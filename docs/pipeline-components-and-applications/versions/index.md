@@ -16,7 +16,7 @@ import {versions} from '@site/src/componentVersions';
 
 In short, almost everything is compatible with almost everything. We rarely change the core protocols that various components use to communicate.
 
-You might encounter specific restrictions when following the documentation, for example, some of our [data models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/index.md#consent-tracking-custom-module) might call for a reasonably recent version of the [warehouse loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md).
+You might encounter specific restrictions when following the documentation, for example, some of our [data models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/index.md) might call for a reasonably recent version of the [warehouse loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md).
 
 :::tip
 
@@ -28,7 +28,7 @@ When in doubt, feel free to start a thread on [Discourse](https://discourse.snow
 
 :::info Snowplow BDP
 
-If you are using Snowplow BDP (Enterprise or Cloud), you don’t need to deal with upgrading your pipeline, as we perform upgrades for you.
+If you are using Snowplow BDP, you don’t need to deal with upgrading your pipeline, as we perform upgrades for you.
 
 :::
 
@@ -46,7 +46,7 @@ We still keep the [documentation for legacy applications](/docs/pipeline-compone
 
 :::info Snowplow BDP
 
-If you are using Snowplow BDP (Enterprise or Cloud), you don’t need to install any of the core pipeline components yourself. We deploy your pipeline and keep it up to date.
+If you are using Snowplow BDP, you don’t need to install any of the core pipeline components yourself. We deploy your pipeline and keep it up to date.
 
 :::
 
@@ -59,6 +59,8 @@ Component | Latest version
 [Stream Collector](/docs/pipeline-components-and-applications/stream-collector/index.md) | ${versions.collector}
 [Enrich](/docs/pipeline-components-and-applications/enrichment-components/index.md) | ${versions.enrich}
 [RDB Loader (Redshift, Snowflake, Databricks)](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | ${versions.rdbLoader}
+[Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/index.md) | ${versions.lakeLoader}
+[Snowflake Streaming Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowflake-streaming-loader/index.md) | ${versions.snowflakeStreamingLoader}
 [S3 Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/index.md) | ${versions.s3Loader}
 [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md) | ${versions.snowbridge}
 [Elasticsearch Loader](/docs/destinations/forwarding-events/elasticsearch/index.md) | ${versions.esLoader}
@@ -76,6 +78,8 @@ Component | Latest version
 [Enrich](/docs/pipeline-components-and-applications/enrichment-components/index.md) | ${versions.enrich}
 [RDB Loader (Snowflake, Databricks)](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | ${versions.rdbLoader}
 [BigQuery Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/index.md) | ${versions.bqLoader}
+[Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/index.md) | ${versions.lakeLoader}
+[Snowflake Streaming Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowflake-streaming-loader/index.md) | ${versions.snowflakeStreamingLoader}
 [GCS Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/index.md) | ${versions.gcsLoader}
 [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md) | ${versions.snowbridge}
 [Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/index.md) | ${versions.lakeLoader}
@@ -92,6 +96,7 @@ Component | Latest version
 [Enrich](/docs/pipeline-components-and-applications/enrichment-components/index.md) | ${versions.enrich}
 [RDB Loader (Snowflake)](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) | ${versions.rdbLoader}
 [Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/index.md) | ${versions.lakeLoader}
+[Snowflake Streaming Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowflake-streaming-loader/index.md) | ${versions.snowflakeStreamingLoader}
 `} remarkPlugins={[remarkGfm]} />
 
 </TabItem>
@@ -101,7 +106,7 @@ Component | Latest version
 
 :::info Snowplow BDP
 
-If you are using Snowplow BDP (Enterprise or Cloud), you don’t need to install Iglu Server yourself. It’s also unlikely that you need to use any of the other components in this section. You can manage your data structures [in the UI or via the API](/docs/understanding-tracking-design/managing-your-data-structures/index.md).
+If you are using Snowplow BDP, you don’t need to install Iglu Server yourself. It’s also unlikely that you need to use any of the other components in this section. You can manage your data structures [in the UI or via the API](/docs/understanding-tracking-design/managing-your-data-structures/index.md).
 
 :::
 
@@ -178,7 +183,7 @@ import ModelVersionsSqlRunner from '@site/docs/modeling-your-data/modeling-your-
 
 :::info Snowplow BDP
 
-If you are using Snowplow BDP (Enterprise or Cloud), you don’t need to install Snowplow Mini yourself. We (optionally) deploy it and keep it up to date for you.
+If you are using Snowplow BDP, you don’t need to install Snowplow Mini yourself. We (optionally) deploy it and keep it up to date for you.
 
 :::
 
@@ -194,9 +199,9 @@ Application | Latest version
 <ReactMarkdown children={`
 SDK | Latest version
 :--|:-:
-[Scala](/docs/modeling-your-data/analytics-sdk/analytics-sdk-scala/index.md) | ${versions.analyticsSdkScala}
-[Javascript](/docs/modeling-your-data/analytics-sdk/analytics-sdk-javascript/index.md) | ${versions.analyticsSdkJavascript}
-[Python](/docs/modeling-your-data/analytics-sdk/analytics-sdk-python/index.md) | ${versions.analyticsSdkPython}
-[.NET](/docs/modeling-your-data/analytics-sdk/analytics-sdk-net/index.md) | ${versions.analyticsSdkDotNet}
-[Go](/docs/modeling-your-data/analytics-sdk/analytics-sdk-go/index.md) | ${versions.analyticsSdkGo}
+[Scala](/docs/destinations/analytics-sdk/analytics-sdk-scala/index.md) | ${versions.analyticsSdkScala}
+[Javascript](/docs/destinations/analytics-sdk/analytics-sdk-javascript/index.md) | ${versions.analyticsSdkJavascript}
+[Python](/docs/destinations/analytics-sdk/analytics-sdk-python/index.md) | ${versions.analyticsSdkPython}
+[.NET](/docs/destinations/analytics-sdk/analytics-sdk-net/index.md) | ${versions.analyticsSdkDotNet}
+[Go](/docs/destinations/analytics-sdk/analytics-sdk-go/index.md) | ${versions.analyticsSdkGo}
 `} remarkPlugins={[remarkGfm]} />

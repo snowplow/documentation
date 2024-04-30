@@ -20,11 +20,11 @@ It is the default identifier used in our dbt packages to identify users.
 In the tracked events, it can appear either:
 
 1. As the `domain_userid` parameter in the atomic event properties.
-    * This is currently the default behaviour on Web apps.
+    * This is currently the default behavior on Web apps.
     * It is not supported in mobile apps.
 2. As the `userId` property in the `client_session` context entity ([see below](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/device-and-browser/index.md#mobile-context)).
     * This is an optional configuration in the JavaScript tracker for Web apps.
-    * It is the default behaviour on mobile apps.
+    * It is the default behavior on mobile apps.
     * This is referred to as the `device_user_id` in our dbt-snowplow-mobile package.
 
 :::tip Coalesced into the `user_identifier` in our unified dbt package
@@ -32,7 +32,7 @@ A good practice is to coalesce the `domain_userid` and the `userId` property in 
 This is also what our unified dbt packages does – it provides the information under a single `user_identifier` field.
 :::
 
-In case you want to change the default tracking behaviour, refer to the following documentation:
+In case you want to change the default tracking behavior, refer to the following documentation:
 
 * The initialization options [on the JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
 * Session tracking on mobile apps [using the iOS and Android trackers](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/session-tracking/index.md) or [using the React Native tracker](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/tracking-events/session-tracking/index.md).
@@ -89,7 +89,7 @@ In mobile apps, activity is detected using the tracked events.
 
 Identity stitching is the process of taking various user identifiers and combining them into a single user identifier, to better identify and track users throughout their journey on your site/app.
 It effectively allows you to attribute logged-in and non-logged-in sessions and page views back to a single user.
-Our dbt packages support identity stitching as [explained here](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-user-mapping/index.md).
+Our dbt packages support identity stitching as [explained here](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/index.md).
 
 In order for identity stitching to be reliable, it is necessary to follow two recommendations in tracking:
 

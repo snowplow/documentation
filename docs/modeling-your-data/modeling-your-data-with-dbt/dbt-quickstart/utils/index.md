@@ -1,6 +1,6 @@
 ---
 sidebar_label: "Utils"
-sidebar_position: 600
+sidebar_position: 60
 title: "Utils Quickstart"
 ---
 ```mdx-code-block
@@ -12,10 +12,10 @@ import TabItem from '@theme/TabItem';
 The models, functionality, and variables described below are only available from `snowplow-utils v0.15.0` and above, as earlier packages do not utilize these variables.
 :::
 
-The `snowplow-utils` package allows you to create your own custom `snowplow_base_events_this_run` table using macros that generate the required SQL code for you, allowing you to incorporate whatever custom event types, contexts of Snowplow data. Using this package will allow you to leverage the [incremental nature](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md) of the Snowplow packages, meaning you can more easily build data models using our other packages such as `snowplow-web` and `snowplow-mobile`, as well as build your own completely custom packages without having to do the initial heavy lifting yourself. This can, however, be a bit complicated to set up and so for that purpose we've create this quickstart page to guide you through this process.
+The `snowplow-utils` package allows you to create your own custom `snowplow_base_events_this_run` table using macros that generate the required SQL code for you, allowing you to incorporate whatever custom event types, contexts of Snowplow data. Using this package will allow you to leverage the [incremental nature](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md) of the Snowplow packages, meaning you can more easily build data models using our other packages such as `snowplow-web` and `snowplow-mobile`, as well as build your own completely custom packages without having to do the initial heavy lifting yourself. This can, however, be a bit complicated to set up and so for that purpose we've create this quickstart page to guide you through this process.
 
 :::info
-It is only recommended that you use this if you are planning on heavily customizing your Snowplow data modeling setup, whilst still taking advantage of the incremental framework that the existing dbt packages offer. If you are going to be heavily leveraging the existing Snowplow packages (e.g. [snowplow-web](https://hub.getdbt.com/snowplow/snowplow_web/latest/) or [snowplow-mobile](https://hub.getdbt.com/snowplow/snowplow_mobile/latest/)) then you will not need to leverage this package for the creation of your base tables. Please instead follow the appropriate quickstart guides for the packages you are going to be utilizing instead, such as for [web](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/web/index.md) or [mobile](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/mobile/index.md).
+It is only recommended that you use this if you are planning on heavily customizing your Snowplow data modeling setup, whilst still taking advantage of the incremental framework that the existing dbt packages offer. If you are going to be heavily leveraging the existing Snowplow packages (e.g. snowplow-unified) then you will not need to leverage this package for the creation of your base tables. Please instead follow the appropriate quickstart guides for the packages you are going to be utilizing instead, such as for [web](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/legacy/web/index.md) or [mobile](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/legacy/mobile/index.md).
 
 :::
 
@@ -25,16 +25,12 @@ In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and connec
 
 - A dataset of Snowplow events from one of the [Snowplow trackers](/docs/collecting-data/index.md)
 
-```mdx-code-block
-import DbtPrivs from "@site/docs/reusable/dbt-privs/_index.md"
-
-<DbtPrivs/>
-```
+## Installation
 
 ```mdx-code-block
 import DbtPackageInstallation from "@site/docs/reusable/dbt-package-installation/_index.md"
 
-<DbtPackageInstallation/>
+<DbtPackageInstallation package='utils' fullname='dbtSnowplowUtils'/>
 ```
 
 ## Setup
@@ -105,7 +101,7 @@ Within the `snowplow_base_quarantined_sessions.sql` file, you can call the `base
 {{ quarantined_query }}
 ```
 
-This macro doesn't accept any arguments, and simply generates a table which contains a column named `session_identifier`, containing all session identifiers of sessions that have been quarantined due to exceeding the maximum session length, to avoid long table scans. More information on the sessionization logic and optimization can be found [here](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md)
+This macro doesn't accept any arguments, and simply generates a table which contains a column named `session_identifier`, containing all session identifiers of sessions that have been quarantined due to exceeding the maximum session length, to avoid long table scans. More information on the sessionization logic and optimization can be found [here](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md)
 
 ### 4. Setting up the incremental manifest macro
 Next, within the `snowplow_incremental_manifest.sql` file, you can call the `base_create_snowplow_incremental_manifest` macro as follows:
@@ -251,7 +247,7 @@ For Redshift & Postgres we also introduce the `prefix` and `alias` fields, where
 mcc_iud.mcc_internal_user_id as internal_user_id,
 ```
 
-This could be leveraged in the `snowplow__custom_sql` variable. For more examples, please see [the following page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-utils-data-model/dbt-utils-advanced-operation/index.md).
+This could be leveraged in the `snowplow__custom_sql` variable. For more examples, please see [Custom Sessionization & Users](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/custom-identifiers/index.md).
 </TabItem>
 </Tabs>
 

@@ -6,16 +6,25 @@ import LakeLoaderDiagram from '@site/docs/pipeline-components-and-applications/l
 ```
 
 <>{props.warehouse == 'Databricks' && (
-  <Admonition type="info">
+  <Admonition type="note" title="Cloud">
     <p>The cloud selection below is for your <i>pipeline</i>. We don’t have restrictions on where {props.warehouse} itself is deployed.</p>
   </Admonition>
 )}</>
 
-<Tabs groupId="cloud" queryString lazy>
-  {props.warehouse != 'Synapse Analytics' && (<TabItem value="gcp" label="GCP">
-    <LakeLoaderDiagram {...props} stream="Pub/Sub" bucket="GCS" cloud="GCP"/>
-  </TabItem>)}
-  <TabItem value="azure" label="Azure">
-    <LakeLoaderDiagram {...props} stream="Kafka" bucket="ADLS" queue="Azure"/>
-  </TabItem>
-</Tabs>
+<>
+{props.warehouse === 'Synapse Analytics' ?
+    (<LakeLoaderDiagram {...props} stream="Kafka" bucket="ADLS" cloud="Azure"/>)
+: (
+    <Tabs groupId="cloud" queryString lazy>
+      <TabItem value="aws" label="AWS">
+        <LakeLoaderDiagram {...props} stream="Kinesis" bucket="S3" cloud="AWS"/>
+      </TabItem>
+      <TabItem value="gcp" label="GCP">
+        <LakeLoaderDiagram {...props} stream="Pub/Sub" bucket="GCS" cloud="GCP"/>
+      </TabItem>
+      <TabItem value="azure" label="Azure">
+        <LakeLoaderDiagram {...props} stream="Kafka" bucket="ADLS" cloud="Azure"/>
+      </TabItem>
+    </Tabs>
+)}
+</>

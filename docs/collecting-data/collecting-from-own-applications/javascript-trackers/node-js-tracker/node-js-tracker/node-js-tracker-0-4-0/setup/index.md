@@ -6,7 +6,7 @@ sidebar_position: 100
 
 ## Compatibility
 
-The Snowplow Node.js Tracker is tested and compatible with Node.js 10, 12 and 14. Installation requires [npm](https://www.npmjs.org/) or [yarn](https://yarnpkg.com/).
+The Snowplow Node.js Tracker is tested and compatible with Node.js versions from 10 to 20. Installation requires npm or yarn.. Installation requires [npm](https://www.npmjs.org/) or [yarn](https://yarnpkg.com/).
 
 ## Installation
 

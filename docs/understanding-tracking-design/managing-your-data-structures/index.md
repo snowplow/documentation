@@ -1,6 +1,6 @@
 ---
 title: "Managing data structures"
-sidebar_position: 50
+sidebar_position: 3
 ---
 
 ```mdx-code-block

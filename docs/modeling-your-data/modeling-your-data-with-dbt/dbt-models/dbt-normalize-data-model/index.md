@@ -1,6 +1,7 @@
 ---
 title: "Normalize"
-sidebar_position: 500
+sidebar_position: 50
+description: "The Snowplow Normalize dbt Package"
 hide_title: true
 ---
 
@@ -11,7 +12,8 @@ import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
 ```
 <Badges badgeType="dbt-package Release" pkg="normalize"></Badges>&nbsp;
-<Badges badgeType="Maintained"></Badges>
+<Badges badgeType="Maintained"></Badges>&nbsp;
+<Badges badgeType="SPAL"></Badges>
 
 
 # Snowplow Normalize Package
@@ -24,10 +26,10 @@ Normalize in this context means [database normalization](https://en.wikipedia.or
 
 The package provides [macros](https://docs.getdbt.com/docs/build/jinja-macros) and a python script that is used to generate your normalized events, filtered events, and users table for use within downstream ETL tools such as Census. See the [Model Design](#model-design) section for further details on these tables.
 
-The package only includes the base incremental scratch model and does not have any derived models, instead it generates models in your project as if they were custom models you had built on top of the [Snowplow incremental tables](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/index.md), using the `_this_run` table as the base for new events to process each run. See the [configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md) section for the variables that apply to the incremental model.
+The package only includes the base incremental scratch model and does not have any derived models, instead it generates models in your project as if they were custom models you had built on top of the [Snowplow incremental tables](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md), using the `_this_run` table as the base for new events to process each run. See the [configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md) section for the variables that apply to the incremental model.
 
 :::note
-The incremental model is simplified compared to the standard web model, this package does not use sessions to identify which historic events to reprocess and just uses the `collector_tstamp` and package variables to identify which events to (re)process.
+The incremental model is simplified compared to the standard unified model, this package does not use sessions to identify which historic events to reprocess and just uses the `collector_tstamp` and package variables to identify which events to (re)process.
 
 :::
 
@@ -467,7 +469,7 @@ The config file is a JSON file which can be viewed by running the python script 
 
 An example configuration can be found in the `utils/example_normalize_config.json` file within the package.
 
-For [Snowplow BDP](/docs/getting-started-on-snowplow-bdp-enterprise/index.md) customers you can use the [Tracking Catalog](/docs/discovering-data/tracking-catalog/index.md) to discover which events you are tracking and the contexts enabled for each event, however you will still need to get the schema urls from your Data Structures.
+In Snowplow BDP, you can use the [Tracking Catalog](/docs/discovering-data/tracking-catalog/index.md) to discover which events you are tracking and the contexts enabled for each event, however you will still need to get the schema urls from your Data Structures.
 
 :::tip
 You should keep your configuration file, and your resolver file if you have one, at your project level and not inside the the snowplow-normalize package to avoid them being overwritten/deleted when the package is updated.

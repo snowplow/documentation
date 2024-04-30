@@ -5,6 +5,7 @@ sidebar_position: 3
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 import DeployOverview from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/_deploy_overview.md';
 import LakeLoaderDiagram from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/_diagram.md';
@@ -16,16 +17,22 @@ The Lake Loader is an application that loads Snowplow events to a cloud storage 
 
 :::info Open Table Formats
 
-Currently the Lake Loader supports [Delta format](https://delta.io/) only. Future releases will add support for [Iceberg](https://iceberg.apache.org/) and [Hudi](https://hudi.apache.org/) formats.
+The Lake Loader supports the three major Open Table Formats: [Delta](https://delta.io/), [Iceberg](https://iceberg.apache.org/) and [Hudi](https://hudi.apache.org/).
+
+For Iceberg tables, the loader supports [AWS Glue](https://docs.aws.amazon.com/glue/) and [GCP BigLake](https://cloud.google.com/bigquery/docs/iceberg-tables) as Iceberg catalogs.
 
 :::
 
 <Tabs groupId="cloud" queryString lazy>
-  <TabItem value="gcp" label="GCP" default>
+  <TabItem value="aws" label="AWS" default>
+    <LakeLoaderDiagram stream="Kinesis" bucket="S3" cloud="AWS"/>
+    <DeployOverview cloud="AWS"/>
+  </TabItem>
+  <TabItem value="gcp" label="GCP">
     <LakeLoaderDiagram stream="Pub/Sub" bucket="GCS" cloud="GCP"/>
     <DeployOverview cloud="GCP"/>
   </TabItem>
-  <TabItem value="aws" label="Azure">
+  <TabItem value="azure" label="Azure">
     <LakeLoaderDiagram stream="Kafka" bucket="ADLS Gen 2" cloud="Azure"/>
     <DeployOverview cloud="Azure"/>
   </TabItem>
@@ -38,14 +45,21 @@ The loader config file is in HOCON format, and it allows configuring many differ
 The simplest possible config file just needs a description of your pipeline inputs and outputs:
 
 <Tabs groupId="cloud" queryString>
-  <TabItem value="gcp" label="GCP" default>
+  <TabItem value="aws" label="AWS" default>
+
+```json reference
+https://github.com/snowplow-incubator/snowplow-lake-loader/blob/main/config/config.aws.minimal.hocon
+```
+
+  </TabItem>
+  <TabItem value="gcp" label="GCP">
 
 ```json reference
 https://github.com/snowplow-incubator/snowplow-lake-loader/blob/main/config/config.gcp.minimal.hocon
 ```
 
   </TabItem>
-  <TabItem value="aws" label="Azure">
+  <TabItem value="azure" label="Azure">
 
 ```json reference
 https://github.com/snowplow-incubator/snowplow-lake-loader/blob/main/config/config.azure.minimal.hocon

@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 The tracker can capture application lifecycle state changes. In particular, when the app changes state from foreground to background and vice versa.
 
-The lifecycle tracking is disabled by default. It can be enabled in `TrackerConfiguration` like in the example below:
+The lifecycle tracking is enabled by default (since v6.0.0). It can be configured in `TrackerConfiguration` like in the example below:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>

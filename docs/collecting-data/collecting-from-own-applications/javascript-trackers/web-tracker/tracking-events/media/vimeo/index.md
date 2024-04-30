@@ -240,7 +240,7 @@ startVimeoTracking({
 
 As the Vimeo plugin uses Snowplow Media internally, for more granular control over events, you can utilise any of the functions provided by the [Snowplow Media Plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/index.md).
 
-For example, if you wish to include additional behaviour when a video is paused, you can create callback on the `pause` event of an instance of a Vimeo player.
+For example, if you wish to include additional behavior when a video is paused, you can create callback on the `pause` event of an instance of a Vimeo player.
 
 :::note 
 In the following example, ensure you aren't passing the `pause` event to the `startVimeoTracking` function, as this will result in the event being tracked twice.

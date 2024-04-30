@@ -1,13 +1,11 @@
 ---
-title: "Versioning Data Structures in BDP Cloud"
+title: "Versioning Data Structures with the Data Structures Builder"
 date: "2023-03-01"
 sidebar_label: "Using the Data Structures Builder"
 sidebar_position: 20
 sidebar_custom_props:
   offerings:
-    - cloud
-    - enterprise
-
+    - bdp
 ---
 
 # Versioning with the Data Structures Builder

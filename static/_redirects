@@ -18,9 +18,9 @@
 /docs/collecting-data/collecting-from-own-applications/python-tracker/adding-extra-data-the-subject-class/* /docs/collecting-data/collecting-from-own-applications/python-tracker/previous_versions/python-v0-15/adding-extra-data-the-subject-class/:splat 301
 /docs/collecting-data/collecting-from-own-applications/python-tracker/the-redisworker-class/* /docs/collecting-data/collecting-from-own-applications/python-tracker/previous_versions/python-v0-15/the-redisworker-class/:splat 301
 
-/docs/modeling-your-data/resolving-data-model-failures-via-snowplow-bdp/ /docs/modeling-your-data/running-data-models-via-snowplow-bdp/sql-runner/resolving-data-model-failures/ 301
+/docs/modeling-your-data/resolving-data-model-failures-via-snowplow-bdp/ /docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/resolving-data-model-failures/ 301
 /docs/modeling-your-data/retrieving-job-execution-data-via-the-api/ /docs/modeling-your-data/running-data-models-via-snowplow-bdp/retrieving-job-execution-data-via-the-api/ 301
-/docs/modeling-your-data/configuring-and-running-data-models-via-snowplow-bdp/ /docs/modeling-your-data/running-data-models-via-snowplow-bdp/sql-runner/using-sql-runner/ 301
+/docs/modeling-your-data/configuring-and-running-data-models-via-snowplow-bdp/ /docs/modeling-your-data/running-data-models-via-snowplow-bdp/ 301
 /docs/modeling-your-data/setup-and-run-sql-runner/ /docs/modeling-your-data/modeling-your-data-with-sql-runner/ 301
 /docs/modeling-your-data/the-snowplow-web-data-model/sql-runner-web-data-model/ /docs/modeling-your-data/modeling-your-data-with-sql-runner/sql-runner-web-data-model/ 301
 /docs/modeling-your-data/the-snowplow-mobile-data-model/sql-runner-mobile-data-model/ /docs/modeling-your-data/modeling-your-data-with-sql-runner/sql-runner-mobile-data-model/ 301
@@ -32,8 +32,6 @@
 /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader-3-0-0/* /docs/destinations/warehouses-and-lakes/rdb/:splat 301
 /docs/pipeline-components-and-applications/loaders-storage-targets/previous-versions/snowplow-rdb-loader-2/ /docs/destinations/warehouses-and-lakes/rdb/previous-versions/snowplow-rdb-loader/ 301
 /docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/rdb-transformer-configuration-reference/ /docs/destinations/warehouses-and-lakes/rdb/transforming-enriched-data/ 301
-
-/docs/try-snowplow/recipes/* /docs/recipes/:splat 301
 
 /docs/getting-started-with-snowplow-bdp/what-is-snowplow-bdp/ /docs/getting-started-on-snowplow-bdp-enterprise/ 301
 /docs/getting-started-with-snowplow-bdp/what-is-snowplow-bdp/feature-comparison/ /docs/feature-comparison/ 302
@@ -69,7 +67,6 @@
 /docs/forwarding-events-to-destinations/supporting-additional-destinations/* /docs/destinations/overview/:splat 301
 /docs/forwarding-events-to-destinations/forwarding-events/* /docs/destinations/forwarding-events/:splat 301
 /docs/pipeline-components-and-applications/loaders-storage-targets/elasticsearch-loader/* /docs/destinations/forwarding-events/elasticsearch/:splat 301
-/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-snowflake-loader/* /docs/pipeline-components-and-applications/legacy/snowflake-loader/:splat 301
 /docs/pipeline-components-and-applications/loaders-storage-targets/events-manifest-populator/* /docs/pipeline-components-and-applications/legacy/events-manifest-populator/:splat 301
 /docs/pipeline-components-and-applications/loaders-storage-targets/emr-etl-runner/* /docs/pipeline-components-and-applications/legacy/emr-etl-runner/:splat 301
 /docs/forwarding-events-to-destinations/ /docs/destinations/ 301
@@ -160,11 +157,9 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/getting-started-on-snowplow-open-source/quick-start-gcp/sending-test-events/ /docs/first-steps/tracking/ 301
 /docs/getting-started-on-snowplow-open-source/tracking-events/ /docs/first-steps/tracking/ 301
 /docs/getting-started-on-snowplow-bdp-cloud/tracking-events/ /docs/first-steps/tracking/ 301
-/docs/try-snowplow/tracking-events-with-try-snowplow/ /docs/first-steps/tracking/ 301
 
 /docs/getting-started-on-snowplow-open-source/quick-start-aws/query-your-data/* /docs/first-steps/querying/ 301
 /docs/getting-started-on-snowplow-open-source/quick-start-gcp/query-your-data/* /docs/first-steps/querying/ 301
-/docs/try-snowplow/accessing-and-querying-your-try-snowplow-data/ /docs/recipes/querying-try-data/ 301
 
 /docs/getting-started-on-snowplow-open-source/quick-start-aws/ /docs/getting-started-on-snowplow-open-source/quick-start/ 301
 /docs/getting-started-on-snowplow-open-source/quick-start-gcp/ /docs/getting-started-on-snowplow-open-source/quick-start/ 301
@@ -258,3 +253,39 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/google-tag-manager-custom-template/settings-variable-guide/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/google-tag-manager-custom-template/v3-settings-variable/ 301
 /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/google-tag-manager-custom-template/template-for-javascript-tracker-v2/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/google-tag-manager-custom-template/previous-versions/template-for-javascript-tracker-v2/ 301
 
+# Data Products
+/docs/understanding-tracking-design/managing-your-tracking-scenarios/* /docs/understanding-tracking-design/managing-event-specifications/ 301
+
+#Data Models
+/docs/modeling-your-data/what-is-data-modeling/ /docs/modeling-your-data/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/passthrough-fields/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/passthrough-fields/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/passthrough-fields/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/passthrough-fields/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-mobile-data-model/passthrough-fields/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/passthrough-fields/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/custom-sessionization-and-users/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/custom-sessionization-and-users/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-mobile-data-model/custom-sessionization-and-users/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-user-mapping/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-materialization/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/optimized-upserts/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-duplicates/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/deduplication/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-timestamps/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/late-arriving-data/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/aligning-tracking-with-modeling.md/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/modeling-entities/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/macros-and-keys/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/overridable-macros/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/:splat 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-mobile-data-model/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/:splat 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-fractribution-data-model/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/:splat 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/fractribution/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/legacy/:splat 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/web/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/legacy/:splat 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/mobile/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/legacy/:splat 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/fractribution/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/legacy/fractribution:splat 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/web/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/legacy/web:splat 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/mobile/* /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/legacy/mobile:splat 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-utils-data-model/dbt-utils-advanced-operation/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/custom-identifiers/ 301
+
+# Enterprise & Cloud refactor
+/docs/getting-started-on-snowplow-bdp-enterprise/setup/ /docs/getting-started-on-bdp/private-managed-cloud/ 301
+/docs/getting-started-on-snowplow-bdp-enterprise/* /docs/getting-started-on-bdp/private-managed-cloud/:splat 301
+/docs/getting-started-on-snowplow-bdp-cloud/first-party-tracking/ /docs/collecting-data/first-party-tracking/ 301
+/docs/getting-started-on-snowplow-bdp-cloud/* /docs/getting-started-on-bdp/cloud/ 301
+/docs/modeling-your-data/analytics-sdk/* /docs/destinations/analytics-sdk/:splat 301

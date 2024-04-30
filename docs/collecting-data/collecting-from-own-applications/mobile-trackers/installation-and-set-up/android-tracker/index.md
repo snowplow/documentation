@@ -21,13 +21,13 @@ Add into your `build.gradle` file:
 ```gradle
 dependencies {
   ...
-  // Snowplow Android Tracker
-  implementation 'com.snowplowanalytics:snowplow-android-tracker:5.+'
-  // In case 'lifecycleAutotracking' is enabled
-  implementation 'androidx.lifecycle-extensions:2.2.+'
+  implementation 'com.snowplowanalytics:snowplow-android-tracker:6.+'
   ...
 }
 ```
+No other dependencies are required to track events. However, some **optional** dependencies can be added:
+- `InstallReferrer` to enable the referrer context entity of the [`ApplicationInstall` event](docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/installation-tracking/index.md).
+-  `Play Services` dependencies for [tracking the app set ID and AAID](docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/platform-and-application-context/index.md).
 
 ## Setting up
 
@@ -64,20 +64,20 @@ Once the tracker SDK is correctly set as a dependency in your app project you ha
 
 
 2. It creates a tracker instance which can be used to track events like this:
-  
+
     <Tabs groupId="platform" queryString>
       <TabItem value="android" label="Android (Kotlin)">
- 
+
    ```kotlin
-   val event = Structured("Category_example", "Action_example")
+   val event = ScreenView("screen_name")
    tracker.track(event)
    ```
-  
+
       </TabItem>
-      <TabItem value="android-java" label="Android (Java)"> 
+      <TabItem value="android-java" label="Android (Java)">
 
    ```java
-   Event event = new Structured("Category_example", "Action_example");
+   Event event = new ScreenView("screen_name");
    tracker.track(event);
    ```
 
@@ -93,7 +93,7 @@ If you prefer to access the tracker when the reference is not directly accessibl
 ```kotlin
 Snowplow.defaultTracker?.track(event)
 ```
-  
+
 </TabItem>
 <TabItem value="android-java" label="Android (Java)">
 
@@ -104,7 +104,7 @@ Snowplow.getDefaultTracker().track(event);
   </TabItem>
 </Tabs>
 
-You can override the default configuration with a fine grained configuration when you create the tracker. See the [Android API docs](https://snowplow.github.io/snowplow-android-tracker/snowplow-android-tracker/com.snowplowanalytics.snowplow.configuration/index.html) and [iOS API docs](https://snowplow.github.io/snowplow-ios-tracker/documentation/snowplowtracker/configurationprotocol) for the `Configuration` classes to see all the options and defaults.
+You can override the default configuration with a fine grained configuration when you create the tracker. See the [Android API docs](https://snowplow.github.io/snowplow-android-tracker/snowplow-android-tracker/com.snowplowanalytics.snowplow.configuration/index.html) for the `Configuration` classes to see all the options and defaults.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="android" label="Android (Kotlin)">
@@ -125,6 +125,7 @@ val trackerConfig = TrackerConfiguration("appId")
     .exceptionAutotracking(true)
     .installAutotracking(true)
     .userAnonymisation(false)
+    .logLevel(LogLevel.OFF)
 val sessionConfig = SessionConfiguration(
     TimeMeasure(30, TimeUnit.SECONDS),
     TimeMeasure(30, TimeUnit.SECONDS)
@@ -156,12 +157,14 @@ TrackerConfiguration trackerConfig = new TrackerConfiguration("appId")
     .applicationContext(true)
     .exceptionAutotracking(true)
     .installAutotracking(true)
-    .userAnonymisation(false);
+    .userAnonymisation(false)
+    .logLevel(LogLevel.OFF);
 SessionConfiguration sessionConfig = new SessionConfiguration(
     new TimeMeasure(30, TimeUnit.SECONDS),
     new TimeMeasure(30, TimeUnit.SECONDS)
 );
-Snowplow.createTracker(getApplicationContext(),
+Snowplow.createTracker(
+    getApplicationContext(),
     "appTracker",
     networkConfig,
     trackerConfig,
@@ -177,3 +180,18 @@ The trackers created with the above method are configured "locally" only. To cre
 :::
 
 The [Android tracker Github repository](https://github.com/snowplow/snowplow-android-tracker) includes demo apps in Java, Kotlin, and Kotlin with Jetpack Compose. They are provided as simple reference apps to help you set up the tracker.
+
+## Using the tracker with R8 optimization
+
+Depending on your app configuration, you may need to add ProGuard rules to prevent the R8 compiler removing code needed for tracker function. Fetching certain [platform context](docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/platform-and-application-context/index.md) properties - AAID and app set ID - uses reflection. To include the necessary classes, add the following rules to the app's `proguard-rules.pro` file.
+
+```
+# Reflection for the appSetId
+-keep class com.google.android.gms.appset.AppSet { *; }
+-keep class com.google.android.gms.appset.AppSetIdInfo { *; }
+-keep class com.google.android.gms.internal.appset.zzr { *; }
+-keep class com.google.android.gms.tasks.Tasks { *; }
+
+# Reflection for the AAID (AndroidIdfa)
+-keep class com.google.android.gms.ads.identifier.** { *; }
+```

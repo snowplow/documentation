@@ -17,9 +17,9 @@ We'll give it the following details:
 - We'll set name to `basic_form_tracking`
 - And give it a description of `Schema for tracking our demo form`
 
-:::info BDP Cloud
+:::info Data Structures Builder
 
-If you are a BDP Cloud customer, use the [data structures builder UI](/docs/understanding-tracking-design/managing-your-data-structures/ui/builder/index.md) to follow along. You will not need the JSON code.
+In Snowplow BDP, you can use the [data structures builder UI](/docs/understanding-tracking-design/managing-your-data-structures/ui/builder/index.md) to follow along. You will not need the JSON code.
 
 :::
 
@@ -28,13 +28,13 @@ If you are a BDP Cloud customer, use the [data structures builder UI](/docs/unde
     "$schema" : "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
     "description": "Schema for tracking our demo form",
     "self": {
-        "vendor": "com.snowplowanalytics",		
-        "name": "basic_form_tracking",						
+        "vendor": "com.snowplowanalytics",
+        "name": "basic_form_tracking",
         "format": "jsonschema",
         "version": "1-0-0"
     },
     "type": "object",
-    "properties": {	
+    "properties": {
         ...
     },
     "additionalProperties": false
@@ -67,9 +67,9 @@ In the schema for this data structure, we would display these decisions as prope
 ...
 ```
 
-:::info BDP Cloud
+:::info Data Structures Builder
 
-If you are a BDP Cloud customer, you can create an equivalent data structure in the [data structures builder UI](/docs/understanding-tracking-design/managing-your-data-structures/ui/builder/index.md).
+In Snowplow BDP, you can use the [data structures builder UI](/docs/understanding-tracking-design/managing-your-data-structures/ui/builder/index.md) to follow along. You will not need the JSON code.
 
 :::
 
@@ -147,8 +147,8 @@ Our final schema might look liks this:
     "$schema" : "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
     "description": "Schema for tracking our demo form",
     "self": {
-        "vendor": "com.snowplowanalytics",        
-        "name": "basic_form_tracking",                      
+        "vendor": "com.snowplowanalytics",
+        "name": "basic_form_tracking",
         "format": "jsonschema",
         "version": "1-0-0"
     },
@@ -217,19 +217,19 @@ Create a new HTML page with this content:
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="form1_first_name">First name</label>  
+  <label class="col-md-4 control-label" for="form1_first_name">First name</label>
   <div class="col-md-4">
   <input id="form1_first_name" name="form1_first_name" type="text" placeholder="" class="form-control input-md" required="">
-    
+
   </div>
 </div>
 
 <!-- Text input-->
 <div class="form-group">
-  <label class="col-md-4 control-label" for="form1_contact_number">Contact number</label>  
+  <label class="col-md-4 control-label" for="form1_contact_number">Contact number</label>
   <div class="col-md-4">
   <input id="form1_contact_number" name="form1_contact_number" type="text" placeholder="" class="form-control input-md">
-    
+
   </div>
 </div>
 
@@ -280,7 +280,7 @@ Let's add a function into our page, you'll need to pass in the values from your 
 
 ```javascript
 <script>
-function form1submit(){ 
+function form1submit(){
   window.snowplow('trackSelfDescribingEvent', {
     schema: 'iglu:com.snowplowanalytics/form1_fields/jsonschema/1-0-0',
     data: {
@@ -297,6 +297,6 @@ function form1submit(){
 
 The easiest way to test that your tracking works correctly is via the [Snowplow Inspector](/docs/testing-debugging/snowplow-inspector/index.md). Make sure to [configure](/docs/testing-debugging/snowplow-inspector/adding-schemas/index.md) it with your schema registry.
 
-If you are using BDP Enterprise, you can use [Snowplow Mini](/docs/pipeline-components-and-applications/snowplow-mini/index.md) to validate _and_ inspect your events in more detail in the OpenSearch dashboard.
+With Snowplow BDP, you can use [Snowplow Mini](/docs/pipeline-components-and-applications/snowplow-mini/index.md) to validate _and_ inspect your events in more detail in the OpenSearch dashboard.
 
 Finally, regardless of your Snowplow offering, you can also use [Snowplow Micro](/docs/testing-debugging/snowplow-micro/index.md).

@@ -1,6 +1,7 @@
 ---
 title: "Media Player"
-sidebar_position: 200
+description: "The Snowplow Media Player dbt Package"
+sidebar_position: 20
 hide_title: true
 ---
 
@@ -75,7 +76,7 @@ The package generates robust identifiers for use in the incremental logic and ke
 
 | Identifier | Definition |
 | ----------------------- | ----------------------------- |
-| `session_identifier` | The session  identifier as defined in your dbt project variables which is is used for the package's [incremental sessionization logic](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/). If not set, this defaults to the `mediaSessionId` from the media session entity if enabled, else to the page/screen view id. This ensures all media events for a play spanning multiple `domain_sessionid`s are modelled. The more traditional session identifier `domain_sessionid` can be extracted from the `domain_sessionid_array` field.  |
+| `session_identifier` | The session  identifier as defined in your dbt project variables which is is used for the package's [incremental sessionization logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/). If not set, this defaults to the `mediaSessionId` from the media session entity if enabled, else to the page/screen view id. This ensures all media events for a play spanning multiple `domain_sessionid`s are modelled. The more traditional session identifier `domain_sessionid` can be extracted from the `domain_sessionid_array` field.  |
 | `user_identifier` | The user identifier as defined in your dbt project variables. If not set, this defaults to be `domain_userid` for web or the `userId` from the client session entity for mobile. |
 | `media_identifier` | Used to identify individual media elements/content. It is generated from the `player_id`, `media_label`, `media_type` and `media_player_type` fields. |
 | `play_id` | The unique identifier for each individual play of media content. This is the `mediaSessionId` from the media session entity if enabled. Otherwise this uses the page/screen view identifier together with the `media_identifer` to generate a unique play id. |
@@ -104,4 +105,4 @@ By default these are disabled, but you can enable them in the project's `profile
         enabled: true
 ```
 
-Just like in case of the web model, users are encouraged to use the Media Player model and its incremental logic to design their own custom models / modules. The `snowplow_media_player_base_events_this_run` table is designed with this in mind, where a couple of potentially useful fields are generated that the Media Player model does not use downstream but they nonetheless have the potential to be incorporated into users custom models. For more information on creating custom models, [visit the guide here](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md).
+Just like in case of all our packages, users are encouraged to use the Media Player model and its incremental logic to design their own custom models / modules. The `snowplow_media_player_base_events_this_run` table is designed with this in mind, where a couple of potentially useful fields are generated that the Media Player model does not use downstream but they nonetheless have the potential to be incorporated into users custom models. For more information on creating custom models, [visit the guide here](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md).

@@ -17,19 +17,12 @@ Once you’ve tracked some events, you will want to look at them in your data wa
 <Tabs groupId="offering" queryString>
   <TabItem value="enterprise" label="BDP Enterprise" default>
 
-Use the connection details you provided when setting up BDP Enterprise.
+You can find the connection details in the [Console](https://console.snowplowanalytics.com/destinations/catalog), under the destination you’ve selected.
 
   </TabItem>
   <TabItem value="cloud" label="BDP Cloud">
 
 You can find the connection details in the [Console](https://console.snowplowanalytics.com/destinations/catalog), under the destination you’ve selected.
-
-  </TabItem>
-  <TabItem value="try" label="Try Snowplow">
-
-You can find the connection details in the [Try Snowplow UI](https://try.snowplowanalytics.com/access-data): hostname, port, database, username and password (request credentials in the UI if you haven’t done so).
-
-For a step-by-step guide on how to query data in Try Snowplow, see [this tutorial](/docs/recipes/querying-try-data/index.md).
 
   </TabItem>
   <TabItem value="community" label="Community Edition">

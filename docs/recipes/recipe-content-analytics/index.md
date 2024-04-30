@@ -25,12 +25,6 @@ For this purpose, you can add a content [entity](/docs/understanding-your-pipeli
 
 We have already created a custom `content` entity for you in [Iglu Central](http://iglucentral.com/).
 
-```mdx-code-block
-import DataStructuresSharedBlock from "@site/docs/recipes/custom-events-entities/_index.md"
-
-<DataStructuresSharedBlock/>
-```
-
 The `content` entity has the following fields:
 
 <table><tbody><tr><td><strong>Field</strong></td><td><strong>Description</strong></td><td><strong>Type</strong></td><td><strong>Validation</strong></td><td><strong>Required?</strong></td></tr><tr><td><code>name</code></td><td>The name of the piece of content</td><td>string</td><td><code>maxLength: 255</code></td><td>✅&nbsp;</td></tr><tr><td>id</td><td>The content identifier</td><td>string</td><td>maxLength: 255</td><td>❌</td></tr><tr><td><code>category</code></td><td>The category of the piece of content</td><td>string</td><td><code>maxLength: 255</code></td><td>❌</td></tr><tr><td><code>date_published</code></td><td>The date the piece of content was published</td><td>string</td><td><code>maxLength: 255</code></td><td>❌</td></tr><tr><td><code>author</code></td><td>The author of the piece of content</td><td>string</td><td><code>maxLength: 255</code></td><td>❌</td></tr></tbody></table>
@@ -54,7 +48,7 @@ window.snowplow('trackPageView', {
       "data": {
          "name": "example_name",
          "id": "example_id",
-         "category": "example_category",  
+         "category": "example_category",
          "date_published": "01-01-1970",
          "author": "example_author"
       }
@@ -98,11 +92,11 @@ CREATE TABLE derived.content AS(
 
         SELECT
             wp.id AS page_view_id,
-            c.category AS content_category, 
-            c.name AS content_name, 
+            c.category AS content_category,
+            c.name AS content_name,
             c.date_published AS date_published,
             c.author AS author,
-            10*SUM(CASE WHEN ev.event_name = 'page_ping' THEN 1 ELSE 0 END) AS time_engaged_in_s, 
+            10*SUM(CASE WHEN ev.event_name = 'page_ping' THEN 1 ELSE 0 END) AS time_engaged_in_s,
             ROUND(100*(LEAST(LEAST(GREATEST(MAX(COALESCE(ev.pp_yoffset_max, 0)), 0), MAX(ev.doc_height)) + ev.br_viewheight, ev.doc_height)/ev.doc_height::FLOAT)) AS percentage_vertical_scroll_depth
 
         FROM atomic.events AS ev
@@ -110,18 +104,18 @@ CREATE TABLE derived.content AS(
             ON ev.event_id = wp.root_id AND ev.collector_tstamp = wp.root_tstamp
         INNER JOIN atomic.io_snowplow_foundation_content_1 AS c
             ON ev.event_id = c.root_id AND ev.collector_tstamp = c.root_tstamp
-        
+
         GROUP BY 1,2,3,4,5,ev.br_viewheight,ev.doc_height
 
     )
 
     SELECT
-        content_category, 
-        content_name, 
+        content_category,
+        content_name,
         date_published,
         author,
         COUNT(DISTINCT page_view_id) AS page_views,
-        ROUND(SUM(time_engaged_in_s)/COUNT(DISTINCT page_view_id)) AS average_time_engaged_in_s, 
+        ROUND(SUM(time_engaged_in_s)/COUNT(DISTINCT page_view_id)) AS average_time_engaged_in_s,
         ROUND(SUM(percentage_vertical_scroll_depth)/COUNT(DISTINCT page_view_id))AS average_percentage_vertical_scroll_depth
 
     FROM content_page_views

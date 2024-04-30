@@ -20,9 +20,11 @@ const swap = (allItems, linkItems, descriptions) => {
       className: 'header',
     }] : []
 
-    const className = item.customProps?.offerings ?
-      [item.className || '', ...item.customProps.offerings].join(' ') :
-      item.className
+    const className = [
+      item.className || '',
+      (item.customProps?.hidden ? 'hidden' : ''),
+      ...(item.customProps?.offerings || [])
+    ].join(' ')
 
     if (item.type === 'category') {
       // a workaround for category pages not picking up the description in index.md

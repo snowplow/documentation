@@ -1,6 +1,6 @@
 ---
 title: "YAUAA enrichment"
-sidebar_position: 8
+sidebar_position: 9
 sidebar_label: YAUAA
 ---
 

@@ -26,7 +26,7 @@ There are three primary ways to contact Snowplow Support:
 
 ![BDP Console](https://lh7-us.googleusercontent.com/woUpEx_CAz2EMf_UKKmRBVR4EIfEfdriADcXj1beotevq91P8AIj3aG7SD6vRNW2cZsqaDsip4aUsQNIwZ7CmmkOQq1BX2KvhyNuCYCqg3W31D_BOrIeV6KFFP2rIz1RjR8j2ACU1BzRUJo_dF8UyTY)
 
-- Or you can log a new request by directly emailing [support@support.io](mailto:support@support.io).
+- Or you can log a new request by directly emailing [support@snowplow.io](mailto:support@snowplow.io).
 
 You’ll receive an email when a support case has been updated, and also when the status changes. Whichever method you use to update that support case reply (by replying to that email, or updating tickets through the Help Center), all activity is recorded in the ticket and you can view/manage all your tickets in the Help Center.
 
@@ -48,8 +48,8 @@ Click on ‘My Activities’ to access all your tickets and their current status
 
 We will always do our very best to get you fast, accurate answers to your questions, and resolve any issues with your data or pipeline. That said, here are a few things you can do to help us get you the result you need as quickly as possible:
 
-- Submit your requests through the Snowplow [BDP Console](https://console.snowplowanalytics.com/) (for BDP Cloud/Enterprise customers), the [Snowplow Help Center](http://support.snowplowanalytics.com/), or directly using the [support@support.io](mailto:support@support.io) email, rather than contacting other teams or folks within Snowplow using another method. We’re all here to help, but the fastest route to Support is the direct one.
-- Provide as much detail as you can when you log a case. Let us know what you’ve tried, what the end goal is, and any other context you can. Let us know if anything has changed. Give us any errors that you see, or describe any unexpected behaviours. Provide any code that you think is relevant right when you log the call.
+- Submit your requests through the Snowplow [BDP Console](https://console.snowplowanalytics.com/) (for BDP Cloud/Enterprise customers), the [Snowplow Help Center](http://support.snowplowanalytics.com/), or directly using the [support@snowplow.io](mailto:support@snowplow.io) email, rather than contacting other teams or folks within Snowplow using another method. We’re all here to help, but the fastest route to Support is the direct one.
+- Provide as much detail as you can when you log a case. Let us know what you’ve tried, what the end goal is, and any other context you can. Let us know if anything has changed. Give us any errors that you see, or describe any unexpected behaviors. Provide any code that you think is relevant right when you log the call.
 - Use a single support request for only one issue, question or challenge. If a conversation runs from one issue or question to another, it quickly gets difficult to track the real priority, problem and status. It really helps us to prioritise your requests, and get you the most accurate and appropriate response, if we can track and work on each of those issues or questions separately. That’s why we’ll always work with you to capture a new ticket for each issue.
 
 ## Helpful resources

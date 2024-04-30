@@ -6,12 +6,9 @@ sidebar_position: 2
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import TrySnowplow from "@site/docs/reusable/try-snowplow/_index.md";
 ```
 
 This guide will take you through how to spin up a Snowplow Community Edition pipeline using the [Snowplow Terraform modules](https://registry.terraform.io/namespaces/snowplow-devops). _(Not familiar with Terraform? Take a look at [Infrastructure as code with Terraform](https://learn.hashicorp.com/tutorials/terraform/infrastructure-as-code?in=terraform/aws-get-started).)_
-
-<TrySnowplow/>
 
 ## Prerequisites
 
@@ -94,7 +91,7 @@ The sections below will guide you through setting up your destination to receive
 <Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
 
-There are four main storage options for you to select: Postgres, Redshift, Snowflake and Databricks. Additionally, there is an S3 option, which is primarily used to archive enriched (and/or raw) events and to store [failed events](/docs/understanding-your-pipeline/failed-events/index.md).
+There are four main storage options for you to select: Postgres, Redshift, Snowflake and Databricks. For Snowflake, you can choose between the newest [Streaming Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowflake-streaming-loader/index.md) (recommended) or [RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md). Additionally, there is an S3 option, which is primarily used to archive enriched (and/or raw) events and to store [failed events](/docs/understanding-your-pipeline/failed-events/index.md).
 
 We recommend to only load data into a single destination, but nothing prevents you from loading into multiple destinations with the same pipeline (e.g. for testing purposes).
 
@@ -311,6 +308,10 @@ No extra steps needed.
   </TabItem>
   <TabItem value="snowflake" label="Snowflake">
 
+If you are going to use the [Snowflake Streaming Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowflake-streaming-loader/index.md) (currently, only provided for AWS), you will need to generate a key pair following the [Snowflake documentation](https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-the-private-key). Make sure to enter an empty passphrase, as the terraform module below does not support keys with passphrases (for simplicity).
+
+If you are not using the Snowflake Streaming Loader, you will need to pick a password.
+
 Execute the following SQL (replace the `${...}` variables with your desired values). You will need access to both `SYSADMIN` and `SECURITYADMIN` level roles to action this:
 
 ```sql
@@ -330,7 +331,9 @@ GRANT USAGE ON DATABASE ${snowflake_database} TO ROLE ${snowflake_loader_role};
 GRANT ALL ON SCHEMA ${snowflake_database}.${snowflake_schema} TO ROLE ${snowflake_loader_role};
 
 -- 5. Create a user that can be used for loading data
-CREATE USER IF NOT EXISTS ${snowflake_loader_user} PASSWORD='${snowflake_password}'
+CREATE USER IF NOT EXISTS ${snowflake_loader_user}
+  RSA_PUBLIC_KEY='MIIBIj...' -- fill out if using Snowflake Streaming Loader
+  PASSWORD='...'             -- fill out otherwise
   MUST_CHANGE_PASSWORD = FALSE
   DEFAULT_ROLE = ${snowflake_loader_role}
   EMAIL = 'loader@acme.com';
@@ -548,6 +551,26 @@ As mentioned [above](#storage-options), there are several options for the pipeli
 
 When in doubt, refer back to the [destination setup](#prepare-the-destination) section where you have picked values for many of the variables.
 
+<details>
+<summary>Snowflake + Streaming Loader</summary>
+
+If you are using Snowflake with the Streaming Loader, you will need to provide a private key you’ve generated during [destination setup](#prepare-the-destination).
+
+Here’s how to do it:
+
+```
+snowflake_streaming_loader_private_key = <<EOT
+-----BEGIN PRIVATE KEY-----
+MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCd2dEYSUp3hdyK
+5hWwpkNGG56hLFWDK47oMf/Niu+Yh+8Wm4p9TlPje+UuKOnK5N4nAbM4hlhKyEJv
+...
+99Xil8uas3v7o2OSe7FfLA==
+-----END PRIVATE KEY-----
+EOT
+```
+
+</details>
+
 :::caution
 
 For all active destinations, change any `_password` setting to a value that _only you_ know.
@@ -739,6 +762,68 @@ You can also consume your ADLS data via Fabric and OneLake:
 Do note that currently not all Fabric services support nested fields present in the Snowplow data.
 
 :::
+
+  </TabItem>
+</Tabs>
+
+## Configure HTTPS (optional)
+
+Now that you have a working pipeline, you can *optionally* configure your Collector and Iglu Server to have an HTTPS-enabled endpoint. This might be required in some cases to track events on strictly SSL-only websites, as well as to enable first-party tracking (by putting the Collector endpoint on the same sub-domain as your website).
+
+<Tabs groupId="cloud" queryString>
+  <TabItem value="aws" label="AWS" default>
+
+1. Navigate to Amazon Certificate Manager (ACM) in the AWS Console
+2. Request a public certificate from the ACM portal for the domain you want to host these endpoints under (e.g. for the Collector this might be `c.acme.com`) - make sure you are in the *same* region as your pipeline
+  - `Fully qualified domain name` will be something like `c.acme.com`
+  - `Validation method` is whatever works best for you - generally `DNS validation` is going to be easiest to action
+  - `Key algorithm` should be left as `RSA 2048`
+3. Once you have requested the certificate, it should show up in the ACM certificate list as `Pending validation` - complete the DNS / Email validation steps and wait until the status changes to `Issued`
+4. Copy the issued certificate’s `ARN` and paste it into your `terraform.tfvars` file under `ssl_information.certificate_arn`
+5. Change `ssl_information.enabled` to `true`
+6. Apply the `iglu_server` / `pipeline` module as you have done previously to attach the certificate to the Load Balancer
+7. Add a `CNAME` DNS record for your requested domain pointing to the AWS Load balancer (e.g. `c.acme.com` -> `<lb-identifier>.<region>.elb.amazonaws.com`)
+  - If you are using `Route53` for DNS record management, you can instead [setup an Alias route](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-elb-load-balancer.html) which can help circumvent certain `CNAME` cloaking tracking protections
+
+You should now be able to access your service over HTTPS. Verify this by going to your newly set up endpoint in a browser — you should get a valid response with a valid SSL certificate.
+
+  </TabItem>
+  <TabItem value="gcp" label="GCP">
+
+1. Navigate to Google Certificate Manager in the GCP Console
+2. Select the `Classic Certificates` tab and then press `Create SSL Certificate`
+  - `Name` should be something unique for the certificate you are creating
+  - `Description` describe the service you are creating the certificate for
+  - `Create mode` allows you to either supply your own certificate or create a `Google-managed` one. We generally recommend the latter for ease of implementation and updates
+  - `Domains` add the domain you want to host the service under (e.g. for the Collector this might be `c.acme.com`)
+3. Add an `A` DNS record for the requested domain pointing to the GCP Load balancer (e.g. `c.acme.com` -> `<lb-ipv4-address>`)
+4. Copy the Certificate ID into your `terraform.tfvars` file under `ssl_information.certificate_id`
+  - The ID takes the form `projects/{{project}}/global/sslCertificates/{{name}}`
+5. Change `ssl_information.enabled` to `true`
+6. Apply the `iglu_server` / `pipeline` module as you have done previously to attach the certificate to the Load Balancer
+
+Once the certificate is issued, you should now be able to access your service over HTTPS. Verify this by going to your newly set up endpoint in a browser — you should get a valid response with a valid SSL certificate.
+
+:::info
+
+It’s worth noting that GCP Managed Certificates can take up to 24 hours to be provisioned successfully, so it might take a while before you can access your service over HTTPS.
+
+:::
+
+  </TabItem>
+  <TabItem value="azure" label="Azure">
+
+Unlike AWS or GCP, Azure doesn't have a Certificate Management layer. So to follow this guide, you will need to have bought your own valid SSL certificate covering the domain(s) you want to bind to.
+
+1. [Convert your SSL Certificate](https://github.com/snowplow-devops/terraform-azurerm-lb?tab=readme-ov-file#adding-a-custom-certificate) into the correct format (`pkcs12`) needed for the Azure Application Load Balancer
+2. Copy the `pkcs12` certificate password into your `terraform.tfvars` file under `ssl_information.password`
+3. Copy the `pkcs12` certificate into your `terraform.tfvars` file under `ssl_information.data`
+ - Ensure the certificate is `base64`-encoded (e.g. `cat cert.p12 | base64`)
+4. Change `ssl_information.enabled` to `true`
+5. Apply the `iglu_server` / `pipeline` module as you have done previously to attach the certificate to the Load Balancer
+6. Add an `A` DNS record for your requested domain pointing to the Azure Load Balancer (e.g. `c.acme.com` -> `<lb-ipv4-address>`)
+
+You should now be able to access your service over HTTPS. Verify this by going to your newly set up endpoint in a browser — you should get a valid response with a valid SSL certificate.
 
   </TabItem>
 </Tabs>

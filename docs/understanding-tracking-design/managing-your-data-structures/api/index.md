@@ -4,7 +4,7 @@ sidebar_label: "Using the API"
 sidebar_position: 2
 sidebar_custom_props:
   offerings:
-    - enterprise
+    - bdp
 ---
 
 As well as managing [data structures](/docs/understanding-your-pipeline/schemas/index.md) through the Snowplow BDP Console, Snowplow BDP customers can also manage them programmatically through the data structures API.
@@ -55,19 +55,19 @@ Use this request to:
 - Retrieve a list of all data structures
 - Retrieve a list of data structures filtered by `vendor` or `name` query parameters
 
-`**GET** ​/api​/msc​/v1​/organizations​/{organizationId}​/data-structures/v1`
+`**GET** /api/msc/v1/organizations/{organizationId}/data-structures/v1`
 
 ### Retrieve a specific data structure
 
 Use this request to retrieve a specific data structure by its hash (see 'Generating a data structure hash' below), which is generated on creation.
 
-`**GET** ​/api​/msc​/v1​/organizations​/{organizationId}​/data-structures​/v1/{dataStructureHash}`
+`**GET** /api/msc/v1/organizations/{organizationId}/data-structures/v1/{dataStructureHash}`
 
 ### Retrieve specific version of a specific data structure
 
 Use this request to retrieve all versions of a specific data structure by its hash (see 'Generating a data structure hash' below)
 
-`**GET** ​/api​/msc​/v1​/organizations​/{organizationId}​/data-structures/v1/{dataStructureHash}​/versions​/{versionNumber}`
+`**GET** /api/msc/v1/organizations/{organizationId}/data-structures/v1/{dataStructureHash}/versions/{versionNumber}`
 
 See the [detailed API documentation](https://console.snowplowanalytics.com/api/msc/v1/docs) for all options.
 
@@ -75,7 +75,7 @@ See the [detailed API documentation](https://console.snowplowanalytics.com/api/m
 
 To use the commands to retrieve information about a specific Data Structure, you need to encode its identifying parameters (`organization ID`, `vendor`, `name` and `format`) and hash it with SHA-256.
 
-**Example:**  
+**Example:**
 
 | Parameter | Value |
 |-----------|-------|
@@ -84,7 +84,7 @@ To use the commands to retrieve information about a specific Data Structure, you
 | Schema name | `search` |
 | Format | `jsonschema` |
 
-First concatenate the information with a dash (-) as the separator:  
+First concatenate the information with a dash (-) as the separator:
 `38e97db9-f3cb-404d-8250-cd227506e544-com.acme.event-search-jsonschema`
 
 And then hash them with SHA-256 to receive: `a41ef92847476c1caaf5342c893b51089a596d8ecd28a54d3f22d922422a6700`
@@ -93,7 +93,7 @@ And then hash them with SHA-256 to receive: `a41ef92847476c1caaf5342c893b51089a5
 
 To validate that your schema is in proper JSON format and complies with warehouse loading requirements, you can use the validation `POST` requests.
 
-`**POST** ​/api​/msc​/v1​/organizations​/{organizationId}​/data-structures/v1/validation-requests`
+`**POST** /api/msc/v1/organizations/{organizationId}/data-structures/v1/validation-requests`
 
 ### Example
 
@@ -144,9 +144,9 @@ Please note:
 
 The deployment endpoints deal with getting a new or edited version of your data structure into your development and production environments.
 
-`**GET** ​/api​/msc​/v1​/organizations​/{organizationId}​/data-structures/v1/{dataStructureHash}​/deployments`
+`**GET** /api/msc/v1/organizations/{organizationId}/data-structures/v1/{dataStructureHash}/deployments`
 
-`**POST** ​/api​/msc​/v1​/organizations​/{organizationId}​/data-structures/v1/deployment-requests`
+`**POST** /api/msc/v1/organizations/{organizationId}/data-structures/v1/deployment-requests`
 
 ### Example
 

@@ -5,7 +5,7 @@ sidebar_label: "Using the UI or API"
 sidebar_position: 10
 sidebar_custom_props:
   offerings:
-    - enterprise
+    - bdp
 ---
 
 Having already set up [collectors in your pipeline](/docs/understanding-your-pipeline/architecture-overview/index.md) and trackers [to submit events](/docs/collecting-data/index.md) to them, you may want to verify your collector configuration. This can take two forms, depending on your needs.
@@ -44,14 +44,14 @@ Once you have these you can exchange credentials for a token.
 Here is an example CURL to use to fetch the token:
 
 ```bash
-curl --request POST \ 
-  --url 'https://id.snowplowanalytics.com/oauth/token' \ 
-  --header 'content-type: application/x-www-form-urlencoded' \ 
-  --data grant_type=password \ 
-  --data username=USER@DOMAIN.COM \ 
-  --data password='PASSWORD' \ 
-  --data audience=https://snowplowanalytics.com/api/ \ 
-  --data client_id='YOUR_CLIENT_ID' \ 
+curl --request POST \
+  --url 'https://id.snowplowanalytics.com/oauth/token' \
+  --header 'content-type: application/x-www-form-urlencoded' \
+  --data grant_type=password \
+  --data username=USER@DOMAIN.COM \
+  --data password='PASSWORD' \
+  --data audience=https://snowplowanalytics.com/api/ \
+  --data client_id='YOUR_CLIENT_ID' \
   --data client_secret='YOUR_CLIENT_SECRET'
 ```
 
@@ -61,7 +61,7 @@ This token will be needed in any request to the API in the form of `Authorizati
 
 You can have a look at and interact with the collector configuration endpoint in the normative [API specification](https://console.snowplowanalytics.com/api/msc/v1/docs/index.html?url=/api/msc/v1/docs/docs.yaml#/configuration/getOrganizationsOrganizationidResourcesV1PipelinesPipelineidConfigurationCollector).
 
-Authorizing in the API documentation
+### Authorizing in the API documentation
 
 To be able to post sample requests in the documentation you need to click the `Authorize` button at the top of the document and authorize with your token. The value for the token field in each individual requests is overwritten by this authorization.
 
@@ -88,29 +88,29 @@ The Pipeline ID is the second UUID in the location bar.
 Invoking this API will return an object of the following form:
 
 ```json
-{ 
-    "cookieDomains": 
-    { 
-        "fallback": "mydomain.com", 
-        "domains": [] 
-    }, 
-    "paths": { 
-        "post": { 
-            "paths": [] 
-        }, 
-        "webhook": { 
-            "paths": [] 
-        }, 
-        "redirect": { 
-            "paths": [], 
-            "enabled": true 
-        } 
-    }, 
-    "cookieAttributes": { 
-        "secure": true, 
-        "sameSite": "None", 
-        "httpOnly": false 
-    }, 
+{
+    "cookieDomains":
+    {
+        "fallback": "mydomain.com",
+        "domains": []
+    },
+    "paths": {
+        "post": {
+            "paths": []
+        },
+        "webhook": {
+            "paths": []
+        },
+        "redirect": {
+            "paths": [],
+            "enabled": true
+        }
+    },
+    "cookieAttributes": {
+        "secure": true,
+        "sameSite": "None",
+        "httpOnly": false
+    },
     "blockUnencrypted": false
 }
 ```

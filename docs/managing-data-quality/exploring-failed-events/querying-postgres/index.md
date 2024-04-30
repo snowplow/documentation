@@ -10,21 +10,13 @@ Each type of failed event is stored in its own table. You can get a full list of
 
 ```sql
 SELECT * FROM information_schema.tables
-WHERE table_schema = 'badrows';
+WHERE table_schema = 'atomic_bad';
 ```
-
-:::info Database schema name
-
-The example above uses `badrows` as the database schema name in Postgres. This will depend on how you’ve set up your loader. Typically, it’s `badrows` for [Try Snowplow](/docs/try-snowplow/index.md) and `atomic_bad` for [Community Edition Quick Start](/docs/getting-started-on-community-edition/what-is-quick-start/index.md).
-
-We will use `badrows` throughout the rest of this page — feel free to substitute your own schema name.
-
-:::
 
 For instance, to check the number of [schema violations](/docs/understanding-your-pipeline/failed-events/index.md#schema-violation), you can query the respective table:
 
 ```sql
-SELECT COUNT(*) FROM badrows.com_snowplowanalytics_snowplow_badrows_schema_violations_2;
+SELECT COUNT(*) FROM atomic_bad.com_snowplowanalytics_snowplow_badrows_schema_violations_2;
 ```
 
 Taking it further, you can check how many failed events you have by [schema](/docs/understanding-your-pipeline/schemas/index.md) and error type:
@@ -34,7 +26,7 @@ SELECT
    "failure.messages"->0->'error'->'error' AS error,
    "failure.messages"->0->'schemaKey' AS schema,
    count(*) AS failed_events
-FROM badrows.com_snowplowanalytics_snowplow_badrows_schema_violations_2
+FROM atomic_bad.com_snowplowanalytics_snowplow_badrows_schema_violations_2
 GROUP BY 1,2
 ORDER BY 3 DESC
 ```

@@ -27,19 +27,24 @@ Initialize the setup of Snowtype code generation in a project. Creates the `snow
 
 Generates tracking code based on configuration on the `snowtype.config.json` file. Can generate/modify the `.snowtype-lock.json` file.
 
+**Options**
+ -  `-is, --instructions` Generate event specification instructions.
+ -  `-va, --validations` Add runtime validation on events. _Currently available for the Browser tracker_.
+
 ### `snowtype update`
 
-Checks for latest version updates in Data Structures and Tracking Scenarios.
+Checks for latest version updates in Data Structures and Event Specifications.
 
 **Options**
  -  `-y, --yes` Updates all to latest version without prompting. (default: false)
 
 ### `snowtype patch`
 
-Adds new Data Structures and Tracking Scenarios in the `snowtype.config.json` file without needing to modify the file by hand.
+Adds new Data Structures and Event Specifications in the `snowtype.config.json` file without needing to modify the file by hand.
 
 **Options**
- - `-t, --trackingScenarioIds` Tracking Scenario ID/s.
+ - `-e, --eventSpecificationIds` Event Specification ID/s.
+ - `-p, --dataProductIds` Data Product ID/s.
  - `-d, --dataStructures` Data structure schema URI/s.
  - `-i, --igluCentralSchemas` Iglu central schema URI/s.
 

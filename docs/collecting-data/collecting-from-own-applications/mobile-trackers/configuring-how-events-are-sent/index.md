@@ -199,22 +199,31 @@ EmitterConfiguration emitterConfiguration = new EmitterConfiguration()
 
 ## Configuring how many events to send in one request
 
-The tracker sends events in batches. The tracker allows only a choice of 1 (`BufferOption.single`), 10 (`BufferOption.defaultGroup`), or 25 (`BufferOption.largeGroup`) events at maximum per request payload. 
+There are two options in the `EmitterConfiguration` that are relevant for configuring how many events are sent per request to the collector:
 
-The tracker checks for events to send every time an event is tracked. Normally, the new event will be sent immediately in its own request (no batching), regardless of the `BufferOption` setting.
+1. `bufferOption` – How many events to wait for before making a request. Defaults to 1.
+2. `emitRange` – The maximum amount of events to send in a request. Defaults to 25.
 
-With very high event volumes, or when many events are buffered in the event store (e.g. if the network had been down), the `BufferOption` settings come into play. The maximum number of events to remove from the eventStore at once (by one thread) is set by the `EmitterConfiguration.emitRange` property: 150 events by default. These events are processed into requests with a maximum `BufferOption` of events per request.
+The `bufferOption` tells the tracker how many events have to accumulate in the event store before it should make a request to the collector.
+There are three options: 1 (`BufferOption.single`), 10 (`BufferOption.smallGroup`), or 25 (`BufferOption.largeGroup`) events.
+Choosing `BufferOption.smallGroup` means that 10 events need to be tracked before the first request to the collector is made.
+
+With very high event volumes, or when many events are buffered in the event store (e.g. if the network had been down), the `emitRange` settings come into play.
+This setting specifies the maximum number of events that can be sent in one request to the collector.
+For instance, let's say that 100 events accumulate in the event store.
+In case the default emit range (25) is used, the tracker will make 4 requests serially, one after the other, each with 25 events.
 
 If the event store is empty when the tracker tries to send events - because another thread has just sent them - the thread sleeps for 5 seconds before trying again. If this happens 5 times in a row in the same thread, event sending will be paused for the whole tracker. It is restarted when a new event arrives.
 
-Configure the batch size like this:
+Configure the batch size and emit range like this:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
 ```swift
 let emitterConfig = EmitterConfiguration()
-      .bufferOption(BufferOption.defaultGroup)
+      .bufferOption(BufferOption.single)
+      .emitRange(25)
 ```
 
   </TabItem>
@@ -222,7 +231,8 @@ let emitterConfig = EmitterConfiguration()
 
 ```kotlin
 val emitterConfiguration = EmitterConfiguration()
-    .bufferOption(BufferOption.DefaultGroup)
+    .bufferOption(BufferOption.Single)
+    .emitRange(25)
 ```
 
   </TabItem>
@@ -230,7 +240,65 @@ val emitterConfiguration = EmitterConfiguration()
 
 ```java
 EmitterConfiguration emitterConfiguration = new EmitterConfiguration()
-      .bufferOption(BufferOption.DefaultGroup);
+      .bufferOption(BufferOption.Single)
+      .emitRange(25);
+```
+
+  </TabItem>
+</Tabs>
+
+:::note Behavior before version 6.0.0 of the tracker
+Before version 6 of the iOS and Android tracker, the `bufferOption` and `emitRange` had a slightly different meaning.
+Events were sent right after they were tracked regardless of the `bufferOption` used.
+The `bufferOption` was used to specify the maximum number of events per request and the `emitRange` specified the maximum number of total events to make in parallel requests at once.
+For instance, if there were 100 events in the event store and `bufferOption` was set to 10 (called `defaultGroup` previously) and `emitRange` to 50, the tracker would make 5 parallel requests to the collector with 10 events each. After that it would make another 10 parallel requests to the collector with 10 events each.
+:::
+
+## Automatic clean up of the event store
+
+:::note Not available before v6
+This feature was introduced in version 6.0.0 of the iOS and Android trackers.
+:::
+
+Under some situations events may keep accumulating in the event store without the tracker being able to send them at all.
+For instance, this may happen in case the user has an ad blocker installed or in case they permanently use the app offline.
+
+If events accumulated in the event store without any limits, the size of the event store would keep getting bigger, potentially causing performance issues or app crashes.
+To prevent this, the tracker automatically removes old events from the event store.
+It removes old events based on two criteria that are configurable using `EmitterConfiguration`:
+
+1. Maximum event store size (`maxEventStoreSize`) – in case the number of events surpasses this threshold, the oldest events will be removed until the number of events is under the threshold. Defaults to 1000.
+2. Maximum event age (`maxEventStoreAge`) – events older than this threshold are removed. Defaults to 30 days.
+
+The clean up is triggered before each emit attempt – before sending events to the collector.
+
+You can configure the properties as follows.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="ios" label="iOS" default>
+
+```swift
+let emitterConfig = EmitterConfiguration()
+      .maxEventStoreSize(1000) // events
+      .maxEventStoreAge(TimeInterval(60 * 60 * 24 * 30)) // 30 days
+```
+
+  </TabItem>
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val emitterConfiguration = EmitterConfiguration()
+    .maxEventStoreSize(1000)
+    .maxEventStoreAge(30.toDuration(DurationUnit.DAYS))
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+EmitterConfiguration emitterConfiguration = new EmitterConfiguration()
+      .maxEventStoreSize(1000)
+      .maxEventStoreAge(Duration.ofDays(30).toKotlinDuration());
 ```
 
   </TabItem>

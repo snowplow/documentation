@@ -5,15 +5,16 @@ sidebar_label: "Using the JSON Editor"
 sidebar_position: 1
 sidebar_custom_props:
   offerings:
-    - enterprise
+    - bdp
 ---
+
 :::info
-The JSON editor is ideal for more complex data structures that require heavy nesting and more advanced data types. For simple data structures, use the [Data Structures Builder](/docs/understanding-tracking-design/managing-your-data-structures/ui/builder/index.md).	
+The JSON editor is ideal for more complex data structures that require heavy nesting and more advanced data types. For simple data structures, use the [Data Structures Builder](/docs/understanding-tracking-design/managing-your-data-structures/ui/builder/index.md).
 :::
 
 ## Creating a new data structure
 
-Select whether you'd like to create an [Event](/docs/understanding-your-pipeline/events/index.md) or an [Entity](/docs/understanding-your-pipeline/entities/index.md). You can always change this selection at a later date.    
+Select whether you'd like to create an [Event](/docs/understanding-your-pipeline/events/index.md) or an [Entity](/docs/understanding-your-pipeline/entities/index.md). You can always change this selection at a later date.
 
 ![](images/image-2.png)
 
@@ -23,7 +24,7 @@ You can now write the first version of your JSON schema for this Data Structure.
 
 Once you are done, click the **'Validate'** button and we'll validate that your schema is valid JSON markup. Assuming it passes validation the 'Publish' button will activate.
 
-Click **'Publish to development environment'** to publish your Data Structure to your development environment. As this is the first version of your data structure it will be created as version `1-0-0`. Click publish again on the modal dialog to confirm the action.
+Click **'Publish to development environment'** to publish your Data Structure to your development environment. As this is the first version of your data structure it will be created as version `1-0-0`. Click publish again on the dialog to confirm the action.
 
 Your new Data Structure will be published to your development environment ready [for you to test](/docs/managing-data-quality/testing-and-qa-workflows/index.md).
 
@@ -40,7 +41,7 @@ Once you are happy with your changes, click **'Validate'** to ensure you have va
 
 ![](images/image-7.png)
 
-The versioning modal dialog will appear, at this point you have three options:
+The versioning dialog will appear, at this point you have three options:
 
 - Increment a minor version to indicate a non-breaking change to the schema. In our example, this would increment the schema to from `1-0-1` to `1-0-2`.
 - Increment a major version to indicate a breaking change to the schema. In our example, this would increment the schema from `1-0-1` to `2-0-0`.

@@ -42,7 +42,7 @@ Use the [Web vitals plugin for the JavaScript tracker](/docs/collecting-data/col
 
 #### Modeled data using the snowplow-web dbt package
 
-To process raw web vitals event data, we have included an optional module to model in the [snowplow-web dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/core-web-vitals-module/index.md).
+To process raw web vitals event data, we have included an optional module to model in the [snowplow-web dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/core-web-vitals-module/index.md).
 
 This custom module consists of a series of dbt models which produce the following aggregated models from the raw web vitals events:
 

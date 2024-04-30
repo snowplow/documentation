@@ -1,6 +1,6 @@
 ---
 title: "Mobile"
-sidebar_position: 300
+sidebar_position: 910
 ---
 
 ### Upgrading to 0.7.0

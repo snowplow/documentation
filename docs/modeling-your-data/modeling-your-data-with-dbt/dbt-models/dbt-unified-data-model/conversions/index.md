@@ -18,13 +18,22 @@ Conversion events are a type of event that's important to your business, be that
 
 Because we know that each user may have a different concept of what a conversion means to them, for example it could be a specific type of event such as a `page_view` on a specific url, a self-describing event such as `sign_up`, or even a bespoke `conversion` event type with some attached context, the way we model conversions is also flexible and allows you to change your definition over time. This allows you to track multiple types of conversions, with varying logic, even retrospectively.
 
+There are two ways that you can model conversions in the Unified package:
+
+1. In the **sessions table only**
+2. In the **optional conversions module**
+
+## 1. Enabling conversions in the sessions table only
+
+By configuring the conversion specifications through the `snowplow__conversion_events` variable you can enable conversion events to be modelled in the derived sessions table.
+
 :::caution
 
 Because this is part of the sessions table within the Unified dbt package, we still expect your sessions to contain at least one `page_view` or `page_ping` event, and the events must all have a `session_identifier` to be included in the `base_events_this_run_table`. Without a `session_identifier` the event will not be visible to the model, and without a `page_view` or `page_ping` in the session there will be no session record for the model to attach the conversions to.
 
 :::
 
-## Conversion Columns
+### Conversion Columns
 For every type of conversion you provide a configuration for, the package will add up to 6 columns to the `snowplow_unified_sessions` table, depending on what you provide in your configuration. All columns start with `cv_{name}_` based on the name of your conversion and will be placed at the end of the table.
 
 | Column                       | Description                                                                                  |
@@ -56,7 +65,7 @@ If you are using these columns make sure that all your conversion values are in 
 
 :::
 
-## The conversion configuration dictionary
+### The conversion configuration dictionary
 The `snowplow__conversion_events` variable in our project takes a list of dictionaries to determine what events count as a conversion. These dictionaries are expected to have certain keys and form what we call a conversion configuration. The keys are:
 
 | Key           | Required | Description                                                                                                                                                         | Example value                                              |
@@ -75,7 +84,7 @@ For Redshift and Postgres users currently you are limited to just the fields add
 
 :::
 
-### Example configurations
+#### Example configurations
 
 <details>
 <summary>All ids of page views on a particular url</summary>
@@ -155,6 +164,122 @@ Using our [Snowplow e-commerce tracking](/docs/collecting-data/collecting-from-o
 </details>
 
 
-## Configuration Generator
+### Configuration Generator
 
-You can use the full config generator on the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/index.mdx) to help you generate your conversion event definitions.
+You can use the below generator to generate the conversion events variable, make sure you combine this with existing conversions if you have any already. You can also use the full config generator on the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/index.mdx) to help you generate all your package variables.
+
+```mdx-code-block
+import CodeBlock from '@theme/CodeBlock';
+import { useState } from 'react';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { useColorMode } from '@docusaurus/theme-common';
+import validator from '@rjsf/validator-ajv8';
+import Form from '@rjsf/mui';
+
+export const schema = {
+  "recommendFullRefresh": false,
+      "title": "Conversion Definition",
+      "description": "> Click the plus sign to add a new entry",
+      "type": "array",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "required": [
+          "name",
+          "condition"
+        ],
+        "title": "",
+        "description": "Conversion Event",
+        "properties": {
+          "name": {
+            "type": "string",
+            "title": "Name",
+            "description": "Name of your conversion type"
+          },
+          "condition": {
+            "type": "string",
+            "title": "Condition",
+            "description": "SQL condition e.g. event_name = 'page_view'"
+          },
+          "value": {
+            "type": "string",
+            "title": "Value",
+            "description": "SQL value e.g. tr_total_base"
+          },
+          "default_value": {
+            "type": "number",
+            "title": "Default value",
+            "description": "Default value e.g. 0"
+          },
+          "list_events": {
+            "type": "boolean",
+            "title": "List all event ids?"
+          }
+        }
+      },
+      "uniqueItems": true
+};
+
+export const printYamlVariables = (data) => {
+  return(
+    <>
+    <h4>Project Variable:</h4>
+    <CodeBlock language="yaml">{`vars:
+  snowplow_unified:
+    snowplow__conversion_events: ${JSON.stringify(data, null, 4)}`}</CodeBlock>
+    </>
+  )
+}
+
+export const darkTheme = createTheme({
+  palette: {
+    mode: 'dark',
+  },
+});
+
+export const lightTheme = createTheme({
+  palette: {
+    mode: 'light',
+  },
+});
+
+export function JsonSchemaGenerator({ output, children, schema }) {
+  const [formData, setFormData] = useState(null)
+  const { colorMode, setColorMode } = useColorMode()
+  return (
+    <ThemeProvider theme={colorMode === 'dark' ? darkTheme : lightTheme}>
+      <div className="JsonValidator">
+            <Form
+              schema={schema}
+              formData={formData}
+              onChange={(e) => setFormData(e.formData)}
+              validator={validator}
+              showErrorList="bottom"
+              liveValidate
+              uiSchema={{
+                    "ui:submitButtonOptions": { norender: true },
+                }}
+            />
+      </div>
+      {output(formData)}
+    </ThemeProvider>
+  )
+};
+```
+
+<JsonSchemaGenerator schema={schema} output={printYamlVariables} />
+
+
+## 2. Enabling conversions in the Conversions Module
+
+If you need a a conversions source table for your downstream model (e.g. for the snowplow-attribution package), you can enable the optional Conversions module by setting the `snowplow__enable_conversions` variable to `true` to model that for you. You will also need to make sure you define your conversion events using the `snowplow__conversion_events` variable in case you have not already done so for the sessions table.
+
+This would produce an incremental conversions table where you will see the most important fields related to your conversion events based on your definitions. If you defined multiple conversion types, you will see them all in one table.
+
+| event_id                             | session_identifier                  | user_identifier    | user_id | cv_value | cv_tstamp             | dvce_created_tstamp   | cv_type    |
+|----------------------------------------|----------------------------------------|----------------------|-----------|------------|-------------------------|-------------------------|--------------|
+| event_1 | session_1 | f000170187170673177  | user_1| 50.00      | 2023-06-08 20:18:32.000 | 2023-06-08 20:18:32.000 | transactions |
+| event_2   | session_2 | f0009028775170427694 |user_2 | 20.42      | 2023-06-11 15:33:03.000 | 2023-06-11 15:33:03.000 | transactions |
+| event_3   | session_3| f0008284662789123943 | user_3| 200.00     | 2023-07-07 13:05:55.000 | 2023-07-07 13:05:55.000 | transactions |
+
+You can also apply user-stitching to your conversions table by setting the `snowplow__conversion_stitching` variable to `true`. For more details please refer to our guide on [Identity Stitching](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/index.md).

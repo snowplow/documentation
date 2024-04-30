@@ -1,6 +1,6 @@
 ---
 title: "Utils"
-sidebar_position: 100
+sidebar_position: 50
 ---
 
 ### Upgrading to 0.14.0

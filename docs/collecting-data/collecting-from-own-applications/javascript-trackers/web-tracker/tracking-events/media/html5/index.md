@@ -3,7 +3,7 @@ title: "HTML5 media"
 sidebar_position: 10
 ---
 
-# HTML5 nedia tracking
+# HTML5 media tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

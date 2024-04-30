@@ -19,7 +19,9 @@ function process(event) {
 }
 ```
 
-Remember that you can only have _one_ JavaScript enrichment, and hence a single `process` function for your pipeline. However, you can split more complex logic into multiple helper functions and variables as you see fit, as long as you comply with the above interface.
+Starting with Enrich 4.1.0, it is possible to have multiple JavaScript enrichments. (Currently, the order in which they would run is not defined.)
+
+With versions prior to 4.1.0, you can only have _one_ JavaScript enrichment, and hence a single `process` function for your pipeline. However, you can split more complex logic into multiple helper functions and variables as you see fit, as long as you comply with the above interface.
 
 :::tip JavaScript Language Features
 
@@ -277,3 +279,44 @@ function process(event) {
   ...
 }
 ```
+
+## Passing an object of parameters
+
+Starting with Enrich 4.1.0, it is possible to pass an object of parameters to the JS enrichment.
+
+You can pass these parameters in the enrichment configuration, for example:
+
+```json
+{
+	"schema": "iglu:com.snowplowanalytics.snowplow/javascript_script_config/jsonschema/1-0-1",
+
+	"data": {
+
+		"vendor": "com.snowplowanalytics.snowplow",
+		"name": "javascript_script_config",
+		"enabled": true,
+		"parameters": {
+			"script": "script",
+			"config": {
+				"foo": 3,
+				"nested": {
+					"bar": "test"
+				}
+			}
+		}
+	}
+}
+```
+
+The parameter object can be accessed in JavaScript enrichment code via the second parameter of the `process` function, for example:
+
+```js
+function process(event, params) {
+  event.setApp_id(params.nested.bar);
+  return [];
+}
+```
+
+:::tip
+This is useful when you want to quickly reconfigure the enrichment without updating the JavaScript code.
+:::

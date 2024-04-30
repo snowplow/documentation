@@ -1,6 +1,6 @@
 ---
 title: "E-commerce"
-sidebar_position: 600
+sidebar_position: 30
 ---
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

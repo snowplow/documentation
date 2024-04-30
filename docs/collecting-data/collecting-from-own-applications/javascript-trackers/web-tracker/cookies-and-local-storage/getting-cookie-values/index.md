@@ -1,8 +1,12 @@
 ---
 title: "Getting cookie information"
-date: "2020-03-03"
 sidebar_position: 500
 ---
+
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
 
 ## Domain user information
 

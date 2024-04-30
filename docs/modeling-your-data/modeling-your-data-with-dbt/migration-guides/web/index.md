@@ -1,6 +1,6 @@
 ---
 title: "Web"
-sidebar_position: 200
+sidebar_position: 900
 ---
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 Note the minimum `dbt-core` version now required is 1.5.0
 
-Most upgrades and new features should be available automatically after the first run of the new version of the package, however there are a few breaking changes to manage before this first run. To enable any other new optional features or make use of the new configuration options, please see the [configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/web/index.mdx) page.
+Most upgrades and new features should be available automatically after the first run of the new version of the package, however there are a few breaking changes to manage before this first run. To enable any other new optional features or make use of the new configuration options, please see the [configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/legacy/web/index.mdx) page.
 
 1. The seed files have been prefixed with `snowplow_web_` so you will need to re-run `dbt seed` if this is not part of your standard workflow (note this will not drop the existing tables)
 2. Both the quarantined sessions and the sessions lifecycle table have has a column renamed, please run the below statements to rename this column in your warehouse if not doing a full-refresh of the package.

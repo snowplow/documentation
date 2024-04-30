@@ -294,9 +294,13 @@ There will be a new dataset available in BigQuery with the suffix `_snowplow_db`
 
 [RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) is a set of applications that loads enriched events into Snowflake.
 
+Alternatively, for AWS you can choose the newer [Snowflake Streaming Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowflake-streaming-loader/index.md), which is a single application.
+
 See the following Terraform modules for further details on the resources, default and required input variables, and outputs:
-* Transformer ([AWS — Kinesis](https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest), [Azure — Kafka / Event Hubs](https://registry.terraform.io/modules/snowplow-devops/transformer-event-hub-vmss/azurerm/latest))
-* Snowflake Loader ([AWS](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-ec2/aws/latest), [Azure](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-vmss/azurerm/latest))
+* RDB Loader:
+  * Transformer component ([AWS — Kinesis](https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest), [Azure — Kafka / Event Hubs](https://registry.terraform.io/modules/snowplow-devops/transformer-event-hub-vmss/azurerm/latest))
+  * Snowflake Loader component ([AWS](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-ec2/aws/latest), [Azure](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-vmss/azurerm/latest))
+* Snowflake Streaming Loader ([AWS](https://registry.terraform.io/modules/snowplow-devops/snowflake-streaming-loader-ec2/aws/latest))
 
 
   </TabItem>

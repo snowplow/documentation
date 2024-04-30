@@ -141,7 +141,9 @@ You can specify a list of CSS classes to match against the buttons you want to t
 
 ```javascript
 window.snowplow('enableButtonClickTracking', {
-  allowlist: ['my-button'],
+  filter: {
+    allowlist: ['my-button'],
+  }
 });
 ```
 
@@ -151,7 +153,9 @@ window.snowplow('enableButtonClickTracking', {
 ```javascript
 import { enableButtonClickTracking } from '@snowplow/browser-plugin-button-click-tracking';
 enableButtonClickTracking({
-  allowlist: ['my-button'],
+  filter: {
+    allowlist: ['my-button'],
+  }
 });
 ```
 
@@ -167,7 +171,9 @@ Inversely, you can specify a list of CSS classes to match against the buttons yo
 
 ```javascript
 window.snowplow('enableButtonClickTracking', {
-  denylist: ['my-button'],
+  filter: {
+    denylist: ['my-button'],
+  }
 });
 ```
 
@@ -177,7 +183,9 @@ window.snowplow('enableButtonClickTracking', {
 ```javascript
 import { enableButtonClickTracking } from '@snowplow/browser-plugin-button-click-tracking';
 enableButtonClickTracking({
-  denylist: ['my-button'],
+  filter: {
+    denylist: ['my-button'],
+  }
 });
 ```
 
@@ -267,7 +275,9 @@ We can configure the plugin to only track this button class:
 
 ```javascript
 window.snowplow('enableButtonClickTracking', {
-  allowlist: ['nav-btn'],
+  filter: {
+    allowlist: ['nav-btn'],
+  }
 });
 ```
 
@@ -302,7 +312,9 @@ We can configure the plugin to only track this button class:
 import { enableButtonClickTracking } from '@snowplow/browser-plugin-button-click-tracking';
 
 enableButtonClickTracking({
-  allowlist: ['nav-btn'],
+  filter: {
+    allowlist: ['nav-btn'],
+  }
 });
 ```
 
@@ -322,4 +334,3 @@ On click, this will result in the following event:
 
 </TabItem>
 </Tabs>
-

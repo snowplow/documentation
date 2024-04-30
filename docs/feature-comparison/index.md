@@ -1,73 +1,73 @@
 ---
-title: "Feature comparison"
+title: "Product features"
 sidebar_position: 1
 hide_table_of_contents: true
 ---
 
-Should you choose [Snowplow Community Edition](/docs/getting-started-on-community-edition/index.md), [Snowplow BDP Cloud](/docs/getting-started-on-snowplow-bdp-cloud/index.md) or [Snowplow BDP Enterprise](/docs/getting-started-on-snowplow-bdp-enterprise/index.md)? Below you can find a detailed feature comparison. Still not sure? Check out [our guide](https://snowplow.io/os-or-bdp/).
+Below you can find a detailed list of product features, including which are available as part of the Snowplow Behavioral Data Platform (BDP) and which are available with the [Snowplow Community Edition](/docs/getting-started-on-community-edition/index.md). 
 
 To find out more about the support services offered to Snowplow BDP customers see our [Statement of Support](/statement-of-support/).
 
-| <h3>Create & consume behavioral data</h3> | [Community Edition](/docs/getting-started-on-community-edition/index.md) | [BDP Cloud](/docs/getting-started-on-snowplow-bdp-cloud/index.md) | [BDP Enterprise](/docs/getting-started-on-snowplow-bdp-enterprise/index.md) |
-|:--|:-:|:-:|:-:|
-| [35+ trackers & webhooks](/docs/collecting-data/index.md) | ✅ | ✅ | ✅ |
-| 1st party tracking | ✅ | ✅ | ✅ |
-| [Anonymous data collection](/docs/recipes/recipe-anonymous-tracking/index.md) | ✅ | ✅ | ✅ |
-| Custom [events](/docs/understanding-your-pipeline/events/index.md#out-of-the-box-and-custom-events) & [entities](/docs/understanding-your-pipeline/entities/index.md#custom-entities) | ✅ | ✅ | ✅ |
-| [Enrichments](/docs/enriching-your-data/available-enrichments/index.md) | ✅ | ✅ | ✅ |
-| Advanced stream transformations (JS, API, SQL enrichments) | ✅ | ❌ | ✅ |
-| [Out-of-the-box data models](/docs/modeling-your-data/what-is-data-modeling/index.md)  | ✅ | ✅ | ✅ |
-| [Data Product Accelerators](https://snowplow.io/data-product-accelerators/) | ✅ | ✅ | ✅ |
-| [Destinations hub](https://snowplow.io/destination-hub/) | do-it-yourself | ❌ | ✅ |
-| **Warehouse / lake destinations** | | | |
-| • Snowflake | ✅ | ✅ | ✅ |
-| • Redshift | ✅ | ✅| ✅ |
-| • BigQuery | ✅ | ❌ | ✅ |
-| • Databricks | ✅ | ✅ | ✅ |
-| • Synapse Analytics | ✅ | ❌ | ✅ |
-| • Elasticsearch | ✅ | ❌ | ✅ |
-| • Postgres | ✅<br/>_(not suitable for high volumes)_ | ❌ | ❌ |
-| • S3 | ✅ | ❌ | ✅ |
-| • GCS | ✅ | ❌ | ✅ |
-| • ADLS / OneLake | ✅ | ❌ | ✅ |
-| **Real-time streams** | | | |
-| • Kinesis | ✅ | ❌ | ✅ |
-| • Pubsub | ✅ | ❌ | ✅ |
-| • Kafka / Azure Event Hubs / Confluent Cloud | ✅ | ❌ | ✅<br/>_(bolt-on)_ |
-| <h3>Build more trust in your data</h3> | [Community Edition](/docs/getting-started-on-community-edition/index.md) | [BDP Cloud](/docs/getting-started-on-snowplow-bdp-cloud/index.md) | [BDP Enterprise](/docs/getting-started-on-snowplow-bdp-enterprise/index.md) |
-| [Failed Events](/docs/understanding-your-pipeline/failed-events/index.md) | ✅ | ❌ | ✅ |
-| [Data quality monitoring & API](/docs/managing-data-quality/monitoring-failed-events/index.md) | ❌ | ❌ | ✅ |
-| Jobs monitoring dashboard | ❌ | ❌ | ✅ |
-| Pipeline configuration tooling | ❌ | ❌ | ✅ |
-| QA pipeline | do-it-yourself | ❌ | ✅ |
-| Auto-scaling | do-it-yourself | ❌ | ✅ |
-| Collector uptime SLA | ❌ | ❌ | ✅ |
-| Warehouse loading latency SLA | ❌ | ❌ | ✅ |
-| Surge protection | do-it-yourself | ❌ | ✅ |
-| Outage protection | ❌ | ❌ | ✅<br/>_(top tier only)_ |
-| <h3>Collaborate across multiple teams</h3> | [Community Edition](/docs/getting-started-on-community-edition/index.md) | [BDP Cloud](/docs/getting-started-on-snowplow-bdp-cloud/index.md) | [BDP Enterprise](/docs/getting-started-on-snowplow-bdp-enterprise/index.md) |
-| Seats | N/A | unlimited | unlimited |
-| [Data structures tooling & API](/docs/understanding-tracking-design/managing-your-data-structures/ui/index.md) | ❌ | ✅<br/>[_(UI only)_](/docs/understanding-tracking-design/managing-your-data-structures/ui/builder/index.md) | ✅ |
-| [Tracking scenarios](/docs/understanding-tracking-design/tracking-plans/index.md) | ❌ | ✅<br/>_(UI only)_ | ✅ |
-| [Data modeling management tooling](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/index.md) | ❌ | _coming soon_ | ✅ |
-| [Tracking catalog](/docs/discovering-data/tracking-catalog/index.md) | ❌ | ❌ | ✅ |
-| <h3>Deployment & security</h3> | [Community Edition](/docs/getting-started-on-community-edition/index.md) | [BDP Cloud](/docs/getting-started-on-snowplow-bdp-cloud/index.md) | [BDP Enterprise](/docs/getting-started-on-snowplow-bdp-enterprise/index.md) |
-| Deployment method | self-hosted | Snowplow-hosted cloud | private cloud |
-| • AWS | ✅ | — | ✅ |
-| • GCP | ✅ | — | ✅ |
-| • Azure | ✅ | — | ✅ |
-| Single Sign-On | ❌ | ❌ | ✅ |
-| Fine grained user permissions (ACLs) | ❌ | ❌ | ✅<br/>_(top tier only)_ |
-| Custom VPC integration | ❌ | ❌ | ✅<br/>_(bolt-on)_ |
-| AWS Infra security bundle | ❌ | ❌ | ✅<br/>_(top tier only)_ |
-| <h3>Services</h3> | [Community Edition](/docs/getting-started-on-community-edition/index.md) | [BDP Cloud](/docs/getting-started-on-snowplow-bdp-cloud/index.md) | [BDP Enterprise](/docs/getting-started-on-snowplow-bdp-enterprise/index.md) |
-| Self-help support website, FAQs and educational materials | ✅ | ✅ | ✅ |
-| Community support via Discourse | ✅ | ✅ | ✅ |
-| 24/7/365 Support through email / Help Centre | ❌ | ✅ | ✅ |
-| Support SLAs (first response time) [*](https://snowplow.io/snowplow-bdp-product-description/#slas) | ❌ | ❌ | ✅ |
-| Infrastructure management | ❌ | ✅ | ✅ |
-| Regular infrastructure reviews | ❌ | ❌ | ✅<br/>_(select tiers)_ |
-| Deferred upgrades | ❌ | ❌ | ✅<br/>_(select tiers)_ |
-| Provision of news / updates / ideas / customer stories | ✅ | ✅ | ✅ |
-| Success management | ❌ | ❌ | ✅<br/>_(select tiers)_ |
-| Data strategy and consultation sessions | ❌ | ❌ | ✅<br/>_(select tiers)_ |
+| <h3>Data Pipeline</h3> |     BDP     | [Community Edition](/docs/getting-started-on-community-edition/index.md) | 
+|:--|:-:|:-:|
+| [35+ trackers & webhooks](/docs/collecting-data/index.md) | ✅ | ✅ |
+| 1st party tracking | ✅ | ✅ |
+| [Anonymous data collection](/docs/recipes/recipe-anonymous-tracking/index.md) | ✅ | ✅ |
+| [ID service](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/browsers/index.md#what-is-an-id-service) | ✅ | ✅ |
+| High availability & auto-scaling | ✅ | ❌ |
+| [Enrichments](/docs/enriching-your-data/available-enrichments/index.md) | ✅ | ✅ |
+| [Failed events](/docs/understanding-your-pipeline/failed-events/index.md) | ✅ | ✅ | 
+| [Data quality monitoring](/docs/managing-data-quality/monitoring-failed-events/index.md) | ✅ | ❌ |
+| Single Sign-On | ✅ | ❌ | 
+| Pipeline observability | ✅ | do-it-yourself | 
+| Surge protection | ✅ | do-it-yourself |
+| **Warehouse / lake destinations** | | 
+| • Snowflake | ✅ | ✅ | 
+| • Redshift | ✅ | ✅| 
+| • BigQuery | ✅ | ✅ | 
+| • Databricks | ✅ | ✅ | 
+| • Synapse Analytics | ✅ | ✅ |
+| • Elasticsearch | ✅ | ✅ | 
+| • S3 | ✅ | ✅ | 
+| • GCS | ✅ | ✅ | 
+| • ADLS / OneLake | ✅ | ✅ |
+| **Real-time streams** | | 
+| • Kinesis | ✅ | ✅ |
+| • Pubsub | ✅ | ✅ | 
+| • Kafka / Azure Event Hubs / Confluent Cloud | ✅ | ✅ |
+| <h3>Data Product Studio</h3> | BDP |[Community Edition](/docs/getting-started-on-community-edition/index.md)|
+| Advanced enrichments (PII, IP anonymisation, JS, API, SQL enrichments) | ✅ | ✅ (no UI or API)| 
+| [Data structures tooling & API](/docs/understanding-tracking-design/managing-your-data-structures/ui/index.md) | ✅ |❌|
+| [Data Products](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-poducts/) | ✅ |❌|
+| [Data modeling management tooling](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/index.md) | ✅ | ❌ |
+| Jobs monitoring dashboard | ✅  | ❌ |
+| [Tracking catalog](/docs/discovering-data/tracking-catalog/index.md) | ✅ | ❌ |
+| Failed events alerting | ✅ | ❌ |
+| Failed events recoveries | ✅ | ❌ |
+| QA pipeline | ✅ | do-it-yourself |
+| Fine grained user permissions (ACLs) | ✅ | ❌ |
+| API key access | ✅ | ❌ |
+| <h3>[Data Applications](/docs/data-apps/index.md)</h3> | BDP |[Community Edition](/docs/getting-started-on-community-edition/index.md)|
+| **Digital Analytics** |  | |
+| Funnel builder | ✅  | ❌ |
+| User & Marketing Analytics | ✅  | ❌ |
+| Marketing Attribution COMING SOON | ✅  | ❌ |
+| [Out-of-the-box data models](/docs/modeling-your-data/index.md)  | ✅ | ❌ |
+| <h3>Performance & Resilience</h3> | BDP |[Community Edition](/docs/getting-started-on-community-edition/index.md)|
+| Outage Protection | ✅ | ❌ |
+| Global Availability | ✅ | ❌ |
+| <h3>Infrastructure & Security</h3> | BDP |[Community Edition](/docs/getting-started-on-community-edition/index.md)|
+| **High** |  |  |
+| HTTP access controls | ✅ | ❌ |
+| VPC peering | ✅ | ❌ |
+| SSH access control | ✅ | ❌ |
+| CVE reporting | ✅ | ❌ |
+| Static collector IPs | ✅ | ❌ |
+| **Advanced** |   |   |
+| Custom VPC integration | ✅ | ❌ |
+| Custom IAM policy | ✅ | ❌ |
+| Custom security agents | ✅ | ❌ |
+| <h3>SLAs</h3> | BDP |[Community Edition](/docs/getting-started-on-community-edition/index.md)|
+| Collector uptime SLA | ✅ | ❌ | 
+| Warehouse loading latency SLA | ✅ | ❌ |
+

@@ -66,27 +66,27 @@ We recommend having a business level of support with your cloud provider. If you
 
 This table provides an outline of the support services provided by Snowplow available to our paid packages. Any support we provide you beyond this scope is on a discretionary basis, and might only be offered as part of a separate Statement of Work, with associated additional costs.
 
-| | [Snowplow Community Edition](https://docs.snowplow.io/docs/getting-started-on-community-edition) | [Snowplow HA Pipeline](https://snowplow.io/snowplow-ha-pipeline-product-description) | [Try Snowplow (Trial)](https://try.snowplowanalytics.com) | [BDP Cloud](https://docs.snowplow.io/docs/getting-started-on-snowplow-bdp-cloud) | [BDP Enterprise](https://snowplow.io/snowplow-bdp-product-description) | [Data Model Packs](https://snowplow.io/snowplow-data-model-pack) |
-| --- | --- | --- | --- | --- | --- | --- |
-| Documentation | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Community Support | ✅ | ✅ | ✅ | ✅ | ✅ | ✅ |
-| 24x7 Technical Support | - | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Help Center, Knowledge Base & Snow School | - | ✅ | ✅ | ✅ | ✅ | ✅ |
-| Pipeline Health Monitoring | - | - | ✅ | ✅ | ✅ | - |
-| Infrastructure-as-Code Management | - | - | ✅ | ✅ | ✅ | - |
-| Managed Component Upgrades | - | - | ✅ | ✅ | ✅ | - |
-| Deferred Upgrades | - | - | - | - | ✅ (Summit tier) | - |
-| GitHub User Management | - | - | - | - | ✅ | - |
-| Bad Data Recoveries | - | - | - | - | ✅ | - |
-| Infrastructure Reviews | - | - | - | - | ✅ (Summit tier or standalone service) | - |
+| | [Snowplow Community Edition](https://docs.snowplow.io/docs/getting-started-on-community-edition) | [Snowplow HA Pipeline](https://snowplow.io/snowplow-ha-pipeline-product-description) | [BDP Cloud](https://docs.snowplow.io/docs/getting-started-on-snowplow-bdp-cloud) | [BDP Enterprise](https://snowplow.io/snowplow-bdp-product-description) | [Data Model Packs](https://snowplow.io/snowplow-data-model-pack) |
+| --- | --- | --- | --- | --- | --- |
+| Documentation | ✅ | ✅ | ✅ | ✅ | ✅ |
+| Community Support | ✅ | ✅ | ✅ | ✅ | ✅ |
+| 24x7 Technical Support | - | ✅ | ✅ | ✅ | ✅ |
+| Help Center, Knowledge Base & Snow School | - | ✅ | ✅ | ✅ | ✅ |
+| Pipeline Health Monitoring | - | - | ✅ | ✅ | - |
+| Infrastructure-as-Code Management | - | - | ✅ | ✅ | - |
+| Managed Component Upgrades | - | - | ✅ | ✅ | - |
+| Deferred Upgrades | - | - | - | ✅ (Summit tier) | - |
+| GitHub User Management | - | - | - | ✅ | - |
+| Bad Data Recoveries | - | - | - | ✅ | - |
+| Infrastructure Reviews | - | - | - | ✅ (Summit tier or standalone service) | - |
 
 ### Pipeline Health Monitoring
 
-Our 24/7 team monitors your managed infrastructure components, in efforts to maintain uptime and data latency commitments. We also monitor real-time data delivery and work with you to resolve any issues impacting the flow of data through the pipeline. 
+Our 24/7 team monitors your managed infrastructure components, in efforts to maintain uptime and data latency commitments. We also monitor real-time data delivery and work with you to resolve any issues impacting the flow of data through the pipeline.
 
 ### Infrastructure-as-Code Management
 
-We use proprietary means (via technologies such as Terraform) to manage the configuration of pipeline infrastructure and environments. Where appropriate, we’ll work with you to make and deploy certain configuration and secrets changes to the Snowplow pipeline setup on your behalf. 
+We use proprietary means (via technologies such as Terraform) to manage the configuration of pipeline infrastructure and environments. Where appropriate, we’ll work with you to make and deploy certain configuration and secrets changes to the Snowplow pipeline setup on your behalf.
 
 We encourage you to reach out to us if you are considering setting up new use cases, or are expecting seasonal or periodic (eg daily) peaks in volume or usage; we will work with you to ensure your pipeline is optimally tuned for performance and cost management according to your changing needs.
 
@@ -100,7 +100,7 @@ Customers with this entitlement, for major updates, can request a deferred upgra
 
 ### GitHub User Management
 
-Managing your pipeline usually requires Snowplow to assist with user access management for the GitHub snowplow-proservices pipeline repository. 
+Managing your pipeline usually requires Snowplow to assist with user access management for the GitHub snowplow-proservices pipeline repository.
 
 ### Bad Data Recoveries
 
@@ -133,9 +133,9 @@ The following items are out of scope of the support services offered to Snowplow
 | Cost management | Managing or monitoring the infrastructure costs associated with running your pipeline | We are able to provide general recommendations and best practice on right-sizing your infrastructure and storage. As part of our Infrastructure Review service, we are able to make more specific recommendations |
 | Data warehouse migrations | Migration of data from one data warehouse to another, or the loading of historical data into a new data warehouse | Helping you to understand best practices surrounding data reprocessing if it’s required for your pipeline |
 | Pipeline migrations | Migration of pipeline components between sub-accounts within your cloud provider or between cloud providers | Deployment and management of your pipeline in line with our https://snowplow.io/snowplow-bdp-product-description/ |
-| Destination management | Managing Redshift or Elastic/Open Search clusters on your behalf. 
+| Destination management | Managing Redshift or Elastic/Open Search clusters on your behalf.
 
-Note: some legacy agreements include destination management. Snowplow has sunset this service and therefore we do not offer 
+Note: some legacy agreements include destination management. Snowplow has sunset this service and therefore we do not offer
 * destination management for new customers
 * management of additional destinations for existing customers with legacy agreements. | Helping you understand the requirements of destination setup for Snowplow, and advising on best practice. |
 

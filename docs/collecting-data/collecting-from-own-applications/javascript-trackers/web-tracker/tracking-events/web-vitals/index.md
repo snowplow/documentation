@@ -65,7 +65,7 @@ newTracker('sp1', '{{collector_url}}', {
 
 ## Configuration
 
-The Web Vitals plugin can be initialized with a couple of options allowing for customizing its behaviour:
+The Web Vitals plugin can be initialized with a couple of options allowing for customizing its behavior:
 
 |       Option        |       Type       |                                                                                    Description                                                                                     |                      Default value                       |
 |:-------------------:|:----------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------:|

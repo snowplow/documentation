@@ -248,3 +248,13 @@ Whether to encode the custom self-describing event data in base64.
 ### Platform identifier
 
 When a platform is not specified on the event, this value will be used.
+
+### App ID
+
+This text box allows you to specify the `app_id` for the event.
+
+:::note
+
+In case you are specifying the `app_id` through a GTM-SS Variable, please ensure that its return value is a string, otherwise it will be ignored.
+
+:::

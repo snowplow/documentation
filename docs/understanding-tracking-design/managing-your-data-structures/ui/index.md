@@ -5,9 +5,7 @@ sidebar_label: "Using the UI"
 sidebar_position: 1
 sidebar_custom_props:
   offerings:
-    - enterprise
-    - cloud
-
+    - bdp
 ---
 
 ## Creating a new data structure
@@ -16,7 +14,7 @@ To create a new [Data Structure](/docs/understanding-your-pipeline/schemas/index
 
 ![](images/image-1.png)
 
-Enterprise customers can select from two options: **Create using builder** or **Create using JSON**. The [Data Structures Builder](/docs/understanding-tracking-design/managing-your-data-structures/ui/builder/index.md) only supports the following types:
+You can select from two options: **Create using builder** or **Create using JSON**. The [Data Structures Builder](/docs/understanding-tracking-design/managing-your-data-structures/ui/builder/index.md) only supports the following types:
 
 - string
 - enumerated list
@@ -24,7 +22,7 @@ Enterprise customers can select from two options: **Create using builder** or **
 - decimal
 - boolean
 
-For more complex data structures that require heavy nesting and more advanced data types, use the [JSON Editor](/docs/understanding-tracking-design/managing-your-data-structures/ui/json-editor/index.md). BDP Cloud accounts will be automatically directed to the [Data Structures Builder](/docs/understanding-tracking-design/managing-your-data-structures/ui/builder/index.md).
+For more complex data structures that require heavy nesting and more advanced data types, use the [JSON Editor](/docs/understanding-tracking-design/managing-your-data-structures/ui/json-editor/index.md).
 
 
 ```mdx-code-block
@@ -75,7 +73,7 @@ Once located, either click on the name to view the Data Structure and then click
 
 ![](images/image-8.png)
 
-At this stage you will see the publish modal dialog, and depending on how you versioned your edits you will see one of two messages:
+At this stage you will see the publish dialog, and depending on how you versioned your edits you will see one of two messages:
 
 If you are **publishing a new schema,** or **have incremented** the version whilst editing then you will see a confirmation of the action. Click '**Migrate to Production**' to promote the data structure.
 
@@ -97,7 +95,7 @@ Navigate to **Data Structures** and locate the Data Structure you wish to hide. 
 
 Once located either click on the name to view the Data Structure and then click the '**Hide**' button, or click the three dots to bring up the action menu where you can select **'**Hide Data Structure****'.
 
-Follow the modal instructions to confirm the action.
+Follow the dialog instructions to confirm the action.
 
 :::note
 

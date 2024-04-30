@@ -1,6 +1,7 @@
 ---
 title: "Unified Digital"
-sidebar_position: 100
+sidebar_position: 10
+description: "The Snowplow Unified dbt Package"
 hide_title: true
 ---
 
@@ -10,12 +11,8 @@ import ThemedImage from '@theme/ThemedImage';
 import DocCardList from '@theme/DocCardList';
 ```
 
-:::danger
-The Unified Digital Model is currently in public preview state.
-:::
-
 <Badges badgeType="dbt-package Release" pkg="unified"></Badges>&nbsp;
-<Badges badgeType="Early Release"></Badges>&nbsp;
+<Badges badgeType="Actively Maintained"></Badges>&nbsp;
 <Badges badgeType="SPAL"></Badges>
 
 # Snowplow Unified Digital Model
@@ -46,27 +43,40 @@ This model consists of a series of modules, each producing a table which serves 
 - Users: Aggregates session level data to a users level, `user_identifier`, outputting the table `snowplow_unified_users`.
 - User Mapping: Provides a mapping between user identifiers, `user_identifier` and `user_id`, outputting the table `snowplow_unified_user_mapping`. This can be used for session stitching.
 
+### Supported Entities
+While using any entity in our packages is possible thanks to [modeling entities](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/modeling-entities/index.md), a large set of common web and mobile entities are built into the processing of the package to add to your derived tables. Note these are in addition to those [required](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/unified/index.md#requirements) to run the package.
 
-## Overridable Macros
+| Entity                                                                                                                                                                              | Type   | Enabled via Variable                    |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | --------------------------------------- |
+| [YAUAA](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/device-and-browser/index.md#yauaa-context-for-user-agent-parsing)                | web    | snowplow__enable_yauaa                  |
+| [IAB](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/device-and-browser/index.md#iab-context-for-spiders-and-robots)                    | web    | snowplow__enable_iab                    |
+| [UA](/docs/enriching-your-data/available-enrichments/ua-parser-enrichment/index.md)                                                                                                 | web    | snowplow__enable_ua                     |
+| [Browser](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/device-and-browser/index.md#browser-context)                                   | web    | snowplow__enable_browser_context        |
+| [Mobile](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/device-and-browser/index.md#mobile-context)                                     | mobile | snowplow__enable_mobile_context         |
+| [Geolocation](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/geolocation/index.md#geolocation-context-entity-tracked-in-apps)           | mobile | snowplow__enable_geolocation_context    |
+| [Application](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/app-information/index.md#application-context-entity-on-mobile-apps)        | mobile | snowplow__enable_application_context    |
+| [Screen](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/page-and-screen-view-events/index.md#screen-view-events)                        | mobile | snowplow__enable_screen_context         |
+| [Deep Links](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/links-and-referrers/index.md#context-entity-attached-to-screen-view-events) | mobile | snowplow__enable_deep_link_context      |
+| [Screen Summary](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/page-activity-tracking/index.md#screen-summary-entity)                  | mobile | snowplow__enable_screen_summary_context |
 
-:::tip
 
-For information about overriding our macros, see [here](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/macros-and-keys/index.md#overriding-macros)
 
-:::
+### Optional Modules
+| Module            | Docs                                                                                                                                           | Enabled via Variable         |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
+| Consent Reporting | [<Icon icon="fa-solid fa-book"/>](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/consent-module/index.md) | snowplow__enable_consent     |
+| Core Web Vitals   | [<Icon icon="fa-solid fa-book"/>](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/core-web-vitals-module/index.md) | snowplow__enable_cwv         |
+| App Errors        | [<Icon icon="fa-solid fa-book"/>](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/app-errors-module/index.md) | snowplow__enable_app_errors  |
+| Conversions       | [<Icon icon="fa-solid fa-book"/>](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/conversions/index.md) | snowplow__enable_conversions |
 
-- `unify_fields_query()`[source](https://github.com/snowplow/dbt-snowplow-unified/blob/main/macros/unify_fields_query.sql): used to group together fields that come from multiple contexts or sdes depending on whether the plarform is mobile or web.
-- `filter_bots(table_alias)`[source](https://github.com/snowplow/dbt-snowplow-unified/blob/main/macros/filter_bots.sql): used to define the filter to remove bot events from events processed by the package. Of the form `and <condition>`. Used throughout the package to filter out bots from all models.
-- `channel_group_query()`[source](https://github.com/snowplow/dbt-snowplow-unified/blob/main/macros/channel_group_query.sql): defines the channel a user arrived at using various fields, populates the `default_channel_group` field. Must be a valid sql `select` object e.g. a complete `case when` statement. Used in `sessions_this_run` table.
-- `engaged_session()`[source](https://github.com/snowplow/dbt-snowplow-unified/blob/main/macros/engaged_session.sql): defines if a session was engaged or not, populates the `is_engaged` field. Must return `true` or `false` and be a valid sql `select` object e.g. a complete `case when` statement. Used in `sessions_this_run` table.
-- `content_group_query()`[source](https://github.com/snowplow/dbt-snowplow-unified/blob/main/macros/channel_group_query.sql): defines the content groups by classifying the page urls for page views. Must be a valid sql `select` object e.g. a complete `case when` statement. Used in `views_this_run` table.
 
 ## Engaged vs. Absolute Time
 At a view- and session-level we provide two measures of time; **absolute**, how long a user had the page open, and **engaged**, how much of that time the user was on the page. Engaged time is often a large predictor of a customer conversion, such as a purchase or a sign-up, whatever that may be in your domain.
 
 Calculating absolute time is simple, it's the difference between the `derived_tstamp` of the first and last (page view or page ping) events within that page view/session.
 
-The calculation for engaged time is more complicated, it is derived based on page pings which means if the user isn't active on your content, the engaged time does not increase. Let's consider a single page view example of reading an article; partway through the reader may see something they don't understand, so they open a new tab and look this up. They might stumble upon a Wikipedia page on it, they go down a rabbit hole and 10 minutes later they make it back to your site to finish the article. In this case there will be a gap for those 10 minutes in the page pings in the events data.
+### Web Calculation
+The calculation for engaged time on web is more complicated, it is derived based on page pings which means if the user isn't active on your content, the engaged time does not increase. Let's consider a single page view example of reading an article; partway through the reader may see something they don't understand, so they open a new tab and look this up. They might stumble upon a Wikipedia page on it, they go down a rabbit hole and 10 minutes later they make it back to your site to finish the article. In this case there will be a gap for those 10 minutes in the page pings in the events data.
 
 To adjust for these gaps we calculate engaged time as the time to trigger each ping (your heartbeat) times the number of pings (ignoring the first one), and add to that the time delay to the first ping (your minimum visit length). The formula is:
 
@@ -88,8 +98,11 @@ dark: require('./images/engaged_time_dark.drawio.png').default
 
 At a session level, this calculation is slightly more involved, as it needs to happen per page view and account for [stray page pings](#stray-page-pings), but the underlying idea is the same.
 
+### Mobile Calculation
+For Mobile we use the `screen_summary` entity from the [mobile trackers](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/screen-tracking/index.md#screen-engagement-tracking) for the engaged time. Check out the [mobile engagement demo](https://snowplow-incubator.github.io/mobile-screen-engagement-demo/) for a live view of this.
 
-## Stray Page Pings (Web only!)
+
+## Stray Page Pings (Web only)
 Stray Page Pings are pings within a session that do not have a corresponding `page_view` event within **the same session**. The most common cause of these is someone returning to a tab after their session has timed out but not refreshing the page. The `page_view` event exists in some other session, but there is no guarantee that both these sessions will be processed in the same run, which could lead to different results. Depending on your site content and user behavior the prevalence of sessions with stray page pings could vary greatly. For example with long-form content we have seen around 10% of all sessions contain only stray page pings (i.e. no `page_view` events).
 
 We take different approaches to adjust for these stray pings at the page view and sessions levels, which can lead to differences between the two tables, but each is as accurate as we can currently make it.

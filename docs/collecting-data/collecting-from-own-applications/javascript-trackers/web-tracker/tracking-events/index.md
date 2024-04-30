@@ -46,7 +46,8 @@ For example, instrumenting a tracker and manually tracking a [page view](/docs/c
 ```javascript
 import {
   newTracker,
-  trackPageView
+  trackPageView,
+  enableActivityTracking
 } from '@snowplow/browser-tracker';
 
 newTracker('sp', '{{collector_url_here}}', {
@@ -67,6 +68,12 @@ trackPageView();
 The tracker makes it easy to track different kinds of data. We provide three kinds of base events - PageViews, Structured, and fully custom (Self-Describing) - that can be manually tracked. On top of this, we also provide a range of [plugins](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/index.md) for automatic and manual tracking of different events and entities.
 
 Each event has an associated context, which is composed of entities. The tracker attaches entities to the events based on the tracker configuration and active plugins. You can also attach your own [custom entities](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/custom-tracking-using-schemas/index.md) to all `trackX` method calls.
+
+:::note
+
+Tracker methods available through plugins do not necessarily support adding custom entities. For those please refer to the corresponding plugin documentation for details.
+
+:::
 
 For example, here is a page view with an additional custom context entity.
 
@@ -417,7 +424,7 @@ setReferrerUrl(document.referrer);
 
 Snowplow events have several timestamps. The raw event payload always contains a `deviceCreatedTimestamp` (`dtm`) and a `deviceSentTimestamp` (`stm`). Other timestamps are added as the event moves through the pipeline.
 
-Every `trackX...()` method in the tracker allows for a custom timestamp, called `trueTimestamp` to be set. Read more about timestamps in [this still relevant forums post](https://discourse.snowplowanalytics.com/t/which-timestamp-is-the-best-to-see-when-an-event-occurred/538). 
+Every `trackX...()` method in the tracker allows for a custom timestamp, called `trueTimestamp` to be set. Read more about timestamps in [this still relevant forums post](https://discourse.snowplowanalytics.com/t/which-timestamp-is-the-best-to-see-when-an-event-occurred/538).
 
 As standard, every event tracked by the Javascript tracker will be recorded with two timestamps:
 

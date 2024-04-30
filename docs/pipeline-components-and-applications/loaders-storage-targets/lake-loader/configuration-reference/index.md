@@ -1,15 +1,22 @@
 ---
 title: "Lake Loader configuration reference"
+sidebar_label: "Configuration reference"
 sidebar_position: 1
 ---
 
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 import DeltaConfig from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/configuration-reference/_delta_config.md';
+import HudiConfig from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/configuration-reference/_hudi_config.md';
+import IcebergBigLakeConfig from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/configuration-reference/_iceberg_biglake_config.md';
+import IcebergGlueConfig from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/configuration-reference/_iceberg_glue_config.md';
 import PubsubConfig from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/configuration-reference/_pubsub_config.md';
+import KinesisConfig from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/configuration-reference/_kinesis_config.md';
 import KafkaConfig from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/configuration-reference/_kafka_config.md';
 import CommonConfig from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/configuration-reference/_common_config.md';
+import Admonition from '@theme/Admonition';
 ```
 
 <p>The configuration reference in this page is written for Lake Loader <code>{`${versions.lakeLoader}`}</code></p>
@@ -31,21 +38,78 @@ import CommonConfig from '@site/docs/pipeline-components-and-applications/loader
     </table>
   </TabItem>
 
-  <TabItem value="iceberg" label="Iceberg">
-
-:::note Coming soon
-
-Currently the Lake Loader supports [Delta format](https://delta.io/) only. Future releases will add support for [Iceberg](https://iceberg.apache.org/) format.
-
-:::
-
+  <TabItem value="iceberg-glue" label="Iceberg / Glue">
+    <table>
+        <thead>
+            <tr>
+                <th>Parameter</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+          <IcebergGlueConfig/>
+        </tbody>
+    </table>
   </TabItem>
+
+  <TabItem value="iceberg-biglake" label="Iceberg / BigLake">
+    <Admonition type="note" title="Alternative Docker image">
+    To use the Lake Loader with BigLake support, pull the <code>snowplow/lake-loader-gcp:{`${versions.lakeLoader}`}-biglake</code> image from Docker Hub.
+    </Admonition>
+    <table>
+        <thead>
+            <tr>
+                <th>Parameter</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+          <IcebergBigLakeConfig/>
+        </tbody>
+    </table>
+  </TabItem>
+
+  <TabItem value="hudi" label="Hudi">
+    <Admonition type="note" title="Alternative Docker image">
+    To use the Lake Loader with Hudi support, pull the appropriate alternative image from Docker Hub:
+    <ul>
+        <li><code>snowplow/lake-loader-aws:{`${versions.lakeLoader}`}-hudi</code></li>
+        <li><code>snowplow/lake-loader-gcp:{`${versions.lakeLoader}`}-hudi</code></li>
+        <li><code>snowplow/lake-loader-azure:{`${versions.lakeLoader}`}-hudi</code></li>
+    </ul>
+    </Admonition>
+    <table>
+        <thead>
+            <tr>
+                <th>Parameter</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+          <HudiConfig/>
+        </tbody>
+    </table>
+  </TabItem>
+
 </Tabs>
 
 ### Streams configuration
 
 <Tabs groupId="cloud" queryString>
-  <TabItem value="gcp" label="GCP" default>
+  <TabItem value="aws" label="AWS" default>
+    <table>
+        <thead>
+            <tr>
+                <th>Parameter</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+          <KinesisConfig/>
+        </tbody>
+    </table>
+  </TabItem>
+  <TabItem value="gcp" label="GCP">
     <table>
         <thead>
             <tr>

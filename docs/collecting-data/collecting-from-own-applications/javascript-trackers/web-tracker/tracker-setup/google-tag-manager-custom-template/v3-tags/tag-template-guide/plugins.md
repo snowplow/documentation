@@ -26,6 +26,8 @@ This is usually acceptable as the browser will have cached the first request; if
 Plugins are loaded by the tracker SDK directly, not via the Tag Template:
 You do not need to adjust the Template permissions to allow loading plugins from these URLs.
 
+:::
+
 :::note
 
 Official Snowplow Plugin versions are updated in lock-step with the tracker version, to ensure maximum compatibility.
@@ -33,6 +35,8 @@ For best results, try to keep your SDK version and plugin versions in sync.
 If you are loading your tracker SDK file and the plugins from a CDN like unpkg or jsDelivr (built into the Template), the version is located in the URLs.
 Consider keeping your version in a GTM Variable that you can use to define your SDK version and include in the URLs for plugins to keep them in sync.
 If you are self-hosting the files, make sure to update the plugin files at the same time you update the SDK.
+
+:::
 
 The Plugin's documentation will describe the value to use for the **Plugin Configuration** field.
 This is usually an array with two string elements, for example `['snowplowWebVitals', 'WebVitalsPlugin']`.
@@ -49,11 +53,15 @@ The Tag Template will try to call `.indexOf(',')` on the **Additional Configurat
 String values (before or after splitting) of `true`, `false`, `null`, and numeric values will become their respective typed JSON values.
 It is not possible to pass a single `null`, `undefined`, or empty string value as a parameter to a Plugin, instead no arguments will be passed to the plugin.
 
+:::
+
 :::info
 
 If your configuration includes functions, GTM will wrap those functions in [its sandbox](https://developers.google.com/tag-platform/tag-manager/templates/sandboxed-javascript), even when passed to the SDK for execution.
 Complex values like DOM elements will be replaced by `null` when passed to or returned from your function.
 This may make some plugins not function as intended.
+
+:::
 
 ## Inline Plugins
 

@@ -1,6 +1,5 @@
 ---
-title: "Iglu"
-date: "2020-10-22"
+title: "Iglu schema registry"
 sidebar_position: 90
 ---
 

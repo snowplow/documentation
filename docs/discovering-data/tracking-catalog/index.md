@@ -7,7 +7,7 @@ description: "The Tracking Catalog will provide your team with easy and self ser
 
 :::note
 
- Please note that the Tracking Catalog is available only for BDP Customers on selected Tiers. If you're unsure about your eligibility, please get in touch with your Customer Success Manager.
+Please note that the Tracking Catalog is available only for BDP Customers on selected Tiers. If you're unsure about your eligibility, please get in touch with your Customer Success Manager.
 
 :::
 
@@ -43,7 +43,7 @@ If you select a particular [Event](/docs/understanding-your-pipeline/events/inde
 
 The catalog will also display all [canonical properties](/docs/understanding-your-pipeline/canonical-event/index.md#understanding-the-individual-fields) which are also tracked out of the box, when you use Snowplow trackers.
 
-![Screenshot of a BDP Console modal displaying the canonical properties table](images/canonical-properties.png)
+![Screenshot of a BDP Console dialog displaying the canonical properties table](images/canonical-properties.png)
 
 If you scroll down the page, you will see an Event map. 
 This map displays what entities are being tracked with the event. This information is really valuable to understand the connections between the data.

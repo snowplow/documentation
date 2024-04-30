@@ -10,7 +10,7 @@ The order of enrichments is hard-coded and cannot be changed, the below table li
 
 :::note
 
-Currently, it’s not possible to configure more than one instance of the same enrichment. This is particularly relevant for the JavaScript, SQL Query and API Request enrichments — you can only configure one of each.
+It’s not possible to configure more than one instance of the same enrichment except JavaScript enrichment starting with Enrich 4.1.0. It is possible to have multiple JavaScript enrichments starting with Enrich 4.1.0. For all other enrichments, you can still only configure one of each including SQL Query and API Request enrichments.
 
 :::
 
@@ -23,6 +23,7 @@ Currently, it’s not possible to configure more than one instance of the same e
 | [Currency Conversion](/docs/enriching-your-data/available-enrichments/currency-conversion-enrichment/index.md)     | Convert the values of all transactions to a specified base currency using Open Exchange Rates API. *(Please note the [limitations](/docs/enriching-your-data/available-enrichments/currency-conversion-enrichment/index.md).)* |
 | [Referer Parser](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/index.md)              | Extracts attribution data from referer URLs.                                                                                                                                                                                   |
 | [Campaign Attribution](/docs/enriching-your-data/available-enrichments/campaign-attribution-enrichment/index.md)   | Choose which querystring parameters will be used to generate the marketing campaign fields. *If you do not enable the campaign_attribution enrichment, those fields will not be populated.*                                    |
+| [Cross Navigation Enrichment](/docs/enriching-your-data/available-enrichments/cross-navigation-enrichment/index.md)   | Parse the extended cross navigation format in _sp querystring parameter and attach the cross_navigation context to an event. (>= Enrich 4.1.0)                                                                                                                                       |
 | [Event Fingerprint](/docs/enriching-your-data/available-enrichments/event-fingerprint-enrichment/index.md)         | Generate a fingerprint for the event using a hash of client-set fields. Helpful for deduplicating events.                                                                                                                      |
 | [Cookie Extractor](/docs/enriching-your-data/available-enrichments/cookie-extractor-enrichment/index.md)           | Specify cookies that you want to extract if found.                                                                                                                                                                             |
 | [HTTP Header Extractor](/docs/enriching-your-data/available-enrichments/http-header-extractor-enrichment/index.md) | Specify headers that you want to extract via a regex pattern, if found each extracted header will be attached to your event.                                                                                                   |

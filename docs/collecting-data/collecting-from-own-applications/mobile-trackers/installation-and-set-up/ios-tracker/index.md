@@ -8,7 +8,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-The Snowplow iOS Tracker SDK supports iOS 11.0+, macOS 10.13+, tvOS 12.0+ and watchOS 6.0+.
+The Snowplow iOS Tracker SDK supports iOS 11.0+, macOS 10.13+, tvOS 12.0+, watchOS 6.0+, and visionOS 1.0+.
 It can be used both in Swift as well as in Objective-C code.
 
 ## Installing
@@ -29,15 +29,15 @@ To install Snowplow Tracker with Cocoapods:
 1. Make sure that Cocoapods is installed on your system and correctly configured for your app.
 
 2. Add the iOS Tracker SDK among the dependencies of your `Podfile`:
-   
+
    ```ruby
-   pod 'SnowplowTracker', '~> 5.0'
+   pod 'SnowplowTracker', '~> 6.0'
    ```
 
 3. Run the command `pod install` to add the tracker to your app project.
 
 :::note
-Support for installing the tracker using Carthage has been dropped in version 5 of the tracker.
+Support for installing the tracker using Carthage was dropped in version 5 of the tracker.
 :::
 
 ## Setting up
@@ -47,7 +47,7 @@ Once the tracker SDK is correctly set as a dependency in your app project you ha
 1. In your application delegate `AppDelegate.swift` add `import SnowplowTracker`.
 
 2. In the `application(_:didFinishLaunchingWithOptions:)` method, set up the SDK as follows:
-   
+
    ```swift
    let tracker = Snowplow.createTracker(namespace: "appTracker", endpoint: "https://snowplow-collector-url.com")
    ```
@@ -55,14 +55,14 @@ Once the tracker SDK is correctly set as a dependency in your app project you ha
    The URL path for your collector endpoint should include the protocol, "http" or "https". If not included in the URL, "https" connection will be used by default.
 
 3. It creates a tracker instance which can be used to track events like this:
-   
+
    ```swift
-   let event = Structured(category: "Category_example", action: "Action_example")
-   tracker?.track(event)
+   let event = ScreenView(name: "screen_name")
+   tracker.track(event)
    ```
-   
+
    If you prefer to access the tracker when the reference is not directly accessible, you can use the `defaultTracker` :
-   
+
    ```swift
    Snowplow.defaultTracker()?.track(event)
    ```
@@ -82,6 +82,8 @@ Snowplow.createTracker(namespace: "appTracker", endpoint: "https://snowplow-coll
       .exceptionAutotracking(true)
       .installAutotracking(true)
       .userAnonymisation(false)
+      .immersiveSpaceContext(true)
+      .logLevel(.off)
   SessionConfiguration(
       foregroundTimeout: Measurement(value: 30, unit: .minutes),
       backgroundTimeout: Measurement(value: 30, unit: .minutes)

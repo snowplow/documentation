@@ -1,44 +1,40 @@
 ---
 sidebar_label: "Unified Digital"
-sidebar_position: 100
+sidebar_position: 10
 title: "Unified Digital Quickstart"
 ---
 
-:::info
-Please note that this data model is under the Snowplow Personal & Academic License ([SPAL](/docs/contributing/personal-and-academic-license-faq/)).
-:::
-
-:::danger
-The Unified Digital Model is currently in public preview state.
-:::
 
 ## Requirements
 
 In addition to [dbt](https://github.com/dbt-labs/dbt) being installed:
 
-To model web events:
+<details>
+<summary>To model web events</summary>
 
 - web events dataset being available in your database
 - [Snowplow Javascript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/index.md) version 2 or later implemented.
 - Web Page context [enabled](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md#webpage-context) (enabled by default in [v3+](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md#webpage-context)).
 - [Page view events](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#page-views) implemented.
 
-To model mobile events:
+</details>
+
+<details>
+<summary>To model mobile events</summary>
+
 - mobile events dataset being available in your database
 - Snowplow [Android](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/android-tracker/index.md), [iOS](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/objective-c-tracker/index.md) mobile tracker version 1.1.0 (or later) or [React Native tracker](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/react-native-tracker/) implemented
 - Mobile session context enabled ([ios](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/objective-c-tracker/ios-tracker-1-7-0/index.md#session-context) or  [android](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/android-tracker/android-1-7-0/index.md#session-tracking)).
 - Screen view events enabled ([ios](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/objective-c-tracker/ios-tracker-1-7-0/index.md#tracking-features) or [android](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/android-tracker/android-1-7-0/index.md#tracking-features)).
 
-```mdx-code-block
-import DbtPrivs from "@site/docs/reusable/dbt-privs/_index.md"
+</details>
 
-<DbtPrivs/>
-```
+## Installation
 
 ```mdx-code-block
 import DbtPackageInstallation from "@site/docs/reusable/dbt-package-installation/_index.md"
 
-<DbtPackageInstallation/>
+<DbtPackageInstallation package='unified' fullname='dbtSnowplowUnified'/>
 ```
 
 ## Setup
@@ -76,6 +72,16 @@ Please note that your `target.database` is NULL if using Databricks. In Databric
 
 :::
 
+Next, Unified Digital assumes you are modeling both web and mobile events and expects certain fields to exist based on this. If you are only tracking and modeling e.g. web data, you can disable the other as below:
+
+```yml title="dbt_project.yml"
+vars:
+  snowplow_unified:
+    snowplow__enable_mobile: false
+    snowplow__enable_web: true
+```
+Note these are both `true` by default so you only need to add the one you wish to disable.
+
 ### 4. Enabled desired contexts
 
 The Unified Digital Model has the option to join in data from the following Snowplow enrichments and out-of-the-box context entities:
@@ -92,6 +98,7 @@ The Unified Digital Model has the option to join in data from the following Snow
 - App Error context
 - Core Web Vitals
 - Consent (Preferences & cmp visible)
+- Mobile screen summary (used for screen engagement calculation)
 
 By default these are **all disabled** in the Unified Digital Model. Assuming you have the enrichments turned on in your Snowplow pipeline, to enable the contexts within the package please add the following to your `dbt_project.yml` file:
 
@@ -110,6 +117,7 @@ vars:
     snowplow__enable_consent: true
     snowplow__enable_cwv: true
     snowplow__enable_app_errors: true
+    snowplow__enable_screen_summary_context: true
 ```
 
 ### 5. Filter your data set

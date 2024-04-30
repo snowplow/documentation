@@ -18,12 +18,12 @@ LicenseInfo.setLicenseKey("a3d6a1e3cdca760ace01b65d01608642Tz03MTE1NixFPTE3MjE1N
 function importAll(r) {
   const mods = {}
   r.keys().forEach(element => {
-    mods[element.substring(2, element.length - 3)] = r(element);
+    mods[element.substring(2, element.length - 5)] = r(element);
   });
   return mods;
 }
 
-export const schemaImports = importAll(require.context('./Schemas/', false, /\.(js)$/));
+export const schemaImports = importAll(require.context('./Schemas/', false, /\.(json)$/));
 
 // Theming
 export const darkTheme = createTheme({
@@ -203,7 +203,6 @@ export function JsonToTable({ children, versionedSchema }) {
               includeHeaders: true,
             }}
             getRowHeight={() => 'auto'}
-            pagination
             pageSizeOptions={[5, 10, 25, 50, 100]}
             rows={rows
               .filter(row => row.group === header) // Filter rows based on 'group' property
@@ -246,7 +245,7 @@ export function DbtCongfigurationPage({ schemaName, versions, label, children })
   var versionedSchema = null
 
   if ((schemaName + '_' + schemaVersion) in schemaImports) {
-    versionedSchema = schemaImports[schemaName + '_' + schemaVersion].Schema;
+    versionedSchema = schemaImports[schemaName + '_' + schemaVersion];
   }
 
   const childProps = Children.map(children, (child) => {

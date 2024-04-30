@@ -1,6 +1,6 @@
 ---
 title: "Event fingerprint enrichment"
-sidebar_position: 5
+sidebar_position: 6
 sidebar_label: Event fingerprint
 ---
 

@@ -60,7 +60,13 @@ Create a custom role and assign it the “Snowplow BDP Enterprise Deployment” 
                         "Microsoft.Authorization/roleDefinitions/write",
                         "Microsoft.Authorization/roleDefinitions/read",
                         "Microsoft.Authorization/roleDefinitions/delete",
-                        "Microsoft.Resources/subscriptions/resourcegroups/read"
+                        "Microsoft.Resources/subscriptions/resourcegroups/read",
+                        "Microsoft.Authorization/registrationDefinitions/write",
+                        "Microsoft.Authorization/registrationDefinitions/read",
+                        "Microsoft.Authorization/registrationDefinitions/delete",
+                        "Microsoft.Authorization/registrationAssignments/write",
+                        "Microsoft.Authorization/registrationAssignments/read",
+                        "Microsoft.Authorization/registrationAssignments/delete"
                     ],
                     "notActions": [],
                     "dataActions": [],

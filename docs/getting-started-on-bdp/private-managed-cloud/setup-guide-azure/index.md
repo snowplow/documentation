@@ -32,7 +32,7 @@ You will need to grant our verified application service principal the access int
     ```
     https://login.microsoftonline.com/<TenantID>/oauth2/authorize?client_id=0581feb4-b614-42c7-b8e7-b4e7fba9153a&response_type=code
     ```
-3. A consent window will appear detailing that an Enterprise application is being set up in your tenant. It needs to be accepted by your Azure tenant admin. After accepting, Microsoft redirects you to a page unrelated to the Azure Portal, so close this window
+3. A consent window will appear detailing that an Enterprise application is being set up in your tenant. It needs to be accepted by your Azure tenant admin for the organization (there is a tick box that must be ticked). After accepting, Microsoft redirects you to a page unrelated to the Azure Portal, so close this window
 4. Verify the trust has been established by viewing “Snowplow BDP Enterprise Deployment” application in the Enterprise Applications section of Entra ID
 
 #### Create and assign role to application service principal

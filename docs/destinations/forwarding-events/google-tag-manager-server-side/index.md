@@ -19,11 +19,11 @@ Taking an approach with Snowplow and GTM SS offers many additional flexibility a
 
 GTM SS with Snowplow can be setup in two different configurations.
 
-![](images/gtmssoptions.png)
+![](images/gtmssoptions2.png)
 
 ### Destinations Hub (Post-pipeline)
 
-Use GTM SS to relay enriched events to destinations. Events are sent to GTM SS after being processed by your Snowplow Pipeline.
+Use GTM SS to relay enriched events to destinations. Events are sent to GTM SS via Snowbridge after being processed by your Snowplow Pipeline.
 
 * For Community Edition, see [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md).
 * For Snowplow BDP, you can [request setup](https://console.snowplowanalytics.com/destinations/catalog) through the Console.
@@ -36,7 +36,7 @@ Destinations Hub is the recommended way to setup GTM Server-side because it allo
 
 ### Server Side Tag Manager (Pre-pipeline)
 
-Use GTM SS to relay raw events before the Snowplow pipeline to destinations, including to your Snowplow pipeline.
+Use GTM SS to relay raw events before the Snowplow pipeline to destinations, including to your Snowplow pipeline. This is useful if your company uses GA but does want to send data to Snowflake or Databricks via BigQuery.
 
 ### Principles for AWS deployment
 

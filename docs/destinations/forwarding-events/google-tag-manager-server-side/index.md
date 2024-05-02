@@ -36,7 +36,7 @@ Destinations Hub is the recommended way to setup GTM Server-side because it allo
 
 ### Server Side Tag Manager (Pre-pipeline)
 
-Use GTM SS to relay raw events before the Snowplow pipeline to destinations, including to your Snowplow pipeline. This is useful if your company uses GA but does want to send data to Snowflake or Databricks via BigQuery.
+Use GTM SS to relay raw events before the Snowplow pipeline to destinations, including to your Snowplow pipeline. This is useful if your company uses GA but does not want to send data to Snowflake or Databricks via BigQuery.
 
 ### Principles for AWS deployment
 

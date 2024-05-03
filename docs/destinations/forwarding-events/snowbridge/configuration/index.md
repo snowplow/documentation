@@ -25,6 +25,20 @@ If you do not provide a configuration, or provide an empty one, the application 
 * `stdout` failure target.
 There’ll be no external statistics reporting or sentry error reporting.
 
+## License
+
+Since version 2.4.0, Snowbridge is released under the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.0/) ([FAQ](/docs/contributing/limited-use-license-faq/index.md)).
+
+To accept the terms of license and run RDB Loader, set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable. Alternatively, you can configure the `license.accept` option, like this:
+
+```hcl
+license {
+  accept = true
+}
+```
+
+## Example configuration
+
 The below example is a complete configuration, which specifies a kinesis source, a builtin Snowplow filter (which may only be used if the input is Snowplow enriched data), a custom javascript transformation, and a pubsub target, as well as the statsD stats receiver, and sentry for error reporting.
 
 In layman's terms, this configuration will read data from a kinesis stream, filter out any data whose `event_name` field is not `page_view`, run a custom Javascript script upon the data to change the `app_id` to `"1"`, and send the transformed page view data to pubsub. It will also send statistics about what it's doing to a statsD endpoint, and will send information about errors to a sentry endpoint.

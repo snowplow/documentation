@@ -120,6 +120,12 @@ If you are already using Google Tag Manager to add various code snippets to your
 
 The JavaScript tracker captures many events (e.g. page views) automatically, so you should start accumulating your first events as soon as the changes are rolled out to your users.
 
+:::tip Strong user and session cookies and ad-blocker mitigation
+
+To make sure that your tracking is well configured for strong first-party cookies and resilient against the impact of ad-blockers, [visit this page with several useful recommendations](/docs/first-steps/tracking/cookies-and-ad-blockers/index.md).
+
+:::
+
 ## Using other trackers
 
 We have many different trackers in different programming languages, in case the JavaScript tracker is not a fit for you. For example, see the [mobile native trackers](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/index.md) or the [full list](/docs/collecting-data/collecting-from-own-applications/index.md) of what’s available.

@@ -18,4 +18,5 @@ src/components/JsonSchemaValidator/Schemas/dbtUtils_0.15.2.json
 src/components/JsonSchemaValidator/Schemas/dbtUtils_0.16.0.json
 src/components/JsonSchemaValidator/Schemas/dbtUtils_0.16.1.json
 src/components/JsonSchemaValidator/Schemas/dbtUtils_0.16.2.json
+src/components/JsonSchemaValidator/Schemas/dbtUtils_0.16.3.json
 src/components/JsonSchemaValidator/Schemas/dbtWeb*

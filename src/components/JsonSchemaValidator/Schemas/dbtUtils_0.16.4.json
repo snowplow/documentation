@@ -16,10 +16,15 @@
             "title": "SQL & Alias",
             "properties": {
               "sql": {
-                "type": "string"
+                "type": "string",
+                "title": "Field SQL",
+                "format": "sql",
+                "order": 1
               },
               "alias": {
-                "type": "string"
+                "type": "string",
+                "title": "Field Alias",
+                "order": 2
               }
             },
             "required": [
@@ -203,10 +208,16 @@
         "title": "Identifier",
         "properties": {
           "schema": {
-            "type": "string"
+            "type": "string",
+            "title": "(JSON) schema name for the field",
+            "order": 1,
+            "description": "The schema name of your events table, atomic in most use cases, alternatively for sdes/contexts this should instead be the name of the field itself"
           },
           "field": {
-            "type": "string"
+            "type": "string",
+            "order": 2,
+            "title": "Field name",
+            "description": "The name of the field to use as session identifier, alternatively, in case of sdes/contexts it is the name of the element that refers to the field to be extracted"
           }
         },
         "required": [
@@ -253,10 +264,16 @@
         "title": "Identifier",
         "properties": {
           "schema": {
-            "type": "string"
+            "type": "string",
+            "title": "(JSON) schema name for the field",
+            "order": 1,
+            "description": "The schema name of your events table, atomic in most use cases, alternatively for sdes/contexts this should instead be the name of the field itself"
           },
           "field": {
-            "type": "string"
+            "type": "string",
+            "order": 2,
+            "title": "Field name",
+            "description": "The name of the field to use as user identifier, alternatively, in case of sdes/contexts it is the name of the element that refers to the field to be extracted"
           }
         },
         "required": [
@@ -295,19 +312,26 @@
         "properties": {
           "schema": {
             "type": "string",
-            "description": "Table name"
+            "title": "Table name",
+            "description": "Table name",
+            "order": 1
           },
           "prefix": {
             "type": "string",
-            "description": "Prefix to add to columns"
+            "title": "Column prefix",
+            "description": "Prefix to add to columns",
+            "order": 2
           },
           "alias": {
             "type": "string",
-            "description": "Table alias for the subquery"
+            "title": "CTE Alias",
+            "description": "Table alias for the subquery",
+            "order": 3
           },
           "single_entity": {
             "type": "boolean",
-            "title": "Is single entity?"
+            "title": "Is single entity?",
+            "order": 4
           }
         },
         "required": [

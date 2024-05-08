@@ -527,7 +527,7 @@
             "type": "string",
             "order": 2,
             "title": "Field name",
-            "description": "The name of the field to use as user identifier, alternatively, in case of sdes/contexts it is the name of the element that refers to the field to be extracted"
+            "description": "The name of the field to use as session identifier, alternatively, in case of sdes/contexts it is the name of the element that refers to the field to be extracted"
           }
         },
         "required": [

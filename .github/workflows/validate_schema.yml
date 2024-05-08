@@ -25,4 +25,4 @@ jobs:
           base_dir: ./src/components/JsonSchemaValidator/Schemas/
           json_schema_version: "draft-07"
           ajv_strict_mode: false
-          exclude_file: ./src/components/JsonSchemaValidator/Schemas/exclude_from_checks.txt
+          exclude_file: src/components/JsonSchemaValidator/Schemas/exclude_from_checks.txt

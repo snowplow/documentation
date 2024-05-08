@@ -21,7 +21,7 @@ jobs:
         uses: GrantBirki/json-yaml-validate@v2.6.0
         with:
           comment: "true" # enable comment mode
-          json_schema: ./src/components/JsonSchemaValidator/dbt-variables-meta-schema # validate JSON files against the schema
+          json_schema: ./src/components/JsonSchemaValidator/dbt-variables-meta-schema.json # validate JSON files against the schema
           base_dir: ./src/components/JsonSchemaValidator/Schemas/
           json_schema_version: "draft-07"
           ajv_strict_mode: false

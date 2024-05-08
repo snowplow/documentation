@@ -15,6 +15,9 @@
                     "patternProperties": {
                         "^snowplow__": {
                             "type": "object",
+                          	"additionalProperties": {
+                                "$ref": "#"
+                            },
                             "properties": {
                                 "recommendFullRefresh": {
                                     "type": "boolean"
@@ -65,6 +68,24 @@
                                         "Databricks",
                                         "Bigquery"
                                     ]
+                                },
+                                "minimum": {
+                                    "type": "number"
+                                },
+                                "maximum": {
+                                    "type": "number"
+                                },
+                                "minItems": {
+                                    "type": "number"
+                                },
+                                "maxItems": {
+                                    "type": "number"
+                                },
+                                "format": {
+                                    "type": "string"
+                                },
+                                "$ref": {
+                                    "type": "string"
                                 }
                             },
                             "oneOf": [
@@ -94,6 +115,19 @@
                                 }
                             ],
                             "default": {}
+                        },
+                        "^.*": {
+                            "type": "object",
+                            "properties": {
+                                "title": {
+                                    "type": "string"
+                                },
+                              	"order": {
+                                    "type": "number"
+                                }
+                            },
+                          	"additionalProperties": true,
+                            "required": ["title", "order"]
                         }
                     },
                     "default": {}

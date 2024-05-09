@@ -323,7 +323,7 @@
     "snowplow__attribution_start_date": {
       "recommendFullRefresh": true,
       "order": 7,
-      "consoleGroup": "basic",
+      "consoleGroup": "required",
       "type": "string",
       "format": "date",
       "title": "Attribution Start Date",

@@ -133,8 +133,6 @@ In the example above the `CustomEventStore` is your implementation of the `Event
 
 ## What happens if an event fails to send?
 
-To prevent unnecessary requests being made while the collector is unavailable, a backoff is added to all subsequent event sending attempts. This resets after a request is successful.
-
 The tracker has an option for setting response codes not to retry after. The intended use is for codes such as `400 Bad Request`, `401 Unauthorised`, `403 Forbidden`, `410 Gone`, `422 Unprocessable Entity`. When received in response from the Collector, the tracker doesn't retry to send events. Requests with all other 3xx, 4xx, and 5xx status codes are retried. The set of status codes for which events should be retried or not is customizable in `EmitterConfiguration`.
 
 By default, the tracker retries sending events on all 3xx, 4xx, and 5xx status codes except the status codes indicated above. You may override the default behavior using the `customRetryForStatusCodes`. Please note that not retrying sending events to the Collector means that the events will be dropped when they fail to be sent. The `customRetryForStatusCodes` needs a dictionary that maps integers (status codes) to booleans (true for retry and false for not retry).

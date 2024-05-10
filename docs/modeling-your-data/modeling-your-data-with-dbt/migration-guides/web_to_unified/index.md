@@ -30,7 +30,7 @@ The unified package contains a list of new fields, some of which we can compute 
 2. Fields that are not available in the out-of-the-box derived tables:
 There are a few fields that we have dropped as they were incorporated into a new field based on different grouping. There may also be custom fields you have added to the derived tables. The below passthrough variables come in handy in this case:
 ```yml
-    snowplow__page_view_passthroughs: []
+    snowplow__view_passthroughs: []
     snowplow__session_passthroughs: []
     snowplow__user_first_passthroughs: []
     snowplow__user_last_passthroughs: []
@@ -49,7 +49,7 @@ Once you decided you would like to go ahead with the upgrade process you will fi
 
 You will then need to execute a list of sql scripts we provide below, which will first create the new tables based on your existing derived tables created by the web package, then make the changes (e.g. renaming, adding, dropping and updating columns wherever possible). The manifest tables will also be altered making sure that you will then have everything ready for a new run in the unified package as if nothing happened. 
 
-Execute the below sql scripts with your database IDE to create your new derived and manifest tables at once without having to reprocess your event data from scratch. Make sure to update `(your_schema)_derived` to match your derived schema name beforehand.
+Execute the below sql scripts with your database IDE to create your new derived and manifest tables at once without having to reprocess your event data from scratch. Make sure to update `(your_schema)_derived` to match your derived schema name beforehand. Please also be aware you might need to adjust the data `varchar` data type to `string` depending on your warehouse (Bigquery, Databricks users mainly) or limit it to the maximum in case there are limitations (potentially Redshift).
 
 
 <details>

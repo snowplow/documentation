@@ -20,7 +20,7 @@ In addition to [dbt](https://github.com/dbt-labs/dbt) being installed:
 </details>
 
 <details>
-<summary>To mode mobile events</summary>
+<summary>To model mobile events</summary>
 
 - mobile events dataset being available in your database
 - Snowplow [Android](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/android-tracker/index.md), [iOS](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/previous-versions/objective-c-tracker/index.md) mobile tracker version 1.1.0 (or later) or [React Native tracker](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/react-native-tracker/) implemented
@@ -54,7 +54,7 @@ If you do not do this the package will still work, but the incremental upserts w
 
 Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the Unified Digital Model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#yaml-selectors) section.
 
-These are defined in the `selectors.yml` file ([source](https://github.com/snowplow/dbt-snowplow-web/blob/main/selectors.yml)) within the package, however in order to use these selections you will need to copy this file into your own dbt project directory. This is a top-level file and therefore should sit alongside your `dbt_project.yml` file. If you are using multiple packages in your project you will need to combine the contents of these into a single file.
+These are defined in the `selectors.yml` file ([source](https://github.com/snowplow/dbt-snowplow-unified/blob/main/selectors.yml)) within the package, however in order to use these selections you will need to copy this file into your own dbt project directory. This is a top-level file and therefore should sit alongside your `dbt_project.yml` file. If you are using multiple packages in your project you will need to combine the contents of these into a single file.
 
 ### 3. Check source data
 
@@ -71,6 +71,16 @@ vars:
 Please note that your `target.database` is NULL if using Databricks. In Databricks, schemas and databases are used interchangeably and in the dbt implementation of Databricks therefore we always use the schema value, so adjust your `snowplow__atomic_schema` value if you need to.
 
 :::
+
+Next, Unified Digital assumes you are modeling both web and mobile events and expects certain fields to exist based on this. If you are only tracking and modeling e.g. web data, you can disable the other as below:
+
+```yml title="dbt_project.yml"
+vars:
+  snowplow_unified:
+    snowplow__enable_mobile: false
+    snowplow__enable_web: true
+```
+Note these are both `true` by default so you only need to add the one you wish to disable.
 
 ### 4. Enabled desired contexts
 

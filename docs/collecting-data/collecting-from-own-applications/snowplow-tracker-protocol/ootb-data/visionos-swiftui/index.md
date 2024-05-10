@@ -7,7 +7,7 @@ import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 import TOCInline from '@theme/TOCInline';
 ```
 
-Use the window group and immersive space context entities and events to understand user behaviour within visionOS apps on Apple's Vision Pro headset.
+Use the window group and immersive space context entities and events to understand user behavior within visionOS apps on Apple's Vision Pro headset.
 
 Track the opening and dismissing of SwiftUI window groups using `OpenWindowEvent` and `DismissWindowEvent`. These events can be used in any SwiftUI app, not just visionOS. The event data is sent as a window group context entity attached to these events; the events themselves have no properties.
 

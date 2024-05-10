@@ -1,13 +1,13 @@
 export const versions = {
   // Trackers
-  androidTracker: '6.0.2',
-  dotNetTracker: '1.2.1',
+  androidTracker: '6.0.3',
+  dotNetTracker: '1.2.2',
   cppTracker: '2.0.0',
-  flutterTracker: '0.6.0',
+  flutterTracker: '0.7.0',
   golangTracker: '3.0.0',
   googleAmpTracker: '1.1.0',
   iosTracker: '6.0.2',
-  javaTracker: '2.0.0',
+  javaTracker: '2.1.0',
   javaScriptTracker: '3.23.0',
   luaTracker: '0.2.0',
   phpTracker: '0.7.0',
@@ -19,17 +19,17 @@ export const versions = {
   rustTracker: '0.2.0',
   scalaTracker: '2.0.0',
   unityTracker: '0.8.0',
-  webViewTracker: '0.2.0',
+  webViewTracker: '0.2.1',
 
   // Core pipeline
   collector: '3.1.0',
   enrich: '4.1.0',
   sqs2kinesis: '1.0.4',
   dataflowRunner: '0.7.5',
-  snowbridge: '2.2.2',
+  snowbridge: '2.3.0',
 
   // Loaders
-  bqLoader: '1.7.0',
+  bqLoader: '1.7.1',
   esLoader: '2.1.2',
   gcsLoader: '0.5.5',
   postgresLoader: '0.3.3',
@@ -43,9 +43,9 @@ export const versions = {
   // dbt
   dbtSnowplowAttribution: '0.2.0',
   dbtSnowplowUnified: '0.4.0',
-  dbtSnowplowWeb: '1.0.0',
+  dbtSnowplowWeb: '1.0.1',
   dbtSnowplowMobile: '1.0.0',
-  dbtSnowplowUtils: '0.16.3',
+  dbtSnowplowUtils: '0.16.5',
   dbtSnowplowMediaPlayer: '0.7.2',
   dbtSnowplowNormalize: '0.3.5',
   dbtSnowplowFractribution: '0.3.6',

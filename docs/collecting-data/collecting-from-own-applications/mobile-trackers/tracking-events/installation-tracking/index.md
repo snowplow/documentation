@@ -62,7 +62,7 @@ Property | Type | Description
 `installBeginTimestamp` | Datetime | The timestamp when installation begins
 `googlePlayInstantParam` | Boolean | Boolean indicating if the user has interacted with the app's instant experience in the past 7 days
 
-To enable tracking the entity, you will need to have `installAutotracking` enabled and add the following line to the dependencies section of the `build.gradle` file in your app:
+To enable tracking the entity, you will need to have `installAutotracking` enabled (it's on by default) and add the following line to the dependencies section of the `build.gradle` file in your app:
 
 ```gradle
 dependencies {

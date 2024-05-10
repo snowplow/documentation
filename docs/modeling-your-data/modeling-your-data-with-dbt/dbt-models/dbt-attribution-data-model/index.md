@@ -62,6 +62,25 @@ sources={{
 />
 </p>
 
+### Attribution Models
+
+The package currently offers 4 different attribution models all of which are calculated by default into both the incremental base tables and the report tables. If you would like to filter on them for reporting you can do so with `var('snowplow__attribution_list')`. Please note, however, that they will still be available for the incremental base tables.
+
+- `first_touch`: Assigns 100% attribution to the first channel in each path.
+- `last_touch`: Assigns 100% attribution to the last channel in each path.
+- `position_based`: The first and last channels get 40% of the credit each, with the remaining channels getting the leftover 20% distributed evenly.
+- `linear`: Assigns attribution evenly between all channels on the path.
+​
+<p align="center">
+<ThemedImage
+alt='Data processing model for the attribution package'
+sources={{
+  light: require('./images/attribution_models_light.png').default,
+  dark: require('./images/attribution_models_dark.png').default
+}}
+/>
+</p>
+
 
 ## What is Marketing Attribution?
 
@@ -191,9 +210,6 @@ In order to apply these transformations, all you have to do is to define them in
 
  Apart from this, you can also restrict how far in time (`var('snowplow_path_lookback_days')`) and steps (`var('snowplow_path_lookback_steps')`) you want to allow your path to go.
 
-
-
-
 </details>
 
 #### Other, macro based setup
@@ -226,30 +242,6 @@ import AttributionDbtMacros from "@site/docs/reusable/attribution-dbt-macros/_in
 | id2_Display_Other0  | event_2 | user_id2 | 2023-07-19 04:27:51.000 | 66.5             | Display_Other > Organic_Search   | Display_Other  | 0            | 2           | 66.5                    | 0                      | 33.25  | 33.25 |
 | id3_Organic_Search1 | event_2 | user_id2 | 2023-07-19 04:27:51.000 | 66.5 | Display_Other > Organic_Search | Organic_Search | 1 | 2 | 0| 66.5 | 33.25 | 33.25 |
 
-
-**Attribution Models**
-
-<details>
-    <summary>Attribution Models</summary>
-
-The package currently offers 4 different attribution models all of which are calculated by default into both the incremental base tables and the report tables. If you would like to filter on them for reporting you can do so with `var('snowplow__attribution_list')`. Please note, however, that they will still be available for the incremental base tables.
-
-- `first_touch`: Assigns 100% attribution to the first channel in each path.
-- `last_touch`: Assigns 100% attribution to the last channel in each path.
-- `position_based`: The first and last channels get 40% of the credit each, with the remaining channels getting the leftover 20% distributed evenly.
-- `linear`: Assigns attribution evenly between all channels on the path.
-​
-<p align="center">
-<ThemedImage
-alt='Data processing model for the attribution package'
-sources={{
-  light: require('./images/attribution_models_light.png').default,
-  dark: require('./images/attribution_models_dark.png').default
-}}
-/>
-</p>
-
-</details>
 
 3. The **`derived.snowplow_attribution_campaign_attributions`** does the same, only for campaigns not channels.
 

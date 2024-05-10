@@ -230,6 +230,7 @@
     },
     "surrogate_key_treat_nulls_as_empty_strings": {
       "type": "boolean",
+      "order": 999,
       "title": "Surrogate Key Treat Nulls as Empty Strings",
       "group": "Operation and Logic",
       "longDescription": "Passed through to `dbt_utils` to match legacy surrogate key behavior.",
@@ -253,11 +254,15 @@
         "properties": {
           "schema": {
             "type": "string",
+            "title": "(JSON) schema name for the field",
+            "order": 1,
             "description": "The schema name of your events table, atomic in most use cases, alternatively for sdes/contexts this should instead be the name of the field itself"
           },
           "field": {
             "type": "string",
-            "description": "The name of the field to use as user identifier, alternatively, in case of sdes/contexts it is the name of the element that refers to the field to be extracted"
+            "order": 2,
+            "title": "Field name",
+            "description": "The name of the field to use as session identifier, alternatively, in case of sdes/contexts it is the name of the element that refers to the field to be extracted"
           }
         },
         "required": [
@@ -305,10 +310,14 @@
         "properties": {
           "schema": {
             "type": "string",
+            "title": "(JSON) schema name for the field",
+            "order": 1,
             "description": "The schema name of your events table, atomic in most use cases, alternatively for sdes/contexts this should instead be the name of the field itself"
           },
           "field": {
             "type": "string",
+            "order": 2,
+            "title": "Field name",
             "description": "The name of the field to use as user identifier, alternatively, in case of sdes/contexts it is the name of the element that refers to the field to be extracted"
           }
         },
@@ -492,7 +501,7 @@
       "consoleGroup": "basic",
       "type": "boolean",
       "warehouse": "Bigquery",
-      "title": "(Bigquery) Dervied Timestamp Partition",
+      "title": "(Bigquery) Derived Timestamp Partition",
       "longDescription": "Boolean to enable filtering the events table on `derived_tstamp` in addition to `collector_tstamp`.",
       "packageDefault": "true",
       "group": "Warehouse Specific"
@@ -512,22 +521,29 @@
       "items": {
         "type": "object",
         "title": "Entity or SDE",
-        "properties": {
+        "properties": {          
           "schema": {
             "type": "string",
-            "description": "Table name"
+            "title": "Table name",
+            "description": "Table name",
+            "order": 1
           },
           "prefix": {
             "type": "string",
-            "description": "Prefix to add to columns"
+            "title": "Column prefix",
+            "description": "Prefix to add to columns",
+            "order": 2
           },
           "alias": {
             "type": "string",
-            "description": "Table alias for the subquery"
+            "title": "CTE Alias",
+            "description": "Table alias for the subquery",
+            "order": 3
           },
           "single_entity": {
             "type": "boolean",
-            "title": "Is single entity?"
+            "title": "Is single entity?",
+            "order": 4
           }
         },
         "required": [

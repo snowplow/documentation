@@ -10,6 +10,29 @@ import TabItem from '@theme/TabItem';
 
 This migration guide is for the [Snowplow Web](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/index.md) (legacy dbt package) users who would like to upgrade to the [Snowplow Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) package which is our most supported and feature-rich dbt package you can use to model web and/or mobile event data.
 
+### Simplified Upgrade Overview
+
+<p align="center">
+<ThemedImage
+alt='Migration steps - part I'
+sources={{
+light: require('./images/migrate_1.png').default,
+dark: require('./images/migrate_1.png').default
+}}
+/>
+</p>
+
+<p align="center">
+<ThemedImage
+alt='Migration steps - part II'
+sources={{
+light: require('./images/migrate_2.png').default,
+dark: require('./images/migrate_2.png').default
+}}
+/>
+</p>
+
+
 ### Breaking changes between the packages
 
 - the `page_views` table has been renamed to `views`
@@ -576,25 +599,3 @@ create view (your_schema)_derived.mock_snowplow_web_users as (
 );
 ```
 </details>
-
-### Simplified Upgrade Overview
-
-<p align="center">
-<ThemedImage
-alt='Migration steps - part I'
-sources={{
-light: require('./images/migrate_1.png').default,
-dark: require('./images/migrate_1.png').default
-}}
-/>
-</p>
-
-<p align="center">
-<ThemedImage
-alt='Migration steps - part II'
-sources={{
-light: require('./images/migrate_2.png').default,
-dark: require('./images/migrate_2.png').default
-}}
-/>
-</p>

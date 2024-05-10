@@ -275,3 +275,17 @@ export function DbtCongfigurationPage({ schemaName, versions, label, children })
     <SelectSchemaVersion versions={versions} label={label} />
   )
 }
+
+
+// Function to return a list of versions from the schema folder that start with a specific name
+export function getSchemaVersions(schemaName) {
+    const schemaVersions = [];
+    Object.keys(schemaImports).forEach((key) => {
+      if (key.startsWith(schemaName)) {
+        schemaVersions.push(key.split('_')[1]);
+      }
+    });
+    // reverse it
+    schemaVersions.reverse();
+    return schemaVersions;
+  }

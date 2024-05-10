@@ -4,7 +4,7 @@ sidebar_position: 20
 hide_table_of_contents: true
 ---
 
-import { DbtCongfigurationPage, JsonToTable, JsonSchemaGenerator } from '@site/src/components/JsonSchemaValidator';
+import { DbtCongfigurationPage, JsonToTable, JsonSchemaGenerator, getSchemaVersions } from '@site/src/components/JsonSchemaValidator';
 import { dump } from 'js-yaml';
 import Admonition from '@theme/Admonition';
 import DbtSchemas from "@site/docs/reusable/dbt-schemas/_index.md";
@@ -54,7 +54,7 @@ export const printYamlVariables = (data) => {
 
 export const MyMdxComponent = () => {
   const schemaName = 'dbtMediaPlayer';
-  const versions = ['0.7.2','0.7.1', '0.7.0', '0.6.1'];
+  const versions = getSchemaVersions(schemaName);
   const label = 'dbt media player version';
   const output = printYamlVariables;
     return (

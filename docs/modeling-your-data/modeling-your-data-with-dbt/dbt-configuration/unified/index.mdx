@@ -4,7 +4,7 @@ sidebar_position: 10
 hide_table_of_contents: true
 ---
 
-import { DbtCongfigurationPage, JsonToTable, JsonSchemaGenerator } from '@site/src/components/JsonSchemaValidator';
+import { DbtCongfigurationPage, JsonToTable, JsonSchemaGenerator, getSchemaVersions } from '@site/src/components/JsonSchemaValidator';
 import { dump } from 'js-yaml';
 import Admonition from '@theme/Admonition';
 import DbtSchemas from "@site/docs/reusable/dbt-schemas/_index.md";
@@ -55,7 +55,7 @@ export const printYamlVariables = (data) => {
 
 export const MyMdxComponent = () => {
   const schemaName = 'dbtUnified';
-  const versions = ['0.4.0', '0.3.1', '0.3.0', '0.2.0', '0.1.2'];
+  const versions = getSchemaVersions(schemaName);
   const label = 'dbt unified version';
   const output = printYamlVariables;
   return (

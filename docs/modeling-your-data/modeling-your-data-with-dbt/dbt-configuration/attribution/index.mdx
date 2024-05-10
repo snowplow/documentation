@@ -4,7 +4,7 @@ sidebar_position: 30
 hide_table_of_contents: true
 ---
 
-import { DbtCongfigurationPage, JsonToTable, JsonSchemaGenerator } from '@site/src/components/JsonSchemaValidator';
+import { DbtCongfigurationPage, JsonToTable, JsonSchemaGenerator, getSchemaVersions } from '@site/src/components/JsonSchemaValidator';
 import { dump } from 'js-yaml';
 import Admonition from '@theme/Admonition';
 import DbtSchemas from "@site/docs/reusable/dbt-schemas/_index.md";
@@ -36,7 +36,7 @@ export const printYamlVariables = (data) => {
 
 export const MyMdxComponent = () => {
   const schemaName = 'dbtAttribution';
-  const versions = ['0.2.0', '0.1.0'];
+  const versions = getSchemaVersions(schemaName);
   const label = 'dbt attribution version';
   const output = printYamlVariables;
     return (

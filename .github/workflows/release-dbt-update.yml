@@ -10,7 +10,7 @@ on:
         options:
           - Attribution
           - Unified
-          - Media
+          - MediaPlayer
           - Ecommerce
           - Normalize
           - Web

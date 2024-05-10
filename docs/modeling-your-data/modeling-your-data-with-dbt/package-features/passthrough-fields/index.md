@@ -36,6 +36,13 @@ vars:
 
 Note that how to extract a field from your context column will depend on your warehouse (see our [querying guide](/docs/storing-querying/querying-data/index.md#entities) for more information), and you are unable to use dbt macros in this variable. For first/last variables, any basic field will have `first_` or `last_` prefixed to the field name automatically to avoid clashes, however if you are using the SQL approach, you will need to add these prefixes as part of your alias.
 
+
+:::tip
+
+In certain cases, such as the users table in Unified, it may be required to first passthrough fields to an upstream table (the sessions table in that case) to make sure it is available for selection. The best way to identify this is to look at the DAG in the dbt docs for the package you are using.
+
+:::
+
 ## Usage Notes
 
 Which event the field(s) are taken from depends on the derived table; for example in the Views table in the Unified package the the field value from the `page_view` event itself, _not_ the pings. 

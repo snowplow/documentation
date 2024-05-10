@@ -3,6 +3,7 @@ title: "Web to Unified"
 sidebar_position: 1000
 ---
 ```mdx-code-block
+import ThemedImage from '@theme/ThemedImage';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
@@ -575,3 +576,25 @@ create view (your_schema)_derived.mock_snowplow_web_users as (
 );
 ```
 </details>
+
+### Simplified Upgrade Overview
+
+<p align="center">
+<ThemedImage
+alt='Migration steps - part I'
+sources={{
+light: require('./images/migrate_1.png').default,
+dark: require('./images/migrate_1.png').default
+}}
+/>
+</p>
+
+<p align="center">
+<ThemedImage
+alt='Migration steps - part II'
+sources={{
+light: require('./images/migrate_2.png').default,
+dark: require('./images/migrate_2.png').default
+}}
+/>
+</p>

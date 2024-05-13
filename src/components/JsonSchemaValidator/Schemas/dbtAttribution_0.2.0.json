@@ -43,7 +43,7 @@
       "title": "Conversions Source",
       "description": "Source of conversion events",
       "longDescription": "The source (schema and table) of your conversion events, likely your atomic events table.",
-      "packageDefault": "{{ source('atomic', 'events') }}",
+      "packageDefault": "{{ source('derived', 'snowplow_unified_conversions') }}",
       "group": "Warehouse and Tracker"
     },
     "snowplow__conversion_path_source": {

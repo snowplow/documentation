@@ -42,7 +42,7 @@ Create a custom role and assign it the “Snowplow BDP Enterprise Deployment” 
 1. Navigate to your newly created subscription
 2. Click into “Access Control (IAM)”
 3. Click “Add custom role”
-4. The Conditions must use the third option. This is required to enable the Lighthouse Offer to be created as justified by Microsoft at <https://learn.microsoft.com/en-us/azure/lighthouse/how-to/deploy-policy-remediation#create-a-user-who-can-assign-roles-to-a-managed-identity-in-the-customer-tenant:~:text=To%20allow%20a,Administrator%20or%20Owner.>.
+4. The Conditions must use the third option. This is required to enable the [Lighthouse Offer to be created as detailed in Microsoft documentation](https://learn.microsoft.com/en-us/azure/lighthouse/how-to/deploy-policy-remediation#create-a-user-who-can-assign-roles-to-a-managed-identity-in-the-customer-tenant:~:text=To%20allow%20a,Administrator%20or%20Owner)
 ![Iam role addignment conditions](./images/azure_role_assignment_conditions.png)
 5. Create the following role, which allows Snowplow to create various roles that are specific to components that make up your pipeline. The `customer_subscription_id` should be the subscription ID that Snowplow will deploy into
     ```json

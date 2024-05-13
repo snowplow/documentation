@@ -5,78 +5,28 @@ sidebar_position: 75
 
 # Media tracking
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-import Media from "@site/docs/reusable/media/_index.md"
-```
+There are four media tracking plugins to choose from. Choosing the right plugin for you depends on the following questions:
 
-This plugin is the recommended way to manually track media events from video players.
-While we also provide plugins for integrating with specific video players (e.g., YouTube, HTML5), this plugin allows you to implement media tracking for any player.
+1. What media player do you use in your app?
+2. Do you prefer the tracker to automatically subscribe to and track events from the media player, or do you prefer to track the events manually by calling track event functions (e.g., you have a wrapper around the media player which listens to the player events and can send them to Snowplow)?
+3. What data do you want to track? This will have an effect on whether you choose a plugin that tracks version 1 or version 2 of our media schemas (see below).
 
-:::note
-The plugin is available since version 3.12 of the tracker.
+:::note Version 1 vs Version 2 media schemas
+
+We recommend adopting the newer, more fully-featured v2 schemas where possible. The [media player data model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) does also support the v1 schemas.
+
+The v2 schemas:
+
+1. Enable more accurate metrics about the playback (e.g., played duration, average playback rate) that are computed on the tracker instead of estimated in modeling.
+2. Enable tracking ads played during media playback.
+3. Provide additional events to track playback quality and periodic media pings during playback.
+4. Support live streaming video (in addition to VOD).
+
 :::
 
-Snowplow media events and entities must be **manually tracked**.
-
-## Install plugin
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-| Tracker Distribution | Included |
-|----------------------|----------|
-| `sp.js`              | ❌        |
-| `sp.lite.js`         | ❌        |
-
-**Download:**
-
-<table><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-media@latest/dist/index.umd.min.js">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-media@latest/dist/index.umd.min.js">unpkg</a> (latest)</td></tr></tbody></table>
-
-```javascript
-window.snowplow(
-    'addPlugin',
-    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-media@latest/dist/index.umd.min.js',
-    ['snowplowMedia', 'SnowplowMediaPlugin']
-);
-```
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-- `npm install @snowplow/browser-plugin-media`
-- `yarn add @snowplow/browser-plugin-media`
-- `pnpm add @snowplow/browser-plugin-media`
-
-```javascript
-import { newTracker, trackPageView } from '@snowplow/browser-tracker';
-import { SnowplowMediaPlugin } from '@snowplow/browser-plugin-media';
-
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
-   plugins: [ SnowplowMediaPlugin() ],
-});
-```
-
-  </TabItem>
-</Tabs>
-
-## Usage
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```mdx-code-block
-<Media tracker="js-tag" />
-```
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-```mdx-code-block
-<Media tracker="js-browser" />
-```
-
-  </TabItem>
-</Tabs>
+| Plugin | Media schemas version | Provides auto-tracking? | Player |
+| --- | --- | --- | --- |
+| [Snowplow media](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/snowplow/index.md) | v2 | ❌ | Any |
+| [Vimeo](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/vimeo/index.md)  | v2 | ✅ | Vimeo |
+| [HTML5](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/html5/index.md) | v1 | ✅ | HTML5 |
+| [YouTube](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/youtube/index.md) | v1 | ✅ | YouTube |

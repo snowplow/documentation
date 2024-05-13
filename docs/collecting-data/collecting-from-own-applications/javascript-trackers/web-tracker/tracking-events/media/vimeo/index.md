@@ -1,5 +1,5 @@
 ---
-title: "Vimeo media"
+title: "Vimeo"
 sidebar_position: 15
 ---
 
@@ -54,8 +54,8 @@ window.snowplow(
 ```javascript
 import { VimeoTrackingPlugin } from '@snowplow/browser-plugin-vimeo-tracking';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ VimeoTrackingPlugin() ],
 });
 ```
@@ -216,7 +216,7 @@ If you wish to track only a subset of these events, you can pass an array of `Vi
 window.snowplow('startVimeoTracking',  {
   id,
   video,
-  captureEvents: ['play', 'pause'], 
+  captureEvents: ['play', 'pause'],
 })
 ```
 
@@ -229,7 +229,7 @@ import { VimeoEvent } from '@snowplow/browser-plugin-vimeo-tracking'
 startVimeoTracking({
   id,
   video,
-  captureEvents: [VimeoEvent.Play, VimeoEvent.Pause], 
+  captureEvents: [VimeoEvent.Play, VimeoEvent.Pause],
 })
 ```
 
@@ -242,7 +242,7 @@ As the Vimeo plugin uses Snowplow Media internally, for more granular control ov
 
 For example, if you wish to include additional behavior when a video is paused, you can create callback on the `pause` event of an instance of a Vimeo player.
 
-:::note 
+:::note
 In the following example, ensure you aren't passing the `pause` event to the `startVimeoTracking` function, as this will result in the event being tracked twice.
 :::
 

@@ -1,5 +1,5 @@
 ---
-title: "YouTube media"
+title: "YouTube"
 sidebar_position: 20
 ---
 
@@ -64,7 +64,7 @@ For this plugin to find your media element, your iFrame must be given the id tha
     <iframe
       id="yt-player"
       src="https://www.youtube.com/embed/zSM4ZyVe8xs"
-    ></iframe>  
+    ></iframe>
 
     <script>
       window.snowplow(
@@ -95,8 +95,8 @@ For this plugin to find your media element, your iFrame must be given the id tha
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 import { YouTubeTrackingPlugin, enableYouTubeTracking } from '@snowplow/browser-plugin-youtube-tracking';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ YouTubeTrackingPlugin() ],
 });
 
@@ -149,8 +149,8 @@ enableYouTubeTracking({
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 import { YouTubeTrackingPlugin, enableYouTubeTracking } from '@snowplow/browser-plugin-youtube-tracking';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ YouTubeTrackingPlugin() ],
 });
 

@@ -16,10 +16,15 @@
             "title": "SQL & Alias",
             "properties": {
               "sql": {
-                "type": "string"
+                "type": "string",
+                "title": "Field SQL",
+                "format": "sql",
+                "order": 1
               },
               "alias": {
-                "type": "string"
+                "type": "string",
+                "title": "Field Alias",
+                "order": 2
               }
             },
             "required": [
@@ -29,6 +34,45 @@
             "additionalProperties": false
           }
         ]
+      },
+      "uniqueItems": true
+    },
+    "aggregation_vars": {
+      "type": "array",
+      "description": "> Click the plus sign to add a new entry",
+      "minItems": 0,
+      "items": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "enum": [
+              "sum",
+              "avg",
+              "min",
+              "max",
+              "count",
+              "countd"
+            ],
+            "title": "Aggregation type",
+            "order": 1
+          },
+          "field": {
+            "type": "string",
+            "title": "Field to aggregate",
+            "order": 2
+          },
+          "alias": {
+            "type": "string",
+            "title": "Aggregated field alias",
+            "order": 3
+          }
+        },
+        "required": [
+          "type",
+          "field",
+          "alias"
+        ],
+        "additionalProperties": false
       },
       "uniqueItems": true
     }
@@ -109,10 +153,10 @@
       "consoleGroup": "advanced",
       "type": "string",
       "title": "Sessions Table",
-      "description": "The users module requires data from the derived sessions table. If you choose to disable the standard sessions table in favor of your own custom table, set this to reference your new table e.g. {{ ref(\"snowplow_web_sessions_custom\") }}",
+      "description": "The users module requires data from the derived sessions table. If you choose to disable the standard sessions table in favor of your own custom table, set this to reference your new table e.g. {{ ref(\"snowplow_unified_sessions_custom\") }}",
       "group": "Warehouse and Tracker",
-      "longDescription": "The users module requires data from the derived sessions table. If you choose to disable the standard sessions table in favor of your own custom table, set this to reference your new table e.g. `{{ ref(\\'snowplow_web_sessions_custom\\') }}`. Please see the [README](https://github.com/snowplow/dbt-snowplow-web/tree/main/custom_example) in the `custom_example` directory for more information on this sort of implementation.",
-      "packageDefault": "\"{{ ref( \\'snowplow_web_sessions\\' ) }}\""
+      "longDescription": "The users module requires data from the derived sessions table. If you choose to disable the standard sessions table in favor of your own custom table, set this to reference your new table e.g. `{{ ref(\\'snowplow_unified_sessions_custom\\') }}`. Please see the [README](https://github.com/snowplow/dbt-snowplow-unified/tree/main/custom_example) in the `custom_example` directory for more information on this sort of implementation.",
+      "packageDefault": "\"{{ ref( \\'snowplow_unified_sessions\\' ) }}\""
     },
     "snowplow__allow_refresh": {
       "recommendFullRefresh": true,
@@ -143,7 +187,7 @@
       "title": "Conversion Definition",
       "group": "Operation and Logic",
       "description": "> Click the plus sign to add a new entry",
-      "longDescription": "A list of dictionaries that define a conversion event for your modeling, to add the relevant columns to the sessions table. The dictionary keys are `name` (required), `condition` (required), `value`, `default_value`, and `list_events`. For more information see the [package documentation](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/conversions/).",
+      "longDescription": "A list of dictionaries that define a conversion event for your modeling, to add the relevant columns to the sessions table. The dictionary keys are `name` (required), `condition` (required), `value`, `default_value`, and `list_events`. For more information see the [package documentation](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/conversions/).",
       "packageDefault": "",
       "type": "array",
       "minItems": 0,
@@ -159,26 +203,33 @@
           "name": {
             "type": "string",
             "title": "Name",
-            "description": "Name of your conversion type"
+            "description": "Name of your conversion type",
+            "order": 1
           },
           "condition": {
             "type": "string",
             "title": "Condition",
-            "description": "SQL condition e.g. event_name = 'page_view'"
+            "description": "SQL condition e.g. event_name = 'page_view'",
+            "format": "sql",
+            "order": 2
           },
           "value": {
             "type": "string",
             "title": "Value",
-            "description": "SQL value e.g. tr_total_base"
+            "description": "SQL value e.g. tr_total_base",
+            "format": "sql",
+            "order": 3
           },
           "default_value": {
             "type": "number",
             "title": "Default value",
-            "description": "Default value e.g. 0"
+            "description": "Default value e.g. 0",
+            "order": 4
           },
           "list_events": {
             "type": "boolean",
-            "title": "List all event ids?"
+            "title": "List all event ids?",
+            "order": 5
           }
         }
       },
@@ -221,26 +272,6 @@
       "packageDefault": "3",
       "description": "The maximum allowed number of days between the event creation and it being sent to the collector"
     },
-    "snowplow__limit_page_views_to_session": {
-      "recommendFullRefresh": true,
-      "order": 108,
-      "consoleGroup": "advanced",
-      "type": "boolean",
-      "title": "Limit Page View to Session",
-      "longDescription": "A boolean whether to ensure page view aggregations are limited to pings in the same session as the `page_view` event, to ensure deterministic behavior. If false you may get different results for the same `page_view` depending on which sessions are included in a run. See the [stray page ping](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/#stray-page-pings) section for more information.",
-      "packageDefault": "true",
-      "group": "Operation and Logic"
-    },
-    "snowplow__list_event_counts": {
-      "recommendFullRefresh": false,
-      "order": 16,
-      "consoleGroup": "basic",
-      "type": "boolean",
-      "title": "List Per-Event Counts",
-      "longDescription": "A boolean whether to include a json-type (varies by warehouse) column in the sessions table with a count of events for each `event_type` in that session.",
-      "packageDefault": "false",
-      "group": "Operation and Logic"
-    },
     "snowplow__lookback_window_hours": {
       "recommendFullRefresh": false,
       "order": 43,
@@ -272,10 +303,10 @@
       "type": "number",
       "minimum": 0,
       "title": "Session Lookback Window",
-      "longDescription": "Number of days to limit scan on `snowplow_web_base_sessions_lifecycle_manifest` manifest. Exists to improve performance of model when we have a lot of sessions. Should be set to as large a number as practical.",
+      "longDescription": "Number of days to limit scan on `snowplow_unified_base_sessions_lifecycle_manifest` manifest. Exists to improve performance of model when we have a lot of sessions. Should be set to as large a number as practical.",
       "packageDefault": "730",
       "group": "Operation and Logic",
-      "description": "Number of days to limit scan on `snowplow_web_base_sessions_lifecycle_manifest` manifest"
+      "description": "Number of days to limit scan on `snowplow_unified_base_sessions_lifecycle_manifest` manifest"
     },
     "snowplow__session_stitching": {
       "recommendFullRefresh": false,
@@ -305,7 +336,7 @@
       "consoleGroup": "advanced",
       "type": "boolean",
       "title": "Total All Conversions",
-      "longDescription": "A boolean flag whether to calculate and add the `cv__all_volume` and `cv__all_total` columns. For more information see the [package documentation](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/conversions/).",
+      "longDescription": "A boolean flag whether to calculate and add the `cv__all_volume` and `cv__all_total` columns. For more information see the [package documentation](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/conversions/).",
       "packageDefault": "false",
       "group": "Operation and Logic"
     },
@@ -333,7 +364,8 @@
       "packageDefault": "[ ] (no filter applied)",
       "group": "Contexts, Filters, and Logs",
       "items": {
-        "type": "string"
+        "type": "string",
+        "title": "App ID"
       }
     },
     "snowplow__enable_consent": {
@@ -342,7 +374,7 @@
       "consoleGroup": "advanced",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
-      "longDescription": "Flag to enable the [consent](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/consent-module/) module.",
+      "longDescription": "Flag to enable the [consent](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/consent-module/) module.",
       "packageDefault": "false",
       "title": "Enable Consent Module"
     },
@@ -352,7 +384,7 @@
       "consoleGroup": "advanced",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
-      "longDescription": "Flag to enable the [Core Web Vitals](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/core-web-vitals-module/) module.",
+      "longDescription": "Flag to enable the [Core Web Vitals](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/core-web-vitals-module/) module.",
       "packageDefault": "false",
       "title": "Enable Core Web Vitals Module"
     },
@@ -447,7 +479,7 @@
       "type": "string",
       "title": "Seed reference for GA4 Categories",
       "longDescription": "Name of the model for the GA4 category mapping seed table, either a seed or a model (if you want to use a source, create a model to select from it).",
-      "packageDefault": "snowplow_web_dim_ga4_source_categories",
+      "packageDefault": "snowplow_unified_dim_ga4_source_categories",
       "group": "Warehouse and Tracker"
     },
     "snowplow__geo_mapping_seed": {
@@ -457,7 +489,7 @@
       "type": "string",
       "title": "Seed reference for geo mapping",
       "longDescription": "Name of the model for the Geo mapping seed table, either a seed or a model (if you want to use a source, create a model to select from it).",
-      "packageDefault": "snowplow_web_dim_geo_country_mapping",
+      "packageDefault": "snowplow_unified_dim_geo_country_mapping",
       "group": "Warehouse and Tracker"
     },
     "snowplow__rfc_5646_seed": {
@@ -467,7 +499,7 @@
       "type": "string",
       "title": "Seed reference for rfc 5646 (language mapping)",
       "longDescription": "Name of the model for the RFC 5646 (language) mapping seed table, either a seed or a model (if you want to use a source, create a model to select from it).",
-      "packageDefault": "snowplow_web_dim_rfc_5646_language_mapping",
+      "packageDefault": "snowplow_unified_dim_rfc_5646_language_mapping",
       "group": "Warehouse and Tracker"
     },
     "snowplow__session_identifiers": {
@@ -487,11 +519,15 @@
         "properties": {
           "schema": {
             "type": "string",
+            "title": "(JSON) schema name for the field",
+            "order": 1,
             "description": "The schema name of your events table, atomic in most use cases, alternatively for sdes/contexts this should instead be the name of the field itself"
           },
           "field": {
             "type": "string",
-            "description": "The name of the field to use as user identifier, alternatively, in case of sdes/contexts it is the name of the element that refers to the field to be extracted"
+            "order": 2,
+            "title": "Field name",
+            "description": "The name of the field to use as session identifier, alternatively, in case of sdes/contexts it is the name of the element that refers to the field to be extracted"
           }
         },
         "required": [
@@ -507,6 +543,7 @@
       "order": 47,
       "consoleGroup": "advanced",
       "type": "string",
+      "format": "sql",
       "title": "SQL for your session identifier",
       "longDescription": "This allows you to override the `session_identifiers` SQL, to define completely custom SQL in order to build out a session identifier for your events. If you are interested in using this instead of providing identifiers through the `session_identifiers` variable, please see the [Custom Identifiers](docs/modeling-your-data/modeling-your-data-with-dbt/package-features/custom-identifiers/) section for more details on how to do that.",
       "packageDefault": "",
@@ -539,10 +576,14 @@
         "properties": {
           "schema": {
             "type": "string",
+            "title": "(JSON) schema name for the field",
+            "order": 1,
             "description": "The schema name of your events table, atomic in most use cases, alternatively for sdes/contexts this should instead be the name of the field itself"
           },
           "field": {
             "type": "string",
+            "title": "Field name",
+            "order": 2,
             "description": "The name of the field to use as user identifier, alternatively, in case of sdes/contexts it is the name of the element that refers to the field to be extracted"
           }
         },
@@ -559,6 +600,7 @@
       "order": 49,
       "consoleGroup": "advanced",
       "type": "string",
+      "format": "sql",
       "title": "SQL for your user identifier",
       "longDescription": "This allows you to override the `user_identifiers` SQL, to define completely custom SQL in order to build out a user identifier for your events. If you are interested in using this instead of providing identifiers through the `user_identifiers` variable, please see the [Custom Identifiers](docs/modeling-your-data/modeling-your-data-with-dbt/package-features/custom-identifiers/) section for more details on how to do that.",
       "packageDefault": "",
@@ -569,18 +611,19 @@
       "order": 50,
       "consoleGroup": "advanced",
       "type": "string",
+      "format": "sql",
       "title": "Field used when stitching together users",
       "longDescription": "This is the user_id you want to stitch to sessions (and/or page views) with matching domain_userids. It supports raw `sql` expressions.",
       "packageDefault": "user_id",
       "group": "Operation and Logic"
     },
-    "snowplow__page_view_passthroughs": {
+    "snowplow__view_passthroughs": {
       "recommendFullRefresh": false,
-      "order": 114,
+      "order": 132,
       "consoleGroup": "advanced",
       "title": "Page View Passthroughs",
       "group": "Contexts, Filters, and Logs",
-      "longDescription": "Field(s) to carry through from the events table to the derived table. The field is from the `page_view` event record. Aggregation is not supported. A list of either flat column names from the events table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output.",
+      "longDescription": "Field(s) to carry through from the events table to the derived table. The field is from the `page/screen_view` event record. Aggregation is not supported. A list of either flat column names from the events table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output. See the [Passthrough field](docs/modeling-your-data/modeling-your-data-with-dbt/package-features/passthrough-fields/) docs for more information.",
       "packageDefault": "[ ] (no passthroughs)",
       "$ref": "#/definitions/passthrough_vars"
     },
@@ -590,7 +633,7 @@
       "consoleGroup": "advanced",
       "title": "Session Passthroughs",
       "group": "Contexts, Filters, and Logs",
-      "longDescription": "Field(s) to carry through from the events table to the derived table. The field is based on the first `page_view` or `page_ping` event for that session. Aggregation is not supported. A list of either flat column names from the events table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output.",
+      "longDescription": "Field(s) to carry through from the events table to the derived table. The field is based on the first `page/screen_view` or `page_ping` event for that session. Aggregation is not supported. A list of either flat column names from the events table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output.",
       "packageDefault": "[ ] (no passthroughs)",
       "$ref": "#/definitions/passthrough_vars"
     },
@@ -614,6 +657,16 @@
       "packageDefault": "[ ] (no passthroughs)",
       "$ref": "#/definitions/passthrough_vars"
     },
+    "snowplow__conversion_passthroughs": {
+      "recommendFullRefresh": false,
+      "order": 75,
+      "consoleGroup": "advanced",
+      "title": "User Conversion Passthroughs",
+      "group": "Contexts, Filters, and Logs",
+      "longDescription": "Field(s) to carry through from the events table to the derived table. The field is based on the events_this_run table therefore taking all events. Aggregation is not supported. A list of either flat column names from the events table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output.  See the [Passthrough field](docs/modeling-your-data/modeling-your-data-with-dbt/package-features/passthrough-fields/) docs for more information.Note flat fields will be aliased with a `last_` prefix, dictionary provided aliases will not by default.",
+      "packageDefault": "[ ] (no passthroughs)",
+      "$ref": "#/definitions/passthrough_vars"
+    },
     "snowplow__entities_or_sdes": {
       "recommendFullRefresh": false,
       "order": 104,
@@ -632,19 +685,26 @@
         "properties": {
           "schema": {
             "type": "string",
-            "description": "Table name"
+            "title": "Table name",
+            "description": "Table name",
+            "order": 1
           },
           "prefix": {
             "type": "string",
-            "description": "Prefix to add to columns"
+            "title": "Column prefix",
+            "description": "Prefix to add to columns",
+            "order": 2
           },
           "alias": {
             "type": "string",
-            "description": "Table alias for the subquery"
+            "title": "CTE Alias",
+            "description": "Table alias for the subquery",
+            "order": 3
           },
           "single_entity": {
             "type": "boolean",
-            "title": "Is single entity?"
+            "title": "Is single entity?",
+            "order": 4
           }
         },
         "required": [
@@ -655,15 +715,215 @@
       },
       "uniqueItems": true
     },
-    "snowplow__page_view_stitching": {
+    "snowplow__view_stitching": {
       "recommendFullRefresh": false,
-      "order": 52,
+      "order": 53,
       "consoleGroup": "advanced",
       "type": "boolean",
-      "title": "Enable Page View Stitching",
-      "longDescription": "Determines whether to apply the user mapping to the page views table. Note this can be an expensive operation to do every run. One way to mitigate this is by running this update with less frequency than your usual run by enabling this variable only for that specific run. Please see the [User Mapping](docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/) section for more details.",
+      "title": "Enable View Stitching",
+      "longDescription": "Determines whether to apply the user mapping to the views table. Note this can be an expensive operation to do every run. One way to mitigate this is by running this update with less frequency than your usual run by enabling this variable only for that specific run. Please see the [User Mapping](docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/) section for more details.",
       "packageDefault": "false",
       "group": "Operation and Logic"
+    },
+    "snowplow__conversion_stitching": {
+      "recommendFullRefresh": true,
+      "order": 77,
+      "consoleGroup": "advanced",
+      "type": "boolean",
+      "title": "Enable Conversion Stitching",
+      "longDescription": "Determines whether to apply the user mapping to the conversions table. Please see the [User Mapping](docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/) section for more details.",
+      "packageDefault": "true",
+      "group": "Operation and Logic"
+    },
+    "snowplow__list_event_counts": {
+      "recommendFullRefresh": false,
+      "order": 16,
+      "consoleGroup": "basic",
+      "type": "boolean",
+      "title": "List Per-Event Counts",
+      "longDescription": "A boolean whether to include a json-type (varies by warehouse) column in the sessions table with a count of events for each `event_type` in that session.",
+      "packageDefault": "false",
+      "group": "Operation and Logic"
+    },
+    "snowplow__enable_mobile_context": {
+      "recommendFullRefresh": false,
+      "order": 100,
+      "consoleGroup": "advanced",
+      "type": "boolean",
+      "title": "Enable Mobile Context",
+      "longDescription": "Flag to include mobile context data in the models",
+      "packageDefault": "false",
+      "group": "Contexts, Filters, and Logs"
+    },
+    "snowplow__enable_geolocation_context": {
+      "recommendFullRefresh": false,
+      "order": 24,
+      "consoleGroup": "basic",
+      "type": "boolean",
+      "title": "Enable Geolocation Context",
+      "longDescription": "Flag to include the geolocation data in the models.",
+      "packageDefault": "false",
+      "group": "Contexts, Filters, and Logs"
+    },
+    "snowplow__enable_application_context": {
+      "recommendFullRefresh": false,
+      "order": 96,
+      "consoleGroup": "advanced",
+      "type": "boolean",
+      "title": "Enable App Context",
+      "longDescription": "Flag to include the app context data in the models.",
+      "packageDefault": "false",
+      "group": "Contexts, Filters, and Logs"
+    },
+    "snowplow__enable_screen_context": {
+      "recommendFullRefresh": false,
+      "order": 102,
+      "consoleGroup": "advanced",
+      "type": "boolean",
+      "title": "Enable Screen Context",
+      "longDescription": "Flag to include the mobile screen data in the models.",
+      "packageDefault": "false",
+      "group": "Contexts, Filters, and Logs"
+    },
+    "snowplow__enable_app_errors": {
+      "recommendFullRefresh": false,
+      "order": 94,
+      "consoleGroup": "advanced",
+      "type": "boolean",
+      "title": "Enable App Error Context",
+      "longDescription": "Flag to include the mobile app error data in the models.",
+      "packageDefault": "false",
+      "group": "Contexts, Filters, and Logs"
+    },
+    "snowplow__enable_conversions": {
+      "recommendFullRefresh": false,
+      "order": 22,
+      "consoleGroup": "basic",
+      "type": "boolean",
+      "title": "Enable Conversions",
+      "longDescription": "Flag to enable the conversions optional module.",
+      "packageDefault": "false",
+      "group": "Contexts, Filters, and Logs"
+    },
+    "snowplow__enable_deep_link_context": {
+      "recommendFullRefresh": false,
+      "order": 23,
+      "consoleGroup": "basic",
+      "type": "boolean",
+      "title": "Enable Deep Link Context",
+      "longDescription": "Flag to include the deep link context data in the models.",
+      "packageDefault": "false",
+      "group": "Contexts, Filters, and Logs"
+    },
+    "snowplow__enable_mobile": {
+      "recommendFullRefresh": false,
+      "order": 12,
+      "consoleGroup": "required",
+      "type": "boolean",
+      "title": "Enable Mobile Data",
+      "longDescription": "Flag to process mobile events throughout the package.",
+      "packageDefault": "true",
+      "group": "Warehouse and Tracker"
+    },
+    "snowplow__enable_web": {
+      "recommendFullRefresh": false,
+      "order": 10,
+      "consoleGroup": "required",
+      "type": "boolean",
+      "title": "Enable Web Data",
+      "longDescription": "Flag to process web events throughout the package.",
+      "packageDefault": "true",
+      "group": "Warehouse and Tracker"
+    },
+    "snowplow__enable_screen_summary_context": {
+      "recommendFullRefresh": false,
+      "order": 103,
+      "consoleGroup": "advanced",
+      "type": "boolean",
+      "title": "Enable Screen Summary Context",
+      "longDescription": "Flag to process the screen engagement information in the screen summary context on mobile events.",
+      "packageDefault": "false",
+      "group": "Contexts, Filters, and Logs"
+    },
+    "snowplow__custom_sql": {
+      "recommendFullRefresh": false,
+      "order": 84,
+      "consoleGroup": "advanced",
+      "type": "string",
+      "title": "Custom SQL",
+      "format": "sql",
+      "group": "Operation and Logic",
+      "longDescription": "This allows you to introduce custom sql to the `snowplow_unified_events_this_run` table, which you can then leverage in downstream models. For more information on the usage, see the following page on the [advanced usage of the utils package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/examples/additional-sql-on-events-this-run/).",
+      "packageDefault": "",
+      "description": "Custom SQL for your events this run table."
+    },
+    "snowplow__view_aggregations": {
+      "recommendFullRefresh": false,
+      "order": 131,
+      "consoleGroup": "advanced",
+      "title": "View Aggregations",
+      "group": "Contexts, Filters, and Logs",
+      "longDescription": "Aggregations to calculate as part of the the derived table. A list of dictionaries defining the type (sum, avg, min, max, count, countd), field to aggregate, and what to alias the column.",
+      "packageDefault": "[ ] (no aggregations)",
+      "$ref": "#/definitions/aggregation_vars"
+    },
+    "snowplow__session_aggregations": {
+      "recommendFullRefresh": false,
+      "order": 120,
+      "consoleGroup": "advanced",
+      "title": "Session Aggregations",
+      "group": "Contexts, Filters, and Logs",
+      "longDescription": "Aggregations to calculate as part of the the derived table. A list of dictionaries defining the type (sum, avg, min, max, count, countd), field to aggregate, and what to alias the column.",
+      "packageDefault": "[ ] (no aggregations)",
+      "$ref": "#/definitions/aggregation_vars"
+    },
+    "snowplow__user_aggregations": {
+      "recommendFullRefresh": false,
+      "order": 128,
+      "consoleGroup": "advanced",
+      "title": "User First Aggregations",
+      "group": "Contexts, Filters, and Logs",
+      "longDescription": " Aggregations to calculate as part of the the derived table. A list of dictionaries defining the type (sum, avg, min, max, count, countd), field to aggregate, and what to alias the column.",
+      "packageDefault": "[ ] (no aggregations)",
+      "$ref": "#/definitions/aggregation_vars"
+    },
+    "snowplow__grant_select_to": {
+      "recommendFullRefresh": false,
+      "order": 106,
+      "consoleGroup": "advanced",
+      "type": "array",
+      "description": "> Click the plus sign to add a new entry",
+      "minItems": 0,
+      "items": {
+        "type": "string",
+        "title": "User/Role"
+      },
+      "title": "Grant Select List",
+      "group": "Warehouse and Tracker",
+      "longDescription": "A list of users to grant select to all tables created by this package to.",
+      "packageDefault": "[]"
+    },
+    "snowplow__grant_schema_usage": {
+      "recommendFullRefresh": false,
+      "order": 105,
+      "consoleGroup": "advanced",
+      "type": "boolean",
+      "description": "Enable granting usage on schemas",
+      "title": "Enable grant usage",
+      "group": "Warehouse and Tracker",
+      "longDescription": "Enables granting usage on schemas interacted with on a dbt run",
+      "packageDefault": "true"
+    },
+    "snowplow__use_refr_if_mkt_null": {
+      "recommendFullRefresh": false,
+      "order": 133,
+      "consoleGroup": "advanced",
+      "type": "boolean",
+      "description": "Use refr fields when mkt fields are null for default channel group",
+      "title": "Use Refr if Mkt is null",
+      "group": "Operation and Logic",
+      "longDescription": "Use the refr fields when the mkt fields are null for the definition of default channel group. This is a common case when for example a landing page has a redirect.",
+      "packageDefault": "false"
     }
   }
 }

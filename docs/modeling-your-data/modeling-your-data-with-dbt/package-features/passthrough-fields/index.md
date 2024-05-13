@@ -39,7 +39,7 @@ Note that how to extract a field from your context column will depend on your wa
 
 :::tip
 
-In certain cases, such as the users table in Unified, it may be required to first passthrough fields to an upstream table (the sessions table in that case) to make sure it is available for selection. The best way to identify this is to look at the DAG in the dbt docs for the package you are using.
+In certain cases, such as the users table in Unified, it may be required to first set passthrough fields on an upstream table (the sessions table in that case) to make sure it is available for selection. The best way to identify this is to look at the DAG in the dbt docs for the package you are using.
 
 :::
 

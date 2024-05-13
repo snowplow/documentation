@@ -1,5 +1,6 @@
 ---
 title: "Testing and debugging"
+sidebar_label: "Test"
 sidebar_position: 75
 ---
 

@@ -172,6 +172,7 @@ When selecting a `dbt-core` version, below you'll find a table which contains th
 | **1.4.5** | 1.4.2    | 1.4.2      | 1.4.5    | 1.4.0    | 1.4.1     |
 | **1.5.1** | 1.5.1    | 1.5.4      | 1.5.1    | 1.5.9    | 1.5.1     |
 | **1.6.9** | 1.6.9    | 1.6.7      | 1.6.9    | 1.6.4    | 1.6.5     |
+| **1.7.11** | 1.7.7    | 1.7.11      | 1.7.11    | 1.7.5    | 1.7.3     |
 
 Please also note that the model name needs to match to the corresponding datamodeling subfolder name in GitHub. The dbt project for the model in the above example would therefore live under:
 

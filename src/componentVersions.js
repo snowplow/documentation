@@ -6,7 +6,7 @@ export const versions = {
   flutterTracker: '0.7.0',
   golangTracker: '3.0.0',
   googleAmpTracker: '1.1.0',
-  iosTracker: '6.0.2',
+  iosTracker: '6.0.3',
   javaTracker: '2.1.0',
   javaScriptTracker: '3.23.0',
   luaTracker: '0.2.0',

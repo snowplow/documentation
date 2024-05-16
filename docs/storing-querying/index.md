@@ -1,6 +1,6 @@
 ---
 title: "Storing and querying data"
-sidebar_label: "Query"
+sidebar_label: "Store & Query"
 sidebar_position: 84
 ---
 

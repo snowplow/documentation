@@ -3,9 +3,14 @@ title: "Snowtype configuration options"
 sidebar_position: 3
 ---
 
-The Snowtype CLI configuration will be saved in a`snowtype.config.json` file after initialization. **We highly recommend you keep this file in the root of your project folder.**
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
 
-## Attributes in `snowtype.config.json`
+The Snowtype CLI configuration can be saved in a `.json`, `.js`, or `.ts` file after initialization. For example: `snowtype.config.json`, `snowtype.config.js`, or `snowtype.config.ts`. **We highly recommend you keep this file in the root of your project folder.**
+
+## Attributes in your configuration file
 
 ### `igluCentralSchemas`
 
@@ -42,7 +47,10 @@ The outpath relative to the current working directory when running the script.
 
 ## Example configuration file
 
-```json
+<Tabs groupId="config" queryString>
+  <TabItem value="json" label="JSON">
+
+  ```json
 {
   "igluCentralSchemas": ["iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"],
   "dataStructures": ["iglu:com.myorg/custom_web_page/jsonschema/1-1-0"],
@@ -58,3 +66,66 @@ The outpath relative to the current working directory when running the script.
   "outpath": "./src/snowtype"
 }
 ```
+  </TabItem>
+
+  <TabItem value="javascript" label="JavaScript" default>
+
+```javascript
+const config = {
+  igluCentralSchemas: [],
+  dataStructures: [],
+  eventSpecificationIds: [],
+  dataProductIds: [],
+  organizationId: '177234df-d425-412e-ad8d-8b97515b2807',
+  tracker: '@snowplow/browser-tracker',
+  language: 'typescript',
+  outpath: './snowtype'
+}
+
+module.exports = config;
+
+```
+  </TabItem>
+
+  <TabItem value="typescript" label="TypeScript" default>
+
+```typescript
+type SnowtypeConfig = {
+  tracker:
+    | "@snowplow/browser-tracker"
+    | "@snowplow/javascript-tracker"
+    | "snowplow-android-tracker"
+    | "snowplow-ios-tracker"
+    | "@snowplow/node-tracker"
+    | "snowplow-golang-tracker"
+    | "@snowplow/react-native-tracker";
+  language: "typescript" | "javascript" | "kotlin" | "swift" | "go";
+  outpath: string;
+  organizationId?: string;
+  igluCentralSchemas?: string[];
+  dataStructures?: string[];
+  eventSpecificationIds?: string[];
+  dataProductIds?: string[];
+};
+
+const config: SnowtypeConfig = {
+  "igluCentralSchemas": ["iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"],
+  "dataStructures": ["iglu:com.myorg/custom_web_page/jsonschema/1-1-0"],
+  "eventSpecificationIds": [
+    "a123456b-c222-11d1-e123-1f123456789g"
+  ],
+  "dataProductIds": [
+    "a123456b-c222-11d1-e123-1f12345678dp"
+  ],
+  "organizationId": "a654321b-c111-33d3-e321-1f123456789g",
+  "tracker": "@snowplow/browser-tracker",
+  "language": "typescript",
+  "outpath": "./src/snowtype"
+};
+
+export default config;
+
+```
+  </TabItem>
+    
+</Tabs>

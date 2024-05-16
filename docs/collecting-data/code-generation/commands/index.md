@@ -15,7 +15,7 @@ This page only summarizes the CLI commands and the options for each command. For
 
 ### `snowtype init`
 
-Initialize the setup of Snowtype code generation in a project. Creates the `snowtype.config.json` file.
+Initialize the setup of Snowtype code generation in a project. Creates the `snowtype.config.json`, `snowtype.config.js`, or `snowtype.config.ts` file.
 
 **Options**
  -  `-i, --organizationId` Organization ID.
@@ -25,7 +25,7 @@ Initialize the setup of Snowtype code generation in a project. Creates the `snow
 
 ### `snowtype generate`
 
-Generates tracking code based on configuration on the `snowtype.config.json` file. Can generate/modify the `.snowtype-lock.json` file.
+Generates tracking code based on configuration on the `snowtype.config.json`, `snowtype.config.js`, or `snowtype.config.ts` file. Can generate/modify the `.snowtype-lock.json` file.
 
 **Options**
  -  `-is, --instructions` Generate event specification instructions.
@@ -40,7 +40,7 @@ Checks for latest version updates in Data Structures and Event Specifications.
 
 ### `snowtype patch`
 
-Adds new Data Structures and Event Specifications in the `snowtype.config.json` file without needing to modify the file by hand.
+Adds new Data Structures and Event Specifications in the `snowtype.config.json`, `snowtype.config.js`, or `snowtype.config.ts` file without needing to modify the file by hand.
 
 **Options**
  - `-e, --eventSpecificationIds` Event Specification ID/s.

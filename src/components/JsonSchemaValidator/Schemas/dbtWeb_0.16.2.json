@@ -600,7 +600,7 @@
       "consoleGroup": "advanced",
       "title": "User First Passthroughs",
       "group": "Contexts, Filters, and Logs",
-      "longDescription": " Field(s) to carry through from the events table to the derived table. The field is based on the first session record for that user. Aggregation is not supported. A list of either flat column names from the events table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output.",
+      "longDescription": " Field(s) to carry through from the events table to the derived table. The field is based on the first session record for that user. Aggregation is not supported. A list of either flat column names from the sessions table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output.",
       "packageDefault": "[ ] (no passthroughs)",
       "$ref": "#/definitions/passthrough_vars"
     },
@@ -610,7 +610,7 @@
       "consoleGroup": "advanced",
       "title": "User Last Passthroughs",
       "group": "Contexts, Filters, and Logs",
-      "longDescription": "Field(s) to carry through from the events table to the derived table. The field is based on the last session record for that user. Aggregation is not supported. A list of either flat column names from the events table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output.  See the [Passthrough field](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/passthrough-fields/) docs for more information.Note flat fields will be aliased with a `last_` prefix, dictionary provided aliases will not by default.",
+      "longDescription": "Field(s) to carry through from the events table to the derived table. The field is based on the last session record for that user. Aggregation is not supported. A list of either flat column names from the sessions table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output.  See the [Passthrough field](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/passthrough-fields/) docs for more information.Note flat fields will be aliased with a `last_` prefix, dictionary provided aliases will not by default.",
       "packageDefault": "[ ] (no passthroughs)",
       "$ref": "#/definitions/passthrough_vars"
     },

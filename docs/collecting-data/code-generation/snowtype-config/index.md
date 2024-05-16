@@ -48,10 +48,30 @@ The outpath relative to the current working directory when running the script.
 ## Example configuration file
 
 <Tabs groupId="config" queryString>
-  <TabItem value="json" label="JSON">
+  <TabItem value="json" label="JSON" default>
 
   ```json
 {
+    "igluCentralSchemas": ["iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"],
+    "dataStructures": ["iglu:com.myorg/custom_web_page/jsonschema/1-1-0"],
+    "eventSpecificationIds": [
+      "a123456b-c222-11d1-e123-1f123456789g"
+    ],
+    "dataProductIds": [
+      "a123456b-c222-11d1-e123-1f12345678dp"
+    ],
+    "organizationId": "a654321b-c111-33d3-e321-1f123456789g",
+    "tracker": "@snowplow/browser-tracker",
+    "language": "typescript",
+    "outpath": "./src/snowtype"
+}
+```
+  </TabItem>
+
+  <TabItem value="javascript" label="JavaScript" default>
+
+```javascript
+const config = {
   "igluCentralSchemas": ["iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"],
   "dataStructures": ["iglu:com.myorg/custom_web_page/jsonschema/1-1-0"],
   "eventSpecificationIds": [
@@ -65,29 +85,13 @@ The outpath relative to the current working directory when running the script.
   "language": "typescript",
   "outpath": "./src/snowtype"
 }
-```
-  </TabItem>
-
-  <TabItem value="javascript" label="JavaScript" default>
-
-```javascript
-const config = {
-  igluCentralSchemas: [],
-  dataStructures: [],
-  eventSpecificationIds: [],
-  dataProductIds: [],
-  organizationId: '177234df-d425-412e-ad8d-8b97515b2807',
-  tracker: '@snowplow/browser-tracker',
-  language: 'typescript',
-  outpath: './snowtype'
-}
 
 module.exports = config;
 
 ```
   </TabItem>
 
-  <TabItem value="typescript" label="TypeScript" default>
+  <TabItem value="typescript" label="TypeScript">
 
 ```typescript
 type SnowtypeConfig = {

@@ -294,7 +294,7 @@ To add an Event Specification to the code generation, either manually or through
 
 ![event specification id](images/ts-id.png)
 
-Then you should add this ID to your `snowtype.config.json`, `snowtype.config.js`, or `snowtype.config.ts` `eventSpecificationIds` array.
+Then you should add this ID to your configuration file `eventSpecificationIds` array.
 
 ### Data Structures
 
@@ -302,7 +302,7 @@ To add a Data Structure to the code generation, either manually or through the `
 
 ![data structure url](images/ds-url.png)
 
-Then you should add this Data Structure tracking URL to your `snowtype.config.json`, `snowtype.config.js`, or `snowtype.config.ts` `dataStructures` array.
+Then you should add this Data Structure tracking URL to your configuration file `dataStructures` array.
 
 ### Iglu Central Schemas
 
@@ -310,7 +310,7 @@ To add a Data Structure to the code generation, either manually or through the `
 
 ![iglu central tracking url](images/iglu-url.png)
 
-Then you should add this Schema tracking URL to your `snowtype.config.json`, `snowtype.config.js`, or `snowtype.config.ts` `igluCentralSchemas` array.
+Then you should add this Schema tracking URL to your configuration file `igluCentralSchemas` array.
 
 ## Generating event specification instructions
 

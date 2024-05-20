@@ -45,9 +45,9 @@ These instructions are also provided as part of the setup flow in Snowplow BDP C
 3. Select "Another AWS account"  
     (Account ID: 793733611312 Require MFA: true)
 4. Select the policy you created earlier
-5. Call the role "SnowplowAdmin" or similar
+5. Call the role "SnowplowAdmin" (please use this specific name)
 
-You will need to share this role with us as part of filling out the setup form in Snowplow BDP console.
+You will need to share this role with us as part of filling out the setup form in Snowplow BDP Console.
 
 ### JSON Policy Document
 
@@ -137,7 +137,7 @@ The last step is to set up the Snowplow deployment role. This is a role assumed 
 - Account ID: 793733611312
 - Do not require MFA, as Snowplow needs to be able to assume the role via headless jobs.
 3. Attach the `IAMFullAccess` policy. If a Permission Boundary was set on the admin role, then add this boundary to the bottom section of permissions page.
-- Role name: SnowplowDeployment
+- Role name: SnowplowDeployment (please use this specific name)
 - Role description: Allows the Snowplow Team to programmatically deploy to this account.
 4. Copy the Snowplow deployment role ARN. You will need to share this role with us as part of filling out the setup form in Snowplow BDP console.
 

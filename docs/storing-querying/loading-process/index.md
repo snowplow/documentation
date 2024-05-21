@@ -9,7 +9,8 @@ description: "A high level view of how Snowplow data is loaded into Redshift, Bi
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import RDBLoaderDiagram from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/_cross-cloud-diagram.md';
-import BigQueryLoaderDiagram from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/_diagram.md';
+import BigQueryLoaderDiagramV1 from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/previous-versions/bigquery-loader-1.x/_diagram.md';
+import BigQueryLoaderDiagramV2 from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/_cross-cloud-diagram.md';
 import LakeLoaderDiagram from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/_cross-cloud-diagram.md';
 import SnowflakeStreamingLoaderDiagram from '@site/docs/pipeline-components-and-applications/loaders-storage-targets/snowflake-streaming-loader/_cross-cloud-diagram.md';
 ```
@@ -28,8 +29,14 @@ We load data into Redshift using the [RDB Loader](/docs/pipeline-components-and-
 
 We load data into BigQuery using the [BigQuery Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/index.md).
 
-<BigQueryLoaderDiagram/>
-
+   <Tabs groupId="bigquery-loader-version" queryString lazy>
+        <TabItem value="v2" label="Version 2.x" default>
+            <BigQueryLoaderDiagramV2/>
+        </TabItem>
+        <TabItem value="v1" label="Version 1.x">
+            <BigQueryLoaderDiagramV1/>
+        </TabItem>
+     </Tabs>
   </TabItem>
   <TabItem value="databricks" label="Databricks">
 

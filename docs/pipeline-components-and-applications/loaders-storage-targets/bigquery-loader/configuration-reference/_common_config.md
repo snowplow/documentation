@@ -4,21 +4,21 @@ import Link from '@docusaurus/Link';
 
 <tr>
     <td><code>batching.maxBytes</code></td>
-    <td>Optional. Default value <code>16000000</code>. Events are emitted to Snowflake when the batch reaches this size in bytes</td>
+    <td>Optional. Default value <code>16000000</code>. Events are emitted to BigQuery when the batch reaches this size in bytes</td>
 </tr>
 <tr>
     <td><code>batching.maxDelay</code></td>
-    <td>Optional. Default value <code>1 second</code>.  Events are emitted to Snowflake after a maximum of this duration, even if the <code>maxBytes</code> size has not been reached</td>
+    <td>Optional. Default value <code>1 second</code>.  Events are emitted to BigQuery after a maximum of this duration, even if the <code>maxBytes</code> size has not been reached</td>
 </tr>
 <tr>
     <td><code>batching.uploadConcurrency</code></td>
-    <td>Optional. Default value 3.  How many batches can we send simultaneously over the network to Snowflake</td>
+    <td>Optional. Default value 3.  How many batches can we send simultaneously over the network to BigQuery</td>
 </tr>
 <tr>
     <td><code>retries.setupErrors.delay</code></td>
     <td>
       Optional. Default value <code>30 seconds</code>.
-      Configures exponential backoff on errors related to how Snowflake is set up for this loader.
+      Configures exponential backoff on errors related to how BigQuery is set up for this loader.
       Examples include authentication errors and permissions errors.
       This class of errors are reported periodically to the monitoring webhook.
     </td>
@@ -37,7 +37,7 @@ import Link from '@docusaurus/Link';
 </tr>
 <tr>
     <td><code>skipSchemas</code></td>
-    <td>Optional, e.g. <code>["iglu:com.example/skipped1/jsonschema/1-0-0"]</code> or with wildcards <code>["iglu:com.example/skipped2/jsonschema/1-*-*"]</code>. A list of schemas that won't be loaded to Snowflake. This feature could be helpful when recovering from edge-case schemas which for some reason cannot be loaded to the table.</td>
+    <td>Optional, e.g. <code>["iglu:com.example/skipped1/jsonschema/1-0-0"]</code> or with wildcards <code>["iglu:com.example/skipped2/jsonschema/1-*-*"]</code>. A list of schemas that won't be loaded to BigQuery. This feature could be helpful when recovering from edge-case schemas which for some reason cannot be loaded to the table.</td>
 </tr>
 <tr>
     <td><code>monitoring.metrics.statsd.hostname</code></td>
@@ -57,11 +57,11 @@ import Link from '@docusaurus/Link';
 </tr>
 <tr>
     <td><code>monitoring.metrics.statsd.prefix</code></td>
-    <td>Optional. Default <code>snowplow.snowflake-loader</code>. Prefix used for the metric name when sending to statsd.</td>
+    <td>Optional. Default <code>snowplow.bigquery-loader</code>. Prefix used for the metric name when sending to statsd.</td>
 </tr>
 <tr>
     <td><code>monitoring.webhook.endpoint</code></td>
-    <td>Optional, e.g. <code>https://webhook.example.com</code>.  The loader will send to the webhook a payload containing details of any error related to how Snowflake is set up for this loader.</td>
+    <td>Optional, e.g. <code>https://webhook.example.com</code>.  The loader will send to the webhook a payload containing details of any error related to how BigQuery is set up for this loader.</td>
 </tr>
 <tr>
     <td><code>monitoring.webhook.tags.*</code></td>
@@ -82,16 +82,4 @@ import Link from '@docusaurus/Link';
 <tr>
     <td><code>telemetry.userProvidedId</code></td>
     <td>Optional. See <Link to="/docs/getting-started-on-community-edition/telemetry/#how-can-i-help">here</Link> for more information.</td>
-</tr>
-<tr>
-    <td><code>output.good.jdbcLoginTimeout</code></td>
-    <td>Optional. Sets the login timeout on the JDBC driver which connects to Snowflake</td>
-</tr>
-<tr>
-    <td><code>output.good.jdbcNetworkTimeout</code></td>
-    <td>Optional. Sets the network timeout on the JDBC driver which connects to Snowflake</td>
-</tr>
-<tr>
-    <td><code>output.good.jdbcQueryTimeout</code></td>
-    <td>Optional. Sets the query timeout on the JDBC driver which connects to Snowflake</td>
 </tr>

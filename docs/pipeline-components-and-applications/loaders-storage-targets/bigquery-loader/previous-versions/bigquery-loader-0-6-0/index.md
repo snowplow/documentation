@@ -1,7 +1,7 @@
 ---
 title: "BigQuery Loader (0.6.x)"
 date: "2021-10-06"
-sidebar_position: 0
+sidebar_position: 10 
 ---
 
 ## Technical Architecture

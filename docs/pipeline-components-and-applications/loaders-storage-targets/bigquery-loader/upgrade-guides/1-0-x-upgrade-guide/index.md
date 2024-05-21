@@ -6,7 +6,7 @@ sidebar_position: 0
 
 ## Configuration
 
-The only breaking change from the 0.6.x series is the new format of the configuration file. That used to be a self-describing JSON but is now HOCON. Additionally, some app-specific command-line arguments have been incorporated into the config, such as Repeater's `--failedInsertsSub` option. For more details, see the [setup guide](/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/index.md#setup-guide) and [configuration reference](/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/snowplow-bigquery-loader-configuration-reference/index.md).
+The only breaking change from the 0.6.x series is the new format of the configuration file. That used to be a self-describing JSON but is now HOCON. Additionally, some app-specific command-line arguments have been incorporated into the config, such as Repeater's `--failedInsertsSub` option. For more details, see the [setup guide](/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/index.md#setup-guide) and [configuration reference](/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/previous-versions/bigquery-loader-1.x/configuration-reference/index.md).
 
 Using Repeater as an example, if your configuration for 0.6.x looked like this:
 

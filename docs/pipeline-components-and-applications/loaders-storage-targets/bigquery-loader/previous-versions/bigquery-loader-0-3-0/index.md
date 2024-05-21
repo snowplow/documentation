@@ -1,7 +1,7 @@
 ---
 title: "BigQuery Loader (0.3.x)"
 date: "2020-03-11"
-sidebar_position: 30
+sidebar_position: 40
 ---
 
 Please be aware that we have identified a security vulnerability in BigQuery Repeater in this version, which we've fixed in version [0.4.2](/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/previous-versions/bigquery-loader-0-4-0/index.md). You can find more details on our [Discourse forum](https://discourse.snowplow.io/t/important-notice-snowplow-bigquery-loader-vulnerability-and-fix/3783).

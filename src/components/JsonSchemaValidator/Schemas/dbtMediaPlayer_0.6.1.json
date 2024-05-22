@@ -295,7 +295,7 @@
     "snowplow__enable_media_player_v1": {
       "recommendFullRefresh": false,
       "order": 31,
-      "consoleGroup": "basic",
+      "consoleGroup": "required",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Set to `true` if the [version 1 of the media player context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player/jsonschema/1-0-0) is enabled. This schema was used in our older media plugins on the JavaScript tracker. It is not tracked in the latest versions.",
@@ -305,11 +305,11 @@
     "snowplow__enable_media_player_v2": {
       "recommendFullRefresh": false,
       "order": 32,
-      "consoleGroup": "basic",
+      "consoleGroup": "required",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Set to `true` if the [version 2 of the media player context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player/jsonschema/2-0-0) is enabled. This is tracked by our latest JavaScript and mobile trackers.",
-      "packageDefault": "false",
+      "packageDefault": "true",
       "title": "Enable Media Player v2 Module"
     },
     "snowplow__enable_media_session": {
@@ -349,7 +349,7 @@
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Whether to use the web contexts for web media events in the processing (based on the web page context).",
-      "packageDefault": "false",
+      "packageDefault": "true",
       "title": "Enable Web Events Module"
     },
     "snowplow__enable_mobile_events": {

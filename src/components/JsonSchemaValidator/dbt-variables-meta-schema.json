@@ -13,7 +13,7 @@
                         "$ref": "#"
                     },
                     "patternProperties": {
-                        "^snowplow__": {
+                        "^(snowplow__|surrogate_key_treat_nulls_as_empty_strings)": {
                             "type": "object",
                           	"additionalProperties": {
                                 "$ref": "#"

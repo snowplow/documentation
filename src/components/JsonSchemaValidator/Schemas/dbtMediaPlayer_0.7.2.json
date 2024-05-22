@@ -229,6 +229,8 @@
       "description": "Minimum number of seconds that a media play needs to last to consider that interaction a valid play"
     },
     "surrogate_key_treat_nulls_as_empty_strings": {
+      "recommendFullRefresh": true,
+      "consoleGroup": "advanced",
       "type": "boolean",
       "order": 999,
       "title": "Surrogate Key Treat Nulls as Empty Strings",

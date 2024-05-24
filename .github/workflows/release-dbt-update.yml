@@ -16,6 +16,7 @@ on:
           - Web
           - Mobile
           - Fractribution
+          - Utils
           # Add more package names as needed
       version:
         description: 'Enter version'

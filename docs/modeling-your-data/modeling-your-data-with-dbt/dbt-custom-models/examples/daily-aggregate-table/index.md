@@ -29,6 +29,7 @@ Note there is no need to [tag](/docs/modeling-your-data/modeling-your-data-with-
 
 -- depends_on: {{ ref('snowplow_unified_events_this_run') }}
 
+{# Get the range of dates processed in the current run to limit the later scan #}
 {% if is_incremental() %}
 {%- set lower_limit, upper_limit = snowplow_utils.return_limits_from_model(ref('snowplow_unified_events_this_run'),
                                                                            'derived_tstamp',
@@ -48,6 +49,12 @@ where {{ snowplow_utils.is_run_with_new_events('snowplow_unified') }} --returns 
 group by 1
 
 ```
+
+:::tip
+
+Notice that we are filtering on the `start_tstamp` column from the sessions table, because this is the partition/sort key for that table. Make sure you used the right column for the derived table you are querying. 
+
+:::
 
 We need to add a dependency on events this run to ensure dbt runs everything in the right order, we do this by adding the `-- depends_on: {{ ref('snowplow_unified_events_this_run') }}` comment. Next we get the limits for the current run and those are the dates we then use to work out what range we have to scan the sessions table on. On the first run, it will do a full scan to backfill the table from the existing derived sessions data.
 

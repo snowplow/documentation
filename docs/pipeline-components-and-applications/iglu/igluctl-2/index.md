@@ -19,7 +19,8 @@ Iglu provides a CLI application, called igluctl which allows you to perform most
     - `generate` - verify that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for Redshift and Postgres warehouses. Generate DDLs and migrations from set of JSON Schemas. If the schema is not evolved correctly and backward incompatible data is sent within transformer's aggregation window, loading would fail for all events.
     - `push` - push set of JSON Schemas from static registry to full-featured (Scala Registry for example) one
     - `pull` - pull set of JSON Schemas from registry to local folder
-    - `parquet-verify` - verify that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for parquet transformation (for loading into Databricks).  If the schema is not evolved correctly, the offending version will be stored in a separate column with `_recovered_` in its name.
+    - `verify-parquet` - verify that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for parquet transformation (for loading into Databricks). It reports the breaking schema versions.
+    - `verify-redshift` - verify that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for loading into Redshift. It reports the major schema versions within which schema evolution rules were broken.
     - `deploy` - run entire schema workflow using a config file. This could be used to chain multiple commands, i.e. `lint` followed by `push` and `s3cp`.
     - `s3cp` - copy JSONPaths or schemas to S3 bucket
 - `server` - work with an Iglu server
@@ -266,6 +267,55 @@ Example:
     ]
 
 }
+```
+
+## static verify-parquet
+
+`igluctl static verify-parquet` verifies that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for parquet transformation (for loading into Databricks). It reports the breaking schema versions.
+
+It accepts one required arguments:
+
+- `input` - path to your schema files.
+
+Example command:
+
+```bash
+$ ./igluctl static verify-parquet /path/to/static/registry
+```
+
+Example output:
+
+```
+Breaking change introduced by 'com.acme/product/jsonschema/1-0-2'. Changes: Incompatible type change Long to Double at /item/price
+Breaking change introduced by 'com.acme/user/jsonschema/1-0-1'. Changes: Incompatible type change Long to Integer at /id
+Breaking change introduced by 'com.acme/item/jsonschema/1-1-0'. Changes: Incompatible type change String to Json at /metadata
+```
+
+## static verify-redshift
+
+`igluctl static verify-redshift` verifies that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for loading into Redshift. It reports the major schema versions within which schema evolution rules were broken.
+
+:::note
+This command being under `static` is a misnomer and will be fixed in the next version.
+:::
+
+It accepts two required arguments:
+
+- `server` - Iglu Server URL.
+- `apikey` - Iglu Server Read ApiKey
+
+Example command:
+
+```bash
+$ ./igluctl static verify-redshift --server iglu.acme.com --apikey f81d4fae-7dec-11d0-a765-00a0c91e6bf6
+```
+
+Example output:
+
+```
+iglu:com.acme/product/jsonschema/1-*-*
+iglu:com.acme/user/jsonschema/1-*-*
+iglu:com.acme/item/jsonschema/2-*-*
 ```
 
 ## server keygen

@@ -42,9 +42,7 @@ Create a custom role and assign it the “Snowplow BDP Enterprise Deployment” 
 1. Navigate to your newly created subscription
 2. Click into “Access Control (IAM)”
 3. Click “Add custom role”
-4. The Conditions must use the third option. This is required to enable the [Lighthouse Offer to be created as detailed in Microsoft documentation](https://learn.microsoft.com/en-us/azure/lighthouse/how-to/deploy-policy-remediation#create-a-user-who-can-assign-roles-to-a-managed-identity-in-the-customer-tenant:~:text=To%20allow%20a,Administrator%20or%20Owner)
-![Iam role addignment conditions](./images/azure_role_assignment_conditions.png)
-5. Create the following role, which allows Snowplow to create various roles that are specific to components that make up your pipeline. The `customer_subscription_id` should be the subscription ID that Snowplow will deploy into
+4. Create the following role, which allows Snowplow to create various roles that are specific to components that make up your pipeline. The `customer_subscription_id` should be the subscription ID that Snowplow will deploy into
     ```json
     {
         "properties": {
@@ -72,8 +70,10 @@ Create a custom role and assign it the “Snowplow BDP Enterprise Deployment” 
         }
     }
     ```
-6. Within “Access Control (IAM)”, click “Add role assignment”
-7. Assign the `Snowplow-Deployment-Role-Creator-Role` to service principal “Snowplow BDP Enterprise Deployment”
+5. Within “Access Control (IAM)”, click “Add role assignment”
+6. Assign the `Snowplow-Deployment-Role-Creator-Role` to service principal “Snowplow BDP Enterprise Deployment”. The role can be found under the “Privileged administrator roles” tab. The Conditions tab should be selected and you must select the third option. This is required to enable the [Lighthouse Offer to be created as detailed in Microsoft documentation](https://learn.microsoft.com/en-us/azure/lighthouse/how-to/deploy-policy-remediation#create-a-user-who-can-assign-roles-to-a-managed-identity-in-the-customer-tenant:~:text=To%20allow%20a,Administrator%20or%20Owner)
+![IAM role assignment conditions](./images/azure_role_assignment_conditions.png)
+
 
 ### Final checklist
 

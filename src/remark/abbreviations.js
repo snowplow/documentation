@@ -6,6 +6,7 @@ const plugin = () => {
     ADLS: 'Azure Data Lake Storage',
     AWS: 'Amazon Web Services',
     BDP: 'Behavioral Data Platform',
+    CDI: 'Customer Data Infrastructure',
     CDP: 'Customer Data Platform',
     CLI: 'Command Line Interface',
     EC2: 'Amazon Elastic Compute Cloud',

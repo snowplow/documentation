@@ -80,7 +80,7 @@ The `snowplow__conversion_events` variable in our project takes a list of dictio
 
 Because the sessions table builds from our `_events_this_run` table, and both the `condition` and `value` fields will accept any valid sql that can go in a `case when...` and `select` block respectively, this means you can use any fields in a `contexts_` or `unstruct_` column in addition to the default `atomic.events` fields. However, it will not accept dbt code so you need to extract the relevant field yourself. You can see an example of this below.
 
-For Redshift and Postgres users currently you are limited to just the fields added by the IAB, UA, and YAUAA contexts without modifying the models yourself, however we plan to support adding arbitrary self-describing event and context fields to our base table in the future.
+For Redshift and Postgres we have added the variable `snowplow__entities_or_sdes` that you can use to bring in all the fields from any self describing events or entities. For more details on this check out the [Custom entities & Events section](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/modeling-entities/index.md#custom-entities--events).
 
 :::
 
@@ -155,6 +155,24 @@ Using our [Snowplow e-commerce tracking](/docs/collecting-data/collecting-from-o
     "value": "CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_TRANSACTION_1[0].revenue", 
     "default_value":0
     }
+```
+
+</TabItem>
+<TabItem value="redshift" label="Redshift">
+
+```yml
+  snowplow__entities_or_sdes: [
+              {'schema': 'com_snowplowanalytics_snowplow_ecommerce_transaction_1', 'prefix': 'trans_entity', 'alias': 'tr', 'single_entity': true},
+              {'schema': 'com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1', 'prefix': 'trans_event', 'alias': 'trev', 'single_entity': true}
+              ]
+
+      snowplow__conversion_events: [
+                  {
+          "name": "transact", 
+          "condition": "event_name = 'snowplow_ecommerce_action' and trans_event_type = 'transaction'",
+          "value": "trans_entity_revenue"
+          }
+      ]
 ```
 
 </TabItem>

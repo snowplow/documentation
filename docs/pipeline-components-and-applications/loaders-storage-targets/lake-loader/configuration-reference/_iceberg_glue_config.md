@@ -23,6 +23,14 @@ import Link from '@docusaurus/Link';
     <td>Required. The name of the table in the Glue database</td>
 </tr>
 <tr>
+    <td><code>output.good.icebergTableProperties.*</code></td>
+    <td>
+    Optional. A map of key/value strings corresponding to Iceberg's table properties.
+    These can be anything <Link to="https://iceberg.apache.org/docs/latest/configuration/">from the Iceberg table properties documentation</Link>.
+    The default properties include configuring Iceberg's column-level statistics for the important Snowplow timestamp columns: <code>load_tstamp</code>, <code>collector_tstamp</code>, <code>derived_tstamp</code>, <code>dvce_created_tstamp</code>.
+    </td>
+</tr>
+<tr>
     <td><code>output.good.catalog.options.*</code></td>
     <td>
     Optional. A map of key/value strings which are passed to the catalog configuration.

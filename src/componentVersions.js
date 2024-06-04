@@ -36,7 +36,7 @@ export const versions = {
   rdbLoader: '6.0.0',
   s3Loader: '2.2.8',
   s3Loader22x: '2.2.8',
-  lakeLoader: '0.3.0',
+  lakeLoader: '0.4.1',
   snowflakeStreamingLoader: '0.2.2',
 
   // Data Modelling

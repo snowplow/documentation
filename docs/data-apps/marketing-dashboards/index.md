@@ -17,6 +17,13 @@ The **User & Marketing Analytics** app contains all the visuals you need to perf
 - Measurement of user engagement
 - Deep dives into technology and user demographics
 
+View a short walkthrough video of the app here: 
+```mdx-code-block
+import ReactPlayer from 'react-player'
+<ReactPlayer playing controls url='https://player.vimeo.com/video/954459770?badge=0&autopause=0&player_id=0&app_id=58479' />
+<br/>
+```
+
 ## Requirements
 
 - [YAUAA enrichment](/docs/enriching-your-data/available-enrichments/yauaa-enrichment/index.md) enabled

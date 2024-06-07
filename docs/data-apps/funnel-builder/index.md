@@ -20,16 +20,23 @@ This data app is currently in Public Preview and features may changes without no
 
 ## Introduction
 
+
 Funnels are an essential tool for understanding user journeys on your app or website. They help to visualize how many users complete each event along a journey such as signing up or making a purchase, so you can understand which stages are leading to the most drop-off and make changes to improve conversion rates. 
 
-This data application provides an intuitive UI for building a funnel analysis and visualizing the results. You can specify any number of conditions and steps, and will receive the following outputs when you run the analysis (see screenshots below): 
+This data application provides an intuitive UI for building a funnel analysis and visualizing the results. Watch a short walkthrough video of the tool below: 
+
+```mdx-code-block
+import ReactPlayer from 'react-player'
+<ReactPlayer playing controls url='https://player.vimeo.com/video/954457532?badge=0&autopause=0&player_id=0&app_id=58479' />
+<br/>
+```
+
+It works on any table that Snowplow’s Data Modeling User has access to, including the atomic events table and derived tables. It comes with some pre-built funnels based on out-of-the-box Snowplow events such as `page_views` and `link_clicks`, and you can save your own custom funnels to share with teammates. You can specify any number of conditions and steps, and will receive the following outputs when you run the analysis (see screenshots below): 
 
 - User Counts by Funnel Step Chart
 - Conversion Rates Chart
 - Abandonment Rates Chart
 - Summary Statistics Table
-
-It works on any table that Snowplow’s Data Modeling User has access to, including the atomic events table and derived tables. It comes with some pre-built funnels based on out-of-the-box Snowplow events such as `page_views` and `link_clicks`, and you can save your own custom funnels to share with teammates.
 
 ![Screenshot of a funnel configuration with built funnel charts.](./images/ecommerce-full-page.png)
 

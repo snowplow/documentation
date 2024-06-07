@@ -10,7 +10,7 @@ To better understand why, consider a late arriving event for a session that star
 The only way to accurately do daily aggregates in our packages is to calculate these off the *derived tables*, i.e. the persistent tables in the package. This would be inefficient to scan the whole table every time, so we can be smart and use the _range of dates_ in the [events this run table](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md#events-this-run) to identify which dates we need to rescan, thus reducing the compute cost.
 
 ## A simple example
-Let's say we want to do a simple daily aggregates model built in the unified package - we want to keep a count of the number of sessions and the average engaged time per day. This table would be 1 row per day, and we would need to read from the `snowplow_unified_sessions` *derived* table for the reasons discussed above.
+Let's say we want to do a simple daily aggregates model built in the Unified package - we want to keep a count of the number of sessions and the average engaged time per day. This table would be 1 row per day, and we would need to read from the `snowplow_unified_sessions` *derived* table for the reasons discussed above.
 
 The skeleton of the model would be to make an incremental model, ensure we add the [optimized upsert](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/optimized-upserts/index.md), checking for new events, and selecting from the sessions model.
 

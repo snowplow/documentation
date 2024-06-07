@@ -68,10 +68,10 @@ In order to load this data again from `failedInserts` to BigQuery you can use 
 
 Repeater has several important behavior aspects:
 
-- If a pulled record is not a valid Snowplow event, it will result into a `loader_recovery_error` bad row.
+- If a pulled record is not a valid Snowplow event, it will result into a `loader_recovery_error` failed event.
 - If a pulled record is a valid event, Repeater will wait some time (15 minutes by default) after the `etl_tstamp` before attempting to re-insert it, in order to let Mutator do its job.
-- If the database responds with an error, the row will get transformed into a `loader_recovery_error` bad row.
-- All entities in the dead-letter bucket are valid Snowplow [bad rows](https://github.com/snowplow/snowplow-badrows).
+- If the database responds with an error, the row will get transformed into a `loader_recovery_error` failed event.
+- All entities in the dead-letter bucket are in the [bad rows format](https://github.com/snowplow/snowplow-badrows).
 
 ### Topics, subscriptions and message formats
 
@@ -286,7 +286,7 @@ We recommend constantly running Repeater on a small / cheap node or Docker conta
     --config=/configs/bigquery.hocon \\
     --resolver=/configs/resolver.json \\
     --bufferSize=20 \\ # size of the batch to send to the dead-letter bucket
-    --timeout=20 \\ # duration after which bad rows will be sunk into the dead-letter bucket  
+    --timeout=20 \\ # duration after which failed events will be sunk into the dead-letter bucket
     --backoffPeriod=900 \\ # seconds to wait before attempting an insert (calculated against etl_tstamp)
     --verbose # optional, for debugging only
 `}</CodeBlock>

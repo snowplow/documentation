@@ -81,7 +81,7 @@ There are several key concepts in Snowplow: events (self-describing, structured)
 **Please, use up-to-date terms:**
 * _Self-describing event_, not _unstructured event_
 * _Entities_, not _contexts_ (it’s ok-ish to refer to a set of entities as “context”, but only in a casual sense, as in “these provide some context to the event”)
-* _Failed events_ and not _bad rows_
+* _Failed events_ and not _bad rows_, unless specifically referring to the legacy bad row JSON format and associated tooling
 * If you are writing about schemas, pick “schema” or “data structure” and stick with it
 
 **Please, do not over-explain these in any of your writing.** Instead, just link to one of the existing concept pages:

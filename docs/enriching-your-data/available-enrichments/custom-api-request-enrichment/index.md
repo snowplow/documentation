@@ -137,7 +137,7 @@ To disable `ttl` so keys could be stored in cache until job is done `0` valu
 
 #### `ignoreOnError`
 
-When set to `true`, no bad row will be emitted if the API call fails and the enriched event will be emitted without the context added by this enrichment.
+When set to `true`, no failed event will be emitted if the API call fails and the enriched event will be emitted without the context added by this enrichment.
 
 ### Data sources
 

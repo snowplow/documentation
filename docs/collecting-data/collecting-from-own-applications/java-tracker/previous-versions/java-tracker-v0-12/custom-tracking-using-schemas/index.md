@@ -38,7 +38,7 @@ The Java tracker does not yet provide the ability to automatically assign entiti
 
 The Java tracker provides the `SelfDescribingJson` class for custom events and entities. There is no in-built distinction between schemas used for events and those used for entities: they can be used interchangably.
 
-Your schemas must be accessible to your pipeline, within an [Iglu server](/docs/pipeline-components-and-applications/iglu/index.md). Tracked events containing self-describing JSON are validated against their schemas during the enrichment phase of the pipeline. If the data don't match the schema, the events end up in the Bad Rows storage instead of the data warehouse.
+Your schemas must be accessible to your pipeline, within an [Iglu server](/docs/pipeline-components-and-applications/iglu/index.md). Tracked events containing self-describing JSON are validated against their schemas during the enrichment phase of the pipeline. If the data don't match the schema, the events end up as [failed events](/docs/understanding-your-pipeline/failed-events/index.md).
 
 A self-describing JSON needs two keys, `schema` and `data`. The `schema` key is the Iglu URI for the schema. The `data` value must match the properties described by the specified schema. It is usually provided as a map.
 

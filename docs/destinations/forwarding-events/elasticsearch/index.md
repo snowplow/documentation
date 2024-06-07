@@ -217,7 +217,7 @@ The sink is configured using a HOCON file, for which you can find examples [her
 | output.good.cluster.documentType | Optional. The Elasticsearch index type. Index types are deprecated in ES >=7.x Therefore, it shouldn't be set with ES >=7.x |
 | output.good.chunk.byteLimit | Optional. Bulk request to Elasticsearch will be splitted to chunks according given byte limit. Default value 1000000. |
 | output.good.chunk.recordLimit | Optional. Bulk request to Elasticsearch will be splitted to chunks according given record limit. Default value 500. |
-| output.bad.type | Required. Configure where to write bad rows. Can be "kinesis", "nsq", "stderr" or "none". |
+| output.bad.type | Required. Configure where to write failed events. Can be "kinesis", "nsq", "stderr" or "none". |
 | output.bad.streamName | Required. Stream name for events which are rejected by Elasticsearch. |
 | output.bad.region | Used when `output.bad.type` is kinesis. Optional if it can be resolved with [AWS region provider chain](https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/regions/providers/DefaultAwsRegionProviderChain.html). Region where the bad Kinesis stream is located. |
 | output.bad.customEndpoint | Used when `output.bad.type` is kinesis. Optional. Custom endpoint to override AWS Kinesis endpoints, this can be used to specify local endpoints when using localstack. |

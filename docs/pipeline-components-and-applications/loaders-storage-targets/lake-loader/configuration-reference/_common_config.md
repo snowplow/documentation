@@ -50,3 +50,25 @@ import Link from '@docusaurus/Link';
     <td><code>telemetry.userProvidedId</code></td>
     <td>Optional. See <Link to="/docs/getting-started-on-community-edition/telemetry/#how-can-i-help">here</Link> for more information.</td>
 </tr>
+<tr>
+    <td><code>inMemBatchBytes</code></td>
+    <td>Optional. Default value 25600000. Controls how many events are buffered in memory before saving the batch to local disk. The default value works well for most reasonably sized VMs.</td>
+</tr>
+<tr>
+    <td><code>cpuParallelismFactor</code></td>
+    <td>
+    Optional. Default value 0.75.
+    Controls how the app splits the workload into concurrent batches which can be run in parallel.
+    E.g. If there are 4 available processors, and cpuParallelismFraction = 0.75, then we process 3 batches concurrently.
+    The default value works well for most workloads.
+    </td>
+</tr>
+<tr>
+    <td><code>numEagerWindows</code></td>
+    <td>
+    Optional. Default value 1.
+    Controls how eagerly the loader starts processing the next timed window even when the previous timed window is still finalizing (committing into the lake).
+    By default, we start processing a timed windows if the previous 1 window is still finalizing, but we do not start processing a timed window if any more older windows are still finalizing.
+    The default value works well for most workloads.
+    </td>
+</tr>

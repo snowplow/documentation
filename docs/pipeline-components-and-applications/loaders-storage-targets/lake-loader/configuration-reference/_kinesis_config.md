@@ -27,6 +27,14 @@
     <td>Optional. Default value 1. The number of batches of events which are pre-fetched from kinesis. The default value is known to work well.</td>
 </tr>
 <tr>
+    <td><code>input.workerIdentifier</code></td>
+    <td>Optional. Defaults to the <code>HOSTNAME</code> environment variable. The name of this KCL worker used in the dynamodb lease table.</td>
+</tr>
+<tr>
+    <td><code>input.leaseDuration</code></td>
+    <td>Optional. Default value <code>10 seconds</code>. The duration of shard leases.  KCL workers must periodically refresh leases in the dynamodb table before this duration expires.</td>
+</tr>
+<tr>
     <td><code>output.bad.streamName</code></td>
     <td>Required. Name of the Kinesis stream that will receive failed events.</td>
 </tr>

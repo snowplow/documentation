@@ -33,6 +33,14 @@ It works on any table that Snowplow’s Data Modeling User has access to, includ
 
 ![Screenshot of a funnel configuration with built funnel charts.](./images/ecommerce-full-page.png)
 
+
+```mdx-code-block
+import ReactPlayer from 'react-player'
+import videoUrl from './images/funnel_builder_video.mp4'
+
+<ReactPlayer controls url={videoUrl} />
+<br/>
+```
 ### Requirements
 
 - Access to the table(s) you wish to run the tool on granted to the role used when setting up the data app

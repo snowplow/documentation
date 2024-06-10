@@ -35,11 +35,17 @@ Instance is not valid against its schema:
 
 ### Test
 
-To run a small-scale recovery test outputting both good and bad events into files, execute:
+To run a small-scale recovery test, outputting both good and failed events into files, execute:
 
 ```
 snowplow-event-recovery run --config $PWD/scenarios.json -o /tmp -i $PWD/input/ --resolver $PWD/resolver.json
 ```
+
+The input folder (`--input` or `-i`) contains a line-delimited files (by default `.txt` files are parsed, but the glob extension can be configured using `--glob` or `-g` flag) minimized json failed events as seen in
+[example](https://github.com/snowplow-incubator/snowplow-event-recovery/tree/master/examples).
+
+With output being saved into `/tmp` directory as a stringified payload objects
+into `good.txt` and json-serialized failed events into `bad.txt`.
 
 Which for successful recovery will print the progress and output summary:
 ```
@@ -50,7 +56,7 @@ Enriched event 2dfeb9b7-5a87-4214-8a97-a8b23176856b
 Total Lines: 156, Recovered: 142
 ```
 
-By default no enrichments are configured, but local-only (ones that do not depend on upstream resource storage) enrichments can be configured:
+By default no enrichments are configured, but local-only (ones that do not depend on upstream resource storage) enrichments can be enabled by setting `--enrichments` flag:
 
 ```
 snowplow-event-recovery run --config $PWD/scenarios.json -o /tmp -i $PWD/input/ --resolver $PWD/resolver.json --enrichments $PWD/enrichments

@@ -25,7 +25,7 @@ There are three ways of setting user permissions:
 
 #### User permission set
 
-<table><tbody><tr><td><strong>Console feature</strong></td><td><strong>Permissions</strong></td></tr><tr><td>User management</td><td>No access (in the UI)</td></tr><tr><td>Environments</td><td>View access</td></tr><tr><td>Data structures</td><td>Edit on developmentCreate</td></tr><tr><td>Data models</td><td>View access</td></tr><tr><td>API keys</td><td>View access</td></tr></tbody></table>
+<table><tbody><tr><td><strong>Console feature</strong></td><td><strong>Permissions</strong></td></tr><tr><td>User management</td><td>No access (in the UI)</td></tr><tr><td>Environments</td><td>View access</td></tr><tr><td>Data structures</td><td>Edit on development<br/>Create</td></tr><tr><td>Data models</td><td>View access</td></tr><tr><td>API keys</td><td>View access</td></tr></tbody></table>
 
 #### Admin permission set
 

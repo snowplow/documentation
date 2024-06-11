@@ -303,7 +303,7 @@
       "title": "Conversions Clause",
       "group": "Operation and Logic",
       "longDescription": "A string of sql to filter on certain conversion events.",
-      "packageDefault": "cv_value > 0"
+      "packageDefault": "cv_value > 0 and user_identifier is not null"
     },
     "snowplow__attribution_list": {
       "recommendFullRefresh": false,

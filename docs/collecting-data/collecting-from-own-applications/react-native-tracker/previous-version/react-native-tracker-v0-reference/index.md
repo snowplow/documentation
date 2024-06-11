@@ -38,7 +38,7 @@ tracker.trackScreenViewEvent({screenName: 'myScreenName'});
 In the previous 0.1.x releases, initializing the tracker was done differently. As an example describing the API change for a quick migration to v0.2.0:
 
 ```typescript
-/* Previous API (v0.1.x) 
+/* Previous API (v0.1.x)
 import Tracker from '@snowplow/react-native-tracker';                       // (a)
 
 const initPromise = Tracker.initialize({                                    // (b)
@@ -273,7 +273,7 @@ tracker.trackSelfDescribingEvent({
 **Required properties**:
 
 - `schema`: (string) – A valid Iglu schema path. This must point to the location of the custom event’s schema, of the format: `iglu:{vendor}/{name}/{format}/{version}`.
-- `data`: (object) – The custom data for your event. This data must conform to the schema specified in the `schema` argument, or the event will fail validation and land in bad rows.
+- `data`: (object) – The custom data for your event. This data must conform to the schema specified in the `schema` argument, or the event will fail validation and become a [failed event](/docs/understanding-your-pipeline/failed-events/index.md).
 
 To attach custom contexts, pass a second argument to the function, containing an array of self-describing JSON.
 

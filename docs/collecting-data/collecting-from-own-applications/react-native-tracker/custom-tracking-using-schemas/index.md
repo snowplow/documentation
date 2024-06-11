@@ -22,7 +22,7 @@ A Self Describing event is a [self-describing JSON](http://snowplowanalytics.com
 **Required properties**
 
 - `schema`: (string) – A valid Iglu schema path. This must point to the location of the custom event’s schema, of the format: `iglu:{vendor}/{name}/{format}/{version}`.
-- `data`: (object) – The custom data for your event. This data must conform to the schema specified in the `schema` argument, or the event will fail validation and land in bad rows.
+- `data`: (object) – The custom data for your event. This data must conform to the schema specified in the `schema` argument, or the event will fail validation and become a [failed event](/docs/understanding-your-pipeline/failed-events/index.md).
 
 To track a custom self-describing event, use the `trackSelfDescribingEvent` method of the tracker.
 

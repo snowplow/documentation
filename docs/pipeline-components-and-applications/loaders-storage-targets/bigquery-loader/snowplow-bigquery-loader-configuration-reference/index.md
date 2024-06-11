@@ -14,7 +14,7 @@ This is a complete list of the options that can be configured in the Snowplow Bi
 | `loader.input.subscription`          | Required. Enriched events subscription consumed by Loader and StreamLoader, eg enriched-sub. |
 | `loader.output.good.datasetId`       | Required. Specify the dataset to which the events table belongs, eg snowplow.  |
 | `loader.output.good.tableId`        | Required. The name of the events table, eg events.  |
-| `loader.output.bad.topic`            | Required. The name of the topic where bad rows will be written, eg bad-topic. |
+| `loader.output.bad.topic`            | Required. The name of the topic where failed events will be written, eg bad-topic. |
 | `loader.output.types.topic`          | Required. The name of the topic where observed types will be written, eg types-topic. |
 | `loader.output.failedInserts.topic`  | Required. The name of the topic where failed inserts will be written, eg failed-inserts-topic. |
 | `mutator.input.subscription`         | Required. A subscription on the loader.output.types.topic, eg types-sub.  |

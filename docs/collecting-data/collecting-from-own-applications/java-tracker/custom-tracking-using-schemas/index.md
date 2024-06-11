@@ -6,15 +6,15 @@ sidebar_position: 30
 
 Self-describing (self-referential) JSON schemas are at the core of Snowplow tracking. Read more about them [here](/docs/understanding-your-pipeline/schemas/index.md). They allow you to track completely customised data, and are also used internally throughout Snowplow pipelines.
 
-In all our trackers, self-describing JSON are used in two places. One is in the `SelfDescribing` event type that wraps custom self-describing JSONs for sending. The second use is to attach custom data to any tracked event. It's one of the most powerful Snowplow features. 
+In all our trackers, self-describing JSON are used in two places. One is in the `SelfDescribing` event type that wraps custom self-describing JSONs for sending. The second use is to attach custom data to any tracked event. It's one of the most powerful Snowplow features.
 
-When tracking user behavior, the event describes the specific activity they performed, e.g. a user added an item to an eCommerce cart. To understand the meaning of the event, and how it relates to your business, it's ideal to also track the relatively persistent environment in which the activity was performed. For example, is the user a repeat customer? Which item did they add, and how many are in stock? 
+When tracking user behavior, the event describes the specific activity they performed, e.g. a user added an item to an eCommerce cart. To understand the meaning of the event, and how it relates to your business, it's ideal to also track the relatively persistent environment in which the activity was performed. For example, is the user a repeat customer? Which item did they add, and how many are in stock?
 
 These environmental factors can be tracked as the event "context", using self-describing JSON. When self-describing JSON are tracked as part of an event, they are called "entities". All the entities of an event together form the context. Read more in this [thorough blog post](https://snowplowanalytics.com/blog/2020/03/25/what-are-snowplow-events-and-entities-and-what-makes-them-so-powerful/).
 
 ### Adding custom entities to any event
 
-Every `Event.Builder` in the Java tracker allows for a list of `SelfDescribingJson` objects to be added to the `Event`. It's fine to add multiple entities of the same type. There's no official limit to how many entities you can add to a single event, but consider if the payload size could become problematic if you are adding a large number. 
+Every `Event.Builder` in the Java tracker allows for a list of `SelfDescribingJson` objects to be added to the `Event`. It's fine to add multiple entities of the same type. There's no official limit to how many entities you can add to a single event, but consider if the payload size could become problematic if you are adding a large number.
 
 Context entities can be added to any event using the `customContext()` Builder method:
 ```java
@@ -36,11 +36,11 @@ The Java tracker does not yet provide the ability to automatically assign entiti
 
 The Java tracker provides the `SelfDescribingJson` class for custom events and entities. There is no in-built distinction between schemas used for events and those used for entities: they can be used interchangably.
 
-Your schemas must be accessible to your pipeline, within an [Iglu server](/docs/pipeline-components-and-applications/iglu/index.md). Tracked events containing self-describing JSON are validated against their schemas during the enrichment phase of the pipeline. If the data don't match the schema, the events end up in the Bad Rows storage instead of the data warehouse.
+Your schemas must be accessible to your pipeline, within an [Iglu server](/docs/pipeline-components-and-applications/iglu/index.md). Tracked events containing self-describing JSON are validated against their schemas during the enrichment phase of the pipeline. If the data don't match the schema, the events end up as [failed events](/docs/understanding-your-pipeline/failed-events/index.md).
 
 A self-describing JSON needs two keys, `schema` and `data`. The `schema` key is the Iglu URI for the schema. The `data` value must match the properties described by the specified schema. It is usually provided as a map.
 
-A simple initialisation looks like this:  
+A simple initialisation looks like this:
 ```java
 // This map will be used for the "data" key
 Map<String, String> eventData = new HashMap<>();

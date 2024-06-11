@@ -33,7 +33,7 @@ license {
 | `monitoring.metrics.stdout.prefix` | Optional. Default: `snowplow.enrich`. Prefix for the metrics appearing in the logs. |
 | `telemetry.disable` | Optional. Set to `true` to disable [telemetry](/docs/getting-started-on-community-edition/telemetry/index.md). |
 | `telemetry.userProvidedId` | Optional. See [here](/docs/getting-started-on-community-edition/telemetry/index.md#how-can-i-help) for more information. |
-| `featureFlags.acceptInvalid` | Optional. Default: `false`. Enrich *3.0.0* introduces the validation of the enriched events against atomic schema before emitting. If set to `false`, a bad row will be emitted instead of the enriched event if validation fails. If set to `true`, invalid enriched events will be emitted, as before. |
+| `featureFlags.acceptInvalid` | Optional. Default: `false`. Enrich *3.0.0* introduces the validation of the enriched events against atomic schema before emitting. If set to `false`, a failed event will be emitted instead of the enriched event if validation fails. If set to `true`, invalid enriched events will be emitted, as before. |
 | `featureFlags.legacyEnrichmentOrder` | Optional. Default: `false`. In early versions of `enrich-kinesis` and `enrich-pubsub` (>= *3.1.5*), the Javascript enrichment incorrectly ran before the currency, weather, and IP Lookups enrichments. Set this flag to true to keep the erroneous behavior of those previous versions. |
 | `validation.atomicFieldsLimits` (since *4.0.0*) | Optional. For the defaults, see [here](https://github.com/snowplow/enrich/blob/master/modules/common/src/main/resources/reference.conf). Configuration for custom maximum atomic fields (strings) length. It's a map-like structure with keys being atomic field names and values being their max allowed length. |
 
@@ -44,7 +44,7 @@ Instead of a message queue, it's also possible to read collector payloads from f
 | `input.type`| Required. Must be `FileSystem`. |
 | `input.dir`| Required. E.g. `/input/collectorPayloads/`. Directory containing collector payloads encoded with Thrift. |
 
-Likewise, it's possible to write enriched events, pii events and bad rows to files instead of PubSub or Kinesis.
+Likewise, it's possible to write enriched events, pii events and failed events to files instead of PubSub or Kinesis.
 
 To write enriched events to files:
 
@@ -54,12 +54,12 @@ To write enriched events to files:
 | `output.good.file` | Required. E.g. `/output/enriched`. File where enriched events will be written. |
 | `output.good.maxBytes` | Optional. E.g. `1048576`. Maximum size of a file in bytes. Triggers file rotation. |
 
-To write bad rows to files:
+To write failed events to files:
 
 | parameter | description |
 |-|-|
 | `output.bad.type` | Required. Must be `FileSystem`. |
-| `output.bad.file` | Required. E.g. `/output/badRows`. File where bad rows will be written. |
+| `output.bad.file` | Required. E.g. `/output/bad`. File where failed events will be written. |
 | `output.bad.maxBytes` | Optional. E.g. `1048576`. Maximum size of a file in bytes. Triggers file rotation. |
 
 To write pii events to files:
@@ -86,10 +86,10 @@ A minimal configuration file can be found on the [Github repo](https://github.co
 | `output.good.delayThreshold` | Optional. Default: `200 milliseconds`. Delay threshold to use for batching. After this amount of time has elapsed, before `maxBatchSize` and `maxBatchBytes` have been reached, messages from the buffer will be sent. |
 | `output.good.maxBatchSize` | Optional. Default: `1000` (PubSub maximum). Maximum number of messages sent within a batch. When the buffer reaches this number of messages they are sent. |
 | `output.good.maxBatchBytes` | Optional. Default: `8000000` (PubSub maximum is 10MB). Maximum number of bytes sent within a batch. When the buffer reaches this size messages are sent. |
-| `output.bad.topic` | Required. E.g. `projects/example-project/topics/badrows`. Name of the PubSub topic that will receive the bad rows. |
-| `output.bad.delayThreshold` | Same as `output.good.delayThreshold` for bad rows. |
-| `output.bad.maxBatchSize` | Same as `output.good.maxBatchSize` for bad rows. |
-| `output.bad.maxBatchBytes` | Same as `output.good.maxBatchBytes` for bad rows. |
+| `output.bad.topic` | Required. E.g. `projects/example-project/topics/bad`. Name of the PubSub topic that will receive the failed events. |
+| `output.bad.delayThreshold` | Same as `output.good.delayThreshold` for failed events. |
+| `output.bad.maxBatchSize` | Same as `output.good.maxBatchSize` for failed events. |
+| `output.bad.maxBatchBytes` | Same as `output.good.maxBatchBytes` for failed events. |
 | `output.pii.topic` | Optional. Example: `projects/test-project/topics/pii`. Should be used in conjunction with the PII pseudonymization enrichment. When configured, enables an extra output topic for writing a `pii_transformation` event. |
 | `output.pii.attributes` | Same as `output.good.attributes` for pii events. |
 | `output.pii.delayThreshold` | Same as `output.good.delayThreshold` for pii events. |
@@ -123,14 +123,14 @@ A minimal configuration file can be found on the [Github repo](https://github.co
 | `output.good.throttledBackoffPolicy.maxBackoff` (since *3.4.1*) | Optional. Default: `1 second`. Maximum backoff before retrying when writing fails in case of throughput exceeded. Writing is retried forever. |
 | `output.good.recordLimit` | Optional. Default: `500` (maximum allowed). Limits the number of events in a single PutRecords request. Several requests are made in parallel. |
 | `output.good.customEndpoint` | Optional. E.g. `http://localhost:4566`. To use a custom Kinesis endpoint. |
-| `output.bad.streamName` | Required. E.g. `bad`. Name of the Kinesis stream to write to the bad rows. |
-| `output.bad.region` | Same as `output.good.region` for bad rows. |
-| `output.bad.backoffPolicy.minBackoff` | Same as `output.good.backoffPolicy.minBackoff` for bad rows. |
-| `output.bad.backoffPolicy.maxBackoff` | Same as `output.good.backoffPolicy.maxBackoff` for bad rows. |
-| `output.bad.backoffPolicy.maxRetries` | Same as `output.good.backoffPolicy.maxRetries` for bad rows. |
-| `output.bad.throttledBackoffPolicy.minBackoff` (since *3.4.1*) | Same as `output.good.throttledBackoffPolicy.minBackoff` for bad rows. |
-| `output.bad.throttledBackoffPolicy.maxBackoff` (since *3.4.1*) | Same as `output.good.throttledBackoffPolicy.maxBackoff` for bad rows. |
-| `output.bad.recordLimit` | Same as `output.good.recordLimit` for bad rows. |
+| `output.bad.streamName` | Required. E.g. `bad`. Name of the Kinesis stream to write to the failed events. |
+| `output.bad.region` | Same as `output.good.region` for failed events. |
+| `output.bad.backoffPolicy.minBackoff` | Same as `output.good.backoffPolicy.minBackoff` for failed events. |
+| `output.bad.backoffPolicy.maxBackoff` | Same as `output.good.backoffPolicy.maxBackoff` for failed events. |
+| `output.bad.backoffPolicy.maxRetries` | Same as `output.good.backoffPolicy.maxRetries` for failed events. |
+| `output.bad.throttledBackoffPolicy.minBackoff` (since *3.4.1*) | Same as `output.good.throttledBackoffPolicy.minBackoff` for failed events. |
+| `output.bad.throttledBackoffPolicy.maxBackoff` (since *3.4.1*) | Same as `output.good.throttledBackoffPolicy.maxBackoff` for failed events. |
+| `output.bad.recordLimit` | Same as `output.good.recordLimit` for failed events. |
 | `output.bad.customEndpoint` | Same as `output.good.customEndpoint` for pii events. |
 | `output.pii.streamName` | Optional. E.g. `pii`. Should be used in conjunction with the PII pseudonymization enrichment. When configured, enables an extra output stream for writing a `pii_transformation` event. |
 | `output.pii.region` | Same as `output.good.region` for pii events. |
@@ -188,7 +188,7 @@ A minimal configuration file can be found on the [Github repo](https://github.co
 | `output.good.topic` | Required. Name of the NSQ topic that will receive the enriched events. |
 | `output.good.nsqdHost` | Required. The host name of nsqd application. |
 | `output.good.nsqdPort` | Required. The port number of nsqd application. |
-| `output.bad.topic` | Required. Name of the NSQ topic that will receive the bad rows. |
+| `output.bad.topic` | Required. Name of the NSQ topic that will receive the failed events. |
 | `output.bad.nsqdHost` | Required. The host name of nsqd application. |
 | `output.bad.nsqdPort` | Required. The port number of nsqd application. |
 | `output.pii.topic` | Optional. Name of the NSQ topic that will receive the pii events. |
@@ -199,7 +199,7 @@ A minimal configuration file can be found on the [Github repo](https://github.co
 
 Enriched events are expected to match [atomic](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/atomic/jsonschema/1-0-0) schema.
 However, until `3.0.0`, it was never checked that the enriched events emitted by enrich were valid.
-If an event is not valid against `atomic` schema, a bad row should be emitted instead of the enriched event.
+If an event is not valid against `atomic` schema, a [failed event](/docs/understanding-your-pipeline/failed-events/index.md) should be emitted instead of the enriched event.
 However, this is a breaking change, and we want to give some time to users to adapt, in case today they are working downstream with enriched events that are not valid against `atomic`.
 For this reason, this new validation was added as a feature that can be deactivated like that:
 
@@ -214,9 +214,9 @@ It will be possible to know if the new validation would have had an impact by 2 
 
 1. A new metric `invalid_enriched` has been introduced.
     It reports the number of enriched events that were not valid against `atomic` schema. As the other metrics, it can be seen on stdout and/or StatsD.
-2. Each time there is an enriched event invalid against `atomic` schema, a line will be logged with the bad row (add `-Dorg.slf4j.simpleLogger.log.InvalidEnriched=debug` to the `JAVA_OPTS` to see it).
+2. Each time there is an enriched event invalid against `atomic` schema, a line will be logged with the failed event (add `-Dorg.slf4j.simpleLogger.log.InvalidEnriched=debug` to the `JAVA_OPTS` to see it).
 
-If `acceptInvalid` is set to `false`, a bad row will be emitted instead of the enriched event in case it's not valid against `atomic` schema.
+If `acceptInvalid` is set to `false`, a failed event will be emitted instead of the enriched event in case it's not valid against `atomic` schema.
 
 When we'll know that all our customers don't have any invalid enriched events any more, we'll remove the feature flags and it will be impossible to emit invalid enriched events.
 

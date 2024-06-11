@@ -73,7 +73,6 @@ All lake loaders are micro-batching.
 | Lake | Format | Compatibility | Loader application | Status |
 | --- | --- | --- | --- | --- |
 | GCS | Delta   | Databricks         | [Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/index.md) | Early release |
-| GCS | Iceberg | BigLake / BigQuery | [Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/index.md) | Early release |
 | GCS | JSON    | BigQuery           | [GCS Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/index.md) | Only recommended for [failed events](/docs/understanding-your-pipeline/failed-events/index.md) |
 
   </TabItem>

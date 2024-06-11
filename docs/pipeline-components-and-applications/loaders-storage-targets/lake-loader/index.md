@@ -19,7 +19,7 @@ The Lake Loader is an application that loads Snowplow events to a cloud storage 
 
 The Lake Loader supports the three major Open Table Formats: [Delta](https://delta.io/), [Iceberg](https://iceberg.apache.org/) and [Hudi](https://hudi.apache.org/).
 
-For Iceberg tables, the loader supports [AWS Glue](https://docs.aws.amazon.com/glue/) and [GCP BigLake](https://cloud.google.com/bigquery/docs/iceberg-tables) as Iceberg catalogs.
+For Iceberg tables, the loader supports [AWS Glue](https://docs.aws.amazon.com/glue/) as catalog.
 
 :::
 

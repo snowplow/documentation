@@ -52,31 +52,9 @@ import Admonition from '@theme/Admonition';
     </table>
   </TabItem>
 
-  <TabItem value="iceberg-biglake" label="Iceberg / BigLake">
-    <Admonition type="note" title="Alternative Docker image">
-    To use the Lake Loader with BigLake support, pull the <code>snowplow/lake-loader-gcp:{`${versions.lakeLoader}`}-biglake</code> image from Docker Hub.
-    </Admonition>
-    <table>
-        <thead>
-            <tr>
-                <th>Parameter</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-          <IcebergBigLakeConfig/>
-        </tbody>
-    </table>
-  </TabItem>
-
   <TabItem value="hudi" label="Hudi">
     <Admonition type="note" title="Alternative Docker image">
-    To use the Lake Loader with Hudi support, pull the appropriate alternative image from Docker Hub:
-    <ul>
-        <li><code>snowplow/lake-loader-aws:{`${versions.lakeLoader}`}-hudi</code></li>
-        <li><code>snowplow/lake-loader-gcp:{`${versions.lakeLoader}`}-hudi</code></li>
-        <li><code>snowplow/lake-loader-azure:{`${versions.lakeLoader}`}-hudi</code></li>
-    </ul>
+    To use the Lake Loader with Hudi support, pull the appropriate alternative image from Docker Hub, e.g. <code>snowplow/lake-loader-aws:{`${versions.lakeLoader}`}-hudi</code>.
     </Admonition>
     <table>
         <thead>

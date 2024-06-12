@@ -80,7 +80,7 @@ The `snowplow__conversion_events` variable in our project takes a list of dictio
 
 Because the sessions table builds from our `_events_this_run` table, and both the `condition` and `value` fields will accept any valid sql that can go in a `case when...` and `select` block respectively, this means you can use any fields in a `contexts_` or `unstruct_` column in addition to the default `atomic.events` fields. However, it will not accept dbt code so you need to extract the relevant field yourself. You can see an example of this below.
 
-For Redshift and Postgres users currently you are limited to just the fields added by the IAB, UA, and YAUAA contexts without modifying the models yourself, however we plan to support adding arbitrary self-describing event and context fields to our base table in the future.
+For Redshift and Postgres we have added the variable `snowplow__entities_or_sdes` that you can use to bring in all the fields from any self describing events or entities. For more details on this check out the [Custom entities & Events section](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/modeling-entities/index.md#custom-entities--events).
 
 :::
 
@@ -89,12 +89,17 @@ For Redshift and Postgres users currently you are limited to just the fields add
 <details>
 <summary>All ids of page views on a particular url</summary>
 
-```json
-    {
-    "name": "contact_page_view", 
-    "condition": "event_name = 'page_view' and page_url like '%contact-us%",
-    "list_events": true 
-    }
+```yml title="dbt_project.yml"
+vars:
+  snowplow_unified:
+    snowplow__conversion_events:
+      [
+        {
+          "name": "contact_page_view", 
+          "condition": "event_name = 'page_view' and page_url like '%contact-us%",
+          "list_events": true 
+        }
+      ]
 ```
 
 </details>
@@ -105,11 +110,16 @@ For Redshift and Postgres users currently you are limited to just the fields add
 
 For some self-describing event with a name of `sign_up`, where we do not want to attribute a value:
 
-```json
-    {
-    "name": "transact", 
-    "condition": "event_name = 'sign_up'", 
-    }
+```yml title="dbt_project.yml"
+vars:
+  snowplow_unified:
+    snowplow__conversion_events:
+      [
+        {
+          "name": "transact", 
+          "condition": "event_name = 'sign_up'", 
+        }
+      ]
 ```
 
 </details>
@@ -124,37 +134,83 @@ Using our [Snowplow e-commerce tracking](/docs/collecting-data/collecting-from-o
 <Tabs groupId="warehouse" queryString>
 <TabItem value="snowflake" label="Snowflake" default>
 
-```json
-    {
-    "name": "transact", 
-    "condition": "UNSTRUCT_EVENT_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_SNOWPLOW_ECOMMERCE_ACTION_1:type::varchar = 'transaction'", 
-    "value": "CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_TRANSACTION_1[0]:revenue::decimal(22,2)", 
-    "default_value":0
-    }
+```yml title="dbt_project.yml"
+vars:
+  snowplow_unified:
+    snowplow__conversion_events:
+      [
+        {
+          "name": "transact", 
+          "condition": "UNSTRUCT_EVENT_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_SNOWPLOW_ECOMMERCE_ACTION_1:type::varchar = 'transaction'", 
+          "value": "CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_TRANSACTION_1[0]:revenue::decimal(22,2)", 
+          "default_value":0
+        }
+      ]
 ```
 
 </TabItem>
 <TabItem value="bigquery" label="BigQuery">
 
-```json
-    {
-    "name": "transact", 
-    "condition": "UNSTRUCT_EVENT_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_SNOWPLOW_ECOMMERCE_ACTION_1_0_0.type = 'transaction'",
-    "value": "CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_TRANSACTION_1_0_0[SAFE_OFFSET(0)].revenue",
-    "default_value":0
-    }
+```yml title="dbt_project.yml"
+vars:
+  snowplow_unified:
+    snowplow__conversion_events:
+      [
+        {
+          "name": "transact", 
+          "condition": "UNSTRUCT_EVENT_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_SNOWPLOW_ECOMMERCE_ACTION_1_0_0.type = 'transaction'",
+          "value": "CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_TRANSACTION_1_0_0[SAFE_OFFSET(0)].revenue",
+          "default_value":0
+        }
+      ]
 ```
 
 </TabItem>
 <TabItem value="databricks" label="Databricks">
 
-```json
-    {
-    "name": "transact", 
-    "condition": "UNSTRUCT_EVENT_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_SNOWPLOW_ECOMMERCE_ACTION_1.type = 'transaction'", 
-    "value": "CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_TRANSACTION_1[0].revenue", 
-    "default_value":0
-    }
+```yml title="dbt_project.yml"
+vars:
+  snowplow_unified:
+    snowplow__conversion_events:
+      [
+        {
+          "name": "transact", 
+          "condition": "UNSTRUCT_EVENT_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_SNOWPLOW_ECOMMERCE_ACTION_1.type = 'transaction'", 
+          "value": "CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_TRANSACTION_1[0].revenue", 
+          "default_value":0
+        }
+      ]
+```
+
+</TabItem>
+<TabItem value="redshift" label="Redshift">
+
+```yml title="dbt_project.yml"
+vars:
+  snowplow_unified:
+    snowplow__entities_or_sdes: 
+      [
+        {
+          'schema': 'com_snowplowanalytics_snowplow_ecommerce_transaction_1', 
+          'prefix': 'trans_entity', 
+          'alias': 'tr', 
+          'single_entity': true
+        },
+        {
+          'schema': 'com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1', 
+          'prefix': 'trans_event', 
+          'alias': 'trev', 
+          'single_entity': true
+        }
+      ]
+    snowplow__conversion_events: 
+      [
+        {
+          "name": "transact", 
+          "condition": "event_name = 'snowplow_ecommerce_action' and trans_event_type = 'transaction'", 
+          "value":"trans_entity_revenue"
+        }
+      ]
 ```
 
 </TabItem>

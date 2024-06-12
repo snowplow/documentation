@@ -19,9 +19,7 @@ function process(event) {
 }
 ```
 
-Starting with Enrich 4.1.0, it is possible to have multiple JavaScript enrichments. (Currently, the order in which they would run is not defined.)
-
-With versions prior to 4.1.0, you can only have _one_ JavaScript enrichment, and hence a single `process` function for your pipeline. However, you can split more complex logic into multiple helper functions and variables as you see fit, as long as you comply with the above interface.
+You can only have _one_ JavaScript enrichment, and hence a single `process` function for your pipeline. However, you can split more complex logic into multiple helper functions and variables as you see fit, as long as you comply with the above interface.
 
 :::tip JavaScript Language Features
 

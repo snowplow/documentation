@@ -67,7 +67,7 @@ Here is an example of a derived context attached by this enrichment for a page v
 
 ```json
 {
-  "schema":"iglu:com.snowplowanalytics.snowplow/yauaa_context/jsonschema/1-0-1",
+  "schema":"iglu:nl.basjes/yauaa_context/jsonschema/1-0-1",
     "data": {
         "deviceClass":"Phone",
         "deviceName":"Samsung SM-G960F",

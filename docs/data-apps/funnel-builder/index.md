@@ -31,8 +31,6 @@ This data application provides an intuitive UI for building a funnel analysis an
 
 It works on any table that Snowplow’s Data Modeling User has access to, including the atomic events table and derived tables. It comes with some pre-built funnels based on out-of-the-box Snowplow events such as `page_views` and `link_clicks`, and you can save your own custom funnels to share with teammates.
 
-![Screenshot of a funnel configuration with built funnel charts.](./images/ecommerce-full-page.png)
-
 
 ```mdx-code-block
 import ReactPlayer from 'react-player'

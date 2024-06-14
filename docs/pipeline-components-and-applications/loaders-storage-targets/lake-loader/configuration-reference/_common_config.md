@@ -52,7 +52,7 @@ import Link from '@docusaurus/Link';
 </tr>
 <tr>
     <td><code>inMemBatchBytes</code></td>
-    <td>Optional. Default value 25600000. Controls how many events are buffered in memory before saving the batch to local disk. The default value works well for most reasonably sized VMs.</td>
+    <td>Optional. Default value 50000000. Controls how many events are buffered in memory before saving the batch to local disk. The default value works well for reasonably sized VMs. For smaller VMs (e.g. less than 2 cpu core, 8 GG memory) consider decreasing this value.</td>
 </tr>
 <tr>
     <td><code>cpuParallelismFactor</code></td>

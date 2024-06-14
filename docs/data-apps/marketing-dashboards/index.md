@@ -21,7 +21,7 @@ The **User & Marketing Analytics** app contains all the visuals you need to perf
 import ReactPlayer from 'react-player'
 import videoUrl from './images/umd_video.mp4'
 
-<ReactPlayer controls url={videoUrl} />
+<ReactPlayer controls url={videoUrl} width='100%' height='100%'/>
 <br/>
 ```
 

@@ -36,7 +36,7 @@ It works on any table that Snowplow’s Data Modeling User has access to, includ
 import ReactPlayer from 'react-player'
 import videoUrl from './images/funnel_builder_video.mp4'
 
-<ReactPlayer controls url={videoUrl} />
+<ReactPlayer controls url={videoUrl} width='100%' height='100%' />
 <br/>
 ```
 ### Requirements

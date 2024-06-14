@@ -50,7 +50,7 @@ collector {
 | `collector.cookieBounce.fallbackNetworkUserId` | Optional. Default: `00000000-0000-4000-A000-000000000000`. Network user id to use when third-party cookies are blocked. |
 | `collector.cookieBounce.forwardedProtocolHeader` | Optional. E.g. `X-Forwarded-Proto`. The header containing the originating protocol for use in the bounce redirect location. Use this if behind a load balancer that performs SSL termination. |
 | `collector.enableDefaultRedirect` | Optional. Default: `false`. When enabled, the collector's `/r` endpoint returns a `302` status code with a redirect back to a url specified with the `?u=` query parameter. |
-| `collector.redirectDomains` (since *2.5.0*) | Optional. Default: empty. Domains which are valid for collector redirects. If empty then redirects are allowed to any domain. |
+| `collector.redirectDomains` (since *2.5.0*) | Optional. Default: empty. Domains which are valid for collector redirects. If empty then redirects are allowed to any domain. Must be an exact match. |
 | `collector.redirectMacro.enabled` | Optional. Default: `false`. When enabled, the redirect url passed via the `u` query parameter is scanned for a `placeholder` token. All occurrences of the placeholder are substituted with the cookie's network user id. |
 | `collector.redirectMacro.placeholder` | Optional. Default: `${SP_NUID}`. |
 | `collector.rootResponse.enabled` | Optional. Default: `false`. Enable custom response handling for the root `"/"` path. |

@@ -27,7 +27,7 @@
     <td>Required. Name of the Snowflake schema containing the events table</td>
 </tr>
 <tr>
-    <td><code>output.good.schema</code></td>
+    <td><code>output.good.table</code></td>
     <td>Optional. Default value `events`. Name to use for the events table</td>
 </tr>
 <tr>

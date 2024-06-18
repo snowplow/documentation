@@ -12,7 +12,7 @@ In the following short video a complete example configuration of the Snowplow GT
 import ReactPlayer from 'react-player'
 import videoUrl from './images/http_request_tag_example_configuration.mp4'
 
-<ReactPlayer controls url={videoUrl} />
+<ReactPlayer controls url={videoUrl} width='100%' height='100%'/>
 <br/>
 ```
 

@@ -8,7 +8,7 @@ sidebar_custom_props:
     - bdp
 ---
 
-## Creating Data Product based on Templates using Console
+## Creating a Data Product based on Templates using Console
 
 To create a new data product based on a pre-defined template, navigate to the "Data products" section from the navigation bar and click the "Create data product" or "Templates" buttons.
 

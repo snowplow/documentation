@@ -14,7 +14,7 @@ import SettingsImage from './images/settings.png';
 
 :::caution
 
-This data app is currently in Public Preview and features may changes without notice. 
+This data app is currently in Public Preview and features may change without notice. 
 
 :::
 

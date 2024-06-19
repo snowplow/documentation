@@ -14,6 +14,17 @@ import LakeLoaderDiagram from '@site/docs/pipeline-components-and-applications/l
 <>
 {props.warehouse === 'Synapse Analytics' ?
     (<LakeLoaderDiagram {...props} stream="Kafka" bucket="ADLS" cloud="Azure"/>)
+: props.warehouse === 'Databricks' ?
+    (
+    <Tabs groupId="cloud" queryString lazy>
+      <TabItem value="gcp" label="GCP">
+        <LakeLoaderDiagram {...props} stream="Pub/Sub" bucket="GCS" cloud="GCP"/>
+      </TabItem>
+      <TabItem value="azure" label="Azure">
+        <LakeLoaderDiagram {...props} stream="Kafka" bucket="ADLS" cloud="Azure"/>
+      </TabItem>
+    </Tabs>
+    )
 : (
     <Tabs groupId="cloud" queryString lazy>
       <TabItem value="aws" label="AWS">

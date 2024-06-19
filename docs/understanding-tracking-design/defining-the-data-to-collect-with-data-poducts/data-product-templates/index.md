@@ -29,6 +29,7 @@ Included event specifications:
 ## E-commerce Web
 
 This Data Product template contains all the basic e-commerce interactions that help you analyze customer behavior, identify potential growth opportunities and improve your sales performance.
+Tracked using the [Snowplow Ecommerce plugin](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/).
 
 Included event specifications:
 
@@ -46,7 +47,8 @@ Included event specifications:
 
 ## Media Web
 
-This Data Product template contains a full set of media tracking interactions to measure video or audio data tracked using the [Snowplow Media plugin](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/snowplow/).
+This Data Product template contains a full set of media tracking interactions to measure video or audio data.
+Tracked using the [Snowplow Media plugin](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/snowplow/).
 
 Included event specifications:
 

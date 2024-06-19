@@ -18,7 +18,7 @@ Below is a list of the current templates:
 
 This Data Product template contains all the tracking of Standard Events. It is recommended to be used in conjunction with JavaScript Trackers (Web and Node.js).
 
-Note: The event volume counts are calculated differently for this Data Product. They are counts of any page_ping/page_view events sent for App Id's of this data product.
+Note: The event volume counts are calculated differently for this Data Product. They are counts of any page_ping/page_view events sent for the app ID's of this data product.
 
 Included event specifications:
 

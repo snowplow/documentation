@@ -3,6 +3,13 @@ title: "Media Player"
 sidebar_position: 20
 ---
 
+### Upgrading to 0.8.0
+**We recommend a [full refresh run](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/full-or-partial-refreshes/#complete-refresh-of-snowplow-package) if you have been using any previous versions.** There might be inconsistencies in the calculation of impressions and play rate in the media stats table without doing a full refresh.
+
+**Breaking changes:**
+
+-  The calculation of impressions in the stats table changed to use distinct plays instead of page views. This allows for multiple videos on the same page to be counted as separate impressions.
+
 ### Upgrading to 0.7.0
 **This version requires a [full refresh run](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/full-or-partial-refreshes/#complete-refresh-of-snowplow-package) if you have been using any previous versions.** You will not be able to upgrade and have the package work without doing a full refresh.
 

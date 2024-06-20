@@ -14,7 +14,11 @@ A few extra benefits:
 - Snowtype generated functions are available in `window.__snowtype` for all tags to use.
 - Fully typed code documentation using JSDoc.
 
-## Getting Started
+## Getting Started without a code repository
+
+<details>
+<summary>Already using Snowtype?</summary>
+
 To generate code for usage in Google Tag Manager, you should use the option `Google Tag Manager` as the tracker option in your [init](../commands/index.md#snowtype-init) flow or replace your `tracker` and `language` attributes with the following values:
 
 ```json
@@ -24,6 +28,36 @@ To generate code for usage in Google Tag Manager, you should use the option `Goo
     "language": "javascript-gtm"
 }
 ```
+</details>
+
+What we are going to showcase here is how you can set up a separate project that uses Snowtype to generate code for your Google Tag Manager tracking needs. _You can also use version control to better understand any changes you make across time._
+
+The only requirement is to first have [Node.js](https://nodejs.org/en/download/package-manager) installed on your computer. After that, open your terminal and run the following commands:
+```bash
+# Navigate to a directory that you wish to create your project in.
+cd ./directory/to/setup/the/project
+# Create a folder for the project. Here you can replace 
+# 'container-id' with the GTM container the code will be used in.
+mkdir snowtype-gtm-container-id
+# Change directory to the newly created folder.
+cd snowtype-gtm-container-id
+# This will create a few needed files for the project.
+npm init -y
+# This will install the latest version of Snowtype.
+npm install @snowplow/snowtype@latest
+# This will start the Snowtype init flow, 
+# in which you should select 'Google Tag Manager' when 
+# prompted to select a tracker.
+npx @snowplow/snowtype init
+```
+
+After you have completed the `init` flow and have added your desired configuration, you can go ahead and generate the code you need to use:
+
+```bash
+npx @snowplow/snowtype generate
+```
+
+After that you can find the code in the specified `outpath` attribute of your configuration file.
 
 ## Using in Google Tag Manager
 

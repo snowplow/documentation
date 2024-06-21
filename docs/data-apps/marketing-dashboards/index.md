@@ -20,7 +20,7 @@ The **User & Marketing Analytics** app contains all the visuals you need to perf
 ```mdx-code-block
 import ReactPlayer from 'react-player'
 
-<ReactPlayer controls url='https://player.vimeo.com/video/954457532?h=5699f90919&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479' width='100%' height='100%'/>
+<ReactPlayer controls url='https://player.vimeo.com/video/954457532?h=5699f90919&amp;badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479' width='100%'/>
 <br/>
 ```
 

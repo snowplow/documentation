@@ -328,7 +328,7 @@ export function JsonSchemaGenerator({ output, children, schema }) {
 
 ## 2. Enabling conversions in the Conversions Module
 
-If you need a a conversions source table for your downstream model (e.g. for the snowplow-attribution package), you can enable the optional Conversions module by setting the `snowplow__enable_conversions` variable to `true` to model that for you. You will also need to make sure you define your conversion events using the `snowplow__conversion_events` variable in case you have not already done so for the sessions table.
+If you need a conversions source table for your downstream model (e.g. for the snowplow-attribution package), you can enable the optional Conversions module by setting the `snowplow__enable_conversions` variable to `true` to model that for you. You will also need to make sure you define your conversion events using the `snowplow__conversion_events` variable in case you have not already done so for the sessions table.
 
 This would produce an incremental conversions table where you will see the most important fields related to your conversion events based on your definitions. If you defined multiple conversion types, you will see them all in one table.
 
@@ -337,5 +337,11 @@ This would produce an incremental conversions table where you will see the most 
 | event_1 | session_1 | f000170187170673177  | user_1| 50.00      | 2023-06-08 20:18:32.000 | 2023-06-08 20:18:32.000 | transactions |
 | event_2   | session_2 | f0009028775170427694 |user_2 | 20.42      | 2023-06-11 15:33:03.000 | 2023-06-11 15:33:03.000 | transactions |
 | event_3   | session_3| f0008284662789123943 | user_3| 200.00     | 2023-07-07 13:05:55.000 | 2023-07-07 13:05:55.000 | transactions |
+
+:::note
+
+On Databricks targets, this table should also have a `cv_tstamp_date` column; this is used as the partition key for the table and should be the `DATE()` of the `cv_tstamp` value.
+
+:::
 
 You can also apply user-stitching to your conversions table by setting the `snowplow__conversion_stitching` variable to `true`. In this case a new field called `stitched_user_id` will be added to the table. For more details please refer to our guide on [Identity Stitching](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/index.md).

@@ -924,6 +924,17 @@
       "group": "Operation and Logic",
       "longDescription": "Use the refr fields when the mkt fields are null for the definition of default channel group. This is a common case when for example a landing page has a redirect.",
       "packageDefault": "false"
+    },
+    "snowplow__enable_initial_checks": {
+      "recommendFullRefresh": false,
+      "order": 134,
+      "consoleGroup": "advanced",
+      "type": "boolean",
+      "description": "Use this field to enable initial checks when changing the package configuration to ensure quick fails if the configuration is incorrect",
+      "title": "Enable Initial Checks",
+      "group": "Operation and Logic",
+      "longDescription": "Use this field to test the existance of all the seed models in the dwh and the existence of contexts that are needed based on your configuration. This is useful when changing the package configuration to ensure quick fails if the configuration is incorrect.",
+      "packageDefault": "false"
     }
   }
 }

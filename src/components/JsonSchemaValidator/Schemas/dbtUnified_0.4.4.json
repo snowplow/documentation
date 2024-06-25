@@ -935,6 +935,18 @@
       "group": "Operation and Logic",
       "longDescription": "Use this field to test the existance of all the seed models in the dwh and the existence of contexts that are needed based on your configuration. This is useful when changing the package configuration to ensure quick fails if the configuration is incorrect.",
       "packageDefault": "false"
+    },
+    "snowplow__snowflake_lakeloader": {
+      "recommendFullRefresh": true,
+      "order": 134,
+      "consoleGroup": "required",
+      "type": "boolean",
+      "description": "Enable running the models on an iceberg table using lakeloader data",
+      "title": "(Snowflake) Using lakeloader?",
+      "group": "Warehouse Specific",
+      "longDescription": "To use the models on an iceberg events table created via the lakeloader on Snowflake, this will need to be enabled due to different table structures.",
+      "packageDefault": "false",
+      "warehouse": "Snowflake"
     }
   }
 }

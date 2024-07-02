@@ -26,12 +26,21 @@ import DocCardList from '@theme/DocCardList';
 
 ## Accessing the Applications
 
-You can find the Data Applications in the `Applications` tab in the left sidebar of your Snowplow Console. If the status is not `Live`, you can click on the tile and request access. A Snowplow Customer Success Manager will then get in contact with you to discuss the Snowplow Digital Analytics package.
+You can find the Data Applications in the `Applications` tab in the left sidebar of your Snowplow Console. If you have purchased a package with data applications available you can [install the application](#installing-applications) or you can click on the tile and request access. A Snowplow Customer Success Manager will then get in contact with you to discuss.
 
 Once the application is installed, clicking on the tile will launch the application in a separate browser tab. By default, anyone in your Console organization will be able to access data applications.
 
 If you wish to invite others to use data applications but not have access to the rest of Console, you can [create a new user](/docs/using-the-snowplow-console/managing-users/adding-removing/index.md) and add a user with the `Data applications user` role. That user will then only see the Data Applications tab within Console. This permissions can be managed in the [usual way](/docs/using-the-snowplow-console/managing-users/managing-permissions/index.md).
 
+## Installing applications
+
+Once you have purchased an application you are able to install it. Click the tile to begin installing the application and follow the steps. 
+
+<img src={require("./images/install-app-tile.png").default} alt="Image of application tile showing start install process" />
+
+Depending on the requirements of the application you may need to enable data models and enrichments in order to use it. These requirements are highlighted within the documentation pages for each data application and will also be shown to you during the install process. 
+
+<img src={require("./images/sample-app-install.png").default} alt="Image of application install process" />
 
 ## General Usage
 ### Is the app running?

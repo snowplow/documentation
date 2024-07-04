@@ -21,7 +21,7 @@ There are three ways of setting user permissions:
 
 - Admin (pre-defined role)
 - User (pre-defined role)
-- Custom (custom permissions role) - **custom roles are only available on our Summit tier**
+- Custom (custom permissions role) - **custom roles are only available to customers with access to the fine grained user permissions feature**
 
 #### User permission set
 

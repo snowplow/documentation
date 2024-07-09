@@ -18,7 +18,7 @@ As an initial overview, in your snowplow-pipeline repository, your data models r
 ```text
 .
 ├── datamodeling
-|   ├── datamodel_name
+|   ├── datamodel-name
 |       └── dbt
 |           ├── analyses
 |           ├── logs

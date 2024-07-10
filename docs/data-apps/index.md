@@ -55,7 +55,7 @@ To install a data application you will need to create a connection. This will be
 
 ![Image of application install process](images/add-connection.png)
 
-Once you have selected a destination, provided the credentials and run any sql scripts we will then test the connection and once tested successfully will be available for the application to use.
+Once you have selected a destination, provided the credentials and run the suggested SQL script, BDP will test the connection. Upon a successful test, the application will be available to use.
 
 ## General Usage
 ### Is the app running?

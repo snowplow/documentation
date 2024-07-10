@@ -26,7 +26,10 @@ import DocCardList from '@theme/DocCardList';
 
 ## Accessing the Applications
 
-You can find the Data Applications in the `Applications` tab in the left sidebar of your Snowplow Console. If you have purchased a package with data applications available you can [install the application](#installing-applications) or you can click on the tile and request access. A Snowplow Customer Success Manager will then get in contact with you to discuss.
+You can find the Data Applications in the `Applications` tab in the left sidebar of your Snowplow Console. An application can be in one of three states:
+* _By request_ — If you have not yet purchased a package that includes the application, you can click on “Learn more” and register your interest. A Snowplow Customer Success Manager will then get in contact with you to discuss getting access to the application.
+* _Available_ — The application is ready to be set up. See the [installation instructions](#installing-applications) below.
+* _Live_ — The application is ready to use.
 
 Once the application is installed, clicking on the tile will launch the application in a separate browser tab. By default, anyone in your Console organization will be able to access data applications.
 

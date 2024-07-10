@@ -55,7 +55,11 @@ If you are running the necessary data models yourself outside of BDP, then you w
 
 ## Application connections
 
-To install a data application you will need to create a connection. This will be the location where your data model output or atomic table resides. Connections can be created during the application install process and involves securely sending credentials for the data app to use to fetch data.
+To install a data application, you will need to create a connection to where your data model output or atomic table resides. You can do this as part of the installation process. Creating a connection involves securely setting up credentials for the data app to use to fetch the data.
+
+:::tip
+You might have already set up a warehouse connection for loading and/or modeling the data. Data applications, however, require a different connection, as you will often want them to run under a different user/role and with different permissions.
+:::
 
 ![Image of application install process](images/add-connection.png)
 

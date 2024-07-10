@@ -41,9 +41,13 @@ Once you have purchased an application you are able to install it. Click the til
 
 ![Image of application tile showing start install process](images/install-app-tile.png)
 
-Depending on the requirements of the application you may need to enable data models and enrichments in order to use it. These requirements are highlighted within the documentation pages for each data application and will also be shown to you during the install process. 
+During installation you will need to provide a connection to the warehouse you would like the application to use. It will also highlight any pipeline and data model dependencies that are required.
 
 ![Image of application install process](images/sample-app-install.png)
+
+## Dependencies on data models
+
+Generally applications will depend on data models. If there are dependencies then the installation flow will highlight which models are required and what models you currently have running through console. It will also highlight any properties that need to be enabled on these data models. If you are running these models yourself outside of console then you will need to manually check the requirements for each application. These requirements are highlighted within the documentation pages for each application.
 
 ## General Usage
 ### Is the app running?

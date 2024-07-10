@@ -288,11 +288,21 @@ trackWebPage<Product | WebPage>(t, {
 
 </Tabs>
 
+### Data Products
+
+To generate code for the whole set of Event Specifications of a Data Product, either manually or through the `snowtype patch` command, you will need the ID of the Data Product. You can do this either by clicking on the `Implement tracking` button on the Data Products main page to get the command directly:
+
+![data product track](images/dp-track.png)
+
+Or retrieve the ID from the URL bar and then add it on the `dataProductIds` array:
+
+![data product id](images/dp-id.png)
+
 ### Event Specifications
 
-To add an Event Specification to the code generation, either manually or through the `snowtype patch` command, you would need the ID of the event specification. You can find the Event Specification ID in the main page of the event specification as shown below:
+To add an Event Specification to the code generation, either manually or through the `snowtype patch` command, you would need the ID of the Event Specification. You can find the Event Specification ID in the main page of the Event Specification as shown below:
 
-![event specification id](images/ts-id.png)
+![event specification id](images/es-id.png)
 
 Then you should add this ID to your configuration file `eventSpecificationIds` array.
 

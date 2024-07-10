@@ -45,7 +45,7 @@ During installation you will need to [provide a connection](#application-connect
 
 ![Image of application install process](images/sample-app-install.png)
 
-## Dependencies on data models
+### Dependencies on data models
 
 Generally, applications will depend on data models. If there are dependencies, then the installation flow will highlight which models are required and what models you currently have [running via BDP](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/standard-models/index.md). It will also highlight any properties that you need to enable or configure for these data models.
 

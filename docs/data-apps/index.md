@@ -39,11 +39,11 @@ If you wish to invite others to use data applications but not have access to the
 
 Once you have purchased an application you are able to install it. Click the tile to begin installing the application and follow the steps. 
 
-<img src={require("./images/install-app-tile.png").default} alt="Image of application tile showing start install process" />
+![Image of application tile showing start install process](images/install-app-tile.png)
 
 Depending on the requirements of the application you may need to enable data models and enrichments in order to use it. These requirements are highlighted within the documentation pages for each data application and will also be shown to you during the install process. 
 
-<img src={require("./images/sample-app-install.png").default} alt="Image of application install process" />
+![Image of application install process](images/sample-app-install.png)
 
 ## General Usage
 ### Is the app running?

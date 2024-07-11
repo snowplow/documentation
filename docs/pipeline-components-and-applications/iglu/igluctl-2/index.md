@@ -10,6 +10,8 @@ import CodeBlock from '@theme/CodeBlock';
 
 Iglu is a schema repository for JSON Schema. A schema repository (sometimes called a registry) is like npm or Maven or git but holds data schemas instead of software or code. Iglu is used extensively in Snowplow.
 
+<p> This document is for version {versions.igluctl} </p>
+
 ## Igluctl
 
 Iglu provides a CLI application, called igluctl which allows you to perform most common tasks on Iglu registry. So far, the overall structure of igluctl commands looks like the following:

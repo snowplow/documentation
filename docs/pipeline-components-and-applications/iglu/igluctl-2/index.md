@@ -10,6 +10,8 @@ import CodeBlock from '@theme/CodeBlock';
 
 Iglu is a schema repository for JSON Schema. A schema repository (sometimes called a registry) is like npm or Maven or git but holds data schemas instead of software or code. Iglu is used extensively in Snowplow.
 
+<p> This document is for version {versions.igluctl}. </p>
+
 ## Igluctl
 
 Iglu provides a CLI application, called igluctl which allows you to perform most common tasks on Iglu registry. So far, the overall structure of igluctl commands looks like the following:
@@ -19,13 +21,14 @@ Iglu provides a CLI application, called igluctl which allows you to perform most
     - `generate` - verify that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for Redshift and Postgres warehouses. Generate DDLs and migrations from set of JSON Schemas. If the schema is not evolved correctly and backward incompatible data is sent within transformer's aggregation window, loading would fail for all events.
     - `push` - push set of JSON Schemas from static registry to full-featured (Scala Registry for example) one
     - `pull` - pull set of JSON Schemas from registry to local folder
-    - `verify-parquet` - verify that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for parquet transformation (for loading into Databricks). It reports the breaking schema versions.
-    - `verify-redshift` - verify that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for loading into Redshift. It reports the major schema versions within which schema evolution rules were broken.
     - `deploy` - run entire schema workflow using a config file. This could be used to chain multiple commands, i.e. `lint` followed by `push` and `s3cp`.
     - `s3cp` - copy JSONPaths or schemas to S3 bucket
 - `server` - work with an Iglu server
     - `keygen` - generate read and write API keys on Iglu Server
 - `table-check` - will check a given Redshift or Postgres tables against iglu server.
+- `verify` (since 0.13.0) - work with schemas to check their evolution
+    - `redshift` - verify that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for loading into Redshift. It reports the major schema versions within which schema evolution rules were broken.
+    - `parquet` - verify that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for parquet transformation (for loading into Databricks). It reports the breaking schema versions.
 
 ## Downloading and running Igluctl 
 
@@ -269,55 +272,6 @@ Example:
 }
 ```
 
-## static verify-parquet
-
-`igluctl static verify-parquet` verifies that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for parquet transformation (for loading into Databricks). It reports the breaking schema versions.
-
-It accepts one required arguments:
-
-- `input` - path to your schema files.
-
-Example command:
-
-```bash
-$ ./igluctl static verify-parquet /path/to/static/registry
-```
-
-Example output:
-
-```
-Breaking change introduced by 'com.acme/product/jsonschema/1-0-2'. Changes: Incompatible type change Long to Double at /item/price
-Breaking change introduced by 'com.acme/user/jsonschema/1-0-1'. Changes: Incompatible type change Long to Integer at /id
-Breaking change introduced by 'com.acme/item/jsonschema/1-1-0'. Changes: Incompatible type change String to Json at /metadata
-```
-
-## static verify-redshift
-
-`igluctl static verify-redshift` verifies that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for loading into Redshift. It reports the major schema versions within which schema evolution rules were broken.
-
-:::note
-This command being under `static` is a misnomer and will be fixed in the next version.
-:::
-
-It accepts two required arguments:
-
-- `server` - Iglu Server URL.
-- `apikey` - Iglu Server Read ApiKey
-
-Example command:
-
-```bash
-$ ./igluctl static verify-redshift --server iglu.acme.com --apikey f81d4fae-7dec-11d0-a765-00a0c91e6bf6
-```
-
-Example output:
-
-```
-iglu:com.acme/product/jsonschema/1-*-*
-iglu:com.acme/user/jsonschema/1-*-*
-iglu:com.acme/item/jsonschema/2-*-*
-```
-
 ## server keygen
 
 `igluctl server keygen` generates read and write API keys on Iglu Server.
@@ -376,4 +330,69 @@ or
 
 ```bash
 $ ./igluctl table-check --server <uri> ...connection params
+```
+
+## verify parquet
+
+`igluctl verify parquet` verifies that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for parquet transformation (for loading into Databricks). It reports the breaking schema versions.
+
+It accepts one required arguments:
+
+- `input` - path to your schema files.
+
+Example command:
+
+```bash
+$ ./igluctl verify parquet /path/to/static/registry
+```
+
+Example output:
+
+```
+Breaking change introduced by 'com.acme/product/jsonschema/1-0-2'. Changes: Incompatible type change Long to Double at /item/price
+Breaking change introduced by 'com.acme/user/jsonschema/1-0-1'. Changes: Incompatible type change Long to Integer at /id
+Breaking change introduced by 'com.acme/item/jsonschema/1-1-0'. Changes: Incompatible type change String to Json at /metadata
+```
+
+
+## verify redshift
+
+`igluctl verify redshift` verifies that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for loading into Redshift. It reports the major schema versions within which schema evolution rules were broken.
+
+It accepts two required and one optional arguments:
+
+- `server` - Iglu Server URL.
+- `apikey` - Iglu Server Read ApiKey
+- `--verbose/-v` - emit detailed report or not (disabled by default)
+
+Example command:
+
+```bash
+$ ./igluctl verify redshift --server iglu.acme.com --apikey f81d4fae-7dec-11d0-a765-00a0c91e6bf6
+```
+
+Example output:
+
+```
+iglu:com.snowplowanalytics.iglu/resolver-config/jsonschema/1-*-*
+iglu:com.snowplowanalytics.snowplow/event_fingerprint_config/jsonschema/1-*-*
+iglu:com.snowplowanalytics.snowplow.badrows/loader_runtime_error/jsonschema/1-*-*
+```
+
+Example command with verbose output:
+
+```bash
+$ ./igluctl verify redshift --server iglu.acme.com --apikey f81d4fae-7dec-11d0-a765-00a0c91e6bf6 --verbose
+```
+
+Example output:
+
+```
+iglu:com.snowplowanalytics.iglu/resolver-config/jsonschema/1-*-*:
+  iglu:com.snowplowanalytics.iglu/resolver-config/jsonschema/1-0-2: [Incompatible types in column cache_size old RedshiftBigInt new RedshiftDouble]
+  iglu:com.snowplowanalytics.iglu/resolver-config/jsonschema/1-0-3: [Incompatible types in column cache_size old RedshiftBigInt new RedshiftDouble]
+iglu:com.snowplowanalytics.snowplow/event_fingerprint_config/jsonschema/1-*-*:
+  iglu:com.snowplowanalytics.snowplow/event_fingerprint_config/jsonschema/1-0-1: [Incompatible types in column parameters.hash_algorithm old RedshiftChar(3) new RedshiftVarchar(6)]
+iglu:com.snowplowanalytics.snowplow.badrows/loader_runtime_error/jsonschema/1-*-*:
+  iglu:com.snowplowanalytics.snowplow.badrows/loader_runtime_error/jsonschema/1-0-1: [Making required column nullable error]
 ```

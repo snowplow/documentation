@@ -24,7 +24,7 @@ Iglu provides a CLI application, called igluctl which allows you to perform most
 - `server` - work with an Iglu server
     - `keygen` - generate read and write API keys on Iglu Server
 - `table-check` - will check a given Redshift or Postgres tables against iglu server.
-- `verify` - work with schemas to check their evolution
+- `verify` (since 0.13.0) - work with schemas to check their evolution
     - `redshift` - verify that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for loading into Redshift. It reports the major schema versions within which schema evolution rules were broken.
     - `parquet` - verify that schema is evolved correctly within the same major version (e.g. from `1-a-b` to `1-c-d`) for parquet transformation (for loading into Databricks). It reports the breaking schema versions.
 

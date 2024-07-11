@@ -1,5 +1,3 @@
-<>{ props.lang === "javascript" && <>
-
 If you call `snowplow` with a function as the argument, the function will be executed when sp.js loads:
 
 ```javascript
@@ -48,22 +46,3 @@ snowplow(console.log.bind(console), "sp.js has loaded");
 ```
 
 For more on execution context in JavaScript, see the [MDN page](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/this).
-
-</>
-}</>
-<>{ props.lang === "browser" && <>
-
-When initialising a tracker, you can use the returned `tracker` instance to access various properties from this tracker instance.
-
-```javascript
-// Configure a tracker instance named "sp"
-const sp = newTracker('sp', '{{COLLECTOR_URL}', {
- appId: 'snowplowExampleApp'
-});
-
-// Access the tracker properties
-const domainUserId = sp.getDomainUserId();
-```
-
-</>
-}</>

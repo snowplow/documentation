@@ -167,18 +167,19 @@ When the JavaScript Tracker loads on a page, it generates a new page view UUID a
 It's possible to retrieve certain properties for use in your code, including the page view UUID, [user ID](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#getting-user-id-once-set), and [cookie values](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/cookies-and-local-storage/getting-cookie-values/#retrieving-cookie-properties-from-the-tracker), using a tracker callback. This is an advanced usage of the tracker.
 
 ```mdx-code-block
-import RetrieveValues from "@site/docs/reusable/javascript-tracker-retrieve-values/_index.md"
+import RetrieveValuesJs from "@site/docs/reusable/javascript-tracker-retrieve-values/_javascript.md"
+import RetrieveValuesBrowser from "@site/docs/reusable/javascript-tracker-retrieve-values/_browser.md"
 ```
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
 
-<RetrieveValues lang="javascript" />
+<RetrieveValuesJs />
 
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
 
-<RetrieveValues lang="browser" />
+<RetrieveValuesBrowser />
 
   </TabItem>
 </Tabs>

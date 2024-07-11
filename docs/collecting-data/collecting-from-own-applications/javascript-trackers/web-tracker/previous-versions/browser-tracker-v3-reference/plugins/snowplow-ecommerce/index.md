@@ -4,7 +4,8 @@ sidebar_position: 16000
 ---
 
 ```mdx-code-block
-import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md'
+import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md';
+
 <ReleaseBadge/>
 ```
 
@@ -26,8 +27,8 @@ The plugin is available since version 3.8 of the tracker.
 import { newTracker } from '@snowplow/browser-tracker';
 import { SnowplowEcommercePlugin } from '@snowplow/browser-plugin-snowplow-ecommerce';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ SnowplowEcommercePlugin() ],
 });
 ```
@@ -35,8 +36,8 @@ newTracker('sp1', '{{collector_url}}', {
 ## Functions
 
 API | Used for:
--- | -- 
-`trackProductView` | Tracking a visit to a product page. Known also as product detail view. 
+-- | --
+`trackProductView` | Tracking a visit to a product page. Known also as product detail view.
 `trackAddToCart` | Track an addition to cart.
 `trackRemoveFromCart` | Track a removal from cart.
 `trackProductListView` | Track an impression of a product list. The list could be a search results page, recommended products, upsells etc.
@@ -198,7 +199,7 @@ trackProductListClick({
 import { trackPromotionView } from '@snowplow/browser-plugin-snowplow-ecommerce';
 
 /* Carousel slide 1 viewed */
-trackPromotionView({ 
+trackPromotionView({
     id: 'IP1234',
     name: 'promo_winter',
     type: 'carousel',
@@ -207,7 +208,7 @@ trackPromotionView({
 });
 
 /* On carousel slide 2 view */
-trackPromotionView({ 
+trackPromotionView({
     id: 'IP1234',
     name: 'promo_winter',
     type: 'carousel',
@@ -221,7 +222,7 @@ trackPromotionView({
 ```js
 import { trackPromotionClick } from "@snowplow/browser-plugin-snowplow-ecommerce";
 
-trackPromotionClick({ 
+trackPromotionClick({
     id: 'IP1234',
     name: 'promo_winter',
     type: 'carousel',
@@ -521,7 +522,7 @@ Available from version 3.10.
 
 If you already use Google Analytics 4 ecommerce or Universal Analytics Enhanced Ecommerce to collect information about the shopping behavior of your users, we have prepared a way to quickly implement Snowplow Ecommerce without making many changes on your current setup.
 
-The _transitional_ API that we provide, depends on the standardized [dataLayer](https://developers.google.com/tag-platform/tag-manager/web/datalayer) structure for both Google Analytics ecommerce implementations. This would make it easier for the transition to happen either through Google Tag Manager, which has more control over the dataLayer, or custom code that uses the standard ecommerce structures. 
+The _transitional_ API that we provide, depends on the standardized [dataLayer](https://developers.google.com/tag-platform/tag-manager/web/datalayer) structure for both Google Analytics ecommerce implementations. This would make it easier for the transition to happen either through Google Tag Manager, which has more control over the dataLayer, or custom code that uses the standard ecommerce structures.
 
 :::info
 To learn more about how to use this transitional API, you should go ahead and visit our [Ecommerce Web Accelerator](https://docs.snowplow.io/accelerators/ecommerce/tracking/ua_ga4_migration/) dedicated page which describes the usage of these methods and more.
@@ -641,7 +642,7 @@ trackEnhancedEcommercePurchase( {{dataLayer.ecommerce reference}}, {
 });
 ```
 
-- Where `paymentMethod` is the payment method selected in this transaction. This attributes corresponds to the `payment_method` of the [transaction schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.ecommerce/transaction/jsonschema/1-0-0#L30). Defaults to `unknown`. 
+- Where `paymentMethod` is the payment method selected in this transaction. This attributes corresponds to the `payment_method` of the [transaction schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.ecommerce/transaction/jsonschema/1-0-0#L30). Defaults to `unknown`.
 
 ### Google Analytics 4 Ecommerce
 
@@ -785,4 +786,4 @@ trackGA4Transaction({
 });
 ```
 
-- Where `paymentMethod` is the payment method selected in this transaction. This attributes corresponds to the `payment_method` of the [transaction schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.ecommerce/transaction/jsonschema/1-0-0#L30). Defaults to `unknown`. 
+- Where `paymentMethod` is the payment method selected in this transaction. This attributes corresponds to the `payment_method` of the [transaction schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.ecommerce/transaction/jsonschema/1-0-0#L30). Defaults to `unknown`.

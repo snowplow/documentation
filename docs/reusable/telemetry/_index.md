@@ -1,4 +1,5 @@
-<details><summary>Telemetry notice</summary>
+<details>
+<summary>Telemetry notice</summary>
 
 <p>By default, Snowplow collects telemetry data for {props.name}{props.since && ` (since version ${props.since})`}. Telemetry allows us to understand how our applications are used and helps us build a better product for our users (including you!).</p>
 

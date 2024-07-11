@@ -8,6 +8,7 @@ sidebar_position: 1
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
+
 ## Available on Terraform Registry
 
 [![](https://img.shields.io/static/v1?label=Terraform&message=Registry&color=7B42BC&logo=terraform)](https://registry.terraform.io/modules/snowplow-devops/collector-kinesis-ec2/aws/latest)

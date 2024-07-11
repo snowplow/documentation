@@ -39,10 +39,10 @@ This page goes on to discuss more advanced topics in tracking events:
 Page views are tracked using the `trackPageView` method. This is generally part of the first Snowplow tag to fire on a particular web page. As a result, the `trackPageView` method is usually deployed straight after the tag that also invokes the Snowplow JavaScript (sp.js) e.g.
 
 ```javascript
-import { 
-  newTracker, 
-  enableActivityTracking, 
-  trackPageView 
+import {
+  newTracker,
+  enableActivityTracking,
+  trackPageView
 } from '@snowplow/browser-tracker';
 
 newTracker('sp', '{{collector_url_here}}', {
@@ -84,9 +84,9 @@ Additionally, you can pass a function which returns an array of zero or more con
 For example:
 
 ```javascript
-import { 
-  enableActivityTracking, 
-  trackPageView 
+import {
+  enableActivityTracking,
+  trackPageView
 } from '@snowplow/browser-tracker';
 
 // Turn on page pings every 10 seconds
@@ -129,27 +129,27 @@ That is accomplished using 'page ping' events. If activity tracking is enabled, 
 Page pings are enabled by:
 
 ```javascript
-import { 
+import {
   enableActivityTracking
 } from '@snowplow/browser-tracker';
 
-enableActivityTracking({ 
-  minimumVisitLength: number, 
-  heartbeatDelay: number 
+enableActivityTracking({
+  minimumVisitLength: number,
+  heartbeatDelay: number
 });
 ```
 
 where `minimumVisitLength` is the time period from page load before the first page ping occurs, in seconds. `heartbeat` is the number of seconds between each page ping, once they have started. So, if you executed:
 
 ```javascript
-import { 
-  enableActivityTracking, 
-  trackPageView 
+import {
+  enableActivityTracking,
+  trackPageView
 } from '@snowplow/browser-tracker';
 
-enableActivityTracking({ 
-  minimumVisitLength: 30, 
-  heartbeatDelay: 10 
+enableActivityTracking({
+  minimumVisitLength: 30,
+  heartbeatDelay: 10
 });
 
 trackPageView();
@@ -168,13 +168,13 @@ Notes:
 You can now perform edge analytics in the browser to reduce the number of events sent to you collector whilst still tracking user activity. The Snowplow JavaScript Tracker enabled this by allowing a callback to be specified in place of a page ping being sent. This is enabled by:
 
 ```javascript
-import { 
+import {
   enableActivityTrackingCallback
 } from '@snowplow/browser-tracker';
 
-enableActivityTrackingCallback({ 
-  minimumVisitLength: number, 
-  heartbeatDelay: number, 
+enableActivityTrackingCallback({
+  minimumVisitLength: number,
+  heartbeatDelay: number,
   callback: (data: ActivityCallbackData) => void
 });
 ```
@@ -204,9 +204,9 @@ type ActivityCallbackData = {
 A full example of how this might be used to aggregate page ping information and then send an event on page unload is below:
 
 ```javascript
-import { 
-  newTracker, 
-  enableActivityTrackingCallback, 
+import {
+  newTracker,
+  enableActivityTrackingCallback,
   trackPageView,
   trackSelfDescribingEvent
 } from '@snowplow/browser-tracker';
@@ -223,9 +223,9 @@ var aggregatedEvent = {
     maxYOffset: 0,
     numEvents: 0
 };
-enableActivityTrackingCallback({ 
-  minimumVisitLength: 10, 
-  heartbeatDelay: 10, 
+enableActivityTrackingCallback({
+  minimumVisitLength: 10,
+  heartbeatDelay: 10,
   callback: function (event) {
     aggregatedEvent = {
         pageViewId: event.pageViewId,
@@ -383,9 +383,9 @@ An example of tracking a user listening to a music mix:
 import { trackStructEvent } from '@snowplow/browser-tracker';
 
 trackStructEvent({
-  category: 'Mixes', 
-  action: 'Play', 
-  label: 'MrC/fabric-0503-mix', 
+  category: 'Mixes',
+  action: 'Play',
+  label: 'MrC/fabric-0503-mix',
   value: 0.0
 });
 ```
@@ -715,9 +715,9 @@ This is its signature:
 ```javascript
 import { enableLinkClickTracking } from '@snowplow/browser-plugin-link-click-tracking';
 
-enableLinkClickTracking({ 
-  options?: FilterCriterion, 
-  pseudoClicks?: boolean, 
+enableLinkClickTracking({
+  options?: FilterCriterion,
+  pseudoClicks?: boolean,
   trackContent?: boolean
   context?: SelfDescribingJson[]
 });
@@ -753,7 +753,7 @@ This is an array of CSS classes which should be ignored by link click tracking. 
 ```javascript
 import { enableLinkClickTracking } from '@snowplow/browser-plugin-link-click-tracking';
 
-enableLinkClickTracking({ 
+enableLinkClickTracking({
   options: {
     denylist: ['barred', 'untracked']
   }
@@ -775,8 +775,8 @@ The opposite of a denylist. This is an array of the CSS classes of links which y
 ```javascript
 import { enableLinkClickTracking } from '@snowplow/browser-plugin-link-click-tracking';
 
-enableLinkClickTracking({ 
-  options: { 
+enableLinkClickTracking({
+  options: {
     'allowlist': ['unbarred', 'tracked']
   }
 });
@@ -876,10 +876,10 @@ Of these arguments, only `targetUrl` is required. This is how to use `trackLi
 import { trackLinkClick } from '@snowplow/browser-plugin-link-click-tracking';
 
 trackLinkClick({
-  targetUrl: 'http://www.example.com', 
-  elementId: 'first-link', 
-  elementClasses: ['class-1', 'class-2'], 
-  elementTarget: '', 
+  targetUrl: 'http://www.example.com',
+  elementId: 'first-link',
+  elementClasses: ['class-1', 'class-2'],
+  elementTarget: '',
   elementContent: 'this page'
 });
 ```
@@ -1112,7 +1112,7 @@ import { addTrans } from '@snowplow/browser-plugin-ecommerce'
 addTrans({
     orderId: '1234',  // required
     total: 11.99,   // required
-    affiliation: 'Acme Clothing', 
+    affiliation: 'Acme Clothing',
     tax: 1.29,
     shipping: 5,
     city: 'San Jose',
@@ -1148,7 +1148,7 @@ import { addItem } from '@snowplow/browser-plugin-ecommerce'
 addItem({
     orderId: '1234', // required
     sku: 'DD44',     // required
-    name: 'T-Shirt',      
+    name: 'T-Shirt',
     category: 'Green Medium',
     price: 11.99,
     quantity: 1,
@@ -1187,20 +1187,20 @@ An example:
 import { trackAddToCart, trackRemoveFromCart } from '@snowplow/browser-plugin-ecommerce';
 
 trackAddToCart({
-  sku: '000345', 
-  name: 'blue tie', 
-  category: 'clothing', 
-  unitPrice: 3.49, 
-  quantity: 2, 
+  sku: '000345',
+  name: 'blue tie',
+  category: 'clothing',
+  unitPrice: 3.49,
+  quantity: 2,
   currency: 'GBP'
 });
 
 trackRemoveFromCart({
-  sku: '000345', 
-  name: 'blue tie', 
-  category: 'clothing', 
-  unitPrice: 3.49, 
-  quantity: 2, 
+  sku: '000345',
+  name: 'blue tie',
+  category: 'clothing',
+  unitPrice: 3.49,
+  quantity: 2,
   currency: 'GBP'
 });
 ```
@@ -1240,10 +1240,10 @@ The method is executed in as:
 ```javascript
 import { trackSocialInteraction } from '@snowplow/browser-plugin-site-tracking';
 
-trackSocialInteraction({ 
-  action: string, 
-  network: string, 
-  target: string 
+trackSocialInteraction({
+  action: string,
+  network: string,
+  target: string
 });
 ```
 
@@ -1253,8 +1253,8 @@ For example:
 import { trackSocialInteraction } from '@snowplow/browser-plugin-site-tracking';
 
 trackSocialInteraction({
-  action: 'like', 
-  network: 'facebook', 
+  action: 'like',
+  network: 'facebook',
   target: 'pbz00123'
 });
 ```
@@ -1344,7 +1344,7 @@ We want to be able to identify people who've clicked on ads e.g. in a marketing 
 <a href="http://mysite.com/myproduct.html?utm_source=newsletter-october&utm_medium=email&utm_campaign=cn0201">Visit website</a>
 ```
 
-For the prospective customer clicking on the link, adding the query parameters does not change the user experience. (The user is still directed to the webpage at <http://mysite.com/myproduct.html>.) But Snowplow then has access to the fields given in the query string, and uses them to identify this user as originating from the October Newsletter, an email marketing campaign with campaign id = cn0201.
+For the prospective customer clicking on the link, adding the query parameters does not change the user experience. (The user is still directed to the webpage at `http://mysite.com/myproduct.html`.) But Snowplow then has access to the fields given in the query string, and uses them to identify this user as originating from the October Newsletter, an email marketing campaign with campaign id = cn0201.
 
 #### Anatomy of the query parameters
 
@@ -1794,10 +1794,10 @@ As an example, `trackConsentGranted` will store one consent document as a cust
 
 ```javascript
 trackConsentGranted({
-  id: '1234', 
-  version: '5', 
-  name: 'consent_document', 
-  description: 'a document granting consent', 
+  id: '1234',
+  version: '5',
+  name: 'consent_document',
+  description: 'a document granting consent',
   expiry: '2020-11-21T08:00:00.000Z'
 });
 ```
@@ -1922,8 +1922,8 @@ try {
   var user = getUser()
 } catch(e) {
   trackError({
-    message: 'Cannot get user object', 
-    filename: 'shop.js', 
+    message: 'Cannot get user object',
+    filename: 'shop.js',
     error: e
   });
 }

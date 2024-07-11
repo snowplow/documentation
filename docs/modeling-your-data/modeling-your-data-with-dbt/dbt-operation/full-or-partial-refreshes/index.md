@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 ## Complete refresh of Snowplow package
 
-While you can drop and recompute the incremental tables within this package using the standard `--full-refresh` flag, all [manifest tables](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/manifest-tables/index.md) are protected from being dropped in production (as defined by a target not matching your `snowplow__dev_target_name`). 
+While you can drop and recompute the incremental tables within this package using the standard `--full-refresh` flag, all [manifest tables](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/manifest-tables/index.md) are protected from being dropped in production (as defined by a target not matching your `snowplow__dev_target_name`).
 
 Without dropping the manifest during a full refresh, the selected derived incremental tables would be dropped but the processing of events would resume from where the package left off, as captured by the `snowplow_<package_name>_incremental_manifest` table, rather than your `snowplow__start_date`.
 
@@ -53,7 +53,7 @@ You may at times wish to refresh only some derived models in a package, either a
     ```
     2. *(High Risk)* manually deleting the record from the `snowplow_<package_name>_incremental_manifest` table.
 
-By removing the  model from the manifest the <package\> will be in [State 2](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md#state-2-new-model-introduced) and will replay all events.
+By removing the model from the manifest the `<package\>` will be in [State 2](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md#state-2-new-model-introduced) and will replay all events.
 
 ## Custom period re-processing
 
@@ -73,10 +73,10 @@ As defined in the [standard run incremental logic](/docs/modeling-your-data/mode
 For example, if your last run success was `2022-10-30 13:00:00` and you needed to reprocess events from `2022-10-25 02:00:00`, you would set your `snowplow__lookback_window_hours` to `137` (5 days × 24 hours + 11 hours, and 6 hours of an additional buffer the look back window would usually provide). This will reprocess all the events in a single run, which may be larger than the value you have set in `snowplow__backfill_limit_days`. If you wish to avoid going over the backfill limit you have set, please use option 2. Don't forget to change your value back once the run has completed!
 
 <p align="center">
-<ThemedImage 
-alt="Demonstration of data processing through option 1 approach" 
+<ThemedImage
+alt="Demonstration of data processing through option 1 approach"
 sources={{
-    light: require('./images/data_progress_example1_light.drawio.png').default, 
+    light: require('./images/data_progress_example1_light.drawio.png').default,
     dark: require('./images/data_progress_example1_dark.drawio.png').default
 }}/>
 </p>

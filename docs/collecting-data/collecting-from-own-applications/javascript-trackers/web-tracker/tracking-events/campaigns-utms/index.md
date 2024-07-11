@@ -37,7 +37,7 @@ We want to be able to identify people who've clicked on ads e.g. in a marketing 
 <a href="http://mysite.com/myproduct.html?utm_source=newsletter-october&utm_medium=email&utm_campaign=cn0201">Visit website</a>
 ```
 
-For the prospective customer clicking on the link, adding the query parameters does not change the user experience. (The user is still directed to the webpage at <http://mysite.com/myproduct.html>.) But Snowplow then has access to the fields given in the query string, and uses them to identify this user as originating from the October Newsletter, an email marketing campaign with campaign id = cn0201.
+For the prospective customer clicking on the link, adding the query parameters does not change the user experience. (The user is still directed to the webpage at `http://mysite.com/myproduct.html`.) But Snowplow then has access to the fields given in the query string, and uses them to identify this user as originating from the October Newsletter, an email marketing campaign with campaign id = cn0201.
 
 ### Anatomy of the query parameters
 

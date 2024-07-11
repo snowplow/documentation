@@ -8,7 +8,7 @@ sidebar_position: 40
 
 This page details general configurations that can apply across many of our packages, each package has specific configuration variables that define how the models run, please see each child page for the specifics of each package.
 
-::: 
+:::
 
 ## Variables
 
@@ -56,8 +56,8 @@ Since there are many different situations, we've created the following table to 
 
 |                                             | Adapter supports UC and UC Enabled                                                                   | Adapter supports UC and UC not enabled         | Adapter does not support UC                                                                         |
 | ------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| Events land in default `atomic` schema      | `snowplow__databricks_catalog` = '{name_of_catalog}'                                                 | Nothing needed                                 | `snowplow__databricks_catalog` = 'atomic'                                                           |
-| Events land in custom schema (not `atomic`) | `snowplow__atomic_schema` = '{name_of_schema}'  `snowplow__databricks_catalog` = '{name_of_catalog}' | `snowplow__atomic_schema` = '{name_of_schema}' | `snowplow__atomic_schema` = '{name_of_schema}'  `snowplow__databricks_catalog` = '{name_of_schema}' |
+| Events land in default `atomic` schema      | `snowplow__databricks_catalog = '{name_of_catalog}'`                                                 | Nothing needed                                 | `snowplow__databricks_catalog = 'atomic'`                                                           |
+| Events land in custom schema (not `atomic`) | `snowplow__atomic_schema = '{name_of_schema}'`  `snowplow__databricks_catalog = '{name_of_catalog}'` | `snowplow__atomic_schema = '{name_of_schema}'` | `snowplow__atomic_schema = '{name_of_schema}'`  `snowplow__databricks_catalog = '{name_of_schema}'` |
 
 #### Optimization of models
 

@@ -396,9 +396,9 @@ The arguments are as follows:
 
 | **Argument** | **Description** | **Required?** | **Validation** |
 | --- | --- | --- | --- |
-| `eventData` | The properties of the event | Yes | Map<String, Object> |
-| `context` | Custom context for the event | No | Map |
-| `timestamp` | Optional timestamp for the event | No | Long |
+| `eventData` | The properties of the event | Yes | `Map<String, Object>` |
+| `context` | Custom context for the event | No | `Map` |
+| `timestamp` | Optional timestamp for the event | No | `Long` |
 
 Example:
 

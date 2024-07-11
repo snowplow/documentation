@@ -22,7 +22,7 @@ Follow these instructions to quickly implement a Snowplow web tracker with defau
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
-  
+
 Getting started with sending events using the JavaScript tracker is very similar to other web analytics vendors like Google Analytics, Adobe Analytics, etc.
 
 The process involves the following high level steps:
@@ -33,7 +33,7 @@ The process involves the following high level steps:
   - If manually inserting the tag into your website or tag management solution: Snowplow BDP users can generate a tag snippet in the Snowplow BDP Console [here](https://console.snowplowanalytics.com/tag-generator). Other users can use and edit the standard tag [here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/index.md).
 
 ```javascript
- ;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[]; p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments) };p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1; n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","{{URL to sp.js}}","snowplow")); 
+ ;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[]; p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments) };p[i].q=p[i].q||[];n=l.createElement(o);g=l.getElementsByTagName(o)[0];n.async=1; n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","{{URL to sp.js}}","snowplow"));
 ```
 
 - Once you’ve generated your tag add it to all the pages you’d like to track:
@@ -44,7 +44,7 @@ The process involves the following high level steps:
 - Configure an instance of the tracker by calling `newTracker` with your desired properties.
 
 ```javascript
-window.snowplow('newTracker', 'sp1', '{{collector_url}}', { 
+window.snowplow('newTracker', 'sp1', '{{collector_url}}', {
   appId: 'my-app-id'
 })
 ```
@@ -83,8 +83,8 @@ import { newTracker, trackPageView } from "@snowplow/browser-tracker";
 - Configure an instance of the tracker by calling `newTracker(...)` with your desired properties. This will create a module level instance of your tracker. You don't need to keep a reference to it.
 
 ```javascript
-newTracker('sp1', '{{collector_url}}', { 
-  appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+  appId: 'my-app-id',
   plugins: [ ],
 })
 ```

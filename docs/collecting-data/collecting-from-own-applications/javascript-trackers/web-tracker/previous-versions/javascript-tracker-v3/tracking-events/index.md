@@ -123,18 +123,18 @@ That is accomplished using 'page ping' events. If activity tracking is enabled, 
 Page pings are enabled by:
 
 ```javascript
-snowplow('enableActivityTracking', { 
-  minimumVisitLength: number, 
-  heartbeatDelay: number 
+snowplow('enableActivityTracking', {
+  minimumVisitLength: number,
+  heartbeatDelay: number
 });
 ```
 
 where `minimumVisitLength` is the time period from page load before the first page ping occurs, in seconds. `heartbeat` is the number of seconds between each page ping, once they have started. So, if you executed:
 
 ```javascript
-snowplow('enableActivityTracking', { 
-  minimumVisitLength: 30, 
-  heartbeatDelay: 10 
+snowplow('enableActivityTracking', {
+  minimumVisitLength: 30,
+  heartbeatDelay: 10
 });
 
 snowplow('trackPageView');
@@ -153,9 +153,9 @@ Notes:
 You can now perform edge analytics in the browser to reduce the number of events sent to you collector whilst still tracking user activity. The Snowplow JavaScript Tracker enabled this by allowing a callback to be specified in place of a page ping being sent. This is enabled by:
 
 ```javascript
-snowplow('enableActivityTrackingCallback', { 
-  minimumVisitLength: number, 
-  heartbeatDelay: number, 
+snowplow('enableActivityTrackingCallback', {
+  minimumVisitLength: number,
+  heartbeatDelay: number,
   callback: (data: ActivityCallbackData) => void
 });
 ```
@@ -197,9 +197,9 @@ var aggregatedEvent = {
     maxYOffset: 0,
     numEvents: 0
 };
-snowplow('enableActivityTrackingCallback', { 
-  minimumVisitLength: 10, 
-  heartbeatDelay: 10, 
+snowplow('enableActivityTrackingCallback', {
+  minimumVisitLength: 10,
+  heartbeatDelay: 10,
   callback: function (event) {
     aggregatedEvent = {
         pageViewId: event.pageViewId,
@@ -363,9 +363,9 @@ An example of tracking a user listening to a music mix:
 
 ```javascript runnable
 snowplow('trackStructEvent', {
-  category: 'Mixes', 
-  action: 'Play', 
-  label: 'MrC/fabric-0503-mix', 
+  category: 'Mixes',
+  action: 'Play',
+  label: 'MrC/fabric-0503-mix',
   property: '',
   value: 0.0
 });
@@ -678,9 +678,9 @@ snowplow('enableLinkClickTracking');
 This is its signature (Where `?` defines an optional property):
 
 ```javascript
-snowplow('enableLinkClickTracking', { 
-  options?: FilterCriterion, 
-  pseudoClicks?: boolean, 
+snowplow('enableLinkClickTracking', {
+  options?: FilterCriterion,
+  pseudoClicks?: boolean,
   trackContent?: boolean
   context?: SelfDescribingJson[]
 });
@@ -706,7 +706,7 @@ You can control which links are tracked using the second argument. There are thr
 This is an array of CSS classes which should be ignored by link click tracking. For example, the below code will stop link click events firing for links with the class "barred" or "untracked", but will fire link click events for all other links:
 
 ```javascript
-snowplow('enableLinkClickTracking', { 
+snowplow('enableLinkClickTracking', {
   options: {
     denylist: ['barred', 'untracked']
   }
@@ -724,8 +724,8 @@ snowplow('enableLinkClickTracking', { options: { 'denylist': ['barred'] } });
 The opposite of a denylist. This is an array of the CSS classes of links which you do want to be tracked. Only clicks on links with a class in the list will be tracked.
 
 ```javascript
-snowplow('enableLinkClickTracking', { 
-  options: { 
+snowplow('enableLinkClickTracking', {
+  options: {
     'allowlist': ['unbarred', 'tracked']
   }
 });
@@ -817,10 +817,10 @@ Of these arguments, only `targetUrl` is required. This is how to use `trackLi
 
 ```javascript
 snowplow('trackLinkClick', {
-  targetUrl: 'http://www.example.com', 
-  elementId: 'first-link', 
-  elementClasses: ['class-1', 'class-2'], 
-  elementTarget: '', 
+  targetUrl: 'http://www.example.com',
+  elementId: 'first-link',
+  elementClasses: ['class-1', 'class-2'],
+  elementTarget: '',
   elementContent: 'this page'
 });
 ```
@@ -1021,7 +1021,7 @@ For example:
 snowplow('addTrans', {
     orderId: '1234',  // required
     total: 11.99,   // required
-    affiliation: 'Acme Clothing', 
+    affiliation: 'Acme Clothing',
     tax: 1.29,
     shipping: 5,
     city: 'San Jose',
@@ -1055,7 +1055,7 @@ For example:
 snowplow('addItem', {
     orderId: '1234', // required
     sku: 'DD44',     // required
-    name: 'T-Shirt',      
+    name: 'T-Shirt',
     category: 'Green Medium',
     price: 11.99,
     quantity: 1,
@@ -1087,9 +1087,9 @@ snowplow('trackTrans');
   n.src=w;g.parentNode.insertBefore(n,g)}}(window,document,"script","{{URL to sp.js}}","snowplow"));
 
   snowplow('newTracker', 'sp', '{{collector_url_here}}', { appId: 'my-store' });
-  snowplow('enableActivityTracking',{ 
-    minimumVisitLength: 30, 
-    heartbeatDelay: 10 
+  snowplow('enableActivityTracking',{
+    minimumVisitLength: 30,
+    heartbeatDelay: 10
   });
   snowplow('trackPageView');
   snowplow('enableLinkClickTracking');
@@ -1097,7 +1097,7 @@ snowplow('trackTrans');
   snowplow('addTrans', {
     orderId: '1234',  // required
     total: 11.99,   // required
-    affiliation: 'Acme Clothing', 
+    affiliation: 'Acme Clothing',
     tax: 1.29,
     shipping: 5,
     city: 'San Jose',
@@ -1112,7 +1112,7 @@ snowplow('trackTrans');
   snowplow('addItem', {
     orderId: '1234', // required
     sku: 'DD44',     // required
-    name: 'T-Shirt',      
+    name: 'T-Shirt',
     category: 'Green Medium',
     price: 11.99,
     quantity: 1,
@@ -1150,20 +1150,20 @@ An example:
 
 ```javascript
 snowplow('trackAddToCart', {
-  sku: '000345', 
-  name: 'blue tie', 
-  category: 'clothing', 
-  unitPrice: 3.49, 
-  quantity: 2, 
+  sku: '000345',
+  name: 'blue tie',
+  category: 'clothing',
+  unitPrice: 3.49,
+  quantity: 2,
   currency: 'GBP'
 });
 
 snowplow('trackRemoveFromCart', {
-  sku: '000345', 
-  name: 'blue tie', 
-  category: 'clothing', 
-  unitPrice: 3.49, 
-  quantity: 2, 
+  sku: '000345',
+  name: 'blue tie',
+  category: 'clothing',
+  unitPrice: 3.49,
+  quantity: 2,
   currency: 'GBP'
 });
 ```
@@ -1189,10 +1189,10 @@ The `trackSocialInteraction` method takes three parameters:
 The method is executed in as:
 
 ```javascript
-snowplow('trackSocialInteraction', { 
-  action: string, 
-  network: string, 
-  target: string 
+snowplow('trackSocialInteraction', {
+  action: string,
+  network: string,
+  target: string
 });
 ```
 
@@ -1200,8 +1200,8 @@ For example:
 
 ```javascript
 snowplow('trackSocialInteraction', {
-  action: 'like', 
-  network: 'facebook', 
+  action: 'like',
+  network: 'facebook',
   target: 'pbz00123'
 });
 ```
@@ -1235,7 +1235,7 @@ We want to be able to identify people who've clicked on ads e.g. in a marketing 
 <a href="http://mysite.com/myproduct.html?utm_source=newsletter-october&utm_medium=email&utm_campaign=cn0201">Visit website</a>
 ```
 
-For the prospective customer clicking on the link, adding the query parameters does not change the user experience. (The user is still directed to the webpage at <http://mysite.com/myproduct.html>.) But Snowplow then has access to the fields given in the query string, and uses them to identify this user as originating from the October Newsletter, an email marketing campaign with campaign id = cn0201.
+For the prospective customer clicking on the link, adding the query parameters does not change the user experience. (The user is still directed to the webpage at `http://mysite.com/myproduct.html`.) But Snowplow then has access to the fields given in the query string, and uses them to identify this user as originating from the October Newsletter, an email marketing campaign with campaign id = cn0201.
 
 #### Anatomy of the query parameters
 
@@ -1778,10 +1778,10 @@ As an example, `trackConsentGranted` will store one consent document as a cust
 
 ```javascript
 snowplow('trackConsentGranted',
-  id: '1234', 
-  version: '5', 
-  name: 'consent_document', 
-  description: 'a document granting consent', 
+  id: '1234',
+  version: '5',
+  name: 'consent_document',
+  description: 'a document granting consent',
   expiry: '2020-11-21T08:00:00.000Z'
 );
 ```
@@ -1906,8 +1906,8 @@ try {
   var user = getUser()
 } catch(e) {
   snowplow('trackError', {
-    message: 'Cannot get user object', 
-    filename: 'shop.js', 
+    message: 'Cannot get user object',
+    filename: 'shop.js',
     error: e
   });
 }

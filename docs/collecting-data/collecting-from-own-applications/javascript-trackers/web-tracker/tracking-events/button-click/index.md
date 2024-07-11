@@ -35,30 +35,19 @@ Button click events are **automatically tracked** once configured.
     <tr>
       <td>Download from GitHub Releases (Recommended)</td>
       <td>
-        <a
-          href="https://github.com/snowplow/snowplow-javascript-tracker/releases"
-          >Github Releases (plugins.umd.zip)</a
-        >
+        <a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">Github Releases (plugins.umd.zip)</a>
       </td>
     </tr>
     <tr>
       <td>Available on jsDelivr</td>
       <td>
-        <a
-          href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-button-click-tracking@latest/dist/index.umd.min.js"
-          >jsDelivr</a
-        >
-        (latest)
+        <a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-button-click-tracking@latest/dist/index.umd.min.js">jsDelivr</a> (latest)
       </td>
     </tr>
     <tr>
       <td>Available on unpkg</td>
       <td>
-        <a
-          href="https://unpkg.com/@snowplow/browser-plugin-button-click-tracking@latest/dist/index.umd.min.js"
-          >unpkg</a
-        >
-        (latest)
+        <a href="https://unpkg.com/@snowplow/browser-plugin-button-click-tracking@latest/dist/index.umd.min.js">unpkg</a> (latest)
       </td>
     </tr>
   </tbody>
@@ -97,8 +86,8 @@ window.snowplow('enableButtonClickTracking');
 ```javascript
 import { enableButtonClickTracking, enableButtonClickTracking } from '@snowplow/browser-plugin-button-click-tracking';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ ButtonClickTrackingPlugin() ],
 });
 
@@ -251,7 +240,7 @@ This will result in the following event:
     "schema": "iglu:com.snowplowanalytics.snowplow/button_click/jsonschema/1-0-0",
     "data": {
         // Note the label is "My custom label", not "Click me"
-        "label": "My custom label", 
+        "label": "My custom label",
     }
 }
 ```

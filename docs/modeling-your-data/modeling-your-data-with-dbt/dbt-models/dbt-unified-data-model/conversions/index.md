@@ -299,7 +299,7 @@ export const lightTheme = createTheme({
   },
 });
 
-export function JsonSchemaGenerator({ output, children, schema }) {
+export const JsonSchemaGenerator = ({ output, children, schema }) => {
   const [formData, setFormData] = useState(null)
   const { colorMode, setColorMode } = useColorMode()
   return (

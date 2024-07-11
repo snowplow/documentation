@@ -49,8 +49,16 @@ const plugin = () => {
           const replaced = split.map((token) =>
             config[token]
               ? {
-                  type: 'html',
-                  value: `<abbr data-title="${config[token]}">${token}</abbr>`,
+                  type: 'mdxJsxFlowElement',
+                  name: 'abbr',
+                  attributes: [
+                    {
+                      type: 'mdxJsxAttribute',
+                      name: 'data-title',
+                      value: config[token],
+                    }
+                  ],
+                  children: [{type: 'text', value: token}]
                 }
               : { ...node, value: token }
           )

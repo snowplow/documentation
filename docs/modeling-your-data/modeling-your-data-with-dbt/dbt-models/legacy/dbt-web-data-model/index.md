@@ -9,8 +9,6 @@ hide_title: true
 import Badges from '@site/src/components/Badges';
 import ThemedImage from '@theme/ThemedImage';
 import DocCardList from '@theme/DocCardList';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import {versions} from '@site/src/componentVersions';
 
 ```
@@ -48,17 +46,15 @@ dark: require('./images/web-process-dark.drawio.png').default
 />
 </p>
 
-<ReactMarkdown children={`
 | snowplow-web version       | dbt versions        | BigQuery | Databricks | Redshift | Snowflake | Postgres |
 | -------------------------- | ------------------- | :------: | :--------: | :------: | :-------: | :------: |
-| ${versions.dbtSnowplowWeb} | >=1.6.0 to <2.0.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
-| 0.16.2                     | >=1.5.0 to <2.0.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
-| 0.15.2                     | >=1.4.0 to <2.0.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅*     |
-| 0.13.3**                   | >=1.3.0 to <2.0.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
-| 0.11.0                     | >=1.0.0 to <1.3.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
-| 0.5.1                      | >=0.20.0 to <1.0.0  |    ✅     |     ❌      |    ✅     |     ✅     |    ✅     |
-| 0.4.1                      | >=0.18.0 to <0.20.0 |    ✅     |     ❌      |    ✅     |     ✅     |    ❌     |
-`} remarkPlugins={[remarkGfm]} />
+| {versions.dbtSnowplowWeb} | >=1.6.0 to \<2.0.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
+| 0.16.2                     | >=1.5.0 to \<2.0.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
+| 0.15.2                     | >=1.4.0 to \<2.0.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅*     |
+| 0.13.3**                   | >=1.3.0 to \<2.0.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
+| 0.11.0                     | >=1.0.0 to \<1.3.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
+| 0.5.1                      | >=0.20.0 to \<1.0.0  |    ✅     |     ❌      |    ✅     |     ✅     |    ✅     |
+| 0.4.1                      | >=0.18.0 to \<0.20.0 |    ✅     |     ❌      |    ✅     |     ✅     |    ❌     |
 
 <span style={{'font-size':'80%'}}>
 

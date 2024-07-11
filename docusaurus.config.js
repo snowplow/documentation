@@ -3,8 +3,8 @@
 
 const sidebar = require('./sidebars')
 const abbreviations = require('./src/remark/abbreviations')
-const math = require('remark-math')
-const katex = require('rehype-katex')
+import remarkMath from 'remark-math'
+import rehypeKatex from 'rehype-katex'
 
 /** @type {import('@docusaurus/types').Config} */
 module.exports = {
@@ -16,6 +16,7 @@ module.exports = {
   // reset this back to throw, set to warn so that site builds
   onBrokenLinks: 'warn',
   onBrokenMarkdownLinks: 'throw',
+  onBrokenAnchors: 'warn',
   favicon: 'img/favicon.ico',
   trailingSlash: true,
   organizationName: 'snowplow',
@@ -49,8 +50,8 @@ module.exports = {
         docs: {
           showLastUpdateTime: true,
           editUrl: 'https://github.com/snowplow/documentation/tree/main/',
-          remarkPlugins: [abbreviations, math],
-          rehypePlugins: [katex],
+          remarkPlugins: [abbreviations, remarkMath],
+          rehypePlugins: [rehypeKatex],
           async sidebarItemsGenerator({
             defaultSidebarItemsGenerator,
             ...args

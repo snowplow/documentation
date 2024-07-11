@@ -14,7 +14,7 @@ Thousands of organizations like Burberry, Strava, and Auto Trader rely on Snowpl
 
 ### Why Next-Gen CDI?​
 
-Snowplow is built from the ground up to not only lay the foundation for an organization's advanced analytics use cases, but to also power machine learning and AI use cases, including those powered by generative AI. 
+Snowplow is built from the ground up to not only lay the foundation for an organization's advanced analytics use cases, but to also power machine learning and AI use cases, including those powered by generative AI.
 
 Key benefits of Snowplow’s Next-Gen CDI:
 * Data Depth & Quality

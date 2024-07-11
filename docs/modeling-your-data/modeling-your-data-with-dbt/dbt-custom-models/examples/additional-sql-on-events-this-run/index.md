@@ -21,7 +21,13 @@ vars:
 ```
 
 ### Utilizing custom contexts or SDEs
+
 Suppose you have a custom context called `contexts_com_mycompany_click_1` which contains a `click_id` that you want to concat with Snowplow's `domain_sessionid`. If you want to make this available in the events this run table directly you could do the following:
+
+```mdx-code-block
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+```
 
 <Tabs groupId="warehouse" queryString>
 <TabItem value="databricks+snowflake" label="Databricks & Snowflake" default>
@@ -57,7 +63,7 @@ vars:
 </Tabs>
 
 
-### Adding multiple fields 
+### Adding multiple fields
 
 If you'd like to add multiple lines of SQL, you can do that as well by making this string a multi-line string, ending each non-final line with a comma. You can do that as follows:
 

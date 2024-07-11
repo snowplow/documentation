@@ -30,6 +30,7 @@ Generates tracking code based on configuration on the configuration file. Can ge
 **Options**
  -  `-is, --instructions` Generate event specification instructions.
  -  `-va, --validations` Add runtime validation on events. _Currently available for the Browser tracker_.
+ -  `--disallowDevSchemas` Disallow generation of code using schemas deployed on DEV environment. _Sending events using schemas deployed on DEV, will result in failed events in production pipelines._ (default: false)
 
 ### `snowtype update`
 
@@ -37,6 +38,7 @@ Checks for latest version updates in Data Structures and Event Specifications.
 
 **Options**
  -  `-y, --yes` Updates all to latest version without prompting. (default: false)
+ -  `-m, --maximumBump` The maximum SchemaVer update to show an available update notification for. Possible values are 'patch', 'minor', 'major' and will work as expected regular SemVer bumps. (default: 'major')
 
 ### `snowtype patch`
 

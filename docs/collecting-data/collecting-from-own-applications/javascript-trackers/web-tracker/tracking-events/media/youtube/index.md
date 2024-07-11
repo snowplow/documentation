@@ -37,8 +37,7 @@ YouTube media events and entities are **automatically tracked** once configured.
 - `yarn add @snowplow/browser-plugin-youtube-tracking`
 - `pnpm add @snowplow/browser-plugin-youtube-tracking`
 
-
-  </TabItem>
+</TabItem>
 </Tabs>
 
 ## Quick Start

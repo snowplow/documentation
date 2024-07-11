@@ -41,8 +41,7 @@ Link click events are **automatically tracked** once configured.
 - `yarn add @snowplow/browser-plugin-link-click-tracking`
 - `pnpm add @snowplow/browser-plugin-link-click-tracking`
 
-
-  </TabItem>
+</TabItem>
 </Tabs>
 
 ## Enable link click tracking
@@ -53,7 +52,7 @@ Turn on link click tracking like this:
   <TabItem value="js" label="JavaScript (tag)" default>
 
 ```javascript
-window.snowplow('addPlugin', 
+window.snowplow('addPlugin',
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-link-click-tracking@latest/dist/index.umd.min.js",
   ["snowplowLinkClickTracking", "LinkClickTrackingPlugin"]
 );
@@ -70,8 +69,8 @@ Link click tracking is part of a separate plugin, `@snowplow/browser-plugin-link
 import { newTracker } from '@snowplow/browser-tracker';
 import { LinkClickTrackingPlugin, enableLinkClickTracking } from '@snowplow/browser-plugin-link-click-tracking';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ LinkClickTrackingPlugin() ],
 });
 

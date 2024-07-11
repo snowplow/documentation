@@ -42,8 +42,7 @@ Form events are **automatically tracked** once configured.
 - `yarn add @snowplow/browser-plugin-form-tracking`
 - `pnpm add @snowplow/browser-plugin-form-tracking`
 
-
-  </TabItem>
+</TabItem>
 </Tabs>
 
 ## Enable form tracking
@@ -52,7 +51,7 @@ Form events are **automatically tracked** once configured.
   <TabItem value="js" label="JavaScript (tag)" default>
 
 ```javascript
-window.snowplow('addPlugin', 
+window.snowplow('addPlugin',
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-form-tracking@latest/dist/index.umd.min.js",
   ["snowplowFormTracking", "FormTrackingPlugin"]
 );
@@ -69,8 +68,8 @@ This is part of the `@snowplow/browser-plugin-form-tracking` plugin. You need to
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 import { FormTrackingPlugin, enableFormTracking } from '@snowplow/browser-plugin-form-tracking';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ FormTrackingPlugin() ],
 });
 

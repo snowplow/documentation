@@ -62,8 +62,8 @@ Rather than adding the tag snippet directly, you may wish to use an alternative 
 - Use the Snowplow Plugin in the [analytics npm package](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/snowplow-plugin-for-analytics-npm-package/index.md).
 
 
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
+</TabItem>
+<TabItem value="browser" label="Browser (npm)">
 
 Getting started with sending events using the Browser Tracker will be familiar for anyone who is used to installing npm packages into their web apps and is designed to work with frameworks such as React, Angular and Vue.
 
@@ -95,7 +95,7 @@ newTracker('sp1', '{{collector_url}}', {
 trackPageView();
 ```
 
-  </TabItem>
+</TabItem>
 </Tabs>
 
 ## What's tracked with the default configuration?

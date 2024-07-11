@@ -35,7 +35,7 @@ There are three ways of setting user permissions:
 |-|-|
 |User management|No access (in the UI)|
 |Environments|View access|
-|Data Products|Edit<br/>Create|
+|Data products|Edit<br/>Create|
 |Data structures|Edit on development<br/>Create|
 |Data models|View access|
 |API keys|View access|
@@ -46,7 +46,7 @@ There are three ways of setting user permissions:
 |-|-|
 |User management|Full access|
 |Environments|Full access|
-|Data Products|Full access|
+|Data products|Full access|
 |Data structures|Full access|
 |Data models|Full access|
 |API keys|Full access|
@@ -57,7 +57,7 @@ There are three ways of setting user permissions:
 |-|-|
 |User management|Customized by you, per user|
 |Environments|Customized by you, per user|
-|Data Products|Customized by you, per user|
+|Data products|Customized by you, per user|
 |Data structures|Customized by you, per user|
 |Data models & jobs|Customized by you, per user|
 |API keys|Customized by you, per user|

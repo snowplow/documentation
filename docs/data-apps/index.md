@@ -41,7 +41,7 @@ Once you have purchased an application, you are able to install it. Click the ti
 
 ![Image of application tile showing start install process](images/install-app-tile.png)
 
-During installation you will need to [provide a connection](#application-connections) to the warehouse you would like the application to use. It will also highlight any pipeline and data model dependencies that are required.
+During installation, you will need to [provide a connection](#application-connections) to the warehouse you would like the application to use. It will also highlight any pipeline and data model dependencies that are required.
 
 ![Image of application install process](images/sample-app-install.png)
 

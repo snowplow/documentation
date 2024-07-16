@@ -44,9 +44,7 @@ The Focal Meter integration is **automatic** once configured.
 - `yarn add @snowplow/browser-plugin-focalmeter@focalmeter_plugin`
 - `pnpm add @snowplow/browser-plugin-focalmeter@focalmeter_plugin`
 
-
-
-  </TabItem>
+</TabItem>
 </Tabs>
 
 ## Initialization
@@ -76,8 +74,8 @@ window.snowplow('enableFocalMeterIntegration', {
 import { newTracker } from '@snowplow/browser-tracker';
 import { FocalMeterPlugin, enableFocalMeterIntegration } from '@snowplow/browser-plugin-focalmeter';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ FocalMeterPlugin() ],
 });
 

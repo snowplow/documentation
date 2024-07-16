@@ -48,9 +48,8 @@ Configure a Google Cloud service account. See [details on using the service acco
 - Create a new JSON Key and store it locally
 - Create the environment variable by running `export GOOGLE_APPLICATION_CREDENTIALS="KEY PATH"` in your terminal
 
-
-  </TabItem>
-  <TabItem value="azure" label="Azure">
+</TabItem>
+<TabItem value="azure" label="Azure">
 
 Install the [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli).
 
@@ -196,8 +195,7 @@ If you [used our `base` module](#set-up-a-vpc-to-deploy-into), you will need to 
 * `subnet_id_lb`: use the identifier of the `iglu-agw1` subnet from `base`
 * `subnet_id_servers`: use the identifier of the `iglu1` subnet from `base`
 
-
-  </TabItem>
+</TabItem>
 </Tabs>
 
 To update your input variables, you’ll need to know a few things:

@@ -8,6 +8,7 @@ sidebar_position: 10
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
+
 ### Tracker compatibility
 
 As a programming language that lets you work more quickly and integrate your systems more effectively, Python is available in a huge number of different computing environments and platforms, from Civilization IV through [Django framework](https://www.djangoproject.com/) to Ubuntu One.

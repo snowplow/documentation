@@ -122,7 +122,7 @@ Tracker.init(new Tracker
 
 As you can see there is a fair amount of modularity to the Trackers creation.
 
-The below are required arguments for the 'TrackerBuilder({{ ... }})' segment of the constructor:
+The below are required arguments for the `TrackerBuilder({{ ... }})` segment of the constructor:
 
 | **Argument Name** | **Description** | **Required?** |
 | --- | --- | --- |
@@ -1093,7 +1093,7 @@ The `Context` is used for caching events in a [SQLite database](http://develo
 
 Don't confuse the Android context with Snowplow's own custom contexts - they are completely separate things.
 
-The below are required arguments for the 'EmitterBuilder({{ ... }})' segment of the constructor:
+The below are required arguments for the `'EmitterBuilder({{ ... }})'` segment of the constructor:
 
 | **Argument Name** | **Description** | **Required?** |
 | --- | --- | --- |

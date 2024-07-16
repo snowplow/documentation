@@ -11,6 +11,7 @@ import TabItem from '@theme/TabItem';
 import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
 ```
+
 <Badges badgeType="dbt-package Release" pkg="normalize"></Badges>&nbsp;
 <Badges badgeType="Maintained"></Badges>&nbsp;
 <Badges badgeType="SPAL"></Badges>
@@ -106,8 +107,9 @@ In general, it should only be required to run the script in this package once to
 The script should always be run from the **root** of your dbt project (the same level your `dbt_project.yml` file is at).
 
 ### Install python packages
+
 :::caution
-Python [>=3.7, <=3.10] is currently supported
+Python versions between 3.7 and 3.10 (inclusive) are currently supported
 
 :::
 

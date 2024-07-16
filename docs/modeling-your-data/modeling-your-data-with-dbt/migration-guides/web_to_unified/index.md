@@ -71,7 +71,7 @@ Once you decided you would like to go ahead with the upgrade process you will fi
 
 #### Step 2: Execute SQL scripts to create the new tables
 
-You will then need to execute a list of sql scripts we provide below, which will first create the new tables based on your existing derived tables created by the web package, then make the changes (e.g. renaming, adding, dropping and updating columns wherever possible). The manifest tables will also be altered making sure that you will then have everything ready for a new run in the unified package as if nothing happened. 
+You will then need to execute a list of sql scripts we provide below, which will first create the new tables based on your existing derived tables created by the web package, then make the changes (e.g. renaming, adding, dropping and updating columns wherever possible). The manifest tables will also be altered making sure that you will then have everything ready for a new run in the unified package as if nothing happened.
 
 Execute the below sql scripts with your database IDE to create your new derived and manifest tables at once without having to reprocess your event data from scratch. Make sure to update `(your_schema)_derived` to match your derived schema name beforehand. Please also be aware you might need to adjust the data `varchar` data type to `string` depending on your warehouse (Bigquery, Databricks users mainly) or limit it to the maximum in case there are limitations (potentially Redshift).
 
@@ -132,9 +132,9 @@ alter table  (your_schema)_derived.snowplow_unified_views rename column useragen
 alter table  (your_schema)_derived.snowplow_unified_views rename column useragent_version to ua__useragent_version;
 alter table  (your_schema)_derived.snowplow_unified_views add column if not exists default_channel_group varchar(25);
 alter table  (your_schema)_derived.snowplow_unified_views add column event_name varchar(1000);
-update (your_schema)_derived.snowplow_unified_views 
+update (your_schema)_derived.snowplow_unified_views
 set event_name = 'page_view'
-where 1=1; 
+where 1=1;
 alter table  (your_schema)_derived.snowplow_unified_views add column os_type varchar(16777216);
 alter table  (your_schema)_derived.snowplow_unified_views add column os_version varchar(16777216);
 alter table  (your_schema)_derived.snowplow_unified_views add column session__previous_session_id varchar(36);
@@ -202,38 +202,38 @@ alter table (your_schema)_derived.snowplow_unified_users drop column original_do
 alter table (your_schema)_derived.snowplow_unified_users rename column page_views to views;
 alter table (your_schema)_derived.snowplow_unified_users rename column referrer to page_referrer;
 alter table (your_schema)_derived.snowplow_unified_users add column on_mobile boolean;
-update (your_schema)_derived.snowplow_unified_users 
+update (your_schema)_derived.snowplow_unified_users
 set on_mobile = false
-where 1=1; 
+where 1=1;
 alter table (your_schema)_derived.snowplow_unified_users add column on_web boolean;
-update (your_schema)_derived.snowplow_unified_users 
+update (your_schema)_derived.snowplow_unified_users
 set on_web = true
-where 1=1; 
+where 1=1;
 alter table (your_schema)_derived.snowplow_unified_users add column screen_names_viewed number(30,0);
 alter table (your_schema)_derived.snowplow_unified_users add column sessions_duration_s number(30,0);
 alter table (your_schema)_derived.snowplow_unified_users add column active_days number(18,0);
 alter table (your_schema)_derived.snowplow_unified_users add column last_platform varchar(255);
-update (your_schema)_derived.snowplow_unified_users 
+update (your_schema)_derived.snowplow_unified_users
 set last_platform = 'web'
-where 1=1; 
+where 1=1;
 alter table (your_schema)_derived.snowplow_unified_users add column last_screen_resolution varchar(16777216);
 alter table (your_schema)_derived.snowplow_unified_users add column last_os_type varchar(16777216);
 alter table (your_schema)_derived.snowplow_unified_users add column last_os_version varchar(16777216);
 alter table (your_schema)_derived.snowplow_unified_users add column first_platform varchar(255);
-update (your_schema)_derived.snowplow_unified_users 
+update (your_schema)_derived.snowplow_unified_users
 set first_platform = 'web'
-where 1=1; 
+where 1=1;
 alter table (your_schema)_derived.snowplow_unified_users add column geo_latitude float;
 alter table (your_schema)_derived.snowplow_unified_users add column geo_longitude float;
 alter table (your_schema)_derived.snowplow_unified_users add column geo_timezone varchar(64);
 alter table (your_schema)_derived.snowplow_unified_users add column geo_zipcode varchar(15);
 alter table  (your_schema)_derived.snowplow_unified_users add column if not exists stitched_user_id varchar(16777216);
 
-update (your_schema)_snowplow_manifest.snowplow_unified_incremental_manifest 
+update (your_schema)_snowplow_manifest.snowplow_unified_incremental_manifest
 set model = replace(model, 'snowplow_web', 'snowplow_unified')
-where 1=1; 
+where 1=1;
 
-update (your_schema)_snowplow_manifest.snowplow_unified_incremental_manifest 
+update (your_schema)_snowplow_manifest.snowplow_unified_incremental_manifest
 set model = case when model = 'snowplow_unified_page_views_this_run' then 'snowplow_unified_views_this_run'
 when model = 'snowplow_unified_page_views' then 'snowplow_unified_views' else model end
 where 1=1;
@@ -293,15 +293,15 @@ In case you changed any of the default variables in your web project, add them h
 - `snowplow__screen_summary_context`: com_snowplowanalytics_mobile_screen_summary_1 (Redshift only)
 
 **Variables with changed defaults:**
-- `snowplow__session_identifiers`: [{"schema" : "atomic", "field" : "domain_sessionid"}]
-- `snowplow__user_identifiers`: [{"schema": "atomic", "field" : "domain_userid"}]
+- `snowplow__session_identifiers`: `[{"schema" : "atomic", "field" : "domain_sessionid"}]`
+- `snowplow__user_identifiers`: `[{"schema": "atomic", "field" : "domain_userid"}]`
 to none
 `snowplow__databricks_catalog`: 'hive_metastore'
 
 
 #### Step 4: Verifying the new derived datasets
 
-At this stage you could potentially run both packages simultaneously until you make sure you are happy to stop the old jobs that updated the web package. 
+At this stage you could potentially run both packages simultaneously until you make sure you are happy to stop the old jobs that updated the web package.
 
 We have also provided views which replicate the original derived tables to help you maintain your existing reporting (in case you use the original derived tables as a source for your BI tool or for downstream data models).
 
@@ -310,7 +310,7 @@ We have also provided views which replicate the original derived tables to help 
 
 ```sql
 create view (your_schema)_derived.mock_snowplow_web_page_views as (
-  select 
+  select
     view_id as page_view_id,
     event_id,
     app_id,
@@ -420,9 +420,9 @@ create view (your_schema)_derived.mock_snowplow_web_page_views as (
     yauaa__operating_system_version as operating_system_version,
   from (your_schema)_derived.snowplow_unified_views
 );
-    
+
 create view (your_schema)_derived.mock_snowplow_web_sessions as (
-  select 
+  select
     app_id,
     platform,
     session_identifier as domain_sessionid,
@@ -538,7 +538,7 @@ create view (your_schema)_derived.mock_snowplow_web_sessions as (
 );
 
 create view (your_schema)_derived.mock_snowplow_web_users as (
-  select 
+  select
     user_id,
     user_identifier as domain_userid,
     null as original_domain_userid,
@@ -595,7 +595,7 @@ create view (your_schema)_derived.mock_snowplow_web_users as (
     mkt_network,
     mkt_source_platform,
     default_channel_group
-    from (your_schema)_derived.snowplow_unified_users 
+    from (your_schema)_derived.snowplow_unified_users
 );
 ```
 </details>

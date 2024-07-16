@@ -502,10 +502,10 @@ tracker.track_form_submit("signupForm", ["signup__warning"], {"name": "email", "
 
 Use `track_site_search()` to track a what user searches on your website. Arguments are:
 
-| **Argument** | **Description** | **Required?** | ******Type****** |
+| **Argument** | **Description** | **Required?** | **Type** |
 | --- | --- | --- | --- |
 | `terms` | Search terms | Yes | List(str) |
-| `filters` | Filters applied to search | No | List(dict{str:str |
+| `filters` | Filters applied to search | No | List(Dict[str,str]) |
 | `total_results` | Total number of results | No | Integer |
 | `page_results` | Number of pages of results | No | Integer |
 | `context` | Custom context for the event | No | List(SelfDescribingJson) |

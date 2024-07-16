@@ -12,6 +12,7 @@ import ReactMarkdown from 'react-markdown';
 import remarkGfm from 'remark-gfm';
 import {versions} from '@site/src/componentVersions';
 ```
+
 <Badges badgeType="dbt-package Release" pkg="mobile"></Badges>&nbsp;
 <Badges badgeType="Maintained"></Badges>&nbsp;
 <Badges badgeType="SCL"></Badges>

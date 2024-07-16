@@ -4,7 +4,8 @@ sidebar_position: 6500
 ---
 
 ```mdx-code-block
-import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md'
+import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md';
+
 <ReleaseBadge/>
 ```
 
@@ -26,8 +27,8 @@ The plugin is available since version 3.8 of the tracker.
 import { newTracker } from '@snowplow/browser-tracker';
 import { EnhancedConsentPlugin } from '@snowplow/browser-plugin-enhanced-consent';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ EnhancedConsentPlugin() ],
 });
 ```
@@ -35,7 +36,7 @@ newTracker('sp1', '{{collector_url}}', {
 ## Functions
 
 API | Used for:
--- | -- 
+-- | --
 `trackConsentAllow` | Track an acceptance of user consent.
 `trackConsentSelected` | Track a specific selection of consented scopes.
 `trackConsentPending` | Track the unconfirmed selection about user consent.
@@ -43,7 +44,7 @@ API | Used for:
 `trackConsentDeny` | Track a denial of user consent.
 `trackConsentExpired` | Track the expiration of a consent selection.
 `trackConsentWithdrawn` | Track the withdrawal of user consent.
-`trackCmpVisible` | Track the render time of a CMP banner. 
+`trackCmpVisible` | Track the render time of a CMP banner.
 
 ## Usage
 

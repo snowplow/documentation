@@ -36,14 +36,14 @@ Set the ‘Request Token Encoding’ to JSON and the ‘Request Type’ to POST.
 http://collector.domain.com/com.marketo/v1?aid=<company code>
 ```
 
-To further distinguish the webhooks 3 additional fields are included: “name”, “description” and “step”. In order to populate these fields custom tokens must be created for each webhook. Custom tokens (begins with ‘{{my.’ followed by the name you created for the token) can be created in either campaign folders or programs. For our custom “step” field please create the custom token as a “number” type.
+To further distinguish the webhooks 3 additional fields are included: “name”, “description” and “step”. In order to populate these fields custom tokens must be created for each webhook. Custom tokens (begins with `{{my.` followed by the name you created for the token) can be created in either campaign folders or programs. For our custom “step” field please create the custom token as a “number” type.
 
 In the below example the webhook is called at the 3rd step in Campaign A’s flow.
 
 **_NOTE:_ change the token names for the first 3 fields to align with the event your own webhook is activated on.**
 
 ```json
-{   
+{
    "name": {{my.Campaign A}},
    "description": {{my.Campaign A desc}},
    "step": {{my.Campaign A step}},

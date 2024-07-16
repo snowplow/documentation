@@ -8,6 +8,7 @@ hide_title: true
 ```mdx-code-block
 import Badges from '@site/src/components/Badges';
 ```
+
 <Badges badgeType="dbt-package Release" pkg="ecommerce"></Badges>&nbsp;
 <Badges badgeType="Actively Maintained"></Badges>
 <Badges badgeType="SPAL"></Badges>

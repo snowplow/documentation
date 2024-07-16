@@ -38,7 +38,7 @@ module.exports = {
   },
 
   themes: [
-    '@saucelabs/theme-github-codeblock',
+    'docusaurus-theme-github-codeblock',
     '@docusaurus/theme-mermaid',
   ],
 

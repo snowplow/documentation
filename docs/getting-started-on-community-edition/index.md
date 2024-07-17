@@ -2,7 +2,7 @@
 title: "Setting up Snowplow Community Edition"
 date: "2020-10-30"
 sidebar_position: 8
-sidebar_label: "Setting up Community Edition"
+sidebar_label: "Community Edition"
 sidebar_custom_props:
   offerings:
     - community

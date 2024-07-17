@@ -1,5 +1,6 @@
 ---
 title: "Modeling data"
+sidebar_label: "Model"
 sidebar_position: 90
 description: "An overview of the purpose of data modeling."
 ---

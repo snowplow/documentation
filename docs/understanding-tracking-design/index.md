@@ -1,5 +1,6 @@
 ---
 title: "Defining the data to collect"
+sidebar_label: "Define"
 date: "2020-02-15"
 sidebar_position: 60
 sidebar_custom_props:

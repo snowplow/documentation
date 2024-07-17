@@ -50,7 +50,7 @@ A sample usage would be as following.
 gcloud compute images create \
 imported-sp-mini \
 --source-uri \
-https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-20-0-large-1709663164.tar.gz
+https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-20-1-large-1721204297.tar.gz
 ```
 
 Note that `imported-sp-mini` is a name of your choice for destination image and above URI is for large image, change it with your preferred version of Snowplow Mini.
@@ -59,7 +59,7 @@ Note that `imported-sp-mini` is a name of your choice for destination image an
 
 | L / 2 vCPUs | XL / 4 vCPUs | XXL / 8 vCPUs |
 | --- | --- | --- |
-| [large](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-20-0-large-1709663164.tar.gz) | [xlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-20-0-xlarge-1709663158.tar.gz) | [xxlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-20-0-xxlarge-17096631484.tar.gz) |
+| [large](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-20-1-large-1721204297.tar.gz) | [xlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-20-1-xlarge-1721204346.tar.gz) | [xxlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-20-1-xxlarge-1721204318.tar.gz) |
 
 You can find more about `gcloud compute images create` command [here](https://cloud.google.com/sdk/gcloud/reference/compute/images/create) for additional parameters.
 

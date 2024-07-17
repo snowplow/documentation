@@ -44,7 +44,7 @@ To process raw events created by the Snowplow Enhanced Consent plugin we have in
 
 This custom module consists of a series of dbt models which produce the following aggregated models from the raw consent tracking events:
 
-Derived table | Table description | 
+Derived table | Table description | dbt
 ---|---|---
 `snowplow_web_consent_log` | Snowplow incremental table showing the audit trail of consent and Consent Management Platform (cmp) events | [Docs](https://snowplow.github.io/dbt-snowplow-web/#!/model/model.snowplow_web.snowplow_web_consent_log)
 `snowplow_web_consent_users` | Incremental table of user consent tracking stats | [Docs](https://snowplow.github.io/dbt-snowplow-web/#!/model/model.snowplow_web.snowplow_web_consent_users)

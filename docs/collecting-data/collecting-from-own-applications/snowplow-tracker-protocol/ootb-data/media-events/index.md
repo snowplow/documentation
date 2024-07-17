@@ -321,7 +321,7 @@ They consist of the following events and context entities:
 
 [The media player dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) contains a fully incremental model that transforms raw media event data into a set of derived tables based around the following data objects: media plays, media stats, media ad views, and media ads.
 
-Derived table | Table description | 
+Derived table | Table description | dbt
 ---|---|---
 `snowplow_media_player_base` | This derived table summarises the key media player events and metrics of each media element on a media_id and pageview level which is considered as a base aggregation level for media interactions. | [Docs](https://snowplow.github.io/dbt-snowplow-media-player/#!/model/model.snowplow_media_player.snowplow_media_player_base)
 `snowplow_media_player_plays_by_pageview` | This view removes impressions from the '_base' table to summarise media plays on a page_view by media_id level. | [Docs](https://snowplow.github.io/dbt-snowplow-media-player/#!/model/model.snowplow_media_player.snowplow_media_player_plays_by_pageview)

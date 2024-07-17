@@ -2,7 +2,7 @@
 title: "Event parameters"
 ---
 
-This page lists all the parameters that Snowplow trackers use when firing events to push data into the Snowplow collectors. Each parameter maps onto one or more fields in the Snowplow events table employed in storage. 
+This page lists all the parameters that Snowplow trackers use when firing events to push data into the Snowplow collectors. Each parameter maps onto one or more fields in the Snowplow events table employed in storage.
 
 This page is for you if you want to understand the tracker payload in more detail, and especially if you are building your own tracker. In the latter case, utilizing the parameters documented here will ensure that your tracker works with the rest of the Snowplow stack.
 
@@ -62,42 +62,42 @@ If enabled, the [activity tracking function](/docs/collecting-data/collecting-fr
 
 Page pings are identified by `e=pp`. As well as all the standard web fields, there are four additional fields that `pp` includes, which are used to identify how users are scrolling over web pages:
 
-| **Parameter** | **Table Column**      | **Type** | **Description**                                     | **Example values** |
-|----------------|----------|-----------------------------------------------------|--------------------|
-| `pp_mix`      | `pp_xoffset_min` | integer  | Minimum page x offset seen in the last ping period  | `0`                |
-| `pp_max`      | `pp_xoffset_max` | integer  | Maximum page x offset seen in the last ping period  | `100`              |
-| `pp_miy`      | `pp_yoffset_min` | integer  | Minimum page y offset seen in the last ping period  | `0`                |
-| `pp_may`      | `pp_yoffset_max` | integer  | Maximum page y offset seen in the last ping period  | `100`              |
+| **Parameter** | **Table Column** | **Type** | **Description**                                    | **Example values** |
+| ------------- | ---------------- | -------- | -------------------------------------------------- | ------------------ |
+| `pp_mix`      | `pp_xoffset_min` | integer  | Minimum page x offset seen in the last ping period | `0`                |
+| `pp_max`      | `pp_xoffset_max` | integer  | Maximum page x offset seen in the last ping period | `100`              |
+| `pp_miy`      | `pp_yoffset_min` | integer  | Minimum page y offset seen in the last ping period | `0`                |
+| `pp_may`      | `pp_yoffset_max` | integer  | Maximum page y offset seen in the last ping period | `100`              |
 
 #### Transaction tracking
 
 Transaction events allow you to track a transaction. The items of the transaction can be tracked using [Transaction Item events](#transaction-item-events).
 
-| **Parameter** | **Table Column**      | **Type** | **Description**                                      | **Example values** |
-|----------------|----------|------------------------------------------------------|--------------------|
-| `tr_id`       | `tr_orderid`     | text     | Order ID                                             | `12345`            |
-| `tr_af`       | `tr_affiliation` | text     | Transaction affiliation (e.g. channel)               | `Web`              |
-| `tr_tt`       | `tr_total`       | decimal  | Transaction total value                              | `9.99`             |
-| `tr_tx`       | `tr_tax`         | decimal  | Transaction tax value (i.e. amount of VAT included)  | `1.98`             |
-| `tr_sh`       | `tr_shipping`    | decimal  | Delivery cost charged                                | `3.00`             |
-| `tr_ci`       | `tr_city`        | text     | Delivery address: city                               | `London`           |
-| `tr_st`       | `tr_state`       | text     | Delivery address: state                              | `Denver`           |
-| `tr_co`       | `tr_country`     | text     | Delivery address: country                            | `United Kingdom`   |
-| `tr_cu`       | `tr_currency`    | text     | Transaction Currency                                 | `GBP`              |
+| **Parameter** | **Table Column** | **Type** | **Description**                                     | **Example values** |
+| ------------- | ---------------- | -------- | --------------------------------------------------- | ------------------ |
+| `tr_id`       | `tr_orderid`     | text     | Order ID                                            | `12345`            |
+| `tr_af`       | `tr_affiliation` | text     | Transaction affiliation (e.g. channel)              | `Web`              |
+| `tr_tt`       | `tr_total`       | decimal  | Transaction total value                             | `9.99`             |
+| `tr_tx`       | `tr_tax`         | decimal  | Transaction tax value (i.e. amount of VAT included) | `1.98`             |
+| `tr_sh`       | `tr_shipping`    | decimal  | Delivery cost charged                               | `3.00`             |
+| `tr_ci`       | `tr_city`        | text     | Delivery address: city                              | `London`           |
+| `tr_st`       | `tr_state`       | text     | Delivery address: state                             | `Denver`           |
+| `tr_co`       | `tr_country`     | text     | Delivery address: country                           | `United Kingdom`   |
+| `tr_cu`       | `tr_currency`    | text     | Transaction Currency                                | `GBP`              |
 
 #### Transaction item events
 
 Transaction item events are separate events, representing the items of a transaction, which are linked to a Transaction event via `ti_id` which should map to `tr_id` of a transaction event.
 
-| **Parameter** | **Table Column**  | **Type** | **Description**  | **Example values** |
-|---------------|---------------|----------|------------------|--------------------|
-| `ti_id`       | `ti_orderid`  | text     | Order ID         | `12345`            |
-| `ti_sk`       | `ti_sku`      | text | Item SKU | Yes | \`pbz0025' |
-| `ti_nm`       | `ti_name`     | text | Item name | Yes | `black-tarot` |
-| `ti_ca`       | `ti_category` | text | Item category | Yes | `tarot` |
-| `ti_pr`       | `ti_price`    | decimal | Item price | Yes | `7.99` |
-| `ti_qu`       | `ti_quantity` | integer | Item quantity | Yes | `2` |
-| `ti_cu`       | `ti_currency` | text | Currency | Yes | `USD` |
+| **Parameter** | **Table Column** | **Type** | **Description** | **Example values** |
+| ------------- | ---------------- | -------- | --------------- | ------------------ |
+| `ti_id`       | `ti_orderid`     | text     | Order ID        | `12345`            |
+| `ti_sk`       | `ti_sku`         | text     | Item SKU        | `pbz0025`          |
+| `ti_nm`       | `ti_name`        | text     | Item name       | `black-tarot`      |
+| `ti_ca`       | `ti_category`    | text     | Item category   | `tarot`            |
+| `ti_pr`       | `ti_price`       | decimal  | Item price      | `7.99`             |
+| `ti_qu`       | `ti_quantity`    | integer  | Item quantity   | `2`                |
+| `ti_cu`       | `ti_currency`    | text     | Currency        | `USD`              |
 
 #### Structured event tracking
 
@@ -111,13 +111,13 @@ We recommend using [self-describing events](#self-describing-events) for custom 
 
 As well as setting `e=se`, there are five custom event specific parameters that can be set:
 
-| **Parameter** | **Table Column**   | **Type** | **Description**                                                         | **Example values**            |
-|---------------|---------------|----------|-------------------------------------------------------------------------|-------------------------------|
-| `se_ca`       | `se_category` | text     | The category of event                                                   | `Ecomm`, `Media`              |
-| `se_ac`       | `se_action`   | text     | The action / event itself                                               | `add-to-basket`, `play-video` |
-| `se_la`       | `se_label`    | text     | A label often used to refer to the 'object' the action is performed on  | `dog-skateboarding-video`     |
-| `se_pr`       | `se_property` | text     | A property associated with either the action or the object              | `hd`                          |
-| `se_va`       | `se_value`    | decimal  | A value associated with the user action                                 | `13.99`                       |
+| **Parameter** | **Table Column** | **Type** | **Description**                                                        | **Example values**            |
+| ------------- | ---------------- | -------- | ---------------------------------------------------------------------- | ----------------------------- |
+| `se_ca`       | `se_category`    | text     | The category of event                                                  | `Ecomm`, `Media`              |
+| `se_ac`       | `se_action`      | text     | The action / event itself                                              | `add-to-basket`, `play-video` |
+| `se_la`       | `se_label`       | text     | A label often used to refer to the 'object' the action is performed on | `dog-skateboarding-video`     |
+| `se_pr`       | `se_property`    | text     | A property associated with either the action or the object             | `hd`                          |
+| `se_va`       | `se_value`       | decimal  | A value associated with the user action                                | `13.99`                       |
 
 ### Event Entity Tracking
 
@@ -128,10 +128,10 @@ To learn about context entities and how they are serialized in the event payload
 
 ### Event parameters
 
-| **Parameter** | **Table Column**           | **Type** | **Description**  | **Example values**                     |
-|---------------|-----------------------|----------|------------------|----------------------------------------|
-| `e`           | `event`               | text     | Event type       | (See table [above](#snowplow-events))           |
-| `eid`         | `event_id`            | text     | Event UUID       | `606adff6-9ccc-41f4-8807-db8fdb600df8` |
+| **Parameter** | **Table Column** | **Type** | **Description** | **Example values**                     |
+| ------------- | ---------------- | -------- | --------------- | -------------------------------------- |
+| `e`           | `event`          | text     | Event type      | (See table [above](#snowplow-events))  |
+| `eid`         | `event_id`       | text     | Event UUID      | `606adff6-9ccc-41f4-8807-db8fdb600df8` |
 
 :::caution
 
@@ -147,12 +147,12 @@ The event ID (`eid`) is the unique identifier (UUID) for this row. This should b
 
 ### Application parameters
 
-| **Parameter** | **Table Column**                 | **Type** | **Description**                              | **Example values**      |
-|---------------|-----------------------------|----------|----------------------------------------------|-------------------------|
-| `tna`         | `name_tracker`              | text     | The tracker namespace                        | `tracker_1`             |
-| `aid`         | `app_id`                    | text     | Unique identifier for website / application  | `snow-game-android`     |
-| `p`           | `platform`                  | text     | The platform the app runs on                 | `web`, `mob`, `app`     |
-| `tv`          | `v_tracker`                 | text     | Identifier for Snowplow tracker              | `js-2.16.2`             |
+| **Parameter** | **Table Column** | **Type** | **Description**                             | **Example values**  |
+| ------------- | ---------------- | -------- | ------------------------------------------- | ------------------- |
+| `tna`         | `name_tracker`   | text     | The tracker namespace                       | `tracker_1`         |
+| `aid`         | `app_id`         | text     | Unique identifier for website / application | `snow-game-android` |
+| `p`           | `platform`       | text     | The platform the app runs on                | `web`, `mob`, `app` |
+| `tv`          | `v_tracker`      | text     | Identifier for Snowplow tracker             | `js-2.16.2`         |
 
 :::info
 
@@ -175,7 +175,7 @@ The tracker namespace parameter is used to distinguish between different tracker
 
 ### Timestamp parameters
 
-| **Parameter** | **Table Column**           | **Type** | **Description**                                              | **Example values** |
+| **Parameter** | **Table Column**           | **Type** | **Description**                                         | **Example values** |
 |---------------|-----------------------|----------|--------------------------------------------------------------|--------------------|
 | `dtm`         | `dvce_created_tstamp` | int      | Timestamp when event occurred, as recorded by client device  | `1361553733313`    |
 | `stm`         | `dvce_sent_tstamp`    | int      | Timestamp when event was sent by client device to collector  | `1361553733371`    |

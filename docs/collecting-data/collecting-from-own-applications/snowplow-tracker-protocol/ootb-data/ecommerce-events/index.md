@@ -156,7 +156,7 @@ All tracked e-commerce properties are tracked as context entities.
 
 [The package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md) contains a fully incremental model that transforms raw e-commerce event data into a set of derived tables based around the following e-commerce data objects: carts, checkouts, products and transactions.
 
-Derived table | Table description | 
+Derived table | Table description | dbt
 ---|---|---
 `snowplow_ecommerce_base_events_this_run` | Base: Performs the incremental logic, the table contains a de-duped data set of all events required for the current run of the model, and is the foundation for all other models generated. | [Docs](https://snowplow.github.io/dbt-snowplow-ecommerce/#!/model/model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_this_run)
 `snowplow_ecommerce_cart_interactions` | Carts: Parses the cart interactions that occur to provide handy filters and aggregations, which helps identify what happened to carts on a session level to extract, for example, abandoned carts with ease. | [Docs](https://snowplow.github.io/dbt-snowplow-ecommerce/#!/model/model.snowplow_ecommerce.snowplow_ecommerce_cart_interactions)
@@ -167,7 +167,7 @@ Derived table | Table description |
 
 ## E-commerce analytics accelerator
 
-Follow the [e-commerce accelerator](https://snowplow.io/data-product-accelerators/ecommerce-analytics-dpa/) for a complete guide to build a deeper understanding of customer behavior in your ecommerce store. 
+Follow the [e-commerce accelerator](https://snowplow.io/data-product-accelerators/ecommerce-analytics-dpa/) for a complete guide to build a deeper understanding of customer behavior in your ecommerce store.
 
 <details>
   <summary>Old e-commerce events</summary>

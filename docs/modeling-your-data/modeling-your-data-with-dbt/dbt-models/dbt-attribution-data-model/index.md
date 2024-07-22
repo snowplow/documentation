@@ -90,7 +90,7 @@ Marketing attribution determines which marketing tactics are contributing to sal
 ## Benefits of using our package
 The package was implemented with a **glassbox philosophy** in mind, making it very **transparent** for data consumers how the data is transformed. It is processed **all in SQL** inside your warehouse, there are no external dependencies e.g. extra Python packages or black-box ML algorithms.
 
-It is also very **flexible**, there are no direct dependencies on data sources or limitations on the touchpoints (it works on all channels or campaigns). You can use ad spend data from any 3rd party data sources.
+It is also very **flexible**, there are no limitations on the touchpoints (it works on all channels or campaigns). You can use ad spend data from any 3rd party data sources. Although there are no direct dependencies on data sources either, it is recommended to be used together with the [Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) dbt package for a seamless setup without the need to overwrite default dbt macros.
 
 It also does the heavy-lifting for you and provides you with **incremental data models** reducing unnecessary costs even if you would like to regularly analyze the data based on a shifting time window in your reports (e.g. last 30 days).
 
@@ -106,7 +106,7 @@ We also provide the **[Attribution Data App](/docs/data-apps/attribution-modelin
 
 ### 1. Conversion source
 
-You will also need a table where the conversion events are stored. If you use the snowplow_unified model and configure conversions to be modelled, you will have this information in your `derived.snowplow_unified_conversions` table:
+You will also need a table where the conversion events are stored. If you use the snowplow_unified model and configure conversions to be modelled, you will have this information in your `derived.snowplow_unified_conversions` table (default):
 
 
 <div>
@@ -152,7 +152,7 @@ Please bear in mind, if you would like to calculate the attribution for conversi
 
 ### 2. Path source
 
-You will also need a source table to track your user journey / path with fields to be able to classify your marketing channels. The perfect table for this is your `derived.snowplow_unified_views` table:
+You will also need a source table to track your user journey / path with fields to be able to classify your marketing channels. The perfect table for this is your `derived.snowplow_unified_views` table (default):
 
 <div>
   {MarkdownTableToMuiDataGrid(`
@@ -183,6 +183,16 @@ You most likely have a warehouse with marketing (ad) spend information by channe
 </div>
 
 To make it flexible to use what you already have, we suggest creating a view on top of the table you have, rename the fields that the model will use and add that view reference in `var('snowplow__spend_source')`. For more details on how to do this check out our [Quick Start Guide](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/attribution/#3.good-to-know).
+
+### 4. User mapping source (optional, but recommended)
+
+In order to be able to attribute the value of a conversion to one or more channels and campaigns it is essential to have a shared user identifier field between the conversion events and the preceding website visits. If the Unified dbt package is used for the conversion and conversion path source, there are two out-of-the box stitching options to use: 
+
+1. By enabling BOTH the `snowplow__view_stitching` the `snowplow__conversion_stitching` in the unified package, both sources will get the latest `stitched_user_id` field based on logged in user activity (see details [here](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/index.md)). By setting the `snowplow__conversion_stitching` variable in the attribution package to true, the package will consider that field to take as a basis for both the conversion and the path source. Please note that this could potentially become a costly operation due to the volume of the snowplow_unified_views table, as after each run all the id fields will be updated by the latest mapping.
+
+2. Alternatively (default from v.0.2.3 onwards), the package will rely on the `snowplow__user_mapping_source` defaulted to the `derived.snowplow_unified_user_mapping` table which will get used to take the latest logged in business user_id field per user_identifier, if available, otherwise it will keep the user_identifier value for both the conversions and conversion path source before the two are joined.
+
+3. When using custom sources or solutions, this logic could be overwritten in the dbt project using the `snowplow_attribution_paths_to_conversion()` dispatch macro.
 
 ### One-off setup
 

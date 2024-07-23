@@ -28,8 +28,10 @@ Initialize the setup of Snowtype code generation in a project. Creates the confi
 Generates tracking code based on configuration on the configuration file. Can generate/modify the `.snowtype-lock.json` file.
 
 **Options**
- -  `-is, --instructions` Generate event specification instructions.
- -  `-va, --validations` Add runtime validation on events. _Currently available for the Browser tracker_.
+ -  `--instructions` Generate event specification instructions.
+ -  `--no-instructions` Generate without instructions.
+ -  `--validations` Add runtime validation on events. _Currently available for the Browser tracker_.
+ -  `--no-validations` Do not add runtime validation on events.
  -  `--disallowDevSchemas` Disallow generation of code using schemas deployed on DEV environment. _Sending events using schemas deployed on DEV, will result in failed events in production pipelines._ (default: false)
 
 ### `snowtype update`

@@ -330,6 +330,7 @@ By using the `--instructions` option on the `snowtype generate` command, you can
 
 This includes:
 - Trigger description.
+- Implementation rules.
 - Images uploaded on your Event Specification triggers.
 - App identifiers and URLs this event should be triggered on.
 - Direct links to the code for this Event Specification.
@@ -366,7 +367,7 @@ An example showcasing the flag's behavior:
 
 This Data Structure has other deployed versions such as `1-0-1`, `1-1-0` and `2-0-0`. The `update` command will show available updates as follows:
 
-```sh
+```bash
 npx @snowplow/snowtype update --maximumBump=major
 # Will prompt an update to 2-0-0 or any other available update.
 
@@ -382,4 +383,4 @@ npx @snowplow/snowtype update --maximumBump=patch
 While developing or testing, it might be useful to use [Snowplow Mini](../../../pipeline-components-and-applications/snowplow-mini/) to validate against your new schemas in your development environment.
 In this and any other case you are developing a schema and eventually publishing the tracking to production, you need to make sure all the schemas you are using are deployed to the production environment for the pipeline to use. Failing to do that will result in failed events.
 
-Snowtype by default will print a warning when code is generated using schemas only published to development environment. To make sure that there are no schemas not yet deployed to production, you can use the `--disallowDevSchemas` flag when using the `generate` command. Using this flag will make sure each generation attempt will fail, indicating the schemas that are not yet deployed to the production environment.
+Snowtype by default will print a warning when code is generated using schemas only published to development environment. To make sure that there are no schemas not yet deployed to production, you can use the `--disallowDevSchemas` flag or option when using the `generate` command. Using this flag will make sure each generation attempt will fail, indicating the schemas that are not yet deployed to the production environment.

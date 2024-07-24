@@ -44,6 +44,38 @@ The target language to generate the required code for. [See list of available la
 
 The outpath relative to the current working directory when running the script.
 
+### `options`
+
+Options related to Snowtype behavior and are described by the following TypeScript type:
+
+```ts
+options?: {
+  /* Command related options. */
+  commands: {
+    generate?: {
+      /* Generate implementation instructions. */
+      instructions?: boolean;
+      /* Add runtime validations. */
+      validations?: boolean;
+      /* Disallow generation of code using schemas only deployed on DEV environment. */
+      disallowDevSchemas?: boolean;
+    }
+    update?: {
+      /* Update your configuration file automatically and regenerate the code of the latest available update. */
+      regenerateOnUpdate?: boolean
+      /* The maximum SchemaVer update to show an available update notification for. */
+      maximumBump?: "major" | "minor" | "patch"
+    }
+    patch?: {
+      /* Automatically regenerate the code after a successful patch operation. */
+      regenerateOnPatch?: boolean
+    }
+  }
+}
+```
+
+_Keep in mind that CLI flags take precedence over configuration file options._
+
 
 ## Example configuration file
 
@@ -110,6 +142,22 @@ type SnowtypeConfig = {
   dataStructures?: string[];
   eventSpecificationIds?: string[];
   dataProductIds?: string[];
+  options?: {
+    commands: {
+      generate?: {
+        instructions?: boolean;
+        validations?: boolean;
+        disallowDevSchemas?: boolean;
+      }
+      update?: {
+        regenerateOnUpdate?: boolean
+        maximumBump?: "major" | "minor" | "patch"
+      }
+      patch?: {
+        regenerateOnPatch?: boolean
+      }
+    }
+  }
 };
 
 const config: SnowtypeConfig = {

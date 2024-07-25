@@ -57,6 +57,17 @@
       "packageDefault": "{{ source('derived', 'snowplow_unified_views') }}",
       "group": "Warehouse and Tracker"
     },
+    "snowplow__user_mapping_source": {
+      "recommendFullRefresh": true,
+      "order": 125,
+      "consoleGroup": "advanced",
+      "type": "string",
+      "title": "User Mapping Source",
+      "description": "Source of user mapping table to be used for stitching by default",
+      "longDescription": "The source (schema and table) of the user mapping table produced by the unified package. In case the user mapping table is not available, the paths_to_conversion macro needs to be overwritten in the dbt project where the package is referenced.",
+      "packageDefault": "{{ source('derived', 'snowplow_unified_user_mapping') }}",
+      "group": "Warehouse and Tracker"
+    },
     "snowplow__conversion_window_start_date": {
       "recommendFullRefresh": true,
       "order": 80,
@@ -291,7 +302,7 @@
       "consoleGroup": "advanced",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
-      "longDescription": "This should align with the variable of the same name inside the unified package. If allowed it will consider the stitched_user_id field, not the user_identifier in the source data for more accurate results.",
+      "longDescription": "This should be set to true if both the snowplow__conversion_stitching and snowplow__view_stitching variables are also enabled in the Unified package. If allowed it will consider the stitched_user_id field, not the user_identifier in the source data for more accurate results.",
       "packageDefault": "false",
       "title": "Conversion Stitching"
     },
@@ -303,7 +314,7 @@
       "title": "Conversions Clause",
       "group": "Operation and Logic",
       "longDescription": "A string of sql to filter on certain conversion events.",
-      "packageDefault": "cv_value > 0 and user_identifier is not null"
+      "packageDefault": "cv_value > 0 and ev.user_identifier is not null"
     },
     "snowplow__attribution_list": {
       "recommendFullRefresh": false,

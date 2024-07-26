@@ -192,7 +192,7 @@ In order to be able to attribute the value of a conversion to one or more channe
 
 2. Alternatively (default from v.0.3.0 onwards), the package will rely on the `snowplow__user_mapping_source` defaulted to the `derived.snowplow_unified_user_mapping` table which will get used to take the latest logged in business user_id field per user_identifier, if available, otherwise it will keep the user_identifier value for both the conversions and conversion path source before the two are joined.
 
-3. When using custom sources or solutions, this logic could be overwritten in the dbt project using the `snowplow_attribution_paths_to_conversion()` dispatch macro.
+3. When using custom sources or solutions, this logic could be overwritten in the dbt project using the `snowplow_attribution_paths_to_conversion()` dispatch macro. In case the optional `snowplow_attribution_paths_to_non_conversion` table is also in use and it needs custom stitching logic, it is advised to disable it and create a custom model with the desired stitching logic.
 
 ### One-off setup
 

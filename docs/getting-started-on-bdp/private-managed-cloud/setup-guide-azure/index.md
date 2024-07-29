@@ -80,7 +80,7 @@ Create a custom role and assign it the “Snowplow BDP Enterprise Deployment” 
 6. Assign the `Snowplow-Deployment-Role-Creator-Role` to service principal “Snowplow BDP Enterprise Deployment”
 
 ### Determine if Snowplow requies a specific VPC (optional)
-If you require Snowplow to be deployed into a specific VPC, this should be provided at the same time as credentials. We need a /16 provided for the VPC so that we can create /20 subnets (note: [VPC peering and using a custom VPC is an additional bolt-on](https://snowplow.io/snowplow-behavioral-data-platform-product-description/#h-vpc-peering-aws-gcp))
+If you require Snowplow to be deployed into a specific VPC CIDR range, this should be provided at the same time as credentials. We need a /16 provided for the VPC so that we can create /20 subnets (note: [VPC peering and using a custom VPC is an additional bolt-on](https://snowplow.io/snowplow-behavioral-data-platform-product-description/#h-vpc-peering-aws-gcp))
 
 ### Final checklist
 

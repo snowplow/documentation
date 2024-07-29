@@ -59,7 +59,7 @@ For Snowplow BDP customers, patching is disabled for production pipelines. Commu
 
 :::tip Schema caching
 
-Note that various pipeline components, most importantly Enrich (including Enrich embedded in Snowplow Mini and Snowplow Micro), cache schemas to improve performance. The default caching time is 10 minutes (it’s controlled by the [Iglu Resolver configuration](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md). This means that the effect of patching a schema will not be immediate.
+Note that various pipeline components, most importantly Enrich (including Enrich embedded in Snowplow Mini and Snowplow Micro), cache schemas to improve performance. The default caching time is 10 minutes (it’s controlled by the [Iglu Resolver configuration](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md)). This means that the effect of patching a schema will not be immediate.
 
 :::
 
@@ -259,7 +259,7 @@ For example, if version `1-0-2` is defined to supersede version `1-0-1`, and you
 
 :::tip Schema caching
 
-Note that various pipeline components, most importantly Enrich (including Enrich embedded in Snowplow Mini and Snowplow Micro), cache schemas to improve performance. The default caching time is 10 minutes (it’s controlled by the [Iglu Resolver configuration](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md). This means that the effect of superseding a schema will not be immediate.
+Note that various pipeline components, most importantly Enrich (including Enrich embedded in Snowplow Mini and Snowplow Micro), cache schemas to improve performance. The default caching time is 10 minutes (it’s controlled by the [Iglu Resolver configuration](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md)). This means that the effect of superseding a schema will not be immediate.
 
 :::
 

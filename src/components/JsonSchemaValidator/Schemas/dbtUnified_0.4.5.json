@@ -954,7 +954,7 @@
       "consoleGroup": "advanced",
       "type": "boolean",
       "description": "Use this field to bypass optimization which avoids long scans due to late arriving data for trackers which do not send dvce_created or sent tstamps.",
-      "title": "Enable Initial Checks",
+      "title": "Allow Null Device Timestamps",
       "group": "Operation and Logic",
       "longDescription": "Use this field to bypass optimization which avoids long scans due to late arriving data. Warning, use this field only when using specific older versions of the AMP tracker or the Pixel tracker.",
       "packageDefault": "false"

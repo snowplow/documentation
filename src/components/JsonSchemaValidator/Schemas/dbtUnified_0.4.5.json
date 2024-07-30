@@ -927,7 +927,7 @@
     },
     "snowplow__enable_initial_checks": {
       "recommendFullRefresh": false,
-      "order": 134,
+      "order": 135,
       "consoleGroup": "advanced",
       "type": "boolean",
       "description": "Use this field to enable initial checks when changing the package configuration to ensure quick fails if the configuration is incorrect",
@@ -947,6 +947,17 @@
       "longDescription": "To use the models on an iceberg events table created via the lakeloader on Snowflake, this will need to be enabled due to different table structures.",
       "packageDefault": "false",
       "warehouse": "Snowflake"
+    },
+    "snowplow__allow_null_dvce_tstamps": {
+      "recommendFullRefresh": false,
+      "order": 136,
+      "consoleGroup": "advanced",
+      "type": "boolean",
+      "description": "Use this field to bypass optimization which avoids long scans due to late arriving data for trackers which do not send dvce_created or sent tstamps.",
+      "title": "Enable Initial Checks",
+      "group": "Operation and Logic",
+      "longDescription": "Use this field to bypass optimization which avoids long scans due to late arriving data. Warning, use this field only when using specific older versions of the AMP tracker or the Pixel tracker.",
+      "packageDefault": "false"
     }
   }
 }

@@ -145,7 +145,7 @@ The last step is to set up the Snowplow deployment role. This is a role assumed 
 If you require Snowplow to be deployed into a specific VPC CIDR range, this should be provided at the same time. We need a /18 provided for the VPC so that we can create /20 and /23 subnets (note: [VPC peering and using a custom VPC is an additional bolt-on](https://snowplow.io/snowplow-behavioral-data-platform-product-description/#h-vpc-peering-aws-gcp)).
 
 ### Determine if Snowplow requires a specific IAM Permission Boundary (optional)
-If you require Snowplow to be deployed using a Permission Boundary, this should be provided at the same time (note: [IAM Permission Boundary is an additional bolt-on](https://snowplow.io/snowplow-behavioral-data-platform-product-description/#h-custom-vpc-integration-aws)).
+If you require Snowplow to be deployed using a specific IAM Permission Boundary, this should be provided at the same time (note: [IAM Permission Boundary is an additional bolt-on](https://snowplow.io/snowplow-behavioral-data-platform-product-description/#h-custom-vpc-integration-aws)).
 
 ### Final checklist
 
@@ -154,4 +154,4 @@ If you are sending a request to our team to set up your account for you. Please 
 2. SnowplowDeployment role ARN
 3. AWS region to deploy into
 4. VPC CIDR requirements for VPC peering (optional)
-5. The IAM permission boundary ARN (optional)
+5. The IAM Permission Boundary ARN (optional)

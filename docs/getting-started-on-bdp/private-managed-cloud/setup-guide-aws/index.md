@@ -141,10 +141,10 @@ The last step is to set up the Snowplow deployment role. This is a role assumed 
 - Role description: Allows the Snowplow Team to programmatically deploy to this account.
 4. Copy the Snowplow deployment role ARN. You will need to share this role with us as part of filling out the setup form in Snowplow BDP console.
 
-### Determine if Snowplow requires a specific VPC (optional)
+### Determine if Snowplow requires a specific VPC CIDR range (optional)
 If you require Snowplow to be deployed into a specific VPC CIDR range, this should be provided at the same time. We need a /18 provided for the VPC so that we can create /20 and /23 subnets (note: [VPC peering and using a custom VPC is an additional bolt-on](https://snowplow.io/snowplow-behavioral-data-platform-product-description/#h-vpc-peering-aws-gcp))
 
-### Determine if Snowplow requires a specific Permission Boundaey (optional)
+### Determine if Snowplow requires a specific IAM Permission Boundaey (optional)
 If you require Snowplow to be deployed using a Permission Boundary, this should be provided at the same time. Note: [IAM Permission Boundary is an additional bolt-on](https://snowplow.io/snowplow-behavioral-data-platform-product-description/#h-custom-vpc-integration-aws))
 
 ### Final checklist

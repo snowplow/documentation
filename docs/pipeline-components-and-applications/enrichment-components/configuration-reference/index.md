@@ -86,10 +86,14 @@ A minimal configuration file can be found on the [Github repo](https://github.co
 | `output.good.delayThreshold` | Optional. Default: `200 milliseconds`. Delay threshold to use for batching. After this amount of time has elapsed, before `maxBatchSize` and `maxBatchBytes` have been reached, messages from the buffer will be sent. |
 | `output.good.maxBatchSize` | Optional. Default: `1000` (PubSub maximum). Maximum number of messages sent within a batch. When the buffer reaches this number of messages they are sent. |
 | `output.good.maxBatchBytes` | Optional. Default: `8000000` (PubSub maximum is 10MB). Maximum number of bytes sent within a batch. When the buffer reaches this size messages are sent. |
-| `output.bad.topic` | Required. E.g. `projects/example-project/topics/bad`. Name of the PubSub topic that will receive the failed events. |
-| `output.bad.delayThreshold` | Same as `output.good.delayThreshold` for failed events. |
-| `output.bad.maxBatchSize` | Same as `output.good.maxBatchSize` for failed events. |
-| `output.bad.maxBatchBytes` | Same as `output.good.maxBatchBytes` for failed events. |
+| `output.incomplete.topic` | Required. E.g. `projects/example-project/topics/incomplete`. Name of the PubSub topic that will receive the failed events (same format as the enriched events). |
+| `output.incomplete.delayThreshold` | Same as `output.good.delayThreshold` for failed events. |
+| `output.incomplete.maxBatchSize` | Same as `output.good.maxBatchSize` for failed events. |
+| `output.incomplete.maxBatchBytes` | Same as `output.good.maxBatchBytes` for failed events. |
+| `output.bad.topic` | Required. E.g. `projects/example-project/topics/bad`. Name of the PubSub topic that will receive the failed events in the "bad row" format (JSON). |
+| `output.bad.delayThreshold` | Same as `output.good.delayThreshold` for failed events in the "bad row" format (JSON). |
+| `output.bad.maxBatchSize` | Same as `output.good.maxBatchSize` for failed events in the "bad row" format (JSON). |
+| `output.bad.maxBatchBytes` | Same as `output.good.maxBatchBytes` for failed events in the "bad row" format (JSON). |
 | `output.pii.topic` | Optional. Example: `projects/test-project/topics/pii`. Should be used in conjunction with the PII pseudonymization enrichment. When configured, enables an extra output topic for writing a `pii_transformation` event. |
 | `output.pii.attributes` | Same as `output.good.attributes` for pii events. |
 | `output.pii.delayThreshold` | Same as `output.good.delayThreshold` for pii events. |
@@ -123,15 +127,24 @@ A minimal configuration file can be found on the [Github repo](https://github.co
 | `output.good.throttledBackoffPolicy.maxBackoff` (since *3.4.1*) | Optional. Default: `1 second`. Maximum backoff before retrying when writing fails in case of throughput exceeded. Writing is retried forever. |
 | `output.good.recordLimit` | Optional. Default: `500` (maximum allowed). Limits the number of events in a single PutRecords request. Several requests are made in parallel. |
 | `output.good.customEndpoint` | Optional. E.g. `http://localhost:4566`. To use a custom Kinesis endpoint. |
-| `output.bad.streamName` | Required. E.g. `bad`. Name of the Kinesis stream to write to the failed events. |
-| `output.bad.region` | Same as `output.good.region` for failed events. |
-| `output.bad.backoffPolicy.minBackoff` | Same as `output.good.backoffPolicy.minBackoff` for failed events. |
-| `output.bad.backoffPolicy.maxBackoff` | Same as `output.good.backoffPolicy.maxBackoff` for failed events. |
-| `output.bad.backoffPolicy.maxRetries` | Same as `output.good.backoffPolicy.maxRetries` for failed events. |
-| `output.bad.throttledBackoffPolicy.minBackoff` (since *3.4.1*) | Same as `output.good.throttledBackoffPolicy.minBackoff` for failed events. |
-| `output.bad.throttledBackoffPolicy.maxBackoff` (since *3.4.1*) | Same as `output.good.throttledBackoffPolicy.maxBackoff` for failed events. |
-| `output.bad.recordLimit` | Same as `output.good.recordLimit` for failed events. |
-| `output.bad.customEndpoint` | Same as `output.good.customEndpoint` for pii events. |
+| `output.incomplete.streamName` | Required. E.g. `incomplete`. Name of the Kinesis stream that will receive the failed events (same format as the enriched events). |
+| `output.incomplete.region` | Same as `output.good.region` for failed events. |
+| `output.incomplete.backoffPolicy.minBackoff` | Same as `output.good.backoffPolicy.minBackoff` for failed events. |
+| `output.incomplete.backoffPolicy.maxBackoff` | Same as `output.good.backoffPolicy.maxBackoff` for failed events. |
+| `output.incomplete.backoffPolicy.maxRetries` | Same as `output.good.backoffPolicy.maxRetries` for failed events. |
+| `output.incomplete.throttledBackoffPolicy.minBackoff` (since *3.4.1*) | Same as `output.good.throttledBackoffPolicy.minBackoff` for failed events. |
+| `output.incomplete.throttledBackoffPolicy.maxBackoff` (since *3.4.1*) | Same as `output.good.throttledBackoffPolicy.maxBackoff` for failed events. |
+| `output.incomplete.recordLimit` | Same as `output.good.recordLimit` for failed events. |
+| `output.incomplete.customEndpoint` | Same as `output.good.customEndpoint` for failed events. |
+| `output.bad.streamName` | Required. E.g. `bad`. Name of the Kinesis stream that will receive the failed events in the "bad row" format (JSON). |
+| `output.bad.region` | Same as `output.good.region` for failed events in the "bad row" format (JSON). |
+| `output.bad.backoffPolicy.minBackoff` | Same as `output.good.backoffPolicy.minBackoff` for failed events in the "bad row" format (JSON). |
+| `output.bad.backoffPolicy.maxBackoff` | Same as `output.good.backoffPolicy.maxBackoff` for failed events in the "bad row" format (JSON). |
+| `output.bad.backoffPolicy.maxRetries` | Same as `output.good.backoffPolicy.maxRetries` for failed events in the "bad row" format (JSON). |
+| `output.bad.throttledBackoffPolicy.minBackoff` (since *3.4.1*) | Same as `output.good.throttledBackoffPolicy.minBackoff` for failed events in the "bad row" format (JSON). |
+| `output.bad.throttledBackoffPolicy.maxBackoff` (since *3.4.1*) | Same as `output.good.throttledBackoffPolicy.maxBackoff` for failed events in the "bad row" format (JSON). |
+| `output.bad.recordLimit` | Same as `output.good.recordLimit` for failed events in the "bad row" format (JSON). |
+| `output.bad.customEndpoint` | Same as `output.good.customEndpoint` for failed events in the "bad row" format (JSON). |
 | `output.pii.streamName` | Optional. E.g. `pii`. Should be used in conjunction with the PII pseudonymization enrichment. When configured, enables an extra output stream for writing a `pii_transformation` event. |
 | `output.pii.region` | Same as `output.good.region` for pii events. |
 | `output.pii.partitionKey` | Same as `output.good.partitionKey` for pii events. |
@@ -157,14 +170,17 @@ A minimal configuration file can be found on the [Github repo](https://github.co
 | `output.good.producerConf` | Optional. Kafka producer configuration. See [the docs](https://kafka.apache.org/documentation/#producerconfigs) for all properties |
 | `output.good.partitionKey` | Optional. Enriched event field to use as Kafka partition key |
 | `output.good.headers` | Optional. Enriched event fields to add as Kafka record headers |
+| `output.incomplete.topicName` | Optional. Name of the Kafka topic that will receive the failed events (same format as the enriched events) |
+| `output.incomplete.bootstrapServers` | Optional. A list of host:port pairs to use for establishing the initial connection to the Kafka cluster |
+| `output.incomplete.producerConf` | Optional. Kafka producer configuration. See [the docs](https://kafka.apache.org/documentation/#producerconfigs) for all properties |
+| `output.bad.topicName` | Optional. Name of the Kafka topic that will receive the failed events in the “bad row” format (JSON |
+| `output.bad.bootstrapServers` | Optional. A list of host:port pairs to use for establishing the initial connection to the Kafka cluster |
+| `output.bad.producerConf` | Optional. Kafka producer configuration. See [the docs](https://kafka.apache.org/documentation/#producerconfigs) for all properties |
 | `output.pii.topicName` | Optional. Name of the Kafka topic to write to |
 | `output.pii.bootstrapServers` | Optional. A list of host:port pairs to use for establishing the initial connection to the Kafka cluster |
 | `output.pii.producerConf` | Optional. Kafka producer configuration. See [the docs](https://kafka.apache.org/documentation/#producerconfigs) for all properties |
 | `output.pii.partitionKey` | Optional. Enriched event field to use as Kafka partition key |
 | `output.pii.headers` | Optional. Enriched event fields to add as Kafka record headers |
-| `output.bad.topicName` | Optional. Name of the Kafka topic to write to |
-| `output.bad.bootstrapServers` | Optional. A list of host:port pairs to use for establishing the initial connection to the Kafka cluster |
-| `output.bad.producerConf` | Optional. Kafka producer configuration. See [the docs](https://kafka.apache.org/documentation/#producerconfigs) for all properties |
 | `blobStorage.s3` (since *4.0.0*) | Optional. Set to `true` if S3 client should be initialized to download enrichments assets. |
 | `blobStorage.gcs` (since *4.0.0*) | Optional. Set to `true` if GCS client should be initialized to download enrichments assets. |
 | `blobStorage.azureStorage` (since *4.0.0*) | Optional. Azure Blob Storage client configuration. ABS client won't be enabled if it isn't given. |
@@ -188,7 +204,10 @@ A minimal configuration file can be found on the [Github repo](https://github.co
 | `output.good.topic` | Required. Name of the NSQ topic that will receive the enriched events. |
 | `output.good.nsqdHost` | Required. The host name of nsqd application. |
 | `output.good.nsqdPort` | Required. The port number of nsqd application. |
-| `output.bad.topic` | Required. Name of the NSQ topic that will receive the failed events. |
+| `output.incomplete.topic` | Required. Name of the NSQ topic that will receive the failed events (same format as the enriched events). |
+| `output.incomplete.nsqdHost` | Required. The host name of nsqd application. |
+| `output.incomplete.nsqdPort` | Required. The port number of nsqd application. |
+| `output.bad.topic` | Required. Name of the NSQ topic that will receive the failed events in the "bad row" format (JSON). |
 | `output.bad.nsqdHost` | Required. The host name of nsqd application. |
 | `output.bad.nsqdPort` | Required. The port number of nsqd application. |
 | `output.pii.topic` | Optional. Name of the NSQ topic that will receive the pii events. |

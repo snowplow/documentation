@@ -256,7 +256,6 @@ vars:
     ...
     snowplow__session_sql: "DATE(e.derived_tstamp)"
     ...
-...
 ```
 
 This would be parsed into the following SQL:
@@ -269,4 +268,22 @@ SELECT
 ```
 
 ## Customizing user identifiers
-Customizing user identifiers works in the exact same way as customizing session identifiers, although you need to make use of the `snowplow__user_identifiers` variable instead of the `snowplow__session_identifiers`, and `snowplow__user_sql` in place of `snowplow__session_sql`. By default the user identifier is the `domain_userid` field which is found in the atomic events table. You can find an example project that shows this [here](https://github.com/snowplow-incubator/dbt-example-project/tree/main/custom_users).
+Customizing user identifiers works in the exact same way as customizing session identifiers, although you need to make use of the `snowplow__user_identifiers` variable instead of the `snowplow__session_identifiers`, and `snowplow__user_sql` in place of `snowplow__session_sql`. By default the user identifier is the `domain_userid` field which is found in the atomic events table. 
+
+You can find a project with examples to demonstrate this [here](https://github.com/snowplow-incubator/dbt-example-project/tree/main/custom_users).
+
+### Handling Anonymized Users
+In case of applying Client-side anonymisation with session tracking, the `userId` property of the `contexts_com_snowplowanalytics_snowplow_client_session_1` equates to a null UUID which will appear as `00000000-0000-0000-0000-000000000000` in the database. It may be convenient to make this field an actual NULL field to make it easier to exclude them from modeling (e.g the user mapping table of the Unified Package excludes null values). This can be made possible with the use of the `snowplow__user_sql` variable, however, this means that the extraction from the relevant context/sde field needs to be handled manually. 
+
+Example implementation (Snowflake):
+
+
+```yml title="dbt_project.yml"
+vars:
+  snowplow_unified:
+    snowplow__user_sql: 'coalesce(case when contexts_com_snowplowanalytics_snowplow_client_session_1[0]:userId::varchar(36) == "00000000-0000-0000-0000-000000000000" then null else contexts_com_snowplowanalytics_snowplow_client_session_1[0]:userId::varchar(36) end, domain_userid)'
+```
+
+:::info
+Defining the `snowplow__user_sql` variable will ensure that the package takes it's value as the `user_identifier` **over** anything you may have defined with the `snowplow__user_identifiers` variable.
+:::

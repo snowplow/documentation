@@ -273,7 +273,7 @@ Customizing user identifiers works in the exact same way as customizing session 
 You can find a project with examples to demonstrate this [here](https://github.com/snowplow-incubator/dbt-example-project/tree/main/custom_users).
 
 ### Handling Anonymized Users
-In case of applying Client-side anonymisation with session tracking, the `userId` property of the `contexts_com_snowplowanalytics_snowplow_client_session_1` equates to a null UUID which will appear as `00000000-0000-0000-0000-000000000000` in the database. It may be convenient to make this field an actual NULL field to make it easier to exlude them from modeling (e.g the user mapping table of the Unified Package excludes null values). This can be made possible with the use of the `snowplow__user_sql` variable, however, this means that the extraction from the relevant context/sde field needs to be handled manually. 
+In case of applying Client-side anonymisation with session tracking, the `userId` property of the `contexts_com_snowplowanalytics_snowplow_client_session_1` equates to a null UUID which will appear as `00000000-0000-0000-0000-000000000000` in the database. It may be convenient to make this field an actual NULL field to make it easier to exclude them from modeling (e.g the user mapping table of the Unified Package excludes null values). This can be made possible with the use of the `snowplow__user_sql` variable, however, this means that the extraction from the relevant context/sde field needs to be handled manually. 
 
 Example implementation (Snowflake):
 

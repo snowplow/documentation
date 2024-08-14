@@ -254,7 +254,7 @@ Instead, suppose you want to take the `DATE` value of your `derived_tstamp` as y
  ```yml title="dbt_project.yml"
 vars:
     ...
-    snowplow__session_sql: "e.domain_userid || '_' || e.domain_sessionid"
+    snowplow__session_sql: "DATE(e.derived_tstamp)"
     ...
 ```
 

@@ -14,17 +14,32 @@ To create a new data product based on a pre-defined template, navigate to the "D
 
 Below is a list of the current templates:
 
-### Base Web Data Product
+### Base Web
 
-This Data Product template contains all the tracking of Standard Events. It is recommended to be used in conjunction with the JavaScript or Browser tracker.
+This Data Product template contains all the tracking of Standard Events related to web tracking. It is expected that these events would be implemented using our [Web trackers](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/index.md) and the respective [button click](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/button-click/index.md) and [link click](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/link-click/index.md) plugins.
 
-Note: The event volume counts are calculated differently for this Data Product. They are counts of any page_ping/page_view events sent for the app ID's of this data product.
+Note: The event volume counts are calculated differently for this Data Product. They are counts of any of the following events sent for the app ID's of this data product.
 
 Included event specifications:
 
-* [Page Ping](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/activity-page-pings/)
 * [Page View](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/page-views/)
+* [Page Ping](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/activity-page-pings/)
+* [Button click](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/button-click/index.md)
+* [Link click](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/link-click/index.md)
 
+### Base Mobile
+
+This Data Product template contains all the tracking of Standard Events related to mobile tracking. It is expected that these events would be implemented using our [mobile trackers](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/index.md) with [installation](/docs/collecting-data//collecting-from-own-applications/mobile-trackers/tracking-events/installation-tracking/index.md), [screen view](/docs/collecting-data//collecting-from-own-applications/mobile-trackers/tracking-events/screen-tracking/index.md) and [app lifecycle](/docs/collecting-data//collecting-from-own-applications/mobile-trackers/tracking-events/lifecycle-tracking/index.md) tracking capabilities enabled.
+
+Note: The event volume counts are calculated differently for this Data Product. They are counts of any of the following events sent for the app ID's of this data product.
+
+Included event specifications:
+
+* [Screen view](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/page-and-screen-view-events/index.md#screen-view-events)
+* [Screen end](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/page-activity-tracking/index.md#screen-end-event)
+* [Application install](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/mobile-lifecycle-events/index.md#install-event)
+* [Application background](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/mobile-lifecycle-events/index.md#background-event)
+* [Application foreground](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/mobile-lifecycle-events/index.md#foreground-event)
 
 ## E-commerce Web
 

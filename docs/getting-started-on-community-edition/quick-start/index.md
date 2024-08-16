@@ -74,7 +74,7 @@ Details on how to configure the Azure Terraform Provider can be found [on the re
   </TabItem>
 </Tabs>
 
-## Storage options
+## Warehouse storage options
 
 The sections below will guide you through setting up your destination to receive Snowplow data, but for now here is an overview.
 
@@ -86,6 +86,24 @@ The sections below will guide you through setting up your destination to receive
 | Redshift | :white_check_mark: | — | — |
 | BigQuery | — | :white_check_mark: | — |
 | Synapse Analytics | — | — | :white_check_mark: |
+
+## Real-Time Streaming Storage Options
+
+As part of the deployment, your data will be available in real-time streams corresponding to the cloud provider you have chosen. You can consume data directly from these streams, either in addition to or instead of the data warehouse.
+
+| Stream | AWS | GCP | Azure |
+|:----------|:---:|:---:|:-----:|
+| Kinesis | :white_check_mark: | :x: | :x: |
+| Pub/Sub | :x: | :white_check_mark: |:x: |
+| EventHubs | :x: | :x: | :white_check_mark: |
+
+For an out-of-the-box solution to accessing this data in real-time streams, you can [check out our Snowbridge project](/docs/destinations/forwarding-events/snowbridge/). Alternatively, if you want to develop a custom consumer, you can [leverage our Analytics SDKs](https://docs.snowplow.io/docs/destinations/analytics-sdk/) to parse the event formats more easily.
+
+:::note
+
+EventHubs topics are deployed in a Kafka-compatible model, so you can consume from them using standard Kafka connector libraries.
+
+:::
 
 <Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>

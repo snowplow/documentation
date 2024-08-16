@@ -95,6 +95,27 @@ profile_name:
   target: prod
 ```
 
+Alternatively, if you prefer to leverage RSA public/private key-based authentication, your profile should look like the following:
+
+```yaml
+profile_name:
+  outputs:
+    prod:
+      type: snowflake
+      account:
+      user: ANALYTICS_PROD_USER
+      private_key_path: "{{ env_var('SNOWFLAKE_RSA_PRIVATE_KEY_PATH') }}"
+      # passphrase is optional -> if this is not set only include 'private_key_path'
+      private_key_passphrase: "{{ env_var('SNOWFLAKE_RSA_PRIVATE_KEY_PASSPHRASE') }}"
+      role: ANALYTICS_PROD_ROLE
+      database: ANALYTICS_PROD_DB
+      warehouse: ANALYTICS_PROD_WH
+      schema: DBT_PROD
+      threads: [1 or more]
+      client_session_keep_alive: true
+  target: prod
+```
+
 </TabItem>
 <TabItem value="bigquery" label="BigQuery">
 

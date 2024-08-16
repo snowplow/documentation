@@ -110,7 +110,7 @@ module.exports = {
             position: 'left',
           },
           {
-            to: 'https://go.snowplowanalytics.com/l/571483/2021-02-19/3sn5nml',
+            to: 'https://snowplow.io/get-started/book-a-demo-of-snowplow-bdp/',
             label: 'Book a demo',
             className: 'snowplow-button',
             position: 'right',

@@ -87,7 +87,7 @@ The sections below will guide you through setting up your destination to receive
 | BigQuery | — | :white_check_mark: | — |
 | Synapse Analytics | — | — | :white_check_mark: |
 
-## Real-Time Streaming Storage Options
+## Real-time streaming storage options
 
 As part of the deployment, your data will be available in real-time streams corresponding to the cloud provider you have chosen. You can consume data directly from these streams, either in addition to or instead of the data warehouse.
 

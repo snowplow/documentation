@@ -18,10 +18,10 @@ The **User & Marketing Analytics** app contains all the visuals you need to perf
 - Deep dives into technology and user demographics
 
 ```mdx-code-block
-import ReactPlayer from 'react-player'
+import TrackedReactFilePlayer from '@site/src/components/TrackedReactFilePlayer'
 import videoUrl from './images/umd_video.mp4'
 
-<ReactPlayer controls url={videoUrl} width='100%' height='100%'/>
+<TrackedReactFilePlayer label="UMD" controls url={videoUrl} width='100%' height='100%'/>
 <br/>
 ```
 

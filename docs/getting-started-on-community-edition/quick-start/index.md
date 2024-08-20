@@ -74,7 +74,7 @@ Details on how to configure the Azure Terraform Provider can be found [on the re
   </TabItem>
 </Tabs>
 
-## Warehouse storage options
+## Storage options
 
 The sections below will guide you through setting up your destination to receive Snowplow data, but for now here is an overview.
 
@@ -87,7 +87,7 @@ The sections below will guide you through setting up your destination to receive
 | BigQuery | — | :white_check_mark: | — |
 | Synapse Analytics | — | — | :white_check_mark: |
 
-## Real-time streaming storage options
+## Real-time streaming options
 
 As part of the deployment, your data will be available in real-time streams corresponding to the cloud provider you have chosen. You can consume data directly from these streams, either in addition to or instead of the data warehouse.
 

@@ -96,11 +96,12 @@ Your channel and spend data will be summed separately in the `attribution_overvi
 
 <details>
     <summary>Running both Unified and Attribution dbt packages from the same project</summary>
-Although auto-deployed packages managed via Console run in separate projects, for others there may be use cases when it is more practical to run both the [Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) and Attribution dbt packages from the same project. We purposefully did not directly link the two packages and this method of running is non-standard but there is a way to make it work. When specifying the sources just make sure you change the default source references to: ref('')  instead of hard coding the schema.table_name for these variables:
+Although auto-deployed packages managed via Console run in separate projects, for others there may be use cases when it is more practical to run both the [Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/) and Attribution dbt packages from the same project. We purposefully did not directly link the two packages and this method of running is non-standard but there is a way to make it work. When specifying the sources just make sure you change the default source references to: ref('')  instead of hard coding the schema.table_name for these variables:
 
 ```yml
 snowplow__conversion_path_source: "{{ ref('snowplow_unified_views') }}"
 snowplow__conversions_source: "{{ ref('snowplow_unified_conversions') }}"
+snowplow__user_mapping_source: "{{ ref('snowplow_unified_user_mapping') }}"
 ```
 
 Keep in mind that the manifest tables are still not linked, therefore both projects' statefulness is dictated by their own set of tables and values.

@@ -9,10 +9,10 @@ sidebar_position: 100
 In the following short video a complete example configuration of the Snowplow GTM SS HTTP Request Tag is presented.
 
 ```mdx-code-block
-import ReactPlayer from 'react-player'
+import TrackedReactFilePlayer from '@site/src/components/TrackedReactFilePlayer'
 import videoUrl from './images/http_request_tag_example_configuration.mp4'
 
-<ReactPlayer controls url={videoUrl} width='100%' height='100%'/>
+<TrackedReactFilePlayer label="HTTP Request Tag Example Configuration" controls url={videoUrl} width='100%' height='100%'/>
 <br/>
 ```
 

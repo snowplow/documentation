@@ -33,10 +33,10 @@ It works on any table that Snowplow’s Data Modeling User has access to, includ
 
 
 ```mdx-code-block
-import ReactPlayer from 'react-player'
+import TrackedReactFilePlayer from '@site/src/components/TrackedReactFilePlayer'
 import videoUrl from './images/funnel_builder_video.mp4'
 
-<ReactPlayer controls url={videoUrl} width='100%' height='100%' />
+<TrackedReactFilePlayer label="Funnel Builder" controls url={videoUrl} width='100%' height='100%' />
 <br/>
 ```
 ### Requirements

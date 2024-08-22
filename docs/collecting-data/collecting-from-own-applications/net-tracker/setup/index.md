@@ -33,3 +33,31 @@ Install-Package Snowplow.Tracker.PlatformExtensions
 ```
 
 Remember to add an assembly reference to the .NET Tracker to your project.
+
+### MAUI users
+
+The `Snowplow.Tracker.PlatformExtensions` package is currently not compatible with MAUI apps.
+
+However, as a replacement for the `GetLocalFilePath` function that the package provides, you can use the following implementation:
+
+```cs
+/// <summary>
+/// Returns a path for storing the Snowplow events and session databases
+/// </summary>
+public string GetLocalFilePath(string filename)
+{
+    var path = System.Environment.GetFolderPath(System.Environment.SpecialFolder.LocalApplicationData);
+    return Path.Combine(path, filename);
+}
+```
+
+This function can be used to initialize the tracker as follows:
+
+```cs
+var dest = new SnowplowHttpCollectorEndpoint(collectorUri, method: method, port: port, protocol: protocol);
+var storage = new LiteDBStorage(GetLocalFilePath("events.db"));
+var queue = new PersistentBlockingQueue(storage, new PayloadToJsonString());
+var emitter = new AsyncEmitter(dest, queue);
+var clientSession = new ClientSession(GetLocalFilePath("client_session.dict"));
+Instance.Start(emitter: emitter, clientSession: clientSession);
+```

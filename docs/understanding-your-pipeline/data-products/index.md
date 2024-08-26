@@ -2,12 +2,14 @@
 title: "Data Products Introduction"
 sidebar_position: 7
 sidebar_label: "🆕 Data Products Introduction"
-description: "Snowplow's data products enable organizations to easily generate AI and BI-ready data that is reliable, clear, compliant, accurate, and predictable"
+description: "Snowplow's behavioral data products enable organizations to easily generate AI and BI-ready data that is reliable, clear, compliant, accurate, and predictable"
 ---
 
-Data products are Snowplow's solution to helping organizations more easily create and democratise behavioral data. By creating well-documented datasets, that are both human and machine readable, you can more easily collaborate around data & unlock self-service analytics at scale.
+Data products are Snowplow's solution to helping organizations more easily create and democratise behavioral data. Snowplow’s Customer Data Infrastructure (CDI) captures first party customer behavior data from a variety of sources. The data collected are behavioral events - actions and observations captured from a client or server endpoint. For example, Snowplow’s event tracking technology can capture behavioral events from websites, mobile phones, video, internet TVs, airplane seat entertainment systems, factory floor IoT devices, and more.  Events from these customer endpoints, often billions a month, are captured in real-time and stored in an atomic events table in a destination data store, such as Snowflake, Databricks or even cloud data lakes like S3.
 
-With data products, you can:
+This atomic events table houses data from one or more data products in a consistent way. This is a powerful concept - this table is a singular view of all the different behaviors of all your customers, all stored in one place. As a result, this events table data provides the foundation for Snowplow’s behavioral data products.
+
+With Snowplow's behavioral data products, you can:
 
 * Set clear ownership for the data being created
 * Make tracking implementation easier
@@ -16,25 +18,25 @@ With data products, you can:
 * Collaborate more effectively with the various teams involved in delivering value from your data
 * Drive a self-serve culture around data across your organization
 
-## What is a Data Product
+## What is a Behavioral Data Product
 
-A data product is a well documented dataset. By documenting what data you are collecting, where, the meaning of that data and how to use it, you can break down the barriers that exist today between the many teams involved in the data value chain (i.e. from those implementing the tracking to those analysing the data). 
+A behavioral data product is a well documented dataset. By documenting what data you are collecting, where, the meaning of that data and how to use it, you can break down the barriers that exist today between the many teams involved in the data value chain (i.e. from those implementing the tracking to those analyzing the data). 
 
-At its core, a data product has:
+At its core, a behavioral data product has:
 
 * An explicit owner; that is responsible for maintaining and updating the data over time
 * Consumers; who use the data to deliver use cases and are impacted by upstream changes 
 
-Data products at Snowplow are underpinned by the concept of a data contract. They act as a formal agreement between the producers of data products and the consumers of data products, and support better collaboration around the data being created.
+Behavioral data products at Snowplow are underpinned by the concept of a data contract. They act as a formal agreement between the producers of data products and the consumers of data products, and support better collaboration around the data being created.
 
 We have always believed in the value of data contracts at Snowplow; our tech is underpinned by event and entity schemas that describe upfront the structure of the data and ensure that the data conforms to that structure as it is processed by your pipeline. This schema technology forms the foundations of a data contract, but data products take this to the next level to bring enhanced quality, governance and discoverability to the data that you create. 
 
-Examples of data products:
+Examples of behavioral data products:
 
 * E-commerce Web
 * Media Web
 
-## Key elements of a Data Product
+## Key elements of a Behavioral Data Product
 
 **An owner**; data products are typically split by domain with each data product having an explicit owner that is responsible for the maintenance and evolution of that data.
 
@@ -76,6 +78,6 @@ The **event specification** describes a specific implementation of an event. It 
 
 By adding screenshots, and descriptions to the event specification, you are also able to communicate the **semantics of the data** to those that want to analyse it. In this way you can ensure that the data is **represented accurately** when being used to derive insights and make decisions by the many teams using the data downstream.
 
-A data structure can be used across event specifications, and across data products. In doing so, you can ensure you consistently track business critical events and entities (for example, your "product" entity) across your organisation. Having the ability to use centralised event and entity schemas in this way, means that you are able to better govern the structure of the data across an organisation whilst also empowering teams to manage their own specific implementation of events via data products. 
+A data structure can be used across event specifications, and across data products. In doing so, you can ensure you consistently track business critical events and entities (for example, your "product" entity) across your organisation. Having the ability to use centralized event and entity schemas in this way, means that you are able to better govern the structure of the data across an organisation whilst also empowering teams to manage their own specific implementation of events via data products. 
 
-To understand how to get started with data products, see [Defining the Data to collect with Data Products](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-poducts/) for further details.
+To understand how to get started with Snowplow's behavioral data products, see [Defining the Data to collect with Data Products](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-poducts/) for further details.

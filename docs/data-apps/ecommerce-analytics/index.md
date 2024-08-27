@@ -27,6 +27,7 @@ Leveraging Snowplow's latest Ecommerce event tracking and our proprietary E-comm
 
 - Running the [Snowplow E-commerce dbt Package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md)
 - Access to the derived tables granted to the role used when setting up the data app
+- E-commerce events tracked using the e-commerce plugins for the [JavaScript (Snowplow E-commerce plugin)](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md) and [mobile trackers](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/ecommerce-tracking/index.md).
 
 ## Usage
 
@@ -35,6 +36,7 @@ The following steps will guide you through using the app.
 ### Step 1: Explore the dashboards using sample data (optional)
 
 Before you configure the app to use your data, you are free to explore all the dashboards of the app using the sample data included in the app.
+The use of sample data is enabled by default and can be enabled/disabled using the "Use Sample Data" toggle on the Settings page.
 
 You can browse the following pages:
 
@@ -51,6 +53,8 @@ These refer to the output of the E-commerce dbt package.
 
 First, choose the warehouse schema where your dbt E-commerce package produced the derived tables (e.g., `dbt_ecom_derived`).
 The app will suggest the most likely tables below.
+The following derived tables will need to be configured: cart interactions, checkout interactions, product interactions, sessions, and transaction interactions table.
+
 Verify that these match the desired tables and click "Save Settings".
 The app will then check that the tables have the required columns.
 If successful, you can navigate to the dashboard pages in the sidebar and explore your data.

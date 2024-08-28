@@ -36,6 +36,12 @@ Examples of data products:
 
 ## Key elements of a Data Product
 
+**The Source Application/s it is part of**; a data product is referencing the [Source Application/s](/docs/understanding-tracking-design/organize-data-sources-with-source-applications/index.md) that is spanning across.
+
+**Benefits:**
+
+* Have a clear view in which application the data product is implemented in, which domains it spans and the related application context information it will have available by default in the dataset.
+
 **An owner**; data products are typically split by domain with each data product having an explicit owner that is responsible for the maintenance and evolution of that data.
 
 **Benefits:**

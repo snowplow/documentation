@@ -100,7 +100,7 @@ The purpose of this package is to allow an incremental, efficient way to do mark
 
 In the below guide we will walk you through the data transformation process step-by-step in order for you to see how the source data changes downstream. This will give you and your team a transparent and easy-to-understand way to see how this package will lead you to valuable insights.
 
-We also provide the **[Attribution Data App](/docs/data-apps/attribution-modeling/index.md)** specifically to help your analysis by visualizing the output in the form of interactive dashboards as well as letting you capture datasets for comparison. It works in tandem with the package and will auto-update daily in case your package has been processed since then.
+We also provide the **[Marketing Attribution Data App](/docs/data-apps/attribution-modeling/index.md)** specifically to help your analysis by visualizing the output in the form of interactive dashboards as well as letting you capture datasets for comparison. It works in tandem with the package and will auto-update daily in case your package has been processed since then.
 
 ## Sources you are going to need
 

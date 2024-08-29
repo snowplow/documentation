@@ -59,7 +59,7 @@ Define a fixed conversion window by selecting the appropriate date range with th
 1. Select your schema that contains the derived unified and attribution tables: this will trigger an update which checks for any tables with the names closest to what the app expects.
 2. After waiting for the update to take place you can revise if the auto-detected source tables are in line with your expectations, you can change them to any other existing tables you have in case they are not correct.
 
-    There is an optional `snowplow_attribution_paths_to_non_conversion` table select box, which for most users are not relevant and therefore the first option: `Do not use paths_to_non_conversion table` should be selected. 
+    There is an optional `snowplow_attribution_paths_to_non_conversion` table select box, which for most users are not relevant and therefore the first option: `Do not use paths_to_non_conversion table` should be selected. This drop and recompute table calculates the paths your customers have followed that have not lead to a conversion.
 
     Please note that this table is not recalculated by the app, therefore it should only be used for a fixed view with the intention of consuming the same period as is in the latest data model, consuming the  `snowplow_attribution_paths_to_non_conversion` table for use in the `Path Summary` page.
 

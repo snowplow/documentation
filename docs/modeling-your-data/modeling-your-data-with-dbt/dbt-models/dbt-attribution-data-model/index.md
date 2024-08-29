@@ -48,7 +48,7 @@ This package consists of a series of dbt models that produce the following table
 - `snowplow_attribution_channel_attributions`: By channel path and conversion level incremental table that attributes the conversion value based on various algorithms
 - `snowplow_attribution_overview`: The user defined report view (potentially showing ROAS)
 - `snowplow_attribution_path_summary`: For each unique path, a summary of associated conversions, optionally non-conversions and revenue
-- `snowplow_attribution_paths_to_non_conversion`: Customer id and the the paths the customer has followed that have not lead to conversion. Optional drop and recompute table, disabled by default.
+- `snowplow_attribution_paths_to_non_conversion`: Customer id and the paths the customer has followed that have not lead to conversion. Optional drop and recompute table, disabled by default.
 
 In the [Quick Start](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/index.md) section you will find a step-by-step guide on how to operate the package as a whole.
 

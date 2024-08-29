@@ -52,7 +52,7 @@ Non-dynamic views will have to be given a name and will typically be used to gen
 
 Define a fixed conversion window by selecting the appropriate date range with the date picker tool (which gets activated by clicking on the default date range). 
 
-#### 1.2 Set a currency symbol (defaults to £)
+#### 1.2 Set a currency symbol (defaults to $)
 
 ### 2. Connect your Data Sources:
 

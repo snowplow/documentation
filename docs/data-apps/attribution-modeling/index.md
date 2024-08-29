@@ -66,7 +66,7 @@ Define a fixed conversion window by selecting the appropriate date range with th
 3. Overwrite the attribution_manifest table. Most likely the schema name will have to be modified. Please keep the `schema_name.table_name` notation here. Make sure you press enter once modified.
 4. (Optional but recommended) Specify the Spend Source: this will most likely be a view you created on top of your table that holds your marketing spend data. The view should make sure you align the expected field names. It should have `campaign`, `channel`, `spend` and `spend_tstamp` for the analysis to work. Doing this will make sure you have Return On Advertising Spend (ROAS) calculation in your overview. Make sure you press enter once modified.
 
-    Once happy with all the imputs press `Create View` button. The app will first run a validation against the data sources making sure it has all the fields it needs and display them if something is not correct, otherwise it will save the view and the dashboards are ready to be explored. The first time a dashboard page is visited, the relevant query will run once and the data will be cached to speed up subsequent dashboard explorations for other users.
+    Once you are happy with all the imputs press `Create View` button. The app will first run a validation against the data sources making sure it has all the fields it needs and display them if something is not correct, otherwise it will save the view and the dashboards are ready to be explored. The first time a dashboard page is visited, the relevant query will run once and the data will be cached to speed up subsequent dashboard explorations for other users.
 
 
 ## Using the Dashboard

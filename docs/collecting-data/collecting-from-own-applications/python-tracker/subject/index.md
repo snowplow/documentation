@@ -129,7 +129,7 @@ s.set_color_depth(32)
 
 ### `set_timezone`
 
-This method lets you pass a user's timezone into Snowplow. The timezone should be a string.
+This method lets you pass a user's timezone into Snowplow. The timezone should be a [IANA TZ identifier](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) string.
 
 ```python
 s.set_timezone("Europe/London")
@@ -151,6 +151,15 @@ If you have access to the user's IP address, you can set it like this:
 s.set_ip_address('34.633.11.139')
 ```
 
+The set value will be used in the [IP Lookup](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) and [IAB](/docs/enriching-your-data/available-enrichments/iab-enrichment/index.md) enrichments, if enabled.
+
+:::tip
+
+On web applications, the remote address of an incoming request may reflect load balancers or reverse proxies instead of the actual Subject's IP.
+You may need to consider the [Forwarded](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Forwarded) or [X-Forwarded-For](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For) HTTP headers instead, though these headers can be forged by the requester.
+
+:::
+
 ### `set_useragent`
 
 If you have access to the user's useragent (sometimes called "browser string"), you can set it like this:
@@ -158,6 +167,8 @@ If you have access to the user's useragent (sometimes called "browser string"), 
 ```python
 s.set_useragent('Mozilla/5.0 (Windows NT 5.1; rv:23.0) Gecko/20100101 Firefox/23.0')
 ```
+
+The set value will be used in the [YAUAA](/docs/enriching-your-data/available-enrichments/yauaa-enrichment/index.md), [UA Parser](/docs/enriching-your-data/available-enrichments/ua-parser-enrichment/index.md), [IAB](/docs/enriching-your-data/available-enrichments/iab-enrichment/index.md) and similar enrichments.
 
 ### `set_domain_user_id`
 
@@ -179,6 +190,13 @@ This method lets you pass a Domain Session ID in to Snowplow:
 ```python
 s.set_domain_session_id('ecdff4d0-9175-40ac-a8bb-325c49733607')
 ```
+
+:::tip
+
+The Domain User ID, Domain Session ID, and Domain Session Index values can all be extracted from the same cookie.
+
+:::
+
 ### `set_domain_session_index`
 This method lets you pass a Domain Session index in to Snowplow:
 ```python

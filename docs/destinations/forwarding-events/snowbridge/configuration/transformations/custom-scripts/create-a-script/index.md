@@ -5,11 +5,11 @@ sidebar_position: 100
 
 # Writing a script
 
-Custom tranformation scripts may be defined in Javascript and provided to Snowbridge.
+Custom transformation scripts may be defined in Javascript and provided to Snowbridge.
 
 ## The scripting interface
 
-The script must define a main function with a single argument. Snowbridge will pass the engineProtocol data structure as the argument:
+The script must define a main function with a single argument. Snowbridge will pass the `engineProtocol` data structure as the argument:
 
 
 ```go
@@ -86,7 +86,7 @@ https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/tra
 
 ## Filtering
 
-If the `FilterOut` field of the output is returned as `true`, the message will be acked immediately and won't be sent to the target. This will be the behavior regardelss of what is returned to the other fields in the protocol.
+If the `FilterOut` field of the output is returned as `true`, the message will be acknowledged immediately and won't be sent to the target. This will be the behavior regardless of what is returned to the other fields in the protocol.
 
 ```js reference
 https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/custom-scripts/create-a-script-filter-example.js
@@ -108,11 +108,13 @@ https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/tra
 
 ## Setting an HTTP header
 
-For the http target only, you can specify a set of http headers, which will be appended to the configured headers for the http target. Do so by prividing an object in the `HTTPHeaders` field:
+For the `http` target only, you can specify a set of HTTP headers, which will be appended to the configured headers for the `http` target. Do so by providing an object in the `HTTPHeaders` field:
 
 ```js reference
 https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/custom-scripts/create-a-script-header-example.js
 ```
+
+The headers will only be included if the target has the [`dynamic_headers = true` setting](/docs/destinations/forwarding-events/snowbridge/configuration/targets/http/index.md#configuration-options) configured.
 
 ## Configuration
 

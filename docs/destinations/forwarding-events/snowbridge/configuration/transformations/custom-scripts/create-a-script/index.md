@@ -23,9 +23,21 @@ type engineProtocol struct {
 
 This structure is represented as an object in the script engine, and serves as both the input and output of the script.
 
-Scripts must define a main function with a single input argument:
+Scripts must define a `main` function with a single input argument (JSDoc for type information is optional):
 
 ```js
+/**
+ * @typedef {object} EngineProtocol
+ * @property {boolean} FilterOut
+ * @property {string} PartitionKey
+ * @property {(string | Object.<string, ?>)} Data
+ * @property {Object.<string, string>} HTTPHeaders
+ */
+
+/**
+ * @param {EngineProtocol} input
+ * @return {Partial<EngineProtocol>}
+ */
 function main(input) {
     return input
 }

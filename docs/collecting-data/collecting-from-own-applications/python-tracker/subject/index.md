@@ -32,13 +32,19 @@ The full set of subject methods are listed below:
 
 | **Subject Method** | **Description** |
 | --- | --- |
-| [`set_platform`](#change-the-trackers-platform-withset_platform) | Track custom events with custom schemas |
-| [`set_user_id`](#set-user-id-withset_user_id) | Track views of web pages |
-| [`set_screen_resolution`](#set-screen-resolution-with-set_screen_resolution) | Track engagement on web pages over time |
-| [`set_viewport`](#set-viewport-dimensions-withset_viewport) | Track views of a screen (non-web e.g. in-app) |
-| [`set_color_depth`](#set-color-depth-withset_color_depth) | Track custom events without schemas |
-| [`set_timezone`](#set-timezone-withset_timezone) | Track custom events without schemas |
-| [`set_lang`](#set-the-language-withset_lang) | Track custom events without schemas |
+| [`set_platform`](#set_platform) | Override the platform for the event (e.g. `srv`, `app`, `web`) |
+| [`set_user_id`](#set_user_id) | Identify the Subject with a business ID |
+| [`set_screen_resolution`](#set_screen_resolution) | Set the dimensions of the Subject's device |
+| [`set_viewport`](#set_viewport) | Set the dimensions of the Subject's viewport |
+| [`set_color_depth`](#set_color_depth) | Set the color depth of the Subject device's display |
+| [`set_timezone`](#set_timezone) | Set the local timezone for the Subject |
+| [`set_lang`](#set_lang) | Set the preferred language or locale of the Subject |
+| [`set_ip_address`](#set_ip_address) | Set the IP address of the Subject |
+| [`set_user_agent`](#set_user_agent) | Set the User Agent string of the Subject |
+| [`set_domain_user_id`](#set_domain_user_id) | Set the Domain User ID of the Subject |
+| [`set_network_user_id`](#set_network_user_id) | Set the Network User ID of the Subject |
+| [`set_domain_session_id`](#set_domain_session_id) | Set the Domain Session ID of the Subject |
+| [`set_domain_session_index`](#set_domain_session_index) | Set the Domain Session Index of the Subject |
 
 
 ### Setting a Tracker Subject

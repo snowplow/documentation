@@ -22,6 +22,8 @@ This is where a request to the destination technology fails or is rejected - for
 
 Note that this means failures on the receiving end (eg. if an endpoint is unavailable), mean Snowbridge will continue to attempt to process the data until the issue is fixed.
 
+As of Snowbridge 2.4.2, the kinesis target does not treat kinesis throttling as this type of failure. Rather it has an in-built backoff and retry, which will persist until each event in the batch is successful.
+
 ### Oversized data
 
 Targets have limits to the size of a single message. Where the destination technology has a hard limit, targets are hardcoded to that limit. Otherwise, this is a configurable option in the target configuration. When a message's data is above this limit, Snowbridge will produce a [size violation failed event](/docs/understanding-your-pipeline/failed-events/index.md#size-violation), and emit it to the failure target.

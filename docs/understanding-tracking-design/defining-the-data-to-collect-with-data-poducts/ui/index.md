@@ -47,3 +47,13 @@ In the image below, you can see an example of a data product. It not only provid
 ![Event specification details](images/event-specification-details.png)
 
 If you need to edit a data product at any time, simply select it from the data products listing accessible from the main menu.
+
+#### Updating existing Data Products following the release of Source Applications
+
+Data Products created prior to the release of [Source Applications](../organize-data-sources-with-source-applications/index.md) will need to be updated to assign Source Applications in which the events will be tracked on. The selected Source Applications will add the relevant application IDs to each of the event specifications in the data product. 
+
+![Updating existing Data Products](images/edit-existing-data-product.png)
+
+Event specifications which contain previously added application IDs will need to be updated to use the identifiers inherited from the Source Applications selected at Data Product level. This process can be done manually or you can [reach out to our team](#submitting-a-support-request) to help you with that.
+
+![Updating existing Event Specifications](images/edit-existing-event-specification.png)

@@ -22,7 +22,7 @@ This is where a request to the destination technology fails or is rejected - for
 
 Note that this means failures on the receiving end (eg. if an endpoint is unavailable), mean Snowbridge will continue to attempt to process the data until the issue is fixed.
 
-As of Snowbridge 2.4.2, the kinesis target does not treat kinesis throttling as this type of failure. Rather it has an in-built backoff and retry, which will persist until each event in the batch is either successful, or fails for a different reason.
+As of Snowbridge 2.4.2, the kinesis target does not treat kinesis write throughput exceptions as this type of failure. Rather it has an in-built backoff and retry, which will persist until each event in the batch is either successful, or fails for a different reason.
 
 ### Oversized data
 

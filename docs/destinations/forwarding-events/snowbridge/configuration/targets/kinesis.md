@@ -9,7 +9,7 @@ Authentication is done via the [AWS authentication environment variables](https:
 
 ## Throttle retries
 
-As of 2.4.2, the kinesis target handles kinesis throttling separately from all other errors and failures. It will back off and retry only the throttled records on an initial back off of 50ms, increasing by 50ms each time, until there are no more throttle errors.
+As of 2.4.2, the kinesis target handles kinesis write throughput exceptions separately from all other errors and failures. It will back off and retry only the throttled records on an initial back off of 50ms, increasing by 50ms each time, until there are no more throttle errors.
 
 ## Configuration options
 

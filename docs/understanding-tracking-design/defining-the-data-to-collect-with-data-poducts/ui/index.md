@@ -50,7 +50,7 @@ If you need to edit a data product at any time, simply select it from the data p
 
 #### Updating existing Data Products following the release of Source Applications
 
-Data Products created prior to the release of [Source Applications](../../organize-data-sources-with-source-applications/index.md) will need to be updated to assign Source Applications in which the events will be tracked on. The selected Source Applications will add the relevant application IDs to each of the event specifications in the data product. 
+Data Products created prior to the release of [Source Applications](../../organize-data-sources-with-source-applications/index.md) in September 2024 will need to be updated to assign Source Applications in which the events will be tracked on. The selected Source Applications will add the relevant application IDs to each of the event specifications in the data product. 
 
 ![Updating existing Data Products](images/edit-existing-data-product.png)
 

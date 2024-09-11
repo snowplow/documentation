@@ -54,6 +54,6 @@ Data Products created prior to the release of [Source Applications](../../organi
 
 ![Updating existing Data Products](images/edit-existing-data-product.png)
 
-Event specifications which contain previously added application IDs will need to be updated to use the identifiers inherited from the Source Applications selected at Data Product level. This process can be done manually or you can [reach out to our team](mailto:support@snowplow.io) to help you with that.
+Event specifications which contain previously added application IDs will need to be updated to use the identifiers inherited from the Source Applications selected at Data Product level. This process can be done manually but you can reach out to our Support team to help you with that by either logging a request through our Snowplow [BDP Console](https://console.snowplowanalytics.com/) or by directly emailing [support@snowplow.io](mailto:support@snowplow.io).
 
 ![Updating existing Event Specifications](images/edit-existing-event-specification.png)

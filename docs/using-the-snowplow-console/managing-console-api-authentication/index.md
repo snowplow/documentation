@@ -18,8 +18,6 @@ This method and the respective credentials still work for those who have been us
 
 ## Credentials UI v2
 
-The following view is available for all customers under [BDP Console settings](https://console.snowplowanalytics.com/credentials):
-
 ![](images/image.png)
 
 API keys generation view
@@ -36,6 +34,49 @@ This is a secret, equivalent to a username and a password combined, and should b
 curl \
   --header 'X-API-Key: <API_KEY>' \   
   https://console.snowplowanalytics.com/api/msc/v1/organizations/<ORGANIZATION_ID>/credentials/v2/token
+```
+
+You can find your organization's ID within the BDP Console URL:
+
+![This image has an empty alt attribute; its file name is orgID.png](images/orgID.png)
+
+The organization ID is the UUID in the first URL segment after the host
+
+The curl command above will return a JWT as follows:
+
+```json
+{"accessToken":"<JWT>"}
+```
+
+You may then use this access token value to supply authorization headers for subsequent api requests:
+
+```bash
+curl --header 'Authorization: Bearer <JWT>'
+```
+
+Authenticating with v2 only required the API key secret. While this method and the respective credentials will continue to work, we strongly advise you to use v3 detailed below.
+
+## Credentials UI v3
+
+The following view is available for all customers under [BDP Console settings](https://console.snowplowanalytics.com/credentials):
+
+![](images/accessing-generated-api-keys.png)
+
+API keys generation view
+
+It is possible to have multiple different keys, and deletion of a key is also possible. When a new API key is created, the following view shows up:
+
+![](images/generated-api-key-v3.png)
+
+Showing a newly created API key
+
+With v3 you will need both the API key ID and the API key secret. The secret is equivalent to a username and a password combined, and should be handled as such at all times. As soon as you have an API key, it is straightforward to exchange it for a JWT. If you would do that using curl, it would look as follows:
+
+```bash
+curl \
+  --header 'X-API-Key-ID: <API_KEY_ID>' \
+  --header 'X-API-Key-Secret: <API_KEY_SECRET>' \   
+  https://console.snowplowanalytics.com/api/msc/v1/organizations/<ORGANIZATION_ID>/credentials/v3/token
 ```
 
 You can find your organization's ID within the BDP Console URL:

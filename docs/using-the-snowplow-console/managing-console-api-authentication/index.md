@@ -40,7 +40,7 @@ You can find your organization's ID within the BDP Console URL:
 
 ![This image has an empty alt attribute; its file name is orgID.png](images/orgID.png)
 
-The organization ID is the UUID in the first URL segment after the host
+The organization ID is the UUID in the first URL segment after the host.
 
 The curl command above will return a JWT as follows:
 
@@ -48,7 +48,7 @@ The curl command above will return a JWT as follows:
 {"accessToken":"<JWT>"}
 ```
 
-You may then use this access token value to supply authorization headers for subsequent api requests:
+You may then use this access token value to supply authorization headers for subsequent API requests:
 
 ```bash
 curl --header 'Authorization: Bearer <JWT>'
@@ -58,19 +58,19 @@ Authenticating with v2 only required the API key secret. While this method and t
 
 ## Credentials UI v3
 
-The following view is available for all customers under [BDP Console settings](https://console.snowplowanalytics.com/credentials):
+The following view is available to all customers under [BDP Console settings](https://console.snowplowanalytics.com/credentials):
 
 ![](images/accessing-generated-api-keys.png)
 
 API keys generation view
 
-It is possible to have multiple different keys, and deletion of a key is also possible. When a new API key is created, the following view shows up:
+You can create multiple API keys, and it's also possible to delete any key. When a new API key is generated, the following view will appear:
 
 ![](images/generated-api-key-v3.png)
 
-Showing a newly created API key
+Newly created API key view
 
-With v3 you will need both the API key ID and the API key secret. The secret is equivalent to a username and a password combined, and should be handled as such at all times. As soon as you have an API key, it is straightforward to exchange it for a JWT. If you would do that using curl, it would look as follows:
+In v3, both the API key ID and API key secret are required. The secret functions like a combination of a username and password, and should be treated with the same level of security. Once you have an API key, exchanging it for a JWT is straightforward. For example, using curl, the process would look like this:
 
 ```bash
 curl \
@@ -79,7 +79,7 @@ curl \
   https://console.snowplowanalytics.com/api/msc/v1/organizations/<ORGANIZATION_ID>/credentials/v3/token
 ```
 
-You can find your organization's ID within the BDP Console URL:
+You can find your organization's ID in the BDP Console URL:
 
 ![This image has an empty alt attribute; its file name is orgID.png](images/orgID.png)
 
@@ -91,7 +91,7 @@ The curl command above will return a JWT as follows:
 {"accessToken":"<JWT>"}
 ```
 
-You may then use this access token value to supply authorization headers for subsequent api requests:
+You may then use this access token value to supply authorization headers for subsequent API requests:
 
 ```bash
 curl --header 'Authorization: Bearer <JWT>'

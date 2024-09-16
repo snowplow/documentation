@@ -91,7 +91,7 @@ The curl command above will return a JWT as follows:
 {"accessToken":"<JWT>"}
 ```
 
-You may then use this access token value to supply authorization headers for subsequent API requests:
+You can then use this access token to supply authorization headers for subsequent API requests:
 
 ```bash
 curl --header 'Authorization: Bearer <JWT>'

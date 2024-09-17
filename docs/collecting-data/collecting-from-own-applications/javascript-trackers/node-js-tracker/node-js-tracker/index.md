@@ -2,6 +2,8 @@
 title: "Previous versions"
 date: "2020-02-26"
 sidebar_position: 300
+sidebar_custom_props:
+  outdated: true
 ---
 
 ```mdx-code-block

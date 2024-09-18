@@ -23,7 +23,7 @@ To setup your cloud environment as required you will need
 
 - to be able to set up a sub-account and appropriate permissions on AWS
 - to know which AWS region you’d like us to install your Snowplow pipeline into
-- to know whether or not you want VPC peering, and for which /21 or /22 CIDR range (note: [VPC peering is an additional bolt-on for basecamp and ascent tiers](https://snowplow.io/snowplow-bdp-product-description/#bolt-ons))
+- to know whether or not you want VPC peering, and for which /21 or /22 CIDR range (note: [VPC peering and using a custom VPC is an additional bolt-on](https://snowplow.io/snowplow-behavioral-data-platform-product-description/#h-vpc-peering-aws-gcp))
 
 We often find our point of contact requires support from their DevOps or Networking colleagues to complete the cloud setup step; in Snowplow BDP Console you can [easily create accounts for colleagues](/docs/using-the-snowplow-console/managing-users/index.md) who can complete this step for you.
 
@@ -45,9 +45,9 @@ These instructions are also provided as part of the setup flow in Snowplow BDP C
 3. Select "Another AWS account"  
     (Account ID: 793733611312 Require MFA: true)
 4. Select the policy you created earlier
-5. Call the role "SnowplowAdmin" or similar
+5. Call the role "SnowplowAdmin" (please use this specific name)
 
-You will need to share this role with us as part of filling out the setup form in Snowplow BDP console.
+You will need to share this role with us as part of filling out the setup form in Snowplow BDP Console.
 
 ### JSON Policy Document
 
@@ -137,9 +137,17 @@ The last step is to set up the Snowplow deployment role. This is a role assumed 
 - Account ID: 793733611312
 - Do not require MFA, as Snowplow needs to be able to assume the role via headless jobs.
 3. Attach the `IAMFullAccess` policy. If a Permission Boundary was set on the admin role, then add this boundary to the bottom section of permissions page.
-- Role name: SnowplowDeployment
+- Role name: SnowplowDeployment (please use this specific name)
 - Role description: Allows the Snowplow Team to programmatically deploy to this account.
 4. Copy the Snowplow deployment role ARN. You will need to share this role with us as part of filling out the setup form in Snowplow BDP console.
+
+### Determine if Snowplow requires a specific VPC CIDR range (optional)
+
+If you require Snowplow to be deployed into a specific VPC CIDR range, this should be provided at the same time. We need a /18 provided for the VPC so that we can create /20 and /23 subnets (note: [VPC peering and using a custom VPC is an additional bolt-on](https://snowplow.io/snowplow-behavioral-data-platform-product-description/#h-vpc-peering-aws-gcp)).
+
+### Determine if Snowplow requires a specific IAM Permission Boundary (optional)
+
+If you require Snowplow to be deployed using a specific IAM Permission Boundary, this should be provided at the same time (note: [IAM Permission Boundary is an additional bolt-on](https://snowplow.io/snowplow-behavioral-data-platform-product-description/#h-custom-vpc-integration-aws)).
 
 ### Final checklist
 
@@ -147,5 +155,5 @@ If you are sending a request to our team to set up your account for you. Please 
 1. SnowplowAdmin role ARN
 2. SnowplowDeployment role ARN
 3. AWS region to deploy into
-4. VPC CIDR requirements for VPC Peering (if applicable)
-5. The IAM permission boundary ARN (if applicable)
+4. VPC CIDR requirements for VPC peering (optional)
+5. The IAM Permission Boundary ARN (optional)

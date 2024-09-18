@@ -37,8 +37,7 @@ GA cookies information is **automatically tracked** once configured.
 - `yarn add @snowplow/browser-plugin-ga-cookies`
 - `pnpm add @snowplow/browser-plugin-ga-cookies`
 
-
-  </TabItem>
+</TabItem>
 </Tabs>
 
 ## Initialization

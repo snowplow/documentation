@@ -9,7 +9,7 @@ As you are building this for yourself, there is no need to follow our usual this
 
 :::note
 
-Any custom derived model must build only to session-level or _lower_ because of the [incremental sessionization](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md) of our packages. For example you can't build a table that aggregates per day using the standard sessionisation as not all events from a given day are always processed in the same run.
+Any custom derived model must build only to session-level or _lower_ because of the [incremental sessionization](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md) of our packages. For example you can't build a table that aggregates per day using the standard sessionisation as not all events from a given day are always processed in the same run, at least not on any of the [this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md), see the [Daily Aggregate Table](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/examples/daily-aggregate-table/index.md) for how to do this.
 
 :::
 

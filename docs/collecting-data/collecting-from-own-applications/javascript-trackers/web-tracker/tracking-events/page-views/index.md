@@ -167,18 +167,19 @@ When the JavaScript Tracker loads on a page, it generates a new page view UUID a
 It's possible to retrieve certain properties for use in your code, including the page view UUID, [user ID](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#getting-user-id-once-set), and [cookie values](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/cookies-and-local-storage/getting-cookie-values/#retrieving-cookie-properties-from-the-tracker), using a tracker callback. This is an advanced usage of the tracker.
 
 ```mdx-code-block
-import RetrieveValues from "@site/docs/reusable/javascript-tracker-retrieve-values/_index.md"
+import RetrieveValuesJs from "@site/docs/reusable/javascript-tracker-retrieve-values/_javascript.md"
+import RetrieveValuesBrowser from "@site/docs/reusable/javascript-tracker-retrieve-values/_browser.md"
 ```
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
 
-<RetrieveValues lang="javascript" />
+<RetrieveValuesJs />
 
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
 
-<RetrieveValues lang="browser" />
+<RetrieveValuesBrowser />
 
   </TabItem>
 </Tabs>
@@ -203,6 +204,43 @@ snowplow(function () {
 ```javascript
 const pageViewId = sp.getPageViewId();
 console.log(pageViewId);
+```
+
+  </TabItem>
+</Tabs>
+
+## When is the page view ID generated
+
+The first page view ID after loading a page is available even before the first page view is tracked. That means that events tracked before the first page view have the same page view ID as the first page view event.
+
+In single page apps, multiple page URLs might be visited while the same app is in memory. This brings up a question when are the second and following page view IDs generated. Normally, they are generated when the second and following page view events are tracked.
+
+In some cases, it may be desirable to generate a new page view ID for the second page URL before the page view event is tracked. For instance, the page may track multiple async events during the page load (e.g., for A/B testing) and we can't ensure that they will be tracked after the page view event (but still want them to share the same page view ID as the page view event).
+
+The tracker provides a configuration option, `preservePageViewIdForUrl`, that enables binding the generation of the page view ID to the changes in the page URL. That means that the page view ID will change along with changes in the URL for all events regardless of which order they are tracked in. The options are:
+
+* `false` (default) – the `pageViewId` will be regenerated on the second and each following page view event (first page view doesn't change the page view ID since tracker initialization).
+* `true` or `'full'` – the `pageViewId` will be kept the same for all page views with that exact URL (even for events tracked before the page view event).
+* `'pathname'` – the `pageViewId` will be kept the same for all page views with the same pathname (search params or fragment may change).
+* `'pathnameAndSearch'` – the `pageViewId` will be kept the same for all page views with the same pathname and search params (fragment may change).
+* `preservePageViewId` – the `preservePageViewIdForUrl` setting is ignored.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('newTracker', 'sp', 'https://{{collector_url_here}}', {
+  preservePageViewIdForUrl: 'pathname'
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+newTracker('sp', 'https://{{collector_url_here}}', {
+  preservePageViewIdForUrl: 'pathname'
+});
 ```
 
   </TabItem>

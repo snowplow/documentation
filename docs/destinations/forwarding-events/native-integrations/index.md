@@ -10,7 +10,7 @@ Snowplow offers a variety of native integrations which directly consume the real
 
 The Elasticsearch loader reads enriched data from the enriched Kinesis stream and streams it into Elasticsearch in near real-time.
 
-* For Community Edition, see the Elasticsearch Loader [documentation](/docs/destinations/forwarding-events/elasticsearch/index.md).
+* For Community Edition, see the Elasticsearch Loader [documentation](/docs/pipeline-components-and-applications/elasticsearch/index.md).
 * For Snowplow BDP, you can [request setup](https://console.snowplowanalytics.com/destinations/catalog) through the Console.
 
 ## Azure Event Hubs

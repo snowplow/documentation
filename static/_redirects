@@ -261,9 +261,9 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/passthrough-fields/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/passthrough-fields/ 301
 /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/passthrough-fields/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/passthrough-fields/ 301
 /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-mobile-data-model/passthrough-fields/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/passthrough-fields/ 301
-/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/custom-sessionization-and-users/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/ 301
-/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/custom-sessionization-and-users/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/ 301
-/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-mobile-data-model/custom-sessionization-and-users/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/custom-sessionization-and-users/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/custom-identifiers/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-web-data-model/custom-sessionization-and-users/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/custom-identifiers/ 301
+/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-mobile-data-model/custom-sessionization-and-users/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/custom-identifiers/ 301
 /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-user-mapping/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/ 301
 /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-materialization/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/optimized-upserts/ 301
 /docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-incremental-logic/ /docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/ 301
@@ -289,3 +289,4 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/getting-started-on-snowplow-bdp-cloud/first-party-tracking/ /docs/collecting-data/first-party-tracking/ 301
 /docs/getting-started-on-snowplow-bdp-cloud/* /docs/getting-started-on-bdp/cloud/ 301
 /docs/modeling-your-data/analytics-sdk/* /docs/destinations/analytics-sdk/:splat 301
+/docs/destinations/forwarding-events/elasticsearch/* /docs/pipeline-components-and-applications/elasticsearch/:splat 301

@@ -435,7 +435,7 @@ By default, this is set to 1, but it is configurable:
 
 <>{(props.tracker == 'ios') && (<CodeBlock language="swift">
 {`let configuration = MediaTrackingConfiguration(id: id)
-    .maxPausedPings(3)
+configuration.maxPausedPings = 3
 let mediaTracking = tracker.media.startMediaTracking(configuration: configuration)
 `}
 </CodeBlock>)}</>

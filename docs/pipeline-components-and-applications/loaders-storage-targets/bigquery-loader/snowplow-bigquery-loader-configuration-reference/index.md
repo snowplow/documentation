@@ -14,13 +14,13 @@ This is a complete list of the options that can be configured in the Snowplow Bi
 | `loader.input.subscription`          | Required. Enriched events subscription consumed by Loader and StreamLoader, eg enriched-sub. |
 | `loader.output.good.datasetId`       | Required. Specify the dataset to which the events table belongs, eg snowplow.  |
 | `loader.output.good.tableId`        | Required. The name of the events table, eg events.  |
-| `loader.output.bad.topic`            | Required. The name of the topic where bad rows will be written, eg bad-topic. |
+| `loader.output.bad.topic`            | Required. The name of the topic where failed events will be written, eg bad-topic. |
 | `loader.output.types.topic`          | Required. The name of the topic where observed types will be written, eg types-topic. |
 | `loader.output.failedInserts.topic`  | Required. The name of the topic where failed inserts will be written, eg failed-inserts-topic. |
 | `mutator.input.subscription`         | Required. A subscription on the loader.output.types.topic, eg types-sub.  |
-| `mutator.output.good.*`              | Required. Equivalent to loader.output.good.*. Can be specified in detail or as ${loader.output.good}. |
+| `mutator.output.good.*`              | Required. Equivalent to loader.output.good.*. Can be specified in detail or as `${loader.output.good}`. |
 | `repeater.input.subscription`        | Required. Failed inserts subscription consumed by Repeater. Must be attached to the loader.output.failedInserts.topic, eg failed-inserts-sub.  |
-| `repeater.output.good.*`             | Required. Equivalent to loader.output.good.*. Can be specified in detail or as ${loader.output.good}. |
+| `repeater.output.good.*`             | Required. Equivalent to loader.output.good.*. Can be specified in detail or as `${loader.output.good}`. |
 | `repeater.output.deadLetters.bucket` | Required. Failed inserts that repeatedly fail to be inserted into BigQuery are stored on GCS in this bucket, eg gs://dead-letter-bucket. |
 | `monitoring.*`                       | Optional. See below for details.Note: This was a required setting in 1.0.0. Can be left blank, ie {}, to disable this functionality in that version. |
 
@@ -29,11 +29,11 @@ This is a complete list of the options that can be configured in the Snowplow Bi
 | parameter | description |
 |-----------|-------------|
 | `monitoring.statsd.*`       | Optional. If set up, metrics will be emitted from StreamLoader and Repeater using the [StatsD](https://github.com/statsd/statsd) protocol. |
-| `monitoring.statsd.hostname`   | Optional, eg statsd.acme.gl. |
+| `monitoring.statsd.hostname`   | Optional, eg `statsd.acme.gl`. |
 | `monitoring.statsd.port`       | Optional, eg 1024.  |
-| `monitoring.statsd.tags`       | Optional. You can use env vars, eg {"worker": ${HOST}}. |
+| `monitoring.statsd.tags`       | Optional. You can use env vars, eg `{"worker": ${HOST}}`. |
 | `monitoring.statsd.period`     | Optional, eg 10 sec.  |
-| `monitoring.statsd.prefix`     | Optional, eg snowplow.monitoring. |
+| `monitoring.statsd.prefix`     | Optional, eg `snowplow.monitoring`. |
 | `monitoring.stdout.*`          | Optional. If set up, metrics will be logged to stdout at INFO level.  |
 | `monitoring.sentry`            | Optional. If set up, errors will be sent to a [Sentry](https://sentry.io/) endpoint. |
 

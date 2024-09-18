@@ -35,7 +35,7 @@ They replace many of the settings previously set on the builders for the Tracker
 An example configuration:
 
 ```swift
-func initTracker(trackerNamespace: String) -&gt; TrackerController {
+func initTracker(trackerNamespace: String) -> TrackerController {
         let networkConfig = NetworkConfiguration(endpoint: "https://snowplow-collector-url.com")
         let trackerConfig = TrackerConfiguration()
             .sessionContext(true)

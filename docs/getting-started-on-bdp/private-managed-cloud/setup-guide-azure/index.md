@@ -60,13 +60,7 @@ Create a custom role and assign it the “Snowplow BDP Enterprise Deployment” 
                         "Microsoft.Authorization/roleDefinitions/write",
                         "Microsoft.Authorization/roleDefinitions/read",
                         "Microsoft.Authorization/roleDefinitions/delete",
-                        "Microsoft.Resources/subscriptions/resourcegroups/read",
-                        "Microsoft.Authorization/registrationDefinitions/write",
-                        "Microsoft.Authorization/registrationDefinitions/read",
-                        "Microsoft.Authorization/registrationDefinitions/delete",
-                        "Microsoft.Authorization/registrationAssignments/write",
-                        "Microsoft.Authorization/registrationAssignments/read",
-                        "Microsoft.Authorization/registrationAssignments/delete"
+                        "Microsoft.Resources/subscriptions/resourcegroups/read"
                     ],
                     "notActions": [],
                     "dataActions": [],
@@ -77,7 +71,12 @@ Create a custom role and assign it the “Snowplow BDP Enterprise Deployment” 
     }
     ```
 5. Within “Access Control (IAM)”, click “Add role assignment”
-6. Assign the `Snowplow-Deployment-Role-Creator-Role` to service principal “Snowplow BDP Enterprise Deployment”
+6. Assign the `Snowplow-Deployment-Role-Creator-Role` to service principal “Snowplow BDP Enterprise Deployment”. The role can be found under the “Privileged administrator roles” tab. The Conditions tab should be selected and you must select the third option. This is required to enable the [Lighthouse Offer to be created as detailed in Microsoft documentation](https://learn.microsoft.com/en-us/azure/lighthouse/how-to/deploy-policy-remediation#create-a-user-who-can-assign-roles-to-a-managed-identity-in-the-customer-tenant:~:text=To%20allow%20a,Administrator%20or%20Owner)
+![IAM role assignment conditions](./images/azure_role_assignment_conditions.png)
+
+
+### Determine if Snowplow requires a specific VPC (optional)
+If you require Snowplow to be deployed into a specific VPC CIDR range, this should be provided at the same time as credentials. We need a /16 provided for the VPC so that we can create /20 subnets (note: [VPC peering and using a custom VPC is an additional bolt-on](https://snowplow.io/snowplow-behavioral-data-platform-product-description/#h-vpc-peering-aws-gcp))
 
 ### Check subscription resource availablity
 You must check that the following infrastructure is available in the subscription before deplyoment starts. If the required instances are unavailable, it may result in delays to getting started. 
@@ -99,3 +98,4 @@ If you are sending a request to our team to set up deployment into your Azure ac
 2. The subscription ID
 3. Azure region to deploy into
 4. The ID of the `Snowplow-Deployment-Role-Creator-Role`
+5. The specific VPC CIDR range that the pipeline should be deployed in (optional).

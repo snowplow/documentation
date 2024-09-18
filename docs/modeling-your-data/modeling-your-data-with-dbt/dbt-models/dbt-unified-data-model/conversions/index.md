@@ -80,7 +80,7 @@ The `snowplow__conversion_events` variable in our project takes a list of dictio
 
 Because the sessions table builds from our `_events_this_run` table, and both the `condition` and `value` fields will accept any valid sql that can go in a `case when...` and `select` block respectively, this means you can use any fields in a `contexts_` or `unstruct_` column in addition to the default `atomic.events` fields. However, it will not accept dbt code so you need to extract the relevant field yourself. You can see an example of this below.
 
-For Redshift and Postgres users currently you are limited to just the fields added by the IAB, UA, and YAUAA contexts without modifying the models yourself, however we plan to support adding arbitrary self-describing event and context fields to our base table in the future.
+For Redshift and Postgres we have added the variable `snowplow__entities_or_sdes` that you can use to bring in all the fields from any self describing events or entities. For more details on this check out the [Custom entities & Events section](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/modeling-entities/index.md#custom-entities--events).
 
 :::
 
@@ -89,12 +89,17 @@ For Redshift and Postgres users currently you are limited to just the fields add
 <details>
 <summary>All ids of page views on a particular url</summary>
 
-```json
-    {
-    "name": "contact_page_view", 
-    "condition": "event_name = 'page_view' and page_url like '%contact-us%",
-    "list_events": true 
-    }
+```yml title="dbt_project.yml"
+vars:
+  snowplow_unified:
+    snowplow__conversion_events:
+      [
+        {
+          "name": "contact_page_view",
+          "condition": "event_name = 'page_view' and page_url like '%contact-us%",
+          "list_events": true
+        }
+      ]
 ```
 
 </details>
@@ -105,11 +110,16 @@ For Redshift and Postgres users currently you are limited to just the fields add
 
 For some self-describing event with a name of `sign_up`, where we do not want to attribute a value:
 
-```json
-    {
-    "name": "transact", 
-    "condition": "event_name = 'sign_up'", 
-    }
+```yml title="dbt_project.yml"
+vars:
+  snowplow_unified:
+    snowplow__conversion_events:
+      [
+        {
+          "name": "transact",
+          "condition": "event_name = 'sign_up'",
+        }
+      ]
 ```
 
 </details>
@@ -124,37 +134,83 @@ Using our [Snowplow e-commerce tracking](/docs/collecting-data/collecting-from-o
 <Tabs groupId="warehouse" queryString>
 <TabItem value="snowflake" label="Snowflake" default>
 
-```json
-    {
-    "name": "transact", 
-    "condition": "UNSTRUCT_EVENT_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_SNOWPLOW_ECOMMERCE_ACTION_1:type::varchar = 'transaction'", 
-    "value": "CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_TRANSACTION_1[0]:revenue::decimal(22,2)", 
-    "default_value":0
-    }
+```yml title="dbt_project.yml"
+vars:
+  snowplow_unified:
+    snowplow__conversion_events:
+      [
+        {
+          "name": "transact",
+          "condition": "UNSTRUCT_EVENT_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_SNOWPLOW_ECOMMERCE_ACTION_1:type::varchar = 'transaction'",
+          "value": "CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_TRANSACTION_1[0]:revenue::decimal(22,2)",
+          "default_value":0
+        }
+      ]
 ```
 
 </TabItem>
 <TabItem value="bigquery" label="BigQuery">
 
-```json
-    {
-    "name": "transact", 
-    "condition": "UNSTRUCT_EVENT_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_SNOWPLOW_ECOMMERCE_ACTION_1_0_0.type = 'transaction'",
-    "value": "CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_TRANSACTION_1_0_0[SAFE_OFFSET(0)].revenue",
-    "default_value":0
-    }
+```yml title="dbt_project.yml"
+vars:
+  snowplow_unified:
+    snowplow__conversion_events:
+      [
+        {
+          "name": "transact",
+          "condition": "UNSTRUCT_EVENT_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_SNOWPLOW_ECOMMERCE_ACTION_1_0_0.type = 'transaction'",
+          "value": "CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_TRANSACTION_1_0_0[SAFE_OFFSET(0)].revenue",
+          "default_value":0
+        }
+      ]
 ```
 
 </TabItem>
 <TabItem value="databricks" label="Databricks">
 
-```json
-    {
-    "name": "transact", 
-    "condition": "UNSTRUCT_EVENT_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_SNOWPLOW_ECOMMERCE_ACTION_1.type = 'transaction'", 
-    "value": "CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_TRANSACTION_1[0].revenue", 
-    "default_value":0
-    }
+```yml title="dbt_project.yml"
+vars:
+  snowplow_unified:
+    snowplow__conversion_events:
+      [
+        {
+          "name": "transact",
+          "condition": "UNSTRUCT_EVENT_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_SNOWPLOW_ECOMMERCE_ACTION_1.type = 'transaction'",
+          "value": "CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_TRANSACTION_1[0].revenue",
+          "default_value":0
+        }
+      ]
+```
+
+</TabItem>
+<TabItem value="redshift" label="Redshift">
+
+```yml title="dbt_project.yml"
+vars:
+  snowplow_unified:
+    snowplow__entities_or_sdes:
+      [
+        {
+          'schema': 'com_snowplowanalytics_snowplow_ecommerce_transaction_1',
+          'prefix': 'trans_entity',
+          'alias': 'tr',
+          'single_entity': true
+        },
+        {
+          'schema': 'com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1',
+          'prefix': 'trans_event',
+          'alias': 'trev',
+          'single_entity': true
+        }
+      ]
+    snowplow__conversion_events:
+      [
+        {
+          "name": "transact",
+          "condition": "event_name = 'snowplow_ecommerce_action' and trans_event_type = 'transaction'",
+          "value":"trans_entity_revenue"
+        }
+      ]
 ```
 
 </TabItem>
@@ -229,7 +285,7 @@ export const printYamlVariables = (data) => {
     snowplow__conversion_events: ${JSON.stringify(data, null, 4)}`}</CodeBlock>
     </>
   )
-}
+};
 
 export const darkTheme = createTheme({
   palette: {
@@ -243,7 +299,7 @@ export const lightTheme = createTheme({
   },
 });
 
-export function JsonSchemaGenerator({ output, children, schema }) {
+export const JsonSchemaGenerator = ({ output, children, schema }) => {
   const [formData, setFormData] = useState(null)
   const { colorMode, setColorMode } = useColorMode()
   return (
@@ -272,7 +328,7 @@ export function JsonSchemaGenerator({ output, children, schema }) {
 
 ## 2. Enabling conversions in the Conversions Module
 
-If you need a a conversions source table for your downstream model (e.g. for the snowplow-attribution package), you can enable the optional Conversions module by setting the `snowplow__enable_conversions` variable to `true` to model that for you. You will also need to make sure you define your conversion events using the `snowplow__conversion_events` variable in case you have not already done so for the sessions table.
+If you need a conversions source table for your downstream model (e.g. for the snowplow-attribution package), you can enable the optional Conversions module by setting the `snowplow__enable_conversions` variable to `true` to model that for you. You will also need to make sure you define your conversion events using the `snowplow__conversion_events` variable in case you have not already done so for the sessions table.
 
 This would produce an incremental conversions table where you will see the most important fields related to your conversion events based on your definitions. If you defined multiple conversion types, you will see them all in one table.
 
@@ -282,4 +338,10 @@ This would produce an incremental conversions table where you will see the most 
 | event_2   | session_2 | f0009028775170427694 |user_2 | 20.42      | 2023-06-11 15:33:03.000 | 2023-06-11 15:33:03.000 | transactions |
 | event_3   | session_3| f0008284662789123943 | user_3| 200.00     | 2023-07-07 13:05:55.000 | 2023-07-07 13:05:55.000 | transactions |
 
-You can also apply user-stitching to your conversions table by setting the `snowplow__conversion_stitching` variable to `true`. For more details please refer to our guide on [Identity Stitching](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/index.md).
+:::note
+
+On Databricks targets, this table should also have a `cv_tstamp_date` column; this is used as the partition key for the table and should be the `DATE()` of the `cv_tstamp` value.
+
+:::
+
+You can also apply user-stitching to your conversions table by setting the `snowplow__conversion_stitching` variable to `true`. In this case a new field called `stitched_user_id` will be added to the table. For more details please refer to our guide on [Identity Stitching](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/index.md).

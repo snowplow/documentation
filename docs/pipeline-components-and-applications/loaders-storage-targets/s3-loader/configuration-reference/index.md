@@ -26,7 +26,7 @@ This is a complete list of the options that can be configured in the S3 loader H
 | `buffer.byteLimit`              | Required. Maximum bytes to read from kinesis before flushing a file to S3 |
 | `buffer.recordLimit`            | Required. Maximum records to read from kinesis before flushing a file to S3 |
 | `buffer.timeLimit`              | Required. Maximum time to wait in milliseconds between writing files to S3 |
-| `monitoring.snowplow.collector` | Optional. E.g. <https://snplow.acme.com>. URI of a snowplow collector. Used for monitoring application lifecycle and failure events |
+| `monitoring.snowplow.collector` | Optional. E.g. `https://snplow.acme.com`. URI of a snowplow collector. Used for monitoring application lifecycle and failure events |
 | `monitoring.snowplow.appId`     | Required only if the collector uri is also configured. Sets the appId field of the snowplow events |
 | `monitoring.sentry.dsn`         | Optional, for tracking uncaught run time exceptions |
 | `monitoring.metrics.cloudwatch` | Optional boolean, with default true. This is used to disable sending metrics to cloudwatch |

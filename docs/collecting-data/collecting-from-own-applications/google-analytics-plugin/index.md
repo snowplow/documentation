@@ -30,22 +30,22 @@ The best way to deploy this using Google Tag Manager is to replicate the plugin 
 
 ### 1. Create a new Custom JavaScript variable
 
-Create a new Custom JavaScript variable, and name it {{customTask - Snowplow duplicator}}. Add the following code within:
+Create a new Custom JavaScript variable, and name it `{{customTask - Snowplow duplicator}}`. Add the following code within:
 
 ```javascript
 function() {
   // Add your snowplow collector endpoint here
   var endpoint = 'https://mycollector.mydomain.com/';
-  
+
   return function(model) {
     var vendor = 'com.google.analytics';
     var version = 'v1';
     var path = ((endpoint.substr(-1) !== '/') ? endpoint + '/' : endpoint) + vendor + '/' + version;
-    
+
     var globalSendTaskName = '_' + model.get('trackingId') + '_sendHitTask';
-    
+
     var originalSendHitTask = window[globalSendTaskName] = window[globalSendTaskName] || model.get('sendHitTask');
-    
+
     model.set('sendHitTask', function(sendModel) {
       var payload = sendModel.get('hitPayload');
       originalSendHitTask(sendModel);
@@ -60,7 +60,7 @@ function() {
 
 This stores a reference to the original `sendHitTask` in a globally scoped variable (e.g. `window['_UA-12345-1_sendHitTask']`) to avoid multiple runs of this `customTask` from cascading on each other.
 
-### 2. Add {{customTask - Snowplow duplicator}} to Google Analytics tags
+### 2. Add `{{customTask - Snowplow duplicator}}` to Google Analytics tags
 
 This variable must be added to every single Google Analytics tag in the GTM container, whose hits you want to duplicate to Snowplow.
 
@@ -71,7 +71,7 @@ Regardless of whether you choose to add this variable directly to the tags' sett
 1. Browse to the tags' **More Settings** option, expand it, and then expand **Fields to set**. If you are editing the tag directly (i.e. not using a Google Analytics Settings variable), you will need to check "Enable overriding settings in this tag" first.
 2. Add a new field with:
     - **Field name**: customTask
-    - **Value**: {{customTask - Snowplow duplicator}}
+    - **Value**: `{{customTask - Snowplow duplicator}}`
 
 All tags which have this field set will now send the Google Analytics payload to the Snowplow endpoint.
 
@@ -82,7 +82,7 @@ Further reading on the topic:
 
 ## Data structure
 
-You can find the specific schema for the properties that will be collected via Google Analytics in the IgluCentral repository:  
+You can find the specific schema for the properties that will be collected via Google Analytics in the IgluCentral repository:
 [Google](https://github.com/snowplow/iglu-central/tree/master/schemas/com.google.analytics)
 
 [Google Measurement Protocol](https://github.com/snowplow/iglu-central/tree/master/schemas/com.google.analytics.measurement-protocol)

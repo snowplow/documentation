@@ -32,13 +32,19 @@ The full set of subject methods are listed below:
 
 | **Subject Method** | **Description** |
 | --- | --- |
-| [`set_platform`](#change-the-trackers-platform-withset_platform) | Track custom events with custom schemas |
-| [`set_user_id`](#set-user-id-withset_user_id) | Track views of web pages |
-| [`set_screen_resolution`](#set-screen-resolution-with-set_screen_resolution) | Track engagement on web pages over time |
-| [`set_viewport`](#set-viewport-dimensions-withset_viewport) | Track views of a screen (non-web e.g. in-app) |
-| [`set_color_depth`](#set-color-depth-withset_color_depth) | Track custom events without schemas |
-| [`set_timezone`](#set-timezone-withset_timezone) | Track custom events without schemas |
-| [`set_lang`](#set-the-language-withset_lang) | Track custom events without schemas |
+| [`set_platform`](#set_platform) | Override the platform for the event (e.g. `srv`, `app`, `web`) |
+| [`set_user_id`](#set_user_id) | Identify the Subject with a business ID |
+| [`set_screen_resolution`](#set_screen_resolution) | Set the dimensions of the Subject's device |
+| [`set_viewport`](#set_viewport) | Set the dimensions of the Subject's viewport |
+| [`set_color_depth`](#set_color_depth) | Set the color depth of the Subject device's display |
+| [`set_timezone`](#set_timezone) | Set the local timezone for the Subject |
+| [`set_lang`](#set_lang) | Set the preferred language or locale of the Subject |
+| [`set_ip_address`](#set_ip_address) | Set the IP address of the Subject |
+| [`set_user_agent`](#set_user_agent) | Set the User Agent string of the Subject |
+| [`set_domain_user_id`](#set_domain_user_id) | Set the Domain User ID of the Subject |
+| [`set_network_user_id`](#set_network_user_id) | Set the Network User ID of the Subject |
+| [`set_domain_session_id`](#set_domain_session_id) | Set the Domain Session ID of the Subject |
+| [`set_domain_session_index`](#set_domain_session_index) | Set the Domain Session Index of the Subject |
 
 
 ### Setting a Tracker Subject
@@ -123,7 +129,7 @@ s.set_color_depth(32)
 
 ### `set_timezone`
 
-This method lets you pass a user's timezone into Snowplow. The timezone should be a string.
+This method lets you pass a user's timezone into Snowplow. The timezone should be a [IANA TZ identifier](https://en.wikipedia.org/wiki/List_of_tz_database_time_zones) string.
 
 ```python
 s.set_timezone("Europe/London")
@@ -145,6 +151,15 @@ If you have access to the user's IP address, you can set it like this:
 s.set_ip_address('34.633.11.139')
 ```
 
+The set value will be used in the [IP Lookup](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) and [IAB](/docs/enriching-your-data/available-enrichments/iab-enrichment/index.md) enrichments, if enabled.
+
+:::tip
+
+On web applications, the remote address of an incoming request may reflect load balancers or reverse proxies instead of the actual Subject's IP.
+You may need to consider the [Forwarded](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Forwarded) or [X-Forwarded-For](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/X-Forwarded-For) HTTP headers instead, though these headers can be forged by the requester.
+
+:::
+
 ### `set_useragent`
 
 If you have access to the user's useragent (sometimes called "browser string"), you can set it like this:
@@ -152,6 +167,8 @@ If you have access to the user's useragent (sometimes called "browser string"), 
 ```python
 s.set_useragent('Mozilla/5.0 (Windows NT 5.1; rv:23.0) Gecko/20100101 Firefox/23.0')
 ```
+
+The set value will be used in the [YAUAA](/docs/enriching-your-data/available-enrichments/yauaa-enrichment/index.md), [UA Parser](/docs/enriching-your-data/available-enrichments/ua-parser-enrichment/index.md), [IAB](/docs/enriching-your-data/available-enrichments/iab-enrichment/index.md) and similar enrichments.
 
 ### `set_domain_user_id`
 
@@ -173,6 +190,13 @@ This method lets you pass a Domain Session ID in to Snowplow:
 ```python
 s.set_domain_session_id('ecdff4d0-9175-40ac-a8bb-325c49733607')
 ```
+
+:::tip
+
+The Domain User ID, Domain Session ID, and Domain Session Index values can all be extracted from the same cookie.
+
+:::
+
 ### `set_domain_session_index`
 This method lets you pass a Domain Session index in to Snowplow:
 ```python

@@ -35,7 +35,7 @@ Support for OptimizelyX has been introduced in the tracker, you can have a look 
 **Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
 
 ```javascript
-window.snowplow('addPlugin', 
+window.snowplow('addPlugin',
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-optimizely-x@latest/dist/index.umd.min.js",
   ["snowplowOptimizelyX", "OptimizelyXPlugin"]
 );
@@ -52,8 +52,8 @@ window.snowplow('addPlugin',
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 import { OptimizelyXPlugin } from '@snowplow/browser-plugin-optimizely-x';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ OptimizelyXPlugin() ],
 });
 ```
@@ -93,8 +93,7 @@ If you’re planning on leveraging the entity’s variation names, you’ll have
 - `yarn add @snowplow/browser-plugin-optimizely`
 - `pnpm add @snowplow/browser-plugin-optimizely`
 
-
-  </TabItem>
+</TabItem>
 </Tabs>
 
 ### Initialization
@@ -103,7 +102,7 @@ If you’re planning on leveraging the entity’s variation names, you’ll have
   <TabItem value="js" label="JavaScript (tag)" default>
 
 ```javascript
-window.snowplow('addPlugin', 
+window.snowplow('addPlugin',
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-optimizely@latest/dist/index.umd.min.js",
   ["snowplowOptimizely", "OptimizelyPlugin"],
   [true, true, true, true, true, true, true]
@@ -112,14 +111,14 @@ window.snowplow('addPlugin',
 The parameter array of booleans is used to initialize the plugin. If you do not include this, all the Optimizely contexts will be included. To alter this behavior you can flip some of the booleans. The array represent enabling the following contexts:
 
 ```javascript
-[ 
-  summary: boolean, 
-  experiments: boolean,  
-  states: boolean, 
-  variations: boolean, 
-  visitor: boolean, 
-  audiences: boolean, 
-  dimensions: boolean 
+[
+  summary: boolean,
+  experiments: boolean,
+  states: boolean,
+  variations: boolean,
+  visitor: boolean,
+  audiences: boolean,
+  dimensions: boolean
 ]
 ```
 
@@ -130,8 +129,8 @@ The parameter array of booleans is used to initialize the plugin. If you do not 
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 import { OptimizelyPlugin } from '@snowplow/browser-plugin-optimizely';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ OptimizelyPlugin() ],
 });
 ```

@@ -1,0 +1,61 @@
+name: Release dbt Workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      package_name:
+        description: 'Select package name'
+        type: choice
+        required: true
+        options:
+          - Attribution
+          - Unified
+          - MediaPlayer
+          - Ecommerce
+          - Normalize
+          - Web
+          - Mobile
+          - Fractribution
+          - Utils
+          # Add more package names as needed
+      version:
+        description: 'Enter version'
+        required: true
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      
+
+
+    - name: Copy Schema File
+      run: |
+        bash .github/scripts/copy_schema.sh ${{ github.event.inputs.package_name }} ${{ github.event.inputs.version }}
+
+    - name: Update Component Versions
+      run: |
+        bash .github/scripts/update_versions.sh ${{ github.event.inputs.package_name }} ${{ github.event.inputs.version }}
+
+    - name: Get Users Username
+      id: get_username
+      uses: actions/github-script@v4
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const { data } = await github.users.getByUsername({
+            username: '${{ github.actor }}'
+          });
+
+    - name: Create Pull Request
+      uses: peter-evans/create-pull-request@v6
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        branch: Release/${{ github.event.inputs.package_name }}/${{ github.event.inputs.version }}
+        base: main
+        title: "Release ${{ github.event.inputs.package_name }} version ${{ github.event.inputs.version }}"
+        body: |
+          This pull request is automatically generated to release version ${{ github.event.inputs.version }} of package ${{ github.event.inputs.package_name }}.
+        reviewers: ${{ steps.get_username.outputs.result }}

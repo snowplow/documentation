@@ -21,7 +21,7 @@ For purposes of this Agreement, “Excluded Purpose” means making available an
 
 </details>
 
-For example, this does not allow the hosting of Snowplow’s Snowbridge product, or other software licensed under the Snowplow Community License, as part of an online service or distribution of on-premises offerings, that compete with Snowplow products or services.
+For example, this does not allow the hosting of any Community License version of Snowplow’s Snowbridge product, or other software licensed under the Snowplow Community License, as part of an online service or distribution of on-premises offerings, that compete with Snowplow products or services.
 
 If you are not doing what is excluded, this license change will not affect your current use.
 

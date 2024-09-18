@@ -9,6 +9,7 @@ sidebar_position: 110
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
+
 :::note
 Snowplow visionOS tracking was added in version 6.0.0.
 :::
@@ -57,9 +58,9 @@ In this example, a window group entity is added to an [Ecommerce](docs/collectin
 
 ```swift
 let product = ProductEntity(
-  id: "productId", 
-  category: "category", 
-  currency: "GBP", 
+  id: "productId",
+  category: "category",
+  currency: "GBP",
   price: 100
 )
 let event = ProductViewEvent(product: product)
@@ -75,7 +76,7 @@ Use the `OpenImmersiveSpaceEvent` and `DismissImmersiveSpaceEvent` to automatica
 
 ```swift
 let tracker = Snowplow.createTracker(
-  namespace: "appTracker", 
+  namespace: "appTracker",
   endpoint: "https://snowplow-collector-url.com"
 )
 

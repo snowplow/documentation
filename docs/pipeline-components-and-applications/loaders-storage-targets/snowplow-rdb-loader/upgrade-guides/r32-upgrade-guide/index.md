@@ -4,7 +4,7 @@ date: "2020-03-06"
 sidebar_position: 700
 ---
 
-We recommend to go through the upgrade routine in several independent steps. After every step you should have a working pipeline. If something is not working or Shredder produces unexpected bad rows - please let us know.
+We recommend to go through the upgrade routine in several independent steps. After every step you should have a working pipeline. If something is not working or Shredder produces unexpected failed events - please let us know.
 
 ## Updating assets
 
@@ -17,14 +17,14 @@ We recommend to go through the upgrade routine in several independent steps. Aft
 ```yaml
 aws:
   emr:
-    ami_version: 5.19.0     # was 5.9.0; Required by RDB Shredder 
+    ami_version: 5.19.0     # was 5.9.0; Required by RDB Shredder
 storage:
   versions:
     rdb_loader: 0.17.0      # was 0.16.0
     rdb_shredder: 0.16.0    # was 0.15.0
 ```
 
-At this point, your pipeline should be running with new assets as it was before, without automigrations and generated TSV. We recommend to test this setup and monitor shredded bad rows for one or two runs before proceeding to enabling automigrations.
+At this point, your pipeline should be running with new assets as it was before, without automigrations and generated TSV. We recommend to test this setup and monitor shredded failed events for one or two runs before proceeding to enabling automigrations.
 
 ## Iglu Server
 
@@ -44,7 +44,7 @@ After setting up the Iglu Server, don't forget to add it to your resolver config
 
 New RDB Shredder is still able to produce legacy JSON files. But automigrations can be applied only to tables where data is prepared as TSV. If you setup a new pipeline, you can generate only TSVs abandoning legacy DDLs (except `atomic.events` and `atomic.manifest`) and [JSONPaths](https://discourse.snowplow.io/t/jsonpaths-files-demystified/269) altogether. However, if you already have tables deployed which DDLs were generated manually or via old igluctl you will likely need to apply so called _tabular blacklisting_ to these tables. It means that Shredder will keep producing data with these schemas as JSONs and Loader won't be able to apply migrations to it. This is necessary because manually generated DDLs are not guaranteed to have predictable column order and the only way to map JSON values to respective columns is JSONPaths files.
 
-[igluctl 0.7.0](https://discourse.snowplow.io/t/igluctl-0-7-0-released/3620) provides `rdbms table-check` subcommand that get schemas from Iglu Server, figures out what DDL the Loader would generate, then connects to Redshift and compares those DDLs with actual state of the table.  
+[igluctl 0.7.0](https://discourse.snowplow.io/t/igluctl-0-7-0-released/3620) provides `rdbms table-check` subcommand that get schemas from Iglu Server, figures out what DDL the Loader would generate, then connects to Redshift and compares those DDLs with actual state of the table.
 Every table that have an incompatible order will have to be "blacklisted" in Redshift storage target config (`redshift_config.json`).
 
 Here's an example of a black list containing several schemas from Iglu Central:

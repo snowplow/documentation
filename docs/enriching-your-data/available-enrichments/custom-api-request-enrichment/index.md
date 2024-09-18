@@ -137,7 +137,7 @@ To disable `ttl` so keys could be stored in cache until job is done `0` valu
 
 #### `ignoreOnError`
 
-When set to `true`, no bad row will be emitted if the API call fails and the enriched event will be emitted without the context added by this enrichment.
+When set to `true`, no failed event will be emitted if the API call fails and the enriched event will be emitted without the context added by this enrichment.
 
 ### Data sources
 
@@ -156,14 +156,14 @@ This enrichment uses any 3rd party RESTful service to fetch data in JSON format.
 
 Here are some clues on how this enrichment will handle some exceptional cases:
 
-- if provided JSONPath is invalid - all events attempted to being enriched will be sent to `enriched/bad`
-- if more than one context (derived or custom) matches `schemaCriterion` - first one will be picked, no matter if following have higher SchemaVer
-- if input's value found more than in one sources - last one will be picked, so try to put more precise input last (for example to get longitude/latitude pair use data from IP Lookup enrichment first and GPS-derived longitude/latitude second)
-- if any of input key wasn't found - HTTP request won't be sent and new context won't be derived, but event will be processed as usual
-- if output's JSONPath wasn't found - event will be sent to `enriched/bad` bucket
-- if server returned any non-successful response or timed-out - event will be sent to `enriched/bad` bucket
-- if server response returned JSON which invalidated by schema provided in output - event will be sent to `shredded/bad`
-- if input JSONPath will match non-primitive value in context or unstructured event, enrichment will try to stringify it. Array will be concatenated with commas, `null` will be transformed to string "null", object will be just stringified and will inevitable result in invalid URL
+- If the provided JSONPath is invalid - all events attempting to be enriched will be sent to `enriched/bad`
+- If more than one context (derived or custom) matches `schemaCriterion` - the first one will be picked, even if the following have higher SchemaVer
+- If the input's value is found in more than one source - the last one will be picked, so try to put the more precise input last (for example to get longitude/latitude pair use data from IP Lookup enrichment first and GPS-derived longitude/latitude second)
+- If any of the input key wasn't found - the HTTP request won't be sent and a new context won't be derived, but the event will be processed as usual
+- If the output's JSONPath wasn't found - the event will be sent to `enriched/bad` bucket
+- If the server returned any non-successful response or timed-out - the event will be sent to `enriched/bad` bucket
+- If the server response returned JSON which is invalidated by the schema provided in the output - the event will be sent to `shredded/bad`
+- If the input JSONPath will match a non-primitive value in context or unstructured event, the enrichment will try to stringify it. An array will be concatenated with commas, `null` will be transformed to string "null", an object will be stringified and will result in invalid URL
 
 ### Data generated
 

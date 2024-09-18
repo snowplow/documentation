@@ -9,8 +9,9 @@ import EventQuery from "@site/docs/reusable/event-query/_index.md"
 <Admonition type="note" title={(props.overview ? (props.overview.event ? 'Event': 'Context entity') : 'Schema') + ': ' + props.schema.self.name}>
   <p>{props.info || props.schema.description}</p>
   <p>
-    Schema URI: <code>
-    iglu://{props.schema.self.vendor}/{props.schema.self.name}/{props.schema.self.format}/{props.schema.self.version}
+    Schema URI:
+    <code>
+      iglu://{props.schema.self.vendor}/{props.schema.self.name}/{props.schema.self.format}/{props.schema.self.version}
     </code>
   </p>
   {

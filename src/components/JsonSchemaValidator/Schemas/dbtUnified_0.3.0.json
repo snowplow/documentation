@@ -16,10 +16,15 @@
             "title": "SQL & Alias",
             "properties": {
               "sql": {
-                "type": "string"
+                "type": "string",
+                "title": "Field SQL",
+                "format": "sql",
+                "order": 1
               },
               "alias": {
-                "type": "string"
+                "type": "string",
+                "title": "Field Alias",
+                "order": 2
               }
             },
             "required": [
@@ -47,13 +52,19 @@
               "max",
               "count",
               "countd"
-            ]
+            ],
+            "title": "Aggregation type",
+            "order": 1
           },
           "field": {
-            "type": "string"
+            "type": "string",
+            "title": "Field to aggregate",
+            "order": 2
           },
           "alias": {
-            "type": "string"
+            "type": "string",
+            "title": "Aggregated field alias",
+            "order": 3
           }
         },
         "required": [
@@ -144,7 +155,7 @@
       "title": "Sessions Table",
       "description": "The users module requires data from the derived sessions table. If you choose to disable the standard sessions table in favor of your own custom table, set this to reference your new table e.g. {{ ref(\"snowplow_unified_sessions_custom\") }}",
       "group": "Warehouse and Tracker",
-      "longDescription": "The users module requires data from the derived sessions table. If you choose to disable the standard sessions table in favor of your own custom table, set this to reference your new table e.g. `{{ ref(\\'snowplow_unified_sessions_custom\\') }}`. Please see the [README](https://github.com/snowplow/dbt-snowplow-unified/tree/main/custom_example) in the `custom_example` directory for more information on this sort of implementation.",
+      "longDescription": "The users module requires data from the derived sessions table. If you choose to disable the standard sessions table in favor of your own custom table, set this to reference your new table e.g. `{{ ref(\\'snowplow_unified_sessions_custom\\') }}`.Please see the [examples](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/examples/) in the documentation for more information on this sort of implementation.",
       "packageDefault": "\"{{ ref( \\'snowplow_unified_sessions\\' ) }}\""
     },
     "snowplow__allow_refresh": {
@@ -165,7 +176,7 @@
       "minimum": 0,
       "title": "Backfill Limit",
       "group": "Operation and Logic",
-      "longDescription": "The maximum numbers of days of new data to be processed since the latest event processed. Please refer to the [incremental logic](docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/#package-state) section for more details.",
+      "longDescription": "The maximum numbers of days of new data to be processed since the latest event processed. Please refer to the [incremental logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/#package-state) section for more details.",
       "packageDefault": "30",
       "description": "The maximum numbers of days of new data to be processed since the latest event processed"
     },
@@ -192,26 +203,33 @@
           "name": {
             "type": "string",
             "title": "Name",
-            "description": "Name of your conversion type"
+            "description": "Name of your conversion type",
+            "order": 1
           },
           "condition": {
             "type": "string",
             "title": "Condition",
-            "description": "SQL condition e.g. event_name = 'page_view'"
+            "description": "SQL condition e.g. event_name = 'page_view'",
+            "format": "sql",
+            "order": 2
           },
           "value": {
             "type": "string",
             "title": "Value",
-            "description": "SQL value e.g. tr_total_base"
+            "description": "SQL value e.g. tr_total_base",
+            "format": "sql",
+            "order": 3
           },
           "default_value": {
             "type": "number",
             "title": "Default value",
-            "description": "Default value e.g. 0"
+            "description": "Default value e.g. 0",
+            "order": 4
           },
           "list_events": {
             "type": "boolean",
-            "title": "List all event ids?"
+            "title": "List all event ids?",
+            "order": 5
           }
         }
       },
@@ -296,7 +314,7 @@
       "consoleGroup": "advanced",
       "type": "boolean",
       "title": "Enable Session Stitching",
-      "longDescription": "Determines whether to apply the user mapping to the sessions table. Please see the [User Mapping](docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/) section for more details.",
+      "longDescription": "Determines whether to apply the user mapping to the sessions table. Please see the [User Mapping](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/) section for more details.",
       "packageDefault": "true",
       "group": "Operation and Logic"
     },
@@ -330,7 +348,7 @@
       "minimum": 0,
       "title": "Upsert Lookback Days",
       "group": "Operation and Logic",
-      "longDescription": "Number of days to look back over the incremental derived tables during the upsert. Where performance is not a concern, should be set to as long a value as possible. Having too short a period can result in duplicates. Please see the [Snowplow Optimized Materialization](docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/optimized-upserts/) section for more details.",
+      "longDescription": "Number of days to look back over the incremental derived tables during the upsert. Where performance is not a concern, should be set to as long a value as possible. Having too short a period can result in duplicates. Please see the [Snowplow Optimized Materialization](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/optimized-upserts/) section for more details.",
       "packageDefault": "30",
       "description": "Number of days to look back over the incremental derived tables during the upsert"
     },
@@ -346,7 +364,8 @@
       "packageDefault": "[ ] (no filter applied)",
       "group": "Contexts, Filters, and Logs",
       "items": {
-        "type": "string"
+        "type": "string",
+        "title": "App ID"
       }
     },
     "snowplow__enable_consent": {
@@ -489,7 +508,7 @@
       "consoleGroup": "advanced",
       "title": "Session Identifiers",
       "group": "Operation and Logic",
-      "longDescription": "A list of key:value dictionaries which contain all of the contexts and fields where your session identifiers are located. For each entry in the list, if your map contains the `schema` value `atomic`, then this refers to a field found directly in the atomic `events` table. If you are trying to introduce a context/entity with an identifier in it, the package will look for the context in your events table with the name specified in the `schema` field. It will use the specified value in the `field` key as the field name to access. For Redshift/Postgres, using the `schema` key the package will try to find a table in your `snowplow__events_schema` schema with the same name as the `schema` value provided, and join that. If multiple fields are specified, the package will try to coalesce all fields in the order specified in the list. For a better understanding of the advanced usage of this variable, please see the [Custom Identifiers](docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/) section for more details.",
+      "longDescription": "A list of key:value dictionaries which contain all of the contexts and fields where your session identifiers are located. For each entry in the list, if your map contains the `schema` value `atomic`, then this refers to a field found directly in the atomic `events` table. If you are trying to introduce a context/entity with an identifier in it, the package will look for the context in your events table with the name specified in the `schema` field. It will use the specified value in the `field` key as the field name to access. For Redshift/Postgres, using the `schema` key the package will try to find a table in your `snowplow__events_schema` schema with the same name as the `schema` value provided, and join that. If multiple fields are specified, the package will try to coalesce all fields in the order specified in the list. For a better understanding of the advanced usage of this variable, please see the [Custom Identifiers](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/custom-identifiers/) section for more details.",
       "packageDefault": "[{\"schema\" : \"atomic\", \"field\" : \"domain_sessionid\"}]",
       "type": "array",
       "description": "> Click the plus sign to add a new entry",
@@ -500,10 +519,14 @@
         "properties": {
           "schema": {
             "type": "string",
+            "title": "(JSON) schema name for the field",
+            "order": 1,
             "description": "The schema name of your events table, atomic in most use cases, alternatively for sdes/contexts this should instead be the name of the field itself"
           },
           "field": {
             "type": "string",
+            "order": 2,
+            "title": "Field name",
             "description": "The name of the field to use as user identifier, alternatively, in case of sdes/contexts it is the name of the element that refers to the field to be extracted"
           }
         },
@@ -520,8 +543,9 @@
       "order": 47,
       "consoleGroup": "advanced",
       "type": "string",
+      "format": "sql",
       "title": "SQL for your session identifier",
-      "longDescription": "This allows you to override the `session_identifiers` SQL, to define completely custom SQL in order to build out a session identifier for your events. If you are interested in using this instead of providing identifiers through the `session_identifiers` variable, please see the [Custom Identifiers](docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/) section for more details on how to do that.",
+      "longDescription": "This allows you to override the `session_identifiers` SQL, to define completely custom SQL in order to build out a session identifier for your events. If you are interested in using this instead of providing identifiers through the `session_identifiers` variable, please see the [Custom Identifiers](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/custom-identifiers/) section for more details on how to do that.",
       "packageDefault": "",
       "group": "Operation and Logic"
     },
@@ -541,7 +565,7 @@
       "consoleGroup": "advanced",
       "title": "User Identifiers",
       "group": "Operation and Logic",
-      "longDescription": "A list of key:value dictionaries which contain all of the contexts and fields where your user identifiers are located. For each entry in the list, if your map contains the `schema` value `atomic`, then this refers to a field found directly in the atomic `events` table. If you are trying to introduce a context/entity with an identifier in it, the package will look for the context in your events table with the name specified in the `schema` field. It will use the specified value in the `field` key as the field name to access. For Redshift/Postgres, using the `schema` key the package will try to find a table in your `snowplow__events_schema` schema with the same name as the `schema` value provided, and join that. If multiple fields are specified, the package will try to coalesce all fields in the order specified in the list. For a better understanding of the advanced usage of this variable, please see the [Custom Identifiers](docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/) section for more details.",
+      "longDescription": "A list of key:value dictionaries which contain all of the contexts and fields where your user identifiers are located. For each entry in the list, if your map contains the `schema` value `atomic`, then this refers to a field found directly in the atomic `events` table. If you are trying to introduce a context/entity with an identifier in it, the package will look for the context in your events table with the name specified in the `schema` field. It will use the specified value in the `field` key as the field name to access. For Redshift/Postgres, using the `schema` key the package will try to find a table in your `snowplow__events_schema` schema with the same name as the `schema` value provided, and join that. If multiple fields are specified, the package will try to coalesce all fields in the order specified in the list. For a better understanding of the advanced usage of this variable, please see the [Custom Identifiers](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/custom-identifiers/) section for more details.",
       "packageDefault": "[{\"schema\" : \"atomic\", \"field\" : \"domain_userid\"}]",
       "type": "array",
       "description": "> Click the plus sign to add a new entry",
@@ -552,10 +576,14 @@
         "properties": {
           "schema": {
             "type": "string",
+            "title": "(JSON) schema name for the field",
+            "order": 1,
             "description": "The schema name of your events table, atomic in most use cases, alternatively for sdes/contexts this should instead be the name of the field itself"
           },
           "field": {
             "type": "string",
+            "title": "Field name",
+            "order": 2,
             "description": "The name of the field to use as user identifier, alternatively, in case of sdes/contexts it is the name of the element that refers to the field to be extracted"
           }
         },
@@ -572,8 +600,9 @@
       "order": 49,
       "consoleGroup": "advanced",
       "type": "string",
+      "format": "sql",
       "title": "SQL for your user identifier",
-      "longDescription": "This allows you to override the `user_identifiers` SQL, to define completely custom SQL in order to build out a user identifier for your events. If you are interested in using this instead of providing identifiers through the `user_identifiers` variable, please see the [Custom Identifiers](docs/modeling-your-data/modeling-your-data-with-dbt/package-features/customer-identifiers/) section for more details on how to do that.",
+      "longDescription": "This allows you to override the `user_identifiers` SQL, to define completely custom SQL in order to build out a user identifier for your events. If you are interested in using this instead of providing identifiers through the `user_identifiers` variable, please see the [Custom Identifiers](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/custom-identifiers/) section for more details on how to do that.",
       "packageDefault": "",
       "group": "Operation and Logic"
     },
@@ -582,6 +611,7 @@
       "order": 50,
       "consoleGroup": "advanced",
       "type": "string",
+      "format": "sql",
       "title": "Field used when stitching together users",
       "longDescription": "This is the user_id you want to stitch to sessions (and/or page views) with matching domain_userids. It supports raw `sql` expressions.",
       "packageDefault": "user_id",
@@ -613,7 +643,7 @@
       "consoleGroup": "advanced",
       "title": "User First Passthroughs",
       "group": "Contexts, Filters, and Logs",
-      "longDescription": " Field(s) to carry through from the events table to the derived table. The field is based on the first session record for that user. Aggregation is not supported. A list of either flat column names from the events table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output.",
+      "longDescription": " Field(s) to carry through from the events table to the derived table. The field is based on the first session record for that user. Aggregation is not supported. A list of either flat column names from the sessions table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output.",
       "packageDefault": "[ ] (no passthroughs)",
       "$ref": "#/definitions/passthrough_vars"
     },
@@ -623,7 +653,7 @@
       "consoleGroup": "advanced",
       "title": "User Last Passthroughs",
       "group": "Contexts, Filters, and Logs",
-      "longDescription": "Field(s) to carry through from the events table to the derived table. The field is based on the last session record for that user. Aggregation is not supported. A list of either flat column names from the events table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output. Note flat fields will be aliased with a `last_` prefix, dictionary provided aliases will not by default.",
+      "longDescription": "Field(s) to carry through from the events table to the derived table. The field is based on the last session record for that user. Aggregation is not supported. A list of either flat column names from the sessions table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output.  See the [Passthrough field](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/passthrough-fields/) docs for more information.Note flat fields will be aliased with a `last_` prefix, dictionary provided aliases will not by default.",
       "packageDefault": "[ ] (no passthroughs)",
       "$ref": "#/definitions/passthrough_vars"
     },
@@ -633,7 +663,7 @@
       "consoleGroup": "advanced",
       "title": "User Conversion Passthroughs",
       "group": "Contexts, Filters, and Logs",
-      "longDescription": "Field(s) to carry through from the events table to the derived table. The field is based on the events_this_run table therefore taking all events. Aggregation is not supported. A list of either flat column names from the events table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output. Note flat fields will be aliased with a `last_` prefix, dictionary provided aliases will not by default.",
+      "longDescription": "Field(s) to carry through from the events table to the derived table. The field is based on the events_this_run table therefore taking all events. Aggregation is not supported. A list of either flat column names from the events table or a dictionary with the keys `sql` for the SQL code to select the column and `alias` for the alias of the column in the output.  See the [Passthrough field](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/passthrough-fields/) docs for more information.Note flat fields will be aliased with a `last_` prefix, dictionary provided aliases will not by default.",
       "packageDefault": "[ ] (no passthroughs)",
       "$ref": "#/definitions/passthrough_vars"
     },
@@ -655,19 +685,26 @@
         "properties": {
           "schema": {
             "type": "string",
-            "description": "Table name"
+            "title": "Table name",
+            "description": "Table name",
+            "order": 1
           },
           "prefix": {
             "type": "string",
-            "description": "Prefix to add to columns"
+            "title": "Column prefix",
+            "description": "Prefix to add to columns",
+            "order": 2
           },
           "alias": {
             "type": "string",
-            "description": "Table alias for the subquery"
+            "title": "CTE Alias",
+            "description": "Table alias for the subquery",
+            "order": 3
           },
           "single_entity": {
             "type": "boolean",
-            "title": "Is single entity?"
+            "title": "Is single entity?",
+            "order": 4
           }
         },
         "required": [
@@ -684,7 +721,7 @@
       "consoleGroup": "advanced",
       "type": "boolean",
       "title": "Enable View Stitching",
-      "longDescription": "Determines whether to apply the user mapping to the views table. Note this can be an expensive operation to do every run. One way to mitigate this is by running this update with less frequency than your usual run by enabling this variable only for that specific run. Please see the [User Mapping](docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/) section for more details.",
+      "longDescription": "Determines whether to apply the user mapping to the views table. Note this can be an expensive operation to do every run. One way to mitigate this is by running this update with less frequency than your usual run by enabling this variable only for that specific run. Please see the [User Mapping](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/) section for more details.",
       "packageDefault": "false",
       "group": "Operation and Logic"
     },
@@ -694,7 +731,7 @@
       "consoleGroup": "advanced",
       "type": "boolean",
       "title": "Enable Conversion Stitching",
-      "longDescription": "Determines whether to apply the user mapping to the conversions table. Please see the [User Mapping](docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/) section for more details.",
+      "longDescription": "Determines whether to apply the user mapping to the conversions table. Please see the [User Mapping](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/) section for more details.",
       "packageDefault": "true",
       "group": "Operation and Logic"
     },
@@ -814,6 +851,7 @@
       "consoleGroup": "advanced",
       "type": "string",
       "title": "Custom SQL",
+      "format": "sql",
       "group": "Operation and Logic",
       "longDescription": "This allows you to introduce custom sql to the `snowplow_unified_events_this_run` table, which you can then leverage in downstream models. For more information on the usage, see the following page on the [advanced usage of the utils package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/examples/additional-sql-on-events-this-run/).",
       "packageDefault": "",
@@ -827,7 +865,7 @@
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Aggregations to calculate as part of the the derived table. A list of dictionaries defining the type (sum, avg, min, max, count, countd), field to aggregate, and what to alias the column.",
       "packageDefault": "[ ] (no aggregations)",
-      "$ref": "#/definitions/passthrough_vars"
+      "$ref": "#/definitions/aggregation_vars"
     },
     "snowplow__session_aggregations": {
       "recommendFullRefresh": false,
@@ -837,7 +875,7 @@
       "group": "Contexts, Filters, and Logs",
       "longDescription": "Aggregations to calculate as part of the the derived table. A list of dictionaries defining the type (sum, avg, min, max, count, countd), field to aggregate, and what to alias the column.",
       "packageDefault": "[ ] (no aggregations)",
-      "$ref": "#/definitions/passthrough_vars"
+      "$ref": "#/definitions/aggregation_vars"
     },
     "snowplow__user_aggregations": {
       "recommendFullRefresh": false,
@@ -847,7 +885,7 @@
       "group": "Contexts, Filters, and Logs",
       "longDescription": " Aggregations to calculate as part of the the derived table. A list of dictionaries defining the type (sum, avg, min, max, count, countd), field to aggregate, and what to alias the column.",
       "packageDefault": "[ ] (no aggregations)",
-      "$ref": "#/definitions/passthrough_vars"
+      "$ref": "#/definitions/aggregation_vars"
     },
     "snowplow__grant_select_to": {
       "recommendFullRefresh": false,

@@ -114,11 +114,16 @@ If you are already using Google Tag Manager to add various code snippets to your
 - Set it to fire on 'All Pages' or a trigger of your choosing
 - You can preview your tag to send some events before publishing it
 
-
-  </TabItem>
+</TabItem>
 </Tabs>
 
 The JavaScript tracker captures many events (e.g. page views) automatically, so you should start accumulating your first events as soon as the changes are rolled out to your users.
+
+:::tip Strong user and session cookies and ad-blocker mitigation
+
+To make sure that your tracking is well configured for strong first-party cookies and resilient against the impact of ad-blockers, [visit this page with several useful recommendations](/docs/first-steps/tracking/cookies-and-ad-blockers/index.md).
+
+:::
 
 ## Using other trackers
 

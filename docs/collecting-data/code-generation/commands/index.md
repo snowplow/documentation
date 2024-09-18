@@ -15,7 +15,7 @@ This page only summarizes the CLI commands and the options for each command. For
 
 ### `snowtype init`
 
-Initialize the setup of Snowtype code generation in a project. Creates the `snowtype.config.json` file.
+Initialize the setup of Snowtype code generation in a project. Creates the configuration file.
 
 **Options**
  -  `-i, --organizationId` Organization ID.
@@ -25,11 +25,14 @@ Initialize the setup of Snowtype code generation in a project. Creates the `snow
 
 ### `snowtype generate`
 
-Generates tracking code based on configuration on the `snowtype.config.json` file. Can generate/modify the `.snowtype-lock.json` file.
+Generates tracking code based on configuration on the configuration file. Can generate/modify the `.snowtype-lock.json` file.
 
 **Options**
- -  `-is, --instructions` Generate event specification instructions.
- -  `-va, --validations` Add runtime validation on events. _Currently available for the Browser tracker_.
+ -  `--instructions` Generate event specification instructions.
+ -  `--no-instructions` Generate without instructions.
+ -  `--validations` Add runtime validation on events. _Currently available for the Browser tracker_.
+ -  `--no-validations` Do not add runtime validation on events.
+ -  `--disallowDevSchemas` Disallow generation of code using schemas deployed on DEV environment. _Sending events using schemas deployed on DEV, will result in failed events in production pipelines._ (default: false)
 
 ### `snowtype update`
 
@@ -37,6 +40,7 @@ Checks for latest version updates in Data Structures and Event Specifications.
 
 **Options**
  -  `-y, --yes` Updates all to latest version without prompting. (default: false)
+ -  `-m, --maximumBump` The maximum SchemaVer update to show an available update notification for. Possible values are 'patch', 'minor', 'major' and will work as expected regular SemVer bumps. (default: 'major')
 
 ### `snowtype patch`
 

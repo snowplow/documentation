@@ -1,5 +1,5 @@
 ---
-title: "HTML5 media"
+title: "HTML5"
 sidebar_position: 10
 ---
 
@@ -31,7 +31,7 @@ HTML5 media events and entities are **automatically tracked** once configured.
 **Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
 
 ```javascript
-window.snowplow('addPlugin', 
+window.snowplow('addPlugin',
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-media-tracking@latest/dist/index.umd.min.js",
   ["snowplowMediaTracking", "MediaTrackingPlugin"]
 );
@@ -48,8 +48,8 @@ window.snowplow('addPlugin',
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 import { MediaTrackingPlugin, enableMediaTracking } from '@snowplow/browser-plugin-media-tracking';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ MediaTrackingPlugin() ],
 });
 
@@ -71,7 +71,7 @@ To start tracking media with default settings, use the snippet below, using your
 **`main.js`**
 
 ```javascript
-window.snowplow('addPlugin', 
+window.snowplow('addPlugin',
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-media-tracking@latest/dist/index.umd.min.js",
   ["snowplowMediaTracking", "MediaTrackingPlugin"]
 );
@@ -130,14 +130,14 @@ The `enableMediaTracking` function takes the form:
   <TabItem value="js" label="JavaScript (tag)" default>
 
 ```javascript
-window.snowplow('enableMediaTracking', { 
-  id, 
-  options?: { 
-    label?, 
-    captureEvents?, 
-    boundaries?, 
-    volumeChangeTrackingInterval? 
-  } 
+window.snowplow('enableMediaTracking', {
+  id,
+  options?: {
+    label?,
+    captureEvents?,
+    boundaries?,
+    volumeChangeTrackingInterval?
+  }
 })
 ```
 
@@ -145,13 +145,13 @@ window.snowplow('enableMediaTracking', {
   <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
-enableMediaTracking({ 
-  id, 
-  options?: { 
-    label?, 
-    captureEvents?, 
-    boundaries?, 
-    volumeChangeTrackingInterval? 
+enableMediaTracking({
+  id,
+  options?: {
+    label?,
+    captureEvents?,
+    boundaries?,
+    volumeChangeTrackingInterval?
   }
 })
 ```

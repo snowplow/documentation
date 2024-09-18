@@ -171,7 +171,7 @@ A Snowplow enrichment can run many millions of time per hour, effectively launch
 
 #### `ignoreOnError`
 
-When set to `true`, no bad row will be emitted if the SQL query fails and the enriched event will be emitted without the context added by this enrichment.
+When set to `true`, no failed event will be emitted if the SQL query fails and the enriched event will be emitted without the context added by this enrichment.
 
 ## Examples
 
@@ -279,7 +279,7 @@ This single context would be added to the `derived_contexts` array:
     {
       "SKU": "456",
       "prod_name": "Ray-Bans"
-    }    
+    }
   ]
 }
 ```

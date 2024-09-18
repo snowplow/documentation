@@ -63,7 +63,7 @@ Component | Latest version
 [Snowflake Streaming Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowflake-streaming-loader/index.md) | ${versions.snowflakeStreamingLoader}
 [S3 Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/index.md) | ${versions.s3Loader}
 [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md) | ${versions.snowbridge}
-[Elasticsearch Loader](/docs/destinations/forwarding-events/elasticsearch/index.md) | ${versions.esLoader}
+[Elasticsearch Loader](/docs/pipeline-components-and-applications/elasticsearch/index.md) | ${versions.esLoader}
 [Postgres Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-postgres-loader/index.md) | ${versions.postgresLoader}
 [Dataflow Runner](/docs/pipeline-components-and-applications/dataflow-runner/index.md) | ${versions.dataflowRunner}
 `} remarkPlugins={[remarkGfm]} />

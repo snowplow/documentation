@@ -1,7 +1,7 @@
 ---
 title: "Managing Data Products via the API"
 sidebar_label: "Using the API"
-sidebar_position: 2
+sidebar_position: 3
 sidebar_custom_props:
   offerings:
     - bdp

@@ -1,5 +1,5 @@
 ---
-title: "Client-side validation (Beta)"
+title: "Client-side validation"
 sidebar_position: 5
 ---
 
@@ -13,7 +13,7 @@ Using Snowtype you can get notified, at runtime, about schema validation errors 
 To opt-in to client-side validation you should include the `--validations` flag when you are generating your code.
 
 ```sh
-npx snowtype generate --validations
+npx @snowplow/snowtype generate --validations
 ```
 
 For validations to work, you will also need to install `ajv@8`, `ajv-formats@2` and `ajv-draft-04@1`.
@@ -104,12 +104,46 @@ A similar warning will occur when there is a cardinality rule set for an entity,
 
 ![empty cardinality validation browser example](./images/cardinality-empty.png)
 
+## Custom Violation Handler
+
+By default, when a JSON Schema or Data Product rule is violated, Snowtype will print a warning using `console.log`, displaying this information in the browser's developer tool panel. While this is useful for debugging events in the browser, it can be adjusted for different environments to better suit your needs. For example:
+
+- When unit testing with a library such as Jest, you might prefer each violation to throw a new `Error` so that relevant tests automatically fail.
+- In staging or production environments, you might want to report the violation to a third-party error monitoring solution such as Sentry.
+
+To accommodate custom violation handling use cases, Snowtype provides an option to set the `violationsHandler`. Using the `snowtype.setOptions` API, you can configure the `violationsHandler` to be called whenever a violation is detected.
+
+```ts
+import { snowtype } from "{{outpath}}/snowplow";
+
+function myViolationsHandler(error){
+    // Custom violation handling logic
+}
+
+snowtype.setOptions({ violationsHandler: mockViolationsHandler });
+```
+
+The `error` attribute is typed as follows:
+
+```ts
+type ErrorType = {
+  /* Specific error code number e.g. 100, 200, 201 ... */
+  code: number;
+  /* Error message */
+  message: string;
+  /* Description of the violation */
+  description: string;
+  /* Violations occurred */
+  errors: (ErrorObject | Record<string, unknown>)[];
+};
+```
+
+:::info
+When Snowtype detects the `NODE_ENV` environment variable being set to `test`, as is done by many testing libraries, it will automatically default to throwing an `Error` when a violation is detected. 
+:::
+
 ### Coming soon
 This is the initial version of this feature but due to the importance of integrating data quality checks as close to the code producing them as possible, there are a few upcoming features you should expect to be released pretty soon.
-- Custom `onValidationError` handler. You can pass a custom function to be executed when a validation is detected. For example:
-    - Send the error to your error monitoring tool e.g. Sentry, Rollbar.
-    - Control if the event will be sent or dropped.
-    - Integrate nicely with JavaScript unit testing libraries.
 - Property rules validation for [Data Products](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-poducts/).
 
 ## Caveats

@@ -13,6 +13,7 @@ Most of the time, configuring Iglu Resolver (or Client) means adding following J
   "schema": "iglu:com.snowplowanalytics.iglu/resolver-config/jsonschema/1-0-3",
   "data": {
     "cacheSize": 500,
+    "cacheTtl": 600,
     "repositories": [
       {
         "name": "Iglu Central",
@@ -45,6 +46,6 @@ The above configuration assumes Snowplow-authored schemas (Iglu Central) will be
 ### Configuration parameters
 
 - `cacheSize` determines how many individual schemas we will keep cached in our Iglu client (to save additional lookups)
-- `cacheTtl` (not used above) determines how long a schema can live in the cache before being reloaded
+- `cacheTtl` determines how long a schema can live in the cache before being reloaded (in seconds)
 - `repositories` is a JSON array of repositories to look up schemas in
 - `priority` and `vendorPrefixes` help the resolver to know which repository to check first for a given schema. For details see Iglu's [repository resolution algorithm](/docs/pipeline-components-and-applications/iglu/common-architecture/schema-resolution/index.md#3-registry-priority)

@@ -8,18 +8,25 @@ sidebar_position: 0
   <meta name='zd-site-verification' content='fly2zzu1qcv51s1ma9jds' />
 </head>
 
-Hi! Welcome to Snowplow, the world’s largest developer-first engine for collecting behavioral data.  
+Welcome to Snowplow, the leader in next-generation customer data infrastructure (CDI), enabling every data-driven organization to own and unlock the value of its customer behavioral data to fuel AI, advanced analytics, and personalized experiences from their central data platform.
 
-We are the leader in [Data Creation](https://snowplowanalytics.com/what-is-data-creation/?utm_source=docs&utm_content=introduction). Thousands of organizations of all sizes around the world generate, enhance, and model behavioral data with Snowplow to fuel [advanced analytics](https://snowplowanalytics.com/advanced-analytics/?utm_source=docs&utm_content=introduction), [AI/ML initiatives](https://snowplowanalytics.com/ai-ml/?utm_source=docs&utm_content=introduction), or [Composable CDPs](https://snowplowanalytics.com/composable-cdp/?utm_source=docs&utm_content=landing-page).
+Thousands of organizations like Burberry, Strava, and Auto Trader rely on Snowplow to collect, manage, and operationalize real-time event data from their central data platform to uncover deeper customer journey insights, predict customer behaviors, deliver differentiated customer experiences, and detect fraudulent activities.
 
-### Why Data Creation?
+### Why Next-Gen CDI?​
 
-Have you found yourself relying on “data exhaust” — data from arbitrary tools, hard to get into your data warehouse, in inconvenient format, not fit for your use cases? The solution is to deliberately design and collect clean, structured, rich and unopinionated behavioral data using Snowplow.
+Snowplow is built from the ground up to not only lay the foundation for an organization's advanced analytics use cases, but to also power machine learning and AI use cases, including those powered by generative AI. 
+
+Key benefits of Snowplow’s Next-Gen CDI:
+* Data Depth & Quality
+* Centralized Data Governance
+* Real-time operationalization
+* Privacy and Compliance
+* AI and BI-Ready Behavioral Data
 
 ### Why Snowplow?
 
-* 🏔️ **Rock solid architecture** capable of processing billions of events per day.
+* 🏔️ “Glass-box” technical architecture capable of processing billions of events per day.
 * 🛠️ **Over [20 SDKs](/docs/collecting-data/collecting-from-own-applications/index.md)** to collect data from web, mobile, server-side, and other sources.
 * ✅ A unique approach based on **[schemas and validation](/docs/understanding-your-pipeline/schemas/index.md)** ensures your data is as clean as possible.
 * 🪄 **Over [15 enrichments](/docs/enriching-your-data/available-enrichments/index.md)** to get the most out of your data.
-* 🏭 Send data to **popular warehouses and streams** — Snowplow fits nicely within the [Modern Data Stack](https://snowplowanalytics.com/blog/2021/05/12/modern-data-stack/?utm_source=docs&utm_content=landing-page).
+* 🏭 Stream data to your data warehouse/lakehouse or SaaS destinations of choice — Snowplow fits nicely within the [Modern Data Stack](https://snowplowanalytics.com/blog/2021/05/12/modern-data-stack/?utm_source=docs&utm_content=landing-page).

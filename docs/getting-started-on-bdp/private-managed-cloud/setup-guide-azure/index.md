@@ -79,6 +79,19 @@ Create a custom role and assign it the “Snowplow BDP Enterprise Deployment” 
 5. Within “Access Control (IAM)”, click “Add role assignment”
 6. Assign the `Snowplow-Deployment-Role-Creator-Role` to service principal “Snowplow BDP Enterprise Deployment”
 
+### Check subscription resource availablity
+You must check that the following infrastructure is available in the subscription before deplyoment starts. If the required instances are unavailable, it may result in delays to getting started. 
+
+Snowplow requires the below instances and databases. We have provided the Azure CLI commands that can be used to check their availability. Please note that they are required in all availability zones in the region for redundancy. 
+
+Instances DSv3, DSv4 and DSv5 Series:
+
+`az vm list-skus --location <REGION> --size Standard_D4s --all --output table`
+
+Database GP_Standard_D2ads_v5:
+
+`az vm list-skus --location <REGION> --size Standard_D2ads --all --output table`
+
 ### Final checklist
 
 If you are sending a request to our team to set up deployment into your Azure account, please ensure you provide the following information:

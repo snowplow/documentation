@@ -228,6 +228,14 @@ h5 {
   font-family: 'Rubik';
 }
 
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-weight: 500;
+}
+
 h1 {
   font-size: 32px;
   line-height: 40px;

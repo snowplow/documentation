@@ -4,7 +4,7 @@ date: "2020-02-26"
 sidebar_position: 30
 ---
 
-The Subject object lets you send any additional information about your application's environment, current user etc to Snowplow.
+The Subject object lets you send any additional information about your application's environment, current user, etc to Snowplow.
 
 To create a new subject:
 
@@ -12,22 +12,25 @@ To create a new subject:
 $subject = new Subject();
 ```
 
-By default the subject has one piece information in it already, the platform ["p" => "srv"].
+By default the subject has one piece information in it already, the [platform](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/going-deeper/event-parameters/index.md#application-parameters) `["p" => "srv"]`.
 
 The Subject class contains a variety of 'set' methods to attach extra data to your event.
 
-- [`setPlatform`](#set-platform)
-- [`setUserId`](#set-user-id)
-- [`setScreenRes`](#set-screen-res)
-- [`setViewport`](#set-viewport)
-- [`setColorDepth`](#set-color-depth)
-- [`setTimezone`](#set-timezone)
-- `[setLanguage](#set-lang)`
-- [`setIpAddress`](#set-ip-address)
-- [`setUseragent`](#set-useragent)
-- [`setNetworkUserId`](#set-network-user-id)
-- [`setSessionId`](#set-session-id)
-- [`setSessionIndex`](#set-session-index)
+- [`setPlatform`](#setplatform)
+- [`setUserId`](#setuserid)
+- [`setScreenResolution`](#setscreenresolution)
+- [`setViewPort`](#setviewport)
+- [`setColorDepth`](#setcolordepth)
+- [`setTimezone`](#settimezone)
+- [`setLanguage`](#setlanguage)
+- [`setIpAddress`](#setipaddress)
+- [`setUseragent`](#setuseragent)
+- [`setNetworkUserId`](#setnetworkuserid)
+- [`setDomainUserId`](#setdomainuserid)
+- [`setSessionId`](#setsessionid)
+- [`setSessionIndex`](#setsessionindex)
+- [`setRefr`](#setrefr)
+- [`setPageUrl`](#setpageurl)
 
 These set methods can be called either directly onto a subject object:
 
@@ -40,6 +43,13 @@ Or they can be called through the tracker object:
 
 ```php
 $tracker->returnSubject()->setPlatform("tv");
+```
+
+You can also change the active Subject a Tracker is operating with:
+
+```php
+$subject2 = new Subject();
+$tracker->updateSubject($subject2);
 ```
 
 ### `setPlatform`
@@ -56,7 +66,7 @@ For example:
 $subject->setPlatform("tv") # Running on a Connected TV
 ```
 
-For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md).
+For a full list of supported platforms, please see the [Event Parameters reference](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/going-deeper/event-parameters/index.md#application-parameters).
 
 ### `setUserId`
 
@@ -86,18 +96,18 @@ Both numbers should be positive integers; note the order is width followed by he
 $subject->setScreenResolution(1366, 768);
 ```
 
-### `setViewport`
+### `setViewPort`
 
 If your PHP code has access to the viewport dimensions, then you can pass this in to Snowplow too:
 
 ```php
-$subject->setViewport($width, $height);
+$subject->setViewPort($width, $height);
 ```
 
 Both numbers should be positive integers; note the order is width followed by height. Example:
 
 ```php
-$subject->setViewport(300, 200);
+$subject->setViewPort(300, 200);
 ```
 
 ### `setColorDepth`
@@ -224,4 +234,20 @@ The session index should be a number:
 
 ```php
 $subject->setSessionIndex(1);
+```
+
+### `setRefr`
+
+This method lets you set the referrer URL to a full URI:
+
+```php
+$subject->setRefr("https://example.com/previous-page");
+```
+
+### `setPageUrl`
+
+This method lets you set the page URL to a full URI string:
+
+```php
+$subject->setPageUrl("https://example.com/current-page");
 ```

@@ -15,9 +15,17 @@ Currently the only supported method of installation is through Composer. For a t
 
 ### Composer
 
-Using Composer to manage your dependencies, simply add the Snowplow PHP Tracker to your project by including it in your composer.json file as a dependency.
+Using Composer to manage your dependencies, simply add the Snowplow PHP Tracker to your project by running:
 
-<CodeBlock language="json">{
+```bash
+composer require snowplow/snowplow-tracker
+```
+
+to include it in your `composer.json` file as a dependency.
+
+You can also add it manually:
+
+<CodeBlock language="json" title="composer.json">{
 `{
     "require": {
         "snowplow/snowplow-tracker": "${versions.phpTracker}"
@@ -27,16 +35,15 @@ Using Composer to manage your dependencies, simply add the Snowplow PHP Tracker 
 
 Assuming you have Composer setup correctly in the root of your project. Type the following command line argument:
 
-```javascript
-composer install # If composer has not been run yet
-composer update # If composer dependencies are already installed
+```bash
+composer update # Will update lockfile and install dependencies
 ```
 
 This will install the Snowplow Tracker and allow you to initialize a Tracker object:
 
 ```php
 // Bare minimum Tracker initialization.
- 
+
 use Snowplow\Tracker\Tracker;
 use Snowplow\Tracker\Subject;
 use Snowplow\Tracker\Emitters\SyncEmitter;

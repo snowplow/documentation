@@ -12,7 +12,7 @@ To create a new subject:
 $subject = new Subject();
 ```
 
-By default the subject has one piece information in it already, the [platform](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/going-deeper/event-parameters/index.md#application-parameters) `["p" => "srv"]`.
+By default the subject has one piece of information in it already, the [platform](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/going-deeper/event-parameters/index.md#application-parameters) `["p" => "srv"]`.
 
 The Subject class contains a variety of 'set' methods to attach extra data to your event.
 

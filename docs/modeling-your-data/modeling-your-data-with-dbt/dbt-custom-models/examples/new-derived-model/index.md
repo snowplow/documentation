@@ -47,7 +47,7 @@ Then it is simply a case of writing the actual model content itself, which in th
   )
 }}
 
-select *
+select
     session_identifier,
     min(derived_tstamp) as start_tstamp,
     event_name,

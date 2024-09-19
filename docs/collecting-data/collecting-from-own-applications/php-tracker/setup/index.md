@@ -15,7 +15,7 @@ Currently the only supported method of installation is through Composer. For a t
 
 ### Composer
 
-Using Composer to manage your dependencies, simply add the Snowplow PHP Tracker to your project by running:
+If using Composer to manage your dependencies, simply add the Snowplow PHP Tracker to your project by running:
 
 ```bash
 composer require snowplow/snowplow-tracker

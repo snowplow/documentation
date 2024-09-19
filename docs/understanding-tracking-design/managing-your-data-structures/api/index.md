@@ -2,9 +2,6 @@
 title: "Managing data structures via the API"
 sidebar_label: "Using the API"
 sidebar_position: 2
-sidebar_custom_props:
-  offerings:
-    - bdp
 ---
 
 As well as managing [data structures](/docs/understanding-your-pipeline/schemas/index.md) through the Snowplow BDP Console, Snowplow BDP customers can also manage them programmatically through the data structures API.

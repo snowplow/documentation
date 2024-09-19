@@ -3,9 +3,6 @@ title: "Using the Recovery Builder to design your recovery"
 date: "2021-10-13"
 sidebar_label: "Using the Recovery Builder"
 sidebar_position: 0
-sidebar_custom_props:
-  offerings:
-    - bdp
 ---
 
 ### What is the Recovery Builder?

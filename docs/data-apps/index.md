@@ -1,10 +1,7 @@
 ---
 title: "Data Applications"
 sidebar_position: 112
-sidebar_label: "🆕 Data Applications"
-sidebar_custom_props:
-  offerings:
-    - bdp
+sidebar_label: "Data Applications"
 ---
 
 ```mdx-code-block

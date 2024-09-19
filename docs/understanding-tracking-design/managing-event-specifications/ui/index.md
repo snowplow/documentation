@@ -2,9 +2,6 @@
 title: "Managing Event Specifications in the Console"
 sidebar_label: "Using the UI"
 sidebar_position: 1
-sidebar_custom_props:
-  offerings:
-    - bdp
 ---
 
 ## Creating a new Event Specification through Console

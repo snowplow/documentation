@@ -3,9 +3,6 @@ title: "Event Recovery for Community Edition"
 date: "2020-07-02"
 sidebar_label: "Using Flink/Spark"
 sidebar_position: 40
-sidebar_custom_props:
-  offerings:
-    - community
 ---
 
 Snowplow pipelines are "non-lossy", this means if something is wrong with an event during any part of the pipeline, the event is stored in a separate storage environment rather than just discarded. See the [failed events section](/docs/understanding-your-pipeline/failed-events/index.md) for more information on the types of failures that may occur.

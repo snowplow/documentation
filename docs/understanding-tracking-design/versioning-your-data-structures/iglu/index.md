@@ -2,9 +2,6 @@
 title: "Versioning Data Structures using Iglu"
 sidebar_label: "Using Iglu"
 sidebar_position: 30
-sidebar_custom_props:
-  offerings:
-    - community
 ---
 
 ## How do I version?

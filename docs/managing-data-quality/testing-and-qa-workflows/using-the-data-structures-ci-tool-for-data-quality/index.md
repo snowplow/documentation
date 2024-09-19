@@ -2,9 +2,6 @@
 title: "Using the Data Structures CI tool"
 date: "2020-06-01"
 sidebar_position: 2000
-sidebar_custom_props:
-  offerings:
-    - bdp
 ---
 
 The Data Structures CI is a command-line tool which integrates Data Structures API into your CI/CD pipelines and currently has one task which verifies that all schema dependencies for a project are already deployed into a specified environment (e.g. "DEV", "PROD").

@@ -48,25 +48,6 @@ The sidebar on the left follows [file structure](https://github.com/snowplow/doc
 
 To control the position of a section in the sidebar, go to the `index.md` file for that section and adjust the `sidebar_position` attribute at the top (see [this example](https://github.com/snowplow/documentation/blob/main/docs/tutorials/index.md)). Sidebar positions are just numbers, and you can use any number as long as the order is correct.
 
-### Offerings
-
-Some documentation is only relevant to a particular offering. You can indicate it like this:
-```
----
-title: ...
-...
-sidebar_custom_props:
-  offerings:
-    - bdp
-...
----
-```
-
-This will result in an icon appearing in the sidebar, as well as an automatic banner on the page, specifying that the docs only apply to a given offering.
-
-The available values are: `bdp` and `community`. Do not specify both values at once — if a piece of documentation is relevant to all offerings, there should be no `offerings` property as that’s the default.
-
-Whenever the same functionality can be achieved in multiple offerings but in a different way (e.g. managing schemas), create a parent folder (“Managing schemas”) that’s offering-neutral, and then add offering-specific pages inside it. This way, other pages can link to the generic page without having to specify different methods for different offerings.
 
 ### Links
 

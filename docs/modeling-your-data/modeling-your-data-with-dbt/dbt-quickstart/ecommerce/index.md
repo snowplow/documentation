@@ -126,7 +126,22 @@ vars:
     snowplow__enable_mobile_events: true
 ```
 
-### 8. Run your model
+### 8. Optimize your project
+
+There are ways how you can deal with [high volume optimizations](/docs/modeling-your-data/modeling-your-data-with-dbt/ddbt-custom-models/high-volume-optimizations/) at a later stage, if needed, but you can do a lot upfront by selecting carefully which variable to use for `snowplow__session_timestamp`, which helps identify the timestamp column used for sessionization. This timestamp column should ideally be set to the column your event table is partitioned on. It is defaulted to `collector_tstamp` but depending on your loader it can be the `load_tstamp` as the sensible value to use:
+
+```yml title="dbt_project.yml"
+vars:
+  snowplow_ecommerce:
+    snowplow__session_timestamp: 'load_tstamp'
+```
+
+### 9. Verify your variables using our Config guides (Optional)
+
+If you are unsure whether the default values set are good enough in your case or you would already like to maximize the potential of your models, you can dive deeper into the meaning behind our variables on our [Config](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/) page. It includes a [Config Generator](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/#Generator) to help you create all your variable configurations, if necessary.
+
+
+### 10. Run your model
 
 You can now run your models for the first time by running the below command (see the [operation](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md) page for more information on operation of the package):
 

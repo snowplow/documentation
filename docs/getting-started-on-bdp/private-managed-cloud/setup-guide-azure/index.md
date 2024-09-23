@@ -83,13 +83,15 @@ You must check that the following infrastructure is available in the subscriptio
 
 Snowplow requires the below instances and databases. We have provided the Azure CLI commands that can be used to check their availability. Please note that they are required in all availability zones in the region for redundancy.
 
-Instances DSv3, DSv4 and DSv5 Series:
+Instances DSv5 (preferred), DSv4 and DSv3 series:
 
 `az vm list-skus --location <REGION> --size Standard_D4s --all --output table`
 
 Database GP_Standard_D2ads_v5:
 
 `az vm list-skus --location <REGION> --size Standard_D2ads --all --output table`
+
+Please note that the above is for a minimal deployment. If you will be sending over one billion events per month through the pipeline, please speak to us for advice on what instance sizes are recommended. 
 
 ### Final checklist
 

@@ -78,6 +78,21 @@ Create a custom role and assign it the “Snowplow BDP Enterprise Deployment” 
 ### Determine if Snowplow requires a specific VPC (optional)
 If you require Snowplow to be deployed into a specific VPC CIDR range, this should be provided at the same time as credentials. We need a /16 provided for the VPC so that we can create /20 subnets (note: [VPC peering and using a custom VPC is an additional bolt-on](https://snowplow.io/snowplow-behavioral-data-platform-product-description/#h-vpc-peering-aws-gcp))
 
+### Check subscription resource availability
+You must check that the following infrastructure is available in the subscription before deployment starts. If the required instances are unavailable, it will result in delays to getting started.
+
+Snowplow requires the below instances and databases. We have provided the Azure CLI commands that can be used to check their availability. Please note that they are required in all availability zones in the region for redundancy.
+
+Instances DSv5 (preferred), DSv4 and DSv3 series:
+
+`az vm list-skus --location <REGION> --size Standard_D4s --all --output table`
+
+Database GP_Standard_D2ads_v5:
+
+`az vm list-skus --location <REGION> --size Standard_D2ads --all --output table`
+
+Please note that the above is for a minimal deployment. If you will be sending over one billion events per month through the pipeline, please speak to us for advice on what instance sizes are recommended. 
+
 ### Final checklist
 
 If you are sending a request to our team to set up deployment into your Azure account, please ensure you provide the following information:

@@ -131,7 +131,6 @@ vars:
     snowplow__app_id: ['my_app_1','my_app_2']
 ```
 
-
 ### 6. Verify page ping variables
 
 The Unified Digital Model processes page ping events to calculate web page engagement times. If your [tracker configuration](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#activity-tracking-page-pings) for `min_visit_length` (default 5) and `heartbeat` (default 10) differs from the defaults provided in this package, you can override by adding to your `dbt_project.yml`:
@@ -170,7 +169,21 @@ Depending on the use case it should either be the catalog (for Unity Catalog use
 
 :::
 
-### 8. Run your model
+### 8. Optimize your project
+
+There are ways how you can deal with [high volume optimizations](/docs/modeling-your-data/modeling-your-data-with-dbt/ddbt-custom-models/high-volume-optimizations/) at a later stage, if needed, but you can do a lot upfront by selecting carefully which variable to use for `snowplow__session_timestamp`, which helps identify the timestamp column used for sessionization. This timestamp column should ideally be set to the column your event table is partitioned on. It is defaulted to `collector_tstamp` but depending on your loader it can be the `load_tstamp` as the sensible value to use:
+
+```yml title="dbt_project.yml"
+vars:
+  snowplow_unified:
+    snowplow__session_timestamp: 'load_tstamp'
+```
+
+### 9. Verify your variables using our Config guides (Optional)
+
+If you are unsure whether the default values set are good enough in your case or you would already like to maximize the potential of your models, you can dive deeper into the meaning behind our variables on our [Config](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/) page. It includes a [Config Generator](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/#Generator) to help you create all your variable configurations, if necessary.
+
+### 10. Run your model
 
 You can run your models for the first time by running the below command (see the [operation](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md) page for more information on operation of the package). As this package contains some seed files, you will need to seed these first
 
@@ -179,5 +192,5 @@ dbt seed --select snowplow_unified --full-refresh
 dbt run --selector snowplow_unified
 ```
 
-### 9. Enable extras
+### 11. Enable extras
 The package comes with additional modules and functionality that you can enable, for more information see the [consent tracking](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/consent-module/index.md), [conversions](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/conversions/index.md), and [core web vitals](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/core-web-vitals-module/index.md) documentation.

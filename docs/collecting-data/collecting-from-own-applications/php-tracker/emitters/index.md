@@ -4,11 +4,14 @@ date: "2020-02-26"
 sidebar_position: 40
 ---
 
-We now support four different emitters: sync, socket, curl and an out-of-band file emitter. The most basic emitter only requires you to specify the type of emitter to be used and the collectors URI as parameters.
+We currently support four different emitters: sync, socket, curl and an out-of-band file emitter. The most basic emitter only requires you to select the type of emitter to be used and specify the collector's hostname as parameters.
 
-All emitters support both `GET` and `POST` as methods for sending events to Snowplow collectors. For the sake of speed, we recommend using `POST` as the tracker can then bundle many events together into a single request.
+All emitters support both `GET` and `POST` as methods for sending events to Snowplow collectors.
 
-It is recommended that after you have finished logging all of your events to run the following command:
+For the sake of performance, we recommend using `POST` as the tracker can then batch many events together into a single request.
+Note that depending on your pipeline architecture, your collector may have limits on the maximum request size it will accept that could be exceeded by large batch sizes.
+
+It is recommended that after you have finished logging all of your events to call the following method:
 
 ```php
 $tracker->flushEmitters();
@@ -23,7 +26,7 @@ The Sync emitter is a very basic synchronous emitter which supports both `GET`�
 By default, this emitter uses the Request type POST, HTTP and a buffer size of 50.
 
 As of version 0.7.0, the emitter has the capability to retry failed requests.
-In case connection to the collector can't be estabilished or the request fails with a 4xx (except for 400, 401, 403, 410, 422) or 5xx status code, the same request is retried.
+In case connection to the collector can't be established or the request fails with a 4xx (except for 400, 401, 403, 410, 422) or 5xx status code, the same request is retried.
 The number of times a request should be retried is configurable but defaults to 1.
 There is a back-off period between subsequent retries, which starts with 100ms (configurable) and increases exponentially.
 
@@ -45,7 +48,7 @@ Arguments:
 
 | **Argument** | **Description** | **Required?** | **Validation** |
 | --- | --- | --- | --- |
-| `$uri` | Collector URI | Yes | Non-empty string |
+| `$uri` | Collector hostname | Yes | Non-empty string |
 | `$protocol` | Collector Protocol (HTTP or HTTPS) | No | String |
 | `$type` | Request Type (POST or GET) | No | String |
 | `$buffer_size` | Amount of events to store before flush | No | Int |
@@ -58,7 +61,7 @@ Arguments:
 The Socket emitter allows for the much faster transmission of Requests to the collector by allowing us to write data directly to the HTTP socket. However, this solution is still, in essence, a synchronous process and will block the execution of the main script.
 
 As of version 0.7.0, the emitter has the capability to retry failed requests.
-In case connection to the collector can't be estabilished or the request fails with a 4xx (except for 400, 401, 403, 410, 422) or 5xx status code, the same request is retried.
+In case connection to the collector can't be established or the request fails with a 4xx (except for 400, 401, 403, 410, 422) or 5xx status code, the same request is retried.
 The number of times a request should be retried is configurable but defaults to 1.
 There is a back-off period between subsequent retries, which starts with 100ms (configurable) and increases exponentially.
 
@@ -80,7 +83,7 @@ Arguments:
 
 | **Argument** | **Description** | **Required?** | **Validation** |
 | --- | --- | --- | --- |
-| `$uri` | Collector URI | Yes | Non-empty string |
+| `$uri` | Collector hostname | Yes | Non-empty string |
 | `$ssl` | Whether to use SSL encryption | No | Boolean |
 | `$type` | Request Type (POST or GET) | No | String |
 | `$timeout` | Socket Timeout Limit | No | Int or Float |
@@ -117,7 +120,7 @@ Arguments:
 
 | **Argument**    | **Description**                                         | **Required?** | **Validation**   |
 |-----------------|---------------------------------------------------------|---------------|------------------|
-| `$uri`          | Collector URI                                           | Yes           | Non-empty string |
+| `$uri`          | Collector hostname                                      | Yes           | Non-empty string |
 | `$protocol`     | Collector Protocol (HTTP or HTTPS)                      | No            | String           |
 | `$type`         | Request Type (POST or GET)                              | No            | String           |
 | `$buffer_size`  | Amount of events to store before flush                  | No            | Int              |
@@ -173,7 +176,7 @@ Arguments:
 
 | **Argument** | **Description** | **Required?** | **Validation** |
 | --- | --- | --- | --- |
-| `$uri` | Collector URI | Yes | Non-empty string |
+| `$uri` | Collector hostname | Yes | Non-empty string |
 | `$protocol` | Collector Protocol (HTTP or HTTPS) | No | String |
 | `$type` | Request Type (POST or GET) | No | String |
 | `$workers` | Amount of background workers | No | Int |

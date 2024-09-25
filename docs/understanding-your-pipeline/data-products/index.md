@@ -78,10 +78,10 @@ Break down the barriers that exist between data producers and data consumers, by
 
 You will be able to view several items in the UI that help identify and detect anomalies or potential misconfigurations in trackers that are not sending the expected events. This is particularly useful during the development phase when implementing tracking for a specific application using [Snowtype](/docs/collecting-data/code-generation). These visual elements include:
 
-* A counter for each event specification, showing the total number of events detected from the tracked applications in the last 30 days.
+* A counter for each event specification, showing the total number of events detected from the tracked [applications IDs](/docs/understanding-tracking-design/organize-data-sources-with-source-applications/index.md#application-ids) in the last 30 days.
 * A 'last seen' field for each event specification, indicating when the last event matching the event specification was detected.
 * A list of application IDs from which events are being tracked, displayed for each event specification. For each application ID, a status will be shown with different colors:
-  * __Green__: Events conforming to the event specification are being tracked and identified with the specific application ID inherited from the configured source applications.
+  * __Green__: Events conforming to the event specification are being tracked and identified with the specific application ID inherited from the configured [source applications](/docs/understanding-tracking-design/organize-data-sources-with-source-applications/index.md).
   * __Gray__: No events are being tracked for an application ID inherited from the configured source applications.
   * __Yellow__: Events are being tracked for an application ID that has not been configured or inherited from the source applications.
 

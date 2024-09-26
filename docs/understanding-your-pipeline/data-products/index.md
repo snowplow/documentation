@@ -103,8 +103,6 @@ For these data products, the volume metrics will behave differently:
 
   ![](images/data_product_metrics_toggled.png)
 
-__Note__: _Soon, you will not be able to create a base data product without a source application through the UI_.
-
 ::: 
 
 ## How data products help with governance, data quality and data discoverability

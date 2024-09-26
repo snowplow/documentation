@@ -76,25 +76,34 @@ Break down the barriers that exist between data producers and data consumers, by
 
 **Benefits:**
 
-You will be able to view several items in the UI that help detect anomalies or potential misconfigurations in trackers that are not sending the expected events or are using incorrect [application IDs](/docs/understanding-tracking-design/organize-data-sources-with-source-applications/index.md#application-ids). This is particularly useful during the development phase when implementing tracking for a specific application using [Snowtype](/docs/collecting-data/code-generation). These elements include:
+You will be able to view several items in the UI that help detect anomalies or potential misconfigurations in trackers that are either not sending the expected events or are using incorrect [application IDs](/docs/understanding-tracking-design/organize-data-sources-with-source-applications/index.md#application-ids). This is particularly useful during the development phase when implementing tracking for a specific application using [Snowtype](/docs/collecting-data/code-generation). These elements include:
 
 * A counter for each event specification, showing the total number of events detected from the tracked application IDs in the last 30 days.
 * A 'last seen' field for each event specification, indicating when the last event matching the event specification ID was detected.
 * A list of application IDs from which events are being tracked, displayed for each event specification. For each application ID, a status will be shown with different colors:
-  * __Green__: Events specifications are being tracked and identified with the specific application ID inherited from the configured [source applications](/docs/understanding-tracking-design/organize-data-sources-with-source-applications/index.md).
-  * __Gray__: No events are being tracked for an application ID inherited from the configured source applications.
-  * __Yellow__: Events are being tracked for an application ID that has not been configured or inherited from the source applications.
+  * __Green__: Event specifications are being tracked and identified with the specific application ID inherited from the configured [source applications](/docs/understanding-tracking-design/organize-data-sources-with-source-applications/index.md).
+  * __Gray__: No event specifications are being tracked for an application ID inherited from the configured source applications.
+  * __Yellow__: Event specifications are being tracked for an application ID that has not been configured or inherited from the source applications.
 
 :::note
 
 Some data products, such as [__Base Web__](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-poducts/data-product-templates/index.md#base-web) and [__Base Mobile__](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-poducts/data-product-templates/index.md#base-mobile), contain standard events (e.g., _page pings_, _link clicks_, _screen view_, _application install_). 
 
-For these data products, the volume metrics will, by default, display the volume of all events associated with the application IDs for the specific data product, similar to other non-base data products.
+For these data products, the volume metrics will behave differently:
 
-However, a toggle will also be available above the event specification list. When activated, this toggle will show not only the counts and metrics of events received for standard events within this specific data product context but also all standard events tracked in your pipeline, regardless of the Source Applications setting.
+- If no standard events are being tracked with an application ID different from those inherited from the source applications set up in the data product, the behavior will be the same as for a normal data product.
 
-![](images/data_product_metrics_default.png)
-![](images/data_product_metrics_toggled.png)
+- If standard events are being tracked with application IDs different from those inherited from the source applications set up in the data product, a toggle will appear above the event specification list. 
+
+  This toggle will be disabled by default, so the metrics displayed will relate only to the application IDs inherited from the source applications set up in the data product.
+  
+  ![](images/data_product_metrics_default.png)
+
+  If the toggle is enabled, it will show the metrics for all the application IDs found for the standard events (not just the ones inherited from the data product).
+
+  ![](images/data_product_metrics_toggled.png)
+
+__Note__: _Soon, you will not be able to create a base data product without a source application through the UI_.
 
 ::: 
 

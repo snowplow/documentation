@@ -72,16 +72,16 @@ Break down the barriers that exist between data producers and data consumers, by
 
 ![Key elements of a Data Product](images/key-elements-of-a-data-product.png)
 
-**Volume metrics**; data products can identify events ingested in your pipeline that match the configured event specifications. This allows your team to visualize the volume-related metrics for events being tracked to specific application IDs.
+**Volume metrics**; data products can detect events ingested in your pipeline that match the configured event specifications. This allows your team to monitor occurrence-related metrics for events being tracked with specific [event specification IDs](/docs/collecting-data/code-generation/commands/index.md#snowtype-patch).
 
 **Benefits:**
 
-You will be able to view several items in the UI that help identify and detect anomalies or potential misconfigurations in trackers that are not sending the expected events. This is particularly useful during the development phase when implementing tracking for a specific application using [Snowtype](/docs/collecting-data/code-generation). These visual elements include:
+You will be able to view several items in the UI that help detect anomalies or potential misconfigurations in trackers that are not sending the expected events or are using incorrect [application IDs](/docs/understanding-tracking-design/organize-data-sources-with-source-applications/index.md#application-ids). This is particularly useful during the development phase when implementing tracking for a specific application using [Snowtype](/docs/collecting-data/code-generation). These elements include:
 
-* A counter for each event specification, showing the total number of events detected from the tracked [applications IDs](/docs/understanding-tracking-design/organize-data-sources-with-source-applications/index.md#application-ids) in the last 30 days.
-* A 'last seen' field for each event specification, indicating when the last event matching the event specification was detected.
+* A counter for each event specification, showing the total number of events detected from the tracked application IDs in the last 30 days.
+* A 'last seen' field for each event specification, indicating when the last event matching the event specification ID was detected.
 * A list of application IDs from which events are being tracked, displayed for each event specification. For each application ID, a status will be shown with different colors:
-  * __Green__: Events conforming to the event specification are being tracked and identified with the specific application ID inherited from the configured [source applications](/docs/understanding-tracking-design/organize-data-sources-with-source-applications/index.md).
+  * __Green__: Events specifications are being tracked and identified with the specific application ID inherited from the configured [source applications](/docs/understanding-tracking-design/organize-data-sources-with-source-applications/index.md).
   * __Gray__: No events are being tracked for an application ID inherited from the configured source applications.
   * __Yellow__: Events are being tracked for an application ID that has not been configured or inherited from the source applications.
 
@@ -91,7 +91,7 @@ Some data products, such as [__Base Web__](/docs/understanding-tracking-design/d
 
 For these data products, the volume metrics will, by default, display the volume of all events associated with the application IDs for the specific data product, similar to other non-base data products.
 
-However, a toggle will also be available above the event specification list. When activated, this toggle will show not only the counts and metrics of events received for standard events within this specific data product context, but also all standard events tracked in your pipeline that are associated with the application IDs set in the base data product.
+However, a toggle will also be available above the event specification list. When activated, this toggle will show not only the counts and metrics of events received for standard events within this specific data product context but also all standard events tracked in your pipeline, regardless of the Source Applications setting.
 
 ![](images/data_product_metrics_default.png)
 ![](images/data_product_metrics_toggled.png)

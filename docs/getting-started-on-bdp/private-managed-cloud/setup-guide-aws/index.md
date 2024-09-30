@@ -147,7 +147,7 @@ If you require Snowplow to be deployed into a specific VPC CIDR range, this shou
 
 ### Determine if Snowplow requires a specific IAM Permission Boundary (optional)
 
-If you require Snowplow to be deployed using a specific IAM Permission Boundary, this should be provided at the same time (note: [IAM Permission Boundary is an additional bolt-on](https://snowplow.io/snowplow-behavioral-data-platform-product-description/#h-custom-vpc-integration-aws)).
+If you require Snowplow to be deployed using a specific IAM Permission Boundary, this should be provided at the same time.
 
 ### Final checklist
 

@@ -66,11 +66,14 @@
     "unist-util-flatmap": "^1.0.0",
     "url": "^0.11.0",
     "uuid": "^10.0.0",
-    "webpack": "^5.76.0"
+    "webpack": "^5.76.0",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.5.2",
     "@docusaurus/types": "^3.5.2",
+    "@types/mdx-js__react": "^2.0.0",
+    "@types/webpack-env": "^1.18.5",
     "prettier": "2.7.1",
     "typescript": "^5.5.4"
   },

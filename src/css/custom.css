@@ -301,7 +301,8 @@ article.community > a > p::before {
   margin-right: 0.3em;
 }
 
-li.hidden, article.hidden {
+li.hidden,
+article.hidden {
   display: none;
 }
 
@@ -316,7 +317,8 @@ article.community > a > p::before {
   content: '🛠️';
 }
 
-a.menu__link, a.card {
+a.menu__link,
+a.card {
   position: relative;
 }
 .bdp a:hover::after,
@@ -489,10 +491,83 @@ fieldset {
   padding-top: 8px;
 }
 
-.JsonValidator .collapsibleContent_i85q{
+.JsonValidator .collapsibleContent_i85q {
   padding-top: 0px;
 }
 
 .JsonValidator .MuiFormControl-root.MuiTextField-root.css-i44wyl {
   margin-bottom: 16px;
+}
+
+/* 
+Controls the display of navbar/sidebar items
+- desktop-only: only visible on desktop top navbar
+- mobile-only: only visible on mobile side menu, not in top navbar
+*/
+.navbar__items > .mobile-only {
+  display: none;
+}
+
+@media (max-width: 996px) {
+  .navbar__items > .mobile-only {
+    display: none;
+  }
+
+  .navbar__items > .desktop-only {
+    display: none;
+  }
+}
+
+.menu__list > .desktop-only {
+  display: none;
+}
+
+@media (min-width: 996px) {
+  .menu__list > .desktop-only {
+    display: none;
+  }
+}
+
+/* Prevents the indicator on the Docs / Tutorials & Guides tabs from being hidden by overflow: hidden */
+.desktop-only > .MuiTabs-scroller {
+  overflow: visible !important;
+  overflow-x: visible !important;
+}
+
+.mobile-only > .MuiTabs-scroller {
+  overflow: visible !important;
+  overflow-x: visible !important;
+}
+
+/* General styling for tutorial pages */
+.tutorial-doc-page .pagination-nav {
+  margin-top: 2rem;
+}
+
+.tutorial-doc-page .feedback-prompt {
+  margin-top: 3rem;
+}
+
+.tutorial-doc-page .theme-doc-footer {
+  display: none;
+  margin-top: 0;
+}
+
+.tutorial-doc-page .feedback-prompt {
+  margin-top: 2rem;
+}
+
+/* Hide the feedback and last updated times on the tutorial home page */
+.tutorial-home-page article > footer {
+  display: none;
+}
+
+.docs-tutorial-tab-indicator {
+  height: 4px !important;
+  transition: none !important;
+  transform: translateY(4px);
+}
+
+.docs-tutorial-tabs {
+  overflow: visible !important;
 }

@@ -167,7 +167,7 @@ curl 'https://console.snowplowanalytics.com/api/msc/v1/organizations/cad39ca5-3e
 
 Please note:
 
-- This example shows deploying from `VALIDATED` to `DEV`. The method is the same for Production, but you would change the variables where `"source": "DEV"` and `"target": "PROD"`
+- This example demonstrates deployment from `VALIDATED` to `DEV`. The method is the same for Production, but you would change the variables where `"source": "DEV"` and `"target": "PROD"`
 - The API enforces a workflow of validating, testing on development and then deploying to production. To achieve this you deploy from one environment to another; from (virtual environment) `VALIDATED` to `DEV`, then `DEV` to `PROD`.
 - Only users designated as "admin" in the console have the permissions to promote from `DEV` to `PROD`.
 - There is a sync option that will return the response of the deployment request directly. Otherwise you can poll for deployment responses using the deployment ID.

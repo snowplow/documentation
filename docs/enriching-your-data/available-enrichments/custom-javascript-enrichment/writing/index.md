@@ -306,7 +306,7 @@ You can pass these parameters in the enrichment configuration, for example:
 }
 ```
 
-The parameter object can be accessed in JavaScript enrichment code via the second parameter of the `process` function, for example:
+The parameter object can be accessed in JavaScript enrichment code via the _second_ parameter of the `process` function, for example:
 
 ```js
 function process(event, params) {
@@ -318,3 +318,26 @@ function process(event, params) {
 :::tip
 This is useful when you want to quickly reconfigure the enrichment without updating the JavaScript code.
 :::
+
+## Accessing the HTTP request headers
+
+Starting with Enrich 5.1.1, it is possible to access the HTTP headers that came with the original request to the Collector. The array of headers is passed in the _third_ argument to the `process` function. Each header is a string in the format `HEADER:value`.
+
+:::tip formatting
+Per the HTTP specification, headers are not case sensitive, so we recommend using a case insensitive match, like what is shown below.
+It is also a good practice to trim whitespace from the value, as there might or might not be some space around the `:` character.
+:::
+
+For example, if you want to pass some token via a custom `X-JWT` header and then use it in the enrichment:
+
+```js
+function process(event, params, headers) {
+  for (header of headers) {
+    const token = header.match(/X-JWT:(.+)/i)
+    if (token) {
+      const value = token[1].trim()
+      // do something with the value
+    }
+  }
+}
+```

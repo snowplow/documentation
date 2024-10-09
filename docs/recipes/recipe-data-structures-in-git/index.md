@@ -22,13 +22,13 @@ We have built [snowplow-cli](/docs/understanding-tracking-design/managing-your-d
 
 * A deployed Snowplow BDP pipeline
 * [snowplow-cli](/docs/understanding-tracking-design/managing-your-data-structures/cli/#download) downloaded and configured
-* A familiarity with [git](https://git-scm.com/) and an understanding of [github workflows](https://docs.github.com/en/actions/writing-workflows)
+* A familiarity with [git](https://git-scm.com/) and an understanding of [github actions](https://docs.github.com/en/actions/writing-workflows)
 * A sensible [terminal emulator](https://en.wikipedia.org/wiki/Terminal_emulator) and shell
 
 
 ## What you'll be doing
 
-This recipe will walk through creating and deploying a data structure from the command line using [snowplow-cli](https://github.com/snowplow-product/snowplow-cli). It will then show how it is possible to automate the validation and deployment process using [github workflows](https://docs.github.com/en/actions/writing-workflows).
+This recipe will walk through creating and deploying a data structure from the command line using [snowplow-cli](https://github.com/snowplow-product/snowplow-cli). It will then show how it is possible to automate the validation and deployment process using [github actions](https://docs.github.com/en/actions/writing-workflows).
 
 ## Create a local data structure
 
@@ -182,10 +182,10 @@ $ snowplow-cli ds publish prod
 Data structures must be published to `dev` before they can be published to `prod`
 :::
 
-We have now seen how to create, validate and then publish a new data structure from the command line. Next we'll look at how to configure github workflows to run validation and publishing automatically for us.
+We have now seen how to create, validate and then publish a new data structure from the command line. Next we'll look at how to configure github actions to run validation and publishing automatically for us.
 
 
-## Automating with github workflows
+## Automating with github actions
 
 ### Set up repository
 
@@ -219,7 +219,7 @@ jobs:
     env:
       SNOWPLOW_CONSOLE_ORG_ID: ${{ secrets.SNOWPLOW_CONSOLE_ORG_ID }}
       SNOWPLOW_CONSOLE_API_KEY_ID: ${{ secrets.SNOWPLOW_CONSOLE_API_KEY_ID }}
-      SNOWPLOW_CONSOLE_API_KEY_SECRET: ${{ secrets.SNOWPLOW_CONSOLE_API_KEY_SECRET }}
+      SNOWPLOW_CONSOLE_API_KEY: ${{ secrets.SNOWPLOW_CONSOLE_API_KEY }}
 
     steps:
       - uses: actions/checkout@v4
@@ -249,7 +249,7 @@ jobs:
     env:
       SNOWPLOW_CONSOLE_ORG_ID: ${{ secrets.SNOWPLOW_CONSOLE_ORG_ID }}
       SNOWPLOW_CONSOLE_API_KEY_ID: ${{ secrets.SNOWPLOW_CONSOLE_API_KEY_ID }}
-      SNOWPLOW_CONSOLE_API_KEY_SECRET: ${{ secrets.SNOWPLOW_CONSOLE_API_KEY_SECRET }}
+      SNOWPLOW_CONSOLE_API_KEY: ${{ secrets.SNOWPLOW_CONSOLE_API_KEY}}
 
     steps:
       - uses: actions/checkout@v4
@@ -275,7 +275,7 @@ jobs:
     env:
       SNOWPLOW_CONSOLE_ORG_ID: ${{ secrets.SNOWPLOW_CONSOLE_ORG_ID }}
       SNOWPLOW_CONSOLE_API_KEY_ID: ${{ secrets.SNOWPLOW_CONSOLE_API_KEY_ID }}
-      SNOWPLOW_CONSOLE_API_KEY_SECRET: ${{ secrets.SNOWPLOW_CONSOLE_API_KEY_SECRET }}
+      SNOWPLOW_CONSOLE_API_KEY: ${{ secrets.SNOWPLOW_CONSOLE_API_KEY}}
 
     steps:
       - uses: actions/checkout@v4

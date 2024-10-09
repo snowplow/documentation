@@ -47,7 +47,7 @@ Snowplow CLI can take its configuration from a variety of sources. More details 
 
   ```bash
   SNOWPLOW_CONSOLE_API_KEY_ID=********-****-****-****-************
-  SNOWPLOW_CONSOLE_API_KEY_SECRET=********-****-****-****-************
+  SNOWPLOW_CONSOLE_API_KEY=********-****-****-****-************
   SNOWPLOW_CONSOLE_ORG_ID=********-****-****-****-************
   ```
 
@@ -57,7 +57,7 @@ Snowplow CLI can take its configuration from a variety of sources. More details 
   ```yaml
   console:
     api-key-id: ********-****-****-****-************
-    api-key-secret: ********-****-****-****-************
+    api-key: ********-****-****-****-************
     org-id: ********-****-****-****-************
   ```
 
@@ -65,7 +65,7 @@ Snowplow CLI can take its configuration from a variety of sources. More details 
   <TabItem value="args" label="inline arguments" >
 
   ```bash
-  snowplow-cli data-structures --api-key-id ********-****-****-****-************ --api-key-secret ********-****-****-****-************ --org-id ********-****-****-****-************
+  snowplow-cli data-structures --api-key-id ********-****-****-****-************ --api-key ********-****-****-****-************ --org-id ********-****-****-****-************
   ```
 
   </TabItem>

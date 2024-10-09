@@ -116,16 +116,14 @@ This will take you to a list of hidden Data Structures, locate the one you wish 
 
 * * *
 
-## Git-managed Data Structures
+## Externally managed Data Structures
 
-Data Structures can be managed through Git using our dps-cli tool.
+Data Structures can be managed externally using our [snowplow-cli](/docs/understanding-tracking-design/managing-your-data-structures/cli/) tool.
 
-When a Data Structure is managed through Git, you will see an information alert pointing to the repository from which the Data Structure is managed from. When a Data Structure is locked, you cannot make any edits to it, hide it or migrate it to a different environment.
-
-If you have the required access rights, you can unlock the Data Structure for editing in the UI using the `Unlock` button in the information alert.
+When a Data Structure is managed externally it becomes locked in the UI disabling all editing. You will see a banner explaining the situation and giving people with the 'publish to production' (default for admin users) capability the ability to unlock.
 
 ![](images/locked-ds.png)
 
 :::caution
-Editing after unlocking will put your repository out-of-sync.
+Having a single source of truth for a data structure is a good idea. If your source of truth is external then unlocking and editing will cause conflicts.
 :::

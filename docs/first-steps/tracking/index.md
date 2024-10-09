@@ -25,6 +25,13 @@ Regardless of how you send the events, it might take a few minutes for them to r
 
 If you are eager to look at some Snowplow events or just test your pipeline, you can use the box below to send some data (including [failed events](/docs/understanding-your-pipeline/failed-events/index.md)) to your Collector.
 
+:::tip HTTPS
+
+Note that to use this tool, you need a Collector URL that starts with `https://`, not `http://`.
+This is because web browsers block traffic from HTTPS-enabled sites (such as `https://docs.snowplow.io` — this site — to non-HTTPS resources).
+
+:::
+
 <Tabs groupId="offering" queryString>
   <TabItem value="enterprise" label="BDP Enterprise" default>
 

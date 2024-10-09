@@ -113,3 +113,19 @@ If you have hidden a Data Structure and wish to restore it, navigate to the bott
 ![](images/image-9.png)
 
 This will take you to a list of hidden Data Structures, locate the one you wish to restore and click **'Restore data structure'** to show it in the main listing.
+
+* * *
+
+## Git-managed Data Structures
+
+Data Structures can be managed through Git using our dps-cli tool.
+
+When a Data Structure is managed through Git, you will see an information alert pointing to the repository from which the Data Structure is managed from. When a Data Structure is locked, you cannot make any edits to it, hide it or migrate it to a different environment.
+
+If you have the required access rights, you can unlock the Data Structure for editing in the UI using the `Unlock` button in the information alert.
+
+![](images/locked-ds.png)
+
+:::caution
+Editing after unlocking will put your repository out-of-sync.
+:::

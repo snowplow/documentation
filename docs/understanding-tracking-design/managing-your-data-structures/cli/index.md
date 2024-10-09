@@ -23,10 +23,10 @@ The `data-structures` subcommand of [Snowplow CLI](https://github.com/snowplow-p
 
 Releases can be found on github https://github.com/snowplow-product/snowplow-cli/releases.
 
-For systems with `curl` available the following commands should get you started with the latest version. Take care to replace `darwin_amd64` with the correct architecture for your system.
+For systems with `curl` available the following commands should get you started with the latest version. Take care to replace `darwin_arm64` with the correct architecture for your system.
 
 ```bash
-curl -L -o snowplow-cli https://github.com/snowplow-product/snowplow-cli/releases/latest/download/snowplow-cli_darwin_amd64
+curl -L -o snowplow-cli https://github.com/snowplow-product/snowplow-cli/releases/latest/download/snowplow-cli_darwin_arm64
 chmod u+x snowplow-cli
 ```
 

@@ -87,9 +87,9 @@ Instances DSv5 (preferred), DSv4 and DSv3 series:
 
 `az vm list-skus --location <REGION> --size Standard_D4s --all --output table`
 
-Database GP_Standard_D2ads_v5:
+Database B_Standard_B2s:
 
-`az vm list-skus --location <REGION> --size Standard_D2ads --all --output table`
+`az vm list-skus --location <REGION> --size Standard_B2s --all --output table`
 
 Please note that the above is for a minimal deployment. If you will be sending over one billion events per month through the pipeline, please speak to us for advice on what instance sizes are recommended. 
 

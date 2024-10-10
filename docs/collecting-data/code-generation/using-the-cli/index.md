@@ -16,13 +16,18 @@ The Snowtype CLI is a tool which aims to speed up tracking implementations, prov
 
 A Console API key is required for the Snowtype CLI to authenticate with your account. You can find your own or create one in the Console [API key management](https://console.snowplowanalytics.com/credentials).
 
-From there, the ways for the CLI to recognize the key are either through the global `-k, --apiKey` option or the `SNOWPLOW_CONSOLE_API_KEY` environment variable. The Snowtype CLI does automatically read from a `.env` file at the root of your project as well.
+:::note
+Both API key and API key ID variables are required for versions > `0.9.0`.
+:::
+
+The ways for the CLI to read the credentials are either through the global `-k, --apiKey` and `-s, apiKeyId` options or the `SNOWPLOW_CONSOLE_API_KEY` and `SNOWPLOW_CONSOLE_API_KEY_ID` environment variables. Additionally, the Snowtype CLI automatically reads from a `.env` file at the root of your project.
 
 <Tabs groupId="api-key">
   <TabItem value="env file" label=".env file" default>
 
   ```bash
   SNOWPLOW_CONSOLE_API_KEY=MY-API-KEY
+  SNOWPLOW_CONSOLE_API_KEY_ID=MY-API-KEY-ID
   ```
 
   </TabItem>
@@ -31,19 +36,20 @@ From there, the ways for the CLI to recognize the key are either through the glo
   ```bash
   # The required command will depend on your shell
   export SNOWPLOW_CONSOLE_API_KEY=MY-API-KEY
+  export SNOWPLOW_CONSOLE_API_KEY_ID=MY-API-KEY-ID
   ```
 
   </TabItem>
   <TabItem value="cli" label="CLI parameter" default>
 
   ```bash
-  npx @snowplow/snowtype generate --apiKey MY-API-KEY
+  npx @snowplow/snowtype generate --apiKey MY-API-KEY --apiKeyId MY-API-KEY-ID
   ```
 
   </TabItem>
 </Tabs>
 
-**Recommended:** We recommend that you use the `SNOWPLOW_CONSOLE_API_KEY` environment variable.
+**Recommended:** We recommend that you use the `SNOWPLOW_CONSOLE_API_KEY` and `SNOWPLOW_CONSOLE_API_KEY_ID` environment variables.
 
 ## Initializing Snowtype for your project
 

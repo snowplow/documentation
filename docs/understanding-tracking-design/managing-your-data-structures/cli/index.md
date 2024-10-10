@@ -13,13 +13,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-## Getting started
-
 The `data-structures` subcommand of [Snowplow CLI](https://github.com/snowplow-product/snowplow-cli) provides a collection of functionality to ease the integration of custom development and publishing workflows.
 
-### Snowplow CLI Prerequisites
+## Snowplow CLI Prerequisites
 
-#### Download
+### Download
 
 Releases can be found on github https://github.com/snowplow-product/snowplow-cli/releases.
 
@@ -30,7 +28,7 @@ curl -L -o snowplow-cli https://github.com/snowplow-product/snowplow-cli/release
 chmod u+x snowplow-cli
 ```
 
-#### Configure
+### Configure
 
 You will need three values.
 
@@ -110,10 +108,10 @@ This command will find all files under `./folder-name` (if omitted then `./data-
 If any validations fail the command will report the problems to stdout and exit with status code 1.
 
 
-### Deploying data structures
+### Publishing data structures
 
 ```bash
-snowplow-cli ds deploy dev ./folder-name
+snowplow-cli ds publish dev ./folder-name
 ```
 
 This command will find all files under `./folder-name` (if omitted then `./data-structures`) and attempt to publish them to BDP console in the environment provided (`dev` or `prod`).

@@ -57,7 +57,11 @@ This should provide us the following output
 3:00PM INFO generate wrote=data-structures/com.example/login.yaml
 ```
 
-You'll note that snowplow-cli uses a naming scheme that follows a `vendor/name` pattern and defaults to `yaml` output. This is not a prerequisite for other commands to work, just an opinionated default.
+The generated file is written to our default `data-structures` directory under a sub directory matching the `--vendor` we supplied with a filename that mirrors the name we gave the data structure. Help for all the arguments available to `generate` is available by running `snowplow-cli ds generate --help`.
+
+:::note
+This directory layout and file naming scheme is also followed by the [download](/docs/understanding-tracking-design/managing-your-data-structures/cli/#downloading-data-structures) command.
+:::
 
 Let's see what it has created for us.
 
@@ -134,7 +138,7 @@ You should see output similar to this:
 
 ### Publish to development
 
-Apart from the missing descriptions everything looks good. We can fill them in later™. Let's go ahead and publish our data structure to our [development](/docs/managing-data-quality/testing-and-qa-workflows/) environment.
+Apart from the missing descriptions everything looks good. We can fill them in later. Let's go ahead and publish our data structure to our [development](/docs/managing-data-quality/testing-and-qa-workflows/) environment.
 
 ```bash
 $ snowplow-cli ds publish dev
@@ -189,7 +193,7 @@ We have now seen how to create, validate and then publish a new data structure f
 
 ### Set up repository
 
-We'll not go into the details of creating github repositories and initial commits here. The [github docs](https://docs.github.com/) do an excellent job of that already. The next few steps will assume a working github repository containing the directory and data structure we created in the previous section. It will have two branches named `main` and `develop` which should be in sync.
+We'll not go into the details of creating github repositories and initial commits here, the [github docs](https://docs.github.com/) do an excellent job of that already. The next few steps will assume a working github repository containing the directory and data structure we created in the previous section. It will have two branches named `main` and `develop` which should be in sync.
 
 ### Publish to develop workflow
 
@@ -201,10 +205,10 @@ on:
 ```
 
 With our trigger point worked out we need to complete a series of steps:
-1. configure snowplow-cli via environment variables provided as [github action secrets](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions)
-2. checkout our repo
-3. install snowplow-cli
-4. run the `snowplow-cli ds publish dev` command as we did earlier
+1. Configure snowplow-cli via environment variables provided as [github action secrets](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions)
+2. Checkout our repo
+3. Install snowplow-cli. We'll use our [setup-snowplow-cli](https://github.com/snowplow-product/setup-snowplow-cli) github action here. Behind the scenes it is downloading the [latest](https://github.com/snowplow-product/snowplow-cli/releases/latest) snowplow-cli release and making it available via the workflow job's `path`.
+4. Run the `snowplow-cli ds publish dev` command as we did earlier
 
 The full action:
 
@@ -224,9 +228,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - run: curl -L -o snowplow-cli https://github.com/snowplow-product/snowplow-cli/releases/latest/download/snowplow-cli_linux_x86_64 && chmod u+x snowplow-cli
+      - uses: snowplow-product/setup-snowplow-cli@v1
 
-      - run: ./snowplow-cli ds publish dev --managed-from $GITHUB_REPOSITORY
+      - run: snowplow-cli ds publish dev --managed-from $GITHUB_REPOSITORY
 ```
 :::tip
 The value of the `--managed-from` flag will be displayed inside the 'This data structure is locked' banner we saw earlier in the UI. It is designed to help people track down the source of truth for this data structure.
@@ -254,9 +258,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - run: curl -L -o snowplow-cli https://github.com/snowplow-product/snowplow-cli/releases/latest/download/snowplow-cli_linux_x86_64 && chmod u+x snowplow-cli
+      - uses: snowplow-product/setup-snowplow-cli@v1
 
-      - run: ./snowplow-cli ds pub prod --managed-from $GITHUB_REPOSITORY
+      - run: snowplow-cli ds publish prod --managed-from $GITHUB_REPOSITORY
 ```
 
 ### Validate on pull request workflow
@@ -270,7 +274,7 @@ on:
     branches: [develop, main]
 
 jobs:
-  publish:
+  validate:
     runs-on: ubuntu-latest
     env:
       SNOWPLOW_CONSOLE_ORG_ID: ${{ secrets.SNOWPLOW_CONSOLE_ORG_ID }}
@@ -280,9 +284,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - run: curl -L -o snowplow-cli https://github.com/snowplow-product/snowplow-cli/releases/latest/download/snowplow-cli_linux_x86_64 && chmod u+x snowplow-cli
+      - uses: snowplow-product/setup-snowplow-cli@v1
 
-      - run: ./snowplow-cli ds validate --gh-annotate
+      - run: snowplow-cli ds validate --gh-annotate
 ```
 :::tip
 The `--gh-annotate` flag will make the validate command output [github workflow command](https://docs.github.com/en/actions/writing-workflows/choosing-what-your-workflow-does/workflow-commands-for-github-actions) compatible output. We'll see an example of what that looks like in the next section.
@@ -317,7 +321,7 @@ We wait patiently for our validate on pull request workflow to run and then..
 
 ![](./images/worked-pr-checks.png)
 
-Not great. To dig in and find the problem we open the 'file' tab on the pull request and see..
+Validation has failed. To identify the problem we open the 'file' tab on the pull request and see..
 
 ![](./images/worked-diff-annotated.png)
 :::note
@@ -350,7 +354,7 @@ And the workflow result..
 
 ![](./images/worked-pr-checks-ok.png)
 
-Excellent. Now our colleagues can feedback on our changes and if everyone is happy we can merge to `develop` which will trigger our `publish-develop.yml` workflow.
+Validation has passed. Now our colleagues can feedback on our changes and if everyone is happy we can merge to `develop` which will trigger our `publish-develop.yml` workflow.
 
 ![](./images/worked-pub-dev.png)
 
@@ -360,7 +364,3 @@ Finally, once we are convinced everything works we can open another pull request
 
 * We have seen how snowplow-cli can be used to work with data structures from the command line
 * We have applied that knowledge to build github workflows which support automated validation and publication
-
-## What you might want to do next
-
-Start to think about how you could integrate snowplow-cli into your own workflows. If you have any ideas or come across any problems then we would love to hear about them, please reach out via discourse.

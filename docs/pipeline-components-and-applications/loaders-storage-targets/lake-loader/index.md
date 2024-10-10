@@ -91,6 +91,20 @@ If you tune this setting correctly, then your lake can support efficient analyti
 
 The Lake Loader requires an [Iglu resolver file](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md) which describes the Iglu repositories that host your schemas.  This should be the same Iglu configuration file that you used in the Enrichment process.
 
+### Metrics
+
+The Lake Loader can be configured to send the following custom metrics to a [StatsD](https://www.datadoghq.com/statsd-monitoring/) receiver:
+
+| Metric                      | Definition |
+|-----------------------------|------------|
+| `events_committed`          | A count of events that are successfully written and committed to the lake.  Because the loader works in timed windows of several minutes, this metric has a "spiky" value, which is often zero and then periodically spikes up to larger values. |
+| `events_received`           | A count of events received by the loader.  Unlike `events_committed` this is a smooth varying metric, because the loader is constantly receiving events throughout a timed window. |
+| `events_bad`                | A count of failed events that could not be loaded, and were instead sent to the bad output stream. |
+| `latency_millis`            | The time in milliseconds from when events are written to the source stream of events (i.e. by Enrich) until when they are read by the loader. |
+| `processing_latency_millis` | For each window of events, the time in milliseconds from when the first event is read from the stream, until all events are written and committed to the lake. |
+
+See the `monitoring.metrics.statsd` options in the [configuration reference](/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/configuration-reference/index.md) for how to configure the StatsD receiver.
+
 
 ```mdx-code-block
 import Telemetry from "@site/docs/reusable/telemetry/_index.md"

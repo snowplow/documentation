@@ -50,11 +50,12 @@ import {versions} from '@site/src/componentVersions';
 <TabItem value="ecommerce" label="Snowplow E-commerce">
 
 <ReactMarkdown children={`
-| snowplow-ecommerce version       | dbt versions      | BigQuery | Databricks | Redshift | Snowflake | Postgres |
-| -------------------------------- | ----------------- | :------: | :--------: | :------: | :-------: | :------: |
-| ${versions.dbtSnowplowEcommerce} | >=1.4.0 to <2.0.0 |    ✅     |     ✅      |    ✅     |     ✅     |    ⚠️     |
-| 0.3.0                            | >=1.3.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |
-| 0.2.1                            | >=1.0.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |
+| snowplow-ecommerce version       | dbt versions      | BigQuery  | Databricks | Redshift  | Snowflake | Postgres | Spark |
+| -------------------------------- | ----------------- | :------:  | :--------: | :------:  | :-------: | :------: | :---: |
+| ${versions.dbtSnowplowEcommerce} | >=1.4.0 to <2.0.0 |    ✅     |     ✅      |    ✅     |     ✅     |    ⚠️     |   ✅   |
+| 0.8.2                            | >=1.4.0 to <2.0.0 |    ✅     |     ✅      |    ✅     |     ✅     |    ⚠️     |   ❌    |
+| 0.3.0                            | >=1.3.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |   ❌   |
+| 0.2.1                            | >=1.0.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |   ❌   |
 `} remarkPlugins={[remarkGfm]} />
 
 > _Postgres is technically supported in the models within the package, however one of the contexts’ names is too long to be loaded via the Postgres Loader._

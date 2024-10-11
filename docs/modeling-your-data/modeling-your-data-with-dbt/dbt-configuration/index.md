@@ -44,6 +44,23 @@ To optimism performance of large Postgres datasets you can create [indexes](http
 }}
 ```
 
+### Spark
+
+For Spark environments, Iceberg is currently the supported file format for external tables. We have successfully tested this setup using both Glue and Thrift as connection methods. To use these models, create an external table from the Iceberg lake format in Spark and point your dbt model to this table.
+
+Here's an example profiles.yml configuration for Spark using Thrift:
+``` yaml
+spark:
+  type: spark
+  host: localhost
+  method: thrift
+  port: 10000
+  schema: default
+```
+
+In your dbt_project.yml, the file_format is set to iceberg by default for Spark. While you can override this in your project's dbt YAML file to use a different file format, please note that Iceberg is currently the only officially supported format.
+
+
 ### Databricks
 
 You can connect to Databricks using either the `dbt-spark` or the `dbt-databricks` connectors. The `dbt-spark` adapter does not allow dbt to take advantage of certain features that are unique to Databricks, which you can take advantage of when using the `dbt-databricks` adapter. Where possible, we would recommend using the `dbt-databricks` adapter.

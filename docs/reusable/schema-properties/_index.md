@@ -11,7 +11,7 @@ import EventQuery from "@site/docs/reusable/event-query/_index.md"
   <p>
     Schema URI:
     <code>
-      iglu://{props.schema.self.vendor}/{props.schema.self.name}/{props.schema.self.format}/{props.schema.self.version}
+      iglu:{props.schema.self.vendor}/{props.schema.self.name}/{props.schema.self.format}/{props.schema.self.version}
     </code>
   </p>
   {

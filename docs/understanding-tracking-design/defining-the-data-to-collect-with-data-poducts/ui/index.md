@@ -60,21 +60,21 @@ Event specifications which contain previously added application IDs will need to
 
 ## Upgrading Event Specification Instructions
 
-When working with Event Specifications of a Data Product, it’s essential to account for the evolution of underlying [Data Structures](../../managing-your-data-structures/index.md). Data Structures define reusable JSON schemas, which can be referenced by different Event Specifications (events and entities). Each Event Specification may contain instructions, which relay on a specific version of a Data Structure, adding another layer to specialize or constraint Event Specifications in a more granular way.
+When working with Event Specifications of a Data Product, it’s essential to account for the evolution of underlying [Data Structures](../../managing-your-data-structures/index.md). Data Structures define reusable JSON schemas, which can be referenced by different Event Specifications (events and entities). Each Event Specification may contain instructions, which rely on a specific version of a Data Structure, adding another layer to specialize or constraint Event Specifications in a more granular way.
 
 ### Versioning of Data Structures
 
-As data and your events evolve, Data Structures may be updated to new versions, which can either be compatible or incompatible with previous versions of the Data Structure. These changes can lead to potential conflicts with the instructions in the Event Specification (events and entities) that reference an older version of the Data Structure.
+As data and events evolve, Data Structures may be updated to new versions, which can be either compatible or incompatible with previous ones. These changes may cause potential conflicts with the instructions in Event Specifications (both events and entities) that reference an older version of the Data Structure.
 
 ### Semi-Automatic Upgrade of Event Specifications via the UI
 
-To streamline the process of upgrading an Event Specification to the latest version of a Data Structure, we’ve implemented a mechanism that allows you to update event specification instructions. Here’s how it works:
+To streamline the process of upgrading an Event Specification to the latest version of a Data Structure, we’ve implemented a mechanism that allows you to update Event Specification instructions through the UI. Here’s how it works:
 
 When a new version of a Data Structure becomes available, the system will indicate that the event or entities referenced by the data structure has a new version available, showing an **'Upgrade'** button in the UI. 
 
 ![Upgrade Event Specification warning](images/upgrade-event-specification-warning.png)
 
-If clicked, it will navigate to a new page, informing the user of the new version they are upgrading to, along with a **'View Changes'**.
+Clicking the button navigates to a new page, informing the user of the new version they are upgrading to, along with a **'View Changes'**.
 
 ![Upgrade Event Specification page](images/upgrade-event-specification-page.png)
 
@@ -87,7 +87,7 @@ At the bottom, a button will allow users to confirm the upgrade. One of two thin
 #### 1. Successful automatic upgrade
 
 - If the Event Specification instructions are compatible with the new Data Structure version, the system will automatically upgrade the Event Specification to the latest version of the Data Structure.
-- All instructions will be updated seamlessly without further user intervention.
+- All instructions will be updated seamlessly without any further user intervention.
 
 ![Automatic upgrade Event Specification](images/success_upgrade.png)
 
@@ -95,10 +95,10 @@ At the bottom, a button will allow users to confirm the upgrade. One of two thin
 
 If the new version of the Data Structure introduces incompatibilities with the existing Event Specification instructions, the system will flag the conflicting properties.
 
-- The UI will prompt the user to resolve the conflict before the Event Specification can be upgraded.
-- The conflict resolution UI presents the user with options to modify or delete each instruction depending on the type of incompatibility:
+- The UI will prompt the user to resolve these conflicts before the Event Specification can be upgraded.
+- The conflict resolution UI provides options to the user tp modify or delete each instruction depending on the type of incompatibility:
   - **Remove conflicting instructions**: If a specific property is no longer present in the new Data Structure.
-  - **Modify conflicting instructions**: If a property in the new Data Structure has been changed in an incompatible way (e.g., changed type, added/removed enum values, added pattern, etc.).
+  - **Modify conflicting instructions**: If a property in the new Data Structure has been changed in an incompatible way (e.g., type change, added/removed enum values, added pattern, etc.).
   
 ![Conflict resolution Event Specification](images/conflict_resolution.png)
 

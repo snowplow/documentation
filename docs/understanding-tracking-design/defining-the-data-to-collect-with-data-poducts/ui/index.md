@@ -60,7 +60,7 @@ Event specifications which contain previously added application IDs will need to
 
 ## Upgrading Event Specification Instructions
 
-When working with Event Specifications of a Data Product, it’s essential to account for the evolution of underlying [Data Structures](docs/understanding-tracking-design/managing-your-data-structures/index.md). Data Structures define reusable JSON schemas, which can be referenced by different Event Specifications (events and entities). Each Event Specification may contain instructions, which relay on a specific version of a Data Structure, adding another layer to specialize or constraint Event Specifications in a more granular way.
+When working with Event Specifications of a Data Product, it’s essential to account for the evolution of underlying [Data Structures](../../managing-your-data-structures/index.md). Data Structures define reusable JSON schemas, which can be referenced by different Event Specifications (events and entities). Each Event Specification may contain instructions, which relay on a specific version of a Data Structure, adding another layer to specialize or constraint Event Specifications in a more granular way.
 
 ### Versioning of Data Structures
 
@@ -72,15 +72,15 @@ To streamline the process of upgrading an Event Specification to the latest vers
 
 When a new version of a Data Structure becomes available, the system will indicate that the event or entities referenced by the data structure has a new version available, showing an **'Upgrade'** button in the UI. 
 
-![Upgrade Event Specification warning](/images/upgrade-event-specification-warning.png)
+![Upgrade Event Specification warning](images/upgrade-event-specification-warning.png)
 
 If clicked, it will navigate to a new page, informing the user of the new version they are upgrading to, along with a **'View Changes'**.
 
-![Upgrade Event Specification page](/images/upgrade-event-specification-page.png)
+![Upgrade Event Specification page](images/upgrade-event-specification-page.png)
 
 When clicked it will show the differences between the current version of the Data Structure and the one the user intends to upgrade to. 
 
-![Upgrade Event Specification diff](/images/upgrade-event-specification-diff.png)
+![Upgrade Event Specification diff](images/upgrade-event-specification-diff.png)
 
 At the bottom, a button will allow users to confirm the upgrade. One of two things can happen when the upgrade is confirmed:
 
@@ -89,7 +89,7 @@ At the bottom, a button will allow users to confirm the upgrade. One of two thin
 - If the Event Specification instructions are compatible with the new Data Structure version, the system will automatically upgrade the Event Specification to the latest version of the Data Structure.
 - All instructions will be updated seamlessly without further user intervention.
 
-![Automatic upgrade Event Specification](/images/success_upgrade.png)
+![Automatic upgrade Event Specification](images/success_upgrade.png)
 
 #### 2. Conflict detection and resolution
 
@@ -100,6 +100,6 @@ If the new version of the Data Structure introduces incompatibilities with the e
   - **Remove conflicting instructions**: If a specific property is no longer present in the new Data Structure.
   - **Modify conflicting instructions**: If a property in the new Data Structure has been changed in an incompatible way (e.g., changed type, added/removed enum values, added pattern, etc.).
   
-![Conflict resolution Event Specification](/images/conflict_resolution.png)
+![Conflict resolution Event Specification](images/conflict_resolution.png)
 
 This mechanism ensures that teams can benefit from updated Data Structures while maintaining the integrity and accuracy of their Event Specifications. Users are empowered to make informed decisions during the upgrade process, with clear visual cues and options to handle conflicts effectively.

@@ -27,7 +27,7 @@ At time of writing, `Iceberg` is the preferred file format for Snowflake [iceber
 Note that compared to the other loaders for Snowflake, that field names in Self-describing events and Entities are converted to `snake_case` format (the other loaders retain the format used in the schema, often `camelCase`). You will need to adjust other variables and inputs accordingly compared to what you may find in the docs. 
 
 # Spark
-Currently using spark directly as a compute engine is not supported for our packages.
+At time of writing, `Iceberg` is the supported file format for Spark external tables. We've tested this using Glue and Thrift as a connection method. If you have your event data in Iceberg format in a lake, you should be able to run the models by pointing the packages to a spark deployment, connected to that lake. For more information on setting up dbt with Spark using Thrift, please refer to the [dbt Spark documentation on Thrift](https://docs.getdbt.com/docs/core/connect-data-platform/spark-setup#thrift).
 
 # Redshift (spectrum)
 Currently using Redshift Spectrum tables is not supported for our packages due to [limitations](https://docs.aws.amazon.com/redshift/latest/dg/nested-data-restrictions.html) with the platform.

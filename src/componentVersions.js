@@ -45,7 +45,7 @@ export const versions = {
   dbtSnowplowUnified: '0.4.5',
   dbtSnowplowWeb: '1.0.1',
   dbtSnowplowMobile: '1.0.0',
-  dbtSnowplowUtils: '0.16.8',
+  dbtSnowplowUtils: '0.17.0',
   dbtSnowplowMediaPlayer: '0.8.0',
   dbtSnowplowNormalize: '0.3.5',
   dbtSnowplowFractribution: '0.3.6',

@@ -51,15 +51,13 @@ While using any entity in our packages is possible thanks to [modeling entities]
 | [YAUAA](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/device-and-browser/index.md#yauaa-context-for-user-agent-parsing)                | web    | snowplow__enable_yauaa                  |
 | [IAB](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/device-and-browser/index.md#iab-context-for-spiders-and-robots)                    | web    | snowplow__enable_iab                    |
 | [UA](/docs/enriching-your-data/available-enrichments/ua-parser-enrichment/index.md)                                                                                                 | web    | snowplow__enable_ua                     |
-| [Browser](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/device-and-browser/index.md#browser-context)                                   | web    | snowplow__enable_browser_context / snowplow__enable_browser_context_2 ( depending the schema version used )    |
+| [Browser](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/device-and-browser/index.md#browser-context)                                   | web    | snowplow\__enable_browser_context, snowplow\__enable_browser_context_2 (depending on schema versions tracked, when both are enabled the values are coalesced) |
 | [Mobile](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/device-and-browser/index.md#mobile-context)                                     | mobile | snowplow__enable_mobile_context         |
 | [Geolocation](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/geolocation/index.md#geolocation-context-entity-tracked-in-apps)           | mobile | snowplow__enable_geolocation_context    |
 | [Application](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/app-information/index.md#application-context-entity-on-mobile-apps)        | mobile | snowplow__enable_application_context    |
 | [Screen](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/page-and-screen-view-events/index.md#screen-view-events)                        | mobile | snowplow__enable_screen_context         |
 | [Deep Links](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/links-and-referrers/index.md#context-entity-attached-to-screen-view-events) | mobile | snowplow__enable_deep_link_context      |
 | [Screen Summary](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/page-activity-tracking/index.md#screen-summary-entity)                  | mobile | snowplow__enable_screen_summary_context |
-
-
 
 ### Optional Modules
 | Module            | Docs                                                                                                                                           | Enabled via Variable         |

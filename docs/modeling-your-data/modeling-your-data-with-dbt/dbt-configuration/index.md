@@ -58,7 +58,7 @@ spark:
   schema: default
 ```
 
-In your dbt_project.yml, the file_format is set to iceberg by default for Spark. While you can override this in your project's dbt YAML file to use a different file format, please note that Iceberg is currently the only officially supported format.
+In your dbt_project.yml, the file_format is set to `iceberg` by default for Spark. While you can override this in your project's dbt YAML file to use a different file format, please note that Iceberg is currently the only officially supported format.
 
 
 ### Databricks

@@ -14,9 +14,10 @@ import {versions} from '@site/src/componentVersions';
 
 
 <ReactMarkdown children={`
-| snowplow-unified version       | dbt versions        | BigQuery | Databricks | Redshift | Snowflake | Postgres |
-| -------------------------- | ------------------- | :------: | :--------: | :------: | :-------: | :------: |
-| ${versions.dbtSnowplowUnified} | >=1.6.0 to <2.0.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
+| snowplow-unified version       | dbt versions        | BigQuery | Databricks | Redshift | Snowflake | Postgres | Spark |
+| -------------------------- | ------------------- | :------: | :--------: | :------: | :-------: | :------: | :---: |
+| ${versions.dbtSnowplowUnified} | >=1.6.0 to <2.0.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |   ✅   |
+| 0.4.5                   | >=1.6.0 to <2.0.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |   ❌   |
 `} remarkPlugins={[remarkGfm]} />
 
 

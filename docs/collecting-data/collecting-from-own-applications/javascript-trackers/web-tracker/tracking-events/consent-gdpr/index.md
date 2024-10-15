@@ -1,16 +1,16 @@
 ---
-title: "Consent and GDPR"
+title: "Consent"
 sidebar_position: 100
 ---
 
-# Consent and GDPR tracking
+# Consent
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Track user consent preferences selection events using the Enhanced Consent plugin. Additionally, add a context entity containing GDPR details to every event using the [original Consent plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/consent-gdpr/original/index.md).
+Track user consent preferences selection events using the Enhanced Consent plugin.
 
 Enhanced consent events must be **manually tracked**. The GDPR context entity will be **automatically tracked** with all events if configured.
 
@@ -21,7 +21,7 @@ Enhanced consent events must be **manually tracked**. The GDPR context entity wi
 
 | Tracker Distribution | Included |
 |----------------------|----------|
-| `sp.js`              | ❌        |
+| `sp.js`              | ✅        |
 | `sp.lite.js`         | ❌        |
 
 **Download:**

@@ -41,10 +41,11 @@ Included event specifications:
 * [Application background](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/mobile-lifecycle-events/index.md#background-event)
 * [Application foreground](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/mobile-lifecycle-events/index.md#foreground-event)
 
-## E-commerce Web
+### E-commerce (Web and Mobile)
 
-This Data Product template contains all the basic e-commerce interactions that help you analyze customer behavior, identify potential growth opportunities and improve your sales performance.
-Tracked using the [Snowplow Ecommerce plugin](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/).
+This Data Product template contains all the basic e-commerce interactions that help you analyze customer behavior, identify potential growth opportunities, and improve your sales performance.
+
+Tracked using the [out-of-the-box e-commerce events](docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/ecommerce-events/index.md) for web, Android, and iOS. On web, this requires the [Snowplow Ecommerce plugin](/docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/).
 
 Included event specifications:
 
@@ -60,7 +61,7 @@ Included event specifications:
 * Transaction
 * Transaction Error
 
-## Media Web
+### Media Web
 
 This Data Product template contains a full set of media tracking interactions to measure video or audio data.
 Tracked using the [Snowplow Media plugin](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/snowplow/).
@@ -91,4 +92,3 @@ Included event specifications:
 * Seek End Event
 * Seek Start Event
 * Volume Change Event
-

@@ -49,7 +49,7 @@ export const versions = {
   dbtSnowplowUtils: '0.17.0',
   dbtSnowplowNormalize: '0.3.5',
   dbtSnowplowFractribution: '0.3.6',
-  dbtSnowplowEcommerce: '0.8.2',
+  dbtSnowplowEcommerce: '0.9.0',
 
   // sql runner
   sqlRunner: '0.10.1',

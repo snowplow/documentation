@@ -26,7 +26,7 @@ Here is a simple example of how to initialise a tracker, setting a few configura
 ```javascript
 snowplow('newTracker', 'sp', '{{collector_url_here}}', {
   appId: 'my-app-id',
-  discoverRootDomain: true,
+  discoverRootDomain: true, // default, can be omitted
   cookieSameSite: 'Lax', // Recommended
   contexts: {
     webPage: true // default, can be omitted
@@ -40,7 +40,7 @@ snowplow('newTracker', 'sp', '{{collector_url_here}}', {
 ```javascript
 newTracker('sp', '{{collector_url_here}}', {
   appId: 'my-app-id',
-  discoverRootDomain: true,
+  discoverRootDomain: true, // default, can be omitted
   cookieSameSite: 'Lax', // Recommended
   contexts: {
     webPage: true // default, can be omitted

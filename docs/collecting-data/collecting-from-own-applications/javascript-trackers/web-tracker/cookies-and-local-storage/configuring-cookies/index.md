@@ -33,7 +33,8 @@ If your website spans multiple subdomains e.g.
 
 You will want to track user behavior across all those subdomains, rather than within each individually. As a result, it is important that the domain for your first party cookies is set to ‘.mysite.com’ rather than ‘www.mysite.com’. By doing so, any values that are stored on the cookie on one of subdomain will be accessible on all the others.
 
-Although it's possible to set this manually, we recommend that you enable automatic discovery and setting of the root domain, using the optional `discoverRootDomain` field of the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). If it is set to `true`, the tracker automatically discovers and sets the `configCookieDomain` value to the root domain.
+Although it's possible to set this manually, we recommend that you enable automatic discovery and setting of the root domain, using the optional `discoverRootDomain` field of the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
+If it is set to `true` (the default), the tracker automatically discovers and sets the `configCookieDomain` value to the root domain.
 
 :::note
 If you have been setting this manually please note that the automatic detection does not prepend a ‘.’ to the domain. For example a root domain of “.mydomain.com” would become “mydomain.com”. This is because the library we use for setting cookies doesn’t care about the difference.
@@ -41,7 +42,17 @@ If you have been setting this manually please note that the automatic detection 
 **This will then result in a different domain hash, so we recommend that if you have been setting this manually with a leading ‘.’ to continue to do so manually.**
 :::
 
-To set the domain manually, use the `cookieDomain` field of the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). If this field is not set, the cookies will not be given a domain.
+To set the domain manually, use the `cookieDomain` field of the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
+This will override the `discoverRootDomain` setting.
+
+:::warning
+In earlier versions, `discoverRootDomain` was disabled by default, and enabling it would cause it to ignore the `cookieDomain` setting, if set.
+
+In v4 this is reversed: `discoverRootDomain` is now enabled by default, but will be ignored if `cookieDomain` is set.
+When migrating from older versions, you may need to remove your `cookieDomain` configuration to maintain the earlier behavior.
+
+If you want the earlier default behavior where no domain at all is used, leave `cookieDomain` unset and explicitly set `discoverRootDomain` to `false`.
+:::
 
 :::warning
 Changing the cookie domain will reset all existing cookies. As a result, it might be a major one-time disruption to data analytics because all visitors to the website will receive a new `domain_userid`.

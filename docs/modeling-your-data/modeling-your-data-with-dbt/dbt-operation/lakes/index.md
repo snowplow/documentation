@@ -1,5 +1,5 @@
 ---
-title: "Running the models on data lakehouses"
+title: "Running on Data Lakes"
 sidebar_position: 50
 description: "How to run our models on lakehouses"
 ---
@@ -10,11 +10,12 @@ import Badges from '@site/src/components/Badges';
 
 <Badges badgeType="Early Release"></Badges>&nbsp;
 
-:::danger
+:::info
 
 Running the models on data lakes or lakehouses (using external tables in a warehouse to read directly from a lake) is currently in Early Release state and is not fully supported. Certain features may not work as expected and errors are more likely to occur. Please use this approach at your own risk and raise any issues you find with us.
 
 :::
+
 
 If you are using the [lake loaders](/docs/storing-querying/storage-options/index.md#data-lake-loaders) to load your data into a lake storage option, it may be possible to use our data models. In general in this section of the docs we are not going to detail which warehouses support which file formats, or how to set up the respective tables in each warehouse - please see the docs for your appropriate warehouse to see what file formats they support.
 

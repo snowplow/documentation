@@ -10,8 +10,6 @@ import Badges from '@site/src/components/Badges';
 
 <Badges badgeType="Early Release"></Badges>&nbsp;
 
-:::danger
-
 Running the models on data lakes or lakehouses (using external tables in a warehouse to read directly from a lake) is currently in Early Release state and is not fully supported. Certain features may not work as expected and errors are more likely to occur. Please use this approach at your own risk and raise any issues you find with us.
 
 :::

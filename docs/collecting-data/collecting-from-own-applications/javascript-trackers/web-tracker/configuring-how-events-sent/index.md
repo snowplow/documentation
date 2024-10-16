@@ -20,7 +20,9 @@ It's possible to add a fine-grained configuration for exactly how the web tracke
 
 ### Base64 encoding
 
-By default, context entities and custom self-describing events are encoded into Base64 to ensure that no data is lost or corrupted. You can turn encoding on or off using the `encodeBase64` field of the [tracker configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
+Context entities and custom self-describing events can be encoded into Base64 to ensure that no data is lost or corrupted. You can turn encoding on or off using the `encodeBase64` field of the [tracker configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
+
+This setting is enabled by default for GET requests. For POST requests, it is disabled by default as it doesn't provide the same benefits and can result in larger payload size and is more difficult to debug.
 
 ### Number of events per request
 
@@ -63,13 +65,17 @@ customHeaders: {
 
 Set this in the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
 
-### Disabling `withCredentials` flag
+### Disabling sending credentials with requests
 
-From v3.2.0, it's now possible to turn off the `withCredentials` flag (in the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md)) on all requests to the collector. The default value is `true` which sets `withCredentials` to `true` on requests. Disabling this flag will have impact when using `eventMethod: "post"` and `eventMethod: "get"`. This flag has no effect on same site requests, but disabling it will prevent cookies being sent with requests to a Snowplow Collector running on a different domain. You can read more about this flag at [MDN](https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequest/withCredentials).
+The `credentials` option in the tracker configuration controls whether cookies are sent with requests to a Snowplow Collector running on a different domain.
+The default setting is `include` to always include the cookies.
+The setting translates to the `credentials` option in the fetch API, see [the documentation here](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch#including_credentials).
 
 ```json
-withCredentials: false
+credentials: 'omit'
 ```
+
+Before v4, this configuration was provided using the `withCredentials` flag.
 
 ## Network protocol and method
 
@@ -107,7 +113,7 @@ By default, events are sent by GET. This can be changed using the `eventMethod`
 
 If you set the `eventMethod` field of the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md) to `post`, the tracker will send events using POST requests rather than GET requests. In browsers which do not support cross-origin XMLHttpRequests (e.g. IE9), the tracker will fall back to using GET.
 
-`eventMethod` defaults to `post`, other options available are `get` for GET requests and `beacon` for using the Beacon API (**Note**: Beacon support is not available and/or unreliable in some browsers, in these cases the tracker will fallback to POST). See below for more about Beacon API.
+`eventMethod` defaults to `post`. `get` can be used for GET requests.
 
 The main advantage of POST requests is that they circumvent Internet Explorer’s maximum URL length of 2083 characters by storing the event data in the body of the request rather than the querystring.
 
@@ -138,15 +144,19 @@ For instance, if you wish to send several events at once, you might make the API
 
 Note that if `localStorage` is inaccessible or you are not using it to store data, the buffer size will always be 1 to prevent losing events when the user leaves the page.
 
-### Beacon API support
+### `keepalive` option for Collector requests
 
-The Beacon interface is used to schedule asynchronous and non-blocking requests to a web server. This will allow events to be sent even after a webpage is closed. This browser interface can be used to send events by setting the `eventMethod` field in the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md) to `beacon`.
+The keepalive feature in the [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) indicates that the request should be allowed to outlive the webpage that initiated it.
+It enables requests to the Snowplow collector to complete even if the page is closed or navigated away from.
 
-Using Beacon will store a Session Cookie in the users browser for reliability reasons, and will always send the first request as a standard POST. This prevents data loss in a number of older browsers with broken Beacon implementations.
+This option is enabled by default.
 
-Note: the Beacon API makes POST requests.
-
-More information and documentation about the Beacon API can be found [here](https://developer.mozilla.org/en-US/docs/Web/API/Beacon_API).
+```ts
+let tracker = newTracker("...", "...", {
+    // ...
+    keepalive: true
+});
+```
 
 ### Custom POST path
 
@@ -236,3 +246,37 @@ export type RequestFailure = {
 ```
 
 The format of `EventBatch` is the same as the `onRequestSuccess` callback.
+
+## Custom tracker components
+
+### Custom event store
+
+Before events are sent to the Snowplow Collector, they are queued in an event store.
+This ensures that events can be batched together and retried in case of network failures.
+
+By default, the tracker uses the browser local storage for the event store implementation.
+It is possible to use an in memory event store or provide a custom event store implementation by setting the `eventStore` configuration option.
+
+```ts
+import { newInMemoryEventStore } from '@snowplow/tracker-core';
+
+let tracker = newTracker("...", "...", {
+    // ...
+    eventStore: newInMemoryEventStore({
+        maxSize: 1000
+    })
+});
+```
+
+### Custom fetch function
+
+The tracker provides an option to override the [fetch function](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) used to make requests to the Snowplow Collector.
+It may be useful in unit tests to test that requests are made without actually making them.
+You may also want to wrap the fetch function to modify or monitor the requests.
+
+```ts
+let tracker = newTracker("...", "...", {
+    // ...
+    customFetch: (input: RequestInfo, init?: RequestInit) => fetch(input, init)
+});
+```

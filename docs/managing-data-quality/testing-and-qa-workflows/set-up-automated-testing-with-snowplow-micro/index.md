@@ -99,7 +99,7 @@ If you wanted to use `docker run` instead of `docker-compose`, the same step 
 
 ## Tracking design
 
-Our demo web app uses Snowplow to track user activity. Then, using Snowplow Micro we will be testing that tracking is properly configured on our site using, as examples, two populat web test tools, Nightwatch and Cypress.
+Our demo web app uses Snowplow to track user activity. Then, using Snowplow Micro we will be testing that tracking is properly configured on our site using, as examples, two popular web test tools, Nightwatch and Cypress.
 
 ### Overview of the demo app
 

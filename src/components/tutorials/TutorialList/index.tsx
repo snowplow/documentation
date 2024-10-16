@@ -78,8 +78,7 @@ function TutorialCard({ tutorial }: { tutorial: Tutorial }) {
           <StartButton
             disabled={!firstStep}
             onClick={() => {
-              const steps = getSteps(tutorial.meta.id)
-              const first = steps[0]
+              const [first] = getSteps(tutorial.meta.id)
               history.push(first.path)
             }}
             endIcon={<ChevronRight />}

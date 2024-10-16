@@ -10,94 +10,118 @@ Require the Node.js Tracker module into your code like so:
 
 ```javascript
 const snowplow = require('@snowplow/node-tracker');
-const gotEmitter = snowplow.gotEmitter;
-const tracker = snowplow.tracker;
+const tracker = snowplow.newTracker;
 ```
 
 or, if using ES Modules, you can import the module like so:
 
 ```javascript
-import { tracker, gotEmitter } from '@snowplow/node-tracker';
+import { newTracker } from '@snowplow/node-tracker';
 ```
 
-### Configure Emitter
-
-First, initialize an emitter instance. The Snowplow Node.js Tracker is bundled with an emitter based on the [`got`](https://github.com/sindresorhus/got) library. This emitter will be responsible for how and when events are sent to Snowplow.
-
-`got` only works on Node.js applications and does not have browser support, if the `got` library isn't suitable for your project you can [create your own emitter as described below](#create-your-own-emitter). If you want to track users in the browser, you should use the [@snowplow/browser-tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/index.md) package.
-
-A simple set up of this emitter might look like:
+The `newTracker` call takes 2 arguments – the tracker and emitter configuration. The tracker configuration specifies the tracker namespace and app name. The emitter configuration specifies how events are queued locally and sent to the Snowplow collector.
 
 ```javascript
-const e = gotEmitter(
-  'collector.mydomain.net', // Collector endpoint
-  snowplow.HttpProtocol.HTTPS, // Optionally specify a method - https is the default
-  8080, // Optionally specify a port
-  snowplow.HttpMethod.POST, // Method - defaults to GET
-  5 // Only send events once n are buffered. Defaults to 1 for GET requests and 10 for POST requests.
-);
+const tracker = newTracker({
+  namespace: "my-tracker", // Namespace to identify the tracker instance. It will be attached to all events which the tracker fires.
+  appId: "my-app", // Application identifier
+  encodeBase64: false, // Whether to use base64 encoding for the self-describing JSON. Defaults to true.
+}, {
+  endpoint: "https://collector.mydomain.net", // Collector endpoint
+  eventMethod: "post", // Method - defaults to POST
+  bufferSize: 1, // Only send events once n are buffered. Defaults to 1 for GET requests and 10 for POST requests.
+});
 ```
 
-There are a number of additional parameters that the `gotEmitter` allows to be configured which are passed to the underlying `got` library which this emitter is built on.
+There are a number of additional parameters that may optionally be configured.
+Please refer to the following API docs for the full list:
 
-The full set of `gotEmitter` parameters can be found in our [API Documentation](http://snowplow.github.io/snowplow-javascript-tracker/docs/node-tracker/markdown/node-tracker.gotemitter). A complete example might look like:
+1. [Tracker configuration options](http://snowplow.github.io/snowplow-javascript-tracker/docs/node-tracker/markdown/node-tracker.trackerconfiguration).
+2. [Emitter configuration options](http://snowplow.github.io/snowplow-javascript-tracker/docs/node-tracker/markdown/node-tracker.emitterconfigurationbase).
+
+### Using multiple Emitters
+
+In case you want to send the events to multiple Snowplow collectors, you can provide a list of emitter configurations in the `newTracker` call – one for each collector.
+This may look as follows.
 
 ```javascript
-const e = snowplow.gotEmitter(
-  'collector.mydomain.net', // Endpoint
-  snowplow.HttpProtocol.HTTPS, // Protocol
-  8080, // Port
-  snowplow.HttpMethod.POST, // Method
-  1, // Buffer Size
-  5, // Retries
-  cookieJar, // cookieJar from tough-cookie library
-  function (error, response) { // Callback called for each request
-    if (error) {
-      console.log(error, 'Request error');
-    } else {
-      console.log('Event Sent');
-    }
+const tracker = newTracker({
+  namespace: "my-tracker", // Namespace to identify the tracker instance. It will be attached to all events which the tracker fires.
+  appId: "my-app", // Application identifier
+  encodeBase64: false, // Whether to use base64 encoding for the self-describing JSON. Defaults to true.
+}, [
+  {
+    endpoint: "https://collector1.mydomain.net", // First collector endpoint
   },
   {
-    http: new http.Agent({ maxSockets: 6 }),
-    https: new https.Agent({ maxSockets: 6 })
-  }, // Node.js agentOptions object to tune performance
-  false // Use anonymous server tracking. Available from 3.21.0 onwards
-);
+    endpoint: "https://collector2.mydomain.net", // Second collector endpoint
+  },
+]);
 ```
-
-### Configuring Tracker
-
-Initialise a tracker instance like this:
-
-```javascript
-const t = tracker([e], 'myTracker', 'myApp', false);
-```
-
-The `tracker` function takes four parameters:
-
-- An array of emitters to which the tracker will hand Snowplow events
-- An optional tracker `namespace` which will be attached to all events which the tracker fires, allowing you to identify their origin
-- The `appId`, or application ID
-- `encodeBase64`, which determines whether unstructured events and custom contexts will be base 64 encoded (by default they are).
 
 ### Create your own Emitter
 
-The `gotEmitter` is built against a standard `Emitter` interface which means if `got` isn't suitable for your project then you can create your own `Emitter`.
+Emitter is an object responsible for queuing tracked events and making requests to the Snowplow collector.
 
-As an example where this might be useful, as `got` only works in Node.js applications if you wanted to track on a browser based application and you have already considered the [@snowplow/browser-tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/index.md) package, then you can build your own Emitter - two libraries which might be appropriate are [ky](https://github.com/sindresorhus/ky) (built by the same team as `got`) or [axios](https://github.com/axios/axios).
+By default, the Node tracker makes use of the [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) to make the HTTP requests.
+If you want to use a different library or logic for queuing and sending events, you can provide a custom `Emitter` implementation.
 
 Emitters must conform to an [`Emitter` interface](https://github.com/snowplow/snowplow-javascript-tracker/blob/master/trackers/node-tracker/docs/markdown/node-tracker.emitter.md), which looks like:
 
 ```typescript
+/**
+ * Emitter is responsible for sending events to the collector.
+ * It manages the event queue and sends events in batches depending on configuration.
+ */
 interface Emitter {
-  flush: () => void;
-  input: (payload: PayloadDictionary) => void;
-  /** Set if the requests from the emitter should be anonymized. Read more about anonymization used at https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/going-deeper/http-headers/. Available from 3.21.0 onwards */
-  setAnonymization?: (shouldAnonymize: boolean) => void;
+    /**
+     * Forces the emitter to send all events in the event store to the collector.
+     * @returns A Promise that resolves when all events have been sent to the collector.
+     */
+    flush: () => Promise<void>;
+    /**
+     * Adds a payload to the event store or sends it to the collector.
+     * @param payload - A payload to be sent to the collector
+     * @returns Promise that resolves when the payload has been added to the event store or sent to the collector
+     */
+    input: (payload: Payload) => Promise<void>;
+    /**
+     * Updates the collector URL to which events will be sent.
+     * @param url - New collector URL
+     */
+    setCollectorUrl: (url: string) => void;
+    /**
+     * Sets the server anonymization flag.
+     */
+    setAnonymousTracking: (anonymous: boolean) => void;
+    /**
+     * Updates the buffer size of the emitter.
+     */
+    setBufferSize: (bufferSize: number) => void;
 }
 ```
 
-You can see the implementation of the `gotEmitter` [here](https://github.com/snowplow/snowplow-javascript-tracker/blob/master/trackers/node-tracker/src/got_emitter.ts).
+Once you implement your own `Emitter`, you can pass it to the `newTracker` call as follows.
 
-Once your emitter has been initialised you can inject it into the `tracker` just as you would do with the `gotEmitter`. We are also open to PR's which contain additional emitters.
+```ts
+export const expressTracker = newTracker(
+  {
+    namespace: "my-tracker",
+    appId: "my-app",
+  },
+  {
+    customEmitter: () => ({
+      input: (payload) => {
+        return Promise.resolve();
+      },
+      flush: () => {
+        return Promise.resolve();
+      },
+      setCollectorUrl: (url) => {},
+      setAnonymousTracking: (anonymous) => {},
+      setBufferSize: (bufferSize) => {},
+    }),
+  }
+);
+
+```

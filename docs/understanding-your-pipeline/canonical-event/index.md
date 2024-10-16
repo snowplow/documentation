@@ -132,7 +132,7 @@ Some Snowplow Trackers allow the user to name each specific Tracker instance. `n
 | Field | Type | Description | Reqd? | Example| Source | Web | Mobile|
 |-------------------|------|-----------------------------------------------------------------------------------------------------------------------|-------|----------------------------------------|----------------------|-----|---------|
 | user_id | text | Unique ID set by business | No| 'c94f860b-1266-4dad-ae57-3a36a414a521' | Tracking | ✅ | ✅ |
-| domain_userid | text | User ID set by Snowplow using 1st party client-set cookie | No| '4b0dfa75-9a8c-46a1-9691-01add9db4200' | Tracking | ✅ | ❌ |
+| domain_userid | text | User ID set by Snowplow using 1st party client-set cookie, (only used for Web events!) | No| '4b0dfa75-9a8c-46a1-9691-01add9db4200' | Tracking | ✅ | ❌ |
 | network_userid| text | User ID set by Snowplow using server-set cookie, which may be 1st or 3rd party, depending on collector configuration. | No| 'ecdff4d0-9175-40ac-a8bb-325c49733607' | Tracking or Pipeline | ✅ | ✅ |
 | user_ipaddress| text | User IP address, can be overwritten with the IP Anonymization Enrichment| No| '92.231.54.234'| Tracking or Pipeline | ✅ | ✅ |
 | domain_sessionidx | int| A visit / session index | No| 3| Tracking | ✅ | ❌ |
@@ -140,6 +140,8 @@ Some Snowplow Trackers allow the user to name each specific Tracker instance. `n
 
 
 `domain_sessionidx` is the number of the current user session. For example, an event occurring during a user's first session would have `domain_sessionidx` set to 1. The JavaScript Tracker calculates this field by storing a visit count in a first-party cookie. Whenever the Tracker fires an event, if more than 30 minutes have elapsed since the last event, the visitor count is increased by 1. (Whenever an event is fired, a "session cookie" is created and set to expire in 30 minutes. This is how the Tracker can tell whether the visit count should be incremented.) Thirty minutes is the default value and can be changed using the `sessionCookieTimeout` configuration option in the tracker.
+
+It is worth to call out here that the `domain_userid` is regarded as the most reliable session based identifier for most use cases, it is therefore treated as the primary `user_identifier` field in our data models that rely on sessionisation (e.g. the Unified data model). These are only populated for web events, the mobile equivalent is embedded into an ootb entity called [Session Context Entity](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/user-and-session-identification/index.md#client-session-context-entity) which are then extracted (`session__user_id`) then coalesced with the web based domain_userid by default and being referred to as `user_identifier` within the data modeling package.
 
 #### Device and operating system fields
 
@@ -264,6 +266,7 @@ Fields containing information about the event type.
 | `br_viewwidth`| int | Viewport width | No| 1000 | Tracking| ✅ | ❌ |
 
 For more information on this topic please check out the relevant [Tracking Documentation](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/device-and-browser/index.md).
+
 
 ### Event-specific fields
 

@@ -27,6 +27,9 @@ For systems with `curl` available the following commands should get you started 
 curl -L -o snowplow-cli https://github.com/snowplow-product/snowplow-cli/releases/latest/download/snowplow-cli_darwin_arm64
 chmod u+x snowplow-cli
 ```
+:::info
+The following examples assume you remain in the folder containing `snowplow-cli`.
+:::
 
 ### Configure
 
@@ -38,7 +41,7 @@ Organization Id can be retrieved from the URL immediately following the .com whe
 
 ![](images/orgID.png)
 
-Snowplow CLI can take its configuration from a variety of sources. More details are available from `snowplow-cli data-structures --help`. Variations on these three examples should serve most cases.
+Snowplow CLI can take its configuration from a variety of sources. More details are available from `./snowplow-cli data-structures --help`. Variations on these three examples should serve most cases.
 
 <Tabs groupId="config">
   <TabItem value="env" label="env variables" default>
@@ -63,7 +66,7 @@ Snowplow CLI can take its configuration from a variety of sources. More details 
   <TabItem value="args" label="inline arguments" >
 
   ```bash
-  snowplow-cli data-structures --api-key-id ********-****-****-****-************ --api-key ********-****-****-****-************ --org-id ********-****-****-****-************
+  ./snowplow-cli data-structures --api-key-id ********-****-****-****-************ --api-key ********-****-****-****-************ --org-id ********-****-****-****-************
   ```
 
   </TabItem>
@@ -75,7 +78,7 @@ Snowplow CLI can take its configuration from a variety of sources. More details 
 ### Creating data structures
 
 ```bash
-snowplow-cli ds generate login_click ./folder-name
+./snowplow-cli ds generate login_click ./folder-name
 
 ```
 
@@ -85,7 +88,7 @@ Will create a minimal data structure template in a new file `./folder-name/login
 ### Downloading data structures
 
 ```bash
-snowplow-cli ds download 
+./snowplow-cli ds download 
 ```
 
 This command will retrieve all organization data structures. By default it will create a folder named `data-structures` in the current working directory to put them in. It uses a combination of vendor and name to further break things down.
@@ -96,7 +99,7 @@ Given a data structure with `vendor: com.acme` and `name: link_click` and assumi
 ### Validating data structures
 
 ```bash
-snowplow-cli ds validate ./folder-name
+./snowplow-cli ds validate ./folder-name
 ```
 
 This command will find all files under `./folder-name` (if omitted then `./data-structures`) and attempt to validate them using BDP console. It will assert the following
@@ -111,7 +114,7 @@ If any validations fail the command will report the problems to stdout and exit 
 ### Publishing data structures
 
 ```bash
-snowplow-cli ds publish dev ./folder-name
+./snowplow-cli ds publish dev ./folder-name
 ```
 
 This command will find all files under `./folder-name` (if omitted then `./data-structures`) and attempt to publish them to BDP console in the environment provided (`dev` or `prod`).

@@ -4,17 +4,12 @@ import { Box, Grid } from '@mui/material'
 import PaginatorNavLink from '@theme/PaginatorNavLink'
 import { Step } from '@site/src/components/tutorials/models'
 
-export function Paginators({
-  next,
-  prev,
-  setActiveStep,
-  isMobile = false,
-}: {
+export const Paginators: React.FC<{
   next: Step | null
   prev: Step | null
   setActiveStep: (step: Step) => void
   isMobile: boolean
-}): JSX.Element {
+}> = ({ next, prev, setActiveStep, isMobile = false }) => {
   return (
     <Box
       sx={{

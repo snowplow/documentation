@@ -1,10 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { FC, useEffect, useState } from 'react'
 
 import Link from '@docusaurus/Link'
 import { grey } from '@mui/material/colors'
 import { useHistory } from '@docusaurus/router'
 import { ChevronRight, Search } from '@mui/icons-material'
-import theme from 'prism-react-renderer/themes/shadesOfPurple'
 import {
   Box,
   FormControl,
@@ -15,6 +14,7 @@ import {
   Select,
   Typography,
   useMediaQuery,
+  useTheme,
 } from '@mui/material'
 
 import { getMetaData, getSteps } from '../utils'
@@ -27,6 +27,7 @@ import {
   StartButton,
   Topic,
 } from './styledComponents'
+
 function getFirstStepPath(meta: Meta): string | null {
   const steps = getSteps(meta.id)
   if (steps.length === 0) {
@@ -35,7 +36,7 @@ function getFirstStepPath(meta: Meta): string | null {
   return steps[0].path
 }
 
-function TutorialCard({ tutorial }: { tutorial: Tutorial }) {
+const TutorialCard: FC<{ tutorial: Tutorial }> = ({ tutorial }) => {
   const history = useHistory()
   const firstStep = getFirstStepPath(tutorial.meta)
 
@@ -110,8 +111,9 @@ const TopicDropdownValues: TopicDropdown[] = [
   ...Object.values(TopicType.Values),
 ]
 
-export default function TutorialList() {
-  const isMobile = useMediaQuery(theme.breakpoints.up('md'))
+const TutorialList: FC = () => {
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
 
   const [search, setSearch] = useState('')
   const [topic, setTopic] = useState<TopicDropdown>('All topics')
@@ -165,13 +167,13 @@ export default function TutorialList() {
   )
 }
 
-function MobileTutorialList({
-  search,
-  setSearch,
-  topic,
-  setTopic,
-  parsedTutorials,
-}) {
+const MobileTutorialList: FC<{
+  search: string
+  setSearch: React.Dispatch<React.SetStateAction<string>>
+  topic: TopicDropdown
+  setTopic: React.Dispatch<React.SetStateAction<TopicDropdown>>
+  parsedTutorials: Tutorial[]
+}> = ({ search, setSearch, topic, setTopic, parsedTutorials }) => {
   return (
     <Box sx={{ mt: 1 }}>
       <Grid container direction="column" rowSpacing={2}>
@@ -182,8 +184,8 @@ function MobileTutorialList({
           .filter((tutorial: Tutorial) => searchFilter(search, tutorial))
           .filter((tutorial: Tutorial) => topicFilter(topic, tutorial))
           .map((tutorial: Tutorial) => (
-            <Grid item>
-              <TutorialCard key={tutorial.meta.id} tutorial={tutorial} />
+            <Grid item key={tutorial.meta.id}>
+              <TutorialCard tutorial={tutorial} />
             </Grid>
           ))}
       </Grid>
@@ -191,13 +193,13 @@ function MobileTutorialList({
   )
 }
 
-function DesktopTutorialList({
-  search,
-  setSearch,
-  topic,
-  setTopic,
-  parsedTutorials,
-}) {
+const DesktopTutorialList: FC<{
+  search: string
+  setSearch: React.Dispatch<React.SetStateAction<string>>
+  topic: TopicDropdown
+  setTopic: React.Dispatch<React.SetStateAction<TopicDropdown>>
+  parsedTutorials: Tutorial[]
+}> = ({ search, setSearch, topic, setTopic, parsedTutorials }) => {
   return (
     <Box marginX={8} marginY={3} minWidth="90vw">
       <Grid container columnSpacing={2}>
@@ -217,7 +219,9 @@ function DesktopTutorialList({
   )
 }
 
-function SearchBar({ setSearch }) {
+const SearchBar: FC<{
+  setSearch: React.Dispatch<React.SetStateAction<string>>
+}> = ({ setSearch }) => {
   return (
     <Grid item>
       <FormControl
@@ -251,7 +255,10 @@ function SearchBar({ setSearch }) {
   )
 }
 
-function TopicFilter({ topic, setTopic }) {
+const TopicFilter: FC<{
+  topic: TopicDropdown
+  setTopic: React.Dispatch<React.SetStateAction<TopicDropdown>>
+}> = ({ topic, setTopic }) => {
   return (
     <Grid item>
       <FormControl
@@ -283,3 +290,5 @@ function TopicFilter({ topic, setTopic }) {
     </Grid>
   )
 }
+
+export default TutorialList

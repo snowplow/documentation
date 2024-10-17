@@ -1,5 +1,4 @@
-import React, { useEffect, useRef } from 'react'
-
+import React, { FC, useEffect, useState } from 'react'
 import { useTheme } from '@emotion/react'
 import { grey } from '@mui/material/colors'
 import { useHistory } from '@docusaurus/router'
@@ -18,17 +17,10 @@ import {
 
 import { Step } from './models'
 
-function ListIcon({
+const ListIcon: FC<{ selfPosition: number; activePosition?: number }> = ({
   selfPosition,
   activePosition,
-}: {
-  selfPosition: number
-  activePosition?: number
-}): JSX.Element {
-  if (!activePosition) {
-    return <FontAwesomeIcon size="lg" icon={faCircle} />
-  }
-
+}) => {
   const theme = useTheme()
   const transform = { transform: 'translateY(-1px)' }
 
@@ -38,6 +30,10 @@ function ListIcon({
   // Palette _does_ in fact exist on `theme`
   // @ts-ignore
   const color = theme.palette.primary.main
+
+  if (!activePosition) {
+    return <FontAwesomeIcon size="lg" icon={faCircle} />
+  }
 
   if (selfPosition === activePosition) {
     return (
@@ -60,17 +56,13 @@ function ListIcon({
   }
 }
 
-export default function Steps({
-  steps,
-  activeStep,
-  setActiveStep,
-}: {
+const Steps: FC<{
   steps: Step[]
   activeStep: Step | null
   setActiveStep: (step: Step) => void
-}): JSX.Element {
+}> = ({ steps, activeStep, setActiveStep }) => {
   const history = useHistory()
-  const [lastUpdated, setLastUpdated] = React.useState<string>('')
+  const [lastUpdated, setLastUpdated] = useState<string>('')
 
   useEffect(() => {
     const element = document.getElementById('lastUpdated')
@@ -159,3 +151,5 @@ export default function Steps({
     </Paper>
   )
 }
+
+export default Steps

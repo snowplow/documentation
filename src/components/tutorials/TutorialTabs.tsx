@@ -1,5 +1,4 @@
 import React, { SyntheticEvent, useEffect, useState } from 'react'
-
 import { Tab, Tabs } from '@mui/material'
 import { useHistory, useLocation } from '@docusaurus/router'
 
@@ -14,7 +13,7 @@ function getCurrentTab(pathname: string): DocsTab {
     : DocsTab.Docs
 }
 
-export function DocsTutorialsTabsMobile(): JSX.Element {
+export const DocsTutorialsTabsMobile: React.FC = () => {
   const history = useHistory()
   const location = useLocation()
 
@@ -32,8 +31,6 @@ export function DocsTutorialsTabsMobile(): JSX.Element {
   }
 
   return (
-    // All this overflow needs to be visible for the indicator to be able to
-    // show against the bottom of the navbar, as it has padding surrounding it
     <Tabs
       className="mobile-only"
       sx={{ overflow: 'visible', overflowX: 'visible' }}
@@ -61,7 +58,7 @@ export function DocsTutorialsTabsMobile(): JSX.Element {
   )
 }
 
-export function DocsTutorialsTabsDesktop(): JSX.Element {
+export const DocsTutorialsTabsDesktop: React.FC = () => {
   const history = useHistory()
   const location = useLocation()
 
@@ -79,8 +76,6 @@ export function DocsTutorialsTabsDesktop(): JSX.Element {
   }
 
   return (
-    // All this overflow needs to be visible for the indicator to be able to
-    // show against the bottom of the navbar, as it has padding surrounding it
     <Tabs
       className="desktop-only"
       sx={{ overflow: 'visible', overflowX: 'visible' }}

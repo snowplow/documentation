@@ -1,14 +1,13 @@
-import React, { ReactNode, useEffect, useMemo, useState } from 'react'
+import React, { FC, ReactNode, useEffect, useMemo, useState } from 'react'
 
 import clsx from 'clsx'
 import { Location } from 'history'
 
 import { useLocation } from '@docusaurus/router'
-import { Grid, useMediaQuery } from '@mui/material'
+import { Grid, useMediaQuery, useTheme } from '@mui/material'
 import type { Props } from '@theme/DocPage/Layout/Main'
 import Steps from '@site/src/components/tutorials/Steps'
 import { Header } from '@site/src/components/tutorials/Header'
-import theme from 'prism-react-renderer/themes/shadesOfPurple'
 import { getSteps } from '@site/src/components/tutorials/utils'
 import { useDocsSidebar } from '@docusaurus/theme-common/internal'
 import { Meta, Step } from '@site/src/components/tutorials/models'
@@ -64,10 +63,10 @@ function findStepFromLocation(location: Location, steps: Steps): Step | null {
   return null
 }
 
-function DefaultDocPageLayout({
+const DefaultDocPageLayout: FC<Props> = ({
   hiddenSidebarContainer,
   children,
-}: Props): JSX.Element {
+}) => {
   const sidebar = useDocsSidebar()
   return (
     <main
@@ -89,10 +88,10 @@ function DefaultDocPageLayout({
   )
 }
 
-function TutorialHomeDocPageLayout({
+const TutorialHomeDocPageLayout: FC<Props> = ({
   hiddenSidebarContainer,
   children,
-}: Props): JSX.Element {
+}) => {
   const sidebar = useDocsSidebar()
 
   useEffect(() => {
@@ -113,10 +112,14 @@ function TutorialHomeDocPageLayout({
   )
 }
 
-function TutorialDocPageLayout({ hiddenSidebarContainer, children }: Props) {
+const TutorialDocPageLayout: FC<Props> = ({
+  hiddenSidebarContainer,
+  children,
+}) => {
   const sidebar = useDocsSidebar()
   const location = useLocation()
-  const isMobile = useMediaQuery(theme.breakpoints.up('md'))
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
 
   const meta = useMemo<Meta>(() => getMeta(location), [location])
   const steps = useMemo<Step[]>(() => getSteps(meta.id), [meta.id])
@@ -130,7 +133,7 @@ function TutorialDocPageLayout({ hiddenSidebarContainer, children }: Props) {
     if (step) {
       setActiveStep(step)
     }
-  }, [])
+  }, [location, steps])
 
   useEffect(() => {
     if (activeStep) {
@@ -148,7 +151,7 @@ function TutorialDocPageLayout({ hiddenSidebarContainer, children }: Props) {
       )}
     >
       {isMobile ? (
-        <Mobile
+        <TutorialDocPageLayoutMobile
           children={children}
           meta={meta}
           steps={steps}
@@ -158,7 +161,7 @@ function TutorialDocPageLayout({ hiddenSidebarContainer, children }: Props) {
           prev={prev}
         />
       ) : (
-        <Desktop
+        <TutorialDocPageLayoutDesktop
           children={children}
           meta={meta}
           steps={steps}
@@ -172,10 +175,7 @@ function TutorialDocPageLayout({ hiddenSidebarContainer, children }: Props) {
   )
 }
 
-export default function DocPageLayoutMain({
-  hiddenSidebarContainer,
-  children,
-}: Props): JSX.Element {
+const DocPageLayoutMain: FC<Props> = ({ hiddenSidebarContainer, children }) => {
   const tutorial = useTutorial()
 
   switch (tutorial) {
@@ -210,23 +210,17 @@ export default function DocPageLayoutMain({
   }
 }
 
-function Mobile({
-  children,
-  meta,
-  steps,
-  activeStep,
-  setActiveStep,
-  next,
-  prev,
-}: {
+export default DocPageLayoutMain
+
+const TutorialDocPageLayoutMobile: FC<{
   children: ReactNode
   meta: Meta | null
   steps: Step[]
-  activeStep: Step
+  activeStep: Step | null
   setActiveStep: (step: Step) => void
   next: Step | null
   prev: Step | null
-}): JSX.Element {
+}> = ({ children, meta, steps, activeStep, setActiveStep, next, prev }) => {
   return (
     <Grid
       sx={{ m: 2, mt: 0 }}
@@ -256,15 +250,7 @@ function Mobile({
   )
 }
 
-function Desktop({
-  children,
-  meta,
-  steps,
-  activeStep,
-  setActiveStep,
-  next,
-  prev,
-}: {
+const TutorialDocPageLayoutDesktop: FC<{
   children: ReactNode
   meta: Meta | null
   steps: Step[]
@@ -272,7 +258,7 @@ function Desktop({
   setActiveStep: (step: Step) => void
   next: Step | null
   prev: Step | null
-}): JSX.Element {
+}> = ({ children, meta, steps, activeStep, setActiveStep, next, prev }) => {
   return (
     <Grid container sx={{ m: 3 }} columnSpacing={5}>
       <Grid container item direction="column">

@@ -165,7 +165,9 @@ To keep using old plugins, they will have to be [explicitly installed](/docs/col
 
 #### HTML5 media
 
-TODO
+- Plugin now wraps the Snowplow Media plugin, uses v2 Media Tracking schemas
+- The v3 `enableMediaTracking` method has been removed, in its place is `startHtml5MediaTracking`
+- Media tracking can now be stopped with the `endHtml5Tracking` method
 
 #### Link click
 

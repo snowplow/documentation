@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-This plugin will allow the tracking of any HTML5 `<video>` or `<audio>` element, along with many HTML5 based video player frameworks.
+This plugin enables the automatic tracking of HTML media elements (`<video>` and `<audio>`) on a webpage, using the [Snowplow Media Plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/snowplow/index.md).
 
 HTML5 media events and entities are **automatically tracked** once configured.
 
@@ -46,52 +46,49 @@ window.snowplow('addPlugin',
 
 ```javascript
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
-import { MediaTrackingPlugin, enableMediaTracking } from '@snowplow/browser-plugin-media-tracking';
+import { MediaTrackingPlugin, startHtml5MediaTracking } from '@snowplow/browser-plugin-media-tracking';
 
 newTracker('sp1', '{{collector_url}}', {
    appId: 'my-app-id',
    plugins: [ MediaTrackingPlugin() ],
 });
 
-enableMediaTracking(/* options */);
+startHtml5MediaTracking(/* options */);
 ```
 
   </TabItem>
 </Tabs>
-
-
 
 ## Quick Start
 
-To start tracking media with default settings, use the snippet below, using your id and source:
+To start tracking media with default settings:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
 
 **`main.js`**
 
-```javascript
-window.snowplow('addPlugin',
-  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-media-tracking@latest/dist/index.umd.min.js",
-  ["snowplowMediaTracking", "MediaTrackingPlugin"]
-);
+```html
+<video id='html-id' src='./video.mp4'></video>
+<script>
+  window.snowplow('addPlugin',
+    "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-media-tracking@latest/dist/index.umd.min.js",
+    ["snowplowMediaTracking", "MediaTrackingPlugin"]
+  );
 
-window.snowplow('enableMediaTracking', {
-  id: 'example-id'
-})
+  const sessionId = crypto.randomUUID();
+
+  window.snowplow('startHtml5MediaTracking', {
+    id: sessionId,
+    video: 'html-id',
+  })
+</script>
 ```
 
 **`index.html`**
 
 ```html
-<html>
-  <head>
-    <title>Snowplow Media Tracking Example</title>
-  </head>
-  <body>
-    <video id='example-id' src='./example-video.mp4'></video>
-  </body>
-</html>
+<video id='html-id' src='./video.mp4'></video>
 ```
 
   </TabItem>
@@ -100,265 +97,179 @@ window.snowplow('enableMediaTracking', {
 **`main.js`**
 
 ```javascript
-import { enableMediaTracking } from '@snowplow/browser-plugin-media-tracking'
+import { startHtml5MediaTracking } from '@snowplow/browser-plugin-media-tracking'
 
-enableMediaTracking({
-  id: 'example-id'
+const sessionId = crypto.randomUUID();
+
+startHtml5MediaTracking({
+  id: "session-id",
+  video: 'html-id',
 })
+
 ```
 
 **`index.html`**
 
 ```html
-<html>
-  <head>
-    <title>Snowplow Media Tracking Example</title>
-  </head>
-  <body>
-    <video id='example-id' src='./example-video.mp4'></video>
-  </body>
-</html>
-```
-  </TabItem>
-</Tabs>
-
-## The enableMediaTracking function
-
-The `enableMediaTracking` function takes the form:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
-window.snowplow('enableMediaTracking', {
-  id,
-  options?: {
-    label?,
-    captureEvents?,
-    boundaries?,
-    volumeChangeTrackingInterval?
-  }
-})
-```
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-```javascript
-enableMediaTracking({
-  id,
-  options?: {
-    label?,
-    captureEvents?,
-    boundaries?,
-    volumeChangeTrackingInterval?
-  }
-})
-```
-  </TabItem>
-</Tabs>
-
-
-| Parameter                              | Type       | Default             | Description                                                                                                    | Required |
-|----------------------------------------|------------|---------------------|----------------------------------------------------------------------------------------------------------------|----------|
-| `id`                                   | `string`   | \-                  | The HTML id attribute of the media element                                                                     | Yes      |
-| `options.label`                        | `string`   | \-                  | An identifiable custom label sent with the event                                                               | No       |
-| `options.captureEvents`                | `string[]` | `['DefaultEvents']` | The events or Event Group to capture. For a full list of events and groups, check the [section below](#events) | No       |
-| `options.boundaries`                   | `number[]` | `[10, 25, 50, 75]`  | The progress percentages to fire an event at (valid values 1 - 99 inclusive) [[1]](#1)                         | No       |
-| `options.volumeChangeTrackingInterval` | `number`   | `250`               | The rate at which volume events can be sent [[2]](#2)                                                          | No       |
-
-1. To track when a video ends, use the 'ended' event.
-
-2. When holding and dragging the volume slider, 'volumechange' events would be fired extremely quickly. This is used to limit the rate they can be sent out at. The default value is likely to be appropriate, but you can adjust it if you find you want fewer/more volume events through.
-
-Below is an example of the full `enableMediaTracking` function:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
-window.snowplow('enableMediaTracking', {
-  id: 'example-video',
-  options: {
-    label: 'My Custom Video Label',
-    captureEvents: ['play', 'pause', 'ended'],
-    boundaries: [20, 80],
-    volumeChangeTrackingInterval: 200,
-  }
-}
-```
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-```javascript
-enableMediaTracking({
-  id: 'example-video',
-  options: {
-    label: 'My Custom Video Label',
-    captureEvents: ['play', 'pause', 'ended'],
-    boundaries: [20, 80],
-    volumeChangeTrackingInterval: 200,
-  }
-})
+<video id='html-id' src='./video.mp4'></video>
 ```
 
   </TabItem>
 </Tabs>
 
-## Usage
+---
 
-For this plugin to find your media element, one of the following conditions must be true:
+### `startHtml5MediaTracking`
 
-1. The `<audio>` or `<video>` element has the HTML id passed into `enableMediaTracking`
+This function begins tracking media events for a given media element. It takes a configuration object with the following fields:
+
+#### Required Fields
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `config.id` | `string` | A unique session ID for each media element, used to identify and end tracking. |
+| `config.video` | `string \| HTMLMediaElement` | The ID of the media element (as a string) or the media element itself. |
+
+---
+
+#### Optional Fields
+
+| Parameter | Type | Description | Default Value |
+|-----------|------|-------------|---------------|
+| `config.label` | `string` | A human-readable label for the media element. | `undefined` |
+| `config.captureEvents` | `HTML5MediaEventTypes` | A list of media events to track. | All events tracked by default |
+| `config.boundaries` | `number[]` | Percentage thresholds (0-100) to trigger progress events. | Disabled |
+| `config.context` | [`DynamicContext`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/custom-tracking-using-schemas/global-context/#global-contexts-methods) | Dynamic contexts attached to each tracking event. | `undefined` |
+| `config.updatePageActivityWhilePlaying` | `boolean` | Whether to update page activity while media is playing. | `true` |
+| `config.filterOutRepeatedEvents` | `FilterOutRepeatedEvents` | Whether to suppress consecutive identical events. | `false` |
+
+---
+
+#### Ping Configuration (Optional)
+
+| Parameter | Type | Description | Default Value |
+|-----------|------|-------------|---------------|
+| `config.pings.pingInterval` | `number` | Interval (in seconds) for sending ping events. | `30` (seconds) |
+| `config.pings.maxPausedPings` | `number` | Maximum number of ping events sent while playback is paused. | `1` |
+
+---
+
+### Example Usage
+
+```javascript
+startHtml5MediaTracking({
+  id: "unique-session-id",
+  video: document.getElementById("myVideoElement"),
+  label: "Product Demo Video",
+  captureEvents: ["play", "pause", "ended"],
+  boundaries: [25, 50, 75, 100],
+  pings: {
+    pingInterval: 20,
+    maxPausedPings: 2,
+  },
+  updatePageActivityWhilePlaying: true,
+  filterOutRepeatedEvents: false,
+});
+```
+
+---
+
+  </TabItem>
+</Tabs>
+
+### `endHtml5MediaTracking`
+
+This function disables auto tracking for the player registered with the provided session ID.
+It will remove any event listeners and poll intervals, and call [`endMediaTracking`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/snowplow/index.md#starting-and-ending-media-tracking) from the core plugin.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
 
-**`index.html`**
+**`main.js`**
 
 ```html
-...
-  <body>
-    <video id='example-id' src='./example-video.mp4'></video>
-    <script>
-      window.snowplow('enableMediaTracking', {
-        id: 'example-id'
-      })
-      </script>
-  </body>
-...
+<video id='html-id' src='./video.mp4'></video>
+<script>
+  window.snowplow('addPlugin',
+    "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-media-tracking@latest/dist/index.umd.min.js",
+    ["snowplowMediaTracking", "MediaTrackingPlugin"]
+  );
+
+  const sessionId = crypto.randomUUID();
+
+  window.snowplow('startHtml5MediaTracking', {
+    id: sessionId,
+    video: 'html-id',
+  })
+
+  // Tracking some video events...
+
+  window.snowplow('endHtml5MediaTracking', sessionId)
+</script>
 ```
+
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
-
-**`index.html`**
-
-```html
-<video id='example-id'></video>
-```
 
 **`main.js`**
 
 ```javascript
-enableMediaTracking({
-  id: 'example-id'
+import { startHtml5MediaTracking, endHtml5MediaTracking } from '@snowplow/browser-plugin-media-tracking'
+
+const sessionId = crypto.randomUUID();
+
+startHtml5MediaTracking({
+  id: "session-id",
+  video: 'html-id',
 })
+
+// Tracking some video events...
+
+endHtml5MediaTracking(sessionId)
 ```
-  </TabItem>
-</Tabs>
-
-
-2. The media element is the only `<audio>` or `<video>` child of a parent element with the HTML id passed into `enableMediaTracking`
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
 
 **`index.html`**
 
 ```html
-...
-  <body>
-    <div id="example-id">
-      <video id='example-id' src='./example-video.mp4'></video>
-    </div>
-    <script>
-      window.snowplow('enableMediaTracking', {
-        id: 'example-id'
-      })
-      </script>
-  </body>
-...
-```
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-**`index.html`**
-
-```html
-<div id='example-id'>
-  <video src='./example-video.mp4'></video>
-</div>
-```
-
-**`main.js`**
-
-```javascript
-enableMediaTracking({
-  id: 'example-id'
-})
+<video id='html-id' src='./video.mp4'></video>
 ```
 
   </TabItem>
 </Tabs>
-
 
 ## Events
 
-### Capturable Events
+The HTML5 media plugin can track the following events:
 
-Below is a table of all the events that can be used in `options.captureEvents`
+| Event Type                | Event String             | Description |
+|---------------------------|--------------------------|-------------|
+| **Ready**                  | `ready`                  | Fired when media tracking is successfully attached to the player and ready to track events. |
+| **Play**                   | `play`                   | Fired when the player transitions from a paused state to playing. |
+| **Pause**                  | `pause`                  | Fired when the user pauses the playback. |
+| **End**                    | `end`                    | Fired when playback stops because the media has reached its end or no more data is available. |
+| **SeekEnd**                | `seek_end`               | Fired when a seek operation is completed. |
+| **PlaybackRateChange**      | `playback_rate_change`   | Fired when the playback rate (speed) of the media changes. |
+| **VolumeChange**           | `volume_change`          | Fired when the volume level of the media changes. |
+| **FullscreenChange**       | `fullscreen_change`      | Fired when the browser enters or exits full-screen mode. |
+| **PictureInPictureChange** | `picture_in_picture_change` | Fired when the browser enters or exits picture-in-picture mode. |
+| **BufferStart**            | `buffer_start`           | Fired when the media player starts buffering (loading content to play). |
+| **BufferEnd**              | `buffer_end`             | Fired when buffering ends, and playback resumes. |
+| **Error**                  | `error`                  | Fired when an error occurs during the loading or playback of the media. |
+| **Ping**                   | `ping`                   | Fired periodically during media playback, regardless of other events. |
+| **PercentProgress**        | `percent_progress`       | Fired when a specific percentage of the media content has been played (as set by boundaries). |
 
-| Name                  | Fire Condition                                                                                                                                                                |
-|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| abort                 | The resource was not fully loaded, but not as the result of an error.                                                                                                         |
-| canplay               | The user agent can play the media, but estimates that not enough data has been loaded to play the media up to its end without having to stop for further buffering of content |
-| canplaythrough        | The user agent can play the media, and estimates that enough data has been loaded to play the media up to its end without having to stop for further buffering of content.    |
-| durationchange        | The duration attribute has been updated.                                                                                                                                      |
-| emptied               | The media has become empty; for example, when the media has already been loaded (or partially loaded), and the HTMLMediaElement.load() method is called to reload it.         |
-| ended                 | When playback stops when end of the media (`<audio>` or `<video>`) is reached or because no further data is available.                                                        |
-| error                 | The resource could not be loaded due to an error.                                                                                                                             |
-| loadeddata            | The first frame of the media has finished loading.                                                                                                                            |
-| loadedmetadata        | The metadata has been loaded                                                                                                                                                  |
-| loadstart             | The browser has started to load a resource.                                                                                                                                   |
-| pause                 | When a request to pause play is handled and the activity has entered its paused state, most commonly occurring when the media's HTMLMediaElement.pause() method is called.    |
-| play                  | The paused property is changed from true to false, as a result of the HTMLMediaElement.play() method, or the autoplay attribute                                               |
-| playing               | When playback is ready to start after having been paused or delayed due to lack of data                                                                                       |
-| progress              | Fired periodically as the browser loads a resource.                                                                                                                           |
-| ratechange            | The playback rate has changed.                                                                                                                                                |
-| seeked                | When a seek operation completes                                                                                                                                               |
-| seeking               | When a seek operation begins                                                                                                                                                  |
-| stalled               | The user agent is trying to fetch media data, but data is unexpectedly not forthcoming.                                                                                       |
-| suspend               | The media data loading has been suspended.                                                                                                                                    |
-| timeupdate            | The time indicated by the currentTime attribute has been updated.                                                                                                             |
-| volumechange          | The volume has changed.                                                                                                                                                       |
-| waiting               | When playback has stopped because of a temporary lack of data.                                                                                                                |
-| enterpictureinpicture | When the element enters picture-in-picture mode                                                                                                                               |
-| leavepictureinpicture | When the element leaves picture-in-picture mode                                                                                                                               |
-| fullscreenchange      | Fired immediately after the browser switches into or out of full-screen. mode.                                                                                                |
-| cuechange             | When a text track has changed the currently displaying cues.                                                                                                                  |
-| percentprogress       | When a percentage boundary set in `options.boundaries` is reached.                                                                                                            |
+### Customizing Tracked Events
 
-:::note
-
-Not all events are available in all browsers (though most are). To check, use the following links:
-
-[https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement#browser_compatibility](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement#browser_compatibility)
-
-[https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#browser_compatibility](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#browser_compatibility)
-:::
-
-### Event Groups
-
-You can also use a pre-made event group in `options.captureEvents`:
-
-| Name            | Events                                                                                                      |
-|-----------------|-------------------------------------------------------------------------------------------------------------|
-| `DefaultEvents` | `['pause', 'play', 'seeked', 'ratechange', 'volumechange', 'ended', 'fullscreenchange', 'percentprogress']` |
-| `AllEvents`     | Every event listed in [Capturable Events](#capturable-events)                                               |
-
-It is possible to extend an event group with any event in the Events table above. This could be useful if you want all the events contained in the 'DefaultEvents' group, along with the 'emptied' event (for example). This could be expressed in the following way:
+It is possible to only track a subset of these events by passing an array of event types to the `captureEvents` option:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
 
 ```javascript
-window.snowplow('enableMediaTracking', {
-  id: 'example-video',
-  options: {
-    captureEvents: ['DefaultEvents', 'emptied'],
-  }
+window.snowplow("startHtml5MediaTracking", {
+  id: crypto.randomUUID(),
+  video: 'example-video',
+  captureEvents: ['play', 'pause'],
 })
 ```
 
@@ -366,44 +277,25 @@ window.snowplow('enableMediaTracking', {
   <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
-enableMediaTracking({
-  id: 'example-video',
-  options: {
-    captureEvents: ['DefaultEvents', 'emptied'],
-  }
+import { startHtml5MediaTracking, HTMLMediaEventTypes } from '@snowplow/browser-plugin-media-tracking'
+
+const sessionId = uuidv4();
+
+startHtml5MediaTracking({
+  id: crypto.randomUUID(),
+  video: 'example-video',
+  captureEvents: [HTMLMediaEventTypes.Play, HTMLMediaEventTypes.Pause],
 })
 ```
 
   </TabItem>
 </Tabs>
 
-## Schemas and Example Data
+### Schemas
 
-Four schemas are used with this plugin:
+Event and entity schemas are [the same as](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/snowplow/index.md#tracked-events-and-entities) for the [Snowplow Media Plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/snowplow/index.md).
 
-### [An unstructured event with identifying information](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player_event/jsonschema/1-0-0)
-
-```json
-{
-    "type": "play",
-    "label": "Identifying Label"
-}
-```
-
-### [Snowplow platform-agnostic media context](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player/jsonschema/1-0-0)
-
-```json
-{
-    "currentTime": 12.32,
-    "duration": 20,
-    "ended": false,
-    "loop": false,
-    "muted": true,
-    "paused": false,
-    "playbackRate": 1,
-    "volume": 100
-}
-```
+Along with the standard media context, the HTML5 media plugin also tracks the following media-specific contexts:
 
 ### [HTML5 Media specific context](https://github.com/snowplow/iglu-central/blob/master/schemas/org.whatwg/media_element/jsonschema/1-0-0)
 
@@ -458,16 +350,3 @@ Four schemas are used with this plugin:
     "videoWidth": 400
 }
 ```
-
-:::note
-
-Not all properties in the HTML5 Media/Video specific schemas will be available on all browsers. Use the following links to check availability:
-
-[https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement#browser_compatibility](https://developer.mozilla.org/en-US/docs/Web/API/HTMLMediaElement#browser_compatibility)
-
-[https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#browser_compatibility](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/video#browser_compatibility)
-:::
-
-## Video Frameworks
-
-This plugin has been tested with [VideoJS](https://videojs.com/) and [Plyr](https://plyr.io/), but should work with almost any player framework that results in a `<video>` or `<audio>` element. You may find that some frameworks render out in a way that means the id given to the component doesn't exist in the actual DOM.

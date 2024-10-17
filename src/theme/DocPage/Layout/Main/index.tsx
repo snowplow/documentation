@@ -1,17 +1,18 @@
-import React, { ReactNode, Suspense, useEffect, useMemo, useState } from 'react'
+import React, { ReactNode, useEffect, useMemo, useState } from 'react'
 
 import clsx from 'clsx'
 import { Location } from 'history'
 
-import { Grid } from '@mui/material'
 import { useLocation } from '@docusaurus/router'
+import { Grid, useMediaQuery } from '@mui/material'
 import type { Props } from '@theme/DocPage/Layout/Main'
 import Steps from '@site/src/components/tutorials/Steps'
 import { Header } from '@site/src/components/tutorials/Header'
+import theme from 'prism-react-renderer/themes/shadesOfPurple'
 import { getSteps } from '@site/src/components/tutorials/utils'
 import { useDocsSidebar } from '@docusaurus/theme-common/internal'
 import { Meta, Step } from '@site/src/components/tutorials/models'
-import { useIsMobile, useTutorial } from '@site/src/components/tutorials/hooks'
+import { useTutorial } from '@site/src/components/tutorials/hooks'
 
 import styles from './styles.module.css'
 import { Paginators } from './Paginators'
@@ -115,7 +116,7 @@ function TutorialHomeDocPageLayout({
 function TutorialDocPageLayout({ hiddenSidebarContainer, children }: Props) {
   const sidebar = useDocsSidebar()
   const location = useLocation()
-  const isMobile = useIsMobile()
+  const isMobile = useMediaQuery(theme.breakpoints.up('md'))
 
   const meta = useMemo<Meta>(() => getMeta(location), [location])
   const steps = useMemo<Step[]>(() => getSteps(meta.id), [meta.id])

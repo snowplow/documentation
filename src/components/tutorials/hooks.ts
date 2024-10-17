@@ -1,17 +1,6 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useMemo } from 'react'
 
-import { useWindowSize } from '@docusaurus/theme-common'
 import { useLocation } from '@docusaurus/router'
-
-export function useIsMobile(): boolean {
-  const windowSize = useWindowSize()
-
-  const isMobile = useMemo(() => {
-    return windowSize === 'mobile'
-  }, [windowSize])
-
-  return isMobile
-}
 
 export enum TutorialKind {
   TutorialHome = 'tutorial-home',

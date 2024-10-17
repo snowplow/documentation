@@ -4,6 +4,7 @@ import Link from '@docusaurus/Link'
 import { grey } from '@mui/material/colors'
 import { useHistory } from '@docusaurus/router'
 import { ChevronRight, Search } from '@mui/icons-material'
+import theme from 'prism-react-renderer/themes/shadesOfPurple'
 import {
   Box,
   FormControl,
@@ -13,9 +14,9 @@ import {
   OutlinedInput,
   Select,
   Typography,
+  useMediaQuery,
 } from '@mui/material'
 
-import { useIsMobile } from '../hooks'
 import { getMetaData, getSteps } from '../utils'
 import { Grid as TutorialGrid } from './styledComponents'
 import { Meta, Topic as TopicType, Tutorial } from '../models'
@@ -26,7 +27,6 @@ import {
   StartButton,
   Topic,
 } from './styledComponents'
-
 function getFirstStepPath(meta: Meta): string | null {
   const steps = getSteps(meta.id)
   if (steps.length === 0) {
@@ -111,7 +111,7 @@ const TopicDropdownValues: TopicDropdown[] = [
 ]
 
 export default function TutorialList() {
-  const isMobile = useIsMobile()
+  const isMobile = useMediaQuery(theme.breakpoints.up('md'))
 
   const [search, setSearch] = useState('')
   const [topic, setTopic] = useState<TopicDropdown>('All topics')

@@ -1,5 +1,4 @@
 ---
-id: setting-up-locally
 title: Setting up locally
 position: 2
 ---

@@ -539,3 +539,21 @@ Prevents the indicator on the Docs / Tutorials & Guides tabs from being hidden b
   overflow: visible !important;
   overflow-x: visible !important;
 }
+
+/* Custom CSS for a tutorial page */
+.tutorial-doc-page .pagination-nav {
+  margin-top: 2rem;
+}
+
+.tutorial-doc-page .feedbackPrompt_src-theme-DocItem-Footer-styles-module {
+  margin-top: 3rem;
+}
+
+.tutorial-doc-page .theme-doc-footer {
+  display: none;
+  margin-top: 0;
+}
+
+.tutorial-doc-page .feedbackPrompt_src-theme-DocItem-Footer-styles-module {
+  margin-top: 1rem;
+}

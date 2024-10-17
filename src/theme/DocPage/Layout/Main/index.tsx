@@ -141,6 +141,7 @@ function TutorialDocPageLayout({ hiddenSidebarContainer, children }: Props) {
   return (
     <main
       className={clsx(
+        'tutorial-doc-page',
         styles.docMainContainer,
         (hiddenSidebarContainer || !sidebar) && styles.docMainContainerEnhanced
       )}
@@ -226,48 +227,31 @@ function Mobile({
   prev: Step | null
 }): JSX.Element {
   return (
-    <>
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-          .pagination-nav {
-              margin-top: 2rem;
-          }
-          
-          .feedbackPrompt_src-theme-DocItem-Footer-styles-module {
-            margin-top: 3rem;
-          }
-
-      `,
-        }}
-      />
-
-      <Grid
-        sx={{ m: 2, mt: 0 }}
-        rowSpacing={2}
-        container
-        direction="column"
-        wrap="nowrap"
-      >
-        <Grid item>
-          <Header title={meta?.title || ''} label={meta?.label || ''} />
-        </Grid>
-        <Grid item xs={4}>
-          <Steps
-            steps={steps}
-            activeStep={activeStep}
-            setActiveStep={setActiveStep}
-          />
-        </Grid>
-        <Grid item>{children}</Grid>
-        <Paginators
-          next={next}
-          prev={prev}
+    <Grid
+      sx={{ m: 2, mt: 0 }}
+      rowSpacing={2}
+      container
+      direction="column"
+      wrap="nowrap"
+    >
+      <Grid item>
+        <Header title={meta?.title || ''} label={meta?.label || ''} />
+      </Grid>
+      <Grid item xs={4}>
+        <Steps
+          steps={steps}
+          activeStep={activeStep}
           setActiveStep={setActiveStep}
-          isMobile={true}
         />
       </Grid>
-    </>
+      <Grid item>{children}</Grid>
+      <Paginators
+        next={next}
+        prev={prev}
+        setActiveStep={setActiveStep}
+        isMobile={true}
+      />
+    </Grid>
   )
 }
 
@@ -289,53 +273,32 @@ function Desktop({
   prev: Step | null
 }): JSX.Element {
   return (
-    <>
-      <style
-        dangerouslySetInnerHTML={{
-          __html: `
-          .pagination-nav {
-              margin-top: 2rem;
-          }
-          
-          .feedbackPrompt_src-theme-DocItem-Footer-styles-module {
-            margin-top: 3rem
-          }
-
-          .theme-doc-footer {
-            display: none;
-            margin-top: 0;
-          }
-      `,
-        }}
-      />
-
-      <Grid container sx={{ m: 3 }} columnSpacing={5}>
-        <Grid container item direction="column">
-          <Grid item>
-            <Header title={meta?.title || ''} label={meta?.label || ''} />
+    <Grid container sx={{ m: 3 }} columnSpacing={5}>
+      <Grid container item direction="column">
+        <Grid item>
+          <Header title={meta?.title || ''} label={meta?.label || ''} />
+        </Grid>
+        <Grid container item wrap="nowrap" columnGap={5}>
+          <Grid item xs={4}>
+            <Steps
+              steps={steps}
+              activeStep={activeStep}
+              setActiveStep={setActiveStep}
+            />
           </Grid>
-          <Grid container item wrap="nowrap" columnGap={5}>
-            <Grid item xs={4}>
-              <Steps
-                steps={steps}
-                activeStep={activeStep}
-                setActiveStep={setActiveStep}
-              />
+          <Grid container item>
+            <Grid sx={{ width: '100%' }} item>
+              {children}
             </Grid>
-            <Grid container item>
-              <Grid sx={{ width: '100%' }} item>
-                {children}
-              </Grid>
-              <Paginators
-                next={next}
-                prev={prev}
-                setActiveStep={setActiveStep}
-                isMobile={false}
-              />
-            </Grid>
+            <Paginators
+              next={next}
+              prev={prev}
+              setActiveStep={setActiveStep}
+              isMobile={false}
+            />
           </Grid>
         </Grid>
       </Grid>
-    </>
+    </Grid>
   )
 }

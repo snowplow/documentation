@@ -22,7 +22,7 @@ Some of the databases MaxMind maintains require a commercial subscription with M
 
 MaxMind offers five different databases with information on different IP addresses which can be used with Snowplow, one free:
 
-- [GeoLite2 Free Database](https://dev.maxmind.com/geoip/geoip2/geolite2/), which contains geographic information (e.g. country) by IP address
+- [GeoLite2 Free Database](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data/), which contains geographic information (e.g. country) by IP address
 
 And four paid for databases:
 

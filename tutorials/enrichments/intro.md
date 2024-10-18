@@ -30,13 +30,13 @@ When you select navigate to the Enrichments screen you'll see a listing of all E
 
 ![Screenshot 2024-08-08 at 9.08.16 AM.png](./screenshots/Screenshot_2024-08-08_at_9.08.16_AM.png)
 
-1. Click on the three dots icon to see available options e.g. enable / edit.
+3. Click on the three dots icon to see available options e.g. enable / edit.
 
 ![Screenshot 2024-08-08 at 9.09.22 AM.png](./screenshots/Screenshot_2024-08-08_at_9.09.22_AM.png)
 
 ![Screenshot 2024-08-08 at 9.09.14 AM.png](./screenshots/Screenshot_2024-08-08_at_9.09.14_AM.png)
 
-1. To configure an enrichment, simply select "Configure and enable" if it's currently disabled, or choose "Edit configuration" if it's already set up. This will open a JSON editor where you can input your configuration.
+4. To configure an enrichment, simply select "Configure and enable" if it's currently disabled, or choose "Edit configuration" if it's already set up. This will open a JSON editor where you can input your configuration.
     1. Each enrichment has a JSON schema against which it is validated. The enrichment JSONs follow a common pattern:
 
 ```json

@@ -60,7 +60,7 @@ The following Docker command will pick up the environment variables and pass the
 <CodeBlock language="bash">{
 ` export MICRO_IGLU_REGISTRY_URL=https://com-example.iglu.snplow.net/api
  export MICRO_IGLU_API_KEY=abcdef123456
-
+${"\n"}
 docker run -p 9090:9090 \\
   -e MICRO_IGLU_REGISTRY_URL \\
   -e MICRO_IGLU_API_KEY \\

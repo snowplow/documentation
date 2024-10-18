@@ -174,9 +174,6 @@ startHtml5MediaTracking({
 
 ---
 
-  </TabItem>
-</Tabs>
-
 ### `endHtml5MediaTracking`
 
 This function disables auto tracking for the player registered with the provided session ID.

@@ -1,5 +1,5 @@
 ---
-title: "Timings"
+title: "Performance timings"
 sidebar_position: 98
 ---
 

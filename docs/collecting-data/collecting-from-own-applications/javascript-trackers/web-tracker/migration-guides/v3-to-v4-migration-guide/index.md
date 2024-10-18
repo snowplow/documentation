@@ -77,15 +77,35 @@ window.snowplow('newTracker', 'sp', {
 
 ### Async cookie access
 
-TODO
+Whereas in v3, the tracker updated user and session information in cookies during the track call (e.g., `trackPageView`), v4 makes this asynchronous.
+The cookies are updated within 10ms of the track call and the read cookie values are cached for 50ms.
+This strategy makes the track function take less time and avoid blocking the main thread of the app.
+
+There is an option to keep the behavior from v3 and update cookies synchronously.
+This can be useful for testing purposes to ensure that the cookies are written before the test continues.
+It also has the benefit of making sure that the cookie is correctly set before session information is used in events.
+The downside is that it is slower and blocks the main thread.
+
+
+[Read more about the synchronous cookie write option.](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/configuring-how-events-sent/index.md#synchronous-cookie-writes)
 
 ### Removed Beacon API, introduced `keepalive`
 
-TODO (impact on batching behavior)
+Version 4 removes the option to set `beacon` as the method for making requests to the Snowplow Collector.
+This is due to the use of the fetch API instead of the XMLHttpRequest API for making HTTP requests.
+
+As an alternative to the Beacon API, there is a new keepalive option available from the fetch API.
+It indicates that the request should be allowed to outlive the webpage that initiated it.
+It enables requests to the Snowplow Collector to complete even if the page is closed or navigated away from.
+
+[Read more about the option here.](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/configuring-how-events-sent/index.md#keepalive-option-for-collector-requests)
 
 ### `credentials` instead of `withCredentials`
 
-TODO
+Also related to the move to fetch instead of XMLHttpRequest, we have changed the `withCredentials` configuration option.
+It is now called `credentials` and has values that reflect the option in the fetch API.
+
+[Read more about the option here.](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/configuring-how-events-sent/#disabling-sending-credentials-with-requests).
 
 ### `os_timezone` detection
 
@@ -99,7 +119,9 @@ Using the plugin will override the new default value.
 
 ### Dropped support for older browsers
 
-TODO
+The support for the following browsers versions has been dropped:
+
+* Drop IE 11 and Safari 10 support.
 
 ## Plugin changes
 
@@ -111,12 +133,10 @@ v4 plugins that don't use the new `filter` API are also backwards compatible wit
 The following plugins are no longer maintained and are no longer available in v4.
 The v3 plugins should still work with v4, but will no longer be officially supported.
 
-TODO: links for the plugins
-
-- Browser Features
-- Classic Consent
-- Classic Ecommerce
-- Optimizely
+- [Browser Features](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/web-trackers-v3/plugins/index.md#browser-features-plugin-deprecated)
+- [Classic Consent](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/web-trackers-v3/tracking-events/consent-gdpr/original/index.md)
+- [Classic Ecommerce](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/web-trackers-v3/tracking-events/ecommerce/original/index.md)
+- [Optimizely](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/web-trackers-v3/tracking-events/optimizely/index.md#optimizely-classic)
 
 ### Bundled plugin changes
 
@@ -124,22 +144,22 @@ The list of plugins included in the default `sp.js` JavaScript Tracker bundle ha
 
 The following plugins are no longer included by default:
 
-- Client Hints
-- Classic Consent
-- Classic Ecommerce
-- Enhanced Ecommerce
-- Timezone Detection
-- Optimizely
-- Optimizely X
-- Performance Timing
+- [Client Hints](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/client-hints/index.md)
+- [Classic Consent](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/web-trackers-v3/tracking-events/consent-gdpr/original/index.md)
+- [Classic Ecommerce](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/web-trackers-v3/tracking-events/ecommerce/original/index.md)
+- [Enhanced Ecommerce](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/enhanced/index.md)
+- [Timezone Detection](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timezone-geolocation/index.md)
+- [Optimizely](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/web-trackers-v3/tracking-events/optimizely/index.md#optimizely-classic)
+- [Optimizely X](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/optimizely/index.md)
+- [Performance Timing](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timings/index.md#performance-timing-plugin-original)
 
 The following plugins are now included by default:
 
-- Button Click Tracking
-- Enhanced Consent
-- Snowplow Ecommerce
-- Performance Navigation Timing
-- Web Vitals
+- [Button Click Tracking](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/button-click/index.md)
+- [Enhanced Consent](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/consent-gdpr/index.md)
+- [Snowplow Ecommerce](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md)
+- [Performance Navigation Timing](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timings/index.md)
+- [Web Vitals](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/web-vitals/index.md)
 
 To keep using old plugins, they will have to be [explicitly installed](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/configuring-tracker-plugins/javascript/index.md) using `addPlugins` or built into a custom bundle.
 

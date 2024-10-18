@@ -147,7 +147,7 @@ Note that if `localStorage` is inaccessible or you are not using it to store d
 ### `keepalive` option for Collector requests
 
 The keepalive feature in the [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) indicates that the request should be allowed to outlive the webpage that initiated it.
-It enables requests to the Snowplow collector to complete even if the page is closed or navigated away from.
+It enables requests to the Snowplow Collector to complete even if the page is closed or navigated away from.
 
 This option is enabled by default.
 
@@ -247,7 +247,7 @@ export type RequestFailure = {
 
 The format of `EventBatch` is the same as the `onRequestSuccess` callback.
 
-## Custom tracker components
+## Custom tracker components and configuration
 
 ### Custom event store
 
@@ -278,5 +278,25 @@ You may also want to wrap the fetch function to modify or monitor the requests.
 let tracker = newTracker("...", "...", {
     // ...
     customFetch: (input: RequestInfo, init?: RequestInit) => fetch(input, init)
+});
+```
+
+### Synchronous cookie writes
+
+Since v4 of the tracker, the tracker updates the user and session information in cookies asynchronously from the track calls (e.g., `trackPageView`).
+The cookies are updated within 10ms of the track call and the read cookie values are cached for 50ms.
+This strategy makes the track function take less time and avoid blocking the main thread of the app.
+
+It might be desirable to update cookies synchronously.
+This can be useful for testing purposes to ensure that the cookies are written before the test continues.
+It also has the benefit of making sure that the cookie is correctly set before session information is used in events.
+The downside is that it is slower and blocks the main thread.
+
+To configure synchronous cookie updates, use the `synchronousCookieWrite` configuration option:
+
+```ts
+let tracker = newTracker("...", "...", {
+    // ...
+    synchronousCookieWrite: true
 });
 ```

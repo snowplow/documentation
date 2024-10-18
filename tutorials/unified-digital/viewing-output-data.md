@@ -1,23 +1,24 @@
 ---
-title: Viewing the Output Data
+title: Viewing the Output Data  
 position: 4
 ---
 
-We can go ahead and look at some of those outputs, so I've selected the views, sessions and users table and if we go and look at those we can see really kind of detailed tables.
+The output data can now be reviewed, focusing on the `views`, `sessions`, and `users` tables. These tables contain detailed records of key metrics and interactions.
 
 ```yaml
 select * from dbt_ryan_derived.snowplow_unified_views;
 ```
 
-So this is one row per view. When did that view start and end? Lots of information about where the event took place.
+This query retrieves one row per view, detailing when each view started and ended, along with extensive information on where the event occurred.
 
 ```yaml
 select * from dbt_ryan_derived.snowplow_unified_sessions;
 ```
 
-The engage time in seconds using pings compared to the absolute time. Similar kind of thing in sessions with additional information in there as well.
-Counts of page views, counts of events and that kind of stuff. And then the users table which is one row per user identifier and provides information
+The sessions table includes the engagement time in seconds, calculated using pings in comparison to absolute time. It also contains additional data, such as counts of page views and events.
 
 ```yaml
 select * from dbt_ryan_derived.snowplow_unified_users;
 ```
+
+The users table provides one row per user identifier, offering detailed information about each user.

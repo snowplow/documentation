@@ -44,14 +44,14 @@ position: 2
 
 7. Delete some of the other default pieces that are in the default project as they are not needed.
 
-![](./screenshots/Screenshot_2024-07-04_at_17.14.37.png)
+    ![](./screenshots/Screenshot_2024-07-04_at_17.14.37.png)
 
 ### Setting Variables
 
 Now we’ll get to using our variables, which is how you enable the parts of the model that are relevant to your use-case.
 
 1. Define the location of your source data within your `vars` block where your raw events are being loaded into.
-If you're using Databricks you might need to also manage the Hive catalogue [LINK]. Make sure to update these with your actual table names!
+If you're using Databricks you might need to also manage the [Hive catalogue](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/unified/#7-additional-vendor-specific-configuration). Make sure to update these with your actual table names!
 
     ```yaml
     vars:
@@ -69,7 +69,7 @@ If you're using Databricks you might need to also manage the Hive catalogue [LIN
         snowplow__enable_web: true
     ```
 
-3. Enable contexts to make sure that they're processed within the package - this means they will be un-nested from the atomic columns and made available in the derived tables. Make sure to only enable the ones you need.
+3. Enable contexts (also known as [entities](https://docs.snowplow.io/docs/understanding-your-pipeline/entities/)) to make sure that they're processed within the package - this means they will be un-nested from the atomic columns and made available in the derived tables. Make sure to only enable the ones you need.
 
     ```yaml
     vars:

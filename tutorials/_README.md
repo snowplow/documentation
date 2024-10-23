@@ -15,7 +15,7 @@ This file keeps the metadata of the tutorial. It contains the following fields:
 |--------------|--------------------------------------------------------------------|-|
 | `title`      | The title of the tutorial, shown on the card and the tutorial page. |`string`|
 | `description`| A short description of the tutorial, shown on the card.             |`string`|
-| `topic`      | The topic of the tutorial, shown on the card  and the tutorial page.                      | One of: `'Tracking design'`, `'Tracking implementation'`, `'Data modeling'`, `'Infrastructure'`|
+| `label`      | The topic of the tutorial, shown on the card  and the tutorial page.                      | One of: `'Tracking design'`, `'Tracking implementation'`, `'Data modeling'`, `'Infrastructure'`|
 
 Example:
 
@@ -23,7 +23,7 @@ Example:
 {
   "title": "Video & Media Analytics",
   "description": "Track video events across media players",
-  "topic": "Tracking design"
+  "label": "Tracking design"
 }
 ```
 

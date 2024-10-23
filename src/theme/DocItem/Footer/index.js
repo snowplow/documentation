@@ -1,9 +1,10 @@
 import React, { useState, useRef } from 'react'
 import clsx from 'clsx'
 import Footer from '@theme-original/DocItem/Footer'
-import { useDoc } from '@docusaurus/theme-common/internal'
 import styles from './styles.module.css'
 import { trackStructEvent } from '@snowplow/browser-tracker'
+import { useLocation } from '@docusaurus/router'
+import { useDoc } from '@docusaurus/theme-common/internal'
 
 function CommentBox({ handleSubmit, feedbackTextRef }) {
   const placeholder = 'How can we improve it?'
@@ -24,8 +25,8 @@ function CommentBox({ handleSubmit, feedbackTextRef }) {
   )
 }
 
-function Feedback() {
-  const { permalink } = useDoc().metadata
+export function Feedback() {
+  const doc = useDoc()
   const feedbackTextRef = useRef()
   const buttonLikeRef = useRef()
   const buttonDislikeRef = useRef()
@@ -45,7 +46,7 @@ function Feedback() {
     trackStructEvent({
       category: 'feedback',
       action: 'like',
-      label: permalink,
+      label: doc.permalink,
     })
   }
 
@@ -57,7 +58,7 @@ function Feedback() {
     trackStructEvent({
       category: 'feedback',
       action: 'dislike',
-      label: permalink,
+      label: doc.permalink,
     })
   }
 
@@ -68,7 +69,7 @@ function Feedback() {
     trackStructEvent({
       category: 'feedback',
       action: 'comment',
-      label: permalink,
+      label: doc.permalink,
       property: text,
     })
 
@@ -81,7 +82,7 @@ function Feedback() {
 
   return (
     <footer>
-      <div className={styles.feedbackPrompt}>
+      <div className={styles.feedbackPrompt + ' feedback-prompt'}>
         {/* This icon ("comment-dots") is part of the
         Font Awesome Free catalogue, covered by the CC BY 4.0 license.
         https://fontawesome.com/license/free

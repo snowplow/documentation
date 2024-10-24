@@ -10,7 +10,7 @@ Require the Node.js Tracker module into your code like so:
 
 ```javascript
 const snowplow = require('@snowplow/node-tracker');
-const tracker = snowplow.newTracker;
+const tracker = snowplow.newTracker( /* ... */ );
 ```
 
 or, if using ES Modules, you can import the module like so:
@@ -36,8 +36,8 @@ const tracker = newTracker({
 There are a number of additional parameters that may optionally be configured.
 Please refer to the following API docs for the full list:
 
-1. [Tracker configuration options](http://snowplow.github.io/snowplow-javascript-tracker/docs/node-tracker/markdown/node-tracker.trackerconfiguration).
-2. [Emitter configuration options](http://snowplow.github.io/snowplow-javascript-tracker/docs/node-tracker/markdown/node-tracker.emitterconfigurationbase).
+1. [Tracker configuration options](https://snowplow.github.io/snowplow-javascript-tracker/docs/node-tracker/markdown/node-tracker.trackerconfiguration).
+2. [Emitter configuration options](https://snowplow.github.io/snowplow-javascript-tracker/docs/node-tracker/markdown/node-tracker.emitterconfigurationbase).
 
 ### Using multiple Emitters
 

@@ -2,5 +2,5 @@
 type: link
 title: API reference
 sidebar_position: 5000
-href: https://github.com/snowplow/snowplow-javascript-tracker/tree/master/trackers/node-tracker/docs
+href: https://snowplow.github.io/snowplow-javascript-tracker/docs/node-tracker/node-tracker.api 
 ---

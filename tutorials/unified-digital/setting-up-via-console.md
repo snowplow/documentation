@@ -16,8 +16,8 @@ Snowplow provides a fully managed service for running data models. We recommend 
 3. Set a name, warehouse connection and owner who will receive failure alerts.
 ![](./screenshots/Screenshot_2024-07-04_at_17.41.51.png)
 
-4. Edit your configuration variables, pay particular attention to web and mobile data, and the core enrichments e.g. IAB, YAUAA. This means they will be un-nested from the atomic columns and made available in the derived tables.
-![](./screenshots//Screenshot_2024-07-04_at_17.43.22.png)
+4. Edit your configuration variables. Pay particular attention to web and mobile data, and the core enrichments e.g. IAB, YAUAA. This means they will be un-nested from the atomic columns and made available in the derived tables.
+![](./screenshots//Screenshot_2024-07-04_at_17.43.22.png) For a more detailed guide check out the [Setting Variables](/tutorials/unified-digital/setting-up-locally/#setting-variables) section of the local setup section of this tutorial.
 
 5. Set a schedule - use a CRON editor if necessary
 ![](./screenshots/Screenshot_2024-07-04_at_17.44.04.png)

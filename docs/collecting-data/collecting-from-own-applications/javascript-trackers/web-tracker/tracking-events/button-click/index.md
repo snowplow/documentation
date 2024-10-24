@@ -25,7 +25,7 @@ Button click events are **automatically tracked** once configured.
 
 | Tracker Distribution | Included |
 |----------------------|----------|
-| `sp.js`              | ❌        |
+| `sp.js`              | ✅        |
 | `sp.lite.js`         | ❌        |
 
 **Download:**

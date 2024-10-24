@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-This plugin will allow the tracking of an embedded YouTube iFrame.
+This plugin enables the automatic tracking of an embedded YouTube iFrame video, using the [Snowplow Media Plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/snowplow/index.md) and [YouTube Player API](https://developers.google.com/youtube/iframe_api_reference).
 
 YouTube media events and entities are **automatically tracked** once configured.
 
@@ -21,14 +21,12 @@ YouTube media events and entities are **automatically tracked** once configured.
 
 | Tracker Distribution | Included |
 |----------------------|----------|
-| `sp.js`              | ❌        |
-| `sp.lite.js`         | ❌        |
+| `sp.js`              | ❌       |
+| `sp.lite.js`         | ❌       |
 
 **Download:**
 
 <table><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-youtube-tracking@latest/dist/index.umd.min.js">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-youtube-tracking@latest/dist/index.umd.min.js">unpkg</a> (latest)</td></tr></tbody></table>
-
-**Note:** This plugin will not work if using GAv4 Enhanced Measurement Video engagement, as both the GAv4 and Snowplow trackers will attempt to attach to the Youtube video.
 
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
@@ -44,17 +42,28 @@ YouTube media events and entities are **automatically tracked** once configured.
 
 The snippets below show how to get started with the plugin, after [setting up your tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/index.md).
 
-:::info The plugin's `id` attribute will accept:
-- The `id` of an `iframe` element
-- An existing instance of `YT.Player`, created with the [YouTube Iframe API](https://developers.google.com/youtube/iframe_api_reference)
-:::
 
-1. `iFrame`
+### `startYouTubeTracking`
 
-For this plugin to find your media element, your iFrame must be given the id that is passed into `enableYouTubeTracking`.
+This function enables the auto tracking for the specified YouTube Player.
+It installs the iFrame API if necessary, adds event listeners and any poll intervals, and then calls [`startMediaTracking`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/snowplow/index.md#starting-and-ending-media-tracking).
+
+The accepted options are the same as for the core `startMediaTracking` method, with the following additions:
+
+- `video`: A DOM ID for the iFrame element hosting the player, an iFrame element, or a pre-existing [YT.Player](https://developers.google.com/youtube/iframe_api_reference#Loading_a_Video_Player) instance to track events for.
+- `captureEvents`: An optional list of events to track; see [Events](#events).
+- `label`: The plugin manages the [`player` entity](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/snowplow/index.md#media-player-entity) automatically, but you can optionally supply a custom `label` if required.
+
+As it is required for `startMediaTracking`, the following option is also required:
+
+- `id`: A UUID used to identify the media session the events will be a part of.
+
+Other options such as `updatePageActivityWhilePlaying` will be passed to the core plugin directly.
+
+The function returns the `mediaSessionId` used for the events that will be generated; this value can be passed to [`endYouTubeTracking`](#endyoutubetracking).
 
 <Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
+  <TabItem value="js-iframe" label="JavaScript (tag) - iFrame" default>
 
 ```html
 <!DOCTYPE html>
@@ -72,8 +81,11 @@ For this plugin to find your media element, your iFrame must be given the id tha
         ['snowplowYouTubeTracking', 'YouTubeTrackingPlugin']
       );
 
-      window.snowplow('enableYouTubeTracking', {
-        id: 'yt-player'
+      var mediaSessionId = crypto.randomUUID();
+
+      window.snowplow('startYouTubeTracking', {
+        id: mediaSessionId,
+        video: 'yt-player' // or: document.getElementById('yt-player')
       });
     </script>
   </body>
@@ -81,7 +93,7 @@ For this plugin to find your media element, your iFrame must be given the id tha
 ```
 
   </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
+  <TabItem value="browser-iframe" label="Browser (npm) - iFrame">
 
 ```html
 <iframe
@@ -92,25 +104,21 @@ For this plugin to find your media element, your iFrame must be given the id tha
 
 ```javascript
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
-import { YouTubeTrackingPlugin, enableYouTubeTracking } from '@snowplow/browser-plugin-youtube-tracking';
+import { YouTubeTrackingPlugin, startYouTubeTracking } from '@snowplow/browser-plugin-youtube-tracking';
 
 newTracker('sp1', '{{collector_url}}', {
    appId: 'my-app-id',
    plugins: [ YouTubeTrackingPlugin() ],
 });
 
-enableYouTubeTracking({
-  id: 'yt-player'
+const mediaSessionId = startYouTubeTracking({
+  id: crypto.randomUUID(),
+  video: 'yt-player' // or: document.getElementById('yt-player')
 })
 ```
 
   </TabItem>
-</Tabs>
-
-1. `YT.Player`
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
+  <TabItem value="js-player" label="JavaScript (tag) - YT.Player">
 
 ```html
 <!DOCTYPE html>
@@ -129,8 +137,11 @@ enableYouTubeTracking({
         videoId: 'zSM4ZyVe8xs'
       });
 
-      window.snowplow('enableYouTubeTracking', {
-          id: player
+      const mediaSessionId = crypto.randomUUID();
+
+      window.snowplow('startYouTubeTracking', {
+          id: mediaSessionId,
+          video: player
       });
     </script>
   </body>
@@ -138,7 +149,7 @@ enableYouTubeTracking({
 ```
 
   </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
+  <TabItem value="browser-player" label="Browser (npm) - YT.Player">
 
 ```html
 <div id="yt-player"></div>
@@ -146,7 +157,7 @@ enableYouTubeTracking({
 
 ```javascript
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
-import { YouTubeTrackingPlugin, enableYouTubeTracking } from '@snowplow/browser-plugin-youtube-tracking';
+import { YouTubeTrackingPlugin, startYouTubeTracking } from '@snowplow/browser-plugin-youtube-tracking';
 
 newTracker('sp1', '{{collector_url}}', {
    appId: 'my-app-id',
@@ -157,15 +168,260 @@ const player = new YT.Player('yt-player', {
   videoId: 'zSM4ZyVe8xs'
 });
 
-enableYouTubeTracking({
-  id: player,
+const mediaSessionId = startYouTubeTracking({
+  id: crypto.randomUUID(),
+  video: player
 })
 ```
 
   </TabItem>
 </Tabs>
 
-## The enableYouTubeTracking function
+### `endYouTubeTracking`
+
+This function disables auto tracking for the player registered with the provided session ID.
+
+It will remove any event listeners and poll intervals, and call [`endMediaTracking`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/snowplow/index.md#starting-and-ending-media-tracking) from the core plugin.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js-iframe" label="JavaScript (tag) - iFrame" default>
+
+```html
+<!DOCTYPE html>
+<html>
+  <body>
+    <iframe
+      id="yt-player"
+      src="https://www.youtube.com/embed/zSM4ZyVe8xs"
+    ></iframe>
+
+    <script>
+      window.snowplow(
+        'addPlugin',
+        'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-youtube-tracking@latest/dist/index.umd.min.js',
+        ['snowplowYouTubeTracking', 'YouTubeTrackingPlugin']
+      );
+
+      var mediaSessionId = crypto.randomUUID();
+
+      window.snowplow('startYouTubeTracking', {
+        id: mediaSessionId,
+        video: 'yt-player' // or: document.getElementById('yt-player')
+      });
+
+      window.snowplow('endYouTubeTracking', mediaSessionId);
+    </script>
+  </body>
+</html>
+```
+
+  </TabItem>
+  <TabItem value="browser-iframe" label="Browser (npm) - iFrame">
+
+```html
+<iframe
+  id="yt-player"
+  src="https://www.youtube.com/embed/zSM4ZyVe8xs"
+></iframe>
+```
+
+```javascript
+import { newTracker, trackPageView } from '@snowplow/browser-tracker';
+import { YouTubeTrackingPlugin, endYouTubeTracking, startYouTubeTracking } from '@snowplow/browser-plugin-youtube-tracking';
+
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
+   plugins: [ YouTubeTrackingPlugin() ],
+});
+
+const mediaSessionId = startYouTubeTracking({
+  id: crypto.randomUUID(),
+  video: 'yt-player' // or: document.getElementById('yt-player')
+});
+
+endYouTubeTracking(mediaSessionId);
+```
+
+  </TabItem>
+</Tabs>
+
+### `trackYouTubeSelfDescribingEvent`
+
+This function allows tracking custom Self Describing Event payloads that have the media-related entities attached as if they were generated by this or the core plugin directly.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js-iframe" label="JavaScript (tag) - iFrame" default>
+
+```html
+<!DOCTYPE html>
+<html>
+  <body>
+    <iframe
+      id="yt-player"
+      src="https://www.youtube.com/embed/zSM4ZyVe8xs"
+    ></iframe>
+
+    <script>
+      window.snowplow(
+        'addPlugin',
+        'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-youtube-tracking@latest/dist/index.umd.min.js',
+        ['snowplowYouTubeTracking', 'YouTubeTrackingPlugin']
+      );
+
+      var mediaSessionId = crypto.randomUUID();
+
+      window.snowplow('startYouTubeTracking', {
+        id: mediaSessionId,
+        video: 'yt-player' // or: document.getElementById('yt-player')
+      });
+
+      window.snowplow('trackYouTubeSelfDescribingEvent', {event: {schema: 'iglu:com_example/my_event/jsonschema/1-0-0', data: { video: true }}});
+
+      window.snowplow('endYouTubeTracking', mediaSessionId);
+    </script>
+  </body>
+</html>
+```
+
+  </TabItem>
+  <TabItem value="browser-iframe" label="Browser (npm) - iFrame">
+
+```html
+<iframe
+  id="yt-player"
+  src="https://www.youtube.com/embed/zSM4ZyVe8xs"
+></iframe>
+```
+
+```javascript
+import { newTracker, trackPageView } from '@snowplow/browser-tracker';
+import { YouTubeTrackingPlugin, endYouTubeTracking, startYouTubeTracking } from '@snowplow/browser-plugin-youtube-tracking';
+
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
+   plugins: [ YouTubeTrackingPlugin() ],
+});
+
+const mediaSessionId = startYouTubeTracking({
+  id: crypto.randomUUID(),
+  video: 'yt-player' // or: document.getElementById('yt-player')
+});
+
+trackYouTubeSelfDescribingEvent({event: {schema: 'iglu:com_example/my_event/jsonschema/1-0-0', data: { video: true }}});
+
+endYouTubeTracking(mediaSessionId);
+```
+
+  </TabItem>
+</Tabs>
+
+## Events
+
+### Capturable Events
+
+Below is a table of all the core Snowplow Media plugin events that can be used in the `captureEvents` option:
+
+| Name                  | Fire Condition                                                    |
+|-----------------------|-------------------------------------------------------------------|
+| ready                 | The video player has loaded                                       |
+| play                  | The video is played                                               |
+| pause                 | The video is paused                                               |
+| end                   | When playback stops at the end of the video                       |
+| seek_start            | When seeking begins to jump to another position of the video      |
+| seek_end              | When seeking ends and another position of the video is jumped to  |
+| playback_rate_change  | Playback rate has changed                                         |
+| volume_change         | Volume has changed                                                |
+| ping                  | Fires periodically during playback                                |
+| percent_progress      | Fires at progress milestones defined by `boundaries` option       |
+| buffer_start          | Fires when playback pauses because content is not yet buffered    |
+| buffer_end            | Fires when playback resumes after content has been fetched        |
+| quality_change        | Playback quality has changed                                      |
+| error                 | An error occurs in the player                                     |
+
+In addition, the following event names are also accepted for compatibility with v3, mapped to the equivalent event from above:
+
+| Name                  | Fire Condition                                                    |
+|-----------------------|-------------------------------------------------------------------|
+| seek                  | On seek                                                           |
+| volumechange          | Volume has changed                                                |
+| ended                 | When playback stops at the end of the video                       |
+| percentprogress       | When a percentage boundary set in `options.boundaries` is reached |
+| playbackratechange    | Playback rate has changed                                         |
+| playbackqualitychange | Playback quality has changed                                      |
+
+The following events are defined by the core Snowplow Media plugin but _not_ supported by this plugin or the YouTube API:
+
+| Name                      | Fire Condition                                                |
+|---------------------------|---------------------------------------------------------------|
+| fullscreen_change         | Full screen state toggled                                     |
+| picture_in_picture_change | Picture-in-picture state toggled                              |
+| ad_break_start            | Beginning of an ad break                                      |
+| ad_break_end              | End of an ad break                                            |
+| ad_start                  | Beginning of an ad within an ad break                         |
+| ad_first_quartile         | 25% progress through an ad                                    |
+| ad_midpoint               | 50% progress through an ad                                    |
+| ad_third_quartile         | 75% progress through an ad                                    |
+| ad_complete               | 100% progress through an ad                                   |
+| ad_skip                   | User has opted to skip the ad before completion               |
+| ad_click                  | User has clicked the playing ad                               |
+| ad_pause                  | User has paused the playing ad                                |
+| ad_resume                 | User has resumed the paused ad                                |
+
+### Event Groups
+
+You can also use a pre-made event group names in `captureEvents`:
+
+| Name            | Events                                                                                                                 |
+|-----------------|------------------------------------------------------------------------------------------------------------------------|
+| `DefaultEvents` | `['ready', 'play', 'pause', 'ping', 'end', 'seek_start', 'seek_end', 'volume_change', 'percent_progress', 'playback_rate_change', 'quality_change']` |
+| `AllEvents`     | Every supported event listed in [Capturable Events](#capturable-events)                                                |
+
+It is possible to extend an event group with any event in the Events table above. This could be useful if you want, for example, all the events contained in the 'DefaultEvents' group, along with the 'error' event. This is expressed in the following way:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+window.snowplow('startYouTubeTracking', {
+  id: crypto.randomUUID(),
+  video: "example-video",
+  captureEvents: ["DefaultEvents", "error"],
+})
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+enableYouTubeTracking({
+  id: crypto.randomUUID(),
+  video: 'example-video',
+  captureEvents: ['DefaultEvents', 'error'],
+})
+```
+
+  </TabItem>
+</Tabs>
+
+## Legacy API
+
+In addition to the above, the following methods are provided for compatibility with earlier versions of the plugin.
+
+These APIs are deprecated in v4, and wrap the newer API methods above.
+
+### The enableYouTubeTracking function
+
+`enableYouTubeTracking` is similar to `startYouTubeTracking`, except:
+
+- An `id` option is used to identify the player instead of `video`
+- The additional options to `startMediaTracking` are nested within an `options` object
+- The media session ID value will be generated automatically if not provided
+
+:::info The plugin's `id` option is equivalent to `video` in the new API and will accept:
+- The `id` of an `iframe` element
+- An `iframe` element directly
+- An existing instance of `YT.Player`, created with the [YouTube Iframe API](https://developers.google.com/youtube/iframe_api_reference)
+:::
 
 The `enableYouTubeTracking` function takes the form:
 
@@ -182,6 +438,7 @@ window.snowplow("enableYouTubeTracking", { id, options?: { label?, captureEvents
 ```javascript
 enableYouTubeTracking({ id, options?: { label?, captureEvents?, boundaries?, updateRate? } })
 ```
+
   </TabItem>
 </Tabs>
 
@@ -192,7 +449,7 @@ enableYouTubeTracking({ id, options?: { label?, captureEvents?, boundaries?, upd
 | `options.label`         | `string`                | \-                  | An identifiable custom label sent with the event                                                               | No       |
 | `options.captureEvents` | `string[]`              | `['DefaultEvents']` | The events or Event Group to capture. For a full list of events and groups, check the [section below](#events) | No       |
 | `options.boundaries`    | `number[]`              | `[10, 25, 50, 75]`  | The progress percentages to fire an event at (valid values 1 - 99 inclusive) [[1]](#1)                         | No       |
-| `options.updateRate`    | `number`                | `250`               | The rate at which `seek` and `volumechange` events can occur [[2]](#2)                                         | No       |
+| `options.*`             | `any`                   |                     | Any other options are passed through to `startMediaTracking`                         | No       |
 
 Below is an example of the full `enableYouTubeTracking` function:
 
@@ -229,91 +486,19 @@ enableYouTubeTracking({
   </TabItem>
 </Tabs>
 
-## Events
+### The disableYouTubeTracking function
 
-### Capturable Events
+This function is an equivalent counterpart to `endYouTubeTracking` for `enableYouTubeTracking`.
 
-Below is a table of all the events that can be used in `options.captureEvents`
-
-| Name                  | Fire Condition                                                    |
-|-----------------------|-------------------------------------------------------------------|
-| play                  | The video is played                                               |
-| pause                 | The video is paused                                               |
-| seek                  | On seek                                                           |
-| volumechange          | Volume has changed                                                |
-| ended                 | When playback stops at the end of the video                       |
-| error                 | An error occurs in the player                                     |
-| percentprogress       | When a percentage boundary set in `options.boundaries` is reached |
-| playbackratechange    | Playback rate has changed                                         |
-| playbackqualitychange | Playback quality has changed                                      |
-
-### Event Groups
-
-You can also use a pre-made event group in `options.captureEvents`:
-
-| Name            | Events                                                                                                                 |
-|-----------------|------------------------------------------------------------------------------------------------------------------------|
-| `DefaultEvents` | `['play', 'pause', 'seek', 'volumechange', 'ended', 'percentprogress', 'playbackratechange', 'playbackqualitychange']` |
-| `AllEvents`     | Every event listed in [Capturable Events](#capturable-events)                                                          |
-
-It is possible to extend an event group with any event in the Events table above. This could be useful if you want, for example, all the events contained in the 'DefaultEvents' group, along with the 'error' event. This is expressed in the following way:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
-window.snowplow('enableYouTubeTracking', {
-  id: "example-video",
-  options: {
-    captureEvents: ["DefaultEvents", "error"],
-  }
-})
-```
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-```javascript
-enableYouTubeTracking({
-  id: 'example-video',
-  options: {
-    captureEvents: ['DefaultEvents', 'error'],
-  }
-})
-```
-
-  </TabItem>
-</Tabs>
+Instead of requiring the session ID to be provided, it will remove the oldest of any sessions started with `enableYouTubeTracking` so the session ID doesn't need to be known and passed explicitly.
 
 ## Schemas and Example Data
 
-Three schemas are used with this plugin:
+Event and entity schemas are [the same as](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/snowplow/index.md#tracked-events-and-entities) for the [Snowplow Media Plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/snowplow/index.md).
 
-### [An unstructured event with identifying information](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player_event/jsonschema/1-0-0)
+In addition, there is a dedicated entity attached with YouTube-specific information to all events.
 
-```json
-{
-    "type": "play",
-    "label": "Identifying Label"
-}
-```
-
-### [Snowplow platform-agnostic media context](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player/jsonschema/1-0-0)
-
-```json
-{
-    "currentTime": 12.32,
-    "duration": 20,
-    "ended": false,
-    "loop": false,
-    "muted": true,
-    "paused": false,
-    "playbackRate": 1,
-    "volume": 100
-}
-```
-
-### [YouTube player specific context](https://github.com/snowplow/iglu-central/blob/master/schemas/org.whatwg/media_element/jsonschema/1-0-0)
+### [YouTube player specific context](https://github.com/snowplow/iglu-central/tree/master/schemas/com.youtube/youtube/jsonschema/1-0-0)
 
 ```json
 {
@@ -346,9 +531,3 @@ Three schemas are used with this plugin:
   ]
 }
 ```
-
-* * *
-
-1. To track when a video ends, use the 'ended' event.
-
-2. `seek` and `volumechange` use `setInterval` to poll the player every `n` ms. You are able to adjust the poll rate, however, lower values may cause performance issues.

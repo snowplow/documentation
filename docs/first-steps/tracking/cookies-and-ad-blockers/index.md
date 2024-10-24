@@ -28,7 +28,7 @@ This greatly limits the effectiveness of tracking a customer journey where users
 In particular, it affects the `network_userid` identifier in Snowplow events.
 
 Snowplow provides the ID service solution that fully mitigates the impact of this change.
-Visit the [documentation for the ID service](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/javascript-tracker-v3/advanced-usage/using-an-id-service/index.md) to learn more.
+Visit the [documentation for the ID service](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/browsers/index.md#itp-mitigation) to learn more.
 
 ## 2. Mitigating the impact of ad-blockers
 

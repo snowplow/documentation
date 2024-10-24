@@ -29,7 +29,7 @@ Snowplow ecommerce events and entities must be **manually tracked**.
 
 | Tracker Distribution | Included |
 |----------------------|----------|
-| `sp.js`              | ❌        |
+| `sp.js`              | ✅        |
 | `sp.lite.js`         | ❌        |
 
 **Download:**

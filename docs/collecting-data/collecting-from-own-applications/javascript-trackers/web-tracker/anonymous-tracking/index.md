@@ -67,8 +67,6 @@ Setting `stateStorageStrategy` to `cookieAndLocalStorage` or `localStorage` also
 
 Server Anonymisation requires the Snowplow Stream Collector v2.1.0+. Using a lower version will cause events to fail to send until Server Anonymisation is disabled.
 
-Server Anonymisation will not work when the tracker is initialized with `eventMethod: 'beacon'` as it requires additional custom headers which beacon does not support.
-
 ## Toggling anonymous tracking
 
 You may wish to toggle this functionality on or off during a page visit, for example when a user accepts a cookie banner you may not want to disable anonymous tracking, or when a user logs in to your site.

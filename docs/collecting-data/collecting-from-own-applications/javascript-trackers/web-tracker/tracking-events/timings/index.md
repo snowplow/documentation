@@ -1,16 +1,14 @@
 ---
-title: "Timings"
+title: "Performance timings"
 sidebar_position: 98
 ---
 
-# Timings tracking
+# Performance Navigation Timing
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
-
-Create and track general timing events using the [site tracking plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timings/generic/index.md).
 
 To add performance timing context entities to your Snowplow tracking, use this Performance navigation timing plugin. 
 
@@ -29,6 +27,8 @@ The plugin is available since version 3.10 of the tracker.
 Adding this plugin will automatically capture [this](https://github.com/snowplow/iglu-central/blob/master/schemas/org.w3/PerformanceNavigationTiming/jsonschema/1-0-0) context entity.
 
 Performance navigation timing context entities are **automatically tracked** once configured.
+
+You can also create and track general timing events using the [site tracking plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timings/generic/index.md).
 
 ## Install plugin
 
@@ -80,6 +80,10 @@ As these metrics are primarily related to the initial page serve and load, after
 For actual rendering performance, the application will have to use the PerformanceMark/PerformanceMeasure [User timing](https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/User_timing) APIs. These allow custom timing milestones, but since it's completely custom and there are no common conventions for using these APIs, currently there is no automatic support in the tracker for tracking these. Therefore we encourage you to build your custom schema in case you believe you would benefit from these additional metrics.
 
 ## Performance timing plugin (original)
+
+:::warning
+This plugin has been deprecated and superseded by the Performance Navigation Timing plugin described above.
+:::
 
 This older plugin has been superseded by the Performance Navigation Timing plugin, which has a newer API and additional metrics such as the compressed/decompressed page size, and information about the navigation that can contextualise cache usage that can impact the measured metrics, as well as server-side metrics, etc.
 

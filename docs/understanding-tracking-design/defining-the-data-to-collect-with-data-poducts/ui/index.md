@@ -12,7 +12,7 @@ sidebar_custom_props:
 
 To create a new data product, navigate to the "Data products" section from the navigation bar and click the "Create data product" button.
 
-![Create data product](images/create-data-product.png)
+![Create data product](images/create-data-product-v2.png)
 
 A modal will appear on the page, giving you the possibility to quickly create a data product by using one of the existing templates or create one from scratch.
 

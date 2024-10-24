@@ -7,7 +7,7 @@ This tutorial walks you through the process of setting up our Unified Digital DB
 
 ### Prerequisites
 
-- DBT installed
+- [DBT](https://github.com/dbt-labs/dbt) installed
 - Connection to a warehouse
 - for web:
   - web events dataset being available in your database

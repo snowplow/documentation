@@ -124,7 +124,7 @@ window.snowplow('trackMyEvent', { eventProp: 'value' });
   <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
-import { newTracker } from '@snowplow/browser-tracker'; 
+import { addPlugin } from '@snowplow/browser-tracker'; 
 
 const myPlugin = {
   contexts: () => {
@@ -139,7 +139,7 @@ const myPlugin = {
   },
 };
 
-newTracker('sp1', '{{COLLECTOR_URL}}', { plugins: [myPlugin] });
+addPlugin(myPlugin, ['sp1'])
 ```
 
   </TabItem>

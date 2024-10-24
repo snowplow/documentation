@@ -30,12 +30,12 @@ The plugin is available since version 3.23 of the tracker.
 
 **Download:**
 
-<table><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-event-specifications@latest/dist/index.umd.min.js">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-event-specifications@latest/dist/index.umd.min.js">unpkg</a> (latest)</td></tr></tbody></table>
+<table><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-event-specifications@3/dist/index.umd.min.js">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-event-specifications@3/dist/index.umd.min.js">unpkg</a> (latest)</td></tr></tbody></table>
 
 ```javascript
 window.snowplow(
     'addPlugin',
-    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-event-specifications@latest/dist/index.umd.min.js',
+    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-event-specifications@3/dist/index.umd.min.js',
     ['eventSpecifications', 'EventSpecificationsPlugin']
 );
 ```
@@ -43,9 +43,9 @@ window.snowplow(
   </TabItem>
   <TabItem value="browser" label="Browser (npm)" default>
 
-- `npm install @snowplow/browser-plugin-event-specifications`
-- `yarn add @snowplow/browser-plugin-event-specifications`
-- `pnpm add @snowplow/browser-plugin-event-specifications`
+- `npm install @snowplow/browser-plugin-event-specifications@3`
+- `yarn add @snowplow/browser-plugin-event-specifications@3`
+- `pnpm add @snowplow/browser-plugin-event-specifications@3`
 
 
 ```javascript
@@ -71,7 +71,7 @@ The configuration of the plugin would be in the form of:
 ```javascript
 window.snowplow(
     'addPlugin',
-    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-event-specifications@latest/dist/index.umd.min.js',
+    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-event-specifications@3/dist/index.umd.min.js',
     ['eventSpecifications', 'EventSpecificationsPlugin'],
     [
         {

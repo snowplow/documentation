@@ -26,12 +26,12 @@ Enhanced consent events must be **manually tracked**. The GDPR context entity wi
 
 **Download:**
 
-<table><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-enhanced-consent@latest/dist/index.umd.min.js">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-enhanced-consent@latest/dist/index.umd.min.js">unpkg</a> (latest)</td></tr></tbody></table>
+<table><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-enhanced-consent@3/dist/index.umd.min.js">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-enhanced-consent@3/dist/index.umd.min.js">unpkg</a> (latest)</td></tr></tbody></table>
 
 ```javascript
 window.snowplow(
     'addPlugin',
-    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-enhanced-consent@latest/dist/index.umd.min.js',
+    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-enhanced-consent@3/dist/index.umd.min.js',
     ['snowplowEnhancedConsentTracking', 'EnhancedConsentPlugin']
 );
 ```
@@ -39,9 +39,9 @@ window.snowplow(
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
 
-- `npm install @snowplow/browser-plugin-enhanced-consent`
-- `yarn add @snowplow/browser-plugin-enhanced-consent`
-- `pnpm add @snowplow/browser-plugin-enhanced-consent`
+- `npm install @snowplow/browser-plugin-enhanced-consent@3`
+- `yarn add @snowplow/browser-plugin-enhanced-consent@3`
+- `pnpm add @snowplow/browser-plugin-enhanced-consent@3`
 
 ```javascript
 import { newTracker } from '@snowplow/browser-tracker';

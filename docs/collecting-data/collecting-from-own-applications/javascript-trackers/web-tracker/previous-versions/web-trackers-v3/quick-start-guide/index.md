@@ -70,9 +70,9 @@ Getting started with sending events using the Browser Tracker will be familiar f
 The process involves the following high level steps:
 
 - Install the `@snowplow/browser-tracker` package using your preferred package manager
-    - `npm install @snowplow/browser-tracker`
-    - `yarn add @snowplow/browser-tracker`
-    - `pnpm add @snowplow/browser-tracker`
+    - `npm install @snowplow/browser-tracker@3`
+    - `yarn add @snowplow/browser-tracker@3`
+    - `pnpm add @snowplow/browser-tracker@3`
 
 - You can then import this library into your application
 

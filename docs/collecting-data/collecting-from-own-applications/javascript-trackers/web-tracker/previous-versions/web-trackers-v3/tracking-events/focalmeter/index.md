@@ -35,14 +35,14 @@ The Focal Meter integration is **automatic** once configured.
 
 **Download:**
 
-<table><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-focalmeter@latest/dist/index.umd.min.js">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-focalmeter@latest/dist/index.umd.min.js">unpkg</a> (latest)</td></tr></tbody></table>
+<table><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-focalmeter@3/dist/index.umd.min.js">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-focalmeter@3/dist/index.umd.min.js">unpkg</a> (latest)</td></tr></tbody></table>
 
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
 
-- `npm install @snowplow/browser-plugin-focalmeter@focalmeter_plugin`
-- `yarn add @snowplow/browser-plugin-focalmeter@focalmeter_plugin`
-- `pnpm add @snowplow/browser-plugin-focalmeter@focalmeter_plugin`
+- `npm install @snowplow/browser-plugin-focalmeter@focalmeter_plugin@3`
+- `yarn add @snowplow/browser-plugin-focalmeter@focalmeter_plugin@3`
+- `pnpm add @snowplow/browser-plugin-focalmeter@focalmeter_plugin@3`
 
 </TabItem>
 </Tabs>
@@ -57,7 +57,7 @@ To integrate with the Kantar FocalMeter, use the snippet below after [setting u
 ```javascript
 window.snowplow(
     'addPlugin',
-    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-focalmeter@latest/dist/index.umd.min.js',
+    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-focalmeter@3/dist/index.umd.min.js',
     ['snowplowFocalMeter', 'FocalMeterPlugin']
 );
 

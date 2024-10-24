@@ -15,9 +15,9 @@ There are two ways to add plugins to the browser tracker:
 
 Plugins must first be installed. For example, to use the Performance Timing plugin, run one of the following commands:
 
-- `npm install @snowplow/browser-plugin-performance-timing`
-- `yarn add @snowplow/browser-plugin-performance-timing`
-- `pnpm add @snowplow/browser-plugin-performance-timing`
+- `npm install @snowplow/browser-plugin-performance-timing@3`
+- `yarn add @snowplow/browser-plugin-performance-timing@3`
+- `pnpm add @snowplow/browser-plugin-performance-timing@3`
 
 ## Tracker initialization
 

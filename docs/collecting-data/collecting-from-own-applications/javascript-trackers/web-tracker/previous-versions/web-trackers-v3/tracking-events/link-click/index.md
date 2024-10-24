@@ -30,7 +30,7 @@ Link click events are **automatically tracked** once configured.
 
 **Download:**
 
-<table class="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-link-click-tracking@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-link-click-tracking@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a> (latest)</td></tr></tbody></table>
+<table class="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-link-click-tracking@3/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-link-click-tracking@3/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a> (latest)</td></tr></tbody></table>
 
 **Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
 
@@ -53,7 +53,7 @@ Turn on link click tracking like this:
 
 ```javascript
 window.snowplow('addPlugin',
-  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-link-click-tracking@latest/dist/index.umd.min.js",
+  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-link-click-tracking@3/dist/index.umd.min.js",
   ["snowplowLinkClickTracking", "LinkClickTrackingPlugin"]
 );
 
@@ -63,7 +63,7 @@ snowplow('enableLinkClickTracking');
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
 
-Link click tracking is part of a separate plugin, `@snowplow/browser-plugin-link-click-tracking`. You need to install it with your favourite package manager: `npm install @snowplow/browser-plugin-link-click-tracking` and then initialize it:
+Link click tracking is part of a separate plugin, `@snowplow/browser-plugin-link-click-tracking`. You need to install it with your favourite package manager: `npm install @snowplow/browser-plugin-link-click-tracking@3` and then initialize it:
 
 ```javascript
 import { newTracker } from '@snowplow/browser-tracker';

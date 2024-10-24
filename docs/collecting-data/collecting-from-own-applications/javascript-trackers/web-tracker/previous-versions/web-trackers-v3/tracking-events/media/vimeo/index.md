@@ -34,12 +34,12 @@ Vimeo media events and entities are **automatically tracked** once configured.
 
 **Download:**
 
-<table><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-vimeo-tracking@latest/dist/index.umd.min.js">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-vimeo-tracking@latest/dist/index.umd.min.js">unpkg</a> (latest)</td></tr></tbody></table>
+<table><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-vimeo-tracking@3/dist/index.umd.min.js">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-vimeo-tracking@3/dist/index.umd.min.js">unpkg</a> (latest)</td></tr></tbody></table>
 
 ```javascript
 window.snowplow(
     'addPlugin',
-    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-vimeo-tracking@latest/dist/index.umd.min.js',
+    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-vimeo-tracking@3/dist/index.umd.min.js',
     ['snowplowVimeoTracking', 'VimeoTrackingPlugin']
 );
 ```
@@ -47,9 +47,9 @@ window.snowplow(
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
 
-- `npm install @snowplow/browser-plugin-vimeo-tracking`
-- `yarn add @snowplow/browser-plugin-vimeo-tracking`
-- `pnpm add @snowplow/browser-plugin-vimeo-tracking`
+- `npm install @snowplow/browser-plugin-vimeo-tracking@3`
+- `yarn add @snowplow/browser-plugin-vimeo-tracking@3`
+- `pnpm add @snowplow/browser-plugin-vimeo-tracking@3`
 
 ```javascript
 import { VimeoTrackingPlugin } from '@snowplow/browser-plugin-vimeo-tracking';

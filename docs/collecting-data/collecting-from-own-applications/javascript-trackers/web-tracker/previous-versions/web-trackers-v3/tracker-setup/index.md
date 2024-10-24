@@ -35,9 +35,9 @@ Once the tracker is loaded via the tag, you can move on to initializing the trac
 Getting started with sending events using the Browser Tracker will be familiar for anyone who is used to installing npm packages into their web apps and is designed to work with frameworks such as React, Angular and Vue.
 
 - Install the `@snowplow/browser-tracker` package using your preferred package manager
-    - `npm install @snowplow/browser-tracker`
-    - `yarn add @snowplow/browser-tracker`
-    - `pnpm add @snowplow/browser-tracker`
+    - `npm install @snowplow/browser-tracker@3`
+    - `yarn add @snowplow/browser-tracker@3`
+    - `pnpm add @snowplow/browser-tracker@3`
 
 - You can then import this library into your application
 

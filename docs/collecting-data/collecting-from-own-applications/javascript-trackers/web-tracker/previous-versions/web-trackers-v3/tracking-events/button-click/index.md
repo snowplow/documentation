@@ -41,13 +41,13 @@ Button click events are **automatically tracked** once configured.
     <tr>
       <td>Available on jsDelivr</td>
       <td>
-        <a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-button-click-tracking@latest/dist/index.umd.min.js">jsDelivr</a> (latest)
+        <a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-button-click-tracking@3/dist/index.umd.min.js">jsDelivr</a> (latest)
       </td>
     </tr>
     <tr>
       <td>Available on unpkg</td>
       <td>
-        <a href="https://unpkg.com/@snowplow/browser-plugin-button-click-tracking@latest/dist/index.umd.min.js">unpkg</a> (latest)
+        <a href="https://unpkg.com/@snowplow/browser-plugin-button-click-tracking@3/dist/index.umd.min.js">unpkg</a> (latest)
       </td>
     </tr>
   </tbody>
@@ -56,9 +56,9 @@ Button click events are **automatically tracked** once configured.
 </TabItem>
 <TabItem value="browser" label="Browser (npm)">
 
-- `npm install @snowplow/browser-plugin-button-click-tracking`
-- `yarn add @snowplow/browser-plugin-button-click-tracking`
-- `pnpm add @snowplow/browser-plugin-button-click-tracking`
+- `npm install @snowplow/browser-plugin-button-click-tracking@3`
+- `yarn add @snowplow/browser-plugin-button-click-tracking@3`
+- `pnpm add @snowplow/browser-plugin-button-click-tracking@3`
 
 </TabItem>
 </Tabs>
@@ -73,7 +73,7 @@ To start tracking all button clicks, call the `enableButtonClickTracking` functi
 ```javascript
 window.snowplow(
     'addPlugin',
-    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-button-click-tracking@latest/dist/index.umd.min.js',
+    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-button-click-tracking@3/dist/index.umd.min.js',
     ['snowplowButtonClickTracking', 'ButtonClickTrackingPlugin']
 );
 

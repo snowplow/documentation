@@ -137,7 +137,7 @@ After calling `addPlugin`, the third parameter is an Array of arguments that wil
 ```javascript
 snowplow(
   'addPlugin',
-  'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-web-vitals@latest/dist/index.umd.min.js', // may also be an inline plugin
+  'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-web-vitals@3/dist/index.umd.min.js', // may also be an inline plugin
   ['snowplowWebVitals', 'WebVitalsPlugin'],
   [ // must be an Array in case the plugin takes multiple parameters
     { // most plugins will just take a single Object parameter with different properties for each supported option

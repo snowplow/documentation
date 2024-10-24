@@ -27,4 +27,4 @@ Snowplow JavaScript Tracker v2 is available via the [cdnjs](https://cdnjs.com/) 
 
 Snowplow JavaScript Tracker v3 is available via the [unpkg](https://unpkg.com/) CDN. Click the link below to explore the available assets:
 
-[Snowplow JavaScript Tracker v3 on unpkg](https://unpkg.com/browse/@snowplow/javascript-tracker@latest/dist/)
+[Snowplow JavaScript Tracker v3 on unpkg](https://unpkg.com/browse/@snowplow/javascript-tracker@3/dist/)

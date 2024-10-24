@@ -26,16 +26,16 @@ GA cookies information is **automatically tracked** once configured.
 
 **Download:**
 
-<table class="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-ga-cookies@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-ga-cookies@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a> (latest)</td></tr></tbody></table>
+<table class="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-ga-cookies@3/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-ga-cookies@3/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a> (latest)</td></tr></tbody></table>
 
 **Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
 
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
 
-- `npm install @snowplow/browser-plugin-ga-cookies`
-- `yarn add @snowplow/browser-plugin-ga-cookies`
-- `pnpm add @snowplow/browser-plugin-ga-cookies`
+- `npm install @snowplow/browser-plugin-ga-cookies@3`
+- `yarn add @snowplow/browser-plugin-ga-cookies@3`
+- `pnpm add @snowplow/browser-plugin-ga-cookies@3`
 
 </TabItem>
 </Tabs>
@@ -51,7 +51,7 @@ GA cookies information is **automatically tracked** once configured.
 
 ```javascript
 window.snowplow('addPlugin',
-  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-ga-cookies@latest/dist/index.umd.min.js",
+  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-ga-cookies@3/dist/index.umd.min.js",
   ["snowplowGaCookies", "GaCookiesPlugin"]
 );
 ```
@@ -79,7 +79,7 @@ newTracker('sp1', '{{collector_url}}', {
 
 ```javascript
 window.snowplow('addPlugin',
-  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-ga-cookies@latest/dist/index.umd.min.js",
+  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-ga-cookies@3/dist/index.umd.min.js",
   ["snowplowGaCookies", "GaCookiesPlugin"],
   [pluginOptions]
 );

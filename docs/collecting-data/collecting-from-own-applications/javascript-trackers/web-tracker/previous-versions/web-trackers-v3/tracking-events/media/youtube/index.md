@@ -26,16 +26,16 @@ YouTube media events and entities are **automatically tracked** once configured.
 
 **Download:**
 
-<table><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-youtube-tracking@latest/dist/index.umd.min.js">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-youtube-tracking@latest/dist/index.umd.min.js">unpkg</a> (latest)</td></tr></tbody></table>
+<table><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-youtube-tracking@3/dist/index.umd.min.js">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-youtube-tracking@3/dist/index.umd.min.js">unpkg</a> (latest)</td></tr></tbody></table>
 
 **Note:** This plugin will not work if using GAv4 Enhanced Measurement Video engagement, as both the GAv4 and Snowplow trackers will attempt to attach to the Youtube video.
 
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
 
-- `npm install @snowplow/browser-plugin-youtube-tracking`
-- `yarn add @snowplow/browser-plugin-youtube-tracking`
-- `pnpm add @snowplow/browser-plugin-youtube-tracking`
+- `npm install @snowplow/browser-plugin-youtube-tracking@3`
+- `yarn add @snowplow/browser-plugin-youtube-tracking@3`
+- `pnpm add @snowplow/browser-plugin-youtube-tracking@3`
 
 </TabItem>
 </Tabs>
@@ -68,7 +68,7 @@ For this plugin to find your media element, your iFrame must be given the id tha
     <script>
       window.snowplow(
         'addPlugin',
-        'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-youtube-tracking@latest/dist/index.umd.min.js',
+        'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-youtube-tracking@3/dist/index.umd.min.js',
         ['snowplowYouTubeTracking', 'YouTubeTrackingPlugin']
       );
 
@@ -121,7 +121,7 @@ enableYouTubeTracking({
     <script>
       window.snowplow(
         'addPlugin',
-        'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-youtube-tracking@latest/dist/index.umd.min.js',
+        'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-youtube-tracking@3/dist/index.umd.min.js',
         ['snowplowYouTubeTracking', 'YouTubeTrackingPlugin']
       );
 

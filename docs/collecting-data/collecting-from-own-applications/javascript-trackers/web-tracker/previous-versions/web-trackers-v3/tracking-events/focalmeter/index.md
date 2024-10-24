@@ -52,7 +52,7 @@ The Focal Meter integration is **automatic** once configured.
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
 
-To integrate with the Kantar FocalMeter, use the snippet below after [setting up your tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/quick-start-guide/index.md):
+To integrate with the Kantar FocalMeter, use the snippet below after [setting up your tracker](../../quick-start-guide/index.md):
 
 ```javascript
 window.snowplow(

@@ -4,7 +4,7 @@ date: "2023-12-20"
 sidebar_position: 200
 ---
 
-[Plugins](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/index.md) provide an easy way to distribute custom behavior for the tracker.
+[Plugins](../../../../plugins/index.md) provide an easy way to distribute custom behavior for the tracker.
 Each Plugin can be loaded from external URLs or provided inline within GTM, and can optionally take some custom configuration.
 A Plugin may add new methods to the tracker that can be called via [Custom Commands](#custom-commands).
 
@@ -65,10 +65,10 @@ This may make some plugins not function as intended.
 
 ## Inline Plugins
 
-[Inline Plugins](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/creating-your-own-plugins/index.md#inline-plugins) are plugins that don't require being fetched from an external file to load.
+[Inline Plugins](../../../../plugins/creating-your-own-plugins/index.md#inline-plugins) are plugins that don't require being fetched from an external file to load.
 
 You can create Inline Plugins in GTM by using Custom JavaScript Variables in the **Plugin URL** field.
-The Variable should return an Object with a method that returns another Object meeting the [Plugin Interface](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/creating-your-own-plugins/index.md#plugin-interface) (any other methods on the outer Object will become tracker methods).
+The Variable should return an Object with a method that returns another Object meeting the [Plugin Interface](../../../../plugins/creating-your-own-plugins/index.md#plugin-interface) (any other methods on the outer Object will become tracker methods).
 
 For **Plugin Configuration**, the UI enforces the comma-seperated values syntax required for external Plugins and unconditionally calls `.split(',')` on the string.
 The SDK requires that for inline-plugins only a single string may be used.

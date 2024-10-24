@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-This plugin enables the automatic tracking of a Vimeo video, utilising the [Snowplow Media Plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/index.md).
+This plugin enables the automatic tracking of a Vimeo video, utilising the [Snowplow Media Plugin](../index.md).
 
 :::info Example app
 To illustrate the tracked [events](/docs/understanding-your-pipeline/events/index.md) and [entities](/docs/understanding-your-pipeline/entities/index.md), you can visit an example app that showcases the tracked media events and entities live as you watch a video.
@@ -65,7 +65,7 @@ newTracker('sp1', '{{collector_url}}', {
 
 ## Basic usage
 
-The snippets below show how to get started with the plugin, after [setting up your tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/index.md).
+The snippets below show how to get started with the plugin, after [setting up your tracker](../../../tracker-setup/index.md).
 
 :::info Accepted `video` attribute values
 The plugin's `video` attribute will accept either:
@@ -238,7 +238,7 @@ startVimeoTracking({
 
 ## Advanced usage
 
-As the Vimeo plugin uses Snowplow Media internally, for more granular control over events, you can utilise any of the functions provided by the [Snowplow Media Plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/index.md).
+As the Vimeo plugin uses Snowplow Media internally, for more granular control over events, you can utilise any of the functions provided by the [Snowplow Media Plugin](../index.md).
 
 For example, if you wish to include additional behavior when a video is paused, you can create callback on the `pause` event of an instance of a Vimeo player.
 
@@ -290,7 +290,7 @@ video.on('pause', () => {
 
 ### Tracking advertising events
 
-Advertising events are not tracked automatically, but can be tracked using the `trackAd*` functions provided by Snowplow Media. For a full list of available functions, see the [Snowplow Media Plugin documentation](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/index.md#update-ad-and-ad-break-properties).
+Advertising events are not tracked automatically, but can be tracked using the `trackAd*` functions provided by Snowplow Media. For a full list of available functions, see the [Snowplow Media Plugin documentation](../index.md#update-ad-and-ad-break-properties).
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>

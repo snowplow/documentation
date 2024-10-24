@@ -54,8 +54,8 @@ window.snowplow(
 import { newTracker } from '@snowplow/browser-tracker';
 import { WebVitalsPlugin } from '@snowplow/browser-plugin-web-vitals';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ WebVitalsPlugin() ],
 });
 ```
@@ -73,7 +73,7 @@ The Web Vitals plugin can be initialized with a couple of options allowing for c
 |   webVitalsSource   |     `string`     |                                              The URL endpoint the Web Vitals script should be loaded from. Defaults to the UNPKG CDN.                                              | `https://unpkg.com/web-vitals@3/dist/web-vitals.iife.js` |
 |       context       | `DynamicContext` | Context entities to add to the tracked event. Can be provided either as an array of self-describing JSONs or function that returns a context entity. (available from version 3.19) |                                                          |
 
-See the example for configuring [Plugins After Initialization](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/configuring-tracker-plugins/javascript/index.md#plugins-after-initialization) on how these options can be used.
+See the example for configuring [Plugins After Initialization](../../plugins/configuring-tracker-plugins/javascript/index.md#plugins-after-initialization) on how these options can be used.
 
 ### Using an already existing Web Vitals library source
 
@@ -84,4 +84,3 @@ There could be cases where your page or one of the loaded JavaScript bundles alr
 The default Web Vitals measurement script is loaded from the [UNPKG](https://www.unpkg.com/) CDN. This choice is chosen as a default but you should consider your own setup when choosing the script source. Selecting a script source from a CDN which might already be used in your website might save you from yet another connection startup time (_Queueing_,_DNS lookup_,_TCP_, _SSL_).
 
 Another reasonable choice could be [jsDelivr](https://cdn.jsdelivr.net/npm/web-vitals@3/dist/web-vitals.iife.js).
-

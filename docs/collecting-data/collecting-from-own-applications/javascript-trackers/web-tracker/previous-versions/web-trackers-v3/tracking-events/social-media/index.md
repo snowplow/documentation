@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Social interaction tracking is provided as part of the Site tracking plugin. This plugin also provides events for [site search](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/site-search/index.md) and [timings](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timings/generic/index.md).
+Social interaction tracking is provided as part of the Site tracking plugin. This plugin also provides events for [site search](../site-search/index.md) and [timings](../timings/generic/index.md).
 
 Social media interaction events must be **manually tracked**.
 
@@ -31,7 +31,7 @@ Social media interaction events must be **manually tracked**.
 **Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
 
 ```javascript
-window.snowplow('addPlugin', 
+window.snowplow('addPlugin',
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-site-tracking@latest/dist/index.umd.min.js",
   ["snowplowSiteTracking", "SiteTrackingPlugin"]
 );
@@ -48,8 +48,8 @@ window.snowplow('addPlugin',
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 import { SiteTrackingPlugin, trackSiteSearch } from '@snowplow/browser-plugin-site-tracking';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ SiteTrackingPlugin() ],
 });
 ```

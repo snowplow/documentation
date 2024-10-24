@@ -10,9 +10,9 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Create and track general timing events using the [site tracking plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/timings/generic/index.md).
+Create and track general timing events using the [site tracking plugin](./generic/index.md).
 
-To add performance timing context entities to your Snowplow tracking, use this Performance navigation timing plugin. 
+To add performance timing context entities to your Snowplow tracking, use this Performance navigation timing plugin.
 
 By default all its metrics are relative to the page load rather than absolute time stamps, making it easy to analyze and aggregate. To learn more about the properties tracked, you can visit the [specification](https://www.w3.org/TR/navigation-timing-2/) or MDN [documentation site](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceNavigationTiming).
 
@@ -47,7 +47,7 @@ Performance navigation timing context entities are **automatically tracked** onc
 **Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
 
 ```javascript
-window.snowplow('addPlugin', 
+window.snowplow('addPlugin',
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-performance-navigation-timing@latest/dist/index.umd.min.js",
   ["snowplowPerformanceNavigationTiming", "PerformanceNavigationTimingPlugin"]
 );
@@ -64,8 +64,8 @@ window.snowplow('addPlugin',
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 import { PerformanceNavigationTimingPlugin } from '@snowplow/browser-plugin-performance-navigation-timing';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ PerformanceNavigationTimingPlugin() ],
 });
 ```
@@ -75,7 +75,7 @@ newTracker('sp1', '{{collector_url}}', {
 
 ## More detailed analysis for Single Page Applications (SPA)
 
-As these metrics are primarily related to the initial page serve and load, after the window.onload handler ends the metrics will likely stay static for the life of the SPA page. If there's a pattern to the API requests the SPA makes for new content, the [PerformanceObserver](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver) could be used to capture the network metrics for that request from the performance API and re-use the schema. 
+As these metrics are primarily related to the initial page serve and load, after the window.onload handler ends the metrics will likely stay static for the life of the SPA page. If there's a pattern to the API requests the SPA makes for new content, the [PerformanceObserver](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceObserver) could be used to capture the network metrics for that request from the performance API and re-use the schema.
 
 For actual rendering performance, the application will have to use the PerformanceMark/PerformanceMeasure [User timing](https://developer.mozilla.org/en-US/docs/Web/API/Performance_API/User_timing) APIs. These allow custom timing milestones, but since it's completely custom and there are no common conventions for using these APIs, currently there is no automatic support in the tracker for tracking these. Therefore we encourage you to build your custom schema in case you believe you would benefit from these additional metrics.
 
@@ -128,7 +128,7 @@ Performance timing context entities are **automatically tracked** once configure
 **Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
 
 ```javascript
-window.snowplow('addPlugin', 
+window.snowplow('addPlugin',
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-performance-timing@latest/dist/index.umd.min.js",
   ["snowplowPerformanceTiming", "PerformanceTimingPlugin"]
 );
@@ -145,8 +145,8 @@ window.snowplow('addPlugin',
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 import { PerformanceTimingPlugin } from '@snowplow/browser-plugin-performance-timing';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ PerformanceTimingPlugin() ],
 });
 ```

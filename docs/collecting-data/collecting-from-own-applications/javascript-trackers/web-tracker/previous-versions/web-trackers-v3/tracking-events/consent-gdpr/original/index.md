@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-This plugin has been partially superseded by the [Enhanced Consent](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/consent-gdpr/index.md) plugin. This older plugin has only two `trackX` methods, but it does allow the addition of GDPR context entities to every event.
+This plugin has been partially superseded by the [Enhanced Consent](../index.md) plugin. This older plugin has only two `trackX` methods, but it does allow the addition of GDPR context entities to every event.
 
 This plugin is the recommended way to track marketing consent events on your website. Functions, usage and a complete setup journey is showcased on the [Consent Tracking for Marketing accelerator](https://docs.snowplow.io/accelerators/consent/).
 
@@ -34,7 +34,7 @@ Original consent events must be **manually tracked**. The GDPR context entity wi
 **Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
 
 ```javascript
-window.snowplow('addPlugin', 
+window.snowplow('addPlugin',
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-consent@latest/dist/index.umd.min.js",
   ["snowplowConsent", "ConsentPlugin"]
 );
@@ -51,8 +51,8 @@ window.snowplow('addPlugin',
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 import { ConsentPlugin } from '@snowplow/browser-plugin-consent';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ ConsentPlugin() ],
 });
 ```

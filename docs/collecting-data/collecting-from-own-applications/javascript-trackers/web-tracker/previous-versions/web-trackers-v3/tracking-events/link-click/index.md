@@ -343,7 +343,7 @@ enableLinkClickTracking({ context: [ dynamicContext ] });
 </Tabs>
 
 
-See [this page](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/custom-tracking-using-schemas/index.md) for more information about tracking context entities.
+See [this page](../../custom-tracking-using-schemas/index.md) for more information about tracking context entities.
 
 ## Manual link click tracking
 

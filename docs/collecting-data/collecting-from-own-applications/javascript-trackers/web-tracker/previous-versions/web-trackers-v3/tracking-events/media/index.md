@@ -26,7 +26,7 @@ The v2 schemas:
 
 | Plugin | Media schemas version | Provides auto-tracking? | Player |
 | --- | --- | --- | --- |
-| [Snowplow media](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/snowplow/index.md) | v2 | ❌ | Any |
-| [Vimeo](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/vimeo/index.md)  | v2 | ✅ | Vimeo |
-| [HTML5](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/html5/index.md) | v1 | ✅ | HTML5 |
-| [YouTube](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/youtube/index.md) | v1 | ✅ | YouTube |
+| [Snowplow media](./snowplow/index.md) | v2 | ❌ | Any |
+| [Vimeo](./vimeo/index.md)  | v2 | ✅ | Vimeo |
+| [HTML5](./html5/index.md) | v1 | ✅ | HTML5 |
+| [YouTube](./youtube/index.md) | v1 | ✅ | YouTube |

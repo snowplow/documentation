@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Track user consent preferences selection events using the Enhanced Consent plugin. Additionally, add a context entity containing GDPR details to every event using the [original Consent plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/web-trackers-v3/tracking-events/consent-gdpr/original/index.md).
+Track user consent preferences selection events using the Enhanced Consent plugin. Additionally, add a context entity containing GDPR details to every event using the [original Consent plugin](./original/index.md).
 
 Enhanced consent events must be **manually tracked**. The GDPR context entity will be **automatically tracked** with all events if configured.
 
@@ -47,8 +47,8 @@ window.snowplow(
 import { newTracker } from '@snowplow/browser-tracker';
 import { EnhancedConsentPlugin } from '@snowplow/browser-plugin-enhanced-consent';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ EnhancedConsentPlugin() ],
 });
 ```

@@ -19,7 +19,7 @@ import DocCardList from '@theme/DocCardList';
 There are two distributions of the JavaScript Tracker:
 
 - `sp.js` is fully featured and is bundled with the majority of the available plugins.
-- `sp.lite.js` is a smaller distribution with no bundled plugins. Included is Page View, Self Describing and Structured Event tracking as well as Activity Tracking and Anonymous Tracking. All other features can be loaded as separate [plugins](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/index.md).
+- `sp.lite.js` is a smaller distribution with no bundled plugins. Included is Page View, Self Describing and Structured Event tracking as well as Activity Tracking and Anonymous Tracking. All other features can be loaded as separate [plugins](../plugins/index.md).
 
 ```mdx-code-block
 import LoadWithTag from "@site/docs/reusable/javascript-tracker-load-with-tag/_index.md"

@@ -4,14 +4,14 @@ date: "2023-03-22"
 sidebar_position: 400
 ---
 
-The [default releases](https://github.com/snowplow/snowplow-javascript-tracker/releases) of the JavaScript Tracker include a full-featured `sp.js` version, and a smaller-filesize `sp.lite.js` version that includes fewer [plugins](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/index.md).
+The [default releases](https://github.com/snowplow/snowplow-javascript-tracker/releases) of the JavaScript Tracker include a full-featured `sp.js` version, and a smaller-filesize `sp.lite.js` version that includes fewer [plugins](../../index.md).
 
 If the plugin you want to use is present in the `sp.js` version you are using, you can start using it without additional installation.
 
 While plugins can be loaded dynamically, self hosting the additional files adds complexity and the additional resource requests can negatively impact page performance.
 For this reason, it can be desirable to have your own version of `sp.js` that includes _just_ the features you need, to both reduce the filesize and not require loading additional script resources.
 
-The UMD files (which work in the browser) can be downloaded from [GitHub releases](https://github.com/snowplow/snowplow-javascript-tracker/releases) or they are available via [third party CDNs](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/hosting-the-javascript-tracker/third-party-cdn-hosting/index.md).
+The UMD files (which work in the browser) can be downloaded from [GitHub releases](https://github.com/snowplow/snowplow-javascript-tracker/releases) or they are available via [third party CDNs](../../../tracker-setup/hosting-the-javascript-tracker/third-party-cdn-hosting/index.md).
 
 ## Custom Plugin Selections
 To do this, you'll need to install [git](https://git-scm.com/) and [Node.js](https://nodejs.org/en/) 14 or 16 (at the time of writing) then open a Terminal or Command Prompt and run the following:
@@ -35,7 +35,7 @@ Once complete (it might take a minute or two), you'll find your brand new `sp.js
 
 ## Including Custom Plugins
 The above only works for the official plugins included in the `snowplow-javascript-tracker` repository.
-If you have [developed your own plugins](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/creating-your-own-plugins/index.md), or want to include plugins from third parties, the process is similar, but with some additional small code changes:
+If you have [developed your own plugins](../../creating-your-own-plugins/index.md), or want to include plugins from third parties, the process is similar, but with some additional small code changes:
 
 1. Include the plugin as a dependency in `trackers/javascript-tracker/package.json`
 1. Import the plugin in `trackers/javascript-tracker/src/features.ts`
@@ -118,7 +118,7 @@ How you pass these options to the plugin varies by when the plugin is loaded:
 ### Bundled Plugins
 
 Bundled plugins will automatically include any exposed methods.
-Additional configuration is typically passed through via the [`contexts`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md#adding-predefined-contexts) configuration, which is extracted and passed to the plugin in `features.ts`, described in [Including Custom Plugins](#including-custom-plugins).
+Additional configuration is typically passed through via the [`contexts`](../../../tracker-setup/initialization-options/index.md#adding-predefined-contexts) configuration, which is extracted and passed to the plugin in `features.ts`, described in [Including Custom Plugins](#including-custom-plugins).
 
 ```javascript
 snowplow('newTracker', 'sp', '{{collector_url_here}}', {
@@ -151,4 +151,4 @@ snowplow(
 );
 ```
 
-This method can also be used for [Inline Plugins](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/creating-your-own-plugins/index.md#inline-plugins).
+This method can also be used for [Inline Plugins](../../creating-your-own-plugins/index.md#inline-plugins).

@@ -8,7 +8,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Snowplow allows for a highly configurable cookie set up. This allows for you to create optimal first party tracking in a privacy-first world, including [anonymous](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/anonymous-tracking/index.md) and cookieless tracking.
+Snowplow allows for a highly configurable cookie set up. This allows for you to create optimal first party tracking in a privacy-first world, including [anonymous](../../anonymous-tracking/index.md) and cookieless tracking.
 
 ## Flow charts
 
@@ -19,7 +19,7 @@ In the PDF below you'll find a flow chart to help you with your cookie configura
 
 ## Cookie name
 
-Set the cookie name for the tracker instance using the `cookieName` field of the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). The default is “_sp_“. Snowplow uses two cookies, a domain cookie and a session cookie. In the default case, their names are “_sp_id” and “_sp_ses” respectively. If you are upgrading from an earlier version of Snowplow, you should use the default cookie name so that the cookies set by the earlier version are still remembered. Otherwise you should provide a new name to prevent clashes with other Snowplow users on the same page.
+Set the cookie name for the tracker instance using the `cookieName` field of the [configuration object](../../tracker-setup/initialization-options/index.md). The default is “_sp_“. Snowplow uses two cookies, a domain cookie and a session cookie. In the default case, their names are “_sp_id” and “_sp_ses” respectively. If you are upgrading from an earlier version of Snowplow, you should use the default cookie name so that the cookies set by the earlier version are still remembered. Otherwise you should provide a new name to prevent clashes with other Snowplow users on the same page.
 
 Once set, you can retrieve a cookie name thanks to the `getCookieName(basename)` method where basename is `id` or `ses` for the domain and session cookie respectively. As an example, you can retrieve the complete name of the domain cookie with `getCookieName('id')`.
 
@@ -33,7 +33,7 @@ If your website spans multiple subdomains e.g.
 
 You will want to track user behavior across all those subdomains, rather than within each individually. As a result, it is important that the domain for your first party cookies is set to ‘.mysite.com’ rather than ‘www.mysite.com’. By doing so, any values that are stored on the cookie on one of subdomain will be accessible on all the others.
 
-Although it's possible to set this manually, we recommend that you enable automatic discovery and setting of the root domain, using the optional `discoverRootDomain` field of the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). If it is set to `true`, the tracker automatically discovers and sets the `configCookieDomain` value to the root domain.
+Although it's possible to set this manually, we recommend that you enable automatic discovery and setting of the root domain, using the optional `discoverRootDomain` field of the [configuration object](../../tracker-setup/initialization-options/index.md). If it is set to `true`, the tracker automatically discovers and sets the `configCookieDomain` value to the root domain.
 
 :::note
 If you have been setting this manually please note that the automatic detection does not prepend a ‘.’ to the domain. For example a root domain of “.mydomain.com” would become “mydomain.com”. This is because the library we use for setting cookies doesn’t care about the difference.
@@ -41,7 +41,7 @@ If you have been setting this manually please note that the automatic detection 
 **This will then result in a different domain hash, so we recommend that if you have been setting this manually with a leading ‘.’ to continue to do so manually.**
 :::
 
-To set the domain manually, use the `cookieDomain` field of the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). If this field is not set, the cookies will not be given a domain.
+To set the domain manually, use the `cookieDomain` field of the [configuration object](../../tracker-setup/initialization-options/index.md). If this field is not set, the cookies will not be given a domain.
 
 :::warning
 Changing the cookie domain will reset all existing cookies. As a result, it might be a major one-time disruption to data analytics because all visitors to the website will receive a new `domain_userid`.
@@ -49,7 +49,7 @@ Changing the cookie domain will reset all existing cookies. As a result, it migh
 
 ## Cookie lifetime and duration
 
-Whenever a tracker is initialized on your domain, it will set domain-specific visitor’s cookies. By default, these cookies will be active for 2 years. You can change this duration using the `cookieLifetime` [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md) parameter or `setVisitorCookieTimeout` method.
+Whenever a tracker is initialized on your domain, it will set domain-specific visitor’s cookies. By default, these cookies will be active for 2 years. You can change this duration using the `cookieLifetime` [configuration object](../../tracker-setup/initialization-options/index.md) parameter or `setVisitorCookieTimeout` method.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -102,7 +102,7 @@ would set the session cookie lifespan to an hour.
 
 ## Cookie samesite and secure attributes
 
-Set the cookie samesite attribute for the tracker instance using the `cookieSameSite` field of the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). The default is `None` for backward compatibility reasons, however `Lax` is likely a better option for most use cases given the reasons below. Valid values are "`Strict`", "`Lax`", "`None`" or `null`. `null` will not set the SameSite attribute.
+Set the cookie samesite attribute for the tracker instance using the `cookieSameSite` field of the [configuration object](../../tracker-setup/initialization-options/index.md). The default is `None` for backward compatibility reasons, however `Lax` is likely a better option for most use cases given the reasons below. Valid values are "`Strict`", "`Lax`", "`None`" or `null`. `null` will not set the SameSite attribute.
 
 It is recommended to set either "`None`" or "`Lax`". You must use "`None`" if using the tracker in a third party iframe. "`Lax`" is good in all other cases and must be used if not setting Secure to true.
 
@@ -122,4 +122,4 @@ When choosing local storage, the Tracker will additionally store events in local
 
 ## Local storage queue size
 
-Because most browsers limit local storage to around 5mb per site, you may want to limit the number of events the tracker will queue in local storage if they fail to send. The default is a max queue size of 1000, but you may wish to reduce this if your web application also makes use local storage. To do so, you should set the optional `maxLocalStorageQueueSize` field of the [configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md) is set to your desired value (e.g. 500).
+Because most browsers limit local storage to around 5mb per site, you may want to limit the number of events the tracker will queue in local storage if they fail to send. The default is a max queue size of 1000, but you may wish to reduce this if your web application also makes use local storage. To do so, you should set the optional `maxLocalStorageQueueSize` field of the [configuration object](../../tracker-setup/initialization-options/index.md) is set to your desired value (e.g. 500).

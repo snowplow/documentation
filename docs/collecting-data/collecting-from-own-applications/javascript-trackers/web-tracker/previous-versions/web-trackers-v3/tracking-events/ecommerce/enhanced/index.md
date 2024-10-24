@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 ```
 
 :::tip
-This plugin has been superseded by the [Snowplow ecommerce plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md). We highly recommend using this newer plugin, which is more fully featured and allows you to use the DBT model we provide.
+This plugin has been superseded by the [Snowplow ecommerce plugin](../index.md). We highly recommend using this newer plugin, which is more fully featured and allows you to use the DBT model we provide.
 :::
 
 This plugin is based on Google Analytics' Enhanced Ecommerce package. For more information on the Enhanced Ecommerce functions please see the Google Analytics [documentation](https://developers.google.com/analytics/devguides/collection/analyticsjs/enhanced-ecommerce).
@@ -366,4 +366,3 @@ addEnhancedEcommercePromoContext({
 
   </TabItem>
 </Tabs>
-

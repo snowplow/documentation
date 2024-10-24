@@ -70,15 +70,14 @@ export const DocsTutorialsTabsDesktop: React.FC = () => {
     setTab(getCurrentTab(location.pathname))
   }, [location.pathname])
 
-  const handleChange = (_e: SyntheticEvent, newValue: DocsTab) => {
-    history.push(newValue)
-    setTab(newValue)
+  const changeTab = (tab: DocsTab) => {
+    history.push(tab)
+    setTab(tab)
   }
 
   return (
     <Tabs
       className="desktop-only docs-tutorial-tabs"
-      onChange={handleChange}
       value={tab}
       TabScrollButtonProps={{
         className: 'docs-tutorial-tab-scroll-button',
@@ -87,8 +86,14 @@ export const DocsTutorialsTabsDesktop: React.FC = () => {
         className: 'docs-tutorial-tab-indicator',
       }}
     >
-      <Tab value={DocsTab.Docs} label="Docs" sx={{ textTransform: 'none' }} />
       <Tab
+        onClick={() => changeTab(DocsTab.Docs)}
+        value={DocsTab.Docs}
+        label="Docs"
+        sx={{ textTransform: 'none' }}
+      />
+      <Tab
+        onClick={() => changeTab(DocsTab.Tutorials)}
         value={DocsTab.Tutorials}
         label="Tutorials & Guides"
         sx={{ textTransform: 'none' }}

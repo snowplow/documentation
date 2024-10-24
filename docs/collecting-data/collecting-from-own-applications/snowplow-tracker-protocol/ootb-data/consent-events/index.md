@@ -66,7 +66,7 @@ However, we recommend using the Enhanced Consent events as they are more up-to-d
 
 To learn how to track consent granted and withdrawn events, see:
 
-* On Web, make use of the [Consent plugin on the JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/consent-gdpr/original/index.md).
+* On Web, make use of the [Consent plugin on the JavaScript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/web-trackers-v3/tracking-events/consent-gdpr/original/index.md).
 * On mobile, see the [consent tracking APIs here](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/index.md#creating-a-consent-event).
 
 The tracking consists of two events (`consent_granted` and `consent_withdrawn`) and two context entities (`consent_document` and `gdpr`).

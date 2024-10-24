@@ -96,7 +96,7 @@ The following table shows all the various configuration parameters. Note that th
 | [`preservePageViewIdForUrl`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/page-views/index.md#when-is-the-page-view-id-generated) | Option to change when a new page view ID is generated. Makes it possible to generate a new page view on URL change instead of when tracking a page view, which enables tracking events before the page view event with the same ID. | `false` | `false`, `true`, `full`, `pathname`, `pathnameAndSearch` |
 | [`customFetch`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/configuring-how-events-sent/index.md#custom-event-store) | Enables overriding the default fetch function with a custom implementation. | function | |
 | [`eventStore`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/configuring-how-events-sent/index.md#custom-event-store) | Enables providing a custom EventStore implementation to store events before sending them to the collector. | object | |
-| [`keepalive`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/configuring-how-events-sent/index.md#keepalive-option-for-collector-requests) | Indicates that the request should be allowed to outlive the webpage that initiated it. Enables collector requests to complete even if the page is closed or navigated away from. | boolean | true |
+| [`keepalive`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/configuring-how-events-sent/index.md#keepalive-option-for-collector-requests) | Indicates that the request should be allowed to outlive the webpage that initiated it. Enables collector requests to complete even if the page is closed or navigated away from. | boolean | false |
 | [`synchronousCookieWrite`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/configuring-how-events-sent/index.md#synchronous-cookie-writes) | Whether to write the cookies synchronously. | boolean | false |
 
 Here is a longer code example in which every tracker configuration parameter is set:
@@ -150,7 +150,7 @@ snowplow('newTracker', 'sp', '{{collector_url_here}}', {
   onSessionUpdateCallback: function(clientSession) { }, // Allows the addition of a callback, whenever a new session is generated. Available in v3.11+.
   onRequestSuccess: function(data) => { }, // Available in v3.18.1+
   onRequestFailure: function(data) => { }, // Available in v3.18.1+
-  keepalive: true, // Introduced in v4
+  keepalive: false, // Introduced in v4
   customFetch: undefined, // Introduced in v4
   eventStore: undefined, // Introduced in v4
 });
@@ -199,7 +199,7 @@ newTracker('sp', '{{collector_url_here}}', {
   onSessionUpdateCallback: function(clientSession) { }, // Allows the addition of a callback, whenever a new session is generated. Available in v3.11+.
   onRequestSuccess: function(data) => { }, // Available in v3.18.1+
   onRequestFailure: function(data) => { }, // Available in v3.18.1+
-  keepalive: true, // Introduced in v4
+  keepalive: false, // Introduced in v4
   customFetch: undefined, // Introduced in v4
   eventStore: undefined, // Introduced in v4
 });

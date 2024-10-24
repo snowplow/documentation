@@ -149,7 +149,13 @@ Note that if `localStorage` is inaccessible or you are not using it to store d
 The keepalive feature in the [fetch API](https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API) indicates that the request should be allowed to outlive the webpage that initiated it.
 It enables requests to the Snowplow Collector to complete even if the page is closed or navigated away from.
 
-This option is enabled by default.
+This option is disabled by default.
+
+:::note
+Browsers put a limit on keepalive requests of 64KB.
+You may control the size of the individual POST requests using the `maxPostBytes` option.
+But in case of multiple keepalive requests in parallel (may happen in case of multiple trackers), the limit is shared between them and may cause the requests to fail.
+:::
 
 ```ts
 let tracker = newTracker("...", "...", {

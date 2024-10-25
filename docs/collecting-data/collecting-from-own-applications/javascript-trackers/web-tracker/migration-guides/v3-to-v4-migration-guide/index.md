@@ -196,6 +196,7 @@ To keep using old plugins, they will have to be [explicitly installed](/docs/col
 - The plugin now uses `capture`-phase event listeners; previously it relied on `target` or `bubble`-phase events
 - Links within Custom Components and open-mode shadow trees should now be trackable but were previously ignored
 - The manual `trackLinkClick` method can now accept an element to build a payload from, rather than requiring the called to construct the event payload
+- Link click tracking now also tracks links with empty `href` attributes and assigns `about:invalid` as the `targetUrl` to avoid the event failing schema validation. Such links will also be reported as warnings in the console.
 
 #### YouTube media
 

@@ -75,7 +75,7 @@ A dialog will appear, allowing you to upload an image and provide additional con
 
 ### Properties
 
-This section allows you to specify how each property for a selected event data structure should be populated.
+This section allows you to specify how each property for a selected event or entity data structure should be populated.
 
 The dialog displays the list of properties for the selected data structure will be listed here, with the ability to provide the exact value/s or a description of how to populate these properties when the event is triggered.
 

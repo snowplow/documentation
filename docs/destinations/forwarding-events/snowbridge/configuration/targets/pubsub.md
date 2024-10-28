@@ -7,7 +7,7 @@ description: "Write data to a Pubsub topic."
 
 Authentication is done using a [GCP Service Account](https://cloud.google.com/docs/authentication/application-default-credentials#attached-sa). Create a service account credentials file, and provide the path to it via the `GOOGLE_APPLICATION_CREDENTIALS` environment variable.
 
-Snowbridge connects to PubSub using [Google's Go Pubsub sdk](cloud.google.com/go/pubsub), which establishes a grpc connection with TLS encryption.
+Snowbridge connects to PubSub using [Google's Go Pubsub sdk](https://cloud.google.com/go/pubsub), which establishes a grpc connection with TLS encryption.
 
 ## Configuration options
 

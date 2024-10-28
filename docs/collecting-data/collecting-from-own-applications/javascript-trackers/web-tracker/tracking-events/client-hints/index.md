@@ -32,7 +32,7 @@ The Client Hints context entity is **automatically tracked** once configured.
 
 | Tracker Distribution | Included |
 |----------------------|----------|
-| `sp.js`              | ✅        |
+| `sp.js`              | ❌        |
 | `sp.lite.js`         | ❌        |
 
 **Download:**

@@ -210,7 +210,7 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/browser-features/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/ 301
 /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/button-click/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/button-click/ 301
 /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/client-hints/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/client-hints/ 301
-/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/consent/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/consent-gdpr/original/ 301
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/consent/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/web-trackers-v3/tracking-events/consent-gdpr/original/ 301
 /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/debugger/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/testing-debugging/ 301
 /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/ecommerce/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/original/ 301
 /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/plugins/enhanced-consent/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/consent-gdpr/ 301
@@ -290,3 +290,7 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/getting-started-on-snowplow-bdp-cloud/* /docs/getting-started-on-bdp/cloud/ 301
 /docs/modeling-your-data/analytics-sdk/* /docs/destinations/analytics-sdk/:splat 301
 /docs/destinations/forwarding-events/elasticsearch/* /docs/pipeline-components-and-applications/elasticsearch/:splat 301
+
+# Deprecated JS tracker plugins
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/consent-gdpr/original/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/web-trackers-v3/tracking-events/consent-gdpr/original/
+/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/original/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/web-trackers-v3/tracking-events/ecommerce/original/

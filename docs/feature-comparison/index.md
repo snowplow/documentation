@@ -54,7 +54,7 @@ To find out more about the support services offered to Snowplow BDP customers se
 | Marketing Attribution | ✅  | ❌ |
 | Video & Media | ✅  | ❌ |
 | [Unified, Utils, Attribution, Media, Normalize data models](/docs/modeling-your-data/index.md)  | ✅ | ❌ |
-| **ECommerce Analytics** |  | |
+| **Ecommerce Analytics** |  | |
 | Ecommerce Analytics | ✅  | ❌ |
 | [Ecommerce data model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md)  | ✅ | ❌ |
 | <h3>Performance & Resilience</h3> | BDP |[Community Edition](/docs/getting-started-on-community-edition/index.md)|

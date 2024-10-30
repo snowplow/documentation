@@ -12,11 +12,6 @@ import StepImage from './images/step.png';
 import SettingsImage from './images/settings.png';
 ```
 
-:ℹ️
-
-This data app is currently in Public Preview and features may change without notice. 
-
-:::
 
 ## Introduction
 

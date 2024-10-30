@@ -11,7 +11,8 @@ To overwrite these macros correctly with those in your project, ensure you prefi
 
 #### `channel_classification` macro
 
-> The [`channel_classification`](https://github.com/snowplow/dbt-snowplow-attribution/blob/main/macros/channel_classification.sql) macro is used to perform channel classifications. We encourage users to define this at the upstream source level already, if possible. If you are using `snowplow_unified_views` or `sessions` as a base for the path source you can just leave this untouched, and the Attribution package will take the `default_channel_group` field as is. Alternatively, you can overwrite the logic based on the fields you may have in your source table. It is highly recommended that you examine and configure this or the upstream macro when using your own data, as the ROAS calculations and attribution calculations will run against these channel definitions, and the default values will not consider any custom marketing parameters.
+> The [`channel_classification`](https://github.com/snowplow/dbt-snowplow-attribution/blob/main/macros/channel_classification.sql) macro is used to classify each marketing touchpoint from your path source deciding which marketing channel it was driven by. Be default it expects an already classified field called `default_channel_group`. In case the Attribution package is used together with the Unified Digital package, it is advisable to classify your pageviews and sessions upstram using the `channel_group_guery()` macro. For an in-depth guide on how to achive this check the [channel group query](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/overridable-macros/index.md#icon-iconfa-brands-fa-github-channel_group_query) macro documentation.
+
 
 #### `attribution_overview` macro
 

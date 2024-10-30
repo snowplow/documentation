@@ -75,9 +75,9 @@ Under **Tag Type**, you can choose what type of command is compiled and sent to 
 Tags that can derive their parameters from a Google Tag Manager variable are:
 
 - [Ad Tracking](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ads/index.md)
-- [Cart Tracking](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/original/index.md)
+- [Cart Tracking](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/web-trackers-v3/tracking-events/ecommerce/original/index.md)
 - [Error Tracking](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/errors/index.md)
-- [Consent](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/consent-gdpr/original/index.md)
+- [Consent](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/web-trackers-v3/tracking-events/consent-gdpr/original/index.md)
 - [Self-describing Event](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/custom-tracking-using-schemas/index.md#tracking-a-custom-event-self-describing)
 - [Site Search](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/site-search/index.md)
 - [Social Interaction](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/social-media/index.md)

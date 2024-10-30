@@ -255,9 +255,54 @@ And rules must meet some requirements to be considered valid:
   - `com.acme.*.marketing.*` is invalid
   - `com.acme.*.*` is valid
 
+### Named global entities
+
+From version 4 onwards, you can alternatively supply the definitions as a mapping object.
+This associates each global entity with a "name" or "tag" that can be used to reference it in future calls.
+
+For example, in the below we associate a global entity definition with the name `example`, and can then update or remove it by name in later calls.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+// add the entity defined by `globalContextDefinition` with the name "example"
+var globalContextDefinition = [ruleSet, contextEntityToAdd];
+window.snowplow('addGlobalContexts', { example: globalContextDefinition });
+
+// update the global entity named "example"; this replaces the entity from `globalContextDefinition`
+var globalContextDefinition2 = [ruleSet, differentContextEntity];
+window.snowplow('addGlobalContexts', { example: globalContextDefinition2 });
+
+// remove the global entity named "example"; it will no longer appear on subsequent events
+window.snowplow('removeGlobalContexts', ["example"]);
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+// add the entity defined by `globalContextDefinition` with the name "example"
+var globalContextDefinition = [ruleSet, contextEntityToAdd];
+addGlobalContexts({ example: globalContextDefinition });
+
+// update the global entity named "example"; this replaces the entity from `globalContextDefinition`
+var globalContextDefinition2 = [ruleSet, differentContextEntity];
+addGlobalContexts({ example: globalContextDefinition2 });
+
+// remove the global entity named "example"; it will no longer appear on subsequent events
+removeGlobalContexts(["example"]);
+```
+
+  </TabItem>
+</Tabs>
+
+Names can be whatever makes sense to you, but each name can only be associated with a single entity definition at a time (additions with the same name will replace the previous value).
+The value for the named entity can be the same as unnamed global entities defined with the array method, including generator functions, filter functions, and rulesets and are processed equivalently.
+
 ### Global contexts methods
 
-These are the standard methods to add and remove global contexts:
+These are the standard methods to add and remove global context entities:
 
 #### `addGlobalContexts`
 To add global contexts:
@@ -265,12 +310,30 @@ To add global contexts:
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
 
-`snowplow('addGlobalContexts', [array of global contexts])`
+```javascript
+// unnamed global entities
+snowplow('addGlobalContexts', [array of global contexts])
+
+// named global entities
+snowplow('addGlobalContexts', {
+  name: globalContext1,
+  name2: globalContext2,
+})
+```
 
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
 
- `addGlobalContexts([array of global contexts])`
+```javascript
+// unnamed global entities
+addGlobalContexts([array of global contexts])
+
+// named global entities
+addGlobalContexts({
+  name: globalContext1,
+  name2: globalContext2,
+})
+```
 
   </TabItem>
 </Tabs>
@@ -282,17 +345,29 @@ To remove a global context:
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
 
-`snowplow('removeGlobalContexts', [array of global contexts])`
+```javascript
+// unnamed global entities
+snowplow('removeGlobalContexts', [array of global contexts])
+
+// named global entities
+snowplow('removeGlobalContexts', ["name", "name2"]) // array of entity names
+```
 
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
 
-`removeGlobalContexts([array of global contexts])`.
+```javascript
+// unnamed global entities
+removeGlobalContexts([array of global contexts])
+
+// named global entities
+removeGlobalContexts(["name", "name2"]) // array of entity names
+```
 
   </TabItem>
 </Tabs>
 
-Global context entities are removed by doing a JSON match of the context to be removed with the added context. So the objects have to be the same in order for them to be matched.
+Unnamed global context entities are removed by doing a JSON match of the context to be removed with the added context. So the objects have to be the same in order for them to be matched.
 
 For example:
 
@@ -325,17 +400,21 @@ removeGlobalContexts([entity]); // remove the global context
 
 #### `clearGlobalContexts`
 
-To remove all global contexts:
+To remove all named and unnamed global context entities:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
 
-`snowplow('clearGlobalContexts')`
+```javascript
+snowplow('clearGlobalContexts');
+```
 
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
 
-`clearGlobalContexts()`
+```javascript
+clearGlobalContexts();
+```
 
   </TabItem>
 </Tabs>

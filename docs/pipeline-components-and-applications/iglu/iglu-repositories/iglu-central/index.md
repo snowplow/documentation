@@ -4,27 +4,25 @@ date: "2021-03-26"
 sidebar_position: 1000
 ---
 
-[Iglu Central](http://iglucentral.com/) is a public repository of JSON Schemas hosted by Snowplow Analytics.
+[Iglu Central](http://iglucentral.com/) is a public repository of JSON Schemas hosted by Snowplow Analytics.
 
-As far as we know, Iglu Central is the first public **machine-readable** schema repository - all prior efforts we have seen are human-browsable directories of articles about schemas (e.g. [schema.org](http://schema.org/)).
+As far as we know, Iglu Central is the first public **machine-readable** schema repository - all prior efforts we have seen are human-browsable directories of articles about schemas (e.g. [schema.org](http://schema.org/)).
 
-Think of Iglu Central as like [RubyGems.org](http://rubygems.org/) or [Maven Central](http://central.maven.org/) but for storing publically-available JSON Schemas.
+Think of Iglu Central as like [RubyGems.org](http://rubygems.org/) or [Maven Central](http://central.maven.org/) but for storing publically-available JSON Schemas.
 
 ## Technical architecture
 
-Under the hood, Iglu Central is built and run as a static Iglu repository, which is simply an Iglu repository server structured as a static website serving its whole content over http, and is hosted on Amazon S3.
+Under the hood, Iglu Central is built and run as a static Iglu repository, which is simply an Iglu repository server structured as a static website serving its whole content over http, and is hosted on Amazon S3.
 
 ![iglu-central-img](images/iglu-central.png)
 
-The [deployment process](/docs/pipeline-components-and-applications/iglu/iglu-central-setup/index.md) for Iglu Central is documented on this wiki in case a user wants to setup a public mirror or private instance of Iglu Central.
+The [deployment process](/docs/pipeline-components-and-applications/iglu/iglu-central-setup/index.md) for Iglu Central is documented on this wiki in case a user wants to setup a public mirror or private instance of Iglu Central.
 
-Iglu Central is available for view at [http://iglucentral.com](http://iglucentral.com/). Although Iglu Central is primarily designed to be consumed by [Iglu clients](/docs/pipeline-components-and-applications/iglu/iglu-clients/index.md), the root index page for Iglu Central links to all schemas currently hosted on Iglu Central.
+Iglu Central is available for view at [http://iglucentral.com](http://iglucentral.com/). Although Iglu Central is primarily designed to be consumed by [Iglu clients](/docs/pipeline-components-and-applications/iglu/iglu-clients/index.md), the root index page for Iglu Central links to all schemas currently hosted on Iglu Central.
 
 ## Self Hosting Iglu Central schemas
 
-The schemas for Iglu Central are stored in GitHub, in [snowplow/iglu-central](https://github.com/snowplow/iglu-central).
-
-Some components of Snowplow require an Iglu Server, and a static repo will not work. This means you'll want to host a mirror of Iglu Central. You can mirror Iglu Central using `[igluctl](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md)`:
+The schemas for Iglu Central are stored in GitHub, in [snowplow/iglu-central](https://github.com/snowplow/iglu-central). You can mirror Iglu Central using `[igluctl](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md)`:
 
 ```bash
 git clone https://github.com/snowplow/iglu-central
@@ -32,4 +30,4 @@ cd iglu-central
 igluctl static push --public schemas/ http://CHANGE-TO-MY-IGLU-URL.elb.amazonaws.com 00000000-0000-0000-0000-000000000000
 ```
 
-For further information on Iglu Central, consult the [Iglu Central setup guide](/docs/pipeline-components-and-applications/iglu/iglu-central-setup/index.md).
+For further information on Iglu Central, consult the [Iglu Central setup guide](/docs/pipeline-components-and-applications/iglu/iglu-central-setup/index.md).

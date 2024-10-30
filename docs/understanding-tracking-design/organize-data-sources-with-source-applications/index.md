@@ -6,6 +6,16 @@ sidebar_label: "🆕 Source Applications"
 
 For data collection, you will often have different sources of information that correspond to applications designed for a particular purpose. These are what we will refer to as Source Applications.
 
+:::tip
+A guideline, which will address your needs most of the time, is to think of a Source Application as an independently deployable application system.
+For example: 
+- An Android mobile application.
+- An iOS mobile application.
+- A web application.
+
+This will let you best manage changes you make to the available Application Contexts etc. and make sure it reflects as closely as possible the current data state.
+:::
+
 To illustrate, let's consider Snowplow. We can identify several applications designed for distinct purposes, each serving as a separate data source for behavioral data, or in other words, a Source Application:
 
 - The Snowplow website that corresponds to the application served under www.snowplow.io

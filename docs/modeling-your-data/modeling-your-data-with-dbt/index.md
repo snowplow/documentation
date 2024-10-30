@@ -4,13 +4,6 @@ description: "Information for our dbt packages including quickstarts, configurat
 sidebar_position: 10
 ---
 
-```mdx-code-block
-import ThemedImage from '@theme/ThemedImage';
-import { AllAccelerators } from "@site/src/components/AcceleratorAdmonitions";
-
-<AllAccelerators/>
-```
-
 [dbt](https://docs.getdbt.com/) enables analytics engineers to transform data in their warehouses by simply writing select statements. Snowplow has written and maintain a number of dbt packages to model your snowplow data for various purposes and produce derived tables for use in analytics, AI, ML, BI, or reverse ETL tools.
 
 Using Snowplow's dbt packages means you can draw insight and value from your data *quicker*, *easier*, and *cheaper* than building your own modeling from scratch.

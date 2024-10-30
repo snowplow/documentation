@@ -1,7 +1,7 @@
 ---
 title: "Managing data structures via the API"
 sidebar_label: "Using the API"
-sidebar_position: 2
+sidebar_position: 3
 sidebar_custom_props:
   offerings:
     - bdp
@@ -167,11 +167,11 @@ curl 'https://console.snowplowanalytics.com/api/msc/v1/organizations/cad39ca5-3e
 
 Please note:
 
-- This example shows an example of deploying from `VALIDATED` to `DEV`. The method is the same for Production, but you would change the variables where `"source": "DEV"` and `"target": "PROD"`
+- This example demonstrates deployment from `VALIDATED` to `DEV`. The method is the same for Production, but you would change the variables where `"source": "DEV"` and `"target": "PROD"`
 - The API enforces a workflow of validating, testing on development and then deploying to production. To achieve this you deploy from one environment to another; from (virtual environment) `VALIDATED` to `DEV`, then `DEV` to `PROD`.
 - Only users designated as "admin" in the console have the permissions to promote from `DEV` to `PROD`.
 - There is a sync option that will return the response of the deployment request directly. Otherwise you can poll for deployment responses using the deployment ID.
-- The property for `message` can be sent with a deployment which will capture any change log notes that will be stored against the deployment. This feature is only available to Enterprise tier accounts in the console.
+- The property for `message` can be sent with a deployment which will capture any change log notes that will be stored against the deployment. (Note that this specific property is a bolt-on feature and might not be available for your account.)
 
 ## Managing meta data
 

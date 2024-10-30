@@ -23,7 +23,6 @@ Only system administrators can set up SSO for their company.
 
 ### Requirements
 
-- SSO is available to customers on the Ascent & Summit tiers.
 - Your identity provider must adhere to the OASIS SAML 2.0 protocol.
 - All users of an SSO-enabled instance of Snowplow must authenticate through the identity provider.
 

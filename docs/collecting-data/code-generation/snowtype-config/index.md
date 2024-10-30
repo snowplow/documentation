@@ -62,13 +62,15 @@ options?: {
     }
     update?: {
       /* Update your configuration file automatically and regenerate the code of the latest available update. */
-      regenerateOnUpdate?: boolean
+      regenerateOnUpdate?: boolean;
       /* The maximum SchemaVer update to show an available update notification for. */
-      maximumBump?: "major" | "minor" | "patch"
+      maximumBump?: "major" | "minor" | "patch";
+      /* The `update` command will only display updates for Data Structures that have been deployed to production environment. */
+      showOnlyProdUpdates?: boolean;
     }
     patch?: {
       /* Automatically regenerate the code after a successful patch operation. */
-      regenerateOnPatch?: boolean
+      regenerateOnPatch?: boolean;
     }
   }
 }
@@ -150,8 +152,9 @@ type SnowtypeConfig = {
         disallowDevSchemas?: boolean;
       }
       update?: {
-        regenerateOnUpdate?: boolean
-        maximumBump?: "major" | "minor" | "patch"
+        regenerateOnUpdate?: boolean;
+        maximumBump?: "major" | "minor" | "patch";
+        showOnlyProdUpdates?: boolean;
       }
       patch?: {
         regenerateOnPatch?: boolean

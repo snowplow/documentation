@@ -72,6 +72,39 @@ Break down the barriers that exist between data producers and data consumers, by
 
 ![Key elements of a Data Product](images/key-elements-of-a-data-product.png)
 
+**Volume metrics**; data products can detect events ingested in your pipeline that match the configured event specifications. This allows your team to monitor occurrence-related metrics for events being tracked with specific [event specification IDs](/docs/collecting-data/code-generation/commands/index.md#snowtype-patch).
+
+**Benefits:**
+
+You will be able to view several items in the UI that help detect anomalies or potential misconfigurations in trackers that are either not sending the expected events or are using incorrect [application IDs](/docs/understanding-tracking-design/organize-data-sources-with-source-applications/index.md#application-ids). This is particularly useful during the development phase when implementing tracking for a specific application using [Snowtype](/docs/collecting-data/code-generation). These elements include:
+
+* A counter for each event specification, showing the total number of events detected from the tracked application IDs in the last 30 days.
+* A 'last seen' field for each event specification, indicating when the last event matching the event specification ID was detected.
+* A list of application IDs from which events are being tracked, displayed for each event specification. For each application ID, a status will be shown with different colors:
+  * __Green__: Event specifications are being tracked and identified with the specific application ID inherited from the configured [source applications](/docs/understanding-tracking-design/organize-data-sources-with-source-applications/index.md).
+  * __Gray__: No event specifications are being tracked for an application ID inherited from the configured source applications.
+  * __Yellow__: Event specifications are being tracked for an application ID that has not been configured or inherited from the source applications.
+
+:::note
+
+Some data products, such as [__Base Web__](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-poducts/data-product-templates/index.md#base-web) and [__Base Mobile__](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-poducts/data-product-templates/index.md#base-mobile), contain standard events (e.g., _page pings_, _link clicks_, _screen view_, _application install_). 
+
+For these data products, the volume metrics will behave differently:
+
+- If no standard events are being tracked with an application ID different from those inherited from the source applications set up in the data product, the behavior will be the same as for a normal data product.
+
+- If standard events are being tracked with application IDs different from those inherited from the source applications set up in the data product, a toggle will appear above the event specification list. 
+
+  This toggle will be disabled by default, so the metrics displayed will relate only to the application IDs inherited from the source applications set up in the data product.
+  
+  ![](images/data_product_metrics_default.png)
+
+  If the toggle is enabled, it will show the metrics for all the application IDs found for the standard events (not just the ones inherited from the data product).
+
+  ![](images/data_product_metrics_toggled.png)
+
+::: 
+
 ## How data products help with governance, data quality and data discoverability
 
 The **data structures** that you attach to your event specification describe the [structure of the data](/docs/understanding-your-pipeline/schemas/). They validate that the values of the properties contained within your events and entities are **valid** as they pass through your pipeline.

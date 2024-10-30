@@ -29,7 +29,7 @@ For Snowplow BDP customers, dbt projects can be configured and scheduled in the 
 
 :::info
 
-Our dbt models are available under a mix of licenses. For more information about how to get access to these models, please contact us by requesting a demo if you are new to Snowplow or by reaching out to our support team.
+Our dbt packages are available under a mix of licenses. For more information about how to get access to these packages, please contact us by requesting a demo if you are new to Snowplow or by reaching out to our support team.
 
 :::
 

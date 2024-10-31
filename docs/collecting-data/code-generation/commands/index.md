@@ -33,6 +33,7 @@ Generates tracking code based on configuration on the configuration file. Can ge
  -  `--validations` Add runtime validation on events. _Currently available for the Browser tracker_.
  -  `--no-validations` Do not add runtime validation on events.
  -  `--disallowDevSchemas` Disallow generation of code using schemas deployed on DEV environment. _Sending events using schemas deployed on DEV, will result in failed events in production pipelines._ (default: false)
+ -  `--deprecateOnlyOnProdAvailableUpdates` Show deprecation warnings only when there are PROD available schema updates. (default: false)
 
 ### `snowtype update`
 

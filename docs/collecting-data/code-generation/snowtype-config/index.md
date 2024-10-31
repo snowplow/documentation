@@ -59,6 +59,8 @@ options?: {
       validations?: boolean;
       /* Disallow generation of code using schemas only deployed on DEV environment. */
       disallowDevSchemas?: boolean;
+      /* Show deprecation warnings only when there are PROD available schema updates. */
+      deprecateOnlyOnProdAvailableUpdates?: boolean;
     }
     update?: {
       /* Update your configuration file automatically and regenerate the code of the latest available update. */
@@ -150,6 +152,7 @@ type SnowtypeConfig = {
         instructions?: boolean;
         validations?: boolean;
         disallowDevSchemas?: boolean;
+        deprecateOnlyOnProdAvailableUpdates?: boolean;
       }
       update?: {
         regenerateOnUpdate?: boolean;

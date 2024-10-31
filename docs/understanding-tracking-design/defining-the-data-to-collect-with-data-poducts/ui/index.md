@@ -24,7 +24,7 @@ After selecting "Create from scratch" a form will appear on the page. Enter your
 
 This page allows you to create multiple event specifications. You can click on any row to enter the details on this screen, or you can complete the information later.
 
-When clicking on a event specification row, a page will allow you to enter additional information into separate modals:
+When clicking on an event specification row, a page will allow you to enter additional information into separate modals:
 
 - **Event information**; describes information such as which applications the event fires in
 - **Event data structure**; determines how your data is structured and define the types of properties of the event

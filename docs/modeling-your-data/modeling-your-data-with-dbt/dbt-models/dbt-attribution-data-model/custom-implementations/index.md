@@ -46,11 +46,13 @@ Next the model is aggregating data from both the channel and campaign attributio
 
 Here comes the second time based filter which you might want to adjust. Depending on whether you run your package based on a rolling window or a specific conversion with start and end dates (aka a specific period which should be used in a drop and recompute manner with --full-refresh flag etc.) you filter on the data in the following manner:
 
+```jinja2
   {% if not var('snowplow__conversion_window_start_date') == '' and not var('snowplow__conversion_window_end_date') == '' %}
     cv_tstamp >= '{{ var("snowplow__conversion_window_start_date") }}' and cv_tstamp < '{{ var("snowplow__conversion_window_end_date") }}'
   {% else %}
     cv_tstamp >= {{ snowplow_utils.timestamp_add('day', -var("snowplow__conversion_window_days"), last_processed_cv_tstamp) }}
   {% endif%}
+ ```
   
 Finally, the model takes the aggregated conversion level data and does a series of unions to aggregate metrics by attribution type (.first touch, last touch etc.) Here again you might want to adjust what specific metrics you are interested in, add your own etc.
 
@@ -64,7 +66,7 @@ In that case, you can simply overwrite both the `snowplow__conversion_window_sta
 Bear in mind that it needs a full-refresh every time you process the package:
  
 ```bash
- dbt run --select snowplow_web tag:snowplow_web_incremental --full-refresh --vars 'snowplow__allow_refresh: true'
+ dbt run --select snowplow_attribution --full-refresh --vars 'snowplow__allow_refresh: true'
 ```
 
 ## Bringing your own sources - customizing the paths_to_conversions() macro

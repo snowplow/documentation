@@ -25,4 +25,3 @@ https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/tra
 ```hcl reference
 https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/snowplow-builtin/spGtmssPreview-full-example.hcl
 ```
-assets/docs/configuration/transformations/snowplow-builtin/spGtmssPreview-full-example.hcl

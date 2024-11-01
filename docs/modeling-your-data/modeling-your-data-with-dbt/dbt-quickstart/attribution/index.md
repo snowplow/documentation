@@ -101,7 +101,7 @@ Your channel and spend data will be summed separately in the `attribution_overvi
 
 <details>
     <summary>Running both Unified and Attribution dbt packages from the same project</summary>
-Although auto-deployed packages managed via Console run in separate projects, for others there may be use cases when it is more practical to run both the [Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) and Attribution dbt packages from the same project. We purposefully did not directly link the two packages to allow for flexibility but there is a way to run them from the same project. When specifying the sources just make sure you change the default source references to: ref('')  instead of hard coding the schema.table_name for these variables in order for dbt to establish a proper lineage graph to process things in order:
+Although auto-deployed packages managed via Console run in separate projects, for others there may be use cases when it is more practical to run both the Unified Digital and Attribution dbt packages from the same project. We purposefully did not directly link the two packages to allow for flexibility but there is a way to run them from the same project. When specifying the sources just make sure you change the default source references to: ref('')  instead of hard coding the schema.table_name for these variables in order for dbt to establish a proper lineage graph to process things in order:
 
 ```yml
 snowplow__conversion_path_source: "{{ ref('snowplow_unified_views') }}"

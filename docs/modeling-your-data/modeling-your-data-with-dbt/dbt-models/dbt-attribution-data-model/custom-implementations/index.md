@@ -1,5 +1,5 @@
 ---
-title: "Custom Impmplementations"
+title: "Custom Implementations"
 description: "Custom Implementations"
 sidebar_position: 30
 hide_title: true
@@ -71,12 +71,21 @@ Bear in mind that it needs a full-refresh every time you process the package:
 
 ## Bringing your own sources - customizing the paths_to_conversions() macro
 
-There may be cases where you opt for not relying on the snowplow-unified based source tables. The main thing to care about is that you have a joined user_id in both the conversion and path source. The package provides a mechanism to add a user stitching with the user of a user_mapping table that you can also define as a source, but most likely you already have that unique user id in your own data. 
+There may be cases where you opt for not relying on the snowplow-unified based source tables. The main thing to care about is that you have a joined user_id in both the conversion and path source.
 
-In theory, you could create a view on top of your source data to make sure you align the expected input fields (e.g. call the unique user_id `stitched_user_id`) and align variables to fit that logic (e.g. making sure you set the variable `snowplow__conversion_stitching` to True, indicating to the model that you already have the id available for the model to use without having to rely on the user mapping table to do that for you, like users who rely on the unified package would probably want).
+There are two ways to go about this:
 
-However, a more convenient option is probably to add a `paths_to_conversions()` macro to your package overwriting the dispatch macro with the same name provided by the package to change the logic to fit your needs.
+#### 1. Align your data sources in a way to fit the package logic
 
+- create a view on top of your source data to make sure you align the expected input fields
+
+- have the common user_id field called `stitched_user_id` in both your path and conversions source view
+    
+- make sure to set the variable `snowplow__conversion_stitching` to True (it means the package will rely on the `stitched_user_id` fields for the joins)
+
+#### 2. Align the package logic to work with your data sources
+
+The `paths_to_conversions()` macro to your package is provided in the form of a dispatch macro that you can simply overwrite by adding a new macro with the same name in your dbt project.
 
 The default structure of the macro is the following:
 
@@ -103,8 +112,8 @@ with paths as (
 select ...
 ```
 
-You would most probably need to touch the `paths` and `conversions` cte to adjust how your data is getting processed incrementally from your custom sources. The `string_aggs` cte joins them into a stringified path of the user journeys / conversion. These stings are then converted to `arrays` in the subsequent cte. 
+You would most probably need to touch the `paths` and `conversions` cte to adjust how your data is getting processed incrementally from your custom sources. The `string_aggs` cte creates the individual paths the user travelled through to get to the conversion. These path strings are then converted to `arrays` in the subsequent cte. 
 
-After that there is a separate macro called `transform_paths` that is being called to provide the sql for the path transformations. It is quite complex, uses generative sql based on the path transformation array provided as a variable to generate specific cts as they are required to simplify the paths for easier comparative analysis. 
+After that there is a separate macro called `transform_paths` that is being called to provide the sql for the path transformations. It is quite complex, we would not be recommending to overwrite these.
 
 After that the macro just selects the final paths_to_conversion data that will be used for the incremental update for a given run for this derived table.

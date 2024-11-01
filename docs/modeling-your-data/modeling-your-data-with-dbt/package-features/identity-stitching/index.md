@@ -57,12 +57,25 @@ Consider processing costs before enabling `snowplow__view_stitching` to `true`. 
 
 ### Custom solutions
 
-#### Customizing user identifiers
-Customizing user identifiers works in the exact same way as customizing session identifiers, although you need to make use of the `snowplow__user_identifiers` variable instead of the `snowplow__session_identifiers`, and `snowplow__user_sql` in place of `snowplow__session_sql`. By default the user identifier is the `domain_userid` field which is found in the atomic events table. 
+#### **Customizing user identifiers**
+Customizing user identifiers works in the exact same way as [customizing session identifiers](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/custom-identifiers/#customizing-session-identifiers), please refer to that link to understand the breakdown of how to set this up, although you need to make use of the `snowplow__user_identifiers` variable instead of the `snowplow__session_identifiers`, and `snowplow__user_sql` in place of `snowplow__session_sql`.
 
-You can find a project with examples to demonstrate this [here](https://github.com/snowplow-incubator/dbt-example-project/tree/main/custom_users).
+```yml title="example default overwrites"
+vars:
+  snowplow_unified:
+    # This is an example of user identifiers for BigQuery
+    snowplow__user_identifiers: [{"schema": "contexts_com_snowplowanalytics_user_identifier_2_*", "field" : "user_id"}, {"schema": "contexts_com_snowplowanalytics_user_identifier_1_*", "field" : "user_id"}]
+    # For Databricks
+    snowplow__user_identifiers: [{"schema": "contexts_com_snowplowanalytics_user_identifier_2", "field" : "user_id"}, {"schema": "contexts_com_snowplowanalytics_user_identifier_1", "field" : "user_id"}]
+    # For Redshift/Postgres
+    snowplow__user_identifiers: [{"schema": "contexts_com_snowplowanalytics_user_identifier_2", "field" : "user_id", "prefix" : "ui_t", "alias": "uidt"}, {"schema": "contexts_com_snowplowanalytics_user_identifier_1", "field" : "user_id", "prefix": "ui_o", "alias": "uido"}]
+    # For Snowflake
+    snowplow__user_identifiers: [{"schema": "contexts_com_snowplowanalytics_user_identifier_2", "field" : "userId"}, {"schema": "contexts_com_snowplowanalytics_user_identifier_1", "field" : "userId"}]
+```
 
-#### Handling Anonymized Users
+If you need a specific way to refer to a custom user you can also use the `snowplow_user_sql` variable, which will override any default or overwrites on `snowplow__user_identifiers`.
+
+#### **Handling Anonymized Users**
 In case of applying Client-side anonymisation with session tracking, the `userId` property of the `contexts_com_snowplowanalytics_snowplow_client_session_1` equates to a null UUID which will appear as `00000000-0000-0000-0000-000000000000` in the database. It may be convenient to make this field an actual NULL field to make it easier to exclude them from modeling (e.g the user mapping table of the Unified Package excludes null values). This can be made possible with the use of the `snowplow__user_sql` variable, however, this means that the extraction from the relevant context/sde field needs to be handled manually. 
 
 Example implementation (Snowflake):

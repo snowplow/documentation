@@ -36,13 +36,13 @@ Point some test environment tracking to `localhost:9090`, and your events should
 You can run Snowbridge locally via Docker:
 
 <CodeBlock language="bash">{
-`docker run --env SNOWBRIDGE_CONFIG_FILE="" --env ACCEPT_LIMITED_USE_LICENSE=yes snowplow/snowbridge:${versions.snowbridge}`
+`docker run --env ACCEPT_LIMITED_USE_LICENSE=yes snowplow/snowbridge:${versions.snowbridge}`
 }</CodeBlock>
 
 The default configuration for Snowbridge uses the `stdin` source and the `stdout` target. So, to test sending data through with no transformations, we can run the following command (where `data.tsv` is a file with Snowplow events in TSV format):
 
 <CodeBlock language="bash">{
-`cat data.tsv | docker run --env SNOWBRIDGE_CONFIG_FILE="" --env ACCEPT_LIMITED_USE_LICENSE=yes -i snowplow/snowbridge:${versions.snowbridge}`
+`cat data.tsv | docker run --env ACCEPT_LIMITED_USE_LICENSE=yes -i snowplow/snowbridge:${versions.snowbridge}`
 }</CodeBlock>
 
 This will print the data to the terminal, along with logs.

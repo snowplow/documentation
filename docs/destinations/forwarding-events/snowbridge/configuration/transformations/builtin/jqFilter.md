@@ -14,14 +14,6 @@ If the provided jq command returns a non-boolean value error, or results in an e
 
 This example filters out all data that doesn't have an `app_id` key.
 
-## Helper Functions
-
-```mdx-code-block
-import JQHelpersSharedBlock from "./reusable/_jqHelpers.md"
-
-<JQHelpersSharedBlock/>
-```
-
 Minimal configuration:
 
 ```hcl reference
@@ -32,4 +24,12 @@ Every configuration option:
 
 ```hcl reference
 https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/snowplow-builtin/jqFilter-full-example.hcl
+```
+
+## Helper Functions
+
+```mdx-code-block
+import JQHelpersSharedBlock from "./reusable/_jqHelpers.md"
+
+<JQHelpersSharedBlock/>
 ```

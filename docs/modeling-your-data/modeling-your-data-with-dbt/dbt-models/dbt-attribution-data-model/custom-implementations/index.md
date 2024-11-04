@@ -33,7 +33,7 @@ The Attribution Overview, though enabled by default, is abstracted away into its
 
 When analyzing marketing attribution it is always going to be a specific analysis with respect to time: there is always a conversion period, which sets the main timeframe of the analysis, during which conversions happen.
 
-By default, the model expects a spend source and the model aggregates that by the sum of total cost by spend and by channel and campaign. This is where it might make sense add custom logic, adjusting the period to filter on the investment period relative to the conversion period in question. By default, it is taking spends before the conversion happened but not more than 90 days earlier spends:
+By default, the model expects a spend source and the model aggregates that (it takes the sum of total cost by spend and by channel and campaign). However, associating the spend data with the attribution data is taken dynamically by default based on the timestamp of the conversion relative to the spend. The view by default takes into account spend data that happened before conversion but no less than 90 days before conversion. This is where it makes sense add custom logic, adjusting the period to filter on the investment period relative to the conversion period in question depending on business requirements.
 
 ```sql
     from spend_with_unique_keys s
@@ -44,7 +44,7 @@ By default, the model expects a spend source and the model aggregates that by th
 
 Next the model is aggregating data from both the channel and campaign attributions table by conversion, summing up all the different kinds of attribution (first touch, last touch etc.)
 
-Here comes the second time based filter which you might want to adjust. Depending on whether you run your package based on a rolling window or a specific conversion with start and end dates (aka a specific period which should be used in a drop and recompute manner with --full-refresh flag etc.) you filter on the data in the following manner:
+Here comes the second time based filter which you might want to adjust in case you run your package incrementally as default. If you adjusted the `snowplow__conversion_window_start_date` and `snowplow__conversion_window_end_date` and ran a specific conversion period, then you can leave it as per default, but for incremental package runs you might want to change the `snowplow__conversion_window_days` variable to extend the analysis period (by default it means it will process last 30 number of days since the last path being available in the paths source (most likely the last page view from the snowplow_unified.views table)).
 
 ```jinja2
   {% if not var('snowplow__conversion_window_start_date') == '' and not var('snowplow__conversion_window_end_date') == '' %}
@@ -54,7 +54,7 @@ Here comes the second time based filter which you might want to adjust. Dependin
   {% endif%}
  ```
   
-Finally, the model takes the aggregated conversion level data and does a series of unions to aggregate metrics by attribution type (.first touch, last touch etc.) Here again you might want to adjust what specific metrics you are interested in, add your own etc.
+Finally, the model takes the aggregated conversion level data and does a series of unions to calculate metrics by attribution type (first touch, last touch etc.) Here again you might want to adjust what specific metrics you are interested in, add your own etc.
 
 ## Running the Attribution Analysis with a specific conversion period only
 By default the Attribution package is designed to be run incrementally. 

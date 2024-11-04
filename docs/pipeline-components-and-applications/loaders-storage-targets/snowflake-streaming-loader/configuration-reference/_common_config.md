@@ -68,11 +68,11 @@ import Link from '@docusaurus/Link';
     <td>Optional. A map of key/value strings to be included in the payload content sent to the webhook.</td>
 </tr>
 <tr>
-    <td><code>sentry.dsn</code></td>
+    <td><code>monitoring.sentry.dsn</code></td>
     <td>Optional. Set to a Sentry URI to report unexpected runtime exceptions.</td>
 </tr>
 <tr>
-    <td><code>sentry.tags.*</code></td>
+    <td><code>monitoring.sentry.tags.*</code></td>
     <td>Optional. A map of key/value strings which are passed as tags when reporting exceptions to Sentry.</td>
 </tr>
 <tr>

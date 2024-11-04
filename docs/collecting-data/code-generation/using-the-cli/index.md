@@ -331,7 +331,7 @@ Then you should add this Schema tracking URL to your configuration file `igluCen
 
 ## Generating event specification instructions
 
-When generating code for Event Specifications, you have the option of delivering the implementation instructions and triggers for each scenario right on the developer's environment.
+When generating code for event specifications, you have the option of delivering the implementation instructions and triggers for each specification right on the developer's environment.
 
 By using the `--instructions` option on the `snowtype generate` command, you can generate a markdown file with all the required information about tracking an event specification.
 

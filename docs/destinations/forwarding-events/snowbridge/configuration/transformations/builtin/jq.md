@@ -18,14 +18,6 @@ The minimal example here returns the input data as a single element array, and t
 
 The jq transformation will remove any keys with null values from the data.
 
-## Helper functions
-
-```mdx-code-block
-import JQHelpersSharedBlock from "./reusable/_jqHelpers.md"
-
-<JQHelpersSharedBlock/>
-```
-
 Minimal configuration:
 
 ```hcl reference
@@ -36,4 +28,12 @@ Every configuration option:
 
 ```hcl reference
 https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/snowplow-builtin/jq-full-example.hcl
+```
+
+## Helper functions
+
+```mdx-code-block
+import JQHelpersSharedBlock from "./reusable/_jqHelpers.md"
+
+<JQHelpersSharedBlock/>
 ```

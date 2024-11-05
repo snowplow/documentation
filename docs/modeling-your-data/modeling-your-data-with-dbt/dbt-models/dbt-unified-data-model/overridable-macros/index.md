@@ -33,7 +33,12 @@ Defines the filter to remove bot events from events processed by the package. Of
 
 ### [<Icon icon="fa-brands fa-github"/>](https://github.com/snowplow/dbt-snowplow-unified/blob/main/macros/field_definitions/channel_group_query.sql) `channel_group_query`
 #### Details
-Defines the channel a user arrived at using various fields, populates the `default_channel_group` field in the `views` and `sessions` tables. Must be a valid sql `select` object e.g. a complete `case when` statement. Used as part of the `platform_independent_fields` macro.
+Defines the channel a user arrived at using various fields, populates the `default_channel_group` field in the `views` and `sessions` tables. Must be a valid sql `select` object e.g. a complete `case when` statement. Used as part of the `platform_independent_fields` macro. 
+
+The defaults can be altered by overwriting the macro in your project with the same name to generate your expected channels if they differ from the default macro which most likely will, as default values will not consider any custom marketing parameters you may have. It will most likely be a long list of case statements where `mkt_source` and `mkt_medium` fields are used for the classification. You can also rely on the help of the `source_category` field that you will get as the package automatically joins the seed file generated table `snowplow_unified_dim_ga4_source_categories` where this macro gets used.
+
+Another consideration to have is to enable the `snowplow__use_refr_if_mkt_null` variable. In that case `src_field` will become a coalesce(mkt_source, refr_source), and it will become coalesce(mkt_medium, refr_medium) for the `medium_field` used as a reference throughout the original definition.
+
 
 ### [<Icon icon="fa-brands fa-github"/>](https://github.com/snowplow/dbt-snowplow-unified/blob/main/macros/field_definitions/engaged_session.sql) `engaged_session`
 #### Details

@@ -14,7 +14,7 @@ Stitching users together is not an easy task: depending on the typical user jour
 
 ## Session stitching
 
-For the out-of-the-box user stitching we opt for the sweet spot method: applying a logic that the majority of our users will benefit from while not introducing compute-heavy calculations. We do this in our core dbt package, the `Snowplow Digital` package that produces a `users` table.
+For the out-of-the-box user stitching we opt for the sweet spot method: applying a logic that the majority of our users will benefit from while not introducing compute-heavy calculations. We do this in our core dbt package, the `Snowplow Unified Digital` package that produces a `users` table.
 
 We provide user stitching on one layer: between the primary `user_identifier` field and a custom defined (`var('snowplow__user_stitching_id')`) id field. The package considers the `user_identifier` field as the primary key for the users table and this would typically be the most "reliable" cookie based field, hence it is defaulted to `domain_userid` when processing web events and the session_context entity based user_id for mobile events. The custom defined id to be used for stitching is recommended to be the `atomic.user_id` field that is used for tracking logged in users. This reliable user identifier field is the common denominator for applying the so called session-stitching in our packages.
 

@@ -287,6 +287,8 @@ Next you add this Data Product to the Snowtype project by copying the first code
 
 ![](./images/sntp-patch.png)
 
+Now your Snowtype configuration file should include the Data Product in the `dataProductIds` array.
+
 ### Generating code and implementation instructions
 
 On your terminal now run `npx @snowplow/snowtype generate --instructions`. If all is as expected, after a few seconds, you will have the following files generated:

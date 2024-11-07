@@ -8,7 +8,7 @@ This transformation base64 decodes the message's data from a base64 byte array, 
 
 `base64Decode` has no options.
 
-Example:
+## Configuration options
 
 ```hcl reference
 https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/builtin/base64Decode-minimal-example.hcl

@@ -8,7 +8,7 @@ sidebar_position: 500
 
 You can read about our telemetry principles [here](/docs/getting-started-on-community-edition/telemetry/index.md).
 
-## Configuration via file:
+## Configuration options
 
 Enabling telemetry:
 

@@ -14,6 +14,8 @@ If the provided jq command returns a non-boolean value error, or results in an e
 
 This example filters out all data that doesn't have an `app_id` key.
 
+## Configuration options
+
 Minimal configuration:
 
 ```hcl reference

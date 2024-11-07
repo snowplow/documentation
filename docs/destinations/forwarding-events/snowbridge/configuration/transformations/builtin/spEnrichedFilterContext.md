@@ -14,6 +14,8 @@ Filters can be used in one of two ways, which is determined by the `filter_actio
 
 The below example keeps messages which contain `prod` in the `environment` field of the `contexts_com_acme_env_context_1` context. Note that the `contexts_com_acme_env_context_1` context is attached more than once, if _any_ of the values at `dev` don't match `environment`, the message will be kept.
 
+## Configuration options
+
 Minimal configuration:
 
 ```hcl reference

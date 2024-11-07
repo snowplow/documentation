@@ -87,14 +87,27 @@ While the intention was never to support non-JSON data, previously to v3 the req
 
 From v3 on, only valid JSON will work, otherwise the message will be considered invalid and sent to the failure target.
 
-## Response rules, and retry configuration
+## Response rules (beta)
 
 :::note
 This feature was added in version 3.0.0
+
+This feature is in beta status because we may make breaking changes in future versions.
 :::
 
-TODO: Finish this - writing retry bit first.
+Response rules allow you to configure how the app deals with failures in sending the data. You can configure a response code and an optional string match on the response body to determine how a failure response is handled. Response codes between 200 and 299 are considered successful, and are not handled by this feature.
 
+There are three categories of failure:
+
+`invalid` means that the data is considered incompatible with the target for some reason. For example, you may have defined a mapping for a given API, but the event being processed happens to have null data for a field that is required by the API. In this instance, retrying the data won't fix the issue, so you would configure an invalid response rule, which identifies responses which indicate this scenario.
+
+Data that matches an invalid response rule is sent to the failure target.
+
+`setup` means that this error is not retryable, but is something which can only be resolved by a change in configuration or a change to the target. An example of this is an authentication failure - retrying will fix the issue, the resolution is to grant the appropriate permissions, or provide the correct API key.
+
+Data that matches a setup response rule is handled by a retey as determined in the `setup` configuration block of [retry configuration](/docs/destinations/forwarding-events/snowbridge/configuration/retries/index.md).
+
+`transient` errors are everything else - we assume that the issue is temporary and retrying will resolve the problem. An example of this is being throttled by an API because too much data is being sent at once. There is no explicit configuration for transient - rather, anything that is not configured as one of the other types is considered transient.
 
 ## Configuration options
 

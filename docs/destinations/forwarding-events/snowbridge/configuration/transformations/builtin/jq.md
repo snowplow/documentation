@@ -23,13 +23,13 @@ The jq transformation will remove any keys with null values from the data.
 Minimal configuration:
 
 ```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/snowplow-builtin/assets/docs/configuration/transformations/builtin/jq-minimal-example.hcl
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/builtin/jq-minimal-example.hcl
 ```
 
 Every configuration option:
 
 ```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/snowplow-builtin/jq-full-example.hcl
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/builtin/jq-full-example.hcl
 ```
 
 ## Helper functions

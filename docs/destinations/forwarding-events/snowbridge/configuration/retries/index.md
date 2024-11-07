@@ -1,0 +1,26 @@
+---
+title: "Retries (beta)"
+description: "Configure retry behaviour."
+---
+
+:::note
+This feature was added in version 3.0.0
+
+This feature is in beta status because we may make breaking changes in future versions.
+:::
+
+This feature allows you to configure the retry behaviour when the target encounters a failure in sending the data. There are two types of failure you can define:
+
+A transient failure is a failure which we expect to succeed again on retry. For example some temporary network error, or when we encounter throttling. Typically you would configure a short backoff for this type of failure. When we encounter a transient failure, we keep processing the rest of the data as normal, under the expectation that everyhting is operating as normal. The failed data is retried after a backoff.
+
+A setup failure is one which we don't expect to be immediately resolved, for example an incorrect address, or an invalid API Key. Typically you would configue a long backoff for this type of failure, under the assumption that the issue needs to be fixed with either a configuration change or a change to the target itself (eg. permissions need to be granted). When we encounter a setup error, we stop attempting to process any data, and the whole app waits for the backoff period before trying again. Setup errors will be retried 5 times, before the app crashes.
+
+As of v3.0.0, only the http target can be configured to return setup errors, via the response rules feature - configuration details for response rules can be found in [the http target configuration section](/docs/destinations/forwarding-events/snowbridge/configuration/targets/http/index.md). For all other targets, all errors returned will be considered transient, and behaviour can be configured using the `tranisent` block of the retry configuration.
+
+Retries will be attempted on an exponential backoff - in other words, on each subsequent failure, the backoff time will double. You can configure transient failures to retry indefinitely by setting `max_attempts` to 0.
+
+## Configuration options
+
+```hcl reference
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/retry-example.hcl
+```

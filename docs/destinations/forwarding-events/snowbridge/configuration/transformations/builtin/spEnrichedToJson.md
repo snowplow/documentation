@@ -4,7 +4,7 @@
 
 `spEnrichedToJson` has no options.
 
-Example:
+## Configuration options
 
 ```hcl reference
 https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/snowplow-builtin/spEnrichedToJson-minimal-example.hcl

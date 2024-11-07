@@ -16,7 +16,7 @@ Invalid preview headers sent to GTM SS can result in requests failing, which may
 First, we validate to ensure that the value is a valid base64 string. Second, we compare the age of the event (based on `collector_tstamp`) to ensure it is under a configurable timeout age. If either of these conditions fail, we treat the message as invalid, and output to the failure target.
 :::
 
-Example:
+## Configuration options
 
 ```hcl reference
 https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/snowplow-builtin/spGtmssPreview-minimal-example.hcl

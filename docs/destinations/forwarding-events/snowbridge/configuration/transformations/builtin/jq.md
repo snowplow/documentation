@@ -18,6 +18,8 @@ The minimal example here returns the input data as a single element array, and t
 
 The jq transformation will remove any keys with null values from the data.
 
+## Configuration options
+
 Minimal configuration:
 
 ```hcl reference

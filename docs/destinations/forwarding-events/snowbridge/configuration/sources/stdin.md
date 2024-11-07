@@ -7,7 +7,7 @@ Stdin source is the default, and has one optional configuration to set the concu
 
 Stdin source simply treats stdin as the input.
 
-## Configuration 
+## Configuration options
 
 Here is an example of the minimum required configuration:
 

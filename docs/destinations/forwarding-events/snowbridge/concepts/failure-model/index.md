@@ -18,11 +18,13 @@ There are several different failures that Snowbridge may hit.
 
 ### Target failure
 
-This is where a request to the destination technology fails or is rejected - for example a http 400 response is received. When Snowbridge hits this failure, it will retry 5 times. If all 5 attempts fail, it will be reported as a 'MsgFailed' for monitoring purposes, and will proceed without acking the failed Messages. As long as the source's acking model allows for it, these will be re-processed through Snowbridge again.
+This is where a request to the destination technology fails or is rejected - for example a http 400 response is received. 
 
-Note that this means failures on the receiving end (eg. if an endpoint is unavailable), mean Snowbridge will continue to attempt to process the data until the issue is fixed.
+Retry behaviour for target failures are determined by the retry configuration. You can find details of this in the [configuration section](/docs/destinations/forwarding-events/snowbridge/configuration/retries/index.md).
 
 As of Snowbridge 2.4.2, the kinesis target does not treat kinesis write throughput exceptions as this type of failure. Rather it has an in-built backoff and retry, which will persist until each event in the batch is either successful, or fails for a different reason.
+
+Before verst 3.0.0, Snowbridge treats every kind of target failure the same -  it will retry 5 times. If all 5 attempts fail, it will be reported as a 'MsgFailed' for monitoring purposes, and will proceed without acking the failed Messages. As long as the source's acking model allows for it, these will be re-processed through Snowbridge again.
 
 ### Oversized data
 
@@ -33,6 +35,8 @@ Writes of oversized messages to the failure target will be recorded with 'Oversi
 ### Invalid data
 
 In the unlikely event that Snowbridge encounters data which is invalid for the target destination (for example empty data is invalid for pubsub), it will create a [generic error failed event](/docs/fundamentals/failed-events/index.md#generic-error),  emit it to the failure target, and ack the original message.
+
+As of version 3.0.0, the http target may produce invalid failures. This occurs when the a POST request body cannot be formed, when the templating feature's attempts to template data result in an error, or when the response conforms to a response rules configuration which sepcifies that the failure is to be treated as invalid. You can find more details in the [configuration section](/docs/destinations/forwarding-events/snowbridge/configuration/targets/http/index.md).
 
 Transformation failures are also treated as invalid, as described below.
 

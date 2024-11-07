@@ -19,13 +19,13 @@ This example filters out all data that doesn't have an `app_id` key.
 Minimal configuration:
 
 ```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/snowplow-builtin/assets/docs/configuration/transformations/builtin/jqFilter-minimal-example.hcl
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/builtin/jqFilter-minimal-example.hcl
 ```
 
 Every configuration option:
 
 ```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/snowplow-builtin/jqFilter-full-example.hcl
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/builtin/jqFilter-full-example.hcl
 ```
 
 ## Helper Functions

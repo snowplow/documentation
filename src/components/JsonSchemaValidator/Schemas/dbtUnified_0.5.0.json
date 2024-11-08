@@ -420,7 +420,7 @@
     },
     "snowplow__enable_browser_context": {
       "recommendFullRefresh": false,
-      "order": 26,
+      "order": 28,
       "consoleGroup": "basic",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
@@ -430,7 +430,7 @@
     },
     "snowplow__enable_browser_context_2": {
       "recommendFullRefresh": false,
-      "order": 26,
+      "order": 29,
       "consoleGroup": "basic",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",

@@ -424,7 +424,7 @@
       "consoleGroup": "basic",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
-      "longDescription": "Flag to include the [Browser context](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/device-and-browser/index.md#browser-context) data in the models (until using JS tracker <3.17 this should be enabled), can be used together with `snowplow__enable_browser_context_2` to coalesce the two.",
+      "longDescription": "Flag to include fields extracted from the [Browser context](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/device-and-browser/index.md#browser-context) data in the models (JS tracker <3.17), can be used together with `snowplow__enable_browser_context_2` (supports 2nd major schema version) to coalesce the two.",
       "packageDefault": "false",
       "title": "Enable Browser Context"
     },
@@ -434,9 +434,9 @@
       "consoleGroup": "basic",
       "type": "boolean",
       "group": "Contexts, Filters, and Logs",
-      "longDescription": "Flag to include the 2nd major version of the [Browser context](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/device-and-browser/index.md#browser-context) data in the models (available from JS tracker (>=3.17), can be used together with `snowplow__enable_browser_context` for previous versions to coalesce the two.",
+      "longDescription": "Flag to include fields extracted from the 2nd major version of schemas related to the [Browser context](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/device-and-browser/index.md#browser-context) data in the models (JS tracker (>=3.17), can be used together with `snowplow__enable_browser_context` for previous versions to coalesce the two.",
       "packageDefault": "false",
-      "title": "Enable Browser Context"
+      "title": "Enable Browser Context 2"
     },
     "snowplow__has_log_enabled": {
       "recommendFullRefresh": false,

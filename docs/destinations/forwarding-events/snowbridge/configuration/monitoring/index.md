@@ -35,7 +35,7 @@ Snowbridge sends the following metrics to statsd:
 | Metric                   | Definitions                                                                                                                                             |
 |--------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
 | `target_success`         | Events successfully sent to the target.                                                                                                                     |
-| `target_failed`          | Events which failed to reach the target, after 5 retries. Will be retried later.                                                                        |
+| `target_failed`          | Attempts to send to the target which failed, and will be retried.                                                                        |
 | `message_filtered`       | Events filtered out via transformation.                                                                                                                 |
 | `failure_target_success` | Events we could not send to the target, which are not retryable, successfully sent to the failure target.                             |
 | `failure_target_failed`  | Events we could not send to the target, which are not retryable, which we failed to send to the failure target. In this scenario, Snowbridge will crash. |

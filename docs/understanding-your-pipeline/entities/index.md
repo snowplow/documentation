@@ -77,6 +77,7 @@ window.snowplow("newTracker", "sp", "{{COLLECTOR_URL}}", {
   },
   contexts: {
     webPage: true,
+    performanceNavigationTiming: true,
     performanceTiming: true,
     gaCookies: true,
     geolocation: false

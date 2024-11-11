@@ -137,7 +137,7 @@ snowplow('newTracker', 'sp', '{{collector_url_here}}', {
     webPage: true, // Default
     session: false, // Adds client session context entity to events, off by default. Available in v3.5+.
     browser: false, // Adds browser context entity to events, off by default. Available in v3.9+.
-    performanceNavigationTiming: true,
+    performanceNavigationTiming: true, // Adds performance navigation timing entity. Available in v4.0.2+
     performanceTiming: true,
     gaCookies: true,
     // gaCookies: { ga4: true, ua: false, ga4MeasurementId: "", cookiePrefix: "_ga_" }, // Optional

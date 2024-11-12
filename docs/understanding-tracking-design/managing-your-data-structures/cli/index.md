@@ -29,7 +29,7 @@ Verify the installation with
 snowplow-cli --help
 ```
 
-For systems where homebrew is not available binaries for multiple platforms can be found in [releases](https://github.com/snowplow-product/snowplow-cli/releases)
+For systems where homebrew is not available binaries for multiple platforms can be found in [releases](https://github.com/snowplow-product/snowplow-cli/releases).
 
 Example installation for `linux_x86_64` using `curl`
 
@@ -84,7 +84,7 @@ Snowplow CLI can take its configuration from a variety of sources. More details 
   </TabItem>
 </Tabs>
 
-Snowplow CLI defaults to yaml format. It can be changed to json by either providing a `--output-format json` flag or setting the `output-format: json` config value. It will work for all commands where it matters, not only for `generate`
+Snowplow CLI defaults to yaml format. It can be changed to json by either providing a `--output-format json` flag or setting the `output-format: json` config value. It will work for all commands where it matters, not only for `generate`.
 
 
 ## Available commands

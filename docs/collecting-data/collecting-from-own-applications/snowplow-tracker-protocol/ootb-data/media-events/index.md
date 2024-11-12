@@ -261,6 +261,33 @@ They consist of the following events and context entities:
 
 ### Media session entity
 
+The media session entity is updated automatically by our trackers.
+It contains metrics that are calculated based on the tracked media events and the media update calls.
+
+It makes use of the following events and information to update it's state:
+
+* Is the playback paused or not (`paused` information in the `media_player` entity, see above).
+  * The information is updated automatically when you track a media play or paused event.
+  * Enables the calculation of `timePlayed`, `timePaused`, `timePlayedMuted`, and `contentWatched` metrics.
+* Current playback position (`currentTime` information in the `media_player` entity).
+  * Enables the calculation of `timePlayed`, `timePaused`, `timePlayedMuted`, and `contentWatched` metrics.
+* Is the playback muted or not (`muted` information in the `media_player` entity).
+  * Enables the calculation of `timePlayedMuted` metrics.
+* Current playback rate (`playbackRate` information in `media_player` entity).
+  * Enables the calculation of `avgPlaybackRate` metric.
+* Buffer start and end events (buffering can also end by a play event).
+  * Enables the calculation of `timeBuffering` metric.
+* Ad start event.
+  * Enables the calculation of `ads` metric (number of played ads).
+* Ad skip event.
+  * Enables the calculation of `adsSkipped` metric.
+* Ad click event.
+  * Enables the calculation of `adsClicked` metric.
+* Ad break start event.
+  * Enables the calculation of `adBreaks` metric.
+* Ad start, ad quartile and ad complete events.
+  * Enable the calculation of `timeSpentAds` metric.
+
 <SchemaProperties
   overview={{event: false, web: true, mobile: true, automatic: true}}
   example={{

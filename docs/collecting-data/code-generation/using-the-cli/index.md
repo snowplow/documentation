@@ -329,6 +329,12 @@ To add a Data Structure to the code generation, either manually or through the `
 
 Then you should add this Schema tracking URL to your configuration file `igluCentralSchemas` array.
 
+### Local Data Structure Repositories
+
+To add a local Data Structure repository to the code generation, either manually or through the `snowtype patch` command, you would only need the path/s to the repository/ies you have generated schemas using the [snowplow-cli](/docs/understanding-tracking-design/managing-your-data-structures/cli/).
+
+Then you should add the path/s to your configuration file `repositories` array.
+
 ## Generating event specification instructions
 
 When generating code for event specifications, you have the option of delivering the implementation instructions and triggers for each specification right on the developer's environment.

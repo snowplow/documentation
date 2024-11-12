@@ -38,143 +38,151 @@ vars:
     snowplow__view_passthroughs: ['contexts_my_entity_1']
 ```
 
-Note that how to extract a field from your self describing event / entity column will depend on your warehouse and you would need to extract fields one by one, giving each a unique alias: 
-
+Note that how to extract a field from your self describing event / entity column will depend on your warehouse:
 
 <Tabs groupId="warehouse" queryString>
 <TabItem value="redshift/postgres" label="Redshift, Postgres" default>
 
-For Redshift and Postgres users, self-describing events and entities are not part of the standard `events` table. Instead, each type of event is in its own table. The table name and the fields in the table will be determined by the event’s schema. See [how schemas translate to the warehouse](/docs/storing-querying/schemas-in-warehouse/index.md) for more details.
+For Redshift and Postgres, passthrough fields work with both standard columns and custom entities. Here's how to handle different scenarios:
 
-In order for you to use fields from there through passthrough fields, you would need to first make sure that those fields are part of the base_events_this_run table. 
+**Standard Columns**
+```yml
+# Simple field passthrough
+snowplow__view_passthroughs: ['page_url', 'page_title']
 
-Any custom entities or self-describing events are able to be added to the [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md#events-this-run) table, and are de-duped on by taking the earliest `collector_tstamp` record, by using the `snowplow__entities_or_sdes` variable in our package. See [modeling entities](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/modeling-entities/index.md) for more information and examples.
+# SQL-based passthrough
+snowplow__view_passthroughs: [
+  {'sql': 'COALESCE(page_url, refr_url)', 'alias': 'final_url'}
+]
+```
 
-Once you add those fields into your events_this_run table through the snowplow__entities_or_sdes variable you can simply refer to them as passthrough fields, coalesce different versions etc.
-
+**Custom Entities**
+1. First, add your entities to `events_this_run` using the `snowplow__entities_or_sdes` variable:
 ```yml
 snowplow__entities_or_sdes: [
-      {'schema': 'custom_table_name', 'prefix': 'device_1', 'alias': 'dvc_1', 'single_entity': true},
+  {'schema': 'custom_entity_table', 'prefix': 'my_entity_1', 'alias': 'entity_1'}
 ]
+```
+
+2. Then reference the fields in your passthrough configuration:
+```yml
 snowplow__view_passthroughs: [
-      device_1_type,
-      device_1_viewport,
-      device_1_app_version,
-      device_1_app_user_agent,
+  'my_entity_1_field',
+  {'sql': 'COALESCE(my_entity_1_field_v1, my_entity_1_field_v2)', 'alias': 'entity_field'}
 ]
 ```
 
 </TabItem>
 <TabItem value="bigquery" label="BigQuery">
 
-**Self-describing events**
+In BigQuery, passthrough fields can come from standard columns, self-describing events, or context entities:
 
-Each type of self-describing event is in a dedicated `RECORD`-type column. The column name and the fields in the record will be determined by the event’s schema. See [how schemas translate to the warehouse](/docs/storing-querying/schemas-in-warehouse/index.md) for more details.
-
-You can query fields in the self-describing event like so:
-
-```sql
-SELECT
-    ...
-    unstruct_event_my_example_event_1_0_0.my_field,
-    ...
-FROM
-    <events>
-
-```
-**Entities**
-
-Each type of entity is in a dedicated `REPEATED RECORD`-type column. The column name and the fields in the record will be determined by the entity’s schema. See [how schemas translate to the warehouse](/docs/storing-querying/schemas-in-warehouse/index.md) for more details.
-
-You can query a single entity’s fields by extracting them like so:
-
-```sql
-SELECT
-    ...
-    contexts_my_entity_1_0_0[SAFE_OFFSET(0)].my_field AS my_field,
-    ...
-FROM
-    <events>
+**Standard Columns**
+```yml
+snowplow__view_passthroughs: [
+  'page_url',
+  {'sql': 'COALESCE(page_url, refr_url)', 'alias': 'final_url'}
+]
 ```
 
-In either case, you need to add this extraction logic to the `{'sql': '...'}` part of the passthrough field definitions with the `{'alias': '...'}` being the unique field name.
+**Self-describing Events**
+```yml
+snowplow__view_passthroughs: [
+  # Extract specific fields from self-describing events
+  {'sql': 'unstruct_event_my_event_1_0_0.field_name', 'alias': 'my_event_field'},
+  # Multiple fields
+  {'sql': 'unstruct_event_my_event_1_0_0.field1 || unstruct_event_my_event_1_0_0.field2', 'alias': 'combined_fields'}
+]
+```
+
+**Context Entities**
+```yml
+snowplow__view_passthroughs: [
+  # Extract first occurrence of an entity field
+  {'sql': 'contexts_my_entity_1_0_0[SAFE_OFFSET(0)].field_name', 'alias': 'entity_field'},
+  # Combine entity fields
+  {'sql': 'COALESCE(contexts_entity_v1[SAFE_OFFSET(0)].field, contexts_entity_v2[SAFE_OFFSET(0)].field)', 'alias': 'entity_field_combined'}
+]
+```
 
 </TabItem>
 <TabItem value="snowflake" label="Snowflake">
 
-**Self-describing events**
+Snowflake handles passthrough fields for standard columns, self-describing events, and context entities with its own syntax:
 
-Each type of self-describing event is in a dedicated `OBJECT`-type column. The column name will be determined by the event’s schema. See [how schemas translate to the warehouse](/docs/storing-querying/schemas-in-warehouse/index.md) for more details.
-
-You can query fields in the self-describing event like so:
-
-```sql
-SELECT
-    ...
-    unstruct_event_my_example_event_1:myField::varchar, -- field will be variant type so important to cast
-    ...
-FROM
-    <events>
+**Standard Columns**
+```yml
+snowplow__view_passthroughs: [
+  'page_url',
+  {'sql': 'COALESCE(page_url, refr_url)', 'alias': 'final_url'}
+]
 ```
-**Entities**
 
-Each type of entity is in a dedicated `ARRAY`-type column. The column name will be determined by the entity’s schema. See [how schemas translate to the warehouse](/docs/storing-querying/schemas-in-warehouse/index.md) for more details.
-
-You can query a single entity’s fields by extracting them like so:
-
-```sql
-SELECT
-    ...
-    contexts_my_entity_1[0]:myField::varchar,  -- field will be variant type so important to cast
-    ...
-FROM
-    <events>
+**Self-describing Events**
+```yml
+snowplow__view_passthroughs: [
+  # Single field from an event
+  {'sql': 'unstruct_event_my_event_1:fieldName::varchar', 'alias': 'event_field'},
+  # Multiple fields
+  {'sql': 'unstruct_event_my_event_1:field1::varchar || unstruct_event_my_event_1:field2::varchar', 'alias': 'combined_fields'}
+]
 ```
-In either case, you need to add this extraction logic to the `{'sql': '...'}` part of the passthrough field definitions with the `{'alias': '...'}` being the unique field name.
+
+**Context Entities**
+```yml
+snowplow__view_passthroughs: [
+  # First occurrence of an entity field
+  {'sql': 'contexts_my_entity_1[0]:fieldName::varchar', 'alias': 'entity_field'},
+  # Combining versions
+  {'sql': 'COALESCE(contexts_entity_v1[0]:field::varchar, contexts_entity_v2[0]:field::varchar)', 'alias': 'entity_field_combined'}
+]
+```
+
 </TabItem>
-<TabItem value="databricks" label="Databricks, Spark SQL">
+<TabItem value="databricks" label="Databricks, Spark SQL">
 
-**Self-describing events**
+Databricks handles passthrough fields using its native STRUCT types and array indexing:
 
-Each type of self-describing event is in a dedicated `STRUCT`-type column. The column name and the fields in the `STRUCT` will be determined by the event’s schema. See [how schemas translate to the warehouse](/docs/storing-querying/schemas-in-warehouse/index.md) for more details.
-
-You can query fields in the self-describing event by extracting them like so:
-
-```sql
-SELECT
-    ...
-    unstruct_event_my_example_event_1.my_field,
-    ...
-FROM
-    <events>
+**Standard Columns**
+```yml
+snowplow__view_passthroughs: [
+  'page_url',
+  {'sql': 'COALESCE(page_url, refr_url)', 'alias': 'final_url'}
+]
 ```
 
-**Entities**
-
-Each type of entity is in a dedicated `ARRAY<STRUCT>`-type column. The column name and the fields in the `STRUCT` will be determined by the entity’s schema. See [how schemas translate to the warehouse](/docs/storing-querying/schemas-in-warehouse/index.md) for more details.
-
-You can query a single entity’s fields by extracting them like so:
-
-```sql
-SELECT
-    ...
-    contexts_my_entity_1[0].my_field,
-    ...
-FROM
-    <events>
+**Self-describing Events**
+```yml
+snowplow__view_passthroughs: [
+  # Single field from an event
+  {'sql': 'unstruct_event_my_event_1.field_name', 'alias': 'event_field'},
+  # Multiple fields
+  {'sql': 'unstruct_event_my_event_1.field1 || unstruct_event_my_event_1.field2', 'alias': 'combined_fields'}
+]
 ```
 
-In either case, you need to add this extraction logic to the `{'sql': '...'}` part of the passthrough field definitions with the `{'alias': '...'}` being the unique field name.
+**Context Entities**
+```yml
+snowplow__view_passthroughs: [
+  # First occurrence of an entity field
+  {'sql': 'contexts_my_entity_1[0].field_name', 'alias': 'entity_field'},
+  # Combining versions
+  {'sql': 'COALESCE(contexts_entity_v1[0].field, contexts_entity_v2[0].field)', 'alias': 'entity_field_combined'}
+]
+```
+
 </TabItem>
 </Tabs>
 
-
-Please note you are unable to use dbt macros in this variable, and also not able to use lateral flatten / explode type extractions. 
-
-For first/last variables, any basic field will have `first_` or `last_` prefixed to the field name automatically to avoid clashes, however if you are using the SQL approach, you will need to add these prefixes as part of your alias.
-
-
 :::tip
+When using passthrough fields with entities or self-describing events, always consider:
+1. Field type casting may be required (especially in Snowflake)
+2. Array indexes start at 0 for the first occurrence
+3. Use COALESCE when dealing with multiple versions of the same field
+4. Please note you are unable to use dbt macros in this variable, and also not able to use lateral flatten / explode type extractions. 
+:::
+
+:::caution
 
 In certain cases, such as the users table in Unified, it may be required to first set passthrough fields on an upstream table (the sessions table in that case) to make sure it is available for selection. The best way to identify this is to look at the DAG in the dbt docs for the package you are using.
 

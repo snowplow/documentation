@@ -264,29 +264,21 @@ They consist of the following events and context entities:
 The media session entity is updated automatically by our trackers.
 It contains metrics that are calculated based on the tracked media events and the media update calls.
 
-It makes use of the following events and information to update it's state:
+It makes use of the information in the media player entity (see above) and the tracked media event types to update it's state and calculate metrics.
+The table below shows which media player properties (first column) and media events (second column) are used to calculate the metrics within the media session entity (third column).
 
-* Is the playback paused or not (`paused` information in the `media_player` entity, see above).
-  * The information is updated automatically when you track a media play or paused event.
-  * Enables the calculation of `timePlayed`, `timePaused`, `timePlayedMuted`, and `contentWatched` metrics.
-* Current playback position (`currentTime` information in the `media_player` entity).
-  * Enables the calculation of `timePlayed`, `timePaused`, `timePlayedMuted`, and `contentWatched` metrics.
-* Is the playback muted or not (`muted` information in the `media_player` entity).
-  * Enables the calculation of `timePlayedMuted` metrics.
-* Current playback rate (`playbackRate` information in `media_player` entity).
-  * Enables the calculation of `avgPlaybackRate` metric.
-* Buffer start and end events (buffering can also end by a play event).
-  * Enables the calculation of `timeBuffering` metric.
-* Ad start event.
-  * Enables the calculation of `ads` metric (number of played ads).
-* Ad skip event.
-  * Enables the calculation of `adsSkipped` metric.
-* Ad click event.
-  * Enables the calculation of `adsClicked` metric.
-* Ad break start event.
-  * Enables the calculation of `adBreaks` metric.
-* Ad start, ad quartile and ad complete events.
-  * Enable the calculation of `timeSpentAds` metric.
+Media player entity property | Media events | Affected calculation of metric
+--|--|--
+`paused` | `play_event`, `pause_event` | `timePlayed`, `timePaused`, `timePlayedMuted`, `contentWatched`
+`currentTime` |  | `timePlayed`, `timePaused`, `timePlayedMuted`, `contentWatched`
+`muted` |  | `timePlayedMuted`
+`playbackRate` | `playback_rate_change_event` | `avgPlaybackRate`
+| | `buffer_start_event`, `buffer_end_event`, `play_event` | `timeBuffering`
+| | `ad_start_event` | `ads`
+| | `ad_skip_event` | `adsSkipped`
+| | `ad_click_event` | `adsClicked`
+| | `ad_break_start_event` | `adBreaks`
+| | `ad_start_event`, `ad_quartile_event`, `ad_complete_event` | `timeSpentAds`
 
 <SchemaProperties
   overview={{event: false, web: true, mobile: true, automatic: true}}

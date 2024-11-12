@@ -261,6 +261,25 @@ They consist of the following events and context entities:
 
 ### Media session entity
 
+The media session entity is updated automatically by our trackers.
+It contains metrics that are calculated based on the tracked media events and the media update calls.
+
+It makes use of the information in the media player entity (see above) and the tracked media event types to update it's state and calculate metrics.
+The table below shows which media player properties (first column) and media events (second column) are used to calculate the metrics within the media session entity (third column).
+
+Media player entity property | Media events | Affected calculation of metric
+--|--|--
+`paused` | `play_event`, `pause_event` | `timePlayed`, `timePaused`, `timePlayedMuted`, `contentWatched`
+`currentTime` |  | `timePlayed`, `timePaused`, `timePlayedMuted`, `contentWatched`
+`muted` |  | `timePlayedMuted`
+`playbackRate` | `playback_rate_change_event` | `avgPlaybackRate`
+| | `buffer_start_event`, `buffer_end_event`, `play_event` | `timeBuffering`
+| | `ad_start_event` | `ads`
+| | `ad_skip_event` | `adsSkipped`
+| | `ad_click_event` | `adsClicked`
+| | `ad_break_start_event` | `adBreaks`
+| | `ad_start_event`, `ad_quartile_event`, `ad_complete_event` | `timeSpentAds`
+
 <SchemaProperties
   overview={{event: false, web: true, mobile: true, automatic: true}}
   example={{

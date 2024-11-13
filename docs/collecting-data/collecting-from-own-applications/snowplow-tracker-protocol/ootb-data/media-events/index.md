@@ -279,6 +279,9 @@ Media player entity property | Media events | Affected calculation of metric
 | | `ad_click_event` | `adsClicked`
 | | `ad_break_start_event` | `adBreaks`
 | | `ad_start_event`, `ad_quartile_event`, `ad_complete_event` | `timeSpentAds`
+| | `ad_start_event`, `ad_complete_event`, `ad_skip_event` | `timePlayed`, `timePlayedMuted`*
+
+\* Play time stats are not being incremented while ads with type linear (default) are being played. Linear ads take over the video playback. For non-linear and companion ads, play time stats are still being incremented while the ad is playing.
 
 <SchemaProperties
   overview={{event: false, web: true, mobile: true, automatic: true}}

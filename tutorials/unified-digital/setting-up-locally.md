@@ -116,7 +116,7 @@ vars:
     
 5. Optimize your data processing
 
-There are ways how you can deal with [high volume optimizations](/docs/modeling-your-data/modeling-your-data-with-dbt/ddbt-custom-models/high-volume-optimizations/) at a later stage, if needed, but you can do a lot upfront by selecting carefully which variable to use for `snowplow__session_timestamp`, which helps identify the timestamp column used for sessionization. This timestamp column should ideally be set to the column your event table is partitioned on. It is defaulted to `collector_tstamp` but depending on your loader it can be the `load_tstamp` as the sensible value to use:
+There are ways how you can deal with [high volume optimizations](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/high-volume-optimizations/) at a later stage, if needed, but you can do a lot upfront by selecting carefully which variable to use for `snowplow__session_timestamp`, which helps identify the timestamp column used for sessionization. This timestamp column should ideally be set to the column your event table is partitioned on. It is defaulted to `collector_tstamp` but depending on your loader it can be the `load_tstamp` as the sensible value to use:
 
 ```yml title="dbt_project.yml"
 vars:

@@ -3,10 +3,23 @@
 # Move commands with their full path strings
 moves=(
     "docs/collecting-data/code-generation docs/data-product-studio/snowtype",
-    # "docs/collecting-data docs/sources",
-    # "docs/contributing docs/resources",
-    # "docs/enriching-your-data docs/pipeline/enriching-your-data",
-    # "docs/feature-comparison docs/get-started/feature-comparison",
+    "docs/collecting-data docs/sources",
+    "docs/contributing docs/resources",
+    "docs/enriching-your-data docs/pipeline/enriching-your-data",
+    "docs/feature-comparison docs/get-started/feature-comparison",
+    "docs/getting-started-on-bdp docs/get-started/snowplow-bdp",
+    "docs/getting-started-on-community-edition docs/get-started/snowplow-community-edition",
+    "docs/managing-data-quality docs/data-product-studio/data-quality",
+    "docs/modeling-your-data docs/data-models",
+    "docs/pipeline-components-and-applications docs/api-reference",
+    "docs/storing-querying docs/destinations-temp/loaders-warehouses",
+    "docs/destinations docs/destinations-temp/event-streaming",
+    "docs/destinations-temp docs/destinations",
+    "docs/testing-debugging docs/data-product-studio/data-quality/testing-debugging",
+    "docs/understanding-tracking-design docs/data-product-studio/data-products",
+    "docs/understanding-your-pipeline docs/fundamentals",
+    "docs/using-the-snowplow-console docs/account-management"
+
 
     # Add more move strings here, one per line
 )
@@ -24,7 +37,7 @@ function create_directory_and_index() {
     echo "Creating $index_path"
     cat << EOF > "$index_path"
 ---
-title: "$dir_name"
+title: "NEW FOLDER $dir_name"
 date: "$today"
 sidebar_position: 1
 ---

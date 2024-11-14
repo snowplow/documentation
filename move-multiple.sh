@@ -2,23 +2,23 @@
 
 # Move commands with their full path strings
 moves=(
-    "docs/collecting-data/code-generation docs/data-product-studio/snowtype",
-    "docs/collecting-data docs/sources",
-    "docs/contributing docs/resources",
-    "docs/enriching-your-data docs/pipeline/enriching-your-data",
-    "docs/feature-comparison docs/get-started/feature-comparison",
-    "docs/getting-started-on-bdp docs/get-started/snowplow-bdp",
-    "docs/getting-started-on-community-edition docs/get-started/snowplow-community-edition",
-    "docs/managing-data-quality docs/data-product-studio/data-quality",
-    "docs/modeling-your-data docs/data-models",
-    "docs/pipeline-components-and-applications docs/api-reference",
-    "docs/storing-querying docs/destinations-temp/loaders-warehouses",
-    "docs/destinations docs/destinations-temp/event-streaming",
-    "docs/destinations-temp docs/destinations",
-    "docs/testing-debugging docs/data-product-studio/data-quality/testing-debugging",
-    "docs/understanding-tracking-design docs/data-product-studio/data-products",
-    "docs/understanding-your-pipeline docs/fundamentals",
-    "docs/using-the-snowplow-console docs/account-management"
+    "docs/collecting-data/code-generation docs/data-product-studio/random-intermediate-folder/snowtype",
+    # "docs/collecting-data docs/sources",
+    # "docs/contributing docs/resources",
+    # "docs/enriching-your-data docs/pipeline/enriching-your-data",
+    # "docs/feature-comparison docs/get-started/feature-comparison",
+    # "docs/getting-started-on-bdp docs/get-started/snowplow-bdp",
+    # "docs/getting-started-on-community-edition docs/get-started/snowplow-community-edition",
+    # "docs/managing-data-quality docs/data-product-studio/data-quality",
+    # "docs/modeling-your-data docs/data-models",
+    # "docs/pipeline-components-and-applications docs/api-reference",
+    # "docs/storing-querying docs/destinations-temp/loaders-warehouses",
+    # "docs/destinations docs/destinations-temp/event-streaming",
+    # "docs/destinations-temp docs/destinations",
+    # "docs/testing-debugging docs/data-product-studio/data-quality/testing-debugging",
+    # "docs/understanding-tracking-design docs/data-product-studio/data-products",
+    # "docs/understanding-your-pipeline docs/fundamentals",
+    # "docs/using-the-snowplow-console docs/account-management"
 
 
     # Add more move strings here, one per line
@@ -45,7 +45,7 @@ sidebar_position: 1
 EOF
 }
 
-# Function to move a file/directory and create destination path if needed
+# Function to move a file/directory using move.sh
 function move_file() {
     local source_path="$1"
     local dest_path="$2"
@@ -53,15 +53,32 @@ function move_file() {
     # Remove any trailing comma from the destination path
     dest_path="${dest_path%,}"
 
-    # Create the destination directory if it doesn't exist
+    # Create the destination directory tree if it doesn't exist
     local dest_dir=$(dirname "$dest_path")
     if [ ! -d "$dest_dir" ]; then
-        create_directory_and_index "$dest_dir"
+        create_directory_structure "$dest_dir"
     fi
 
-    # Move the file/directory
-    echo "Running: ./move.sh $source_path $dest_path"
-    ./move.sh $source_path $dest_path
+    # Run the move.sh script with the source and destination paths
+    echo "Running: ./move.sh \"$source_path\" \"$dest_path\""
+    ./move.sh "$source_path" "$dest_path"
+}
+
+# Function to create the directory structure recursively
+function create_directory_structure() {
+    local dir_path="$1"
+
+    # Base case: if the directory exists, return
+    if [ -d "$dir_path" ]; then
+        return
+    fi
+
+    # Recursive case: create the parent directory first
+    local parent_dir=$(dirname "$dir_path")
+    create_directory_structure "$parent_dir"
+
+    # Create the current directory and index.md file
+    create_directory_and_index "$dir_path"
 }
 
 # Run move_file for each path string

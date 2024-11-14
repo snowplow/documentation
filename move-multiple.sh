@@ -26,7 +26,7 @@ function create_directory_and_index() {
 ---
 title: "$dir_name"
 date: "$today"
-sidebar_position: 50
+sidebar_position: 1
 ---
 
 EOF

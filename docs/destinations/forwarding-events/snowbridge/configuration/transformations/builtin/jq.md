@@ -7,7 +7,7 @@ This transformation was added in version 3.0.0
 ```mdx-code-block
 import JQDescriptionSharedBlock from "./reusable/_jqDescription.md"
 
-<JQHelpersSharedBlock/>
+<JQDescriptionSharedBlock/>
 ```
 
 `jq` runs a jq command on the message data, and outputs the result of the command. While jq supports multi-element results, commands must output only a single element - this single element can be an array data type.

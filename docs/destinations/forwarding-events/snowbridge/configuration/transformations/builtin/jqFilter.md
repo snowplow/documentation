@@ -7,7 +7,7 @@ This transformation was added in version 3.0.0
 ```mdx-code-block
 import JQDescriptionSharedBlock from "./reusable/_jqDescription.md"
 
-<JQHelpersSharedBlock/>
+<JQDescriptionSharedBlock/>
 ```
 
 `jqFilter` filters messages based on the output of a jq command which is run against the data. The provided command must return a boolean result. `false` filters the message out, `true` keeps it.

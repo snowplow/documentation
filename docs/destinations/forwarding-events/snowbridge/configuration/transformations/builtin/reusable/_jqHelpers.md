@@ -6,7 +6,7 @@ In addition to the native functions available in the jq language, the following 
 { foo: .collector_tstamp | epoch | todateiso8601 }
 ```
 
-`epochMillis` - converts a time.Time to an epoch in milliseconds, as unsigned integer type. Because of how integers are handled in Go, unsigned integers aren't compatible with jq's native timestamp functions, so the `epoch` function truncates to seconds. This function cannot be chained with native jq functions, but where milliseconds matter for a value, use this function.
+`epochMillis` - converts a time.Time to an epoch in milliseconds, as unsigned integer type. Because of how integers are handled in Go, unsigned integers aren't compatible with jq's native timestamp functions, so the `epoch` function truncates to seconds, and the `epochMillis` function exists in case milliseconds are needed. This function cannot be chained with native jq functions, but where milliseconds matter for a value, use this function.
 
 ```
 { foo: .collector_tstamp | epochMillis }

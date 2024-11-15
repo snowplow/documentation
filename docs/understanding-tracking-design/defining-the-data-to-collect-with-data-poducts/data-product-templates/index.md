@@ -12,6 +12,8 @@ sidebar_custom_props:
 
 To create a new data product based on a pre-defined template, navigate to the "Data products" section from the navigation bar and click the "Create data product" or "Templates" buttons.
 
+When creating a data product based on a template, the name must be unique to ensure proper identification and avoid conflicts.
+
 Below is a list of the current templates:
 
 ### Base Web

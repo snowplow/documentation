@@ -9,22 +9,30 @@ fi
 file_path="$1"
 new_label="$2"
 
+# Check if label is empty or just quotes
+if [ -z "$new_label" ] || [ "$new_label" = "\"\"" ] || [ "$new_label" = "''" ]; then
+    echo "Error: Label cannot be empty"
+    exit 1
+fi
+
+# Strip existing quotes if present, store in variable
+cleaned_label=$(echo "$new_label" | sed "s/^[\"']//;s/[\"']$//")
+
+if [ -z "$cleaned_label" ]; then
+    echo "Error: Label cannot be empty"
+    exit 1
+fi
+
 # Check if file exists
 if [ ! -f "$file_path" ]; then
-    echo "Exiting: File does not exist"
+    echo "Error: File does not exist"
     exit 1
 fi
 
 # Check if filename is index.md
 filename=$(basename "$file_path")
 if [ "$filename" != "index.md" ]; then
-    echo "Exiting: File must be named index.md"
-    exit 1
-fi
-
-# Check if label is empty or just quotes
-if [ -z "$new_label" ] || [ "$new_label" = "\"\"" ] || [ "$new_label" = "''" ]; then
-    echo "Exiting: Label cannot be empty"
+    echo "Error: File must be named index.md"
     exit 1
 fi
 
@@ -60,7 +68,7 @@ while IFS= read -r line || [ -n "$line" ]; do
         if [ "$line" = "---" ]; then
             # If no sidebar_label was found, add it before closing delimiter
             if ! $sidebar_label_found; then
-                echo "sidebar_label: $new_label" >> "$temp_file"
+                printf 'sidebar_label: "%s"\n' "$cleaned_label" >> "$temp_file"
             fi
             echo "$line" >> "$temp_file"
             in_frontmatter=false
@@ -69,7 +77,7 @@ while IFS= read -r line || [ -n "$line" ]; do
             # Check if line contains sidebar_label
             if [[ "$line" =~ ^[[:space:]]*sidebar_label:[[:space:]]* ]]; then
                 # Replace existing sidebar_label with new one
-                echo "sidebar_label: $new_label" >> "$temp_file"
+                printf 'sidebar_label: "%s"\n' "$cleaned_label" >> "$temp_file"
                 sidebar_label_found=true
             else
                 echo "$line" >> "$temp_file"

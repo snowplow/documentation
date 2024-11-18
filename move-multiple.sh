@@ -1,26 +1,25 @@
 #!/usr/bin/env bash
 
-# Move commands with their full path strings
+# Move commands
+# Starting path, end path, optional new sidebar label
 moves=(
-    # 'docs/collecting-data/code-generation docs/data-product-studio/snowtype "hello world"',
-    'docs/collecting-data docs/collecting-data-test "hello world"',
-
-    # "docs/collecting-data docs/sources",
-    # "docs/contributing docs/resources",
-    # "docs/enriching-your-data docs/pipeline/enriching-your-data",
-    # "docs/feature-comparison docs/get-started/feature-comparison",
-    # "docs/getting-started-on-bdp docs/get-started/snowplow-bdp",
-    # "docs/getting-started-on-community-edition docs/get-started/snowplow-community-edition",
-    # "docs/managing-data-quality docs/data-product-studio/data-quality",
-    # "docs/modeling-your-data docs/data-models",
-    # "docs/pipeline-components-and-applications docs/api-reference",
-    # "docs/storing-querying docs/destinations-temp/loaders-warehouses",
-    # "docs/destinations docs/destinations-temp/event-streaming",
-    # "docs/destinations-temp docs/destinations",
-    # "docs/testing-debugging docs/data-product-studio/data-quality/testing-debugging",
-    # "docs/understanding-tracking-design docs/data-product-studio/data-products",
-    # "docs/understanding-your-pipeline docs/fundamentals",
-    # "docs/using-the-snowplow-console docs/account-management"
+    "docs/collecting-data/code-generation docs/data-product-studio/snowtype 'Snowtype'",
+    "docs/collecting-data docs/sources 'Sources'",
+    "docs/contributing docs/resources 'Resources'",
+    "docs/enriching-your-data docs/pipeline/enriching-your-data",
+    "docs/feature-comparison docs/get-started/feature-comparison",
+    "docs/getting-started-on-bdp docs/get-started/snowplow-bdp",
+    "docs/getting-started-on-community-edition docs/get-started/snowplow-community-edition",
+    "docs/managing-data-quality docs/data-product-studio/data-quality",
+    "docs/modeling-your-data docs/data-models 'Data Models'",
+    "docs/pipeline-components-and-applications docs/api-reference 'API Reference'",
+    "docs/storing-querying docs/destinations-temp/loaders-warehouses 'Loaders and Warehouses'",
+    "docs/destinations docs/destinations-temp/event-streaming",
+    "docs/destinations-temp docs/destinations 'Destinations'",
+    "docs/testing-debugging docs/data-product-studio/data-quality/testing-debugging",
+    "docs/understanding-tracking-design docs/data-product-studio/data-products 'Data Products'",
+    "docs/understanding-your-pipeline docs/fundamentals 'Fundamentals'",
+    "docs/using-the-snowplow-console docs/account-management 'Account Management'",
 
 
     # Add more move strings here, one per line

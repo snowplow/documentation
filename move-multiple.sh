@@ -34,6 +34,7 @@ function move_file() {
 
     # Remove any trailing comma from the destination path
     dest_path="${dest_path%,}"
+    sidebar_label="${sidebar_label%,}"
 
     # Create the destination directory tree if it doesn't exist
     local dest_dir=$(dirname "$dest_path")

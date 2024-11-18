@@ -11,14 +11,20 @@ new_label="$2"
 
 # Check if file exists
 if [ ! -f "$file_path" ]; then
-    echo "Error: File does not exist"
+    echo "Exiting: File does not exist"
     exit 1
 fi
 
 # Check if filename is index.md
 filename=$(basename "$file_path")
 if [ "$filename" != "index.md" ]; then
-    echo "Error: File must be named index.md"
+    echo "Exiting: File must be named index.md"
+    exit 1
+fi
+
+# Check if label is empty or just quotes
+if [ -z "$new_label" ] || [ "$new_label" = "\"\"" ] || [ "$new_label" = "''" ]; then
+    echo "Exiting: Label cannot be empty"
     exit 1
 fi
 
@@ -54,7 +60,7 @@ while IFS= read -r line || [ -n "$line" ]; do
         if [ "$line" = "---" ]; then
             # If no sidebar_label was found, add it before closing delimiter
             if ! $sidebar_label_found; then
-                echo "sidebar_label: \"$new_label\"" >> "$temp_file"
+                echo "sidebar_label: $new_label" >> "$temp_file"
             fi
             echo "$line" >> "$temp_file"
             in_frontmatter=false
@@ -63,7 +69,7 @@ while IFS= read -r line || [ -n "$line" ]; do
             # Check if line contains sidebar_label
             if [[ "$line" =~ ^[[:space:]]*sidebar_label:[[:space:]]* ]]; then
                 # Replace existing sidebar_label with new one
-                echo "sidebar_label: \"$new_label\"" >> "$temp_file"
+                echo "sidebar_label: $new_label" >> "$temp_file"
                 sidebar_label_found=true
             else
                 echo "$line" >> "$temp_file"

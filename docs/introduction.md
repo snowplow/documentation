@@ -26,7 +26,7 @@ Key benefits of Snowplow’s Next-Gen CDI:
 ### Why Snowplow?
 
 * 🏔️ “Glass-box” technical architecture capable of processing billions of events per day.
-* 🛠️ **Over [20 SDKs](/docs/sources/collecting-from-own-applications/index.md)** to collect data from web, mobile, server-side, and other sources.
+* 🛠️ **Over [20 SDKs](/docs/sources/trackers/index.md)** to collect data from web, mobile, server-side, and other sources.
 * ✅ A unique approach based on **[schemas and validation](/docs/fundamentals/schemas/index.md)** ensures your data is as clean as possible.
 * 🪄 **Over [15 enrichments](/docs/pipeline/enrichments/available-enrichments/index.md)** to get the most out of your data.
 * 🏭 Stream data to your data warehouse/lakehouse or SaaS destinations of choice — Snowplow fits nicely within the [Modern Data Stack](https://snowplowanalytics.com/blog/2021/05/12/modern-data-stack/?utm_source=docs&utm_content=landing-page).

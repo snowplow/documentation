@@ -320,3 +320,5 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/sources/code-generation/* /docs/data-product-studio/data-products/snowtype/:splat 301
 /docs/sources/configuring-collector/* /docs/pipeline/configuring-collector/:splat 301
 /docs/pipeline/enriching-your-data/* /docs/pipeline/enrichments/:splat 301
+/docs/sources/collecting-data-from-third-parties/* /docs/sources/webhooks/:splat 301
+/docs/sources/collecting-from-own-applications/* /docs/sources/trackers/:splat 301

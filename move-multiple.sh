@@ -39,7 +39,10 @@ moves=(
     # "docs/sources/code-generation docs/data-product-studio/data-products/snowtype Snowtype"
     # "docs/sources/configuring-collector docs/pipeline/configuring-collector Collector"
 
-    "docs/pipeline/enriching-your-data docs/pipeline/enrichments"
+    # "docs/pipeline/enriching-your-data docs/pipeline/enrichments"
+
+    "docs/sources/collecting-data-from-third-parties docs/sources/webhooks"
+    "docs/sources/collecting-from-own-applications docs/sources/trackers"
 
     # Add more move strings here, one per line
 )

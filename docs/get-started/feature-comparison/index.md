@@ -14,7 +14,7 @@ To find out more about the support services offered to Snowplow BDP customers se
 | [35+ trackers & webhooks](/docs/sources/index.md) | ✅ | ✅ |
 | 1st party tracking | ✅ | ✅ |
 | [Anonymous data collection](/docs/recipes-tutorials/recipe-anonymous-tracking/index.md) | ✅ | ✅ |
-| [ID service](/docs/sources/collecting-from-own-applications/javascript-trackers/web-tracker/browsers/index.md#what-is-an-id-service) | ✅ | ✅ |
+| [ID service](/docs/sources/trackers/javascript-trackers/web-tracker/browsers/index.md#what-is-an-id-service) | ✅ | ✅ |
 | High availability & auto-scaling | ✅ | ❌ |
 | [Enrichments](/docs/pipeline/enrichments/available-enrichments/index.md) | ✅ | ✅ |
 | [Failed events](/docs/fundamentals/failed-events/index.md) | ✅ | ✅ |

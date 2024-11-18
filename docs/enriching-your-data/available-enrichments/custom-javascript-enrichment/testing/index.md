@@ -39,11 +39,11 @@ When debugging a JavaScript enrichment with Micro, there are a few sources of us
 
 The overview will show you which events are enriched successfully and which fail:
 
-![Micro UI overview](../../../../testing-debugging/snowplow-micro/images/overview.png)
+![Micro UI overview](/img/docs/snowplow-micro/overview.png)
 
 For each failed event, you can also expand the details and look at the failure message:
 
-![Micro UI failure message](../../../../testing-debugging/snowplow-micro/images/failure-details.png)
+![Micro UI failure message](/img/docs/snowplow-micro/failure-details.png)
 
 ### Logs
 

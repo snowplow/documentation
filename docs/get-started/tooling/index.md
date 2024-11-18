@@ -13,6 +13,6 @@ If you are implementing tracking on a website or in a web or mobile application,
 
 ## Snowplow Micro
 
-For debugging [enrichments](/docs/pipeline/enriching-your-data/index.md), streaming applications (e.g. using the [analytics SDKs](/docs/destinations/event-streaming/analytics-sdk/index.md)), and other more advanced usage, take a look at [Snowplow Micro](/docs/data-product-studio/data-quality/testing-debugging/snowplow-micro/index.md). It’s a minified Snowplow pipeline that can run on your machine.
+For debugging [enrichments](/docs/pipeline/enrichments/index.md), streaming applications (e.g. using the [analytics SDKs](/docs/destinations/event-streaming/analytics-sdk/index.md)), and other more advanced usage, take a look at [Snowplow Micro](/docs/data-product-studio/data-quality/testing-debugging/snowplow-micro/index.md). It’s a minified Snowplow pipeline that can run on your machine.
 
 ![Snowplow Micro screenshot](/img/docs/snowplow-micro/overview.png)

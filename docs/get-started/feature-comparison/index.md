@@ -5,44 +5,43 @@ hide_table_of_contents: true
 sidebar_label: "Feature Comparison"
 ---
 
-Below you can find a detailed list of product features, including which are available as part of the Snowplow Behavioral Data Platform (BDP) and which are available with the [Snowplow Community Edition](/docs/get-started/snowplow-community-edition/index.md). 
+Below you can find a detailed list of product features, including which are available as part of the Snowplow Behavioral Data Platform (BDP) and which are available with the [Snowplow Community Edition](/docs/get-started/snowplow-community-edition/index.md).
 
 To find out more about the support services offered to Snowplow BDP customers see our [Statement of Support](/statement-of-support/).
 
-| <h3>Data Pipeline</h3> |     BDP     | [Community Edition](/docs/get-started/snowplow-community-edition/index.md) | 
+| <h3>Data Pipeline</h3> |     BDP     | [Community Edition](/docs/get-started/snowplow-community-edition/index.md) |
 |:--|:-:|:-:|
 | [35+ trackers & webhooks](/docs/sources/index.md) | ✅ | ✅ |
 | 1st party tracking | ✅ | ✅ |
 | [Anonymous data collection](/docs/recipes-tutorials/recipe-anonymous-tracking/index.md) | ✅ | ✅ |
 | [ID service](/docs/sources/collecting-from-own-applications/javascript-trackers/web-tracker/browsers/index.md#what-is-an-id-service) | ✅ | ✅ |
 | High availability & auto-scaling | ✅ | ❌ |
-| [Enrichments](/docs/pipeline/enriching-your-data/available-enrichments/index.md) | ✅ | ✅ |
-| [Failed events](/docs/fundamentals/failed-events/index.md) | ✅ | ✅ | 
+| [Enrichments](/docs/pipeline/enrichments/available-enrichments/index.md) | ✅ | ✅ |
+| [Failed events](/docs/fundamentals/failed-events/index.md) | ✅ | ✅ |
 | [Data quality monitoring](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/index.md) | ✅ | ❌ |
-| Single Sign-On | ✅ | ❌ | 
-| Pipeline observability | ✅ | do-it-yourself | 
+| Single Sign-On | ✅ | ❌ |
+| Pipeline observability | ✅ | do-it-yourself |
 | Surge protection | ✅ | do-it-yourself |
-| **Warehouse / lake destinations** | | 
-| • Snowflake | ✅ | ✅ | 
-| • Redshift | ✅ | ✅| 
-| • BigQuery | ✅ | ✅ | 
-| • Databricks | ✅ | ✅ | 
+| **Warehouse / lake destinations** | |
+| • Snowflake | ✅ | ✅ |
+| • Redshift | ✅ | ✅|
+| • BigQuery | ✅ | ✅ |
+| • Databricks | ✅ | ✅ |
 | • Synapse Analytics | ✅ | ✅ |
-| • Elasticsearch | ✅ | ✅ | 
-| • S3 | ✅ | ✅ | 
-| • GCS | ✅ | ✅ | 
+| • Elasticsearch | ✅ | ✅ |
+| • S3 | ✅ | ✅ |
+| • GCS | ✅ | ✅ |
 | • ADLS / OneLake | ✅ | ✅ |
-| **Real-time streams** | | 
+| **Real-time streams** | |
 | • Kinesis | ✅ | ✅ |
-| • Pubsub | ✅ | ✅ | 
+| • Pubsub | ✅ | ✅ |
 | • Kafka / Azure Event Hubs / Confluent Cloud | ✅ | ✅ |
 | <h3>Data Product Studio</h3> | BDP |[Community Edition](/docs/get-started/snowplow-community-edition/index.md)|
-| Advanced enrichments (PII, IP anonymisation, JS, API, SQL enrichments) | ✅ | ✅ (no UI or API)| 
+| Advanced enrichments (PII, IP anonymisation, JS, API, SQL enrichments) | ✅ | ✅ (no UI or API)|
 | [Data structures tooling & API](/docs/data-product-studio/data-products/managing-your-data-structures/ui/index.md) | ✅ |❌|
-| [Data Products](/docs/data-product-studio/data-products/defining-the-data-to-collect-with-data-poducts/) | ✅ |❌|
+| [Data Products](/docs/data-product-studio/data-products/defining-the-data-to-collect-with-data-products/) | ✅ |❌|
 | [Data modeling management tooling](/docs/data-models/running-data-models-via-snowplow-bdp/dbt/index.md) | ✅ | ❌ |
 | Jobs monitoring dashboard | ✅  | ❌ |
-| [Tracking catalog](/docs/discovering-data-to-delete/tracking-catalog/index.md) | ✅ | ❌ |
 | Failed events alerting | ✅ | ❌ |
 | Failed events recoveries | ✅ | ❌ |
 | QA pipeline | ✅ | do-it-yourself |
@@ -73,6 +72,5 @@ To find out more about the support services offered to Snowplow BDP customers se
 | Custom IAM policy | ✅ | ❌ |
 | Custom security agents | ✅ | ❌ |
 | <h3>SLAs</h3> | BDP |[Community Edition](/docs/get-started/snowplow-community-edition/index.md)|
-| Collector uptime SLA | ✅ | ❌ | 
+| Collector uptime SLA | ✅ | ❌ |
 | Warehouse loading latency SLA | ✅ | ❌ |
-

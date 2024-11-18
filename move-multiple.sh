@@ -3,37 +3,43 @@
 # Move commands
 # Starting path, end path, optional new sidebar label
 moves=(
-    "docs/collecting-data docs/sources Sources",
+    # "docs/collecting-data docs/sources Sources",
 
-    "docs/contributing docs/resources Resources",
+    # "docs/contributing docs/resources Resources",
 
-    "docs/understanding-your-pipeline docs/fundamentals Fundamentals",
+    # "docs/understanding-your-pipeline docs/fundamentals Fundamentals",
 
-    "docs/first-steps docs/get-started Get Started",
-    "docs/feature-comparison docs/get-started/feature-comparison Feature Comparison",
-    "docs/getting-started-on-bdp docs/get-started/snowplow-bdp Snowplow BDP",
-    "docs/getting-started-on-community-edition docs/get-started/snowplow-community-edition Snowplow Community Edition",
-    "docs/fundamentals/deployment-model docs/get-started/deployment-model",
+    # "docs/first-steps docs/get-started Get Started",
+    # "docs/feature-comparison docs/get-started/feature-comparison Feature Comparison",
+    # "docs/getting-started-on-bdp docs/get-started/snowplow-bdp Snowplow BDP",
+    # "docs/getting-started-on-community-edition docs/get-started/snowplow-community-edition Snowplow Community Edition",
+    # "docs/fundamentals/deployment-model docs/get-started/deployment-model",
 
-    "docs/enriching-your-data docs/pipeline/enriching-your-data",
+    # "docs/enriching-your-data docs/pipeline/enriching-your-data",
 
-    "docs/managing-data-quality docs/data-product-studio/data-quality/failed-events Failed Events",
-    "docs/data-product-studio/data-quality/failed-events/testing-and-qa-workflows docs/data-product-studio/data-quality/testing-and-qa-workflows",
-    "docs/testing-debugging docs/data-product-studio/data-quality/testing-debugging",
-    "docs/understanding-tracking-design docs/data-product-studio/data-products Data Products",
-    "docs/collecting-data/code-generation docs/data-product-studio/data-products/snowtype Snowtype",
+    # "docs/managing-data-quality docs/data-product-studio/data-quality/failed-events Failed Events",
+    # "docs/data-product-studio/data-quality/failed-events/testing-and-qa-workflows docs/data-product-studio/data-quality/testing-and-qa-workflows",
+    # "docs/testing-debugging docs/data-product-studio/data-quality/testing-debugging",
+    # "docs/understanding-tracking-design docs/data-product-studio/data-products Data Products",
+    # "docs/collecting-data/code-generation docs/data-product-studio/data-products/snowtype Snowtype",
 
-    "docs/modeling-your-data docs/data-models Data Models",
-    "docs/pipeline-components-and-applications docs/api-reference API Reference",
+    # "docs/modeling-your-data docs/data-models Data Models",
+    # "docs/pipeline-components-and-applications docs/api-reference API Reference",
 
-    "docs/storing-querying docs/destinations-temp/loaders-warehouses Loaders and Warehouses",
-    "docs/destinations docs/destinations-temp/event-streaming Event Streaming",
-    "docs/destinations-temp docs/destinations Destinations",
+    # "docs/storing-querying docs/destinations-temp/loaders-warehouses Loaders and Warehouses",
+    # "docs/destinations docs/destinations-temp/event-streaming Event Streaming",
+    # "docs/destinations-temp docs/destinations Destinations",
 
-    "docs/using-the-snowplow-console docs/account-management Account Management",
+    # "docs/using-the-snowplow-console docs/account-management Account Management",
 
-    "docs/discovering-data docs/discovering-data-to-delete Delete me!",
-    "docs/recipes docs/recipes-tutorials Recipes and Tutorials (move to new tab)",
+    # "docs/discovering-data docs/discovering-data-to-delete Delete me!",
+    # "docs/recipes docs/recipes-tutorials Recipes and Tutorials (move to new tab)",
+
+    # "docs/data-product-studio/data-products/defining-the-data-to-collect-with-data-poducts docs/data-product-studio/data-products/defining-the-data-to-collect-with-data-products"
+    # "docs/sources/code-generation docs/data-product-studio/data-products/snowtype Snowtype"
+    # "docs/sources/configuring-collector docs/pipeline/configuring-collector Collector"
+
+    "docs/pipeline/enriching-your-data docs/pipeline/enrichments"
 
     # Add more move strings here, one per line
 )

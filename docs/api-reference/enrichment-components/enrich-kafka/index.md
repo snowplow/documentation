@@ -27,7 +27,7 @@ It is published on Docker Hub and can be run with the following command:
 
 Above assumes that you have following directory structure:
 
-1. `enrichments` directory, (possibly empty) with all [enrichment configuration JSONs](/docs/pipeline/enriching-your-data/available-enrichments/index.md)
+1. `enrichments` directory, (possibly empty) with all [enrichment configuration JSONs](/docs/pipeline/enrichments/available-enrichments/index.md)
 2. Iglu Resolver [configuration JSON](/docs/api-reference/iglu/iglu-resolver/index.md)
 3. [configuration HOCON](/docs/api-reference/enrichment-components/configuration-reference/index.md)
 

@@ -41,7 +41,7 @@ export default function MDXContentWrapper(props) {
     admonitions.push(
       <Admonition type="info" key="offering">
         This documentation only applies to <strong>{names.join(' and ')}</strong>.
-        See the <a href="/docs/feature-comparison/">feature comparison</a> page for more information about the different Snowplow offerings.
+        See the <a href="/docs/get-started/feature-comparison">feature comparison</a> page for more information about the different Snowplow offerings.
       </Admonition>
     )
   }

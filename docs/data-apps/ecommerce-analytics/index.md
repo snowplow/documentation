@@ -25,9 +25,9 @@ Leveraging Snowplow's latest Ecommerce event tracking and our proprietary E-comm
 
 ### Requirements
 
-- Running the [Snowplow E-commerce dbt Package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md)
+- Running the [Snowplow E-commerce dbt Package](/docs/data-models/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md)
 - Access to the derived tables granted to the role used when setting up the data app
-- E-commerce events tracked using the e-commerce plugins for the [JavaScript (Snowplow E-commerce plugin)](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md) and [mobile trackers](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/ecommerce-tracking/index.md).
+- E-commerce events tracked using the e-commerce plugins for the [JavaScript (Snowplow E-commerce plugin)](/docs/sources/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md) and [mobile trackers](/docs/sources/collecting-from-own-applications/mobile-trackers/tracking-events/ecommerce-tracking/index.md).
 
 ## Usage
 

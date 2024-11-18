@@ -1,7 +1,7 @@
 ---
 title: "Data Applications"
 sidebar_position: 112
-sidebar_label: "🆕 Data Applications"
+sidebar_label: "Data Applications"
 sidebar_custom_props:
   offerings:
     - bdp
@@ -21,7 +21,7 @@ Data applications are self-service analytics tools, deployed in your cloud, that
 ```mdx-code-block
 import DocCardList from '@theme/DocCardList';
 
-<DocCardList /> 
+<DocCardList />
 ```
 
 ## Accessing the Applications
@@ -33,11 +33,11 @@ You can find the Data Applications in the `Applications` tab in the left sidebar
 
 Once the application is installed, clicking on the tile will launch the application in a separate browser tab. By default, anyone in your Console organization will be able to access data applications.
 
-If you wish to invite others to use data applications but not have access to the rest of Console, you can [create a new user](/docs/using-the-snowplow-console/managing-users/adding-removing/index.md) and add a user with the `Data applications user` role. That user will then only see the Data Applications tab within Console. This permissions can be managed in the [usual way](/docs/using-the-snowplow-console/managing-users/managing-permissions/index.md).
+If you wish to invite others to use data applications but not have access to the rest of Console, you can [create a new user](/docs/account-management/managing-users/adding-removing/index.md) and add a user with the `Data applications user` role. That user will then only see the Data Applications tab within Console. This permissions can be managed in the [usual way](/docs/account-management/managing-users/managing-permissions/index.md).
 
 ## Installing applications
 
-Once you have purchased an application, you are able to install it. Click the tile to begin installing the application and follow the steps. 
+Once you have purchased an application, you are able to install it. Click the tile to begin installing the application and follow the steps.
 
 ![Image of application tile showing start install process](images/install-app-tile.png)
 
@@ -47,7 +47,7 @@ During installation, you will need to [provide a connection](#application-connec
 
 ### Dependencies on data models
 
-Generally, applications will depend on data models. If there are dependencies, then the installation flow will highlight which models are required and what models you currently have [running via BDP](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/standard-models/index.md). It will also highlight any properties that you need to enable or configure for these data models.
+Generally, applications will depend on data models. If there are dependencies, then the installation flow will highlight which models are required and what models you currently have [running via BDP](/docs/data-models/running-data-models-via-snowplow-bdp/standard-models/index.md). It will also highlight any properties that you need to enable or configure for these data models.
 
 :::note
 If you are running the necessary data models yourself outside of BDP, then you will need to manually check that your setup satisfies the requirements for each application. These requirements are listed within the documentation pages for each application.

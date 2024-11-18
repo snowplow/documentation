@@ -1,11 +1,6 @@
 ---
-title: "Getting Snowplow data into additional destinations"
-sidebar_label: "Routing data elsewhere"
-sidebar_position: 85
+title: "Destinations"
+date: "2024-11-18"
+sidebar_position: 80
+sidebar_label: "Destinations"
 ---
-
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
-
-<DocCardList />
-```

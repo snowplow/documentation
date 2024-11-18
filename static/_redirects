@@ -294,3 +294,25 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 # Deprecated JS tracker plugins
 /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/consent-gdpr/original/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/web-trackers-v3/tracking-events/consent-gdpr/original/
 /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/original/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/web-trackers-v3/tracking-events/ecommerce/original/
+/docs/collecting-data/* /docs/sources/:splat 301
+/docs/contributing/* /docs/resources/:splat 301
+/docs/understanding-your-pipeline/* /docs/fundamentals/:splat 301
+/docs/first-steps/* /docs/get-started/:splat 301
+/docs/feature-comparison/* /docs/get-started/feature-comparison/:splat 301
+/docs/getting-started-on-bdp/* /docs/get-started/snowplow-bdp/:splat 301
+/docs/getting-started-on-community-edition/* /docs/get-started/snowplow-community-edition/:splat 301
+/docs/fundamentals/deployment-model/* /docs/get-started/deployment-model/:splat 301
+/docs/enriching-your-data/* /docs/pipeline/enriching-your-data/:splat 301
+/docs/managing-data-quality/* /docs/data-product-studio/data-quality/failed-events/:splat 301
+/docs/data-product-studio/data-quality/failed-events/testing-and-qa-workflows/* /docs/data-product-studio/data-quality/testing-and-qa-workflows/:splat 301
+/docs/testing-debugging/* /docs/data-product-studio/data-quality/testing-debugging/:splat 301
+/docs/understanding-tracking-design/* /docs/data-product-studio/data-products/:splat 301
+/docs/collecting-data/code-generation/* /docs/data-product-studio/data-products/snowtype/:splat 301
+/docs/modeling-your-data/* /docs/data-models/:splat 301
+/docs/pipeline-components-and-applications/* /docs/api-reference/:splat 301
+/docs/storing-querying/* /docs/destinations-temp/loaders-warehouses/:splat 301
+/docs/destinations/* /docs/destinations-temp/event-streaming/:splat 301
+/docs/destinations-temp/* /docs/destinations/:splat 301
+/docs/using-the-snowplow-console/* /docs/account-management/:splat 301
+/docs/discovering-data/* /docs/discovering-data-to-delete/:splat 301
+/docs/recipes/* /docs/recipes-tutorials/:splat 301

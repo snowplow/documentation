@@ -148,6 +148,17 @@
       "packageDefault": "collector_tstamp",
       "description": "Determines which timestamp is used to process sessions of data"
     },
+    "snowplow__partition_tstamp": {
+      "recommendFullRefresh": false,
+      "order": 56,
+      "consoleGroup": "advanced",
+      "type": "string",
+      "title": "Start Date",
+      "group": "Operation and Logic",
+      "longDescription": "This determines which timestamp is used to partition the derived tables. You need to make sure that this timestamp will be present in the flattened events table.",
+      "packageDefault": "collector_tstamp",
+      "description": "This determines which timestamp is used to partition the derived tables."
+    },
     "snowplow__upsert_lookback_days": {
       "recommendFullRefresh": false,
       "order": 126,

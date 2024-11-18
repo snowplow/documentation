@@ -16,22 +16,52 @@ import Badges from '@site/src/components/Badges';
 <Badges badgeType="Maintained"></Badges>&nbsp;
 <Badges badgeType="SPAL"></Badges>
 
-
 # Snowplow Normalize Package
-:::note
 
+:::note
 Normalize in this context means [database normalization](https://en.wikipedia.org/wiki/Database_normalization), as these models produce flatter data, not statistical normalization.
 :::
 
-**The package source code can be found in the [snowplow/dbt-snowplow-normalize repo](https://github.com/snowplow/dbt-snowplow-normalize ), and the docs for the [macro design are here](https://snowplow.github.io/dbt-snowplow-normalize/#/overview/snowplow_normalize ).**
+**The package source code can be found in the [snowplow/dbt-snowplow-normalize repo](https://github.com/snowplow/dbt-snowplow-normalize), and the docs for the [macro design are here](https://snowplow.github.io/dbt-snowplow-normalize/#/overview/snowplow_normalize).**
+
+## Package Configuration
+
+### Partition Timestamp Configuration
+
+The package uses a configurable partition timestamp column, controlled by the `snowplow__partition_tstamp` variable:
+
+```yaml
+vars:
+  snowplow__partition_tstamp: "collector_tstamp"  # Default value
+```
+
+:::warning Important Note on Custom Partition Timestamps
+If you change `snowplow__partition_tstamp` to a different column (e.g., "loader_tstamp"), you MUST ensure that this column is included in the `event_columns` list in your normalize configuration for each event. Failing to do so will cause the models to fail, as the partition column must be present in the normalized output.
+
+Example configuration when using a custom partition timestamp:
+```json
+{
+    "events": [
+        {
+            "event_names": ["page_view"],
+            "event_columns": [
+                "domain_userid",
+                "loader_tstamp",  // Must include your custom partition timestamp here
+                "app_id"
+            ],
+            // ... rest of configuration
+        }
+    ]
+}
+```
+:::
 
 The package provides [macros](https://docs.getdbt.com/docs/build/jinja-macros) and a python script that is used to generate your normalized events, filtered events, and users table for use within downstream ETL tools such as Census. See the [Model Design](#model-design) section for further details on these tables.
 
 The package only includes the base incremental scratch model and does not have any derived models, instead it generates models in your project as if they were custom models you had built on top of the [Snowplow incremental tables](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md), using the `_this_run` table as the base for new events to process each run. See the [configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md) section for the variables that apply to the incremental model.
 
 :::note
-The incremental model is simplified compared to the standard unified model, this package does not use sessions to identify which historic events to reprocess and just uses the `collector_tstamp` and package variables to identify which events to (re)process.
-
+The incremental model is simplified compared to the standard unified model, this package does not use sessions to identify which historic events to reprocess and just uses the `snowplow__partition_tstamp` (defaults to `collector_tstamp`) and package variables to identify which events to (re)process.
 :::
 
 ## Model Design
@@ -54,7 +84,7 @@ For each `event_names` listed, a model is generated for records with matching ev
 For example, if you have 3 `event_names` listed as `['page_view']`, `['page_ping']`, and `['link_click', 'deep_link_click']` then 3 models will be generated, each containing only those respective events from the atomic events table.
 
 ### Filtered Events Model
-A single model is built that provides `event_id`, `collector_tstamp` and the name of the Normalized Event Model that the event was processed into, it does not include records for events that were not of an event type in your configuration. The model file itself is a series of `UNION` statements.
+A single model is built that provides `event_id`, `snowplow__partition_tstamp` (defaults to `collector_tstamp`), and the name of the Normalized Event Model that the event was processed into, it does not include records for events that were not of an event type in your configuration. The model file itself is a series of `UNION` statements.
 
 ### Users Model
 The users model provides a more traditional view of a Users table than that presented in the other Snowplow dbt packages. This model has one row per non-null `user_id` (or other identifier column you specify), and takes the latest (based on `collector_tstamp`) values from the specified contexts to ensure you always have the latest version of the information that you choose to collect about your users. This is designed to be immediately usable in downstream tools. The model file itself consists of lists of variables and a macro call.

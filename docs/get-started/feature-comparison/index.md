@@ -18,7 +18,7 @@ To find out more about the support services offered to Snowplow BDP customers se
 | High availability & auto-scaling | ✅ | ❌ |
 | [Enrichments](/docs/pipeline/enrichments/available-enrichments/index.md) | ✅ | ✅ |
 | [Failed events](/docs/fundamentals/failed-events/index.md) | ✅ | ✅ |
-| [Data quality monitoring](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/index.md) | ✅ | ❌ |
+| [Data quality monitoring](/docs/data-product-studio/data-quality/failed-events/monitor/index.md) | ✅ | ❌ |
 | Single Sign-On | ✅ | ❌ |
 | Pipeline observability | ✅ | do-it-yourself |
 | Surge protection | ✅ | do-it-yourself |

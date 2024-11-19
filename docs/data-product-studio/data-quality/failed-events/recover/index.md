@@ -2,6 +2,7 @@
 title: "Recovering failed events"
 date: "2021-10-13"
 sidebar_position: 4
+sidebar_label: "Recover"
 ---
 
 ## What is event recovery?
@@ -18,7 +19,7 @@ There are two phases to a recovery:
 
 ### Designing the recovery
 
-Designing the script that will run and perform the fixes. For Snowplow BDP Enterprise customers, this stage of recovery can be designed using the [Recovery Builder](/docs/data-product-studio/data-quality/failed-events/recovering-failed-events/builder/index.md).
+Designing the script that will run and perform the fixes. For Snowplow BDP Enterprise customers, this stage of recovery can be designed using the [Recovery Builder](/docs/data-product-studio/data-quality/failed-events/recover/builder/index.md).
 
 A recovery script has two key parts:
 

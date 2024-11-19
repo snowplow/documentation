@@ -51,7 +51,13 @@ moves=(
     # "docs/data-models/running-data-models-via-snowplow-bdp docs/data-models/running-data-models"
     # "docs/data-models/modeling-your-data-with-dbt docs/data-models/models-dbt"
     # "docs/data-models/modeling-your-data-with-sql-runner docs/data-models/models-sql-runner"
-    "docs/data-models/running-data-models/retrieving-job-execution-data-via-the-api docs/data-models/running-data-models/retrieving-job-execution-data"
+    # "docs/data-models/running-data-models/retrieving-job-execution-data-via-the-api docs/data-models/running-data-models/retrieving-job-execution-data"
+
+    "docs/data-product-studio/data-quality/failed-events/exploring-failed-events docs/data-product-studio/data-quality/failed-events/explore Explore"
+    "docs/data-product-studio/data-quality/failed-events/monitoring-failed-events docs/data-product-studio/data-quality/failed-events/monitor Monitor"
+    "docs/data-product-studio/data-quality/failed-events/recovering-failed-events docs/data-product-studio/data-quality/failed-events/recover Recover"
+    "docs/data-product-studio/data-quality/testing-and-qa-workflows/set-up-automated-testing-with-snowplow-micro docs/data-product-studio/data-quality/testing-debugging/snowplow-micro/automated-testing Automated testing"
+    "docs/data-product-studio/data-quality/testing-and-qa-workflows/using-the-data-structures-ci-tool-for-data-quality docs/data-product-studio/data-quality/testing-debugging/data-structures-ci-tool Data Structures CI tool"
 
     # Add more move strings here, one per line
 )

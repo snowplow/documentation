@@ -282,7 +282,7 @@ FROM
 
 ## Failed events
 
-See [Exploring failed events](/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/index.md).
+See [Exploring failed events](/docs/data-product-studio/data-quality/failed-events/explore/index.md).
 
 ## Dealing with duplicates
 

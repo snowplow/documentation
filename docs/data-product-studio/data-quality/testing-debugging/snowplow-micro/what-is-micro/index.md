@@ -7,7 +7,7 @@ description: "Snowplow Micro is a lightweight version of the Snowplow pipeline t
 
 [Snowplow Micro](https://github.com/snowplow-incubator/snowplow-micro) is a lightweight version of the Snowplow pipeline. It’s great for:
 * Getting familiar with Snowplow
-* Debugging and testing, including [automated testing](/docs/data-product-studio/data-quality/testing-and-qa-workflows/set-up-automated-testing-with-snowplow-micro/index.md)
+* Debugging and testing, including [automated testing](/docs/data-product-studio/data-quality/testing-debugging/snowplow-micro/automated-testing/index.md)
 
 ![Snowplow Micro UI](../images/overview.png)
 

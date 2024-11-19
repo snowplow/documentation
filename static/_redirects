@@ -329,3 +329,8 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/data-models/modeling-your-data-with-dbt/* /docs/data-models/models-dbt/:splat 301
 /docs/data-models/modeling-your-data-with-sql-runner/* /docs/data-models/models-sql-runner/:splat 301
 /docs/data-models/running-data-models/retrieving-job-execution-data-via-the-api/* /docs/data-models/running-data-models/retrieving-job-execution-data/:splat 301
+/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/* /docs/data-product-studio/data-quality/failed-events/explore/:splat 301
+/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/* /docs/data-product-studio/data-quality/failed-events/monitor/:splat 301
+/docs/data-product-studio/data-quality/failed-events/recovering-failed-events/* /docs/data-product-studio/data-quality/failed-events/recover/:splat 301
+/docs/data-product-studio/data-quality/testing-and-qa-workflows/set-up-automated-testing-with-snowplow-micro/* /docs/data-product-studio/data-quality/testing-debugging/snowplow-micro/automated-testing/:splat 301
+/docs/data-product-studio/data-quality/testing-and-qa-workflows/using-the-data-structures-ci-tool-for-data-quality/* /docs/data-product-studio/data-quality/testing-debugging/data-structures-ci-tool/:splat 301

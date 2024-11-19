@@ -13,7 +13,7 @@ There are four media tracking plugins to choose from. Choosing the right plugin 
 
 :::note Version 1 vs Version 2 media schemas
 
-We recommend adopting the newer, more fully-featured v2 schemas where possible. The [media player data model](/docs/data-models/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) does also support the v1 schemas.
+We recommend adopting the newer, more fully-featured v2 schemas where possible. The [media player data model](/docs/data-models/models-dbt/dbt-models/dbt-media-player-data-model/index.md) does also support the v1 schemas.
 
 The v2 schemas:
 

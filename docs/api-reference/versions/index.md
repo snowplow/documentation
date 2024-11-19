@@ -16,7 +16,7 @@ import {versions} from '@site/src/componentVersions';
 
 In short, almost everything is compatible with almost everything. We rarely change the core protocols that various components use to communicate.
 
-You might encounter specific restrictions when following the documentation, for example, some of our [data models](/docs/data-models/modeling-your-data-with-dbt/dbt-models/index.md) might call for a reasonably recent version of the [warehouse loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md).
+You might encounter specific restrictions when following the documentation, for example, some of our [data models](/docs/data-models/models-dbt/dbt-models/index.md) might call for a reasonably recent version of the [warehouse loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md).
 
 :::tip
 
@@ -151,15 +151,15 @@ Tracker | Latest version
 
 #### dbt
 
-[Modeling data with dbt](/docs/data-models/modeling-your-data-with-dbt/index.md) is our recommended approach.
+[Modeling data with dbt](/docs/data-models/models-dbt/index.md) is our recommended approach.
 
 ```mdx-code-block
-import ModelVersionsDbt from '@site/docs/data-models/modeling-your-data-with-dbt/_model-versions.md'
+import ModelVersionsDbt from '@site/docs/data-models/models-dbt/_model-versions.md'
 
 <ModelVersionsDbt/>
 ```
 
-See also the [dbt version compatibility checker](/docs/data-models/modeling-your-data-with-dbt/index.md#dbt-version-compatibility-checker).
+See also the [dbt version compatibility checker](/docs/data-models/models-dbt/index.md#dbt-version-compatibility-checker).
 
 #### SQL Runner
 
@@ -170,11 +170,11 @@ We recommend using the dbt models above, as they are more actively developed.
 :::
 
 <ReactMarkdown children={`
-The latest version of [SQL Runner](/docs/data-models/modeling-your-data-with-sql-runner/index.md) itself is **${versions.sqlRunner}**.
+The latest version of [SQL Runner](/docs/data-models/models-sql-runner/index.md) itself is **${versions.sqlRunner}**.
 `}/>
 
 ```mdx-code-block
-import ModelVersionsSqlRunner from '@site/docs/data-models/modeling-your-data-with-sql-runner/_model-versions.md'
+import ModelVersionsSqlRunner from '@site/docs/data-models/models-sql-runner/_model-versions.md'
 
 <ModelVersionsSqlRunner/>
 ```

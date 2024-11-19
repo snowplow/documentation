@@ -325,3 +325,7 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/account-management/managing-users/* /docs/account-management/user-management/:splat 301
 /docs/account-management/user-management/managing-permissions/* /docs/account-management/user-management/permissions/:splat 301
 /docs/account-management/managing-console-api-authentication/* /docs/account-management/api-credentials/:splat 301
+/docs/data-models/running-data-models-via-snowplow-bdp/* /docs/data-models/running-data-models/:splat 301
+/docs/data-models/modeling-your-data-with-dbt/* /docs/data-models/models-dbt/:splat 301
+/docs/data-models/modeling-your-data-with-sql-runner/* /docs/data-models/models-sql-runner/:splat 301
+/docs/data-models/running-data-models/retrieving-job-execution-data-via-the-api/* /docs/data-models/running-data-models/retrieving-job-execution-data/:splat 301

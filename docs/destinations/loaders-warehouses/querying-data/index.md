@@ -18,7 +18,7 @@ Please refer to [the structure of Snowplow data](/docs/fundamentals/canonical-ev
 
 :::tip Data models
 
-Querying the `events` table directly can be useful for exploring your events or building custom analytics. However, for many common use cases it’s much easier to use our [data models](/docs/data-models/modeling-your-data-with-dbt/index.md), which provide a pre-aggregated view of your data.
+Querying the `events` table directly can be useful for exploring your events or building custom analytics. However, for many common use cases it’s much easier to use our [data models](/docs/data-models/models-dbt/index.md), which provide a pre-aggregated view of your data.
 
 :::
 
@@ -288,7 +288,7 @@ See [Exploring failed events](/docs/data-product-studio/data-quality/failed-even
 
 In some cases, your data might contain duplicate events (full deduplication _before_ the data lands in the warehouse is optionally available for [Redshift, Snowflake and Databricks on AWS](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/deduplication/index.md)).
 
-While our [data models](/docs/data-models/modeling-your-data-with-dbt/index.md) deal with duplicates for you, there may be cases where you need to de-duplicate the events table yourself.
+While our [data models](/docs/data-models/models-dbt/index.md) deal with duplicates for you, there may be cases where you need to de-duplicate the events table yourself.
 
 <Tabs groupId="warehouse" queryString>
 <TabItem value="redshift/postgres" label="Redshift, Postgres" default>
@@ -350,7 +350,7 @@ If your events might have more than one `my_entity` attached, the logic is sligh
 
 First, de-duplicate the events table in the same way as above, but also keep track of the number of duplicates (see `event_id_dedupe_count` below). In the entity table, generate a row number per unique combination of _all_ fields in the record. Then join on `root_id` and `root_tstamp` as before, but with an _additional_ clause that the row number is a multiple of the number of duplicates, to support the 1-to-many join. This ensures all duplicates are removed while retaining all original records of the entity. This may look like a weird join condition, but it works.
 
-Unfortunately, listing all fields manually can be quite tedious, but we have added support for this in the [de-duplication logic](/docs/data-models/modeling-your-data-with-dbt/package-mechanics/deduplication/index.md#multiple-entity-contexts) of our dbt packages.
+Unfortunately, listing all fields manually can be quite tedious, but we have added support for this in the [de-duplication logic](/docs/data-models/models-dbt/package-mechanics/deduplication/index.md#multiple-entity-contexts) of our dbt packages.
 
 ```sql
 WITH unique_events AS (

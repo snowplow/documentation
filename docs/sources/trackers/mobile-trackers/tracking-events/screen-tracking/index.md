@@ -327,7 +327,7 @@ Snowplow.defaultTracker.track(event);
 
 ### Modeled data using the Snowplow Unified dbt package
 
-Starting with version 0.2.0, the [Snowplow Unified Package](/docs/data-models/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) will process the screen engagement information in the `screen_summary` entity to provide the following metrics:
+Starting with version 0.2.0, the [Snowplow Unified Package](/docs/data-models/models-dbt/dbt-models/dbt-unified-data-model/index.md) will process the screen engagement information in the `screen_summary` entity to provide the following metrics:
 
 1. In the `snowplow_unified_views` derived table:
     * `engaged_time_in_s` will contain the screen foreground time.

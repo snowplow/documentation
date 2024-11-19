@@ -40,7 +40,7 @@ To find out more about the support services offered to Snowplow BDP customers se
 | Advanced enrichments (PII, IP anonymisation, JS, API, SQL enrichments) | ✅ | ✅ (no UI or API)|
 | [Data structures tooling & API](/docs/data-product-studio/data-products/managing-your-data-structures/ui/index.md) | ✅ |❌|
 | [Data Products](/docs/data-product-studio/data-products/defining-the-data-to-collect-with-data-products/) | ✅ |❌|
-| [Data modeling management tooling](/docs/data-models/running-data-models-via-snowplow-bdp/dbt/index.md) | ✅ | ❌ |
+| [Data modeling management tooling](/docs/data-models/running-data-models/dbt/index.md) | ✅ | ❌ |
 | Jobs monitoring dashboard | ✅  | ❌ |
 | Failed events alerting | ✅ | ❌ |
 | Failed events recoveries | ✅ | ❌ |
@@ -56,7 +56,7 @@ To find out more about the support services offered to Snowplow BDP customers se
 | [Unified, Utils, Attribution, Media, Normalize data models](/docs/data-models/index.md)  | ✅ | ❌ |
 | **Ecommerce Analytics** |  | |
 | Ecommerce Analytics | ✅  | ❌ |
-| [Ecommerce data model](/docs/data-models/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md)  | ✅ | ❌ |
+| [Ecommerce data model](/docs/data-models/models-dbt/dbt-models/dbt-ecommerce-data-model/index.md)  | ✅ | ❌ |
 | <h3>Performance & Resilience</h3> | BDP |[Community Edition](/docs/get-started/snowplow-community-edition/index.md)|
 | Outage Protection | ✅ | ❌ |
 | Global Availability | ✅ | ❌ |

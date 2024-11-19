@@ -260,7 +260,7 @@ window.snowplow('trackSelfDescribingEvent', {
 });
 ```
 
-- `webPage` [predefined Context](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md#adding-predefined-contexts). Note: The webPage predefined context is enabled by default in JavaScript Tracker v3, as it is also a prerequisite for the official [Snowplow web data model](/docs/data-models/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/index.md).
+- `webPage` [predefined Context](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md#adding-predefined-contexts). Note: The webPage predefined context is enabled by default in JavaScript Tracker v3, as it is also a prerequisite for the official [Snowplow web data model](/docs/data-models/models-dbt/dbt-models/legacy/dbt-web-data-model/index.md).
 
 ## Testing with Snowplow Micro
 

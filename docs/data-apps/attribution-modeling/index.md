@@ -12,7 +12,7 @@ This data app is currently in Public Preview and features may change without not
 
 In today's increasingly complex digital world, users often take multi-channel journeys before converting. Assigning credit across multiple touchpoints is vital to getting an accurate picture of the efficacy of your marketing channels, yet requires merging disparate datasets and running complex calculations.
 
-Our **Marketing Attribution** app (together with the [Snowplow Attribution dbt package](/docs/data-models/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/index.md)) lowers the barrier to entry for your marketing team through the following features:
+Our **Marketing Attribution** app (together with the [Snowplow Attribution dbt package](/docs/data-models/models-dbt/dbt-models/dbt-attribution-data-model/index.md)) lowers the barrier to entry for your marketing team through the following features:
 
 - Incremental SQL model in your warehouse for cost-effective computation
 - Choice of first-touch, last-touch, linear and positional methods, with additional filters and transforms available
@@ -26,8 +26,8 @@ Our **Marketing Attribution** app (together with the [Snowplow Attribution dbt p
 
 - [Campaign Attribution enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) enabled
 - [Referrer Parser enrichment](/docs/pipeline/enrichments/available-enrichments/referrer-parser-enrichment/index.md) enabled
-- Running the [Snowplow Unified Digital dbt Package](/docs/data-models/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) with `conversion event(s)` defined and the optional conversion module enabled
-- Running the [Snowplow Attribution dbt Package](/docs/data-models/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/index.md)
+- Running the [Snowplow Unified Digital dbt Package](/docs/data-models/models-dbt/dbt-models/dbt-unified-data-model/index.md) with `conversion event(s)` defined and the optional conversion module enabled
+- Running the [Snowplow Attribution dbt Package](/docs/data-models/models-dbt/dbt-models/dbt-attribution-data-model/index.md)
 - Access to the derived tables granted to the role used when setting up the data app
 
 ## Preparing Views for the Dashboards

@@ -141,7 +141,7 @@ In this example, the tracked page view and every subsequent page ping will have 
 
 When the JavaScript Tracker loads on a page, it generates a new page view UUID. If the webPage context entity is enabled, then an entity containing this UUID is attached to **all events**.
 
-From v3 of the web tracker, the webPage entity is enabled by default. We advise you leave this enabled so you can use the [Snowplow Web Data Model](/docs/data-models/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/index.md).
+From v3 of the web tracker, the webPage entity is enabled by default. We advise you leave this enabled so you can use the [Snowplow Web Data Model](/docs/data-models/models-dbt/dbt-models/legacy/dbt-web-data-model/index.md).
 
 To disable this entity, set `"webPage": false` in the `"contexts"` object within the [tracker configuration object](../../tracker-setup/initialization-options/index.md).
 

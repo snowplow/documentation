@@ -319,7 +319,7 @@ They consist of the following events and context entities:
 
 ## Modeled data using the snowplow-media-player dbt package
 
-[The media player dbt package](/docs/data-models/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) contains a fully incremental model that transforms raw media event data into a set of derived tables based around the following data objects: media plays, media stats, media ad views, and media ads.
+[The media player dbt package](/docs/data-models/models-dbt/dbt-models/dbt-media-player-data-model/index.md) contains a fully incremental model that transforms raw media event data into a set of derived tables based around the following data objects: media plays, media stats, media ad views, and media ads.
 
 Derived table | Table description | 
 ---|---|---

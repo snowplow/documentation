@@ -44,9 +44,14 @@ moves=(
     # "docs/sources/collecting-data-from-third-parties docs/sources/webhooks"
     # "docs/sources/collecting-from-own-applications docs/sources/trackers"
 
-    "docs/account-management/managing-users docs/account-management/user-management User Management"
-    "docs/account-management/user-management/managing-permissions docs/account-management/user-management/permissions Permissions"
-    "docs/account-management/managing-console-api-authentication docs/account-management/api-credentials"
+    # "docs/account-management/managing-users docs/account-management/user-management User Management"
+    # "docs/account-management/user-management/managing-permissions docs/account-management/user-management/permissions Permissions"
+    # "docs/account-management/managing-console-api-authentication docs/account-management/api-credentials"
+
+    # "docs/data-models/running-data-models-via-snowplow-bdp docs/data-models/running-data-models"
+    # "docs/data-models/modeling-your-data-with-dbt docs/data-models/models-dbt"
+    # "docs/data-models/modeling-your-data-with-sql-runner docs/data-models/models-sql-runner"
+    "docs/data-models/running-data-models/retrieving-job-execution-data-via-the-api docs/data-models/running-data-models/retrieving-job-execution-data"
 
     # Add more move strings here, one per line
 )

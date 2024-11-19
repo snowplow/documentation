@@ -34,11 +34,11 @@ import videoUrl from './images/umd_video.mp4'
 - [Referrer Parser enrichment](/docs/pipeline/enrichments/available-enrichments/referrer-parser-enrichment/index.md) enabled
 
 - One of:
-  - (**Recommended**) Running the [Snowplow Unified dbt Package](/docs/data-models/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) with:
+  - (**Recommended**) Running the [Snowplow Unified dbt Package](/docs/data-models/models-dbt/dbt-models/dbt-unified-data-model/index.md) with:
     - `snowplow__enable_yauaa` set to `true`
     - `snowplow__list_event_counts` set to `true`
     - (optional) Conversion event(s) defined, with `snowplow__total_all_conversions` set to `true`
-  - Running the [Snowplow Web dbt Package](/docs/data-models/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/index.md) with:
+  - Running the [Snowplow Web dbt Package](/docs/data-models/models-dbt/dbt-models/legacy/dbt-web-data-model/index.md) with:
     - `snowplow__enable_yauaa` set to `true`
     - `snowplow__list_event_counts` set to `true`
     - (optional) Conversion event(s) defined, with `snowplow__total_all_conversions` set to `true`

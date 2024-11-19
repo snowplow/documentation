@@ -154,7 +154,7 @@ All tracked e-commerce properties are tracked as context entities.
 
 ## Modeled data using the snowplow-ecommerce dbt package
 
-[The package](/docs/data-models/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md) contains a fully incremental model that transforms raw e-commerce event data into a set of derived tables based around the following e-commerce data objects: carts, checkouts, products and transactions.
+[The package](/docs/data-models/models-dbt/dbt-models/dbt-ecommerce-data-model/index.md) contains a fully incremental model that transforms raw e-commerce event data into a set of derived tables based around the following e-commerce data objects: carts, checkouts, products and transactions.
 
 Derived table | Table description | 
 ---|---|---

@@ -66,5 +66,5 @@ To track screen engagement on mobile, see the [screen engagement documentation](
 
 ## Use in modeling
 
-Page and screen activity events are used by our [Snowplow Unified Package](/docs/data-models/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) (starting from version 0.2.0) to calculate page engagement metrics.
-The [Snowplow Web Package](/docs/data-models/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/index.md) can process page ping events.
+Page and screen activity events are used by our [Snowplow Unified Package](/docs/data-models/models-dbt/dbt-models/dbt-unified-data-model/index.md) (starting from version 0.2.0) to calculate page engagement metrics.
+The [Snowplow Web Package](/docs/data-models/models-dbt/dbt-models/legacy/dbt-web-data-model/index.md) can process page ping events.

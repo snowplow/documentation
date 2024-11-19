@@ -10,7 +10,7 @@ In addition to the standard [privileges required by dbt](https://docs.getdbt.com
 - `<profile_schema>_snowplow_manifest`
 
 
-Alternatively, you can override the output schemas our models write to, see the relevant package [configuration page](/docs/data-models/modeling-your-data-with-dbt/dbt-configuration/index.md) for how to do this.
+Alternatively, you can override the output schemas our models write to, see the relevant package [configuration page](/docs/data-models/models-dbt/dbt-configuration/index.md) for how to do this.
 
 <Tabs groupId="warehouse" queryString>
 <TabItem value="snowflake" label="Snowflake">

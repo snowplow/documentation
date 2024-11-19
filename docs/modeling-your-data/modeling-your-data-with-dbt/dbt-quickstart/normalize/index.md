@@ -114,7 +114,7 @@ Depending on the use case it should either be the catalog (for Unity Catalog use
 
 :::
 
-### 10. Partition Timestamp Configuration
+### 10. Change the default partition timestamp *(optional)*
 
 The package uses a configurable partition timestamp column, controlled by the `snowplow__partition_tstamp` variable:
 

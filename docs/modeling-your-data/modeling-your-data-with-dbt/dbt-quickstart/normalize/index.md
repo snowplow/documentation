@@ -120,8 +120,10 @@ The package uses a configurable partition timestamp column, controlled by the `s
 
 ```yaml
 vars:
-  snowplow__partition_tstamp: "collector_tstamp"  # Default value
+  snowplow__partition_tstamp: "collector_tstamp"  # Default value, any change should be a timestamp
 ```
+
+The purpose of this variable is to adjust the partitioning of the derived tables to use a different timestamp (e.g., derived_tstamp) that is more suitable for analytics in the next layer.
 
 :::warning Important Note on Custom Partition Timestamps
 If you change `snowplow__partition_tstamp` to a different column (e.g., "loader_tstamp"), you MUST ensure that this column is included in the `event_columns` list in your normalize configuration for each event. Failing to do so will cause the models to fail, as the partition column must be present in the normalized output.

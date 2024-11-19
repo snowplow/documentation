@@ -41,8 +41,11 @@ moves=(
 
     # "docs/pipeline/enriching-your-data docs/pipeline/enrichments"
 
-    "docs/sources/collecting-data-from-third-parties docs/sources/webhooks"
-    "docs/sources/collecting-from-own-applications docs/sources/trackers"
+    # "docs/sources/collecting-data-from-third-parties docs/sources/webhooks"
+    # "docs/sources/collecting-from-own-applications docs/sources/trackers"
+
+    "docs/account-management/managing-users docs/account-management/user-management User Management"
+    "docs/account-management/user-management/managing-permissions docs/account-management/user-management/permissions Permissions"
 
     # Add more move strings here, one per line
 )

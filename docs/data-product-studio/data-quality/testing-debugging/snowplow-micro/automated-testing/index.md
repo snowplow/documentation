@@ -1,6 +1,6 @@
 ---
 title: "Automated testing with Snowplow Micro"
-sidebar_position: 0
+sidebar_position: 40
 sidebar_label: "Automated testing"
 ---
 
@@ -375,7 +375,7 @@ this.command = (callback) => {
         {
             url: 'http://localhost:9090/micro/all',
             json: true
-        }, 
+        },
         (err, res, body) => {
             if (err) {
                 console.warn(error);
@@ -603,8 +603,8 @@ cy.eventsWithParams(
         "se_category": "Media",
         "se_action": "Play video",
         "se_label": "Surfing"
-    }, 
-    3 
+    },
+    3
 );
 ```
 
@@ -646,8 +646,8 @@ cy.eventsWithContexts(
                 "categories": ["sports", "history", "food"]
             }
         }
-    ], 
-    2 
+    ],
+    2
 );
 ```
 
@@ -680,8 +680,8 @@ cy.eventsWithProperties(
                 },
             }
         ]
-    }, 
-    1 
+    },
+    1
 );
 ```
 

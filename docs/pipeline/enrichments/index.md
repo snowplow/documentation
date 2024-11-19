@@ -1,7 +1,7 @@
 ---
 title: "Enrichments"
 date: "2020-02-15"
-sidebar_position: 80
+sidebar_position: 5
 ---
 
 ```mdx-code-block

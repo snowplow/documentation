@@ -6,7 +6,7 @@ sidebar_position: 40
 This guide will help you understand some of the basic capabilities of Data Products and how they can be used in practice for most tracking implementation setups.
 
 ## Prerequisites
-- A [collector](https://docs.snowplow.io/docs/pipeline/configuring-collector/ui/) endpoint.
+- A [collector](https://docs.snowplow.io/docs/pipeline/configuring-collector/) endpoint.
 - A [Console API key](https://docs.snowplow.io/docs/data-product-studio/data-products/snowtype/using-the-cli/#authenticating-with-the-console) for generating code using Snowtype.
 
 ## What you'll be doing
@@ -20,7 +20,7 @@ This basic tracking setup will include:
 
 For demonstration purposes we are going to be using a [TodoMVC](https://todomvc.com/) clone built with [React.js](https://react.dev/).
 
-If you want to follow along you can: 
+If you want to follow along you can:
 1. Clone the repository using`git clone git@github.com:snowplow-incubator/data-products-basic-tracking-recipe.git`.
 2. Change into the project directory and install the dependencies using `npm install`.
 3. Run the development server using `npm run dev`.
@@ -53,7 +53,7 @@ To create a Base Web Data Product for your application, navigate to the Data Pro
 By default, a Base Data Product is not connected to a Source Application and will show all the Base Event application IDs, so for this you need to edit the Data Product and set the Source Application to `Todo Web Application`.
 ![](./images/create-base-dp-inputs.png)
 
-The Base Web (_or Mobile_) data product will monitor and count base events as they are sent for the selected Source Application app IDs, as we will see later on. There is no need for additional implementation. 
+The Base Web (_or Mobile_) data product will monitor and count base events as they are sent for the selected Source Application app IDs, as we will see later on. There is no need for additional implementation.
 
 ## Initialize the tracker
 
@@ -82,7 +82,7 @@ import "./styles.css";
 +  heartbeatDelay: 10,
 +});
 
-+trackPageView(); 
++trackPageView();
 
 createRoot(document.getElementById("root")!).render(
 ```
@@ -298,7 +298,7 @@ On your terminal now run `npx @snowplow/snowtype generate --instructions`. If al
 The `src/tracking/instructions.md` file includes detailed instructions and information about the Event Specifications to be implemented while `src/tracking/snowplow.ts` contains all the required code to be used to track the Event Specifications.
 
 :::info
-In some editors like [Visual Studio Code](https://code.visualstudio.com/), the APIs that are available in a project are shown to the developer as they type. For Snowtype exposed APIs to track Event Specifications or event Data Structures start with `track` and then the name of the Data Structure or Event Specification. For Event Specification APIs, there is also the suffix of `Spec` or `spec` depending on the language. 
+In some editors like [Visual Studio Code](https://code.visualstudio.com/), the APIs that are available in a project are shown to the developer as they type. For Snowtype exposed APIs to track Event Specifications or event Data Structures start with `track` and then the name of the Data Structure or Event Specification. For Event Specification APIs, there is also the suffix of `Spec` or `spec` depending on the language.
 E.g. for our custom Data Product, we have available the `trackAddTodoSpec`, `trackCompleteTodoSpec` and `trackRemoveTodoSpec` methods.
 :::
 

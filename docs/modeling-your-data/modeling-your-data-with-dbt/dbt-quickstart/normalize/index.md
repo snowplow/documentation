@@ -114,8 +114,37 @@ Depending on the use case it should either be the catalog (for Unity Catalog use
 
 :::
 
+### 10. Partition Timestamp Configuration
 
-### 10. Run your model(s)
+The package uses a configurable partition timestamp column, controlled by the `snowplow__partition_tstamp` variable:
+
+```yaml
+vars:
+  snowplow__partition_tstamp: "collector_tstamp"  # Default value
+```
+
+:::warning Important Note on Custom Partition Timestamps
+If you change `snowplow__partition_tstamp` to a different column (e.g., "loader_tstamp"), you MUST ensure that this column is included in the `event_columns` list in your normalize configuration for each event. Failing to do so will cause the models to fail, as the partition column must be present in the normalized output.
+
+Example configuration when using a custom partition timestamp:
+```json
+{
+    "events": [
+        {
+            "event_names": ["page_view"],
+            "event_columns": [
+                "domain_userid",
+                "loader_tstamp",  // Must include your custom partition timestamp here
+                "app_id"
+            ],
+            // ... rest of configuration
+        }
+    ]
+}
+```
+:::
+
+### 11. Run your model(s)
 
 You can now run your models for the first time by running the below command (see the [operation](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md) page for more information on operation of the package):
 

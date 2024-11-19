@@ -149,7 +149,7 @@
       "description": "Determines which timestamp is used to process sessions of data"
     },
     "snowplow__partition_tstamp": {
-      "recommendFullRefresh": false,
+      "recommendFullRefresh": true,
       "order": 56,
       "consoleGroup": "advanced",
       "type": "string",

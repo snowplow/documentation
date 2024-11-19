@@ -24,44 +24,12 @@ Normalize in this context means [database normalization](https://en.wikipedia.or
 
 **The package source code can be found in the [snowplow/dbt-snowplow-normalize repo](https://github.com/snowplow/dbt-snowplow-normalize), and the docs for the [macro design are here](https://snowplow.github.io/dbt-snowplow-normalize/#/overview/snowplow_normalize).**
 
-## Package Configuration
-
-### Partition Timestamp Configuration
-
-The package uses a configurable partition timestamp column, controlled by the `snowplow__partition_tstamp` variable:
-
-```yaml
-vars:
-  snowplow__partition_tstamp: "collector_tstamp"  # Default value
-```
-
-:::warning Important Note on Custom Partition Timestamps
-If you change `snowplow__partition_tstamp` to a different column (e.g., "loader_tstamp"), you MUST ensure that this column is included in the `event_columns` list in your normalize configuration for each event. Failing to do so will cause the models to fail, as the partition column must be present in the normalized output.
-
-Example configuration when using a custom partition timestamp:
-```json
-{
-    "events": [
-        {
-            "event_names": ["page_view"],
-            "event_columns": [
-                "domain_userid",
-                "loader_tstamp",  // Must include your custom partition timestamp here
-                "app_id"
-            ],
-            // ... rest of configuration
-        }
-    ]
-}
-```
-:::
-
 The package provides [macros](https://docs.getdbt.com/docs/build/jinja-macros) and a python script that is used to generate your normalized events, filtered events, and users table for use within downstream ETL tools such as Census. See the [Model Design](#model-design) section for further details on these tables.
 
 The package only includes the base incremental scratch model and does not have any derived models, instead it generates models in your project as if they were custom models you had built on top of the [Snowplow incremental tables](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md), using the `_this_run` table as the base for new events to process each run. See the [configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md) section for the variables that apply to the incremental model.
 
 :::note
-The incremental model is simplified compared to the standard unified model, this package does not use sessions to identify which historic events to reprocess and just uses the `snowplow__partition_tstamp` (defaults to `collector_tstamp`) and package variables to identify which events to (re)process.
+The incremental model is simplified compared to the standard unified model, this package does not use sessions to identify which historic events to reprocess and just uses the `snowplow__session_timestamp` (defaults to `collector_tstamp`) and package variables to identify which events to (re)process.
 :::
 
 ## Model Design

@@ -334,3 +334,5 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/data-product-studio/data-quality/failed-events/recovering-failed-events/* /docs/data-product-studio/data-quality/failed-events/recover/:splat 301
 /docs/data-product-studio/data-quality/testing-and-qa-workflows/set-up-automated-testing-with-snowplow-micro/* /docs/data-product-studio/data-quality/testing-debugging/snowplow-micro/automated-testing/:splat 301
 /docs/data-product-studio/data-quality/testing-and-qa-workflows/using-the-data-structures-ci-tool-for-data-quality/* /docs/data-product-studio/data-quality/testing-debugging/data-structures-ci-tool/:splat 301
+/docs/data-product-studio/data-products/introduction-to-tracking-design/* /docs/data-product-studio/data-products/tracking-design/:splat 301
+/docs/data-product-studio/data-products/organize-data-sources-with-source-applications/* /docs/data-product-studio/data-products/source-applications/:splat 301

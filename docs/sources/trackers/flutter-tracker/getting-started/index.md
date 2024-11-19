@@ -9,7 +9,7 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-Designing how and what to track in your app is an important decision. Check out our docs about tracking design [here](/docs/data-product-studio/data-products/introduction-to-tracking-design/index.md).
+Designing how and what to track in your app is an important decision. Check out our docs about tracking design [here](/docs/data-product-studio/data-products/tracking-design/index.md).
 
 The following steps will guide you through setting up the Flutter tracker in your project and tracking a simple event.
 

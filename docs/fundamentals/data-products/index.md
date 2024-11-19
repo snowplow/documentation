@@ -36,7 +36,7 @@ Examples of data products:
 
 ## Key elements of a Data Product
 
-**The Source Application/s it is part of**; a data product is referencing the [Source Application/s](/docs/data-product-studio/data-products/organize-data-sources-with-source-applications/index.md) that is spanning across.
+**The Source Application/s it is part of**; a data product is referencing the [Source Application/s](/docs/data-product-studio/data-products/source-applications/index.md) that is spanning across.
 
 **Benefits:**
 
@@ -76,12 +76,12 @@ Break down the barriers that exist between data producers and data consumers, by
 
 **Benefits:**
 
-You will be able to view several items in the UI that help detect anomalies or potential misconfigurations in trackers that are either not sending the expected events or are using incorrect [application IDs](/docs/data-product-studio/data-products/organize-data-sources-with-source-applications/index.md#application-ids). This is particularly useful during the development phase when implementing tracking for a specific application using [Snowtype](/docs/data-product-studio/data-products/snowtype). These elements include:
+You will be able to view several items in the UI that help detect anomalies or potential misconfigurations in trackers that are either not sending the expected events or are using incorrect [application IDs](/docs/data-product-studio/data-products/source-applications/index.md#application-ids). This is particularly useful during the development phase when implementing tracking for a specific application using [Snowtype](/docs/data-product-studio/data-products/snowtype). These elements include:
 
 * A counter for each event specification, showing the total number of events detected from the tracked application IDs in the last 30 days.
 * A 'last seen' field for each event specification, indicating when the last event matching the event specification ID was detected.
 * A list of application IDs from which events are being tracked, displayed for each event specification. For each application ID, a status will be shown with different colors:
-  * __Green__: Event specifications are being tracked and identified with the specific application ID inherited from the configured [source applications](/docs/data-product-studio/data-products/organize-data-sources-with-source-applications/index.md).
+  * __Green__: Event specifications are being tracked and identified with the specific application ID inherited from the configured [source applications](/docs/data-product-studio/data-products/source-applications/index.md).
   * __Gray__: No event specifications are being tracked for an application ID inherited from the configured source applications.
   * __Yellow__: Event specifications are being tracked for an application ID that has not been configured or inherited from the source applications.
 

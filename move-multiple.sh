@@ -62,14 +62,16 @@ moves=(
     # "docs/data-product-studio/data-products/introduction-to-tracking-design docs/data-product-studio/data-products/tracking-design"
     # "docs/data-product-studio/data-products/organize-data-sources-with-source-applications docs/data-product-studio/data-products/source-applications"
 
-    "docs/data-product-studio/data-products/versioning-your-data-structures docs/data-product-studio/data-products/data-structures/version-amend Verson and amend"
-    "docs/data-product-studio/data-products/managing-your-data-structures docs/data-product-studio/data-products/data-structures/manage Manage"
+    # "docs/data-product-studio/data-products/versioning-your-data-structures docs/data-product-studio/data-products/data-structures/version-amend Verson and amend"
+    # "docs/data-product-studio/data-products/managing-your-data-structures docs/data-product-studio/data-products/data-structures/manage Manage"
 
-    "docs/data-product-studio/data-products/managing-event-specifications/ui docs/data-product-studio/data-products/event-specifications"
-    "docs/data-product-studio/data-products/managing-event-specifications/api docs/data-product-studio/data-products/event-specifications/api"
-    "docs/data-product-studio/data-products/tracking-plans docs/data-product-studio/data-products/event-specifications/tracking-plans"
+    # "docs/data-product-studio/data-products/managing-event-specifications/ui docs/data-product-studio/data-products/event-specifications"
+    # "docs/data-product-studio/data-products/managing-event-specifications/api docs/data-product-studio/data-products/event-specifications/api"
+    # "docs/data-product-studio/data-products/tracking-plans docs/data-product-studio/data-products/event-specifications/tracking-plans"
 
-    "docs/data-product-studio/data-products/defining-the-data-to-collect-with-data-products docs/data-product-studio/data-products/data-products"
+    # "docs/data-product-studio/data-products/defining-the-data-to-collect-with-data-products docs/data-product-studio/data-products/data-products"
+
+
 
     # Add more move strings here, one per line
 )

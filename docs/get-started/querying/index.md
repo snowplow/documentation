@@ -1,7 +1,7 @@
 ---
 title: "Querying your first events"
 sidebar_position: 4
-sidebar_label: "Querying data"
+sidebar_label: "Query data"
 description: "Inspecting the events you tracked"
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "Managing API authentication"
+title: "API Credentials"
 date: "2021-12-27"
 sidebar_position: 20
 ---
@@ -32,7 +32,7 @@ This is a secret, equivalent to a username and a password combined, and should b
 
 ```bash
 curl \
-  --header 'X-API-Key: <API_KEY>' \   
+  --header 'X-API-Key: <API_KEY>' \
   https://console.snowplowanalytics.com/api/msc/v1/organizations/<ORGANIZATION_ID>/credentials/v2/token
 ```
 
@@ -75,7 +75,7 @@ In v3, both the API key ID and API key are required. The api key functions like 
 ```bash
 curl \
   --header 'X-API-Key-ID: <API_KEY_ID>' \
-  --header 'X-API-Key: <API_KEY>' \   
+  --header 'X-API-Key: <API_KEY>' \
   https://console.snowplowanalytics.com/api/msc/v1/organizations/<ORGANIZATION_ID>/credentials/v3/token
 ```
 

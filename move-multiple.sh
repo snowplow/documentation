@@ -46,6 +46,7 @@ moves=(
 
     "docs/account-management/managing-users docs/account-management/user-management User Management"
     "docs/account-management/user-management/managing-permissions docs/account-management/user-management/permissions Permissions"
+    "docs/account-management/managing-console-api-authentication docs/account-management/api-credentials"
 
     # Add more move strings here, one per line
 )

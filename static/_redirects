@@ -322,3 +322,6 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/pipeline/enriching-your-data/* /docs/pipeline/enrichments/:splat 301
 /docs/sources/collecting-data-from-third-parties/* /docs/sources/webhooks/:splat 301
 /docs/sources/collecting-from-own-applications/* /docs/sources/trackers/:splat 301
+/docs/account-management/managing-users/* /docs/account-management/user-management/:splat 301
+/docs/account-management/user-management/managing-permissions/* /docs/account-management/user-management/permissions/:splat 301
+/docs/account-management/managing-console-api-authentication/* /docs/account-management/api-credentials/:splat 301

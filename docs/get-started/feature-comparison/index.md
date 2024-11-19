@@ -38,8 +38,8 @@ To find out more about the support services offered to Snowplow BDP customers se
 | • Kafka / Azure Event Hubs / Confluent Cloud | ✅ | ✅ |
 | <h3>Data Product Studio</h3> | BDP |[Community Edition](/docs/get-started/snowplow-community-edition/index.md)|
 | Advanced enrichments (PII, IP anonymisation, JS, API, SQL enrichments) | ✅ | ✅ (no UI or API)|
-| [Data structures tooling & API](/docs/data-product-studio/data-products/managing-your-data-structures/ui/index.md) | ✅ |❌|
-| [Data Products](/docs/data-product-studio/data-products/defining-the-data-to-collect-with-data-products/) | ✅ |❌|
+| [Data structures tooling & API](/docs/data-product-studio/data-products/data-structures/manage/ui/index.md) | ✅ |❌|
+| [Data Products](/docs/data-product-studio/data-products/data-products/) | ✅ |❌|
 | [Data modeling management tooling](/docs/data-models/running-data-models/dbt/index.md) | ✅ | ❌ |
 | Jobs monitoring dashboard | ✅  | ❌ |
 | Failed events alerting | ✅ | ❌ |

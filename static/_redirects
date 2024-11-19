@@ -336,3 +336,9 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/data-product-studio/data-quality/testing-and-qa-workflows/using-the-data-structures-ci-tool-for-data-quality/* /docs/data-product-studio/data-quality/testing-debugging/data-structures-ci-tool/:splat 301
 /docs/data-product-studio/data-products/introduction-to-tracking-design/* /docs/data-product-studio/data-products/tracking-design/:splat 301
 /docs/data-product-studio/data-products/organize-data-sources-with-source-applications/* /docs/data-product-studio/data-products/source-applications/:splat 301
+/docs/data-product-studio/data-products/versioning-your-data-structures/* /docs/data-product-studio/data-products/data-structures/version-amend/:splat 301
+/docs/data-product-studio/data-products/managing-your-data-structures/* /docs/data-product-studio/data-products/data-structures/manage/:splat 301
+/docs/data-product-studio/data-products/managing-event-specifications/ui/* /docs/data-product-studio/data-products/event-specifications/:splat 301
+/docs/data-product-studio/data-products/managing-event-specifications/api/* /docs/data-product-studio/data-products/event-specifications/api/:splat 301
+/docs/data-product-studio/data-products/tracking-plans/* /docs/data-product-studio/data-products/event-specifications/tracking-plans/:splat 301
+/docs/data-product-studio/data-products/defining-the-data-to-collect-with-data-products/* /docs/data-product-studio/data-products/data-products/:splat 301

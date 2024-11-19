@@ -1,7 +1,7 @@
 ---
 title: "Managing Event Specifications in the Console"
-sidebar_label: "Using the UI"
-sidebar_position: 1
+sidebar_label: "Event Specifications"
+sidebar_position: 5
 sidebar_custom_props:
   offerings:
     - bdp
@@ -9,7 +9,7 @@ sidebar_custom_props:
 
 ## Creating a new Event Specification through Console
 
-Event specifications serve as direct counterparts to [data structures](/docs/data-product-studio/data-products/managing-your-data-structures/ui/index.md) and encapsulate the documented events within a data product.
+Event specifications serve as direct counterparts to [data structures](/docs/data-product-studio/data-products/data-structures/manage/ui/index.md) and encapsulate the documented events within a data product.
 
 :::info
 Please note that the creation of event specifications is exclusive to data products.

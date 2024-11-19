@@ -33,7 +33,7 @@ This is where creating a **Tracking Plan** comes into play. It is a comprehensiv
 - Other relevant information.
 
 :::info
-Snowplow BDP customers can create tracking plans directly in Snowplow instead of using an external document. See [Creating tracking plans](/docs/data-product-studio/data-products/tracking-plans/index.md) for more information.
+Snowplow BDP customers can create tracking plans directly in Snowplow instead of using an external document. See [Creating tracking plans](/docs/data-product-studio/data-products/event-specifications/tracking-plans/index.md) for more information.
 :::
 
 Snowplow also uses a **schema registry** to store the definition of these data structures.
@@ -131,7 +131,7 @@ Make sure that information that would be represented using dimension tables is c
 
 Finally, it is a good practice to ask whether certain data really needs to be captured.
 Tracking unnecessary information uses extra bandwidth and battery power and may add extra overhead to manage.
-Schemas can be [evolved](/docs/data-product-studio/data-products/versioning-your-data-structures/index.md) to allow adding more information later.
+Schemas can be [evolved](/docs/data-product-studio/data-products/data-structures/version-amend/index.md) to allow adding more information later.
 Refer to the business reports identified earlier in order to assess what data needs to be tracked.
 
 ## Define the events

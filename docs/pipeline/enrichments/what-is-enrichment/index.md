@@ -6,7 +6,7 @@ sidebar_position: 0
 
 ### Overview
 
-During Enrichment your events have extra properties and values attached to them, also know as dimension widening.
+During Enrichment your events have extra properties and values attached to them, also known as dimension widening.
 
 Snowplow enrichments can be categorized into three brackets:
 

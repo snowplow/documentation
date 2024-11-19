@@ -2,7 +2,7 @@
 title: "Product features"
 sidebar_position: 1
 hide_table_of_contents: true
-sidebar_label: "Feature Comparison"
+sidebar_label: "Feature comparison"
 ---
 
 Below you can find a detailed list of product features, including which are available as part of the Snowplow Behavioral Data Platform (BDP) and which are available with the [Snowplow Community Edition](/docs/get-started/snowplow-community-edition/index.md).

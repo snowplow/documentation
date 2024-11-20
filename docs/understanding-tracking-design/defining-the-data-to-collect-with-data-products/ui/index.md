@@ -20,6 +20,10 @@ A modal will appear on the page, giving you the possibility to quickly create a 
 
 After selecting "Create from scratch" a form will appear on the page. Enter your data product information and click "Create and continue" to navigate to the event specification page.
 
+:::note
+_The name of your data product must be unique to ensure proper identification and avoid conflicts._
+:::note
+
 ![Event specifications](images/event-specifications.png)
 
 This page allows you to create multiple event specifications. You can click on any row to enter the details on this screen, or you can complete the information later.

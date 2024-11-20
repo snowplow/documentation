@@ -38,7 +38,7 @@ To find out more about the support services offered to Snowplow BDP customers se
 | <h3>Data Product Studio</h3> | BDP |[Community Edition](/docs/getting-started-on-community-edition/index.md)|
 | Advanced enrichments (PII, IP anonymisation, JS, API, SQL enrichments) | ✅ | ✅ (no UI or API)| 
 | [Data structures tooling & API](/docs/understanding-tracking-design/managing-your-data-structures/ui/index.md) | ✅ |❌|
-| [Data Products](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-poducts/) | ✅ |❌|
+| [Data Products](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-products/) | ✅ |❌|
 | [Data modeling management tooling](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/index.md) | ✅ | ❌ |
 | Jobs monitoring dashboard | ✅  | ❌ |
 | [Tracking catalog](/docs/discovering-data/tracking-catalog/index.md) | ✅ | ❌ |

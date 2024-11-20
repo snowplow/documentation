@@ -7,7 +7,7 @@ sidebar_custom_props:
     - bdp
 ---
 
-As well as managing [data products](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-poducts/index.md) through the Snowplow BDP Console, Snowplow BDP customers can also manage them programmatically through an API.
+As well as managing [data products](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-products/index.md) through the Snowplow BDP Console, Snowplow BDP customers can also manage them programmatically through an API.
 
 This functionality is key to automating existing processes and frequent manual tasks, including workflows in version control systems like GitHub.
 
@@ -120,6 +120,10 @@ The request body is mandatory and should be in JSON format. The minimum payload 
 }
 ```
 
+:::note
+_The name of your data product must be unique to ensure proper identification and avoid conflicts._
+:::note
+
 ### Updating a Data Product
 
 Use this request to update a data product. The `dataProductId` is required, along with a valid request body.
@@ -127,6 +131,10 @@ Use this request to update a data product. The `dataProductId` is required, alon
 The minimum payload on update would be the same as on creation but with the addition of the required `status` field. On creation, by default, it will set the `status` to `draft`.
 
 `**POST** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v2/{dataProductId}`
+
+:::note
+_The name of your data product must be unique to ensure proper identification and avoid conflicts._
+:::note
 
 See the [detailed API documentation](https://console.snowplowanalytics.com/api/msc/v1/docs) for all options.
 

@@ -87,7 +87,7 @@ You will be able to view several items in the UI that help detect anomalies or p
 
 :::note
 
-Some data products, such as [__Base Web__](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-poducts/data-product-templates/index.md#base-web) and [__Base Mobile__](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-poducts/data-product-templates/index.md#base-mobile), contain standard events (e.g., _page pings_, _link clicks_, _screen view_, _application install_). 
+Some data products, such as [__Base Web__](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-products/data-product-templates/index.md#base-web) and [__Base Mobile__](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-products/data-product-templates/index.md#base-mobile), contain standard events (e.g., _page pings_, _link clicks_, _screen view_, _application install_). 
 
 For these data products, the volume metrics will behave differently:
 
@@ -117,4 +117,4 @@ By adding screenshots, and descriptions to the event specification, you are also
 
 A data structure can be used across event specifications, and across data products. In doing so, you can ensure you consistently track business critical events and entities (for example, your "product" entity) across your organisation. Having the ability to use centralised event and entity schemas in this way, means that you are able to better govern the structure of the data across an organisation whilst also empowering teams to manage their own specific implementation of events via data products. 
 
-To understand how to get started with data products, see [Defining the Data to collect with Data Products](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-poducts/) for further details.
+To understand how to get started with data products, see [Defining the Data to collect with Data Products](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-products/) for further details.

@@ -16,6 +16,10 @@ The Snowtype CLI configuration can be saved in a `.json`, `.js`, or `.ts` file a
 
 The schema tracking URLs for schemas available in [Iglu Central](http://iglucentral.com/).
 
+### `repositories`
+
+Local Data Structure repositories generated from the [snowplow-cli](/docs/understanding-tracking-design/managing-your-data-structures/cli/).
+
 ### `dataStructures`
 
 The schema tracking URLs for Data Structures published in the Console.
@@ -89,6 +93,7 @@ _Keep in mind that CLI flags take precedence over configuration file options._
   ```json
 {
     "igluCentralSchemas": ["iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"],
+    "repositories": ["../data-structures"],
     "dataStructures": ["iglu:com.myorg/custom_web_page/jsonschema/1-1-0"],
     "eventSpecificationIds": [
       "a123456b-c222-11d1-e123-1f123456789g"
@@ -109,6 +114,7 @@ _Keep in mind that CLI flags take precedence over configuration file options._
 ```javascript
 const config = {
   "igluCentralSchemas": ["iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"],
+  "repositories": ["../data-structures"],
   "dataStructures": ["iglu:com.myorg/custom_web_page/jsonschema/1-1-0"],
   "eventSpecificationIds": [
     "a123456b-c222-11d1-e123-1f123456789g"
@@ -143,6 +149,7 @@ type SnowtypeConfig = {
   outpath: string;
   organizationId?: string;
   igluCentralSchemas?: string[];
+  repositories?: string[];
   dataStructures?: string[];
   eventSpecificationIds?: string[];
   dataProductIds?: string[];
@@ -168,6 +175,7 @@ type SnowtypeConfig = {
 
 const config: SnowtypeConfig = {
   "igluCentralSchemas": ["iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"],
+  "repositories": ["../data-structures"],
   "dataStructures": ["iglu:com.myorg/custom_web_page/jsonschema/1-1-0"],
   "eventSpecificationIds": [
     "a123456b-c222-11d1-e123-1f123456789g"

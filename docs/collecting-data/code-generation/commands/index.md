@@ -28,6 +28,7 @@ Initialize the setup of Snowtype code generation in a project. Creates the confi
 Generates tracking code based on configuration on the configuration file. Can generate/modify the `.snowtype-lock.json` file.
 
 **Options**
+ -  `-c, --config` Config file path.
  -  `--instructions` Generate event specification instructions.
  -  `--no-instructions` Generate without instructions.
  -  `--validations` Add runtime validation on events. _Currently available for the Browser tracker_.
@@ -40,6 +41,7 @@ Generates tracking code based on configuration on the configuration file. Can ge
 Checks for latest version updates in Data Structures and Event Specifications.
 
 **Options**
+ -  `-c, --config` Config file path.
  -  `-y, --yes` Updates all to latest version without prompting. (default: false)
  -  `-m, --maximumBump` The maximum SchemaVer update to show an available update notification for. Possible values are 'patch', 'minor', 'major' and will work as expected regular SemVer bumps. (default: 'major')
 
@@ -48,6 +50,7 @@ Checks for latest version updates in Data Structures and Event Specifications.
 Adds new Data Structures and Event Specifications in the `snowtype.config.json` file without needing to modify the file by hand.
 
 **Options**
+ - `-c, --config` Config file path.
  - `-e, --eventSpecificationIds` Event Specification ID/s.
  - `-p, --dataProductIds` Data Product ID/s.
  - `-d, --dataStructures` Data structure schema URI/s.

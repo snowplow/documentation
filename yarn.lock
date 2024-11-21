@@ -1544,7 +1544,7 @@
     "@docusaurus/theme-search-algolia" "2.4.1"
     "@docusaurus/types" "2.4.1"
 
-"@docusaurus/react-loadable@5.5.2":
+"@docusaurus/react-loadable@5.5.2", "react-loadable@npm:@docusaurus/react-loadable@5.5.2":
   version "5.5.2"
   resolved "https://registry.npmjs.org/@docusaurus/react-loadable/-/react-loadable-5.5.2.tgz"
   integrity sha512-A3dYjdBGuy0IGT+wyLIGIKLRE+sAk1iNk0f1HjNDysO7u8lhL4N3VEm+FAubmJbAztn94F7MxBTPmnixbiyFdQ==
@@ -2346,51 +2346,51 @@
     p-map "^4.0.0"
     webpack-sources "^3.2.2"
 
-"@snowplow/browser-plugin-link-click-tracking@^3.24.2":
-  version "3.24.2"
-  resolved "https://registry.yarnpkg.com/@snowplow/browser-plugin-link-click-tracking/-/browser-plugin-link-click-tracking-3.24.2.tgz#050159e7c3b79a4d69692e7a57ae40a5241f4fb9"
-  integrity sha512-NEiLHNsIM216u+lq2VcDtuVLiwkI6nn1K7cnujOMUs00Qe/tyzZLanDCJMu7kkBcQaSwJ8KXYLJnFxIBITmV+A==
+"@snowplow/browser-plugin-link-click-tracking@^4.0.4":
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/@snowplow/browser-plugin-link-click-tracking/-/browser-plugin-link-click-tracking-4.0.4.tgz#60a795e4788c9290908428464eed37d9e4ada607"
+  integrity sha512-4UihAxdE4J6+aQ5r3LdpY9ncYiCHCBljOXWlpu6hTiPqDAjwdmhvajt9iNx8zYBOEEdqP33V1cQVQm6n3HH/UA==
   dependencies:
-    "@snowplow/browser-tracker-core" "3.24.2"
-    "@snowplow/tracker-core" "3.24.2"
+    "@snowplow/browser-tracker-core" "4.0.4"
+    "@snowplow/tracker-core" "4.0.4"
     tslib "^2.3.1"
 
-"@snowplow/browser-plugin-media@^3.24.2":
-  version "3.24.2"
-  resolved "https://registry.npmjs.org/@snowplow/browser-plugin-media/-/browser-plugin-media-3.24.2.tgz"
-  integrity sha512-TWxcWf3wu5VM4IAtxAHKBJWHHQojGG7yWp9KAAJq3hVPo//WTDQ9MBCTUJTYSiL7pRI66UOD2/wInS2z/v9vHg==
+"@snowplow/browser-plugin-media@^4.0.4":
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/@snowplow/browser-plugin-media/-/browser-plugin-media-4.0.4.tgz#7b70bf69e7bf614528acd525ddd67e68a10a15dc"
+  integrity sha512-ueXQBdPD4s8Bfd7rGW0LwHnvo2q94DUuoQ22GnMfaEgMOfigakTq3hqSnWWi2IBYkHvrlVTu0PZkXyQypOyH2A==
   dependencies:
-    "@snowplow/browser-tracker-core" "3.24.2"
-    "@snowplow/tracker-core" "3.24.2"
+    "@snowplow/browser-tracker-core" "4.0.4"
+    "@snowplow/tracker-core" "4.0.4"
     tslib "^2.3.1"
-    uuid "^3.4.0"
+    uuid "^10.0.0"
 
-"@snowplow/browser-tracker-core@3.24.2":
-  version "3.24.2"
-  resolved "https://registry.npmjs.org/@snowplow/browser-tracker-core/-/browser-tracker-core-3.24.2.tgz"
-  integrity sha512-9bm+lu7kARmlDK6KGR5B/DSnYZaymKZxlWwqk1UD+otHSlxqg72Fqug0sExQ5zMI1U+TbbwP0fn2kdnTTJnuxw==
+"@snowplow/browser-tracker-core@4.0.4":
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/@snowplow/browser-tracker-core/-/browser-tracker-core-4.0.4.tgz#c4f95aa0b40a524d65f850fb49abb3a62824af15"
+  integrity sha512-9qoMTVb4S5uWw7XeM+QyBdT3BZFFNhBlE9wGNVXNPdtZenqPtRTi1FNZSY8a8jlTtHDqLJ/Hs7MzNaX+Wki+ZA==
   dependencies:
-    "@snowplow/tracker-core" "3.24.2"
+    "@snowplow/tracker-core" "4.0.4"
     sha1 "^1.1.1"
     tslib "^2.3.1"
-    uuid "^3.4.0"
+    uuid "^10.0.0"
 
-"@snowplow/browser-tracker@^3.24.2":
-  version "3.24.2"
-  resolved "https://registry.yarnpkg.com/@snowplow/browser-tracker/-/browser-tracker-3.24.2.tgz#462718bdd0d72071d0bbf5b3d33437ef5fc7fc3c"
-  integrity sha512-XN91/0NyP/iypwZDt22jMp7MdB2tWDpt/JJAzGQj+tEt7dUQ83PAu+6dfcKlNFlJZ9gEfJvqxlco0Fz5omEh2w==
+"@snowplow/browser-tracker@^4.0.4":
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/@snowplow/browser-tracker/-/browser-tracker-4.0.4.tgz#05b94addf5c6a6a3ed6444bbd5f52359a2542527"
+  integrity sha512-exSLWQa3hEX7asFSyz0J9J7m5AueL+xw7m082yZTwz0pzZDoePYcLNK5fdaV+JIIRJ8CarfSQg9YjwUmtRWdRA==
   dependencies:
-    "@snowplow/browser-tracker-core" "3.24.2"
-    "@snowplow/tracker-core" "3.24.2"
+    "@snowplow/browser-tracker-core" "4.0.4"
+    "@snowplow/tracker-core" "4.0.4"
     tslib "^2.3.1"
 
-"@snowplow/tracker-core@3.24.2":
-  version "3.24.2"
-  resolved "https://registry.npmjs.org/@snowplow/tracker-core/-/tracker-core-3.24.2.tgz"
-  integrity sha512-9tERPeada0QVVzIO9Z91xu9kF5o8XOgPy+0lWoBCMtrtcMolZpqD59xLua8uoLBKpQ3EqpL/5bvYhpfSfipYyA==
+"@snowplow/tracker-core@4.0.4":
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/@snowplow/tracker-core/-/tracker-core-4.0.4.tgz#2f480ec6798e4ed2f2e7c6b496a8c49b6c2f34ce"
+  integrity sha512-8TffG+h/oHjpIbOlAseBEEBWdB4jcblgU2zwLviifxlqpIJ7xmy+Kmi1FgSkkIBEM6O+tDCERlReF3ijVsov3Q==
   dependencies:
     tslib "^2.3.1"
-    uuid "^3.4.0"
+    uuid "^10.0.0"
 
 "@svgr/babel-plugin-add-jsx-attribute@^6.5.1":
   version "6.5.1"
@@ -8835,14 +8835,6 @@ react-loadable-ssr-addon-v5-slorber@^1.0.1:
   dependencies:
     "@babel/runtime" "^7.10.3"
 
-"react-loadable@npm:@docusaurus/react-loadable@5.5.2":
-  version "5.5.2"
-  resolved "https://registry.npmjs.org/@docusaurus/react-loadable/-/react-loadable-5.5.2.tgz"
-  integrity sha512-A3dYjdBGuy0IGT+wyLIGIKLRE+sAk1iNk0f1HjNDysO7u8lhL4N3VEm+FAubmJbAztn94F7MxBTPmnixbiyFdQ==
-  dependencies:
-    "@types/react" "*"
-    prop-types "^15.6.2"
-
 "react-loadable@npm:@docusaurus/react-loadable@6.0.0":
   version "6.0.0"
   resolved "https://registry.yarnpkg.com/@docusaurus/react-loadable/-/react-loadable-6.0.0.tgz#de6c7f73c96542bd70786b8e522d535d69069dc4"
@@ -10474,11 +10466,6 @@ uuid@^10.0.0:
   version "10.0.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-10.0.0.tgz#5a95aa454e6e002725c79055fd42aaba30ca6294"
   integrity sha512-8XkAphELsDnEGrDxUOHB3RGvXz6TeuYSGEZBOjtTtPm2lwhGBjLgOzLHB63IUWfBpNucQjND6d3AOudO+H3RWQ==
-
-uuid@^3.4.0:
-  version "3.4.0"
-  resolved "https://registry.npmjs.org/uuid/-/uuid-3.4.0.tgz"
-  integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
 
 uuid@^8.3.0, uuid@^8.3.2:
   version "8.3.2"

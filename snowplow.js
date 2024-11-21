@@ -9,7 +9,6 @@ import {
 import {
   LinkClickTrackingPlugin,
   enableLinkClickTracking,
-  refreshLinkClickTracking,
 } from '@snowplow/browser-plugin-link-click-tracking'
 import { onPreferencesChanged } from 'cookie-though'
 import Cookies from 'js-cookie'
@@ -70,7 +69,6 @@ const setupBrowserTracker = () => {
   addGlobalContexts([selectedTabContext])
 
   enableLinkClickTracking()
-  refreshLinkClickTracking()
   enableActivityTracking({
     heartbeatDelay: 10,
     minimumVisitLength: 10,
@@ -113,9 +111,6 @@ const module = {
       // see https://github.com/facebook/docusaurus/pull/7424 regarding setTimeout
       setTimeout(() => {
         trackPageView()
-        // we need to call it whenever a new link appears on the page
-        // see https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/#refreshlinkclicktracking
-        refreshLinkClickTracking()
       })
     }
   },

@@ -13,17 +13,6 @@ import { DocSearchButton, useDocSearchKeyboardEvents } from '@docsearch/react'
 import { useAlgoliaContextualFacetFilters } from '@docusaurus/theme-search-algolia/client'
 import Translate from '@docusaurus/Translate'
 import translations from '@theme/SearchTranslations'
-import debounce from 'lodash.debounce'
-import { refreshLinkClickTracking } from '@snowplow/browser-plugin-link-click-tracking'
-
-// we need to call refreshLinkClickTracking whenever a new link appears on the page
-// see https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/javascript-trackers/javascript-tracker/javascript-tracker-v3/tracking-events/#refreshlinkclicktracking
-// It's hard to hook into the lifecycle of Algolia search so I found that
-// we can use the search result transform function but that's called many times
-// so we debounce the refresh of link tracking
-const refreshLinks = debounce(refreshLinkClickTracking, 200, {
-  trailing: true,
-})
 
 let DocSearchModal = null
 function Hit({ hit, children }) {
@@ -113,7 +102,6 @@ function DocSearch({ contextualSearch, externalUrlRegex, ...props }) {
     },
   }).current
   const transformItems = useRef((items) => {
-    refreshLinks()
     return items.map((item) => {
       // If Algolia contains a external domain, we should navigate without
       // relative URL

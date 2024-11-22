@@ -4,8 +4,6 @@ description: "How to create, update, and remove custom models in our dbt package
 sidebar_position: 60
 ---
 
-## Custom models
-
 The Snowplow packages are designed to be easily customized or extended within your own dbt project by building your own custom models. The standard models we provide (base, page/screen views, sessions and users) are not designed to be modified by you. 
 
 In general there are 3 types of custom models you may end up building:

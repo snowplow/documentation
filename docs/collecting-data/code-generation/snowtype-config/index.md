@@ -144,8 +144,9 @@ type SnowtypeConfig = {
     | "snowplow-ios-tracker"
     | "@snowplow/node-tracker"
     | "snowplow-golang-tracker"
-    | "@snowplow/react-native-tracker";
-  language: "typescript" | "javascript" | "kotlin" | "swift" | "go";
+    | "@snowplow/react-native-tracker"
+    | "snowplow-flutter-tracker";
+  language: "typescript" | "javascript" | "kotlin" | "swift" | "go" | "dart";
   outpath: string;
   organizationId?: string;
   igluCentralSchemas?: string[];
@@ -193,5 +194,5 @@ export default config;
 
 ```
   </TabItem>
-    
+
 </Tabs>

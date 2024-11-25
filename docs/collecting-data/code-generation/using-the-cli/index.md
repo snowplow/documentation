@@ -107,6 +107,7 @@ Following is the set of available trackers and languages the Snowtype CLI curren
 | `snowplow-golang-tracker` | go |
 | `snowplow-ios-tracker` | swift |
 | `snowplow-android-tracker` | kotlin |
+| `snowplow-flutter-tracker` | dart |
 
 ### Example Usage
 
@@ -293,6 +294,28 @@ trackWebPage<Product | WebPage>(t, {
 
 </TabItem>
 
+<TabItem value="snowplow-flutter-tracker" label="snowplow-flutter-tracker" default>
+
+```dart
+import './{outpath}/snowplow.dart';
+
+/* Track a WebPage event */
+await tracker.track(const WebPage(id: "212a9b63-1af7-4e96-9f35-e2fca110ff43"));
+
+/* Track a WebPage event with a Product context entity */
+const product = Product(
+  category: "Snowplow/Shoes",
+  currency: "EUR",
+  id: "Product id",
+  price: 10.0,
+  name: "Snowplow product"
+);
+const event = WebPage(id: "212a9b63-1af7-4e96-9f35-e2fca110ff43");
+await tracker.track(event, contexts: [product]);
+```
+
+</TabItem>
+
 </Tabs>
 
 ### Data Products
@@ -368,7 +391,7 @@ In that case, you can select to update to latest versions and regenerate the tra
 
 For possible Data Structure updates, you can set the maximum level of update you want to be notified about using the `--maximumBump` flag. This value provides the maximum bump to be notified about and update to if available. This value defaults to 'major' meaning the update command will notify you for all updates up to and including major type of updates to the schema model.
 
-An example showcasing the flag's behavior: 
+An example showcasing the flag's behavior:
 
 ```js
 // Data Structure version added to the snowtype config is 1-0-0.

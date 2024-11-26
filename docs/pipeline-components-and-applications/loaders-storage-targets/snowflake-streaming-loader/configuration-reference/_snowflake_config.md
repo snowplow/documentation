@@ -28,9 +28,9 @@
 </tr>
 <tr>
     <td><code>output.good.table</code></td>
-    <td>Optional. Default value `events`. Name to use for the events table</td>
+    <td>Optional. Default value <code>events</code>. Name to use for the events table</td>
 </tr>
 <tr>
     <td><code>output.good.channel</code></td>
-    <td>Optional. Default value `snowplow`. Name to use for the Snowflake channel.  If you run multiple loaders in parallel, then each channel must be given a unique name.</td>
+    <td>Optional. Default value <code>snowplow</code>. Prefix to use for the snowflake channels. The full name will be suffixed with a number, e.g. <code>snowplow-1</code>. If you run multiple loaders in parallel, then each loader must be configured with a unique channel prefix.</td>
 </tr>

@@ -11,8 +11,12 @@ import Link from '@docusaurus/Link';
     <td>Optional. Default value <code>1 second</code>.  Events are emitted to Snowflake after a maximum of this duration, even if the <code>maxBytes</code> size has not been reached</td>
 </tr>
 <tr>
-    <td><code>batching.uploadConcurrency</code></td>
-    <td>Optional. Default value 3.  How many batches can we send simultaneously over the network to Snowflake</td>
+    <td><code>batching.uploadParallelismFactor</code></td>
+    <td>Optional. Default value 2.5.  Controls how many batches can we send simultaneously over the network to Snowflake. E.g. If there are 4 available processors, and <code>uploadParallelismFactor</code> is 2.5, then the loader sends up to 10 batches in parallel. Adjusting this value can cause the app to use more or less of the available CPU.</td>
+</tr>
+<tr>
+    <td><code>cpuParallelismFactor</code></td>
+    <td>Optional. Default value 0.75. Controls how the loaders splits the workload into concurrent batches which can be run in parallel. E.g. If there are 4 available processors, and <code>cpuParallelismFactor</code> is 0.75, then the loader processes 3 batches concurrently. Adjusting this value can cause the app to use more or less of the available CPU.</td>
 </tr>
 <tr>
     <td><code>retries.setupErrors.delay</code></td>
@@ -68,6 +72,10 @@ import Link from '@docusaurus/Link';
     <td>Optional. A map of key/value strings to be included in the payload content sent to the webhook.</td>
 </tr>
 <tr>
+    <td><code>monitoring.webhook.heartbeat.*</code></td>
+    <td>Optional. Default value <code>5.minutes</code>. How often to send a heartbeat event to the webhook when healthy.</td>
+</tr>
+<tr>
     <td><code>monitoring.sentry.dsn</code></td>
     <td>Optional. Set to a Sentry URI to report unexpected runtime exceptions.</td>
 </tr>
@@ -94,4 +102,8 @@ import Link from '@docusaurus/Link';
 <tr>
     <td><code>output.good.jdbcQueryTimeout</code></td>
     <td>Optional. Sets the query timeout on the JDBC driver which connects to Snowflake</td>
+</tr>
+<tr>
+    <td><code>http.client.maxConnectionsPerServer</code></td>
+    <td> Optional. Default value 4. Configures the internal HTTP client used for alerts and telemetry. The maximum number of open HTTP requests to any single server at any one time.</td>
 </tr>

@@ -212,6 +212,85 @@ enableButtonClickTracking({
 </TabItem>
 </Tabs>
 
+## Adding context entities to tracked events
+
+You can also attach context entities to the tracked button click events as either an array of self-describing JSON objects or a callback function that returns the entities dynamically.
+
+### Statically defined context entities
+
+To add a static list of context entities to the events, use the following configuration
+
+<Tabs groupId="platform" queryString>
+<TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+window.snowplow('enableButtonClickTracking', {
+  context: [
+    {
+      schema: 'iglu:com.example_company/page/jsonschema/1-2-1',
+      data: { pageType: 'test' }
+    }
+  ],
+});
+```
+
+</TabItem>
+<TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { enableButtonClickTracking } from '@snowplow/browser-plugin-button-click-tracking';
+
+enableButtonClickTracking({
+  context: [
+    {
+      schema: 'iglu:com.example_company/page/jsonschema/1-2-1',
+      data: { pageType: 'test' }
+    }
+  ],
+});
+```
+
+</TabItem>
+</Tabs>
+
+### Dynamic context entities
+
+You can define a callback function that takes the click event and button element as parameters and returns a context entity for that specific event.
+
+
+<Tabs groupId="platform" queryString>
+<TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+window.snowplow('enableButtonClickTracking', {
+  context: function (event, element) {
+    return {
+      schema: 'iglu:com.example_company/page/jsonschema/1-2-1',
+      data: { pageType: 'test' }
+    };
+  },
+});
+```
+
+</TabItem>
+<TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { enableButtonClickTracking } from '@snowplow/browser-plugin-button-click-tracking';
+
+enableButtonClickTracking({
+  context: function (event, element) {
+    return {
+      schema: 'iglu:com.example_company/page/jsonschema/1-2-1',
+      data: { pageType: 'test' }
+    };
+  },
+});
+```
+
+</TabItem>
+</Tabs>
+
 ## Tracked data
 
 The plugin will track the following data (if present on the element):

@@ -32,6 +32,19 @@ You can specify the tracker namespace and app ID when creating a new tracker ins
 The tracker platform is set automatically but can be overriden in most of our trackers.
 The tracker version is also set automatically.
 
+## Application context entity on Web apps
+
+This context entity is tracked with events tracked using the JavaScript tracker starting from version 4.1.0.
+The application version is provided in the tracker configuration, [see instructions here](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#setting-application-version).
+
+<SchemaProperties
+  overview={{event: false, web: true, mobile: false, automatic: false}}
+  example={{
+    "version": "1.1.0"
+  }}
+  schema={{ "description": "Schema for an application context which tracks the app version.", "properties": { "version": { "type": "string", "description": "Version of the application. Can be a semver-like structure (e.g 1.1.0) or a Git commit SHA hash.", "maxLength": 255 } }, "additionalProperties": false, "type": "object", "required": [ "version" ], "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "application", "format": "jsonschema", "version": "1-0-0" }, "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#" }} />
+
+
 ## Application context entity on mobile apps
 
 This context entity is automatically tracked with events on mobile apps and gives information about the app version and build number.

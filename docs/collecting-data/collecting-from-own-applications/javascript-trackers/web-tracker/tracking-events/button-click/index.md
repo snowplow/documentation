@@ -265,8 +265,8 @@ You can define a callback function that takes the click event and button element
 window.snowplow('enableButtonClickTracking', {
   context: function (event, element) {
     return {
-      schema: 'iglu:com.example_company/page/jsonschema/1-2-1',
-      data: { pageType: 'test' }
+      schema: 'iglu:com.example_company/click/jsonschema/1-2-1',
+      data: { content: element.textContent }
     };
   },
 });
@@ -281,8 +281,8 @@ import { enableButtonClickTracking } from '@snowplow/browser-plugin-button-click
 enableButtonClickTracking({
   context: function (event, element) {
     return {
-      schema: 'iglu:com.example_company/page/jsonschema/1-2-1',
-      data: { pageType: 'test' }
+      schema: 'iglu:com.example_company/click/jsonschema/1-2-1',
+      data: { content: element.textContent }
     };
   },
 });

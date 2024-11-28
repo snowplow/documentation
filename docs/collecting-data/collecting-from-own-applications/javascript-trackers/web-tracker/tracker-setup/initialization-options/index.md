@@ -110,6 +110,7 @@ Here is a longer code example in which every tracker configuration parameter is 
 ```javascript
 snowplow('newTracker', 'sp', '{{collector_url_here}}', {
   appId: 'my-app-id',
+  appVersion: '0.1.0',
   platform: 'web',
   cookieDomain: null,
   discoverRootDomain: true,
@@ -166,6 +167,7 @@ snowplow('newTracker', 'sp', '{{collector_url_here}}', {
 ```javascript
 newTracker('sp', '{{collector_url_here}}', {
   appId: 'my-app-id',
+  appVersion: '0.1.0',
   platform: 'web',
   cookieDomain: null,
   discoverRootDomain: true,

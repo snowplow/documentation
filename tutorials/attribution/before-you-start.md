@@ -3,7 +3,7 @@ title: Before you start
 position: 2
 ---
 
-Marketing Attribution Analysis can be done in many ways depending on your business and needs. Our aim has always been to make it flexible for users to make changes from selecting a different data source to reshaping how the customer journey to conversion will be adjusted for the analysis. We suggest taking the time initially, before running the model and also readjust the configurations later on to fit your needs. 
+Marketing Attribution Analysis can be done in many ways depending on your business and needs. Our aim has always been to make it flexible for users to make changes from selecting a different data source to reshaping how the customer journey to conversion will be adjusted for the analysis. We suggest taking the time to read the documentation before running the model and also readjust the configurations later on to fit your needs.
 
 In the subsequent setup steps, we will only include the absolute minimum that's needed to be able to run it for the first time, but there are many other variables that should also be considered to fine-tune for the best outcome as the default values might not be the best for your specific analysis. Below we list a few optional variables that would dictate the modeled outcome to give you some examples:
 

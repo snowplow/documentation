@@ -1,5 +1,5 @@
 ---
-title: "Attribution"
+title: "Keeping cohesion between the Unified and Attribution packages"
 description: "Keeping cohesion between the Unified and Attribution packages"
 sidebar_position: 10
 hide_title: true

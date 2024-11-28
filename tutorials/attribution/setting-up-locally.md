@@ -65,7 +65,7 @@ vars:
 7. Run the dbt package
 
 ```yml
-dbt run select snowplow_attribution
+dbt run --select snowplow_attribution
 ```
 :::info 
 Please Note: If you are running Unified in the same project as Attribution and intend to run them in the same run, you can execute dbt run instead, but better handle it through a custom selectors.yml file

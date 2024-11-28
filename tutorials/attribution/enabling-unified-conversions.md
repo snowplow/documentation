@@ -38,7 +38,7 @@ vars:
     ]
 ```
 
-1. Enable the Conversions Module to create the `snowplow_unified_conversions` table by setting the following variable in your Unified dbt_project.yml file. 
+3. Enable the Conversions Module to create the `snowplow_unified_conversions` table by setting the following variable in your Unified dbt_project.yml file. 
 
 ```yml
 vars:
@@ -47,7 +47,7 @@ vars:
 ```
 
 :::caution 
-If you have not previously run the Unified package with the conversions module enabled by default it will cause the Snowplow package to backfill from the `snowplow__start_date` (with `snowplow__backfill_limit_days` increments for each run) until the `snowplow_unified_conversions` table becomes up-to-date wit the rest of the incremental tables. During backfilling any existing derived incremental tables (e.g. sessions table) are not going to get updated. 
+If you have not previously run the Unified package with the conversions module enabled by default it will cause the Snowplow package to backfill from the `snowplow__start_date` (with `snowplow__backfill_limit_days` increments for each run) until the `snowplow_unified_conversions` table becomes up-to-date with the rest of the incremental tables. During backfilling any existing derived incremental tables (e.g. sessions table) are not going to get updated. 
 
 Alternatively, you can adjust the run configurations the first time you run the package with the enabled conversions module to only backfill the `snowplow_unified_conversions` table from a certain more recent date only. [Read more details here](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/backfilling/).
 

@@ -31,6 +31,80 @@ Installed and configured [Snowplow CLI](/docs/pipeline-components-and-applicatio
 
 This command creates a minimal data product template in a new file `./data-products/my-data-product.yaml`.
 
+### Creating source app
+
+```bash
+./snowplow-cli dp generate --source-app my-source-app
+
+```
+
+This command creates a minimal source app template in a new file `./data-products/source-apps/my-source-app.yaml`.
+
+### Creating event spec
+
+To create an event spec, you need to modify the existing data-product file and add an event spec object. Here's a minimal example:
+
+```yaml title="./data-products/test-cli.yaml"
+apiVersion: v1
+resourceType: data-product
+resourceName: 3d3059c4-d29b-4979-a973-43f7070e1dd0
+data:
+    name: test-cli
+    sourceApplications: []
+    eventSpecifications:
+        - resourceName: 11d881cd-316e-4286-b5d4-fe7aebf56fca
+          name: test
+          event:
+            source: iglu:com.snowplowanalytics.snowplow/button_click/jsonschema/1-0-0
+```
+
+:::caution Warning
+
+The `source` fields of events and entities must refer to a deployed data structure. Referring to a locally created data structure is not yet supported.
+
+:::
+
+### Linking data product to a source application
+
+To link a data product to a source application, provide a list of references to the source application files in the `data.sourceApplications` field. Here's an example:
+
+```yaml title="./data-products/test-cli.yaml"
+apiVersion: v1
+resourceType: data-product
+resourceName: 3d3059c4-d29b-4979-a973-43f7070e1dd0
+data:
+    name: test-cli
+    sourceApplications:
+        - $ref: ./source-apps/my-source-app.yaml
+```
+
+### Modifying the event specifications source applications
+
+By default event specs inherit all the source apps of the data product. If you want to customise it, you can use the `excludedSourceApplications` in the event spec description to remove a given source application from an event spec
+
+```yaml title="./data-products/test-cli.yaml"
+apiVersion: v1
+resourceType: data-product
+resourceName: 3d3059c4-d29b-4979-a973-43f7070e1dd0
+data:
+    name: test-cli
+    sourceApplications:
+        - $ref: ./source-apps/generic.yaml
+        - $ref: ./source-apps/specific.yaml
+    eventSpecifications:
+        - resourceName: 11d881cd-316e-4286-b5d4-fe7aebf56fca
+          name: All source apps
+          event:
+            source: iglu:com.snowplowanalytics.snowplow/button_click/jsonschema/1-0-0
+        - resourceName: b9c994a0-03b2-479c-b1cf-7d25c3adc572
+          name: Not quite everything
+          excludedSourceApplications:
+            - $ref: ./source-apps/specific.yaml
+          event:
+            source: iglu:com.snowplowanalytics.snowplow/button_click/jsonschema/1-0-0
+```
+In this example event spec `All source apps` is related to both `generic` and `specific` source apps, but event spec `Not quite everything` is related only to the `generic` source app
+
 
 ### Downloading data products, event specifications and source apps
 

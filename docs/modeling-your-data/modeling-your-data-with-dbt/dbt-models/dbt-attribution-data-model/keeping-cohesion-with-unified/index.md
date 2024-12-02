@@ -5,6 +5,8 @@ sidebar_position: 10
 hide_title: true
 ---
 
+## Keeping cohesion between the Unified and Attribution packages
+
 In case there are data issues (e.g. you may want to reprocess the analysis based on the latest user stitching status) the Attribution package produced data models can be reprocessed fully without the need to refresh the Unified package, but not the other way round as it is used as one of the primary sources to rely on when creating the incremental tables. If the underlying data source changed which impacted the views or conversions source data, you would need to refresh the attribution package as well. 
 
 There is, however, no dependency between the packages when it comes to syncing them. You may want to run your Unified package once an hour for the more business critical tables to get updated, while you can process the Attribution package once a month, if that's what makes sense for your business. There is no concept of backfill limits or partials reprocessing for the Attribution package, regardless of the last run, the package will reprocess all the data since the last processed conversion event that became available in the source tables.

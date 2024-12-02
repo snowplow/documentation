@@ -8,12 +8,15 @@ position: 5
 Snowplow provides a fully managed service for running data models. We recommend this if you are just getting started out, or don’t anticipate needing to build your own custom models. To get started, follow these steps:
 
 1. Navigate to the Data models section of the Snowplow Console and click `Add data model`
+
 ![](./screenshots/F8E9BF8C-47CF-48B7-9EDC-78D6EB1221D0_1_201_a.jpeg)
 
 2. Select `Attribution`
+
 ![](./screenshots/Screenshot01.png)
 
 3. Set a name, warehouse connection and owner who will receive failure alerts.
+
 ![](./screenshots/Screenshot30.png)
 
 4. Click Confirm - and then wait for the data model to be created and show up as ‘Disabled’ in the Data Models tab.
@@ -37,7 +40,9 @@ For a more detailed guide check out the [Setting Variables](/tutorials/attributi
 
 
 8. (Optional) Configure the default schedule - use a CRON editor if necessary
+
 ![](./screenshots/Screenshot_2024-07-04_at_17.44.04.png)
 
 9. Enable the model by clicking the Enable button in the top right
+
 ![](./screenshots/Screenshot_2024-07-04_at_17.44.26.png)

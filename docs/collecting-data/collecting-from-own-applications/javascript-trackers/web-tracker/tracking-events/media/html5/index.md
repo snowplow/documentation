@@ -154,6 +154,16 @@ This function begins tracking media events for a given media element. It takes a
 
 ---
 
+#### Filter Out Repeated Events Configuration (Optional)
+
+| Parameter | Type | Description | Default Value |
+|-----------|------|-------------|---------------|
+| `config.filterOutRepeatedEvents.seekEvents` | `boolean` | Whether to filter out seek start and end events tracked after each other. | `false` |
+| `config.filterOutRepeatedEvents.volumeChangeEvents` | `boolean` | Whether to filter out volume change events tracked after each other. | `false` |
+| `config.filterOutRepeatedEvents.flushTimeoutMs` | `number` | Timeout in milliseconds after which to send the events that are queued for filtering. | `5000` (milliseconds) |
+
+---
+
 ### Example Usage
 
 ```javascript
@@ -161,14 +171,18 @@ startHtml5MediaTracking({
   id: "unique-session-id",
   video: document.getElementById("myVideoElement"),
   label: "Product Demo Video",
-  captureEvents: ["play", "pause", "ended"],
+  captureEvents: ["play", "pause", "end"],
   boundaries: [25, 50, 75, 100],
   pings: {
     pingInterval: 20,
     maxPausedPings: 2,
   },
   updatePageActivityWhilePlaying: true,
-  filterOutRepeatedEvents: false,
+  filterOutRepeatedEvents: {
+    seekEvents: true,
+    volumeChangeEvents: false,
+    flushTimeoutMs: 5000
+  },
 });
 ```
 

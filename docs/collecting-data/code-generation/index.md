@@ -8,7 +8,7 @@ sidebar_label: "Code Generation"
 This documentation only applies to [Snowplow BDP](https://snowplow.io/snowplow-bdp/). See the [feature comparison](/docs/feature-comparison/index.md) page for more information about the different Snowplow offerings.
 :::
 
-The `Snowtype CLI` is a tool that assists with instrumenting, verifying and maintaining tracking code that works with Snowplow tracking SDKs. 
+**Snowtype** is a tool that assists with instrumenting, verifying and maintaining tracking code. Snowtype works with Snowplow tracking SDKs. 
 
 ```mdx-code-block
 import DocCardList from '@theme/DocCardList';

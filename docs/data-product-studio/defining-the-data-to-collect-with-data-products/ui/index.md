@@ -54,7 +54,7 @@ If you need to edit a data product at any time, simply select it from the data p
 
 #### Updating existing Data Products following the release of Source Applications
 
-Data Products created prior to the release of [Source Applications](../../organize-data-sources-with-source-applications/index.md) in September 2024 will need to be updated to assign Source Applications in which the events will be tracked on. The selected Source Applications will add the relevant application IDs to each of the event specifications in the data product. 
+Data Products created prior to the release of [Source Applications](../../organize-data-sources-with-source-applications/index.md) in September 2024 will need to be updated to assign Source Applications in which the events will be tracked on. The selected Source Applications will add the relevant application IDs to each of the event specifications in the data product.
 
 ![Updating existing Data Products](images/edit-existing-data-product.png)
 
@@ -64,7 +64,7 @@ Event specifications which contain previously added application IDs will need to
 
 ## Upgrading Event Specification Instructions
 
-When working with Event Specifications of a Data Product, it’s essential to account for the evolution of underlying [Data Structures](../../managing-your-data-structures/index.md). Data Structures define reusable JSON schemas, which can be referenced by different Event Specifications (events and entities). Each Event Specification may contain instructions, which rely on a specific version of a Data Structure, adding another layer to specialize or constraint Event Specifications in a more granular way.
+When working with Event Specifications of a Data Product, it’s essential to account for the evolution of underlying [Data Structures](docs/data-product-studio/data-structures/index.md). Data Structures define reusable JSON schemas, which can be referenced by different Event Specifications (events and entities). Each Event Specification may contain instructions, which rely on a specific version of a Data Structure, adding another layer to specialize or constraint Event Specifications in a more granular way.
 
 ### Versioning of Data Structures
 
@@ -74,7 +74,7 @@ As data and events evolve, Data Structures may be updated to new versions, which
 
 To streamline the process of upgrading an Event Specification to the latest version of a Data Structure, we’ve implemented a mechanism that allows you to update Event Specification instructions through the UI. Here’s how it works:
 
-When a new version of a Data Structure becomes available, the system will indicate that the event or entities referenced by the data structure has a new version available, showing an **'Upgrade'** button in the UI. 
+When a new version of a Data Structure becomes available, the system will indicate that the event or entities referenced by the data structure has a new version available, showing an **'Upgrade'** button in the UI.
 
 ![Upgrade Event Specification warning](images/upgrade-event-specification-warning.png)
 
@@ -82,7 +82,7 @@ Clicking the button navigates to a new page, informing the user of the new versi
 
 ![Upgrade Event Specification page](images/upgrade-event-specification-page.png)
 
-When clicked it will show the differences between the current version of the Data Structure and the one the user intends to upgrade to. 
+When clicked it will show the differences between the current version of the Data Structure and the one the user intends to upgrade to.
 
 ![Upgrade Event Specification diff](images/upgrade-event-specification-diff.png)
 
@@ -103,7 +103,7 @@ If the new version of the Data Structure introduces incompatibilities with the e
 - The conflict resolution UI provides options to the user tp modify or delete each instruction depending on the type of incompatibility:
   - **Remove conflicting instructions**: If a specific property is no longer present in the new Data Structure.
   - **Modify conflicting instructions**: If a property in the new Data Structure has been changed in an incompatible way (e.g., type change, added/removed enum values, added pattern, etc.).
-  
+
 ![Conflict resolution Event Specification](images/conflict_resolution.png)
 
 This mechanism ensures that teams can benefit from updated Data Structures while maintaining the integrity and accuracy of their Event Specifications. Users are empowered to make informed decisions during the upgrade process, with clear visual cues and options to handle conflicts effectively.

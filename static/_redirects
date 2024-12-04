@@ -317,3 +317,6 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/sources/code-generation/* /docs/data-product-studio/snowtype/:splat 301
 /docs/data-product-studio/versioning-your-data-structures/* /docs/data-product-studio/data-structures/version-amend/:splat 301
 /docs/data-product-studio/managing-your-data-structures/* /docs/data-product-studio/data-structures/manage/:splat 301
+/docs/data-product-studio/managing-event-specifications/ui/* /docs/data-product-studio/event-specifications/:splat 301
+/docs/data-product-studio/managing-event-specifications/api/* /docs/data-product-studio/event-specifications/api/:splat 301
+/docs/data-product-studio/tracking-plans/* /docs/data-product-studio/event-specifications/tracking-plans/:splat 301

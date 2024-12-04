@@ -4,6 +4,11 @@ description: "Details on how to add sql to the events this run table"
 sidebar_position: 40
 ---
 
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
 There may be times when the [events this run table](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md#events-this-run) requires additional fields on it for you to make use of to [add to your derived tables](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/examples/adding-fields-to-derived-table/index.md). It is not recommended to alter this model directly, as it is a core part of the packages, but you can use the `snowplow__custom_sql` variable in packages that support it to add custom sql into the `select` block of the events this run model.
 
 To find out if your package supports this, check the [configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md) page.

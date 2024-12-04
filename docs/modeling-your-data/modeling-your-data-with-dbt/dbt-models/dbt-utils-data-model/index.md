@@ -9,6 +9,7 @@ hide_title: true
 import Badges from '@site/src/components/Badges';
 import ThemedImage from '@theme/ThemedImage';
 ```
+
 <Badges badgeType="dbt-package Release" pkg="utils"></Badges>&nbsp;
 <Badges badgeType="Actively Maintained"></Badges>&nbsp;
 <Badges badgeType="SPAL"></Badges>

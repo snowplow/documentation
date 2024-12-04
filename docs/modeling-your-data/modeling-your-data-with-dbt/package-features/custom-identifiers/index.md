@@ -1,5 +1,5 @@
 ---
-title: "Custom Sessionization & Users"
+title: "Custom Sessionization"
 sidebar_position: 50
 toc_max_heading_level: 5
 ---
@@ -256,7 +256,6 @@ vars:
     ...
     snowplow__session_sql: "DATE(e.derived_tstamp)"
     ...
-...
 ```
 
 This would be parsed into the following SQL:
@@ -267,6 +266,3 @@ SELECT
     DATE(e.derived_tstamp) as session_identifier,
 ...
 ```
-
-## Customizing user identifiers
-Customizing user identifiers works in the exact same way as customizing session identifiers, although you need to make use of the `snowplow__user_identifiers` variable instead of the `snowplow__session_identifiers`, and `snowplow__user_sql` in place of `snowplow__session_sql`. By default the user identifier is the `domain_userid` field which is found in the atomic events table. You can find an example project that shows this [here](https://github.com/snowplow-incubator/dbt-example-project/tree/main/custom_users).

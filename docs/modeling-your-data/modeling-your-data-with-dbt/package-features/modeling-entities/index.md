@@ -19,7 +19,7 @@ In some cases, these fields may exist but be null when the entity or self-descri
 
 For warehouses other than Redshift, all columns in your atomic events table are available in the [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md#events-this-run) table, so you can use them as needed in any other models. 
 
-For Redshift we provide the `snowplow__entities_or_sdes` in our packages that have an events this run table. This variable takes a the name of your entity or self-describing event table, a prefix, an alias, and if it is a single entity.
+For Redshift we provide the `snowplow__entities_or_sdes` in our packages that have an events this run table. This variable takes the name of your entity or self-describing event table, a prefix, an alias, and if it is a single entity.
 
 :::caution
 

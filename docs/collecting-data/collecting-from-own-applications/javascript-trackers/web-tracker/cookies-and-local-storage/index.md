@@ -44,7 +44,7 @@ If no session cookie is already present when an event fires, the tracker treats 
 
 Note: A new session can be started at any time by calling the function `newSession`.
 
-When using [anonymous tracking](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/anonymous-tracking/index.md) with session (`anonymousTracking: { withSessionTracking: true }`; available from v2.15.0+) this key will contain a _salt_ value which is used to stitch page views into a session. The value is never sent to the collector. 
+When using [anonymous tracking](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/anonymous-tracking/index.md) with session (`anonymousTracking: { withSessionTracking: true }`; available from v2.15.0+) this key will contain a _salt_ value which is used to stitch page views into a session. The value is never sent to the collector.
 
 ### Collector cookie `sp`
 
@@ -64,8 +64,8 @@ Local storage will only be used if `stateStorageStrategy` is set to `localSto
 
 | Storage key                                | Description                                                                                                                                                                                                                                                                        |
 |--------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| snowplowOutQueue_{namespace}_post2         | Used to store a cache of unsent events. This is used to reduce the chance of events to be lost due to page navigation and events not being set to the collector before the navigation event occurs. Where GET requests are used, this key will end in `_get` rather than `_post2`. |
-| snowplowOutQueue_{namespace}_post2.expires | Used to match the concept of cookie expiry within local storage. This ensures a consistent behavior between cookie and local storage. Where GET requests are used, this key will end in `_get` rather than `_post2`.                                                               |
+| `snowplowOutQueue_{namespace}_post2`         | Used to store a cache of unsent events. This is used to reduce the chance of events to be lost due to page navigation and events not being set to the collector before the navigation event occurs. Where GET requests are used, this key will end in `_get` rather than `_post2`. |
+| `snowplowOutQueue_{namespace}_post2.expires` | Used to match the concept of cookie expiry within local storage. This ensures a consistent behavior between cookie and local storage. Where GET requests are used, this key will end in `_get` rather than `_post2`.                                                               |
 
 ## Mapping values to tracker protocol
 

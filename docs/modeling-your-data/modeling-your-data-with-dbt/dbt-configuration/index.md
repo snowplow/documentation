@@ -8,7 +8,7 @@ sidebar_position: 40
 
 This page details general configurations that can apply across many of our packages, each package has specific configuration variables that define how the models run, please see each child page for the specifics of each package.
 
-::: 
+:::
 
 ## Variables
 
@@ -44,6 +44,23 @@ To optimism performance of large Postgres datasets you can create [indexes](http
 }}
 ```
 
+### Spark
+
+For Spark environments, Iceberg is currently the supported file format for external tables. We have successfully tested this setup using both Glue and Thrift as connection methods. To use these models, create an external table from the Iceberg lake format in Spark and point your dbt model to this table.
+
+Here's an example profiles.yml configuration for Spark using Thrift:
+``` yaml
+spark:
+  type: spark
+  host: localhost
+  method: thrift
+  port: 10000
+  schema: default
+```
+
+In your dbt_project.yml, the file_format is set to `iceberg` by default for Spark. While you can override this in your project's dbt YAML file to use a different file format, please note that Iceberg is currently the only officially supported format.
+
+
 ### Databricks
 
 You can connect to Databricks using either the `dbt-spark` or the `dbt-databricks` connectors. The `dbt-spark` adapter does not allow dbt to take advantage of certain features that are unique to Databricks, which you can take advantage of when using the `dbt-databricks` adapter. Where possible, we would recommend using the `dbt-databricks` adapter.
@@ -56,8 +73,8 @@ Since there are many different situations, we've created the following table to 
 
 |                                             | Adapter supports UC and UC Enabled                                                                   | Adapter supports UC and UC not enabled         | Adapter does not support UC                                                                         |
 | ------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| Events land in default `atomic` schema      | `snowplow__databricks_catalog` = '{name_of_catalog}'                                                 | Nothing needed                                 | `snowplow__databricks_catalog` = 'atomic'                                                           |
-| Events land in custom schema (not `atomic`) | `snowplow__atomic_schema` = '{name_of_schema}'  `snowplow__databricks_catalog` = '{name_of_catalog}' | `snowplow__atomic_schema` = '{name_of_schema}' | `snowplow__atomic_schema` = '{name_of_schema}'  `snowplow__databricks_catalog` = '{name_of_schema}' |
+| Events land in default `atomic` schema      | `snowplow__databricks_catalog = '{name_of_catalog}'`                                                 | Nothing needed                                 | `snowplow__databricks_catalog = 'atomic'`                                                           |
+| Events land in custom schema (not `atomic`) | `snowplow__atomic_schema = '{name_of_schema}'`  `snowplow__databricks_catalog = '{name_of_catalog}'` | `snowplow__atomic_schema = '{name_of_schema}'` | `snowplow__atomic_schema = '{name_of_schema}'`  `snowplow__databricks_catalog = '{name_of_schema}'` |
 
 #### Optimization of models
 

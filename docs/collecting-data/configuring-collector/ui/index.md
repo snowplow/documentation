@@ -67,7 +67,7 @@ To be able to post sample requests in the documentation you need to click the `
 
 The endpoint for the API is:
 
-[https://console.snowplowanalytics.com/api/msc/v1/organizations/**{organizationId}**/resources/v1/pipelines/**{pipelineId}**/configuration/collector](https://console.snowplowanalytics.com/api/msc/v1/organizations/{organizationId}/resources/v1/pipelines/{pipelineId}/configuration/collector)
+`https://console.snowplowanalytics.com/api/msc/v1/organizations/{organizationId}/resources/v1/pipelines/{pipelineId}/configuration/collector`
 
 and the only supported HTTP verb is `GET`.
 

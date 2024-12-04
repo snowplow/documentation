@@ -9,6 +9,7 @@ sidebar_position: 70
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
+
 :::note
 Snowplow ecommerce tracking was added in version 5.4.0. With the addition of these new ecommerce events and entities, we have deprecated the old `EcommerceTransaction` and `EcommerceTransactionItem` events. [Migration guide](docs/collecting-data/collecting-from-own-applications/mobile-trackers/migration-guides/migration-guide-to-new-ecommerce/index.md).
 :::
@@ -28,9 +29,9 @@ Ecommerce events are tracked like normal Snowplow events. For example, tracking 
 let tracker = Snowplow.createTracker(namespace: "appTracker", endpoint: "https://snowplow-collector-url.com")
 
 let product = ProductEntity(
-  id: "productId", 
-  category: "category", 
-  currency: "GBP", 
+  id: "productId",
+  category: "category",
+  currency: "GBP",
   price: 100
 )
 let event = ProductViewEvent(product: product)
@@ -47,9 +48,9 @@ val tracker = Snowplow.createTracker(
 )
 
 val event = ProductViewEvent(ProductEntity(
-  id = "productId", 
-  category = "category", 
-  currency = "GBP", 
+  id = "productId",
+  category = "category",
+  currency = "GBP",
   price = 100
   )
 )
@@ -72,14 +73,14 @@ ProductViewEvent event = new ProductViewEvent(new ProductEntity(
   "GBP", // currency
   100 // price
   )
-);         
+);
 tracker.track(event);
 ```
   </TabItem>
 </Tabs>
 
 
-Add or update properties using setters. For example, adding data to a PromotionEntity: 
+Add or update properties using setters. For example, adding data to a PromotionEntity:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
@@ -126,7 +127,7 @@ This table lists all the ecommerce events.
 `RefundEvent`           | Track a transaction partial or complete refund.
 
 
-Each ecommerce event is a [self-describing](docs/collecting-data/collecting-from-own-applications/mobile-trackers/custom-tracking-using-schemas/index.md) event using a single schema, 
+Each ecommerce event is a [self-describing](docs/collecting-data/collecting-from-own-applications/mobile-trackers/custom-tracking-using-schemas/index.md) event using a single schema,
 `iglu:com.snowplowanalytics.snowplow.ecommerce/snowplow_ecommerce_action/jsonschema/1-0-2`.
 
 <details>
@@ -153,9 +154,9 @@ Tracking a visit to a details screen for a specific product.
 
 ```swift
 let product = ProductEntity(
-  id: "plow2", 
-  category: "snow.clearance.ploughs.large", 
-  currency: "NOK", 
+  id: "plow2",
+  category: "snow.clearance.ploughs.large",
+  currency: "NOK",
   price: 5000
 )
 let event = ProductViewEvent(product: product)
@@ -168,9 +169,9 @@ tracker.track(event)
 
 ```kotlin
 val product = ProductEntity(
-  id = "plow2", 
-  category = "snow.clearance.ploughs.large", 
-  currency = "NOK", 
+  id = "plow2",
+  category = "snow.clearance.ploughs.large",
+  currency = "NOK",
   price = 5000
 )
 val event = ProductViewEvent(product)
@@ -188,7 +189,7 @@ ProductViewEvent event = new ProductViewEvent(new ProductEntity(
     "NOK", // currency
     5000 // price
   )
-); 
+);
 
 tracker.track(event);
 ```
@@ -205,9 +206,9 @@ Tracking one or more products being added to a cart.
 
 ```swift
 let product = ProductEntity(
-  id: "productId", 
-  category: "clothes/shirts", 
-  currency: "EUR", 
+  id: "productId",
+  category: "clothes/shirts",
+  currency: "EUR",
   price: 100.50
 )
 let cart = CartEntity(totalValue: 200, currency: "EUR")
@@ -221,9 +222,9 @@ tracker.track(event)
 
 ```kotlin
 val product = ProductEntity(
-  id = "productId", 
-  category = "clothes/shirts", 
-  currency = "EUR", 
+  id = "productId",
+  category = "clothes/shirts",
+  currency = "EUR",
   price = 100.50
 )
 val cart = CartEntity(totalValue = 200, currency = "EUR")
@@ -277,9 +278,9 @@ tracker.track(event)
 
 ```kotlin
 val product = ProductEntity(
-  id = "productId", 
-  category = "clothes/shirts", 
-  currency = "EUR", 
+  id = "productId",
+  category = "clothes/shirts",
+  currency = "EUR",
   price = 100.50
 )
 val cart = CartEntity(totalValue = 200, currency = "EUR")
@@ -330,9 +331,9 @@ tracker.track(event)
 
 ```kotlin
 val product = ProductEntity(
-  id = "productId", 
-  category = "software", 
-  currency = "USD", 
+  id = "productId",
+  category = "software",
+  currency = "USD",
   price = 99.99
 )
 val event = ProductListViewEvent(listOf(product), name = "snowplowProducts")
@@ -380,9 +381,9 @@ tracker.track(event)
 
 ```kotlin
 val product = ProductEntity(
-  id = "productId", 
-  category = "software", 
-  currency = "USD", 
+  id = "productId",
+  category = "software",
+  currency = "USD",
   price = 99.99
 )
 val event = ProductListClickEvent(product, name = "snowplowProducts")
@@ -457,10 +458,10 @@ Track the completion of a purchase or transaction, along with common transaction
 
 ```swift
 let transaction = TransactionEntity(
-  transactionId: "id-123", 
-  revenue: 50000, 
-  currency: "JPY", 
-  paymentMethod: "debit", 
+  transactionId: "id-123",
+  revenue: 50000,
+  currency: "JPY",
+  paymentMethod: "debit",
   totalQuantity: 2
 )
 let event = TransactionEvent(transaction)
@@ -473,7 +474,7 @@ tracker.track(event)
 
 ```kotlin
 val transaction = TransactionEntity(
-  id = "id-123", 
+  id = "id-123",
   revenue = 50000,
   currency = "JPY",
   paymentMethod = "debit",
@@ -510,15 +511,15 @@ Track an error occurring during a transaction.
 
 ```swift
 let transaction = TransactionEntity(
-  transactionId: "id-123", 
-  revenue: 50000, 
-  currency: "JPY", 
-  paymentMethod: "debit", 
+  transactionId: "id-123",
+  revenue: 50000,
+  currency: "JPY",
+  paymentMethod: "debit",
   totalQuantity: 2
 )
 let event = TransactionErrorEvent(
-  transaction: transaction, 
-  errorCode: "E05", 
+  transaction: transaction,
+  errorCode: "E05",
   errorDescription: "connection_failure"
 )
 
@@ -530,14 +531,14 @@ tracker.track(event)
 
 ```kotlin
 val transaction = TransactionEntity(
-  id = "id-123", 
+  id = "id-123",
   revenue = 50000,
   currency = "JPY",
   paymentMethod = "debit",
   totalQuantity = 2
 )
 val event = TransactionErrorEvent(
-    transaction = transaction, 
+    transaction = transaction,
     errorCode = "E05",
     errorDescription = "connection_failure"
 )
@@ -577,7 +578,7 @@ Track a refund being requested for part of, or the entirety of, a transaction.
 ```swift
 let event = RefundEvent(
   transactionId: "id-123", // use the transaction ID from the original Transaction event
-  refundAmount: 20000, 
+  refundAmount: 20000,
   currency: "JPY"
 )
 

@@ -57,6 +57,12 @@ Also, never patch a schema version that exists in a production environment, even
 
 For Snowplow BDP customers, patching is disabled for production pipelines. Community Edition users have to explicitly enable patching (if desired) in the [Iglu Server configuration](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/reference/index.md) (`patchesAllowed`) at their own risk.
 
+:::tip Schema caching
+
+Note that various pipeline components, most importantly Enrich (including Enrich embedded in Snowplow Mini and Snowplow Micro), cache schemas to improve performance. The default caching time is 10 minutes (it’s controlled by the [Iglu Resolver configuration](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md)). This means that the effect of patching a schema will not be immediate.
+
+:::
+
 ## Marking the schema as superseded
 
 
@@ -242,6 +248,7 @@ The `$supersedes` field states that the schema version defined in the `self` par
 "$supersedes": ["1-0-2", "1-0-3"],
 ...
 ```
+
 :::note Patching and superseding
 
 Once you’ve defined the `$supersedes` field for a schema version, you can’t update it — even in the development environment where [patching](#patching-the-schema) is allowed. However, you can change which schema version supersedes which by creating new schema versions.
@@ -249,6 +256,13 @@ Once you’ve defined the `$supersedes` field for a schema version, you can’t 
 For example, if version `1-0-2` is defined to supersede version `1-0-1`, and you create version `1-0-3` which also supersedes `1-0-1`, then `1-0-1` will be superseded by the newest version, i.e. `1-0-3`. See diagrams below for more information on how this is determined.
 
 :::
+
+:::tip Schema caching
+
+Note that various pipeline components, most importantly Enrich (including Enrich embedded in Snowplow Mini and Snowplow Micro), cache schemas to improve performance. The default caching time is 10 minutes (it’s controlled by the [Iglu Resolver configuration](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md)). This means that the effect of superseding a schema will not be immediate.
+
+:::
+
 ### Rules
 
 #### A schema version can only supersede previous versions

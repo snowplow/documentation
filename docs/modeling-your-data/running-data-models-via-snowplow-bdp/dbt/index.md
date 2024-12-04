@@ -18,7 +18,7 @@ As an initial overview, in your snowplow-pipeline repository, your data models r
 ```text
 .
 ├── datamodeling
-|   ├── datamodel_name
+|   ├── datamodel-name
 |       └── dbt
 |           ├── analyses
 |           ├── logs
@@ -86,6 +86,27 @@ profile_name:
       account:
       user: ANALYTICS_PROD_USER
       password: "{{ env_var('SNOWFLAKE_DATAMODELING_PASSWORD') }}"
+      role: ANALYTICS_PROD_ROLE
+      database: ANALYTICS_PROD_DB
+      warehouse: ANALYTICS_PROD_WH
+      schema: DBT_PROD
+      threads: [1 or more]
+      client_session_keep_alive: true
+  target: prod
+```
+
+Alternatively, if you prefer to leverage RSA public/private key-based authentication, your profile should look like the following:
+
+```yaml
+profile_name:
+  outputs:
+    prod:
+      type: snowflake
+      account:
+      user: ANALYTICS_PROD_USER
+      private_key_path: "{{ env_var('SNOWFLAKE_RSA_PRIVATE_KEY_PATH') }}"
+      # passphrase is optional -> if this is not set only include 'private_key_path'
+      private_key_passphrase: "{{ env_var('SNOWFLAKE_RSA_PRIVATE_KEY_PASSPHRASE') }}"
       role: ANALYTICS_PROD_ROLE
       database: ANALYTICS_PROD_DB
       warehouse: ANALYTICS_PROD_WH

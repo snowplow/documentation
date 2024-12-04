@@ -5,6 +5,7 @@ const sidebar = require('./sidebars')
 const abbreviations = require('./src/remark/abbreviations')
 const math = require('remark-math')
 const katex = require('rehype-katex')
+const path = require('path')
 
 /** @type {import('@docusaurus/types').Config} */
 module.exports = {
@@ -36,10 +37,7 @@ module.exports = {
     mermaid: true,
   },
 
-  themes: [
-    '@saucelabs/theme-github-codeblock',
-    '@docusaurus/theme-mermaid',
-  ],
+  themes: ['@saucelabs/theme-github-codeblock', '@docusaurus/theme-mermaid'],
 
   presets: [
     [
@@ -64,6 +62,19 @@ module.exports = {
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
         },
+      },
+    ],
+  ],
+
+  plugins: [
+    [
+      '@docusaurus/plugin-content-docs',
+      {
+        id: 'tutorials',
+        path: 'tutorials',
+        routeBasePath: 'tutorials',
+        sidebarPath: false,
+        showLastUpdateTime: true,
       },
     ],
   ],
@@ -94,23 +105,26 @@ module.exports = {
         },
         items: [
           {
-            href: 'https://snowplow.io/data-product-accelerators/',
-            label: 'Accelerators',
-            className: 'nav-link__first',
+            type: 'custom-docsTutorialsTabsDesktop',
             position: 'left',
+          },
+          {
+            type: 'custom-docsTutorialsTabsMobile',
+            position: 'left',
+            className: 'mobile-only',
           },
           {
             href: 'https://discourse.snowplow.io',
             label: 'Discourse',
-            position: 'left',
+            position: 'right',
           },
           {
             href: 'https://github.com/snowplow/',
             label: 'GitHub',
-            position: 'left',
+            position: 'right',
           },
           {
-            to: 'https://go.snowplowanalytics.com/l/571483/2021-02-19/3sn5nml',
+            to: 'https://snowplow.io/get-started/book-a-demo-of-snowplow-bdp/',
             label: 'Book a demo',
             className: 'snowplow-button',
             position: 'right',

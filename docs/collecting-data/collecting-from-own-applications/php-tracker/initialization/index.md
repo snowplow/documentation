@@ -18,7 +18,7 @@ We can now create our Emitter, Subject and Tracker objects.
 
 ### Creating a Tracker
 
-The most basic Tracker instance will only require you to provide the type of Emitter and the URI of the collector to which the Tracker will log events.
+The most basic Tracker instance will only require you to provide an [Emitter](/docs/collecting-data/collecting-from-own-applications/php-tracker/emitters/index.md) and the data [Subject](/docs/collecting-data/collecting-from-own-applications/php-tracker/subjects/index.md) for which the Tracker will log events.
 
 ```php
 $emitter = new SyncEmitter($collector_uri, "http", "POST", 10, false);
@@ -54,8 +54,8 @@ $emitter_array = array($emitter1, $emitter2);
 
 // Tracker Init
 $subject = new Subject();
-$tracker1 = ($emitter1, $subject); # Single Emitter
-$tracker2 = ($emitter_array, $subject); # Array of Emitters
+$tracker1 = new Tracker($emitter1, $subject); # Single Emitter
+$tracker2 = new Tracker($emitter_array, $subject); # Array of Emitters
 ```
 
 #### `subject`

@@ -23,10 +23,6 @@
     <td>Optional. Default value 1000.  How many events the Kinesis client may fetch in a single poll.  Only used when `input.retrievalMode` is Polling.</td>
 </tr>
 <tr>
-    <td><code>input.bufferSize</code></td>
-    <td>Optional. Default value 1. The number of batches of events which are pre-fetched from kinesis. The default value is known to work well.</td>
-</tr>
-<tr>
     <td><code>input.workerIdentifier</code></td>
     <td>Optional. Defaults to the <code>HOSTNAME</code> environment variable. The name of this KCL worker used in the dynamodb lease table.</td>
 </tr>

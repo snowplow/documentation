@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-If this plugin is used, the tracker will look for Google Analytics cookies (Universal Analytics and GA4, specifically the `__utma`, `__utmb`, `__utmc`, `__utmv`, `__utmz`, and `_ga` cookies) and combine their values into event context entities that get sent with every event.
+If this plugin is used, the tracker will look for Google Analytics cookies (GA4/Universal Analytics and "classic" GA; specifically the `_ga` cookie and older `__utma`, `__utmb`, `__utmc`, `__utmv`, `__utmz`) and combine their values into event context entities that get sent with every event.
 
 GA cookies information is **automatically tracked** once configured.
 
@@ -37,43 +37,10 @@ GA cookies information is **automatically tracked** once configured.
 - `yarn add @snowplow/browser-plugin-ga-cookies`
 - `pnpm add @snowplow/browser-plugin-ga-cookies`
 
-
-  </TabItem>
+</TabItem>
 </Tabs>
 
 ## Initialization
-
-<details>
-
-<summary><i>pre-v3.17.0</i></summary>
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
-window.snowplow('addPlugin',
-  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-ga-cookies@latest/dist/index.umd.min.js",
-  ["snowplowGaCookies", "GaCookiesPlugin"]
-);
-```
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-```javascript
-import { newTracker, trackPageView } from '@snowplow/browser-tracker';
-import { GaCookiesPlugin } from '@snowplow/browser-plugin-ga-cookies';
-
-newTracker('sp1', '{{collector_url}}', {
-   appId: 'my-app-id',
-   plugins: [ GaCookiesPlugin() ],
-});
-```
-
-  </TabItem>
-</Tabs>
-
-</details>
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -82,7 +49,7 @@ newTracker('sp1', '{{collector_url}}', {
 window.snowplow('addPlugin',
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-ga-cookies@latest/dist/index.umd.min.js",
   ["snowplowGaCookies", "GaCookiesPlugin"],
-  [pluginOptions]
+  [pluginOptions] // note: for sp.js, pluginOptions can also be specified when calling `newTracker`; e.g. `contexts: { gaCookies: { ua: true, ga4: false } }`
 );
 ```
 
@@ -115,41 +82,16 @@ interface GACookiesPluginOptions {
 
 | Name             | Default | Description                                                                                                                                                                                                                                                                                                                                                     |
 |------------------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| ua               | `true`  | Send Universal Analytics specific cookie values.                                                                                                                                                                                                                                                                                                                |
-| ga4              | `false` | Send Google Analytics 4 specific cookie values.                                                                                                                                                                                                                                                                                                                 |
+| ua               | `false`  | Send Universal Analytics specific cookie values.                                                                                                                                                                                                                                                                                                                |
+| ga4              | `true` | Send Google Analytics 4 specific cookie values.                                                                                                                                                                                                                                                                                                                 |
 | ga4MeasurementId | `""`    | Measurement id(s) to search the Google Analytics 4 session cookie. Can be a single measurement id as a string or an array of measurement id strings. The cookie has the form of `<cookie_prefix>_ga_<container-id>` where `<container-id>` is the data stream container id and `<cookie_prefix>` is the optional `cookie_prefix` option of the gtag.js tracker. |
 | cookiePrefix     | `[]`    | Cookie prefix set on the Google Analytics 4 cookies using the `cookie_prefix` option of the gtag.js  tracker.                                                                                                                                                                                                                                                   |
 
 ## Context entities
 
-<details>
+Adding this plugin will automatically capture the following entities:
 
-<summary><i>pre-v3.17.0</i></summary>
-
-Adding this plugin will automatically capture the following context:
-
-**Context**                                                                                             [iglu:com.google.analytics/cookies/jsonschema/1-0-0](https://github.com/snowplow/iglu-central/blob/master/schemas/com.google.analytics/cookies/jsonschema/1-0-0)
-
-**Example**
-```json
-{
-  "_ga": "GA1.2.739498691.16151511088"
-}
-```
-
-</details>
-
-Adding this plugin will automatically capture the following contexts:
-
-1. For Universal Analytics cookies: `iglu:com.google.analytics/cookies/jsonschema/1-0-0`, e.g.
-
-   ```json
-   {
-       "_ga": "GA1.2.3.4"
-   }
-   ```
-
-2. For GA4 cookies: `iglu:com.google.ga4/cookies/jsonschema/1-0-0`
+1. For GA4 cookies: `iglu:com.google.ga4/cookies/jsonschema/1-0-0` (default)
 
    ```json
    {
@@ -161,5 +103,13 @@ Adding this plugin will automatically capture the following contexts:
                "session_cookie": "567"
            }
        ]
+   }
+   ```
+
+2. For Universal Analytics cookies: `iglu:com.google.analytics/cookies/jsonschema/1-0-0` (if enabled)
+
+   ```json
+   {
+       "_ga": "GA1.2.3.4"
    }
    ```

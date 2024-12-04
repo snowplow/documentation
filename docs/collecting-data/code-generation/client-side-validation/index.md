@@ -1,5 +1,5 @@
 ---
-title: "Client-side validation (Beta)"
+title: "Client-side validation"
 sidebar_position: 5
 ---
 
@@ -13,7 +13,7 @@ Using Snowtype you can get notified, at runtime, about schema validation errors 
 To opt-in to client-side validation you should include the `--validations` flag when you are generating your code.
 
 ```sh
-npx snowtype generate --validations
+npx @snowplow/snowtype generate --validations
 ```
 
 For validations to work, you will also need to install `ajv@8`, `ajv-formats@2` and `ajv-draft-04@1`.
@@ -60,7 +60,7 @@ Currently the validation information will include attributes that can help point
 ## Entity cardinality rules validation example
 
 :::info
-This feature is available since version 0.3.1 of Snowtype for the [Browser Tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/quick-start-guide/?platform=browser) in TypeScript.
+This feature is available since version 0.3.1 of Snowtype for the [Browser Tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/quick-start-guide/?platform=browser) in both TypeScript and JavaScript.
 :::
 
 Cardinality rules allow you to specify the expected number of an entity taking part in an Event Specification. You would use this capability to ensure the correct number of entities are getting sent alongside your event. E.g. 
@@ -104,18 +104,98 @@ A similar warning will occur when there is a cardinality rule set for an entity,
 
 ![empty cardinality validation browser example](./images/cardinality-empty.png)
 
-### Coming soon
-This is the initial version of this feature but due to the importance of integrating data quality checks as close to the code producing them as possible, there are a few upcoming features you should expect to be released pretty soon.
-- Custom `onValidationError` handler. You can pass a custom function to be executed when a validation is detected. For example:
-    - Send the error to your error monitoring tool e.g. Sentry, Rollbar.
-    - Control if the event will be sent or dropped.
-    - Integrate nicely with JavaScript unit testing libraries.
-- Property rules validation for [Data Products](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-poducts/).
+## Property rules validation example
+
+:::info
+This feature is available since version 0.10.0 of Snowtype for the [Browser Tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/quick-start-guide/?platform=browser) in both TypeScript and JavaScript.
+:::
+
+Property rules are [specific instructions](/docs/understanding-tracking-design/managing-event-specifications/ui/index.md#properties) you can add in every schema that takes part in an Event Specification. This capability will allow you to adjust the expected values specifically to this event. E.g.
+
+- The `category` attribute of the `product` entity is expected to take the values of "related" or "cross-sell" for this Event Specification
+
+![property rules browser example](./images/property-rules-browser.png)
+
+The code generated for the Event Specification can be used as such without violating the property rules:
+
+```ts
+trackRelatedSpec({
+    label: "Related product",
+    context: [
+        /* This is a method to create this specific product entity for the `Related` Event Specification */
+        createProductRelated({
+            /* Category can only be `cross-sell` or `related` based on the type generated */
+            category: "cross-sell",
+            name: "product",
+            quantity: 1,
+            price: 10,
+        })
+    ],
+});
+```
+
+In the case that a rule is violated, for example adding an unintended `category` value, you will get notified with a validation warning on your browser as such:
+
+```ts
+trackRelatedSpec({
+    label: "Related product",
+    context: [
+        createProductRelated({
+            /* `cross-sells` is not a valid category based on the set instructions. */
+            category: "cross-sells",
+            name: "product",
+            quantity: 1,
+            price: 10,
+        })
+    ],
+});
+```
+
+![property rules enum error](./images/property-rules-enum-error.png)
+
+
+## Custom Violation Handler
+
+By default, when a JSON Schema or Data Product rule is violated, Snowtype will print a warning using `console.log`, displaying this information in the browser's developer tool panel. While this is useful for debugging events in the browser, it can be adjusted for different environments to better suit your needs. For example:
+
+- When unit testing with a library such as Jest, you might prefer each violation to throw a new `Error` so that relevant tests automatically fail.
+- In staging or production environments, you might want to report the violation to a third-party error monitoring solution such as Sentry.
+
+To accommodate custom violation handling use cases, Snowtype provides an option to set the `violationsHandler`. Using the `snowtype.setOptions` API, you can configure the `violationsHandler` to be called whenever a violation is detected.
+
+```ts
+import { snowtype } from "{{outpath}}/snowplow";
+
+function myViolationsHandler(error){
+    // Custom violation handling logic
+}
+
+snowtype.setOptions({ violationsHandler: mockViolationsHandler });
+```
+
+The `error` attribute is typed as follows:
+
+```ts
+type ErrorType = {
+  /* Specific error code number e.g. 100, 200, 201 ... */
+  code: number;
+  /* Error message */
+  message: string;
+  /* Description of the violation */
+  description: string;
+  /* Violations occurred */
+  errors: (ErrorObject | Record<string, unknown>)[];
+};
+```
+
+:::info
+When Snowtype detects the `NODE_ENV` environment variable being set to `test`, as is done by many testing libraries, it will automatically default to throwing an `Error` when a violation is detected. 
+:::
 
 ## Caveats
 
 ### Bundle size consideration
-Since the validation capability depends on a set of additional libraries which can increase the application bundle size, it is advised that this feature is used in development and test environments. Moving forwards there is consideration for creating a validation capability with minimal overhead both at runtime and bundle size.
+Since the validation capability depends on a set of additional libraries which can increase the application bundle size, it is advised that this feature is used in development and test environments. Moving forwards there is consideration for creating a validation capability with minimal overhead both at runtime performance and bundle size.
 
 ### Divergence with pipeline validation
 Due to the differences between environments, there could be a few cases where validation result might diverge between the client and the pipeline. These differences can be found in cases where regular expressions are included in the schema. For JSON Schema, these kinds of formats are mostly included in the [pattern](https://json-schema.org/understanding-json-schema/reference/string#regexp) attribute.

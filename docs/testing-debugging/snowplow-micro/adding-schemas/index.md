@@ -58,7 +58,10 @@ In Snowplow BDP, you can find your Iglu registry URLs and generate API keys [via
 The following Docker command will pick up the environment variables and pass them to Micro:
 
 <CodeBlock language="bash">{
-`docker run -p 9090:9090 \\
+` export MICRO_IGLU_REGISTRY_URL=https://com-example.iglu.snplow.net/api
+ export MICRO_IGLU_API_KEY=abcdef123456
+${"\n"}
+docker run -p 9090:9090 \\
   -e MICRO_IGLU_REGISTRY_URL \\
   -e MICRO_IGLU_API_KEY \\
   snowplow/snowplow-micro:${versions.snowplowMicro}`

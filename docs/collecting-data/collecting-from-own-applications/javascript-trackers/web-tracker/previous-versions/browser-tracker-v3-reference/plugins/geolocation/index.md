@@ -15,8 +15,8 @@ If this plugin is enabled, the tracker will attempt to create a context from the
 ## Installation
 
 - `npm install @snowplow/browser-plugin-geolocation`
-- ``yarn add @snowplow/browser-plugin-`geolocation` ``
-- ``pnpm add @snowplow/browser-plugin-`geolocation` ``
+- `yarn add @snowplow/browser-plugin-geolocation`
+- `pnpm add @snowplow/browser-plugin-geolocation`
 
 ## Initialization
 
@@ -34,11 +34,16 @@ enableGeolocationContext();
 
 ### Functions
 
-<table class="has-fixed-layout"><tbody><tr><td><code>enableGeolocationContext</code></td><td>
+<table class="has-fixed-layout"><tbody>
+<tr>
+<td><code>enableGeolocationContext</code></td>
+<td>
 
 [Documentation](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracker-setup/initialization-options/index.md)
 
-</td></tr></tbody></table>
+</td>
+</tr>
+</tbody></table>
 
 ### Context
 

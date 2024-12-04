@@ -279,9 +279,8 @@ See the following Terraform modules for further details on the resources, defaul
 * [Transformer Kinesis](https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest)
 * [Redshift Loader](https://registry.terraform.io/modules/snowplow-devops/redshift-loader-ec2/aws/latest)
 
-
-  </TabItem>
-  <TabItem value="bigquery" label="BigQuery">
+</TabItem>
+<TabItem value="bigquery" label="BigQuery">
 
 The [BigQuery Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/index.md) is a set of applications that loads enriched events into BigQuery.
 
@@ -302,9 +301,8 @@ See the following Terraform modules for further details on the resources, defaul
   * Snowflake Loader component ([AWS](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-ec2/aws/latest), [Azure](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-vmss/azurerm/latest))
 * Snowflake Streaming Loader ([AWS](https://registry.terraform.io/modules/snowplow-devops/snowflake-streaming-loader-ec2/aws/latest))
 
-
-  </TabItem>
-  <TabItem value="databricks" label="Databricks (direct)">
+</TabItem>
+<TabItem value="databricks" label="Databricks (direct)">
 
 [RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) is a set of applications that loads enriched events into Databricks.
 
@@ -312,9 +310,8 @@ See the following Terraform modules for further details on the resources, defaul
 * [Transformer Kinesis](https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest)
 * [Databricks Loader](https://registry.terraform.io/modules/snowplow-devops/databricks-loader-ec2/aws/latest)
 
-
-  </TabItem>
-  <TabItem value="databricks-lake" label="Databricks (via lake)">
+</TabItem>
+<TabItem value="databricks-lake" label="Databricks (via lake)">
 
 [Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) is an application that loads enriched events into a data lake so that they can be queried via Databricks (or other means).
 

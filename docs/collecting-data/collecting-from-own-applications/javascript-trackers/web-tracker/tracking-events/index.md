@@ -205,6 +205,16 @@ All events also provide the option for setting a custom timestamp, called `trueT
 
 Set the application ID using the `appId` field of the [tracker configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). This will be attached to every event the tracker fires. You can set different application IDs on different parts of your site. You can then distinguish events that occur on different applications by grouping results based on `application_id`.
 
+### Setting application version
+
+:::info
+The option to track the application version was introduced in version 4.1 of the JavaScript tracker.
+:::
+
+Set the application ID using the `appVersion` field of the [tracker configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). This will be attached to every event the tracker fires using the [application context entity](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/app-information/index.md#application-context-entity-on-web-apps).
+
+The version of can be a semver-like structure (e.g 1.1.0) or a Git commit SHA hash.
+
 ### Setting application platform
 
 Set the application platform using the `platform` field of the [tracker configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). This will be attached to every event the tracker fires. Its default value is “web”. For a list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md#application-parameters).
@@ -313,18 +323,19 @@ setUserIdFromCookie('cookieid');
 It's possible to retrieve certain properties for use in your code, including the user ID, [page view ID](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/page-views/#get-page-view-id), and [cookie values](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/cookies-and-local-storage/getting-cookie-values/#retrieving-cookie-properties-from-the-tracker), using a tracker callback. This is an advanced usage of the tracker.
 
 ```mdx-code-block
-import RetrieveValues from "@site/docs/reusable/javascript-tracker-retrieve-values/_index.md"
+import RetrieveValuesJs from "@site/docs/reusable/javascript-tracker-retrieve-values/_javascript.md"
+import RetrieveValuesBrowser from "@site/docs/reusable/javascript-tracker-retrieve-values/_browser.md"
 ```
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
 
-<RetrieveValues lang="javascript" />
+<RetrieveValuesJs />
 
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
 
-<RetrieveValues lang="browser" />
+<RetrieveValuesBrowser />
 
   </TabItem>
 </Tabs>

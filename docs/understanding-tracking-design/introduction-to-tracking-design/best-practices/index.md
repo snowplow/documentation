@@ -100,7 +100,7 @@ These questions may help when defining your events:
 * Which entities go along with the events?
 * When should the events happen? What are the triggers of the events?
 
-:::note Event Specifications (previously called Tracking Scenarios)
+:::note Event Specifications
 The last two questions above can be captured using [event specifications in BDP Enterprise and Cloud](https://snowplow.io/blog/tracking-scenarios-release/).
 :::
 

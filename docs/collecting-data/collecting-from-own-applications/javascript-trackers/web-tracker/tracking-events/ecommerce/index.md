@@ -29,7 +29,7 @@ Snowplow ecommerce events and entities must be **manually tracked**.
 
 | Tracker Distribution | Included |
 |----------------------|----------|
-| `sp.js`              | ❌        |
+| `sp.js`              | ✅        |
 | `sp.lite.js`         | ❌        |
 
 **Download:**
@@ -521,6 +521,7 @@ window.snowplow("trackTransaction:{trackerName}", {
       price: 200,
       inventory_status: "in stock",
       currency: "USD",
+      quantity: 1,
     },
   ],
 });
@@ -549,6 +550,7 @@ trackTransaction({
       price: 200,
       inventory_status: "in stock",
       currency: "USD",
+      quantity: 1,
     },
   ],
 });
@@ -585,6 +587,7 @@ window.snowplow("trackRefund:{trackerName}", {
       price: 200,
       inventory_status: "in stock",
       currency: "USD",
+      quantity: 1,
     },
   ],
 });
@@ -610,6 +613,7 @@ trackRefund({
       price: 200,
       inventory_status: "in stock",
       currency: "USD",
+      quantity: 1,
     },
   ],
 });

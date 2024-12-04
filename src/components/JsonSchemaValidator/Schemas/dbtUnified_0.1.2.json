@@ -111,7 +111,7 @@
       "title": "Sessions Table",
       "description": "The users module requires data from the derived sessions table. If you choose to disable the standard sessions table in favor of your own custom table, set this to reference your new table e.g. {{ ref(\"snowplow_unified_sessions_custom\") }}",
       "group": "Warehouse and Tracker",
-      "longDescription": "The users module requires data from the derived sessions table. If you choose to disable the standard sessions table in favor of your own custom table, set this to reference your new table e.g. `{{ ref(\\'snowplow_unified_sessions_custom\\') }}`. Please see the [README](https://github.com/snowplow/dbt-snowplow-unified/tree/main/custom_example) in the `custom_example` directory for more information on this sort of implementation.",
+      "longDescription": "The users module requires data from the derived sessions table. If you choose to disable the standard sessions table in favor of your own custom table, set this to reference your new table e.g. `{{ ref(\\'snowplow_unified_sessions_custom\\') }}`.Please see the [examples](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/examples/) in the documentation for more information on this sort of implementation.",
       "packageDefault": "\"{{ ref( \\'snowplow_unified_sessions\\' ) }}\""
     },
     "snowplow__allow_refresh": {

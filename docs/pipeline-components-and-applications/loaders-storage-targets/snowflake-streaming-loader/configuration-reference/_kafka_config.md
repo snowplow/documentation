@@ -23,6 +23,6 @@
     <td>Optional. A map of key/value pairs for <a href="https://docs.confluent.io/platform/current/installation/configuration/producer-configs.html" target="_blank">any standard Kafka producer configuration option</a>.</td>
 </tr>
 <tr>
-    <td><code>output.bad.maxRecordSize.*</code></td>
+    <td><code>output.bad.maxRecordSize</code></td>
     <td>Optional.  Default value 1000000.  Any single failed event sent to Kafka should not exceed this size in bytes</td>
 </tr>

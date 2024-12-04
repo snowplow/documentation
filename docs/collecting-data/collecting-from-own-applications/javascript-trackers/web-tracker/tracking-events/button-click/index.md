@@ -25,7 +25,7 @@ Button click events are **automatically tracked** once configured.
 
 | Tracker Distribution | Included |
 |----------------------|----------|
-| `sp.js`              | ❌        |
+| `sp.js`              | ✅        |
 | `sp.lite.js`         | ❌        |
 
 **Download:**
@@ -35,30 +35,19 @@ Button click events are **automatically tracked** once configured.
     <tr>
       <td>Download from GitHub Releases (Recommended)</td>
       <td>
-        <a
-          href="https://github.com/snowplow/snowplow-javascript-tracker/releases"
-          >Github Releases (plugins.umd.zip)</a
-        >
+        <a href="https://github.com/snowplow/snowplow-javascript-tracker/releases">Github Releases (plugins.umd.zip)</a>
       </td>
     </tr>
     <tr>
       <td>Available on jsDelivr</td>
       <td>
-        <a
-          href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-button-click-tracking@latest/dist/index.umd.min.js"
-          >jsDelivr</a
-        >
-        (latest)
+        <a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-button-click-tracking@latest/dist/index.umd.min.js">jsDelivr</a> (latest)
       </td>
     </tr>
     <tr>
       <td>Available on unpkg</td>
       <td>
-        <a
-          href="https://unpkg.com/@snowplow/browser-plugin-button-click-tracking@latest/dist/index.umd.min.js"
-          >unpkg</a
-        >
-        (latest)
+        <a href="https://unpkg.com/@snowplow/browser-plugin-button-click-tracking@latest/dist/index.umd.min.js">unpkg</a> (latest)
       </td>
     </tr>
   </tbody>
@@ -97,8 +86,8 @@ window.snowplow('enableButtonClickTracking');
 ```javascript
 import { enableButtonClickTracking, enableButtonClickTracking } from '@snowplow/browser-plugin-button-click-tracking';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ ButtonClickTrackingPlugin() ],
 });
 
@@ -223,6 +212,85 @@ enableButtonClickTracking({
 </TabItem>
 </Tabs>
 
+## Adding context entities to tracked events
+
+You can also attach context entities to the tracked button click events as either an array of self-describing JSON objects or a callback function that returns the entities dynamically.
+
+### Statically defined context entities
+
+To add a static list of context entities to the events, use the following configuration
+
+<Tabs groupId="platform" queryString>
+<TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+window.snowplow('enableButtonClickTracking', {
+  context: [
+    {
+      schema: 'iglu:com.example_company/page/jsonschema/1-2-1',
+      data: { pageType: 'test' }
+    }
+  ],
+});
+```
+
+</TabItem>
+<TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { enableButtonClickTracking } from '@snowplow/browser-plugin-button-click-tracking';
+
+enableButtonClickTracking({
+  context: [
+    {
+      schema: 'iglu:com.example_company/page/jsonschema/1-2-1',
+      data: { pageType: 'test' }
+    }
+  ],
+});
+```
+
+</TabItem>
+</Tabs>
+
+### Dynamic context entities
+
+You can define a callback function that takes the click event and button element as parameters and returns a context entity for that specific event.
+
+
+<Tabs groupId="platform" queryString>
+<TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+window.snowplow('enableButtonClickTracking', {
+  context: function (event, element) {
+    return {
+      schema: 'iglu:com.example_company/click/jsonschema/1-2-1',
+      data: { content: element.textContent }
+    };
+  },
+});
+```
+
+</TabItem>
+<TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { enableButtonClickTracking } from '@snowplow/browser-plugin-button-click-tracking';
+
+enableButtonClickTracking({
+  context: function (event, element) {
+    return {
+      schema: 'iglu:com.example_company/click/jsonschema/1-2-1',
+      data: { content: element.textContent }
+    };
+  },
+});
+```
+
+</TabItem>
+</Tabs>
+
 ## Tracked data
 
 The plugin will track the following data (if present on the element):
@@ -251,7 +319,7 @@ This will result in the following event:
     "schema": "iglu:com.snowplowanalytics.snowplow/button_click/jsonschema/1-0-0",
     "data": {
         // Note the label is "My custom label", not "Click me"
-        "label": "My custom label", 
+        "label": "My custom label",
     }
 }
 ```

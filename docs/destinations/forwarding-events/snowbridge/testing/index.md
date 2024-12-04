@@ -30,13 +30,13 @@ Point some test environment tracking to `localhost:9090`, and your events should
 You can run Snowbridge locally via Docker:
 
 <CodeBlock language="bash">{
-`docker run snowplow/snowbridge:${versions.snowbridge}`
+`docker run --env SNOWBRIDGE_CONFIG_FILE="" --env ACCEPT_LIMITED_USE_LICENSE=yes snowplow/snowbridge:${versions.snowbridge}` 
 }</CodeBlock>
 
 The default configuration for Snowbridge uses the `stdin` source and the `stdout` target. So, to test sending data through with no transformations, we can run the following command (where `data.tsv` is a file with Snowplow events in TSV format):
 
 <CodeBlock language="bash">{
-`cat data.tsv | docker run -i snowplow/snowbridge:${versions.snowbridge}`
+`cat data.tsv | docker run --env SNOWBRIDGE_CONFIG_FILE="" --env ACCEPT_LIMITED_USE_LICENSE=yes -i snowplow/snowbridge:${versions.snowbridge}`
 }</CodeBlock>
 
 This will print the data to the terminal, along with logs.
@@ -65,6 +65,7 @@ To add a specific configuration to test, create a configuration file (`config.hc
 
 <CodeBlock language="bash">{
 `cat data.tsv | docker run -i \\
+    --env ACCEPT_LIMITED_USE_LICENSE=yes \\
     --mount type=bind,source=$(pwd)/config.hcl,target=/tmp/config.hcl \\
     snowplow/snowbridge:${versions.snowbridge} > output.txt`
 }</CodeBlock>
@@ -81,6 +82,7 @@ You can add custom scripts by mounting a file, similarly to the above. Assuming 
 
 <CodeBlock language="bash">{
 `cat data.tsv | docker run -i \\
+    --env ACCEPT_LIMITED_USE_LICENSE=yes \\
     --mount type=bind,source=$(pwd)/config.hcl,target=/tmp/config.hcl \\
     --mount type=bind,source=$(pwd)/script.js,target=/tmp/script.js \\
     snowplow/snowbridge:${versions.snowbridge} > output.txt`

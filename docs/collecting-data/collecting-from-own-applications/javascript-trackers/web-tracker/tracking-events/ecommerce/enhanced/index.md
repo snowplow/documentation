@@ -9,8 +9,9 @@ sidebar_position: 70
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
-:::tip
-This plugin has been superseded by the [Snowplow ecommerce plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md). We highly recommend using this newer plugin, which is more fully featured and allows you to use the DBT model we provide.
+
+:::warning
+This plugin has been deprecated and superseded by the [Snowplow ecommerce plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md). We highly recommend using this newer plugin, which is more fully featured and allows you to use the DBT model we provide.
 :::
 
 This plugin is based on Google Analytics' Enhanced Ecommerce package. For more information on the Enhanced Ecommerce functions please see the Google Analytics [documentation](https://developers.google.com/analytics/devguides/collection/analyticsjs/enhanced-ecommerce).
@@ -24,7 +25,7 @@ Enhanced ecommerce events must be **manually tracked**.
 
 | Tracker Distribution | Included |
 |----------------------|----------|
-| `sp.js`              | ✅        |
+| `sp.js`              | ❌        |
 | `sp.lite.js`         | ❌        |
 
 **Download:**
@@ -34,7 +35,7 @@ Enhanced ecommerce events must be **manually tracked**.
 **Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
 
 ```javascript
-window.snowplow('addPlugin', 
+window.snowplow('addPlugin',
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-enhanced-ecommerce@latest/dist/index.umd.min.js",
   ["snowplowEnhancedEcommerce", "EnhancedEcommercePlugin"]
 );
@@ -51,8 +52,8 @@ window.snowplow('addPlugin',
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 import { EnhancedEcommercePlugin, trackEnhancedEcommerceAction } from '@snowplow/browser-plugin-enhanced-ecommerce';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ EnhancedEcommercePlugin() ],
 });
 ```

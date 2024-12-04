@@ -6,7 +6,8 @@ sidebar_position: 3000
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md'
+import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md';
+
 <ReleaseBadge/>
 ```
 
@@ -44,7 +45,7 @@ The responsibilities of this service are:
 
 _The new unique identifier cookie for sake of simplicity in this document will have the name `spIdService`._
 
-### ID service business logic 
+### ID service business logic
 
 The ID service code should include the following logic:
 
@@ -53,7 +54,7 @@ The ID service code should include the following logic:
 - If `spIdService` and `sp` are both missing, then it generates a new ID in the `spIdService` and `sp` cookies with the same unique identifier generation algorithm with the Snowplow pipeline, currently UUID v4.
 - The HTTP response should have a 200 OK status code but any additional payload is not necessary.
 
-### Code examples 
+### Code examples
 
 Below we showcase a couple of code samples for ID service API endpoints:
 

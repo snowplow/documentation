@@ -6,8 +6,6 @@ hide_table_of_contents: true
 
 Below you can find a detailed list of product features, including which are available as part of the Snowplow Behavioral Data Platform (BDP) and which are available with the [Snowplow Community Edition](/docs/getting-started-on-community-edition/index.md). 
 
-To find out more about the support services offered to Snowplow BDP customers see our [Statement of Support](/statement-of-support/).
-
 | <h3>Data Pipeline</h3> |     BDP     | [Community Edition](/docs/getting-started-on-community-edition/index.md) | 
 |:--|:-:|:-:|
 | [35+ trackers & webhooks](/docs/collecting-data/index.md) | ✅ | ✅ |
@@ -38,7 +36,7 @@ To find out more about the support services offered to Snowplow BDP customers se
 | <h3>Data Product Studio</h3> | BDP |[Community Edition](/docs/getting-started-on-community-edition/index.md)|
 | Advanced enrichments (PII, IP anonymisation, JS, API, SQL enrichments) | ✅ | ✅ (no UI or API)| 
 | [Data structures tooling & API](/docs/understanding-tracking-design/managing-your-data-structures/ui/index.md) | ✅ |❌|
-| [Data Products](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-poducts/) | ✅ |❌|
+| [Data Products](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-products/) | ✅ |❌|
 | [Data modeling management tooling](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/index.md) | ✅ | ❌ |
 | Jobs monitoring dashboard | ✅  | ❌ |
 | [Tracking catalog](/docs/discovering-data/tracking-catalog/index.md) | ✅ | ❌ |
@@ -51,8 +49,12 @@ To find out more about the support services offered to Snowplow BDP customers se
 | **Digital Analytics** |  | |
 | Funnel builder | ✅  | ❌ |
 | User & Marketing Analytics | ✅  | ❌ |
-| Marketing Attribution COMING SOON | ✅  | ❌ |
-| [Out-of-the-box data models](/docs/modeling-your-data/index.md)  | ✅ | ❌ |
+| Marketing Attribution | ✅  | ❌ |
+| Video & Media | ✅  | ❌ |
+| [Unified, Utils, Attribution, Media, Normalize data models](/docs/modeling-your-data/index.md)  | ✅ | ❌ |
+| **Ecommerce Analytics** |  | |
+| Ecommerce Analytics | ✅  | ❌ |
+| [Ecommerce data model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md)  | ✅ | ❌ |
 | <h3>Performance & Resilience</h3> | BDP |[Community Edition](/docs/getting-started-on-community-edition/index.md)|
 | Outage Protection | ✅ | ❌ |
 | Global Availability | ✅ | ❌ |

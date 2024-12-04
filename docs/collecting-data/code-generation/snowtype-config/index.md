@@ -16,6 +16,10 @@ The Snowtype CLI configuration can be saved in a `.json`, `.js`, or `.ts` file a
 
 The schema tracking URLs for schemas available in [Iglu Central](http://iglucentral.com/).
 
+### `repositories`
+
+Local Data Structure repositories generated from the [snowplow-cli](/docs/understanding-tracking-design/managing-your-data-structures/cli/).
+
 ### `dataStructures`
 
 The schema tracking URLs for Data Structures published in the Console.
@@ -44,6 +48,42 @@ The target language to generate the required code for. [See list of available la
 
 The outpath relative to the current working directory when running the script.
 
+### `options`
+
+Options related to Snowtype behavior and are described by the following TypeScript type:
+
+```ts
+options?: {
+  /* Command related options. */
+  commands: {
+    generate?: {
+      /* Generate implementation instructions. */
+      instructions?: boolean;
+      /* Add runtime validations. */
+      validations?: boolean;
+      /* Disallow generation of code using schemas only deployed on DEV environment. */
+      disallowDevSchemas?: boolean;
+      /* Show deprecation warnings only when there are PROD available schema updates. */
+      deprecateOnlyOnProdAvailableUpdates?: boolean;
+    }
+    update?: {
+      /* Update your configuration file automatically and regenerate the code of the latest available update. */
+      regenerateOnUpdate?: boolean;
+      /* The maximum SchemaVer update to show an available update notification for. */
+      maximumBump?: "major" | "minor" | "patch";
+      /* The `update` command will only display updates for Data Structures that have been deployed to production environment. */
+      showOnlyProdUpdates?: boolean;
+    }
+    patch?: {
+      /* Automatically regenerate the code after a successful patch operation. */
+      regenerateOnPatch?: boolean;
+    }
+  }
+}
+```
+
+_Keep in mind that CLI flags take precedence over configuration file options._
+
 
 ## Example configuration file
 
@@ -53,6 +93,7 @@ The outpath relative to the current working directory when running the script.
   ```json
 {
     "igluCentralSchemas": ["iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"],
+    "repositories": ["../data-structures"],
     "dataStructures": ["iglu:com.myorg/custom_web_page/jsonschema/1-1-0"],
     "eventSpecificationIds": [
       "a123456b-c222-11d1-e123-1f123456789g"
@@ -73,6 +114,7 @@ The outpath relative to the current working directory when running the script.
 ```javascript
 const config = {
   "igluCentralSchemas": ["iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"],
+  "repositories": ["../data-structures"],
   "dataStructures": ["iglu:com.myorg/custom_web_page/jsonschema/1-1-0"],
   "eventSpecificationIds": [
     "a123456b-c222-11d1-e123-1f123456789g"
@@ -102,18 +144,39 @@ type SnowtypeConfig = {
     | "snowplow-ios-tracker"
     | "@snowplow/node-tracker"
     | "snowplow-golang-tracker"
-    | "@snowplow/react-native-tracker";
-  language: "typescript" | "javascript" | "kotlin" | "swift" | "go";
+    | "@snowplow/react-native-tracker"
+    | "snowplow-flutter-tracker";
+  language: "typescript" | "javascript" | "kotlin" | "swift" | "go" | "dart";
   outpath: string;
   organizationId?: string;
   igluCentralSchemas?: string[];
+  repositories?: string[];
   dataStructures?: string[];
   eventSpecificationIds?: string[];
   dataProductIds?: string[];
+  options?: {
+    commands: {
+      generate?: {
+        instructions?: boolean;
+        validations?: boolean;
+        disallowDevSchemas?: boolean;
+        deprecateOnlyOnProdAvailableUpdates?: boolean;
+      }
+      update?: {
+        regenerateOnUpdate?: boolean;
+        maximumBump?: "major" | "minor" | "patch";
+        showOnlyProdUpdates?: boolean;
+      }
+      patch?: {
+        regenerateOnPatch?: boolean
+      }
+    }
+  }
 };
 
 const config: SnowtypeConfig = {
   "igluCentralSchemas": ["iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0"],
+  "repositories": ["../data-structures"],
   "dataStructures": ["iglu:com.myorg/custom_web_page/jsonschema/1-1-0"],
   "eventSpecificationIds": [
     "a123456b-c222-11d1-e123-1f123456789g"
@@ -131,5 +194,5 @@ export default config;
 
 ```
   </TabItem>
-    
+
 </Tabs>

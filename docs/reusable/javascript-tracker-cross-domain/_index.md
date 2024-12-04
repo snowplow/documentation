@@ -39,46 +39,36 @@ If you want to decorate every link, regardless of its destination:
 Note that the above will decorate “links” which are actually just JavaScript actions (with an `href` of `"javascript:void(0)"`), or links to email addresses or telephone numbers ([`mailto:`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#linking_to_an_email_address) or [`tel:`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/a#linking_to_telephone_numbers) schemes).
 To exclude these links, check them explicitly:
 
-<>{ props.lang === "browser" && <>
-
-```javascript
-crossDomainLinker(function(linkElement) {
-  return linkElement.href.indexOf('javascript:') < 0;
-});
+```mdx-code-block
+import CodeBlock from '@theme/CodeBlock';
 ```
-</>
-}</>
-<>{ props.lang === "javascript" && <>
 
-```javascript
-snowplow('crossDomainLinker', function(linkElement) {
+<>{(props.lang === "browser") && <CodeBlock language="javascript">{
+`crossDomainLinker(function(linkElement) {
   return linkElement.href.indexOf('javascript:') < 0;
-});
-```
-</>
-}</>
+});`
+}</CodeBlock>}</>
+
+<>{(props.lang === "javascript") && <CodeBlock language="javascript">{
+`snowplow('crossDomainLinker', function(linkElement) {
+  return linkElement.href.indexOf('javascript:') < 0;
+});`
+}</CodeBlock>}</>
 
 Alternatively, only count links that parse as web URLs by checking the link's [`hostname`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLAnchorElement/hostname).
 This should automatically exclude links that don't lead simply to other web pages.
 
-<>{ props.lang === "browser" && <>
-
-```javascript
-crossDomainLinker(function(linkElement) {
+<>{(props.lang === "browser") && <CodeBlock language="javascript">{
+`crossDomainLinker(function(linkElement) {
   return linkElement.hostname !== "";
-});
-```
-</>
-}</>
-<>{ props.lang === "javascript" && <>
+});`
+}</CodeBlock>}</>
 
-```javascript
-snowplow('crossDomainLinker', function(linkElement) {
+<>{(props.lang === "javascript") && <CodeBlock language="javascript">{
+`snowplow('crossDomainLinker', function(linkElement) {
   return linkElement.hostname !== "";
-});
-```
-</>
-}</>
+});`
+}</CodeBlock>}</>
 
 :::note Opt-in vs opt-out
 
@@ -117,24 +107,17 @@ This ensures that the timestamp added to the querystring is fresh.
 
 If further links get added to the page after the tracker has loaded, you can use the tracker’s `crossDomainLinker` method to add listeners again. (Listeners won’t be added to links which already have them.)
 
-<>{ props.lang === "browser" && <>
-
-```javascript
-crossDomainLinker(function (linkElement) {
+<>{(props.lang === "browser") && <CodeBlock language="javascript">{
+`crossDomainLinker(function (linkElement) {
   return (linkElement.href === 'http://acme.de' || linkElement.id === 'crossDomainLink');
-});
-```
-</>
-}</>
-<>{ props.lang === "javascript" && <>
+});`
+}</CodeBlock>}</>
 
-```javascript
-snowplow('crossDomainLinker', function (linkElement) {
+<>{(props.lang === "javascript") && <CodeBlock language="javascript">{
+`snowplow('crossDomainLinker', function (linkElement) {
   return (linkElement.href === 'http://acme.de' || linkElement.id === 'crossDomainLink');
-});
-```
-</>
-}</>
+});`
+}</CodeBlock>}</>
 
 :::caution Warning
 
@@ -153,29 +136,28 @@ This means after the next page is tracked, if the user copies the URL after the 
 
 You can do this using the [History API](https://developer.mozilla.org/en-US/docs/Web/API/History/replaceState).
 
-<>{ props.lang === "browser" && <>
-
-```javascript
-trackPageView(); // page URL is https://example.com/?example=123&_sp=6de9024e-17b9-4026-bd4d-efec50ae84cb.1680681134458
+<>{(props.lang === "browser") && <CodeBlock language="javascript">{
+`trackPageView(); // page URL is https://example.com/?example=123&_sp=6de9024e-17b9-4026-bd4d-efec50ae84cb.1680681134458
 if (/[?&]_sp=/.test(window.location.href)) {
   history.replaceState(history.state, "", window.location.replace(/&?_sp=[^&]+/, "")); // page URL is now https://example.com/?example=123
-}
-```
-</>
-}</>
-<>{ props.lang === "javascript" && <>
+}`
+}</CodeBlock>}</>
 
-The URL updating code runs in a [Tracker Callback](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#getting-user-id-once-set) to ensure it does not run before the page view event has a chance to capture the original URL.
-```javascript
-snowplow('trackPageView'); // page URL is https://example.com/?example=123&_sp=6de9024e-17b9-4026-bd4d-efec50ae84cb.1680681134458
+```mdx-code-block
+import ReactMarkdown from 'react-markdown';
+```
+
+<>{(props.lang === "javascript") && <><ReactMarkdown>{`
+The URL updating code runs in a [Tracker Callback](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#getting-user-id-once-set) to ensure it does not run before the page view event has a chance to capture the original URL.`}</ReactMarkdown>
+<CodeBlock language="javascript">{
+`snowplow('trackPageView'); // page URL is https://example.com/?example=123&_sp=6de9024e-17b9-4026-bd4d-efec50ae84cb.1680681134458
 snowplow(function(){
   if (/[?&]_sp=/.test(window.location.href)) {
     history.replaceState(history.state, "", window.location.replace(/&?_sp=[^&]+/, "")); // page URL is now https://example.com/?example=123
   }
-});
-```
-</>
-}</>
+});`
+}</CodeBlock>
+</>}</>
 
 This approach can work with other parameters (e.g. `utm_source`) but it is not recommended unless you are sure other systems have also already captured the parameter values for their own systems.
 Some systems may consider the URL update a single page application page change, and automatically fire additional page view events with this implementation, we suggest careful testing of this technique to ensure compatibility with your existing vendors.

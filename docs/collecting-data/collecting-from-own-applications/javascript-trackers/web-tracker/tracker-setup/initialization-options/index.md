@@ -26,7 +26,8 @@ Here is a simple example of how to initialise a tracker, setting a few configura
 ```javascript
 snowplow('newTracker', 'sp', '{{collector_url_here}}', {
   appId: 'my-app-id',
-  discoverRootDomain: true,
+  appVersion: '0.1.0',
+  discoverRootDomain: true, // default, can be omitted
   cookieSameSite: 'Lax', // Recommended
   contexts: {
     webPage: true // default, can be omitted
@@ -40,7 +41,8 @@ snowplow('newTracker', 'sp', '{{collector_url_here}}', {
 ```javascript
 newTracker('sp', '{{collector_url_here}}', {
   appId: 'my-app-id',
-  discoverRootDomain: true,
+  appVersion: '0.1.0',
+  discoverRootDomain: true, // default, can be omitted
   cookieSameSite: 'Lax', // Recommended
   contexts: {
     webPage: true // default, can be omitted
@@ -64,15 +66,16 @@ The following table shows all the various configuration parameters. Note that th
 | Property                                                                                                                                                                                      | Description                                                                                          | Default (if applicable) | Type          |
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|-------------------------|---------------|
 | [`appId`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#setting-application-id)                                                     | Set the application ID.                                                                              |                         | `string`      |
+| [`appVersion`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#setting-application-version)                                                     | Set the application version.                                                                              |                         | `string`      |
 | [`platform`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#setting-application-platform)                                            | Set the application platform.                                                                        | "web"                   | `string` enum |
 | [`cookieDomain`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/cookies-and-local-storage/configuring-cookies/#cookie-domain)                                                                                                                                                                                | Set the cookie domain.                                                                               |                         |               |
 | [`discoverRootDomain`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/cookies-and-local-storage/configuring-cookies/#cookie-domain)                                                                                                                                                                          | Automatic discovery and setting of the root domain, to facilitate tracking over multiple subdomains. | true                    | `boolean`     |
 | [`cookieName`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/cookies-and-local-storage/configuring-cookies/#cookie-name)                                                                                                                                                                                  | Set the cookie name.                                                                                 |                         | `string`      |
 | [`cookieSameSite`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/cookies-and-local-storage/configuring-cookies/#cookie-samesite-and-secure-attributes)                                                                                                                                                                              | Set the cookie samesite attribute.                                                                   | null                    | `string` enum |
 | [`cookieSecure`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/cookies-and-local-storage/configuring-cookies/#cookie-samesite-and-secure-attributes)                                                                                                                                                                                | Set the cookie secure attribute.                                                                     | true                    | `boolean`     |
-| [`encodeBase64`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/configuring-how-events-sent#base64-encoding)                                          | Enable Base64 encoding for JSONs (context entities and custom self-describing events).               | true                    | `boolean`     |
+| [`encodeBase64`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/configuring-how-events-sent#base64-encoding)                                          | Enable Base64 encoding for JSONs (context entities and custom self-describing events).               | true for GET, false for POST requests | `boolean`     |
 | [`respectDoNotTrack`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/anonymous-tracking/#respecting-do-not-track)                                     | Choose to respect browser Do Not Track option.                                                       | false                   | `boolean`     |
-| [`eventMethod`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/configuring-how-events-sent/#network-protocol-and-method)                              | Choose to send events by GET, POST, or Beacon API.                                                       | `post`                   | `string` enum |
+| [`eventMethod`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/configuring-how-events-sent/#network-protocol-and-method)                              | Choose to send events by GET, POST.                                                       | `post`                   | `string` enum |
 | [`bufferSize`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/configuring-how-events-sent/#number-of-events-per-request)                              | How many events to send in one request.                                                              | 1                       | `int`         |
 | [`maxPostBytes`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/configuring-how-events-sent/#maximum-payload-size)                                    | Set a limit for the size of one request.                                                             | 40000                   | `int`         |
 | [`maxGetBytes`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/configuring-how-events-sent/#maximum-payload-size)                                     | Set a limit for the size of one request.                                                             |                         | `int`         |
@@ -85,7 +88,7 @@ The following table shows all the various configuration parameters. Note that th
 | [`connectionTimeout`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/configuring-how-events-sent/#connection-timeout)                                 | Set request connection timeout.                                                                      | 5000 ms                 | `int`         |
 | [`anonymousTracking`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/anonymous-tracking/index.md)                                                     | Do not track user identifiers.                                                                       | false                   | `boolean`     |
 | [`customHeaders`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/configuring-how-events-sent/#custom-request-headers)                                 | Add custom headers to requests.                                                                      |                         | `object`      |
-| [`withCredentials`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/configuring-how-events-sent/#disabling-withcredentials-flag)                       | Choose whether to use the `withCredentials` flag in collector requests.                              | true                    | `boolean`     |
+| [`credentials`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/configuring-how-events-sent/#disabling-sending-credentials-with-requests)                       | Choose whether to include cookies in certain collector requests.                              | `include`                    | `string` enum |
 | [`contexts`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#auto-tracked-entities)                                                   | Configure context entities to add to all events.                                                     | various                 | `object`      |
 | [`retryStatusCodes`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/configuring-how-events-sent/#custom-retry-http-codes)                             | Set HTTP response codes to retry requests on.                                                        |                         | `[int]`       |
 | [`dontRetryStatusCodes`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/configuring-how-events-sent/#custom-retry-http-codes)                         | Set HTTP response codes not to retry requests on.                                                    |                         | `[int]`       |
@@ -93,6 +96,11 @@ The following table shows all the various configuration parameters. Note that th
 | [`onSessionUpdateCallback`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/session/#on-session-update-callback)                       | A callback to run every time the session updates.                                                    |                         | `function`    |
 | [`onRequestSuccess`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/configuring-how-events-sent/#onrequestsuccess-callback)                           | A callback to run every time a request is successfully sent to the collector.                        |                         | `function`    |
 | [`onRequestFailure`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/configuring-how-events-sent/#onrequestfailure-callback)                           | A callback to run every time a request fails to send.                                                |                         | `function`    |
+| [`preservePageViewIdForUrl`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/page-views/index.md#when-is-the-page-view-id-generated) | Option to change when a new page view ID is generated. Makes it possible to generate a new page view on URL change instead of when tracking a page view, which enables tracking events before the page view event with the same ID. | `false` | `false`, `true`, `full`, `pathname`, `pathnameAndSearch` |
+| [`customFetch`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/configuring-how-events-sent/index.md#custom-event-store) | Enables overriding the default fetch function with a custom implementation. | function | |
+| [`eventStore`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/configuring-how-events-sent/index.md#custom-event-store) | Enables providing a custom EventStore implementation to store events before sending them to the collector. | object | |
+| [`keepalive`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/configuring-how-events-sent/index.md#keepalive-option-for-collector-requests) | Indicates that the request should be allowed to outlive the webpage that initiated it. Enables collector requests to complete even if the page is closed or navigated away from. | boolean | false |
+| [`synchronousCookieWrite`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/configuring-how-events-sent/index.md#synchronous-cookie-writes) | Whether to write the cookies synchronously. | boolean | false |
 
 Here is a longer code example in which every tracker configuration parameter is set:
 
@@ -102,6 +110,7 @@ Here is a longer code example in which every tracker configuration parameter is 
 ```javascript
 snowplow('newTracker', 'sp', '{{collector_url_here}}', {
   appId: 'my-app-id',
+  appVersion: '0.1.0',
   platform: 'web',
   cookieDomain: null,
   discoverRootDomain: true,
@@ -127,13 +136,15 @@ snowplow('newTracker', 'sp', '{{collector_url_here}}', {
   // anonymousTracking: { withSessionTracking: true },
   // anonymousTracking: { withSessionTracking: true, withServerAnonymisation: true },
   customHeaders: {}, // Use with caution. Available from v3.2.0+
-  withCredentials: true, // Available from v3.2.0+
+  credentials: 'include', // Available from v4+
   contexts: {
     webPage: true, // Default
     session: false, // Adds client session context entity to events, off by default. Available in v3.5+.
     browser: false, // Adds browser context entity to events, off by default. Available in v3.9+.
+    performanceNavigationTiming: true, // Adds performance navigation timing entity. Available in v4.0.2+
     performanceTiming: true,
     gaCookies: true,
+    // gaCookies: { ga4: true, ua: false, ga4MeasurementId: "", cookiePrefix: "_ga_" }, // Optional
     geolocation: false,
     clientHints: true,
     // clientHints: { includeHighEntropy: true }, // Optional
@@ -144,6 +155,9 @@ snowplow('newTracker', 'sp', '{{collector_url_here}}', {
   onSessionUpdateCallback: function(clientSession) { }, // Allows the addition of a callback, whenever a new session is generated. Available in v3.11+.
   onRequestSuccess: function(data) => { }, // Available in v3.18.1+
   onRequestFailure: function(data) => { }, // Available in v3.18.1+
+  keepalive: false, // Introduced in v4
+  customFetch: undefined, // Introduced in v4
+  eventStore: undefined, // Introduced in v4
 });
 ```
 
@@ -153,6 +167,7 @@ snowplow('newTracker', 'sp', '{{collector_url_here}}', {
 ```javascript
 newTracker('sp', '{{collector_url_here}}', {
   appId: 'my-app-id',
+  appVersion: '0.1.0',
   platform: 'web',
   cookieDomain: null,
   discoverRootDomain: true,
@@ -178,7 +193,7 @@ newTracker('sp', '{{collector_url_here}}', {
   // anonymousTracking: { withSessionTracking: true },
   // anonymousTracking: { withSessionTracking: true, withServerAnonymisation: true },
   customHeaders: {}, // Use with caution. Available from v3.2.0+
-  withCredentials: true, // Available from v3.2.0+
+  credentials: 'include', // Available from v4+
   contexts: {
     webPage: true, // Default
     session: false, // Adds client session context entity to events, off by default. Available in v3.5+.
@@ -190,6 +205,9 @@ newTracker('sp', '{{collector_url_here}}', {
   onSessionUpdateCallback: function(clientSession) { }, // Allows the addition of a callback, whenever a new session is generated. Available in v3.11+.
   onRequestSuccess: function(data) => { }, // Available in v3.18.1+
   onRequestFailure: function(data) => { }, // Available in v3.18.1+
+  keepalive: false, // Introduced in v4
+  customFetch: undefined, // Introduced in v4
+  eventStore: undefined, // Introduced in v4
 });
 ```
 

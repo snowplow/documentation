@@ -11,6 +11,7 @@ import TabItem from '@theme/TabItem';
 import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
 ```
+
 <Badges badgeType="dbt-package Release" pkg="media-player"></Badges>&nbsp;
 <Badges badgeType="Actively Maintained"></Badges>&nbsp;
 <Badges badgeType="SPAL"></Badges>

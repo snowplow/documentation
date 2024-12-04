@@ -247,7 +247,7 @@ In order to apply these transformations, all you have to do is to define them in
 
 </details>
 
-#### Other, macro based setup
+#### **Other, macro based setup**
 
 ```mdx-code-block
 import AttributionDbtMacros from "@site/docs/reusable/attribution-dbt-macros/_index.md"
@@ -255,7 +255,7 @@ import AttributionDbtMacros from "@site/docs/reusable/attribution-dbt-macros/_in
 <AttributionDbtMacros/>
 ```
 
-#### Adding tests (Optional)
+#### **Adding tests (Optional)**
 Please note that the Unified data model allows nulls on `user_identifier` field, but the Attribution package does not, by default we filter out nulls within the `paths_to_conversion` macro when joining on the `path_source` and also on the `conversion_source` using the `conversion_clause` variable, which by default includes the null filter. We encourage users to add their own tests in the appropriate level (e.g. in the derived.snowplow_unified_views level) to make sure you don't accidentally exclude those events without user_identifier that are null (e.g. due to a tracking issue).
 
 ## Output

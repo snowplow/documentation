@@ -22,7 +22,7 @@ The following context entities are attached at the tracker based on information 
 This is an optional feature on the JavaScript tracker that adds browser information that is normally tracked in the atomic event properties (see above) plus some extra information (such as the tab ID) as a context entity.
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: false, automatic: true}}
+  overview={{event: false, web: true, mobile: false, automatic: false}}
   example={{
     viewport: null,
     documentSize: null,

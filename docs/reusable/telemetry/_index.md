@@ -11,6 +11,6 @@ This data is anonymous and minimal, and since our code is open source, you can i
 
 <div>{props.children}</div>
 
-See our [telemetry principles](/docs/getting-started-on-community-edition/telemetry/index.md) for more information.
+See our [telemetry principles](/docs/get-started/snowplow-community-edition/telemetry/index.md) for more information.
 
 </details>

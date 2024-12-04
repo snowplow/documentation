@@ -9,12 +9,12 @@ moves=(
 
     # "docs/contributing docs/resources Resources",
     # "docs/understanding-your-pipeline docs/fundamentals Fundamentals",
-    "docs/first-steps docs/get-started Get started",
+    # "docs/first-steps docs/get-started Get started",
 
-    # "docs/feature-comparison docs/get-started/feature-comparison Feature comparison",
-    # "docs/getting-started-on-bdp docs/get-started/snowplow-bdp Snowplow BDP",
-    # "docs/getting-started-on-community-edition docs/get-started/snowplow-community-edition Snowplow Community Edition",
-    # "docs/fundamentals/deployment-model docs/get-started/deployment-model",
+    "docs/feature-comparison docs/get-started/feature-comparison Feature comparison",
+    "docs/getting-started-on-bdp docs/get-started/snowplow-bdp Snowplow BDP",
+    "docs/getting-started-on-community-edition docs/get-started/snowplow-community-edition Snowplow Community Edition",
+    "docs/fundamentals/deployment-model docs/get-started/deployment-model",
 
     # "docs/enriching-your-data docs/pipeline/enrichments",
 

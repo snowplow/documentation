@@ -2,11 +2,12 @@
 title: "Product features"
 sidebar_position: 1
 hide_table_of_contents: true
+sidebar_label: "Feature comparison"
 ---
 
-Below you can find a detailed list of product features, including which are available as part of the Snowplow Behavioral Data Platform (BDP) and which are available with the [Snowplow Community Edition](/docs/getting-started-on-community-edition/index.md). 
+Below you can find a detailed list of product features, including which are available as part of the Snowplow Behavioral Data Platform (BDP) and which are available with the [Snowplow Community Edition](/docs/get-started/snowplow-community-edition/index.md). 
 
-| <h3>Data Pipeline</h3> |     BDP     | [Community Edition](/docs/getting-started-on-community-edition/index.md) | 
+| <h3>Data Pipeline</h3> |     BDP     | [Community Edition](/docs/get-started/snowplow-community-edition/index.md) | 
 |:--|:-:|:-:|
 | [35+ trackers & webhooks](/docs/sources/index.md) | ✅ | ✅ |
 | 1st party tracking | ✅ | ✅ |
@@ -33,7 +34,7 @@ Below you can find a detailed list of product features, including which are avai
 | • Kinesis | ✅ | ✅ |
 | • Pubsub | ✅ | ✅ | 
 | • Kafka / Azure Event Hubs / Confluent Cloud | ✅ | ✅ |
-| <h3>Data Product Studio</h3> | BDP |[Community Edition](/docs/getting-started-on-community-edition/index.md)|
+| <h3>Data Product Studio</h3> | BDP |[Community Edition](/docs/get-started/snowplow-community-edition/index.md)|
 | Advanced enrichments (PII, IP anonymisation, JS, API, SQL enrichments) | ✅ | ✅ (no UI or API)| 
 | [Data structures tooling & API](/docs/understanding-tracking-design/managing-your-data-structures/ui/index.md) | ✅ |❌|
 | [Data Products](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-products/) | ✅ |❌|
@@ -45,7 +46,7 @@ Below you can find a detailed list of product features, including which are avai
 | QA pipeline | ✅ | do-it-yourself |
 | Fine grained user permissions (ACLs) | ✅ | ❌ |
 | API key access | ✅ | ❌ |
-| <h3>[Data Applications](/docs/data-apps/index.md)</h3> | BDP |[Community Edition](/docs/getting-started-on-community-edition/index.md)|
+| <h3>[Data Applications](/docs/data-apps/index.md)</h3> | BDP |[Community Edition](/docs/get-started/snowplow-community-edition/index.md)|
 | **Digital Analytics** |  | |
 | Funnel builder | ✅  | ❌ |
 | User & Marketing Analytics | ✅  | ❌ |
@@ -55,10 +56,10 @@ Below you can find a detailed list of product features, including which are avai
 | **Ecommerce Analytics** |  | |
 | Ecommerce Analytics | ✅  | ❌ |
 | [Ecommerce data model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md)  | ✅ | ❌ |
-| <h3>Performance & Resilience</h3> | BDP |[Community Edition](/docs/getting-started-on-community-edition/index.md)|
+| <h3>Performance & Resilience</h3> | BDP |[Community Edition](/docs/get-started/snowplow-community-edition/index.md)|
 | Outage Protection | ✅ | ❌ |
 | Global Availability | ✅ | ❌ |
-| <h3>Infrastructure & Security</h3> | BDP |[Community Edition](/docs/getting-started-on-community-edition/index.md)|
+| <h3>Infrastructure & Security</h3> | BDP |[Community Edition](/docs/get-started/snowplow-community-edition/index.md)|
 | **High** |  |  |
 | HTTP access controls | ✅ | ❌ |
 | VPC peering | ✅ | ❌ |
@@ -69,7 +70,7 @@ Below you can find a detailed list of product features, including which are avai
 | Custom VPC integration | ✅ | ❌ |
 | Custom IAM policy | ✅ | ❌ |
 | Custom security agents | ✅ | ❌ |
-| <h3>SLAs</h3> | BDP |[Community Edition](/docs/getting-started-on-community-edition/index.md)|
+| <h3>SLAs</h3> | BDP |[Community Edition](/docs/get-started/snowplow-community-edition/index.md)|
 | Collector uptime SLA | ✅ | ❌ | 
 | Warehouse loading latency SLA | ✅ | ❌ |
 

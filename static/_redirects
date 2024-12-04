@@ -303,3 +303,7 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/contributing/* /docs/resources/:splat 301
 /docs/understanding-your-pipeline/* /docs/fundamentals/:splat 301
 /docs/first-steps/* /docs/get-started/:splat 301
+/docs/feature-comparison/* /docs/get-started/feature-comparison/:splat 301
+/docs/getting-started-on-bdp/* /docs/get-started/snowplow-bdp/:splat 301
+/docs/getting-started-on-community-edition/* /docs/get-started/snowplow-community-edition/:splat 301
+/docs/fundamentals/deployment-model/* /docs/get-started/deployment-model/:splat 301

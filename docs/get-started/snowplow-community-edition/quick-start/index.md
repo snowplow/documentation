@@ -676,7 +676,7 @@ If you have attached a custom SSL certificate and set up your own DNS records, t
 
 :::tip Terraform errors
 
-For solutions to some common Terraform errors that you might encounter when running `terraform plan` or `terraform apply`, see the [FAQs section](/docs/getting-started-on-community-edition/faq/index.md#troubleshooting-terraform-errors).
+For solutions to some common Terraform errors that you might encounter when running `terraform plan` or `terraform apply`, see the [FAQs section](/docs/get-started/snowplow-community-edition/faq/index.md#troubleshooting-terraform-errors).
 
 :::
 
@@ -846,4 +846,4 @@ You should now be able to access your service over HTTPS. Verify this by going t
 
 ---
 
-If you are curious, here’s [what has been deployed](/docs/getting-started-on-community-edition/what-is-deployed/index.md). Now it’s time to [send your first events to your pipeline](/docs/get-started/tracking/index.md)!
+If you are curious, here’s [what has been deployed](/docs/get-started/snowplow-community-edition/what-is-deployed/index.md). Now it’s time to [send your first events to your pipeline](/docs/get-started/tracking/index.md)!

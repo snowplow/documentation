@@ -23,8 +23,16 @@
     <td>Optional. Default value 1000.  How many events the Kinesis client may fetch in a single poll.  Only used when `input.retrievalMode` is Polling.</td>
 </tr>
 <tr>
-    <td><code>input.bufferSize</code></td>
-    <td>Optional. Default value 1. The number of batches of events which are pre-fetched from kinesis. The default value is known to work well.</td>
+    <td><code>input.workerIdentifier</code></td>
+    <td>Optional. Defaults to the <code>HOSTNAME</code> environment variable. The name of this KCL worker used in the dynamodb lease table.</td>
+</tr>
+<tr>
+    <td><code>input.leaseDuration</code></td>
+    <td>Optional. Default value <code>10 seconds</code>. The duration of shard leases.  KCL workers must periodically refresh leases in the dynamodb table before this duration expires.</td>
+</tr>
+<tr>
+    <td><code>input.maxLeasesToStealAtOneTimeFactor</code></td>
+    <td>Optional. Default value <code>2.0</code>. Controls how to pick the max number of shard-leases to steal at one time. E.g. If there are 4 available processors, and <code>maxLeasesToStealAtOneTimeFactor</code> is 2.0, then allow the KCL to steal up to 8 leases. Allows bigger instances to more quickly acquire the shard-leases they need to combat latency.</td>
 </tr>
 <tr>
     <td><code>output.bad.streamName</code></td>
@@ -47,6 +55,6 @@
     <td>Optional.  Default value 5242880.  The maximum number of bytes we are allowed to send to Kinesis in 1 PutRecords request.</td>
 </tr>
 <tr>
-    <td><code>output.bad.maxRecordSize.*</code></td>
+    <td><code>output.bad.maxRecordSize</code></td>
     <td>Optional.  Default value 1000000.  Any single event failed event sent to Kinesis should not exceed this size in bytes</td>
 </tr>

@@ -7,7 +7,7 @@ sidebar_custom_props:
     - bdp
 ---
 
-As well as managing [data products](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-poducts/index.md) through the Snowplow BDP Console, Snowplow BDP customers can also manage them programmatically through an API.
+As well as managing [data products](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-products/index.md) through the Snowplow BDP Console, Snowplow BDP customers can also manage them programmatically through an API.
 
 This functionality is key to automating existing processes and frequent manual tasks, including workflows in version control systems like GitHub.
 
@@ -23,7 +23,7 @@ To be able to post sample requests in the documentation you need to click the `A
 
 The endpoints focus on the main operations in the workflow around:
 
-1. Retrieving existing data products and their event specifications, also known as tracking scenarios in the current (v1) API version
+1. Retrieving existing data products and their event specifications
 2. Creating new or editing existing data products
 3. Viewing the data product history
 4. Managing subscriptions for change notifications
@@ -46,13 +46,13 @@ The following `GET` requests are designed to allow you to access information abo
 
 To retrieve a comprehensive list of all data products in your organization, you can use the following GET request:
 
-`**GET** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v1`
+`**GET** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v2`
 
 Path parameter `organizationId` is required.
 
 ### Retrieving Information about a Specific Data Product
 
-`**GET** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v1/{dataProductId}`
+`**GET** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v2/{dataProductId}`
 
 Path parameters `organizationId` and `dataProductId` are required.
 
@@ -61,10 +61,10 @@ When retrieving a data product, it could also contain an array field `data[].tra
 ```json
 "data": [
   ...
-  "trackingScenarios": [
+  "eventSpecs": [
     {
       "id": "d1336abc-1b60-46f7-be2d-2105f2daf283",
-      "url": "https://console.snowplowanalytics.com/api/msc/v1/organizations/f51dada7-4f11-4b6a-bbbd-2cf6a3673035/tracking-scenarios/v1/d1336abc-1b60-46f7-be2d-2105f2daf283"
+      "url": "https://console.snowplowanalytics.com/api/msc/v1/organizations/f51dada7-4f11-4b6a-bbbd-2cf6a3673035/event-specs/v1/d1336abc-1b60-46f7-be2d-2105f2daf283"
       }
   ]
   ...
@@ -76,7 +76,7 @@ Under the json path `includes.tracking_scenarios`, the API will also attach asso
 ```json
 "includes": {
   ...
-  "trackingScenarios": [
+  "eventSpecs": [
     "id": "d1336abc-1b60-46f7-be2d-2105f2daf283",
      ...
   ]
@@ -88,7 +88,7 @@ Under the json path `includes.tracking_scenarios`, the API will also attach asso
 
 If you wish to retrieve the change log of a specific data product, you can use the following GET request:
 
-`**GET** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v1/{dataProductId}/history`
+`**GET** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v2/{dataProductId}/history`
 
 You can pass several parameters to control the result of the response:
 
@@ -105,7 +105,7 @@ Path parameter `organizationId` is required.
 
 This `POST` request allows you to create a new data product within an organization.
 
-`**POST** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v1`
+`**POST** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v2`
 
 
 The request body is mandatory and should be in JSON format. The minimum payload would be a JSON with only the `name` of the data product. The remaining fields are optional and not required on creation. Example:
@@ -120,13 +120,21 @@ The request body is mandatory and should be in JSON format. The minimum payload 
 }
 ```
 
+:::note
+_The name of your data product must be unique to ensure proper identification and avoid conflicts._
+:::note
+
 ### Updating a Data Product
 
 Use this request to update a data product. The `dataProductId` is required, along with a valid request body.
 
 The minimum payload on update would be the same as on creation but with the addition of the required `status` field. On creation, by default, it will set the `status` to `draft`.
 
-`**POST** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v1/{dataProductId}`
+`**POST** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v2/{dataProductId}`
+
+:::note
+_The name of your data product must be unique to ensure proper identification and avoid conflicts._
+:::note
 
 See the [detailed API documentation](https://console.snowplowanalytics.com/api/msc/v1/docs) for all options.
 
@@ -134,7 +142,7 @@ See the [detailed API documentation](https://console.snowplowanalytics.com/api/m
 
 Use this request to delete a data product. The `dataProductId` and `organizationId` are both required.
 
-`**POST** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v1/{dataProductId}`
+`**POST** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v2/{dataProductId}`
 
 ## Subscription Management for Data Products
 
@@ -190,4 +198,4 @@ To resend a subscription confirmation email, use the following request. Path par
 
 To send emails with instructions for the SDK generator, use the following request. Path parameters `organizationId` and `dataProductId` and a valid request body are required.
 
-`**POST** /organizations/{organizationId}/data-products/v1/{dataProductId}/share-instructions`
+`**POST** /organizations/{organizationId}/data-products/v2/{dataProductId}/share-instructions`

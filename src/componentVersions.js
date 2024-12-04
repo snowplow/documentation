@@ -8,7 +8,7 @@ export const versions = {
   googleAmpTracker: '1.1.0',
   iosTracker: '6.0.8',
   javaTracker: '2.1.0',
-  javaScriptTracker: '4.0.0',
+  javaScriptTracker: '4.1.0',
   luaTracker: '0.2.0',
   phpTracker: '0.7.1',
   pixelTracker: '0.3.0',
@@ -22,7 +22,7 @@ export const versions = {
   webViewTracker: '0.2.1',
 
   // Core pipeline
-  collector: '3.1.0',
+  collector: '3.2.1',
   enrich: '5.1.2',
   sqs2kinesis: '1.0.4',
   dataflowRunner: '0.7.5',
@@ -31,13 +31,13 @@ export const versions = {
   // Loaders
   bqLoader: '1.7.1',
   esLoader: '2.1.2',
-  gcsLoader: '0.5.5',
+  gcsLoader: '0.5.6',
   postgresLoader: '0.3.3',
-  rdbLoader: '6.1.1',
+  rdbLoader: '6.1.2',
   s3Loader: '2.2.9',
   s3Loader22x: '2.2.9',
-  lakeLoader: '0.4.1',
-  snowflakeStreamingLoader: '0.2.4',
+  lakeLoader: '0.5.0',
+  snowflakeStreamingLoader: '0.3.0',
 
   // Data Modelling
   // dbt

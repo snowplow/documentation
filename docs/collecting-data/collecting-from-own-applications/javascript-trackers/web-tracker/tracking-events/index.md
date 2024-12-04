@@ -205,6 +205,16 @@ All events also provide the option for setting a custom timestamp, called `trueT
 
 Set the application ID using the `appId` field of the [tracker configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). This will be attached to every event the tracker fires. You can set different application IDs on different parts of your site. You can then distinguish events that occur on different applications by grouping results based on `application_id`.
 
+### Setting application version
+
+:::info
+The option to track the application version was introduced in version 4.1 of the JavaScript tracker.
+:::
+
+Set the application ID using the `appVersion` field of the [tracker configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). This will be attached to every event the tracker fires using the [application context entity](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/app-information/index.md#application-context-entity-on-web-apps).
+
+The version of can be a semver-like structure (e.g 1.1.0) or a Git commit SHA hash.
+
 ### Setting application platform
 
 Set the application platform using the `platform` field of the [tracker configuration object](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). This will be attached to every event the tracker fires. Its default value is “web”. For a list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md#application-parameters).

@@ -45,7 +45,7 @@ An example of inputs can be the following which you can adjust to your case:
 
 ## Create a Base Data Product
 
-After creating a Source Application, the recommended way to keep track of what we consider base events for a tracking setup is through the Base Data Product templates. For this application you can use the [Base Web](https://docs.snowplow.io/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-poducts/data-product-templates/#base-web).
+After creating a Source Application, the recommended way to keep track of what we consider base events for a tracking setup is through the Base Data Product templates. For this application you can use the [Base Web](https://docs.snowplow.io/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-products/data-product-templates/#base-web).
 
 To create a Base Web Data Product for your application, navigate to the Data Products section and after clicking the `Templates` button, select the Base Web template.
 ![](./images/create-dp.png)
@@ -286,6 +286,8 @@ The inputs should look like the following:
 Next you add this Data Product to the Snowtype project by copying the first code command.
 
 ![](./images/sntp-patch.png)
+
+Now your Snowtype configuration file should include the Data Product in the `dataProductIds` array.
 
 ### Generating code and implementation instructions
 

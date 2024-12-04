@@ -294,3 +294,4 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 # Deprecated JS tracker plugins
 /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/consent-gdpr/original/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/web-trackers-v3/tracking-events/consent-gdpr/original/
 /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/original/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/web-trackers-v3/tracking-events/ecommerce/original/
+/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-poducts/* /docs/understanding-tracking-design/defining-the-data-to-collect-with-data-products/:splat 301

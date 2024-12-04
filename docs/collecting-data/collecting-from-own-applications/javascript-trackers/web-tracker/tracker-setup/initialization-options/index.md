@@ -26,6 +26,7 @@ Here is a simple example of how to initialise a tracker, setting a few configura
 ```javascript
 snowplow('newTracker', 'sp', '{{collector_url_here}}', {
   appId: 'my-app-id',
+  appVersion: '0.1.0',
   discoverRootDomain: true, // default, can be omitted
   cookieSameSite: 'Lax', // Recommended
   contexts: {
@@ -40,6 +41,7 @@ snowplow('newTracker', 'sp', '{{collector_url_here}}', {
 ```javascript
 newTracker('sp', '{{collector_url_here}}', {
   appId: 'my-app-id',
+  appVersion: '0.1.0',
   discoverRootDomain: true, // default, can be omitted
   cookieSameSite: 'Lax', // Recommended
   contexts: {
@@ -64,6 +66,7 @@ The following table shows all the various configuration parameters. Note that th
 | Property                                                                                                                                                                                      | Description                                                                                          | Default (if applicable) | Type          |
 |-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------|-------------------------|---------------|
 | [`appId`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#setting-application-id)                                                     | Set the application ID.                                                                              |                         | `string`      |
+| [`appVersion`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#setting-application-version)                                                     | Set the application version.                                                                              |                         | `string`      |
 | [`platform`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#setting-application-platform)                                            | Set the application platform.                                                                        | "web"                   | `string` enum |
 | [`cookieDomain`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/cookies-and-local-storage/configuring-cookies/#cookie-domain)                                                                                                                                                                                | Set the cookie domain.                                                                               |                         |               |
 | [`discoverRootDomain`](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/cookies-and-local-storage/configuring-cookies/#cookie-domain)                                                                                                                                                                          | Automatic discovery and setting of the root domain, to facilitate tracking over multiple subdomains. | true                    | `boolean`     |
@@ -107,6 +110,7 @@ Here is a longer code example in which every tracker configuration parameter is 
 ```javascript
 snowplow('newTracker', 'sp', '{{collector_url_here}}', {
   appId: 'my-app-id',
+  appVersion: '0.1.0',
   platform: 'web',
   cookieDomain: null,
   discoverRootDomain: true,
@@ -137,6 +141,7 @@ snowplow('newTracker', 'sp', '{{collector_url_here}}', {
     webPage: true, // Default
     session: false, // Adds client session context entity to events, off by default. Available in v3.5+.
     browser: false, // Adds browser context entity to events, off by default. Available in v3.9+.
+    performanceNavigationTiming: true, // Adds performance navigation timing entity. Available in v4.0.2+
     performanceTiming: true,
     gaCookies: true,
     // gaCookies: { ga4: true, ua: false, ga4MeasurementId: "", cookiePrefix: "_ga_" }, // Optional
@@ -162,6 +167,7 @@ snowplow('newTracker', 'sp', '{{collector_url_here}}', {
 ```javascript
 newTracker('sp', '{{collector_url_here}}', {
   appId: 'my-app-id',
+  appVersion: '0.1.0',
   platform: 'web',
   cookieDomain: null,
   discoverRootDomain: true,

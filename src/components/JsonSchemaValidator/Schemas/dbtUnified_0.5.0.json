@@ -418,6 +418,26 @@
       "packageDefault": "false",
       "title": "Enable YAUAA"
     },
+    "snowplow__enable_browser_context": {
+      "recommendFullRefresh": false,
+      "order": 28,
+      "consoleGroup": "basic",
+      "type": "boolean",
+      "group": "Contexts, Filters, and Logs",
+      "longDescription": "Flag to include fields extracted from the [Browser context](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/device-and-browser/index.md#browser-context) data in the models (JS tracker <3.17), can be used together with `snowplow__enable_browser_context_2` (supports 2nd major schema version) to coalesce the two.",
+      "packageDefault": "false",
+      "title": "Enable Browser Context"
+    },
+    "snowplow__enable_browser_context_2": {
+      "recommendFullRefresh": false,
+      "order": 29,
+      "consoleGroup": "basic",
+      "type": "boolean",
+      "group": "Contexts, Filters, and Logs",
+      "longDescription": "Flag to include fields extracted from the 2nd major version of schemas related to the [Browser context](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/device-and-browser/index.md#browser-context) data in the models (JS tracker (>=3.17), can be used together with `snowplow__enable_browser_context` for previous versions to coalesce the two.",
+      "packageDefault": "false",
+      "title": "Enable Browser Context 2"
+    },
     "snowplow__has_log_enabled": {
       "recommendFullRefresh": false,
       "order": 107,

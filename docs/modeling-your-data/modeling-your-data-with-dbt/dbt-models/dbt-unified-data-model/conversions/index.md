@@ -219,7 +219,28 @@ vars:
 
 </details>
 
+<details>
+<summary>Defining multiple conversions</summary>
 
+When defining multiple conversion types just follow the  (list of dictionaries) format:
+
+```yml
+    snowplow__conversion_events:
+      [
+        {
+          "name": "...",
+          "condition": "...",
+          ...(add more definitions optionally)
+        },
+        {
+          "name": "...",
+          "condition": "...",
+          ...(add more definitions optionally)
+        }
+      ]
+  ```
+
+</details>
 ### Configuration Generator
 
 You can use the below generator to generate the conversion events variable, make sure you combine this with existing conversions if you have any already. You can also use the full config generator on the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/index.mdx) to help you generate all your package variables.

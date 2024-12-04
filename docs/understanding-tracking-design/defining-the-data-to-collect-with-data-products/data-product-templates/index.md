@@ -12,6 +12,10 @@ sidebar_custom_props:
 
 To create a new data product based on a pre-defined template, navigate to the "Data products" section from the navigation bar and click the "Create data product" or "Templates" buttons.
 
+:::note
+_When creating a data product based on a template, the name must be unique to ensure proper identification and avoid conflicts._
+:::
+
 Below is a list of the current templates:
 
 ### Base Web
@@ -45,7 +49,7 @@ Included event specifications:
 
 This Data Product template contains all the basic e-commerce interactions that help you analyze customer behavior, identify potential growth opportunities, and improve your sales performance.
 
-Tracked using the [out-of-the-box e-commerce events](docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/ecommerce-events/index.md) for web, Android, and iOS. On web, this requires the [Snowplow Ecommerce plugin](/docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/).
+Tracked using the [out-of-the-box e-commerce events](docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/ootb-data/ecommerce-events/index.md) for web, Android, and iOS. On web, this requires the [Snowplow Ecommerce plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/).
 
 Included event specifications:
 

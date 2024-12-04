@@ -6,7 +6,7 @@ sidebar_position: 50
 
 ## License
 
-Enrich is released under the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.0/) ([FAQ](/docs/contributing/limited-use-license-faq/index.md)).
+Enrich is released under the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.0/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).
 
 To accept the terms of license and run Enrich, set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable. Alternatively, you can configure the `license.accept` option, like this:
 
@@ -218,7 +218,7 @@ A minimal configuration file can be found on the [Github repo](https://github.co
 
 Enriched events are expected to match [atomic](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/atomic/jsonschema/1-0-0) schema.
 However, until `3.0.0`, it was never checked that the enriched events emitted by enrich were valid.
-If an event is not valid against `atomic` schema, a [failed event](/docs/understanding-your-pipeline/failed-events/index.md) should be emitted instead of the enriched event.
+If an event is not valid against `atomic` schema, a [failed event](/docs/fundamentals/failed-events/index.md) should be emitted instead of the enriched event.
 However, this is a breaking change, and we want to give some time to users to adapt, in case today they are working downstream with enriched events that are not valid against `atomic`.
 For this reason, this new validation was added as a feature that can be deactivated like that:
 

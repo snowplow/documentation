@@ -15,7 +15,7 @@ Page view tracking is used to record views of web pages.
 
 Under the hood, the page view events are not self-describing events but standard events with the event type `pv`.
 The tracked information includes the page URL and title.
-You can see an overview of the [page fields in the atomic events table here](/docs/understanding-your-pipeline/canonical-event/index.md#page-fields).
+You can see an overview of the [page fields in the atomic events table here](/docs/fundamentals/canonical-event/index.md#page-fields).
 
 Additionally, the page view is assigned an identifier – the page view ID.
 This is tracked in the `web_page` context entity in that page view event and for all events on that page.

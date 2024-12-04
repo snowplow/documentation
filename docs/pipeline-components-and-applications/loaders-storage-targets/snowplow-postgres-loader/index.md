@@ -8,7 +8,7 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-With Snowplow Postgres Loader you can load enriched data or [failed events](/docs/understanding-your-pipeline/failed-events/index.md) into PostgreSQL database.
+With Snowplow Postgres Loader you can load enriched data or [failed events](/docs/fundamentals/failed-events/index.md) into PostgreSQL database.
 
 :::danger Production use
 

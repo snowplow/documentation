@@ -21,7 +21,7 @@ This plugin enables the automatic tracking of a Vimeo video, utilising the [Snow
 - `pnpm add @snowplow/browser-plugin-vimeo-tracking`
 
 :::info Example app
-To illustrate the tracked [events](/docs/understanding-your-pipeline/events/index.md) and [entities](/docs/understanding-your-pipeline/entities/index.md), you can visit an example app that showcases the tracked media events and entities live as you watch a video.
+To illustrate the tracked [events](/docs/fundamentals/events/index.md) and [entities](/docs/fundamentals/entities/index.md), you can visit an example app that showcases the tracked media events and entities live as you watch a video.
 
 There are examples for both the [iframe](https://snowplow-incubator.github.io/snowplow-javascript-tracker-examples/vimeoIframe) and [player](https://snowplow-incubator.github.io/snowplow-javascript-tracker-examples/vimeoPlayer) methods of tracking a Vimeo video.
 

@@ -142,7 +142,7 @@ It contains the tracker generated user and session identifiers.
 
 ### Properties in the atomic events
 
-See the [table on this page](/docs/understanding-your-pipeline/canonical-event/index.md#user-related-fields) to get an overview of the user and session related fields in the atomic events table.
+See the [table on this page](/docs/fundamentals/canonical-event/index.md#user-related-fields) to get an overview of the user and session related fields in the atomic events table.
 
 ## Anonymisation
 

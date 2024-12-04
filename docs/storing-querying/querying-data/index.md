@@ -12,9 +12,9 @@ import TabItem from '@theme/TabItem';
 
 ## Basic queries
 
-You will typically find most of your Snowplow data in the `events` table. If you are using Redshift or Postgres, there will be extra tables for [self-describing events](/docs/understanding-your-pipeline/events/index.md#self-describing-events) and [entities](/docs/understanding-your-pipeline/entities/index.md) — see [below](#self-describing-events).
+You will typically find most of your Snowplow data in the `events` table. If you are using Redshift or Postgres, there will be extra tables for [self-describing events](/docs/fundamentals/events/index.md#self-describing-events) and [entities](/docs/fundamentals/entities/index.md) — see [below](#self-describing-events).
 
-Please refer to [the structure of Snowplow data](/docs/understanding-your-pipeline/canonical-event/index.md) for the principles behind our approach, as well as the descriptions of the various standard columns.
+Please refer to [the structure of Snowplow data](/docs/fundamentals/canonical-event/index.md) for the principles behind our approach, as well as the descriptions of the various standard columns.
 
 :::tip Data models
 
@@ -29,7 +29,7 @@ SELECT * FROM <events>
 WHERE event_name = 'page_view'
 ```
 
-You will need to replace `<events>` with the appropriate location — the database, schema and table name will depend on your setup. See this [first steps section](/docs/first-steps/querying/index.md#connection-details) for details.
+You will need to replace `<events>` with the appropriate location — the database, schema and table name will depend on your setup. See this [first steps section](/docs/get-started/querying/index.md#connection-details) for details.
 
 :::caution
 
@@ -45,7 +45,7 @@ This ensures that you read from the minimum number of (micro-)partitions necessa
 
 ## Self-describing events
 
-[Self-describing events](/docs/understanding-your-pipeline/events/index.md#self-describing-events) can contain their own set of fields, defined by their [schema](/docs/understanding-your-pipeline/schemas/index.md).
+[Self-describing events](/docs/fundamentals/events/index.md#self-describing-events) can contain their own set of fields, defined by their [schema](/docs/fundamentals/schemas/index.md).
 
 <Tabs groupId="warehouse" queryString>
 <TabItem value="redshift/postgres" label="Redshift, Postgres" default>
@@ -139,7 +139,7 @@ FROM
 
 ## Entities
 
-[Entities](/docs/understanding-your-pipeline/entities/index.md) (also known as contexts) provide extra information about the event, such as data describing a product or a user.
+[Entities](/docs/fundamentals/entities/index.md) (also known as contexts) provide extra information about the event, such as data describing a product or a user.
 
 <Tabs groupId="warehouse" queryString>
 <TabItem value="redshift/postgres" label="Redshift, Postgres" default>

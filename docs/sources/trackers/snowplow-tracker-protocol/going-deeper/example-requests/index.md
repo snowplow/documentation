@@ -143,7 +143,7 @@ An array of entities can be sent with each event. Entity payloads should be wrap
 
 Entities can be attached to any Snowplow event type, it's possible to attach the `user` entity described above to any of the events which follow in this section.
 
-[Learn more](/docs/understanding-your-pipeline/entities/index.md) about entities.
+[Learn more](/docs/fundamentals/entities/index.md) about entities.
 
 :::
 

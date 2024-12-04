@@ -18,8 +18,8 @@ There are two migration strategies you might take:
 The Streaming Loader is fully compatible with the table created and managed by the recent versions of RDB Loader.  In particular, these aspects are exactly the same as before:
 
 - There are 129 columns for the atomic fields, common to all Snowplow events
-- [Self-describing events](/docs/understanding-your-pipeline/events/index.md#self-describing-events) are loaded into columns named like `unstruct_event_com_example_button_press_1`
-- [Entities](/docs/understanding-your-pipeline/entities/index.md) are loaded into columns named like `contexts_com_example_user_1`
+- [Self-describing events](/docs/fundamentals/events/index.md#self-describing-events) are loaded into columns named like `unstruct_event_com_example_button_press_1`
+- [Entities](/docs/fundamentals/entities/index.md) are loaded into columns named like `contexts_com_example_user_1`
 - For both self-describing events and entities, a new column is created for each major version of the Iglu schema
 
 :::tip

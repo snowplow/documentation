@@ -45,10 +45,10 @@ Finally, you can filter each column:
 
 ## Exploring event details
 
-For valid events, you can expand the row to look at all the [event fields](/docs/understanding-your-pipeline/canonical-event/index.md) in JSON:
+For valid events, you can expand the row to look at all the [event fields](/docs/fundamentals/canonical-event/index.md) in JSON:
 
 ![Expanding the event row](../images/event-details.gif)
 
-Equally, for [failed events](/docs/understanding-your-pipeline/failed-events/index.md), you can explore the failure message:
+Equally, for [failed events](/docs/fundamentals/failed-events/index.md), you can explore the failure message:
 
 ![Failure message for a failed event](../images/failure-details.png)

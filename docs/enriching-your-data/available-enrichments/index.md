@@ -4,7 +4,7 @@ sidebar_position: 20
 ---
 
 
-Snowplow offers a large number of enrichments that can be used to enhance your event data. Most enrichments attach data to the event as [entities](/docs/understanding-your-pipeline/entities/index.md), although some enrichments fill or modify event fields directly.
+Snowplow offers a large number of enrichments that can be used to enhance your event data. Most enrichments attach data to the event as [entities](/docs/fundamentals/entities/index.md), although some enrichments fill or modify event fields directly.
 
 The order of enrichments is hard-coded and cannot be changed, the below table lists available enrichments in order they are executed.
 

@@ -6,7 +6,7 @@ sidebar_position: 200
 
 ## Overview
 
-The [Snowplow JavaScript and TypeScript Analytics SDK](https://github.com/snowplow-incubator/snowplow-js-analytics-sdk) lets you work with [Snowplow enriched events](/docs/understanding-your-pipeline/canonical-event/index.md) in your JavaScript event processing, data modeling and machine-learning jobs. You can use this SDK with [AWS Lambda](https://aws.amazon.com/lambda/), [Google Cloud Functions](https://cloud.google.com/functions/), [Google App Engine](https://cloud.google.com/appengine) and other JavaScript-compatible frameworks.
+The [Snowplow JavaScript and TypeScript Analytics SDK](https://github.com/snowplow-incubator/snowplow-js-analytics-sdk) lets you work with [Snowplow enriched events](/docs/fundamentals/canonical-event/index.md) in your JavaScript event processing, data modeling and machine-learning jobs. You can use this SDK with [AWS Lambda](https://aws.amazon.com/lambda/), [Google Cloud Functions](https://cloud.google.com/functions/), [Google App Engine](https://cloud.google.com/appengine) and other JavaScript-compatible frameworks.
 
 ## Setup
 
@@ -58,4 +58,4 @@ export function handler(input: any) {
 
 - `event: string` - TSV string containing event data.
 
-Returns decoded [Snowplow enriched event](/docs/understanding-your-pipeline/canonical-event/index.md).
+Returns decoded [Snowplow enriched event](/docs/fundamentals/canonical-event/index.md).

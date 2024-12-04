@@ -6,7 +6,7 @@ sidebar_position: 90
 
 Snowplow is designed to make it easy for you to change your tracking design in a safe and backwards-compatible way as your organisational data needs evolve.
 
-Data structures are used to describe the structure your data should be delivered in. The structure itself is described by a [JSON schemas](/docs/understanding-your-pipeline/schemas/index.md). Each schema carries a version number expressed as three numeric digits. As your schema evolves, all previous versions of that schema remain available to ensure backwards-compatibility.
+Data structures are used to describe the structure your data should be delivered in. The structure itself is described by a [JSON schemas](/docs/fundamentals/schemas/index.md). Each schema carries a version number expressed as three numeric digits. As your schema evolves, all previous versions of that schema remain available to ensure backwards-compatibility.
 
 ## Why is versioning important?
 

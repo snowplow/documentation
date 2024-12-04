@@ -16,7 +16,7 @@ BDP Enterprise is a version of [Snowplow](https://snowplow.io) hosted in your ow
 
 :::tip BDP Cloud
 
-Consider [BDP Cloud](/docs/getting-started-on-bdp/cloud/index.md) for a faster setup time if you don’t wish to host your own cloud infrastructure (besides the data warehouse or lake). See [deployment model](/docs/understanding-your-pipeline/deployment-model/index.md) for a comparison between BDP Enterprise and BDP Cloud.
+Consider [BDP Cloud](/docs/getting-started-on-bdp/cloud/index.md) for a faster setup time if you don’t wish to host your own cloud infrastructure (besides the data warehouse or lake). See [deployment model](/docs/fundamentals/deployment-model/index.md) for a comparison between BDP Enterprise and BDP Cloud.
 
 :::
 

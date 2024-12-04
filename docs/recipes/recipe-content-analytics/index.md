@@ -17,7 +17,7 @@ You have already set up Snowplow’s out of the box web tracking by instrumentin
 
 To understand how people are engaging with your content, you’ll want to be tie these events to specific pieces of content, not just pages.
 
-For this purpose, you can add a content [entity](/docs/understanding-your-pipeline/entities/index.md) which will be sent every time these events are tracked. You can then aggregate all of your user behavioral data into one row per content piece to get a better view of how your content is performing.
+For this purpose, you can add a content [entity](/docs/fundamentals/entities/index.md) which will be sent every time these events are tracked. You can then aggregate all of your user behavioral data into one row per content piece to get a better view of how your content is performing.
 
 ## Design and implement the `content` entity
 

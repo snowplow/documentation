@@ -108,7 +108,7 @@ EventHubs topics are deployed in a Kafka-compatible model, so you can consume fr
 <Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
 
-There are four main storage options for you to select: Postgres, Redshift, Snowflake and Databricks. For Snowflake, you can choose between the newest [Streaming Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowflake-streaming-loader/index.md) (recommended) or [RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md). Additionally, there is an S3 option, which is primarily used to archive enriched (and/or raw) events and to store [failed events](/docs/understanding-your-pipeline/failed-events/index.md).
+There are four main storage options for you to select: Postgres, Redshift, Snowflake and Databricks. For Snowflake, you can choose between the newest [Streaming Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowflake-streaming-loader/index.md) (recommended) or [RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md). Additionally, there is an S3 option, which is primarily used to archive enriched (and/or raw) events and to store [failed events](/docs/fundamentals/failed-events/index.md).
 
 We recommend to only load data into a single destination, but nothing prevents you from loading into multiple destinations with the same pipeline (e.g. for testing purposes).
 
@@ -177,7 +177,7 @@ These are the subnet identifiers, e.g. `"/subscriptions/<...>/resourceGroups/<..
 
 The first step is to set up the [Iglu Server](/docs/pipeline-components-and-applications/iglu/index.md) stack required by the rest of your pipeline.
 
-This will allow you to create and evolve your own [custom events](/docs/understanding-your-pipeline/events/index.md#self-describing-events) and [entities](/docs/understanding-your-pipeline/entities/index.md#custom-entities). Iglu Server stores the [schemas](/docs/understanding-your-pipeline/schemas/index.md) for your events and entities and fetches them as your events are processed by the pipeline.
+This will allow you to create and evolve your own [custom events](/docs/fundamentals/events/index.md#self-describing-events) and [entities](/docs/fundamentals/entities/index.md#custom-entities). Iglu Server stores the [schemas](/docs/fundamentals/schemas/index.md) for your events and entities and fetches them as your events are processed by the pipeline.
 
 ### Step 1: Update the `iglu_server` input variables
 
@@ -846,4 +846,4 @@ You should now be able to access your service over HTTPS. Verify this by going t
 
 ---
 
-If you are curious, here’s [what has been deployed](/docs/getting-started-on-community-edition/what-is-deployed/index.md). Now it’s time to [send your first events to your pipeline](/docs/first-steps/tracking/index.md)!
+If you are curious, here’s [what has been deployed](/docs/getting-started-on-community-edition/what-is-deployed/index.md). Now it’s time to [send your first events to your pipeline](/docs/get-started/tracking/index.md)!

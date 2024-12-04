@@ -25,7 +25,7 @@ Populate the general information, such as Name, and a Description and Vendor. Ve
 
 ![](images/data-structures-1.png)
 
-When creating a new [Data Structure](/docs/understanding-your-pipeline/schemas/index.md), you can add one or multiple properties. For each property, you can set a name, description, its type and a possible enumeration of allowed values (for type `string`). You can also set additional constraints to define if this property should be optional or mandatory, and if `null` values are allowed.
+When creating a new [Data Structure](/docs/fundamentals/schemas/index.md), you can add one or multiple properties. For each property, you can set a name, description, its type and a possible enumeration of allowed values (for type `string`). You can also set additional constraints to define if this property should be optional or mandatory, and if `null` values are allowed.
 
 ![](images/data-structures-2.png)
 

@@ -14,7 +14,7 @@ The JSON editor is ideal for more complex data structures that require heavy nes
 
 ## Creating a new data structure
 
-Select whether you'd like to create an [Event](/docs/understanding-your-pipeline/events/index.md) or an [Entity](/docs/understanding-your-pipeline/entities/index.md). You can always change this selection at a later date.
+Select whether you'd like to create an [Event](/docs/fundamentals/events/index.md) or an [Entity](/docs/fundamentals/entities/index.md). You can always change this selection at a later date.
 
 ![](images/image-2.png)
 

@@ -11,7 +11,7 @@ import TOCInline from '@theme/TOCInline';
 
 ## Browser information in the atomic event properties
 
-For an overview of the browser information that is tracked in the atomic event properties, [please refer to the table on this page](/docs/understanding-your-pipeline/canonical-event/index.md#browser-fields).
+For an overview of the browser information that is tracked in the atomic event properties, [please refer to the table on this page](/docs/fundamentals/canonical-event/index.md#browser-fields).
 
 ## Context entities added by the tracker
 

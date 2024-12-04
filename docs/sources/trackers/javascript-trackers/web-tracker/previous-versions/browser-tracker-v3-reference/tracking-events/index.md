@@ -478,7 +478,7 @@ trackSelfDescribingEvent({
 });
 ```
 
-For more information on custom contexts, see [here](/docs/understanding-your-pipeline/entities/index.md#custom-entities).
+For more information on custom contexts, see [here](/docs/fundamentals/entities/index.md#custom-entities).
 
 ### Global context
 

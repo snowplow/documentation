@@ -6,7 +6,7 @@ sidebar_position: 500
 
 ## 1. Overview
 
-The [Snowplow Analytics SDK for .NET](https://github.com/snowplow/snowplow-dotnet-analytics-sdk) lets you work with [Snowplow enriched events](/docs/understanding-your-pipeline/canonical-event/index.md) in your .NET event processing, data modeling and machine-learning jobs. You can use this SDK with [Azure Data Lake Analytics](https://azure.microsoft.com/en-gb/services/data-lake-analytics/), [Azure Functions](https://azure.microsoft.com/en-gb/services/functions/), [AWS Lambda](https://aws.amazon.com/lambda/), [Microsoft Orleans](https://dotnet.github.io/orleans/) and other .NET-compatible data processing frameworks.
+The [Snowplow Analytics SDK for .NET](https://github.com/snowplow/snowplow-dotnet-analytics-sdk) lets you work with [Snowplow enriched events](/docs/fundamentals/canonical-event/index.md) in your .NET event processing, data modeling and machine-learning jobs. You can use this SDK with [Azure Data Lake Analytics](https://azure.microsoft.com/en-gb/services/data-lake-analytics/), [Azure Functions](https://azure.microsoft.com/en-gb/services/functions/), [AWS Lambda](https://aws.amazon.com/lambda/), [Microsoft Orleans](https://dotnet.github.io/orleans/) and other .NET-compatible data processing frameworks.
 
 The .NET Analytics SDK makes it significantly easier to build applications that consume Snowplow enriched data directly from Event Hubs or Azure Blob Storage.
 

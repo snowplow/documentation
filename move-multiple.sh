@@ -3,15 +3,14 @@
 # Move commands
 # Starting path, end path, optional new sidebar label
 moves=(
-    "docs/collecting-data docs/sources Sources",
-    "docs/sources/collecting-data-from-third-parties docs/sources/webhooks"
-    "docs/sources/collecting-from-own-applications docs/sources/trackers"
+    # "docs/collecting-data docs/sources Sources",
+    # "docs/sources/collecting-data-from-third-parties docs/sources/webhooks"
+    # "docs/sources/collecting-from-own-applications docs/sources/trackers"
 
     # "docs/contributing docs/resources Resources",
-
     # "docs/understanding-your-pipeline docs/fundamentals Fundamentals",
+    "docs/first-steps docs/get-started Get started",
 
-    # "docs/first-steps docs/get-started Get Started",
     # "docs/feature-comparison docs/get-started/feature-comparison Feature comparison",
     # "docs/getting-started-on-bdp docs/get-started/snowplow-bdp Snowplow BDP",
     # "docs/getting-started-on-community-edition docs/get-started/snowplow-community-edition Snowplow Community Edition",

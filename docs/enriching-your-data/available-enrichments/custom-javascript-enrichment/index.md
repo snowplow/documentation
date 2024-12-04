@@ -5,9 +5,9 @@ sidebar_label: Custom JavaScript
 ---
 
 With this enrichment, you can write a JavaScript function to be executed for each event. Use this enrichment to apply your own business logic to your events, including:
-* [Adding extra data](/docs/enriching-your-data/available-enrichments/custom-javascript-enrichment/writing/index.md#adding-extra-entities-to-the-event) to the event in the form of [entities](/docs/understanding-your-pipeline/entities/index.md)
+* [Adding extra data](/docs/enriching-your-data/available-enrichments/custom-javascript-enrichment/writing/index.md#adding-extra-entities-to-the-event) to the event in the form of [entities](/docs/fundamentals/entities/index.md)
 * [Modifying event fields](/docs/enriching-your-data/available-enrichments/custom-javascript-enrichment/writing/index.md#modifying-event-fields-directly) directly
-* [Discarding the event](/docs/enriching-your-data/available-enrichments/custom-javascript-enrichment/writing/index.md#discarding-the-event) so that it goes to [failed events](/docs/understanding-your-pipeline/failed-events/index.md) rather than your data destination
+* [Discarding the event](/docs/enriching-your-data/available-enrichments/custom-javascript-enrichment/writing/index.md#discarding-the-event) so that it goes to [failed events](/docs/fundamentals/failed-events/index.md) rather than your data destination
 
 ## Configuration
 

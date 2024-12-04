@@ -4,7 +4,7 @@ date: "2021-08-06"
 sidebar_position: 21
 ---
 
-Self-describing (self-referential) JSON schemas are at the core of Snowplow tracking. Read more about them [here](/docs/understanding-your-pipeline/schemas/index.md). They allow you to track completely customised data, and are also used internally throughout Snowplow pipelines.
+Self-describing (self-referential) JSON schemas are at the core of Snowplow tracking. Read more about them [here](/docs/fundamentals/schemas/index.md). They allow you to track completely customised data, and are also used internally throughout Snowplow pipelines.
 
 In all our trackers, self-describing JSON are used in two places. One is in the `SelfDescribing` event type that wraps custom self-describing JSONs for sending. The second use is to attach entities to any tracked event.
 The entities can describe the context in which the event happen or provide extra information to better describe the event.
@@ -22,7 +22,7 @@ A Self Describing event is a [self-describing JSON](http://snowplowanalytics.com
 **Required properties**
 
 - `schema`: (string) – A valid Iglu schema path. This must point to the location of the custom event’s schema, of the format: `iglu:{vendor}/{name}/{format}/{version}`.
-- `data`: (object) – The custom data for your event. This data must conform to the schema specified in the `schema` argument, or the event will fail validation and become a [failed event](/docs/understanding-your-pipeline/failed-events/index.md).
+- `data`: (object) – The custom data for your event. This data must conform to the schema specified in the `schema` argument, or the event will fail validation and become a [failed event](/docs/fundamentals/failed-events/index.md).
 
 To track a custom self-describing event, use the `trackSelfDescribingEvent` method of the tracker.
 

@@ -6,7 +6,7 @@ sidebar_position: 4
 
 ## What is event recovery?
 
-Events can fail to process for many reasons ([see more in Failed Events](/docs/understanding-your-pipeline/failed-events/index.md)), when this happens the raw data for these events is stored in file storage on your cloud so they can be analyzed, diagnosed and recovered.
+Events can fail to process for many reasons ([see more in Failed Events](/docs/fundamentals/failed-events/index.md)), when this happens the raw data for these events is stored in file storage on your cloud so they can be analyzed, diagnosed and recovered.
 
 Event recovery ensures you can recover these failed events, meaning you maintain a complete and accurate data set, even when your tracking or pipeline encounters problems.
 

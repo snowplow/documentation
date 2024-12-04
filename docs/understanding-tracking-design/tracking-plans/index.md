@@ -13,7 +13,7 @@ As explained in [Introduction to tracking design](/docs/understanding-tracking-d
 - The decisions you make based on those events
 - What you need to know about those events to make those decisions
 
-While our [Schema](/docs/understanding-your-pipeline/schemas/index.md) technology and Data Structures UI can help you capture the structure and instructions for validating your data, we also provide event specifications, which help capture additional information.
+While our [Schema](/docs/fundamentals/schemas/index.md) technology and Data Structures UI can help you capture the structure and instructions for validating your data, we also provide event specifications, which help capture additional information.
 
 ## Event Specifications Information
 
@@ -50,7 +50,7 @@ The event validation part allows you to set the instructions for tracking implem
 
 ### Entities
 
-The [Entities](/docs/understanding-your-pipeline/entities/index.md) part allows you to declare which entities should be tracked with the event. You can also define whether the entity should be mandatory or optional, or whether more than one instance should be tracked with this event.
+The [Entities](/docs/fundamentals/entities/index.md) part allows you to declare which entities should be tracked with the event. You can also define whether the entity should be mandatory or optional, or whether more than one instance should be tracked with this event.
 
 :::info
 Snowplow BDP provides both a UI and an API to manage your Event Specifications. For information about managing event specifications see [How to manage Event Specifications](/docs/understanding-tracking-design/managing-event-specifications/index.md).

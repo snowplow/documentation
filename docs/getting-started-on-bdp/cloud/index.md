@@ -9,7 +9,7 @@ sidebar_label: "BDP Cloud"
 
 BDP Cloud is a hosted version of [Snowplow](https://snowplow.io) designed to get your organization up and running and delivering value from behavioral data as quickly as possible. It enables you to create rich and well-structured data to power your advanced analytics and AI use cases.
 
-With BDP Cloud, you don’t need to set up any cloud infrastructure yourself. See [deployment model](/docs/understanding-your-pipeline/deployment-model/index.md) for a comparison between BDP Cloud and BDP Enterprise.
+With BDP Cloud, you don’t need to set up any cloud infrastructure yourself. See [deployment model](/docs/fundamentals/deployment-model/index.md) for a comparison between BDP Cloud and BDP Enterprise.
 
 ## Where is the Snowplow pipeline hosted?
 

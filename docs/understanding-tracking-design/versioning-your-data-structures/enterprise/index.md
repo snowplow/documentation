@@ -11,7 +11,7 @@ sidebar_custom_props:
 
 ### Breaking and non-breaking changes
 
-In Data Structures UI at the point of publishing a [schema](/docs/understanding-your-pipeline/schemas/index.md) you'll be asked to select which version you'd like to create.
+In Data Structures UI at the point of publishing a [schema](/docs/fundamentals/schemas/index.md) you'll be asked to select which version you'd like to create.
 
 ```mdx-code-block
 import Breaking from "../_breaking.md"

@@ -7,7 +7,7 @@ sidebar_position: 0
 
 ### New license
 
-Since version 4.0.0, Enrich has been migrated to use the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.0/) ([FAQ](/docs/contributing/limited-use-license-faq/index.md)).
+Since version 4.0.0, Enrich has been migrated to use the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.0/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).
 
 ### `stream-enrich` assets and `enrich-rabbitmq` deprecated
 
@@ -17,7 +17,7 @@ As announced a while ago, these assets are now removed from the codebase.
 
 ### License acceptance
 
-You have to explicitly accept the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.0/) ([FAQ](/docs/contributing/limited-use-license-faq/index.md)). To do so, either set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable, or update the following section in the configuration:
+You have to explicitly accept the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.0/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)). To do so, either set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable, or update the following section in the configuration:
 
 ```hcl
 {

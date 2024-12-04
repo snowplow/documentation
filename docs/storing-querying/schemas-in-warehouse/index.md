@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 import ParquetRecoveryColumns from '@site/docs/storing-querying/schemas-in-warehouse/_parquet-recovery-columns.md';
 ```
 
-[Self-describing events](/docs/understanding-your-pipeline/events/index.md#self-describing-events) and [entities](/docs/understanding-your-pipeline/entities/index.md) use [schemas](/docs/understanding-your-pipeline/schemas/index.md) to define which fields should be present, and of what type (e.g. string, number). This page explains what happens to this information in the warehouse.
+[Self-describing events](/docs/fundamentals/events/index.md#self-describing-events) and [entities](/docs/fundamentals/entities/index.md) use [schemas](/docs/fundamentals/schemas/index.md) to define which fields should be present, and of what type (e.g. string, number). This page explains what happens to this information in the warehouse.
 
 ## Location
 

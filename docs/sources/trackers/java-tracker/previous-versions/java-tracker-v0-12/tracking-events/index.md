@@ -43,7 +43,7 @@ The Java tracker provides classes for tracking different types of events. They a
 
 Note: `EcommerceTransaction`/`EcommerceTransactionItem` are a legacy design and may be deprecated soon.
 
-`Unstructured` events (also called Self-Describing events elsewhere in Snowplow) allow you to track anything that can be described by a [JSON schema](/docs/understanding-your-pipeline/schemas/index.md). The data you provide will be sent as a JSON inside the raw event payload. The specific type of JSON schema needed are described fully on the [next page](/docs/sources/trackers/java-tracker/previous-versions/java-tracker-v0-12/custom-tracking-using-schemas/index.md).
+`Unstructured` events (also called Self-Describing events elsewhere in Snowplow) allow you to track anything that can be described by a [JSON schema](/docs/fundamentals/schemas/index.md). The data you provide will be sent as a JSON inside the raw event payload. The specific type of JSON schema needed are described fully on the [next page](/docs/sources/trackers/java-tracker/previous-versions/java-tracker-v0-12/custom-tracking-using-schemas/index.md).
 
 The `ScreenView` and `Timing` out-of-the-box event types are actually wrappers for `Unstructured` events: the method parameters for building those events represent fields in their hidden self-describing JSON schemas. This is why both `ScreenView` and `Timing` events are labelled "unstruct" in the data warehouse.
 

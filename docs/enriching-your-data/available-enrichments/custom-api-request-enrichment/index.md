@@ -144,8 +144,8 @@ When set to `true`, no failed event will be emitted if the API call fails and th
 The data source for this enrichment is the entire `enriched/good` event. More precisely, input data can be accessed in any of four forms:
 
 - Snowplow Plain Old Java Object produced during common enrichment process
-- [Snowplow self-describing event](/docs/understanding-your-pipeline/events/index.md#self-describing-events)
-- [Entities](/docs/understanding-your-pipeline/entities/index.md) (contexts) attached to event by tracking SDK
+- [Snowplow self-describing event](/docs/fundamentals/events/index.md#self-describing-events)
+- [Entities](/docs/fundamentals/entities/index.md) (contexts) attached to event by tracking SDK
 - Derived entities (contexts) attached to event by [other enrichments](/docs/enriching-your-data/available-enrichments/index.md)
 
 More precise usage of these data sources is described in inputs section.

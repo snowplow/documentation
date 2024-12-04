@@ -10,7 +10,7 @@ sidebar_custom_props:
 
 # Versioning with the Data Structures Builder
 
-Versioning is automated when using the Data Structure Builder to create or edit your custom [Data Structures](/docs/understanding-your-pipeline/schemas/index.md) for your [Events](/docs/understanding-your-pipeline/events/index.md) and [Entities](/docs/understanding-your-pipeline/entities/index.md).
+Versioning is automated when using the Data Structure Builder to create or edit your custom [Data Structures](/docs/fundamentals/schemas/index.md) for your [Events](/docs/fundamentals/events/index.md) and [Entities](/docs/fundamentals/entities/index.md).
 
 ![](../../managing-your-data-structures/ui/builder/images/data-structures-2.png)
 

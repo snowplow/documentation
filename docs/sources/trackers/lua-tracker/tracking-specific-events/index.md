@@ -39,7 +39,7 @@ tracker:track_struct_event("shop", "add-to-basket", "book", "pcs", 2)
 
 ## Track self-describing events with `track_self_describing_event`
 
-Use `track_self_describing_event` to track a custom event. This is the most advanced and powerful tracking method, which requires a certain amount of planning and infrastructure. A guide to understanding Self-Describing events is [available here](/docs/understanding-your-pipeline/events/index.md#self-describing-events).
+Use `track_self_describing_event` to track a custom event. This is the most advanced and powerful tracking method, which requires a certain amount of planning and infrastructure. A guide to understanding Self-Describing events is [available here](/docs/fundamentals/events/index.md#self-describing-events).
 
 | Parameter | Description | Required in event? |
 | --- | --- | --- |

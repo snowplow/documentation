@@ -73,7 +73,7 @@ The following are our recommendations, but in general, it's more important to be
 
 ## Start with entities
 
-A good practice when designing tracking is to start with [the entities](/docs/understanding-your-pipeline/entities/index.md).
+A good practice when designing tracking is to start with [the entities](/docs/fundamentals/entities/index.md).
 Entities contextualize and join events together, and they are often the levels of analysis a business is interested in (e.g., sale, user, organization, location).
 
 It may not be obvious whether some properties should be added to events or entities.
@@ -91,7 +91,7 @@ Refer to the business reports identified earlier in order to assess what data ne
 
 ## Define the events
 
-Using the entities, one can start to derive the [events](/docs/understanding-your-pipeline/events/index.md).
+Using the entities, one can start to derive the [events](/docs/fundamentals/events/index.md).
 Events can be viewed as the interactions between entities that occur at a particular point in time (e.g., add item to basket, share video, click on a link).
 
 These questions may help when defining your events:

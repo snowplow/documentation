@@ -10,7 +10,7 @@ sidebar_position: 1040
 
 ## Event Extractor
 
-Snowplow Event Extractor is an ADLA custom extractor that allows you to parse **[Snowplow enriched events](/docs/understanding-your-pipeline/canonical-event/index.md)**. Snowplow’s enrichment process outputs enriched events in a TSV format consisting of 131 fields.
+Snowplow Event Extractor is an ADLA custom extractor that allows you to parse **[Snowplow enriched events](/docs/fundamentals/canonical-event/index.md)**. Snowplow’s enrichment process outputs enriched events in a TSV format consisting of 131 fields.
 
 EventExtractor implements IExtractor interface:
 

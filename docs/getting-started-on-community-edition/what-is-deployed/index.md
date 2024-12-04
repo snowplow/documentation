@@ -118,7 +118,7 @@ This is an application that receives raw Snowplow events over HTTP(S), serialize
 
 ## Enrich
 
-This is an application that reads the raw Snowplow events, validates them (including validation against [schemas](/docs/understanding-your-pipeline/schemas/index.md)), [enriches](/docs/enriching-your-data/what-is-enrichment/index.md) them and writes the enriched events to another stream. More details can be found [here](/docs/pipeline-components-and-applications/enrichment-components/index.md).
+This is an application that reads the raw Snowplow events, validates them (including validation against [schemas](/docs/fundamentals/schemas/index.md)), [enriches](/docs/enriching-your-data/what-is-enrichment/index.md) them and writes the enriched events to another stream. More details can be found [here](/docs/pipeline-components-and-applications/enrichment-components/index.md).
 
 <TerraformLinks
   aws="https://registry.terraform.io/modules/snowplow-devops/enrich-kinesis-ec2/aws/latest"
@@ -128,7 +128,7 @@ This is an application that reads the raw Snowplow events, validates them (inclu
 
 ## Iglu
 
-The Iglu stack allows you to manage [schemas](/docs/understanding-your-pipeline/schemas/index.md).
+The Iglu stack allows you to manage [schemas](/docs/fundamentals/schemas/index.md).
 
 ### Iglu load balancer
 
@@ -152,7 +152,7 @@ The [Iglu Server](/docs/pipeline-components-and-applications/iglu/iglu-repositor
 
 ### Iglu database
 
-This is the Iglu Server database (RDS on AWS, CloudSQL on GCP and PostgreSQL on Azure) where the Iglu [schemas](/docs/understanding-your-pipeline/schemas/index.md) themselves are stored.
+This is the Iglu Server database (RDS on AWS, CloudSQL on GCP and PostgreSQL on Azure) where the Iglu [schemas](/docs/fundamentals/schemas/index.md) themselves are stored.
 
 <TerraformLinks
   aws="https://registry.terraform.io/modules/snowplow-devops/rds/aws/latest"
@@ -203,7 +203,7 @@ The S3 loader (enriched) also reads from this enriched stream and writes to the 
 
 ### Bad 1 stream
 
-This bad stream is for [failed events](/docs/understanding-your-pipeline/failed-events/index.md), which get created when the Collector, Enrich or various loader applications fail to process the data.
+This bad stream is for [failed events](/docs/fundamentals/failed-events/index.md), which get created when the Collector, Enrich or various loader applications fail to process the data.
 
 ### Other streams
 
@@ -232,28 +232,28 @@ No other streams.
 <Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
 
-Aside from your main destination, the data is written to S3 by the S3 Loader applications for archival and to deal with [failed events](/docs/understanding-your-pipeline/failed-events/index.md).
+Aside from your main destination, the data is written to S3 by the S3 Loader applications for archival and to deal with [failed events](/docs/fundamentals/failed-events/index.md).
 
 See the [S3 Loader](https://registry.terraform.io/modules/snowplow-devops/s3-loader-kinesis-ec2/aws/latest) and [S3](https://registry.terraform.io/modules/snowplow-devops/s3-bucket/aws/latest) Terraform modules for further details on the resources, default and required input variables, and outputs.
 
 The following loaders and folders are available:
 * Raw loader, `raw/`: events that come straight out of the Collector and have not yet been validated or enriched by the Enrich application. They are Thrift records and are therefore a little tricky to decode. There are not many reasons to use this data, but backing this data up gives you the flexibility to replay this data should something go wrong further downstream in the pipeline.
-* Enriched loader, `enriched/`: enriched events, in GZipped blobs of [enriched TSV](/docs/understanding-your-pipeline/canonical-event/understanding-the-enriched-tsv-format/index.md). Historically, this has been used as the staging ground for loading into data warehouses via the [Batch transformer](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/spark-transformer/index.md) application. However, it’s no longer used in the quick start examples.
-* Bad loader, `bad/`: [failed events](/docs/understanding-your-pipeline/failed-events/index.md). You can [query them using Athena](/docs/managing-data-quality/exploring-failed-events/querying/index.md).
+* Enriched loader, `enriched/`: enriched events, in GZipped blobs of [enriched TSV](/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md). Historically, this has been used as the staging ground for loading into data warehouses via the [Batch transformer](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/spark-transformer/index.md) application. However, it’s no longer used in the quick start examples.
+* Bad loader, `bad/`: [failed events](/docs/fundamentals/failed-events/index.md). You can [query them using Athena](/docs/managing-data-quality/exploring-failed-events/querying/index.md).
 
 Also, if you choose Postgres as your destination, the Postgres loader will load all failed events into Postgres.
 
   </TabItem>
   <TabItem value="gcp" label="GCP">
 
-If you choose Postgres as your destination, the Postgres loader will load all [failed events](/docs/understanding-your-pipeline/failed-events/index.md) into Postgres, although not to GCS.
+If you choose Postgres as your destination, the Postgres loader will load all [failed events](/docs/fundamentals/failed-events/index.md) into Postgres, although not to GCS.
 
 If you choose BigQuery as your destination, there will be a “dead letter” GCS bucket. It will have the suffix `-bq-loader-dead-letter` and will contain events that the loader fails to be insert into BigQuery, _but not_ any other kind of failed events. To store all failed events, you will need to manually deploy the [GCS Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/index.md) application.
 
   </TabItem>
   <TabItem value="azure" label="Azure">
 
-Currently, [failed events](/docs/understanding-your-pipeline/failed-events/index.md) are only available in the `bad` Kafka / Event Hubs topic.
+Currently, [failed events](/docs/fundamentals/failed-events/index.md) are only available in the `bad` Kafka / Event Hubs topic.
 
   </TabItem>
 </Tabs>

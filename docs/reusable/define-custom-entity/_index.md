@@ -1,4 +1,4 @@
-Custom context can be used to augment any standard Snowplow event type, including self-describing events, with additional data. We refer to this custom context as [entities](/docs/understanding-your-pipeline/entities/index.md).
+Custom context can be used to augment any standard Snowplow event type, including self-describing events, with additional data. We refer to this custom context as [entities](/docs/fundamentals/entities/index.md).
 
 The context is an array of entities. More than one entity (of either different or the same type) can be attached to an event. The `context` argument (if it is provided at all) should be a non-empty array.
 

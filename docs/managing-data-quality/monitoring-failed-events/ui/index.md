@@ -5,7 +5,7 @@ sidebar_label: "Using the UI"
 sidebar_position: 2000
 ---
 
-Snowplow pipelines separate events that are problematic in order to keep data quality high in downstream systems. For more information on understanding failed events see [here](/docs/understanding-your-pipeline/failed-events/index.md).
+Snowplow pipelines separate events that are problematic in order to keep data quality high in downstream systems. For more information on understanding failed events see [here](/docs/fundamentals/failed-events/index.md).
 
 For Snowplow customers that would like to benefit from seeing aggregates of failed events by type, there is an optional feature in the Snowplow BDP Console.
 

@@ -154,7 +154,7 @@ tracker.track(event)
 
 </details>
 
-Since `additionalProperties` is set to `false`, all events with the `altitude` field end up as [failed events](/docs/understanding-your-pipeline/failed-events/index.md).
+Since `additionalProperties` is set to `false`, all events with the `altitude` field end up as [failed events](/docs/fundamentals/failed-events/index.md).
 
 We can create a new schema with version `1-0-3` that contains the `altitude` field and then use this schema in the next version of the application. This would make the events valid. However, users will not update their application to the new version all at once. Events from the older version will continue to come, therefore there will still be failed events until all users start to use a newer version.
 

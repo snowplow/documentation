@@ -81,7 +81,7 @@ Tags that can derive their parameters from a Google Tag Manager variable are:
 - [Self-describing Event](/docs/sources/trackers/javascript-trackers/web-tracker/custom-tracking-using-schemas/index.md#tracking-a-custom-event-self-describing)
 - [Site Search](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/site-search/index.md)
 - [Social Interaction](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/social-media/index.md)
-- [Structured Event](/docs/understanding-your-pipeline/events/index.md#structured-events)
+- [Structured Event](/docs/fundamentals/events/index.md#structured-events)
 - [Timing](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/timings/generic/index.md)
 
 You can set the **Retrieve Parameters From Variable** setting to a Google Tag Manager variable. This parameter _must_ return an object. In the object, the key-value pairs should reflect the named parameters in the [event documentation](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/index.md). For example, to have the variable populate an [Error event](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/index.md#error-tracking), you could use a Custom JavaScript variable like this:

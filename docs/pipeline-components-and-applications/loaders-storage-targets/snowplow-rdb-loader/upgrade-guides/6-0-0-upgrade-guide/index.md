@@ -13,7 +13,7 @@ import License from "@site/docs/pipeline-components-and-applications/loaders-sto
 
 ### What is schema evolution?
 
-One of Snowplow’s key features is the ability to [define custom schemas and validate events against them](/docs/understanding-your-pipeline/schemas/index.md). Over time, users often evolve the schemas, e.g. by adding new fields or changing existing fields. To accommodate these changes, RDB loader automatically adjusts the database tables in the warehouse accordingly.
+One of Snowplow’s key features is the ability to [define custom schemas and validate events against them](/docs/fundamentals/schemas/index.md). Over time, users often evolve the schemas, e.g. by adding new fields or changing existing fields. To accommodate these changes, RDB loader automatically adjusts the database tables in the warehouse accordingly.
 
 There are two main types of schema changes:
 

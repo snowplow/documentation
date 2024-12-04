@@ -9,7 +9,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Data warehouses and data lakes are primary destinations for Snowplow data. For other options, see the [destinations overview](/docs/understanding-your-pipeline/destinations/index.md) page.
+Data warehouses and data lakes are primary destinations for Snowplow data. For other options, see the [destinations overview](/docs/fundamentals/destinations/index.md) page.
 
 ## Data warehouse loaders
 
@@ -65,7 +65,7 @@ All lake loaders are micro-batching.
 | --- | --- | --- | --- | --- |
 | S3 | Delta    | Athena           | [Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/index.md) | Early release |
 | S3 | Iceberg  | Athena, Redshift | [Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/index.md) | Early release |
-| S3 | TSV/JSON | Athena           | [S3 Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/index.md) | Only recommended for use with [RDB Batch Transformer](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/spark-transformer/index.md) or for [failed events](/docs/understanding-your-pipeline/failed-events/index.md) |
+| S3 | TSV/JSON | Athena           | [S3 Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/s3-loader/index.md) | Only recommended for use with [RDB Batch Transformer](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/spark-transformer/index.md) or for [failed events](/docs/fundamentals/failed-events/index.md) |
 
   </TabItem>
   <TabItem value="gcp" label="GCP">
@@ -73,7 +73,7 @@ All lake loaders are micro-batching.
 | Lake | Format | Compatibility | Loader application | Status |
 | --- | --- | --- | --- | --- |
 | GCS | Delta   | Databricks         | [Lake Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/lake-loader/index.md) | Early release |
-| GCS | JSON    | BigQuery           | [GCS Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/index.md) | Only recommended for [failed events](/docs/understanding-your-pipeline/failed-events/index.md) |
+| GCS | JSON    | BigQuery           | [GCS Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/google-cloud-storage-loader/index.md) | Only recommended for [failed events](/docs/fundamentals/failed-events/index.md) |
 
   </TabItem>
     <TabItem value="azure" label="Azure">

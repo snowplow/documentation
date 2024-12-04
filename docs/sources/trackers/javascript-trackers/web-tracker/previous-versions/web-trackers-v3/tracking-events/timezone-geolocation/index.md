@@ -14,7 +14,7 @@ Track users' timezone and geolocation with these configuration options.
 
 ## Timezone
 
-The timezone plugin allows the tracker to populate the `os_timezone` field within the [canonical event model](/docs/understanding-your-pipeline/canonical-event/index.md). This field has its own column in the data warehouse.
+The timezone plugin allows the tracker to populate the `os_timezone` field within the [canonical event model](/docs/fundamentals/canonical-event/index.md). This field has its own column in the data warehouse.
 
 The timezone property is **automatically tracked** once configured.
 

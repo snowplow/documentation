@@ -32,7 +32,7 @@ Copy the header value (in the example above, `sTjhMcUdkNldaM2RsOThwWTRvNzE3VkZtb
 
 ## Add the preview header to your events
 
-You can add the header value to all or some of your events as an [entity](/docs/understanding-your-pipeline/entities/index.md).
+You can add the header value to all or some of your events as an [entity](/docs/fundamentals/entities/index.md).
 
 For example, if you are using the [JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/index.md):
 

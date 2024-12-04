@@ -21,7 +21,7 @@ If your failed events would not be fixed by applying the above, they currently w
 The typical flow for recovery and some prerequisites to consider would be:  
 **Understanding the failure issue**
 
-- Familiarity with the [failed event types](/docs/understanding-your-pipeline/failed-events/index.md)
+- Familiarity with the [failed event types](/docs/fundamentals/failed-events/index.md)
 - Access to S3 or GCS buckets with failed events
 
 **Configuring a recovery**

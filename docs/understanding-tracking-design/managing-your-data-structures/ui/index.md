@@ -10,7 +10,7 @@ sidebar_custom_props:
 
 ## Creating a new data structure
 
-To create a new [Data Structure](/docs/understanding-your-pipeline/schemas/index.md), first navigate to **Data Structures** in the menu and click the **'Create a Data Structure'** button.
+To create a new [Data Structure](/docs/fundamentals/schemas/index.md), first navigate to **Data Structures** in the menu and click the **'Create a Data Structure'** button.
 
 ![](images/image-1.png)
 

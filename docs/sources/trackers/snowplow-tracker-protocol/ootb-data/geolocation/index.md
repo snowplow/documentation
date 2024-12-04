@@ -16,7 +16,7 @@ There are two options to attach geolocation information to Snowplow events:
 Geolocation information can be automatically extracted from the IP address of the HTTP request to the collector.
 This is done during enrichment using the [IP Lookup Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md).
 
-You can see the information added to events as [atomic event properties in this table](/docs/understanding-your-pipeline/canonical-event/index.md#location-fields).
+You can see the information added to events as [atomic event properties in this table](/docs/fundamentals/canonical-event/index.md#location-fields).
 
 ## Geolocation context entity tracked in apps
 

@@ -6,8 +6,8 @@ description: "How to write the enrichment code in JavaScript."
 
 Your JavaScript enrichment code should contain a function called `process`:
 * This function will receive each event as its only argument
-* It can optionally return an array of [entities](/docs/understanding-your-pipeline/entities/index.md) to be added to the event (under `derived_contexts`)
-* Any uncaught exceptions will result in [failed events](/docs/understanding-your-pipeline/failed-events/index.md)
+* It can optionally return an array of [entities](/docs/fundamentals/entities/index.md) to be added to the event (under `derived_contexts`)
+* Any uncaught exceptions will result in [failed events](/docs/fundamentals/failed-events/index.md)
 
 ```js
 function process(event) {
@@ -30,7 +30,7 @@ JavaScript enrichment uses the [Nashorn Engine](https://docs.oracle.com/en/java/
 ## Best practices
 
 Before we dive into it, here are a few general tips:
-* Make sure your code works for _all_ of your events, not just the particular types of events you are interested in. Remember, unhandled exceptions will result in [failed events](/docs/understanding-your-pipeline/failed-events/index.md).
+* Make sure your code works for _all_ of your events, not just the particular types of events you are interested in. Remember, unhandled exceptions will result in [failed events](/docs/fundamentals/failed-events/index.md).
 * Don’t try to share state across multiple enriched events. Enrichments are run inside a highly parallel application with multiple independent instances, so this will not work.
 * In your enrichment code, avoid CPU-intensive tasks (e.g. encryption) and IO-intensive tasks (e.g. requests to an external service) without thoroughly benchmarking the impact they might have on your event processing time.
 * The enrichment code has access to the Java standard library and therefore to the filesystem of the machine it’s running on. Proceed with caution when copying code from untrusted sources.
@@ -46,7 +46,7 @@ function process(event) {
   ...
 ```
 
-There are getter methods available for each of the [standard event fields](/docs/understanding-your-pipeline/canonical-event/understanding-the-enriched-tsv-format/index.md?fields=table) — just capitalize the first letter of the field and prepend it with `get`, for example `event.getUser_ipaddress()` or `event.getGeo_country()`.
+There are getter methods available for each of the [standard event fields](/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md?fields=table) — just capitalize the first letter of the field and prepend it with `get`, for example `event.getUser_ipaddress()` or `event.getGeo_country()`.
 
 :::note
 
@@ -56,7 +56,7 @@ One exception is `refr_device_tstamp`, where the getter method is called `getRef
 
 ## Inspecting self-describing events and entities
 
-If your event is a [self-describing event](/docs/understanding-your-pipeline/events/index.md#self-describing-events), you might want to access its fields. Here’s how to do it:
+If your event is a [self-describing event](/docs/fundamentals/events/index.md#self-describing-events), you might want to access its fields. Here’s how to do it:
 
 ```js
 function process(event) {
@@ -80,7 +80,7 @@ For events other than self-describing events, `getUnstruct_event()` will return 
 
 :::
 
-You can access any [entities](/docs/understanding-your-pipeline/entities/index.md) in the event in a similar fashion:
+You can access any [entities](/docs/fundamentals/entities/index.md) in the event in a similar fashion:
 
 ```js
 function process(event) {
@@ -169,7 +169,7 @@ Keep in mind that the old value of a modified field will not be available in you
 
 :::
 
-Just like with getters, there are setter methods available for each of the [standard event fields](/docs/understanding-your-pipeline/canonical-event/understanding-the-enriched-tsv-format/index.md?fields=table):
+Just like with getters, there are setter methods available for each of the [standard event fields](/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md?fields=table):
 
 ```js
 function process(event) {
@@ -243,7 +243,7 @@ You might be tempted to update derived entities in a similar way by using `event
 
 ## Discarding the event
 
-Sometimes you don’t want the event to appear in your data warehouse or lake, e.g. because you suspect it comes from a bot and not a real user. In this case, you can `throw` an exception in your JavaScript code, which will send the event to [failed events](/docs/understanding-your-pipeline/failed-events/index.md):
+Sometimes you don’t want the event to appear in your data warehouse or lake, e.g. because you suspect it comes from a bot and not a real user. In this case, you can `throw` an exception in your JavaScript code, which will send the event to [failed events](/docs/fundamentals/failed-events/index.md):
 
 ```js
 const botPattern = /.*Googlebot.*/;

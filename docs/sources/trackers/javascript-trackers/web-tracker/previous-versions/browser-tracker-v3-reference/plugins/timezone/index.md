@@ -30,4 +30,4 @@ newTracker('sp1', '{{collector_url}}', {
 
 ### Properties
 
-This plugin will add Timezone tracking. This allows the tracker to populate the `` `os_timezone` `` field within the [canonical event model](/docs/understanding-your-pipeline/canonical-event/index.md).
+This plugin will add Timezone tracking. This allows the tracker to populate the `` `os_timezone` `` field within the [canonical event model](/docs/fundamentals/canonical-event/index.md).

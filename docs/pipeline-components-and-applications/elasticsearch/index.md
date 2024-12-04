@@ -19,7 +19,7 @@ We only offer this loader on AWS or as part of [Snowplow Mini](/docs/pipeline-co
 
 ## What the data looks like
 
-There are a few changes compared to the [standard structure of Snowplow data](/docs/understanding-your-pipeline/canonical-event/index.md).
+There are a few changes compared to the [standard structure of Snowplow data](/docs/fundamentals/canonical-event/index.md).
 
 ### Boolean fields reformatted
 
@@ -31,7 +31,7 @@ The `geo_latitude` and `geo_longitude` fields are combined into a single `g
 
 ### Self-describing events
 
-Each [self-describing event](/docs/understanding-your-pipeline/events/index.md#self-describing-events) gets its own field (same [naming rules](/docs/storing-querying/schemas-in-warehouse/index.md?warehouse=snowflake#location) as for Snowflake). For example:
+Each [self-describing event](/docs/fundamentals/events/index.md#self-describing-events) gets its own field (same [naming rules](/docs/storing-querying/schemas-in-warehouse/index.md?warehouse=snowflake#location) as for Snowflake). For example:
 
 ```json
 {
@@ -46,7 +46,7 @@ Each [self-describing event](/docs/understanding-your-pipeline/events/index.md#s
 
 ### Entities
 
-Each [entity](/docs/understanding-your-pipeline/entities/index.md) type attached to the event gets its own field (same [naming rules](/docs/storing-querying/schemas-in-warehouse/index.md?warehouse=snowflake#location) as for Snowflake). The field contains an array with the data for all entities of the given type. For example:
+Each [entity](/docs/fundamentals/entities/index.md) type attached to the event gets its own field (same [naming rules](/docs/storing-querying/schemas-in-warehouse/index.md?warehouse=snowflake#location) as for Snowflake). The field contains an array with the data for all entities of the given type. For example:
 
 ```json
 {

@@ -35,7 +35,7 @@ You can enable and edit enrichments on any environment, but we recommend the fol
 
 **Navigate to a Snowplow Mini** and locate the enrichment you wish to enable. In the listing select _Configure and enable / Edit configuration_ from the pop up menu, or click the **Configure and enable / Edit config** button when viewing the enrichment.
 
-**On the configuration screen**, edit the JSON configuration ([refer to each individual enrichments documentation for support](/docs/enriching-your-data/available-enrichments/index.md)) and click _Validate._
+**On the configuration screen**, edit the JSON configuration ([refer to each individual enrichments documentation for support](/docs/pipeline/enrichments/available-enrichments/index.md)) and click _Validate._
 
 If your configuration is valid you will be given the option to _Publish_ the enrichment to the environment. If it is invalid you will be given validation errors to correct.
 

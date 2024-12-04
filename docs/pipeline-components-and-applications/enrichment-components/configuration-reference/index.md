@@ -259,4 +259,4 @@ Since `4.0.0`, it is possible to configure the lengths of the atomic fields, bel
 
 ## Enrichments
 
-The list of the enrichments that can be configured can be found on [this page](/docs/enriching-your-data/available-enrichments/index.md).
+The list of the enrichments that can be configured can be found on [this page](/docs/pipeline/enrichments/available-enrichments/index.md).

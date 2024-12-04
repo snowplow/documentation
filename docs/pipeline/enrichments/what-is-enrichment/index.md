@@ -73,15 +73,15 @@ Finally, contexts, unstructured events and the relevant configurable enrichments
 
 ### Configurable enrichment
 
-All configurable enrichments are listed on the [Available Enrichments](/docs/enriching-your-data/available-enrichments/index.md) page.
+All configurable enrichments are listed on the [Available Enrichments](/docs/pipeline/enrichments/available-enrichments/index.md) page.
 
 The following configurable enrichments write data into `atomic.events` table (legacy enrichments):
 
-- [IP anonymization enrichment](/docs/enriching-your-data/available-enrichments/ip-anonymization-enrichment/index.md)
-- [IP lookups enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md)
-- [Campaign attribution enrichment](/docs/enriching-your-data/available-enrichments/campaign-attribution-enrichment/index.md)
-- [Currency conversion enrichment](/docs/enriching-your-data/available-enrichments/currency-conversion-enrichment/index.md)
-- [referer-parser enrichment](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/index.md)
-- [Event fingerprint enrichment](/docs/enriching-your-data/available-enrichments/event-fingerprint-enrichment/index.md)
+- [IP anonymization enrichment](/docs/pipeline/enrichments/available-enrichments/ip-anonymization-enrichment/index.md)
+- [IP lookups enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md)
+- [Campaign attribution enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md)
+- [Currency conversion enrichment](/docs/pipeline/enrichments/available-enrichments/currency-conversion-enrichment/index.md)
+- [referer-parser enrichment](/docs/pipeline/enrichments/available-enrichments/referrer-parser-enrichment/index.md)
+- [Event fingerprint enrichment](/docs/pipeline/enrichments/available-enrichments/event-fingerprint-enrichment/index.md)
 
 All other configurable enrichments create a separate context and thus are loaded into their own dedicated tables.

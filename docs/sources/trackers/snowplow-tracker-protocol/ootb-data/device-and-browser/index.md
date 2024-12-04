@@ -91,7 +91,7 @@ The following context entities are added during enrichment of events in the pipe
 
 ### YAUAA context for user-agent parsing
 
-[YAUAA (Yet Another User Agent Analyzer) enrichment](/docs/enriching-your-data/available-enrichments/yauaa-enrichment/index.md) enables parsing the user-agent string tracked in Web events.
+[YAUAA (Yet Another User Agent Analyzer) enrichment](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md) enables parsing the user-agent string tracked in Web events.
 It extract information about the user's device and browser, like for instance the device class (Phone, Tablet, etc.).
 
 <SchemaProperties
@@ -147,7 +147,7 @@ It extract information about the user's device and browser, like for instance th
 
 ### IAB context for spiders and robots
 
-The [IAB Spiders & Robots enrichment](/docs/enriching-your-data/available-enrichments/iab-enrichment/index.md) uses the IAB/ABC International Spiders and Bots List to determine whether an event was produced by a user or a robot/spider based on its’ IP address and user agent.
+The [IAB Spiders & Robots enrichment](/docs/pipeline/enrichments/available-enrichments/iab-enrichment/index.md) uses the IAB/ABC International Spiders and Bots List to determine whether an event was produced by a user or a robot/spider based on its’ IP address and user agent.
 
 
 <SchemaProperties

@@ -85,7 +85,7 @@ window.snowplow("newTracker", "sp", "{{COLLECTOR_URL}}", {
 );
 ```
 
-Other out-of-the-box entities are added to the events by certain [enrichments](/docs/enriching-your-data/available-enrichments/index.md).
+Other out-of-the-box entities are added to the events by certain [enrichments](/docs/pipeline/enrichments/available-enrichments/index.md).
 
 ## Custom entities
 

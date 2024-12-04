@@ -6,7 +6,7 @@ sidebar_position: 60
 
 See [Tracking events](/docs/sources/trackers/java-tracker/tracking-events/index.md) to learn how to track events with the Java tracker.
 
-All Snowplow events, regardless of the tracker used, look similar. They all currently contain 137 columns/properties. Some are populated by pipeline enrichments, e.g. the [campaign attribution enrichment](/docs/enriching-your-data/available-enrichments/campaign-attribution-enrichment/index.md) populates the `mkt_` columns. Snowplow event structure and columns are explained [here](/docs/fundamentals/canonical-event/index.md).
+All Snowplow events, regardless of the tracker used, look similar. They all currently contain 137 columns/properties. Some are populated by pipeline enrichments, e.g. the [campaign attribution enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) populates the `mkt_` columns. Snowplow event structure and columns are explained [here](/docs/fundamentals/canonical-event/index.md).
 
 This reference page shows two simple example events generated using the default tracker configuration and a [Snowplow Micro](/docs/testing-debugging/snowplow-micro/what-is-micro/index.md) testing pipeline. These events were tracked from a simplified version of the "simple-console" demo provided in the [Java tracker Github repository](https://github.com/snowplow/snowplow-java-tracker). While most Snowplow pipelines transform events into table rows, Micro has an API that provides events in JSON format.
 

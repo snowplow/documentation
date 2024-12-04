@@ -8,7 +8,7 @@ This enrichment replaces the end of the user's IP address with "x"s, on a config
 
 Both IPv4 and IPv6 are supported.
 
-This enrichment runs after [IP lookup enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md).
+This enrichment runs after [IP lookup enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md).
 
 ## Configuration
 

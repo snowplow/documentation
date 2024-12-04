@@ -28,10 +28,10 @@ import videoUrl from './images/umd_video.mp4'
 
 ## Requirements
 
-- [YAUAA enrichment](/docs/enriching-your-data/available-enrichments/yauaa-enrichment/index.md) enabled
-- [Campaign Attribution enrichment](/docs/enriching-your-data/available-enrichments/campaign-attribution-enrichment/index.md) enabled
-- [IP Lookup enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) enabled
-- [Referrer Parser enrichment](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/index.md) enabled
+- [YAUAA enrichment](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md) enabled
+- [Campaign Attribution enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) enabled
+- [IP Lookup enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) enabled
+- [Referrer Parser enrichment](/docs/pipeline/enrichments/available-enrichments/referrer-parser-enrichment/index.md) enabled
 
 - One of:
   - (**Recommended**) Running the [Snowplow Unified dbt Package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) with:

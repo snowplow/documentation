@@ -31,7 +31,7 @@ This table shows the available deduplication mechanisms:
 
 "Natural duplicates" are events which share the same event ID (`event_id`) and the same event payload (`event_fingerprint`), meaning that they are semantically identical to each other. For a given batch of events being processed, RDB Transformer keeps only the first out of each group of natural duplicates and discards all others.
 
-To enable this functionality, you need to have the [Event Fingerprint Enrichment](/docs/enriching-your-data/available-enrichments/event-fingerprint-enrichment/index.md) enabled in Enrich. This will correctly populate the `event_fingerprint` property. No changes are required in the transformer's own `config.hocon` file.
+To enable this functionality, you need to have the [Event Fingerprint Enrichment](/docs/pipeline/enrichments/available-enrichments/event-fingerprint-enrichment/index.md) enabled in Enrich. This will correctly populate the `event_fingerprint` property. No changes are required in the transformer's own `config.hocon` file.
 
 If the fingerprint enrichment is not enabled, the transformer will assign a random UUID to each event, effectively marking all events as non-duplicates (in the 'natural' sense).
 
@@ -43,7 +43,7 @@ If the fingerprint enrichment is not enabled, the transformer will assign a rand
 - Generate new random `event_id` for each of them
 - Create a [`duplicate`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/duplicate/jsonschema/1-0-0) context with the original `event_id` for each event where the duplicated `event_id` was found.
 
-There is no transformer configuration required for this functionality: deduplication is performed automatically. It is optional but highly recommended to use the [Event Fingerprint Enrichment](/docs/enriching-your-data/available-enrichments/event-fingerprint-enrichment/index.md) in Enrich in order to correctly populate the `event_fingerprint` property.
+There is no transformer configuration required for this functionality: deduplication is performed automatically. It is optional but highly recommended to use the [Event Fingerprint Enrichment](/docs/pipeline/enrichments/available-enrichments/event-fingerprint-enrichment/index.md) in Enrich in order to correctly populate the `event_fingerprint` property.
 
 ## Cross-batch natural deduplication
 

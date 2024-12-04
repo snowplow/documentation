@@ -213,7 +213,7 @@ curl -L -X PUT '<mini-address>/control-plane/telemetry' -u '<username>:<password
 
 ## Uploading custom enrichments
 
-You can add new custom enrichments via the Control Plane tab. The only thing you have to do is submit the enrichment file which you created according to this [wiki page](/docs/enriching-your-data/available-enrichments/index.md). If the enrichment relies on additional schemas these should be uploaded to the Iglu repository.
+You can add new custom enrichments via the Control Plane tab. The only thing you have to do is submit the enrichment file which you created according to this [wiki page](/docs/pipeline/enrichments/available-enrichments/index.md). If the enrichment relies on additional schemas these should be uploaded to the Iglu repository.
 
 ## Adding a custom schema
 

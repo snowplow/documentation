@@ -10,13 +10,13 @@ sidebar_custom_props:
 
 If you have installed Snowplow via [Quick Start](/docs/get-started/snowplow-community-edition/what-is-quick-start/index.md), you will have the following enrichments enabled by default:
 
-- [UA parser](/docs/enriching-your-data/available-enrichments/ua-parser-enrichment/index.md)
-- [YAUAA](/docs/enriching-your-data/available-enrichments/yauaa-enrichment/index.md)
-- [Campaign Attribution](/docs/enriching-your-data/available-enrichments/campaign-attribution-enrichment/index.md)
-- [Event fingerprint](/docs/enriching-your-data/available-enrichments/event-fingerprint-enrichment/index.md)
-- [Referer parser](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/index.md)
+- [UA parser](/docs/pipeline/enrichments/available-enrichments/ua-parser-enrichment/index.md)
+- [YAUAA](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md)
+- [Campaign Attribution](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md)
+- [Event fingerprint](/docs/pipeline/enrichments/available-enrichments/event-fingerprint-enrichment/index.md)
+- [Referer parser](/docs/pipeline/enrichments/available-enrichments/referrer-parser-enrichment/index.md)
 
-To enable an extra enrichment, such as the [IP anonymisation enrichment](/docs/enriching-your-data/available-enrichments/ip-anonymization-enrichment/index.md):
+To enable an extra enrichment, such as the [IP anonymisation enrichment](/docs/pipeline/enrichments/available-enrichments/ip-anonymization-enrichment/index.md):
 
 - Follow the instructions for [AWS](https://github.com/snowplow-devops/terraform-aws-enrich-kinesis-ec2#inserting-custom-enrichments), [GCP](https://github.com/snowplow-devops/terraform-google-enrich-pubsub-ce#inserting-custom-enrichments) or [Azure](https://github.com/snowplow-devops/terraform-azurerm-enrich-event-hub-vmss#inserting-custom-enrichments), updating the `anonOctets` and `anonSegments` according to the number of octets/ segments that you would like to be anonymised
 - Run `terraform apply`

@@ -151,7 +151,7 @@ Your array of entities will be passed to `JSON.stringify()` before being attache
 
 </details>
 
-If you are still iterating on the schema while writing the JavaScript code, you might find the setup described in the [testing guide](/docs/enriching-your-data/available-enrichments/custom-javascript-enrichment/testing/index.md#iterating-on-code-and-schemas) very useful.
+If you are still iterating on the schema while writing the JavaScript code, you might find the setup described in the [testing guide](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/testing/index.md#iterating-on-code-and-schemas) very useful.
 
 :::caution
 

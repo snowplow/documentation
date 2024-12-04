@@ -110,7 +110,7 @@ The platform ID is used to distinguish the same app running on different platfor
 | event | text | The type of event recorded| Yes | 'page_view'| Tracking| ✅ | ✅ |
 | event_id| text | A UUID for each event | Yes | 'c6ef3124-b53a-4b13-a233-0088f79dcbcb' | Tracking (or enrichment if empty) | ✅ | ✅ |
 | txn_id| int| Transaction ID set client-side, used to de-dupe records | No| 421828 | Tracking (Deprecated) | ✅ | ✅ |
-| event_fingerprint | text | Hash client-set event fields, used to de-dupe records | No| AADCE520E20C2899F4CED228A79A3083 | [Event Fingerprint Enrichment](/docs/enriching-your-data/available-enrichments/event-fingerprint-enrichment/index.md)| ✅ | ✅ |
+| event_fingerprint | text | Hash client-set event fields, used to de-dupe records | No| AADCE520E20C2899F4CED228A79A3083 | [Event Fingerprint Enrichment](/docs/pipeline/enrichments/available-enrichments/event-fingerprint-enrichment/index.md)| ✅ | ✅ |
 
 
 A complete list of event types is given [here](#event-specific-fields).
@@ -161,14 +161,14 @@ For more information on this topic please check out the relevant [Tracking Docum
 
 | Field | Type | Description | Reqd? | Example| Source| Web | Mobile|
 |-----------------|------|-----------------------------------------------------------|-------|----------------------|---------------|-----|---------|
-| geo_country | text | ISO 3166-1 code for the country the visitor is located in | No| 'GB', 'US' | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
-| geo_region| text | ISO-3166-2 code for country region the visitor is in| No| 'I9', 'TX' | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
-| geo_city| text | City the visitor is in| No| 'New York', 'London' | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
-| geo_zipcode | text | Postcode the visitor is in| No| '94109'| [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
-| geo_latitude| text | Visitor location latitude | No| 37.443604| [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
-| geo_longitude | text | Visitor location longitude| No| -122.4124| [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
-| geo_region_name | text | Visitor region name | No| 'Florida'| [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
-| geo_timezone| text | Visitor timezone name | No| 'Europe/London'| [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
+| geo_country | text | ISO 3166-1 code for the country the visitor is located in | No| 'GB', 'US' | [IP Enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
+| geo_region| text | ISO-3166-2 code for country region the visitor is in| No| 'I9', 'TX' | [IP Enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
+| geo_city| text | City the visitor is in| No| 'New York', 'London' | [IP Enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
+| geo_zipcode | text | Postcode the visitor is in| No| '94109'| [IP Enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
+| geo_latitude| text | Visitor location latitude | No| 37.443604| [IP Enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
+| geo_longitude | text | Visitor location longitude| No| -122.4124| [IP Enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
+| geo_region_name | text | Visitor region name | No| 'Florida'| [IP Enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
+| geo_timezone| text | Visitor timezone name | No| 'Europe/London'| [IP Enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
 
 For more information on this topic please check out the relevant [Tracking Documentation](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/geolocation/index.md).
 
@@ -176,10 +176,10 @@ For more information on this topic please check out the relevant [Tracking Docum
 
 | Field | Type | Description | Reqd? | Example| Source| Web | Mobile|
 |-----------------|------|-----------------------------------------------------------------------------------------------|-------|----------------------|---------------|-----|---------|
-| ip_isp| text | Visitor's ISP | No| 'FDN Communications' | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
-| ip_organization | text | Organization associated with the visitor's IP address - defaults to ISP name if none is found | No| 'Bouygues Telecom' | [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
-| ip_domain | text | Second level domain name associated with the visitor's IP address | No| 'nuvox.net'| [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
-| ip_netspeed | text | Visitor's connection type | No| 'Cable/DSL'| [IP Enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
+| ip_isp| text | Visitor's ISP | No| 'FDN Communications' | [IP Enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
+| ip_organization | text | Organization associated with the visitor's IP address - defaults to ISP name if none is found | No| 'Bouygues Telecom' | [IP Enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
+| ip_domain | text | Second level domain name associated with the visitor's IP address | No| 'nuvox.net'| [IP Enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
+| ip_netspeed | text | Visitor's connection type | No| 'Cable/DSL'| [IP Enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
 
 
 #### Metadata fields
@@ -197,13 +197,13 @@ Fields containing information about the event type.
 
 | Field| Type | Description| Reqd? | Example | Source| Web | Mobile|
 |--------------|------|----------------------------------------------------------------|-------|-----------------------------------------|---------------------------------|-----|---------|
-| mkt_medium | text | Type of traffic source | No| 'cpc', 'affiliate', 'organic', 'social' | [Campaign Attribution Enrichment](/docs/enriching-your-data/available-enrichments/campaign-attribution-enrichment/index.md) | ✅ | ✅ |
-| mkt_source | text | The company / website where the traffic came from| No| 'Google', 'Facebook'| [Campaign Attribution Enrichment](/docs/enriching-your-data/available-enrichments/campaign-attribution-enrichment/index.md) | ✅ | ✅ |
-| mkt_term | text | Any keywords associated with the referrer| No| 'new age tarot decks' | [Campaign Attribution Enrichment](/docs/enriching-your-data/available-enrichments/campaign-attribution-enrichment/index.md) | ✅ | ✅ |
-| mkt_content| text | The content of the ad. (Or an ID so that it can be looked up.) | No| 13894723| [Campaign Attribution Enrichment](/docs/enriching-your-data/available-enrichments/campaign-attribution-enrichment/index.md) | ✅ | ✅ |
-| mkt_campaign | text | The campaign ID| No| 'diageo-123'| [Campaign Attribution Enrichment](/docs/enriching-your-data/available-enrichments/campaign-attribution-enrichment/index.md) | ✅ | ✅ |
-| mkt_clickid| text | The click ID | No| 'ac3d8e459' | [Campaign Attribution Enrichment](/docs/enriching-your-data/available-enrichments/campaign-attribution-enrichment/index.md) | ✅ | ✅ |
-| mkt_network| text | The ad network to which the click ID belongs | No| 'DoubleClick' | [Campaign Attribution Enrichment](/docs/enriching-your-data/available-enrichments/campaign-attribution-enrichment/index.md) | ✅ | ✅ |
+| mkt_medium | text | Type of traffic source | No| 'cpc', 'affiliate', 'organic', 'social' | [Campaign Attribution Enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅ | ✅ |
+| mkt_source | text | The company / website where the traffic came from| No| 'Google', 'Facebook'| [Campaign Attribution Enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅ | ✅ |
+| mkt_term | text | Any keywords associated with the referrer| No| 'new age tarot decks' | [Campaign Attribution Enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅ | ✅ |
+| mkt_content| text | The content of the ad. (Or an ID so that it can be looked up.) | No| 13894723| [Campaign Attribution Enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅ | ✅ |
+| mkt_campaign | text | The campaign ID| No| 'diageo-123'| [Campaign Attribution Enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅ | ✅ |
+| mkt_clickid| text | The click ID | No| 'ac3d8e459' | [Campaign Attribution Enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅ | ✅ |
+| mkt_network| text | The ad network to which the click ID belongs | No| 'DoubleClick' | [Campaign Attribution Enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅ | ✅ |
 
 ### Platform-specific fields
 
@@ -227,9 +227,9 @@ Fields containing information about the event type.
 | refr_urlpath | text | Referrer page path| No| '/images/search' | Default Enrichment (referer)| ✅ | ❌ |
 | refr_urlquery| text | Referrer URL querystring| No| 'q=psychic+oracle+cards' | Default Enrichment (referer)| ✅ | ❌ |
 | refr_urlfragment | text | Referrer URL fragment | No|| Default Enrichment (referer)| ✅ | ❌ |
-| refr_medium| text | Type of referrer| No| 'search', 'internal' | [Referrer Parser Enrichment](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/index.md)| ✅ | ❌ |
-| refr_source| text | Name of referrer if recognized| No| 'Bing images'| [Referrer Parser Enrichment](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/index.md)| ✅ | ❌ |
-| refr_term| text | Keywords if source is a search engine | No| 'psychic oracle cards' | [Referrer Parser Enrichment](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/index.md)| ✅ | ❌ |
+| refr_medium| text | Type of referrer| No| 'search', 'internal' | [Referrer Parser Enrichment](/docs/pipeline/enrichments/available-enrichments/referrer-parser-enrichment/index.md)| ✅ | ❌ |
+| refr_source| text | Name of referrer if recognized| No| 'Bing images'| [Referrer Parser Enrichment](/docs/pipeline/enrichments/available-enrichments/referrer-parser-enrichment/index.md)| ✅ | ❌ |
+| refr_term| text | Keywords if source is a search engine | No| 'psychic oracle cards' | [Referrer Parser Enrichment](/docs/pipeline/enrichments/available-enrichments/referrer-parser-enrichment/index.md)| ✅ | ❌ |
 | refr_domain_userid | text | The Snowplow domain_userid of the referring website | No| 'bc2e92ec6c204a14' | Default Enrichment (cross_domain) | ✅ | ❌ |
 | `refr_dvce_tstamp`| timestamp | The time of attaching the domain_userid to the inbound link| No| '2013-11-26 00:02:05'| Default Enrichment (`cross_domain`) | ✅ | ❌ |
 
@@ -331,7 +331,7 @@ Fields that start `tr_` relate to the transaction as a whole. Fields that start 
 | `ti_currency` | text| Currency | No| 'EUR' |
 | `base_currency`*| text| Reporting currency | No| 'GBP' |
 
-\* Set exclusively by the [Currency conversion enrichment](/docs/enriching-your-data/available-enrichments/currency-conversion-enrichment/index.md).
+\* Set exclusively by the [Currency conversion enrichment](/docs/pipeline/enrichments/available-enrichments/currency-conversion-enrichment/index.md).
 
 For more information on this topic please check out the relevant [Tracking Documentation](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/ecommerce-events/index.md).
 

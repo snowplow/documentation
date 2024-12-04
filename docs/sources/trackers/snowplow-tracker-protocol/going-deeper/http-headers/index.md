@@ -2,7 +2,7 @@
 title: "HTTP request headers"
 ---
 
-Snowplow Collectors will collect any standard HTTP headers and the values of these headers can be extracted during Enrichment. The [HTTP header extractor enrichment](/docs/enriching-your-data/available-enrichments/http-header-extractor-enrichment/index.md) can be configured for the headers you wish to extract.
+Snowplow Collectors will collect any standard HTTP headers and the values of these headers can be extracted during Enrichment. The [HTTP header extractor enrichment](/docs/pipeline/enrichments/available-enrichments/http-header-extractor-enrichment/index.md) can be configured for the headers you wish to extract.
 
 Additionally, the following two headers can be sent on requests:
 
@@ -13,4 +13,4 @@ Additionally, the following two headers can be sent on requests:
 
 #### Cookie Header
 
-Snowplow Collectors will collect any cookie information sent in the `Cookie` HTTP header. Cookies can be attached to events using the [Cookie extractor enrichment](/docs/enriching-your-data/available-enrichments/cookie-extractor-enrichment/index.md)
+Snowplow Collectors will collect any cookie information sent in the `Cookie` HTTP header. Cookies can be attached to events using the [Cookie extractor enrichment](/docs/pipeline/enrichments/available-enrichments/cookie-extractor-enrichment/index.md)

@@ -151,7 +151,7 @@ If you have access to the user's IP address, you can set it like this:
 s.set_ip_address('34.633.11.139')
 ```
 
-The set value will be used in the [IP Lookup](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md) and [IAB](/docs/enriching-your-data/available-enrichments/iab-enrichment/index.md) enrichments, if enabled.
+The set value will be used in the [IP Lookup](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) and [IAB](/docs/pipeline/enrichments/available-enrichments/iab-enrichment/index.md) enrichments, if enabled.
 
 :::tip
 
@@ -168,7 +168,7 @@ If you have access to the user's useragent (sometimes called "browser string"), 
 s.set_useragent('Mozilla/5.0 (Windows NT 5.1; rv:23.0) Gecko/20100101 Firefox/23.0')
 ```
 
-The set value will be used in the [YAUAA](/docs/enriching-your-data/available-enrichments/yauaa-enrichment/index.md), [UA Parser](/docs/enriching-your-data/available-enrichments/ua-parser-enrichment/index.md), [IAB](/docs/enriching-your-data/available-enrichments/iab-enrichment/index.md) and similar enrichments.
+The set value will be used in the [YAUAA](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md), [UA Parser](/docs/pipeline/enrichments/available-enrichments/ua-parser-enrichment/index.md), [IAB](/docs/pipeline/enrichments/available-enrichments/iab-enrichment/index.md) and similar enrichments.
 
 ### `set_domain_user_id`
 

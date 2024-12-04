@@ -14,7 +14,7 @@ Below you can find a detailed list of product features, including which are avai
 | [Anonymous data collection](/docs/recipes/recipe-anonymous-tracking/index.md) | ✅ | ✅ |
 | [ID service](/docs/sources/trackers/javascript-trackers/web-tracker/browsers/index.md#what-is-an-id-service) | ✅ | ✅ |
 | High availability & auto-scaling | ✅ | ❌ |
-| [Enrichments](/docs/enriching-your-data/available-enrichments/index.md) | ✅ | ✅ |
+| [Enrichments](/docs/pipeline/enrichments/available-enrichments/index.md) | ✅ | ✅ |
 | [Failed events](/docs/fundamentals/failed-events/index.md) | ✅ | ✅ | 
 | [Data quality monitoring](/docs/managing-data-quality/monitoring-failed-events/index.md) | ✅ | ❌ |
 | Single Sign-On | ✅ | ❌ | 

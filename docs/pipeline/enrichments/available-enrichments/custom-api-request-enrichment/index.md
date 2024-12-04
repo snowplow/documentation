@@ -146,7 +146,7 @@ The data source for this enrichment is the entire `enriched/good` event. More pr
 - Snowplow Plain Old Java Object produced during common enrichment process
 - [Snowplow self-describing event](/docs/fundamentals/events/index.md#self-describing-events)
 - [Entities](/docs/fundamentals/entities/index.md) (contexts) attached to event by tracking SDK
-- Derived entities (contexts) attached to event by [other enrichments](/docs/enriching-your-data/available-enrichments/index.md)
+- Derived entities (contexts) attached to event by [other enrichments](/docs/pipeline/enrichments/available-enrichments/index.md)
 
 More precise usage of these data sources is described in inputs section.
 

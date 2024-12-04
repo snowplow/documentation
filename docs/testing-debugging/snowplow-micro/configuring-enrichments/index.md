@@ -9,7 +9,7 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-By default, Micro does not come with any [enrichments](/docs/enriching-your-data/available-enrichments/index.md) enabled — this helps us keep the docker image smaller. You can enable any enrichments you like by passing corresponding configuration files to Micro.
+By default, Micro does not come with any [enrichments](/docs/pipeline/enrichments/available-enrichments/index.md) enabled — this helps us keep the docker image smaller. You can enable any enrichments you like by passing corresponding configuration files to Micro.
 
 <details>
 <summary>Limitations for enrichments that rely on data files</summary>
@@ -24,7 +24,7 @@ Also, the Enrich application supports files located in S3 and GCS with the `s3:/
 
 </details>
 
-For example, let’s say that you want to configure the [IP Lookup enrichment](/docs/enriching-your-data/available-enrichments/ip-lookup-enrichment/index.md). The default configuration file looks like this:
+For example, let’s say that you want to configure the [IP Lookup enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md). The default configuration file looks like this:
 
 ```json reference
 https://github.com/snowplow/enrich/blob/master/config/enrichments/ip_lookups.json
@@ -55,6 +55,6 @@ Once Micro starts, you should see messages like these:
 
 :::tip
 
-Micro is especially great for [testing the JavaScript enrichment](/docs/enriching-your-data/available-enrichments/custom-javascript-enrichment/testing/index.md).
+Micro is especially great for [testing the JavaScript enrichment](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/testing/index.md).
 
 :::

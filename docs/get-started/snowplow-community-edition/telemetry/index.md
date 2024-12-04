@@ -26,7 +26,7 @@ You can always disable telemetry if you prefer.
 
 ### Privacy
 
-We do not automatically collect any personally identifiable information (PII) other than the IP address of the computer where a Snowplow application or a terraform module is running. This IP address is subsequently pseudonymised using SHA-256 with the [Snowplow PII pseudonymization enrichment](/docs/enriching-your-data/available-enrichments/pii-pseudonymization-enrichment/index.md).
+We do not automatically collect any personally identifiable information (PII) other than the IP address of the computer where a Snowplow application or a terraform module is running. This IP address is subsequently pseudonymised using SHA-256 with the [Snowplow PII pseudonymization enrichment](/docs/pipeline/enrichments/available-enrichments/pii-pseudonymization-enrichment/index.md).
 
 ### Minimalism
 

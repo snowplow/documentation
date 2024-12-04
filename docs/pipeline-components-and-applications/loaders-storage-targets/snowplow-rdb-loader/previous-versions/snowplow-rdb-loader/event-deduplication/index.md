@@ -27,7 +27,7 @@ As of [the R76 Changeable Eagle-Hawk release](http://snowplowanalytics.com/blog/
 
 - i.e. events which share the same event ID (`event_id`) and the same event payload (based by `event_fingerprint`), meaning that they are semantically identical to each other. For a given ETL run (batch) of events being processed, RDB Shredder keeps only the first out of each group of natural duplicates; all others will be discarded.
 
-To enable this functionality you need to have [the Event Fingerprint Enrichment](/docs/enriching-your-data/available-enrichments/event-fingerprint-enrichment/index.md) enabled in order to correctly populate the `event_fingerprint` property.
+To enable this functionality you need to have [the Event Fingerprint Enrichment](/docs/pipeline/enrichments/available-enrichments/event-fingerprint-enrichment/index.md) enabled in order to correctly populate the `event_fingerprint` property.
 
 #### In-batch synthetic de-duplication
 
@@ -37,7 +37,7 @@ As of [the R86 Petra](http://snowplowanalytics.com/blog/2016/12/20/snowplow-r86-
 2. Generate new random `event_id` for each of them
 3. Create a [`duplicate`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/duplicate/jsonschema/1-0-0) context with the original `event_id` for each event where the duplicated `event_id` was found
 
-There is no configuration required for this functionality - de-duplication is performed automatically in RDB Shredder, but it is highly recommended to use the [Event Fingerprint Enrichment](/docs/enriching-your-data/available-enrichments/event-fingerprint-enrichment/index.md) in order to correctly populate the `event_fingerprint` property.
+There is no configuration required for this functionality - de-duplication is performed automatically in RDB Shredder, but it is highly recommended to use the [Event Fingerprint Enrichment](/docs/pipeline/enrichments/available-enrichments/event-fingerprint-enrichment/index.md) in order to correctly populate the `event_fingerprint` property.
 
 #### Cross-batch natural de-duplication
 

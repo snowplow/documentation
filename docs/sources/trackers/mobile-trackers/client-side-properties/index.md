@@ -41,9 +41,9 @@ To use the modern API throughout the tracker and standardize the screen resoluti
 
 All enriched Snowplow events contain values for `user_ipaddress`, `useragent`, and `network_userid`.
 
-Unless [anonymous tracking with server anonymisation](../anonymous-tracking/index.md) is enabled, the `user_ipaddress` is automatically added to all enriched events. To manually override this without using anonymous tracking, use a `SubjectConfiguration` and set an `ipAddress` string; use an empty string to prevent IP address tracking. Alternatively, use the [IP anonymization enrichment](/docs/enriching-your-data/available-enrichments/ip-anonymization-enrichment/index.md).
+Unless [anonymous tracking with server anonymisation](../anonymous-tracking/index.md) is enabled, the `user_ipaddress` is automatically added to all enriched events. To manually override this without using anonymous tracking, use a `SubjectConfiguration` and set an `ipAddress` string; use an empty string to prevent IP address tracking. Alternatively, use the [IP anonymization enrichment](/docs/pipeline/enrichments/available-enrichments/ip-anonymization-enrichment/index.md).
 
-The `useragent` is also automatically added but it can be overriden on configuration. Snowplow pipelines provide multiple useragent-parsing [enrichments](/docs/enriching-your-data/available-enrichments/index.md). To manually override the detected useragent, set a `useragent` string.
+The `useragent` is also automatically added but it can be overriden on configuration. Snowplow pipelines provide multiple useragent-parsing [enrichments](/docs/pipeline/enrichments/available-enrichments/index.md). To manually override the detected useragent, set a `useragent` string.
 
 The `network_userid` is the cookie value for the event collector's third-party cookie. The cookie is named `sp` (or `micro` for Snowplow Micro pipelines). To override the collector cookie’s value with your own generated ID, set `networkUserId`. Again, anonymous tracking with server anonymisation will prevent the addition of this property to events. The `network_userid` is stored in the tracker and is kept the same until the app is deleted or the collector endpoint is changed or the cookie is expired.
 

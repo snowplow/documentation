@@ -6,7 +6,7 @@ description: "Examples of enrichment code in JavaScript."
 
 ## Labeling internal and external traffic
 
-Suppose you want to extend your events with a label that distinguishes traffic from internal and external systems. This is a good use case for [adding an entity](/docs/enriching-your-data/available-enrichments/custom-javascript-enrichment/writing/index.md#adding-extra-entities-to-the-event).
+Suppose you want to extend your events with a label that distinguishes traffic from internal and external systems. This is a good use case for [adding an entity](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/writing/index.md#adding-extra-entities-to-the-event).
 
 ```js
 const internalIPs = new Set([
@@ -33,7 +33,7 @@ This example is not copy-paste-able. You will need to define your own schema.
 
 ## Filtering out bots
 
-You can use the [IAB enrichment](/docs/enriching-your-data/available-enrichments/iab-enrichment/index.md) to identify bots. However, it does not remove the bot-generated events from your data — it only adds relevant information to the events (in the `derived_contexts` field), e.g.:
+You can use the [IAB enrichment](/docs/pipeline/enrichments/available-enrichments/iab-enrichment/index.md) to identify bots. However, it does not remove the bot-generated events from your data — it only adds relevant information to the events (in the `derived_contexts` field), e.g.:
 
 ```json
 {
@@ -85,7 +85,7 @@ function process(event) {
 
 ## Omitting information based on a condition
 
-Let’s say you want to omit certain user information depending on which country the user is in. While [PII pseudonymization enrichment](/docs/enriching-your-data/available-enrichments/pii-pseudonymization-enrichment/index.md) is very useful for dealing with PII, it does not support such conditions. JavaScript enrichment to the rescue!
+Let’s say you want to omit certain user information depending on which country the user is in. While [PII pseudonymization enrichment](/docs/pipeline/enrichments/available-enrichments/pii-pseudonymization-enrichment/index.md) is very useful for dealing with PII, it does not support such conditions. JavaScript enrichment to the rescue!
 
 ```js
 function process(event) {

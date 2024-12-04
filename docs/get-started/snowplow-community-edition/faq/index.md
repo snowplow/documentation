@@ -23,15 +23,15 @@ When a new version of a module is released, follow these instructions to upgrade
 
 The following enrichments are enabled by default within the Enrich module:
 
-- [UA parser](/docs/enriching-your-data/available-enrichments/ua-parser-enrichment/index.md)
-- [YAUAA](/docs/enriching-your-data/available-enrichments/yauaa-enrichment/index.md)
-- [Campaign Attribution](/docs/enriching-your-data/available-enrichments/campaign-attribution-enrichment/index.md)
-- [Event fingerprint](/docs/enriching-your-data/available-enrichments/event-fingerprint-enrichment/index.md)
-- [Referer parser](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/index.md)
+- [UA parser](/docs/pipeline/enrichments/available-enrichments/ua-parser-enrichment/index.md)
+- [YAUAA](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md)
+- [Campaign Attribution](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md)
+- [Event fingerprint](/docs/pipeline/enrichments/available-enrichments/event-fingerprint-enrichment/index.md)
+- [Referer parser](/docs/pipeline/enrichments/available-enrichments/referrer-parser-enrichment/index.md)
 
-Other available enrichments enrichments and the configurations can be found [here](/docs/enriching-your-data/available-enrichments/index.md).
+Other available enrichments enrichments and the configurations can be found [here](/docs/pipeline/enrichments/available-enrichments/index.md).
 
-Follow the [documentation](/docs/enriching-your-data/managing-enrichments/terraform/index.md) if you want to enable or disable certain enrichments.
+Follow the [documentation](/docs/pipeline/enrichments/managing-enrichments/terraform/index.md) if you want to enable or disable certain enrichments.
 
 ## Troubleshooting Terraform Errors
 

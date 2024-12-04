@@ -28,7 +28,7 @@ It is published on Docker Hub and can be run with the following command:
 Above assumes that you have following directory structure:
 
 1. GCP credentials [JSON file](https://cloud.google.com/docs/authentication/getting-started)
-2. `enrichments` directory, (possibly empty) with all [enrichment configuration JSONs](/docs/enriching-your-data/available-enrichments/index.md)
+2. `enrichments` directory, (possibly empty) with all [enrichment configuration JSONs](/docs/pipeline/enrichments/available-enrichments/index.md)
 3. Iglu Resolver [configuration JSON](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md)
 4. enrich-pubSub [configuration HOCON](/docs/pipeline-components-and-applications/enrichment-components/configuration-reference/index.md)
 

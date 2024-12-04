@@ -33,7 +33,7 @@ Next, point your tracking code to `localhost:9090` (see the [usage guide](/docs/
 
 ## Debugging
 
-When debugging a JavaScript enrichment with Micro, there are a few sources of useful information: the [UI](/docs/data-product-studio/data-quality/snowplow-micro/ui/index.md) (available since Micro 2.0.0), the logs and the [REST API](/docs/pipeline-components-and-applications/snowplow-micro/api/index.md).
+When debugging a JavaScript enrichment with Micro, there are a few sources of useful information: the [UI](/docs/data-product-studio/data-quality/snowplow-micro/ui/index.md) (available since Micro 2.0.0), the logs and the [REST API](/docs/api-reference/snowplow-micro/api/index.md).
 
 ### User Interface
 
@@ -104,7 +104,7 @@ print(JSON.stringify(myEvent.data, null, 2));
 
 ### REST API
 
-Using Micro’s [REST API](/docs/pipeline-components-and-applications/snowplow-micro/api/index.md), you can verify that your code modifies event fields or adds entities as expected. The most useful endpoint is `/micro/good`, which will return all successfully processed events:
+Using Micro’s [REST API](/docs/api-reference/snowplow-micro/api/index.md), you can verify that your code modifies event fields or adds entities as expected. The most useful endpoint is `/micro/good`, which will return all successfully processed events:
 
 ```bash
 curl localhost:9090/micro/good

@@ -54,7 +54,7 @@ The output of the script must be an object which maps to engineProtocol.
 
 ### `snowplow_mode`
 
-`snowplow_mode` uses the [Go Analytics SDK](/docs/destinations/analytics-sdk/analytics-sdk-go/index.md) to parse the TSV fields into an object suitable for working with in Go.
+`snowplow_mode` uses the [Go Analytics SDK](/docs/api-reference/analytics-sdk/analytics-sdk-go/index.md) to parse the TSV fields into an object suitable for working with in Go.
 The result of the [`ParsedEvent.ToMap()`](https://pkg.go.dev/github.com/snowplow/snowplow-golang-analytics-sdk/analytics#ParsedEvent.ToMap) method is the input to your transform function.
 
 The [keys of the resulting map](https://github.com/snowplow/snowplow-golang-analytics-sdk/blob/a3430fbe576483d615b713120cfb5e443897d572/analytics/mappings.go#L153) are defined by the Analytics SDK.
@@ -68,7 +68,7 @@ When returned as part of `Data`, `time.Time` instances will [serialize in JSON](
 
 :::
 
-Structured data ([Self Describing Event](/docs/fundamentals/events/index.md#self-describing-events) payloads and [Entities](docs/fundamentals/entities/index.md)) will have keys with a prefix of `unstruct_event_` or `contexts_`, the vendor name converted to snake case, the event/entity name in snake case, and the [schema model version](/docs/pipeline-components-and-applications/iglu/common-architecture/schemaver/index.md). For example:
+Structured data ([Self Describing Event](/docs/fundamentals/events/index.md#self-describing-events) payloads and [Entities](docs/fundamentals/entities/index.md)) will have keys with a prefix of `unstruct_event_` or `contexts_`, the vendor name converted to snake case, the event/entity name in snake case, and the [schema model version](/docs/api-reference/iglu/common-architecture/schemaver/index.md). For example:
 
 | **Schema URI** | **Type** | **Key** |
 | --- | --- | --- |

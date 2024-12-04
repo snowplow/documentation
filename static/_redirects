@@ -323,3 +323,7 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/data-product-studio/defining-the-data-to-collect-with-data-products/* /docs/data-product-studio/data-products/:splat 301
 /docs/data-product-studio/organize-data-sources-with-source-applications/* /docs/data-product-studio/source-applications/:splat 301
 /docs/sources/configuring-collector/* /docs/pipeline/collector/:splat 301
+/docs/pipeline-components-and-applications/* /docs/api-reference/:splat 301
+/docs/destinations/analytics-sdk/* /docs/api-reference/analytics-sdk/:splat 301
+/docs/storing-querying/* /docs/destinations/warehouses-lakes/:splat 301
+/docs/recipes/* /docs/resources/recipes-tutorials/:splat 301

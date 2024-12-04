@@ -36,7 +36,7 @@ docker-compose up
 This will:
 
 1. Start serving the app on `localhost:8000`
-2. Launch Snowplow Micro, mounting the `micro` directory and setting the port 9090 for accessing Micro's [REST API](/docs/pipeline-components-and-applications/snowplow-micro/api/index.md) endpoints. Inside the `micro` directory are:
+2. Launch Snowplow Micro, mounting the `micro` directory and setting the port 9090 for accessing Micro's [REST API](/docs/api-reference/snowplow-micro/api/index.md) endpoints. Inside the `micro` directory are:
     1. The [configuration for Snowplow Micro](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/micro.conf).
     2. The [configuration for Iglu resolvers](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/iglu.json).
     3. The `iglu-client-embedded` directory containing the custom schemas used for tracking.

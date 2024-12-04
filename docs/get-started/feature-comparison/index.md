@@ -11,7 +11,7 @@ Below you can find a detailed list of product features, including which are avai
 |:--|:-:|:-:|
 | [35+ trackers & webhooks](/docs/sources/index.md) | ✅ | ✅ |
 | 1st party tracking | ✅ | ✅ |
-| [Anonymous data collection](/docs/recipes/recipe-anonymous-tracking/index.md) | ✅ | ✅ |
+| [Anonymous data collection](/docs/resources/recipes-tutorials/recipe-anonymous-tracking/index.md) | ✅ | ✅ |
 | [ID service](/docs/sources/trackers/javascript-trackers/web-tracker/browsers/index.md#what-is-an-id-service) | ✅ | ✅ |
 | High availability & auto-scaling | ✅ | ❌ |
 | [Enrichments](/docs/pipeline/enrichments/available-enrichments/index.md) | ✅ | ✅ |

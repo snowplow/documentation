@@ -23,7 +23,7 @@ If you are not running your website or app locally but would still like to use M
 
 ## Exposing Micro via a public domain name
 
-This method allows you to get a publicly accessible URL for your Micro, which you can point your tracking code to. You can also send this URL to colleagues for them to inspect the results via the [UI](/docs/data-product-studio/data-quality/snowplow-micro/ui/index.md) (since version 2.0.0) or the [API](/docs/pipeline-components-and-applications/snowplow-micro/api/index.md).
+This method allows you to get a publicly accessible URL for your Micro, which you can point your tracking code to. You can also send this URL to colleagues for them to inspect the results via the [UI](/docs/data-product-studio/data-quality/snowplow-micro/ui/index.md) (since version 2.0.0) or the [API](/docs/api-reference/snowplow-micro/api/index.md).
 
 ```mermaid
 flowchart LR

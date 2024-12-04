@@ -359,7 +359,7 @@ Create a corresponding Redshift table for the schema. We recommend autogeneratin
 /path/to/schema-guru-0.6.2 ddl --with-json-paths schemas/com.adjust.snowplow/install
 ```
 
-Or with [Igluctl](/docs/pipeline-components-and-applications/iglu/igluctl-2/index.md):
+Or with [Igluctl](/docs/api-reference/iglu/igluctl-2/index.md):
 
 ```bash
 /path/to/igluctl static generate --with-json-paths schemas/com.adjust.snowplow/install

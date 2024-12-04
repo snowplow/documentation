@@ -86,7 +86,7 @@ This package consists of two macros, a python script, and some example configura
 
   - `example_normalize_config.json`: This file is an example of an input to the python script, showing all options and valid values. For additional information about the file structure run `python dbt_packages/snowplow_normalize/utils/snowplow_normalize_model_gen.py --configHelp` in your project root.
 
-  - `example_resolver_config.json`: This file is an example [Iglu Resolver](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md) configuration. It supports custom iglu servers with API keys, but does not currently support accessing embedded registries. For more information please see the Resolver docs.
+  - `example_resolver_config.json`: This file is an example [Iglu Resolver](/docs/api-reference/iglu/iglu-resolver/index.md) configuration. It supports custom iglu servers with API keys, but does not currently support accessing embedded registries. For more information please see the Resolver docs.
 
   - `models/base/`: Models relating to the incremental nature of the package, processing only new events (and those covered by the lookback window).
 ## Operation
@@ -134,7 +134,7 @@ The config file is a JSON file which can be viewed by running the python script 
 <TabItem value="desc" label="Field Description" default>
 
 - `config` _(required - object)_:
-  - `resolver_file_path` _(required - string)_: Relative path to your resolver config json, or `"default"` to use [iglucentral](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-central/index.md) only
+  - `resolver_file_path` _(required - string)_: Relative path to your resolver config json, or `"default"` to use [iglucentral](/docs/api-reference/iglu/iglu-repositories/iglu-central/index.md) only
   - `filtered_events_table_name` _(optional - string)_: Name of filtered events table, if not provided it will not be generated
   - `users_table_name` _(optional - string)_: Name of users table, default `events_users` if user schema(s) provided
   - `validate_schemas` _(optional - boolean)_: If you want to validate schemas loaded from each iglu registry or not, default `true`

@@ -97,7 +97,7 @@ As part of the deployment, your data will be available in real-time streams corr
 | Pub/Sub | :x: | :white_check_mark: |:x: |
 | EventHubs | :x: | :x: | :white_check_mark: |
 
-For an out-of-the-box solution to accessing this data in real-time streams, you can [check out our Snowbridge tool](/docs/destinations/forwarding-events/snowbridge/index.md). Alternatively, if you want to develop a custom consumer, you can [leverage our Analytics SDKs](/docs/destinations/analytics-sdk/index.md) to parse the event formats more easily.
+For an out-of-the-box solution to accessing this data in real-time streams, you can [check out our Snowbridge tool](/docs/destinations/forwarding-events/snowbridge/index.md). Alternatively, if you want to develop a custom consumer, you can [leverage our Analytics SDKs](/docs/api-reference/analytics-sdk/index.md) to parse the event formats more easily.
 
 :::note
 
@@ -108,7 +108,7 @@ EventHubs topics are deployed in a Kafka-compatible model, so you can consume fr
 <Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
 
-There are four main storage options for you to select: Postgres, Redshift, Snowflake and Databricks. For Snowflake, you can choose between the newest [Streaming Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowflake-streaming-loader/index.md) (recommended) or [RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md). Additionally, there is an S3 option, which is primarily used to archive enriched (and/or raw) events and to store [failed events](/docs/fundamentals/failed-events/index.md).
+There are four main storage options for you to select: Postgres, Redshift, Snowflake and Databricks. For Snowflake, you can choose between the newest [Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md) (recommended) or [RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md). Additionally, there is an S3 option, which is primarily used to archive enriched (and/or raw) events and to store [failed events](/docs/fundamentals/failed-events/index.md).
 
 We recommend to only load data into a single destination, but nothing prevents you from loading into multiple destinations with the same pipeline (e.g. for testing purposes).
 
@@ -175,7 +175,7 @@ These are the subnet identifiers, e.g. `"/subscriptions/<...>/resourceGroups/<..
 
 ## Set up Iglu Server
 
-The first step is to set up the [Iglu Server](/docs/pipeline-components-and-applications/iglu/index.md) stack required by the rest of your pipeline.
+The first step is to set up the [Iglu Server](/docs/api-reference/iglu/index.md) stack required by the rest of your pipeline.
 
 This will allow you to create and evolve your own [custom events](/docs/fundamentals/events/index.md#self-describing-events) and [entities](/docs/fundamentals/entities/index.md#custom-entities). Iglu Server stores the [schemas](/docs/fundamentals/schemas/index.md) for your events and entities and fetches them as your events are processed by the pipeline.
 
@@ -324,7 +324,7 @@ No extra steps needed.
   </TabItem>
   <TabItem value="snowflake" label="Snowflake">
 
-If you are going to use the [Snowflake Streaming Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowflake-streaming-loader/index.md) (currently, only provided for AWS), you will need to generate a key pair following the [Snowflake documentation](https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-the-private-key). Make sure to enter an empty passphrase, as the terraform module below does not support keys with passphrases (for simplicity).
+If you are going to use the [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md) (currently, only provided for AWS), you will need to generate a key pair following the [Snowflake documentation](https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-the-private-key). Make sure to enter an empty passphrase, as the terraform module below does not support keys with passphrases (for simplicity).
 
 If you are not using the Snowflake Streaming Loader, you will need to pick a password.
 

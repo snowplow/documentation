@@ -10,7 +10,7 @@ Snowplow is underpinned by Event Streams, either AWS Kinesis, GCP PubSub or Apac
 
 The Snowplow events in the Enriched stream are in a tab separated format (TSV) by default. Many downstream consumers will prefer this data in JSON format, and the Snowplow Analytics SDKs have been built to help with this.
 
-- [Snowplow Analytics SDKs](/docs/destinations/analytics-sdk/index.md)
+- [Snowplow Analytics SDKs](/docs/api-reference/analytics-sdk/index.md)
 
 ## AWS Lambda and GCP Cloud Functions
 

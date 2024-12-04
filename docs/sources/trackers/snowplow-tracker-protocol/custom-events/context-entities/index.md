@@ -21,7 +21,7 @@ Each individual entity is a self-describing JSON such as:
 
 :::info
 
-`"iglu:com.my_company/user/jsonschema/1-0-0"` respresents a [self-describing JSON](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-jsons/index.md). It is used to validate the event data against a predefined JSON Schema as part of a Snowplow pipeline.
+`"iglu:com.my_company/user/jsonschema/1-0-0"` respresents a [self-describing JSON](/docs/api-reference/iglu/common-architecture/self-describing-jsons/index.md). It is used to validate the event data against a predefined JSON Schema as part of a Snowplow pipeline.
 
 :::
 

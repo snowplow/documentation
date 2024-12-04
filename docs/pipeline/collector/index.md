@@ -6,7 +6,7 @@ sidebar_label: "Collector"
 
 Once your [event collector](docs/fundamentals/architecture-overview/index.md) is set up, along with [trackers](docs/sources/trackers/index.md) to submit events to them, you may want to verify your collector configuration. This can take two forms, depending on your needs.
 
-Read more about the technical aspects of the collector [here](docs/pipeline-components-and-applications/stream-collector/index.md).
+Read more about the technical aspects of the collector [here](docs/api-reference/stream-collector/index.md).
 
 ## Viewing collector configuration in Snowplow BDP Console
 
@@ -141,4 +141,4 @@ Finally, `blockUnencrypted` is an optional boolean property indicating whether u
 
 ## Configuring the collector for Community Edition users
 
-After you have installed the [Collector](docs/pipeline-components-and-applications/stream-collector/index.md) (either following the [Quick Start guide](/docs/get-started/snowplow-community-edition/what-is-quick-start/index.md) or [manually](docs/pipeline-components-and-applications/stream-collector/setup/index.md)), you can follow the [reference page](docs/pipeline-components-and-applications/stream-collector/configure/index.md) to configure it.
+After you have installed the [Collector](docs/api-reference/stream-collector/index.md) (either following the [Quick Start guide](/docs/get-started/snowplow-community-edition/what-is-quick-start/index.md) or [manually](docs/api-reference/stream-collector/setup/index.md)), you can follow the [reference page](docs/api-reference/stream-collector/configure/index.md) to configure it.

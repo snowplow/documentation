@@ -118,4 +118,4 @@ If you created a OneLake shortcut in the [last step](/docs/get-started/snowplow-
 
 ## Writing queries
 
-Follow [our querying guide](/docs/storing-querying/querying-data/index.md) for more information.
+Follow [our querying guide](/docs/destinations/warehouses-lakes/querying-data/index.md) for more information.

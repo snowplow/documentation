@@ -15,7 +15,7 @@ Sometimes, small mistakes creep into your schemas. For example, you might mark a
 
 It might be tempting to somehow “overwrite” the schema without updating the version. But this can bring several problems:
 * Events that were previously valid could become invalid against the new changes.
-* Your warehouse loader, which updates the table [according to the schema](/docs/storing-querying/schemas-in-warehouse/index.md#versioning), could get stuck if it’s not possible to cast the data in the existing table column to the new definition (e.g. if you change a field type from a string to a number).
+* Your warehouse loader, which updates the table [according to the schema](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md#versioning), could get stuck if it’s not possible to cast the data in the existing table column to the new definition (e.g. if you change a field type from a string to a number).
 * Similarly, data models or other applications consuming the data downstream might not be able to deal with the changes.
 
 The best approach is to just create a new schema version and update your tracking code to use it. However, there are two alternatives for when it’s not ideal.
@@ -55,11 +55,11 @@ Also, never patch a schema version that exists in a production environment, even
 
 :::
 
-For Snowplow BDP customers, patching is disabled for production pipelines. Community Edition users have to explicitly enable patching (if desired) in the [Iglu Server configuration](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/reference/index.md) (`patchesAllowed`) at their own risk.
+For Snowplow BDP customers, patching is disabled for production pipelines. Community Edition users have to explicitly enable patching (if desired) in the [Iglu Server configuration](/docs/api-reference/iglu/iglu-repositories/iglu-server/reference/index.md) (`patchesAllowed`) at their own risk.
 
 :::tip Schema caching
 
-Note that various pipeline components, most importantly Enrich (including Enrich embedded in Snowplow Mini and Snowplow Micro), cache schemas to improve performance. The default caching time is 10 minutes (it’s controlled by the [Iglu Resolver configuration](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md)). This means that the effect of patching a schema will not be immediate.
+Note that various pipeline components, most importantly Enrich (including Enrich embedded in Snowplow Mini and Snowplow Micro), cache schemas to improve performance. The default caching time is 10 minutes (it’s controlled by the [Iglu Resolver configuration](/docs/api-reference/iglu/iglu-resolver/index.md)). This means that the effect of patching a schema will not be immediate.
 
 :::
 
@@ -70,7 +70,7 @@ If your events are failing in production because of an incorrect schema, you mig
 
 :::note
 
-You need to be on Enrich 3.8.0+ and Iglu Server 0.11.0+ to use this feature. Additionally, if you are using [Snowplow Mini](/docs/pipeline-components-and-applications/snowplow-mini/overview/index.md) or [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md), you will need version 0.17.0+ or 1.7.1+ respectively.
+You need to be on Enrich 3.8.0+ and Iglu Server 0.11.0+ to use this feature. Additionally, if you are using [Snowplow Mini](/docs/api-reference/snowplow-mini/overview/index.md) or [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md), you will need version 0.17.0+ or 1.7.1+ respectively.
 
 :::
 
@@ -259,7 +259,7 @@ For example, if version `1-0-2` is defined to supersede version `1-0-1`, and you
 
 :::tip Schema caching
 
-Note that various pipeline components, most importantly Enrich (including Enrich embedded in Snowplow Mini and Snowplow Micro), cache schemas to improve performance. The default caching time is 10 minutes (it’s controlled by the [Iglu Resolver configuration](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md)). This means that the effect of superseding a schema will not be immediate.
+Note that various pipeline components, most importantly Enrich (including Enrich embedded in Snowplow Mini and Snowplow Micro), cache schemas to improve performance. The default caching time is 10 minutes (it’s controlled by the [Iglu Resolver configuration](/docs/api-reference/iglu/iglu-resolver/index.md)). This means that the effect of superseding a schema will not be immediate.
 
 :::
 

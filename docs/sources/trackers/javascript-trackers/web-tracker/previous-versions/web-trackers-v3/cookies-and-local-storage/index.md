@@ -50,7 +50,7 @@ When using [anonymous tracking](../anonymous-tracking/index.md) with session (`a
 
 There is a third sort of Snowplow-related cookie: the cookie set by the Collector, independently of the JavaScript Tracker. The Collector cookie is called “sp”. It is either a first or third-party cookie, depending on the collector URL (it can be used as a first party cookie is the collector is on the same domain as the site), used to track users over multiple domains.
 
-This cookie can be disabled by setting `collector.cookie.enabled` to false (See [here](/docs/pipeline-components-and-applications/stream-collector/configure/index.md) for more information).
+This cookie can be disabled by setting `collector.cookie.enabled` to false (See [here](/docs/api-reference/stream-collector/configure/index.md) for more information).
 
 ### Opt-out cookie
 

@@ -23,7 +23,7 @@ Many types of failed events can be “recovered”. That is, you can fix the und
 
 While an event is being processed by the pipeline it is checked to ensure it meets the specific formatting or configuration expectations; these include checks like: does it match the schema it is associated with, were Enrichments successfully applied and was the payload sent by the tracker acceptable.
 
-Generally, the [Collector](/docs/pipeline-components-and-applications/stream-collector/index.md) tries to write any payload to the raw stream, no matter its content, and no matter whether it is valid. This explains why many of the failure types are filtered out by the [enrichment](/docs/pipeline/enrichments/what-is-enrichment/index.md) application, and not any earlier.
+Generally, the [Collector](/docs/api-reference/stream-collector/index.md) tries to write any payload to the raw stream, no matter its content, and no matter whether it is valid. This explains why many of the failure types are filtered out by the [enrichment](/docs/pipeline/enrichments/what-is-enrichment/index.md) application, and not any earlier.
 
 :::note
 
@@ -43,12 +43,12 @@ This failure type is produced during the process of [validation and enrichment](
 
 In order for an event to be processed successfully:
 
-1. There must be a schema in an [iglu repository](/docs/pipeline-components-and-applications/iglu/iglu-repositories/index.md) corresponding to each self-describing event or entity. The enrichment app must be able to look up the schema in order to validate the event.
+1. There must be a schema in an [iglu repository](/docs/api-reference/iglu/iglu-repositories/index.md) corresponding to each self-describing event or entity. The enrichment app must be able to look up the schema in order to validate the event.
 2. Each self-describing event or entity must conform to the structure described in the schema. For example, all required fields must be present, and all fields must be of the expected type.
 
-If your pipeline is generating schema violations, it might mean there is a problem with your tracking, or a problem with your [iglu resolver](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md) which lists where schemas should be found. The error details in the schema violation JSON object should give you a hint about what the problem might be.
+If your pipeline is generating schema violations, it might mean there is a problem with your tracking, or a problem with your [iglu resolver](/docs/api-reference/iglu/iglu-resolver/index.md) which lists where schemas should be found. The error details in the schema violation JSON object should give you a hint about what the problem might be.
 
-Snowplow BDP customers should check in the Snowplow BDP Console that all data structures are correct and have been [promoted to production](/docs/data-product-studio/data-structures/manage/ui/index.md). Snowplow Community Edition users should check that the Enrichment app is configured with an [iglu resolver file](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md) that points to a repository containing the schemas.
+Snowplow BDP customers should check in the Snowplow BDP Console that all data structures are correct and have been [promoted to production](/docs/data-product-studio/data-structures/manage/ui/index.md). Snowplow Community Edition users should check that the Enrichment app is configured with an [iglu resolver file](/docs/api-reference/iglu/iglu-resolver/index.md) that points to a repository containing the schemas.
 
 Next, check the tracking code in your custom application, and make sure the entities you are sending conform the schema definition.
 
@@ -150,7 +150,7 @@ Tracker protocol violation schema can be found [here](https://github.com/snowplo
 
 ### Size Violation
 
-This failure type can be produced either by the [Collector](/docs/pipeline-components-and-applications/stream-collector/index.md) or by the [enrichment](/docs/pipeline/enrichments/what-is-enrichment/index.md) application. It happens when the size of the raw event or enriched event is too big for the output message queue. In this case it will be truncated and wrapped in a size violation failed event instead.
+This failure type can be produced either by the [Collector](/docs/api-reference/stream-collector/index.md) or by the [enrichment](/docs/pipeline/enrichments/what-is-enrichment/index.md) application. It happens when the size of the raw event or enriched event is too big for the output message queue. In this case it will be truncated and wrapped in a size violation failed event instead.
 
 <details>
 
@@ -162,7 +162,7 @@ Size violation schema can be found [here](https://github.com/snowplow/iglu-centr
 
 ### Loader Parsing Error
 
-This failure type can be produced by [any loader](/docs/pipeline-components-and-applications/loaders-storage-targets/index.md), if the enriched event in the real time good stream cannot be parsed as a canonical TSV event format. For example, if line has not enough columns (not 131) or event_id is not UUID. This error type is uncommon and unexpected, because it can only be caused by an invalid message in the stream of validated enriched events.
+This failure type can be produced by [any loader](/docs/api-reference/loaders-storage-targets/index.md), if the enriched event in the real time good stream cannot be parsed as a canonical TSV event format. For example, if line has not enough columns (not 131) or event_id is not UUID. This error type is uncommon and unexpected, because it can only be caused by an invalid message in the stream of validated enriched events.
 
 <details>
 
@@ -174,15 +174,15 @@ Loader parsing error schema can be found [here](https://github.com/snowplow/iglu
 
 ### Loader Iglu Error
 
-This failure type can be produced by [any loader](/docs/pipeline-components-and-applications/loaders-storage-targets/index.md) and describes an error using the [Iglu](/docs/pipeline-components-and-applications/iglu/index.md) subsystem.
+This failure type can be produced by [any loader](/docs/api-reference/loaders-storage-targets/index.md) and describes an error using the [Iglu](/docs/api-reference/iglu/index.md) subsystem.
 
 <details>
 
 For example:
 
-- A schema is not available in any of the repositories listed in the [iglu resolver](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md).
-- Some loaders (e.g. [RDB loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) and [Postgres loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-postgres-loader/index.md)) make use of the "schema list" api endpoints, which are only implemented for an [iglu-server](/docs/pipeline-components-and-applications/iglu/iglu-repositories/iglu-server/index.md) repository. A loader iglu error will be generated if the schema is in a [static repo](/docs/pipeline-components-and-applications/iglu/iglu-repositories/static-repo/index.md) or [embedded repo](/docs/pipeline-components-and-applications/iglu/iglu-repositories/jvm-embedded-repo/index.md).
-- The loader cannot auto-migrate a database table. If a schema version is incremented from `1-0-0` to `1-0-1` then it is expected to be [a non-breaking change](/docs/pipeline-components-and-applications/iglu/common-architecture/schemaver/index.md), and many loaders (e.g. RDB loader) attempt to execute a `ALTER TABLE` statement to facilitate the new schema in the warehouse. But if the schema change is breaking (e.g. string field changed to integer field) then the database migration is not possible.
+- A schema is not available in any of the repositories listed in the [iglu resolver](/docs/api-reference/iglu/iglu-resolver/index.md).
+- Some loaders (e.g. [RDB loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) and [Postgres loader](/docs/api-reference/loaders-storage-targets/snowplow-postgres-loader/index.md)) make use of the "schema list" api endpoints, which are only implemented for an [iglu-server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) repository. A loader iglu error will be generated if the schema is in a [static repo](/docs/api-reference/iglu/iglu-repositories/static-repo/index.md) or [embedded repo](/docs/api-reference/iglu/iglu-repositories/jvm-embedded-repo/index.md).
+- The loader cannot auto-migrate a database table. If a schema version is incremented from `1-0-0` to `1-0-1` then it is expected to be [a non-breaking change](/docs/api-reference/iglu/common-architecture/schemaver/index.md), and many loaders (e.g. RDB loader) attempt to execute a `ALTER TABLE` statement to facilitate the new schema in the warehouse. But if the schema change is breaking (e.g. string field changed to integer field) then the database migration is not possible.
 
 This failure type cannot be [recovered](/docs/data-product-studio/data-quality/failed-events/recovering-failed-events/index.md).
 
@@ -192,7 +192,7 @@ Loader iglu error schema can be found [here](https://github.com/snowplow/iglu-ce
 
 ### Loader Recovery Error
 
-Currently only the [BigQuery repeater](/docs/pipeline-components-and-applications/loaders-storage-targets/bigquery-loader/index.md#block-8db848d4-0265-4ffa-97db-0211f4e2293d) generates this error. We call it "loader recovery error" because the purpose of the repeater is to recover from previously failed inserts. It represents the case when the software could not re-insert the row into the database due to a runtime failure or invalid data in a source.
+Currently only the [BigQuery repeater](/docs/api-reference/loaders-storage-targets/bigquery-loader/index.md#block-8db848d4-0265-4ffa-97db-0211f4e2293d) generates this error. We call it "loader recovery error" because the purpose of the repeater is to recover from previously failed inserts. It represents the case when the software could not re-insert the row into the database due to a runtime failure or invalid data in a source.
 
 <details>
 

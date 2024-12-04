@@ -4,7 +4,7 @@ sidebar_label: "Using Postgres"
 sidebar_position: 3
 ---
 
-If you use the [Postgres Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-postgres-loader/index.md) (not recommended for large volume production use cases), you can load your [failed events](/docs/fundamentals/failed-events/index.md) into Postgres.
+If you use the [Postgres Loader](/docs/api-reference/loaders-storage-targets/snowplow-postgres-loader/index.md) (not recommended for large volume production use cases), you can load your [failed events](/docs/fundamentals/failed-events/index.md) into Postgres.
 
 Each type of failed event is stored in its own table. You can get a full list of tables with the following query:
 

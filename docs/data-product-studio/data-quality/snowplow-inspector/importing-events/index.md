@@ -21,7 +21,7 @@ Historical events that have already failed the enrichment process can be importe
 The extension will accept an uncompressed file, which you can paste a selection from, or in total straight from your clipboard.
 
 ## Importing events from ElasticSearch / OpenSearch
-If you use [ElasticSearch](https://www.elastic.co/) / [OpenSearch](https://opensearch.org/) as a destination for your events (or as used in [Snowplow Mini](/docs/pipeline-components-and-applications/snowplow-mini/index.md)) you can specify a query to use and the extension will load events as they are indexed.
+If you use [ElasticSearch](https://www.elastic.co/) / [OpenSearch](https://opensearch.org/) as a destination for your events (or as used in [Snowplow Mini](/docs/api-reference/snowplow-mini/index.md)) you can specify a query to use and the extension will load events as they are indexed.
 
 This can be useful for testing many devices at once, e.g. multiple mobile devices that are all sending events to your Snowplow Mini instance.
 

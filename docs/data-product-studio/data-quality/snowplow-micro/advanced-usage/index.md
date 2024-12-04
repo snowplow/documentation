@@ -40,7 +40,7 @@ As usual, you can change the ports to your liking (see [Running Micro](/docs/dat
 
 ## Adding custom Iglu resolver configuration
 
-If you’d like to tweak the Iglu registries Micro uses, the priority between them, the cache sizes, etc, you can provide your own [Iglu resolver configuration](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md) (`iglu.json`).
+If you’d like to tweak the Iglu registries Micro uses, the priority between them, the cache sizes, etc, you can provide your own [Iglu resolver configuration](/docs/api-reference/iglu/iglu-resolver/index.md) (`iglu.json`).
 
 :::tip
 
@@ -57,7 +57,7 @@ Pass your configuration file to the container (using a [bind mount](https://docs
   --iglu /config/iglu.json`
 }</CodeBlock>
 
-That’s it. You can use the [the API](/docs/pipeline-components-and-applications/snowplow-micro/api/index.md#microiglu) to check if Micro is able to reach your schemas (replace `com.example` and `my-schema` as appropriate).
+That’s it. You can use the [the API](/docs/api-reference/snowplow-micro/api/index.md#microiglu) to check if Micro is able to reach your schemas (replace `com.example` and `my-schema` as appropriate).
 
 ```bash
 curl localhost:9090/micro/iglu/com.example/my-schema/jsonschema/1-0-0
@@ -65,7 +65,7 @@ curl localhost:9090/micro/iglu/com.example/my-schema/jsonschema/1-0-0
 
 ## Adding custom collector configuration
 
-If you’d like to tweak the [collector configuration](/docs/pipeline-components-and-applications/stream-collector/configure/index.md) inside Micro, the simplest approach is to override individual settings. For example, to change the cookie name:
+If you’d like to tweak the [collector configuration](/docs/api-reference/stream-collector/configure/index.md) inside Micro, the simplest approach is to override individual settings. For example, to change the cookie name:
 
 <CodeBlock language="bash">{
 `docker run -p 9090:9090 \\

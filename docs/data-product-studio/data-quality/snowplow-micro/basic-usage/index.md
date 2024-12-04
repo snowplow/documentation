@@ -94,7 +94,7 @@ Would you rather see the events visually? Open [http://localhost:9090/micro/ui](
 
 ![Micro UI overview](../images/overview.png)
 
-Alternatively, you can inspect the events via [the API](/docs/pipeline-components-and-applications/snowplow-micro/api/index.md). For example, try:
+Alternatively, you can inspect the events via [the API](/docs/api-reference/snowplow-micro/api/index.md). For example, try:
 
 ```bash
 curl localhost:9090/micro/good
@@ -102,7 +102,7 @@ curl localhost:9090/micro/good
 
 ## Exporting events to TSV
 
-Snowplow pipelines output data in the [_enriched TSV format_](/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md). Typically, this is picked up by one of our [loaders](/docs/storing-querying/storage-options/index.md) or by tools such as [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md).
+Snowplow pipelines output data in the [_enriched TSV format_](/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md). Typically, this is picked up by one of our [loaders](/docs/destinations/warehouses-lakes/storage-options/index.md) or by tools such as [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md).
 
 With Micro, you can see what your data would look like in this format — useful if you want to test any logic that is parsing this data. 
 

@@ -8,7 +8,7 @@ As discussed in the [section "Failed events in the Console"](/docs/data-product-
 
 ## Authorization
 
-Before you can invoke the Failed Events API, you will need to [authenticate with an API key](/docs/using-the-snowplow-console/managing-console-api-authentication/index.md).
+Before you can invoke the Failed Events API, you will need to [authenticate with an API key](/docs/account-management/managing-console-api-authentication/index.md).
 
 
 ## Available operations and data returned

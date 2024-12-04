@@ -5,6 +5,7 @@ sidebar_position: 120
 sidebar_custom_props:
   offerings:
     - bdp
+sidebar_label: "Account management"
 ---
 
 ```mdx-code-block

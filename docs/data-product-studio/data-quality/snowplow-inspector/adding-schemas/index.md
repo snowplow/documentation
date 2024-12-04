@@ -72,8 +72,8 @@ This type is recommended for use with Snowplow BDP via the [Data Structures API]
 
 In order to function, the extension requires:
 
-- Organization ID: This is usually found in the URL when logged into the Snowplow BDP console. See more at [Managing Console API authentication](/docs/using-the-snowplow-console/managing-console-api-authentication/index.md#credentials-ui-v2).
-- API Key: When logged into the Snowplow BDP console, should be available in [API keys for managing Snowplow](https://console.snowplowanalytics.com/credentials) (within "Manage organization"). See more at [Managing Console API authentication](/docs/using-the-snowplow-console/managing-console-api-authentication/index.md#credentials-ui-v2).
+- Organization ID: This is usually found in the URL when logged into the Snowplow BDP console. See more at [Managing Console API authentication](/docs/account-management/managing-console-api-authentication/index.md#credentials-ui-v2).
+- API Key: When logged into the Snowplow BDP console, should be available in [API keys for managing Snowplow](https://console.snowplowanalytics.com/credentials) (within "Manage organization"). See more at [Managing Console API authentication](/docs/account-management/managing-console-api-authentication/index.md#credentials-ui-v2).
 
 ## Iglu Server registries
 [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) is a more full-featured dedicated service for hosting server that is more flexible than Static Registries.

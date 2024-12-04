@@ -40,13 +40,12 @@ moves=(
 
     # "docs/sources/configuring-collector docs/pipeline/collector Collector"
 
-    "docs/pipeline-components-and-applications docs/api-reference API reference",
-    "docs/destinations/analytics-sdk docs/api-reference/analytics-sdk",
-    "docs/storing-querying docs/destinations/warehouses-lakes Warehouses and lakes",
-    "docs/recipes docs/resources/recipes-tutorials Recipes and tutorials",
+    # "docs/pipeline-components-and-applications docs/api-reference API reference",
+    # "docs/destinations/analytics-sdk docs/api-reference/analytics-sdk",
+    # "docs/storing-querying docs/destinations/warehouses-lakes Warehouses and lakes",
+    # "docs/recipes docs/resources/recipes-tutorials Recipes and tutorials",
 
-
-    # "docs/using-the-snowplow-console docs/account-management Account management",
+    "docs/using-the-snowplow-console docs/account-management Account management",
 
     # "docs/discovering-data docs/discovering-data-to-delete Delete me!",
 

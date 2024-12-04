@@ -1,10 +1,10 @@
 ---
 title: "Defining the Data to collect with Data Products"
 sidebar_position: 2
-sidebar_label: "Defining the Data to collect with Data Products"
+sidebar_label: "Data Products"
 ---
 
-As described in [Data Products Introduction](/docs/fundamentals/data-products/index.md), a data product is a logical grouping of the data you collect as an organisation by domain, with an explicit owner. 
+As described in [Data Products Introduction](/docs/fundamentals/data-products/index.md), a data product is a logical grouping of the data you collect as an organisation by domain, with an explicit owner.
 
 With data products, you can:
 
@@ -22,11 +22,11 @@ With data products, you can:
 
 - **Name;** a descriptive and unique name for the data product
 - **Description;** a description of the data that the data product captures
-- **Owner;** the individual responsible for the data product 
+- **Owner;** the individual responsible for the data product
 - **Domain;** the team or business domain that owns the data product
-- **Source Application;** the [source application/s](../organize-data-sources-with-source-applications/index.md) the Data Product is implemented in
+- **Source Application;** the [source application/s](docs/data-product-studio/source-applications/index.md) the Data Product is implemented in
 - **Event specifications**
-    * **Name;** a descriptive name for the event 
+    * **Name;** a descriptive name for the event
     * **Description;** a description to help people understand what action the event is capturing
     * **Source Applications;** the source application(s) inherited from the data product containing the Application ID(s) that will be sent with this event
     * **Triggers;** specific instructions on where the event gets triggered (e.g. when a user clicks the "Add to basket" button)

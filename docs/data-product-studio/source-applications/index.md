@@ -22,7 +22,7 @@ To illustrate, let's consider Snowplow. We can identify several applications des
 - The BDP Console application that is served under console.snowplowanalytics.com.
 - The documentation website serving as our information hub, for all things related to our product, served under docs.snowplow.io.
 
-Source Applications are a foundational component that enables you to establish the overarching relationships that connect application IDs and [Application Entites](docs/sources/trackers/javascript-trackers/web-tracker/custom-tracking-using-schemas/global-context/index.md) and [Data Products](../defining-the-data-to-collect-with-data-products/index.md).
+Source Applications are a foundational component that enables you to establish the overarching relationships that connect application IDs and [Application Entites](docs/sources/trackers/javascript-trackers/web-tracker/custom-tracking-using-schemas/global-context/index.md) and [Data Products](docs/data-product-studio/data-products/index.md).
 
 ## Application IDs
 

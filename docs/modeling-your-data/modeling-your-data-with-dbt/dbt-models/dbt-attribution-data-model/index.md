@@ -220,9 +220,9 @@ You can also do the opposite, filter on certain channels to include in your anal
 You can do either for campaigns, too, with the `snowplow__channels_to_exclude` and `snowplow__channels_to_include` variables.
 </details>
 
-#### Transform paths
+#### **Transform paths**
 
-In order to reduce unneccesarily long paths your can apply a number of path transformations that are created as part of user defined functions automatically in your warehouse by the package.
+In order to reduce unneccesarily long paths you can apply a number of path transformations that are created as part of user defined functions automatically in your warehouse by the package.
 
 In order to apply these transformations, all you have to do is to define them in the `snowplow__path_transforms` variable as a list of dictionaries, with the transformation name as key and optionally the parameter as value (for `remove_if_last_and_not_all` and `remove_if_not_all`). If the transformation requires no parameter you can just use `null` as values for the dictionary. For more details on how to do this, check out the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/attribution/index.mdx) E.g.: `{'exposure_path': null, 'remove_if_last_and_not_all': 'direct'}`
 
@@ -247,7 +247,7 @@ In order to apply these transformations, all you have to do is to define them in
 
 </details>
 
-#### Other, macro based setup
+#### **Other, macro based setup**
 
 ```mdx-code-block
 import AttributionDbtMacros from "@site/docs/reusable/attribution-dbt-macros/_index.md"
@@ -255,7 +255,7 @@ import AttributionDbtMacros from "@site/docs/reusable/attribution-dbt-macros/_in
 <AttributionDbtMacros/>
 ```
 
-#### Adding tests (Optional)
+#### **Adding tests (Optional)**
 Please note that the Unified data model allows nulls on `user_identifier` field, but the Attribution package does not, by default we filter out nulls within the `paths_to_conversion` macro when joining on the `path_source` and also on the `conversion_source` using the `conversion_clause` variable, which by default includes the null filter. We encourage users to add their own tests in the appropriate level (e.g. in the derived.snowplow_unified_views level) to make sure you don't accidentally exclude those events without user_identifier that are null (e.g. due to a tracking issue).
 
 ## Output

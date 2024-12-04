@@ -15,6 +15,7 @@ Enrich can periodically emit event-based metrics to a statsd daemon. Here is a s
 ```text
 snowplow.enrich.raw:42|c|#tag1:value1
 snowplow.enrich.good:30|c|#tag1:value1
+snowplow.enrich.incomplete:10|c|#tag1:value1
 snowplow.enrich.bad:12|c|#tag1:value1
 snowplow.enrich.latency:123.4|g|#tag1:value1
 snowplow.enrich.invalid_enriched:0|c|#tag1:value1
@@ -22,6 +23,7 @@ snowplow.enrich.invalid_enriched:0|c|#tag1:value1
 
 - `raw`: total number of raw collector payloads received.
 - `good`: total number of good events successfully enriched.
+- `incomplete`: total number of failed events due to schema violations or enrichment failures (if feature is enabled).
 - `bad`: total number of failed events, e.g. due to schema violations, invalid collector payload, or an enrichment failure.
 - `latency`: time difference between the collector timestamp and time the event is emitted to the output stream
 - `invalid_enriched`: number of enriched events that were not valid against [atomic](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/atomic/jsonschema/1-0-0) schema

@@ -3,74 +3,58 @@
 # Move commands
 # Starting path, end path, optional new sidebar label
 moves=(
-    # OLD
     # "docs/collecting-data docs/sources Sources",
+    # "docs/sources/collecting-data-from-third-parties docs/sources/webhooks"
+    # "docs/sources/collecting-from-own-applications docs/sources/trackers"
 
     # "docs/contributing docs/resources Resources",
 
     # "docs/understanding-your-pipeline docs/fundamentals Fundamentals",
 
     # "docs/first-steps docs/get-started Get Started",
-    # "docs/feature-comparison docs/get-started/feature-comparison Feature Comparison",
+    # "docs/feature-comparison docs/get-started/feature-comparison Feature comparison",
     # "docs/getting-started-on-bdp docs/get-started/snowplow-bdp Snowplow BDP",
     # "docs/getting-started-on-community-edition docs/get-started/snowplow-community-edition Snowplow Community Edition",
     # "docs/fundamentals/deployment-model docs/get-started/deployment-model",
 
-    # "docs/enriching-your-data docs/pipeline/enriching-your-data",
+    # "docs/enriching-your-data docs/pipeline/enrichments",
 
-    # "docs/managing-data-quality docs/data-product-studio/data-quality/failed-events Failed Events",
-    # "docs/data-product-studio/data-quality/failed-events/testing-and-qa-workflows docs/data-product-studio/data-quality/testing-and-qa-workflows",
-    # "docs/testing-debugging docs/data-product-studio/data-quality/testing-debugging",
-    # "docs/understanding-tracking-design docs/data-product-studio/data-products Data Products",
-    # "docs/collecting-data/code-generation docs/data-product-studio/data-products/snowtype Snowtype",
 
-    # "docs/modeling-your-data docs/data-models Data Models",
-    # "docs/pipeline-components-and-applications docs/api-reference API Reference",
+    # "docs/understanding-tracking-design docs/data-product-studio Data Product Studio",
 
-    # "docs/storing-querying docs/destinations-temp/loaders-warehouses Loaders and Warehouses",
-    # "docs/destinations docs/destinations-temp/event-streaming Event Streaming",
-    # "docs/destinations-temp docs/destinations Destinations",
+    # "docs/managing-data-quality docs/data-product-studio/data-quality/failed-events Failed events",
+    # "docs/testing-debugging/snowplow-inspector docs/data-product-studio/data-quality/snowplow-inspector",
+    # "docs/testing-debugging/snowplow-micro docs/data-product-studio/data-quality/snowplow-micro",
 
-    # "docs/using-the-snowplow-console docs/account-management Account Management",
+    # "docs/managing-data-quality/testing-and-qa-workflows/set-up-automated-testing-with-snowplow-micro docs/data-product-studio/data-quality/snowplow-micro/automated-testing Automated testing"
+    # "docs/managing-data-quality/testing-and-qa-workflows/using-the-data-structures-ci-tool-for-data-quality docs/data-product-studio/data-quality/data-structures-ci-tool Data Structures CI tool"
 
-    # "docs/discovering-data docs/discovering-data-to-delete Delete me!",
-    # "docs/recipes docs/recipes-tutorials Recipes and Tutorials (move to new tab)",
 
-    # "docs/data-product-studio/data-products/defining-the-data-to-collect-with-data-poducts docs/data-product-studio/data-products/defining-the-data-to-collect-with-data-products"
-    # "docs/sources/code-generation docs/data-product-studio/data-products/snowtype Snowtype"
+    # "docs/sources/code-generation docs/data-product-studio/snowtype Snowtype",
+    # "docs/data-product-studio/defining-the-data-to-collect-with-data-poducts docs/data-product-studio/data-products"
+
+    # "docs/data-product-studio/versioning-your-data-structures docs/data-product-studio/data-structures/version-amend Verson and amend"
+    # "docs/data-product-studio/managing-your-data-structures docs/data-product-studio/data-products/manage Manage"
+
+    # "docs/data-product-studio/managing-event-specifications/ui docs/data-product-studio/event-specifications"
+    # "docs/data-product-studio/managing-event-specifications/api docs/data-product-studio/event-specifications/api"
+    # "docs/data-product-studio/tracking-plans docs/data-product-studio/event-specifications/tracking-plans"
+    # "docs/data-product-studio/defining-the-data-to-collect-with-data-products docs/data-product-studio/data-products"
+
     # "docs/sources/configuring-collector docs/pipeline/configuring-collector Collector"
 
-    # "docs/pipeline/enriching-your-data docs/pipeline/enrichments"
+    # "docs/pipeline-components-and-applications docs/api-reference API reference",
 
-    # "docs/sources/collecting-data-from-third-parties docs/sources/webhooks"
-    # "docs/sources/collecting-from-own-applications docs/sources/trackers"
+    # "docs/storing-querying docs/destinations/warehouses-lakes Warehouses and lakes",
+    "docs/destinations/analytics-sdk docs/api-reference/analytics-sdk",
+    # "docs/recipes docs/resources/recipes-tutorials Recipes and tutorials",
 
-    # "docs/account-management/managing-users docs/account-management/user-management User Management"
-    # "docs/account-management/user-management/managing-permissions docs/account-management/user-management/permissions Permissions"
-    # "docs/account-management/managing-console-api-authentication docs/account-management/api-credentials"
 
-    # "docs/data-models/running-data-models-via-snowplow-bdp docs/data-models/running-data-models"
-    # "docs/data-models/modeling-your-data-with-dbt docs/data-models/models-dbt"
-    # "docs/data-models/modeling-your-data-with-sql-runner docs/data-models/models-sql-runner"
-    # "docs/data-models/running-data-models/retrieving-job-execution-data-via-the-api docs/data-models/running-data-models/retrieving-job-execution-data"
+    # "docs/using-the-snowplow-console docs/account-management Account management",
 
-    # "docs/data-product-studio/data-quality/failed-events/exploring-failed-events docs/data-product-studio/data-quality/failed-events/explore Explore"
-    # "docs/data-product-studio/data-quality/failed-events/monitoring-failed-events docs/data-product-studio/data-quality/failed-events/monitor Monitor"
-    # "docs/data-product-studio/data-quality/failed-events/recovering-failed-events docs/data-product-studio/data-quality/failed-events/recover Recover"
-    # "docs/data-product-studio/data-quality/testing-and-qa-workflows/set-up-automated-testing-with-snowplow-micro docs/data-product-studio/data-quality/testing-debugging/snowplow-micro/automated-testing Automated testing"
-    # "docs/data-product-studio/data-quality/testing-and-qa-workflows/using-the-data-structures-ci-tool-for-data-quality docs/data-product-studio/data-quality/testing-debugging/data-structures-ci-tool Data Structures CI tool"
+    # "docs/discovering-data docs/discovering-data-to-delete Delete me!",
 
-    # "docs/data-product-studio/data-products/introduction-to-tracking-design docs/data-product-studio/data-products/tracking-design"
-    # "docs/data-product-studio/data-products/organize-data-sources-with-source-applications docs/data-product-studio/data-products/source-applications"
 
-    # "docs/data-product-studio/data-products/versioning-your-data-structures docs/data-product-studio/data-products/data-structures/version-amend Verson and amend"
-    # "docs/data-product-studio/data-products/managing-your-data-structures docs/data-product-studio/data-products/data-structures/manage Manage"
-
-    # "docs/data-product-studio/data-products/managing-event-specifications/ui docs/data-product-studio/data-products/event-specifications"
-    # "docs/data-product-studio/data-products/managing-event-specifications/api docs/data-product-studio/data-products/event-specifications/api"
-    # "docs/data-product-studio/data-products/tracking-plans docs/data-product-studio/data-products/event-specifications/tracking-plans"
-
-    # "docs/data-product-studio/data-products/defining-the-data-to-collect-with-data-products docs/data-product-studio/data-products/data-products"
 
 
 

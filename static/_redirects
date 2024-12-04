@@ -308,3 +308,7 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/getting-started-on-community-edition/* /docs/get-started/snowplow-community-edition/:splat 301
 /docs/fundamentals/deployment-model/* /docs/get-started/deployment-model/:splat 301
 /docs/enriching-your-data/* /docs/pipeline/enrichments/:splat 301
+/docs/understanding-tracking-design/* /docs/data-product-studio/:splat 301
+/docs/managing-data-quality/* /docs/data-product-studio/data-quality/failed-events/:splat 301
+/docs/testing-debugging/snowplow-inspector/* /docs/data-product-studio/data-quality/snowplow-inspector/:splat 301
+/docs/testing-debugging/snowplow-micro/* /docs/data-product-studio/data-quality/snowplow-micro/:splat 301

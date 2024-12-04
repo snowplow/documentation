@@ -19,7 +19,7 @@ We'll give it the following details:
 
 :::info Data Structures Builder
 
-In Snowplow BDP, you can use the [data structures builder UI](/docs/understanding-tracking-design/managing-your-data-structures/ui/builder/index.md) to follow along. You will not need the JSON code.
+In Snowplow BDP, you can use the [data structures builder UI](/docs/data-product-studio/managing-your-data-structures/ui/builder/index.md) to follow along. You will not need the JSON code.
 
 :::
 
@@ -69,7 +69,7 @@ In the schema for this data structure, we would display these decisions as prope
 
 :::info Data Structures Builder
 
-In Snowplow BDP, you can use the [data structures builder UI](/docs/understanding-tracking-design/managing-your-data-structures/ui/builder/index.md) to follow along. You will not need the JSON code.
+In Snowplow BDP, you can use the [data structures builder UI](/docs/data-product-studio/managing-your-data-structures/ui/builder/index.md) to follow along. You will not need the JSON code.
 
 :::
 
@@ -189,7 +189,7 @@ In cases where you have more control over the data collection — like 1st party
 
 ### Uploading your schema
 
-For this step, follow the documentation on [managing your data structures](/docs/understanding-tracking-design/managing-your-data-structures/index.md).
+For this step, follow the documentation on [managing your data structures](/docs/data-product-studio/managing-your-data-structures/index.md).
 
 ## Testing the schema
 
@@ -200,7 +200,7 @@ To do this we'll need to:
 - Create the HTML for our form
 - Initialize the Snowplow Javascript Tracker
 - Set up our event tracking
-- Use [Snowplow Micro](/docs/testing-debugging/snowplow-micro/index.md) or [Snowplow Mini](/docs/pipeline-components-and-applications/snowplow-mini/overview/index.md) to validate our tracking
+- Use [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md) or [Snowplow Mini](/docs/pipeline-components-and-applications/snowplow-mini/overview/index.md) to validate our tracking
 
 ### HTML
 
@@ -295,8 +295,8 @@ function form1submit(){
 
 #### Testing the tracking
 
-The easiest way to test that your tracking works correctly is via the [Snowplow Inspector](/docs/testing-debugging/snowplow-inspector/index.md). Make sure to [configure](/docs/testing-debugging/snowplow-inspector/adding-schemas/index.md) it with your schema registry.
+The easiest way to test that your tracking works correctly is via the [Snowplow Inspector](/docs/data-product-studio/data-quality/snowplow-inspector/index.md). Make sure to [configure](/docs/data-product-studio/data-quality/snowplow-inspector/adding-schemas/index.md) it with your schema registry.
 
 With Snowplow BDP, you can use [Snowplow Mini](/docs/pipeline-components-and-applications/snowplow-mini/index.md) to validate _and_ inspect your events in more detail in the OpenSearch dashboard.
 
-Finally, regardless of your Snowplow offering, you can also use [Snowplow Micro](/docs/testing-debugging/snowplow-micro/index.md).
+Finally, regardless of your Snowplow offering, you can also use [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md).

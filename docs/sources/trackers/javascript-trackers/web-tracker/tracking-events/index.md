@@ -142,7 +142,7 @@ Read about page view tracking [here](/docs/sources/trackers/javascript-trackers/
 
 ### Custom (self-describing)
 
-Our philosophy in creating Snowplow is that users should capture important user interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](/docs/understanding-tracking-design/index.md).
+Our philosophy in creating Snowplow is that users should capture important user interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](/docs/data-product-studio/index.md).
 
 Read about how to track custom events [here](/docs/sources/trackers/javascript-trackers/web-tracker/custom-tracking-using-schemas/index.md).
 

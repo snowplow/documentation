@@ -36,7 +36,7 @@ Examples of data products:
 
 ## Key elements of a Data Product
 
-**The Source Application/s it is part of**; a data product is referencing the [Source Application/s](/docs/understanding-tracking-design/organize-data-sources-with-source-applications/index.md) that is spanning across.
+**The Source Application/s it is part of**; a data product is referencing the [Source Application/s](/docs/data-product-studio/organize-data-sources-with-source-applications/index.md) that is spanning across.
 
 **Benefits:**
 
@@ -76,18 +76,18 @@ Break down the barriers that exist between data producers and data consumers, by
 
 **Benefits:**
 
-You will be able to view several items in the UI that help detect anomalies or potential misconfigurations in trackers that are either not sending the expected events or are using incorrect [application IDs](/docs/understanding-tracking-design/organize-data-sources-with-source-applications/index.md#application-ids). This is particularly useful during the development phase when implementing tracking for a specific application using [Snowtype](/docs/sources/code-generation). These elements include:
+You will be able to view several items in the UI that help detect anomalies or potential misconfigurations in trackers that are either not sending the expected events or are using incorrect [application IDs](/docs/data-product-studio/organize-data-sources-with-source-applications/index.md#application-ids). This is particularly useful during the development phase when implementing tracking for a specific application using [Snowtype](/docs/sources/code-generation). These elements include:
 
 * A counter for each event specification, showing the total number of events detected from the tracked application IDs in the last 30 days.
 * A 'last seen' field for each event specification, indicating when the last event matching the event specification ID was detected.
 * A list of application IDs from which events are being tracked, displayed for each event specification. For each application ID, a status will be shown with different colors:
-  * __Green__: Event specifications are being tracked and identified with the specific application ID inherited from the configured [source applications](/docs/understanding-tracking-design/organize-data-sources-with-source-applications/index.md).
+  * __Green__: Event specifications are being tracked and identified with the specific application ID inherited from the configured [source applications](/docs/data-product-studio/organize-data-sources-with-source-applications/index.md).
   * __Gray__: No event specifications are being tracked for an application ID inherited from the configured source applications.
   * __Yellow__: Event specifications are being tracked for an application ID that has not been configured or inherited from the source applications.
 
 :::note
 
-Some data products, such as [__Base Web__](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-products/data-product-templates/index.md#base-web) and [__Base Mobile__](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-products/data-product-templates/index.md#base-mobile), contain standard events (e.g., _page pings_, _link clicks_, _screen view_, _application install_). 
+Some data products, such as [__Base Web__](/docs/data-product-studio/defining-the-data-to-collect-with-data-products/data-product-templates/index.md#base-web) and [__Base Mobile__](/docs/data-product-studio/defining-the-data-to-collect-with-data-products/data-product-templates/index.md#base-mobile), contain standard events (e.g., _page pings_, _link clicks_, _screen view_, _application install_). 
 
 For these data products, the volume metrics will behave differently:
 
@@ -117,4 +117,4 @@ By adding screenshots, and descriptions to the event specification, you are also
 
 A data structure can be used across event specifications, and across data products. In doing so, you can ensure you consistently track business critical events and entities (for example, your "product" entity) across your organisation. Having the ability to use centralised event and entity schemas in this way, means that you are able to better govern the structure of the data across an organisation whilst also empowering teams to manage their own specific implementation of events via data products. 
 
-To understand how to get started with data products, see [Defining the Data to collect with Data Products](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-products/) for further details.
+To understand how to get started with data products, see [Defining the Data to collect with Data Products](/docs/data-product-studio/defining-the-data-to-collect-with-data-products/) for further details.

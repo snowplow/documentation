@@ -37,15 +37,15 @@ The inputs on the creation screen are:
 - **Name**: A name used for this application which is fairly understood across the organization.
 - **Description**: A few words on what this Source Application represents and/or any notes.
 - **Primary owner**: Owner email address.
-- **Application IDs**: The [Application IDs](https://docs.snowplow.io/docs/understanding-tracking-design/organize-data-sources-with-source-applications/#application-ids) expected to be used for this application. _These will automatically flow down to the Data Products and Event specifications you define relating to this Source Application._
-- **Application entities**: Here is where you will set the [Application Contexts](https://docs.snowplow.io/docs/understanding-tracking-design/organize-data-sources-with-source-applications/#application-context) you will implement and expect to be available with every event hit coming from this application.
+- **Application IDs**: The [Application IDs](https://docs.snowplow.io/docs/data-product-studio/organize-data-sources-with-source-applications/#application-ids) expected to be used for this application. _These will automatically flow down to the Data Products and Event specifications you define relating to this Source Application._
+- **Application entities**: Here is where you will set the [Application Contexts](https://docs.snowplow.io/docs/data-product-studio/organize-data-sources-with-source-applications/#application-context) you will implement and expect to be available with every event hit coming from this application.
 
 An example of inputs can be the following which you can adjust to your case:
 ![](./images/filled-sap.png)
 
 ## Create a Base Data Product
 
-After creating a Source Application, the recommended way to keep track of what we consider base events for a tracking setup is through the Base Data Product templates. For this application you can use the [Base Web](https://docs.snowplow.io/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-products/data-product-templates/#base-web).
+After creating a Source Application, the recommended way to keep track of what we consider base events for a tracking setup is through the Base Data Product templates. For this application you can use the [Base Web](https://docs.snowplow.io/docs/data-product-studio/defining-the-data-to-collect-with-data-products/data-product-templates/#base-web).
 
 To create a Base Web Data Product for your application, navigate to the Data Products section and after clicking the `Templates` button, select the Base Web template.
 ![](./images/create-dp.png)
@@ -94,7 +94,7 @@ What this code does is:
 2. Enables activity tracking which will send periodic page pings.
 3. Sends a page view when the main application component is first rendered.
 
-You can validate this step being implemented properly using the [Snowplow Inspector](https://docs.snowplow.io/docs/testing-debugging/snowplow-inspector/overview/) browser extension observing Page view and Page ping events.
+You can validate this step being implemented properly using the [Snowplow Inspector](https://docs.snowplow.io/docs/data-product-studio/data-quality/snowplow-inspector/overview/) browser extension observing Page view and Page ping events.
 ![](./images/inspector.png)
 
 ## Add link click tracking

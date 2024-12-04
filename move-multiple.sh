@@ -16,14 +16,14 @@ moves=(
     # "docs/getting-started-on-community-edition docs/get-started/snowplow-community-edition Snowplow Community Edition",
     # "docs/fundamentals/deployment-model docs/get-started/deployment-model",
 
-    "docs/enriching-your-data docs/pipeline/enrichments",
+    # "docs/enriching-your-data docs/pipeline/enrichments",
 
 
-    # "docs/understanding-tracking-design docs/data-product-studio Data Product Studio",
+    "docs/understanding-tracking-design docs/data-product-studio Data Product Studio",
 
-    # "docs/managing-data-quality docs/data-product-studio/data-quality/failed-events Failed events",
-    # "docs/testing-debugging/snowplow-inspector docs/data-product-studio/data-quality/snowplow-inspector",
-    # "docs/testing-debugging/snowplow-micro docs/data-product-studio/data-quality/snowplow-micro",
+    "docs/managing-data-quality docs/data-product-studio/data-quality/failed-events Failed events",
+    "docs/testing-debugging/snowplow-inspector docs/data-product-studio/data-quality/snowplow-inspector",
+    "docs/testing-debugging/snowplow-micro docs/data-product-studio/data-quality/snowplow-micro",
 
     # "docs/managing-data-quality/testing-and-qa-workflows/set-up-automated-testing-with-snowplow-micro docs/data-product-studio/data-quality/snowplow-micro/automated-testing Automated testing"
     # "docs/managing-data-quality/testing-and-qa-workflows/using-the-data-structures-ci-tool-for-data-quality docs/data-product-studio/data-quality/data-structures-ci-tool Data Structures CI tool"

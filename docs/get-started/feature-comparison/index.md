@@ -16,7 +16,7 @@ Below you can find a detailed list of product features, including which are avai
 | High availability & auto-scaling | ✅ | ❌ |
 | [Enrichments](/docs/pipeline/enrichments/available-enrichments/index.md) | ✅ | ✅ |
 | [Failed events](/docs/fundamentals/failed-events/index.md) | ✅ | ✅ | 
-| [Data quality monitoring](/docs/managing-data-quality/monitoring-failed-events/index.md) | ✅ | ❌ |
+| [Data quality monitoring](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/index.md) | ✅ | ❌ |
 | Single Sign-On | ✅ | ❌ | 
 | Pipeline observability | ✅ | do-it-yourself | 
 | Surge protection | ✅ | do-it-yourself |
@@ -36,8 +36,8 @@ Below you can find a detailed list of product features, including which are avai
 | • Kafka / Azure Event Hubs / Confluent Cloud | ✅ | ✅ |
 | <h3>Data Product Studio</h3> | BDP |[Community Edition](/docs/get-started/snowplow-community-edition/index.md)|
 | Advanced enrichments (PII, IP anonymisation, JS, API, SQL enrichments) | ✅ | ✅ (no UI or API)| 
-| [Data structures tooling & API](/docs/understanding-tracking-design/managing-your-data-structures/ui/index.md) | ✅ |❌|
-| [Data Products](/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-products/) | ✅ |❌|
+| [Data structures tooling & API](/docs/data-product-studio/managing-your-data-structures/ui/index.md) | ✅ |❌|
+| [Data Products](/docs/data-product-studio/defining-the-data-to-collect-with-data-products/) | ✅ |❌|
 | [Data modeling management tooling](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/index.md) | ✅ | ❌ |
 | Jobs monitoring dashboard | ✅  | ❌ |
 | [Tracking catalog](/docs/discovering-data/tracking-catalog/index.md) | ✅ | ❌ |

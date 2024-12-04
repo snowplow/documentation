@@ -4,7 +4,7 @@ date: "2022-10-24"
 sidebar_position: 3000
 ---
 
-Designing how and what to track in your app is an important decision. Check out our docs about tracking design [here](/docs/understanding-tracking-design/introduction-to-tracking-design/index.md).
+Designing how and what to track in your app is an important decision. Check out our docs about tracking design [here](/docs/data-product-studio/introduction-to-tracking-design/index.md).
 
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your apps.
 

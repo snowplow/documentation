@@ -15,4 +15,4 @@ Each offering has its own setup guide:
 
 ## Snowplow Micro
 
-While not a full substitute for a real Snowplow pipeline, [Snowplow Micro](/docs/testing-debugging/snowplow-micro/index.md) could be a quick way to get a feel for how Snowplow works for more technical users. Note that Micro does not store data in any warehouse or database, but you will be able to look at the available fields.
+While not a full substitute for a real Snowplow pipeline, [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md) could be a quick way to get a feel for how Snowplow works for more technical users. Note that Micro does not store data in any warehouse or database, but you will be able to look at the available fields.

@@ -7,12 +7,12 @@ description: "Tools that help test and debug Snowplow"
 
 ## Snowplow Inspector
 
-If you are implementing tracking on a website or in a web or mobile application, we highly recommend to install the [Snowplow Inspector](/docs/testing-debugging/snowplow-inspector/index.md). It will help you validate which Snowplow events are triggering, look at their properties, and more.
+If you are implementing tracking on a website or in a web or mobile application, we highly recommend to install the [Snowplow Inspector](/docs/data-product-studio/data-quality/snowplow-inspector/index.md). It will help you validate which Snowplow events are triggering, look at their properties, and more.
 
-![Snowplow Inspector screenshot](../../testing-debugging/snowplow-inspector/images/using-poplin-chrome-extension.png)
+![Snowplow Inspector screenshot](../../data-product-studio/data-quality/snowplow-inspector/images/using-poplin-chrome-extension.png)
 
 ## Snowplow Micro
 
-For debugging [enrichments](/docs/pipeline/enrichments/index.md), streaming applications (e.g. using the [analytics SDKs](/docs/destinations/analytics-sdk/index.md)), and other more advanced usage, take a look at [Snowplow Micro](/docs/testing-debugging/snowplow-micro/index.md). It’s a minified Snowplow pipeline that can run on your machine.
+For debugging [enrichments](/docs/pipeline/enrichments/index.md), streaming applications (e.g. using the [analytics SDKs](/docs/destinations/analytics-sdk/index.md)), and other more advanced usage, take a look at [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md). It’s a minified Snowplow pipeline that can run on your machine.
 
-![Snowplow Micro screenshot](../../testing-debugging/snowplow-micro/images/overview.png)
+![Snowplow Micro screenshot](../../data-product-studio/data-quality/snowplow-micro/images/overview.png)

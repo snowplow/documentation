@@ -247,7 +247,7 @@ It will be translated into a field called `last_name` (notice the underscore) in
 
 ## Versioning
 
-What happens when you evolve your schema to a [new version](/docs/understanding-tracking-design/versioning-your-data-structures/index.md)?
+What happens when you evolve your schema to a [new version](/docs/data-product-studio/versioning-your-data-structures/index.md)?
 
 <Tabs groupId="warehouse" queryString>
   <TabItem value="redshift" label="Redshift" default>

@@ -8,7 +8,7 @@ description: "Details on where and how Snowplow is deployed"
 
 Snowplow BDP Enterprise is deployed using a “private SaaS” or “Bring Your Own Cloud (BYOC)” deployment model. This means the data pipeline is hosted and run in your own cloud environment, using your data warehouse or lake. (These comprise the **data plane**.) The ongoing pipeline maintenance, such as upgrades and security patches, are still managed by Snowplow.
 
-The **control plane**, which includes a UI and an API for [defining your data](/docs/understanding-tracking-design/index.md) and managing your infrastructure, is hosted by Snowplow.
+The **control plane**, which includes a UI and an API for [defining your data](/docs/data-product-studio/index.md) and managing your infrastructure, is hosted by Snowplow.
 
 |   | Hosted by Snowplow | Hosted by you |
 |:--|:------------------:|:-------------:|

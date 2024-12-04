@@ -22,7 +22,7 @@ As you evolve your website, mobile app or server-side application, you can evolv
 
 :::tip
 
-Check out the documentation for [managing](/docs/understanding-tracking-design/managing-your-data-structures/index.md) and [versioning](/docs/understanding-tracking-design/versioning-your-data-structures/index.md) data structures.
+Check out the documentation for [managing](/docs/data-product-studio/managing-your-data-structures/index.md) and [versioning](/docs/data-product-studio/versioning-your-data-structures/index.md) data structures.
 
 :::
 
@@ -53,7 +53,7 @@ To host schemas for your [custom self-described events](/docs/fundamentals/event
 ## The anatomy of a schema
 
 :::info
-BDP customers can create custom schemas using the [Data Structures Builder](/docs/understanding-tracking-design/managing-your-data-structures/ui/builder/index.md) without worrying about how it works under the hood.
+BDP customers can create custom schemas using the [Data Structures Builder](/docs/data-product-studio/managing-your-data-structures/ui/builder/index.md) without worrying about how it works under the hood.
 :::
 
 Snowplow schemas are based on the [JSON Schema](https://json-schema.org/) standard ([draft 4](https://datatracker.ietf.org/doc/html/draft-fge-json-schema-validation-00)). Let’s take a look at an example schema to talk about its constituent parts:
@@ -108,7 +108,7 @@ Snowplow schemas are based on the [JSON Schema](https://json-schema.org/) standa
 - **“vendor”** - This usually refers to the company who has authored the schema. Most times this will be your company’s name. This could also be for organizing schemas from different groups in your organization if you have multiple teams working on different events and contexts (e.g. com.acme.android, com.acme.marketing). Snowplow uses the reversed company internet domain for vendor names (e.g. com.snowplowanalytics).
 - **“name”** - This is the name you want to give your schema. Much like the description above, this is a good chance to help others like data analysts who might be consuming this data know exactly what your schema is meant to capture.
 - **“format”** - This field simply states the format of the schema which will always be `jsonschema`.
-- **“version”** - Snowplow allows you to [increment versions of a schema](/docs/understanding-tracking-design/versioning-your-data-structures/index.md) as your tracking needs to evolve and this argument stores the current version.
+- **“version”** - Snowplow allows you to [increment versions of a schema](/docs/data-product-studio/versioning-your-data-structures/index.md) as your tracking needs to evolve and this argument stores the current version.
 
 After the self section, the remainder of the schema is where you will begin describing the event or context fields that you will be collecting.
 
@@ -120,4 +120,4 @@ After the self section, the remainder of the schema is where you will begin desc
 - **"type"** - This denotes the type of data that is collected through this field. The most common types of data collected are `string`, `number`, `integer`, `object`, `array`, `boolean` and `null`. A single field can allow multiple types as shown in the field `job title` in the example schema which allows both `string` and `null`
 - Validation arguments can then be passed into the field such as `minLength`, `maxLength` and `enum` for strings and `minimum` and `maximum` for integers. A full set of valid arguments can be found on the [JSON schema specification](https://datatracker.ietf.org/doc/html/draft-fge-json-schema-validation-00#section-5).
 
-**“$supersedes”** / **“$supersededBy”** - _Optional, not shown_. See [marking schemas as superseded](/docs/understanding-tracking-design/versioning-your-data-structures/amending/index.md#marking-the-schema-as-superseded).
+**“$supersedes”** / **“$supersededBy”** - _Optional, not shown_. See [marking schemas as superseded](/docs/data-product-studio/versioning-your-data-structures/amending/index.md#marking-the-schema-as-superseded).

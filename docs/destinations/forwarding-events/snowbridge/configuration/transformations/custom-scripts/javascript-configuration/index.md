@@ -16,13 +16,15 @@ If a script errors or times out, a [transformation failure](/docs/destinations/f
 
 Scripts must be available to the runtime of the application at the path provided in the `script_path` configuration option. For docker, this means mounting the script to the container and providing that path.
 
-Here is an example of a minimal configuration for the custom Javascript script transformation:
+## Configuration options
+
+Minimal Configuration:
 
 ```hcl reference
 https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/custom-scripts/js-configuration-minimal-example.hcl
 ```
 
-Here is an example of every configuration option:
+Every configuration option:
 
 ```hcl reference
 https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/custom-scripts/js-configuration-full-example.hcl

@@ -8,10 +8,20 @@ This transformation was added in version 2.3.0
 
 Only one preview mode context should be sent at a time.
 
-There are no configuration optons for this transformation.
+:::note
+As of version 3.0.0:
 
-Example:
+Invalid preview headers sent to GTM SS can result in requests failing, which may be problematic. There is insufficient information available about the values to allow us to confidently validate them, but we do two things to avoid this problem.
+
+First, we validate to ensure that the value is a valid base64 string. Second, we compare the age of the event (based on `collector_tstamp`) to ensure it is under a configurable timeout age. If either of these conditions fail, we treat the message as invalid, and output to the failure target.
+:::
+
+## Configuration options
 
 ```hcl reference
 https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/snowplow-builtin/spGtmssPreview-minimal-example.hcl
+```
+
+```hcl reference
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/snowplow-builtin/spGtmssPreview-full-example.hcl
 ```

@@ -4,7 +4,8 @@ description: "Write data to an SQS queue."
 ---
 
 Stdout target doesn't have any configurable options - when configured it simply outputs the messages to stdout.
-## Configuration 
+
+## Configuration options
 
 Here is an example of the configuration:
 

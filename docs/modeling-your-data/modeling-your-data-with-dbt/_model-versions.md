@@ -41,11 +41,12 @@ import {versions} from '@site/src/componentVersions';
 <TabItem value="normalize" label="Snowplow Normalize">
 
 <ReactMarkdown children={`
-| snowplow-normalize version       | dbt versions      | BigQuery | Databricks | Redshift | Snowflake | Postgres |
-| -------------------------------- | ----------------- | :------: | :--------: | :------: | :-------: | :------: |
-| ${versions.dbtSnowplowNormalize} | >=1.4.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |
-| 0.2.3                            | >=1.3.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |
-| 0.1.0                            | >=1.0.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |
+| snowplow-normalize version       | dbt versions      | BigQuery  | Databricks | Redshift  | Snowflake  | Postgres |   Spark   |
+| -------------------------------- | ----------------- | :------:  | :--------: | :------:  | :-------:  | :------: | :------:  |
+| ${versions.dbtSnowplowNormalize} | >=1.4.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |     ✅    |
+| 0.3.5                            | >=1.4.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |     ❌    |
+| 0.2.3                            | >=1.3.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |     ❌    |
+| 0.1.0                            | >=1.0.0 to <2.0.0 |    ✅     |     ✅      |    ❌     |     ✅     |    ❌     |     ❌    |
 `} remarkPlugins={[remarkGfm]} />
 
 </TabItem>

@@ -7,7 +7,7 @@ sidebar_custom_props:
     - bdp
 ---
 
-The `Snowtype CLI` is a tool that assists with instrumenting, verifying and maintaining tracking code that works with Snowplow tracking SDKs.
+**Snowtype** is a tool that assists with instrumenting, verifying and maintaining tracking code. Snowtype works with Snowplow tracking SDKs.
 
 ```mdx-code-block
 import DocCardList from '@theme/DocCardList';

@@ -23,4 +23,4 @@ import Breaking from "../_breaking.md"
 
 For particular workflows you may want to make use of the middle digital as part of your versioning strategy. For simplicity, the UI allows only breaking or non-breaking changes.
 
-Should you wish to use the middle versioning digit this is possible [via the Data Structures API](/docs/data-product-studio/managing-your-data-structures/api/index.md).
+Should you wish to use the middle versioning digit this is possible [via the Data Structures API](/docs/data-product-studio/data-structures/manage/api/index.md).

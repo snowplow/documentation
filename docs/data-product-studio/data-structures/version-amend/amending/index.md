@@ -44,8 +44,8 @@ flowchart LR
 ```
 
 We call this approach “patching”. To patch the schema, i.e. apply changes to it without updating the version:
-* If you are using Snowplow BDP, select the “Patch” option [in the UI](/docs/data-product-studio/managing-your-data-structures/ui/index.md) when saving the schema
-* If you are using Snowplow Community Edition, do not increment the schema version when [uploading it with `igluctl`](/docs/data-product-studio/managing-your-data-structures/iglu/index.md)
+* If you are using Snowplow BDP, select the “Patch” option [in the UI](/docs/data-product-studio/data-structures/manage/ui/index.md) when saving the schema
+* If you are using Snowplow Community Edition, do not increment the schema version when [uploading it with `igluctl`](/docs/data-product-studio/data-structures/manage/iglu/index.md)
 
 :::danger
 
@@ -98,8 +98,8 @@ Here’s how this works, at a glance:
 * Suppose schema `1-0-2` is wrong.
 * Draft a new schema version correcting the issue.
 * In the new schema, add the following field at the root: `"$supersedes": ["1-0-2"]`.
-* [Set the version](/docs/data-product-studio/versioning-your-data-structures/index.md) of the new schema as usual, i.e. `1-0-3` if there are no breaking changes or `2-0-0` if there are.
-* [Add](/docs/data-product-studio/managing-your-data-structures/index.md) the new schema to your production environment.
+* [Set the version](/docs/data-product-studio/data-structures/version-amend/index.md) of the new schema as usual, i.e. `1-0-3` if there are no breaking changes or `2-0-0` if there are.
+* [Add](/docs/data-product-studio/data-structures/manage/index.md) the new schema to your production environment.
 * Events or entities that use schema `1-0-2` will now be automatically updated (in the Enrich application) to use version `1-0-3`, and will be validated against that version. (A special entity will be added to these events to record this fact.)
 
 ### Example
@@ -207,7 +207,7 @@ To record this fact, an extra entity will be added to all such events:
 }
 ```
 
-Finally, if we [browse](/docs/data-product-studio/managing-your-data-structures/index.md) schema version `1-0-2`, we will see that Iglu Server automatically keeps track of which schema supersedes which. Specifically, it will now contain a `$supersededBy` definition:
+Finally, if we [browse](/docs/data-product-studio/data-structures/manage/index.md) schema version `1-0-2`, we will see that Iglu Server automatically keeps track of which schema supersedes which. Specifically, it will now contain a `$supersededBy` definition:
 
 <details>
   <summary>Geolocation <code>1-0-2</code> with <code>$supersededBy</code></summary>

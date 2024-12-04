@@ -18,7 +18,7 @@ The schema tracking URLs for schemas available in [Iglu Central](http://iglucent
 
 ### `repositories`
 
-Local Data Structure repositories generated from the [snowplow-cli](/docs/data-product-studio/managing-your-data-structures/cli/).
+Local Data Structure repositories generated from the [snowplow-cli](/docs/data-product-studio/data-structures/manage/cli/).
 
 ### `dataStructures`
 

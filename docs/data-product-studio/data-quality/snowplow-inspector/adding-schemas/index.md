@@ -68,7 +68,7 @@ These schemas are managed within the extension and stored on your own machine.
 The only required configuration is a name, and the schemas themselves.
 
 ## Data Structures API registries
-This type is recommended for use with Snowplow BDP via the [Data Structures API](/docs/data-product-studio/managing-your-data-structures/api/index.md).
+This type is recommended for use with Snowplow BDP via the [Data Structures API](/docs/data-product-studio/data-structures/manage/api/index.md).
 
 In order to function, the extension requires:
 

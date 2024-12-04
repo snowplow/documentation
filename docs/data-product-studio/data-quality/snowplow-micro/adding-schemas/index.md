@@ -34,7 +34,7 @@ trackSelfDescribingEvent({
 
 For Micro to understand this event, it will need to know about `com.example/my-schema/jsonschema/1-0-0` or any other relevant schemas. There are two ways you can achieve this:
 
-* **Point Micro to an Iglu registry that contains your schemas.** This is a good option if you use Snowplow BDP [UI](/docs/data-product-studio/managing-your-data-structures/ui/index.md) or [API](/docs/data-product-studio/managing-your-data-structures/api/index.md) to create schemas, or if you have deployed your own Iglu registry.
+* **Point Micro to an Iglu registry that contains your schemas.** This is a good option if you use Snowplow BDP [UI](/docs/data-product-studio/data-structures/manage/ui/index.md) or [API](/docs/data-product-studio/data-structures/manage/api/index.md) to create schemas, or if you have deployed your own Iglu registry.
 * **Add schemas to Micro directly.** This can be handy for quickly testing a schema.
 
 Whichever approach you choose, you can use the [the API](/docs/pipeline-components-and-applications/snowplow-micro/api/index.md#microiglu) to check if Micro is able to reach your schemas (replace `com.example` and `my-schema` as appropriate).
@@ -75,7 +75,7 @@ For more flexibility, see [Advanced usage](/docs/data-product-studio/data-qualit
 
 :::note Limitations
 
-Currently, this method does not work for [marking schemas as superseded](/docs/data-product-studio/versioning-your-data-structures/amending/index.md#marking-the-schema-as-superseded).
+Currently, this method does not work for [marking schemas as superseded](/docs/data-product-studio/data-structures/version-amend/amending/index.md#marking-the-schema-as-superseded).
 
 :::
 

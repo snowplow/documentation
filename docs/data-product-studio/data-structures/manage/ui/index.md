@@ -14,7 +14,7 @@ To create a new [Data Structure](/docs/fundamentals/schemas/index.md), first nav
 
 ![](images/image-1.png)
 
-You can select from two options: **Create using builder** or **Create using JSON**. The [Data Structures Builder](/docs/data-product-studio/managing-your-data-structures/ui/builder/index.md) only supports the following types:
+You can select from two options: **Create using builder** or **Create using JSON**. The [Data Structures Builder](/docs/data-product-studio/data-structures/manage/ui/builder/index.md) only supports the following types:
 
 - string
 - enumerated list
@@ -22,7 +22,7 @@ You can select from two options: **Create using builder** or **Create using JSON
 - decimal
 - boolean
 
-For more complex data structures that require heavy nesting and more advanced data types, use the [JSON Editor](/docs/data-product-studio/managing-your-data-structures/ui/json-editor/index.md).
+For more complex data structures that require heavy nesting and more advanced data types, use the [JSON Editor](/docs/data-product-studio/data-structures/manage/ui/json-editor/index.md).
 
 
 ```mdx-code-block
@@ -77,7 +77,7 @@ At this stage you will see the publish dialog, and depending on how you versione
 
 If you are **publishing a new schema,** or **have incremented** the version whilst editing then you will see a confirmation of the action. Click '**Migrate to Production**' to promote the data structure.
 
-If you **have patched** the version whilst editing then you will see a warning that you must increment before publishing. Patching the version on Production is not a permitted action. [Increment the version number according to the changes you have made](/docs/data-product-studio/versioning-your-data-structures/index.md) and click '**Migrate to production**' to promote the latest version of your Data Structure to your production environment.
+If you **have patched** the version whilst editing then you will see a warning that you must increment before publishing. Patching the version on Production is not a permitted action. [Increment the version number according to the changes you have made](/docs/data-product-studio/data-structures/version-amend/index.md) and click '**Migrate to production**' to promote the latest version of your Data Structure to your production environment.
 
 Your data structure will now be available in your production environment to send events against.
 
@@ -118,7 +118,7 @@ This will take you to a list of hidden Data Structures, locate the one you wish 
 
 ## Externally managed Data Structures
 
-Data Structures can be managed from an external repository using our [snowplow-cli](/docs/data-product-studio/managing-your-data-structures/cli/) tool.
+Data Structures can be managed from an external repository using our [snowplow-cli](/docs/data-product-studio/data-structures/manage/cli/) tool.
 
 When a Data Structure is managed this way it becomes locked in the UI disabling all editing. You will see a banner explaining the situation and giving people with the 'publish to production' (default for admin users) capability the ability to unlock.
 

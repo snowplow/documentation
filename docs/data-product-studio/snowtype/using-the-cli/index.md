@@ -354,7 +354,7 @@ Then you should add this Schema tracking URL to your configuration file `igluCen
 
 ### Local Data Structure Repositories
 
-To add a local Data Structure repository to the code generation, either manually or through the `snowtype patch` command, you would only need the path/s to the repository/ies you have generated schemas using the [snowplow-cli](/docs/data-product-studio/managing-your-data-structures/cli/).
+To add a local Data Structure repository to the code generation, either manually or through the `snowtype patch` command, you would only need the path/s to the repository/ies you have generated schemas using the [snowplow-cli](/docs/data-product-studio/data-structures/manage/cli/).
 
 Then you should add the path/s to your configuration file `repositories` array.
 

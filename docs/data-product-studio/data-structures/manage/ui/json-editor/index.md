@@ -9,7 +9,7 @@ sidebar_custom_props:
 ---
 
 :::info
-The JSON editor is ideal for more complex data structures that require heavy nesting and more advanced data types. For simple data structures, use the [Data Structures Builder](/docs/data-product-studio/managing-your-data-structures/ui/builder/index.md).
+The JSON editor is ideal for more complex data structures that require heavy nesting and more advanced data types. For simple data structures, use the [Data Structures Builder](/docs/data-product-studio/data-structures/manage/ui/builder/index.md).
 :::
 
 ## Creating a new data structure
@@ -45,15 +45,15 @@ The versioning dialog will appear, at this point you have three options:
 
 - Increment a minor version to indicate a non-breaking change to the schema. In our example, this would increment the schema to from `1-0-1` to `1-0-2`.
 - Increment a major version to indicate a breaking change to the schema. In our example, this would increment the schema from `1-0-1` to `2-0-0`.
-- [Patch the current version](/docs/data-product-studio/versioning-your-data-structures/amending/index.md#patching-the-schema), this will overwrite the existing schema without increasing the version. In our example, this would leave the schema at 1-0-1.
+- [Patch the current version](/docs/data-product-studio/data-structures/version-amend/amending/index.md#patching-the-schema), this will overwrite the existing schema without increasing the version. In our example, this would leave the schema at 1-0-1.
 
 :::caution Selecting the “patch” option
 
-Patching can be useful in development environments, but should be done carefully and should never be done in production. See [amending schemas](/docs/data-product-studio/versioning-your-data-structures/amending/index.md) for an explanation and some suggestions.
+Patching can be useful in development environments, but should be done carefully and should never be done in production. See [amending schemas](/docs/data-product-studio/data-structures/version-amend/amending/index.md) for an explanation and some suggestions.
 
 :::
 
-For more information see [Versioning your data structures](/docs/data-product-studio/versioning-your-data-structures/index.md).
+For more information see [Versioning your data structures](/docs/data-product-studio/data-structures/version-amend/index.md).
 
 Once you have selected the appropriate version, click **'Publish to development environment'** and your edits will be published to your development environment ready [for you to test](docs/data-product-studio/data-quality/index.md).
 

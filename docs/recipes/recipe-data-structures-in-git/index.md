@@ -16,12 +16,12 @@ The Snowplow Console's UI offers excellent facilities to get started quickly wit
 
 A common solution when faced with these requirements is to move management to some form of version control platform (github/gitlab). This opens up an entire ecosystem of tools and patterns enabling all manner of custom workflows.
 
-We have built [snowplow-cli](/docs/data-product-studio/managing-your-data-structures/cli/) to help you bridge the gap between these repository based workflows and BDP Console.
+We have built [snowplow-cli](/docs/data-product-studio/data-structures/manage/cli/) to help you bridge the gap between these repository based workflows and BDP Console.
 
 ## Prerequisites
 
 * A deployed Snowplow BDP pipeline
-* [snowplow-cli](/docs/data-product-studio/managing-your-data-structures/cli/#download) downloaded and configured
+* [snowplow-cli](/docs/data-product-studio/data-structures/manage/cli/#download) downloaded and configured
 * A familiarity with [git](https://git-scm.com/) and an understanding of [github actions](https://docs.github.com/en/actions/writing-workflows)
 * A sensible [terminal emulator](https://en.wikipedia.org/wiki/Terminal_emulator) and shell
 
@@ -60,7 +60,7 @@ This should provide us the following output
 The generated file is written to our default `data-structures` directory under a sub directory matching the `--vendor` we supplied with a filename that mirrors the name we gave the data structure. Help for all the arguments available to `generate` is available by running `snowplow-cli ds generate --help`.
 
 :::note
-This directory layout and file naming scheme is also followed by the [download](/docs/data-product-studio/managing-your-data-structures/cli/#downloading-data-structures) command.
+This directory layout and file naming scheme is also followed by the [download](/docs/data-product-studio/data-structures/manage/cli/#downloading-data-structures) command.
 :::
 
 Let's see what it has created for us.
@@ -85,7 +85,7 @@ data:
 ```
 * `apiVersion` should always be `v1`
 * `resourceType` should remain `data-structure`
-* `meta.hidden` directly relates to showing and hiding [in BDP Console UI](/docs/data-product-studio/managing-your-data-structures/ui/#hiding-a-data-structure)
+* `meta.hidden` directly relates to showing and hiding [in BDP Console UI](/docs/data-product-studio/data-structures/manage/ui/#hiding-a-data-structure)
 * `meta.schemaType` can be `event` or `entity`
 * `meta.customData` is a map of strings to strings that can be used to send across any key/value pairs you'd like to associate with the data structure
 * `data` is the actual [snowplow self describing schema](/docs/pipeline-components-and-applications/iglu/common-architecture/self-describing-json-schemas/) that this data structure describes

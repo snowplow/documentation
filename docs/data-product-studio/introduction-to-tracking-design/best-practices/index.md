@@ -86,7 +86,7 @@ Make sure that information that would be represented using dimension tables is c
 
 Finally, it is a good practice to ask whether certain data really needs to be captured.
 Tracking unnecessary information uses extra bandwidth and battery power and may add extra overhead to manage.
-Schemas can be [evolved](/docs/data-product-studio/versioning-your-data-structures/index.md) to allow adding more information later.
+Schemas can be [evolved](/docs/data-product-studio/data-structures/version-amend/index.md) to allow adding more information later.
 Refer to the business reports identified earlier in order to assess what data needs to be tracked.
 
 ## Define the events

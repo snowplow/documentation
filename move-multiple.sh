@@ -26,10 +26,12 @@ moves=(
     # "docs/data-product-studio/data-quality/failed-events/testing-and-qa-workflows/set-up-automated-testing-with-snowplow-micro docs/data-product-studio/data-quality/snowplow-micro/automated-testing Automated testing"
     # "docs/data-product-studio/data-quality/failed-events/testing-and-qa-workflows/using-the-data-structures-ci-tool-for-data-quality docs/data-product-studio/data-quality/data-structures-ci-tool Data Structures CI tool"
 
-    "docs/sources/code-generation docs/data-product-studio/snowtype Snowtype",
+    # "docs/sources/code-generation docs/data-product-studio/snowtype Snowtype",
 
-    # "docs/data-product-studio/versioning-your-data-structures docs/data-product-studio/data-structures/version-amend Verson and amend"
-    # "docs/data-product-studio/managing-your-data-structures docs/data-product-studio/data-structures/manage Manage"
+    "docs/data-product-studio/versioning-your-data-structures docs/data-product-studio/data-structures/version-amend Verson and amend"
+    "docs/data-product-studio/managing-your-data-structures docs/data-product-studio/data-structures/manage Manage"
+
+
 
     # "docs/data-product-studio/managing-event-specifications/ui docs/data-product-studio/event-specifications"
     # "docs/data-product-studio/managing-event-specifications/api docs/data-product-studio/event-specifications/api"

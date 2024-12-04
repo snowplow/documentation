@@ -106,7 +106,7 @@ Component | Latest version
 
 :::info Snowplow BDP
 
-If you are using Snowplow BDP, you don’t need to install Iglu Server yourself. It’s also unlikely that you need to use any of the other components in this section. You can manage your data structures [in the UI or via the API](/docs/data-product-studio/managing-your-data-structures/index.md).
+If you are using Snowplow BDP, you don’t need to install Iglu Server yourself. It’s also unlikely that you need to use any of the other components in this section. You can manage your data structures [in the UI or via the API](/docs/data-product-studio/data-structures/manage/index.md).
 
 :::
 

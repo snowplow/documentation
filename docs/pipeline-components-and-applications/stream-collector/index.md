@@ -4,7 +4,7 @@ date: "2020-11-02"
 sidebar_position: 20
 ---
 
-The Stream Collector receives raw Snowplow events sent over HTTP by [trackers](/docs/collecting-data/collecting-from-own-applications/index.md) or [webhooks](/docs/collecting-data/collecting-data-from-third-parties/index.md). It serializes them to a [Thrift](http://thrift.apache.org/) record format, and then writes them to a sink. Currently supported sinks are:
+The Stream Collector receives raw Snowplow events sent over HTTP by [trackers](/docs/sources/trackers/index.md) or [webhooks](/docs/sources/webhooks/index.md). It serializes them to a [Thrift](http://thrift.apache.org/) record format, and then writes them to a sink. Currently supported sinks are:
 
 1. [Amazon Kinesis](http://aws.amazon.com/kinesis/)
 2. [Google PubSub](https://cloud.google.com/pubsub/)

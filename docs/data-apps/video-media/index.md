@@ -22,7 +22,7 @@ Our **Video and Media Analytics** app helps you visualize insights on your video
 
 - Running the [Snowplow Media dbt Package](docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md)
 - Access to the derived tables granted to the role used when setting up the data app
-- Media events tracked using the media plugins for the [JavaScript](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/index.md) or [mobile trackers](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/media-tracking/index.md). Note that there are multiple JavaScript tracker media plugins available. Implementation of a v2 plugin is required for this data app to work as intended.
+- Media events tracked using the media plugins for the [JavaScript](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/index.md) or [mobile trackers](/docs/sources/trackers/mobile-trackers/tracking-events/media-tracking/index.md). Note that there are multiple JavaScript tracker media plugins available. Implementation of a v2 plugin is required for this data app to work as intended.
 
 ## Usage
 

@@ -23,7 +23,7 @@ It is only recommended that you use this if you are planning on heavily customiz
 
 In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and connected to your database you need:
 
-- A dataset of Snowplow events from one of the [Snowplow trackers](/docs/collecting-data/index.md)
+- A dataset of Snowplow events from one of the [Snowplow trackers](/docs/sources/index.md)
 
 ## Installation
 

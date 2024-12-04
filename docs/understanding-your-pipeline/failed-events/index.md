@@ -107,7 +107,7 @@ Collector payload format violation schema can be found [here](https://github.com
 
 ### Adaptor Failure
 
-This failure type is produced by the [enrichment](/docs/enriching-your-data/what-is-enrichment/index.md) application, when it tries to interpret a Collector payload from the raw stream as a http request from a [3rd party webhook](/docs/collecting-data/collecting-data-from-third-parties/index.md).
+This failure type is produced by the [enrichment](/docs/enriching-your-data/what-is-enrichment/index.md) application, when it tries to interpret a Collector payload from the raw stream as a http request from a [3rd party webhook](/docs/sources/webhooks/index.md).
 
 :::info
 
@@ -132,7 +132,7 @@ Adapter failure schema can be found [here](https://github.com/snowplow/iglu-cent
 
 ### Tracker Protocol Violation
 
-This failure type is produced by the [enrichment](/docs/enriching-your-data/what-is-enrichment/index.md) application, when a http request does not conform to our [Snowplow Tracker Protocol](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md).
+This failure type is produced by the [enrichment](/docs/enriching-your-data/what-is-enrichment/index.md) application, when a http request does not conform to our [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md).
 
 <details>
 
@@ -140,7 +140,7 @@ Snowplow trackers send http requests to the `/i` endpoint or the `/com.snowplowa
 
 Many tracker protocol violations are caused by bot traffic, so do not be surprised to see some of them in your pipeline.
 
-Another likely source is misconfigured query parameters if you are using the [pixel tracker](/docs/collecting-data/collecting-from-own-applications/pixel-tracker/index.md). In this case you might try to fix your application sending events, and then [recover the failed events](/docs/managing-data-quality/recovering-failed-events/index.md).
+Another likely source is misconfigured query parameters if you are using the [pixel tracker](/docs/sources/trackers/pixel-tracker/index.md). In this case you might try to fix your application sending events, and then [recover the failed events](/docs/managing-data-quality/recovering-failed-events/index.md).
 
 Because this failure is handled during enrichment, events in the real time good stream are free of this violation type.
 

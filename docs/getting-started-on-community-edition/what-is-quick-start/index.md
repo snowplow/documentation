@@ -8,7 +8,7 @@ We have built a set of [terraform](https://www.terraform.io/docs/language/module
 
 After following this guide, you will be able to: 
 
-- Collect granular, well-structured data with our suite of web, mobile and server side [SDKs](/docs/collecting-data/collecting-from-own-applications/index.md)
+- Collect granular, well-structured data with our suite of web, mobile and server side [SDKs](/docs/sources/trackers/index.md)
 - Create your own [custom events](/docs/understanding-your-pipeline/events/index.md#self-describing-events) and [entities](/docs/understanding-your-pipeline/entities/index.md#custom-entities)
 - Easily enable and disable our suite of [out-of-the-box enrichments](/docs/enriching-your-data/available-enrichments/index.md)
 - Consume your rich data from the data warehouse, database, lake and/or real-time stream

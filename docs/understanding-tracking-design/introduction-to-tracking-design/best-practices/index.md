@@ -51,7 +51,7 @@ These include:
 * Error and performance tracking.
 
 It is recommended to use and build on top of these data structures in order to save effort and make use of the existing Snowplow dbt packages and tooling.
-To get a comprehensive overview of the out-of-the-box provided schemas, [please refer to this page](/docs/collecting-data/collecting-from-own-applications/snowplow-tracker-protocol/index.md).
+To get a comprehensive overview of the out-of-the-box provided schemas, [please refer to this page](/docs/sources/trackers/snowplow-tracker-protocol/index.md).
 
 Our [data product accelerators](https://snowplow.io/data-product-accelerators/) are a great resource to develop your data product faster using out-of-the-box data structures based on best practices.
 

@@ -125,26 +125,26 @@ Component | Latest version
 <ReactMarkdown children={`
 Tracker | Latest version
 :--|:-:
-[JavaScript (Web and Node.js)](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/index.md) | ${versions.javaScriptTracker}
-[iOS](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/index.md) | ${versions.iosTracker}
-[Android](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/index.md) | ${versions.androidTracker}
-[React Native](/docs/collecting-data/collecting-from-own-applications/react-native-tracker/index.md) | ${versions.reactNativeTracker}
-[Flutter](/docs/collecting-data/collecting-from-own-applications/flutter-tracker/index.md) | ${versions.flutterTracker}
-[WebView](/docs/collecting-data/collecting-from-own-applications/webview-tracker/index.md) | ${versions.webViewTracker}
-[Roku](/docs/collecting-data/collecting-from-own-applications/roku-tracker/index.md) | ${versions.rokuTracker}
-[Google AMP](/docs/collecting-data/collecting-from-own-applications/google-amp-tracker/index.md) | ${versions.googleAmpTracker}
-[Pixel](/docs/collecting-data/collecting-from-own-applications/pixel-tracker/index.md) | ${versions.pixelTracker}
-[Golang](/docs/collecting-data/collecting-from-own-applications/golang-tracker/index.md) | ${versions.golangTracker}
-[.NET](/docs/collecting-data/collecting-from-own-applications/net-tracker/index.md) | ${versions.dotNetTracker}
-[Java](/docs/collecting-data/collecting-from-own-applications/java-tracker/index.md) | ${versions.javaTracker}
-[Python](/docs/collecting-data/collecting-from-own-applications/python-tracker/index.md) | ${versions.pythonTracker}
-[Scala](/docs/collecting-data/collecting-from-own-applications/scala-tracker/index.md) | ${versions.scalaTracker}
-[Ruby](/docs/collecting-data/collecting-from-own-applications/ruby-tracker/index.md) | ${versions.rubyTracker}
-[Rust](/docs/collecting-data/collecting-from-own-applications/rust-tracker/index.md) | ${versions.rustTracker}
-[PHP](/docs/collecting-data/collecting-from-own-applications/php-tracker/index.md) | ${versions.phpTracker}
-[C++](/docs/collecting-data/collecting-from-own-applications/c-tracker/index.md) | ${versions.cppTracker}
-[Unity](/docs/collecting-data/collecting-from-own-applications/unity-tracker/index.md) | ${versions.unityTracker}
-[Lua](/docs/collecting-data/collecting-from-own-applications/lua-tracker/index.md) | ${versions.luaTracker}
+[JavaScript (Web and Node.js)](/docs/sources/trackers/javascript-trackers/index.md) | ${versions.javaScriptTracker}
+[iOS](/docs/sources/trackers/mobile-trackers/index.md) | ${versions.iosTracker}
+[Android](/docs/sources/trackers/mobile-trackers/index.md) | ${versions.androidTracker}
+[React Native](/docs/sources/trackers/react-native-tracker/index.md) | ${versions.reactNativeTracker}
+[Flutter](/docs/sources/trackers/flutter-tracker/index.md) | ${versions.flutterTracker}
+[WebView](/docs/sources/trackers/webview-tracker/index.md) | ${versions.webViewTracker}
+[Roku](/docs/sources/trackers/roku-tracker/index.md) | ${versions.rokuTracker}
+[Google AMP](/docs/sources/trackers/google-amp-tracker/index.md) | ${versions.googleAmpTracker}
+[Pixel](/docs/sources/trackers/pixel-tracker/index.md) | ${versions.pixelTracker}
+[Golang](/docs/sources/trackers/golang-tracker/index.md) | ${versions.golangTracker}
+[.NET](/docs/sources/trackers/net-tracker/index.md) | ${versions.dotNetTracker}
+[Java](/docs/sources/trackers/java-tracker/index.md) | ${versions.javaTracker}
+[Python](/docs/sources/trackers/python-tracker/index.md) | ${versions.pythonTracker}
+[Scala](/docs/sources/trackers/scala-tracker/index.md) | ${versions.scalaTracker}
+[Ruby](/docs/sources/trackers/ruby-tracker/index.md) | ${versions.rubyTracker}
+[Rust](/docs/sources/trackers/rust-tracker/index.md) | ${versions.rustTracker}
+[PHP](/docs/sources/trackers/php-tracker/index.md) | ${versions.phpTracker}
+[C++](/docs/sources/trackers/c-tracker/index.md) | ${versions.cppTracker}
+[Unity](/docs/sources/trackers/unity-tracker/index.md) | ${versions.unityTracker}
+[Lua](/docs/sources/trackers/lua-tracker/index.md) | ${versions.luaTracker}
 `} remarkPlugins={[remarkGfm]} />
 
 ### Data Models

@@ -52,7 +52,7 @@ Examples of data products:
 
 **Benefits:**
 
-* Provide implementation details to developers implementing tracking (see section on [Snowtype](/docs/collecting-data/code-generation) for further details)
+* Provide implementation details to developers implementing tracking (see section on [Snowtype](/docs/sources/code-generation) for further details)
 * Provide documentation around the semantics of the data that you are creating, to enable analysts, data scientists, analytics engineers with data discoverability
 
 **Subscribers;** allow colleagues to express an interest in understanding changes that are made to the data within a Data Product, usually because the data is being used in a downstream data model or data application. 
@@ -72,11 +72,11 @@ Break down the barriers that exist between data producers and data consumers, by
 
 ![Key elements of a Data Product](images/key-elements-of-a-data-product.png)
 
-**Volume metrics**; data products can detect events ingested in your pipeline that match the configured event specifications. This allows your team to monitor occurrence-related metrics for events being tracked with specific [event specification IDs](/docs/collecting-data/code-generation/commands/index.md#snowtype-patch).
+**Volume metrics**; data products can detect events ingested in your pipeline that match the configured event specifications. This allows your team to monitor occurrence-related metrics for events being tracked with specific [event specification IDs](/docs/sources/code-generation/commands/index.md#snowtype-patch).
 
 **Benefits:**
 
-You will be able to view several items in the UI that help detect anomalies or potential misconfigurations in trackers that are either not sending the expected events or are using incorrect [application IDs](/docs/understanding-tracking-design/organize-data-sources-with-source-applications/index.md#application-ids). This is particularly useful during the development phase when implementing tracking for a specific application using [Snowtype](/docs/collecting-data/code-generation). These elements include:
+You will be able to view several items in the UI that help detect anomalies or potential misconfigurations in trackers that are either not sending the expected events or are using incorrect [application IDs](/docs/understanding-tracking-design/organize-data-sources-with-source-applications/index.md#application-ids). This is particularly useful during the development phase when implementing tracking for a specific application using [Snowtype](/docs/sources/code-generation). These elements include:
 
 * A counter for each event specification, showing the total number of events detected from the tracked application IDs in the last 30 days.
 * A 'last seen' field for each event specification, indicating when the last event matching the event specification ID was detected.

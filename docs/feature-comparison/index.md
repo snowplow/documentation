@@ -8,10 +8,10 @@ Below you can find a detailed list of product features, including which are avai
 
 | <h3>Data Pipeline</h3> |     BDP     | [Community Edition](/docs/getting-started-on-community-edition/index.md) | 
 |:--|:-:|:-:|
-| [35+ trackers & webhooks](/docs/collecting-data/index.md) | ✅ | ✅ |
+| [35+ trackers & webhooks](/docs/sources/index.md) | ✅ | ✅ |
 | 1st party tracking | ✅ | ✅ |
 | [Anonymous data collection](/docs/recipes/recipe-anonymous-tracking/index.md) | ✅ | ✅ |
-| [ID service](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/browsers/index.md#what-is-an-id-service) | ✅ | ✅ |
+| [ID service](/docs/sources/trackers/javascript-trackers/web-tracker/browsers/index.md#what-is-an-id-service) | ✅ | ✅ |
 | High availability & auto-scaling | ✅ | ❌ |
 | [Enrichments](/docs/enriching-your-data/available-enrichments/index.md) | ✅ | ✅ |
 | [Failed events](/docs/understanding-your-pipeline/failed-events/index.md) | ✅ | ✅ | 

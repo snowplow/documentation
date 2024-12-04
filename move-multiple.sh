@@ -3,9 +3,9 @@
 # Move commands
 # Starting path, end path, optional new sidebar label
 moves=(
-    # "docs/collecting-data docs/sources Sources",
-    # "docs/sources/collecting-data-from-third-parties docs/sources/webhooks"
-    # "docs/sources/collecting-from-own-applications docs/sources/trackers"
+    "docs/collecting-data docs/sources Sources",
+    "docs/sources/collecting-data-from-third-parties docs/sources/webhooks"
+    "docs/sources/collecting-from-own-applications docs/sources/trackers"
 
     # "docs/contributing docs/resources Resources",
 
@@ -46,7 +46,7 @@ moves=(
     # "docs/pipeline-components-and-applications docs/api-reference API reference",
 
     # "docs/storing-querying docs/destinations/warehouses-lakes Warehouses and lakes",
-    "docs/destinations/analytics-sdk docs/api-reference/analytics-sdk",
+    # "docs/destinations/analytics-sdk docs/api-reference/analytics-sdk",
     # "docs/recipes docs/resources/recipes-tutorials Recipes and tutorials",
 
 

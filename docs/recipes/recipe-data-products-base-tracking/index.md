@@ -6,8 +6,8 @@ sidebar_position: 40
 This guide will help you understand some of the basic capabilities of Data Products and how they can be used in practice for most tracking implementation setups.
 
 ## Prerequisites
-- A [collector](https://docs.snowplow.io/docs/collecting-data/configuring-collector/ui/) endpoint.
-- A [Console API key](https://docs.snowplow.io/docs/collecting-data/code-generation/using-the-cli/#authenticating-with-the-console) for generating code using Snowtype.
+- A [collector](https://docs.snowplow.io/docs/sources/configuring-collector/ui/) endpoint.
+- A [Console API key](https://docs.snowplow.io/docs/sources/code-generation/using-the-cli/#authenticating-with-the-console) for generating code using Snowtype.
 
 ## What you'll be doing
 
@@ -57,7 +57,7 @@ The Base Web (_or Mobile_) data product will monitor and count base events as th
 
 ## Initialize the tracker
 
-For this example application, we will use the [Browser tracker](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/quick-start-guide/#quick-start-basic) which is distributed through npm.
+For this example application, we will use the [Browser tracker](https://docs.snowplow.io/docs/sources/trackers/javascript-trackers/web-tracker/quick-start-guide/#quick-start-basic) which is distributed through npm.
 
 Switch to the project root directory and then install it by running `npm install @snowplow/browser-tracker`.
 
@@ -99,7 +99,7 @@ You can validate this step being implemented properly using the [Snowplow Inspec
 
 ## Add link click tracking
 
-As a next step you will implement link click tracking for the main page link pointing to the TodoMVC website. To track this and other links on your pages, you can install the [Link click](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/link-click/) tracking plugin. The plugin provides automatic link click tracking for all links on your page.
+As a next step you will implement link click tracking for the main page link pointing to the TodoMVC website. To track this and other links on your pages, you can install the [Link click](https://docs.snowplow.io/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/link-click/) tracking plugin. The plugin provides automatic link click tracking for all links on your page.
 
 To enable it in the application, switch to the project root directory and then install it by running `npm install @snowplow/browser-plugin-link-click-tracking`.
 
@@ -248,7 +248,7 @@ To make sure your intention on this Event Specification is clear and also instru
 ![](./images/implementation-instructions.png)
 
 :::tip
-Information for implementation instructions, cardinality rules and trigger details will be available for the implementation engineers directly through Snowtype [instructions feature](https://docs.snowplow.io/docs/collecting-data/code-generation/using-the-cli/#generating-event-specification-instructions).
+Information for implementation instructions, cardinality rules and trigger details will be available for the implementation engineers directly through Snowtype [instructions feature](https://docs.snowplow.io/docs/sources/code-generation/using-the-cli/#generating-event-specification-instructions).
 :::
 
 Now on the Entity data structures section, click `Add existing data structure`, find and select the todo entity created earlier. On the next modal step you can define the expected cardinality, of this entity on the event specification. For the todo entity, you want to have exactly 1 instance.
@@ -271,9 +271,9 @@ For some Event Specification features, such as event counts, it is required that
 
 ### Installing Snowtype
 
-After having setup a [Console API key](https://docs.snowplow.io/docs/collecting-data/code-generation/using-the-cli/#authenticating-with-the-console) you can install Snowtype on this project by switching to the project root directory and running `npm install @snowplow/snowtype --save-dev`.
+After having setup a [Console API key](https://docs.snowplow.io/docs/sources/code-generation/using-the-cli/#authenticating-with-the-console) you can install Snowtype on this project by switching to the project root directory and running `npm install @snowplow/snowtype --save-dev`.
 
-Since this is a project without previous Snowtype installation, we need to go through the [init flow](https://docs.snowplow.io/docs/collecting-data/code-generation/using-the-cli/#initializing-snowtype-for-your-project).
+Since this is a project without previous Snowtype installation, we need to go through the [init flow](https://docs.snowplow.io/docs/sources/code-generation/using-the-cli/#initializing-snowtype-for-your-project).
 
 To do that, you can go to the Data Product page and click on the `Implement tracking` button. There you can copy the second code command which relates to initializing a new Snowtype project.
 

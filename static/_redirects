@@ -314,3 +314,4 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/testing-debugging/snowplow-micro/* /docs/data-product-studio/data-quality/snowplow-micro/:splat 301
 /docs/data-product-studio/data-quality/failed-events/testing-and-qa-workflows/set-up-automated-testing-with-snowplow-micro/* /docs/data-product-studio/data-quality/snowplow-micro/automated-testing/:splat 301
 /docs/data-product-studio/data-quality/failed-events/testing-and-qa-workflows/using-the-data-structures-ci-tool-for-data-quality/* /docs/data-product-studio/data-quality/data-structures-ci-tool/:splat 301
+/docs/sources/code-generation/* /docs/data-product-studio/snowtype/:splat 301

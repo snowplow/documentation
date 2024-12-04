@@ -72,7 +72,7 @@ Break down the barriers that exist between data producers and data consumers, by
 
 ![Key elements of a Data Product](images/key-elements-of-a-data-product.png)
 
-**Volume metrics**; data products can detect events ingested in your pipeline that match the configured event specifications. This allows your team to monitor occurrence-related metrics for events being tracked with specific [event specification IDs](/docs/sources/code-generation/commands/index.md#snowtype-patch).
+**Volume metrics**; data products can detect events ingested in your pipeline that match the configured event specifications. This allows your team to monitor occurrence-related metrics for events being tracked with specific [event specification IDs](/docs/data-product-studio/snowtype/commands/index.md#snowtype-patch).
 
 **Benefits:**
 

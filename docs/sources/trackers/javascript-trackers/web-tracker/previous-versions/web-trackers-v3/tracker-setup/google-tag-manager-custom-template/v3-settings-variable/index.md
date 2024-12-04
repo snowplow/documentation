@@ -33,7 +33,7 @@ This means that a tracker configuration is applied **only once** to the tracker.
 
 ### Collector Endpoint Hostname
 
-This needs to be set to the hostname/domain (e.g. `sp.domain.com`) on which you’ve [configured](/docs/sources/configuring-collector/index.md) your Snowplow Collector.
+This needs to be set to the hostname/domain (e.g. `sp.domain.com`) on which you’ve [configured](/docs/pipeline/collector/index.md) your Snowplow Collector.
 
 ## Acknowledgements
 

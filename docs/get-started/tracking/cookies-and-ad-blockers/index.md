@@ -40,7 +40,7 @@ As many ad blockers will block this path, it is recommended to change the path.
 
 To change the path, you will need to take the following steps (in this order):
 
-1. Update the [Collector configuration](/docs/sources/configuring-collector/index.md) to support the new path _before_ you send events to it with this setting.
+1. Update the [Collector configuration](/docs/pipeline/collector/index.md) to support the new path _before_ you send events to it with this setting.
 2. Provide the new path in the [`customPostPath` configuration in the tracker](/docs/sources/trackers/javascript-trackers/web-tracker/configuring-how-events-sent/index.md#custom-post-path).
 
 **Strategy 2: Rename sp.js file**

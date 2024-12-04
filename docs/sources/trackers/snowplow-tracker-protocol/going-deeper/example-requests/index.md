@@ -11,7 +11,7 @@ The requests on this page are only relevant if you plan to write a new tracker i
 
 Below are a number of example Tracker Protocol requests. All examples are POST requests with a JSON body.
 
-All requests are sent to `https://<your-collector-host>/com.snowplowanalytics.snowplow/tp2` unless you have specified a custom POST path when [configuring your Collector](/docs/sources/configuring-collector/index.md).
+All requests are sent to `https://<your-collector-host>/com.snowplowanalytics.snowplow/tp2` unless you have specified a custom POST path when [configuring your Collector](/docs/pipeline/collector/index.md).
 
 All payloads should be wrapped in a `payload_data` Self Describing JSON.
 

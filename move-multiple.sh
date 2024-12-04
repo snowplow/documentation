@@ -35,10 +35,10 @@ moves=(
     # "docs/data-product-studio/managing-event-specifications/api docs/data-product-studio/event-specifications/api"
     # "docs/data-product-studio/tracking-plans docs/data-product-studio/event-specifications/tracking-plans"
 
-    "docs/data-product-studio/defining-the-data-to-collect-with-data-products docs/data-product-studio/data-products"
-    "docs/data-product-studio/organize-data-sources-with-source-applications docs/data-product-studio/source-applications"
+    # "docs/data-product-studio/defining-the-data-to-collect-with-data-products docs/data-product-studio/data-products"
+    # "docs/data-product-studio/organize-data-sources-with-source-applications docs/data-product-studio/source-applications"
 
-    # "docs/sources/configuring-collector docs/pipeline/configuring-collector Collector"
+    "docs/sources/configuring-collector docs/pipeline/collector Collector"
 
     # "docs/pipeline-components-and-applications docs/api-reference API reference",
 

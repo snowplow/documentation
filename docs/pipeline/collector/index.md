@@ -1,14 +1,12 @@
 ---
-title: "Configuring the Collector in Snowplow BDP"
-date: "2020-08-10"
-sidebar_label: "Using the UI or API"
-sidebar_position: 10
-sidebar_custom_props:
-  offerings:
-    - bdp
+title: "Configuring the Collector"
+sidebar_position: 1
+sidebar_label: "Collector"
 ---
 
-Having already set up [collectors in your pipeline](/docs/fundamentals/architecture-overview/index.md) and trackers [to submit events](/docs/sources/index.md) to them, you may want to verify your collector configuration. This can take two forms, depending on your needs.
+Once your [event collector](docs/fundamentals/architecture-overview/index.md) is set up, along with [trackers](docs/sources/trackers/index.md) to submit events to them, you may want to verify your collector configuration. This can take two forms, depending on your needs.
+
+Read more about the technical aspects of the collector [here](docs/pipeline-components-and-applications/stream-collector/index.md).
 
 ## Viewing collector configuration in Snowplow BDP Console
 
@@ -140,3 +138,7 @@ The `cookieAttributes` object is always expected to be available and contains th
     - `strict`
 
 Finally, `blockUnencrypted` is an optional boolean property indicating whether un-encrypted traffic should be allowed or not. If not available, the default is `false` (i.e. "do not block").
+
+## Configuring the collector for Community Edition users
+
+After you have installed the [Collector](docs/pipeline-components-and-applications/stream-collector/index.md) (either following the [Quick Start guide](/docs/get-started/snowplow-community-edition/what-is-quick-start/index.md) or [manually](docs/pipeline-components-and-applications/stream-collector/setup/index.md)), you can follow the [reference page](docs/pipeline-components-and-applications/stream-collector/configure/index.md) to configure it.

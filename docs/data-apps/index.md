@@ -1,7 +1,7 @@
 ---
 title: "Data Applications"
 sidebar_position: 112
-sidebar_label: "🆕 Data Applications"
+sidebar_label: "Data Applications"
 sidebar_custom_props:
   offerings:
     - bdp
@@ -21,7 +21,7 @@ Data applications are self-service analytics tools, deployed in your cloud, that
 ```mdx-code-block
 import DocCardList from '@theme/DocCardList';
 
-<DocCardList /> 
+<DocCardList />
 ```
 
 ## Accessing the Applications
@@ -37,7 +37,7 @@ If you wish to invite others to use data applications but not have access to the
 
 ## Installing applications
 
-Once you have purchased an application, you are able to install it. Click the tile to begin installing the application and follow the steps. 
+Once you have purchased an application, you are able to install it. Click the tile to begin installing the application and follow the steps.
 
 ![Image of application tile showing start install process](images/install-app-tile.png)
 

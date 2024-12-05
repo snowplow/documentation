@@ -1,6 +1,6 @@
 ---
 title: "Snowflake Streaming Loader"
-sidebar_label: "🆕 Snowflake Streaming Loader"
+sidebar_label: "Snowflake Streaming Loader"
 sidebar_position: 0
 ---
 
@@ -65,5 +65,3 @@ https://github.com/snowplow-incubator/snowflake-loader/blob/main/config/config.a
 </Tabs>
 
 See the [configuration reference](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/configuration-reference/index.md) for all possible configuration parameters.
-
-

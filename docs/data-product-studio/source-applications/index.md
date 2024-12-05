@@ -1,7 +1,7 @@
 ---
 title: "Organize Data Sources with Source Applications"
 sidebar_position: 1
-sidebar_label: "🆕 Source Applications"
+sidebar_label: "Source Applications"
 ---
 
 For data collection, you will often have different sources of information that correspond to applications designed for a particular purpose. These are what we will refer to as Source Applications.

@@ -1,7 +1,7 @@
 ---
 title: "Data Products Introduction"
 sidebar_position: 7
-sidebar_label: "🆕 Data Products Introduction"
+sidebar_label: "Data Products Introduction"
 description: "Snowplow's data products enable organizations to easily generate AI and BI-ready data that is reliable, clear, compliant, accurate, and predictable"
 ---
 
@@ -12,22 +12,22 @@ With data products, you can:
 * Set clear ownership for the data being created
 * Make tracking implementation easier
 * Deliver better governance around your data
-* More easily communicate what the data means and how to use it 
+* More easily communicate what the data means and how to use it
 * Collaborate more effectively with the various teams involved in delivering value from your data
 * Drive a self-serve culture around data across your organization
 
 ## What is a Data Product
 
-A data product is a well documented dataset. By documenting what data you are collecting, where, the meaning of that data and how to use it, you can break down the barriers that exist today between the many teams involved in the data value chain (i.e. from those implementing the tracking to those analysing the data). 
+A data product is a well documented dataset. By documenting what data you are collecting, where, the meaning of that data and how to use it, you can break down the barriers that exist today between the many teams involved in the data value chain (i.e. from those implementing the tracking to those analysing the data).
 
 At its core, a data product has:
 
 * An explicit owner; that is responsible for maintaining and updating the data over time
-* Consumers; who use the data to deliver use cases and are impacted by upstream changes 
+* Consumers; who use the data to deliver use cases and are impacted by upstream changes
 
 Data products at Snowplow are underpinned by the concept of a data contract. They act as a formal agreement between the producers of data products and the consumers of data products, and support better collaboration around the data being created.
 
-We have always believed in the value of data contracts at Snowplow; our tech is underpinned by event and entity schemas that describe upfront the structure of the data and ensure that the data conforms to that structure as it is processed by your pipeline. This schema technology forms the foundations of a data contract, but data products take this to the next level to bring enhanced quality, governance and discoverability to the data that you create. 
+We have always believed in the value of data contracts at Snowplow; our tech is underpinned by event and entity schemas that describe upfront the structure of the data and ensure that the data conforms to that structure as it is processed by your pipeline. This schema technology forms the foundations of a data contract, but data products take this to the next level to bring enhanced quality, governance and discoverability to the data that you create.
 
 Examples of data products:
 
@@ -55,7 +55,7 @@ Examples of data products:
 * Provide implementation details to developers implementing tracking (see section on [Snowtype](/docs/sources/code-generation) for further details)
 * Provide documentation around the semantics of the data that you are creating, to enable analysts, data scientists, analytics engineers with data discoverability
 
-**Subscribers;** allow colleagues to express an interest in understanding changes that are made to the data within a Data Product, usually because the data is being used in a downstream data model or data application. 
+**Subscribers;** allow colleagues to express an interest in understanding changes that are made to the data within a Data Product, usually because the data is being used in a downstream data model or data application.
 
 **Benefits:**
 
@@ -87,23 +87,23 @@ You will be able to view several items in the UI that help detect anomalies or p
 
 :::note
 
-Some data products, such as [__Base Web__](/docs/data-product-studio/data-products/data-product-templates/index.md#base-web) and [__Base Mobile__](/docs/data-product-studio/data-products/data-product-templates/index.md#base-mobile), contain standard events (e.g., _page pings_, _link clicks_, _screen view_, _application install_). 
+Some data products, such as [__Base Web__](/docs/data-product-studio/data-products/data-product-templates/index.md#base-web) and [__Base Mobile__](/docs/data-product-studio/data-products/data-product-templates/index.md#base-mobile), contain standard events (e.g., _page pings_, _link clicks_, _screen view_, _application install_).
 
 For these data products, the volume metrics will behave differently:
 
 - If no standard events are being tracked with an application ID different from those inherited from the source applications set up in the data product, the behavior will be the same as for a normal data product.
 
-- If standard events are being tracked with application IDs different from those inherited from the source applications set up in the data product, a toggle will appear above the event specification list. 
+- If standard events are being tracked with application IDs different from those inherited from the source applications set up in the data product, a toggle will appear above the event specification list.
 
   This toggle will be disabled by default, so the metrics displayed will relate only to the application IDs inherited from the source applications set up in the data product.
-  
+
   ![](images/data_product_metrics_default.png)
 
   If the toggle is enabled, it will show the metrics for all the application IDs found for the standard events (not just the ones inherited from the data product).
 
   ![](images/data_product_metrics_toggled.png)
 
-::: 
+:::
 
 ## How data products help with governance, data quality and data discoverability
 
@@ -115,6 +115,6 @@ The **event specification** describes a specific implementation of an event. It 
 
 By adding screenshots, and descriptions to the event specification, you are also able to communicate the **semantics of the data** to those that want to analyse it. In this way you can ensure that the data is **represented accurately** when being used to derive insights and make decisions by the many teams using the data downstream.
 
-A data structure can be used across event specifications, and across data products. In doing so, you can ensure you consistently track business critical events and entities (for example, your "product" entity) across your organisation. Having the ability to use centralised event and entity schemas in this way, means that you are able to better govern the structure of the data across an organisation whilst also empowering teams to manage their own specific implementation of events via data products. 
+A data structure can be used across event specifications, and across data products. In doing so, you can ensure you consistently track business critical events and entities (for example, your "product" entity) across your organisation. Having the ability to use centralised event and entity schemas in this way, means that you are able to better govern the structure of the data across an organisation whilst also empowering teams to manage their own specific implementation of events via data products.
 
 To understand how to get started with data products, see [Defining the Data to collect with Data Products](/docs/data-product-studio/data-products/) for further details.

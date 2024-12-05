@@ -2,7 +2,7 @@
 title: "Snowplow fundamentals"
 sidebar_position: 2
 sidebar_custom_props:
-  header: "Getting started"
+  header: " "
 sidebar_label: "Fundamentals"
 ---
 

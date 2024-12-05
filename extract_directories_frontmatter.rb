@@ -3,7 +3,7 @@
 require_relative 'extract_frontmatter'
 
 # Function to (optionally) recursively extract front matter from `index.md` files in directories.
-# NB the recursion is capped at 3 levels deep so it doesn't get excessive.
+# NB the recursion is capped at 2 levels deep so it doesn't get confusing.
 #
 # Usage non-recursive: ruby extract_directories_frontmatter.rb /path/to/base/directory
 # Or for recursive output: ruby extract_directories_frontmatter.rb -r /path/to/base/directory
@@ -31,7 +31,7 @@ def process_directory(results, path, recursive, depth = 0)
   # Collect all directories to process
   dirs_to_process = find_directories(path)
 
-  if dirs_to_process.size != 0 && depth < 3
+  if dirs_to_process.size != 0 && depth < 2
     dirs_to_process.each do |entry|
       process_directory(results, File.join(path, entry), recursive, depth + 1)
     end

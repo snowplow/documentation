@@ -1,7 +1,7 @@
 ---
 title: "Using the Data Structures CI tool"
 date: "2020-06-01"
-sidebar_position: 2000
+sidebar_position: 4
 sidebar_custom_props:
   offerings:
     - bdp

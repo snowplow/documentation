@@ -1,7 +1,7 @@
 ---
 title: "Versioning data structures"
 date: "2020-02-25"
-sidebar_position: 90
+sidebar_position: 2
 sidebar_label: "Verson and amend"
 ---
 

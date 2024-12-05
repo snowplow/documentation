@@ -1,6 +1,7 @@
 ---
 title: "Working with the Snowtype CLI"
 sidebar_position: 2
+sidebar_label: "Snowtype CLI"
 ---
 
 ```mdx-code-block

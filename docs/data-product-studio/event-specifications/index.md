@@ -1,7 +1,7 @@
 ---
 title: "Managing Event Specifications in the Console"
-sidebar_label: "Using the UI"
-sidebar_position: 1
+sidebar_label: "Event specifications"
+sidebar_position: 4
 sidebar_custom_props:
   offerings:
     - bdp

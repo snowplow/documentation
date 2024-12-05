@@ -2,6 +2,7 @@
 title: "Introduction to tracking design"
 date: "2020-06-01"
 sidebar_position: 0
+sidebar_label: "Tracking design"
 ---
 
 To use Snowplow successfully, you need to have a good idea of:

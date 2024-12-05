@@ -1,5 +1,5 @@
 ---
-title: "Getting started with the Snowtype CLI"
+title: "Get started with the Snowtype CLI"
 sidebar_position: 1
 ---
 

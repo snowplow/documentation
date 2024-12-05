@@ -1,7 +1,7 @@
 ---
-title: "Defining the Data to collect with Data Products"
-sidebar_position: 2
-sidebar_label: "Data Products"
+title: "Defining the data to collect with Data Products"
+sidebar_position: 5
+sidebar_label: "Data products"
 ---
 
 As described in [Data Products Introduction](/docs/fundamentals/data-products/index.md), a data product is a logical grouping of the data you collect as an organisation by domain, with an explicit owner.

@@ -1,6 +1,6 @@
 ---
 title: "Code Generation - automatically generate code for Snowplow tracking SDKs"
-sidebar_position: 0
+sidebar_position: 6
 sidebar_label: "Snowtype"
 sidebar_custom_props:
   offerings:

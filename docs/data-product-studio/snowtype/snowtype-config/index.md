@@ -1,6 +1,7 @@
 ---
 title: "Snowtype configuration options"
 sidebar_position: 3
+sidebar_label: "Configuration options"
 ---
 
 ```mdx-code-block

@@ -1,5 +1,5 @@
 ---
-title: "Set up the stream collector"
+title: "Set up"
 date: "2021-08-04"
 sidebar_position: 1
 ---
@@ -13,11 +13,11 @@ import CodeBlock from '@theme/CodeBlock';
 
 [![](https://img.shields.io/static/v1?label=Terraform&message=Registry&color=7B42BC&logo=terraform)](https://registry.terraform.io/modules/snowplow-devops/collector-kinesis-ec2/aws/latest)
 
-A Terraform module is available which deploys the stream collector on a AWS EC2 without the need for this manual setup.
+A Terraform module is available which deploys the collector on a AWS EC2 without the need for this manual setup.
 
 ## Run the collector
 
-The stream collector is on docker hub with several different flavours. Pull the image that matches the sink you are using:
+The collector is on docker hub with several different flavours. Pull the image that matches the sink you are using:
 
 <CodeBlock language="bash">{
 `docker pull snowplow/scala-stream-collector-kinesis:${versions.collector}

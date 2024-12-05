@@ -49,8 +49,6 @@ moves=(
 
 
 
-
-
     # Add more move strings here, one per line
 )
 

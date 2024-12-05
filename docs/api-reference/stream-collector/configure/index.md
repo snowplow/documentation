@@ -1,5 +1,5 @@
 ---
-title: "Configure the Stream Collector"
+title: "Configure"
 sidebar_position: 2
 ---
 
@@ -7,7 +7,7 @@ This is a complete list of the options that can be configured in the collector H
 
 ### License
 
-Stream Collector is released under the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.0/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).
+The collector is released under the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.0/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).
 
 To accept the terms of license and run the collector, set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable. Alternatively, you can configure the `collector.license.accept` option, like this:
 
@@ -243,9 +243,9 @@ Note: If you don't have a verified certificate, you need to disable SSL verifica
 
 ### Setting up an SQS buffer (2.0.0+)
 
-On AWS, the lack of auto-scaling in Kinesis results in throttled streams in case of traffic spikes and Stream Collector starts accumulating events to retry them later. If accumulation continues long enough, Stream Collector will run out of memory. To prevent the possibility of a broken collector, we decided to make it possible to configure an SQS buffer which can provide additional assurance during extreme traffic spikes.
+On AWS, the lack of auto-scaling in Kinesis results in throttled streams in case of traffic spikes and the collector starts accumulating events to retry them later. If accumulation continues long enough, the collector will run out of memory. To prevent the possibility of a broken collector, we decided to make it possible to configure an SQS buffer which can provide additional assurance during extreme traffic spikes.
 
-SQS is used to queue any message that Stream Collector failed to send to Kinesis. The [Snowbridge application](/docs/destinations/forwarding-events/snowbridge/index.md) can then read the messages from SQS and write them to Kinesis once Kinesis is ready. In the event of any AWS API glitches, there is a retry mechanism which retries sending to the SQS queue 10 times.
+SQS is used to queue any message that the collector failed to send to Kinesis. The [Snowbridge application](/docs/destinations/forwarding-events/snowbridge/index.md) can then read the messages from SQS and write them to Kinesis once Kinesis is ready. In the event of any AWS API glitches, there is a retry mechanism which retries sending to the SQS queue 10 times.
 
 The keys set up for the Kinesis stream are stored as SQS message attributes in order to preserve the information.
 

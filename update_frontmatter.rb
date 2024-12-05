@@ -14,14 +14,15 @@ def update_front_matter(input_file)
     old = extract_front_matter(current).split("\n")
 
     all_properties = {
-          path:  new[0],
-          old_title: parse_properties(old[0]),
-          new_title: parse_properties(new[1]),
-          old_label: parse_properties(old[1]),
-          new_label: parse_properties(new[2]),
-          old_position: parse_properties(old[2]),
-          new_position: parse_properties(new[3]),
-        }
+      path:  new[0],
+      old_title: parse_properties(old[0]),
+      new_title: parse_properties(new[1]),
+      old_label: parse_properties(old[1]),
+      new_label: parse_properties(new[2]),
+      old_position: parse_properties(old[2]),
+      new_position: parse_properties(new[3]),
+    }
+
     updated_front_matter = replace_properties(current, all_properties)
     write_front_matter(path, updated_front_matter)
   end
@@ -46,10 +47,8 @@ def parse_input_file(file_path)
 end
 
 def parse_properties(line)
-  # puts "line: #{line}"
   match = line.match(/^- (title:|sidebar_label:|sidebar_position:).*?\ *[\"\']?(.*)\b[\"\']?/m)
   if match
-  puts match
     match[2].strip
   else
     ""
@@ -79,20 +78,19 @@ def current_front_matter(path)
   frontmatter_match[0]
 end
 
-def replace_properties(current, new)
-  replacements = [
-    [:new_title, :old_title, /title: .*/, "title: \"%s\""],
-    [:new_label, :old_label, /sidebar_label: .*/, "sidebar_label: \"%s\""],
-    [:new_position, :old_position, /sidebar_position: .*/, "sidebar_position: %d"]
-  ]
+def replace_properties(current, all)
+  if all[:old_title] != all[:new_title]
+    current.gsub!(/title: .*/, "title: \"#{all[:new_title]}\"")
+  end
 
-  replacements.each do |new_key, old_key, pattern, format|
-    new_value = new[new_key]
-    old_value = new[old_key]
+  if all[:old_label] == "N/A" && all[:new_label] != "N/A"
+    current.gsub!(/(\n---\s*)$/, "\nsidebar_label: \"#{all[:new_label]}\"\\1")
+  elsif all[:old_label] != all[:new_label]
+    current.gsub!(/sidebar_label: .*/, "sidebar_label: \"#{all[:new_label]}\"")
+  end
 
-    if !new_value.empty? && (old_value != new_value)
-      current.gsub!(pattern, format % (new_key == :new_position ? new_value.to_i : new_value))
-    end
+  if all[:old_position] != all[:new_position]
+    current.gsub!(/sidebar_position: .*/, "sidebar_position: #{all[:new_position]}")
   end
 
   current

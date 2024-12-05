@@ -1,6 +1,6 @@
 ---
-title: "NEW FOLDER pipeline"
+title: "Pipeline"
 date: "2024-12-04"
-sidebar_position: 1
+sidebar_position: 5
 ---
 

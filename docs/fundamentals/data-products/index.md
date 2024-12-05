@@ -1,7 +1,7 @@
 ---
-title: "Data Products Introduction"
+title: "Introduction to Data Products"
 sidebar_position: 7
-sidebar_label: "Data Products Introduction"
+sidebar_label: "Data Products"
 description: "Snowplow's data products enable organizations to easily generate AI and BI-ready data that is reliable, clear, compliant, accurate, and predictable"
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: "Recipes and tutorials"
-sidebar_position: 4
+sidebar_position: 10
 sidebar_label: "Recipes and tutorials"
 ---
 

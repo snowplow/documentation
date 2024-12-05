@@ -1,64 +1,54 @@
-docs/get-started
-- title: "First steps with Snowplow"
-- sidebar_label: "Get started"
-- sidebar_position: 3
-
-	docs/get-started/custom-events
-	- title: "Creating your first custom events"
-	- sidebar_label: "Define custom events"
-	- sidebar_position: 8
-
-	docs/get-started/deployment-model
-	- title: "Deployment model"
-	- sidebar_label: N/A
-	- sidebar_position: 1
-
-	docs/get-started/diving-deeper
-	- title: "Exploring Snowplow beyond the first steps"
-	- sidebar_label: "Dive deeper"
-	- sidebar_position: 11
-
-	docs/get-started/failed-events
-	- title: "Inspecting your first failed events"
-	- sidebar_label: "Inspect failed events"
+docs/account-management
+	- title: "Managing your account"
+	- sidebar_label: "Account management"
 	- sidebar_position: 9
 
-	docs/get-started/feature-comparison
-	- title: "Product features"
-	- sidebar_label: "Feature comparison"
-	- sidebar_position: 2
-
-	docs/get-started/installing
-	- title: "Installing Snowplow"
-	- sidebar_label: N/A
-	- sidebar_position: 1
-
-	docs/get-started/modeling
-	- title: "Running your first data models"
-	- sidebar_label: "Run a data model"
-	- sidebar_position: 7
-
-	docs/get-started/querying
-	- title: "Querying your first events"
-	- sidebar_label: "Query the data"
-	- sidebar_position: 6
-
-	docs/get-started/snowplow-bdp
-	- title: "Setting up Snowplow Behavioral Data Platform"
-	- sidebar_label: "Snowplow BDP"
-	- sidebar_position: 3
-
-	docs/get-started/snowplow-community-edition
-	- title: "Setting up Snowplow Community Edition"
-	- sidebar_label: "Snowplow Community Edition"
-	- sidebar_position: 4
-
-	docs/get-started/tooling
-	- title: "Useful tools for working with Snowplow"
-	- sidebar_label: "Useful tools"
+	docs/api-reference
+	- title: "Components & applications"
+	- sidebar_label: "API reference"
 	- sidebar_position: 10
 
-	docs/get-started/tracking
-	- title: "Tracking your first events"
-	- sidebar_label: "Track events"
+	docs/data-apps
+	- title: "Data applications"
+	- sidebar_label: "Data applications"
+	- sidebar_position: 8
+
+	docs/data-product-studio
+	- title: "Defining the data to collect"
+	- sidebar_label: "Data Product Studio"
+	- sidebar_position: 3
+
+	docs/destinations
+	- title: "Destinations"
+	- sidebar_label: "Destinations"
+	- sidebar_position: 6
+
+	docs/fundamentals
+	- title: "Snowplow fundamentals"
+	- sidebar_label: "Fundamentals"
+	- sidebar_position: 2
+
+	docs/get-started
+	- title: "First steps with Snowplow"
+	- sidebar_label: "Get started"
+	- sidebar_position: 1
+
+	docs/modeling-your-data
+	- title: "Modeling data"
+	- sidebar_label: Data models
+	- sidebar_position: 7
+
+	docs/pipeline
+	- title: "Pipeline"
+	- sidebar_label: N/A
 	- sidebar_position: 5
+
+	docs/resources
+	- title: "Community & contributing"
+	- sidebar_label: "Resources"
+	- sidebar_position: 11
+
+	docs/sources
+	- title: "Sources"
+	- sidebar_label: N/A
+	- sidebar_position: 4

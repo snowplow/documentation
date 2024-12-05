@@ -1,7 +1,7 @@
 ---
-title: "Data Applications"
-sidebar_position: 112
-sidebar_label: "Data Applications"
+title: "Data applications"
+sidebar_position: 8
+sidebar_label: "Data applications"
 sidebar_custom_props:
   offerings:
     - bdp

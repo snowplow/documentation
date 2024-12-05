@@ -1,7 +1,7 @@
 ---
 title: "Modeling your data with dbt"
 description: "Information for our dbt packages including quickstarts, configurations, and building custom models."
-sidebar_position: 10
+sidebar_position: 1
 ---
 
 [dbt](https://docs.getdbt.com/) enables analytics engineers to transform data in their warehouses by simply writing select statements. Snowplow has written and maintain a number of dbt packages to model your snowplow data for various purposes and produce derived tables for use in analytics, AI, ML, BI, or reverse ETL tools.

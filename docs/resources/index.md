@@ -1,7 +1,7 @@
 ---
 title: "Community & contributing"
 date: "2020-10-28"
-sidebar_position: 140
+sidebar_position: 11
 sidebar_label: "Resources"
 ---
 

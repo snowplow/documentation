@@ -29,7 +29,7 @@ def extract_front_matter(input)
     - sidebar_position: #{sidebar_position}
     RESULTS
   else
-    "Error: No front matter found in #{input}"
+    "Error: No front matter found"
   end
 end
 

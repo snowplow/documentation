@@ -1,6 +1,6 @@
 ---
-title: "Getting Snowplow data into additional destinations"
-sidebar_label: "Routing data elsewhere"
+title: "Destinations"
+sidebar_label: "Destinations"
 sidebar_position: 85
 ---
 

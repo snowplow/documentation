@@ -1,6 +1,6 @@
 ---
 title: "Storing and querying data"
-sidebar_position: 84
+sidebar_position: 1
 sidebar_label: "Warehouses and lakes"
 ---
 

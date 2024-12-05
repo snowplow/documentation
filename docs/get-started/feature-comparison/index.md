@@ -1,13 +1,13 @@
 ---
 title: "Product features"
-sidebar_position: 1
+sidebar_position: 2
 hide_table_of_contents: true
 sidebar_label: "Feature comparison"
 ---
 
-Below you can find a detailed list of product features, including which are available as part of the Snowplow Behavioral Data Platform (BDP) and which are available with the [Snowplow Community Edition](/docs/get-started/snowplow-community-edition/index.md). 
+Below you can find a detailed list of product features, including which are available as part of the Snowplow Behavioral Data Platform (BDP) and which are available with the [Snowplow Community Edition](/docs/get-started/snowplow-community-edition/index.md).
 
-| <h3>Data Pipeline</h3> |     BDP     | [Community Edition](/docs/get-started/snowplow-community-edition/index.md) | 
+| <h3>Data Pipeline</h3> |     BDP     | [Community Edition](/docs/get-started/snowplow-community-edition/index.md) |
 |:--|:-:|:-:|
 | [35+ trackers & webhooks](/docs/sources/index.md) | ✅ | ✅ |
 | 1st party tracking | ✅ | ✅ |
@@ -15,32 +15,31 @@ Below you can find a detailed list of product features, including which are avai
 | [ID service](/docs/sources/trackers/javascript-trackers/web-tracker/browsers/index.md#what-is-an-id-service) | ✅ | ✅ |
 | High availability & auto-scaling | ✅ | ❌ |
 | [Enrichments](/docs/pipeline/enrichments/available-enrichments/index.md) | ✅ | ✅ |
-| [Failed events](/docs/fundamentals/failed-events/index.md) | ✅ | ✅ | 
+| [Failed events](/docs/fundamentals/failed-events/index.md) | ✅ | ✅ |
 | [Data quality monitoring](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/index.md) | ✅ | ❌ |
-| Single Sign-On | ✅ | ❌ | 
-| Pipeline observability | ✅ | do-it-yourself | 
+| Single Sign-On | ✅ | ❌ |
+| Pipeline observability | ✅ | do-it-yourself |
 | Surge protection | ✅ | do-it-yourself |
-| **Warehouse / lake destinations** | | 
-| • Snowflake | ✅ | ✅ | 
-| • Redshift | ✅ | ✅| 
-| • BigQuery | ✅ | ✅ | 
-| • Databricks | ✅ | ✅ | 
+| **Warehouse / lake destinations** | |
+| • Snowflake | ✅ | ✅ |
+| • Redshift | ✅ | ✅|
+| • BigQuery | ✅ | ✅ |
+| • Databricks | ✅ | ✅ |
 | • Synapse Analytics | ✅ | ✅ |
-| • Elasticsearch | ✅ | ✅ | 
-| • S3 | ✅ | ✅ | 
-| • GCS | ✅ | ✅ | 
+| • Elasticsearch | ✅ | ✅ |
+| • S3 | ✅ | ✅ |
+| • GCS | ✅ | ✅ |
 | • ADLS / OneLake | ✅ | ✅ |
-| **Real-time streams** | | 
+| **Real-time streams** | |
 | • Kinesis | ✅ | ✅ |
-| • Pubsub | ✅ | ✅ | 
+| • Pubsub | ✅ | ✅ |
 | • Kafka / Azure Event Hubs / Confluent Cloud | ✅ | ✅ |
 | <h3>Data Product Studio</h3> | BDP |[Community Edition](/docs/get-started/snowplow-community-edition/index.md)|
-| Advanced enrichments (PII, IP anonymisation, JS, API, SQL enrichments) | ✅ | ✅ (no UI or API)| 
+| Advanced enrichments (PII, IP anonymisation, JS, API, SQL enrichments) | ✅ | ✅ (no UI or API)|
 | [Data structures tooling & API](/docs/data-product-studio/data-structures/manage/ui/index.md) | ✅ |❌|
 | [Data Products](/docs/data-product-studio/data-products/) | ✅ |❌|
 | [Data modeling management tooling](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/index.md) | ✅ | ❌ |
 | Jobs monitoring dashboard | ✅  | ❌ |
-| [Tracking catalog](/docs/discovering-data/tracking-catalog/index.md) | ✅ | ❌ |
 | Failed events alerting | ✅ | ❌ |
 | Failed events recoveries | ✅ | ❌ |
 | QA pipeline | ✅ | do-it-yourself |
@@ -71,6 +70,5 @@ Below you can find a detailed list of product features, including which are avai
 | Custom IAM policy | ✅ | ❌ |
 | Custom security agents | ✅ | ❌ |
 | <h3>SLAs</h3> | BDP |[Community Edition](/docs/get-started/snowplow-community-edition/index.md)|
-| Collector uptime SLA | ✅ | ❌ | 
+| Collector uptime SLA | ✅ | ❌ |
 | Warehouse loading latency SLA | ✅ | ❌ |
-

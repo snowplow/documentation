@@ -1,7 +1,7 @@
 ---
 title: "Running your first data models"
-sidebar_position: 5
-sidebar_label: "Modeling data"
+sidebar_position: 7
+sidebar_label: "Run a data model"
 description: "Using a data model to aggregate your data"
 ---
 

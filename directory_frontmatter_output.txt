@@ -1,129 +1,64 @@
-docs/data-product-studio
-- title: "Defining the data to collect"
-- sidebar_label: "Data Product Studio"
-- sidebar_position: 60
+docs/get-started
+- title: "First steps with Snowplow"
+- sidebar_label: "Get started"
+- sidebar_position: 3
 
-	docs/data-product-studio/data-products
-	- title: "Defining the data to collect with Data Products"
-	- sidebar_label: "Data products"
-	- sidebar_position: 5
+	docs/get-started/custom-events
+	- title: "Creating your first custom events"
+	- sidebar_label: "Define custom events"
+	- sidebar_position: 8
 
-		docs/data-product-studio/data-products/api
-		- title: "Managing Data Products via the API"
-		- sidebar_label: "Using the API"
-		- sidebar_position: 3
-
-		docs/data-product-studio/data-products/data-product-templates
-		- title: "Data product templates"
-		- sidebar_label: "Using data product templates"
-		- sidebar_position: 2
-
-		docs/data-product-studio/data-products/ui
-		- title: "Managing Data Product using Console"
-		- sidebar_label: "Using the UI"
-		- sidebar_position: 1
-
-	docs/data-product-studio/data-quality
-	- title: "Data quality"
+	docs/get-started/deployment-model
+	- title: "Deployment model"
 	- sidebar_label: N/A
+	- sidebar_position: 1
+
+	docs/get-started/diving-deeper
+	- title: "Exploring Snowplow beyond the first steps"
+	- sidebar_label: "Dive deeper"
+	- sidebar_position: 11
+
+	docs/get-started/failed-events
+	- title: "Inspecting your first failed events"
+	- sidebar_label: "Inspect failed events"
+	- sidebar_position: 9
+
+	docs/get-started/feature-comparison
+	- title: "Product features"
+	- sidebar_label: "Feature comparison"
+	- sidebar_position: 2
+
+	docs/get-started/installing
+	- title: "Installing Snowplow"
+	- sidebar_label: N/A
+	- sidebar_position: 1
+
+	docs/get-started/modeling
+	- title: "Running your first data models"
+	- sidebar_label: "Run a data model"
 	- sidebar_position: 7
 
-		docs/data-product-studio/data-quality/data-structures-ci-tool
-		- title: "Using the Data Structures CI tool"
-		- sidebar_label: "Data Structures CI tool"
-		- sidebar_position: 4
-
-		docs/data-product-studio/data-quality/failed-events
-		- title: "Managing data quality"
-		- sidebar_label: "Failed events"
-		- sidebar_position: 3
-
-		docs/data-product-studio/data-quality/snowplow-inspector
-		- title: "Snowplow Inspector"
-		- sidebar_label: N/A
-		- sidebar_position: 1
-
-		docs/data-product-studio/data-quality/snowplow-micro
-		- title: "Snowplow Micro"
-		- sidebar_label: N/A
-		- sidebar_position: 2
-
-	docs/data-product-studio/data-structures
-	- title: "Data structures"
-	- sidebar_label: N/A
-	- sidebar_position: 3
-
-		docs/data-product-studio/data-structures/manage
-		- title: "Managing data structures"
-		- sidebar_label: "Manage"
-		- sidebar_position: 1
-
-		docs/data-product-studio/data-structures/version-amend
-		- title: "Versioning data structures"
-		- sidebar_label: "Verson and amend"
-		- sidebar_position: 2
-
-	docs/data-product-studio/event-specifications
-	- title: "Managing Event Specifications in the Console"
-	- sidebar_label: "Event specifications"
-	- sidebar_position: 4
-
-		docs/data-product-studio/event-specifications/api
-		- title: "Managing Event Specifications via the API"
-		- sidebar_label: "Using the API"
-		- sidebar_position: 1
-
-		docs/data-product-studio/event-specifications/tracking-plans
-		- title: "Creating a tracking plan with event specifications"
-		- sidebar_label: "Creating a tracking plan"
-		- sidebar_position: 2
-
-	docs/data-product-studio/introduction-to-tracking-design
-	- title: "Introduction to tracking design"
-	- sidebar_label: "Tracking design"
-	- sidebar_position: 0
-
-		docs/data-product-studio/introduction-to-tracking-design/best-practices
-		- title: "Tracking design best practices"
-		- sidebar_label: N/A
-		- sidebar_position: N/A
-
-	docs/data-product-studio/snowtype
-	- title: "Code Generation - automatically generate code for Snowplow tracking SDKs"
-	- sidebar_label: "Snowtype"
+	docs/get-started/querying
+	- title: "Querying your first events"
+	- sidebar_label: "Query the data"
 	- sidebar_position: 6
 
-		docs/data-product-studio/snowtype/client-side-validation
-		- title: "Client-side validation"
-		- sidebar_label: N/A
-		- sidebar_position: 5
+	docs/get-started/snowplow-bdp
+	- title: "Setting up Snowplow Behavioral Data Platform"
+	- sidebar_label: "Snowplow BDP"
+	- sidebar_position: 3
 
-		docs/data-product-studio/snowtype/commands
-		- title: "Commands"
-		- sidebar_label: N/A
-		- sidebar_position: 4
+	docs/get-started/snowplow-community-edition
+	- title: "Setting up Snowplow Community Edition"
+	- sidebar_label: "Snowplow Community Edition"
+	- sidebar_position: 4
 
-		docs/data-product-studio/snowtype/getting-started
-		- title: "Get started with the Snowtype CLI"
-		- sidebar_label: N/A
-		- sidebar_position: 1
+	docs/get-started/tooling
+	- title: "Useful tools for working with Snowplow"
+	- sidebar_label: "Useful tools"
+	- sidebar_position: 10
 
-		docs/data-product-studio/snowtype/snowtype-config
-		- title: "Snowtype configuration options"
-		- sidebar_label: "Configuration options"
-		- sidebar_position: 3
-
-		docs/data-product-studio/snowtype/using-the-cli
-		- title: "Working with the Snowtype CLI"
-		- sidebar_label: Snowtype CLI
-		- sidebar_position: 2
-
-		docs/data-product-studio/snowtype/working-with-gtm
-		- title: "Using Snowtype with Google Tag Manager"
-		- sidebar_label: N/A
-		- sidebar_position: 6
-
-	docs/data-product-studio/source-applications
-	- title: "Organize data sources with Source Applications"
-	- sidebar_label: "Source applications"
-	- sidebar_position: 2
+	docs/get-started/tracking
+	- title: "Tracking your first events"
+	- sidebar_label: "Track events"
+	- sidebar_position: 5

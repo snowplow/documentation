@@ -1,7 +1,8 @@
 ---
-title: "Managing users"
+title: "User management"
 date: "2020-02-15"
-sidebar_position: 30
+sidebar_position: 2
+sidebar_label: "User management"
 ---
 
 ```mdx-code-block

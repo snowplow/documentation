@@ -1,7 +1,7 @@
 ---
 title: "Tracking your first events"
-sidebar_position: 3
-sidebar_label: "Tracking events"
+sidebar_position: 5
+sidebar_label: "Track events"
 description: "Tracking your first Snowplow events"
 ---
 

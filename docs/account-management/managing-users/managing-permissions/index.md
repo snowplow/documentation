@@ -1,7 +1,7 @@
 ---
 title: "Managing user permissions in Console"
-sidebar_label: "Managing user permissions"
-sidebar_position: 30
+sidebar_label: "Permissions"
+sidebar_position: 2
 ---
 
 To set a users permissions, navigate to `Manage users` and then to the user who's account you'd like to manage.

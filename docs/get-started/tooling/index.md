@@ -1,6 +1,6 @@
 ---
 title: "Useful tools for working with Snowplow"
-sidebar_position: 2
+sidebar_position: 10
 sidebar_label: "Useful tools"
 description: "Tools that help test and debug Snowplow"
 ---

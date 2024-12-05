@@ -1,6 +1,6 @@
 ---
 title: "Deployment model"
-sidebar_position: 0.5
+sidebar_position: 1
 description: "Details on where and how Snowplow is deployed"
 ---
 

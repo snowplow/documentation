@@ -1,7 +1,7 @@
 ---
 title: "Exploring Snowplow beyond the first steps"
-sidebar_position: 8
-sidebar_label: "Diving deeper"
+sidebar_position: 11
+sidebar_label: "Dive deeper"
 description: "What to look at once you are familiar with Snowplow basics"
 ---
 

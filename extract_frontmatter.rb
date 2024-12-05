@@ -1,15 +1,9 @@
 #!/usr/bin/env ruby
 
-def extract_front_matter(input_file)
-  # Read the contents of the specified file
-  begin
-    file_contents = File.read(input_file)
-  rescue Errno::ENOENT
-    return "Error: File not found at #{input_file}"
-  end
+def extract_front_matter(input)
 
   # Extract front matter using regex
-  front_matter_match = file_contents.match(/^---\n(.*?)\n---/m)
+  front_matter_match = input.match(/^---\n(.*?)\n---/m)
 
   if front_matter_match
     front_matter = front_matter_match[1]
@@ -30,19 +24,19 @@ def extract_front_matter(input_file)
 
     # Build and return the results as a string
     <<~RESULTS.chomp
-    - title: #{title_quotes}#{title}#{title_quotes} | NEW:
-    - sidebar_label: #{sidebar_label_quotes}#{sidebar_label}#{sidebar_label_quotes} | NEW:
-    - sidebar_position: #{sidebar_position} | NEW:
+    - title: #{title_quotes}#{title}#{title_quotes}
+    - sidebar_label: #{sidebar_label_quotes}#{sidebar_label}#{sidebar_label_quotes}
+    - sidebar_position: #{sidebar_position}
     RESULTS
   else
-    "Error: No front matter found in #{input_file}"
+    "Error: No front matter found in #{input}"
   end
 end
 
 # If script is run directly (not required if using as a library)
 if __FILE__ == $0
   if ARGV.empty?
-    puts "Usage: ruby extract_frontmatter.rb /path/to/index.md"
+    puts "Usage: ruby extract_frontmatter.rb 'input string'"
     exit 1
   end
 

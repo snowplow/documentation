@@ -1,17 +1,29 @@
 #!/usr/bin/env ruby
 
-require 'fileutils'
+require_relative 'extract_frontmatter'
 
 input_file = 'directory_frontmatter_output.txt'
 
 def update_front_matter(input_file)
   directory_groups = parse_input_file(input_file)
-  directory_groups.map! { |group| extract_directory_details(group) }
 
-  directory_groups.each do |details|
-    current = current_front_matter(details[:path])
-    updated_front_matter = replace_properties(current, details)
-    write_front_matter(details[:path], updated_front_matter)
+  directory_groups.each do |new|
+    path = new[0]
+
+    current = current_front_matter(path)
+    old = extract_front_matter(current).split("\n")
+
+    all_properties = {
+          path:  new[0],
+          old_title: parse_properties(old[0]),
+          new_title: parse_properties(new[1]),
+          old_label: parse_properties(old[1]),
+          new_label: parse_properties(new[2]),
+          old_position: parse_properties(old[2]),
+          new_position: parse_properties(new[3]),
+        }
+    updated_front_matter = replace_properties(current, all_properties)
+    write_front_matter(path, updated_front_matter)
   end
 end
 
@@ -33,25 +45,14 @@ def parse_input_file(file_path)
   directory_groups
 end
 
-def extract_directory_details(directory_lines)
-  details = {
-    path: directory_lines[0].strip,
-    old_title: properties(directory_lines[1])[0],
-    new_title: properties(directory_lines[1])[1],
-    old_label: properties(directory_lines[2])[0],
-    new_label: properties(directory_lines[2])[1],
-    old_position: properties(directory_lines[3])[0],
-    new_position: properties(directory_lines[3])[1],
-  }
-  details
-end
-
-def properties(line)
-  match = line.match(/^- (title:|sidebar_label:|sidebar_position:) (.*?) \| NEW:\ ?[\"\']?(.*)\b[\"\']?/m)
+def parse_properties(line)
+  # puts "line: #{line}"
+  match = line.match(/^- (title:|sidebar_label:|sidebar_position:).*?\ *[\"\']?(.*)\b[\"\']?/m)
   if match
-    [match[2].strip, match[3].strip]
+  puts match
+    match[2].strip
   else
-    ["", ""]
+    ""
   end
 end
 
@@ -64,9 +65,13 @@ def current_front_matter(path)
     puts "File not found: #{index_file}"
   end
 
-  # Read the existing file content
-  content = File.read(index_file)
-  frontmatter_match = content.match(/---\n(.*?)\n---/m)
+  begin
+    file_contents = File.read(index_file)
+  rescue Errno::ENOENT
+    return "Error: File not found at #{index_file}"
+  end
+
+  frontmatter_match = file_contents.match(/---\n(.*?)\n---/m)
 
   unless frontmatter_match
     puts "No front matter found in: #{index_file}"
@@ -74,7 +79,7 @@ def current_front_matter(path)
   frontmatter_match[0]
 end
 
-def replace_properties(current, details)
+def replace_properties(current, new)
   replacements = [
     [:new_title, :old_title, /title: .*/, "title: \"%s\""],
     [:new_label, :old_label, /sidebar_label: .*/, "sidebar_label: \"%s\""],
@@ -82,8 +87,8 @@ def replace_properties(current, details)
   ]
 
   replacements.each do |new_key, old_key, pattern, format|
-    new_value = details[new_key]
-    old_value = details[old_key]
+    new_value = new[new_key]
+    old_value = new[old_key]
 
     if !new_value.empty? && (old_value != new_value)
       current.gsub!(pattern, format % (new_key == :new_position ? new_value.to_i : new_value))

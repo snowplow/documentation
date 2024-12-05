@@ -46,8 +46,13 @@ def frontmatter(path, depth)
   index_path = File.join(path, 'index.md')
 
   if File.exist?(index_path)
+    begin
+      file_contents = File.read(index_path)
+    rescue Errno::ENOENT
+      return "Error: File not found at #{index_path}"
+    end
     # Extract front matter
-    front_matter_result = extract_front_matter(index_path)
+    front_matter_result = extract_front_matter(file_contents)
 
     # Create indentation
     indent = "\t" * depth

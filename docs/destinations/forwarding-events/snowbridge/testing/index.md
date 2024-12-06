@@ -11,9 +11,15 @@ import CodeBlock from '@theme/CodeBlock';
 
 The easiest way to test Snowbridge configuration (e.g. transformations) is to run it locally. Ideally, you should also use a sample of data that is as close to the real world as possible. The sample file should contain the events/messages you’d like to test with, one per line.
 
-## Snowplow data — generating a sample
+## Snowplow data
 
-If you're working with Snowplow data, you can follow the [guide to use Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/basic-usage/index.md) to generate test data, using the `--output-tsv` to get the data into a file, as per the [exporting to tsv section](/docs/data-product-studio/data-quality/snowplow-micro/basic-usage/index.md#exporting-events-to-tsv).
+### Getting started
+
+You can get started working with Snowplow data by [downloading this file](./assets/input.txt) that contains a sample of web and mobile Snowplow events in TSV format. However, if you need events that match your actual events, use the following section of this guide to generate your own sample of events.
+
+### Generating a sample
+
+In order to generate your own sample of Snowplow data, you can follow the [guide to use Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/basic-usage/index.md) to generate test data, using the `--output-tsv` to get the data into a file, as per the [exporting to tsv section](/docs/data-product-studio/data-quality/snowplow-micro/basic-usage/index.md#exporting-events-to-tsv).
 
 For example, here we’re using a file named `data.tsv`:
 
@@ -30,7 +36,7 @@ Point some test environment tracking to `localhost:9090`, and your events should
 You can run Snowbridge locally via Docker:
 
 <CodeBlock language="bash">{
-`docker run --env SNOWBRIDGE_CONFIG_FILE="" --env ACCEPT_LIMITED_USE_LICENSE=yes snowplow/snowbridge:${versions.snowbridge}` 
+`docker run --env SNOWBRIDGE_CONFIG_FILE="" --env ACCEPT_LIMITED_USE_LICENSE=yes snowplow/snowbridge:${versions.snowbridge}`
 }</CodeBlock>
 
 The default configuration for Snowbridge uses the `stdin` source and the `stdout` target. So, to test sending data through with no transformations, we can run the following command (where `data.tsv` is a file with Snowplow events in TSV format):

@@ -1,70 +1,15 @@
 ---
-title: "Snowplow v3"
-date: "2021-11-18"
-sidebar_position: 100
+title: "Snowplow v3 Tags"
+sidebar_position: 1000
 ---
 
-This template implements the [Snowplow JavaScript tracker v3](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/index.md).
+Snowplow provides the following custom GTM Tag templates to use:
 
-The template supports all the features of the tracker, with a few exceptions due to the limitations of custom templates’ [sandboxed JavaScript](https://developers.google.com/tag-platform/tag-manager/templates/sandboxed-javascript).
+```mdx-code-block
+import DocCardList from '@theme/DocCardList';
 
-## Install the template
-
-To **install the template**, browse to **Templates** in the Google Tag Manager user interface.
-
-Under **Tag Templates**, click **Search Gallery**, and type `Snowplow v3` into the gallery overlay search bar.
-
-![search Snowplow v3 in GTM gallery](images/search_snowplow_v3.png)
-
-Click the **Snowplow v3** template name, and then click **Add to Workspace** in the next screen. Review the permissions and click **Add** to finalize the import.
-
-After importing the template, you can follow the normal process of creating a **new tag** in Google Tag Manager, and the **Snowplow v3** template will be listed among the **Custom** tag types you can choose from.
-
-## Caveats
-
-To begin with, some of the caveats of using the Custom Template.
-
-- Any methods that require the parsing of HTML elements (e.g. link tracking filter functions, cross domain linking) will not work and are thus disabled.
-- Automatic error tracking does not work due to lack of support for the `ErrorEvent` API.
-- There is no implementation for the [standard ecommerce](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#ecommerce-tracking) events. Users are encouraged to implement the [enhanced ecommerce](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#enhanced-ecommerce-tracking) setup instead.
-
-## Instructions
-
-Here are basic instructions for how to instrument the JavaScript tracker v3.
-
-In general, when the tag fires, it first checks if the Snowplow JavaScript library has been loaded from the self-hosted URL provided in the template settings (more on this below). Then, the tag checks whether a tracker with the given **Tracker Name** has already been initialized. If not, it proceeds to initialize the new tracker.
-
-Finally, the tag bundles a **command** from the settings in the tag, and sends it to the given **Collector Endpoint**.
-
-### Settings Configuration
-
-The Tag template requires a [Snowplow v3 Settings](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/google-tag-manager-custom-template/v3-settings-variable/index.md) Variable template to be configured which can be referenced within the Tag. This settings template contains the information required for the Tag to appropriately initialize the tracker.
-
-Once a settings variable has been configured, it can be attached to the Tag in the **Tracker Initialisation** section.
-
-![tracker initialization](images/tracker_initialization.png)
-
-You can also choose to override some of the parameters specifically for this tag if you wish to, such as the Tracker Name or the Collector Endpoint.
-
-#### Self Hosted JavaScript Tracker
-
-If you have the Snowplow library [self-hosted](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/hosting-the-javascript-tracker/index.md), and have configured it as such in your Settings variable, you need to update the **Injects Scripts** permission to reflect the new location, by editing the **Snowplow Analytics v3 Tag template**. Delete the content of the **Allowed URL Match Patterns** field, and type the full URL to the library there. Again, it must match what you input into the tag itself when creating it.
-
-![modifying permissions](images/modifying_permissions.png)
-
-Modifying permissions **breaks the gallery link** and you will no longer be notified about updates to the template.
-
-![modifying permissions breaks gallery link](images/modifying_breaks_gallery_link.png)
-
-:::note
-
-Since v1.1.0, an alternative to prevent breaking the gallery update link is to use the `Do not load` option from the corresponding drop down menu:
-
-![library host drop down 'Do not load' option](images/host_drop_down_no_load.png)
-
-Using this option means that the Snowplow v3 Tag will not inject the Snowplow JavaScript Tracker library on the page and can be used **only** when the Tracker Snippet is loaded with another technique, e.g. directly on the page or through another GTM tag. (This is also supported as a configuration option since v1.2.0 of the [Snowplow v3 Settings](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/google-tag-manager-custom-template/v3-settings-variable/index.md) Variable.)
-
-:::
+<DocCardList />
+```
 
 ### Tag Type
 
@@ -116,7 +61,7 @@ If you choose the first, the template will look into the `dataLayer` structure f
 
 If you selected **Choose Variable**, you need to provide a GTM variable that returns an object in the correct, expected format.
 
-For Google Analytics 4 compatible ecommerce tracking, see the dedicated [Snowplow v3 Ecommerce Tag](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/google-tag-manager-custom-template/v3-tags/ecommerce-tag-template/index.md) template instead.
+For Google Analytics 4 compatible ecommerce tracking, see the dedicated [Snowplow v3 Ecommerce Tag](/docs/collecting-data/collecting-from-own-applications/google-tag-manager/previous-versions/v3/v3-tags/ecommerce-tag-template/index.md) template instead.
 
 ##### Form Tracking
 
@@ -175,7 +120,3 @@ Using the **Context Entities** table allows you to attach [custom context entiti
 #### Set Custom Timestamp
 
 You can also choose to [set the True Timestamp](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#setting-the-true-timestamp) with this field. The format must be UNIX time in milliseconds.
-
-## Acknowledgements
-
-Thanks to [Simo Ahava](https://www.simoahava.com/) for building the initial release of this template.

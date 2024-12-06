@@ -86,7 +86,7 @@ Here you can specify a variable returning an object holding additional informati
 
 ### Tracker Settings
 
-The Snowplow v3 Ecommerce tag template **requires** a Snowplow v3 Settings Variable to be setup. In this section you can select the Google Tag Manager variable of type [Snowplow v3 Settings](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/google-tag-manager-custom-template/v3-settings-variable/index.md) to use.
+The Snowplow v3 Ecommerce tag template **requires** a Snowplow v3 Settings Variable to be setup. In this section you can select the Google Tag Manager variable of type [Snowplow v3 Settings](/docs/collecting-data/collecting-from-own-applications/google-tag-manager/previous-versions/v3/v3-settings-variable/index.md) to use.
 
 ### Plugin Settings
 

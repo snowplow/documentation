@@ -195,6 +195,7 @@ trackProductListClick({
 - Where `name` is the name of the list the product is currently in. For the list names, you can use any kind of friendly name or a codified language to express the labeling of the list. E.g. 'Shoes - Men - Sneakers','Search results: "unisex shoes"', 'Product page upsells'
 
 ### trackPromotionView
+
 ```js
 import { trackPromotionView } from '@snowplow/browser-plugin-snowplow-ecommerce';
 
@@ -431,7 +432,6 @@ On internal promotion events, an internal promotion can have the following attri
 | creative_id | `string` | Identifier/Name/Url for the creative presented on this promotion element. | ✘ |
 | type | `string` | The type of the promotion delivery mechanism. E.g. popup, banner, intra-content. | ✘ |
 | slot | `string` | The website slot in which the promotional content was added to. E.g. Identifier for slot sidebar-1, intra-content-2. | ✘ |
-
 
 <a href="https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/promotion/jsonschema" target="_blank" rel="noreferrer noopener">Relevant Iglu schema</a>
 
@@ -787,3 +787,5 @@ trackGA4Transaction({
 ```
 
 - Where `paymentMethod` is the payment method selected in this transaction. This attributes corresponds to the `payment_method` of the [transaction schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.ecommerce/transaction/jsonschema/1-0-0#L30). Defaults to `unknown`.
+
+*[UA]: Universal Analytics

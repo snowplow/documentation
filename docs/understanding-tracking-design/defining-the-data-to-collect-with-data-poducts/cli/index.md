@@ -31,18 +31,18 @@ Installed and configured [Snowplow CLI](/docs/pipeline-components-and-applicatio
 
 This command creates a minimal data product template in a new file `./data-products/my-data-product.yaml`.
 
-### Creating source app
+### Creating source application
 
 ```bash
 ./snowplow-cli dp generate --source-app my-source-app
 
 ```
 
-This command creates a minimal source app template in a new file `./data-products/source-apps/my-source-app.yaml`.
+This command creates a minimal source application template in a new file `./data-products/source-apps/my-source-app.yaml`.
 
-### Creating event spec
+### Creating event specification
 
-To create an event spec, you need to modify the existing data-product file and add an event spec object. Here's a minimal example:
+To create an event specification, you need to modify the existing data-product file and add an event specification object. Here's a minimal example:
 
 ```yaml title="./data-products/test-cli.yaml"
 apiVersion: v1
@@ -80,7 +80,7 @@ data:
 
 ### Modifying the event specifications source applications
 
-By default event specs inherit all the source apps of the data product. If you want to customise it, you can use the `excludedSourceApplications` in the event spec description to remove a given source application from an event spec
+By default event specifications inherit all the source applications of the data product. If you want to customise it, you can use the `excludedSourceApplications` in the event specification description to remove a given source application from an event spec.
 
 ```yaml title="./data-products/test-cli.yaml"
 apiVersion: v1
@@ -103,7 +103,7 @@ data:
           event:
             source: iglu:com.snowplowanalytics.snowplow/button_click/jsonschema/1-0-0
 ```
-In this example event spec `All source apps` is related to both `generic` and `specific` source apps, but event spec `Not quite everything` is related only to the `generic` source app
+In this example event specification `All source apps` is related to both `generic` and `specific` source apps, but event specification `Not quite everything` is related only to the `generic` source application.
 
 
 ### Downloading data products, event specifications and source apps
@@ -112,15 +112,15 @@ In this example event spec `All source apps` is related to both `generic` and `s
 ./snowplow-cli dp download
 ```
 
-This command retrieves all organization data products, event specifications, and source apps. By default, it creates a folder named `data-products` in your current working directory. You can specify a different folder name as an argument if needed. 
+This command retrieves all organization data products, event specifications, and source applications. By default, it creates a folder named `data-products` in your current working directory. You can specify a different folder name as an argument if needed. 
 
 The command creates the following structure:
 - A main `data-products` folder containing your data product files
-- A `source-apps` subfolder containing source app definitions
-- Event specifications embedded within their related data product files
+- A `source-apps` subfolder containing source application definitions
+- Event specifications embedded within their related data product files.
 
 
-### Validating data products, event specifications and source apps
+### Validating data products, event specifications and source applications
 
 ```bash
 ./snowplow-cli dp validate
@@ -129,13 +129,13 @@ The command creates the following structure:
 This command scans all files under `./data-products` and validates them using the BDP console. It checks:
 
 1. Whether each file is in a valid format (YAML/JSON) with correctly formatted fields
-2. Whether all source app references in the data product files are valid
+2. Whether all source application references in the data product files are valid
 3. Whether event specification rules are compatible with their schemas
 
 If validation fails, the command displays the errors in the console and exits with status code 1.
 
 
-### Publishing data products, event specifications and source apps
+### Publishing data products, event specifications and source applications
 
 ```bash
 ./snowplow-cli dp publish

@@ -7,11 +7,11 @@ sidebar_position: 999
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-`snowplow-cli` means to bring Snowplow Console into the command line. It allows you to download your data structures and data products to yaml/json files and publish them back to console. This enables the git-ops workflow, with reviews and brancing.
+`snowplow-cli` brings data management elements of Snowplow Console into the command line. It allows you to download your data structures and data products to yaml/json files and publish them back to console. This enables git-ops-like workflows, with reviews and brancing.
 
 # Install
 
-Snowplow CLI can be installed with [homebrew](https://brew.sh/)
+Snowplow CLI can be installed with [homebrew](https://brew.sh/):
 ```
 brew install snowplow-product/taps/snowplow-cli
 ```
@@ -39,9 +39,9 @@ Verify the installation with
 
 You will need three values.
 
-API Key Id and API Key Secret are generated from the [credentials section](https://console.snowplowanalytics.com/credentials) in BDP Console.
+An API Key Id and the corresponding API Key (secret), which are generated from the [credentials section](https://console.snowplowanalytics.com/credentials) in BDP Console.
 
-Organization Id can be retrieved from the URL immediately following the .com when visiting BDP console:
+The organization ID, which can be retrieved from the URL immediately following the .com when visiting BDP console:
 
 ![](./images/orgID.png)
 
@@ -82,4 +82,4 @@ Snowplow CLI defaults to yaml format. It can be changed to json by either provid
 # Use cases
 
 - [Manage your data structures with snowplow-cli](/docs/understanding-tracking-design/managing-your-data-structures/cli/index.md)
-- [Set up a github CI/CD pipeline to manage data structures](/docs/recipes/recipe-data-structures-in-git/index.md)
+- [Set up a github CI/CD pipeline to manage data structures and data products](/docs/recipes/recipe-data-structures-in-git/index.md)

@@ -80,7 +80,7 @@ data:
 
 ### Modifying the event specifications source applications
 
-By default event specifications inherit all the source applications of the data product. If you want to customise it, you can use the `excludedSourceApplications` in the event specification description to remove a given source application from an event spec.
+By default event specifications inherit all the source applications of the data product. If you want to customise it, you can use the `excludedSourceApplications` in the event specification description to remove a given source application from an event specification.
 
 ```yaml title="./data-products/test-cli.yaml"
 apiVersion: v1

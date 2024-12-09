@@ -29,11 +29,11 @@ vars:
   snowplow_unified:
     snowplow__conversion_events: [
       {
-        "name": "purchase", // Required, name of the conversion, string (must be valid SQL column name)
-        "condition": " event_name == 'purchase' ", // Required, valid SQL condition that returns true or false
-        "value": " 1 ", // Optional but recommended, can be field name or SQL
-        "default_value": "0", // Optional, can be field name or SQL
-        "list_events": "true"// Optional, boolean
+        "name": "purchase", # Required, name of the conversion, string (must be valid SQL column name)
+        "condition": " event_name == 'purchase' ", # Required, valid SQL condition that returns true or false
+        "value": " 1 ", # Optional but recommended, can be field name or SQL
+        "default_value": "0", # Optional, can be field name or SQL
+        "list_events": "true" # Optional, boolean
       }
     ]
 ```

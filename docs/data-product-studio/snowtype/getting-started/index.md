@@ -1,5 +1,5 @@
 ---
-title: "Get started with the Snowtype CLI"
+title: "Get started with Snowtype"
 sidebar_position: 1
 ---
 
@@ -38,7 +38,7 @@ yarn add --dev @snowplow/snowtype
   <TabItem value="pnpm" label="pnpm">
 
 ```bash
-pnpm add --save-dev @snowplow/snowtype 
+pnpm add --save-dev @snowplow/snowtype
 ```
 
   </TabItem>
@@ -72,11 +72,10 @@ yarn snowtype init
 ```bash
 pnpm @snowplow/snowtype init
 # Same as
-pnpm snowtype init 
+pnpm snowtype init
 ```
 
   </TabItem>
 </Tabs>
 
 _We will show example commands using `npm/npx` but it should work the same with any other package manager._
-

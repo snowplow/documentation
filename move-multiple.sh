@@ -3,6 +3,7 @@
 # Move commands
 # Starting path, end path, optional new sidebar label
 moves=(
+    # Example move command:
     # "docs/collecting-data docs/sources Sources",
     # "docs/sources/collecting-data-from-third-parties docs/sources/webhooks"
     # "docs/sources/collecting-from-own-applications docs/sources/trackers"

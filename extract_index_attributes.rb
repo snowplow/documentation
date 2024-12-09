@@ -1,14 +1,14 @@
 #!/usr/bin/env ruby
 
-require_relative 'extract_frontmatter'
-
-# Function to (optionally) recursively extract front matter from `index.md` files in directories.
-# NB the recursion is capped at 2 levels deep so it doesn't get confusing.
+# Function to extract front matter from `index.md` files in directories.
 #
-# Usage non-recursive: ruby extract_directories_frontmatter.rb /path/to/base/directory
-# Or for recursive output: ruby extract_directories_frontmatter.rb -r /path/to/base/directory
+# Usage:
+# ruby extract_index_attributes.rb /docs/path/to/directory
 #
-# Output will be in file `directory_frontmatter_output.txt` in this directory
+# Or for one extra level of nested folders (-r flag):
+# ruby extract_index_attributes.rb -r /docs/path/to/directory
+#
+# Output will be in file `update_attributes_here.txt` in this directory
 
 def extract_directory_front_matter(base_path, recursive: false)
   # Ensure the base path exists and is a directory
@@ -31,7 +31,13 @@ def process_directory(results, path, recursive, depth = 0)
   # Collect all directories to process
   dirs_to_process = find_directories(path)
 
-  if dirs_to_process.size != 0 && depth < 2
+  if recursive
+    max_depth = 2
+  else
+    max_depth = 1
+  end
+
+  if dirs_to_process.size != 0 && depth < max_depth
     dirs_to_process.each do |entry|
       process_directory(results, File.join(path, entry), recursive, depth + 1)
     end
@@ -60,6 +66,39 @@ def frontmatter(path, depth)
     "#{indent}#{path}\n#{front_matter_result.gsub(/^/, indent)}"
   else
     nil
+  end
+end
+
+def extract_front_matter(input)
+
+  # Extract front matter using regex
+  front_matter_match = input.match(/^---\n(.*?)\n---/m)
+
+  if front_matter_match
+    front_matter = front_matter_match[1]
+
+    # Extract specific properties, preserving original quotes
+    title_match = front_matter.match(/title:\s*(["']?)([^"'\n]+)\1/)
+    sidebar_position_match = front_matter.match(/sidebar_position:\s*(\d+)/)
+    sidebar_label_match = front_matter.match(/sidebar_label:\s*(["']?)([^"'\n]+)\1/)
+
+    # Prepare results
+    title = title_match ? title_match[2].strip : 'N/A'
+    sidebar_position = sidebar_position_match ? sidebar_position_match[1] : 'N/A'
+    sidebar_label = sidebar_label_match ? sidebar_label_match[2].strip : 'N/A'
+
+    # Determine if quotes were present in the original
+    title_quotes = title_match ? title_match[1] : ''
+    sidebar_label_quotes = sidebar_label_match ? sidebar_label_match[1] : ''
+
+    # Build and return the results as a string
+    <<~RESULTS.chomp
+    - title: #{title_quotes}#{title}#{title_quotes}
+    - sidebar_label: #{sidebar_label_quotes}#{sidebar_label}#{sidebar_label_quotes}
+    - sidebar_position: #{sidebar_position}
+    RESULTS
+  else
+    "Error: No front matter found"
   end
 end
 
@@ -103,7 +142,7 @@ if __FILE__ == $0
   output = extract_directory_front_matter(ARGV[0], recursive: options[:recursive])
 
   # Write output to file in the same directory as the script
-  output_file = File.join(File.dirname(__FILE__), 'directory_frontmatter_output.txt')
+  output_file = File.join(File.dirname(__FILE__), 'update_attributes_here.txt')
 
   File.open(output_file, 'w') do |file|
     # Join results with two newlines for separation

@@ -469,8 +469,6 @@ The config file is a JSON file which can be viewed by running the python script 
 
 An example configuration can be found in the `utils/example_normalize_config.json` file within the package.
 
-In Snowplow BDP, you can use the [Tracking Catalog](/docs/discovering-data/tracking-catalog/index.md) to discover which events you are tracking and the contexts enabled for each event, however you will still need to get the schema urls from your Data Structures.
-
 :::tip
 You should keep your configuration file, and your resolver file if you have one, at your project level and not inside the the snowplow-normalize package to avoid them being overwritten/deleted when the package is updated.
 
@@ -510,7 +508,7 @@ The snowplow-normalize package handles this for you, all you have to do is make 
 
 The columns will then appear as part of the derived model configuration and will then be coalesced when compiled.
 
-```jinja2 title="normalized_model.sql" 
+```jinja2 title="normalized_model.sql"
 {%- set sde_cols = ['UNSTRUCT_EVENT_COM_SNOWPLOWANALYTICS_SNOWPLOW_GEOLOCATION_CONTEXT_1_0_0', 'UNSTRUCT_EVENT_COM_SNOWPLOWANALYTICS_SNOWPLOW_GEOLOCATION_CONTEXT_1_1_0'] -%}
 ```
 :::

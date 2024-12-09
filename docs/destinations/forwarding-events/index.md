@@ -1,6 +1,6 @@
 ---
-title: "Forwarding Events"
-sidebar_position: 3
+title: "Forwarding events"
+sidebar_position: 2
 ---
 
 Snowplow supports many ways to forward events to a variety of platforms. Snowplow has native integrations as well as supporting Snowplow, vendor and community authored destinations via Google Tag Manager Server Side.

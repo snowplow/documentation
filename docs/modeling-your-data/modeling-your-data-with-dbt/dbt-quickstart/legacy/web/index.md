@@ -14,10 +14,10 @@ import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
 
 In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web events dataset being available in your database:
 
-- [Snowplow Javascript tracker](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/index.md) version 2 or later implemented.
-- Web Page context [enabled](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md#webpage-context) (enabled by default in [v3+](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md#webpage-context)).
-- [Page view events](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#page-views) implemented.
-- From version v0.13.0 onwards you must be using [RDB Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) v4.0.0 and above, or [BigQuery Loader](/docs/pipeline-components-and-applications/loaders-storage-targets/snowplow-rdb-loader/index.md) v1.0.0 and above. If you are not using these versions, or are using the Postgres loader, you will need to set `snowplow__enable_load_tstamp` to `false` in your `dbt_project.yml` and will not be able to use the consent models.
+- [Snowplow Javascript tracker](/docs/sources/trackers/javascript-trackers/index.md) version 2 or later implemented.
+- Web Page context [enabled](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md#webpage-context) (enabled by default in [v3+](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md#webpage-context)).
+- [Page view events](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/index.md#page-views) implemented.
+- From version v0.13.0 onwards you must be using [RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) v4.0.0 and above, or [BigQuery Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) v1.0.0 and above. If you are not using these versions, or are using the Postgres loader, you will need to set `snowplow__enable_load_tstamp` to `false` in your `dbt_project.yml` and will not be able to use the consent models.
 
 ## Installation
 
@@ -66,9 +66,9 @@ Please note that your `target.database` is NULL if using Databricks. In Databric
 
 The web package has the option to join in data from the following 3 Snowplow enrichments:
 
-- [IAB enrichment](/docs/enriching-your-data/available-enrichments/iab-enrichment/index.md)
-- [UA Parser enrichment](/docs/enriching-your-data/available-enrichments/ua-parser-enrichment/index.md)
-- [YAUAA enrichment](/docs/enriching-your-data/available-enrichments/yauaa-enrichment/index.md)
+- [IAB enrichment](/docs/pipeline/enrichments/available-enrichments/iab-enrichment/index.md)
+- [UA Parser enrichment](/docs/pipeline/enrichments/available-enrichments/ua-parser-enrichment/index.md)
+- [YAUAA enrichment](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md)
 
 By default these are **all disabled** in the web package. Assuming you have the enrichments turned on in your Snowplow pipeline, to enable the contexts within the package please add the following to your `dbt_project.yml` file:
 
@@ -94,7 +94,7 @@ vars:
 
 ### 6. Verify page ping variables
 
-The web package processes page ping events to calculate web page engagement times. If your [tracker configuration](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#activity-tracking-page-pings) for `min_visit_length` (default 5) and `heartbeat` (default 10) differs from the defaults provided in this package, you can override by adding to your `dbt_project.yml`:
+The web package processes page ping events to calculate web page engagement times. If your [tracker configuration](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/index.md#activity-tracking-page-pings) for `min_visit_length` (default 5) and `heartbeat` (default 10) differs from the defaults provided in this package, you can override by adding to your `dbt_project.yml`:
 
 ```yml title="dbt_project.yml"
 vars:
@@ -144,6 +144,6 @@ The package comes with additional modules and functionality that you can enable,
 
 :::tip
 
-For some common analytical queries to run on the derived web data, take a look at our page [here](/docs/recipes/recipe-dbt-web-queries/index.md)!
+For some common analytical queries to run on the derived web data, take a look at our page [here](/docs/resources/recipes-tutorials/recipe-dbt-web-queries/index.md)!
 
 :::

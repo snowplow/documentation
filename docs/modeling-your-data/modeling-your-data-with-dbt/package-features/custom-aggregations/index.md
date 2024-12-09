@@ -27,7 +27,7 @@ vars:
 ```
 The aggregation always runs on the [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md#events-this-run) table so all events (with a session identifier) and columns are available for you to use.
 
-Note that how to extract and use field from your entity or self-describing event columns will depend on your warehouse (see our [querying guide](/docs/storing-querying/querying-data/index.md#entities) for more information), and you are unable to use dbt macros in this variable. 
+Note that how to extract and use field from your entity or self-describing event columns will depend on your warehouse (see our [querying guide](/docs/destinations/warehouses-lakes/querying-data/index.md#entities) for more information), and you are unable to use dbt macros in this variable. 
 
 ### Supported Aggregations
 Currently we support the following aggregations:

@@ -1,0 +1,52 @@
+```mdx-code-block
+import Link from '@docusaurus/Link';
+```
+
+<tr>
+    <td><code>monitoring.metrics.*</code></td>
+    <td>Send metrics to a StatsD server or stdout.</td>
+</tr>
+<tr>
+    <td><code>monitoring.metrics.statsd.*</code></td>
+    <td>Optional. For sending metrics (good and bad event counts) to a StatsD server.</td>
+</tr>
+<tr>
+    <td><code>monitoring.metrics.statsd.hostname</code></td>
+    <td>Required if <code>monitoring.metrics.statsd</code> section is configured. The host name of the StatsD server.</td>
+</tr>
+<tr>
+    <td><code>monitoring.metrics.statsd.port</code></td>
+    <td>Required if <code>monitoring.metrics.statsd</code> section is configured. Port of the StatsD server.</td>
+</tr>
+<tr>
+    <td><code>monitoring.metrics.statsd.tags</code></td>
+    <td>Optional. Tags which are used to annotate the StatsD metric with any contextual information.</td>
+</tr>
+<tr>
+    <td><code>monitoring.metrics.statsd.prefix</code></td>
+    <td>Optional. Configures the prefix of StatsD metric names. The default is <code>snoplow.transformer</code>.</td>
+</tr>
+<tr>
+    <td><code>monitoring.metrics.stdout.*</code></td>
+    <td>Optional. For sending metrics to stdout.</td>
+</tr>
+<tr>
+    <td><code>monitoring.metrics.stdout.prefix</code></td>
+    <td>Optional. Overrides the default metric prefix.</td>
+</tr>
+<tr>
+    <td><code>telemetry.disable</code></td>
+    <td>Optional. Set to <code>true</code> to disable <Link to="/docs/get-started/snowplow-community-edition/telemetry/">telemetry</Link>.</td>
+</tr>
+<tr>
+    <td><code>telemetry.userProvidedId</code></td>
+    <td>Optional. See <Link to="/docs/get-started/snowplow-community-edition/telemetry/#how-can-i-help">here</Link> for more information.</td>
+</tr>
+<tr>
+    <td><code>monitoring.sentry.dsn</code></td>
+    <td>Optional. For tracking runtime exceptions.</td>
+</tr>
+<tr>
+    <td><code>featureFlags.enableMaxRecordsPerFile</code> (since 5.4.0) </td>
+    <td>Optional, default = true. When enabled, <code>output.maxRecordsPerFile</code> configuration parameter is going to be used.</td>
+</tr>

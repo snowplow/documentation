@@ -1,6 +1,6 @@
 ---
 title: "Running standard models via Snowplow BDP"
-sidebar_label: "🆕 Standard models"
+sidebar_label: "Standard models"
 sidebar_position: 1
 ---
 

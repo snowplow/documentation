@@ -10,7 +10,7 @@ Example:
 https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/snowplow-builtin/spEnrichedToJson-minimal-example.hcl
 ```
 
-The transformation to JSON is done via the [analytics SDK](/docs/destinations/analytics-sdk/index.md) logic, specifically in this case the [Golang analytics SDK](/docs/destinations/analytics-sdk/analytics-sdk-go/index.md).
+The transformation to JSON is done via the [analytics SDK](/docs/api-reference/analytics-sdk/index.md) logic, specifically in this case the [Golang analytics SDK](/docs/api-reference/analytics-sdk/analytics-sdk-go/index.md).
 
 In brief, the relevant logic here is that:
 

@@ -2,10 +2,23 @@
 
 This is the source for https://docs.snowplow.io/docs.
 
-* [Contributing](#contributing)
-* [How to preview locally](#how*to-preview-locally)
-* [Organizing content](#organizing-content)
-* [Formatting content](#formatting-content)
+- [Contributing](#contributing)
+- [How to preview locally](#how-to-preview-locally)
+- [Organizing content](#organizing-content)
+  - [Sidebar](#sidebar)
+    - [Updating sidebar attributes for multiple sections at once](#updating-sidebar-attributes-for-multiple-sections-at-once)
+  - [Offerings](#offerings)
+  - [Links](#links)
+  - [Concepts](#concepts)
+  - [Reusable fragments](#reusable-fragments)
+  - [Versioned modules](#versioned-modules)
+  - [Moving pages around](#moving-pages-around)
+    - [Moving multiple pages around at once](#moving-multiple-pages-around-at-once)
+- [Formatting content](#formatting-content)
+  - [Formatting your work using prettier](#formatting-your-work-using-prettier)
+  - [Images](#images)
+- [VSCode Snippets](#vscode-snippets)
+
 
 ## Contributing
 
@@ -48,6 +61,49 @@ The sidebar on the left follows [file structure](https://github.com/snowplow/doc
 
 To control the position of a section in the sidebar, go to the `index.md` file for that section and adjust the `sidebar_position` attribute at the top (see [this example](https://github.com/snowplow/documentation/blob/main/docs/tutorials/index.md)). Sidebar positions are just numbers, and you can use any number as long as the order is correct.
 
+The text shown in the sidebar doesn't have to be the same as the page title. Use the `sidebar_label` attribute to specify a different label for the section.
+
+#### Updating sidebar attributes for multiple sections at once
+
+To update the `sidebar_position`, `sidebar_label`, and/or page title for multiple sections in one go, you can use the `extract_index_attributes.rb` script followed by the `update_index_attributes.rb` script. They're both in the root of this repo.
+
+Use the `extract_index_attributes.rb` script like this, providing a path to the parent folder you're interested in:
+
+```bash
+ruby extract_index_attributes.rb docs/collecting-data
+```
+
+It will output the relevant attributes of that folder's `index.md` file, and the `index.md` files of subfolders in it (just 1 level deep), into a new file called `update_attributes_here.txt` (in the repo root). The file will look something like this:
+
+```txt
+docs/data-product-studio/data-quality/failed-events
+- title: "Managing data quality"
+- sidebar_label: "Failed events"
+- sidebar_position: 3
+
+	docs/data-product-studio/data-quality/failed-events/exploring-failed-events
+	- title: "Exploring failed events"
+	- sidebar_label: "Explore"
+	- sidebar_position: 3
+```
+Update the attributes to the new values you want. You can delete the sections for any folders you don't want to edit.
+
+To also output the attributes of the next level of subfolders inside each subfolder (so 2 levels deep in total), use the `-r` flag:
+
+```bash
+ruby extract_index_attributes.rb -r docs/collecting-data
+```
+
+Once you finish editing `update_attributes_here.txt`, save the file and run the `update_index_attributes.rb` script:
+
+```bash
+ruby update_index_attributes.rb
+```
+
+It'll update the `index.md` files as appropriate.
+
+You can now delete the `update_attributes_here.txt` file.
+
 ### Offerings
 
 Some documentation is only relevant to a particular offering. You can indicate it like this:
@@ -73,6 +129,8 @@ Whenever the same functionality can be achieved in multiple offerings but in a d
 For links within this documentation, please end the link with `/index.md`. This way all links will be checked, and you’ll get an error if a link is broken at any point.
 
 If you forgot to do this, you can quickly fix a bunch of links by running `./make-links-validatable.sh`. (You might need to install the `moreutils` package via `brew install moreutils` to get the `sponge` command.)
+
+Avoid using relative links (e.g. `../../setup/index.md`) unless within a versioned module section.
 
 ### Concepts
 
@@ -103,7 +161,7 @@ You can create reusable fragments and include them in multiple files (see [this 
 
 Some of our modules are versioned (e.g. trackers, loaders). Here are a few simple rules to follow.
 
-* Within pages for versioned modules, use **relative links** (e.g. `../setup/index.md`) when pointing to pages for the same version. This helps moving directories around without breaking the links.
+* Within pages for versioned modules ONLY, use **relative links** (e.g. `../setup/index.md`) when pointing to pages for the same version. This helps moving directories around without breaking the links.
 * For the latest docs, **don’t include the version number in the URL**. Otherwise we’d need to update internal links to it with every version change (also, it would get indexed and we’ll need to add a redirect later to avoid breaking external links). For example, see the [Scala tracker docs](https://github.com/snowplow/documentation/tree/main/docs/collecting-data/collecting-from-own-applications/scala-tracker) — the path ends with `scala-tracker` rather than `scala-tracker-2-0`.
 * **Put older versions in a single folder, e.g. `previous-versions/`**. In the `index.md` for that folder, add the following:
   ```
@@ -132,6 +190,37 @@ Note: the script is somewhat brittle, and you need to follow these rules:
 * Use relative paths, starting with `docs/` (like above)
 * End the path on a directory, rather than an `index.md`
 * Do not include trailing slashes
+
+#### Moving multiple pages around at once
+
+To move multiple sections at once, use the `move-multiple.sh` script. It's a wrapper around the `move.sh` script, so it has the same limitations as that one.
+
+Add the old and new paths to the `moves` array at the top of the `move-multiple.sh` script. For example:
+
+```bash
+moves=(
+    "docs/collecting-data docs/sources",
+    "docs/contributing docs/resources/contributing"
+)
+```
+
+Run the script with
+
+```bash
+./move-multiple.sh
+```
+
+It will run the `move.sh` script for each move command, in order. If a folder in the new path doesn't exist, it'll create it.
+
+Additionally, you can add a new sidebar label for each move command. It'll be added to (or update existing) the `index.md` file of the moved folder. This can make it easier to find your rearranged pages.
+
+For example:
+
+```bash
+moves=(
+    "docs/collecting-data docs/sources Sources NEW Update this",
+)
+```
 
 ## Formatting content
 

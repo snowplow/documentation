@@ -16,7 +16,7 @@ The Snowplow Console's UI offers excellent facilities to get started quickly wit
 
 A common solution when faced with these requirements is to move management to some form of version control platform (github/gitlab). This opens up an entire ecosystem of tools and patterns enabling all manner of custom workflows.
 
-We have built [Snowplow CLI](/docs/pipeline-components-and-applications/cli/index.md) to help you bridge the gap between these repository based workflows and BDP Console.
+We have built [Snowplow CLI](/docs/pipeline-components-and-applications/cli/index.md) to help you bridge the gap between these repository-based workflows and BDP Console.
 
 ## Prerequisites
 
@@ -372,7 +372,7 @@ First, we'll create a source application to represent our website that will send
 snowplow-cli dp generate --source-app website
 ```
 :::note
-`dp` is an alias for `data-products`. Source apps and event specsifications are also managed by this command
+`dp` is an alias for `data-products`. Source applications and event specifications are also managed by this command
 :::
 
 This should provide the following output
@@ -380,7 +380,7 @@ This should provide the following output
 INFO generate wrote kind="source app" file=data-products/source-apps/website.yaml
 ```
 
-The generated file is written to our default `data-products/source-apps`. Help for all the arguments available to `generate` is available by running `snowplow-cli dp generate --help`.
+The generated file is written to the default `data-products/source-apps` directory. Help for all the arguments available to `generate` is available by running `snowplow-cli dp generate --help`.
 
 Let's examine the generated file:
 
@@ -432,9 +432,9 @@ snowplow-cli dp publish
 
 After publishing, you'll be able to see your new source application in the BDP Console UI.
 
-### Create a data product and an event spec
+### Create a data product and an event specification
 
-Let's now create a data product and an event spec by running the following command
+Let's now create a data product and an event specification by running the following command
 
 ```bash
 snowplow-cli dp generate --data-product Login
@@ -455,7 +455,7 @@ data:
     eventSpecifications: []
 ```
 
-Let's amend it to add an event spec, and a reference to a source app
+Let's amend it to add an event specification, and a reference to a source application:
 
 ```yml {6,7,9,11-14} title="data-products/login.yaml"
 apiVersion: v1
@@ -503,7 +503,7 @@ snowplow-cli dp publish
 
 ### Add data products validation and publishing in the github actions
 
-Now that we've modeled a source app, data product and event spec, let's see how we can add them to the existing github actions workflows for data structures. You can customize your setup, use a separate repository or a separate actions, but in this example we'll add the data products publishing into the existing workflows.
+Now that we've modeled a source application, data product and event specification, let's see how we can add them to the existing github actions workflows for data structures. You can customize your setup, use a separate repository or a separate actions, but in this example we'll add the data products publishing into the existing workflows.
 
 Lets modify the PR example, and add the following line. This command will validate and print the changes to the github actions log.
 
@@ -530,7 +530,7 @@ jobs:
       - run: snowplow-cli dp publish --dry-run --gh-annotate
 ```
 
-Data products, source apps and event specs don't have the dev and prod environments, so it's enough to publish them once.
+Data products, source applications and event specifications don't have the dev and prod environments, so it's enough to publish them once.
 We can add the same command but without the `--dry-run` flag to the publish pipeline.
 
 ```yml {20} title=".github/workflows/publish-develop.yml"
@@ -562,4 +562,4 @@ You might want to publish data products in the `.github/workflows/publish-produc
 
 * We have seen how snowplow-cli can be used to work with data structures from the command line
 * We have applied that knowledge to build github workflows which support automated validation and publication
-* We have added source apps, data products and event specs to use the same approach as data structures
+* We have added source applications, data products and event specifications to use the same approach as data structures.

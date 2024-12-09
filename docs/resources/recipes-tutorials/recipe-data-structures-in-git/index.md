@@ -475,7 +475,7 @@ data:
 ```
 
 :::note
-You'll need to come up with a valid uuid V4 for the `resourceName` of an event spec. You can do so by using an (online generator)[https://www.uuidgenerator.net], or running the `uuidgen` command in your terminal
+You'll need to come up with a valid uuid V4 for the `resourceName` of an event specification. You can do so by using an (online generator)[https://www.uuidgenerator.net], or running the `uuidgen` command in your terminal
 :::
 
 :::caution Warning

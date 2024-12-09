@@ -553,7 +553,7 @@ jobs:
 
       - run: snowplow-cli ds publish dev --managed-from $GITHUB_REPOSITORY
 
-      - run: snowplow-cli dp publish --gh-annotate
+      - run: snowplow-cli dp publish
 ```
 
 You might want to publish data products in the `.github/workflows/publish-production.yml` as well, or only there. It depends on your setup, but if you strictly follow the rules and always merge to `main` from `develop`, the setup above should be enough.

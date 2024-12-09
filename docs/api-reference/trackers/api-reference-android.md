@@ -1,6 +1,6 @@
 ---
 type: link
-title: API reference (Android)
-sidebar_position: 250
+title: Android
+sidebar_position: 10
 href: https://snowplow.github.io/snowplow-android-tracker/
 ---

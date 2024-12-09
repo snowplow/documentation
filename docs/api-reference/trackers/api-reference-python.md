@@ -1,6 +1,6 @@
 ---
 type: link
-title: API reference
-sidebar_position: 1000
+title: Python
+sidebar_position: 30
 href: https://docs.snowplow.io/snowplow-python-tracker/
 ---

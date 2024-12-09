@@ -1,6 +1,6 @@
 ---
 type: link
-title: API reference
-sidebar_position: 10000
+title: Golang
+sidebar_position: 40
 href: https://pkg.go.dev/github.com/snowplow/snowplow-golang-tracker/v3
 ---

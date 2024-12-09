@@ -1,6 +1,6 @@
 ---
 type: link
-title: API reference (iOS)
-sidebar_position: 251
+title: iOS
+sidebar_position: 20
 href: https://snowplow.github.io/snowplow-ios-tracker/documentation/snowplowtracker/snowplow/
 ---

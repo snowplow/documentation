@@ -1,6 +1,6 @@
 ---
 type: link
-title: API reference
-sidebar_position: 1000
+title: Ruby
+sidebar_position: 70
 href: https://docs.snowplow.io/snowplow-ruby-tracker/
 ---

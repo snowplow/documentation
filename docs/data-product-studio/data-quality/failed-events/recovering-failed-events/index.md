@@ -2,6 +2,7 @@
 title: "Recovering failed events"
 date: "2021-10-13"
 sidebar_position: 4
+sidebar_label: "Recover"
 ---
 
 ## What is event recovery?

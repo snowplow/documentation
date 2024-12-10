@@ -274,10 +274,12 @@ sqsBadBuffer = {bad-sqs-queue-url}
 
 Since version 3.0.0 networking settings are configured in its own `collector.networking` section:
 
-| parameter                                                  | description                                                                                                                                        |
-|------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| parameter                                                    | description                                                                                                                                        |
+|--------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
 | `collector.networking.maxConnections` (since *3.0.0*)        | Optional. Default: `1024`. Maximum number of concurrent active connection.                                                                         |
 | `collector.networking.idleTimeout` (since *3.0.0*)           | Optional. Default: `610 seconds`. Maximum inactivity time for a network connection. If no data is sent within that time, the connection is closed. |
 | `collector.networking.responseHeaderTimeout` (since *3.2.0*) | Optional. Default: `30 seconds`. Time from when the request is made until a response line is generated before a 503 response is returned.          |
 | `collector.networking.maxRequestLineLength` (since *3.2.0*)  | Optional. Default: `20480`. Maximum request line to parse. If exceeded returns a 400 Bad Request.                                                  |
 | `collector.networking.maxHeadersLength` (since *3.2.0*)      | Optional. Default: `40960`. Maximum data that composes the headers. If exceeded returns a 400 Bad Request.                                         |
+| `collector.networking.maxPayloadSize` (since *3.3.0*)        | Optional. Default: `1048576` (1 MB). Maximum size of an event within payload allowed before emitting an Size Violation event. Returns 200 OK.      |
+| `collector.networking.dropPayloadSize` (since *3.3.0*)       | Optional. Default: `2097152` (2 MB). Maximum body payload size allowed before rejecting the request. If exceeded returns a 413 Payload Too Large.  |

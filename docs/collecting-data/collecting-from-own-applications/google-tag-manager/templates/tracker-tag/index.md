@@ -1,5 +1,5 @@
 ---
-title: Further Setup
+title: Tracker Tag Configuration
 ---
 
 ### Tracker Name

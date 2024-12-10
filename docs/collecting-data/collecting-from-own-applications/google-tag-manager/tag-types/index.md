@@ -1,5 +1,5 @@
 ---
-title: Snowplow v4 Tags
+title: Tags
 sidebar_position: 1000
 ---
 

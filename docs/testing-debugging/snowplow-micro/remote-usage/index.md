@@ -2,7 +2,6 @@
 title: "Connecting remote sites and apps"
 sidebar_position: 5
 description: "How to use Micro with websites and apps that are not running locally."
-tags: ['t3sting']
 ---
 
 ```mdx-code-block

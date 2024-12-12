@@ -14,7 +14,7 @@ import LakeLoaderDiagram from '@site/docs/api-reference/loaders-storage-targets/
 import SnowflakeStreamingLoaderDiagram from '@site/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/_cross-cloud-diagram.md';
 ```
 
-The data loading process is engineered for large volumes of data. In addition, for each data warehouse, our loader applications ensure the best representation of Snowplow events. That includes [automatically adjusting the database types](/docs/destinations/warehouses-lakes/schemas-in-warehouse/) for [self-describing events](/docs/fundamentals/events/index.md#self-describing-events) and [entities](/docs/fundamentals/entities/index.md) according to their [schemas](/docs/fundamentals/schemas/index.md).
+The data loading process is engineered for large volumes of data. In addition, for each data warehouse, our loader applications ensure the best representation of Snowplow events. That includes [automatically adjusting the database types](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md) for [self-describing events](/docs/fundamentals/events/index.md#self-describing-events) and [entities](/docs/fundamentals/entities/index.md) according to their [schemas](/docs/fundamentals/schemas/index.md).
 
 <Tabs groupId="warehouse" queryString lazy>
   <TabItem value="redshift" label="Redshift" default>

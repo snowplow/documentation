@@ -36,7 +36,7 @@ trackPageView();
 
 This method automatically captures the URL, referrer URL and page title (inferred from the `<title>` tag). The first page view tracked uses `document.referrer` for the referrer URL, while for subsequent page views it is the previous page URL.
 
-It's possible to [override the URL and referrer URL](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/#setting-a-custom-page-url-and-referrer-url).
+It's possible to [override the URL and referrer URL](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/index.md#setting-a-custom-page-url-and-referrer-url).
 
 If you wish, you can also override the title with a custom value:
 
@@ -164,7 +164,7 @@ By default the tracker will reset the Page Ping timers, which were configured wh
 
 When the JavaScript Tracker loads on a page, it generates a new page view UUID as mentioned above.
 
-It's possible to retrieve certain properties for use in your code, including the page view UUID, [user ID](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/#getting-user-id-once-set), and [cookie values](/docs/sources/trackers/javascript-trackers/web-tracker/cookies-and-local-storage/getting-cookie-values/#retrieving-cookie-properties-from-the-tracker), using a tracker callback. This is an advanced usage of the tracker.
+It's possible to retrieve certain properties for use in your code, including the page view UUID, [user ID](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/index.md#getting-user-id-once-set), and [cookie values](/docs/sources/trackers/javascript-trackers/web-tracker/cookies-and-local-storage/getting-cookie-values/index.md#retrieving-cookie-properties-from-the-tracker), using a tracker callback. This is an advanced usage of the tracker.
 
 ```mdx-code-block
 import RetrieveValuesJs from "@site/docs/reusable/javascript-tracker-retrieve-values/_javascript.md"

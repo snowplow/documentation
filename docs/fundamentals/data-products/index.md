@@ -52,7 +52,7 @@ Examples of data products:
 
 **Benefits:**
 
-* Provide implementation details to developers implementing tracking (see section on [Snowtype](/docs/sources/code-generation) for further details)
+* Provide implementation details to developers implementing tracking (see section on [Snowtype](docs/data-product-studio/snowtype/index.md) for further details)
 * Provide documentation around the semantics of the data that you are creating, to enable analysts, data scientists, analytics engineers with data discoverability
 
 **Subscribers;** allow colleagues to express an interest in understanding changes that are made to the data within a Data Product, usually because the data is being used in a downstream data model or data application.
@@ -76,7 +76,7 @@ Break down the barriers that exist between data producers and data consumers, by
 
 **Benefits:**
 
-You will be able to view several items in the UI that help detect anomalies or potential misconfigurations in trackers that are either not sending the expected events or are using incorrect [application IDs](/docs/data-product-studio/source-applications/index.md#application-ids). This is particularly useful during the development phase when implementing tracking for a specific application using [Snowtype](/docs/sources/code-generation). These elements include:
+You will be able to view several items in the UI that help detect anomalies or potential misconfigurations in trackers that are either not sending the expected events or are using incorrect [application IDs](/docs/data-product-studio/source-applications/index.md#application-ids). This is particularly useful during the development phase when implementing tracking for a specific application using [Snowtype](docs/data-product-studio/snowtype/index.md). These elements include:
 
 * A counter for each event specification, showing the total number of events detected from the tracked application IDs in the last 30 days.
 * A 'last seen' field for each event specification, indicating when the last event matching the event specification ID was detected.
@@ -107,7 +107,7 @@ For these data products, the volume metrics will behave differently:
 
 ## How data products help with governance, data quality and data discoverability
 
-The **data structures** that you attach to your event specification describe the [structure of the data](/docs/fundamentals/schemas/). They validate that the values of the properties contained within your events and entities are **valid** as they pass through your pipeline.
+The **data structures** that you attach to your event specification describe the [structure of the data](/docs/fundamentals/schemas/index.md). They validate that the values of the properties contained within your events and entities are **valid** as they pass through your pipeline.
 
 The **event specification** describes a specific implementation of an event. It is a narrower definition of your event than a data structure - not only do they describe the structure of the data (by attaching the relevant data structure to validate against), they also allow you to define the **right values** for fields when the event gets triggered and the entities that need to be attached.
 
@@ -117,4 +117,4 @@ By adding screenshots, and descriptions to the event specification, you are also
 
 A data structure can be used across event specifications, and across data products. In doing so, you can ensure you consistently track business critical events and entities (for example, your "product" entity) across your organisation. Having the ability to use centralised event and entity schemas in this way, means that you are able to better govern the structure of the data across an organisation whilst also empowering teams to manage their own specific implementation of events via data products.
 
-To understand how to get started with data products, see [Defining the Data to collect with Data Products](/docs/data-product-studio/data-products/) for further details.
+To understand how to get started with data products, see [Defining the Data to collect with Data Products](/docs/data-product-studio/data-products/index.md) for further details.

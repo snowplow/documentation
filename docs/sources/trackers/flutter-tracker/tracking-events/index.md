@@ -182,7 +182,7 @@ Concretely, it consists of the following metrics:
 3. Number of list items scrolled out of all list items (requires some manual tracking).
 4. Scroll depth in pixels (requires some manual tracking).
 
-This information is attached using a [`screen_summary` context entity](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/page-activity-tracking/#screen-summary-entity) to the following events:
+This information is attached using a [`screen_summary` context entity](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/page-activity-tracking/index.md#screen-summary-entity) to the following events:
 
 1. [`screen_end` event](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/page-activity-tracking/index.md#screen-end-event) that is automatically tracked before a new screen view event.
 2. [`application_background` event](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/mobile-lifecycle-events/index.md#background-event).

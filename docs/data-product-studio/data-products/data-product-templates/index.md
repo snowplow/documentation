@@ -26,8 +26,8 @@ Note: The event volume counts are calculated differently for this Data Product. 
 
 Included event specifications:
 
-* [Page View](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/page-views/)
-* [Page Ping](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/activity-page-pings/)
+* [Page View](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/page-views/index.md)
+* [Page Ping](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/activity-page-pings/index.md)
 * [Button click](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/button-click/index.md)
 * [Link click](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/link-click/index.md)
 
@@ -49,7 +49,7 @@ Included event specifications:
 
 This Data Product template contains all the basic e-commerce interactions that help you analyze customer behavior, identify potential growth opportunities, and improve your sales performance.
 
-Tracked using the [out-of-the-box e-commerce events](docs/sources/trackers/snowplow-tracker-protocol/ootb-data/ecommerce-events/index.md) for web, Android, and iOS. On web, this requires the [Snowplow Ecommerce plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce/).
+Tracked using the [out-of-the-box e-commerce events](docs/sources/trackers/snowplow-tracker-protocol/ootb-data/ecommerce-events/index.md) for web, Android, and iOS. On web, this requires the [Snowplow Ecommerce plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md).
 
 Included event specifications:
 

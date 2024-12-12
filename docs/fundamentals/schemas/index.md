@@ -9,7 +9,7 @@ description: "Schemas are a powerful feature that ensures your data is clean and
 
 :::info Terminology
 
-We often use the terms “schema” and “data structure” interchangeably, although in [Snowplow BDP](/docs/get-started/feature-comparison/), “data structure” usually refers to a combination of a schema with some additional metadata.
+We often use the terms “schema” and “data structure” interchangeably, although in [Snowplow BDP](/docs/get-started/feature-comparison/index.md), “data structure” usually refers to a combination of a schema with some additional metadata.
 
 :::
 

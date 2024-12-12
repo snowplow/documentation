@@ -82,7 +82,7 @@ This option indicates if the Snowplow Self-Describing event data will be include
 
 #### Self Describing Event Location
 
-This section is available only if the [Include Self Describing event](/docs/destinations/forwarding-events/google-tag-manager-server-side/braze-tag-for-gtm-ss/braze-tag-configuration/#snowplow-self-describing-event) option is enabled. Using this drop-down menu you can indicate the location where Snowplow Self Describing event properties should be added under Braze event properties. The available options are:
+This section is available only if the [Include Self Describing event](/docs/destinations/forwarding-events/google-tag-manager-server-side/braze-tag-for-gtm-ss/braze-tag-configuration/index.md#snowplow-self-describing-event) option is enabled. Using this drop-down menu you can indicate the location where Snowplow Self Describing event properties should be added under Braze event properties. The available options are:
 
 - **Nest under schema name** (default): The schema name will be used as a key in Braze event properties with the self-describing data as its value.
 - **Merge to root level**: The self-describing properties will be added directly as Braze event properties without nesting.

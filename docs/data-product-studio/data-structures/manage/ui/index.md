@@ -118,7 +118,7 @@ This will take you to a list of hidden Data Structures, locate the one you wish 
 
 ## Externally managed Data Structures
 
-Data Structures can be managed from an external repository using our [snowplow-cli](/docs/data-product-studio/data-structures/manage/cli/) tool.
+Data Structures can be managed from an external repository using our [snowplow-cli](/docs/data-product-studio/data-structures/manage/cli/index.md) tool.
 
 When a Data Structure is managed this way it becomes locked in the UI disabling all editing. You will see a banner explaining the situation and giving people with the 'publish to production' (default for admin users) capability the ability to unlock.
 

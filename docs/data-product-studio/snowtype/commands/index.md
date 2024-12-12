@@ -55,7 +55,7 @@ Adds new Data Structures and Event Specifications in the `snowtype.config.json` 
  - `-p, --dataProductIds` Data Product ID/s.
  - `-d, --dataStructures` Data structure schema URI/s.
  - `-i, --igluCentralSchemas` Iglu central schema URI/s.
- - `-r, --repositories` Local Data Structure repositories generated from the [snowplow-cli](/docs/data-product-studio/data-structures/manage/cli/).
+ - `-r, --repositories` Local Data Structure repositories generated from the [snowplow-cli](/docs/data-product-studio/data-structures/manage/cli/index.md).
 
 
 ### `snowtype help`

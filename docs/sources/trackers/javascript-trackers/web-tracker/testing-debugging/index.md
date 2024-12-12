@@ -18,11 +18,11 @@ To prevent data loss and bad events, it's important to test and validate your tr
 
 ### Snowplow Inspector for browsers
 
-Use our [browser extension](/docs/data-product-studio/data-quality/snowplow-inspector/overview/) to inspect event requests in the browser Developer Tools window.
+Use our [browser extension](/docs/data-product-studio/data-quality/snowplow-inspector/overview/index.md) to inspect event requests in the browser Developer Tools window.
 
 ### Snowplow Micro
 
-A [lightweight, local Snowplow pipeline](/docs/data-product-studio/data-quality/snowplow-micro/what-is-micro/) ideal for sending test events into. It's used as a Docker container.
+A [lightweight, local Snowplow pipeline](/docs/data-product-studio/data-quality/snowplow-micro/what-is-micro/index.md) ideal for sending test events into. It's used as a Docker container.
 
 
 ## Debugging

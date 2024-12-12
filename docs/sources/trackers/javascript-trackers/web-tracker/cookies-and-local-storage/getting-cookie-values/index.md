@@ -43,7 +43,7 @@ If you set a custom `cookieName` field in the argmap, pass that name into the 
 
 ## Retrieving cookie properties from the tracker
 
-It's possible to retrieve cookie properties for use in your code (as well as the [page view UUID](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/page-views/index.md) and [user ID](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/#getting-user-id-once-set)) using a tracker callback. This is an advanced usage of the tracker.
+It's possible to retrieve cookie properties for use in your code (as well as the [page view UUID](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/page-views/index.md) and [user ID](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/index.md#getting-user-id-once-set)) using a tracker callback. This is an advanced usage of the tracker.
 
 ```mdx-code-block
 import RetrieveValuesJs from "@site/docs/reusable/javascript-tracker-retrieve-values/_javascript.md"

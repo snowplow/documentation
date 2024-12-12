@@ -139,7 +139,7 @@ This function begins tracking media events for a given media element. It takes a
 | `config.label` | `string` | A human-readable label for the media element. | `undefined` |
 | `config.captureEvents` | `HTML5MediaEventTypes` | A list of media events to track. | All events tracked by default |
 | `config.boundaries` | `number[]` | Percentage thresholds (0-100) to trigger progress events. | Disabled |
-| `config.context` | [`DynamicContext`](/docs/sources/trackers/javascript-trackers/web-tracker/custom-tracking-using-schemas/global-context/#global-contexts-methods) | Dynamic contexts attached to each tracking event. | `undefined` |
+| `config.context` | [`DynamicContext`](/docs/sources/trackers/javascript-trackers/web-tracker/custom-tracking-using-schemas/global-context/index.md#global-contexts-methods) | Dynamic contexts attached to each tracking event. | `undefined` |
 | `config.updatePageActivityWhilePlaying` | `boolean` | Whether to update page activity while media is playing. | `true` |
 | `config.filterOutRepeatedEvents` | `FilterOutRepeatedEvents` | Whether to suppress consecutive identical events. | `false` |
 

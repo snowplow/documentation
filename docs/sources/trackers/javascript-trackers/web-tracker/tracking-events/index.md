@@ -320,7 +320,7 @@ setUserIdFromCookie('cookieid');
 
 ### Getting user ID once set
 
-It's possible to retrieve certain properties for use in your code, including the user ID, [page view ID](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/page-views/#get-page-view-id), and [cookie values](/docs/sources/trackers/javascript-trackers/web-tracker/cookies-and-local-storage/getting-cookie-values/#retrieving-cookie-properties-from-the-tracker), using a tracker callback. This is an advanced usage of the tracker.
+It's possible to retrieve certain properties for use in your code, including the user ID, [page view ID](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/page-views/index.md#get-page-view-id), and [cookie values](/docs/sources/trackers/javascript-trackers/web-tracker/cookies-and-local-storage/getting-cookie-values/index.md#retrieving-cookie-properties-from-the-tracker), using a tracker callback. This is an advanced usage of the tracker.
 
 ```mdx-code-block
 import RetrieveValuesJs from "@site/docs/reusable/javascript-tracker-retrieve-values/_javascript.md"

@@ -154,4 +154,4 @@ enableActivityTracking({
 
 Adding this code to your site will cause [page ping events](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/activity-page-pings/index.md) to be automatically tracked and sent via POST.
 
-If using the Browser tracker, the events will all have the `webPage` context entity attached, containing the page view ID. If using the JavaScript tracker, the page pings will have the `webPage` as well as `performanceTiming`, `gaCookies`, and `clientHint` entities. Read more about these entities [here](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/#auto-tracked-entities).
+If using the Browser tracker, the events will all have the `webPage` context entity attached, containing the page view ID. If using the JavaScript tracker, the page pings will have the `webPage` as well as `performanceTiming`, `gaCookies`, and `clientHint` entities. Read more about these entities [here](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/index.md#auto-tracked-entities).

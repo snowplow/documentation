@@ -14,7 +14,7 @@ import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
 <Accelerator href="https://docs.snowplow.io/accelerators/snowplow-fractribution" name="Fractional Attribution Modeling"/>
 ```
 :::warning
-The Fractribution Package is no longer maintained, please refer to the [Attribution package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/) for marketing attribution analysis with Snowplow
+The Fractribution Package is no longer maintained, please refer to the [Attribution package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/index.md) for marketing attribution analysis with Snowplow
 :::
 
 ## Requirements

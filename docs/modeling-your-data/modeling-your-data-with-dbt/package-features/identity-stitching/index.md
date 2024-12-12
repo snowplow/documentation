@@ -58,7 +58,7 @@ Consider processing costs before enabling `snowplow__view_stitching` to `true`. 
 ### Custom solutions
 
 #### **Customizing user identifiers**
-Customizing user identifiers works in the exact same way as [customizing session identifiers](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/custom-identifiers/#customizing-session-identifiers), please refer to that link to understand the breakdown of how to set this up, although you need to make use of the `snowplow__user_identifiers` variable instead of the `snowplow__session_identifiers`, and `snowplow__user_sql` in place of `snowplow__session_sql`.
+Customizing user identifiers works in the exact same way as [customizing session identifiers](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/custom-identifiers/index.md#customizing-session-identifiers), please refer to that link to understand the breakdown of how to set this up, although you need to make use of the `snowplow__user_identifiers` variable instead of the `snowplow__session_identifiers`, and `snowplow__user_sql` in place of `snowplow__session_sql`.
 
 ```yml title="example default overwrites"
 vars:

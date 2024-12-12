@@ -267,4 +267,4 @@ Most browsers have a Do Not Track option which allows users to express a prefere
 
 ## Opt-out cookie
 
-Similar in function to Do Not Track, it's possible to set an [opt-out cookie](/docs/sources/trackers/javascript-trackers/web-tracker/cookies-and-local-storage/#opt-out-cookie) to prevent all events being tracked.
+Similar in function to Do Not Track, it's possible to set an [opt-out cookie](/docs/sources/trackers/javascript-trackers/web-tracker/cookies-and-local-storage/index.md#opt-out-cookie) to prevent all events being tracked.

@@ -37,7 +37,7 @@ Below you can find a detailed list of product features, including which are avai
 | <h3>Data Product Studio</h3> | BDP |[Community Edition](/docs/get-started/snowplow-community-edition/index.md)|
 | Advanced enrichments (PII, IP anonymisation, JS, API, SQL enrichments) | ✅ | ✅ (no UI or API)|
 | [Data structures tooling & API](/docs/data-product-studio/data-structures/manage/ui/index.md) | ✅ |❌|
-| [Data Products](/docs/data-product-studio/data-products/) | ✅ |❌|
+| [Data Products](/docs/data-product-studio/data-products/index.md) | ✅ |❌|
 | [Data modeling management tooling](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/index.md) | ✅ | ❌ |
 | Jobs monitoring dashboard | ✅  | ❌ |
 | Failed events alerting | ✅ | ❌ |

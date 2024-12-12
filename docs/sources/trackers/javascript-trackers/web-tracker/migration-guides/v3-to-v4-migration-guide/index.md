@@ -105,7 +105,7 @@ It enables requests to the Snowplow Collector to complete even if the page is cl
 Also related to the move to fetch instead of XMLHttpRequest, we have changed the `withCredentials` configuration option.
 It is now called `credentials` and has values that reflect the option in the fetch API.
 
-[Read more about the option here.](/docs/sources/trackers/javascript-trackers/web-tracker/configuring-how-events-sent/#disabling-sending-credentials-with-requests).
+[Read more about the option here.](/docs/sources/trackers/javascript-trackers/web-tracker/configuring-how-events-sent/index.md#disabling-sending-credentials-with-requests).
 
 ### `os_timezone` detection
 

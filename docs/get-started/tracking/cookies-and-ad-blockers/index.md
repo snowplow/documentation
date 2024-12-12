@@ -16,7 +16,7 @@ Their goal is to make sure that:
 
 As browsers [cut down on third-party cookies](https://snowplow.io/blog/privacy-updates-ad-blockers-and-first-party-tracking/), they are becoming less and less useful for storing user and session identifiers.
 The alternative is to use first-party cookies.
-Although first-party cookies don't allow sharing user and session identifiers across domains (they do let you share them across sub-domains), there are other alternative solutions for [cross-domain tracking](/docs/sources/trackers/javascript-trackers/web-tracker/cross-domain-tracking/) that can be used in conjunction with first-party cookies.
+Although first-party cookies don't allow sharing user and session identifiers across domains (they do let you share them across sub-domains), there are other alternative solutions for [cross-domain tracking](/docs/sources/trackers/javascript-trackers/web-tracker/cross-domain-tracking/index.md) that can be used in conjunction with first-party cookies.
 
 Using Snowplow, you can set up your collector to be on the same domain as the website, which is the requirement for the use of first-party cookies.
 To learn how to set up the collector domain, [visit this page](/docs/sources/first-party-tracking/index.md).

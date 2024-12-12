@@ -26,8 +26,8 @@ dependencies {
 }
 ```
 No other dependencies are required to track events. However, some **optional** dependencies can be added:
-- `InstallReferrer` to enable the referrer context entity of the [`ApplicationInstall` event](docs/sources/trackers/mobile-trackers/tracking-events/installation-tracking/index.md).
--  `Play Services` dependencies for [tracking the app set ID and AAID](docs/sources/trackers/mobile-trackers/tracking-events/platform-and-application-context/index.md).
+- `InstallReferrer` to enable the referrer context entity of the [`ApplicationInstall` event](/docs/sources/trackers/mobile-trackers/tracking-events/installation-tracking/index.md).
+-  `Play Services` dependencies for [tracking the app set ID and AAID](/docs/sources/trackers/mobile-trackers/tracking-events/platform-and-application-context/index.md).
 
 ## Setting up
 
@@ -176,14 +176,14 @@ Snowplow.createTracker(
 </Tabs>
 
 :::note
-The trackers created with the above method are configured "locally" only. To create a tracker where the configuration can be updated through downloaded files, read [this page](docs/sources/trackers/mobile-trackers/remote-configuration/index.md) about remote configuration.
+The trackers created with the above method are configured "locally" only. To create a tracker where the configuration can be updated through downloaded files, read [this page](/docs/sources/trackers/mobile-trackers/remote-configuration/index.md) about remote configuration.
 :::
 
 The [Android tracker Github repository](https://github.com/snowplow/snowplow-android-tracker) includes demo apps in Java, Kotlin, and Kotlin with Jetpack Compose. They are provided as simple reference apps to help you set up the tracker.
 
 ## Using the tracker with R8 optimization
 
-Depending on your app configuration, you may need to add ProGuard rules to prevent the R8 compiler removing code needed for tracker function. Fetching certain [platform context](docs/sources/trackers/mobile-trackers/tracking-events/platform-and-application-context/index.md) properties - AAID and app set ID - uses reflection. To include the necessary classes, add the following rules to the app's `proguard-rules.pro` file.
+Depending on your app configuration, you may need to add ProGuard rules to prevent the R8 compiler removing code needed for tracker function. Fetching certain [platform context](/docs/sources/trackers/mobile-trackers/tracking-events/platform-and-application-context/index.md) properties - AAID and app set ID - uses reflection. To include the necessary classes, add the following rules to the app's `proguard-rules.pro` file.
 
 ```
 # Reflection for the appSetId

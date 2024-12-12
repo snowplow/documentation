@@ -54,7 +54,7 @@ tracker.track(event)
 
 Determining which events occurred in which window group can be done during modelling using these two event types and timestamps. You could also manually add a window group context entity to tracked events.
 
-In this example, a window group entity is added to an [Ecommerce](docs/sources/trackers/mobile-trackers/tracking-events/ecommerce-tracking/index.md) `ProductViewEvent`.
+In this example, a window group entity is added to an [Ecommerce](/docs/sources/trackers/mobile-trackers/tracking-events/ecommerce-tracking/index.md) `ProductViewEvent`.
 
 ```swift
 let product = ProductEntity(
@@ -68,7 +68,7 @@ let entity = WindowGroupEntity(id: "group_1")
 event.entities.append(entity)
 ```
 
-Read more about customized tracking [here](docs/sources/trackers/mobile-trackers/custom-tracking-using-schemas/index.md).
+Read more about customized tracking [here](/docs/sources/trackers/mobile-trackers/custom-tracking-using-schemas/index.md).
 
 ### Immersive space events
 

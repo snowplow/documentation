@@ -11,7 +11,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-As well as [adding context entities](docs/sources/trackers/mobile-trackers/custom-tracking-using-schemas/index.md) to each individual event, it is possible to add context entities in a declarative way, so that they are applied to all (or a subset of) events within an application.
+As well as [adding context entities](/docs/sources/trackers/mobile-trackers/custom-tracking-using-schemas/index.md) to each individual event, it is possible to add context entities in a declarative way, so that they are applied to all (or a subset of) events within an application.
 
 This can be done at tracker setup by providing a `GlobalContextConfiguration`. The logic for each global context entity is held within a `GlobalContext` generator. Multiple `GlobalContext` can be provided to the `GlobalContextConfiguration`, along with an identifying name or tag.
 
@@ -410,11 +410,11 @@ In this case the logic for filtering and generation is encapsulated behind a con
 
 ```swift
 class GlobalContextGenerator : ContextGenerator {
-    
+
     func filter(from event: InspectableEvent) -> Bool {
         return true
     }
-    
+
     func generator(from event: InspectableEvent) -> [SelfDescribingJson]? {
         return [
             SelfDescribingJson(schema:"iglu:com.snowplowanalytics.snowplow/test_sdj/jsonschema/1-0-1", andData:["key": "value"]),

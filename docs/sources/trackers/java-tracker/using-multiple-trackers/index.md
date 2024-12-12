@@ -24,4 +24,4 @@ See the API docs for the full [Snowplow](https://snowplow.github.io/snowplow-jav
 
 Because all Snowplow trackers create events with the same structure, it's easy to work with data from different Snowplow tracker SDKs. For example, you may wish to implement the Java tracker for back-end server tracking, in conjunction with a client-side tracker such as JavaScript or Flutter.
 
-Read more about tracking client-side/server-side [here](docs/sources/trackers/java-tracker/tracking-specific-client-side-properties/index.md).
+Read more about tracking client-side/server-side [here](/docs/sources/trackers/java-tracker/tracking-specific-client-side-properties/index.md).

@@ -68,7 +68,7 @@ When returned as part of `Data`, `time.Time` instances will [serialize in JSON](
 
 :::
 
-Structured data ([Self Describing Event](/docs/fundamentals/events/index.md#self-describing-events) payloads and [Entities](docs/fundamentals/entities/index.md)) will have keys with a prefix of `unstruct_event_` or `contexts_`, the vendor name converted to snake case, the event/entity name in snake case, and the [schema model version](/docs/api-reference/iglu/common-architecture/schemaver/index.md). For example:
+Structured data ([Self Describing Event](/docs/fundamentals/events/index.md#self-describing-events) payloads and [Entities](/docs/fundamentals/entities/index.md)) will have keys with a prefix of `unstruct_event_` or `contexts_`, the vendor name converted to snake case, the event/entity name in snake case, and the [schema model version](/docs/api-reference/iglu/common-architecture/schemaver/index.md). For example:
 
 | **Schema URI** | **Type** | **Key** |
 | --- | --- | --- |

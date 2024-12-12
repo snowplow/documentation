@@ -15,13 +15,13 @@ These changes probably won't break your app code, but they will affect the event
 
 Affects: iOS ✅ Android ✅
 
-[Lifecycle autotracking](docs/sources/trackers/mobile-trackers/tracking-events/lifecycle-tracking/index.md) is now on by default, for both trackers. This is because it's a prerequisite for the new [screen engagement tracking](docs/sources/trackers/mobile-trackers/tracking-events/screen-tracking/index.md#screen-engagement-tracking), which is also on by default.
+[Lifecycle autotracking](/docs/sources/trackers/mobile-trackers/tracking-events/lifecycle-tracking/index.md) is now on by default, for both trackers. This is because it's a prerequisite for the new [screen engagement tracking](/docs/sources/trackers/mobile-trackers/tracking-events/screen-tracking/index.md#screen-engagement-tracking), which is also on by default.
 
 ### Removed properties from platform context entity
 
 Affects: iOS ✅ Android ❌
 
-To comply with Apple's Privacy Manifest rules, we have removed the automatic tracking of `totalStorage` and `availableStorage` metrics from the [platform context entity](docs/sources/trackers/mobile-trackers/tracking-events/platform-and-application-context/index.md). We've also added a Privacy Manifest for the SDK.
+To comply with Apple's Privacy Manifest rules, we have removed the automatic tracking of `totalStorage` and `availableStorage` metrics from the [platform context entity](/docs/sources/trackers/mobile-trackers/tracking-events/platform-and-application-context/index.md). We've also added a Privacy Manifest for the SDK.
 
 To track `totalStorage` or `availableStorage`, use the new `PlatformContextRetriever` callbacks class to configure the platform context entity.
 
@@ -29,7 +29,7 @@ To track `totalStorage` or `availableStorage`, use the new `PlatformContextRetri
 
 Affects: iOS ❌ Android ✅
 
-Previously a screen view event was tracked again by the [screen view autotracking](docs/sources/trackers/mobile-trackers/tracking-events/screen-tracking/index.md) feature when the app moved to foreground. This is not expected because the screen doesn't change when the app is in background, and it is not consistent with how the screen view autotracking works on iOS. The extra event will no longer be tracked.
+Previously a screen view event was tracked again by the [screen view autotracking](/docs/sources/trackers/mobile-trackers/tracking-events/screen-tracking/index.md) feature when the app moved to foreground. This is not expected because the screen doesn't change when the app is in background, and it is not consistent with how the screen view autotracking works on iOS. The extra event will no longer be tracked.
 
 ### Event entities API
 
@@ -43,7 +43,7 @@ There's no change to the behavior of the variable `entities`, so you could still
 
 Affects: iOS ✅ Android ✅
 
-In both trackers, we have changed how the `EmitterConfiguration` options `bufferOption` and `emitRange` are used, as well as changing the defaults. Read more about that [here](docs/sources/trackers/mobile-trackers/configuring-how-events-are-sent/index.md#configuring-how-many-events-to-send-in-one-request). The `BufferOption.defaultGroup` has been renamed to `BufferOption.SmallGroup`.
+In both trackers, we have changed how the `EmitterConfiguration` options `bufferOption` and `emitRange` are used, as well as changing the defaults. Read more about that [here](/docs/sources/trackers/mobile-trackers/configuring-how-events-are-sent/index.md#configuring-how-many-events-to-send-in-one-request). The `BufferOption.defaultGroup` has been renamed to `BufferOption.SmallGroup`.
 
 Network requests are now made serially. If you are using a custom `EmitterConfiguration.emitRange`, you may wish to set it to a lower value. The new default `emitRange` is 25 (down from 150).
 
@@ -75,11 +75,11 @@ See the full changelog on Github, for [iOS](https://github.com/snowplow/snowplow
 
 ### New events
 
-The [screen engagement](docs/sources/trackers/mobile-trackers/tracking-events/screen-tracking/index.md#screen-engagement-tracking) feature adds new events for both iOS and Android. For iOS only, there are new events (and a new demo app) for [visionOS](docs/sources/trackers/mobile-trackers/tracking-events/visionos/index.md). For Android, the `PageView` event has been restored, after accidental deprecation in v5.
+The [screen engagement](/docs/sources/trackers/mobile-trackers/tracking-events/screen-tracking/index.md#screen-engagement-tracking) feature adds new events for both iOS and Android. For iOS only, there are new events (and a new demo app) for [visionOS](/docs/sources/trackers/mobile-trackers/tracking-events/visionos/index.md). For Android, the `PageView` event has been restored, after accidental deprecation in v5.
 
 ### Cross-navigation tracking
 
-Decorate URIs with [user and session information](docs/sources/trackers/mobile-trackers/tracking-events/session-tracking/index.md#decorating-outgoing-links-using-cross-navigation-tracking) in both trackers using the new `CrossDeviceParameterConfiguration`. This is the equivalent of cross-domain tracking for web.
+Decorate URIs with [user and session information](/docs/sources/trackers/mobile-trackers/tracking-events/session-tracking/index.md#decorating-outgoing-links-using-cross-navigation-tracking) in both trackers using the new `CrossDeviceParameterConfiguration`. This is the equivalent of cross-domain tracking for web.
 
 ### Access to `EventStore` in iOS tracker
 
@@ -91,7 +91,7 @@ The custom event and entity classes `SelfDescribing` and `SelfDescribingJson` no
 
 ### Provide custom values to platform context entity
 
-As mentioned above, the new `PlatformContextRetriever` callbacks class allows you to override any [platform entity](docs/sources/trackers/mobile-trackers/tracking-events/platform-and-application-context/index.md#overriding-platform-context-properties) properties. The `PlatformContextRetriever` is available for both iOS and Android.
+As mentioned above, the new `PlatformContextRetriever` callbacks class allows you to override any [platform entity](/docs/sources/trackers/mobile-trackers/tracking-events/platform-and-application-context/index.md#overriding-platform-context-properties) properties. The `PlatformContextRetriever` is available for both iOS and Android.
 
 ### Emitter and network connection behavior
 

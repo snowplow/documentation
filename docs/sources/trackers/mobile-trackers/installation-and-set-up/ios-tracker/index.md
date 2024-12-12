@@ -94,7 +94,7 @@ Snowplow.createTracker(namespace: "appTracker", endpoint: "https://snowplow-coll
 The `createTracker` method allows the creation of multiple trackers in the same app. The `namespace` field lets you distinguish events sent by a specific tracker instance. It is mandatory even when the app uses just a single tracker instance like in the example above.
 
 :::note
-The trackers created with the above method are configured "locally" only. To create a tracker where the configuration can be updated through downloaded files, read [this page](docs/sources/trackers/mobile-trackers/remote-configuration/index.md) about remote configuration.
+The trackers created with the above method are configured "locally" only. To create a tracker where the configuration can be updated through downloaded files, read [this page](/docs/sources/trackers/mobile-trackers/remote-configuration/index.md) about remote configuration.
 :::
 
 The [Examples Github repository](https://github.com/snowplow-incubator/snowplow-ios-tracker-examples) includes demo apps for Swift and Objective-C covering the most popular dependencies managers. They are provided as simple reference apps to help you set up the tracker.

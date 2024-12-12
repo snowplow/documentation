@@ -11,10 +11,10 @@ import TabItem from '@theme/TabItem';
 ```
 
 :::note
-Snowplow ecommerce tracking was added in version 5.4.0. With the addition of these new ecommerce events and entities, we have deprecated the old `EcommerceTransaction` and `EcommerceTransactionItem` events. [Migration guide](docs/sources/trackers/mobile-trackers/migration-guides/migration-guide-to-new-ecommerce/index.md).
+Snowplow ecommerce tracking was added in version 5.4.0. With the addition of these new ecommerce events and entities, we have deprecated the old `EcommerceTransaction` and `EcommerceTransactionItem` events. [Migration guide](/docs/sources/trackers/mobile-trackers/migration-guides/migration-guide-to-new-ecommerce/index.md).
 :::
 
-The Snowplow ecommerce tracking APIs enable you to track events from your ecommerce store on the [web](docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md) as well as mobile apps. A complete setup journey, including data modeling and visualization, is showcased in the [Ecommerce Accelerator](https://snowplow.io/data-product-accelerators/ecommerce-analytics-dpa/).
+The Snowplow ecommerce tracking APIs enable you to track events from your ecommerce store on the [web](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md) as well as mobile apps. A complete setup journey, including data modeling and visualization, is showcased in the [Ecommerce Accelerator](https://snowplow.io/data-product-accelerators/ecommerce-analytics-dpa/).
 
 All ecommerce events must be manually tracked; there is no ecommerce auto-tracking.
 
@@ -127,7 +127,7 @@ This table lists all the ecommerce events.
 `RefundEvent`           | Track a transaction partial or complete refund.
 
 
-Each ecommerce event is a [self-describing](docs/sources/trackers/mobile-trackers/custom-tracking-using-schemas/index.md) event using a single schema,
+Each ecommerce event is a [self-describing](/docs/sources/trackers/mobile-trackers/custom-tracking-using-schemas/index.md) event using a single schema,
 `iglu:com.snowplowanalytics.snowplow.ecommerce/snowplow_ecommerce_action/jsonschema/1-0-2`.
 
 <details>

@@ -54,7 +54,7 @@ If you need to edit a data product at any time, simply select it from the data p
 
 #### Updating existing Data Products following the release of Source Applications
 
-Data Products created prior to the release of [Source Applications](docs/data-product-studio/source-applications/index.md) in September 2024 will need to be updated to assign Source Applications in which the events will be tracked on. The selected Source Applications will add the relevant application IDs to each of the event specifications in the data product.
+Data Products created prior to the release of [Source Applications](/docs/data-product-studio/source-applications/index.md) in September 2024 will need to be updated to assign Source Applications in which the events will be tracked on. The selected Source Applications will add the relevant application IDs to each of the event specifications in the data product.
 
 ![Updating existing Data Products](images/edit-existing-data-product.png)
 
@@ -64,7 +64,7 @@ Event specifications which contain previously added application IDs will need to
 
 ## Upgrading Event Specification Instructions
 
-When working with Event Specifications of a Data Product, it’s essential to account for the evolution of underlying [Data Structures](docs/data-product-studio/data-structures/index.md). Data Structures define reusable JSON schemas, which can be referenced by different Event Specifications (events and entities). Each Event Specification may contain instructions, which rely on a specific version of a Data Structure, adding another layer to specialize or constraint Event Specifications in a more granular way.
+When working with Event Specifications of a Data Product, it’s essential to account for the evolution of underlying [Data Structures](/docs/data-product-studio/data-structures/index.md). Data Structures define reusable JSON schemas, which can be referenced by different Event Specifications (events and entities). Each Event Specification may contain instructions, which rely on a specific version of a Data Structure, adding another layer to specialize or constraint Event Specifications in a more granular way.
 
 ### Versioning of Data Structures
 

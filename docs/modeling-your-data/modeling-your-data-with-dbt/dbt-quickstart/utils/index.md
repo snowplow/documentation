@@ -308,7 +308,7 @@ For the `snowplow_base_events_this_run` model, you will need to run the followin
 {{ base_events_query }}
 ```
 
-Here you once again have a number of parameters that the macro can take, and to get an in-depth explanation of each variable passed here, please refer to the [configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/utils/index.mdx) page. The variables used here are largely either self-explanatory or overlapping with those in the [lifecycle manifest](docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/utils/index.md#6-setting-up-the-sessions-lifecycle-manifest-macro) section, except that you can now specify custom names for your `snowplow_base_sessions_this_run` table through the `snowplow__base_sessions` variable.
+Here you once again have a number of parameters that the macro can take, and to get an in-depth explanation of each variable passed here, please refer to the [configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/utils/index.mdx) page. The variables used here are largely either self-explanatory or overlapping with those in the [lifecycle manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/utils/index.md#6-setting-up-the-sessions-lifecycle-manifest-macro) section, except that you can now specify custom names for your `snowplow_base_sessions_this_run` table through the `snowplow__base_sessions` variable.
 
 ### 9. Modify your `dbt_project.yml`
 To properly configure your dbt project to utilize and update the manifest tables correctly, you will need to add the following hooks to your `dbt_project.yml`

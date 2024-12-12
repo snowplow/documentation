@@ -52,7 +52,7 @@ Examples of data products:
 
 **Benefits:**
 
-* Provide implementation details to developers implementing tracking (see section on [Snowtype](docs/data-product-studio/snowtype/index.md) for further details)
+* Provide implementation details to developers implementing tracking (see section on [Snowtype](/docs/data-product-studio/snowtype/index.md) for further details)
 * Provide documentation around the semantics of the data that you are creating, to enable analysts, data scientists, analytics engineers with data discoverability
 
 **Subscribers;** allow colleagues to express an interest in understanding changes that are made to the data within a Data Product, usually because the data is being used in a downstream data model or data application.
@@ -76,7 +76,7 @@ Break down the barriers that exist between data producers and data consumers, by
 
 **Benefits:**
 
-You will be able to view several items in the UI that help detect anomalies or potential misconfigurations in trackers that are either not sending the expected events or are using incorrect [application IDs](/docs/data-product-studio/source-applications/index.md#application-ids). This is particularly useful during the development phase when implementing tracking for a specific application using [Snowtype](docs/data-product-studio/snowtype/index.md). These elements include:
+You will be able to view several items in the UI that help detect anomalies or potential misconfigurations in trackers that are either not sending the expected events or are using incorrect [application IDs](/docs/data-product-studio/source-applications/index.md#application-ids). This is particularly useful during the development phase when implementing tracking for a specific application using [Snowtype](/docs/data-product-studio/snowtype/index.md). These elements include:
 
 * A counter for each event specification, showing the total number of events detected from the tracked application IDs in the last 30 days.
 * A 'last seen' field for each event specification, indicating when the last event matching the event specification ID was detected.

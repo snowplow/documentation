@@ -58,7 +58,7 @@ tracker.track(event);
 
 The tracker makes it easy to track different kinds of data. We provide a range of `Event` classes for tracking out-of-the-box event types, as well as fully custom events.
 
-Each event has an associated context, which is composed of entities. The tracker attaches entities to the events based on the configuration, but you can attach your own [custom entities](docs/sources/trackers/mobile-trackers/custom-tracking-using-schemas/index.md) as well.
+Each event has an associated context, which is composed of entities. The tracker attaches entities to the events based on the configuration, but you can attach your own [custom entities](/docs/sources/trackers/mobile-trackers/custom-tracking-using-schemas/index.md) as well.
 
 Every tracked event payload has a unique `event_id` UUID string set by the tracker, a set of timestamps, and other ubiquitous properties such as the `namespace`. The `event_id` is returned from the `tracker.track(event)` method. You can know more about how events and entities are structured [here](/docs/sources/trackers/snowplow-tracker-protocol/index.md).
 
@@ -193,7 +193,7 @@ tracker.track(event);
 
 ### Creating a ScreenView event
 
-Track the user viewing a screen within the application. This type of tracking is typically used when automatic [screen view tracking](docs/sources/trackers/mobile-trackers/tracking-events/screen-tracking/index.md) is not suitable within your application.
+Track the user viewing a screen within the application. This type of tracking is typically used when automatic [screen view tracking](/docs/sources/trackers/mobile-trackers/tracking-events/screen-tracking/index.md) is not suitable within your application.
 
 The event schema is `iglu:com.snowplowanalytics.mobile/screen_view/jsonschema/1-0-0`.
 
@@ -508,7 +508,7 @@ The tracked `DeepLinkReceived` event and each subsequent `ScreenView` event also
 
 Our philosophy in creating Snowplow is that users should design suitable data structures customised for their own consumer interactions data capture. You can read more about that philosophy [here](/docs/data-product-studio/index.md).
 
-However, as part of a Snowplow implementation there may be interactions where [custom `SelfDescribing` events](docs/sources/trackers/mobile-trackers/custom-tracking-using-schemas/index.md) are unwarranted. Those are candidates to track as `Structured` events. We do strongly recommend using fully custom `SelfDescribing` events.
+However, as part of a Snowplow implementation there may be interactions where [custom `SelfDescribing` events](/docs/sources/trackers/mobile-trackers/custom-tracking-using-schemas/index.md) are unwarranted. Those are candidates to track as `Structured` events. We do strongly recommend using fully custom `SelfDescribing` events.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>

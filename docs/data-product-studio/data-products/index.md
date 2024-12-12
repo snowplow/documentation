@@ -24,7 +24,7 @@ With data products, you can:
 - **Description;** a description of the data that the data product captures
 - **Owner;** the individual responsible for the data product
 - **Domain;** the team or business domain that owns the data product
-- **Source Application;** the [source application/s](docs/data-product-studio/source-applications/index.md) the Data Product is implemented in
+- **Source Application;** the [source application/s](/docs/data-product-studio/source-applications/index.md) the Data Product is implemented in
 - **Event specifications**
     * **Name;** a descriptive name for the event
     * **Description;** a description to help people understand what action the event is capturing

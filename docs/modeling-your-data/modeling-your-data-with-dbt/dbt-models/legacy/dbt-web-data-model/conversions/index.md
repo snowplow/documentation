@@ -69,7 +69,7 @@ The `snowplow__conversion_events` variable in our project takes a list of dictio
 
 :::tip
 
-Because the sessions table builds from our `_events_this_run` table, and both the `condition` and `value` fields will accept any valid sql that can go in a `case when...` and `select` block respectively, this means you can use any fields in a `contexts_` or `unstruct_` column in addition to the default `atomic.events` fields. However, it will not accept dbt code so you need to extract the relevant field yourself. You can see an example of this below. 
+Because the sessions table builds from our `_events_this_run` table, and both the `condition` and `value` fields will accept any valid sql that can go in a `case when...` and `select` block respectively, this means you can use any fields in a `contexts_` or `unstruct_` column in addition to the default `atomic.events` fields. However, it will not accept dbt code so you need to extract the relevant field yourself. You can see an example of this below.
 
 For Redshift and Postgres users currently you are limited to just the fields added by the IAB, UA, and YAUAA contexts without modifying the models yourself, however we plan to support adding arbitrary self-describing event and context fields to our base table in the future.
 
@@ -82,9 +82,9 @@ For Redshift and Postgres users currently you are limited to just the fields add
 
 ```json
     {
-    "name": "contact_page_view", 
+    "name": "contact_page_view",
     "condition": "event_name = 'page_view' and page_url like '%contact-us%",
-    "list_events": true 
+    "list_events": true
     }
 ```
 
@@ -98,8 +98,8 @@ For some self-describing event with a name of `sign_up`, where we do not want to
 
 ```json
     {
-    "name": "transact", 
-    "condition": "event_name = 'sign_up'", 
+    "name": "transact",
+    "condition": "event_name = 'sign_up'",
     }
 ```
 
@@ -110,16 +110,16 @@ For some self-describing event with a name of `sign_up`, where we do not want to
 <summary>Using a self-describing event and a context name</summary>
 
 
-Using our [Snowplow e-commerce tracking](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md):
+Using our [Snowplow e-commerce tracking](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md):
 
 <Tabs groupId="warehouse" queryString>
 <TabItem value="snowflake" label="Snowflake" default>
 
 ```json
     {
-    "name": "transact", 
-    "condition": "UNSTRUCT_EVENT_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_SNOWPLOW_ECOMMERCE_ACTION_1:type::varchar = 'transaction'", 
-    "value": "CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_TRANSACTION_1[0]:revenue::decimal(22,2)", 
+    "name": "transact",
+    "condition": "UNSTRUCT_EVENT_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_SNOWPLOW_ECOMMERCE_ACTION_1:type::varchar = 'transaction'",
+    "value": "CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_TRANSACTION_1[0]:revenue::decimal(22,2)",
     "default_value":0
     }
 ```
@@ -129,7 +129,7 @@ Using our [Snowplow e-commerce tracking](/docs/collecting-data/collecting-from-o
 
 ```json
     {
-    "name": "transact", 
+    "name": "transact",
     "condition": "UNSTRUCT_EVENT_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_SNOWPLOW_ECOMMERCE_ACTION_1_0_0.type = 'transaction'",
     "value": "CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_TRANSACTION_1_0_0[SAFE_OFFSET(0)].revenue",
     "default_value":0
@@ -141,9 +141,9 @@ Using our [Snowplow e-commerce tracking](/docs/collecting-data/collecting-from-o
 
 ```json
     {
-    "name": "transact", 
-    "condition": "UNSTRUCT_EVENT_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_SNOWPLOW_ECOMMERCE_ACTION_1.type = 'transaction'", 
-    "value": "CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_TRANSACTION_1[0].revenue", 
+    "name": "transact",
+    "condition": "UNSTRUCT_EVENT_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_SNOWPLOW_ECOMMERCE_ACTION_1.type = 'transaction'",
+    "value": "CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_ECOMMERCE_TRANSACTION_1[0].revenue",
     "default_value":0
     }
 ```

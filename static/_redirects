@@ -295,3 +295,36 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/consent-gdpr/original/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/web-trackers-v3/tracking-events/consent-gdpr/original/
 /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/ecommerce/original/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/previous-versions/web-trackers-v3/tracking-events/ecommerce/original/
 /docs/understanding-tracking-design/defining-the-data-to-collect-with-data-poducts/* /docs/understanding-tracking-design/defining-the-data-to-collect-with-data-products/:splat 301
+
+# Sidebar restructure
+/docs/collecting-data/* /docs/sources/:splat 301
+/docs/sources/collecting-data-from-third-parties/* /docs/sources/webhooks/:splat 301
+/docs/sources/collecting-from-own-applications/* /docs/sources/trackers/:splat 301
+/docs/contributing/* /docs/resources/:splat 301
+/docs/understanding-your-pipeline/* /docs/fundamentals/:splat 301
+/docs/first-steps/* /docs/get-started/:splat 301
+/docs/feature-comparison/* /docs/get-started/feature-comparison/:splat 301
+/docs/getting-started-on-bdp/* /docs/get-started/snowplow-bdp/:splat 301
+/docs/getting-started-on-community-edition/* /docs/get-started/snowplow-community-edition/:splat 301
+/docs/fundamentals/deployment-model/* /docs/get-started/deployment-model/:splat 301
+/docs/enriching-your-data/* /docs/pipeline/enrichments/:splat 301
+/docs/understanding-tracking-design/* /docs/data-product-studio/:splat 301
+/docs/managing-data-quality/* /docs/data-product-studio/data-quality/failed-events/:splat 301
+/docs/testing-debugging/snowplow-inspector/* /docs/data-product-studio/data-quality/snowplow-inspector/:splat 301
+/docs/testing-debugging/snowplow-micro/* /docs/data-product-studio/data-quality/snowplow-micro/:splat 301
+/docs/data-product-studio/data-quality/failed-events/testing-and-qa-workflows/set-up-automated-testing-with-snowplow-micro/* /docs/data-product-studio/data-quality/snowplow-micro/automated-testing/:splat 301
+/docs/data-product-studio/data-quality/failed-events/testing-and-qa-workflows/using-the-data-structures-ci-tool-for-data-quality/* /docs/data-product-studio/data-quality/data-structures-ci-tool/:splat 301
+/docs/sources/code-generation/* /docs/data-product-studio/snowtype/:splat 301
+/docs/data-product-studio/versioning-your-data-structures/* /docs/data-product-studio/data-structures/version-amend/:splat 301
+/docs/data-product-studio/managing-your-data-structures/* /docs/data-product-studio/data-structures/manage/:splat 301
+/docs/data-product-studio/managing-event-specifications/ui/* /docs/data-product-studio/event-specifications/:splat 301
+/docs/data-product-studio/managing-event-specifications/api/* /docs/data-product-studio/event-specifications/api/:splat 301
+/docs/data-product-studio/tracking-plans/* /docs/data-product-studio/event-specifications/tracking-plans/:splat 301
+/docs/data-product-studio/defining-the-data-to-collect-with-data-products/* /docs/data-product-studio/data-products/:splat 301
+/docs/data-product-studio/organize-data-sources-with-source-applications/* /docs/data-product-studio/source-applications/:splat 301
+/docs/sources/configuring-collector/* /docs/pipeline/collector/:splat 301
+/docs/pipeline-components-and-applications/* /docs/api-reference/:splat 301
+/docs/destinations/analytics-sdk/* /docs/api-reference/analytics-sdk/:splat 301
+/docs/storing-querying/* /docs/destinations/warehouses-lakes/:splat 301
+/docs/recipes/* /docs/resources/recipes-tutorials/:splat 301
+/docs/using-the-snowplow-console/* /docs/account-management/:splat 301

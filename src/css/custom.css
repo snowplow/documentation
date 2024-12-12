@@ -292,69 +292,20 @@ table h3 {
   line-height: 20px;
 }
 
-li.bdp > div > a::before,
-li.bdp > a::before,
-li.community > div > a::before,
-li.community > a::before {
-  display: inline-block;
-  vertical-align: middle;
-  margin-right: 0.5em;
-  text-wrap: nowrap;
-}
-
-article.bdp > a > p::before,
-article.community > a > p::before {
-  display: inline-block;
-  vertical-align: bottom;
-  margin-right: 0.3em;
-}
-
 li.hidden,
 article.hidden {
   display: none;
-}
-
-li.bdp > div > a::before,
-li.bdp > a::before,
-article.bdp > a > p::before {
-  content: '🏭';
-}
-li.community > div > a::before,
-li.community > a::before,
-article.community > a > p::before {
-  content: '🛠️';
 }
 
 a.menu__link,
 a.card {
   position: relative;
 }
-.bdp a:hover::after,
-.community a:hover::after {
-  position: absolute;
-  left: 0;
-  bottom: -30px;
-  width: auto;
-  white-space: nowrap;
-  transform: none;
-  background-color: var(--ifm-font-color-base);
-  color: var(--ifm-font-color-base-inverse);
-  border-radius: 3px;
-  box-shadow: 1px 1px 5px 0 rgba(0, 0, 0, 0.4);
-  font-size: 14px;
-  z-index: 9998;
-  padding: 3px 5px;
-}
+
 a.card:hover::after {
   top: 2rem;
   left: 2rem;
   bottom: auto;
-}
-.bdp a:hover::after {
-  content: '🏭: For Snowplow BDP customers';
-}
-.community a:hover::after {
-  content: '🛠️: For Snowplow Community Edition users';
 }
 
 .breadcrumbs__item:not(:last-child):after {
@@ -507,7 +458,7 @@ fieldset {
   margin-bottom: 16px;
 }
 
-/* 
+/*
 Controls the display of navbar/sidebar items
 - desktop-only: only visible on desktop top navbar
 - mobile-only: only visible on mobile side menu, not in top navbar

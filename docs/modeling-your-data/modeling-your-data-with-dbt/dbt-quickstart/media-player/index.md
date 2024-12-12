@@ -22,8 +22,8 @@ import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
 
 In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web or mobile events dataset being available in your database:
 
-- A dataset of media events must be available in the database. You can collect media events using our plugins for the JavaScript tracker or using the iOS and Android trackers: [Media plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/index.md), [HTML5 media player plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/html5/index.md), [YouTube plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/youtube/index.md), [Vimeo plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/vimeo/index.md) or the [iOS and Android media APIs](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/media-tracking/index.md)
-- Have the [`webPage` context](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/index.md#auto-tracked-entities) enabled on Web or the [screen context](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/screen-tracking/index.md#screen-view-event-and-screen-context-entity) on mobile (enabled by default).
+- A dataset of media events must be available in the database. You can collect media events using our plugins for the JavaScript tracker or using the iOS and Android trackers: [Media plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/index.md), [HTML5 media player plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/html5/index.md), [YouTube plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/youtube/index.md), [Vimeo plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/vimeo/index.md) or the [iOS and Android media APIs](/docs/sources/trackers/mobile-trackers/tracking-events/media-tracking/index.md)
+- Have the [`webPage` context](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/index.md#auto-tracked-entities) enabled on Web or the [screen context](/docs/sources/trackers/mobile-trackers/tracking-events/screen-tracking/index.md#screen-view-event-and-screen-context-entity) on mobile (enabled by default).
 - Enabled session tracking on the tracker (default on mobile).
 
 The model is compatible with all versions of our media tracking APIs. These have evolved over time and may track the media events using two sets of event and contexts schemas:
@@ -191,7 +191,7 @@ vars:
 
 ### 8. Verify your variables using our Config guides (Optional)
 
-If you are unsure whether the default values set are good enough in your case or you would already like to maximize the potential of your models, you can dive deeper into the meaning behind our variables on our [Config](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/) page. It includes a [Config Generator](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/#Generator) to help you create all your variable configurations, if necessary.
+If you are unsure whether the default values set are good enough in your case or you would already like to maximize the potential of your models, you can dive deeper into the meaning behind our variables on our [Config](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/index.mdx) page. It includes a [Config Generator](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/index.mdx#Generator) to help you create all your variable configurations, if necessary.
 
 
 ### 9. Run your model

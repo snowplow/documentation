@@ -6,8 +6,8 @@ title: Installation and Setup
 This guide will help you understand some of the basic capabilities of Data Products and how they can be used in practice for most tracking implementation setups.
 
 ## Prerequisites
-- A [collector](https://docs.snowplow.io/docs/collecting-data/configuring-collector/ui/) endpoint.
-- A [Console API key](https://docs.snowplow.io/docs/collecting-data/code-generation/using-the-cli/#authenticating-with-the-console) for generating code using Snowtype.
+- A [collector](https://docs.snowplow.io/docs/pipeline/configuring-collector/) endpoint.
+- A [Console API key](https://docs.snowplow.io/docs/data-product-studio/snowtype/using-the-cli/#authenticating-with-the-console) for generating code using Snowtype.
 
 ## What you'll be doing
 
@@ -20,7 +20,7 @@ This basic tracking setup will include:
 
 For demonstration purposes we are going to be using a [TodoMVC](https://todomvc.com/) clone built with [React.js](https://react.dev/).
 
-If you want to follow along you can: 
+If you want to follow along you can:
 1. Clone the repository using`git clone git@github.com:snowplow-incubator/data-products-basic-tracking-recipe.git`.
 2. Change into the project directory and install the dependencies using `npm install`.
 3. Run the development server using `npm run dev`.

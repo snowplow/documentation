@@ -81,7 +81,7 @@ You can use the example provided in `utils/example_normalize_config.json` to sta
 
 ### 7. Setup your resolver connection file *(optional)*
 
-If you are not using iglu central as your only iglu registry then you will need to set up an [iglu resolver](/docs/pipeline-components-and-applications/iglu/iglu-resolver/index.md) file and point to this in your generator config.
+If you are not using iglu central as your only iglu registry then you will need to set up an [iglu resolver](/docs/api-reference/iglu/iglu-resolver/index.md) file and point to this in your generator config.
 
 ### 8. Generate your models
 

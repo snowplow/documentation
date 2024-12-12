@@ -24,8 +24,8 @@ Our **Marketing Attribution** app (together with the [Snowplow Attribution dbt p
 
 ## Requirements
 
-- [Campaign Attribution enrichment](/docs/enriching-your-data/available-enrichments/campaign-attribution-enrichment/index.md) enabled
-- [Referrer Parser enrichment](/docs/enriching-your-data/available-enrichments/referrer-parser-enrichment/index.md) enabled
+- [Campaign Attribution enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) enabled
+- [Referrer Parser enrichment](/docs/pipeline/enrichments/available-enrichments/referrer-parser-enrichment/index.md) enabled
 - Running the [Snowplow Unified Digital dbt Package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) with `conversion event(s)` defined and the optional conversion module enabled
 - Running the [Snowplow Attribution dbt Package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/index.md)
 - Access to the derived tables granted to the role used when setting up the data app

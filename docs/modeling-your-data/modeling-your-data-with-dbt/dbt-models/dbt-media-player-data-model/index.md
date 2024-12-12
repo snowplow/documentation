@@ -22,12 +22,12 @@ import Badges from '@site/src/components/Badges';
 
 The package contains a fully incremental model that transforms raw media player event data into derived tables for easier querying. It can support media events tracked using the following tracking implementations on Web and mobile:
 
-* on Web using plugins for our [JavaScript trackers](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/index.md):
-  * [media plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/index.md) that can be used to track events from any media player.
-  * [HTML5 media tracking plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/html5/index.md).
-  * [YouTube tracking plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/youtube/index.md).
-  * [Vimeo tracking plugin](/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/media/vimeo/index.md).
-* [media tracking APIs on our iOS and Android trackers](/docs/collecting-data/collecting-from-own-applications/mobile-trackers/tracking-events/media-tracking/index.md) for mobile apps.
+* on Web using plugins for our [JavaScript trackers](/docs/sources/trackers/javascript-trackers/index.md):
+  * [media plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/index.md) that can be used to track events from any media player.
+  * [HTML5 media tracking plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/html5/index.md).
+  * [YouTube tracking plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/youtube/index.md).
+  * [Vimeo tracking plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/vimeo/index.md).
+* [media tracking APIs on our iOS and Android trackers](/docs/sources/trackers/mobile-trackers/tracking-events/media-tracking/index.md) for mobile apps.
 
 <details>
 <summary>Version 1 and version 2 of the media event and context entity schemas</summary>
@@ -77,7 +77,7 @@ The package generates robust identifiers for use in the incremental logic and ke
 
 | Identifier | Definition |
 | ----------------------- | ----------------------------- |
-| `session_identifier` | The session  identifier as defined in your dbt project variables which is is used for the package's [incremental sessionization logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/). If not set, this defaults to the `mediaSessionId` from the media session entity if enabled, else to the page/screen view id. This ensures all media events for a play spanning multiple `domain_sessionid`s are modelled. The more traditional session identifier `domain_sessionid` can be extracted from the `domain_sessionid_array` field.  |
+| `session_identifier` | The session  identifier as defined in your dbt project variables which is is used for the package's [incremental sessionization logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md). If not set, this defaults to the `mediaSessionId` from the media session entity if enabled, else to the page/screen view id. This ensures all media events for a play spanning multiple `domain_sessionid`s are modelled. The more traditional session identifier `domain_sessionid` can be extracted from the `domain_sessionid_array` field.  |
 | `user_identifier` | The user identifier as defined in your dbt project variables. If not set, this defaults to be `domain_userid` for web or the `userId` from the client session entity for mobile. |
 | `media_identifier` | Used to identify individual media elements/content. It is generated from the `player_id`, `media_label`, `media_type` and `media_player_type` fields. |
 | `play_id` | The unique identifier for each individual play of media content. This is the `mediaSessionId` from the media session entity if enabled. Otherwise this uses the page/screen view identifier together with the `media_identifer` to generate a unique play id. |

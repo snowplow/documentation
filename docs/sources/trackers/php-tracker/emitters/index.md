@@ -131,14 +131,17 @@ Arguments:
 
 The internal emitter default settings are as follows:
 
-- Rolling Window (Number of concurrent requests)
+- Rolling Window (max number of concurrent requests)
     - POST: 10
     - GET: 30
-- Curl Buffer (Number of times we need to hit the emitters buffer size before sending)
+- Curl Buffer (number of times we need to hit the emitters buffer size before sending)
     - POST: 50
     - GET: 250
 
-These settings are currently not editable from the constructor; however, the values are stored within a `Constants.class` if you must make changes.
+Since version 0.8 of the PHP tracker, you can change these settings using the following setter functions:
+
+- `$curl_emitter.setCurlAmount($curl_amount)` – update the curl buffer size (number of times we need to reach the buffer size before we initiate sending)
+- `$curl_emitter.setRollingWindow($rolling_window)` – update the rolling window configuration (max number of concurrent requests)
 
 ### File
 

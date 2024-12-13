@@ -13,78 +13,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-The `data-structures` subcommand of [Snowplow CLI](https://github.com/snowplow-product/snowplow-cli) provides a collection of functionality to ease the integration of custom development and publishing workflows.
+The `data-structures` subcommand of [Snowplow CLI](/docs/data-product-studio/snowplow-cli/index.md) provides a collection of functionality to ease the integration of custom development and publishing workflows.
 
 ## Snowplow CLI Prerequisites
 
-### Install
-
-Snowplow CLI can be installed with [homebrew](https://brew.sh/)
-```
-brew install snowplow-product/taps/snowplow-cli
-```
-
-Verify the installation with
-```
-snowplow-cli --help
-```
-
-For systems where homebrew is not available binaries for multiple platforms can be found in [releases](https://github.com/snowplow-product/snowplow-cli/releases).
-
-Example installation for `linux_x86_64` using `curl`
-
-```bash
-curl -L -o snowplow-cli https://github.com/snowplow-product/snowplow-cli/releases/latest/download/snowplow-cli_linux_x86_64
-chmod u+x snowplow-cli
-```
-
-Verify the installation with
-```
-./snowplow-cli --help
-```
-
-### Configure
-
-You will need three values.
-
-API Key Id and API Key Secret are generated from the [credentials section](https://console.snowplowanalytics.com/credentials) in BDP Console.
-
-Organization Id can be retrieved from the URL immediately following the .com when visiting BDP console:
-
-![](images/orgID.png)
-
-Snowplow CLI can take its configuration from a variety of sources. More details are available from `./snowplow-cli data-structures --help`. Variations on these three examples should serve most cases.
-
-<Tabs groupId="config">
-  <TabItem value="env" label="env variables" default>
-
-  ```bash
-  SNOWPLOW_CONSOLE_API_KEY_ID=********-****-****-****-************
-  SNOWPLOW_CONSOLE_API_KEY=********-****-****-****-************
-  SNOWPLOW_CONSOLE_ORG_ID=********-****-****-****-************
-  ```
-
-  </TabItem>
-  <TabItem value="defaultconfig" label="$HOME/.config/snowplow/snowplow.yml" >
-
-  ```yaml
-  console:
-    api-key-id: ********-****-****-****-************
-    api-key: ********-****-****-****-************
-    org-id: ********-****-****-****-************
-  ```
-
-  </TabItem>
-  <TabItem value="args" label="inline arguments" >
-
-  ```bash
-  ./snowplow-cli data-structures --api-key-id ********-****-****-****-************ --api-key ********-****-****-****-************ --org-id ********-****-****-****-************
-  ```
-
-  </TabItem>
-</Tabs>
-
-Snowplow CLI defaults to yaml format. It can be changed to json by either providing a `--output-format json` flag or setting the `output-format: json` config value. It will work for all commands where it matters, not only for `generate`.
+Installed and configured [Snowplow CLI](/docs/data-product-studio/snowplow-cli/index.md)
 
 
 ## Available commands

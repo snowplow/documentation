@@ -1,8 +1,7 @@
 ---
 title: Snowplow CLI
-date: 2024-11-25
 sidebar_label: Snowplow CLI
-sidebar_position: 999
+sidebar_position: 7
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -81,5 +80,5 @@ Snowplow CLI defaults to yaml format. It can be changed to json by either provid
 
 # Use cases
 
-- [Manage your data structures with snowplow-cli](/docs/understanding-tracking-design/managing-your-data-structures/cli/index.md)
-- [Set up a github CI/CD pipeline to manage data structures and data products](/docs/recipes/recipe-data-structures-in-git/index.md)
+- [Manage your data structures with snowplow-cli](/docs/data-product-studio/data-structures/manage/cli/index.md)
+- [Set up a github CI/CD pipeline to manage data structures and data products](/docs/resources/recipes-tutorials/recipe-data-structures-in-git/index.md)

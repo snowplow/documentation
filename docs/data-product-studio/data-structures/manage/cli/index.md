@@ -13,11 +13,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-The `data-structures` subcommand of [Snowplow CLI](/docs/pipeline-components-and-applications/cli/index.md) provides a collection of functionality to ease the integration of custom development and publishing workflows.
+The `data-structures` subcommand of [Snowplow CLI](/docs/data-product-studio/cli/index.md) provides a collection of functionality to ease the integration of custom development and publishing workflows.
 
 ## Snowplow CLI Prerequisites
 
-Installed and configured [Snowplow CLI](/docs/pipeline-components-and-applications/cli/index.md)
+Installed and configured [Snowplow CLI](/docs/data-product-studio/cli/index.md)
 
 
 ## Available commands

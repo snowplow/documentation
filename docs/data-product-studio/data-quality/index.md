@@ -1,7 +1,7 @@
 ---
 title: "Data quality"
 date: "2024-12-04"
-sidebar_position: 7
+sidebar_position: 8
 ---
 
 There are a number of ways you can test and QA your pipeline to follow good data practices.

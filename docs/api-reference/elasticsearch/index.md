@@ -72,11 +72,11 @@ Each [entity](/docs/fundamentals/entities/index.md) type attached to the event g
 
 #### Getting started
 
-First off, install and set up Elasticsearch. We have tested the loader with versions 6.x, 7.x and 8.x of Elasticsearch. For more information, check out the [installation guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/_installation.html).
+First off, install and set up Elasticsearch. For more information, check out the [installation guide](https://www.elastic.co/guide/en/elasticsearch/reference/current/_installation.html) for installation information and [Supported versions of OpenSearch and Elasticsearch](https://docs.aws.amazon.com/opensearch-service/latest/developerguide/what-is.html#choosing-version) for the latest information of ElasticSearch/OpenSearch supported versions by AWS.
 
-:::note OpenSearch
+:::note Supported Versions
 
-We have also tested this loader with OpenSearch 2.2.x, 2.4.x and 2.5.
+We support ElasticSearch v6.x and v7.x. We also support OpenSearch v1.x and v2.x. We do not support ElasticSearch v8.x currently.
 
 :::
 

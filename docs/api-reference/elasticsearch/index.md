@@ -76,7 +76,7 @@ First off, install and set up Elasticsearch. For more information, check out the
 
 :::note Supported Versions
 
-We support ElasticSearch v6.x and v7.x. We also support OpenSearch v1.x and v2.x. We do not support ElasticSearch v8.x because it is currently not supported by AWS
+We support ElasticSearch v6.x and v7.x. We also support OpenSearch v1.x and v2.x. We do not support ElasticSearch v8.x currently.
 
 :::
 

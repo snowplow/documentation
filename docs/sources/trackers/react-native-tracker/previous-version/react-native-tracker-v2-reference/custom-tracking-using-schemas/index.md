@@ -80,3 +80,37 @@ tracker.trackScreenViewEvent(
 ```
 
 It is also possible to add custom contexts globally, so that they are applied to all events within an application. For more information, see the Global Contexts section below.
+
+## Global Contexts
+
+As mentioned in the GCConfiguration section, you can set global contexts when initializing the tracker.
+
+However, as the user journey evolves, you may need to remove or add global contexts at runtime.
+
+### Removing Global Contexts
+
+A set of global contexts is identified by its tag, which was set when the global contexts was added, either as part of tracker initial configuration or manually (see below).
+
+To remove the global contexts associated with a tag, you can use the `removeGlobalContexts` tracker method, which takes as argument the tag. For example:
+
+```typescript
+tracker.removeGlobalContexts('my-old-tag');
+```
+
+### Adding Global Contexts
+
+Similarly, you can add global contexts at runtime using the `addGlobalContexts` tracker method. This method takes as argument the GlobalContext to add.
+
+For example:
+
+```typescript
+tracker.addGlobalContexts({
+    tag: 'my-new-tag',
+    globalContexts: [
+        {
+            schema: 'iglu:com.snowplowanalytics.snowplow/ad_impression/jsonschema/1-0-0',
+            data: {impressionId: 'my-ad-impression-id'},
+        },
+    ]
+});
+```

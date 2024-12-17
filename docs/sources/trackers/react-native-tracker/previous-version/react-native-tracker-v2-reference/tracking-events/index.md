@@ -11,21 +11,29 @@ The React Native tracker captures two types of out-of-the-box events, automatica
 Many of the automatic tracking options available on iOS and Android are also available in React Native – these can be enabled or disabled in the TrackerConfiguration passed to `createTracker` as part of the TrackerController configuration object:
 
 ```typescript
-const tracker = newTracker({
-    namespace: 'appTracker',
-    endpoint: COLLECTOR_URL,
+const tracker = createTracker(
+    'appTracker',
+    {
+      endpoint: COLLECTOR_URL,
+    },
+    {
+        trackerConfig: {
+            // auto-tracked events:
+            screenViewAutotracking: false, // only iOS UIKit or Android Activity screens
+            lifecycleAutotracking: false,
+            installAutotracking: true,
+            exceptionAutotracking: true, // only errors in native app code
+            diagnosticAutotracking: false,
 
-    // auto-tracked events:
-    lifecycleAutotracking: false,
-    installAutotracking: true,
-    screenEngagementAutotracking: true,
-
-    // auto-tracked context entities:
-    applicationContext: true,
-    platformContext: true,
-    sessionContext: true,
-    deepLinkContext: true,
-    screenContext: true,
+            // auto-tracked context entities:
+            applicationContext: true,
+            platformContext: true,
+            geoLocationContext: false,
+            sessionContext: true,
+            deepLinkContext: true,
+            screenContext: true,
+        },
+    }
 );
 ```
 
@@ -34,7 +42,8 @@ The automatically captured data are:
 * [**Platform and Application Context Tracking**](./platform-and-application-context/index.md): Captures contextual information about the device and the app.
 * [**Session Tracking**](./session-tracking/index.md): Captures the session which helps to keep track of the user activity in the app.
 * [**App Lifecycle Tracking**](./lifecycle-tracking/index.md): Captures application lifecycle state changes (foreground/background transitions).
-* [**Screen View and Engagement Tracking**](./screen-tracking/index.md): Captures each time a new “screen” is loaded.
+* [**Screen View Tracking**](./screen-tracking/index.md): Captures each time a new “screen” is loaded.
+* [**Exception Tracking**](./exception-tracking/index.md): Captures any unhandled exceptions within the application.
 * [**Installation Tracking**](./installation-tracking/index.md): Captures an install event which occurs the first time an application is opened.
 
 ## Manually-tracked events
@@ -70,7 +79,7 @@ tracker.trackStructuredEvent({
 - `property`: (string) - describes the object or the action performed on it. This might be the quantity of an item added to basket
 - `value`: (number) - quantifies or further describes the user action. This might be the price of an item added-to-basket, or the starting time of the video where play was just pressed
 
-### Tracking timing events
+#### Timing
 
 Use the `trackTimingEvent` tracker method to track user timing events such as how long resources take to load.
 

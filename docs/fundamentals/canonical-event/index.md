@@ -2,7 +2,7 @@
 title: "Understanding the structure of Snowplow data"
 description: A summary of the Snowplow events table and its fields, including custom events and entities
 sidebar_label: "What the data looks like"
-sidebar_position: 5
+sidebar_position: 4
 ---
 
 ```mdx-code-block

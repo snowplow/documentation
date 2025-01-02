@@ -2,6 +2,8 @@
 title: "React Native Tracker v2 reference"
 date: "2020-07-09"
 sidebar_position: 290
+sidebar_custom_props:
+  outdated: true
 ---
 
 ```mdx-code-block

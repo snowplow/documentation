@@ -12,37 +12,29 @@ import TabItem from '@theme/TabItem';
 
 Session tracking captures the session which helps to keep track of the user activity in the app.
 
-Client session tracking is enabled by default. It can be set through the `TrackerConfiguration` as explained below.
+Client session tracking is enabled by default. It can be set using the `sessionContext` option as explained below.
 
 ```typescript
-const tracker = createTracker(
-    'appTracker',
-    { endpoint: COLLECTOR_URL },
-    {
-        trackerConfig: {
-            sessionContext: true,
-        },
-    }
-);
+const tracker = await newTracker({
+    namespace: 'appTracker',
+    endpoint: COLLECTOR_URL,
+    sessionContext: true,
+});
 ```
 
 When enabled, the tracker appends a [`client_session` entity](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) to each event it sends and it maintains this session information as long as the application is installed on the device.
 
 Sessions correspond to tracked user activity. A session expires when no tracking events have occurred for the amount of time defined in a timeout (by default 30 minutes). The session timeout check is executed for each event tracked. If the gap between two consecutive events is longer than the timeout the session is renewed. There are two timeouts since a session can timeout in the foreground (while the app is visible) or in the background (when the app has been suspended, but not closed).
 
-The timeouts for the session can be configured in the `SessionConfiguration` like in the example below:
+The timeouts for the session can be configured like in the example below:
 
 ```typescript
-const tracker = createTracker(
-    'appTracker',
-    { endpoint: COLLECTOR_URL },
-    {
-        sessionConfig: {
-            foregroundTimeout: 1800, // seconds
-            backgroundTimeout: 1800 // seconds
-        },
-    }
-);
+const tracker = await newTracker({
+    namespace: 'appTracker',
+    endpoint: COLLECTOR_URL,
+    foregroundSessionTimeout: 1800, // seconds
+    backgroundSessionTimeout: 1800 // seconds
+});
 ```
 
 The lifecycle events (`Foreground` and `Background` events) have a role in the session expiration. The lifecycle events can be enabled as explained in [App Lifecycle Tracking](../lifecycle-tracking/index.md). Once enabled they will be fired automatically when the app moves from foreground state to background state and vice versa.
@@ -53,16 +45,12 @@ When the app moves from background to foreground, the `Foreground` event is fire
 For instance, with this configuration:
 
 ```typescript
-const tracker = createTracker(
-    'appTracker',
-    { endpoint: COLLECTOR_URL },
-    {
-        sessionConfig: {
-            foregroundTimeout: 360, // seconds
-            backgroundTimeout: 15 // seconds
-        },
-    }
-);
+const tracker = await newTracker({
+    namespace: 'appTracker',
+    endpoint: COLLECTOR_URL,
+    foregroundSessionTimeout: 360, // seconds
+    backgroundSessionTimeout: 15 // seconds
+});
 ```
 
 the session would expire if the app is in background for more than 15 seconds, like in this example:

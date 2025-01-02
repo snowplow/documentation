@@ -36,7 +36,7 @@ The `newTracker` provides a wide range of optional configuration options that le
 The following snippet shows an overview of all the options and their meaning:
 
 ```typescript
-const tracker = newTracker(
+const tracker = newTracker({
     // Network configuration:
     // Represents the network communication configuration allowing the tracker to be able to send events to the Snowplow collector.
 
@@ -148,7 +148,7 @@ const tracker = newTracker(
     screenViewport: [123, 456],
     // The color depth. Populates the `br_colordepth` field.
     colorDepth: 20,
-);
+});
 ```
 
 To learn more about the specific parts of the configuration and autotracked information, see:
@@ -195,7 +195,7 @@ The tracker methods to do so are:
 - **removeGlobalContexts**
 - **clearGlobalContexts**
 
-You can find out more information and examples about how to add or remove global contexts [here](/docs/sources/trackers/react-native-tracker/custom-tracking-using-schemas/global-context/index.md).
+You can find out more information and examples about [how to add or remove global contexts here](/docs/sources/trackers/react-native-tracker/custom-tracking-using-schemas/global-context/index.md).
 
 ### Setting the Subject
 

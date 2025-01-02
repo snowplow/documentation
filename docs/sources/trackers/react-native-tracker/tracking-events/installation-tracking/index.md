@@ -17,15 +17,9 @@ If installation autotracking is not enabled, the tracker will still keep track o
 The installation autotracking is enabled by default. It can be set in `TrackerConfiguration` like in the example below:
 
 ```typescript
-const tracker = createTracker(
-    'appTracker',
-    {
-      endpoint: COLLECTOR_URL,
-    },
-    {
-        trackerConfig: {
-            installAutotracking: true,
-        },
-    }
-);
+const tracker = await newTracker({
+    namespace: 'appTracker',
+    endpoint: COLLECTOR_URL,
+    installAutotracking: true, // disabled by default
+});
 ```

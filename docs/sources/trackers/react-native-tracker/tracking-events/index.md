@@ -8,7 +8,7 @@ The React Native tracker captures two types of out-of-the-box events, automatica
 
 ## Auto-tracked events and entities
 
-Many of the automatic tracking options available on iOS and Android are also available in React Native – these can be enabled or disabled in the TrackerConfiguration passed to `createTracker` as part of the TrackerController configuration object:
+Many of the automatic tracking options available on iOS and Android are also available in React Native – these can be enabled or disabled in the TrackerConfiguration passed to `newTracker` as part of the TrackerController configuration object:
 
 ```typescript
 const tracker = newTracker({

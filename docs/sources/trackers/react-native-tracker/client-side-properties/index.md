@@ -66,23 +66,18 @@ The `network_userid` is stored in the tracker and it's kept the same until the a
 
 ## Setting the subject configuration
 
-The client-side properties can be set during tracker initialization using the `subjectConfig` configuration:
+The client-side properties can be set during tracker initialization using the `newTracker` configuration:
 
 ```typescript
-const tracker = createTracker(
-    'appTracker',
-    {
-      endpoint: COLLECTOR_URL,
-    },
-    {
-        subjectConfig: {
-            userId: 'my-user-id',
-        },
-    }
-);
+const tracker = await newTracker({
+    namespace: 'appTracker',
+    endpoint: COLLECTOR_URL,
+    // pass the subject properties:
+    userId: 'my-user-id',
+});
 ```
 
-See the the full [list of options in the configuration section](/docs/sources/trackers/react-native-tracker/introduction/index.md#subjectconfiguration).
+See the the full [list of options in the configuration section](/docs/sources/trackers/react-native-tracker/introduction/index.md#configuring-the-tracker).
 
 ### Setting the subject data in a tracker instance
 

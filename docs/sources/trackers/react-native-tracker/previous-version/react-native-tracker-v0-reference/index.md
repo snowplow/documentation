@@ -2,6 +2,8 @@
 title: "React Native Tracker v0 reference"
 date: "2021-08-09"
 sidebar_position: 300
+sidebar_custom_props:
+  outdated: true
 ---
 
 This documentation page is about a previous version of the React Native tracker. [Go to the latest docs](/docs/sources/trackers/react-native-tracker/index.md).

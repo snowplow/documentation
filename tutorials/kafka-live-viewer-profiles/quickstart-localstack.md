@@ -3,17 +3,8 @@ position: 2
 title: Quickstart with Localstack
 ---
 
-# Localstack
+# Quickstart with Localstack
 
-## Prerequisites
-
-To follow this accelerator, you will need:
-
-- **Technical Skills**
-  - Understanding of event-driven architectures
-  - Experience with **Apache Kafka**
-  - Basic knowledge of AWS services, especially **DynamoDB**
-  
 ## Architecture
 
 The solution comprises several interconnected components:

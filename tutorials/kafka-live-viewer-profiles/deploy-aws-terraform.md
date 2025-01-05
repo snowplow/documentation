@@ -1,6 +1,6 @@
 ---
 position: 3
-title: Deploy to AWS with Terraform
+title: Deploy on AWS with Terraform
 ---
 
 # Deploy on AWS with Terraform
@@ -9,28 +9,15 @@ title: Deploy to AWS with Terraform
 
 The following [Steps](#steps) will allow you to create an infrastructure on AWS and access it. There is no need to manually install [Terraform](https://www.terraform.io/). It is executed via [Docker](https://www.docker.com/) using the `terraform.sh` script.
 
-To follow these [Steps](#steps), ensure you have correctly configured the `../.env` file in the root of this project.
-
-> **Note**: There is a file `../.env.sample`. Copy it to `../.env` and edit the variables accordingly with your environment.
-
-## Prerequisites
-
-To follow this accelerator, you will need:
-
-- **Development Environment**
-  - A system with Docker installed
-  - Basic knowledge of Java programming and Docker usage
-  - Familiarity with terminal/command-line tools
-
-- **Technical Skills**
-  - Understanding of event-driven architectures
-  - Experience with **Apache Kafka**
-  - Basic knowledge of AWS services, especially **DynamoDB**
-
-- **Cloud Setup**
-  - An AWS account
-
 ## Steps
+
+### Step 0: Prerequisites
+
+1. Open a terminal on Ubuntu Linux or Windows (WSL2).
+2. Install **Docker** and **Docker Compose**.
+3. Clone the project and navigate to its directory.
+4. Create a `.env` file based on `.env.example` and configure AWS variables.
+
 
 ### Step 1 → Initialize the project
 

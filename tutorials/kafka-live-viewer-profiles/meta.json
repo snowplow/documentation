@@ -1,5 +1,5 @@
 {
   "title": "Kafka Live Viewer Profiles",
-  "label": "Infrastructure",
+  "label": "Solution accelerator",
   "description": "A Snowplow solution accelerator showing how to build a real-time viewer profile for a video streaming site. Leveraging Snowplow, Apache Kafka and AWS DynamoDB."
 }

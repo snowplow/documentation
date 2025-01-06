@@ -5,53 +5,23 @@ title: Quickstart with Localstack
 
 # Quickstart with Localstack
 
-## Architecture
-
-The solution comprises several interconnected components:
-
-- **Tracker Frontend**: 
-  - A React application that emits events (e.g., play, pause, ad interactions) to the [Stream Collector](#stream-collector).
-
-- **Stream Collector**:
-  - Collects and forwards events via Kinesis to [Snowbridge](#snowbridge).
-
-- **Snowbridge**:
-  - Enriches the events and routes them via Kafka to the [Live Viewer Backend](#live-viewer-backend).
-
-- **Live Viewer Backend**:
-  - Processes events, stores the data in DynamoDB, and generates JSON state data for the [Live Viewer Frontend](#live-viewer-frontend).
-
-- **Live Viewer Frontend**:
-  - Displays the JSON state for "behavior-viewer" users.
-
-![Architecture Diagram](images/architecture.png)
-
-### Components & Configuration
-
-- **Snowplow components**: `compose.snowplow.yaml`
-- **Kafka infrastructure**: `compose.kafka.yaml`
-- **Application components**: `compose.apps.yaml`
-- **LocalStack setup**: `compose.localstack.yaml`
-- **AWS setup**: Terraform scripts (located in the `docs/terraform` folder).
-
----
-
 ## Steps to Run the Application
 
 ### Step 0: Prerequisites
 
 1. Open a terminal on Ubuntu Linux or Windows (WSL2).
 2. Install **Docker** and **Docker Compose**.
-3. Clone the project and navigate to its directory.
-4. Create a `.env` file based on `.env.example` and configure AWS variables.
+3. [Clone the project](https://github.com/snowplow-incubator/live-viewer-profiles) and navigate to its directory.
+4. Create a `.env` file based on `.env.example`. You don't need to configure AWS variables if you are using Localstack. 
 
 ### Step 1: Start the Containers
 
-Run the following command:
+Run the following command to download and run everything in Docker:
 
 ```bash
 ./up.sh
 ```
+Details on everything that is installed can be found in [architecture](/tutorials/kafka-live-viewer-profiles/introduction#architecture)
 
 **Tips:**
 - Use `Ctrl+C` to stop services but keep containers running.
@@ -59,21 +29,32 @@ Run the following command:
 
 ### Step 2: Open the Tracker Frontend
 
-Visit [http://localhost:3000](http://localhost:3000) to configure the Stream Collector endpoint and start tracking events.
+Visit [http://localhost:3000](http://localhost:3000) to configure the Stream Collector endpoint and start tracking events. Enter the Collector URL: `localhost:9090` and click `Create tracker`. 
+
+On the next screen, click `Custom media tracking demo`. This will bring up a video and a screen that displays information on what events are sent from the browser to the pipeline. If you want to simulate multiple users watching the video at the same time, you can open this in separate browsers. 
+
+You must keep this window open with the video playing because everything here is running in real-time
 
 ### Step 3: Open the Live Viewer Frontend
 
-Visit [http://localhost:8280](http://localhost:8280) to view tracked events displayed in real-time.
+Open [http://localhost:8280](http://localhost:8280) in a separate window. This will display the active users and their current state (e.g. watching video, watching advertisement, paused).
 
-### Step 4 (Optional): Inspect LocalStack
+Congratulations! You have successfully run the accelerator to stream web behavior through Snowplow and Kafka to a real-time dashboard.
+
+## Next Steps
+- You can implement Snowplow media tracking on any HTML5 or YouTube video of your choice
+
+## Other Things You Can Do
+
+### Inspect LocalStack
 
 Visit the [LocalStack UI](https://app.localstack.cloud/) to inspect infrastructure components such as Kinesis and DynamoDB.
 
-### Step 5 (Optional): View Events in Kafka UI
+### View Events in Kafka UI
 
 Access [http://localhost:8080](http://localhost:8080) to review events within the Kafka UI.
 
-### Step 6 (Optional): Use LazyDocker
+### Use LazyDocker
 
 Run the following command to manage containers visually:
 
@@ -81,7 +62,9 @@ Run the following command to manage containers visually:
 sudo ./lazydocker.sh
 ```
 
-### Step 7: Stop the Containers
+## Cleaning up
+
+### Stop the Containers
 
 Shut down all running containers:
 
@@ -89,7 +72,7 @@ Shut down all running containers:
 ./down.sh
 ```
 
-### Step 8: Clean Up
+### Clean Up and Delete
 
 To remove all containers and images, use:
 

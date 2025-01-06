@@ -31,6 +31,18 @@
     <td>Optional. Default value <code>10 seconds</code>. The duration of shard leases.  KCL workers must periodically refresh leases in the dynamodb table before this duration expires.</td>
 </tr>
 <tr>
+    <td><code>input.maxLeasesToStealAtOneTimeFactor</code></td>
+    <td>Optional. Default value <code>2.0</code>. Controls how to pick the max number of shard leases to steal at one time. E.g. If there are 4 available processors, and <code>maxLeasesToStealAtOneTimeFactor = 2.0</code>, then allow the loader to steal up to 8 leases. Allows bigger instances to more quickly acquire the shard-leases they need to combat latency.</td>
+</tr>
+<tr>
+    <td><code>input.checkpointThrottledBackoffPolicy.minBackoff</code></td>
+    <td>Optional.  Default value <code>100 milliseconds</code>.  Initial backoff used to retry checkpointing if we exceed the DynamoDB provisioned write limits.</td>
+</tr>
+<tr>
+    <td><code>input.checkpointThrottledBackoffPolicy.maxBackoff</code></td>
+    <td>Optional.  Default value <code>1 second</code>.  Maximum backoff used to retry checkpointing if we exceed the DynamoDB provisioned write limits.</td>
+</tr>
+<tr>
     <td><code>output.bad.streamName</code></td>
     <td>Required. Name of the Kinesis stream that will receive failed events.</td>
 </tr>

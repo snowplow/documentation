@@ -102,6 +102,7 @@ The Lake Loader can be configured to send the following custom metrics to a [Sta
 | `events_bad`                | A count of failed events that could not be loaded, and were instead sent to the bad output stream. |
 | `latency_millis`            | The time in milliseconds from when events are written to the source stream of events (i.e. by Enrich) until when they are read by the loader. |
 | `processing_latency_millis` | For each window of events, the time in milliseconds from when the first event is read from the stream, until all events are written and committed to the lake. |
+| `e2e_latency_millis`        | The end-to-end latency of the snowplow pipeline. For each window of events, the time in milliseconds from when the first event was received by the collector, until all events are written and committed to the lake. |
 
 See the `monitoring.metrics.statsd` options in the [configuration reference](/docs/api-reference/loaders-storage-targets/lake-loader/configuration-reference/index.md) for how to configure the StatsD receiver.
 

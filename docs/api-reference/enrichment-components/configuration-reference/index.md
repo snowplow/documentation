@@ -6,7 +6,7 @@ sidebar_position: 50
 
 ## License
 
-Enrich is released under the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.0/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).
+Enrich is released under the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.1/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).
 
 To accept the terms of license and run Enrich, set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable. Alternatively, you can configure the `license.accept` option, like this:
 

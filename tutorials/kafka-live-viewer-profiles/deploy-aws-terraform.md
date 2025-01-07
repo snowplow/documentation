@@ -9,7 +9,7 @@ title: Deploy on AWS with Terraform
 
 The following [Steps](#steps) will allow you to create an infrastructure on AWS and access it. There is no need to manually install [Terraform](https://www.terraform.io/). It is executed via [Docker](https://www.docker.com/) using the `terraform.sh` script.
 
-## Steps to deploy the Application
+## Steps to deploy the application
 
 ### Step 0: Prerequisites
 
@@ -53,7 +53,7 @@ Review the [Localstack guide](/tutorials/kafka-live-viewer-profiles/quickstart-l
 
 ---
 
-## Other Commands
+## Other commands
 
 ### Check versions
 

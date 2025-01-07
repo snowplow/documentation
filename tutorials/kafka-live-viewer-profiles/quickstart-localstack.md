@@ -5,7 +5,7 @@ title: Quickstart with Localstack
 
 # Quickstart with Localstack
 
-## Steps to Run the Application
+## Steps to run the application
 
 ### Step 0: Prerequisites
 
@@ -14,7 +14,7 @@ title: Quickstart with Localstack
 3. [Clone the project](https://github.com/snowplow-incubator/live-viewer-profiles) and navigate to its directory.
 4. Create a `.env` file based on `.env.example`. You don't need to configure AWS variables if you are using Localstack. 
 
-### Step 1: Start the Containers
+### Step 1: Start the containers
 
 Run the following command to download and run everything in Docker:
 
@@ -27,7 +27,7 @@ Details on everything that is installed can be found in [architecture](/tutorial
 - Use `Ctrl+C` to stop services but keep containers running.
 - Pass service-specific options to `./up.sh` (e.g., `./up.sh kafka-services`).
 
-### Step 2: Open the Tracker Frontend
+### Step 2: Open the tracker frontend
 
 Visit [http://localhost:3000](http://localhost:3000) to configure the Stream Collector endpoint and start tracking events. Enter the Collector URL: `localhost:9090` and click `Create tracker`. 
 
@@ -35,22 +35,23 @@ On the next screen, click `Custom media tracking demo`. This will bring up a vid
 
 You must keep this window open with the video playing because everything here is running in real-time
 
-### Step 3: Open the Live Viewer Frontend
+### Step 3: Open the live viewer frontend
 
 Open [http://localhost:8280](http://localhost:8280) in a separate window. This will display the active users and their current state (e.g. watching video, watching advertisement, paused).
 
 Congratulations! You have successfully run the accelerator to stream web behavior through Snowplow and Kafka to a real-time dashboard.
 
-## Next Steps
+## Next steps
 - You can implement Snowplow media tracking on any HTML5 or YouTube video of your choice
+- Use our supplied terraform in the next section to run this on AWS and make it publicly available
 
-## Other Things You Can Do
+## Other things you can do
 
 ### Inspect LocalStack
 
 Visit the [LocalStack UI](https://app.localstack.cloud/) to inspect infrastructure components such as Kinesis and DynamoDB.
 
-### View Events in Kafka UI
+### View events in Kafka UI
 
 Access [http://localhost:8080](http://localhost:8080) to review events within the Kafka UI.
 
@@ -64,7 +65,7 @@ sudo ./lazydocker.sh
 
 ## Cleaning up
 
-### Stop the Containers
+### Stop the containers
 
 Shut down all running containers:
 
@@ -72,7 +73,7 @@ Shut down all running containers:
 ./down.sh
 ```
 
-### Clean Up and Delete
+### Clean up and delete
 
 To remove all containers and images, use:
 

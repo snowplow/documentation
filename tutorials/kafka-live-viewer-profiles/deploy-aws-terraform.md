@@ -13,7 +13,7 @@ The following [Steps](#steps) will allow you to create an infrastructure on AWS 
 
 ### Step 0: Prerequisites
 
-1. Open a terminal on Ubuntu Linux or Windows (WSL2).
+1. Open a terminal.
 2. Install **Docker** and **Docker Compose**.
 3. [Clone the project](https://github.com/snowplow-incubator/live-viewer-profiles) and navigate to its directory.
 4. Create a `.env` file based on `.env.example` and configure AWS variables.

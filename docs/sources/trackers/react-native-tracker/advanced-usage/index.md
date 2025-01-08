@@ -6,7 +6,7 @@ sidebar_position: 40
 
 ## Removing a tracker at runtime
 
-As also mentioned in Introduction, besides the `newTracker` function, the React Native Tracker also provides two functions that allow you to remove a tracker (or all of them) at runtime.
+The React Native tracker provides two functions that allow you to remove a tracker (or all of them) at runtime.
 
 ### removeTracker
 

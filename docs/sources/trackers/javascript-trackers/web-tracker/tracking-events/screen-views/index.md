@@ -72,7 +72,7 @@ In order to make use of the plugin, you will need to register it with the tracke
 ```javascript
 window.snowplow(
     'addPlugin',
-    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-button-click-tracking@latest/dist/index.umd.min.js',
+    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-screen-tracking@latest/dist/index.umd.min.js',
     ['snowplowScreenTrackingPlugin', 'ScreenTrackingPlugin']
 );
 ```
@@ -141,7 +141,7 @@ trackScreenView({
 window.snowplow(
     'addPlugin',
     'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-button-click-tracking@latest/dist/index.umd.min.js',
-    ['snowplowScreenTrackingPlugin', 'ScreenTrackingPlugin']
+    ['snowplowScreenTrackingPlugin', 'ScreenTrackingPlugin'],
     [
       {
         screenContext: true, // enabled by default
@@ -154,7 +154,7 @@ window.snowplow(
 <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
-import { ScreenTrackingPlugin, trackScreenView } from '@snowplow/browser-plugin-screen-tracking';
+import { ScreenTrackingPlugin } from '@snowplow/browser-plugin-screen-tracking';
 
 newTracker('sp1', '{{collector_url}}', {
    appId: 'my-app-id',
@@ -171,7 +171,7 @@ newTracker('sp1', '{{collector_url}}', {
 
 If the `screenContext` property is enabled, the tracker attaches a [`Screen` entity](http://iglucentral.com/schemas/com.snowplowanalytics.mobile/screen/jsonschema/1-0-0) to all the events tracked by the tracker reporting the last (and probably current) screen visible on device when the event was tracked.
 
-The `Screen` entity is conditioned by the internal state of the tracker only. To make an example, if the developer manually tracks a `ScreenView` event, all the following events will have a `Screen` entity attached reporting the same information as the last tracked ScreenView event.
+The `Screen` entity is based off the internal state of the tracker only. To make an example, if the developer manually tracks a `ScreenView` event, all the following events will have a `Screen` entity attached reporting the same information as the last tracked ScreenView event.
 
 ## Screen engagement tracking
 
@@ -182,7 +182,7 @@ The `Screen` entity is conditioned by the internal state of the tracker only. To
 window.snowplow(
     'addPlugin',
     'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-button-click-tracking@latest/dist/index.umd.min.js',
-    ['snowplowScreenTrackingPlugin', 'ScreenTrackingPlugin']
+    ['snowplowScreenTrackingPlugin', 'ScreenTrackingPlugin'],
     [
       {
         screenEngagementAutotracking: true, // enabled by default
@@ -195,7 +195,7 @@ window.snowplow(
 <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
-import { ScreenTrackingPlugin, trackScreenView } from '@snowplow/browser-plugin-screen-tracking';
+import { ScreenTrackingPlugin } from '@snowplow/browser-plugin-screen-tracking';
 
 newTracker('sp1', '{{collector_url}}', {
    appId: 'my-app-id',
@@ -231,7 +231,7 @@ Screen engagement tracking is enabled by default, but can be configured using th
 
 For a demo of how mobile screen engagement tracking works in action, **[please visit this demo](https://snowplow-incubator.github.io/mobile-screen-engagement-demo/)**.
 
-#### Updating list item view and scroll depth information
+### Updating list item view and scroll depth information
 
 To update the list item viewed and scroll depth information tracked in the screen summary entity, you can track the `ListItemView` and `ScrollChanged` events with this information.
 When tracked, the tracker won't send these events individually to the collector, but will process the information into the next `screen_summary` entity and discard the events.

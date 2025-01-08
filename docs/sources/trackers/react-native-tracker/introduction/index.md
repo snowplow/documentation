@@ -161,7 +161,7 @@ To learn more about the specific parts of the configuration and autotracked info
 
 ## Tracker methods
 
-### Tracking Events
+### Tracking events
 
 The React Native Tracker can track a range of out-of-the-box events. As an example, the following snippet tracks a screen view event:
 

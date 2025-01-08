@@ -57,10 +57,6 @@ Congratulations! You have successfully run the accelerator to stream web behavio
 
 ## Other things you can do
 
-### Inspect LocalStack
-
-Visit the [LocalStack UI](https://app.localstack.cloud/) to inspect infrastructure components such as Kinesis and DynamoDB.
-
 ### View events in Kafka UI
 
 Access [http://localhost:8080](http://localhost:8080) to review events within the Kafka UI.
@@ -72,6 +68,10 @@ Run the following command to manage containers visually:
 ```bash
 sudo ./lazydocker.sh
 ```
+
+### Inspect LocalStack
+
+Visit the [LocalStack UI](https://app.localstack.cloud/) to inspect infrastructure components such as Kinesis and DynamoDB. Please note that a Localstack account is required to view this. 
 
 ## Cleaning up
 

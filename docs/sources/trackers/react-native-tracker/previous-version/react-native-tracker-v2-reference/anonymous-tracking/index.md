@@ -22,11 +22,11 @@ import AnonymousTrackingSharedBlock from "@site/docs/reusable/anonymous-tracking
 
 <AnonymousTrackingSharedBlock/>
 ```
-There are several levels to the anonymisation depending on which of the three categories are affected:
+There are several levels to the anonymization depending on which of the three categories are affected:
 
-## 1. Full client-side anonymisation
+## 1. Full client-side anonymization
 
-In this case, we want to anonymise both the client-side user identifiers as well as the client-side session identifiers. This means disabling the Session context altogether and enabling user anonymisation:
+In this case, we want to anonymise both the client-side user identifiers as well as the client-side session identifiers. This means disabling the Session context altogether and enabling user anonymization:
 
 ```typescript
 const tracker = createTracker(
@@ -41,7 +41,7 @@ const tracker = createTracker(
 );
 ```
 
-## 2. Client-side anonymisation with session tracking
+## 2. Client-side anonymization with session tracking
 
 This setting disables client-side user identifiers but tracks session information. In practice, this means that events track the Session context entity but the `userId` property is a null UUID (`00000000-0000-0000-0000-000000000000`). In case Platform context is enabled, the IDFA identifiers will not be present.
 
@@ -58,9 +58,9 @@ const tracker = createTracker(
 );
 ```
 
-## 3. Server-side anonymisation
+## 3. Server-side anonymization
 
-Server-side anonymisation affects user identifiers set server-side. In particular, these are the `network_userid` property set in server-side cookie and the user IP address. You can anonymise the properties using the `serverAnonymisation` flag in `EmitterConfiguration`:
+Server-side anonymization affects user identifiers set server-side. In particular, these are the `network_userid` property set in server-side cookie and the user IP address. You can anonymise the properties using the `serverAnonymisation` flag in `EmitterConfiguration`:
 
 ```typescript
 const tracker = createTracker(

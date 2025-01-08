@@ -23,13 +23,13 @@ import AnonymousTrackingSharedBlock from "@site/docs/reusable/anonymous-tracking
 <AnonymousTrackingSharedBlock/>
 ```
 
-Version 4 of the React Native tracker does not yet provide full support for client-side anonymisation, but this is something we plan to introduce in the upcoming versions.
+Version 4 of the React Native tracker does not yet provide full support for client-side anonymization, but this is something we plan to introduce in the upcoming versions.
 
-There are several levels to the anonymisation depending on which of the three categories are affected:
+There are several levels to the anonymization depending on which of the three categories are affected:
 
-## 1. Full client-side anonymisation
+## 1. Full client-side anonymization
 
-In this case, we want to anonymise both the client-side user identifiers as well as the client-side session identifiers. This means disabling the Session context altogether and enabling user anonymisation:
+In this case, we want to anonymise both the client-side user identifiers as well as the client-side session identifiers. This means disabling the Session context altogether and enabling user anonymization:
 
 ```typescript
 const tracker = await newTracker({
@@ -44,7 +44,7 @@ The version 4 does not yet automatically anonymise the `userId` in the Subject a
 These need to be removed manually.
 :::
 
-## 2. Client-side anonymisation with session tracking
+## 2. Client-side anonymization with session tracking
 
 This setting disables client-side user identifiers but tracks session information. In practice, this means that events track the Session context entity but the `userId` property is a null UUID (`00000000-0000-0000-0000-000000000000`). In case Platform context is enabled, the IDFA identifiers will not be present.
 
@@ -52,9 +52,9 @@ This setting disables client-side user identifiers but tracks session informatio
 This option is not yet available in the version 4 of the React Native tracker.
 :::
 
-## 3. Server-side anonymisation
+## 3. Server-side anonymization
 
-Server-side anonymisation affects user identifiers set server-side. In particular, these are the `network_userid` property set in server-side cookie and the user IP address. You can anonymise the properties using the `serverAnonymisation` flag in `EmitterConfiguration`:
+Server-side anonymization affects user identifiers set server-side. In particular, these are the `network_userid` property set in server-side cookie and the user IP address. You can anonymise the properties using the `serverAnonymisation` flag in `EmitterConfiguration`:
 
 ```typescript
 const tracker = await newTracker(

@@ -33,8 +33,8 @@ This service is available as an EC2 image within the AWS Community AMIs in the f
 
 <p>Version {versions.snowplowMini} (recommended) comes with:</p>
 
-- Snowplow Stream Collector NSQ 3.2.0
-- Snowplow Stream Enrich NSQ 5.1.1
+- Snowplow Collector NSQ 3.3.0
+- Snowplow Enrich NSQ 5.2.0
 - Snowplow Elasticsearch Loader 2.1.2
 - Snowplow Iglu Server 0.13.0
 - Opensearch 2.4.0

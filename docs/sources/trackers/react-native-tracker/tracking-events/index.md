@@ -41,60 +41,6 @@ The automatically captured data are:
 
 All tracker's `track` methods take two arguments: An object of key-value pairs for the event’s properties, and an optional array of [custom event contexts](/docs/sources/trackers/react-native-tracker/custom-tracking-using-schemas/index.md).
 
-### Tracking structured events
-
-Our philosophy in creating Snowplow is that users should capture important consumer interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](/docs/data-product-studio/index.md). Using `trackSelfDescribingEvent` captures these interactions with custom schemas, as desribed above.
-
-However, as part of a Snowplow implementation there may be interactons where custom Self Describing events are perhaps too complex or unwarranted. They are then candidates to track using `trackStructuredEvent`, if none of the other event-specific methods outlined below are appropriate.
-
-For example:
-
-```typescript
-tracker.trackStructuredEvent({
-  category: 'my-category',
-  action: 'my-action',
-  label: 'my-label',
-  property: 'my-property',
-  value: 50.00
-});
-```
-
-**Required properties**
-
-- `category`: The name you supply for the group of objects you want to track e.g. ‘media’, ‘ecomm’
-- `action`: A string which defines the type of user interaction for the web object e.g. ‘play-video’, ‘add-to-basket’
-
-**Optional properties**
-
-- `label`: (string) - identifies the specific object being actioned e.g. ID of the video being played, or the SKU or the product added-to-basket
-- `property`: (string) - describes the object or the action performed on it. This might be the quantity of an item added to basket
-- `value`: (number) - quantifies or further describes the user action. This might be the price of an item added-to-basket, or the starting time of the video where play was just pressed
-
-### Tracking timing events
-
-Use the `trackTimingEvent` tracker method to track user timing events such as how long resources take to load.
-
-For example:
-
-```typescript
-tracker.trackTimingEvent({
-    category: 'timing-category',
-    variable: 'timing-variable',
-    timing: 5,
-    label: 'optional-label'
-});
-```
-
-**Required properties**
-
-- `category`: (string) - Defines the timing category
-- `variable`: (string) - Define the timing variable measured
-- `timing`: (number) - Represent the time
-
-**Optional properties**
-
-- `label`: An optional string to further identify the timing event
-
 ### Tracking screen view events
 
 Track the user viewing a screen within the application.
@@ -147,6 +93,31 @@ Optional properties
 
 - `pageTitle`: (string) – Page Title for the page view event.
 - `referrer`: (string) – Url for the referring page to the page view event. Must be a vaild url.
+
+### Tracking timing events
+
+Use the `trackTimingEvent` tracker method to track user timing events such as how long resources take to load.
+
+For example:
+
+```typescript
+tracker.trackTimingEvent({
+    category: 'timing-category',
+    variable: 'timing-variable',
+    timing: 5,
+    label: 'optional-label'
+});
+```
+
+**Required properties**
+
+- `category`: (string) - Defines the timing category
+- `variable`: (string) - Define the timing variable measured
+- `timing`: (number) - Represent the time
+
+**Optional properties**
+
+- `label`: An optional string to further identify the timing event
 
 ### Tracking consent granted events
 
@@ -408,3 +379,32 @@ const attachment: MessageNotificationAttachmentProps = {
     url: 'http://att.url',
 };
 ```
+
+### Tracking structured events
+
+Our philosophy in creating Snowplow is that users should capture important consumer interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](/docs/data-product-studio/index.md). Using `trackSelfDescribingEvent` captures these interactions with custom schemas, as desribed above.
+
+However, as part of a Snowplow implementation there may be interactons where custom Self Describing events are perhaps too complex or unwarranted. They are then candidates to track using `trackStructuredEvent`, if none of the other event-specific methods outlined below are appropriate.
+
+For example:
+
+```typescript
+tracker.trackStructuredEvent({
+  category: 'my-category',
+  action: 'my-action',
+  label: 'my-label',
+  property: 'my-property',
+  value: 50.00
+});
+```
+
+**Required properties**
+
+- `category`: The name you supply for the group of objects you want to track e.g. ‘media’, ‘ecomm’
+- `action`: A string which defines the type of user interaction for the web object e.g. ‘play-video’, ‘add-to-basket’
+
+**Optional properties**
+
+- `label`: (string) - identifies the specific object being actioned e.g. ID of the video being played, or the SKU or the product added-to-basket
+- `property`: (string) - describes the object or the action performed on it. This might be the quantity of an item added to basket
+- `value`: (number) - quantifies or further describes the user action. This might be the price of an item added-to-basket, or the starting time of the video where play was just pressed

@@ -79,4 +79,4 @@ tracker.trackScreenViewEvent(
 );
 ```
 
-It is also possible to add custom contexts globally, so that they are applied to all events within an application. For more information, see the Global Contexts section below.
+It is also possible to add custom contexts globally, so that they are applied to all events within an application. For more information, see [the Global Contexts section](/docs/sources/trackers/react-native-tracker/custom-tracking-using-schemas/global-context/index.md).

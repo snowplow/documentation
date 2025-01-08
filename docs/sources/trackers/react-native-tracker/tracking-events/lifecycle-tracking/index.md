@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 The tracker can capture application lifecycle state changes. In particular, when the app changes state from foreground to background and vice versa.
 
-The lifecycle tracking is disabled by default. It can be enabled using the `lifecycleAutotracking` option like in the example below:
+The lifecycle tracking is enabled by default. It can be disabled using the `lifecycleAutotracking` option like in the example below:
 
 ```typescript
 const tracker = await newTracker({

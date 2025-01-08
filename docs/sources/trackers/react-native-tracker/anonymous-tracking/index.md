@@ -17,13 +17,15 @@ This feature is available since v1.3.
 
 :::
 
+:::note
+Version 4 of the React Native tracker does not yet provide full support for client-side anonymization, but this is something we plan to introduce in the upcoming versions.
+:::
+
 ```mdx-code-block
 import AnonymousTrackingSharedBlock from "@site/docs/reusable/anonymous-tracking-mobile/_index.md"
 
 <AnonymousTrackingSharedBlock/>
 ```
-
-Version 4 of the React Native tracker does not yet provide full support for client-side anonymization, but this is something we plan to introduce in the upcoming versions.
 
 There are several levels to the anonymization depending on which of the three categories are affected:
 

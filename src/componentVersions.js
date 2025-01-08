@@ -19,7 +19,7 @@ export const versions = {
   rustTracker: '0.2.0',
   scalaTracker: '2.0.0',
   unityTracker: '0.8.1',
-  webViewTracker: '0.2.1',
+  webViewTracker: '0.3.0',
 
   // Core pipeline
   collector: '3.3.0',

@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-This plugin provides integration for WebViews on mobile platforms, when using the Snowplow native mobile (Android and iOS v6.1+) ADD LINK or React Native (v4.2+) ADD LINK trackers.
+This plugin provides integration for WebViews on mobile platforms, when using the Snowplow native mobile ([Android and iOS v6.1+](/docs/sources/trackers/mobile-trackers/hybrid-apps/index.md)) or [React Native v4.2+](docs/sources/trackers/react-native-tracker/hybrid-apps/index.md) trackers.
 
 When the plugin is active, for every event the web tracker checks if it is running in a WebView with at least one of the mobile interfaces available. If it is, the event is forwarded to the mobile tracker, and not tracked by the web tracker. If not, the event is tracked as normal.
 

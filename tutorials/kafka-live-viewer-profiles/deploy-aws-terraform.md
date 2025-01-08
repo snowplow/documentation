@@ -16,7 +16,16 @@ The following [Steps](#steps) will allow you to create an infrastructure on AWS 
 1. Open a terminal.
 2. Install **Docker** and **Docker Compose**.
 3. [Clone the project](https://github.com/snowplow-incubator/live-viewer-profiles) and navigate to its directory.
+```bash
+git clone https://github.com/snowplow-incubator/live-viewer-profiles.git
+```
 4. Create a `.env` file based on `.env.example` and configure AWS variables.
+```bash
+ACCEPT_LICENSE="true"
+AWS_REGION=eu-west-2
+AWS_ACCESS_KEY_ID=xxxxxxxxxxxxxxxxxxxxx
+AWS_SECRET_ACCESS_KEY=xxxxxxxxxxxxxxxxx
+```
 
 
 ### Step 1: Initialize the project
@@ -49,7 +58,12 @@ $ ./up.sh    # <- start the Docker containers
 
 ### Step 4: Open access to the applications
 
-Review the [Localstack guide](/tutorials/kafka-live-viewer-profiles/quickstart-localstack) for the default configuration for each component. Open public access to the two frontend applications and the Snowplow Collector so that anyone can watch the video, submit events to the pipeline, and see information on concurrent users. 
+Review the [Localstack guide](/tutorials/kafka-live-viewer-profiles/quickstart-localstack) for the default configuration for each component. Open public access to the two frontend applications and the Snowplow Collector using a HTTP load balancer so that anyone can watch the video, submit events to the pipeline, and see information on concurrent users. 
+
+The applications listen for HTTP traffic on the following ports
+- Web tracker front end - 3000
+- Live viewer front end - 8280
+- Snowplow collector - 9090
 
 ---
 

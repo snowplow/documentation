@@ -12,7 +12,17 @@ title: Quickstart with Localstack
 1. Open a terminal.
 2. Install **Docker** and **Docker Compose**.
 3. [Clone the project](https://github.com/snowplow-incubator/live-viewer-profiles) and navigate to its directory.
-4. Create a `.env` file based on `.env.example`. You don't need to configure AWS variables if you are using Localstack. 
+```bash
+git clone https://github.com/snowplow-incubator/live-viewer-profiles.git
+```
+4. Create a `.env` file based on `.env.example`. You can leave the AWS variables as placeholders when using Localstack
+```bash
+ACCEPT_LICENSE="true"
+AWS_REGION=eu-west-2
+AWS_ACCESS_KEY_ID=xxxxxxxxxxxxxxxxxxxxx
+AWS_SECRET_ACCESS_KEY=xxxxxxxxxxxxxxxxx
+AWS_ENDPOINT_URL=http://localstack:4566
+```
 
 ### Step 1: Start the containers
 
@@ -27,13 +37,13 @@ Details on everything that is installed can be found in [architecture](/tutorial
 - Use `Ctrl+C` to stop services but keep containers running.
 - Pass service-specific options to `./up.sh` (e.g., `./up.sh kafka-services`).
 
-### Step 2: Open the tracker frontend
+### Step 2: Open the web tracking frontend
 
 Visit [http://localhost:3000](http://localhost:3000) to configure the Stream Collector endpoint and start tracking events. Enter the Collector URL: `localhost:9090` and click `Create tracker`. 
 
 On the next screen, click `Custom media tracking demo`. This will bring up a video and a screen that displays information on what events are sent from the browser to the pipeline. If you want to simulate multiple users watching the video at the same time, you can open this in separate browsers. 
 
-You must keep this window open with the video playing because everything here is running in real-time
+You must keep this window open with the video playing because everything here is running in real-time. You can use the [Snowplow Chrome Plugin](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm?hl=en&pli=1) to verfiy that the events are successfully sent from the web browser.
 
 ### Step 3: Open the live viewer frontend
 

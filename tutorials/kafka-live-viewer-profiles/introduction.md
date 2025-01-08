@@ -3,11 +3,11 @@ position: 1
 title: Introduction
 ---
 
-# Snowplow Solution Accelerator: Live Viewer Profiles
+# Snowplow solution accelerator: live viewer profiles
 
 ## Introduction
 
-Welcome to the **Live Viewer Profiles** solution accelerator for video streaming! 
+Welcome to the **live viewer profiles** solution accelerator for video streaming! 
 
 This accelerator demonstrates how to build a real-time use case leveraging **Snowplow event data** to create live viewer profiles for a video streaming site. By combining Snowplow's streaming pipeline with **Apache Kafka**, a **Java application** and **AWS DynamoDB**, the solution processes live streaming events to visualize user interactions with video content and advertisements. 
 
@@ -17,7 +17,7 @@ This accelerator is open source and can serve as the foundation to build practic
 
 ---
 
-## Solution Accelerator Code
+## Solution accelerator code
 [**The code for this infrastructure is available on here on GitHub.**](https://github.com/snowplow-incubator/live-viewer-profiles)
 
 ---
@@ -26,7 +26,7 @@ This accelerator is open source and can serve as the foundation to build practic
 
 The solution comprises several interconnected components:
 
-- **Web Application**: 
+- **Web tracking application**: 
   - A React application with a video to watch. Snowplow's media tracking has been configured to send events (e.g., play, pause, ad skipped) to the [Snowplow Collector](/docs/fundamentals/architecture-overview).
   - Code available in [tracker-frontend](https://github.com/snowplow-incubator/live-viewer-profiles/tree/main/tracker-frontend) folder in GitHub
 
@@ -36,18 +36,18 @@ The solution comprises several interconnected components:
 - **Snowplow Snowbridge**:
   - Publishes events to Kafka for the Live Viewer Backend to consume
 
-- **Live Viewer Backend**:
+- **Live viewer backend**:
   - A Java application which processes events from Kafka, stores the data in DynamoDB, and generates JSON state data for the Live Viewer Frontend
   - Code available in [live-viewer-backend](https://github.com/snowplow-incubator/live-viewer-profiles/tree/main/live-viewer-backend) folder in GitHub
 
-- **Live Viewer Frontend**:
+- **Live viewer frontend**:
   - A HTML website which displays the state of users currently watching the video.
   - Code available in [live-viewer-frontend](https://github.com/snowplow-incubator/live-viewer-profiles/tree/main/live-viewer-frontend) folder in GitHub
 
 The following diagram maps out where each component sits in the end to end communication flow. 
 ![Architecture Diagram](images/architecture.png)
 
-### Components & Configuration
+### Components & configuration
 The following files in the [GitHub repository](https://github.com/snowplow-incubator/live-viewer-profiles) can be used  to configure the project's components. 
 - **Snowplow components**: `compose.snowplow.yaml`
 - **Kafka infrastructure**: `compose.kafka.yaml`

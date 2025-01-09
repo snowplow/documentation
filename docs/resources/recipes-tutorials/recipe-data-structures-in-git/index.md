@@ -401,6 +401,10 @@ data:
 * `resourceName` is a unique identifier of the source applications. It must be a valid uuid v4
 * `data` is the contents of the source app
 
+:::note
+For more information about available fields and values you can refer to the [source applications schema](https://raw.githubusercontent.com/snowplow-product/snowplow-cli/main/internal/validation/schema/source-application.json). Making your ide schema aware via a [language server](https://github.com/redhat-developer/yaml-language-server) should provide a much smoother editing experience.
+:::
+
 Now let's customize our source application. We'll configure it to handle events from our production website as well as staging and UAT environments. We'll also add an owner field and remove the unused entities section.
 
 ```yml {6-7} title="data-products/source-apps/website.yaml"
@@ -455,6 +459,10 @@ data:
     eventSpecifications: []
 ```
 
+:::note
+For more information about available fields and values you can refer to the [data products schema](https://raw.githubusercontent.com/snowplow-product/snowplow-cli/main/internal/validation/schema/data-product.json). Making your ide schema aware via a [language server](https://github.com/redhat-developer/yaml-language-server) should provide a much smoother editing experience.
+:::
+
 Let's amend it to add an event specification, and a reference to a source application:
 
 ```yml {6,7,9,11-14} title="data-products/login.yaml"
@@ -475,7 +483,7 @@ data:
 ```
 
 :::note
-You'll need to come up with a valid uuid V4 for the `resourceName` of an event specification. You can do so by using an (online generator)[https://www.uuidgenerator.net], or running the `uuidgen` command in your terminal
+You'll need to come up with a valid uuid V4 for the `resourceName` of an event specification. You can do so by using an [online generator](https://www.uuidgenerator.net), or running the `uuidgen` command in your terminal
 :::
 
 :::caution Warning

@@ -42,6 +42,6 @@ This tutorial demonstrated how to utilize Snowplow event data for practical use 
 ## Next Steps
 - **Extend tracking**: Extend the solution to track more granular user interactions or integrate your own media
 - **Additional platforms**: Implement the solution for other platforms, such as media interactions on mobile.
-- **Scaling**: Apply the Terraform setup to deploy the solution at scale for large streaming platforms.
+- **Extend dashboard**: Extend the Live Viewer to include information on the media being watched and the user. 
 
 By completing this tutorial, you are equipped to harness the power of event-driven systems and Snowplow’s analytics framework to build dynamic, real-time solutions tailored to your streaming and analytics needs.

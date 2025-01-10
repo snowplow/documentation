@@ -65,6 +65,10 @@ The applications listen for HTTP traffic on the following ports
 - Live viewer front end - 8280
 - Snowplow collector - 9090
 
+## Next Steps
+- You can implement Snowplow media tracking on any [HTML5](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/html5/) or [YouTube](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/youtube/) media of your choice
+- Look into the output from Kafka and extend the Live Viewer to include information on the media being watched and the user. 
+
 ---
 
 ## Other Commands

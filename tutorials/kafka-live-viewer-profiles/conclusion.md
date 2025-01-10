@@ -5,7 +5,7 @@ title: Conclusion
 
 # Conclusion
 
-In this tutorial, we have explored the **Snowplow Solution Accelerator for Live Viewer Profiles**, gaining practical insights into building, deploying, and extending real-time, event-driven architectures using Snowplow and Kafka.
+In this tutorial, we have explored the **live viewer profiles** solution accelerator for video streaming, gaining practical insights into building, deploying, and extending real-time, event-driven architectures using Snowplow and Kafka.
 
 ## Key Takeaways
 

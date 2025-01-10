@@ -20,27 +20,21 @@ We successfully have built a real time system for processing event data includin
 
 This architecture highlights how real-time insights can be achieved using event-driven systems in a streaming context.
 
-### Setting Up Locally with LocalStack
-We learned how to:
+### What We Achieved
+We explored how to:
 1. Use LocalStack to emulate AWS services for local development and testing.
 2. Launch and interact with the system components, such as the Kafka UI and LocalStack UI.
 3. View and verify the real-time event data from the browser using Snowplow's media tracking capabilities.
-
-### Deploying on AWS with Terraform
-We also explored the process of deploying the solution in a production-ready environment using Terraform. This involved:
-- Configuring the AWS environment.
-- Initializing and applying the Terraform scripts.
-- Managing the infrastructure to ensure smooth operations in the cloud.
+4. Deploy the solution in an AWS environment using Terraform. 
 
 ### Practical Applications
-This tutorial demonstrated how to utilize Snowplow event data for practical use cases, such as:
-- Real-time viewer insights.
-- Engagement analytics.
+This tutorial can be extended to utilize Snowplow event data for other real-time use cases, such as:
+- Web Engagement analytics.
 - Personalized recommendations.
 - Ad performance tracking.
 
 ## Next Steps
-- **Extend tracking**: Extend the solution to track more granular user interactions or integrate your own media
+- **Extend tracking**: Extend the solution to track more granular user interactions or integrate your own media.
 - **Additional platforms**: Implement the solution for other platforms, such as media interactions on mobile.
 - **Extend dashboard**: Extend the Live Viewer to include information on the media being watched and the user. 
 

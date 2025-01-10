@@ -62,7 +62,7 @@ Congratulations! You have successfully run the accelerator to stream web behavio
 ## Next Steps
 - You can implement Snowplow media tracking on any [HTML5](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/html5/) or [YouTube](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/youtube/) media of your choice
 - Look into the output from Kafka and extend the Live Viewer to include information on the media being watched and the user. 
-- Use our supplied Terraform in the next section to run this on AWS and make it publicly available
+- Use our supplied Terraform in the next section to run this on AWS and make it publicly available.
 
 ## Other Things You Can Do
 

@@ -9,7 +9,7 @@ title: Deploy on AWS with Terraform
 
 The following [Steps](#steps) will deploy the solution accelerator to AWS using Terraform. There is no need to manually install [Terraform](https://www.terraform.io/). It is executed via [Docker](https://www.docker.com/) using the `terraform.sh` script.
 
-## Steps to deploy the application
+## Steps to Deploy the Application
 
 ### Step 0: Prerequisites
 
@@ -28,19 +28,19 @@ AWS_SECRET_ACCESS_KEY=xxxxxxxxxxxxxxxxx
 ```
 
 
-### Step 1: Initialize the project
+### Step 1: Initialize the Project
 
 ```bash
 $ ./terraform.sh init
 ```
 
-### Step 2: Create the infrastructure
+### Step 2: Create the Infrastructure
 
 ```bash
 $ ./terraform.sh apply
 ```
 
-### Step 3: Access the EC2 instance that runs the apps in AWS
+### Step 3: Access the EC2 Instance that Runs the Apps in AWS
 
 ```bash
 $ ./apps/ssh.sh
@@ -56,9 +56,9 @@ $ ./down.sh  # <- stop the Docker containers
 $ ./up.sh    # <- start the Docker containers
 ```
 
-### Step 4: Open access to the applications
+### Step 4: Open Access to the Applications
 
-Review the [Localstack guide](/tutorials/kafka-live-viewer-profiles/quickstart-localstack) for the default configuration for each component. Open public access to the two frontend applications and the Snowplow Collector using a HTTP load balancer so that anyone can watch the video, submit events to the pipeline, and see information on concurrent users. 
+Review the [LocalStack guide](/tutorials/kafka-live-viewer-profiles/quickstart-localstack) for the default configuration for each component. Open public access to the two frontend applications and the Snowplow Collector using a HTTP load balancer so that anyone can watch the video, submit events to the pipeline, and see information on concurrent users. 
 
 The applications listen for HTTP traffic on the following ports
 - Web tracker front end - 3000
@@ -67,9 +67,9 @@ The applications listen for HTTP traffic on the following ports
 
 ---
 
-## Other commands
+## Other Commands
 
-### Check versions
+### Check Versions
 
 ```bash
 $ ./terraform.sh --version
@@ -83,13 +83,13 @@ on linux_amd64
 + provider registry.terraform.io/hashicorp/tls v4.0.6
 ```
 
-### Check the Terraform plan
+### Check the Terraform Plan
 
 ```bash
 $ ./terraform.sh plan
 ```
 
-### Generate a PNG image for the Terraform modules in this project
+### Generate a PNG Image for the Terraform Modules in This Project
 
 ```bash
 $ ./terraform.sh png
@@ -99,7 +99,7 @@ Current PNG image of the available modules:
 
 ![Terraform Modules](images/terraform.png)
 
-### Destroy the infrastructure
+### Destroy the Infrastructure
 
 ```bash
 $ ./terraform.sh destroy

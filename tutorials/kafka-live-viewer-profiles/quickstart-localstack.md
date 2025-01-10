@@ -5,7 +5,7 @@ title: Quickstart with Localstack
 
 # Quickstart with Localstack
 
-## Steps to run the application
+## Steps to Run the Application
 
 ### Step 0: Prerequisites
 
@@ -24,7 +24,7 @@ AWS_SECRET_ACCESS_KEY=xxxxxxxxxxxxxxxxx
 AWS_ENDPOINT_URL=http://localstack:4566
 ```
 
-### Step 1: Start the containers
+### Step 1: Start the Containers
 
 Run the following command to download and run everything in Docker:
 
@@ -37,31 +37,39 @@ Details on everything that is installed can be found in [architecture](/tutorial
 - Use `Ctrl+C` to stop services but keep containers running.
 - Pass service-specific options to `./up.sh` (e.g., `./up.sh kafka-services`).
 
-### Step 2: Open the web tracking frontend
+### Step 2: Open the Web Tracking Frontend
 
 Visit [http://localhost:3000](http://localhost:3000) to configure the Stream Collector endpoint and start tracking events. Enter the Collector URL: `localhost:9090` and click `Create tracker`. 
 
+![Application Output](images/tracker-demo.png)
+
 On the next screen, click `Custom media tracking demo`. This will bring up a video and a screen that displays information on what events are sent from the browser to the pipeline. If you want to simulate multiple users watching the video at the same time, you can open this in separate browsers. 
+
+![Application Output](images/welcome-page.png)
 
 You must keep this window open with the video playing because everything here is running in real-time. You can use the [Snowplow Chrome Plugin](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm?hl=en&pli=1) to verify that the events are successfully sent from the web browser.
 
-### Step 3: Open the live viewer frontend
+![Application Output](images/video.png)
+
+### Step 3: Open the Live Viewer Frontend
 
 Open [http://localhost:8280](http://localhost:8280) in a separate window. This will display the active users and their current state (e.g. watching video, watching advertisement, paused).
 
+![Application Output](images/live-viewer.png)
+
 Congratulations! You have successfully run the accelerator to stream web behavior through Snowplow and Kafka to a real-time dashboard.
 
-## Next steps
-- You can implement Snowplow media tracking on any HTML5 or YouTube video of your choice
-- Use our supplied terraform in the next section to run this on AWS and make it publicly available
+## Next Steps
+- You can implement Snowplow media tracking on any [HTML5](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/html5/) or [YouTube](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/youtube/) media of your choice
+- Use our supplied Terraform in the next section to run this on AWS and make it publicly available
 
-## Other things you can do
+## Other Things You Can Do
 
-### View events in Kafka UI
+### View Events in Kafka UI
 
 Access [http://localhost:8080](http://localhost:8080) to review events within the Kafka UI.
 
-### Use LazyDocker
+### Manage Containers with LazyDocker
 
 Run the following command to manage containers visually:
 
@@ -69,13 +77,13 @@ Run the following command to manage containers visually:
 sudo ./lazydocker.sh
 ```
 
-### Inspect LocalStack
+### Inspect Infrastructure with LocalStack UI
 
-Visit the [LocalStack UI](https://app.localstack.cloud/) to inspect infrastructure components such as Kinesis and DynamoDB. Please note that a Localstack account is required to view this. 
+Visit the [LocalStack UI](https://app.localstack.cloud/) to inspect infrastructure components such as Kinesis and DynamoDB. Please note that a LocalStack account is required to view this. 
 
-## Cleaning up
+## Cleaning Up
 
-### Stop the containers
+### Stop the Fontainers
 
 Shut down all running containers:
 
@@ -83,7 +91,7 @@ Shut down all running containers:
 ./down.sh
 ```
 
-### Clean up and delete
+### Clean Up and Delete
 
 To remove all containers and images, use:
 

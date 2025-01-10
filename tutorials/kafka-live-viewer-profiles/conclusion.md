@@ -9,12 +9,14 @@ In this tutorial, we have explored the **Snowplow Solution Accelerator for Live 
 
 ## Key Takeaways
 
-### Understanding the Architecture
-We started covering the architecture of the solution, which integrates multiple components:
-- **Web Tracking Application** for event collection.
+### Understanding the Process
+We successfully have built a real time system for processing event data including:
+- **Web Tracking Application** for collecting media events.
+![Application Output](images/video.png)
 - **Snowplow Collector and Snowbridge** for event processing and forwarding.
 - **Live Viewer Backend** for managing real-time data with Kafka and DynamoDB.
-- **Live Viewer Frontend** for visualizing user activity.
+- **Live Viewer Frontend** for visualizing real-time user activity on the web tracking application.
+![Live viewer frontend](images/live-viewer.png)
 
 This architecture highlights how real-time insights can be achieved using event-driven systems in a streaming context.
 

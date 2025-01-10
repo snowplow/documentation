@@ -41,21 +41,21 @@ Details on everything that is installed can be found in [architecture](/tutorial
 
 Visit [http://localhost:3000](http://localhost:3000) to configure the Stream Collector endpoint and start tracking events. Enter the Collector URL: `localhost:9090` and click `Create tracker`. 
 
-![Application Output](images/tracker-demo.png)
+![First page of tracking website](images/tracker-demo.png)
 
 On the next screen, click `Custom media tracking demo`. This will bring up a video and a screen that displays information on what events are sent from the browser to the pipeline. If you want to simulate multiple users watching the video at the same time, you can open this in separate browsers. 
 
-![Application Output](images/welcome-page.png)
+![Welcome page on tracking website](images/welcome-page.png)
 
 You must keep this window open with the video playing because everything here is running in real-time. You can use the [Snowplow Chrome Plugin](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm?hl=en&pli=1) to verify that the events are successfully sent from the web browser.
 
-![Application Output](images/video.png)
+![Video playing on the website](images/video.png)
 
 ### Step 3: Open the Live Viewer Frontend
 
 Open [http://localhost:8280](http://localhost:8280) in a separate window. This will display the active users and their current state (e.g. watching video, watching advertisement, paused).
 
-![Application Output](images/live-viewer.png)
+![Live viewer frontend](images/live-viewer.png)
 
 Congratulations! You have successfully run the accelerator to stream web behavior through Snowplow and Kafka to a real-time dashboard.
 

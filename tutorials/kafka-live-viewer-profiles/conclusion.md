@@ -34,8 +34,8 @@ This tutorial can be extended to utilize Snowplow event data for other real-time
 - Ad performance tracking.
 
 ## Next Steps
-- **Extend tracking**: Extend the solution to track more granular user interactions or integrate your own media.
-- **Additional platforms**: Implement the solution for other platforms, such as media interactions on mobile.
-- **Extend dashboard**: Extend the Live Viewer to include information on the media being watched and the user. 
+- **Extend tracking:** Extend the solution to track more granular user interactions or track on a new platform such as mobile.
+- **Extend dashboard:** Extend the Live Viewer to include information on the media being watched and the user.
+- **Replace the state store:** Replace Amazon DynamoDB with an alternative to be cloud agnostic, e.g. Google Bigtable or MongoDB.
 
 By completing this tutorial, you are equipped to harness the power of event-driven systems and Snowplow’s analytics framework to build dynamic, real-time solutions tailored to your streaming and analytics needs.

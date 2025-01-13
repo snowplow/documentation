@@ -12,14 +12,20 @@ import TabItem from '@theme/TabItem';
 
 The tracker can capture application lifecycle state changes. In particular, when the app changes state from foreground to background and vice versa.
 
-The lifecycle tracking is enabled by default. It can be disabled using the `lifecycleAutotracking` option like in the example below:
+The lifecycle tracking is disabled by default. It can be enabled in `TrackerConfiguration` like in the example below:
 
 ```typescript
-const tracker = await newTracker({
-    namespace: 'appTracker',
-    endpoint: COLLECTOR_URL,
-    lifecycleAutotracking: true, // enabled by default
-});
+const tracker = createTracker(
+    'appTracker',
+    {
+      endpoint: COLLECTOR_URL,
+    },
+    {
+        trackerConfig: {
+            lifecycleAutotracking: true,
+        },
+    }
+);
 ```
 
 Once enabled, the tracker will automatically track a [`Background` event](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/mobile-lifecycle-events/index.md#background-event) when the app is moved to background and a [`Foreground` event](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/mobile-lifecycle-events/index.md#foreground-event) when the app moves back to foreground (becomes visible in the screen).

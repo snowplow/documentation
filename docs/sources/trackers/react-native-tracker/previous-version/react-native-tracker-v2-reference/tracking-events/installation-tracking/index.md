@@ -14,12 +14,18 @@ Installation tracking tracks an install event which occurs the first time an app
 
 If installation autotracking is not enabled, the tracker will still keep track of when the app was first installed, so that when enabled, the tracker will send the recorded install event with a timestamp reflecting when it was first installed.
 
-The installation autotracking is disabled by default. It can be set in `TrackerConfiguration` like in the example below:
+The installation autotracking is enabled by default. It can be set in `TrackerConfiguration` like in the example below:
 
 ```typescript
-const tracker = await newTracker({
-    namespace: 'appTracker',
-    endpoint: COLLECTOR_URL,
-    installAutotracking: true, // disabled by default
-});
+const tracker = createTracker(
+    'appTracker',
+    {
+      endpoint: COLLECTOR_URL,
+    },
+    {
+        trackerConfig: {
+            installAutotracking: true,
+        },
+    }
+);
 ```

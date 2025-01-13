@@ -1,0 +1,19 @@
+---
+title: "React Native Tracker v2 reference"
+date: "2020-07-09"
+sidebar_position: 290
+sidebar_custom_props:
+  outdated: true
+---
+
+```mdx-code-block
+import Badges from '@site/src/components/Badges';
+
+<Badges badgeType="Actively Maintained"></Badges>&nbsp;<Badges badgeType="React Native Tracker Release"></Badges>&nbsp;<Badges badgeType="Snowplow Tracker React Native Release"></Badges>
+```
+
+```mdx-code-block
+import DocCardList from '@theme/DocCardList';
+
+<DocCardList />
+```

@@ -17,7 +17,7 @@ When the plugin is active, for every event the web tracker checks if it is runni
 This plugin uses the [Snowplow WebView tracker](/docs/sources/trackers/webview-tracker/index.md) as a dependency.
 
 :::note
-The plugin is available since version 4.2 of the tracker.
+The plugin is available since version 4.3 of the tracker.
 :::
 
 The WebView integration is **automatic** once configured.

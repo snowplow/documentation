@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 
 :::info
 
-This feature is available since v4.
+This feature is available since v4. To use the Web plugin, you will need v6.1+ of the iOS or Android tracker.
 
 :::
 
@@ -21,7 +21,7 @@ Hybrid apps are mobile apps that in addition to a native interface, provide part
 
 ## Event forwarding
 
-We recommend using the Web tracker (v4.2+) to forward all Web events to the mobile tracker.
+We recommend using the Web tracker (v4.3+) to forward all Web events to the mobile tracker.
 
 1. Implement the Snowplow iOS or Android tracker.
 2. Implement the [Snowplow Web/JavaScript tracker](/docs/sources/trackers/javascript-trackers/index.md) in the WebView in your app. Make sure to include the [WebView plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/webview/index.md).

@@ -34,18 +34,11 @@ We recommend using the Web tracker (v4.2+) to forward all Web events to the Reac
 
 4. Track events as usual.
 
-:::warning Tracker namespace
-
-The tracker namespace, set at tracker initialization, **must be the same** for the React Native and Web trackers.
-
-:::
-
 The Web tracker will automatically intercept all web events and forward them to the React Native tracker. The forwarded events will have the tracker version from Web, e.g. "js-4.1.0", but will otherwise be tracked like the mobile events. They may contain additional information not present in the React Native mobile events, such as a browser useragent string or URL, or Web context entities e.g. the [WebPage entity](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/page-views/#webpage-page-view-id-context-entity).
 
 The forwarded events are filtered out of the Web tracker event queue so that they are not tracked twice.
 
 The WebView plugin uses the [Snowplow WebView tracker](/docs/sources/trackers/webview-tracker/index.md) as a dependency.
-
 
 ## WebView Tracker
 
@@ -64,12 +57,7 @@ If you don't want to implement a Web tracker in your WebView, you can use the [S
             source={{uri: WEB_VIEW_URI}}
             ... />;
     ```
+
 4. Manually track [WebView events](/docs/sources/trackers/webview-tracker/index.md).
-
-:::warning Tracker namespace
-
-The tracker namespace, set at tracker initialization, **must be the same** for the React Native and Web trackers.
-
-:::
 
 All event types can be tracked with WebView tracker v0.3.0+, but it requires more work than using the event forwarding.

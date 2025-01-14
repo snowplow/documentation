@@ -380,7 +380,7 @@ window.snowplow('trackScreenView', {
 
 ## Specifying a tracker namespace
 
-You can specify a tracker namespace for the event. If not specified, the default tracker will be used.
+You can specify tracker namespaces for the event. If not specified, the default tracker will be used.
 
 All of the `trackXYZ()` methods accept two arguments:
 

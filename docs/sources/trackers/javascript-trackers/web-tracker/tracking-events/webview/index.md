@@ -63,3 +63,42 @@ newTracker('sp1', '{{collector_url}}', {
 
 </TabItem>
 </Tabs>
+
+## Configuration
+
+By default, the plugin will forward events to the default initialized Snowplow tracker on each platform. To specify a different tracker instance, or multiple trackers, pass in a list of tracker namespaces at setup.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+window.snowplow(
+    'addPlugin',
+    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-webview@latest/dist/index.umd.min.js',
+    ["snowplowWebViewTracking", "WebViewPlugin"][
+      {
+        trackerNamespaces: ["sp1", "sp2"],
+      }
+    ]
+);
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { newTracker } from '@snowplow/browser-tracker';
+import { WebViewPlugin } from '@snowplow/browser-plugin-webview';
+
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
+   plugins: [ WebViewPlugin({ trackerNamespaces: ['sp1', 'sp2'] }) ],
+});
+```
+
+</TabItem>
+</Tabs>
+
+:::warning
+If there is no mobile tracker with the specified namespace(s), the event will not be tracked.
+:::

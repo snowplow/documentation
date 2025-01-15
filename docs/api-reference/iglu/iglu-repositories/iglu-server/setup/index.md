@@ -60,6 +60,12 @@ We also provide a [docker-compose.yml](https://github.com/snowplow-incubator/ig
 
 ## 2. Initialize the database
 
+:::note
+
+Iglu Server has been successfully tested with PostgreSQL 16.3, but should work with PostgreSQL 8.2 or newer.
+
+:::
+
 With a fresh install you need to manually create the database:
 
 ```bash

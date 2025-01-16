@@ -135,7 +135,8 @@ The last step is to set up the Snowplow deployment role. This is a role assumed 
 1. Navigate to https://console.aws.amazon.com/iam/home#/roles$new?step=type&roleType=crossAccount
 2. Select Create role and for trusted entity type select AWS account.
 - Account ID: 793733611312
-- Do not require MFA, as Snowplow needs to be able to assume the role via headless jobs.
+- Do not select Require MFA as Snowplow needs to be able to assume the role via headless jobs
+- If setting this up via IAM, do not add `"aws:MultiFactorAuthPresent": "false"` condition, as this will prevent the role being assumed by Snowplow SRE staff as part of investigations
 3. Attach the `IAMFullAccess` policy. If a Permission Boundary was set on the admin role, then add this boundary to the bottom section of permissions page.
 - Role name: SnowplowDeployment (please use this specific name)
 - Role description: Allows the Snowplow Team to programmatically deploy to this account.

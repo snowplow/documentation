@@ -132,7 +132,8 @@ By default, the plugin will forward events to the default initialized Snowplow t
 window.snowplow(
     'addPlugin',
     'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-webview@latest/dist/index.umd.min.js',
-    ["snowplowWebViewTracking", "WebViewPlugin"][
+    ["snowplowWebViewTracking", "WebViewPlugin"],
+    [
       {
         trackerNamespaces: ["sp1", "sp2"],
       }

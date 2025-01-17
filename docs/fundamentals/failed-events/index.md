@@ -55,23 +55,21 @@ Snowplow BDP provides a dashboard and alerts for failed events. See [Monitoring 
 
 ---
 
-For the common failures (validation and enrichment), it’s possible to load the offending events into _a separate table_ in your warehouse or lake. This way, you can easily inspect them and decide how they might be patched up (e.g. with SQL) and merged with the rest of your data. These events will include a special column with the details of the failure, and any invalid columns will be set to `null`. Otherwise, the format is [the same as for your atomic events](/docs/fundamentals/canonical-event/index.md).
+For the common failures (validation and enrichment), you can configure continuous loading of any offending events into _a separate table_ in your warehouse or lake. This way, you can easily inspect them and decide how they might be patched up (e.g. with SQL) and merged with the rest of your data.
 
-:::note Compatibility
+:::note
 
-This feature is available since Enrich 5.0.0 and works with Snowflake, BigQuery and Lake loaders.
+This feature is not retroactive, i.e. only failed events that occur _after it’s enabled_ will be loaded into your desired destination.
 
 :::
+
+The events will include a special column with the details of the failure, and any invalid columns will be set to `null`. Otherwise, the format is [the same as for your atomic events](/docs/fundamentals/canonical-event/index.md).
+
+See [Exploring failed events](/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/warehouse-lake/index.md) for more details and setup instructions.
 
 ---
 
-Finally, all failed events are backed up in object storage (S3 on AWS or GCS on GCP). Sometimes, but not in all cases (e.g. not if the original events exceeded size limits), it’s possible to recover them by replaying them through the pipeline. This is a complicated process mainly reserved for internal failures and outages. Refer to [Recovering failed events](/docs/data-product-studio/data-quality/failed-events/recovering-failed-events/index.md).
-
-:::note Azure
-
-Writing failed events to object storage is supported on AWS and GCP, but not on Azure.
-
-:::
+Finally, on AWS and GCP all failed events are backed up in object storage (S3 and GCS respectively). Sometimes, but not in all cases (e.g. not if the original events exceeded size limits), it’s possible to recover them by replaying them through the pipeline. This is a complicated process mainly reserved for internal failures and outages. Refer to [Recovering failed events](/docs/data-product-studio/data-quality/failed-events/recovering-failed-events/index.md).
 
 ---
 

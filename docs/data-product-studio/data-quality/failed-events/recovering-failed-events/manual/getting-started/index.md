@@ -6,7 +6,7 @@ sidebar_position: 0
 
 Event recovery at its core, is the ability to fix events that have failed and replay them through your pipeline.
 
-After inspecting failed events either in the [Snowplow BDP Console](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/ui/index.md), or in the [partitioned failure buckets](/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/querying/index.md), you can determine which events are possible to recover based on what the fix entails.
+After inspecting failed events either in the [Snowplow BDP Console](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/ui/index.md), or in the [partitioned failure buckets](/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/file-storage/index.md), you can determine which events are possible to recover based on what the fix entails.
 
 With recovery it is possible to:
 
@@ -16,9 +16,9 @@ With recovery it is possible to:
 
 If your failed events would not be fixed by applying the above, they currently would be considered unrecoverable. Due to the fact that there might be a mix of recoverable and unrecoverable data in your storage, event recovery uses configuration in order to process only a subset of the failed events.
 
-### What you'll need to get started  
+### What you'll need to get started
 
-The typical flow for recovery and some prerequisites to consider would be:  
+The typical flow for recovery and some prerequisites to consider would be:
 **Understanding the failure issue**
 
 - Familiarity with the [failed event types](/docs/fundamentals/failed-events/index.md)

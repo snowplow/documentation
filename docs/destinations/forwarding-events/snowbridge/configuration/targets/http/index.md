@@ -99,7 +99,7 @@ Response rules allow you to configure how the app deals with failures in sending
 
 There are three categories of failure:
 
-`invalid` means that the data is considered incompatible with the target for some reason. For example, you may have defined a mapping for a given API, but the event being processed happens to have null data for a field that is required by the API. In this instance, retrying the data won't fix the issue, so you would configure an invalid response rule, which identifies responses which indicate this scenario.
+`invalid` means that the data is considered incompatible with the target for some reason. For example, you may have defined a mapping for a given API, but the event happens to have null data for a required field. In this instance, retrying the data won't fix the issue, so you would configure an invalid response rule, identifying which responses indicate this scenario.
 
 Data that matches an invalid response rule is sent to the failure target.
 

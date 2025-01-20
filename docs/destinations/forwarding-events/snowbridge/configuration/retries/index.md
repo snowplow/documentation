@@ -1,5 +1,5 @@
 ---
-title: "Retries (beta)"
+title: "Retry behavior (beta)"
 description: "Configure retry behaviour."
 ---
 

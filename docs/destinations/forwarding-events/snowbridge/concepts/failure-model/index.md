@@ -20,7 +20,7 @@ There are several different failures that Snowbridge may hit.
 
 This is where a request to the destination technology fails or is rejected - for example a http 400 response is received. 
 
-Retry behaviour for target failures are determined by the retry configuration. You can find details of this in the [configuration section](/docs/destinations/forwarding-events/snowbridge/configuration/retries/index.md).
+Retry behaviour for target failures is determined by the retry configuration. You can find details of this in the [configuration section](/docs/destinations/forwarding-events/snowbridge/configuration/retries/index.md).
 
 As of Snowbridge 2.4.2, the kinesis target does not treat kinesis write throughput exceptions as this type of failure. Rather it has an in-built backoff and retry, which will persist until each event in the batch is either successful, or fails for a different reason.
 

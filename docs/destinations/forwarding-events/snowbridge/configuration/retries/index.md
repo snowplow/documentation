@@ -17,7 +17,7 @@ A **setup failure** is one we don't expect to be immediately resolved, for examp
 
 As of version 3.0.0, only the http target can be configured to return setup errors, via the response rules feature - see [the http target configuration section](/docs/destinations/forwarding-events/snowbridge/configuration/targets/http/index.md). For all other targets, all errors returned will be considered transient, and behaviour can be configured using the `transient` block of the retry configuration.
 
-Retries will be attempted on an exponential backoff - in other words, on each subsequent failure, the backoff time will double. You can configure transient failures to retry indefinitely by setting `max_attempts` to 0.
+Retries will be attempted with an exponential backoff. In other words, on each subsequent failure, the backoff time will double. You can configure transient failures to be retried indefinitely by setting `max_attempts` to 0.
 
 ## Configuration options
 

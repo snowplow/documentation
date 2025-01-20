@@ -105,7 +105,7 @@ Data that matches an invalid response rule is sent to the failure target.
 
 `setup` means that this error is not retryable, but is something which can only be resolved by a change in configuration or a change to the target. An example of this is an authentication failure - retrying will fix the issue, the resolution is to grant the appropriate permissions, or provide the correct API key.
 
-Data that matches a setup response rule is handled by a retey as determined in the `setup` configuration block of [retry configuration](/docs/destinations/forwarding-events/snowbridge/configuration/retries/index.md).
+Data that matches a setup response rule is handled by a retry as determined in the `setup` configuration block of [retry configuration](/docs/destinations/forwarding-events/snowbridge/configuration/retries/index.md).
 
 `transient` errors are everything else - we assume that the issue is temporary and retrying will resolve the problem. An example of this is being throttled by an API because too much data is being sent at once. There is no explicit configuration for transient - rather, anything that is not configured as one of the other types is considered transient.
 

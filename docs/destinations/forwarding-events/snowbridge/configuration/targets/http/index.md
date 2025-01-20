@@ -23,7 +23,7 @@ Like in the case of basic authentication, we recommend using environment variabl
 This feature was added in version 2.3.0
 :::
 
-When enabled, the dynamic headers attaches a header to the data according to what your transformation provides in the `HTTPHeaders` field of `engineProtocol`. Data is batched according to the dynamic header value before requests are sent.
+When enabled, this feature attaches a header to the data according to what your transformation provides in the `HTTPHeaders` field of `engineProtocol`. Data is batched independently per each dynamic header value before requests are sent.
 
 ## Request templating
 

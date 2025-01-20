@@ -41,7 +41,7 @@ Where the dynamic headers feature is enabled, data is split into batches accordi
 
 In addition to all base functions available in the Go text/template package, the following custom functions are available for convenience:
 
-`prettyPrint` - Because the input to the templater is a Go data structure, simply providing a reference to an object field won't produce a JSON object in the output of the template. `prettyPrint` converts the data to prettified JSON (by unmarshaling to json). Use it wherever you expect a JSON object in the output. This is compatible with any data type, but it shouldn't be necessary if the data is not an object.
+`prettyPrint` - Because the input to the templater is a Go data structure, simply providing a reference to an object field won't output it as JSON. `prettyPrint` converts the data to prettified JSON. Use it wherever you expect a JSON object in the output. This is compatible with any data type, but it shouldn't be necessary if the data is not an object.
 
 `env` - Allows you to set and refer to an env var in your template. Use it when your request body must contain sensitive data, for example an API key.
 

@@ -33,7 +33,7 @@ This feature was added in version 3.0.0
 
 This feature allows you to provide a [Golang text template](https://pkg.go.dev/text/template) to construct a request body from a batch of data. This feature should be useful in constructing requests to send to an API, for example.
 
-Input data must be valid JSON, any message whose that fails to be marshaled to JSON will be treated as invalid and sent to the failure target. Equally, if an attempt to template a batch of data results in an error, then all messages in the batch will be considred invalid and sent to the failuret target.
+Input data must be valid JSON, any message that fails to be marshaled to JSON will be treated as invalid and sent to the failure target. Equally, if an attempt to template a batch of data results in an error, then all messages in the batch will be considered invalid and sent to the failure target.
 
 Where the dynamic headers feature is enabled, data is split into batches according to the provided header value, and the templater will operate on each batch separately.
 

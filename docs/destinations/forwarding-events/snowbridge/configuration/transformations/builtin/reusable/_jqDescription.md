@@ -2,4 +2,4 @@
 
 jq supports formatting values, mathematical operations, boolean comparisons, regex matches, and many more useful features. To get started with jq command, see the [tutorial](https://jqlang.github.io/jq/tutorial/), and [full reference manual](https://jqlang.github.io/jq/manual/). [This open-source jq playground tool](https://jqplay.org/) may also be helpful.
 
-For most use cases, you are unlikely to meaningfully encounter them, but note that there are [some small differences](https://github.com/itchyny/gojq?tab=readme-ov-file#difference-to-jq) between jq and gojq.
+For most use cases, you are unlikely to encounter them, but note that there are [some small differences](https://github.com/itchyny/gojq?tab=readme-ov-file#difference-to-jq) between jq and gojq.

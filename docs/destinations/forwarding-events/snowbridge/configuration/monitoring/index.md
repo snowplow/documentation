@@ -24,7 +24,7 @@ https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/mon
 https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/monitoring/sentry-example.hcl
 ```
 
-### StatsD stats receiver Configuration
+### StatsD stats receiver configuration
 
 ```hcl reference
 https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/monitoring/statsd-example.hcl

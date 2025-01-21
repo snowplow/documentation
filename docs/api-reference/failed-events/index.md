@@ -7,15 +7,15 @@ This page lists all the possible types of [failed events](/docs/fundamentals/fai
 
 ## Where do failed events originate?
 
-While an event is being processed by the pipeline it is checked to ensure it meets the specific formatting or configuration expectations; these include checks like: does it match the schema it is associated with, were Enrichments successfully applied and was the payload sent by the tracker acceptable.
+While an event is being processed by the pipeline it is checked to ensure it meets the specific formatting or configuration expectations. These include checks like: does it match the schema it is associated with, were Enrichments successfully applied, and was the payload sent by the tracker acceptable.
 
 Generally, the [Collector](/docs/api-reference/stream-collector/index.md) tries to write any payload to the raw stream, no matter its content, and no matter whether it is valid. This explains why many of the failure types are filtered out by the [Enrich](/docs/api-reference/enrichment-components/index.md) application, and not any earlier.
 
 :::note
 
-The Collector might receive events in batches. If something is wrong with the Collector payload as a whole (e.g. due to a [Collector Payload Format Violation](#collector-payload-format-violation)), the generated failed event would represent an entire batch of Snowplow events.
+The Collector might receive events in batches. If something is wrong with the Collector payload as a whole (e.g. due to a [Collector payload format violation](#collector-payload-format-violation)), the generated failed event would represent an entire batch of Snowplow events.
 
-Once the Collector payload successfully reaches the validation and enrichment steps, it is split into its constituent events. Each of them would fail (or not fail) independently (e.g. due to an [Enrichment Failure](#enrichment-failure)). This means that each failed event generated at this stage represents a single Snowplow event.
+Once the Collector payload successfully reaches the validation and enrichment steps, it is split into its constituent events. Each of them would fail (or not fail) independently (e.g. due to an [enrichment failure](#enrichment-failure)). This means that each failed event generated at this stage represents a single Snowplow event.
 
 :::
 
@@ -81,7 +81,7 @@ Violations could be:
 - Invalid query string encoding in URL
 - Path not respecting /vendor/version
 
-The most likely source of this failure type is bot traffic that has hit the Collector with an invalid http request. Bots are prevalent on the web, so do not be surprised if your Collector receives some of this traffic. Generally you would ignore not try to recover a Collector payload format violation, because it likely did not originate from a tracker or a webhook.
+The most likely source of this failure type is bot traffic that has hit the Collector with an invalid http request. Bots are prevalent on the web, so do not be surprised if your Collector receives some of this traffic. Generally you would ignore, and not try to recover, a Collector payload format violation, because it likely did not originate from a tracker or a webhook.
 
 Because this failure is handled during enrichment, events in the real time good stream are free of this violation type.
 
@@ -91,7 +91,7 @@ Collector payload format violation schema can be found [here](https://github.com
 
 ## Adaptor failure
 
-This failure type is produced by the [enrichment](/docs/pipeline/enrichments/what-is-enrichment/index.md) application, when it tries to interpret a Collector payload from the raw stream as a http request from a [3rd party webhook](/docs/sources/webhooks/index.md).
+This failure type is produced by the [enrichment](/docs/pipeline/enrichments/what-is-enrichment/index.md) application, when it tries to interpret a Collector payload from the raw stream as a HTTP request from a [3rd party webhook](/docs/sources/webhooks/index.md).
 
 :::info
 
@@ -103,7 +103,7 @@ Many adaptor failures are caused by bot traffic, so do not be surprised to see s
 
 The failure could be:
 
-1. The vendor/version combination in the Collector url is not supported. For example, imagine a http request sent to `/com.sandgrod/v3` which is a mis-spelling of the [sendgrid adaptor](http://sendgrid) endpoint.
+1. The vendor/version combination in the Collector URL is not supported. For example, imagine a http request sent to `/com.sandgrod/v3` which is a mis-spelling of the [sendgrid adaptor](http://sendgrid) endpoint.
 2. The webhook sent by the 3rd party does not conform to the expected structure and list of fields for this webhook. For example, imagine the 3rd party webhook payload is updated and stops sending a field that it was sending before.
 
 Many adaptor failures are caused by bot traffic, so do not be surprised to see some of them in your pipeline. However, if you believe you are missing data because of a misconfigured webhook, then you might try to fix the webhook and then [recover the failed events](/docs/data-product-studio/data-quality/failed-events/recovering-failed-events/index.md).
@@ -167,7 +167,7 @@ This failure type can be produced by [any loader](/docs/api-reference/loaders-st
 For example:
 
 - A schema is not available in any of the repositories listed in the [Iglu resolver](/docs/api-reference/iglu/iglu-resolver/index.md).
-- Some loaders (e.g. [RDB loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) and [Postgres loader](/docs/api-reference/loaders-storage-targets/snowplow-postgres-loader/index.md)) make use of the "schema list" api endpoints, which are only implemented for an [Iglu server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) repository. A loader Iglu error will be generated if the schema is in a [static repo](/docs/api-reference/iglu/iglu-repositories/static-repo/index.md) or [embedded repo](/docs/api-reference/iglu/iglu-repositories/jvm-embedded-repo/index.md).
+- Some loaders (e.g. [RDB loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) and [Postgres loader](/docs/api-reference/loaders-storage-targets/snowplow-postgres-loader/index.md)) make use of the "schema list" API endpoints, which are only implemented for an [Iglu server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) repository. A loader Iglu error will be generated if the schema is in a [static repo](/docs/api-reference/iglu/iglu-repositories/static-repo/index.md) or [embedded repo](/docs/api-reference/iglu/iglu-repositories/jvm-embedded-repo/index.md).
 - The loader cannot auto-migrate a database table. If a schema version is incremented from `1-0-0` to `1-0-1` then it is expected to be [a non-breaking change](/docs/api-reference/iglu/common-architecture/schemaver/index.md), and many loaders (e.g. RDB loader) attempt to execute a `ALTER TABLE` statement to facilitate the new schema in the warehouse. But if the schema change is breaking (e.g. string field changed to integer field) then the database migration is not possible.
 
 This failure type cannot be [recovered](/docs/data-product-studio/data-quality/failed-events/recovering-failed-events/index.md).

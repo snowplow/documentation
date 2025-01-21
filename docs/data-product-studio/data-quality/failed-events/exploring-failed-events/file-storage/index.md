@@ -19,7 +19,7 @@ If you followed the [Community Edition quick start guide](/docs/get-started/snow
 
 ## Retrieving raw data
 
-You can directly access and download examples of events that are failing from file storage, this is useful for further investigation and also required to design a recovery operation.
+You can directly access and download examples of events that are failing from file storage. This is useful for further investigation, and also required to design a recovery operation.
 
 <Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>

@@ -30,7 +30,7 @@ The format of the failed events loaded into your warehouse or lake is [the same 
 There are two differences compared to regular events.
 
 **Invalid data is removed from the event.** This principle applies to all columns:
-* Any invalid standard column (e.g. `geo_country`) will be set to `null`.
+* Any invalid standard column (e.g. `geo_country`) will be set to `null` instead of the offending value.
 * Likewise, any column containing the JSON for a self-describing event (`unstruct_...`) will be set to `null` if that JSON fails validation.
 * Finally, for entity columns (`contexts_`), if one entity is invalid, it will be removed from the array of entities. If all entities are invalid, the whole column will be set to `null`.
 

@@ -46,17 +46,17 @@ Schema violation schema can be found [here](https://github.com/snowplow/iglu-cen
 
 ## Enrichment failure
 
-This failure type is produced by the [enrichment](/docs/pipeline/enrichments/what-is-enrichment/index.md) application, and it represents any failure to enrich the event by one of your configured enrichments.
+This failure type is produced by the [Enrich](/docs/pipeline/enrichments/what-is-enrichment/index.md) application, and it represents any failure to enrich the event by one of your configured enrichments.
 
 <details>
 
 There are many reasons why an enrichment will fail, but here are some examples:
 
-- You are using the [custom SQL enrichment](/docs/pipeline/enrichments/available-enrichments/custom-sql-enrichment/index.md) but the credentials for accessing the database are wrong.
-- You are using the [IP lookup enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) but have mis-configured the location of the MaxMind database.
-- You are using the [custom API request enrichment](/docs/pipeline/enrichments/available-enrichments/custom-api-request-enrichment/index.md) but the API server is not responding.
-- The raw event contained an unstructured event field or a context field which was not valid JSON.
-- An Iglu server responded with an unexpected error response, so the event schema could not be resolved.
+- You are using the [custom SQL enrichment](/docs/pipeline/enrichments/available-enrichments/custom-sql-enrichment/index.md) but the credentials for accessing the database are wrong
+- You are using the [IP lookup enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) but have mis-configured the location of the MaxMind database
+- You are using the [custom API request enrichment](/docs/pipeline/enrichments/available-enrichments/custom-api-request-enrichment/index.md) but the API server is not responding
+- The raw event contained an unstructured event field or a context field which was not valid JSON
+- An Iglu server responded with an unexpected error response, so the event schema could not be resolved
 
 If your pipeline is generating enrichment failures, it might mean there is a problem with your enrichment configuration. The error details in the enrichment failure JSON object should give you a hint about what the problem might be.
 
@@ -70,7 +70,7 @@ Enrichment failure schema can be found [here](https://github.com/snowplow/iglu-c
 
 ## Collector payload format violation
 
-This failure type is produced by the [enrichment](/docs/pipeline/enrichments/what-is-enrichment/index.md) application, when Collector payloads from the raw stream are deserialized from thrift format.
+This failure type is produced by the [Enrich](/docs/pipeline/enrichments/what-is-enrichment/index.md) application, when Collector payloads from the raw stream are deserialized from thrift format.
 
 <details>
 
@@ -79,9 +79,9 @@ Violations could be:
 - Malformed HTTP requests
 - Truncation
 - Invalid query string encoding in URL
-- Path not respecting /vendor/version
+- Path not respecting `/vendor/version`
 
-The most likely source of this failure type is bot traffic that has hit the Collector with an invalid http request. Bots are prevalent on the web, so do not be surprised if your Collector receives some of this traffic. Generally you would ignore, and not try to recover, a Collector payload format violation, because it likely did not originate from a tracker or a webhook.
+The most likely source of this failure type is bot traffic that has hit the Collector with an invalid HTTP request. Bots are prevalent on the web, so do not be surprised if your Collector receives some of this traffic. Generally you would ignore, and not try to recover, a Collector payload format violation, because it likely did not originate from a tracker or a webhook.
 
 Because this failure is handled during enrichment, events in the real time good stream are free of this violation type.
 
@@ -91,7 +91,7 @@ Collector payload format violation schema can be found [here](https://github.com
 
 ## Adaptor failure
 
-This failure type is produced by the [enrichment](/docs/pipeline/enrichments/what-is-enrichment/index.md) application, when it tries to interpret a Collector payload from the raw stream as a HTTP request from a [3rd party webhook](/docs/sources/webhooks/index.md).
+This failure type is produced by the [Enrich](/docs/pipeline/enrichments/what-is-enrichment/index.md) application, when it tries to interpret a Collector payload from the raw stream as a HTTP request from a [3rd party webhook](/docs/sources/webhooks/index.md).
 
 :::info
 
@@ -103,7 +103,7 @@ Many adaptor failures are caused by bot traffic, so do not be surprised to see s
 
 The failure could be:
 
-1. The vendor/version combination in the Collector URL is not supported. For example, imagine a http request sent to `/com.sandgrod/v3` which is a mis-spelling of the [sendgrid adaptor](http://sendgrid) endpoint.
+1. The vendor/version combination in the Collector URL is not supported. For example, imagine an HTTP request sent to `/com.sandgrod/v3` which is a mis-spelling of the [sendgrid adaptor](http://sendgrid) endpoint.
 2. The webhook sent by the 3rd party does not conform to the expected structure and list of fields for this webhook. For example, imagine the 3rd party webhook payload is updated and stops sending a field that it was sending before.
 
 Many adaptor failures are caused by bot traffic, so do not be surprised to see some of them in your pipeline. However, if you believe you are missing data because of a misconfigured webhook, then you might try to fix the webhook and then [recover the failed events](/docs/data-product-studio/data-quality/failed-events/recovering-failed-events/index.md).
@@ -116,11 +116,11 @@ Adapter failure schema can be found [here](https://github.com/snowplow/iglu-cent
 
 ## Tracker protocol violation
 
-This failure type is produced by the [enrichment](/docs/pipeline/enrichments/what-is-enrichment/index.md) application, when a http request does not conform to our [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md).
+This failure type is produced by the [Enrich](/docs/pipeline/enrichments/what-is-enrichment/index.md) application, when an HTTP request does not conform to our [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md).
 
 <details>
 
-Snowplow trackers send http requests to the `/i` endpoint or the `/com.snowplowanalytics.snowplow/tp2` endpoint, and they are expected to conform to this protocol.
+Snowplow trackers send HTTP requests to the `/i` endpoint or the `/com.snowplowanalytics.snowplow/tp2` endpoint, and they are expected to conform to this protocol.
 
 Many tracker protocol violations are caused by bot traffic, so do not be surprised to see some of them in your pipeline.
 
@@ -134,7 +134,7 @@ Tracker protocol violation schema can be found [here](https://github.com/snowplo
 
 ## Size violation
 
-This failure type can be produced either by the [Collector](/docs/api-reference/stream-collector/index.md) or by the [enrichment](/docs/pipeline/enrichments/what-is-enrichment/index.md) application. It happens when the size of the raw event or enriched event is too big for the output message queue. In this case it will be truncated and wrapped in a size violation failed event instead.
+This failure type can be produced either by the [Collector](/docs/api-reference/stream-collector/index.md) or by the [Enrich](/docs/pipeline/enrichments/what-is-enrichment/index.md) application. It happens when the size of the raw event or enriched event is too big for the output message queue. In this case it will be truncated and wrapped in a size violation failed event instead.
 
 <details>
 

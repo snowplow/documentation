@@ -87,14 +87,14 @@ SELECT data.failure.messages FROM adapter_failures
 WHERE from_iso8601_timestamp(data.failure.timestamp) > timestamp '2020-04-01'
 ```
 
-This approach is great for debugging your pipeline without the need to load your failed events into a separate database.
+This approach is handy for debugging your pipeline without the need to load your failed events into a separate database.
 
 Before you can query this data, you need to create corresponding tables in Athena or BigQuery as we explain below. Each different failed event type (e.g. schema violations, adapter failures) has a different schema, so you will need one table per event type.
 
 ## Creating the tables
 
-<Tabs groupId="warehouse" queryString>
-  <TabItem value="athena" label="Athena" default>
+<Tabs groupId="cloud" queryString>
+  <TabItem value="aws" label="AWS" default>
 
 Go to [the Athena dashboard](https://eu-central-1.console.aws.amazon.com/athena/home) and use the query editor. Start by creating a database (replace `{{ DATABASE }}` with the name of your pipeline, e.g. `prod1` or `qa1`):
 
@@ -102,11 +102,11 @@ Go to [the Athena dashboard](https://eu-central-1.console.aws.amazon.com/athena
 CREATE DATABASE IF NOT EXISTS {{ DATABASE }}
 ```
 
-Then run each sql statement provided in the [badrows-tables repository](https://github.com/snowplow-incubator/snowplow-badrows-tables/tree/master/athena) by copying them into the Athena query editor. We recommend creating all tables, although you can skip the ones you are not interested in.
+Then run each SQL statement provided in the [badrows-tables repository](https://github.com/snowplow-incubator/snowplow-badrows-tables/tree/master/athena) by copying them into the Athena query editor. We recommend creating all tables, although you can skip the ones you are not interested in.
 
 :::info Placeholders
 
-Note that the sql statements contain a few placeholders which you will need to edit before you can create the tables:
+Note that the SQL statements contain a few placeholders which you will need to edit before you can create the tables:
 
 * `{{ DATABASE }}` — as above, change this to the name of your pipeline, e.g. `prod1` or `qa1`.
 * `s3://{{ BUCKET }}/{{ PIPELINE }}` — this should point to the directory in S3 where your bad rows files are stored.
@@ -116,7 +116,7 @@ Note that the sql statements contain a few placeholders which you will need to e
 ![Creating a table in Athena](images/athena-create-table.png)
 
   </TabItem>
-  <TabItem value="bigquery" label="BigQuery">
+  <TabItem value="gcp" label="GCP">
 
 :::info Community Edition quick start guide on GCP
 
@@ -126,7 +126,7 @@ If you followed the [Community Edition quick start guide](/docs/get-started/snow
 
 :::note
 
-These instructions make use of the [bq command-line tool](https://cloud.google.com/bigquery/docs/bq-command-line-tool) which is packaged with the [google cloud sdk](https://cloud.google.com/sdk/docs). Follow the sdk instructions for how to [initialize and authenticate the sdk](https://cloud.google.com/sdk/docs/initializing). Also take a look at the [BigQuery dashboard](https://console.cloud.google.com/bigquery) as you run these commands, so you can see your tables as you create them.
+These instructions make use of the [`bq` command-line tool](https://cloud.google.com/bigquery/docs/bq-command-line-tool) which is packaged with the [Google cloud SDK](https://cloud.google.com/sdk/docs). Follow the SDK instructions for how to [initialize and authenticate the SDK](https://cloud.google.com/sdk/docs/initializing). Also take a look at the [BigQuery dashboard](https://console.cloud.google.com/bigquery) as you run these commands, so you can see your tables as you create them.
 
 :::
 

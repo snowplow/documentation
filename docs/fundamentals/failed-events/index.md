@@ -29,7 +29,7 @@ The two most common types of failed events are:
 
 :::tip
 
-In many cases, you will be able to fix the underlying problem directly, e.g. by altering your tracking code, by providing the correct schema or by changing your enrichment configuration.
+In many cases, you will be able to fix the underlying problem directly, e.g. by altering your tracking code, by providing the correct schema, or by changing your enrichment configuration.
 
 :::
 

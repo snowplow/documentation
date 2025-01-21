@@ -11,7 +11,7 @@ These problems can arise at various stages:
 * Collection (e.g. invalid payload format)
 * Validation (e.g. event does not match the schema)
 * Enrichment (e.g. external API unavailable)
-* Loading (should be very unlikely with modern versions of Snowplow)
+* Loading (very unlikely with modern versions of Snowplow)
 
 :::note
 

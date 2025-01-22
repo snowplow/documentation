@@ -1,6 +1,5 @@
 {
-    "title": "Tracking with Base Data Products",
-    "label": "Data products",
-    "description": "This tutorial walks you through the process of setting up our Unified Digital DBT package."
-  }
-  
+  "title": "Tracking with Base Data Products",
+  "label": "Data products",
+  "description": "This tutorial walks you through using Data Product Studio."
+}

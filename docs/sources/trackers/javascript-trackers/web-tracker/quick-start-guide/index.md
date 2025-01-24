@@ -57,7 +57,7 @@ window.snowplow('trackPageView');
 
 Rather than adding the tag snippet directly, you may wish to use an alternative option for loading the JavaScript Tracker.
 
-- Users of Google Tag Manager can use the [Snowplow Analytics Custom Template](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/google-tag-manager-custom-template/index.md).
+- Users of Google Tag Manager can use the [Snowplow Analytics Custom Template](/docs/sources/trackers/google-tag-manager/index.md).
 
 - Use the Snowplow Plugin in the [analytics npm package](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/snowplow-plugin-for-analytics-npm-package/index.md).
 

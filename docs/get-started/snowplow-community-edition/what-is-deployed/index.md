@@ -239,7 +239,7 @@ See the [S3 Loader](https://registry.terraform.io/modules/snowplow-devops/s3-loa
 The following loaders and folders are available:
 * Raw loader, `raw/`: events that come straight out of the Collector and have not yet been validated or enriched by the Enrich application. They are Thrift records and are therefore a little tricky to decode. There are not many reasons to use this data, but backing this data up gives you the flexibility to replay this data should something go wrong further downstream in the pipeline.
 * Enriched loader, `enriched/`: enriched events, in GZipped blobs of [enriched TSV](/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md). Historically, this has been used as the staging ground for loading into data warehouses via the [Batch transformer](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/spark-transformer/index.md) application. However, it’s no longer used in the quick start examples.
-* Bad loader, `bad/`: [failed events](/docs/fundamentals/failed-events/index.md). You can [query them using Athena](/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/querying/index.md).
+* Bad loader, `bad/`: [failed events](/docs/fundamentals/failed-events/index.md). You can [query them using Athena](/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/file-storage/index.md).
 
 Also, if you choose Postgres as your destination, the Postgres loader will load all failed events into Postgres.
 

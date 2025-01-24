@@ -24,7 +24,7 @@ const plugin = () => {
     KCL: 'Kinesis Client Library',
     OSS: 'Open Source Software',
     QA: 'Quality Assurance',
-    PII: 'Personal Identifiable Information',
+    PII: 'Personally Identifiable Information',
     RDS: 'Amazon Relational Database Service',
     S3: 'Amazon Cloud Object Storage',
     SS: 'Server Side',

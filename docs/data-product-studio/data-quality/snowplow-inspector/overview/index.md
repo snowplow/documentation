@@ -32,6 +32,6 @@ This makes the tool a good first port of call when trying to answer questions su
 
 Additionally, you can configure the extension to show whether or not an event has passed validation according to any event validation rules codified in the corresponding [schema](/docs/fundamentals/schemas/index.md).
 
-For events that failed validation in production historically that you are unable to replicate in your own browser, see our guides on [how to query failed events](/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/querying/index.md) from their respective destinations.
+For events that failed validation in production historically that you are unable to replicate in your own browser, see our guides on [how to query failed events](/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/file-storage/index.md) from their respective destinations.
 These failed events have a [specific format](/docs/fundamentals/failed-events/index.md) that includes an array of helpful, detailed error messages that explain the exact reasons why the event failed validation.
 These events can also [be imported](/docs/data-product-studio/data-quality/snowplow-inspector/importing-events/index.md#importing-failed-events) into the extension to view as if your browser had generated them itself.

@@ -42,7 +42,7 @@ _Usage in non-competing products, no distribution_ ([FAQ](/docs/resources/commun
 </td>
 <td>
 
-_Usage in non-competing products, no high availability in production, no distribution_  ([FAQ](/docs/resources/limited-use-license-faq/index.md))
+_Usage in non-production environments only, no distribution_  ([FAQ](/docs/resources/limited-use-license-faq/index.md))
 
 </td>
 <td>

@@ -40,11 +40,12 @@ This guide will walk you through setting up and testing an abandoned browse camp
    - Product URL using `{{custom_attribute.${product_url}}}`
    - Add dynamic product images if available
    
-**Tip**:
+:::tip
    - The `abandonedEmail=true` parameter in the URL helps track when users click through from abandoned browse emails
    - You can use this parameter to:
      - Track email campaign success
      - Remove users from the campaign audience once they've engaged
+:::
 
 ## Campaign Settings
 

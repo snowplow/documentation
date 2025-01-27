@@ -7,6 +7,8 @@ title: Introduction
 
 This tutorial demonstrates how to implement an Abandoned Browse tracking and re-engagement system using Snowplow, Snowflake, and Census. This solution helps e-commerce businesses identify and re-engage users who have shown interest in products but haven't completed a purchase.
 
+![Abandoned Browse](images/retl-email.png)
+
 ## Prerequisites
 
 - An eCommerce website with a product catalog to track events from

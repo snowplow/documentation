@@ -22,7 +22,7 @@ This guide will walk you through setting up and testing an abandoned browse camp
 ![Braze Campaign Builder](images/retl-braze.png)
 
 1. Click "Edit Campaign" in the campaign builder and click "Edit Email Body"
-2. Design your email using Braze's editor:
+2. Design your email using Braze's visual editor or use the following HTML:
    ```html
    Subject: Don't miss out on {{custom_attribute.${product}}}!
    
@@ -75,7 +75,10 @@ This guide will walk you through setting up and testing an abandoned browse camp
     - Click on the link you receive in the test email with the `abandonedEmail=true` parameter
     - In Snowflake or Census, check the `winback_successful` column for the user has been set to true
 
+---
 ![Braze Test Email](images/retl-email.png)
+
+---
 
 ## Best Practices
 

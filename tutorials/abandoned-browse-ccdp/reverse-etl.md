@@ -73,27 +73,34 @@ WHERE
 1. In Census, go to **Syncs** and click "Create New Sync"
 2. For the Source:
    - Select your Snowflake connection
-   - Paste in your abandoned browse query
-   - Test the query to ensure it returns data
+   - Configure the authentication method
 
-3. For the Destination:
-   - Select your marketing platform (e.g., Braze)
-   - Choose the appropriate object type (e.g., Users or Events)
+3. Configure the dataset
+    - Select dataset from the menu
+    - Select the Snowflake source
+    - Enter the SQL query above
+    - Click "Preview" and ensure it returns data
 
-4. Map the fields:
-   - User ID → External User ID
-   - Product ID → Custom Attribute
-   - Total View Time → Custom Attribute
-   - Last View Time → Custom Attribute
+![Census Dataset](images/retl-datasets.png)
 
-5. Configure sync settings:
-   - Set sync frequency (e.g., every 1 hour)
-   - Choose sync behavior (e.g., update or mirror)
-   - Enable "Full Sync" for the first run
+4. Configure the audience segment:
+    - Select Segments from the menu
+    - Click "New Segment"
+    - Under "Segment Of", select the dataset from the previous step
+    - Add filters to the segment based on the image below. 
+    - Click preview to confirm that the correct data is being returned
 
-6. Save and start the sync
+![Census Sync](images/retl-census.png)
 
-Once your Census sync is configured and running, proceed to the [Creating Campaigns in Braze](./braze-campaign.md) guide to set up your marketing automation campaign.
+5. Configure the sync settings:
+    - Select Syncs from the menu
+    - Click "New Sync"
+    - Under Source, select the audience from the previous step
+    - Under Destination, select Braze
+    - Configure the mapping as shown in the image below
+    - Click "Run Now"
+
+![Census Mapping](images/retl-census-mapping.png)
 
 ## Monitoring and Optimization
 

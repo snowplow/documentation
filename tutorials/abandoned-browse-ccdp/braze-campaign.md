@@ -19,7 +19,9 @@ This guide will walk you through setting up and testing an abandoned browse camp
 
 ## Create Email Template
 
-1. Click "Edit Message" in the campaign builder
+![Braze Campaign Builder](images/retl-braze.png)
+
+1. Click "Edit Campaign" in the campaign builder and click "Edit Email Body"
 2. Design your email using Braze's editor:
    ```html
    Subject: Don't miss out on {{custom_attribute.${product}}}!
@@ -57,20 +59,22 @@ This guide will walk you through setting up and testing an abandoned browse camp
 
 ## Testing the Campaign
 
-1. Create a test user:
-   - Ensure Census has synced product view data for this user
-   - Verify custom attributes in Braze user profile
+1. Return to "Edit Campaign" and click "Preview" at the bottom of the page
+   - Select "Search User" under Preview message as user
+   - If the user can't be found, ensure Census has synced product view data for this user
+   - Verify custom attributes are populated correctly in the email
+   - Click "Send Test" to send the test email
 
-2. Send test email:
-   - Click "Preview and Test"
-   - Select your test user
-   - Send test message
-
-3. Verify email content:
+2. Verify email content:
    - Check all personalization renders correctly
    - Verify product links work
    - Test on multiple email clients
 
+3. Verify winback success:
+    - Click on the link you receive in the test email with the `abandonedEmail=true` parameter
+    - In Snowflake or Census, check the `winback_successful` column for the user has been set to true
+
+![Braze Test Email](images/retl-email.png)
 
 ## Best Practices
 
@@ -82,4 +86,4 @@ This guide will walk you through setting up and testing an abandoned browse camp
 
 ## Congratulations
 
-Thanks for your effort! You have now set up an abandoned browse campaign in Braze. Let's review what we have achieved in the [Conclusion](./conclusion.md). 
+Thanks for your effort! You have now set up an abandoned browse campaign in Braze, sent an email, and verified winback success. Let's review what we have achieved in the [Conclusion](./conclusion.md). 

@@ -9,9 +9,11 @@ This tutorial demonstrates how to implement an Abandoned Browse tracking and re-
 
 ## Prerequisites
 
+- An eCommerce website with a product catalog to track events from
 - Snowplow instance
     - [Localstack](https://github.com/snowplow-incubator/snowplow-local) (Recommended)
     - [Community Edition](/docs/get-started/snowplow-community-edition)
+    - BDP Enterprise if you're already a customer
 - Access to a data warehouse (e.g. [Snowflake](https://www.snowflake.com))
 - [Census Reverse ETL](https://www.getcensus.com) or Snowplow Reverse ETL
 - Marketing automation platform (e.g. [Braze](https://www.braze.com))

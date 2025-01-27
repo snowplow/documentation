@@ -11,17 +11,17 @@ Congratulations on completing the tutorial on setting up an Abandoned Browse tra
 
 1. **Tracking Setup**: You have successfully implemented product view and engagement tracking using Snowplow's JavaScript tracker. This includes setting up page view, time spent, and add-to-cart tracking.
 
-2. **Data Modeling**: You have learned how to model your data to identify users who have shown interest in products but have not completed a purchase. This involved writing SQL queries to aggregate and analyze user behavior data.
+2. **Data Modeling**: You have learned how to model your data to identify users who have shown interest in products but have not completed a purchase. This involved writing SQL queries to aggregate and analyze user behavior data, including tracking successful winback campaigns through URL parameters.
 
 3. **Reverse ETL**: You have set up a Reverse ETL workflow using Census to sync your modeled data to a marketing automation platform like Braze. This enables you to create targeted re-engagement campaigns.
 
-4. **Campaign Creation**: You have created and configured an abandoned browse email campaign in Braze, utilizing personalized content to re-engage users and drive conversions.
+4. **Campaign Creation**: You have created and configured an abandoned browse email campaign in Braze, utilizing personalized content and tracking parameters to re-engage users, drive conversions, and measure campaign success.
 
 ## Recommended Next Steps
 
 To build on top of this solution accelerator, consider the following next steps:
 
-- **Expand Tracking**: Extend your tracking setup to include additional user interactions and checkout steps, to create a more comprehensive view of user behavior. You can follow our [eCommerce accelerator](https://docs.snowplow.io/accelerators/ecommerce) to learn more.
+- **Expand Tracking**: Extend your tracking setup to include additional user interactions, checkout steps, and campaign success metrics to create a more comprehensive view of user behavior and marketing effectiveness. You can follow our [eCommerce accelerator](https://docs.snowplow.io/accelerators/ecommerce) to learn more.
 
 - **Advanced Segmentation**: Use the data collected to create more advanced audience segments, such as users with high engagement but no purchase, or users who frequently view specific product categories.
 

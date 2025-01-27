@@ -4,9 +4,9 @@ title: Tracking Setup
 ---
 
 
-## Snowplow JavaScript Initialization
+## Initialize Snowplow JavaScript Tracker
 
-Before any tracking can take place, initialize the Snowplow JavaScript tracker. Below is an example of how to set up the tracker:
+First, initialize the Snowplow JavaScript tracker. Below is an example of how to set up the tracker:
 
 ```javascript
 ; (function (p, l, o, w, i, n, g) {
@@ -19,24 +19,12 @@ Before any tracking can take place, initialize the Snowplow JavaScript tracker. 
   }
 }(window, document, "script", "https://cdn.jsdelivr.net/npm/@snowplow/javascript-tracker@latest/dist/sp.lite.js", "snowplow"));
 
-// Production
+// Replace with your collector URL
 var collector = "yourcollector.site.com";
 
-// Testing
-// var tracker = "https://com-snplow-sales-gcp-prod1.mini.snplow.net";
-// window.snowplow('newTracker', 'rt', collector, {
-//   encodeBase64: false,
-//   appId: 'ShopifyDemo',
-//   platform: 'web',
-//   contexts: {
-//     webPage: true,
-//     performanceTiming: true
-//   }
-// });
-
-window.snowplow('newTracker', 'awsSales', awsSalesTracker, {
+window.snowplow('newTracker', 'awsSales', collector, {
   encodeBase64: false,
-  appId: 'ShopifyDemo',
+  appId: 'eCommerceDemo',
   platform: 'web',
   contexts: {
     webPage: true,
@@ -52,9 +40,9 @@ window.snowplow(
 );
 ```
 
-### Time Spent Tracking
+### Track User Engagement Time
 
-Use the `enableActivityTracking` function to track user activity on the page:
+Use the `enableActivityTracking` function to calculate the time the user is actively engaged on the page:
 
 ```javascript
 snowplow('enableActivityTracking', {
@@ -63,16 +51,19 @@ snowplow('enableActivityTracking', {
 });
 ```
 
-### Explanation of Parameters
+### Explanation of Activity Tracking Parameters
 
 - **minimumVisitLength**: The minimum time (in seconds) a user must stay on the page before tracking starts.
 - **heartbeatDelay**: The interval (in seconds) at which activity pings are sent.
+If you change these parameters, make sure to update the values in the [Data Modeling](./data-modeling.md#identifying-most-viewed-but-not-added-to-cart-products) step.
 
-### Page View Tracking
+### Track Page Views with Enhanced E-commerce Context
 
 After setting up activity tracking, implement the page view tracking with enhanced e-commerce context:
 
 ```javascript
+var floatPrice = parseFloat({{productPrice}});
+
 snowplow('trackPageView', {
   context: [{
     schema: "iglu:com.snowplowanalytics.snowplow.ecommerce/product/jsonschema/1-0-0",
@@ -81,7 +72,7 @@ snowplow('trackPageView', {
       name: {{productName}},
       brand: {{productBrand}},
       category: {{productCategory}},
-      price: {{price}},
+      price: floatPrice,
       currency: {{currency}},
       variant: {{productVariantTitle}}
     }
@@ -89,7 +80,7 @@ snowplow('trackPageView', {
 });
 ```
 
-### Add to Cart Tracking
+### Track "Add to Cart" Events
 
 After tracking page views, you can track "add to cart" events. Below is an example implementation:
 
@@ -108,7 +99,6 @@ var product = [{
   "variant": {{productVariantTitle}}
 }];
 
-// Add to cart. The cart_id parameter is not included because Shopify uses a cookie instead.
 window.snowplow("trackAddToCart", { 
   products: product, 
   total_value: newTotalValue, 
@@ -116,7 +106,7 @@ window.snowplow("trackAddToCart", {
 });
 ```
 
-### Explanation of Parameters
+### Explanation of "Add to Cart" Parameters
 
 - **id**: The unique identifier for the product.
 - **name**: The product's name.
@@ -127,4 +117,6 @@ window.snowplow("trackAddToCart", {
 - **variant**: The product variant (if applicable).
 - **total_value**: The updated total cart value after adding the product.
 
-With this implementation, each "add to cart" event is enriched with product and cart details.
+## Next Step
+
+With this implementation, you have page view, time spent, and add to cart tracking. If you want to add more eCommerce tracking, please refer to the [Snowplow Ecommerce Accelerator](https://docs.snowplow.io/accelerators/ecommerce). Next progress to the [Data Modeling](./data-modeling.md) step to verify your tracking setup.

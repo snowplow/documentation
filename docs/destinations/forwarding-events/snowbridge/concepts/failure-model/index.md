@@ -38,7 +38,7 @@ Writes of oversized messages to the failure target will be recorded with 'Oversi
 
 In the unlikely event that Snowbridge encounters data which is invalid for the target destination (for example empty data is invalid for pubsub), it will create a [generic error failed event](/docs/fundamentals/failed-events/index.md#generic-error),  emit it to the failure target, and ack the original message.
 
-As of version 3.0.0, the http target may produce invalid failures. This occurs when the a POST request body cannot be formed, when the templating feature's attempts to template data result in an error, or when the response conforms to a response rules configuration which sepcifies that the failure is to be treated as invalid. You can find more details in the [configuration section](/docs/destinations/forwarding-events/snowbridge/configuration/targets/http/index.md).
+As of version 3.0.0, the http target may produce 'invalid' type failures. This occurs when the a POST request body cannot be formed, when the templating feature's attempts to template data result in an error, or when the response conforms to a response rules configuration which sepcifies that the failure is to be treated as invalid. You can find more details in the [configuration section](/docs/destinations/forwarding-events/snowbridge/configuration/targets/http/index.md).
 
 Transformation failures are also treated as invalid, as described below.
 

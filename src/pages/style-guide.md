@@ -12,7 +12,7 @@ This includes writings such as:
 
 Some rules, annotated with "❗️", are different depending on the purpose of the writing.
 
-If you're using an AI tool to help you write, provide it with the link to this page and instruct it to follow this style guide.
+If you're using an AI tool to help you write, provide it with [the contents of this page](https://github.com/snowplow/documentation/blob/style_guide/src/pages/style-guide.md) [TODO update link before publishing] and instruct it to follow this style guide.
 
 This guide is linked from the [docs GitHub README](https://github.com/snowplow/documentation).
 

@@ -10,7 +10,7 @@ This includes writings such as:
 - text within the Console
 - other marketing content for the [main Snowplow website](https://snowplow.io/)
 
-Some rules, annotated with "❗️", are different depending on the purpose of the writing.
+Some rules, annotated with "➕", are different depending on the purpose of the writing.
 
 If you're using an AI tool to help you write, provide it with [the contents of this page](https://github.com/snowplow/documentation/blob/style_guide/src/pages/style-guide.md) [TODO update link before publishing] and instruct it to follow this style guide.
 
@@ -59,7 +59,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     |                        | set up credentials for your account |             |
 
 ## Formatting and punctuation
-### Quotation marks ❗️
+### Quotation marks ➕
 - Use double quotation marks (") rather than single (')
 
     | ✅                    | ❌                    |
@@ -85,7 +85,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     | ------------------------------------------------------------ | ----------------------------------------------------------- |
     | digital products, customer experiences, and fraud mitigation | digital products, customer experiences and fraud mitigation |
 
-### Titles and headings ❗️
+### Titles and headings ➕
 - Headings never finish with a full stop
 - For **documentation** and **release notes**, use sentence case for titles and headings
 
@@ -114,7 +114,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     | User and Marketing Analytics app | User & Marketing Analytics app |
 
 ## Writing style
-### Tone ❗️
+### Tone ➕
 - For **documentation**, **release notes**, and the **main website**, use a calm, conversational, professional tone
   - Contractions such as "don't" are fine
 - For **blog posts**, a more casual and friendly tone is welcome
@@ -143,7 +143,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     | -------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
     | Set up your tracking and send events. These events are received by the Collector | Set up your tracking and send events. The Collector receives the events |
 
-### Pronouns ❗️
+### Pronouns ➕
 - Refer to the reader directly as "you" (second-person pronoun) where possible
 
     | ✅                                   | ❌                                         |
@@ -175,7 +175,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     | we have fixed a bug        |
     | the Snowplow trackers      |
 
-### Timelessness ❗️
+### Timelessness ➕
 - For all **documentation** except for **migration guides**, stay within the current moment in time
     - We won't remember to come back and update it
     - The documentation is not an appropriate place to announce upcoming features
@@ -196,7 +196,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     | will be coming soon      |
     | currently                |
 
-### Exclamation marks ❗️
+### Exclamation marks ➕
 - For **documentation** and **release notes**, avoid exclamation marks
 
     | ✅                           | ❌                           |
@@ -210,7 +210,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     | ---------------------------------------------------- |
     | keep your data AI-ready from collection to delivery! |
 
-### Emojis ❗️
+### Emojis ➕
 - For most **documentation**, emojis can be used sparingly, to provide information
   - Emojis must not be used for decoration
 
@@ -253,92 +253,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
   | they will need to  | he/she will need to |
   | five person-hours  | five man-hours      |
 
-## General technical terms
-### Acronyms
-- Acronyms should be in capitals
-
-    | ✅    |
-    | ---- |
-    | HTTP |
-    | CDI  |
-    | CLI  |
-    | API  |
-    | SQL  |
-    | SDK  |
-    | URL  |
-
-- Some can be pluralized with an "s", but not all
-
-  | ✅            | ❌     |
-  | ------------ | ----- |
-  | JSON         | JSONs |
-  | JSON schemas | JSONs |
-  | APIs         |       |
-  | SDKs         |       |
-  | URLs         |       |
-
-- For the **documentation** website, we have a docs plugin that adds a dotted line and a tooltip explanation to acronyms, e.g. hovering over "BDP" will show that it stands for "Behavioral Data Platform": add new acronym definitions to the `src/remark/abbreviations.js` file to enable this behavior
-- (Technically, these are all initialisms, not acronyms)
-
-### Capitalization
-- Third-party products should be capitalized as appropriate
-
-    | ✅         |
-    | --------- |
-    | Google    |
-    | Snowflake |
-    | dbt       |
-    | Kafka     |
-    | npm       |
-
-- Don't use capitalization to highlight things
-
-  | ✅                            | ❌                            |
-  | ---------------------------- | ---------------------------- |
-  | using machine learning       | using Machine Learning       |
-  | due to an enrichment failure | due to an Enrichment Failure |
-
-- Use lower case for "web"
-
-  | ✅             | ❌             |
-  | ------------- | ------------- |
-  | a web browser | a Web browser |
-
-### Hyphenation
-- "Real-time" is hyphenated if it's used as an adjective
-  - It's two separate words if it's being used as a noun
-
-    | ✅   adjective                       | ✅         noun              |
-    | ----------------------------------- | --------------------------- |
-    | data available in real-time streams | data available in real time |
-
-- "Back-end" and "front-end" are hyphenated
-  - Strictly speaking, they should only be hyphenated if they're used as adjectives, and two separate words when used as nouns
-  - We are going for consistency instead of being entirely grammatically correct here
-
-    | ✅   adjective        | ✅         noun           |
-    | -------------------- | ------------------------ |
-    | front-end developers | working on the front-end |
-    | back-end tracking    | a storage back-end       |
-
-- "Server-side" and "client-side" are hyphenated
-
-    | ✅                                     | ❌                                     |
-    | ------------------------------------- | ------------------------------------- |
-    | ingestion from server-side            | ingestion from server side            |
-    | Google Tag Manager Server-side        | Google Tag Manager Server Side        |
-    | enable client-side anonymous tracking | enable client side anonymous tracking |
-
-- Use "ecommerce" without hyphen or capitalization (similar to "email")
-    - Exception: you're referring to a specific Snowplow product or feature, in which case it should be capitalized
-
-    | ✅                        | ❌                        |
-    | ------------------------ | ------------------------ |
-    | track ecommerce events   | track e-commerce events  |
-    | the Ecommerce plugin     | the E-commerce plugin    |
-    | the Ecommerce data model | the ecommerce data model |
-
-## Product-specific terms
+## Snowplow-specific terms
 
 ### Snowplow
 - Snowplow is called Snowplow, not Snowplow Analytics
@@ -479,6 +394,91 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     | ✅                                            |
     | -------------------------------------------- |
     | baked-in events aren't described by a schema |
+
+## General technical terms
+### Acronyms
+- Acronyms should be in capitals
+
+    | ✅    |
+    | ---- |
+    | HTTP |
+    | CDI  |
+    | CLI  |
+    | API  |
+    | SQL  |
+    | SDK  |
+    | URL  |
+
+- Some can be pluralized with an "s", but not all
+
+  | ✅            | ❌     |
+  | ------------ | ----- |
+  | JSON         | JSONs |
+  | JSON schemas | JSONs |
+  | APIs         |       |
+  | SDKs         |       |
+  | URLs         |       |
+
+- For the **documentation** website, we have a docs plugin that adds a dotted line and a tooltip explanation to acronyms, e.g. hovering over "BDP" will show that it stands for "Behavioral Data Platform": add new acronym definitions to the `src/remark/abbreviations.js` file to enable this behavior
+- (Technically, these are all initialisms, not acronyms)
+
+### Capitalization
+- Third-party products should be capitalized as appropriate
+
+    | ✅         |
+    | --------- |
+    | Google    |
+    | Snowflake |
+    | dbt       |
+    | Kafka     |
+    | npm       |
+
+- Don't use capitalization to highlight things
+
+  | ✅                            | ❌                            |
+  | ---------------------------- | ---------------------------- |
+  | using machine learning       | using Machine Learning       |
+  | due to an enrichment failure | due to an Enrichment Failure |
+
+- Use lower case for "web"
+
+  | ✅             | ❌             |
+  | ------------- | ------------- |
+  | a web browser | a Web browser |
+
+### Hyphenation
+- "Real-time" is hyphenated if it's used as an adjective
+  - It's two separate words if it's being used as a noun
+
+    | ✅   adjective                       | ✅         noun              |
+    | ----------------------------------- | --------------------------- |
+    | data available in real-time streams | data available in real time |
+
+- "Back-end" and "front-end" are hyphenated
+  - Strictly speaking, they should only be hyphenated if they're used as adjectives, and two separate words when used as nouns
+  - We are going for consistency instead of being entirely grammatically correct here
+
+    | ✅   adjective        | ✅         noun           |
+    | -------------------- | ------------------------ |
+    | front-end developers | working on the front-end |
+    | back-end tracking    | a storage back-end       |
+
+- "Server-side" and "client-side" are hyphenated
+
+    | ✅                                     | ❌                                     |
+    | ------------------------------------- | ------------------------------------- |
+    | ingestion from server-side            | ingestion from server side            |
+    | Google Tag Manager Server-side        | Google Tag Manager Server Side        |
+    | enable client-side anonymous tracking | enable client side anonymous tracking |
+
+- Use "ecommerce" without hyphen or capitalization (similar to "email")
+    - Exception: you're referring to a specific Snowplow product or feature, in which case it should be capitalized
+
+    | ✅                        | ❌                        |
+    | ------------------------ | ------------------------ |
+    | track ecommerce events   | track e-commerce events  |
+    | the Ecommerce plugin     | the E-commerce plugin    |
+    | the Ecommerce data model | the ecommerce data model |
 
 ## Accessibility
 ### Images

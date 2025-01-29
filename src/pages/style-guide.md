@@ -493,7 +493,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
 
 
 ## Markdown formatting
-The rules in this section apply only to the main **documentation** site.
+The rules in this section apply only to the main D**documentation** site.
 
 ### Headings
 - Use only heading levels 1, 2 and 3

@@ -61,12 +61,16 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
 ## Formatting and punctuation
 ### Quotation marks ❗️
 - Use double quotation marks (") rather than single (')
-- For **documentation**, use straight quotes (") rather than smart ones (")
 
     | ✅                    | ❌                    |
     | -------------------- | -------------------- |
     | the "Filters" button | the 'Filters' button |
-    | a "spiky" value      | a “spiky” value      |
+
+- For **documentation**, use straight quotes (") rather than smart ones (“)
+
+    | ✅               | ❌               |
+    | --------------- | --------------- |
+    | a "spiky" value | a “spiky” value |
 
 - For **all other writing**, smart quotes are fine as long as this is consistent within the piece of writing
 
@@ -116,14 +120,15 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
 - For **blog posts**, a more casual and friendly tone is welcome
 
 ### Brevity
-- Explain the point as simply as possible, without any extra words or phrases that don't add real information
+- Explain the point as simply as possible, without any extra words or phrases that don't add meaningful information
 
-     | ❌              |
-     | -------------- |
-     | simply         |
-     | on top of that |
-     | quickly        |
+    | ❌              |
+    | -------------- |
+    | simply         |
+    | on top of that |
+    | quickly        |
 
+- Link to existing pages, such as those in the [Fundamentals](/docs/fundamentals/) docs section, rather than explaining concepts again
 
 ### Voice
 - Use active rather than passive voice
@@ -227,7 +232,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
 - Adding diagrams and images is encouraged
 - Diagrams and images should have white backgrounds
 - For images, use `.webp` or `.png` format
-- For **documentation** diagrams, [Mermaid](http://mermaid.js.org/#/) code is recommended as the diagrams scale automatically
+- For **documentation** diagrams, [Mermaid](http://mermaid.js.org/#/) code is recommended as they adjust automatically
 
 ## Inclusive language
 ### Allowlist and denylist
@@ -307,13 +312,14 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     | ----------------------------------- | --------------------------- |
     | data available in real-time streams | data available in real time |
 
-- "Back-end" and "front-end" are hyphenated if they're used as adjectives
-  - They are two separate words when used as nouns
+- "Back-end" and "front-end" are hyphenated
+  - Strictly speaking they should only be hyphenated if they're used as adjectives, and two separate words when used as nouns
+  - We are going for consistency instead of being grammatically correct here
 
     | ✅   adjective        | ✅         noun           |
     | -------------------- | ------------------------ |
-    | front-end developers | working on the front end |
-    | back-end tracking    | a storage back end       |
+    | front-end developers | working on the front-end |
+    | back-end tracking    | a storage back-end       |
 
 - "Server-side" and "client-side" are hyphenated
 
@@ -379,7 +385,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
    | ------------ | -------------- |
    | Snowplow CLI | `snowplow-cli` |
 
-### Entities
+### Deprecated terminology
 - Use "entity", not "context"
     - It's unavoidable to use "context" when referring to some table columns or APIs, but use the correct nomenclature around them anyway
     - Link to the Fundamentals [page about entities](https://docs.snowplow.io/docs/fundamentals/entities/) if it feels unclear
@@ -389,6 +395,11 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
    | these entities provide some context to the event | these contexts provide some context to the event |
    | all versions of the entity                       | all versions of the context                      |
    | pass a list of entities using the `context` key  | pass a list of contexts using the `context` key  |
+   | the derived entities                             | the derived contexts                             |
+
+- Use "self-describing event", not "unstructured event"
+- Use "failed events", not "bad rows"
+  - Exception: if specifically referring to the legacy bad row JSON format and associated tooling
 
 ### Pipeline components
 - Console is capitalized, and gets a definite article ("the")

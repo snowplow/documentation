@@ -391,8 +391,18 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
    | the derived entities                             | the derived contexts                             |
 
 - Use "self-describing event", not "unstructured event"
+
+   | ✅                             | ❌                          |
+   | ----------------------------- | -------------------------- |
+   | custom self-describing events | custom unstructured events |
+
 - Use "failed events", not "bad rows"
   - Exception: if specifically referring to the legacy bad row JSON format and associated tooling
+
+   | ✅                                 | ❌                             |
+   | --------------------------------- | ----------------------------- |
+   | where your failed event files are | where your bad rows files are |
+   | the bad rows format               |                               |
 
 ### Pipeline components
 - Console is capitalized, and gets a definite article ("the")
@@ -493,7 +503,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
 
 
 ## Markdown formatting
-The rules in this section apply only to the main D**documentation** site.
+The rules in this section apply only to the main **documentation** site.
 
 ### Headings
 - Use only heading levels 1, 2 and 3

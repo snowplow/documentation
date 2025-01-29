@@ -1,14 +1,20 @@
 # Snowplow style guide
 
-This guide is for anyone writing for Snowplow.
+This guide is for anyone writing for Snowplow. Please follow these rules so that all Snowplow content is consistent and easy to read.
 
-This includes writings such as technical product documentation, other API documentation (generated from inline code documentation), blog posts, release notes, and other marketing content.
+This includes writings such as:
+- technical product documentation, including the [documentation site](/docs/), public [Knowledge Base](https://support.snowplow.io/hc/en-us) articles, GitHub READMEs, dbt package documentation, etc.
+- other API documentation generated from code documentation, by tools such as Swagger or API Extractor
+- blog posts
+- release notes
+- text within the Console
+- other marketing content for the [main Snowplow website](https://snowplow.io/)
 
-Some rules are different depending on the purpose of the writing.
+Some rules, annotated with "❗️", are different depending on the purpose of the writing.
 
-If you're using an AI tool to help you write, provide it the link to this page.  does this work?
+If you're using an AI tool to help you write, provide it with the link to this page and instruct it to follow this style guide.
 
-
+This guide is linked from the [docs GitHub README](https://github.com/snowplow/documentation).
 
 ## Grammar and spelling
 
@@ -33,39 +39,36 @@ If you're using an AI tool to help you write, provide it the link to this page. 
     | -------------------- | --------------------- |
     | the data is captured | the data are captured |
 
-### Verbs and nouns TODO
+### Set up and log in
 - "Set up" is a verb, "setup" is a noun or adjective
+  - Prefer "configuration" over "setup"
+  - Avoid the hyphenated version, "set-up", because it's unclear
 
-  | ✅                                          | ❌                                   |
-  | ------------------------------------------ | ----------------------------------- |
-  | set up your tracking                       | setup your tracking                 |
-  | your tracking implementation setup         | your tracking implementation set up |
-  | your tracking implementation configuration | your tracking implementation set up |
-
-    - Avoid the hyphenated version, "set-up", because it's unclear
+    | ✅   verb             | ✅         noun                             | ✅ adjective |
+    | -------------------- | ------------------------------------------ | ----------- |
+    | set up your tracking | your tracking implementation setup         | setup page  |
+    |                      | your tracking implementation configuration |             |
 
 - "Log in" is a verb, "login" is a noun or adjective
+  - Prefer "credentials" over "login"
+  - Avoid the hyphenated version, "log-in", because it's unclear
 
-    | ✅                                   | ❌                                |
-    | ----------------------------------- | -------------------------------- |
-    | log in to your account              | login to your account            |
-    | set up a login for your account     | set up a log in for your account |
-    | set up credentials for your account | set up a log in for your account |
-    | login page                          | log in page                      |
-
-    - Avoid the hyphenated version, "log-in", because it's unclear
+    | ✅   verb               | ✅         noun                      | ✅ adjective |
+    | ---------------------- | ----------------------------------- | ----------- |
+    | log in to your account | set up a login for your account     | login page  |
+    |                        | set up credentials for your account |             |
 
 ## Formatting and punctuation
-### Quotation marks
+### Quotation marks ❗️
 - Use double quotation marks (") rather than single (')
-- For documentation, use straight quotes (") rather than smart ones (")
+- For **documentation**, use straight quotes (") rather than smart ones (")
 
     | ✅                    | ❌                    |
     | -------------------- | -------------------- |
     | the "Filters" button | the 'Filters' button |
     | a "spiky" value      | a “spiky” value      |
 
-- For all other writing, smart quotes are fine as long as this is consistent within the piece of writing
+- For **all other writing**, smart quotes are fine as long as this is consistent within the piece of writing
 
     | ✅               | ✅               |
     | --------------- | --------------- |
@@ -78,15 +81,15 @@ If you're using an AI tool to help you write, provide it the link to this page. 
     | ------------------------------------------------------------ | ----------------------------------------------------------- |
     | digital products, customer experiences, and fraud mitigation | digital products, customer experiences and fraud mitigation |
 
-### Titles and headings
+### Titles and headings ❗️
 - Headings never finish with a full stop
-- For documentation and release notes, use sentence case for titles and headings
+- For **documentation** and **release notes**, use sentence case for titles and headings
 
     | ✅                               | ❌                               |
     | ------------------------------- | ------------------------------- |
     | Configuring how events are sent | Configuring How Events Are Sent |
 
-- For the main website and blog posts, use title case
+- For the **main website** and **blog posts**, use title case
 
     | ✅                    | ❌                    |
     | -------------------- | -------------------- |
@@ -107,9 +110,10 @@ If you're using an AI tool to help you write, provide it the link to this page. 
     | User and Marketing Analytics app | User & Marketing Analytics app |
 
 ## Writing style
-### Tone
-- For documentation and release notes, use a calm, conversational, professional tone
-- For blog posts, a more casual and friendly tone is fine
+### Tone ❗️
+- For **documentation**, **release notes**, and the **main website**, use a calm, conversational, professional tone
+  - Contractions such as "don't" are fine
+- For **blog posts**, a more casual and friendly tone is welcome
 
 ### Brevity
 - Explain the point as simply as possible, without any extra words or phrases that don't add real information
@@ -134,7 +138,7 @@ If you're using an AI tool to help you write, provide it the link to this page. 
     | -------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
     | Set up your tracking and send events. These events are received by the Collector | Set up your tracking and send events. The Collector receives the events |
 
-### Pronouns
+### Pronouns ❗️
 - Refer to the reader directly as "you" (second-person pronoun) where possible
 
     | ✅                                   | ❌                                         |
@@ -147,24 +151,27 @@ If you're using an AI tool to help you write, provide it the link to this page. 
     | -------------------------------------------------- |
     | you can track information about the user's browser |
 
-- For documentation, refer to Snowplow as "Snowplow" and avoid using "our", "we", "us" (first-person pronouns)
+- For **documentation**, primarily refer to Snowplow as "Snowplow"
+  -  Exception: use "our", "we", "us" (first-person pronouns) if it makes for a better sentence
 
-    | ✅                                                                                | ❌                                                                                        |
-    | -------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-    | Snowplow supports two types of Iglu registry                                     | we support two types of Iglu registry                                                    |
-    | there are a number of official Snowplow plugins, but you can also build your own | there are a number of official Snowplow plugins, but we also encourage building your own |
-    | Snowplow trackers                                                                | our trackers                                                                             |
+    | ✅                                            | ❌                                       |
+    | -------------------------------------------- | --------------------------------------- |
+    | Snowplow supports two types of Iglu registry | we support two types of Iglu registry   |
+    | Snowplow provides                            | we provide                              |
+    | but you can also build your own              | but we also encourage building your own |
+    | use the Snowplow trackers                    | use our trackers                        |
+    | because we discard stray pings               | because Snowplow discards stray pings   |
 
-- For release notes and blog posts, using first-person pronouns is fine
+- For **release notes**, **blog posts**, and the **main website**, using first-person pronouns as well as "Snowplow" is fine
 
     | ✅                          |
     | -------------------------- |
     | we are pleased to announce |
     | we have fixed a bug        |
-    | Snowplow trackers          |
+    | the Snowplow trackers      |
 
-### Timeless
-- For all documentation except for migration guides, stay within the current moment in time
+### Timeless ❗️
+- For all **documentation** except for **migration guides**, stay within the current moment in time
     - We won't remember to come back and update it
     - The documentation is not an appropriate place to announce upcoming features
 
@@ -175,7 +182,7 @@ If you're using an AI tool to help you write, provide it the link to this page. 
     | you can now       |
     | Snowplow plans to |
 
-- For migration guides and release notes, it's fine to compare to the past, or make reference to already-announced upcoming features
+- For **migration guides** and **release notes**, it's fine to compare to the past, or make reference to already-announced upcoming features
   - Referring to previous functionality is the point of migration guides, after all
 
     | ✅                        |
@@ -184,22 +191,22 @@ If you're using an AI tool to help you write, provide it the link to this page. 
     | will be coming soon      |
     | currently                |
 
-### Exclamation marks
-- For documentation and release notes, avoid exclamation marks
+### Exclamation marks ❗️
+- For **documentation** and **release notes**, avoid exclamation marks
 
     | ✅                           | ❌                           |
     | --------------------------- | --------------------------- |
     | That's it for installation. | That's it for installation! |
 
-- For other writing, occasional exclamation marks are fine
+- For **other writing**, occasional exclamation marks are fine
   - They can help maintain a friendly, casual tone
 
     | ✅                                                    |
     | ---------------------------------------------------- |
     | keep your data AI-ready from collection to delivery! |
 
-### Emojis
-- For documentation, emojis can be used sparingly, to provide information
+### Emojis ❗️
+- For most **documentation**, emojis can be used sparingly, to provide information
   - Emojis must not be used for decoration
 
     | ✅                    | ❌                                    |
@@ -207,9 +214,9 @@ If you're using an AI tool to help you write, provide it the link to this page. 
     | ✅ Geolocation entity | 🏔️ “Glass-box” technical architecture |
 
 
-- For release notes and API documentation, no emojis at all
+- For **release notes** and **API documentation**, no emojis at all
 
-- For blog posts, occasional emojis are fine
+- For **blog posts** and the **main website**, occasional emojis are fine
   - They can help maintain a friendly, casual tone
 
     | ✅                                              |
@@ -217,7 +224,10 @@ If you're using an AI tool to help you write, provide it the link to this page. 
     | 🎉 Reduce your data loading costs by up to 80%. |
 
 ### Diagrams and images
-TODO
+- Adding diagrams and images is encouraged
+- Diagrams and images should have white backgrounds
+- For images, use `.webp` or `.png` format
+- For **documentation** diagrams, [Mermaid](http://mermaid.js.org/#/) code is recommended as the diagrams scale automatically
 
 ## Inclusive language
 ### Allowlist and denylist
@@ -262,7 +272,7 @@ TODO
   | SDKs         |       |
   | URLs         |       |
 
-- We have a docs plugin that adds a dotted line and a tooltip explanation to acronyms, e.g. hovering over "BDP" will show that it stands for "Behavioral Data Platform": add new acronym definitions to the `src/remark/abbreviations.js` file to enable this behavior
+- For the **documentation** website, we have a docs plugin that adds a dotted line and a tooltip explanation to acronyms, e.g. hovering over "BDP" will show that it stands for "Behavioral Data Platform": add new acronym definitions to the `src/remark/abbreviations.js` file to enable this behavior
 - (Technically, these are all initialisms, not acronyms)
 
 ### Capitalization
@@ -290,21 +300,28 @@ TODO
   | a web browser | a Web browser |
 
 ### Hyphenation
-- "Real-time" is hyphenated if it's an adjective only
+- "Real-time" is hyphenated if it's used as an adjective
   - It's two separate words if it's being used as a noun
 
     | ✅   adjective                       | ✅         noun              |
     | ----------------------------------- | --------------------------- |
     | data available in real-time streams | data available in real time |
 
-- "Back-end" and "front-end" are hyphenated if they're used as adjectives, TODO but as two separate words as a noun
-    - E.g. "front-end developers", not "front end developers" or "frontend developers" (adjective)
+- "Back-end" and "front-end" are hyphenated if they're used as adjectives
+  - They are two separate words when used as nouns
 
-    | ✅   adjective        | ✅         noun |
-    | -------------------- | -------------- |
-    | front-end developers | TODO           |
-    | server-side tracking | TODO           |
+    | ✅   adjective        | ✅         noun           |
+    | -------------------- | ------------------------ |
+    | front-end developers | working on the front end |
+    | back-end tracking    | a storage back end       |
 
+- "Server-side" and "client-side" are hyphenated
+
+    | ✅                                     | ❌                                     |
+    | ------------------------------------- | ------------------------------------- |
+    | ingestion from server-side            | ingestion from server side            |
+    | Google Tag Manager Server-side        | Google Tag Manager Server Side        |
+    | enable client-side anonymous tracking | enable client side anonymous tracking |
 
 - Use "ecommerce" without hyphen or capitalization (similar to "email")
     - Exception: you're referring to a specific Snowplow product or feature, in which case it should be capitalized
@@ -438,6 +455,7 @@ TODO
    | ---------------------------------- | ---------------------------------- |
    | Video and Media Analytics data app | Video and Media Analytics Data App |
    | ready-made applications            | ready-made data applications       |
+   | Funnel Builder app                 | Funnel Builder App                 |
 
 ### Events without schemas
 - Use "baked-in events" for events that don't have a schema
@@ -447,8 +465,6 @@ TODO
     | ✅                                            |
     | -------------------------------------------- |
     | baked-in events aren't described by a schema |
-
-TODO baked-in properties/fields??
 
 ## Accessibility
 ### Images
@@ -473,7 +489,7 @@ TODO baked-in properties/fields??
 
 
 ## Markdown formatting
-The rules in this section apply only to the documentation.
+The rules in this section apply only to the **documentation** site.
 
 ### Headings
 - Use only heading levels 1, 2 and 3
@@ -501,13 +517,13 @@ The rules in this section apply only to the documentation.
 
 ### Bold and italic
 - Highlight specific key words or phrases using bold (`**`, preferred) or italic (`_`)
-- Choose bold _or_ italic, don't combine them for the same words
+- Choose bold _or_ italic, don't combine them for the same words, or within the same sentence
 - Don't use bold or italic for components such as buttons or page titles (use quotation marks instead), or entire paragraphs
 
-   | ✅                                                    | ❌                                                    |
-   | ---------------------------------------------------- | ---------------------------------------------------- |
-   | events are **automatically tracked** once configured | **events** are automatically tracked once configured |
-   | click on the "Add action" button                     | click on the _**Add action**_ button                 |
+   | ✅                                                    | ❌                                                      |
+   | ---------------------------------------------------- | ------------------------------------------------------ |
+   | events are **automatically tracked** once configured | **events** are _automatically tracked_ once configured |
+   | click on the "Add action" button                     | click on the _**Add action**_ button                   |
 
 ### Code
 - Use inline code (single backticks, <code>`</code>) for field names, classes, file names, etc.

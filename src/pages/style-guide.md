@@ -175,7 +175,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     | we have fixed a bug        |
     | the Snowplow trackers      |
 
-### Timeless ❗️
+### Timelessness ❗️
 - For all **documentation** except for **migration guides**, stay within the current moment in time
     - We won't remember to come back and update it
     - The documentation is not an appropriate place to announce upcoming features
@@ -313,8 +313,8 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     | data available in real-time streams | data available in real time |
 
 - "Back-end" and "front-end" are hyphenated
-  - Strictly speaking they should only be hyphenated if they're used as adjectives, and two separate words when used as nouns
-  - We are going for consistency instead of being grammatically correct here
+  - Strictly speaking, they should only be hyphenated if they're used as adjectives, and two separate words when used as nouns
+  - We are going for consistency instead of being entirely grammatically correct here
 
     | ✅   adjective        | ✅         noun           |
     | -------------------- | ------------------------ |
@@ -337,13 +337,6 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     | track ecommerce events   | track e-commerce events  |
     | the Ecommerce plugin     | the E-commerce plugin    |
     | the Ecommerce data model | the ecommerce data model |
-
-### Documentation
-- Refer to the documentation as "the documentation", or more casually as "the docs"
-
-   | ✅                          | ❌                     |
-   | -------------------------- | --------------------- |
-   | refer to the documentation | refer to the doc site |
 
 ## Product-specific terms
 
@@ -500,7 +493,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
 
 
 ## Markdown formatting
-The rules in this section apply only to the **documentation** site.
+The rules in this section apply only to the main **documentation** site.
 
 ### Headings
 - Use only heading levels 1, 2 and 3

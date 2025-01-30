@@ -4,15 +4,9 @@ sidebar_position: 3
 sidebar_label: "Marketing Attribution"
 ---
 
-:::note
-
-This Data Model Pack is currently in Public Preview and features may change without notice.
-
-:::
-
 In today's increasingly complex digital world, users often take multi-channel journeys before converting. Assigning credit across multiple touchpoints is vital to getting an accurate picture of the efficacy of your marketing channels, yet requires merging disparate datasets and running complex calculations.
 
-Our **Marketing Attribution** Data Model Pack (together with the [Snowplow Attribution dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/index.md)) lowers the barrier to entry for your marketing team through the following features:
+The Snowplow **Marketing Attribution** Data Model Pack (together with the [Snowplow Attribution dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/index.md)) lowers the barrier to entry for your marketing team through the following features:
 
 - Incremental SQL model in your warehouse for cost-effective computation
 - Choice of first-touch, last-touch, linear and positional methods, with additional filters and transforms available
@@ -60,7 +54,7 @@ The currency symbol defaults to "$".
 2. After waiting for the update to take place, you can check if the auto-detected source tables are what you expect. Change them to any other appropriate existing tables if they are not correct.
 3. For most users, the "Paths To Non-Conversion" table should be set to "Do not use paths_to_non_conversion table".
 
-    This drop and recompute table calculates the paths your customers have followed that have not led to a conversion, for use in the "Path Summary" page. This table is not recalculated by the Data Model Pack. Therefore it should only be used for a static view with the intention of consuming the same period as in the latest data model.
+    This drop and recompute table calculates the paths your customers have followed that have not led to a conversion, for use in the Path Summary page. This table is not recalculated by the Data Model Pack. Therefore it should only be used for a static view with the intention of consuming the same period as in the latest data model.
 
 4. Overwrite the "Attribution Manifest" table. Most likely the schema name will have to be modified. Keep the `schema_name.table_name` notation here, and press enter once modified.
 5. (Optional but recommended) Specify the "Spend Source" to get the return on advertising spend (ROAS) calculation in your overview. This will most likely be a view you created on top of your table that holds your marketing spend data. The view will make sure you align the expected field names. It should have `campaign`, `channel`, `spend` and `spend_tstamp` for the analysis to work. Press enter once modified.
@@ -81,10 +75,10 @@ To use a filter, first select which view to use, and then make changes with "Vie
 - select which Attribution Type to use (`First Touch`, `Last Touch`, `Linear` or `Position Based`)
 - choose between using `Campaign` or `Channel` for paths
 
-Some pages have additional filters, such as the `Number of items` filter for the "Path Summary" page, which reduces the number of items shown in specific charts.
+Some pages have additional filters, such as the `Number of items` filter for the Path Summary page, which reduces the number of items shown in specific charts.
 
 ## Editing and deleting views
-Edit or delete existing views from the "Settings" page, using the "Edit/Delete Views" dropdown.
+Edit or delete existing views from the Settings page, using the "Edit/Delete Views" dropdown.
 
 - **Delete** Click X next to the view.
 - **Edit** Click on the name of the view. The Data Model Pack will take you to the view configuration page where you can make amendments. Saving will overwrite the existing view configurations.

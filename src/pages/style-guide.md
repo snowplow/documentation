@@ -550,6 +550,7 @@ The rules in this section apply only to the main **documentation** site.
 
 - Use code blocks (triple backticks, <code>```</code>) for code examples
   - Specify the language next to the opening backticks, so that the code block is rendered correctly
+  - If the rendering doesn't look right, make sure that the specified language is listed under `prism: additionalLanguages` in the `docusaurus.config.js` file
 
     | ✅                                                          |
     | ---------------------------------------------------------- |

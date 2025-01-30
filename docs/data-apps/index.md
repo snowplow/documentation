@@ -20,14 +20,13 @@ TODO update image
 
 ## Available Data Model Packs
 
-TODO links to dbt models
-| Data Model Pack              | Description                                   | Base dbt data model                                                                                                                    |
-| ---------------------------- | --------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| Ecommerce Analytics          | Reports inspired by Google Analytics v4       | Ecommerce                                                                                                                              |
-| Funnel Builder               | Understanding user journeys                   | any                                                                                                                                    |
-| User and Marketing Analytics | Analysis of web and mobile performance        | Unified Digital or Web                                                                                                                 |
-| Marketing Attribution        | Understand touchpoints and attribution models | Unified Digital and [Attribution](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/index.md) |
-| Video and Media Analytics    | Insights into video and media performance     | Media Player                                                                                                                           |
+| Data Model Pack              | Description                                   | Base dbt data model                                                                                                                                                                                                                       |
+| ---------------------------- | --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Ecommerce Analytics          | Reports inspired by Google Analytics v4       | [Ecommerce](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md)                                                                                                                            |
+| Funnel Builder               | Understanding user journeys                   | any                                                                                                                                                                                                                                       |
+| User and Marketing Analytics | Analysis of web and mobile performance        | [Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) or [Web](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/index.md)           |
+| Marketing Attribution        | Understand touchpoints and attribution models | [Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) and [Attribution](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/index.md) |
+| Video and Media Analytics    | Insights into video and media performance     | [Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md)                                                                                                                      |
 
 ## Access
 

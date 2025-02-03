@@ -331,3 +331,4 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 
 # Failed events reshuffle
 /docs/data-product-studio/data-quality/failed-events/exploring-failed-events/querying/ /docs/data-product-studio/data-quality/failed-events/exploring-failed-events/file-storage/ 301
+/docs/data-apps/* /docs/modeling-your-data/visualization/:splat 301

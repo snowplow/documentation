@@ -21,7 +21,7 @@ This Data Model Pack provides an intuitive UI for building a funnel analysis and
 - Abandonment Rates Chart
 - Summary Statistics Table
 
-It works on any table that Snowplow’s Data Modeling User has access to, including the atomic events table and derived tables. It comes with some pre-built funnels based on out-of-the-box Snowplow events such as `page_views` and `link_clicks`, and you can save your own custom funnels to share with teammates.
+It works on any table that Snowplow’s Data Modeling User has access to, including the atomic events table and derived tables. It comes with some pre-built funnels based on out-of-the-box Snowplow events such as page views and link clicks, and you can save your own custom funnels to share with teammates.
 
 
 ```mdx-code-block
@@ -73,26 +73,26 @@ You can define an unlimited number of steps.
 
 <img src={StepImage} alt="An example funnel step configuration." style={{maxWidth: "400px"}} />
 
-:::note The "Update Steps" button
-Whenever you make a change to the funnel steps or the filter rules, it is necessary to click the "Update Steps" button.
+:::note The **Update Steps** button
+Whenever you make a change to the funnel steps or the filter rules, it is necessary to click the **Update Steps** button.
 :::
 
 ### Check additional settings
 
 There are a range of other options you can use to configure the funnel.
-Use the Settings tab to update the following configuration if you prefer (or keep the defaults):
+Use the **Settings** tab to update the following configuration if you prefer (or keep the defaults):
 
-- **Order events by** This must be a timestamp column. If you have added a date range pre-filter, make sure that it is the same field as this one.
-- **Group funnels by** Choose a field to group the funnels by - we recommend user or session identifiers.
-- **Additional columns to group by** Use this to visualize additional dimensions in your funnel analysis e.g. experiment groups.
-- **Max days since funnel start** Maximum days since the funnel's start for an event to still be considered part of that funnel. Set to 0 for unlimited.
-- **Intra step time (hours)** Maximum hours since an event for the next to be included in the same funnel. Set to 0 for unlimited.
+- **Order events by**: this must be a timestamp column. If you have added a date range pre-filter, make sure that it is the same field as this one.
+- **Group funnels by**: choose a field to group the funnels by - we recommend user or session identifiers.
+- **Additional columns to group by**: use this to visualize additional dimensions in your funnel analysis e.g. experiment groups.
+- **Max days since funnel start**: maximum days since the funnel's start for an event to still be considered part of that funnel. Set to 0 for unlimited.
+- **Intra step time (hours)**: maximum hours since an event for the next to be included in the same funnel. Set to 0 for unlimited.
 
 <img src={SettingsImage} alt="Additional settings configuration." style={{maxWidth: "400px"}} />
 
 ### Build the funnel charts
 
-Click the "Build Funnel Charts" button to generate interactive funnel charts and tables.
+Click the **Build Funnel Charts** button to generate interactive funnel charts and tables.
 You can also download the generated SQL to edit or rerun in your own environment.
 
 | User counts by funnel step                                                  | Funnel conversion rates                                                       |
@@ -105,17 +105,17 @@ You can also download the generated SQL to edit or rerun in your own environment
 
 ### Save your funnel configuration
 
-Once you are happy with the settings of your funnel you can save it for anyone to open and use using the "Save Funnel" button.
-The funnel configuration will be saved under the name used in the "Funnel Name" input at the top of the page.
+Once you are happy with the settings of your funnel you can save it for anyone to open and use using the **Save Funnel** button.
+The funnel configuration will be saved under the name used in the **Funnel Name** input at the top of the page.
 
 ### (Optional) Output to a table
 
-You can also save the results of a given run to a table in your warehouse in the settings tab.
-Use the `Output results to table` checkbox under the Settings tab and choose the configuration for the output table.
+You can also save the results of a given run to a table in your warehouse in the **Settings** tab.
+Use the **Output results to table** checkbox under the **Settings** tab and choose the configuration for the output table.
 
 ### Export visualizations to a BI tool
 
-If you would like to visualize these funnels in a different tool, the Export page contains instructions on how to run the generated SQL and recreate the analysis in the following tools:
+If you would like to visualize these funnels in a different tool, the **Export** page contains instructions on how to run the generated SQL and recreate the analysis in the following tools:
 
 - Looker
 - PowerBI
@@ -124,8 +124,8 @@ If you would like to visualize these funnels in a different tool, the Export pag
 - Streamlit
 
 ## Editing or deleting a funnel
-Once your funnel is saved you will find it on the Welcome page. You are free to make any modifications to them as you need if you click on them. Deletion is also simple, just click on the ❌ symbol.
+Once your funnel is saved you will find it on the **Welcome** page. You are free to make any modifications to them as you need if you click on them. Deletion is also simple, just click on the ❌ symbol.
 
 :::note
-If your underlying data sources (views/tables) change (e.g. fields removed) the pre-saved funnels might break, and you may need to edit or recreate them to avoid sql compilation issues.
+If your underlying data sources (views/tables) change (e.g. fields removed) the pre-saved funnels might break, and you may need to edit or recreate them to avoid SQL compilation issues.
 :::

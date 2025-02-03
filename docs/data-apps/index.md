@@ -12,7 +12,9 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Snowplow Data Model Packs are self-service analytics tools, deployed in your cloud, that help you extract value from your data quickly by providing templated use-cases for data collection, modeling, and activation. They aim to reduce the technical barrier, making data analysis more accessible beyond just SQL users. Each Data Model Pack contains a set of dashboard visualizations based on a Snowplow data model.
+Snowplow Data Model Packs are self-service analytics tools that help you extract value from your data quickly by providing templated use-cases for data collection, modeling, and activation.
+
+They are deployed in your cloud and aim to reduce the technical barrier, making data analysis more accessible beyond just SQL users. Each Data Model Pack contains a set of dashboard visualizations based on a Snowplow data model.
 
 TODO update image
 
@@ -31,9 +33,9 @@ TODO update image
 ## Access
 
 You can find the Data Model Packs in the "Data Model Packs" section in the left sidebar of your Snowplow Console. A Data Model Pack can be in one of three states:
-* **By request** If you have not yet purchased a package that includes the Data Model Pack, click on “Learn more” and register your interest. A Snowplow Customer Success Manager will then get in contact with you to discuss getting access.
-* **Available** The Data Model Pack is ready to be set up. See the installation instructions below.
-* **Live** The Data Model Pack is ready to use.
+* **By request**: if you have not yet purchased a package that includes the Data Model Pack, click on “Learn more” and register your interest. A Snowplow Customer Success Manager will then get in contact with you to discuss getting access.
+* **Available**: the Data Model Pack is ready to be set up. See the installation instructions below.
+* **Live**: the Data Model Pack is ready to use.
 
 Once the Data Model Pack is installed, clicking on the tile will launch it in a separate browser tab. By default, anyone in your Console organization will be able to access the Data Model Packs.
 
@@ -71,7 +73,7 @@ The connection process will look something like this:
 
 ![Data Model Pack warehouse connection process](images/add-connection.png)
 
-Once you have selected a destination, provided the credentials and run the suggested SQL script, the Console will test the connection. Upon a successful test, the Data Model Pack will be available to use.
+Once you have selected a destination, provided the credentials, and run the suggested SQL script, the Console will test the connection. Upon a successful test, the Data Model Pack will be available to use.
 
 ## Using the Data Model Pack
 ### Is it running?

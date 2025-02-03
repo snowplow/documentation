@@ -28,26 +28,26 @@ The following steps will guide you through using the Data Model Pack.
 ### Explore the dashboards using sample data (optional)
 
 Before you configure your data, you are free to explore all the dashboards using the sample data included.
-The use of sample data is enabled by default and can be enabled/disabled using the "Use Sample Data" toggle on the Settings page.
+The use of sample data is enabled by default and can be enabled/disabled using the **Use Sample Data** toggle on the **Settings** page.
 
 You can browse the following pages:
 
-1. **Overview** Key metrics including the revenue, number of customers and the average order value. It also shows the revenue for top performing products and product lists.
-2. **Purchases** Dive deeper into the purchased products and compare product views, add to carts, units purchased, and more.
-3. **Sessions** A funnel of how users navigated from product views all the way to transactions by their number of sessions, conversion rate and abandonments.
-4. **Checkout** Individual checkout steps within the funnel, showing conversion rate and abandonment for each step.
-5. **Transactions** Key metrics for the transactions including types of payments.
+1. **Overview**: key metrics including the revenue, number of customers and the average order value. It also shows the revenue for top performing products and product lists.
+2. **Purchases**: dive deeper into the purchased products and compare product views, add to carts, units purchased, and more.
+3. **Sessions**: a funnel of how users navigated from product views all the way to transactions by their number of sessions, conversion rate and abandonments.
+4. **Checkout**: individual checkout steps within the funnel, showing conversion rate and abandonment for each step.
+5. **Transactions**: key metrics for the transactions including types of payments.
 
 ### Configure using the Ecommerce dbt package tables
 
-The Settings page lets you choose the schema and tables in your data warehouse to use.
+The **Settings** page lets you choose the schema and tables in your data warehouse to use.
 These refer to the output of the Ecommerce dbt package.
 
-First, choose the warehouse schema where your dbt Ecommerce package produced the derived tables (e.g., `dbt_ecom_derived`).
+First, choose the warehouse schema where your dbt Ecommerce package produced the derived tables (e.g. `dbt_ecom_derived`).
 The Data Model Pack will suggest the most likely tables below.
 The following derived tables will need to be configured: `cart interactions`, `checkout interactions`, `product interactions`, `sessions`, and `transaction interactions`.
 
-Verify that these match the desired tables and click "Save Settings".
+Verify that these match the desired tables and click **Save Settings**.
 If the tables have the required columns, you can navigate to the dashboard pages in the sidebar and explore your data.
 
 ### Choose the date range and filters
@@ -57,7 +57,7 @@ These options let you narrow down the data shown in the dashboard to what you ar
 
 ![the top of the Checkout page, showing the filter buttons](images/filters.png)
 
-When you click on the "Filters" button, you will see a modal with an option to add conditions on fields in the data.
+When you click on the **Filters** button, you will see a modal with an option to add conditions on fields in the data.
 For example, you can add conditions on the products or product lists that you are interested in.
 
 ![setting up a filter for a completed order](images/filters_modal.png)

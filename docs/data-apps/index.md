@@ -16,8 +16,6 @@ Snowplow Data Model Packs are self-service analytics tools that help you extract
 
 They are deployed in your cloud and aim to reduce the technical barrier, making data analysis more accessible beyond just SQL users. Each Data Model Pack contains a set of dashboard visualizations based on a Snowplow data model.
 
-TODO update image
-
 ![Pipeline showing data flowing from tracked events into Data Model Packs](./images/data-apps-pipeline.png)
 
 ## Available Data Model Packs

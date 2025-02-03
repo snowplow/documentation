@@ -14,7 +14,7 @@ import SettingsImage from './images/settings.png';
 
 Funnels are an essential tool for understanding user journeys on your app or website. They help to visualize how many users complete each event along a journey such as signing up or making a purchase, so you can understand which stages are leading to the most drop-off and make changes to improve conversion rates.
 
-This Data Model Pack provides an intuitive UI for building a funnel analysis and visualizing the results. You can specify any number of conditions and steps, and will receive the following outputs when you run the analysis (see screenshots below):
+This visualization provides an intuitive UI for building a funnel analysis and visualizing the results. You can specify any number of conditions and steps, and will receive the following outputs when you run the analysis (see screenshots below):
 
 - User Counts by Funnel Step Chart
 - Conversion Rates Chart
@@ -33,7 +33,7 @@ import videoUrl from './images/funnel_builder_video.mp4'
 ```
 ## Requirements
 
-- Access to the table(s) you wish to run the tool on, granted to the role used when setting up the Data Model Pack
+- Access to the table(s) you wish to run the tool on, granted to the role used when setting up the visualization
 
 ## Building a funnel
 

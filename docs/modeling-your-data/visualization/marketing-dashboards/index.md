@@ -4,7 +4,7 @@ sidebar_position: 2
 sidebar_label: "User and Marketing Analytics"
 ---
 
-The User and Marketing Analytics Data Model Pack contains all the visuals you need to perform a high level analysis of your web and mobile performance. This includes:
+The User and Marketing Analytics visualization contains all the visuals you need to perform a high level analysis of your web and mobile performance. This includes dashboards covering:
 - Reports on user acquisition
 - Information relating to your traffic sources
 - Insight into user retention
@@ -36,7 +36,7 @@ import videoUrl from './images/umd_video.mp4'
     - `snowplow__enable_yauaa` set to `true`
     - `snowplow__list_event_counts` set to `true`
     - (optional) Conversion event(s) defined, with `snowplow__total_all_conversions` set to `true`
-- Access to the derived tables granted to the role used when setting up the Data Model Pack
+- Access to the derived tables granted to the role used when setting up the visualization
 
 ## Usage
 All charts have help text to explain any definitions used, and have the SQL used to produce them available to download by clicking on the icon in their title.
@@ -53,6 +53,6 @@ Some charts are only related to new or returning users, not both, so depending o
 All configurations can be found in the **Settings** page. Note that all these settings are global for all users, meaning if you change them they will be changed for everyone.
 
 Configuration options:
-- Select the currency symbol used throughout the Data Model Pack
+- Select the currency symbol used throughout the visualization
 - Toggle between using campaign or channel for reporting aggregation
 - Use tables produced by the web package instead of the unified package, and select which tables to use

@@ -6,24 +6,25 @@ sidebar_label: "Ecommerce Analytics"
 
 <!-- Ecommerce reports based on GA4's Monetization metrics, covering revenue, purchases, checkout journey and promotions -->
 
-The Ecommerce Analytics Data Model Pack offers an in-depth breakdown of ecommerce activities across your websites and mobile apps, presenting an enhanced rendition of Google Analytics v4 reports.
+The Ecommerce Analytics visualization offers an in-depth breakdown of ecommerce activities across your websites and mobile apps, presenting an enhanced rendition of Google Analytics v4 reports. Use the dashboards to:
+
 * Access real-time data directly within your data warehouse in a governed manner.
 * Navigate through a series of interactive dashboards designed to surface monetization data, purchasing behaviors, checkout experiences, and transaction patterns.
 * Customize your analytics workflow with filters for campaigns, channels, and products.
 
-Leveraging Snowplow's Ecommerce event tracking packages and our Ecommerce dbt package, the Data Model Pack transforms raw event data into structured tables covering carts, checkouts, products, transactions, and user interactions, providing valuable insights for informed decision-making.
+Leveraging Snowplow's Ecommerce event tracking packages and our Ecommerce dbt package, the visualization transforms raw event data into structured tables covering carts, checkouts, products, transactions, and user interactions, providing valuable insights for informed decision-making.
 
 ![the overview page](images/overview.png)
 
 ## Requirements
 
 - Running the [Snowplow Ecommerce dbt Package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md)
-- Access to the derived tables granted to the role used when setting up the Data Model Pack
+- Access to the derived tables granted to the role used when setting up the visualization
 - Ecommerce events tracked using the ecommerce APIs for the [JavaScript (Snowplow Ecommerce plugin)](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md) or [mobile trackers](/docs/sources/trackers/mobile-trackers/tracking-events/ecommerce-tracking/index.md)
 
 ## Usage
 
-The following steps will guide you through using the Data Model Pack.
+The following steps will guide you through using the visualization.
 
 ### Explore the dashboards using sample data (optional)
 
@@ -44,7 +45,7 @@ The **Settings** page lets you choose the schema and tables in your data warehou
 These refer to the output of the Ecommerce dbt package.
 
 First, choose the warehouse schema where your dbt Ecommerce package produced the derived tables (e.g. `dbt_ecom_derived`).
-The Data Model Pack will suggest the most likely tables below.
+The visualization will suggest the most likely tables below.
 The following derived tables will need to be configured: `cart interactions`, `checkout interactions`, `product interactions`, `sessions`, and `transaction interactions`.
 
 Verify that these match the desired tables and click **Save Settings**.

@@ -111,7 +111,7 @@ You will also need a table where the conversion events are stored. If you use th
 
 <div>
   {MarkdownTableToMuiDataGrid(`
-| user_identifier                      | user_id | start_tstamp          | cv_value       |
+| user_identifier                      | user_id | cv_tstamp          | cv_value       |
 |--------------------------------------|---------|-----------------------|----------------|
 | user_id1 | user1   | 2022-06-08 08:11      | 94.42          |
 | user_id2| user2   | 2022-06-09 12:03      | 206.5          |

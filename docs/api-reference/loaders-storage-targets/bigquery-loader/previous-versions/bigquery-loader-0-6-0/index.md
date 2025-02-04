@@ -1,7 +1,7 @@
 ---
 title: "BigQuery Loader (0.6.x)"
 date: "2021-10-06"
-sidebar_position: 10 
+sidebar_position: 10
 ---
 
 ## Technical Architecture
@@ -14,7 +14,7 @@ The available tools are:
 4. **Snowplow BigQuery Repeater**, a Scala app that reads `failedInserts` (caused by _mutation lag_) and tries to re-insert them into BigQuery after some delay, sinking failures into a dead-end bucket.
 5. **[DEPRECATED] Snowplow BigQuery Forwarder**, an alternative to Repeater implemented as an Apache Beam job. This component has been deprecated from version 0.5.0. Please use Repeater instead.
 
-![This image has an empty alt attribute; its file name is bigquery-microservices-architecture.png](images/bigquery-microservices-architecture.png)
+![This image has an empty alt attribute; its file name is bigquery-microservices-architecture.png](../images/bigquery-microservices-architecture.png)
 
 ### Snowplow BigQuery Loader
 
@@ -273,7 +273,7 @@ $ ./snowplow-bigquery-repeater \
     --failedInsertsSub $FAILED_INSERTS_SUB \
     --deadEndBucket $DEAD_END_GCS \   # Must start with gcs:\\ prefix
     --desperatesBufferSize 20 \       # Size of the batch to send to the dead-end bucket
-    --desperatesWindow 20 \           # Window duration after which bad rows will be sunk into the dead-end bucket  
+    --desperatesWindow 20 \           # Window duration after which bad rows will be sunk into the dead-end bucket
     --backoffPeriod 900               # Seconds to wait before attempting a re-insert (calculated against etl_tstamp)
 ```
 
@@ -289,7 +289,7 @@ Like Loader, Forwarder can be submitted from any machine authenticated to submit
 $ ./snowplow-bigquery-forwarder \
     --config=$CONFIG \
     --resolver=$RESOLVER \
-    --labels={"key1":"val1","key2":"val2"} # optional   
+    --labels={"key1":"val1","key2":"val2"} # optional
     --failedInsertsSub=$FAILED_INSERTS_SUB
 ```
 

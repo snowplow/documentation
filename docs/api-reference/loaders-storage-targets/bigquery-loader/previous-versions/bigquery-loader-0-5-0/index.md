@@ -13,7 +13,7 @@ The available tools are:
 3. **Snowplow BigQuery Repeater**, a Scala app that reads `failedInserts` (caused by _mutation lag_) and tries to re-insert them into BigQuery after some delay, sinking failures into a dead-end bucket.
 4. **[DEPRECATED] Snowplow BigQuery Forwarder**, an alternative to Repeater implemented as an Apache Beam job. This component has been deprecated from version 0.5.0. Please use Repeater instead.
 
-![](images/bigquery-microservices-architecture.png)
+![](../images/bigquery-microservices-architecture.png)
 
 In addition it also includes a fourth microservice, the "repeater".
 

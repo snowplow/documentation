@@ -15,9 +15,9 @@ The following [Steps](#steps) will deploy the solution accelerator to AWS using 
 
 1. Open a terminal.
 2. Install **Docker** and **Docker Compose**.
-3. [Clone the project](https://github.com/snowplow-incubator/live-viewer-profiles) and navigate to its directory.
+3. [Clone the project](https://github.com/snowplow-industry-solutions/kafka-live-viewer-profiles) and navigate to its directory.
 ```bash
-git clone https://github.com/snowplow-incubator/live-viewer-profiles.git
+git clone https://github.com/snowplow-industry-solutions/kafka-live-viewer-profiles.git
 ```
 4. Create a `.env` file based on `.env.example` and configure AWS variables.
 ```bash
@@ -58,7 +58,7 @@ $ ./up.sh    # <- start the Docker containers
 
 ### Step 4: Open Access to the Applications
 
-Review the [LocalStack guide](/tutorials/kafka-live-viewer-profiles/quickstart-localstack) for the default configuration for each component. Open public access to the two frontend applications and the Snowplow Collector using a HTTP load balancer so that anyone can watch the video, submit events to the pipeline, and see information on concurrent users. 
+Review the [LocalStack guide](/tutorials/kafka-live-viewer-profiles/quickstart-localstack) for the default configuration for each component. Open public access to the two frontend applications and the Snowplow Collector using a HTTP load balancer so that anyone can watch the video, submit events to the pipeline, and see information on concurrent users.
 
 The applications listen for HTTP traffic on the following ports
 - Web tracker front end - 3000
@@ -67,7 +67,7 @@ The applications listen for HTTP traffic on the following ports
 
 ## Next Steps
 - You can implement Snowplow media tracking on any [HTML5](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/html5/) or [YouTube](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/youtube/) media of your choice
-- Look into the output from Kafka and extend the Live Viewer to include information on the media being watched and the user. 
+- Look into the output from Kafka and extend the Live Viewer to include information on the media being watched and the user.
 - Replace Amazon DynamoDB with an alternative to be cloud agnostic, e.g. Google Bigtable or MongoDB.
 ---
 

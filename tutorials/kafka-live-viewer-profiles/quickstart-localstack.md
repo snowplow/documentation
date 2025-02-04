@@ -11,9 +11,9 @@ title: Quickstart with Localstack
 
 1. Open a terminal.
 2. Install **Docker** and **Docker Compose**.
-3. [Clone the project](https://github.com/snowplow-incubator/live-viewer-profiles) and navigate to its directory.
+3. [Clone the project](https://github.com/snowplow-industry-solutions/kafka-live-viewer-profiles) and navigate to its directory.
 ```bash
-git clone https://github.com/snowplow-incubator/live-viewer-profiles.git
+git clone https://github.com/snowplow-industry-solutions/kafka-live-viewer-profiles.git
 ```
 4. Create a `.env` file based on `.env.example`. You can leave the AWS variables as placeholders when using Localstack
 ```bash
@@ -39,11 +39,11 @@ Details on everything that is installed can be found in [architecture](/tutorial
 
 ### Step 2: Open the Web Tracking Frontend
 
-Visit [http://localhost:3000](http://localhost:3000) to configure the Stream Collector endpoint and start tracking events. Enter the Collector URL: `localhost:9090` and click `Create tracker`. 
+Visit [http://localhost:3000](http://localhost:3000) to configure the Stream Collector endpoint and start tracking events. Enter the Collector URL: `localhost:9090` and click `Create tracker`.
 
 ![First page of tracking website](images/tracker-demo.png)
 
-On the next screen, click `Custom media tracking demo`. This will bring up a video and a screen that displays information on what events are sent from the browser to the pipeline. If you want to simulate multiple users watching the video at the same time, you can open this in separate browsers. 
+On the next screen, click `Custom media tracking demo`. This will bring up a video and a screen that displays information on what events are sent from the browser to the pipeline. If you want to simulate multiple users watching the video at the same time, you can open this in separate browsers.
 
 ![Welcome page on tracking website](images/welcome-page.png)
 
@@ -61,7 +61,7 @@ Congratulations! You have successfully run the accelerator to stream web behavio
 
 ## Next Steps
 - You can implement Snowplow media tracking on any [HTML5](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/html5/) or [YouTube](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/youtube/) media of your choice
-- Look into the output from Kafka and extend the Live Viewer to include information on the media being watched and the user. 
+- Look into the output from Kafka and extend the Live Viewer to include information on the media being watched and the user.
 - Use our supplied Terraform in the next section to run this on AWS and make it publicly available.
 
 ## Other Things You Can Do
@@ -80,7 +80,7 @@ sudo ./lazydocker.sh
 
 ### Inspect Infrastructure with LocalStack UI
 
-Visit the [LocalStack UI](https://app.localstack.cloud/) to inspect infrastructure components such as Kinesis and DynamoDB. Please note that a LocalStack account is required to view this. 
+Visit the [LocalStack UI](https://app.localstack.cloud/) to inspect infrastructure components such as Kinesis and DynamoDB. Please note that a LocalStack account is required to view this.
 
 ## Cleaning Up
 

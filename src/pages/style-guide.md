@@ -3,12 +3,12 @@
 This guide is for anyone writing for Snowplow. Please follow these rules so that all Snowplow content is consistent and easy to read.
 
 This includes writings such as:
-- technical product documentation, including the [documentation site](/docs/), public [Knowledge Base](https://support.snowplow.io/hc/en-us) articles, GitHub READMEs, dbt package documentation, etc.
-- other API documentation generated from code documentation, by tools such as Swagger or API Extractor
-- blog posts
-- release notes
-- text within the Console
-- other marketing content for the [main Snowplow website](https://snowplow.io/)
+- Technical product documentation, including the [documentation site](/docs/), public [Knowledge Base](https://support.snowplow.io/hc/en-us) articles, GitHub READMEs, dbt package documentation, etc.
+- Other API documentation generated from code documentation, by tools such as Swagger or API Extractor
+- Blog posts
+- Release notes
+- Text within the Console
+- Other marketing content for the [main Snowplow website](https://snowplow.io/)
 
 Some rules, annotated with "➕", are different depending on the purpose of the writing.
 
@@ -86,7 +86,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     | digital products, customer experiences, and fraud mitigation | digital products, customer experiences and fraud mitigation |
 
 ### Titles and headings ➕
-- Headings never finish with a full stop
+- Headings never finish with punctuation (no full stops, colons, etc.)
 - For **documentation** and **release notes**, use sentence case for titles and headings
 
     | ✅                               | ❌                               |
@@ -95,14 +95,51 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
 
 - For the **main website** and **blog posts**, use title case
 
-    | ✅                    | ❌                    |
-    | -------------------- | -------------------- |
-    | Sample Snowplow Data | Sample Snowplow data |
+    | ✅                               | ❌                               |
+    | ------------------------------- | ------------------------------- |
+    | Configuring How Events Are Sent | Configuring how events are sent |
 
-### List punctuation
+### Bold and italic
+- Highlight specific key words or phrases using bold (`**`, preferred) or italic (`_`)
+  - Choose bold _or_ italic, don't combine them for the same words
+- Use bold for UI components that the reader will interact with: page titles, tabs, buttons, dropdown menus, checkboxes, etc.
+- Don't make entire paragraphs bold or italic
+
+   | ✅                                                    | ❌                                                          |
+   | ---------------------------------------------------- | ---------------------------------------------------------- |
+   | events are **automatically tracked** once configured | **events** are _**automatically tracked**_ once configured |
+   | click on the **Add action** button                   | click on the _Add action_ button                           |
+   | the **Settings** page                                | the "Settings" page                                        |
+
+### Code
+- Use inline code (single backticks, <code>`</code>) for names of tables, fields, columns, classes, file names, etc.
+- If the name has underscores or is all lower case, it should probably be marked as code (rather than in bold or with apostrophes)
+
+    | ✅                                        |
+    | ---------------------------------------- |
+    | `snowplow_fractribution_channel_counts`  |
+    | `iglu:com.acme/context/jsonschema/1-0-0` |
+    | a single `geo_location` field            |
+    | an `event_id` UUID string                |
+    | tracking a `ScreenView` event            |
+
+### Lists
 - For bullet points and numbered lists, don't put a full stop at the end of the sentence
 - Exception: list items that have multiple sentences within them should have full stops at the end
+- Start with a capital letter
 - Lists should be consistent - either single sentence (no full stop) or multiple sentences (with full stop)
+- When using a colon to make a kind of list item header, the subsequent sentence starts lowercase, like when using colons normally
+  - Avoid using hyphens for list item "headers"
+
+   | ✅                                                     | ❌                                                                             |
+   | ----------------------------------------------------- | ----------------------------------------------------------------------------- |
+   | * Make tracking implementation easier                 | * make tracking implementation easier                                         |
+   | * Boolean: the value will be interpreted as a boolean | * Boolean: This option means that the value will be interpreted as a boolean. |
+   | 2. **Remove** the attribute entirely                  | 2. **Remove** - remove the attribute entirely                                 |
+
+### Tables
+- Normal text inside tables starts with a capital letter
+- Text should be consistent, either single sentence (no full stop) or multiple sentences (with full stop)
 
 ### Ampersands
 - Use "and" rather than "&"
@@ -115,9 +152,14 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
 
 ## Writing style
 ### Tone ➕
-- For **documentation**, **release notes**, and the **main website**, use a calm, conversational, professional tone
+- For **documentation**, **release notes**, and the **main website**, use a calm, encouraging, professional tone
   - Contractions such as "don't" are fine
 - For **blog posts**, a more casual and friendly tone is welcome
+
+    | ✅           | ❌                              |
+    | ----------- | ------------------------------ |
+    | press enter | make sure you press enter      |
+    | specify     | you must be careful to specify |
 
 ### Brevity
 - Explain the point as simply as possible, without any extra words or phrases that don't add meaningful information
@@ -186,6 +228,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     | in the future     |
     | you can now       |
     | Snowplow plans to |
+    | latest            |
 
 - For **migration guides** and **release notes**, it's fine to compare to the past, or make reference to already-announced upcoming features
   - Referring to previous functionality is the point of migration guides, after all
@@ -241,7 +284,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     | ✅                         | ❌                         |
     | ------------------------- | ------------------------- |
     | allowed form elements     | whitelisted form elements |
-    | allowlisted form elements | whitelisted form elements |
+    | allowlisted form elements |                           |
 
 ### Gendered language
 - Avoid gendered language
@@ -257,7 +300,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
 
 ### Snowplow
 - Snowplow is called Snowplow, not Snowplow Analytics
-- Most products can have "Snowplow" appended to their name if it helps clarify what's being referred to
+- Most products can have "Snowplow" added to their name if it helps clarify what's being referred to
 
   | ✅                               |
   | ------------------------------- |
@@ -273,6 +316,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     | Data Product Studio                   |
     | Snowtype                              |
     | Snowplow Customer Data Infrastructure |
+    | Data Model Packs                      |
 
 - Most products or features should not have capital letters when being used in a sentence
 
@@ -284,7 +328,6 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
    | Unified Digital data model                     | Unified Digital Data Model                     |
    | stream that contains all of your failed events | stream that contains all of your Failed Events |
    | custom self-describing event                   | custom Self-describing event                   |
-   | Attribution Modeling data app                  | Attribution Modeling Data App                  |
    | Snowplow tag template                          | Snowplow Tag Template                          |
 
 - Product names should be in normal text, not code markup
@@ -318,6 +361,14 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
    | --------------------------------- | ----------------------------- |
    | where your failed event files are | where your bad rows files are |
    | the bad rows format               |                               |
+
+
+- Use "visualization", not "data application"
+
+   | ✅                                       | ❌                                  |
+   | --------------------------------------- | ---------------------------------- |
+   | the Marketing Attribution visualization | the Marketing Attribution data app |
+
 
 ### Pipeline components
 - Console is capitalized, and gets a definite article ("the")
@@ -376,16 +427,6 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
    | ---------------------------------------------- | ---------------------------------------- |
    | track a page view using the JavaScript tracker | track a page view using the web trackers |
 
-### Data applications
-- The name of the app is capitalized, followed by lowercase "data application" or "data app"
-- Just "applications"/"apps" is fine as long as it's clear what's meant, and no other types of app are being referred to within the writing
-
-   | ✅                                  | ❌                                  |
-   | ---------------------------------- | ---------------------------------- |
-   | Video and Media Analytics data app | Video and Media Analytics Data App |
-   | ready-made applications            | ready-made data applications       |
-   | Funnel Builder app                 | Funnel Builder App                 |
-
 ### Events without schemas
 - Use "baked-in events" for events that don't have a schema
 - Specifically, these are page views, page pings, and the legacy ecommerce transaction events
@@ -394,6 +435,15 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     | ✅                                            |
     | -------------------------------------------- |
     | baked-in events aren't described by a schema |
+
+### Versions
+- Refer to specific versions as "version X.Y.Z" or just "X.Y.Z"
+- It's not necessary to put all 3 numbers if there aren't any patches
+
+  | ✅                     | ❌              |
+  | --------------------- | -------------- |
+  | install version 1.3.0 | install v1.3.0 |
+  | since 0.12            | since v0.12    |
 
 ## General technical terms
 ### Acronyms
@@ -414,7 +464,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
   | ✅            | ❌     |
   | ------------ | ----- |
   | JSON         | JSONs |
-  | JSON schemas | JSONs |
+  | JSON schemas |       |
   | APIs         |       |
   | SDKs         |       |
   | URLs         |       |
@@ -478,7 +528,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     | ------------------------ | ------------------------ |
     | track ecommerce events   | track e-commerce events  |
     | the Ecommerce plugin     | the E-commerce plugin    |
-    | the Ecommerce data model | the ecommerce data model |
+    | the Ecommerce data model | the eCommerce data model |
 
 ## Accessibility
 ### Images
@@ -505,6 +555,9 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
 ## Markdown formatting
 The rules in this section apply only to the main **documentation** site.
 
+### Bullet point lists
+- It's ok to use `-` or `*` for the list bullet points, since they come out looking the same
+
 ### Headings
 - Use only heading levels 1, 2 and 3
 - The title of the page should have header level 1 (#)
@@ -529,28 +582,10 @@ The rules in this section apply only to the main **documentation** site.
 - Use "Note" or "Info" blocks to highlight information that doesn't necessarily require action, such as that about a newer version being available, how a specific component works, or what versions are supported
 - The "Warning" and "Danger" blocks are reserved for information about potential data loss or permissions breaches
 
-### Bold and italic
-- Highlight specific key words or phrases using bold (`**`, preferred) or italic (`_`)
-- Choose bold _or_ italic, don't combine them for the same words, or within the same sentence
-- Don't use bold or italic for components such as buttons or page titles (use quotation marks instead), or entire paragraphs
-
-   | ✅                                                    | ❌                                                      |
-   | ---------------------------------------------------- | ------------------------------------------------------ |
-   | events are **automatically tracked** once configured | **events** are _automatically tracked_ once configured |
-   | click on the "Add action" button                     | click on the _**Add action**_ button                   |
-
 ### Code
-- Use inline code (single backticks, <code>`</code>) for field names, classes, file names, etc.
-
-    | ✅                             |
-    | ----------------------------- |
-    | a single `geo_location` field |
-    | a `event_id` UUID string      |
-    | tracking a `ScreenView` event |
-
 - Use code blocks (triple backticks, <code>```</code>) for code examples
-  - Specify the language next to the opening backticks, so that the code block is rendered correctly
-  - If the rendering doesn't look right, make sure that the specified language is listed under `prism: additionalLanguages` in the `docusaurus.config.js` file
+- Specify the language next to the opening backticks, so that the code block is rendered correctly
+- If the rendering doesn't look right, make sure that the specified language is listed under `prism: additionalLanguages` in the `docusaurus.config.js` file
 
     | ✅                                                          |
     | ---------------------------------------------------------- |

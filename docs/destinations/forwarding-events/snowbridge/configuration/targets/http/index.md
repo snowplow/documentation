@@ -21,7 +21,7 @@ Snowbridge supports sending authorized requests to OAuth2 - compliant HTTP targe
 
 Like in the case of basic authentication, we recommend using environment variables for sensitive values.
 
-## Dynamic Headers
+## Dynamic headers
 
 :::note
 This feature was added in version 2.3.0

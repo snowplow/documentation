@@ -18,7 +18,7 @@ There are several different failures that Snowbridge may hit.
 
 ### Target failure
 
-This is where a request to the destination technology fails or is rejected - for example a http 400 response is received. 
+This is where a request to the destination technology fails or is rejected - for example a HTTP 400 response is received. 
 
 Retry behaviour for target failures is determined by the retry configuration. You can find details of this in the [configuration section](/docs/destinations/forwarding-events/snowbridge/configuration/retries/index.md).
 

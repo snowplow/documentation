@@ -17,7 +17,7 @@ Previously, by default the body of HTTP requests came in whatever form it was re
 
 Note that this is a breaking change to the pre-v3 default behaviour, in two ways:
 
-1. Previously to v3, we sent data one request per message
+1. Prior to v3, we sent data one request per message
 
 This means that where no template is provided, request bodies will be arrays of JSON rather than individual JSON objects. 
 

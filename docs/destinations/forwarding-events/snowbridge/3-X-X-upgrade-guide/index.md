@@ -13,7 +13,7 @@ Support for Lua transformations has been removed. If you are running a Lua trans
 
 ### HTTP Target Changes
 
-Previously, by default the body of http requests came in whatever form it received. It is now an array. From v3, where no template is configured, the POST request body will contain an array of JSON containing the data for the whole batch. Data must be valid JSON or it will be considered invalid and sent to the failure target.
+Previously, by default the body of HTTP requests came in whatever form it was received. It is now an array. From v3, where no template is configured, the POST request body will contain an array of JSON containing the data for the whole batch. Data must be valid JSON or it will be considered invalid and sent to the failure target.
 
 Note that this is a breaking change to the pre-v3 default behaviour, in two ways:
 

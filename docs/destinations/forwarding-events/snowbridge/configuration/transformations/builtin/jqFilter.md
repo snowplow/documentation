@@ -12,7 +12,7 @@ import JQDescriptionSharedBlock from "./reusable/_jqDescription.md"
 
 `jqFilter` filters messages based on the output of a jq command which is run against the data. The provided command must return a boolean result. `false` filters the message out, `true` keeps it.
 
-If the provided jq command returns a non-boolean value error, or results in an error, then the message will be considred invalid, and will be sent to the failure target.
+If the provided jq command returns a non-boolean value error, or results in an error, then the message will be considered invalid, and will be sent to the failure target.
 
 This example filters out all data that doesn't have an `app_id` key.
 

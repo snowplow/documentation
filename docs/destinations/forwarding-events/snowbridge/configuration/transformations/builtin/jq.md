@@ -1,7 +1,7 @@
 # jq
 
 :::note
-This transformation was added in version 3.0.0
+This transformation was added in version 3.0.0.
 :::
 
 ```mdx-code-block

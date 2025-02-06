@@ -41,7 +41,7 @@ https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/tar
 
 2. Non-JSON data is not supported
 
-While the intention was never to support non-JSON data, previously to v3 the request body was simply populated with whatever bytes were found in the message data, regardless of whether it is valid JSON.
+While the intention was never to support non-JSON data, prior to v3, the request body was simply populated with whatever bytes were found in the message data, regardless of whether it was valid JSON.
 
 From v3 on, only valid JSON will work, otherwise the message will be considered invalid and sent to the failure target.
 

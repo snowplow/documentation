@@ -1,13 +1,8 @@
 ---
 title: "Anonymous tracking"
-description: "Capture Snowplow web events without user or session identifiers, without IP addresses and without setting any cookies"
 date: "2021-01-04"
 sidebar_position: 50
 ---
-
-<head>
-  <link rel="canonical" href="https://docs.snowplow.io/docs/sources/trackers/javascript-trackers/web-tracker/anonymous-tracking" />
-</head>
 
 ## Introduction
 

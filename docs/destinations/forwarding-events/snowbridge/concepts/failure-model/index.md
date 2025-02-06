@@ -22,7 +22,7 @@ This is where a request to the destination technology fails or is rejected - for
 
 Retry behaviour for target failures is determined by the retry configuration. You can find details of this in the [configuration section](/docs/destinations/forwarding-events/snowbridge/configuration/retries/index.md).
 
-As of Snowbridge 2.4.2, the kinesis target does not treat kinesis write throughput exceptions as this type of failure. Rather it has an in-built backoff and retry, which will persist until each event in the batch is either successful, or fails for a different reason.
+As of Snowbridge 2.4.2, the Kinesis target does not treat kinesis write throughput exceptions as this type of failure. Rather it has an in-built backoff and retry, which will persist until each event in the batch is either successful, or fails for a different reason.
 
 Before version 3.0.0, Snowbridge treats every kind of target failure the same -  it will retry 5 times. If all 5 attempts fail, it will proceed without acking the failed Messages. As long as the source's acking model allows for it, these will be re-processed through Snowbridge again.
 

@@ -26,7 +26,7 @@ As of Snowbridge 2.4.2, the kinesis target does not treat kinesis write throughp
 
 Before version 3.0.0, Snowbridge treats every kind of target failure the same -  it will retry 5 times. If all 5 attempts fail, it will proceed without acking the failed Messages. As long as the source's acking model allows for it, these will be re-processed through Snowbridge again.
 
-Each taget failure attempt will be reported as a 'MsgFailed' for monitoring purposes.
+Each target failure attempt will be reported as a 'MsgFailed' for monitoring purposes.
 
 ### Oversized data
 

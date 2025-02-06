@@ -14,9 +14,9 @@ import JQDescriptionSharedBlock from "./reusable/_jqDescription.md"
 
 If the provided jq command returns a non-boolean value error, or results in an error, then the message will be considered invalid, and will be sent to the failure target.
 
-This example filters out all data that doesn't have an `app_id` key.
-
 ## Configuration options
+
+This example filters out all data that doesn't have an `app_id` key.
 
 Minimal configuration:
 

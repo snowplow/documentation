@@ -1,5 +1,5 @@
 ---
-title: "Kinesis Source"
+title: "Kinesis"
 description: "Read data from a Kinesis stream."
 ---
 

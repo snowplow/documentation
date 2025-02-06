@@ -1,5 +1,5 @@
 ---
-title: "HTTP Target"
+title: "HTTP"
 description: "Send data over HTTP."
 ---
 

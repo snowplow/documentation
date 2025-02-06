@@ -1,6 +1,7 @@
 ---
-title: "Stdout Target"
+title: "Stdout"
 description: "Write data to an SQS queue."
+sidebar_position: 1
 ---
 
 Stdout target doesn't have any configurable options - when configured it simply outputs the messages to stdout.

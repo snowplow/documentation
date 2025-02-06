@@ -1,5 +1,5 @@
 ---
-title: "SQS Target"
+title: "SQS"
 description: "Write data to an SQS queue."
 ---
 

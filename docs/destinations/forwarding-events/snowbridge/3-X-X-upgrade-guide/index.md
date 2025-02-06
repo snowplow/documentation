@@ -13,15 +13,15 @@ Support for Lua transformations has been removed. If you are running a Lua trans
 
 ### HTTP Target Changes
 
-Previously, by default the body of HTTP requests came in whatever form it was received. It is now an array. From v3, where no template is configured, the POST request body will contain an array of JSON containing the data for the whole batch. Data must be valid JSON or it will be considered invalid and sent to the failure target.
+Previously, by default the body of HTTP requests came in whatever form it was received. It is now an array. From 3.0.0, where no template is configured, the POST request body will contain an array of JSON containing the data for the whole batch. Data must be valid JSON or it will be considered invalid and sent to the failure target.
 
 Note that this is a breaking change to the pre-v3 default behaviour, in two ways:
 
-1. Prior to v3, we sent data one request per message
+- 1. Prior to 3.0.0, we sent data one request per message
 
 This means that where no template is provided, request bodies will now be arrays of JSON rather than individual JSON objects. 
 
-For example, pre-v3, a request body might look like this:
+For example, pre-3.0.0, a request body might look like this:
 
 ```
 {"foo": "bar"}
@@ -39,9 +39,9 @@ If you need to preserve the previous behaviour (as long as your data is valid JS
 https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/targets/http-template-unwrap-example.file
 ```
 
-2. Non-JSON data is not supported
+- 2. Non-JSON data is not supported
 
 While the intention was never to support non-JSON data, prior to v3, the request body was simply populated with whatever bytes were found in the message data, regardless of whether it was valid JSON.
 
-From v3 on, only valid JSON will work, otherwise the message will be considered invalid and sent to the failure target.
+From 3.0.0 on, only valid JSON will work, otherwise the message will be considered invalid and sent to the failure target.
 

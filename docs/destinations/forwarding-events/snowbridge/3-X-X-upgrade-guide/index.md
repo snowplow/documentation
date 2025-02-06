@@ -1,5 +1,5 @@
 ---
-title: "3.X.X Upgrade Guide"
+title: "3.X.X upgrade guide"
 sidebar_position: 400
 ---
 

@@ -5,6 +5,10 @@ date: "2021-01-04"
 sidebar_position: 50
 ---
 
+<head>
+  <link rel="canonical" href="https://docs.snowplow.io/docs/sources/trackers/javascript-trackers/web-tracker/anonymous-tracking" />
+</head>
+
 ## Introduction
 
 By default, Snowplow captures identifiers with all events that can be considered personal identifiable information (PII) — user and session cookie IDs as well as the IP address. However, Snowplow also allows you to track data without these identifiers. This tutorial explains how you can capture Snowplow web events without:

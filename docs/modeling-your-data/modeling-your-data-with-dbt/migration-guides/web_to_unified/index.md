@@ -389,7 +389,7 @@ create view (your_schema)_derived.mock_snowplow_web_page_views as (
     ua__useragent_minor as useragent_minor,
     ua__useragent_patch as useragent_patch,
     ua__useragent_version as useragent_version,
-    null as  os_family,
+    ua__os_family as  os_family,
     ua__os_major as os_major,
     ua__os_minor as os_minor,
     ua__os_patch as os_patch,
@@ -397,7 +397,12 @@ create view (your_schema)_derived.mock_snowplow_web_page_views as (
     ua__os_version as os_version,
     ua__device_family as device_family,
     yauaa__device_class as device_class,
-    device_category,
+    case
+        when device_class = 'Desktop' then 'Desktop'
+        when device_class = 'Phone' then 'Mobile'
+        when device_class = 'Tablet' then 'Tablet'
+        else 'Other'
+    end as device_category,
     screen_resolution,
     yauaa__agent_class as agent_class,
     yauaa__agent_name as agent_name,
@@ -405,7 +410,7 @@ create view (your_schema)_derived.mock_snowplow_web_page_views as (
     yauaa__agent_name_version_major as agent_name_version_major,
     yauaa__agent_version as agent_version,
     yauaa__agent_version_major as agent_version_major,
-    null as device_brand,
+    yauaa__device_brand as device_brand,
     yauaa__device_name as device_name,
     yauaa__device_version as device_version,
     yauaa__layout_engine_class as layout_engine_class,

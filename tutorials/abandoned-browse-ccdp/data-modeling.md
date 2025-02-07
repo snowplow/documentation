@@ -2,11 +2,12 @@
 position: 3
 title: Data Modeling
 ---
-## Sending Events and Verifying Data
 
-After implementing the tracking setup, send some events and test that they are arriving in your data warehouse. If you don't have a data warehouse, you can sign up for a free trial of Snowflake.
+## Sending events and verifying data
 
-Once you have sent data to Snowflake, you can run the following query to verify the events are coming through:
+After implementing the tracking setup, send some events and test that they are arriving in your data warehouse. If you don't have a data warehouse, you can sign up for a [free trial of Snowflake](https://www.snowflake.com/).
+
+Once you have sent data to Snowflake, you can run the following query to verify the events are coming through. The [Snowflake Streaming loader](http://localhost:3000/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/) has a latency of several seconds so you should see results immediately. 
 
 ```sql
 SELECT 
@@ -23,11 +24,13 @@ WHERE
 ORDER BY load_tstamp DESC;
 ```
 
-## Identifying Most Viewed but Not Added-to-Cart Products
+## Identifying most viewed but not added-to-cart products
 
 Once events are confirmed, use the following query to check that we can aggregate the data correctly. This query will be used in the next step to build an abandoned browse audience in Census.
 
-The SQL query identifies users who have viewed product pages today but have not completed a purchase. It aggregates data from Snowplow events to calculate the total time a user has engaged with product pages, checks if they have added items to their cart, and determines if they have previously received a win-back email. The second part of the query then selects the most engaged product for each user, and ensures that only users who are logged in are included.
+The SQL query identifies users who have viewed product pages today but have not completed a purchase. It aggregates data from Snowplow events to calculate the total time a user has engaged with product pages, checks if they have added items to their cart, and determines if they have previously received a win-back email. The second part of the query then selects the most engaged product for each user and ensures that only users who are logged in are included.
+
+Snowplow loads to most data warehouses / lakes in real-time so this query will include users that have been active within the last couple seconds!
 
 ```sql
 WITH productsViewedToday AS (
@@ -79,6 +82,6 @@ WHERE
     AND a.email IS NOT NULL;
 ```
 
-## Next Step
+## Next step
 
-Proceed to the [Reverse ETL Setup](./reverse-etl.md) to sync this data to your marketing platform.
+Proceed to the [reverse ETL setup](./reverse-etl.md) to sync this data to your marketing platform.

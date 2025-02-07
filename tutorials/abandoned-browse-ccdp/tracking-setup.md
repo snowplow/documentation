@@ -3,13 +3,13 @@ position: 2
 title: Tracking Setup
 ---
 
-## Initialize Snowplow JavaScript Tracker
+## Initialize Snowplow JavaScript tracker
 
-To begin, we will set up Snowplow tracking on your eCommerce website. We assume that you already have a Snowplow pipeline. Please refer to the [Introduction](/tutorials/abandoned-browse-ccdp/installation) for more information on the different options. 
+To begin, we will set up Snowplow tracking on your ecommerce website. We assume that you already have a Snowplow pipeline. Please refer to the [Introduction](/tutorials/abandoned-browse-ccdp/installation) for more information on the different options. 
 
 ![website](images/retl-shopfront.png)
 
-First, initialize the Snowplow JavaScript tracker. Below is an example of how to set up the tracker:
+First, [initialize the Snowplow JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/quick-start-guide). Below is an example of how to set up the tracker:
 
 ```javascript
 ; (function (p, l, o, w, i, n, g) {
@@ -27,7 +27,7 @@ var collector = "yourcollector.site.com";
 
 window.snowplow('newTracker', 'trackerName', collector, {
   encodeBase64: false,
-  appId: 'eCommerceDemo',
+  appId: 'ecommerceDemo',
   platform: 'web',
   contexts: {
     webPage: true,
@@ -43,13 +43,17 @@ window.snowplow(
 );
 ```
 
-### Track User Engagement Time
+### Track user engagement time
+
+We want to understand how long a product is viewed for in order to determine the which product each customer is paying the most attention to. 
 
 Use the `enableActivityTracking` function to calculate the time the user is actively engaged on the page:
-- **minimumVisitLength**: The minimum time (in seconds) a user must stay on the page before tracking starts.
-- **heartbeatDelay**: The interval (in seconds) at which activity pings are sent.
+- **minimumVisitLength**: the minimum time (in seconds) a user must stay on the page before tracking starts
+- **heartbeatDelay**: the interval (in seconds) at which activity pings are sent
 
-If you change these parameters, make sure to update the values in the [Data Modeling](./data-modeling.md#identifying-most-viewed-but-not-added-to-cart-products) step. This event must be called before the `trackPageView` function.
+If you change these parameters, make sure to update the values in the [data modeling](./data-modeling.md#identifying-most-viewed-but-not-added-to-cart-products) step. 
+
+This event must be called before the `trackPageView` function.
 
 ```javascript
 snowplow('enableActivityTracking', {
@@ -58,9 +62,9 @@ snowplow('enableActivityTracking', {
 });
 ```
 
-### Track Page Views with the Product Context
+### Track page views with the product context
 
-After setting up activity tracking, implement the page view tracking with enhanced e-commerce context:
+After setting up activity tracking, implement the page view tracking with enhanced ecommerce context:
 
 ```javascript
 var floatPrice = parseFloat({{productPrice}});
@@ -81,7 +85,7 @@ snowplow('trackPageView', {
 });
 ```
 
-### Track "Add to Cart" Events
+### Track "add to cart" events
 
 After tracking page views, you can track "add to cart" events. Below is an example implementation:
 
@@ -107,21 +111,21 @@ window.snowplow("trackAddToCart", {
 });
 ```
 
-### Explanation of "Add to Cart" Parameters
+### Explanation of "add to cart" parameters
 
-- **id**: The unique identifier for the product.
-- **name**: The product's name.
-- **price**: The product's price as a floating-point number.
-- **brand**: The brand associated with the product.
-- **currency**: The currency code (e.g., USD, EUR).
-- **category**: The product's category or taxonomy.
-- **variant**: The product variant (if applicable).
-- **total_value**: The updated total cart value after adding the product.
+- **id**: the unique identifier for the product
+- **name**: the product's name
+- **price**: the product's price as a floating-point number
+- **brand**: the brand associated with the product
+- **currency**: the currency code (e.g., USD, EUR)
+- **category**: the product's category or taxonomy
+- **variant**: the product variant (if applicable)
+- **total_value**: the updated total cart value after adding the product
 
 ## Test your tracking
+
 To verify your tracking implementation, use the [Snowplow Chrome Extension](https://chrome.google.com/webstore/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm). This extension allows you to inspect Snowplow events in real-time as they are sent from your website. Navigate to your product pages and add items to cart while monitoring the extension to ensure events are firing correctly with all expected parameters. The extension will show you the full event payload including all contexts and properties, making it easy to debug your implementation.
 
+## Next step
 
-## Next Step
-
-With this implementation, you have page view, time spent, and add to cart tracking. If you want to add more eCommerce tracking, please refer to the [Snowplow Ecommerce Accelerator](https://docs.snowplow.io/accelerators/ecommerce) or the detailed [eCommerce documentation](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce). Next progress to the [Data Modeling](./data-modeling.md) step to verify your tracking setup in the data warehouse.
+With this implementation, you have page view, time spent, and add to cart tracking. If you want to add more ecommerce tracking, please refer to the [Snowplow ecommerce accelerator](https://docs.snowplow.io/accelerators/ecommerce) or the detailed [ecommerce documentation](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce). Next progress to the [data modeling](./data-modeling.md) step to verify your tracking setup in the data warehouse.

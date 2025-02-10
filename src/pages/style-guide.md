@@ -124,31 +124,34 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     | tracking a `ScreenView` event            |
 
 ### Lists
+- Introduce the whole list with a sentence ending in a colon
+- Start each item with a capital letter
 - For bullet points and numbered lists, don't put a full stop at the end of the sentence
 - Exception: list items that have multiple sentences within them should have full stops at the end
-- Start with a capital letter
 - Lists should be consistent - either single sentence (no full stop) or multiple sentences (with full stop)
 - When using a colon to make a kind of list item header, the subsequent sentence starts lowercase, like when using colons normally
   - Avoid using hyphens for list item "headers"
 
-   | ✅                                                     | ❌                                                                             |
-   | ----------------------------------------------------- | ----------------------------------------------------------------------------- |
-   | * Make tracking implementation easier                 | * make tracking implementation easier                                         |
-   | * Boolean: the value will be interpreted as a boolean | * Boolean: This option means that the value will be interpreted as a boolean. |
-   | 2. **Remove** the attribute entirely                  | 2. **Remove** - remove the attribute entirely                                 |
+  | ✅                                                                                                                        | ❌                                                                                                                        |
+  | ------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+  | * Make tracking implementation easier                                                                                    | * make tracking implementation easier                                                                                    |
+  | * Boolean: the value will be interpreted as a boolean                                                                    | * Boolean: The value will be interpreted as a boolean.                                                                   |
+  | 2. **Remove** the attribute entirely                                                                                     | 2. **Remove** - remove the attribute entirely                                                                            |
+  | Make the following changes:<br></br>- Replace `com.myvendor` with your company domain<br></br>- Leave `jsonschema` as-is | Make the following changes:<br></br>- replace `com.myvendor` with your company domain<br></br>- leave `jsonschema` as-is |
 
 ### Tables
-- Normal text inside tables starts with a capital letter
+- Text inside tables should start with a capital letter
+- Exception: code and related text should be formatted as inline code, with appropriate capitalization (e.g. `true`)
 - Text should be consistent, either single sentence (no full stop) or multiple sentences (with full stop)
 
 ### Ampersands
 - Use "and" rather than "&"
 - This is partly for consistency and aesthetic reasons, but also helps with screen reader accessibility
 
-    | ✅                                | ❌                              |
-    | -------------------------------- | ------------------------------ |
-    | version and amend                | version & amend                |
-    | User and Marketing Analytics app | User & Marketing Analytics app |
+    | ✅                                          | ❌                                        |
+    | ------------------------------------------ | ---------------------------------------- |
+    | version and amend                          | version & amend                          |
+    | User and Marketing Analytics visualization | User & Marketing Analytics visualization |
 
 ## Writing style
 ### Tone ➕

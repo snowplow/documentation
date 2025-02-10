@@ -1,5 +1,5 @@
 ---
-title: "Kafka Target"
+title: "Kafka"
 description: "Write data to a Kafka topic."
 ---
 

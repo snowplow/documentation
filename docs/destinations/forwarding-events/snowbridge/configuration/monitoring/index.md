@@ -23,7 +23,8 @@ https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/mon
 ```hcl reference
 https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/monitoring/sentry-example.hcl
 ```
-### StatsD stats receiver 
+
+### StatsD stats receiver configuration
 
 ```hcl reference
 https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/monitoring/statsd-example.hcl
@@ -33,10 +34,10 @@ Snowbridge sends the following metrics to statsd:
 
 | Metric                   | Definitions                                                                                                                                             |
 |--------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `target_success`         | Events successfully sent to the target.                                                                                                                     |
-| `target_failed`          | Events which failed to reach the target, after 5 retries. Will be retried later.                                                                        |
+| `target_success`         | Events successfully sent to the target.                                                                                                                 |
+| `target_failed`          | Events which failed to reach the target, and will be handled by the retry config. Retries which fail are also counted.                                   |
 | `message_filtered`       | Events filtered out via transformation.                                                                                                                 |
-| `failure_target_success` | Events we could not send to the target, which are not retryable, successfully sent to the failure target.                             |
+| `failure_target_success` | Events we could not send to the target, which are not retryable, successfully sent to the failure target.                                               |
 | `failure_target_failed`  | Events we could not send to the target, which are not retryable, which we failed to send to the failure target. In this scenario, Snowbridge will crash. |
 | `min_processing_latency` | Min time between entering Snowbridge and write to target/failure target.                                                                                |
 | `max_processing_latency` | Max time between entering Snowbridge and write to target/failure target.                                                                                |

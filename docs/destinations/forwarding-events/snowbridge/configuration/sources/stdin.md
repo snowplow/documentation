@@ -1,13 +1,14 @@
 ---
-title: "Stdin Source"
+title: "Stdin"
 description: "Read data from stdin."
+sidebar_position: 1
 ---
 
 Stdin source is the default, and has one optional configuration to set the concurrency. 
 
 Stdin source simply treats stdin as the input.
 
-## Configuration 
+## Configuration options
 
 Here is an example of the minimum required configuration:
 

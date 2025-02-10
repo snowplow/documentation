@@ -1,5 +1,5 @@
 ---
-title: "Kafka Source"
+title: "Kafka"
 description: "Read data from a Kafka topic."
 ---
 

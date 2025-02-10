@@ -87,5 +87,5 @@ See the `monitoring.metrics.statsd` options in the [configuration reference](/do
 ```mdx-code-block
 import Telemetry from "@site/docs/reusable/telemetry/_index.md"
 
-<Telemetry name="Lake Loader" since="0.1.0" idSetting="telemetry.userProvidedId" disableSetting="telemetry.disable" />
+<Telemetry name="BigQuery Loader" since="2.0.0" idSetting="telemetry.userProvidedId" disableSetting="telemetry.disable" />
 ```

@@ -66,3 +66,26 @@ https://github.com/snowplow-incubator/snowplow-bigquery-loader/blob/v2/config/co
 </Tabs>
 
 See the [configuration reference](/docs/api-reference/loaders-storage-targets/bigquery-loader/configuration-reference/index.md) for all possible configuration parameters.
+
+### Iglu
+
+The BigQuery Loader requires an [Iglu resolver file](/docs/api-reference/iglu/iglu-resolver/index.md) which describes the Iglu repositories that host your schemas.  This should be the same Iglu configuration file that you used in the Enrichment process.
+
+## Metrics
+
+The BigQuery Loader can be configured to send the following custom metrics to a [StatsD](https://www.datadoghq.com/statsd-monitoring/) receiver:
+
+| Metric                      | Definition |
+|-----------------------------|------------|
+| `events_good`               | A count of events that are successfully written to BigQuery. |
+| `events_bad`                | A count of failed events that could not be loaded, and were instead sent to the bad output stream. |
+| `latency_millis`            | The time in milliseconds from when events are written to the source stream of events (i.e. by Enrich) until when they are read by the loader. |
+| `e2e_latency_millis`        | The end-to-end latency of the snowplow pipeline. The time in milliseconds from when an event was received by the collector, until it is written into BigQuery. |
+
+See the `monitoring.metrics.statsd` options in the [configuration reference](/docs/api-reference/loaders-storage-targets/bigquery-loader/configuration-reference/index.md) for how to configure the StatsD receiver.
+
+```mdx-code-block
+import Telemetry from "@site/docs/reusable/telemetry/_index.md"
+
+<Telemetry name="BigQuery Loader" since="2.0.0" idSetting="telemetry.userProvidedId" disableSetting="telemetry.disable" />
+```

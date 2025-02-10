@@ -87,7 +87,8 @@ FROM
 ```
 
 :::note
-The column name produced by previous versions of the BigQuery Loader (<2.0.0) would contain full schema version, e.g. `unstruct_event_my_example_event_1_0_0`
+The column name produced by previous versions of the BigQuery Loader (<2.0.0) would contain full schema version, e.g. `unstruct_event_my_example_event_1_0_0`.
+The [BigQuery Loader upgrade guide](/docs/api-reference/loaders-storage-targets/bigquery-loader/upgrade-guides/2-0-0-upgrade-guide/index.md) describes how to enable the legacy column names in the 2.0.0 loader.
 :::
 
 </TabItem>

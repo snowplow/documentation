@@ -4,7 +4,7 @@ import Link from '@docusaurus/Link';
 
 <tr>
     <td><code>batching.maxBytes</code></td>
-    <td>Optional. Default value <code>16000000</code>. Events are emitted to BigQuery when the batch reaches this size in bytes</td>
+    <td>Optional. Default value <code>10000000</code>. Events are emitted to BigQuery when the batch reaches this size in bytes</td>
 </tr>
 <tr>
     <td><code>batching.maxDelay</code></td>
@@ -37,7 +37,35 @@ import Link from '@docusaurus/Link';
 </tr>
 <tr>
     <td><code>skipSchemas</code></td>
-    <td>Optional, e.g. <code>["iglu:com.example/skipped1/jsonschema/1-0-0"]</code> or with wildcards <code>["iglu:com.example/skipped2/jsonschema/1-*-*"]</code>. A list of schemas that won't be loaded to BigQuery. This feature could be helpful when recovering from edge-case schemas which for some reason cannot be loaded to the table.</td>
+    <td>
+      Optional, e.g. <code>["iglu:com.example/skipped1/jsonschema/1-0-0"]</code> or with wildcards <code>["iglu:com.example/skipped2/jsonschema/1-*-*"]</code>.
+      A list of schemas that won't be loaded to BigQuery.
+      This feature could be helpful when recovering from edge-case schemas which for some reason cannot be loaded to the table.
+    </td>
+</tr>
+<tr>
+    <td><code>legacyColumnMode</code></td>
+    <td>Optional. Default value <code>false</code>.
+      When this mode is enabled, the loader uses the legacy column style used by the v1 BigQuery loader.
+      For example, an entity for a <code>1-0-0</code> schema is loaded into a column ending in <code>_1_0_0</code>, instead of a column ending in <code>_1</code>.
+      This feature could be helpful when migrating from the v1 loader to the v2 loader.
+    </td>
+</tr>
+<tr>
+    <td><code>legacyColumns</code></td>
+    <td>
+      Optional, e.g. <code>["iglu:com.example/legacy/jsonschema/1-0-0"]</code> or with wildcards <code>["iglu:com.example/legacy/jsonschema/1-*-*"]</code>.
+      Schemas for which to use the legacy column style used by the v1 BigQuery loader, even when <code>legacyColumnMode</code> is disabled.
+    </td>
+</tr>
+<tr>
+    <td><code>exitOnMissingIgluSchema</code></td>
+    <td>
+      Optional. Default value <code>true</code>.
+      Whether the loader should crash and exit if it fails to resolve an Iglu Schema.
+      We recommend `true` because Snowplow enriched events have already passed validation, so a missing schema normally indicates an error that needs addressing.
+      Change to <code>false</code> so events go the failed events stream instead of crashing the loader.
+    </td>
 </tr>
 <tr>
     <td><code>monitoring.metrics.statsd.hostname</code></td>
@@ -68,6 +96,10 @@ import Link from '@docusaurus/Link';
     <td>Optional. A map of key/value strings to be included in the payload content sent to the webhook.</td>
 </tr>
 <tr>
+    <td><code>monitoring.webhook.heartbeat.*</code></td>
+    <td>Optional. Default value <code>5.minutes</code>. How often to send a heartbeat event to the webhook when healthy.</td>
+</tr>
+<tr>
     <td><code>monitoring.sentry.dsn</code></td>
     <td>Optional. Set to a Sentry URI to report unexpected runtime exceptions.</td>
 </tr>
@@ -82,4 +114,8 @@ import Link from '@docusaurus/Link';
 <tr>
     <td><code>telemetry.userProvidedId</code></td>
     <td>Optional. See <Link to="/docs/getting-started-on-community-edition/telemetry/#how-can-i-help">here</Link> for more information.</td>
+</tr>
+<tr>
+    <td><code>http.client.maxConnectionsPerServer</code></td>
+    <td> Optional. Default value 4. Configures the internal HTTP client used for iglu resolver, alerts and telemetry. The maximum number of open HTTP requests to any single server at any one time.</td>
 </tr>

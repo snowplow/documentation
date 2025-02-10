@@ -41,6 +41,23 @@ If you are not using Snowplow dbt models but still use dbt, you can employ [this
 
 :::
 
+### Enable legacy mode for the old table format
+
+We realize that migrating to the new table format might be inconvenient for some Snowplow users.  It is possible to run the 2.0.0 loader can in legacy mode, so it loads self-describing events and entities using the old column names of the 1.x loader.
+
+**Option 1:** In the configuration file, set `legacyColumnMode` to `true`. When this mode is enabled, the loader uses the legacy column style for all self-describing events and entities.
+
+**Option 2:** In the configuration file, set `legacyColumns` to list specific schemas for which to use the legacy column style.  This list is used when `legacyColumnMode` is `false` (the default).
+
+For example:
+
+```json
+"legacyColumns": [
+  "iglu:com.example/legacy_a/jsonschema/1-0-0",
+  "iglu:com.example/legacy_b/jsonschema/1-*-*"
+]
+```
+
 ## Recovery columns
 
 ### What is schema evolution?

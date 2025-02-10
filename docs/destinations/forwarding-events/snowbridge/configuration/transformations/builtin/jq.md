@@ -12,7 +12,7 @@ import JQDescriptionSharedBlock from "./reusable/_jqDescription.md"
 
 `jq` runs a jq command on the message data, and outputs the result of the command. While jq supports multi-element results, commands must output only a single element - this single element can be an array data type.
 
-If the provided jq command results in an error, the message will be considred invalid, and will be sent to the failure target.
+If the provided jq command results in an error, the message will be considered invalid, and will be sent to the failure target.
 
 The minimal example here returns the input data as a single element array, and the full example maps the data to a new data structure.
 

@@ -3,21 +3,21 @@ title: "HTTP"
 description: "Send data over HTTP."
 ---
 
-:::note 
+:::note
 Version 3.0.0 makes breaking changes to the http target. Details on migrating can be found [in the migration guide](/docs/destinations/forwarding-events/snowbridge/3-X-X-upgrade-guide/index.md)
 :::
 
 ## Basic Authentication
 
-Where basicauth is used, it may be configured using the `basic_auth_username` and `basic_auth_password` options. Where an authorisation header is used, it may be set via the `headers` option.
+Where basicauth is used, it may be configured using the `basic_auth_username` and `basic_auth_password` options. Where an authorization header is used, it may be set via the `headers` option.
 
-we recommend using environment variables for sensitive values - which can be done via HCL's native `env.MY_ENV_VAR` format (as seen below).
+We recommend using environment variables for sensitive values - which can be done via HCL's native `env.MY_ENV_VAR` format (as seen below).
 
 TLS may be configured by providing the `key_file`, `cert_file` and `ca_file` options with paths to the relevant TLS files.
 
 ## OAuth2
 
-Snowbridge supports sending authorized requests to OAuth2 - compliant HTTP targets. This can be enabled in by setting `oauth2_client_id `, `oauth2_client_secret`, `oauth2_refresh_token` (these 3 are long-lived credentials used to generate short-lived bearer access tokens) and `oauth2_token_url`(which is the URL of authorization server providing access tokens).
+Snowbridge supports sending authorized requests to OAuth2-compliant HTTP targets. This can be enabled by setting `oauth2_client_id`, `oauth2_client_secret`, `oauth2_refresh_token` (these three are long-lived credentials used to generate short-lived bearer access tokens), and `oauth2_token_url` (which is the URL of the authorization server providing access tokens).
 
 Like in the case of basic authentication, we recommend using environment variables for sensitive values.
 

@@ -106,4 +106,4 @@ transform {
 
 ## Further testing
 
-You can use the above method to test all aspects of the app from a local environment too, including sources, targets, failure targets, metrics endpoints etc. In some cases, you'll need to ensure that the local envionment has access to any required resources and can authenticate (e.g. connecting from a laptop to a cloud account/local mock of cloud resources, or setting up a local metrics server for testing). Once that’s done, provide Snowbridge with an hcl file configuring it to connect to those resources, and run it the same way as in the examples above.
+You can use the above method to test all aspects of the app from a local environment too, including sources, targets, failure targets, metrics endpoints etc. In some cases, you'll need to ensure that the local environment has access to any required resources and can authenticate (e.g. connecting from a laptop to a cloud account/local mock of cloud resources, or setting up a local metrics server for testing). Once that’s done, provide Snowbridge with an hcl file configuring it to connect to those resources, and run it the same way as in the examples above.

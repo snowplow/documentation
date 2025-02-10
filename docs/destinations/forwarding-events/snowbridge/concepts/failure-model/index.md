@@ -18,9 +18,9 @@ There are several different failures that Snowbridge may hit.
 
 ### Target failure
 
-This is where a request to the destination technology fails or is rejected - for example a HTTP 400 response is received. 
+This is where a request to the destination technology fails or is rejected - for example a HTTP 400 response is received.
 
-Retry behaviour for target failures is determined by the retry configuration. You can find details of this in the [configuration section](/docs/destinations/forwarding-events/snowbridge/configuration/retries/index.md).
+Retry behavior for target failures is determined by the retry configuration. You can find details of this in the [configuration section](/docs/destinations/forwarding-events/snowbridge/configuration/retries/index.md).
 
 As of Snowbridge 2.4.2, the Kinesis target does not treat kinesis write throughput exceptions as this type of failure. Rather it has an in-built backoff and retry, which will persist until each event in the batch is either successful, or fails for a different reason.
 
@@ -60,6 +60,6 @@ Firstly, if it hits an error in retrieving data from the source stream, it will 
 
 Secondly, as described above, where there are failures it will attempt to reprocess the data if it can, and where failures aren't recoverable it will attempt to handle that via a failure target. Normally, even reaching this point is rare.
 
-In the very unlikely event that Snowbridge reaches this point and cannot write to a failure target, the app will crash. Should this happen, and the app is re-deployed, it will begin processing data from the last acked message. Note that the likely impact of this is duplicated sends to the target, but not data loss. 
+In the very unlikely event that Snowbridge reaches this point and cannot write to a failure target, the app will crash. Should this happen, and the app is re-deployed, it will begin processing data from the last acked message. Note that the likely impact of this is duplicated sends to the target, but not data loss.
 
-Of course, if you experience crashes or other issues that are not explained by the above, please log an issue detailing the bahaviour.
+Of course, if you experience crashes or other issues that are not explained by the above, please log an issue detailing the behavior.

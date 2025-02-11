@@ -1,5 +1,6 @@
 ---
 title: "Opt-outs and anonymous tracking"
+description: "Capture Snowplow web events without user or session identifiers, without IP addresses and without setting any cookies"
 date: "2022-08-30"
 sidebar_position: 2860
 ---
@@ -40,7 +41,7 @@ This mode will no longer track any user identifiers or session information. Simi
 
 Setting `stateStorageStrategy` to `cookieAndLocalStorage` or `localStorage` also allows for event buffering to continue working whilst not sending user information when `anonymousTracking` is enabled.
 
-Anonymous tracking can be toggled on and off. 
+Anonymous tracking can be toggled on and off.
 
 ### 2. Client-side anonymisation with session
 
@@ -169,7 +170,7 @@ import { enableAnonymousTracking } from '@snowplow/browser-tracker';
 
 enableAnonymousTracking({
   options: {},
-  stateStorageStrategy: 'none' 
+  stateStorageStrategy: 'none'
 });
 ```
 
@@ -190,8 +191,8 @@ snowplow('disableAnonymousTracking');
 or, if you wish to also adjust the `stateStorageStrategy` when enabling:
 
 ```javascript
-snowplow('disableAnonymousTracking', { 
-  stateStorageStrategy: 'cookieAndLocalStorage' 
+snowplow('disableAnonymousTracking', {
+  stateStorageStrategy: 'cookieAndLocalStorage'
 });
 ```
 
@@ -209,8 +210,8 @@ or, if you wish to also adjust the `stateStorageStrategy` when enabling:
 ```javascript
 import { disableAnonymousTracking } from '@snowplow/browser-tracker';
 
-disableAnonymousTracking({ 
-  stateStorageStrategy: 'cookieAndLocalStorage' 
+disableAnonymousTracking({
+  stateStorageStrategy: 'cookieAndLocalStorage'
 });
 ```
 

@@ -44,8 +44,11 @@ This guide will walk you through setting up and testing an abandoned browse camp
    - The `abandonedEmail=true` parameter in the URL helps track when users click through from abandoned browse emails
    - You can use this parameter to:
      - track email campaign success
-     - remove users from the campaign audience in Reverse ETL once they've engaged
+     - remove users from the campaign audience once they've engaged. See image below for how to configure this in your Reverse ETL audience.
 :::
+
+![Filter Winback](images/retl-winback-filtered.png)
+
 
 ## Campaign settings
 

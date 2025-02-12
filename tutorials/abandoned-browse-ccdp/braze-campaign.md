@@ -22,18 +22,16 @@ This guide will walk you through setting up and testing an abandoned browse camp
 ![Braze Campaign Builder](images/retl-braze.png)
 
 1. Click "Edit Campaign" in the campaign builder and click "Edit Email Body"
-2. Design your email using Braze's visual editor or use the following HTML:
+2. Design your email using Braze's visual editor:
    ```html
    Subject: Don't miss out on {{custom_attribute.${product}}}!
    
-   Hello!
-   
-   We noticed you were checking out {{custom_attribute.${product}}}. 
+   Hey {{${first_name}}} we saw you were interested in {{custom_attribute.${PRODUCT}}} 
    
    <a href="{{custom_attribute.${product_url}}}?abandonedEmail=true">
-     Take another look
+     You spent {{custom_attribute.${TIME_ENGAGED_IN_S}}} seconds checking it out.... Why not check it out once more before it sells out?!!
    </a>
-   ```
+   ``
 
 3. Add personalization:
    - product name using `{{custom_attribute.${product}}}`

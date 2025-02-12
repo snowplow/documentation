@@ -375,11 +375,13 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
 
 ### Pipeline components
 - Console is capitalized, and gets a definite article ("the")
+- It can also be called "the BDP Console" or "the Snowplow BDP Console"
+  - This is fine at the start of a piece of writing but feels overly wordy if used throughout, so maybe open with that if you like then just call it "the Console" subsequently
 
-   | ✅                              | ❌                              |
-   | ------------------------------ | ------------------------------ |
-   | data structures in the Console | data structures in the console |
-   |                                | data structures in Console     |
+   | ✅                                  | ❌                              |
+   | ---------------------------------- | ------------------------------ |
+   | data structures in the Console     | data structures in the console |
+   | data structures in the BDP Console | data structures in Console     |
 
 - Collector is capitalized, and gets a definite article ("the")
     - Use "the Collector endpoint" where possible for clarity - the reader might not know what we mean by "Collector", but they probably know what an endpoint is

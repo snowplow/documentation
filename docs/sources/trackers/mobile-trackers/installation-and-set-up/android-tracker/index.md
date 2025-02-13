@@ -130,6 +130,7 @@ val sessionConfig = SessionConfiguration(
     TimeMeasure(30, TimeUnit.SECONDS),
     TimeMeasure(30, TimeUnit.SECONDS)
 )
+    .continueSessionOnRestart(false)
 createTracker(
     applicationContext,
     "appTracker",
@@ -162,7 +163,8 @@ TrackerConfiguration trackerConfig = new TrackerConfiguration("appId")
 SessionConfiguration sessionConfig = new SessionConfiguration(
     new TimeMeasure(30, TimeUnit.SECONDS),
     new TimeMeasure(30, TimeUnit.SECONDS)
-);
+)
+    .continueSessionOnRestart(false);
 Snowplow.createTracker(
     getApplicationContext(),
     "appTracker",

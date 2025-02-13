@@ -313,6 +313,6 @@ SessionConfiguration trackerConfig = new SessionConfiguration()
   </TabItem>
 </Tabs>
 
-With the option enabled, every session update is persisted to user defaults or shared preferences storage.
+With the option enabled, every session update is persisted to UserDefaults or shared preferences storage.
 In case it's disabled, only session changes are persisted to UserDefaults.
 This means that there is more overhead when the option is enabled.

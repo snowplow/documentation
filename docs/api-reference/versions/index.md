@@ -54,49 +54,49 @@ If you are using Snowplow BDP, you don’t need to install any of the core pipel
 <TabItem value="aws" label="AWS" default>
 
 <ReactMarkdown children={`
-Component | Latest version
-:--|:-:
-[Stream Collector](/docs/api-reference/stream-collector/index.md) | ${versions.collector}
-[Enrich](/docs/api-reference/enrichment-components/index.md) | ${versions.enrich}
-[RDB Loader (Redshift, Snowflake, Databricks)](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) | ${versions.rdbLoader}
-[Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md) | ${versions.lakeLoader}
-[Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md) | ${versions.snowflakeStreamingLoader}
-[S3 Loader](/docs/api-reference/loaders-storage-targets/s3-loader/index.md) | ${versions.s3Loader}
-[Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md) | ${versions.snowbridge}
-[Elasticsearch Loader](/docs/api-reference/elasticsearch/index.md) | ${versions.esLoader}
-[Postgres Loader](/docs/api-reference/loaders-storage-targets/snowplow-postgres-loader/index.md) | ${versions.postgresLoader}
-[Dataflow Runner](/docs/api-reference/dataflow-runner/index.md) | ${versions.dataflowRunner}
+| Component                                                                                                                |            Latest version            |
+| :----------------------------------------------------------------------------------------------------------------------- | :----------------------------------: |
+| [Stream Collector](/docs/api-reference/stream-collector/index.md)                                                        |        ${versions.collector}         |
+| [Enrich](/docs/api-reference/enrichment-components/index.md)                                                             |          ${versions.enrich}          |
+| [RDB Loader (Redshift, Snowflake, Databricks)](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) |        ${versions.rdbLoader}         |
+| [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                                          |        ${versions.lakeLoader}        |
+| [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md)            | ${versions.snowflakeStreamingLoader} |
+| [S3 Loader](/docs/api-reference/loaders-storage-targets/s3-loader/index.md)                                              |         ${versions.s3Loader}         |
+| [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md)                                                   |        ${versions.snowbridge}        |
+| [Elasticsearch Loader](/docs/api-reference/elasticsearch/index.md)                                                       |         ${versions.esLoader}         |
+| [Postgres Loader](/docs/api-reference/loaders-storage-targets/snowplow-postgres-loader/index.md)                         |      ${versions.postgresLoader}      |
+| [Dataflow Runner](/docs/api-reference/dataflow-runner/index.md)                                                          |      ${versions.dataflowRunner}      |
 `} remarkPlugins={[remarkGfm]} />
 
 </TabItem>
 <TabItem value="gcp" label="GCP">
 
 <ReactMarkdown children={`
-Component | Latest version
-:--|:-:
-[Stream Collector](/docs/api-reference/stream-collector/index.md) | ${versions.collector}
-[Enrich](/docs/api-reference/enrichment-components/index.md) | ${versions.enrich}
-[RDB Loader (Snowflake, Databricks)](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) | ${versions.rdbLoader}
-[BigQuery Loader](/docs/api-reference/loaders-storage-targets/bigquery-loader/index.md) | ${versions.bqLoader}
-[Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md) | ${versions.lakeLoader}
-[Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md) | ${versions.snowflakeStreamingLoader}
-[GCS Loader](/docs/api-reference/loaders-storage-targets/google-cloud-storage-loader/index.md) | ${versions.gcsLoader}
-[Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md) | ${versions.snowbridge}
-[Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md) | ${versions.lakeLoader}
-[Postgres Loader](/docs/api-reference/loaders-storage-targets/snowplow-postgres-loader/index.md) | ${versions.postgresLoader}
+| Component                                                                                                      |            Latest version            |
+| :------------------------------------------------------------------------------------------------------------- | :----------------------------------: |
+| [Stream Collector](/docs/api-reference/stream-collector/index.md)                                              |        ${versions.collector}         |
+| [Enrich](/docs/api-reference/enrichment-components/index.md)                                                   |          ${versions.enrich}          |
+| [RDB Loader (Snowflake, Databricks)](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) |        ${versions.rdbLoader}         |
+| [BigQuery Loader](/docs/api-reference/loaders-storage-targets/bigquery-loader/index.md)                        |         ${versions.bqLoader}         |
+| [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                                |        ${versions.lakeLoader}        |
+| [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md)  | ${versions.snowflakeStreamingLoader} |
+| [GCS Loader](/docs/api-reference/loaders-storage-targets/google-cloud-storage-loader/index.md)                 |        ${versions.gcsLoader}         |
+| [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md)                                         |        ${versions.snowbridge}        |
+| [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                                |        ${versions.lakeLoader}        |
+| [Postgres Loader](/docs/api-reference/loaders-storage-targets/snowplow-postgres-loader/index.md)               |      ${versions.postgresLoader}      |
 `} remarkPlugins={[remarkGfm]} />
 
 </TabItem>
 <TabItem value="azure" label="Azure">
 
 <ReactMarkdown children={`
-Component | Latest version
-:--|:-:
-[Stream Collector](/docs/api-reference/stream-collector/index.md) | ${versions.collector}
-[Enrich](/docs/api-reference/enrichment-components/index.md) | ${versions.enrich}
-[RDB Loader (Snowflake)](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) | ${versions.rdbLoader}
-[Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md) | ${versions.lakeLoader}
-[Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md) | ${versions.snowflakeStreamingLoader}
+| Component                                                                                                     |            Latest version            |
+| :------------------------------------------------------------------------------------------------------------ | :----------------------------------: |
+| [Stream Collector](/docs/api-reference/stream-collector/index.md)                                             |        ${versions.collector}         |
+| [Enrich](/docs/api-reference/enrichment-components/index.md)                                                  |          ${versions.enrich}          |
+| [RDB Loader (Snowflake)](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md)            |        ${versions.rdbLoader}         |
+| [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                               |        ${versions.lakeLoader}        |
+| [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md) | ${versions.snowflakeStreamingLoader} |
 `} remarkPlugins={[remarkGfm]} />
 
 </TabItem>
@@ -111,40 +111,40 @@ If you are using Snowplow BDP, you don’t need to install Iglu Server yourself.
 :::
 
 <ReactMarkdown children={`
-Component | Latest version
-:--|:-:
-[Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) | ${versions.igluServer}
-[\`igluctl\` utility](/docs/api-reference/iglu/igluctl-2/index.md) | ${versions.igluctl}
-[Iglu Scala client](/docs/api-reference/iglu/iglu-clients/scala-client-setup/index.md) | ${versions.igluScalaClient}
-[Iglu Ruby client](/docs/api-reference/iglu/iglu-clients/ruby-client/index.md) | ${versions.igluRubyClient}
-[Iglu Objective-C client](/docs/api-reference/iglu/iglu-clients/objc-client/index.md) | ${versions.igluObjCClient}
+| Component                                                                              |       Latest version        |
+| :------------------------------------------------------------------------------------- | :-------------------------: |
+| [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md)         |   ${versions.igluServer}    |
+| [\`igluctl\` utility](/docs/api-reference/iglu/igluctl-2/index.md)                     |     ${versions.igluctl}     |
+| [Iglu Scala client](/docs/api-reference/iglu/iglu-clients/scala-client-setup/index.md) | ${versions.igluScalaClient} |
+| [Iglu Ruby client](/docs/api-reference/iglu/iglu-clients/ruby-client/index.md)         | ${versions.igluRubyClient}  |
+| [Iglu Objective-C client](/docs/api-reference/iglu/iglu-clients/objc-client/index.md)  | ${versions.igluObjCClient}  |
 `} remarkPlugins={[remarkGfm]} />
 
 ### Trackers
 
 <ReactMarkdown children={`
-Tracker | Latest version
-:--|:-:
-[JavaScript (Web and Node.js)](/docs/sources/trackers/javascript-trackers/index.md) | ${versions.javaScriptTracker}
-[iOS](/docs/sources/trackers/mobile-trackers/index.md) | ${versions.iosTracker}
-[Android](/docs/sources/trackers/mobile-trackers/index.md) | ${versions.androidTracker}
-[React Native](/docs/sources/trackers/react-native-tracker/index.md) | ${versions.reactNativeTracker}
-[Flutter](/docs/sources/trackers/flutter-tracker/index.md) | ${versions.flutterTracker}
-[WebView](/docs/sources/trackers/webview-tracker/index.md) | ${versions.webViewTracker}
-[Roku](/docs/sources/trackers/roku-tracker/index.md) | ${versions.rokuTracker}
-[Google AMP](/docs/sources/trackers/google-amp-tracker/index.md) | ${versions.googleAmpTracker}
-[Pixel](/docs/sources/trackers/pixel-tracker/index.md) | ${versions.pixelTracker}
-[Golang](/docs/sources/trackers/golang-tracker/index.md) | ${versions.golangTracker}
-[.NET](/docs/sources/trackers/net-tracker/index.md) | ${versions.dotNetTracker}
-[Java](/docs/sources/trackers/java-tracker/index.md) | ${versions.javaTracker}
-[Python](/docs/sources/trackers/python-tracker/index.md) | ${versions.pythonTracker}
-[Scala](/docs/sources/trackers/scala-tracker/index.md) | ${versions.scalaTracker}
-[Ruby](/docs/sources/trackers/ruby-tracker/index.md) | ${versions.rubyTracker}
-[Rust](/docs/sources/trackers/rust-tracker/index.md) | ${versions.rustTracker}
-[PHP](/docs/sources/trackers/php-tracker/index.md) | ${versions.phpTracker}
-[C++](/docs/sources/trackers/c-tracker/index.md) | ${versions.cppTracker}
-[Unity](/docs/sources/trackers/unity-tracker/index.md) | ${versions.unityTracker}
-[Lua](/docs/sources/trackers/lua-tracker/index.md) | ${versions.luaTracker}
+| Tracker                                                                             |        Latest version         |
+| :---------------------------------------------------------------------------------- | :---------------------------: |
+| [JavaScript (Web and Node.js)](/docs/sources/trackers/javascript-trackers/index.md) | ${versions.javaScriptTracker} |
+| [iOS](/docs/sources/trackers/mobile-trackers/index.md)                              |    ${versions.iosTracker}     |
+| [Android](/docs/sources/trackers/mobile-trackers/index.md)                          |  ${versions.androidTracker}   |
+| [React Native](/docs/sources/trackers/react-native-tracker/index.md)                | ${versions.javaScriptTracker} |
+| [Flutter](/docs/sources/trackers/flutter-tracker/index.md)                          |  ${versions.flutterTracker}   |
+| [WebView](/docs/sources/trackers/webview-tracker/index.md)                          |  ${versions.webViewTracker}   |
+| [Roku](/docs/sources/trackers/roku-tracker/index.md)                                |    ${versions.rokuTracker}    |
+| [Google AMP](/docs/sources/trackers/google-amp-tracker/index.md)                    | ${versions.googleAmpTracker}  |
+| [Pixel](/docs/sources/trackers/pixel-tracker/index.md)                              |   ${versions.pixelTracker}    |
+| [Golang](/docs/sources/trackers/golang-tracker/index.md)                            |   ${versions.golangTracker}   |
+| [.NET](/docs/sources/trackers/net-tracker/index.md)                                 |   ${versions.dotNetTracker}   |
+| [Java](/docs/sources/trackers/java-tracker/index.md)                                |    ${versions.javaTracker}    |
+| [Python](/docs/sources/trackers/python-tracker/index.md)                            |   ${versions.pythonTracker}   |
+| [Scala](/docs/sources/trackers/scala-tracker/index.md)                              |   ${versions.scalaTracker}    |
+| [Ruby](/docs/sources/trackers/ruby-tracker/index.md)                                |    ${versions.rubyTracker}    |
+| [Rust](/docs/sources/trackers/rust-tracker/index.md)                                |    ${versions.rustTracker}    |
+| [PHP](/docs/sources/trackers/php-tracker/index.md)                                  |    ${versions.phpTracker}     |
+| [C++](/docs/sources/trackers/c-tracker/index.md)                                    |    ${versions.cppTracker}     |
+| [Unity](/docs/sources/trackers/unity-tracker/index.md)                              |   ${versions.unityTracker}    |
+| [Lua](/docs/sources/trackers/lua-tracker/index.md)                                  |    ${versions.luaTracker}     |
 `} remarkPlugins={[remarkGfm]} />
 
 ### Data Models
@@ -188,20 +188,20 @@ If you are using Snowplow BDP, you don’t need to install Snowplow Mini yoursel
 :::
 
 <ReactMarkdown children={`
-Application | Latest version
-:--|:-:
-[Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/what-is-micro/index.md) | ${versions.snowplowMicro}
-[Snowplow Mini](/docs/api-reference/snowplow-mini/usage-guide/index.md) | ${versions.snowplowMini}
+| Application                                                                                    |      Latest version       |
+| :--------------------------------------------------------------------------------------------- | :-----------------------: |
+| [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/what-is-micro/index.md) | ${versions.snowplowMicro} |
+| [Snowplow Mini](/docs/api-reference/snowplow-mini/usage-guide/index.md)                        | ${versions.snowplowMini}  |
 `} remarkPlugins={[remarkGfm]} />
 
 ### Analytics SDKs
 
 <ReactMarkdown children={`
-SDK | Latest version
-:--|:-:
-[Scala](/docs/api-reference/analytics-sdk/analytics-sdk-scala/index.md) | ${versions.analyticsSdkScala}
-[Javascript](/docs/api-reference/analytics-sdk/analytics-sdk-javascript/index.md) | ${versions.analyticsSdkJavascript}
-[Python](/docs/api-reference/analytics-sdk/analytics-sdk-python/index.md) | ${versions.analyticsSdkPython}
-[.NET](/docs/api-reference/analytics-sdk/analytics-sdk-net/index.md) | ${versions.analyticsSdkDotNet}
-[Go](/docs/api-reference/analytics-sdk/analytics-sdk-go/index.md) | ${versions.analyticsSdkGo}
+| SDK                                                                               |           Latest version           |
+| :-------------------------------------------------------------------------------- | :--------------------------------: |
+| [Scala](/docs/api-reference/analytics-sdk/analytics-sdk-scala/index.md)           |   ${versions.analyticsSdkScala}    |
+| [Javascript](/docs/api-reference/analytics-sdk/analytics-sdk-javascript/index.md) | ${versions.analyticsSdkJavascript} |
+| [Python](/docs/api-reference/analytics-sdk/analytics-sdk-python/index.md)         |   ${versions.analyticsSdkPython}   |
+| [.NET](/docs/api-reference/analytics-sdk/analytics-sdk-net/index.md)              |   ${versions.analyticsSdkDotNet}   |
+| [Go](/docs/api-reference/analytics-sdk/analytics-sdk-go/index.md)                 |     ${versions.analyticsSdkGo}     |
 `} remarkPlugins={[remarkGfm]} />

@@ -277,3 +277,42 @@ Uri decoratedLink = Snowplow.getDefaultTracker().decorateLink(link, new CrossDev
 
   </TabItem>
 </Tabs>
+
+## Session behavior on app restarts
+
+By default, each time the mobile app restarts (or when a new tracker instance is created), a new session is started regardless of whether the previous session timed out or not.
+
+Since version 6.2 of the iOS and Android trackers, there is an option to continue the previously persisted session when the app restarts.
+The previous session is only continued in case the app is restarted within the configured session timeout interval.
+The option can be configured using `SessionConfiguration`:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="ios" label="iOS" default>
+
+```swift
+let sessionConfig = SessionConfiguration()
+    .continueSessionOnRestart(true)
+```
+
+  </TabItem>
+  <TabItem value="android" label="Android (Kotlin)">
+
+```kotlin
+val sessionConfig = SessionConfiguration()
+    .continueSessionOnRestart(true)
+```
+
+  </TabItem>
+  <TabItem value="android-java" label="Android (Java)">
+
+```java
+SessionConfiguration trackerConfig = new SessionConfiguration()
+    .continueSessionOnRestart(true);
+```
+
+  </TabItem>
+</Tabs>
+
+With the option enabled, every session update is persisted to UserDefaults or shared preferences storage.
+In case it's disabled, only session changes are persisted to UserDefaults.
+This means that there is more overhead when the option is enabled.

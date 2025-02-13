@@ -88,6 +88,7 @@ Snowplow.createTracker(namespace: "appTracker", endpoint: "https://snowplow-coll
       foregroundTimeout: Measurement(value: 30, unit: .minutes),
       backgroundTimeout: Measurement(value: 30, unit: .minutes)
   )
+      .continueSessionOnRestart(false)
 }
 ```
 

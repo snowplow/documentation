@@ -43,7 +43,7 @@ window.snowplow(
 );
 ```
 
-### Track user engagement time
+### Track page views and user engagement time
 
 We want to understand how long a product is viewed for in order to determine the which product each customer is paying the most attention to. 
 
@@ -60,28 +60,25 @@ snowplow('enableActivityTracking', {
   minimumVisitLength: 5,
   heartbeatDelay: 5
 });
+
+snowplow('trackPageView');
 ```
 
-### Track page views with the product context
+### Track product views
 
-After setting up activity tracking, implement the page view tracking with enhanced ecommerce context:
-
+Implement the product view tracking when a product is viewed. This will create a column in the warehouse dedicated to storing information on viewed products.
+`
 ```javascript
 var floatPrice = parseFloat({{productPrice}});
 
-snowplow('trackPageView', {
-  context: [{
-    schema: "iglu:com.snowplowanalytics.snowplow.ecommerce/product/jsonschema/1-0-0",
-    data: {
-      id: {{productId}},
-      name: {{productName}},
-      brand: {{productBrand}},
-      category: {{productCategory}},
-      price: floatPrice,
-      currency: {{currency}},
-      variant: {{productVariantTitle}}
-    }
-  }]
+  snowplow('trackProductView', {
+    id: {{productId}},
+    name: {{productName}},
+    brand: {{productBrand}},
+    category: {{productCategory}},
+    price: price,
+    currency: {{currency}},
+    variant: {{productVariantTitle}}
 });
 ```
 

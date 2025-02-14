@@ -16,6 +16,7 @@ SELECT
     page_urlpath AS product_id, 
     event_name,
     page_title,
+    unstruct_event_com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1,
     contexts_com_snowplowanalytics_snowplow_ecommerce_product_1,
     contexts_com_snowplowanalytics_snowplow_web_page_1
 FROM DATABASE.ATOMIC.EVENTS
@@ -23,6 +24,9 @@ WHERE
     DATE(load_tstamp) = CURRENT_DATE()
 ORDER BY load_tstamp DESC;
 ```
+
+The output of this query should be similar to below: 
+![Atomic Events](images/retl-atomic-events.png)
 
 ## Identifying most viewed but not added-to-cart products
 
@@ -81,6 +85,8 @@ WHERE
     b.time_engaged_in_s IS NULL 
     AND a.email IS NOT NULL;
 ```
+The output of this query should be similar to below: 
+![Aggregated Query](images/retl-aggregated-query.png)
 
 ## Next step
 

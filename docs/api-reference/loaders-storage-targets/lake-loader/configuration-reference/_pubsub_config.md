@@ -3,12 +3,8 @@
     <td>Required, e.g. <code>projects/myproject/subscriptions/snowplow-enriched</code>. Name of the Pub/Sub subscription with the enriched events</td>
 </tr>
 <tr>
-    <td><code>input.parallelPullCount</code></td>
-    <td>Optional. Default value 3. Number of threads used internally by the pubsub client library for fetching events</td>
-</tr>
-<tr>
-    <td><code>input.maxAckExtensionPeriod</code></td>
-    <td>Optional. Default value <code>1 hour</code>. For how long the pubsub client library will continue to re-extend the ack deadline of an unprocessed event.</td>
+    <td><code>input.parallelPullFactor</code></td>
+    <td>Optional. Default value 0.5. <code>parallelPullFactor * cpu count</code> will determine the number of threads used internally by the Pub/Sub client library for fetching events</td>
 </tr>
 <tr>
     <td><code>input.durationPerAckExtension</code></td>

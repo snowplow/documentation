@@ -22,7 +22,7 @@ Additionally, you can track custom entities along with the events.
 :::info Example app
 To illustrate the tracked events and entities, you can visit a React example app that showcases the tracked media events and entities live as you watch a video.
 
-[Visit the app here.](https://snowplow-incubator.github.io/snowplow-javascript-tracker-examples/media)
+[Visit the app here.](https://snowplow-industry-solutions.github.io/snowplow-javascript-tracker-examples/media)
 Source code for the app is [available here.](https://github.com/snowplow-industry-solutions/snowplow-javascript-tracker-examples/tree/master/react)
 :::
 

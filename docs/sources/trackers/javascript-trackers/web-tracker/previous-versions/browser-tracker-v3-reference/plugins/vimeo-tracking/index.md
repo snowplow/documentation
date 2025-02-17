@@ -25,7 +25,7 @@ To illustrate the tracked [events](/docs/fundamentals/events/index.md) and [enti
 
 There are examples for both the [iframe](https://snowplow-incubator.github.io/snowplow-javascript-tracker-examples/vimeoIframe) and [player](https://snowplow-incubator.github.io/snowplow-javascript-tracker-examples/vimeoPlayer) methods of tracking a Vimeo video.
 
-Source code for the app is [available here](https://github.com/snowplow-incubator/snowplow-javascript-tracker-examples).
+Source code for the app is [available here](https://github.com/snowplow-industry-solutions/snowplow-javascript-tracker-examples).
 :::
 
 ## Basic Usage
@@ -132,7 +132,7 @@ import { VimeoEvent } from '@snowplow/browser-plugin-vimeo-tracking'
 startVimeoTracking({
   id,
   video,
-  captureEvents: [VimeoEvent.Play, VimeoEvent.Pause], 
+  captureEvents: [VimeoEvent.Play, VimeoEvent.Pause],
 })
 ```
 
@@ -142,7 +142,7 @@ As the Vimeo plugin uses Snowplow Media internally, for more granular control ov
 
 For example, if you wish to include additional behavior when a video is paused, you can create callback on the `pause` event of an instance of a Vimeo player.
 
-:::note 
+:::note
 
 In the following example, ensure you aren't passing the `pause` event to the `startVimeoTracking` function, as this will result in the event being tracked twice.
 

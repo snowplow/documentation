@@ -11,8 +11,26 @@ import Link from '@docusaurus/Link';
     <td>Optional. Default value <code>1 second</code>.  Events are emitted to BigQuery after a maximum of this duration, even if the <code>maxBytes</code> size has not been reached</td>
 </tr>
 <tr>
-    <td><code>batching.uploadConcurrency</code></td>
-    <td>Optional. Default value 3.  How many batches can we send simultaneously over the network to BigQuery</td>
+    <td><code>batching.writeBatchConcurrency</code></td>
+    <td>Optional. Default value 2.  How many batches can we send simultaneously over the network to BigQuery</td>
+</tr>
+<tr>
+    <td><code>cpuParallelism.parseBytesFactor</code></td>
+    <td>
+      Optional. Default value <code>0.1</code>.
+      Controls how many batches of bytes we can parse into enriched events simultaneously.
+      E.g. If there are 2 cores and <code>parseBytesFactor = 0.1</code> then only one batch gets processed at a time.
+      Adjusting this value can cause the app to use more or less of the available CPU.
+    </td>
+</tr>
+<tr>
+    <td><code>cpuParallelism.transformFactor</code></td>
+    <td>
+      Optional. Default value <code>0.75</code>.
+      Controls how many batches of enriched events we can transform into BigQuery format simultaneously.
+      E.g. If there are 4 cores and <code>transformFactor = 0.75</code> then 3 batches gets processed in parallel.
+      Adjusting this value can cause the app to use more or less of the available CPU.
+    </td>
 </tr>
 <tr>
     <td><code>retries.setupErrors.delay</code></td>

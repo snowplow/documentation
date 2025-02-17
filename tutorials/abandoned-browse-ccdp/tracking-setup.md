@@ -5,7 +5,7 @@ title: Tracking Setup
 
 ## Initialize Snowplow JavaScript tracker
 
-To begin, we will set up Snowplow tracking on your ecommerce website. We assume that you already have a Snowplow pipeline. Please refer to the [Introduction](/tutorials/abandoned-browse-ccdp/installation) for more information on the different options. 
+To begin, we will set up Snowplow tracking on your ecommerce website. In this section we will capture what products a customer views, how long they view them for and if they add them to their cart. We assume that you already have a Snowplow pipeline. If you do not yet have a pipeline running, please return to the [Introduction](/tutorials/abandoned-browse-ccdp/introduction) information on the different deployment options. 
 
 ![website](images/retl-shopfront.png)
 
@@ -64,51 +64,50 @@ snowplow('enableActivityTracking', {
 snowplow('trackPageView');
 ```
 
+### Test your tracking
+
+To verify your tracking implementation, use the [Snowplow Chrome Extension](https://chrome.google.com/webstore/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm). This extension allows you to inspect Snowplow events in real-time as they are sent from your website. Navigate to your product pages and add items to cart while monitoring the extension to ensure events are firing correctly with all expected parameters. The extension will show you the full event payload including all contexts and properties, making it easy to debug your implementation.
+
+![Chrome Extension](images/retl-chrome-extension.png)
+
 ### Track product views
 
-Implement the product view tracking when a product is viewed. This will create a column in the warehouse dedicated to storing information on viewed products.
+Implement the product view tracking when a product is viewed. This will create a column in the warehouse dedicated to storing information on viewed products. Please ensure you the data type for each variable matches the example below.
 `
 ```javascript
-var floatPrice = parseFloat({{productPrice}});
-
   snowplow('trackProductView', {
-    id: {{productId}},
-    name: {{productName}},
-    brand: {{productBrand}},
-    category: {{productCategory}},
-    price: price,
-    currency: {{currency}},
-    variant: {{productVariantTitle}}
+    id: "12345",
+    name: "Baseball T",
+    brand: "Snowplow",
+    category: "apparel",
+    price: 200,
+    currency: "USD",
 });
 ```
 
 ### Track "add to cart" events
 
-After tracking page views, you can track "add to cart" events. Below is an example implementation:
+Track "add to cart" events so users that perform this action can be filtered out or be placed in a different cohort. Below is an example implementation, showing a single product being added to the cart:
 
 ```javascript
-var floatPrice = parseFloat({{productPrice}});
-var currentCartValue = parseFloat({{cartTotalValue}});
-var newTotalValue = floatPrice + currentCartValue;
-
-var product = [{
-  "id": {{productId}},
-  "name": {{productName}},
-  "price": floatPrice,
-  "brand": {{productBrand}},
-  "currency": {{currency}},
-  "category": {{productCategory}},
-  "variant": {{productVariantTitle}}
-}];
-
-window.snowplow("trackAddToCart", { 
-  products: product, 
-  total_value: newTotalValue, 
-  currency: {{currency}} 
+window.snowplow("trackAddToCart", {
+  products: [
+    {
+      id: "P125",
+      name: "Baseball T",
+      brand: "Snowplow",
+      category: "Mens/Apparel",
+      price: 200,
+      currency: "USD",
+    },
+  ],
+  total_value: 200,
+  currency: "USD",
 });
 ```
+![Add to cart](images/retl-add-to-cart.png)
 
-### Explanation of "add to cart" parameters
+### Explanation of parameters
 
 - **id**: the unique identifier for the product
 - **name**: the product's name
@@ -118,10 +117,6 @@ window.snowplow("trackAddToCart", {
 - **category**: the product's category or taxonomy
 - **variant**: the product variant (if applicable)
 - **total_value**: the updated total cart value after adding the product
-
-## Test your tracking
-
-To verify your tracking implementation, use the [Snowplow Chrome Extension](https://chrome.google.com/webstore/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm). This extension allows you to inspect Snowplow events in real-time as they are sent from your website. Navigate to your product pages and add items to cart while monitoring the extension to ensure events are firing correctly with all expected parameters. The extension will show you the full event payload including all contexts and properties, making it easy to debug your implementation.
 
 ## Next step
 

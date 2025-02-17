@@ -9,8 +9,8 @@ Next we will set up a Census sync to build an audience using our query from Snow
 
 1. Log into your Census account ([sign up if needed](https://www.getcensus.com/))
 2. Go to **Sources**
-3. Click "New Source" 
-4. Select Snowflake
+3. Click **New Source**
+4. Select **Snowflake**
 5. Enter your Snowflake connection details
 6. Test the connection and save
 
@@ -70,35 +70,35 @@ WHERE
 
 ## Set up the Census sync
 
-1. In Census, go to **Syncs** and click "Create New Sync"
+1. In Census, go to **Syncs** and click **Create New Sync**
 2. For the source:
-   - Select your Snowflake connection
-   - Configure the authentication method
+   - select your Snowflake connection
+   - configure the authentication method
 
 3. Configure the dataset
-    - select dataset from the menu
+    - select **Datasets** from the menu
     - select the Snowflake source
     - enter the SQL query above
-    - click "Preview" and ensure it returns data
+    - click **Preview** and ensure it returns data
 
 ![Census Dataset](images/retl-datasets.png)
 
 4. Configure the audience segment:
-    - select segments from the menu
-    - click "New Segment"
-    - under "Segment Of", select the dataset from the previous step
+    - select **Segments** from the menu
+    - click **New Segment**
+    - under **Segment Of**, select the dataset from the previous step
     - add filters to the segment based on the image below
     - click preview to confirm that the correct data is being returned
 
 ![Census Sync](images/retl-census.png)
 
-5. Configure the sync settings:
-    - select syncs from the menu
-    - click "New Sync"
-    - under source, select the audience from the previous step
-    - under destination, select Braze
+5. Configure the sync settings to send data from our audience to Braze:
+    - select **Syncs** from the menu
+    - click **New Sync**
+    - under **Source**, select the audience from the previous step
+    - under **Destination**, select Braze
     - configure the mapping as shown in the image below
-    - click "Run Now"
+    - click **Run Now**
 
 ![Census Mapping](images/retl-census-mapping.png)
 

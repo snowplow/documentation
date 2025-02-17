@@ -8,22 +8,22 @@ This guide will walk you through setting up and testing an abandoned browse camp
 ## Setting up the campaign
 
 1. Log into your Braze dashboard
-2. Navigate to **campaigns** and click "Create campaign"
-3. Select "Email" as the channel
+2. Navigate to **campaigns** and click **Create campaign**
+3. Select **Email** as the channel
 4. Name your campaign (e.g. "Abandoned browse - product reminder")
 
 ![Create Campaign](images/retl-create-campaign.png)
 
 ## Configure campaign trigger
 
-1. In the "Delivery" section, select "Action-Based"
+1. In the **Delivery** section, select **Action-Based**
 2. Set up the trigger criteria
 
 ## Create email template
 
 ![Braze Campaign Builder](images/retl-braze.png)
 
-1. Click "Edit Campaign" in the campaign builder and click "Edit Email Body"
+1. Click **Edit Campaign** in the campaign builder and click **Edit Email Body**
 2. Design your email using Braze's visual editor:
    ```html
    Subject: Don't miss out on {{custom_attribute.${product}}}!
@@ -63,11 +63,11 @@ This guide will walk you through setting up and testing an abandoned browse camp
 
 ## Testing the campaign
 
-1. Return to "Edit Campaign" and click "Preview" at the bottom of the page
-   - select "Search User" under preview message as user
+1. Return to **Edit Campaign** and click **Preview** at the bottom of the page
+   - select **Search User** under preview message as user
    - if the user can't be found, ensure Census has synced product view data for this user
    - verify custom attributes are populated correctly in the email
-   - click "Send Test" to send the test email
+   - click **Send Test** to send the test email
 
 2. Verify email content:
    - check all personalization renders correctly

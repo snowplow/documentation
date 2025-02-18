@@ -12,7 +12,7 @@ This guide will walk you through setting up and testing an abandoned browse camp
 3. Select **Email** as the channel
 4. Name your campaign (e.g. "Abandoned browse - product reminder")
 
-![Create Campaign](images/retl-create-campaign.png)
+![Create Campaign](images/retl-braze-create-campaign.png)
 
 ## Configure campaign trigger
 
@@ -21,7 +21,7 @@ This guide will walk you through setting up and testing an abandoned browse camp
 
 ## Create email template
 
-![Braze Campaign Builder](images/retl-braze.png)
+![Braze Campaign Builder](images/retl-braze-preview.png)
 
 1. Click **Edit Campaign** in the campaign builder and click **Edit Email Body**
 2. Design your email using Braze's visual editor:

@@ -11,7 +11,7 @@ Next we will set up a Census sync to build an audience using our query from Snow
 2. Go to **Sources**
 3. Click **New Source**
 4. Select **Snowflake**
-5. Enter your Snowflake connection details
+5. Enter your Snowflake connection details. Refer to the [documentation](https://docs.getcensus.com/sources/available-sources/snowflake) if you have any questions
 6. Test the connection and save
 
 ## Create your abandoned browse audience
@@ -75,7 +75,7 @@ WHERE
    - select your Snowflake connection
    - configure the authentication method
 
-3. Configure the dataset
+3. Configure the dataset:
     - select **Datasets** from the menu
     - select the Snowflake source
     - enter the SQL query above

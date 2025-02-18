@@ -8,7 +8,7 @@ This guide will walk you through setting up and testing an abandoned browse camp
 ## Setting up the campaign
 
 1. Log into your Braze dashboard
-2. Navigate to **campaigns** and click **Create campaign**
+2. Navigate to **Campaigns** and click **Create campaign**
 3. Select **Email** as the channel
 4. Name your campaign (e.g. "Abandoned browse - product reminder")
 

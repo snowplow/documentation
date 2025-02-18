@@ -66,13 +66,13 @@ snowplow('trackPageView');
 
 ### Test your tracking
 
-To verify your tracking implementation, use the [Snowplow Chrome Extension](https://chrome.google.com/webstore/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm). This extension allows you to inspect Snowplow events in real-time as they are sent from your website. Navigate to your product pages and add items to cart while monitoring the extension to ensure events are firing correctly with all expected parameters. The extension will show you the full event payload including all contexts and properties, making it easy to debug your implementation.
+To verify your tracking implementation, use the [Snowplow Chrome Extension](https://chrome.google.com/webstore/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm). This extension allows you to inspect Snowplow events in real-time as they are sent from your website. Navigate to your product pages and add items to cart while monitoring the extension to ensure events are firing correctly with all expected parameters. The extension will show you the full event payload including all entities and properties, making it easy to debug your implementation.
 
 ![Chrome Extension](images/retl-chrome-extension.png)
 
 ### Track product views
 
-Implement the product view tracking when a product is viewed. This will create a column in the warehouse dedicated to storing information on viewed products. Please ensure you the data type for each variable matches the example below.
+Implement the product view tracking when a product is viewed. This will create a column in the warehouse dedicated to storing information on viewed products. Please ensure you use the correct data type for each variable. Refer to the [ecommerce tracker documentation](https://docs.snowplow.io/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce) for further information. 
 `
 ```javascript
   snowplow('trackProductView', {
@@ -87,7 +87,7 @@ Implement the product view tracking when a product is viewed. This will create a
 
 ### Track "add to cart" events
 
-Track "add to cart" events so users that perform this action can be filtered out or be placed in a different cohort. Below is an example implementation, showing a single product being added to the cart:
+Track "add to cart" events so users that perform this action can be filtered out or be placed in a different cohort. Below is an example implementation, showing a single product being added to the cart.
 
 ```javascript
 window.snowplow("trackAddToCart", {
@@ -115,7 +115,6 @@ window.snowplow("trackAddToCart", {
 - **brand**: the brand associated with the product
 - **currency**: the currency code (e.g., USD, EUR)
 - **category**: the product's category or taxonomy
-- **variant**: the product variant (if applicable)
 - **total_value**: the updated total cart value after adding the product
 
 ## Next step

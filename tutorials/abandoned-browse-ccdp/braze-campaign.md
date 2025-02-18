@@ -33,7 +33,7 @@ This guide will walk you through setting up and testing an abandoned browse camp
    <a href="{{custom_attribute.${product_url}}}?abandonedEmail=true">
      You spent {{custom_attribute.${TIME_ENGAGED_IN_S}}} seconds checking it out.... Why not check it out once more before it sells out?!!
    </a>
-   ``
+   ```
 
 3. Add personalization:
    - product name using `{{custom_attribute.${product}}}`

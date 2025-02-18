@@ -1,24 +1,15 @@
-At the high level, BigQuery loader reads enriched Snowplow events in real time and loads them in BigQuery using the Storage Write API.
+```mdx-code-block
+import Mermaid from '@theme/Mermaid';
+import Link from '@docusaurus/Link';
+```
+<p>The BigQuery Streaming Loader on {props.cloud} is a fully streaming application that continually pulls events from {props.stream} and writes to BigQuery using the <Link to="https://cloud.google.com/bigquery/docs/write-api">BigQuery Storage API</Link>.</p>
 
-```mermaid
+<Mermaid value={`
 flowchart LR
-  stream[["<b>Enriched events</b>\n(Pub/Sub stream)"]]
-  loader{{"<b>BigQuery Loader</b>\n(Loader, Mutator and Repeater apps)"}}
-  subgraph BigQuery
+  stream[["<b>Enriched Events</b>\n(${props.stream} stream)"]]
+  loader{{"<b>BigQuery Loader</b>"}}
+  subgraph bigquery [BigQuery]
     table[("<b>Events table</b>")]
   end
-  stream-->loader-->BigQuery
-```
-
-BigQuery loader consists of three applications: Loader, Mutator and Repeater. The following diagram illustrates the interaction between them and BigQuery:
-
-```mermaid
-sequenceDiagram
-  loop
-    Note over Loader: Read a small batch of events
-    Loader-->>+Mutator: Communicate event types (via Pub/Sub)
-    Loader->>BigQuery: Send events using the Storage Write API
-    Mutator-->>-BigQuery: Adjust column types if necessary
-    Repeater->>BigQuery: Resend events that failed<br/>because columns were not up to date
-  end
-```
+  stream-->loader-->|BigQuery Storage API|bigquery
+`}/>

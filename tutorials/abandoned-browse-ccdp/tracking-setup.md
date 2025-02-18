@@ -66,13 +66,13 @@ snowplow('trackPageView');
 
 ### Test your tracking
 
-To verify your tracking implementation, use the [Snowplow Chrome Extension](https://chrome.google.com/webstore/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm). This extension allows you to inspect Snowplow events in real-time as they are sent from your website. Navigate to your product pages and add items to cart while monitoring the extension to ensure events are firing correctly with all expected parameters. The extension will show you the full event payload including all entities and properties, making it easy to debug your implementation.
+To verify your tracking implementation, use the [Snowplow Chrome extension](https://chrome.google.com/webstore/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm). This extension allows you to inspect Snowplow events in real-time as they are sent from your website. Navigate to your product pages and add items to cart while monitoring the extension to ensure events are firing correctly with all expected parameters. The extension will show you the full event payload including all entities and properties, making it easy to debug your implementation.
 
 ![Chrome Extension](images/retl-chrome-extension.png)
 
 ### Track product views
 
-Implement the product view tracking when a product is viewed. This will create a column in the warehouse dedicated to storing information on viewed products. Please ensure you use the correct data type for each variable. Refer to the [ecommerce tracker documentation](https://docs.snowplow.io/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce) for further information. 
+Implement the product view tracking when a product is viewed. This will create a column in the warehouse dedicated to storing information on viewed products. Please ensure you use the correct data type for each variable. Refer to the [ecommerce documentation](https://docs.snowplow.io/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce) for further information. 
 `
 ```javascript
   snowplow('trackProductView', {
@@ -105,6 +105,9 @@ window.snowplow("trackAddToCart", {
   currency: "USD",
 });
 ```
+
+Once add to cart events are tracked, the event should look like this in your Snowplow Chrome extension.
+
 ![Add to cart](images/retl-add-to-cart.png)
 
 ### Explanation of parameters

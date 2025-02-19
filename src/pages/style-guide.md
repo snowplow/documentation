@@ -193,7 +193,8 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     | on top of that |
     | quickly        |
 
-- Link to existing pages, such as those in the [Fundamentals](/docs/fundamentals/) docs section, rather than explaining concepts again
+- Don't explain concepts, link to existing pages about them such as those in the [Fundamentals](/docs/fundamentals/) docs section
+  - This includes events, entities and context, schemas, enrichment, the structure of the data, failed events, etc.
 
 ### Voice
 - Use active rather than passive voice

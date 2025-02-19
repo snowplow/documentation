@@ -164,6 +164,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
 ### Tone
 - For **documentation**, **release notes**, and the **main website**, use a calm, encouraging, professional tone
   - Contractions such as "don't" are fine
+  - Try not to stress out the reader with cautions and warnings
 - For **blog posts**, a more casual and friendly tone is welcome
 
     | ✅           | ❌                              |
@@ -254,7 +255,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     | Snowplow plans to |
     | latest            |
 
-- For **migration guides** and **release notes**, it's fine to compare to the past, or make reference to already-announced upcoming features
+- For **migration guides**, **release notes**, and all **other writing**, it's fine to compare to the past, or make reference to already-announced upcoming features
   - Referring to previous functionality is the point of migration guides, after all
 
     | ✅                        |

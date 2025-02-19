@@ -3,19 +3,36 @@
 This guide is for anyone writing for Snowplow. Please follow these rules so that all Snowplow content is consistent and easy to read.
 
 This includes writings such as:
-- Technical product documentation, including the [documentation site](/docs/) (created with Docusaurus), public [Knowledge Base](https://support.snowplow.io/hc/en-us) articles (Zendesk), GitHub READMEs, etc.
+- Technical product documentation, including:
+  - The main [documentation site](/docs/) (created with Docusaurus),
+  - Public [Knowledge Base](https://support.snowplow.io/hc/en-us) articles (Zendesk)
+  - GitHub READMEs
 - Other API documentation generated from code documentation, by tools such as Swagger or API Extractor
 - Release notes
 - Text within the Console
 - Blog posts
 - Other marketing content for the [main Snowplow website](https://snowplow.io/)
 
-If you're using an AI tool to help you write, provide it with [the contents of this page](https://github.com/snowplow/documentation/blob/style_guide/src/pages/style-guide.md) [TODO update link before publishing] and instruct it to follow this style guide.
-
 This guide is linked from the [docs GitHub README](https://github.com/snowplow/documentation).
 
-## Using this guide
+## Using this guide with an AI tool
 
+If you're using an LLM AI tool to help you write, provide it with this guide.
+
+The guide file is found [here](https://github.com/snowplow/documentation/blob/main/src/pages/style-guide.md).
+Depending which AI you are using, you will need to copy the file contents, or save the file.
+
+TODO labelled scrneeshot
+
+### Writing new content
+
+Tell the AI that it should follow this style guide.
+
+### Editing existing content
+
+Provide the AI with both the style guide and the content you want to update.
+
+It might do a reasonable job of updating things like formatting and spelling (then again, it might not). It is less likely to do a good job of improving less easily-defined things, such as replacing an unnecessary explanation of a concept with a link to the Fundamentals page.
 
 ## Grammar and spelling
 

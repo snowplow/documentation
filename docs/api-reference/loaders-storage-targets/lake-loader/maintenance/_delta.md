@@ -5,7 +5,7 @@ The Snowplow Lake Loader **does not** automatically run the maintenance tasks de
 
 ## Compact data files
 
-We recommend that you schedule a compaction job run once per day.
+We recommend that you schedule a compaction job to run once per day.
 
 Your daily compaction job should operate on files that were loaded in the previous calendar day, i.e. the last completed timestamp partition.  For example, if you run the job via SQL, then use a `WHERE` clause on `load_tstamp_date < current_date()`:
 

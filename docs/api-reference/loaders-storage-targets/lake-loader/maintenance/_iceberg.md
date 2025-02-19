@@ -38,7 +38,7 @@ CALL catalog_name.system.rewrite_data_files(
 The `rewriteDataFiles` action has two benefits for Snowplow data:
 
 1. Queries are more efficient when the underlying parquet files are large.  After you compact your files, you will benefit from this whenever you run queries over your historic data, i.e. not just the most recently loaded events.
-2. When there are fewer data files, then the size of the table's manifest files are also smaller.  This reduces the overhead of creating a new manifest file, and so it improves the performance of the Lake Loader when committing new events into the lake.  This becomes especially important as your lake grows in size over time.
+2. When there are fewer data files, the size of the table's manifest files is smaller.  This reduces the overhead of creating a new manifest file, and thus improves the performance of the Lake Loader when committing new events into the lake.  This becomes especially important as your lake grows in size over time.
 
 ## Remove orphan files
 

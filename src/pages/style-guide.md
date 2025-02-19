@@ -3,11 +3,11 @@
 This guide is for anyone writing for Snowplow. Please follow these rules so that all Snowplow content is consistent and easy to read.
 
 This includes writings such as:
-- Technical product documentation, including the [documentation site](/docs/), public [Knowledge Base](https://support.snowplow.io/hc/en-us) articles, GitHub READMEs, dbt package documentation, etc.
+- Technical product documentation, including the [documentation site](/docs/), public [Knowledge Base](https://support.snowplow.io/hc/en-us) articles, GitHub READMEs, etc.
 - Other API documentation generated from code documentation, by tools such as Swagger or API Extractor
-- Blog posts
 - Release notes
 - Text within the Console
+- Blog posts
 - Other marketing content for the [main Snowplow website](https://snowplow.io/)
 
 Some rules, annotated with "➕", are different depending on the purpose of the writing.
@@ -87,6 +87,11 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
 
 ### Titles and headings ➕
 - Headings never finish with punctuation (no full stops, colons, etc.)
+- Use only heading levels 1, 2 and 3
+- The title of the page should have header level 1 (#)
+- Subheadings should be H2 (##), with any sections under that as H3 (###)
+- Do not use smaller headings - they look confusingly like normal text
+  - Docusaurus doesn't include smaller headings in the table of contents
 - For **documentation** and **release notes**, use sentence case for titles and headings
 
     | ✅                               | ❌                               |
@@ -123,12 +128,13 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     | an `event_id` UUID string                |
     | tracking a `ScreenView` event            |
 
-### Lists
+### Lists (bullets and numbers)
 - Introduce the whole list with a sentence ending in a colon
 - Start each item with a capital letter
-- For bullet points and numbered lists, don't put a full stop at the end of the sentence
+- Don't put a full stop at the end of the sentence
 - Exception: list items that have multiple sentences within them should have full stops at the end
 - Lists should be consistent - either single sentence (no full stop) or multiple sentences (with full stop)
+- There should be no more than seven items in the list
 - When using a colon to make a kind of list item header, the subsequent sentence starts lowercase, like when using colons normally
   - Avoid using hyphens for list item "headers"
 
@@ -277,7 +283,9 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
 ### Diagrams and images
 - Adding diagrams and images is encouraged
 - Diagrams and images should have white backgrounds
-- For images, use `.webp` or `.png` format
+- For images, use `.webp` (preferred - the file size is smaller) or `.png` format
+- Images should be a sensible size (max 2000px x 500px)
+- Highlighting the relevant part of an image is recommended
 - For **documentation** diagrams, [Mermaid](http://mermaid.js.org/#/) code is recommended as they adjust automatically
 
 ## Inclusive language
@@ -558,18 +566,12 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
 
 
 ## Markdown formatting
-The rules in this section apply only to the main **documentation** site.
 
 ### Bullet point lists
 - It's ok to use `-` or `*` for the list bullet points, since they come out looking the same
 
-### Headings
-- Use only heading levels 1, 2 and 3
-- The title of the page should have header level 1 (#)
-- Subheadings should be H2 (##), with any sections under that as H3 (###)
-- Do not use smaller headings as they look confusingly like normal text, and aren't included in the table of contents
-
 ### Admonitions
+- This applies to the main **documentation** site only
 - Highlight blocks of text using the built-in [Docusaurus admonitions](https://docusaurus.io/docs/markdown-features/admonitions) feature
 - Use admonitions sparingly; having multiple within one page is overwhelming
 - Set a custom heading where possible
@@ -590,7 +592,7 @@ The rules in this section apply only to the main **documentation** site.
 ### Code
 - Use code blocks (triple backticks, <code>```</code>) for code examples
 - Specify the language next to the opening backticks, so that the code block is rendered correctly
-- If the rendering doesn't look right, make sure that the specified language is listed under `prism: additionalLanguages` in the `docusaurus.config.js` file
+- For the main **documentation** site only: if the rendering doesn't look right, make sure that the specified language is listed under `prism: additionalLanguages` in the `docusaurus.config.js` file
 
     | ✅                                                          |
     | ---------------------------------------------------------- |

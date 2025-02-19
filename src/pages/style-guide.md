@@ -3,14 +3,12 @@
 This guide is for anyone writing for Snowplow. Please follow these rules so that all Snowplow content is consistent and easy to read.
 
 This includes writings such as:
-- Technical product documentation, including the [documentation site](/docs/), public [Knowledge Base](https://support.snowplow.io/hc/en-us) articles, GitHub READMEs, etc.
+- Technical product documentation, including the [documentation site](/docs/) (created with Docusaurus), public [Knowledge Base](https://support.snowplow.io/hc/en-us) articles (Zendesk), GitHub READMEs, etc.
 - Other API documentation generated from code documentation, by tools such as Swagger or API Extractor
 - Release notes
 - Text within the Console
 - Blog posts
 - Other marketing content for the [main Snowplow website](https://snowplow.io/)
-
-Some rules, annotated with "➕", are different depending on the purpose of the writing.
 
 If you're using an AI tool to help you write, provide it with [the contents of this page](https://github.com/snowplow/documentation/blob/style_guide/src/pages/style-guide.md) [TODO update link before publishing] and instruct it to follow this style guide.
 
@@ -59,7 +57,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     |                        | set up credentials for your account |             |
 
 ## Formatting and punctuation
-### Quotation marks ➕
+### Quotation marks
 - Use double quotation marks (") rather than single (')
 
     | ✅                    | ❌                    |
@@ -85,7 +83,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     | ------------------------------------------------------------ | ----------------------------------------------------------- |
     | digital products, customer experiences, and fraud mitigation | digital products, customer experiences and fraud mitigation |
 
-### Titles and headings ➕
+### Titles and headings
 - Headings never finish with punctuation (no full stops, colons, etc.)
 - Use only heading levels 1, 2 and 3
 - The title of the page should have header level 1 (#)
@@ -160,7 +158,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     | User and Marketing Analytics visualization | User & Marketing Analytics visualization |
 
 ## Writing style
-### Tone ➕
+### Tone
 - For **documentation**, **release notes**, and the **main website**, use a calm, encouraging, professional tone
   - Contractions such as "don't" are fine
 - For **blog posts**, a more casual and friendly tone is welcome
@@ -194,7 +192,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     | -------------------------------------------------------------------------------- | ----------------------------------------------------------------------- |
     | Set up your tracking and send events. These events are received by the Collector | Set up your tracking and send events. The Collector receives the events |
 
-### Pronouns ➕
+### Pronouns
 - Refer to the reader directly as "you" (second-person pronoun) where possible
 
     | ✅                                   | ❌                                         |
@@ -226,7 +224,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     | we have fixed a bug        |
     | the Snowplow trackers      |
 
-### Timelessness ➕
+### Timelessness
 - For all **documentation** except for **migration guides**, stay within the current moment in time
     - We won't remember to come back and update it
     - The documentation is not an appropriate place to announce upcoming features
@@ -248,7 +246,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     | will be coming soon      |
     | currently                |
 
-### Exclamation marks ➕
+### Exclamation marks
 - For **documentation** and **release notes**, avoid exclamation marks
 
     | ✅                           | ❌                           |
@@ -262,7 +260,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     | ---------------------------------------------------- |
     | keep your data AI-ready from collection to delivery! |
 
-### Emojis ➕
+### Emojis
 - For most **documentation**, emojis can be used sparingly, to provide information
   - Emojis must not be used for decoration
 

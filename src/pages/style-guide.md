@@ -19,10 +19,10 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
 
 If you're using an LLM AI tool to help you write, provide it with this guide.
 
-The guide file is found [here](https://github.com/snowplow/documentation/blob/main/src/pages/style-guide.md).
+The style guide file is found [here](https://github.com/snowplow/documentation/blob/main/src/pages/style-guide.md).
 Depending which AI you are using, you will need to copy the file contents, or save the file.
 
-TODO labelled scrneeshot
+![github screenshot showing how to download the file](github_style_guide.webp)
 
 ### Writing new content
 

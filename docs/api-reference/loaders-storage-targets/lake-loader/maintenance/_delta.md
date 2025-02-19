@@ -1,7 +1,7 @@
 The [Delta documentation](https://docs.delta.io/latest/best-practices.html#-delta-compact-files) makes recommendations for running regular maintenance jobs to get the best performance from your lake.
 This guide expands on those recommendations specifically for your Snowplow events lake.
 
-The Snowplow Lake Loader does not automatically run the maintenance tasks described below.
+The Snowplow Lake Loader **does not** automatically run the maintenance tasks described below.
 
 ## Compact data files
 

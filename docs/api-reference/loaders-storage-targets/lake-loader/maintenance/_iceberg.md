@@ -10,7 +10,7 @@ The Snowplow Lake Loader is a continuously-running streaming loader, so it creat
 
 There are two benefits of expiring snapshots in your Snowplow lake:
 
-1. The snapshot metadata files can be much smaller, because the list of metadata files to track is much reduced.  This reduces the overhead of creating a new snapshot file, and so it improves the performance of the Lake Loader when committing new events into the lake.  This becomes especially important as your lake grows in size over time.
+1. The snapshot metadata files can be much smaller, because the list of metadata files to track is much smaller.  This reduces the overhead of creating a new snapshot file, and thus improves the performance of the Lake Loader when committing new events into the lake.  This becomes especially important as your lake grows in size over time.
 2. If you regularly run compaction jobs (see below) then you will amass lots of small parquet files, which have since been rewritten into larger parquet files.  By expiring snapshots, you will delete the redundant small data files, which will save you some storage cost.
 
 For example, if you run the action via a Spark SQL procedure:

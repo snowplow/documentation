@@ -14,6 +14,9 @@ If you're using an AI tool to help you write, provide it with [the contents of t
 
 This guide is linked from the [docs GitHub README](https://github.com/snowplow/documentation).
 
+## Using this guide
+
+
 ## Grammar and spelling
 
 ### US English
@@ -167,6 +170,19 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
     | ----------- | ------------------------------ |
     | press enter | make sure you press enter      |
     | specify     | you must be careful to specify |
+
+### Self-promotion
+- For **blog posts** and the **main website**, it's important to say how great Snowplow is
+- For **all other writing**, this is inappropriate
+  - Documentation must not sound like sales or marketing collateral
+- Blog posts should not be linked to from the **documentation**
+
+  | Marketing                                                | Documentation                               |
+  | -------------------------------------------------------- | ------------------------------------------- |
+  | stream your enhanced events effortlessly to destinations | stream your enhanced events to destinations |
+  | allows users to easily record                            | allows users to record                      |
+  | create events quickly and accurately                     | create events                               |
+  | we have the best features to do X                        | we do X                                     |
 
 ### Brevity
 - Explain the point as simply as possible, without any extra words or phrases that don't add meaningful information

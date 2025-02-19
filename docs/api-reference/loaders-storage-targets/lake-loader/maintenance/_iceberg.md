@@ -53,7 +53,7 @@ SET TBLPROPERTIES ('write.metadata.delete-after-commit.enabled'='true')
 ```
 :::
 
-As long as `delete-after-commit` is enabled in the table properties, the Snowplow Lake Loader should not create orphan files under normal circumstances.  But it is technically still possible for the loader to create orphan files under rare exceptional circumstances, e.g. transient network errors, or if the loader exits without completing graceful shutdown.  Orphan files do not negatively impact query performance or write performance.  But they do contribute to storage costs.
+As long as `delete-after-commit` is enabled in the table properties, the Snowplow Lake Loader should not create orphan files under normal circumstances.  But it is technically still possible for the loader to create orphan files under rare exceptional circumstances, e.g. transient network errors, or if the loader exits without completing a graceful shutdown.  Orphan files do not negatively impact query performance or write performance.  But they do contribute to storage costs.
 
 This action needs to list every file in the lake directory, and on large lakes that might be a very large number of files.  This is why we recommend to run it on an infrequent schedule.
 

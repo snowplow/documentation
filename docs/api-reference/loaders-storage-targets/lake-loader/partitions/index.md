@@ -19,4 +19,6 @@ If you run a query with a clause like `WHERE load_tstamp > ?`, then your query e
 
 If you often write queries over a single type of event, e.g. `WHERE event_name = 'add_to_cart'` then the query engine can do a very efficient query over the parquet files for the specific event.
 
-Furthermore, the Lake Loader has been optimized for writing into a lake with the default partitioning, and the loader will not perform so well with any other partitioning. For these reasons, we strongly advise that you do not change the partitioning structure of your lake.
+:::note
+The Lake Loader has been optimized for writing into a lake with the default partitioning, and the loader will not perform so well with any other partitioning. For these reasons, we strongly advise that you do not change the partitioning structure of your lake.
+:::

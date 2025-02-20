@@ -44,7 +44,7 @@ The `rewriteDataFiles` action has two benefits for Snowplow data:
 
 We recommend that you schedule the `removeOrphanFiles` Iceberg action to run once per month.
 
-:::warning delete-after-commit
+:::tip delete-after-commit
 Your Iceberg table should have `write.metadata.delete-after-commit.enabled=true` set in the table properties. If your Iceberg table was originally created by a Lake Loader older than version 0.7.0, then please run:
 
 ```sql

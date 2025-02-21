@@ -30,4 +30,4 @@ VACUUM <your_table>;
 
 Unreferenced data files do not negatively impact query performance or write performance.  But they do contribute to storage costs.
 
-Vacuum jobs need to list every file in the lake directory, and on large lakes that might be a very large number of files.  This is why we recommend to run it on an infrequent schedule.
+Vacuum jobs need to list every file in the lake directory. In large lakes, there might be a lot of files, requiring the job to use a lot of Spark compute resources. This is why we recommend to run it infrequently to offset this impact.

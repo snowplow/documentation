@@ -22,8 +22,8 @@ Additionally, you can track custom entities along with the events.
 :::info Example app
 To illustrate the tracked events and entities, you can visit a React example app that showcases the tracked media events and entities live as you watch a video.
 
-[Visit the app here.](https://snowplow-incubator.github.io/snowplow-javascript-tracker-examples/media)
-Source code for the app is [available here.](https://github.com/snowplow-incubator/snowplow-javascript-tracker-examples/tree/master/react)
+[Visit the app here.](https://snowplow-industry-solutions.github.io/snowplow-javascript-tracker-examples/media)
+Source code for the app is [available here.](https://github.com/snowplow-industry-solutions/snowplow-javascript-tracker-examples/tree/master/react)
 :::
 
 ### Media player events
@@ -843,7 +843,7 @@ mediaTracking.update(player, null, null);`}
 Having started a media tracking instance, you can use it to track media events as you receive them from the media player.
 
 Typically, you would subscribe to notifications from the media player (e.g., user clicks play, volume changes, content is buffering) with callbacks that would track the Snowplow events.
-For an example, see the code that subscribes for events from an HTML5 media player [here](https://github.com/snowplow-incubator/snowplow-javascript-tracker-examples/tree/master/react/src/components/video.jsx).
+For an example, see the code that subscribes for events from an HTML5 media player [here](https://github.com/snowplow-industry-solutions/snowplow-javascript-tracker-examples/tree/master/react/src/components/video.jsx).
 
 ### Providing additional information
 

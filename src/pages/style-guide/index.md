@@ -19,7 +19,7 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
 
 If you're using an LLM AI tool to help you write, provide it with this guide.
 
-The style guide file is found [here](https://github.com/snowplow/documentation/blob/main/src/pages/style-guide.md).
+The style guide file is found [here](https://github.com/snowplow/documentation/blob/main/src/pages/style-guide.md). TODO
 Depending which AI you are using, you will need to copy the file contents, or save the file.
 
 ![github screenshot showing how to download the file](github_style_guide.webp)
@@ -28,11 +28,39 @@ Depending which AI you are using, you will need to copy the file contents, or sa
 
 Tell the AI that it should follow this style guide.
 
+Example prompt:
+```text
+TODO
+```
+
 ### Editing existing content
 
 Provide the AI with both the style guide and the content you want to update.
 
-It might do a reasonable job of updating things like formatting and spelling (then again, it might not). It is less likely to do a good job of improving less easily-defined things, such as replacing an unnecessary explanation of a concept with a link to the Fundamentals page.
+You could ask the AI to create an edited version that is consistent with the style guide. It might do a reasonable job of updating things like formatting and spelling (then again, it might not). It is less likely to do a good job of improving less easily-defined things, such as replacing an unnecessary explanation of a concept with a link to a Fundamentals page.
+
+Example prompt:
+```text
+Here is an existing piece of documentation, and the company style guide. Update the documentation to be compliant with the style guide. Do a first pass looking for and improving on any larger structural or design problems. Then a second pass looking for more specific technical problems.
+
+Tell me any issues you find in the content. I expect to get a full updated version that aligns with the style guide.
+```
+
+Alternatively, ask it to go through all the style guide rules (everything at header level h3) and work out whether the content is compliant with the style guide or not. Tell it to list the rules which are not being followed, and the evidence for each. It will likely still miss some problems (and hallucinate others) but this can provide a useful checklist for improvements.
+
+Example prompt:
+```text
+Here is an existing piece of documentation, and the company style guide. Go through every section in the style guide (everything at header level h3 i.e. ###) and work out whether the documentation complies with it or not.
+
+If the page is not following that rule, tell me so and the evidence for your decision. I expect to get a list of some of the headings from the style guide, along with the associated evidence, and advice on updating the content.
+```
+
+## Examples
+
+Here are two pieces of older content that only partially follow the style guide. You can see the original text and the text that has been updated to match the style guide rules:
+
+* Documentation: [annotated screenshot](annotated-docs.webp); [original text](./style-guide/example-docs-before); [updated text](./style-guide/example-docs-after)
+* Blog post: [annotated screenshot](annotated-blog.webp); [original text](./style-guide/example-blog-before); [updated text](./style-guide/example-blog-after)
 
 ## Grammar and spelling
 
@@ -211,7 +239,7 @@ It might do a reasonable job of updating things like formatting and spelling (th
     | on top of that |
     | quickly        |
 
-- Don't explain concepts, link to existing pages about them such as those in the [Fundamentals](/docs/fundamentals/) docs section
+- Importantly, don't explain concepts: link to existing pages about them such as those in the [Fundamentals](/docs/fundamentals/) docs section
   - This includes events, entities and context, schemas, enrichment, the structure of the data, failed events, etc.
 
 ### Voice
@@ -415,14 +443,14 @@ It might do a reasonable job of updating things like formatting and spelling (th
 
 
 ### Pipeline components
-- Console is capitalized, and gets a definite article ("the")
-- It can also be called "the BDP Console" or "the Snowplow BDP Console"
-  - This is fine at the start of a piece of writing but feels overly wordy if used throughout, so maybe open with that if you like then just call it "the Console" subsequently
+- Console is capitalized, and doesn't have a definite article (no "the")
+- It can also be called "BDP Console" or "Snowplow BDP Console"
+  - This is fine at the start of a piece of writing but feels overly wordy if used throughout, so maybe open with that then just call it "Console" subsequently
 
-   | ✅                                  | ❌                              |
-   | ---------------------------------- | ------------------------------ |
-   | data structures in the Console     | data structures in the console |
-   | data structures in the BDP Console | data structures in Console     |
+   | ✅                              | ❌                                       |
+   | ------------------------------ | --------------------------------------- |
+   | data structures in Console     | data structures in the console          |
+   | data structures in BDP Console | data structures in the Snowplow Console |
 
 - Collector is capitalized, and gets a definite article ("the")
     - Use "the Collector endpoint" where possible for clarity - the reader might not know what we mean by "Collector", but they probably know what an endpoint is

@@ -40,5 +40,5 @@ Once you've completed this accelerator, you can:
 
 By leveraging Snowplow’s granular event data, you can proactively monitor data quality.
 
-Ready to get started? [Jump into the notebook](https://github.com/snowplow-industry-solutions/event-volume-anomaly-detection/blob/main/anomaly_detection.ipynb) and start detecting anomalies!
+Ready to get started? [Jump into the notebook](https://github.com/snowplow-industry-solutions/event-volume-anomaly-detection/tree/main/notebooks) and start detecting anomalies!
 

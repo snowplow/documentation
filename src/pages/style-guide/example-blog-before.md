@@ -16,11 +16,11 @@ Snowtype works by integrating with our Data Product Studio to retrieve custom sc
 ## New Features and Improvements
 ### Enhanced Client-Side Validation
 
-In addition to Snowtype’s strongly typed APIs, we've implemented [client-side validation](https://docs.snowplow.io/docs/collecting-data/code-generation/client-side-validation/?_gl=1*1xbm6e9*_gcl_au*NjE3NTk4MzcxLjE3MzI4ODgzMDY.) for the browser tracker, focusing on three key areas:
+In addition to Snowtype’s strongly typed APIs, we've implemented [client-side validation](https://docs.snowplow.io/docs/collecting-data/code-generation/client-side-validation/) for the browser tracker, focusing on three key areas:
 
 1. **Schema Validation**: Catches type mismatches between your data and defined schemas. For example, if your button_click event expects an id property of type string but receives a number, you'll get an immediate browser console warning‍
-2. **[Cardinality Rules](https://docs.snowplow.io/docs/collecting-data/code-generation/client-side-validation/?_gl=1*1xbm6e9*_gcl_au*NjE3NTk4MzcxLjE3MzI4ODgzMDY.#entity-cardinality-rules-validation-example) Validation**: Ensures the correct number of entities are included with each event. For instance, if a Product Click event is missing its associated product data, you'll receive an error notification, i.e Exactly 1, At least 1 Between 1 and 2‍
-3. **[Property Rules](https://docs.snowplow.io/docs/understanding-tracking-design/managing-event-specifications/ui/?_gl=1*1xbm6e9*_gcl_au*NjE3NTk4MzcxLjE3MzI4ODgzMDY.#properties) Validation**: Validates field values against predefined rules. If a product entity with a category attribute must be either "related" or "cross-sell" but receives "upsell", the system flags this immediately.
+2. **[Cardinality Rules](https://docs.snowplow.io/docs/collecting-data/code-generation/client-side-validation#entity-cardinality-rules-validation-example) Validation**: Ensures the correct number of entities are included with each event. For instance, if a Product Click event is missing its associated product data, you'll receive an error notification, i.e Exactly 1, At least 1 Between 1 and 2‍
+3. **[Property Rules](https://docs.snowplow.io/docs/understanding-tracking-design/managing-event-specifications/ui#properties) Validation**: Validates field values against predefined rules. If a product entity with a category attribute must be either "related" or "cross-sell" but receives "upsell", the system flags this immediately.
 
 ### Expanded Platform Support
 
@@ -32,9 +32,9 @@ Snowtype now supports nine different platforms and frameworks so its even easier
 * iOS (Swift)
 * Golang
 * Android (Kotlin)
-* [React Native](https://docs.snowplow.io/docs/collecting-data/code-generation/using-the-cli/?_gl=1*17lzjik*_gcl_au*NjE3NTk4MzcxLjE3MzI4ODgzMDY.) (TS)
-* [Flutter](https://docs.snowplow.io/docs/collecting-data/code-generation/using-the-cli/?_gl=1*17lzjik*_gcl_au*NjE3NTk4MzcxLjE3MzI4ODgzMDY.) (Dart)
-* [Google Tag Manager](https://docs.snowplow.io/docs/collecting-data/code-generation/working-with-gtm/?_gl=1*17lzjik*_gcl_au*NjE3NTk4MzcxLjE3MzI4ODgzMDY.) (JS)
+* [React Native](https://docs.snowplow.io/docs/collecting-data/code-generation/using-the-cli/) (TS)
+* [Flutter](https://docs.snowplow.io/docs/collecting-data/code-generation/using-the-cli/) (Dart)
+* [Google Tag Manager](https://docs.snowplow.io/docs/collecting-data/code-generation/working-with-gtm/) (JS)
 
 ### Developer Experience Improvements
 
@@ -49,7 +49,11 @@ We've enhanced the development experience with:
 
 Consider the difference in implementation. Previously, tracking an e-commerce event required manual schema references and property definitions.
 
+![code block](./blog-post-code1.png)
+
 With Snowtype, the same functionality is achieved with cleaner, more maintainable code that includes built-in validations and type safety.
+
+![code block](./blog-post-code2.png)
 
 ## Looking Forward
 

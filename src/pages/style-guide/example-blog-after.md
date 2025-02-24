@@ -8,33 +8,32 @@ Most event tracking technologies allow teams to send arbitrary data, leaving ana
 
 Instead, Snowplow delivers high-quality behavioral data to your stream or warehouse by strictly validating all incoming events against a predefined schema. However, we recognized that implementing correct tracking can be challenging. This is where Snowtype comes in, addressing two critical challenges:
 
-1. **Implementation Efficiency**: Developers can now use generated, type-safe code in their preferred programming language, complete with IDE and browser warnings, instead of manually writing tracking functions that reference event schemas.
-2. **Data Accuracy**: By generating strict tracking code upfront, Snowtype eliminates common data quality issues that typically arise from incorrect data transmission from applications.
+1. **Implementation efficiency**: developers can now use generated, type-safe code in their preferred programming language, complete with IDE and browser warnings, instead of manually writing tracking functions that reference event schemas.
+2. **Data accuracy**: by generating strict tracking code upfront, Snowtype eliminates common data quality issues that typically arise from incorrect data transmission from applications.
 
-Snowtype works by integrating with our Data Product Studio to retrieve custom schemas and data products - including our newly launched [git-backed data structures](https://snowplow.io/blog/introducing-git-backed-management). After retrieving these components, it automatically generates corresponding types/classes and tracking functions. But what sets Snowtype apart is its advanced handling of data products and event specifications: when event and entity Data Structures combine in interactions, Snowtype responds by crafting precise tracking APIs. These APIs are built to match specifications exactly, implementing both property and cardinality rules validation that work during compilation and as the code runs.
+Snowtype works by integrating with our Data Product Studio to retrieve custom schemas and data products - including our newly launched [git-backed data structures](https://snowplow.io/blog/introducing-git-backed-management). After retrieving these components, it automatically generates corresponding types/classes and tracking functions. But what sets Snowtype apart is its advanced handling of data products and event specifications: when event and entity data structures combine in interactions, Snowtype responds by crafting precise tracking APIs. These APIs are built to match specifications exactly, implementing both property and cardinality rules validation that work during compilation and as the code runs.
 
 ## New Features and Improvements
 ### Enhanced Client-Side Validation
 
-In addition to Snowtype’s strongly typed APIs, we've implemented [client-side validation](https://docs.snowplow.io/docs/collecting-data/code-generation/client-side-validation/?_gl=1*1xbm6e9*_gcl_au*NjE3NTk4MzcxLjE3MzI4ODgzMDY.) for the browser tracker, focusing on three key areas:
+In addition to Snowtype’s strongly typed APIs, we've implemented [client-side validation](https://docs.snowplow.io/docs/collecting-data/code-generation/client-side-validation/) for the browser tracker, focusing on three key areas:
 
-1. **Schema Validation**: Catches type mismatches between your data and defined schemas. For example, if your button_click event expects an id property of type string but receives a number, you'll get an immediate browser console warning‍
-2. **[Cardinality Rules](https://docs.snowplow.io/docs/collecting-data/code-generation/client-side-validation/?_gl=1*1xbm6e9*_gcl_au*NjE3NTk4MzcxLjE3MzI4ODgzMDY.#entity-cardinality-rules-validation-example) Validation**: Ensures the correct number of entities are included with each event. For instance, if a Product Click event is missing its associated product data, you'll receive an error notification, i.e `Exactly 1`, `At least 1` `Between 1 and 2‍`
-3. **[Property Rules](https://docs.snowplow.io/docs/understanding-tracking-design/managing-event-specifications/ui/?_gl=1*1xbm6e9*_gcl_au*NjE3NTk4MzcxLjE3MzI4ODgzMDY.#properties) Validation**: Validates field values against predefined rules. If a product entity with a category attribute must be either "related" or "cross-sell" but receives "upsell", the system flags this immediately.
+1. **[Schema validation](https://docs.snowplow.io/docs/data-product-studio/snowtype/client-side-validation/#schema-validation-example)** catches type mismatches between your data and defined schemas. For example, if your button_click event expects an `id` property of type `string` but receives a `number`, you'll get an immediate browser console warning‍.
+2. **[Cardinality rules validation](https://docs.snowplow.io/docs/collecting-data/code-generation/client-side-validation#entity-cardinality-rules-validation-example)** ensures the correct number of entities are included with each event, e.g. `Exactly 1`, `At least 1`, `Between 1 and 2‍`. For instance, if a product click event is missing its associated product data, you'll receive an error notification.
+3. **[Property rules validation](https://docs.snowplow.io/docs/understanding-tracking-design/managing-event-specifications/ui#properties)** validates field values against predefined rules. If a product entity with a category attribute must be either "related" or "cross-sell" but receives "upsell", the system flags this immediately.
 
 ### Expanded Platform Support
 
 Snowtype now supports nine different platforms and frameworks so its even easier to deploy across your entire app suite:
 
-* Browser (JavaScript/TypeScript)
-* Javascript
-* Node (JS/TS)
+* Web trackers: browser (JavaScript/TypeScript), JavaScript (JavaScript)
+* Node.js (JS/TS)
 * iOS (Swift)
-* Golang
+* Golang (Golang)
 * Android (Kotlin)
-* [React Native](https://docs.snowplow.io/docs/collecting-data/code-generation/using-the-cli/?_gl=1*17lzjik*_gcl_au*NjE3NTk4MzcxLjE3MzI4ODgzMDY.) (TS)
-* [Flutter](https://docs.snowplow.io/docs/collecting-data/code-generation/using-the-cli/?_gl=1*17lzjik*_gcl_au*NjE3NTk4MzcxLjE3MzI4ODgzMDY.) (Dart)
-* [Google Tag Manager](https://docs.snowplow.io/docs/collecting-data/code-generation/working-with-gtm/?_gl=1*17lzjik*_gcl_au*NjE3NTk4MzcxLjE3MzI4ODgzMDY.) (JavaScript)
+* React Native (TypeScript)
+* Flutter (Dart)
+* Google Tag Manager (JavaScript)
 
 ### Developer Experience Improvements
 
@@ -47,9 +46,33 @@ We've enhanced the development experience with:
 
 ## From Theory to Practice
 
-Consider the difference in implementation. Previously, tracking an e-commerce event required manual schema references and property definitions.
+Consider the difference in implementation. Previously, custom tracking required manual schema references and property definitions. For example, tracking an ecommerce checkout event with web page entity:
+
+```javascript
+/* Example in Node.js */
+nodeTracker.track(
+    buildSelfDescribingEvent({
+        event: {
+            schema: "iglu:com.snowplowanalytics.snowplow.ecommerce/snowplow_ecommerce_action/jsonschema/1-0-2",
+            data: {
+                type: "checkout_step",
+            },
+        },
+    }),
+    [ { data: { id: "123"}, schema: "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0",} ]
+);
+```
 
 With Snowtype, the same functionality is achieved with cleaner, more maintainable code that includes built-in validations and type safety.
+
+```javascript
+/* Example in Node.js */
+trackSnowplowEcommerceAction<WebPage>(nodeTracker, {
+    type: Type.CheckoutStep,
+    /* Entities are optionally typed as well using the <WebPage> notation */
+    context: [createWebPage({ id: "123" })],
+});
+```
 
 ## Looking Forward
 

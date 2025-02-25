@@ -6,8 +6,8 @@ title: Installation and Setup
 This guide will help you understand some of the basic capabilities of Data Products and how they can be used in practice for most tracking implementation setups.
 
 ## Prerequisites
-- A [collector](https://docs.snowplow.io/docs/pipeline/configuring-collector/) endpoint.
-- A [Console API key](https://docs.snowplow.io/docs/data-product-studio/snowtype/using-the-cli/#authenticating-with-the-console) for generating code using Snowtype.
+- A [collector](/docs/pipeline/collector/) endpoint.
+- A [Console API key](/docs/data-product-studio/snowtype/using-the-cli/#authenticating-with-the-console) for generating code using Snowtype.
 
 ## What you'll be doing
 

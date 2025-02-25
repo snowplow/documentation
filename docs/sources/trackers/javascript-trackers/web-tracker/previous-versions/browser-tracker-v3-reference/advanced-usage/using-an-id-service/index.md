@@ -62,14 +62,14 @@ Below we showcase a couple of code samples for ID service API endpoints:
 <TabItem value="nextjs" label="Next.js TypeScript" default>
 
 ```ts reference
-https://github.com/snowplow-incubator/id-service-examples/blob/main/examples/typescript/Next.js/api-route.ts
+https://github.com/snowplow-industry-solutions/id-service-examples/blob/main/examples/typescript/Next.js/api-route.ts
 ```
 
 </TabItem>
 <TabItem value="php" label="PHP">
 
 ```php reference
-https://github.com/snowplow-incubator/id-service-examples/blob/main/examples/php/wordpress/api-route.php
+https://github.com/snowplow-industry-solutions/id-service-examples/blob/main/examples/php/wordpress/api-route.php
 ```
 
 </TabItem>

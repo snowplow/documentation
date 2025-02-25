@@ -22,8 +22,8 @@ Additionally, you can track custom entities along with the events.
 :::info Example app
 To illustrate the tracked events and entities, you can visit a React example app that showcases the tracked media events and entities live as you watch a video.
 
-[Visit the app here.](https://snowplow-incubator.github.io/snowplow-javascript-tracker-examples/media)
-Source code for the app is [available here.](https://github.com/snowplow-incubator/snowplow-javascript-tracker-examples/tree/master/react)
+[Visit the app here.](https://snowplow-industry-solutions.github.io/snowplow-javascript-tracker-examples/media)
+Source code for the app is [available here.](https://github.com/snowplow-industry-solutions/snowplow-javascript-tracker-examples/tree/master/react)
 :::
 
 ### Media player events
@@ -45,23 +45,23 @@ It contains the current playback position (`currentTime`) as well as the paused 
 
 The schemas contain a single `label` property:
 
-| Request Key | Required | Type/Format | Description |
-| --- | --- | --- | --- |
-| currentTime | Y | number | The current playback time |
-| duration | N | number | A double-precision floating-point value indicating the duration of the media in seconds |
-| ended | Y | boolean | If playback of the media has ended |
-| fullscreen | N | boolean | Whether the video element is fullscreen |
-| livestream | N | boolean | If the media is live |
-| label | N | string | Human readable name given to tracked media content |
-| loop | N | boolean | If the video should restart after ending |
-| mediaType | N | enum: `audio` or `video` | Type of media content |
-| muted | N | boolean | If the media element is muted |
-| paused | Y | boolean | If the media element is paused |
-| pictureInPicture | N | boolean | Whether the video element is showing picture-in-picture |
-| playbackRate | N | number | Playback rate (1 is normal) |
-| playerType | N | string | Type of the media player (e.g., com.youtube-youtube, com.vimeo-vimeo, org.whatwg-media_element) |
-| quality | N | string | Quality level of the playback (e.g., 1080p) |
-| volume | N | integer | Volume percent |
+| Request Key      | Required | Type/Format              | Description                                                                                     |
+| ---------------- | -------- | ------------------------ | ----------------------------------------------------------------------------------------------- |
+| currentTime      | Y        | number                   | The current playback time                                                                       |
+| duration         | N        | number                   | A double-precision floating-point value indicating the duration of the media in seconds         |
+| ended            | Y        | boolean                  | If playback of the media has ended                                                              |
+| fullscreen       | N        | boolean                  | Whether the video element is fullscreen                                                         |
+| livestream       | N        | boolean                  | If the media is live                                                                            |
+| label            | N        | string                   | Human readable name given to tracked media content                                              |
+| loop             | N        | boolean                  | If the video should restart after ending                                                        |
+| mediaType        | N        | enum: `audio` or `video` | Type of media content                                                                           |
+| muted            | N        | boolean                  | If the media element is muted                                                                   |
+| paused           | Y        | boolean                  | If the media element is paused                                                                  |
+| pictureInPicture | N        | boolean                  | Whether the video element is showing picture-in-picture                                         |
+| playbackRate     | N        | number                   | Playback rate (1 is normal)                                                                     |
+| playerType       | N        | string                   | Type of the media player (e.g., com.youtube-youtube, com.vimeo-vimeo, org.whatwg-media_element) |
+| quality          | N        | string                   | Quality level of the playback (e.g., 1080p)                                                     |
+| volume           | N        | integer                  | Volume percent                                                                                  |
 </details>
 
 *Schema:*
@@ -75,22 +75,22 @@ It also contains statistics about the media playback computed on the tracker (e.
 <details>
     <summary>Media player session entity properties</summary>
 
-| Request Key | Required | Type/Format | Description |
-| --- | --- | --- | --- |
-| mediaSessionId | Y | string | An identifier for the media session (can be provided by the user) |
-| startedAt | N | date-time | Date-time timestamp of when the session started. |
-| pingInterval | N | number | Interval (seconds) in which the ping events will be sent. Default (10s) is assumed if not specified. |
-| timePlayed | N | number | Total seconds user spent playing content (excluding ads). |
-| timePlayedMuted | N | number | Total seconds user spent playing content on mute (excluding ads). |
-| timePaused | N | number | Total seconds user spent with paused content (excluding linear ads) |
-| contentWatched | N | number | Total seconds of the content played. Each part of the content played is counted once (i.e., counts rewinding or rewatching the same content only once). Playback rate does not affect this value. |
-| timeBuffering | N | number | Total seconds that playback was buffering during the session. |
-| timeSpentAds | N | number | Total seconds that ads played during the session. |
-| ads | N | integer | Number of ads played. |
-| adsClicked | N | integer | Number of ads that the user clicked on |
-| adsSkipped | N | integer | Number of ads that the user skipped |
-| adBreaks | N | integer | Number of ad breaks played. |
-| avgPlaybackRate | N | number | Average playback rate (1 is normal speed). |
+| Request Key     | Required | Type/Format | Description                                                                                                                                                                                       |
+| --------------- | -------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| mediaSessionId  | Y        | string      | An identifier for the media session (can be provided by the user)                                                                                                                                 |
+| startedAt       | N        | date-time   | Date-time timestamp of when the session started.                                                                                                                                                  |
+| pingInterval    | N        | number      | Interval (seconds) in which the ping events will be sent. Default (10s) is assumed if not specified.                                                                                              |
+| timePlayed      | N        | number      | Total seconds user spent playing content (excluding ads).                                                                                                                                         |
+| timePlayedMuted | N        | number      | Total seconds user spent playing content on mute (excluding ads).                                                                                                                                 |
+| timePaused      | N        | number      | Total seconds user spent with paused content (excluding linear ads)                                                                                                                               |
+| contentWatched  | N        | number      | Total seconds of the content played. Each part of the content played is counted once (i.e., counts rewinding or rewatching the same content only once). Playback rate does not affect this value. |
+| timeBuffering   | N        | number      | Total seconds that playback was buffering during the session.                                                                                                                                     |
+| timeSpentAds    | N        | number      | Total seconds that ads played during the session.                                                                                                                                                 |
+| ads             | N        | integer     | Number of ads played.                                                                                                                                                                             |
+| adsClicked      | N        | integer     | Number of ads that the user clicked on                                                                                                                                                            |
+| adsSkipped      | N        | integer     | Number of ads that the user skipped                                                                                                                                                               |
+| adBreaks        | N        | integer     | Number of ad breaks played.                                                                                                                                                                       |
+| avgPlaybackRate | N        | number      | Average playback rate (1 is normal speed).                                                                                                                                                        |
 </details>
 
 It is an optional entity that is enabled by default.
@@ -105,13 +105,13 @@ These entities give information about the currently playing ad and ad break.
 <details>
     <summary>Media ad break entity properties</summary>
 
-| Request Key | Required | Type/Format | Description |
-| --- | --- | --- | --- |
-| name | N | string | Ad break name such as pre-roll, mid-roll, and post-roll. |
-| breakId | N | string | ID of the ad break. |
-| startTime | Y | number | Playback time in seconds at the start of the ad break. |
-| podSize | N | integer | The number of ads to be played within the ad break. |
-| breakType | N | enum: linear, nonlinear, companion | linear  – take full control of the video for a period of time
+| Request Key | Required | Type/Format                        | Description                                                   |
+| ----------- | -------- | ---------------------------------- | ------------------------------------------------------------- |
+| name        | N        | string                             | Ad break name such as pre-roll, mid-roll, and post-roll.      |
+| breakId     | N        | string                             | ID of the ad break.                                           |
+| startTime   | Y        | number                             | Playback time in seconds at the start of the ad break.        |
+| podSize     | N        | integer                            | The number of ads to be played within the ad break.           |
+| breakType   | N        | enum: linear, nonlinear, companion | linear  – take full control of the video for a period of time |
 nonlinear – run concurrently to the video
 companion – accompany the video but placed outside the player |
 </details>
@@ -122,14 +122,14 @@ companion – accompany the video but placed outside the player |
 <details>
     <summary>Media player ad entity properties</summary>
 
-| Request Key | Required | Type/Format | Description |
-| --- | --- | --- | --- |
-| name | N | string | Friendly name of the ad |
-| adId | Y | string | Unique identifier for the ad. |
-| creativeId | N | string | The ID of the ad creative |
-| podPosition | N | integer | The number position of the ad within the ad break, starting with 1. |
-| duration | Y | number | Length of the video ad in seconds |
-| skippable | N | boolean | Indicating whether skip controls are made available to the end user |
+| Request Key | Required | Type/Format | Description                                                         |
+| ----------- | -------- | ----------- | ------------------------------------------------------------------- |
+| name        | N        | string      | Friendly name of the ad                                             |
+| adId        | Y        | string      | Unique identifier for the ad.                                       |
+| creativeId  | N        | string      | The ID of the ad creative                                           |
+| podPosition | N        | integer     | The number position of the ad within the ad break, starting with 1. |
+| duration    | Y        | number      | Length of the video ad in seconds                                   |
+| skippable   | N        | boolean     | Indicating whether skip controls are made available to the end user |
 </details>
 
 *Schema for the ad entity:*
@@ -372,14 +372,14 @@ This can be configured as follows:
 <>{(props.tracker == 'js-tag') && (<CodeBlock language="javascript">
 {`window.snowplow('startMediaTracking', {
     id,
-    pings: { pingInterval: 30 }, // Interval in seconds for sending ping events. Defaults to 30s. 
+    pings: { pingInterval: 30 }, // Interval in seconds for sending ping events. Defaults to 30s.
 });`}
 </CodeBlock>)}</>
 
 <>{(props.tracker == 'js-browser') && (<CodeBlock language="javascript">
 {`startMediaTracking({
     id,
-    pings: { pingInterval: 30 }, // Interval in seconds for sending ping events. Defaults to 30s. 
+    pings: { pingInterval: 30 }, // Interval in seconds for sending ping events. Defaults to 30s.
 });
 `}
 </CodeBlock>)}</>
@@ -409,7 +409,7 @@ MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuratio
 {`MediaTracking mediaTracking = tracker.startMediaTracking(
     configuration: const MediaTrackingConfiguration(
         id: id,
-        pingInterval: 30 // Interval in seconds for sending ping events. Defaults to 30s. 
+        pingInterval: 30 // Interval in seconds for sending ping events. Defaults to 30s.
     )
 );`}
 </CodeBlock>)}</>
@@ -843,7 +843,7 @@ mediaTracking.update(player, null, null);`}
 Having started a media tracking instance, you can use it to track media events as you receive them from the media player.
 
 Typically, you would subscribe to notifications from the media player (e.g., user clicks play, volume changes, content is buffering) with callbacks that would track the Snowplow events.
-For an example, see the code that subscribes for events from an HTML5 media player [here](https://github.com/snowplow-incubator/snowplow-javascript-tracker-examples/tree/master/react/src/components/video.jsx).
+For an example, see the code that subscribes for events from an HTML5 media player [here](https://github.com/snowplow-industry-solutions/snowplow-javascript-tracker-examples/tree/master/react/src/components/video.jsx).
 
 ### Providing additional information
 
@@ -1295,10 +1295,10 @@ Tracks a media player playback rate change event sent when the playback rate has
 
 The event schema has two properties:
 
-| Request Key | Required | Type/Format | Description |
-| --- | --- | --- | --- |
-| previousRate | N | number | Playback rate before the change (1 is normal) |
-| newRate | Y | number | Playback rate after the change (1 is normal) |
+| Request Key  | Required | Type/Format | Description                                   |
+| ------------ | -------- | ----------- | --------------------------------------------- |
+| previousRate | N        | number      | Playback rate before the change (1 is normal) |
+| newRate      | Y        | number      | Playback rate after the change (1 is normal)  |
 
 The `previousRate` is set automatically based on the last `playbackRate` value in the `player` entity.
 The `newRate` is passed when tracking the event and is automatically updated in the `player` entity.
@@ -1336,10 +1336,10 @@ Tracks a media player volume change event sent when the volume has changed.
 
 The event schema has two properties:
 
-| Request Key | Required | Type/Format | Description |
-| --- | --- | --- | --- |
-| previousVolume | N | integer | Volume percentage before the change |
-| newVolume | Y | integer | Volume percentage after the change |
+| Request Key    | Required | Type/Format | Description                         |
+| -------------- | -------- | ----------- | ----------------------------------- |
+| previousVolume | N        | integer     | Volume percentage before the change |
+| newVolume      | Y        | integer     | Volume percentage after the change  |
 
 The `previousVolume` is set automatically based on the last `volume` value in the `player` entity.
 The `newVolume` is passed when tracking the event and is automatically updated in the `player` entity.
@@ -1377,9 +1377,9 @@ Tracks a media player fullscreen change event fired immediately after the browse
 
 The event schema has one property:
 
-| Request Key | Required | Type/Format | Description |
-| --- | --- | --- | --- |
-| fullscreen | Y | boolean | Whether the video element is fullscreen |
+| Request Key | Required | Type/Format | Description                             |
+| ----------- | -------- | ----------- | --------------------------------------- |
+| fullscreen  | Y        | boolean     | Whether the video element is fullscreen |
 
 The `fullscreen` value is passed when tracking the event and is automatically updated in the `player` entity.
 
@@ -1416,9 +1416,9 @@ Tracks a media player picture-in-picture change event fired immediately after th
 
 The event schema has one property:
 
-| Request Key | Required | Type/Format | Description |
-| --- | --- | --- | --- |
-| pictureInPicture | Y | boolean | Whether the video element is showing picture-in-picture |
+| Request Key      | Required | Type/Format | Description                                             |
+| ---------------- | -------- | ----------- | ------------------------------------------------------- |
+| pictureInPicture | Y        | boolean     | Whether the video element is showing picture-in-picture |
 
 The `pictureInPicture` value is passed when tracking the event and is automatically updated in the `player` entity.
 
@@ -1554,9 +1554,9 @@ Tracks a media player ad skip event fired when the user activated a skip control
 
 The event schema has one optional property:
 
-| Request Key | Required | Type/Format | Description |
-| --- | --- | --- | --- |
-| percentProgress | N | integer | The percent of the way through the ad |
+| Request Key     | Required | Type/Format | Description                           |
+| --------------- | -------- | ----------- | ------------------------------------- |
+| percentProgress | N        | integer     | The percent of the way through the ad |
 
 Tracking this event will increase the counter of `adsSkipped` in the session entity.
 
@@ -1593,9 +1593,9 @@ Tracks a media player ad first quartile played event fired when a quartile of ad
 
 The event schema has one required property – it is set automatically to 25%:
 
-| Request Key | Required | Type/Format | Description |
-| --- | --- | --- | --- |
-| percentProgress | Y | integer | The percent of the way through the ad |
+| Request Key     | Required | Type/Format | Description                           |
+| --------------- | -------- | ----------- | ------------------------------------- |
+| percentProgress | Y        | integer     | The percent of the way through the ad |
 
 <>{(props.tracker == 'js-tag') && (<CodeBlock language="javascript">
 {`window.snowplow('trackMediaAdFirstQuartile', { id });`}
@@ -1630,9 +1630,9 @@ Tracks a media player ad midpoint played event fired when a midpoint of ad is re
 
 The event schema has one required property – it is set automatically to 50%:
 
-| Request Key | Required | Type/Format | Description |
-| --- | --- | --- | --- |
-| percentProgress | Y | integer | The percent of the way through the ad |
+| Request Key     | Required | Type/Format | Description                           |
+| --------------- | -------- | ----------- | ------------------------------------- |
+| percentProgress | Y        | integer     | The percent of the way through the ad |
 
 <>{(props.tracker == 'js-tag') && (<CodeBlock language="javascript">
 {`window.snowplow('trackMediaAdMidpoint', { id });`}
@@ -1667,9 +1667,9 @@ Tracks media player ad third quartile played event fired when a quartile of ad i
 
 The event schema has one required property – it is set automatically to 75%:
 
-| Request Key | Required | Type/Format | Description |
-| --- | --- | --- | --- |
-| percentProgress | Y | integer | The percent of the way through the ad |
+| Request Key     | Required | Type/Format | Description                           |
+| --------------- | -------- | ----------- | ------------------------------------- |
+| percentProgress | Y        | integer     | The percent of the way through the ad |
 
 <>{(props.tracker == 'js-tag') && (<CodeBlock language="javascript">
 {`window.snowplow('trackMediaAdThirdQuartile', { id });`}
@@ -1736,9 +1736,9 @@ Tracks a media player ad click event fired when the user clicked on the ad.
 
 The event schema has one optional property:
 
-| Request Key | Required | Type/Format | Description |
-| --- | --- | --- | --- |
-| percentProgress | N | integer | The percent of the way through the ad |
+| Request Key     | Required | Type/Format | Description                           |
+| --------------- | -------- | ----------- | ------------------------------------- |
+| percentProgress | N        | integer     | The percent of the way through the ad |
 
 Tracking this event will increase the counter of `adsClicked` in the session entity.
 
@@ -1775,9 +1775,9 @@ Tracks a media player ad pause event fired when the user clicked the pause contr
 
 The event schema has one optional property:
 
-| Request Key | Required | Type/Format | Description |
-| --- | --- | --- | --- |
-| percentProgress | N | integer | The percent of the way through the ad |
+| Request Key     | Required | Type/Format | Description                           |
+| --------------- | -------- | ----------- | ------------------------------------- |
+| percentProgress | N        | integer     | The percent of the way through the ad |
 
 <>{(props.tracker == 'js-tag') && (<CodeBlock language="javascript">
 {`window.snowplow('trackMediaAdPause', { id, percentProgress: 30 });`}
@@ -1909,13 +1909,13 @@ Tracks a media player quality change event tracked when the video playback quali
 
 The event schema has the following properties:
 
-| Request Key | Required | Type/Format | Description |
-| --- | --- | --- | --- |
-| previousQuality | N | string | Quality level before the change (e.g., 1080p) |
-| newQuality | N | string | Quality level after the change (e.g., 1080p) |
-| bitrate | N | integer | The current bitrate in bits per second |
-| framesPerSecond | N | integer | The current number of frames per second |
-| automatic | N | boolean | Whether the change was automatic or triggered by the user |
+| Request Key     | Required | Type/Format | Description                                               |
+| --------------- | -------- | ----------- | --------------------------------------------------------- |
+| previousQuality | N        | string      | Quality level before the change (e.g., 1080p)             |
+| newQuality      | N        | string      | Quality level after the change (e.g., 1080p)              |
+| bitrate         | N        | integer     | The current bitrate in bits per second                    |
+| framesPerSecond | N        | integer     | The current number of frames per second                   |
+| automatic       | N        | boolean     | Whether the change was automatic or triggered by the user |
 
 The `previousQuality` is set automatically based on the last `quality` value in the `player` entity.
 The `newQuality` is passed when tracking the event and is automatically updated in the `player` entity.
@@ -1988,11 +1988,11 @@ Tracks a media player error event tracked when the resource could not be loaded 
 
 The event schema has the following properties:
 
-| Request Key | Required | Type/Format | Description |
-| --- | --- | --- | --- |
-| errorCode | N | string | Error-identifying code for the playback issue. E.g. E522 |
-| errorName | N | string | Name for the type of error that occurred in the playback. E.g. forbidden |
-| errorDescription | N | string | Longer description for the error occurred in the playback |
+| Request Key      | Required | Type/Format | Description                                                              |
+| ---------------- | -------- | ----------- | ------------------------------------------------------------------------ |
+| errorCode        | N        | string      | Error-identifying code for the playback issue. E.g. E522                 |
+| errorName        | N        | string      | Name for the type of error that occurred in the playback. E.g. forbidden |
+| errorDescription | N        | string      | Longer description for the error occurred in the playback                |
 
 <>{(props.tracker == 'js-tag') && (<CodeBlock language="javascript">
 {`window.snowplow('trackMediaError', {

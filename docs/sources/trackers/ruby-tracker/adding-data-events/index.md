@@ -26,7 +26,7 @@ Each schema will describe a single "entity". All of an event's entities together
 
 The context entities were originally called "context" themselves, with the event context referred to as "contexts". This was confusing (and not great English grammar), so we changed the name. However, the name "contexts" persists in some places.
 
-Check out our [demo Rails app](https://github.com/snowplow-incubator/snowplow-ruby-tracker-examples) to see an example of a custom eCommerce event created using a self-describing event plus product entity. Note that context can be added to any event type, not just self-describing events. This means that even a simple event type like a page view can hold complex and extensive information - reducing the chances of data loss and the amount of modeling (JOINs etc.) needed in modeling, while increasing the value of each event, and the sophistication of the possible use cases.
+Check out our [demo Rails app](https://github.com/snowplow-industry-solutions/snowplow-ruby-tracker-examples) to see an example of a custom eCommerce event created using a self-describing event plus product entity. Note that context can be added to any event type, not just self-describing events. This means that even a simple event type like a page view can hold complex and extensive information - reducing the chances of data loss and the amount of modeling (JOINs etc.) needed in modeling, while increasing the value of each event, and the sophistication of the possible use cases.
 
 The entities you provide are validated against their schemas as the event is processed (during the enrich phase). If there is a mistake or mismatch, the event is processed as a Bad Event.
 
@@ -93,22 +93,22 @@ You could create and define a new Subject for every user or every event you want
 
 The following table lists all the properties that can be set via Subject. These are all part of the [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md). Check out the [API docs](https://snowplow.github.io/snowplow-ruby-tracker/SnowplowTracker/Subject.html) for the details of how to set these parameters.
 
-| Property | **Description** |
-| --- | --- |
-| `platform` | The platform the app runs on |
-| `user_id` | Unique identifier for user |
-| `domain_userid` | Cookie-based unique identifier for user |
-| `network_userid` | Cookie-based unique identifier for user |
-| `domain_sessionid` | Cookie-based unique identifier for a visit/session of a `user_id` |
-| `domain_sessionidx` | Cookie-based count of separate visits/sessions from a `user_id` |
-| `user_fingerprint` | User identifier based on (hopefully unique) browser features |
-| `user_ipaddress` | User's IP address |
-| `useragent` | User agent or browser string |
-| `br_lang` | The device/browser language |
-| `os_timezone` | The device OS's timezone |
-| `dvce_screenheight` and `dvce_screenwidth` | The device screen resolution |
-| `br_viewwidth` and `br_viewheight` | The browser viewport size |
-| `br_colordepth` | The browser color depth |
+| Property                                   | **Description**                                                   |
+| ------------------------------------------ | ----------------------------------------------------------------- |
+| `platform`                                 | The platform the app runs on                                      |
+| `user_id`                                  | Unique identifier for user                                        |
+| `domain_userid`                            | Cookie-based unique identifier for user                           |
+| `network_userid`                           | Cookie-based unique identifier for user                           |
+| `domain_sessionid`                         | Cookie-based unique identifier for a visit/session of a `user_id` |
+| `domain_sessionidx`                        | Cookie-based count of separate visits/sessions from a `user_id`   |
+| `user_fingerprint`                         | User identifier based on (hopefully unique) browser features      |
+| `user_ipaddress`                           | User's IP address                                                 |
+| `useragent`                                | User agent or browser string                                      |
+| `br_lang`                                  | The device/browser language                                       |
+| `os_timezone`                              | The device OS's timezone                                          |
+| `dvce_screenheight` and `dvce_screenwidth` | The device screen resolution                                      |
+| `br_viewwidth` and `br_viewheight`         | The browser viewport size                                         |
+| `br_colordepth`                            | The browser color depth                                           |
 
 :::note
 The methods for defining `domain_sessionid` and `domain_sessionidx` were added in tracker version 0.7.0.
@@ -168,7 +168,7 @@ Several of the user properties listed in the above table are relevant only to we
 
 Read more about sharing data between client-side and server-side trackers in this [blog post](https://snowplowanalytics.com/blog/2021/11/09/the-unrivaled-power-of-joining-client-and-server-side-tracking/).
 
-If you have implemented the Ruby tracker as well as the JavaScript tracker in your web app, you could extract the values from the cookies, and set them in your Ruby events using these Subject methods. An example of this is included for `domain_user_id` in our [demo Rails app](https://github.com/snowplow-incubator/snowplow-ruby-tracker-examples).
+If you have implemented the Ruby tracker as well as the JavaScript tracker in your web app, you could extract the values from the cookies, and set them in your Ruby events using these Subject methods. An example of this is included for `domain_user_id` in our [demo Rails app](https://github.com/snowplow-industry-solutions/snowplow-ruby-tracker-examples).
 
 Extracting the `domain_user_id` from the `_sp_id` cookie in Rails:
 
@@ -208,14 +208,14 @@ The Page class was added in tracker version 0.7.0.
 
 Processed Snowplow events have five different timestamps. They can have either `dvce_created_tstamp` or `true_tstamp`.
 
-| **Timestamp name** | **Description** |
-| --- | --- |
-| `dvce_created_tstamp` | Added during event creation |
-| `true_tstamp` | This can be manually set as an alternative to `dvce_created_tstamp` |
-| `dvce_sent_tstamp` | Added by the Emitter on event sending |
-| `collector_tstamp` | Added by the event collector |
-| `etl_tstamp` | Added after event enrichment during the processing pipeline |
-| `derived_tstamp` | Either a calculated value (`collector_tstamp - (dvce_sent_tstamp - dvce_created_tstamp)`) or the same as `true_tstamp` |
+| **Timestamp name**    | **Description**                                                                                                        |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| `dvce_created_tstamp` | Added during event creation                                                                                            |
+| `true_tstamp`         | This can be manually set as an alternative to `dvce_created_tstamp`                                                    |
+| `dvce_sent_tstamp`    | Added by the Emitter on event sending                                                                                  |
+| `collector_tstamp`    | Added by the event collector                                                                                           |
+| `etl_tstamp`          | Added after event enrichment during the processing pipeline                                                            |
+| `derived_tstamp`      | Either a calculated value (`collector_tstamp - (dvce_sent_tstamp - dvce_created_tstamp)`) or the same as `true_tstamp` |
 
 Overriding the default event timestamp (`dvce_created_tstamp`) can be useful in some situations. For example, if the Snowplow event refers to an action that happened previously but is only now being tracked. This can be achieved using the Ruby tracker classes DeviceTimestamp and TrueTimestamp (see [API docs](https://snowplow.github.io/snowplow-ruby-tracker/SnowplowTracker/Timestamp.html)).
 

@@ -78,7 +78,7 @@ The responsibilities of this service are:
 
 _The new unique identifier cookie for sake of simplicity in this document will have the name `spIdService`._
 
-#### ID service business logic 
+#### ID service business logic
 
 The ID service code should include the following logic:
 
@@ -87,7 +87,7 @@ The ID service code should include the following logic:
 - If `spIdService` and `sp` are both missing, then it generates a new ID in the `spIdService` and `sp` cookies with the same unique identifier generation algorithm with the Snowplow pipeline, currently UUID v4.
 - The HTTP response should have a 200 OK status code but any additional payload is not necessary.
 
-### Code examples 
+### Code examples
 
 Below we showcase a couple of code samples for ID service API endpoints:
 
@@ -95,14 +95,14 @@ Below we showcase a couple of code samples for ID service API endpoints:
 <TabItem value="nextjs" label="Next.js TypeScript" default>
 
 ```ts reference
-https://github.com/snowplow-incubator/id-service-examples/blob/main/examples/typescript/Next.js/api-route.ts
+https://github.com/snowplow-industry-solutions/id-service-examples/blob/main/examples/typescript/Next.js/api-route.ts
 ```
 
 </TabItem>
 <TabItem value="php" label="PHP">
 
 ```php reference
-https://github.com/snowplow-incubator/id-service-examples/blob/main/examples/php/wordpress/api-route.php
+https://github.com/snowplow-industry-solutions/id-service-examples/blob/main/examples/php/wordpress/api-route.php
 ```
 
 </TabItem>

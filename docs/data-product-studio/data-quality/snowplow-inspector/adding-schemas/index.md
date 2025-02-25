@@ -98,4 +98,4 @@ To connect to your static registry, the extension will need:
 - Base URI: The base URL to use when requesting schemas. The extension will request schemas relative to this base, expecting a `schemas/{vendor}/{name}/{format/{version}` format.
 
 Optionally you can also provide:
-- Manifest URI: The URI to use for the schema manifest (aka [Schema List](https://discourse.snowplow.io/t/igluctl-0-8-0-released/5551#2-uploads-schema-lists-by-default-2)) file that lists the schemas contained in the registry. If not provided, defaults to `schemas`, to match the `igluctl` default.
+- Manifest URI: The URI to use for the schema manifest (aka schema list, as described in the [release notes](https://github.com/snowplow/igluctl/releases/tag/0.8.0)) file that lists the schemas contained in the registry. If not provided, defaults to `schemas`, to match the `igluctl` default.

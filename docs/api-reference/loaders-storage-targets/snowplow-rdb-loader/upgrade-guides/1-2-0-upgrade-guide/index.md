@@ -6,7 +6,7 @@ sidebar_position: 190
 
 RDB Loader 1.2.0 brings many improvements for monitoring subsystem. If you're not interested in new features - you can just bump versions. If you need webhook monitoring - read below instructions on how to enable it.
 
-[Official announcement](https://discourse.snowplow.io/t/snowplow-rdb-loader-1-2-0-released/5571)
+[Release notes](https://github.com/snowplow/snowplow-rdb-loader/releases/tag/1.2.0).
 
 ## Assets
 

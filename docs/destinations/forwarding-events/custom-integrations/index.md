@@ -18,8 +18,6 @@ The Snowplow events in the Enriched stream are in a tab separated format (TSV) b
 
 Server-less functions are an easy way to approach building real time consumers of the event stream for those use cases which require fast action or decisioning based on incoming events (For example, Ad Bidding, Paywall Optimization, Real-time reporting, etc).
 
-For an example of what could be achieved with AWS Lambda, take a look at this example of [Real-time reporting using AWS Lambda and DynamoDB](https://discourse.snowplow.io/t/real-time-reporting-using-aws-lambda-and-dynamodb-a-tutorial-to-compute-the-number-of-players-in-a-game-level-on-the-snowplow-event-stream-1-2/1008).
-
 ## Kinesis Client Library (KCL) applications
 
 The KCL (Kinesis Consumer Library) allows for applications to be built to consume from AWS Kinesis. It makes use of AWS DynamoDB to keep track of shards in the data stream, and makes it far easier to consume from Kinesis than would otherwise be possible.

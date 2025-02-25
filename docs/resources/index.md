@@ -33,6 +33,6 @@ Please complete and sign the most appropriate CLA for you. For more information,
 
 ## Join the conversation
 
-Have an idea for Snowplow? Found a bug? We encourage you to start a conversation on the [Snowplow Discourse](https://discourse.snowplow.io/) or to file a [new issue on GitHub](https://github.com/snowplow/snowplow/issues/new) before writing code. Announcing what you're working on (or even just your need or pain points) starts a collaborative process to identify general solutions and helps us all avoid duplicating effort.
+Have an idea for Snowplow? Found a bug? We encourage you to start a conversation on [Community](https://community.snowplow.io/) or to file a [new issue on GitHub](https://github.com/snowplow/snowplow/issues/new) before writing code. Announcing what you're working on (or even just your need or pain points) starts a collaborative process to identify general solutions and helps us all avoid duplicating effort.
 
 Let's build Snowplow and grow our community, together.

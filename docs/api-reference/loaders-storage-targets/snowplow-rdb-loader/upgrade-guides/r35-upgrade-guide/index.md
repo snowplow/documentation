@@ -6,12 +6,12 @@ sidebar_position: 300
 
 R35 is a release with major changes in pipeline architecture:
 
-- No dependency on EmrEtlRunner (neither Shredder nor Loader can be lauched using EmrEtlRunner, marking deprecation of EmrEtlRunner)
+- No dependency on EmrEtlRunner (neither Shredder nor Loader can be launched using EmrEtlRunner, marking deprecation of EmrEtlRunner)
 - Loader is not an EMR step anymore
 - Major changes in directory structure
 - New dependency on SQS
 
-[Official announcement.](https://discourse.snowplow.io/t/snowplow-rdb-loader-r35-relased/4700)
+[Release notes](https://github.com/snowplow/snowplow-rdb-loader/releases/tag/r35).
 
 This is the last release in 0.x branch and breaking changes still might be introduced in 1.0.0 release.
 
@@ -34,7 +34,7 @@ In the new architecture there are two EMR steps:
 1. S3DistCp, copying enriched data sunk by [S3 Loader](/docs/api-reference/loaders-storage-targets/s3-loader/index.md), from S3 sink bucket (same as "enriched stream bucket") into _enriched data lake_ (aka shredder input, similar as previously known "enriched archive")
 2. RDB Shredder, picking up all _unprocessed_ folders in enriched data lake, shredding data there and writing it into _shredded data lake_ (previously known as "shredded archive")
 
-RDB Loader is a stand-alone long-running app, lauched either on EC2 box or Fargate cluster. The loading gets triggered by an SQS message, sent by Shredder after it finished processing a new batch.
+RDB Loader is a stand-alone long-running app, launched either on EC2 box or Fargate cluster. The loading gets triggered by an SQS message, sent by Shredder after it finished processing a new batch.
 
 RDB Shredder decides that folder is unprocessed by:
 
@@ -139,7 +139,7 @@ Here's an example:
     "skip": [ ]
   },
 
-  # Warehouse connection details, identical to storage target config 
+  # Warehouse connection details, identical to storage target config
   "storage": {
     # Database, redshift is the only acceptable option
     "type": "redshift",
@@ -215,7 +215,7 @@ run=2021-01-27-18-35-00/
 
 ## Caution
 
-We consider this version a public beta. Although it has been carefully tested in sandbox environments showing signficantly decreased AWS costs on associated infrastructure, it still haven't been used in production.
+We consider this version a public beta. Although it has been carefully tested in sandbox environments showing significantly decreased AWS costs on associated infrastructure, it still haven't been used in production.
 
 One known issue in this version is absence of protection against double-loading. If Loader receives the same SQS message multiple time (i.e. sent manually) - the same batch will be loaded multiple times.
 

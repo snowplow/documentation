@@ -25,6 +25,4 @@ After implementing tracking, you'll want to verify and analyze the events being 
 
 For more detailed information about all available Android events and their structures, refer to the comprehensive documentation provided by Snowplow Analytics.
 
-If you encounter any issues or have questions, you can seek help on the Snowplow discourse forum.
-
 This concludes the basic tutorial for getting started with Snowplow Analytics' Android tracker. In future tutorials, we'll explore how to track custom events and utilize more advanced features of the tracker.

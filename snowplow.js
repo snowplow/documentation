@@ -14,6 +14,10 @@ import {
   ButtonClickTrackingPlugin,
   enableButtonClickTracking,
 } from '@snowplow/browser-plugin-button-click-tracking'
+import {
+  FormTrackingPlugin,
+  enableFormTracking,
+} from '@snowplow/browser-plugin-form-tracking'
 import { onPreferencesChanged } from 'cookie-though'
 import Cookies from 'js-cookie'
 import { COOKIE_PREF_KEY, DOCS_SITE_URLS } from './src/constants/config'
@@ -34,6 +38,7 @@ const createTrackerConfig = (cookieName) => {
       LinkClickTrackingPlugin(),
       SnowplowMediaPlugin(),
       ButtonClickTrackingPlugin(),
+      FormTrackingPlugin(),
     ],
     cookieDomain: `.${domain[1]}.${domain[0]}`,
     cookieName,
@@ -85,6 +90,7 @@ const setupBrowserTracker = () => {
   }) // precise tracking for the unified log
 
   enableButtonClickTracking()
+  enableFormTracking()
 }
 
 if (ExecutionEnvironment.canUseDOM) {

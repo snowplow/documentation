@@ -2346,6 +2346,24 @@
     p-map "^4.0.0"
     webpack-sources "^3.2.2"
 
+"@snowplow/browser-plugin-button-click-tracking@^4.0.4":
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/@snowplow/browser-plugin-button-click-tracking/-/browser-plugin-button-click-tracking-4.3.1.tgz#c4ccd7d95a2fb9977a4c5ab43dfc5f0ed26c7f35"
+  integrity sha512-wtFD2Jy45ra346HNIJ5Jn1fqfNjgVNHV8QCpWE7XqBZsuKEExeG9arx8UpJNXyKNtn+JXlWiVzOaqG0iTCUIjg==
+  dependencies:
+    "@snowplow/browser-tracker-core" "4.3.1"
+    "@snowplow/tracker-core" "4.3.1"
+    tslib "^2.3.1"
+
+"@snowplow/browser-plugin-form-tracking@^4.0.4":
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/@snowplow/browser-plugin-form-tracking/-/browser-plugin-form-tracking-4.3.1.tgz#6008c80f4b770f57f006b1642fc8583f7f2e8853"
+  integrity sha512-s6teGKNAxXVtaY6y0wiFu6e6YVBnyw2HQaW6/h7DT6Z9glereUotiFGI4uamBmeYwg5qoiPtWuioxrG+KoXokQ==
+  dependencies:
+    "@snowplow/browser-tracker-core" "4.3.1"
+    "@snowplow/tracker-core" "4.3.1"
+    tslib "^2.3.1"
+
 "@snowplow/browser-plugin-link-click-tracking@^4.0.4":
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/@snowplow/browser-plugin-link-click-tracking/-/browser-plugin-link-click-tracking-4.0.4.tgz#60a795e4788c9290908428464eed37d9e4ada607"
@@ -2375,6 +2393,16 @@
     tslib "^2.3.1"
     uuid "^10.0.0"
 
+"@snowplow/browser-tracker-core@4.3.1":
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/@snowplow/browser-tracker-core/-/browser-tracker-core-4.3.1.tgz#3dc9fc56ca1fee7c75cf380ec7088384884032a3"
+  integrity sha512-6LBGvHHp4I+OibGmm81iHJLlQ/qI7QqnQlZKzVRa1KIMIUnfTvuGHdUnYNQL7aTWWB2sHFEvB+9JwMUEHQcp0g==
+  dependencies:
+    "@snowplow/tracker-core" "4.3.1"
+    sha1 "^1.1.1"
+    tslib "^2.3.1"
+    uuid "^10.0.0"
+
 "@snowplow/browser-tracker@^4.0.4":
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/@snowplow/browser-tracker/-/browser-tracker-4.0.4.tgz#05b94addf5c6a6a3ed6444bbd5f52359a2542527"
@@ -2388,6 +2416,14 @@
   version "4.0.4"
   resolved "https://registry.yarnpkg.com/@snowplow/tracker-core/-/tracker-core-4.0.4.tgz#2f480ec6798e4ed2f2e7c6b496a8c49b6c2f34ce"
   integrity sha512-8TffG+h/oHjpIbOlAseBEEBWdB4jcblgU2zwLviifxlqpIJ7xmy+Kmi1FgSkkIBEM6O+tDCERlReF3ijVsov3Q==
+  dependencies:
+    tslib "^2.3.1"
+    uuid "^10.0.0"
+
+"@snowplow/tracker-core@4.3.1":
+  version "4.3.1"
+  resolved "https://registry.yarnpkg.com/@snowplow/tracker-core/-/tracker-core-4.3.1.tgz#c0d7acea506933071b78a8334435078e23558b99"
+  integrity sha512-1hWOlDQdPnIVB/zlqKbSj+4I1sQQWBEblGGU1FIYKaRi+YMnvLJu35N0cGOk41J0ZFPCf9/HpxOAG88JhWsEuQ==
   dependencies:
     tslib "^2.3.1"
     uuid "^10.0.0"

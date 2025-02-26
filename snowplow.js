@@ -10,6 +10,14 @@ import {
   LinkClickTrackingPlugin,
   enableLinkClickTracking,
 } from '@snowplow/browser-plugin-link-click-tracking'
+import {
+  ButtonClickTrackingPlugin,
+  enableButtonClickTracking,
+} from '@snowplow/browser-plugin-button-click-tracking'
+import {
+  FormTrackingPlugin,
+  enableFormTracking,
+} from '@snowplow/browser-plugin-form-tracking'
 import { onPreferencesChanged } from 'cookie-though'
 import Cookies from 'js-cookie'
 import { COOKIE_PREF_KEY, DOCS_SITE_URLS } from './src/constants/config'
@@ -26,7 +34,12 @@ const createTrackerConfig = (cookieName) => {
   const trackerConfig = {
     appId,
     eventMethod: 'post',
-    plugins: [LinkClickTrackingPlugin(), SnowplowMediaPlugin()],
+    plugins: [
+      LinkClickTrackingPlugin(),
+      SnowplowMediaPlugin(),
+      ButtonClickTrackingPlugin(),
+      FormTrackingPlugin(),
+    ],
     cookieDomain: `.${domain[1]}.${domain[0]}`,
     cookieName,
     cookieSameSite: 'Lax',
@@ -58,13 +71,15 @@ const setupBrowserTracker = () => {
 
   const selectedTabContext = () => {
     const data = pickBy({
-      cloud: localStorage.getItem("docusaurus.tab.cloud"),
-      data_warehouse: localStorage.getItem("docusaurus.tab.warehouse")
+      cloud: localStorage.getItem('docusaurus.tab.cloud'),
+      data_warehouse: localStorage.getItem('docusaurus.tab.warehouse'),
     })
-    if (!_.isEmpty(data)) return {
-      schema: 'iglu:com.snowplowanalytics.docs/selected_tabs/jsonschema/1-0-0',
-      data
-    }
+    if (!_.isEmpty(data))
+      return {
+        schema:
+          'iglu:com.snowplowanalytics.docs/selected_tabs/jsonschema/1-0-0',
+        data,
+      }
   }
   addGlobalContexts([selectedTabContext])
 
@@ -73,6 +88,9 @@ const setupBrowserTracker = () => {
     heartbeatDelay: 10,
     minimumVisitLength: 10,
   }) // precise tracking for the unified log
+
+  enableButtonClickTracking()
+  enableFormTracking()
 }
 
 if (ExecutionEnvironment.canUseDOM) {

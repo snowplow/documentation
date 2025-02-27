@@ -19,8 +19,9 @@ This is the source for https://docs.snowplow.io/docs.
   - [Images](#images)
 - [VSCode Snippets](#vscode-snippets)
 
-
 ## Contributing
+
+Follow the [Snowplow style guide](https://docs.snowplow.io/style-guide) when contributing documentation.
 
 All contributions are welcome, from [reporting issues](https://github.com/snowplow/documentation/issues/new) to correcting typos and formatting to full-blown how-tos and guides.
 

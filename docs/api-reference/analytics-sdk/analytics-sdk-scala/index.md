@@ -11,14 +11,14 @@ import CodeBlock from '@theme/CodeBlock';
 
 ## 1. Overview
 
-The [Snowplow Analytics SDK for Scala](https://github.com/snowplow/snowplow-scala-analytics-sdk) lets you work with [Snowplow enriched events](/docs/fundamentals/canonical-event/index.md) in your Scala event processing,  
+The [Snowplow Analytics SDK for Scala](https://github.com/snowplow/snowplow-scala-analytics-sdk) lets you work with [Snowplow enriched events](/docs/fundamentals/canonical-event/index.md) in your Scala event processing,
 data modeling and machine-learning jobs. You can use this SDK with [Apache Spark](http://spark.apache.org/), [AWS Lambda](https://aws.amazon.com/lambda/), [Apache Flink](https://flink.apache.org/), [Scalding](https://github.com/twitter/scalding), [Apache Samza](http://samza.apache.org/) and other JVM-compatible data processing frameworks.
 
 The Scala Analytics SDK makes it significantly easier to build applications that consume Snowplow enriched data directly from Kinesis or S3.
 
 ## 2. Compatibility
 
-Snowplow Scala Analytics SDK was compiled against Scala versions 2.12 and 2.13. 
+Snowplow Scala Analytics SDK was compiled against Scala versions 2.12 and 2.13.
 Minimum required Java Runtime is JRE8.
 
 ## 3. Setup
@@ -68,7 +68,7 @@ Note that you need to change `_2.12` to `_2.13` in artifactId if you're using Sc
 
 ### 4.1 Overview
 
-The Snowplow enriched event is a relatively complex TSV string containing scalars and self-describing JSONs.  
+The Snowplow enriched event is a relatively complex TSV string containing scalars and self-describing JSONs.
 Rather than work with this structure directly, Snowplow analytics SDKs ship with _event transformers_, which translate the Snowplow enriched event format into other formats that are more convenient for engineers and analysts.
 
 As the Snowplow enriched event format evolves towards a cleaner [Apache Avro](https://avro.apache.org/)\-based structure, we will be updating this SDK to maintain compatibility across different enriched event versions.
@@ -158,7 +158,7 @@ Here’s the code we use internally for our own data modeling jobs:
 import cats.data.Validated
 import com.snowplowanalytics.snowplow.analytics.scalasdk.Event
 
-val events = input.flatMap(line => 
+val events = input.flatMap(line =>
   Event.parse(line) match {
     case Validated.Valid(event) => Some(event.toJson(true).noSpaces)
     case Validated.Invalid(_) => None

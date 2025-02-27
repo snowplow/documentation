@@ -59,7 +59,7 @@ Here is an existing piece of documentation, and the company style guide. Update 
 Tell me any issues you find in the content. I expect to get a full updated version that aligns with the style guide.
 ```
 
-Alternatively, ask it to just list problems rather than trying to edit the text itself. It will likely still miss some problems (and hallucinate others) but this can provide a useful checklist for improvements.
+Alternatively, ask it just to just list problems rather than trying to edit the text itself. It will likely still miss some problems (and hallucinate others) but this can provide a useful checklist for improvements.
 
 Example prompt:
 ```text
@@ -72,8 +72,8 @@ If the page is not following that rule, tell me so and the evidence for your dec
 
 Here are two pieces of older content that only partially follow the style guide. You can see the original text and the text that has been updated to match the style guide rules:
 
-* Documentation: [annotated screenshot](annotated-docs.webp); [original text](./style-guide/example-docs-before); [updated text](./style-guide/example-docs-after)
-* Blog post: [annotated screenshot](annotated-blog.webp); [original text](./style-guide/example-blog-before); [updated text](./style-guide/example-blog-after)
+* Documentation: [annotated screenshot](annotated-docs.webp); [original text](/style-guide/example-docs-before); [updated text](/style-guide/example-docs-after)
+* Blog post: [annotated screenshot](annotated-blog.webp); [original text](/style-guide/example-blog-before); [updated text](/style-guide/example-blog-after)
 
 ## Grammar and spelling
 

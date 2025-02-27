@@ -65,8 +65,7 @@ As in the default view, it is possible to change the time horizon from the 7-day
 
 Complementing the graphical overview, there is a table that lists all errors (at this moment only validation and resolution errors are supported). You can quickly see, for each type of failed event, a short description of the root cause, the offending data structure, first & last seen timestamps, and the total volume.
 
-Clicking on a particular error type will take you to a detailed view:
-
+Clicking on a particular error type will take you to a detailed view. It is worth pointing out that the most useful column to explore is `CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_FAILURE_1`, which contains the actual error information encoded as a JSON object:
 ![](images/dqd-details.png)
 
 The detailed view shows (in addition to what is presented in the overview table) an elaborate description of the root cause and the application version ([web](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/app-information/#application-context-entity-on-web-apps), [mobile](/docs/sources/trackers/mobile-trackers/tracking-events/platform-and-application-context/)). In addition, it makes it possible to explore the failed event data in your warehouse, by providing a sample of those failed events in their entirety. Some columns are too wide to fit in the table, so if you click on them you will see the pretty-printed, syntax-highlighted content in its entirety:

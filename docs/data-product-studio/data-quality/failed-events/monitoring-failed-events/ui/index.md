@@ -8,8 +8,8 @@ sidebar_position: 2000
 Snowplow pipelines separate events that are problematic in order to keep data quality high in downstream systems. For more information on understanding failed events see [here](/docs/fundamentals/failed-events/index.md).
 
 For Snowplow customers that would like to benefit from seeing aggregates of failed events by type, there are relevant optional features in the Snowplow BDP Console. Snowplow offers two different ways to monitor failed events: 
-- the default view with little available information to debug errors, and 
-- the Data Quality Dashboard that surfaces failed events directly from your warehouse in a secure manner, making debugging a lot easier. 
+- The default view with little available information to debug errors 
+- The Data Quality Dashboard that surfaces failed events directly from your warehouse in a secure manner, making debugging a lot easier
 
 The two ways are representing a trade-off between ease of exploration and avoidance of PII exposure, which we will discuss in detail below.
 

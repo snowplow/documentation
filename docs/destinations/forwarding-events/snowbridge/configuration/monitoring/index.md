@@ -30,6 +30,14 @@ https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/mon
 https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/monitoring/statsd-example.hcl
 ```
 
+### End-to-end latency configuration
+
+Snowplow Enriched data only:
+
+```hcl reference
+https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/metrics/e2e-latency-example.hcl
+```
+
 Snowbridge sends the following metrics to statsd:
 
 | Metric                   | Definitions                                                                                                                                             |
@@ -54,3 +62,6 @@ Snowbridge sends the following metrics to statsd:
 | `min_request_latency`    | Min time between starting request to target and finishing request to target.                                                                             |
 | `max_request_latency`    | Max time between starting request to target and finishing request to target.                                                                             |
 | `avg_request_latency`    | Avg time between starting request to target and finishing request to target.                                                                             |
+| `min_e2e_latency`    | Min time between Snowplow collector tstamp and finishing request to target. Enabled via configuration - Snowplow enriched data only.                                                                           |
+| `max_e2e_latency`    | Max time between Snowplow collector tstamp and finishing request to target. Enabled via configuration - Snowplow enriched data only.                                                                             |
+| `avg_e2e_latency`    | Avg time between Snowplow collector tstamp and finishing request to target. Enabled via configuration - Snowplow enriched data only.    |

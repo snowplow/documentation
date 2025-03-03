@@ -7,7 +7,7 @@ sidebar_position: 1
 
 :::note Compatibility
 
-This feature is available since Enrich 5.0.0 and works with Snowflake and Lake loaders.
+This feature is available since Enrich 5.0.0 and works with Snowflake Loader, BigQuery Loader since version 2, and Lake Loader.
 
 :::
 
@@ -112,6 +112,7 @@ Now you are ready to add a loader. Click _“Add failed events loader”_, which
 You can use the following loaders with the failed events stream:
 
 * Snowflake Streaming Loader
+* BigQuery Loader (since version 2)
 * Lake Loader
 
 Pick your desired destination and follow the steps in the UI, selecting _“failed events”_ as the  type of events.

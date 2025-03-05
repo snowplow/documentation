@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useMemo, useState } from 'react'
+import React, { FC, useMemo, useState } from 'react'
 
 import Link from '@docusaurus/Link'
 import { useHistory } from '@docusaurus/router'
@@ -202,7 +202,7 @@ const DesktopTutorialList: FC<{
   topic: TopicDropdown
   setTopic: React.Dispatch<React.SetStateAction<TopicDropdown>>
   tutorials: Tutorial[]
-}> = ({ search, setSearch, topic, setTopic, tutorials }) => {
+}> = ({ setSearch, topic, setTopic, tutorials }) => {
   return (
     <Box marginX={8} marginY={3} sx={{ minWidth: '90vw', mr: 0 }}>
       <Grid container columnSpacing={2}>

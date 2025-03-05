@@ -17,7 +17,9 @@ export function Header({ title, label }: { title: string; label: string }) {
       </Grid>
       <Grid item container alignItems="center" columnSpacing={2} sx={{ mb: 3 }}>
         <Grid item>
-          <TutorialTitle variant="h4">{title}</TutorialTitle>
+          <TutorialTitle className="tutorial-title" variant="h4">
+            {title}
+          </TutorialTitle>
         </Grid>
         <Grid item>
           <Topic label={label} />

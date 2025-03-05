@@ -19,7 +19,7 @@ export function Header({ title, label }: { title: string; label: string }) {
           }}
         >
           <ChevronLeftIcon />
-          Back to Tutorials
+          Tutorials
         </Link>
       </Grid>
       <Grid item container alignItems="center" columnSpacing={2} sx={{ mb: 3 }}>

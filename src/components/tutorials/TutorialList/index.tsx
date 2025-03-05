@@ -38,7 +38,7 @@ const TutorialCard: FC<{ tutorial: Tutorial }> = ({ tutorial }) => {
   const firstStep = getFirstStepPath(tutorial.meta)
 
   return (
-    <Card>
+    <Card sx={{ height: '100%' }}>
       <Grid
         container
         direction="column"

@@ -11,8 +11,15 @@ export function Header({ title, label }: { title: string; label: string }) {
   return (
     <Grid container direction="column" rowSpacing={0}>
       <Grid item>
-        <Link to="/tutorials">
-          <ChevronLeftIcon /> Back to Tutorials
+        <Link
+          to="/tutorials"
+          style={{
+            display: 'inline-flex',
+            alignItems: 'center',
+          }}
+        >
+          <ChevronLeftIcon />
+          Back to Tutorials
         </Link>
       </Grid>
       <Grid item container alignItems="center" columnSpacing={2} sx={{ mb: 3 }}>

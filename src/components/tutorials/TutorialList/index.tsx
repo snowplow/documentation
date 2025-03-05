@@ -2,10 +2,9 @@ import React, { FC, useEffect, useMemo, useState } from 'react'
 
 import Link from '@docusaurus/Link'
 import { useHistory } from '@docusaurus/router'
-import { ChevronRight, Search } from '@mui/icons-material'
+import { ChevronRight } from '@mui/icons-material'
 import {
   Box,
-  FormControl,
   Grid,
   InputAdornment,
   MenuItem,

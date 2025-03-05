@@ -25,6 +25,8 @@ import {
 import { Meta, Topic as TopicType, Tutorial } from '../models'
 import { Card, Description, StartButton, Topic } from './styledComponents'
 
+import Head from '@docusaurus/Head'
+
 function getFirstStepPath(meta: Meta): string | null {
   const steps = getSteps(meta.id)
   if (steps.length === 0) {
@@ -144,22 +146,29 @@ const TutorialList: FC = () => {
     [search, topic, parsedTutorials]
   )
 
-  return isMobile ? (
-    <MobileTutorialList
-      search={search}
-      setSearch={setSearch}
-      topic={topic}
-      setTopic={setTopic}
-      tutorials={tutorials}
-    />
-  ) : (
-    <DesktopTutorialList
-      search={search}
-      setSearch={setSearch}
-      topic={topic}
-      setTopic={setTopic}
-      tutorials={tutorials}
-    />
+  return (
+    <>
+      <Head>
+        <title>Tutorials | Snowplow Documentation</title>
+      </Head>{' '}
+      {isMobile ? (
+        <MobileTutorialList
+          search={search}
+          setSearch={setSearch}
+          topic={topic}
+          setTopic={setTopic}
+          tutorials={tutorials}
+        />
+      ) : (
+        <DesktopTutorialList
+          search={search}
+          setSearch={setSearch}
+          topic={topic}
+          setTopic={setTopic}
+          tutorials={tutorials}
+        />
+      )}
+    </>
   )
 }
 

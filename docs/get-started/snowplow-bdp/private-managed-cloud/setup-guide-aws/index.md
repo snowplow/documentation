@@ -129,22 +129,6 @@ We also provide a CloudFormation template that will create a role named Snowplow
 
 For complete documentation from Amazon go [here](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html).
 
-### Check Kinesis Data Stream Quotas
-
-By default, our pipeline can scale up to 384 shards. This number of shards is only used when there is significant traffic. However, for a successful deployment, the Kinesis Data Stream Quota must be set to at least 384 shards in the AWS Region where the pipeline will be deployed. If this requirement is not met, the deployment will fail during validation.
-
-1. Access Service Quotas within the AWS sub-account
-2. Navigate to AWS Services and select:
-- Kinesis Data Streams > Shards per Region (Quota code: L-0918CF54)
-3. Make sure that you have selected the correct Region where the pipeline will be deployed
-4. Check the Applied account-level quota value:
-- If it is at least 384, no further action is needed
-- If it is below 384, proceed with the next steps
-5. Click on Request Increase at Account Level and request an increase to at least 384 shards 
-6. Wait for the quota increase to be completed before proceeding with deployment. (Smaller increases are usually automatically approved while larger requests are submitted to AWS Support)
-
-For complete documentation from Amazon go [here](https://aws.amazon.com/kinesis/data-streams/faqs).
-
 ### Setup the Snowplow deployment role
 
 The last step is to set up the Snowplow deployment role. This is a role assumed by the machine user to make changes with Terraform. 

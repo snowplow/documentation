@@ -1,6 +1,7 @@
 import React, { FC, useMemo, useState } from 'react'
 
 import Link from '@docusaurus/Link'
+import Head from '@docusaurus/Head'
 import { useHistory } from '@docusaurus/router'
 import { ChevronRight } from '@mui/icons-material'
 import {
@@ -24,8 +25,6 @@ import {
 } from './styledComponents'
 import { Meta, Topic as TopicType, Tutorial } from '../models'
 import { Card, Description, StartButton, Topic } from './styledComponents'
-
-import Head from '@docusaurus/Head'
 
 function getFirstStepPath(meta: Meta): string | null {
   const steps = getSteps(meta.id)
@@ -153,7 +152,6 @@ const TutorialList: FC = () => {
       </Head>{' '}
       {isMobile ? (
         <MobileTutorialList
-          search={search}
           setSearch={setSearch}
           topic={topic}
           setTopic={setTopic}
@@ -161,7 +159,6 @@ const TutorialList: FC = () => {
         />
       ) : (
         <DesktopTutorialList
-          search={search}
           setSearch={setSearch}
           topic={topic}
           setTopic={setTopic}
@@ -183,12 +180,11 @@ function filterTutorials(
 }
 
 const MobileTutorialList: FC<{
-  search: string
   setSearch: React.Dispatch<React.SetStateAction<string>>
   topic: TopicDropdown
   setTopic: React.Dispatch<React.SetStateAction<TopicDropdown>>
   tutorials: Tutorial[]
-}> = ({ search, setSearch, topic, setTopic, tutorials }) => {
+}> = ({ setSearch, topic, setTopic, tutorials }) => {
   return (
     <Box sx={{ mt: 1 }}>
       <Grid container direction="column" rowSpacing={2}>
@@ -206,7 +202,6 @@ const MobileTutorialList: FC<{
 }
 
 const DesktopTutorialList: FC<{
-  search: string
   setSearch: React.Dispatch<React.SetStateAction<string>>
   topic: TopicDropdown
   setTopic: React.Dispatch<React.SetStateAction<TopicDropdown>>

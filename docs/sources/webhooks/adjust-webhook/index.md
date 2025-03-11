@@ -872,7 +872,7 @@ Do this using [Schema Guru](https://github.com/snowplow/schema-guru) e.g. the SQ
 $ /path/to/schema-guru-0.6.2 ddl --with-json-paths schemas/com.adjust.snowplow/reattribute
 ```
 
-Or with [Igluctl](https://docs.snowplowanalytics.com/open-source/iglu/igluctl/):
+Or with [Igluctl](/docs/api-reference/iglu/igluctl-2/index.md):
 
 ```bash
 $ /path/to/igluctl static generate --with-json-paths schemas/com.adjust.snowplow/reattribute

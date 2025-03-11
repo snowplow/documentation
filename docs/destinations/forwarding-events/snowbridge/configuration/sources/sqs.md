@@ -1,5 +1,5 @@
 ---
-title: "SQS Source"
+title: "SQS"
 description: "Read data from an SQS queue."
 ---
 

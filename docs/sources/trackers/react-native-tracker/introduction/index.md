@@ -13,7 +13,7 @@ The Snowplow React Native Tracker is purely implemented in JavaScript/TypeScript
 - React Native for mobile and Web
 - Expo bare and managed workflow
 
-<p>The current version is {versions.reactNativeTracker}.</p>
+<p>The current version is {versions.javaScriptTracker}.</p>
 
 ## Initializing a tracker
 
@@ -57,7 +57,7 @@ const tracker = newTracker({
     // Identifies the application
     appId: 'my-app-id',
     // Version of the application (e.g., semver or git commit hash)
-    appVersion: '1.0.0', 
+    appVersion: '1.0.0',
     // Build number of the application
     appBuild: '1',
     // Platform of the device, allowed options are:

@@ -26,6 +26,14 @@ import Link from '@docusaurus/Link';
     </td>
 </tr>
 <tr>
+    <td><code>skipSchemas</code></td>
+    <td>
+      Optional, e.g. <code>["iglu:com.example/skipped1/jsonschema/1-0-0"]</code> or with wildcards <code>["iglu:com.example/skipped2/jsonschema/1-*-*"]</code>.
+      A list of schemas that won't be loaded to the lake.
+      This feature could be helpful when recovering from edge-case schemas which for some reason cannot be loaded.
+    </td>
+</tr>
+<tr>
     <td><code>spark.conf.*</code></td>
     <td>Optional. A map of key/value strings which are passed to the internal spark context.</td>
 </tr>
@@ -87,6 +95,14 @@ import Link from '@docusaurus/Link';
     <td>Optional. Default value <code>5.minutes</code>. How often to send a heartbeat event to the webhook when healthy.</td>
 </tr>
 <tr>
+    <td><code>monitoring.healthProbe.port</code></td>
+    <td>Optional. Default value <code>8000</code>. Open a HTTP server that returns OK only if the app is healthy.</td>
+</tr>
+<tr>
+    <td><code>monitoring.healthProbe.unhealthyLatency</code></td>
+    <td>Optional. Default value <code>15 minutes</code>. Health probe becomes unhealthy if any received event is still not fully processed before this cutoff time.</td>
+</tr>
+<tr>
     <td><code>monitoring.sentry.dsn</code></td>
     <td>Optional. Set to a Sentry URI to report unexpected runtime exceptions.</td>
 </tr>
@@ -107,7 +123,7 @@ import Link from '@docusaurus/Link';
     <td>Optional. Default value 50000000. Controls how many events are buffered in memory before saving the batch to local disk. The default value works well for reasonably sized VMs. For smaller VMs (e.g. less than 2 cpu core, 8 GG memory) consider decreasing this value.</td>
 </tr>
 <tr>
-    <td><code>cpuParallelismFactor</code></td>
+    <td><code>cpuParallelismFraction</code></td>
     <td>
     Optional. Default value 0.75.
     Controls how the app splits the workload into concurrent batches which can be run in parallel.

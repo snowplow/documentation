@@ -108,9 +108,34 @@ For example, suppose you have the following field in the schema:
 It will be translated into a field called `last_name` (notice the underscore), of type `STRING`.
 
   </TabItem>
+
   <TabItem value="bigquery" label="BigQuery">
+     <Tabs groupId="biquery-loader-version" queryString lazy>
+         <TabItem value="v2" label="Version 2.x" default>
+
+Each type of self-describing event and each type of entity get their own dedicated columns in the `events` table. The name of such a column is composed of the schema vendor, schema name and major schema version (more on versioning [later](#versioning)).
+
+Examples:
+
+| Kind | Schema | Resulting column |
+|---|---|---|
+| Self-describing event | `com.example/button_press/jsonschema/1-0-0` | `events.unstruct_event_com_example_button_press_1` |
+| Entity | `com.example/user/jsonschema/1-0-0` | `events.contexts_com_example_user_1` |
+
+   </TabItem>
+   <TabItem value="v1" label="Version 1.x">
 
 Each type of self-describing event and each type of entity get their own dedicated columns in the `events` table. The name of such a column is composed of the schema vendor, schema name and full schema version (more on versioning [later](#versioning)).
+ 
+Examples:
+
+ | Kind | Schema | Resulting column |
+ |---|---|---|
+ | Self-describing event | `com.example/button_press/jsonschema/1-0-0` | `events.unstruct_event_com_example_button_press_1_0_0` |
+ | Entity | `com.example/user/jsonschema/1-0-0` | `events.contexts_com_example_user_1_0_0` |
+
+   </TabItem>
+  </Tabs>
 
 The column name is prefixed by `unstruct_event_` for self-describing events, and by `contexts_` for entities. _(In case you were wondering, those are the legacy terms for self-describing events and entities, respectively.)_
 
@@ -119,13 +144,6 @@ The column name is prefixed by `unstruct_event_` for self-describing events, and
 All characters are converted to lowercase and all symbols (like `.`) are replaced with an underscore.
 
 :::
-
-Examples:
-
-| Kind | Schema | Resulting column |
-|---|---|---|
-| Self-describing event | `com.example/button_press/jsonschema/1-0-0` | `events.unstruct_event_com_example_button_press_1_0_0` |
-| Entity | `com.example/user/jsonschema/1-0-0` | `events.contexts_com_example_user_1_0_0` |
 
 For self-describing events, the column will be of a `RECORD` type, while for entities the type will be `REPEATED RECORD` (because an event can have more than one entity attached).
 
@@ -155,6 +173,7 @@ For example, suppose you have the following field in the schema:
 It will be translated into a field called `last_name` (notice the underscore), of type `STRING`.
 
   </TabItem>
+
   <TabItem value="snowflake" label="Snowflake">
 
 Each type of self-describing event and each type of entity get their own dedicated columns in the `events` table. The name of such a column is composed of the schema vendor, schema name and major schema version (more on versioning [later](#versioning)).
@@ -332,7 +351,24 @@ Note that this behavior was introduced in RDB Loader 5.3.0.
 
   </TabItem>
   <TabItem value="bigquery" label="BigQuery">
+    <Tabs groupId="biquery-loader-version" queryString lazy>
+        <TabItem value="v2" label="Version 2.x" default>
 
+Because the column name for the self-describing event or entity includes the major schema version, each major version of a schema gets a new column:
+
+| Schema | Resulting column |
+|---|---|
+| `com.example/button_press/jsonschema/1-0-0` | `unstruct_event_com_example_button_press_1` |
+| `com.example/button_press/jsonschema/1-2-0` | `unstruct_event_com_example_button_press_1` |
+| `com.example/button_press/jsonschema/2-0-0` | `unstruct_event_com_example_button_press_2` |
+
+When you evolve your schema within the same major version, (non-destructive) changes are applied to the existing column automatically. For example, if you add a new optional field in the schema, a new optional field will be added to the `RECORD`.
+
+:::info Breaking changes
+<ParquetRecoveryColumns/>
+:::
+   </TabItem>
+   <TabItem value="v1" label="Version 1.x">
 Because the column name for the self-describing event or entity includes the full schema version, each version of a schema gets a new column:
 
 | Schema | Resulting column |
@@ -345,12 +381,14 @@ If you are [modeling your data with dbt](/docs/modeling-your-data/modeling-your-
 
 :::info Breaking changes
 
-While our recommendation is to use major schema versions to indicate breaking changes (e.g. changing a type of a field from a `string` to a `number`), this is not particularly relevant for BigQuery. Indeed, each schema version gets its own column, so there is no difference between major and minor versions. That said, we believe sticking to our recommendation is a good idea:
+While our recommendation is to use major schema versions to indicate breaking changes (e.g. changing a type of a field from a `string` to a `number`), this is not particularly relevant for BigQuery Loader version 1.x. Indeed, each schema version gets its own column, so there is no difference between major and minor versions. That said, we believe sticking to our recommendation is a good idea:
 * Breaking changes might affect downstream consumers of the data, even if they don’t affect BigQuery
-* In the future, you might decide to migrate to a different data warehouse where our rules are stricter (e.g. Databricks)
+* Version 2 of the loader has stricter behavior that matches our loaders for other warehouses and lakes
 
 :::
 
+   </TabItem>
+   </Tabs>
   </TabItem>
   <TabItem value="snowflake" label="Snowflake">
 

@@ -8,7 +8,7 @@ sidebar_position: 500
 
 You can read about our telemetry principles [here](/docs/get-started/snowplow-community-edition/telemetry/index.md).
 
-## Configuration via file:
+## Configuration options
 
 Enabling telemetry:
 

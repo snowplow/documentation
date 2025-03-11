@@ -13,7 +13,7 @@ Check out the following example applications that can be used as a reference for
 
 ## iOS Tracker Demos
 
-The [examples repo](https://github.com/snowplow-incubator/snowplow-ios-tracker-examples) contains examples of some of the ways you can use the iOS Tracker, including:
+The [examples repo](https://github.com/snowplow-industry-solutions/snowplow-ios-tracker-examples) contains examples of some of the ways you can use the iOS Tracker, including:
 
 - A Swift SPM app
 - A Swift Cocoapods app

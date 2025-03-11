@@ -1,5 +1,5 @@
 ---
-title: "Kinesis Target"
+title: "Kinesis"
 description: "Write data to a Kinesis stream."
 ---
 

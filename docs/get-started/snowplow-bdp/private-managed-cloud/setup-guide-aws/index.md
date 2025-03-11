@@ -104,7 +104,8 @@ You will need to share this role with us as part of filling out the setup form i
         "sns:*",
         "sqs:*",
         "ssm:*",
-        "support:*"
+        "support:*",
+        "wafv2:ListWebACLs"
       ],
       "Resource":"*"
     }

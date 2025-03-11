@@ -1,5 +1,5 @@
 ---
-title: "EventHub Target"
+title: "EventHub"
 description: "Write data to an EventHub."
 ---
 

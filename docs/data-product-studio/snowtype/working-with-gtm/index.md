@@ -69,7 +69,7 @@ Below you can see the steps you need to create the variable using the contents g
 
 :::warning
 
-If the generated code is too large for Google Tag Manager, you can split it into multiple variables and include them in the order they are generated, or place directly into a Custom HTML tag.
+If the generated code is too large for Google Tag Manager, you will receive a warning from Snowtype. You can choose to use the `.minified.js` version created by Snowtype to reduce the file size. Alternatively, you can split the code into multiple variables and include them in the order they are generated, or place them directly into a Custom HTML tag.
 
 :::
 

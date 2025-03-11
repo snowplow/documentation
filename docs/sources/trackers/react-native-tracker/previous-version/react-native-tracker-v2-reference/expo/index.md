@@ -43,6 +43,4 @@ The tracker is missing more advanced features such as:
     - Features like install auto-tracking that track events automatically are not available.
     - Also the tracker doesn't persist the screen state, which means that the [`screen` context entity](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.mobile/screen/jsonschema/1-0-0) is not automatically added to tracked events.
 - No support for batching multiple events in POST requests from the emitter – events are sent one per request as soon as they are tracked.
-- The Global contexts feature is not yet implemented.
-
-We will improve the support for the Expo managed workflow over time. Please let us know on [Discourse](https://discourse.snowplow.io/) if you have any feedback about the tracker!
+- The Global Contexts feature is not implemented.

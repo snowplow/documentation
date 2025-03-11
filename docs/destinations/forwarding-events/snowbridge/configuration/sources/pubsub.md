@@ -1,5 +1,5 @@
 ---
-title: "PubSub Source"
+title: "PubSub"
 description: "Read data from a PubSub topic."
 ---
 

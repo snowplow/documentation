@@ -36,13 +36,13 @@ Point some test environment tracking to `localhost:9090`, and your events should
 You can run Snowbridge locally via Docker:
 
 <CodeBlock language="bash">{
-`docker run --env SNOWBRIDGE_CONFIG_FILE="" --env ACCEPT_LIMITED_USE_LICENSE=yes snowplow/snowbridge:${versions.snowbridge}`
+`docker run --env ACCEPT_LIMITED_USE_LICENSE=yes snowplow/snowbridge:${versions.snowbridge}`
 }</CodeBlock>
 
 The default configuration for Snowbridge uses the `stdin` source and the `stdout` target. So, to test sending data through with no transformations, we can run the following command (where `data.tsv` is a file with Snowplow events in TSV format):
 
 <CodeBlock language="bash">{
-`cat data.tsv | docker run --env SNOWBRIDGE_CONFIG_FILE="" --env ACCEPT_LIMITED_USE_LICENSE=yes -i snowplow/snowbridge:${versions.snowbridge}`
+`cat data.tsv | docker run --env ACCEPT_LIMITED_USE_LICENSE=yes -i snowplow/snowbridge:${versions.snowbridge}`
 }</CodeBlock>
 
 This will print the data to the terminal, along with logs.
@@ -106,4 +106,4 @@ transform {
 
 ## Further testing
 
-You can use the above method to test all aspects of the app from a local environment too, including sources, targets, failure targets, metrics endpoints etc. In some cases, you'll need to ensure that the local envionment has access to any required resources and can authenticate (e.g. connecting from a laptop to a cloud account/local mock of cloud resources, or setting up a local metrics server for testing). Once that’s done, provide Snowbridge with an hcl file configuring it to connect to those resources, and run it the same way as in the examples above.
+You can use the above method to test all aspects of the app from a local environment too, including sources, targets, failure targets, metrics endpoints etc. In some cases, you'll need to ensure that the local environment has access to any required resources and can authenticate (e.g. connecting from a laptop to a cloud account/local mock of cloud resources, or setting up a local metrics server for testing). Once that’s done, provide Snowbridge with an hcl file configuring it to connect to those resources, and run it the same way as in the examples above.

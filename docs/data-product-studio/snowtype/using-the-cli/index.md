@@ -109,6 +109,7 @@ Following is the set of available trackers and languages the Snowtype CLI curren
 | `snowplow-ios-tracker` | swift |
 | `snowplow-android-tracker` | kotlin |
 | `snowplow-flutter-tracker` | dart |
+| `snowplow-java-tracker` | java |
 
 ### Example Usage
 
@@ -313,6 +314,37 @@ const product = Product(
 );
 const event = WebPage(id: "212a9b63-1af7-4e96-9f35-e2fca110ff43");
 await tracker.track(event, contexts: [product]);
+```
+
+</TabItem>
+
+<TabItem value="snowplow-java-tracker" label="snowplow-java-tracker" default>
+
+```java
+package test;
+
+import com.snowplowanalytics.snowplow.tracker.*;
+import com.snowplowanalytics.snowplow.tracker.Tracker;
+import com.snowplowanalytics.snowplow.snowtype.*;
+import com.snowplowanalytics.snowplow.tracker.events.SelfDescribing;
+
+import java.util.Collections;
+
+
+public class SnowtypeTest {
+    public static void main(String[] args) {
+        Tracker tracker = Snowplow.createTracker("asdf", "asdf", "asdf");
+
+        /* Track a WebPage event */
+        tracker.track(SelfDescribing.builder().eventData(new WebPage.Builder().setId("212a9b63-1af7-4e96-9f35-e2fca110ff43").build().toSelfDescribingJson()).build());
+
+        /* Track a WebPage event with a Product context entity */
+        Product product = new Product.Builder().setId("Product id").setName("Snowplow product").setCurrency("EUR").setPrice(10.0).setCategory("Snowplow/Shoes").build();
+        WebPage webPage = new WebPage.Builder().setId("212a9b63-1af7-4e96-9f35-e2fca110ff43").build();
+        SelfDescribing event = SelfDescribing.builder().eventData(product.toSelfDescribingJson()).customContext(Collections.singletonList(webPage.toSelfDescribingJson())).build();
+        tracker.track(event);
+    }
+}
 ```
 
 </TabItem>

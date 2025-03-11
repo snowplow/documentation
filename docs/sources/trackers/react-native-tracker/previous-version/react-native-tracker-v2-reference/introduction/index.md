@@ -10,8 +10,6 @@ import {versions} from '@site/src/componentVersions';
 
 The Snowplow React Native Tracker is a module which imports the [Mobile Native Snowplow Trackers](/docs/sources/trackers/mobile-trackers/index.md) as native modules, available for use in React Native projects. More specifically it is built upon the [Mobile Native Trackers v5](/docs/sources/trackers/mobile-trackers/index.md), so as to leverage their tracking capabilities, API and configuration parameters.
 
-<p>The current version is {versions.reactNativeTracker}.</p>
-
 ## Initializing a tracker
 
 The React Native Tracker can be configured with a set of configuration objects. Once you import the module into your app, the `createTracker` function can be used to setup a tracker, which is identified internally by its namespace.
@@ -139,11 +137,11 @@ interface TrackerConfiguration {
 
 - **appId**: Identifier of the app.
 - **devicePlatform**: The device platform the app runs on. Default value: `'mob'`. Allowed platform values are:
-    
+
     - `'mob'`: Mobile/Tablet
     - `'web'`: Web(including mobile web)
     - `'pc'`: Desktop/Laptop/Netbook
-    
+
     - `'srv'`: Server-side app
     - `'app'`: General app
     - `'tv'`: Connected TV

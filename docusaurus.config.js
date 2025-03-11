@@ -114,8 +114,13 @@ module.exports = {
             className: 'mobile-only',
           },
           {
-            href: 'https://discourse.snowplow.io',
-            label: 'Discourse',
+            href: 'https://support.snowplow.io/',
+            label: 'Contact Support',
+            position: 'right',
+          },
+          {
+            href: 'https://community.snowplow.io/',
+            label: 'Community',
             position: 'right',
           },
           {

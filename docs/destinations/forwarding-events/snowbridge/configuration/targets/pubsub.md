@@ -1,5 +1,5 @@
 ---
-title: "PubSub Target"
+title: "PubSub"
 description: "Write data to a Pubsub topic."
 ---
 

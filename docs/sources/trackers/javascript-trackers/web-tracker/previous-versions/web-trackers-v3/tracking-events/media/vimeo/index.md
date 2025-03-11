@@ -13,11 +13,9 @@ import TabItem from '@theme/TabItem';
 This plugin enables the automatic tracking of a Vimeo video, utilising the [Snowplow Media Plugin](../index.md).
 
 :::info Example app
-To illustrate the tracked [events](/docs/fundamentals/events/index.md) and [entities](/docs/fundamentals/entities/index.md), you can visit an example app that showcases the tracked media events and entities live as you watch a video.
+To illustrate the tracked [events](/docs/fundamentals/events/index.md) and [entities](/docs/fundamentals/entities/index.md), you can visit [an example app](https://snowplow-industry-solutions.github.io/snowplow-javascript-tracker-examples/media) that showcases the tracked media events and entities live as you watch a video.
 
-There are examples for both the [iframe](https://snowplow-incubator.github.io/snowplow-javascript-tracker-examples/vimeoIframe) and [player](https://snowplow-incubator.github.io/snowplow-javascript-tracker-examples/vimeoPlayer) methods of tracking a Vimeo video.
-
-Source code for the app is [available here](https://github.com/snowplow-incubator/snowplow-javascript-tracker-examples).
+Source code for the app is [available here](https://github.com/snowplow-industry-solutions/snowplow-javascript-tracker-examples).
 :::
 
 Vimeo media events and entities are **automatically tracked** once configured.
@@ -28,7 +26,7 @@ Vimeo media events and entities are **automatically tracked** once configured.
   <TabItem value="js" label="JavaScript (tag)" default>
 
 | Tracker Distribution | Included |
-|----------------------|----------|
+| -------------------- | -------- |
 | `sp.js`              | ❌        |
 | `sp.lite.js`         | ❌        |
 
@@ -185,7 +183,7 @@ It's important to call `endVimeoTracking` as this will end any recurring ping ev
 <summary>The plugin provides automatic tracking of the following events</summary>
 
 | Vimeo Event Name               | Description                                                                                        |
-|--------------------------------|----------------------------------------------------------------------------------------------------|
+| ------------------------------ | -------------------------------------------------------------------------------------------------- |
 | Ready                          | Sent when the media tracking is successfully attached to the player and can track events.          |
 | Play                           | Sent when the player changes state to playing from previously being paused.                        |
 | Pause                          | Sent when the user pauses the playback.                                                            |

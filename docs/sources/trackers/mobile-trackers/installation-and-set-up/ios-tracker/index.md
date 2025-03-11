@@ -88,6 +88,7 @@ Snowplow.createTracker(namespace: "appTracker", endpoint: "https://snowplow-coll
       foregroundTimeout: Measurement(value: 30, unit: .minutes),
       backgroundTimeout: Measurement(value: 30, unit: .minutes)
   )
+      .continueSessionOnRestart(false)
 }
 ```
 
@@ -97,4 +98,4 @@ The `createTracker` method allows the creation of multiple trackers in the same 
 The trackers created with the above method are configured "locally" only. To create a tracker where the configuration can be updated through downloaded files, read [this page](/docs/sources/trackers/mobile-trackers/remote-configuration/index.md) about remote configuration.
 :::
 
-The [Examples Github repository](https://github.com/snowplow-incubator/snowplow-ios-tracker-examples) includes demo apps for Swift and Objective-C covering the most popular dependencies managers. They are provided as simple reference apps to help you set up the tracker.
+The [Examples Github repository](https://github.com/snowplow-industry-solutions/snowplow-ios-tracker-examples) includes demo apps for Swift and Objective-C covering the most popular dependencies managers. They are provided as simple reference apps to help you set up the tracker.

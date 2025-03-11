@@ -116,20 +116,20 @@ The tracker can be set up to automatically track certain events, or automaticall
 
 However, the following autotracked context entities can be configured directly when instrumenting the tracker. To enable them, simply add their names and boolean to the `contexts` field of the [configuration object](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). They will be added to every event tracked.
 
-| Entity    | Usage                             | Enabled by default |
-|-----------|-----------------------------------|--------------------|
+| Entity                                                                                                                         | Usage                             | Enabled by default |
+| ------------------------------------------------------------------------------------------------------------------------------ | --------------------------------- | ------------------ |
 | [`webPage`](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/page-views/index.md#webpage-context-entity) | A UUID for the page view.         | `true`             |
-| [`session`](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/session/index.md) | Data about the current session.   | `false`            |
-| [`browser`](/docs/sources/trackers/javascript-trackers/web-tracker/browsers/index.md) | Properties of the user's browser. | `false`            |
+| [`session`](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/session/index.md)                           | Data about the current session.   | `false`            |
+| [`browser`](/docs/sources/trackers/javascript-trackers/web-tracker/browsers/index.md)                                          | Properties of the user's browser. | `false`            |
 
 The following context entities can be configured by plugin, or when setting up the **JavaScript tracker** configuration object only. To automatically track these context entities when using the Browser tracker, use the plugin versions.
 
-| Entity              | Usage                          | Enabled by default |
-|---------------------|--------------------------------|--------------------|
-| [`performanceTiming`](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/timings/index.md) | Performance timing metrics.    | `true`             |
-| [`gaCookies`](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ga-cookies/index.md)         | Extract GA cookie values.      | `true`             |
-| [`geolocation`](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/timezone-geolocation/index.md)       | User's geolocation.            | `false`            |
-| [`clientHints`](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/client-hints/index.md)       | Chrome user-agent Client Hints | `true`             |
+| Entity                                                                                                                | Usage                          | Enabled by default |
+| --------------------------------------------------------------------------------------------------------------------- | ------------------------------ | ------------------ |
+| [`performanceTiming`](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/timings/index.md)        | Performance timing metrics.    | `true`             |
+| [`gaCookies`](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ga-cookies/index.md)             | Extract GA cookie values.      | `true`             |
+| [`geolocation`](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/timezone-geolocation/index.md) | User's geolocation.            | `false`            |
+| [`clientHints`](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/client-hints/index.md)         | Chrome user-agent Client Hints | `true`             |
 
 ## Manually-tracked events
 
@@ -153,7 +153,7 @@ There may be user interactions where custom self-describing events are too compl
 There are five parameters that can be associated with each structured event. Only the first two are required:
 
 | Name       | Required? | Description                                                                                                                                                      | Type    |
-|------------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------|
+| ---------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
 | `Category` | Yes       | The name you supply for the group of objects you want to track e.g. 'media', 'ecomm'.                                                                            | String  |
 | `Action`   | Yes       | Defines the type of user interaction for the web object e.g. 'play-video', add-to-basket'.                                                                       | String  |
 | `Label`    | No        | Identifies the specific object being actioned e.g. ID of the video being played, or the SKU or the product added to basket.                                      | String? |
@@ -435,7 +435,7 @@ setReferrerUrl(document.referrer);
 
 Snowplow events have several timestamps. The raw event payload always contains a `deviceCreatedTimestamp` (`dtm`) and a `deviceSentTimestamp` (`stm`). Other timestamps are added as the event moves through the pipeline.
 
-Every `trackX...()` method in the tracker allows for a custom timestamp, called `trueTimestamp` to be set. Read more about timestamps in [this still relevant forums post](https://discourse.snowplowanalytics.com/t/which-timestamp-is-the-best-to-see-when-an-event-occurred/538).
+Every `trackX...()` method in the tracker allows for a custom timestamp, called `trueTimestamp` to be set.
 
 As standard, every event tracked by the Javascript tracker will be recorded with two timestamps:
 

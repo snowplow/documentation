@@ -80,11 +80,16 @@ You can query fields in the self-describing event like so:
 ```sql
 SELECT
     ...
-    unstruct_event_my_example_event_1_0_0.my_field,
+    unstruct_event_my_example_event_1.my_field,
     ...
 FROM
     <events>
 ```
+
+:::note
+The column name produced by previous versions of the BigQuery Loader (<2.0.0) would contain full schema version, e.g. `unstruct_event_my_example_event_1_0_0`.
+The [BigQuery Loader upgrade guide](/docs/api-reference/loaders-storage-targets/bigquery-loader/upgrade-guides/2-0-0-upgrade-guide/index.md) describes how to enable the legacy column names in the 2.0.0 loader.
+:::
 
 </TabItem>
 <TabItem value="snowflake" label="Snowflake">
@@ -174,7 +179,7 @@ You can query a single entity’s fields by extracting them like so:
 ```sql
 SELECT
     ...
-    contexts_my_entity_1_0_0[SAFE_OFFSET(0)].my_field AS my_field,
+    contexts_my_entity_1[SAFE_OFFSET(0)].my_field AS my_field,
     ...
 FROM
     <events>
@@ -190,8 +195,11 @@ SELECT
 FROM
     <events>
 LEFT JOIN
-    unnest(contexts_my_entity_1_0_0) AS my_ent -- left join to avoid discarding events without values in this entity
+    unnest(contexts_my_entity_1) AS my_ent -- left join to avoid discarding events without values in this entity
 ```
+:::note
+Column name produced by previous versions of the BigQuery Loader (<2.0.0) would contain full schema version, e.g.  `contexts_my_entity_1_0_0`.
+:::
 
 </TabItem>
 <TabItem value="snowflake" label="Snowflake">

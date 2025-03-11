@@ -8,6 +8,8 @@ Filters can be used in one of two ways, which is determined by the `filter_actio
 
 This example filters out all data whose `platform` value does not match either `web` or `mobile`.
 
+## Configuration options
+
 Minimal configuration:
 
 ```hcl reference

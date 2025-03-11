@@ -58,7 +58,7 @@ Snowplow requires that you put together schemas for your events and entities, ah
 1. To validate that the data coming in is "good data" that conforms to the schema
 2. Process the data correctly, in particular, shredding the JSONs that represent the data into tidy tables in Redshift suitable for analysis
 
-**Iglu** is a key technology for making this possible. It is machine-readable, open-source _schema registry_ for JSON and Thrift schemas from the team at Snowplow Analytics. A schema registry is like [Git](https://en.wikipedia.org/wiki/Git_(software)) but holds data schemas instead of software or code.
+**Iglu** is a key technology for making this possible. It is machine-readable _schema registry_ for JSON and Thrift schemas. A schema registry is like [Git](https://en.wikipedia.org/wiki/Git_(software)) but holds data schemas instead of software or code.
 
 ## Analyze your business use case and define reports
 

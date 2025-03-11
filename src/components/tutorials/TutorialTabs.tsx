@@ -51,7 +51,7 @@ export const DocsTutorialsTabsMobile: React.FC = () => {
       <Tab value={DocsTab.Docs} label="Docs" sx={{ textTransform: 'none' }} />
       <Tab
         value={DocsTab.Tutorials}
-        label="Tutorials & Guides"
+        label="Tutorials"
         sx={{ textTransform: 'none' }}
       />
     </Tabs>
@@ -91,12 +91,14 @@ export const DocsTutorialsTabsDesktop: React.FC = () => {
         value={DocsTab.Docs}
         label="Docs"
         sx={{ textTransform: 'none' }}
+        href={DocsTab.Docs}
       />
       <Tab
         onClick={() => changeTab(DocsTab.Tutorials)}
         value={DocsTab.Tutorials}
-        label="Tutorials & Guides"
+        label="Tutorials"
         sx={{ textTransform: 'none' }}
+        href={DocsTab.Tutorials}
       />
     </Tabs>
   )

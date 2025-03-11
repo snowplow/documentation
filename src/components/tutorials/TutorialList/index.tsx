@@ -1,11 +1,11 @@
-import React, { FC, useEffect, useMemo, useState } from 'react'
+import React, { FC, useMemo, useState } from 'react'
 
 import Link from '@docusaurus/Link'
+import Head from '@docusaurus/Head'
 import { useHistory } from '@docusaurus/router'
-import { ChevronRight, Search } from '@mui/icons-material'
+import { ChevronRight } from '@mui/icons-material'
 import {
   Box,
-  FormControl,
   Grid,
   InputAdornment,
   MenuItem,
@@ -39,7 +39,7 @@ const TutorialCard: FC<{ tutorial: Tutorial }> = ({ tutorial }) => {
   const firstStep = getFirstStepPath(tutorial.meta)
 
   return (
-    <Card>
+    <Card sx={{ height: '100%' }}>
       <Grid
         container
         direction="column"
@@ -145,22 +145,27 @@ const TutorialList: FC = () => {
     [search, topic, parsedTutorials]
   )
 
-  return isMobile ? (
-    <MobileTutorialList
-      search={search}
-      setSearch={setSearch}
-      topic={topic}
-      setTopic={setTopic}
-      tutorials={tutorials}
-    />
-  ) : (
-    <DesktopTutorialList
-      search={search}
-      setSearch={setSearch}
-      topic={topic}
-      setTopic={setTopic}
-      tutorials={tutorials}
-    />
+  return (
+    <>
+      <Head>
+        <title>Tutorials | Snowplow Documentation</title>
+      </Head>{' '}
+      {isMobile ? (
+        <MobileTutorialList
+          setSearch={setSearch}
+          topic={topic}
+          setTopic={setTopic}
+          tutorials={tutorials}
+        />
+      ) : (
+        <DesktopTutorialList
+          setSearch={setSearch}
+          topic={topic}
+          setTopic={setTopic}
+          tutorials={tutorials}
+        />
+      )}
+    </>
   )
 }
 
@@ -175,12 +180,11 @@ function filterTutorials(
 }
 
 const MobileTutorialList: FC<{
-  search: string
   setSearch: React.Dispatch<React.SetStateAction<string>>
   topic: TopicDropdown
   setTopic: React.Dispatch<React.SetStateAction<TopicDropdown>>
   tutorials: Tutorial[]
-}> = ({ search, setSearch, topic, setTopic, tutorials }) => {
+}> = ({ setSearch, topic, setTopic, tutorials }) => {
   return (
     <Box sx={{ mt: 1 }}>
       <Grid container direction="column" rowSpacing={2}>
@@ -198,12 +202,11 @@ const MobileTutorialList: FC<{
 }
 
 const DesktopTutorialList: FC<{
-  search: string
   setSearch: React.Dispatch<React.SetStateAction<string>>
   topic: TopicDropdown
   setTopic: React.Dispatch<React.SetStateAction<TopicDropdown>>
   tutorials: Tutorial[]
-}> = ({ search, setSearch, topic, setTopic, tutorials }) => {
+}> = ({ setSearch, topic, setTopic, tutorials }) => {
   return (
     <Box marginX={8} marginY={3} sx={{ minWidth: '90vw', mr: 0 }}>
       <Grid container columnSpacing={2}>

@@ -100,7 +100,7 @@ The purpose of this package is to allow an incremental, efficient way to do mark
 
 In the below guide we will walk you through the data transformation process step-by-step in order for you to see how the source data changes downstream. This will give you and your team a transparent and easy-to-understand way to see how this package will lead you to valuable insights.
 
-We also provide the **[Marketing Attribution Data App](/docs/data-apps/attribution-modeling/index.md)** specifically to help your analysis by visualizing the output in the form of interactive dashboards as well as letting you capture datasets for comparison. It works in tandem with the package and will auto-update daily in case your package has been processed since then.
+We also provide the **[Marketing Attribution Data Model Pack](/docs/modeling-your-data/visualization/attribution-modeling/index.md)** specifically to help your analysis by visualizing the output in the form of interactive dashboards as well as letting you capture datasets for comparison. It works in tandem with the package and will auto-update daily in case your package has been processed since then.
 
 ## Sources you are going to need
 
@@ -111,11 +111,11 @@ You will also need a table where the conversion events are stored. If you use th
 
 <div>
   {MarkdownTableToMuiDataGrid(`
-| user_identifier                      | user_id | cv_tstamp          | cv_value       |
-|--------------------------------------|---------|-----------------------|----------------|
-| user_id1 | user1   | 2022-06-08 08:11      | 94.42          |
-| user_id2| user2   | 2022-06-09 12:03      | 206.5          |
-| user_id3 | user3   | 2022-06-09 15:02      | 5              |
+| user_identifier | user_id | start_tstamp     | cv_value |
+| --------------- | ------- | ---------------- | -------- |
+| user_id1        | user1   | 2022-06-08 08:11 | 94.42    |
+| user_id2        | user2   | 2022-06-09 12:03 | 206.5    |
+| user_id3        | user3   | 2022-06-09 15:02 | 5        |
 `, datagridProps)}
 </div>
 
@@ -151,11 +151,11 @@ You will also need a source table to track your user journey / path with fields 
 
 <div>
   {MarkdownTableToMuiDataGrid(`
-  | user_identifier                      | user_id | start_tstamp     | mkt_medium | mkt_source  |
-|--------------------------------------|---------|------------------|------------|-------------|
-| user_id1 | user1  | 2022-06-04 06:12  | organic    | google      |
-| user_id1 | user1  | 2022-06-05 14:45  | cpc        | youtube.com |
-| user_id2 | user2  | 2022-06-04 18:13  | referral   | quora.com   |
+  | user_identifier | user_id | start_tstamp     | mkt_medium | mkt_source  |
+  | --------------- | ------- | ---------------- | ---------- | ----------- |
+  | user_id1        | user1   | 2022-06-04 06:12 | organic    | google      |
+  | user_id1        | user1   | 2022-06-05 14:45 | cpc        | youtube.com |
+  | user_id2        | user2   | 2022-06-04 18:13 | referral   | quora.com   |
 `, datagridProps)}
 </div>
 
@@ -174,9 +174,9 @@ You most likely have a warehouse with marketing (ad) spend information by channe
 <div>
   {MarkdownTableToMuiDataGrid(`
   | channel           | campaign  | spend | spend_tstamp     |
-|-------------------|-----------|-------|------------------|
-| Paid_Search_Other | campaign1 | 10000 | 2022-05-04 18:32 |
-| Video             | campaign2 | 10000 | 2022-05-04 18:32 |
+  | ----------------- | --------- | ----- | ---------------- |
+  | Paid_Search_Other | campaign1 | 10000 | 2022-05-04 18:32 |
+  | Video             | campaign2 | 10000 | 2022-05-04 18:32 |
 `, datagridProps)}
 </div>
 
@@ -264,22 +264,22 @@ Please note that the Unified data model allows nulls on `user_identifier` field,
 1. The **`derived.snowplow_attribution_paths_to_conversion`** model will aggregate the paths the customer has followed that have lead to conversion based on the path transformation and other limitations such as the path_lookback_step or path_lookback_days variable i.e. it combines the path and conversion source tables to produce an outcome. It looks like this:
 
 
-  | customer_id          | cv_tstamp | revenue | channel_path                              | channel_transformed_path  | campaign_path | campaign_transformed_path |
-|----------------------|-----------------------|---------|-------------------------------------------|---------------------------|---------------|---------------------------|
-| user_id1 | 2022-06-11 15:33  | 20.42   | Direct                                    | Direct                    | camp1 > camp2 | camp1 > camp2             |
-| user_id2 | 2022-07-30 11:55  | 24      | Direct > Direct                           | Direct                    | camp1         | camp1                     |
-| user_id3  | 2022-06-08 20:18  | 50      | Direct > Direct                           | Direct                    | camp2 > camp1 | camp2 > camp1             |
-| user_id1 | 2022-07-25 07:52  | 140     | Organic_Search > Direct > Organic_Search  | Organic_Search > Direct > Organic_Search | Campaign 2 > Campaign 2 > Campaign 1 > Campaign 1 | Campaign 2 > Campaign 1
+  | customer_id | cv_tstamp        | revenue | channel_path                             | channel_transformed_path                 | campaign_path                                     | campaign_transformed_path |
+  | ----------- | ---------------- | ------- | ---------------------------------------- | ---------------------------------------- | ------------------------------------------------- | ------------------------- |
+  | user_id1    | 2022-06-11 15:33 | 20.42   | Direct                                   | Direct                                   | camp1 > camp2                                     | camp1 > camp2             |
+  | user_id2    | 2022-07-30 11:55 | 24      | Direct > Direct                          | Direct                                   | camp1                                             | camp1                     |
+  | user_id3    | 2022-06-08 20:18 | 50      | Direct > Direct                          | Direct                                   | camp2 > camp1                                     | camp2 > camp1             |
+  | user_id1    | 2022-07-25 07:52 | 140     | Organic_Search > Direct > Organic_Search | Organic_Search > Direct > Organic_Search | Campaign 2 > Campaign 2 > Campaign 1 > Campaign 1 | Campaign 2 > Campaign 1   |
 
 
 2. The **`derived.snowplow_attribution_channel_attributions`** unnests the paths from paths_to_conversion into their separate rows and calculates the attribution amount for that specific path step for each of the sql based attribution models:
 
 
-  | composite_key                 | event_id                             | customer_id          | cv_tstamp               | cv_total_revenue | channel_transformed_path         | channel        | source_index | path_length | first_touch_attribution | last_touch_attribution | linear_attribution | position_based_attribution |
-|-----------------------------------------------------|--------------------------------------|----------------------|-------------------------|------------------|----------------------------------|----------------|--------------|-------------|-------------------------|------------------------|--------------------|----------------------------|
-| id1_Video0          | event_1 | user_id1 | 2023-07-07 13:05:55.000 | 200              | Video                            | Video          | 0            | 1           | 200                     | 200                    | 200                | 200                        |
-| id2_Display_Other0  | event_2 | user_id2 | 2023-07-19 04:27:51.000 | 66.5             | Display_Other > Organic_Search   | Display_Other  | 0            | 2           | 66.5                    | 0                      | 33.25  | 33.25 |
-| id3_Organic_Search1 | event_2 | user_id2 | 2023-07-19 04:27:51.000 | 66.5 | Display_Other > Organic_Search | Organic_Search | 1 | 2 | 0| 66.5 | 33.25 | 33.25 |
+  | composite_key       | event_id | customer_id | cv_tstamp               | cv_total_revenue | channel_transformed_path       | channel        | source_index | path_length | first_touch_attribution | last_touch_attribution | linear_attribution | position_based_attribution |
+  | ------------------- | -------- | ----------- | ----------------------- | ---------------- | ------------------------------ | -------------- | ------------ | ----------- | ----------------------- | ---------------------- | ------------------ | -------------------------- |
+  | id1_Video0          | event_1  | user_id1    | 2023-07-07 13:05:55.000 | 200              | Video                          | Video          | 0            | 1           | 200                     | 200                    | 200                | 200                        |
+  | id2_Display_Other0  | event_2  | user_id2    | 2023-07-19 04:27:51.000 | 66.5             | Display_Other > Organic_Search | Display_Other  | 0            | 2           | 66.5                    | 0                      | 33.25              | 33.25                      |
+  | id3_Organic_Search1 | event_2  | user_id2    | 2023-07-19 04:27:51.000 | 66.5             | Display_Other > Organic_Search | Organic_Search | 1            | 2           | 0                       | 66.5                   | 33.25              | 33.25                      |
 
 
 3. The **`derived.snowplow_attribution_campaign_attributions`** does the same, only for campaigns not channels.
@@ -289,24 +289,24 @@ Please note that the Unified data model allows nulls on `user_identifier` field,
 1. The **`derived.snowplow_attribution_path_summary`** shows the campaign/channel paths and the associated conversions (and optionally non-conversions, if the `path_to_non_conversions` table is enabled through its related variable `enable_path_to_non_conversions`)
 
 
-  | transformed_path                   | conversions | non_conversions | revenue  |
-|------------------------------------|-------------|-----------------|----------|
-| Direct                             | 3           | 25              | 94.42    |
-| Organic_Search                     | 2           | 26              | 206.5    |
-| Referral > Direct                  | 0           | 1               | 0        |
-| Video                              | 1           | 2               | 200      |
-| Organic_Search > Paid_Search_Other | 0           | 2               | 0        |
+  | transformed_path                   | conversions | non_conversions | revenue |
+  | ---------------------------------- | ----------- | --------------- | ------- |
+  | Direct                             | 3           | 25              | 94.42   |
+  | Organic_Search                     | 2           | 26              | 206.5   |
+  | Referral > Direct                  | 0           | 1               | 0       |
+  | Video                              | 1           | 2               | 200     |
+  | Organic_Search > Paid_Search_Other | 0           | 2               | 0       |
 
 
 2. The view called **`derived.snowplow_attribution_overview`** is tied to a dispatch macro of the same name which lets you overwrite it in your project, if needed. Given you specify your `var('snowplow__spend_source')` it will calculate the ROAS for you for each channel and campaign:
 
 
-  | path_type | attribution_type | touch_point| in_n_conversion_paths | attributed_conversions | min_cv_tstamp | max_cv_tstamp | spend | sum_cv_total_revenue | attributed_revenue | roas |
-|----------|-------------|----------------|---|----------------|-------------------------|-------------------------|--------|------------|------------------|----------------|
-| campaign | first_touch | Campaign 2     | 2 | 1 | 2023-07-19 04:27:51.000 | 2023-07-25 07:52:34.000 | 100,000 | 206.5 | 206.5 | 0.002065 |
-| campaign | last_touch  | Campaign 1     | 3 | 1 | 2023-07-07 13:05:55.000 | 2023-07-30 11:55:24.000 | 100,000 | 364 | 364| 0.00364 |
-| channel  | first_touch | Display_Other  | 1 | 1 | 2023-07-19 04:27:51.000 | 2023-07-19 04:27:51.000 | 100,000 | 66.5  | 66.5  | 0.000665 |
-| channel  | first_touch | Organic_Search | 2 | 0| 2023-07-19 04:27:51.000 | 2023-07-25 07:52:34.000 | 100,000 | 206.5  | 0  | 0 |
+  | path_type | attribution_type | touch_point    | in_n_conversion_paths | attributed_conversions | min_cv_tstamp           | max_cv_tstamp           | spend   | sum_cv_total_revenue | attributed_revenue | roas     |
+  | --------- | ---------------- | -------------- | --------------------- | ---------------------- | ----------------------- | ----------------------- | ------- | -------------------- | ------------------ | -------- |
+  | campaign  | first_touch      | Campaign 2     | 2                     | 1                      | 2023-07-19 04:27:51.000 | 2023-07-25 07:52:34.000 | 100,000 | 206.5                | 206.5              | 0.002065 |
+  | campaign  | last_touch       | Campaign 1     | 3                     | 1                      | 2023-07-07 13:05:55.000 | 2023-07-30 11:55:24.000 | 100,000 | 364                  | 364                | 0.00364  |
+  | channel   | first_touch      | Display_Other  | 1                     | 1                      | 2023-07-19 04:27:51.000 | 2023-07-19 04:27:51.000 | 100,000 | 66.5                 | 66.5               | 0.000665 |
+  | channel   | first_touch      | Organic_Search | 2                     | 0                      | 2023-07-19 04:27:51.000 | 2023-07-25 07:52:34.000 | 100,000 | 206.5                | 0                  | 0        |
 
 
 ### Manifest table

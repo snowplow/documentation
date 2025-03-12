@@ -353,11 +353,11 @@ If you need a conversions source table for your downstream model (e.g. for the s
 
 This would produce an incremental conversions table where you will see the most important fields related to your conversion events based on your definitions. If you defined multiple conversion types, you will see them all in one table.
 
-| event_id                             | session_identifier                  | user_identifier    | user_id | cv_value | cv_tstamp             | dvce_created_tstamp   | cv_type    |
-|----------------------------------------|----------------------------------------|----------------------|-----------|------------|-------------------------|-------------------------|--------------|
-| event_1 | session_1 | f000170187170673177  | user_1| 50.00      | 2023-06-08 20:18:32.000 | 2023-06-08 20:18:32.000 | transactions |
-| event_2   | session_2 | f0009028775170427694 |user_2 | 20.42      | 2023-06-11 15:33:03.000 | 2023-06-11 15:33:03.000 | transactions |
-| event_3   | session_3| f0008284662789123943 | user_3| 200.00     | 2023-07-07 13:05:55.000 | 2023-07-07 13:05:55.000 | transactions |
+| event_id  | session_identifier  | user_identifier       | user_id  | cv_id  | cv_value  | cv_tstamp               | dvce_created_tstamp   | cv_type       |
+|-----------|----------------------|-----------------------|----------|--------|-----------|-------------------------|------------------------|--------------|
+| event_1   | session_1            | f000170187170673177   | user_1   | cv_1   | 50.00     | 2023-06-08 20:18:32.000 | 2023-06-08 20:18:32.000 | transactions |
+| event_2   | session_2            | f0009028775170427694  | user_2   | cv_2   | 20.42     | 2023-06-11 15:33:03.000 | 2023-06-11 15:33:03.000 | transactions |
+| event_3   | session_3            | f0008284662789123943  | user_3   | cv_3   | 200.00    | 2023-07-07 13:05:55.000 | 2023-07-07 13:05:55.000 | transactions |
 
 :::note
 

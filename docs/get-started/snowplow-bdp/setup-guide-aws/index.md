@@ -1,11 +1,11 @@
 ---
-title: "Setup Snowplow BDP on AWS"
+title: "BDP Enterprise on AWS"
 date: "2020-01-30"
 sidebar_position: 10
 coverImage: "aws_logo_0.png"
 ---
 
-To setup Snowplow, simply follow the ['Getting Started' steps in the Snowplow BDP Console](https://console.snowplowanalytics.com/getting-started). You will receive an account as part of your onboarding.
+To set up Snowplow, simply follow the ['Getting Started' steps in the Snowplow BDP Console](https://console.snowplowanalytics.com/getting-started). You will receive an account as part of your onboarding.
 
 ## What are the steps
 
@@ -42,7 +42,7 @@ These instructions are also provided as part of the setup flow in Snowplow BDP C
 
 1. Access the IAM control panel within the sub-account
 2. Go to Access management > Roles and select Create role
-3. Select "Another AWS account"  
+3. Select "Another AWS account"
     (Account ID: 793733611312 Require MFA: true)
 4. Select the policy you created earlier
 5. Call the role "SnowplowAdmin" (please use this specific name)
@@ -114,7 +114,7 @@ You will need to share this role with us as part of filling out the setup form i
     }
   ]
 }
- 
+
 ```
 
 For complete documentation from Amazon go [here](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html).
@@ -134,7 +134,7 @@ For complete documentation from Amazon go [here](https://docs.aws.amazon.com/AWS
 
 ### Setup the Snowplow deployment role
 
-The last step is to set up the Snowplow deployment role. This is a role assumed by the machine user to make changes with Terraform. 
+The last step is to set up the Snowplow deployment role. This is a role assumed by the machine user to make changes with Terraform.
 
 1. Navigate to https://console.aws.amazon.com/iam/home#/roles$new?step=type&roleType=crossAccount
 2. Select Create role and for trusted entity type select AWS account.

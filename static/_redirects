@@ -334,3 +334,8 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/data-product-studio/data-quality/failed-events/exploring-failed-events/querying/ /docs/data-product-studio/data-quality/failed-events/exploring-failed-events/file-storage/ 301
 
 /docs/data-apps/* /docs/modeling-your-data/visualization/:splat 301
+
+# Adding content to every section
+/docs/get-started/deployment-model/* /docs/get-started/ 301
+/docs/get-started/snowplow-bdp/private-managed-cloud/* /docs/get-started/snowplow-bdp/:splat 301
+/docs/get-started/snowplow-bdp/cloud/* /docs/get-started/snowplow-bdp/ 301

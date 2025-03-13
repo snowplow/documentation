@@ -339,3 +339,5 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/get-started/deployment-model/* /docs/get-started/ 301
 /docs/get-started/snowplow-bdp/private-managed-cloud/* /docs/get-started/snowplow-bdp/:splat 301
 /docs/get-started/snowplow-bdp/cloud/* /docs/get-started/snowplow-bdp/ 301
+/docs/get-started/snowplow-community-edition/what-is-community-edition/ /docs/get-started/snowplow-community-edition/ 301
+/docs/fundamentals/architecture-overview/* /docs/fundamentals/ 301

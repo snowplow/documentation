@@ -346,3 +346,6 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/data-product-studio/snowtype/getting-started/* /docs/data-product-studio/snowtype/:splat 301
 /docs/data-product-studio/data-quality/snowplow-inspector/overview/* /docs/data-product-studio/data-quality/snowplow-inspector/:splat 301
 /docs/data-product-studio/data-quality/snowplow-micro/what-is-micro/* /docs/data-product-studio/data-quality/snowplow-micro/:splat 301
+/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/ui/* /docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/:splat 301
+/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/api/* /docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/:splat 301
+/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/warehouse-lake/* /docs/data-product-studio/data-quality/failed-events/exploring-failed-events/:splat 301

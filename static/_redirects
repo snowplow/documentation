@@ -343,3 +343,4 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/fundamentals/architecture-overview/* /docs/fundamentals/ 301
 /docs/data-product-studio/introduction-to-tracking-design/ /docs/data-product-studio/ 301
 /docs/data-product-studio/data-structures/manage/ui* /docs/data-product-studio/data-structures/manage/:splat 301
+/docs/data-product-studio/snowtype/getting-started/* /docs/data-product-studio/snowtype/:splat 301

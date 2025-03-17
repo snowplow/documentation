@@ -9,7 +9,7 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-You can (and should!) test your enrichment with [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/what-is-micro/index.md) before adding it to your production pipeline.
+You can (and should!) test your enrichment with [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md) before adding it to your production pipeline.
 
 ## Basic setup
 

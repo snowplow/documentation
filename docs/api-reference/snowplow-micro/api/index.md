@@ -9,7 +9,7 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-This page documents the REST API of [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/what-is-micro/index.md#what-is-snowplow-micro).
+This page documents the REST API of [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md#what-is-snowplow-micro).
 
 ## /micro/all
 
@@ -277,7 +277,7 @@ curl -X POST -H 'Content-Type: application/json' <IP:PORT>/micro/good -d '<JSON>
 An example of JSON with filters could be:
 
 ```json
-{ 
+{
   "schema": "iglu:com.acme/example/jsonschema/1-0-0",
   "contexts": [
     "com.snowplowanalytics.mobile/application/jsonschema/1-0-0",

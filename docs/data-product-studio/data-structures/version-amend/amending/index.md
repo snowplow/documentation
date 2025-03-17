@@ -44,7 +44,7 @@ flowchart LR
 ```
 
 We call this approach “patching”. To patch the schema, i.e. apply changes to it without updating the version:
-* If you are using Snowplow BDP, select the “Patch” option [in the UI](/docs/data-product-studio/data-structures/manage/ui/index.md) when saving the schema
+* If you are using Snowplow BDP, select the “Patch” option [in the UI](/docs/data-product-studio/data-structures/manage/index.md) when saving the schema
 * If you are using Snowplow Community Edition, do not increment the schema version when [uploading it with `igluctl`](/docs/data-product-studio/data-structures/manage/iglu/index.md)
 
 :::danger

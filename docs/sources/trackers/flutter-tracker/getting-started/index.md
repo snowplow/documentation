@@ -9,7 +9,7 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-Designing how and what to track in your app is an important decision. Check out our docs about tracking design [here](/docs/data-product-studio/introduction-to-tracking-design/index.md).
+Designing how and what to track in your app is an important decision. Check out our docs about tracking design [here](/docs/data-product-studio/index.md).
 
 The following steps will guide you through setting up the Flutter tracker in your project and tracking a simple event.
 
@@ -43,7 +43,7 @@ Make sure to use JavaScript tracker version `3.5` or newer. You may also refer
 
 ## Initialization
 
-Instantiate a tracker using the `Snowplow.createTracker` function. At its most basic, the function takes two required arguments: `namespace` and `endpoint`. Tracker namespace identifies the tracker instance, you may create multiple trackers with different namespaces. The endpoint is the URI of the Snowplow collector to send the events to. This tracker creation is asynchronous and uses the `await` keyword; therefore it must occur inside a function labelled `async`. You could create the tracker in the `main()` of your main widget. 
+Instantiate a tracker using the `Snowplow.createTracker` function. At its most basic, the function takes two required arguments: `namespace` and `endpoint`. Tracker namespace identifies the tracker instance, you may create multiple trackers with different namespaces. The endpoint is the URI of the Snowplow collector to send the events to. This tracker creation is asynchronous and uses the `await` keyword; therefore it must occur inside a function labelled `async`. You could create the tracker in the `main()` of your main widget.
 
 ```dart
 SnowplowTracker tracker = await Snowplow.createTracker(
@@ -57,7 +57,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   SnowplowTracker tracker = await Snowplow.createTracker(
-      namespace: "namespace", 
+      namespace: "namespace",
       endpoint: "http://0.0.0.0:9090");
 
   runApp(MyApp(tracker: tracker));

@@ -1,6 +1,6 @@
 ---
 title: "Managing data structures via the API"
-sidebar_label: "Using the API"
+sidebar_label: "Data structures API"
 sidebar_position: 3
 sidebar_custom_props:
   offerings:
@@ -77,12 +77,12 @@ To use the commands to retrieve information about a specific Data Structure, you
 
 **Example:**
 
-| Parameter | Value |
-|-----------|-------|
+| Parameter       | Value                                  |
+| --------------- | -------------------------------------- |
 | Organization ID | `38e97db9-f3cb-404d-8250-cd227506e544` |
-| Vendor | `com.acme.event` |
-| Schema name | `search` |
-| Format | `jsonschema` |
+| Vendor          | `com.acme.event`                       |
+| Schema name     | `search`                               |
+| Format          | `jsonschema`                           |
 
 First concatenate the information with a dash (-) as the separator:
 `38e97db9-f3cb-404d-8250-cd227506e544-com.acme.event-search-jsonschema`

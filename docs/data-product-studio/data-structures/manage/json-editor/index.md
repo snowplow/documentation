@@ -1,7 +1,7 @@
 ---
 title: "Managing data structures with the JSON Editor"
 description: "The JSON editor is best suited for defining complex data structures that require heavy nesting and advanced data types."
-sidebar_label: "Using the JSON Editor"
+sidebar_label: "Console: JSON editor"
 sidebar_position: 1
 sidebar_custom_props:
   offerings:
@@ -9,7 +9,7 @@ sidebar_custom_props:
 ---
 
 :::info
-The JSON editor is ideal for more complex data structures that require heavy nesting and more advanced data types. For simple data structures, use the [Data Structures Builder](/docs/data-product-studio/data-structures/manage/builder/index.md).
+The JSON editor is ideal for more complex data structures that require nesting or more advanced data types. For simple data structures, use the [Data Structures Builder](/docs/data-product-studio/data-structures/manage/builder/index.md).
 :::
 
 ## Creating a new data structure

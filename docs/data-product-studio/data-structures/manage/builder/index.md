@@ -1,20 +1,23 @@
 ---
 title: "Managing data structures with the Data Structures Builder"
 description: "The Data Structures Builder is ideal for quickly creating an event or entity with our guided setup and automated versioning."
-sidebar_label: "Using the Data Structures Builder"
+sidebar_label: "Console: data structures builder"
 sidebar_position: 1
+sidebar_custom_props:
+  offerings:
+    - bdp
 ---
 
 :::info Supported properties
-The builder only supports the following types:
+The [data structures builder](/docs/data-product-studio/data-structures/manage/builder/index.md) only supports the following types:
 
-- string
-- enumerated list
-- integer
-- decimal
-- boolean
+- String
+- Enumerated list
+- Integer
+- Decimal
+- Boolean
 
-For more complex data structures that require heavy nesting and more advanced data types, use the JSON Editor.
+For more complex data structures that require nesting or more advanced data types, use the [JSON editor](/docs/data-product-studio/data-structures/manage/json-editor/index.md).
 :::
 
 ***
@@ -45,5 +48,3 @@ When you modify the data structure, the builder will mark your changes in yellow
 If you are satisfied with your changes, click "Save" and make sure to note the newly updated tracking URL.
 
 ![](images/data-structure-version.png)
-
-

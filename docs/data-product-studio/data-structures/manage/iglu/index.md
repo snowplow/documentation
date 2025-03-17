@@ -1,7 +1,7 @@
 ---
 title: "Managing schemas using Iglu"
 date: "2020-02-15"
-sidebar_label: "Using Iglu"
+sidebar_label: "Iglu"
 sidebar_position: 4
 sidebar_custom_props:
   offerings:

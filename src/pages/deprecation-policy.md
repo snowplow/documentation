@@ -46,7 +46,7 @@ Likewise, any publicly available product description will be amended to reflect 
 
 ### Removal
 
-After the deprecation period (6 months or 1 month — see above), the relevant features or components will be removed from the codebase. This will be considered a breaking change, so any affected software assets (e.g. components where features were removed) will be released with a new major version.
+After the deprecation period (six months or one month — see above), the relevant features or components will be removed from the codebase. This will be considered a breaking change, so any affected software assets (e.g. components where features were removed) will be released with a new major version.
 
 ### Rollout
 

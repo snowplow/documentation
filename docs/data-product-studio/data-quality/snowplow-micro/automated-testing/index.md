@@ -9,7 +9,7 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-[Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/what-is-micro/index.md) is a lightweight version of the Snowplow pipeline which is great for testing.
+[Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md) is a lightweight version of the Snowplow pipeline which is great for testing.
 
 The [snowplow-micro-examples](https://github.com/snowplow-incubator/snowplow-micro-examples) repository aims to show in detail all the steps to setting up automated tests for your Snowplow event tracking (using Nightwatch and Cypress as examples of test tools), to build end-to-end GitHub Actions testing workflows.
 
@@ -375,7 +375,7 @@ this.command = (callback) => {
         {
             url: 'http://localhost:9090/micro/all',
             json: true
-        }, 
+        },
         (err, res, body) => {
             if (err) {
                 console.warn(error);
@@ -603,8 +603,8 @@ cy.eventsWithParams(
         "se_category": "Media",
         "se_action": "Play video",
         "se_label": "Surfing"
-    }, 
-    3 
+    },
+    3
 );
 ```
 
@@ -646,8 +646,8 @@ cy.eventsWithContexts(
                 "categories": ["sports", "history", "food"]
             }
         }
-    ], 
-    2 
+    ],
+    2
 );
 ```
 
@@ -680,8 +680,8 @@ cy.eventsWithProperties(
                 },
             }
         ]
-    }, 
-    1 
+    },
+    1
 );
 ```
 

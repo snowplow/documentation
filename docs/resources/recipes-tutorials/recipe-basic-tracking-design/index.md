@@ -19,7 +19,7 @@ We'll give it the following details:
 
 :::info Data Structures Builder
 
-In Snowplow BDP, you can use the [data structures builder UI](/docs/data-product-studio/data-structures/manage/ui/builder/index.md) to follow along. You will not need the JSON code.
+In Snowplow BDP, you can use the [data structures builder UI](/docs/data-product-studio/data-structures/manage/builder/index.md) to follow along. You will not need the JSON code.
 
 :::
 
@@ -69,7 +69,7 @@ In the schema for this data structure, we would display these decisions as prope
 
 :::info Data Structures Builder
 
-In Snowplow BDP, you can use the [data structures builder UI](/docs/data-product-studio/data-structures/manage/ui/builder/index.md) to follow along. You will not need the JSON code.
+In Snowplow BDP, you can use the [data structures builder UI](/docs/data-product-studio/data-structures/manage/builder/index.md) to follow along. You will not need the JSON code.
 
 :::
 

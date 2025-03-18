@@ -352,3 +352,5 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/pipeline/enrichments/what-is-enrichment/* /docs/pipeline/enrichments/:splat 301
 /docs/destinations/warehouses-lakes/storage-options/* /docs/destinations/warehouses-lakes/:splat 301
 /docs/destinations/forwarding-events/snowbridge/getting-started/* /docs/destinations/forwarding-events/snowbridge/getting-started/:splat 301
+/docs/destinations/forwarding-events/snowbridge/concepts/application-overview/* /docs/destinations/forwarding-events/snowbridge/concepts/:splat 301
+/docs/destinations/forwarding-events/snowbridge/configuration/sources/stdin/* /docs/destinations/forwarding-events/snowbridge/configuration/sources/:splat 301

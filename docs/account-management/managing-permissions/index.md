@@ -4,20 +4,20 @@ sidebar_label: "Permissions"
 sidebar_position: 2
 ---
 
-To set a users permissions, navigate to `Manage users` and then to the user who's account you'd like to manage.
+To set a users permissions, navigate to `Manage users` and then to the user whose account you'd like to manage.
 
 ## What permissions can be set?
 
-Snowplow console sets permissions for each area of console as summarized below:
+Snowplow BDP Console sets permissions for each area of Console as summarized below:
 
-|**Console feature**|**Description**|**Possible permissions**|
-|-|-|-|
-|User management|The management and addition of user access. This permission cannot be configured on a Custom role.|No access<br/>Edit<br/>Create|
-|Environments|The management of pipeline and sandbox (Mini) environments. This includes managing which Enrichments run on each environment.|No access<br/>View<br/>Edit|
-|Data products|The management and creation of Data Products|No access<br/>View<br/>Edit<br/>Create|
-|Data structures|The management and creation of the schemas that define the events and entities you are capturing.|No access<br/>View<br/>Edit on development<br/>Edit on production<br/>Create|
-|Data models|The management and creation of your data models.|No access<br/>View<br/>Edit<br/>Create|
-|API keys|The management and creation of API keys.|View<br/>Manage<br/>Create|
+| **Console feature** | **Description**                                                                                                               | **Possible permissions**                                                     |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| User management     | The management and addition of user access. This permission cannot be configured on a Custom role.                            | No access<br/>Edit<br/>Create                                                |
+| Environments        | The management of pipeline and sandbox (Mini) environments. This includes managing which Enrichments run on each environment. | No access<br/>View<br/>Edit                                                  |
+| Data products       | The management and creation of Data Products                                                                                  | No access<br/>View<br/>Edit<br/>Create                                       |
+| Data structures     | The management and creation of the schemas that define the events and entities you are capturing.                             | No access<br/>View<br/>Edit on development<br/>Edit on production<br/>Create |
+| Data models         | The management and creation of your data models.                                                                              | No access<br/>View<br/>Edit<br/>Create                                       |
+| API keys            | The management and creation of API keys.                                                                                      | View<br/>Manage<br/>Create                                                   |
 
 ## How are permissions set?
 
@@ -31,36 +31,36 @@ There are three ways of setting user permissions:
 
 #### User permission set
 
-|**Console feature**|**Permissions**|
-|-|-|
-|User management|No access (in the UI)|
-|Environments|View access|
-|Data products|Edit<br/>Create|
-|Data structures|Edit on development<br/>Create|
-|Data models|View access|
-|API keys|View access|
+| **Console feature** | **Permissions**                |
+| ------------------- | ------------------------------ |
+| User management     | No access (in the UI)          |
+| Environments        | View access                    |
+| Data products       | Edit<br/>Create                |
+| Data structures     | Edit on development<br/>Create |
+| Data models         | View access                    |
+| API keys            | View access                    |
 
 #### Admin permission set
 
-|**Console feature**|**Permissions**|
-|-|-|
-|User management|Full access|
-|Environments|Full access|
-|Data products|Full access|
-|Data structures|Full access|
-|Data models|Full access|
-|API keys|Full access|
+| **Console feature** | **Permissions** |
+| ------------------- | --------------- |
+| User management     | Full access     |
+| Environments        | Full access     |
+| Data products       | Full access     |
+| Data structures     | Full access     |
+| Data models         | Full access     |
+| API keys            | Full access     |
 
 #### Custom permission set
 
-|**Console feature**|**Permissions**|
-|-|-|
-|User management|Customized by you, per user|
-|Environments|Customized by you, per user|
-|Data products|Customized by you, per user|
-|Data structures|Customized by you, per user|
-|Data models & jobs|Customized by you, per user|
-|API keys|Customized by you, per user|
+| **Console feature** | **Permissions**             |
+| ------------------- | --------------------------- |
+| User management     | Customized by you, per user |
+| Environments        | Customized by you, per user |
+| Data products       | Customized by you, per user |
+| Data structures     | Customized by you, per user |
+| Data models & jobs  | Customized by you, per user |
+| API keys            | Customized by you, per user |
 
 A note on API keys and permissions
 

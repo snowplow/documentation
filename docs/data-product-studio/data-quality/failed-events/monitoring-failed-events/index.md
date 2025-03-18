@@ -83,7 +83,7 @@ The API that powers the Console view and dashboard is publicly available, and ca
 
 ### Authorization
 
-Before you can invoke the Failed Events API, you will need to [authenticate with an API key](/docs/account-management/managing-console-api-authentication/index.md).
+Before you can invoke the Failed Events API, you will need to [authenticate with an API key](/docs/account-management/index.md).
 
 
 ### Available operations and data returned

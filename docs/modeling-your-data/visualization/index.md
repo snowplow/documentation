@@ -47,7 +47,7 @@ You can find the visualizations in the **Visualizations** section in the left si
 
 Once the visualization is installed, clicking on the tile will launch it in a separate browser tab. By default, anyone in your Console organization will be able to access the visualizations.
 
-If you wish to invite others to use the visualizations but without giving them access to the rest of the Console, you can [create a new user](/docs/account-management/managing-users/adding-removing/index.md) with the `visualizations user` role. That user will then only see the **Visualizations** tab within the Console. The permissions can be managed in the [usual way](/docs/account-management/managing-users/managing-permissions/index.md).
+If you wish to invite others to use the visualizations but without giving them access to the rest of the Console, you can [create a new user](/docs/account-management/managing-users/index.md) with the `visualizations user` role. That user will then only see the **Visualizations** tab within the Console. The permissions can be managed in the [usual way](/docs/account-management/managing-permissions/index.md).
 
 ## Installation
 

@@ -15,7 +15,7 @@ Here you will find an overview of what’s available.
 
 ## Data warehouses and lakes
 
-Snowplow is primarily built for data warehouse and lake destinations and supports Redshift, BigQuery, Snowflake, Databricks and Synapse Analytics, as well as S3, GCS and ADLS / OneLake, via the [various loaders](/docs/destinations/warehouses-lakes/storage-options/index.md).
+Snowplow is primarily built for data warehouse and lake destinations and supports Redshift, BigQuery, Snowflake, Databricks and Synapse Analytics, as well as S3, GCS and ADLS / OneLake, via the [various loaders](/docs/destinations/warehouses-lakes/index.md).
 
 ## Additional destinations
 

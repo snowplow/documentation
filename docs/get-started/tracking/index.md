@@ -17,7 +17,7 @@ Once your pipeline is set up, you will want to send some events to it. Here’s 
 
 :::tip Latency
 
-Regardless of how you send the events, it might take a few minutes for them to reach your destination (e.g. data warehouse). This depends on which [destination and loader](/docs/destinations/warehouses-lakes/storage-options/index.md) you have configured.
+Regardless of how you send the events, it might take a few minutes for them to reach your destination (e.g. data warehouse). This depends on which [destination and loader](/docs/destinations/warehouses-lakes/index.md) you have configured.
 
 :::
 

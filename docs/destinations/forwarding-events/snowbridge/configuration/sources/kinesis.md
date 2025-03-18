@@ -5,7 +5,7 @@ description: "Read data from a Kinesis stream."
 
 :::note
 
-To use this source, you need the AWS-specific version of Snowbridge that can only be run on AWS. See [the page on Snowbridge distributions](/docs/destinations/forwarding-events/snowbridge/getting-started/distribution-and-deployment.md) for more information.
+To use this source, you need the AWS-specific version of Snowbridge that can only be run on AWS. See [the page on Snowbridge distributions](/docs/destinations/forwarding-events/snowbridge/getting-started/index.md) for more information.
 
 :::
 
@@ -23,7 +23,7 @@ The AWS kinesis source requires the additional setup of a set of dynamoDB tables
 Under the hood we are using a fork of the [Kinsumer](https://github.com/snowplow-devops/kinsumer) library which has defined this DynamoDB table structure - these tables need to be created by hand before the application can launch.
 
 | TableName                                | DistKey        |
-|------------------------------------------|----------------|
+| ---------------------------------------- | -------------- |
 | `${SOURCE_KINESIS_APP_NAME}_clients`     | ID (String)    |
 | `${SOURCE_KINESIS_APP_NAME}_checkpoints` | Shard (String) |
 | `${SOURCE_KINESIS_APP_NAME}_metadata`    | Key (String)   |

@@ -18,7 +18,7 @@ The Java tracker makes it easy to track different kinds of data. We provide a ra
 
 Every tracked event payload has a unique `event_id` UUID string. Other ubiquitous properties include the `name_tracker` (`trackerNamespace`) and `app_id` (`appId`) set when the `Tracker` was initialized. From version 0.12 onwards, `Tracker.track()` returns the payload's `eventId`.
 
-Snowplow events have a defined structure and [protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md) that is identical regardless of the tracker used. A minimal payload - the raw event - is sent from the tracker to your collector. The raw event is [enriched](/docs/pipeline/enrichments/what-is-enrichment/index.md) as it passes through your pipeline. By the time the event arrives in your data storage, depending which [enrichments](/docs/pipeline/enrichments/available-enrichments/index.md) you have enabled, it will have gained different kinds of metadata, and have many more fields than it started with. The default Java tracker event fields are shown [here](/docs/sources/trackers/java-tracker/what-do-java-tracker-events-look-like/index.md).
+Snowplow events have a defined structure and [protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md) that is identical regardless of the tracker used. A minimal payload - the raw event - is sent from the tracker to your collector. The raw event is [enriched](/docs/pipeline/enrichments/index.md) as it passes through your pipeline. By the time the event arrives in your data storage, depending which [enrichments](/docs/pipeline/enrichments/available-enrichments/index.md) you have enabled, it will have gained different kinds of metadata, and have many more fields than it started with. The default Java tracker event fields are shown [here](/docs/sources/trackers/java-tracker/what-do-java-tracker-events-look-like/index.md).
 
 The [Java tracker Github repository](https://github.com/snowplow/snowplow-java-tracker) includes a mini demo, "simple-console". The demo sends one event of each type to your event collector.
 
@@ -114,7 +114,7 @@ Track page views with the `PageView` event. This is a "canonical" event type; da
 | page title   | page               | page_title               |
 | referrer URL | refr               | page_referrer            |
 
-The provided URLs will also be decomposed into other columns, such as `page_urlscheme`, during event [enrichment](/docs/pipeline/enrichments/what-is-enrichment/index.md).
+The provided URLs will also be decomposed into other columns, such as `page_urlscheme`, during event [enrichment](/docs/pipeline/enrichments/index.md).
 
 A simple initialisation looks like this:
 ```java

@@ -22,7 +22,7 @@ Refer to the [setup instructions](/docs/modeling-your-data/running-data-models-v
   </TabItem>
   <TabItem value="cloud" label="BDP Cloud">
 
-Refer to the [setup instructions](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/standard-models/index.md) to add and configure your models in the Console, so that they can be run automatically by Snowplow BDP.
+Refer to the [setup instructions](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/index.md) to add and configure your models in the Console, so that they can be run automatically by Snowplow BDP.
 
   </TabItem>
   <TabItem value="community" label="Community Edition">

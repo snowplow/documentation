@@ -21,7 +21,7 @@ Once the Collector payload successfully reaches the validation and enrichment st
 
 ## Schema violation
 
-This failure type is produced during the process of [validation and enrichment](/docs/pipeline/enrichments/what-is-enrichment/index.md). It concerns the [self-describing events](/docs/fundamentals/events/index.md#self-describing-events) and [entities](/docs/fundamentals/entities/index.md) which can be attached to your snowplow event.
+This failure type is produced during the process of [validation and enrichment](/docs/pipeline/enrichments/index.md). It concerns the [self-describing events](/docs/fundamentals/events/index.md#self-describing-events) and [entities](/docs/fundamentals/entities/index.md) which can be attached to your snowplow event.
 
 <details>
 
@@ -46,7 +46,7 @@ Schema violation schema can be found [here](https://github.com/snowplow/iglu-cen
 
 ## Enrichment failure
 
-This failure type is produced by the [Enrich](/docs/pipeline/enrichments/what-is-enrichment/index.md) application, and it represents any failure to enrich the event by one of your configured enrichments.
+This failure type is produced by the [Enrich](/docs/pipeline/enrichments/index.md) application, and it represents any failure to enrich the event by one of your configured enrichments.
 
 <details>
 
@@ -70,7 +70,7 @@ Enrichment failure schema can be found [here](https://github.com/snowplow/iglu-c
 
 ## Collector payload format violation
 
-This failure type is produced by the [Enrich](/docs/pipeline/enrichments/what-is-enrichment/index.md) application, when Collector payloads from the raw stream are deserialized from thrift format.
+This failure type is produced by the [Enrich](/docs/pipeline/enrichments/index.md) application, when Collector payloads from the raw stream are deserialized from thrift format.
 
 <details>
 
@@ -91,7 +91,7 @@ Collector payload format violation schema can be found [here](https://github.com
 
 ## Adaptor failure
 
-This failure type is produced by the [Enrich](/docs/pipeline/enrichments/what-is-enrichment/index.md) application, when it tries to interpret a Collector payload from the raw stream as a HTTP request from a [3rd party webhook](/docs/sources/webhooks/index.md).
+This failure type is produced by the [Enrich](/docs/pipeline/enrichments/index.md) application, when it tries to interpret a Collector payload from the raw stream as a HTTP request from a [3rd party webhook](/docs/sources/webhooks/index.md).
 
 :::info
 
@@ -116,7 +116,7 @@ Adapter failure schema can be found [here](https://github.com/snowplow/iglu-cent
 
 ## Tracker protocol violation
 
-This failure type is produced by the [Enrich](/docs/pipeline/enrichments/what-is-enrichment/index.md) application, when an HTTP request does not conform to our [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md).
+This failure type is produced by the [Enrich](/docs/pipeline/enrichments/index.md) application, when an HTTP request does not conform to our [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md).
 
 <details>
 
@@ -134,7 +134,7 @@ Tracker protocol violation schema can be found [here](https://github.com/snowplo
 
 ## Size violation
 
-This failure type can be produced either by the [Collector](/docs/api-reference/stream-collector/index.md) or by the [Enrich](/docs/pipeline/enrichments/what-is-enrichment/index.md) application. It happens when the size of the raw event or enriched event is too big for the output message queue. In this case it will be truncated and wrapped in a size violation failed event instead.
+This failure type can be produced either by the [Collector](/docs/api-reference/stream-collector/index.md) or by the [Enrich](/docs/pipeline/enrichments/index.md) application. It happens when the size of the raw event or enriched event is too big for the output message queue. In this case it will be truncated and wrapped in a size violation failed event instead.
 
 <details>
 

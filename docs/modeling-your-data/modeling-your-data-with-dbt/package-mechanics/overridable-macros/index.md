@@ -1,13 +1,11 @@
 ---
-title: "Overridable Macros"
+title: "Overridable macros"
 sidebar_position: 20
 ---
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
-
-## Overriding Macros
 
 Many of our packages are built using [macros](https://docs.getdbt.com/docs/build/jinja-macros) to allow easier support of multiple warehouses. Some of these macros are designed to be overridable to give an easy route to customization for the user. You can find a list of the overridable macros for each package in the [package details](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/index.md) pages.
 

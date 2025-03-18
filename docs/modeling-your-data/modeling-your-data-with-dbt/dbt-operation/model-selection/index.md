@@ -1,9 +1,7 @@
 ---
-title: "Model Selection"
+title: "Model selection"
 sidebar_position: 30
 ---
-
-## YAML Selectors
 
 The Snowplow models in each package are designed to be run as a whole, which ensures all incremental tables are kept in sync. As such, run the model using:
 

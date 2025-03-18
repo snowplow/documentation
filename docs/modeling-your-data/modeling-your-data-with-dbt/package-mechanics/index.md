@@ -1,5 +1,5 @@
 ---
-title: "Package Mechanics"
+title: "Package mechanics"
 description: "Key mechanics of our packages"
 sidebar_position: 70
 ---

@@ -17,9 +17,3 @@ The tracker should be straightforward to use if you are comfortable with Python 
 There are three basic types of objects you will create when using the Snowplow Python Tracker: subjects, emitters, and trackers.
 
 A subject represents a user whose events are tracked. A tracker constructs events and sends them to one or more emitters. Each emitter then sends the event to the endpoint you configure. This will usually be a Snowplow collector, but could also be a custom event store.
-
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
-
-<DocCardList />
-```

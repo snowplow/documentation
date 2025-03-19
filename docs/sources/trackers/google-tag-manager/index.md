@@ -21,9 +21,3 @@ The main Tag template that you will need to use when setting up the JavaScript T
   A variable template which can be used to easily apply a set of tracker configuration parameters to tags created with the Snowplow v4 tag template.
 
 For Ecommerce tracking, the [Snowplow Ecommerce Tag](https://github.com/snowplow/snowplow-gtm-tag-template-ecommerce-v3) is available on GitHub.
-
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
-
-<DocCardList />
-```

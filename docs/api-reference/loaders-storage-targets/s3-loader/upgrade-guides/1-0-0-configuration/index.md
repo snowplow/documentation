@@ -1,7 +1,7 @@
 ---
-title: "1.0.0 Configuration"
+title: "1.0.0 configuration"
 date: "2021-07-16"
-sidebar_position: 0
+sidebar_position: 12
 ---
 
 The sink is configured using a HOCON file. These are the fields:

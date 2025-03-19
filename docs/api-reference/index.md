@@ -5,8 +5,6 @@ sidebar_position: 10
 sidebar_label: "API reference"
 ---
 
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
+This section contains detailed technical information about Snowplow components.
 
-<DocCardList />
-```
+Some of the information is relevant only for [Community Edition](/docs/get-started/snowplow-community-edition/index.md) users, as [Snowplow BDP](/docs/get-started/snowplow-bdp/index.md) customers won't need to configure all their own components.

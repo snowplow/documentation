@@ -357,6 +357,7 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/destinations/forwarding-events/snowbridge/configuration/transformations/custom-scripts/create-a-script/* /docs/destinations/forwarding-events/snowbridge/configuration/transformations/custom-scripts/:splat 301
 /docs/destinations/forwarding-events/snowbridge/configuration/transformations/custom-scripts/examples/non-snowplow/* /docs/destinations/forwarding-events/snowbridge/configuration/transformations/custom-scripts/examples/:splat 301
 /docs/destinations/forwarding-events/snowbridge/configuration/transformations/custom-scripts/examples/snowplow/* /docs/destinations/forwarding-events/snowbridge/configuration/transformations/custom-scripts/examples/:splat 301
+/docs/destinations/forwarding-events/snowbridge/configuration/targets/stdout/* /docs/destinations/forwarding-events/snowbridge/configuration/targets/:splat 301
 /docs/modeling-your-data/running-data-models-via-snowplow-bdp/standard-models/* /docs/modeling-your-data/running-data-models-via-snowplow-bdp/:splat 301
 /docs/account-management/managing-users/managing-permissions/* /docs/account-management/managing-permissions/:splat 301
 /docs/account-management/managing-users/adding-removing/* /docs/account-management/managing-users/:splat 301

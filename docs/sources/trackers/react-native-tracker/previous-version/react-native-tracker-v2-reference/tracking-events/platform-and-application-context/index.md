@@ -33,42 +33,42 @@ const tracker = createTracker(
 
 The [application context entity](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.mobile/application/jsonschema/1-0-0) contains two properties:
 
-| Property | Type | Description | Required in schema |
-| --- | --- | --- | --- |
-| `version` | String | Version number of the application e.g 1.1.0 | Yes |
-| `build` | String | Build name of the application e.g s9f2k2d or 1.1.0 beta | Yes |
+| Property  | Type   | Description                                             | Required in schema |
+| --------- | ------ | ------------------------------------------------------- | ------------------ |
+| `version` | String | Version number of the application e.g 1.1.0             | Yes                |
+| `build`   | String | Build name of the application e.g s9f2k2d or 1.1.0 beta | Yes                |
 
 ## Platform context
 
 The [platform context entity](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/mobile_context/jsonschema/1-0-3) contains the following properties:
 
-| Property | Type | Description | Required in schema |
-| --- | --- | --- | --- |
-| `osType` | String | Type of the operating system (e.g., "ios", "tvos", "watchos", "osx", "android") | Yes |
-| `osVersion` | String | Version of the mobile operating system. | Yes |
-| `deviceManufacturer` | String | Device vendor. | Yes |
-| `deviceModel` | String | Model of the device. | Yes |
-| `carrier` | String | Carrier of the SIM inserted in the device. | No |
-| `networkType` | String | One of: "mobile", "wifi", "offline" | No |
-| `networkTechnology` | String | Radio access technology that the device is using. | No |
-| `openIdfa` | String | Deprecated property. | No |
-| `appleIdfa` | String | Advertising identifier on iOS. | No |
-| `appleIdfv` | String | UUID [identifier for vendors](https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor) on iOS. | No |
-| `androidIdfa` | String | Advertising identifier on Android. | No |
-| `physicalMemory` | Integer | Total physical system memory in bytes | No |
-| `systemAvailableMemory` | Integer | Available memory on the system in bytes (Android only) | No |
-| `appAvailableMemory` | Integer | Amount of memory in bytes available to the current app (iOS only) | No |
-| `batteryLevel` | Integer | Remaining battery level as an integer percentage of total battery capacity | No |
-| `batteryState` | String | Battery state for the device. One of: "unplugged", "charging", "full". | No |
-| `lowPowerMode` | Boolean | A Boolean indicating whether Low Power Mode is enabled (iOS only) | No |
-| `availableStorage` | Integer | Bytes of storage remaining | No |
-| `totalStorage` | Integer | Total size of storage in bytes | No |
-| `isPortrait` | Boolean | A Boolean indicating whether the device orientation is portrait (either upright or upside down) | No |
-| `resolution` | String | Screen resolution in pixels. Arrives in the form of WIDTHxHEIGHT (e.g., 1200x900). Doesn't change when device orientation changes | No |
-| `scale` | Number | Scale factor used to convert logical coordinates to device coordinates of the screen (uses UIScreen.scale on iOS and DisplayMetrics.density on Android) | No |
-| `language` | String | System language currently used on the device (ISO 639) | No |
-| `appSetId` | String | Android vendor ID scoped to the set of apps published under the same Google Play developer account (see https://developer.android.com/training/articles/app-set-id) | No |
-| `appSetIdScope` | String (either "app" or "developer") | Scope of the `appSetId`. Can be scoped to the app or to a developer account on an app store (all apps from the same developer on the same device will have the same ID) | No |
+| Property                | Type                                 | Description                                                                                                                                                             | Required in schema |
+| ----------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| `osType`                | String                               | Type of the operating system (e.g., "ios", "tvos", "watchos", "osx", "android")                                                                                         | Yes                |
+| `osVersion`             | String                               | Version of the mobile operating system.                                                                                                                                 | Yes                |
+| `deviceManufacturer`    | String                               | Device vendor.                                                                                                                                                          | Yes                |
+| `deviceModel`           | String                               | Model of the device.                                                                                                                                                    | Yes                |
+| `carrier`               | String                               | Carrier of the SIM inserted in the device.                                                                                                                              | No                 |
+| `networkType`           | String                               | One of: "mobile", "wifi", "offline"                                                                                                                                     | No                 |
+| `networkTechnology`     | String                               | Radio access technology that the device is using.                                                                                                                       | No                 |
+| `openIdfa`              | String                               | Deprecated property.                                                                                                                                                    | No                 |
+| `appleIdfa`             | String                               | Advertising identifier on iOS.                                                                                                                                          | No                 |
+| `appleIdfv`             | String                               | UUID [identifier for vendors](https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor) on iOS.                                             | No                 |
+| `androidIdfa`           | String                               | Advertising identifier on Android.                                                                                                                                      | No                 |
+| `physicalMemory`        | Integer                              | Total physical system memory in bytes                                                                                                                                   | No                 |
+| `systemAvailableMemory` | Integer                              | Available memory on the system in bytes (Android only)                                                                                                                  | No                 |
+| `appAvailableMemory`    | Integer                              | Amount of memory in bytes available to the current app (iOS only)                                                                                                       | No                 |
+| `batteryLevel`          | Integer                              | Remaining battery level as an integer percentage of total battery capacity                                                                                              | No                 |
+| `batteryState`          | String                               | Battery state for the device. One of: "unplugged", "charging", "full".                                                                                                  | No                 |
+| `lowPowerMode`          | Boolean                              | A Boolean indicating whether Low Power Mode is enabled (iOS only)                                                                                                       | No                 |
+| `availableStorage`      | Integer                              | Bytes of storage remaining                                                                                                                                              | No                 |
+| `totalStorage`          | Integer                              | Total size of storage in bytes                                                                                                                                          | No                 |
+| `isPortrait`            | Boolean                              | A Boolean indicating whether the device orientation is portrait (either upright or upside down)                                                                         | No                 |
+| `resolution`            | String                               | Screen resolution in pixels. Arrives in the form of WIDTHxHEIGHT (e.g., 1200x900). Doesn't change when device orientation changes                                       | No                 |
+| `scale`                 | Number                               | Scale factor used to convert logical coordinates to device coordinates of the screen (uses UIScreen.scale on iOS and DisplayMetrics.density on Android)                 | No                 |
+| `language`              | String                               | System language currently used on the device (ISO 639)                                                                                                                  | No                 |
+| `appSetId`              | String                               | Android vendor ID scoped to the set of apps published under the same Google Play developer account (see https://developer.android.com/training/articles/app-set-id)     | No                 |
+| `appSetIdScope`         | String (either "app" or "developer") | Scope of the `appSetId`. Can be scoped to the app or to a developer account on an app store (all apps from the same developer on the same device will have the same ID) | No                 |
 
 ### Identifier for Advertisers (IDFA/AAID)
 
@@ -80,7 +80,7 @@ Otherwise, their values will be NULL.
 
 To track the IDFA identifier on iOS, you will need to initialize the tracker in native iOS (Swift or Objective-C) code. This is necessary because you will need to retrieve the ID from the `ASIdentifierManager` and pass it when creating the tracker in native code. Unfortunately, we can't provide this option in React Native since it would make the tracker library dependent on the API which would cause issues for apps that don't require it.
 
-Please [follow the documentation for the iOS tracker](/docs/sources/trackers/mobile-trackers/installation-and-set-up/ios-tracker/index.md) to call the `Snowplow.createTracker()` function inside the `application(_:didFinishLaunchingWithOptions:)` method. Make sure to pass the `TrackerConfiguration.advertisingIdentifierRetriever` callback that retrieves the ID as [described here](/docs/sources/trackers/mobile-trackers/tracking-events/platform-and-application-context/index.md?platform=ios#identifier-for-advertisers-idfaaaid).
+Please [follow the documentation for the iOS tracker](/docs/sources/trackers/mobile-trackers/installation-and-set-up/index.md) to call the `Snowplow.createTracker()` function inside the `application(_:didFinishLaunchingWithOptions:)` method. Make sure to pass the `TrackerConfiguration.advertisingIdentifierRetriever` callback that retrieves the ID as [described here](/docs/sources/trackers/mobile-trackers/tracking-events/platform-and-application-context/index.md?platform=ios#identifier-for-advertisers-idfaaaid).
 
   </TabItem>
   <TabItem value="android" label="Android">

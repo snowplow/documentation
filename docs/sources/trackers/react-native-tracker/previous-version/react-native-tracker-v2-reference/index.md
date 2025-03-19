@@ -12,8 +12,4 @@ import Badges from '@site/src/components/Badges';
 <Badges badgeType="Actively Maintained"></Badges>&nbsp;<Badges badgeType="React Native Tracker Release"></Badges>&nbsp;<Badges badgeType="Snowplow Tracker React Native Release"></Badges>
 ```
 
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
-
-<DocCardList />
-```
+We recommend upgrading to the latest version.

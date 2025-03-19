@@ -4,8 +4,6 @@ date: "2020-11-24"
 sidebar_position: 60
 ---
 
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
+Snowplow provides loader applications for several different warehouse and lakes, across different clouds.
 
-<DocCardList />
-```
+Choose a loader based on your use case and data needs.

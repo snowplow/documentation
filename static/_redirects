@@ -366,3 +366,5 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/api-reference/snowplow-micro/configuration/* /docs/api-reference/snowplow-micro/:splat 301
 /docs/api-reference/snowplow-mini/overview/* /docs/api-reference/snowplow-mini/:splat 301
 /docs/sources/trackers/google-amp-tracker/version-1/* /docs/sources/trackers/google-amp-tracker/:splat 301
+/docs/sources/trackers/mobile-trackers/installation-and-set-up/android-tracker/* /docs/sources/trackers/mobile-trackers/installation-and-set-up/:splat 301
+/docs/sources/trackers/mobile-trackers/installation-and-set-up/ios-tracker/* /docs/sources/trackers/mobile-trackers/installation-and-set-up/:splat 301

@@ -200,7 +200,7 @@ To do this we'll need to:
 - Create the HTML for our form
 - Initialize the Snowplow Javascript Tracker
 - Set up our event tracking
-- Use [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md) or [Snowplow Mini](/docs/api-reference/snowplow-mini/overview/index.md) to validate our tracking
+- Use [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md) or [Snowplow Mini](/docs/api-reference/snowplow-mini/index.md) to validate our tracking
 
 ### HTML
 

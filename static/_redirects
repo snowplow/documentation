@@ -350,6 +350,7 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/api/* /docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/:splat 301
 /docs/data-product-studio/data-quality/failed-events/exploring-failed-events/warehouse-lake/* /docs/data-product-studio/data-quality/failed-events/exploring-failed-events/:splat 301
 /docs/pipeline/enrichments/what-is-enrichment/* /docs/pipeline/enrichments/:splat 301
+/docs/pipeline/enrichments/managing-enrichments/ui/* /docs/pipeline/enrichments/managing-enrichments/:splat 301
 /docs/destinations/warehouses-lakes/storage-options/* /docs/destinations/warehouses-lakes/:splat 301
 /docs/destinations/forwarding-events/snowbridge/getting-started/* /docs/destinations/forwarding-events/snowbridge/getting-started/:splat 301
 /docs/destinations/forwarding-events/snowbridge/concepts/application-overview/* /docs/destinations/forwarding-events/snowbridge/concepts/:splat 301

@@ -1,7 +1,7 @@
 ---
 title: "Managing enrichments in Snowplow Community Edition"
 date: "2021-10-06"
-sidebar_label: "Using Terraform"
+sidebar_label: "Community Edition: Terraform"
 sidebar_position: 15
 sidebar_custom_props:
   offerings:

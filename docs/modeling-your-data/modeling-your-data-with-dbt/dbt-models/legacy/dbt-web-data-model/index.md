@@ -53,7 +53,7 @@ dark: require('./images/web-process-dark.drawio.png').default
 | -------------------------- | ------------------- | :------: | :--------: | :------: | :-------: | :------: |
 | ${versions.dbtSnowplowWeb} | >=1.6.0 to <2.0.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
 | 0.16.2                     | >=1.5.0 to <2.0.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
-| 0.15.2                     | >=1.4.0 to <2.0.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅*     |
+| 0.15.2                     | >=1.4.0 to <2.0.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅*    |
 | 0.13.3**                   | >=1.3.0 to <2.0.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
 | 0.11.0                     | >=1.0.0 to <1.3.0   |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
 | 0.5.1                      | >=0.20.0 to <1.0.0  |    ✅     |     ❌      |    ✅     |     ✅     |    ✅     |
@@ -79,7 +79,7 @@ This model consists of a series of modules, each producing a table which serves 
 
 ## Optional Modules
 
-<DocCardList />
+See the subsections for information on the optional modules.
 
 ## Overridable Macros
 

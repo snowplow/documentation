@@ -4,7 +4,7 @@ date: "2021-04-07"
 sidebar_position: 2000
 ---
 
-Assuming you have completed the [Node.js Tracker Setup](/docs/sources/trackers/javascript-trackers/node-js-tracker/node-js-tracker-v4/setup/index.md) for your project, you are now ready to initialize the Tracker.
+Assuming you have completed the [Node.js Tracker Setup](/docs/sources/trackers/javascript-trackers/node-js-tracker/initialization/index.md) for your project, you are now ready to initialize the Tracker.
 
 Require the Node.js Tracker module into your code like so:
 

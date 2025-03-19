@@ -11,7 +11,7 @@ This brings support for new platforms (Web, Expo Go) and new features (JS tracke
 The method for creating a new tracker instance has been changed to `newTracker`.
 This is not just a rename, but a change in the structure of its parameters, which are now more in line with the rest of our JavaScript trackers.
 
-You can review the [documentation page](/docs/sources/trackers/react-native-tracker/introduction/index.md) for the current set of configuration options.
+You can review the [documentation page](/docs/sources/trackers/react-native-tracker/index.md) for the current set of configuration options.
 
 The parameters are now provided in a flattened object instead of separated under categories.
 Some have also been renamed:

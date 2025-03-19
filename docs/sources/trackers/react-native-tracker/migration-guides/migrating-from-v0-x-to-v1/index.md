@@ -12,7 +12,7 @@ In the following sections we assume a starting version of 0.2.0. If you have ins
 
 ## Tracker initialization
 
-In the v1 of the React Native Tracker, a tracker is configured with a set of configuration objects, about which you can find detailed information [here](/docs/sources/trackers/react-native-tracker/introduction/index.md).
+In the v1 of the React Native Tracker, a tracker is configured with a set of configuration objects, about which you can find detailed information [here](/docs/sources/trackers/react-native-tracker/index.md).
 
 The `createTracker` function now accepts 3 arguments:
 
@@ -30,7 +30,7 @@ In the following examples, the changes needed are described:
 import { createTracker } from '@snowplow/react-native-tracker';
 
 const tracker = createTracker(
-    'my-tracker-namespace', 
+    'my-tracker-namespace',
     {
         endpoint: 'my-endpoint.com',
         appId: 'my-app-id'
@@ -68,7 +68,7 @@ In v1, the `protocol` property has been removed. The collector URL can include t
 
 ```typescript
 const tracker = createTracker(
-    'my-tracker-namespace', 
+    'my-tracker-namespace',
     {
         endpoint: 'my-endpoint.com',
         protocol: 'http',
@@ -225,7 +225,7 @@ The changes to v0.2.0 PageViewEvent properties are:
 
 ## Setting the subject
 
-In v1.0.0, setting the subject can be done both when configuring the tracker (through the [SubjectConfiguration](/docs/sources/trackers/react-native-tracker/introduction/index.md#subjectconfiguration) object) and at runtime ([using the `set..` tracker methods](/docs/sources/trackers/react-native-tracker/tracking-events/index.md#setting-the-subject-data)), so the exact migration steps depend on the specifics of your app.
+In v1.0.0, setting the subject can be done both when configuring the tracker (through the [SubjectConfiguration](/docs/sources/trackers/react-native-tracker/index.md#subjectconfiguration) object) and at runtime ([using the `set..` tracker methods](/docs/sources/trackers/react-native-tracker/tracking-events/index.md#setting-the-subject-data)), so the exact migration steps depend on the specifics of your app.
 
 A notable difference between the SubjectConfiguration properties of v1.0.0 from the `SubjectData` properties of v0.2.0 is the way to set screen dimensions either for the screen resolution or for the screen viewport.
 

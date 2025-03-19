@@ -1,7 +1,7 @@
 ---
 title: "Configuration"
 date: "2021-04-07"
-sidebar_position: 3000
+sidebar_position: 2
 ---
 
 You may have additional information about your application's environment, current user and so on, which you want to send to your Snowplow pipeline with each event.
@@ -10,19 +10,19 @@ You may have additional information about your application's environment, curren
 
 The `tracker` instance has a set of `set...()` methods to attach extra data to all tracked events:
 
-- [`setPlatform()`](#set-the-platform-id-withsetplatform)
-- [`setUserId()`](#set-user-id-withsetuserid)
-- [`setDomainUserId()`](#set-domain-user-id-with-setdomainuserid)
-- [`setSessionId()`](#set-session-id-with-setsessionid)
-- [`setSessionIndex()`](#set-session-index-with-setsessionindex)
-- [`setNetworkUserId()`](#set-network-user-id-with-setnetworkuserid)
-- [`setScreenResolution()`](#set-screen-resolution-with-setscreenresolution)
-- [`setViewport()`](#set-viewport-dimensions-withsetviewport)
-- [`setColorDepth()`](#set-color-depth-withsetcolordepth)
-- [`setTimezone()`](#set-the-timezone-withsettimezone)
-- [`setLang()`](#set-the-language-withsetlang)
-- [`setIpAddress()`](#set-the-ip-address-withsetipaddress)`
-- [`setUseragent()`](#set-the-useragent-withsetuseragent)`
+- [Set the platform ID with `setPlatform()`](#set-the-platform-id-withsetplatform)
+- [Set user ID with `setUserId()`](#set-user-id-withsetuserid)
+- [Set domain user ID with `setDomainUserId()`](#set-domain-user-id-with-setdomainuserid)
+- [Set session ID with `setSessionId()`](#set-session-id-with-setsessionid)
+- [Set session index with `setSessionIndex()`](#set-session-index-with-setsessionindex)
+- [Set network user ID with `setNetworkUserId()`](#set-network-user-id-with-setnetworkuserid)
+- [Set screen resolution with `setScreenResolution()`](#set-screen-resolution-with-setscreenresolution)
+- [Set viewport dimensions with `setViewport()`](#set-viewport-dimensions-withsetviewport)
+- [Set color depth with `setColorDepth()`](#set-color-depth-withsetcolordepth)
+- [Set the timezone with `setTimezone()`](#set-the-timezone-withsettimezone)
+- [Set the language with `setLang()`](#set-the-language-withsetlang)
+- [Set the IP Address with `setIpAddress()`](#set-the-ip-address-withsetipaddress)
+- [Set the Useragent with `setUseragent()`](#set-the-useragent-withsetuseragent)
 
 ### Set the platform ID with `setPlatform()`
 

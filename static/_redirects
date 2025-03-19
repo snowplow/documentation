@@ -370,3 +370,6 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/sources/trackers/mobile-trackers/installation-and-set-up/ios-tracker/* /docs/sources/trackers/mobile-trackers/installation-and-set-up/:splat 301
 /docs/sources/trackers/react-native-tracker/introduction/* /docs/sources/trackers/react-native-tracker/:splat 301
 /docs/sources/trackers/google-tag-manager/snowplow-template/tag-types/* /docs/sources/trackers/google-tag-manager/snowplow-template/:splat 301
+/docs/sources/trackers/javascript-trackers/node-js-tracker/node-js-tracker-v4/setup/* /docs/sources/trackers/javascript-trackers/node-js-tracker/initialization/:splat 301
+/docs/sources/trackers/javascript-trackers/node-js-tracker/node-js-tracker-v4/* /docs/sources/trackers/javascript-trackers/node-js-tracker/:splat 301
+/docs/sources/trackers/javascript-trackers/node-js-tracker/node-js-tracker/* /docs/sources/trackers/javascript-trackers/previous-versions/:splat 301

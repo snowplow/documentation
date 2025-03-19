@@ -4,7 +4,7 @@ date: "2020-09-03"
 sidebar_position: 200
 ---
 
-Assuming you have completed the [Node.js Tracker Setup](/docs/sources/trackers/javascript-trackers/node-js-tracker/node-js-tracker/node-js-tracker-0-4-0/setup/index.md) for your project, you are now ready to initialize the Tracker.
+Assuming you have completed the [Node.js Tracker Setup](/docs/sources/trackers/javascript-trackers/node-js-tracker/previous-versions/node-js-tracker-0-4-0/setup/index.md) for your project, you are now ready to initialize the Tracker.
 
 Require the Node.js Tracker module into your code like so:
 
@@ -58,7 +58,7 @@ const e = snowplow.gotEmitter(
       console.log('Event Sent');
     }
   },
-  { 
+  {
     http: new http.Agent({ maxSockets: 6 }),
     https: new https.Agent({ maxSockets: 6 })
   } // Node.js agentOptions object to tune performance

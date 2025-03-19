@@ -3,8 +3,6 @@ title: "Out-of-the-box data"
 sidebar_position: 2
 ---
 
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
+This section has more details on the event types introduced [here](/docs/fundamentals/events/index.md).
 
-<DocCardList />
-```
+These out-of-the-box event types are provided so you can get started with generating event data quickly.

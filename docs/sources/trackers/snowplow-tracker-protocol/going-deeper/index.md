@@ -3,8 +3,6 @@ title: "Going deeper into event properties"
 sidebar_position: 3
 ---
 
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
+This section contains details on the parameters included in each event.
 
-<DocCardList />
-```
+Requests to the collector endpoint can contain more than one event, depending how your tracker is configured.

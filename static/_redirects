@@ -369,3 +369,4 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/sources/trackers/mobile-trackers/installation-and-set-up/android-tracker/* /docs/sources/trackers/mobile-trackers/installation-and-set-up/:splat 301
 /docs/sources/trackers/mobile-trackers/installation-and-set-up/ios-tracker/* /docs/sources/trackers/mobile-trackers/installation-and-set-up/:splat 301
 /docs/sources/trackers/react-native-tracker/introduction/* /docs/sources/trackers/react-native-tracker/:splat 301
+/docs/sources/trackers/google-tag-manager/snowplow-template/tag-types/* /docs/sources/trackers/google-tag-manager/snowplow-template/:splat 301

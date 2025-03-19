@@ -1,10 +1,32 @@
 ---
-title: "Initialization"
+title: "Installation and initialization"
 date: "2021-04-07"
-sidebar_position: 2000
+sidebar_position: 1
 ---
 
-Assuming you have completed the [Node.js Tracker Setup](/docs/sources/trackers/javascript-trackers/node-js-tracker/node-js-tracker-v4/setup/index.md) for your project, you are now ready to initialize the Tracker.
+The Snowplow Node.js Tracker is tested and compatible with Node.js versions from 18 to 20. Installation requires [npm](https://www.npmjs.org/), [pnpm](https://pnpm.js.org/) or [yarn](https://yarnpkg.com/).
+
+## Installation
+
+Setting up the tracker should be straightforward if you are familiar with npm:
+
+```bash
+npm install @snowplow/node-tracker
+```
+
+alternative you can use pnpm or yarn:
+
+```bash
+pnpm add @snowplow/node-tracker
+```
+
+```bash
+yarn add @snowplow/node-tracker
+```
+
+The Snowplow Node.js Tracker is also **bundled with TypeScript types and interfaces** so will integrate easily with TypeScript applications.
+
+## Initialization
 
 Require the Node.js Tracker module into your code like so:
 

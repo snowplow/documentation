@@ -1,22 +1,18 @@
 ---
-title: "Tracking Events"
+title: "Tracking events"
 date: "2021-04-07"
-sidebar_position: 4000
+sidebar_position: 3
 ---
 
-## Tracking specific events
+Tracking methods supported by the Node.js tracker at a glance:
 
-Snowplow has been built to enable you to track a wide range of events that occur when users interact with your websites and apps.
-
-Tracking methods supported by the Node.js Tracker at a glance:
-
-| **Function** | **Description** |
-| --- | --- |
-| [`track()`](#track-events-with-the-track-function) | Tracks an event generated from a build functions |
-| [`buildScreenView()`](#track-screen-views-withbuildscreenview) | Track the user viewing a screen within the application |
-| [`buildPageView()`](#track-pageviews-withbuildpageview) | Track and record views of web pages. |
-| [`buildSelfDescribingEvent()`](#track-self-describing-events-withbuildselfdescribingevent) | Track a Snowplow custom self describing event |
-| [`buildStructEvent()`](#track-structured-events-with-buildstructevent) | Track a Snowplow custom structured event |
+| **Function**                                                                               | **Description**                                        |
+| ------------------------------------------------------------------------------------------ | ------------------------------------------------------ |
+| [`track()`](#track-events-with-the-track-function)                                         | Tracks an event generated from a build functions       |
+| [`buildScreenView()`](#track-screen-views-withbuildscreenview)                             | Track the user viewing a screen within the application |
+| [`buildPageView()`](#track-pageviews-withbuildpageview)                                    | Track and record views of web pages.                   |
+| [`buildSelfDescribingEvent()`](#track-self-describing-events-withbuildselfdescribingevent) | Track a Snowplow custom self describing event          |
+| [`buildStructEvent()`](#track-structured-events-with-buildstructevent)                     | Track a Snowplow custom structured event               |
 
 ### Track events with the track() function
 
@@ -27,8 +23,8 @@ All events are tracked through the `track()` function on the tracker instance. T
 Each build method which is passed to the `track()` function has both default and optional arguments. If you don't want to provide a value for an optional argument, just ignore it in the object or pass `null` and it will be ignored. For example, if you want to track a page view event with a referrer but without a title:
 
 ```javascript
-t.track(buildPageView({ 
-  pageUrl: 'http://www.example.com', 
+t.track(buildPageView({
+  pageUrl: 'http://www.example.com',
   referrer: 'http://www.referer.com'
 });
 ```
@@ -38,8 +34,8 @@ t.track(buildPageView({
 In short, custom contexts let you add additional information about the circumstances surrounding an event. Each call to `track()` accepts an additional optional context parameter:
 
 ```javascript
-t.track(buildPageView({ 
-  pageUrl: 'http://www.example.com', 
+t.track(buildPageView({
+  pageUrl: 'http://www.example.com',
   referrer: 'http://www.referer.com'
 }),
 []); // Array of custom contexts
@@ -64,10 +60,10 @@ If a visitor arrives on a page advertising a movie, the context dictionary might
 This is how to fire a page view event with the above custom context:
 
 ```javascript
-t.track(buildPageView({ 
-  pageUrl: 'http://www.example.com', 
+t.track(buildPageView({
+  pageUrl: 'http://www.example.com',
   referrer: 'http://www.referer.com'
-}), 
+}),
 [{
   "schema": "iglu:com.acme_company/movie_poster/jsonschema/2-1-1",
   "data": {
@@ -89,7 +85,7 @@ Here is an example tracking a structured event and supplying the optional timest
 
 ```javascript
 t.track(buildStructEvent({
-  category: "game action", 
+  category: "game action",
   action: "save"
 }), [], 1368725287000);
 ```
@@ -100,10 +96,10 @@ Timestamp is counted in milliseconds since the Unix epoch - the same format as g
 
 Use `buildScreenView()` to build a user viewing a screen (or equivalent) within your app. Arguments are:
 
-| **Argument** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `name` | Human-readable name for this screen | No | Non-empty string |
-| `id` | Unique identifier for this screen | No | String |
+| **Argument** | **Description**                     | **Required?** | **Type**         |
+| ------------ | ----------------------------------- | ------------- | ---------------- |
+| `name`       | Human-readable name for this screen | No            | Non-empty string |
+| `id`         | Unique identifier for this screen   | No            | String           |
 
 `name` and `id` are not individually required, but you must provide at least one of them.
 
@@ -111,7 +107,7 @@ Example:
 
 ```javascript
 t.track(buildScreenView({
-  name: "HUD > Save Game", 
+  name: "HUD > Save Game",
   id: "screen23"
 }));
 ```
@@ -120,17 +116,17 @@ t.track(buildScreenView({
 
 Use `buildPageView()` to track a user viewing a page within your app. Arguments are:
 
-| **Argument** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `pageUrl` | The URL of the page | Yes | Non-empty string |
-| `pageTitle` | The title of the page | No | String |
-| `referrer` | The address which linked to the page | No | String |
+| **Argument** | **Description**                      | **Required?** | **Type**         |
+| ------------ | ------------------------------------ | ------------- | ---------------- |
+| `pageUrl`    | The URL of the page                  | Yes           | Non-empty string |
+| `pageTitle`  | The title of the page                | No            | String           |
+| `referrer`   | The address which linked to the page | No            | String           |
 
 Example:
 
 ```javascript
 t.track(buildPageView({
-  pageUrl: "www.example.com", 
+  pageUrl: "www.example.com",
   url: "example",
   referrer: "www.referrer.com"
 }));
@@ -142,9 +138,9 @@ Use `buildSelfDescribingEvent()` to track a custom event which consists of a n
 
 The arguments are as follows:
 
-| **Argument** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `event` | The self describing event definition | Yes | JSON |
+| **Argument** | **Description**                      | **Required?** | **Type** |
+| ------------ | ------------------------------------ | ------------- | -------- |
+| `event`      | The self describing event definition | Yes           | JSON     |
 
 Example:
 
@@ -168,22 +164,22 @@ The `event` property must be an object with two fields: `schema` and `data`
 
 Use `buildStructEvent()` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required):
 
-| **Argument** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `category` | The grouping of structured events which this `action` belongs to | Yes | Non-empty string |
-| `action` | Defines the type of user interaction which this event involves | Yes | Non-empty string |
-| `label` | A string to provide additional dimensions to the event data | No | String |
-| `property` | A string describing the object or the action performed on it | No | String |
-| `value` | A value to provide numerical data about the event | No | Number |
+| **Argument** | **Description**                                                  | **Required?** | **Type**         |
+| ------------ | ---------------------------------------------------------------- | ------------- | ---------------- |
+| `category`   | The grouping of structured events which this `action` belongs to | Yes           | Non-empty string |
+| `action`     | Defines the type of user interaction which this event involves   | Yes           | Non-empty string |
+| `label`      | A string to provide additional dimensions to the event data      | No            | String           |
+| `property`   | A string describing the object or the action performed on it     | No            | String           |
+| `value`      | A value to provide numerical data about the event                | No            | Number           |
 
 Example:
 
 ```javascript
 t.track(buildStructEvent({
-  category: "shop", 
-  action: "add-to-basket", 
-  label: "product", 
-  property: "pcs", 
+  category: "shop",
+  action: "add-to-basket",
+  label: "product",
+  property: "pcs",
   value: 2
 }));
 ```

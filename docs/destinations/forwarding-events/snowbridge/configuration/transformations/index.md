@@ -29,9 +29,3 @@ The below first filters out any `event_name` which does not match the regex `^pa
 ```hcl reference
 https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/transformations-overview-example.hcl
 ```
-
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
-
-<DocCardList />
-```

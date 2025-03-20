@@ -52,7 +52,30 @@ function useCategoryHrefWithSSRFallback(item) {
     return findFirstCategoryLink(item)
   }, [item, isBrowser])
 }
-function CollapseButton({ categoryLabel, onClick }) {
+
+function CollapseButton({ categoryLabel, href, collapsed, updateCollapsed }) {
+  // Modified CollapseButton so that it has the same behavior as the title
+  const handleClick = (e) => {
+    e.preventDefault()
+    e.stopPropagation()
+
+    if (!collapsed) {
+      // When expanded, simply collapse
+      updateCollapsed(true)
+    } else {
+      // When collapsed, expand AND navigate to the page
+      updateCollapsed(false)
+      if (href) {
+        const linkElement = e.target
+          .closest('.menu__list-item-collapsible')
+          .querySelector('.menu__link')
+        if (linkElement) {
+          linkElement.click()
+        }
+      }
+    }
+  }
+
   return (
     <button
       aria-label={translate(
@@ -66,7 +89,7 @@ function CollapseButton({ categoryLabel, onClick }) {
       )}
       type="button"
       className="clean-btn menu__caret"
-      onClick={onClick}
+      onClick={handleClick}
     />
   )
 }
@@ -98,7 +121,6 @@ export default function DocSidebarItemCategory({
       return isActive ? false : item.collapsed
     },
   })
-
   const { expandedItem, setExpandedItem } = useDocSidebarItemsExpandedState()
 
   // Use this instead of `setCollapsed`, because it is also reactive
@@ -108,6 +130,7 @@ export default function DocSidebarItemCategory({
   }
 
   useAutoExpandActiveCategory({ isActive, collapsed, updateCollapsed })
+
   useEffect(() => {
     if (
       collapsible &&
@@ -118,6 +141,26 @@ export default function DocSidebarItemCategory({
       setCollapsed(true)
     }
   }, [collapsible, expandedItem, index, setCollapsed, autoCollapseCategories])
+
+  // Modified click handler for the title link
+  const handleTitleClick = (e) => {
+    onItemClick?.(item)
+
+    if (collapsible) {
+      if (isActive && !collapsed) {
+        // When expanded and selected, clicking title should collapse
+        e.preventDefault()
+        updateCollapsed(true)
+      } else if (href) {
+        // For items with href, expand and let navigation happen
+        updateCollapsed(false)
+      } else {
+        // For items without href, just toggle
+        e.preventDefault()
+        updateCollapsed()
+      }
+    }
+  }
 
   return (
     <li
@@ -142,21 +185,7 @@ export default function DocSidebarItemCategory({
             'menu__link--sublist-caret': !href && collapsible,
             'menu__link--active': isActive,
           })}
-          onClick={
-            collapsible
-              ? (e) => {
-                  onItemClick?.(item)
-                  if (href) {
-                    updateCollapsed(false)
-                  } else {
-                    e.preventDefault()
-                    updateCollapsed()
-                  }
-                }
-              : () => {
-                  onItemClick?.(item)
-                }
-          }
+          onClick={handleTitleClick}
           aria-current={isCurrentPage ? 'page' : undefined}
           aria-expanded={collapsible ? !collapsed : undefined}
           href={collapsible ? hrefWithSSRFallback ?? '#' : hrefWithSSRFallback}
@@ -167,10 +196,9 @@ export default function DocSidebarItemCategory({
         {href && collapsible && (
           <CollapseButton
             categoryLabel={label}
-            onClick={(e) => {
-              e.preventDefault()
-              updateCollapsed()
-            }}
+            href={href}
+            collapsed={collapsed}
+            updateCollapsed={updateCollapsed}
           />
         )}
       </div>

@@ -68,9 +68,3 @@ tracker:track_struct_event("category", "action", "label", "property", 10)
 ```
 
 Visit documentation about [tracking events](/docs/sources/trackers/lua-tracker/tracking-specific-events/index.md) to learn about other supported event types.
-
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
-
-<DocCardList />
-```

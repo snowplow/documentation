@@ -1,7 +1,7 @@
 ---
-title: "2.0.0 Upgrade Guide"
+title: "2.0.0 upgrade guide"
 date: "2021-07-05"
-sidebar_position: 10
+sidebar_position: 11
 ---
 
 ## Caution

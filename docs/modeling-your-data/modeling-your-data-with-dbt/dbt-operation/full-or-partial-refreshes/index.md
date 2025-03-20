@@ -1,5 +1,5 @@
 ---
-title: "Full or Partial Refreshes"
+title: "Full or partial refreshes"
 sidebar_position: 20
 ---
 
@@ -8,6 +8,8 @@ import ThemedImage from '@theme/ThemedImage';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
+
+You can choose to refresh all or only some tables.
 
 ## Complete refresh of Snowplow package
 

@@ -94,7 +94,7 @@ What this code does is:
 2. Enables activity tracking which will send periodic page pings.
 3. Sends a page view when the main application component is first rendered.
 
-You can validate this step being implemented properly using the [Snowplow Inspector](/docs/data-product-studio/data-quality/snowplow-inspector/overview/index.md) browser extension observing Page view and Page ping events.
+You can validate this step being implemented properly using the [Snowplow Inspector](/docs/data-product-studio/data-quality/snowplow-inspector/index.md) browser extension observing Page view and Page ping events.
 ![](./images/inspector.png)
 
 ## Add link click tracking

@@ -4,8 +4,6 @@ date: "2020-02-15"
 sidebar_position: 4
 ---
 
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
+To collect events from your own applications, use our [tracker SDKs](/docs/sources/trackers/index.md).
 
-<DocCardList />
-```
+For tracking from third-party applications, use our [webhooks](/docs/sources/webhooks/index.md).

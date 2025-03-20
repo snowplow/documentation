@@ -1,6 +1,6 @@
 ---
 title: "Accessing failed events in file storage"
-sidebar_label: "In file storage"
+sidebar_label: "Raw failed events"
 sidebar_position: 2
 ---
 

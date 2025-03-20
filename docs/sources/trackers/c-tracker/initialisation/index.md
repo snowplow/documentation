@@ -4,7 +4,7 @@ date: "2020-02-25"
 sidebar_position: 20
 ---
 
-Designing how and what to track in your app is an important decision. Check out our docs about tracking design [here](/docs/data-product-studio/introduction-to-tracking-design/index.md).
+Designing how and what to track in your app is an important decision. Check out our docs about tracking design [here](/docs/data-product-studio/index.md).
 
 ## Import the library
 
@@ -95,32 +95,32 @@ auto tracker = Snowplow::create_tracker(tracker_config, network_config, emitter_
 `TrackerConfiguration` contains settings to identify and configure the tracker. It's constructor takes 3 attributes:
 
 | Constructor attribute | Description                                                                                          | Default |
-|-----------------------|------------------------------------------------------------------------------------------------------|---------|
+| --------------------- | ---------------------------------------------------------------------------------------------------- | ------- |
 | `name_space`          | Tracker namespace to identify the tracker and also attach as a property to tracked events.           | None    |
 | `app_id`              | Application ID.                                                                                      | ""      |
 | `platform`            | Enum of the platform the Tracker is running on, can be one of: web, mob, pc, app, srv, tv, cnsl, iot | srv     |
 
 It further provides 2 optional setter functions:
 
-| Setter                | Description                                                                                                             | Default |
-|-----------------------|-------------------------------------------------------------------------------------------------------------------------|---------|
-| `set_use_base64`      | Whether to use base64 encoding in events.                                                                               | true    |
+| Setter                | Description                                                                                                            | Default |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------- | ------- |
+| `set_use_base64`      | Whether to use base64 encoding in events.                                                                              | true    |
 | `set_desktop_context` | Whether to add a desktop_context, which gathers information about the device the tracker is running on, to each event. | true    |
 
 ### Network configuration using "NetworkConfiguration"
 
 `NetworkConfiguration` has only two properties set in it's constructor to configure the Snowplow collector:
 
-| Constructor attribute | Description                                                                                                                                                                   | Default                                                                                   |
-|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------|
-| `collector_url`       | Full URL of the Snowplow collector including the protocol (or defaults to HTTPS if protocol not present).                                                                     | None                                                                                      |
-| `method`              | HTTP method to use when sending events to collector – GET or POST.                                                                                                            | POST                                                                                      |
+| Constructor attribute | Description                                                                                                                                                                  | Default                                                                                   |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- |
+| `collector_url`       | Full URL of the Snowplow collector including the protocol (or defaults to HTTPS if protocol not present).                                                                    | None                                                                                      |
+| `method`              | HTTP method to use when sending events to collector – GET or POST.                                                                                                           | POST                                                                                      |
 | `curl_cookie_file`    | Path to a file where to store cookies in case http_client is nullptr and the CURL HTTP client is used – only relevant under Linux (CURL is not used under Windows and macOS) | In-memory cookie storage with CURL on Linux, platform native storage on Windows and macOS |
 
 Additionally, it provides the following setter functions:
 
 | Setter            | Description                                                                | Default                           |
-|-------------------|----------------------------------------------------------------------------|-----------------------------------|
+| ----------------- | -------------------------------------------------------------------------- | --------------------------------- |
 | `set_http_client` | Unique pointer to a custom HTTP client to send GET and POST requests with. | Platform-specific implementation. |
 
 ### Emitter configuration using "EmitterConfiguration"
@@ -137,7 +137,7 @@ EmitterConfiguration config2(storage); // you can also pass a custom `EventStore
 Additionally, it provides the following setter functions:
 
 | Setter                             | Description                                                                                                                                  | Default     |
-|------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------|-------------|
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ----------- |
 | `set_batch_size`                   | The maximum amount of events to send at a time.                                                                                              | 250 events  |
 | `set_byte_limit_get`               | The byte limit when sending a GET request.                                                                                                   | 40000 bytes |
 | `set_byte_limit_post`              | The byte limit when sending a POST request.                                                                                                  | 40000 bytes |
@@ -149,7 +149,7 @@ Additionally, it provides the following setter functions:
 `SessionConfiguration` is an optional attribute in `create_tracker`. If passed, session tracking will be enabled with the given configuration. If not passed, session tracking will not be enabled. The constructor takes 3 attributes:
 
 | Constructor attribute        | Description                                                                                                                                                                         | Default    |
-|------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------|
+| ---------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- |
 | `session_store` or `db_name` | You may either pass a path to an SQLite database to be used for session storage or a custom implementation of `SessionStore` similar as for `EventStore` in `EmitterConfiguration`. | None       |
 | `foreground_timeout`         | Timeout in ms for updating the session when the app is in background.                                                                                                               | 30 minutes |
 | `background_timeout`         | Timeout in ms for updating the session when the app is in foreground.                                                                                                               | 30 minutes |
@@ -196,16 +196,16 @@ Emitter is a required component responsible for sending tracked events to the co
 
 Accepts an argument of an Emitter instance pointer; if the object is `NULL` will throw an exception. See Emitters for more on emitter configuration.
 
-| **Argument Name**  | **Description**                                                                                                                                                               | **Required?** | **Default**                                                                               |
-|--------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------|-------------------------------------------------------------------------------------------|
-| `event_store`      | Defines the database to use for event queue                                                                                                                                   | Yes           | –                                                                                         |
-| `uri`              | The collector URI (excluding protocol) to send events to                                                                                                                      | Yes           | –                                                                                         |
-| `method`           | The request type to use (GET or POST)                                                                                                                                         | No            | POST                                                                                      |
-| `protocol`         | The protocol to use (HTTP or HTTPS)                                                                                                                                           | No            | HTTPS                                                                                     |
-| `batch_size`       | The maximum amount of events to send at a time                                                                                                                                | No            | 250 events                                                                                |
-| `byte_limit_post`  | The byte limit when sending a POST request                                                                                                                                    | No            | 40000 bytes                                                                               |
-| `byte_limit_get`   | The byte limit when sending a GET request                                                                                                                                     | No            | 40000 bytes                                                                               |
-| `http_client`      | Unique pointer to a custom HTTP client to send GET and POST requests with                                                                                                     | No            | Platform-specific implementation.                                                         |
+| **Argument Name**  | **Description**                                                                                                                                                              | **Required?** | **Default**                                                                               |
+| ------------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ----------------------------------------------------------------------------------------- |
+| `event_store`      | Defines the database to use for event queue                                                                                                                                  | Yes           | –                                                                                         |
+| `uri`              | The collector URI (excluding protocol) to send events to                                                                                                                     | Yes           | –                                                                                         |
+| `method`           | The request type to use (GET or POST)                                                                                                                                        | No            | POST                                                                                      |
+| `protocol`         | The protocol to use (HTTP or HTTPS)                                                                                                                                          | No            | HTTPS                                                                                     |
+| `batch_size`       | The maximum amount of events to send at a time                                                                                                                               | No            | 250 events                                                                                |
+| `byte_limit_post`  | The byte limit when sending a POST request                                                                                                                                   | No            | 40000 bytes                                                                               |
+| `byte_limit_get`   | The byte limit when sending a GET request                                                                                                                                    | No            | 40000 bytes                                                                               |
+| `http_client`      | Unique pointer to a custom HTTP client to send GET and POST requests with                                                                                                    | No            | Platform-specific implementation.                                                         |
 | `curl_cookie_file` | Path to a file where to store cookies in case http_client is nullptr and the CURL HTTP client is used – only relevant under Linux (CURL is not used under Windows and macOS) | No            | In-memory cookie storage with CURL on Linux, platform native storage on Windows and macOS |
 
 ### Subject
@@ -225,7 +225,7 @@ Adds the ability to attach a ClientSession context to each event that leaves the
 The tracker instance lets you track events. You should maintain a reference to the initialized tracker during the app lifetime.
 
 | **Argument Name** | **Description**                                                                                                                           | **Required?** | **Default** |
-|-------------------|-------------------------------------------------------------------------------------------------------------------------------------------|---------------|-------------|
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------- | ------------- | ----------- |
 | `emitter`         | The emitter to which events are sent                                                                                                      | Yes           | –           |
 | `subject`         | The user being tracked                                                                                                                    | No            | nullptr     |
 | `client_session`  | Client session recording                                                                                                                  | No            | nullptr     |

@@ -365,7 +365,7 @@ export interface GlobalContext {
 export type GCConfiguration = GlobalContext[];
 ```
 
-Global Contexts can also be set (added or removed) at runtime. In the [Adding or removing global contexts](/docs/sources/trackers/react-native-tracker/introduction/index.md#adding-or-removing-global-contexts) section below, you can find out more about the available tracker methods to do so.
+Global Contexts can also be set (added or removed) at runtime. In the [Adding or removing global contexts](/docs/sources/trackers/react-native-tracker/index.md#adding-or-removing-global-contexts) section below, you can find out more about the available tracker methods to do so.
 
 ## Tracker methods
 

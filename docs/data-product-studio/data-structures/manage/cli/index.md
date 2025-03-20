@@ -1,7 +1,7 @@
 ---
 title: "Managing data structures via the CLI"
 description: "Use the 'snowplow-cli data-structures' command to manage your data structures."
-sidebar_label: "Using the CLI"
+sidebar_label: "Snowplow CLI"
 sidebar_position: 2
 sidebar_custom_props:
   offerings:
@@ -35,7 +35,7 @@ Will create a minimal data structure template in a new file `./folder-name/login
 ### Downloading data structures
 
 ```bash
-./snowplow-cli ds download 
+./snowplow-cli ds download
 ```
 
 This command will retrieve all organization data structures. By default it will create a folder named `data-structures` in the current working directory to put them in. It uses a combination of vendor and name to further break things down.
@@ -67,6 +67,3 @@ If any validations fail the command will report the problems to stdout and exit 
 This command will find all files under `./folder-name` (if omitted then `./data-structures`) and attempt to publish them to BDP console in the environment provided (`dev` or `prod`).
 
 Publishing to `dev` will also cause data structures to be validated with the `validate` command before upload. Publishing to `prod` will not validate but requires all data structures referenced to be present on `dev`.
-
-
-

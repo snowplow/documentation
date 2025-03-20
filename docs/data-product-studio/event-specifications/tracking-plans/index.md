@@ -7,7 +7,7 @@ sidebar_custom_props:
     - bdp
 ---
 
-As explained in [Introduction to tracking design](/docs/data-product-studio/introduction-to-tracking-design/index.md), to use Snowplow successfully, you need to have a good idea of:
+As explained in [Introduction to tracking design](/docs/data-product-studio/index.md), to use Snowplow successfully, you need to have a good idea of:
 - The events that matter to your business
 - The events that occur in your website, mobile application, server-side systems, factories, call centers, dispatch centers, etc.
 - The decisions you make based on those events

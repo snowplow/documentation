@@ -17,9 +17,3 @@ The Tracker should be relatively straightforward to setup if you are familiar wi
 :::info These pages are for version 0.12
 See [here](/docs/sources/trackers/java-tracker/installation-and-set-up/index.md) for the documentation for the latest version.
 :::
-
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
-
-<DocCardList />
-```

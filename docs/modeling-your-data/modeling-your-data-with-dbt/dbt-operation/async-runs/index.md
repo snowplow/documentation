@@ -1,5 +1,5 @@
 ---
-title: "Asynchronous Runs"
+title: "Asynchronous runs"
 sidebar_position: 60
 ---
 

@@ -1,7 +1,7 @@
 ---
-sidebar_label: "E-commerce"
+sidebar_label: "Ecommerce"
 sidebar_position: 40
-title: "E-commerce Quickstart"
+title: "Ecommerce Quickstart"
 ---
 
 ```mdx-code-block
@@ -14,10 +14,10 @@ import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
 
 In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web events dataset being available in your database:
 
-- A dataset of e-commerce events from the [Snowplow JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/index.md), or the [iOS/Android](/docs/sources/trackers/mobile-trackers/tracking-events/ecommerce-tracking/index.md) trackers must be available in the database.
-- Have the [`webPage` context](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md#adding-predefined-contexts) enabled. (Note if you have only tracked mobile e-commerce events, you will need other events in your warehouse to have used this context as we require the column to exist).
-- Have the following e-commerce contexts enabled: `cart`, `checkout_step`, `page` `transaction`, `user`
-- Track the e-commerce tracking action events on your website/mobile application
+- A dataset of ecommerce events from the [Snowplow JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/index.md), or the [iOS/Android](/docs/sources/trackers/mobile-trackers/tracking-events/ecommerce-tracking/index.md) trackers must be available in the database.
+- Have the [`webPage` context](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md#adding-predefined-contexts) enabled. (Note if you have only tracked mobile ecommerce events, you will need other events in your warehouse to have used this context as we require the column to exist).
+- Have the following ecommerce contexts enabled: `cart`, `checkout_step`, `page` `transaction`, `user`
+- Track the ecommerce tracking action events on your website/mobile application
 
 
 ## Installation
@@ -43,7 +43,7 @@ If you do not do this the package will still work, but the incremental upserts w
 
 ### 2. Adding the `selectors.yml` file
 
-Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the e-commerce model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#yaml-selectors) section.
+Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the ecommerce model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#yaml-selectors) section.
 
 These are defined in the `selectors.yml` file ([source](https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/selectors.yml)) within the package, however in order to use these selectors you will need to copy this file into your own dbt project directory. This is a top-level file and therefore should sit alongside your `dbt_project.yml` file. If you are using multiple packages in your project you will need to combine the contents of these into a single file.
 
@@ -91,7 +91,7 @@ vars:
 
 ### 6. Removing unused modules
 
-The e-commerce package creates tables that depend on the existence of certain entities that are a part of the [Snowplow e-commerce](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md) JS plugin. If, for some reason, you have not implemented them and would like to streamline your data modeling not to create empty tables, then you need to add that configuration to your `dbt_project.yml` file. Below you can see an example of what that would look like if you wanted to disable the [cart entity](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md#cart)
+The ecommerce package creates tables that depend on the existence of certain entities that are a part of the [Snowplow ecommerce](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md) JS plugin. If, for some reason, you have not implemented them and would like to streamline your data modeling not to create empty tables, then you need to add that configuration to your `dbt_project.yml` file. Below you can see an example of what that would look like if you wanted to disable the [cart entity](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md#cart)
 
 #### Disabling the cart module in `dbt_project.yml` (recommended)
 
@@ -117,8 +117,8 @@ If you want to temporarily disable a module, or you just find it easier to use t
 dbt run --exclude carts --select snowplow_ecommerce --vars '{snowplow__disable_ecommerce_carts: true}'
 ```
 
-### 7. Enable mobile e-commerce events
-Mobile e-commerce events may be processed in the package, if they have a `domain_sessionid` and are in your listed `app_id`s, however to correctly source the mobile session and screen view ids you need to set the following in your `dbt_project.yml`:
+### 7. Enable mobile ecommerce events
+Mobile ecommerce events may be processed in the package, if they have a `domain_sessionid` and are in your listed `app_id`s, however to correctly source the mobile session and screen view ids you need to set the following in your `dbt_project.yml`:
 
 ```yml title="dbt_project.yml"
 vars:

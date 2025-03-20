@@ -183,17 +183,17 @@ In the first step, you can provide the data model name, a description, and the o
 
 When selecting a `dbt-core` version, below you'll find a table which contains the exact `dbt-adapter` versions that are bundled with each specific version of `dbt-core`:
 
-| dbt-core  | BigQuery | Databricks | Postgres | Redshift | Snowflake |
-| :-------: | :------: | :--------: | :------: | :------: | :-------: |
-| **1.0.0** | 1.0.0    | -          | 1.0.0    | 1.0.0    | 1.0.0     |
-| **1.0.8** | 1.0.0    | 1.0.3      | 1.0.8    | 1.0.1    | 1.0.1     |
-| **1.1.2** | 1.1.1    | 1.1.6      | 1.1.2    | 1.1.0    | 1.1.0     |
-| **1.2.2** | 1.2.0    | 1.2.4      | 1.2.2    | 1.2.1    | 1.2.0     |
-| **1.3.0** | 1.3.0    | 1.3.1      | 1.3.0    | 1.3.0    | 1.3.0     |
-| **1.4.5** | 1.4.2    | 1.4.2      | 1.4.5    | 1.4.0    | 1.4.1     |
-| **1.5.1** | 1.5.1    | 1.5.4      | 1.5.1    | 1.5.9    | 1.5.1     |
-| **1.6.9** | 1.6.9    | 1.6.7      | 1.6.9    | 1.6.4    | 1.6.5     |
-| **1.7.11** | 1.7.7    | 1.7.11      | 1.7.11    | 1.7.5    | 1.7.3     |
+|  dbt-core  | BigQuery | Databricks | Postgres | Redshift | Snowflake |
+| :--------: | :------: | :--------: | :------: | :------: | :-------: |
+| **1.0.0**  |  1.0.0   |     -      |  1.0.0   |  1.0.0   |   1.0.0   |
+| **1.0.8**  |  1.0.0   |   1.0.3    |  1.0.8   |  1.0.1   |   1.0.1   |
+| **1.1.2**  |  1.1.1   |   1.1.6    |  1.1.2   |  1.1.0   |   1.1.0   |
+| **1.2.2**  |  1.2.0   |   1.2.4    |  1.2.2   |  1.2.1   |   1.2.0   |
+| **1.3.0**  |  1.3.0   |   1.3.1    |  1.3.0   |  1.3.0   |   1.3.0   |
+| **1.4.5**  |  1.4.2   |   1.4.2    |  1.4.5   |  1.4.0   |   1.4.1   |
+| **1.5.1**  |  1.5.1   |   1.5.4    |  1.5.1   |  1.5.9   |   1.5.1   |
+| **1.6.9**  |  1.6.9   |   1.6.7    |  1.6.9   |  1.6.4   |   1.6.5   |
+| **1.7.11** |  1.7.7   |   1.7.11   |  1.7.11  |  1.7.5   |   1.7.3   |
 
 Please also note that the model name needs to match to the corresponding datamodeling subfolder name in GitHub. The dbt project for the model in the above example would therefore live under:
 
@@ -246,10 +246,3 @@ This ensures that the correct package dependencies are installed, that seeds are
 ### 4. Monitor your model in the Snowplow BDP Console
 
 After everything has been set up and has executed, you can now monitor your data models running against your data warehouse from the Snowplow BDP Console, in the Jobs UI! There you can see the data modeling DAG generated, and monitor the status, duration and run times of the data model. You can also browse through the logs that dbt generates during it's runs. If all seeds, snapshots, models, and tests pass you will see the `Result: SUCCEEDED` status in the Jobs UI. If any of the steps fail (including tests that result in a warning), you will see the `Result: FAILED` status.
-
-
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
-
-<DocCardList />
-```

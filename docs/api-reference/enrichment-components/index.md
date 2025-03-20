@@ -4,7 +4,7 @@ date: "2020-11-09"
 sidebar_position: 50
 ---
 
-This is the technical documentation for the enrichment step. If you are not familiar yet with this step of the pipeline, please refer to [this page](/docs/pipeline/enrichments/what-is-enrichment/index.md).
+This is the technical documentation for the enrichment step. If you are not familiar yet with this step of the pipeline, please refer to [this page](/docs/pipeline/enrichments/index.md).
 
 Here is the list of the enrichment assets:
 
@@ -23,4 +23,3 @@ Standalone JVM application that reads collector payloads from a Kafka topic and 
 ## [enrich-nsq](/docs/api-reference/enrichment-components/enrich-nsq/index.md) (cloud agnostic)
 
 Standalone JVM application that reads collector payloads from NSQ and outputs back to NSQ.
-

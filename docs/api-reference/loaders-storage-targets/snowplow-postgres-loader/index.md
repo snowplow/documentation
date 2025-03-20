@@ -12,7 +12,7 @@ With Snowplow Postgres Loader you can load enriched data or [failed events](/doc
 
 :::danger Production use
 
-The Postgres loader is not recommended for production use, especially with large data volumes. We recommend using a fully-fledged data warehouse like Databricks, Snowflake, BigQuery or Redshift, together with a [respective loader](/docs/destinations/warehouses-lakes/storage-options/index.md).
+The Postgres loader is not recommended for production use, especially with large data volumes. We recommend using a fully-fledged data warehouse like Databricks, Snowflake, BigQuery or Redshift, together with a [respective loader](/docs/destinations/warehouses-lakes/index.md).
 
 :::
 
@@ -50,7 +50,7 @@ It accepts very typical configuration for Snowplow Loader:
 
 Where `resolver.json` is a typical [Iglu Client](/docs/api-reference/iglu/iglu-resolver/index.md) configuration.
 
-**Please pay attention that schemas for all self-describing JSONs flowing through Postgres Loader must be hosted on Iglu Server 0.6.0 or above.**  
+**Please pay attention that schemas for all self-describing JSONs flowing through Postgres Loader must be hosted on Iglu Server 0.6.0 or above.**
 Iglu Central is static registry and if you use Snowplow-authored schemas - you need to upload all schemas from there as well.
 
 ## Configuration

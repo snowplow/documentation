@@ -1,7 +1,7 @@
 ---
-title: "2.2.x Upgrade Guide"
+title: "2.2.x upgrade guide"
 date: "2022-05-19"
-sidebar_position: 20
+sidebar_position: 10
 ---
 
 ```mdx-code-block

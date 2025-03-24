@@ -29,13 +29,13 @@ AWS_ENDPOINT_URL=http://localstack:4566
 Run the following command to download and run everything in Docker:
 
 ```bash
-./up.sh
+./docker/up.sh
 ```
 Details on everything that is installed can be found in [architecture](/tutorials/kafka-live-viewer-profiles/introduction#architecture)
 
 **Tips:**
 - Use `Ctrl+C` to stop services but keep containers running.
-- Pass service-specific options to `./up.sh` (e.g., `./up.sh kafka-services`).
+- Pass service-specific options to `./docker/up.sh` (e.g., `./docker/up.sh kafka-services`).
 
 ### Step 2: Open the Web Tracking Frontend
 
@@ -75,7 +75,7 @@ Access [http://localhost:8080](http://localhost:8080) to review events within th
 Run the following command to manage containers visually:
 
 ```bash
-sudo ./lazydocker.sh
+sudo ./docker/lazy.sh
 ```
 
 ### Inspect Infrastructure with LocalStack UI
@@ -84,12 +84,12 @@ Visit the [LocalStack UI](https://app.localstack.cloud/) to inspect infrastructu
 
 ## Cleaning Up
 
-### Stop the Fontainers
+### Stop the containers
 
 Shut down all running containers:
 
 ```bash
-./down.sh
+./docker/down.sh
 ```
 
 ### Clean Up and Delete
@@ -97,7 +97,7 @@ Shut down all running containers:
 To remove all containers and images, use:
 
 ```bash
-./clean.sh
+./docker/clean.sh
 ```
 
 **Warning**: This command will delete all generated data.

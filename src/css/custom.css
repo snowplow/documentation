@@ -535,3 +535,19 @@ Controls the display of navbar/sidebar items
 .docs-tutorial-tabs {
   overflow: visible !important;
 }
+
+.sources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  grid-gap: 20px;
+  padding: 20px;
+}
+
+.sources-logo {
+  width: 100%;
+  height: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+}

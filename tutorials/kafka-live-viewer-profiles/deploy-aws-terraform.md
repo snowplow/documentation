@@ -31,19 +31,19 @@ AWS_SECRET_ACCESS_KEY=xxxxxxxxxxxxxxxxx
 ### Step 1: Initialize the Project
 
 ```bash
-$ ./terraform.sh init
+$ ./terraform/terraform.sh init
 ```
 
 ### Step 2: Create the Infrastructure
 
 ```bash
-$ ./terraform.sh apply
+$ ./terraform/terraform.sh apply
 ```
 
 ### Step 3: Access the EC2 Instance that Runs the Apps in AWS
 
 ```bash
-$ ./apps/ssh.sh
+$ ./terraform/apps/ssh.sh
 ```
 
 Inside the EC2 instance, you can control the Docker images in a similar way to how you do locally:
@@ -76,7 +76,7 @@ The applications listen for HTTP traffic on the following ports
 ### Check Versions
 
 ```bash
-$ ./terraform.sh --version
+$ ./terraform/terraform.sh --version
 ```
 Example response
 ```bash
@@ -90,13 +90,13 @@ on linux_amd64
 ### Check the Terraform Plan
 
 ```bash
-$ ./terraform.sh plan
+$ ./terraform/terraform.sh plan
 ```
 
 ### Generate a PNG Image for the Terraform Modules in This Project
 
 ```bash
-$ ./terraform.sh png
+$ ./terraform/terraform.sh png
 ```
 
 Current PNG image of the available modules:
@@ -106,5 +106,5 @@ Current PNG image of the available modules:
 ### Destroy the Infrastructure
 
 ```bash
-$ ./terraform.sh destroy
+$ ./terraform/terraform.sh destroy
 ```

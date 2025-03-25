@@ -35,6 +35,7 @@ The schema URIs have the format:
 
 You can see the schemas listed under the event tracking methods below.
 
+
 ### Media player entity
 
 The media player entity is attached to all media events and gives information about the current state of the media player.
@@ -98,6 +99,8 @@ It is an optional entity that is enabled by default.
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/session/jsonschema/1-0-0`.
 
+<!-- [Start] Are these trackable with Roku? (Niv comment) -->
+<!-- <>{(props.tracker != 'roku') && (<>  -->
 ### Media ad and ad break entities
 
 These entities give information about the currently playing ad and ad break.
@@ -135,6 +138,13 @@ companion – accompany the video but placed outside the player |
 *Schema for the ad entity:*
 `iglu:com.snowplowanalytics.snowplow.media/ad/jsonschema/1-0-0`.
 
+<!-- </>)}</> -->
+<!-- [End] (Niv comment) -->
+
+
+
+<!-- [Start] Remove for Roku since this is explained already (Niv comment) -->
+<!-- <>{(props.tracker != 'roku') && (<>  -->
 ## Starting and ending media tracking
 
 The tracker keeps track of ongoing media tracking instances in order to manage entities that are tracked along with the media events.
@@ -352,6 +362,9 @@ player.setVolume(100); // Volume level`}
 );`}
 </CodeBlock>)}</>
 
+<!-- </>)}</> -->
+<!-- [End] (Niv comment) -->
+
 #### Media ping events
 
 Media ping events are events sent in a regular interval while media tracking is active.
@@ -414,6 +427,16 @@ MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuratio
 );`}
 </CodeBlock>)}</>
 
+<!-- (Niv comment)
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.enableMediaTracking = {
+    media: m.Video,
+    version: 2,
+    id: id,
+    pingInterval: 30 // Interval in seconds for sending ping events. Defaults to 30s.
+}`}
+</CodeBlock>)}</> -->
+
 The ping events are sent in an interval that is unrelated to the media playback.
 However, to prevent sending too many events while the player is paused in background (e.g., in a background tab), there is a limit to how many ping events can be sent while the media is paused.
 By default, this is set to 1, but it is configurable:
@@ -463,6 +486,16 @@ MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuratio
 );`}
 </CodeBlock>)}</>
 
+<!-- (Niv comment)
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.enableMediaTracking = {
+    media: m.Video,
+    version: 2,
+    id: id,
+    maxPausedPings: 3 // Maximum number of consecutive ping events to send when playback is paused. Defaults to 1.
+}`}
+</CodeBlock>)}</> -->
+
 You can disable ping events as follows:
 
 <>{(props.tracker == 'js-tag') && (<CodeBlock language="javascript">
@@ -503,6 +536,16 @@ MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuratio
     )
 );`}
 </CodeBlock>)}</>
+
+<!-- (Niv comment)
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.enableMediaTracking = {
+    media: m.Video,
+    version: 2,
+    id: id,
+    pings: false
+}`}
+</CodeBlock>)}</> -->
 
 Media ping events have the following schema:
 `iglu:com.snowplowanalytics.snowplow.media/ping_event/jsonschema/1-0-0`.
@@ -574,6 +617,16 @@ MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuratio
 );`}
 </CodeBlock>)}</>
 
+<!-- (Niv comment)
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.enableMediaTracking = {
+    media: m.Video,
+    version: 2,
+    id: id,
+    session: false
+}`}
+</CodeBlock>)}</> -->
+
 #### Percentage progress events
 
 Percentage progress events are tracked when the playback reaches some percentage boundaries.
@@ -618,6 +671,18 @@ MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuratio
 );`}
 </CodeBlock>)}</>
 
+<!-- (Niv comment)
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.enableMediaTracking = {
+    media: m.Video,
+    version: 2,
+    id: id,
+    options: {
+        boundaries: [25, 50, 75, 100]
+    }
+}`}
+</CodeBlock>)}</> -->
+
 Percentage progress events have the following schema:
 `iglu:com.snowplowanalytics.snowplow.media/percent_progress_event/jsonschema/1-0-0`.
 
@@ -652,6 +717,18 @@ val mediaTracking = tracker?.media?.startMediaTracking(configuration)`}
 configuration.setCaptureEvents(Collections.singletonList(MediaPlayEvent.class));
 MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuration);`}
 </CodeBlock>)}</>
+
+<!-- (Niv comment)
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.enableMediaTracking = {
+    media: m.Video,
+    version: 2,
+    id: id,
+    options: {
+        captureEvents: [MediaTrackingEvent.PLAY,  MediaTrackingEvent.PAUSE]
+    }
+}`}
+</CodeBlock>)}</> -->
 </>)}</>
 
 <>{(props.tracker == 'js-browser' || props.tracker == 'js-tag') && (<>
@@ -796,7 +873,23 @@ MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuratio
 );`}
 </CodeBlock>)}</>
 
-## Updating playback properties
+<!-- (Niv comment)
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.enableMediaTracking = {
+    media: m.Video,
+    version: 2,
+    id: id,
+    entities: [
+          SelfDescribingJSON(
+              schema: "iglu:org.schema/video/jsonschema/1-0-0",
+              data: {"creativeId": "value"})
+        ]
+}`}
+</CodeBlock>)}</> -->
+
+<!-- [Start] To be confirmed (Niv comment) -->
+<!-- <>{(props.tracker != 'roku') && (<>  -->
+## Updating playback properties 
 
 Updates stored attributes of the media player such as the current playback.
 Use this function to continually update the player attributes so that they can be sent in the background ping events.
@@ -838,12 +931,45 @@ mediaTracking.update(player, null, null);`}
 );`}
 </CodeBlock>)}</>
 
+<!-- </>)}</> -->
+<!-- [End] (Niv comment) -->
+
 ## Tracking media events
 
 Having started a media tracking instance, you can use it to track media events as you receive them from the media player.
 
 Typically, you would subscribe to notifications from the media player (e.g., user clicks play, volume changes, content is buffering) with callbacks that would track the Snowplow events.
 For an example, see the code that subscribes for events from an HTML5 media player [here](https://github.com/snowplow-industry-solutions/snowplow-javascript-tracker-examples/tree/master/react/src/components/video.jsx).
+
+<!-- (Niv comment)
+<>{(props.tracker == 'roku') && (<>
+<h4>Auto-tracking events</h4>
+
+The following events are automatically tracked with the Roku Tracker:
+
+* ready events
+* play events
+* pause events
+* ping events 
+* percent progress events 
+* buffer start events 
+* buffer end events 
+* end event 
+* error event 
+
+The following snippets starts media tracking:
+
+```brightscript
+m.global.snowplow.enableMediaTracking = {
+    media: m.Video,
+    version: 2
+}
+```
+
+</>)}</> -->
+
+<!-- [Start] To be confirmed(Niv comment) -->
+<!-- <>{(props.tracker != 'roku') && (<>  -->
 
 ### Providing additional information
 
@@ -1016,6 +1142,9 @@ mediaTracking.track(new MediaAdBreakStartEvent(), null, null, adBreak);`}
 );`}
 </CodeBlock>)}</>
 
+<!-- </>)}</> -->
+<!-- [End] (Niv comment) -->
+
 #### Add context entities to tracked event
 
 You can add custom context entities to tracked events.
@@ -1090,6 +1219,20 @@ trackMediaPlay({
     ]
 );`}
 </CodeBlock>)}</>
+
+<!-- (Niv comment)
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.enableMediaTracking = {
+    media: m.Video,
+    version: 2,
+    id: id,
+    entities: [
+          SelfDescribingJSON(
+              schema: "iglu:org.schema/video/jsonschema/1-0-0",
+              data: {"creativeId": "value"})
+        ]
+}`}
+</CodeBlock>)}</> -->
 
 ### Available event types
 

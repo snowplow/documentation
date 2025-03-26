@@ -542,12 +542,3 @@ Controls the display of navbar/sidebar items
   grid-gap: 20px;
   padding: 20px;
 }
-
-.sources-logo {
-  width: 100%;
-  height: auto;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 10px;
-}

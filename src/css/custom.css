@@ -112,8 +112,9 @@
 }
 
 .navbar__logo {
-  width: 150px;
-  margin-left: 6px;
+  max-width: 150px;
+  max-height: 28px;
+  margin-left: 4px;
 }
 
 /* All buttons */

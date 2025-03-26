@@ -148,8 +148,7 @@ export default function DocSidebarItemCategory({
 
     if (collapsible) {
       if (isActive && !collapsed) {
-        // When expanded and selected, clicking title should collapse
-        e.preventDefault()
+        // When expanded and selected, clicking title should collapse and navigate
         updateCollapsed(true)
       } else if (href) {
         // For items with href, expand and let navigation happen

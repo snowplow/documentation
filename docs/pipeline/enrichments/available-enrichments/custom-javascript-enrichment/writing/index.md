@@ -243,25 +243,12 @@ You might be tempted to update derived entities in a similar way by using `event
 
 ## Discarding the event
 
-Sometimes you don’t want the event to appear in your data warehouse or lake, e.g. because you suspect it comes from a bot and not a real user. In this case, you can `throw` an exception in your JavaScript code, which will send the event to [failed events](/docs/fundamentals/failed-events/index.md):
+```mdx-code-block
+import DiscardingEvents from "@site/docs/reusable/discarding-events/_index.md"
 
-```js
-const botPattern = /.*Googlebot.*/;
-
-function process(event) {
-  const useragent = event.getUseragent();
-
-  if (useragent !== null && botPattern.test(useragent)) {
-    throw "Filtered event produced by Googlebot";
-  }
-}
+<DiscardingEvents/>
 ```
 
-:::caution
-
-This will create an “enrichment failure” failed event, which may be tricky to distinguish from genuine failures in your enrichment code, e.g. due to a mistake. In the future, we might provide a better mechanism for discarding events.
-
-:::
 
 ## Accessing Java methods
 

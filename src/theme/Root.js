@@ -28,10 +28,7 @@ const useCookie = () => {
 
 export default function Root({ children }) {
   const { siteConfig } = useDocusaurusContext()
-
   const [userId, sessionId] = useCookie()
-  console.log(userId, sessionId)
-
   const userInfo = {
     username: userId,
     props: { sessionId: sessionId },

@@ -5,7 +5,7 @@ const sidebar = require('./sidebars')
 const abbreviations = require('./src/remark/abbreviations')
 const math = require('remark-math')
 const katex = require('rehype-katex')
-const path = require('path')
+require('dotenv').config()
 
 /** @type {import('@docusaurus/types').Config} */
 module.exports = {
@@ -25,6 +25,10 @@ module.exports = {
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
+  },
+  customFields: {
+    productFruitsNext: process.env.PRODUCT_FRUITS_NEXT,
+    productFruitsProd: process.env.PRODUCT_FRUITS_PROD,
   },
 
   clientModules: [

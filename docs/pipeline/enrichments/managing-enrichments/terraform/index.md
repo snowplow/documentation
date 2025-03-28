@@ -1,7 +1,7 @@
 ---
 title: "Managing enrichments in Snowplow Community Edition"
 date: "2021-10-06"
-sidebar_label: "Using Terraform"
+sidebar_label: "Community Edition: Terraform"
 sidebar_position: 15
 sidebar_custom_props:
   offerings:
@@ -30,4 +30,4 @@ The IAB and IP Lookups enrichments require a 3rd party database to function.
 
 To disable any enrichment, you can follow the instructions for [AWS](https://github.com/snowplow-devops/terraform-aws-enrich-kinesis-ec2#disabling-default-enrichments), [GCP](https://github.com/snowplow-devops/terraform-google-enrich-pubsub-ce#disabling-default-enrichments) or [Azure](https://github.com/snowplow-devops/terraform-azurerm-enrich-event-hub-vmss#disabling-default-enrichments).
 
-If you are using [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/what-is-micro/index.md) for testing, you can configure enrichments following the [usage guide](/docs/data-product-studio/data-quality/snowplow-micro/configuring-enrichments/index.md).
+If you are using [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md) for testing, you can configure enrichments following the [usage guide](/docs/data-product-studio/data-quality/snowplow-micro/configuring-enrichments/index.md).

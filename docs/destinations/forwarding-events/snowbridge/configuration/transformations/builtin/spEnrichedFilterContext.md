@@ -1,8 +1,8 @@
 # spEnrichedFilterContext
 
-`spEnrichedFilterContext`: Specific to Snowplow data.  Filters messages based on a regex match against a field in a context.
+`spEnrichedFilterContext`: Specific to Snowplow data. Filters messages based on a regex match against a field in an entity.
 
-This transformation is for use on fields from contexts.
+This transformation is for use on fields from entities (contexts).
 
 Note that if the same context is present in the data more than once, one instance of a match is enough for the regex condition to be considered a match — and the message to be kept.
 

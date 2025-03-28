@@ -80,5 +80,4 @@ In this section, we will create a simple tag to fire a page view event.
 
 To test the tag, you can use the GTM preview mode. Click the `Preview` button in the top right of the GTM interface. This will open a new tab with your website and the GTM preview console.
 
-Ensure that you see the Page View event in your Snowplow pipeline. If you don't have a full pipeline set up yet and are hosting the site locally, you can use [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/what-is-micro/index.md), or [Snowplow Inspector](/docs/data-product-studio/data-quality/snowplow-inspector/overview/index.md) to check that the event is sent correctly.
-
+Ensure that you see the Page View event in your Snowplow pipeline. If you don't have a full pipeline set up yet and are hosting the site locally, you can use [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md), or [Snowplow Inspector](/docs/data-product-studio/data-quality/snowplow-inspector/index.md) to check that the event is sent correctly.

@@ -28,7 +28,7 @@ Check out the documentation for [managing](/docs/data-product-studio/data-struct
 
 ## Managing data quality with schemas
 
-Schemas describe how you want your data to be structured. When data is [processed through your Snowplow pipeline](/docs/fundamentals/architecture-overview/index.md), each event is validated against its schema and only valid events are allowed to pass through. [Failed events](/docs/fundamentals/failed-events/index.md) are sent to a separate location.
+Schemas describe how you want your data to be structured. When data is [processed through your Snowplow pipeline](/docs/fundamentals/index.md), each event is validated against its schema and only valid events are allowed to pass through. [Failed events](/docs/fundamentals/failed-events/index.md) are sent to a separate location.
 
 By describing how the data should be structured as part of your schema definition, you ensure clean and consistent data landing in your data warehouse or other destinations.
 
@@ -53,7 +53,7 @@ To host schemas for your [custom self-described events](/docs/fundamentals/event
 ## The anatomy of a schema
 
 :::info
-BDP customers can create custom schemas using the [Data Structures Builder](/docs/data-product-studio/data-structures/manage/ui/builder/index.md) without worrying about how it works under the hood.
+BDP customers can create custom schemas using the [Data Structures Builder](/docs/data-product-studio/data-structures/manage/builder/index.md) without worrying about how it works under the hood.
 :::
 
 Snowplow schemas are based on the [JSON Schema](https://json-schema.org/) standard ([draft 4](https://datatracker.ietf.org/doc/html/draft-fge-json-schema-validation-00)). Let’s take a look at an example schema to talk about its constituent parts:

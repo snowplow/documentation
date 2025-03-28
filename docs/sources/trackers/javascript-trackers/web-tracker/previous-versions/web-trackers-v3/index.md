@@ -17,9 +17,3 @@ The **JavaScript Tracker** is loaded via tag: add code snippets to your website 
 The **Browser Tracker** is available via `npm` (`@snowplow/browser-tracker`) and can be directly bundled into your application. It supports core tracking methods out of the box and can be extended through plugins (`@snowplow/browser-plugin-*`). This tracker is often used when natively integrating tracking into React, Angular and Vue applications.
 
 As the API is similar, we have combined the documentation for both trackers. We've marked the sections which are only relevant to one tracker or another.
-
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
-
-<DocCardList />
-```

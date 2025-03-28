@@ -1,5 +1,5 @@
 ---
-title: "Dispatch Setup"
+title: "Dispatch setup"
 description: "Details on how to setup the dispatch order for macros"
 sidebar_position: 30
 ---

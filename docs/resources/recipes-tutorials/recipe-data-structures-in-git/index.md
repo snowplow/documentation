@@ -85,7 +85,7 @@ data:
 ```
 * `apiVersion` should always be `v1`
 * `resourceType` should remain `data-structure`
-* `meta.hidden` directly relates to showing and hiding [in BDP Console UI](/docs/data-product-studio/data-structures/manage/ui/index.md#hiding-a-data-structure)
+* `meta.hidden` directly relates to showing and hiding [in BDP Console UI](/docs/data-product-studio/data-structures/manage/index.md#hiding-a-data-structure)
 * `meta.schemaType` can be `event` or `entity`
 * `meta.customData` is a map of strings to strings that can be used to send across any key/value pairs you'd like to associate with the data structure
 * `data` is the actual [snowplow self describing schema](/docs/api-reference/iglu/common-architecture/self-describing-json-schemas/index.md) that this data structure describes
@@ -443,7 +443,7 @@ Let's now create a data product and an event specification by running the follow
 ```bash
 snowplow-cli dp generate --data-product Login
 ```
-This should provide the following output 
+This should provide the following output
 ```
 INFO generate wrote kind="data product" file=data-products/login.yaml
 ```

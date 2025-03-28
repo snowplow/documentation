@@ -21,9 +21,3 @@ If you are upgrading from 0.1.0 to 0.2.0, there are a couple of changes required
 - [`Tracker.track`](./getting-started/index.md#tracking-events) is no longer an async function
 - The Emitter must be safely closed to allow the tracker to drop, as it spawns a thread to send events. This can be done by calling `Tracker.close_emitter()`.
 :::
-
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
-
-<DocCardList />
-```

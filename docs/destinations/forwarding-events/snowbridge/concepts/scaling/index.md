@@ -3,11 +3,7 @@ title: "Scaling"
 sidebar_position: 150
 ---
 
-# Scaling
-
-## Horizontal scaling
-
-Snowbridge is built to suit a horizontal scaling model, and you can safely deploy multiple instances of Snowbridge to consume the same input out-of-the-box. No addditional configuration or setup is required for the app to smoothly run across multiple instances/environments, compared to a single instance/environment.
+Snowbridge is built to suit a **horizontal scaling** model, and you can safely deploy multiple instances of Snowbridge to consume the same input out-of-the-box. No addditional configuration or setup is required for the app to smoothly run across multiple instances/environments, compared to a single instance/environment.
 
 :::note
 If you are using the Kinesis source, you will need to manually create a few DynamoDB tables as described in [the Kinesis source configuration section](/docs/destinations/forwarding-events/snowbridge/configuration/sources/kinesis.md). Snowbridge uses these tables to coordinate multiple instances consuming from the same stream.

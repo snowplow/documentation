@@ -22,9 +22,3 @@ This is a Portable Class Library (PCL) wrapper around the core `Snowplow.Tracke
 ## Snowplow Demo Application
 
 The Xamarin demo application can be deployed on Android and iOS. Simply launch the `Snowplow.Demo.App.sln` solution file with Visual Studio and deploy to either emulators or actual test devices. The .NET Core Console demo application can also be loaded with Visual Studio using `Snowplow.Demo.Console.sln`.
-
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
-
-<DocCardList />
-```

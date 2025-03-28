@@ -19,9 +19,3 @@ A subject represents a user whose events are tracked. A tracker constructs event
 The current flow of the PHP Tracker is illustrated below:
 
 ![](images/php-tracker-flow.png)
-
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
-
-<DocCardList />
-```

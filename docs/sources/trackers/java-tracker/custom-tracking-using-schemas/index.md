@@ -25,7 +25,7 @@ SelfDescribing selfDescribing = SelfDescribing.builder()
             .build();
 ```
 
-Event context is sent as a JSON inside the event payload. During [enrichment](/docs/pipeline/enrichments/what-is-enrichment/index.md), it is separated into columns for each different schema used.
+Event context is sent as a JSON inside the event payload. During [enrichment](/docs/pipeline/enrichments/index.md), it is separated into columns for each different schema used.
 
 A note on nomenclature: entities were originally called "context", with the context called "contexts". The old nomenclature is still used in some parts of Snowplow, meaning that enriched events in the data warehouse refer to "contexts"/"context" rather than "context"/"entity".
 

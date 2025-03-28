@@ -35,7 +35,6 @@ The schema URIs have the format:
 
 You can see the schemas listed under the event tracking methods below.
 
-
 ### Media player entity
 
 The media player entity is attached to all media events and gives information about the current state of the media player.
@@ -99,8 +98,6 @@ It is an optional entity that is enabled by default.
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/session/jsonschema/1-0-0`.
 
-<!-- [Start] Are these trackable with Roku? (Niv comment) -->
-<!-- <>{(props.tracker != 'roku') && (<>  -->
 ### Media ad and ad break entities
 
 These entities give information about the currently playing ad and ad break.
@@ -138,21 +135,24 @@ companion – accompany the video but placed outside the player |
 *Schema for the ad entity:*
 `iglu:com.snowplowanalytics.snowplow.media/ad/jsonschema/1-0-0`.
 
-<!-- </>)}</> -->
-<!-- [End] (Niv comment) -->
-
-
-
-<!-- [Start] Remove for Roku since this is explained already (Niv comment) -->
-<!-- <>{(props.tracker != 'roku') && (<>  -->
 ## Starting and ending media tracking
 
 The tracker keeps track of ongoing media tracking instances in order to manage entities that are tracked along with the media events.
 
-Media tracking instances are identified by a unique ID (that is tracked in the media session entity as `mediaSessionId`).
-You provide the identifier in the `startMediaTracking` call that initializes the media tracking instance.
-All subsequent media track calls will be processed within this media tracking if given the same ID.
-Make sure that each media player and content tracked have a different ID.
+<>{props.tracker != 'roku'
+? <p>
+    Media tracking instances are identified by a unique ID (that is tracked in the media session entity as <code>mediaSessionId</code>).
+    You provide the identifier in the <code>startMediaTracking</code> call that initializes the media tracking instance.
+    All subsequent media track calls will be processed within this media tracking if given the same ID.
+    Make sure that each media player and content tracked have a different ID.
+    </p>
+: <p>
+    Media tracking instances are identified by the Audio/Video scene graph node they are attached to.
+    You provide the node and other options in the <code>enableMediaTracking</code> call that initializes the media tracking instance.
+    Assign a <code>roAssociativeArray</code> to the <code>enableMediaTracking</code> property with the options.
+    The <code>version</code> property must be specified as <code>2</code>.
+</p>
+}</>
 
 <>{(props.tracker == 'js-tag') && (<CodeBlock language="javascript">
 {`const id = 'XXXXX'; // randomly generated ID
@@ -190,7 +190,23 @@ MediaTracking mediaTracking = tracker.startMediaTracking(
 );`}
 </CodeBlock>)}</>
 
-Use the `endMediaTracking` call to end media tracking. This will clear the local state for the media tracking and stop any background updates.
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.enableMediaTracking = {
+    media: m.Video,
+    version: 2
+}`}
+</CodeBlock>)}</>
+
+<>{props.tracker != 'roku'
+? <p>
+    Use the <code>endMediaTracking</code> call to end media tracking.
+    This will clear the local state for the media tracking and stop any background updates.
+  </p>
+: <p>
+    Use the <code>disableMediaTracking</code> call to end media tracking.
+    This will disable any listeners and stop sending events.
+  </p>
+}</>
 
 <>{(props.tracker == 'js-tag') && (<CodeBlock language="javascript">
 {`window.snowplow('endMediaTracking', { id });`}
@@ -229,13 +245,34 @@ endMediaTracking({ id });`}
     </CodeBlock>
 </Admonition>)}</>
 
-### Configuration
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.disableMediaTracking = {
+    media: m.Video
+}`}
+</CodeBlock>)}</>
 
-You can provide additional configuration to the `startMediaTracking` call to configure the tracking or give initial information about the media played.
+### Configuration
+<>{props.tracker != 'roku'
+? <p>
+    You can provide additional configuration to the <code>startMediaTracking</code> call to configure the tracking or give initial information about the media played.
+  </p>
+: <p>
+    You can provide additional configuration to the <code>enableMediaTracking</code> call to configure the tracking or give initial information about the media played.
+  </p>
+}</>
+
 
 #### Media player properties
 
-The `media` property lets you provide information about the media playback that will be used to populate the media player entity tracked with media events.
+<>{props.tracker == 'roku'
+? <>
+    The <code>label</code> configuration specifies the label used in the media player entity.
+    All other properties are automatically tracked from the media node.
+</>
+: <>
+    The <code>player</code> property lets you provide information about the media playback that will be used to populate the media player entity tracked with media events.
+</>
+}</>
 
 <>{(props.tracker == 'js-tag') && (<CodeBlock language="javascript">
 {`window.snowplow('startMediaTracking', {
@@ -362,8 +399,12 @@ player.setVolume(100); // Volume level`}
 );`}
 </CodeBlock>)}</>
 
-<!-- </>)}</> -->
-<!-- [End] (Niv comment) -->
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.disableMediaTracking = {
+    media: m.Video,
+    label: "Sample video"
+}`}
+</CodeBlock>)}</>
 
 #### Media ping events
 
@@ -427,15 +468,15 @@ MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuratio
 );`}
 </CodeBlock>)}</>
 
-<!-- (Niv comment)
 <>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
 {`m.global.snowplow.enableMediaTracking = {
     media: m.Video,
     version: 2,
     id: id,
-    pingInterval: 30 // Interval in seconds for sending ping events. Defaults to 30s.
+    pings: true ' Enabled by default, false to disable
+    pingInterval: 30 ' Interval in seconds for sending ping events. Defaults to 30s
 }`}
-</CodeBlock>)}</> -->
+</CodeBlock>)}</>
 
 The ping events are sent in an interval that is unrelated to the media playback.
 However, to prevent sending too many events while the player is paused in background (e.g., in a background tab), there is a limit to how many ping events can be sent while the media is paused.
@@ -486,15 +527,14 @@ MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuratio
 );`}
 </CodeBlock>)}</>
 
-<!-- (Niv comment)
 <>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
 {`m.global.snowplow.enableMediaTracking = {
     media: m.Video,
     version: 2,
     id: id,
-    maxPausedPings: 3 // Maximum number of consecutive ping events to send when playback is paused. Defaults to 1.
+    maxPausedPings: 1 ' Value is disregarded, Roku will only track pings while the video is making progress
 }`}
-</CodeBlock>)}</> -->
+</CodeBlock>)}</>
 
 You can disable ping events as follows:
 
@@ -537,7 +577,6 @@ MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuratio
 );`}
 </CodeBlock>)}</>
 
-<!-- (Niv comment)
 <>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
 {`m.global.snowplow.enableMediaTracking = {
     media: m.Video,
@@ -545,7 +584,7 @@ MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuratio
     id: id,
     pings: false
 }`}
-</CodeBlock>)}</> -->
+</CodeBlock>)}</>
 
 Media ping events have the following schema:
 `iglu:com.snowplowanalytics.snowplow.media/ping_event/jsonschema/1-0-0`.
@@ -617,7 +656,6 @@ MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuratio
 );`}
 </CodeBlock>)}</>
 
-<!-- (Niv comment)
 <>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
 {`m.global.snowplow.enableMediaTracking = {
     media: m.Video,
@@ -625,7 +663,7 @@ MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuratio
     id: id,
     session: false
 }`}
-</CodeBlock>)}</> -->
+</CodeBlock>)}</>
 
 #### Percentage progress events
 
@@ -671,17 +709,14 @@ MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuratio
 );`}
 </CodeBlock>)}</>
 
-<!-- (Niv comment)
 <>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
 {`m.global.snowplow.enableMediaTracking = {
     media: m.Video,
     version: 2,
     id: id,
-    options: {
-        boundaries: [25, 50, 75, 100]
-    }
+    boundaries: [10, 25, 50, 75]
 }`}
-</CodeBlock>)}</> -->
+</CodeBlock>)}</>
 
 Percentage progress events have the following schema:
 `iglu:com.snowplowanalytics.snowplow.media/percent_progress_event/jsonschema/1-0-0`.
@@ -718,17 +753,14 @@ configuration.setCaptureEvents(Collections.singletonList(MediaPlayEvent.class));
 MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuration);`}
 </CodeBlock>)}</>
 
-<!-- (Niv comment)
 <>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
 {`m.global.snowplow.enableMediaTracking = {
     media: m.Video,
     version: 2,
     id: id,
-    options: {
-        captureEvents: [MediaTrackingEvent.PLAY,  MediaTrackingEvent.PAUSE]
-    }
+    captureEvents: ["play", "pause"]
 }`}
-</CodeBlock>)}</> -->
+</CodeBlock>)}</>
 </>)}</>
 
 <>{(props.tracker == 'js-browser' || props.tracker == 'js-tag') && (<>
@@ -873,35 +905,33 @@ MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(configuratio
 );`}
 </CodeBlock>)}</>
 
-<!-- (Niv comment)
 <>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
 {`m.global.snowplow.enableMediaTracking = {
     media: m.Video,
     version: 2,
     id: id,
     entities: [
-          SelfDescribingJSON(
-              schema: "iglu:org.schema/video/jsonschema/1-0-0",
-              data: {"creativeId": "value"})
-        ]
+        {
+            schema: "iglu:org.schema/video/jsonschema/1-0-0",
+            data: {"creativeId": "value"}
+        }
+    ]
 }`}
-</CodeBlock>)}</> -->
+</CodeBlock>)}</>
 
-<!-- [Start] To be confirmed (Niv comment) -->
-<!-- <>{(props.tracker != 'roku') && (<>  -->
-## Updating playback properties 
-
+<>{(props.tracker != 'roku') && (<>
+<h3>Updating playback properties</h3>
+<p>
 Updates stored attributes of the media player such as the current playback.
 Use this function to continually update the player attributes so that they can be sent in the background ping events.
 We recommend updating the playback position every 1 second.
-
+</p>
 <>{(props.tracker == 'js-tag') && (<CodeBlock language="javascript">
 {`window.snowplow('updateMediaTracking', {
     id,
     player: { currentTime: 10 }
 });`}
 </CodeBlock>)}</>
-
 <>{(props.tracker == 'js-browser') && (<CodeBlock language="javascript">
 {`import { updateMediaTracking } from "@snowplow/browser-plugin-media";
 updateMediaTracking({
@@ -910,29 +940,23 @@ updateMediaTracking({
 });
 `}
 </CodeBlock>)}</>
-
 <>{(props.tracker == 'ios') && (<CodeBlock language="swift">
 {`mediaTracking.update(player: MediaPlayerEntity().currentTime(10.0))`}
 </CodeBlock>)}</>
-
 <>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
 {`mediaTracking?.update(player = MediaPlayerEntity(currentTime = 10.0))`}
 </CodeBlock>)}</>
-
 <>{(props.tracker == 'android-java') && (<CodeBlock language="java">
 {`MediaPlayerEntity player = new MediaPlayerEntity();
 player.setCurrentTime(10.0);
 mediaTracking.update(player, null, null);`}
 </CodeBlock>)}</>
-
 <>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
 {`await mediaTracking.update(
     player: const MediaPlayerEntity(currentTime: 10.0)
 );`}
 </CodeBlock>)}</>
-
-<!-- </>)}</> -->
-<!-- [End] (Niv comment) -->
+</>)}</>
 
 ## Tracking media events
 
@@ -941,52 +965,40 @@ Having started a media tracking instance, you can use it to track media events a
 Typically, you would subscribe to notifications from the media player (e.g., user clicks play, volume changes, content is buffering) with callbacks that would track the Snowplow events.
 For an example, see the code that subscribes for events from an HTML5 media player [here](https://github.com/snowplow-industry-solutions/snowplow-javascript-tracker-examples/tree/master/react/src/components/video.jsx).
 
-<!-- (Niv comment)
 <>{(props.tracker == 'roku') && (<>
-<h4>Auto-tracking events</h4>
-
-The following events are automatically tracked with the Roku Tracker:
-
-* ready events
-* play events
-* pause events
-* ping events 
-* percent progress events 
-* buffer start events 
-* buffer end events 
-* end event 
-* error event 
-
-The following snippets starts media tracking:
-
-```brightscript
-m.global.snowplow.enableMediaTracking = {
-    media: m.Video,
-    version: 2
-}
-```
-
-</>)}</> -->
-
-<!-- [Start] To be confirmed(Niv comment) -->
-<!-- <>{(props.tracker != 'roku') && (<>  -->
+<h4>Auto-tracked events</h4>
+<p>The following events are automatically tracked with the Roku Tracker:</p>
+<ul>
+    <li>ready events</li>
+    <li>play events</li>
+    <li>pause events</li>
+    <li>ping events</li>
+    <li>seek start events</li>
+    <li>seek end events</li>
+    <li>percent progress events</li>
+    <li>buffer start events</li>
+    <li>buffer end events</li>
+    <li>end event</li>
+    <li>error event</li>
+</ul>
+</>)}</>
 
 ### Providing additional information
 
 This section explains how to update information in the media entities along with tracked events.
 
-#### Update media player properties
-
+<>{(props.tracker != 'roku') && (<>
+<h5>Update media player properties</h5>
+<p>
 You can update properties for the media player entity as events are tracked.
 The updated properties will apply for the current and all following events.
-
+</p>
 <>{(props.tracker == 'js-tag') && (<CodeBlock language="javascript">
 {`window.snowplow('trackMediaSeekEnd', {
     id,
     player: { currentTime: 30.0 }
 });`}
 </CodeBlock>)}</>
-
 <>{(props.tracker == 'js-browser') && (<CodeBlock language="javascript">
 {`import { trackMediaSeekEnd } from "@snowplow/browser-plugin-media";
 trackMediaSeekEnd({
@@ -994,33 +1006,33 @@ trackMediaSeekEnd({
     player: { currentTime: 30.0 }
 });`}
 </CodeBlock>)}</>
-
 <>{(props.tracker == 'ios') && (<CodeBlock language="swift">
 {`mediaTracking.track(MediaSeekEndEvent(), player: MediaPlayerEntity().currentTime(30.0))`}
 </CodeBlock>)}</>
-
 <>{(props.tracker == 'android-kotlin') && (<CodeBlock language="kotlin">
 {`mediaTracking?.track(MediaSeekEndEvent(), player = MediaPlayerEntity(currentTime = 30.0))`}
 </CodeBlock>)}</>
-
 <>{(props.tracker == 'android-java') && (<CodeBlock language="java">
 {`MediaPlayerEntity player = new MediaPlayerEntity();
 player.setCurrentTime(30.0);
 mediaTracking.track(new MediaSeekEndEvent(), player, null, null);`}
 </CodeBlock>)}</>
-
 <>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
 {`await mediaTracking.track(
     MediaPlayEvent(),
     player: const MediaPlayerEntity(currentTime: 30.0)
 );`}
 </CodeBlock>)}</>
+</>)}</>
 
 #### Update ad and ad break properties
 
 When tracking ad events, you can attach information about the currently playing ad or ad break.
+
+<>{props.tracker != 'roku' && (<p>
 It is only necessary to attach this information once – at the start of the ad break for ad break properties, or at the start of an ad for ad properties.
 The tracker will remember the information and attach it to all following ad events until the next ad complete or ad break end event.
+</p>)}</>
 
 <>{(props.tracker == 'js-tag') && (<CodeBlock language="javascript">
 {`window.snowplow('trackMediaAdStart', {
@@ -1142,8 +1154,18 @@ mediaTracking.track(new MediaAdBreakStartEvent(), null, null, adBreak);`}
 );`}
 </CodeBlock>)}</>
 
-<!-- </>)}</> -->
-<!-- [End] (Niv comment) -->
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.trackMediaEvent = {
+    schema: "iglu:com.snowplowanalytics.snowplow.media/ad_break_start_event/jsonschema/1-0-0",
+    data: {},
+    adBreak: {
+        name: "pre-roll",
+        "breakId": "2345",
+        "podSize": 2,
+        "breakType": "linear"
+    },
+}`}
+</CodeBlock>)}</>
 
 #### Add context entities to tracked event
 
@@ -1220,19 +1242,20 @@ trackMediaPlay({
 );`}
 </CodeBlock>)}</>
 
-<!-- (Niv comment)
 <>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
-{`m.global.snowplow.enableMediaTracking = {
-    media: m.Video,
-    version: 2,
-    id: id,
+{`m.global.snowplow.trackMediaEvent = {
+    schema: "iglu:org.example/custom_event/jsonschema/1-0-0",
+    data: {},
+    ad: {},
+    adBreak: {},
     entities: [
-          SelfDescribingJSON(
-              schema: "iglu:org.schema/video/jsonschema/1-0-0",
-              data: {"creativeId": "value"})
-        ]
+        {
+            schema: "iglu:org.schema/video/jsonschema/1-0-0",
+            data: {"creativeId": "value"}
+        }
+    ]
 }`}
-</CodeBlock>)}</> -->
+</CodeBlock>)}</>
 
 ### Available event types
 
@@ -1265,6 +1288,8 @@ Tracks a media player ready event that is fired when the media tracking is succe
 <>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
 {`await mediaTracking.track(MediaReadyEvent());`}
 </CodeBlock>)}</>
+
+<>{(props.tracker == 'roku') && (<p>This event automatically fires for Audio/Video nodes, or can be tracked manually via <code>trackMediaEvent</code> if disabled via <code>captureEvents</code>.</p>)}</>
 
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/ready_event/jsonschema/1-0-0`.
@@ -1299,6 +1324,8 @@ Tracking this event will automatically set the `paused` property in the media pl
 {`await mediaTracking.track(MediaPlayEvent());`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'roku') && (<p>This event automatically fires for Audio/Video nodes, or can be tracked manually via <code>trackMediaEvent</code> if disabled via <code>captureEvents</code>.</p>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/play_event/jsonschema/1-0-0`.
 
@@ -1331,6 +1358,8 @@ Tracking this event will automatically set the `paused` property in the media pl
 <>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
 {`await mediaTracking.track(MediaPauseEvent());`}
 </CodeBlock>)}</>
+
+<>{(props.tracker == 'roku') && (<p>This event automatically fires for Audio/Video nodes, or can be tracked manually via <code>trackMediaEvent</code> if disabled via <code>captureEvents</code>.</p>)}</>
 
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/pause_event/jsonschema/1-0-0`.
@@ -1365,6 +1394,8 @@ Tracking this event will automatically set the `ended` and `paused` properties i
 {`await mediaTracking.track(MediaEndEvent());`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'roku') && (<p>This event automatically fires for Audio/Video nodes, or can be tracked manually via <code>trackMediaEvent</code> if disabled via <code>captureEvents</code>.</p>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/end_event/jsonschema/1-0-0`.
 
@@ -1396,6 +1427,8 @@ Tracks a media player seek start event sent when a seek operation begins.
 {`await mediaTracking.track(MediaEndEvent());`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'roku') && (<p>This event automatically fires for Video nodes using the native trickplay bar, or can be tracked manually via <code>trackMediaEvent</code> if disabled via <code>captureEvents</code> or using a custom seek implementation.</p>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/seek_start_event/jsonschema/1-0-0`.
 
@@ -1426,6 +1459,8 @@ Tracks a media player seek end event sent when a seek operation completes.
 <>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
 {`await mediaTracking.track(MediaSeekEndEvent());`}
 </CodeBlock>)}</>
+
+<>{(props.tracker == 'roku') && (<p>This event automatically fires for Video nodes using the native trickplay bar, or can be tracked manually via <code>trackMediaEvent</code> if disabled via <code>captureEvents</code> or using a custom seek implementation.</p>)}</>
 
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/seek_end_event/jsonschema/1-0-0`.
@@ -1470,6 +1505,15 @@ The `newRate` is passed when tracking the event and is automatically updated in 
 {`await mediaTracking.track(const MediaPlaybackRateChangeEvent(newRate: 1.5));`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.trackMediaEvent = {
+    schema: "iglu:com.snowplowanalytics.snowplow.media/playback_rate_change_event/jsonschema/1-0-0",
+    data: {
+        "newRate": 1.5
+    }
+}`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/playback_rate_change_event/jsonschema/1-0-0`.
 
@@ -1511,6 +1555,15 @@ The `newVolume` is passed when tracking the event and is automatically updated i
 {`await mediaTracking.track(const MediaVolumeChangeEvent(newVolume: 50));`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.trackMediaEvent = {
+    schema: "iglu:com.snowplowanalytics.snowplow.media/volume_change_event/jsonschema/1-0-0",
+    data: {
+        "newVolume": 50
+    }
+}`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/volume_change_event/jsonschema/1-0-0`.
 
@@ -1548,6 +1601,15 @@ The `fullscreen` value is passed when tracking the event and is automatically up
 
 <>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
 {`await mediaTracking.track(const MediaFullscreenChangeEvent(fullscreen: true));`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.trackMediaEvent = {
+    schema: "iglu:com.snowplowanalytics.snowplow.media/fullscreen_change_event/jsonschema/1-0-0",
+    data: {
+        fullscreen: true
+    }
+}`}
 </CodeBlock>)}</>
 
 *Schema:*
@@ -1589,6 +1651,15 @@ The `pictureInPicture` value is passed when tracking the event and is automatica
 {`await mediaTracking.track(const MediaPictureInPictureChangeEvent(pictureInPicture: false));`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.trackMediaEvent = {
+    schema: "iglu:com.snowplowanalytics.snowplow.media/picture_in_picture_change_event/jsonschema/1-0-0",
+    data: {
+        pictureInPicture: false
+    }
+}`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/picture_in_picture_change_event/jsonschema/1-0-0`.
 
@@ -1624,6 +1695,15 @@ Tracking this event will increase the counter of `adBreaks` in the session entit
 {`await mediaTracking.track(MediaAdBreakStartEvent());`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.trackMediaEvent = {
+    schema: "iglu:com.snowplowanalytics.snowplow.media/ad_break_start_event/jsonschema/1-0-0",
+    data: {},
+    ad: {},
+    adBreak: {},
+}`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/ad_break_start_event/jsonschema/1-0-0`.
 
@@ -1653,6 +1733,15 @@ Tracks a media player ad break end event that signals the end of an ad break.
 
 <>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
 {`await mediaTracking.track(MediaAdBreakEndEvent());`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.trackMediaEvent = {
+    schema: "iglu:com.snowplowanalytics.snowplow.media/ad_break_end_event/jsonschema/1-0-0",
+    data: {},
+    ad: {},
+    adBreak: {},
+}`}
 </CodeBlock>)}</>
 
 *Schema:*
@@ -1686,6 +1775,15 @@ Tracking this event will increase the counter of `ads` in the session entity.
 
 <>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
 {`await mediaTracking.track(MediaAdStartEvent());`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.trackMediaEvent = {
+    schema: "iglu:com.snowplowanalytics.snowplow.media/ad_start_event/jsonschema/1-0-0",
+    data: {},
+    ad: {},
+    adBreak: {},
+}`}
 </CodeBlock>)}</>
 
 *Schema:*
@@ -1727,6 +1825,15 @@ Tracking this event will increase the counter of `adsSkipped` in the session ent
 {`await mediaTracking.track(const MediaAdSkipEvent(percentProgress: 20));`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.trackMediaEvent = {
+    schema: "iglu:com.snowplowanalytics.snowplow.media/ad_skip_event/jsonschema/1-0-0",
+    data: {},
+    ad: {},
+    adBreak: {},
+}`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/ad_skip_event/jsonschema/1-0-0`.
 
@@ -1764,6 +1871,17 @@ The event schema has one required property – it is set automatically to 25%:
 {`await mediaTracking.track(MediaAdFirstQuartileEvent());`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.trackMediaEvent = {
+    schema: "iglu:com.snowplowanalytics.snowplow.media/ad_quartile_event/jsonschema/1-0-0",
+    data: {
+        "percentProgress": 25
+    },
+    ad: {},
+    adBreak: {},
+}`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/ad_quartile_event/jsonschema/1-0-0`.
 
@@ -1799,6 +1917,17 @@ The event schema has one required property – it is set automatically to 50%:
 
 <>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
 {`await mediaTracking.track(MediaAdMidpointEvent());`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.trackMediaEvent = {
+    schema: "iglu:com.snowplowanalytics.snowplow.media/ad_quartile_event/jsonschema/1-0-0",
+    data: {
+        "percentProgress": 50
+    },
+    ad: {},
+    adBreak: {},
+}`}
 </CodeBlock>)}</>
 
 *Schema:*
@@ -1839,6 +1968,17 @@ The event schema has one required property – it is set automatically to 75%:
 {`await mediaTracking.track(MediaAdMidpointEvent());`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.trackMediaEvent = {
+    schema: "iglu:com.snowplowanalytics.snowplow.media/ad_quartile_event/jsonschema/1-0-0",
+    data: {
+        "percentProgress": 75
+    },
+    ad: {},
+    adBreak: {},
+}`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/ad_quartile/jsonschema/1-0-0`.
 
@@ -1868,6 +2008,15 @@ Tracks a media player ad complete event that signals the ad creative was played 
 
 <>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
 {`await mediaTracking.track(MediaAdCompleteEvent());`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.trackMediaEvent = {
+    schema: "iglu:com.snowplowanalytics.snowplow.media/ad_complete_event/jsonschema/1-0-0",
+    data: {},
+    ad: {},
+    adBreak: {},
+}`}
 </CodeBlock>)}</>
 
 *Schema:*
@@ -1909,6 +2058,15 @@ Tracking this event will increase the counter of `adsClicked` in the session ent
 {`await mediaTracking.track(const MediaAdClickEvent(percentProgress: 20));`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.trackMediaEvent = {
+    schema: "iglu:com.snowplowanalytics.snowplow.media/ad_click_event/jsonschema/1-0-0",
+    data: {},
+    ad: {},
+    adBreak: {},
+}`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/ad_click_event/jsonschema/1-0-0`.
 
@@ -1946,6 +2104,15 @@ The event schema has one optional property:
 {`await mediaTracking.track(const MediaAdPauseEvent(percentProgress: 10));`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.trackMediaEvent = {
+    schema: "iglu:com.snowplowanalytics.snowplow.media/ad_pause_event/jsonschema/1-0-0",
+    data: {},
+    ad: {},
+    adBreak: {},
+}`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/ad_pause_event/jsonschema/1-0-0`.
 
@@ -1975,6 +2142,15 @@ Tracks a media player ad resume event fired when the user resumed playing the ad
 
 <>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
 {`await mediaTracking.track(const MediaAdResumeEvent(percentProgress: 15));`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.trackMediaEvent = {
+    schema: "iglu:com.snowplowanalytics.snowplow.media/ad_resume_event/jsonschema/1-0-0",
+    data: {},
+    ad: {},
+    adBreak: {},
+}`}
 </CodeBlock>)}</>
 
 *Schema:*
@@ -2012,6 +2188,8 @@ The tracker will calculate the time since this event until either the buffer end
 {`await mediaTracking.track(MediaBufferStartEvent());`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'roku') && (<p>This event automatically fires for Audio/Video nodes, or can be tracked manually via <code>trackMediaEvent</code> if disabled via <code>captureEvents</code>.</p>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/buffer_start_event/jsonschema/1-0-0`.
 
@@ -2042,6 +2220,8 @@ Tracks a media player buffering end event fired when the the player finishes buf
 <>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
 {`await mediaTracking.track(MediaBufferEndEvent());`}
 </CodeBlock>)}</>
+
+<>{(props.tracker == 'roku') && (<p>This event automatically fires for Audio/Video nodes, or can be tracked manually via <code>trackMediaEvent</code> if disabled via <code>captureEvents</code>.</p>)}</>
 
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/buffer_end_event/jsonschema/1-0-0`.
@@ -2122,6 +2302,13 @@ mediaTracking.track(event, null, null, null);`}
 );`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.trackMediaEvent = {
+    schema: "iglu:com.snowplowanalytics.snowplow.media/quality_change_event/jsonschema/1-0-0",
+    data: { }
+}`}
+</CodeBlock>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/quality_change_event/jsonschema/1-0-0`.
 
@@ -2190,6 +2377,8 @@ mediaTracking.track(event, null, null, null);`}
 );`}
 </CodeBlock>)}</>
 
+<>{(props.tracker == 'roku') && (<p>This event automatically fires for Audio/Video nodes, or can be tracked manually via <code>trackMediaEvent</code> if disabled via <code>captureEvents</code>.</p>)}</>
+
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/error_event/jsonschema/1-0-0`.
 
@@ -2248,4 +2437,11 @@ When tracked within the context of a media tracking, the tracker will attach the
             data: {"foo": "bar"}
     )
 );`}
+</CodeBlock>)}</>
+
+<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
+{`m.global.snowplow.trackMediaEvent = {
+    schema: "iglu:com.snowplowanalytics.snowplow.media/quality_change_event/jsonschema/1-0-0",
+    data: { }
+}`}
 </CodeBlock>)}</>

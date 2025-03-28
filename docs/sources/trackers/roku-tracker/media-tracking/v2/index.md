@@ -11,30 +11,13 @@ Media tracking has [multiple versions](/docs/sources/trackers/javascript-tracker
 This document is for version 2 of the schemas; tracker versions earlier than v0.3.0 [only support v1 tracking](/docs/sources/trackers/roku-tracker/media-tracking/v1/index.md).
 
 
-## Usage
+## Configuration
 
-To start media tracking for an Audio/Video node, assign a `roAssociativeArray` with the node to the `enableMediaTracking` property:
+Most tracking of [Audio](https://developer.roku.com/en-au/docs/references/scenegraph/media-playback-nodes/audio.md) and [Video](https://developer.roku.com/en-au/docs/references/scenegraph/media-playback-nodes/video.md) nodes is automatic, so configuration is minimal.
 
-```brightscript
-m.global.snowplow.enableMediaTracking = {
-    media: m.Video,
-    version: 2
-}
-```
+For backwards compatibility with [v1 media tracking](/docs/sources/trackers/roku-tracker/media-tracking/v1/index.md), most options will accept either `roAssociativeArray` format in the `enableMediaTracking` call as long as `version` is specified as `2`.
 
-The `version: 2` option is required to specify v2 instead of [v1 media tracking](/docs/sources/trackers/roku-tracker/media-tracking/v1/index.md), which is the default for backwards compatibility.
-
-To stop tracking events from the node, set the `disableMediaTracking` property with a `roAssociativeArray` with exactly one attribute, `media` (or `audio`/`video`), like so:
-
-```brightscript
-m.global.snowplow.disableVideoTracking = {
-    video: m.video
-}
-```
-
-The tracker will then stop observing and tracking events from the node.
-
-In addition to the node and version selector, the `enableMediaTracking` property accepts several optional attributes listed in the tables below.
+The accepted options include:
 
 | Attribute | Type | Description | Required? |
 | --- | --- | --- | --- |

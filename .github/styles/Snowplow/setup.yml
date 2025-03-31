@@ -1,0 +1,7 @@
+extends: existence
+message: "Double check that you're using '%s' as a noun, not as a verb."
+level: suggestion
+ignorecase: true
+tokens:
+  - setup
+  - login

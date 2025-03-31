@@ -1,6 +1,6 @@
 extends: existence
 message: "Use the Oxford comma in '%s'."
-link: 'https://developers.google.com/style/commas'
+link: 'https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md#commas'
 scope: sentence
 level: warning
 tokens:

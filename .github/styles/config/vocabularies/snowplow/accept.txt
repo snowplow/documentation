@@ -2,3 +2,18 @@ Iglu
 Snowbridge
 Snowtype
 dbt
+Kinesis
+namespace
+[aA]nonymization
+[sS]essionization
+boolean
+Databricks
+[eE]nrichments
+SDKs
+APIs
+discoverability
+misconfiguration
+Postgres
+SLAs
+onboarding
+Microsoft Entra

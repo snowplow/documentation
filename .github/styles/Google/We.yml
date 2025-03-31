@@ -1,5 +1,5 @@
 extends: existence
-message: "Try to avoid using first-person plural like '%s'."
+message: "Try to avoid using first-person plural like '%s' - it can be confusing who you're talking about."
 link: 'https://developers.google.com/style/pronouns#personal-pronouns'
 level: suggestion
 ignorecase: true

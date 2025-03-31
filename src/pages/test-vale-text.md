@@ -4,22 +4,31 @@ date: "2022-03-24"
 sidebar_position: 30
 ---
 
-Self-describing (self-referential) JSON schemas are at the core of snowplow tracking SnowPlow - really? Read more about them [here](/docs/fundamentals/schemas/index.md). They allow you to track completely customised data, and are also used internally throughout Snowplow pipelines.
+This is Data product Studio. It has many event specifications, rather than Event Specifications. Ecommerce not E-commerce, or e-commerce, or eCommerce. It should easily be ecommerce (or the Ecommerce data model). yes. no. yes it is.
 
-Javascript hello javascript Snowbridge
+## Event specifications in use
 
-Colour is color. Behaviour and behavior. Behavioral not behavioural. Initialise? Or initialize? A data centre or data center. I modelled and also modeled the data organise .
+Self-describing ('self-referential') JSON schemas are at the core of snowplow tracking SnowPlow - really? Read more about them [here](/docs/fundamentals/schemas/index.md). They allow you to track completely customised data, and are also used internally throughout Snowplow pipelines.
 
-test now. quite good now? now?
-In all our trackers, self-describing JSON are used in two places. One is in the `SelfDescribing` event type that wraps custom self-describing JSONs for sending. The second use is to attach custom data to any tracked event. It's one of the most powerful Snowplow features.
+test now. quite good now? hmm! now
+In all our trackers, self-describing JSON are used in two 'places'. Don't you mean "don't"? Don't? One is in the `SelfDescribing` event type that wraps custom self-describing JSONs for sending. The second use is to attach custom data to any tracked event. It's one of the most powerful Snowplow features. How about now.
 
 When tracking user behavior, the event describes the specific activity they performed, e.g. a user added an item to an eCommerce cart. To understand the meaning of the event, and how it relates to your business, it's ideal to also track the relatively persistent environment in which the activity was performed. For example, is the user a repeat customer? Which item did they add, and how many are in stock?
 
-This is some interesting text. It's very interesting:
+This is some interesting text, words, and letters. It's very interesting:
 * hello: nice
+* This is a list
 
-## dbt Models
-## dbt models
+1. hello
+2. Goodybe
+
+- Yes
+- no
+-
+
+## this heading is 1: About JSON and Windows
+## dbt models.
+# This Heading Is Title Case
 
 the android app
 

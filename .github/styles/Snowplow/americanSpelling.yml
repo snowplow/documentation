@@ -8,6 +8,8 @@ message: "Use the US spelling '%s' instead of the British '%s'."
 link: https://docs.gitlab.com/ee/development/documentation/styleguide/index.html#language
 level: error
 ignorecase: true
+action:
+  name: replace
 swap:
   aeon: eon
   aeroplane: airplane
@@ -18,6 +20,8 @@ swap:
   anaesthesia: anesthesia
   analyse: analyze
   annexe: annex
+  anonymise: anonymize
+  anonymisation: anonymization
   apologise: apologize
   authorise: authorize
   authorised: authorized
@@ -85,6 +89,7 @@ swap:
   organise: organize
   orientated: oriented
   paralyse: paralyze
+  personalisation: personalization
   plough: plow
   pretence: pretense
   pyjamas: pajamas
@@ -98,6 +103,7 @@ swap:
   saltpetre: saltpeter
   sceptic: skeptic
   sepulchre: sepulcher
+  sessionisation: sessionization
   signalling: signaling
   sizeable: sizable
   skilful: skillful

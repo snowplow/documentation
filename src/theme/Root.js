@@ -6,24 +6,23 @@ import { ProductFruits } from 'react-product-fruits'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 
 const useCookie = () => {
-  const [userIdValue, setUserIdValue] = useState('')
-  const [sessionIdValue, setSessionIdValue] = useState('')
+  const [userId, setUserId] = useState('unknown_user')
+  const [sessionId, setSessionId] = useState('unknown_session')
 
   useEffect(() => {
-    const cookie = document.cookie
+    const cookieValue = document.cookie
       .split('; ')
       .find((row) => row.startsWith('_sp_biz1_id'))
+      ?.split('=')[1]
 
-    const cookieExists = cookie !== undefined && cookie !== null
+    if (cookieValue) {
+      const parts = cookieValue.split('.')
+      setUserId(parts[0] ?? 'unknown_user')
+      setSessionId(parts[5] ?? 'unknown_session')
+    }
+  }, [])
 
-    setUserIdValue(cookieExists ? cookie.split('=')[1].split('.')[0] : '')
-    setSessionIdValue(cookieExists ? cookie.split('=')[1].split('.')[5] : '')
-  })
-
-  return [
-    userIdValue ? userIdValue : 'unknown_user',
-    sessionIdValue ? sessionIdValue : 'unknown_session',
-  ]
+  return [userId, sessionId]
 }
 
 export default function Root({ children }) {
@@ -33,10 +32,12 @@ export default function Root({ children }) {
     username: userId,
     props: { sessionId: sessionId },
   }
+
+  console.log(userInfo)
   return (
     <>
       <ProductFruits
-        workspaceCode={siteConfig.customFields.productFruitsNext}
+        workspaceCode={siteConfig.customFields.productFruits}
         language="en"
         user={userInfo}
         lifeCycle="unmount"

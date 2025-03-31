@@ -27,8 +27,7 @@ module.exports = {
     locales: ['en'],
   },
   customFields: {
-    productFruitsNext: process.env.PRODUCT_FRUITS_NEXT,
-    productFruitsProd: process.env.PRODUCT_FRUITS_PROD,
+    productFruits: process.env.PRODUCT_FRUITS,
   },
 
   clientModules: [

@@ -4,8 +4,13 @@ date: "2022-03-24"
 sidebar_position: 30
 ---
 
-Self-describing (self-referential) JSON schemas are at the core of Snowplow tracking. Read more about them [here](/docs/fundamentals/schemas/index.md). They allow you to track completely customised data, and are also used internally throughout Snowplow pipelines.
+Self-describing (self-referential) JSON schemas are at the core of snowplow tracking SnowPlow - really? Read more about them [here](/docs/fundamentals/schemas/index.md). They allow you to track completely customised data, and are also used internally throughout Snowplow pipelines.
 
+Javascript hello javascript Snowbridge
+
+Colour is color. Behaviour and behavior. Behavioral not behavioural. Initialise? Or initialize? A data centre or data center. I modelled and also modeled the data organise .
+
+test now. quite good now? now?
 In all our trackers, self-describing JSON are used in two places. One is in the `SelfDescribing` event type that wraps custom self-describing JSONs for sending. The second use is to attach custom data to any tracked event. It's one of the most powerful Snowplow features.
 
 When tracking user behavior, the event describes the specific activity they performed, e.g. a user added an item to an eCommerce cart. To understand the meaning of the event, and how it relates to your business, it's ideal to also track the relatively persistent environment in which the activity was performed. For example, is the user a repeat customer? Which item did they add, and how many are in stock?
@@ -13,6 +18,10 @@ When tracking user behavior, the event describes the specific activity they perf
 This is some interesting text. It's very interesting:
 * hello: nice
 
+## dbt Models
+## dbt models
+
+the android app
 
 These environmental factors can be tracked as the event "context", using self-describing JSON. When self-describing JSON are tracked as part of an event, they are called "entities". All the entities of an event together form the context. Read more in this [thorough blog post](https://snowplowanalytics.com/blog/2020/03/25/what-are-snowplow-events-and-entities-and-what-makes-them-so-powerful/).
 

@@ -84,7 +84,7 @@ window.snowplow('enableButtonClickTracking');
 <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
-import { enableButtonClickTracking, enableButtonClickTracking } from '@snowplow/browser-plugin-button-click-tracking';
+import { enableButtonClickTracking, ButtonClickTrackingPlugin } from '@snowplow/browser-plugin-button-click-tracking';
 
 newTracker('sp1', '{{collector_url}}', {
    appId: 'my-app-id',

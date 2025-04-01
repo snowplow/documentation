@@ -69,6 +69,7 @@ You will need to share this role with us as part of filling out the setup form i
         "ec2:*",
         "ecs:*",
         "eks:*",
+        "elasticache:*",
         "elasticloadbalancing:*",
         "elasticmapreduce:*",
         "es:*",
@@ -105,7 +106,9 @@ You will need to share this role with us as part of filling out the setup form i
         "sqs:*",
         "ssm:*",
         "support:*",
-        "wafv2:ListWebACLs"
+        "wafv2:Describe*",
+        "wafv2:Get*",
+        "wafv2:List*",
       ],
       "Resource":"*"
     }

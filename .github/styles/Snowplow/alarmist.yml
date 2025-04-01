@@ -1,0 +1,9 @@
+extends: existence
+message: 'Try not to command. Consider a more collaborative tone.'
+ignorecase: true
+level: suggestion
+tokens:
+  - make sure
+  - take care
+  - be careful
+  - watch out

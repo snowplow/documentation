@@ -34,6 +34,14 @@ swap:
   'useragent': user agent
   'params': parameters
   'third party': third-party
+  'Machine Learning': machine learning
+  'Web': web
+  'server side': server-side
+  'client side': client-side
+  'backend': back-end
+  'back end': back-end
+  'frontend': front-end
+  'front end': front-end
 
   'context': entity
   'contexts': entities
@@ -46,3 +54,11 @@ swap:
   'Data Structure': data structure
   'Data Structures': data structures
   'Application Context': application entity
+  'Data Model': data model
+  'Data Models': data models
+  'Page View': page view
+  'Page Views': page views
+  'Page Ping': page ping
+  'Page Pings': page pings
+  'Failed Event': failed event
+  'Failed Events': failed events

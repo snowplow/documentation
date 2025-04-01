@@ -68,3 +68,5 @@ exceptions:
   - SQS
   - UUID
   - UNIX
+  - CDI
+  - ETL

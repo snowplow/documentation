@@ -121,3 +121,11 @@ Xcode
 Cocoapods
 Okta
 enablement
+Data Product Studio
+Data Model Packs
+Data Model Pack
+AWS Console
+BDP Console
+Iglu Central
+Iglu Server
+Kafka

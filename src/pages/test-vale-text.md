@@ -8,11 +8,11 @@ This is Data product Studio. It has many event specifications, rather than Event
 
 ## Event specifications in use
 
-This is Iterable and iterable. Now nullable.
+This is Iterable. Now & nullable yeah BDP console kafka and Kafka. It's the backend and back-end and front-end and frontend. Or back end and front end? What about server-side and client-side, or serverside and clientside? is it server side and client side? Trackers are ok really.
 
 Self-describing ('self-referential') JSON schemas are at the core of snowplow tracking SnowPlow - really? Read more about them [here](/docs/fundamentals/schemas/index.md). They allow you to track completely customised data, and are also used internally throughout Snowplow pipelines.
 
-test now. quite good now? hmm! now
+test he said. And then she did, or he/she. Yes they did.
 In all our trackers, self-describing JSON are used in two 'places'. Don't you mean "don't"? Don't? One is in the `SelfDescribing` event type that wraps custom self-describing JSONs for sending. The second use is to attach custom data to any tracked event. It's one of the most powerful Snowplow features. How about now.
 
 When tracking user behavior, the event describes the specific activity they performed, e.g. a user added an item to an eCommerce cart. To understand the meaning of the event, and how it relates to your business, it's ideal to also track the relatively persistent environment in which the activity was performed. For example, is the user a repeat customer? Which item did they add, and how many are in stock?

@@ -8,4 +8,4 @@ action:
   name: replace
 swap:
   # '\b(?:eg|e\.g\.)(?=[\s,;])': for example
-  '\b(?:ie|i\.e\.)(?=[\s,;])': that is
+  # '\b(?:ie|i\.e\.)(?=[\s,;])': that is

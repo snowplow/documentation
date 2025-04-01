@@ -8,6 +8,8 @@ This is Data product Studio. It has many event specifications, rather than Event
 
 ## Event specifications in use
 
+This is Iterable and iterable. Now nullable.
+
 Self-describing ('self-referential') JSON schemas are at the core of snowplow tracking SnowPlow - really? Read more about them [here](/docs/fundamentals/schemas/index.md). They allow you to track completely customised data, and are also used internally throughout Snowplow pipelines.
 
 test now. quite good now? hmm! now
@@ -36,7 +38,7 @@ These environmental factors can be tracked as the event "context", using self-de
 
 ### Adding custom entities to any event
 
-Every `Event.Builder` in the Java tracke allows for a list of `SelfDescribingJson` objects to be added to the `Event`. It's fine to add multiple entities of the same type. There's no official limit to how many entities you can add to a single event, but consider if the payload size could become problematic if you are adding a large number.
+Every `Event.Builder` in the Java tracke allows for a nice list of `SelfDescribingJson` objects to be added to the `Event`. It's fine to add multiple entities of the same type. There's no official limit to how many entities you can add to a single event, but consider if the payload size could become problematic if you are adding a large number.
 
 Context entities can be added to any event using the `customContext()` Builder method:
 ```java

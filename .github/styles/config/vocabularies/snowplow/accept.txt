@@ -47,7 +47,6 @@ Vero
 Xcode
 Zendesk
 
-
 Data Product Studio
 Data Model Packs
 Data Model Pack
@@ -56,7 +55,6 @@ BDP Console
 Iglu Central
 Iglu Server
 
-
 APIs
 CDNs
 CLAs
@@ -64,7 +62,6 @@ KPIs
 SDKs
 SLAs
 URIs
-
 
 (un)?ack(s|ing|ed)?
 [aA]d(-?)blocker

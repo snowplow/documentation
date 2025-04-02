@@ -1,7 +1,7 @@
 extends: substitution
 message: "Use '%s' instead of '%s'."
 link: 'https://developers.google.com/style/word-list'
-level: warning
+level: suggestion
 ignorecase: false
 action:
   name: replace
@@ -18,7 +18,7 @@ swap:
   '[\.]+apk': APK
   '3\-D': 3D
   'Google (?:I\-O|IO)': Google I/O
-  'tap (?:&|and) hold': touch & hold
+  # 'tap (?:&|and) hold': touch & hold
   'un(?:check|select)': clear
   above: preceding
   account name: username
@@ -60,7 +60,7 @@ swap:
   in order to: to
   ingest: import|load
   k8s: Kubernetes
-  long press: touch & hold
+  # long press: touch & hold
   network IP address: internal IP address
   omnibox: address bar
   open-source: open source

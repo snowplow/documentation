@@ -1,0 +1,13 @@
+extends: existence
+message: "Don't use plurals in parentheses, or with slashes, such as in '%s'."
+link: 'https://developers.google.com/style/plurals-parentheses'
+level: warning
+nonword: true
+action:
+  name: edit
+  params:
+    - trim_right
+    - '(s)'
+tokens:
+  - '\b\w+\(s\)'
+  - '\b\w+\/s\b'

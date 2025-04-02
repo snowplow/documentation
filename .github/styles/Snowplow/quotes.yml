@@ -1,0 +1,10 @@
+extends: existence
+message: Use straight double quotes instead of smart or single quotes.
+level: warning
+nonword: true
+tokens:
+  - “
+  - ”
+  - ‘
+  - ’
+  - ('(?!(?:s|t|d|ll|ve|re|m)\b)[^']*?')

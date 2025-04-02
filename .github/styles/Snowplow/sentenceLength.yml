@@ -1,0 +1,8 @@
+description: Try to keep sentences short (< 25 words). Split up sentences if possible
+link: https://hyperlint.com/vale/rule/sentence-length-rule/
+extends: occurrence
+message: 'Try to keep sentences short (< 25 words).'
+scope: sentence
+level: warning
+max: 25
+token: \b(\w+)\b

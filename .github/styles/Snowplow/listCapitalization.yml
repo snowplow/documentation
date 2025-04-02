@@ -1,0 +1,7 @@
+extends: existence
+message: 'Capitalize the start of list items.'
+level: error
+scope:
+  - list
+tokens:
+  - ^\s*[a-z][a-zA-Z]*

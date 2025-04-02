@@ -1,0 +1,6 @@
+extends: occurrence
+message: 'Sentences must be shorter than 50 words.'
+scope: sentence
+level: error
+max: 50
+token: \b(\w+)\b

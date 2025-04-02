@@ -1,0 +1,11 @@
+extends: existence
+message: "Try to avoid using first-person plural like '%s'. It can be confusing who you're talking about."
+link: 'https://developers.google.com/style/pronouns#personal-pronouns'
+level: suggestion
+ignorecase: true
+tokens:
+  - we
+  - we'(?:ve|re)
+  - ours?
+  - us
+  - let's

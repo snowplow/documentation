@@ -6,10 +6,8 @@ level: suggestion
 tokens:
   - currently
   - now
-  - will
   - soon
   - won't
-  - "[a-zA-Z]*'ll"
   - in the future
   - we plan to
   - Snowplow plans to

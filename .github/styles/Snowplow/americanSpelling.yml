@@ -21,6 +21,7 @@ swap:
   analyse: analyze
   annexe: annex
   anonymise: anonymize
+  anonymising: anonymizing
   anonymisation: anonymization
   apologise: apologize
   authorise: authorize
@@ -94,8 +95,9 @@ swap:
   personalisation: personalization
   plough: plow
   pretence: pretense
-  pseudonymised: pseudonymized
   pseudonymise: pseudonymize
+  pseudonymised: pseudonymized
+  pseudonymising: pseudonymizing
   pseudonymisation: pseudonymization
   pyjamas: pajamas
   rateable: ratable

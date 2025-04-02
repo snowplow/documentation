@@ -70,3 +70,4 @@ exceptions:
   - UNIX
   - CDI
   - ETL
+  - SSO

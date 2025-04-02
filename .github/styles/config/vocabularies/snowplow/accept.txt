@@ -91,6 +91,7 @@ Fractribution
 goroutine
 hostname
 JSONPath(s)?
+JSON Web Tokens
 [lL]akehouse
 [lL]ookback
 [lL]ookup(s)?
@@ -102,6 +103,7 @@ JSONPath(s)?
 [nN]ullable
 [oO]nboarding
 [oO]perationalize
+[oO]verride(n)?
 [oO]verridable
 [pP]assthrough
 [pP]seudocode
@@ -131,4 +133,5 @@ READMEs
 [uU]ntrusted
 [uU]psert(ed|s)?
 [uU]tils
+[vV]iewport
 [wW]alkthrough

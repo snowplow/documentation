@@ -23,9 +23,3 @@ Notice that in the configuration file you will need to provide the JavaScript co
 ## Output
 
 This enrichment is the only one that can both update fields of the atomic event in-place or/and add derived contexts to the enriched event.
-
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
-
-<DocCardList />
-```

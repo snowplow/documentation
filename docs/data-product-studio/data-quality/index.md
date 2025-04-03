@@ -17,13 +17,6 @@ When implementing new tracking, or when making changes to your schemas or enrich
 
 ## Test tracking using automated testing
 
-For more automated testing of your tracking we have a tool called [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/what-is-micro/index.md) which allows you to integrate with your automated testing suite to check that your tracking remains intact as application-level changes are made.
+For more automated testing of your tracking we have a tool called [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md) which allows you to integrate with your automated testing suite to check that your tracking remains intact as application-level changes are made.
 
 Follow [this guide](/docs/data-product-studio/data-quality/snowplow-micro/basic-usage/index.md) to get familiar with Micro and set it up. Next, take a look at the [examples of integrating Micro with Nightwatch and Cypress](/docs/data-product-studio/data-quality/snowplow-micro/automated-testing/index.md).
-
-
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
-
-<DocCardList />
-```

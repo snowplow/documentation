@@ -9,7 +9,7 @@ sidebar_custom_props:
 
 ## Creating a new Event Specification through Console
 
-Event specifications serve as direct counterparts to [data structures](/docs/data-product-studio/data-structures/manage/ui/index.md) and encapsulate the documented events within a data product.
+Event specifications serve as direct counterparts to [data structures](/docs/data-product-studio/data-structures/manage/index.md) and encapsulate the documented events within a data product.
 
 :::info
 Please note that the creation of event specifications is exclusive to data products.

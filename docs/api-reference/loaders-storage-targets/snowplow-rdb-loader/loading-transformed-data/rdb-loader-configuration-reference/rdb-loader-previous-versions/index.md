@@ -1,13 +1,11 @@
 ---
-title: "RDB Loader Previous Versions"
+title: "RDB Loader previous versions"
 date: "2022-05-27"
 sidebar_position: 10
 sidebar_custom_props:
   outdated: true
 ---
 
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
+This section contains the documentation for configuring previous versions of the RDB Loader.
 
-<DocCardList />
-```
+We recommend upgrading to the latest version.

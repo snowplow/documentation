@@ -80,8 +80,6 @@ An example step definition can look like this:
 
 If this configuration option is not provided, cross-batch natural deduplication will be disabled. In-batch deduplication will still work however.
 
-To avoid 'cold start' problems you may want to use the [`event-manifest-populator`](/docs/api-reference/legacy/events-manifest-populator/index.md) Spark job, which backfills the duplicates table with events from a specified point in time onwards.
-
 ### Costs and performance implications
 
 Cross-batch deduplication uses DynamoDB as transient storage and therefore has associated AWS costs. The default write capacity is 100 units, which should roughly cost USD50 per month. Note that at this rate your shred job can get throttled by insufficient capacity, even with a very powerful EMR cluster. You can tweak throughput to match your needs but that will inflate the bill.

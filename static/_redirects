@@ -373,3 +373,8 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/sources/trackers/javascript-trackers/node-js-tracker/node-js-tracker-v4/setup/* /docs/sources/trackers/javascript-trackers/node-js-tracker/initialization/:splat 301
 /docs/sources/trackers/javascript-trackers/node-js-tracker/node-js-tracker-v4/* /docs/sources/trackers/javascript-trackers/node-js-tracker/:splat 301
 /docs/sources/trackers/javascript-trackers/node-js-tracker/node-js-tracker/* /docs/sources/trackers/javascript-trackers/previous-versions/:splat 301
+
+# Removing deprecated things
+/docs/sources/trackers/actionscript3-tracker/* /docs/sources/trackers/ 301
+/docs/sources/trackers/arduino-tracker/* /docs/sources/trackers/ 301
+/docs/sources/trackers/google-amp-tracker/version-0/* /docs/sources/trackers/google-amp-tracker/ 301

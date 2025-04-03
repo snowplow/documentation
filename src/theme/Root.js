@@ -10,7 +10,7 @@ const useCookie = () => {
   const [sessionId, setSessionId] = useState('unknown_session')
 
   useEffect(() => {
-    const cookieValue = document.cookie
+    const cookieValue = decodeURIComponent(document.cookie)
       .split('; ')
       .find((row) => row.startsWith('_sp_biz1_id'))
       ?.split('=')[1]
@@ -33,7 +33,6 @@ export default function Root({ children }) {
     props: { sessionId: sessionId },
   }
 
-  console.log(userInfo)
   return (
     <>
       <ProductFruits

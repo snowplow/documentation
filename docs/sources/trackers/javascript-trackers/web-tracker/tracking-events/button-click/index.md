@@ -212,6 +212,36 @@ enableButtonClickTracking({
 </TabItem>
 </Tabs>
 
+### Default label in events
+
+The tracker automatically adds the `label` information in events based on the button's content or data attributes.
+
+Since the `label` property in the event schema is required, starting from version 4.5 of the tracker, the tracker adds a `(empty)` string as the default label in case it can't be inferred from the button itself.
+The default value is configurable using the `defaultLabel` option:
+
+<Tabs groupId="platform" queryString>
+<TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+window.snowplow('enableButtonClickTracking', {
+  defaultLabel: "custom-default-label",
+});
+```
+
+</TabItem>
+<TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { enableButtonClickTracking } from '@snowplow/browser-plugin-button-click-tracking';
+
+enableButtonClickTracking({
+  defaultLabel: "custom-default-label",
+});
+```
+
+</TabItem>
+</Tabs>
+
 ## Adding context entities to tracked events
 
 You can also attach context entities to the tracked button click events as either an array of self-describing JSON objects or a callback function that returns the entities dynamically.

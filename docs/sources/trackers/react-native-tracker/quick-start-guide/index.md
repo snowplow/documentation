@@ -18,6 +18,11 @@ To install the tracker, add it as a dependency to your React Native app:
 npm install --save @snowplow/react-native-tracker
 ```
 
+Note that in addition to `react` and `react-native`, the tracker has two peer dependencies that need to be added as dependencies to your app:
+
+1. `@react-native-async-storage/async-storage` for event and session local storage implementation.
+2. `react-native-get-random-values` as a polyfill for the Crypto Web APIs.
+
 ## Instrumentation
 
 Next, in your app create a new tracker using the `newTracker` method. As a minimal example:

@@ -26,8 +26,33 @@ module.exports = {
     defaultLocale: 'en',
     locales: ['en'],
   },
+
   customFields: {
     productFruits: process.env.PRODUCT_FRUITS,
+    webpack: {
+      module: {
+        rules: [
+          {
+            test: /\.css$/,
+            use: [
+              require.resolve('style-loader'),
+              require.resolve('css-loader'),
+              {
+                loader: require.resolve('postcss-loader'),
+                options: {
+                  postcssOptions: {
+                    plugins: [
+                      require.resolve('tailwindcss'),
+                      require.resolve('autoprefixer'),
+                    ],
+                  },
+                },
+              },
+            ],
+          },
+        ],
+      },
+    },
   },
 
   clientModules: [
@@ -192,31 +217,4 @@ module.exports = {
         contextualSearch: true,
       },
     }),
-
-  customFields: {
-    webpack: {
-      module: {
-        rules: [
-          {
-            test: /\.css$/,
-            use: [
-              require.resolve('style-loader'),
-              require.resolve('css-loader'),
-              {
-                loader: require.resolve('postcss-loader'),
-                options: {
-                  postcssOptions: {
-                    plugins: [
-                      require.resolve('tailwindcss'),
-                      require.resolve('autoprefixer'),
-                    ],
-                  },
-                },
-              },
-            ],
-          },
-        ],
-      },
-    },
-  },
 }

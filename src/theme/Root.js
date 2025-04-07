@@ -27,6 +27,7 @@ const useCookie = () => {
 
 export default function Root({ children }) {
   const { siteConfig } = useDocusaurusContext()
+  const apiKey = siteConfig.customFields.productFruits
   const [userId, sessionId] = useCookie()
   const userInfo = {
     username: userId,
@@ -35,12 +36,14 @@ export default function Root({ children }) {
 
   return (
     <>
-      <ProductFruits
-        workspaceCode={siteConfig.customFields.productFruits}
-        language="en"
-        user={userInfo}
-        lifeCycle="unmount"
-      />
+      {apiKey && (
+        <ProductFruits
+          workspaceCode={apiKey}
+          language="en"
+          user={userInfo}
+          lifeCycle="unmount"
+        />
+      )}
 
       {getInitColorSchemeScript()}
       <CssVarsProvider theme={theme}>{children}</CssVarsProvider>

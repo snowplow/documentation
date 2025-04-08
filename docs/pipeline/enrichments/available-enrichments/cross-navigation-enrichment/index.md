@@ -8,6 +8,10 @@ This enrichment parses the extended cross navigation format in `_sp` querystring
 
 The `_sp` parameter can be attached by our Web ([see cross-domain tracking](/docs/sources/trackers/web-trackers/cross-domain-tracking/index.md)) and [mobile trackers](/docs/sources/trackers/mobile-trackers/tracking-events/session-tracking/index.md#decorating-outgoing-links-using-cross-navigation-tracking) and contains user, session and app identifiers (e.g., domain user and session IDs, business user ID, source app ID). The information to include in the parameters is configurable in the trackers. This is useful for tracking the movement of users across different apps and platforms.
 
+:::note Base64 encoding
+This enrichment expects the events to be base64-encoded.
+:::
+
 The extended cross navigation format can be described by `_sp={domainUserId}.{timestamp}.{sessionId}.{subjectUserId}.{sourceId}.{platform}.{reason}`
 
 If this enrichment isn't enabled, Enrich parses `_sp` querystring parameter according to the old format, `_sp={domainUserId}.{timestamp}`

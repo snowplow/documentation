@@ -1,5 +1,5 @@
 extends: existence
-message: "Capitalize '%s'."
+message: 'When you use a colon in a title or heading, capitalize the word that follows it.'
 link: https://docs.microsoft.com/en-us/style-guide/punctuation/colons
 nonword: true
 level: warning

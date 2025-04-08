@@ -63,6 +63,7 @@ exceptions:
   - YAML
   - ZIP
 
+  # Added for Snowplow
   - BDP
   - DNS
   - SQS

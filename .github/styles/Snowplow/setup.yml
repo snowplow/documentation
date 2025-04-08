@@ -1,7 +1,10 @@
 extends: existence
-message: "Double check that you're using '%s' as a noun, not as a verb."
-level: suggestion
+message: "'Setup' is a noun meaning 'configuration'. Do you mean 'set up'?"
+level: warning
 ignorecase: true
 tokens:
-  - setup
-  - login
+  - to setup
+  - be setup
+  - \bis setup
+  - you setup
+  - \'s setup

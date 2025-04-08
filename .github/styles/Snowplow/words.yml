@@ -17,6 +17,7 @@ swap:
   (?:github|Github): GitHub
   'javascript': JavaScript
   'Javascript': JavaScript
+  'json': JSON
   '[jJ]sonpath': JSONPath
   (?:kubernetes|k8s|K8s|K8S): Kubernetes
   (?:node.js|nodeJS|NodeJS|node.JS|Node.JS): Node.js
@@ -24,6 +25,7 @@ swap:
   '(?:snowplow|SnowPlow)': Snowplow
   (?:sql|Sql): SQL
   'scala': Scala
+  'yaml': YAML
 
   # General technical terms
   'ad(-?)blocker': ad blocker
@@ -57,6 +59,7 @@ swap:
   'Data Products': data products
   'Data Structure': data structure
   'Data Structures': data structures
+  'collector': Collector
   'context': entity
   'contexts': entities
   'Failed Event': failed event

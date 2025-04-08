@@ -72,3 +72,5 @@ exceptions:
   - CDI
   - ETL
   - SSO
+  - AWS
+  - GCP

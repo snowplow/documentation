@@ -1,5 +1,5 @@
 ---
-title: "E-commerce events"
+title: "Ecommerce events"
 ---
 
 ```mdx-code-block
@@ -7,15 +7,15 @@ import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 import TOCInline from '@theme/TOCInline';
 ```
 
-Snowplow provides support for tracking and modeling events from e-commerce stores directly in our trackers and data models.
+Snowplow provides support for tracking and modeling events from ecommerce stores directly in our trackers and data models.
 
 <TOCInline toc={toc} maxHeadingLevel={4} />
 
 ## Events and context entities
 
-### E-commerce action event
+### Ecommerce action event
 
-Each ecommerce event is a self-describing event using a single e-commerce action schema.
+Each ecommerce event is a self-describing event using a single ecommerce action schema.
 
 The events are distinguished by their `type` property, which is different for each Event class tracked.
 
@@ -27,9 +27,9 @@ The events are distinguished by their `type` property, which is different for ea
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for an Ecommerce action", "self": { "vendor": "com.snowplowanalytics.snowplow.ecommerce", "name": "snowplow_ecommerce_action", "format": "jsonschema", "version": "1-0-2" }, "type": "object", "properties": { "type": { "description": "Standard ecommerce actions.", "enum": [ "add_to_cart", "remove_from_cart", "product_view", "list_click", "list_view", "promo_click", "promo_view", "checkout_step", "transaction", "refund", "trns_error" ] }, "name": { "description": "The name of the list presented to the user E.g. product list, search results, shop the look, frequently bought with.", "type": [ "string", "null" ], "maxLength": 128 } }, "required": [ "type" ], "additionalProperties": false }} />
 
-### E-commerce context entities
+### Ecommerce context entities
 
-All tracked e-commerce properties are tracked as context entities.
+All tracked ecommerce properties are tracked as context entities.
 
 #### Cart
 
@@ -154,23 +154,23 @@ All tracked e-commerce properties are tracked as context entities.
 
 ## Modeled data using the snowplow-ecommerce dbt package
 
-[The package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md) contains a fully incremental model that transforms raw e-commerce event data into a set of derived tables based around the following e-commerce data objects: carts, checkouts, products and transactions.
+[The package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md) contains a fully incremental model that transforms raw ecommerce event data into a set of derived tables based around the following ecommerce data objects: carts, checkouts, products and transactions.
 
-Derived table | Table description | 
----|---|---
-`snowplow_ecommerce_base_events_this_run` | Base: Performs the incremental logic, the table contains a de-duped data set of all events required for the current run of the model, and is the foundation for all other models generated. | [Docs](https://snowplow.github.io/dbt-snowplow-ecommerce/#!/model/model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_this_run)
-`snowplow_ecommerce_cart_interactions` | Carts: Parses the cart interactions that occur to provide handy filters and aggregations, which helps identify what happened to carts on a session level to extract, for example, abandoned carts with ease. | [Docs](https://snowplow.github.io/dbt-snowplow-ecommerce/#!/model/model.snowplow_ecommerce.snowplow_ecommerce_cart_interactions)
-`snowplow_ecommerce_checkout_interactions` | Checkouts: Parses checkout steps that occur to provide handy filters and aggregations to help identify which checkout steps were walked through, and what details were entered in each of these steps. This lends itself well to a funnel analysis. | [Docs](https://snowplow.github.io/dbt-snowplow-ecommerce/#!/model/model.snowplow_ecommerce.snowplow_ecommerce_checkout_interactions)
-`snowplow_ecommerce_product_interactions` | Products: Parses product view and list information to provide insights into which products were being viewed, what details were being shown to the end user and how the user then interacted with these products. | [Docs](https://snowplow.github.io/dbt-snowplow-ecommerce/#!/model/model.snowplow_ecommerce.snowplow_ecommerce_product_interactions)
-`snowplow_ecommerce_transaction_interactions` | Transactions: Parses transaction actions to provide insights into which transactions occurred, how much revenue was generated from them, and other insights leveraging the many properties of the transaction e-commerce context. | [Docs](https://snowplow.github.io/dbt-snowplow-ecommerce/#!/model/model.snowplow_ecommerce.snowplow_ecommerce_transaction_interactions)
-`snowplow_ecommerce_sessions` | Sessions: Aggregates all other data into a sessions table which leverages the  `domain_sessionid`. | [Docs](https://snowplow.github.io/dbt-snowplow-ecommerce/#!/model/model.snowplow_ecommerce.snowplow_ecommerce_sessions)
+| Derived table                                 | Table description                                                                                                                                                                                                                                   |
+| --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `snowplow_ecommerce_base_events_this_run`     | Base: Performs the incremental logic, the table contains a de-duped data set of all events required for the current run of the model, and is the foundation for all other models generated.                                                         | [Docs](https://snowplow.github.io/dbt-snowplow-ecommerce/#!/model/model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_this_run)   |
+| `snowplow_ecommerce_cart_interactions`        | Carts: Parses the cart interactions that occur to provide handy filters and aggregations, which helps identify what happened to carts on a session level to extract, for example, abandoned carts with ease.                                        | [Docs](https://snowplow.github.io/dbt-snowplow-ecommerce/#!/model/model.snowplow_ecommerce.snowplow_ecommerce_cart_interactions)        |
+| `snowplow_ecommerce_checkout_interactions`    | Checkouts: Parses checkout steps that occur to provide handy filters and aggregations to help identify which checkout steps were walked through, and what details were entered in each of these steps. This lends itself well to a funnel analysis. | [Docs](https://snowplow.github.io/dbt-snowplow-ecommerce/#!/model/model.snowplow_ecommerce.snowplow_ecommerce_checkout_interactions)    |
+| `snowplow_ecommerce_product_interactions`     | Products: Parses product view and list information to provide insights into which products were being viewed, what details were being shown to the end user and how the user then interacted with these products.                                   | [Docs](https://snowplow.github.io/dbt-snowplow-ecommerce/#!/model/model.snowplow_ecommerce.snowplow_ecommerce_product_interactions)     |
+| `snowplow_ecommerce_transaction_interactions` | Transactions: Parses transaction actions to provide insights into which transactions occurred, how much revenue was generated from them, and other insights leveraging the many properties of the transaction ecommerce context.                    | [Docs](https://snowplow.github.io/dbt-snowplow-ecommerce/#!/model/model.snowplow_ecommerce.snowplow_ecommerce_transaction_interactions) |
+| `snowplow_ecommerce_sessions`                 | Sessions: Aggregates all other data into a sessions table which leverages the  `domain_sessionid`.                                                                                                                                                  | [Docs](https://snowplow.github.io/dbt-snowplow-ecommerce/#!/model/model.snowplow_ecommerce.snowplow_ecommerce_sessions)                 |
 
-## E-commerce analytics accelerator
+## Ecommerce analytics accelerator
 
-Follow the [e-commerce accelerator](https://snowplow.io/data-product-accelerators/ecommerce-analytics-dpa/) for a complete guide to build a deeper understanding of customer behavior in your ecommerce store. 
+Follow the [ecommerce accelerator](https://snowplow.io/data-product-accelerators/ecommerce-analytics-dpa/) for a complete guide to build a deeper understanding of customer behavior in your ecommerce store.
 
 <details>
-  <summary>Old e-commerce events</summary>
+  <summary>Old ecommerce events</summary>
   <div>
 
 Some of our trackers also provide ecommerce tracking APIs for older ecommerce events. This is no longer the recommended approach to track ecommerce events.
@@ -179,31 +179,31 @@ Some of our trackers also provide ecommerce tracking APIs for older ecommerce ev
 
 Transaction events allow you to track a transaction. The items of the transaction can be tracked using [Transaction Item events](#transaction-item-events).
 
-| **Parameter** | **Table Column**      | **Type** | **Description**                                      | **Example values** |
-|----------------|----------|------------------------------------------------------|--------------------|
-| `tr_id`       | `tr_orderid`     | text     | Order ID                                             | `12345`            |
-| `tr_af`       | `tr_affiliation` | text     | Transaction affiliation (e.g. channel)               | `Web`              |
-| `tr_tt`       | `tr_total`       | decimal  | Transaction total value                              | `9.99`             |
-| `tr_tx`       | `tr_tax`         | decimal  | Transaction tax value (i.e. amount of VAT included)  | `1.98`             |
-| `tr_sh`       | `tr_shipping`    | decimal  | Delivery cost charged                                | `3.00`             |
-| `tr_ci`       | `tr_city`        | text     | Delivery address: city                               | `London`           |
-| `tr_st`       | `tr_state`       | text     | Delivery address: state                              | `Denver`           |
-| `tr_co`       | `tr_country`     | text     | Delivery address: country                            | `United Kingdom`   |
-| `tr_cu`       | `tr_currency`    | text     | Transaction Currency                                 | `GBP`              |
+| **Parameter** | **Table Column** | **Type** | **Description**                                     | **Example values** |
+| ------------- | ---------------- | -------- | --------------------------------------------------- |
+| `tr_id`       | `tr_orderid`     | text     | Order ID                                            | `12345`            |
+| `tr_af`       | `tr_affiliation` | text     | Transaction affiliation (e.g. channel)              | `Web`              |
+| `tr_tt`       | `tr_total`       | decimal  | Transaction total value                             | `9.99`             |
+| `tr_tx`       | `tr_tax`         | decimal  | Transaction tax value (i.e. amount of VAT included) | `1.98`             |
+| `tr_sh`       | `tr_shipping`    | decimal  | Delivery cost charged                               | `3.00`             |
+| `tr_ci`       | `tr_city`        | text     | Delivery address: city                              | `London`           |
+| `tr_st`       | `tr_state`       | text     | Delivery address: state                             | `Denver`           |
+| `tr_co`       | `tr_country`     | text     | Delivery address: country                           | `United Kingdom`   |
+| `tr_cu`       | `tr_currency`    | text     | Transaction Currency                                | `GBP`              |
 
 #### Transaction item events
 
 Transaction item events are separate events, representing the items of a transaction, which are linked to a Transaction event via `ti_id` which should map to `tr_id` of a transaction event.
 
-| **Parameter** | **Table Column**  | **Type** | **Description**  | **Example values** |
-|---------------|---------------|----------|------------------|--------------------|
-| `ti_id`       | `ti_orderid`  | text     | Order ID         | `12345`            |
-| `ti_sk`       | `ti_sku`      | text | Item SKU | Yes | \`pbz0025' |
-| `ti_nm`       | `ti_name`     | text | Item name | Yes | `black-tarot` |
-| `ti_ca`       | `ti_category` | text | Item category | Yes | `tarot` |
-| `ti_pr`       | `ti_price`    | decimal | Item price | Yes | `7.99` |
-| `ti_qu`       | `ti_quantity` | integer | Item quantity | Yes | `2` |
-| `ti_cu`       | `ti_currency` | text | Currency | Yes | `USD` |
+| **Parameter** | **Table Column** | **Type** | **Description** | **Example values** |
+| ------------- | ---------------- | -------- | --------------- | ------------------ |
+| `ti_id`       | `ti_orderid`     | text     | Order ID        | `12345`            |
+| `ti_sk`       | `ti_sku`         | text     | Item SKU        | Yes                | \`pbz0025'    |
+| `ti_nm`       | `ti_name`        | text     | Item name       | Yes                | `black-tarot` |
+| `ti_ca`       | `ti_category`    | text     | Item category   | Yes                | `tarot`       |
+| `ti_pr`       | `ti_price`       | decimal  | Item price      | Yes                | `7.99`        |
+| `ti_qu`       | `ti_quantity`    | integer  | Item quantity   | Yes                | `2`           |
+| `ti_cu`       | `ti_currency`    | text     | Currency        | Yes                | `USD`         |
 
   </div>
 </details>

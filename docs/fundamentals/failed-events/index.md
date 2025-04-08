@@ -65,7 +65,7 @@ This feature is not retroactive, i.e. only failed events that occur _after it’
 
 The events will include a special column with the details of the failure, and any invalid columns will be set to `null`. Otherwise, the format is [the same as for your atomic events](/docs/fundamentals/canonical-event/index.md).
 
-See [Exploring failed events](/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/warehouse-lake/index.md) for more details and setup instructions.
+See [Exploring failed events](/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/index.md) for more details and setup instructions.
 
 ---
 

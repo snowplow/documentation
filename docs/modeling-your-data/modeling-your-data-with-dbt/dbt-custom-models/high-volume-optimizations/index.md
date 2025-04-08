@@ -1,5 +1,5 @@
 ---
-title: "High Volume Optimizations"
+title: "High volume optimizations"
 sidebar_position: 20
 ---
 
@@ -21,7 +21,7 @@ These configurations have not been fully tested and leave you at risk of issues 
 
 In general we try to only write the columns into [this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md), and therefore derived tables, that are populated and relevant to that table. However, there may by many columns in these tables that you don't require and as as cloud warehouses are usually [columnar warehouses](https://en.wikipedia.org/wiki/Column-oriented_DBMS) this leads to more compute required to write these columns, and more storage to keep and maintain the metadata for them.
 
-Rather than edit the this run tables directly, as this could leave you out of sync with our updates, we recommend changing the materialization of all this run models (except the events and base sessions) to be `ephemeral`, this stops the incremental data being first written as a table before being merged into the derived table. Doing this may not be the best option if you re-use any of these tables in multiple custom models as it will have to run them each time. 
+Rather than edit the this run tables directly, as this could leave you out of sync with our updates, we recommend changing the materialization of all this run models (except the events and base sessions) to be `ephemeral`, this stops the incremental data being first written as a table before being merged into the derived table. Doing this may not be the best option if you re-use any of these tables in multiple custom models as it will have to run them each time.
 
 Next instead of selecting all columns from your now ephemeral this run models, disable our derived model and build your own to explicitly select just the columns that you require. See the [adding fields to derived table](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/examples/adding-fields-to-derived-table/index.md) example for how to do this.
 
@@ -29,7 +29,7 @@ Your derived table will now be writing and storing fewer columns, and the this r
 
 ### Events this run
 
-The [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md#events-this-run) by design contains every column that your atomic events table does including all self-describing events and entities (except in Redshift where these must be specified by a variable to be joined on). This can mean a very large amount of columns and data that you never use have to be read and written in every single run. 
+The [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md#events-this-run) by design contains every column that your atomic events table does including all self-describing events and entities (except in Redshift where these must be specified by a variable to be joined on). This can mean a very large amount of columns and data that you never use have to be read and written in every single run.
 
 In general, it is a bad idea to alter the events this run table, as it can lead to issues elsewhere in the package, but it is also one of the largest places to reduce the amount of read/written data in a given run. The easiest thing to do in this case is to disable the events this run table from the package and duplicate the model into your top level project. Note the model must have the exact same name as the one you disabled, and you will need to duplicate many of the variables from the package into your project yaml to ensure they are available in the correct scope.
 
@@ -102,7 +102,7 @@ default_cte as (
 
 select
   ... -- your specific columns here
-from 
+from
   default_cte
 
 ```

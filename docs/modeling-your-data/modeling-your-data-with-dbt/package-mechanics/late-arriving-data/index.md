@@ -1,5 +1,5 @@
 ---
-title: "Late Arriving Data"
+title: "Late arriving data"
 description: "A detailed overview of how the data flows and how to manage variables for handling edge cases."
 sidebar_position: 70
 ---

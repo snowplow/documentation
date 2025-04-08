@@ -1,7 +1,7 @@
 ---
 title: "Event Recovery for Community Edition"
 date: "2020-07-02"
-sidebar_label: "Using Flink/Spark"
+sidebar_label: "Manual recovery"
 sidebar_position: 40
 sidebar_custom_props:
   offerings:

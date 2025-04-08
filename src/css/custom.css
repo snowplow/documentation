@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /**
  * Any CSS included here will be global. The classic template
  * bundles Infima by default. Infima is a CSS framework designed to
@@ -112,8 +116,9 @@
 }
 
 .navbar__logo {
-  width: 150px;
-  margin-left: 6px;
+  max-width: 150px;
+  max-height: 28px;
+  margin-left: 4px;
 }
 
 /* All buttons */
@@ -529,4 +534,11 @@ Controls the display of navbar/sidebar items
 
 .docs-tutorial-tabs {
   overflow: visible !important;
+}
+
+.sources-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  grid-gap: 20px;
+  padding: 20px;
 }

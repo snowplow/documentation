@@ -99,17 +99,11 @@ The Snowtype CLI does not automatically install the required Snowplow tracking l
 
 Following is the set of available trackers and languages the Snowtype CLI currently can work with. This list is also the source of truth for valid keys in the `tracker` and `language` attributes of the Snowtype configuration file.
 
-| **Tracker** | **Language/s** |
-| --- | --- |
-| `@snowplow/browser-tracker` | javascript, typescript |
-| `@snowplow/node-tracker` | javascript, typescript |
-| `@snowplow/react-native-tracker` | typescript |
-| `@snowplow/javascript-tracker` | javascript |
-| `snowplow-golang-tracker` | go |
-| `snowplow-ios-tracker` | swift |
-| `snowplow-android-tracker` | kotlin |
-| `snowplow-flutter-tracker` | dart |
-| `snowplow-java-tracker` | java |
+```mdx-code-block
+import Trackers from "../_supported-trackers.md"
+
+<Trackers/>
+```
 
 ### Example Usage
 

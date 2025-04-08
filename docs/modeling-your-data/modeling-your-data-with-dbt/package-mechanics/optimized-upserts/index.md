@@ -1,5 +1,5 @@
 ---
-title: "Snowplow Optimized Materialization"
+title: "Snowplow optimized materialization"
 description: "Details on our optimized version of the dbt incremental materialization and how to enable it."
 sidebar_position: 80
 ---
@@ -16,7 +16,7 @@ All other features of the `incremental` materialization are supported including 
 
 ## Usage
 ### Controlling the buffer size
-We calculate the upper and lower limit from the source table (usually a [this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md) table) before adding a buffer to the lower limit to cover late arriving data or other issues with specific timestamps. This buffer is controlled by the `snowplow__upsert_lookback_days` variable and usually has a default of 30. 
+We calculate the upper and lower limit from the source table (usually a [this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md) table) before adding a buffer to the lower limit to cover late arriving data or other issues with specific timestamps. This buffer is controlled by the `snowplow__upsert_lookback_days` variable and usually has a default of 30.
 
 To disable this buffer entirely, you can either set `snowplow__upsert_lookback_days` to 0 or you can  `disable_upsert_lookback` to `true` in your ** model config** if you want to do this for a specific model. **Note this is a [model config](https://docs.getdbt.com/reference/model-configs), not a variable.**
 

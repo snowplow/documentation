@@ -1,5 +1,5 @@
 ---
-title: "Custom Integrations"
+title: "Custom integrations"
 date: "2021-11-24"
 sidebar_position: 30
 ---

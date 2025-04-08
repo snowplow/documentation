@@ -1,5 +1,5 @@
 ---
-title: "Disabling Models"
+title: "Disabling models"
 description: "How to disable a model in our packages"
 sidebar_position: 40
 ---

@@ -47,7 +47,7 @@ You can find the visualizations in the **Visualizations** section in the left si
 
 Once the visualization is installed, clicking on the tile will launch it in a separate browser tab. By default, anyone in your Console organization will be able to access the visualizations.
 
-If you wish to invite others to use the visualizations but without giving them access to the rest of the Console, you can [create a new user](/docs/account-management/managing-users/adding-removing/index.md) with the `visualizations user` role. That user will then only see the **Visualizations** tab within the Console. The permissions can be managed in the [usual way](/docs/account-management/managing-users/managing-permissions/index.md).
+If you wish to invite others to use the visualizations but without giving them access to the rest of the Console, you can [create a new user](/docs/account-management/managing-users/index.md) with the `visualizations user` role. That user will then only see the **Visualizations** tab within the Console. The permissions can be managed in the [usual way](/docs/account-management/managing-permissions/index.md).
 
 ## Installation
 
@@ -65,7 +65,7 @@ The installation workflow will look something like this:
 
 ### Data model dependencies
 
-Generally, visualizations will depend on data models. If there are dependencies, the installation flow will highlight which models are required and what models you currently have [running via BDP](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/standard-models/index.md). It will also highlight any properties that you need to enable or configure for these data models.
+Generally, visualizations will depend on data models. If there are dependencies, the installation flow will highlight which models are required and what models you currently have [running via BDP](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/index.md). It will also highlight any properties that you need to enable or configure for these data models.
 
 :::note Manual configuration for Open Source
 If you are running the necessary data models yourself outside of BDP, then you will need to manually check that your setup satisfies the requirements for each visualization. These requirements are listed within the documentation pages for each visualization.

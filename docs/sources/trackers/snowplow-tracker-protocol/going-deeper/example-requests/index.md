@@ -1,8 +1,6 @@
 ---
-title: "Example Tracker Requests"
+title: "Example tracker requests"
 ---
-
-# Example Tracker Requests
 
 :::note
 This page gives examples of requests to the Snowplow collector. However, there is no need to perform these requests manually. Instead, we recommend using our Snowplow trackers that do them for you.
@@ -86,9 +84,9 @@ represents the following JSON, when decoded:
   <summary>cURL example</summary>
 
   ```bash
-  curl --request POST \ 
-      --url https://collector.website.com/com.snowplowanalytics.snowplow/tp2 \ 
-      --header 'Content-Type: application/json' \ 
+  curl --request POST \
+      --url https://collector.website.com/com.snowplowanalytics.snowplow/tp2 \
+      --header 'Content-Type: application/json' \
       --data '{
       "schema": "iglu:com.snowplowanalytics.snowplow/payload_data/jsonschema/1-0-4",
       "data": [
@@ -131,7 +129,7 @@ An array of entities can be sent with each event. Entity payloads should be wrap
   "data": [
     {
       ...
-    },    
+    },
     {
       ...
     },
@@ -207,9 +205,9 @@ represents the following JSON, when decoded:
   <summary>cURL example</summary>
 
    ```bash
-   curl --request POST \ 
-      --url https://collector.website.com/com.snowplowanalytics.snowplow/tp2 \ 
-      --header 'Content-Type: application/json' \ 
+   curl --request POST \
+      --url https://collector.website.com/com.snowplowanalytics.snowplow/tp2 \
+      --header 'Content-Type: application/json' \
       --data '{
       "schema": "iglu:com.snowplowanalytics.snowplow/payload_data/jsonschema/1-0-4",
       "data": [
@@ -280,9 +278,9 @@ represents the following JSON, when decoded:
   <summary>cURL example</summary>
 
     ```bash
-    curl --request POST \ 
-      --url https://collector.website.com/com.snowplowanalytics.snowplow/tp2 \ 
-      --header 'Content-Type: application/json' \ 
+    curl --request POST \
+      --url https://collector.website.com/com.snowplowanalytics.snowplow/tp2 \
+      --header 'Content-Type: application/json' \
       --data '{
       "schema": "iglu:com.snowplowanalytics.snowplow/payload_data/jsonschema/1-0-4",
       "data": [
@@ -353,9 +351,9 @@ represents the following JSON, when decoded:
   <summary>cURL example</summary>
 
     ```bash
-    curl --request POST \ 
-      --url https://collector.website.com/com.snowplowanalytics.snowplow/tp2 \ 
-      --header 'Content-Type: application/json' \ 
+    curl --request POST \
+      --url https://collector.website.com/com.snowplowanalytics.snowplow/tp2 \
+      --header 'Content-Type: application/json' \
       --data '{
       "schema": "iglu:com.snowplowanalytics.snowplow/payload_data/jsonschema/1-0-4",
       "data": [

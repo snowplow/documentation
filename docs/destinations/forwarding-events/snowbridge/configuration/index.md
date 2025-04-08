@@ -46,9 +46,3 @@ In layman's terms, this configuration will read data from a kinesis stream, filt
 ```hcl reference
 https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/overview-full-example.hcl
 ```
-
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
-
-<DocCardList />
-```

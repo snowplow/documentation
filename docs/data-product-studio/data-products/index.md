@@ -33,9 +33,3 @@ With data products, you can:
     * **Event data structure;** the event data structure that this event will validate against as it is processed by your pipeline
     * **Entities;** the entities that should be attached to this event (e.g. user, product)
     * **Properties;** any specific rules for each property of the event
-
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
-
-<DocCardList />
-```

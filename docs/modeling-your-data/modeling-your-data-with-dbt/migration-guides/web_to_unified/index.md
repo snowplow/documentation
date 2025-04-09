@@ -83,7 +83,7 @@ Execute the below sql scripts with your database IDE to create your new derived 
 create table (your_schema)_derived.snowplow_unified_views as (select * from (your_schema)_derived.snowplow_web_page_views);
 create table (your_schema)_derived.snowplow_unified_sessions as (select * from (your_schema)_derived.snowplow_web_sessions);
 create table (your_schema)_derived.snowplow_unified_users as (select * from (your_schema)_derived.snowplow_web_users);
-create table (your_schema)_derived.snowplow_unified_incremental_manifest as (select * from (your_schema)_derived.snowplow_web_incremental_manifest);
+create table (your_schema)_snowplow_manifest.snowplow_unified_incremental_manifest as (select * from (your_schema)_snowplow_manifest.snowplow_web_incremental_manifest);
 create table (your_schema)_snowplow_manifest.snowplow_unified_base_sessions_lifecycle_manifest as (select * from (your_schema)_snowplow_manifest.snowplow_web_base_sessions_lifecycle_manifest)
 
 alter table (your_schema)_derived.snowplow_unified_views rename column domain_sessionid to session_identifier;

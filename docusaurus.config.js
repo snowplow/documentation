@@ -5,7 +5,7 @@ const sidebar = require('./sidebars')
 const abbreviations = require('./src/remark/abbreviations')
 const math = require('remark-math')
 const katex = require('rehype-katex')
-const path = require('path')
+require('dotenv').config()
 
 /** @type {import('@docusaurus/types').Config} */
 module.exports = {
@@ -25,6 +25,34 @@ module.exports = {
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
+  },
+
+  customFields: {
+    productFruits: process.env.PRODUCT_FRUITS,
+    webpack: {
+      module: {
+        rules: [
+          {
+            test: /\.css$/,
+            use: [
+              require.resolve('style-loader'),
+              require.resolve('css-loader'),
+              {
+                loader: require.resolve('postcss-loader'),
+                options: {
+                  postcssOptions: {
+                    plugins: [
+                      require.resolve('tailwindcss'),
+                      require.resolve('autoprefixer'),
+                    ],
+                  },
+                },
+              },
+            ],
+          },
+        ],
+      },
+    },
   },
 
   clientModules: [
@@ -189,31 +217,4 @@ module.exports = {
         contextualSearch: true,
       },
     }),
-
-  customFields: {
-    webpack: {
-      module: {
-        rules: [
-          {
-            test: /\.css$/,
-            use: [
-              require.resolve('style-loader'),
-              require.resolve('css-loader'),
-              {
-                loader: require.resolve('postcss-loader'),
-                options: {
-                  postcssOptions: {
-                    plugins: [
-                      require.resolve('tailwindcss'),
-                      require.resolve('autoprefixer'),
-                    ],
-                  },
-                },
-              },
-            ],
-          },
-        ],
-      },
-    },
-  },
 }

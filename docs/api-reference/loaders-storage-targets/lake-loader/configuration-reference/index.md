@@ -9,7 +9,6 @@ import {versions} from '@site/src/componentVersions';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import DeltaConfig from '@site/docs/api-reference/loaders-storage-targets/lake-loader/configuration-reference/_delta_config.md';
-import HudiConfig from '@site/docs/api-reference/loaders-storage-targets/lake-loader/configuration-reference/_hudi_config.md';
 import IcebergBigLakeConfig from '@site/docs/api-reference/loaders-storage-targets/lake-loader/configuration-reference/_iceberg_biglake_config.md';
 import IcebergGlueConfig from '@site/docs/api-reference/loaders-storage-targets/lake-loader/configuration-reference/_iceberg_glue_config.md';
 import PubsubConfig from '@site/docs/api-reference/loaders-storage-targets/lake-loader/configuration-reference/_pubsub_config.md';
@@ -48,23 +47,6 @@ import Admonition from '@theme/Admonition';
         </thead>
         <tbody>
           <IcebergGlueConfig/>
-        </tbody>
-    </table>
-  </TabItem>
-
-  <TabItem value="hudi" label="Hudi">
-    <Admonition type="note" title="Alternative Docker image">
-    To use the Lake Loader with Hudi support, pull the appropriate alternative image from Docker Hub, e.g. <code>snowplow/lake-loader-aws:{`${versions.lakeLoader}`}-hudi</code>.
-    </Admonition>
-    <table>
-        <thead>
-            <tr>
-                <th>Parameter</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-          <HudiConfig/>
         </tbody>
     </table>
   </TabItem>

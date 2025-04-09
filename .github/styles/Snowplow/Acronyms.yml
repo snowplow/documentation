@@ -64,13 +64,17 @@ exceptions:
   - ZIP
 
   # Added for Snowplow
+  - AWS
   - BDP
+  - CDI
+  - CVE
   - DNS
+  - ETL
+  - GCP
+  - IAM
+  - PII
+  - SLA
+  - SSO
   - SQS
   - UUID
   - UNIX
-  - CDI
-  - ETL
-  - SSO
-  - AWS
-  - GCP

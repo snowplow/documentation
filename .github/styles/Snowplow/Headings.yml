@@ -28,3 +28,5 @@ exceptions:
   - Single Sign On
   - VS Code
   - Snowplow
+  - WebView
+  - iOS

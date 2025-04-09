@@ -13,14 +13,14 @@ import {versions} from '@site/src/componentVersions';
 <Badges badgeType="Early Release"></Badges>
 ```
 
-<p>The <a href="https://github.com/snowplow-incubator/snowplow-webview-tracker">Snowplow WebView Tracker</a> allows you to track Snowplow events from Web views in <strong>mobile hybrid apps</strong>. The current tracker version is {versions.webViewTracker}.</p>
+<p>The <a href="https://github.com/snowplow-incubator/snowplow-webview-tracker">Snowplow WebView Tracker</a> allows you to track Snowplow events from web views in <strong>mobile hybrid apps</strong>. The current tracker version is {versions.webViewTracker}.</p>
 
-Hybrid apps are mobile apps that in addition to a native interface, provide part of the UI through an embedded Web view.
-Snowplow events are tracked from both the native code (e.g. written in Swift or Kotlin) as well as the Web view (in JavaScript).
-Our goal is to have both events tracked from the native code as well as the Web view, share the same session and appear as tracked with the same tracker.
+Hybrid apps are mobile apps that in addition to a native interface, provide part of the UI through an embedded web view.
+Snowplow events are tracked from both the native code (e.g. written in Swift or Kotlin) as well as the web view (in JavaScript).
+The goal is to have events that are tracked from the native code and web view share the same session, and appear as tracked with the same tracker.
 
 :::tip
-We recommend using the [Snowplow Web tracker](/docs/sources/trackers/javascript-trackers/index.md) with [WebView plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/webview/index.md) (which uses the WebView tracker as a dependency), rather than using this tracker directly.
+We recommend using the [Snowplow web tracker](/docs/sources/trackers/javascript-trackers/index.md) with [WebView plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/webview/index.md) (which uses the WebView tracker as a dependency), rather than using this tracker directly.
 
 The WebView plugin automatically forwards all tracked events to the mobile tracker. Events must be manually tracked when using the WebView tracker by itself.
 :::
@@ -83,7 +83,7 @@ import { trackSelfDescribingEvent } from '@snowplow/webview-tracker';
   </TabItem>
   <TabItem value="tag" label="Using Snowplow tag">
 
-You may download the `sp.js` file from the [Releases section on Github](https://github.com/snowplow-incubator/snowplow-webview-tracker/releases), self-host it, and load to your page using the following tag:
+You may download the `sp.js` file from the [Releases section on GitHub](https://github.com/snowplow-incubator/snowplow-webview-tracker/releases), self-host it, and load to your page using the following tag:
 
 ```html
 <script type="text/javascript" async=1>
@@ -93,7 +93,7 @@ You may download the `sp.js` file from the [Releases section on Github](https://
 
 :::note
 
-Make sure to replace the `{{URL to sp.js}}` with the URL to the `sp.js` file in the snippet.
+Replace the `{{URL to sp.js}}` with the URL to the `sp.js` file in the snippet.
 
 :::
 
@@ -116,7 +116,7 @@ The following functions are available:
 | `trackPageView`            | Track a Web page visit                                                                                                                                      |
 | `trackWebViewEvent`        | Track any Snowplow event (used internally by the [WebView plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/webview/index.md)) |
 
-All the methods share common features and parameters. Every type of event can have optional context entities added.
+All the methods share common features and parameters. Every type of event can have optional entities added.
 
 ### Self-describing (custom)
 
@@ -125,7 +125,7 @@ Use the `trackSelfDescribingEvent` function to track a [fully custom event](/doc
 | Argument  | Description                                                | Required? |
 | --------- | ---------------------------------------------------------- | --------- |
 | `event`   | Self-describing event, with `schema` and `data` properties | Yes       |
-| `context` | List of context entities as self-describing JSONs          | No        |
+| `context` | List of context entities as self-describing JSON           | No        |
 
 <Tabs groupId="installation" queryString>
   <TabItem value="npm" label="Installed using npm" default>
@@ -159,19 +159,19 @@ window.snowplow('trackSelfDescribingEvent', {
 
 ### Screen views
 
-Use `trackScreenView` to track a user viewing a screen (or similar) within your app. This is the page view equivalent for apps that are not webpages.
+Use `trackScreenView` to track a user viewing a screen (or similar) within your app. This is the page view equivalent for apps that are not web pages.
 
 
-| Argument         | Description                                                 | Required? |
-| ---------------- | ----------------------------------------------------------- | --------- |
-| `name`           | The human-readable name of the screen viewed.               | Yes       |
-| `id`             | The id (UUID v4) of screen that was viewed.                 | Yes       |
-| `type`           | The type of screen that was viewed.                         | No        |
-| `previousName`   | The name of the previous screen that was viewed.            | No        |
-| `previousType`   | The type of screen that was viewed.                         | No        |
-| `previousId`     | The id (UUID v4) of the previous screen that was viewed.    | No        |
-| `transitionType` | The type of transition that led to the screen being viewed. | No        |
-| `context`        | List of context entities as self-describing JSONs           | No        |
+| Argument         | Description                                                | Required? |
+| ---------------- | ---------------------------------------------------------- | --------- |
+| `name`           | The human-readable name of the screen viewed               | Yes       |
+| `id`             | The id (UUID v4) of screen that was viewed                 | Yes       |
+| `type`           | The type of screen that was viewed                         | No        |
+| `previousName`   | The name of the previous screen that was viewed            | No        |
+| `previousType`   | The type of screen that was viewed                         | No        |
+| `previousId`     | The id (UUID v4) of the previous screen that was viewed    | No        |
+| `transitionType` | The type of transition that led to the screen being viewed | No        |
+| `context`        | List of context entities as self-describing JSON           | No        |
 
 <Tabs groupId="installation" queryString>
   <TabItem value="npm" label="Installed using npm" default>
@@ -201,13 +201,13 @@ window.snowplow('trackScreenView', {
 
 ### Page views
 
-The `PageViewEvent` may be used to track page views on the Web.
-The event is designed to track web page views and automatically captures page title, referrer and URL.
+The `PageViewEvent` may be used to track page views on the web.
+The event is designed to track web page views and automatically captures page title, referrer, and URL.
 
-| Argument  | Description                                       | Required? |
-| --------- | ------------------------------------------------- | --------- |
-| `title`   | Override the page title.                          | No        |
-| `context` | List of context entities as self-describing JSONs | No        |
+| Argument  | Description                                      | Required? |
+| --------- | ------------------------------------------------ | --------- |
+| `title`   | Override the page title                          | No        |
+| `context` | List of context entities as self-describing JSON | No        |
 
 <Tabs groupId="installation" queryString>
   <TabItem value="npm" label="Installed using npm" default>
@@ -233,10 +233,10 @@ Track a semi-custom Structured event.
 | ---------- | -------------------------------------------------------------- | --------- |
 | `category` | The grouping of structured events which this action belongs to | Yes       |
 | `action`   | Defines the type of user interaction which this event involves | Yes       |
-| `label`    | Often used to refer to the 'object' the action is performed on | No        |
-| `property` | Describing the 'object', or the action performed on it         | No        |
+| `label`    | Often used to refer to the "object" the action is performed on | No        |
+| `property` | Describing the "object", or the action performed on it         | No        |
 | `value`    | Provides numerical data about the event                        | No        |
-| `context`  | List of context entities as self-describing JSONs              | No        |
+| `context`  | List of context entities as self-describing JSON               | No        |
 
 <Tabs groupId="installation" queryString>
   <TabItem value="npm" label="Installed using npm" default>
@@ -272,7 +272,7 @@ window.snowplow('trackStructEvent', {
 This method is available since v0.3.0.
 :::
 
-This method is used internally by the WebView plugin. We recommend implementing the Web tracker with WebView plugin rather than using this directly.
+This method is used internally by the WebView plugin. We recommend implementing the web tracker with WebView plugin rather than using this directly.
 
 Use this method to track any kind of Snowplow event e.g. a page ping. You will need to define the event name yourself, e.g. "pp" for page ping. It also allows you to set a tracker version, to help distinguish between native and WebView events (e.g. "webview-0.3.0" while the native tracker version might be something like "ios-6.1.0").
 
@@ -280,7 +280,7 @@ Use this method to track any kind of Snowplow event e.g. a page ping. You will n
 | ------------ | ------------------------------------------------------------------------------------------------- | --------- |
 | `properties` | Event properties that are ["baked-in"](/docs/fundamentals/canonical-event/#out-of-the-box-fields) | Yes       |
 | `event`      | An optional self-describing event, with `schema` and `data` properties                            | No        |
-| `context`    | List of context entities as self-describing JSONs                                                 | No        |
+| `context`    | List of context entities as self-describing JSON                                                  | No        |
 
 | Event type                 | `eventName`    |
 | -------------------------- | -------------- |
@@ -323,7 +323,7 @@ window.snowplow('trackWebViewEvent', {
 
 ## Adding context entities
 
-You can add a list of context entities to any event. In this example, two entities are added.
+You can add a list of entities to any event. In this example, two entities are added.
 
 <Tabs groupId="installation" queryString>
   <TabItem value="npm" label="Installed using npm" default>
@@ -407,6 +407,6 @@ window.snowplow('trackPageView', {}, ['ns1']);
   </TabItem>
 </Tabs>
 
-:::warning
-If there is no mobile tracker with the specified namespace(s), the event will not be tracked.
+:::warning Specifying namespaces
+If you specify namespaces in the configuration, and no mobile trackers actually exist with those namespaces, the event will be lost.
 :::

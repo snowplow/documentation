@@ -23,6 +23,7 @@ Properties of the network configuration:
 | --- | --- |
 | `collector` | URI for the Snowplow collector endpoint. |
 | `method` | HTTP method to use. `GET` and `POST` methods are supported. |
+| `serverAnonymous` | Enable the `SP-Anonymous` header for server anonymization. |
 
 ## Tracker namespaces
 

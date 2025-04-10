@@ -107,7 +107,7 @@ For the http target, you can add a custom http request template by mounting a fi
     --env ACCEPT_LIMITED_USE_LICENSE=yes \\
     --mount type=bind,source=$(pwd)/config.hcl,target=/tmp/config.hcl \\
     --mount type=bind,source=$(pwd)/template.tpl,target=/tmp/template.tpl \\
-    snowplow/snowbridge:${versions.snowbridge}
+    snowplow/snowbridge:${versions.snowbridge}`
 }</CodeBlock>
 
 

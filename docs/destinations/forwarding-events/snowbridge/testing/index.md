@@ -98,9 +98,9 @@ transform {
 }
 ```
 
-### Adding a http request template
+### Adding a HTTP request template
 
-For the http target, you can add a custom http request template by mounting a file, similarly to above. Assuming the template is in `template.tpl`, that looks like this:
+For the HTTP target, you can add a custom HTTP request template by mounting a file, similarly to above. Assuming the template is in `template.tpl`, that looks like this:
 
 <CodeBlock language="bash">{
 `cat data.tsv | docker run -i \\
@@ -112,7 +112,7 @@ For the http target, you can add a custom http request template by mounting a fi
 
 
 
-The http target config should point to the path of the script _inside_ the container (`/tmp/template.tpl` above). For example, the http target block in the configuration might look like this:
+The HTTP target config should point to the path of the script _inside_ the container (`/tmp/template.tpl` above). For example, the HTTP target block in the configuration might look like this:
 
 ```hcl
 target {

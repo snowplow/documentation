@@ -10,6 +10,11 @@ import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
+:::note 
+You can view an interactive version of this quickstart on Google Colab [here](https://colab.research.google.com/drive/1ExqheS4lIuJRs0wk0B6sxaYfnZGcTYUv)
+:::
+
+
 Welcome to the Snowplow Signals Quickstart! This guide will walk you through the steps to set up and use Snowplow Signals to define attributes, create views, and retrieve user features. By the end of this guide, you'll have a working setup to personalize your applications using Snowplow Signals.
 
 1. **Install and Set Up the SDK**: Get started with the Snowplow Signals SDK.
@@ -33,7 +38,7 @@ An API Key Id and the corresponding API Key (secret), which are generated from t
 
 The organization ID, which can be retrieved from the URL immediately following the .com when visiting BDP console:
 
-![](./images/orgID.png)
+![](../images/orgID.png)
 
 
 ```python

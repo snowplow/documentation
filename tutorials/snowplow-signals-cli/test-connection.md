@@ -4,7 +4,6 @@ title: Testing Your Connection
 ---
 
 Before we start working with Snowplow Signals, let's make sure we can connect to all the necessary services. This step is crucial as it verifies that:
-
 - Your API credentials are correct
 - All required services are accessible
 - Your network connection is working properly

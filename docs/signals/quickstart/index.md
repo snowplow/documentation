@@ -8,18 +8,17 @@ sidebar_label: "Quickstart Guide"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import CodeBlock from '@theme/CodeBlock';
-
 ```
 
 Welcome to the Snowplow Signals Quickstart! This guide will walk you through the steps to set up and use Snowplow Signals to define attributes, create views, and retrieve user features. By the end of this guide, you'll have a working setup to personalize your applications using Snowplow Signals.
 
 1. **Install and Set Up the SDK**: Get started with the Snowplow Signals SDK.
-2. **Define an Attribute**: Learn how to define user behavior attributes.
+2. **Define an Attribute**: Learn how to define stream user behavior attributes.
 3. **Create and Test a View**: Combine attributes into a view and test it.
 4. **Deploy a View**: Make your view live in the Signals API.
 5. **Retrieve Attributes**: Fetch user features from the API.
 
-## **Step 1:** Installation and Setup
+## Step 1: Installation and Setup
 The Snowplow Signals SDK allows you to define attributes, create views, and retrieve user features. It requires Python 3.12 or above.
 
 Install the SDK using pip:
@@ -28,7 +27,14 @@ Install the SDK using pip:
 $ pip install snowplow-signals
 ```
 
-To connect to your deployment, initialize the Signals object with your API credentials:
+To connect to your Signals deployment, you will need 4 values.
+
+An API Key Id and the corresponding API Key (secret), which are generated from the [credentials section](https://console.snowplowanalytics.com/credentials) in BDP Console.
+
+The organization ID, which can be retrieved from the URL immediately following the .com when visiting BDP console:
+
+![](./images/orgID.png)
+
 
 ```python
 from snowplow_signals import Signals
@@ -40,7 +46,7 @@ signals = Signals(
 )
 ```
 
-## **Step 2:** Define an `Attribute`
+## Step 2: Define an `Attribute`
 
 An `Attribute` represents a specific fact about a user's behavior. For example, you can define an attribute to count the number of `page_view` events a user has made.
 
@@ -60,7 +66,7 @@ page_view_count = Attribute(
     aggregation="counter"
 )
 ```
-You can also create more complex attributes by adding `Criteria` to filter events. For example:
+You can refine to your attributes by adding `Criteria` to filter for specific events. For example:
 
 ```python
 from snowplow_signals import Attribute, Event, Criteria, Criterion
@@ -89,7 +95,7 @@ products_added_to_cart_feature = Attribute(
 )
 ```
 
-## **Step 3:** Create and test a `View`
+## Step 3: Create and test a `View`
 
 A `View` is a collection of attributes that share a common entity (e.g., session or user). Here's how to create a view with the attributes we defined earlier:
 
@@ -127,7 +133,7 @@ Example Output
 | abc                  | 3                  | [`green_trainers`]          | 
 
 
-## **Step 4:** Deploy a `View` to Signals
+## Step 4: Deploy a `View` to Signals
 Once you're satisfied with the View, deploy it to the API using the `apply` method:
 
 ```python
@@ -136,7 +142,7 @@ signals.apply([my_attribute_view])
 
 This makes the View live, and events will start being processed based on the defined attributes.
 
-## **Step 5:** Retreive `Attributes` from Signals
+## Step 5: Retreive `Attributes` from Signals
 
 Now that events are being processed, you can retrieve user features from the API:
 

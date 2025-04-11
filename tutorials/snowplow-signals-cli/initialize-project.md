@@ -25,7 +25,6 @@ snowplow-batch-autogen init --verbose
 
 This command will:
 
-- Create a new dbt project structure
 - Set up base configuration files
 - Initialize necessary directories
 - Set up the basic project scaffolding
@@ -34,7 +33,7 @@ This command will:
 
 When successful, you should see:
 
-```bash
+```
 Initializing dbt project(s) in ./my_snowplow_project
 ✅ Successfully initialized dbt project(s)
 ```
@@ -44,15 +43,9 @@ Initializing dbt project(s) in ./my_snowplow_project
 The initialization will create the following structure:
 
 ```
-my_snowplow_project/
-├── dbt_project.yml
-├── packages.yml
-├── models/
-│   ├── base/
-│   └── ../
-│   └── ../
-├── macros/
-└── macros/
+{attribute_view_name}/
+└── configs/
+    └── base_config.json
 ```
 
 ## Advanced Initialization Options

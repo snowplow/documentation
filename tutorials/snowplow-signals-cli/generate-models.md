@@ -25,62 +25,40 @@ snowplow-batch-autogen generate --verbose
 
 This command will:
 
+- Set up dbt configuration files
 - Generate data models based on your schema
 - Create necessary macros
-- Set up configuration files
 - Update existing files if needed
 
 ## Expected Output
 
 When successful, you should see:
 
-```bash
+```
 🛠️ Generating dbt models in ./my_snowplow_project
 ✅ Successfully generated dbt models
 ```
 
-## Model Generation Process
+And the file structure would be:
 
-The generation process includes:
-
-1. Analyzing your schema
-2. Creating base models
-3. Generating staging models
-4. Setting up macros and tests
-
-## Updating Existing Models
-
-To update existing models:
-
-```bash
-snowplow-batch-autogen generate \
-  --update \
-  --verbose
 ```
-
-## Best Practices
-
-1. Always test your models after generation
-2. Review generated code for accuracy
-3. Document any custom modifications
-4. Keep track of model versions
-5. Regularly update your models
+{attribute_view_name}/
+├── dbt_project.yml
+├── packages.yml
+├── models/
+│   ├── base/
+│   ├── filtered_events/
+│   ├── daily_aggregates/
+│   └── attributes/
+├── configs/
+│   ├── base_config.json
+│   └── dbt_config.json
+└── macros/
+```
 
 ## Troubleshooting
 
 If you encounter issues:
 
-1. Check API service health
-2. Verify schema compatibility
-3. Ensure proper project structure
-4. Review error messages in verbose mode
-
-## Next Steps
-
-After generating your models:
-
-1. Review the generated code
-2. Test the models in your environment
-3. Set up a batch source
-
--- FIXME either way here we will have a new page for that
+1. Ensure the project were initialized in the path you try to generate it
+2. Deep dive on the `base_config.json` file

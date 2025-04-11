@@ -21,10 +21,12 @@ Before starting, ensure you have:
 
 This tutorial will guide you through:
 
-1. Setting up your environment and testing API connectivity
-2. Initializing dbt projects
-3. Generating dbt models and assets
-4. Managing and updating your models
+1. Setting up your environment
+2. Testing API connectivity
+3. Initializing dbt projects
+4. Generating dbt models and assets
+5. Running the dbt project and exploring the data
+6. Materiallizing the projects to a Batch Source in the feature store.
 
 ## Setting Up Environment Variables
 

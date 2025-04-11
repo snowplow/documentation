@@ -22,7 +22,7 @@ snowplow-batch-autogen init \
   --api-key "YOUR_API_KEY" \
   --api-key-id "YOUR_API_KEY_ID" \
   --org-id "YOUR_ORG_ID" \
-  --repo-path "./my_snowplow_project" \
+  --repo-path "./my_snowplow_repo" \
   --verbose
 ```
 
@@ -63,7 +63,7 @@ When you run the initialization command, the CLI will:
 After initialization, your repository will have this structure:
 
 ```
-my_snowplow_project/
+my_snowplow_repo/
 ├── user_attributes_1/
 │   └── configs/
 │       └── base_config.json

@@ -19,7 +19,7 @@ snowplow-batch-autogen generate \
   --api-key "YOUR_API_KEY" \
   --api-key-id "YOUR_API_KEY_ID" \
   --org-id "YOUR_ORG_ID" \
-  --repo-path "./my_snowplow_project" \
+  --repo-path "./my_snowplow_repo" \
   --verbose
 ```
 
@@ -59,7 +59,7 @@ For each project, the generation process will:
 After generation, each project in your repository will have this expanded structure:
 
 ```
-my_snowplow_project/
+my_snowplow_repo/
 ├── user_attributes_1/
 │   ├── dbt_project.yml      # Main dbt configuration
 │   ├── packages.yml         # Dependencies configuration

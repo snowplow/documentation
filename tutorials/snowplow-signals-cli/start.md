@@ -48,7 +48,7 @@ export SNOWPLOW_API_URL="YOUR_API_URL"
 export SNOWPLOW_API_KEY="YOUR_API_KEY"
 export SNOWPLOW_API_KEY_ID="YOUR_API_KEY_ID"
 export SNOWPLOW_ORG_ID="YOUR_ORG_ID"
-export SNOWPLOW_REPO_PATH="./my_snowplow_project"
+export SNOWPLOW_REPO_PATH="./my_snowplow_repo"
 ```
 
 Ready to begin? Let's start by testing your connection to the Snowplow Signals services. 

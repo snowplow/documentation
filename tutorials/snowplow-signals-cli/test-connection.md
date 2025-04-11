@@ -1,9 +1,16 @@
 ---
 position: 2
-title: Testing Connection
+title: Testing Your Connection
 ---
 
-Let's start by verifying that we can connect to the Snowplow Signals services:
+Before we start working with Snowplow Signals, let's make sure we can connect to all the necessary services. This step is crucial as it verifies that:
+- Your API credentials are correct
+- All required services are accessible
+- Your network connection is working properly
+
+## Testing the Connection
+
+You can test your connection using the following command:
 
 ```bash
 snowplow-batch-autogen test-connection \
@@ -14,22 +21,26 @@ snowplow-batch-autogen test-connection \
   --verbose
 ```
 
-If you've set up environment variables, you can simply run:
+If you've set up the environment variables as shown in the previous step, you can use this simpler command:
 
 ```bash
 snowplow-batch-autogen test-connection --verbose
 ```
 
-This command will:
+## What's Being Tested?
 
-- Test authentication service connectivity
-- Check API service health
-- Verify all dependencies
-- Provide detailed status information
+The connection test checks several important components:
 
-## Expected Output
+- 🔐 Authentication service: Verifies your API credentials
+- 🌐 API service: Ensures the main service is accessible
+- 📊 Dependencies: Checks the status of:
+  - Database connections
+  - Cache service
+  - Storage systems
 
-When the connection is successful, you should see:
+## Successful Connection
+
+When everything is working correctly, you'll see a clear success message:
 
 ```bash
 🔐 Testing authentication service...
@@ -45,13 +56,14 @@ When the connection is successful, you should see:
 ✨ All services are operational!
 ```
 
-## Troubleshooting
+## Troubleshooting Connection Issues
 
-If you encounter any issues:
+If you encounter any problems:
 
-1. Verify your API credentials are correct
-2. Check your network connectivity
-3. Ensure your API key has the necessary permissions
-4. Use the `--verbose` flag for more detailed error messages
+1. Double-check your API credentials
+2. Verify your network connection
+3. Ensure your API key has the required permissions
+4. Use the `--verbose` flag for detailed error messages
+5. Check if your organization's services are up and running
 
-Once you've successfully tested your connection, you're ready to initialize your dbt project. 
+Once you see the success message, you're ready to create your first project! 

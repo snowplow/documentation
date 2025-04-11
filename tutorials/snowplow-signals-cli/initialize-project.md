@@ -1,9 +1,20 @@
 ---
 position: 3
-title: Initializing a Project
+title: Creating Projects for Batch Views
 ---
 
-Now that we've verified our connection, let's create a new dbt project:
+Now that we've verified our connection to Snowplow Signals, let's create projects for your batch views. Each batch view will have its own separate dbt project in the specified repository path, with the project name following the format `{view_name}_{view_version}`.
+
+## Creating Projects
+
+You have two options when creating projects:
+
+1. **Generate projects for all batch views**: Creates a separate project for each batch view in your repository
+2. **Generate project for a specific view**: Creates a project for just one batch view
+
+### Option 1: All Batch Views
+
+To create projects for all your batch views:
 
 ```bash
 snowplow-batch-autogen init \
@@ -15,44 +26,11 @@ snowplow-batch-autogen init \
   --verbose
 ```
 
-With environment variables set:
+This will create a separate project directory for each batch view in your repository, with each directory named using the format `{view_name}_{view_version}`.
 
-```bash
-snowplow-batch-autogen init --verbose
-```
+### Option 2: Specific Batch View
 
-## What This Command Does
-
-This command will:
-
-- Set up base configuration files
-- Initialize necessary directories
-- Set up the basic project scaffolding
-
-## Expected Output
-
-When successful, you should see:
-
-```
-Initializing dbt project(s) in ./my_snowplow_project
-✅ Successfully initialized dbt project(s)
-```
-
-## Project Structure
-
-The initialization will create the following structure:
-
-```
-{attribute_view_name}/
-└── configs/
-    └── base_config.json
-```
-
-## Advanced Initialization Options
-
-### Initializing Specific Views
-
-You can initialize a specific attribute view:
+To create a project for a specific batch view:
 
 ```bash
 snowplow-batch-autogen init \
@@ -61,11 +39,56 @@ snowplow-batch-autogen init \
   --verbose
 ```
 
+If you've set up your environment variables, you can use these simpler commands:
+
+```bash
+# For all batch views
+snowplow-batch-autogen init --verbose
+
+# For a specific view
+snowplow-batch-autogen init --view-name "user_attributes" --view-version 1 --verbose
+```
+
+## What Happens During Initialization?
+
+When you run the initialization command, the CLI will:
+
+1. Create a separate project directory for each batch view (named `{view_name}_{view_version}`)
+2. Set up the basic configuration files for each project
+3. Initialize the necessary folder structure for each project
+4. Prepare each project for model generation
+
+## Project Structure
+
+After initialization, your repository will have this structure:
+
+```
+my_snowplow_project/
+├── user_attributes_1/
+│   └── configs/
+│       └── base_config.json
+├── product_views_2/
+│   └── configs/
+│       └── base_config.json
+└── user_segments_1/
+    └── configs/
+        └── base_config.json
+```
+
+Each view gets its own project directory with its own configuration, named using the format `{view_name}_{view_version}`.
+
+## Choosing Between Options
+
+- Use **Option 1** when you want to set up projects for all your batch views at once
+- Use **Option 2** when you want to work with a specific batch view
+
 ## Troubleshooting
 
-If you encounter issues:
+If you run into any issues during initialization:
 
-1. Check repository path permissions
-2. Check if you request existing batch view
+1. Make sure you have write permissions in the target directory
+2. Verify that the view name and version combination doesn't already exist
+3. Check that your API credentials have the necessary permissions
+4. Use the `--verbose` flag to get more detailed error messages
 
-Once your project is initialized, you're ready to generate your dbt models.
+Once your projects are created, you're ready to generate the data models for each view!

@@ -5,15 +5,27 @@ title: Materializing Models to Feature Store
 
 > ⚠️ This feature is currently under development and will be available in a future release.
 
-## Coming Soon
+## What is Model Materialization?
 
-The materialization feature will allow you to create batch sources in your feature store from your Snowplow Signals models. This will enable:
+Model materialization is the process of taking your tested and validated dbt models and making them available in your Snowplow Signals feature store. This enables you to:
 
-- Creating batch sources from your dbt models
-- Configuring feature store ingestion schedules
-- Managing feature store metadata
-- Setting up feature store monitoring
+- Serve your features in production
+- Schedule regular updates
+- Monitor feature performance
+- Manage feature metadata
 
-This feature will bridge the gap between your dbt models and the feature store, making it easier to serve your features in production.
+## Coming Features
 
-Stay tuned for updates on this feature! 
+When this feature is released, you'll be able to:
+
+1. Create batch sources directly from your dbt models
+2. Configure automatic ingestion schedules
+
+## Why This Matters
+
+Materializing your models to the feature store is crucial because it:
+
+- Bridges the gap between development and production
+- Ensures consistent feature serving
+
+Stay tuned for updates on this exciting feature! We'll notify you when it's ready for use. 

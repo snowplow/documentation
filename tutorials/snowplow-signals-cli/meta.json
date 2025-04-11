@@ -1,8 +1,0 @@
-{
-  "title": "Snowplow Signals CLI Tutorial",
-  "description": "Learn how to use the Snowplow Signals SDK CLI tool to manage dbt projects and generate data models",
-  "icon": "terminal",
-  "tags": ["cli", "dbt", "data modeling"],
-  "categories": ["Tutorials"],
-  "exclude": ["images"]
-} 

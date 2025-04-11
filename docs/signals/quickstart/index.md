@@ -11,7 +11,7 @@ import CodeBlock from '@theme/CodeBlock';
 ```
 
 :::note 
-You can view an interactive version of this quickstart on Google Colab [here](https://colab.research.google.com/drive/1ExqheS4lIuJRs0wk0B6sxaYfnZGcTYUv)
+You can try an interactive version of this quickstart on Google Colab [here](https://colab.research.google.com/drive/1ExqheS4lIuJRs0wk0B6sxaYfnZGcTYUv)
 :::
 
 
@@ -36,7 +36,7 @@ To connect to your Signals deployment, you will need 4 values.
 
 An API Key Id and the corresponding API Key (secret), which are generated from the [credentials section](https://console.snowplowanalytics.com/credentials) in BDP Console.
 
-The organization ID, which can be retrieved from the URL immediately following the .com when visiting BDP console:
+The organization ID, which can be retrieved from the URL immediately following the .com when visiting BDP Console:
 
 ![](../images/orgID.png)
 
@@ -147,7 +147,7 @@ signals.apply([my_attribute_view])
 
 This makes the View live, and events will start being processed based on the defined attributes.
 
-## Step 5: Retreive `Attributes` from Signals
+## Step 5: Retrieve `Attributes` from Signals
 
 Now that events are being processed, you can retrieve user features from the API:
 

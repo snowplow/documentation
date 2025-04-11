@@ -7,9 +7,10 @@ sidebar_label: "Attributes"
 
 Attributes are the building blocks of Snowplow Signals. They represent specific facts about user behavior and are calculated based on events in your Snowplow pipeline. This guide explains how to define an `Attribute`, and use `Criteria` to filter events for precise data aggregation.
 
-- **Number of Pageviews in the Last 7 Days:** Counts how many pages a user has viewed within the past week.
-- **Last Product Viewed:** Identifies the most recent product a user interacted with.
-- **Previous Purchases:** Provides a record of the user's past transactions. 
+- **Number of page views in the last 7 Days:** counts how many pages a user has viewed within the past week.
+- **Last product viewed:** identifies the most recent product a user interacted with.
+- **Previous purchases:** provides a record of the user's past transactions. 
+
 
 ### Basic Usage
 
@@ -104,6 +105,6 @@ A `Criterion` specifies the individual filter conditions for an `Attribute` usin
 | --- | --- | --- | 
 | `property_syntax` | The syntax used to reference the property| One of: `snowflake`, `blobl` |
 | `property` | The path to the property on the event or entity you wish to filter. | `string` |
-| `operator` | he operator used to compare the property to the value. | One of: `=`, `!=`, `<`, `>`, `<=`, `>=`, `like`, `in` |
+| `operator` | The operator used to compare the property to the value. | One of: `=`, `!=`, `<`, `>`, `<=`, `>=`, `like`, `in` |
 | `value` | The value to compare the property to. | One of:  `str`, `int`, `float`, `bool`, `List[str]`, `List[int]`, `List[float]`, `List[bool]` |
 

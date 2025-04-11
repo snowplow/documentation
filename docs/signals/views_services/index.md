@@ -1,22 +1,22 @@
 ---
 title: "Views and Services"
-sidebar_position: 20
+sidebar_position: 30
 description: "Views and Services."
 sidebar_label: "Views and Services"
 ---
 
-To access Attributes, you need to define a View and optionally group multiple Views into a Service. This guide explains how to define Views and Services, apply them to your deployment, and retrieve calculated values.
+To access attributes, you need to define a `View` and optionally group multiple views into a `Service`. This guide explains how to define views and services, apply them to your deployment, and retrieve calculated values.
 
 
 ### What is a View?
-A `View` is a versioned collection of Attributes grouped by a common Entity (e.g., session_id or user_id). Once defined, a `View` allows you to retrieve the calculated values of the Attributes it contains.
+A `View` is a versioned collection of attributes grouped by a common `Entity` (e.g., `session_id` or `user_id`). Once defined, a `View` allows you to retrieve the calculated values of the attributes it contains.
 
 ### What is a Service?
-A `Service` is a collection of Views that streamlines the retrieval of multiple Views. By grouping related Views into a `Service`, you can efficiently manage and access user insights, making it easier to personalize applications and analyze behavior.
+A `Service` is a collection of views that streamlines the retrieval of multiple views. By grouping related views into a `Service`, you can efficiently manage and access user insights, making it easier to personalize applications and analyze behavior.
 
 
 ### Defining a View
-You can define a `View` by passing in a list of previously defined Attributes. Here's an example:
+You can define a `View` by passing in a list of previously defined attributes. Here's an example:
 
 ```python
 from snowplow_signals import View, session_entity
@@ -55,7 +55,7 @@ The `View` has the following properties:
 | **Argument Name** | **Description** | **Type** |
 | --- | --- | --- | 
 | `name` | The name of the View | `string` |
-| `version` | The verion of the View | `int` |
+| `version` | The version of the View | `int` |
 | `entity` | The entity associated with the View | `Entity` |
 | `ttl` | The amount of time this group of attributes lives. If not specified, the entity's ttl is used or the ttl is not limited. | `timedelta` |
 | `batch_source` | The data source for the View | `BatchSource` |

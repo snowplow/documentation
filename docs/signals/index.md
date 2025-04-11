@@ -15,7 +15,7 @@ Signals allows users to enhance their applications by aggregating user attribute
 
 The `Source` of a view refers to the origin of the data. A source can be one of two types:
 
-- **Batch Source:** Data that is aggregated and stored in a data warehouse, such as DBT models.
+- **Batch Source:** Data that is aggregated and stored in a data warehouse, such as dbt models.
 - **Stream Source:** Data that is aggregated in real-time in stream.
 
 
@@ -34,7 +34,7 @@ Signals calculates user attributes in two ways:
 
 ### Views
 
-A `View` is a collection of attributes that share a common aggregator (eg `session_id` or `user_id`) and a data `Source`. You can picture it as a table of attributes, for example:
+A `View` is a collection of attributes that share a common aggregator (ie `session_id` or `user_id`) and a data `Source`. You can picture it as a table of attributes, for example:
 
 | user_id | number_of_pageviews | last_product_viewed |  previous_purchases |
 |---------|---------------------|---------------------|---------------------|

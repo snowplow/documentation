@@ -102,7 +102,6 @@ A `Criterion` specifies the individual filter conditions for an `Attribute` usin
 
 | **Argument Name** | **Description** | **Type** |
 | --- | --- | --- | 
-| `property_syntax` | The syntax used to reference the property| One of: `snowflake`, `blobl` |
 | `property` | The path to the property on the event or entity you wish to filter. | `string` |
 | `operator` | The operator used to compare the property to the value. | One of: `=`, `!=`, `<`, `>`, `<=`, `>=`, `like`, `in` |
 | `value` | The value to compare the property to. | One of:  `str`, `int`, `float`, `bool`, `List[str]`, `List[int]`, `List[float]`, `List[bool]` |

@@ -20,8 +20,8 @@ Welcome to the Snowplow Signals Quickstart! This guide will walk you through the
 1. **Install and Set Up the SDK**: Get started with the Snowplow Signals SDK.
 2. **Define an Attribute**: Learn how to define stream user behavior attributes.
 3. **Create and Test a View**: Combine attributes into a view and test it.
-4. **Deploy a View**: Make your view live in the Signals API.
-5. **Retrieve Attributes**: Fetch user features from the API.
+4. **Deploy a View**: Push a view to the Profile API
+5. **Retrieve Attributes**: Fetch user features from the Profile API.
 
 ## Step 1: Installation and Setup
 The Snowplow Signals SDK allows you to define attributes, create views, and retrieve user features. It requires Python 3.12 or above.
@@ -88,7 +88,7 @@ products_added_to_cart_feature = Attribute(
     ],
     aggregation="unique_list",
     property="contexts_com_snowplowanalytics_snowplow_ecommerce_product_1[0].name",
-    filter=Criteria(
+    criteria=Criteria(
         all=[
             Criterion(
                 property="unstruct_event_com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1:type",

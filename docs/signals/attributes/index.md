@@ -53,7 +53,7 @@ page_views_attribute = Attribute(
         )
     ],
     aggregation='counter',
-    filter=Criteria(
+    criteria=Criteria(
         all=[
             Criterion(
                 property="page_title",
@@ -76,7 +76,6 @@ The table below lists all arguments for an `Attribute`:
 | `tags` | Metadata for the Attribute | |
 | `events` | List of Snowplow Events that the Attribute is calculated on | List of `Event` type |
 | `aggregation` | The aggregation type of the Attribute  | One of:  `counter`, `sum`, `min`, `max`, `mean`, `first`, `last`, `unique_list` |
-| `property_syntax` | The syntax used to reference the property. | One of: `snowflake`, `blobl` |
 | `property` | The property of the event or entity you wish to use in the aggregation | `string` |
 | `criteria` | List of `Criteria` to filter the events | List of `Criteria` type |
 | `period` | The time period over which the aggregation should be calculated | |

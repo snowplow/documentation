@@ -12,9 +12,9 @@ import ReactMarkdown from 'react-markdown';
 import { DataGridPremium, GridToolbar, useGridApiRef, useKeepGroupedColumnsHidden, gridClasses, } from '@mui/x-data-grid-premium';
 import { LicenseInfo } from '@mui/x-license-pro';
 
-LicenseInfo.setLicenseKey("a3d6a1e3cdca760ace01b65d01608642Tz03MTE1NixFPTE3MjE1NDQ2NzEwMDAsUz1wcmVtaXVtLExNPXN1YnNjcmlwdGlvbixLVj0y");
+LicenseInfo.setLicenseKey(process.env.PUBLIC_MUI_LICENSE_KEY);
 
-// Import all the schemas 
+// Import all the schemas
 function importAll(r) {
   const mods = {}
   r.keys().forEach(element => {
@@ -169,7 +169,7 @@ export function JsonToTable({ children, versionedSchema }) {
     filterable: true
   },].concat(columns)
 
-  // generate the rows of data from the properties 
+  // generate the rows of data from the properties
   const rows = Object.keys(properties).map((list, index) => (
     { id: index, variableName: list.substring(10), longDescription: properties[list].longDescription, default: properties[list].packageDefault, group: properties[list].group, warehouse: properties[list].warehouse }
   ))

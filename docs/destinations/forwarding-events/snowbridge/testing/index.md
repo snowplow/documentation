@@ -98,7 +98,7 @@ transform {
 }
 ```
 
-### Adding a HTTP request template
+### Adding an HTTP request template
 
 For the HTTP target, you can add a custom HTTP request template by mounting a file, similarly to above. Assuming the template is in `template.tpl`, that looks like this:
 

@@ -131,7 +131,7 @@
       "description": "> Click the plus sign to add a new entry",
       "minItems": 0,
       "title": "Path Transforms",
-      "longDescription": "Dictionary of path transforms (and their argument, `null` if none) to perform on the full conversion path (see the transform path options in our [model docs](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/)).",
+      "longDescription": "Dictionary of path transforms (and their argument) to perform on the conversion path (see the transform path options in our [model docs](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/)). For `remove_if_not_all` and `remove_if_last_and_not_all` transformations, the argument has to be a non-empty array, for the others it should be null.",
       "packageDefault": "{'exposure_path': null}",
       "group": "Contexts, Filters, and Logs",
       "items": {

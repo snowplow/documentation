@@ -1,5 +1,5 @@
 ---
-title: "Native Integrations"
+title: "Native integrations"
 date: "2021-11-24"
 sidebar_position: 0
 ---

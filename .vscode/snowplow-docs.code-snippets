@@ -28,19 +28,6 @@
     ],
     "description": "Docusaurus Front Matter"
   },
-  "Doc card block": {
-    "scope": "markdown",
-    "prefix": "doc_card",
-    "body": [
-      "```mdx-code-block",
-      "import DocCardList from '@theme/DocCardList';",
-      "",
-      "<DocCardList />",
-      "```",
-      ""
-    ],
-    "description": "Docusaurus doc card block for empty hierarchy pages"
-  },
   "Themed image block": {
     "scope": "markdown",
     "prefix": "theme",

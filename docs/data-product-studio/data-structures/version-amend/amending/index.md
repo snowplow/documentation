@@ -44,7 +44,7 @@ flowchart LR
 ```
 
 We call this approach “patching”. To patch the schema, i.e. apply changes to it without updating the version:
-* If you are using Snowplow BDP, select the “Patch” option [in the UI](/docs/data-product-studio/data-structures/manage/ui/index.md) when saving the schema
+* If you are using Snowplow BDP, select the “Patch” option [in the UI](/docs/data-product-studio/data-structures/manage/index.md) when saving the schema
 * If you are using Snowplow Community Edition, do not increment the schema version when [uploading it with `igluctl`](/docs/data-product-studio/data-structures/manage/iglu/index.md)
 
 :::danger
@@ -70,7 +70,7 @@ If your events are failing in production because of an incorrect schema, you mig
 
 :::note
 
-You need to be on Enrich 3.8.0+ and Iglu Server 0.11.0+ to use this feature. Additionally, if you are using [Snowplow Mini](/docs/api-reference/snowplow-mini/overview/index.md) or [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md), you will need version 0.17.0+ or 1.7.1+ respectively.
+You need to be on Enrich 3.8.0+ and Iglu Server 0.11.0+ to use this feature. Additionally, if you are using [Snowplow Mini](/docs/api-reference/snowplow-mini/index.md) or [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md), you will need version 0.17.0+ or 1.7.1+ respectively.
 
 :::
 

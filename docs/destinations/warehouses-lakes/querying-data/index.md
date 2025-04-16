@@ -133,7 +133,7 @@ You can query fields in the self-describing event like so:
 ```sql
 SELECT
     ...
-    JSON_VALUE(unstruct_event_my_example_event_1, '$.myField')
+    JSON_VALUE(unstruct_event_my_example_event_1, '$.my_field')
     ...
 FROM
     OPENROWSET(BULK 'events', DATA_SOURCE = '<events>', FORMAT = 'DELTA') AS events
@@ -267,7 +267,7 @@ You can query a single entity’s fields by extracting them like so:
 ```sql
 SELECT
     ...
-    JSON_VALUE(contexts_my_entity_1, '$[0].myField')
+    JSON_VALUE(contexts_my_entity_1, '$[0].my_field')
     ...
 FROM
     OPENROWSET(BULK 'events', DATA_SOURCE = '<events>', FORMAT = 'DELTA') AS events

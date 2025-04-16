@@ -334,3 +334,47 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/data-product-studio/data-quality/failed-events/exploring-failed-events/querying/ /docs/data-product-studio/data-quality/failed-events/exploring-failed-events/file-storage/ 301
 
 /docs/data-apps/* /docs/modeling-your-data/visualization/:splat 301
+
+# Adding content to every section
+/docs/get-started/deployment-model/* /docs/get-started/ 301
+/docs/get-started/snowplow-bdp/private-managed-cloud/* /docs/get-started/snowplow-bdp/:splat 301
+/docs/get-started/snowplow-bdp/cloud/* /docs/get-started/snowplow-bdp/ 301
+/docs/get-started/snowplow-community-edition/what-is-community-edition/ /docs/get-started/snowplow-community-edition/ 301
+/docs/fundamentals/architecture-overview/* /docs/fundamentals/ 301
+/docs/data-product-studio/introduction-to-tracking-design/ /docs/data-product-studio/ 301
+/docs/data-product-studio/data-structures/manage/ui* /docs/data-product-studio/data-structures/manage/:splat 301
+/docs/data-product-studio/snowtype/getting-started/* /docs/data-product-studio/snowtype/:splat 301
+/docs/data-product-studio/data-quality/snowplow-inspector/overview/* /docs/data-product-studio/data-quality/snowplow-inspector/:splat 301
+/docs/data-product-studio/data-quality/snowplow-micro/what-is-micro/* /docs/data-product-studio/data-quality/snowplow-micro/:splat 301
+/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/ui/* /docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/:splat 301
+/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/api/* /docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/:splat 301
+/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/warehouse-lake/* /docs/data-product-studio/data-quality/failed-events/exploring-failed-events/:splat 301
+/docs/pipeline/enrichments/what-is-enrichment/* /docs/pipeline/enrichments/:splat 301
+/docs/pipeline/enrichments/managing-enrichments/ui/* /docs/pipeline/enrichments/managing-enrichments/:splat 301
+/docs/destinations/warehouses-lakes/storage-options/* /docs/destinations/warehouses-lakes/:splat 301
+/docs/destinations/forwarding-events/snowbridge/getting-started/* /docs/destinations/forwarding-events/snowbridge/getting-started/:splat 301
+/docs/destinations/forwarding-events/snowbridge/concepts/application-overview/* /docs/destinations/forwarding-events/snowbridge/concepts/:splat 301
+/docs/destinations/forwarding-events/snowbridge/configuration/sources/stdin/* /docs/destinations/forwarding-events/snowbridge/configuration/sources/:splat 301
+/docs/destinations/forwarding-events/snowbridge/configuration/transformations/custom-scripts/create-a-script/* /docs/destinations/forwarding-events/snowbridge/configuration/transformations/custom-scripts/:splat 301
+/docs/destinations/forwarding-events/snowbridge/configuration/transformations/custom-scripts/examples/non-snowplow/* /docs/destinations/forwarding-events/snowbridge/configuration/transformations/custom-scripts/examples/:splat 301
+/docs/destinations/forwarding-events/snowbridge/configuration/transformations/custom-scripts/examples/snowplow/* /docs/destinations/forwarding-events/snowbridge/configuration/transformations/custom-scripts/examples/:splat 301
+/docs/destinations/forwarding-events/snowbridge/configuration/targets/stdout/* /docs/destinations/forwarding-events/snowbridge/configuration/targets/:splat 301
+/docs/modeling-your-data/running-data-models-via-snowplow-bdp/standard-models/* /docs/modeling-your-data/running-data-models-via-snowplow-bdp/:splat 301
+/docs/account-management/managing-users/managing-permissions/* /docs/account-management/managing-permissions/:splat 301
+/docs/account-management/managing-users/adding-removing/* /docs/account-management/managing-users/:splat 301
+/docs/account-management/managing-console-api-authentication/* /docs/account-management/:splat 301
+/docs/api-reference/snowplow-micro/configuration/* /docs/api-reference/snowplow-micro/:splat 301
+/docs/api-reference/snowplow-mini/overview/* /docs/api-reference/snowplow-mini/:splat 301
+/docs/sources/trackers/google-amp-tracker/version-1/* /docs/sources/trackers/google-amp-tracker/:splat 301
+/docs/sources/trackers/mobile-trackers/installation-and-set-up/android-tracker/* /docs/sources/trackers/mobile-trackers/installation-and-set-up/:splat 301
+/docs/sources/trackers/mobile-trackers/installation-and-set-up/ios-tracker/* /docs/sources/trackers/mobile-trackers/installation-and-set-up/:splat 301
+/docs/sources/trackers/react-native-tracker/introduction/* /docs/sources/trackers/react-native-tracker/:splat 301
+/docs/sources/trackers/google-tag-manager/snowplow-template/tag-types/* /docs/sources/trackers/google-tag-manager/snowplow-template/:splat 301
+/docs/sources/trackers/javascript-trackers/node-js-tracker/node-js-tracker-v4/setup/* /docs/sources/trackers/javascript-trackers/node-js-tracker/initialization/:splat 301
+/docs/sources/trackers/javascript-trackers/node-js-tracker/node-js-tracker-v4/* /docs/sources/trackers/javascript-trackers/node-js-tracker/:splat 301
+/docs/sources/trackers/javascript-trackers/node-js-tracker/node-js-tracker/* /docs/sources/trackers/javascript-trackers/previous-versions/:splat 301
+
+# Removing deprecated things
+/docs/sources/trackers/actionscript3-tracker/* /docs/sources/trackers/ 301
+/docs/sources/trackers/arduino-tracker/* /docs/sources/trackers/ 301
+/docs/sources/trackers/google-amp-tracker/version-0/* /docs/sources/trackers/google-amp-tracker/ 301

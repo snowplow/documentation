@@ -85,7 +85,7 @@ data:
 ```
 * `apiVersion` should always be `v1`
 * `resourceType` should remain `data-structure`
-* `meta.hidden` directly relates to showing and hiding [in BDP Console UI](/docs/data-product-studio/data-structures/manage/ui/index.md#hiding-a-data-structure)
+* `meta.hidden` directly relates to showing and hiding [in BDP Console UI](/docs/data-product-studio/data-structures/manage/index.md#hiding-a-data-structure)
 * `meta.schemaType` can be `event` or `entity`
 * `meta.customData` is a map of strings to strings that can be used to send across any key/value pairs you'd like to associate with the data structure
 * `data` is the actual [snowplow self describing schema](/docs/api-reference/iglu/common-architecture/self-describing-json-schemas/index.md) that this data structure describes
@@ -207,7 +207,7 @@ on:
 With our trigger point worked out we need to complete a series of steps:
 1. Configure snowplow-cli via environment variables provided as [github action secrets](https://docs.github.com/en/actions/security-for-github-actions/security-guides/using-secrets-in-github-actions)
 2. Checkout our repo
-3. Install snowplow-cli. We'll use our [setup-snowplow-cli](https://github.com/snowplow-product/setup-snowplow-cli) github action here. Behind the scenes it is downloading the [latest](https://github.com/snowplow-product/snowplow-cli/releases/latest) snowplow-cli release and making it available via the workflow job's `path`.
+3. Install snowplow-cli. We'll use our [setup-snowplow-cli](https://github.com/snowplow/setup-snowplow-cli) github action here. Behind the scenes it is downloading the [latest](https://github.com/snowplow/snowplow-cli/releases/latest) snowplow-cli release and making it available via the workflow job's `path`.
 4. Run the `snowplow-cli ds publish dev` command as we did earlier
 
 The full action:
@@ -228,7 +228,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: snowplow-product/setup-snowplow-cli@v1
+      - uses: snowplow/setup-snowplow-cli@v1
 
       - run: snowplow-cli ds publish dev --managed-from $GITHUB_REPOSITORY
 ```
@@ -258,7 +258,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: snowplow-product/setup-snowplow-cli@v1
+      - uses: snowplow/setup-snowplow-cli@v1
 
       - run: snowplow-cli ds publish prod --managed-from $GITHUB_REPOSITORY
 ```
@@ -284,7 +284,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: snowplow-product/setup-snowplow-cli@v1
+      - uses: snowplow/setup-snowplow-cli@v1
 
       - run: snowplow-cli ds validate --gh-annotate
 ```
@@ -402,7 +402,7 @@ data:
 * `data` is the contents of the source app
 
 :::note
-For more information about available fields and values you can refer to the [source applications schema](https://raw.githubusercontent.com/snowplow-product/snowplow-cli/main/internal/validation/schema/source-application.json). Making your ide schema aware via a [language server](https://github.com/redhat-developer/yaml-language-server) should provide a much smoother editing experience.
+For more information about available fields and values you can refer to the [source applications schema](https://raw.githubusercontent.com/snowplow/snowplow-cli/main/internal/validation/schema/source-application.json). Making your ide schema aware via a [language server](https://github.com/redhat-developer/yaml-language-server) should provide a much smoother editing experience.
 :::
 
 Now let's customize our source application. We'll configure it to handle events from our production website as well as staging and UAT environments. We'll also add an owner field and remove the unused entities section.
@@ -443,7 +443,7 @@ Let's now create a data product and an event specification by running the follow
 ```bash
 snowplow-cli dp generate --data-product Login
 ```
-This should provide the following output 
+This should provide the following output
 ```
 INFO generate wrote kind="data product" file=data-products/login.yaml
 ```
@@ -460,7 +460,7 @@ data:
 ```
 
 :::note
-For more information about available fields and values you can refer to the [data products schema](https://raw.githubusercontent.com/snowplow-product/snowplow-cli/main/internal/validation/schema/data-product.json). Making your ide schema aware via a [language server](https://github.com/redhat-developer/yaml-language-server) should provide a much smoother editing experience.
+For more information about available fields and values you can refer to the [data products schema](https://raw.githubusercontent.com/snowplow/snowplow-cli/main/internal/validation/schema/data-product.json). Making your ide schema aware via a [language server](https://github.com/redhat-developer/yaml-language-server) should provide a much smoother editing experience.
 :::
 
 Let's amend it to add an event specification, and a reference to a source application:
@@ -531,7 +531,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: snowplow-product/setup-snowplow-cli@v1
+      - uses: snowplow/setup-snowplow-cli@v1
 
       - run: snowplow-cli ds validate --gh-annotate
 
@@ -557,7 +557,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: snowplow-product/setup-snowplow-cli@v1
+      - uses: snowplow/setup-snowplow-cli@v1
 
       - run: snowplow-cli ds publish dev --managed-from $GITHUB_REPOSITORY
 

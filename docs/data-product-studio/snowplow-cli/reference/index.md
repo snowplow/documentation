@@ -1,7 +1,7 @@
 ---
-title: Command Reference
+title: Command reference
 date: 2024-11-26
-sidebar_label: Command Reference
+sidebar_label: Command reference
 sidebar_position: 1
 ---
 
@@ -394,7 +394,7 @@ Publish modified data structures to BDP Console and your development environment
 
 The 'meta' section of a data structure is not versioned within BDP Console.
 Changes to it will be published by this command.
-	
+
 
 ```
 snowplow-cli data-structures publish dev [paths...] default: [./data-structures] [flags]
@@ -448,7 +448,7 @@ Publish data structures from your development to your production environment
 
 Data structures found on \<path...\> which are deployed to your development
 environment will be published to your production environment.
-	
+
 
 ```
 snowplow-cli data-structures publish prod [paths...] default: [./data-structures] [flags]
@@ -461,7 +461,7 @@ snowplow-cli data-structures publish prod [paths...] default: [./data-structures
 	$ snowplow-cli ds publish prod
 	$ snowplow-cli ds publish prod --dry-run
 	$ snowplow-cli ds publish prod --dry-run ./my-data-structures ./my-other-data-structures
-	
+
 ```
 
 ### Options
@@ -537,6 +537,3 @@ snowplow-cli data-structures validate [paths...] default: [./data-structures] [f
   -q, --quiet                 Log output level to Warn
   -s, --silent                Disable output
 ```
-
-
-

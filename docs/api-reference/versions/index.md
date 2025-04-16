@@ -180,10 +180,10 @@ If you are using Snowplow BDP, you don’t need to install Snowplow Mini yoursel
 :::
 
 <ReactMarkdown children={`
-| Application                                                                                    |      Latest version       |
-| :--------------------------------------------------------------------------------------------- | :-----------------------: |
-| [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/what-is-micro/index.md) | ${versions.snowplowMicro} |
-| [Snowplow Mini](/docs/api-reference/snowplow-mini/usage-guide/index.md)                        | ${versions.snowplowMini}  |
+| Application                                                                      |      Latest version       |
+| :------------------------------------------------------------------------------- | :-----------------------: |
+| [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md) | ${versions.snowplowMicro} |
+| [Snowplow Mini](/docs/api-reference/snowplow-mini/usage-guide/index.md)          | ${versions.snowplowMini}  |
 `} remarkPlugins={[remarkGfm]} />
 
 ### Analytics SDKs

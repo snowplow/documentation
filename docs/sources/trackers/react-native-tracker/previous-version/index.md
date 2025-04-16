@@ -6,8 +6,6 @@ sidebar_custom_props:
   outdated: true
 ---
 
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
+This section contains the documentation for the previous versions of the React Native tracker.
 
-<DocCardList />
-```
+We recommend upgrading to the latest version.

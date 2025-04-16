@@ -6,15 +6,4 @@ sidebar_custom_props:
   legacy: true
 ---
 
-```mdx-code-block
-import { AllAccelerators } from "@site/src/components/AcceleratorAdmonitions";
-
-<AllAccelerators/>
-```
-
-
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
-
-<DocCardList />
-```
+This section contains how-to advice on using Snowplow with a number of different use cases. Check out our [Tutorials](/tutorials) for more.

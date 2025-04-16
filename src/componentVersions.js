@@ -6,9 +6,9 @@ export const versions = {
   flutterTracker: '0.7.1',
   golangTracker: '3.1.0',
   googleAmpTracker: '1.1.0',
-  iosTracker: '6.2.0',
+  iosTracker: '6.2.1',
   javaTracker: '2.1.0',
-  javaScriptTracker: '4.3.0',
+  javaScriptTracker: '4.5.0',
   luaTracker: '0.2.0',
   phpTracker: '0.8.0',
   pixelTracker: '0.3.0',
@@ -23,12 +23,14 @@ export const versions = {
   // Core pipeline
   collector: '3.3.0',
   enrich: '5.3.0',
+  collector: '3.4.0',
+  enrich: '5.3.0',
   sqs2kinesis: '1.0.4',
   dataflowRunner: '0.7.5',
-  snowbridge: '3.0.1',
+  snowbridge: '3.1.1',
 
   // Loaders
-  bqLoader: '2.0.0',
+  bqLoader: '2.0.1',
   bqLoader1x: '1.7.2',
   esLoader: '2.1.3',
   gcsLoader: '0.5.6',
@@ -36,12 +38,12 @@ export const versions = {
   rdbLoader: '6.1.3',
   s3Loader: '2.2.9',
   s3Loader22x: '2.2.9',
-  lakeLoader: '0.6.1',
-  snowflakeStreamingLoader: '0.4.0',
+  lakeLoader: '0.6.2',
+  snowflakeStreamingLoader: '0.4.1',
 
   // Data Modelling
   // dbt
-  dbtSnowplowAttribution: '0.4.0',
+  dbtSnowplowAttribution: '0.5.0',
   dbtSnowplowUnified: '0.5.2',
   dbtSnowplowWeb: '1.0.1',
   dbtSnowplowMobile: '1.0.0',
@@ -75,6 +77,6 @@ export const versions = {
   igluScalaClient: '2.2.1',
 
   // Testing & debugging
-  snowplowMicro: '2.1.3',
+  snowplowMicro: '2.2.0',
   snowplowMini: '0.22.0',
 }

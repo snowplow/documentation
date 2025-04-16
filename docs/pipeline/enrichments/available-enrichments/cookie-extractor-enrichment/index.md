@@ -15,6 +15,7 @@ The following table provides examples of how the cookie and collector domains in
 | Collector Domain | Cookie Domain | Cookies Extracted |
 | ---------------- | ------------- | ----------------- |
 | c.snowplow.io | acme.com | ❌ |
+| t.acme.com | c.acme.com | ❌ |
 | t.acme.com | acme.com | ✅ |
 | sp.track.acme.com | acme.com | ✅ |
 

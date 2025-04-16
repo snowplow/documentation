@@ -9,8 +9,6 @@ import Badges from '@site/src/components/Badges';
 <Badges badgeType="Maintained"></Badges>
 ```
 
-## What is the Pixel tracker?
-
 The Pixel tracker is an HTML-only tracking tag (no JavaScript) to track opens / views of HTML content that does not support JavaScript. Examples of use cases include HTML emails.
 
 In a normal JavaScript tag, the name-value pairs of data that are sent through to the Snowplow collector via the querystring are calculated on the fly by the JavaScript. (Examples of data points that are calculated on the fly include `user_id`, or `browser_features`.)

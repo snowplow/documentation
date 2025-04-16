@@ -1,0 +1,13 @@
+extends: existence
+message: "Make sure that temporal words like '%s' aren't referring to product features or offerings."
+link: 'https://github.com/DataDog/documentation/blob/master/CONTRIBUTING.md#tense'
+ignorecase: true
+level: suggestion
+tokens:
+  - currently
+  - now
+  - soon
+  - in the future
+  - we plan to
+  - Snowplow plans to
+  - latest

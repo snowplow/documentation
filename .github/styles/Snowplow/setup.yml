@@ -1,0 +1,10 @@
+extends: existence
+message: "'Setup' is a noun meaning 'configuration'. Do you mean 'set up'?"
+level: warning
+ignorecase: true
+tokens:
+  - to setup
+  - be setup
+  - \bis setup
+  - you setup
+  - \'s setup

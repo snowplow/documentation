@@ -24,9 +24,3 @@ As sending and processing of events is done asynchronously it is advised to crea
 See [here for instructions](http://blog.ralch.com/tutorial/design-patterns/golang-singleton/) on building a Singleton in Golang.
 
 :::
-
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
-
-<DocCardList />
-```

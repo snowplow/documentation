@@ -9,10 +9,9 @@ The collector receives raw Snowplow events sent over HTTP by [trackers](/docs/so
 1. [Amazon Kinesis](http://aws.amazon.com/kinesis/)
 2. [Google PubSub](https://cloud.google.com/pubsub/)
 3. [Apache Kafka](http://kafka.apache.org/)
-4. [RabbitMQ](https://www.rabbitmq.com/) (experimental)
-5. [NSQ](http://nsq.io/)
-6. [Amazon SQS](https://aws.amazon.com/sqs/)
-7. `stdout` for a custom stream collection process
+4. [NSQ](http://nsq.io/)
+5. [Amazon SQS](https://aws.amazon.com/sqs/)
+6. `stdout` for a custom stream collection process
 
 The collector supports cross-domain Snowplow deployments, setting a `user_id` (used to identify unique visitors) server side to reliably identify the same user across domains.
 

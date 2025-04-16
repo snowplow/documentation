@@ -41,7 +41,7 @@ Whilst you can force the buffer size to be greater than 1 for a GET Request; it 
 Constructor:
 
 ```php
-public function __construct($uri, $protocol = NULL, $type = NULL, $buffer_size = NULL, $debug = false, $max_retry_attempts = NULL, $retry_backoff_ms = NULL)
+public function __construct($uri, $protocol = NULL, $type = NULL, $buffer_size = NULL, $debug = false, $max_retry_attempts = NULL, $retry_backoff_ms = NULL, $server_anonymization = false)
 ```
 
 Arguments:
@@ -55,6 +55,7 @@ Arguments:
 | `$debug` | Whether or not to log errors | No | Boolean |
 | `$max_retry_attempts` | The maximum number of times to retry a request. Defaults to 1. | No | Int |
 | `$retry_backoff_ms` | The number of milliseconds to backoff before retrying a request. Defaults to 100ms, increases exponentially in subsequent retries. | No | Int |
+| `$server_anonymization` | Enable Server Anonymization for sent events; IP and Network User ID information will not be included with tracked events | No | Int |
 
 ### Socket
 
@@ -91,6 +92,7 @@ Arguments:
 | `$debug` | Whether or not to log errors | No | Boolean |
 | `$max_retry_attempts` | The maximum number of times to retry a request. Defaults to 1. | No | Int |
 | `$retry_backoff_ms` | The number of milliseconds to backoff before retrying a request. Defaults to 100ms, increases exponentially in subsequent retries. | No | Int |
+| `$server_anonymization` | Enable Server Anonymization for sent events; IP and Network User ID information will not be included with tracked events | No | Int |
 
 ### Curl
 
@@ -118,14 +120,15 @@ public function __construct($uri, $protocol = NULL, $type = NULL, $buffer_size =
 
 Arguments:
 
-| **Argument**    | **Description**                                         | **Required?** | **Validation**   |
-|-----------------|---------------------------------------------------------|---------------|------------------|
-| `$uri`          | Collector hostname                                      | Yes           | Non-empty string |
-| `$protocol`     | Collector Protocol (HTTP or HTTPS)                      | No            | String           |
-| `$type`         | Request Type (POST or GET)                              | No            | String           |
-| `$buffer_size`  | Amount of events to store before flush                  | No            | Int              |
-| `$debug`        | Whether or not to log errors                            | No            | Boolean          |
-| `$curl_timeout` | Maximum time the request is allowed to take, in seconds | No            | Int              |
+| **Argument**            | **Description**                                         | **Required?** | **Validation**   |
+|-------------------------|---------------------------------------------------------|---------------|------------------|
+| `$uri`                  | Collector hostname                                      | Yes           | Non-empty string |
+| `$protocol`             | Collector Protocol (HTTP or HTTPS)                      | No            | String           |
+| `$type`                 | Request Type (POST or GET)                              | No            | String           |
+| `$buffer_size`          | Amount of events to store before flush                  | No            | Int              |
+| `$debug`                | Whether or not to log errors                            | No            | Boolean          |
+| `$curl_timeout`         | Maximum time the request is allowed to take, in seconds | No            | Int              |
+| `$server_anonymization` | Enable Server Anonymization for sent events             | No            | Int              |
 
 #### Curl Default Settings
 

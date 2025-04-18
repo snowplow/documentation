@@ -88,7 +88,7 @@ See [here](/docs/resources/recipes-tutorials/recipe-anonymous-tracking/index.md)
 
 #### ID Service
 
-This allows you to set the endpoint for the [ID service](/docs/sources/trackers/javascript-trackers/web-tracker/browsers/#what-is-an-id-service-).
+This allows you to set the endpoint for the [ID service](/docs/sources/trackers/javascript-trackers/web-tracker/browsers/index.md#what-is-a-cookie-extension-service-).
 
 ## Cookie Settings
 

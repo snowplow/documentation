@@ -7,16 +7,20 @@ sidebar_label: "Batch Engine"
 
 While many `Attributes` can be computed in stream, those that have to be calculated over a longer period (e.g. a day or more), can only be created "offline" in the warehouse. We call them `Batch Attributes`. The entity here is typically the user, which may be the `domain_userid` or other Snowplow identifier fields, such as the logged in `user_id`. 
 
+:::info
+For now, only the `domain_userid` can be used, but shortly we will extend support for all Snowplow identifiers
+:::
+
 Examples of `Batch Attributes` are typically:
 - customer lifetime values
 - specific transactions that have or have not happened in the last X number of days
 - first or last events a specific user generated or any properties associated to these events
 
 ## Let us do the heavy lifting
-You may already have tables in your warehouse that you want to use (in which case you only have to register them as a batch source to be used by Signals), but if you don't have them, and don't want to build complex data models to do this efficiently for you. All of this to avoid recalculating the values each time over a very large table, which over time may easily be impossible. We have developed a tool to generate these `Attributes` for you, with the help of a few CLI commands, we call this the **`Batch Engine`**.
+You may already have tables in your warehouse that contain such computed values, in which case you only have to register them as a batch source to be used by Signals. However, if you don't have them, we have developed a tool called the **`Batch Engine`** to efficiently generate these `Attributes` for you, with the help of a few CLI commands. This way you can avoid having to build complex data models to avoid recalculating the values each time over a very large table, which over time may even be impossible to do, not just costly.
 
 ## How it works
-In short, what you need to do first is to define a set of `Attributes` and register them as a View through the Python Signals SDK. Then you can use the optional CLI functionality of the SDK to generate a dbt project which will ultimately produce a view-specific attribute table. Then all that's left is to materialize the table, which will mean that Signals will regularly fetch the values from your warehouse table and sends it through the pipeline.
+In short, what you need to do first is to define a set of `Attributes` and register them as a `View` through the Python Signals SDK. Then you can use the optional CLI functionality of the SDK to generate a dbt project which will ultimately produce a view-specific attribute table. Then all that's left is to materialize the table, which will mean that Signals will regularly fetch the values from your warehouse table and sends it through the pipeline.
 
 ## Generating the dbt project
 Here we assume you already defined your Views related to custom Batch Attributes, you want the Batch Engine to help generate for you. 

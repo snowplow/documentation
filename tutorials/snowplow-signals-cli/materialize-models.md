@@ -1,31 +1,49 @@
 ---
 position: 6
-title: Materializing Models to Feature Store
+title: Materializing Models to Signals
 ---
-
-> ⚠️ This feature is currently under development and will be available in a future release.
 
 ## What is Model Materialization?
 
-Model materialization is the process of taking your tested and validated dbt models and making them available in your Snowplow Signals feature store. This enables you to:
+Model materialization is the process of taking your tested and validated dbt models and making them available in Snowplow Signals. This enables you to serve your attributes in production (with regular updates to keep the warehouse and Signals in sync)
 
-- Serve your features in production
-- Schedule regular updates
-- Monitor feature performance
-- Manage feature metadata
+## Materializing your attribute table
+Once you are happy with the dbt package generated outputs, you already have the attributes table in the warehouse, and you are ready to commit to it for production you are ready to start materializing your table.
 
-## Coming Features
+### Step 1. - Fill out the batch_source_config
+At the time of the data model generation, a config file is generated for you to adjust, under `config/batch_source_config.json`. You will see a similar structure to this:
 
-When this feature is released, you'll be able to:
+```yml
+{
+    "database": "",
+    "wh_schema": "",
+    "table": "ecommerce_1_attributes",
+    "name": "ecommerce_1_attributes",
+    "timestamp_field": "lower_limit",
+    "created_timestamp_column": "valid_at_tstamp",
+    "description": "Table containing attributes for ecommerce_1 view",
+    "tags": {},
+    "owner": ""
+}
+```
+Make sure you fill out the `database` and `wh_schema` (this will be your dbt profile's `{target_name}_derived`), which will need to correspond to the attributes table the dbt package has already produced. The rest you can leave unchanged.
 
-1. Create batch sources directly from your dbt models
-2. Configure automatic ingestion schedules
+### Step 2. - Run the materialize command
 
-## Why This Matters
+Run the following CLI command:
 
-Materializing your models to the feature store is crucial because it:
+```bash
+snowplow-batch-autogen materialize \
+  --view-name "ecommerce" \
+  --view-version 1 \
+  --verbose
+```
+Based on the output you will see if it was successful. First it attempts to register the Batch Source for the view in question, if all good you will see the relevant message:
 
-- Bridges the gap between development and production
-- Ensures consistent feature serving
+✅ Successfully added Batch Source information to view ecommerce_1
 
-Stay tuned for updates on this exciting feature! 
+It then updates Signals which registers the table and the syncing should automatically begin from that point onwards:
+
+✅ Successfully registered table ecommerce_transaction_interactions_features_1_attributes
+
+For now there is no way to alter the update schedule (default: every 5 minutes), but watch out for updates on this in the near future!

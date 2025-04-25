@@ -1,13 +1,13 @@
 ---
 position: 1
-title: Getting Started with Snowplow Signals CLI
+title: Getting Started with Signals Batch Engine
 ---
 
-Welcome to the Snowplow Signals CLI guide! This tool helps you generate and manage dbt projects for batch processing of your Snowplow Signals attributes.
+Welcome to the Signals Batch Engine guide! This tool helps you generate and manage dbt projects for batch processing of your Snowplow Signals attributes.
 
 ## What is Snowplow Signals?
 
-Snowplow Signals is a feature store that helps you manage and serve machine learning features at scale. In the personalization API, you can have different types of attribute views:
+Snowplow Signals is a feature store that helps you manage and serve machine learning features at scale. In the Profiles API, you can have different types of attribute views:
 
 - **Batch Views**: Processed offline, perfect for historical data and complex aggregations
 - **Stream Views**: Processed in real-time, ideal for immediate feature updates
@@ -29,6 +29,18 @@ Before starting, ensure you have:
   - API Key
   - API Key ID
   - Organization ID
+
+## Installation
+
+To install the Signals Batch Engine CLI tool, run the following command:
+
+```bash
+pip install 'snowplow-signals[batch-engine]'
+```
+
+This will install the CLI tool along with all necessary dependencies for working with batch views.
+
+> **Important**: Make sure you're in the correct Python environment (virtual environment, Poetry, etc.) where you want to install the CLI tool. The CLI commands will only work in the environment where the package is installed.
 
 ## What you'll learn
 

@@ -50,7 +50,7 @@ export default function DocItemLayout({ children }: Props): JSX.Element {
       <div className={clsx('col', !docTOC.hidden && styles.docItemCol)}>
         <DocVersionBanner />
         <div className={styles.docItemContainer}>
-          <article>
+          <article className='max-w-3xl px-10 m-auto'>
             <DocBreadcrumbs />
             <DocVersionBadge />
             {docTOC.mobile}

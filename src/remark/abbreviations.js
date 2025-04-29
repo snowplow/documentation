@@ -7,6 +7,7 @@ const plugin = () => {
     AWS: 'Amazon Web Services',
     BDP: 'Behavioral Data Platform',
     CDI: 'Customer Data Infrastructure',
+    CDN: 'Content Delivery Network',
     CDP: 'Customer Data Platform',
     CLI: 'Command Line Interface',
     EC2: 'Amazon Elastic Compute Cloud',

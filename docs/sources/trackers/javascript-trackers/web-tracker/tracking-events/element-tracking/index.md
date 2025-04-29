@@ -60,6 +60,409 @@ Example use cases for these events include:
 </TabItem>
 </Tabs>
 
+## Examples
+
+Here we'll show some example rules for simple use cases on the [Snowplow website](https://snowplow.io/) ([snapshot at time of writing](https://web.archive.org/web/20250422013533/https://snowplow.io/)).
+
+The code examples use the [JavaScript Tracker syntax](/docs/sources/trackers/javascript-trackers/web-tracker/index.md), but should be easy to adapt to Browser Tracker syntax if needed.
+
+<details>
+  <summary>Scroll sections</summary>
+
+  The homepage has content grouped into distinct "layers" as you scroll down the page.
+  To see when users scroll down to each section, we can track an `expose` event for each section.
+  We can capture the header element text to identify each one.
+
+  ```javascript title="Rule configuration"
+  snowplow('startElementTracking', {
+    elements: {
+      selector: "section",
+      expose: { when: "element" },
+      details: { child_text: { title: "h2" } }
+    }
+  });
+  ```
+
+  ```json title="Event: expose_event"
+  {
+    "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
+    "data": {
+      "element_name": "section",
+      "width": 1920,
+      "height": 1111.7333984375,
+      "position_x": 0,
+      "position_y": 716.4500122070312,
+      "doc_position_x": 0,
+      "doc_position_y": 716.4500122070312,
+      "element_index": 2,
+      "element_matches": 10,
+      "originating_page_view": "06dbb0a2-9acf-4ae4-9562-1469b6d12c5d",
+      "attributes": [
+        {
+          "source": "child_text",
+          "attribute": "title",
+          "value": "Why Data Teams Choose Snowplow"
+        }
+      ]
+    }
+  }
+  ```
+
+  ```json title="Event: expose_event"
+  {
+    "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
+    "data": {
+      "element_name": "section",
+      "width": 1920,
+      "height": 2880,
+      "position_x": 0,
+      "position_y": 896.683349609375,
+      "doc_position_x": 0,
+      "doc_position_y": 1828.183349609375,
+      "element_index": 3,
+      "element_matches": 10,
+      "originating_page_view": "06dbb0a2-9acf-4ae4-9562-1469b6d12c5d",
+      "attributes": [
+        {
+          "source": "child_text",
+          "attribute": "title",
+          "value": "How Does Snowplow Work?"
+        }
+      ]
+    }
+  }
+  ```
+
+</details>
+
+<details>
+  <summary>Content depth</summary>
+
+  The blog posts have longer-form content.
+  Snowplow's page ping events track scroll depth by pixels, but it's inconsistent between devices and page.
+  To see how much content is consumed, we can generate stats based on the paragraphs in the content.
+  We can also get periodic stats based on the overall article in page pings.
+
+  ```javascript title="Rule configuration"
+  snowplow('startElementTracking', {
+    elements: [
+      {
+        selector: ".blogs_blog-post-body_content",
+        name: "blog content",
+        expose: false,
+        includeStats: ["page_ping"]
+      },
+      {
+        selector: ".blogs_blog-post-body_content p",
+        name: "blog paragraphs"
+      }
+    ]
+  });
+  ```
+
+  Because the expose event contains the `element_index` and `element_matches`, we can easily get the maximum `element_index` by pageview ID to get consumption statistics for individual views of each article, which can then be aggregated to the content or category level.
+  This can be converted to a percentage by comparing with `element_matches`.
+
+  ```json title="Event: expose_event"
+  {
+    "schema": "iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0",
+    "data": [
+      {
+        "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
+        "data": {
+          "element_name": "blog paragraphs",
+          "width": 800,
+          "height": 48,
+          "position_x": 320,
+          "position_y": 533.25,
+          "doc_position_x": 320,
+          "doc_position_y": 1373,
+          "element_index": 6,
+          "element_matches": 24,
+          "originating_page_view": "f390bec5-f63c-48af-b3ad-a03f0511af7f",
+          "attributes": []
+        }
+      },
+      {
+        "schema": "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0",
+        "data": {
+          "id": "f390bec5-f63c-48af-b3ad-a03f0511af7f"
+        }
+      }
+    ]
+  }
+  ```
+
+  The periodic page ping events also give us a summary of the overall progress in the `max_y_depth_ratio`/`max_y_depth` values.
+  With `y_depth_ratio` we can also see when users backtrack up the page.
+
+  ```json title="Event: page_ping"
+  {
+    "schema": "iglu:com.snowplowanalytics.snowplow/element_statistics/jsonschema/1-0-0",
+    "data": {
+      "element_name": "blog content",
+      "element_index": 1,
+      "element_matches": 1,
+      "current_state": "unknown",
+      "min_size": "800x3928",
+      "current_size": "800x3928",
+      "max_size": "800x3928",
+      "y_depth_ratio": 0.20302953156822812,
+      "max_y_depth_ratio": 0.4931262729124236,
+      "max_y_depth": "1937/3928",
+      "element_age_ms": 298379,
+      "times_in_view": 0,
+      "total_time_visible_ms": 0
+    }
+  }
+  ```
+
+</details>
+
+<details>
+  <summary>Simple funnels</summary>
+
+  Way at the bottom of the page is a newsletter sign-up form.
+  Measuring how it performs is difficult because many visitors don't even see it.
+  To test this we first need to know when the form is on a page, then when it is actually seen, then when people actually interact with it, before finally submitting and subscribing to the form.
+  The form tracking plugin can only do the last parts, but the element tracker gives us the earlier steps.
+  If we end up adding more forms in the future, we'll want to know which is which, so we'll mark the footer as a component so we can split it out later.
+
+  ```javascript title="Rule configuration"
+  snowplow('startElementTracking', {
+    elements: [
+      {
+        selector: ".hbspt-form",
+        name: "newsletter signup",
+        create: true,
+      },
+      {
+        selector: "footer",
+        component: true,
+        expose: false
+      }
+    ]
+  });
+  ```
+
+  If we try this on a blog page, we actually get two `create_element` events!
+  Blog posts have a second newsletter sign-up in a sidebar next to the content.
+  Because only the second one was a member of our `footer` component, it's easy to see which one we're trying to measure when we query the data later.
+
+  ```json title="Event: create_element"
+  {
+    "schema": "iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0",
+    "data": [
+      {
+        "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
+        "data": {
+          "element_name": "newsletter signup",
+          "width": 336,
+          "height": 161,
+          "position_x": 1232,
+          "position_y": 238.88333129882812,
+          "doc_position_x": 1232,
+          "doc_position_y": 3677.883331298828,
+          "element_index": 1,
+          "element_matches": 2,
+          "originating_page_view": "02e30714-a84a-42f8-8b07-df106d669db0",
+          "attributes": []
+        }
+      },
+      {
+        "schema": "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0",
+        "data": {
+          "id": "02e30714-a84a-42f8-8b07-df106d669db0"
+        }
+      }
+    ]
+  }
+  ```
+
+  ```json title="Event: create_element"
+  {
+    "schema": "iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0",
+    "data": [
+      {
+        "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
+        "data": {
+          "element_name": "newsletter signup",
+          "width": 560,
+          "height": 137,
+          "position_x": 320,
+          "position_y": 1953.5,
+          "doc_position_x": 320,
+          "doc_position_y": 5392.5,
+          "element_index": 2,
+          "element_matches": 2,
+          "originating_page_view": "02e30714-a84a-42f8-8b07-df106d669db0",
+          "attributes": []
+        }
+      },
+      {
+        "schema": "iglu:com.snowplowanalytics.snowplow/component_parents/jsonschema/1-0-0",
+        "data": {
+          "element_name": "newsletter signup",
+          "component_list": [
+            "footer"
+          ]
+        }
+      },
+      {
+        "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
+        "data": {
+          "element_name": "footer",
+          "width": 1920,
+          "height": 1071.5,
+          "position_x": 0,
+          "position_y": 1212,
+          "doc_position_x": 0,
+          "doc_position_y": 4651,
+          "originating_page_view": "",
+          "attributes": []
+        }
+      },
+      {
+        "schema": "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0",
+        "data": {
+          "id": "02e30714-a84a-42f8-8b07-df106d669db0"
+        }
+      }
+    ]
+  }
+  ```
+
+</details>
+
+<details>
+  <summary>Recommendations performance</summary>
+
+  On the homepage there's a section for the "Latest Blogs from Snowplow".
+  This could easily be recommendations or some other form of personalization.
+  If it were, we might want to optimize it.
+  Link tracking could tell us when a recommendation worked and a visitor clicked it, but how would we know when things aren't working?
+  If we track when the widget is visible and see what items were recommended, we can then correlate it with the clicks to measure performance.
+  To make sure our recommendations are actually visible, we'll make it so it only counts as visible if at least 50% of it is in view, and it has to be that way for at least 1.5 seconds.
+  We'll also collect the post title and author information.
+
+
+  ```javascript title="Rule configuration"
+  snowplow('startElementTracking', {
+    elements: [
+      {
+        selector: ".blog_list-header_list-wrapper",
+        name: "recommended_posts",
+        create: true,
+        expose: { when: "element", minTimeMillis: 1500, minPercentage: 0.5 },
+        contents: [
+          {
+            selector: ".collection-item",
+            name: "recommended_item",
+            details: { child_text: { title: "h3", author: ".blog_list-header_author-text > p" } }
+          }
+        ]
+      }
+    ]
+  });
+  ```
+
+  Scrolling down to see the items and we see the items that were served to the visitor:
+
+  ```json title="Event: expose_element"
+  {
+    "schema": "iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0",
+    "data": [
+      {
+        "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
+        "data": {
+          "element_name": "recommended_posts",
+          "width": 1280,
+          "height": 680.7666625976562,
+          "position_x": 320,
+          "position_y": 437.70001220703125,
+          "doc_position_x": 320,
+          "doc_position_y": 6261.066711425781,
+          "element_index": 1,
+          "element_matches": 1,
+          "originating_page_view": "034db1d6-1d60-42ca-8fe1-9aafc0442a22",
+          "attributes": []
+        }
+      },
+      {
+        "schema": "iglu:com.snowplowanalytics.snowplow/element_content/jsonschema/1-0-0",
+        "data": {
+          "element_name": "recommended_item",
+          "parent_name": "recommended_posts",
+          "parent_position": 1,
+          "position": 1,
+          "attributes": [
+            {
+              "source": "child_text",
+              "attribute": "title",
+              "value": "Data Pipeline Architecture Patterns for AI: Choosing the Right Approach"
+            },
+            {
+              "source": "child_text",
+              "attribute": "author",
+              "value": "Matus Tomlein"
+            }
+          ]
+        }
+      },
+      {
+        "schema": "iglu:com.snowplowanalytics.snowplow/element_content/jsonschema/1-0-0",
+        "data": {
+          "element_name": "recommended_item",
+          "parent_name": "recommended_posts",
+          "parent_position": 1,
+          "position": 2,
+          "attributes": [
+            {
+              "source": "child_text",
+              "attribute": "title",
+              "value": "Data Pipeline Architecture For AI: Why Traditional Approaches Fall Short"
+            },
+            {
+              "source": "child_text",
+              "attribute": "author",
+              "value": "Matus Tomlein"
+            }
+          ]
+        }
+      },
+      {
+        "schema": "iglu:com.snowplowanalytics.snowplow/element_content/jsonschema/1-0-0",
+        "data": {
+          "element_name": "recommended_item",
+          "parent_name": "recommended_posts",
+          "parent_position": 1,
+          "position": 3,
+          "attributes": [
+            {
+              "source": "child_text",
+              "attribute": "title",
+              "value": "Agentic AI Applications: How They Will Turn the Web Upside Down"
+            },
+            {
+              "source": "child_text",
+              "attribute": "author",
+              "value": "Yali\tSassoon"
+            }
+          ]
+        }
+      },
+      {
+        "schema": "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0",
+        "data": {
+          "id": "034db1d6-1d60-42ca-8fe1-9aafc0442a22"
+        }
+      }
+    ]
+  }
+  ```
+
+</details>
+
 ## Enable element tracking
 
 You can begin tracking elements by providing configuration to the plugin's `startElementTracking` method:
@@ -398,396 +801,3 @@ Custom entities can be attached to the events generated by the plugin.
 
 - You can include `context` alongside `elements` when calling `startElementTracking`. You can pass an array of static entities _or_ a callback function that returns such an array. The function will receive the element that the event is relevant to, and the matching rule that defined the event should fire.
 - Individual rules may also contain specific `context` in the same format as above.
-
-## Examples
-
-Here we'll show some example rules for simple use cases on the [Snowplow website](https://snowplow.io/) ([snapshot at time of writing](https://web.archive.org/web/20250422013533/https://snowplow.io/)).
-
-<details>
-  <summary>Scroll sections</summary>
-
-  The homepage has content grouped into distinct "layers" as you scroll down the page.
-  To see when users scroll down to each section, we can track an `expose` event for each section.
-  We can capture the header element text to identify each one.
-
-  ```json title="Rule configuration"
-  {
-    selector: "section",
-    expose: { when: "element" },
-    details: { child_text: { title: "h2" } }
-  }
-  ```
-
-  ```json title="Event: expose_event"
-  {
-    "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
-    "data": {
-      "element_name": "section",
-      "width": 1920,
-      "height": 1111.7333984375,
-      "position_x": 0,
-      "position_y": 716.4500122070312,
-      "doc_position_x": 0,
-      "doc_position_y": 716.4500122070312,
-      "element_index": 2,
-      "element_matches": 10,
-      "originating_page_view": "06dbb0a2-9acf-4ae4-9562-1469b6d12c5d",
-      "attributes": [
-        {
-          "source": "child_text",
-          "attribute": "title",
-          "value": "Why Data Teams Choose Snowplow"
-        }
-      ]
-    }
-  }
-  ```
-
-  ```json title="Event: expose_event"
-  {
-    "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
-    "data": {
-      "element_name": "section",
-      "width": 1920,
-      "height": 2880,
-      "position_x": 0,
-      "position_y": 896.683349609375,
-      "doc_position_x": 0,
-      "doc_position_y": 1828.183349609375,
-      "element_index": 3,
-      "element_matches": 10,
-      "originating_page_view": "06dbb0a2-9acf-4ae4-9562-1469b6d12c5d",
-      "attributes": [
-        {
-          "source": "child_text",
-          "attribute": "title",
-          "value": "How Does Snowplow Work?"
-        }
-      ]
-    }
-  }
-  ```
-
-</details>
-
-<details>
-  <summary>Content depth</summary>
-
-  The blog posts have longer-form content.
-  Snowplow's page ping events track scroll depth by pixels, but it's inconsistent between devices and page.
-  To see how much content is consumed, we can generate stats based on the paragraphs in the content.
-  We can also get periodic stats based on the overall article in page pings.
-
-  ```json title="Rule configuration"
-  [
-    {
-      selector: ".blogs_blog-post-body_content",
-      name: "blog content",
-      expose: false,
-      includeStats: ["page_ping"]
-    },
-    {
-      selector: ".blogs_blog-post-body_content p",
-      name: "blog paragraphs"
-    }
-  ]
-  ```
-
-  Because the expose event contains the `element_index` and `element_matches`, we can easily get the maximum `element_index` by pageview ID to get consumption statistics for individual views of each article, which can then be aggregated to the content or category level.
-  This can be converted to a percentage by comparing with `element_matches`.
-
-  ```json title="Event: expose_event"
-  {
-    "schema": "iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0",
-    "data": [
-      {
-        "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
-        "data": {
-          "element_name": "blog paragraphs",
-          "width": 800,
-          "height": 48,
-          "position_x": 320,
-          "position_y": 533.25,
-          "doc_position_x": 320,
-          "doc_position_y": 1373,
-          "element_index": 6,
-          "element_matches": 24,
-          "originating_page_view": "f390bec5-f63c-48af-b3ad-a03f0511af7f",
-          "attributes": []
-        }
-      },
-      {
-        "schema": "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0",
-        "data": {
-          "id": "f390bec5-f63c-48af-b3ad-a03f0511af7f"
-        }
-      }
-    ]
-  }
-  ```
-
-  The periodic page ping events also give us a summary of the overall progress in the `max_y_depth_ratio`/`max_y_depth` values.
-  With `y_depth_ratio` we can also see when users backtrack up the page.
-
-  ```json title="Event: page_ping"
-  {
-    "schema": "iglu:com.snowplowanalytics.snowplow/element_statistics/jsonschema/1-0-0",
-    "data": {
-      "element_name": "blog content",
-      "element_index": 1,
-      "element_matches": 1,
-      "current_state": "unknown",
-      "min_size": "800x3928",
-      "current_size": "800x3928",
-      "max_size": "800x3928",
-      "y_depth_ratio": 0.20302953156822812,
-      "max_y_depth_ratio": 0.4931262729124236,
-      "max_y_depth": "1937/3928",
-      "element_age_ms": 298379,
-      "times_in_view": 0,
-      "total_time_visible_ms": 0
-    }
-  }
-  ```
-
-</details>
-
-<details>
-  <summary>Simple funnels</summary>
-
-  Way at the bottom of the page is a newsletter sign-up form.
-  Measuring how it performs is difficult because many visitors don't even see it.
-  To test this we first need to know when the form is on a page, then when it is actually seen, then when people actually interact with it, before finally submitting and subscribing to the form.
-  The form tracking plugin can only do the last parts, but the element tracker gives us the earlier steps.
-  If we end up adding more forms in the future, we'll want to know which is which, so we'll mark the footer as a component so we can split it out later.
-
-  ```json title="Rule configuration"
-  [
-    {
-      selector: ".hbspt-form",
-      name: "newsletter signup",
-      create: true,
-    },
-    {
-      selector: "footer",
-      component: true,
-      expose: false
-    }
-  ]
-  ```
-
-  If we try this on a blog page, we actually get two `create_element` events!
-  Blog posts have a second newsletter sign-up in a sidebar next to the content.
-  Because only the second one was a member of our `footer` component, it's easy to see which one we're trying to measure when we query the data later.
-
-  ```json title="Event: create_element"
-  {
-    "schema": "iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0",
-    "data": [
-      {
-        "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
-        "data": {
-          "element_name": "newsletter signup",
-          "width": 336,
-          "height": 161,
-          "position_x": 1232,
-          "position_y": 238.88333129882812,
-          "doc_position_x": 1232,
-          "doc_position_y": 3677.883331298828,
-          "element_index": 1,
-          "element_matches": 2,
-          "originating_page_view": "02e30714-a84a-42f8-8b07-df106d669db0",
-          "attributes": []
-        }
-      },
-      {
-        "schema": "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0",
-        "data": {
-          "id": "02e30714-a84a-42f8-8b07-df106d669db0"
-        }
-      }
-    ]
-  }
-  ```
-
-  ```json title="Event: create_element"
-  {
-    "schema": "iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0",
-    "data": [
-      {
-        "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
-        "data": {
-          "element_name": "newsletter signup",
-          "width": 560,
-          "height": 137,
-          "position_x": 320,
-          "position_y": 1953.5,
-          "doc_position_x": 320,
-          "doc_position_y": 5392.5,
-          "element_index": 2,
-          "element_matches": 2,
-          "originating_page_view": "02e30714-a84a-42f8-8b07-df106d669db0",
-          "attributes": []
-        }
-      },
-      {
-        "schema": "iglu:com.snowplowanalytics.snowplow/component_parents/jsonschema/1-0-0",
-        "data": {
-          "element_name": "newsletter signup",
-          "component_list": [
-            "footer"
-          ]
-        }
-      },
-      {
-        "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
-        "data": {
-          "element_name": "footer",
-          "width": 1920,
-          "height": 1071.5,
-          "position_x": 0,
-          "position_y": 1212,
-          "doc_position_x": 0,
-          "doc_position_y": 4651,
-          "originating_page_view": "",
-          "attributes": []
-        }
-      },
-      {
-        "schema": "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0",
-        "data": {
-          "id": "02e30714-a84a-42f8-8b07-df106d669db0"
-        }
-      }
-    ]
-  }
-  ```
-
-</details>
-
-<details>
-  <summary>Recommendations performance</summary>
-
-  On the homepage there's a section for the "Latest Blogs from Snowplow".
-  This could easily be recommendations or some other form of personalization.
-  If it were, we might want to optimize it.
-  Link tracking could tell us when a recommendation worked and a visitor clicked it, but how would we know when things aren't working?
-  If we track when the widget is visible and see what items were recommended, we can then correlate it with the clicks to measure performance.
-  To make sure our recommendations are actually visible, we'll make it so it only counts as visible if at least 50% of it is in view, and it has to be that way for at least 1.5 seconds.
-  We'll also collect the post title and author information.
-
-
-  ```json title="Rule configuration"
-  [
-    {
-      selector: ".blog_list-header_list-wrapper",
-      name: "recommended_posts",
-      create: true,
-      expose: { when: "element", minTimeMillis: 1500, minPercentage: 0.5 },
-      contents: [
-        {
-          selector: ".collection-item",
-          name: "recommended_item",
-          details: { child_text: { title: "h3", author: ".blog_list-header_author-text > p" } }
-        }
-      ]
-    }
-  ]
-  ```
-
-  Scrolling down to see the items and we see the items that were served to the visitor:
-
-  ```json title="Event: expose_element"
-  {
-    "schema": "iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0",
-    "data": [
-      {
-        "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
-        "data": {
-          "element_name": "recommended_posts",
-          "width": 1280,
-          "height": 680.7666625976562,
-          "position_x": 320,
-          "position_y": 437.70001220703125,
-          "doc_position_x": 320,
-          "doc_position_y": 6261.066711425781,
-          "element_index": 1,
-          "element_matches": 1,
-          "originating_page_view": "034db1d6-1d60-42ca-8fe1-9aafc0442a22",
-          "attributes": []
-        }
-      },
-      {
-        "schema": "iglu:com.snowplowanalytics.snowplow/element_content/jsonschema/1-0-0",
-        "data": {
-          "element_name": "recommended_item",
-          "parent_name": "recommended_posts",
-          "parent_position": 1,
-          "position": 1,
-          "attributes": [
-            {
-              "source": "child_text",
-              "attribute": "title",
-              "value": "Data Pipeline Architecture Patterns for AI: Choosing the Right Approach"
-            },
-            {
-              "source": "child_text",
-              "attribute": "author",
-              "value": "Matus Tomlein"
-            }
-          ]
-        }
-      },
-      {
-        "schema": "iglu:com.snowplowanalytics.snowplow/element_content/jsonschema/1-0-0",
-        "data": {
-          "element_name": "recommended_item",
-          "parent_name": "recommended_posts",
-          "parent_position": 1,
-          "position": 2,
-          "attributes": [
-            {
-              "source": "child_text",
-              "attribute": "title",
-              "value": "Data Pipeline Architecture For AI: Why Traditional Approaches Fall Short"
-            },
-            {
-              "source": "child_text",
-              "attribute": "author",
-              "value": "Matus Tomlein"
-            }
-          ]
-        }
-      },
-      {
-        "schema": "iglu:com.snowplowanalytics.snowplow/element_content/jsonschema/1-0-0",
-        "data": {
-          "element_name": "recommended_item",
-          "parent_name": "recommended_posts",
-          "parent_position": 1,
-          "position": 3,
-          "attributes": [
-            {
-              "source": "child_text",
-              "attribute": "title",
-              "value": "Agentic AI Applications: How They Will Turn the Web Upside Down"
-            },
-            {
-              "source": "child_text",
-              "attribute": "author",
-              "value": "Yali\tSassoon"
-            }
-          ]
-        }
-      },
-      {
-        "schema": "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0",
-        "data": {
-          "id": "034db1d6-1d60-42ca-8fe1-9aafc0442a22"
-        }
-      }
-    ]
-  }
-  ```
-
-</details>

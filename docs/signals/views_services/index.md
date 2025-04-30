@@ -68,6 +68,15 @@ The `View` has the following properties:
 | `attributes` | The list of attributes that will be calculated from events as part of this view. | `Attribute` |
 
 
+### View Computation Types
+The method of calculating and serving attributes related to a specific View depends on a specific combination of property values, illustrated in the below matrix:
+
+| | Offline = false | Offline = true and has attributes | Offline = True and has no attributes |
+|---|---|---|---|
+| **Online = false** | Attributes are not computed anywhere | Attributes computed through the Batch Engine in the warehouse but not yet materialized | Table pre-computed without Batch Engine and only in the warehouse |
+| **Online = true** | Attributes computed in stream | Attributes computed through the Batch Engine and materialized into Signals | Table materialized into Signals (if it has a batch source configured) |
+
+
 ### Services
 A `Service` groups multiple `Views` together, allowing you to retrieve calculated values from all the `Views` in the `Service`. Here's an example:
 

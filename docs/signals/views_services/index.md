@@ -40,7 +40,7 @@ To understand what the output of a `View` will look like, use the `test` method 
 ```python
 # Assuming signals object has been instantiated using the Signals() class
 
-test_data = signals.test(
+test_data = sp_signals.test(
     view=my_attribute_view,
     app_ids=["website"] # The app id in your Snowplow Events
 )
@@ -93,7 +93,7 @@ To begin calculating your `Attributes`, you need to apply the `Views` or `Servic
 ```python
 # Assuming signals object has been instantiated using the Signals() class
 
-signals.apply([
+sp_signals.apply([
         my_service,
         my_other_service
     ])
@@ -109,7 +109,7 @@ To access the calculated values, use the `get_online_attributes` method. Here's 
 ```python
 # Assuming signals object has been instantiated using the Signals() class
 
-calculated_values = signals.get_online_attributes(
+calculated_values = sp_signals.get_online_attributes(
     source=my_service,
     identifiers="abc-123",
 )

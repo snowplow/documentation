@@ -27,7 +27,7 @@ view = View(
 
 )
 
-signals.apply([view]) #Stream Source created
+sp_signals.apply([view]) #Stream Source created
 ```
 
 Once applied, the stream source begins calculating the attributes in real-time.

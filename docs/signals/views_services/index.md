@@ -59,7 +59,8 @@ The `View` has the following properties:
 | `entity` | The entity associated with the View | `Entity` |
 | `ttl` | The amount of time this group of attributes lives. If not specified, the entity's ttl is used or the ttl is not limited. | `timedelta` |
 | `batch_source` | The data source for the View | `BatchSource` |
-| `online` | Whether the View is calculated in real-time (`True`) or in the warehouse (`False`)	 | `bool` |
+| `online` | Whether online retrieval is enabled (`True`) or not (`False`) | `bool` |
+| `offline` | Whether the View is calculated in the warehouse (`True`) or in real-time (`False`) | `bool` |
 | `description` | The description of the View | `string` |
 | `tags` | The metadata of the View | `dict` |
 | `owner` | The owner of the feature view, typically the email of the primary maintainer. | `string` |

@@ -48,7 +48,7 @@ The Snowplow Collector generates a user identifier that is stored in cookies for
 
 The identifier is available both in Web and mobile apps. However, in Android apps, it is stored in memory so it is reset after the app restarts.
 
-In most scenarios, this identifier may have a longer lifetime than the tracker generated identifier. However, browsers can restrict it's lifetime for different reasons, such as when the Snowplow Collector is on a third-party domain from the website (not recommended), or due to the ITP restrictions in Safari (Snowplow provides a solution to mitigate this problem – [the ID service](/docs/sources/trackers/javascript-trackers/web-tracker/browsers/index.md#itp-mitigation)).
+In most scenarios, this identifier may have a longer lifetime than the tracker generated identifier. However, browsers can restrict it's lifetime for different reasons, such as when the Snowplow Collector is on a third-party domain from the website (not recommended), or due to the ITP restrictions in Safari (Snowplow provides a solution to mitigate this problem – [the Cookie Extension service](/docs/sources/trackers/javascript-trackers/web-tracker/browsers/index.md#itp-mitigation)).
 
 :::info
 `network_userid` is captured via a cookie set by the Snowplow Collector. It can be overriden by setting `tnuid` on a Tracker request payload but is typically expected to be populated by the Collector cookies.

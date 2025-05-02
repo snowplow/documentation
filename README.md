@@ -4,6 +4,9 @@ This is the source for https://docs.snowplow.io/docs.
 
 - [Contributing](#contributing)
 - [How to preview locally](#how-to-preview-locally)
+- [Checking spelling and grammar](#checking-spelling-and-grammar)
+  - [VS Code extension](#vs-code-extension)
+  - [Vale command-line interface](#vale-command-line-interface)
 - [Organizing content](#organizing-content)
   - [Sidebar](#sidebar)
     - [Updating sidebar attributes for multiple sections at once](#updating-sidebar-attributes-for-multiple-sections-at-once)
@@ -19,8 +22,9 @@ This is the source for https://docs.snowplow.io/docs.
   - [Images](#images)
 - [VSCode Snippets](#vscode-snippets)
 
-
 ## Contributing
+
+Follow the [Snowplow style guide](https://docs.snowplow.io/style-guide) when contributing documentation.
 
 All contributions are welcome, from [reporting issues](https://github.com/snowplow/documentation/issues/new) to correcting typos and formatting to full-blown how-tos and guides.
 
@@ -50,6 +54,41 @@ yarn start
 (Hitting an error with `yarn start`? `brew upgrade yarn` and try again. Yarn might also suggest further commands to update `docusaurus`.)
 
 Step 4. Go to `localhost:3000` in your browser and enjoy!
+
+## Checking spelling and grammar
+
+This repository uses Vale for linting prose. To run Vale, you will need to install the VS Code extension, and/or install Vale onto your computer.
+
+Vale has three levels of alert: error, warning, and suggestion. It won't automatically correct your text, it just flags potential problems.
+
+Vale only checks normal prose. Text that's marked as code—code blocks or in-line code—isn't included for linting, nor file paths in links.
+
+### VS Code extension
+
+To install the extension, find "[Vale VSCode](https://marketplace.visualstudio.com/items?itemName=ChrisChinchilla.vale-vscode)" in the Extensions Marketplace within VS Code, then click **Install**.
+
+The Vale extension will automatically check files when they're opened or saved. It underlines the flagged sections in different colours, based on the severity of the alert - red for errors, orange for warnings, and blue for suggestions. Mouse-over the underlined section to see the alert message, or check the VS Code **Problems** tab.
+
+### Vale command-line interface
+
+To [install the Vale CLI](https://vale.sh/docs/install) globally in your Mac, run:
+
+```bash
+$ brew install vale
+```
+
+Lint files by passing a path to the `vale` command.
+`$ vale {path}`
+
+It works recursively with folders or individual files, for example:
+`$ vale docs/account-management` or `$ vale docs/sources/trackers/mobile-trackers/client-side-properties/index.md`
+
+To see only alerts over a certain level, use the `--minAlertLevel` flag, for example:
+`$ vale --minAlertLevel=warning docs/account-management`
+
+
+[Vale CLI options](https://vale.sh/docs/cli)
+
 
 ## Organizing content
 

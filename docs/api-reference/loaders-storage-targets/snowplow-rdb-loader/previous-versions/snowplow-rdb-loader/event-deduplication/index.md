@@ -12,12 +12,12 @@ Duplicates is a common problem in event pipelines, it has been described and stu
 
 There are four strategies planned regarding incorporating deduplication mechanisms in RDB Shredder:
 
-| Strategy | Batch? | Same event ID? | Same event fingerprint? | Availability |
-| --- | --- | --- | --- | --- |
-| In-batch natural de-duplication | In-batch | Yes | Yes | [R76 Changeable Hawk-Eagle](http://snowplowanalytics.com/blog/2016/01/26/snowplow-r76-changeable-hawk-eagle-released/#deduplication) |
-| In-batch synthetic de-duplication | In-batch | Yes | No | [R86 Petra](http://snowplowanalytics.com/blog/2016/12/20/snowplow-r86-petra-released/) |
-| Cross-batch natural de-duplication | Cross-batch | Yes | Yes | [R88 Angkor Wat](http://snowplowanalytics.com/blog/2017/04/27/snowplow-r88-angkor-wat-released/) |
-| Cross-batch synthetic de-duplication | Cross-batch | Yes | No | Planned |
+| Strategy                             | Batch?      | Same event ID? | Same event fingerprint? | Availability                                                                                                                         |
+| ------------------------------------ | ----------- | -------------- | ----------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| In-batch natural de-duplication      | In-batch    | Yes            | Yes                     | [R76 Changeable Hawk-Eagle](http://snowplowanalytics.com/blog/2016/01/26/snowplow-r76-changeable-hawk-eagle-released/#deduplication) |
+| In-batch synthetic de-duplication    | In-batch    | Yes            | No                      | [R86 Petra](http://snowplowanalytics.com/blog/2016/12/20/snowplow-r86-petra-released/)                                               |
+| Cross-batch natural de-duplication   | Cross-batch | Yes            | Yes                     | [R88 Angkor Wat](http://snowplowanalytics.com/blog/2017/04/27/snowplow-r88-angkor-wat-released/)                                     |
+| Cross-batch synthetic de-duplication | Cross-batch | Yes            | No                      | Planned                                                                                                                              |
 
 We will cover these in turn:
 
@@ -77,8 +77,6 @@ In the code, we perform this check after we have grouped the batch by `event_id`
 ##### Enabling
 
 To enable cross-batch natural de-duplication you must provide a DynamoDB table [configuration](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/previous-versions/snowplow-rdb-loader/dynamodb-table/index.md) to EmrEtlRunner and provide [necessary rights](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/previous-versions/snowplow-rdb-loader/dynamodb-table/index.md#2-setting-up-iam-policy) in IAM. If this is not provided, then cross-batch natural de-duplication will be disabled. In-batch de-duplication will still work however.
-
-To avoid "cold start" problems you may want to use the [Event-manifest-populator](/docs/api-reference/legacy/events-manifest-populator/index.md) Spark job, which backpopulates duplicate storage with events from the specified point in time.
 
 ##### Table cleanup
 

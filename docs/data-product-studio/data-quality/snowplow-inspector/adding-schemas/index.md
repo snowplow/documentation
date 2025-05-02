@@ -39,10 +39,11 @@ Using the ‘Registries...’ button on the right, you can:
 Selecting a "local" registry will activate the ‘Schemas...’ button and allow you to manage the schemas it contains.
 
 When adding or editing a registry, the following types are supported:
-1. [Local](#local-registries)
-2. [Data Structures API](#data-structures-api-registries)
-3. [Iglu Server](#iglu-server-registries)
-4. [Static HTTP](#static-registries)
+- [Registries and schema management](#registries-and-schema-management)
+- [Local registries](#local-registries)
+- [Data Structures API registries](#data-structures-api-registries)
+- [Iglu Server registries](#iglu-server-registries)
+- [Static registries](#static-registries)
 
 Configuring a registry requires a name and one of these types.
 You may also optionally include a priority, and list of vendor prefixes.
@@ -72,8 +73,8 @@ This type is recommended for use with Snowplow BDP via the [Data Structures API]
 
 In order to function, the extension requires:
 
-- Organization ID: This is usually found in the URL when logged into the Snowplow BDP console. See more at [Managing Console API authentication](/docs/account-management/managing-console-api-authentication/index.md#credentials-ui-v2).
-- API Key: When logged into the Snowplow BDP console, should be available in [API keys for managing Snowplow](https://console.snowplowanalytics.com/credentials) (within "Manage organization"). See more at [Managing Console API authentication](/docs/account-management/managing-console-api-authentication/index.md#credentials-ui-v2).
+- Organization ID: This is usually found in the URL when logged into the Snowplow BDP console. See more at [Managing Console API authentication](/docs/account-management/index.md#version-2).
+- API Key: When logged into the Snowplow BDP console, should be available in [API keys for managing Snowplow](https://console.snowplowanalytics.com/credentials) (within "Manage organization"). See more at [Managing Console API authentication](/docs/account-management/index.md#version-2).
 
 ## Iglu Server registries
 [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) is a more full-featured dedicated service for hosting server that is more flexible than Static Registries.
@@ -98,4 +99,4 @@ To connect to your static registry, the extension will need:
 - Base URI: The base URL to use when requesting schemas. The extension will request schemas relative to this base, expecting a `schemas/{vendor}/{name}/{format/{version}` format.
 
 Optionally you can also provide:
-- Manifest URI: The URI to use for the schema manifest (aka [Schema List](https://discourse.snowplow.io/t/igluctl-0-8-0-released/5551#2-uploads-schema-lists-by-default-2)) file that lists the schemas contained in the registry. If not provided, defaults to `schemas`, to match the `igluctl` default.
+- Manifest URI: The URI to use for the schema manifest (aka schema list, as described in the [release notes](https://github.com/snowplow/igluctl/releases/tag/0.8.0)) file that lists the schemas contained in the registry. If not provided, defaults to `schemas`, to match the `igluctl` default.

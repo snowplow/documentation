@@ -8,9 +8,9 @@ sidebar_position: 30
 
 Duplicates are a common problem in event pipelines. At the root of it is the fact that we can't guarantee every event has a unique UUID because:
 
-- we have no exactly-once delivery guarantees
-- user-side software can send events more than once
-- robots can send events reusing the same event ID.
+- We have no exactly-once delivery guarantees
+- User-side software can send events more than once
+- Robots can send events reusing the same event ID
 
 Depending on your use case, you may choose to ignore duplicates, or deal with them once the events are in the data warehouse.
 
@@ -20,12 +20,12 @@ This is less of a concern with [wide row format](/docs/api-reference/loaders-sto
 
 This table shows the available deduplication mechanisms:
 
-| Strategy | Batch? | Same event ID? | Same event fingerprint? | Availability |
-| --- | --- | --- | --- | --- |
-| In-batch natural deduplication | In-batch | Yes | Yes | Spark transformer |
-| In-batch synthetic deduplication | In-batch | Yes | No | Spark transformer |
-| Cross-batch natural deduplication | Cross-batch | Yes | Yes | Spark transformer |
-| Cross-batch synthetic deduplication | Cross-batch | Yes | No | Not supported |
+| Strategy                            | Batch?      | Same event ID? | Same event fingerprint? | Availability      |
+| ----------------------------------- | ----------- | -------------- | ----------------------- | ----------------- |
+| In-batch natural deduplication      | In-batch    | Yes            | Yes                     | Spark transformer |
+| In-batch synthetic deduplication    | In-batch    | Yes            | No                      | Spark transformer |
+| Cross-batch natural deduplication   | Cross-batch | Yes            | Yes                     | Spark transformer |
+| Cross-batch synthetic deduplication | Cross-batch | Yes            | No                      | Not supported     |
 
 ## In-batch natural deduplication
 
@@ -53,8 +53,6 @@ To apply any of these strategies, we need to store information about previously 
 
 We need to store these in a database that allows fast random access, so we chose DynamoDB, a fully managed NoSQL database service.
 
-For more information on how duplicates are created, the difference between 'natural' and 'synthetic' duplicates, and possible mitigation strategies, see [this evergreen Discourse thread](https://discourse.snowplow.io/t/de-deduplicating-events-in-hadoop-and-redshift-tutorial/248) and [this still-relevant blog post](https://snowplowanalytics.com/blog/2015/08/19/dealing-with-duplicate-event-ids/).
-
 ### How to enable cross-batch natural deduplication
 
 To enable cross-batch natural deduplication, you must provide a third configuration option in the `RDB Transformer` step of the Dataflow Runner playbook, using the `--duplicate-storage-config` flag. Like the other options, this needs to be provided as a base64-encoded string. This config file contains information about the DynamoDB table to be used, as well as credentials for accessing it. For more details on the config file structure, refer to the [Snowplow Events Manifest](https://github.com/snowplow-incubator/snowplow-events-manifest) library and its documentation.
@@ -81,8 +79,6 @@ An example step definition can look like this:
 ```
 
 If this configuration option is not provided, cross-batch natural deduplication will be disabled. In-batch deduplication will still work however.
-
-To avoid 'cold start' problems you may want to use the [`event-manifest-populator`](/docs/api-reference/legacy/events-manifest-populator/index.md) Spark job, which backfills the duplicates table with events from a specified point in time onwards.
 
 ### Costs and performance implications
 

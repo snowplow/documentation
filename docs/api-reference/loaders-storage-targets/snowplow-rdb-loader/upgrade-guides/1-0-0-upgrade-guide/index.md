@@ -6,7 +6,7 @@ sidebar_position: 200
 
 This is a release adding a new experimental Stream Shredder asset and improving independent Loader architecture, introduced in R35.
 
-[Official announcement.](https://discourse.snowplow.io/t/snowplow-rdb-loader-1-0-0-released/5017)
+[Release notes](https://github.com/snowplow/snowplow-rdb-loader/releases/tag/1.0.0).
 
 This is the first release in 1.x branch and no breaking changes will be introduced until 2.x release. If you're upgrading from R34 or earlier it's strictly recommended to follow [R35 Upgrade Guide](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/upgrade-guides/r35-upgrade-guide/index.md) first.
 
@@ -65,32 +65,32 @@ You only need to choose one Shredder: batch or stream. **For production environm
 Stream Shredder is configured within same configuration file as RDB Loader and RDB Batch Shredder, but using following properties:
 
 ```json
-  "shredder": {       
+  "shredder": {
     # A batch loader would fail, if stream type encountered
-    "type" : "stream",       
-    # Input stream information         
-    "input": {                
-      # file is another option, but used for debugging only               
-      "type": "kinesis",        
-      # KCL app name - a DynamoDB table will be created with the same name       
-      "appName": "acme-rdb-shredder",       
-      # Kinesis Stream name, must exist     
-      "streamName": "enriched-events",       
-      # Kinesis region       
-      "region": "us-east-1",       
+    "type" : "stream",
+    # Input stream information
+    "input": {
+      # file is another option, but used for debugging only
+      "type": "kinesis",
+      # KCL app name - a DynamoDB table will be created with the same name
+      "appName": "acme-rdb-shredder",
+      # Kinesis Stream name, must exist
+      "streamName": "enriched-events",
+      # Kinesis region
+      "region": "us-east-1",
       # Kinesis position: LATEST or TRIM_HORIZON
-      "position": "LATEST"       
-    },       
-                
+      "position": "LATEST"
+    },
+
     # A frequency to emit loading finished message - 5,10,15,20,30,60 etc minutes, this is what controls how often your data will be loaded
-    "windowing": "10 minutes",       
-                
-    # Path to shredded archive, same as for batch      
-    "output": {       
-      # Path to shredded output       
-      "path": "s3://bucket/good/",       
-      # Shredder output compression, GZIP or NONE       
-      "compression": "GZIP"       
+    "windowing": "10 minutes",
+
+    # Path to shredded archive, same as for batch
+    "output": {
+      # Path to shredded output
+      "path": "s3://bucket/good/",
+      # Shredder output compression, GZIP or NONE
+      "compression": "GZIP"
     }
 }
 ```

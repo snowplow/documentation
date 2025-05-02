@@ -35,6 +35,6 @@ Out of the box, the deployed pipeline will handle up to ~100 events per second (
 
 ## Getting help
 
-Sign up on [discourse](https://discourse.snowplow.io/)! If you run into any problems or have any questions, we are here to help.
+Check out our [Community](https://community.snowplow.io/). If you run into any problems or have any questions, we are here to help.
 
 If you are interested in receiving the latest updates from Product & Engineering, such as critical bug fixes, security updates, new features and the rest, then [join our mailing list](https://info.snowplow.io/newsletter-signup).

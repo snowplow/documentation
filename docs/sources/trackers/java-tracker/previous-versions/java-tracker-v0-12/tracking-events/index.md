@@ -19,7 +19,7 @@ The Java tracker makes it easy to track different kinds of data. We provide a ra
 
 Every tracked event payload has a unique `event_id` UUID string. Other ubiquitous properties include the `name_tracker` (`trackerNamespace`) and `app_id` (`appId`) set when the `Tracker` was initialized. From version 0.12 onwards, `Tracker.track()` returns the payload's `eventId`.
 
-Snowplow events have a defined structure and [protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md) that is identical regardless of the tracker used. A minimal payload - the raw event - is sent from the tracker to your collector. The raw event is [enriched](/docs/pipeline/enrichments/what-is-enrichment/index.md) as it passes through your pipeline. By the time the event arrives in your data storage, depending which [enrichments](/docs/pipeline/enrichments/available-enrichments/index.md) you have enabled, it will have gained different kinds of metadata, and have many more fields than it started with. The default Java tracker event fields are shown [here](/docs/sources/trackers/java-tracker/previous-versions/java-tracker-v0-12/what-do-java-tracker-events-look-like/index.md).
+Snowplow events have a defined structure and [protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md) that is identical regardless of the tracker used. A minimal payload - the raw event - is sent from the tracker to your collector. The raw event is [enriched](/docs/pipeline/enrichments/index.md) as it passes through your pipeline. By the time the event arrives in your data storage, depending which [enrichments](/docs/pipeline/enrichments/available-enrichments/index.md) you have enabled, it will have gained different kinds of metadata, and have many more fields than it started with. The default Java tracker event fields are shown [here](/docs/sources/trackers/java-tracker/previous-versions/java-tracker-v0-12/what-do-java-tracker-events-look-like/index.md).
 
 The [Java tracker Github repository](https://github.com/snowplow/snowplow-java-tracker) includes a mini demo, "simple-console". The demo sends one event of each type to your event collector.
 
@@ -31,15 +31,15 @@ The Java tracker does not yet support automatic event tracking. All tracking mus
 
 The Java tracker provides classes for tracking different types of events. They are listed below.
 
-| `Event` class                                                                                                                                                                                 | `e` in raw event | `eventType` in enriched event |
-|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|------------------|-------------------------------|
+| `Event` class                                                                                                                                                                                      | `e` in raw event | `eventType` in enriched event |
+| -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ----------------------------- |
 | [`Unstructured` (custom)](/docs/sources/trackers/java-tracker/previous-versions/java-tracker-v0-12/tracking-events/index.md#creating-a-custom-event-unstructured-events)                           | ue               | unstruct                      |
 | [`ScreenView`](/docs/sources/trackers/java-tracker/previous-versions/java-tracker-v0-12/tracking-events/index.md#creating-a-screenview-event)                                                      | ue               | unstruct                      |
 | [`Timing`](/docs/sources/trackers/java-tracker/previous-versions/java-tracker-v0-12/tracking-events/index.md#creating-a-timing-event)                                                              | ue               | unstruct                      |
-| [`PageView`](/docs/sources/trackers/java-tracker/previous-versions/java-tracker-v0-12/tracking-events/index.md#creating-a-pageview-event)                                                          | pv               | page_view                    |
+| [`PageView`](/docs/sources/trackers/java-tracker/previous-versions/java-tracker-v0-12/tracking-events/index.md#creating-a-pageview-event)                                                          | pv               | page_view                     |
 | [`Structured`](/docs/sources/trackers/java-tracker/previous-versions/java-tracker-v0-12/tracking-events/index.md#creating-a-structured-event)                                                      | se               | struct                        |
 | [`EcommerceTransaction`](/docs/sources/trackers/java-tracker/previous-versions/java-tracker-v0-12/tracking-events/index.md#creating-ecommercetransaction-and-ecommercetransactionitem-event)\*     | tr               | transaction                   |
-| [`EcommerceTransactionItem`](/docs/sources/trackers/java-tracker/previous-versions/java-tracker-v0-12/tracking-events/index.md#creating-ecommercetransaction-and-ecommercetransactionitem-event)\* | ti               | transaction_item             |
+| [`EcommerceTransactionItem`](/docs/sources/trackers/java-tracker/previous-versions/java-tracker-v0-12/tracking-events/index.md#creating-ecommercetransaction-and-ecommercetransactionitem-event)\* | ti               | transaction_item              |
 
 Note: `EcommerceTransaction`/`EcommerceTransactionItem` are a legacy design and may be deprecated soon.
 
@@ -116,12 +116,12 @@ Provide your `timing` value in milliseconds. The `label` property is optional. S
 Track page views with the `PageView` event. This is a "primitive" event type; data will end up in individual "atomic" columns in the data warehouse.
 
 | Property     | Field in raw event | Column in enriched event |
-|--------------|--------------------|--------------------------|
-| page URL     | url                | page_url                |
-| page title   | page               | page_title              |
-| referrer URL | refr               | page_referrer           |
+| ------------ | ------------------ | ------------------------ |
+| page URL     | url                | page_url                 |
+| page title   | page               | page_title               |
+| referrer URL | refr               | page_referrer            |
 
-The provided URLs will also be decomposed into other columns, such as `page_urlscheme`, during event [enrichment](/docs/pipeline/enrichments/what-is-enrichment/index.md).
+The provided URLs will also be decomposed into other columns, such as `page_urlscheme`, during event [enrichment](/docs/pipeline/enrichments/index.md).
 
 A simple initialisation looks like this:
 
@@ -142,12 +142,12 @@ To track custom data without schemas, use `Structured` events. They are the "pri
 The `Structured` event fields have flexible definitions, and what you put into each field is up to you. This is a double-edged sword. It's highly advisable to agree business-wide on definitions for each of these fields, before implementing tracking.
 
 | Property | Often contains data about     | Field in raw event | Column in enriched event |
-|----------|-------------------------------|--------------------|--------------------------|
-| category | Grouping for the action       | se_ca             | se_category             |
-| action   | Type of user activity         | se_ac             | se_action               |
-| label    | Additional event data         | se_la             | se_label                |
-| property | The action or object acted on | se_pr             | se_property             |
-| value    | Numerical event data          | se_va             | se_value                |
+| -------- | ----------------------------- | ------------------ | ------------------------ |
+| category | Grouping for the action       | se_ca              | se_category              |
+| action   | Type of user activity         | se_ac              | se_action                |
+| label    | Additional event data         | se_la              | se_label                 |
+| property | The action or object acted on | se_pr              | se_property              |
+| value    | Numerical event data          | se_va              | se_value                 |
 
 A simple initialisation looks like this:
 
@@ -172,26 +172,26 @@ The `EcommerceTransaction` and `EcommerceTransactionItem` events are legacy even
 `EcommerceTransaction` and `EcommerceTransactionItem` are "primitive" events. The data will end up in individual "atomic" columns in the data warehouse.
 
 | `EcommerceTransaction` property | Field in raw event | Column in enriched event |
-|---------------------------------|--------------------|--------------------------|
-| orderId                         | tr_id             | tr_orderid              |
-| totalValue                      | tr_tt             | tr_total                |
-| affiliation                     | tr_af             | tr_affiliation          |
-| taxValue                        | tr_tx             | tr_tax                  |
-| shipping                        | tr_sh             | tr_shipping             |
-| city                            | tr_ci             | tr_city                 |
-| state                           | tr_st             | tr_state                |
-| country                         | tr_co             | tr_country              |
-| currency                        | tr_cu             | tr_currency             |
+| ------------------------------- | ------------------ | ------------------------ |
+| orderId                         | tr_id              | tr_orderid               |
+| totalValue                      | tr_tt              | tr_total                 |
+| affiliation                     | tr_af              | tr_affiliation           |
+| taxValue                        | tr_tx              | tr_tax                   |
+| shipping                        | tr_sh              | tr_shipping              |
+| city                            | tr_ci              | tr_city                  |
+| state                           | tr_st              | tr_state                 |
+| country                         | tr_co              | tr_country               |
+| currency                        | tr_cu              | tr_currency              |
 
 | `EcommerceTransactionItem` property | Field in raw event | Column in enriched event |
-|-------------------------------------|--------------------|--------------------------|
-| itemId                              | ti_id             | ti_orderid              |
-| sku                                 | ti_sk             | ti_sku                  |
-| price                               | ti_pr             | ti_price                |
-| quantity                            | ti_qu             | ti_quantity             |
-| name                                | ti_nm             | ti_name                 |
-| category                            | ti_ca             | ti_category             |
-| currency                            | ti_cu             | ti_currency             |
+| ----------------------------------- | ------------------ | ------------------------ |
+| itemId                              | ti_id              | ti_orderid               |
+| sku                                 | ti_sk              | ti_sku                   |
+| price                               | ti_pr              | ti_price                 |
+| quantity                            | ti_qu              | ti_quantity              |
+| name                                | ti_nm              | ti_name                  |
+| category                            | ti_ca              | ti_category              |
+| currency                            | ti_cu              | ti_currency              |
 
 The `orderId` and `itemId` should be the same, as it's the most direct way to associate the two events once they are in the warehouse.
 
@@ -230,9 +230,7 @@ For `EcommerceTransactionItem` events, `itemId`, `sku`, `price` and `quantity` a
 
 Snowplow events have several timestamps. The raw event payload always contains a `deviceCreatedTimestamp` (`dtm`) and a `deviceSentTimestamp` (`stm`). Other timestamps are added as the event moves through the pipeline.
 
-Every `Event.Builder` in the Java tracker allows for a custom timestamp, called `trueTimestamp` to be set. Read more about timestamps in [this still relevant forums post](https://discourse.snowplow.io/t/which-timestamp-is-the-best-to-see-when-an-event-occurred/538).
-
-A `trueTimestamp` can be added to any event using the `trueTimestamp()` Builder method:
+Every `Event.Builder` in the Java tracker allows for a custom timestamp, called `trueTimestamp` to be set. A `trueTimestamp` can be added to any event using the `trueTimestamp()` Builder method:
 
 ```java
 // This example shows an Unstructured event, but all events can have a trueTimestamp

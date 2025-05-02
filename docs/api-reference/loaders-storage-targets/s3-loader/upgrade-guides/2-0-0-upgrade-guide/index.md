@@ -1,12 +1,12 @@
 ---
-title: "2.0.0 Upgrade Guide"
+title: "2.0.0 upgrade guide"
 date: "2021-07-05"
-sidebar_position: 10
+sidebar_position: 11
 ---
 
 ## Caution
 
-If you're upgrading from Snowplow pre-R119 and S3 Loader pre-0.7.0 you have to [upgrade to 0.7.0](https://discourse.snowplow.io/t/s3-loader-0-7-0-google-cloud-storage-loader-0-3-1-released/3651) or 1.0.0 first in order to split bad data produced during transition period.
+If you're upgrading from Snowplow pre-R119 and S3 Loader pre-version 0.7.0 you have to upgrade to version 0.7.0 or 1.0.0 first in order to split bad data produced during transition period.
 
 In [Snowplow R119](https://snowplowanalytics.com/blog/2020/05/12/snowplow-release-r119/) we introduced a new self-describing bad rows format. S3 Loader 0.7.0 was the first version capable of partitioning self-describing data based on its schema. 0.7.0 and 1.0.0 are capable to recognize at runtime whether old or new format is consumed and use `partitionedBucket` output path only if necessary, so both formats can be consumed.
 

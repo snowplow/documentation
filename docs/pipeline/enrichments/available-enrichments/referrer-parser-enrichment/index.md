@@ -10,10 +10,10 @@ Knowing which sites refer users to our website is very much a staple of analytic
 
 This is particularly useful when looking for specific traffic from search engine providers or social networks for instance. Rather than scouring a full referrer URL list this enrichment adds an additional field so that it's possible to look at reports that combine sub-domains from some of the bigger referrers.
 
-## Configuration
+## Configuration example
 
-- [Schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/referer_parser/jsonschema/2-0-0)
-- [Example](https://github.com/snowplow/enrich/blob/master/config/enrichments/referer_parser.json)
+- [Enrichment schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/referer_parser/jsonschema/2-0-0)
+- [Example schema](https://github.com/snowplow/enrich/blob/master/config/enrichments/referer_parser.json)
 
 ```mdx-code-block
 import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
@@ -21,12 +21,12 @@ import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_in
 <TestingWithMicro/>
 ```
 
-Snowplow has several subdomains like _console.snowplowanalytics.com_ and _discourse.snowplowanalytics.com_. As users move from these subdomains to our main _snowplowanalytics.com_ domain, we would like to capture that traffic as being referred internally. Therefore we would set the configuration as such:
+Snowplow has several subdomains like _community.snowplow.io_ and _docs.snowplow.io_. As users move from these subdomains to our main _snowplow.io_ domain, we would like to capture that traffic as being referred internally. Therefore we would set the configuration in the example schema as such:
 
 ```json
 "internalDomains": [
-    "console.snowplowanalytics.com",
-    "discourse.snowplowanalytics.com"
+    "community.snowplow.io",
+    "docs.snowplow.io"
 ],
 ```
 

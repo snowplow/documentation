@@ -1,5 +1,5 @@
 ---
-title: "E-commerce"
+title: "Ecommerce"
 sidebar_position: 40
 hide_table_of_contents: true
 ---
@@ -59,7 +59,7 @@ export const printYamlVariables = (data) => {
 export const MyMdxComponent = () => {
   const schemaName = 'dbtEcommerce';
   const versions = getSchemaVersions(schemaName);
-  const label = 'dbt e-commerce version';
+  const label = 'dbt ecommerce version';
   const output = printYamlVariables;
     return (
       <DbtCongfigurationPage schemaName={schemaName} versions={versions} label={label}>
@@ -74,7 +74,7 @@ export const MyMdxComponent = () => {
             <h2 id="Generator">Config Generator</h2>
             <p>You can use the below inputs to generate the code that you need to place into your <code>dbt_project.yml</code> file to configure the package as you require. Any values not specified will use their default values from the package.</p>
         </JsonSchemaGenerator>
-        <h2 id="schemas">Output Schemas</h2> 
+        <h2 id="schemas">Output Schemas</h2>
         <DbtSchemas/>
         <SchemaSetter output={printSchemaVariables} />
       </DbtCongfigurationPage>

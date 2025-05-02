@@ -40,8 +40,9 @@ collector {
 | `collector.cookie.domains` | Optional. Default: no domains. There is more details about this feature below. This is for fine control over the cookie's domain attribute. |
 | `collector.cookie.fallbackDomain` | Optional. If set, the fallback domain will be used for the cookie if none of the `Origin` header hosts matches the list of cookie domains. |
 | `collector.cookie.secure` | Optional. Default: `true`. Sets the `secure` property of the cookie. |
-| `collector.cookie.httpOnly` | Optional. Default: `true`. Sets the `httpOnly` property of the cookie. |
+| `collector.cookie.httpOnly` | Optional. Default: `true`. Sets the `httpOnly` property of the cookie.  We recommend `true` because `httpOnly` cookies are allowed a longer expiry time by web browsers. |
 | `collector.cookie.sameSite` | Optional. Default: `None`. Sets the `sameSite` property of the cookie. Possible values: `Strict`, `Lax`, `None`. |
+| `collector.cookie.clientCookieName` (since 3.4.0) | Optional. Default: not set.  If a name is specified (e.g. `sp_client`), the collector sets an extra cookie with that name, `httpOnly=false` and the same value as the main cookie (network user id). This is useful if you need to access the network user id on the client side using JavaScript. |
 | `collector.doNotTrackCookie.enabled` | Optional. Default: `false`. If enabled, the collector respects a "do not track" cookie. If the cookie is present, it returns a `200` status code but it does not log the request to the output queue. |
 | `collector.doNotTrackCookie.name` | Required when `doNotTrackCookie` feature is enabled. Configures the name of the cookie in which to check if tracking is disabled. |
 | `collector.doNotTrackCookie.value` | Required when `doNotTrackCookie` feature is enabled. Can be a regular expression. The value of the cookie must match this expression in order for the collector to respect the cookie. |

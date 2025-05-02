@@ -18,12 +18,6 @@ In short, almost everything is compatible with almost everything. We rarely chan
 
 You might encounter specific restrictions when following the documentation, for example, some of our [data models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/index.md) might call for a reasonably recent version of the [warehouse loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md).
 
-:::tip
-
-When in doubt, feel free to start a thread on [Discourse](https://discourse.snowplow.io/).
-
-:::
-
 ## Upgrades and deprecation
 
 :::info Snowplow BDP
@@ -34,9 +28,7 @@ If you are using Snowplow BDP, you don’t need to deal with upgrading your pipe
 
 Some major upgrades might have breaking changes. In this case, we provide upgrade guides, such as the ones for [RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/upgrade-guides/index.md).
 
-From time to time, we develop better applications for certain tasks and deprecate the old ones. Deprecations are announced on [Discourse](https://discourse.snowplow.io/).
-
-We still keep the [documentation for legacy applications](/docs/api-reference/legacy/index.md) for reference, along with guidance on what they have been replaced with.
+From time to time, we develop better applications for certain tasks and deprecate the old ones. Deprecations are announced on [Community](http://community.snowplow.io/).
 
 ---
 
@@ -188,10 +180,10 @@ If you are using Snowplow BDP, you don’t need to install Snowplow Mini yoursel
 :::
 
 <ReactMarkdown children={`
-| Application                                                                                    |      Latest version       |
-| :--------------------------------------------------------------------------------------------- | :-----------------------: |
-| [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/what-is-micro/index.md) | ${versions.snowplowMicro} |
-| [Snowplow Mini](/docs/api-reference/snowplow-mini/usage-guide/index.md)                        | ${versions.snowplowMini}  |
+| Application                                                                      |      Latest version       |
+| :------------------------------------------------------------------------------- | :-----------------------: |
+| [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md) | ${versions.snowplowMicro} |
+| [Snowplow Mini](/docs/api-reference/snowplow-mini/usage-guide/index.md)          | ${versions.snowplowMini}  |
 `} remarkPlugins={[remarkGfm]} />
 
 ### Analytics SDKs

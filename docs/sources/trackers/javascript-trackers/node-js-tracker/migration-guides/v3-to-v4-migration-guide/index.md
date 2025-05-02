@@ -23,7 +23,7 @@ The change has an effect on the public API of the tracker which had to previousl
 The initialization of a tracker instance has changed – instead of initializing an emitter (using `gotEmitter`) and tracker (using `tracker`) separately, the SDK handles initialization of both using the `newTracker` call.
 The `newTracker` call now accepts configuration objects for the tracker and emitter as arguments.
 
-[See the new initialization options here.](/docs/sources/trackers/javascript-trackers/node-js-tracker/node-js-tracker-v4/initialization/index.md)
+[See the new initialization options here.](/docs/sources/trackers/javascript-trackers/node-js-tracker/initialization/index.md)
 
 ### Dropped support for older Node.JS
 

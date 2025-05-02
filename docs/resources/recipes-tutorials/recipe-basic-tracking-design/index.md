@@ -19,7 +19,7 @@ We'll give it the following details:
 
 :::info Data Structures Builder
 
-In Snowplow BDP, you can use the [data structures builder UI](/docs/data-product-studio/data-structures/manage/ui/builder/index.md) to follow along. You will not need the JSON code.
+In Snowplow BDP, you can use the [data structures builder UI](/docs/data-product-studio/data-structures/manage/builder/index.md) to follow along. You will not need the JSON code.
 
 :::
 
@@ -69,7 +69,7 @@ In the schema for this data structure, we would display these decisions as prope
 
 :::info Data Structures Builder
 
-In Snowplow BDP, you can use the [data structures builder UI](/docs/data-product-studio/data-structures/manage/ui/builder/index.md) to follow along. You will not need the JSON code.
+In Snowplow BDP, you can use the [data structures builder UI](/docs/data-product-studio/data-structures/manage/builder/index.md) to follow along. You will not need the JSON code.
 
 :::
 
@@ -200,7 +200,7 @@ To do this we'll need to:
 - Create the HTML for our form
 - Initialize the Snowplow Javascript Tracker
 - Set up our event tracking
-- Use [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md) or [Snowplow Mini](/docs/api-reference/snowplow-mini/overview/index.md) to validate our tracking
+- Use [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md) or [Snowplow Mini](/docs/api-reference/snowplow-mini/index.md) to validate our tracking
 
 ### HTML
 

@@ -86,6 +86,10 @@ This setting disables client-side user identifiers but tracks session informatio
 
 See [here](/docs/resources/recipes-tutorials/recipe-anonymous-tracking/index.md) for more information on anonymous tracking.
 
+#### Cookie Extension Service
+
+This allows you to set the endpoint for the [Cookie Extension Service](/docs/sources/trackers/javascript-trackers/web-tracker/browsers/index.md#what-is-a-cookie-extension-service-).
+
 ## Cookie Settings
 
 ### State Storage Strategy
@@ -118,6 +122,10 @@ This setting allows you to specify the SameSite attribute for the Snowplow track
 ### Session Cookie Timeout
 
 This setting allows you to specify the timeout for the session cookie. By default, the session cookie will expire after 30 minutes of inactivity.
+
+### Synchronously Write Cookies
+
+This setting allows you to specify whether the Snowplow tracker should [write cookies synchronously](/docs/sources/trackers/javascript-trackers/web-tracker/configuring-how-events-sent/#synchronous-cookie-writes). By default, the tracker will write cookies asynchronously.
 
 ## Dispatching
 
@@ -158,6 +166,12 @@ This setting allows you to specify the path to which the events will be sent. By
 This setting allows you to specify the maximum size of the payload that will be sent to the collector. By default, the maximum payload size is set to 40000 bytes.
 
 If an event is generated that is over the maximum payload size, the event will bypass the buffer and be sent immediately to the collector. This means that if it fails, it will not be retried.
+
+#### Enable keepalive
+
+This setting allows you to enable or disable the [keepalive](/docs/sources/trackers/javascript-trackers/web-tracker/configuring-how-events-sent/#keepalive-option-for-collector-requests) feature. This will enable requests to continue to be sent, even if the user navigates away from the page that sent the request.
+
+Defaults to `false`.
 
 ## Predefined Contexts
 

@@ -14,9 +14,3 @@ Data structures are used to describe the structure your data should be delivered
 As well as good practice, versioning has an important role in telling Snowplow Loaders how to handle the changes when loading into your data warehouse(s).
 
 For example, for certain changes there will be a need to create new columns, update columns or even create whole new tables. For this reason, it's important you understand when your change is breaking and version correctly.
-
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
-
-<DocCardList />
-```

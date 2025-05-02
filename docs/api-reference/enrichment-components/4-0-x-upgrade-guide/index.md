@@ -37,7 +37,7 @@ In this release, we are adding a way to configure the limits, and we are increas
 * `page_url` limit increased from `4096` to `10000`
 * `page_referrer` limit increased from `4096` to `10000`
 
-Depending on your [configuration](https://docs.snowplow.io/docs/api-reference/enrichment-components/configuration-reference/index.md), this might be a breaking change:
+Depending on your [configuration](/docs/api-reference/enrichment-components/configuration-reference/index.md), this might be a breaking change:
 * If you have `featureFlags.acceptInvalid` set to `true` in Enrich, then you probably don’t need to worry, because you had no validation in the first place (although we do recommend to enable it).
 * If you have `featureFlags.acceptInvalid` set to `false` (default), then previously invalid events might become valid (which is a good thing), and you need to prepare your warehouse for this eventuality:
   * For Redshift, you should resize the respective columns, e.g. to `VARCHAR(1000)` for `mkt_clickid`. If you don’t, Redshift will truncate the values.
@@ -58,7 +58,6 @@ Below is an example of how to configure these limits:
         "mkt_clickid": 100000
         # ...and any other 'atomic' field with custom limit
     }
-  }  
+  }
 }
 ```
-

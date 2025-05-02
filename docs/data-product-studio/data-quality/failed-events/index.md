@@ -5,8 +5,6 @@ sidebar_position: 3
 sidebar_label: "Failed events"
 ---
 
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
+[Failed events](/docs/fundamentals/failed-events/index.md) are events the pipeline had some problem processing (for example, events that did not pass validation).
 
-<DocCardList />
-```
+We provide tooling for [monitoring](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/index.md), [inspecting](/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/index.md), and [recovering](/docs/data-product-studio/data-quality/failed-events/index.md) failed events.

@@ -6,9 +6,3 @@ sidebar_custom_props:
 ---
 
 In this section you can find out more about the Google Tag Manager custom templates for deploying the previous (v2/v3) versions of the Snowplow JavaScript tracker.
-
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
-
-<DocCardList />
-```

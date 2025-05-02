@@ -1,16 +1,16 @@
 ---
-title: "Using the Recovery Builder to design your recovery"
+title: "Using the recovery builder to design your recovery"
 date: "2021-10-13"
-sidebar_label: "Using the Recovery Builder"
+sidebar_label: "Recovery builder"
 sidebar_position: 0
 sidebar_custom_props:
   offerings:
     - bdp
 ---
 
-### What is the Recovery Builder?
+### What is the recovery builder?
 
-The Recovery Builder is a Console based tool that guides you through building a recovery design so that we can recover your data for you.
+The recovery builder is a Console based tool that guides you through building a recovery design so that we can recover your data for you.
 
 :::note This feature is in beta release
 
@@ -18,13 +18,13 @@ This feature is currently in early beta an only available to customers selected 
 
 :::
 
-### When should I use the Recovery Builder?
+### When should I use the recovery builder?
 
 Before you think about a recovery you'll want to ensure you have diagnosed and fixed the problem which is causing the events to fail process.
 
-:::note Recovery Builder limitations
+:::note Recovery builder limitations
 
-Recovery Builder has some limitations which means it cannot design for certain recovery scenarios.
+recovery builder has some limitations which means it cannot design for certain recovery scenarios.
 
 These include:
 
@@ -38,6 +38,6 @@ For these recoveries please log a Support ticket.
 
 ### Do I need to share my data with you?
 
-One of Snowplow's featues is that your data lives in your private cloud and we don't have access to it. The Recovery Builder respects this data privacy boundary.
+One of Snowplow's featues is that your data lives in your private cloud and we don't have access to it. The recovery builder respects this data privacy boundary.
 
 To use it you will paste in or upload some of your raw data but this will never be stored or sent over the internet, everything happens locally in your browser.

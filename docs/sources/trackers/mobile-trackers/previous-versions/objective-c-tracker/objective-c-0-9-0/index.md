@@ -262,7 +262,7 @@ They can be found in the `Examples` folder:
 
 The two Swift apps share the same codebase. The unique difference is in the configuration for the dependency managers.
 
-For general testing, [Snowplow Mini](/docs/api-reference/snowplow-mini/overview/index.md) can be used as an easily deployable collector with a live web interface for viewing received events.
+For general testing, [Snowplow Mini](/docs/api-reference/snowplow-mini/index.md) can be used as an easily deployable collector with a live web interface for viewing received events.
 
 The apps can be run in an emulator or on an actual Apple device through Xcode.
 
@@ -769,11 +769,11 @@ If you want to track the IDFA you need:
 If you add the `AdSupport` framework but you don’t want get the IDFA with the events:
 
 - Disable the IDFA tracking with a preprocessor flag:
-    
+
     1. Go to _Build Settings_ of the imported Snowplow Obj-C Tracker
     2. Search for Preprocessor Macros
     3. Add a macro defined as `SNOWPLOW_NO_IFA=1`
-    
+
     - Remember: it must be added in the Build Settings of the SnowplowTracker framework. If you set it in the app’s Build Settings it won’t work.
 
 The user has the ability to limit ad-tracking from the device’s Settings. If the user enable the limitations the tracker will not be able to track the IDFA.

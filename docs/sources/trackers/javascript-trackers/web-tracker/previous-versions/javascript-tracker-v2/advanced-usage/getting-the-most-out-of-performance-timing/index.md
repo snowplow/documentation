@@ -21,4 +21,3 @@ setTimeout(function () {
 ```
 
 This delays its execution until after those NavigationTiming fields are set.
-For further information, see [Measuring page load times with the performance timing context [tutorial] - Discourse](https://discourse.snowplow.io/t/measuring-page-load-times-with-the-performance-timing-context-tutorial/100)

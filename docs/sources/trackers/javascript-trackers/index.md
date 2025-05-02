@@ -29,9 +29,3 @@ Find the documentation in the [Node.js tracker](/docs/sources/trackers/javascrip
  ---
 
 <p>All three trackers can be found on <a href="https://github.com/snowplow/snowplow-javascript-tracker">Github</a>. The current version is {versions.javaScriptTracker}.</p>
-
-```mdx-code-block
-import DocCardList from '@theme/DocCardList';
-
-<DocCardList />
-```

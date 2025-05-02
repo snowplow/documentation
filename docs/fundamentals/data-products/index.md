@@ -55,7 +55,7 @@ Examples of data products:
 * Provide implementation details to developers implementing tracking (see section on [Snowtype](/docs/data-product-studio/snowtype/index.md) for further details)
 * Provide documentation around the semantics of the data that you are creating, to enable analysts, data scientists, analytics engineers with data discoverability
 
-**Subscribers;** allow colleagues to express an interest in understanding changes that are made to the data within a Data Product, usually because the data is being used in a downstream data model or data application.
+**Subscribers;** allow colleagues to express an interest in understanding changes that are made to the data within a Data Product, usually because the data is being used in a downstream data model or Data Model Pack.
 
 **Benefits:**
 

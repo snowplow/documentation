@@ -1,0 +1,7 @@
+extends: existence
+message: "'Login' is a noun meaning 'credentials'. Do you mean 'log in'?"
+level: warning
+ignorecase: true
+tokens:
+  - login with
+  - login to

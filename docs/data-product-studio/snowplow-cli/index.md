@@ -6,13 +6,13 @@ sidebar_position: 7
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-`snowplow-cli` brings data management elements of Snowplow Console into the command line. It allows you to download your data structures and data products to yaml/json files and publish them back to console. This enables git-ops-like workflows, with reviews and brancing.
+Snowplow CLI brings data management elements of Snowplow Console into the command line. It allows you to download your data structures and data products to yaml/json files and publish them back to console. This enables git-ops-like workflows, with reviews and brancing.
 
 # Install
 
 Snowplow CLI can be installed with [homebrew](https://brew.sh/):
 ```
-brew install snowplow-product/taps/snowplow-cli
+brew install snowplow/taps/snowplow-cli
 ```
 
 Verify the installation with
@@ -20,12 +20,12 @@ Verify the installation with
 snowplow-cli --help
 ```
 
-For systems where homebrew is not available binaries for multiple platforms can be found in [releases](https://github.com/snowplow-product/snowplow-cli/releases).
+For systems where homebrew is not available binaries for multiple platforms can be found in [releases](https://github.com/snowplow/snowplow-cli/releases).
 
 Example installation for `linux_x86_64` using `curl`
 
 ```bash
-curl -L -o snowplow-cli https://github.com/snowplow-product/snowplow-cli/releases/latest/download/snowplow-cli_linux_x86_64
+curl -L -o snowplow-cli https://github.com/snowplow/snowplow-cli/releases/latest/download/snowplow-cli_linux_x86_64
 chmod u+x snowplow-cli
 ```
 

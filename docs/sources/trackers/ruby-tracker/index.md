@@ -17,7 +17,7 @@ The Snowplow Ruby Tracker allows you to track Snowplow events in your Ruby appli
 
 These pages will help you in setting up and using the Ruby tracker. There are more technical details in the [API docs.](https://snowplow.github.io/snowplow-ruby-tracker/SnowplowTracker.html)
 
-As a server-side tracker, the Ruby tracker pairs very well with the JavaScript client-side tracker, if you are tracking events in a website. We've created a [simple demo Rails app](https://github.com/snowplow-incubator/snowplow-ruby-tracker-examples), which incorporates both trackers, and also uses the Singleton pattern that we suggest for the Ruby tracker.
+As a server-side tracker, the Ruby tracker pairs very well with the JavaScript client-side tracker, if you are tracking events in a website. We've created a [simple demo Rails app](https://github.com/snowplow-industry-solutions/snowplow-ruby-tracker-examples), which incorporates both trackers, and also uses the Singleton pattern that we suggest for the Ruby tracker.
 
 At its simplest, the Ruby tracker is used by calling a Tracker object's `track_x_event` method, such as `track_page_view`, which will send the event payload created to the Snowplow event collector.
 

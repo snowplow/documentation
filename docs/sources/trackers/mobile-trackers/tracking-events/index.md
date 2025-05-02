@@ -561,9 +561,7 @@ All events also provide the option for setting a custom timestamp, called `trueT
 
 Snowplow events have several timestamps. The raw event payload always contains a `deviceCreatedTimestamp` (`dtm`) and a `deviceSentTimestamp` (`stm`). Other timestamps are added as the event moves through the pipeline.
 
-Every `Event` in the tracker allows for a custom timestamp, called `trueTimestamp` to be set. Read more about timestamps in [this still relevant forums post](https://discourse.snowplowanalytics.com/t/which-timestamp-is-the-best-to-see-when-an-event-occurred/538).
-
-A `trueTimestamp` can be added to any event using the `trueTimestamp()` method:
+Every `Event` in the tracker allows for a custom timestamp, called `trueTimestamp` to be set. A `trueTimestamp` can be added to any event using the `trueTimestamp()` method:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>

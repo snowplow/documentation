@@ -118,7 +118,7 @@ This is an application that receives raw Snowplow events over HTTP(S), serialize
 
 ## Enrich
 
-This is an application that reads the raw Snowplow events, validates them (including validation against [schemas](/docs/fundamentals/schemas/index.md)), [enriches](/docs/pipeline/enrichments/what-is-enrichment/index.md) them and writes the enriched events to another stream. More details can be found [here](/docs/api-reference/enrichment-components/index.md).
+This is an application that reads the raw Snowplow events, validates them (including validation against [schemas](/docs/fundamentals/schemas/index.md)), [enriches](/docs/pipeline/enrichments/index.md) them and writes the enriched events to another stream. More details can be found [here](/docs/api-reference/enrichment-components/index.md).
 
 <TerraformLinks
   aws="https://registry.terraform.io/modules/snowplow-devops/enrich-kinesis-ec2/aws/latest"

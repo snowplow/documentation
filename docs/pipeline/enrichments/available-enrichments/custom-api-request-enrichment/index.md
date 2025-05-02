@@ -27,7 +27,7 @@ import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_in
 <TestingWithMicro/>
 ```
 
-The example configuration is using imaginary api.acme.com RESTful service to widen Snowplow event with context containing information about users. To find real-world example you can check our extensive tutorial on [Integrating Clearbit data into Snowplow using the API Request Enrichment](https://discourse.snowplow.io/t/integrating-clearbit-data-into-snowplow-using-the-api-request-enrichment/210).
+The example configuration is using an imaginary api.acme.com RESTful service to widen Snowplow event with context containing information about users.
 
 The configuration JSON for this enrichment contains four sub-objects:
 

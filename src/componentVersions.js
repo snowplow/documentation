@@ -38,7 +38,7 @@ export const versions = {
   rdbLoader: '6.1.3',
   s3Loader: '2.2.9',
   s3Loader22x: '2.2.9',
-  lakeLoader: '0.6.2',
+  lakeLoader: '0.6.3',
   snowflakeStreamingLoader: '0.4.1',
 
   // Data Modelling
@@ -78,5 +78,5 @@ export const versions = {
 
   // Testing & debugging
   snowplowMicro: '2.2.0',
-  snowplowMini: '0.22.0',
+  snowplowMini: '0.23.0',
 }

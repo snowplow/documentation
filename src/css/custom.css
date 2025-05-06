@@ -613,8 +613,8 @@ Controls the display of navbar/sidebar items
     minmax(var(--padding-inline), 1fr) [full-width-end];
 }
 
-.theme-doc-markdown  > :not(.breakout, .full-width),
-.full-width > :not(.breakout, .full-width) {
+.theme-doc-markdown  > :not(.breakout, .full-width, .MuiBox-root ),
+.full-width > :not(.breakout, .full-width, .MuiBox-root) {
   grid-column: content;
 }
 

@@ -24,7 +24,7 @@ export default function DocCardList(props) {
         // changed part:
         // * add the item class to the card
         // * propagate description for categories
-        <article key={index} className={`col col--6 max-w-3xl px-10 m-auto margin-bottom--lg ${item.className || ''}`}>
+        <article key={index} className={`col col--6 ${item.className || ''}`}>
           <DocCard item={{...item, description: item.description || item.customProps?.description}} />
         </article>
       ))}

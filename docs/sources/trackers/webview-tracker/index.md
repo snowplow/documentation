@@ -276,11 +276,11 @@ This method is used internally by the WebView plugin. We recommend implementing 
 
 Use this method to track any kind of Snowplow event e.g. a page ping. You will need to define the event name yourself, e.g. "pp" for page ping. It also allows you to set a tracker version, to help distinguish between native and WebView events (e.g. "webview-0.3.0" while the native tracker version might be something like "ios-6.1.0").
 
-| Argument     | Description                                                                                       | Required? |
-| ------------ | ------------------------------------------------------------------------------------------------- | --------- |
-| `properties` | Event properties that are ["baked-in"](/docs/fundamentals/canonical-event/#out-of-the-box-fields) | Yes       |
-| `event`      | An optional self-describing event, with `schema` and `data` properties                            | No        |
-| `context`    | List of context entities as self-describing JSON                                                  | No        |
+| Argument     | Description                                                                                               | Required? |
+| ------------ | --------------------------------------------------------------------------------------------------------- | --------- |
+| `properties` | Event properties that are ["baked-in"](/docs/fundamentals/canonical-event/index.md#out-of-the-box-fields) | Yes       |
+| `event`      | An optional self-describing event, with `schema` and `data` properties                                    | No        |
+| `context`    | List of context entities as self-describing JSON                                                          | No        |
 
 | Event type                 | `eventName`    |
 | -------------------------- | -------------- |

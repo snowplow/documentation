@@ -10,7 +10,7 @@ export const versions = {
   javaTracker: '2.1.0',
   javaScriptTracker: '4.5.0',
   luaTracker: '0.2.0',
-  phpTracker: '0.9.1',
+  phpTracker: '0.9.2',
   pixelTracker: '0.3.0',
   pythonTracker: '1.0.3',
   rokuTracker: '0.2.0',

@@ -213,7 +213,7 @@ Every time the events buffer is flushed we can see if the flush was successful. 
 
 #### Event specific information
 
-If Debug Mode is enabled the emitter begins storing information internally. It stores the HTTP response code and the payload for every request made by the emitter.
+If debug mode is enabled the emitter begins storing information internally. It stores the HTTP response code and the payload for every request made by the emitter.
 
 ```php
 array(

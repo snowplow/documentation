@@ -35,7 +35,7 @@ We've filtered on these two types of errors to reduce noise like bot traffic tha
 
 At the top there is a data quality score that compares the volume of failed events to the volume that were successfully loaded into a data warehouse.
 
-The bar chart shows how the total number of failed events varies over time, color-coding validation and enrichment errors. The time window is 7 days be default but can be extended to 14 or 30 days.
+The bar chart shows how the total number of failed events varies over time, colour-coding validation and enrichment errors. The time window is 7 days be default but can be extended to 14 or 30 days.
 
 In the table, failed events are aggregated by the unique type of failure (validation, enrichment) and the offending schema.
 

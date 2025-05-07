@@ -67,7 +67,7 @@ Vale only checks normal prose. Text that's marked as code—code blocks or in-li
 
 To install the extension, find "[Vale VSCode](https://marketplace.visualstudio.com/items?itemName=ChrisChinchilla.vale-vscode)" in the Extensions Marketplace within VS Code, then click **Install**.
 
-The Vale extension will automatically check files when they're opened or saved. It underlines the flagged sections in different colors, based on the severity of the alert - red for errors, orange for warnings, and blue for suggestions. Mouse-over the underlined section to see the alert message, or check the VS Code **Problems** tab.
+The Vale extension will automatically check files when they're opened or saved. It underlines the flagged sections in different colours, based on the severity of the alert - red for errors, orange for warnings, and blue for suggestions. Mouse-over the underlined section to see the alert message, or check the VS Code **Problems** tab.
 
 ### Vale command-line interface
 

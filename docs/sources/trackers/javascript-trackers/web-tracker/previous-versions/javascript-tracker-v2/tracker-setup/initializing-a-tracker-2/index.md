@@ -473,7 +473,7 @@ When initialising the tracker, you can specify an array of features to skip.
 Full list of features:
 
 - `res` - Screen Resolution
-- `cd` - Screen Color Depth
+- `cd` - Screen Colour Depth
 - `cookie` - Cookie support (if cookies enabled in tracker initialization)
 - `pdf` - PDF MimeType Support (application/pdf)
 - `qt` - Quicktime Video MimeType Support (video/quicktime)

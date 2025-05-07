@@ -105,12 +105,12 @@ products_added_to_cart_feature = Attribute(
 A `View` is a collection of attributes that share a common entity (e.g., session or user). Here's how to create a view with the attributes we defined earlier:
 
 ```python
-from snowplow_signals import View, session_entity
+from snowplow_signals import View, domain_sessionid
 
 my_attribute_view = View(
     name="my_attribute_view",
     version=1,
-    entity=session_entity,
+    entity=domain_sessionid,
      attributes=[
         page_view_count,
         products_added_to_cart_feature,

@@ -38,12 +38,12 @@ Once the `BatchSource` is defined, you can create a `View` by specifying the fie
 
 
 ```python
-from snowplow_signals import View, user_entity, Field
+from snowplow_signals import View, domain_userid, Field
 
 view = View(
     name="ecommerce_transaction_interactions_attributes",
     version=1,
-    entity=user_entity,
+    entity=domain_userid,
     fields=[
         Field(
             name="TOTAL_TRANSACTIONS",

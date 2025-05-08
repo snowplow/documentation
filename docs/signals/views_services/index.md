@@ -40,7 +40,7 @@ To understand what the output of a `View` will look like, use the `test` method 
 ```python
 # Assuming signals object has been instantiated using the Signals() class
 
-test_data = signals.test(
+test_data = sp_signals.test(
     view=my_attribute_view,
     app_ids=["website"] # The app id in your Snowplow Events
 )
@@ -59,12 +59,22 @@ The `View` has the following properties:
 | `entity` | The entity associated with the View | `Entity` |
 | `ttl` | The amount of time this group of attributes lives. If not specified, the entity's ttl is used or the ttl is not limited. | `timedelta` |
 | `batch_source` | The data source for the View | `BatchSource` |
-| `online` | Whether the View is calculated in real-time (`True`) or in the warehouse (`False`)	 | `bool` |
+| `online` | Whether online retrieval is enabled (`True`) or not (`False`) | `bool` |
+| `offline` | Whether the View is calculated in the warehouse (`True`) or in real-time (`False`) | `bool` |
 | `description` | The description of the View | `string` |
 | `tags` | The metadata of the View | `dict` |
 | `owner` | The owner of the feature view, typically the email of the primary maintainer. | `string` |
 | `fields` | The list of table columns that are part of this view during materialization. | `Field` |
 | `attributes` | The list of attributes that will be calculated from events as part of this view. | `Attribute` |
+
+
+### View computation types
+The method of calculating and serving attributes related to a specific View depends on a specific combination of property values, illustrated in the below matrix:
+
+| | Offline = false | Offline = true and has attributes | Offline = True and has no attributes |
+|---|---|---|---|
+| **Online = false** | Attributes are not computed anywhere | Attributes computed through the Batch Engine in the warehouse but not yet materialized | Table pre-computed without Batch Engine and only in the warehouse |
+| **Online = true** | Attributes computed in stream | Attributes computed through the Batch Engine and materialized into Signals | Table materialized into Signals (if it has a batch source configured) |
 
 
 ### Services
@@ -93,7 +103,7 @@ To begin calculating your `Attributes`, you need to apply the `Views` or `Servic
 ```python
 # Assuming signals object has been instantiated using the Signals() class
 
-signals.apply([
+sp_signals.apply([
         my_service,
         my_other_service
     ])
@@ -109,7 +119,7 @@ To access the calculated values, use the `get_online_attributes` method. Here's 
 ```python
 # Assuming signals object has been instantiated using the Signals() class
 
-calculated_values = signals.get_online_attributes(
+calculated_values = sp_signals.get_online_attributes(
     source=my_service,
     identifiers="abc-123",
 )

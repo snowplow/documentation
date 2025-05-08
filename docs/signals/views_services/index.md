@@ -68,7 +68,7 @@ The `View` has the following properties:
 | `attributes` | The list of attributes that will be calculated from events as part of this view. | `Attribute` |
 
 
-### View Computation Types
+### View computation types
 The method of calculating and serving attributes related to a specific View depends on a specific combination of property values, illustrated in the below matrix:
 
 | | Offline = false | Offline = true and has attributes | Offline = True and has no attributes |

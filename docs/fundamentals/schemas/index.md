@@ -117,7 +117,7 @@ After the self section, the remainder of the schema is where you will begin desc
 **“properties”** - Here is where you will describe the fields you intend on collecting. Each field is given a name and a number of arguments, these are important as they feed directly into the validation process.
 
 - **“description”** - Similar to the description field for the schema, this argument is where you should put detailed information on what this field represents to avoid any misunderstanding or misinterpretation during analysis.
-- **"type"** - This denotes the type of data that is collected through this field. The most common types of data collected are `string`, `number`, `integer`, `object`, `array`, `boolean` and `null`. A single field can allow multiple types as shown in the field `job title` in the example schema which allows both `string` and `null`
+- **"type"** - This denotes the type of data that is collected through this field. The most common types of data collected are `string`, `number`, `integer`, `object`, `array`, `boolean` and `null`. A single field can allow multiple types as shown in the field `job role` in the example schema which allows both `string` and `null`
 - Validation arguments can then be passed into the field such as `minLength`, `maxLength` and `enum` for strings and `minimum` and `maximum` for integers. A full set of valid arguments can be found on the [JSON schema specification](https://datatracker.ietf.org/doc/html/draft-fge-json-schema-validation-00#section-5).
 
 **“$supersedes”** / **“$supersededBy”** - _Optional, not shown_. See [marking schemas as superseded](/docs/data-product-studio/data-structures/version-amend/amending/index.md#marking-the-schema-as-superseded).

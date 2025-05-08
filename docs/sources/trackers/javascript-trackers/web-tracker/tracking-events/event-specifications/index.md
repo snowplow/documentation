@@ -15,7 +15,7 @@ The plugin allows you to integrate with Event Specifications for a selected set 
 The plugin will automatically add an Event Specification context to the events matching the configuration added. 
 
 :::note
-The plugin is available since version 3.23 of the tracker.
+The plugin is available since version 3.23 of the tracker and is currently only available for Data Products created using the [Media Web template](/docs/data-product-studio/data-products/data-product-templates/#media-web).
 :::
 
 ## Install plugin

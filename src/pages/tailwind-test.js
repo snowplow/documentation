@@ -14,10 +14,12 @@ import {
   Info
 } from 'lucide-react';
 import { Button } from '../components/ui/button.jsx';
+import Navigation from '../components/ui/navigation.jsx';
 
 export default function TailwindTest() {
   return (
     <Layout title="Tailwind Test Page">
+      <Navigation />
       <main className="container mx-auto px-4 py-8">
         <h1 className="text-4xl font-bold text-blue-600 mb-8 flex items-center gap-2">
           <Home className="w-8 h-8" />

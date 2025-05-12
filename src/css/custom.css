@@ -2,54 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer base {
+/*** Shadcn UI theme */
+ @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --background: 210 20% 98.04%;
+    --foreground: 220.91 39.29% 10.98%;
+    --muted: 220 13.04% 90.98%;
+    --muted-foreground: 220 8.94% 46.08%;
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --popover-foreground: 220.91 39.29% 10.98%;
+    --card: 0 0% 100%;
+    --card-foreground: 220.91 39.29% 10.98%;
+    --border: 220 13.04% 90.98%;
+    --input: 220 13.04% 90.98%;
+    --primary: 261.56 53.33% 47.06%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 100%;
+    --secondary-foreground: 220.91 39.29% 10.98%;
+    --accent: 220 14.29% 95.88%;
+    --accent-foreground: 220.91 39.29% 10.98%;
+    --destructive: 3.96 72.8% 50.98%;
+    --destructive-foreground: 0 0% 100%;
+    --ring: 262.11 53.27% 79.02%;
+    --chart-1: 262.11 53.27% 79.02%;
+    --chart-2: 183.6 84.27% 34.9%;
+    --chart-3: 40.11 80% 54.9%;
+    --chart-4: 339.77 74.78% 54.9%;
+    --chart-5: 220.45 70.08% 50.2%;
     --radius: 0.5rem;
 
     --font-fallback: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif ;
   }
 
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 210 40% 98%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 212.7 26.8% 83.9%;
+  [data-theme='dark'] {
+    --background: 0 0% 1.96%;
+    --foreground: 0 0% 90.2%;
+    --muted: 156 9% 8%;
+    --muted-foreground: 0 0% 60%;
+    --popover: 0 0% 6.27%;
+    --popover-foreground: 0 0% 90.2%;
+    --card: 0 0% 9.8%;
+    --card-foreground: 0 0% 90.2%;
+    --border: 0 0% 13.73%;
+    --input: 0 0% 17.65%;
+    --primary: 258.05 71.93% 66.47%;
+    --primary-foreground: 0 0% 90.2%;
+    --secondary: 0 0% 0%;
+    --secondary-foreground: 0 0% 90.2%;
+    --accent: 0 0% 15.69%;
+    --accent-foreground: 0 0% 60%;
+    --destructive: 3.95 72.93% 44.9%;
+    --destructive-foreground: 0 0% 100%;
+    --ring: 262.11 53.27% 79.02%;
+    --chart-1: 261.82 54.1% 88.04%;
+    --chart-2: 183.75 45.28% 58.43%;
+    --chart-3: 40.27 76.84% 62.75%;
+    --chart-4: 340 73.06% 62.16%;
+    --chart-5: 220.66 71.03% 58.04%;
   }
 }
+
 
 /**
  * Any CSS included here will be global. The classic template
@@ -113,7 +125,7 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-background-color: #f2f4f7;
+  --ifm-background-color: var(--background);
   --ifm-color-primary: #6638b8;
   --ifm-color-primary-dark: #522d93;
   --ifm-color-primary-darker: #472781;
@@ -128,7 +140,7 @@
   --ifm-code-padding-vertical: 0.05rem;
   --ifm-font-family-base: 'Inter18pt-Regular', var(--font-fallback);
   --ifm-menu-color-active: #6638b8;
-  --ifm-font-color-base: #000000;
+  --ifm-font-color-base: var(--foreground);
   --ifm-font-color-base-inverse: rgb(218, 221, 225);
   --ifm-toc-padding-horizontal: 20px;
   --docusaurus-highlighted-code-line-bg: rgba(224, 199, 50, 0.2);
@@ -137,8 +149,11 @@
   --ifm-menu-link-sublist-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24"><path fill="rgb(102, 56, 184)" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>');
 }
 
+
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 [data-theme='dark'] {
+  --ifm-background-color: var(--background );
+
   --ifm-menu-color-active: #b198df;
   --ifm-color-primary: #b198df;
   --ifm-color-primary-dark: #522d93;
@@ -585,3 +600,57 @@ Controls the display of navbar/sidebar items
   grid-gap: 20px;
   padding: 20px;
 }
+
+/*START doc markdown grid layout control */
+.theme-doc-markdown {
+  --padding-inline: 1rem;
+  --content-max-width: 680px;
+  --breakout-max-width: 1200px;
+
+  --breakout-size: calc(
+    (var(--breakout-max-width) - var(--content-max-width)) / 2
+  );
+
+  display: grid;
+  grid-template-columns:
+    [full-width-start] minmax(var(--padding-inline), 1fr)
+    [breakout-start] minmax(0, var(--breakout-size))
+    [content-start] min(
+      100% - (var(--padding-inline) * 2),
+      var(--content-max-width)
+    )
+    [content-end]
+    minmax(0, var(--breakout-size)) [breakout-end]
+    minmax(var(--padding-inline), 1fr) [full-width-end];
+}
+
+.theme-doc-markdown  > :not(.breakout, .full-width),
+.full-width > :not(.breakout, .full-width) {
+  grid-column: content;
+}
+
+.theme-doc-markdown > .breakout, .theme-doc-markdown p img {
+  grid-column: breakout;
+}
+
+.theme-doc-markdown  > .full-width  {
+  grid-column: full-width;
+  display: grid;
+  grid-template-columns: inherit;
+}
+
+img.full-width {
+  width: 100%;
+  max-height: 100vh;
+  object-fit: cover;
+}
+
+/*Control rest of the elements erase after we upgrade */
+.docItemContainer_src-theme-DocItem-Layout-styles-module nav, 
+.docItemContainer_src-theme-DocItem-Layout-styles-module article nav, 
+.docItemContainer_src-theme-DocItem-Layout-styles-module article footer  {
+  max-width: 680px;
+  margin: 3rem auto 0 auto;
+}
+
+/* doc markdown grid layout control END*/

@@ -24,6 +24,8 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 222.2 84% 4.9%;
     --radius: 0.5rem;
+
+    --font-fallback: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif ;
   }
 
   .dark {
@@ -54,46 +56,60 @@
  * bundles Infima by default. Infima is a CSS framework designed to
  * work well for content-centric websites.
  */
-
-@font-face {
-  font-family: 'Rubik';
-  src: url('/fonts/Rubik-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter-Medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Roboto';
-  src: url('/fonts/Roboto-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Roboto';
-  src: url('/fonts/Roboto-Medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Roboto';
-  src: url('/fonts/Roboto-Italic.ttf') format('truetype');
-  font-weight: 400;
+ @font-face {
+  font-family: 'Inter18pt-Bold';
+  src: url('/fonts/Inter18pt-BoldItalic.woff2') format('woff2'),
+      url('/fonts/Inter18pt-BoldItalic.woff') format('woff');
+  font-weight: bold;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-  font-family: 'Roboto';
-  src: url('/fonts/Roboto-MediumItalic.ttf') format('truetype');
-  font-weight: 500;
+  font-family: 'Inter18pt-BoldItalic';
+  src: url('/fonts/Inter18pt-Italic.woff2') format('woff2'),
+      url('/fonts/Inter18pt-Italic.woff') format('woff');
+  font-weight: normal;
   font-style: italic;
+  font-display: swap;
 }
+
+@font-face {
+  font-family: 'Inter18pt-Bold';
+  src: url('/fonts/Inter18pt-Bold.woff2') format('woff2'),
+      url('/fonts/Inter18pt-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter18pt-Regular';
+  src: url('/fonts/Inter18pt-Regular.woff2') format('woff2'),
+      url('/fonts/Inter18pt-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter18pt-Light';
+  src: url('/fonts/Inter18pt-Light.woff2') format('woff2'),
+      url('/fonts/Inter18pt-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter18pt-LightItalic';
+  src: url('/fonts/Inter18pt-LightItalic.woff2') format('woff2'),
+      url('/fonts/Inter18pt-LightItalic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
 
 /* You can override the default Infima variables here. */
 :root {
@@ -110,7 +126,7 @@
   --ifm-color-announcement: #e6f6fe;
   --ifm-code-font-size: 95%;
   --ifm-code-padding-vertical: 0.05rem;
-  --ifm-font-family-base: 'Roboto', Arial, Helvetica, sans-serif;
+  --ifm-font-family-base: 'Inter18pt-Regular', var(--font-fallback);
   --ifm-menu-color-active: #6638b8;
   --ifm-font-color-base: #000000;
   --ifm-font-color-base-inverse: rgb(218, 221, 225);
@@ -185,7 +201,7 @@ button.snowplow-button {
   border: none;
   border-radius: 4px;
 
-  font-family: 'Inter';
+  font-family: 'Inter18pt-Regular', var(--font-fallback);
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -277,30 +293,23 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: 'Rubik';
+  font-family: 'Inter18pt-Bold', var(--font-fallback);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5 {
-  font-weight: 500;
-}
 
 h1 {
-  font-size: 32px;
-  line-height: 40px;
+  font-size: 38px;
+  line-height: 44px;
 }
 
 h2 {
   font-size: 28px;
-  line-height: 36px;
+  line-height: 40px;
 }
 
 h3 {
-  font-size: 24px;
-  line-height: 32px;
+  font-size: 20px;
+  line-height: 24px;
 }
 
 table h1,
@@ -310,7 +319,7 @@ table h3 {
 }
 
 .table-of-contents__left-border {
-  border-left-color: #98a2b3;
+  border-left-color: var(--border);
 }
 
 .theme-doc-sidebar-item-link-level-1.header {
@@ -427,7 +436,7 @@ code {
 input[type='text'],
 input[type='email'],
 textarea {
-  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-family: 'Inter18pt-Regular', var(--font-fallback);
   font-size: 14px;
 }
 

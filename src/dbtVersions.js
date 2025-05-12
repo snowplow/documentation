@@ -1049,6 +1049,12 @@ export const dbtVersions = {
             "packages": {
                 "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0"
             }
+        },
+        "0.17.2": {
+            "dbtversion": ">=1.4.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0"
+            }
         }
     },
     "snowplow/snowplow_web": {

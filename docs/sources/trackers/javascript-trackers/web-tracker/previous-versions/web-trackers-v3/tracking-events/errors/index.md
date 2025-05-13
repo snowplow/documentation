@@ -20,18 +20,18 @@ Error events can be **manually tracked** and/or **automatically tracked**.
   <TabItem value="js" label="JavaScript (tag)" default>
 
 | Tracker Distribution | Included |
-|----------------------|----------|
+| -------------------- | -------- |
 | `sp.js`              | ✅        |
 | `sp.lite.js`         | ❌        |
 
 **Download:**
 
-<table class="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-error-tracking@3/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-error-tracking@3/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a> (latest)</td></tr></tbody></table>
+<table className="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-error-tracking@3/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-error-tracking@3/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a> (latest)</td></tr></tbody></table>
 
 **Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
 
 ```javascript
-window.snowplow('addPlugin', 
+window.snowplow('addPlugin',
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-error-tracking@3/dist/index.umd.min.js",
   ["snowplowErrorTracking", "ErrorTrackingPlugin"]
 );
@@ -48,8 +48,8 @@ window.snowplow('addPlugin',
 import { newTracker } from '@snowplow/browser-tracker';
 import { ErrorTrackingPlugin, enableErrorTracking } from '@snowplow/browser-plugin-error-tracking';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ ErrorTrackingPlugin() ],
 });
 
@@ -103,7 +103,7 @@ trackError({
 </Tabs>
 
 | **Name**   | **Required?** | **Description**                     | **Type**   |
-|------------|---------------|-------------------------------------|------------|
+| ---------- | ------------- | ----------------------------------- | ---------- |
 | `message`  | Yes           | Error message                       | string     |
 | `filename` | No            | Filename or URL                     | string     |
 | `lineno`   | No            | Line number of problem code chunk   | number     |
@@ -183,7 +183,7 @@ enableErrorTracking({
 </Tabs>
 
 | **Name**       | **Required?** | **Description**                 | **Type**                                    |
-|----------------|---------------|---------------------------------|---------------------------------------------|
+| -------------- | ------------- | ------------------------------- | ------------------------------------------- |
 | `filter`       | No            | Predicate to filter exceptions  | `(ErrorEvent) => Boolean`                   |
 | `contextAdder` | No            | Function to get dynamic context | `(ErrorEvent) => Array<SelfDescribingJson>` |
 | context        | No            | Additional custom context       | `Array<SelfDescribingJson>`                 |

@@ -23,7 +23,7 @@ In the tracked events, it can appear either:
     * This is currently the default behavior on Web apps.
     * It is not supported in mobile apps.
     * This is referred to as the default `user_identifier` field in the dbt-snowplow-unified package
-2. As the `userId` property in the `client_session` context entity ([see below](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/user-and-session-identification/index.md#client-session-context-entity)).
+2. As the `userId` property in the `client_session` context entity ([see below](/docs/events/ootb-data/user-and-session-identification/index.md#client-session-context-entity)).
     * This is an optional configuration in the JavaScript tracker for Web apps.
     * It is the default behavior on mobile apps.
     * This is referred to as the default `user_identifier` field in the dbt-snowplow-unified package (used to be referred to as `device_user_id` in our legacy dbt-snowplow-mobile package).
@@ -39,7 +39,7 @@ In case you want to change the default tracking behavior, refer to the following
 * Session tracking on mobile apps [using the iOS and Android trackers](/docs/sources/trackers/mobile-trackers/tracking-events/session-tracking/index.md) or [using the React Native tracker](/docs/sources/trackers/react-native-tracker/tracking-events/session-tracking/index.md).
 
 :::note
-In mobile apps, there are additional on-device identifiers provided by the platform – advertising ID (IDFA) and vendor ID (IDFV, app set ID). These can be tracked [in the mobile context entity](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/device-and-browser/index.md#mobile-context).
+In mobile apps, there are additional on-device identifiers provided by the platform – advertising ID (IDFA) and vendor ID (IDFV, app set ID). These can be tracked [in the mobile context entity](/docs/events/ootb-data/device-and-browser/index.md#mobile-context).
 :::
 
 ### Server (Collector) generated user identifier

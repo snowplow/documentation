@@ -36,7 +36,7 @@ Screen engagement tracking is available for native Android and iOS apps starting
 Screen engagement information is tracked on our mobile trackers in the `screen_summary` context entity.
 The entity is tracked along with these events:
 
-1. `application_foreground` and `application_background` events (see [lifecycle events](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/mobile-lifecycle-events/index.md)).
+1. `application_foreground` and `application_background` events (see [lifecycle events](/docs/events/ootb-data/mobile-lifecycle-events/index.md)).
 2. `screen_end` event (see below).
 
 ### Screen summary entity

@@ -69,7 +69,7 @@ Local storage will only be used if `stateStorageStrategy` is set to `localSto
 
 ## Mapping values to tracker protocol
 
-The values stored in the cookies listed above are mapped into the [tracker protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md) when events are sent to a Snowplow Collector.
+The values stored in the cookies listed above are mapped into the [tracker protocol](/docs/events/index.md) when events are sent to a Snowplow Collector.
 
 The below table shows which parameters the cookie values map to:
 

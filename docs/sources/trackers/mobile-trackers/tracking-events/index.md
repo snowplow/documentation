@@ -60,7 +60,7 @@ The tracker makes it easy to track different kinds of data. We provide a range o
 
 Each event has an associated context, which is composed of entities. The tracker attaches entities to the events based on the configuration, but you can attach your own [custom entities](/docs/sources/trackers/mobile-trackers/custom-tracking-using-schemas/index.md) as well.
 
-Every tracked event payload has a unique `event_id` UUID string set by the tracker, a set of timestamps, and other ubiquitous properties such as the `namespace`. The `event_id` is returned from the `tracker.track(event)` method. You can know more about how events and entities are structured [here](/docs/sources/trackers/snowplow-tracker-protocol/index.md).
+Every tracked event payload has a unique `event_id` UUID string set by the tracker, a set of timestamps, and other ubiquitous properties such as the `namespace`. The `event_id` is returned from the `tracker.track(event)` method. You can know more about how events and entities are structured [here](/docs/events/index.md).
 
 See the full configuration and parameter options for all these classes and methods in the API docs - [Android](https://snowplow.github.io/snowplow-android-tracker/index.html) and [iOS](https://snowplow.github.io/snowplow-ios-tracker/documentation/snowplowtracker/).
 

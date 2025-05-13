@@ -119,7 +119,7 @@ You can change the platform the subject is using by calling:
 s1.setPlatform("cnsl");
 ```
 
-For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md).
+For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/events/index.md).
 
 ### 3.2 Set user ID with `setUserId`
 

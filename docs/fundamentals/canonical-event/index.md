@@ -141,7 +141,7 @@ Some Snowplow Trackers allow the user to name each specific Tracker instance. `n
 
 `domain_sessionidx` is the number of the current user session. For example, an event occurring during a user's first session would have `domain_sessionidx` set to 1. The JavaScript Tracker calculates this field by storing a visit count in a first-party cookie. Whenever the Tracker fires an event, if more than 30 minutes have elapsed since the last event, the visitor count is increased by 1. (Whenever an event is fired, a "session cookie" is created and set to expire in 30 minutes. This is how the Tracker can tell whether the visit count should be incremented.) Thirty minutes is the default value and can be changed using the `sessionCookieTimeout` configuration option in the tracker.
 
-It is worth to call out here that the `domain_userid` is regarded as the most reliable session based identifier for most use cases, it is therefore treated as the primary `user_identifier` field in our data models that rely on sessionisation (e.g. the Unified data model). These are only populated for web events, the mobile equivalent is embedded into an ootb entity called [Session Context Entity](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/user-and-session-identification/index.md#client-session-context-entity) which are then extracted (`session__user_id`) then coalesced with the web based domain_userid by default and being referred to as `user_identifier` within the data modeling package.
+It is worth to call out here that the `domain_userid` is regarded as the most reliable session based identifier for most use cases, it is therefore treated as the primary `user_identifier` field in our data models that rely on sessionisation (e.g. the Unified data model). These are only populated for web events, the mobile equivalent is embedded into an ootb entity called [Session Context Entity](/docs/events/ootb-data/user-and-session-identification/index.md#client-session-context-entity) which are then extracted (`session__user_id`) then coalesced with the web based domain_userid by default and being referred to as `user_identifier` within the data modeling package.
 
 #### Device and operating system fields
 
@@ -156,7 +156,7 @@ It is worth to call out here that the `domain_userid` is regarded as the most re
 | os_family | text| Operating system family| No| 'Linux'| Deprecated | ✅ | ✅ |
 | os_manufacturer | text| Company responsible for OS | No| 'Apple'| Deprecated | ✅ | ✅ |
 
-For more information on this topic please check out the relevant [Tracking Documentation](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/device-and-browser/index.md).
+For more information on this topic please check out the relevant [Tracking Documentation](/docs/events/ootb-data/device-and-browser/index.md).
 #### Location fields
 
 | Field | Type | Description | Reqd? | Example| Source| Web | Mobile|
@@ -170,7 +170,7 @@ For more information on this topic please check out the relevant [Tracking Docum
 | geo_region_name | text | Visitor region name | No| 'Florida'| [IP Enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
 | geo_timezone| text | Visitor timezone name | No| 'Europe/London'| [IP Enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) | ✅ | ✅ |
 
-For more information on this topic please check out the relevant [Tracking Documentation](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/geolocation/index.md).
+For more information on this topic please check out the relevant [Tracking Documentation](/docs/events/ootb-data/geolocation/index.md).
 
 #### IP address-based fields
 
@@ -265,7 +265,7 @@ Fields containing information about the event type.
 | br_viewheight | int | Viewport height| No| 1000 | Tracking | ✅ | ❌ |
 | `br_viewwidth`| int | Viewport width | No| 1000 | Tracking| ✅ | ❌ |
 
-For more information on this topic please check out the relevant [Tracking Documentation](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/device-and-browser/index.md).
+For more information on this topic please check out the relevant [Tracking Documentation](/docs/events/ootb-data/device-and-browser/index.md).
 
 
 ### Event-specific fields
@@ -333,7 +333,7 @@ Fields that start `tr_` relate to the transaction as a whole. Fields that start 
 
 \* Set exclusively by the [Currency conversion enrichment](/docs/pipeline/enrichments/available-enrichments/currency-conversion-enrichment/index.md).
 
-For more information on this topic please check out the relevant [Tracking Documentation](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/ecommerce-events/index.md).
+For more information on this topic please check out the relevant [Tracking Documentation](/docs/events/ootb-data/ecommerce-events/index.md).
 
 #### Structured events
 
@@ -350,7 +350,7 @@ For more information on this topic please check out the relevant [Tracking Docum
 
 \* These fields are only required for `struct` events.
 
-For more information on this topic please check out the relevant [Tracking Documentation](/docs/sources/trackers/snowplow-tracker-protocol/custom-events/structured-events/index.md).
+For more information on this topic please check out the relevant [Tracking Documentation](/docs/events/custom-events/structured-events/index.md).
 
 
 #### Self-describing events
@@ -361,7 +361,7 @@ For each type of self-describing event, there will be a dedicated column (or tab
 
 See [querying data](/docs/destinations/warehouses-lakes/querying-data/index.md#self-describing-events) for more details on the structure and how to query it in different warehouses. You might also want to check [how schema definitions translate to the warehouse](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md).
 
-For more information on this topic please check out the relevant [Tracking Documentation](/docs/sources/trackers/snowplow-tracker-protocol/custom-events/self-describing-events/index.md).
+For more information on this topic please check out the relevant [Tracking Documentation](/docs/events/custom-events/self-describing-events/index.md).
 
 #### Entities
 
@@ -371,7 +371,7 @@ For each type of entity, there will be a dedicated column (or table, in case of 
 
 See [querying data](/docs/destinations/warehouses-lakes/querying-data/index.md#entities) for more details on the structure and how to query it in different warehouses. You might also want to check [how schema definitions translate to the warehouse](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md).
 
-For more information on this topic please check out the relevant [Tracking Documentation](/docs/sources/trackers/snowplow-tracker-protocol/custom-events/context-entities/index.md).
+For more information on this topic please check out the relevant [Tracking Documentation](/docs/events/custom-events/context-entities/index.md).
 
 
 ### Out-of-the-box self-describing events and entities

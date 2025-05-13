@@ -27,7 +27,7 @@ The required attributes of the `Snowplow::create_tracker` method are `namespace`
 
 Subject information are persistent and global information about the tracked device or user. They apply to all events and are assigned as event properties.
 
-The configured attributes are mapped to Snowplow event properties described in the [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md). They are mapped as follows:
+The configured attributes are mapped to Snowplow event properties described in the [Snowplow Tracker Protocol](/docs/events/index.md). They are mapped as follows:
 
 | Attribute         | Event Property   |
 | ----------------- | ---------------- |

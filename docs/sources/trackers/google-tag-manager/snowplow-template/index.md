@@ -3,7 +3,7 @@ title: Snowplow Template
 sidebar_position: 200
 ---
 
-This template implements the [Snowplow JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/index.md) for Google Tag Manager. It allows for the sending of [Snowplow events](docs/sources/trackers/snowplow-tracker-protocol/index.md) from your website to your Snowplow collector.
+This template implements the [Snowplow JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/index.md) for Google Tag Manager. It allows for the sending of [Snowplow events](docs/events/index.md) from your website to your Snowplow collector.
 
 Tag Types are the kinds of events that can be tracked with the Snowplow v4 Tag Template. Each tag type has its own set of options and parameters that can be configured.
 
@@ -217,7 +217,7 @@ The Errors tracker tag provides a way to manually track any errors that occur on
 
 ## Page View
 
-You can provide a `Custom Page Title` if you wish, and you can add a [custom context](/docs/sources/trackers/snowplow-tracker-protocol/custom-events/context-entities/index.md) to the request, as also described [here](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/page-views/index.md#tracking-a-page-view).
+You can provide a `Custom Page Title` if you wish, and you can add a [custom context](/docs/events/custom-events/context-entities/index.md) to the request, as also described [here](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/page-views/index.md#tracking-a-page-view).
 
 If you enable `Page Activity Tracking`, page pings will be sent at intervals that you can specify.
 

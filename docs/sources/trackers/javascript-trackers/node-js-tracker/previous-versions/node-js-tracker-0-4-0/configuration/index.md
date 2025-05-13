@@ -40,7 +40,7 @@ t.setPlatform("mob");
 
 If the platform is not set manually, it defaults to `'srv'` (for server).
 
-For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md#application-parameters).
+For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/events/index.md#application-parameters).
 
 ### Set user ID with `setUserId()`
 

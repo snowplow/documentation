@@ -17,7 +17,7 @@ The tracker provides the following event classes for tracking events out of the 
 | `ScreenViewEvent`     | Tracks the user viewing a screen within the application |
 | `TimingEvent`         | Tracks a timing event                                   |
 
-Snowplow events are all processed into the same format, regardless of the event type (and regardless of the tracker language used). Read about the different properties and fields of events in the [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md).
+Snowplow events are all processed into the same format, regardless of the event type (and regardless of the tracker language used). Read about the different properties and fields of events in the [Snowplow Tracker Protocol](/docs/events/index.md).
 
 ## Custom event context
 

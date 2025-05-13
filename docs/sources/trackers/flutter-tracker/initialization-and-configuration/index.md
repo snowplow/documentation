@@ -103,7 +103,7 @@ Some of the properties are only configurable on iOS and Android and are automati
 | `screenViewport`   | `Size?`   | The screen viewport.                                            | ✔       | ✔   | Non-configurable, auto-assigned. |         |
 | `colorDepth`       | `double?` | The color depth.                                                | ✔       | ✔   | Non-configurable, auto-assigned. |         |
 
-The configured attributes are mapped to Snowplow event properties described in the [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md). They are mapped as follows:
+The configured attributes are mapped to Snowplow event properties described in the [Snowplow Tracker Protocol](/docs/events/index.md). They are mapped as follows:
 
 | Attribute                 | Event Property      |
 |---------------------------|---------------------|

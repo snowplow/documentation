@@ -91,7 +91,7 @@ Notes:
 
 ### `userId`
 
-Specify the optional `"userId"` var to set the uid/user_id  [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md#user-related-parameters) field.
+Specify the optional `"userId"` var to set the uid/user_id  [Snowplow Tracker Protocol](/docs/events/index.md#user-related-parameters) field.
 
 ```javascript
 "vars": {
@@ -101,7 +101,7 @@ Specify the optional `"userId"` var to set the uid/user_id  [Snowplow Tracker Pr
 
 ### `nameTracker`
 
-Specify the optional "nameTracker" var to set the tna/name_tracker [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md#application-parameters) field.
+Specify the optional "nameTracker" var to set the tna/name_tracker [Snowplow Tracker Protocol](/docs/events/index.md#application-parameters) field.
 
 ```javascript
 "vars": {

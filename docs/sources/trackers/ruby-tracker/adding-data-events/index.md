@@ -91,7 +91,7 @@ Your server-side code may not have access to all these parameters, or they might
 
 You could create and define a new Subject for every user or every event you want to track. Attaching that Subject to the `track_x_event` method call would add those properties to your event. Alternatively, you could swap the tracker-associated Subject for a more appropriate one before tracking the event, using `set_subject`.
 
-The following table lists all the properties that can be set via Subject. These are all part of the [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md). Check out the [API docs](https://snowplow.github.io/snowplow-ruby-tracker/SnowplowTracker/Subject.html) for the details of how to set these parameters.
+The following table lists all the properties that can be set via Subject. These are all part of the [Snowplow Tracker Protocol](/docs/events/index.md). Check out the [API docs](https://snowplow.github.io/snowplow-ruby-tracker/SnowplowTracker/Subject.html) for the details of how to set these parameters.
 
 | Property                                   | **Description**                                                   |
 | ------------------------------------------ | ----------------------------------------------------------------- |

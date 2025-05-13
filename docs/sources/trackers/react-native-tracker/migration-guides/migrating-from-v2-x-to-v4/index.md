@@ -42,7 +42,7 @@ Read more [in the documentation here](/docs/sources/trackers/react-native-tracke
 ### Removed geolocation context entity
 
 The geolocation context entity is no longer available to be tracked by the tracker.
-You may track it manually using global context and [the geolocation schema](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/geolocation/index.md#geolocation-context-entity-tracked-in-apps).
+You may track it manually using global context and [the geolocation schema](/docs/events/ootb-data/geolocation/index.md#geolocation-context-entity-tracked-in-apps).
 
 ### Removed exception and diagnostic autotracking
 

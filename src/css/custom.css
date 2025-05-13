@@ -638,6 +638,10 @@ Controls the display of navbar/sidebar items
   display: grid;
   grid-template-columns: inherit;
 }
+/*Tutorial on same grid as rest of ducumentation site */
+.theme-doc-markdown .MuiBox-root {
+    grid-column: 1;
+}
 
 img.full-width {
   width: 100%;

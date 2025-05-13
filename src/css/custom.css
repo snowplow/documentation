@@ -626,15 +626,15 @@ Controls the display of navbar/sidebar items
 
 .theme-doc-markdown  > :not(.breakout, .full-width),
 .full-width > :not(.breakout, .full-width) {
-  grid-column: content;
+  grid-column: 3;
 }
 
 .theme-doc-markdown > .breakout, .theme-doc-markdown p img {
-  grid-column: breakout;
+  grid-column: 2;
 }
 
 .theme-doc-markdown  > .full-width  {
-  grid-column: full-width;
+  grid-column: 1;
   display: grid;
   grid-template-columns: inherit;
 }

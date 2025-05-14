@@ -167,6 +167,8 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/getting-started-on-snowplow-open-source/quick-start-gcp/summary-of-what-you-have-deployed/ /docs/getting-started-on-snowplow-open-source/what-is-deployed/ 301
 /docs/getting-started-on-snowplow-open-source/quick-start-aws/upgrade-guide/ /docs/getting-started-on-snowplow-open-source/upgrade-guide/ 301
 
+/docs/sources/trackers/roku-tracker/video-tracking/ /docs/sources/trackers/roku-tracker/media-tracking/ 301
+
 # Combining JS tracker docs
 /docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/quick-start-guide/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/quick-start-guide/ 301
 /docs/collecting-data/collecting-from-own-applications/javascript-trackers/browser-tracker/cookies-and-local-storage/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/cookies-and-local-storage/ 301

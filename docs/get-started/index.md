@@ -5,12 +5,13 @@ sidebar_label: "Get started"
 description: "Details on where and how Snowplow is deployed"
 ---
 
-You can choose between Snowplow BDP Enterprise (paid, hosted in your cloud), Snowplow BDP Cloud (paid, hosted by Snowplow) and Snowplow Community Edition (free, hosted in your cloud). See the [feature comparison page](/docs/get-started/feature-comparison/index.md) for more information.
+You can choose between Snowplow BDP Enterprise (paid, hosted in your cloud), Snowplow BDP Cloud (paid, hosted by Snowplow), Snowplow Community Edition (free, hosted in your cloud) and Snowplow Local (free, hosted on your local machine for development). See the [feature comparison page](/docs/get-started/feature-comparison/index.md) for more information.
 
 Each offering has its own setup guide:
 * [Snowplow BDP Enterprise](/docs/get-started/snowplow-bdp/index.md)
 * [Snowplow BDP Cloud](/docs/get-started/snowplow-bdp/index.md)
 * [Snowplow Community Edition](/docs/get-started/snowplow-community-edition/index.md)
+* [Snowplow Local](/docs/get-started/snowplow-local/index.md)
 
 ## Snowplow BDP Enterprise
 

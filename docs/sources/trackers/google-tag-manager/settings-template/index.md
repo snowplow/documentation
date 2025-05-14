@@ -88,7 +88,7 @@ See [here](/docs/resources/recipes-tutorials/recipe-anonymous-tracking/index.md)
 
 #### Cookie Extension Service
 
-This allows you to set the endpoint for the [Cookie Extension Service](/docs/sources/trackers/javascript-trackers/web-tracker/browsers/index.md#what-is-a-cookie-extension-service-).
+This allows you to set the endpoint for the [Cookie Extension Service](/docs/events/cookie-extension/index.md).
 
 ## Cookie Settings
 
@@ -184,6 +184,6 @@ Available predefined contexts are:
 | `webPage`                     | Information about the web page where the event occurred.                                                                                 | [Web Page tracking](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/page-views/index.md#webpage-page-view-id-context-entity) |
 | `gaCookies`                   | Information about the Google Analytics cookies.                                                                                          | [Google Analytics Cookies Plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ga-cookies/index.md)                       |
 | `clientHints`                 | Information about the client's device.                                                                                                   | [Client Hints Plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/client-hints/index.md)                                 |
-| `geolocation`                 | Information about the client's geolocation.                                                                                              | [Geolocation](/docs/events/ootb-data/geolocation/index.md)                                                      |
-| `session`                     | Information about the user session.                                                                                                      | [Session](/docs/events/ootb-data/user-and-session-identification/index.md#client-session-context-entity)        |
+| `geolocation`                 | Information about the client's geolocation.                                                                                              | [Geolocation](/docs/events/ootb-data/geolocation/index.md)                                                                                          |
+| `session`                     | Information about the user session.                                                                                                      | [Session](/docs/events/ootb-data/user-and-session-identification/index.md#client-session-context-entity)                                            |
 | `performanceNavigationTiming` | Retrieves data from the [PerformanceNavigationTiming](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceNavigationTiming) API. | [Performance Navigation Timing](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/timings/index.md)                            |

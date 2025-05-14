@@ -28,7 +28,7 @@ This greatly limits the effectiveness of tracking a customer journey where users
 In particular, it affects the `network_userid` identifier in Snowplow events.
 
 Snowplow provides the Cookie Extension service solution that fully mitigates the impact of this change.
-Visit the [documentation for the Cookie Extension service](/docs/sources/trackers/javascript-trackers/web-tracker/browsers/index.md#itp-mitigation) to learn more.
+Visit the [documentation for the Cookie Extension service](/docs/events/cookie-extension/index.md) to learn more.
 
 ## 2. Mitigating the impact of ad-blockers
 

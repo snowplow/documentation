@@ -65,7 +65,7 @@ Similarly, `page_referrer` gets the value from `refr`, which represents the r
 | `refr_urlquery`    | Querystring                  |
 | `refr_urlfragment` | Fragment (anchor)            |
 
-Additionally the derived timestamp is calculated, `derived_tstamp`. See [this blog post](https://snowplowanalytics.com/blog/2015/09/15/improving-snowplows-understanding-of-time/) for more details.
+Additionally the derived timestamp is calculated, `derived_tstamp`. See [Timestamps](/docs/events/timestamps/index.md) for more details.
 
 Finally, contexts, unstructured events and the relevant configurable enrichments (if enabled) are validated against their corresponding JSON schemas and the array of the derived contexts is assembled.
 

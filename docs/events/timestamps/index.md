@@ -20,15 +20,13 @@ The timestamps are:
 | `refr_device_tstamp`  | [Enrich](/docs/api-reference/enrichment-components/index.md)                        | Timestamp extracted from the [cross-domain navigation query string](/docs/pipeline/enrichments/available-enrichments/cross-navigation-enrichment/index.md), if present | ❌             |
 | `load_tstamp`         | [Loader](/docs/destinations/warehouses-lakes/loading-process/index.md) or warehouse | Timestamp when the event was loaded into the warehouse                                                                                                                 | ✅             |
 
-The `load_tstamp` is added either by the Loader or by the warehouse at the point of loading, depending on the Loader/warehouse.
+The `load_tstamp` is added either by the Loader or by the warehouse at the point of loading, depending on the Loader/warehouse. Use this timestamp for incremental processing.
 
 ## Derived timestamp
 
-Snowplow recommends using the `derived_tstamp` as the primary event timestamp for analysis.
+Snowplow recommends using the `derived_tstamp` as the primary event timestamp for analysis. It allows for devices with incorrectly set clocks, or delays in event sending due to network outages.
 
 It's calculated as `collector_tstamp` minus the difference between the `dvce_sent_tstamp` and the `dvce_created_tstamp`. Alternatively, if `true_tstamp` is available, `derived_tstamp` is the same as `true_tstamp`.
-
-This derived timestamp allows for devices with incorrectly set clocks, or delays in event sending due to network outages.
 
 The calculation has two assumptions:
 * We assume that, although `dvce_created_tstamp` and `dvce_sent_tstamp` can both be inaccurate, they're inaccurate in precisely the same way. If the device clock is 15 minutes fast at event creation, then it remains 15 minutes fast at event sending, whenever that might be.

@@ -209,41 +209,41 @@ Create a new HTML page with this content:
 ```html
 <html>
 <body>
-<form class="form-horizontal">
+<form className="form-horizontal">
 <fieldset>
 
 <!-- Form Name -->
 <legend>Form Name</legend>
 
 <!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="form1_first_name">First name</label>
-  <div class="col-md-4">
+<div className="form-group">
+  <label className="col-md-4 control-label" for="form1_first_name">First name</label>
+  <div className="col-md-4">
   <input id="form1_first_name" name="form1_first_name" type="text" placeholder="" class="form-control input-md" required="">
 
   </div>
 </div>
 
 <!-- Text input-->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="form1_contact_number">Contact number</label>
-  <div class="col-md-4">
+<div className="form-group">
+  <label className="col-md-4 control-label" for="form1_contact_number">Contact number</label>
+  <div className="col-md-4">
   <input id="form1_contact_number" name="form1_contact_number" type="text" placeholder="" class="form-control input-md">
 
   </div>
 </div>
 
 <!-- Multiple Checkboxes -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="opt_into_marketing">Receive marketing info?</label>
-  <div class="col-md-4">
-  <div class="checkbox">
+<div className="form-group">
+  <label className="col-md-4 control-label" for="opt_into_marketing">Receive marketing info?</label>
+  <div className="col-md-4">
+  <div className="checkbox">
     <label for="opt_into_marketing-0">
       <input type="checkbox" name="opt_into_marketing" id="opt_into_marketing-0" value="1">
       Yes
     </label>
 	</div>
-  <div class="checkbox">
+  <div className="checkbox">
     <label for="opt_into_marketing-1">
       <input type="checkbox" name="opt_into_marketing" id="opt_into_marketing-1" value="0">
       No
@@ -253,9 +253,9 @@ Create a new HTML page with this content:
 </div>
 
 <!-- Button -->
-<div class="form-group">
-  <label class="col-md-4 control-label" for="button"></label>
-  <div class="col-md-4">
+<div className="form-group">
+  <label className="col-md-4 control-label" for="button"></label>
+  <div className="col-md-4">
     <button id="button" name="button" class="btn btn-primary" onclick="form1submit()">Submit</button>
   </div>
 </div>

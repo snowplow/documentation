@@ -34,7 +34,7 @@ enableGeolocationContext();
 
 ### Functions
 
-<table class="has-fixed-layout"><tbody>
+<table className="has-fixed-layout"><tbody>
 <tr>
 <td><code>enableGeolocationContext</code></td>
 <td>
@@ -49,6 +49,6 @@ enableGeolocationContext();
 
 Adding this plugin will automatically capture the following context:
 
-| Context                                                                                                                                                                                                       | Example                                           |
-|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------|
+| Context                                                                                                                                                                                                      | Example                                           |
+| ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------- |
 | [iglu:com.snowplowanalytics.snowplow/geolocation_context/jsonschema/1-1-0](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/geolocation_context/jsonschema/1-1-0) | ![](images/Screenshot-2021-03-30-at-22.25.13.png) |

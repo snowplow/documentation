@@ -26,8 +26,8 @@ Snowplow automatic form tracking detects three event types: `change_form`, `subm
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 import { FormTrackingPlugin, enableFormTracking } from '@snowplow/browser-plugin-form-tracking';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ FormTrackingPlugin() ],
 });
 
@@ -36,7 +36,7 @@ enableFormTracking();
 
 ### Functions
 
-<table class="has-fixed-layout"><tbody><tr><td><code>enableFormTracking</code></td><td><a href="/docs/sources/trackers/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#enableFormTracking">Documentation</a></td></tr></tbody></table>
+<table className="has-fixed-layout"><tbody><tr><td><code>enableFormTracking</code></td><td><a href="/docs/sources/trackers/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#enableFormTracking">Documentation</a></td></tr></tbody></table>
 
 ### Context
 

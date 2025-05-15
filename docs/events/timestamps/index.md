@@ -34,6 +34,12 @@ The calculation has two assumptions:
 
 ## What timestamp to use?
 
-The choice of timestamp for downstream analysis should be consistent with how the warehouse table is partitioned.
+The choice of timestamp for downstream analysis depends on how you're using the data.
 
-For example, if your warehouse is partitioned by `load_tstamp`, then use clauses like `WHERE load_tstamp > ?` in your analysis.
+For reporting, we recommend using the `derived_tstamp`. Our data models use `derived_tstamp` as the default `start_tstamp` for creating derived tables.
+
+To filter the `atomic.events` table directly, use the timestamp it's partitioned on. For example, if your warehouse is partitioned by `load_tstamp`, then use clauses like `WHERE load_tstamp > ?` in your analysis.
+
+The `refr_device_tstamp` timestamp can help you understand cross-domain navigation by your users.
+
+All of the timestamps can also be used for custom use cases, or in debugging, to closely follow how the events are created and move through the pipeline.

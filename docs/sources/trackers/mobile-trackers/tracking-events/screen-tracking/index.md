@@ -127,8 +127,8 @@ Using the Android `Application.ActivityLifecycleCallbacks` interface, the tracke
 
 Automatic screen view tracking tracks two pieces of information:
 
-- The tracker automatically tracks each screen change using a [`ScreenView` event](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/page-and-screen-view-events/index.md#screen-view-events).
-- If the `TrackerConfiguration.screenContext` property is enabled, the tracker attaches a [`Screen` entity](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/page-and-screen-view-events/index.md#screen-view-events) to all the events tracked by the tracker reporting the last (and probably current) screen visible on device when the event was tracked.
+- The tracker automatically tracks each screen change using a [`ScreenView` event](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-view-events).
+- If the `TrackerConfiguration.screenContext` property is enabled, the tracker attaches a [`Screen` entity](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-view-events) to all the events tracked by the tracker reporting the last (and probably current) screen visible on device when the event was tracked.
 
 The `Screen` entity is conditioned by the internal state of the tracker only. To make an example, if the developer manually tracks a `ScreenView` event, all the following events will have a `Screen` entity attached reporting the same information as the last tracked ScreenView event, even if it was manually tracked and the app is in a different screen.
 
@@ -150,11 +150,11 @@ Concretely, it consists of the following metrics:
 3. Number of list items scrolled out of all list items (requires some manual tracking).
 4. Scroll depth in pixels (requires some manual tracking).
 
-This information is attached using a [`screen_summary` context entity](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/page-activity-tracking/index.md#screen-summary-entity) to the following events:
+This information is attached using a [`screen_summary` context entity](/docs/events/ootb-data/page-activity-tracking/index.md#screen-summary-entity) to the following events:
 
-1. [`screen_end` event](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/page-activity-tracking/index.md#screen-end-event) that is automatically tracked before a new screen view event.
-2. [`application_background` event](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/mobile-lifecycle-events/index.md#background-event).
-3. [`application_foreground` event](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/mobile-lifecycle-events/index.md#foreground-event).
+1. [`screen_end` event](/docs/events/ootb-data/page-activity-tracking/index.md#screen-end-event) that is automatically tracked before a new screen view event.
+2. [`application_background` event](/docs/events/ootb-data/mobile-lifecycle-events/index.md#background-event).
+3. [`application_foreground` event](/docs/events/ootb-data/mobile-lifecycle-events/index.md#foreground-event).
 
 Screen engagement tracking is enabled by default, but can be configured using the `TrackerConfiguration.screenEngagementAutotracking` option.
 

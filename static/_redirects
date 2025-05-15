@@ -378,3 +378,4 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/sources/trackers/actionscript3-tracker/* /docs/sources/trackers/ 301
 /docs/sources/trackers/arduino-tracker/* /docs/sources/trackers/ 301
 /docs/sources/trackers/google-amp-tracker/version-0/* /docs/sources/trackers/google-amp-tracker/ 301
+/docs/sources/trackers/snowplow-tracker-protocol/* /docs/events/:splat 301

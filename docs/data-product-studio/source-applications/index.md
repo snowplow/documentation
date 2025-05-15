@@ -26,7 +26,7 @@ Source Applications are a foundational component that enables you to establish t
 
 ## Application IDs
 
-For each of these applications you would set up a unique application ID using the [app_id](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/app-information/index.md#atomic-event-properties) field to distinguish them later on in analysis.
+For each of these applications you would set up a unique application ID using the [app_id](/docs/events/ootb-data/app-information/index.md#atomic-event-properties) field to distinguish them later on in analysis.
 
 :::tip
 We often see, and recommend as a best practice, setting up a unique application ID for each deployment environment you are using. For example `${appId}-qa` for staging, `${appId}-dev` for development environments.

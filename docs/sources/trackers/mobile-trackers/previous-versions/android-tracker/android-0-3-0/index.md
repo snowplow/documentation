@@ -117,7 +117,7 @@ tracker.setPlatform(DevicePlatforms.{{ Valid Enum Option }})
 
 There are several different DevicePlatforms options to choose from.
 
-For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md).
+For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/events/index.md).
 
 #### 2.3.8 Change the tracker's subject with `setSubject`
 

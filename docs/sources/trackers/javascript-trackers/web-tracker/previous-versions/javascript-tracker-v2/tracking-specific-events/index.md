@@ -661,7 +661,7 @@ This argument is a string taken from the event payload field, `e`.
 | Custom structured event | se |
 | Custom self describing event | ue |
 
-Further information about the event payload can be found in the [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md).
+Further information about the event payload can be found in the [Snowplow Tracker Protocol](/docs/events/index.md).
 
 ##### `eventSchema`
 

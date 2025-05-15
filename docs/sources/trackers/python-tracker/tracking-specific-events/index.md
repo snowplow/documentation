@@ -17,7 +17,7 @@ tracker.track(page_view)
 
 Every tracked event payload has a unique event_id UUID string (`eid`). Other properties include the name_tracker (`namespace`) and `app_id` set when the Tracker was initialized. From version 1 onwards, `tracker.track()` returns the payload's `eid`.
 
-Snowplow events have a defined structure and protocol that is identical regardless of the tracker used. Further information on this structure can be found [here](/docs/sources/trackers/snowplow-tracker-protocol/index.md). 
+Snowplow events have a defined structure and protocol that is identical regardless of the tracker used. Further information on this structure can be found [here](/docs/events/index.md). 
 
 The Python tracker [Github repository](https://github.com/snowplow/snowplow-python-tracker) includes 3 example apps demonstrating different ways to send events to your collector.
 

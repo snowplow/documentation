@@ -12,7 +12,7 @@ To create a new subject:
 $subject = new Subject();
 ```
 
-By default the subject has one piece of information in it already, the [platform](/docs/sources/trackers/snowplow-tracker-protocol/going-deeper/event-parameters/index.md#application-parameters) `["p" => "srv"]`.
+By default the subject has one piece of information in it already, the [platform](/docs/events/going-deeper/event-parameters/index.md#application-parameters) `["p" => "srv"]`.
 
 The Subject class contains a variety of 'set' methods to attach extra data to your event.
 
@@ -66,7 +66,7 @@ For example:
 $subject->setPlatform("tv") # Running on a Connected TV
 ```
 
-For a full list of supported platforms, please see the [Event Parameters reference](/docs/sources/trackers/snowplow-tracker-protocol/going-deeper/event-parameters/index.md#application-parameters).
+For a full list of supported platforms, please see the [Event Parameters reference](/docs/events/going-deeper/event-parameters/index.md#application-parameters).
 
 ### `setUserId`
 

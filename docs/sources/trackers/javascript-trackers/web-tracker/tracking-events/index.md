@@ -108,7 +108,7 @@ trackPageView({
   </TabItem>
 </Tabs>
 
-Every tracked event payload has a unique `event_id` UUID string set by the tracker, a set of timestamps, and other ubiquitous properties such as the `namespace`. You can find out more about how events and entities are structured [here](/docs/sources/trackers/snowplow-tracker-protocol/index.md).
+Every tracked event payload has a unique `event_id` UUID string set by the tracker, a set of timestamps, and other ubiquitous properties such as the `namespace`. You can find out more about how events and entities are structured [here](/docs/events/index.md).
 
 ## Auto-tracked entities
 
@@ -211,13 +211,13 @@ Set the application ID using the `appId` field of the [tracker configuration o
 The option to track the application version was introduced in version 4.1 of the JavaScript tracker.
 :::
 
-Set the application ID using the `appVersion` field of the [tracker configuration object](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). This will be attached to every event the tracker fires using the [application context entity](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/app-information/index.md#application-context-entity-on-web-apps).
+Set the application ID using the `appVersion` field of the [tracker configuration object](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). This will be attached to every event the tracker fires using the [application context entity](/docs/events/ootb-data/app-information/index.md#application-context-entity-on-web-apps).
 
 The version of can be a semver-like structure (e.g 1.1.0) or a Git commit SHA hash.
 
 ### Setting application platform
 
-Set the application platform using the `platform` field of the [tracker configuration object](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). This will be attached to every event the tracker fires. Its default value is “web”. For a list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md#application-parameters).
+Set the application platform using the `platform` field of the [tracker configuration object](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md). This will be attached to every event the tracker fires. Its default value is “web”. For a list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/events/index.md#application-parameters).
 
 ### Setting the user ID
 

@@ -57,7 +57,7 @@ This information can be entered during tracker initialization by passing a `sub
 
 Some subject information is filled automatically by the tracker. This includes the platform of the user, timezone, language, resolution, and viewport.
 
-The following table lists all the properties that can be set in tracker initialization. These are all part of the [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md).
+The following table lists all the properties that can be set in tracker initialization. These are all part of the [Snowplow Tracker Protocol](/docs/events/index.md).
 
 | Property        | Description                             |
 | --------------- | --------------------------------------- |

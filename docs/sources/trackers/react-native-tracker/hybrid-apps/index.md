@@ -19,7 +19,7 @@ Hybrid apps are mobile apps that in addition to a React Native interface, provid
 We recommend using the Web tracker (v4.3+) to forward all Web events to the React Native tracker.
 
 1. Implement the React Native tracker.
-2. Implement the [Snowplow Web/JavaScript tracker](/docs/sources/trackers/javascript-trackers/index.md) in the WebView in your app. Make sure to include the [WebView plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/webview/index.md).
+2. Implement the [Snowplow Web/JavaScript tracker](/docs/sources/trackers/web-trackers/index.md) in the WebView in your app. Make sure to include the [WebView plugin](/docs/sources/trackers/web-trackers/tracking-events/webview/index.md).
 3. Subscribe to WebView event messages.
 
     ```typescript
@@ -34,7 +34,7 @@ We recommend using the Web tracker (v4.3+) to forward all Web events to the Reac
 
 4. Track events as usual.
 
-The Web tracker will automatically intercept all web events and forward them to the React Native tracker. The forwarded events will have the tracker version from Web, e.g. "js-4.1.0", but will otherwise be tracked like the mobile events. They may contain additional information not present in the React Native mobile events, such as a browser useragent string or URL, or Web context entities e.g. the [WebPage entity](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/page-views/index.md#webpage-page-view-id-context-entity).
+The Web tracker will automatically intercept all web events and forward them to the React Native tracker. The forwarded events will have the tracker version from Web, e.g. "js-4.1.0", but will otherwise be tracked like the mobile events. They may contain additional information not present in the React Native mobile events, such as a browser useragent string or URL, or Web context entities e.g. the [WebPage entity](/docs/sources/trackers/web-trackers/tracking-events/page-views/index.md#webpage-page-view-id-context-entity).
 
 The forwarded events are filtered out of the Web tracker event queue so that they are not tracked twice.
 

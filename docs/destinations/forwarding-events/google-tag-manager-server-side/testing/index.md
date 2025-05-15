@@ -34,7 +34,7 @@ Copy the header value (in the example above, `sTjhMcUdkNldaM2RsOThwWTRvNzE3VkZtb
 
 You can add the header value to all or some of your events as an [entity](/docs/fundamentals/entities/index.md).
 
-For example, if you are using the [JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/index.md):
+For example, if you are using the [JavaScript tracker](/docs/sources/trackers/web-trackers/index.md):
 
 ```javascript
 snowplow('trackPageView', {
@@ -48,7 +48,7 @@ snowplow('trackPageView', {
 });
 ```
 
-You can also add it as a [global context](/docs/sources/trackers/javascript-trackers/web-tracker/custom-tracking-using-schemas/global-context/index.md) for all events:
+You can also add it as a [global context](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/global-context/index.md) for all events:
 
 ```javascript
 const gtmPreviewContext = {

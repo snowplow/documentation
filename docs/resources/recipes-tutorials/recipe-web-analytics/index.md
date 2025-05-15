@@ -54,7 +54,7 @@ Furthermore, you can manually reset a session, for example after a conversion, l
 window.snowplow("newSession");
 ```
 
-Go ahead and update the sessionization logic in your tracker implementation if you would like to. More information on the Snowplow session cookie can be found [here](/docs/sources/trackers/javascript-trackers/web-tracker/cookies-and-local-storage/index.md).
+Go ahead and update the sessionization logic in your tracker implementation if you would like to. More information on the Snowplow session cookie can be found [here](/docs/sources/trackers/web-trackers/cookies-and-local-storage/index.md).
 
 ## Modeling sessions
 

@@ -4,7 +4,7 @@ date: "2021-11-18"
 sidebar_position: 100
 ---
 
-This template implements the [Snowplow JavaScript tracker v3](/docs/sources/trackers/javascript-trackers/index.md).
+This template implements the [Snowplow JavaScript tracker v3](/docs/sources/trackers/web-trackers/index.md).
 
 The template supports all the features of the tracker, with a few exceptions due to the limitations of custom templates’ [sandboxed JavaScript](https://developers.google.com/tag-platform/tag-manager/templates/sandboxed-javascript).
 
@@ -14,7 +14,7 @@ To begin with, some of the caveats of using the Custom Template.
 
 - Any methods that require the parsing of HTML elements (e.g. link tracking filter functions, cross domain linking) will not work and are thus disabled.
 - Automatic error tracking does not work due to lack of support for the `ErrorEvent` API.
-- There is no implementation for the [standard ecommerce](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/index.md#ecommerce-tracking) events. Users are encouraged to implement the [enhanced ecommerce](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/index.md#enhanced-ecommerce-tracking) setup instead.
+- There is no implementation for the [standard ecommerce](/docs/sources/trackers/web-trackers/tracking-events/index.md#ecommerce-tracking) events. Users are encouraged to implement the [enhanced ecommerce](/docs/sources/trackers/web-trackers/tracking-events/index.md#enhanced-ecommerce-tracking) setup instead.
 
 ## Instructions
 
@@ -36,7 +36,7 @@ You can also choose to override some of the parameters specifically for this tag
 
 #### Self Hosted JavaScript Tracker
 
-If you have the Snowplow library [self-hosted](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/hosting-the-javascript-tracker/index.md), and have configured it as such in your Settings variable, you need to update the **Injects Scripts** permission to reflect the new location, by editing the **Snowplow Analytics v3 Tag template**. Delete the content of the **Allowed URL Match Patterns** field, and type the full URL to the library there. Again, it must match what you input into the tag itself when creating it.
+If you have the Snowplow library [self-hosted](/docs/sources/trackers/web-trackers/tracker-setup/hosting-the-javascript-tracker/index.md), and have configured it as such in your Settings variable, you need to update the **Injects Scripts** permission to reflect the new location, by editing the **Snowplow Analytics v3 Tag template**. Delete the content of the **Allowed URL Match Patterns** field, and type the full URL to the library there. Again, it must match what you input into the tag itself when creating it.
 
 ![modifying permissions](images/modifying_permissions.png)
 

@@ -17,7 +17,7 @@ These events are sent as HTTP requests to the Snowplow collector that the tracke
 Simply put, what the Snowplow Inspector extension does is parse these HTTP requests into a more easily readable format.
 This allows anyone with the extension to more easily see what actions on a webpage with Snowplow tracking trigger events to be sent to a Snowplow pipeline. 
 
-In the example below two events were fired as HTTP post requests from a test webpage: a [**page_view**](/docs/fundamentals/canonical-event/index.md#page-views) event and a ([self-describing](/docs/fundamentals/events/index.md#self-describing-events)) [**link_click**](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/link-click/index.md) event. 
+In the example below two events were fired as HTTP post requests from a test webpage: a [**page_view**](/docs/fundamentals/canonical-event/index.md#page-views) event and a ([self-describing](/docs/fundamentals/events/index.md#self-describing-events)) [**link_click**](/docs/sources/trackers/web-trackers/tracking-events/link-click/index.md) event. 
 
 ![A screenshot of the Snowplow Inspector extension listing two events observed on the current page. A page_view event is selected, detailing the properties collected as a part of that event.](./images/using-poplin-chrome-extension.png)
 

@@ -21,7 +21,7 @@ After importing the template, you can follow the normal process of creating a **
 
 ## Instructions
 
-The fields in the template provide a UI for setting the tracker configuration parameters. You are thus encouraged to follow [this link](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md) to understand what each individual field does.
+The fields in the template provide a UI for setting the tracker configuration parameters. You are thus encouraged to follow [this link](/docs/sources/trackers/web-trackers/tracker-setup/initialization-options/index.md) to understand what each individual field does.
 
 ### Tracker Name
 

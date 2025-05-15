@@ -35,7 +35,7 @@ This is also what our unified dbt packages does – it provides the information 
 
 In case you want to change the default tracking behavior, refer to the following documentation:
 
-* The initialization options [on the JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md).
+* The initialization options [on the JavaScript tracker](/docs/sources/trackers/web-trackers/tracker-setup/initialization-options/index.md).
 * Session tracking on mobile apps [using the iOS and Android trackers](/docs/sources/trackers/mobile-trackers/tracking-events/session-tracking/index.md) or [using the React Native tracker](/docs/sources/trackers/react-native-tracker/tracking-events/session-tracking/index.md).
 
 :::note
@@ -48,7 +48,7 @@ The Snowplow Collector generates a user identifier that is stored in cookies for
 
 The identifier is available both in Web and mobile apps. However, in Android apps, it is stored in memory so it is reset after the app restarts.
 
-In most scenarios, this identifier may have a longer lifetime than the tracker generated identifier. However, browsers can restrict it's lifetime for different reasons, such as when the Snowplow Collector is on a third-party domain from the website (not recommended), or due to the ITP restrictions in Safari (Snowplow provides a solution to mitigate this problem – [the Cookie Extension service](/docs/sources/trackers/javascript-trackers/web-tracker/browsers/index.md#itp-mitigation)).
+In most scenarios, this identifier may have a longer lifetime than the tracker generated identifier. However, browsers can restrict it's lifetime for different reasons, such as when the Snowplow Collector is on a third-party domain from the website (not recommended), or due to the ITP restrictions in Safari (Snowplow provides a solution to mitigate this problem – [the Cookie Extension service](/docs/sources/trackers/web-trackers/browsers/index.md#itp-mitigation)).
 
 :::info
 `network_userid` is captured via a cookie set by the Snowplow Collector. It can be overriden by setting `tnuid` on a Tracker request payload but is typically expected to be populated by the Collector cookies.
@@ -62,7 +62,7 @@ This is an external identifier given in the tracker by the app. Most commonly it
 The business user identifier is provided under the `user_id` field in the atomic events as well as our dbt packages.
 :::
 
-All our trackers have an API to set this identifier. You can find it in [the JavaScript tracker docs here](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/index.md#setting-the-user-id) and [the mobile trackers docs here](/docs/sources/trackers/mobile-trackers/client-side-properties/index.md#set-the-subjectconfiguration).
+All our trackers have an API to set this identifier. You can find it in [the JavaScript tracker docs here](/docs/sources/trackers/web-trackers/tracking-events/index.md#setting-the-user-id) and [the mobile trackers docs here](/docs/sources/trackers/mobile-trackers/client-side-properties/index.md#set-the-subjectconfiguration).
 
 This identifier can be very useful to stitch the generated tracker identifiers together in order to identify the same user across multiple browsers or devices. See below for more information on user stitching.
 
@@ -112,7 +112,7 @@ In settings where multiple users share the same browser, identity stitching may 
 Because the tracker generated user identifier will be consistent for all sessions from the browser, the stitched user identifier will also be consistent regardless of whether one or more users log in.
 
 In case you want to make sure that after a user logs out, the following events won't be attributed to the same user ID, you can reset the user and session identifiers in the tracker.
-To do this on the JavaScript tracker, make use of the function to [clear user data](/docs/sources/trackers/javascript-trackers/web-tracker/anonymous-tracking/index.md#clear-user-data) 
+To do this on the JavaScript tracker, make use of the function to [clear user data](/docs/sources/trackers/web-trackers/anonymous-tracking/index.md#clear-user-data) 
 (such a feature is not yet available on the mobile trackers).
 Clearing the user data on the tracker will result in new tracker generated user and session identifiers.
 It will not clear the server generated `network_userid` user identifier.
@@ -172,7 +172,7 @@ There are several levels of anonymous tracking that our trackers provide:
 
 #### How to track?
 
-* Anonymous tracking on Web [using the JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/anonymous-tracking/index.md).
+* Anonymous tracking on Web [using the JavaScript tracker](/docs/sources/trackers/web-trackers/anonymous-tracking/index.md).
 * Anonymous tracking in mobile apps [using the iOS and Android trackers](/docs/sources/trackers/mobile-trackers/anonymous-tracking/index.md) and [the React Native tracker](/docs/sources/trackers/react-native-tracker/anonymous-tracking/index.md).
 
 ### PII pseudonymization using enrichment

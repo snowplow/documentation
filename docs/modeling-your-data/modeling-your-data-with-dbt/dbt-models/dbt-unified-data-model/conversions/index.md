@@ -129,7 +129,7 @@ vars:
 <summary>Using a self-describing event and a context name</summary>
 
 
-Using our [Snowplow e-commerce tracking](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md):
+Using our [Snowplow e-commerce tracking](/docs/sources/trackers/web-trackers/tracking-events/ecommerce/index.md):
 
 <Tabs groupId="warehouse" queryString>
 <TabItem value="snowflake" label="Snowflake" default>

@@ -62,7 +62,7 @@ Over the years, it has become more idiomatic to use [entities](/docs/fundamental
 <details>
 <summary>Tracking and storage format</summary>
 
-Snowplow [tracking SDKs](/docs/sources/trackers/index.md) provide a dedicated API for these events. For example, if you want to track a page view using the [JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/quick-start-guide/index.md):
+Snowplow [tracking SDKs](/docs/sources/trackers/index.md) provide a dedicated API for these events. For example, if you want to track a page view using the [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md):
 
 ```javascript
 window.snowplow('trackPageView');
@@ -97,7 +97,7 @@ Structured events have 5 fields:
 <details>
 <summary>Tracking and storage format</summary>
 
-To track a structured event, use one of the [tracking SDKs](/docs/sources/trackers/index.md). For example, with the [JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/quick-start-guide/index.md):
+To track a structured event, use one of the [tracking SDKs](/docs/sources/trackers/index.md). For example, with the [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md):
 
 ```javascript
 snowplow('trackStructEvent', {
@@ -143,7 +143,7 @@ Some self-describing events were predefined by Snowplow and are natively support
 
 To track your own _custom_ self-describing event, e.g. `viewed_product`, **you will first need to define its [schema](/docs/fundamentals/schemas/index.md)** (see [managing data structures](/docs/data-product-studio/data-structures/manage/index.md)). This schema might have fields such as `productId`, `brand`, etc.
 
-Then you can use one of our [tracking SDKs](/docs/sources/trackers/index.md). For example, with the [JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/quick-start-guide/index.md):
+Then you can use one of our [tracking SDKs](/docs/sources/trackers/index.md). For example, with the [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md):
 
 ```javascript
 window.snowplow('trackSelfDescribingEvent', {

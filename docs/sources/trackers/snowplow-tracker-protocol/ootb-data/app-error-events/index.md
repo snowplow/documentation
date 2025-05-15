@@ -30,5 +30,5 @@ All tracked events are self-describing events that follow the `application_error
 Both our Web and mobile trackers provide an automatic exception tracking feature.
 Visit the following links to learn more about error tracking:
 
-1. On Web, using the [error tracking plugin for the JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/errors/index.md)
+1. On Web, using the [error tracking plugin for the JavaScript tracker](/docs/sources/trackers/web-trackers/tracking-events/errors/index.md)
 2. [iOS and Android tracking documentation](/docs/sources/trackers/mobile-trackers/tracking-events/exception-tracking/index.md).

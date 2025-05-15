@@ -42,7 +42,7 @@ This is an optional feature on the JavaScript tracker that adds browser informat
 
 #### How to track?
 
-[See the JavaScript tracker documentation](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/index.md#auto-tracked-entities) to learn how to configure the context entity.
+[See the JavaScript tracker documentation](/docs/sources/trackers/web-trackers/tracking-events/index.md#auto-tracked-entities) to learn how to configure the context entity.
 
 ### Mobile context
 

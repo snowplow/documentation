@@ -3,7 +3,7 @@ title: Snowplow Template
 sidebar_position: 200
 ---
 
-This template implements the [Snowplow JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/index.md) for Google Tag Manager. It allows for the sending of [Snowplow events](docs/sources/trackers/snowplow-tracker-protocol/index.md) from your website to your Snowplow collector.
+This template implements the [Snowplow JavaScript tracker](/docs/sources/trackers/web-trackers/index.md) for Google Tag Manager. It allows for the sending of [Snowplow events](docs/sources/trackers/snowplow-tracker-protocol/index.md) from your website to your Snowplow collector.
 
 Tag Types are the kinds of events that can be tracked with the Snowplow v4 Tag Template. Each tag type has its own set of options and parameters that can be configured.
 
@@ -192,7 +192,7 @@ The following Enhanced Ecommerce plugin has been deprecated in favor of the [Sno
 
 The Enhanced Ecommerce tag is used to track ecommerce events, such as product views, add to cart, and purchases.
 
-When you select [Enhanced Ecommerce](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce/enhanced/index.md), you are left with two options: Use Data Layer or Choose Variable. The way it works is very similar to Enhanced Ecommerce in Google Analytics.
+When you select [Enhanced Ecommerce](/docs/sources/trackers/web-trackers/tracking-events/ecommerce/enhanced/index.md), you are left with two options: Use Data Layer or Choose Variable. The way it works is very similar to Enhanced Ecommerce in Google Analytics.
 
 If you choose the first, the template will look into the `dataLayer` structure for the most recently pushed [Enhanced Ecommerce object](https://www.simoahava.com/analytics/enhanced-ecommerce-guide-for-google-tag-manager/#data-types-actions), and map this object to the request to Snowplow Analytics.
 
@@ -217,11 +217,11 @@ The Errors tracker tag provides a way to manually track any errors that occur on
 
 ## Page View
 
-You can provide a `Custom Page Title` if you wish, and you can add a [custom context](/docs/sources/trackers/snowplow-tracker-protocol/custom-events/context-entities/index.md) to the request, as also described [here](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/page-views/index.md#tracking-a-page-view).
+You can provide a `Custom Page Title` if you wish, and you can add a [custom context](/docs/sources/trackers/snowplow-tracker-protocol/custom-events/context-entities/index.md) to the request, as also described [here](/docs/sources/trackers/web-trackers/tracking-events/page-views/index.md#tracking-a-page-view).
 
 If you enable `Page Activity Tracking`, page pings will be sent at intervals that you can specify.
 
-The `Callback Function` is something you can set to a JavaScript function. If you set the callback, then instead of sending the page ping to Snowplow, the function gets invoked instead. See the [JavaScript tracker documentation](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/activity-page-pings/index.md#activity-tracking-callback) for more information.
+The `Callback Function` is something you can set to a JavaScript function. If you set the callback, then instead of sending the page ping to Snowplow, the function gets invoked instead. See the [JavaScript tracker documentation](/docs/sources/trackers/web-trackers/tracking-events/activity-page-pings/index.md#activity-tracking-callback) for more information.
 
 
 
@@ -237,7 +237,7 @@ If you check `Track HTML Content Of Clicked Link`, then the full text content of
 
 :::note
 
-This setting enables the tracker's native [Link Click Tracking plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/link-click/index.md), it does not directly fire an event.
+This setting enables the tracker's native [Link Click Tracking plugin](/docs/sources/trackers/web-trackers/tracking-events/link-click/index.md), it does not directly fire an event.
 
 :::
 
@@ -249,7 +249,7 @@ Denylists and allowlists for forms are a list of comma-separated HTML class name
 
 For fields, denylists and allowlists work similarly, except they use the `name` attribute rather than the class.
 
-Note that this tag enables the tracker's native [Form Tracking plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/form-tracking/index.md), it does not directly fire an event.
+Note that this tag enables the tracker's native [Form Tracking plugin](/docs/sources/trackers/web-trackers/tracking-events/form-tracking/index.md), it does not directly fire an event.
 It is intended to trigger [early on a page](https://support.google.com/tagmanager/answer/7679319) to begin listening for form events, _not_ to trigger on form events like [Form Submit Triggers](https://support.google.com/tagmanager/answer/7679217).
 
 ## Custom commands
@@ -274,7 +274,7 @@ For a list of available commands, consult the [API documentation](https://github
 
 ### Add custom context entities
 
-Using the Context Entities table allows you to attach [custom context entities](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/index.md#custom-context) to the Snowplow event. Each row should be set to a variable value that must be an array of custom context objects that will all be concatenated to add to the Event.
+Using the Context Entities table allows you to attach [custom context entities](/docs/sources/trackers/web-trackers/tracking-events/index.md#custom-context) to the Snowplow event. Each row should be set to a variable value that must be an array of custom context objects that will all be concatenated to add to the Event.
 
 For example to manually attach the web page context, create a custom JavaScript variable that returns an array with the custom context object:
 
@@ -296,22 +296,22 @@ Then set this variable as the value in the Context Entities table.
 
 ### Set Custom Timestamp
 
-You can also choose to [set the True Timestamp](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/index.md#adding-custom-timestamps-to-events) with this field. The format must be UNIX time in milliseconds.
+You can also choose to [set the True Timestamp](/docs/sources/trackers/web-trackers/tracking-events/index.md#adding-custom-timestamps-to-events) with this field. The format must be UNIX time in milliseconds.
 
 ## Parameter Object
 
 Tags that can derive their parameters from a Google Tag Manager variable are:
 
-- [Ad Tracking](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ads/index.md)
-- [Cart Tracking](/docs/sources/trackers/javascript-trackers/web-tracker/previous-versions/web-trackers-v3/tracking-events/ecommerce/original/index.md)
-- [Error Tracking](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/errors/index.md)
-- [Self-describing Event](/docs/sources/trackers/javascript-trackers/web-tracker/custom-tracking-using-schemas/index.md#tracking-a-custom-event-self-describing)
-- [Site Search](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/site-search/index.md)
-- [Social Interaction](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/social-media/index.md)
+- [Ad Tracking](/docs/sources/trackers/web-trackers/tracking-events/ads/index.md)
+- [Cart Tracking](/docs/sources/trackers/web-trackers/previous-versions/web-trackers-v3/tracking-events/ecommerce/original/index.md)
+- [Error Tracking](/docs/sources/trackers/web-trackers/tracking-events/errors/index.md)
+- [Self-describing Event](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/index.md#tracking-a-custom-event-self-describing)
+- [Site Search](/docs/sources/trackers/web-trackers/tracking-events/site-search/index.md)
+- [Social Interaction](/docs/sources/trackers/web-trackers/tracking-events/social-media/index.md)
 - [Structured Event](/docs/fundamentals/events/index.md#structured-events)
-- [Timing](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/timings/generic/index.md)
+- [Timing](/docs/sources/trackers/web-trackers/tracking-events/timings/generic/index.md)
 
-You can set the Retrieve Parameters From Variable setting to a Google Tag Manager variable. This parameter _must_ return an object. In the object, the key-value pairs should reflect the named parameters in the [event documentation](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/index.md). For example, to have the variable populate an [Error event](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/index.md#error-tracking), you could use a Custom JavaScript variable like this:
+You can set the Retrieve Parameters From Variable setting to a Google Tag Manager variable. This parameter _must_ return an object. In the object, the key-value pairs should reflect the named parameters in the [event documentation](/docs/sources/trackers/web-trackers/tracking-events/index.md). For example, to have the variable populate an [Error event](/docs/sources/trackers/web-trackers/tracking-events/index.md#error-tracking), you could use a Custom JavaScript variable like this:
 
 ```javascript
 function() {
@@ -329,4 +329,4 @@ Alternatively, you can set the drop-down to the value `No`, and add the paramete
 
 ![adding parameters manually](images/adding_parameters_manually.png)
 
-Some tag types will add additional selections to this section. Follow the [official tracker documentation](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/index.md) for more information about what each option does.
+Some tag types will add additional selections to this section. Follow the [official tracker documentation](/docs/sources/trackers/web-trackers/tracking-events/index.md) for more information about what each option does.

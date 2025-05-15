@@ -16,7 +16,7 @@ Our Video and Media Analytics visualization helps you visualize insights on your
 
 - Running the [Snowplow Media dbt Package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md)
 - Access to the derived tables granted to the role used when setting up the visualization
-- Media events tracked using the media APIs for the [JavaScript (Media plugins)](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/index.md) or [mobile trackers](/docs/sources/trackers/mobile-trackers/tracking-events/media-tracking/index.md). Note that there are multiple JavaScript tracker media plugins available. Implementation of a v2 plugin is required for this visualization to work as intended.
+- Media events tracked using the media APIs for the [JavaScript (Media plugins)](/docs/sources/trackers/web-trackers/tracking-events/media/index.md) or [mobile trackers](/docs/sources/trackers/mobile-trackers/tracking-events/media-tracking/index.md). Note that there are multiple JavaScript tracker media plugins available. Implementation of a v2 plugin is required for this visualization to work as intended.
 
 ## Usage
 

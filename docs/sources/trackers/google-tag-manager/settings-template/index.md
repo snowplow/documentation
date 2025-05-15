@@ -23,7 +23,7 @@ This needs to be set to the hostname/domain (e.g. `sp.domain.com`) on which youâ
 
 ### Snowplow JavaScript Tracker Library
 
-This determines the source of the Snowplow JavaScript tracker library. You can choose to load the tracker from a CDN or host it on your own server. For production usage, we recommend [self-hosting the tracker](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/hosting-the-javascript-tracker/index.md).
+This determines the source of the Snowplow JavaScript tracker library. You can choose to load the tracker from a CDN or host it on your own server. For production usage, we recommend [self-hosting the tracker](/docs/sources/trackers/web-trackers/tracker-setup/hosting-the-javascript-tracker/index.md).
 
 ### Self-Hosted Library URL
 
@@ -88,7 +88,7 @@ See [here](/docs/resources/recipes-tutorials/recipe-anonymous-tracking/index.md)
 
 #### Cookie Extension Service
 
-This allows you to set the endpoint for the [Cookie Extension Service](/docs/sources/trackers/javascript-trackers/web-tracker/browsers/index.md#what-is-a-cookie-extension-service-).
+This allows you to set the endpoint for the [Cookie Extension Service](/docs/sources/trackers/web-trackers/browsers/index.md#what-is-a-cookie-extension-service-).
 
 ## Cookie Settings
 
@@ -107,7 +107,7 @@ This setting allows you to specify the domain for which the Snowplow tracker coo
 
 By default, `auto` will be used, which will set the domain to the root domain.
 
-See [here](/docs/sources/trackers/javascript-trackers/web-tracker/cookies-and-local-storage/configuring-cookies/index.md#cookie-domain) for more information.
+See [here](/docs/sources/trackers/web-trackers/cookies-and-local-storage/configuring-cookies/index.md#cookie-domain) for more information.
 
 ### Cookie Lifetime
 
@@ -125,7 +125,7 @@ This setting allows you to specify the timeout for the session cookie. By defaul
 
 ### Synchronously Write Cookies
 
-This setting allows you to specify whether the Snowplow tracker should [write cookies synchronously](/docs/sources/trackers/javascript-trackers/web-tracker/configuring-how-events-sent/index.md#synchronous-cookie-writes). By default, the tracker will write cookies asynchronously.
+This setting allows you to specify whether the Snowplow tracker should [write cookies synchronously](/docs/sources/trackers/web-trackers/configuring-how-events-sent/index.md#synchronous-cookie-writes). By default, the tracker will write cookies asynchronously.
 
 ## Dispatching
 
@@ -169,7 +169,7 @@ If an event is generated that is over the maximum payload size, the event will b
 
 #### Enable keepalive
 
-This setting allows you to enable or disable the [keepalive](/docs/sources/trackers/javascript-trackers/web-tracker/configuring-how-events-sent/index.md#keepalive-option-for-collector-requests) feature. This will enable requests to continue to be sent, even if the user navigates away from the page that sent the request.
+This setting allows you to enable or disable the [keepalive](/docs/sources/trackers/web-trackers/configuring-how-events-sent/index.md#keepalive-option-for-collector-requests) feature. This will enable requests to continue to be sent, even if the user navigates away from the page that sent the request.
 
 Defaults to `false`.
 
@@ -181,9 +181,9 @@ Available predefined contexts are:
 
 | Name                          | Description                                                                                                                              | Source Plugin                                                                                                                                       |
 | ----------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `webPage`                     | Information about the web page where the event occurred.                                                                                 | [Web Page tracking](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/page-views/index.md#webpage-page-view-id-context-entity) |
-| `gaCookies`                   | Information about the Google Analytics cookies.                                                                                          | [Google Analytics Cookies Plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ga-cookies/index.md)                       |
-| `clientHints`                 | Information about the client's device.                                                                                                   | [Client Hints Plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/client-hints/index.md)                                 |
+| `webPage`                     | Information about the web page where the event occurred.                                                                                 | [Web Page tracking](/docs/sources/trackers/web-trackers/tracking-events/page-views/index.md#webpage-page-view-id-context-entity) |
+| `gaCookies`                   | Information about the Google Analytics cookies.                                                                                          | [Google Analytics Cookies Plugin](/docs/sources/trackers/web-trackers/tracking-events/ga-cookies/index.md)                       |
+| `clientHints`                 | Information about the client's device.                                                                                                   | [Client Hints Plugin](/docs/sources/trackers/web-trackers/tracking-events/client-hints/index.md)                                 |
 | `geolocation`                 | Information about the client's geolocation.                                                                                              | [Geolocation](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/geolocation/index.md)                                                      |
 | `session`                     | Information about the user session.                                                                                                      | [Session](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/user-and-session-identification/index.md#client-session-context-entity)        |
-| `performanceNavigationTiming` | Retrieves data from the [PerformanceNavigationTiming](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceNavigationTiming) API. | [Performance Navigation Timing](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/timings/index.md)                            |
+| `performanceNavigationTiming` | Retrieves data from the [PerformanceNavigationTiming](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceNavigationTiming) API. | [Performance Navigation Timing](/docs/sources/trackers/web-trackers/tracking-events/timings/index.md)                            |

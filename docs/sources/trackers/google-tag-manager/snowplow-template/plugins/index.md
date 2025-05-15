@@ -3,7 +3,7 @@ title: "Plugins"
 sidebar_position: 200
 ---
 
-Plugins are supported to provide an easy way to extend the functionality of the tracker. This is similar to the [JavaScript Tracker](/docs/sources/trackers/javascript-trackers/web-tracker/plugins/creating-your-own-plugins/index.md) but with the caveat that plugins may be more limited in their functionality due to the constraints of the Google Tag Manager environment.
+Plugins are supported to provide an easy way to extend the functionality of the tracker. This is similar to the [JavaScript Tracker](/docs/sources/trackers/web-trackers/plugins/creating-your-own-plugins/index.md) but with the caveat that plugins may be more limited in their functionality due to the constraints of the Google Tag Manager environment.
 
 Each plugin can be loaded from external URLs or provided inline within GTM, and can optionally take some custom configuration.
 A plugin may add new methods to the tracker that can be called via [Custom Commands](#custom-commands).
@@ -39,7 +39,7 @@ This is usually acceptable as the browser will have cached the first request; if
 
 The name of the plugin to load. These values can be found on the respective plugin documentation.
 
-For example, for the `Link Click Tracking` plugin, the values (`'snowplowLinkClickTracking,LinkClickTrackingPlugin'`) can be found in the snippet [here](https://docs.snowplow.io/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/link-click/#enable-link-click-tracking).
+For example, for the `Link Click Tracking` plugin, the values (`'snowplowLinkClickTracking,LinkClickTrackingPlugin'`) can be found in the snippet [here](https://docs.snowplow.io/docs/sources/trackers/web-trackers/tracking-events/link-click/#enable-link-click-tracking).
 
 ### Additional Configuration (optional)
 
@@ -64,10 +64,10 @@ It is not possible to pass a single `null`, `undefined`, or empty string value a
 
 ## Custom plugins
 
-[Inline plugins](/docs/sources/trackers/javascript-trackers/web-tracker/plugins/creating-your-own-plugins/index.md#inline-plugins) are plugins that don't require being fetched from an external file to load.
+[Inline plugins](/docs/sources/trackers/web-trackers/plugins/creating-your-own-plugins/index.md#inline-plugins) are plugins that don't require being fetched from an external file to load.
 
 You can create Inline plugins in GTM by using Custom JavaScript Variables in the `Plugin URL` field.
-The Variable should return an Object with a method that returns another Object meeting the [plugin interface](/docs/sources/trackers/javascript-trackers/web-tracker/plugins/creating-your-own-plugins/index.md#plugin-interface) (any other methods on the outer Object will become tracker methods).
+The Variable should return an Object with a method that returns another Object meeting the [plugin interface](/docs/sources/trackers/web-trackers/plugins/creating-your-own-plugins/index.md#plugin-interface) (any other methods on the outer Object will become tracker methods).
 
 For `Plugin Configuration`, the UI enforces the comma-seperated values syntax required for external plugins and unconditionally calls `.split(',')` on the string.
 The tracker requires that for inline-plugins only a single string may be used.

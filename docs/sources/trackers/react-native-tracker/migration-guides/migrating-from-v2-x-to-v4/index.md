@@ -32,7 +32,7 @@ The session context entity can still be removed using the `sessionContext` optio
 
 ### GDPR configuration not available
 
-We have deprecated and removed the GPDR configuration. As a more up-to-date replacement, one can make use of the [consent plugins available for the JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/consent-gdpr/index.md).
+We have deprecated and removed the GPDR configuration. As a more up-to-date replacement, one can make use of the [consent plugins available for the JavaScript tracker](/docs/sources/trackers/web-trackers/tracking-events/consent-gdpr/index.md).
 
 ### Application context is not tracked automatically
 

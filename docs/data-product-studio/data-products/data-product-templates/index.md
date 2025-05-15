@@ -20,16 +20,16 @@ Below is a list of the current templates:
 
 ### Base Web
 
-This Data Product template contains all the tracking of Standard Events related to web tracking. It is expected that these events would be implemented using our [Web trackers](/docs/sources/trackers/javascript-trackers/web-tracker/index.md) and the respective [button click](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/button-click/index.md) and [link click](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/link-click/index.md) plugins.
+This Data Product template contains all the tracking of Standard Events related to web tracking. It is expected that these events would be implemented using our [Web trackers](/docs/sources/trackers/web-trackers/index.md) and the respective [button click](/docs/sources/trackers/web-trackers/tracking-events/button-click/index.md) and [link click](/docs/sources/trackers/web-trackers/tracking-events/link-click/index.md) plugins.
 
 Note: The event volume counts are calculated differently for this Data Product. They are counts of any of the following events sent for the app ID's of this data product.
 
 Included event specifications:
 
-* [Page View](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/page-views/index.md)
-* [Page Ping](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/activity-page-pings/index.md)
-* [Button click](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/button-click/index.md)
-* [Link click](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/link-click/index.md)
+* [Page View](/docs/sources/trackers/web-trackers/tracking-events/page-views/index.md)
+* [Page Ping](/docs/sources/trackers/web-trackers/tracking-events/activity-page-pings/index.md)
+* [Button click](/docs/sources/trackers/web-trackers/tracking-events/button-click/index.md)
+* [Link click](/docs/sources/trackers/web-trackers/tracking-events/link-click/index.md)
 
 ### Base Mobile
 
@@ -49,7 +49,7 @@ Included event specifications:
 
 This Data Product template contains all the basic e-commerce interactions that help you analyze customer behavior, identify potential growth opportunities, and improve your sales performance.
 
-Tracked using the [out-of-the-box e-commerce events](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/ecommerce-events/index.md) for web, Android, and iOS. On web, this requires the [Snowplow Ecommerce plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md).
+Tracked using the [out-of-the-box e-commerce events](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/ecommerce-events/index.md) for web, Android, and iOS. On web, this requires the [Snowplow Ecommerce plugin](/docs/sources/trackers/web-trackers/tracking-events/ecommerce/index.md).
 
 Included event specifications:
 
@@ -68,7 +68,7 @@ Included event specifications:
 ### Media Web
 
 This Data Product template contains a full set of media tracking interactions to measure video or audio data.
-Tracked using the [Snowplow Media plugin](https://docs.snowplow.io/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/snowplow/).
+Tracked using the [Snowplow Media plugin](https://docs.snowplow.io/docs/sources/trackers/web-trackers/tracking-events/media/snowplow/).
 
 Included event specifications:
 

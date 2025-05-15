@@ -96,7 +96,7 @@ The platform ID is used to distinguish the same app running on different platfor
 | dvce_created_tstamp| timestamp | Timestamp for the event recorded on the client device| No| '2013-11-26 00:03:57.885' | Tracking | ✅ | ✅ |
 | dvce_sent_tstamp | timestamp | When the event was actually sent by the client device| No| '2013-11-26 00:03:58.032' | Tracking | ✅ | ✅ |
 | etl_tstamp | timestamp | Timestamp for when the event was validated and enriched. Note: the name is historical and does not mean that the event is loaded at this point (this is further downstream). | No| '2017-01-26 00:01:25.292' | Pipeline | ✅ | ✅ |
-| os_timezone | text| Client operating system timezone | No| 'Europe/London' | Tracking: [Timezone Plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/timezone-geolocation/index.md)| ✅ | ✅ |
+| os_timezone | text| Client operating system timezone | No| 'Europe/London' | Tracking: [Timezone Plugin](/docs/sources/trackers/web-trackers/tracking-events/timezone-geolocation/index.md)| ✅ | ✅ |
 | derived_tstamp | timestamp | Timestamp making allowance for inaccurate device clock | No| '2013-11-26 00:02:04' | Default Enrichment | ✅ | ✅ |
 | true_tstamp| timestamp | User-set "true timestamp" for the event| No| '2013-11-26 00:02:04' | Tracking | ✅ | ✅ |
 | load_tstamp| timestamp | Timestamp for when the data was loaded into the warehouse, best choice for incremental processing| No| '2013-11-26 00:02:04' | Pipeline | ✅ | ✅ |

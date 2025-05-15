@@ -12,7 +12,7 @@ import Badges from '@site/src/components/Badges';
 
 The Snowplow Python Tracker allows you to track Snowplow events from your Python apps and games.
 
-The tracker should be straightforward to use if you are comfortable with Python development; any prior experience with Snowplow's [JavaScript Tracker](/docs/sources/trackers/javascript-trackers/index.md), Google Analytics or Mixpanel (which have similar APIs to Snowplow) is helpful but not necessary.
+The tracker should be straightforward to use if you are comfortable with Python development; any prior experience with Snowplow's [JavaScript Tracker](/docs/sources/trackers/web-trackers/index.md), Google Analytics or Mixpanel (which have similar APIs to Snowplow) is helpful but not necessary.
 
 There are three basic types of objects you will create when using the Snowplow Python Tracker: subjects, emitters, and trackers.
 

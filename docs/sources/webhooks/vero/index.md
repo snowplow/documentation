@@ -51,7 +51,7 @@ If you want, you can also manually override the event's `platform` parameter b
 http://<collector host>/com.getvero/v1?p=<platform code>
 ```
 
-Supported platform codes can again be found in the [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md); if not set, then the value for `platform` will default to `srv` for a server-side application.
+Supported platform codes can again be found in the [Snowplow Tracker Protocol](/docs/events/index.md); if not set, then the value for `platform` will default to `srv` for a server-side application.
 
 The other values you can set up manually in the similar fashion are `nuid`, `aid`, `cv`, `eid`, `ttm`, and `url`.
 

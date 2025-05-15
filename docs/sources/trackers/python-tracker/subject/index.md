@@ -93,7 +93,7 @@ The default platform is `pc`. You can change the platform the subject is using b
 s.set_platform('mob')
 ```
 
-For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md#application-parameters).
+For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/events/index.md#application-parameters).
 
 ### `set_user_id`
 

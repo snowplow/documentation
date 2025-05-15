@@ -108,7 +108,7 @@ trackPageView({
   </TabItem>
 </Tabs>
 
-Every tracked event payload has a unique `event_id` UUID string set by the tracker, a set of timestamps, and other ubiquitous properties such as the `namespace`. You can find out more about how events and entities are structured [here](/docs/sources/trackers/snowplow-tracker-protocol/index.md).
+Every tracked event payload has a unique `event_id` UUID string set by the tracker, a set of timestamps, and other ubiquitous properties such as the `namespace`. You can find out more about how events and entities are structured [here](/docs/events/index.md).
 
 ## Auto-tracked entities
 
@@ -207,7 +207,7 @@ Set the application ID using the `appId` field of the [tracker configuration o
 
 ### Setting application platform
 
-Set the application platform using the `platform` field of the [tracker configuration object](../tracker-setup/initialization-options/index.md). This will be attached to every event the tracker fires. Its default value is “web”. For a list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md#application-parameters).
+Set the application platform using the `platform` field of the [tracker configuration object](../tracker-setup/initialization-options/index.md). This will be attached to every event the tracker fires. Its default value is “web”. For a list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/events/index.md#application-parameters).
 
 ### Setting the user ID
 

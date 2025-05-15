@@ -18,7 +18,7 @@ The Snowplow iOS tracker supports tracking within visionOS apps. All the usual e
 
 The immersive space context entity is semi-automatically added to all events.
 
-The events are: `OpenWindowEvent`, `DismissWindowEvent`, `OpenImmersiveSpaceEvent`, and `DismissImmersiveSpaceEvent`. Find the schema details for the events and entities [here](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/visionos-swiftui/index.md).
+The events are: `OpenWindowEvent`, `DismissWindowEvent`, `OpenImmersiveSpaceEvent`, and `DismissImmersiveSpaceEvent`. Find the schema details for the events and entities [here](/docs/events/ootb-data/visionos-swiftui/index.md).
 
 ### Window events
 

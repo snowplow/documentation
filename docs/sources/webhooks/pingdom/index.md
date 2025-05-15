@@ -48,7 +48,7 @@ For the **Webhook URL** field you will need to provide the URI to your Snowplo
 http://<collector host>/com.pingdom/v1?aid=<company code>
 ```
 
-The `aid=` name-value pair in your URI's querystring is optional; this is the `app_id` parameter taken from the [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md). You can use it to specify which company in Pingdom these call complete events belong to. Putting it all together, our setup screen now looks like this:
+The `aid=` name-value pair in your URI's querystring is optional; this is the `app_id` parameter taken from the [Snowplow Tracker Protocol](/docs/events/index.md). You can use it to specify which company in Pingdom these call complete events belong to. Putting it all together, our setup screen now looks like this:
 
 ![](images/pingdom-2.png)
 
@@ -58,7 +58,7 @@ If you want, you can also manually override the event's `platform` parameter l
 http://<collector host>/com.pingdom/v1?aid=<company code>&p=<platform code>
 ```
 
-Supported platform codes can again be found in the [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md); if not set, then the value for `platform` will default to `srv` for a server-side application.
+Supported platform codes can again be found in the [Snowplow Tracker Protocol](/docs/events/index.md); if not set, then the value for `platform` will default to `srv` for a server-side application.
 
 After we have finished adding the contact method simply click **Save Settings**.
 

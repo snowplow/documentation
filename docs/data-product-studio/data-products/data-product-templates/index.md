@@ -39,17 +39,17 @@ Note: The event volume counts are calculated differently for this Data Product. 
 
 Included event specifications:
 
-* [Screen view](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/page-and-screen-view-events/index.md#screen-view-events)
-* [Screen end](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/page-activity-tracking/index.md#screen-end-event)
-* [Application install](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/mobile-lifecycle-events/index.md#install-event)
-* [Application background](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/mobile-lifecycle-events/index.md#background-event)
-* [Application foreground](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/mobile-lifecycle-events/index.md#foreground-event)
+* [Screen view](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-view-events)
+* [Screen end](/docs/events/ootb-data/page-activity-tracking/index.md#screen-end-event)
+* [Application install](/docs/events/ootb-data/mobile-lifecycle-events/index.md#install-event)
+* [Application background](/docs/events/ootb-data/mobile-lifecycle-events/index.md#background-event)
+* [Application foreground](/docs/events/ootb-data/mobile-lifecycle-events/index.md#foreground-event)
 
 ### E-commerce (Web and Mobile)
 
 This Data Product template contains all the basic e-commerce interactions that help you analyze customer behavior, identify potential growth opportunities, and improve your sales performance.
 
-Tracked using the [out-of-the-box e-commerce events](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/ecommerce-events/index.md) for web, Android, and iOS. On web, this requires the [Snowplow Ecommerce plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md).
+Tracked using the [out-of-the-box e-commerce events](/docs/events/ootb-data/ecommerce-events/index.md) for web, Android, and iOS. On web, this requires the [Snowplow Ecommerce plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md).
 
 Included event specifications:
 

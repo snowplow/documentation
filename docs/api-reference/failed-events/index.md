@@ -116,7 +116,7 @@ Adapter failure schema can be found [here](https://github.com/snowplow/iglu-cent
 
 ## Tracker protocol violation
 
-This failure type is produced by the [Enrich](/docs/pipeline/enrichments/index.md) application, when an HTTP request does not conform to our [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md).
+This failure type is produced by the [Enrich](/docs/pipeline/enrichments/index.md) application, when an HTTP request does not conform to our [Snowplow Tracker Protocol](/docs/events/index.md).
 
 <details>
 

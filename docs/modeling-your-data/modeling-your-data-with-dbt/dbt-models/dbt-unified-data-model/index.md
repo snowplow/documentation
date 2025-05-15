@@ -48,16 +48,16 @@ While using any entity in our packages is possible thanks to [modeling entities]
 
 | Entity                                                                                                                                                                              | Type   | Enabled via Variable                    |
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------ | --------------------------------------- |
-| [YAUAA](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/device-and-browser/index.md#yauaa-context-for-user-agent-parsing)                | web    | snowplow__enable_yauaa                  |
-| [IAB](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/device-and-browser/index.md#iab-context-for-spiders-and-robots)                    | web    | snowplow__enable_iab                    |
+| [YAUAA](/docs/events/ootb-data/device-and-browser/index.md#yauaa-context-for-user-agent-parsing)                | web    | snowplow__enable_yauaa                  |
+| [IAB](/docs/events/ootb-data/device-and-browser/index.md#iab-context-for-spiders-and-robots)                    | web    | snowplow__enable_iab                    |
 | [UA](/docs/pipeline/enrichments/available-enrichments/ua-parser-enrichment/index.md)                                                                                                 | web    | snowplow__enable_ua                     |
-| [Browser](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/device-and-browser/index.md#browser-context)                                   | web    | snowplow\__enable_browser_context, snowplow\__enable_browser_context_2 (depending on schema versions tracked, when both are enabled the values are coalesced) |
-| [Mobile](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/device-and-browser/index.md#mobile-context)                                     | mobile | snowplow__enable_mobile_context         |
-| [Geolocation](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/geolocation/index.md#geolocation-context-entity-tracked-in-apps)           | mobile | snowplow__enable_geolocation_context    |
-| [Application](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/app-information/index.md#application-context-entity-on-mobile-apps)        | mobile | snowplow__enable_application_context    |
-| [Screen](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/page-and-screen-view-events/index.md#screen-view-events)                        | mobile | snowplow__enable_screen_context         |
-| [Deep Links](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/links-and-referrers/index.md#context-entity-attached-to-screen-view-events) | mobile | snowplow__enable_deep_link_context      |
-| [Screen Summary](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/page-activity-tracking/index.md#screen-summary-entity)                  | mobile | snowplow__enable_screen_summary_context |
+| [Browser](/docs/events/ootb-data/device-and-browser/index.md#browser-context)                                   | web    | snowplow\__enable_browser_context, snowplow\__enable_browser_context_2 (depending on schema versions tracked, when both are enabled the values are coalesced) |
+| [Mobile](/docs/events/ootb-data/device-and-browser/index.md#mobile-context)                                     | mobile | snowplow__enable_mobile_context         |
+| [Geolocation](/docs/events/ootb-data/geolocation/index.md#geolocation-context-entity-tracked-in-apps)           | mobile | snowplow__enable_geolocation_context    |
+| [Application](/docs/events/ootb-data/app-information/index.md#application-context-entity-on-mobile-apps)        | mobile | snowplow__enable_application_context    |
+| [Screen](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-view-events)                        | mobile | snowplow__enable_screen_context         |
+| [Deep Links](/docs/events/ootb-data/links-and-referrers/index.md#context-entity-attached-to-screen-view-events) | mobile | snowplow__enable_deep_link_context      |
+| [Screen Summary](/docs/events/ootb-data/page-activity-tracking/index.md#screen-summary-entity)                  | mobile | snowplow__enable_screen_summary_context |
 
 ### Optional Modules
 | Module            | Docs                                                                                                                                           | Enabled via Variable         |

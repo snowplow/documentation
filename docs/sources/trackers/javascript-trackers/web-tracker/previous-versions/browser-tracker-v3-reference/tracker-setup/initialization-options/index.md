@@ -79,7 +79,7 @@ Set the application ID using the `appId` field of the configuration object. Th
 
 #### Setting the platform
 
-Set the application platform using the `platform` field of the configuration object. This will be attached to every event the tracker fires. Its default value is “web”. For a list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md#application-parameters).
+Set the application platform using the `platform` field of the configuration object. This will be attached to every event the tracker fires. Its default value is “web”. For a list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/events/index.md#application-parameters).
 
 #### Configuring the cookie domain
 

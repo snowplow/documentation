@@ -2,7 +2,7 @@
 title: "Event parameters"
 ---
 
-This page lists all the parameters that Snowplow trackers use when firing events to push data into the Snowplow collectors. Each parameter maps onto one or more fields in the Snowplow events table employed in storage. 
+This page lists all the parameters that Snowplow trackers use when firing events to push data into the Snowplow collectors. Each parameter maps onto one or more fields in the Snowplow events table employed in storage.
 
 This page is for you if you want to understand the tracker payload in more detail, and especially if you are building your own tracker. In the latter case, utilizing the parameters documented here will ensure that your tracker works with the rest of the Snowplow stack.
 
@@ -184,9 +184,9 @@ The tracker namespace parameter is used to distinguish between different tracker
 
 :::info
 
-The Snowplow Collector will also capture `collector_tstamp` which the time the event arrived at the collector.
+The Snowplow Collector will also capture `collector_tstamp` which the time the event arrived at the Collector.
 
-Snowplow will also calculate a `derived_tstamp` which attempts to make allowances for innaccurate device clocks.
+Snowplow will also calculate a `derived_tstamp` which attempts to make allowances for inaccurate device clocks.
 The `ttm` field is used for a timestamp set on the client which should be taken as accurate. This will overwrite the `derived_tstamp` if set.
 
 :::

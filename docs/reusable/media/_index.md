@@ -265,13 +265,13 @@ endMediaTracking({ id });`}
 #### Media player properties
 
 <>{props.tracker == 'roku'
-? <>
+? <p>
     The <code>label</code> configuration specifies the label used in the media player entity.
     All other properties are automatically tracked from the media node.
-</>
-: <>
+</p>
+: <p>
     The <code>player</code> property lets you provide information about the media playback that will be used to populate the media player entity tracked with media events.
-</>
+</p>
 }</>
 
 <>{(props.tracker == 'js-tag') && (<CodeBlock language="javascript">

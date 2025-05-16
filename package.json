@@ -82,6 +82,7 @@
   "devDependencies": {
     "@docusaurus/module-type-aliases": "^3.5.2",
     "@docusaurus/types": "^3.5.2",
+    "@tailwindcss/typography": "^0.5.16",
     "@types/mdx-js__react": "^2.0.0",
     "@types/webpack-env": "^1.18.5",
     "autoprefixer": "10.4.14",

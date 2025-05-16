@@ -975,6 +975,7 @@ For an example, see the code that subscribes for events from an HTML5 media play
     <li>ping events</li>
     <li>seek start events</li>
     <li>seek end events</li>
+    <li>quality change events</li>
     <li>percent progress events</li>
     <li>buffer start events</li>
     <li>buffer end events</li>
@@ -2302,12 +2303,7 @@ mediaTracking.track(event, null, null, null);`}
 );`}
 </CodeBlock>)}</>
 
-<>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
-{`m.global.snowplow.trackMediaEvent = {
-    schema: "iglu:com.snowplowanalytics.snowplow.media/quality_change_event/jsonschema/1-0-0",
-    data: { }
-}`}
-</CodeBlock>)}</>
+<>{(props.tracker == 'roku') && (<p>This event automatically fires for Audio/Video nodes, or can be tracked manually via <code>trackMediaEvent</code> if disabled via <code>captureEvents</code>.</p>)}</>
 
 *Schema:*
 `iglu:com.snowplowanalytics.snowplow.media/quality_change_event/jsonschema/1-0-0`.

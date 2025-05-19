@@ -20,8 +20,7 @@ To receive alerts you must have the Failed Events monitoring feature switched on
 
 - Login to Snowplow BDP console
 - Locate the pipeline you wish to set up alerts for in the left-hand navigation
-- Find and select `Pipeline configuration`
-- Scroll down to `Pipeline alerts` or use the page navigation to jump to it
+- Click on the `Configuration` tab, then the `Pipeline alerts` section
 
 ![](images/image.png)
 

@@ -20,7 +20,7 @@ import TabItem from '@theme/TabItem';
 You can also create [custom data models](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/index.md).
 
 ## Create a warehouse connection
-Begin by creating a new warehouse connection. It will be used by a data model to connect to your warehouse. Click on the "Set up new connection" button on the [Data Models page](https://console.snowplowanalytics.com/data-models) and fill in all the necessary details.
+Begin by creating a new warehouse connection. It will be used by a data model to connect to your warehouse.Go to [Destinations/Connections](https://console.snowplowanalytics.com/connections), click on "Set up connection", and fill in all the necessary details.
 
 ![](./images/warehouse-connections.png)
 
@@ -33,7 +33,7 @@ You might have already set up a warehouse connection for loading the data. Data 
 Supported destinations are Snowflake, Databricks, Redshift and BigQuery.
 
 ## Create a data model
-To create a new data model, click the "Add data model" button. Then, select the data model you're interested in, such as [Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md), and the warehouse connection it should use. You can also specify the owners of the data model who will be alerted in case of failure.
+To create a new data model, click the "Add data model" button in the [Data Models](https://console.snowplowanalytics.com/data-models) page. Then, select the data model you're interested in, such as [Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md), and the warehouse connection it should use. You can also specify the owners of the data model who will be alerted in case of failure.
 
 ![](images/data-models.png)
 

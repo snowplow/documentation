@@ -12,13 +12,13 @@ Read more about the technical aspects of the collector [here](/docs/api-referenc
 
 The easiest way to access collector configuration is to view it within the Snowplow BDP Console. To do that, after you log in click on _Pipeline Configuration_ under the respective pipeline's navigation menu:
 
-![This image has an empty alt attribute; its file name is image-1.png](images/image-1.png)
+![](images/image-1.png)
 
 Selecting the pipeline configuration tab
 
 You can then view your configuration, with the default values displayed for empty fields:
 
-![This image has an empty alt attribute; its file name is image-2.png](images/image-2.png)
+![](images/image-2.png)
 
 Example collector configuration
 

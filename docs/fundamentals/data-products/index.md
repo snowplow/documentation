@@ -52,7 +52,7 @@ Examples of data products:
 
 **Event specifications**; these describe each event that is collected as part of the data product, on which applications they are triggered and where, the event data structure to validate against, and the entities to attach to each event (e.g. user, product etc).
 
-![Example Event Specification](images/example_event_specification.png)![]()
+![Example Event Specification](images/example_event_specification.png)
 
 **Benefits:**
 

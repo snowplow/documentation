@@ -16,7 +16,7 @@ To start managing Enrichments, navigate to the pipeline you'd like to manage and
 
 When you select navigate to the Enrichments screen you'll see a listing of all Enrichments and see their current status & last edited date for the pipeline.
 
-![](images/ViewEnrichments.gif)
+![](images/ViewEnrichments.png)
 
 
 ## Enable /editing an Enrichment

@@ -28,13 +28,13 @@ Original ecommerce events must be **manually tracked**.
   <TabItem value="js" label="JavaScript (tag)" default>
 
 | Tracker Distribution | Included |
-|----------------------|----------|
+| -------------------- | -------- |
 | `sp.js`              | ✅        |
 | `sp.lite.js`         | ❌        |
 
 **Download:**
 
-<table class="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-ecommerce@3/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-ecommerce@3/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a> (latest)</td></tr></tbody></table>
+<table className="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-ecommerce@3/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-ecommerce@3/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a> (latest)</td></tr></tbody></table>
 
 **Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
 
@@ -76,7 +76,7 @@ The transaction object must be created first, using `addTrans()`. Add items with
 The `addTrans` method creates a transaction object. It takes nine possible parameters, two of which are required:
 
 | **Parameter** | **Description**                                      | **Required?** | **Example value** |
-|---------------|------------------------------------------------------|---------------|-------------------|
+| ------------- | ---------------------------------------------------- | ------------- | ----------------- |
 | `orderId`     | Internal unique order id number for this transaction | Yes           | '1234'            |
 | `affiliation` | Partner or store affiliation                         | No            | 'Womens Apparel'  |
 | `total`       | Total amount of the transaction                      | Yes           | '19.99'           |
@@ -151,7 +151,7 @@ The `addItem` method is used to capture the details of each product item inclu
 There are six potential parameters that can be passed with each call, four of which are required:
 
 | **Parameter** | **Description**                                    | **Required?**                                       | **Example value** |
-|---------------|----------------------------------------------------|-----------------------------------------------------|-------------------|
+| ------------- | -------------------------------------------------- | --------------------------------------------------- | ----------------- |
 | `orderId`     | Order ID of the transaction to associate with item | Yes                                                 | '1234'            |
 | `sku`         | Item's SKU code                                    | Yes                                                 | 'pbz0001234'      |
 | `name`        | Product name                                       | No, but advisable (to make interpreting SKU easier) | 'Black Tarot'     |
@@ -333,7 +333,7 @@ trackTrans();
 These methods are also part of `@snowplow/browser-plugin-ecommerce` and let you track users adding and removing items from a cart on an ecommerce site. Their arguments are identical:
 
 | **Name**    | **Required?** | **Description**                        | **Type** |
-|-------------|---------------|----------------------------------------|----------|
+| ----------- | ------------- | -------------------------------------- | -------- |
 | `sku`       | Yes           | Item SKU                               | string   |
 | `name`      | No            | Item name                              | string   |
 | `category`  | No            | Item category                          | string   |

@@ -22,15 +22,15 @@ import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 import { EcommercePlugin, addTrans, addItem, trackTrans } from '@snowplow/browser-plugin-ecommerce';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ EcommercePlugin() ],
 });
 ```
 
 ### Functions
 
-<table class="has-fixed-layout"><tbody><tr><td><code><code>addTrans</code></code></td><td><a href="/docs/sources/trackers/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#addTrans">Documentation</a></td></tr><tr><td><code>addItem</code></td><td><a href="/docs/sources/trackers/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#addItem">Documentation</a></td></tr><tr><td><code>trackTrans</code></td><td><a href="/docs/sources/trackers/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#trackTrans">Documentation</a></td></tr><tr><td><code>trackAddToCart</code></td><td><a href="/docs/sources/trackers/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#trackAddToCart_and_trackRemoveFromCart">Documentation</a></td></tr><tr><td><code>trackRemoveFromCart</code></td><td><a href="/docs/sources/trackers/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#trackAddToCart_and_trackRemoveFromCart">Documentation</a></td></tr></tbody></table>
+<table className="has-fixed-layout"><tbody><tr><td><code><code>addTrans</code></code></td><td><a href="/docs/sources/trackers/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#addTrans">Documentation</a></td></tr><tr><td><code>addItem</code></td><td><a href="/docs/sources/trackers/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#addItem">Documentation</a></td></tr><tr><td><code>trackTrans</code></td><td><a href="/docs/sources/trackers/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#trackTrans">Documentation</a></td></tr><tr><td><code>trackAddToCart</code></td><td><a href="/docs/sources/trackers/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#trackAddToCart_and_trackRemoveFromCart">Documentation</a></td></tr><tr><td><code>trackRemoveFromCart</code></td><td><a href="/docs/sources/trackers/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#trackAddToCart_and_trackRemoveFromCart">Documentation</a></td></tr></tbody></table>
 
 ### Context
 

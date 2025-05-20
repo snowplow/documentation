@@ -23,13 +23,13 @@ Original consent events must be **manually tracked**. The GDPR context entity wi
   <TabItem value="js" label="JavaScript (tag)" default>
 
 | Tracker Distribution | Included |
-|----------------------|----------|
+| -------------------- | -------- |
 | `sp.js`              | ✅        |
 | `sp.lite.js`         | ❌        |
 
 **Download:**
 
-<table class="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-consent@3/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-consent@3/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a> (latest)</td></tr></tbody></table>
+<table className="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-consent@3/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-consent@3/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a> (latest)</td></tr></tbody></table>
 
 **Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
 
@@ -67,7 +67,7 @@ newTracker('sp1', '{{collector_url}}', {
 Use the `trackConsentGranted` method to track a user opting into data collection. A consent document context will be attached to the event if at least the `id` and `version` arguments are supplied. The method arguments are:
 
 | **Name**      | **Description**                                           | **Required?** | **Type**         |
-|---------------|-----------------------------------------------------------|---------------|------------------|
+| ------------- | --------------------------------------------------------- | ------------- | ---------------- |
 | `id`          | Identifier for the document granting consent              | Yes           | String           |
 | `version`     | Version of the document granting consent                  | Yes           | String           |
 | `name`        | Name of the document granting consent                     | No            | String           |
@@ -116,7 +116,7 @@ Use the `trackConsentWithdrawn` method to track a user withdrawing consent for
 The method arguments are:
 
 | **Name**      | **Description**                                   | **Required?** | **Type**         |
-|---------------|---------------------------------------------------|---------------|------------------|
+| ------------- | ------------------------------------------------- | ------------- | ---------------- |
 | `all`         | Specifies whether all consent should be withdrawn | No            | Boolean          |
 | `id`          | Identifier for the document withdrawing consent   | No            | String           |
 | `version`     | Version of the document withdrawing consent       | No            | string           |
@@ -166,7 +166,7 @@ The JSON schema for a consent document can be found [here](https://github.com/sn
 The fields of a consent document are:
 
 | **Name**      | **Description**             | **Required?** | **Type** |
-|---------------|-----------------------------|---------------|----------|
+| ------------- | --------------------------- | ------------- | -------- |
 | `id`          | Identifier for the document | Yes           | String   |
 | `version`     | Version of the document     | Yes           | String   |
 | `name`        | Name of the document        | No            | String   |
@@ -253,7 +253,7 @@ Attach a context entity with the GDPR basis for processing and the details of a 
 It takes the following arguments:
 
 | **Name**              | **Description**             | **Required?** | **Type**    |
-|-----------------------|-----------------------------|---------------|-------------|
+| --------------------- | --------------------------- | ------------- | ----------- |
 | `basisForProcessing`  | GDPR Basis for processing   | Yes           | Enum String |
 | `documentId`          | ID of a GDPR basis document | No            | String      |
 | `documentVersion`     | Version of the document     | No            | String      |

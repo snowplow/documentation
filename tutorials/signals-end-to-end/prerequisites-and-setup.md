@@ -21,8 +21,7 @@ Here's the list of all credential variables you may need to configure:
 
 ```python
 from google.colab import userdata
-# Snowflake credentials to access raw Atomic Events table to prepare a historical training dataset
-# Adjust to your Snowflake authentication mechanism.
+# Snowflake credentials to prepare a training dataset on top of Atomic Events table
 ENV_SF_ACNT = userdata.get('SF_ACNT') # Account
 ENV_SF_USR = userdata.get('SF_USR') # User
 ENV_SF_PWD = userdata.get('SF_PWD') # Pwd
@@ -32,21 +31,14 @@ ENV_SF_WH = userdata.get('SF_WH') # Warehouse
 ENV_SP_API_KEY = userdata.get('SP_API_KEY') # Snowplow Signals API Key
 ENV_SP_API_KEY_ID = userdata.get('SP_API_KEY_ID') # Snowplow Signals API ID
 ENV_SP_ORG_ID = userdata.get('SP_ORG_ID') # Snowplow Org ID
+ENV_SIGNALS_API_ENDPOINT = userdata.get('SIGNALS_API_ENDPOINT') # Snowplow Signals API Endpoint
+ENV_ATOMIC_TABLE = userdata.get('ATOMIC_TABLE') # Snowflake Snowplow Atomic Table
 
 # ngrok token to be able to expose notebook behind HTTPS for querying the API
 ENV_NGROK_TOKEN = userdata.get('NGROK_TOKEN')
 ```
 
 Adjust these to suit your warehouse authentication methods.
-
-### Configure Atomic Events and API Endpoint
-
-Make sure to also update the Signals API endpoint and Atomic Events table in Snowflake:
-
-```python
-ENV_SIGNALS_API_ENDPOINT = "https://d0a9ba0f-893a-445f-91a5-a1abf1359d34.svc.snplow.net" # Snowplow Signals API Endpoint
-ENV_ATOMIC_TABLE = "snowplow_db.atomic_stream.events" # Snowflake Snowplow Atomic Table
-```
 
 ### Run Colab
 

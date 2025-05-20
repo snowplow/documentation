@@ -24,8 +24,8 @@ Link click tracking is enabled using the `enableLinkClickTracking` method. Use
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 import { LinkClickTrackingPlugin, enableLinkClickTracking } from '@snowplow/browser-plugin-link-click-tracking';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ LinkClickTrackingPlugin() ],
 });
 
@@ -34,7 +34,7 @@ enableLinkClickTracking();
 
 ### Functions
 
-<table class="has-fixed-layout"><tbody><tr><td><code>enableLinkClickTracking</code></td><td><a href="/docs/sources/trackers/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#enablelinkclicktracking">Documentation</a></td></tr><tr><td><code>refreshLinkClickTracking</code></td><td><a href="/docs/sources/trackers/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#refreshlinkclicktracking">Documentation</a></td></tr><tr><td><code>trackLinkClick</code></td><td><a href="/docs/sources/trackers/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#tracklinkclick">Documentation</a></td></tr></tbody></table>
+<table className="has-fixed-layout"><tbody><tr><td><code>enableLinkClickTracking</code></td><td><a href="/docs/sources/trackers/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#enablelinkclicktracking">Documentation</a></td></tr><tr><td><code>refreshLinkClickTracking</code></td><td><a href="/docs/sources/trackers/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#refreshlinkclicktracking">Documentation</a></td></tr><tr><td><code>trackLinkClick</code></td><td><a href="/docs/sources/trackers/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#tracklinkclick">Documentation</a></td></tr></tbody></table>
 
 ### Context
 

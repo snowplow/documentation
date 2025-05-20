@@ -24,13 +24,13 @@ Enhanced ecommerce events must be **manually tracked**.
   <TabItem value="js" label="JavaScript (tag)" default>
 
 | Tracker Distribution | Included |
-|----------------------|----------|
+| -------------------- | -------- |
 | `sp.js`              | ❌        |
 | `sp.lite.js`         | ❌        |
 
 **Download:**
 
-<table class="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-enhanced-ecommerce@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-enhanced-ecommerce@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a> (latest)</td></tr></tbody></table>
+<table className="has-fixed-layout"><tbody><tr><td>Download from GitHub Releases (Recommended)</td><td><a href="https://github.com/snowplow/snowplow-javascript-tracker/releases" target="_blank" rel="noreferrer noopener">Github Releases (plugins.umd.zip)</a></td></tr><tr><td>Available on jsDelivr</td><td><a href="https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-enhanced-ecommerce@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">jsDelivr</a> (latest)</td></tr><tr><td>Available on unpkg</td><td><a href="https://unpkg.com/@snowplow/browser-plugin-enhanced-ecommerce@latest/dist/index.umd.min.js" target="_blank" rel="noreferrer noopener">unpkg</a> (latest)</td></tr></tbody></table>
 
 **Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
 
@@ -68,7 +68,7 @@ The enhanced ecommerce plugin is based around the `EnhancedEcommerceAction` even
 Use the `trackEnhancedEcommerceAction` method to track a GA Enhanced Ecommerce Action. When this function is called all of the added Ecommerce context entities are attached to this action and flushed from the tracker.
 
 | **Name** | **Required?** | **Type** |
-|----------|---------------|----------|
+| -------- | ------------- | -------- |
 | `action` | Yes           | string   |
 
 The allowed actions:
@@ -124,7 +124,7 @@ The enhanced ecommerce context entities are specific to this plugin, and cannot 
 Use the `addEnhancedEcommerceActionContext` method to add a GA Enhanced Ecommerce Action Context to the Tracker:
 
 | **Name**      | **Required?** | **Type**          |
-|---------------|---------------|-------------------|
+| ------------- | ------------- | ----------------- |
 | `id`          | Yes           | string            |
 | `affiliation` | No            | string            |
 | `revenue`     | No            | number OR string  |
@@ -190,7 +190,7 @@ addEnhancedEcommerceActionContext({
 Use the `addEnhancedEcommerceImpressionContext` method to add a GA Enhanced Ecommerce Impression Context to the Tracker:
 
 | **Name**   | **Required?** | **Type**          |
-|------------|---------------|-------------------|
+| ---------- | ------------- | ----------------- |
 | `id`       | Yes           | string            |
 | `name`     | No            | string            |
 | `list`     | No            | string            |
@@ -255,7 +255,7 @@ addEnhancedEcommerceImpressionContext({
 Use the `addEnhancedEcommerceProductContext` method to add a GA Enhanced Ecommerce Product Field Context:
 
 | **Name**   | **Required?** | **Type**          |
-|------------|---------------|-------------------|
+| ---------- | ------------- | ----------------- |
 | `id`       | Yes           | string            |
 | `name`     | No            | string            |
 | `list`     | No            | string            |
@@ -320,7 +320,7 @@ addEnhancedEcommerceProductContext({
 Use the `addEnhancedEcommercePromoContext` method to add a GA Enhanced Ecommerce Promotion Field Context:
 
 | **Name**   | **Required?** | **Type** |
-|------------|---------------|----------|
+| ---------- | ------------- | -------- |
 | `id`       | Yes           | string   |
 | `name`     | No            | string   |
 | `creative` | No            | string   |
@@ -366,4 +366,3 @@ addEnhancedEcommercePromoContext({
 
   </TabItem>
 </Tabs>
-

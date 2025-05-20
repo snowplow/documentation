@@ -22,15 +22,15 @@ import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 import { AdTrackingPlugin, trackAdClick } from '@snowplow/browser-plugin-ad-tracking';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ AdTrackingPlugin() ],
 });
 ```
 
 ### Functions
 
-<table class="has-fixed-layout"><tbody><tr><td><code>trackAdImpression</code></td><td><a href="/docs/sources/trackers/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#trackAdImpression">Documentation</a></td></tr><tr><td><code>trackAdClick</code></td><td><a href="/docs/sources/trackers/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#trackAdClick">Documentation</a></td></tr><tr><td><code>trackAdConversion</code></td><td><a href="/docs/sources/trackers/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#trackAdConversion">Documentation</a></td></tr></tbody></table>
+<table className="has-fixed-layout"><tbody><tr><td><code>trackAdImpression</code></td><td><a href="/docs/sources/trackers/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#trackAdImpression">Documentation</a></td></tr><tr><td><code>trackAdClick</code></td><td><a href="/docs/sources/trackers/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#trackAdClick">Documentation</a></td></tr><tr><td><code>trackAdConversion</code></td><td><a href="/docs/sources/trackers/javascript-trackers/web-tracker/previous-versions/browser-tracker-v3-reference/tracking-events/#trackAdConversion">Documentation</a></td></tr></tbody></table>
 
 ### Context
 

@@ -24,7 +24,7 @@ Button click events are **automatically tracked** once configured.
 <TabItem value="js" label="JavaScript (tag)" default>
 
 | Tracker Distribution | Included |
-|----------------------|----------|
+| -------------------- | -------- |
 | `sp.js`              | ✅        |
 | `sp.lite.js`         | ❌        |
 
@@ -326,7 +326,7 @@ enableButtonClickTracking({
 The plugin will track the following data (if present on the element):
 
 | Field     | Description                                         | Type       | Required? |
-|-----------|-----------------------------------------------------|------------|-----------|
+| --------- | --------------------------------------------------- | ---------- | --------- |
 | `label`   | The text on the button, or a user-provided override | `string`   | Yes       |
 | `id`      | The ID of the button                                | `string`   | No        |
 | `classes` | The classes of the button                           | `string[]` | No        |
@@ -365,7 +365,7 @@ Suppose we have the following button on our page:
 
 ```html
 <button id="home-btn" class="nav-btn blue-btn outlined" data-sp-button-label="Home" name="home">
-    <i class="fa fa-home">
+    <i className="fa fa-home">
 </button>
 ```
 
@@ -400,7 +400,7 @@ Suppose we have the following button on our page:
 
 ```html
 <button id="home-btn" class="nav-btn blue-btn outlined" data-sp-button-label="Home" name="home">
-    <i class="fa fa-home">
+    <i className="fa fa-home">
 </button>
 ```
 

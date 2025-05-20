@@ -12,7 +12,7 @@ For tracking from third-party applications, use our [webhooks](/docs/sources/web
 
 <!-- TODO hubspot, iterable, marketo, vero, zendesk logos are missing -->
 <!-- fix when webhooks are tidied up -->
-<div class="sources-grid">
+<div className="sources-grid">
     <img src={require('@site/docs/sources/images/adjust.png').default} alt="adjust" width="200" />
     <img src={require('@site/docs/sources/images/amp.png').default} alt="AMP" width="200" />
     <img src={require('@site/docs/sources/images/android.png').default} alt="Android" width="200" />

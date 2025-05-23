@@ -74,7 +74,7 @@ The table below lists all arguments for an `Attribute`:
 | `description` | The description of the Attribute | `string` |
 | `type` | The type of the aggregation | One of: `bytes`, `string`, `int32`, `int64`, `double`, `float`, `bool`, `unix_timestamp`, `bytes_list`, `string_list`, `int32_list`, `int64_list`, `double_list`, `float_list`, `bool_list`, `unix_timestamp_list`,  |
 | `tags` | Metadata for the Attribute | |
-| `events` | List of Snowplow Events that the Attribute is calculated on | List of `Event` type |
+| `events` | List of Snowplow Events that the Attribute is calculated on | List of `Event` type; see next section |
 | `aggregation` | The aggregation type of the Attribute  | One of:  `counter`, `sum`, `min`, `max`, `mean`, `first`, `last`, `unique_list` |
 | `property` | The property of the event or entity you wish to use in the aggregation | `string` |
 | `criteria` | List of `Criteria` to filter the events | List of `Criteria` type |

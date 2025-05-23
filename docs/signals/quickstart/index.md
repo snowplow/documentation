@@ -11,7 +11,7 @@ import CodeBlock from '@theme/CodeBlock';
 ```
 
 :::note 
-You can try an interactive version of this quickstart on Google Colab [here](https://colab.research.google.com/drive/1ExqheS4lIuJRs0wk0B6sxaYfnZGcTYUv)
+You can try an interactive version of this Quickstart on Google Colab [here](https://colab.research.google.com/drive/1ExqheS4lIuJRs0wk0B6sxaYfnZGcTYUv).
 :::
 
 
@@ -22,7 +22,7 @@ Welcome to the Snowplow Signals Quickstart! This guide will walk you through the
 3. **Create and Test a View**: Combine attributes into a view and test it.
 4. **Deploy a View**: Push a view to the Profile API
 5. **Retrieve Attributes**: Fetch user features from the Profile API.
-
+Steps 1-4 are the Signals configuration. Step 5 shows how to start using the stored attributes.
 ## Step 1: Installation and Setup
 The Snowplow Signals SDK allows you to define attributes, create views, and retrieve user features. It requires Python 3.12 or above.
 
@@ -119,7 +119,7 @@ my_attribute_view = View(
 )
 ```
 
-Before deploying the view, you can test it on the Atomic events table from the past hour:
+Before deploying the view, you can test it on the atomic events table from the past hour:
 
 
 ```python

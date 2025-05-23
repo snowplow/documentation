@@ -7,7 +7,7 @@ sidebar_label: "Sources"
 
 A `Source` defines how an `Attribute` is calculated. There are two types of sources:
 
-- Stream: Attributes are calculated in real time, making them ideal for instant personalization and session-based metrics.
+- Stream: Attributes are calculated in real time, making them ideal for instant personalization and session-based metrics. This is the default stream type.
 - Batch: Attributes are calculated using historical data stored in your warehouse, suitable for metrics over longer time periods.
 
 ### When to use each source

@@ -5,9 +5,9 @@ description: "Stream"
 sidebar_label: "Stream Sources"
 ---
 
-By default, attributes are calculated in stream. This ensures they are available for near real-time personalization. Stream sources are automatically created in the Profile API when you apply a `View`. No additional user configuration is required.
+By default, attributes are calculated in stream. This ensures they are available for near real-time personalization. Stream sources are automatically created in the Profile API when you apply a `View`.
 
-Attributes commonly calculated with a `Stream` source include:
+You may like to configure common `Stream` source attributes such as:
 
 - Latest product viewed
 - Search history 

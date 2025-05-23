@@ -5,7 +5,7 @@ description: "An overview of Signals concepts."
 sidebar_label: "Signals"
 ---
 
-Snowplow Signals is a personalization engine built on Snowplow’s behavioral data pipeline. The Profile API, hosted in your BDP cloud allows you to create, manage and access user attributes by using the Signals SDKs.
+Snowplow Signals is a personalization engine built on Snowplow’s behavioral data pipeline. The Profile API, hosted in your BDP cloud, allows you to create, manage and access user attributes by using the Signals SDKs.
 
 ![](./images/signals.png)
 

@@ -22,9 +22,9 @@ Here's an example:
 view = View(
     name="view",
     version=1,
-    entity=session_entity,
+    entity=domain_sessionid,
     attributes=[page_view_count],
-
+    owner="user@company.com",
 )
 
 sp_signals.apply([view]) #Stream Source created

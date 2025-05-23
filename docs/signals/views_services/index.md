@@ -19,18 +19,18 @@ A `Service` is a collection of views that streamlines the retrieval of multiple 
 You can define a `View` by passing in a list of previously defined attributes. Here's an example:
 
 ```python
-from snowplow_signals import View, session_entity
+from snowplow_signals import View, domain_sessionid
 
 my_attribute_view = View(
     name="my_attribute_view",
     version=1,
-    entity=session_entity,
+    entity=domain_sessionid,
     attributes=[ 
         #Previously defined Attributes
         page_view_count, 
         products_added_to_cart_feature,
     ],
-
+    owner="user@company.com",
 )
 ```
 

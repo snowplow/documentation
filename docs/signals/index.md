@@ -9,7 +9,8 @@ Snowplow Signals is a personalization engine built on Snowplow’s behavioral da
 
 ![](./images/signals.png)
 
-Signals allows users to enhance their applications by aggregating user attributes and providing near real-time visibility into customer behavior. With seamless access to user history, it simplifies creating personalized, intelligent experiences.
+Signals allows you to enhance your applications by aggregating historical user attributes and providing near real-time visibility into customer behavior.
+Use the aggregated attributes to power in-product personalization and recommendations engines, adaptive UIs, and agentic applications like AI copilots and chatbots.
 
 ### Sources
 

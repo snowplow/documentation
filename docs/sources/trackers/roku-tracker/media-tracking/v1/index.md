@@ -18,23 +18,21 @@ m.global.snowplow.enableVideoTracking = {
 
 From tracker version 0.3.0:
 - You can also use `enableAudioTracking` and pass the node via `audio` instead of `video`
-- The v2 `enableMediaTracking` call and `media` option will also work
-  - The tracker will use v1 tracking if the `version` option is not specified or defined as `1`.
-  - To opt into version 2 schemas (recommended), pass the `version: 2` option to your `enableMediaTracking` call.
+- The v2 `enableMediaTracking` call and `media` option will also work, the tracker will use v1 tracking if the optional `version` option is defined as `1`
 
 In addition to the node and version selector, the `enableVideoTracking` property accepts several optional attributes listed in the tables below.
 
 | Attribute | Type | Description | Required? |
 | --- | --- | --- | --- |
 | `media` / `audio` / `video` | Audio / Video | Audio/Video node to be tracked | yes |
-| `version` | Integer | Tracking schema version to use; defaults to 1 if not provided | no |
+| `version` | Integer | Tracking schema version to use; defaults to 1 if not provided for `enableVideoTracking` and `enableAudioTracking` | no |
 | `label` / `options.label` | String | An identifiable custom label sent with the event | no |
 | `options.captureEvents` | String[] | Types of events to capture | no, defaults to all events except for `position` |
 | `options.boundaries` | Integer[] | Percentage boundaries in playback for which events will be sent | no, defaults to `[10, 25, 50, 75]` |
 | `options.positionInterval` | Integer | Interval in seconds in which `position` events should be reported | no, defaults to 5 |
 | `context` / `entities` | SelfDescribingJSON[] | Array of custom entities to include with all generated media events | no |
 
-To stop tracking events from the node, set the `disableVideoTracking` property. The tracker will then stop observing and tracking events from the node.
+To stop tracking events from the node, set the `disableVideoTracking`/`disableAudioTracking` property. The tracker will then stop observing and tracking events from the node.
 The property should be set with an `roAssociativeArray` with exactly one attribute, `video` (or `audio`/`media`), like so:
 
 ```brightscript

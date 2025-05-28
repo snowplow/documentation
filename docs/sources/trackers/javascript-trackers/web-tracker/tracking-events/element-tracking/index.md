@@ -691,9 +691,7 @@ These events include an `element` entity which includes:
 - Size and position information
 - Any attributes collected via the [`detail` setting](#element-data)
 
-```json reference title="Entity - iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0" referenceLinkText="See schema on GitHub"
-https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/element/jsonschema/1-0-0
-```
+[See `element` entity schema on GitHub](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/element/jsonschema/1-0-0)
 
 ### Optional entities
 
@@ -744,9 +742,7 @@ startElementTracking({ elements: {
 
 Define non-self-describing events with the event names assigned to them during enrichment (`page_view`, `page_ping`, `event` (structured events), `transaction`, and `transaction_item`).
 
-```json reference title="Entity - iglu:com.snowplowanalytics.snowplow/element_statistics/jsonschema/1-0-0" referenceLinkText="See schema on GitHub"
-https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/element_statistics/jsonschema/1-0-0
-```
+[See `element_statistics` entity schema on GitHub](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/element_statistics/jsonschema/1-0-0)
 
 #### Component hierarchy
 
@@ -792,9 +788,7 @@ enableFormTracking({ context: [componentGenerator] });
   </TabItem>
 </Tabs>
 
-```json reference title="Entity - iglu:com.snowplowanalytics.snowplow/component_parents/jsonschema/1-0-0" referenceLinkText="See schema on GitHub"
-https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/component_parents/jsonschema/1-0-0
-```
+[See `component_parents` entity schema on GitHub](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/component_parents/jsonschema/1-0-0)
 
 #### Element contents
 
@@ -804,9 +798,7 @@ There can be many instances of this entity in individual events, and the list of
 Each instance contains references to the parent `element_content` or `element` entity instance that contains it in the `parent_name` and `parent_index` properties (via `element_name` and `element_index`, respectively).
 Nested `details` configurations are also used to populate the `attributes` for each instance.
 
-```json reference title="Entity - iglu:com.snowplowanalytics.snowplow/element_content/jsonschema/1-0-0" referenceLinkText="See schema on GitHub"
-https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/element_content/jsonschema/1-0-0
-```
+[See `element_content` entity schema on GitHub](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/element_content/jsonschema/1-0-0)
 
 #### Custom context
 

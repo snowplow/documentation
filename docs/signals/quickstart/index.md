@@ -137,6 +137,9 @@ Example Output
 | xyz                  | 5                  | [`red_hat`, `blue_shoes`]   |
 | abc                  | 3                  | [`green_trainers`]          | 
 
+:::warning
+**Note:** You can filter on specific app_ids during testing. To avoid unnecessary compute, the streaming engine is typically configured to process only a subset of relevant app_ids. While you may be able to test using any app_id, bear in mind that data retrieval might not return expected results if that app_id isn't included in the streaming engine’s configuration.
+:::
 
 ## Step 4: Deploy a `View` to Signals
 Once you're satisfied with the View, deploy it to the API using the `apply` method:

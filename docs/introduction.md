@@ -15,7 +15,7 @@ Digital-first companies like Strava, HelloFresh, Auto Trader, Burberry, and DPG 
 
 ![diagram of snowplow architecture](@site/static/img/snowplow-cdi.png)
 
-### Why Next-Gen CDI?​
+### Why Customer Data Infrastructure (CDI)?​​
 
 Snowplow lays the foundation for an organization's advanced analytics, operational, and ML and AI use cases, including customer insights, predict customer behaviors, hyper-personalize customer experiences, and detect fraud in real time. 
 

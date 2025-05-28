@@ -31,7 +31,7 @@
     "@mui/icons-material": "^5.11.16",
     "@mui/lab": "^5.0.0-alpha.137",
     "@mui/material": "^5.12.3",
-    "@mui/x-data-grid-premium": "^6.16.3",
+    "@mui/x-data-grid-premium": "6.20.4",
     "@radix-ui/react-dialog": "^1.1.6",
     "@radix-ui/react-dropdown-menu": "^2.1.6",
     "@radix-ui/react-slot": "1.0.2",

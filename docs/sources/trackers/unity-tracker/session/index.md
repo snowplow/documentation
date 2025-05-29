@@ -13,6 +13,7 @@ On those two platforms, session information is stored in [`PlayerPrefs`](https:/
 
 | **Argument Name** | **Description** | **Required?** | **Default** |
 | --- | --- | --- | --- |
+| `sessionPath` | The file path to store the persistent session state in | Yes (accepts null) | "snowplow_session.dict" |
 | `foregroundTimeout` | The time until a session expires in focus | No | 600 (s) |
 | `backgroundTimeout` | The time until a session expires in back | No | 300 (s) |
 | `checkInterval` | How often to validate the session timeout | No | 15 (s) |
@@ -20,12 +21,20 @@ On those two platforms, session information is stored in [`PlayerPrefs`](https:/
 A full Session construction should look like the following:
 
 ```csharp
-Session session = new Session (1200, 600, 30);
+Session session = new Session ("snowplow_session_state.json", 1200, 600, 30);
 ```
 
-The timeout's refer to the length of time the session remains active after the last event is sent. As long as events are sent within this limit the session will not timeout.
+A minimal construction would be:
+
+```csharp
+Session session = new Session (null);
+```
+
+The timeouts refer to the length of time the session remains active after the last event is sent. As long as events are sent within this limit the session will not timeout.
 
 ### Functions
+
+Except `sessionPath`, all of the constructor variables can be altered/retrieved after creation with the accompanying `session.SetXXX()`/`session.GetXXX()` functions.
 
 #### `SetBackground(bool)`
 

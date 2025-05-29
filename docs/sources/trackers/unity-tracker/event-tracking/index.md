@@ -6,6 +6,9 @@ sidebar_position: 80
 
 ## Event Types
 
+You track events by building an event payload using event-specific Builder objects, and passing the result to a tracker instance's `Track()` method.
+Your events can have common fields configured with the respective `SetCustomContexts()`, `SetTimestamp()`, and `SetEventId()` methods, in addition to event-specific fields covered below.
+
 #### Track page views with `Track(PageView)`
 
 You can use `Track(PageView)` to track a user viewing a web page within your app.

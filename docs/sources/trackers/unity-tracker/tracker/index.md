@@ -23,7 +23,7 @@ A full Tracker construction should look like the following:
 ```csharp
 IEmitter e1 = new AsyncEmitter ("com.collector.acme")
 Subject subject = new Subject();
-Session session = new Session();
+Session session = new Session(null);
 Tracker t1 = new Tracker(e1, "Namespace", "AppId", subject, session, DevicePlatforms.Desktop, true);
 ```
 

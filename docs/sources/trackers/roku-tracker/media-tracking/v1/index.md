@@ -1,33 +1,39 @@
 ---
-title: "Video tracking"
+title: "Media tracking (v1)"
 date: "2021-12-23"
-sidebar_position: 4500
 ---
 
-Video tracking enables collecting events about video playback from the [Video node](https://developer.roku.com/en-gb/docs/references/scenegraph/media-playback-nodes/video.md) provided in the Roku SceneGraph SDK for media playback. Once enabled for a Video node, the tracker subscribes to selected events and tracks them automatically. This makes adding video tracking into your Roku channels really simple.
+Media tracking has [multiple versions](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/index.md) of schema available.
+This document is for version 1 of the schemas, it is recommended to [migrate to v2 tracking](/docs/sources/trackers/roku-tracker/media-tracking/v2/index.md#migrating-from-v1).
 
 ## Usage
 
-To start video tracking for a Video node, assign a `roAssociativeArray` with the video node to the `enableVideoTracking` property:
+To start media tracking for an Audio/Video node, assign a `roAssociativeArray` with the node to the `enableVideoTracking` property:
 
 ```brightscript
 m.global.snowplow.enableVideoTracking = {
-    label: "videoLabel", ' optional
     video: m.Video
 }
 ```
 
-In addition to the video node, the `enableVideoTracking` property accepts several optional attributes listed in the table below.
+From tracker version 0.3.0:
+- You can also use `enableAudioTracking` and pass the node via `audio` instead of `video`
+- The v2 `enableMediaTracking` call and `media` option will also work, the tracker will use v1 tracking if the optional `version` option is defined as `1`
+
+In addition to the node and version selector, the `enableVideoTracking` property accepts several optional attributes listed in the tables below.
 
 | Attribute | Type | Description | Required? |
 | --- | --- | --- | --- |
-| `video` | Video | Video node to be tracked | yes |
-| `label` | String | An identifiable custom label sent with the event | no |
+| `media` / `audio` / `video` | Audio / Video | Audio/Video node to be tracked | yes |
+| `version` | Integer | Tracking schema version to use; defaults to 1 if not provided for `enableVideoTracking` and `enableAudioTracking` | no |
+| `label` / `options.label` | String | An identifiable custom label sent with the event | no |
 | `options.captureEvents` | String[] | Types of events to capture | no, defaults to all events except for `position` |
 | `options.boundaries` | Integer[] | Percentage boundaries in playback for which events will be sent | no, defaults to `[10, 25, 50, 75]` |
-| `options.positionInterval` | integer | Interval in seconds in which `position` events should be reported | no, defaults to 5 |
+| `options.positionInterval` | Integer | Interval in seconds in which `position` events should be reported | no, defaults to 5 |
+| `context` / `entities` | SelfDescribingJSON[] | Array of custom entities to include with all generated media events | no |
 
-To stop tracking events from the video node, set the `disableVideoTracking` property. The tracker will then stop observing and tracking events from the video node. The property should be set with an `roAssociativeArray` with exactly one attribute, `video`, like so:
+To stop tracking events from the node, set the `disableVideoTracking`/`disableAudioTracking` property. The tracker will then stop observing and tracking events from the node.
+The property should be set with an `roAssociativeArray` with exactly one attribute, `video` (or `audio`/`media`), like so:
 
 ```brightscript
 m.global.snowplow.disableVideoTracking = {
@@ -36,6 +42,8 @@ m.global.snowplow.disableVideoTracking = {
 ```
 
 ## Media Player Events
+
+### Media Events
 
 All playback events are tracked automatically and conform to the `media_player_event` schema. The schema has two properties:
 

@@ -28,20 +28,21 @@ The package contains a fully incremental model that transforms raw media player 
   * [YouTube tracking plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/youtube/index.md).
   * [Vimeo tracking plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/vimeo/index.md).
 * [media tracking APIs on our iOS and Android trackers](/docs/sources/trackers/mobile-trackers/tracking-events/media-tracking/index.md) for mobile apps.
+* [media tracking APIs on our Roku tracker](/docs/sources/trackers/roku-tracker/media-tracking/index.md) for [Roku](https://www.roku.com/) devices
 
 <details>
 <summary>Version 1 and version 2 of the media event and context entity schemas</summary>
 
 There are two versions of schemas for media events that our trackers may use to track media events. This has an effect on the information provided by the media package. In contrast with v1, the v2 schemas contain information about the media playback that is computed directly on the tracker and is more accurate (e.g., play time, buffering time). They also introduce new schemas for tracking ads during media playback.
 
-1. v1 media schemas (used by the HTML5 and YouTube plugin for JavaScript tracker):
+1. v1 media schemas (used by the HTML5 and YouTube plugin for JavaScript tracker and the Roku tracker):
    - [media-player event schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player_event/jsonschema/1-0-0) used for all media events.
    - [media-player context v1 schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player/jsonschema/1-0-0).
    - Depending on the plugin / intention there are player-specific contexts:
       - in case of embedded YouTube tracking: Have the [YouTube specific context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.youtube/youtube/jsonschema/1-0-0) enabled.
       - in case of HTML5 audio or video tracking: Have the [HTML5 media element context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/org.whatwg/media_element/jsonschema/1-0-0) enabled.
       - in case of HTML5 video tracking: Have the [HTML5 video element context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/org.whatwg/video_element/jsonschema/1-0-0) enabled.
-2. v2 media schemas (used by the media and Vimeo plugins for the JavaScript trackers and the mobile trackers):
+2. v2 media schemas (used by the media and Vimeo plugins for the JavaScript trackers, the Roku tracker, and the mobile trackers):
    - [per-event media event schemas](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.media).
    - [media-player context v2 schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player/jsonschema/2-0-0).
    - optional [media-session context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.media/session/jsonschema/1-0-0).
@@ -50,7 +51,7 @@ There are two versions of schemas for media events that our trackers may use to 
 </details>
 
 :::note
-Support for the version 2 schemas (as used by the media, Vimeo JS plugin or the mobile trackers) has been added in version 0.6 of the media player package. Older package versions only support version 1 schemas.
+Support for the version 2 schemas (as used by the media, Vimeo JS plugin, Roku tracker or the mobile trackers) has been added in version 0.6 of the media player package. Older package versions only support version 1 schemas.
 :::
 
 ## Overview

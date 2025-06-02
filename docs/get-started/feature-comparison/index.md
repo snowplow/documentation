@@ -41,7 +41,7 @@ Here is a detailed list of product features, including which are available as pa
 | [Data modeling management tooling](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/index.md)            |   ✅   |                                     ❌                                      |
 | Jobs monitoring dashboard                                                                                                 |   ✅   |                                     ❌                                      |
 | Failed events alerting                                                                                                    |   ✅   |                                     ❌                                      |
-| Failed events recoveries                                                                                                  |   ✅   |                                     ❌                                      |
+| Failed events in the warehouse                                                                                            |   ✅   |                                     ❌                                      |
 | QA pipeline                                                                                                               |   ✅   |                               do-it-yourself                               |
 | Fine-grained user permissions using access control lists                                                                  |   ✅   |                                     ❌                                      |
 | API key access                                                                                                            |   ✅   |                                     ❌                                      |

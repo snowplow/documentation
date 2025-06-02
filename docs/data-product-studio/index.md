@@ -170,7 +170,7 @@ This makes it difficult to understand what the event captures based on the event
 Also, versioning of the schema is less unintuitive, because adding a new event type means updating the schema version for all other types as well.
 This makes the event schemas more difficult to evolve independently and may introduce undesired dependencies.
 
-<div style={{ width: "50%", float: "left", paddingRight: "5px" }}>
+<div style={{ width: "100%"}}>
 
 :::warning `website_action` groups unrelated events
 It is not obvious from the event name `website_action` what it captures. The event also groups together two unrelated actions that are distinguished by the `type` property.
@@ -200,7 +200,7 @@ It is not obvious from the event name `website_action` what it captures. The eve
 :::
 
 </div>
-<div style={{ width: "50%", float: "left", paddingLeft: "5px" }}>
+<div style={{ width: "100%" }}>
 
 :::tip `view_product` and `click_list_item` events
 Each action is represented using a single event schema.

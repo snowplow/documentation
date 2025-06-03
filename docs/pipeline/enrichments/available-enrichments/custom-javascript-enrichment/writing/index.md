@@ -328,3 +328,18 @@ function process(event, params, headers) {
   }
 }
 ```
+
+## Erasing derived contexts
+
+Starting with Enrich 5.4.0, it is possible to erase derived contexts.
+
+It can be used to update existing derived contexts as well. The way to do that is shown in the below example:
+
+```js
+function process(event) {
+  const derived = JSON.parse(event.getDerived_contexts());
+  event.eraseDerived_contexts();
+  derived.data[0].data.deviceBrand = "test1";
+  return derived.data;
+}
+```

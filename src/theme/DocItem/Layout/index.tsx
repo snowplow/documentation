@@ -17,6 +17,12 @@ import { Paper } from '@mui/material'
 
 import { useTutorial, TutorialKind } from '@site/src/components/tutorials/hooks'
 
+const BreadcrumbsWrapper = ({ className }: { className?: string }) => (
+  <div className={className}>
+    <DocBreadcrumbs />
+  </div>
+)
+
 /**
  * Decide if the toc should be rendered, on mobile or desktop viewports
  */
@@ -50,8 +56,8 @@ export default function DocItemLayout({ children }: Props): JSX.Element {
       <div className={clsx('col', !docTOC.hidden && styles.docItemCol)}>
         <DocVersionBanner />
         <div className={styles.docItemContainer}>
-          <article className="prose md:prose xl:prose-lg max-w-none leading-relaxed">
-            <DocBreadcrumbs />
+          <article className="prose md:prose xl:prose-lg max-w-none leading-relaxed prose-table:rounded-lg prose-td:ps-3 prose-td:pe-3 prose-th:ps-3 prose-th:pe-3">
+            <BreadcrumbsWrapper className="" />
             <DocVersionBadge />
             {docTOC.mobile}
             {tutorial === TutorialKind.Tutorial ? (

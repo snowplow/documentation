@@ -185,6 +185,7 @@ html[data-theme='dark'] {
   }
 
   ul.breadcrumbs {
+    padding: 0;
     margin-bottom: 32px;
   }
 }
@@ -638,8 +639,9 @@ img.full-width {
   max-height: 100vh;
   object-fit: cover;
 }
+/* doc markdown grid layout control END*/
 
-/*Control rest of the elements erase after we upgrade */
+/* START Control rest of the elements erase after we upgrade */
 .docItemContainer_src-theme-DocItem-Layout-styles-module nav, 
 .docItemContainer_src-theme-DocItem-Layout-styles-module article nav, 
 .docItemContainer_src-theme-DocItem-Layout-styles-module article footer  {
@@ -654,4 +656,13 @@ abbr[data-title]:focus:after, abbr[data-title]:hover:after {
   font-size: .875rem;
   padding: 4px 8px;
 }
-/* doc markdown grid layout control END*/
+.tocCollapsibleContent_node_modules-\@docusaurus-theme-classic-lib-theme-TOCCollapsible-styles-module > ul {
+  padding: .75rem !important;
+  font-size: 1rem !important;
+  margin: 0 !important;
+}
+.tocCollapsibleContent_node_modules-\@docusaurus-theme-classic-lib-theme-TOCCollapsible-styles-module a {
+  text-decoration: none !important;
+}
+/* END  Control rest of the elements erase after we upgrade */
+

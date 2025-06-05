@@ -1,0 +1,114 @@
+---
+position: 3
+title: Calculations
+---
+
+This section explains **what** is calculated, **how** each metric is updated, and **where** the values are stored.
+
+---
+
+### 0. The beginning
+
+Everything starts with the entry point class `com.evoura.snowplow.SnowplowAnalyticsPipeline`, which is responsible for:
+
+1. Creating a Kafka source (a Flink operator to read the data)
+2. Parsing the data into a known object (`com.evoura.snowplow.model.SnowplowEvent`)
+3. Branching the data for multiple windowed calculations
+4. Defining how each window processes the data
+5. Sinking the features into Redis
+
+### 1. Calculation workflow — high level
+
+1. The Snowplow tracker sends raw events
+2. Flink parses events, assigns timestamps, and sends each event down a dedicated branch
+3. Each branch runs a windowed function that maintains just enough state to update the metric
+4. The function emits a `MetricValue` object at a fixed cadence (30 seconds or 1 minute)
+5. Flink writes the metric to Redis using a predictable key (`user:{id}:feature:{name}_{window}`)
+
+---
+
+### 2. Window types
+
+| **Window type** | **Purpose**                  | **Size**           | **Emit every**     | **Ends when**       | **Used in**                      |
+|-----------------|------------------------------|--------------------|--------------------|---------------------|----------------------------------|
+| Rolling         | Continuous, sliding view     | 5 m, 1 h, 24 h     | 30 s or 1 min      | Never; always shifts | Product, Category, Cart, Purchase |
+| Session         | Group events per visit       | Gap-based (30 m idle) | 30 s             | No events for 30 m   | Session metrics                  |
+
+![live-shopper-calculations-architecture.png](./images/live-shopper-calculations-architecture.png)
+
+- All rolling windows use a custom `RollingWindowProcessFunction`
+- The session view uses `SnowplowSessionWindow`
+
+For example, aggregation on a **rolling window of 5 seconds** and a **session window with a 3-second gap** would look like:
+
+![live-shopper-calculations-window.png](./images/live-shopper-calculations-window.png)
+
+![live-shopper-calculations-window2.png](./images/live-shopper-calculations-window2.png)
+
+More detail is available in [**The case for a custom window in Flink: Expanding your streaming use-cases**](https://pedromazala.substack.com/p/the-case-for-a-custom-window-in-flink?utm_source=snowplow&utm_medium=accelerator&utm_campaign=live-shopper).
+
+---
+
+### 3. Per-feature logic
+
+#### 3.1 Product views
+
+- **Event filter**: `product_view`
+- **Key**: `userId`
+- **Windows**: 5 m, 1 h
+- **Metrics**: view count, average price, min-max price range  
+  _Emitted as_: `product_view_count_5m`, `avg_viewed_price_1h`, etc.
+
+#### 3.2 Category engagement
+
+- **Event filter**: `list_view`, `product_view`
+- **Key**: `userId`
+- **Windows**: 5 m, 1 h, 24 h
+- **Metrics**: category view count, repeat views, top category in window
+
+#### 3.3 Cart behavior
+
+- **Event filter**: `add_to_cart`, `remove_from_cart`
+- **Key**: `userId`
+- **Windows**: 5 m, 1 h
+- **Metrics**: adds, removes, net cart value, cart change frequency
+
+#### 3.4 Purchase history
+
+- **Event filter**: checkout events (`add_to_cart`, `remove_from_cart`, `checkout_step`)
+- **Key**: `userId`
+- **Window**: 24 h
+- **Metrics**: order count, total spend, average order value
+
+#### 3.5 Session analytics
+
+- **Event filter**: all high-level engagement events
+- **Key**: `sessionId`
+- **Window**: session gap (30 m)
+- **Metrics**: session duration, pages per session, bounce flag, cart-to-page ratio
+
+---
+
+### 4. Redis key pattern
+
+```
+user:{user_id}:{feature}_{window}
+
+```
+
+**Examples**:
+- `user:trent@snowplowanalytics.com:product_view_count_5m`
+- `user:lucas@snowplowanalytics.com:session_duration`
+
+Downstream apps (dashboards, ML models, chat bots) read these keys directly.
+
+---
+
+### 5. Why this matters
+
+- Metrics are calculated in-stream, so they’re always fresh
+- Rolling windows offer an up-to-date view over the last N minutes or hours
+- Session windows account for user inactivity, producing clean session data
+- Redis keys are predictable, making metrics easy to use across services
+
+With this setup, anyone using the metrics knows exactly **what** was counted, **where** it came from, and **how fresh** it is.

@@ -223,4 +223,4 @@ When we check `com.evoura.snowplow.operator.product.ProductViewEvent`, we notice
     
     After these changes, let's re-run the script `./up.sh`. It will rebuild the docker image and restart the containers. From now on you should be able to see the most seen brand by user. 
     
-    ![image.png](attachment:762d3186-fadb-47c4-b454-7c53710ca599:image.png)
+    ![image.png](./images/live-shopper-add-calculation-redis.webp)

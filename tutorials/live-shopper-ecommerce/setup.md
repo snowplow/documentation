@@ -9,6 +9,39 @@ You can find the architectural overview in [this Excalidraw scene](https://link.
 
 ![live-shopper-setup-architecture.svg](./images/live-shopper-setup-architecture.svg)
 
+This architecture includes four key parts:
+
+### 1. Snowplow: Event capture and ingestion
+
+- **E-store front-end and Snowplow JavaScript tracker**: Every click (e.g., product view, add to cart) is emitted as a structured Snowplow event.
+- **Snowplow Local to Kafka**: Events are validated and enriched with device and geolocation data, then forwarded into Kafka. Kafka provides ordering guarantees and back-pressure protection.
+
+### 2. Real-time stream processing in Flink
+
+- **Source**: A single Flink job reads from the `enriched-good` topic.
+- **Branching by event type**: The stream is split into four logical lanes (product, category, cart, purchase).
+- **Keying and windowing**:
+  - **Rolling windows** (5 min, 1 h, 24 h): Keyed by `user_id` for always-fresh “last-N-minutes” stats.
+  - **Session windows**: Keyed by `session_id`, grouping events into sessions that end after 30 minutes of inactivity.
+- **Aggregations**: Each lane computes its own features (e.g., view counts, average price, cart value, session duration).
+- **Metric parsers**: Convert aggregated values into one or more metrics. For example, a unique product count may feed both product view metrics and average viewed price metrics.
+
+### 3. Feature store and action loop
+
+- **Sink to Redis**: Flink writes each metric to Redis using deterministic keys like `user:{id}:{feature}_{window}` or `session:{sid}:{metric}`, making Redis a low-latency feature store.
+- **Backend consumers**: The e-store backend (or any downstream app like ML models or dashboards) can retrieve metrics in microseconds to:
+  - trigger live-chat prompts when high-value carts stall
+  - send discounts based on price sensitivity
+  - feed both real-time dashboards and long-term analytics using consistent definitions
+
+### 4. Why this layout matters
+
+- **Sub-second freshness**: Metrics are computed in the stream, not via nightly batch jobs, so they’re actionable in-session.
+- **Single source of truth**: The same logic powers dashboards and in-session nudges.
+- **Composable and portable**: The entire system runs in Docker, and can be adapted to cloud-managed Kafka/Flink/Redis with minimal changes.
+
+---
+
 ## How to run
 
 1. [**Clone the repository**](https://github.com/snowplow-industry-solutions/flink-live-shopper)
@@ -19,6 +52,8 @@ You can find the architectural overview in [this Excalidraw scene](https://link.
    - **Redis Insights**: http://localhost:5540  
    - **Flink dashboard**: http://localhost:8081  
    - **Grafana**: http://localhost:3001  
+
+---
 
 ## Dataflow steps
 
@@ -47,6 +82,8 @@ You can find the architectural overview in [this Excalidraw scene](https://link.
    - These metrics are available for real-time lookups by downstream systems.
 
    ![live-shoper-setup-redis.png](./images/live-shoper-setup-redis.png)
+
+---
 
 To test the system, log in to the ecommerce store using one of the [**mock users**](https://github.com/snowplow-industry-solutions/ecommerce-nextjs-example-store/blob/main/src/mocks/users.ts).
 

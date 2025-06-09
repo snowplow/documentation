@@ -8,7 +8,7 @@
     --background: 210 20% 98.04%;
     --foreground: 220.91 39.29% 10.98%;
     --muted: 220 13.04% 90.98%;
-    --muted-foreground: 220 8.94% 46.08%;
+    --muted-foreground: 215 14% 34%;
     --popover: 0 0% 100%;
     --popover-foreground: 220.91 39.29% 10.98%;
     --card: 0 0% 100%;
@@ -589,8 +589,8 @@ Controls the display of navbar/sidebar items
 /*START doc markdown grid layout control */
 .theme-doc-markdown {
   --padding-inline: 1rem;
-  --content-max-width: 680px;
-  --breakout-max-width: 1024px;
+  --content-max-width: 720px;
+  --breakout-max-width: 960px;
 
   --breakout-size: calc(
     (var(--breakout-max-width) - var(--content-max-width)) / 2
@@ -645,7 +645,7 @@ img.full-width {
 .docItemContainer_src-theme-DocItem-Layout-styles-module nav, 
 .docItemContainer_src-theme-DocItem-Layout-styles-module article nav, 
 .docItemContainer_src-theme-DocItem-Layout-styles-module article footer  {
-  max-width: 680px;
+  max-width: 740px;
   margin: 3rem auto 0 auto;
 }
 abbr[data-title]:focus:after, abbr[data-title]:hover:after {

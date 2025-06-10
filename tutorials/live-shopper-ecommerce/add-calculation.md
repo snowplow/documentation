@@ -176,7 +176,7 @@ public class ProductFeature implements Serializable {
   ...
 }
 ```
-This class contains a `TypeInfoFactory` class. A `TypeInfoFactory` is a way to tell Flink what's being forwarded to the next operator. This is required because we decided to disable Kryo deserialization on Flink. TODO why?
+This class contains a `TypeInfoFactory` class. A `TypeInfoFactory` is a way to tell Flink what's being forwarded to the next operator. This is required because we decided to turn off Kryo deserialization on Flink.
 
 Update the `ProductFeature` `TypeInfoFactory` to forward the `mostViewedBrand` feature.
 

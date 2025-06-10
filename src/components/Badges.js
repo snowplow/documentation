@@ -4,7 +4,7 @@ export default function Badges(props) {
   if (props.badgeType === 'Docker Pulls') {
     const { repo } = props
     return (
-      <a href={`https://hub.docker.com/r/${repo}`}>
+      <a href={`https://hub.docker.com/r/${repo}`} className="not-prose">
         <img
           loading="lazy"
           src={`https://img.shields.io/docker/pulls/${repo}`}
@@ -17,7 +17,7 @@ export default function Badges(props) {
   }
   if (props.badgeType === 'Actively Maintained') {
     return (
-      <a href="/docs/collecting-data/collecting-from-own-applications/tracker-maintenance-classification">
+      <a href="/docs/collecting-data/collecting-from-own-applications/tracker-maintenance-classification" className="not-prose">
         <img
           loading="lazy"
           src="https://img.shields.io/static/v1?style=flat&amp;label=Snowplow&amp;message=Actively%20Maintained&amp;color=6638b8&amp;labelColor=9ba0aa&amp;logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAeFBMVEVMaXGXANeYANeXANZbAJmXANeUANSQAM+XANeMAMpaAJhZAJeZANiXANaXANaOAM2WANVnAKWXANZ9ALtmAKVaAJmXANZaAJlXAJZdAJxaAJlZAJdbAJlbAJmQAM+UANKZANhhAJ+EAL+BAL9oAKZnAKVjAKF1ALNBd8J1AAAAKHRSTlMAa1hWXyteBTQJIEwRgUh2JjJon21wcBgNfmc+JlOBQjwezWF2l5dXzkW3/wAAAHpJREFUeNokhQOCA1EAxTL85hi7dXv/E5YPCYBq5DeN4pcqV1XbtW/xTVMIMAZE0cBHEaZhBmIQwCFofeprPUHqjmD/+7peztd62dWQRkvrQayXkn01f/gWp2CrxfjY7rcZ5V7DEMDQgmEozFpZqLUYDsNwOqbnMLwPAJEwCopZxKttAAAAAElFTkSuQmCC"
@@ -30,7 +30,7 @@ export default function Badges(props) {
   }
   if (props.badgeType === 'Maintained') {
     return (
-      <a href="/docs/collecting-data/collecting-from-own-applications/tracker-maintenance-classification">
+      <a href="/docs/collecting-data/collecting-from-own-applications/tracker-maintenance-classification" className="not-prose">
         <img
           loading="lazy"
           src="https://img.shields.io/static/v1?style=flat&label=Snowplow&message=Maintained&color=9e62dd&labelColor=9ba0aa&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAeFBMVEVMaXGXANeYANeXANZbAJmXANeUANSQAM+XANeMAMpaAJhZAJeZANiXANaXANaOAM2WANVnAKWXANZ9ALtmAKVaAJmXANZaAJlXAJZdAJxaAJlZAJdbAJlbAJmQAM+UANKZANhhAJ+EAL+BAL9oAKZnAKVjAKF1ALNBd8J1AAAAKHRSTlMAa1hWXyteBTQJIEwRgUh2JjJon21wcBgNfmc+JlOBQjwezWF2l5dXzkW3/wAAAHpJREFUeNokhQOCA1EAxTL85hi7dXv/E5YPCYBq5DeN4pcqV1XbtW/xTVMIMAZE0cBHEaZhBmIQwCFofeprPUHqjmD/+7peztd62dWQRkvrQayXkn01f/gWp2CrxfjY7rcZ5V7DEMDQgmEozFpZqLUYDsNwOqbnMLwPAJEwCopZxKttAAAAAElFTkSuQmCC"
@@ -43,7 +43,7 @@ export default function Badges(props) {
   }
   if (props.badgeType === 'Early Release') {
     return (
-      <a href="/docs/collecting-data/collecting-from-own-applications/tracker-maintenance-classification">
+      <a href="/docs/collecting-data/collecting-from-own-applications/tracker-maintenance-classification" className="not-prose">
         <img
           loading="lazy"
           src="https://img.shields.io/static/v1?style=flat&amp;label=Snowplow&amp;message=Early%20Release&amp;color=014477&amp;labelColor=9ba0aa&amp;logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAeFBMVEVMaXGXANeYANeXANZbAJmXANeUANSQAM+XANeMAMpaAJhZAJeZANiXANaXANaOAM2WANVnAKWXANZ9ALtmAKVaAJmXANZaAJlXAJZdAJxaAJlZAJdbAJlbAJmQAM+UANKZANhhAJ+EAL+BAL9oAKZnAKVjAKF1ALNBd8J1AAAAKHRSTlMAa1hWXyteBTQJIEwRgUh2JjJon21wcBgNfmc+JlOBQjwezWF2l5dXzkW3/wAAAHpJREFUeNokhQOCA1EAxTL85hi7dXv/E5YPCYBq5DeN4pcqV1XbtW/xTVMIMAZE0cBHEaZhBmIQwCFofeprPUHqjmD/+7peztd62dWQRkvrQayXkn01f/gWp2CrxfjY7rcZ5V7DEMDQgmEozFpZqLUYDsNwOqbnMLwPAJEwCopZxKttAAAAAElFTkSuQmCC"
@@ -56,7 +56,7 @@ export default function Badges(props) {
   }
   if (props.badgeType === 'Unsupported') {
     return (
-      <a href="/docs/collecting-data/collecting-from-own-applications/tracker-maintenance-classification">
+      <a href="/docs/collecting-data/collecting-from-own-applications/tracker-maintenance-classification" className="not-prose">
         <img
           loading="lazy"
           src="https://img.shields.io/static/v1?style=flat&label=Snowplow&message=Unsupported&color=24292e&labelColor=lightgrey&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAeFBMVEVMaXGXANeYANeXANZbAJmXANeUANSQAM+XANeMAMpaAJhZAJeZANiXANaXANaOAM2WANVnAKWXANZ9ALtmAKVaAJmXANZaAJlXAJZdAJxaAJlZAJdbAJlbAJmQAM+UANKZANhhAJ+EAL+BAL9oAKZnAKVjAKF1ALNBd8J1AAAAKHRSTlMAa1hWXyteBTQJIEwRgUh2JjJon21wcBgNfmc+JlOBQjwezWF2l5dXzkW3/wAAAHpJREFUeNokhQOCA1EAxTL85hi7dXv/E5YPCYBq5DeN4pcqV1XbtW/xTVMIMAZE0cBHEaZhBmIQwCFofeprPUHqjmD/+7peztd62dWQRkvrQayXkn01f/gWp2CrxfjY7rcZ5V7DEMDQgmEozFpZqLUYDsNwOqbnMLwPAJEwCopZxKttAAAAAElFTkSuQmCC"
@@ -72,6 +72,7 @@ export default function Badges(props) {
       <img
         src="https://img.shields.io/packagist/v/snowplow/snowplow-tracker"
         alt="Latest version"
+        className="not-prose"
       ></img>
     )
   }
@@ -81,6 +82,7 @@ export default function Badges(props) {
         <img
           src="https://img.shields.io/npm/v/@snowplow/react-native-tracker"
           alt="Latest version"
+          className="not-prose"
         ></img>
       </a>
     )
@@ -91,6 +93,7 @@ export default function Badges(props) {
         <img
           src="https://img.shields.io/pypi/v/snowplow-tracker"
           alt="Latest version"
+          className="not-prose"
         ></img>
       </a>
     )
@@ -101,6 +104,7 @@ export default function Badges(props) {
       <img
         src="https://img.shields.io/packagist/php-v/snowplow/snowplow-tracker"
         alt="PHP Version"
+        className="not-prose"
       ></img>
     )
   }
@@ -110,6 +114,7 @@ export default function Badges(props) {
         <img
           src="https://img.shields.io/npm/dependency-version/@snowplow/react-native-tracker/peer/react-native"
           alt="React Native Version"
+          className="not-prose"
         ></img>
       </a>
     )
@@ -120,6 +125,7 @@ export default function Badges(props) {
         <img
           src="https://img.shields.io/pypi/pyversions/snowplow-tracker"
           alt="React Native Version"
+          className="not-prose"
         ></img>
       </a>
     )
@@ -130,6 +136,7 @@ export default function Badges(props) {
         <img
           src="https://img.shields.io/github/v/release/snowplow/snowplow-javascript-tracker?include_prereleases&sort=semver&style=flat"
           alt="JavaScript version"
+          className="not-prose"
         ></img>
       </a>
     )
@@ -144,31 +151,33 @@ export default function Badges(props) {
           loading="lazy"
           alt="Release Version"
           title="Release Version"
-          className="img_ev3q"
+          className="img_ev3q not-prose"
         ></img>
       </a>
     )
   }
   if (props.badgeType === 'SCL') {
     return (
-      <a href="/community-license-1.0">
+      <a href="/community-license-1.0" className="not-prose">
         <img
           loading="lazy"
           src="https://img.shields.io/static/v1?style=flat&label=Snowplow&message=Community%20License&color=9e62dd&labelColor=9ba0aa&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAeFBMVEVMaXGXANeYANeXANZbAJmXANeUANSQAM+XANeMAMpaAJhZAJeZANiXANaXANaOAM2WANVnAKWXANZ9ALtmAKVaAJmXANZaAJlXAJZdAJxaAJlZAJdbAJlbAJmQAM+UANKZANhhAJ+EAL+BAL9oAKZnAKVjAKF1ALNBd8J1AAAAKHRSTlMAa1hWXyteBTQJIEwRgUh2JjJon21wcBgNfmc+JlOBQjwezWF2l5dXzkW3/wAAAHpJREFUeNokhQOCA1EAxTL85hi7dXv/E5YPCYBq5DeN4pcqV1XbtW/xTVMIMAZE0cBHEaZhBmIQwCFofeprPUHqjmD/+7peztd62dWQRkvrQayXkn01f/gWp2CrxfjY7rcZ5V7DEMDQgmEozFpZqLUYDsNwOqbnMLwPAJEwCopZxKttAAAAAElFTkSuQmCC"
           alt="Snowplow Community License"
           title="Snowplow Community License badge"
+          className="not-prose"
         ></img>
       </a>
     )
   }
   if (props.badgeType === 'SPAL') {
     return (
-      <a href="/personal-and-academic-license-1.0/">
+      <a href="/personal-and-academic-license-1.0/" className="not-prose" >
         <img
           loading="lazy"
           src="https://img.shields.io/static/v1?style=flat&label=Snowplow&message=Personal%20and%20Academic%20License&color=6737b7&labelColor=9ba0aa&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAMAAAAoLQ9TAAAAeFBMVEVMaXGXANeYANeXANZbAJmXANeUANSQAM+XANeMAMpaAJhZAJeZANiXANaXANaOAM2WANVnAKWXANZ9ALtmAKVaAJmXANZaAJlXAJZdAJxaAJlZAJdbAJlbAJmQAM+UANKZANhhAJ+EAL+BAL9oAKZnAKVjAKF1ALNBd8J1AAAAKHRSTlMAa1hWXyteBTQJIEwRgUh2JjJon21wcBgNfmc+JlOBQjwezWF2l5dXzkW3/wAAAHpJREFUeNokhQOCA1EAxTL85hi7dXv/E5YPCYBq5DeN4pcqV1XbtW/xTVMIMAZE0cBHEaZhBmIQwCFofeprPUHqjmD/+7peztd62dWQRkvrQayXkn01f/gWp2CrxfjY7rcZ5V7DEMDQgmEozFpZqLUYDsNwOqbnMLwPAJEwCopZxKttAAAAAElFTkSuQmCC"
           alt="Snowplow Personal and Academic License"
           title="Snowplow Personal and Academic License badge"
+          className="not-prose"
         ></img>
       </a>
     )

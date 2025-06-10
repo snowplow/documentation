@@ -50,7 +50,7 @@ export default function DocItemLayout({ children }: Props): JSX.Element {
       <div className={clsx('col', !docTOC.hidden && styles.docItemCol)}>
         <DocVersionBanner />
         <div className={styles.docItemContainer}>
-          <article>
+          <article className="prose max-w-none leading-relaxed prose-table:rounded-lg prose-td:ps-3 prose-td:pe-3 prose-th:ps-3 prose-th:pe-3 prose-ul:mt-0 prose-ol:mt-0 prose-code:before:content-none prose-code:after:content-none prose-code:font-normal prose-code:text-base prose-img:mx-auto prose-img:block">
             <DocBreadcrumbs />
             <DocVersionBadge />
             {docTOC.mobile}

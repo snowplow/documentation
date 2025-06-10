@@ -8,7 +8,7 @@
     --background: 210 20% 98.04%;
     --foreground: 220.91 39.29% 10.98%;
     --muted: 220 13.04% 90.98%;
-    --muted-foreground: 220 8.94% 46.08%;
+    --muted-foreground: 215 14% 34%;
     --popover: 0 0% 100%;
     --popover-foreground: 220.91 39.29% 10.98%;
     --card: 0 0% 100%;
@@ -125,7 +125,7 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-background-color: var(--background);
+  
   --ifm-color-primary: #6638b8;
   --ifm-color-primary-dark: #522d93;
   --ifm-color-primary-darker: #472781;
@@ -140,7 +140,7 @@
   --ifm-code-padding-vertical: 0.05rem;
   --ifm-font-family-base: 'Inter18pt-Regular', var(--font-fallback);
   --ifm-menu-color-active: #6638b8;
-  --ifm-font-color-base: var(--foreground);
+  --ifm-font-color-base: var(--muted-foreground);
   --ifm-font-color-base-inverse: rgb(218, 221, 225);
   --ifm-toc-padding-horizontal: 20px;
   --docusaurus-highlighted-code-line-bg: rgba(224, 199, 50, 0.2);
@@ -151,8 +151,8 @@
 
 
 /* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
-  --ifm-background-color: var(--background );
+html[data-theme='dark'] {
+  
 
   --ifm-menu-color-active: #b198df;
   --ifm-color-primary: #b198df;
@@ -185,6 +185,7 @@
   }
 
   ul.breadcrumbs {
+    padding: 0;
     margin-bottom: 32px;
   }
 }
@@ -298,9 +299,7 @@ button.snowplow-button:focus {
 
 /* End of buttons */
 
-p {
-  line-height: 24px;
-}
+
 
 header,
 h1,
@@ -311,27 +310,10 @@ h5 {
   font-family: 'Inter18pt-Bold', var(--font-fallback);
 }
 
-
-h1 {
-  font-size: 38px;
-  line-height: 44px;
+table {
+  display: inline-table;
 }
 
-h2 {
-  font-size: 28px;
-  line-height: 40px;
-}
-
-h3 {
-  font-size: 20px;
-  line-height: 24px;
-}
-
-table h1,
-table h2,
-table h3 {
-  margin-bottom: 0;
-}
 
 .table-of-contents__left-border {
   border-left-color: var(--border);
@@ -382,6 +364,9 @@ a.card:hover::after {
   top: 2rem;
   left: 2rem;
   bottom: auto;
+}
+.breadcrumbs {
+  padding-left: 0;
 }
 
 .breadcrumbs__item:not(:last-child):after {
@@ -604,8 +589,8 @@ Controls the display of navbar/sidebar items
 /*START doc markdown grid layout control */
 .theme-doc-markdown {
   --padding-inline: 1rem;
-  --content-max-width: 680px;
-  --breakout-max-width: 1200px;
+  --content-max-width: 720px;
+  --breakout-max-width: 960px;
 
   --breakout-size: calc(
     (var(--breakout-max-width) - var(--content-max-width)) / 2
@@ -626,11 +611,14 @@ Controls the display of navbar/sidebar items
 
 .theme-doc-markdown  > :not(.breakout, .full-width),
 .full-width > :not(.breakout, .full-width) {
-  grid-column: 3;
+  grid-column-start: 3;
+  grid-column-end: 4;
 }
 
-.theme-doc-markdown > .breakout, .theme-doc-markdown p img {
-  grid-column: 2;
+.theme-doc-markdown > .breakout, .theme-doc-markdown table, .theme-doc-markdown p:has(img, table), .theme-doc-markdown div:has(div.css-yu4ftp-MuiDataGrid-root, div.css-m0j720-MuiDataGrid-root) {
+  grid-column-start: 2!important;
+  grid-column-end: 5!important;
+  height: fit-content;
 }
 
 .theme-doc-markdown  > .full-width  {
@@ -639,22 +627,50 @@ Controls the display of navbar/sidebar items
   grid-template-columns: inherit;
 }
 /*Tutorial on same grid as rest of ducumentation site */
-.theme-doc-markdown .MuiBox-root {
-    grid-column: 1;
-}
 
+.theme-doc-markdown .MuiBox-root {
+  grid-column: 1;
+}
+.theme-doc-markdown .MuiBox-root.css-pehwr4 {
+  grid-column: 3;
+}
 img.full-width {
   width: 100%;
   max-height: 100vh;
   object-fit: cover;
 }
+/* doc markdown grid layout control END*/
 
-/*Control rest of the elements erase after we upgrade */
+/* START Control rest of the elements erase after we upgrade */
 .docItemContainer_src-theme-DocItem-Layout-styles-module nav, 
 .docItemContainer_src-theme-DocItem-Layout-styles-module article nav, 
 .docItemContainer_src-theme-DocItem-Layout-styles-module article footer  {
-  max-width: 680px;
+  max-width: 740px;
   margin: 3rem auto 0 auto;
 }
+abbr[data-title]:focus:after, abbr[data-title]:hover:after {
+  background-color: hsl(var(--popover));
+  border-radius: var(--radius);
+  color: var(--popover-foreground);
+  content: attr(data-title);
+  font-size: .875rem;
+  padding: 4px 8px;
+}
+.tocCollapsibleContent_node_modules-\@docusaurus-theme-classic-lib-theme-TOCCollapsible-styles-module > ul {
+  padding: .75rem !important;
+  font-size: 1rem !important;
+  margin: 0 !important;
+}
+.tocCollapsibleContent_node_modules-\@docusaurus-theme-classic-lib-theme-TOCCollapsible-styles-module a {
+  text-decoration: none !important;
+}
+.prose .markdown table thead tr th h3, .prose .markdown table tbody tr td h3 {
+  margin: .5rem 0 !important;
+}
+.prose table thead a {
+  font-weight: 700;
+  text-decoration: none;
+}
 
-/* doc markdown grid layout control END*/
+/* END  Control rest of the elements erase after we upgrade */
+

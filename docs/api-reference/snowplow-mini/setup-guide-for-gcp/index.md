@@ -20,7 +20,7 @@ Snowplow Mini is, in essence, the Snowplow real time stack inside of a single im
 <p>Version {versions.snowplowMini} (recommended) comes with:</p>
 
 - Snowplow Collector NSQ 3.3.0
-- Snowplow Enrich NSQ 5.2.0
+- Snowplow Enrich NSQ 5.4.0
 - Snowplow Elasticsearch Loader 2.1.2
 - Snowplow Iglu Server 0.13.0
 - Opensearch 2.4.0

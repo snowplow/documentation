@@ -6,7 +6,7 @@ sidebar_position: 7
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Snowplow CLI brings data management elements of Snowplow Console into the command line. It allows you to download your data structures and data products to yaml/json files and publish them back to console. This enables git-ops-like workflows, with reviews and brancing.
+Snowplow CLI brings data management elements of Snowplow Console into the command line. It allows you to download your data structures and data products to YAML/JSON files and publish them back to Console. This enables git-ops-like workflows, with reviews and branching.
 
 # Install
 

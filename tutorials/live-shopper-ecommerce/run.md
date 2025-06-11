@@ -3,14 +3,26 @@ position: 2
 title: Run the project
 ---
 
-1. [**Clone the repository**](https://github.com/snowplow-industry-solutions/flink-live-shopper)
-2. Run the script `up.sh`
+1. [Clone the repository](https://github.com/snowplow-industry-solutions/flink-live-shopper)
+2. Run the startup script. This will:
+    - Ensure `.env` files exist, copying from `.env.example` if needed
+    - Update Git submodules
+    - Start all the services defined in the Docker Compose files, in detached mode
+
+   ```bash
+   up.sh
+   ```
+
 3. Access the main interfaces:
-   - **Web application e-store**: http://localhost:3000
-   - **AKHQ**: http://localhost:8085
-   - **Redis Insights**: http://localhost:5540
-   - **Flink dashboard**: http://localhost:8081
-   - **Grafana**: http://localhost:3001
+   - **Web application ecommerce store**: `http://localhost:3000`
+   - **AKHQ (Kafka UI)**: `http://localhost:8085`
+   - **Redis Insights**: `http://localhost:5540`
+   - **Flink dashboard**: `http://localhost:8081`
+   - **Grafana**: `http://localhost:3001`
+4. When finished, stop the containers
+   ```bash
+   docker compose down
+   ```
 
 ## Dataflow steps
 
@@ -40,7 +52,7 @@ title: Run the project
 
    ![Screenshot showing the Redis dashboard](./images/live-shopper-setup-redis.png)
 
----
+## Testing
 
 To test the system, log in to the ecommerce store using one of the [mock users](https://github.com/snowplow-industry-solutions/ecommerce-nextjs-example-store/blob/main/src/mocks/users.ts).
 

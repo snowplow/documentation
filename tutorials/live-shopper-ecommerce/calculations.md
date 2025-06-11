@@ -14,14 +14,13 @@ This section explains what is calculated, how each metric is updated, and where 
 
 Everything starts with the entry point class `com.evoura.snowplow.SnowplowAnalyticsPipeline`, which is responsible for:
 
-1. Creating a Kafka source (a Flink operator to read the data)
-2. Parsing the data into a known object (`com.evoura.snowplow.model.SnowplowEvent`)
-3. Branching the data for multiple windowed calculations
-4. Defining how each window processes the data
-5. Sinking the features into Redis
+- Creating a Kafka source (a Flink operator to read the data)
+- Parsing the data into a known object (`com.evoura.snowplow.model.SnowplowEvent`)
+- Branching the data for multiple windowed calculations
+- Defining how each window processes the data
+- Sinking the features into Redis
 
-### High-level workflow
-
+At a high level, the workflow is:
 1. The Snowplow tracker sends raw events to the Snowplow pipeline, which processes them and forwards them to Flink
 2. Flink parses events, assigns more timestamps, and sends each event down a dedicated branch
 3. Each branch runs a windowed function that maintains just enough state to update the metric
@@ -34,6 +33,8 @@ Everything starts with the entry point class `com.evoura.snowplow.SnowplowAnalyt
 | ----------- | ------------------------ | ----------------------- | ------------- | -------------------- | --------------------------------- |
 | Rolling     | Continuous, sliding view | 5 m, 1 h, 24 h          | 30 s or 1 min | Never; always shifts | Product, Category, Cart, Purchase |
 | Session     | Group events per visit   | Gap-based (30 min idle) | 30 s          | No events for 30 min | Session metrics                   |
+
+This architecture diagram shows more details about the windowing logic:
 
 ![live-shopper-calculations-architecture.png](./images/live-shopper-calculations-architecture.png)
 

@@ -3,7 +3,7 @@ title: Introduction and Overview
 position: 1
 ---
 
-This tutorial will guide you through the process of building a real-time prospect scoring system using Snowplow Signals AI together with a machine learning model.
+This tutorial will guide you through the process of building a real-time prospect scoring system using Snowplow Signals together with a machine learning model.
 
 By the end, you'll understand how to leverage Snowplow event data to predict a prospect's likelihood to convert on your website and trigger personalized engagements.
 
@@ -28,7 +28,7 @@ The system consists of three main blocks:
 
 1. **Marketing Website** – users browse the website, Snowplow behaviour events are sent to the Snowplow Collector.
 2. **Snowplow Infrastructure**: Collector captures the events, Signals calculates aggregated user attributes in near real-time (e.g., `num_pageviews, num_sessions`, etc.).
-3. **Intermediary `/predict` API** that calls the Signals API to get the latest attributes, runs an ML model on the Signals AI output, and sends the response back to the Marketing Website.
+3. **Intermediary `/predict` API** that calls the Signals API to get the latest attributes, runs an ML model on the Signals output, and sends the response back to the Marketing Website.
 
 ![](./screenshots/solution_overview.png)
 

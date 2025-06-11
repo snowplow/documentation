@@ -134,7 +134,7 @@ Adjust it to call the endpoint APIs as often as needed in your use case.
 
 ## Final Notes and Next Steps
 
-This tutorial walked you through the process of building a prospect scoring system using Snowplow Signals AI together with a machine learning model.
+This tutorial walked you through the process of building a prospect scoring system using Snowplow Signals together with a machine learning model.
 It is a starting point in exploring and using Signals APIs for your own needs.
 
 Suggested **next steps**:

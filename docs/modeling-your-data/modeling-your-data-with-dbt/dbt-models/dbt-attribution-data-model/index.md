@@ -21,13 +21,12 @@ export const datagridProps = {
 <Badges badgeType="Early Release"></Badges>&nbsp;
 <Badges badgeType="SPAL"></Badges>
 
+# Snowplow Attribution Package
+
 :::info
-You will need Unified [verson 0.4.0](https://github.com/snowplow/dbt-snowplow-unified/releases/tag/0.4.0) to use Attribution version 0.2.0.
+You will need Unified [version 0.4.0](https://github.com/snowplow/dbt-snowplow-unified/releases/tag/0.4.0) to use Attribution version 0.2.0.
 
 :::
-
-
-# Snowplow Attribution Package
 ​
 **The package source code can be found in the [snowplow/dbt-snowplow-attribution repo](https://github.com/snowplow/dbt-snowplow-attribution), and the docs for the [macro design are here](https://snowplow.github.io/dbt-snowplow-attribution/#/overview/snowplow_attribution).**
 ​

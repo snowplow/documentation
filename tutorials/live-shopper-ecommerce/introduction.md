@@ -13,8 +13,8 @@ In this accelerator, you'll learn how to calculate key metrics, in near real tim
 
 After you set up the project, you can explore the system via three tools:
 - [**Snowplow ecommerce store**](https://github.com/snowplow-industry-solutions/ecommerce-nextjs-example-store) (left panel in below image)
-- [**AKHQ**](https://akhq.io/) a Kafka visualization tool (center panel)
-- [**Redis Insights**](https://redis.io/insight/) a Redis visualization tool (right panel)
+- [**AKHQ**](https://akhq.io/), a Kafka visualization tool (center panel)
+- [**Redis Insights**](https://redis.io/insight/), a Redis visualization tool (right panel)
 
 All interactions on the store flow through [Snowplow Local](https://github.com/snowplow-incubator/snowplow-local) and are streamed into Kafka, where they are processed using Flink.
 

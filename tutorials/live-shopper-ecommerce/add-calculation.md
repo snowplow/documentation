@@ -12,19 +12,19 @@ The package `com.evoura.snowplow.operator.product` contains all classes related 
 3. `return_view_count`
 4. `price_range_viewed`
 
-These are generated as metrics for Flink by the `com.evoura.snowplow.operator.product.ProductMetricsGeneratorRichFunction` class. To generate an additional feature, you will need to update several other classes first.
+These are generated as metrics for Flink by the `ProductMetricsGeneratorRichFunction` class. To generate an additional feature, you will need to update several other classes first.
 
 In this example, you will track a new feature called `most_viewed_brand`, based on the user's most viewed product brand.
 
 ## 1. Add a field to `ProductViewEvent`
 
-The web application tracks data on product brand—it's a field within the Snowplow [ecommerce `product_view` event](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce/#product-view). A full example payload is available at `.example/product_view.json`.
+The web application tracks data on product brand—it's a field within the Snowplow [ecommerce `product_view` event](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce/#product-view). A full example payload is available at `.example/product_view.json`, showing how the payload would look after processing through the Snowplow pipeline.
 
 The `brand` field isn't currently present in the `ProductViewEvent` class.
 
 Add `brand` as a `String` instance variable, after `timestamp`.
 
-The class should now look like this:
+The updated class should look like this:
 
 ```java
 package com.evoura.snowplow.operator.product;
@@ -84,7 +84,7 @@ Because you updated the `ProductViewEvent` constructor, you need to update the `
 
 On line 32, provide the `brand` argument as `productNode.path("brand").asText()`.
 
-The method should now look like this:
+The updated method should look like this:
 
 ```java
 @Override
@@ -104,13 +104,13 @@ public ProductViewEvent map(SnowplowEvent snowplowEvent) throws Exception {
 }
 ```
 
-## 3. Calculate the most viewed brand by user
+## 3. Calculate the most viewed brand
 
 You can now calculate which brand is the most viewed by the user. All the current features are already segmented by `user_id`, so the segmentation won't be part of this.
 
 Look at the class `com.evoura.snowplow.operator.product.ProductFeatureRollingWindow`. The method `ProductFeatureRollingWindow.processWindow` receives `Iterable<ProductViewEvent> events` as the first argument.
 
-This variable will contain all the `ProductViewEvent` in the defined window. For products you can choose a 5 minute or a 1 hour window. Iterate through these items to calculate the most viewed brand by the user in this window.
+This variable will contain all the `ProductViewEvent`s in the defined window. For products you can choose a 5 minute or a 1 hour window. Iterate through these items to calculate the most viewed brand by the user in this window.
 
 It will look like something like this:
 
@@ -176,7 +176,11 @@ public class ProductFeature implements Serializable {
   ...
 }
 ```
-This class contains a `TypeInfoFactory` class. A `TypeInfoFactory` is a way to tell Flink what's being forwarded to the next operator. This is required because we decided to turn off Kryo deserialization on Flink.
+This class contains a `TypeInfoFactory` class. A `TypeInfoFactory` is a way to tell Flink what's being forwarded to the next operator.
+
+This is required because we decided to turn off Kryo deserialization on Flink. This trades some convenience for the long-term ability to perform rolling upgrades, rescale jobs, and keep historical state readable as your data model inevitably changes.
+
+Kryo's "black-box" binary format doesn't carry any structural information, so even a small change to a field name, order, or data type breaks compatibility and can corrupt state when jobs are upgraded. Flink's own type serializers (POJO, Avro, Protobuf, etc.) embed explicit schema metadata and versioning hooks, allowing the runtime to evolve the schema safely and transparently migrate state across savepoints. We chose POJO for this project to avoid requiring any external schema registry.
 
 Update the `ProductFeature` `TypeInfoFactory` to forward the `mostViewedBrand` feature.
 

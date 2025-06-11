@@ -22,8 +22,8 @@ Everything starts with the entry point class `com.evoura.snowplow.SnowplowAnalyt
 
 ### High-level workflow
 
-1. The Snowplow tracker sends raw events
-2. Flink parses events, assigns timestamps, and sends each event down a dedicated branch
+1. The Snowplow tracker sends raw events to the Snowplow pipeline, which processes them and forwards them to Flink
+2. Flink parses events, assigns more timestamps, and sends each event down a dedicated branch
 3. Each branch runs a windowed function that maintains just enough state to update the metric
 4. The function emits a `MetricValue` object at a fixed cadence (30 seconds or 1 minute)
 5. Flink writes the metric to Redis using a predictable key (`user:{id}:feature:{name}_{window}`)

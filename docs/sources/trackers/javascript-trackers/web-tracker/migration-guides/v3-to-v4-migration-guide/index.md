@@ -144,6 +144,8 @@ For example:
 In v3, `encodeBase64` defaulted to `true` if not explicitly configured.
 In v4, if not configured explicitly, the setting will now default to `false` if the [`eventMethod`](/docs/sources/trackers/javascript-trackers/web-tracker/configuring-how-events-sent/index.md#network-protocol-and-method) is `post` (the default), but remains `true` if using the `get` method.
 
+If your Collector is hosted behind a Web Application Firewall and custom entities/events include content that may be classified as risky (e.g. content containing HTML code) this may trigger false positives and cause the events to be rejected by the firewall; re-enabling base64 encoding should obfuscate the payload again and allow successful delivery.
+
 Per the [tracker protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md), the payload fields used for base-64-encoded data differs from plain JSON-encoded data: When upgrading to v4, plugins or tests relying on payload data being in `cx` or `ue_px` may now require updating to check the non-base64-encoded equivalents in `co` and `ue_pr`. Tracker protocol-compliant processors such as the Enricher should already support both fields and require no changes.
 
 ### Dropped support for older browsers

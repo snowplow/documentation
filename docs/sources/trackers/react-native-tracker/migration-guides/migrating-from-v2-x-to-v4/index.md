@@ -61,3 +61,13 @@ Refer to [the documentation to learn more](/docs/sources/trackers/react-native-t
 ### Not possible to access from native code
 
 Since the tracker is now purely implemented in JavaScript, it is no longer possible to access it from mobile native iOS or Android code.
+
+### Base64 encoding disabled by default
+
+In v2, the tracker defaulted to base64-encoding payloads for Self-Describing events and Entities.
+In v4, the default is now to not do this.
+In most cases, this behavior is better for performance and has no other impacts.
+
+In some pipeline architectures, the Collector is protected by a Web Application Firewall; if your custom data contains content that appears risky to the WAF (e.g. HTML content) the removal of base64 encoding may mean those events now get blocked by the firewall.
+
+You can return to the old behavior by specifying `encodeBase64: true` when calling `newTracker` as described above.

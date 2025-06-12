@@ -3,7 +3,7 @@ position: 1
 title: Introduction
 ---
 
-Welcome to the **Snowplow Live Shopper** solution accelerator for ecommerce.
+Welcome to the **real-time shopper features using Apache Flink** solution accelerator for ecommerce.
 
 This accelerator demonstrates how to leverage Snowplow's behavioral data to monitor and act on shopper behavior while they're still navigating your site.
 

@@ -1,5 +1,5 @@
 {
-  "title": "Live Shopper for Ecommerce",
+  "title": "Real-time shopper features using Apache Flink",
   "label": "Solution accelerator",
   "description": "How to build a real-time shopper profile for an ecommerce site, leveraging Kafka, Flink and Redis."
 }

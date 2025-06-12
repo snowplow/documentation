@@ -15,7 +15,7 @@ title: Quickstart with Localstack
 ```bash
 git clone https://github.com/snowplow-industry-solutions/kafka-live-viewer-profiles.git
 ```
-4. Create a `.env` file based on `.env.example`. You can leave the AWS variables as placeholders when using Localstack
+4. Create a `.env` file based on `./docker/.env.example`. You can leave the AWS variables as placeholders when using Localstack
 ```bash
 ACCEPT_LICENSE="true"
 AWS_REGION=eu-west-2

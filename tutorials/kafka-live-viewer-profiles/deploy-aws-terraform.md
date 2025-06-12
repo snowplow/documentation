@@ -19,7 +19,7 @@ The following [Steps](#steps) will deploy the solution accelerator to AWS using 
 ```bash
 git clone https://github.com/snowplow-industry-solutions/kafka-live-viewer-profiles.git
 ```
-4. Create a `.env` file based on `.env.example` and configure AWS variables.
+4. Create a `.env` file based on `./docker/.env.example` and configure AWS variables.
 ```bash
 ACCEPT_LICENSE="true"
 AWS_REGION=eu-west-2

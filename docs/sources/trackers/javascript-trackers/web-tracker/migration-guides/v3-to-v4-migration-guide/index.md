@@ -117,6 +117,37 @@ The new method may produce different results and only supports more modern brows
 The Timezone plugin is still supported, but no longer bundled in `sp.js` by default.
 Using the plugin will override the new default value.
 
+### Default for `encodeBase64`
+
+The [`encodeBase64` setting](/docs/sources/trackers/javascript-trackers/web-tracker/configuring-how-events-sent/index.md#base64-encoding) controls whether self describing JSON data in entities and self describing events are encoded with URL-safe [base64 encoding](https://en.wikipedia.org/wiki/Base64) or as JSON strings.
+
+When sending events via the `GET` method, this is recommended because the JSON string would require URL-encoding to safely transmit, which typically results in a larger payload than with the ~33% size overhead of base64-encoded JSON data, which is inherently URL-safe.
+
+For `POST` requests however, the overhead of base64 encoding makes the payload size larger and makes debugging more difficult as the payload isn't human-readable, and has no safety benefits.
+
+For example:
+
+```javascript
+/* Actual JSON, length = 211 */
+{"schema":"iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0","data":[{"schema":"iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0","data":{"id":"0edd614e-975d-4f3a-9cd9-af123ac35068"}}]}
+
+/* URI-encoded JSON, length = 289 */
+"%7B%22schema%22%3A%22iglu%3Acom.snowplowanalytics.snowplow%2Fcontexts%2Fjsonschema%2F1-0-0%22%2C%22data%22%3A%5B%7B%22schema%22%3A%22iglu%3Acom.snowplowanalytics.snowplow%2Fweb_page%2Fjsonschema%2F1-0-0%22%2C%22data%22%3A%7B%22id%22%3A%220edd614e-975d-4f3a-9cd9-af123ac35068%22%7D%7D%5D%7D"
+
+/* Base64-encoded JSON, length = 282 */
+"eyJzY2hlbWEiOiJpZ2x1OmNvbS5zbm93cGxvd2FuYWx5dGljcy5zbm93cGxvdy9jb250ZXh0cy9qc29uc2NoZW1hLzEtMC0wIiwiZGF0YSI6W3sic2NoZW1hIjoiaWdsdTpjb20uc25vd3Bsb3dhbmFseXRpY3Muc25vd3Bsb3cvd2ViX3BhZ2UvanNvbnNjaGVtYS8xLTAtMCIsImRhdGEiOnsiaWQiOiIwZWRkNjE0ZS05NzVkLTRmM2EtOWNkOS1hZjEyM2FjMzUwNjgifX1dfQ"
+
+/* JSON-string-encoded JSON, length = 229 */
+"{\"schema\":\"iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0\",\"data\":[{\"schema\":\"iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0\",\"data\":{\"id\":\"0edd614e-975d-4f3a-9cd9-af123ac35068\"}}]}"
+```
+
+In v3, `encodeBase64` defaulted to `true` if not explicitly configured.
+In v4, if not configured explicitly, the setting will now default to `false` if the [`eventMethod`](/docs/sources/trackers/javascript-trackers/web-tracker/configuring-how-events-sent/index.md#network-protocol-and-method) is `post` (the default), but remains `true` if using the `get` method.
+
+If your Collector is hosted behind a Web Application Firewall and custom entities/events include content that may be classified as risky (e.g. content containing HTML code) this may trigger false positives and cause the events to be rejected by the firewall; re-enabling base64 encoding should obfuscate the payload again and allow successful delivery.
+
+Per the [tracker protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md), the payload fields used for base-64-encoded data differs from plain JSON-encoded data: When upgrading to v4, plugins or tests relying on payload data being in `cx` or `ue_px` may now require updating to check the non-base64-encoded equivalents in `co` and `ue_pr`. Tracker protocol-compliant processors such as the Enricher should already support both fields and require no changes.
+
 ### Dropped support for older browsers
 
 The support for the following browsers versions has been dropped:

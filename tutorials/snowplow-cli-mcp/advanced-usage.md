@@ -38,7 +38,7 @@ When existing tracking needs updates:
 ### Complete Journey Mapping
 Describe high-level goals and get comprehensive tracking plans:
 - **You say**: "Create a data product for our checkout funnel".
-- **AI designs**: Complete user journey from cart management through payment, including error states and abandonment points you might have missed
+- **AI designs**: Complete user journey from cart management through payment, including error states and abandonment points you might have missed.
 
 ### Cross-Platform Strategy
 When expanding to new platforms:

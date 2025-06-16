@@ -33,7 +33,7 @@ Instead of manually figuring out what to track, describe your business process:
 ### Schema Evolution Guidance  
 When existing tracking needs updates:
 - **You say**: "Our product_viewed event is missing context about where users found the product"
-- **AI suggests**: Add context entities rather than breaking schema changes, proper versioning strategy, and related events that should stay consistent
+- **AI suggests**: Add context entities rather than breaking schema changes, proper versioning strategy, and related events that should stay consistent.
 
 ### Complete Journey Mapping
 Describe high-level goals and get comprehensive tracking plans:

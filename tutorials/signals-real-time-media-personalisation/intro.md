@@ -3,9 +3,13 @@ title: Introduction
 position: 1
 ---
 
-This tutorial guides you through using Snowplow Signals to create personalized recommendations for anonymous users based on their behavioral data.  By the end, you'll understand how to configure Snowplow Signals and integrate them into your app to deliver personalized experiences. 
+Personalisation is no longer a nice to have, consumers are expecting it. According to [McKinsey](https://www.mckinsey.com/capabilities/growth-marketing-and-sales/our-insights/enhancing-customer-experience-in-the-digital-age), 71% of consumers expect companies to deliver personalised experiences and 76% will switch if they don't like their experience. Snowplow Signals allows companies to personalise the user experience based on their behaviour to increase engagement, conversion, and retention.
 
-We will use a NextJS newspaper website as an example, but the principles can be applied to many use cases.  The focus will be on turning Snowplow events into real-time Signal attributes, rather than on the recommendation algorithm itself, which will be simplified. 
+In the example shown in this tutorial, we will personalise the experience for a newspaper website to increase customer engagement by recommending articles to customers based on their own reading habits. By keeping users engaged we can either increase our publisher ad revenue, or display paid content to a user that we know they are more likely to engage with and consequently convert to a paying subscriber.
+
+This tutorial guides you through using Snowplow Signals to create personalized recommendations for anonymous users based on their behavioral data.  By the end, you'll understand how to configure Snowplow Signals and integrate them into your app to deliver personalized experiences.
+
+We will use a NextJS newspaper website as an example but the principles can be applied to many use cases.  The focus will be on turning Snowplow events into real-time Signal attributes rather than on the recommendation algorithm itself which will be simplified. 
 
 ### Before Personalization
 

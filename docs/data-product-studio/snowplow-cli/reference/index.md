@@ -1,6 +1,6 @@
 ---
 title: Command Reference
-date: 2025-06-13
+date: 2025-06-16
 sidebar_label: Command Reference
 sidebar_position: 1
 ---
@@ -670,7 +670,7 @@ snowplow-cli data-structures validate [paths...] default: [./data-structures] [f
 ## Mcp
 
 
-Start MCP stdio server for Snowplow validation and context.
+Start MCP stdio server for Snowplow validation and context
 
 ### Synopsis
 

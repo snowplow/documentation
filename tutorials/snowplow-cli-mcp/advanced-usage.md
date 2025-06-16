@@ -28,7 +28,7 @@ The real power of the Snowplow CLI MCP tool isn't just natural language file cre
 ### Business Logic Analysis
 Instead of manually figuring out what to track, describe your business process:
 - **You say**: "We want to track user engagement on our blog".
-- **AI infers**: Need both standard page_view events enhanced with article context, plus custom events for shares/subscriptions, reading progression metrics, and time-based engagement
+- **AI infers**: Need both standard page_view events enhanced with article context, plus custom events for shares/subscriptions, reading progression metrics, and time-based engagement.
 
 ### Schema Evolution Guidance  
 When existing tracking needs updates:

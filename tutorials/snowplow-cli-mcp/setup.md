@@ -16,6 +16,8 @@ curl -L -o snowplow-cli https://github.com/snowplow/snowplow-cli/releases/latest
 chmod u+x snowplow-cli
 ```
 
+If you have `node.js` setup then no need to install, you can run via `npx`.
+
 ## 2. Configure Claude Desktop
 
 Add the Snowplow CLI MCP server to your Claude Desktop configuration:
@@ -29,6 +31,18 @@ Add the Snowplow CLI MCP server to your Claude Desktop configuration:
     "snowplow-cli": {
       "command": "snowplow-cli",
       "args": ["mcp"]
+    }
+  }
+}
+```
+
+Or for `npx`
+```json
+{
+  "mcpServers": {
+    "snowplow-cli": {
+      "command": "npx",
+      "args": ["-y", "@snowplow/snowplow-cli", "mcp"]
     }
   }
 }

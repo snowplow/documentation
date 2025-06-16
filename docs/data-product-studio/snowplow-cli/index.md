@@ -81,4 +81,4 @@ Snowplow CLI defaults to yaml format. It can be changed to json by either provid
 # Use cases
 
 - [Manage your data structures with snowplow-cli](/docs/data-product-studio/data-structures/manage/cli/index.md)
-- [Set up a github CI/CD pipeline to manage data structures and data products](/docs/resources/recipes-tutorials/recipe-data-structures-in-git/index.md)
+- [Set up a github CI/CD pipeline to manage data structures and data products](/tutorials/data-structures-in-git/start)

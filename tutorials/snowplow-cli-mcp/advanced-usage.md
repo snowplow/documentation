@@ -42,7 +42,7 @@ Describe high-level goals and get comprehensive tracking plans:
 
 ### Cross-Platform Strategy
 When expanding to new platforms:
-- **You say**: "We're adding mobile app tracking to our existing web tracking"
+- **You say**: "We're adding mobile app tracking to our existing web tracking".
 - **AI identifies**: Which entities should be consistent across platforms, platform-specific contexts needed, and how to structure shared vs. separate data products
 
 The AI understands Snowplow patterns, business processes, and data governance - making it a strategic partner, not just a faster way to write YAML.

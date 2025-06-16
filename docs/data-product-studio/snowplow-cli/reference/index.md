@@ -670,7 +670,7 @@ snowplow-cli data-structures validate [paths...] default: [./data-structures] [f
 ## Mcp
 
 
-Start MCP stdio server for Snowplow validation and context
+Start MCP stdio server for Snowplow validation and context.
 
 ### Synopsis
 

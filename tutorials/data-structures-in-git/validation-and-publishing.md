@@ -1,5 +1,5 @@
 ---
-title: Modify, Validate and Publish
+title: Modify, validate and publish
 position: 3
 ---
 

@@ -1,6 +1,6 @@
 ---
-title: Worked Example
-position: 6
+title: Verify Github setup
+position: 5
 ---
 
 Now we have our workflows in place let's work through an example. Our login data structure needs some attention. Our requirements have changed and rather than 'success' and 'failure' the login result will now need to report numbers and not strings. So instead of `[success, failure]` it'll be `[200, 403]`.

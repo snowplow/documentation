@@ -1,6 +1,6 @@
 ---
-title: Following up with Data Products
-position: 7
+title: Follow up with Data Products
+position: 6
 ---
 
 Now that we have our data structures set up, we can define data products to organize and document how these structures are used across our applications. We'll walk through creating source applications, data products, and event specifications using the CLI, then integrate them into our automated workflows.

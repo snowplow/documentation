@@ -1,6 +1,6 @@
 ---
 title: Summary
-position: 8
+position: 7
 ---
 
 ## Let's break down what we've done

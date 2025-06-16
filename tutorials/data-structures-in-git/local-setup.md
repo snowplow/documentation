@@ -1,5 +1,5 @@
 ---
-title: Create a Local Data Structure
+title: Create a local data structure
 position: 2
 ---
 

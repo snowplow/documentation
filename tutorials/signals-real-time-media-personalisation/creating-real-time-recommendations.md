@@ -79,7 +79,7 @@ const article_last_read = attributes['article_last_read']?.[0] ?? null;
 const business_articles_read = attributes['article_category_business_read_count']?.[0] ?? 0;
 const ai_articles_read = (attributes['article_category_ai_read_count']?.[0] ?? 0);
 const data_articles_read = (attributes['article_category_data_read_count']?.[0] ?? 0);
-const technlogy_articles_read = (attributes['article_category_technology_read_count']?.[0] ?? 0);
+const technology_articles_read = (attributes['article_category_technology_read_count']?.[0] ?? 0);
 ```
 
 ---
@@ -98,7 +98,7 @@ const interests = Object.entries({
   Business: business_articles_read,
   AI: ai_articles_read,
   Data: data_articles_read,
-  Technology: technlogy_articles_read,
+  Technology: technology_articles_read,
 })
   .filter(([_, count]) => typeof count === "number" && count > 0)
   .sort(([, a], [, b]) => Number(b) - Number(a))

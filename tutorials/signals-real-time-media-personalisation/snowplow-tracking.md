@@ -14,11 +14,11 @@ For our recommendation system, we are going to suggest articles to users based o
 
 The article_details event is sent on every article page view event and contains two properties: category and name. We will utilise these properties in the next step within Signals.
 
-If you would like to follow along, you can create Data Structure with the following JSON schema:
+If you would like to follow along, create a data structure with the following JSON schema:
 
 ```json
 {
-  "$schema": "[http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#](http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#)",
+  "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
   "type": "object",
   "self": {
     "vendor": "com.snplow.example",

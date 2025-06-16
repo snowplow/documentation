@@ -85,7 +85,7 @@ article_category_business_read_count = Attribute(
 )
 ```
 
-Lets breakdown what that code does:
+Let's break down what that code does:
 - We have created an attribute with a name of article_category_business_read_count and set the type to be an integer.
 - We defined the aggregation method to be a counter, which makes the attribute count the number of events
 - Next we define the Snowplow Event we wish to include as part of this attribute, in this case we are using the article_details event we defined earlier in this tutorial.

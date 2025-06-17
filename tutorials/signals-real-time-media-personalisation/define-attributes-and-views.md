@@ -68,7 +68,7 @@ article_category_business_read_count = Attribute(
   aggregation="counter",
   events=[
     Event(
-      vendor="com.snplow.sales.aws",
+      vendor="com.snplow.example",
       name="article_details",
       version="1-0-0",
     )
@@ -105,7 +105,7 @@ article_last_read = Attribute(
   aggregation="last",
   events=[
     Event(
-      vendor="com.snplow.sales.aws",
+      vendor="com.snplow.example",
       name="article_details",
       version="1-0-0",
     )

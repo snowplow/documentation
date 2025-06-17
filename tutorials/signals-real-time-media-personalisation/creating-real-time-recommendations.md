@@ -50,7 +50,7 @@ In this example we are using the `domain_userid` as specified in entity property
 import { cookies } from "next/headers"
 
 const cookieStore = cookies()
-const spCookie = cookieStore.get("_sp_id.1fff")?.value || "anonymous"
+const spCookie = cookieStore.get("_sp_id.1fff")?.value || "anonymous" // Update _sp_id.1fff to the name of your Snowplow Cookie
 
 const spDomainUserId = spCookie.split(".")[0] || "anonymous"
 const spDomainSessionId = spCookie.split(".")[5] || "anonymous"

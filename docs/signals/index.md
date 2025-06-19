@@ -50,7 +50,7 @@ To use Signals, there are three key steps:
 
 ### Defining the business logic
 
-Your first step is to define the attributes and interventions you're interested in tracking. This is done using our Signals Python SDK.
+Your first step is to define the attributes and interventions you're interested in tracking. This is done using our [Signals Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk).
 
 ```mermaid
 flowchart TD
@@ -100,13 +100,13 @@ flowchart TD
     I -->     J[Attribute pushed to<br/>the feature store]
 ```
 
-Batch attributes require some manual configuration and running. Once configured and registered with Signals, the Signals Materialization engine/Sync service will incrementally check on the table every 5 minutes to calculate attributes, and push them to the feature store.
+Batch attributes require some manual configuration and running. Once configured and registered with Signals, the Signals Materialization engine/Sync service will incrementally check on the table every 5 minutes to calculate attributes, and push them to the feature store. Check out the [batch engine tutorial](/tutorials/snowplow-batch-engine/start/) to learn more.
 
 ### Using the attributes
 
 Call the Signals API within your application to retrieve relevant attributes and interventions.
 
-If you have a Node.js application, we provide an SDK that wraps the Signals API for easier implementation.
+If you have a Node.js application, we provide an [SDK](https://github.com/snowplow-incubator/snowplow-signals-typescript-sdk) that wraps the Signals API for easier implementation.
 
 ## Example real-time Signals workflow
 

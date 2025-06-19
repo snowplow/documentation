@@ -1,101 +1,128 @@
 ---
 title: "Snowplow Signals"
 sidebar_position: 8
-description: "An overview of Signals concepts."
+description: "An overview of Signals."
 sidebar_label: "Signals"
+sidebar_custom_props:
+  offerings:
+    - bdp
 ---
 
-Snowplow Signals is a personalization engine built on Snowplow's behavioral data pipeline.
+Snowplow Signals is a real-time personalization engine built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in real time.
 
-Signals allows you to capture aggregate data attributes about the entities you track events for (such as users, sessions, products, pages, etc), and influence future behavior by sending interventions to users that are currently interacting with those entities.
+Real-time personalization use cases that are unlocked by Signals include:
+* Personalized recommendations
+* Personalized messaging
+* Agentic applications such as chatbots or copilots
+* Adaptive UIs
+* Dynamic pricing
+* Contextually relevant advertising
 
-The technical core of Signals is the Profile API used for defining and managing attributes and delivering interventions.
-The Profile API is hosted in your BDP cloud and can be interacted with using the Signals APIs and SDKs. <!-- TODO: link to API/SDK references -->
-Signals also provides infrastructure for working with Snowplow event data in the real-time event stream, and historical data located in your data warehouse.
+Your Signals infrastructure is deployed by us into the same cloud as your Snowplow BDP pipeline. You can use the Signals APIs and SDKs to first define the data you're interested in, then to retrieve the calculated attributes to alter your customer's experience and behavior.
 
-![](./images/signals.png)
+As well as attributes, Signals allows you to define interventions. This is a way to specify the business logic, based on attribute values, that should trigger actions such as notifications in your application.
 
-Signals allows you to enhance your applications by aggregating historical attributes and providing near real-time visibility into customer behavior.
-Use the aggregated attributes and interventions to power in-product personalization and recommendations engines, adaptive user interfaces, and agentic applications like AI copilots and chat-bots.
+Every attribute grouping and intervention that is published to the Signals API is versioned, allowing you to maintain strong data governance within the Profiles Store, and to test new Signals configurations without affecting production.
 
-## Entities
+## How does Signals fit into the Snowplow pipeline?
 
-The foundation of Signals are entities (distinct from [Snowplow entities](/docs/fundamentals/entities/index.md), but they can be related).
+The core Signals infrastructure components are:
+* Profiles Store
+* Streaming engine to compute attributes from Snowplow events in stream
+  * These attributes are directly sent to the Profiles Store
+* Batch engine to compute attributes from warehouse tables
+  * This runs in the warehouse
+* Sync service/Materialization engine to periodically update the Profiles Store with batch attributes
+* Signals API to define, publish, and fetch attributes and interventions
 
-An <dfn>entity</dfn> is the core unit that all the other Signals features relate to, and can be anything with an "identifier" that you can capture in a Snowplow event.
+![](./images/signals-pipeline.png)
 
-For example, the simplest entities to think about (and which come predefined when you start with Signals) are concepts like "users", "devices", or "sessions"; these would be entities that you describe in events with the out-of-the-box [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) like `user_id`, `domain_userid`/`network_userid`, or `domain_sessionid` (respectively).
+## Using Signals
 
-You can define any entities you like, and expand this to broader concepts. For example:
-- Apps (perhaps described by [`app_id`](/docs/fundamentals/canonical-event/index.md#application-fields))
-- Pages (perhaps [`page_urlpath`](/docs/fundamentals/canonical-event/index.md#platform-specific-fields) or a page identifier captured in a custom entity)
-- Products (that you might capture in an [ecommerce entity](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/ecommerce-events/index.md#product) or other custom entity)
-- Page/Screen views (as captured in the `web_page` and `screen_view` entities)
-- Content categories
-- Levels in a game
+Steps for using Signals:
 
-Defining an entity and how to identify it unlocks other features so you can do things like compute [attributes](#attributes) for it, or publish [interventions](#interventions) to it.
+0. Deploy the infrastructure - Snowplow will do this for you
+1. Define and test attributes
+2. Publish the attribute definitions
+3. (Optional) Configure the batch engine for historical warehouse attributes
+4. Use the attributes in your application
 
-## Attributes
+### Defining the business logic
 
-After defining an entity, you can start to calculate attributes for it.
+Your first step is to define the attributes and interventions you're interested in tracking. This is done using our [Signals Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk). Once defined, apply the attributes configuration to the Signals infrastructure.
 
-An <dfn>attribute</dfn> represents a specific fact about behavior with an entity and gets defined as part of a [view](#views).
+Example attributes:
+* `add_to_cart_events_count`
+* `product_view_events_count`
+* `last_login_date`
+* `previous_purchases_count`
+* `latest_refr_source`
 
-For example: (attributes for an entity in **bold**)
-- _Number of **page** views in the last 7 days:_ counts how many pages a page has received within the past week.
-- _Number of pages viewed by a **user** in the last 7 days:_ counts how many pages a user has viewed within the past week.
-- _Last product viewed by a **user**:_ identifies the most recent product a user interacted with.
-- _Last product sold from **product category**:_ identifies the most recent product any user has bought within a product category.
-- _Previous purchases by **user**:_ provides a record of the user's past transactions.
+Defining stream attributes:
 
-All attributes get defined as part of a [view](#views), which ties them to a specific entity and source, defining how their values get updated.
+```mermaid
+flowchart TD
+    A[Create GitHub repo] --> B[Create Jupyter notebook]
+    B --> C[Import Signals Python SDK]
+    C --> D{Decide on what<br/>attributes to track}
 
-You can also set them manually via the APIs, or dynamically via interventions.
+    D --> E[Define attributes]
 
-Read more [about attributes](/docs/signals/attributes/index.md).
+    subgraph SDK[Using SDK API]
+        E --> F[Create versioned groupings]
+        F --> G[Test the group]
+        G --> H[Apply the group]
+    end
 
-### Views
+    H --> I[View defined attributes<br/>in Console]
 
-A <dfn>View</dfn> is a versioned collection of attributes associated with a specific entity that are populated from the same source.
+    style SDK stroke:#333,stroke-width:2px
+```
 
-You can picture the result of a View as a table of attributes for an entity instance.
+Interventions are defined in a similar way.
 
-For example, from the [previous example attributes](#attributes) for a user-entity keyed by `user_id`:
+For batch attributes, you'll also need to set up a dbt project to run the attribute calculation models, and to provide Signals with details of the created table. Alternatively, you can use any pre-existing table. Check out the [batch engine tutorial](/tutorials/snowplow-batch-engine/start/) to learn more.
 
-| `user_id` | `number_of_pageviews` | `last_product_viewed` | `previous_purchases`      |
-|-----------|-----------------------|-----------------------|---------------------------|
-| `abc123`  | 5                     | Red Shoes             | [`Blue Shoes`, `Red Hat`] |
+You don't have to use both stream and historical sources. It's more powerful to combine attributes from both sources, but feel free to configure just one if that makes more sense for your business.
 
-The attributes of a view can be set to expire for instances if they aren't updated after a certain period of time.
+Once Signals receives the applied configurations it will start calculating attributes and populating the Profiles Store.
 
-Each view can be associated with metadata such as an owner, description, and tags.
+### Retrieving the attributes in your application
 
-When you're happy with a version of a View definition, you can associate it with a service to be consistently requested via the API for personalization.
+Call the Signals API within your application to retrieve relevant attributes and interventions.
 
-Read more [about views](/docs/signals/views_services/index.md).
+If you have a Node.js application, we provide an [SDK](https://github.com/snowplow-incubator/snowplow-signals-typescript-sdk) that wraps the Signals API for easier implementation.
+
+You can also use the [Signals Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk) for applications with a Python back-end.
 
 
-### Services
+## How Signals calculates attributes
 
-A <dfn>Service</dfn> is a collection of [views](#views) that are grouped to make the retrieval of attributes simpler.
+Stream attributes are calculated automatically.
 
-They allow you to retrieve attributes in bulk from multiple views, that are each pinned to specific versions so you can ensure the returned values are consistent with what you expect.
-This allows you to freely iterate on your view/attribute definitions without impacting production applications that rely on your attributes, and letting you migrate to new versions when ready.
+When Signals is deployed in your Snowplow BDP pipeline, the event stream is read by the stream engine. All tracked events are inspected. If you've configured Signals to calculate an attribute from a certain type of event, when that event type is received, the engine will extract the attribute data and forward it to the Profiles Store, in real time. If that event type isn't registered as containing attribute data, nothing happens.
 
-Read more [about services](/docs/signals/views_services/index.md).
+```mermaid
+flowchart TD
+    subgraph Stream[Real-time event stream]
+        A[Behavioral data event<br/>is received by Collector] --> B[Event is enriched<br/>by Enrich]
+        B --> D[Event is read from stream by<br/>Signals stream engine]
+    end
 
-## Interventions
+    B --> C[Event is loaded into<br/>the warehouse by Loader]
 
-Once an entity is defined in Signals you can start to retrieve interventions for it, and start publishing to them.
+    D --> E[Stream engine checks<br/>attribute definitions]
+    E --> F{Attributes defined<br/>for this event?}
 
-An <dfn>intervention</dfn> describes an action that can be performed for a user to achieve a more successful result.
+    F -->|No| G[Nothing happens]
 
-User devices and your own systems can request interventions for a list of specific entities, which are then delivered in real-time as they are published.
-You can publish interventions manually using the API, or define them to trigger automatically when [attributes](#attributes) get updated and meet specific criteria.
-There are built-in operations that interventions can perform or that can be handled by Signals SDKs, but the contents of an intervention can contain custom data to use however you need to, and can include current attribute values for dynamic, personalized, actions using the latest real-time data.
+    F -->|Yes| I[Attribute calculated]
+    I -->     J[Attribute pushed to<br/>the Profiles Store]
+```
 
-For example, a user can subscribe to interventions for their own `domain_userid`, the current `app_id`, the current `page`, and the current `product`, and any interventions published targeting any of those entities get received.
-This enables both individual-level and broadcast-level messaging, so you can offer a specific user a personalized message, while also notifying all users on a specific product page that limited stock is selling fast.
+Batch attributes require some manual configuration and running. Once configured and registered with Signals, the Signals materialization engine/sync service will incrementally check on the table every 5 minutes to calculate attributes, and push them to the Profiles Store. Check out the [batch engine tutorial](/tutorials/snowplow-batch-engine/start/) to learn more.
 
-<!-- TODO: Read more about interventions -->
+
+## Example real-time Signals user journey
+
+TODO link to Signals tutorials? description of our sales demo

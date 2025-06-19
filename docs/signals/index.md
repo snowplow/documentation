@@ -37,8 +37,6 @@ The core Signals infrastructure components are:
 
 ![](./images/signals-pipeline.png)
 
-When Signals is deployed in your Snowplow BDP pipeline, the event stream is forwarded to the streaming engine. All tracked events are inspected. If you've configured Signals to calculate an attribute from a certain type of event, when that event type is received, the engine will extract the attribute data and forward it to the feature store, in real time. If that event type isn't registered as containing attribute data, nothing happens.
-
 ## Using Signals
 
 To use Signals, there are three key steps:
@@ -80,6 +78,8 @@ You don't have to use both stream and historical sources. It's more powerful to 
 ### Populating the feature store
 
 Stream attributes are calculated automatically.
+
+When Signals is deployed in your Snowplow BDP pipeline, the event stream is read by the stream engine. All tracked events are inspected. If you've configured Signals to calculate an attribute from a certain type of event, when that event type is received, the engine will extract the attribute data and forward it to the feature store, in real time. If that event type isn't registered as containing attribute data, nothing happens.
 
 ```mermaid
 flowchart TD

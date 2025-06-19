@@ -26,7 +26,7 @@ You may already have tables in your warehouse that contain such computed values,
 What you need to do first is to define a set of `Attributes` and register them as a `View` through the Python Signals SDK. Then you can use the optional CLI functionality of the SDK to generate a dbt project which will ultimately produce a view-specific attribute table. Then all that's left is to materialize the table, which will mean that Signals will regularly fetch the values from your warehouse table and sends it through the Profiles API.
 
 ## Defining batch attributes
-Syntactically speaking, defining batch and stream attributes work the same way. For a general overview of how to do that please refer to the [attributes](/docs/signals/attributes/index.md) section.
+Syntactically speaking, defining batch and stream attributes work the same way. For a general overview of how to do that please refer to the [attributes](/docs/signals/configuration/attributes/index.md) section.
 
 There are 4 main types of attributes that you may likely want to define for batch processing:
 1. `Time Windowed Attributes`: Actions that happened in the `last_x_number of days`. Period needs to be defined as timedelta in days.

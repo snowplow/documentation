@@ -40,7 +40,7 @@ All attributes get defined as part of a [view](#views), which ties them to a spe
 
 You can also set them manually via the APIs, or dynamically via interventions.
 
-Read more [about attributes](/docs/signals/attributes/index.md).
+Read more [about attributes](/docs/signals/configuration/attributes/index.md).
 
 ### Views
 

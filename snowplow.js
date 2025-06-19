@@ -78,6 +78,7 @@ const createTrackerConfig = (cookieName) => {
     cookieDomain: `.${domain[1]}.${domain[0]}`,
     cookieName,
     cookieSameSite: 'Lax',
+    keepalive: true,
     contexts: {
       webPage: true,
       performanceTiming: true,

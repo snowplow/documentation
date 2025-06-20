@@ -43,7 +43,7 @@ The organization ID, which can be retrieved from the URL immediately following t
 
 ```python
 from snowplow_signals import Signals
-signals = Signals(
+sp_signals = Signals(
     api_url="API_URL",
     api_key="API KEY",
     api_key_id="API_KEY_ID",
@@ -145,7 +145,7 @@ Example Output
 Once you're satisfied with the View, deploy it to the API using the `apply` method:
 
 ```python
-signals.apply([my_attribute_view])
+sp_signals.apply([my_attribute_view])
 ```
 
 This makes the View live, and events will start being processed based on the defined attributes.

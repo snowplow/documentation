@@ -33,7 +33,7 @@ def predict(data: InputData):
 Our `/predict` endpoint does these 4 things:
 
 1. Receives `domain_userid`.
-2. Calls Signals API to get latest attribute values using `signals.get_online_attributes(...)` API.
+2. Calls Signals API to get latest attribute values using `sp_signals.get_online_attributes(...)` API.
 3. Scores latest attribute values using an ML model.
 4. Returns Signals API attributes, ML prediction score, ML prediction explanations back.
 

@@ -1,19 +1,15 @@
 ---
 title: "Batch Engine"
-sidebar_position: 40
+sidebar_position: 50
 description: "In depth explanation on how the Batch Engine works."
 sidebar_label: "Batch Engine"
 ---
 
-While many `Attributes` can be computed in stream, those that have to be calculated over a longer period (e.g. a day or more), can only be created "offline" in the warehouse. We call them `Batch Attributes`.
+While many `Attributes` can be computed in stream, there are cases where they should be created "offline" in the warehouse. We call them `Batch Attributes`.
 
 One advantage of computing batch attributes over stream is that the computation can go back in history based on what you have already available in the atomic events dataset.
 
 The entity here is typically the user, which may be the `domain_userid` or other Snowplow identifier fields, such as the logged in `user_id`.
-
-:::info
-For now, only the `domain_userid` can be used, but shortly we will extend support for all Snowplow identifiers
-:::
 
 Examples of `Batch Attributes` are typically:
 - customer lifetime values
@@ -155,6 +151,7 @@ view = View(
         first_mkt_source,
         last_device_class
     ],
+    owner="user@company.com"
 )
 ```
 ## Generating the dbt project

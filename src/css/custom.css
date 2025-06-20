@@ -316,7 +316,7 @@ table {
 
 
 .table-of-contents__left-border {
-  border-left-color: var(--border);
+  border-left-color: hsl(var(--border));
 }
 
 .theme-doc-sidebar-item-link-level-1.header {
@@ -642,11 +642,11 @@ img.full-width {
 /* doc markdown grid layout control END*/
 
 /* START Control rest of the elements erase after we upgrade */
-.docItemContainer_src-theme-DocItem-Layout-styles-module nav, 
-.docItemContainer_src-theme-DocItem-Layout-styles-module article nav, 
-.docItemContainer_src-theme-DocItem-Layout-styles-module article footer  {
+article nav.theme-doc-breadcrumbs, 
+article footer.theme-doc-footer,
+nav.pagination-nav {
   max-width: 740px;
-  margin: 3rem auto 0 auto;
+  margin: 2rem auto 0 auto;
 }
 abbr[data-title]:focus:after, abbr[data-title]:hover:after {
   background-color: hsl(var(--popover));

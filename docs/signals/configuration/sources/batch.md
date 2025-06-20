@@ -33,6 +33,7 @@ data_source = BatchSource(
     schema="SIGNALS",
     table="SNOWPLOW_ECOMMERCE_TRANSACTION_INTERACTIONS_FEATURES",
     timestamp_field="UPDATED_AT",
+    owner="user@company.com",
 )
 ```
 

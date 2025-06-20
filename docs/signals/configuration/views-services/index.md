@@ -90,7 +90,8 @@ my_service = Service(
          # Previously defined Views
         my_attribute_view,
         another_view
-    ]
+    ],
+    owner="user@company.com",
 )
 
 ```

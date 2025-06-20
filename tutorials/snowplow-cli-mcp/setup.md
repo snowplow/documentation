@@ -1,9 +1,8 @@
 ---
 position: 2
-title: Installation & Setup
+title: Installation and setup
 ---
 
-# Installation & Setup
 
 ## 1. Install Snowplow CLI
 
@@ -16,7 +15,7 @@ curl -L -o snowplow-cli https://github.com/snowplow/snowplow-cli/releases/latest
 chmod u+x snowplow-cli
 ```
 
-If you have `node.js` setup then no need to install, you can run via `npx`.
+If you have `node.js` set up then no need to install, you can run via `npx`.
 
 ## 2. Configure Claude Desktop
 

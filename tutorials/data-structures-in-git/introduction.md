@@ -9,7 +9,7 @@ The fact that Data Structures formalize what the warehouse tables look like make
 
 On top of that, detailed change history can be crucial for such large organizations. It is important to be able to tell in fine detail what was changed, when, and by whom.
 
-The Snowplow Console's UI offers excellent facilities to get started quickly with Data Structures (either using the Builder or directly the JSON editor), and is a solid tool for smaller teams; but it doesn't implement such approval processes, neither does it offer such fine-grained visibility around changes.
+The Snowplow Console's UI has facilities to get started quickly with data structures (either using the Builder or the direct JSON editor), and is a solid tool for smaller teams. It doesn't implement such approval processes, neither does it offer such fine-grained visibility around changes.
 
 A common solution when faced with these requirements is to move management to some form of version control platform (github/gitlab). This opens up an entire ecosystem of tools and patterns enabling all manner of custom workflows.
 

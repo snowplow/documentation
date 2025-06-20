@@ -5,7 +5,7 @@ title: Basic Workflow
 
 # Basic Workflow
 
-Here's a typical interaction pattern for creating a data structure:
+Here's a typical interaction pattern for creating a data structure.
 
 ## 1. Get Context (Always First)
 

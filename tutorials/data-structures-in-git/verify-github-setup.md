@@ -1,5 +1,5 @@
 ---
-title: Verify Github setup
+title: Verify GitHub setup
 position: 5
 ---
 
@@ -25,7 +25,7 @@ Having created a [new branch](https://git-scm.com/book/en/v2/Git-Branching-Basic
 
 That all looks good so we'll go ahead and push to github and [create a pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request).
 
-We wait patiently for our validate on pull request workflow to run and then..
+We wait patiently for our validate on pull request workflow to run.
 
 ![](./images/worked-pr-checks.png)
 

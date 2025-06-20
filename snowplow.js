@@ -39,7 +39,7 @@ const sendAggregatedEvent = () => {
   if (aggregatedEvent.numEvents > 0) {
     trackSelfDescribingEvent({
       event: {
-        schema: 'iglu:com.example/page_view_aggregated/jsonschema/1-0-0',
+        schema: 'iglu:com.snowplowanalytics/page_view_aggregated/jsonschema/1-0-0',
         data: {
           minXOffset: Math.max(0, Math.round(aggregatedEvent.minXOffset)),
           maxXOffset: Math.max(0, Math.round(aggregatedEvent.maxXOffset)),

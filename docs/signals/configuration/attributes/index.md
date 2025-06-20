@@ -11,6 +11,12 @@ Attributes are the building blocks of Snowplow Signals. They represent specific 
 - **Last product viewed:** identifies the most recent product a user interacted with.
 - **Previous purchases:** provides a record of the user's past transactions. 
 
+:::note Attribute Calculations
+
+Attribute calculation starts when the definitions are applied, and are not backdated. 
+
+:::
+
 
 ### Basic Usage
 
@@ -79,6 +85,7 @@ The table below lists all arguments for an `Attribute`:
 | `property` | The property of the event or entity you wish to use in the aggregation | `string` |
 | `criteria` | List of `Criteria` to filter the events | List of `Criteria` type |
 | `period` | The time period over which the aggregation should be calculated | |
+| `default_value` | The default value to use if the aggregation returns no results. If not set, the default value is automatically assigned based on the `type`. | |
 
 
 ### Event Type
@@ -106,3 +113,27 @@ A `Criterion` specifies the individual filter conditions for an `Attribute` usin
 | `operator` | The operator used to compare the property to the value. | One of: `=`, `!=`, `<`, `>`, `<=`, `>=`, `like`, `in` |
 | `value` | The value to compare the property to. | One of:  `str`, `int`, `float`, `bool`, `List[str]`, `List[int]`, `List[float]`, `List[bool]` |
 
+### Period
+The `period` property of the `Attribute` definition accepts a Python `timedelta` type. The attribute will then be calculated over this period, for example:
+
+```python
+from datetime import timedelta
+
+l7d = timedelta(days=7)
+
+page_views_attribute = Attribute(
+    name='page_views_count_l7d',
+    type='int32',
+    events=[
+        Event(
+            vendor="com.snowplowanalytics.snowplow",
+            name="page_view",
+            version="1-0-0",
+        )
+    ],
+    aggregation='counter',
+    period=l7d #calculates pageviews over last 7 days
+)
+
+
+```

@@ -1,15 +1,14 @@
 ---
-title: "Data Product Studio"
+title: "Data governance"
 date: "2020-02-15"
 sidebar_position: 3
-sidebar_label: "Data Product Studio"
 sidebar_custom_props:
   header: " "
 ---
 
-Data Product Studio is a set of tooling for designing and implementing behavioral data event tracking, including schemas (data structures), ownership, observability, and code generation. The tools help you improve data quality, and allow you to add a data contracts/governance guarantee.
+Snowplow provides tools for designing and implementing behavioral data event tracking, including schemas (data structures), ownership, observability, and code generation. The tools help you improve data quality, and allow you to add a data contracts/governance guarantee.
 
-The Data Product Studio UI is included in the Snowplow BDP Console.
+Some of these tools, including Snowtype and data quality tools like Snowplow Micro or Snowplow Inspector, are part of the base Snowplow product. You will need to purchase Data Product Studio to access the tracking design and data contracts functionality.
 
 ## Tracking design basics
 

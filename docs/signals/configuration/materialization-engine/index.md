@@ -5,7 +5,7 @@ description: "In depth explanation on how the Materialization Engine works."
 sidebar_label: "Materialization Engine"
 ---
 
-If you plan on using batch attributes that need to be computed in the warehouse, the `Materialization Engine` is used to sync the data between the attribute table and the Profiles Store.
+The `Materialization Engine` in Signals allows you to sync attributes from the warehouse to the Profiles Store, so your real-time use-cases can benefit from historical data.
 
 ## Prerequisites
 - have the attributes table ready in the warehouse
@@ -15,9 +15,9 @@ If you plan on using batch attributes that need to be computed in the warehouse,
 ## Enabling Materialization
 The process of enabling Materialization depends on which kind of batch attributes you would like to sync: 
 
-### 1. Attributes computed by yourself in the warehouse:
+### 1. Existing warehouse tables containing attributes (including non-Snowplow data):
 
-You would need to set `online=True` and apply the view. More details on this: [here](/docs/signals/configuration/sources/batch.md#start-materialization) 
+Set `online=True` and apply the view. More details on this: [here](/docs/signals/configuration/sources/batch.md#start-materialization) 
 
 ### 2. Attributes you would like the Batch Engine to compute for you:
 

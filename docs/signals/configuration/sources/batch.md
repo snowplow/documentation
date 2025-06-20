@@ -16,7 +16,7 @@ Batch sources can be defined in two ways:
 1. Using existing tables in your warehouse.  
 2. Automatically generating tables via the dbt autogen CLI.
 
-They are essentially used for the Materialization Engine to know from where to sync the data to the Profiles Store.
+They are used for the Materialization Engine to know from where to sync the data to the Profiles Store.
 
 
 ## Using Existing Tables
@@ -37,7 +37,7 @@ data_source = BatchSource(
 ```
 
 :::info
-The timestamp_field should ideally represent the last modified time of a record. It's used during materialization to identify which rows have changed since the last sync. Only those with a newer timestamp are sent to the Profiles Store. For performance and efficiency, it's best to use this with incremental or snapshot-based tables.
+The timestamp_field should represent the last modified time of a record. It's used during materialization to identify which rows have changed since the last sync. Only those with a newer timestamp are sent to the Profiles Store. For performance and efficiency, it's best to use this with incremental or snapshot-based tables.
 :::
 
 ### Defining a View

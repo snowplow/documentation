@@ -16,6 +16,8 @@ Batch sources can be defined in two ways:
 1. Using existing tables in your warehouse.  
 2. Automatically generating tables via the dbt autogen CLI.
 
+They are essentially used for the Materialization Engine to know from where to sync the data to the Profiles Store.
+
 
 ## Using Existing Tables
 
@@ -23,6 +25,8 @@ Batch sources can be defined in two ways:
 To use an existing table in your warehouse, first define the connection to the table. Here's an example:
 
 ```python
+from snowplow_signals import BatchSource
+
 data_source = BatchSource(
     name="ecommerce_transaction_interactions_source",
     database="SNOWPLOW_DEV1",
@@ -32,9 +36,15 @@ data_source = BatchSource(
 )
 ```
 
+:::info
+The timestamp_field should ideally represent the last modified time of a record. It's used during materialization to identify which rows have changed since the last sync. Only those with a newer timestamp are sent to the Profiles Store. For performance and efficiency, it's best to use this with incremental or snapshot-based tables.
+:::
+
 ### Defining a View
 
-Once the `BatchSource` is defined, you can create a `View` by specifying the fields (columns) you want to use from the table. Here's an example:
+Once the `BatchSource` is defined, you can create a `View` by specifying the fields (columns) you want to use from the table. Make sure you set the `offline` parameter to `True`. This will indicate that you intend to use the batch_source you defined.
+
+Here's an example:
 
 
 ```python
@@ -42,6 +52,7 @@ from snowplow_signals import View, domain_userid, Field
 
 view = View(
     name="ecommerce_transaction_interactions_attributes",
+    offline=True,
     version=1,
     entity=domain_userid,
     fields=[
@@ -65,11 +76,25 @@ view = View(
 
 ### Apply the View
 
-Finally, apply the View to make the attributes available to your app
+To register these changes, apply the View.
 
 ```python
 sp_signals.apply([view])
 ```
 
-Once applied, the attributes defined in the `View` will be available for use in your app.
+### Start Materialization
+
+Simply registering these sources is not enough for the sync to happen, you have to enable the Materialization process first.
+
+The only thing to do is to set the `online` parameter to `True` and apply again:
+
+
+```python
+sp_signals.apply([view])
+```
+
+From that point onwards the sync will begin and look for new records to send to the Profiles Store at a given interval (defaults to 5 minutes) based on the `timestamp_field` and the last time the sync ran.
+
+## Using the Batch Engine
+Batch Sources also need to be defined as part of implementing a Batch Engine use case, where attribute computation is handled automatically. For more information on how to define Batch Sources, check out the [batch engine tutorial](/tutorials/snowplow-batch-engine/materialize-models/)  
 

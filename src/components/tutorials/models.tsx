@@ -3,11 +3,9 @@ import { z } from 'zod'
 // The Topics allowed for the tutorials
 export const Topic = z.enum([
   'Data modeling',
-  'Data products',
-  'Infrastructure',
+  'Data governance',
   'Solution accelerator',
-  'Tracking design',
-  'Tracking implementation'
+  'Tracking implementation',
 ])
 
 export type Topic = z.infer<typeof Topic>

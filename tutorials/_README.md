@@ -11,11 +11,11 @@ Each tutorial is a directory containing the following files:
 
 This file keeps the metadata of the tutorial. It contains the following fields:
 
-| Field        | Description                                                        |Format|
-|--------------|--------------------------------------------------------------------|-|
-| `title`      | The title of the tutorial, shown on the card and the tutorial page. |`string`|
-| `description`| A short description of the tutorial, shown on the card.             |`string`|
-| `label`      | The topic of the tutorial, shown on the card  and the tutorial page.                      | One of: `'Tracking design'`, `'Tracking implementation'`, `'Data modeling'`, `'Infrastructure'`|
+| Field         | Description                                                          | Format                                                                                              |
+| ------------- | -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `title`       | The title of the tutorial, shown on the card and the tutorial page.  | `string`                                                                                            |
+| `description` | A short description of the tutorial, shown on the card.              | `string`                                                                                            |
+| `label`       | The topic of the tutorial, shown on the card  and the tutorial page. | One of: `'Data governance'`, `'Data modeling'`, `'Solution accelerator'`, `Tracking implementation` |
 
 Example:
 
@@ -33,10 +33,10 @@ Each page of a tutorial is an MDX ([Markdown + JSX](https://docusaurus.io/docs/m
 
 Each file expect two properties in the front matter:
 
-| Field        | Description                                                        |Format|
-|--------------|--------------------------------------------------------------------|-|
-| `position`   | The position of the page in the tutorial.                          |`number`|
-| `title`      | The title of the page. | `string`|
+| Field      | Description                               | Format   |
+| ---------- | ----------------------------------------- | -------- |
+| `position` | The position of the page in the tutorial. | `number` |
+| `title`    | The title of the page.                    | `string` |
 
 Example:
 

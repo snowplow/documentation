@@ -40,7 +40,7 @@ data_source = BatchSource(
 The timestamp_field should represent the last modified time of a record. It's used during materialization to identify which rows have changed since the last sync. Only those with a newer timestamp are sent to the Profiles Store. For performance and efficiency, it's best to use this with incremental or snapshot-based tables.
 :::
 
-### Defining a View
+### Defining a view
 
 Once the `BatchSource` is defined, you can create a `View` by specifying the fields (columns) you want to use from the table. Make sure you set the `offline` parameter to `True`. This will indicate that you intend to use the batch_source you defined.
 

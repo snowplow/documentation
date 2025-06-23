@@ -1,14 +1,13 @@
 ---
 title: "Entities"
 sidebar_position: 40
-description: "Entities."
 sidebar_label: "Entities"
 ---
 
-### What is an Entity?
+### What is an entity?
 An `Entity` is the identifier that an attribute is calculated on, for example `user_id` or `session_id`. 
 
-### Built-in Entities
+### Built-in entities
 Signals has a number of out-of-the-box entities included based on commonly used Snowplow identifiers. These can be accessed as follows:
 
 ```python
@@ -19,7 +18,7 @@ from snowplow_signals import (
     network_userid
 )
 ```
-### Defining an Entity
+### Defining an entity
 You can also define a custom entity, which allows you to calculate attributes on whichever Snowplow atomic property you want. 
 
 For example, an entity that groups by `app_id` can be defined as:

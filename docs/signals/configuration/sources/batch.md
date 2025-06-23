@@ -1,7 +1,6 @@
 ---
 title: "Batch Sources"
 sidebar_position: 30
-description: "Batch Sources."
 sidebar_label: "Batch Sources"
 ---
 
@@ -19,9 +18,9 @@ Batch sources can be defined in two ways:
 They are used for the Materialization Engine to know from where to sync the data to the Profiles Store.
 
 
-## Using Existing Tables
+## Using existing tables
 
-### Defining a Batch Source
+### Defining a batch source
 To use an existing table in your warehouse, first define the connection to the table. Here's an example:
 
 ```python
@@ -75,7 +74,7 @@ view = View(
 )
 ```
 
-### Apply the View
+### Apply the view
 
 To register these changes, apply the View.
 

@@ -1,7 +1,6 @@
 ---
 title: "Defining Attributes"
 sidebar_position: 20
-description: "Attributes."
 sidebar_label: "Attributes"
 ---
 
@@ -18,7 +17,7 @@ Attribute calculation starts when the definitions are applied, and are not backd
 :::
 
 
-### Basic Usage
+### Basic usage
 
 An `Attribute` can be defined to count the number of pageviews in a session through the Python SDK as follows:
 

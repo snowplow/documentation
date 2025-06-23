@@ -4,7 +4,7 @@ date: "2021-11-18"
 sidebar_position: 100
 ---
 
-This template implements the [Snowplow JavaScript tracker v3](/docs/sources/trackers/javascript-trackers/index.md).
+This template implements the [Snowplow JavaScript tracker v3](/docs/sources/trackers/web-trackers/index.md).
 
 The template supports all the features of the tracker, with a few exceptions due to the limitations of custom templates’ [sandboxed JavaScript](https://developers.google.com/tag-platform/tag-manager/templates/sandboxed-javascript).
 

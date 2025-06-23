@@ -13,10 +13,10 @@ import {versions} from '@site/src/componentVersions';
 
 Snowplow provides two web trackers to use depending how you wish to add analytics to your webapp.
 
-The **JavaScript Tracker** is loaded via tag: add code snippets to your website or Tag Manager solution. Some plugins are included in the standard tag, but we also provide customization options.
+The **JavaScript tracker** is loaded via tag: add code snippets to your website or Tag Manager solution. Some plugins are included in the standard tag, but we also provide customization options.
 
-The **Browser Tracker** is available via `npm` (`@snowplow/browser-tracker`) and can be directly bundled into your application. It supports core tracking methods out of the box and can be extended through plugins (`@snowplow/browser-plugin-*`). This tracker is often used when natively integrating tracking into React, Angular and Vue applications.
+The **Browser tracker** is available via `npm` (`@snowplow/browser-tracker`) and can be directly bundled into your application. It supports core tracking methods out of the box and can be extended through plugins (`@snowplow/browser-plugin-*`). This tracker is often used when natively integrating tracking into React, Angular and Vue applications.
 
 As the API is similar, we have combined the documentation for both trackers. We've marked the sections which are only relevant to one tracker or another.
 
-<p>The JavaScript and Browser tracker, along with the Node.js tracker, are part of <a href="https://github.com/snowplow/snowplow-javascript-tracker">one monorepo</a>. The current version is {versions.javaScriptTracker}.</p>
+<p>The JavaScript and Browser tracker, along with the <a href="/docs/sources/trackers/node-js-tracker/index.md">Node.js</a> tracker, are part of <a href="https://github.com/snowplow/snowplow-javascript-tracker">one monorepo</a>. The current version is {versions.javaScriptTracker}.</p>

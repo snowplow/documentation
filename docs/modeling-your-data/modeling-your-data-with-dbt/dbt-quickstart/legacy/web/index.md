@@ -14,7 +14,7 @@ import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
 
 In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web events dataset being available in your database:
 
-- [Snowplow Javascript tracker](/docs/sources/trackers/javascript-trackers/index.md) version 2 or later implemented.
+- [Snowplow Javascript tracker](/docs/sources/trackers/web-trackers/index.md) version 2 or later implemented.
 - Web Page context [enabled](/docs/sources/trackers/web-trackers/tracker-setup/initialization-options/index.md#webpage-context) (enabled by default in [v3+](/docs/sources/trackers/web-trackers/tracker-setup/initialization-options/index.md#webpage-context)).
 - [Page view events](/docs/sources/trackers/web-trackers/tracking-events/index.md#page-views) implemented.
 - From version v0.13.0 onwards you must be using [RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) v4.0.0 and above, or [BigQuery Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) v1.0.0 and above. If you are not using these versions, or are using the Postgres loader, you will need to set `snowplow__enable_load_tstamp` to `false` in your `dbt_project.yml` and will not be able to use the consent models.

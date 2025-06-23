@@ -19,7 +19,7 @@ Hybrid apps are mobile apps that in addition to a React Native interface, provid
 We recommend using the Web tracker (v4.3+) to forward all Web events to the React Native tracker.
 
 1. Implement the React Native tracker.
-2. Implement the [Snowplow Web/JavaScript tracker](/docs/sources/trackers/javascript-trackers/index.md) in the WebView in your app. Make sure to include the [WebView plugin](/docs/sources/trackers/web-trackers/tracking-events/webview/index.md).
+2. Implement the [Snowplow Web/JavaScript tracker](/docs/sources/trackers/web-trackers/index.md) in the WebView in your app. Make sure to include the [WebView plugin](/docs/sources/trackers/web-trackers/tracking-events/webview/index.md).
 3. Subscribe to WebView event messages.
 
     ```typescript

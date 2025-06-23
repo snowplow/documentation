@@ -19,7 +19,7 @@ We have built [Snowplow CLI](https://docs.snowplow.io/docs/data-product-studio/s
 
 * A deployed Snowplow BDP pipeline
 * [Snowplow CLI](https://docs.snowplow.io/docs/data-product-studio/snowplow-cli) installed and configured
-* A familiarity with [git](https://git-scm.com/) and an understanding of [github actions](https://docs.github.com/en/actions/writing-workflows)
+* A familiarity with [git](https://git-scm.com/) and an understanding of [GitHub Actions](https://docs.github.com/en/actions/writing-workflows)
 * A sensible [terminal emulator](https://en.wikipedia.org/wiki/Terminal_emulator) and shell
 
 ## What you'll be doing

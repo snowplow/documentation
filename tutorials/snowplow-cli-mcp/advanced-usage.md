@@ -1,17 +1,19 @@
 ---
 position: 4
-title: Advanced Usage & AI Analysis
+title: Advanced usage and AI analysis
 ---
 
-# Advanced Usage & AI Analysis
+# Advanced usage and AI analysis
 
-## Data Product Creation
+## Data product creation
 
-> Create a data product for e-commerce product interactions. Include:
-> - Product page views
-> - Add to cart events  
-> - A source application for our website
-> - Proper validation of all components
+```
+Create a data product for e-commerce product interactions. Include:
+- Product page views
+- Add to cart events
+- A source application for our website
+- Proper validation of all components
+```
 
 The assistant will:
 1. Create the necessary data structures for events (locally)
@@ -21,28 +23,47 @@ The assistant will:
 
 **Publishing to Console**: Once you're satisfied with your local files, use `snowplow-cli dp publish` and `snowplow-cli ds publish` to sync them to BDP Console.
 
-## Beyond Text Editing: AI-Powered Analysis
+## Analysis and strategy support
 
-The real power of the Snowplow CLI MCP tool isn't just natural language file creation - it's the AI's ability to analyze, infer, and guide your tracking strategy:
+Beyond creating individual files, AI assistants can help analyze tracking requirements and suggest comprehensive solutions:
 
-### Business Logic Analysis
-Instead of manually figuring out what to track, describe your business process:
-- **You say**: "We want to track user engagement on our blog".
-- **AI infers**: Need both standard page_view events enhanced with article context, plus custom events for shares/subscriptions, reading progression metrics, and time-based engagement.
+### Business process analysis
+```
+We want to track user engagement on our blog
+```
 
-### Schema Evolution Guidance  
-When existing tracking needs updates:
-- **You say**: "Our product_viewed event is missing context about where users found the product".
-- **AI suggests**: Add context entities rather than breaking schema changes, proper versioning strategy, and related events that should stay consistent.
+The assistant will suggest:
+- Page view events with article context
+- Custom events for shares and subscriptions
+- Reading progression metrics
+- Time-based engagement tracking
 
-### Complete Journey Mapping
-Describe high-level goals and get comprehensive tracking plans:
-- **You say**: "Create a data product for our checkout funnel".
-- **AI designs**: Complete user journey from cart management through payment, including error states and abandonment points you might have missed.
+### Schema evolution planning
+```
+Our product_viewed event is missing context about where users found the product
+```
 
-### Cross-Platform Strategy
-When expanding to new platforms:
-- **You say**: "We're adding mobile app tracking to our existing web tracking".
-- **AI identifies**: Which entities should be consistent across platforms, platform-specific contexts needed, and how to structure shared vs. separate data products.
+The assistant will provide:
+- Recommendations for adding context entities
+- Versioning strategy
+- Guidelines for maintaining consistency with related events
 
-The AI understands Snowplow patterns, business processes, and data governance - making it a strategic partner, not just a faster way to write YAML.
+### Journey mapping
+```
+Create a data product for our checkout funnel
+```
+
+The assistant will create:
+- Complete tracking plan covering cart management through payment
+- Error state tracking
+- Abandonment scenario tracking
+
+### Cross-platform consistency
+```
+We're adding mobile app tracking to our existing web tracking
+```
+
+The assistant will analyze:
+- Which entities should be consistent across platforms
+- Platform-specific contexts needed
+- Data product structure recommendations

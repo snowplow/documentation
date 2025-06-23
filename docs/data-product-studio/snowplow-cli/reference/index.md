@@ -1,7 +1,6 @@
 ---
-title: Command Reference
-date: 2025-06-16
-sidebar_label: Command Reference
+title: Command reference
+date: 2025-06-23
 sidebar_position: 1
 ---
 
@@ -72,6 +71,7 @@ snowplow-cli data-products download {directory ./data-products} [flags]
 ```
   -h, --help                   help for download
   -f, --output-format string   Format of the files to read/write. json or yaml are supported (default "yaml")
+      --plain                  Don't include any comments in yaml files
 ```
 
 ### Options inherited from parent commands
@@ -129,6 +129,7 @@ snowplow-cli data-products generate [paths...] [flags]
       --data-products-directory string   Directory to write data products to (default "data-products")
   -h, --help                             help for generate
       --output-format string             File format (yaml|json) (default "yaml")
+      --plain                            Don't include any comments in yaml files
       --source-app stringArray           Name of source app to generate
       --source-apps-directory string     Directory to write source apps to (default "data-products/source-apps")
 ```
@@ -387,6 +388,7 @@ snowplow-cli data-structures download {directory ./data-structures} [flags]
       --include-legacy         Include legacy data structures with empty schemaType (will be set to 'entity')
       --match stringArray      Match for specific data structure to download (eg. --match com.example/event_name or --match com.example)
   -f, --output-format string   Format of the files to read/write. json or yaml are supported (default "yaml")
+      --plain                  Don't include any comments in yaml files
 ```
 
 ### Options inherited from parent commands
@@ -446,6 +448,7 @@ snowplow-cli data-structures generate login_click {directory ./data-structures} 
       --event                  Generate data structure as an event (default true)
   -h, --help                   help for generate
       --output-format string   Format for the file (yaml|json) (default "yaml")
+      --plain                  Don't include any comments in yaml files
       --vendor string          A vendor for the data structure.
                                Must conform to the regex pattern [a-zA-Z0-9-_.]+
 ```
@@ -670,13 +673,13 @@ snowplow-cli data-structures validate [paths...] default: [./data-structures] [f
 ## Mcp
 
 
-Start MCP stdio server for Snowplow validation and context
+Start an MCP (Model Context Protocol) stdio server for Snowplow validation and context
 
 ### Synopsis
 
 Start an MCP (Model Context Protocol) stdio server that provides tools for:
   - Validating Snowplow files (data-structures, data-products, source-applications)
-  - Providing context and schemas for Snowplow types
+  - Retrieving the built-in schema and rules that define how Snowplow data structures, data products, and source applications should be structured
 
 ```
 snowplow-cli mcp [flags]
@@ -696,15 +699,23 @@ snowplow-cli mcp [flags]
     }
   }
 
-  VS Code:
+  VS Code '\<workspace\>/.vscode/mcp.json':
   {
-    "mcp": {
+    "servers": {
       ...
-      "servers": {
-        ...
-        "snowplow-cli": {
-          "command": "snowplow-cli", "args": ["mcp"]
-        }
+      "snowplow-cli": {
+        "type": "stdio",
+        "command": "snowplow-cli", "args": ["mcp"]
+      }
+    }
+  }
+
+  Cursor '\<workspace\>/.cursor/mcp.json':
+  {
+    "mcpServers": {
+      ...
+      "snowplow-cli": {
+        "command": "snowplow-cli", "args": ["mcp", "--base-directory", "."]
       }
     }
   }
@@ -723,13 +734,14 @@ Setup options:
 ### Options
 
 ```
-  -S, --api-key string        BDP console api key
-  -a, --api-key-id string     BDP console api key id
-      --dump-context          Dumps the result of the get_context tool to stdout and exits.
-  -h, --help                  help for mcp
-  -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
-  -m, --managed-from string   Link to a github repo where the data structure is managed
-  -o, --org-id string         Your organization id
+  -S, --api-key string          BDP console api key
+  -a, --api-key-id string       BDP console api key id
+      --base-directory string   The base path to use for relative file lookups. Useful for clients that pass in relative file paths.
+      --dump-context            Dumps the result of the get_context tool to stdout and exits.
+  -h, --help                    help for mcp
+  -H, --host string             BDP console host (default "https://console.snowplowanalytics.com")
+  -m, --managed-from string     Link to a github repo where the data structure is managed
+  -o, --org-id string           Your organization id
 ```
 
 ### Options inherited from parent commands

@@ -7,10 +7,16 @@ sidebar_label: "Sources"
 
 A `Source` defines how an `Attribute` is calculated. There are two types of sources:
 
-- Stream: Attributes are calculated in real time, making them ideal for instant personalization and session-based metrics. This is the default stream type.
+- Stream: Attributes are calculated in real time, making them ideal for instant personalization and session-based metrics. This is the default source type.
 - Batch: Attributes are calculated using historical data stored in your warehouse, suitable for metrics over longer time periods.
 
 ### When to use each source
+
+:::note Stream Limitations
+
+Stream attributes are limited to the last 100 instances of an event, this should be considered when defining attributes over longer periods of time.
+
+:::
 
 - Use Stream Sources for real-time use cases, such as tracking the latest product a user viewed or the number of page views in a session.
 - Use Batch Sources for historical analysis, such as calculating a user's purchase history or average session length.

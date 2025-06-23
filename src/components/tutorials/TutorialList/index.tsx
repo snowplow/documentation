@@ -179,6 +179,29 @@ function filterTutorials(
     .filter((tutorial) => topicFilter(topic, tutorial))
 }
 
+const IntroductionText: FC = () => {
+  return (
+    <div>
+      <p>
+        Choose from our different tutorial categories depending on what you want
+        to learn.
+      </p>
+      <ul>
+        <li>Data governance: tracking design</li>
+        <li>
+          Tracking implementation: adding Snowplow tracking to your applications
+        </li>
+        <li>Data modeling: using our dbt models</li>
+        <li>
+          Solution accelerator: advanced use cases, using Snowplow alongside
+          other tools
+        </li>
+      </ul>
+      <br />
+    </div>
+  )
+}
+
 const MobileTutorialList: FC<{
   setSearch: React.Dispatch<React.SetStateAction<string>>
   topic: TopicDropdown
@@ -190,6 +213,8 @@ const MobileTutorialList: FC<{
       <Grid container direction="column" rowSpacing={2}>
         <SearchBar setSearch={setSearch} />
         <TopicFilter topic={topic} setTopic={setTopic} />
+
+        <IntroductionText />
 
         {tutorials.map((tutorial: Tutorial) => (
           <Grid item key={tutorial.meta.id}>
@@ -213,6 +238,8 @@ const DesktopTutorialList: FC<{
         <SearchBar setSearch={setSearch} />
         <TopicFilter topic={topic} setTopic={setTopic} />
       </Grid>
+
+      <IntroductionText />
 
       <TutorialGrid mb={2}>
         {tutorials.map((tutorial: Tutorial) => (

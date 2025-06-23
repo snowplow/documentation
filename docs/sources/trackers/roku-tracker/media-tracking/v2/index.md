@@ -7,7 +7,7 @@ date: "2025-03-21"
 import Media from "@site/docs/reusable/media/_index.md"
 ```
 
-Media tracking has [multiple versions](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/index.md) of schema available.
+Media tracking has [multiple versions](/docs/sources/trackers/web-trackers/tracking-events/media/index.md) of schema available.
 This document is for version 2 of the schemas; tracker versions earlier than v0.3.0 [only support v1 tracking](/docs/sources/trackers/roku-tracker/media-tracking/v1/index.md).
 
 

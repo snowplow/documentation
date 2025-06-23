@@ -6,7 +6,7 @@ sidebar_label: Cross Navigation
 
 This enrichment parses the extended cross navigation format in `_sp` querystring parameter and attaches the `cross_navigation` context to an event.
 
-The `_sp` parameter can be attached by our Web ([see cross-domain tracking](/docs/sources/trackers/javascript-trackers/web-tracker/cross-domain-tracking/index.md)) and [mobile trackers](/docs/sources/trackers/mobile-trackers/tracking-events/session-tracking/index.md#decorating-outgoing-links-using-cross-navigation-tracking) and contains user, session and app identifiers (e.g., domain user and session IDs, business user ID, source app ID). The information to include in the parameters is configurable in the trackers. This is useful for tracking the movement of users across different apps and platforms.
+The `_sp` parameter can be attached by our Web ([see cross-domain tracking](/docs/sources/trackers/web-trackers/cross-domain-tracking/index.md)) and [mobile trackers](/docs/sources/trackers/mobile-trackers/tracking-events/session-tracking/index.md#decorating-outgoing-links-using-cross-navigation-tracking) and contains user, session and app identifiers (e.g., domain user and session IDs, business user ID, source app ID). The information to include in the parameters is configurable in the trackers. This is useful for tracking the movement of users across different apps and platforms.
 
 The extended cross navigation format can be described by `_sp={domainUserId}.{timestamp}.{sessionId}.{subjectUserId}.{sourceId}.{platform}.{reason}`
 

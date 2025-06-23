@@ -219,7 +219,7 @@ This feature was introduced in version 6.0.0 of the iOS and Android trackers.
 The tracker provides a `decorateLink` API to decorate outgoing links from the mobile app to another mobile app or to a website.
 This API adds an `_sp` parameter to the links containing information about the user, app, and current session.
 This is useful for tracking the movement of users across different apps and platforms.
-It is part of our cross-navigation solution and is equivalent to [cross-domain tracking on the JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/cross-domain-tracking/index.md).
+It is part of our cross-navigation solution and is equivalent to [cross-domain tracking on the JavaScript tracker](/docs/sources/trackers/web-trackers/cross-domain-tracking/index.md).
 
 For example, calling `decorateLink` on `appSchema://path/to/page` will produce the following result:
 

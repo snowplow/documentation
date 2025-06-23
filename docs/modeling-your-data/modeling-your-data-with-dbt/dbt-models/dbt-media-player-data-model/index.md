@@ -23,10 +23,10 @@ import Badges from '@site/src/components/Badges';
 The package contains a fully incremental model that transforms raw media player event data into derived tables for easier querying. It can support media events tracked using the following tracking implementations on Web and mobile:
 
 * on Web using plugins for our [JavaScript trackers](/docs/sources/trackers/javascript-trackers/index.md):
-  * [media plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/index.md) that can be used to track events from any media player.
-  * [HTML5 media tracking plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/html5/index.md).
-  * [YouTube tracking plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/youtube/index.md).
-  * [Vimeo tracking plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/vimeo/index.md).
+  * [media plugin](/docs/sources/trackers/web-trackers/tracking-events/media/index.md) that can be used to track events from any media player.
+  * [HTML5 media tracking plugin](/docs/sources/trackers/web-trackers/tracking-events/media/html5/index.md).
+  * [YouTube tracking plugin](/docs/sources/trackers/web-trackers/tracking-events/media/youtube/index.md).
+  * [Vimeo tracking plugin](/docs/sources/trackers/web-trackers/tracking-events/media/vimeo/index.md).
 * [media tracking APIs on our iOS and Android trackers](/docs/sources/trackers/mobile-trackers/tracking-events/media-tracking/index.md) for mobile apps.
 * [media tracking APIs on our Roku tracker](/docs/sources/trackers/roku-tracker/media-tracking/index.md) for [Roku](https://www.roku.com/) devices
 

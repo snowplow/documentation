@@ -333,10 +333,10 @@ Media player entity property | Media events | Affected calculation of metric
 ## How to track?
 
 * on Web using plugins for our [JavaScript trackers](/docs/sources/trackers/javascript-trackers/index.md):
-  * [media plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/index.md) that can be used to track events from any media player.
-  * [HTML5 media tracking plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/html5/index.md).
-  * [YouTube tracking plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/youtube/index.md).
-  * [Vimeo tracking plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/vimeo/index.md).
+  * [media plugin](/docs/sources/trackers/web-trackers/tracking-events/media/index.md) that can be used to track events from any media player.
+  * [HTML5 media tracking plugin](/docs/sources/trackers/web-trackers/tracking-events/media/html5/index.md).
+  * [YouTube tracking plugin](/docs/sources/trackers/web-trackers/tracking-events/media/youtube/index.md).
+  * [Vimeo tracking plugin](/docs/sources/trackers/web-trackers/tracking-events/media/vimeo/index.md).
 * [media tracking APIs on our iOS and Android trackers](/docs/sources/trackers/mobile-trackers/tracking-events/media-tracking/index.md) for mobile apps.
 
 ## Modeled data using the snowplow-media-player dbt package

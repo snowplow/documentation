@@ -63,7 +63,7 @@ Link click tracking feature in the JavaScript tracker enables automatic capturin
 
 ### How to track?
 
-See the [link click tracking documentation for the JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/index.md#link-click-tracking).
+See the [link click tracking documentation for the JavaScript tracker](/docs/sources/trackers/web-trackers/tracking-events/index.md#link-click-tracking).
 
 ## Cross-domain tracking on Web
 
@@ -73,4 +73,4 @@ When the `_sp` parameter is present in the page URL, enrichment uses it to assig
 
 ### How to track?
 
-See the [documentation for cross-domain tracking on the JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md#cross-domain-tracking) for instructions.
+See the [documentation for cross-domain tracking on the JavaScript tracker](/docs/sources/trackers/web-trackers/tracker-setup/initialization-options/index.md#cross-domain-tracking) for instructions.

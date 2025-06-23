@@ -270,7 +270,7 @@ Create a new HTML page with this content:
 
 #### Initializing the tracker
 
-Follow the Web Quick Start Guide to [add it into your HTML](/docs/sources/trackers/javascript-trackers/web-tracker/quick-start-guide/index.md).
+Follow the Web Quick Start Guide to [add it into your HTML](/docs/sources/trackers/web-trackers/quick-start-guide/index.md).
 
 #### Setting up tracking
 

@@ -60,7 +60,7 @@ To use this image, add `-distroless` to the tag:
 
 Follow the documentation for one of [our trackers](/docs/sources/trackers/index.md) to implement some tracking code on your website or application.
 
-You can then point it to `localhost:9090` where Micro is listening. For example, using the [Browser tracker](/docs/sources/trackers/javascript-trackers/web-tracker/index.md):
+You can then point it to `localhost:9090` where Micro is listening. For example, using the [Browser tracker](/docs/sources/trackers/web-trackers/index.md):
 
 ```js
 import { newTracker, trackPageView, enableActivityTracking } from '@snowplow/browser-tracker';

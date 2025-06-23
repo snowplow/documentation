@@ -58,7 +58,7 @@ Currently, recording a pageview involves recording an event where `e=pv`. All th
 
 Page pings are used to record users engaging with content on a web page after it has originally loaded. For example, it can be used to track how far down an article a user scrolls.
 
-If enabled, the [activity tracking function](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/index.md#activity-tracking-page-pings) checks for engagement with a page after load. (E.g. mousemovement, scrolling etc...).
+If enabled, the [activity tracking function](/docs/sources/trackers/web-trackers/tracking-events/index.md#activity-tracking-page-pings) checks for engagement with a page after load. (E.g. mousemovement, scrolling etc...).
 
 Page pings are identified by `e=pp`. As well as all the standard web fields, there are four additional fields that `pp` includes, which are used to identify how users are scrolling over web pages:
 

@@ -3,7 +3,7 @@ title: "Media tracking (v1)"
 date: "2021-12-23"
 ---
 
-Media tracking has [multiple versions](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/index.md) of schema available.
+Media tracking has [multiple versions](/docs/sources/trackers/web-trackers/tracking-events/media/index.md) of schema available.
 This document is for version 1 of the schemas, it is recommended to [migrate to v2 tracking](/docs/sources/trackers/roku-tracker/media-tracking/v2/index.md#migrating-from-v1).
 
 ## Usage

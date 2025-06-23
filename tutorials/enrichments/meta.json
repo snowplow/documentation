@@ -1,5 +1,5 @@
 {
-  "title": "Set up Enrichments",
+  "title": "Set up enrichments",
   "label": "Data governance",
-  "description": "Enrich your event data by adding and amending event properties in the Snowplow pipeline"
+  "description": "Enrich your event data by adding and amending event properties in the Snowplow pipeline."
 }

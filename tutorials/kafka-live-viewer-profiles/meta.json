@@ -1,5 +1,5 @@
 {
-  "title": "Kafka Live Viewer Profiles",
+  "title": "Live viewer profiles using Kafka",
   "label": "Solution accelerator",
   "description": "How to build a real-time viewer profile for a video streaming site. Leveraging Kafka and DynamoDB."
 }

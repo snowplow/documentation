@@ -184,20 +184,9 @@ const IntroductionText: FC = () => {
     <div>
       <p>
         Choose from our different tutorial categories depending on what you want
-        to learn.
+        to learn. Solution accelerators guide you through advanced use cases
+        using Snowplow alongside other tools.
       </p>
-      <ul>
-        <li>Data governance: tracking design</li>
-        <li>
-          Tracking implementation: adding Snowplow tracking to your applications
-        </li>
-        <li>Data modeling: using our dbt models</li>
-        <li>
-          Solution accelerator: advanced use cases, using Snowplow alongside
-          other tools
-        </li>
-      </ul>
-      <br />
     </div>
   )
 }

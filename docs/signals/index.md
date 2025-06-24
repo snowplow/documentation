@@ -89,11 +89,13 @@ Once Signals receives the applied configurations it will start calculating attri
 
 ### Retrieving the attributes in your application
 
-Call the Signals API within your application to retrieve relevant attributes and interventions.
+Snowplow provide SDKs for Node.js and Python to retrieve attributes in your application.
 
-If you have a Node.js application, we provide an [SDK](https://github.com/snowplow-incubator/snowplow-signals-typescript-sdk) that wraps the Signals API for easier implementation.
+|Feature|[Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk)|[Node.js SDK](https://github.com/snowplow-incubator/snowplow-signals-typescript-sdk) |
+|-------|----------|-----------|
+|Define Attributes|✅ |❌|
+|Retrieve Attributes | ✅ |✅  |
 
-You can also use the [Signals Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk) for applications with a Python back-end.
 
 
 ## How Signals calculates attributes

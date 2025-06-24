@@ -1,21 +1,20 @@
 ---
 title: "Views and Services"
 sidebar_position: 30
-description: "Views and Services."
 sidebar_label: "Views and Services"
 ---
 
 To access attributes, you need to define a `View` and optionally group multiple views into a `Service`. This guide explains how to define views and services, apply them to your deployment, and retrieve calculated values.
 
 
-### What is a View?
+### What is a view?
 A `View` is a versioned collection of attributes grouped by a common `Entity` (e.g., `session_id` or `user_id`). Once defined, a `View` allows you to retrieve the calculated values of the attributes it contains.
 
-### What is a Service?
+### What is a service?
 A `Service` is a collection of views that streamlines the retrieval of multiple views. By grouping related views into a `Service`, you can efficiently manage and access user insights, making it easier to personalize applications and analyze behavior.
 
 
-### Defining a View
+### Defining a view
 You can define a `View` by passing in a list of previously defined attributes. Here's an example:
 
 ```python
@@ -34,7 +33,7 @@ my_attribute_view = View(
 )
 ```
 
-### Testing a View
+### Testing a view
 To understand what the output of a `View` will look like, use the `test` method with the `Signals` class. This will output a table of `Attributes` from your `atomic` events table.
 
 ```python
@@ -47,7 +46,7 @@ test_data = sp_signals.test(
 
 ```
 
-### View Properties
+### View properties
 
 The `View` has the following properties:
 
@@ -90,12 +89,13 @@ my_service = Service(
          # Previously defined Views
         my_attribute_view,
         another_view
-    ]
+    ],
+    owner="user@company.com",
 )
 
 ```
 
-### Applying Views and Services
+### Applying views and services
 
 To begin calculating your `Attributes`, you need to apply the `Views` or `Services` to your `Signals` deployment using the `apply` method:
 
@@ -112,7 +112,7 @@ sp_signals.apply([
 Once applied, the attributes within these Views and Services will be calculated.
 
 
-### Retrieving Calculated Values
+### Retrieving calculated values
 
 To access the calculated values, use the `get_online_attributes` method. Here's an example:
 

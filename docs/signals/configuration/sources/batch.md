@@ -1,7 +1,6 @@
 ---
 title: "Batch Sources"
 sidebar_position: 30
-description: "Batch Sources."
 sidebar_label: "Batch Sources"
 ---
 
@@ -19,9 +18,9 @@ Batch sources can be defined in two ways:
 They are used for the Materialization Engine to know from where to sync the data to the Profiles Store.
 
 
-## Using Existing Tables
+## Using existing tables
 
-### Defining a Batch Source
+### Defining a batch source
 To use an existing table in your warehouse, first define the connection to the table. Here's an example:
 
 ```python
@@ -33,6 +32,7 @@ data_source = BatchSource(
     schema="SIGNALS",
     table="SNOWPLOW_ECOMMERCE_TRANSACTION_INTERACTIONS_FEATURES",
     timestamp_field="UPDATED_AT",
+    owner="user@company.com",
 )
 ```
 
@@ -40,7 +40,7 @@ data_source = BatchSource(
 The timestamp_field should represent the last modified time of a record. It's used during materialization to identify which rows have changed since the last sync. Only those with a newer timestamp are sent to the Profiles Store. For performance and efficiency, it's best to use this with incremental or snapshot-based tables.
 :::
 
-### Defining a View
+### Defining a view
 
 Once the `BatchSource` is defined, you can create a `View` by specifying the fields (columns) you want to use from the table. Make sure you set the `offline` parameter to `True`. This will indicate that you intend to use the batch_source you defined.
 
@@ -74,7 +74,7 @@ view = View(
 )
 ```
 
-### Apply the View
+### Apply the view
 
 To register these changes, apply the View.
 

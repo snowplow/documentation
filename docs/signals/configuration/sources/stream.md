@@ -1,7 +1,6 @@
 ---
 title: "Stream Sources"
 sidebar_position: 20
-description: "Stream"
 sidebar_label: "Stream Sources"
 ---
 
@@ -13,7 +12,7 @@ You may like to configure common `Stream` source attributes such as:
 - Search history 
 - Number of page views in a session
 
-### Stream Source
+### Stream source
 
 When you apply a `View`, a stream source is automatically created. This source calculates the attributes defined in the `View` in real-time.
 

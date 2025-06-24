@@ -11,7 +11,7 @@ The Snowplow CLI MCP (Model Context Protocol) tool integrates Snowplow's data st
 
 ## What you'll learn
 
-- How to set up the Snowplow CLI MCP tool with Claude Desktop
+- How to set up the Snowplow CLI MCP tool with AI assistants like Claude Desktop, Cursor, or Copilot
 - Available MCP tools and their functions  
 - Creating and validating data structures through conversation
 - AI-powered analysis for strategic tracking plan development
@@ -21,7 +21,7 @@ The Snowplow CLI MCP (Model Context Protocol) tool integrates Snowplow's data st
 - Snowplow CLI installed ([installation guide](/docs/data-product-studio/snowplow-cli/#install))
 - Snowplow CLI configured with your BDP Console credentials ([configuration guide](/docs/data-product-studio/snowplow-cli/#configure))
 - Claude Desktop or another MCP-compatible client (Cursor or Copilot)
-- **Filesystem access**: Claude needs to write files locally. Enable filesystem access in Claude Desktop settings, or run alongside an MCP filesystem server (e.g., `@modelcontextprotocol/server-filesystem`)
+- **Filesystem access**: If using Claude Desktop, you must run alongside an MCP filesystem server (e.g., `@modelcontextprotocol/server-filesystem`) to enable file operations. Other MCP clients (Cursor, Copilot, etc.) have filesystem access by default.
 
 ## Available MCP tools
 

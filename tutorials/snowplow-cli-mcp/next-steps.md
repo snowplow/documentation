@@ -1,29 +1,9 @@
 ---
 position: 4
-title: Advanced usage and AI analysis
+title: Next steps
 ---
 
-# Advanced usage and AI analysis
-
-## Data product creation
-
-```
-Create a data product for e-commerce product interactions. Include:
-- Product page views
-- Add to cart events
-- A source application for our website
-- Proper validation of all components
-```
-
-The assistant will:
-1. Create the necessary data structures for events (locally)
-2. Create a source application definition (locally)
-3. Create a data product linking everything together (locally)
-4. Validate all components together (including cross-references)
-
-**Publishing to Console**: Once you're satisfied with your local files, use `snowplow-cli dp publish` and `snowplow-cli ds publish` to sync them to BDP Console.
-
-## Analysis and strategy support
+# Next steps
 
 Beyond creating individual files, AI assistants can help analyze tracking requirements and suggest comprehensive solutions:
 

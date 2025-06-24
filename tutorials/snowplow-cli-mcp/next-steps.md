@@ -3,8 +3,6 @@ position: 4
 title: Next steps
 ---
 
-# Next steps
-
 Beyond creating individual files, AI assistants can help analyze tracking requirements and suggest comprehensive solutions:
 
 ### Business process analysis

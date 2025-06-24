@@ -3,18 +3,16 @@ position: 3
 title: Basic workflow
 ---
 
-# Basic workflow
-
 Here's a typical interaction pattern for creating a data structure.
 
-## 1. Get context (Always first)
+## 1. Get context
 
 :::note Important
 Always ensure `get_context` is called at the start of your conversation. If you don't see it happen, then ask for it.
 :::
 
 ```
-Please call get_context to before we start working.
+Please call get_context before we start working.
 ```
 
 The assistant will retrieve the built-in schema and rules that define how Snowplow components should be structured. This provides the structural templates and requirements for your tracking implementation.

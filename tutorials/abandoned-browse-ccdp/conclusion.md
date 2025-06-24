@@ -19,15 +19,15 @@ Congratulations on completing the tutorial on setting up an abandoned browse tra
 
 ## Recommended next steps
 
-- **Expand tracking**: Extend your tracking setup to include additional user interactions, checkout steps, and campaign success metrics to create a more comprehensive view of user behavior and marketing effectiveness. You can follow our [ecommerce accelerator](https://docs.snowplow.io/accelerators/ecommerce) to learn more.
+- **Expand tracking**: extend your tracking setup to include additional user interactions, checkout steps, and campaign success metrics to create a more comprehensive view of user behavior and marketing effectiveness. You can follow our [ecommerce accelerator](https://docs.snowplow.io/accelerators/ecommerce) to learn more.
 
-- **Advanced segmentation**: Use the data collected to create more advanced audience segments, such as users with high engagement but no purchase, or users who frequently view specific product categories.
+- **Advanced segmentation**: use the data collected to create more advanced audience segments, such as users with high engagement but no purchase, or users who frequently view specific product categories.
 
-- **A/B testing**: Implement A/B testing for different campaign elements, such as subject lines, send times, and content layouts, to identify what resonates best with your audience.
+- **A/B testing**: implement A/B testing for different campaign elements, such as subject lines, send times, and content layouts, to identify what resonates best with your audience.
 
-- **Personalization**: Enhance your campaigns with more personalized content, such as product recommendations based on browsing history or dynamic pricing offers.
+- **Personalization**: enhance your campaigns with more personalized content, such as product recommendations based on browsing history or dynamic pricing offers.
 
-- **Integration with other tools**: Consider integrating additional tools and platforms, such as CRM systems, to enrich your data with the customer's name and other data to improve campaign effectiveness.
+- **Integration with other tools**: consider integrating additional tools and platforms, such as CRM systems, to enrich your data with the customer's name and other data to improve campaign effectiveness.
 
 By following these steps, you can continue to refine and expand your abandoned browse tracking and re-engagement system, ultimately driving higher conversion rates and improving customer engagement.
 

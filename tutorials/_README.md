@@ -1,5 +1,5 @@
 
-# Snowplow Guides & Tutorials
+# Snowplow guides and tutorials
 
 This directory contains the tutorials present at `/tutorials`.
 
@@ -21,7 +21,7 @@ Example:
 
 ```json
 {
-  "title": "Video & Media Analytics",
+  "title": "Video and Media Analytics",
   "description": "Track video events across media players",
   "label": "Tracking design"
 }

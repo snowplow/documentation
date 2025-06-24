@@ -42,11 +42,11 @@ We will reuse them multiple times, and this makes the code concise and clear.
 from snowplow_signals import Attribute, Criteria, Criterion, Event, View, user_entity
 from datetime import datetime, timedelta
 
-# View Name
+# View name
 DEMO_VIEW_NAME = "demo_landing_page"
 view_version = int(datetime.now().timestamp())
 
-# Define Standard Events
+# Define standard events
 sp_page_view = Event(vendor="com.snowplowanalytics.snowplow", name="page_view", version="1-0-0")
 sp_page_ping = Event(vendor="com.snowplowanalytics.snowplow", name="page_ping", version="1-0-0")
 sp_submit_form = Event(vendor="com.snowplowanalytics.snowplow", name="submit_form", version="1-0-0")
@@ -62,11 +62,11 @@ Second, let's define the Attributes that we want to track.
 The code below showcases multiple ways to define different common attributes.
 
 ```python
-# Attributes - Latest page_view behaviour
+# Attributes - latest page_view behaviour
 latest_app_id = Attribute(name="latest_app_id", type="string", events=[sp_page_view], aggregation="last", property="app_id")
 latest_device_class = Attribute(name="latest_device_class", type="string", events=[sp_page_view], aggregation="last", property="contexts_nl_basjes_yauaa_context_1[0].deviceClass")
 
-# Attributes - Behaviour over the last 7d
+# Attributes - behaviour over the last 7d
 num_sessions_l7d = Attribute(name="num_sessions_l7d", type="string_list", events=[sp_page_view], period=l7d, aggregation="unique_list", property="domain_sessionid") # We will convert this into a count on our side
 num_apps_l7d = Attribute(name="num_apps_l7d", type="string_list", events=[sp_page_view], period=l7d, aggregation="unique_list", property="app_id")
 num_page_views_l7d = Attribute(name="num_page_views_l7d", type="int32", events=[sp_page_view], period=l7d, aggregation="counter")
@@ -76,7 +76,7 @@ num_pricing_views_l7d = Attribute(name="num_pricing_views_l7d", type="int32", ev
 num_conversions_l7d = Attribute(name="num_conversions_l7d", type="int32", events=[sp_submit_form], period=l7d, aggregation="counter") # We will convert this to boolean as ">0"
 num_form_engagements_l7d = Attribute(name="num_form_engagements_l7d", type="int32", events=[sp_focus_form, sp_change_form], period=l7d, aggregation="counter")
 
-# Attributes - Behaviour over the last 30d
+# Attributes - behaviour over the last 30d
 ...define the same l7d attributes using l30d time window
 first_refr_medium_l30d = Attribute(name="first_refr_medium_l30d", type="string", events=[sp_page_view], period=l30d, aggregation="first", property="refr_medium")
 first_mkt_medium_l30d = Attribute(name="first_mkt_medium_l30d", type="string", events=[sp_page_view], period=l30d, aggregation="first", property="mkt_medium")
@@ -120,7 +120,7 @@ user_attributes_view = View(
 Now that our View is ready, we can apply it to Signals and test the outputs on a subset of recent event data.
 
 ```python
-# Apply view to the Signals API
+# Apply view to the signals api
 from snowplow_signals import Signals
 sp_signals = Signals(api_url=SIGNALS_API_ENDPOINT,
                      api_key=userdata.get('SP_API_KEY'),
@@ -129,7 +129,7 @@ sp_signals = Signals(api_url=SIGNALS_API_ENDPOINT,
 applied = sp_signals.apply([user_attributes_view])
 print(f"{len(applied)} objects applied")
 
-# Test view on the Signals API on the last one hour of data from the atomic events table
+# Test view on the signals api on the last one hour of data from the atomic events table
 sp_signals_test = sp_signals.test(view=user_attributes_view, app_ids=["website"])
 sp_signals_test
 ```

@@ -31,8 +31,8 @@ snowplow-batch-autogen test-connection --verbose
 
 The connection test checks several important components:
 
-- 🔐 Authentication service: Verifies your API credentials
-- 🌐 API service: Ensures the main service is accessible
+- 🔐 Authentication service: verifies your API credentials
+- 🌐 API service: ensures the main service is accessible
 - 📊 Checks the status of:
   - Database connections
   - Cache service

@@ -3,7 +3,7 @@ position: 3
 title: Deploy on AWS with Terraform
 ---
 
-# Deploy on AWS with Terraform
+# Deploy on aws with terraform
 
 ## Introduction
 

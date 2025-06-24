@@ -50,13 +50,13 @@ The solution comprises several interconnected components:
 The following diagram maps out where each component sits in the end to end communication flow.
 ![Architecture Diagram](images/architecture.png)
 
-### Components & Configuration
+### Components and Configuration
 The following files in the [GitHub repository](https://github.com/snowplow-industry-solutions/kafka-live-viewer-profiles) can be used  to configure the project's components.
 - **Snowplow components**: `docker/compose.snowplow.yaml`
 - **Kafka infrastructure**: `docker/compose.kafka.yaml`
 - **Application components**: `docker/compose.apps.yaml`
 - **LocalStack setup**: `docker/compose.localstack.yaml`
-- **AWS setup**: Terraform scripts (located in the `docs/terraform` folder)
+- **AWS setup**: terraform scripts (located in the `docs/terraform` folder)
 
 ## Acknowledgements
 Thank you to the Kafka experts [OSO](https://oso.sh/) for their support with building this accelerator.

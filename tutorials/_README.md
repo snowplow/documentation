@@ -11,11 +11,11 @@ Each tutorial is a directory containing the following files:
 
 This file keeps the metadata of the tutorial. It contains the following fields:
 
-| Field         | Description                                                          | Format                                                                                              |
-| ------------- | -------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| `title`       | The title of the tutorial, shown on the card and the tutorial page.  | `string`                                                                                            |
-| `description` | A short description of the tutorial, shown on the card.              | `string`                                                                                            |
-| `label`       | The topic of the tutorial, shown on the card  and the tutorial page. | One of: `'Data governance'`, `'Data modeling'`, `'Solution accelerator'`, `Tracking implementation` |
+| Field         | Description                                                          | Format                                                                                                         |
+| ------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
+| `title`       | The title of the tutorial, shown on the card and the tutorial page.  | `string`                                                                                                       |
+| `description` | A short description of the tutorial, shown on the card.              | `string`                                                                                                       |
+| `label`       | The topic of the tutorial, shown on the card  and the tutorial page. | One of: `'Data governance'`, `'Data modeling'`, `Signals`, `'Solution accelerator'`, `Tracking implementation` |
 
 Example:
 

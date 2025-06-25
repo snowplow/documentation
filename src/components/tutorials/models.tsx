@@ -4,6 +4,7 @@ import { z } from 'zod'
 export const Topic = z.enum([
   'Data modeling',
   'Data governance',
+  'Signals',
   'Solution accelerator',
   'Tracking implementation',
 ])

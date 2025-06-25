@@ -183,9 +183,8 @@ const IntroductionText: FC = () => {
   return (
     <div>
       <p>
-        Choose from our different tutorial categories depending on what you want
-        to learn. Solution accelerators guide you through advanced use cases
-        using Snowplow alongside other tools.
+        Get started with our standard tutorials. Solution accelerators guide you
+        through advanced use cases using Snowplow alongside other tools.
       </p>
     </div>
   )

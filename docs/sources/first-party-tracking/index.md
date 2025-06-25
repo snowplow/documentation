@@ -16,7 +16,7 @@ When your collector domain (e.g. `collector.snwplow.net`) does not match your pr
 
 With first-party tracking, you can configure a custom collector domain (e.g. `c.flowershop.ai`) to match your primary domain (e.g. `flowershop.ai`), sidestepping these limitations.
 
-Note that in light of the [latest ITP restrictions](https://webkit.org/tracking-prevention/#cname-and-third-party-ip-address-cloaking-defense), you will also need to [use an ID service](/docs/sources/trackers/javascript-trackers/web-tracker/browsers/index.md#itp-mitigation) to fully persist the cookies.
+Note that in light of the [latest ITP restrictions](https://webkit.org/tracking-prevention/#cname-and-third-party-ip-address-cloaking-defense), you will also need to [use a Cookie Extension service](/docs/events/cookie-extension/index.md) to fully persist the cookies.
 
 :::info
 
@@ -46,8 +46,8 @@ For Snowplow collector to be able to set the cookie, the cookie domain must be a
 
 Here are a few examples:
 
-| Collector domain      | Cookie domain       | Cookie available on                            |
-|:----------------------|:--------------------|:-----------------------------------------------|
+| Collector domain      | Cookie domain       | Cookie available on                                      |
+| :-------------------- | :------------------ | :------------------------------------------------------- |
 | `t.flowershop.ai`     | `flowershop.ai`     | `flowershop.ai`, <br/> `app.flowershop.ai`, etc          |
 | `c.app.flowershop.ai` | `app.flowershop.ai` | `app.flowershop.ai`, <br/> `beta.app.flowershop.ai`, etc |
 

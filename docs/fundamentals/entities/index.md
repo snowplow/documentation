@@ -69,7 +69,7 @@ In the data warehouse, each type of entity gets its own column (or its own table
 
 Snowplow provides a number of entities out of the box.
 
-Some of them are attached to the event by tracking SDKs. For example, with the [JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/quick-start-guide/index.md), you can enable the collection of performance timing and other entities. The associated data will be added automatically to any Snowplow event fired on the page:
+Some of them are attached to the event by tracking SDKs. For example, with the [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md), you can enable the collection of performance timing and other entities. The associated data will be added automatically to any Snowplow event fired on the page:
 
 ```javascript
 window.snowplow("newTracker", "sp", "{{COLLECTOR_URL}}", {
@@ -99,7 +99,7 @@ Defining your own custom entities is useful when you have similar bits of busine
 
 To track an event with a custom entity, e.g. `product`, **you will first need to define its [schema](/docs/fundamentals/schemas/index.md)** (see [managing data structures](/docs/data-product-studio/data-structures/manage/index.md)). This schema might have fields such as `productId`, `brand`, etc.
 
-Then you can use one of the [tracking SDKs](/docs/sources/trackers/index.md) to add an array of entities to your event. For example, with the [JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/quick-start-guide/index.md):
+Then you can use one of the [tracking SDKs](/docs/sources/trackers/index.md) to add an array of entities to your event. For example, with the [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md):
 
 ```javascript
 snowplow('trackPageView', {

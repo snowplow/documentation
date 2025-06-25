@@ -35,7 +35,7 @@ We've filtered on these two types of errors to reduce noise like bot traffic tha
 
 At the top there is a data quality score that compares the volume of failed events to the volume that were successfully loaded into a data warehouse.
 
-The bar chart shows how the total number of failed events varies over time, colour-coding validation and enrichment errors. The time window is 7 days be default but can be extended to 14 or 30 days.
+The bar chart shows how the total number of failed events varies over time, color-coding validation and enrichment errors. The time window is 7 days be default but can be extended to 14 or 30 days.
 
 In the table, failed events are aggregated by the unique type of failure (validation, enrichment) and the offending schema.
 
@@ -49,7 +49,7 @@ The detailed view shows the error message as well as other useful metadata (when
 
 The data quality dashboard allows you to see failed events directly from your warehouse. Your browser connects directly to an API running within your infrastructure, such that no failed event information flows through Snowplow. The discussion of architecture is important as it highlights the trade-offs between the two ways of monitoring failed events. The aforementioned API is a simple proxy that connects to your warehouse and serves the failed events to your browser. The connection is fully secure, using an encrypted channel (HTTPS) and authenticating/authorizing via the same mechanism used by Console.
 
-In order for you to be able to deploy and use the data quality dashboard, you need to sink failed events to the warehouse via a [Failed Events Loader](/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/warehouse-lake/#setup). The data quality dashboard only supports Snowflake.
+In order for you to be able to deploy and use the data quality dashboard, you need to sink failed events to the warehouse via a [Failed Events Loader](/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/index.md#configure). The data quality dashboard currently supports Snowflake and Bigquery connections.
 
 ![](images/dqd-architecture.png)
 
@@ -67,7 +67,7 @@ Clicking on a particular error type will take you to a detailed view:
 
 ![](images/dqd-details.png)
 
-The detailed view also shows a description of the root cause and the application version ([web](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/app-information/#application-context-entity-on-web-apps), [mobile](/docs/sources/trackers/mobile-trackers/tracking-events/platform-and-application-context/)). It provides a sample of the failed events in their entirety, as found in your warehouse.
+The detailed view also shows a description of the root cause and the application version ([web](/docs/events/ootb-data/app-information/index.md#application-context-entity-on-web-apps), [mobile](/docs/sources/trackers/mobile-trackers/tracking-events/platform-and-application-context/index.md)). It provides a sample of the failed events in their entirety, as found in your warehouse.
 
 Some columns are too wide to fit in the table: click on them to see the full pretty-printed, syntax-highlighted content. The most useful column to explore is probably `CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_FAILURE_1`, which contains the actual error information encoded as a JSON object:
 

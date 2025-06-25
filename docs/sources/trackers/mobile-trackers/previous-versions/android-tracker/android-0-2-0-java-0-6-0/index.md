@@ -88,7 +88,7 @@ You can change the platform by calling:
 tracker.setPlatform("cnsl");
 ```
 
-For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md).
+For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/events/index.md).
 
 ## 3. Adding extra data: the Subject class
 

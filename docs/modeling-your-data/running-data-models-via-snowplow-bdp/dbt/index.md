@@ -173,9 +173,9 @@ import DbtPrivs from "@site/docs/reusable/dbt-privs/_index.md"
 
 ### 2. The data modeling configuration
 
-Data models can be configured via the Snowplow BDP Console:
+Data models can be configured via the [Data Models](https://console.snowplowanalytics.com/data-models) page in Snowplow BDP Console:
 
-![](images/Screenshot-2021-11-15-at-20.15.28.png)
+![](images/data-models-navbar.png)
 
 In the first step, you can provide the data model name, a description, and the owner(s) of the data model that will be alerted in case of failure. Finally select the engine and version that should run your datamodel (dbt in this case):
 

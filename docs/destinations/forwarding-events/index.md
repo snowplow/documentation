@@ -1,5 +1,5 @@
 ---
-title: "Forwarding events"
+title: "Event forwarding"
 sidebar_position: 2
 ---
 

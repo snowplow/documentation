@@ -91,7 +91,7 @@ Your server-side code may not have access to all these parameters, or they might
 
 You could create and define a new Subject for every user or every event you want to track. Attaching that Subject to the `track_x_event` method call would add those properties to your event. Alternatively, you could swap the tracker-associated Subject for a more appropriate one before tracking the event, using `set_subject`.
 
-The following table lists all the properties that can be set via Subject. These are all part of the [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md). Check out the [API docs](https://snowplow.github.io/snowplow-ruby-tracker/SnowplowTracker/Subject.html) for the details of how to set these parameters.
+The following table lists all the properties that can be set via Subject. These are all part of the [Snowplow Tracker Protocol](/docs/events/index.md). Check out the [API docs](https://snowplow.github.io/snowplow-ruby-tracker/SnowplowTracker/Subject.html) for the details of how to set these parameters.
 
 | Property                                   | **Description**                                                   |
 | ------------------------------------------ | ----------------------------------------------------------------- |
@@ -164,7 +164,7 @@ tracker.track_page_view('www.example.com')
 
 ### Cookie-based user properties
 
-Several of the user properties listed in the above table are relevant only to web apps, and are intended to derive from cookies. The Snowplow cookies are explained on [this page](/docs/sources/trackers/javascript-trackers/web-tracker/cookies-and-local-storage/index.md). The client-side Snowplow JavaScript tracker sets first-party cookies, and the event collector sets a third-party cookie. As a server-side tracker, the Ruby tracker doesn't automatically have access to cookies. However, these properties can be extremely useful, e.g. in stitching events together from individual users, or for matching server-side events with client-side events.
+Several of the user properties listed in the above table are relevant only to web apps, and are intended to derive from cookies. The Snowplow cookies are explained on [this page](/docs/sources/trackers/web-trackers/cookies-and-local-storage/index.md). The client-side Snowplow JavaScript tracker sets first-party cookies, and the event collector sets a third-party cookie. As a server-side tracker, the Ruby tracker doesn't automatically have access to cookies. However, these properties can be extremely useful, e.g. in stitching events together from individual users, or for matching server-side events with client-side events.
 
 Read more about sharing data between client-side and server-side trackers in this [blog post](https://snowplowanalytics.com/blog/2021/11/09/the-unrivaled-power-of-joining-client-and-server-side-tracking/).
 

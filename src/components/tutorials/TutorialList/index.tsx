@@ -179,6 +179,17 @@ function filterTutorials(
     .filter((tutorial) => topicFilter(topic, tutorial))
 }
 
+const IntroductionText: FC = () => {
+  return (
+    <div>
+      <p>
+        Solution accelerators are advanced tutorials that guide you through use
+        cases combining Snowplow with other tools.
+      </p>
+    </div>
+  )
+}
+
 const MobileTutorialList: FC<{
   setSearch: React.Dispatch<React.SetStateAction<string>>
   topic: TopicDropdown
@@ -190,6 +201,8 @@ const MobileTutorialList: FC<{
       <Grid container direction="column" rowSpacing={2}>
         <SearchBar setSearch={setSearch} />
         <TopicFilter topic={topic} setTopic={setTopic} />
+
+        <IntroductionText />
 
         {tutorials.map((tutorial: Tutorial) => (
           <Grid item key={tutorial.meta.id}>
@@ -213,6 +226,8 @@ const DesktopTutorialList: FC<{
         <SearchBar setSearch={setSearch} />
         <TopicFilter topic={topic} setTopic={setTopic} />
       </Grid>
+
+      <IntroductionText />
 
       <TutorialGrid mb={2}>
         {tutorials.map((tutorial: Tutorial) => (

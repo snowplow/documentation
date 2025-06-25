@@ -76,7 +76,7 @@ Now, let’s take a look at how to set up actual event tracking.
 
 ## Using the JavaScript tracker
 
-The [JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/quick-start-guide/index.md) is our most commonly used tracker. It’s a good choice for websites, and the installation process is similar to other tools like Google Analytics.
+The [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md) is our most commonly used tracker. It’s a good choice for websites, and the installation process is similar to other tools like Google Analytics.
 
 To use the JavaScript tracker on your site, you will need to obtain a code snippet first.
 
@@ -97,7 +97,7 @@ Take note of the Collector URL you’ve chosen when deploying your Community Edi
 
 If you have not yet configured an SSL certificate and a custom domain name for your Collector, you can use `http://<collector_dns_name>` (`http`, not `https`), where `collector_dns_name` is the output of the pipeline Terraform module.
 
-Then, follow the JavaScript tracker [quick start guide](/docs/sources/trackers/javascript-trackers/web-tracker/quick-start-guide/index.md) to create your snippet.
+Then, follow the JavaScript tracker [quick start guide](/docs/sources/trackers/web-trackers/quick-start-guide/index.md) to create your snippet.
 
   </TabItem>
 </Tabs>
@@ -138,6 +138,6 @@ We have many different trackers in different programming languages, in case the 
 
 :::tip
 
-For quick testing, you might be tempted to send data to your Collector URL using a basic command-line tool like `cURL`. However, you would need to ensure that the data format follows our [tracker protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md). Instead, take a look at the [command-line tracker](/docs/sources/trackers/snowplow-tracking-cli/index.md) that will do this for you.
+For quick testing, you might be tempted to send data to your Collector URL using a basic command-line tool like `cURL`. However, you would need to ensure that the data format follows our [tracker protocol](/docs/events/index.md). Instead, take a look at the [command-line tracker](/docs/sources/trackers/snowplow-tracking-cli/index.md) that will do this for you.
 
 :::

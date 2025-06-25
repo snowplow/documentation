@@ -95,6 +95,6 @@ local ok, err = tracker:track_screen_view("Character Configuration - Part 1", "c
 
 ## Adding user and platform data
 
-The tracker can store information about the user associated with the event, such as their `user_id`, what type of device they used, or what size screen that device had. It also stores which platform the event occurred on – e.g. server-side app, mobile, games console, etc. This is done through the provided `set_*` methods available on a tracker instance. The stored information is attached to the tracked events using fields described in the [Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md).
+The tracker can store information about the user associated with the event, such as their `user_id`, what type of device they used, or what size screen that device had. It also stores which platform the event occurred on – e.g. server-side app, mobile, games console, etc. This is done through the provided `set_*` methods available on a tracker instance. The stored information is attached to the tracked events using fields described in the [Tracker Protocol](/docs/events/index.md).
 
 For a full list of setters, check out the [Tracker API Documentation](https://snowplow.github.io/snowplow-lua-tracker/modules/Tracker.html).

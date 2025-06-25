@@ -2,55 +2,130 @@
 @tailwind components;
 @tailwind utilities;
 
+/*** Shadcn UI theme */
+ @layer base {
+  :root {
+    --background: 210 20% 98.04%;
+    --foreground: 220.91 39.29% 10.98%;
+    --muted: 220 13.04% 90.98%;
+    --muted-foreground: 215 14% 34%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220.91 39.29% 10.98%;
+    --card: 0 0% 100%;
+    --card-foreground: 220.91 39.29% 10.98%;
+    --border: 220 13.04% 90.98%;
+    --input: 220 13.04% 90.98%;
+    --primary: 261.56 53.33% 47.06%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 0 0% 100%;
+    --secondary-foreground: 220.91 39.29% 10.98%;
+    --accent: 220 14.29% 95.88%;
+    --accent-foreground: 220.91 39.29% 10.98%;
+    --destructive: 3.96 72.8% 50.98%;
+    --destructive-foreground: 0 0% 100%;
+    --ring: 262.11 53.27% 79.02%;
+    --chart-1: 262.11 53.27% 79.02%;
+    --chart-2: 183.6 84.27% 34.9%;
+    --chart-3: 40.11 80% 54.9%;
+    --chart-4: 339.77 74.78% 54.9%;
+    --chart-5: 220.45 70.08% 50.2%;
+    --radius: 0.5rem;
+
+    --font-fallback: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif ;
+  }
+
+  [data-theme='dark'] {
+    --background: 0 0% 1.96%;
+    --foreground: 0 0% 90.2%;
+    --muted: 156 9% 8%;
+    --muted-foreground: 0 0% 60%;
+    --popover: 0 0% 6.27%;
+    --popover-foreground: 0 0% 90.2%;
+    --card: 0 0% 9.8%;
+    --card-foreground: 0 0% 90.2%;
+    --border: 0 0% 13.73%;
+    --input: 0 0% 17.65%;
+    --primary: 258.05 71.93% 66.47%;
+    --primary-foreground: 0 0% 90.2%;
+    --secondary: 0 0% 0%;
+    --secondary-foreground: 0 0% 90.2%;
+    --accent: 0 0% 15.69%;
+    --accent-foreground: 0 0% 60%;
+    --destructive: 3.95 72.93% 44.9%;
+    --destructive-foreground: 0 0% 100%;
+    --ring: 262.11 53.27% 79.02%;
+    --chart-1: 261.82 54.1% 88.04%;
+    --chart-2: 183.75 45.28% 58.43%;
+    --chart-3: 40.27 76.84% 62.75%;
+    --chart-4: 340 73.06% 62.16%;
+    --chart-5: 220.66 71.03% 58.04%;
+  }
+}
+
+
 /**
  * Any CSS included here will be global. The classic template
  * bundles Infima by default. Infima is a CSS framework designed to
  * work well for content-centric websites.
  */
-
-@font-face {
-  font-family: 'Rubik';
-  src: url('/fonts/Rubik-Regular.ttf') format('truetype');
-}
-
-@font-face {
-  font-family: 'Inter';
-  src: url('/fonts/Inter-Medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Roboto';
-  src: url('/fonts/Roboto-Regular.ttf') format('truetype');
-  font-weight: 400;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Roboto';
-  src: url('/fonts/Roboto-Medium.ttf') format('truetype');
-  font-weight: 500;
-  font-style: normal;
-}
-
-@font-face {
-  font-family: 'Roboto';
-  src: url('/fonts/Roboto-Italic.ttf') format('truetype');
-  font-weight: 400;
+ @font-face {
+  font-family: 'Inter18pt-Bold';
+  src: url('/fonts/Inter18pt-BoldItalic.woff2') format('woff2'),
+      url('/fonts/Inter18pt-BoldItalic.woff') format('woff');
+  font-weight: bold;
   font-style: italic;
+  font-display: swap;
 }
 
 @font-face {
-  font-family: 'Roboto';
-  src: url('/fonts/Roboto-MediumItalic.ttf') format('truetype');
-  font-weight: 500;
+  font-family: 'Inter18pt-BoldItalic';
+  src: url('/fonts/Inter18pt-Italic.woff2') format('woff2'),
+      url('/fonts/Inter18pt-Italic.woff') format('woff');
+  font-weight: normal;
   font-style: italic;
+  font-display: swap;
 }
+
+@font-face {
+  font-family: 'Inter18pt-Bold';
+  src: url('/fonts/Inter18pt-Bold.woff2') format('woff2'),
+      url('/fonts/Inter18pt-Bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter18pt-Regular';
+  src: url('/fonts/Inter18pt-Regular.woff2') format('woff2'),
+      url('/fonts/Inter18pt-Regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter18pt-Light';
+  src: url('/fonts/Inter18pt-Light.woff2') format('woff2'),
+      url('/fonts/Inter18pt-Light.woff') format('woff');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Inter18pt-LightItalic';
+  src: url('/fonts/Inter18pt-LightItalic.woff2') format('woff2'),
+      url('/fonts/Inter18pt-LightItalic.woff') format('woff');
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-background-color: #f2f4f7;
+  
   --ifm-color-primary: #6638b8;
   --ifm-color-primary-dark: #522d93;
   --ifm-color-primary-darker: #472781;
@@ -63,9 +138,9 @@
   --ifm-color-announcement: #e6f6fe;
   --ifm-code-font-size: 95%;
   --ifm-code-padding-vertical: 0.05rem;
-  --ifm-font-family-base: 'Roboto', Arial, Helvetica, sans-serif;
+  --ifm-font-family-base: 'Inter18pt-Regular', var(--font-fallback);
   --ifm-menu-color-active: #6638b8;
-  --ifm-font-color-base: #000000;
+  --ifm-font-color-base: var(--muted-foreground);
   --ifm-font-color-base-inverse: rgb(218, 221, 225);
   --ifm-toc-padding-horizontal: 20px;
   --docusaurus-highlighted-code-line-bg: rgba(224, 199, 50, 0.2);
@@ -74,8 +149,11 @@
   --ifm-menu-link-sublist-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24"><path fill="rgb(102, 56, 184)" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>');
 }
 
+
 /* For readability concerns, you should choose a lighter palette in dark mode. */
-[data-theme='dark'] {
+html[data-theme='dark'] {
+  
+
   --ifm-menu-color-active: #b198df;
   --ifm-color-primary: #b198df;
   --ifm-color-primary-dark: #522d93;
@@ -107,6 +185,7 @@
   }
 
   ul.breadcrumbs {
+    padding: 0;
     margin-bottom: 32px;
   }
 }
@@ -138,7 +217,7 @@ button.snowplow-button {
   border: none;
   border-radius: 4px;
 
-  font-family: 'Inter';
+  font-family: 'Inter18pt-Regular', var(--font-fallback);
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -220,9 +299,7 @@ button.snowplow-button:focus {
 
 /* End of buttons */
 
-p {
-  line-height: 24px;
-}
+
 
 header,
 h1,
@@ -230,40 +307,16 @@ h2,
 h3,
 h4,
 h5 {
-  font-family: 'Rubik';
+  font-family: 'Inter18pt-Bold', var(--font-fallback);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5 {
-  font-weight: 500;
+table {
+  display: inline-table;
 }
 
-h1 {
-  font-size: 32px;
-  line-height: 40px;
-}
-
-h2 {
-  font-size: 28px;
-  line-height: 36px;
-}
-
-h3 {
-  font-size: 24px;
-  line-height: 32px;
-}
-
-table h1,
-table h2,
-table h3 {
-  margin-bottom: 0;
-}
 
 .table-of-contents__left-border {
-  border-left-color: #98a2b3;
+  border-left-color: hsl(var(--border));
 }
 
 .theme-doc-sidebar-item-link-level-1.header {
@@ -311,6 +364,9 @@ a.card:hover::after {
   top: 2rem;
   left: 2rem;
   bottom: auto;
+}
+.breadcrumbs {
+  padding-left: 0;
 }
 
 .breadcrumbs__item:not(:last-child):after {
@@ -380,7 +436,7 @@ code {
 input[type='text'],
 input[type='email'],
 textarea {
-  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  font-family: 'Inter18pt-Regular', var(--font-fallback);
   font-size: 14px;
 }
 
@@ -508,20 +564,7 @@ Controls the display of navbar/sidebar items
   margin-top: 2rem;
 }
 
-.tutorial-doc-page .feedback-prompt {
-  margin-top: 3rem;
-}
-
-.tutorial-doc-page .theme-doc-footer {
-  display: none;
-  margin-top: 0;
-}
-
-.tutorial-doc-page .feedback-prompt {
-  margin-top: 2rem;
-}
-
-/* Hide the feedback and last updated times on the tutorial home page */
+/* Hide the last updated times on the tutorial home page */
 .tutorial-home-page article > footer {
   display: none;
 }
@@ -542,3 +585,92 @@ Controls the display of navbar/sidebar items
   grid-gap: 20px;
   padding: 20px;
 }
+
+/*START doc markdown grid layout control */
+.theme-doc-markdown {
+  --padding-inline: 1rem;
+  --content-max-width: 720px;
+  --breakout-max-width: 960px;
+
+  --breakout-size: calc(
+    (var(--breakout-max-width) - var(--content-max-width)) / 2
+  );
+
+  display: grid;
+  grid-template-columns:
+    [full-width-start] minmax(var(--padding-inline), 1fr)
+    [breakout-start] minmax(0, var(--breakout-size))
+    [content-start] min(
+      100% - (var(--padding-inline) * 2),
+      var(--content-max-width)
+    )
+    [content-end]
+    minmax(0, var(--breakout-size)) [breakout-end]
+    minmax(var(--padding-inline), 1fr) [full-width-end];
+}
+
+.theme-doc-markdown  > :not(.breakout, .full-width),
+.full-width > :not(.breakout, .full-width) {
+  grid-column-start: 3;
+  grid-column-end: 4;
+}
+
+.theme-doc-markdown > .breakout, .theme-doc-markdown table, .theme-doc-markdown p:has(img, table), .theme-doc-markdown div:has(div.css-yu4ftp-MuiDataGrid-root, div.css-m0j720-MuiDataGrid-root) {
+  grid-column-start: 2!important;
+  grid-column-end: 5!important;
+  height: fit-content;
+}
+
+.theme-doc-markdown  > .full-width  {
+  grid-column: 1;
+  display: grid;
+  grid-template-columns: inherit;
+}
+/*Tutorial on same grid as rest of ducumentation site */
+
+.theme-doc-markdown .MuiBox-root {
+  grid-column: 1;
+}
+.theme-doc-markdown .MuiBox-root.css-pehwr4 {
+  grid-column: 3;
+}
+img.full-width {
+  width: 100%;
+  max-height: 100vh;
+  object-fit: cover;
+}
+/* doc markdown grid layout control END*/
+
+/* START Control rest of the elements erase after we upgrade */
+article nav.theme-doc-breadcrumbs, 
+article footer.theme-doc-footer,
+nav.pagination-nav {
+  max-width: 740px;
+  margin: 2rem auto 0 auto;
+}
+abbr[data-title]:focus:after, abbr[data-title]:hover:after {
+  background-color: hsl(var(--popover));
+  border-radius: var(--radius);
+  color: var(--popover-foreground);
+  content: attr(data-title);
+  font-size: .875rem;
+  padding: 4px 8px;
+}
+.tocCollapsibleContent_node_modules-\@docusaurus-theme-classic-lib-theme-TOCCollapsible-styles-module > ul {
+  padding: .75rem !important;
+  font-size: 1rem !important;
+  margin: 0 !important;
+}
+.tocCollapsibleContent_node_modules-\@docusaurus-theme-classic-lib-theme-TOCCollapsible-styles-module a {
+  text-decoration: none !important;
+}
+.prose .markdown table thead tr th h3, .prose .markdown table tbody tr td h3 {
+  margin: .5rem 0 !important;
+}
+.prose table thead a {
+  font-weight: 700;
+  text-decoration: none;
+}
+
+/* END  Control rest of the elements erase after we upgrade */
+

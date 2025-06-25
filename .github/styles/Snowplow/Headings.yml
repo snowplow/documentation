@@ -9,6 +9,7 @@ exceptions:
   - CLI
   - Cosmos
   - Docker
+  - DOM
   - Emmet
   - gRPC
   - I

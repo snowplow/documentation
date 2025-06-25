@@ -46,7 +46,7 @@ For example:
 s.set_platform("tv") # Running on a Connected TV
 ```
 
-For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md).
+For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/events/index.md).
 
 ### Set user ID with `set_user_id`
 

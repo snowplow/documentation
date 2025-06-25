@@ -43,7 +43,7 @@ TrackerConfiguration trackerConfig = new TrackerConfiguration("appId")
 
 When enabled, the tracker appends a [`client_session` entity](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) to each event it sends and it maintains this session information as long as the application is installed on the device.
 
-Sessions correspond to tracked user activity. User information is set via the [Client session context entity](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/user-and-session-identification/index.md#client-session-context-entity).
+Sessions correspond to tracked user activity. User information is set via the [Client session context entity](/docs/events/ootb-data/user-and-session-identification/index.md#client-session-context-entity).
 
 A session expires when no tracking events have occurred for the amount of time defined in a timeout (by default 30 minutes). The session timeout check is executed for each event tracked. If the gap between two consecutive events is longer than the timeout the session is renewed. There are two timeouts since a session can timeout in the foreground (while the app is visible) or in the background (when the app has been suspended, but not closed).
 
@@ -219,7 +219,7 @@ This feature was introduced in version 6.0.0 of the iOS and Android trackers.
 The tracker provides a `decorateLink` API to decorate outgoing links from the mobile app to another mobile app or to a website.
 This API adds an `_sp` parameter to the links containing information about the user, app, and current session.
 This is useful for tracking the movement of users across different apps and platforms.
-It is part of our cross-navigation solution and is equivalent to [cross-domain tracking on the JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/cross-domain-tracking/index.md).
+It is part of our cross-navigation solution and is equivalent to [cross-domain tracking on the JavaScript tracker](/docs/sources/trackers/web-trackers/cross-domain-tracking/index.md).
 
 For example, calling `decorateLink` on `appSchema://path/to/page` will produce the following result:
 

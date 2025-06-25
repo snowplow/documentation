@@ -51,6 +51,6 @@ If you want, you can also manually override the event's `platform` parameter l
 http://<collector host>/com.olark/v1?p=<platform code>
 ```
 
-Supported platform codes can again be found in the [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md); if not set, then the value for `platform` will default to `srv` for a server-side application.
+Supported platform codes can again be found in the [Snowplow Tracker Protocol](/docs/events/index.md); if not set, then the value for `platform` will default to `srv` for a server-side application.
 
 Once you click the **Save** button you are ready to receive events about your client chat interactions from olark.

@@ -3,17 +3,17 @@ export const versions = {
   androidTracker: '6.2.0',
   dotNetTracker: '1.3.0',
   cppTracker: '2.0.0',
-  flutterTracker: '0.7.1',
+  flutterTracker: '0.8.0',
   golangTracker: '3.1.0',
   googleAmpTracker: '1.1.0',
   iosTracker: '6.2.1',
   javaTracker: '2.1.0',
-  javaScriptTracker: '4.5.0',
+  javaScriptTracker: '4.6.3',
   luaTracker: '0.2.0',
-  phpTracker: '0.8.0',
+  phpTracker: '0.9.2',
   pixelTracker: '0.3.0',
   pythonTracker: '1.0.3',
-  rokuTracker: '0.2.0',
+  rokuTracker: '0.3.0',
   rubyTracker: '0.8.0',
   rustTracker: '0.2.0',
   scalaTracker: '2.0.0',
@@ -21,14 +21,16 @@ export const versions = {
   webViewTracker: '0.3.0',
 
   // Core pipeline
+  collector: '3.3.0',
+  enrich: '5.3.0',
   collector: '3.4.0',
-  enrich: '5.2.0',
+  enrich: '5.3.0',
   sqs2kinesis: '1.0.4',
   dataflowRunner: '0.7.5',
-  snowbridge: '3.0.1',
+  snowbridge: '3.2.3',
 
   // Loaders
-  bqLoader: '2.0.0',
+  bqLoader: '2.0.1',
   bqLoader1x: '1.7.2',
   esLoader: '2.1.3',
   gcsLoader: '0.5.6',
@@ -36,20 +38,20 @@ export const versions = {
   rdbLoader: '6.1.3',
   s3Loader: '2.2.9',
   s3Loader22x: '2.2.9',
-  lakeLoader: '0.6.1',
+  lakeLoader: '0.6.3',
   snowflakeStreamingLoader: '0.4.1',
 
   // Data Modelling
   // dbt
-  dbtSnowplowAttribution: '0.4.0',
-  dbtSnowplowUnified: '0.5.2',
+  dbtSnowplowAttribution: '0.5.0',
+  dbtSnowplowUnified: '0.5.3',
   dbtSnowplowWeb: '1.0.1',
   dbtSnowplowMobile: '1.0.0',
   dbtSnowplowMediaPlayer: '0.9.2',
-  dbtSnowplowUtils: '0.17.1',
+  dbtSnowplowUtils: '0.17.2',
   dbtSnowplowNormalize: '0.4.0',
   dbtSnowplowFractribution: '0.3.6',
-  dbtSnowplowEcommerce: '0.9.0',
+  dbtSnowplowEcommerce: '0.9.1',
 
   // sql runner
   sqlRunner: '0.10.1',
@@ -68,13 +70,13 @@ export const versions = {
   analyticsSdkScala: '3.0.0',
 
   // Iglu
-  igluServer: '0.14.0',
+  igluServer: '0.14.1',
   igluctl: '0.13.0',
   igluObjCClient: '0.1.1',
   igluRubyClient: '0.2.0',
   igluScalaClient: '2.2.1',
 
   // Testing & debugging
-  snowplowMicro: '2.2.0',
-  snowplowMini: '0.22.0',
+  snowplowMicro: '2.3.0',
+  snowplowMini: '0.23.2',
 }

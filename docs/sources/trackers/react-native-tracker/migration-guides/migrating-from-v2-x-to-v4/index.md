@@ -32,7 +32,7 @@ The session context entity can still be removed using the `sessionContext` optio
 
 ### GDPR configuration not available
 
-We have deprecated and removed the GPDR configuration. As a more up-to-date replacement, one can make use of the [consent plugins available for the JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/consent-gdpr/index.md).
+We have deprecated and removed the GPDR configuration. As a more up-to-date replacement, one can make use of the [consent plugins available for the JavaScript tracker](/docs/sources/trackers/web-trackers/tracking-events/consent-gdpr/index.md).
 
 ### Application context is not tracked automatically
 
@@ -42,7 +42,7 @@ Read more [in the documentation here](/docs/sources/trackers/react-native-tracke
 ### Removed geolocation context entity
 
 The geolocation context entity is no longer available to be tracked by the tracker.
-You may track it manually using global context and [the geolocation schema](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/geolocation/index.md#geolocation-context-entity-tracked-in-apps).
+You may track it manually using global context and [the geolocation schema](/docs/events/ootb-data/geolocation/index.md#geolocation-context-entity-tracked-in-apps).
 
 ### Removed exception and diagnostic autotracking
 
@@ -61,3 +61,13 @@ Refer to [the documentation to learn more](/docs/sources/trackers/react-native-t
 ### Not possible to access from native code
 
 Since the tracker is now purely implemented in JavaScript, it is no longer possible to access it from mobile native iOS or Android code.
+
+### Base64 encoding disabled by default
+
+In v2, the tracker defaulted to base64-encoding payloads for Self-Describing events and Entities.
+In v4, the default is now to not do this.
+In most cases, this behavior is better for performance and has no other impacts.
+
+In some pipeline architectures, the Collector is protected by a Web Application Firewall; if your custom data contains content that appears risky to the WAF (e.g. HTML content) the removal of base64 encoding may mean those events now get blocked by the firewall.
+
+You can return to the old behavior by specifying `encodeBase64: true` when calling `newTracker` as described above.

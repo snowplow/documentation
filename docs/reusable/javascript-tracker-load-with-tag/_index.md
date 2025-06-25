@@ -6,7 +6,7 @@ Use the following tag to your page to load `sp.js`:
 </script>
 ```
 
-**Note:** We recommend self hosting `sp.js` by following our Self hosting snowplow JS guides [here](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/hosting-the-javascript-tracker/index.md). The latest versions are currently available at [GitHub](https://github.com/snowplow/snowplow-javascript-tracker/releases).
+**Note:** We recommend self hosting `sp.js` by following our Self hosting snowplow JS guides [here](/docs/sources/trackers/web-trackers/tracker-setup/hosting-the-javascript-tracker/index.md). The latest versions are currently available at [GitHub](https://github.com/snowplow/snowplow-javascript-tracker/releases).
 
 We also recommend renaming `sp.js` as this file name is commonly blocked by adblockers. Renaming to a random string will help ensure the JavaScript Tracker is loaded as expected.
 

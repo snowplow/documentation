@@ -2,7 +2,7 @@ import React from 'react';
 import { DataGridPremium } from '@mui/x-data-grid-premium';
 import { LicenseInfo } from '@mui/x-license-pro';
 
-LicenseInfo.setLicenseKey("a3d6a1e3cdca760ace01b65d01608642Tz03MTE1NixFPTE3MjE1NDQ2NzEwMDAsUz1wcmVtaXVtLExNPXN1YnNjcmlwdGlvbixLVj0y");
+LicenseInfo.setLicenseKey(process.env.PUBLIC_MUI_LICENSE_KEY);
 
 const MarkdownTableToMuiDataGrid = (markdownTable, datagridProps = {}) => {
   // Split the markdown table into rows

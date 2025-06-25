@@ -267,19 +267,19 @@ It contains metrics that are calculated based on the tracked media events and th
 It makes use of the information in the media player entity (see above) and the tracked media event types to update it's state and calculate metrics.
 The table below shows which media player properties (first column) and media events (second column) are used to calculate the metrics within the media session entity (third column).
 
-Media player entity property | Media events | Affected calculation of metric
---|--|--
-`paused` | `play_event`, `pause_event` | `timePlayed`, `timePaused`, `timePlayedMuted`, `contentWatched`
-`currentTime` |  | `timePlayed`, `timePaused`, `timePlayedMuted`, `contentWatched`
-`muted` |  | `timePlayedMuted`
-`playbackRate` | `playback_rate_change_event` | `avgPlaybackRate`
-| | `buffer_start_event`, `buffer_end_event`, `play_event` | `timeBuffering`
-| | `ad_start_event` | `ads`
-| | `ad_skip_event` | `adsSkipped`
-| | `ad_click_event` | `adsClicked`
-| | `ad_break_start_event` | `adBreaks`
-| | `ad_start_event`, `ad_quartile_event`, `ad_complete_event` | `timeSpentAds`
-| | `ad_start_event`, `ad_complete_event`, `ad_skip_event` | `timePlayed`, `timePlayedMuted`*
+| Media player entity property | Media events                                               | Affected calculation of metric                                  |
+| ---------------------------- | ---------------------------------------------------------- | --------------------------------------------------------------- |
+| `paused`                     | `play_event`, `pause_event`                                | `timePlayed`, `timePaused`, `timePlayedMuted`, `contentWatched` |
+| `currentTime`                |                                                            | `timePlayed`, `timePaused`, `timePlayedMuted`, `contentWatched` |
+| `muted`                      |                                                            | `timePlayedMuted`                                               |
+| `playbackRate`               | `playback_rate_change_event`                               | `avgPlaybackRate`                                               |
+|                              | `buffer_start_event`, `buffer_end_event`, `play_event`     | `timeBuffering`                                                 |
+|                              | `ad_start_event`                                           | `ads`                                                           |
+|                              | `ad_skip_event`                                            | `adsSkipped`                                                    |
+|                              | `ad_click_event`                                           | `adsClicked`                                                    |
+|                              | `ad_break_start_event`                                     | `adBreaks`                                                      |
+|                              | `ad_start_event`, `ad_quartile_event`, `ad_complete_event` | `timeSpentAds`                                                  |
+|                              | `ad_start_event`, `ad_complete_event`, `ad_skip_event`     | `timePlayed`, `timePlayedMuted`*                                |
 
 \* Play time stats are not being incremented while ads with type linear (default) are being played. Linear ads take over the video playback. For non-linear and companion ads, play time stats are still being incremented while the ad is playing.
 
@@ -332,21 +332,21 @@ Media player entity property | Media events | Affected calculation of metric
 
 ## How to track?
 
-* on Web using plugins for our [JavaScript trackers](/docs/sources/trackers/javascript-trackers/index.md):
-  * [media plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/index.md) that can be used to track events from any media player.
-  * [HTML5 media tracking plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/html5/index.md).
-  * [YouTube tracking plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/youtube/index.md).
-  * [Vimeo tracking plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/vimeo/index.md).
+* on Web using plugins for our [JavaScript trackers](/docs/sources/trackers/web-trackers/index.md):
+  * [media plugin](/docs/sources/trackers/web-trackers/tracking-events/media/index.md) that can be used to track events from any media player.
+  * [HTML5 media tracking plugin](/docs/sources/trackers/web-trackers/tracking-events/media/html5/index.md).
+  * [YouTube tracking plugin](/docs/sources/trackers/web-trackers/tracking-events/media/youtube/index.md).
+  * [Vimeo tracking plugin](/docs/sources/trackers/web-trackers/tracking-events/media/vimeo/index.md).
 * [media tracking APIs on our iOS and Android trackers](/docs/sources/trackers/mobile-trackers/tracking-events/media-tracking/index.md) for mobile apps.
 
 ## Modeled data using the snowplow-media-player dbt package
 
 [The media player dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) contains a fully incremental model that transforms raw media event data into a set of derived tables based around the following data objects: media plays, media stats, media ad views, and media ads.
 
-Derived table | Table description | 
----|---|---
-`snowplow_media_player_base` | This derived table summarises the key media player events and metrics of each media element on a media_id and pageview level which is considered as a base aggregation level for media interactions. | [Docs](https://snowplow.github.io/dbt-snowplow-media-player/#!/model/model.snowplow_media_player.snowplow_media_player_base)
-`snowplow_media_player_plays_by_pageview` | This view removes impressions from the '_base' table to summarise media plays on a page_view by media_id level. | [Docs](https://snowplow.github.io/dbt-snowplow-media-player/#!/model/model.snowplow_media_player.snowplow_media_player_plays_by_pageview)
-`snowplow_media_player_media_stats` | This derived table aggregates the '_base' table to individual media_id level, calculating the main KPIs and overall video/audio metrics. | [Docs](https://snowplow.github.io/dbt-snowplow-media-player/#!/model/model.snowplow_media_player.snowplow_media_player_media_stats)
-`snowplow_media_player_media_ad_views` | This derived table aggregated individual views of ads during media playback. | [Docs](https://snowplow.github.io/dbt-snowplow-media-player/#!/model/model.snowplow_media_player.snowplow_media_player_media_ad_views)
-`snowplow_media_player_media_ads` | This derived table aggregates information about ads. Each row represents one ad played within a certain media on a certain platform. Stats about the number of ad clicks, progress reached and more are calculated as total values but also as counts of unique users. | [Docs](https://snowplow.github.io/dbt-snowplow-media-player/#!/model/model.snowplow_media_player.snowplow_media_player_media_ads)
+| Derived table                             | Table description                                                                                                                                                                                                                                                      |
+| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| `snowplow_media_player_base`              | This derived table summarises the key media player events and metrics of each media element on a media_id and pageview level which is considered as a base aggregation level for media interactions.                                                                   | [Docs](https://snowplow.github.io/dbt-snowplow-media-player/#!/model/model.snowplow_media_player.snowplow_media_player_base)              |
+| `snowplow_media_player_plays_by_pageview` | This view removes impressions from the '_base' table to summarise media plays on a page_view by media_id level.                                                                                                                                                        | [Docs](https://snowplow.github.io/dbt-snowplow-media-player/#!/model/model.snowplow_media_player.snowplow_media_player_plays_by_pageview) |
+| `snowplow_media_player_media_stats`       | This derived table aggregates the '_base' table to individual media_id level, calculating the main KPIs and overall video/audio metrics.                                                                                                                               | [Docs](https://snowplow.github.io/dbt-snowplow-media-player/#!/model/model.snowplow_media_player.snowplow_media_player_media_stats)       |
+| `snowplow_media_player_media_ad_views`    | This derived table aggregated individual views of ads during media playback.                                                                                                                                                                                           | [Docs](https://snowplow.github.io/dbt-snowplow-media-player/#!/model/model.snowplow_media_player.snowplow_media_player_media_ad_views)    |
+| `snowplow_media_player_media_ads`         | This derived table aggregates information about ads. Each row represents one ad played within a certain media on a certain platform. Stats about the number of ad clicks, progress reached and more are calculated as total values but also as counts of unique users. | [Docs](https://snowplow.github.io/dbt-snowplow-media-player/#!/model/model.snowplow_media_player.snowplow_media_player_media_ads)         |

@@ -35,7 +35,7 @@ The tracker version is also set automatically.
 ## Application context entity on Web apps
 
 This context entity is tracked with events tracked using the JavaScript tracker starting from version 4.1.0.
-The application version is provided in the tracker configuration, [see instructions here](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/index.md#setting-application-version).
+The application version is provided in the tracker configuration, [see instructions here](/docs/sources/trackers/web-trackers/tracking-events/index.md#setting-application-version).
 
 <SchemaProperties
   overview={{event: false, web: true, mobile: false, automatic: false}}

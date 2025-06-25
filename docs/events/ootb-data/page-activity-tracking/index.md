@@ -16,7 +16,7 @@ There are two mechanisms that the activity tracking is implemented:
 
 Page pings are used to record users engaging with content on a web page after it has originally loaded. For example, it can be used to track how far down an article a user scrolls.
 
-If enabled, the [activity tracking function](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/activity-page-pings/index.md) checks for engagement with a page after load. (E.g. mousemovement, scrolling etc...).
+If enabled, the [activity tracking function](/docs/sources/trackers/web-trackers/tracking-events/activity-page-pings/index.md) checks for engagement with a page after load. (E.g. mousemovement, scrolling etc...).
 
 Page pings are identified by `e=pp`. As well as all the standard web fields, there are four additional fields that `pp` includes, which are used to identify how users are scrolling over web pages:
 
@@ -60,7 +60,7 @@ The event has no properties.
 
 ## How to track
 
-To track page activity on Web, see the [activity tracking documentation](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/activity-page-pings/index.md).
+To track page activity on Web, see the [activity tracking documentation](/docs/sources/trackers/web-trackers/tracking-events/activity-page-pings/index.md).
 
 To track screen engagement on mobile, see the [screen engagement documentation](/docs/sources/trackers/mobile-trackers/tracking-events/screen-tracking/index.md#screen-engagemement-tracking).
 

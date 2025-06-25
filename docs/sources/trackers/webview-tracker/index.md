@@ -20,7 +20,7 @@ Snowplow events are tracked from both the native code (e.g. written in Swift or 
 The goal is to have events that are tracked from the native code and web view share the same session, and appear as tracked with the same tracker.
 
 :::tip
-We recommend using the [Snowplow web tracker](/docs/sources/trackers/javascript-trackers/index.md) with [WebView plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/webview/index.md) (which uses the WebView tracker as a dependency), rather than using this tracker directly.
+We recommend using the [Snowplow web tracker](/docs/sources/trackers/web-trackers/index.md) with [WebView plugin](/docs/sources/trackers/web-trackers/tracking-events/webview/index.md) (which uses the WebView tracker as a dependency), rather than using this tracker directly.
 
 The WebView plugin automatically forwards all tracked events to the mobile tracker. Events must be manually tracked when using the WebView tracker by itself.
 :::
@@ -108,13 +108,13 @@ To track events, simply call their corresponding functions given the event data.
 
 The following functions are available:
 
-| Method                     | Event type tracked                                                                                                                                          |
-| -------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `trackSelfDescribingEvent` | Track a custom event based on "self-describing" JSON schema                                                                                                 |
-| `trackStructEvent`         | Track a semi-custom structured event                                                                                                                        |
-| `trackScreenView`          | Track a view of a screen in the app                                                                                                                         |
-| `trackPageView`            | Track a Web page visit                                                                                                                                      |
-| `trackWebViewEvent`        | Track any Snowplow event (used internally by the [WebView plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/webview/index.md)) |
+| Method                     | Event type tracked                                                                                                                       |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| `trackSelfDescribingEvent` | Track a custom event based on "self-describing" JSON schema                                                                              |
+| `trackStructEvent`         | Track a semi-custom structured event                                                                                                     |
+| `trackScreenView`          | Track a view of a screen in the app                                                                                                      |
+| `trackPageView`            | Track a Web page visit                                                                                                                   |
+| `trackWebViewEvent`        | Track any Snowplow event (used internally by the [WebView plugin](/docs/sources/trackers/web-trackers/tracking-events/webview/index.md)) |
 
 All the methods share common features and parameters. Every type of event can have optional entities added.
 

@@ -57,7 +57,7 @@ The Base Web (_or Mobile_) data product will monitor and count base events as th
 
 ## Initialize the tracker
 
-For this example application, we will use the [Browser tracker](/docs/sources/trackers/javascript-trackers/web-tracker/quick-start-guide/index.md#quick-start-basic) which is distributed through npm.
+For this example application, we will use the [Browser tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md#quick-start-basic) which is distributed through npm.
 
 Switch to the project root directory and then install it by running `npm install @snowplow/browser-tracker`.
 
@@ -99,7 +99,7 @@ You can validate this step being implemented properly using the [Snowplow Inspec
 
 ## Add link click tracking
 
-As a next step you will implement link click tracking for the main page link pointing to the TodoMVC website. To track this and other links on your pages, you can install the [Link click](https://docs.snowplow.io/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/link-click/) tracking plugin. The plugin provides automatic link click tracking for all links on your page.
+As a next step you will implement link click tracking for the main page link pointing to the TodoMVC website. To track this and other links on your pages, you can install the [Link click](https://docs.snowplow.io/docs/sources/trackers/web-trackers/tracking-events/link-click/) tracking plugin. The plugin provides automatic link click tracking for all links on your page.
 
 To enable it in the application, switch to the project root directory and then install it by running `npm install @snowplow/browser-plugin-link-click-tracking`.
 

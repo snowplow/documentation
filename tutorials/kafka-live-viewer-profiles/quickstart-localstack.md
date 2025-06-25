@@ -60,7 +60,7 @@ Open [http://localhost:8280](http://localhost:8280) in a separate window. This w
 Congratulations! You have successfully run the accelerator to stream web behavior through Snowplow and Kafka to a real-time dashboard.
 
 ## Next Steps
-- You can implement Snowplow media tracking on any [HTML5](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/html5/) or [YouTube](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/youtube/) media of your choice
+- You can implement Snowplow media tracking on any [HTML5](/docs/sources/trackers/web-trackers/tracking-events/media/html5/) or [YouTube](/docs/sources/trackers/web-trackers/tracking-events/media/youtube/) media of your choice
 - Look into the output from Kafka and extend the Live Viewer to include information on the media being watched and the user.
 - Use our supplied Terraform in the next section to run this on AWS and make it publicly available.
 

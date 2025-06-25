@@ -183,8 +183,8 @@ const IntroductionText: FC = () => {
   return (
     <div>
       <p>
-        Get started with our standard tutorials. Solution accelerators guide you
-        through advanced use cases using Snowplow alongside other tools.
+        Solution accelerators are advanced tutorials that guide you through use
+        cases combining Snowplow with other tools.
       </p>
     </div>
   )

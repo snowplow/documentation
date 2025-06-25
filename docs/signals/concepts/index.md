@@ -16,7 +16,7 @@ For example, the simplest entities to think about (and which come predefined whe
 You can define any entities you like, and expand this to broader concepts. For example:
 - Apps (perhaps described by [`app_id`](/docs/fundamentals/canonical-event/index.md#application-fields))
 - Pages (perhaps [`page_urlpath`](/docs/fundamentals/canonical-event/index.md#platform-specific-fields) or a page identifier captured in a custom entity)
-- Products (that you might capture in an [ecommerce entity](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/ecommerce-events/index.md#product) or other custom entity)
+- Products (that you might capture in an [ecommerce entity](/docs/events/ootb-data/ecommerce-events/index.md#product) or other custom entity)
 - Page/Screen views (as captured in the `web_page` and `screen_view` entities)
 - Content categories
 - Levels in a game

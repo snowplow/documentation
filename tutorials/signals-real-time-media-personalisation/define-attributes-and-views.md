@@ -3,7 +3,7 @@ title: Defining Snowplow Signals Attributes
 position: 3
 ---
 
-> **Note:** You can follow along with this guide by viewing the notebook in [this repository](https://github.com/snowplow/snowplow-media-demo).
+> **Note:** You can follow along with this guide by viewing the notebook in [this repository](https://github.com/snowplow-incubator/signals-media-demo).
 
 ### Install the Snowplow Signals Python SDK
 

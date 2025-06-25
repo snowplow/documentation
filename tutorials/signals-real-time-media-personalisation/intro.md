@@ -35,6 +35,6 @@ The following diagram illustrates the data flow from the user's activity on the 
 
 This tutorial assumes you have a basic understanding of Snowplow Event Tracking and how APIs work. 
 
-The complete code for this example is available in [this repository](https://github.com/snowplow/snowplow-media-demo).  To run it yourself, you will need: 
+The complete code for this example is available in [this repository](https://github.com/snowplow-incubator/signals-media-demo).  To run it yourself, you will need: 
 * A running Snowplow pipeline. 
 * Snowplow Signals deployed on your pipeline. 

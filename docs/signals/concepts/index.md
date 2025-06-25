@@ -4,6 +4,10 @@ sidebar_position: 1
 sidebar_label: "Concepts"
 ---
 
+Signals introduces a new set of data governance concepts to Snowplow. As with schemas for Snowplow event data, Signals components are strictly defined, structured, and versioned.
+
+The fundamental Signals building block is the `Entity`. Attributes and interventions are all defined relative to entities. Attributes can be grouped together into Views or Services for ease of management and deployment.
+
 ```mermaid
 flowchart TD
     Entity --> Stream
@@ -26,7 +30,6 @@ flowchart TD
     StreamView --> Service
     BatchView --> Service
 ```
-
 
 ## Entities
 

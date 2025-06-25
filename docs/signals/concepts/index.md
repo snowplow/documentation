@@ -4,6 +4,29 @@ sidebar_position: 1
 sidebar_label: "Concepts"
 ---
 
+```mermaid
+flowchart TD
+    Entity --> Stream
+    Entity --> Batch
+    Entity --> Interventions
+
+    subgraph Stream
+        SA1[Attribute 1]
+        SA2[Attribute 2]
+    end
+
+    subgraph Batch
+        BA1[Attribute 1]
+        BA2[Attribute 2]
+    end
+
+    Stream --> StreamView[View]
+    Batch --> BatchView[View]
+
+    StreamView --> Service
+    BatchView --> Service
+```
+
 
 ## Entities
 

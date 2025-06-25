@@ -5,3 +5,5 @@ scope:
   - list
 tokens:
   - ^\s*[a-z][a-zA-Z]*
+exceptions:
+  - iOS

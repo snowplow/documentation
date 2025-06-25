@@ -6,7 +6,7 @@ sidebar_label: "Concepts"
 
 Signals introduces a new set of data governance concepts to Snowplow. As with schemas for Snowplow event data, Signals components are strictly defined, structured, and versioned.
 
-The fundamental Signals building block is the `Entity`. Attributes and interventions are all defined relative to entities. Attributes can be grouped together into Views or Services for ease of management and deployment.
+The fundamental Signals building block is the `Entity`. The other Signals features, attributes and interventions, are all defined relative to entities. Attributes can be grouped together into Views or Services for ease of management and deployment.
 
 ```mermaid
 flowchart TD
@@ -33,34 +33,60 @@ flowchart TD
 
 ## Entities
 
-The foundation of Signals are entities (distinct from [Snowplow entities](/docs/fundamentals/entities/index.md), but they can be related).
+An entity can be anything with an "identifier" that you can capture in a Snowplow event.
 
-An <dfn>entity</dfn> is the core unit that all the other Signals features relate to, and can be anything with an "identifier" that you can capture in a Snowplow event.
+This diagram shows some entities that could be useful for analysis:
 
-For example, the simplest entities to think about (and which come predefined when you start with Signals) are concepts like "users", "devices", or "sessions"; these would be entities that you describe in events with the out-of-the-box [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) like `user_id`, `domain_userid`/`network_userid`, or `domain_sessionid` (respectively).
+```mermaid
+flowchart TD
+    User["o-|-< User"] --> Device["[===] Device"]
+    User --> PhoneDevice["|___| Device"]
 
-You can define any entities you like, and expand this to broader concepts. For example:
-- Apps (perhaps described by [`app_id`](/docs/fundamentals/canonical-event/index.md#application-fields))
-- Pages (perhaps [`page_urlpath`](/docs/fundamentals/canonical-event/index.md#platform-specific-fields) or a page identifier captured in a custom entity)
-- Products (that you might capture in an [ecommerce entity](/docs/events/ootb-data/ecommerce-events/index.md#product) or other custom entity)
-- Page/Screen views (as captured in the `web_page` and `screen_view` entities)
-- Content categories
-- Levels in a game
+    Device --> App1["[www] App"]
+    PhoneDevice --> App2["[app] App"]
 
-Defining an entity and how to identify it unlocks other features so you can do things like compute [attributes](#attributes) for it, or publish [interventions](#interventions) to it.
+    App1 -.-> Page[Page]
+    App1 -.-> Product[Product]
+
+    App2 -.-> Screen[Screen]
+    App2 -.-> ScreenView[Screen View]
+```
+
+Signals comes with predefined entities: "users", "devices", and "sessions". These are defined based on the out-of-the-box [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) in all Snowplow events.
+
+| Built-in entity | Identifier                       |
+| --------------- | -------------------------------- |
+| User            | `user_id`                        |
+| Device          | `domain_userid`/`network_userid` |
+| Session         | `domain_sessionid`               |
+
+You can define any entities you like, and expand this to broader concepts.
+
+| Possible entity  | Possible identifier                                                                                                                          |
+| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| App              | [`app_id`](/docs/fundamentals/canonical-event/index.md#application-fields)                                                                   |
+| Page             | [`page_urlpath`](/docs/fundamentals/canonical-event/index.md#platform-specific-fields)                                                       |
+| Product          | `id` from [ecommerce product](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/ecommerce-events/index.md#product) or custom entity |
+| Screen view      | `id` in `screen_view` entity                                                                                                                 |
+| Content category | from custom entity                                                                                                                           |
+| Video game level | from custom entity                                                                                                                           |
 
 ## Attributes
 
-After defining an entity, you can start to calculate attributes for it.
+After defining an entity, you can start to calculate attributes for it. An attribute defines a specific fact about behavior relating to an entity.
 
-An <dfn>attribute</dfn> represents a specific fact about behavior with an entity and gets defined as part of a [view](#views).
+Example attributes:
 
-For example: (attributes for an entity in **bold**)
-- _Number of **page** views in the last 7 days:_ counts how many pages a page has received within the past week.
-- _Number of pages viewed by a **user** in the last 7 days:_ counts how many pages a user has viewed within the past week.
-- _Last product viewed by a **user**:_ identifies the most recent product a user interacted with.
-- _Last product sold from **product category**:_ identifies the most recent product any user has bought within a product category.
-- _Previous purchases by **user**:_ provides a record of the user's past transactions.
+| Entity               | Attribute                         | Description                                                                      |
+| -------------------- | --------------------------------- | -------------------------------------------------------------------------------- |
+| **User**             | `num_pages_viewed_in_last_7_days` | Counts how many pages the user has viewed within the past week                   |
+| **User**             | `last_product_viewed`             | Identifies the most recent product the user interacted with                      |
+| **User**             | `previous_purchases`              | Provides a record of the user's past transactions                                |
+| **Page**             | `num_views_in_last_7_days`        | Counts how many page views a page has received within the past week              |
+| **Product Category** | `last_product_sold`               | Identifies the most recent product any user has bought within a product category |
+
+TODO stream vs batch
+
 
 All attributes get defined as part of a [view](#views), which ties them to a specific entity and source, defining how their values get updated.
 

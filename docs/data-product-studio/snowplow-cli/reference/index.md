@@ -1,6 +1,6 @@
 ---
 title: Command reference
-date: 2025-06-23
+date: 2025-06-25
 sidebar_position: 1
 ---
 
@@ -40,6 +40,57 @@ Work with Snowplow data products
       --json-output     Log output as json
   -q, --quiet           Log output level to Warn
   -s, --silent          Disable output
+```
+
+
+
+## Data-Products Add-Event-Spec
+
+
+Add new event spec to an existing data product
+
+### Synopsis
+
+Adds one or more event specifications to an existing data product file, or print them to the stdout.
+The command takes the path to a data product file and adds the specified event specifications to it. When run without the argument - it will print generated event specs to the stdout.
+The command will attempt to keep the formatting and comments of the original file intact, but it's a best effort approach. Some comments might be deleted, some formatting changes might occur.
+
+```
+snowplow-cli data-products add-event-spec {path} [flags]
+```
+
+### Examples
+
+```
+  $ snowplow-cli dp add-event-spec --event-spec user_login --event-spec page_view ./my-data-product.yaml
+  $ snowplow-cli dp add-es ./data-products/analytics.yaml -e "checkout_completed" -e "item_purchased"
+```
+
+### Options
+
+```
+  -e, --event-spec stringArray   Name of event spec to add
+  -h, --help                     help for add-event-spec
+  -f, --output-format string     Format of stdout output. Only applicable when the file in not specified. Json or yaml are supported (default "yaml")
+```
+
+### Options inherited from parent commands
+
+```
+  -S, --api-key string        BDP console api key
+  -a, --api-key-id string     BDP console api key id
+      --config string         Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
+                              Then on:
+                                Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
+                                Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
+                                Windows %AppData%\snowplow\snowplow.yml
+      --debug                 Log output level to Debug
+  -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
+      --json-output           Log output as json
+  -m, --managed-from string   Link to a github repo where the data structure is managed
+  -o, --org-id string         Your organization id
+  -q, --quiet                 Log output level to Warn
+  -s, --silent                Disable output
 ```
 
 

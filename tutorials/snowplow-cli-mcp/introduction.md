@@ -36,3 +36,13 @@ The Snowplow CLI MCP server provides these tools:
 
 - **`validate_data_structures`** - Validates data structure files (events/entities). Must be called after creating or modifying any data structure.
 - **`validate_data_products`** - Validates data products and source applications. Must include both data product files AND their referenced source application files.
+
+## Demo: Using the Snowplow CLI MCP with Claude Desktop
+
+<iframe
+  title="vimeo-player"
+  src="https://player.vimeo.com/video/1096253323?h=37276f4852"
+  width="640" height="360" frameborder="0"
+  mozallowfullscreen webkitallowfullscreen allowfullscreen
+  allow="autoplay; fullscreen; picture-in-picture"
+></iframe>

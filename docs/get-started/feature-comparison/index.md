@@ -11,7 +11,7 @@ Here is a detailed list of product features, including which are available as pa
 | :------------------------------------------------------------------------------------------------------------------------ | :---: | :------------------------------------------------------------------------: |
 | [35+ trackers and webhooks](/docs/sources/index.md)                                                                       |   ✅   |                                     ✅                                      |
 | First party tracking                                                                                                      |   ✅   |                                     ✅                                      |
-| [Anonymous data collection](/docs/resources/recipes-tutorials/recipe-anonymous-tracking/index.md)                         |   ✅   |                                     ✅                                      |
+| Anonymous data collection                                                                                                 |   ✅   |                                     ✅                                      |
 | [Cookie Extension service](/docs/events/cookie-extension/index.md)                                                        |   ✅   |                                     ✅                                      |
 | High availability and auto-scaling                                                                                        |   ✅   |                                     ❌                                      |
 | [Enrichments](/docs/pipeline/enrichments/available-enrichments/index.md)                                                  |   ✅   |                                     ✅                                      |

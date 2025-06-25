@@ -1,9 +1,7 @@
 ---
 position: 1
-title: Introduction
+title: Getting started with the Snowplow MCP server for tracking design
 ---
-
-# Getting Started with the Snowplow MCP Server for Tracking Design
 
 The Snowplow CLI MCP (Model Context Protocol) tool integrates Snowplow's data structure management capabilities directly into AI assistants like Claude. This enables natural language interaction for creating, validating, and managing your Snowplow tracking plans **locally**.
 
@@ -18,13 +16,16 @@ The Snowplow CLI MCP (Model Context Protocol) tool integrates Snowplow's data st
 
 ## Demo: Using the Snowplow CLI MCP with Claude Desktop
 
-<iframe
-  title="vimeo-player"
-  src="https://player.vimeo.com/video/1096253323?h=37276f4852"
-  width="640" height="360" frameborder="0"
-  mozallowfullscreen webkitallowfullscreen allowfullscreen
-  allow="autoplay; fullscreen; picture-in-picture"
-></iframe>
+<div style={{position: "relative", width: "100%", height: "0", paddingBottom: "56.25%", overflow: "hidden"}}>
+  <iframe
+    title="vimeo-player"
+    src="https://player.vimeo.com/video/1096253323?h=37276f4852"
+    frameborder="0"
+    mozallowfullscreen webkitallowfullscreen allowfullscreen
+    allow="autoplay; fullscreen; picture-in-picture"
+    style={{position: "absolute", top: 0, left: 0, width: "100%", height: "100%", border: 0}}
+  ></iframe>
+</div>
 
 ## Prerequisites
 

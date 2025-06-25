@@ -89,13 +89,13 @@ Collector payload format violation schema can be found [here](https://github.com
 
 </details>
 
-## Adaptor failure
+## Adapter failure
 
 This failure type is produced by the [Enrich](/docs/pipeline/enrichments/index.md) application, when it tries to interpret a Collector payload from the raw stream as a HTTP request from a [3rd party webhook](/docs/sources/webhooks/index.md).
 
 :::info
 
-Many adaptor failures are caused by bot traffic, so do not be surprised to see some of them in your pipeline.
+Many adapter failures are caused by bot traffic, so do not be surprised to see some of them in your pipeline.
 
 :::
 
@@ -103,10 +103,10 @@ Many adaptor failures are caused by bot traffic, so do not be surprised to see s
 
 The failure could be:
 
-1. The vendor/version combination in the Collector URL is not supported. For example, imagine an HTTP request sent to `/com.sandgrod/v3` which is a mis-spelling of the [sendgrid adaptor](http://sendgrid) endpoint.
+1. The vendor/version combination in the Collector URL is not supported. For example, imagine an HTTP request sent to `/com.sandgrod/v3` which is a mis-spelling of the [sendgrid adapter](http://sendgrid.com) endpoint.
 2. The webhook sent by the 3rd party does not conform to the expected structure and list of fields for this webhook. For example, imagine the 3rd party webhook payload is updated and stops sending a field that it was sending before.
 
-Many adaptor failures are caused by bot traffic, so do not be surprised to see some of them in your pipeline. However, if you believe you are missing data because of a misconfigured webhook, then you might try to fix the webhook and then [recover the failed events](/docs/data-product-studio/data-quality/failed-events/recovering-failed-events/index.md).
+Many adapter failures are caused by bot traffic, so do not be surprised to see some of them in your pipeline. However, if you believe you are missing data because of a misconfigured webhook, then you might try to fix the webhook and then [recover the failed events](/docs/data-product-studio/data-quality/failed-events/recovering-failed-events/index.md).
 
 Because this failure is handled during enrichment, events in the real time good stream are free of this violation type.
 

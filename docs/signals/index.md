@@ -47,6 +47,8 @@ Steps for using Signals:
 3. (Optional) Configure the batch engine for historical warehouse attributes
 4. Use the attributes in your application
 
+TODO what warehouse(s) are supported
+
 ### Defining the business logic
 
 Your first step is to define the attributes and interventions you're interested in tracking. This is done using our [Signals Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk). Once defined, apply the attributes configuration to the Signals infrastructure.
@@ -91,10 +93,10 @@ Once Signals receives the applied configurations it will start calculating attri
 
 Snowplow provide SDKs for Node.js and Python to retrieve attributes in your application.
 
-|Feature|[Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk)|[Node.js SDK](https://github.com/snowplow-incubator/snowplow-signals-typescript-sdk) |
-|-------|----------|-----------|
-|Define Attributes|✅ |❌|
-|Retrieve Attributes | ✅ |✅  |
+| Feature             | [Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk) | [Node.js SDK](https://github.com/snowplow-incubator/snowplow-signals-typescript-sdk) |
+| ------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| Define Attributes   | ✅                                                                        | ❌                                                                                    |
+| Retrieve Attributes | ✅                                                                        | ✅                                                                                    |
 
 
 

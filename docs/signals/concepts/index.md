@@ -6,13 +6,14 @@ sidebar_label: "Concepts"
 
 Signals introduces a new set of data governance concepts to Snowplow. As with schemas for Snowplow event data, Signals components are strictly defined, structured, and versioned.
 
-The fundamental Signals building block is the `Entity`. The other Signals features, attributes and interventions, are all defined relative to entities. Attributes can be grouped together into Views or Services for ease of management and deployment.
+The fundamental Signals building block is the `Entity`. The Signals components attributes and interventions are defined relative to entities. Group attributes together into Views or Services for ease of management and deployment.
 
 ```mermaid
 flowchart TD
     Entity --> Stream
     Entity --> Batch
-    Entity --> Interventions
+    Entity --> Int1[**Intervention 1**]
+    Entity --> Int2[**Intervention 2**]
 
     subgraph Stream
         SA1[Attribute 1]
@@ -24,12 +25,14 @@ flowchart TD
         BA2[Attribute 2]
     end
 
-    Stream --> StreamView[View]
-    Batch --> BatchView[View]
+    Stream --> StreamView[**View**]
+    Batch --> BatchView[**View**]
 
     StreamView --> Service
     BatchView --> Service
 ```
+
+The components in bold are versioned.
 
 ## Entities
 
@@ -39,8 +42,8 @@ This diagram shows some entities that could be useful for analysis:
 
 ```mermaid
 flowchart TD
-    User["o-|-< User"] --> Device["[===] Device"]
-    User --> PhoneDevice["|___| Device"]
+    User["  o<br/> /|\ <br/> / \ <br/>User"] --> Device["  ___<br/> |___|<br/> |___|<br/>Device"]
+    User --> PhoneDevice[" |---| <br/> |    | <br/> |__| <br/>Device"]
 
     Device --> App1["[www] App"]
     PhoneDevice --> App2["[app] App"]
@@ -54,70 +57,108 @@ flowchart TD
 
 Signals comes with predefined entities: "users", "devices", and "sessions". These are defined based on the out-of-the-box [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) in all Snowplow events.
 
-| Built-in entity | Identifier                       |
-| --------------- | -------------------------------- |
-| User            | `user_id`                        |
-| Device          | `domain_userid`/`network_userid` |
-| Session         | `domain_sessionid`               |
+| Signals out-of-the-box entity | Identifier                       |
+| ----------------------------- | -------------------------------- |
+| User                          | `user_id`                        |
+| Device                        | `domain_userid`/`network_userid` |
+| Session                       | `domain_sessionid`               |
 
 You can define any entities you like, and expand this to broader concepts.
 
-| Possible entity  | Possible identifier                                                                                                                          |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| App              | [`app_id`](/docs/fundamentals/canonical-event/index.md#application-fields)                                                                   |
-| Page             | [`page_urlpath`](/docs/fundamentals/canonical-event/index.md#platform-specific-fields)                                                       |
-| Product          | `id` from [ecommerce product](/docs/sources/trackers/snowplow-tracker-protocol/ootb-data/ecommerce-events/index.md#product) or custom entity |
-| Screen view      | `id` in `screen_view` entity                                                                                                                 |
-| Content category | from custom entity                                                                                                                           |
-| Video game level | from custom entity                                                                                                                           |
+| Possible entity  | Possible identifier                                                                                      |
+| ---------------- | -------------------------------------------------------------------------------------------------------- |
+| App              | [`app_id`](/docs/fundamentals/canonical-event/index.md#application-fields)                               |
+| Page             | [`page_urlpath`](/docs/fundamentals/canonical-event/index.md#platform-specific-fields)                   |
+| Product          | `id` from [ecommerce product](/docs/events/ootb-data/ecommerce-events/index.md#product) or custom entity |
+| Screen view      | `id` in `screen_view` entity                                                                             |
+| Content category | from custom entity                                                                                       |
+| Video game level | from custom entity                                                                                       |
 
 ## Attributes
 
 After defining an entity, you can start to calculate attributes for it. An attribute defines a specific fact about behavior relating to an entity.
 
-Example attributes:
+Example attributes for different entities:
 
-| Entity               | Attribute                         | Description                                                                      |
-| -------------------- | --------------------------------- | -------------------------------------------------------------------------------- |
-| **User**             | `num_pages_viewed_in_last_7_days` | Counts how many pages the user has viewed within the past week                   |
-| **User**             | `last_product_viewed`             | Identifies the most recent product the user interacted with                      |
-| **User**             | `previous_purchases`              | Provides a record of the user's past transactions                                |
-| **Page**             | `num_views_in_last_7_days`        | Counts how many page views a page has received within the past week              |
-| **Product Category** | `last_product_sold`               | Identifies the most recent product any user has bought within a product category |
+| Entity           | Attribute                         | Description                                                                      |
+| ---------------- | --------------------------------- | -------------------------------------------------------------------------------- |
+| User             | `num_pages_viewed_in_last_7_days` | Counts how many pages the user has viewed within the past week                   |
+| User             | `last_product_viewed`             | Identifies the most recent product the user interacted with                      |
+| User             | `previous_purchases`              | Provides a record of the user's past transactions                                |
+| Page             | `num_views_in_last_7_days`        | Counts how many page views a page has received within the past week              |
+| Product Category | `last_product_sold`               | Identifies the most recent product any user has bought within a product category |
 
-TODO stream vs batch
-
-
-All attributes get defined as part of a [view](#views), which ties them to a specific entity and source, defining how their values get updated.
-
-You can also set them manually via the APIs, or dynamically via interventions.
-
-Read more [about attributes](/docs/signals/configuration/attributes/index.md).
+Attribute values can be updated in multiple ways, depending how they are configured:
+* Events in real time (stream source only)
+* Events in warehouse (batch source only)
+* Interventions
+* Manually via Signals API
 
 ### Views
 
-A <dfn>View</dfn> is a versioned collection of attributes associated with a specific entity that are populated from the same source.
+Configure attributes by grouping them into views. Each view is associated with a specific entity, source, and owner. It also has a version.
 
-You can picture the result of a View as a table of attributes for an entity instance.
+Check out the attributes configuration page ADD LINK for the full list of configuration options.
 
-For example, from the [previous example attributes](#attributes) for a user-entity keyed by `user_id`:
+Choose the source which fits your use case. For example, the attribute `last_product_viewed` is best calculated from events in-stream during a session, while `num_views_in_last_7_days` is best calculated from historical events.
 
-| `user_id` | `number_of_pageviews` | `last_product_viewed` | `previous_purchases`      |
-| --------- | --------------------- | --------------------- | ------------------------- |
-| `abc123`  | 5                     | Red Shoes             | [`Blue Shoes`, `Red Hat`] |
+An example configuration for a view based on a user entity:
 
-The attributes of a view can be set to expire for instances if they aren't updated after a certain period of time.
+```mermaid
+flowchart TD
+    User[User: `user_id`] --> Stream
 
-Each view can be associated with metadata such as an owner, description, and tags.
+    subgraph Stream[Stream attributes]
+        SA1[number_of_pageviews]
+        SA2[last_product_viewed]
+    end
 
-When you're happy with a version of a View definition, you can associate it with a service to be consistently requested via the API for personalization.
+    Stream --> View[View: `user_attributes_realtime`]
+```
+
+This view could be imagined like this as a table once the attributes are calculated:
+
+| `user_id` | `number_of_pageviews` | `last_product_viewed` |
+| --------- | --------------------- | --------------------- |
+| `abc123`  | 5                     | `"Red Shoes"`         |
+| `def456`  | 10                    | `"Blue Hat"`          |
+
+You can use views individually in your application to retrieve attributes, or combine them into services.
 
 ### Services
 
-A <dfn>Service</dfn> is a collection of [views](#views) that are grouped to make the retrieval of attributes simpler.
+Services allow you to retrieve attributes in bulk from multiple views. Each view is pinned to a specific version, to ensure that the returned values will be consistent with what you expect. One service can combine views with different sources.
 
-They allow you to retrieve attributes in bulk from multiple views, that are each pinned to specific versions so you can ensure the returned values are consistent with what you expect.
-This allows you to freely iterate on your view/attribute definitions without impacting production applications that rely on your attributes, and letting you migrate to new versions when ready.
+```mermaid
+flowchart TD
+    Entity[User: `user_id`] --> Stream
+    Entity --> Batch
+
+    subgraph Stream[Stream attributes]
+        SA1[number_of_pageviews]
+        SA2[last_product_viewed]
+    end
+
+    subgraph Batch[Batch sources]
+        BA1[previous_purchases]
+        BA2[previous_returns]
+    end
+
+    Stream --> StreamView[View: `user_attributes_realtime`]
+    Batch --> BatchView[View: `user_attributes_warehouse`]
+
+    StreamView --> Service
+    BatchView --> Service
+```
+
+This service could be imagined like this as a table:
+
+| `user_id` | `number_of_pageviews` | `last_product_viewed` | `previous_purchases`       | `previous_returns` |
+| --------- | --------------------- | --------------------- | -------------------------- | ------------------ |
+| `abc123`  | 5                     | `"Red Shoes"`         | `[Blue Shoes", "Red Hat"]` | `["Red Hat"]`      |
+| `def456`  | 10                    | `"Yellow Hat"`        | `[]`                       | `[]`               |
+
+Attribute values retrieved using a service are returned in the form TODO.
 
 ## Interventions
 

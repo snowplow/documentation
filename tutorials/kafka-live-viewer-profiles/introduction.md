@@ -56,7 +56,7 @@ The following files in the [GitHub repository](https://github.com/snowplow-indus
 - **Kafka infrastructure**: `docker/compose.kafka.yaml`
 - **Application components**: `docker/compose.apps.yaml`
 - **LocalStack setup**: `docker/compose.localstack.yaml`
-- **AWS setup**: terraform scripts (located in the `docs/terraform` folder)
+- **AWS setup**: Terraform scripts (located in the `docs/terraform` folder)
 
 ## Acknowledgements
 Thank you to the Kafka experts [OSO](https://oso.sh/) for their support with building this accelerator.

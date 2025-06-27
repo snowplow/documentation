@@ -21,7 +21,7 @@ Here's the list of all credential variables you may need to configure:
 
 ```python
 from google.colab import userdata
-# Snowflake credentials to prepare a training dataset on top of Atomic Events table
+# Snowflake credentials to prepare a training dataset on top of atomic events table
 ENV_SF_ACNT = userdata.get('SF_ACNT') # Account
 ENV_SF_USR = userdata.get('SF_USR') # User
 ENV_SF_PWD = userdata.get('SF_PWD') # Pwd

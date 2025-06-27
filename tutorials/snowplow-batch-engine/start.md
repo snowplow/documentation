@@ -9,8 +9,8 @@ Welcome to the Signals Batch Engine guide! This tool helps you generate and mana
 
 Snowplow Signals is a feature store that helps you manage and serve machine learning features at scale. In the Profiles API, you can have different types of attribute views:
 
-- **Batch Views**: Processed offline, perfect for historical data and complex aggregations
-- **Stream Views**: Processed in real-time, ideal for immediate feature updates
+- **Batch Views**: processed offline, perfect for historical data and complex aggregations
+- **Stream Views**: processed in real-time, ideal for immediate feature updates
 
 This CLI tool specifically helps you work with batch views by:
 

@@ -11,11 +11,11 @@ When you install Snowplow via Quick Start, several enrichments are enabled by de
 
 **Default Enrichments:**
 
-- **IP Lookups**: Adds geographical data based on the IP address.
-- **User-Agent Parsing**: Extracts browser, OS, and device information from user-agent strings.
-- **Referer Parsing**: Analyzes referer URLs to determine the source of the traffic.
-- **UA Parser**: Parses user-agent strings into structured data.
-- **Page View ID**: Adds a unique identifier to each page view event
+- **IP Lookups**: adds geographical data based on the IP address.
+- **User-Agent Parsing**: extracts browser, OS, and device information from user-agent strings.
+- **Referer Parsing**: analyzes referer URLs to determine the source of the traffic.
+- **UA Parser**: parses user-agent strings into structured data.
+- **Page View ID**: adds a unique identifier to each page view event
 
 ## Managing Enrichments via BDP
 
@@ -26,7 +26,7 @@ To start managing Enrichments in our hosted BDP platform, follow these steps:
 
 ![Screenshot 2024-07-10 at 2.15.06 PM.png](./screenshots/Screenshot_2024-07-10_at_2.15.06_PM.png)
 
-When you select navigate to the Enrichments screen you'll see a listing of all Enrichments and see their current status & last edited date for the environment.
+When you select navigate to the Enrichments screen you'll see a listing of all Enrichments and see their current status and last edited date for the environment.
 
 ![Screenshot 2024-08-08 at 9.08.16 AM.png](./screenshots/Screenshot_2024-08-08_at_9.08.16_AM.png)
 

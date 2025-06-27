@@ -69,7 +69,7 @@ model = Pipeline(steps=[
     ('classifier', xgb.XGBClassifier(eval_metric='logloss', random_state=seed))
 ])
 
-# Split, Train, and Evaluate
+# Split, train, and evaluate
 X = db_df[x_columns]
 y = db_df[y_column]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=seed, stratify=y)
@@ -81,7 +81,7 @@ y_prob = model.predict_proba(X_test)[:, 1]
 # Export
 joblib.dump(model, "xgb_model.joblib")
 
-# Quick Model Metric Evaluation
+# Quick model metric evaluation
 print("Accuracy:", accuracy_score(y_test, y_pred))
 ...
 ConfusionMatrixDisplay.from_estimator(model, X_test, y_test, cmap='Blues', ax=axes[0])

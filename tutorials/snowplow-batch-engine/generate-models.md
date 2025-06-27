@@ -82,10 +82,10 @@ my_snowplow_repo/
 
 For each batch view, the generated models are specifically designed for batch processing:
 
-- **Base models**: Raw data transformations
-- **Filtered events**: Event filtering and cleaning
-- **Daily aggregates**: Time-based aggregations
-- **Attributes**: Final feature definitions
+- **Base models**: raw data transformations
+- **Filtered events**: event filtering and cleaning
+- **Daily aggregates**: time-based aggregations
+- **Attributes**: final feature definitions
 
 ## Troubleshooting
 

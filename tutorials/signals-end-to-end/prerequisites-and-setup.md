@@ -27,7 +27,7 @@ ENV_SF_USR = userdata.get('SF_USR') # User
 ENV_SF_PWD = userdata.get('SF_PWD') # Pwd
 ENV_SF_WH = userdata.get('SF_WH') # Warehouse
 
-# Snowplow signals credentials
+# Snowplow Signals credentials
 ENV_SP_API_KEY = userdata.get('SP_API_KEY') # Snowplow Signals API Key
 ENV_SP_API_KEY_ID = userdata.get('SP_API_KEY_ID') # Snowplow Signals API ID
 ENV_SP_ORG_ID = userdata.get('SP_ORG_ID') # Snowplow Org ID

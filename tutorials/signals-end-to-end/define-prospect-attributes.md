@@ -120,7 +120,7 @@ user_attributes_view = View(
 Now that our View is ready, we can apply it to Signals and test the outputs on a subset of recent event data.
 
 ```python
-# Apply view to the signals api
+# Apply view to the Signals API
 from snowplow_signals import Signals
 sp_signals = Signals(api_url=SIGNALS_API_ENDPOINT,
                      api_key=userdata.get('SP_API_KEY'),

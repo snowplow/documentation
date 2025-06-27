@@ -129,7 +129,7 @@ sp_signals = Signals(api_url=SIGNALS_API_ENDPOINT,
 applied = sp_signals.apply([user_attributes_view])
 print(f"{len(applied)} objects applied")
 
-# Test view on the signals api on the last one hour of data from the atomic events table
+# Test view on the Signals API on the last one hour of data from the atomic events table
 sp_signals_test = sp_signals.test(view=user_attributes_view, app_ids=["website"])
 sp_signals_test
 ```

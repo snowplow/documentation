@@ -3,7 +3,6 @@ title: Setting up via Snowplow Console
 position: 5
 ---
 
-# Setting up via snowplow console
 
 Snowplow provides a fully managed service for running data models. We recommend this if you are just getting started out, or don’t anticipate needing to build your own custom models. To get started, follow these steps:
 

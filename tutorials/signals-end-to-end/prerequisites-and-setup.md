@@ -34,7 +34,7 @@ ENV_SP_ORG_ID = userdata.get('SP_ORG_ID') # Snowplow Org ID
 ENV_SIGNALS_API_ENDPOINT = userdata.get('SIGNALS_API_ENDPOINT') # Snowplow Signals API Endpoint
 ENV_ATOMIC_TABLE = userdata.get('ATOMIC_TABLE') # Snowflake Snowplow Atomic Table
 
-# Ngrok token to be able to expose notebook behind https for querying the api
+# ngrok token to be able to expose notebook behind HTTPS for querying the API
 ENV_NGROK_TOKEN = userdata.get('NGROK_TOKEN')
 ```
 

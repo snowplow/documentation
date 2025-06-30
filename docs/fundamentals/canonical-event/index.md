@@ -93,13 +93,13 @@ The platform ID is used to distinguish the same app running on different platfor
 | Field | Type| Description| Reqd? | Example | Source | Web | Mobile|
 |------------------------------------------|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------|---------------------------|--------------------------|-----|---------|
 | `collector_tstamp` | timestamp | Timestamp for the event recorded by the collector| Yes | '2013-11-26 00:02:05.123' | Pipeline | ✅ | ✅ |
-| dvce_created_tstamp| timestamp | Timestamp for the event recorded on the client device| No| '2013-11-26 00:03:57.885' | Tracking | ✅ | ✅ |
+| `dvce_created_tstamp` | timestamp | Timestamp for the event recorded on the client device| No| '2013-11-26 00:03:57.885' | Tracking | ✅ | ✅ |
 | `dvce_sent_tstamp` | timestamp | When the event was actually sent by the client device| No| '2013-11-26 00:03:58.032' | Tracking | ✅ | ✅ |
 | `etl_tstamp` | timestamp | Timestamp for when the event was validated and enriched. Note: the name is historical and does not mean that the event is loaded at this point (this is further downstream). | No| '2017-01-26 00:01:25.292' | Pipeline | ✅ | ✅ |
 | `os_timezone` | text| Client operating system timezone | No| 'Europe/London' | Tracking: [Timezone Plugin](/docs/sources/trackers/web-trackers/tracking-events/timezone-geolocation/index.md)| ✅ | ✅ |
 | `derived_tstamp` | timestamp | Timestamp making allowance for inaccurate device clock | No| '2013-11-26 00:02:04.123' | Default Enrichment | ✅ | ✅ |
-| true_tstamp| timestamp | User-set "true timestamp" for the event| No| '2013-11-26 00:02:04.123' | Tracking | ✅ | ✅ |
-| load_tstamp| timestamp | Timestamp for when the data was loaded into the warehouse, best choice for incremental processing| No| '2013-11-26 00:02:04.123' | Pipeline | ✅ | ✅ |
+| `true_tstamp` | timestamp | User-set "true timestamp" for the event| No| '2013-11-26 00:02:04.123' | Tracking | ✅ | ✅ |
+| `load_tstamp `| timestamp | Timestamp for when the data was loaded into the warehouse, best choice for incremental processing| No| '2013-11-26 00:02:04.123' | Pipeline | ✅ | ✅ |
 
 
 
@@ -314,9 +314,9 @@ Fields that start `tr_` relate to the transaction as a whole. Fields that start 
 | `tr_total`| decimal | Total transaction value| Yes | 12.99 |
 | `tr_tax`| decimal | Total tax included in transaction value| No| 3.00|
 | `tr_shipping` | decimal | Delivery cost charged| No| 0.00|
-| `tr_total_base`*| decimal | Total in base currency | No| 12.99 |
-| `tr_tax_base`*| decimal | Total tax in base currency | No| 3.00|
-| `tr_shipping_base`* | decimal | Delivery cost in base currency | No| 0.00|
+| `tr_total_base` * | decimal | Total in base currency | No| 12.99 |
+| `tr_tax_base` * | decimal | Total tax in base currency | No| 3.00|
+| `tr_shipping_base` * | decimal | Delivery cost in base currency | No| 0.00|
 | `tr_city` | text| Delivery address, city | No| 'London'|
 | `tr_state` | text| Delivery address, state| No| 'Washington'|
 | `tr_country` | text| Delivery address, country| No| 'France'|
@@ -326,10 +326,10 @@ Fields that start `tr_` relate to the transaction as a whole. Fields that start 
 | `ti_name` | text| Product name | No| 'Cone pendulum' |
 | `ti_category` | text| Product category | No| 'New Age' |
 | `ti_price`| decimal | Product unit price | Yes | 9.99|
-| `ti_price_base`*| decimal | Price in base currency | No| 9.99|
+| `ti_price_base` * | decimal | Price in base currency | No| 9.99|
 | `ti_quantity` | integer | Number of product in transaction | Yes | 2 |
 | `ti_currency` | text| Currency | No| 'EUR' |
-| `base_currency`*| text| Reporting currency | No| 'GBP' |
+| `base_currency` * | text| Reporting currency | No| 'GBP' |
 
 \* Set exclusively by the [Currency conversion enrichment](/docs/pipeline/enrichments/available-enrichments/currency-conversion-enrichment/index.md).
 

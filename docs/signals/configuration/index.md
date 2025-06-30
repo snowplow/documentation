@@ -8,6 +8,10 @@ By default, Signals calculates attributes in real time, in stream. Stream attrib
 
 Use the Python SDK within a Jupyter notebook to define the attributes you want to calculate, as well as the entities that the attributes relate to. Group them together into a view, and apply this configuration to Signals.
 
+## Set up the SDK
+
+TODO notebook setup
+
 ## Stream volume limit
 
 Attributes are configured based on one or more Snowplow event schemas. For stream attributes, calculation is limited to the most recent 100 instances of the specified event(s) in the pipeline.

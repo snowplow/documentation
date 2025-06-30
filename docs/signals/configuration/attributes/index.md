@@ -69,13 +69,32 @@ An `Event` accepts the following parameters:
 | `vendor`  | `event_vendor` column in `atomic.events` table  | `string` |
 | `version` | `event_version` column in `atomic.events` table | `string` |
 
-For example, if you have a data structure with the schema `iglu:com.snowplowanalytics.snowplow/destination/jsonschema/1-0-1`, the `Event` would be:
+All of these parameters are optional, and work like wildcards.
+
+For example, to calculate an attribute for all page views, the `Event` would be:
+
+```python
+event=Event(
+    name="page_view",
+    vendor="com.snowplowanalytics.snowplow",
+    version="1-0-0"
+)
+```
+
+To calculate an attribute for all versions of a data structure with the schema `iglu:com.snowplowanalytics.snowplow/destination/jsonschema/{{version}}`:
 
 ```python
 event=Event(
     name="destination",
     vendor="com.snowplowanalytics.snowplow",
-    version="1-0-1"
+)
+```
+
+To calculate an attribute for all events for a specific vendor:
+
+```python
+event=Event(
+    vendor="com.snowplowanalytics.snowplow.media",
 )
 ```
 

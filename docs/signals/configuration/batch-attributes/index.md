@@ -1,5 +1,5 @@
 ---
-title: "Batch attributes"
+title: "Batch calculations"
 sidebar_position: 50
 ---
 

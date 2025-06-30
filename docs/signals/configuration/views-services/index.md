@@ -1,7 +1,7 @@
 ---
 title: "Views and Services"
 sidebar_position: 30
-sidebar_label: "Views and Services"
+sidebar_label: "Attribute groups"
 ---
 
 To access attributes, you need to define a `View` and optionally group multiple views into a `Service`. This guide explains how to define views and services, apply them to your deployment, and retrieve calculated values.

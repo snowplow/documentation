@@ -48,20 +48,20 @@ test_data = sp_signals.test(
 The `View` has the following properties:
 
 
-| **Argument Name** | **Description**                                                                                                          | **Type**      |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------- |
-| `name`            | The name of the View                                                                                                     | `string`      |
-| `version`         | The version of the View                                                                                                  | `int`         |
-| `entity`          | The entity associated with the View                                                                                      | `Entity`      |
-| `ttl`             | The amount of time this group of attributes lives. If not specified, the entity's ttl is used or the ttl is not limited. | `timedelta`   |
-| `batch_source`    | The data source for the View                                                                                             | `BatchSource` |
-| `online`          | Whether online retrieval is enabled (`True`) or not (`False`)                                                            | `bool`        |
-| `offline`         | Whether the View is calculated in the warehouse (`True`) or in real-time (`False`)                                       | `bool`        |
-| `description`     | The description of the View                                                                                              | `string`      |
-| `tags`            | The metadata of the View                                                                                                 | `dict`        |
-| `owner`           | The owner of the feature view, typically the email of the primary maintainer.                                            | `string`      |
-| `fields`          | The list of table columns that are part of this view during materialization.                                             | `Field`       |
-| `attributes`      | The list of attributes that will be calculated from events as part of this view.                                         | `Attribute`   |
+| Argument Name  | Description                                                                                                              | Type           | Default | Required? | For batch only? |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------ | -------------- | ------- | --------- | --------------- |
+| `name`         | The name of the View                                                                                                     | `string`       |         | yes       |                 |
+| `version`      | The version of the View                                                                                                  | `int`          | 1       |           |                 |
+| `entity`       | The entity associated with the View                                                                                      | `Entity`       |         | yes       |                 |
+| `ttl`          | The amount of time this group of attributes lives. If not specified, the entity's ttl is used or the ttl is not limited. | `timedelta`    |         |           |                 |
+| `batch_source` | The data source for the View                                                                                             | `BatchSource`  |         |           | yes             |
+| `online`       | Whether online retrieval is enabled (`True`) or not (`False`)                                                            | `bool`         | `True`  |           |                 |
+| `offline`      | Whether the View is calculated in the warehouse (`True`) or in real-time (`False`)                                       | `bool`         |         |           | yes             |
+| `description`  | The description of the View                                                                                              | `string`       |         |           |                 |
+| `tags`         | The metadata of the View                                                                                                 | `dict`         |         |           |                 |
+| `owner`        | The owner of the feature view, typically the email of the primary maintainer.                                            | email `string` |         | yes       |                 |
+| `fields`       | The list of table columns that are part of this view during materialization.                                             | `Field`        |         |           | yes             |
+| `attributes`   | The list of attributes that will be calculated from events as part of this view.                                         | `Attribute`    |         |           |                 |
 
 
 ### View computation types

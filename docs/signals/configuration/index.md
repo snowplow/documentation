@@ -10,7 +10,7 @@ Use the Python SDK within a Jupyter notebook to define the attributes you want t
 
 ## Stream volume limit
 
-Attributes are configured based on one or more Snowplow events. For stream attributes, calculation is limited to the most recent 100 instances of the specified event(s).
+Attributes are configured based on one or more Snowplow event schemas. For stream attributes, calculation is limited to the most recent 100 instances of the specified event(s) in the pipeline.
 
 For example, you could configure a User entity with a `latest_video_played` stream attribute based on the Snowplow media `play_event` event. The 100 event volume window isn't a problem here, as the calculation is always updated with the latest `play_event` for that user. Conversely, for aggregated attributes based on common event types such as page views, the 100 event limit might limit the analytical accuracy.
 

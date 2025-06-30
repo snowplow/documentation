@@ -140,7 +140,7 @@ const TutorialDocPageLayout: FC<Props> = ({
   return (
     <main
       className={clsx(
-        'tutorial-doc-page',
+        'tutorial-doc-page', 'flex', 'w-full',
         styles.docMainContainer,
         (hiddenSidebarContainer || !sidebar) && styles.docMainContainerEnhanced
       )}
@@ -251,20 +251,20 @@ const TutorialDocPageLayoutDesktop: FC<{
   prev: Step | null
 }> = ({ children, meta, steps, activeStep, setActiveStep, next, prev }) => {
   return (
-    <Grid container sx={{ m: 3, width: '100%' }} columnSpacing={5}>
+    <Grid container sx={{ m: 3, width: '100%' }} columnSpacing={1}>
       <Grid container item direction="column">
         <Grid item>
           <Header title={meta?.title || ''} label={meta?.label || ''} />
         </Grid>
-        <Grid container item wrap="nowrap" columnGap={5}>
-          <Grid item xs={3} sx={{ minWidth: '250px' }}>
+        <Grid container item wrap="nowrap" columnGap={3}>
+          <Grid item xs={2} sx={{ minWidth: '240px' }}>
             <Steps
               steps={steps}
               activeStep={activeStep}
               setActiveStep={setActiveStep}
             />
           </Grid>
-          <Grid container item xs={8}>
+          <Grid container item xs={9}>
             <Grid sx={{ width: '100%' }} item>
               {children}
             </Grid>

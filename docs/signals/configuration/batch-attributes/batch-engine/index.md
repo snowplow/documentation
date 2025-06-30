@@ -169,7 +169,7 @@ For those familiar with existing Snowplow dbt packages, it is worth to note that
 There is a second layer of incremental processing logic dictated by the `daily_aggregation_manifest` table. After the `filtered_events` table is created or updated, the `daily_aggregates` table gets updated with the help of this manifest. It is needed due to late arriving data, which may mean that some days will need to be reprocessed as a whole. For optimization purposes there are variables to fine-tune how this works such as the `snowplow__reprocess_days` and the `snowplow__min_rows_to_process`.
 
 Finally, the `Attributes` table is generated which is a drop and recompute table, fully updated each time an incremental update runs. This is cost-effective as the data is already pre-aggregated on a daily level.
-![](../../images/batch_engine_data_models.png)
+![](../../../images/batch_engine_data_models.png)
 
 ## Variables
 

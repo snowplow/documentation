@@ -7,14 +7,11 @@ sidebar_label: "Views and Services"
 To access attributes, you need to define a `View` and optionally group multiple views into a `Service`. This guide explains how to define views and services, apply them to your deployment, and retrieve calculated values.
 
 
-### What is a view?
 A `View` is a versioned collection of attributes grouped by a common `Entity` (e.g., `session_id` or `user_id`). Once defined, a `View` allows you to retrieve the calculated values of the attributes it contains.
 
-### What is a service?
 A `Service` is a collection of views that streamlines the retrieval of multiple views. By grouping related views into a `Service`, you can efficiently manage and access user insights, making it easier to personalize applications and analyze behavior.
 
-
-### Defining a view
+## Defining a view
 You can define a `View` by passing in a list of previously defined attributes. Here's an example:
 
 ```python
@@ -24,16 +21,16 @@ my_attribute_view = View(
     name="my_attribute_view",
     version=1,
     entity=domain_sessionid,
-    attributes=[ 
+    attributes=[
         #Previously defined Attributes
-        page_view_count, 
+        page_view_count,
         products_added_to_cart_feature,
     ],
     owner="user@company.com",
 )
 ```
 
-### Testing a view
+## Testing a view
 To understand what the output of a `View` will look like, use the `test` method with the `Signals` class. This will output a table of `Attributes` from your `atomic` events table.
 
 ```python
@@ -46,37 +43,37 @@ test_data = sp_signals.test(
 
 ```
 
-### View properties
+## View properties
 
 The `View` has the following properties:
 
 
-| **Argument Name** | **Description** | **Type** |
-| --- | --- | --- | 
-| `name` | The name of the View | `string` |
-| `version` | The version of the View | `int` |
-| `entity` | The entity associated with the View | `Entity` |
-| `ttl` | The amount of time this group of attributes lives. If not specified, the entity's ttl is used or the ttl is not limited. | `timedelta` |
-| `batch_source` | The data source for the View | `BatchSource` |
-| `online` | Whether online retrieval is enabled (`True`) or not (`False`) | `bool` |
-| `offline` | Whether the View is calculated in the warehouse (`True`) or in real-time (`False`) | `bool` |
-| `description` | The description of the View | `string` |
-| `tags` | The metadata of the View | `dict` |
-| `owner` | The owner of the feature view, typically the email of the primary maintainer. | `string` |
-| `fields` | The list of table columns that are part of this view during materialization. | `Field` |
-| `attributes` | The list of attributes that will be calculated from events as part of this view. | `Attribute` |
+| **Argument Name** | **Description**                                                                                                          | **Type**      |
+| ----------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------- |
+| `name`            | The name of the View                                                                                                     | `string`      |
+| `version`         | The version of the View                                                                                                  | `int`         |
+| `entity`          | The entity associated with the View                                                                                      | `Entity`      |
+| `ttl`             | The amount of time this group of attributes lives. If not specified, the entity's ttl is used or the ttl is not limited. | `timedelta`   |
+| `batch_source`    | The data source for the View                                                                                             | `BatchSource` |
+| `online`          | Whether online retrieval is enabled (`True`) or not (`False`)                                                            | `bool`        |
+| `offline`         | Whether the View is calculated in the warehouse (`True`) or in real-time (`False`)                                       | `bool`        |
+| `description`     | The description of the View                                                                                              | `string`      |
+| `tags`            | The metadata of the View                                                                                                 | `dict`        |
+| `owner`           | The owner of the feature view, typically the email of the primary maintainer.                                            | `string`      |
+| `fields`          | The list of table columns that are part of this view during materialization.                                             | `Field`       |
+| `attributes`      | The list of attributes that will be calculated from events as part of this view.                                         | `Attribute`   |
 
 
 ### View computation types
 The method of calculating and serving attributes related to a specific View depends on a specific combination of property values, illustrated in the below matrix:
 
-| | Offline = false | Offline = true and has attributes | Offline = True and has no attributes |
-|---|---|---|---|
-| **Online = false** | Attributes are not computed anywhere | Attributes computed through the Batch Engine in the warehouse but not yet materialized | Table pre-computed without Batch Engine and only in the warehouse |
-| **Online = true** | Attributes computed in stream | Attributes computed through the Batch Engine and materialized into Signals | Table materialized into Signals (if it has a batch source configured) |
+|                    | Offline = false                      | Offline = true and has attributes                                                      | Offline = True and has no attributes                                  |
+| ------------------ | ------------------------------------ | -------------------------------------------------------------------------------------- | --------------------------------------------------------------------- |
+| **Online = false** | Attributes are not computed anywhere | Attributes computed through the Batch Engine in the warehouse but not yet materialized | Table pre-computed without Batch Engine and only in the warehouse     |
+| **Online = true**  | Attributes computed in stream        | Attributes computed through the Batch Engine and materialized into Signals             | Table materialized into Signals (if it has a batch source configured) |
 
 
-### Services
+## Services
 A `Service` groups multiple `Views` together, allowing you to retrieve calculated values from all the `Views` in the `Service`. Here's an example:
 
 ```python
@@ -95,7 +92,7 @@ my_service = Service(
 
 ```
 
-### Applying views and services
+## Applying views and services
 
 To begin calculating your `Attributes`, you need to apply the `Views` or `Services` to your `Signals` deployment using the `apply` method:
 
@@ -112,7 +109,27 @@ sp_signals.apply([
 Once applied, the attributes within these Views and Services will be calculated.
 
 
-### Retrieving calculated values
+## Stream source
+
+When you apply a `View`, a stream source is automatically created. This source calculates the attributes defined in the `View` in real-time.
+
+Here's an example:
+```python
+view = View(
+    name="view",
+    version=1,
+    entity=domain_sessionid,
+    attributes=[page_view_count],
+    owner="user@company.com",
+)
+
+sp_signals.apply([view]) #Stream Source created
+```
+
+Once applied, the stream source begins calculating the attributes in real-time.
+
+
+## Retrieving calculated values
 
 To access the calculated values, use the `get_online_attributes` method. Here's an example:
 
@@ -130,4 +147,3 @@ print(calculated_values)
 :::warning
 **Note:** While you can filter on specific app_ids during testing, both the streaming and batch engines may be configured to process only a subset of relevant app_ids to avoid unnecessary compute. As a result, testing with an arbitrary app_id may not yield expected data if it isn’t included in the configured subset.
 :::
-

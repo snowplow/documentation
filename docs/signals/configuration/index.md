@@ -4,6 +4,22 @@ sidebar_position: 1
 sidebar_label: "Configuration"
 ---
 
-TODO
+By default, Signals calculates attributes in real time, in stream. Stream attributes are ideal for real-time use cases such as tracking the latest video a user played, or the number of page views in a session.
 
-link to Signals tutorials here
+Use the Python SDK within a Jupyter notebook to define the attributes you want to calculate, as well as the entities that the attributes relate to. Group them together into a view, and apply this configuration to Signals.
+
+## Stream volume limit
+
+Attributes are configured based on one or more Snowplow events. For stream attributes, calculation is limited to the most recent 100 instances of the specified event(s).
+
+For example, you could configure a User entity with a `latest_video_played` stream attribute based on the Snowplow media `play_event` event. The 100 event volume window isn't a problem here, as the calculation is always updated with the latest `play_event` for that user. Conversely, for aggregated attributes based on common event types such as page views, the 100 event limit might limit the analytical accuracy.
+
+For these attributes or for analyzing user behavior over longer periods, configuring a batch (warehouse) source is a better fit.
+
+## Batch attributes
+
+To configure attributes based on historical data, see [Batch attributes](/docs/signals/configuration/batch-attributes/index.md). Batch attributes are suitable for longer-term metrics such as a user's purchase history or average session length.
+
+## Example use cases TODO
+
+link to Signals tutorials here ADD LINKs

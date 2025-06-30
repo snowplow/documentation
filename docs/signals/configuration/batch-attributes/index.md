@@ -1,7 +1,6 @@
 ---
-title: "Batch Sources"
-sidebar_position: 30
-sidebar_label: "Batch Sources"
+title: "Batch attributes"
+sidebar_position: 50
 ---
 
 In addition to stream sources, Signals allows you to create attributes based on data stored in your warehouse. Batch sources are ideal for metrics calculated over longer periods of time, such as:
@@ -12,7 +11,7 @@ In addition to stream sources, Signals allows you to create attributes based on 
 
 Batch sources can be defined in two ways:
 
-1. Using existing tables in your warehouse.  
+1. Using existing tables in your warehouse.
 2. Automatically generating tables via the dbt autogen CLI.
 
 They are used for the Materialization Engine to know from where to sync the data to the Profiles Store.
@@ -96,5 +95,4 @@ sp_signals.apply([view])
 From that point onwards the sync will begin and look for new records to send to the Profiles Store at a given interval (defaults to 5 minutes) based on the `timestamp_field` and the last time the sync ran.
 
 ## Using the Batch Engine
-Batch Sources also need to be defined as part of implementing a Batch Engine use case, where attribute computation is handled automatically. For more information on how to define Batch Sources, check out the [batch engine tutorial](/tutorials/snowplow-batch-engine/materialize-models/)  
-
+Batch Sources also need to be defined as part of implementing a Batch Engine use case, where attribute computation is handled automatically. For more information on how to define Batch Sources, check out the [batch engine tutorial](/tutorials/snowplow-batch-engine/materialize-models/)

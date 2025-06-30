@@ -101,4 +101,4 @@ For setup instructions and configuration examples for different MCP clients, see
 ## Use cases
 
 - [Manage your data structures with snowplow-cli](/docs/data-product-studio/data-structures/manage/cli/index.md)
-- [Set up a GitHub CI/CD pipeline to manage data structures and data products](/tutorials/data-structures-in-git/start)
+- [Set up a GitHub CI/CD pipeline to manage data structures and data products](/tutorials/data-structures-in-git/introduction)

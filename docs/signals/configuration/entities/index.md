@@ -36,13 +36,39 @@ For example, an entity that groups by `app_id` can be defined as:
 ```python
 app_id_entity = Entity(
     name="app_id_entity",
-    key="app_id",
     description="The id for the app"
+    key="app_id",
 )
 ```
 
-TODO full config options
+The table below lists all available arguments for a custom `Entity`:
 
-TODO another example
+| Argument      | Description                                                                                       | Type        | Required? |
+| ------------- | ------------------------------------------------------------------------------------------------- | ----------- | --------- |
+| `name`        | The name of the entity                                                                            | `string`    | ✅         |
+| `description` | The description of the entity                                                                     | `string`    | ❌         |
+| `key`         | The key used to join this entity to an attribute table. If not specified, the `name` will be used | `string`    | ❌         |
+| `owner`       | The owner of the entity, typically the email of the primary maintainer                            | `string`    | ❌         |
+| `ttl`         | The amount of time that attributes for the entity will live in the Profiles Store                 | `timedelta` | ❌         |
+| `tags`        | String key-value pairs of arbitrary metadata                                                      | dictionary  | ❌         |
 
-Custom entities are used in the same way as any of the out-of-the-box entities.
+Here's an extended example using all possible arguments, based on the atomic `platform` property:
+
+```python
+from datetime import timedelta
+
+platform_entity = Entity(
+    name="platform_tracking_entity",
+    description="Entity for analyzing user behavior patterns across different platforms (web, mobile, server-side) to understand cross-platform engagement and optimize user experience",
+    key="platform",
+    owner="analytics-team@snowplow.com",
+    ttl=timedelta(days=365),
+    tags={
+        "category": "platform_analytics",
+        "business_unit": "product",
+        "created_by": "data_engineering_team"
+    }
+)
+```
+
+Custom entities added to views in the same way as any of the out-of-the-box entities.

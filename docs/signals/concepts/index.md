@@ -205,3 +205,7 @@ Interventions can be triggered automatically based on attribute changes, or manu
 For example, you could subscribe to interventions for `domain_userid`, the current `app_id`, the current `page`, and the current `product`. When new interventions are published for any of those, the retrieved contents includes any relevant attribute values, or custom data that you defined. This enables both individual-level and broadcast-level real-time messaging: for example, offering a specific user a personalized message, while also notifying all users on a specific product page that limited stock is selling fast.
 
 Interventions can also perform built-in automatic operations, including updating attribute values.
+
+## Attributes can be set to expire
+
+TODO ttl stuff

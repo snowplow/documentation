@@ -45,14 +45,16 @@ app_id_entity = Entity(
 
 The table below lists all available arguments for a custom `Entity`:
 
-| Argument      | Description                                                                                       | Type        | Required? |
-| ------------- | ------------------------------------------------------------------------------------------------- | ----------- | --------- |
-| `name`        | The name of the entity                                                                            | `string`    | ✅         |
-| `description` | A description of the entity                                                                       | `string`    | ❌         |
-| `key`         | The key used to join this entity to an attribute table. If not specified, the `name` will be used | `string`    | ❌         |
-| `owner`       | The owner of the entity, typically the email of the primary maintainer                            | `string`    | ❌         |
-| `ttl`         | The amount of time that attributes for the entity will live in the Profiles Store                 | `timedelta` | ❌         |
-| `tags`        | String key-value pairs of arbitrary metadata                                                      | dictionary  | ❌         |
+| Argument      | Description                                                                       | Type        | Required? |
+| ------------- | --------------------------------------------------------------------------------- | ----------- | --------- |
+| `name`        | The name of the entity                                                            | `string`    | ✅         |
+| `description` | A description of the entity                                                       | `string`    | ❌         |
+| `key`         | The key used to join this entity to an attribute table                            | `string`    | ❌         |
+| `owner`       | The owner of the entity, typically the email of the primary maintainer            | `string`    | ❌         |
+| `ttl`         | The amount of time that attributes for the entity will live in the Profiles Store | `timedelta` | ❌         |
+| `tags`        | String key-value pairs of arbitrary metadata                                      | dictionary  | ❌         |
+
+If a `key` isn't specified, the `name` will be used.
 
 Here's an extended example using all possible arguments, based on the atomic `platform` property:
 

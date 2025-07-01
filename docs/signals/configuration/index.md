@@ -26,6 +26,8 @@ For these attributes or for analyzing user behavior over longer periods, configu
 
 To configure attributes based on historical data, see [Batch calculations](/docs/signals/configuration/batch-calculations/index.md). Batch attributes are suitable for longer-term metrics such as a user's purchase history or average session length.
 
+TODO how does it work if one source has batch and stream attributes?
+
 ## Example use cases TODO
 
 link to Signals tutorials here ADD LINKs

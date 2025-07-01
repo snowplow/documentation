@@ -12,9 +12,11 @@ Every view has a version number. If you change the attributes of a view, increas
 
 Signals provides functionality for separating attribute definition from calculation. This allows you to set up your attributes and business logic before putting them into production. The options are different depending on whether the view is for stream or batch attributes.
 
-To configure a table for a batch source, you may choose to set up a view using that source without defining any attributes initially. This ensures that the table is ready and tested for adding and calculating attributes. Read more about configuring batch attributes and views in the [Batch calculations](/docs/signals/configuration/batch-calculations/index.md) section.
+To configure a table for batch attributes, you may choose to set up a view using that source without defining any attributes initially. This ensures that the table is ready and tested for adding and calculating attributes. Read more about configuring batch attributes and views in the [Batch calculations](/docs/signals/configuration/batch-calculations/index.md) section.
 
-Deciding how to set the `online` and `offline` view configuration options:
+Deciding when to calculate and materialize the attributes using the `online` and `offline` view configuration options:
+
+TODO how does this work with existing tables vs new tables?
 
 ```mermaid
 flowchart TD

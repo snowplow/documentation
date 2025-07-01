@@ -96,6 +96,29 @@ Attribute values can be updated in multiple ways, depending how they're configur
 
 Attributes can be defined precisely. For example, an attribute could be calculated from one event type only, or based on values in defined event fields.
 
+### TODO example batch attributes
+
+Syntactically speaking, defining batch and stream attributes work the same way. For a general overview of how to do that please refer to the [attributes](/docs/signals/configuration/attributes/index.md) section.
+
+There are 4 main types of attributes that you may likely want to define for batch processing:
+1. `Time Windowed Attributes`: Actions that happened in the `last_x_number of days`. Period needs to be defined as timedelta in days.
+
+2. `Lifetime Attributes`: Calculated over all the available data for the entity. Period needs to be left as None.
+
+3. `First Touch Attributes`: Events (or properties) that happened for the first time for a given entity. Period needs to be left as None.
+
+4. `Last Touch Attributes`: Events (or properties) that happened for the last time for a given entity. Period needs to be left as None.
+
+We have illustrated each of these 4 types with an example block below.
+
+1. `products_added_to_cart_last_7_days`: This attribute calculates the number of add to cart ecommerce events in the last 7 days
+
+2. `total_product_price_clv`: This attribute is calculated across the customer lifetime
+
+3. `first_mkt_source`: This attribute takes the first page_view event and reads the mkt_source property for a specific entity (e.g. domain_userid)
+
+4. `last_device_class`: This attribute takes the first page_view event and extracts and retrieves the yauaa deviceClass property for a specific entity
+
 ### Many-many relationship between entities and attributes
 
 A single entity will very likely have multiple attributes. For example, you could define a user entity with attributes for the number of page views, the last product they viewed, and their previous purchases.

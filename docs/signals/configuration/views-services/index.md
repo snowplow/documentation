@@ -125,7 +125,7 @@ To understand what the output of a view will look like, use the Signals `test` m
 
 ```python
 sp_signals = Signals(
-        {{ config }} # See the Configuration section for more on this
+        {{ config }} # See the main Configuration section for more on this
     )
 
 test_data = sp_signals.test(

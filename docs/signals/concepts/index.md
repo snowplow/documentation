@@ -224,4 +224,8 @@ Interventions can also perform built-in automatic operations, including updating
 
 ## Attributes can be set to expire
 
-Some attributes will only be relevant for a certain amount of time. To avoid stale attributes staying in your Profiles Store forever, you can configure TTL lifetimes for entities and views. When the lifespan expires, any attributes defined for this entity or view will be deleted.
+Some attributes will only be relevant for a certain amount of time, and eventually stop being updated.
+
+To avoid stale attributes staying in your Profiles Store forever, you can configure TTL lifetimes for entities and views. When none of the attributes for an entity or view have been updated for the defined lifespan, the entity or view expires. Any attribute values for this entity or view will be deleted: fetching them will return `None` values.
+
+If Signals then processes a new event that calculates the attribute again, or materializes the attribute from the warehouse again, the expiration timer is reset.

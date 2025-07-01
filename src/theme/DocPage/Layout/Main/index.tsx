@@ -218,11 +218,12 @@ const TutorialDocPageLayoutMobile: FC<{
 }> = ({ children, meta, steps, activeStep, setActiveStep, next, prev }) => {
   return (
     <Grid
-      sx={{ m: 2, mt: 0 }}
+      sx={{ m: 0, mt: 0 }}
       rowSpacing={2}
       container
       direction="column"
       wrap="nowrap"
+      className='p-4'
     >
       <Grid item>
         <Header title={meta?.title || ''} label={meta?.label || ''} />
@@ -235,8 +236,11 @@ const TutorialDocPageLayoutMobile: FC<{
           isMobile
         />
       </Grid>
-      <Grid item>{children}</Grid>
+      
+      <Grid item>{children}
       <Paginators next={next} prev={prev} setActiveStep={setActiveStep} />
+      </Grid>
+      
     </Grid>
   )
 }
@@ -251,7 +255,7 @@ const TutorialDocPageLayoutDesktop: FC<{
   prev: Step | null
 }> = ({ children, meta, steps, activeStep, setActiveStep, next, prev }) => {
   return (
-    <Grid container sx={{ m: 3, width: '100%' }} columnSpacing={1}>
+    <Grid container sx={{width: '100%' }} columnSpacing={1} className='px-4 py-8'>
       <Grid container item direction="column">
         <Grid item>
           <Header title={meta?.title || ''} label={meta?.label || ''} />
@@ -267,8 +271,9 @@ const TutorialDocPageLayoutDesktop: FC<{
           <Grid container item xs={9}>
             <Grid sx={{ width: '100%' }} item>
               {children}
+              <Paginators className="max-w-[75%]" next={next} prev={prev} setActiveStep={setActiveStep} />
             </Grid>
-            <Paginators next={next} prev={prev} setActiveStep={setActiveStep} />
+            
           </Grid>
         </Grid>
       </Grid>

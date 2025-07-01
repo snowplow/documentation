@@ -36,7 +36,7 @@ The components in bold are versioned.
 
 ## Entities define the attribute context
 
-An entity can be anything with an "identifier" that you capture in the Snowplow [atomic event properties](/docs/fundamentals/canonical-event/index.md).
+An entity can be anything with an "identifier" that you capture in a Snowplow event. TODO actually this isn't true yet? only supporting atomic properties?
 
 This diagram shows some entities that could be useful for analysis:
 
@@ -57,11 +57,11 @@ flowchart TD
 
 Signals comes with predefined entities for user, device, and session. These are defined based on the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) in all Snowplow events.
 
-| Entity  | Out-of-the-box identifier           |
-| ------- | ----------------------------------- |
-| User    | `user_id`                           |
-| Device  | `domain_userid` and`network_userid` |
-| Session | `domain_sessionid`                  |
+| Entity  | Out-of-the-box identifier            |
+| ------- | ------------------------------------ |
+| User    | `user_id`                            |
+| Device  | `domain_userid` and `network_userid` |
+| Session | `domain_sessionid`                   |
 
 You can define any entities you like, and expand this to broader concepts.
 
@@ -224,4 +224,4 @@ Interventions can also perform built-in automatic operations, including updating
 
 ## Attributes can be set to expire
 
-TODO ttl stuff
+Some attributes will only be relevant for a certain amount of time. To avoid stale attributes staying in your Profiles Store forever, you can configure TTL lifetimes for entities and views. When the lifespan expires, any attributes defined for this entity or view will be deleted.

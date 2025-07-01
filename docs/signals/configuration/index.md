@@ -8,6 +8,8 @@ By default, Signals calculates attributes in real time, in stream. Stream attrib
 
 Use the Python SDK within a Jupyter notebook to define the attributes you want to calculate, as well as the entities that the attributes relate to. Group them together into a view, and apply this configuration to Signals.
 
+All configuration is defined using the Signals Python SDK.
+
 ## Set up the SDK
 
 TODO notebook setup

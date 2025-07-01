@@ -184,6 +184,14 @@ This service could be imagined like this as a table:
 
 Retrieve calculated attributes in your application using one of the Signals SDKs, or manually using the Signals API.
 
+## Warehouse attributes can have any origin
+
+Signals, as you might expect for a Snowplow product, is very flexible.
+
+TODO
+decoupled
+
+
 ## Interventions trigger actions
 
 Interventions are a way to trigger actions in your application, such as in-app messages, discounts, or personalized journeys. They're calculated on top of changes in attribute values.

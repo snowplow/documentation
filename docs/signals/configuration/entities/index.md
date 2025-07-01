@@ -41,12 +41,14 @@ app_id_entity = Entity(
 )
 ```
 
+## Options
+
 The table below lists all available arguments for a custom `Entity`:
 
 | Argument      | Description                                                                                       | Type        | Required? |
 | ------------- | ------------------------------------------------------------------------------------------------- | ----------- | --------- |
 | `name`        | The name of the entity                                                                            | `string`    | ✅         |
-| `description` | The description of the entity                                                                     | `string`    | ❌         |
+| `description` | A description of the entity                                                                       | `string`    | ❌         |
 | `key`         | The key used to join this entity to an attribute table. If not specified, the `name` will be used | `string`    | ❌         |
 | `owner`       | The owner of the entity, typically the email of the primary maintainer                            | `string`    | ❌         |
 | `ttl`         | The amount of time that attributes for the entity will live in the Profiles Store                 | `timedelta` | ❌         |

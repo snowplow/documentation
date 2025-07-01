@@ -16,7 +16,7 @@ Attribute calculation starts when the definitions are applied, and aren't backda
 
 All configuration is defined using the Signals Python SDK.
 
-## Minimal configuration example
+## Minimal example
 
 This is the minimum configuration needed to create an attribute:
 
@@ -39,7 +39,7 @@ my_attribute = Attribute(
 
 Once applied and active, this attribute definition will trigger every time Signals processes an event with the schema [`iglu:com.snowplowanalytics.snowplow/button_click/jsonschema/1-0-0`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/button_click/jsonschema/1-0-0). Starting from 0, the stored attribute will be an integer value that increases by 1 with every `button_click` event.
 
-## Configuration options
+## Options
 
 The table below lists all available arguments for an `Attribute`:
 
@@ -166,7 +166,7 @@ criteria=Criteria(
 
 The `page_url` property is from the built-in [atomic event properties](/docs/fundamentals/canonical-event/index.md) in all Snowplow events.
 
-## Extended configuration examples
+## Extended examples
 
 These examples use all the available configuration options.
 

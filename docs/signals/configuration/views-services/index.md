@@ -39,7 +39,7 @@ flowchart TD
     J -->|No| N[Online = false, Offline = true<br/>Table pre-computed without Batch Engine<br/>and only in the warehouse]
 ```
 
-## Minimal view example
+## Minimal stream view example
 
 You can define a `View` by passing in a list of previously defined attributes. Here's a minimal example:
 

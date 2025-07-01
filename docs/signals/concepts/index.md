@@ -36,7 +36,7 @@ The components in bold are versioned.
 
 ## Entities define the attribute context
 
-An entity can be anything with an "identifier" that you can capture in a Snowplow event.
+An entity can be anything with an "identifier" that you capture in the Snowplow [atomic event properties](/docs/fundamentals/canonical-event/index.md).
 
 This diagram shows some entities that could be useful for analysis:
 
@@ -96,9 +96,11 @@ Attribute values can be updated in multiple ways, depending how they're configur
 
 Attributes can be defined precisely. For example, an attribute could be calculated from one event type only, or based on values in defined event fields.
 
-### Logical relationship between entities and attributes
+### Many-many relationship between entities and attributes
 
-A single entity will very likely have multiple attributes. For example, you could define a user entity, with attributes for the number of page views, the last product they viewed, and their previous purchases.
+A single entity will very likely have multiple attributes. For example, you could define a user entity with attributes for the number of page views, the last product they viewed, and their previous purchases.
+
+Imagined like this:
 
 ```python
 user.num_page_views_in_last_7_days
@@ -108,15 +110,17 @@ user.previous_purchases
 
 A single attribute definition could also be associated with multiple entities. For example, an attribute that counts page views might be relevant for user, page, and product entities. Attributes for different entities are distinct, even if they use the same name and definition.
 
+Imagined like this:
+
 ```python
 user.num_page_views_in_last_7_days
 page.num_page_views_in_last_7_days
 product.num_page_views_in_last_7_days
 ```
 
-## Attributes are grouped for ease of management
+## Attributes can be grouped for ease of management
 
-### Views
+### Views group attributes
 
 Configure attributes by grouping them into views. Each view is associated with a specific entity, source, version, and owner. It also has other optional metadata.
 
@@ -145,7 +149,7 @@ This view could be imagined like this as a table once the attributes are calcula
 
 You can use views individually in your application to retrieve attributes, or combine them into services.
 
-### Services
+### Services group views
 
 Services allow you to retrieve attributes in bulk from multiple views. One service can combine views with different sources, as long as they share the same entity.
 
@@ -188,9 +192,13 @@ Retrieve calculated attributes in your application using one of the Signals SDKs
 
 Signals, as you might expect for a Snowplow product, is very flexible.
 
-TODO
-decoupled
+Real-time attribute calculation uses the Snowplow event stream, and therefore ingests only Snowplow events. For historical warehouse attributes, you can import values from any table—whether created by Signals or not.
 
+When defining batch attributes, it's possible to apply configurations that just create a table without attributes, or calculate attributes in a table without materializing them to the Profiles Store. You could also define views with fields instead of attributes, for using pre-existing tables with pre-calculated attributes.
+
+For stream attributes, you can choose to configure and apply views that don't calculate their attribute values.
+
+This means that configuration, calculation, materialization, and retrieval are fully decoupled.
 
 ## Interventions trigger actions
 

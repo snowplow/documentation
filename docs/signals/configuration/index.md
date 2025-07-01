@@ -22,7 +22,7 @@ For these attributes or for analyzing user behavior over longer periods, configu
 
 ## Batch attributes
 
-To configure attributes based on historical data, see [Batch attributes](/docs/signals/configuration/batch-attributes/index.md). Batch attributes are suitable for longer-term metrics such as a user's purchase history or average session length.
+To configure attributes based on historical data, see [Batch calculations](/docs/signals/configuration/batch-calculations/index.md). Batch attributes are suitable for longer-term metrics such as a user's purchase history or average session length.
 
 ## Example use cases TODO
 

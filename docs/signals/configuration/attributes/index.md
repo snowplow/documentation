@@ -4,7 +4,7 @@ sidebar_position: 20
 sidebar_label: "Attributes"
 ---
 
-Attributes are the building blocks of Snowplow Signals. They represent specific facts about user behavior, and are calculated based on events in your Snowplow pipeline.
+Attributes provide the core Signals functionality. Theyrepresent specific facts about user behavior, and are calculated based on events in your Snowplow pipeline.
 
 To configure an attribute, you will need to set:
 * A name, ideally one that describes the attribute
@@ -56,7 +56,6 @@ The table below lists all available arguments for an `Attribute`:
 | `default_value` | The default value to use if the aggregation returns no results. If not set, the default value is automatically assigned based on the `type`. |                                                                                                                                                                                                                     | ❌         |
 | `tags`          | Metadata for the attribute, as a dictionary                                                                                                  |                                                                                                                                                                                                                     | ❌         |
 
-
 ### Specifying events
 
 The `events` list describes the types of events that the attribute is calculated from. They're references to Snowplow events that exist in your Snowplow account, based on event schemas.
@@ -71,22 +70,22 @@ An `Event` accepts the following parameters:
 
 All of these parameters are optional, and work like wildcards.
 
-For example, to calculate an attribute for all page views, the `Event` would be:
-
-```python
-event=Event(
-    name="page_view",
-    vendor="com.snowplowanalytics.snowplow",
-    version="1-0-0"
-)
-```
-
-To calculate an attribute for all versions of a data structure with the schema `iglu:com.snowplowanalytics.snowplow/destination/jsonschema/{{version}}`:
+To calculate an attribute for a data structure with the schema `iglu:com.snowplowanalytics.snowplow.media/destination/jsonschema/2-0-2`, the `Event` would be:
 
 ```python
 event=Event(
     name="destination",
-    vendor="com.snowplowanalytics.snowplow",
+    vendor="com.snowplowanalytics.snowplow.media",
+    version="2-0-2"
+)
+```
+
+To calculate an attribute for all versions of that data structure:
+
+```python
+event=Event(
+    name="destination",
+    vendor="com.snowplowanalytics.snowplow.media",
 )
 ```
 
@@ -98,6 +97,33 @@ event=Event(
 )
 ```
 
+#### Built-in events
+
+Use the following details for Snowplow page view, page ping, or structured events:
+
+```python
+# Page view event
+sp_page_view=Event(
+    name="page_view",
+    vendor="com.snowplowanalytics.snowplow",
+    version="1-0-0"
+)
+
+# Page ping event
+sp_page_ping=Event(
+    name="page_ping",
+    vendor="com.snowplowanalytics.snowplow",
+    version="1-0-0"
+)
+
+# Structured event
+sp_structured=Event(
+    name="event",
+    vendor="com.google.analytics",
+    version="1-0-0"
+)
+```
+
 ### Filtering events by specific values
 
 The `criteria` list filters the events used to calculate an attribute.
@@ -106,10 +132,10 @@ It allows you to be specific about which subsets of events should trigger attrib
 
 The `criteria` list takes a `Criteria` type, with possible arguments:
 
-| Argument | Description                                                                            | Type                  |
-| -------- | -------------------------------------------------------------------------------------- | --------------------- |
-| `all`    | Conditions used to filter the events, where all conditions must be met                 | `list` of `Criterion` |
-| `any`    | Conditions used to filter the events, where at least one of the conditions must be met | `list` of `Criterion` |
+| Argument | Description                                                                            | Type                |
+| -------- | -------------------------------------------------------------------------------------- | ------------------- |
+| `all`    | Conditions used to filter the events, where all conditions must be met                 | list of `Criterion` |
+| `any`    | Conditions used to filter the events, where at least one of the conditions must be met | list of `Criterion` |
 
 A `Criterion` specifies the individual filter conditions for an attribute, using the following properties:
 
@@ -137,6 +163,8 @@ criteria=Criteria(
     ]
 )
 ```
+
+The `page_url` property is from the built-in [atomic event properties](/docs/fundamentals/canonical-event/index.md) in all Snowplow events.
 
 ## Extended configuration examples
 
@@ -185,9 +213,45 @@ The attribute will be calculated over the last 7 days as a rolling window.
 
 ### Example 2
 
-Here's a new example showing how to use the `property` option to access values in any part of a tracked event.
+Here's a new example showing how to use the `property` option to access one of the [atomic event properties](/docs/fundamentals/canonical-event/index.md), in this case `mkt_medium`.
 
-In this example the attribute is based on product prices, tracked within the product entity in an ecommerce transaction event:
+In this example the attribute is calculated from either a page view or a custom event:
+
+```python
+from snowplow_signals import Attribute, Event
+
+my_new_attribute = Attribute(
+    name="referrer_source",
+    description="Referrer",
+    type="string",
+    events=[
+        Event(
+            name="page_view",
+            vendor="com.snowplowanalytics.snowplow",
+            version="1-0-0"
+        ),
+        Event(
+            name="login_landing",
+            vendor="com.business.example",
+            version="1-0-0"
+        )
+    ],
+    aggregation="last"
+    criteria=None,
+    property="mkt_medium",
+    period=None,
+    default_value=None
+    tags={},
+)
+```
+
+This attribute will be updated to the most recent referrer URL every time a page view or `login_landing` event is processed.
+
+### Example 3
+
+This example shows how to use the `property` option to access values in any part of a tracked event.
+
+Tthe attribute is based on product prices, tracked within the product entity in an ecommerce transaction event:
 
 ```python
 from snowplow_signals import Attribute, Event, Criteria, Criterion

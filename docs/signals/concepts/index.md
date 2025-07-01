@@ -6,7 +6,7 @@ sidebar_label: "Concepts"
 
 Signals introduces a new set of data governance concepts to Snowplow. As with schemas for Snowplow event data, Signals components are strictly defined, structured, and versioned.
 
-The fundamental Signals building block is the `Entity`. The Signals components attributes and interventions are defined relative to entities. Attributes for a given entity are grouped together into views and services, for ease of management and deployment.
+The fundamental Signals component is the `Entity`. The Signals components attributes and interventions are defined relative to entities. Attributes for a given entity are grouped together into views and services, for ease of management and deployment.
 
 ```mermaid
 flowchart TD
@@ -34,7 +34,7 @@ flowchart TD
 
 The components in bold are versioned.
 
-## Entities
+## Entities define the attribute context
 
 An entity can be anything with an "identifier" that you can capture in a Snowplow event.
 
@@ -74,7 +74,7 @@ You can define any entities you like, and expand this to broader concepts.
 | Content category | from custom entity                                                                                        |
 | Video game level | from custom entity                                                                                        |
 
-## Attributes
+## Attributes store calculated values
 
 After defining an entity, you can start to calculate attributes for it. An attribute defines a specific fact about behavior relating to an entity.
 
@@ -95,6 +95,26 @@ Attribute values can be updated in multiple ways, depending how they're configur
 * Manually via Signals API
 
 Attributes can be defined precisely. For example, an attribute could be calculated from one event type only, or based on values in defined event fields.
+
+### Logical relationship between entities and attributes
+
+A single entity will very likely have multiple attributes. For example, you could define a user entity, with attributes for the number of page views, the last product they viewed, and their previous purchases.
+
+```python
+user.num_page_views_in_last_7_days
+user.last_product_viewed
+user.previous_purchases
+```
+
+A single attribute definition could also be associated with multiple entities. For example, an attribute that counts page views might be relevant for user, page, and product entities. Attributes for different entities are distinct, even if they use the same name and definition.
+
+```python
+user.num_page_views_in_last_7_days
+page.num_page_views_in_last_7_days
+product.num_page_views_in_last_7_days
+```
+
+## Attributes are grouped for ease of management
 
 ### Views
 
@@ -164,7 +184,7 @@ This service could be imagined like this as a table:
 
 Retrieve calculated attributes in your application using one of the Signals SDKs, or manually using the Signals API.
 
-## Interventions
+## Interventions trigger actions
 
 Interventions are a way to trigger actions in your application, such as in-app messages, discounts, or personalized journeys. They're calculated on top of changes in attribute values.
 

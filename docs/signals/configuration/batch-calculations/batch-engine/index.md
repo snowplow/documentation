@@ -1,8 +1,8 @@
 ---
-title: "Batch Engine"
+title: "Creating new batch attributes using the batch engine"
 sidebar_position: 50
 description: "In depth explanation on how the Batch Engine works."
-sidebar_label: "Batch Engine"
+sidebar_label: "Creating new attributes"
 ---
 
 While many `Attributes` can be computed in stream, there are cases where they should be created "offline" in the warehouse. We call them `Batch Attributes`.
@@ -20,119 +20,6 @@ You may already have tables in your warehouse that contain such computed values,
 
 ## How it works
 What you need to do first is to define a set of `Attributes` and register them as a `View` through the Python Signals SDK. Then you can use the optional CLI functionality of the SDK to generate a dbt project which will ultimately produce a view-specific attribute table. Then all that's left is to materialize the table, which will mean that Signals will regularly fetch the values from your warehouse table and sends it through the Profiles API.
-
-## Defining batch attributes
-Syntactically speaking, defining batch and stream attributes work the same way. For a general overview of how to do that please refer to the [attributes](/docs/signals/configuration/attributes/index.md) section.
-
-There are 4 main types of attributes that you may likely want to define for batch processing:
-1. `Time Windowed Attributes`: Actions that happened in the `last_x_number of days`. Period needs to be defined as timedelta in days.
-
-2. `Lifetime Attributes`: Calculated over all the available data for the entity. Period needs to be left as None.
-
-3. `First Touch Attributes`: Events (or properties) that happened for the first time for a given entity. Period needs to be left as None.
-
-4. `Last Touch Attributes`: Events (or properties) that happened for the last time for a given entity. Period needs to be left as None.
-
-We have illustrated each of these 4 types with an example block below.
-
-1. `products_added_to_cart_last_7_days`: This attribute calculates the number of add to cart ecommerce events in the last 7 days
-
-2. `total_product_price_clv`: This attribute is calculated across the customer lifetime
-
-3. `first_mkt_source`: This attribute takes the first page_view event and reads the mkt_source property for a specific entity (e.g. domain_userid)
-
-4. `last_device_class`: This attribute takes the first page_view event and extracts and retrieves the yauaa deviceClass property for a specific entity
-
-<details>
-<summary>Example batch attribute definitions</summary>
-
-Each block creates a single attribute definition including the logic how it should be calculated (its filters and aggregation).
-
-```python
-from snowplow_signals import (
-    Attribute,
-    Criteria,
-    Criterion,
-    Event,
-)
-from datetime import timedelta
-
-products_added_to_cart_last_7_days = Attribute(
-    name="products_added_to_cart_last_7_days",
-    type="string_list",
-    events=[
-        Event(
-            vendor="com.snowplowanalytics.snowplow",
-            name="snowplow_ecommerce_action",
-            version="1-0-2",
-        )
-    ],
-    aggregation="unique_list",
-    property="contexts_com_snowplowanalytics_snowplow_ecommerce_product_1[0].name",
-    criteria=Criteria(
-        all=[
-            Criterion(
-                property="unstruct_event_com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1:type",
-                operator="=",
-                value="add_to_cart",
-            ),
-        ],
-    ),
-    period=timedelta(days=7),
-)
-
-total_product_price_clv = Attribute(
-    name="total_product_price_clv",
-    type="float",
-    events=[
-        Event(
-            vendor="com.snowplowanalytics.snowplow",
-            name="snowplow_ecommerce_action",
-            version="1-0-2",
-        )
-    ],
-    aggregation="sum",
-    property="contexts_com_snowplowanalytics_snowplow_ecommerce_product_1[0].price",
-    criteria=Criteria(
-        all=[
-            Criterion(
-                property="unstruct_event_com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1:type",
-                operator="=",
-                value="add_to_cart"
-            )
-        ]
-    ),
-)
-
-first_mkt_source = Attribute(
-    name="first_mkt_source",
-    type="string",
-    events=[
-        Event(
-            vendor="com.snowplowanalytics.snowplow",
-            name="page_view",
-            version="1-0-0",
-        )
-    ],
-    aggregation="first",
-    property="mkt_source",
-)
-
-last_device_class = Attribute(
-    name="last_device_class",
-    type="string",
-    events=[
-        Event(
-            vendor="com.snowplowanalytics.snowplow",
-            name="page_view",
-            version="1-0-0",
-        )
-    ],
-    aggregation="last",
-    property="contexts_nl_basjes_yauaa_context_1[0]:deviceClass",
-)
-```
-</details>
 
 ## Defining a batch view
 The key difference between a standard view and one meant for batch processing is the `offline=True` parameter. This flag indicates that the view’s attributes are computed in the data warehouse.
@@ -169,7 +56,7 @@ For those familiar with existing Snowplow dbt packages, it is worth to note that
 There is a second layer of incremental processing logic dictated by the `daily_aggregation_manifest` table. After the `filtered_events` table is created or updated, the `daily_aggregates` table gets updated with the help of this manifest. It is needed due to late arriving data, which may mean that some days will need to be reprocessed as a whole. For optimization purposes there are variables to fine-tune how this works such as the `snowplow__reprocess_days` and the `snowplow__min_rows_to_process`.
 
 Finally, the `Attributes` table is generated which is a drop and recompute table, fully updated each time an incremental update runs. This is cost-effective as the data is already pre-aggregated on a daily level.
-![](../../images/batch_engine_data_models.png)
+![](../../../images/batch_engine_data_models.png)
 
 ## Variables
 

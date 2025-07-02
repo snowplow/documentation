@@ -10,14 +10,14 @@ The `Materialization Engine` in Signals allows you to sync attributes from the w
 ## Prerequisites
 - have the attributes table ready in the warehouse
 - have a [View](/docs/signals/configuration/views-services/index.md) defined together with Attributes with the `offline` parameter set to `True`
-- have the [BatchSource](/docs/signals/configuration/sources/batch.md) registered in the View
+- have the BatchSource registered in the View
 
 ## Enabling Materialization
-The process of enabling Materialization depends on which kind of batch attributes you would like to sync: 
+The process of enabling Materialization depends on which kind of batch attributes you would like to sync:
 
 ### 1. Existing warehouse tables containing attributes (including non-Snowplow data):
 
-Set `online=True` and apply the view. More details on this: [here](/docs/signals/configuration/sources/batch.md#start-materialization) 
+Set `online=True` and apply the view.
 
 ### 2. Attributes you would like the Batch Engine to compute for you:
 
@@ -30,7 +30,7 @@ snowplow-batch-autogen materialize \
   --verbose
 ```
 
-You can follow the [batch engine tutorial](/tutorials/snowplow-batch-engine/materialize-models/) for a step-by-step guide. 
+You can follow the [batch engine tutorial](/tutorials/snowplow-batch-engine/materialize-models/) for a step-by-step guide.
 
 This will take care of the same steps under the hood as you would do for attributes computed by yourself in the warehouse.
 
@@ -38,4 +38,3 @@ Once materialization is enabled, syncs begin at a fixed interval (default: every
 
 ## Supported Warehouses
 Currently only `Snowflake` is supported. `BigQuery` support is coming soon.
-

@@ -10,7 +10,7 @@ In addition to stream sources, Signals allows you to create attributes based on 
 
 You can use existing attributes that are already in your warehouse, or use the Signals batch engine to calculate new attributes in a new table.
 
-To use historical, warehouse attributes in your real-time use cases, you will need to sync the data to the Profiles Store, using the materialization engine.
+To use historical, warehouse attributes in your real-time use cases, you will need to sync the data to the Profiles Store. Signals includes a materialization engine to do this.
 
 :::note Warehouse support
 Only Snowflake is supported currently.
@@ -20,12 +20,11 @@ Only Snowflake is supported currently.
 
 Signals is configured slightly differently depending if you're using existing tables or creating new ones.
 
-| Signals component      | Required for existing attributes | Required for creating new attributes |
-| ---------------------- | -------------------------------- | ------------------------------------ |
-| `BatchSource`          | ✅                                | ❌                                    |
-| `View`                 | with `fields` ✅                  | with `attributes` ✅                  |
-| Batch engine           | ❌                                | ✅                                    |
-| Materialization engine | ✅                                | ✅                                    |
+| Signals component | Required for existing attributes | Required for creating new attributes |
+| ----------------- | -------------------------------- | ------------------------------------ |
+| `BatchSource`     | ✅                                | ❌                                    |
+| `View`            | with `fields` ✅                  | with `attributes` ✅                  |
+| Batch engine      | ❌                                | ✅                                    |
 
 To create new attribute tables, the batch engine will help you set up the required dbt projects and models.
 
@@ -186,6 +185,6 @@ The materialization engine is a cron job that sends warehouse attributes to the 
 
 The engine will be enabled when you either:
 * Apply a view for an existing table, with `online=True`
-* Run the batch engine `materialize` command
+* Run the batch engine `materialize` command after creating new attribute tables
 
 Once enabled, syncs begin at a fixed interval. By default, this is every 5 minutes. Only the records that have changed since the last sync are sent to the Profiles Store.

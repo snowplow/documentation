@@ -3,7 +3,7 @@ title: "Calculate in real-time"
 sidebar_position: 49
 ---
 
-To calculate attributes in real time, apply a default (without specified `batch_source`) view or service configuration to Signals.
+To calculate attributes in real time, apply a default (without specified `batch_source`) [view or service](/docs/signals/configuration/views-services/index.md) configuration to Signals.
 
 Apply the configuration using the `apply` method:
 

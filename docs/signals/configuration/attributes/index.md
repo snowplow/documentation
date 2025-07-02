@@ -68,37 +68,6 @@ An `Event` accepts the following parameters:
 | `vendor`  | `event_vendor` column in `atomic.events` table  | `string` |
 | `version` | `event_version` column in `atomic.events` table | `string` |
 
-All of these parameters are optional, and work like wildcards.
-
-To calculate an attribute for a data structure with the schema `iglu:com.snowplowanalytics.snowplow.media/destination/jsonschema/2-0-2`, the `Event` would be:
-
-```python
-event=Event(
-    name="destination",
-    vendor="com.snowplowanalytics.snowplow.media",
-    version="2-0-2"
-)
-```
-
-To calculate an attribute for all versions of that data structure:
-
-```python
-event=Event(
-    name="destination",
-    vendor="com.snowplowanalytics.snowplow.media",
-)
-```
-
-To calculate an attribute for all events for a specific vendor:
-
-```python
-event=Event(
-    vendor="com.snowplowanalytics.snowplow.media",
-)
-```
-
-#### Built-in events
-
 Use the following details for Snowplow page view, page ping, or structured events:
 
 ```python
@@ -121,6 +90,35 @@ sp_structured=Event(
     name="event",
     vendor="com.google.analytics",
     version="1-0-0"
+)
+```
+
+All of these parameters are optional, and work like wildcards.
+
+To calculate an attribute for version 2-0-2 only of an event data structure with the schema `iglu:com.snowplowanalytics.snowplow.media/destination/jsonschema/2-0-2`, the `Event` would be:
+
+```python
+event=Event(
+    name="destination",
+    vendor="com.snowplowanalytics.snowplow.media",
+    version="2-0-2"
+)
+```
+
+To calculate an attribute for all versions of that event:
+
+```python
+event=Event(
+    name="destination",
+    vendor="com.snowplowanalytics.snowplow.media",
+)
+```
+
+To calculate an attribute for all events for a specific vendor:
+
+```python
+event=Event(
+    vendor="com.snowplowanalytics.snowplow.media",
 )
 ```
 
@@ -284,4 +282,4 @@ my_new_attribute = Attribute(
 )
 ```
 
-This attribute will be calculated for Snowplow ecommerce events with schema [`com.snowplowanalytics.snowplow.ecommerce/snowplow_ecommerce_action/jsonschema/1-0-2`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.ecommerce/snowplow_ecommerce_action/jsonschema/1-0-2) and the `type` property `transaction`. The products in a transaction are stored as [product entities](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.ecommerce/product/jsonschema/1-0-0) in the `contexts_com_snowplowanalytics_snowplow_ecommerce_product_1` array. The `price` property of the first product is used to calculate the attribute.
+This attribute will be calculated for Snowplow ecommerce events with schema [`iglu:com.snowplowanalytics.snowplow.ecommerce/snowplow_ecommerce_action/jsonschema/1-0-2`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.ecommerce/snowplow_ecommerce_action/jsonschema/1-0-2) and the `type` property `transaction`. The products in a transaction are stored as [product entities](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.ecommerce/product/jsonschema/1-0-0) in the `contexts_com_snowplowanalytics_snowplow_ecommerce_product_1` array. The `price` property of the first product is used to calculate the attribute.

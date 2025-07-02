@@ -154,6 +154,8 @@ my_service = Service(
 )
 ```
 
+TODO how does it work when one service has batch and stream views?
+
 ### Service options
 
 The table below lists all available arguments for a `Service`

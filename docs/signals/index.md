@@ -106,6 +106,8 @@ Stream attributes are calculated automatically.
 
 When Signals is deployed in your Snowplow BDP pipeline, the event stream is read by the stream engine. All tracked events are inspected. If you've configured Signals to calculate an attribute from a certain type of event, when that event type is received, the engine will extract the attribute data and forward it to the Profiles Store, in real time. If that event type isn't registered as containing attribute data, nothing happens.
 
+Real-time stream flow:
+
 ```mermaid
 flowchart TD
     subgraph Stream[Real-time event stream]
@@ -124,8 +126,21 @@ flowchart TD
     I -->     J[Attribute pushed to<br/>the Profiles Store]
 ```
 
-Batch attributes require some manual configuration and running. Once configured and registered with Signals, the Signals materialization engine/sync service will incrementally check on the table every 5 minutes to calculate attributes, and push them to the Profiles Store. Check out the [batch engine tutorial](/tutorials/snowplow-batch-engine/start/) to learn more.
+Conversely, batch attributes are calculated or pushed to the Profiles Store periodically:
 
+```mermaid
+flowchart TD
+    subgraph Batch[Warehouse]
+        A[Behavioral data events<br/>arrive in the warehouse] --> B[Events are modeled<br/>into tables]
+        B --> D[Signals checks for<br/>new rows in connected tables]
+    end
+
+    D --> E{Are there<br/>new rows?}
+
+    E -->|No| F[Nothing happens]
+
+    E -->|Yes| H[Attributes synced to<br/>the Profiles Store]
+```
 
 ## Example real-time Signals user journey
 

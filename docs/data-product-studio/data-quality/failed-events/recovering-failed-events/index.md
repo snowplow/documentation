@@ -9,7 +9,7 @@ Event recovery ensures you can recover these failed events from the file storage
 
 At its most simple, the recovery process simply runs a script over a set of raw data to 'fix' the issues and then attempts to re-process these events.
 
-There are two phases to a recovery, designing and running.
+There are two phases to a recovery: designing and running.
 
 ## Design
 
@@ -17,9 +17,9 @@ Designing the script that will run and perform the fixes. For Snowplow BDP Enter
 
 A recovery script has two key parts:
 - **Recovery steps**: a failed event is recovered by applying one or more steps to the payload to fix the issue that is causing a failure. These are typically actions to Replace a value, Remove a value, or Cast a value to a new type.
-- **Recovery filters**: filters determine whether your recovery steps will be applied to a specific failed event, events will only be processed if they validate successfully against all filters.
+- **Recovery filters**: filters determine whether your recovery steps will be applied to a specific failed event; events will only be processed if they validate successfully against all filters.
 
-The recovery process crudely process all failed events within a given time period. Within this period you may have had multiple different events failing, for multiple reasons reasons.
+The recovery process crudely process all failed events within a given time period. Within this period you may have had multiple different events failing, for multiple reasons.
 
 You want your recovery steps to apply only to events that need these recovery steps applying, this helps to avoid duplicates or failed recoveries.
 

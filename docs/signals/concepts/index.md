@@ -94,7 +94,7 @@ Attribute values can be updated in multiple ways, depending how they're configur
 * Interventions
 * Manually via Signals API
 
-Attributes can be defined precisely. For example, an attribute could be calculated from one event type only, or based on values in defined event fields.
+Attributes can be defined precisely. For example, an attribute could be calculated from one event type only, or based on the value of a defined event field.
 
 ### TODO example batch attributes
 

@@ -8,7 +8,7 @@ sidebar_custom_props:
     - bdp
 ---
 
-Snowplow Signals is a real-time personalization engine built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in real time.
+Snowplow Signals is a real-time personalization engine for customer intelligence, built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in real time.
 
 Real-time personalization use cases that are unlocked by Signals include:
 * Personalized recommendations
@@ -17,6 +17,7 @@ Real-time personalization use cases that are unlocked by Signals include:
 * Adaptive UIs
 * Dynamic pricing
 * Contextually relevant advertising
+* Paywall optimization
 
 Your Signals infrastructure is deployed by us into the same cloud as your Snowplow BDP pipeline. You can use the Signals APIs and SDKs to first define the data you're interested in, then to retrieve the calculated attributes to alter your customer's experience and behavior.
 
@@ -142,6 +143,6 @@ flowchart TD
     E -->|Yes| H[Attributes synced to<br/>the Profiles Store]
 ```
 
-## Example real-time Signals user journey
+## Example real-time Signals user journey TODO
 
 TODO link to Signals tutorials? description of our sales demo

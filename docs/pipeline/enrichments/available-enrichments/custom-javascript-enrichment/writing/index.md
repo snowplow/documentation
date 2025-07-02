@@ -255,7 +255,12 @@ function process(event) {
   event.eraseDerived_contexts()
 
   // modify the contexts
-  derived.data[0].data.field = "test"
+  for (const entity of derived.data) {
+    if (entity.schema === ...) {
+      // update a field inside
+      entity.data.myField = entity.data.myField + 1
+    }
+  }
 
   // returned the updated array of derived contexts, which will replace the original one
   return derived.data

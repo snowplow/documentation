@@ -213,15 +213,7 @@ Retrieve calculated attributes in your application using one of the Signals SDKs
 
 ## Warehouse attributes can have any origin
 
-Signals, as you might expect for a Snowplow product, is very flexible.
-
-Real-time attribute calculation uses the Snowplow event stream, and therefore ingests only Snowplow events. For historical warehouse attributes, you can import values from any table—whether created by Signals or not.
-
-When defining batch attributes, it's possible to apply configurations that just create a table without attributes, or calculate attributes in a table without materializing them to the Profiles Store. You could also define views with fields instead of attributes, for using pre-existing tables with pre-calculated attributes.
-
-For stream attributes, you can choose to configure and apply views that don't calculate their attribute values.
-
-This means that configuration, calculation, materialization, and retrieval are fully decoupled.
+Signals, as you might expect for a Snowplow product, is very flexible. Real-time attribute calculation uses the Snowplow event stream, and therefore ingests only Snowplow events. For historical warehouse attributes, you can import values from any table—whether created by Signals or not, even whether derived from Snowplow data or not.
 
 ## Interventions trigger actions
 

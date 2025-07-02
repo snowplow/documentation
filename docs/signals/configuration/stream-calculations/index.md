@@ -8,6 +8,8 @@ To calculate attributes in real time, apply a default (without specified `batch_
 Apply the configuration using the `apply` method:
 
 ```python
+from snowplow_signals import Signals
+
 sp_signals = Signals(
         {{ config }} # See the main Configuration section for more on this
     )

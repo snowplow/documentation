@@ -41,6 +41,12 @@ flowchart TD
     J -->|No| N[Online = false, Offline = true<br/>Table pre-computed without Batch Engine<br/>and only in the warehouse]
 ```
 
+When defining batch attributes, it's possible to apply configurations that just create a table without attributes, or calculate attributes in a table without materializing them to the Profiles Store. You could also define views with fields instead of attributes, for using pre-existing tables with pre-calculated attributes.
+
+For stream attributes, you can choose to configure and apply views that don't calculate their attribute values.
+
+This means that configuration, calculation, materialization, and retrieval are fully decoupled.
+
 ## Minimal stream view example
 
 You can define a `View` by passing in a list of previously defined attributes. Here's a minimal example:

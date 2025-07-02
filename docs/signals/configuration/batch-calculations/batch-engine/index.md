@@ -31,7 +31,7 @@ flowchart TD
     N --> O[Attributes are available to use]
 ```
 
-## Installation
+## Installing
 
 The batch engine is installed separately from the main Python SDK.
 
@@ -43,7 +43,7 @@ pip install 'snowplow-signals[batch-engine]'
 
 This will make the `snowplow-batch-autogen` tool available within your environment.
 
-## CLI commands
+### CLI commands
 
 The available options are:
 
@@ -62,9 +62,9 @@ Here's an example of using the CLI:
 snowplow-batch-autogen init --verbose
 ```
 
-## Walkthrough
+## Creating and registering tables
 
-Check out the [batch engine tutorial](/tutorials/snowplow-batch-engine/start/) for a walkthrough of the workflow.
+Check out the [batch engine tutorial](/tutorials/snowplow-batch-engine/start/) for a walkthrough of the required steps.
 
 ## Incremental data models
 

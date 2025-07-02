@@ -9,9 +9,11 @@ export const Paginators: React.FC<{
   prev: Step | null
   setActiveStep: (step: Step) => void
   isMobile?: boolean
-}> = ({ next, prev, setActiveStep, isMobile = false }) => {
+  className?: string
+}> = ({ next, prev, setActiveStep, isMobile = false, className }) => {
   return (
     <Box
+      className={className}
       sx={{
         display: 'flex',
         width: '100%',
@@ -51,7 +53,7 @@ export const Paginators: React.FC<{
           </Grid>
         )}
       </Grid>
-      {!isMobile && <Box className="col col--3"></Box>}
+      
     </Box>
   )
 }

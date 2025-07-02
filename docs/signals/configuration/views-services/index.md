@@ -132,15 +132,22 @@ Signals will start calculating attributes as soon as this view configuration is 
 To understand what the output of a view will look like, use the Signals `test` method. This will output a table of attributes calculated from your `atomic` events table.
 
 ```python
+from snowplow_signals import Signals
+
+# Connect to Signals
+# See the main Configuration section for more on this
 sp_signals = Signals(
-        {{ config }} # See the main Configuration section for more on this
+        {{ config }}
     )
 
+# Run the test
 test_data = sp_signals.test(
     view=my_attribute_view,
     app_ids=["website"] # The app_id in your Snowplow events
 )
 ```
+
+TODO example output
 
 ## Services
 A `Service` groups multiple views together, allowing you to conveniently retrieve calculated values from all the included views. Here's an example:
@@ -160,7 +167,7 @@ my_service = Service(
 )
 ```
 
-TODO how does it work when one service has batch and stream views?
+TODO how does it work when one service has batch and stream views? Why use services?
 
 ### Service options
 

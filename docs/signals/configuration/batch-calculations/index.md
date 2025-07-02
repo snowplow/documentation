@@ -77,6 +77,8 @@ Pass your source to a new view.
 
 For stream or batch attributes that are calculated by Signals, a view contains references to your attribute definitions. In this case, the attributes are already defined elsewhere and pre-calculated in the warehouse. Instead of `attributes`, this view will have `fields`.
 
+To start with, create the view with `online=False` so that Signals does not materialize the attributes. This will be done later, once Signals has connected to the table.
+
 Specify the fields (columns) you want to use from the source table, using `Field`. Here's an example:
 
 ```python
@@ -87,8 +89,10 @@ view = View(
     version=1,
     entity=domain_userid,
     owner="user@company.com",
+
     offline=True, # Set this to True because this is a batch view
     online=False, # Set this to False until the configuration is complete
+
     batch_source=data_source,
     fields=[
         Field(
@@ -140,106 +144,46 @@ The sync will begin: the materialization engine will look for new records at a g
 
 To create new batch attributes, you'll need to define attributes and views as for stream attributes. However, further steps are necessary to create the required dbt models and tables in your warehouse, and register them with Signals.
 
-The included batch engine CLI tool will help you generate the attributes. Check out the full instructions in [Creating new batch attributes](/docs/signals/configuration/batch-calculations/batch-engine/index.md) or the [batch engine tutorial](/tutorials/snowplow-batch-engine/start/).
+The included batch engine CLI tool will help you with this process. Check out the full instructions in [Creating new batch attributes](/docs/signals/configuration/batch-calculations/batch-engine/index.md) or the [batch engine tutorial](/tutorials/snowplow-batch-engine/start/).
 
 ### Defining a view with attributes
 
+The key difference between a standard stream [view](/docs/signals/configuration/views-services/index.md) and one meant for batch processing is the `offline=True` parameter.
+
+To start with, create the view with `online=False` so that Signals does not try to calculate or materialize the attributes. This will be done later, once Signals has connected to the table.
+
+The entity here is typically the user, which may be the `domain_userid` or other Snowplow identifier fields, such as the logged in `user_id`.
+
+```python
+from snowplow_signals import View, domain_userid
+
+view = View(
+    name="batch_ecommerce_attributes",
+    version=1,
+    entity=domain_userid,
+    owner="user@company.com"
+
+    offline=True, # Set this to True because this is a batch view
+    online=False, # Set this to False until the configuration is complete
+
+    attributes=[
+        products_added_to_cart_last_7_days,
+        total_product_price_clv,
+        first_mkt_source,
+        last_device_class
+    ],
+)
+```
+
 ### Setting up the table
+
+Signals uses dbt to create view-specific attribute tables. The Signals Python SDK includes an optional CLI tool called the batch engine for configuring this.
+
+Check out the full instructions in [Creating new batch attributes](/docs/signals/configuration/batch-calculations/batch-engine/index.md).
 
 ### Registering the table with Signals
 
----
-examples
+TODO
 
-TODO example
 
-<details>
-<summary>Example batch attribute definitions</summary>
-
-Each block creates a single attribute definition including the logic how it should be calculated (its filters and aggregation).
-
-```python
-from snowplow_signals import (
-    Attribute,
-    Criteria,
-    Criterion,
-    Event,
-)
-from datetime import timedelta
-
-products_added_to_cart_last_7_days = Attribute(
-    name="products_added_to_cart_last_7_days",
-    type="string_list",
-    events=[
-        Event(
-            vendor="com.snowplowanalytics.snowplow",
-            name="snowplow_ecommerce_action",
-            version="1-0-2",
-        )
-    ],
-    aggregation="unique_list",
-    property="contexts_com_snowplowanalytics_snowplow_ecommerce_product_1[0].name",
-    criteria=Criteria(
-        all=[
-            Criterion(
-                property="unstruct_event_com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1:type",
-                operator="=",
-                value="add_to_cart",
-            ),
-        ],
-    ),
-    period=timedelta(days=7),
-)
-
-total_product_price_clv = Attribute(
-    name="total_product_price_clv",
-    type="float",
-    events=[
-        Event(
-            vendor="com.snowplowanalytics.snowplow",
-            name="snowplow_ecommerce_action",
-            version="1-0-2",
-        )
-    ],
-    aggregation="sum",
-    property="contexts_com_snowplowanalytics_snowplow_ecommerce_product_1[0].price",
-    criteria=Criteria(
-        all=[
-            Criterion(
-                property="unstruct_event_com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1:type",
-                operator="=",
-                value="add_to_cart"
-            )
-        ]
-    ),
-)
-
-first_mkt_source = Attribute(
-    name="first_mkt_source",
-    type="string",
-    events=[
-        Event(
-            vendor="com.snowplowanalytics.snowplow",
-            name="page_view",
-            version="1-0-0",
-        )
-    ],
-    aggregation="first",
-    property="mkt_source",
-)
-
-last_device_class = Attribute(
-    name="last_device_class",
-    type="string",
-    events=[
-        Event(
-            vendor="com.snowplowanalytics.snowplow",
-            name="page_view",
-            version="1-0-0",
-        )
-    ],
-    aggregation="last",
-    property="contexts_nl_basjes_yauaa_context_1[0]:deviceClass",
-)
-```
-</details>
+Then all that's left is to materialize the table, which will mean that Signals will regularly fetch the values from your warehouse table and sends it through the Profiles API.

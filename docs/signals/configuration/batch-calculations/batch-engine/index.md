@@ -5,42 +5,10 @@ description: "In depth explanation on how the Batch Engine works."
 sidebar_label: "Creating new attributes"
 ---
 
-While many `Attributes` can be computed in stream, there are cases where they should be created "offline" in the warehouse. We call them `Batch Attributes`.
+intro TODO
 
-One advantage of computing batch attributes over stream is that the computation can go back in history based on what you have already available in the atomic events dataset.
 
-The entity here is typically the user, which may be the `domain_userid` or other Snowplow identifier fields, such as the logged in `user_id`.
 
-Examples of `Batch Attributes` are typically:
-- customer lifetime values
-- specific transactions that have or have not happened in the last X number of days
-- first or last events a specific user generated or any properties associated to these events
-
-You may already have tables in your warehouse that contain such computed values, in which case you only have to register them as a batch source to be used by Signals. However, if you don't have them, we have developed a tool called the **`Batch Engine`** to efficiently generate these `Attributes` for you, with the help of a few CLI commands. This way you can avoid having to build complex data models to avoid recalculating the values each time over a very large table, which over time may even be impossible to do, not just costly.
-
-## How it works
-What you need to do first is to define a set of `Attributes` and register them as a `View` through the Python Signals SDK. Then you can use the optional CLI functionality of the SDK to generate a dbt project which will ultimately produce a view-specific attribute table. Then all that's left is to materialize the table, which will mean that Signals will regularly fetch the values from your warehouse table and sends it through the Profiles API.
-
-## Defining a batch view
-The key difference between a standard view and one meant for batch processing is the `offline=True` parameter. This flag indicates that the view’s attributes are computed in the data warehouse.
-
-```python
-from snowplow_signals import View, user_entity
-
-view = View(
-    name="batch_ecommerce_attributes",
-    version=1,
-    entity=user_entity,
-    offline=True,
-    attributes=[
-        products_added_to_cart_last_7_days,
-        total_product_price_clv,
-        first_mkt_source,
-        last_device_class
-    ],
-    owner="user@company.com"
-)
-```
 ## Generating the dbt project
 Here we assume you already defined your View(s) related to custom Batch Attributes, you want the Batch Engine to help generate for you.
 

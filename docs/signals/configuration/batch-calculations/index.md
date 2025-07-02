@@ -16,7 +16,7 @@ To use historical, warehouse attributes in your real-time use cases, you will ne
 Only Snowflake is supported currently.
 :::
 
-## What do you need to configure?
+## Existing or new attributes?
 
 Signals is configured slightly differently depending if you're using existing tables or creating new ones.
 

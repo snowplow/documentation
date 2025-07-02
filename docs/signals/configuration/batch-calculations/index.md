@@ -1,5 +1,5 @@
 ---
-title: "Batch calculations"
+title: "Calculate from warehouse"
 sidebar_position: 50
 ---
 
@@ -10,7 +10,7 @@ In addition to stream sources, Signals allows you to create attributes based on 
 
 You can use existing attributes that are already in your warehouse, or use the Signals batch engine to calculate new attributes in a new table.
 
-To use warehouse attributes in your real-time use cases, you will need to sync the data to the Profiles Store, using the materialization engine.
+To use historical, warehouse attributes in your real-time use cases, you will need to sync the data to the Profiles Store, using the materialization engine.
 
 :::note Warehouse support
 Only Snowflake is supported currently.
@@ -29,9 +29,9 @@ Signals is configured slightly differently depending if you're using existing ta
 
 To create new attribute tables, the batch engine will help you set up the required dbt projects and models.
 
-## Multi-step process ?? online offline 🤔
+## Multi-step process TODO
 
-TODO something something online offline?
+something something online offline?
 
 ## Using existing attributes
 
@@ -150,8 +150,6 @@ The included batch engine CLI tool will help you with this process. Check out th
 
 The key difference between a standard stream [view](/docs/signals/configuration/views-services/index.md) and one meant for batch processing is the `offline=True` parameter.
 
-To start with, create the view with `online=False` so that Signals does not try to calculate or materialize the attributes. This will be done later, once Signals has connected to the table.
-
 The entity here is typically the user, which may be the `domain_userid` or other Snowplow identifier fields, such as the logged in `user_id`.
 
 ```python
@@ -164,7 +162,6 @@ view = View(
     owner="user@company.com"
 
     offline=True, # Set this to True because this is a batch view
-    online=False, # Set this to False until the configuration is complete
 
     attributes=[
         products_added_to_cart_last_7_days,
@@ -175,15 +172,20 @@ view = View(
 )
 ```
 
-### Setting up the table
+### Creating and registering tables
 
 Signals uses dbt to create view-specific attribute tables. The Signals Python SDK includes an optional CLI tool called the batch engine for configuring this.
 
+It will help you create the required dbt models and tables in your warehouse, and register them with Signals.
+
 Check out the full instructions in [Creating new batch attributes](/docs/signals/configuration/batch-calculations/batch-engine/index.md).
 
-### Registering the table with Signals
+## Materialization engine
 
-TODO
+The materialization engine is a cron job that sends warehouse attributes to the Profiles Store.
 
+The engine will be enabled when you either:
+* Apply a view for an existing table, with `online=True`
+* Run the batch engine `materialize` command
 
-Then all that's left is to materialize the table, which will mean that Signals will regularly fetch the values from your warehouse table and sends it through the Profiles API.
+Once enabled, syncs begin at a fixed interval. By default, this is every 5 minutes. Only the records that have changed since the last sync are sent to the Profiles Store.

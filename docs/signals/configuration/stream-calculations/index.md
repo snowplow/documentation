@@ -1,5 +1,5 @@
 ---
-title: "Stream calculations"
+title: "Calculate in real-time"
 sidebar_position: 49
 ---
 

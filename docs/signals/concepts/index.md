@@ -78,11 +78,11 @@ You can define any entities you like, and expand this to broader concepts.
 
 After defining an entity, you can start to calculate attributes for it. An attribute defines a specific fact about behavior relating to an entity.
 
-There are four main types of attributes:
-* Time windowed: actions that happened within the last X number of days. For example, `products_added_to_cart_last_7_days`
-* Lifetime: calculated over all the available data for the entity. For example, `total_product_price_clv`, calculated across the customer lifetime
-* First touch: events (or properties) that happened for the first time for a given entity. For example, `first_mkt_source`
-* Last touch: events (or properties) that happened for the most recent time for a given entity. For example, `last_device_class`
+There are four main types of attribute:
+* Time windowed: actions that happened within the last X number of days. For example, `products_added_to_cart_last_7_days`.
+* Lifetime: calculated over all the available data for the entity. For example, `total_product_price_clv`.
+* First touch: the first event (or property) that happened for a given entity. For example, `first_mkt_source`.
+* Last touch: the most recent event (or property) that happened for a given entity. For example, `last_device_class`.
 
 Example attributes for different entities:
 

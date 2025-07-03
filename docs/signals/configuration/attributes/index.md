@@ -4,7 +4,7 @@ sidebar_position: 20
 sidebar_label: "Attributes"
 ---
 
-Attributes provide the core Signals functionality. Theyrepresent specific facts about user behavior, and are calculated based on events in your Snowplow pipeline.
+Attributes provide the core Signals functionality. They represent specific facts about user behavior, and are calculated based on events in your Snowplow pipeline.
 
 To configure an attribute, you will need to set:
 * A name, ideally one that describes the attribute

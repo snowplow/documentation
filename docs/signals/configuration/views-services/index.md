@@ -4,9 +4,21 @@ sidebar_position: 30
 sidebar_label: "Attribute groups"
 ---
 
-To manage and access attributes, they're grouped into a versioned `View`. You can group multiple views into a `Service` to retrieve calculated values easily.
+Signals has two attribute groupings:
+* Views, for defining attributes
+* Services, for consuming attributes
+
+Each view is a versioned collection of attributes, and specific to one entity and one data source (stream or batch).
+
+Services are groups of views. They provide a stable interface to use in your applications: by pinning specific view versions, they provide a consistent set of consumable attributes.
+
+By using services you can:
+* Iterate on attribute definitions without worrying about breaking downstream processes
+* Migrate to new view versions by updating the service definition, without having to update the application code
 
 ## Attribute management
+
+TODO this is very confusing
 
 Every view has a version number. If you change the attributes of a view, increase the version number.
 
@@ -15,8 +27,6 @@ Signals provides functionality for separating attribute definition from calculat
 To configure a table for batch attributes, you may choose to set up a view using that source without defining any attributes initially. This ensures that the table is ready and tested for adding and calculating attributes. Read more about configuring batch attributes and views in the [Batch calculations](/docs/signals/configuration/batch-calculations/index.md) section.
 
 Deciding when to calculate and materialize the attributes using the `online` and `offline` view configuration options:
-
-TODO how does this work with existing tables vs new tables?
 
 ```mermaid
 flowchart TD
@@ -149,8 +159,11 @@ test_data = sp_signals.test(
 
 TODO example output
 
-## Services TODO
-A `Service` groups multiple views together, allowing you to conveniently retrieve calculated values from all the included views. Here's an example:
+## Services
+
+TODO how does it work when one service has batch and stream views? Does it matter?
+
+Here's an example showing how to create a service to manage two views:
 
 ```python
 from snowplow_signals import Service
@@ -166,8 +179,6 @@ my_service = Service(
     ],
 )
 ```
-
-TODO how does it work when one service has batch and stream views? Why use services?
 
 ### Service options
 

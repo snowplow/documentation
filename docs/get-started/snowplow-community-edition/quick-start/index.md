@@ -6,6 +6,7 @@ sidebar_position: 2
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import LicenseNotice from '@site/docs/get-started/snowplow-community-edition/_license-notice.md';
 ```
 
 This guide will take you through how to spin up a Snowplow Community Edition pipeline using the [Snowplow Terraform modules](https://registry.terraform.io/namespaces/snowplow-devops). _(Not familiar with Terraform? Take a look at [Infrastructure as code with Terraform](https://learn.hashicorp.com/tutorials/terraform/infrastructure-as-code?in=terraform/aws-get-started).)_
@@ -13,6 +14,8 @@ This guide will take you through how to spin up a Snowplow Community Edition pip
 ## Prerequisites
 
 [Sign up](https://snowplow.io/pricing/) for Snowplow Community Edition and follow the link in the email to get a copy of the repository containing the Terraform code.
+
+<LicenseNotice/>
 
 Install [Terraform 1.0.0](https://www.terraform.io/downloads.html) or higher. Follow the instructions to make sure the `terraform` binary is available on your `PATH`. You can also use [tfenv](https://github.com/tfutils/tfenv) to manage your Terraform installation.
 

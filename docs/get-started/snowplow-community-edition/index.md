@@ -8,7 +8,13 @@ sidebar_custom_props:
     - community
 ---
 
+```mdx-code-block
+import LicenseNotice from '@site/docs/get-started/snowplow-community-edition/_license-notice.md';
+```
+
 Snowplow Community Edition is an event data collection platform for data teams who want to manage the collection and warehousing of data across all their platforms and channels, in real-time.
+
+<LicenseNotice/>
 
 Snowplow is a complete, loosely coupled platform that lets you capture, store and analyze granular customer-level and event-level data:
 

@@ -10,7 +10,7 @@ Signals has two attribute groupings:
 
 Each view is a versioned collection of attributes, and specific to one entity and one data source (stream or batch).
 
-Services are groups of views. They provide a stable interface to use in your applications: by pinning specific view versions, they provide a consistent set of consumable attributes.
+Services are groups of views. They provide a stable interface to use in your applications: by pinning specific view versions, they provide a consistent set of consumable attributes. Services can contain views from different entities, and different sources.
 
 By using services you can:
 * Iterate on attribute definitions without worrying about breaking downstream processes
@@ -156,6 +156,10 @@ test_data = sp_signals.test(
     app_ids=["website"] # The app_id in your Snowplow events
 )
 ```
+
+:::note
+While you can filter on specific app_ids during testing, both the streaming and batch engines may be configured to process only a subset of relevant app_ids to avoid unnecessary compute. As a result, testing with an arbitrary app_id may not yield expected data if it isn’t included in the configured subset.
+:::
 
 TODO example output
 

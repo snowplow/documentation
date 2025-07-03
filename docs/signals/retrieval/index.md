@@ -13,7 +13,7 @@ Your calculated attributes are stored in the Profiles Store. To retrieve them, y
 
 Install the SDK into your project, and connect to Signals as described in [Configuration](/docs/signals/configuration/index.md).
 
-### Retrieving attributes from a service
+### Attributes from a service
 
 Use `get_service_attributes()` to retrieve attributes from a specific service. Signals will return the attributes as a dictionary.
 
@@ -39,9 +39,11 @@ The table below lists all available arguments for `get_service_attributes()`
 | `entity`     | The entity name to retrieve attributes for | `string` | ✅         |
 | `identifier` | The specific entity value                  | `string` | ✅         |
 
-### Retrieving attributes from a view
+TODO example output
 
-You can also retrieve a subset of attributes from a specific view using `get_view_attributes()`.
+### Attributes from a view
+
+You can also retrieve a subset of attributes from a specific view using `get_view_attributes()`. Signals will return the attributes as a dictionary.
 
 Here's an example:
 
@@ -69,11 +71,7 @@ The table below lists all available arguments for `get_view_attributes()`
 | `entity`     | The entity name                         | `string`                     | ✅         |
 | `identifier` | The specific entity value               | `string`                     | ✅         |
 
-TODO why do you have to specify the entity, views only have one
-
-### Retrieving a view TODO
-
-what's this?
+TODO example output
 
 ## Node.js SDK TODO
 

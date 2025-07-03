@@ -127,7 +127,7 @@ flowchart TD
     I -->     J[Attribute pushed to<br/>the Profiles Store]
 ```
 
-Conversely, batch attributes are calculated or pushed to the Profiles Store periodically:
+Conversely, batch attributes are calculated via dbt models and pushed to the Profiles Store periodically:
 
 ```mermaid
 flowchart TD

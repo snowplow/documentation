@@ -237,9 +237,35 @@ function process(event) {
 
 :::note
 
-You might be tempted to update derived entities in a similar way by using `event.setDerived_contexts()`. However, this is not supported (the function exists, but has no effect). Instead, refer to the [Adding extra entities](#adding-extra-entities-to-the-event) section.
+You might be tempted to update derived entities in a similar way by using `event.setDerived_contexts()`. However, this is not supported (the function exists, but has no effect). Instead, refer to the [Erasing derived contexts](#erasing-derived-contexts) section.
 
 :::
+
+## Erasing derived contexts
+
+Starting with Enrich 5.4.0, it is possible to erase derived contexts.
+
+This feature can be used to update existing derived contexts as well. The way to do that is shown in the below example:
+
+```js
+function process(event) {
+  const derived = JSON.parse(event.getDerived_contexts())
+
+  // erase the existing contexts from the event
+  event.eraseDerived_contexts()
+
+  // modify the contexts
+  for (const entity of derived.data) {
+    if (entity.schema === ...) {
+      // update a field inside
+      entity.data.myField = entity.data.myField + 1
+    }
+  }
+
+  // returned the updated array of derived contexts, which will replace the original one
+  return derived.data
+}
+```
 
 ## Discarding the event
 

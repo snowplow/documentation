@@ -34,7 +34,6 @@ license {
 | `telemetry.disable` | Optional. Set to `true` to disable [telemetry](/docs/get-started/snowplow-community-edition/telemetry/index.md). |
 | `telemetry.userProvidedId` | Optional. See [here](/docs/get-started/snowplow-community-edition/telemetry/index.md#how-can-i-help) for more information. |
 | `featureFlags.acceptInvalid` | Optional. Default: `false`. Enrich *3.0.0* introduces the validation of the enriched events against atomic schema before emitting. If set to `false`, a failed event will be emitted instead of the enriched event if validation fails. If set to `true`, invalid enriched events will be emitted, as before. |
-| `featureFlags.legacyEnrichmentOrder` | Optional. Default: `false`. In early versions of `enrich-kinesis` and `enrich-pubsub` (>= *3.1.5*), the Javascript enrichment incorrectly ran before the currency, weather, and IP Lookups enrichments. Set this flag to true to keep the erroneous behavior of those previous versions. |
 | `validation.atomicFieldsLimits` (since *4.0.0*) | Optional. For the defaults, see [here](https://github.com/snowplow/enrich/blob/master/modules/common/src/main/resources/reference.conf). Configuration for custom maximum atomic fields (strings) length. It's a map-like structure with keys being atomic field names and values being their max allowed length. |
 
 Instead of a message queue, it's also possible to read collector payloads from files on disk. This can be used for instance for testing purposes. In this case the configuration needs to be as below.

@@ -22,7 +22,7 @@ Within your notebook, install the SDK.
 pip install snowplow-signals
 ```
 
-Once installed, you can start to define your configuration components. To test or apply your configuration, or retrieve calculated attributes from the Profiles Store, you will need to connect to your Signals deployment.
+Once installed, you can start to define your configuration components. To test or apply your configuration, or retrieve calculated attributes from the Profiles Store, you'll need to connect to your Signals deployment.
 
 ## Connecting to Signals
 

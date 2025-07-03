@@ -127,7 +127,7 @@ stream_view = View(
 
 Signals will start calculating attributes as soon as this view configuration is applied.
 
-## Testing views
+## Testing views TODO
 
 To understand what the output of a view will look like, use the Signals `test` method. This will output a table of attributes calculated from your `atomic` events table.
 
@@ -149,7 +149,7 @@ test_data = sp_signals.test(
 
 TODO example output
 
-## Services
+## Services TODO
 A `Service` groups multiple views together, allowing you to conveniently retrieve calculated values from all the included views. Here's an example:
 
 ```python

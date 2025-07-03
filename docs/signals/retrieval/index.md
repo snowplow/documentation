@@ -79,4 +79,4 @@ Install the SDK into your project, and connect to Signals as described in [Confi
 
 TODO
 
-## Signals API
+## Signals API TODO

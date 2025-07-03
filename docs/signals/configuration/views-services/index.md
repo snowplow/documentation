@@ -163,6 +163,29 @@ While you can filter on specific app_ids during testing, both the streaming and 
 
 TODO example output
 
+
+To see which attributes a view has, use `get_view()`. Here's an example:
+
+```python
+attribute_definitions = sp_signals.get_view(
+    name="my_view",
+    version=1,
+)
+
+print(attribute_definitions)
+```
+
+The table below lists all available arguments for `get_view()`
+
+| Argument  | Description          | Type     | Required? |
+| --------- | -------------------- | -------- | --------- |
+| `name`    | The name of the view | `string` | ✅         |
+| `version` | The view version     | `int`    | ❌         |
+
+If you don't specify a version, Signals will retrieve the latest version.
+
+TODO example output
+
 ## Services
 
 TODO how does it work when one service has batch and stream views? Does it matter?

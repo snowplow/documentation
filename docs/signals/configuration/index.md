@@ -56,7 +56,7 @@ sp_signals = Signals(
 )
 ```
 
-### Available methods
+### Available Python methods
 
 The created `Signals` object has the following methods:
 
@@ -64,11 +64,38 @@ The created `Signals` object has the following methods:
 | ------------------------ | ------------------------------------------------------------------- |
 | `apply`                  | Registers the provided objects with Signals                         |
 | `test`                   | Tests a view against the atomic events table                        |
+| `get_service_attributes` | Retrieves attributes for a specific service from the Profiles Store |
 | `get_view`               | Retrieves a view from the Profiles Store                            |
 | `get_view_attributes`    | Retrieves attributes for a specific view from the Profiles Store    |
-| `get_service_attributes` | Retrieves attributes for a specific service from the Profiles Store |
 
 Read more about retrieving calculated attributes in [Retrieving values](/docs/signals/retrieval/index.md)
+
+## Setting up the Node.js SDK TODO
+
+The [Signals Node.js SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk) only retrieves attributes, and can't be used to apply configuration.
+
+Install the SDK into your project:
+
+```bash
+npm install snowplow-signals-typescript-sdk
+```
+
+To connect to Signals using this SDK, you will need the same values as for the Python SDK. Create a Signals object like this:
+
+```typescript
+import { Signals } from 'snowplow-signals-typescript-sdk';
+
+TODO
+```
+
+### Available TypeScript methods
+
+The created `Signals` object has the following methods:
+
+| Method                 | Description                                                         |
+| ---------------------- | ------------------------------------------------------------------- |
+| `getServiceAttributes` | Retrieves attributes for a specific service from the Profiles Store |
+| `getViewAttributes`    | Retrieves attributes for a specific view from the Profiles Store    |
 
 ## Signals API
 

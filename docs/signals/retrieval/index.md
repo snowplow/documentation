@@ -4,25 +4,81 @@ sidebar_position: 1.5
 sidebar_label: "Retrieving values TODO"
 ---
 
-TODO
+Your calculated attributes are stored in the Profiles Store. To retrieve them, you can use:
+* Signals Python SDK
+* Signals Node.js SDK (TypeScript)
+* Signals API
 
+## Python SDK
 
+Install the SDK into your project, and connect to Signals as described in [Configuration](/docs/signals/configuration/index.md).
 
-## Retrieving calculated values
+### Retrieving attributes from a service
 
-To access the calculated values, use the `get_online_attributes` method. Here's an example:
+Use `get_service_attributes()` to retrieve attributes from a specific service. Signals will return the attributes as a dictionary.
+
+Here's an example:
 
 ```python
-# Assuming signals object has been instantiated using the Signals() class
+# The Signals connection object has been created as sp_signals
 
-calculated_values = sp_signals.get_online_attributes(
-    source=my_service,
-    identifiers="abc-123",
+calculated_values = sp_signals.get_service_attributes(
+    source="my_service",
+    entity="domain_userid",
+    identifier="218e8926-3858-431d-b2ed-66da03a1cbe5",
 )
 
 print(calculated_values)
 ```
 
-:::warning
-**Note:** While you can filter on specific app_ids during testing, both the streaming and batch engines may be configured to process only a subset of relevant app_ids to avoid unnecessary compute. As a result, testing with an arbitrary app_id may not yield expected data if it isn’t included in the configured subset.
-:::
+The table below lists all available arguments for `get_service_attributes()`
+
+| Argument     | Description                                | Type     | Required? |
+| ------------ | ------------------------------------------ | -------- | --------- |
+| `name`       | The name of the service                    | `string` | ✅         |
+| `entity`     | The entity name to retrieve attributes for | `string` | ✅         |
+| `identifier` | The specific entity value                  | `string` | ✅         |
+
+### Retrieving attributes from a view
+
+You can also retrieve a subset of attributes from a specific view using `get_view_attributes()`.
+
+Here's an example:
+
+```python
+# The Signals connection object has been created as sp_signals
+
+calculated_values = sp_signals.get_view_attributes(
+    name="my_view",
+    version=1,
+    attributes=["page_view_count"],
+    entity="domain_userid",
+    identifier="218e8926-3858-431d-b2ed-66da03a1cbe5",
+)
+
+print(calculated_values)
+```
+
+The table below lists all available arguments for `get_view_attributes()`
+
+| Argument     | Description                             | Type                         | Required? |
+| ------------ | --------------------------------------- | ---------------------------- | --------- |
+| `name`       | The name of the view                    | `string`                     | ✅         |
+| `version`    | The view version                        | `int`                        | ✅         |
+| `attributes` | The names of the attributes to retrieve | `string` or list of `string` | ✅         |
+| `entity`     | The entity name                         | `string`                     | ✅         |
+| `identifier` | The specific entity value               | `string`                     | ✅         |
+
+TODO why do you have to specify the entity, views only have one
+
+### Retrieving a view TODO
+
+what's this?
+
+## Node.js SDK TODO
+
+Install the SDK into your project, and connect to Signals as described in [Configuration](/docs/signals/configuration/index.md).
+
+TODO
+
+## Signals API

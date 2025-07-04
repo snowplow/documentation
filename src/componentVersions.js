@@ -43,7 +43,7 @@ export const versions = {
   // Data Modelling
   // dbt
   dbtSnowplowAttribution: '0.5.0',
-  dbtSnowplowUnified: '0.5.3',
+  dbtSnowplowUnified: '0.5.4',
   dbtSnowplowWeb: '1.0.1',
   dbtSnowplowMobile: '1.0.0',
   dbtSnowplowMediaPlayer: '0.9.2',

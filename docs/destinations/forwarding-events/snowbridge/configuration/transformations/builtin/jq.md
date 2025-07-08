@@ -1,3 +1,8 @@
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 # jq
 
 :::note
@@ -22,15 +27,15 @@ The jq transformation will remove any keys with null values from the data.
 
 Minimal configuration:
 
-```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/builtin/jq-minimal-example.hcl
-```
+<CodeBlock language="hcl" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/builtin/jq-minimal-example.hcl
+`}</CodeBlock>
 
 Every configuration option:
 
-```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/builtin/jq-full-example.hcl
-```
+<CodeBlock language="hcl" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/builtin/jq-full-example.hcl
+`}</CodeBlock>
 
 ## Helper functions
 

@@ -1,3 +1,8 @@
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 # spGtmssPreview
 
 :::note
@@ -18,10 +23,10 @@ First, we validate to ensure that the value is a valid base64 string. Second, we
 
 ## Configuration options
 
-```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/snowplow-builtin/spGtmssPreview-minimal-example.hcl
-```
+<CodeBlock language="hcl" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/snowplow-builtin/spGtmssPreview-minimal-example.hcl
+`}</CodeBlock>
 
-```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/snowplow-builtin/spGtmssPreview-full-example.hcl
-```
+<CodeBlock language="hcl" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/snowplow-builtin/spGtmssPreview-full-example.hcl
+`}</CodeBlock>

@@ -1,3 +1,8 @@
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 # spEnrichedFilterUnstructEvent
 
 `spEnrichedFilterUnstructEvent`: Specific to Snowplow data.  Filters messages based on a regex match against a field in a custom event.
@@ -18,12 +23,12 @@ This example keeps all events whose `add_to_cart` event data at the `sku` field 
 
 Minimal configuration:
 
-```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/snowplow-builtin/spEnrichedFilterUnstructEvent-minimal-example.hcl
-```
+<CodeBlock language="hcl" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/snowplow-builtin/spEnrichedFilterUnstructEvent-minimal-example.hcl
+`}</CodeBlock>
 
 Every configuration option:
 
-```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/snowplow-builtin/spEnrichedFilterUnstructEvent-full-example.hcl
-```
+<CodeBlock language="hcl" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/snowplow-builtin/spEnrichedFilterUnstructEvent-full-example.hcl
+`}</CodeBlock>

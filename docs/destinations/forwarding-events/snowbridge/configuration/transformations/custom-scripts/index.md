@@ -4,6 +4,11 @@ date: "2022-10-20"
 sidebar_position: 100
 ---
 
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 Custom transformation scripts may be defined in Javascript and provided to Snowbridge.
 
 ## The scripting interface
@@ -91,39 +96,39 @@ For all the below examples, the input is a string representation of the below JS
 
 To modify the message data, return an object which conforms to EngineProtocol, with the `Data` field set to the modified data. The `Data` field may be returned as either a string, or an object.
 
-```js reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/custom-scripts/create-a-script-modify-example.js
-```
+<CodeBlock language="js" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/custom-scripts/create-a-script-modify-example.js
+`}</CodeBlock>
 
 ## Filtering
 
 If the `FilterOut` field of the output is returned as `true`, the message will be acknowledged immediately and won't be sent to the target. This will be the behavior regardless of what is returned to the other fields in the protocol.
 
-```js reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/custom-scripts/create-a-script-filter-example.js
-```
+<CodeBlock language="js" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/custom-scripts/create-a-script-filter-example.js
+`}</CodeBlock>
 
 ## Setting the Partition Key
 
 To set the Partition Key in the message, you can simply set the input's PartitionKey field, and return it:
 
-```js reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/custom-scripts/create-a-script-setpk-example.js
-```
+<CodeBlock language="js" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/custom-scripts/create-a-script-setpk-example.js
+`}</CodeBlock>
 
 Or, if modifying the data as well, return the modified data and PartitionKey field:
 
-```js reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/custom-scripts/create-a-script-setpk-modify-example.js
-```
+<CodeBlock language="js" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/custom-scripts/create-a-script-setpk-modify-example.js
+`}</CodeBlock>
 
 ## Setting an HTTP header
 
 For the `http` target only, you can specify a set of HTTP headers, which will be appended to the configured headers for the `http` target. Do so by providing an object in the `HTTPHeaders` field:
 
-```js reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/custom-scripts/create-a-script-header-example.js
-```
+<CodeBlock language="js" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/custom-scripts/create-a-script-header-example.js
+`}</CodeBlock>
 
 The headers will only be included if the target has the [`dynamic_headers = true` setting](/docs/destinations/forwarding-events/snowbridge/configuration/targets/http/index.md#configuration-options) configured.
 

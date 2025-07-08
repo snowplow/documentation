@@ -1,9 +1,12 @@
+---
+title: "base64Encode"
+description: "Base64 encodes the message's data."
+---
+
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-# base64Encode
 
 Introduced in version 2.1.0
 

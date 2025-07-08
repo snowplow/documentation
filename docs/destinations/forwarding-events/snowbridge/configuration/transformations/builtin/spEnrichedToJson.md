@@ -1,9 +1,12 @@
+---
+title: "spEnrichedToJson"
+description: "Transforms a message's data from Snowplow Enriched tsv string format to a JSON object."
+---
+
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-# SpEnrichedToJson
 
 `spEnrichedToJson`: Specific to Snowplow data. Transforms a message's data from Snowplow Enriched tsv string format to a JSON object. The input data must be a valid Snowplow enriched TSV.
 

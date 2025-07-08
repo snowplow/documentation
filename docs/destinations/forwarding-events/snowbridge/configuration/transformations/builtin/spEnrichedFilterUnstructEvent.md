@@ -1,9 +1,12 @@
+---
+title: "spEnrichedFilterUnstructEvent"
+description: "Filters messages based on a regex match against a field in a custom event."
+---
+
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-# spEnrichedFilterUnstructEvent
 
 `spEnrichedFilterUnstructEvent`: Specific to Snowplow data.  Filters messages based on a regex match against a field in a custom event.
 

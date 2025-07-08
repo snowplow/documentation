@@ -1,9 +1,12 @@
+---
+title: "spEnrichedFilterContext"
+description: "Filters messages based on a regex match against a field in an entity."
+---
+
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-# spEnrichedFilterContext
 
 `spEnrichedFilterContext`: Specific to Snowplow data. Filters messages based on a regex match against a field in an entity.
 

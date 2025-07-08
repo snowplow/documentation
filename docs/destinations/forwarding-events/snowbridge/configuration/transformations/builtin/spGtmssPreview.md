@@ -1,9 +1,12 @@
+---
+title: "spGtmssPreview"
+description: "Extracts a value from the x-gtm-server-preview field and attaches it as the GTM SS preview mode header."
+---
+
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-# spGtmssPreview
 
 :::note
 This transformation was added in version 2.3.0

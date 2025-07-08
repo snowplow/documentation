@@ -1,9 +1,12 @@
+---
+title: "spEnrichedSetPk"
+description: "Sets the message's destination partition key to an atomic field."
+---
+
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-# spEnrichedSetPk
 
 `spEnrichedSetPk`: Specific to Snowplow data. Sets the message's destination partition key to an atomic field from a Snowplow Enriched tsv string.  The input data must be a valid Snowplow enriched TSV.
 

@@ -1,9 +1,12 @@
+---
+title: "jqFilter"
+description: "Filters messages based on the output of a jq command."
+---
+
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-# jqFilter
 
 :::note
 This transformation was added in version 3.0.0.

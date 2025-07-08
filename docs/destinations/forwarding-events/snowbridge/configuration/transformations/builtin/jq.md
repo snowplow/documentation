@@ -1,9 +1,12 @@
+---
+title: "jq"
+description: "Runs a jq command on the message data and outputs the result."
+---
+
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-# jq
 
 :::note
 This transformation was added in version 3.0.0.

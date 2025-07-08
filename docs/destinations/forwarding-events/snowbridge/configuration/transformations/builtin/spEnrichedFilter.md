@@ -1,9 +1,12 @@
+---
+title: "spEnrichedFilter"
+description: "Filters messages based on a regex match against an atomic field."
+---
+
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-# spEnrichedFilter
 
 `spEnrichedFilter`: Specific to Snowplow data. Filters messages based on a regex match against an atomic field.
 

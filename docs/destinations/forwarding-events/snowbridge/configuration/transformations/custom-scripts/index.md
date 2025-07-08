@@ -127,6 +127,20 @@ https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/tra
 
 The headers will only be included if the target has the [`dynamic_headers = true` setting](/docs/destinations/forwarding-events/snowbridge/configuration/targets/http/index.md#configuration-options) configured.
 
+
+## Helper functions
+
+* `hash(input, algorithm)` hashes the input value. Salt is configured using the `hash_salt_secret` parameter in the hcl configuration. If no value is provided, this function will perform an unsalted hash
+
+The following hash algorithms are supported:
+- `sha1` - SHA-1 hash (160 bits)
+- `sha256` - SHA-256 hash (256 bits)
+- `md5` - MD5 hash (128 bits) 
+
+```
+hash(input.Data["app_id"], "sha1")
+```
+
 ## Configuration
 
 Once your script is ready, you can configure it in the app by following the [Javascript](/docs/destinations/forwarding-events/snowbridge/configuration/transformations/custom-scripts/javascript-configuration/index.md) configuration page.

@@ -1,6 +1,6 @@
 ---
 title: "Configuring Signals"
-sidebar_position: 1
+sidebar_position: 20
 sidebar_label: "Configuration"
 ---
 

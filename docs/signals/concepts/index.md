@@ -1,6 +1,6 @@
 ---
 title: "Signals concepts"
-sidebar_position: 1
+sidebar_position: 10
 sidebar_label: "Concepts"
 ---
 

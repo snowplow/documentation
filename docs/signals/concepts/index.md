@@ -25,11 +25,35 @@ Next, choose which attributes from which views you want to consume in your appli
 
 Finally, retrieve calculated attributes in your application, and use them to trigger actions.
 
-### Example diagram
+### Example diagrams
 
-This diagram shows an example configuration.
 
-Things to note:
+This diagram shows a very simple example configuration.
+
+```mermaid
+flowchart TD
+    subgraph Section1[Defining what to calculate]
+        subgraph View[StreamView]
+            V_Entity[Entity]
+            V_Attr1[Attribute 1]
+        end
+
+        View --> ProfilesStore[Profiles Store]
+    end
+
+    subgraph Section2[Service Layer]
+        ProfilesStore --> Service[Service]
+
+        subgraph Service
+            S_Attr1[Attribute 1]
+        end
+
+        Service --> Application[Application]
+    end
+```
+A single attribute has been defined and is being calculated.
+
+The next diagram shows a more complex example configuration. Things to note:
 * Views can have multiple attributes, but only one entity
 * Attributes can be reused across views
 * All calculated attributes are stored in the Profiles Store
@@ -94,6 +118,8 @@ Attribute values can be updated in multiple ways, depending how they're configur
 * Events in real time (stream source only)
 * Data in warehouse (batch source only)
 * Interventions
+
+Real-time attribute calculation uses the Snowplow event stream, and therefore ingests only Snowplow events. For historical warehouse attributes, you can import values from any table—whether created by Signals or not, even whether derived from Snowplow data or not.
 
 Calculated attribute values are stored in the Profiles Store.
 
@@ -211,9 +237,7 @@ This service could be imagined like this as a table:
 
 Retrieve calculated attributes in your application using one of the Signals SDKs, or manually using the Signals API.
 
-## Warehouse attributes can have any origin
 
-Signals, as you might expect for a Snowplow product, is very flexible. Real-time attribute calculation uses the Snowplow event stream, and therefore ingests only Snowplow events. For historical warehouse attributes, you can import values from any table—whether created by Signals or not, even whether derived from Snowplow data or not.
 
 ## Interventions trigger actions
 

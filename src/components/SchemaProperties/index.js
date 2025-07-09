@@ -18,7 +18,7 @@ export default function SchemaProperties(props) {
             <h3 className="text-lg text-card-foreground font-bold not-prose m-0">
               {schemaName}
             </h3>
-            <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-sm font-normal transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-[#dcd0f1] text-[#301a56]">
+            <span className="inline-flex items-center rounded-full border px-2.5 py-0.5 text-sm font-normal transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 border-transparent bg-primary text-primary-foreground">
               {badgeText}
             </span>
           </div>
@@ -49,7 +49,7 @@ export default function SchemaProperties(props) {
         {props.example && (
           <details>
             <summary className="cursor-pointer text-sm font-semibold">Example</summary>
-            <div className="mt-2">
+            <div className="mt-2 text-sm">
               <CodeBlock language="json">
                 {JSON.stringify(props.example, null, 2)}
               </CodeBlock>
@@ -60,9 +60,9 @@ export default function SchemaProperties(props) {
         <details>
           <summary className="cursor-pointer text-sm font-semibold"><b>Schema</b></summary>
           <div className="mt-2">
-            <Tabs groupId="schema-view" queryString>
+            <Tabs className="text-sm not-prose" groupId="schema-view" queryString>
               <TabItem value="table" label="Table">
-                <table className="w-full">
+                <table className="w-full not-prose text-sm">
                   <thead>
                     <tr>
                       <th>Property</th>
@@ -108,7 +108,7 @@ export default function SchemaProperties(props) {
         {(props.overview && props.overview.event) && (
           <details>
             <summary className="cursor-pointer text-sm font-semibold"><b>Warehouse query</b></summary>
-            <div className="mt-2">
+            <div className="mt-2 text-sm not-prose">
               <EventQuery
                 vendor={props.schema.self.vendor}
                 name={props.schema.self.name}

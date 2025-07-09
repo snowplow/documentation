@@ -3,11 +3,6 @@ title: "Calculate from warehouse"
 sidebar_position: 50
 ---
 
-In addition to stream sources, Signals allows you to create attributes based on data stored in your warehouse. Batch sources are ideal for metrics calculated over longer periods of time, such as:
-- Previous purchase history
-- Number of site visits in the last 7 days
-- Average session length
-
 You can use existing attributes that are already in your warehouse, or use the Signals batch engine to calculate new attributes in a new table.
 
 To use historical, warehouse attributes in your real-time use cases, you will need to sync the data to the Profiles Store. Signals includes a materialization engine to do this.

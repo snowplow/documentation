@@ -6,121 +6,140 @@ sidebar_label: "Concepts"
 
 Signals introduces a new set of data governance concepts to Snowplow. As with schemas for Snowplow event data, Signals components are strictly defined, structured, and versioned.
 
-The fundamental Signals component is the `Entity`. The Signals components attributes and interventions are defined relative to entities. Attributes for a given entity are grouped together into views and services, for ease of management and deployment.
+## Overview
+
+**Attributes** define what event data to evaluate, and what kind of calculation to perform. They don't include any configuration for real-time or batch processing, versioning, or calculation context. To add that important metadata, you'll need to create attribute groups.
+
+Signals has two attribute groupings:
+* **Views**, for defining attributes
+* **Services**, for consuming attributes
+
+Start by creating views. At this point, you'll define:
+* The data source - whether to calculate the attributes from the real-time stream, or from the warehouse
+* What **entity** to calculate the attributes for
+* The version number of the view
+
+Apply the view configuration to Signals, so that it can start calculating attributes and populating your **Profiles Store**. You'll need additional configuration if you're using batch processing.
+
+Next, choose which attributes from which views you want to consume in your applications. Group them into services, and apply the configuration to Signals.
+
+Finally, retrieve calculated attributes in your application, and use them to trigger actions.
+
+### Example diagram
+
+This diagram shows an example configuration.
+
+Things to note:
+* Views can have multiple attributes, but only one entity
+* Attributes can be reused across views
+* All calculated attributes are stored in the Profiles Store
+* Services can selectively retrieve attribute values from different views
 
 ```mermaid
 flowchart TD
-    Entity --> Stream
-    Entity --> Batch
-    Entity --> Int1[**Intervention 1**]
-    Entity --> Int2[**Intervention 2**]
+    subgraph Section1[Defining what to calculate]
+        subgraph Attributes[Attributes]
+            Attr1[Attribute 1]
+            Attr2[Attribute 2]
+            Attr3[Attribute 3]
+        end
 
-    subgraph Stream
-        SA1[Attribute 1]
-        SA2[Attribute 2]
+        subgraph StreamView[StreamView]
+            SV_Entity[Entity]
+            SV_Attr1[Attribute 1]
+            SV_Attr2[Attribute 2]
+        end
+
+        subgraph BatchView[BatchView]
+            BV_Entity[Entity]
+            BV_Attr2[Attribute 2]
+            BV_Attr3[Attribute 3]
+        end
+
+        Attr1 -.-> SV_Attr1
+        Attr2 -.-> SV_Attr2
+        Attr2 -.-> BV_Attr2
+        Attr3 -.-> BV_Attr3
+
+        StreamView --> ProfilesStore[Profiles Store]
+        BatchView --> ProfilesStore
     end
 
-    subgraph Batch
-        BA1[Attribute 1]
-        BA2[Attribute 2]
+    subgraph Section2[Using attributes]
+        ProfilesStore --> Service[Service]
+
+        subgraph Service
+            S_Attr1[Attribute 1 from StreamView]
+            S_Attr2[Attribute 2 from BatchView]
+        end
+
+        Service --> Application[Application]
     end
-
-    Stream --> StreamView[**View**]
-    Batch --> BatchView[**View**]
-
-    StreamView --> Service
-    BatchView --> Service
 ```
 
-The components in bold are versioned.
+## Attributes
 
-## Entities define the attribute context
-
-An entity can be anything with an "identifier" that you capture in a Snowplow event. TODO actually this isn't true yet? only supporting atomic properties?
-
-This diagram shows some entities that could be useful for analysis:
-
-```mermaid
-flowchart TD
-    User["  o<br/> /|\ <br/> / \ <br/>User"] --> Device["  ___<br/> |___|<br/> |___|<br/>Device"]
-    User --> PhoneDevice[" |---| <br/> |    | <br/> |__| <br/>Device"]
-
-    Device --> App1["[www] App"]
-    PhoneDevice --> App2["[app] App"]
-
-    App1 -.-> Page[Page]
-    App1 -.-> Product[Product]
-
-    App2 -.-> Screen[Screen]
-    App2 -.-> ScreenView[Screen View]
-```
-
-Signals comes with predefined entities for user, device, and session. These are defined based on the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) in all Snowplow events.
-
-| Entity  | Out-of-the-box identifier            |
-| ------- | ------------------------------------ |
-| User    | `user_id`                            |
-| Device  | `domain_userid` and `network_userid` |
-| Session | `domain_sessionid`                   |
-
-You can define any entities you like, and expand this to broader concepts.
-
-| Entity           | Possible identifier                                                                                       |
-| ---------------- | --------------------------------------------------------------------------------------------------------- |
-| App              | `app_id` from [atomic fields](/docs/fundamentals/canonical-event/index.md#application-fields)             |
-| Page             | `page_urlpath` from [atomic fields](/docs/fundamentals/canonical-event/index.md#platform-specific-fields) |
-| Product          | `id` from [ecommerce product](/docs/events/ootb-data/ecommerce-events/index.md#product) or custom entity  |
-| Screen view      | `id` in `screen_view` entity                                                                              |
-| Content category | from custom entity                                                                                        |
-| Video game level | from custom entity                                                                                        |
-
-## Attributes store calculated values
-
-After defining an entity, you can start to calculate attributes for it. An attribute defines a specific fact about behavior relating to an entity.
+An attribute defines a specific fact about user behavior.
 
 There are four main types of attribute:
-* Time windowed: actions that happened within the last X number of days. For example, `products_added_to_cart_last_7_days`.
-* Lifetime: calculated over all the available data for the entity. For example, `total_product_price_clv`.
-* First touch: the first event (or property) that happened for a given entity. For example, `first_mkt_source`.
-* Last touch: the most recent event (or property) that happened for a given entity. For example, `last_device_class`.
 
-Example attributes for different entities:
-
-| Entity         | Attribute                         | Description                                                         |
-| -------------- | --------------------------------- | ------------------------------------------------------------------- |
-| User           | `num_pages_viewed_in_last_7_days` | Counts how many pages the user has viewed within the past week      |
-| User           | `last_product_viewed`             | Identifies the most recent product the user interacted with         |
-| User           | `previous_purchases`              | Provides a record of the user's past transactions                   |
-| Page           | `num_views_in_last_7_days`        | Counts how many page views a page has received within the past week |
-| Media category | `most_popular_article`            | Identifies the most popular article for all users within a category |
+| Type          | Description                                            | Example                              |
+| ------------- | ------------------------------------------------------ | ------------------------------------ |
+| Time windowed | Actions that happened within the last X number of days | `products_added_to_cart_last_7_days` |
+| Lifetime      | Calculated over all the available data                 | `total_product_price_clv`            |
+| First touch   | The first event or property that happened              | `first_mkt_source`                   |
+| Last touch    | The most recent event or property that happened        | `last_device_class`                  |
 
 Attribute values can be updated in multiple ways, depending how they're configured:
 * Events in real time (stream source only)
-* Events in warehouse (batch source only)
+* Data in warehouse (batch source only)
 * Interventions
-* Manually via Signals API
 
-### Many-many relationship between entities and attributes
+Calculated attribute values are stored in the Profiles Store.
 
-A single entity will very likely have multiple attributes. For example, you could define a user entity with attributes for the number of page views, the last product they viewed, and their previous purchases.
+## Entities
 
-Imagined like this:
+An entity is an identifier that provides the analytical context for attribute calculations. The identifier can be any field of a Snowplow event, such as `domain_userid`.
 
-```python
-user.num_page_views_in_last_7_days
-user.last_product_viewed
-user.previous_purchases
-```
+To demonstrate the necessity of entities, consider the attribute `num_views_in_last_7_days`. This table lists the possible meanings of the attribute, based on the entity it's calculated against:
 
-A single attribute definition could also be associated with multiple entities. For example, an attribute that counts page views might be relevant for user, page, and product entities. Attributes for different entities are distinct, even if they use the same name and definition.
+| Attribute                  | Entity             | Description                                                                   |
+| -------------------------- | ------------------ | ----------------------------------------------------------------------------- |
+| `num_views_in_last_7_days` | User               | How many pages a user has viewed within the past week                         |
+| `num_views_in_last_7_days` | Page               | How many page views a page has received within the past week                  |
+| `num_views_in_last_7_days` | Product            | How many times a product has been viewed within the past week                 |
+| `num_views_in_last_7_days` | App                | How many page views occurred within an app in the past week                   |
+| `num_views_in_last_7_days` | Device             | How many page views came from a specific device in the past week              |
+| `num_views_in_last_7_days` | Session            | How many page views occurred within an individual session in the past week    |
+| `num_views_in_last_7_days` | Marketing campaign | How many page views were generated by a campaign in the past week             |
+| `num_views_in_last_7_days` | Content category   | How many page views occurred for content in a category within the past week   |
+| `num_views_in_last_7_days` | Geographic region  | How many page views came from users in a region within the past week          |
+| `num_views_in_last_7_days` | Customer segment   | How many page views were generated by users in a segment within the past week |
 
-Imagined like this:
+Each of these is likely to have a different calculated value.
 
-```python
-user.num_page_views_in_last_7_days
-page.num_page_views_in_last_7_days
-product.num_page_views_in_last_7_days
-```
+You can define your own entities, or use the built-in ones. Signals comes with predefined entities for user, device, and session. These are defined based on the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) in all Snowplow events.
+
+This table lists the built-in entities, and gives suggestions for others that could be useful:
+
+| Entity            | Possible identifier                                                                                                        | Built-in |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------- | -------- |
+| User              | `user_id` from [atomic fields](/docs/fundamentals/canonical-event/index.md#user-related-fields)                            | ✅        |
+| Device            | `domain_userid` and `network_userid` from [atomic fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) | ✅        |
+| Session           | `domain_sessionid` from [atomic fields](/docs/fundamentals/canonical-event/index.md#user-related-fields)                   | ✅        |
+| App               | `app_id` from [atomic fields](/docs/fundamentals/canonical-event/index.md#application-fields)                              |          |
+| Page              | `page_urlpath` from [atomic fields](/docs/fundamentals/canonical-event/index.md#platform-specific-fields)                  |          |
+| Product           | `id` from [ecommerce product](/docs/events/ootb-data/ecommerce-events/index.md#product) or custom entity                   |          |
+| Screen view       | `id` in `screen_view` entity                                                                                               |          |
+| Geographic region | `geo_country` from [IP Enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md)         |          |
+| Content category  | from custom entity                                                                                                         |          |
+| Video game level  | from custom entity                                                                                                         |          |
+
+
+
+---
+TODO tidy this up
+
 
 ## Attributes can be grouped for ease of management
 

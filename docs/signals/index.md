@@ -48,7 +48,9 @@ Steps for using Signals:
 3. (Optional) Configure the batch engine for historical warehouse attributes
 4. Use the attributes in your application
 
-TODO what warehouse(s) are supported
+:::note Warehouse support
+Only Snowflake is supported currently.
+:::
 
 ### Defining the business logic
 

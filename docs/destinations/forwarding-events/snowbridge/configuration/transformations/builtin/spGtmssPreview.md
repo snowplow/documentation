@@ -1,4 +1,12 @@
-# spGtmssPreview
+---
+title: "spGtmssPreview"
+description: "Extracts a value from the x-gtm-server-preview field and attaches it as the GTM SS preview mode header."
+---
+
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
 
 :::note
 This transformation was added in version 2.3.0
@@ -18,10 +26,10 @@ First, we validate to ensure that the value is a valid base64 string. Second, we
 
 ## Configuration options
 
-```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/snowplow-builtin/spGtmssPreview-minimal-example.hcl
-```
+<CodeBlock language="hcl" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/snowplow-builtin/spGtmssPreview-minimal-example.hcl
+`}</CodeBlock>
 
-```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/snowplow-builtin/spGtmssPreview-full-example.hcl
-```
+<CodeBlock language="hcl" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/snowplow-builtin/spGtmssPreview-full-example.hcl
+`}</CodeBlock>

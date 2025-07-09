@@ -3,6 +3,11 @@ title: "HTTP"
 description: "Send data over HTTP."
 ---
 
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 :::note
 Version 3.0.0 makes breaking changes to the HTTP target. Details on migrating can be found [in the migration guide](/docs/destinations/forwarding-events/snowbridge/3-X-X-upgrade-guide/index.md)
 :::
@@ -49,13 +54,13 @@ In addition to all base functions available in the Go text/template package, the
 
 `env` - Allows you to set and refer to an env var in your template. Use it when your request body must contain sensitive data, for example an API key.
 
-### Template example
+### Template example
 
 The following example provides an API key via environment variable, and iterates the batch to provide JSON-formatted data one by one into a new key, inserting a comma before all but the first event.
 
-```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/targets/http-template-full-example.file
-```
+<CodeBlock language="hcl" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/targets/http-template-full-example.file
+`}</CodeBlock>
 
 ## Response rules (beta)
 
@@ -83,15 +88,15 @@ Data that matches a setup response rule is handled by a retry as determined in t
 
 Here is an example of the minimum required configuration:
 
-```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/targets/http-minimal-example.hcl
-```
+<CodeBlock language="hcl" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/targets/http-minimal-example.hcl
+`}</CodeBlock>
 
 If you want to use this as a [failure target](/docs/destinations/forwarding-events/snowbridge/concepts/failure-model/index.md#failure-targets), then use failure_target instead of target.
 Here is an example of every configuration option:
 
-```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/targets/http-full-example.hcl
-```
+<CodeBlock language="hcl" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/targets/http-full-example.hcl
+`}</CodeBlock>
 
 If you want to use this as a [failure target](/docs/destinations/forwarding-events/snowbridge/concepts/failure-model/index.md#failure-targets), then use failure_target instead of target.

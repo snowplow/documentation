@@ -3,6 +3,11 @@ title: "Kinesis"
 description: "Read data from a Kinesis stream."
 ---
 
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 :::note
 
 To use this source, you need the AWS-specific version of Snowbridge that can only be run on AWS. See [the page on Snowbridge distributions](/docs/destinations/forwarding-events/snowbridge/getting-started/index.md) for more information.
@@ -34,12 +39,12 @@ Assuming your AWS credentials have sufficient permission for Kinesis and DynamoD
 
 Here is an example of the minimum required configuration:
 
-```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/sources/kinesis-minimal-example.hcl
-```
+<CodeBlock language="hcl" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/sources/kinesis-minimal-example.hcl
+`}</CodeBlock>
 
 Here is an example of every configuration option:
 
-```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/sources/kinesis-full-example.hcl
-```
+<CodeBlock language="hcl" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/sources/kinesis-full-example.hcl
+`}</CodeBlock>

@@ -3,6 +3,11 @@ title: "Retry behavior (beta)"
 description: "Configure retry behaviour."
 ---
 
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 :::note
 This feature was added in version 3.0.0
 
@@ -21,6 +26,6 @@ Retries will be attempted with an exponential backoff. In other words, on each s
 
 ## Configuration options
 
-```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/retry-example.hcl
-```
+<CodeBlock language="hcl" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/retry-example.hcl
+`}</CodeBlock>

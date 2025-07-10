@@ -1,10 +1,10 @@
 ---
 title: "Entities"
-sidebar_position: 1
+sidebar_position: 15
 sidebar_label: "Entities"
 ---
 
-An `Entity` is the foundational identifier that attributes are calculated against.
+An `Entity` is the identifier that attributes are calculated against.
 
 Signals includes a number of out-of-the-box entities based on commonly used identifiers from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) in all Snowplow events.
 

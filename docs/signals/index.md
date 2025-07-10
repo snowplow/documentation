@@ -8,7 +8,7 @@ sidebar_custom_props:
     - bdp
 ---
 
-Snowplow Signals is a real-time personalization engine built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in real time.
+Snowplow Signals is a real-time personalization engine for customer intelligence, built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in real time.
 
 Real-time personalization use cases that are unlocked by Signals include:
 * Personalized recommendations
@@ -17,6 +17,7 @@ Real-time personalization use cases that are unlocked by Signals include:
 * Adaptive UIs
 * Dynamic pricing
 * Contextually relevant advertising
+* Paywall optimization
 
 Your Signals infrastructure is deployed by us into the same cloud as your Snowplow BDP pipeline. You can use the Signals APIs and SDKs to first define the data you're interested in, then to retrieve the calculated attributes to alter your customer's experience and behavior.
 
@@ -46,6 +47,10 @@ Steps for using Signals:
 2. Publish the attribute definitions
 3. (Optional) Configure the batch engine for historical warehouse attributes
 4. Use the attributes in your application
+
+:::note Warehouse support
+Only Snowflake is supported currently.
+:::
 
 ### Defining the business logic
 
@@ -91,18 +96,18 @@ Once Signals receives the applied configurations it will start calculating attri
 
 Snowplow provide SDKs for Node.js and Python to retrieve attributes in your application.
 
-|Feature|[Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk)|[Node.js SDK](https://github.com/snowplow-incubator/snowplow-signals-typescript-sdk) |
-|-------|----------|-----------|
-|Define Attributes|✅ |❌|
-|Retrieve Attributes | ✅ |✅  |
-
-
+| Feature             | [Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk) | [Node.js SDK](https://github.com/snowplow-incubator/snowplow-signals-typescript-sdk) |
+| ------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| Define Attributes   | ✅                                                                        | ❌                                                                                    |
+| Retrieve Attributes | ✅                                                                        | ✅                                                                                    |
 
 ## How Signals calculates attributes
 
 Stream attributes are calculated automatically.
 
 When Signals is deployed in your Snowplow BDP pipeline, the event stream is read by the stream engine. All tracked events are inspected. If you've configured Signals to calculate an attribute from a certain type of event, when that event type is received, the engine will extract the attribute data and forward it to the Profiles Store, in real time. If that event type isn't registered as containing attribute data, nothing happens.
+
+Real-time stream flow:
 
 ```mermaid
 flowchart TD
@@ -122,9 +127,22 @@ flowchart TD
     I -->     J[Attribute pushed to<br/>the Profiles Store]
 ```
 
-Batch attributes require some manual configuration and running. Once configured and registered with Signals, the Signals materialization engine/sync service will incrementally check on the table every 5 minutes to calculate attributes, and push them to the Profiles Store. Check out the [batch engine tutorial](/tutorials/snowplow-batch-engine/start/) to learn more.
+Conversely, batch attributes are calculated via dbt models and pushed to the Profiles Store periodically:
 
+```mermaid
+flowchart TD
+    subgraph Batch[Warehouse]
+        A[Behavioral data events<br/>arrive in the warehouse] --> B[Events are modeled<br/>into tables]
+        B --> D[Signals checks for<br/>new rows in connected tables]
+    end
+
+    D --> E{Are there<br/>new rows?}
+
+    E -->|No| F[Nothing happens]
+
+    E -->|Yes| H[Attributes synced to<br/>the Profiles Store]
+```
 
 ## Example real-time Signals user journey
 
-TODO link to Signals tutorials? description of our sales demo
+TODO

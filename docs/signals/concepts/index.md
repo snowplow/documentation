@@ -1,83 +1,271 @@
 ---
 title: "Signals concepts"
-sidebar_position: 1
+sidebar_position: 10
 sidebar_label: "Concepts"
 ---
 
+Signals introduces a new set of data governance concepts to Snowplow. As with schemas for Snowplow event data, Signals components are strictly defined, structured, and versioned.
 
-## Entities
+**Attributes** define a specific fact about user behavior.
 
-The foundation of Signals are entities (distinct from [Snowplow entities](/docs/fundamentals/entities/index.md), but they can be related).
+They don't include any configuration for real-time or batch processing, versioning, or calculation context. To define that important metadata, you'll need to configure attribute groups. Signals has two attribute groupings:
+* **Views**, for defining attributes
+* **Services**, for consuming attributes
 
-An <dfn>entity</dfn> is the core unit that all the other Signals features relate to, and can be anything with an "identifier" that you can capture in a Snowplow event.
+Start by creating views. At this point, you'll define:
+* The data source - whether to calculate the attributes from the real-time stream, or in batch from the warehouse
+* What **entity** to calculate the attributes for
+* The version number of the view
 
-For example, the simplest entities to think about (and which come predefined when you start with Signals) are concepts like "users", "devices", or "sessions"; these would be entities that you describe in events with the out-of-the-box [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) like `user_id`, `domain_userid`/`network_userid`, or `domain_sessionid` (respectively).
+Apply the view configuration to Signals, so that it can start calculating attributes and populating your Profiles Store. You'll need additional configuration if you're using batch processing.
 
-You can define any entities you like, and expand this to broader concepts. For example:
-- Apps (perhaps described by [`app_id`](/docs/fundamentals/canonical-event/index.md#application-fields))
-- Pages (perhaps [`page_urlpath`](/docs/fundamentals/canonical-event/index.md#platform-specific-fields) or a page identifier captured in a custom entity)
-- Products (that you might capture in an [ecommerce entity](/docs/events/ootb-data/ecommerce-events/index.md#product) or other custom entity)
-- Page/Screen views (as captured in the `web_page` and `screen_view` entities)
-- Content categories
-- Levels in a game
+Next, choose which attributes from which views you want to consume in your applications. Group them into services, and apply the configuration to Signals.
 
-Defining an entity and how to identify it unlocks other features so you can do things like compute [attributes](#attributes) for it, or publish [interventions](#interventions) to it.
+Finally, retrieve calculated attributes in your application, and use them to trigger actions.
+
+## Overview diagrams
+
+This diagram shows a simple example configuration:
+
+```mermaid
+flowchart TD
+    subgraph Section1[Defining what to calculate]
+        subgraph View[View]
+            V_Entity[Entity]
+            V_Attr1[Attribute 1]
+        end
+
+        View --> ProfilesStore[Profiles Store]
+    end
+
+    subgraph Section2[Using attributes]
+        ProfilesStore --> Service[Service]
+
+        subgraph Service
+            S_Attr1[Attribute 1]
+        end
+
+        Service --> Application[Application]
+    end
+```
+A single attribute has been defined, calculated, and retrieved to use in an application.
+
+The next diagram shows a more complex example configuration. Things to note:
+* Views can have multiple attributes, but only one entity
+* Attributes can be reused across views
+* All calculated attributes are stored in the Profiles Store
+* Services can selectively retrieve attribute values from different views
+
+```mermaid
+flowchart TD
+    subgraph Section1[Defining what to calculate]
+        subgraph Attributes[Attributes]
+            Attr1[Attribute 1]
+            Attr2[Attribute 2]
+            Attr3[Attribute 3]
+        end
+
+        subgraph StreamView[StreamView]
+            SV_Entity[Entity]
+            SV_Attr1[Attribute 1]
+            SV_Attr2[Attribute 2]
+        end
+
+        subgraph BatchView[BatchView]
+            BV_Entity[Entity]
+            BV_Attr2[Attribute 2]
+            BV_Attr3[Attribute 3]
+        end
+
+        Attr1 -.-> SV_Attr1
+        Attr2 -.-> SV_Attr2
+        Attr2 -.-> BV_Attr2
+        Attr3 -.-> BV_Attr3
+
+        StreamView --> ProfilesStore[Profiles Store]
+        BatchView --> ProfilesStore
+    end
+
+    subgraph Section2[Using attributes]
+        ProfilesStore --> Service[Service]
+
+        subgraph Service
+            S_Attr1[Attribute 1 from StreamView]
+            S_Attr2[Attribute 2 from BatchView]
+        end
+
+        Service --> Application[Application]
+    end
+```
 
 ## Attributes
 
-After defining an entity, you can start to calculate attributes for it.
+An attribute describes what kind of calculation to perform, and what event data to evaluate.
 
-An <dfn>attribute</dfn> represents a specific fact about behavior with an entity and gets defined as part of a [view](#views).
+There are four main types of attribute, depending on the type of user behavior you want to understand:
 
-For example: (attributes for an entity in **bold**)
-- _Number of **page** views in the last 7 days:_ counts how many pages a page has received within the past week.
-- _Number of pages viewed by a **user** in the last 7 days:_ counts how many pages a user has viewed within the past week.
-- _Last product viewed by a **user**:_ identifies the most recent product a user interacted with.
-- _Last product sold from **product category**:_ identifies the most recent product any user has bought within a product category.
-- _Previous purchases by **user**:_ provides a record of the user's past transactions.
+| Type          | Description                                            | Example                              |
+| ------------- | ------------------------------------------------------ | ------------------------------------ |
+| Time windowed | Actions that happened within the last X number of days | `products_added_to_cart_last_7_days` |
+| Lifetime      | Calculated over all the available data                 | `total_product_price_clv`            |
+| First touch   | The first event or property that happened              | `first_mkt_source`                   |
+| Last touch    | The most recent event or property that happened        | `last_device_class`                  |
 
-All attributes get defined as part of a [view](#views), which ties them to a specific entity and source, defining how their values get updated.
+Attribute values can be updated in multiple ways, depending how they're configured:
+* Events in real time (stream source only)
+* Data in warehouse (batch source only)
+* Interventions
 
-You can also set them manually via the APIs, or dynamically via interventions.
+Real-time attribute calculation uses the Snowplow event stream, and therefore ingests only Snowplow events. For historical warehouse attributes, you can import values from any table—whether created by Signals or not, even whether derived from Snowplow data or not.
 
-Read more [about attributes](/docs/signals/configuration/attributes/index.md).
+Calculated attribute values are stored in the Profiles Store.
 
-### Views
+## Entities
 
-A <dfn>View</dfn> is a versioned collection of attributes associated with a specific entity that are populated from the same source.
+An entity is an identifier that provides the analytical context for attribute calculations. The identifier can be any field of a Snowplow event, such as `domain_userid`.
 
-You can picture the result of a View as a table of attributes for an entity instance.
+:::note Nomenclature
+This is distinct from a standard [Snowplow entity](/docs/fundamentals/entities/index.md).
+:::
 
-For example, from the [previous example attributes](#attributes) for a user-entity keyed by `user_id`:
+To demonstrate the necessity of entities, consider the attribute `num_views_in_last_7_days`. This table lists some possible meanings of the attribute, based on the entity it's calculated against:
 
-| `user_id` | `number_of_pageviews` | `last_product_viewed` | `previous_purchases`      |
-| --------- | --------------------- | --------------------- | ------------------------- |
-| `abc123`  | 5                     | Red Shoes             | [`Blue Shoes`, `Red Hat`] |
+| Attribute                  | Entity             | Description                                                                   |
+| -------------------------- | ------------------ | ----------------------------------------------------------------------------- |
+| `num_views_in_last_7_days` | User               | How many pages a user has viewed within the past week                         |
+| `num_views_in_last_7_days` | Page               | How many page views a page has received within the past week                  |
+| `num_views_in_last_7_days` | Product            | How many times a product has been viewed within the past week                 |
+| `num_views_in_last_7_days` | App                | How many page views occurred within an app in the past week                   |
+| `num_views_in_last_7_days` | Device             | How many page views came from a specific device in the past week              |
+| `num_views_in_last_7_days` | Session            | How many page views occurred within an individual session in the past week    |
+| `num_views_in_last_7_days` | Marketing campaign | How many page views were generated by a campaign in the past week             |
+| `num_views_in_last_7_days` | Geographic region  | How many page views came from users in a region within the past week          |
+| `num_views_in_last_7_days` | Customer segment   | How many page views were generated by users in a segment within the past week |
 
-The attributes of a view can be set to expire for instances if they aren't updated after a certain period of time.
+Each of these is likely to have a different calculated value.
 
-Each view can be associated with metadata such as an owner, description, and tags.
+You can define your own entities, or use the built-in ones. Signals comes with predefined entities for user, device, and session. Their identifiers are from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) in all Snowplow events.
 
-When you're happy with a version of a View definition, you can associate it with a service to be consistently requested via the API for personalization.
+This table lists the built-in entities, and suggests others that could be useful:
 
-### Services
+| Entity            | Identifier                                                                                                                 | Built-in |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------- | -------- |
+| User              | `user_id` from [atomic fields](/docs/fundamentals/canonical-event/index.md#user-related-fields)                            | ✅        |
+| Device            | `domain_userid` and `network_userid` from [atomic fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) | ✅        |
+| Session           | `domain_sessionid` from [atomic fields](/docs/fundamentals/canonical-event/index.md#user-related-fields)                   | ✅        |
+| App               | `app_id` from [atomic fields](/docs/fundamentals/canonical-event/index.md#application-fields)                              |          |
+| Page              | `page_urlpath` from [atomic fields](/docs/fundamentals/canonical-event/index.md#platform-specific-fields)                  |          |
+| Product           | `id` from [ecommerce product](/docs/events/ootb-data/ecommerce-events/index.md#product) or custom entity                   |          |
+| Screen view       | `id` in `screen_view` entity                                                                                               |          |
+| Geographic region | `geo_country` from [IP Enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md)         |          |
+| Content category  | from custom entity                                                                                                         |          |
+| Video game level  | from custom entity                                                                                                         |          |
 
-A <dfn>Service</dfn> is a collection of [views](#views) that are grouped to make the retrieval of attributes simpler.
+## Views
 
-They allow you to retrieve attributes in bulk from multiple views, that are each pinned to specific versions so you can ensure the returned values are consistent with what you expect.
-This allows you to freely iterate on your view/attribute definitions without impacting production applications that rely on your attributes, and letting you migrate to new versions when ready.
+Views are where you define the metrics that you want to calculate.
+
+A view is a versioned set of attributes that are calculated against a specific entity, from a specific source. The source could be the real-time event stream, or a warehouse table batch source.
+
+An example configuration for a view based on a user entity, with a stream (default) source:
+
+```mermaid
+flowchart TD
+    subgraph Stream[Attributes]
+        SA1[`number_of_pageviews`]
+        SA2[`last_product_viewed`]
+    end
+
+    Stream --> View
+
+    subgraph View[View: `user_attributes_realtime`]
+        V_User[User entity: `user_id`]
+        V_SA1[`number_of_pageviews`]
+        V_SA2[`last_product_viewed`]
+    end
+```
+
+When this view configuration is applied to Signals, the attributes will be calculated and stored in the Profiles Store. On retrieval, this view might look something like this as a table:
+
+| `user_id`            | `number_of_pageviews` | `last_product_viewed` |
+| -------------------- | --------------------- | --------------------- |
+| `abc123@example.com` | 5                     | `"Red Shoes"`         |
+| `def456@example.com` | 10                    | `"Blue Hat"`          |
+
+## Services
+
+Services are where you define how to use the calculated attributes in your applications.
+
+Each service can contain multiple entire views, or individual attributes from different views, even if they have different entities or different sources.
+
+They provide a stable interface to use in your applications: by pinning specific view versions, they provide a consistent set of consumable attributes.
+
+By using services you can:
+* Iterate on attribute definitions without worrying about breaking downstream processes
+* Migrate to new view versions by updating the service definition, without having to update the application code
+
+Here's a service that combines the same view as before with an additional batch view:
+
+```mermaid
+flowchart TD
+    subgraph Attributes[Attributes]
+        SA1[`number_of_pageviews`]
+        SA2[`last_product_viewed`]
+        BA1[`previous_purchases`]
+        BA2[`previous_returns`]
+    end
+
+    Attributes --> StreamView
+    Attributes --> BatchView
+
+    subgraph StreamView[View: `user_attributes_realtime`]
+        SV_User[User: `user_id`]
+        SV_SA1[`number_of_pageviews`]
+        SV_SA2[`last_product_viewed`]
+    end
+
+    subgraph BatchView[View: `user_attributes_warehouse`]
+        BV_User[User: `user_id`]
+        BV_BA1[`previous_purchases`]
+        BV_BA2[`previous_returns`]
+    end
+
+    StreamView --> Service
+    BatchView --> Service
+
+    subgraph Service[Service]
+        S_StreamView[`user_attributes_realtime`]
+        S_BatchView[`user_attributes_warehouse`]
+    end
+```
+
+In this example, both views have the same entity, and all attributes from both views are included in the service.
+
+This service could be imagined like this as a table:
+
+| `user_id`            | `number_of_pageviews` | `last_product_viewed` | `previous_purchases`       | `previous_returns` |
+| -------------------- | --------------------- | --------------------- | -------------------------- | ------------------ |
+| `abc123@example.com` | 5                     | `"Red Shoes"`         | `[Blue Shoes", "Red Hat"]` | `["Red Hat"]`      |
+| `def456@example.com` | 10                    | `"Yellow Hat"`        | `[]`                       | `[]`               |
 
 ## Interventions
 
-Once an entity is defined in Signals you can start to retrieve interventions for it, and start publishing to them.
+Interventions are a way to trigger actions in your application, such as in-app messages, discounts, or personalized journeys. They're calculated on top of changes in attribute values.
 
-An <dfn>intervention</dfn> describes an action that can be performed for a user to achieve a more successful result.
+They allow you to define logic within Signals rather than in your application. This allows you to update the behavior without requiring application updates, as well as streamlining management, development, and ownership.
 
-User devices and your own systems can request interventions for a list of specific entities, which are then delivered in real-time as they are published.
-You can publish interventions manually using the API, or define them to trigger automatically when [attributes](#attributes) get updated and meet specific criteria.
-There are built-in operations that interventions can perform or that can be handled by Signals SDKs, but the contents of an intervention can contain custom data to use however you need to, and can include current attribute values for dynamic, personalized, actions using the latest real-time data.
+```mermaid
+flowchart TD
+    Application[application] -->|sends| Event[event]
+    Event -->|updates| Attribute[attribute]
+    Intervention[intervention] -->|listens to| Attribute
+    Intervention -->|fires to| Application
+```
 
-For example, a user can subscribe to interventions for their own `domain_userid`, the current `app_id`, the current `page`, and the current `product`, and any interventions published targeting any of those entities get received.
-This enables both individual-level and broadcast-level messaging, so you can offer a specific user a personalized message, while also notifying all users on a specific product page that limited stock is selling fast.
+Like attributes, interventions are specific to an entity.
 
-<!-- TODO: Read more about interventions -->
+Interventions can be triggered automatically based on attribute changes, or manually using the Signals API. Subscribe within your application for real-time updates to interventions for entities of interest.
+
+For example, you could subscribe to interventions for `domain_userid`, the current `app_id`, the current `page`, and the current `product`. When new interventions are published for any of those, the retrieved contents includes any relevant attribute values, or custom data that you defined. This enables both individual-level and broadcast-level real-time messaging: for example, offering a specific user a personalized message, while also notifying all users on a specific product page that limited stock is selling fast.
+
+Interventions can also perform built-in automatic operations, including updating attribute values.

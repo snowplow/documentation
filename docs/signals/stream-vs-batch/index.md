@@ -5,10 +5,10 @@ sidebar_label: "Stream or batch?"
 ---
 
 Whether to compute attributes in real-time from the event stream, or in batch from the warehouse is an important decision. Broadly, you might use:
-* Stream for real-time use cases, such as tracking the latest product a user viewed, or the number of page views in a session
-* Batch sources (warehouse tables) for historical analysis, such as calculating a user's purchase history or average session length
+* **Stream** for real-time use cases, such as tracking the latest product a user viewed, or the number of page views in a session
+* **Batch** sources (warehouse tables) for historical analysis, such as calculating a user's purchase history or average session length
 
-More specifically, the choice depends on your use case. This table summarizes the options for different types of processing:
+This table summarizes the options for different types of processing:
 
 | Feature                                 | Supported in stream                                                           | Supported in batch |
 | --------------------------------------- | ----------------------------------------------------------------------------- | ------------------ |

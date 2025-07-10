@@ -4,23 +4,21 @@ sidebar_position: 30
 sidebar_label: "Attribute groups"
 ---
 
+TODO this page will be redone in the next PR to use the new View wrappers
+
 Signals has two attribute groupings:
 * Views, for defining attributes
 * Services, for consuming attributes
 
 Each view is a versioned collection of attributes, and specific to one entity and one data source (stream or batch).
 
-Services are groups of views. They provide a stable interface to use in your applications: by pinning specific view versions, they provide a consistent set of consumable attributes. Services can contain views from different entities, and different sources.
-
-By using services you can:
-* Iterate on attribute definitions without worrying about breaking downstream processes
-* Migrate to new view versions by updating the service definition, without having to update the application code
+Services are groups of views or attributes.
 
 ## Attribute management
 
 TODO this is very confusing
 
-Every view has a version number. If you change the attributes of a view, increase the version number.
+Every view has a version number.
 
 Signals provides functionality for separating attribute definition from calculation. This allows you to set up your attributes and business logic before putting them into production. The options are different depending on whether the view is for stream or batch attributes.
 
@@ -66,6 +64,9 @@ To avoid stale attributes staying in your Profiles Store forever, you can config
 
 If Signals then processes a new event that calculates the attribute again, or materializes the attribute from the warehouse again, the expiration timer is reset.
 
+## When to update the view version TODO
+
+TODO
 
 ## Minimal stream view example
 

@@ -6,8 +6,6 @@ sidebar_label: "Concepts"
 
 Signals introduces a new set of data governance concepts to Snowplow. As with schemas for Snowplow event data, Signals components are strictly defined, structured, and versioned.
 
-## Overview
-
 **Attributes** define a specific fact about user behavior.
 
 They don't include any configuration for real-time or batch processing, versioning, or calculation context. To define that important metadata, you'll need to configure attribute groups. Signals has two attribute groupings:
@@ -25,7 +23,7 @@ Next, choose which attributes from which views you want to consume in your appli
 
 Finally, retrieve calculated attributes in your application, and use them to trigger actions.
 
-### Example diagrams
+## Overview diagrams
 
 This diagram shows a simple example configuration:
 

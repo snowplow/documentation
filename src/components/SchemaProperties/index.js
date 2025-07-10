@@ -11,7 +11,7 @@ export default function SchemaProperties(props) {
   const description = props.info || props.schema.description;
 
   return (
-    <div className="flex flex-col w-full bg-card rounded-lg shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-border justify-start items-start overflow-hidden">
+    <div className="flex flex-col w-full bg-card rounded-lg shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-border justify-start items-start overflow-hidden mb-4">
       <div className="flex self-stretch flex-row justify-between items-start gap-4 p-6">
         <div className="flex flex-col gap-1 flex-1">
           <div className="flex items-center gap-2">

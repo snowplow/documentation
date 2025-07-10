@@ -101,8 +101,6 @@ Snowplow provide SDKs for Node.js and Python to retrieve attributes in your appl
 | Define Attributes   | ✅                                                                        | ❌                                                                                    |
 | Retrieve Attributes | ✅                                                                        | ✅                                                                                    |
 
-
-
 ## How Signals calculates attributes
 
 Stream attributes are calculated automatically.

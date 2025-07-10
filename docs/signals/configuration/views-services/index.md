@@ -57,6 +57,16 @@ For stream attributes, you can choose to configure and apply views that don't ca
 
 This means that configuration, calculation, materialization, and retrieval are fully decoupled.
 
+
+## Views can be set to expire
+
+Some attributes will only be relevant for a certain amount of time, and eventually stop being updated.
+
+To avoid stale attributes staying in your Profiles Store forever, you can configure TTL lifetimes for entities and views. When none of the attributes for an entity or view have been updated for the defined lifespan, the entity or view expires. Any attribute values for this entity or view will be deleted: fetching them will return `None` values.
+
+If Signals then processes a new event that calculates the attribute again, or materializes the attribute from the warehouse again, the expiration timer is reset.
+
+
 ## Minimal stream view example
 
 You can define a `View` by passing in a list of previously defined attributes. Here's a minimal example:

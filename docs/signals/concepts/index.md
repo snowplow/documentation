@@ -124,6 +124,10 @@ Calculated attribute values are stored in the Profiles Store.
 
 An entity is an identifier that provides the analytical context for attribute calculations. The identifier can be any field of a Snowplow event, such as `domain_userid`.
 
+:::note Nomenclature
+This is distinct from a standard [Snowplow entity](/docs/fundamentals/entities/index.md).
+:::
+
 To demonstrate the necessity of entities, consider the attribute `num_views_in_last_7_days`. This table lists some possible meanings of the attribute, based on the entity it's calculated against:
 
 | Attribute                  | Entity             | Description                                                                   |

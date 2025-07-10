@@ -4,8 +4,6 @@ sidebar_position: 30
 sidebar_label: "Attribute groups"
 ---
 
-TODO this page will be redone in the next PR to use the new View wrappers
-
 Signals has two attribute groupings:
 * Views, for defining attributes
 * Services, for consuming attributes
@@ -15,8 +13,6 @@ Each view is a versioned collection of attributes, and specific to one entity an
 Services are groups of views or attributes.
 
 ## Attribute management
-
-TODO this is very confusing
 
 Every view has a version number.
 
@@ -55,7 +51,6 @@ For stream attributes, you can choose to configure and apply views that don't ca
 
 This means that configuration, calculation, materialization, and retrieval are fully decoupled.
 
-
 ## Views can be set to expire
 
 Some attributes will only be relevant for a certain amount of time, and eventually stop being updated.
@@ -64,7 +59,7 @@ To avoid stale attributes staying in your Profiles Store forever, you can config
 
 If Signals then processes a new event that calculates the attribute again, or materializes the attribute from the warehouse again, the expiration timer is reset.
 
-## When to update the view version TODO
+## When to update the view version
 
 TODO
 
@@ -148,7 +143,7 @@ stream_view = View(
 
 Signals will start calculating attributes as soon as this view configuration is applied.
 
-## Testing views TODO
+## Testing views
 
 To understand what the output of a view will look like, use the Signals `test` method. This will output a table of attributes calculated from your `atomic` events table.
 
@@ -172,9 +167,6 @@ test_data = sp_signals.test(
 While you can filter on specific app_ids during testing, both the streaming and batch engines may be configured to process only a subset of relevant app_ids to avoid unnecessary compute. As a result, testing with an arbitrary app_id may not yield expected data if it isn’t included in the configured subset.
 :::
 
-TODO example output
-
-
 To see which attributes a view has, use `get_view()`. Here's an example:
 
 ```python
@@ -195,11 +187,7 @@ The table below lists all available arguments for `get_view()`
 
 If you don't specify a version, Signals will retrieve the latest version.
 
-TODO example output
-
 ## Services
-
-TODO how does it work when one service has batch and stream views? Does it matter?
 
 Here's an example showing how to create a service to manage two views:
 

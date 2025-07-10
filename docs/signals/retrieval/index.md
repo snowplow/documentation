@@ -1,7 +1,7 @@
 ---
 title: "Retrieving calculated values from the Profiles Store"
 sidebar_position: 30
-sidebar_label: "Retrieving values TODO"
+sidebar_label: "Retrieving values"
 ---
 
 Your calculated attributes are stored in the Profiles Store. To retrieve them, you can use:
@@ -39,7 +39,6 @@ The table below lists all available arguments for `get_service_attributes()`
 | `entity`     | The entity name to retrieve attributes for | `string` | ✅         |
 | `identifier` | The specific entity value                  | `string` | ✅         |
 
-TODO example output
 
 ### Attributes from a view
 
@@ -71,12 +70,8 @@ The table below lists all available arguments for `get_view_attributes()`
 | `entity`     | The entity name                         | `string`                     | ✅         |
 | `identifier` | The specific entity value               | `string`                     | ✅         |
 
-TODO example output
-
 ## Node.js SDK TODO
 
 Install the SDK into your project, and connect to Signals as described in [Configuration](/docs/signals/configuration/index.md).
-
-TODO
 
 ## Signals API TODO

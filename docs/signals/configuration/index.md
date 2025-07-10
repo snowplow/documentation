@@ -14,7 +14,7 @@ All configuration is defined using the [Signals Python SDK](https://github.com/s
 
 First, choose where to store your Signals configurations. We recommend creating a new repository.
 
-The easiest way to use the Python SDK is within a Jupyter notebook. TODO link to example notebook for them to copy - does the SDK come with one?
+The easiest way to use the Python SDK is within a Jupyter notebook.
 
 Within your notebook, install the SDK.
 
@@ -70,7 +70,7 @@ The created `Signals` object has the following methods:
 
 Read more about retrieving calculated attributes in [Retrieving values](/docs/signals/retrieval/index.md)
 
-## Setting up the Node.js SDK TODO
+## Setting up the Node.js SDK
 
 The [Signals Node.js SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk) only retrieves attributes, and can't be used to apply configuration.
 

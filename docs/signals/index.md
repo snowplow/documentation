@@ -143,6 +143,6 @@ flowchart TD
     E -->|Yes| H[Attributes synced to<br/>the Profiles Store]
 ```
 
-## Example real-time Signals user journey TODO
+## Example real-time Signals user journey
 
-TODO link to Signals tutorials? description of our sales demo
+TODO

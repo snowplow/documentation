@@ -23,10 +23,6 @@ Signals is configured slightly differently depending if you're using existing ta
 
 To create new attribute tables, the batch engine will help you set up the required dbt projects and models.
 
-## Multi-step process TODO
-
-something something online offline?
-
 ## Using existing attributes
 
 Using existing tables in your warehouse is the more straight-forward approach, as it doesn't require any additional modeling.
@@ -123,8 +119,6 @@ sp_signals.apply([view])
 ```
 
 Signals will connect to the table, but the attributes will not be materialized into Signals yet because the view has `online=False`.
-
-TODO why separate these steps?
 
 To send the attributes to the Profiles Store, change the `online` parameter to `True`, and apply the view again.
 

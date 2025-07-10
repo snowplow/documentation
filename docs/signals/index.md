@@ -52,6 +52,8 @@ Steps for using Signals:
 Only Snowflake is supported currently.
 :::
 
+Check out the [quick start tutorial](/tutorials/signals-quickstart/start) to get started.
+
 ### Defining the business logic
 
 Your first step is to define the attributes and interventions you're interested in tracking. This is done using our [Signals Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk). Once defined, apply the attributes configuration to the Signals infrastructure.

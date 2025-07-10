@@ -10,6 +10,8 @@ Use the Python SDK to define the attributes you want to calculate, as well as th
 
 All configuration is defined using the [Signals Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk), or manually via the Signals API.
 
+Check out the [quick start tutorial](/tutorials/signals-quickstart/start) to get started.
+
 ## Setting up your project
 
 First, choose where to store your Signals configurations. We recommend creating a new repository.

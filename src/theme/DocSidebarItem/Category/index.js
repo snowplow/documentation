@@ -54,26 +54,12 @@ function useCategoryHrefWithSSRFallback(item) {
 }
 
 function CollapseButton({ categoryLabel, href, collapsed, updateCollapsed }) {
-  // Modified CollapseButton so that it has the same behavior as the title
   const handleClick = (e) => {
     e.preventDefault()
     e.stopPropagation()
-
-    if (!collapsed) {
-      // When expanded, simply collapse
-      updateCollapsed(true)
-    } else {
-      // When collapsed, expand AND navigate to the page
-      updateCollapsed(false)
-      if (href) {
-        const linkElement = e.target
-          .closest('.menu__list-item-collapsible')
-          .querySelector('.menu__link')
-        if (linkElement) {
-          linkElement.click()
-        }
-      }
-    }
+    
+    // Only toggle the collapse state, don't navigate
+    updateCollapsed(!collapsed)
   }
 
   return (

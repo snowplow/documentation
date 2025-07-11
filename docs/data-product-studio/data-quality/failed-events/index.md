@@ -2,7 +2,7 @@
 title: "Managing data quality"
 date: "2020-02-15"
 sidebar_position: 3
-sidebar_label: "Failed events"
+sidebar_label: "Legacy Failed events"
 ---
 
 [Failed events](/docs/fundamentals/failed-events/index.md) are events the pipeline had some problem processing (for example, events that did not pass validation).

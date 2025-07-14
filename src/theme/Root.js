@@ -40,7 +40,14 @@ async function fetchApiKey() {
 
     console.log('❗️❗️ the key is', apiKey)
 
-    JSON.parse(apiKey)
+    // Check if apiKey is a string with exactly 16 characters
+    if (typeof apiKey !== 'string' || apiKey.length !== 16) {
+      throw new Error(
+        `Invalid API key format: expected 16 character string, got ${typeof apiKey} with length ${
+          apiKey.length
+        }`
+      )
+    }
 
     return apiKey
   } catch (error) {

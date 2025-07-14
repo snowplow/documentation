@@ -37,6 +37,8 @@ async function fetchApiKey() {
     }
 
     const apiKey = await response.text()
+    JSON.parse(apiKey)
+
     return apiKey
   } catch (error) {
     console.error('Error fetching API key:', error)

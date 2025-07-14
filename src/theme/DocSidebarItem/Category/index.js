@@ -57,7 +57,7 @@ function CollapseButton({ categoryLabel, href, collapsed, updateCollapsed }) {
   const handleClick = (e) => {
     e.preventDefault()
     e.stopPropagation()
-    
+
     // Only toggle the collapse state, don't navigate
     updateCollapsed(!collapsed)
   }
@@ -128,25 +128,6 @@ export default function DocSidebarItemCategory({
     }
   }, [collapsible, expandedItem, index, setCollapsed, autoCollapseCategories])
 
-  // Modified click handler for the title link
-  const handleTitleClick = (e) => {
-    onItemClick?.(item)
-
-    if (collapsible) {
-      if (isActive && !collapsed) {
-        // When expanded and selected, clicking title should collapse and navigate
-        updateCollapsed(true)
-      } else if (href) {
-        // For items with href, expand and let navigation happen
-        updateCollapsed(false)
-      } else {
-        // For items without href, just toggle
-        e.preventDefault()
-        updateCollapsed()
-      }
-    }
-  }
-
   return (
     <li
       className={clsx(
@@ -170,7 +151,6 @@ export default function DocSidebarItemCategory({
             'menu__link--sublist-caret': !href && collapsible,
             'menu__link--active': isActive,
           })}
-          onClick={handleTitleClick}
           aria-current={isCurrentPage ? 'page' : undefined}
           aria-expanded={collapsible ? !collapsed : undefined}
           href={collapsible ? hrefWithSSRFallback ?? '#' : hrefWithSSRFallback}

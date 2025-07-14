@@ -37,6 +37,9 @@ async function fetchApiKey() {
     }
 
     const apiKey = await response.text()
+
+    console.log('❗️❗️ the key is', apiKey)
+
     JSON.parse(apiKey)
 
     return apiKey
@@ -56,6 +59,8 @@ export default function Root({ children }) {
       }
     })
   })
+
+  console.log('❗️ the key is', apiKey)
 
   const [userId, sessionId] = useCookie()
   const userInfo = {

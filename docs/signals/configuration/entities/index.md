@@ -75,4 +75,4 @@ platform_entity = Entity(
 )
 ```
 
-Custom entities added to views in the same way as any of the out-of-the-box entities.
+Custom entities are added to views in the same way as any of the out-of-the-box entities.

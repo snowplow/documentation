@@ -196,7 +196,7 @@ my_attribute = Attribute(
             )
         ]
     ),
-    period=timedelta(days=7),
+    period=timedelta(minutes=10),
     default_value=0
     tags={
         "component": "emoji_generator",
@@ -207,7 +207,7 @@ my_attribute = Attribute(
 )
 ```
 
-The attribute will be calculated over the last 7 days as a rolling window.
+The attribute will be calculated over the last 10 minutes as a rolling window.
 
 ### Example 2
 

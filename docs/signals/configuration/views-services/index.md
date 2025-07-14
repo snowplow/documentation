@@ -89,20 +89,20 @@ By default, views will calculate attributes from the real-time event stream. Rea
 
 The table below lists all available arguments for a `View`:
 
-| Argument       | Description                                                                         | Type           | Default | Required? | For batch only? |
-| -------------- | ----------------------------------------------------------------------------------- | -------------- | ------- | --------- | --------------- |
-| `name`         | The name of the view                                                                | `string`       |         | ✅         |                 |
-| `version`      | The version of the view                                                             | `int`          | 1       | ❌         |                 |
-| `entity`       | The entity associated with the view                                                 | `Entity`       |         | ✅         |                 |
-| `owner`        | The owner of the feature view, typically the email of the primary maintainer        | email `string` |         | ✅         |                 |
-| `attributes`   | The list of attributes that will be calculated from events as part of this view     | `Attribute`    |         | ❌         |                 |
-| `description`  | A description of the view                                                           | `string`       |         | ❌         |                 |
-| `ttl`          | The amount of time that this group of attributes will live for in the Profile Store | `timedelta`    |         | ❌         |                 |
-| `offline`      | Whether the view is calculated in the warehouse (`True`) or in real-time (`False`)  | `bool`         | `False` | ❌         |                 |
-| `online`       | Whether online retrieval is enabled (`True`) or not (`False`)                       | `bool`         | `True`  | ❌         |                 |
-| `batch_source` | The batch data source for the view                                                  | `BatchSource`  |         | ❌         | ✅               |
-| `fields`       | The list of table columns that are part of this view during materialization         | `Field`        |         | ❌         | ✅               |
-| `tags`         | String key-value pairs of arbitrary metadata                                        | `dict`         |         | ❌         |                 |
+| Argument       | Description                                                                         | Type                | Default | Required? | For batch only? |
+| -------------- | ----------------------------------------------------------------------------------- | ------------------- | ------- | --------- | --------------- |
+| `name`         | The name of the view                                                                | `string`            |         | ✅         |                 |
+| `version`      | The version of the view                                                             | `int`               | 1       | ❌         |                 |
+| `entity`       | The entity associated with the view                                                 | `Entity`            |         | ✅         |                 |
+| `owner`        | The owner of the feature view, typically the email of the primary maintainer        | email `string`      |         | ✅         |                 |
+| `attributes`   | The list of attributes that will be calculated from events as part of this view     | list of `Attribute` |         | ❌         |                 |
+| `description`  | A description of the view                                                           | `string`            |         | ❌         |                 |
+| `ttl`          | The amount of time that this group of attributes will live for in the Profile Store | `timedelta`         |         | ❌         |                 |
+| `offline`      | Whether the view is calculated in the warehouse (`True`) or in real-time (`False`)  | `bool`              | `False` | ❌         |                 |
+| `online`       | Whether online retrieval is enabled (`True`) or not (`False`)                       | `bool`              | `True`  | ❌         |                 |
+| `batch_source` | The batch data source for the view                                                  | `BatchSource`       |         | ❌         | ✅               |
+| `fields`       | The list of table columns that are part of this view during materialization         | `Field`             |         | ❌         | ✅               |
+| `tags`         | String key-value pairs of arbitrary metadata                                        | `dict`              |         | ❌         |                 |
 
 If no `ttl` is set, the entity's `ttl` will be used. If the entity also has no `ttl`, there will be no time limit for attributes.
 

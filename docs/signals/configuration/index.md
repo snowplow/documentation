@@ -66,8 +66,8 @@ The created `Signals` object has the following methods:
 | ------------------------ | ------------------------------------------------------------------- |
 | `apply`                  | Registers the provided objects with Signals                         |
 | `test`                   | Tests a view against the atomic events table                        |
-| `get_service_attributes` | Retrieves attributes for a specific service from the Profiles Store |
 | `get_view`               | Retrieves a view from the Profiles Store                            |
+| `get_service_attributes` | Retrieves attributes for a specific service from the Profiles Store |
 | `get_view_attributes`    | Retrieves attributes for a specific view from the Profiles Store    |
 
 Read more about retrieving calculated attributes in [Retrieving values](/docs/signals/retrieval/index.md)

@@ -10,14 +10,14 @@ Whether to compute attributes in real-time from the event stream, or in batch fr
 
 This table summarizes the options for different types of processing:
 
-| Feature                                 | Supported in stream                                                           | Supported in batch |
-| --------------------------------------- | ----------------------------------------------------------------------------- | ------------------ |
-| Computing user lifetime attributes      | ✅ from the point at which the attribute was defined                           | ✅                  |
-| Reprocessing data                       | ❌ attributes are only calculated from the moment they are defined             | ✅                  |
-| Windowing operations e.g., last 30 days | ✅ but only the last 100 values might be included, depending on the definition | ✅                  |
+| Feature                            | Supported in real-time stream                                                 | Supported in batch |
+| ---------------------------------- | ----------------------------------------------------------------------------- | ------------------ |
+| Computing user lifetime attributes | ✅ from the point at which the attribute was defined                           | ✅                  |
+| Time windowing operations          | ✅ but only the last 100 values might be included, depending on the definition | ✅                  |
+| Reprocessing data                  | ❌ attributes are only calculated from the moment they are defined             | ✅                  |
 
 ## Stream windowing operations
 
-Stream attributes defined with a `period` setting, e.g., last 7 days, are limited to the most recent 100 instances of the specified event in the pipeline. Only those occurrences are considered in the calculation. As a result, if you need to analyze user behavior or aggregate data over longer periods—such as tracking all purchases in the past year or counting page views over several months—stream attributes may not capture the full picture.
+Stream attributes defined with a `period` setting, e.g., last 15 minutes, are limited to the most recent 100 instances of the specified event in the pipeline. Only those occurrences are considered in the calculation. As a result, if you need to analyze user behavior or aggregate data over longer periods—such as counting page views over several hours or tracking all purchases in the past year—stream attributes may not capture the full picture.
 
 This isn't the case for stream attributes that don't have a `period` window defined. In this case, Signals considers all events—starting from the time the attribute was defined—and values aren't forgotten.

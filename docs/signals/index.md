@@ -59,6 +59,7 @@ Check out the [quick start tutorial](/tutorials/signals-quickstart/start) to get
 Your first step is to define the attributes and interventions you're interested in tracking. This is done using our [Signals Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk). Once defined, apply the attributes configuration to the Signals infrastructure.
 
 Example attributes:
+* `num_page_views_last_5_min`
 * `add_to_cart_events_count`
 * `product_view_events_count`
 * `last_login_date`

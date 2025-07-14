@@ -38,9 +38,7 @@ async function fetchApiKey() {
 
     const apiKey = await response.text()
 
-    console.log('❗️❗️ the key is', apiKey)
-
-    // Check if apiKey is a string with exactly 16 characters
+    // The Product Fruits API key is 16 characters
     if (typeof apiKey !== 'string' || apiKey.length !== 16) {
       throw new Error(
         `Invalid API key format: expected 16 character string, got ${typeof apiKey} with length ${
@@ -66,8 +64,6 @@ export default function Root({ children }) {
       }
     })
   })
-
-  console.log('❗️ the key is', apiKey)
 
   const [userId, sessionId] = useCookie()
   const userInfo = {

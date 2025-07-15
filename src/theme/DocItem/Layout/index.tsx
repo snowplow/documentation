@@ -16,6 +16,7 @@ import styles from './styles.module.css'
 import { Paper } from '@mui/material'
 
 import { useTutorial, TutorialKind } from '@site/src/components/tutorials/hooks'
+import { AlignLeft } from 'lucide-react';
 
 /**
  * Decide if the toc should be rendered, on mobile or desktop viewports
@@ -66,7 +67,14 @@ export default function DocItemLayout({ children }: Props): JSX.Element {
           <DocItemPaginator />
         </div>
       </div>
-      {docTOC.desktop && <div className="col col--3">{docTOC.desktop}</div>}
+      {docTOC.desktop && 
+      <div className="col col--3">
+        <div className='flex items-center gap-2 my-1'>
+          <AlignLeft size={16} className='opacity-70 text-foreground' />
+          <p className="text-[0.825rem] font-semibold opacity-70 text-foreground m-0 pl-1">On this page</p>
+        </div>
+        {docTOC.desktop}
+      </div>}
     </div>
   )
 }

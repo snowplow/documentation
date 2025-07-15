@@ -40,7 +40,7 @@ export default function MDXPage(props) {
                   toc={MDXPageContent.toc}
                   minHeadingLevel={frontMatter.toc_min_heading_level}
                   maxHeadingLevel={frontMatter.toc_max_heading_level}
-                />
+                />  
               </div>
             )}
           </div>

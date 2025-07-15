@@ -1,6 +1,6 @@
 ---
 position: 1
-title: Getting Started with Signals
+title: Introduction
 ---
 
 :::note
@@ -17,3 +17,13 @@ Welcome to the Snowplow Signals Quickstart! This guide will walk you through the
 5. **Retrieve Attributes**: Fetch user features from the Profile API.
 
 Steps 1-4 are the Signals configuration. Step 5 shows how to start using the stored attributes.
+
+## Prerequisites
+
+Before starting, ensure you have:
+
+- Python 3.11+ installed
+
+
+
+## What you'll learn

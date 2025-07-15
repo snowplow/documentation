@@ -1,5 +1,5 @@
 {
   "title": "Snowplow CLI MCP tool setup",
   "label": "Data governance",
-  "description": "Learn how to set up and use the Snowplow CLI MCP tool with Claude or other MCP clients for streamlined data structure management."
+  "description": "Use the Snowplow CLI MCP tool with Claude or other MCP clients for streamlined data structure management."
 }

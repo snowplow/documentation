@@ -1,5 +1,5 @@
 {
-  "title": "Abandoned browse for composable CDP",
+  "title": "Implement an abandoned browse system with composable CDP",
   "label": "Solution accelerator",
-  "description": "How to use Snowplow composable CDP with Braze to engage with customers that show intent to purchase."
+  "description": "Use Snowplow composable CDP with Braze to engage with customers that show intent to purchase."
 }

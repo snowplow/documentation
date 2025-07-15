@@ -1,5 +1,5 @@
 {
-  "title": "Managing data structures in Git",
+  "title": "Manage data structures with Git",
   "label": "Data governance",
-  "description": "Learn how to use Snowplow CLI and GitHub Actions to manage authoring and publishing for your data structures"
+  "description": "Use the Snowplow CLI and GitHub Actions to manage authoring and publishing for your data structures."
 }

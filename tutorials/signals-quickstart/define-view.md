@@ -1,6 +1,6 @@
 ---
 position: 4
-title: Create and deploy a view
+title: Create and test a view
 ---
 
 A `View` is a collection of attributes that share a common entity (e.g., session or user). Here's how to create a view with the attributes we defined earlier:

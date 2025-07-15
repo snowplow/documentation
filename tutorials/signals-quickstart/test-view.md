@@ -1,24 +1,7 @@
 ---
 position: 4
-title: Create and test a view
+title: Test the definitions
 ---
-
-A `View` is a collection of attributes that share a common entity (e.g., session or user). Here's how to create a view with the attributes we defined earlier:
-
-```python
-from snowplow_signals import StreamView, domain_sessionid
-
-my_attribute_view = StreamView(
-    name="my_attribute_view",
-    version=1,
-    entity=domain_sessionid,
-     attributes=[
-        page_view_count,
-        products_added_to_cart_feature,
-    ],
-    owner="user@company.com",
-)
-```
 
 Before deploying the view, you can test it on the atomic events table from the past hour:
 

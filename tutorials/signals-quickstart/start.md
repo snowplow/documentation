@@ -25,5 +25,13 @@ Before starting, ensure you have:
 - Python 3.11+ installed
 
 
+assumes notebook knowledge - link to basic tutorial?
+
+
+TODO you'll need events?!
+web tracker, page views, YAUAA - installed by default, referrer parser - installed by default
+
+
+The Snowplow Signals SDK allows you to define attributes, create views, and retrieve user features. It requires Python 3.12 or above.
 
 ## What you'll learn

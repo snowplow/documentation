@@ -174,6 +174,7 @@ This example extends the previous minimal example. Now the attribute is only cal
 
 ```python
 from snowplow_signals import Attribute, Event, Criteria, Criterion
+from datetime import timedelta
 
 my_attribute = Attribute(
     name="emoji_button_click_counter",

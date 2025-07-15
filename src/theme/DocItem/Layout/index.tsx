@@ -70,8 +70,8 @@ export default function DocItemLayout({ children }: Props): JSX.Element {
       {docTOC.desktop && 
       <div className="col col--3">
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5em' }}>
-          <AlignLeft size={16} />
-          <h2 className="text-base font-bold text-foreground m-0 pl-1">On this page</h2>
+          <AlignLeft size={16} className='opacity-70 text-foreground' />
+          <p className="text-[0.825rem] font-semibold opacity-70 text-foreground m-0 pl-1">On this page</p>
         </div>
         {docTOC.desktop}
       </div>}

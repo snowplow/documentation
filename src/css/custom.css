@@ -329,7 +329,6 @@ table {
 .table-of-contents__link:hover, .table-of-contents__link:hover code, .table-of-contents__link--active, .table-of-contents__link--active code {
   color: hsl(var(--primary));
   text-decoration: none;
-  font-weight: bold;
   background-color: hsl(var(--accent));
   border-radius: var(--radius)
 }
@@ -337,6 +336,9 @@ table {
   
   display: block;
   padding: 6px var(--ifm-toc-padding-horizontal);
+}
+.theme-doc-toc-desktop ul ul {
+  padding-left: 16px!important;
 }
 
 

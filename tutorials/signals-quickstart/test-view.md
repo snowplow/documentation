@@ -3,34 +3,67 @@ position: 4
 title: Test the definitions
 ---
 
-Before deploying the view, you can test it on the atomic events table from the past hour:
+Signals will start processing events and computing attributes as soon as you apply the view configuration.
 
+It's a good idea to test the definitions before deployment.
+
+Add a new cell to your notebook with the following code:
 
 ```python
 data = sp_signals.test(
-    view=view,
+    view=my_view
+)
+print(data)
+```
+
+Running this will calculate the attributes from your atomic events table. By default, events from the last hour are considered.
+
+You should see something like this:
+
+|     | `domain_sessionid`                     | `page_view_count` | `most_recent_browser` | `first_referrer_path` |
+| --- | -------------------------------------- | ----------------- | --------------------- | --------------------- |
+| 0   | `d99f6db1-7b28-46ca-a3ef-f0aace99ed86` | 0                 | "Firefox"             | None                  |
+| 1   | `08d833ec-5eef-461c-b452-842e7bd27067` | 1                 | "Chrome"              | "www.google.com"      |
+| 2   | `c4311466-231a-41ca-89d8-f2ff85e62a29` | 0                 | "Chrome"              | "duckduckgo.com"      |
+| 3   | `23937e09-b640-447e-82d9-c01bc16decb2` | 0                 | "Chrome"              | "www.google.com"      |
+| 4   | `61fb46c9-bfd3-48cd-a991-7a8484d1de8c` | 0                 | None                  | None                  |
+| 5   | `b0625a55-8382-4bfb-be9f-fefd75ad7e63` | 1                 | "Chrome"              | None                  |
+| 6   | `d97140c3-3c5e-426e-8527-15314efb2be3` | 0                 | "Chrome"              | None                  |
+| 7   | `4da52032-f6d1-41b4-9cf2-b40e164cbe6e` | 1                 | "Chrome"              | None                  |
+| 8   | `2ee80a4a-86dd-4a24-b697-0709b29ed079` | 0                 | "Safari"              | None                  |
+
+The test method returns the most recent 10 rows. The first column shows the entity values, in this case for the session entity `domain_sessionid`.
+
+The attributes look as expected, so the view is ready to deploy.
+
+## Testing for individual entities
+
+You can also test specific entity instances, by providing a list of IDs.
+
+This example will be calculated for just these two `domain_sessionid`s:
+
+```python
+data = sp_signals.test(
+    view=my_view,
+    entity_ids=["d99f6db1-7b28-46ca-a3ef-f0aace99ed86", "08d833ec-5eef-461c-b452-842e7bd27067"]
+)
+```
+
+|     | `domain_sessionid`                     | `page_view_count` | `most_recent_browser` | `first_referrer_path` |
+| --- | -------------------------------------- | ----------------- | --------------------- | --------------------- |
+| 0   | `d99f6db1-7b28-46ca-a3ef-f0aace99ed86` | 0                 | "Firefox"             | None                  |
+| 1   | `08d833ec-5eef-461c-b452-842e7bd27067` | 1                 | "Chrome"              | "www.google.com"      |
+
+## Testing on a subset of events
+
+Depending on your Snowplow tracking configuration, you might want to test only on events from specific applications, using `app_ids`:
+
+```python
+data = sp_signals.test(
+    view=my_view,
     app_ids=["website"],
 )
 print(data)
 ```
 
-Example Output
-
-| **domain_sessionid** | **page_view_count** | **products_added_to_cart** |
-| -------------------- | ------------------- | -------------------------- |
-| xyz                  | 5                   | [`red_hat`, `blue_shoes`]  |
-| abc                  | 3                   | [`green_trainers`]         |
-
-:::warning
-**Note:** You can filter on specific app_ids during testing. To avoid unnecessary compute, the streaming engine is typically configured to process only a subset of relevant app_ids. While you may be able to test using any app_id, bear in mind that data retrieval might not return expected results if that app_id isn't included in the streaming engine’s configuration.
-:::
-
-## Deploy the view
-
-Once you're satisfied with the View, deploy it to the API using the `apply` method:
-
-```python
-sp_signals.apply([my_attribute_view])
-```
-
-This makes the View live, and events will start being processed based on the defined attributes.
+If you don't see any results, check your Signals configuration to confirm that it's processing events from those `app_id`s.

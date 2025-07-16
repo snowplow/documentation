@@ -249,22 +249,25 @@ This service could be imagined like this as a table:
 
 ## Interventions
 
-Interventions are a way to trigger actions in your application, such as in-app messages, discounts, or personalized journeys. They're calculated on top of changes in attribute values.
+Interventions are a way to trigger actions in your application, such as in-app messages, discounts, or personalized journeys.
+They're calculated on top of changes in attribute values, or fired by your own applications.
 
-They allow you to define logic within Signals rather than in your application. This allows you to update the behavior without requiring application updates, as well as streamlining management, development, and ownership.
+This allows you to influence user behavior without requiring application updates, since you can control when the intervention should fire through Signals.
 
 ```mermaid
 flowchart TD
-    Application[application] -->|sends| Event[event]
-    Event -->|updates| Attribute[attribute]
-    Intervention[intervention] -->|listens to| Attribute
-    Intervention -->|fires to| Application
+    user -->|uses| application
+    application -->|sends| event
+    event -->|updates| attribute
+    attribute -->|triggers| intervention
+    intervention -->|influences| user
 ```
 
-Like attributes, interventions are specific to an entity.
+Like attributes, interventions target specific to an entities.
 
-Interventions can be triggered automatically based on attribute changes, or manually using the Signals API. Subscribe within your application for real-time updates to interventions for entities of interest.
+Interventions can be triggered automatically based on attribute changes, or manually using the Signals API.
+Subscribe within your application for real-time updates to interventions for entities of interest, or users can subscribe to interventions relevant to them.
 
-For example, you could subscribe to interventions for `domain_userid`, the current `app_id`, the current `page`, and the current `product`. When new interventions are published for any of those, the retrieved contents includes any relevant attribute values, or custom data that you defined. This enables both individual-level and broadcast-level real-time messaging: for example, offering a specific user a personalized message, while also notifying all users on a specific product page that limited stock is selling fast.
-
-Interventions can also perform built-in automatic operations, including updating attribute values.
+For example, you could subscribe to interventions for a specific `domain_userid`, the current `app_id`, the current `page`, and the current `product`.
+When new interventions are published for any of those, they are delivered and the contents include any relevant attribute values, that can be used by your application to react.
+This enables both individual-level and broadcast-level real-time messaging: for example, offering a specific user a personalized message, while also notifying all users on a specific product page that limited stock is selling fast.

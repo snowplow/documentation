@@ -10,6 +10,18 @@ This pairs well with the Signals streaming engine, which:
 - processes data in near-real-time for users that are using your offering right now
 - can publish interventions at an individual entity level in real time based on changes to its attributes
 
+```mermaid
+flowchart LR
+    behavior[user behavior] -->|generates| events
+    events -->|update| attributes
+    attributes -->|trigger| interventions
+    interventions -->|activate| functionality
+    functionality -->|influences| behavior
+    systems -->|trigger| interventions
+```
+
+Your application decides how to react to a delivered intervention.
+
 Because [entities are configurable](/docs/signals/configuration/entities/index.md), the targeting used for interventions can be as broad or specific as you like, including:
 - a specific user/session
 - a specific pageview that a user is in the middle of
@@ -159,3 +171,35 @@ Unauthenticated subscribers to interventions are subject to the following limita
 - No more than 50 types of entity may be subscribed at a time
 
 <!-- TODO: disallowed entity types (user_id/pii reasons), per-ip connection limits -->
+
+#### Dataflow
+
+The communication flow when using the plugin is as follows:
+
+```mermaid
+sequenceDiagram
+  actor User
+  participant App
+  participant Tracker
+  participant Plugin
+  participant Pipeline
+  participant Signals
+
+  User ->> App: performs actions
+  App ->> Tracker: tracks actions
+  Tracker ->> Pipeline: emits events
+  Tracker ->> Plugin: updates
+  Plugin ->> Plugin: extracts entity IDs
+  Plugin ->> Signals: resubscribes
+  Pipeline ->> Signals: streams events to
+  Signals ->> Signals: updates attributes
+  Signals ->> Signals: checks intervention rules
+  Signals ->> Plugin: delivers intervention
+  Plugin ->> App: notifies of intervention
+  Plugin ->> Tracker: emits delivery event
+  Tracker ->> Pipeline: tracks delivery event
+  App ->> User: performs intervention
+  App ->> Plugin: notifies status
+  Plugin ->> Tracker: emits handle event
+  Tracker ->> Pipeline: tracks handle event
+```

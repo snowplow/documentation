@@ -5,9 +5,9 @@ title: Define and group attributes
 
 An `Attribute` describes a specific fact about user behavior. They're grouped into `View`s for management and deployment.
 
-In this tutorial you will define three attributes based on page view events.
-
 ## Define attributes
+
+In this tutorial you will define three attributes based on page view events.
 
 ### Page view counter
 
@@ -33,12 +33,19 @@ page_view_count = Attribute(
 )
 ```
 
+Note that there's an 100 event limit for time-windowed [event processing in stream](/docs/signals/configuration/stream-calculations).
+
 ### Most recent browser
 
-The second attribute stores the last seen browser name (e.g. "Safari"), using the `last` aggregation. The `property` tells Signals where to look in the event for the value. Browser information is parsed from an event by the YAUAA enrichment, and appended to the event as an YAUAA entity ADD LINK. Within this entity, the browser name is stored in the `agentName` property.
+The second attribute stores the last seen browser name (e.g. "Safari"), using the `last` aggregation. The `property` tells Signals where to look in the event for the value.
+
+Browser information is appended to every event by the [YAUAA enrichment](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/) as an entity with schema URI `iglu:nl.basjes/yauaa_context/jsonschema/1-0-1`. Within the event payload, this URI becomes `contexts_nl_basjes_yauaa_context_1`. The `property` defined in this attribute uses the `agentName` field from the YAUAA entity. Note the `[0]` index to access the entity data.
+
+In general, your attribute `property` definitions will be based on a column or field from the event, with the column name as seen in your warehouse.
 
 ```python
 from snowplow_signals import Attribute, Event
+from datetime import timedelta
 
 most_recent_browser = Attribute(
     name="most_recent_browser",
@@ -58,9 +65,12 @@ most_recent_browser = Attribute(
 
 ### First referrer
 
-The third attribute stores the first seen referrer path, based on the `refr_urlhost` event property ADD LINK and the `first` aggregation. By using a `criteria` filter, it's only calculated for page views with a non-empty referrer ADD LINK.
+The third attribute stores the first seen referrer path, based on the `refr_urlhost` [atomic event property](/docs/fundamentals/canonical-event/#platform-specific-fields) and the `first` aggregation. By using a `criteria` filter, it's only calculated for page views where the referrer isn't an empty string.
 
 ```python
+from snowplow_signals import Attribute, Event, Criteria, Criterion
+from datetime import timedelta
+
 first_referrer = Attribute(
     name="first_referrer",
     description="The first referrer tracked.",
@@ -98,7 +108,7 @@ Group the attributes together, adding the session entity identifier `domain_sess
 ```python
 from snowplow_signals import View, domain_sessionid
 
-my_attribute_view = View(
+my_view = View(
     name="my_attribute_view",
     version=1,
     entity=domain_sessionid,

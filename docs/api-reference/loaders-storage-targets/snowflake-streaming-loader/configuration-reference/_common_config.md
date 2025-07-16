@@ -12,7 +12,7 @@ import Link from '@docusaurus/Link';
 </tr>
 <tr>
     <td><code>batching.uploadParallelismFactor</code></td>
-    <td>Optional. Default value 2.5.  Controls how many batches can we send simultaneously over the network to Snowflake. E.g. If there are 4 available processors, and <code>uploadParallelismFactor</code> is 2.5, then the loader sends up to 10 batches in parallel. Adjusting this value can cause the app to use more or less of the available CPU.</td>
+    <td>Optional. Default value 3.5.  Controls how many batches can we send simultaneously over the network to Snowflake. E.g. If there are 4 available processors, and <code>uploadParallelismFactor</code> is 3.5, then the loader sends up to 14 batches in parallel. Adjusting this value can cause the app to use more or less of the available CPU.</td>
 </tr>
 <tr>
     <td><code>cpuParallelismFactor</code></td>
@@ -38,6 +38,13 @@ import Link from '@docusaurus/Link';
 <tr>
     <td><code>retries.transientErrors.attempts</code></td>
     <td>Optional. Default value 5. Maximum number of attempts to make before giving up on a transient error.</td>
+</tr>
+<tr>
+    <td><code>retries.checkCommittedOffset.delay</code></td>
+    <td>
+      Optional. Default value <code>100 millis</code>.
+      Configures a delay in between flushing events to Snowflake and fetching the latest offset token from Snowflake to check the events are fully ingested.
+    </td>
 </tr>
 <tr>
     <td><code>skipSchemas</code></td>

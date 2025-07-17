@@ -28,7 +28,7 @@ page_view_count = Attribute(
             version="1-0-0",
         )
     ],
-    aggregation="counter"
+    aggregation="counter",
     period=timedelta(minutes=5),
 )
 ```

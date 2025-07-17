@@ -1,13 +1,16 @@
 ---
-title: Introduction and Overview
+title: Introduction
 position: 1
 ---
 
-This tutorial will guide you through the process of building a real-time prospect scoring system using Snowplow Signals together with a machine learning model.
+Welcome to the [Snowplow Signals](/docs/signals/) real-time prospect scoring tutorial.
 
-By the end, you'll understand how to leverage Snowplow event data to predict a prospect's likelihood to convert on your website and trigger personalized engagements.
+Snowplow Signals is a real-time personalization engine for customer intelligence, built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in near real time.
 
-Use this tutorial as a starting point for how one can integrate Signals data with any ML use cases or other backend services.
+This guide will through the process of building a real-time prospect scoring system using Signals together with a machine learning model. You'll learn how to leverage Snowplow event data to predict a prospect's likelihood to convert on your website, and how to trigger personalized engagements.
+
+Use this tutorial as a starting point for how to integrate Signals data with any ML use cases or other backend services.
+
 
 ### Prospect Journey Overview
 

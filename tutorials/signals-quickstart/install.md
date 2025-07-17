@@ -27,7 +27,9 @@ Add your four connection tokens to the notebook secrets:
   * API key ID
   * Organization ID
 
-Create a `Signals` object by passing in the required values. This example shows how to access notebook secrets, assuming you gave them these names:
+![A screenshot showing where to add secrets into the notebook](./images/notebook-secrets.png)
+
+Create a `Signals` object by passing in the required values:
 
 ```python
 from snowplow_signals import Signals

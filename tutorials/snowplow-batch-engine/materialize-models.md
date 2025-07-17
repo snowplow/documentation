@@ -1,49 +1,55 @@
 ---
 position: 6
-title: Materializing Models to Signals
+title: Materialize models
 ---
 
-## What is Model Materialization?
+Model materialization is the process of making your validated dbt models, and the calculated attributes, available in Signals for production use.
 
-Model materialization is the process of taking your tested and validated dbt models and making them available in Snowplow Signals. This enables you to serve your attributes in production (with regular updates to keep the warehouse and Signals in sync)
+There are two steps for materialization:
+1. Fill out the `batch_source_config.json` file for each model
+2. Run the `materialize` command
 
-## Materializing your attribute table
-Once you are happy with the dbt package generated outputs, you already have the attributes table in the warehouse, and you are ready to commit to it for production you are ready to start materializing your table.
+You'll need to materialize each project individually.
 
-### Step 1. - Fill out the batch_source_config
-At the time of the data model generation, a config file is generated for you to adjust, under `config/batch_source_config.json`. You will see a similar structure to this:
+The `materialize` command uses the [materialization engine](/docs/signals/configuration/batch-calculations#materialization-engine) under the hood.
+
+## Update configuration file
+
+During data model generation, a config file is generated in `config/batch_source_config.json`. It will have a similar structure to this:
 
 ```yml
 {
-    "database": "",
-    "wh_schema": "",
-    "table": "ecommerce_1_attributes",
-    "name": "ecommerce_1_attributes",
+    "database": "",       # Add your database name
+    "wh_schema": "",      # Add your schema
+    "table": "user_attributes_1_attributes",
+    "name": "user_attributes_1_attributes",
     "timestamp_field": "lower_limit",
     "created_timestamp_column": "valid_at_tstamp",
-    "description": "Table containing attributes for ecommerce_1 view",
+    "description": "Table containing attributes for user_attributes_1 view",
     "tags": {},
     "owner": ""
 }
 ```
-Make sure you fill out the `database` and `wh_schema` (this will be your dbt profile's `{target_name}_derived`), which will need to correspond to the attributes table the dbt package has already produced. The rest you can leave unchanged.
 
-### Step 2. - Run the materialize command
+Fill out the `database` and `wh_schema` values. For schema, use your dbt profile's `{target_name}_derived`. These values will need to correspond to the attributes table the dbt package has already produced.
+
+## Run the materialize command
 
 Run the following CLI command:
 
 ```bash
 snowplow-batch-autogen materialize \
-  --view-name "ecommerce" \
+  --view-name "user_attributes" \
   --view-version 1 \
   --verbose
 ```
-Based on the output you will see if it was successful. First it attempts to register the Batch Source for the view in question, if all good you will see the relevant message:
 
-✅ Successfully added Batch Source information to view ecommerce_1
+The batch engine will first register the batch source for the view. It will then update the Signals configuration to register the table.
 
-It then updates Signals which registers the table and the syncing should automatically begin from that point onwards:
+```bash
+# Progress messages
+✅ Successfully added Batch Source information to view user_attributes_1
+✅ Successfully registered table user_attributes_1_attributes
+```
 
-✅ Successfully registered table ecommerce_transaction_interactions_features_1_attributes
-
-For now there is no way to alter the update schedule (default: every 5 minutes), but watch out for updates on this in the near future!
+Syncing to the Profiles Store will begin automatically. By default, Signals will check for updates to the table every 5 minutes. Your attributes will soon be available to retrieve in your applications.

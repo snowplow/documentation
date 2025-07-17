@@ -1,16 +1,25 @@
 ---
 position: 2
-title: Testing Your Connection
+title: Test the connection
 ---
 
-Before we start working with Snowplow Signals, let's make sure we can connect to all the necessary services. This step is crucial as it verifies that:
-- Your API credentials are correct
-- All required services are accessible
-- Your network connection is working properly
+The first step is to confirm that you can connect to all the necessary services.
 
-## Testing the Connection
+The connection test checks several important components:
+* Verifies your API credentials
+* Ensures the main Signals API service is accessible
+* Checks the status of:
+  * Database connections
+  * Cache service
+  * Storage systems
 
-You can test your connection using the following command:
+Test your connection using the following command:
+
+```bash
+snowplow-batch-autogen test-connection --verbose
+```
+
+If you didn't set up environment variables, you can also provide the credentials as command-line flags:
 
 ```bash
 snowplow-batch-autogen test-connection \
@@ -20,25 +29,6 @@ snowplow-batch-autogen test-connection \
   --org-id "YOUR_ORG_ID" \
   --verbose
 ```
-
-If you've set up the environment variables as shown in the previous step, you can use this simpler command:
-
-```bash
-snowplow-batch-autogen test-connection --verbose
-```
-
-## What's Being Tested?
-
-The connection test checks several important components:
-
-- 🔐 Authentication service: verifies your API credentials
-- 🌐 API service: ensures the main service is accessible
-- 📊 Checks the status of:
-  - Database connections
-  - Cache service
-  - Storage systems
-
-## Successful Connection
 
 When everything is working correctly, you'll see a clear success message:
 
@@ -56,7 +46,9 @@ When everything is working correctly, you'll see a clear success message:
 ✨ All services are operational!
 ```
 
-## Troubleshooting Connection Issues
+You can continue to the next step.
+
+## Troubleshooting
 
 If you encounter any problems:
 
@@ -65,5 +57,3 @@ If you encounter any problems:
 3. Ensure your API key has the required permissions
 4. Use the `--verbose` flag for detailed error messages
 5. Check if your organization's services are up and running
-
-Once you see the success message, you're ready to create your first project!

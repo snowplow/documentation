@@ -3,41 +3,37 @@ position: 1
 title: Introduction
 ---
 
-Welcome to the Signals Batch Engine guide! This tool helps you generate and manage dbt projects for batch processing of your Snowplow Signals attributes.
+Welcome to the [Snowplow Signals](/docs/signals/) batch engine tutorial.
 
-## What is Snowplow Signals?
+Snowplow Signals is a real-time personalization engine for customer intelligence, built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in near real time.
 
-Snowplow Signals is a feature store that helps you manage and serve machine learning features at scale. In the Profiles API, you can have different types of attribute views:
+The Signals batch engine is a CLI tool to help with historical data analysis. It isn't required to use Signals: it's only necessary if you want to:
+* Analyze historical data, rather than in real time
+* Calculate attributes for Snowplow events in your warehouse
 
-- **Batch Views**: processed offline, perfect for historical data and complex aggregations
-- **Stream Views**: processed in real-time, ideal for immediate feature updates
+The batch engine helps by:
+* Generating separate dbt projects for each batch view definition
+* Testing and validating your data pipelines
+* Materializing calulated attributes to Signals for production use
 
-This CLI tool specifically helps you work with batch views by:
+To use tables of pre-existing, already calculated values, see the [Signals documentation](/docs/signals/configuration/batch-calculations).
 
-- Generating separate dbt projects for each batch view
-- Testing and validating your data pipelines
-- Materializing features for production use
+This guide will walk you through the steps to set up the batch engine and calculate attributes.
 
 ## Prerequisites
 
-Before starting, ensure you have:
+This tutorial assumes that you have:
 
-- Python 3.11+ installed
-- Snowplow Signals SDK installed
-- Valid API credentials from your Snowplow Signals account:
-  - API URL
-  - API Key
-  - API Key ID
-  - Organization ID
-- Have BatchView/ExternalBatchView(s) already created
+* Python 3.11+ installed in your environment
+* Snowflake warehouse with tables of Snowplow events
+* Permissions to create tables and views in your warehouse
+* [dbt](https://www.getdbt.com/) configured in your warehouse
+* Basic [dbt](https://www.getdbt.com/) knowledge
+* Valid API credentials for your Signals account:
+  * Signals API URL
+  * Snowplow API key
+  * Snowplow API key ID
+  * Snowplow organization ID
+* BatchView/ExternalBatchView(s) definitions already applied to Signals
 
-## What you'll learn
-
-This tutorial will guide you through the complete process of working with batch views in Snowplow Signals:
-
-1. Setting up your environment
-2. Testing your connection to Snowplow Signals services
-3. Creating projects for your batch views (either all views or a specific one)
-4. Generating data models automatically
-5. Running and testing your models
-6. Materializing your models to the feature store
+Check out the [Signals configuration](/docs/signals/configuration) documentation to find out how to generate these credentials, and how to apply attribute configurations.

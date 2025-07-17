@@ -32,12 +32,14 @@ df=response.to_dataframe()
 df
 ```
 
-In your real application, you can access the current session ID and use it to retrieve the relevant attribute values. The attributes are being calculated in near real time, in session.
+In your real application code, you can access the current session ID and use it to retrieve the relevant attribute values. The attributes are being calculated in near real time, in session. Read about how to access IDs such as `domain_sessionid` in your web application in [Getting cookie information](/docs/sources/trackers/web-trackers/cookies-and-local-storage/getting-cookie-values/#getdomainuserid).
 
-In this tutorial example, it's harder to access anything interesting, as you might not know what sessions are active.
+To test this out, use the [Snowplow Inspector](/docs/data-product-studio/data-quality/snowplow-inspector/) browser extension to find out your current session ID on your web application. Click around and generate some page view events. Then find your `Domain Session ID` in the Inspector.
+
+![Screenshot showing the session ID in the Snowplow Inspector](./images/inspector-session.png)
+
+Use this identifier to retrieve the attributes that Signals has just calculated about your session.
 
 |     | `domain_sessionid`                     | `page_view_count` | `most_recent_browser` | `first_referrer_path` |
 | --- | -------------------------------------- | ----------------- | --------------------- | --------------------- |
-| 0   | `d99f6db1-7b28-46ca-a3ef-f0aace99ed86` | None              | None                  | None                  |
-
-Read about how to access IDs such as `domain_sessionid` in your web application in [Getting cookie information](/docs/sources/trackers/web-trackers/cookies-and-local-storage/getting-cookie-values/#getdomainuserid).
+| 0   | `d99f6db1-7b28-46ca-a3ef-f0aace99ed86` | 2.0               | `Firefox`             | `snowplow.io`         |

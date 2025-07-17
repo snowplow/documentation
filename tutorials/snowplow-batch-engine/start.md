@@ -24,7 +24,7 @@ This guide will walk you through the steps to set up the batch engine and calcul
 
 This tutorial assumes that you have:
 
-* Python 3.12+ installed in your environment
+* Python 3.11+ installed in your environment
 * Snowflake warehouse with tables of Snowplow events
 * Permissions to create tables and views in your warehouse
 * [dbt](https://www.getdbt.com/) configured in your warehouse

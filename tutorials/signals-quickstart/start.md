@@ -13,7 +13,7 @@ This guide will walk you through the steps to calculate user behavior attributes
 
 This tutorial assumes that you have:
 
-* Python 3.12+ installed in your environment
+* Python 3.11+ installed in your environment
 * Basic Python and [Jupyter notebook](https://jupyter.org/) knowledge
 * Deployed Snowplow page view tracking from a web application
 * Snowflake warehouse

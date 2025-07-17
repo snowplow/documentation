@@ -263,10 +263,10 @@ flowchart TD
     intervention -->|influences| user
 ```
 
-Like attributes, interventions target specific to an entities.
+Like attributes, interventions target specific entity instances.
 
 Interventions can be triggered automatically based on attribute changes, or manually using the Signals API.
-Subscribe within your application for real-time updates to interventions for entities of interest, or users can subscribe to interventions relevant to them.
+Subscribe within your application for real-time updates to interventions for entities of interest, or user devices can subscribe to interventions that apply to their own entities while they use your application.
 
 For example, you could subscribe to interventions for a specific `domain_userid`, the current `app_id`, the current `page`, and the current `product`.
 When new interventions are published for any of those, they are delivered and the contents include any relevant attribute values, that can be used by your application to react.

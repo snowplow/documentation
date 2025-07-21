@@ -35,7 +35,7 @@ export const versions = {
   gcsLoader: '0.5.6',
   postgresLoader: '0.3.3',
   rdbLoader: '6.1.3',
-  s3Loader: '2.2.9',
+  s3Loader: '2.3.0',
   s3Loader22x: '2.2.9',
   lakeLoader: '0.6.3',
   snowflakeStreamingLoader: '0.5.0',

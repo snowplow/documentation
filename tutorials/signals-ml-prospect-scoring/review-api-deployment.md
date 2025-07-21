@@ -135,14 +135,3 @@ This simple snippet calls the API every 10 seconds.
 Adjust it to call the endpoint APIs as often as needed in your use case.
 
 ![](./screenshots/console_output.png)
-
-## Final Notes and Next Steps
-
-This tutorial walked you through the process of building a prospect scoring system using Snowplow Signals together with a machine learning model.
-It is a starting point in exploring and using Signals APIs for your own needs.
-
-Suggested **next steps**:
-
-- **Define More Signals Attributes:** Define more Signals attributes custom-tailored for your use cases and events.
-- **Integrate Attributes into your Flows:** Integrate Signals APIs into your backend workflows to act on the users attributes.
-- **Explore More Signals Use Cases and Docs:** Explore Signals Documentation to get more ideas on how to integrate Signals capabilities into your use cases.

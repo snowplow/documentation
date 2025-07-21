@@ -1,5 +1,5 @@
 ---
-title: Configure attributes
+title: Configure Signals attributes
 position: 3
 ---
 

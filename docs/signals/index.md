@@ -8,6 +8,8 @@ sidebar_custom_props:
     - bdp
 ---
 
+import SignalsWidget from '@site/src/components/SignalsWidget';
+
 Snowplow Signals is a real-time personalization engine for customer intelligence, built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in real time.
 
 Real-time personalization use cases that are unlocked by Signals include:
@@ -24,6 +26,12 @@ Your Signals infrastructure is deployed by us into the same cloud as your Snowpl
 As well as attributes, Signals allows you to define interventions. This is a way to specify the business logic, based on attribute values, that should trigger actions such as notifications in your application.
 
 Every attribute grouping and intervention that is published to the Signals API is versioned, allowing you to maintain strong data governance within the Profiles Store, and to test new Signals configurations without affecting production.
+
+## Real-time example
+
+Here's some information about you. These attributes are being calculated now, in near real time, from our real-time event stream and your current session:
+
+<SignalsWidget title="Live Signals Metrics" dataFile="/data/signals-data.json" refreshInterval={2000} />
 
 ## How does Signals fit into the Snowplow pipeline?
 

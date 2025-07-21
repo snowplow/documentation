@@ -21,11 +21,11 @@ Run this cell to install the SDK.
 
 The next step is to connect to your Signals deployment. You'll need this connection to test or apply your configuration, or retrieve calculated attributes from the Profiles Store.
 
-Add your four connection tokens to the notebook secrets:
-  * Signals API URL
-  * API key
-  * API key ID
-  * Organization ID
+Add your credentials to the notebook secrets, using these names:
+  * Signals API URL -> `SP_API_URL`
+  * API key -> `SP_API_KEY`
+  * API key ID -> `SP_API_KEY_ID`
+  * Organization ID -> `SP_ORG_ID`
 
 ![A screenshot showing where to add secrets into the notebook](./images/notebook-secrets.png)
 
@@ -33,6 +33,7 @@ Create a `Signals` object by passing in the required values:
 
 ```python
 from snowplow_signals import Signals
+from google.colab import userdata
 
 sp_signals = Signals(
     api_url=userdata.get('SP_API_URL'),

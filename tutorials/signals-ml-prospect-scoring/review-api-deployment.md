@@ -57,6 +57,8 @@ def get_duid_values(duid: str):
 
 In order to be able to call this endpoint from your local machine or via JS in the browser, you need to proxy Colab's localhost to the world behind HTTPS.
 
+We will use ngrok to expose an endpoint from the Colab notebook behind an HTTPS URL.
+
 Let's use `ngrok` for that.
 ngrok exposes Colab's localhost 8000 port behind a one-time HTTPS URL like `https://00ab-11-22-333-44.ngrok-free.app`.
 

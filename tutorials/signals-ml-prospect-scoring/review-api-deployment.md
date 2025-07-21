@@ -55,6 +55,8 @@ def get_duid_values(duid: str):
 
 In order to be able to call this endpoint from your local machine or via JS in the browser, you need to proxy Colab's localhost to the world behind HTTPS.
 
+We will use ngrok to expose an endpoint from the Colab notebook behind an HTTPS URL.
+
 Let's use `ngrok` for that.
 ngrok exposes Colab's localhost 8000 port behind a one-time HTTPS URL like `https://00ab-11-22-333-44.ngrok-free.app`.
 
@@ -131,14 +133,3 @@ This simple snippet calls the API every 10 seconds.
 Adjust it to call the endpoint APIs as often as needed in your use case.
 
 ![](./screenshots/console_output.png)
-
-## Final Notes and Next Steps
-
-This tutorial walked you through the process of building a prospect scoring system using Snowplow Signals together with a machine learning model.
-It is a starting point in exploring and using Signals APIs for your own needs.
-
-Suggested **next steps**:
-
-- **Define More Signals Attributes:** Define more Signals attributes custom-tailored for your use cases and events.
-- **Integrate Attributes into your Flows:** Integrate Signals APIs into your backend workflows to act on the users attributes.
-- **Explore More Signals Use Cases and Docs:** Explore Signals Documentation to get more ideas on how to integrate Signals capabilities into your use cases.

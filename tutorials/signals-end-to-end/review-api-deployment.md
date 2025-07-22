@@ -33,7 +33,7 @@ def predict(data: InputData):
 Our `/predict` endpoint does these 4 things:
 
 1. Receives `domain_userid`.
-2. Calls Signals API to get latest attribute values using `sp_signals.get_online_attributes(...)` API.
+2. Calls Signals API to get latest attribute values using `sp_signals.get_view_attributes(...)` API.
 3. Scores latest attribute values using an ML model.
 4. Returns Signals API attributes, ML prediction score, ML prediction explanations back.
 
@@ -43,9 +43,11 @@ For example, in order to get live Signals Attributes for a `domain_userid` one c
 
 ```python
 def get_duid_values(duid: str):
-    response = sp_signals.get_online_attributes(
-        sp_view,
-        duid
+    response = sp_signals.get_view_attributes(
+        name=view_name,
+        version=view_version,
+        attributes=attributes,
+        identifier=duid
     )
     df = response.to_dataframe()
     ...

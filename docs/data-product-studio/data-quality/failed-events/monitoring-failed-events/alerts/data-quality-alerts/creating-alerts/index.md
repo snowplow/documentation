@@ -73,5 +73,5 @@ Alerts are checked every 10 minutes. You'll receive notifications when new faile
 
 ## Next steps
 
-- [Manage existing alerts](/docs/data-product-studio/data-quality/alerts/managing-alerts/index.md)
+- [Manage existing alerts](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/alerts/data-quality-alerts/managing-alerts/index.md)
 - [Explore failed events](/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/index.md)

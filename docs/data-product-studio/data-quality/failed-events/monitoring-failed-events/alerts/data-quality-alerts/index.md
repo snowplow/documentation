@@ -1,11 +1,7 @@
 ---
-title: "New Failed events alerts"
-sidebar_position: 4
+title: "Data Quality alerts"
+sidebar_position: 1
 ---
-
-:::info Legacy monitoring
-For legacy failed events monitoring, see [monitoring failed events](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/index.md).
-:::
 
 Failed events alerts automatically notify you when [failed events](/docs/fundamentals/failed-events/index.md) occur in your data pipeline. Set up alerts to receive notifications via email or Slack when validation errors, resolution errors, or other data quality issues arise.
 
@@ -37,5 +33,5 @@ Configure alerts to trigger only for specific types of failed events:
 
 ## Next steps
 
-- [Create your first alert](/docs/data-product-studio/data-quality/alerts/creating-alerts/index.md)
-- [Manage existing alerts](/docs/data-product-studio/data-quality/alerts/managing-alerts/index.md)
+- [Create your first alert](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/alerts/data-quality-alerts/creating-alerts/index.md)
+- [Manage existing alerts](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/alerts/data-quality-alerts/managing-alerts/index.md)

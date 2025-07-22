@@ -25,6 +25,43 @@ const SignalsWidget = ({
   const [error, setError] = useState(null)
   const [lastUpdated, setLastUpdated] = useState(null)
   const [isRefreshing, setIsRefreshing] = useState(false)
+  const [domainSessionId, setDomainSessionId] = useState('anonymous')
+
+  // Function to extract domain_sessionid from Snowplow cookie
+  const extractSessionId = () => {
+    try {
+      // Look for Snowplow cookies - common patterns are _sp_id.xxxx
+      const cookies = document.cookie.split(';')
+
+      for (let cookie of cookies) {
+        const trimmedCookie = cookie.trim()
+
+        // Look for Snowplow cookie (usually starts with _sp_id.)
+        if (trimmedCookie.startsWith('_sp_id.')) {
+          const cookieValue = trimmedCookie.split('=')[1]
+          if (cookieValue) {
+            // Snowplow cookie format: userid.timestamp.count.timestamp.sessionid.userid
+            // domain_sessionid is at index 5 (6th position)
+            const parts = cookieValue.split('.')
+            if (parts.length >= 6 && parts[5]) {
+              return parts[5]
+            }
+          }
+        }
+      }
+
+      // If no Snowplow cookie found, return anonymous
+      return 'anonymous'
+    } catch (error) {
+      console.warn('Error extracting session ID from cookies:', error)
+      return 'anonymous'
+    }
+  }
+
+  useEffect(() => {
+    // Extract session ID from cookie on component mount
+    setDomainSessionId(extractSessionId())
+  }, [])
 
   const fetchData = async () => {
     try {
@@ -92,8 +129,13 @@ const SignalsWidget = ({
 
   const formatValue = (attribute, value) => {
     // Handle None/null/empty values
-    if (value === "None" || value === null || value === undefined || value === "") {
-      return "n/a"
+    if (
+      value === 'None' ||
+      value === null ||
+      value === undefined ||
+      value === ''
+    ) {
+      return 'n/a'
     }
 
     // Convert page ping counts to approximate seconds (each ping ≈ 10 seconds)
@@ -103,7 +145,7 @@ const SignalsWidget = ({
         const totalSeconds = numericValue * 10
         const minutes = Math.floor(totalSeconds / 60)
         const seconds = totalSeconds % 60
-        
+
         if (minutes > 0) {
           return `${minutes}m ${seconds}s`
         } else {
@@ -134,28 +176,46 @@ const SignalsWidget = ({
 
   const getDisplayLabel = (attribute) => {
     const labelMap = {
-      'page_views_last_15_min': 'Page views in last 15 minutes',
-      'engaged_time_page_pings': 'Engaged time',
-      'first_referrer_seen': 'Referrer URL',
-      'last_search_term': 'Last search term',
-      'browser_name': 'Browser',
-      'location': 'Location' // This will be our combined city + country
+      page_views: 'Page views this session',
+      engaged_time_page_pings: 'Engaged time',
+      first_referrer_seen: 'Referrer URL',
+      recent_page_1: 'Recent unique pages visited',
+      recent_page_2: '',
+      recent_page_3: '',
+      recent_page_4: '',
+      recent_page_5: '',
+      last_search_term: 'Last search term',
+      browser_name: 'Browser',
+      location: 'Location',
     }
-    return labelMap[attribute] || attribute
+    // Return the mapped value, even if it's an empty string
+    return labelMap.hasOwnProperty(attribute) ? labelMap[attribute] : attribute
   }
 
   const processDataForDisplay = (rawData) => {
-    const filtered = rawData.filter(item => item.attribute !== 'domain_sessionid')
-    
-    // Find city and country to combine into location
-    const cityItem = filtered.find(item => item.attribute === 'geo_city')
-    const countryItem = filtered.find(item => item.attribute === 'geo_country')
-    
-    // Remove individual city and country items
-    const withoutGeoItems = filtered.filter(item => 
-      item.attribute !== 'geo_city' && item.attribute !== 'geo_country'
+    const filtered = rawData.filter(
+      (item) => item.attribute !== 'domain_sessionid'
     )
-    
+
+    // Find city and country to combine into location
+    const cityItem = filtered.find((item) => item.attribute === 'geo_city')
+    const countryItem = filtered.find(
+      (item) => item.attribute === 'geo_country'
+    )
+
+    // Find recent pages to break into separate rows
+    const recentPagesItem = filtered.find(
+      (item) => item.attribute === 'recent_pages_visited'
+    )
+
+    // Remove individual city, country, and recent pages items
+    const withoutSpecialItems = filtered.filter(
+      (item) =>
+        item.attribute !== 'geo_city' &&
+        item.attribute !== 'geo_country' &&
+        item.attribute !== 'recent_pages_visited'
+    )
+
     // Create combined location if both city and country exist
     if (cityItem && countryItem) {
       const countryName = (() => {
@@ -166,37 +226,56 @@ const SignalsWidget = ({
           return countryItem.value
         }
       })()
-      
-      withoutGeoItems.push({
+
+      withoutSpecialItems.push({
         attribute: 'location',
-        value: `${cityItem.value}, ${countryName}`
+        value: `${cityItem.value}, ${countryName}`,
       })
     }
-    
+
+    // Create separate rows for recent pages (up to 5)
+    if (recentPagesItem && Array.isArray(recentPagesItem.value)) {
+      const pages = recentPagesItem.value.slice(0, 5) // Take first 5 pages
+      pages.forEach((page, index) => {
+        if (page && page.trim()) {
+          // Only add non-empty pages
+          withoutSpecialItems.push({
+            attribute: `recent_page_${index + 1}`,
+            value: page,
+          })
+        }
+      })
+    }
+
     // Define the desired order
     const order = [
-      'page_views_last_15_min',
-      'engaged_time_page_pings', 
+      'page_views',
+      'engaged_time_page_pings',
       'first_referrer_seen',
+      'recent_page_1',
+      'recent_page_2',
+      'recent_page_3',
+      'recent_page_4',
+      'recent_page_5',
       'last_search_term',
       'browser_name',
-      'location'
+      'location',
     ]
-    
+
     // Sort items according to the defined order
-    return withoutGeoItems.sort((a, b) => {
+    return withoutSpecialItems.sort((a, b) => {
       const indexA = order.indexOf(a.attribute)
       const indexB = order.indexOf(b.attribute)
-      
+
       // If both items are in the order array, sort by their position
       if (indexA !== -1 && indexB !== -1) {
         return indexA - indexB
       }
-      
+
       // If only one item is in the order array, prioritize it
       if (indexA !== -1) return -1
       if (indexB !== -1) return 1
-      
+
       // If neither item is in the order array, maintain original order
       return 0
     })
@@ -252,7 +331,7 @@ const SignalsWidget = ({
               >
                 <TableCell component="th" scope="row">
                   <Typography variant="body2">
-                    {getDisplayLabel(item.attribute)}
+                    {getDisplayLabel(item.attribute) || ''}
                   </Typography>
                 </TableCell>
                 <TableCell>
@@ -298,6 +377,26 @@ const SignalsWidget = ({
           {error}
         </Alert>
       )}
+
+      {/* Debug: Show extracted domain_sessionid */}
+      <Box
+        sx={{
+          p: 2,
+          borderTop: '1px solid',
+          borderColor: 'divider',
+          bgcolor: 'grey.100',
+        }}
+      >
+        {domainSessionId === 'anonymous' ? (
+          <Typography variant="caption" color="error.main">
+            Unable to get session ID from cookies.
+          </Typography>
+        ) : (
+          <Typography variant="caption" color="text.secondary">
+            Current domain_sessionid: {domainSessionId}
+          </Typography>
+        )}
+      </Box>
     </Paper>
   )
 }

@@ -1,10 +1,11 @@
 {
   "domain_sessionid": "6c388607-7ab5-4364-b6a0-9b1c41002920",
-  "page_views_last_15_min": 8,
+  "page_views": 8,
   "first_referrer_seen": "www.google.com",
   "browser_name": "Chrome",
   "geo_country": "GB",
   "geo_city": "Wallington",
   "engaged_time_page_pings": 17,
-  "last_search_term": "None"
+  "last_search_term": "None",
+  "recent_pages_visited": ["Snowplow Webinars, Linkedin Lives & Event Sessions", "Snowplow Integrations", "Schedule a Demo with One of Our Technical Experts", "Snowplow", "How Strava drives a culture of continuous improvement with self-serve behavioral data from Snowplow", "Signals"]
 }

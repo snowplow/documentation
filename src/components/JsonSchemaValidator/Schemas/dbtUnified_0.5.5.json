@@ -978,6 +978,17 @@
       "group": "Operation and Logic",
       "longDescription": "Use this field to bypass optimization which avoids long scans due to late arriving data. Warning, use this field only when using specific older versions of the AMP tracker or the Pixel tracker.",
       "packageDefault": "false"
+    },
+    "snowplow__license_accepted": {
+      "recommendFullRefresh": false,
+      "order": 137,
+      "consoleGroup": "advanced",
+      "type": "boolean",
+      "description": "Use this field to accept the Snowplow user license.",
+      "title": "License accepted",
+      "group": "Operation and Logic",
+      "longDescription": "Use this field to accept the Snowplow Personal and Academic License or specify that you have a commercial agreement with Snowplow.",
+      "packageDefault": "false"
     }
   }
 }

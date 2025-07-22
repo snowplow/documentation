@@ -62,7 +62,7 @@ export default function SchemaProperties(props) {
             <div className="mt-2">
               <Tabs className="text-base not-prose" groupId="schema-view" queryString>
                 <TabItem value="table" label="Table">
-                  <table className="w-full not-prose text-base">
+                  <table className="w-full not-prose text-sm">
                     <thead>
                       <tr>
                         <th>Property</th>

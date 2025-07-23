@@ -47,19 +47,25 @@ const transformApiResponse = (apiResponse) => {
   const engagedTime = apiResponse.engaged_time_page_pings[0]
   const firstReferrer = apiResponse.first_referrer_seen[0]
 
-  // Get the last 5 pages and reverse the order
-  const allPages = apiResponse.recent_pages_visited[0]
-  const lastFivePages = allPages.slice(-5).reverse()
-
   const result = {
     page_views: pageViews,
     engaged_time_page_pings: engagedTime,
     first_referrer_seen: firstReferrer,
   }
 
-  // Add pages as separate properties starting from recent_page_1
-  for (let i = 0; i < lastFivePages.length; i++) {
-    result[`recent_page_${i + 1}`] = lastFivePages[i]
+  // Check if recent_pages_visited exists and has content
+  if (
+    apiResponse.recent_pages_visited &&
+    apiResponse.recent_pages_visited.length > 0
+  ) {
+    // Get the last 5 pages and reverse the order
+    const allPages = apiResponse.recent_pages_visited[0]
+    const lastFivePages = allPages.slice(-5).reverse()
+
+    // Add pages as separate properties starting from recent_page_1
+    for (let i = 0; i < lastFivePages.length; i++) {
+      result[`recent_page_${i + 1}`] = lastFivePages[i]
+    }
   }
 
   return result

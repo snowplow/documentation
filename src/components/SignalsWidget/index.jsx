@@ -13,6 +13,59 @@ import {
   Alert,
 } from '@mui/material'
 
+// Function to extract domain_sessionid from Snowplow cookie
+const extractSessionId = () => {
+  try {
+    // Look for Snowplow cookies - common patterns are _sp_id.xxxx
+    const cookies = document.cookie.split(';')
+
+    for (let cookie of cookies) {
+      const trimmedCookie = cookie.trim()
+
+      if (trimmedCookie.startsWith('_sp_biz1_id.')) {
+        const cookieValue = trimmedCookie.split('=')[1]
+        if (cookieValue) {
+          // Snowplow cookie format: userid.timestamp.count.timestamp.sessionid.userid
+          // domain_sessionid is at index 5 (6th position)
+          const parts = cookieValue.split('.')
+          if (parts.length >= 6 && parts[5]) {
+            return parts[5]
+          }
+        }
+      }
+    }
+
+    // If no Snowplow cookie found, return null
+    return null
+  } catch (error) {
+    console.warn('Error extracting session ID from cookies:', error)
+    return null
+  }
+}
+
+const transformApiResponse = (apiResponse) => {
+  const pageViews = apiResponse.page_views[0]
+  const engagedTime = apiResponse.engaged_time_page_pings[0]
+  const firstReferrer = apiResponse.first_referrer_seen[0]
+
+  // Get the last 5 pages and reverse the order
+  const allPages = apiResponse.recent_pages_visited[0]
+  const lastFivePages = allPages.slice(-5).reverse()
+
+  const result = {
+    page_views: pageViews,
+    engaged_time_page_pings: engagedTime,
+    first_referrer_seen: firstReferrer,
+  }
+
+  // Add pages as separate properties starting from recent_page_1
+  for (let i = 0; i < lastFivePages.length; i++) {
+    result[`recent_page_${i + 1}`] = lastFivePages[i]
+  }
+
+  return result
+}
+
 const SignalsWidget = ({ refreshInterval = 5000 }) => {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
@@ -21,36 +74,6 @@ const SignalsWidget = ({ refreshInterval = 5000 }) => {
   const [isRefreshing, setIsRefreshing] = useState(false)
   const [domainSessionId, setDomainSessionId] = useState(null)
   const intervalRef = useRef(null)
-
-  // Function to extract domain_sessionid from Snowplow cookie
-  const extractSessionId = () => {
-    try {
-      // Look for Snowplow cookies - common patterns are _sp_id.xxxx
-      const cookies = document.cookie.split(';')
-
-      for (let cookie of cookies) {
-        const trimmedCookie = cookie.trim()
-
-        if (trimmedCookie.startsWith('_sp_biz1_id.')) {
-          const cookieValue = trimmedCookie.split('=')[1]
-          if (cookieValue) {
-            // Snowplow cookie format: userid.timestamp.count.timestamp.sessionid.userid
-            // domain_sessionid is at index 5 (6th position)
-            const parts = cookieValue.split('.')
-            if (parts.length >= 6 && parts[5]) {
-              return parts[5]
-            }
-          }
-        }
-      }
-
-      // If no Snowplow cookie found, return null
-      return null
-    } catch (error) {
-      console.warn('Error extracting session ID from cookies:', error)
-      return null
-    }
-  }
 
   useEffect(() => {
     // Extract session ID from cookie on component mount
@@ -95,12 +118,11 @@ const SignalsWidget = ({ refreshInterval = 5000 }) => {
 
         const result = await response.json()
 
-        // Handle different data formats
+        const newData = transformApiResponse(result)
+        console.log('newData:', newData)
+
         let processedData
-        if (Array.isArray(result)) {
-          // Expect array of {attribute, value} objects
-          processedData = result
-        } else if (typeof result === 'object' && result !== null) {
+        if (typeof result === 'object' && result !== null) {
           // Convert object to array format and unwrap arrays
           processedData = Object.entries(result).map(([key, value]) => {
             // API returns values wrapped in arrays, so unwrap them
@@ -115,7 +137,7 @@ const SignalsWidget = ({ refreshInterval = 5000 }) => {
           throw new Error('Invalid data format')
         }
 
-        setData(processedData)
+        setData(newData)
         setLastUpdated(new Date())
         setError(null)
       } catch (err) {
@@ -178,20 +200,6 @@ const SignalsWidget = ({ refreshInterval = 5000 }) => {
       }
     }
 
-    // Convert 2-letter country codes to full country names
-    if (attribute && attribute.toLowerCase().includes('country')) {
-      try {
-        const displayNames = new Intl.DisplayNames(['en'], { type: 'region' })
-        const countryName = displayNames.of(value)
-        if (countryName && countryName !== value) {
-          return countryName
-        }
-      } catch (error) {
-        // If conversion fails, fall back to original value
-        console.warn('Country code conversion failed:', error)
-      }
-    }
-
     if (typeof value === 'object' && value !== null) {
       return JSON.stringify(value)
     }
@@ -208,8 +216,6 @@ const SignalsWidget = ({ refreshInterval = 5000 }) => {
       recent_page_3: '',
       recent_page_4: '',
       recent_page_5: '',
-      browser_name: 'Browser',
-      location: 'Location',
     }
     // Return the mapped value, even if it's an empty string
     return labelMap.hasOwnProperty(attribute) ? labelMap[attribute] : attribute
@@ -220,41 +226,15 @@ const SignalsWidget = ({ refreshInterval = 5000 }) => {
       (item) => item.attribute !== 'domain_sessionid'
     )
 
-    // Find city and country to combine into location
-    const cityItem = filtered.find((item) => item.attribute === 'geo_city')
-    const countryItem = filtered.find(
-      (item) => item.attribute === 'geo_country'
-    )
-
     // Find recent pages to break into separate rows
     const recentPagesItem = filtered.find(
       (item) => item.attribute === 'recent_pages_visited'
     )
 
-    // Remove individual city, country, and recent pages items
+    // Remove recent pages items
     const withoutSpecialItems = filtered.filter(
-      (item) =>
-        item.attribute !== 'geo_city' &&
-        item.attribute !== 'geo_country' &&
-        item.attribute !== 'recent_pages_visited'
+      (item) => item.attribute !== 'recent_pages_visited'
     )
-
-    // Create combined location if both city and country exist
-    if (cityItem && countryItem) {
-      const countryName = (() => {
-        try {
-          const displayNames = new Intl.DisplayNames(['en'], { type: 'region' })
-          return displayNames.of(countryItem.value) || countryItem.value
-        } catch {
-          return countryItem.value
-        }
-      })()
-
-      withoutSpecialItems.push({
-        attribute: 'location',
-        value: `${cityItem.value}, ${countryName}`,
-      })
-    }
 
     // Create separate rows for recent pages (up to 5)
     if (recentPagesItem && Array.isArray(recentPagesItem.value)) {
@@ -282,8 +262,6 @@ const SignalsWidget = ({ refreshInterval = 5000 }) => {
       'recent_page_3',
       'recent_page_4',
       'recent_page_5',
-      'browser_name',
-      'location',
     ]
 
     // Sort items according to the defined order
@@ -328,6 +306,8 @@ const SignalsWidget = ({ refreshInterval = 5000 }) => {
     )
   }
 
+  console.log('❗️ data', data)
+
   return (
     <Paper elevation={2} sx={{ my: 2, overflow: 'hidden' }}>
       <TableContainer sx={{ pt: 0 }}>
@@ -339,9 +319,9 @@ const SignalsWidget = ({ refreshInterval = 5000 }) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {processDataForDisplay(data).map((item, index) => (
+            {Object.entries(data).map(([key, value]) => (
               <TableRow
-                key={index}
+                key={key}
                 sx={{
                   '&:last-child td, &:last-child th': { border: 0 },
                   '&:hover': { bgcolor: 'action.hover' },
@@ -349,12 +329,12 @@ const SignalsWidget = ({ refreshInterval = 5000 }) => {
               >
                 <TableCell component="th" scope="row">
                   <Typography variant="body2">
-                    {getDisplayLabel(item.attribute) || ''}
+                    {getDisplayLabel(key) || ''}
                   </Typography>
                 </TableCell>
                 <TableCell>
                   <Typography variant="body2">
-                    {formatValue(item.attribute, item.value)}
+                    {formatValue(key, value)}
                   </Typography>
                 </TableCell>
               </TableRow>

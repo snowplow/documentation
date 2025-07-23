@@ -1,5 +1,5 @@
 ---
-title: "Tracking Events"
+title: "Tracking events"
 date: "2021-11-16"
 sidebar_position: 2000
 ---
@@ -103,8 +103,9 @@ m.global.snowplow.screenView = {
 
 When [configuring the tracker](/docs/sources/trackers/roku-tracker/configuration/index.md), use the `trackInstall` setting to opt into automatic [`application_install` tracking](/docs/events/ootb-data/mobile-lifecycle-events/index.md#install-event).
 
-There's no way to directly detect if the app is running as part of a fresh installation, so the tracker uses an indirect trigger. It will send an install event after it creates a first `userId` value for the [`client_session` entity](/docs/sources/trackers/roku-tracker/adding-data/index.md#adding-user-and-platform-data-with-subject).
-This occurs even if the entity is not enabled.
+There's no way to directly detect if the app is running as part of a fresh installation, so the tracker uses an indirect trigger.
+It will send an install event after it creates a first `userId` value for the [`client_session` entity](/docs/sources/trackers/roku-tracker/adding-data/index.md#adding-user-and-platform-data-with-subject).
+Generating a `userId` occurs even if the `client_session` entity is not enabled.
 This is similar to the approach [recommended by Roku](https://community.roku.com/discussions/developer/tracking-application-install-and-version-state/188117).
 
 ```brightscript

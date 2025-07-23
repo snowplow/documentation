@@ -16,7 +16,6 @@ import {
 // Function to extract domain_sessionid from Snowplow cookie
 const extractSessionId = () => {
   try {
-    // Look for Snowplow cookies - common patterns are _sp_id.xxxx
     const cookies = document.cookie.split(';')
 
     for (let cookie of cookies) {
@@ -104,7 +103,7 @@ const getDisplayLabel = (attribute) => {
     page_views: 'Page views this session',
     engaged_time_page_pings: 'Engaged time',
     first_referrer_seen: 'Referrer URL',
-    recent_page_1: 'Recent unique pages visited',
+    recent_page_1: 'Recent pages visited',
     recent_page_2: '',
     recent_page_3: '',
     recent_page_4: '',

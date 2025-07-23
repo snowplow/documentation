@@ -149,7 +149,7 @@ This example shows all the available configuration options for a stream view. To
 This view groups attributes for a user entity, to be calculated in real-time.
 
 ```python
-from snowplow_signals import View, user_id
+from snowplow_signals import StreamView, user_id
 
 stream_view = StreamView(
     name="comprehensive_stream_view",

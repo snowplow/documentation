@@ -36,6 +36,24 @@ Verify the installation with
 
 ## Configure
 
+### Automatic configuration
+
+To create a global configuration automatically, execute the following command:
+
+```
+snowplow-cli setup
+```
+
+Accept the terminal prompt, and you should be taken to the browser. Log in with your BDP account, and confirm the device. If you have access to multiple organizations, you might be prompted for an organization selection. After that a new global configuration should be created. You can verify that you have access by executing:
+
+```
+snowplow-cli status
+```
+
+If you don't want to create a global config, you can create a `.env` file in the current directory by providing the `--dotenv` flag to the setup command.
+
+### Manual configuration
+
 You will need three values.
 
 An API Key Id and the corresponding API Key (secret), which are generated from the [credentials section](https://console.snowplowanalytics.com/credentials) in BDP Console.
@@ -70,6 +88,15 @@ Snowplow CLI can take its configuration from a variety of sources. More details 
 
   ```bash
   ./snowplow-cli data-structures --api-key-id ********-****-****-****-************ --api-key ********-****-****-****-************ --org-id ********-****-****-****-************
+  ```
+
+  </TabItem>
+  <TabItem value="dotenv" label=".env" >
+
+  ```bash
+  SNOWPLOW_CONSOLE_API_KEY="********-****-****-****-************"
+  SNOWPLOW_CONSOLE_API_KEY_ID="********-****-****-****-************"
+  SNOWPLOW_CONSOLE_ORG_ID="********-****-****-****-************"
   ```
 
   </TabItem>

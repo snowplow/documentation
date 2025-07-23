@@ -40,8 +40,7 @@ const createTrackerConfig = (cookieName) => {
       ButtonClickTrackingPlugin(),
       FormTrackingPlugin(),
     ],
-    // cookieDomain: `.${domain[1]}.${domain[0]}`,
-    cookieSecure: false,
+    cookieDomain: `.${domain[1]}.${domain[0]}`,
     cookieName,
     cookieSameSite: 'Lax',
     contexts: {

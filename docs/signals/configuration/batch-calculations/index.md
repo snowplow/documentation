@@ -70,7 +70,7 @@ For stream or batch attributes that are calculated by Signals, a view contains r
 Specify the fields (columns) you want to use from the source table, using `Field`. Here's an example:
 
 ```python
-from snowplow_signals import View, domain_userid, Field
+from snowplow_signals import ExternalBatchView, domain_userid, Field
 
 view = ExternalBatchView(
     name="ecommerce_transaction_interactions_attributes",
@@ -135,7 +135,7 @@ The key difference between a standard stream [view](/docs/signals/configuration/
 The entity here is typically the user, which may be the `domain_userid` or other Snowplow identifier fields, such as the logged in `user_id`.
 
 ```python
-from snowplow_signals import View, domain_userid
+from snowplow_signals import BatchView, domain_userid
 
 view = BatchView(
     name="batch_ecommerce_attributes",

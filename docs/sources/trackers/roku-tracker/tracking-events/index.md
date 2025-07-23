@@ -103,7 +103,7 @@ m.global.snowplow.screenView = {
 
 When [configuring the tracker](/docs/sources/trackers/roku-tracker/configuration/index.md), use the `trackInstall` setting to opt into automatic [`application_install` tracking](/docs/events/ootb-data/mobile-lifecycle-events/index.md#install-event).
 
-Because there is no way to detect if the app is running as part of a fresh installation, the SDK will trigger an installation when it first creates a `userId` value for use in building the [`client_session` entity](/docs/sources/trackers/roku-tracker/adding-data/index.md#adding-user-and-platform-data-with-subject).
+There's no way to directly detect if the app is running as part of a fresh installation, so the tracker uses an indirect trigger. It will send an install event after it creates a first `userId` value for the [`client_session` entity](/docs/sources/trackers/roku-tracker/adding-data/index.md#adding-user-and-platform-data-with-subject).
 This occurs even if the entity is not enabled.
 This is similar to the approach [recommended by Roku](https://community.roku.com/discussions/developer/tracking-application-install-and-version-state/188117).
 
@@ -115,11 +115,11 @@ m.global.snowplow.init = {
 
 :::note
 
-Similar to mobile events, this will track an "install" as the first time the tracking runs and generates a user ID.
+This will track an "install" the first time the tracker runs and generates a user ID.
 If you are adding tracking to an existing channel or upgrading from an older SDK version, enabling this setting may create a burst of events as older installations retroactively report this event for the first time.
 To reduce this:
 
-1. First release the app with SDK v0.3+ and this setting **disabled**
+1. First release the app with Roku tracker v0.3+ and this setting **disabled**
 2. Allow user devices time to generate their first `userId` values
 3. Release an additional version with this setting **enabled**
 4. Only new installations should track the event

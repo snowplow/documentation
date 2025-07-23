@@ -31,7 +31,9 @@ Every attribute grouping and intervention that is published to the Signals API i
 
 Here's some information about you. These attributes are being calculated now, in near real time, from our real-time event stream and your current session:
 
-<SignalsWidget title="Live Signals Metrics" dataFile="/data/signals-data.json" refreshInterval={2000} />
+<SignalsWidget refreshInterval={2000} />
+
+Engaged time is approximate. We're calculating engaged time based off page pings, which are sent every 10 seconds from this website.
 
 ## How does Signals fit into the Snowplow pipeline?
 

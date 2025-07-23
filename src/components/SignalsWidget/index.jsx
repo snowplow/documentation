@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import {
   Table,
   TableBody,
@@ -11,21 +11,16 @@ import {
   Box,
   CircularProgress,
   Alert,
-  Chip,
 } from '@mui/material'
-import RefreshIcon from '@mui/icons-material/Refresh'
 
-const SignalsWidget = ({
-  dataFile = '/data/signals-data.json',
-  refreshInterval = 5000,
-  title = 'Signals Live Data',
-}) => {
+const SignalsWidget = ({ refreshInterval = 5000 }) => {
   const [data, setData] = useState([])
   const [loading, setLoading] = useState(true)
   const [error, setError] = useState(null)
   const [lastUpdated, setLastUpdated] = useState(null)
   const [isRefreshing, setIsRefreshing] = useState(false)
   const [domainSessionId, setDomainSessionId] = useState(null)
+  const intervalRef = useRef(null)
 
   // Function to extract domain_sessionid from Snowplow cookie
   const extractSessionId = () => {
@@ -36,8 +31,7 @@ const SignalsWidget = ({
       for (let cookie of cookies) {
         const trimmedCookie = cookie.trim()
 
-        // Look for Snowplow cookie (usually starts with _sp_id.)
-        if (trimmedCookie.startsWith('_sp_id.')) {
+        if (trimmedCookie.startsWith('_sp_biz1_id.')) {
           const cookieValue = trimmedCookie.split('=')[1]
           if (cookieValue) {
             // Snowplow cookie format: userid.timestamp.count.timestamp.sessionid.userid
@@ -67,9 +61,8 @@ const SignalsWidget = ({
   useEffect(() => {
     // Don't fetch if we don't have a session ID
     if (!domainSessionId) {
-      setDomainSessionId('c6852eb2-3f5f-48c4-b8d5-3b688182b59f')
-      // setError('No session ID available')
-      // setLoading(false)
+      setError('No session ID available from cookies')
+      setLoading(false)
       return
     }
 
@@ -87,7 +80,7 @@ const SignalsWidget = ({
 
         // Fetch real data from Signals API
         const response = await fetch(
-          `http://localhost:3001/api/docs_features?domainSessionId=${domainSessionId}`,
+          `http://mir.localhost.snowplow.io:3001/api/docs_features?domainSessionId=${domainSessionId}`,
           {
             method: 'GET',
             headers: {
@@ -112,13 +105,7 @@ const SignalsWidget = ({
           processedData = Object.entries(result).map(([key, value]) => {
             // API returns values wrapped in arrays, so unwrap them
             let unwrappedValue = Array.isArray(value) ? value[0] : value
-            
-            // Special handling for recent_pages_visited which is nested array
-            if (key === 'recent_pages_visited' && Array.isArray(unwrappedValue)) {
-              // unwrappedValue is already the array of page titles
-              // No need to unwrap further
-            }
-            
+
             return {
               attribute: key,
               value: unwrappedValue,
@@ -129,13 +116,10 @@ const SignalsWidget = ({
         }
 
         setData(processedData)
-        // Only set lastUpdated on the very first successful load
-        if (!lastUpdated) {
-          setLastUpdated(new Date())
-        }
+        setLastUpdated(new Date())
         setError(null)
       } catch (err) {
-        console.error('SignalsWidget error:', err)
+        console.error('❌ SignalsWidget error:', err)
         setError(`Failed to load data: ${err.message}`)
       } finally {
         setLoading(false)
@@ -143,15 +127,29 @@ const SignalsWidget = ({
       }
     }
 
+    // Clear any existing interval
+    if (intervalRef.current) {
+      clearInterval(intervalRef.current)
+    }
+
     // Initial fetch
     fetchData()
 
     // Set up interval for periodic updates
     if (refreshInterval > 0) {
-      const interval = setInterval(fetchData, refreshInterval)
-      return () => clearInterval(interval)
+      intervalRef.current = setInterval(() => {
+        fetchData()
+      }, refreshInterval)
     }
-  }, [domainSessionId, refreshInterval, data.length, lastUpdated])
+
+    // Cleanup function
+    return () => {
+      if (intervalRef.current) {
+        clearInterval(intervalRef.current)
+        intervalRef.current = null
+      }
+    }
+  }, [domainSessionId, refreshInterval])
 
   const formatValue = (attribute, value) => {
     // Handle None/null/empty values
@@ -202,17 +200,16 @@ const SignalsWidget = ({
 
   const getDisplayLabel = (attribute) => {
     const labelMap = {
-      'page_views': 'Page views this session',
-      'engaged_time_page_pings': 'Engaged time',
-      'first_referrer_seen': 'Referrer URL',
-      'recent_page_1': 'Recent unique pages visited',
-      'recent_page_2': '',
-      'recent_page_3': '',
-      'recent_page_4': '',
-      'recent_page_5': '',
-      'last_search_term': 'Last search term',
-      'browser_name': 'Browser',
-      'location': 'Location',
+      page_views: 'Page views this session',
+      engaged_time_page_pings: 'Engaged time',
+      first_referrer_seen: 'Referrer URL',
+      recent_page_1: 'Recent unique pages visited',
+      recent_page_2: '',
+      recent_page_3: '',
+      recent_page_4: '',
+      recent_page_5: '',
+      browser_name: 'Browser',
+      location: 'Location',
     }
     // Return the mapped value, even if it's an empty string
     return labelMap.hasOwnProperty(attribute) ? labelMap[attribute] : attribute
@@ -285,7 +282,6 @@ const SignalsWidget = ({
       'recent_page_3',
       'recent_page_4',
       'recent_page_5',
-      'last_search_term',
       'browser_name',
       'location',
     ]
@@ -312,9 +308,6 @@ const SignalsWidget = ({
   if (loading && data.length === 0) {
     return (
       <Paper elevation={2} sx={{ p: 3, my: 2 }}>
-        <Typography variant="h6" gutterBottom>
-          {title}
-        </Typography>
         <Box display="flex" justifyContent="center" alignItems="center" py={4}>
           <CircularProgress size={24} sx={{ mr: 2 }} />
           <Typography variant="body2" color="text.secondary">
@@ -328,9 +321,6 @@ const SignalsWidget = ({
   if (error && data.length === 0) {
     return (
       <Paper elevation={2} sx={{ p: 3, my: 2 }}>
-        <Typography variant="h6" gutterBottom>
-          {title}
-        </Typography>
         <Alert severity="error" sx={{ mt: 2 }}>
           {error}
         </Alert>
@@ -372,7 +362,6 @@ const SignalsWidget = ({
           </TableBody>
         </Table>
       </TableContainer>
-
       {lastUpdated && (
         <Box
           sx={{
@@ -399,32 +388,11 @@ const SignalsWidget = ({
           </Box>
         </Box>
       )}
-
       {error && data.length > 0 && (
         <Alert severity="warning" sx={{ m: 2, mt: 0 }}>
           {error}
         </Alert>
       )}
-
-      {/* Debug: Show extracted domain_sessionid */}
-      <Box
-        sx={{
-          p: 2,
-          borderTop: '1px solid',
-          borderColor: 'divider',
-          bgcolor: 'grey.100',
-        }}
-      >
-        {!domainSessionId ? (
-          <Typography variant="caption" color="error.main">
-            Unable to get session ID from cookies
-          </Typography>
-        ) : (
-          <Typography variant="caption" color="text.secondary">
-            Current domain_sessionid: {domainSessionId}
-          </Typography>
-        )}
-      </Box>
     </Paper>
   )
 }

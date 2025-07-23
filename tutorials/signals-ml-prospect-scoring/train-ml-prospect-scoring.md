@@ -13,6 +13,10 @@ Here's the prediction structure and timeline:
 
 The next task is to prepare historical data resembling the same Signals features, and train an XGBoost model on top.
 
+## Install dependencies
+
+Run `pip install snowflake-connector-python snowflake-sqlalchemy` to install the required libraries.
+
 ## Prepare training dataset
 
 Double-check that your `ENV_ATOMIC_TABLE` variable points to your Snowflake atomic table address, e.g. `snowplow_tracker_db.atomic.events`.

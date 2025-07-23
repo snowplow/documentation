@@ -31,9 +31,13 @@ Since the attributes will be calculated in stream, those with a defined `period`
 
 With the exception of `num_media_events_l30d`, the attributes will be based on standard Snowplow web events such as `page_view`, `page_ping`, or `submit_form`. If you aren't tracking Snowplow media events, the `num_media_events_l30d` attribute value will just stay at 0.
 
+## Install Signals Python SDK
+
+Run `pip install snowplow-signals`.
+
 ## Define common variables
 
-First, let's prepare the imports and useful variables. We will reuse the variables multiple times, and this makes the code concise and clear.
+Let's prepare the imports and useful variables. We will reuse the variables multiple times, and this makes the code concise and clear.
 
 
 ```python

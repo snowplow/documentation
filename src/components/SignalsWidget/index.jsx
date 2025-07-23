@@ -103,7 +103,7 @@ const getDisplayLabel = (attribute) => {
     page_views: 'Page views this session',
     engaged_time_page_pings: 'Engaged time',
     first_referrer_seen: 'Referrer URL',
-    recent_page_1: 'Recent pages visited',
+    recent_page_1: 'Recent unique pages visited',
     recent_page_2: '',
     recent_page_3: '',
     recent_page_4: '',

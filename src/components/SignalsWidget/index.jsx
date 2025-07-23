@@ -38,7 +38,7 @@ const extractSessionId = () => {
     // If no Snowplow cookie found, return null
     return null
   } catch (error) {
-    console.warn('Error extracting session ID from cookies:', error)
+    // console.warn('Error extracting session ID from cookies:', error)
     return null
   }
 }
@@ -64,6 +64,54 @@ const transformApiResponse = (apiResponse) => {
   }
 
   return result
+}
+
+const formatValue = (attribute, value) => {
+  // Handle None/null/empty values
+  if (
+    value === 'None' ||
+    value === null ||
+    value === undefined ||
+    value === ''
+  ) {
+    return 'n/a'
+  }
+
+  // Convert page ping counts to approximate seconds (each ping ≈ 10 seconds)
+  if (attribute && attribute.toLowerCase().includes('page_ping')) {
+    const numericValue = parseInt(value)
+    if (!isNaN(numericValue)) {
+      const totalSeconds = numericValue * 10
+      const minutes = Math.floor(totalSeconds / 60)
+      const seconds = totalSeconds % 60
+
+      if (minutes > 0) {
+        return `${minutes}m ${seconds}s`
+      } else {
+        return `${seconds}s`
+      }
+    }
+  }
+
+  if (typeof value === 'object' && value !== null) {
+    return JSON.stringify(value)
+  }
+  return String(value)
+}
+
+const getDisplayLabel = (attribute) => {
+  const labelMap = {
+    page_views: 'Page views this session',
+    engaged_time_page_pings: 'Engaged time',
+    first_referrer_seen: 'Referrer URL',
+    recent_page_1: 'Recent unique pages visited',
+    recent_page_2: '',
+    recent_page_3: '',
+    recent_page_4: '',
+    recent_page_5: '',
+  }
+  // Return the mapped value, even if it's an empty string
+  return labelMap.hasOwnProperty(attribute) ? labelMap[attribute] : attribute
 }
 
 const SignalsWidget = ({ refreshInterval = 5000 }) => {
@@ -118,30 +166,17 @@ const SignalsWidget = ({ refreshInterval = 5000 }) => {
 
         const result = await response.json()
 
-        const newData = transformApiResponse(result)
-        console.log('newData:', newData)
-
         let processedData
         if (typeof result === 'object' && result !== null) {
-          // Convert object to array format and unwrap arrays
-          processedData = Object.entries(result).map(([key, value]) => {
-            // API returns values wrapped in arrays, so unwrap them
-            let unwrappedValue = Array.isArray(value) ? value[0] : value
-
-            return {
-              attribute: key,
-              value: unwrappedValue,
-            }
-          })
+          processedData = transformApiResponse(result)
         } else {
           throw new Error('Invalid data format')
         }
 
-        setData(newData)
+        setData(processedData)
         setLastUpdated(new Date())
         setError(null)
       } catch (err) {
-        console.error('❌ SignalsWidget error:', err)
         setError(`Failed to load data: ${err.message}`)
       } finally {
         setLoading(false)
@@ -173,116 +208,6 @@ const SignalsWidget = ({ refreshInterval = 5000 }) => {
     }
   }, [domainSessionId, refreshInterval])
 
-  const formatValue = (attribute, value) => {
-    // Handle None/null/empty values
-    if (
-      value === 'None' ||
-      value === null ||
-      value === undefined ||
-      value === ''
-    ) {
-      return 'n/a'
-    }
-
-    // Convert page ping counts to approximate seconds (each ping ≈ 10 seconds)
-    if (attribute && attribute.toLowerCase().includes('page_ping')) {
-      const numericValue = parseInt(value)
-      if (!isNaN(numericValue)) {
-        const totalSeconds = numericValue * 10
-        const minutes = Math.floor(totalSeconds / 60)
-        const seconds = totalSeconds % 60
-
-        if (minutes > 0) {
-          return `${minutes}m ${seconds}s`
-        } else {
-          return `${seconds}s`
-        }
-      }
-    }
-
-    if (typeof value === 'object' && value !== null) {
-      return JSON.stringify(value)
-    }
-    return String(value)
-  }
-
-  const getDisplayLabel = (attribute) => {
-    const labelMap = {
-      page_views: 'Page views this session',
-      engaged_time_page_pings: 'Engaged time',
-      first_referrer_seen: 'Referrer URL',
-      recent_page_1: 'Recent unique pages visited',
-      recent_page_2: '',
-      recent_page_3: '',
-      recent_page_4: '',
-      recent_page_5: '',
-    }
-    // Return the mapped value, even if it's an empty string
-    return labelMap.hasOwnProperty(attribute) ? labelMap[attribute] : attribute
-  }
-
-  const processDataForDisplay = (rawData) => {
-    const filtered = rawData.filter(
-      (item) => item.attribute !== 'domain_sessionid'
-    )
-
-    // Find recent pages to break into separate rows
-    const recentPagesItem = filtered.find(
-      (item) => item.attribute === 'recent_pages_visited'
-    )
-
-    // Remove recent pages items
-    const withoutSpecialItems = filtered.filter(
-      (item) => item.attribute !== 'recent_pages_visited'
-    )
-
-    // Create separate rows for recent pages (up to 5)
-    if (recentPagesItem && Array.isArray(recentPagesItem.value)) {
-      // Reverse the array to show most recent first (API returns oldest first)
-      const pages = recentPagesItem.value.slice().reverse().slice(0, 5)
-      pages.forEach((page, index) => {
-        // Convert page to string and check if it's not empty
-        const pageString = String(page || '').trim()
-        if (pageString) {
-          withoutSpecialItems.push({
-            attribute: `recent_page_${index + 1}`,
-            value: pageString,
-          })
-        }
-      })
-    }
-
-    // Define the desired order
-    const order = [
-      'page_views',
-      'engaged_time_page_pings',
-      'first_referrer_seen',
-      'recent_page_1',
-      'recent_page_2',
-      'recent_page_3',
-      'recent_page_4',
-      'recent_page_5',
-    ]
-
-    // Sort items according to the defined order
-    return withoutSpecialItems.sort((a, b) => {
-      const indexA = order.indexOf(a.attribute)
-      const indexB = order.indexOf(b.attribute)
-
-      // If both items are in the order array, sort by their position
-      if (indexA !== -1 && indexB !== -1) {
-        return indexA - indexB
-      }
-
-      // If only one item is in the order array, prioritize it
-      if (indexA !== -1) return -1
-      if (indexB !== -1) return 1
-
-      // If neither item is in the order array, maintain original order
-      return 0
-    })
-  }
-
   if (loading && data.length === 0) {
     return (
       <Paper elevation={2} sx={{ p: 3, my: 2 }}>
@@ -305,8 +230,6 @@ const SignalsWidget = ({ refreshInterval = 5000 }) => {
       </Paper>
     )
   }
-
-  console.log('❗️ data', data)
 
   return (
     <Paper elevation={2} sx={{ my: 2, overflow: 'hidden' }}>

@@ -34,14 +34,14 @@ license {
 | `monitoring.healthProbe.unhealthyLatency` (since *6.0.0*) | Optional. Default: `2 minutes`. Health probe becomes unhealthy if any received event is still not fully processed before this cutoff time. |
 | `telemetry.disable` | Optional. Set to `true` to disable [telemetry](/docs/get-started/snowplow-community-edition/telemetry/index.md). |
 | `telemetry.userProvidedId` | Optional. See [here](/docs/get-started/snowplow-community-edition/telemetry/index.md#how-can-i-help) for more information. |
-| `validation.acceptInvalid` | Optional. Default: `false`. Enrich *3.0.0* introduces the validation of the enriched events against atomic schema before emitting. If set to `false`, a failed event will be emitted instead of the enriched event if validation fails. If set to `true`, invalid enriched events will be emitted, as before. |
+| `validation.acceptInvalid` (since *6.0.0*) | Optional. Default: `false`. Enrich *3.0.0* introduces the validation of the enriched events against atomic schema before emitting. If set to `false`, a failed event will be emitted instead of the enriched event if validation fails. If set to `true`, invalid enriched events will be emitted, as before. |
 | `validation.atomicFieldsLimits` (since *4.0.0*) | Optional. For the defaults, see [here](https://github.com/snowplow/enrich/blob/master/modules/common/src/main/resources/reference.conf). Configuration for custom maximum atomic fields (strings) length. It's a map-like structure with keys being atomic field names and values being their max allowed length. |
-| `validation.maxJsonDepth` | Optional. Default: `40`. Maximum allowed depth for the JSON entities in the events. Event will be sent to bad row stream if it contains JSON entity with a depth that exceeds this value. |
-| `validation.exitOnJsCompileError` | Optional. Default: `true`. If it is set to true, Enrich will exit with error if JS enrichment script is invalid. If it is set to false, Enrich will continue to run if JS enrichment script is invalid but every event will end up as bad row. |
+| `validation.maxJsonDepth` (since *6.0.0*) | Optional. Default: `40`. Maximum allowed depth for the JSON entities in the events. Event will be sent to bad row stream if it contains JSON entity with a depth that exceeds this value. |
+| `validation.exitOnJsCompileError` (since *6.0.0*) | Optional. Default: `true`. If it is set to true, Enrich will exit with error if JS enrichment script is invalid. If it is set to false, Enrich will continue to run if JS enrichment script is invalid but every event will end up as bad row. |
 
 ## enrich-pubsub
 
-A minimal configuration file can be found on the [Github repo](https://github.com/snowplow/enrich/blob/master/config/config.pubsub.minimal.hocon), as well as a [comprehensive one](https://github.com/snowplow/enrich/blob/master/config/config.pubsub.extended.hocon).
+A minimal configuration file can be found on the [Github repo](https://github.com/snowplow/enrich/blob/master/config/config.pubsub.minimal.hocon), as well as a [comprehensive one](https://github.com/snowplow/enrich/blob/master/config/config.pubsub.reference.hocon).
 
 | parameter | description |
 |-|-|
@@ -64,7 +64,7 @@ A minimal configuration file can be found on the [Github repo](https://github.co
 
 ## enrich-kinesis
 
-A minimal configuration file can be found on the [Github repo](https://github.com/snowplow/enrich/blob/master/config/config.kinesis.minimal.hocon), as well as a [comprehensive one](https://github.com/snowplow/enrich/blob/master/config/config.kinesis.extended.hocon).
+A minimal configuration file can be found on the [Github repo](https://github.com/snowplow/enrich/blob/master/config/config.kinesis.minimal.hocon), as well as a [comprehensive one](https://github.com/snowplow/enrich/blob/master/config/config.kinesis.reference.hocon).
 
 | parameter | description |
 |-|-|
@@ -74,7 +74,7 @@ A minimal configuration file can be found on the [Github repo](https://github.co
 | `input.initialPosition.timestamp` | Required for `AT_TIMESTAMP`. E.g. `2020-07-17T10:00:00Z`. |
 | `input.retrievalMode.type` | Optional. Default: `Polling`. Set the mode for retrieving records. Possible values: `Polling` or `FanOut`. |
 | `input.retrievalMode.maxRecords` | Required for `Polling`. Default: `1000`. Maximum size of a batch returned by a call to `getRecords`. Records are checkpointed after a batch has been fully processed, thus the smaller `maxRecords`, the more often records can be checkpointed into DynamoDb, but possibly reducing the throughput. |
-| `input.workerIdentifier` | Required. Name of this KCL worker used in the DynamoDB lease table. |
+| `input.workerIdentifier` (since *6.0.0*) | Required. Name of this KCL worker used in the DynamoDB lease table. |
 | `input.leaseDuration` (since *6.0.0*) | Optional. Default: `10 seconds`. Duration of shard leases. KCL workers must periodically refresh leases in the DynamoDB table before this duration expires. |
 | `input.maxLeasesToStealAtOneTimeFactor` (since *6.0.0*) | Optional. Default: `2.0`. Controls how to pick the max number of leases to steal at one time. E.g. If there are 4 available processors, and maxLeasesToStealAtOneTimeFactor = 2.0, then allow the KCL to steal up to 8 leases. Allows bigger instances to more quickly acquire the shard-leases they need to combat latency. |
 | `input.checkpointThrottledBackoffPolicy.minBackoff` (since *6.0.0*) | Optional. Default: `100 millis`. Minimum backoff before retrying when DynamoDB provisioned throughput exceeded. |
@@ -99,7 +99,7 @@ A minimal configuration file can be found on the [Github repo](https://github.co
 
 ## enrich-kafka
 
-A minimal configuration file can be found on the [Github repo](https://github.com/snowplow/enrich/blob/master/config/config.kafka.minimal.hocon), as well as a [comprehensive one](https://github.com/snowplow/enrich/blob/master/config/config.kafka.extended.hocon).
+A minimal configuration file can be found on the [Github repo](https://github.com/snowplow/enrich/blob/master/config/config.kafka.minimal.hocon), as well as a [comprehensive one](https://github.com/snowplow/enrich/blob/master/config/config.kafka.reference.hocon).
 
 | parameter | description |
 |-|-|
@@ -126,7 +126,7 @@ Example values for the Azure storage accounts :
 
 ## enrich-nsq
 
-A minimal configuration file can be found on the [Github repo](https://github.com/snowplow/enrich/blob/master/config/config.nsq.minimal.hocon), as well as a [comprehensive one](https://github.com/snowplow/enrich/blob/master/config/config.nsq.extended.hocon).
+A minimal configuration file can be found on the [Github repo](https://github.com/snowplow/enrich/blob/master/config/config.nsq.minimal.hocon), as well as a [comprehensive one](https://github.com/snowplow/enrich/blob/master/config/config.nsq.reference.hocon).
 
 | parameter | description |
 |-|-|
@@ -143,6 +143,7 @@ A minimal configuration file can be found on the [Github repo](https://github.co
 | `output.bad.topic` | Required. Name of the NSQ topic that will receive the failed events in the "bad row" format (JSON). |
 | `output.bad.nsqdHost` | Required. The host name of nsqd application. |
 | `output.bad.nsqdPort` | Required. The port number of nsqd application. |
+| `blobClients.accounts` (since *6.0.0*) | Optional. Array of Azure Blob Storage accounts to download enrichment assets. |
 
 ## Enriched events validation against atomic schema
 

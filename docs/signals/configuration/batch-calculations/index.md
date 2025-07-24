@@ -15,11 +15,11 @@ Only Snowflake is supported currently.
 
 Signals is configured slightly differently depending if you're using existing tables or creating new ones.
 
-| Signals component | Required for existing attributes | Required for creating new attributes |
-| ----------------- | -------------------------------- | ------------------------------------ |
-| `BatchSource`     | ✅                                | ❌                                    |
-| `View`            | with `fields` ✅                  | with `attributes` ✅                  |
-| Batch engine      | ❌                                | ✅                                    |
+| Signals component   | Required for existing attributes | Required for creating new attributes |
+| -----------------   | -------------------------------- | ------------------------------------ |
+| `BatchSource`       | ✅                                | ❌                                   |
+| `BatchView`         | ❌                                | with `attributes` ✅                 |
+| `ExternalBatchView` | with `fields` ✅                  | ❌                                   |
 
 To create new attribute tables, the batch engine will help you set up the required dbt projects and models.
 
@@ -63,26 +63,20 @@ The `timestamp_field` is optional but recommended for incremental or snapshot-ba
 
 ### Defining a view with fields
 
-Pass your source to a new view.
+Pass your source to a new `ExternalBatchView` so that Signals does not materialize the attributes. This will be done later, once Signals has connected to the table.
 
 For stream or batch attributes that are calculated by Signals, a view contains references to your attribute definitions. In this case, the attributes are already defined elsewhere and pre-calculated in the warehouse. Instead of `attributes`, this view will have `fields`.
-
-To start with, create the view with `online=False` so that Signals does not materialize the attributes. This will be done later, once Signals has connected to the table.
 
 Specify the fields (columns) you want to use from the source table, using `Field`. Here's an example:
 
 ```python
-from snowplow_signals import View, domain_userid, Field
+from snowplow_signals import ExternalBatchView, domain_userid, Field
 
-view = View(
+view = ExternalBatchView(
     name="ecommerce_transaction_interactions_attributes",
     version=1,
     entity=domain_userid,
     owner="user@company.com",
-
-    offline=True, # Set this to True because this is a batch view
-    online=False, # Set this to False until the configuration is complete
-
     batch_source=data_source,
     fields=[
         Field(
@@ -141,16 +135,13 @@ The key difference between a standard stream [view](/docs/signals/configuration/
 The entity here is typically the user, which may be the `domain_userid` or other Snowplow identifier fields, such as the logged in `user_id`.
 
 ```python
-from snowplow_signals import View, domain_userid
+from snowplow_signals import BatchView, domain_userid
 
-view = View(
+view = BatchView(
     name="batch_ecommerce_attributes",
     version=1,
     entity=domain_userid,
     owner="user@company.com"
-
-    offline=True, # Set this to True because this is a batch view
-
     attributes=[
         products_added_to_cart_last_7_days,
         total_product_price_clv,
@@ -173,7 +164,7 @@ Check out the full instructions in [Creating new batch attributes](/docs/signals
 The materialization engine is a cron job that sends warehouse attributes to the Profiles Store.
 
 The engine will be enabled when you either:
-* Apply a view for an existing table, with `online=True`
+* Apply an `ExternalBatchView` for an existing table
 * Run the batch engine `materialize` command after creating new attribute tables
 
 Once enabled, syncs begin at a fixed interval. By default, this is every 5 minutes. Only the records that have changed since the last sync are sent to the Profiles Store.

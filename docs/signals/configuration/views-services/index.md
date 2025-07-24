@@ -10,7 +10,7 @@ Signals has two attribute groupings:
 
 Each view is a versioned collection of attributes, and specific to one entity and one data source (stream or batch).
 
-Services are groups of views or attributes.
+Services are groups of views.
 
 ## Attribute management
 
@@ -20,32 +20,11 @@ Signals provides functionality for separating attribute definition from calculat
 
 To configure a table for batch attributes, you may choose to set up a view using that source without defining any attributes initially. This ensures that the table is ready and tested for adding and calculating attributes. Read more about configuring batch attributes and views in the [Batch calculations](/docs/signals/configuration/batch-calculations/index.md) section.
 
-Deciding when to calculate and materialize the attributes using the `online` and `offline` view configuration options:
+There are 3 types of view, depending on how you want to calculate and materialize the attributes:
 
-```mermaid
-flowchart TD
-
-    B{Is the view batch or stream?} -->|Default| C[Stream source]
-    B -->|Batch| D[Batch source]
-
-    C --> E{Do you want to calculate attributes now?}
-
-    E -->|Yes| F[Online = true, Offline = false<br/>Attributes calculated in stream]
-    E -->|No| G[Online = false, Offline = false<br/>Attributes are not calculated anywhere]
-
-    D --> H{Have you assigned attributes to this view?}
-
-    H -->|Yes| I{Do you want to send attributes to Signals?}
-    H -->|No| J{Do you want to materialize a new table into Signals?}
-
-    I -->|Yes| K[Online = true, Offline = true<br/>Attributes calculated using Batch Engine<br/>and materialized into Signals]
-    I -->|No| L[Online = false, Offline = true<br/>Attributes calculated using Batch Engine<br/>but not materialized]
-
-    J -->|Yes| M[Online = true, Offline = true<br/>Table materialized into Signals<br/>if it has a batch source configured]
-    J -->|No| N[Online = false, Offline = true<br/>Table pre-computed without Batch Engine<br/>and only in the warehouse]
-```
-
-When defining batch attributes, it's possible to apply configurations that just create a table without attributes, or calculate attributes in a table without materializing them to the Profiles Store. You could also define views with fields instead of attributes, for using pre-existing tables with pre-calculated attributes.
+- `StreamView` - Processed in the streaming engine
+- `BatchView` - Processed using the batch engine
+- `ExternalBatchView` - Existing warehouse table that's materialized into Signals
 
 For stream attributes, you can choose to configure and apply views that don't calculate their attribute values.
 
@@ -63,15 +42,15 @@ If Signals then processes a new event that calculates the attribute again, or ma
 
 TODO
 
-## Minimal stream view example
+## StreamView
 
-You can define a `View` by passing in a list of previously defined attributes. Here's a minimal example:
+Use a `StreamView` to calculate attributes from the real-time event stream. Read more about this in the [Stream calculations](/docs/signals/configuration/stream-calculations/index.md) section.
 
 ```python
-from snowplow_signals import View, domain_sessionid
+from snowplow_signals import StreamView, domain_sessionid
 
-my_attribute_view = View(
-    name="my_attribute_view",
+my_stream_view = StreamView(
+    name="my_stream_view",
     version=1,
     entity=domain_sessionid,
     owner="user@company.com",
@@ -83,53 +62,102 @@ my_attribute_view = View(
 )
 ```
 
-By default, views will calculate attributes from the real-time event stream. Read more about this in the [Stream calculations](/docs/signals/configuration/stream-calculations/index.md) section.
+## BatchView
+
+Use a `BatchView` to calculate attributes from batch data sources (e.g., warehouse tables).
+
+```python
+from snowplow_signals import BatchView, domain_sessionid
+
+my_batch_view = BatchView   (
+    name="my_batch_view",
+    version=1,
+    entity=domain_sessionid,
+    owner="user@company.com",
+    attributes=[
+        # Previously defined attributes
+        page_view_count,
+        products_added_to_cart_feature,
+    ],
+)
+```
+
+## ExternalBatchView
+
+Use an `ExternalBatchView` to materialize attributes from an existing warehouse table.
+
+
+```python
+from snowplow_signals import ExternalBatchView, domain_sessionid
+
+my_external_batch_view = ExternalBatchView   (
+    name="my_external_batch_view",
+    version=1,
+    entity=domain_sessionid,
+    owner="user@company.com",
+    batch_source=data_source, # Assuming Data source previously configured
+    fields=[
+        Field(
+            name="TOTAL_TRANSACTIONS",
+            type="int32",
+        ),
+        Field(
+            name="TOTAL_REVENUE",
+            type="int32",
+        ),
+        Field(
+            name="AVG_TRANSACTION_REVENUE",
+            type="int32",
+        ),
+    ],
+)
+```
+
+
 
 ## View options
 
-The table below lists all available arguments for a `View`:
+The table below lists all available arguments for all types of `View`:
 
-| Argument       | Description                                                                         | Type                | Default | Required? | For batch only? |
-| -------------- | ----------------------------------------------------------------------------------- | ------------------- | ------- | --------- | --------------- |
-| `name`         | The name of the view                                                                | `string`            |         | ✅         |                 |
-| `version`      | The version of the view                                                             | `int`               | 1       | ❌         |                 |
-| `entity`       | The entity associated with the view                                                 | `Entity`            |         | ✅         |                 |
-| `owner`        | The owner of the feature view, typically the email of the primary maintainer        | email `string`      |         | ✅         |                 |
-| `attributes`   | The list of attributes that will be calculated from events as part of this view     | list of `Attribute` |         | ❌         |                 |
-| `description`  | A description of the view                                                           | `string`            |         | ❌         |                 |
-| `ttl`          | The amount of time that this group of attributes will live for in the Profile Store | `timedelta`         |         | ❌         |                 |
-| `offline`      | Whether the view is calculated in the warehouse (`True`) or in real-time (`False`)  | `bool`              | `False` | ❌         |                 |
-| `online`       | Whether online retrieval is enabled (`True`) or not (`False`)                       | `bool`              | `True`  | ❌         |                 |
-| `batch_source` | The batch data source for the view                                                  | `BatchSource`       |         | ❌         | ✅               |
-| `fields`       | The list of table columns that are part of this view during materialization         | `Field`             |         | ❌         | ✅               |
-| `tags`         | String key-value pairs of arbitrary metadata                                        | `dict`              |         | ❌         |                 |
+Below is a summary of all options available for configuring Views in Signals. The "Applies to" column shows which view types each option is relevant for.
+
+| Argument       | Description                                                                         | Type                | Default | Required? | Applies to                |
+| -------------- | ----------------------------------------------------------------------------------- | ------------------- | ------- | --------- | ------------------------- |
+| `name`         | The name of the view                                                                | `string`            |         | ✅        | All                       |
+| `version`      | The version of the view                                                             | `int`               | 1       | ❌        | All                       |
+| `entity`       | The entity associated with the view                                                 | `Entity`            |         | ✅        | All                       |
+| `owner`        | The owner of the view                                                               | `Email`             |         | ✅        | All                       |
+| `description`  | A description of the view                                                           | `string`            |         | ❌        | All                       |
+| `ttl`          | Time-to-live for attributes in the Profile Store                                    | `timedelta`         |         | ❌        | All                       |
+| `tags`         | Metadata key-value pairs                                                            | `dict`              |         | ❌        | All                       |
+| `attributes`   | List of attributes to calculate                                                     | list of `Attribute` |         | ✅        | `StreamView`, `BatchView`     |
+| `batch_source` | The batch data source for the view                                                  | `BatchSource`       |         | ✅/❌     | `BatchView`/`ExternalBatchView` |
+| `fields`       | Table columns for materialization                                                   | `Field`             |         | ✅        | `ExternalBatchView`         |
+| `offline`      | Calculate in warehouse (`True`) or real-time (`False`)                              | `bool`              | varies  | ❌        | All                       |
+| `online`       | Enable online retrieval (`True`) or not (`False`)                                   | `bool`              | `True`  | ❌        | All                       |
+
 
 If no `ttl` is set, the entity's `ttl` will be used. If the entity also has no `ttl`, there will be no time limit for attributes.
 
 ## Extended stream view example
 
-This example shows all the available configuration options for a stream view. To find out how to configure a batch view, see the [Batch calculations](/docs/signals/configuration/batch-calculations/index.md) section.
+This example shows all the available configuration options for a stream view. To find out how to configure a batch view, see the [batch calculations](/docs/signals/configuration/batch-calculations/index.md) section.
 
 This view groups attributes for a user entity, to be calculated in real-time.
 
 ```python
-from snowplow_signals import View, user_id
+from snowplow_signals import StreamView, user_id
 
-stream_view = View(
+stream_view = StreamView(
     name="comprehensive_stream_view",
     version=2,
     entity=user_id,
     owner="data-team@company.com",
-
     attributes=[
         page_view_count,
         session_duration,
         conversion_rate,
     ],
-
-    offline=False,  # Stream processing (default)
-    online=True,    # Calculate and serve attributes (default)
-
     description="User engagement attributes in real-time",
     ttl=timedelta(days=90),  # Attributes live in the Profiles Store for 90 days
     tags={

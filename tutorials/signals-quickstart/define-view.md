@@ -6,9 +6,9 @@ title: Create and deploy a view
 A `View` is a collection of attributes that share a common entity (e.g., session or user). Here's how to create a view with the attributes we defined earlier:
 
 ```python
-from snowplow_signals import View, domain_sessionid
+from snowplow_signals import StreamView, domain_sessionid
 
-my_attribute_view = View(
+my_attribute_view = StreamView(
     name="my_attribute_view",
     version=1,
     entity=domain_sessionid,

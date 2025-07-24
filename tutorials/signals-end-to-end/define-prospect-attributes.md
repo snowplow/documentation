@@ -39,7 +39,7 @@ We will reuse them multiple times, and this makes the code concise and clear.
 
 ```python
 # Imports
-from snowplow_signals import Attribute, Criteria, Criterion, Event, View, user_entity
+from snowplow_signals import Attribute, Criteria, Criterion, Event, StreamView, user_entity
 from datetime import datetime, timedelta
 
 # View name
@@ -83,11 +83,11 @@ first_mkt_medium_l30d = Attribute(name="first_mkt_medium_l30d", type="string", e
 num_engaged_campaigns_l30d = Attribute(name="num_engaged_campaigns_l30d", type="string_list", events=[sp_page_view], period=l30d, aggregation="unique_list", property="mkt_campaign")
 ```
 
-Third, let's wrap these all into a single View.
+Third, let's wrap these all into a single StreamView.
 
 ```python
 # Wrap attributes into a view
-user_attributes_view = View(
+user_attributes_view = StreamView(
     name=DEMO_VIEW_NAME,
     version=view_version,
     entity=user_entity,

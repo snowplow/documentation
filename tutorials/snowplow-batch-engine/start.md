@@ -29,11 +29,7 @@ Before starting, ensure you have:
   - API Key
   - API Key ID
   - Organization ID
-- Have View(s) already created
-
-:::info 
-Make sure you specified `offline = True` in your View definition.
-:::
+- Have BatchView/ExternalBatchView(s) already created
 
 
 ## Installation

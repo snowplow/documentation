@@ -12,10 +12,10 @@ import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v
 <ReleaseBadge/>
 ```
 
-Tracker initialization is started by calling the `"newTracker"` function and takes three arguments:
+Initialize the tracker by calling the `newTracker` function. It takes three arguments:
 
-1. The tracker namespace (`sp` in the below example)
-2. The collector endpoint
+1. The tracker namespace
+2. The Collector endpoint
 3. An optional configuration object containing other settings
 
 Here is a simple example of how to initialise a tracker, setting a few configuration options:
@@ -24,6 +24,7 @@ Here is a simple example of how to initialise a tracker, setting a few configura
   <TabItem value="js" label="JavaScript (tag)" default>
 
 ```javascript
+// The tracker namespace is 'sp' in this example
 snowplow('newTracker', 'sp', '{{collector_url_here}}', {
   appId: 'my-app-id',
   appVersion: '0.1.0',
@@ -39,6 +40,7 @@ snowplow('newTracker', 'sp', '{{collector_url_here}}', {
   <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
+// The tracker namespace is 'sp' in this example
 newTracker('sp', '{{collector_url_here}}', {
   appId: 'my-app-id',
   appVersion: '0.1.0',
@@ -53,15 +55,16 @@ newTracker('sp', '{{collector_url_here}}', {
   </TabItem>
 </Tabs>
 
-The tracker will be named `sp` (tracker namespace) and will send events to the a collector url you specify by replacing `{{collector_url_here}}`. The final argument is the configuration object. Here it is just used to set the app ID and the common webPage context for each event. Each event the tracker sends will have an app ID field set to “my-app-id”.
+The tracker will send events to the Collector URL you specify by replacing `{{collector_url_here}}`. The final argument is the configuration object. Here it's used to set the app ID and the webPage entity for each event. Each event the tracker sends will have an `app_id` field set to `my-app-id`.
 
-If `newTracker` is called multiple times with the same namespace, only the first call is taken into account.
+If your code calls `newTracker` multiple times with the same namespace, only the first call is taken into account.
 
 :::tip For Single Page Apps
 Initialize one tracker per initial page load.
 :::
 
-The following table shows all the various configuration parameters. Note that these are all optional. In fact, you aren’t required to provide any configuration object at all.
+The following table shows all the configuration parameters. These are all optional: you aren't required to provide any configuration object at all.
+
 
 | Property                                                                                                                                             | Description                                                                                                                                                                                                                         | Default (if applicable)               | Type                                                     |
 | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- | -------------------------------------------------------- |
@@ -73,9 +76,9 @@ The following table shows all the various configuration parameters. Note that th
 | [`cookieName`](/docs/sources/trackers/web-trackers/cookies-and-local-storage/configuring-cookies/index.md#cookie-name)                               | Set the cookie name.                                                                                                                                                                                                                |                                       | `string`                                                 |
 | [`cookieSameSite`](/docs/sources/trackers/web-trackers/cookies-and-local-storage/configuring-cookies/index.md#cookie-samesite-and-secure-attributes) | Set the cookie samesite attribute.                                                                                                                                                                                                  | null                                  | `string` enum                                            |
 | [`cookieSecure`](/docs/sources/trackers/web-trackers/cookies-and-local-storage/configuring-cookies/index.md#cookie-samesite-and-secure-attributes)   | Set the cookie secure attribute.                                                                                                                                                                                                    | true                                  | `boolean`                                                |
-| [`encodeBase64`](/docs/sources/trackers/web-trackers/configuring-how-events-sent/index.md#base64-encoding)                                           | Enable Base64 encoding for JSONs (context entities and custom self-describing events).                                                                                                                                              | true for GET, false for POST requests | `boolean`                                                |
+| [`encodeBase64`](/docs/sources/trackers/web-trackers/configuring-how-events-sent/index.md#base64-encoding)                                           | Enable Base64 encoding for entities and custom self-describing events (JSON objects).                                                                                                                                               | true for GET, false for POST requests | `boolean`                                                |
 | [`respectDoNotTrack`](/docs/sources/trackers/web-trackers/anonymous-tracking/index.md#respecting-do-not-track)                                       | Choose to respect browser Do Not Track option.                                                                                                                                                                                      | false                                 | `boolean`                                                |
-| [`eventMethod`](/docs/sources/trackers/web-trackers/configuring-how-events-sent/index.md#network-protocol-and-method)                                | Choose to send events by GET, POST.                                                                                                                                                                                                 | `post`                                | `string` enum                                            |
+| [`eventMethod`](/docs/sources/trackers/web-trackers/configuring-how-events-sent/index.md#network-protocol-and-method)                                | Choose to send events by GET or POST.                                                                                                                                                                                               | `post`                                | `string` enum                                            |
 | [`bufferSize`](/docs/sources/trackers/web-trackers/configuring-how-events-sent/index.md#number-of-events-per-request)                                | How many events to send in one request.                                                                                                                                                                                             | 1                                     | `int`                                                    |
 | [`maxPostBytes`](/docs/sources/trackers/web-trackers/configuring-how-events-sent/index.md#maximum-payload-size)                                      | Set a limit for the size of one request.                                                                                                                                                                                            | 40000                                 | `int`                                                    |
 | [`maxGetBytes`](/docs/sources/trackers/web-trackers/configuring-how-events-sent/index.md#maximum-payload-size)                                       | Set a limit for the size of one request.                                                                                                                                                                                            |                                       | `int`                                                    |

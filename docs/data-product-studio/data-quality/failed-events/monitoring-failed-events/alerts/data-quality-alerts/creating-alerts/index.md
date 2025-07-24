@@ -47,6 +47,14 @@ A Slack consent screen will appear
 
 ![Slack consent](images/dq_slack.png)
 
+To select channels in the UI, first add the app to those channels. In Slack:
+
+1. Open the channel where you want notifications
+2. Type `@Snowplow Notifications` and send
+3. Click "Add them" when prompted
+
+![Invite to Slack](images/dq_slack_invite.png)
+
 Once a Slack alert is configured you will see a confirmation notification in the selected Slack channel
 
 ![Slack confirmation](images/dq_slack_confirmation.png)

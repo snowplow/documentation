@@ -24,7 +24,7 @@ There are 3 types of view, depending on how you want to calculate and materializ
 
 - `StreamView` - Processed in the streaming engine
 - `BatchView` - Processed using the batch engine
-- `ExternalBatchView` - Existing customer warehouse table that's materialized into Signals
+- `ExternalBatchView` - Existing warehouse table that's materialized into Signals
 
 When defining batch attributes, it's possible to apply configurations that just create a table without attributes, or calculate attributes in a table without materializing them to the Profiles Store. You can also define an `ExternalBatchView` with fields instead of attributes, for using pre-existing tables with pre-calculated attributes.
 
@@ -46,7 +46,7 @@ TODO
 
 ## StreamView
 
-Use a `StreamView` to calculate attributes in real time from event streams.
+Use a `StreamView` to calculate attributes from the real-time event stream. Read more about this in the [Stream calculations](/docs/signals/configuration/stream-calculations/index.md) section.
 
 ```python
 from snowplow_signals import StreamView, domain_sessionid
@@ -115,7 +115,6 @@ my_external_batch_view = ExternalBatchView   (
 )
 ```
 
-By default, views will calculate attributes from the real-time event stream. Read more about this in the [Stream calculations](/docs/signals/configuration/stream-calculations/index.md) section.
 
 
 ## View options

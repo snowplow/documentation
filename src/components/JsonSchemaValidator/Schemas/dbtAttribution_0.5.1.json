@@ -383,6 +383,16 @@
       "group": "Operation and Logic",
       "longDescription": "Used as the default value to return from the `allow_refresh()` macro. This macro determines whether the manifest tables can be refreshed or not, depending on your environment. See the [Manifest Tables](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/manifest-tables/) section for more details.",
       "packageDefault": "false"
+    },
+    "snowplow__license_accepted": {
+      "recommendFullRefresh": false,
+      "order": 40,
+      "consoleGroup": "advanced",
+      "type": "boolean",
+      "title": "License accepted",
+      "group": "Operation and Logic",
+      "longDescription": "Use this field to accept the Snowplow Personal and Academic License or specify that you have a commercial agreement with Snowplow.",
+      "packageDefault": "false"
     }
   }
 }

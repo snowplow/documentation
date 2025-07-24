@@ -6,13 +6,9 @@ sidebar_label: Cross-navigation
 
 This enrichment parses the extended cross-navigation format in the `_sp` querystring parameter, and attaches a `cross_navigation` entity to an event.
 
-To add the `_sp` querystring, configure cross-domain tracking in the [web](/docs/sources/trackers/web-trackers/cross-domain-tracking/index.md) or [mobile trackers](/docs/sources/trackers/mobile-trackers/tracking-events/session-tracking/index.md#decorating-outgoing-links-using-cross-navigation-tracking). The querystring contains user, session, and app identifiers, for example domain user and session IDs, business user ID, or source application ID. This is useful for tracking the movement of users across different apps and platforms. The information to include in the parameters is configurable in the trackers.
+Check out the [cross-navigation](/docs/events/cross-navigation/index.md) page to learn why this can be useful.
 
-:::note Base64 encoding
-This enrichment expects the events to be base64-encoded. Configure this in the trackers.
-:::
-
-The extended cross-navigation format is `_sp={domainUserId}.{timestamp}.{sessionId}.{subjectUserId}.{sourceId}.{platform}.{reason}`. If this enrichment isn't enabled, Enrich parses the `_sp` querystring parameter according to the old format, `_sp={domainUserId}.{timestamp}`
+The extended cross-navigation format is `_sp={domainUserId}.{timestamp}.{sessionId}.{subjectUserId}.{sourceAppId}.{sourcePlatform}.{reason}`. If this enrichment isn't enabled, Enrich parses the `_sp` querystring parameter according to the old format, `_sp={domainUserId}.{timestamp}`
 
 ## Configuration
 

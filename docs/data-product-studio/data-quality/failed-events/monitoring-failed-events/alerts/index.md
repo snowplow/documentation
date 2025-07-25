@@ -1,31 +1,27 @@
 ---
 title: "Setting up data quality alerts"
-date: "2021-01-14"
-sidebar_label: "Set up alerts"
+date: "2025-01-14"
+sidebar_label: "Alerts"
 sidebar_position: 2500
 ---
 
 ## Overview
 
-Snowplow can send two types of alerts to help you monitor Failed Events:
+Snowplow can alert you when a new failed event has occurred. There are two different implementations available to choose from.
 
-- **New failed event:** receive an alert within 10 minutes of a new type of event failure being detected on your pipeline.
-- **Failed event digest**: receive a daily digest of all Failed Event activity in the previous 48-hour period.
+### [Data quality alerts](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/alerts/data-quality-alerts/index.md)
+Driven by the [Data Quality dashboard](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/index.md#data-quality-dashboard) deployment
 
-## Pre-requisites
+### [Classic alerts](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/alerts/classic-alerts/index.md)
+Driven by the [Snowplow infrastructure](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/index.md#default-view), cheaper to run
 
-To receive alerts you must have the Failed Events monitoring feature switched on in the Snowplow BDP console.
+### Feature comparison
 
-## Subscribing to alerts
-
-- Login to Snowplow BDP console
-- Locate the pipeline you wish to set up alerts for in the left-hand navigation
-- Click on the `Configuration` tab, then the `Pipeline alerts` section
-
-![](images/image.png)
-
-- Click `Manage` for the alert you wish to subscribe to
-- Add one or more email addresses by typing them into the input and clicking `Add recipient`
-- Once you have added all recipients, click `Save Changes`
-
-![](images/image-1.png)
+| Feature | Classic alerts | Data quality alerts |
+| :------ | :------------: | :-----------------: |
+| Can alert on new failed events | ✅ | ✅ |
+| Can send a digest of failed events for a week | ✅ | ✅ |
+| Notify via Email | ✅ | ✅ |
+| Notify via Slack | ❌ | ✅ |
+| Filters | ❌ | ✅ |
+| Does not affect pipeline cost | ✅  | ❌ |

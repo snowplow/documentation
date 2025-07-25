@@ -1,5 +1,5 @@
 ---
-title: "4.0.x upgrade guide"
+title: "4.0.x Upgrade Guide"
 sidebar_position: 0
 ---
 

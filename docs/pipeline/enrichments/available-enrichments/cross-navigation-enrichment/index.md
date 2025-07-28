@@ -8,7 +8,9 @@ This enrichment parses the extended cross-navigation format in the `_sp` queryst
 
 Check out the [cross-navigation](/docs/events/cross-navigation/index.md) page to learn why this can be useful.
 
-The extended cross-navigation format is `_sp={domainUserId}.{timestamp}.{sessionId}.{subjectUserId}.{sourceAppId}.{sourcePlatform}.{reason}`. If this enrichment isn't enabled, Enrich parses the `_sp` querystring parameter according to the old format, `_sp={domainUserId}.{timestamp}`
+The extended cross-navigation format is `_sp={domainUserId}.{timestamp}.{sessionId}.{subjectUserId}.{sourceId}.{sourcePlatform}.{reason}`.
+
+If this enrichment isn't enabled, Enrich parses the `_sp` querystring parameter according to the old format, `_sp={domainUserId}.{timestamp}`
 
 ## Configuration
 

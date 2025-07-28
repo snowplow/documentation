@@ -5,16 +5,13 @@ date: "2025-07-26"
 sidebar_position: 5
 ---
 
-```mdx-code-block
-import Tabs from '@theme/Tabs';
-import TabItem from '@theme/TabItem';
-```
-
 When users navigate between different domains in your ecosystem—such as from your main website to a subdomain, partner site, or mobile app—their user identity is typically lost. This creates gaps in your user journey data and makes it difficult to understand the complete customer experience across your digital properties.
 
 Cross-navigation (also called cross-domain) tracking solves this problem by passing user identification data in URL parameters when users click links to other domains. This enables you to maintain user continuity across your applications.
 
-You can configure the [web](/docs/sources/trackers/web-trackers/index.md) and [native mobile](/docs/sources/trackers/mobile-trackers/index.md) trackers to add an additional parameter named `_sp` to the querystring of outbound links. This process is called "link decoration".
+To use cross-navigation tracking, configure the [web](/docs/sources/trackers/web-trackers/cross-domain-tracking/index.md) or [native mobile](/docs/sources/trackers/mobile-trackers/tracking-events/session-tracking/index.md#decorating-outgoing-links-using-cross-navigation-tracking) trackers to add an additional parameter, named `_sp`, to the querystring of outbound links. This process is called "link decoration".
+
+Link decoration makes the added values visible in the `url` field of events on the destination page or URI. The querystring is added only to the events at the destination: it doesn't persist throughout the user's session.
 
 ## Querystring properties
 
@@ -25,17 +22,17 @@ Available properties:
 | Property         | Description                                    | Extended | Short |
 | ---------------- | ---------------------------------------------- | -------- | ----- |
 | `domainUserId`   | Current tracker-generated UUID user identifier | ✅        | ✅     |
-| `timestamp`      | Current epoch timestamp, ms precision          | ✅        | ✅     |
+| `timestamp`      | Current epoch timestamp, millisecond precision | ✅        | ✅     |
 | `sessionId`      | Current session UUID identifier                | ✅        |       |
 | `subjectUserId`  | Custom business user identifier                | ✅        |       |
-| `sourceAppId`    | Application identifier                         | ✅        |       |
+| `sourceId`       | Application identifier                         | ✅        |       |
 | `sourcePlatform` | Platform of the current device                 | ✅        |       |
-| `reason`         | Custom link text or extra information          | ✅        |       |
+| `reason`         | Custom information or identifier               | ✅        |       |
 
-For example, a decorated link might have this format:
+For example, the link `appSchema://path/to/page` would look like this after decoration:
 
 ```
-appSchema://path/to/page?_sp=domainUserId.timestamp.sessionId.subjectUserId.sourceAppId.sourcePlatform.reason
+appSchema://path/to/page?_sp=domainUserId.timestamp.sessionId.subjectUserId.sourceId.sourcePlatform.reason
 ```
 
 ## How are the querystring parameters processed?
@@ -51,10 +48,3 @@ Both default and extended formats will populate the [atomic](/docs/fundamentals/
 | Populates `refr_domain_userid` field                    | ✅                | ✅                                |
 | Populates `refr_dvce_tstamp` field                      | ✅                | ✅                                |
 | Adds `cross_navigation` entity                          | ❌                | ✅                                |
-
-## What do you need to configure?
-
-To use cross-navigation tracking, you may need to configure it in multiple places, depending on your use case:
-* [Web tracker configuration object](/docs/sources/trackers/web-trackers/cross-domain-tracking/index.md)
-* [Mobile application tracking code](/docs/sources/trackers/mobile-trackers/tracking-events/session-tracking/index.md#decorating-outgoing-links-using-cross-navigation-tracking)
-* [Enable the cross-navigation enrichment](/docs/pipeline/enrichments/managing-enrichments/index.md) for your pipeline

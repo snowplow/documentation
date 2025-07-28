@@ -2,7 +2,7 @@
 title: "Timestamps"
 description: ""
 date: "2025-05-15"
-sidebar_position: 4
+sidebar_position: 400
 ---
 
 Snowplow events have multiple timestamps that are added as the payload moves through the pipeline. The set of timestamps is designed to account for devices with incorrectly set clocks, or delays in event sending due to network outages.

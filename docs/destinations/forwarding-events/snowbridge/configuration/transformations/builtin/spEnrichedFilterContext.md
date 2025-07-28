@@ -1,4 +1,12 @@
-# spEnrichedFilterContext
+---
+title: "spEnrichedFilterContext"
+description: "Filters messages based on a regex match against a field in an entity."
+---
+
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
 
 `spEnrichedFilterContext`: Specific to Snowplow data. Filters messages based on a regex match against a field in an entity.
 
@@ -18,12 +26,12 @@ The below example keeps messages which contain `prod` in the `environment` field
 
 Minimal configuration:
 
-```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/snowplow-builtin/spEnrichedFilterContext-minimal-example.hcl
-```
+<CodeBlock language="hcl" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/snowplow-builtin/spEnrichedFilterContext-minimal-example.hcl
+`}</CodeBlock>
 
 Every configuration option:
 
-```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/snowplow-builtin/spEnrichedFilterContext-full-example.hcl
-```
+<CodeBlock language="hcl" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/snowplow-builtin/spEnrichedFilterContext-full-example.hcl
+`}</CodeBlock>

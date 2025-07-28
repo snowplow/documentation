@@ -11,3 +11,14 @@ In addition to the native functions available in the jq language, the following 
 ```
 { foo: .collector_tstamp | epochMillis }
 ```
+
+* `hash(algorithm, salt)` hashes the input value. To use unsalted hash, pass an empty string for salt. Salt may be provided as an environment variable using hcl syntax.
+
+The following hash algorithms are supported:
+- `sha1` - SHA-1 hash (160 bits)
+- `sha256` - SHA-256 hash (256 bits)
+- `md5` - MD5 hash (128 bits) 
+
+```
+{ foo: .user_id |  hash("sha1"; "${env.SHA1_SALT}") }
+```

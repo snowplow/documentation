@@ -1,5 +1,5 @@
 ---
-title: "Attribute groups: views and services"
+title: "Attribute groups: views"
 sidebar_position: 30
 sidebar_label: "Attribute groups"
 ---
@@ -9,8 +9,6 @@ Signals has two attribute groupings:
 * Services, for consuming attributes
 
 Each view is a versioned collection of attributes, and specific to one entity and one data source (stream or batch).
-
-Services are groups of views.
 
 ## Attribute management
 
@@ -121,20 +119,20 @@ The table below lists all available arguments for all types of `View`:
 
 Below is a summary of all options available for configuring Views in Signals. The "Applies to" column shows which view types each option is relevant for.
 
-| Argument       | Description                                                                         | Type                | Default | Required? | Applies to                |
-| -------------- | ----------------------------------------------------------------------------------- | ------------------- | ------- | --------- | ------------------------- |
-| `name`         | The name of the view                                                                | `string`            |         | ✅        | All                       |
-| `version`      | The version of the view                                                             | `int`               | 1       | ❌        | All                       |
-| `entity`       | The entity associated with the view                                                 | `Entity`            |         | ✅        | All                       |
-| `owner`        | The owner of the view                                                               | `Email`             |         | ✅        | All                       |
-| `description`  | A description of the view                                                           | `string`            |         | ❌        | All                       |
-| `ttl`          | Time-to-live for attributes in the Profile Store                                    | `timedelta`         |         | ❌        | All                       |
-| `tags`         | Metadata key-value pairs                                                            | `dict`              |         | ❌        | All                       |
-| `attributes`   | List of attributes to calculate                                                     | list of `Attribute` |         | ✅        | `StreamView`, `BatchView`     |
-| `batch_source` | The batch data source for the view                                                  | `BatchSource`       |         | ✅/❌     | `BatchView`/`ExternalBatchView` |
-| `fields`       | Table columns for materialization                                                   | `Field`             |         | ✅        | `ExternalBatchView`         |
-| `offline`      | Calculate in warehouse (`True`) or real-time (`False`)                              | `bool`              | varies  | ❌        | All                       |
-| `online`       | Enable online retrieval (`True`) or not (`False`)                                   | `bool`              | `True`  | ❌        | All                       |
+| Argument       | Description                                            | Type                | Default | Required? | Applies to                      |
+| -------------- | ------------------------------------------------------ | ------------------- | ------- | --------- | ------------------------------- |
+| `name`         | The name of the view                                   | `string`            |         | ✅         | All                             |
+| `version`      | The version of the view                                | `int`               | 1       | ❌         | All                             |
+| `entity`       | The entity associated with the view                    | `Entity`            |         | ✅         | All                             |
+| `owner`        | The owner of the view                                  | `Email`             |         | ✅         | All                             |
+| `description`  | A description of the view                              | `string`            |         | ❌         | All                             |
+| `ttl`          | Time-to-live for attributes in the Profile Store       | `timedelta`         |         | ❌         | All                             |
+| `tags`         | Metadata key-value pairs                               | `dict`              |         | ❌         | All                             |
+| `attributes`   | List of attributes to calculate                        | list of `Attribute` |         | ✅         | `StreamView`, `BatchView`       |
+| `batch_source` | The batch data source for the view                     | `BatchSource`       |         | ✅/❌       | `BatchView`/`ExternalBatchView` |
+| `fields`       | Table columns for materialization                      | `Field`             |         | ✅         | `ExternalBatchView`             |
+| `offline`      | Calculate in warehouse (`True`) or real-time (`False`) | `bool`              | varies  | ❌         | All                             |
+| `online`       | Enable online retrieval (`True`) or not (`False`)      | `bool`              | `True`  | ❌         | All                             |
 
 
 If no `ttl` is set, the entity's `ttl` will be used. If the entity also has no `ttl`, there will be no time limit for attributes.
@@ -214,34 +212,3 @@ The table below lists all available arguments for `get_view()`
 | `version` | The view version     | `int`    | ❌         |
 
 If you don't specify a version, Signals will retrieve the latest version.
-
-## Services
-
-Here's an example showing how to create a service to manage two views:
-
-```python
-from snowplow_signals import Service
-
-my_service = Service(
-    name='my_service',
-    description='A collection of views',
-    owner="user@company.com",
-    views=[
-        # Previously defined views
-        my_attribute_view,
-        another_view
-    ],
-)
-```
-
-### Service options
-
-The table below lists all available arguments for a `Service`
-
-| Argument      | Description                                                             | Type        | Required? |
-| ------------- | ----------------------------------------------------------------------- | ----------- | --------- |
-| `name`        | The name of the service                                                 | `string`    | ✅         |
-| `description` | A description of the service                                            | `string`    | ❌         |
-| `owner`       | The owner of the service, typically the email of the primary maintainer | `string`    | ✅         |
-| `views`       | A list of views                                                         | `timedelta` | ❌         |
-| `tags`        | String key-value pairs of arbitrary metadata                            | dictionary  | ❌         |

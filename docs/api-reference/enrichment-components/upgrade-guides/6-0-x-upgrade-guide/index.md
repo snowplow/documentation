@@ -13,7 +13,7 @@ Also, we took this opportunity to make a few breaking changes. Here are the chan
 
 In version 6.0.0, some of the config fields are renamed or moved to a different section. Here are these changes:
 
-* `incomplete` stream is renamed to `failed`.
+* `incomplete` stream config field is renamed to `failed`.
 
 * `acceptInvalid` and `exitOnJsCompileError` fields under `featureFlags` section are moved under the `validation` section.
 
@@ -25,17 +25,15 @@ In version 6.0.0, some of the config fields are renamed or moved to a different 
 
 ### Feature Deprecations
 
-* Output `pii` stream is removed. There will no longer be an option to write `pii_transformation` events to an extra output stream.
+* Output `pii` stream is removed as in our experience it is not used. There will no longer be an option to write `pii_transformation` events to an extra output stream.
 
-* Remote adapters are removed.
+* Remote adapters are removed. This was another feature with little to no usage that allowed Enrich to support custom payloads (which would be sent to a configured URL for translation into the expected format). In practice, most of this can be already achieved with [Iglu Webhooks](/docs/sources/webhooks/iglu-webhook/index.md).
 
-* Reading events from files and writing events to files are deprecated.
+* Reading events from files and writing events to files is no longer supported. This has never been a viable option for production setups.
 
 * In enrich-kinesis, passing enrichment configs to the application via DynamoDB is no longer possible.
 
 * In enrich-kinesis, it is no longer possible to send KCL metrics to Cloudwatch.
-
-* In enrich-kafka, S3 and GCS blob storage integrations are removed.
 
 ## New metrics
 

@@ -31,6 +31,11 @@ Now read through the `query` variable to understand the SQL data preparation que
 If you use a different warehouse, adjust the code here to pull data from it into a pandas DataFrame.
 :::
 
+:::caution Warning
+The default SQL expects that you have `submit_form` events.
+If there are no `submit_form` events in your dataset, adjust SQL to use other event as the target in the `target_had_submit_form_next1h` column.
+:::
+
 ### Best Practices For Atomic Events Training Datasets
 
 1. Make sure that key behaviours you want to use for predictions are properly captured via events.

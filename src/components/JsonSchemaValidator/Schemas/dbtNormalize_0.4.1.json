@@ -159,6 +159,17 @@
       "packageDefault": "collector_tstamp",
       "description": "This determines which timestamp is used to partition the derived tables."
     },
+    "snowplow__license_accepted": {
+      "recommendFullRefresh": false,
+      "order": 127,
+      "consoleGroup": "advanced",
+      "type": "boolean",
+      "title": "License accepted",
+      "group": "Operation and Logic",
+      "longDescription": "Use this field to accept the Snowplow Personal and Academic License or specify that you have a commercial agreement with Snowplow.",
+      "packageDefault": "false",
+      "description": "Use this field to accept the Snowplow user license."
+    },
     "snowplow__upsert_lookback_days": {
       "recommendFullRefresh": false,
       "order": 126,

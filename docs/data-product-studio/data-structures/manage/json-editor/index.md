@@ -22,12 +22,11 @@ You can now write the first version of your JSON schema for this Data Structure.
 
 ![](images/json-template.png)
 
-Once you are done, click the **'Validate'** button and we'll validate that your schema is valid JSON markup. Assuming it passes validation the 'Publish' button will activate.
+Once you are done, click the **'Validate'** button and we'll validate that your schema is valid JSON markup. Assuming it passes validation, you can save your data structure as a **draft**.
 
-Click **'Publish to development environment'** to publish your Data Structure to your development environment. As this is the first version of your data structure it will be created as version `1-0-0`. Click publish again on the dialog to confirm the action.
+**Working with drafts**: Your new data structure will be saved as a draft, which means it's not yet deployed to your development environment and cannot be used for event validation. This allows you to make further changes without worrying about version numbers. When you're ready to test your data structure, you can deploy it from the draft state to your development environment.
 
-Your new Data Structure will be published to your development environment ready [for you to test](/docs/data-product-studio/data-quality/index.md).
-
+Click **'Save as draft'** to save your Data Structure as a draft. As this is the first version of your data structure, it will be created as version `1-0-0` when you later deploy it to your development environment.
 
 ## Editing a data structure
 
@@ -37,9 +36,11 @@ In the example below we have changed the `maxLength` of `example_field_1`.
 
 ![](images/image-5.png)
 
-Once you are happy with your changes, click **'Validate'** to ensure you have valid JSON markup. Then click **'Publish to development environment'** to save your changes to your development environment.
+Once you are happy with your changes, click **'Validate'** to ensure you have valid JSON markup. Your changes will be saved as a draft, allowing you to make multiple modifications without managing version numbers until you're ready to deploy.
 
 ![](images/image-7.png)
+
+**Deploying to development**: When you're ready to test your data structure, click **'Deploy to development environment'** to move your draft to the development environment.
 
 The versioning dialog will appear, at this point you have three options:
 
@@ -47,7 +48,7 @@ The versioning dialog will appear, at this point you have three options:
 - Increment a major version to indicate a breaking change to the schema. In our example, this would increment the schema from `1-0-1` to `2-0-0`.
 - [Patch the current version](/docs/data-product-studio/data-structures/version-amend/amending/index.md#patching-the-schema), this will overwrite the existing schema without increasing the version. In our example, this would leave the schema at 1-0-1.
 
-:::caution Selecting the “patch” option
+:::caution Selecting the "patch" option
 
 Patching can be useful in development environments, but should be done carefully and should never be done in production. See [amending schemas](/docs/data-product-studio/data-structures/version-amend/amending/index.md) for an explanation and some suggestions.
 
@@ -55,7 +56,7 @@ Patching can be useful in development environments, but should be done carefully
 
 For more information see [Versioning your data structures](/docs/data-product-studio/data-structures/version-amend/index.md).
 
-Once you have selected the appropriate version, click **'Publish to development environment'** and your edits will be published to your development environment ready [for you to test](/docs/data-product-studio/data-quality/index.md).
+Once you have selected the appropriate version, click **'Deploy to development environment'** and your data structure will be deployed to your development environment ready [for you to test](/docs/data-product-studio/data-quality/index.md).
 
 You can identify Data Structures where the Development version is ahead of the Production version by the yellow background on the version number. In this example both `user` and `alert` have been edited on development.
 

@@ -7,6 +7,7 @@ sidebar_custom_props:
     - bdp
 ---
 
+import ThemedImage from '@theme/ThemedImage';
 
 To create a new [data structure](/docs/fundamentals/schemas/index.md) using Snowplow BDP Console, first navigate to **Data structures** in the menu and click the **Create a data structure** button.
 
@@ -22,7 +23,26 @@ You can select from two options: **Create using builder** or **Create using JSON
 
 For more complex data structures that require nesting or more advanced data types, use the [JSON editor](/docs/data-product-studio/data-structures/manage/json-editor/index.md).
 
-![](images/builder-or-json.png)
+<ThemedImage
+  alt="Choice between builder and JSON editor options"
+  width="60%"
+  sources={{
+    light: require('./images/builder-or-json.png').default,
+    dark: require('./images/builder-or-json.png').default
+  }}
+/>
+
+## Working with drafts
+
+When you create a new data structure or make changes to an existing one, your changes are initially saved as a **draft**. Drafts allow you to:
+
+- Make multiple changes without worrying about version numbers
+- Experiment freely before committing to a final version
+- Review and refine your data structure before deployment
+
+**Important**: Draft data structures are not deployed to your development environment and will not be available for event validation. You must deploy your draft to the development environment when you're ready to test it.
+
+This workflow gives you the flexibility to iterate on your data structure design without the overhead of managing version increments for every small change.
 
 ## Editing a data structure
 
@@ -43,9 +63,9 @@ The **Edit with builder** option will be unavailable if the Data Structure you'r
 
 ## Promoting a data structure
 
-So far we have learned how to create a new schema, and how to edit an existing schema. Both of these operations result in a schema being published to your development environment for testing.
+When you're ready to use your data structure, you need to deploy it from draft status to your development environment for testing.
 
-Once you are happy with your changes you will want to promote these changes to your production environment.
+Once you are happy with your changes in the development environment, you will want to promote these changes to your production environment.
 
 :::note
 

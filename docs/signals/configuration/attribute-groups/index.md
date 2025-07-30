@@ -8,7 +8,7 @@ Signals has two attribute groupings:
 * Views, for defining attributes
 * Services, for consuming attributes
 
-Each view is a versioned collection of attributes, and specific to one entity and one data source (stream or batch).
+A view is a versioned collection of attributes; the attributes are the properties of the view. Each view is specific to one entity and one data source (stream or batch).
 
 ## Attribute management
 
@@ -16,31 +16,25 @@ Every view has a version number.
 
 Signals provides functionality for separating attribute definition from calculation. This allows you to set up your attributes and business logic before putting them into production. The options are different depending on whether the view is for stream or batch attributes.
 
-To configure a table for batch attributes, you may choose to set up a view using that source without defining any attributes initially. This ensures that the table is ready and tested for adding and calculating attributes. Read more about configuring batch attributes and views in the [Batch calculations](/docs/signals/configuration/batch-calculations/index.md) section.
-
-There are 3 types of view, depending on how you want to calculate and materialize the attributes:
-
-- `StreamView` - Processed in the streaming engine
-- `BatchView` - Processed using the batch engine
-- `ExternalBatchView` - Existing warehouse table that's materialized into Signals
+To configure a table for batch attributes, you may choose to set up a view using that source without defining any attributes initially. This ensures that the table is ready and tested for adding and calculating attributes. Read more about configuring batch attributes and views in the [batch calculations](/docs/signals/configuration/batch-calculations/index.md) section.
 
 For stream attributes, you can choose to configure and apply views that don't calculate their attribute values.
 
 This means that configuration, calculation, materialization, and retrieval are fully decoupled.
 
-## Views can be set to expire
-
-Some attributes will only be relevant for a certain amount of time, and eventually stop being updated.
-
-To avoid stale attributes staying in your Profiles Store forever, you can configure TTL lifetimes for entities and views. When none of the attributes for an entity or view have been updated for the defined lifespan, the entity or view expires. Any attribute values for this entity or view will be deleted: fetching them will return `None` values.
-
-If Signals then processes a new event that calculates the attribute again, or materializes the attribute from the warehouse again, the expiration timer is reset.
-
-## When to update the view version
+## Versioning
 
 TODO
 
-## StreamView
+## Types of view
+
+Signals includes three types of view. Choose which one to use depending on how you want to calculate and materialize the attributes:
+
+- `StreamView`: processed from the real-time event stream
+- `BatchView`: processed using the batch engine
+- `ExternalBatchView`: uses precalculated attributes from an existing warehouse table that's materialized into Signals
+
+### StreamView
 
 Use a `StreamView` to calculate attributes from the real-time event stream. Read more about this in the [Stream calculations](/docs/signals/configuration/stream-calculations/index.md) section.
 
@@ -60,7 +54,7 @@ my_stream_view = StreamView(
 )
 ```
 
-## BatchView
+### BatchView
 
 Use a `BatchView` to calculate attributes from batch data sources (e.g., warehouse tables).
 
@@ -80,7 +74,7 @@ my_batch_view = BatchView   (
 )
 ```
 
-## ExternalBatchView
+### ExternalBatchView
 
 Use an `ExternalBatchView` to materialize attributes from an existing warehouse table.
 
@@ -212,3 +206,11 @@ The table below lists all available arguments for `get_view()`
 | `version` | The view version     | `int`    | ❌         |
 
 If you don't specify a version, Signals will retrieve the latest version.
+
+## Views can be set to expire
+
+Some attributes will only be relevant for a certain amount of time, and eventually stop being updated.
+
+To avoid stale attributes staying in your Profiles Store forever, you can configure TTL lifetimes for entities and views. When none of the attributes for an entity or view have been updated for the defined lifespan, the entity or view expires. Any attribute values for this entity or view will be deleted: fetching them will return `None` values.
+
+If Signals then processes a new event that calculates the attribute again, or materializes the attribute from the warehouse again, the expiration timer is reset.

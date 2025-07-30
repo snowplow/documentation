@@ -18,8 +18,8 @@ Signals is configured slightly differently depending if you're using existing ta
 | Signals component   | Required for existing attributes | Required for creating new attributes |
 | ------------------- | -------------------------------- | ------------------------------------ |
 | `BatchSource`       | ✅                                | ❌                                    |
-| `BatchView`         | ❌                                | with `attributes` ✅                  |
-| `ExternalBatchView` | with `fields` ✅                  | ❌                                    |
+| `BatchView`         | ❌                                | ✅ using `attributes`                 |
+| `ExternalBatchView` | ✅ using `fields`                 | ❌                                    |
 
 To create new attribute tables, the batch engine will help you set up the required dbt projects and models.
 
@@ -130,7 +130,7 @@ The included batch engine CLI tool will help you with this process. Check out th
 
 ### Defining a view with attributes
 
-The key difference between a standard stream [view](/docs/signals/configuration/views/index.md) and one meant for batch processing is the `offline=True` parameter.
+The key difference between a standard stream [view](/docs/signals/configuration/attribute-groups/index.md) and one meant for batch processing is the `offline=True` parameter.
 
 The entity here is typically the user, which may be the `domain_userid` or other Snowplow identifier fields, such as the logged in `user_id`.
 

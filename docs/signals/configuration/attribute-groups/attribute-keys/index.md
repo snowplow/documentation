@@ -25,7 +25,7 @@ from snowplow_signals import (
 )
 ```
 
-Entities become associated with attributes when you group the attributes into views.
+All the attributes within a specific attribute group are calculated based on the provided entity.
 
 ## Custom entities
 

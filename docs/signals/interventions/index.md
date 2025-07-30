@@ -22,7 +22,7 @@ flowchart LR
 
 Your application decides how to react to a delivered intervention.
 
-Because [entities are configurable](/docs/signals/configuration/entities/index.md), the targeting used for interventions can be as broad or specific as you like, including:
+Because [entities are configurable](/docs/signals/configuration/attribute-groups/attribute-keys/index.md), the targeting used for interventions can be as broad or specific as you like, including:
 - a specific user/session
 - a specific pageview that a user is in the middle of
 - all users on a specific page
@@ -36,7 +36,7 @@ Interventions can be published to any combination of entities via the API, or au
 
 You can [define interventions](/docs/signals/configuration/interventions/index.md) and a set of rules to trigger them via the [Signals Python SDK](/docs/signals/configuration/index.md).
 
-As the Signals streaming engine [processes](/docs/signals/configuration/stream-calculations/index.md) Snowplow events, it will calculate any [attributes you have configured](/docs/signals/configuration/attributes/index.md) as views.
+As the Signals streaming engine [processes](/docs/signals/configuration/stream-calculations/index.md) Snowplow events, it will calculate any [attributes you have configured](/docs/signals/configuration/attribute-groups/attributes/index.md) as views.
 As the attribute values get updated, the streaming engine will evaluate the entity's attributes against the rules you have defined.
 If the attribute group matches the rules you define, the rest of your intervention definition gets published as an intervention targeting the entity.
 

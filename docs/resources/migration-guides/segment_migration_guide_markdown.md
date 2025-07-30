@@ -20,15 +20,15 @@ This provides several advantages:
 
 Segment and Snowplow approach data governance differently. Segment's Protocols feature validates data reactively, acting as a gatekeeper for incoming events. This is often a premium feature and, if not rigorously managed, can lead to inconsistent data requiring significant downstream cleaning. Furthermore, there is no separation between development and production environments, meaning no easy way to test changes before deploying them.
 
-Snowplow enforces data quality proactively with mandatory, machine-readable **schemas** for every event and entity. Events that fail validation are quarantined for inspection, ensuring only clean, consistent data lands in your warehouse. This "shift-left" approach moves the cost of data quality from a continuous operational expense to a one-time design investment.
+Snowplow enforces data quality proactively with mandatory, machine-readable **[schemas](https://docs.snowplow.io/docs/fundamentals/schemas/)** for every [event](https://docs.snowplow.io/docs/fundamentals/events/) and [entity](https://docs.snowplow.io/docs/fundamentals/entities/). [Events that fail validation](https://docs.snowplow.io/docs/fundamentals/failed-events/) are quarantined for inspection, ensuring only clean, consistent data lands in your warehouse. This "shift-left" approach moves the cost of data quality from a continuous operational expense to a one-time design investment.
 
 ### Unlock advanced analytics with greater granularity
 
-Segment is primarily a data router, excelling at sending event data to third-party tools. Snowplow is designed to create a rich, granular behavioral data asset. Segment's `track` events use a flat JSON `properties` object, limiting contextual depth. Snowplow's event-entity model allows a single event to be enriched with numerous contextual entities on the tracker and also in the pipeline, providing over 100 structured data points per event.
+Segment is primarily a data router, excelling at sending event data to third-party tools. Snowplow is designed to create a rich, granular behavioral data asset. Segment's `track` events use a flat JSON `properties` object, limiting contextual depth. Snowplow's [event-entity model](https://docs.snowplow.io/docs/fundamentals/events/) allows a single event to be enriched with numerous contextual entities on the tracker and also in the pipeline, providing over 100 structured data points per event.
 
 This rich, structured data is ideal for:
 
-- **Complex data modeling**: Snowplow provides open-source dbt packages to transform raw data into analysis-ready tables
+- **Complex data modeling**: Snowplow provides [open-source dbt packages](https://docs.snowplow.io/docs/modeling-data/modeling-your-data/dbt/) to transform raw data into analysis-ready tables
 - **AI and machine learning**: High-fidelity data is ideal for training ML models like recommendation engines or churn predictors
 - **Deep user behavior analysis**: Rich entities enable multi-faceted exploration of user journeys without complex data wrangling
 
@@ -69,9 +69,9 @@ This model forces the world into a verb-centric framework. The event—the actio
 
 Snowplow introduces a more nuanced and powerful paradigm that separates the *event* (the action that occurred at a point in time) from the *entities* (the nouns that were involved in that action). In Snowplow, every tracked event can be decorated with an array of contextual entities. This is the core of the event-entity model.
 
-An **event** is an immutable record of something that happened. A **self-describing event** in Snowplow is the equivalent of a Segment `track` call, capturing a specific action like `add_to_cart`.
+An **[event](https://docs.snowplow.io/docs/fundamentals/events/)** is an immutable record of something that happened. A **[self-describing event](https://docs.snowplow.io/docs/fundamentals/events/#self-describing-events)** in Snowplow is the equivalent of a Segment `track` call, capturing a specific action like `add_to_cart`.
 
-An **entity**, however, is a reusable, self-describing JSON object that provides rich, structured context about the circumstances surrounding an event. This distinction is a key differentiator: Instead of adding properties like `product_sku`, `product_name`, and `product_price` to every single event related to a product, you define a single, reusable `product` entity. This one entity can then be attached to a multitude of different events throughout the customer journey:
+An **[entity](https://docs.snowplow.io/docs/fundamentals/entities/)**, however, is a reusable, self-describing JSON object that provides rich, structured context about the circumstances surrounding an event. This distinction is a key differentiator: Instead of adding properties like `product_sku`, `product_name`, and `product_price` to every single event related to a product, you define a single, reusable `product` entity. This one entity can then be attached to a multitude of different events throughout the customer journey:
 
 - `view_product`
 - `add_to_basket`
@@ -81,13 +81,13 @@ An **entity**, however, is a reusable, self-describing JSON object that provides
 
 This approach reflects the real world more accurately. An "event" is a momentary action, while "entities" like users, products, and marketing campaigns are persistent objects that participate in many events over time. This separation provides immense power. It allows you to analyze the `product` entity across its entire lifecycle, from initial discovery to final purchase, by querying a single, consistent data structure. You are no longer forced to hunt for and coalesce disparate property fields (`viewed_product_sku`, `purchased_product_sku`, etc.) across different event tables.
 
-Furthermore, Snowplow comes with a rich set of out-of-the-box entities that can be enabled to automatically enrich every event with crucial context, such as the `webPage` entity, the `performanceTiming` entity for site speed, and the `user` entity. This moves the data model from being action-centric to being context-centric, providing a much richer and more interconnected view of behavior from the moment of collection.
+Furthermore, Snowplow comes with a rich set of [out-of-the-box entities](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/#out-of-the-box-entity-tracking) that can be enabled to automatically enrich every event with crucial context, such as the `webPage` entity, the `performanceTiming` entity for site speed, and the `user` entity. This moves the data model from being action-centric to being context-centric, providing a much richer and more interconnected view of behavior from the moment of collection.
 
 ### The language of your business: Building composable data structures with self-describing schemas (data contracts)
 
 The technical foundation that makes the event-entity model possible is Snowplow's use of **self-describing schemas**. In the Segment world, developers often start by implementing events, and then data team then retrospectively classifies and governs them via Segment Protocols. While they do provide tracking plan capabilities, these are hard to find and optional.
 
-In the Snowplow ecosystem, the schema registry *is* the single source of truth. Every self-describing event and every custom entity is defined by a formal JSON Schema, which is stored and versioned in a schema registry called **Iglu**. Each schema is a machine-readable contract that specifies:
+In the Snowplow ecosystem, the schema registry *is* the single source of truth. Every self-describing event and every custom entity is defined by a formal JSON Schema, which is stored and versioned in a schema registry called **[Iglu](https://docs.snowplow.io/docs/fundamentals/schemas/#iglu)**. Each schema is a machine-readable contract that specifies:
 
 - **Identity**: A unique URI comprising a vendor (`com.acme`), a name (`product`), a format (`jsonschema`), and a version (`1-0-0`)
 - **Structure**: The exact properties the event or entity should contain (e.g., `sku`, `name`, `price`)
@@ -99,7 +99,7 @@ The data payload itself contains a reference to the specific schema and version 
 
 The architectural advantage of the event-entity model becomes apparent in the data warehouse. In a Segment implementation, each custom event type is loaded into its own table (e.g., `order_completed`, `product_viewed`). While this provides structure, it can lead to a large number of tables in the warehouse, a challenge sometimes referred to as "schema sprawl." A significant amount of analytical work involves discovering the correct tables and then `UNION`-ing them together to reconstruct a user's complete journey.
 
-Snowplow's data model for modern warehouses like Snowflake and BigQuery simplifies this downstream work by using a "one big table" approach. All data is loaded into a single, wide `atomic.events` table. Self-describing events and their associated entities are not loaded into separate tables. Instead, they are stored as dedicated, structured columns within that one table—for example, as an `OBJECT` in Snowflake or a `REPEATED RECORD` in BigQuery. This model avoids the schema sprawl of the Segment approach.
+Snowplow's data model for modern warehouses like Snowflake and BigQuery simplifies this downstream work by using a "one big table" approach. All data is loaded into a single, wide [`atomic.events` table](https://docs.snowplow.io/docs/fundamentals/canonical-event/). Self-describing events and their associated entities are not loaded into separate tables. Instead, they are stored as dedicated, structured columns within that one table—for example, as an `OBJECT` in Snowflake or a `REPEATED RECORD` in BigQuery. This model avoids the schema sprawl of the Segment approach.
 
 For an analyst, this means that to get a complete picture of an `add_to_cart` event and the product involved, they query a single, predictable table. The event and all its contextual entities are present in the same row. This structure can simplify data modeling in tools like dbt and accelerate time-to-insight, as the analytical work shifts from joining many disparate event tables to unnesting or accessing data within the structured columns of a single table. It is important to note that this loading behavior is different for Amazon Redshift, where each entity type does get loaded into its own separate table.
 
@@ -122,13 +122,13 @@ A migration from Segment to Snowplow can be broken down into three phases:
   - Audit all existing Segment `track`, `identify`, `page`, and `group` calls
   - Export the complete Segment Tracking Plan via API (if you still have an active account) or infer it from data in a data warehouse
   - Translate the Segment plan into a Snowplow tracking plan, defining event schemas and identifying reusable entities - using the Snowplow CLI MCP Server
-  - Deploy the Snowplow pipeline components (Collector, Enrich, Loaders) and the Iglu Schema Registry in your cloud
+  - Deploy the Snowplow pipeline components ([Collector](https://docs.snowplow.io/docs/pipeline-components-and-applications/stream-collector/), [Enrich](https://docs.snowplow.io/docs/pipeline-components-and-applications/enrichment-components/), [Loaders](https://docs.snowplow.io/docs/pipeline-components-and-applications/loaders-storage-targets/)) and the [Iglu Schema Registry](https://docs.snowplow.io/docs/pipeline-components-and-applications/iglu/) in your cloud
 - **Phase 2: Implement and validate**
-  - Add Snowplow trackers to your applications to run in parallel with existing Segment trackers (dual-tracking)
-  - Use tools like Snowplow Micro for local testing and validation before deployment
+  - Add [Snowplow trackers](https://docs.snowplow.io/docs/collecting-data/) to your applications to run in parallel with existing Segment trackers (dual-tracking)
+  - Use tools like [Snowplow Micro](https://docs.snowplow.io/docs/testing-debugging/snowplow-micro/) for local testing and validation before deployment
   - Perform end-to-end data reconciliation in your data warehouse by comparing Segment and Snowplow data to ensure accuracy
 - **Phase 3: Cutover and optimize**
-  - Update all downstream data consumers (BI dashboards, dbt models) to query the new Snowplow data tables
+  - Update all downstream data consumers (BI dashboards, [dbt models](https://docs.snowplow.io/docs/modeling-data/modeling-your-data/dbt/)) to query the new Snowplow data tables
   - Remove the Segment trackers and SDKs from application codebases
   - Decommission the Segment sources and, eventually, the subscription
 
@@ -172,15 +172,15 @@ The result of this step is a definitive, version-controlled artifact (e.g., a `s
 
 Next, you'll need to translate that tracking plan into a Snowplow-appropriate format (Data Products and Data Structures).
 
-The Snowplow CLI is a command-line utility that includes a Model Context Protocol (MCP) server, so you can use an AI agent to generate idiomatic Snowplow tracking. For more information on how to do this, read the [tutorial](https://docs.snowplow.io/tutorials/snowplow-cli-mcp/introduction/).
+The [Snowplow CLI](https://docs.snowplow.io/docs/data-product-studio/snowplow-cli/) is a command-line utility that includes a Model Context Protocol (MCP) server, so you can use an AI agent to generate idiomatic Snowplow tracking. For more information on how to do this, read the [tutorial](https://docs.snowplow.io/tutorials/snowplow-cli-mcp/introduction/).
 
 ### Step 3: Re-instrument your codebase: A conceptual guide
 
-With a robust and well-designed tracking plan published to your Iglu registry, the next step is to update your application code to send events to Snowplow. While the specific code will vary by language and platform, the core concepts are consistent. We recommend using [Snowtype](https://docs.snowplow.io/docs/data-product-studio/snowtype/using-the-cli/), our Code Generation tool, to automatically generate type-safe tracking code.
+With a robust and well-designed tracking plan published to your Iglu registry, the next step is to update your application code to send events to Snowplow. While the specific code will vary by language and platform, the core concepts are consistent. We recommend using [Snowtype](https://docs.snowplow.io/docs/data-product-studio/snowtype/), our Code Generation tool, to automatically generate type-safe tracking code.
 
 #### Migrate client-side tracking: From analytics.js to the Snowplow Browser Tracker
 
-The Snowplow JavaScript/Browser tracker introduces a more modern and readable API. The most significant change from Segment's `analytics.js` is the move from function calls with long, ordered parameter lists to calls that accept a single object with named arguments.
+The [Snowplow JavaScript/Browser tracker](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/) introduces a more modern and readable API. The most significant change from Segment's `analytics.js` is the move from function calls with long, ordered parameter lists to calls that accept a single object with named arguments.
 
 - A Segment call like `analytics.track('Event', {prop: 'value'})` becomes a Snowplow call like `snowplow('trackSelfDescribingEvent', {schema: 'iglu:com.acme/event/jsonschema/1-0-0', data: {prop: 'value'}})`
 - A Segment `identify` call is replaced by a combination of a `setUserId` call to set the primary user identifier and the attachment of a custom `user` entity to provide the user traits
@@ -189,11 +189,11 @@ This object-based approach improves code readability, as the purpose of each val
 
 #### Migrate server-side and mobile tracking: An overview of Snowplow's polyglot trackers
 
-Snowplow provides a comprehensive suite of trackers for virtually every common back-end language and mobile platform, including Java, Python, .NET, Go, Ruby, iOS (Swift/Objective-C), and Android (Kotlin/Java).
+Snowplow provides a comprehensive suite of [trackers](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/) for virtually every common back-end language and mobile platform, including [Java](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/java-tracker/), [Python](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/python-tracker/), [.NET](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/net-tracker/), [Go](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/go-tracker/), [Ruby](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/ruby-tracker/), [iOS](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/mobile-trackers/ios-tracker/) (Swift/Objective-C), and [Android](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/mobile-trackers/android-tracker/) (Kotlin/Java).
 
 While the syntax is idiomatic to each language, the underlying paradigm remains the same across all trackers. The developer will:
 
-1. Initialize the tracker with the endpoint of their Snowplow collector
+1. Initialize the tracker with the endpoint of their [Snowplow collector](https://docs.snowplow.io/docs/pipeline-components-and-applications/stream-collector/)
 2. Use builder patterns or helper classes to construct self-describing events and entity objects, referencing the schema URIs from the Iglu registry. For example, the Java tracker uses a `SelfDescribing.builder()` to construct the event payload
 3. Use a `track` method to send the fully constructed event to the collector
 
@@ -205,7 +205,7 @@ The final step is to rigorously validate the new implementation and manage the c
 
 #### Local validation with Snowplow Micro
 
-To empower developers and "shift-left" on data quality, customers should incorporate **Snowplow Micro**. Micro is a complete Snowplow pipeline packaged into a single Docker container that can be run on a developer's local machine. Before committing any new tracking code, a developer can point their application's tracker to their local Micro instance. They can then interact with the application and see the events they generate appear in the Micro UI in real-time. Micro performs the same validation against the Iglu registry as the production pipeline, allowing developers to instantly confirm that their events are well-formed and pass schema validation. This catches errors early, reduces the feedback loop from hours to seconds, and prevents bad data from ever reaching the production pipeline.
+To empower developers and "shift-left" on data quality, customers should incorporate **[Snowplow Micro](https://docs.snowplow.io/docs/testing-debugging/snowplow-micro/)**. Micro is a complete Snowplow pipeline packaged into a single Docker container that can be run on a developer's local machine. Before committing any new tracking code, a developer can point their application's tracker to their local Micro instance. They can then interact with the application and see the events they generate appear in the Micro UI in real-time. Micro performs the same validation against the Iglu registry as the production pipeline, allowing developers to instantly confirm that their events are well-formed and pass schema validation. This catches errors early, reduces the feedback loop from hours to seconds, and prevents bad data from ever reaching the production pipeline.
 
 #### End-to-end data reconciliation strategies
 

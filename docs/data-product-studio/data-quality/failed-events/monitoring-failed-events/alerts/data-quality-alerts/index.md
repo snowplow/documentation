@@ -17,7 +17,7 @@ The alerting system monitors your failed events and sends notifications based on
 
 Configure alerts to trigger only for specific types of failed events:
 
-- **Issue types**: `ValidationError`, `ResolutionError`
+- **Issue types**: select `ValidationError`, `ResolutionError`, or both
 - **Data structures**: filter by specific schemas or event types
 - **App IDs**: filter by application identifiers
 

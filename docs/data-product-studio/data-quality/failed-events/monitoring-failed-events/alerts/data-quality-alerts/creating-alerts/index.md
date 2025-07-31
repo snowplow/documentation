@@ -61,9 +61,9 @@ Once a Slack alert is configured you will see a confirmation notification in the
 
 Configure when alerts should trigger:
 
-1. **Issue types**: Select ValidationError, ResolutionError, or both
-2. **Data structures**: Choose specific data structures (all versions will apply)
-3. **App IDs**: Filter by application identifiers
+1. **Issue types**: select `ValidationError`, `ResolutionError`, or both
+2. **Data structures**: choose specific data structures (all versions will apply)
+3. **App IDs**: filter by application identifiers
 
 ![Filter configuration](images/dq_filters.png)
 

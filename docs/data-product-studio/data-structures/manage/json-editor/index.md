@@ -36,11 +36,9 @@ In the example below we have changed the `maxLength` of `example_field_1`.
 
 ![](images/image-5.png)
 
-Once you are happy with your changes, click **'Validate'** to ensure you have valid JSON markup. Your changes will be saved as a draft, allowing you to make multiple modifications without managing version numbers until you're ready to deploy.
+Once you are happy with your changes, click **'Validate'** to ensure you have valid JSON markup. Then click **'Publish to development environment'** to save your changes to your development environment.
 
 ![](images/image-7.png)
-
-**Deploying to development**: When you're ready to test your data structure, click **'Deploy to development environment'** to move your draft to the development environment.
 
 The versioning dialog will appear, at this point you have three options:
 

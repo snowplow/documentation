@@ -44,8 +44,6 @@ On the edit page, under the General Information panel, you can update the data s
 
 When you modify the data structure, the builder will mark your changes in yellow and automatically determine the new version of your data structure based on these modifications. You can reset the data structure and erase all changes at any moment by clicking the "Clear Changes" button found in the alert beneath the properties.
 
-**Working with drafts**: Your changes are saved as a draft, allowing you to make multiple modifications without needing to manage version numbers until you're ready to deploy. This gives you the flexibility to experiment and refine your data structure.
-
-If you are satisfied with your changes, click "Save" to update your draft. When you're ready to test your data structure, deploy it to your development environment, and make sure to note the newly updated tracking URL.
+If you are satisfied with your changes, click "Save" and make sure to note the newly updated tracking URL.
 
 ![](images/data-structure-version.png)

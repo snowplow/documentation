@@ -12,7 +12,7 @@ Snowplow can send two types of alerts to help you monitor Failed Events:
 - **Failed event digest**: receive a daily digest of all Failed Event activity in the previous 48-hour period.
 
 
-To receive alerts you must have the Failed Events monitoring feature switched on in the Snowplow BDP console.
+To receive alerts you must have the failed events monitoring feature switched on in Snowplow BDP Console.
 
 ## Subscribing to alerts
 

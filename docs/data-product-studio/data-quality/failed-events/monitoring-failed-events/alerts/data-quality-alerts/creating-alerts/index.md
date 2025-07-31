@@ -42,7 +42,7 @@ When no active Slack integration a `Connect with Slack` button will apear instea
 
 ![Connect to Slack](images/dq_connect_slack.png)
 
-A Slack consent screen will appear
+A Slack consent screen will appear.
 
 ![Slack consent](images/dq_slack.png)
 

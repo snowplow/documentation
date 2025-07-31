@@ -76,8 +76,3 @@ Configure when alerts should trigger:
 ## Alert frequency
 
 Alerts are checked every 10 minutes. You'll receive notifications when new failed events match your filter criteria.
-
-## Next steps
-
-- [Manage existing alerts](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/alerts/data-quality-alerts/managing-alerts/index.md)
-- [Explore failed events](/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/index.md)

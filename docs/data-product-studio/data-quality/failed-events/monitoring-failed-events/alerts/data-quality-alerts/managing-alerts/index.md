@@ -32,8 +32,3 @@ Alerts trigger when new failed events match your filters. If you receive multipl
 - Failed events are occurring frequently
 - Filter criteria are too broad
 - Multiple alerts have overlapping configurations
-
-## Next steps
-
-- [Create additional alerts](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/alerts/data-quality-alerts/creating-alerts/index.md)
-- [Explore failed events](/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/index.md)

@@ -68,7 +68,7 @@ Configure when alerts should trigger:
 
 ![Filter configuration](images/dq_filters.png)
 
-### Complete setup
+## Complete setup
 
 1. Review your configuration
 2. Click **Confirm** to create the alert

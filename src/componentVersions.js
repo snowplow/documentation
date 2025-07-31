@@ -13,7 +13,7 @@ export const versions = {
   phpTracker: '0.9.2',
   pixelTracker: '0.3.0',
   pythonTracker: '1.0.3',
-  rokuTracker: '0.3.0',
+  rokuTracker: '0.3.1',
   rubyTracker: '0.8.0',
   rustTracker: '0.2.0',
   scalaTracker: '2.0.0',

@@ -38,7 +38,7 @@ Choose how you want to receive notifications:
 
 ![Slack destination configuration](images/dq_create_slack_alert.png)
 
-When no active Slack integration a `Connect with Slack` button will apear instead of the list of channels.
+When no active Slack integration is found, a `Connect with Slack` button will appear instead of the list of channels.
 
 ![Connect to Slack](images/dq_connect_slack.png)
 

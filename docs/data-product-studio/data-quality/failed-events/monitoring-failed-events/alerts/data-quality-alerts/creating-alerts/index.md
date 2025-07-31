@@ -58,7 +58,7 @@ Once a Slack alert is configured you will see a confirmation notification in the
 
 ![Slack confirmation](images/dq_slack_confirmation.png)
 
-### Set up filters
+## Set up filters
 
 Configure when alerts should trigger:
 

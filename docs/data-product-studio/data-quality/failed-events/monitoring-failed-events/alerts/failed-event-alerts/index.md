@@ -8,7 +8,7 @@ Failed event alerts automatically notify you when [failed events](/docs/fundamen
 - The alerting system monitors your failed events and sends notifications based on the filters you configure. 
 - Alerts are checked every 10 minutes and sent to your specified destinations when matching failed events are detected.
 
-## Alert destinations
+These alert destinations are supported:
 
 - **Email**: send notifications to one or more email addresses
 - **Slack**: send notifications to specific Slack channels

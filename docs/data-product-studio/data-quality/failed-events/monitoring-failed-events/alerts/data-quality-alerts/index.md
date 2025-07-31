@@ -24,7 +24,7 @@ Configure alerts to trigger only for specific types of failed events:
 
 ## Getting started
 
-1. Navigate to the Data Quality Dashboard
+1. Navigate to the data quality dashboard
 2. View your failed events overview
 3. Click **Manage alerts** to set up notifications
 4. Create and configure your first alert

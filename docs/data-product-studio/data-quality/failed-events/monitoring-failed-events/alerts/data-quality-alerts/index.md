@@ -1,5 +1,5 @@
 ---
-title: "Data Quality alerts"
+title: "Data quality alerts"
 sidebar_position: 1
 ---
 

@@ -31,7 +31,7 @@
     --chart-5: 220.45 70.08% 50.2%;
     --radius: 0.25rem;
 
-    --font-fallback: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif ;
+    --font-fallback: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   }
 
   [data-theme='dark'] {
@@ -69,55 +69,17 @@
  * work well for content-centric websites.
  */
  @font-face {
-  font-family: 'Inter18pt-Bold';
-  src: url('/fonts/Inter18pt-BoldItalic.woff2') format('woff2'),
-      url('/fonts/Inter18pt-BoldItalic.woff') format('woff');
-  font-weight: bold;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Inter18pt-BoldItalic';
-  src: url('/fonts/Inter18pt-Italic.woff2') format('woff2'),
-      url('/fonts/Inter18pt-Italic.woff') format('woff');
-  font-weight: normal;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Inter18pt-Bold';
-  src: url('/fonts/Inter18pt-Bold.woff2') format('woff2'),
-      url('/fonts/Inter18pt-Bold.woff') format('woff');
-  font-weight: bold;
+  font-family: 'InterVariable';
+  src: url('/fonts/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 1 999;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: 'Inter18pt-Regular';
-  src: url('/fonts/Inter18pt-Regular.woff2') format('woff2'),
-      url('/fonts/Inter18pt-Regular.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Inter18pt-Light';
-  src: url('/fonts/Inter18pt-Light.woff2') format('woff2'),
-      url('/fonts/Inter18pt-Light.woff') format('woff');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Inter18pt-LightItalic';
-  src: url('/fonts/Inter18pt-LightItalic.woff2') format('woff2'),
-      url('/fonts/Inter18pt-LightItalic.woff') format('woff');
-  font-weight: 300;
+  font-family: 'InterVariable';
+  src: url('/fonts/Inter-Italic-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 1 999;
   font-style: italic;
   font-display: swap;
 }
@@ -138,7 +100,7 @@
   --ifm-color-announcement: #e6f6fe;
   --ifm-code-font-size: 95%;
   --ifm-code-padding-vertical: 0.05rem;
-  --ifm-font-family-base: 'Inter18pt-Regular', var(--font-fallback);
+  --ifm-font-family-base: 'InterVariable', var(--font-fallback);
   --ifm-menu-color-active: #6638b8;
   --ifm-font-color-base: var(--muted-foreground);
   --ifm-font-color-base-inverse: rgb(218, 221, 225);
@@ -147,6 +109,14 @@
   --doc-sidebar-width: 330px !important;
   --ifm-tabs-padding-vertical: 7px;
   --ifm-menu-link-sublist-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24"><path fill="rgb(102, 56, 184)" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>');
+  --font-fallback: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-variable: 'InterVariable', var(--font-fallback);
+}
+
+body {
+  font-family: var(--font-variable);
+  font-weight: 400;
+  letter-spacing: -0.0125em;
 }
 
 
@@ -217,7 +187,7 @@ button.snowplow-button {
   border: none;
   border-radius: 4px;
 
-  font-family: 'Inter18pt-Regular', var(--font-fallback);
+  font-family: 'InterVariable', var(--font-fallback);
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -299,17 +269,6 @@ button.snowplow-button:focus {
 
 /* End of buttons */
 
-
-
-header,
-h1,
-h2,
-h3,
-h4,
-h5 {
-  font-family: 'Inter18pt-Bold', var(--font-fallback);
-}
-
 table {
   display: inline-table;
 }
@@ -347,7 +306,7 @@ aside.theme-doc-sidebar-container {
   border: none;
 }
 .sidebar_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-styles-module {
-  width: 100%;
+  width: 100%!important;
 }
 
 .theme-doc-sidebar-item-link-level-1.header {
@@ -359,12 +318,9 @@ aside.theme-doc-sidebar-container {
   color: var(--ifm-color-primary-darker);
 }
 
-[data-theme='dark'] .theme-doc-sidebar-item-link-level-1.header {
-  color: var(--ifm-color-primary-lightest);
-}
 
-.theme-doc-sidebar-item-link-level-1 {
-  font-weight: 400;
+.theme-doc-sidebar-item-link-level-1, .theme-doc-sidebar-item-category-level-1 {
+  font-weight: 500;
   color: hsl(var(--foreground));
   font-size: .875rem;
 }
@@ -375,9 +331,10 @@ aside.theme-doc-sidebar-container {
 .theme-doc-sidebar-item-category-level-4,
 .theme-doc-sidebar-item-link-level-3,
 .theme-doc-sidebar-item-link-level-4 {
-  font-weight: 400;
+  font-weight: 340;
   font-size: .875rem;
   line-height: 20px;
+  color: hsl(var(--foreground));
 }
 
 .theme-doc-sidebar-item-category-level-2 .menu__list-item-collapsible .menu__caret
@@ -387,7 +344,7 @@ aside.theme-doc-sidebar-container {
 }
 
 .menu {
-  font-weight: var(--ifm-font-weight-semibold);
+  font-weight: regular;
   overflow-x: hidden;
 }
 
@@ -651,7 +608,7 @@ code {
 input[type='text'],
 input[type='email'],
 textarea {
-  font-family: 'Inter18pt-Regular', var(--font-fallback);
+  font-family: var(--font-variable);
   font-size: 14px;
 }
 
@@ -883,7 +840,7 @@ abbr[data-title]:focus:after, abbr[data-title]:hover:after {
   margin: .5rem 0 !important;
 }
 .prose table thead a {
-  font-weight: 700;
+  font-weight: 600;
   text-decoration: none;
 }
 

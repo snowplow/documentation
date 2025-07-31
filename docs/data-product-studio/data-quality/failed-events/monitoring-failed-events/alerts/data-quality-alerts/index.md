@@ -5,7 +5,6 @@ sidebar_position: 1
 
 Data quality alerts automatically notify you when [failed events](/docs/fundamentals/failed-events/index.md) occur in your data pipeline. Set up alerts to receive notifications via email or Slack when validation errors, resolution errors, or other data quality issues arise.
 
-## How alerts work
 
 The alerting system monitors your failed events and sends notifications based on the filters you configure. Alerts are checked every 10 minutes and sent to your specified destinations when matching failed events are detected.
 

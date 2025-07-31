@@ -15,7 +15,7 @@ To create an alert, go to the BDP Console:
 
 ![Create alert form](images/dq_create_alert.png)
 
-### Configure destination
+## Configure destination
 
 Choose how you want to receive notifications:
 

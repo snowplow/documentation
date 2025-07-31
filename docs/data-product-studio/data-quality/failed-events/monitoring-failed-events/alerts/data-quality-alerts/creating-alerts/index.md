@@ -3,7 +3,7 @@ title: "Creating alerts"
 sidebar_position: 1
 ---
 
-Set up alerts to receive notifications when failed events occur in your data pipeline.
+Set up data quality alerts to receive notifications when failed events occur in your data pipeline.
 
 ## Before you start
 

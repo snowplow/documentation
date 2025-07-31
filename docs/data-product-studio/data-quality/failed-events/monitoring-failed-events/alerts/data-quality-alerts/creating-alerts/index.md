@@ -9,7 +9,7 @@ Set up data quality alerts to receive notifications when failed events occur in 
 You'll need access to the [data quality dashboard](link to relevant DQD page here).
 
 ## Create an alert
-
+To create an alert, go to the BDP Console:
 1. Navigate to **Data Quality** in the left sidebar
 2. Click **Manage alerts** in the top-right corner
 3. Click **Create alert**

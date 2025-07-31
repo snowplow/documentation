@@ -3,7 +3,7 @@ title: "Managing alerts"
 sidebar_position: 2
 ---
 
-Edit, delete, or review existing failed events alerts.
+This page explains how to edit, delete, or review existing data quality alerts.
 
 ## View alerts
 

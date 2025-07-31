@@ -12,7 +12,7 @@ Snowplow can alert you when a new failed event has occurred. There are two diffe
 Driven by the [Data Quality dashboard](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/index.md#data-quality-dashboard) deployment
 
 ### [Classic alerts](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/alerts/classic-alerts/index.md)
-Driven by the [Snowplow infrastructure](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/index.md#default-view), cheaper to run
+Driven by the [Snowplow infrastructure](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/index.md#default-view), these are cheaper to run
 
 ### Feature comparison
 

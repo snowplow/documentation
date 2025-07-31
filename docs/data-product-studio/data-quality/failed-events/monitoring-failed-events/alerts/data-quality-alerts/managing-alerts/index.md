@@ -28,7 +28,7 @@ This page explains how to edit, delete, or review existing data quality alerts.
 
 ## Multiple notifications
 
-Alerts trigger when new failed events match your filters. If you receive multiple notifications, check if:
+Alerts trigger when new failed events match your filters. If you unexpectedly receive multiple notifications, check if:
 - Failed events are occurring frequently
 - Filter criteria are too broad
 - Multiple alerts have overlapping configurations

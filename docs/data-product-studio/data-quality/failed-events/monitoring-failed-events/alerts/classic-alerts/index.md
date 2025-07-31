@@ -5,7 +5,6 @@ sidebar_label: "Classic alerts"
 sidebar_position: 2
 ---
 
-## Overview
 
 Snowplow can send two types of alerts to help you monitor Failed Events:
 

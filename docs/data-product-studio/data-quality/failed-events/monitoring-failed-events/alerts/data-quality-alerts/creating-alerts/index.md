@@ -28,7 +28,7 @@ Choose how you want to receive notifications:
 
 ![Email destination configuration](images/dq_create_email_alert.png)
 
-#### Slack notifications
+### Slack notifications
 
 1. Select **Slack** as destination
 2. Enter alert name (e.g., "web-app")

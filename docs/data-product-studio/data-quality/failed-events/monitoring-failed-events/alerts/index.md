@@ -14,7 +14,7 @@ Driven by the [Data Quality dashboard](/docs/data-product-studio/data-quality/fa
 ### [Classic alerts](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/alerts/classic-alerts/index.md)
 Driven by the [Snowplow infrastructure](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/index.md#default-view), these are cheaper to run
 
-### Feature comparison
+## Feature comparison
 
 | Feature | Classic alerts | Data quality alerts |
 | :------ | :------------: | :-----------------: |

@@ -16,7 +16,14 @@ The JSON editor is ideal for more complex data structures that require nesting o
 
 Select whether you'd like to create an [Event](/docs/fundamentals/events/index.md) or an [Entity](/docs/fundamentals/entities/index.md). You can always change this selection at a later date.
 
-![](images/image-2.png)
+<ThemedImage
+  alt="Choice between builder and JSON editor options"
+  width="60%"
+  sources={{
+    light: require('./images/image-2.png').default,
+    dark: require('./images/image-2.png').default
+  }}
+/>
 
 You can now write the first version of your JSON schema for this data structure. Some template JSON is provided in the code window to start you off.
 

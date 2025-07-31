@@ -6,10 +6,10 @@ sidebar_position: 2
 ---
 
 
-Snowplow can send two types of alerts to help you monitor Failed Events:
+Snowplow can send two types of pipeline alerts to help you monitor failed events:
 
 - **New failed event:** receive an alert within 10 minutes of a new type of event failure being detected on your pipeline.
-- **Failed event digest**: receive a daily digest of all Failed Event activity in the previous 48-hour period.
+- **Failed event digest**: receive a daily digest of all failed event activity in the previous 48-hour period.
 
 
 To receive alerts you must have the failed events monitoring feature switched on in Snowplow BDP Console.

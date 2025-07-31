@@ -18,13 +18,13 @@ Select whether you'd like to create an [Event](/docs/fundamentals/events/index.m
 
 ![](images/image-2.png)
 
-You can now write the first version of your JSON schema for this Data Structure. Some template JSON is provided in the code window to start you off.
+You can now write the first version of your JSON schema for this data structure. Some template JSON is provided in the code window to start you off.
 
 ![](images/json-template.png)
 
-Once you are done, click the **Validate** button and we'll validate that your schema is valid JSON markup. Assuming it passes validation, you can save your data structure as a **draft**.
+Once you are done, click the **Validate** button and we'll validate that your schema is valid JSON markup. Assuming it passes validation, you can save your data structure as a draft.
 
-**Working with drafts**: Your new data structure will be saved as a draft, which means it's not yet deployed to your development environment and cannot be used for event validation. This allows you to make further changes without worrying about version numbers. When you're ready to test your data structure, you can deploy it from the draft state to your development environment.
+See the [Working with drafts](/docs/data-product-studio/data-structures/manage/index.md#working-with-drafts) section for more information about the draft workflow.
 
 Click **Save as draft** to save your data structure as a draft. As this is the first version of your data structure, it will be created as version `1-0-0` when you later deploy it to your development environment.
 
@@ -36,7 +36,7 @@ In the example below we have changed the `maxLength` of `example_field_1`.
 
 ![](images/image-5.png)
 
-Once you are happy with your changes, click **'Validate'** to ensure you have valid JSON markup. Then click **'Publish to development environment'** to save your changes to your development environment.
+Once you are happy with your changes, click **Validate** to ensure you have valid JSON markup. Then click **Publish to development environment** to save your changes to your development environment.
 
 ![](images/image-7.png)
 
@@ -54,8 +54,8 @@ Patching can be useful in development environments, but should be done carefully
 
 For more information see [Versioning your data structures](/docs/data-product-studio/data-structures/version-amend/index.md).
 
-Once you have selected the appropriate version, click **'Deploy to development environment'** and your data structure will be deployed to your development environment ready [for you to test](/docs/data-product-studio/data-quality/index.md).
+Once you have selected the appropriate version, click **Deploy to development environment** and your data structure will be deployed to your development environment ready [for you to test](/docs/data-product-studio/data-quality/index.md).
 
-You can identify Data Structures where the Development version is ahead of the Production version by the yellow background on the version number. In this example both `user` and `alert` have been edited on development.
+You can identify data structures where the Development version is ahead of the Production version by the yellow background on the version number. In this example both `user` and `alert` have been edited on development.
 
 ***

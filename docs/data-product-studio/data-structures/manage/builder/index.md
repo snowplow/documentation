@@ -28,13 +28,13 @@ Populate the general information, such as Name, and a Description and Vendor. Ve
 
 ![](images/data-structures-1.png)
 
-When creating a new [Data Structure](/docs/fundamentals/schemas/index.md), you can add one or multiple properties. For each property, you can set a name, description, its type and a possible enumeration of allowed values (for type `string`). You can also set additional constraints to define if this property should be optional or mandatory, and if `null` values are allowed.
+When creating a new [data structure](/docs/fundamentals/schemas/index.md), you can add one or multiple properties. For each property, you can set a name, description, its type and a possible enumeration of allowed values (for type `string`). You can also set additional constraints to define if this property should be optional or mandatory, and if `null` values are allowed.
 
 ![](images/data-structures-2.png)
 
 Click **Save** on the Property dialog box to save your property changes.
 
-Clicking **Save** on the data structures page will save your data structure as a **draft**. At this point, your data structure is not yet deployed to your development environment and cannot be used for event validation. When you're ready to test your data structure, you'll need to deploy it from the draft state to your development environment.
+Clicking **Save** on the data structure page will save your data structure as a draft. At this point, your data structure is not yet deployed to your development environment and cannot be used for event validation. When you're ready to test your data structure, you'll need to deploy it from the draft state to your development environment.
 
 ## Editing a data structure
 

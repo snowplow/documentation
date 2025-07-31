@@ -1,5 +1,5 @@
 ---
-title: "Setting up data quality alerts"
+title: "Setting up classic alerts"
 date: "2021-01-14"
 sidebar_label: "Classic alerts"
 sidebar_position: 2

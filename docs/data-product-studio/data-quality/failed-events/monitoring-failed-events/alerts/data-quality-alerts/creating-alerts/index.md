@@ -19,7 +19,7 @@ To create an alert, go to the BDP Console:
 
 Choose how you want to receive notifications:
 
-#### Email notifications
+### Email notifications
 
 1. Select **Email** as destination
 2. Enter alert name (e.g., "mobile-app")

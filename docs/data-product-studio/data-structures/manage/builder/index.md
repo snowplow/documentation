@@ -32,9 +32,9 @@ When creating a new [Data Structure](/docs/fundamentals/schemas/index.md), you c
 
 ![](images/data-structures-2.png)
 
-Click "Save" on the Property dialog box and this will save your property changes.
+Click **Save** on the Property dialog box to save your property changes.
 
-Clicking "Save" on the Data Structure page will save your data structure as a **draft**. At this point, your data structure is not yet deployed to your development environment and cannot be used for event validation. When you're ready to test your data structure, you'll need to deploy it from the draft state to your development environment.
+Clicking **Save** on the data structures page will save your data structure as a **draft**. At this point, your data structure is not yet deployed to your development environment and cannot be used for event validation. When you're ready to test your data structure, you'll need to deploy it from the draft state to your development environment.
 
 ## Editing a data structure
 
@@ -42,7 +42,7 @@ On the edit page, under the General Information panel, you can update the data s
 
 ![](images/edit-data-structure.png)
 
-When you modify the data structure, the builder will mark your changes in yellow and automatically determine the new version of your data structure based on these modifications. You can reset the data structure and erase all changes at any moment by clicking the "Clear Changes" button found in the alert beneath the properties.
+When you modify the data structure, the builder will mark your changes in yellow, and automatically determine the new version of your data structure based on these modifications. You can reset the data structure and erase all changes at any moment by clicking the **Clear Changes** button found in the alert beneath the properties.
 
 If you are satisfied with your changes, click "Save" and make sure to note the newly updated tracking URL.
 

@@ -22,11 +22,11 @@ You can now write the first version of your JSON schema for this Data Structure.
 
 ![](images/json-template.png)
 
-Once you are done, click the **'Validate'** button and we'll validate that your schema is valid JSON markup. Assuming it passes validation, you can save your data structure as a **draft**.
+Once you are done, click the **Validate** button and we'll validate that your schema is valid JSON markup. Assuming it passes validation, you can save your data structure as a **draft**.
 
 **Working with drafts**: Your new data structure will be saved as a draft, which means it's not yet deployed to your development environment and cannot be used for event validation. This allows you to make further changes without worrying about version numbers. When you're ready to test your data structure, you can deploy it from the draft state to your development environment.
 
-Click **'Save as draft'** to save your Data Structure as a draft. As this is the first version of your data structure, it will be created as version `1-0-0` when you later deploy it to your development environment.
+Click **Save as draft** to save your data structure as a draft. As this is the first version of your data structure, it will be created as version `1-0-0` when you later deploy it to your development environment.
 
 ## Editing a data structure
 

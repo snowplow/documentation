@@ -25,12 +25,7 @@ Configure alerts to trigger only for specific types of failed events:
 
 1. Navigate to the data quality dashboard
 2. View your failed events overview
-3. Click **Manage alerts** to set up notifications
-4. Create and configure your first alert
+3. Click **[Manage](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/alerts/data-quality-alerts/managing-alerts/index.md)** alerts to set up notifications
+4. **[Create](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/alerts/data-quality-alerts/creating-alerts/index.md)** and configure your first alert
 
 ![Data Quality Dashboard overview](images/dq_manage_alerts_button.png)
-
-## Next steps
-
-- [Create your first alert](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/alerts/data-quality-alerts/creating-alerts/index.md)
-- [Manage existing alerts](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/alerts/data-quality-alerts/managing-alerts/index.md)

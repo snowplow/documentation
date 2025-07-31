@@ -26,7 +26,7 @@ Edit, delete, or review existing failed events alerts.
 3. Click **Delete**
 4. Confirm deletion
 
-### Multiple notifications
+## Multiple notifications
 
 Alerts trigger when new failed events match your filters. If you receive multiple notifications, check if:
 - Failed events are occurring frequently

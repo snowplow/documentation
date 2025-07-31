@@ -54,7 +54,7 @@ To select channels in the UI, first add the app to those channels. In Slack:
 
 ![Invite to Slack](images/dq_slack_invite.png)
 
-Once a Slack alert is configured you will see a confirmation notification in the selected Slack channel
+Once a Slack alert is configured you will see a confirmation notification in the selected Slack channel.
 
 ![Slack confirmation](images/dq_slack_confirmation.png)
 

@@ -28,7 +28,6 @@ This page explains how to edit, delete, or review existing failed event alerts.
 
 ## Multiple notifications
 
-Alerts trigger when new failed events match your filters. If you unexpectedly receive multiple notifications, check if:
-- Failed events are occurring frequently
-- Filter criteria are too broad
-- Multiple alerts have overlapping configurations
+Alerts trigger when new failed events match your filters. You may receive multiple notifications for the same failed events in the following scenarios:
+- Rolling window detection: Alerts use rolling time windows to detect failed events. The same failed event type will continue triggering notifications as each consecutive window passes and detects the events again.
+- Overlapping alert configurations: Multiple alerts may capture the same failed events when their filter criteria overlap. This results in duplicate notifications, especially when alerts are configured to send to the same destination (same Slack channel or email address).

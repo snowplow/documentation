@@ -14,7 +14,6 @@ These alert destinations are supported:
 - **Slack**: send notifications to specific Slack channels
 
 ## What you can filter on
-ƒ
 Configure alerts to trigger only for specific types of failed events:
 
 - **Issue types**: select `ValidationError`, `ResolutionError`, or both

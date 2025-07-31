@@ -5,7 +5,6 @@ sidebar_label: "Alerts"
 sidebar_position: 2500
 ---
 
-## Overview
 
 Snowplow can alert you when a new failed event has occurred. There are two different implementations available to choose from.
 

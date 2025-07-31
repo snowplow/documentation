@@ -10,16 +10,16 @@ The alerting system monitors your failed events and sends notifications based on
 
 ## Alert destinations
 
-- **Email**: Send notifications to one or more email addresses
-- **Slack**: Send notifications to specific Slack channels
+- **Email**: send notifications to one or more email addresses
+- **Slack**: send notifications to specific Slack channels
 
 ## What you can filter on
 
 Configure alerts to trigger only for specific types of failed events:
 
 - **Issue types**: `ValidationError`, `ResolutionError`
-- **Data structures**: Filter by specific schemas or event types
-- **App IDs**: Filter by application identifiers
+- **Data structures**: filter by specific schemas or event types
+- **App IDs**: filter by application identifiers
 
 ## Getting started
 

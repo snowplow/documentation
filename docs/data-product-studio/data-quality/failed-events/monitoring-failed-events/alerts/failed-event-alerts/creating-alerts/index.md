@@ -6,7 +6,7 @@ sidebar_position: 1
 Set up failed event alerts to receive notifications when failed events occur in your data pipeline.
 
 
-You'll need access to the [data quality dashboard](link to relevant DQD page here).
+You'll need access to the [data quality dashboard](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/index.md#data-quality-dashboard).
 
 To create an alert, go to the BDP Console:
 1. Navigate to **Data Quality** in the left sidebar

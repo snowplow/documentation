@@ -127,6 +127,23 @@ query = f"""
 """
 ```
 
+:::note
+This query defines the target column based on `submit_form` events. If you're not tracking those events, the retrieved data won't work with the model - the target values will all be `False`. You'll get a `ValueError` when you try to train the model if this is the case.
+
+If so, define a different target that exists in your database and represents meaningful user behavior. For example, for a simple substitution, you could try multiple page views:
+
+```sql
+-- In targets_as_of_event, replace this line
+count_if(ef.event_name = 'submit_form') > 0 as target_had_submit_form_next1h,
+
+-- With
+count_if(ef.event_name = 'page_view') > 2 as target_had_multiple_pageviews_next1h,
+```
+
+You'll need to update the variable name where it's called in `final_training` also.
+
+:::
+
 Connect to your database to run the query and retrieve data into a pandas DataFrame:
 
 ```python

@@ -3,11 +3,11 @@ title: Configure Signals attributes
 position: 3
 ---
 
-Next, you need to define which attributes to calculate, and to apply the configuration to Signals. The attributes will be calculated from your real-time event stream.
+To use Signals, you need to define which attributes to calculate, and then apply the configuration. Signals will calculate the attributes from your real-time event stream.
 
-For this prospect scoring use case, use the following set of prospect attributes. They'll be calculated against the `domain_userid` device entity. Choosing this entity allows Signals to calculate attributes from events across multiple sessions for each prospect.
+For this prospect scoring use case, use the following set of attributes. They'll be calculated against the `domain_userid` device entity. Choosing this entity allows Signals to calculate attributes from events across multiple sessions for each prospect.
 
-Some attributes will be calculated for two different time windows. We've chosen 7 and 30 days to cover both short- and long-term user behavior on the website.
+Some attributes are calculated for two different time windows. We've chosen 7 and 30 days to cover both short- and long-term user behavior on the website.
 
 Since the attributes will be calculated in stream, those with a defined `period` will be limited to the last 100 relevant events. Read more about this in the [Signals documentation](/docs/signals/stream-vs-batch/#stream-windowing-operations). For our marketing website, these attributes are unlikely to ever reach 100, but this may be something to be aware of for your site.
 
@@ -35,17 +35,17 @@ With the exception of `num_media_events_l30d`, the attributes will be based on s
 
 Run `pip install snowplow-signals`.
 
-## Define common variables
+## Define reusable variables
 
-Let's prepare the imports and useful variables. We will reuse the variables multiple times, and this makes the code concise and clear.
-
+Let's prepare the imports and useful variables. We'll reuse the variables multiple times, and this makes the code concise and clear.
 
 ```python
 # Imports
 from snowplow_signals import Attribute, Criteria, Criterion, Event, StreamView, domain_userid
 from datetime import timedelta
 
-# Define standard events
+# Define standard events and reusable time deltas
+
 sp_page_view = Event(
     vendor="com.snowplowanalytics.snowplow",
     name="page_view",
@@ -305,6 +305,21 @@ user_attributes_view = StreamView(
 )
 ```
 
+Test the attribute outputs on a subset of recent event data. The `test` command uses the last hour of data from your atomic events table. Here we're restricting the results to events with the application ID `website`: this filtering is optional.
+
+```python
+sp_signals_test = sp_signals.test(
+    view=user_attributes_view,
+    app_ids=["website"]
+)
+
+sp_signals_test
+```
+
+The result should look similar to this:
+
+![](./screenshots/signals_test_output.png)
+
 ## Deploy configuration to Signals
 
 Apply the view to Signals.
@@ -325,17 +340,21 @@ applied = sp_signals.apply([user_attributes_view])
 print(f"{len(applied)} objects applied")
 ```
 
-Test the attribute outputs on a subset of recent event data. The `test` command uses the last hour of data from your atomic events table. Here we're restricting the results to events with the application ID `website`: this filtering is optional.
+Signals will start populating your Profiles Store with attributes calculated from your real-time event stream.
 
-```python
-sp_signals_test = sp_signals.test(
-    view=user_attributes_view,
-    app_ids=["website"]
-)
+## Find your `domain_userid` for testing
 
-sp_signals_test
+Go to your website, and use the [Snowplow Inspector](/docs/data-product-studio/data-quality/snowplow-inspector/) browser plugin to find your own `domain_userid` in outbound web events.
+
+![](./screenshots/get_domain_userid.png)
+
+TODO
+
 ```
-
-The result should look similar to this:
-
-![](./screenshots/signals_test_output.png)
+# Go back to the website, generate some events, and check your own domain_userid here to see attributes live
+sp_signals_result = user_attributes_view.get_attributes(
+    signals=sp_signals,
+    identifier='aaaabbbb-1111-2222-3333-44445555dddd'
+)
+sp_signals_result
+```

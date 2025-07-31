@@ -16,7 +16,7 @@ This tutorial uses FastAPI for the endpoint, and ngrok to expose it outside of t
 
 Run `pip install fastapi nest-asyncio pyngrok uvicorn` to install the required libraries.
 
-## Define methods
+## Define methods and variables
 
 Start by loading your model, and defining the methods needed to retrieve and process your Signals data.
 
@@ -108,7 +108,7 @@ def get_predictions(df, explanations=None):
 
 ## Create endpoint
 
-Create a `POST` HTTP endpoint using FastAPI.
+Create a `POST` HTTP endpoint using FastAPI, at `/predict`.
 
 ```python
 @app.post("/predict")

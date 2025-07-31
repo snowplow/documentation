@@ -5,7 +5,7 @@ position: 5.5
 
 The final requirement is to see the prospect scores and predictions in the browser, updated in near real time. TODO is it?
 
-You need an API endpoint that you can access from your local machine, or from JavaScript in the browser. This tutorial uses ngrok to proxy Colab's `localhost:8000` port behind an HTTPS URL. You already installed the Python ngrok library `pyngrok` in the last set of installs.
+You need an API endpoint that you can access from your local machine, or from JavaScript in the browser. This tutorial uses ngrok. You already installed the Python ngrok library `pyngrok` in the last set of installs.
 
 ## Set up proxy
 
@@ -29,15 +29,9 @@ Public URL: https://00ab-11-22-333-44.ngrok-free.app
 INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
 ```
 
-## Find your `domain_userid` for testing
-
-Go to your website, and use the [Snowplow Inspector](/docs/data-product-studio/data-quality/snowplow-inspector/) browser plugin to find your own `domain_userid` in outbound web events.
-
-![](./screenshots/get_domain_userid.png)
-
 ## Test with cURL
 
-Test the endpoint using `cURL`, passing in your `domain_userid`.
+Test the endpoint using `cURL`, passing in your `domain_userid` that you got earlier using the Snowplow Inspector.
 
 The URL is your ngrok API URL plus `/predict`, the endpoint address you defined earlier.
 

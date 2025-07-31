@@ -43,7 +43,7 @@ We're calculating aggregated attributes based off real-time stream event data, s
   * Snowplow API key
   * Snowplow API key ID
   * Snowplow organization ID
-* [ngrok](https://dashboard.ngrok.com/) account and Authtoken (API key)
+* [ngrok](https://dashboard.ngrok.com/) account and Authtoken API key
 * Snowplow events in Snowflake: if you are using a different warehouse, adjust the connection code
 * Google Colab
 

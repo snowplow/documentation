@@ -1,4 +1,4 @@
-# A competitive migration guide: From Segment to Snowplow
+# A competitive migration guide: From Segment to Snowplow Analytics
 
 This guide is for technical implementers considering a migration from Segment to Snowplow. This move represents a shift from a managed Customer Data Platform (CDP) to a more flexible, composable behavioral data platform which runs in your cloud environment.
 
@@ -18,41 +18,41 @@ This provides several advantages:
 
 ### A new approach to governance: Foundational data quality
 
-Segment and Snowplow approach data governance differently. Segment's Protocols feature validates data reactively, acting as a gatekeeper for incoming events. This is often a premium feature and, if not rigorously managed, can lead to inconsistent data requiring significant downstream cleaning. Furthermore, there is no separation between development and production environments, meaning no easy way to test changes before deploying them.
+Segment and Snowplow approach data governance differently. Segment's Protocols feature validates data reactively, acting as a gatekeeper for incoming events. This is a premium feature and, if not rigorously managed, can lead to inconsistent data requiring significant downstream cleaning.
 
 Snowplow enforces data quality proactively with mandatory, machine-readable **[schemas](https://docs.snowplow.io/docs/fundamentals/schemas/)** for every [event](https://docs.snowplow.io/docs/fundamentals/events/) and [entity](https://docs.snowplow.io/docs/fundamentals/entities/). [Events that fail validation](https://docs.snowplow.io/docs/fundamentals/failed-events/) are quarantined for inspection, ensuring only clean, consistent data lands in your warehouse. This "shift-left" approach moves the cost of data quality from a continuous operational expense to a one-time design investment.
 
 ### Unlock advanced analytics with greater granularity
 
-Segment is primarily a data router, excelling at sending event data to third-party tools. Snowplow is designed to create a rich, granular behavioral data asset. Segment's `track` events use a flat JSON `properties` object, limiting contextual depth. Snowplow's [event-entity model](https://docs.snowplow.io/docs/fundamentals/events/) allows a single event to be enriched with numerous contextual entities on the tracker and also in the pipeline, providing over 100 structured data points per event.
+Segment started out as a data router, excelling at sending event data to third-party tools. Snowplow is designed to create a rich, granular first-party behavioral data asset. Segment's `track` events use a flat JSON `properties` object, limiting contextual depth. Snowplow's [event-entity model](https://docs.snowplow.io/docs/fundamentals/events/) allows a single event to be enriched with numerous contextual entities on the tracker and also in the pipeline, providing over 100 structured data points per event.
 
 This rich, structured data is ideal for:
 
-- **Complex data modeling**: Snowplow provides [open-source dbt packages](https://docs.snowplow.io/docs/modeling-data/modeling-your-data/dbt/) to transform raw data into analysis-ready tables
+- **Complex data modeling**: Snowplow provides source-available dbt packages to transform raw data into analysis-ready tables
 - **AI and machine learning**: High-fidelity data is ideal for training ML models like recommendation engines or churn predictors
 - **Deep user behavior analysis**: Rich entities enable multi-faceted exploration of user journeys without complex data wrangling
 
 ### A predictable, infrastructure-based cost model
 
-Segment's pricing is based on Monthly Tracked Users (MTUs), which can become expensive and unpredictable as you scale. This model can penalize growth.
+Segment's entry-level pricing is based on Monthly Tracked Users (MTUs), which can become expensive and unpredictable as you scale. This model can penalize growth.
 
-Snowplow's costs are based on your cloud infrastructure usage (compute and storage from AWS or GCP), which is more predictable and cost-effective at scale. This model aligns cost directly with data processing volume, not user count, encouraging comprehensive data collection without financial penalty.
+Snowplow's costs are based on your cloud infrastructure usage (compute and storage from AWS or GCP) plus a license fee depending on event volume which is more predictable and cost-effective at scale. This model aligns cost directly with data processing volume, not user count, encouraging comprehensive data collection without financial penalty.
 
 | Feature | Segment | Snowplow |
 |---------|---------|----------|
 | **Deployment Model** | SaaS-only; data processed on Segment servers hosted by AWS | Private cloud; runs entirely in your AWS/GCP/Azure account |
-| **Data Ownership** | Data access in warehouse; vendor controls pipeline | True ownership of data and entire pipeline infrastructure |
+| **Data Ownership** | Data access in warehouse; vendor controls pipeline | Customer owns data and controls pipeline infrastructure |
 | **Governance Model** | Reactive; post-hoc validation with Protocols (a premium add-on) | Proactive; foundational schema validation for every event |
 | **Data Structure** | Flat events with properties, user traits and context objects | Rich events enriched by multiple, reusable entities |
-| **Primary Use Case** | Data routing to 3rd party marketing/analytics tools | Creating a foundational behavioral data asset for BI and AI |
-| **Pricing Model** | Based on Monthly Tracked Users (MTUs) and API calls | Based on your underlying cloud infrastructure costs |
+| **Primary Use Case** | Building a Customer Data Platform for routing to 3rd party marketing/analytics tools | Creating a foundational behavioral data asset for BI and AI |
+| **Pricing Model** | Based on Monthly Tracked Users (MTUs) or API calls | Based on event volume |
 | **Real-Time Capability** | Limited low-latency support and observability | Real-time streaming pipeline (e.g., via Kafka) supports use cases in seconds |
 
 ## Deconstructing the data model: From flat events to rich context
 
 To appreciate the strategic value of migrating to Snowplow, it is essential to understand the fundamental differences in how each platform approaches the modeling of behavioral data. This is not just a technical distinction; it is a difference in approach that has consequences for data quality, flexibility, and analytical power. Segment operates on a simple, action-centric model, while Snowplow introduces a more sophisticated, context-centric paradigm that more accurately reflects the complexity of the real world.
 
-### The Segment model: A review of track, identify, and the property-centric approach
+### The Segment model: A review of `track`, `identify`, and the property-centric approach
 
 Segment's data specification is designed for simplicity and ease of use. It is built around a handful of core API methods that capture the essential elements of user interaction. The most foundational of these is the `track` call, which is designed to answer the question, "What is the user doing?". Each `track` call records a single user action, known as an event, which has a human-readable name (e.g., `User Registered`) and an associated `properties` object. This object is a simple JSON containing key-value pairs that describe the action (e.g., `plan: 'pro'`, accountType: 'trial'`).
 
@@ -63,7 +63,7 @@ The other key methods in the Segment spec support this action-centric view:
 - **`group`**: Associates an individual user with a group, such as a company or organization
 - **`alias`**: Used to merge the identities of a user across different systems or states (e.g., anonymous to logged-in)
 
-This model forces the world into a verb-centric framework. The event—the action—is the primary object of interest. All other information, whether it describes the product involved, the user performing the action, or the page on which it occurred, is relegated to being a "property" or a "trait" attached to that action. While this approach is intuitive, it lacks a formal, structured way to define and reuse the *nouns* of the business—the users, products, content, and campaigns—as first-class, independent components of the data model itself. This architectural choice leads to data being defined and repeated within the context of each individual action, rather than as a set of interconnected, reusable concepts.
+This model forces the world into a verb-centric framework. The event—the action—is the primary object of interest. All other information, whether it describes the product involved, the user performing the action, or the page on which it occurred, is relegated to being a "property" or a "trait" attached to that action. While this approach is intuitive, it lacks a formal, structured way to define and reuse the *nouns* of the business—the users, products, content, and campaigns—as first-class, independent components of the data model itself. This architectural choice leads to data being defined and repeated within the context of each individual action, rather than as a set of interconnected, reusable concepts. It often requires a consolidation period down the line as downstream users struggle with data quality issues.
 
 ### The Snowplow approach: Understanding the event-entity distinction
 
@@ -71,7 +71,7 @@ Snowplow introduces a more nuanced and powerful paradigm that separates the *eve
 
 An **[event](https://docs.snowplow.io/docs/fundamentals/events/)** is an immutable record of something that happened. A **[self-describing event](https://docs.snowplow.io/docs/fundamentals/events/#self-describing-events)** in Snowplow is the equivalent of a Segment `track` call, capturing a specific action like `add_to_cart`.
 
-An **[entity](https://docs.snowplow.io/docs/fundamentals/entities/)**, however, is a reusable, self-describing JSON object that provides rich, structured context about the circumstances surrounding an event. This distinction is a key differentiator: Instead of adding properties like `product_sku`, `product_name`, and `product_price` to every single event related to a product, you define a single, reusable `product` entity. This one entity can then be attached to a multitude of different events throughout the customer journey:
+An **[entity](https://docs.snowplow.io/docs/fundamentals/entities/)**, however, is a reusable, self-describing JSON object that provides rich, structured context about the circumstances surrounding an event. This distinction is a key differentiator. Consider a retail example. Instead of adding properties like `product_sku`, `product_name`, and `product_price` to every single event related to a product, you define a single, reusable `product` entity. This one entity can then be attached to a multitude of different events throughout the customer journey:
 
 - `view_product`
 - `add_to_basket`
@@ -85,7 +85,7 @@ Furthermore, Snowplow comes with a rich set of [out-of-the-box entities](https:/
 
 ### The language of your business: Building composable data structures with self-describing schemas (data contracts)
 
-The technical foundation that makes the event-entity model possible is Snowplow's use of **self-describing schemas**. In the Segment world, developers often start by implementing events, and then data team then retrospectively classifies and governs them via Segment Protocols. While they do provide tracking plan capabilities, these are hard to find and optional.
+The technical foundation that makes the event-entity model possible is Snowplow's use of **self-describing schemas**. In the Segment world, developers often start by implementing events, and then the data team then retrospectively classifies and governs them via Segment Protocols. While they do provide tracking plan capabilities, these are hard to find or tied to enterprise-level onboarding.
 
 In the Snowplow ecosystem, the schema registry *is* the single source of truth. Every self-describing event and every custom entity is defined by a formal JSON Schema, which is stored and versioned in a schema registry called **[Iglu](https://docs.snowplow.io/docs/fundamentals/schemas/#iglu)**. Each schema is a machine-readable contract that specifies:
 
@@ -105,10 +105,10 @@ For an analyst, this means that to get a complete picture of an `add_to_cart` ev
 
 | Segment Concept | Segment Example | Snowplow Equivalent | Snowplow Implementation Detail |
 |-----------------|-----------------|---------------------|--------------------------------|
-| **Core Action** | `track('Order Completed', {revenue: 99.99, currency: 'USD'})` | **Self-describing event** | `trackSelfDescribingEvent` with a custom `order_completed` schema containing `revenue` (number) and `currency` (string) properties |
-| **User Identification** | `identify('user123', {plan: 'pro', created_at: '...'})` | **User entity and `setUserId`** | A call to `setUserId('user123')` to populate the atomic `user_id` field, plus attaching a custom `user` entity with a schema containing properties like `plan` and `created_at` |
-| **Page/Screen Context** | `page('Pricing', {category: 'Products'})` | **`trackPageView` and `web_page` entity** | A `trackPageView` call with a `title` of 'Pricing'. This automatically attaches the standard `web_page` entity. The `category` would be a custom property added to a custom `web_page` context or a separate content entity |
-| **Reusable Properties** | `properties.product_sku` in multiple `track` calls | **Dedicated `product` entity** | A single, reusable `product` entity schema is defined with a `sku` property. This entity is then attached as context to all relevant events (`product_viewed`, `add_to_cart`, etc.) |
+| **Core Action** | `track('Order Completed', {revenue: 99.99, currency: 'USD'})` | **Self-Describing Event** | `trackSelfDescribingEvent` with a custom `order_completed` schema containing `revenue` (number) and `currency` (string) properties. |
+| **User Identification** | `identify('user123', {plan: 'pro', created_at: '...'})` | **User Entity & `setUserId`** | A call to `setUserId('user123')` to populate the atomic `user_id` field, plus attaching a custom `user` entity with a schema containing properties like `plan` and `created_at`. |
+| **Page/Screen Context** | `page('Pricing', {category: 'Products'})` | **`trackPageView` & `web_page` Entity** | A `trackPageView` call with a `title` of 'Pricing'. This automatically attaches the standard `web_page` entity. The `category` would be a custom property added to a custom `web_page` context or a separate content entity. |
+| **Reusable Properties** | `properties.product_sku` in multiple `track` calls | **Dedicated `product` Entity** | A single, reusable `product` entity schema is defined with a `sku` property. This entity is then attached as context to all relevant events (`product_viewed`, `add_to_cart`, etc.). |
 
 ## Architecting your migration: A phased framework
 
@@ -178,7 +178,7 @@ The [Snowplow CLI](https://docs.snowplow.io/docs/data-product-studio/snowplow-cl
 
 With a robust and well-designed tracking plan published to your Iglu registry, the next step is to update your application code to send events to Snowplow. While the specific code will vary by language and platform, the core concepts are consistent. We recommend using [Snowtype](https://docs.snowplow.io/docs/data-product-studio/snowtype/), our Code Generation tool, to automatically generate type-safe tracking code.
 
-#### Migrate client-side tracking: From analytics.js to the Snowplow Browser Tracker
+#### Migrate client-side tracking: From `analytics.js` to the Snowplow Browser Tracker
 
 The [Snowplow JavaScript/Browser tracker](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/) introduces a more modern and readable API. The most significant change from Segment's `analytics.js` is the move from function calls with long, ordered parameter lists to calls that accept a single object with named arguments.
 
@@ -205,7 +205,7 @@ The final step is to rigorously validate the new implementation and manage the c
 
 #### Local validation with Snowplow Micro
 
-To empower developers and "shift-left" on data quality, customers should incorporate **[Snowplow Micro](https://docs.snowplow.io/docs/testing-debugging/snowplow-micro/)**. Micro is a complete Snowplow pipeline packaged into a single Docker container that can be run on a developer's local machine. Before committing any new tracking code, a developer can point their application's tracker to their local Micro instance. They can then interact with the application and see the events they generate appear in the Micro UI in real-time. Micro performs the same validation against the Iglu registry as the production pipeline, allowing developers to instantly confirm that their events are well-formed and pass schema validation. This catches errors early, reduces the feedback loop from hours to seconds, and prevents bad data from ever reaching the production pipeline.
+To empower developers and "shift-left" on data quality, customers should incorporate **[Snowplow Micro](https://docs.snowplow.io/docs/testing-debugging/snowplow-micro/)**. Micro is a partial Snowplow pipeline packaged into a single Docker container that can be run on a developer's local machine. Before committing any new tracking code, a developer can point their application's tracker to their local Micro instance. They can then interact with the application and see the events they generate appear in the Micro UI in real-time. Micro performs the same validation against the Iglu registry as the production pipeline, allowing developers to instantly confirm that their events are well-formed and pass schema validation. This catches errors early, reduces the feedback loop from hours to seconds, and prevents bad data from ever reaching the production pipeline.
 
 #### End-to-end data reconciliation strategies
 

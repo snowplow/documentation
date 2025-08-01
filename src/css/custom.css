@@ -322,7 +322,6 @@ aside.theme-doc-sidebar-container {
 .theme-doc-sidebar-item-link-level-1, .theme-doc-sidebar-item-category-level-1 {
   font-weight: 500;
   color: hsl(var(--foreground));
-  font-size: .875rem;
 }
 
 .theme-doc-sidebar-item-category-level-2,
@@ -332,7 +331,6 @@ aside.theme-doc-sidebar-container {
 .theme-doc-sidebar-item-link-level-3,
 .theme-doc-sidebar-item-link-level-4 {
   font-weight: 340;
-  font-size: .875rem;
   line-height: 20px;
   color: hsl(var(--foreground));
 }
@@ -422,7 +420,7 @@ aside.theme-doc-sidebar-container {
     color: hsl(var(--muted-foreground));
     flex: 1;
     line-height: 1.4286;
-    font-size: .875rem;
+    font-size: .93825rem;
     padding: var(--ifm-menu-link-padding-vertical)
       var(--ifm-menu-link-padding-horizontal);
   }

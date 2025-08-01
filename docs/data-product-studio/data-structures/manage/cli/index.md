@@ -42,6 +42,12 @@ This command will retrieve all organization data structures. By default it will 
 
 Given a data structure with `vendor: com.acme` and `name: link_click` and assuming the default format of yaml the resulting folder structure will be `./data-structures/com.acme/link_click.yaml`.
 
+:::note Drafts not included
+
+The CLI download command only retrieves data structures that have been deployed to at least the development environment. **Draft data structures** that haven't been deployed yet will not be included in the download.
+
+:::
+
 
 ### Validating data structures
 

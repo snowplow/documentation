@@ -1,6 +1,6 @@
 ---
 title: Command reference
-date: 2025-06-25
+date: 2025-07-23
 sidebar_position: 1
 ---
 
@@ -31,15 +31,20 @@ Work with Snowplow data products
 ### Options inherited from parent commands
 
 ```
-      --config string   Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
-                        Then on:
-                          Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
-                          Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
-                          Windows %AppData%\snowplow\snowplow.yml
-      --debug           Log output level to Debug
-      --json-output     Log output as json
-  -q, --quiet           Log output level to Warn
-  -s, --silent          Disable output
+      --config string     Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
+                          Then on:
+                            Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
+                            Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
+                            Windows %AppData%\snowplow\snowplow.yml
+      --debug             Log output level to Debug
+      --env-file string   Environment file (.env). Defaults to .env in current directory
+                          Then on:
+                            Unix $HOME/.config/snowplow/.env
+                            Darwin $HOME/Library/Application Support/snowplow/.env
+                            Windows %AppData%\snowplow\.env
+      --json-output       Log output as json
+  -q, --quiet             Log output level to Warn
+  -s, --silent            Disable output
 ```
 
 
@@ -85,6 +90,11 @@ snowplow-cli data-products add-event-spec {path} [flags]
                                 Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
                                 Windows %AppData%\snowplow\snowplow.yml
       --debug                 Log output level to Debug
+      --env-file string       Environment file (.env). Defaults to .env in current directory
+                              Then on:
+                                Unix $HOME/.config/snowplow/.env
+                                Darwin $HOME/Library/Application Support/snowplow/.env
+                                Windows %AppData%\snowplow\.env
   -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
       --json-output           Log output as json
   -m, --managed-from string   Link to a github repo where the data structure is managed
@@ -136,6 +146,11 @@ snowplow-cli data-products download {directory ./data-products} [flags]
                                 Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
                                 Windows %AppData%\snowplow\snowplow.yml
       --debug                 Log output level to Debug
+      --env-file string       Environment file (.env). Defaults to .env in current directory
+                              Then on:
+                                Unix $HOME/.config/snowplow/.env
+                                Darwin $HOME/Library/Application Support/snowplow/.env
+                                Windows %AppData%\snowplow\.env
   -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
       --json-output           Log output as json
   -m, --managed-from string   Link to a github repo where the data structure is managed
@@ -196,6 +211,11 @@ snowplow-cli data-products generate [paths...] [flags]
                                 Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
                                 Windows %AppData%\snowplow\snowplow.yml
       --debug                 Log output level to Debug
+      --env-file string       Environment file (.env). Defaults to .env in current directory
+                              Then on:
+                                Unix $HOME/.config/snowplow/.env
+                                Darwin $HOME/Library/Application Support/snowplow/.env
+                                Windows %AppData%\snowplow\.env
   -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
       --json-output           Log output as json
   -m, --managed-from string   Link to a github repo where the data structure is managed
@@ -248,6 +268,11 @@ snowplow-cli data-products publish {directory ./data-products} [flags]
                                 Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
                                 Windows %AppData%\snowplow\snowplow.yml
       --debug                 Log output level to Debug
+      --env-file string       Environment file (.env). Defaults to .env in current directory
+                              Then on:
+                                Unix $HOME/.config/snowplow/.env
+                                Darwin $HOME/Library/Application Support/snowplow/.env
+                                Windows %AppData%\snowplow\.env
   -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
       --json-output           Log output as json
   -m, --managed-from string   Link to a github repo where the data structure is managed
@@ -298,6 +323,11 @@ snowplow-cli data-products purge {directory ./data-products} [flags]
                                 Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
                                 Windows %AppData%\snowplow\snowplow.yml
       --debug                 Log output level to Debug
+      --env-file string       Environment file (.env). Defaults to .env in current directory
+                              Then on:
+                                Unix $HOME/.config/snowplow/.env
+                                Darwin $HOME/Library/Application Support/snowplow/.env
+                                Windows %AppData%\snowplow\.env
   -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
       --json-output           Log output as json
   -m, --managed-from string   Link to a github repo where the data structure is managed
@@ -348,6 +378,11 @@ snowplow-cli data-products validate [paths...] [flags]
                                 Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
                                 Windows %AppData%\snowplow\snowplow.yml
       --debug                 Log output level to Debug
+      --env-file string       Environment file (.env). Defaults to .env in current directory
+                              Then on:
+                                Unix $HOME/.config/snowplow/.env
+                                Darwin $HOME/Library/Application Support/snowplow/.env
+                                Windows %AppData%\snowplow\.env
   -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
       --json-output           Log output as json
   -m, --managed-from string   Link to a github repo where the data structure is managed
@@ -385,15 +420,20 @@ Work with Snowplow data structures
 ### Options inherited from parent commands
 
 ```
-      --config string   Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
-                        Then on:
-                          Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
-                          Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
-                          Windows %AppData%\snowplow\snowplow.yml
-      --debug           Log output level to Debug
-      --json-output     Log output as json
-  -q, --quiet           Log output level to Warn
-  -s, --silent          Disable output
+      --config string     Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
+                          Then on:
+                            Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
+                            Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
+                            Windows %AppData%\snowplow\snowplow.yml
+      --debug             Log output level to Debug
+      --env-file string   Environment file (.env). Defaults to .env in current directory
+                          Then on:
+                            Unix $HOME/.config/snowplow/.env
+                            Darwin $HOME/Library/Application Support/snowplow/.env
+                            Windows %AppData%\snowplow\.env
+      --json-output       Log output as json
+  -q, --quiet             Log output level to Warn
+  -s, --silent            Disable output
 ```
 
 
@@ -453,6 +493,11 @@ snowplow-cli data-structures download {directory ./data-structures} [flags]
                                 Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
                                 Windows %AppData%\snowplow\snowplow.yml
       --debug                 Log output level to Debug
+      --env-file string       Environment file (.env). Defaults to .env in current directory
+                              Then on:
+                                Unix $HOME/.config/snowplow/.env
+                                Darwin $HOME/Library/Application Support/snowplow/.env
+                                Windows %AppData%\snowplow\.env
   -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
       --json-output           Log output as json
   -m, --managed-from string   Link to a github repo where the data structure is managed
@@ -515,6 +560,11 @@ snowplow-cli data-structures generate login_click {directory ./data-structures} 
                                 Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
                                 Windows %AppData%\snowplow\snowplow.yml
       --debug                 Log output level to Debug
+      --env-file string       Environment file (.env). Defaults to .env in current directory
+                              Then on:
+                                Unix $HOME/.config/snowplow/.env
+                                Darwin $HOME/Library/Application Support/snowplow/.env
+                                Windows %AppData%\snowplow\.env
   -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
       --json-output           Log output as json
   -m, --managed-from string   Link to a github repo where the data structure is managed
@@ -554,6 +604,11 @@ Publish local data structures to BDP console.
                                 Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
                                 Windows %AppData%\snowplow\snowplow.yml
       --debug                 Log output level to Debug
+      --env-file string       Environment file (.env). Defaults to .env in current directory
+                              Then on:
+                                Unix $HOME/.config/snowplow/.env
+                                Darwin $HOME/Library/Application Support/snowplow/.env
+                                Windows %AppData%\snowplow\.env
   -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
       --json-output           Log output as json
   -m, --managed-from string   Link to a github repo where the data structure is managed
@@ -608,6 +663,11 @@ snowplow-cli data-structures publish dev [paths...] default: [./data-structures]
                                 Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
                                 Windows %AppData%\snowplow\snowplow.yml
       --debug                 Log output level to Debug
+      --env-file string       Environment file (.env). Defaults to .env in current directory
+                              Then on:
+                                Unix $HOME/.config/snowplow/.env
+                                Darwin $HOME/Library/Application Support/snowplow/.env
+                                Windows %AppData%\snowplow\.env
   -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
       --json-output           Log output as json
   -m, --managed-from string   Link to a github repo where the data structure is managed
@@ -663,6 +723,11 @@ snowplow-cli data-structures publish prod [paths...] default: [./data-structures
                                 Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
                                 Windows %AppData%\snowplow\snowplow.yml
       --debug                 Log output level to Debug
+      --env-file string       Environment file (.env). Defaults to .env in current directory
+                              Then on:
+                                Unix $HOME/.config/snowplow/.env
+                                Darwin $HOME/Library/Application Support/snowplow/.env
+                                Windows %AppData%\snowplow\.env
   -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
       --json-output           Log output as json
   -m, --managed-from string   Link to a github repo where the data structure is managed
@@ -711,6 +776,11 @@ snowplow-cli data-structures validate [paths...] default: [./data-structures] [f
                                 Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
                                 Windows %AppData%\snowplow\snowplow.yml
       --debug                 Log output level to Debug
+      --env-file string       Environment file (.env). Defaults to .env in current directory
+                              Then on:
+                                Unix $HOME/.config/snowplow/.env
+                                Darwin $HOME/Library/Application Support/snowplow/.env
+                                Windows %AppData%\snowplow\.env
   -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
       --json-output           Log output as json
   -m, --managed-from string   Link to a github repo where the data structure is managed
@@ -798,15 +868,127 @@ Setup options:
 ### Options inherited from parent commands
 
 ```
-      --config string   Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
-                        Then on:
-                          Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
-                          Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
-                          Windows %AppData%\snowplow\snowplow.yml
-      --debug           Log output level to Debug
-      --json-output     Log output as json
-  -q, --quiet           Log output level to Warn
-  -s, --silent          Disable output
+      --config string     Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
+                          Then on:
+                            Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
+                            Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
+                            Windows %AppData%\snowplow\snowplow.yml
+      --debug             Log output level to Debug
+      --env-file string   Environment file (.env). Defaults to .env in current directory
+                          Then on:
+                            Unix $HOME/.config/snowplow/.env
+                            Darwin $HOME/Library/Application Support/snowplow/.env
+                            Windows %AppData%\snowplow\.env
+      --json-output       Log output as json
+  -q, --quiet             Log output level to Warn
+  -s, --silent            Disable output
+```
+
+
+
+## Setup
+
+
+Set up Snowplow CLI with device authentication
+
+### Synopsis
+
+Authenticate with Snowplow Console using device authentication flow and create an API key
+
+```
+snowplow-cli setup [flags]
+```
+
+### Examples
+
+```
+  $ snowplow-cli setup
+  $ snowplow-cli setup --read-only
+```
+
+### Options
+
+```
+  -S, --api-key string        BDP console api key
+  -a, --api-key-id string     BDP console api key id
+      --auth0-domain string   Auth0 domain (default "id.snowplowanalytics.com")
+      --client-id string      Auth0 Client ID for device auth (default "EXQ3csSDr6D7wTIiebNPhXpgkSsOzCzi")
+      --dotenv                Store as .env file in current working directory
+  -h, --help                  help for setup
+  -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
+  -m, --managed-from string   Link to a github repo where the data structure is managed
+  -o, --org-id string         Your organization id
+      --read-only             Create a read-only API key
+```
+
+### Options inherited from parent commands
+
+```
+      --config string     Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
+                          Then on:
+                            Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
+                            Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
+                            Windows %AppData%\snowplow\snowplow.yml
+      --debug             Log output level to Debug
+      --env-file string   Environment file (.env). Defaults to .env in current directory
+                          Then on:
+                            Unix $HOME/.config/snowplow/.env
+                            Darwin $HOME/Library/Application Support/snowplow/.env
+                            Windows %AppData%\snowplow\.env
+      --json-output       Log output as json
+  -q, --quiet             Log output level to Warn
+  -s, --silent            Disable output
+```
+
+
+
+## Status
+
+
+Check Snowplow CLI configuration and connectivity
+
+### Synopsis
+
+Verify that the CLI is properly configured and can connect to Snowplow Console
+
+```
+snowplow-cli status [flags]
+```
+
+### Examples
+
+```
+  $ snowplow-cli status
+```
+
+### Options
+
+```
+  -S, --api-key string        BDP console api key
+  -a, --api-key-id string     BDP console api key id
+  -h, --help                  help for status
+  -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
+  -m, --managed-from string   Link to a github repo where the data structure is managed
+  -o, --org-id string         Your organization id
+```
+
+### Options inherited from parent commands
+
+```
+      --config string     Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
+                          Then on:
+                            Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
+                            Darwin $HOME/Library/Application Support/snowplow/snowplow.yml
+                            Windows %AppData%\snowplow\snowplow.yml
+      --debug             Log output level to Debug
+      --env-file string   Environment file (.env). Defaults to .env in current directory
+                          Then on:
+                            Unix $HOME/.config/snowplow/.env
+                            Darwin $HOME/Library/Application Support/snowplow/.env
+                            Windows %AppData%\snowplow\.env
+      --json-output       Log output as json
+  -q, --quiet             Log output level to Warn
+  -s, --silent            Disable output
 ```
 
 

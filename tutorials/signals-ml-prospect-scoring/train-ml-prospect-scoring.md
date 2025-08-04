@@ -9,7 +9,7 @@ We want to score the combination of these attributes using an ML model to better
 
 Here's the prediction structure and timeline:
 
-![](./screenshots/prediction-structure.png)
+![](./images/prediction-structure.png)
 
 The next task is to prepare historical data resembling the same Signals features, and train an XGBoost model on top.
 
@@ -301,4 +301,4 @@ joblib.dump(model, "xgb_model.joblib")
 
 Follow along in the notebook to evaluate your model's performance.
 
-![](./screenshots/model_evaluate.png)
+![](./images/model_evaluate.png)

@@ -12,7 +12,7 @@ What you achieved:
 
 This tutorial is a starting point for exploring and using Signals APIs for your own needs and use cases.
 
-![](./screenshots/console_output.png)
+![](./images/console_output.png)
 
 ## Next steps
 

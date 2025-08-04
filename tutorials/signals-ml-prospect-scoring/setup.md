@@ -9,7 +9,7 @@ Start by configuring your credentials in the notebook.
 
 Add secrets like this:
 
-![](./screenshots/colab_credentials.jpeg)
+![](./images/colab_credentials.jpeg)
 
 
 Here's a list of all the credentials you may need to configure, saved as variables:

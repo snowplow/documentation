@@ -318,7 +318,7 @@ sp_signals_test
 
 The result should look similar to this:
 
-![](./screenshots/signals_test_output.png)
+![](./images/signals_test_output.png)
 
 ## Define a service
 
@@ -360,7 +360,7 @@ Signals will start populating your Profiles Store with attributes calculated fro
 
 Go to your website, and use the [Snowplow Inspector](/docs/data-product-studio/data-quality/snowplow-inspector/) browser plugin to find your own `domain_userid` in outbound web events.
 
-![](./screenshots/get_domain_userid.png)
+![](./images/get_domain_userid.png)
 
 Use your `domain_userid` to retrieve the attributes that Signals has calculated just now from your real-time event stream.
 

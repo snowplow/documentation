@@ -9,13 +9,11 @@ Choose where to store your Signals configurations. We recommend creating a new r
 
 The easiest way to use the Python SDK is within a Jupyter notebook.
 
-Create a new notebook in your repo. Add this code:
+Create a new notebook in your repo. Run this code:
 
-```bash
-pip install snowplow-signals
+```python
+%pip install snowplow-signals
 ```
-
-Run this cell to install the SDK.
 
 ## Connect to Signals
 

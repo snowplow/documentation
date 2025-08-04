@@ -158,6 +158,6 @@ Every 10 seconds it will print out the prediction score that you'll convert, as 
 
 Adjust the timing interval to call the endpoint APIs as often as needed in your use case.
 
-![](./screenshots/console_output.png)
+![](./images/console_output.png)
 
 In a real use case, you'd be able to take actions based on these scores and predictions.

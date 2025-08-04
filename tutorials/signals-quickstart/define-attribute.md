@@ -3,7 +3,7 @@ position: 3
 title: Define and group attributes
 ---
 
-An `Attribute` describes a specific fact about user behavior. They're grouped into `View`s for management and deployment.
+An `Attribute` describes a specific fact about user behavior. They're grouped into views for management and deployment.
 
 ## Define attributes
 
@@ -33,7 +33,7 @@ page_view_count = Attribute(
 )
 ```
 
-Note that there's an 100 event limit for time-windowed [event processing in stream](/docs/signals/configuration/stream-calculations).
+Note that there's a limit on how many events can be considered for time-windowed [event processing in stream](/docs/signals/configuration/stream-calculations).
 
 ### Most recent browser
 
@@ -106,9 +106,9 @@ Single attribute definitions can't be deployed to Signals, as they don't make se
 Group the attributes together, adding the session entity identifier `domain_sessionid`.
 
 ```python
-from snowplow_signals import View, domain_sessionid
+from snowplow_signals import StreamView, domain_sessionid
 
-my_view = View(
+my_view = StreamView(
     name="my_attribute_view",
     version=1,
     entity=domain_sessionid,

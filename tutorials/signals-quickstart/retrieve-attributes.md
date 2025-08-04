@@ -14,16 +14,16 @@ Unlike when testing views, which returns multiple random entities, when retrievi
 Pass in the name of the view, and the specific entity identifiers of interest. This example shows a `domain_sessionid` taken from the earlier test results table:
 
 ```python
-# Option 1 (if you have the View instance):
+# Option 1 (if you have the View instance)
 response = my_attribute_view.get_attributes(
     signals=sp_signals,
-    identifier="abc-123",
+    identifier="d99f6db1-7b28-46ca-a3ef-f0aace99ed86",
 )
-# Option 2 (if you don't have the View instance):
+# Option 2 (if you don't have the View instance)
 response = sp_signals.get_view_attributes(
     name="my_view",
     version=1,
-    attributes=["page_view_count", "products_added_to_cart"]
+    attributes=["page_view_count", "most_recent_browser", "first_referrer"],
     entity="domain_sessionid",
     identifiers=["d99f6db1-7b28-46ca-a3ef-f0aace99ed86"]
 )
@@ -40,6 +40,6 @@ To test this out, use the [Snowplow Inspector](/docs/data-product-studio/data-qu
 
 Use this identifier to retrieve the attributes that Signals has just calculated about your session.
 
-|     | `domain_sessionid`                     | `page_view_count` | `most_recent_browser` | `first_referrer_path` |
-| --- | -------------------------------------- | ----------------- | --------------------- | --------------------- |
-| 0   | `d99f6db1-7b28-46ca-a3ef-f0aace99ed86` | 2.0               | `Firefox`             | `snowplow.io`         |
+|     | `domain_sessionid`                     | `page_view_count` | `most_recent_browser` | `first_referrer` |
+| --- | -------------------------------------- | ----------------- | --------------------- | ---------------- |
+| 0   | `472f97c1-eec1-45fe-b081-3ff695c30415` | 2.0               | `Firefox`             | `snowplow.io`    |

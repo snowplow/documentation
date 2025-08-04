@@ -1,3 +1,9 @@
+---
+title: "Segment to Snowplow Migration Guide"
+date: "2025-08-04"
+sidebar_position: 0
+---
+
 # A competitive migration guide: From Segment to Snowplow Analytics
 
 This guide is for technical implementers considering a migration from Segment to Snowplow. This move represents a shift from a managed Customer Data Platform (CDP) to a more flexible, composable behavioral data platform which runs in your cloud environment.

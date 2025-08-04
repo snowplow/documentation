@@ -9,7 +9,7 @@ Snowplow Signals is a real-time personalization engine for customer intelligence
 
 The Signals batch engine is a CLI tool to help with historical data analysis. It isn't required to use Signals: it's only necessary if you want to:
 * Analyze historical data, rather than in real time
-* Calculate attributes for Snowplow events in your warehouse
+* Calculate attributes from Snowplow events in your warehouse
 
 The batch engine helps by:
 * Generating separate dbt projects for each batch view definition
@@ -34,6 +34,6 @@ This tutorial assumes that you have:
   * Snowplow API key
   * Snowplow API key ID
   * Snowplow organization ID
-* BatchView/ExternalBatchView(s) definitions already applied to Signals
+* BatchView definitions already applied to Signals
 
 Check out the [Signals configuration](/docs/signals/configuration) documentation to find out how to generate these credentials, and how to apply attribute configurations.

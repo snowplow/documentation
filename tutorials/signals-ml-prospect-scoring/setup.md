@@ -38,6 +38,4 @@ ENV_NGROK_TOKEN = userdata.get('NGROK_TOKEN')
 
 Adjust these to suit your warehouse authentication methods.
 
-Once you've added the secrets, run the whole notebook by selecting `Runtime > Run all`, or run each cell individually.
-
-![](./screenshots/runtime_run_all.png)
+Once you've added the secrets, start working through the tutorial. If you prefer to run the cells in one go with Run all, update your details in the required places first - they're marked with `UPDATE THIS`.

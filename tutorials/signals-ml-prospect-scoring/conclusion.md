@@ -19,4 +19,4 @@ This tutorial is a starting point for exploring and using Signals APIs for your 
 Here are some ideas for further exploration:
 * Define more Signals attributes that are specific for your use cases and tracking
 * Act on the prospect scores and predictions in your application
-* Use attributes to trigger actions and decisions without modeling
+* Use attributes to trigger actions and decisions without the ML step

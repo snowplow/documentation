@@ -39,3 +39,4 @@ export SNOWPLOW_API_KEY_ID="YOUR_API_KEY_ID"
 export SNOWPLOW_ORG_ID="YOUR_ORG_ID"
 export SNOWPLOW_REPO_PATH="./my_snowplow_repo" # Path to the repo where you want to generate projects
 ```
+TODO these should have the same name as in the other tutorials

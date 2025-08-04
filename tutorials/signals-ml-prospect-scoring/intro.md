@@ -47,17 +47,17 @@ We're calculating aggregated attributes based off real-time stream event data, s
 * Snowplow events in Snowflake: if you are using a different warehouse, adjust the connection code
 * Google Colab
 
-Check out the [Signals configuration](/docs/signals/configuration) documentation to find out how to generate the Signals credentials.
+Check out the [Signals configuration](/docs/signals/configuration) documentation to find out how to get the Signals credentials.
 
 ## Architecture
 
-This tutorial uses this end-to-end [Python notebook](https://colab.research.google.com/github/snowplow-incubator/signals-notebooks/blob/main/web/web_prospect_scoring_end_to_end.ipynb).
+This tutorial uses this [Jupyter notebook](https://colab.research.google.com/github/snowplow-incubator/signals-notebooks/blob/main/web/web_prospect_scoring_end_to_end.ipynb).
 
-The system consists of three main blocks. You'll build the third block in this tutorial:
+The system consists of three main blocks:
 
 1. **Your marketing website**: as users browse the website, Snowplow events are sent to the Snowplow Collector
-2. **Snowplow Infrastructure**: the Collector captures the events, and Signals calculates aggregated user attributes in near real-time e.g., `num_pageviews, num_sessions`, etc.
-3. **Intermediary `/predict` API**:  an APIthat calls the Signals API to get the latest attributes, runs an ML model on the Signals output, and sends the response back to the marketing website
+2. **Snowplow Infrastructure**: the Collector captures the events, and Signals calculates aggregated user attributes in near real time e.g., `num_pageviews`, `num_sessions`
+3. **Intermediary `/predict` API**:  an API that calls the Signals API to get the latest attributes, runs an ML model on the Signals output, and sends the response back
 
 ![](./screenshots/solution_overview.png)
 

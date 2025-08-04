@@ -1,5 +1,5 @@
 ---
-title: Train ML prospect scoring model
+title: Train the ML prospect scoring model
 position: 4
 ---
 
@@ -130,13 +130,13 @@ query = f"""
 :::note
 This query defines the target column based on `submit_form` events. If you're not tracking those events, the retrieved data won't work with the model - the target values will all be `False`. You'll get a `ValueError` when you try to train the model if this is the case.
 
-If so, define a different target that exists in your database and represents meaningful user behavior. For example, for a simple substitution, you could try multiple page views:
+If so, define a different target that exists in your database and represents meaningful user behavior. For a less meaningful but simple substitution for this tutorial, you could try multiple page views:
 
 ```sql
 -- In targets_as_of_event, replace this line
 count_if(ef.event_name = 'submit_form') > 0 as target_had_submit_form_next1h,
 
--- With
+-- With this one
 count_if(ef.event_name = 'page_view') > 2 as target_had_multiple_pageviews_next1h,
 ```
 
@@ -149,16 +149,6 @@ Connect to your database to run the query and retrieve data into a pandas DataFr
 ```python
 import snowflake.connector
 import pandas as pd
-import joblib
-from sklearn.pipeline import Pipeline
-from sklearn.compose import ColumnTransformer
-from sklearn.preprocessing import OneHotEncoder, StandardScaler
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score, f1_score, roc_auc_score, log_loss, ConfusionMatrixDisplay, roc_curve, classification_report
-import xgboost as xgb
-import matplotlib.pyplot as plt
-import seaborn as sns
-import shap
 
 import warnings
 warnings.filterwarnings('ignore')
@@ -223,7 +213,17 @@ Key steps in the ML journey are:
     * Optionally, use SHAP to get prediction explanations
 
 ```python
-# preprocessing
+import joblib
+from sklearn.pipeline import Pipeline
+from sklearn.compose import ColumnTransformer
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+from sklearn.model_selection import train_test_split
+from sklearn.metrics import accuracy_score, f1_score, roc_auc_score, log_loss, ConfusionMatrixDisplay, roc_curve, classification_report
+import xgboost as xgb
+import matplotlib.pyplot as plt
+import shap
+
+# Preprocessing
 x_columns = [
     'latest_app_id',
     'day_of_week',
@@ -284,6 +284,10 @@ model = Pipeline(steps=[
 X = db_df[x_columns]
 y = db_df[y_column]
 X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=seed, stratify=y)
+
+# Check if y_train contains both positive/negative classes
+if len(set(y_train)) < 2:
+    raise ValueError("Training labels (y_train) have to contain both 'True/False' classes for classification. Adjust your SQL above to provide both classes in the target column `target_had_submit_form_next1h`.")
 
 model.fit(X_train, y_train)
 y_pred = model.predict(X_test)

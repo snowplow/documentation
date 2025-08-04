@@ -1,5 +1,5 @@
 ---
-title: Create API endpoint
+title: Create intermediary API endpoint
 position: 5
 ---
 
@@ -14,21 +14,24 @@ This tutorial uses FastAPI for the endpoint, and ngrok to expose it outside of t
 
 ## Install dependencies
 
-Run `pip install fastapi nest-asyncio pyngrok uvicorn` to install the required libraries.
+Run `pip install fastapi nest-asyncio uvicorn` to install the required libraries.
 
 ## Define methods and variables
 
 Start by loading your model, and defining the methods needed to retrieve and process your Signals data.
 
 ```python
-TODO imports
+import joblib
+import pandas as pd
+from collections import defaultdict
+from pydantic import BaseModel
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+import datetime
 
 # Load model
 model = joblib.load("xgb_model.joblib")
 explainer = joblib.load("shap_explainer.joblib") # shap.Explainer(model.named_steps['classifier'])
-
-# Retrieve attributes from Signals
-sp_view = sp_signals.get_view("prospect_scoring")
 
 # Input schema
 class InputData(BaseModel):
@@ -47,9 +50,11 @@ app.add_middleware(
 
 # Process the Signals data for individual domain_userids
 def get_duid_values(duid: str):
-    response = sp_view.get_attributes(
-        signals=sp_signals,
-        identifier=duid
+    # Retrieve attributes from Signals
+    response = sp_signals.get_service_attributes(
+        name="prospect_scoring_tutorial_service",
+        entity="domain_userid",
+        identifier=duid,
     )
     df = pd.DataFrame([response])
 
@@ -133,19 +138,7 @@ def predict(data: InputData):
 
 This `/predict` endpoint does four things:
 
-1. Receives `domain_userid`
-2. Calls the Signals API to get the latest attribute values using `sp_signals.get_online_attributes(...)` API TODO
+1. Receives a `domain_userid`
+2. Calls the Signals API to get the current attribute values, using the `prospect_scoring_tutorial_service` service
 3. Scores the attribute values using the ML model
 4. Returns Signals attributes, a ML prediction score, and ML prediction explanations
-
-For example, in order to get live Signals Attributes for a `domain_userid` one can use this Signals API: TODO
-
-```python
-def get_duid_values(duid: str):
-    response = sp_signals.get_online_attributes(
-        sp_view,
-        duid
-    )
-    df = response.to_dataframe()
-    ...
-```

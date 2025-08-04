@@ -27,7 +27,9 @@ Since the attributes will be calculated in stream, those with a defined `period`
 | `first_mkt_medium_l30d`      | First `utm_medium` in the last 30 days                                                          | string | `first`        |
 | `num_engaged_campaigns_l30d` | Number of distinct engaged `utm_campaign`s in the last 30 days                                  | int    | `unique_list`* |
 
-*Signals doesn't have a "count distinct" aggregation. For "count distinct" features like `num_sessions_l7d` or `num_engaged_campaigns_l30d`, we'll use Signal's `unique_list` aggregation, and count the number of distinct elements later, in the intermediary API.
+:::note Count distinct
+Signals doesn't have a "count distinct" aggregation. For "count distinct" features like `num_sessions_l7d` or `num_engaged_campaigns_l30d`, we'll use Signal's `unique_list` aggregation, and count the number of distinct elements later, in the intermediary API.
+:::
 
 With the exception of `num_media_events_l30d`, the attributes will be based on standard Snowplow web events such as `page_view`, `page_ping`, or `submit_form`. If you aren't tracking Snowplow media events, the `num_media_events_l30d` attribute value will just stay at 0.
 
@@ -41,11 +43,10 @@ Let's prepare the imports and useful variables. We'll reuse the variables multip
 
 ```python
 # Imports
-from snowplow_signals import Attribute, Criteria, Criterion, Event, StreamView, domain_userid
+from snowplow_signals import Event
 from datetime import timedelta
 
-# Define standard events and reusable time deltas
-
+# Standard Snowplow events
 sp_page_view = Event(
     vendor="com.snowplowanalytics.snowplow",
     name="page_view",
@@ -77,6 +78,7 @@ sp_media_events = Event(
     vendor="com.snowplowanalytics.snowplow.media"
 )
 
+# Reusable time periods
 l7d=timedelta(days=7)
 l30d=timedelta(days=30)
 ```
@@ -85,9 +87,9 @@ l30d=timedelta(days=30)
 
 Next, define the attributes to calculate.
 
-TODO time window
-
 ```python
+from snowplow_signals import Attribute, Criteria, Criterion
+
 # Latest page_view behavior
 latest_app_id = Attribute(
     name="latest_app_id",
@@ -104,7 +106,6 @@ latest_device_class = Attribute(
     aggregation="last",
     property="contexts_nl_basjes_yauaa_context_1[0].deviceClass"
 )
-
 
 # Behavior over the last 7 days
 num_sessions_l7d = Attribute(
@@ -173,7 +174,6 @@ num_form_engagements_l7d = Attribute(
     period=l7d,
     aggregation="counter"
 )
-
 
 # Behavior over the last 30 days
 num_sessions_l30d = Attribute(
@@ -271,16 +271,16 @@ num_engaged_campaigns_l30d = Attribute(
 )
 ```
 
-## Group attributes into a view
-
-Group the attributes into a view. This is where the `domain_userid` device entity is specified.
+Group the attributes into a view with the `domain_userid` device entity. You'll need to provide your own email address for the `owner` field.
 
 ```python
-# Wrap attributes into a view
+from snowplow_signals import StreamView, domain_userid
+
 user_attributes_view = StreamView(
-    name="prospect_scoring",
+    name="prospect_scoring_tutorial",
     version=1,
     entity=domain_userid,
+    owner="YOUR EMAIL HERE", # UPDATE THIS
     attributes=[
         latest_app_id,
         latest_device_class,
@@ -305,7 +305,7 @@ user_attributes_view = StreamView(
 )
 ```
 
-Test the attribute outputs on a subset of recent event data. The `test` command uses the last hour of data from your atomic events table. Here we're restricting the results to events with the application ID `website`: this filtering is optional.
+Test the attribute outputs on a subset of recent event data. The `test` command uses the last hour of data from your atomic events table. Here we're restricting the results to events with the application ID `website`. This filtering is optional.
 
 ```python
 sp_signals_test = sp_signals.test(
@@ -320,13 +320,27 @@ The result should look similar to this:
 
 ![](./screenshots/signals_test_output.png)
 
-## Deploy configuration to Signals
+## Define a service
 
-Apply the view to Signals.
+Next, define a service for retrieving the calculated attributes. Again, provide your own email address for the `owner` field.
 
 ```python
-# Apply view to the Signals API
+from snowplow_signals import Service
+
+prospect_scoring_tutorial_service = Service(
+    name='prospect_scoring_tutorial_service',
+    owner="YOUR EMAIL HERE", # UPDATE THIS
+    views=[user_attributes_view],
+)
+```
+
+## Deploy configuration to Signals
+
+Apply the view and service configurations to Signals.
+
+```python
 from snowplow_signals import Signals
+
 sp_signals = Signals(
     api_url=ENV_SP_API_URL,
     api_key=ENV_SP_API_KEY,
@@ -334,27 +348,54 @@ sp_signals = Signals(
     org_id=ENV_SP_ORG_ID
 )
 
-applied = sp_signals.apply([user_attributes_view])
+applied = sp_signals.apply([user_attributes_view, prospect_scoring_tutorial_service])
 
-# This should print "1 objects applied"
+# This should print "2 objects applied"
 print(f"{len(applied)} objects applied")
 ```
 
 Signals will start populating your Profiles Store with attributes calculated from your real-time event stream.
 
-## Find your `domain_userid` for testing
+## Look at your attributes
 
 Go to your website, and use the [Snowplow Inspector](/docs/data-product-studio/data-quality/snowplow-inspector/) browser plugin to find your own `domain_userid` in outbound web events.
 
 ![](./screenshots/get_domain_userid.png)
 
-TODO
+Use your `domain_userid` to retrieve the attributes that Signals has calculated just now from your real-time event stream.
 
-```
-# Go back to the website, generate some events, and check your own domain_userid here to see attributes live
-sp_signals_result = user_attributes_view.get_attributes(
-    signals=sp_signals,
-    identifier='aaaabbbb-1111-2222-3333-44445555dddd'
+```python
+sp_signals_result = sp_signals.get_service_attributes(
+    name="prospect_scoring_tutorial_service",
+    entity="domain_userid",
+    identifier="8e554b10-4fcf-49e9-a0d8-48b6b6458df3", # UPDATE THIS
 )
 sp_signals_result
 ```
+
+The result should look something like this:
+
+```yaml
+{'domain_userid': '8e554b10-4fcf-49e9-a0d8-48b6b6458df3',
+ 'num_form_engagements_l7d': None,
+ 'num_sessions_l30d': ['d100158b-c1f9-4833-9211-1f7d2c2ae5ec',
+  '2bea2e3e-abb8-4e81-bf8e-28cd0d5ddb34'],
+ 'num_pricing_views_l7d': None,
+ 'first_refr_medium_l30d': 'internal',
+ 'latest_device_class': 'Desktop',
+ 'first_mkt_medium_l30d': None,
+ 'num_sessions_l7d': ['d100158b-c1f9-4833-9211-1f7d2c2ae5ec',
+  '2bea2e3e-abb8-4e81-bf8e-28cd0d5ddb34'],
+ 'num_media_events_l30d': None,
+ 'num_pricing_views_l30d': None,
+ 'num_page_pings_l30d': 64,
+ 'num_page_views_l7d': 9,
+ 'num_apps_l7d': ['website'],
+ 'num_page_pings_l7d': 64,
+ 'num_page_views_l30d': 9,
+ 'latest_app_id': 'website',
+ 'num_apps_l30d': ['website'],
+ 'num_conversions_l30d': None,
+ 'num_conversions_l7d': None,
+ 'num_engaged_campaigns_l30d': None}
+ ```

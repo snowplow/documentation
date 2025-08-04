@@ -37,11 +37,11 @@ export default function SchemaProperties(props) {
           </div>
           {props.overview && (
             <div className="gap-2 text-base leading-none font-bold flex flex-col items-start">
-              <span>Tracker Compatibility</span>
+              <span>Tracker compatibility</span>
               <div className="flex gap-4">
                 <span className="text-base font-normal text-muted-foreground flex-initial">Web: {props.overview.web ? '✅' : '❌'}</span>
                 <span className="text-base font-normal text-muted-foreground flex-initial">Mobile: {props.overview.mobile ? '✅' : '❌'}</span>
-                <span className="text-base font-normal text-muted-foreground flex-initial">Tracked Automatically: {(typeof props.overview.automatic === 'string') ? props.overview.automatic : (props.overview.automatic ? '✅' : '❌')}</span>
+                <span className="text-base font-normal text-muted-foreground flex-initial">Tracked automatically: {(typeof props.overview.automatic === 'string') ? props.overview.automatic : (props.overview.automatic ? '✅' : '❌')}</span>
               </div>
             </div>
           )}

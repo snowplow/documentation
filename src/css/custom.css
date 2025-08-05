@@ -29,9 +29,9 @@
     --chart-3: 40.11 80% 54.9%;
     --chart-4: 339.77 74.78% 54.9%;
     --chart-5: 220.45 70.08% 50.2%;
-    --radius: 0.5rem;
+    --radius: 0.25rem;
 
-    --font-fallback: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif ;
+    --font-fallback: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   }
 
   [data-theme='dark'] {
@@ -69,59 +69,19 @@
  * work well for content-centric websites.
  */
 @font-face {
-  font-family: 'Inter18pt-Regular';
-  src: url('/fonts/Inter18pt-Italic.woff2') format('woff2'),
-      url('/fonts/Inter18pt-Italic.woff') format('woff');
-  font-weight: normal;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Inter18pt-Bold';
-  src: url('/fonts/Inter18pt-BoldItalic.woff2') format('woff2'),
-      url('/fonts/Inter18pt-BoldItalic.woff') format('woff');
-  font-weight: bold;
-  font-style: italic;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Inter18pt-Bold';
-  src: url('/fonts/Inter18pt-Bold.woff2') format('woff2'),
-      url('/fonts/Inter18pt-Bold.woff') format('woff');
-  font-weight: bold;
+  font-family: 'InterVariable';
+  src: url('/fonts/Inter-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 1 999;
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
-  font-family: 'Inter18pt-Regular';
-  src: url('/fonts/Inter18pt-Regular.woff2') format('woff2'),
-      url('/fonts/Inter18pt-Regular.woff') format('woff');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Inter18pt-Light';
-  src: url('/fonts/Inter18pt-Light.woff2') format('woff2'),
-      url('/fonts/Inter18pt-Light.woff') format('woff');
-  font-weight: 300;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'Inter18pt-LightItalic';
-  src: url('/fonts/Inter18pt-LightItalic.woff2') format('woff2'),
-      url('/fonts/Inter18pt-LightItalic.woff') format('woff');
-  font-weight: 300;
+  font-family: 'InterVariable';
+  src: url('/fonts/Inter-Italic-VariableFont_opsz,wght.ttf') format('truetype');
+  font-weight: 1 999;
   font-style: italic;
   font-display: swap;
 }
-
 
 /* You can override the default Infima variables here. */
 :root {
@@ -138,7 +98,7 @@
   --ifm-color-announcement: #e6f6fe;
   --ifm-code-font-size: 95%;
   --ifm-code-padding-vertical: 0.05rem;
-  --ifm-font-family-base: 'Inter18pt-Regular', var(--font-fallback);
+  --ifm-font-family-base: 'InterVariable', var(--font-fallback);
   --ifm-menu-color-active: #6638b8;
   --ifm-font-color-base: var(--muted-foreground);
   --ifm-font-color-base-inverse: rgb(218, 221, 225);
@@ -147,6 +107,14 @@
   --doc-sidebar-width: 330px !important;
   --ifm-tabs-padding-vertical: 7px;
   --ifm-menu-link-sublist-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24"><path fill="rgb(102, 56, 184)" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>');
+  --font-fallback: -apple-system, system-ui, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-variable: 'InterVariable', var(--font-fallback);
+}
+
+body {
+  font-family: var(--font-variable);
+  font-weight: 400;
+  letter-spacing: -0.0125em;
 }
 
 
@@ -217,7 +185,7 @@ button.snowplow-button {
   border: none;
   border-radius: 4px;
 
-  font-family: 'Inter18pt-Regular', var(--font-fallback);
+  font-family: 'InterVariable', var(--font-fallback);
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
@@ -299,17 +267,6 @@ button.snowplow-button:focus {
 
 /* End of buttons */
 
-
-
-header,
-h1,
-h2,
-h3,
-h4,
-h5 {
-  font-family: 'Inter18pt-Bold', var(--font-fallback);
-}
-
 table {
   display: inline-table;
 }
@@ -320,6 +277,36 @@ table {
   margin-left: 5px;
   padding: 8px 4px;
   font-size: .875rem;
+
+}
+.table-of-contents li {
+  padding: 0;
+  margin: 2px 0 0 0;
+}
+
+.table-of-contents__link:hover, .table-of-contents__link:hover code, .table-of-contents__link--active, .table-of-contents__link--active code {
+  color: hsl(var(--primary));
+  text-decoration: none;
+  background-color: hsl(var(--accent));
+  border-radius: var(--radius)
+}
+.table-of-contents__link {
+  
+  display: block;
+  padding: 6px var(--ifm-toc-padding-horizontal);
+}
+.theme-doc-toc-desktop ul ul {
+  padding-left: 16px!important;
+}
+
+/* Left side bar CSS START */
+
+aside.theme-doc-sidebar-container {
+  border: none;
+}
+.sidebar_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-styles-module {
+  width: 100%!important;
+
 }
 .table-of-contents li {
   padding: 0;
@@ -351,27 +338,207 @@ table {
   color: var(--ifm-color-primary-darker);
 }
 
-[data-theme='dark'] .theme-doc-sidebar-item-link-level-1.header {
-  color: var(--ifm-color-primary-lightest);
-}
 
-.theme-doc-sidebar-item-link-level-1 {
+.theme-doc-sidebar-item-link-level-1, .theme-doc-sidebar-item-category-level-1 {
   font-weight: 500;
+  color: hsl(var(--foreground));
 }
 
 .theme-doc-sidebar-item-category-level-2,
-.theme-doc-sidebar-item-link-level-2 {
-  font-weight: 400;
-}
-
+.theme-doc-sidebar-item-link-level-2,
 .theme-doc-sidebar-item-category-level-3,
 .theme-doc-sidebar-item-category-level-4,
 .theme-doc-sidebar-item-link-level-3,
 .theme-doc-sidebar-item-link-level-4 {
-  font-weight: 400;
-  font-size: 14px;
+  font-weight: 340;
   line-height: 20px;
+  color: hsl(var(--foreground));
 }
+
+.theme-doc-sidebar-item-category-level-2 .menu__list-item-collapsible .menu__caret
+{
+  display: flex;
+  padding: 4px;
+}
+
+.menu {
+  font-weight: regular;
+  overflow-x: hidden;
+}
+
+.menu__list {
+    list-style: none;
+    margin: 0;
+    padding-left: 0;
+  }
+
+/* Non-top level menus */
+
+.menu__list .menu__list {
+      flex: 0 0 100%;
+      margin: 0 0 0.5rem var(--ifm-menu-link-padding-horizontal);
+      padding-left: 0;
+      border-left: 1px solid hsl(var(--border));
+    }
+
+.menu__list-item:not(:first-child) {
+      margin-top: 0.25rem;
+    }
+
+.menu__list-item--collapsed .menu__list {
+        height: 0;
+        overflow: hidden;
+      }
+
+.menu__list-item--collapsed .menu__link--sublist:after,
+      .menu__list-item--collapsed .menu__caret:before {
+        transform: rotateZ(90deg);
+      }
+
+.menu__list-item-collapsible {
+      flex-wrap: wrap;
+      position: relative;
+      border-radius: 0.25rem;
+      display: flex;
+      transition: background var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+    }
+
+.menu__list-item-collapsible:hover {
+      background: hsl(var(--accent)) !important;
+  }
+
+.menu__list-item-collapsible--active {
+        background-color: hsla(261.56, 53.33%, 47.06%, 0.12);
+        border-radius: 0px var(--radius) var(--radius)  0px;
+        border-left: 1px solid hsl(var(--primary));
+}
+
+
+.menu__list-item-collapsible--active .menu__caret {
+  display: flex;
+  border: none;
+  background: none;
+  padding: 4px;
+}
+
+
+.menu__link,
+  .menu__caret {
+    align-items: center;
+    border-radius: 0.25rem;
+    display: flex;
+    transition: background var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+  }
+
+.menu__link:hover, .menu__caret:hover {
+    background: var(--ifm-menu-color-background-hover);
+    border-radius: 0px var(--radius) var(--radius)  0px;
+     border-left: 1px solid hsl(var(--foreground));
+  }
+
+.menu__link {
+    color: hsl(var(--muted-foreground));
+    flex: 1;
+    line-height: 1.4286;
+    font-size: .93825rem;
+    padding: var(--ifm-menu-link-padding-vertical)
+      var(--ifm-menu-link-padding-horizontal);
+  }
+
+.menu__link:hover {
+      text-decoration: none;
+      color: hsl(var(--foreground));
+      transition: color var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+    }
+
+.menu__link--sublist-caret:after {
+      content: '';
+      margin-left: auto;
+      min-width: 1.25rem;
+      background: var(--ifm-menu-link-sublist-icon) 50% / 1.25rem 1.25rem;
+      filter: var(--ifm-menu-link-sublist-icon-filter);
+      height: 1.25rem;
+      transform: rotate(180deg);
+      width: 1.25rem;
+      transition: transform var(--ifm-transition-fast) linear;
+    }
+
+.menu__link--active {
+      color: hsl(var(--primary));
+      background-color: hsla(261.56, 53.33%, 47.06%, 0.12);
+    }
+
+.menu__link--active:hover {
+        color: var(--ifm-menu-color-active);
+        border-radius: 0px var(--radius) var(--radius)  0px;
+        border-left: 1px solid hsl(var(--primary));
+}
+.menu__list-item-collapsible .menu__link:hover, .menu__list-item-collapsible .menu__link--active{
+  color: var(--ifm-menu-color-active);
+        border-radius: 0px var(--radius) var(--radius)  0px;
+        border-left: 1px solid hsl(var(--primary));
+}
+
+.menu__link--active:not(.menu__link--sublist) {
+        background-color: hsla(261.56, 53.33%, 47.06%, 0.12);
+        border-radius: 0px var(--radius) var(--radius)  0px;
+        border-left: 1px solid hsl(var(--primary));
+      }
+
+.menu__caret {
+    padding: var(--ifm-menu-link-padding-vertical)
+      var(--ifm-menu-link-padding-horizontal);
+      display: none;
+  }
+
+.menu__caret:before {
+      content: '';
+      background: var(--ifm-menu-link-sublist-icon) 50% / 1.25rem 1.25rem;
+      filter: var(--ifm-menu-link-sublist-icon-filter);
+      height: 1.25rem;
+      transform: rotate(180deg);
+      width: 1.25rem;
+      transition: transform var(--ifm-transition-fast) linear;
+}
+.menu__list-item-collapsible:hover .menu__caret {
+  display: flex;
+  border: none;
+  background: none;
+  padding: 4px;
+}
+
+/* button to collapse */
+.collapseSidebarButton_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-CollapseButton-styles-module {
+  display: none;
+  margin: 4px!important;
+}
+@media (min-width: 997px) {
+  .sidebar_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-styles-module { 
+    padding-top: 72px !important;
+    width: 272px !important;
+  }
+  .collapseSidebarButton_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-CollapseButton-styles-module {
+      display: inline-flex !important
+;
+      background-color: hsl(var(--accent))!important;
+      border-radius: var(--radius)!important;
+      border: 1px solid hsl(var(--border))!important;
+      align-items: center;
+      justify-content: center;
+  }
+  .collapseSidebarButtonIcon_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-CollapseButton-styles-module {
+    transform: rotate(180deg) scale(.5) !important;
+  }
+  .expandButton_node_modules-\@docusaurus-theme-classic-lib-theme-DocPage-Layout-Sidebar-ExpandButton-styles-module {
+    border-right: 1px solid hsl(var(--border));
+    background-color: hsl(var(--background))!important;
+  }
+  .expandButtonIcon_node_modules-\@docusaurus-theme-classic-lib-theme-DocPage-Layout-Sidebar-ExpandButton-styles-module {
+    transform: rotate(0) scale(.5)!important;
+  }
+}
+/* Left side bar CSS END */
+
 
 li.hidden,
 article.hidden {
@@ -459,7 +626,7 @@ code {
 input[type='text'],
 input[type='email'],
 textarea {
-  font-family: 'Inter18pt-Regular', var(--font-fallback);
+  font-family: var(--font-variable);
   font-size: 14px;
 }
 
@@ -691,7 +858,7 @@ abbr[data-title]:focus:after, abbr[data-title]:hover:after {
   margin: .5rem 0 !important;
 }
 .prose table thead a {
-  font-weight: 700;
+  font-weight: 600;
   text-decoration: none;
 }
 

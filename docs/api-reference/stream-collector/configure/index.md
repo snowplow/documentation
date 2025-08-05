@@ -73,7 +73,7 @@ collector {
 |-----------|-------------|
 | `collector.streams.good` | Required. Name of the output kinesis stream for successfully collected events. |
 | `collector.streams.bad` | Required. Name of the output kinesis stream for http requests which could not be written to the good stream. For example, if the event size exceeds the kinesis limit of 1MB. |
-| `collector.streams.useIpAddressAsPartitionKey` | Optional. Default: `false`. Whether to use the user's IP address as the kinesis partition key. |
+| `collector.streams.useIpAddressAsPartitionKey` (deprecated since *3.5.0*) | Optional. Default: `false`. Whether to use the user's IP address as the kinesis partition key. |
 | `collector.streams.{good,bad}.region` | Optional. Default: `eu-central-1`. AWS region of the kinesis streams. |
 | `collector.streams.{good,bad}.customEndpoint` | Optional. Override aws kinesis endpoint. Can be helpful when using localstack for testing. |
 | `collector.streams.{good,bad}.threadPoolSize` | Optional. Default: `10`. Thread pool size used by the collector sink for asynchronous operations. |
@@ -97,7 +97,7 @@ collector {
 |-----------|-------------|
 | `collector.streams.good` | Required. Name of the output SQS queue for successfully collected events. |
 | `collector.streams.bad` | Required. Name of the output SQS queue for http requests which could not be written to the good stream. For example, if the event size exceeds the SQS limit of 256KB. |
-| `collector.streams.useIpAddressAsPartitionKey` | Optional. Default: `false`. Whether to use the user's IP address as the Kinesis partition key. This is attached to the SQS message as an attribute, with the aim of using it if the events ultimately end up in Kinesis. |
+| `collector.streams.useIpAddressAsPartitionKey` (deprecated since *3.5.0*) | Optional. Default: `false`. Whether to use the user's IP address as the Kinesis partition key. This is attached to the SQS message as an attribute, with the aim of using it if the events ultimately end up in Kinesis. |
 | `collector.streams.{good,bad}.region` | Optional. Default: `eu-central-1`. AWS region of the SQS queues. |
 | `collector.streams.{good,bad}.threadPoolSize` | Optional. Default: `10`. Thread pool size used by the collector sink for asynchronous operations. |
 | `collector.streams.{good,bad}.aws.accessKey` | Required. Set to `default` to use the default provider chain; set to `iam` to use AWS IAM roles; or set to `env` to use `AWS_ACCESS_KEY_ID` environment variable. |
@@ -117,19 +117,35 @@ collector {
 | `collector.streams.good` | Required. Name of the output Pubsub topic for successfully collected events. |
 | `collector.streams.bad` | Required. Name of the output pubsub topic for http requests which could not be written to the good stream. For example, if the event size exceeds the Pubsub limit of 10MB. |
 | `collector.streams.sink.{good,bad}.googleProjectId` | Required. GCP project name. |
-| `collector.streams.sink.{good,bad}backoffPolicy.minBackoff` | Optional. Default: `1000`. Time (in milliseconds) for retrying sending to Pubsub after failure. |
-| `collector.streams.sink.{good,bad}.backoffPolicy.maxBackoff` | Optional. Default: `1000`. Time (in milliseconds) for retrying sending to Pubsub after failure |
-| `collector.streams.sink.{good,bad}.backoffPolicy.totalBackoff` | Optional. Default: `9223372036854`. We set this to the maximum value so that we never give up on trying to send a message to pubsub. |
-| `collector.streams.sink.{good,bad}.backoffPolicy.multipler` | Optional. Default: `2`. Multiplier between two periods. |
-| `collector.streams.sink.{good,bad}.backoffPolicy.initialRpcTimeout` (since *2.5.0*) | Optional. Default: `10000`. Time (in milliseconds) before a RPC call to Pubsub is aborted and retried. |
-| `collector.streams.sink.{good,bad}.backoffPolicy.maxRpcTimeout` (since *2.5.0*) | Optional. Default: `10000`. Maximum time (in milliseconds) before RPC call to Pubsub is aborted and retried. |
-| `collector.streams.sink.{good,bad}.backoffPolicy.rpcTimeoutMultipler` (since *2.5.0*) | Optional. Default: `2`. How RPC timeouts increase as they are retried. |
+| `collector.streams.sink.{good,bad}backoffPolicy.minBackoff` (deprecated since *3.5.0*) | Optional. Default: `1000`. Time (in milliseconds) for retrying sending to Pubsub after failure. |
+| `collector.streams.sink.{good,bad}.backoffPolicy.maxBackoff` (deprecated since *3.5.0*) | Optional. Default: `1000`. Time (in milliseconds) for retrying sending to Pubsub after failure |
+| `collector.streams.sink.{good,bad}.backoffPolicy.totalBackoff` (deprecated since *3.5.0*) | Optional. Default: `9223372036854`. We set this to the maximum value so that we never give up on trying to send a message to pubsub. |
+| `collector.streams.sink.{good,bad}.backoffPolicy.multipler` (deprecated since *3.5.0*) | Optional. Default: `2`. Multiplier between two periods. |
+| `collector.streams.sink.{good,bad}.backoffPolicy.initialRpcTimeout` (deprecated since *3.5.0*) | Optional. Default: `10000`. Time (in milliseconds) before a RPC call to Pubsub is aborted and retried. |
+| `collector.streams.sink.{good,bad}.backoffPolicy.maxRpcTimeout` (deprecated since *3.5.0*) | Optional. Default: `10000`. Maximum time (in milliseconds) before RPC call to Pubsub is aborted and retried. |
+| `collector.streams.sink.{good,bad}.backoffPolicy.rpcTimeoutMultipler` (deprecated since *3.5.0*) | Optional. Default: `2`. How RPC timeouts increase as they are retried. |
 | `collector.streams.sink.{good,bad}..maxBytes` (since *2.9.0*) | Optional. Default: `10000000` (10 MB). Maximum number of bytes that a single record can contain. If a record is bigger, a size violation failed event is emitted instead. |
 | `collector.streams.sink.{good,bad}.startupCheckInterval` (since *2.9.0*) | Optional. Default: `1 second`.  When collector starts, it checks if PubSub topics exist with `listTopics`. This is the interval for the calls. `/sink-health` is made healthy as soon as requests are successful or records are successfully inserted. |
 | `collector.streams.sink.{good,bad}.retryInterval` (since *2.9.0*) | Optional. Default: `10 seconds`. Collector uses built-in retry mechanism of PubSub API. In case of failure of these retries, the events are added to a buffer and every `retryInterval` collector retries to send them. |
 | `collector.streams.{good,bad}.buffer.byteLimit` | Optional. Default: `1000000`. Incoming events are stored in an internal buffer before being sent to Pubsub. This configures the maximum total size of pending events |
 | `collector.streams.{good,bad}.buffer.recordLimit` | Optional. Default: `40`. Maximum number of pending events before flushing to Pubsub. |
 | `collector.streams.{good,bad}.buffer.timeLimit` | Optional. Default: `1000`. Maximum time (in milliseconds) before flushing pending buffered events to Pubsub. |
+
+### Kafka collector options
+
+| parameter | description |
+|-----------|-------------|
+| `collector.streams.good` | Required. Name of the output Kafka topic for successfully collected events. |
+| `collector.streams.bad` | Required. Name of the output Kafka topic for http requests which could not be written to the good stream. |
+| `collector.streams.{good,bad}.brokers` | Required. A list of host:port pairs to use for establishing the initial connection to the Kafka cluster. |
+| `collector.streams.{good,bad}.producerConf` | Optional. Kafka producer configuration. See [the docs](https://kafka.apache.org/documentation/#producerconfigs) for all properties. |
+| `collector.streams.{good,bad}.maxBytes` | Optional. Default: `1000000` (1 MB). Maximum number of bytes that a single record can contain. If a record is bigger, a size violation failed event is emitted instead. |
+| `collector.streams.{good,bad}.startupCheckInterval` | Optional. Default: `10 second`.  When collector starts, it checks if Kafka topics exist. This is the interval for the calls. `/sink-health` is made healthy as soon as requests are successful or records are successfully inserted. |
+| `collector.streams.{good,bad}.buffer.byteLimit` | Optional. Default: `3145728`. Incoming events are stored in an internal buffer before being sent to Kafka. This configures the maximum total size of pending events. |
+| `collector.streams.{good,bad}.buffer.recordLimit` | Optional. Default: `500`. Configures the maximum number of pending events before flushing to Kafka. |
+| `collector.streams.{good,bad}.buffer.timeLimit` | Optional. Default: `5000`. Configures the maximum time in milliseconds before flushing pending buffered events to Kafka. |
+| `collector.streams.{good,bad}.retryInterval` | Optional. Default: `10 seconds`. Collector uses built-in retry mechanism of Kafka API. In case of failure of these retries, the events are added to a buffer and every `retryInterval` collector retries to send them. |
+
 
 
 ### Setting the domain name

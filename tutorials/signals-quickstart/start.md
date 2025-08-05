@@ -9,6 +9,8 @@ Snowplow Signals is a real-time personalization engine for customer intelligence
 
 This guide will walk you through the steps to calculate user behavior attributes from your Snowplow event stream, and retrieve them for use in your application. This will unlock real-time personalization use cases for your business.
 
+It should take less than 10 minutes from starting to retrieving calculated attributes.
+
 ## Prerequisites
 
 This tutorial assumes that you have:
@@ -30,3 +32,5 @@ Check out the [Signals configuration](/docs/signals/configuration) documentation
 Try out an interactive version of this tutorial on Google Colab [here](https://colab.research.google.com/drive/1ExqheS4lIuJRs0wk0B6sxaYfnZGcTYUv).
 
 You'll need to log in with a Google account to use the Colab notebook.
+
+Once you've added the secrets, start working through the tutorial. If you prefer to run the cells in one go with Run all, update your details in the required places first - they're marked with `UPDATE THIS`.

@@ -11,4 +11,4 @@ sp_signals.apply(
 )
 ```
 
-The configuration is now live. Signals will start processing events from your real-time stream, and computing attributes.
+The configuration is now live. Signals will start processing events from your real-time stream, and will populate your Profiles Store with computed attributes.

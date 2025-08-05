@@ -13,7 +13,7 @@ export const versions = {
   phpTracker: '0.9.2',
   pixelTracker: '0.3.0',
   pythonTracker: '1.0.3',
-  rokuTracker: '0.3.0',
+  rokuTracker: '0.3.1',
   rubyTracker: '0.8.0',
   rustTracker: '0.2.0',
   scalaTracker: '2.0.0',
@@ -26,7 +26,7 @@ export const versions = {
   enrich: '5.4.0',
   sqs2kinesis: '1.0.4',
   dataflowRunner: '0.7.5',
-  snowbridge: '3.2.3',
+  snowbridge: '3.3.0',
 
   // Loaders
   bqLoader: '2.0.1',
@@ -35,22 +35,22 @@ export const versions = {
   gcsLoader: '0.5.6',
   postgresLoader: '0.3.3',
   rdbLoader: '6.1.3',
-  s3Loader: '2.2.9',
+  s3Loader: '2.3.0',
   s3Loader22x: '2.2.9',
   lakeLoader: '0.6.3',
-  snowflakeStreamingLoader: '0.4.1',
+  snowflakeStreamingLoader: '0.5.0',
 
   // Data Modelling
   // dbt
-  dbtSnowplowAttribution: '0.5.0',
-  dbtSnowplowUnified: '0.5.4',
+  dbtSnowplowAttribution: '0.5.1',
+  dbtSnowplowUnified: '0.5.5',
   dbtSnowplowWeb: '1.0.1',
   dbtSnowplowMobile: '1.0.0',
-  dbtSnowplowMediaPlayer: '0.9.2',
-  dbtSnowplowUtils: '0.17.2',
-  dbtSnowplowNormalize: '0.4.0',
+  dbtSnowplowMediaPlayer: '0.9.3',
+  dbtSnowplowUtils: '0.17.3',
+  dbtSnowplowNormalize: '0.4.1',
   dbtSnowplowFractribution: '0.3.6',
-  dbtSnowplowEcommerce: '0.9.2',
+  dbtSnowplowEcommerce: '0.9.3',
 
   // sql runner
   sqlRunner: '0.10.1',

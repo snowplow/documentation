@@ -1,48 +1,148 @@
 
-# Snowplow Guides & Tutorials
+# Snowplow tutorials and accelerators
 
-This directory contains the tutorials present at `/tutorials`.
+This file contains guidelines for writing Snowplow tutorials and accelerators.
 
-## Structure
 
-Each tutorial is a directory containing the following files:
+## Writing style
 
-### `meta.json`
+Best practise for writing the text:
+* The usual Snowplow [style guide](https://docs.snowplow.io/style-guide/) rules apply
+  * All headings should be in sentence case
+  * No exclamation marks, no emojis
+* Keep the tutorial streamlined and opinionated
+  * One happy path without too many options or decisions
+  * It's good to include some troubleshooting help too where necessary
+* Write in the second person
+  * It's clearer about what's going on
+  * "You'll create" not "let's create" or "we'll create"
+  * "This tutorial uses X library" not "We'll be using X library"
+* Although a tutorial may be designed for a specific persona, they are part of our technical marketing collateral
+  * It's good for tutorials to be understandable to broader audiences
+  * Explain even "obvious" things
 
-This file keeps the metadata of the tutorial. It contains the following fields:
+## Tutorial structure
 
-| Field         | Description                                                          | Format                                                                                                         |
-| ------------- | -------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------- |
-| `title`       | The title of the tutorial, shown on the card and the tutorial page.  | `string`                                                                                                       |
-| `description` | A short description of the tutorial, shown on the card.              | `string`                                                                                                       |
-| `label`       | The topic of the tutorial, shown on the card  and the tutorial page. | One of: `'Data governance'`, `'Data modeling'`, `Signals`, `'Solution accelerator'`, `Tracking implementation` |
+Tutorials have the following structure:
 
-Example:
+```text
+Introduction
+	Architecture <-- optional
+	Prerequisites
+	Acknowledgements <-- for external contributions
+Install X
+Do some stuff
+Deploy the thing
+Conclusion
+	Next steps
+```
 
+### Introduction
+
+The first page of the tutorial:
+* It should have `title: "Introduction"`
+* Start with a sentence like "Welcome to the XYZ tutorial."
+* Explain in the opening paragraphs:
+  * What the focus of the tutorial is
+  * What's the business use case or value
+  * Who the tutorial is for
+  * What they'll be doing
+* Include:
+  * Links to the relevant docs
+  * Links to the relevant other repo(s)
+  * A diagram if possible
+  * A **Prerequisites** heading
+  * An optional **Acknowledgements** heading, for tutorials written by external collaborators
+* Prerequisites:
+  * Usually a bullet point list
+  * These can be anything from permissions to knowledge to codebases
+  * Add links for third-party tool websites
+  * Add links to instructions for getting credentials if necessary
+* Add an optional **Architecture** heading if the tutorial is complicated
+  * This section needs a diagram
+* Don't include:
+  * Explanations of Snowplow concepts that are already explained in the docs
+  * Code blocks
+  * Actions or instructions for them to follow as part of the tutorial
+
+### Main pages
+
+The tutorial content pages:
+* Should be titled in imperative case
+  * E.g. "Install the SDK", "Generate models"
+  * It should sound right if you imagine putting "how to" in front of each
+* The first page after the introduction would normally be "Install the X" or "Set up Y"
+* Each page should start with at least one paragraph about the goal of this section, or what the steps will do
+* Subheadings are good to break up different sections on the page
+  * Each subsection needs at least a sentence introducing the next steps, and maybe why the steps are required
+  * Avoid numbering the headings - the order of operations is the order in which they appear on the page
+* Be explicit about where in their project or machine the code should be added or run
+* Use screenshots liberally
+* Show the expected outcome of the steps
+
+### Conclusion
+
+The last page of the tutorial:
+* It should have `title: "Conclusion"`
+* Summarise what they've learned or achieved, especially in the context of business value
+* End with a **Next steps** subsection
+
+## Notebooks
+
+For tutorials that incorporate a Jupyter notebook:
+* Link to the notebook in the Introduction and the install/set up page
+* The tutorial and notebook should have the same structure and code examples
+* Add a link in the notebook to the tutorial
+* The notebook should have minimal text and explanation
+  * Maximum one or two sentences per subheading
+  * It shouldn't be a complete, standalone project
+  * Think single source of truth
+
+## Resource repos
+
+For tutorials that are based around a demo project in another repo:
+* Link to the repo in the Introduction and the install/set up page
+* Add a link in the README to the tutorial
+* The repo README should have minimal text and explanation
+  * Information about running the project should all be in the tutorial
+  * Think single source of truth
+
+## File structure
+
+Tutorials have:
+* Their own directory inside the documentation codebase, in `tutorials/`
+* A metadata file, `meta.json`, defining what will show on the card on the Tutorials landing page
+  * For titles and description:
+    * Be concise
+    * Use infinitive form - it should sound right if you imagine putting "how to" in front of each
+  * There's a short list of labels to choose from, pick one
+    * `Data governance`, `Data modeling`, `Signals`, `Solution accelerator`, `Tracking implementation`
+  * Solution accelerators are a specific thing, they:
+    * Use other tools alongside Snowplow
+    * Describe projects that wouldn't be someone's first use case
+* Images in a subfolder called `images`
+* Separate pages as separate `.md` files
+  * The file name will be the URL
+  * The title will be the page main heading
+  * Specify what order the pages appear in by defining the page `position` (doesn't have to be integers)
+
+Example metadata:
 ```json
 {
-  "title": "Video & Media Analytics",
-  "description": "Track video events across media players",
-  "label": "Tracking design"
+  "title": "Manage data structures with Git",
+  "label": "Data governance",
+  "description": "Use Snowplow CLI and GitHub Actions to manage authoring and publishing for your data structures."
 }
 ```
 
-### Tutorial content
-
-Each page of a tutorial is an MDX ([Markdown + JSX](https://docusaurus.io/docs/markdown-features/react)) file.
-
-Each file expect two properties in the front matter:
-
-| Field      | Description                               | Format   |
-| ---------- | ----------------------------------------- | -------- |
-| `position` | The position of the page in the tutorial. | `number` |
-| `title`    | The title of the page.                    | `string` |
-
-Example:
-
-```mdx
+Example page frontmatter:
+```markdown
 ---
-position: 0
-title: "Introduction"
+title: Introduction
+position: 1
 ---
+
+Welcome to the **doing a cool thing with Snowplow** tutorial.
+
+etc
 ```

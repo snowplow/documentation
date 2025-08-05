@@ -1,4 +1,12 @@
-# jqFilter
+---
+title: "jqFilter"
+description: "Filters messages based on the output of a jq command."
+---
+
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
 
 :::note
 This transformation was added in version 3.0.0.
@@ -20,15 +28,15 @@ This example filters out all data that doesn't have an `app_id` key.
 
 Minimal configuration:
 
-```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/builtin/jqFilter-minimal-example.hcl
-```
+<CodeBlock language="hcl" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/builtin/jqFilter-minimal-example.hcl
+`}</CodeBlock>
 
 Every configuration option:
 
-```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/builtin/jqFilter-full-example.hcl
-```
+<CodeBlock language="hcl" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/builtin/jqFilter-full-example.hcl
+`}</CodeBlock>
 
 ## Helper Functions
 

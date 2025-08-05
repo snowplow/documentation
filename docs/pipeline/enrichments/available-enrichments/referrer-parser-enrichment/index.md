@@ -32,6 +32,13 @@ Snowplow has several subdomains like _community.snowplow.io_ and _docs.snowplow.
 
 Enabling this enrichment with the above configuration would fill the `refr_medium` column in our data warehouse with _“Internal”_ (rather then _"Unknown"_) when the referring URL to a page matches the subdomains above.
 
+:::note
+
+The enrichment will also classify `refr_medium` as `Internal` when an event's `page_urlhost` matches it's `refr_urlhost`, regardless of the configured `internalDomains`.
+This behavior is not configurable, and may require handling in data models or a [JavaScript enrichment](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/index.md) to change.
+
+:::
+
 ## Output
 
 This enrichment populates the following fields of the atomic event :

@@ -1,4 +1,12 @@
-# spEnrichedFilter
+---
+title: "spEnrichedFilter"
+description: "Filters messages based on a regex match against an atomic field."
+---
+
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
 
 `spEnrichedFilter`: Specific to Snowplow data. Filters messages based on a regex match against an atomic field.
 
@@ -12,12 +20,12 @@ This example filters out all data whose `platform` value does not match either `
 
 Minimal configuration:
 
-```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/snowplow-builtin/spEnrichedFilter-minimal-example.hcl
-```
+<CodeBlock language="hcl" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/snowplow-builtin/spEnrichedFilter-minimal-example.hcl
+`}</CodeBlock>
 
 Every configuration option:
 
-```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/snowplow-builtin/spEnrichedFilter-full-example.hcl
-```
+<CodeBlock language="hcl" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/snowplow-builtin/spEnrichedFilter-full-example.hcl
+`}</CodeBlock>

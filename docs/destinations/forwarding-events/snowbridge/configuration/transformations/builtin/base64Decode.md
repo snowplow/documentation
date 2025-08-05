@@ -1,4 +1,12 @@
-# base64Decode
+---
+title: "base64Decode"
+description: "Base64 decodes the message's data."
+---
+
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
 
 Introduced in version 2.1.0
 
@@ -10,6 +18,6 @@ This transformation base64 decodes the message's data from a base64 byte array, 
 
 ## Configuration options
 
-```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/builtin/base64Decode-minimal-example.hcl
-```
+<CodeBlock language="hcl" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/builtin/base64Decode-minimal-example.hcl
+`}</CodeBlock>

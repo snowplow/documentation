@@ -4,6 +4,11 @@ date: "2022-10-20"
 sidebar_position: 200
 ---
 
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 This section details how to configure the transformation, once a script is written.
 
 You can also find some complete example use cases in [the examples section](../examples/index.md).
@@ -18,12 +23,12 @@ Scripts must be available to the runtime of the application at the path provided
 
 Minimal configuration:
 
-```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/custom-scripts/js-configuration-minimal-example.hcl
-```
+<CodeBlock language="hcl" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/custom-scripts/js-configuration-minimal-example.hcl
+`}</CodeBlock>
 
 Every configuration option:
 
-```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/custom-scripts/js-configuration-full-example.hcl
-```
+<CodeBlock language="hcl" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/custom-scripts/js-configuration-full-example.hcl
+`}</CodeBlock>

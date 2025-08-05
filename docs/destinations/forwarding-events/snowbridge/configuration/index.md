@@ -4,6 +4,11 @@ date: "2022-10-20"
 sidebar_position: 300
 ---
 
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 # Configuration Overview
 
 Snowbridge is configured using [HCL](https://github.com/hashicorp/hcl). To configure Snowbridge, create your configuration in a file with `.hcl` extension, and set the `SNOWBRIDGE_CONFIG_FILE` environment variable to the path to your file. By default, the Snowbridge docker image uses `/tmp/config.hcl` as the config path - when using the docker images you can either mount your config file to `/tmp/config.hcl`, or mount it to a different path, and set the `SNOWBRIDGE_CONFIG_FILE` environment variable in your docker container to that path.
@@ -23,7 +28,7 @@ If you do not provide a configuration, or provide an empty one, the application 
 * no transformations;
 * `stdout` target;
 * `stdout` failure target.
-There’ll be no external statistics reporting or sentry error reporting.
+There'll be no external statistics reporting or sentry error reporting.
 
 ## License
 
@@ -43,6 +48,6 @@ The below example is a complete configuration, which specifies a kinesis source,
 
 In layman's terms, this configuration will read data from a kinesis stream, filter out any data whose `event_name` field is not `page_view`, run a custom Javascript script upon the data to change the `app_id` to `"1"`, and send the transformed page view data to pubsub. It will also send statistics about what it's doing to a statsD endpoint, and will send information about errors to a sentry endpoint.
 
-```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/overview-full-example.hcl
-```
+<CodeBlock language="hcl" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/overview-full-example.hcl
+`}</CodeBlock>

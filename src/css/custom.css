@@ -68,14 +68,13 @@
  * bundles Infima by default. Infima is a CSS framework designed to
  * work well for content-centric websites.
  */
- @font-face {
+@font-face {
   font-family: 'InterVariable';
   src: url('/fonts/Inter-VariableFont_opsz,wght.ttf') format('truetype');
   font-weight: 1 999;
   font-style: normal;
   font-display: swap;
 }
-
 @font-face {
   font-family: 'InterVariable';
   src: url('/fonts/Inter-Italic-VariableFont_opsz,wght.ttf') format('truetype');
@@ -83,7 +82,6 @@
   font-style: italic;
   font-display: swap;
 }
-
 
 /* You can override the default Infima variables here. */
 :root {
@@ -279,6 +277,7 @@ table {
   margin-left: 5px;
   padding: 8px 4px;
   font-size: .875rem;
+
 }
 .table-of-contents li {
   padding: 0;
@@ -307,7 +306,28 @@ aside.theme-doc-sidebar-container {
 }
 .sidebar_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-styles-module {
   width: 100%!important;
+
 }
+.table-of-contents li {
+  padding: 0;
+  margin: 2px 0 0 0;
+}
+
+.table-of-contents__link:hover, .table-of-contents__link:hover code, .table-of-contents__link--active, .table-of-contents__link--active code {
+  color: hsl(var(--primary));
+  text-decoration: none;
+  background-color: hsl(var(--accent));
+  border-radius: var(--radius)
+}
+.table-of-contents__link {
+  
+  display: block;
+  padding: 6px var(--ifm-toc-padding-horizontal);
+}
+.theme-doc-toc-desktop ul ul {
+  padding-left: 16px!important;
+}
+
 
 .theme-doc-sidebar-item-link-level-1.header {
   margin-top: 1em;

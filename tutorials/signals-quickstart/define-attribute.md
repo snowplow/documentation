@@ -1,6 +1,6 @@
 ---
 position: 3
-title: Define and group attributes
+title: Define what attributes to calculate
 ---
 
 An `Attribute` describes a specific fact about user behavior. They're grouped into views for management and deployment.
@@ -103,16 +103,16 @@ Add all three attribute definitions to your notebook, and run the cell.
 
 Single attribute definitions can't be deployed to Signals, as they don't make sense without the additional context defined in a `View`.
 
-Group the attributes together, adding the session entity identifier `domain_sessionid`.
+Group the attributes together, adding the session entity identifier `domain_sessionid`. You'll need to update the `owner` field to your email address.
 
 ```python
 from snowplow_signals import StreamView, domain_sessionid
 
 my_view = StreamView(
-    name="my_attribute_view",
+    name="my_quickstart_view",
     version=1,
     entity=domain_sessionid,
-    owner="user@company.com",
+    owner="user@company.com", # UPDATE THIS
     attributes=[
         page_view_count,
         most_recent_browser,

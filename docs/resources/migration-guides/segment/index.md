@@ -1,10 +1,8 @@
 ---
-title: "Segment to Snowplow Migration Guide"
+title: "Segment to Snowplow"
 date: "2025-08-04"
 sidebar_position: 0
 ---
-
-# A competitive migration guide: From Segment to Snowplow Analytics
 
 This guide is for technical implementers considering a migration from Segment to Snowplow. This move represents a shift from a managed Customer Data Platform (CDP) to a more flexible, composable behavioral data platform which runs in your cloud environment.
 
@@ -44,15 +42,15 @@ Segment's entry-level pricing is based on Monthly Tracked Users (MTUs), which ca
 
 Snowplow's costs are based on your cloud infrastructure usage (compute and storage from AWS or GCP) plus a license fee depending on event volume which is more predictable and cost-effective at scale. This model aligns cost directly with data processing volume, not user count, encouraging comprehensive data collection without financial penalty.
 
-| Feature | Segment | Snowplow |
-|---------|---------|----------|
-| **Deployment Model** | SaaS-only; data processed on Segment servers hosted by AWS | Private cloud; runs entirely in your AWS/GCP/Azure account |
-| **Data Ownership** | Data access in warehouse; vendor controls pipeline | Customer owns data and controls pipeline infrastructure |
-| **Governance Model** | Reactive; post-hoc validation with Protocols (a premium add-on) | Proactive; foundational schema validation for every event |
-| **Data Structure** | Flat events with properties, user traits and context objects | Rich events enriched by multiple, reusable entities |
-| **Primary Use Case** | Building a Customer Data Platform for routing to 3rd party marketing/analytics tools | Creating a foundational behavioral data asset for BI and AI |
-| **Pricing Model** | Based on Monthly Tracked Users (MTUs) or API calls | Based on event volume |
-| **Real-Time Capability** | Limited low-latency support and observability | Real-time streaming pipeline (e.g., via Kafka) supports use cases in seconds |
+| Feature                  | Segment                                                                              | Snowplow                                                                     |
+| ------------------------ | ------------------------------------------------------------------------------------ | ---------------------------------------------------------------------------- |
+| **Deployment Model**     | SaaS-only; data processed on Segment servers hosted by AWS                           | Private cloud; runs entirely in your AWS/GCP/Azure account                   |
+| **Data Ownership**       | Data access in warehouse; vendor controls pipeline                                   | Customer owns data and controls pipeline infrastructure                      |
+| **Governance Model**     | Reactive; post-hoc validation with Protocols (a premium add-on)                      | Proactive; foundational schema validation for every event                    |
+| **Data Structure**       | Flat events with properties, user traits and context objects                         | Rich events enriched by multiple, reusable entities                          |
+| **Primary Use Case**     | Building a Customer Data Platform for routing to 3rd party marketing/analytics tools | Creating a foundational behavioral data asset for BI and AI                  |
+| **Pricing Model**        | Based on Monthly Tracked Users (MTUs) or API calls                                   | Based on event volume                                                        |
+| **Real-Time Capability** | Limited low-latency support and observability                                        | Real-time streaming pipeline (e.g., via Kafka) supports use cases in seconds |
 
 ## Deconstructing the data model: From flat events to rich context
 
@@ -109,12 +107,12 @@ Snowplow's data model for modern warehouses like Snowflake and BigQuery simplifi
 
 For an analyst, this means that to get a complete picture of an `add_to_cart` event and the product involved, they query a single, predictable table. The event and all its contextual entities are present in the same row. This structure can simplify data modeling in tools like dbt and accelerate time-to-insight, as the analytical work shifts from joining many disparate event tables to unnesting or accessing data within the structured columns of a single table. It is important to note that this loading behavior is different for Amazon Redshift, where each entity type does get loaded into its own separate table.
 
-| Segment Concept | Segment Example | Snowplow Equivalent | Snowplow Implementation Detail |
-|-----------------|-----------------|---------------------|--------------------------------|
-| **Core Action** | `track('Order Completed', {revenue: 99.99, currency: 'USD'})` | **Self-Describing Event** | `trackSelfDescribingEvent` with a custom `order_completed` schema containing `revenue` (number) and `currency` (string) properties. |
-| **User Identification** | `identify('user123', {plan: 'pro', created_at: '...'})` | **User Entity & `setUserId`** | A call to `setUserId('user123')` to populate the atomic `user_id` field, plus attaching a custom `user` entity with a schema containing properties like `plan` and `created_at`. |
-| **Page/Screen Context** | `page('Pricing', {category: 'Products'})` | **`trackPageView` & `web_page` Entity** | A `trackPageView` call with a `title` of 'Pricing'. This automatically attaches the standard `web_page` entity. The `category` would be a custom property added to a custom `web_page` context or a separate content entity. |
-| **Reusable Properties** | `properties.product_sku` in multiple `track` calls | **Dedicated `product` Entity** | A single, reusable `product` entity schema is defined with a `sku` property. This entity is then attached as context to all relevant events (`product_viewed`, `add_to_cart`, etc.). |
+| Segment Concept         | Segment Example                                               | Snowplow Equivalent                     | Snowplow Implementation Detail                                                                                                                                                                                               |
+| ----------------------- | ------------------------------------------------------------- | --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **Core Action**         | `track('Order Completed', {revenue: 99.99, currency: 'USD'})` | **Self-Describing Event**               | `trackSelfDescribingEvent` with a custom `order_completed` schema containing `revenue` (number) and `currency` (string) properties.                                                                                          |
+| **User Identification** | `identify('user123', {plan: 'pro', created_at: '...'})`       | **User Entity & `setUserId`**           | A call to `setUserId('user123')` to populate the atomic `user_id` field, plus attaching a custom `user` entity with a schema containing properties like `plan` and `created_at`.                                             |
+| **Page/Screen Context** | `page('Pricing', {category: 'Products'})`                     | **`trackPageView` & `web_page` Entity** | A `trackPageView` call with a `title` of 'Pricing'. This automatically attaches the standard `web_page` entity. The `category` would be a custom property added to a custom `web_page` context or a separate content entity. |
+| **Reusable Properties** | `properties.product_sku` in multiple `track` calls            | **Dedicated `product` Entity**          | A single, reusable `product` entity schema is defined with a `sku` property. This entity is then attached as context to all relevant events (`product_viewed`, `add_to_cart`, etc.).                                         |
 
 ## Architecting your migration: A phased framework
 

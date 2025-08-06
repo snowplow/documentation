@@ -9,7 +9,7 @@ Additionally, the following two headers can be sent on requests:
 | Header            | Allowed Values     | Description |
 |-------------------|--------------------|------------|
 | Content-Type      | `application/json` | See [MDN Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type)        |
-| SP-Anonymous      | `*`                | Enables Server Side Anonymization, preventing the User IP Address and Network User ID from being collectoed       |
+| SP-Anonymous      | `*`                | Enables Server Side Anonymization, preventing the User IP Address and Network User ID from being collected       |
 
 #### Cookie Header
 

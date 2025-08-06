@@ -85,4 +85,4 @@ The key subsystems are described below.
   - Feed both real-time dashboards and long-term analytics using consistent definitions
 
 ## Acknowledgements
-Thank you to the Kafka experts [evoura](https://evoura.com/?utm_source=snowplow&utm_medium=accelerator&utm_campaign=live-shopper) for their support with building this accelerator.
+Thank you to the Data Streaming experts [evoura](https://evoura.com/?utm_source=snowplow&utm_medium=accelerator&utm_campaign=live-shopper) for their support with building this accelerator.

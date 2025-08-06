@@ -4,6 +4,18 @@ date: "2021-10-04"
 sidebar_position: 50
 ---
 
+## License
+
+S3 Loader is released under the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.1/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).
+
+To accept the terms of license and run S3 Loader, configure the `license.accept` option, like this:
+
+```hcl
+license {
+  accept = true
+}
+```
+
 This is a complete list of the options that can be configured in the S3 loader HOCON config file. The [example configs in github](https://github.com/snowplow/snowplow-s3-loader/tree/master/config) show how to prepare an input file.
 
 

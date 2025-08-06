@@ -8,22 +8,7 @@ This guide helps technical implementers migrate from Segment to Snowplow.
 
 ## Platform differences
 
-There are a number of differences between Segment and Snowplow as a data platform.
-
-| Feature                 | Segment                                                      | Snowplow                                                                    |
-| ----------------------- | ------------------------------------------------------------ | --------------------------------------------------------------------------- |
-| Deployment model        | SaaS-only; data is processed on Segment servers              | Private cloud (BDP Enterprise) and SaaS (BDP Cloud) are both available      |
-| Data ownership          | Data access in warehouse; vendor controls pipeline           | You own your data and control pipeline infrastructure                       |
-| Governance model        | Post-hoc validation with Protocols (premium add-on)          | Schema validation for every event                                           |
-| Data structure          | Flat events with properties, user traits and context objects | Rich events enriched by multiple, reusable entities                         |
-| Warehouse structure     | Separate tables for each custom event type                   | One single `atomic.events` table where possible                             |
-| Pricing model           | Based on Monthly Tracked Users (MTUs) or API calls           | Based on event volume                                                       |
-| Real-time capability    | Limited low-latency support and observability                | Real-time streaming pipeline supports sub-second use cases                  |
-| Downstream integrations | Native connections to 300+ tools                             | Event forwarding to custom destinations plus reverse ETL, powered by Census |
-
-## What do events look like in tracking?
-
-Segment and Snowplow structure and conceptualize events differently.
+There are a number of differences between Segment and Snowplow as a data platform. For migration, it's important to be aware of how Snowplow structures events differently from Segment. This affects how you'll implement tracking and how you'll model the warehouse data.
 
 ### Segment event structure
 
@@ -35,9 +20,9 @@ The other Segment tracking methods are:
 * `group` associates the user with a group
 * `alias` merges user identities, for identity resolution across applications
 
-Data about the user's action is tracked separately from data about the user. You'll stitch them together during data modeling in the warehouse.
+With Segment, you track data about the user's action separately from data about the user. These are stitched together during data modeling in the warehouse.
 
-Here's an example showing how you could track an ecommerce transaction event on web using Segment:
+Here's an example showing how you can track an ecommerce transaction event on web using Segment:
 
 ```javascript
 analytics.track('Transaction Completed', {
@@ -57,13 +42,14 @@ The tracked events can be optionally validated against Protocols, defined as par
 
 ### Snowplow event structure
 
-Snowplow separates the action that occurred (the [event](/docs/fundamentals/events/index.md)) from the contextual objects involved in the action (the entities), such as the user, the device, etc.
+Snowplow separates the action that occurred (the [event](/docs/fundamentals/events/index.md)) from the contextual objects involved in the action (the [entities](/docs/fundamentals/entities/index.md)), such as the user, the device, etc.
 
 Snowplow SDKs also provide methods for tracking page views and screen views, along with many other kinds of events, such as button clicks, form submissions, page pings (activity), media interactions, and so on.
 
+The equivalent to Segment's custom `track` method is `trackSelfDescribingEvent`.
+
 All Snowplow events, whether designed by you or built-in, are defined by [JSON schemas](/docs/fundamentals/schemas/index.md). The events are always validated as they're processed through the Snowplow pipeline, and events that fail validation are separated out for assessment.
 
-The equivalent to Segment's custom `track` method is `track_self_describing_event`.
 
 Here's an example showing how you could track a Snowplow ecommerce transaction event on web:
 
@@ -81,22 +67,24 @@ snowplow('trackTransaction', {
 })
 ```
 
-Superficially, it looks similar to Segment's `track` call. The first key difference is that the product property here contains a reusable `product` entity. This entity would be added to any other relevant event, such as `add_to_cart` or `view_product`.
+Superficially, it looks similar to Segment's `track` call. The first key difference is that the products property here contains a reusable `product` entity. You'd add this entity to any other relevant event, such as `add_to_cart` or `view_product`.
 
-Secondly, the Snowplow tracking SDKs add multiple entities to all tracked events by default, including information about the specific page or screen, the user's session, and the device or browser. Many other built-in entities can be configured, and you can define your own custom entities to any Snowplow event.
+Secondly, the Snowplow tracking SDKs add multiple entities to all tracked events by default, including information about the specific page or screen view, the user's session, and the device or browser. Many other built-in entities can be configured, and you can define your own custom entities to add to any or all Snowplow events.
 
 ### Tracking comparison
 
-This table explains how different Segment tracking methods map to Snowplow events.
+This table gives examples of how the different Segment tracking methods map to Snowplow tracking.
 
-| Segment concept     | Segment example                                               | Snowplow equivalent                                        |
-| ------------------- | ------------------------------------------------------------- | ---------------------------------------------------------- |
-| Core action         | `track('Order Completed', {revenue: 99.99, currency: 'USD'})` | Self-describing event with custom `order_completed` schema |
-| User identification | `identify('user123', {plan: 'pro', created_at: '...'})`       | User entity and `setUserId` call                           |
-| Page context        | `page('Pricing', {category: 'Products'})`                     | `trackPageView` with `web_page` entity                     |
-| Reusable properties | `properties.product_sku` in multiple `track` calls            | Dedicated `product` entity attached to relevant events     |
+| Segment API Call | Segment Example                                                 | Snowplow Implementation                                                                                                                                                      |
+| ---------------- | --------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `track()`        | `track('Order Completed', {revenue: 99.99, currency: 'USD'})`   | Use one of the built-in event types, or define a custom `order_completed` schema containing `revenue` and `currency` properties, and track  `trackSelfDescribingEvent`.      |
+| `page()`         | `page('Pricing')`                                               | Use `trackPageView`. The tracker SDK will capture details such as `title` and `url`.                                                                                         |
+| `screen()`       | `screen('Home Screen')`                                         | Use `trackScreenView`.                                                                                                                                                       |
+| `identify()`     | `identify('user123', {plan: 'pro', created_at: '2024-01-15'})`  | Call `setUserId('user123')` to track the ID in all events. Attach a custom `user` entity with schema containing `plan` and `created_at` properties.                          |
+| `group()`        | `group('company-123', {name: 'Acme Corp', plan: 'Enterprise'})` | No direct equivalent. Attach a custom `group` entity to your events, or track group membership changes as custom events with `group_joined` or `group_updated` schemas.      |
+| `alias()`        | `alias('new-user-id', 'anonymous-id')`                          | No direct equivalent. Track identity changes as custom events with `user_alias_created` schema. Use `setUserId` to update the current user identifier for subsequent events. |
 
-## What does the data look like in the warehouse?
+### Warehouse data structure
 
 Segment loads each custom event type into separate tables, for example, `order_completed`, or `product_viewed` tables. Analysts must `UNION` tables together to reconstruct user journeys.
 

@@ -94,6 +94,15 @@ Snowplow CLI can take its configuration from a variety of sources. More details 
   ```
 
   </TabItem>
+  <TabItem value="dotenv" label=".env" >
+
+  ```bash
+  SNOWPLOW_CONSOLE_API_KEY="********-****-****-****-************"
+  SNOWPLOW_CONSOLE_API_KEY_ID="********-****-****-****-************"
+  SNOWPLOW_CONSOLE_ORG_ID="********-****-****-****-************"
+  ```
+
+  </TabItem>
 </Tabs>
 
 Snowplow CLI defaults to yaml format. It can be changed to json by either providing a `--output-format json` flag or setting the `output-format: json` config value. It will work for all commands where it matters, not only for `generate`.

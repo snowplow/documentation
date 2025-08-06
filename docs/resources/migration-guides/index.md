@@ -5,7 +5,7 @@ sidebar_position: 1
 
 This section contains advice for migrating to Snowplow from other solutions.
 
-In general, there are two possible migration strategies: parallel-run or full re-architecture.
+There are two possible migration strategies: parallel-run or full re-architecture.
 
 ## Parallel-run
 

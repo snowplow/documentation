@@ -6,7 +6,7 @@ sidebar_label: "Configuration"
 
 By default, Signals calculates attributes in real time, in stream. Stream attributes are ideal for real-time use cases such as tracking the latest video a user played, or the number of page views in a session.
 
-Use the Python SDK to define the attributes you want to calculate, as well as the entities that the attributes relate to. Group them together into a view, and apply this configuration to Signals.
+Use the Python SDK to define the attributes you want to calculate, as well as the attribute keys that the attributes relate to. Group them together into a Attribute Group, and apply this configuration to Signals.
 
 All configuration is defined using the [Signals Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk), or manually via the Signals API.
 
@@ -62,13 +62,13 @@ sp_signals = Signals(
 
 The created `Signals` object has the following methods:
 
-| Method                   | Description                                                         |
-| ------------------------ | ------------------------------------------------------------------- |
-| `apply`                  | Registers the provided objects with Signals                         |
-| `test`                   | Tests a view against the atomic events table                        |
-| `get_view`               | Retrieves a view from the Profiles Store                            |
-| `get_service_attributes` | Retrieves attributes for a specific service from the Profiles Store |
-| `get_view_attributes`    | Retrieves attributes for a specific view from the Profiles Store    |
+| Method                   | Description                                                                    |
+| ------------------------ | ------------------------------------------------------------------------------ |
+| `apply`                  | Registers the provided objects with Signals                                    |
+| `test`                   | Tests an Attribute Group against the atomic events table                       |
+| `get_attribute_group`    | Retrieves an Attribute Group from the Profiles Store                           |
+| `get_service_attributes` | Retrieves attributes for a specific service from the Profiles Store            |
+| `get_attributes`         | Retrieves attributes for a specific Attribute Group from the Profiles Store    |
 
 Read more about retrieving calculated attributes in [Retrieving values](/docs/signals/retrieval/index.md)
 
@@ -94,10 +94,10 @@ TODO
 
 The created `Signals` object has the following methods:
 
-| Method                 | Description                                                         |
-| ---------------------- | ------------------------------------------------------------------- |
-| `getServiceAttributes` | Retrieves attributes for a specific service from the Profiles Store |
-| `getViewAttributes`    | Retrieves attributes for a specific view from the Profiles Store    |
+| Method                 | Description                                                                    |
+| ---------------------- | ------------------------------------------------------------------------------ |
+| `getServiceAttributes` | Retrieves attributes for a specific service from the Profiles Store            |
+| `get_attributes`       | Retrieves attributes for a specific Attribute Group from the Profiles Store    |
 
 ## Signals API
 

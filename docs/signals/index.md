@@ -82,7 +82,7 @@ flowchart TD
         G --> H[Apply the group]
     end
 
-    H --> I[View defined attributes<br/>in Console]
+    H --> I[Attribute Group defined attributes<br/>in Console]
 
     style SDK stroke:#333,stroke-width:2px
 ```

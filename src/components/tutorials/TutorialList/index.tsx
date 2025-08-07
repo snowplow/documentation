@@ -93,6 +93,12 @@ function searchFilter(term: string, tutorial?: Tutorial): boolean {
     : false
 }
 
+function technologyFilter(selectedTechnologies: string[], tutorial?: Tutorial): boolean {
+  if (!tutorial) return false
+  if (selectedTechnologies.length === 0) return true
+  return tutorial.meta.technologies.some(tech => selectedTechnologies.includes(tech))
+}
+
 function useCaseFilter(
   selectedUseCases: string[],
   tutorial?: Tutorial
@@ -119,6 +125,15 @@ function getAvailableUseCases(tutorials: Tutorial[]): string[] {
     tutorial.meta.useCases.forEach((useCase) => useCases.add(useCase))
   })
   return Array.from(useCases).sort()
+}
+
+// Extract unique technologies from all tutorials
+function getAvailableTechnologies(tutorials: Tutorial[]): string[] {
+  const technologies = new Set<string>()
+  tutorials.forEach((tutorial) => {
+    tutorial.meta.technologies.forEach((tech) => technologies.add(tech))
+  })
+  return Array.from(technologies).sort()
 }
 
 function getParsedTutorials(tutorials: Meta[]): Tutorial[] {
@@ -154,6 +169,7 @@ const TutorialList: FC = () => {
   const [search, setSearch] = useState('')
   const [selectedTopics, setSelectedTopics] = useState<string[]>([])
   const [selectedUseCases, setSelectedUseCases] = useState<string[]>([])
+  const [selectedTechnologies, setSelectedTechnologies] = useState<string[]>([])
   const parsedTutorials = useMemo<Tutorial[]>(
     () => getParsedTutorials(getMetaData()),
     []
@@ -162,15 +178,20 @@ const TutorialList: FC = () => {
     () => getAvailableUseCases(parsedTutorials),
     [parsedTutorials]
   )
+  const availableTechnologies = useMemo<string[]>(
+    () => getAvailableTechnologies(parsedTutorials),
+    [parsedTutorials]
+  )
   const tutorials = useMemo<Tutorial[]>(
     () =>
       filterTutorials(
         search,
         selectedTopics,
         selectedUseCases,
+        selectedTechnologies,
         parsedTutorials
       ),
-    [search, selectedTopics, selectedUseCases, parsedTutorials]
+    [search, selectedTopics, selectedUseCases, selectedTechnologies, parsedTutorials]
   )
 
   return (
@@ -186,6 +207,9 @@ const TutorialList: FC = () => {
           selectedUseCases={selectedUseCases}
           setSelectedUseCases={setSelectedUseCases}
           availableUseCases={availableUseCases}
+          selectedTechnologies={selectedTechnologies}
+          setSelectedTechnologies={setSelectedTechnologies}
+          availableTechnologies={availableTechnologies}
           tutorials={tutorials}
         />
       ) : (
@@ -196,6 +220,9 @@ const TutorialList: FC = () => {
           selectedUseCases={selectedUseCases}
           setSelectedUseCases={setSelectedUseCases}
           availableUseCases={availableUseCases}
+          selectedTechnologies={selectedTechnologies}
+          setSelectedTechnologies={setSelectedTechnologies}
+          availableTechnologies={availableTechnologies}
           tutorials={tutorials}
         />
       )}
@@ -207,12 +234,14 @@ function filterTutorials(
   search: string,
   selectedTopics: string[],
   selectedUseCases: string[],
+  selectedTechnologies: string[],
   tutorials: Tutorial[]
 ): Tutorial[] {
   return tutorials
     .filter((tutorial) => searchFilter(search, tutorial))
     .filter((tutorial) => topicFilter(selectedTopics, tutorial))
     .filter((tutorial) => useCaseFilter(selectedUseCases, tutorial))
+    .filter((tutorial) => technologyFilter(selectedTechnologies, tutorial))
 }
 
 const MobileTutorialList: FC<{
@@ -222,6 +251,9 @@ const MobileTutorialList: FC<{
   selectedUseCases: string[]
   setSelectedUseCases: React.Dispatch<React.SetStateAction<string[]>>
   availableUseCases: string[]
+  selectedTechnologies: string[]
+  setSelectedTechnologies: React.Dispatch<React.SetStateAction<string[]>>
+  availableTechnologies: string[]
   tutorials: Tutorial[]
 }> = ({
   setSearch,
@@ -230,6 +262,9 @@ const MobileTutorialList: FC<{
   selectedUseCases,
   setSelectedUseCases,
   availableUseCases,
+  selectedTechnologies,
+  setSelectedTechnologies,
+  availableTechnologies,
   tutorials,
 }) => {
   return (
@@ -244,6 +279,11 @@ const MobileTutorialList: FC<{
         <TopicFilter
           selectedTopics={selectedTopics}
           setSelectedTopics={setSelectedTopics}
+        />
+        <TechnologyFilter
+          selectedTechnologies={selectedTechnologies}
+          setSelectedTechnologies={setSelectedTechnologies}
+          availableTechnologies={availableTechnologies}
         />
 
         {tutorials.map((tutorial: Tutorial) => (
@@ -263,6 +303,9 @@ const DesktopTutorialList: FC<{
   selectedUseCases: string[]
   setSelectedUseCases: React.Dispatch<React.SetStateAction<string[]>>
   availableUseCases: string[]
+  selectedTechnologies: string[]
+  setSelectedTechnologies: React.Dispatch<React.SetStateAction<string[]>>
+  availableTechnologies: string[]
   tutorials: Tutorial[]
 }> = ({
   setSearch,
@@ -271,6 +314,9 @@ const DesktopTutorialList: FC<{
   selectedUseCases,
   setSelectedUseCases,
   availableUseCases,
+  selectedTechnologies,
+  setSelectedTechnologies,
+  availableTechnologies,
   tutorials,
 }) => {
   return (
@@ -288,6 +334,11 @@ const DesktopTutorialList: FC<{
             <TopicFilter
               selectedTopics={selectedTopics}
               setSelectedTopics={setSelectedTopics}
+            />
+            <TechnologyFilter
+              selectedTechnologies={selectedTechnologies}
+              setSelectedTechnologies={setSelectedTechnologies}
+              availableTechnologies={availableTechnologies}
             />
           </TopicFilterSidebar>
         </Grid>
@@ -324,6 +375,45 @@ const SearchBar: FC<{
         />
       </SearchBarFormControl>
     </Grid>
+  )
+}
+
+const TechnologyFilter: FC<{
+  selectedTechnologies: string[]
+  setSelectedTechnologies: React.Dispatch<React.SetStateAction<string[]>>
+  availableTechnologies: string[]
+}> = ({ selectedTechnologies, setSelectedTechnologies, availableTechnologies }) => {
+  const handleTechnologyChange = (technology: string, checked: boolean) => {
+    if (checked) {
+      setSelectedTechnologies((prev) => [...prev, technology])
+    } else {
+      setSelectedTechnologies((prev) => prev.filter((tech) => tech !== technology))
+    }
+  }
+
+  return (
+    <Box sx={{ mt: 2 }}>
+      <Typography
+        variant="h6"
+        sx={{ mb: 2, fontSize: '16px', fontWeight: 600 }}
+      >
+        Filter by technology
+      </Typography>
+      {availableTechnologies.map((technology) => (
+        <FormControlLabel
+          key={technology}
+          control={
+            <Checkbox
+              checked={selectedTechnologies.includes(technology)}
+              onChange={(e) => handleTechnologyChange(technology, e.target.checked)}
+              sx={{ '&.Mui-checked': { color: 'rgba(102, 56, 184, 1)' } }}
+            />
+          }
+          label={technology}
+          sx={{ display: 'block', mb: 1 }}
+        />
+      ))}
+    </Box>
   )
 }
 

@@ -93,16 +93,26 @@ function searchFilter(term: string, tutorial?: Tutorial): boolean {
     : false
 }
 
-function snowplowTechFilter(selectedSnowplowTech: string[], tutorial?: Tutorial): boolean {
+function snowplowTechFilter(
+  selectedSnowplowTech: string[],
+  tutorial?: Tutorial
+): boolean {
   if (!tutorial) return false
   if (selectedSnowplowTech.length === 0) return true
-  return tutorial.meta.snowplowTech.some(tech => selectedSnowplowTech.includes(tech))
+  return tutorial.meta.snowplowTech.some((tech) =>
+    selectedSnowplowTech.includes(tech)
+  )
 }
 
-function technologyFilter(selectedTechnologies: string[], tutorial?: Tutorial): boolean {
+function technologyFilter(
+  selectedTechnologies: string[],
+  tutorial?: Tutorial
+): boolean {
   if (!tutorial) return false
   if (selectedTechnologies.length === 0) return true
-  return tutorial.meta.technologies.some(tech => selectedTechnologies.includes(tech))
+  return tutorial.meta.technologies.some((tech) =>
+    selectedTechnologies.includes(tech)
+  )
 }
 
 function useCaseFilter(
@@ -137,10 +147,26 @@ function getFilteredAvailableOptions(
   const getFilteredTutorials = (excludeFilter: string) => {
     return tutorials
       .filter((tutorial) => searchFilter(search, tutorial))
-      .filter((tutorial) => excludeFilter !== 'topics' ? topicFilter(selectedTopics, tutorial) : true)
-      .filter((tutorial) => excludeFilter !== 'useCases' ? useCaseFilter(selectedUseCases, tutorial) : true)
-      .filter((tutorial) => excludeFilter !== 'technologies' ? technologyFilter(selectedTechnologies, tutorial) : true)
-      .filter((tutorial) => excludeFilter !== 'snowplowTech' ? snowplowTechFilter(selectedSnowplowTech, tutorial) : true)
+      .filter((tutorial) =>
+        excludeFilter !== 'topics'
+          ? topicFilter(selectedTopics, tutorial)
+          : true
+      )
+      .filter((tutorial) =>
+        excludeFilter !== 'useCases'
+          ? useCaseFilter(selectedUseCases, tutorial)
+          : true
+      )
+      .filter((tutorial) =>
+        excludeFilter !== 'technologies'
+          ? technologyFilter(selectedTechnologies, tutorial)
+          : true
+      )
+      .filter((tutorial) =>
+        excludeFilter !== 'snowplowTech'
+          ? snowplowTechFilter(selectedSnowplowTech, tutorial)
+          : true
+      )
   }
 
   // Get available options for each filter type
@@ -149,27 +175,31 @@ function getFilteredAvailableOptions(
   const availableTechnologies = new Set<string>()
   const availableSnowplowTech = new Set<string>()
 
-  getFilteredTutorials('topics').forEach(tutorial => {
+  getFilteredTutorials('topics').forEach((tutorial) => {
     availableTopics.add(tutorial.meta.label)
   })
 
-  getFilteredTutorials('useCases').forEach(tutorial => {
-    tutorial.meta.useCases.forEach(useCase => availableUseCases.add(useCase))
+  getFilteredTutorials('useCases').forEach((tutorial) => {
+    tutorial.meta.useCases.forEach((useCase) => availableUseCases.add(useCase))
   })
 
-  getFilteredTutorials('technologies').forEach(tutorial => {
-    tutorial.meta.technologies.forEach(tech => availableTechnologies.add(tech))
+  getFilteredTutorials('technologies').forEach((tutorial) => {
+    tutorial.meta.technologies.forEach((tech) =>
+      availableTechnologies.add(tech)
+    )
   })
 
-  getFilteredTutorials('snowplowTech').forEach(tutorial => {
-    tutorial.meta.snowplowTech.forEach(tech => availableSnowplowTech.add(tech))
+  getFilteredTutorials('snowplowTech').forEach((tutorial) => {
+    tutorial.meta.snowplowTech.forEach((tech) =>
+      availableSnowplowTech.add(tech)
+    )
   })
 
   return {
     availableTopics: Array.from(availableTopics),
     availableUseCases: Array.from(availableUseCases),
     availableTechnologies: Array.from(availableTechnologies),
-    availableSnowplowTech: Array.from(availableSnowplowTech)
+    availableSnowplowTech: Array.from(availableSnowplowTech),
   }
 }
 
@@ -251,7 +281,7 @@ const TutorialList: FC = () => {
     () => getAvailableSnowplowTech(parsedTutorials),
     [parsedTutorials]
   )
-  
+
   // Calculate filtered available options based on current selections
   const filteredAvailableOptions = useMemo(() => {
     return getFilteredAvailableOptions(
@@ -262,7 +292,14 @@ const TutorialList: FC = () => {
       selectedTechnologies,
       selectedSnowplowTech
     )
-  }, [parsedTutorials, search, selectedTopics, selectedUseCases, selectedTechnologies, selectedSnowplowTech])
+  }, [
+    parsedTutorials,
+    search,
+    selectedTopics,
+    selectedUseCases,
+    selectedTechnologies,
+    selectedSnowplowTech,
+  ])
   const tutorials = useMemo<Tutorial[]>(
     () =>
       filterTutorials(
@@ -273,7 +310,14 @@ const TutorialList: FC = () => {
         selectedSnowplowTech,
         parsedTutorials
       ),
-    [search, selectedTopics, selectedUseCases, selectedTechnologies, selectedSnowplowTech, parsedTutorials]
+    [
+      search,
+      selectedTopics,
+      selectedUseCases,
+      selectedTechnologies,
+      selectedSnowplowTech,
+      parsedTutorials,
+    ]
   )
 
   return (
@@ -463,13 +507,17 @@ const DesktopTutorialList: FC<{
               selectedTechnologies={selectedTechnologies}
               setSelectedTechnologies={setSelectedTechnologies}
               allAvailableTechnologies={allAvailableTechnologies}
-              availableTechnologies={filteredAvailableOptions.availableTechnologies}
+              availableTechnologies={
+                filteredAvailableOptions.availableTechnologies
+              }
             />
             <SnowplowTechFilter
               selectedSnowplowTech={selectedSnowplowTech}
               setSelectedSnowplowTech={setSelectedSnowplowTech}
               allAvailableSnowplowTech={allAvailableSnowplowTech}
-              availableSnowplowTech={filteredAvailableOptions.availableSnowplowTech}
+              availableSnowplowTech={
+                filteredAvailableOptions.availableSnowplowTech
+              }
             />
             <TopicFilter
               selectedTopics={selectedTopics}
@@ -507,7 +555,7 @@ const SearchBar: FC<{
             </InputAdornment>
           }
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search by name of the tutorial or guide..."
+          placeholder="Search by tutorial name"
         />
       </SearchBarFormControl>
     </Grid>
@@ -519,7 +567,12 @@ const SnowplowTechFilter: FC<{
   setSelectedSnowplowTech: React.Dispatch<React.SetStateAction<string[]>>
   allAvailableSnowplowTech: string[]
   availableSnowplowTech: string[]
-}> = ({ selectedSnowplowTech, setSelectedSnowplowTech, allAvailableSnowplowTech, availableSnowplowTech }) => {
+}> = ({
+  selectedSnowplowTech,
+  setSelectedSnowplowTech,
+  allAvailableSnowplowTech,
+  availableSnowplowTech,
+}) => {
   const handleSnowplowTechChange = (tech: string, checked: boolean) => {
     if (checked) {
       setSelectedSnowplowTech((prev) => [...prev, tech])
@@ -537,27 +590,31 @@ const SnowplowTechFilter: FC<{
         Filter by Snowplow technology
       </Typography>
       {allAvailableSnowplowTech.map((tech) => {
-        const isAvailable = availableSnowplowTech.includes(tech) || selectedSnowplowTech.includes(tech)
+        const isAvailable =
+          availableSnowplowTech.includes(tech) ||
+          selectedSnowplowTech.includes(tech)
         return (
           <FormControlLabel
             key={tech}
             control={
               <Checkbox
                 checked={selectedSnowplowTech.includes(tech)}
-                onChange={(e) => handleSnowplowTechChange(tech, e.target.checked)}
+                onChange={(e) =>
+                  handleSnowplowTechChange(tech, e.target.checked)
+                }
                 disabled={!isAvailable}
-                sx={{ 
+                sx={{
                   '&.Mui-checked': { color: 'rgba(102, 56, 184, 1)' },
-                  '&.Mui-disabled': { opacity: 0.5 }
+                  '&.Mui-disabled': { opacity: 0.5 },
                 }}
               />
             }
             label={tech}
-            sx={{ 
-              display: 'block', 
+            sx={{
+              display: 'block',
               mb: 1,
               opacity: isAvailable ? 1 : 0.5,
-              color: isAvailable ? 'inherit' : 'rgba(0, 0, 0, 0.38)'
+              color: isAvailable ? 'inherit' : 'rgba(0, 0, 0, 0.38)',
             }}
           />
         )
@@ -571,12 +628,19 @@ const TechnologyFilter: FC<{
   setSelectedTechnologies: React.Dispatch<React.SetStateAction<string[]>>
   allAvailableTechnologies: string[]
   availableTechnologies: string[]
-}> = ({ selectedTechnologies, setSelectedTechnologies, allAvailableTechnologies, availableTechnologies }) => {
+}> = ({
+  selectedTechnologies,
+  setSelectedTechnologies,
+  allAvailableTechnologies,
+  availableTechnologies,
+}) => {
   const handleTechnologyChange = (technology: string, checked: boolean) => {
     if (checked) {
       setSelectedTechnologies((prev) => [...prev, technology])
     } else {
-      setSelectedTechnologies((prev) => prev.filter((tech) => tech !== technology))
+      setSelectedTechnologies((prev) =>
+        prev.filter((tech) => tech !== technology)
+      )
     }
   }
 
@@ -589,27 +653,31 @@ const TechnologyFilter: FC<{
         Filter by technology
       </Typography>
       {allAvailableTechnologies.map((technology) => {
-        const isAvailable = availableTechnologies.includes(technology) || selectedTechnologies.includes(technology)
+        const isAvailable =
+          availableTechnologies.includes(technology) ||
+          selectedTechnologies.includes(technology)
         return (
           <FormControlLabel
             key={technology}
             control={
               <Checkbox
                 checked={selectedTechnologies.includes(technology)}
-                onChange={(e) => handleTechnologyChange(technology, e.target.checked)}
+                onChange={(e) =>
+                  handleTechnologyChange(technology, e.target.checked)
+                }
                 disabled={!isAvailable}
-                sx={{ 
+                sx={{
                   '&.Mui-checked': { color: 'rgba(102, 56, 184, 1)' },
-                  '&.Mui-disabled': { opacity: 0.5 }
+                  '&.Mui-disabled': { opacity: 0.5 },
                 }}
               />
             }
             label={technology}
-            sx={{ 
-              display: 'block', 
+            sx={{
+              display: 'block',
               mb: 1,
               opacity: isAvailable ? 1 : 0.5,
-              color: isAvailable ? 'inherit' : 'rgba(0, 0, 0, 0.38)'
+              color: isAvailable ? 'inherit' : 'rgba(0, 0, 0, 0.38)',
             }}
           />
         )
@@ -623,7 +691,12 @@ const UseCaseFilter: FC<{
   setSelectedUseCases: React.Dispatch<React.SetStateAction<string[]>>
   allAvailableUseCases: string[]
   availableUseCases: string[]
-}> = ({ selectedUseCases, setSelectedUseCases, allAvailableUseCases, availableUseCases }) => {
+}> = ({
+  selectedUseCases,
+  setSelectedUseCases,
+  allAvailableUseCases,
+  availableUseCases,
+}) => {
   const handleUseCaseChange = (useCase: string, checked: boolean) => {
     if (checked) {
       setSelectedUseCases((prev) => [...prev, useCase])
@@ -641,7 +714,9 @@ const UseCaseFilter: FC<{
         Filter by use case
       </Typography>
       {allAvailableUseCases.map((useCase) => {
-        const isAvailable = availableUseCases.includes(useCase) || selectedUseCases.includes(useCase)
+        const isAvailable =
+          availableUseCases.includes(useCase) ||
+          selectedUseCases.includes(useCase)
         return (
           <FormControlLabel
             key={useCase}
@@ -650,18 +725,18 @@ const UseCaseFilter: FC<{
                 checked={selectedUseCases.includes(useCase)}
                 onChange={(e) => handleUseCaseChange(useCase, e.target.checked)}
                 disabled={!isAvailable}
-                sx={{ 
+                sx={{
                   '&.Mui-checked': { color: 'rgba(102, 56, 184, 1)' },
-                  '&.Mui-disabled': { opacity: 0.5 }
+                  '&.Mui-disabled': { opacity: 0.5 },
                 }}
               />
             }
             label={useCase}
-            sx={{ 
-              display: 'block', 
+            sx={{
+              display: 'block',
               mb: 1,
               opacity: isAvailable ? 1 : 0.5,
-              color: isAvailable ? 'inherit' : 'rgba(0, 0, 0, 0.38)'
+              color: isAvailable ? 'inherit' : 'rgba(0, 0, 0, 0.38)',
             }}
           />
         )
@@ -692,7 +767,8 @@ const TopicFilter: FC<{
         Filter by topic
       </Typography>
       {TopicValues.map((topic) => {
-        const isAvailable = availableTopics.includes(topic) || selectedTopics.includes(topic)
+        const isAvailable =
+          availableTopics.includes(topic) || selectedTopics.includes(topic)
         return (
           <FormControlLabel
             key={topic}
@@ -701,18 +777,18 @@ const TopicFilter: FC<{
                 checked={selectedTopics.includes(topic)}
                 onChange={(e) => handleTopicChange(topic, e.target.checked)}
                 disabled={!isAvailable}
-                sx={{ 
+                sx={{
                   '&.Mui-checked': { color: 'rgba(102, 56, 184, 1)' },
-                  '&.Mui-disabled': { opacity: 0.5 }
+                  '&.Mui-disabled': { opacity: 0.5 },
                 }}
               />
             }
             label={topic}
-            sx={{ 
-              display: 'block', 
+            sx={{
+              display: 'block',
               mb: 1,
               opacity: isAvailable ? 1 : 0.5,
-              color: isAvailable ? 'inherit' : 'rgba(0, 0, 0, 0.38)'
+              color: isAvailable ? 'inherit' : 'rgba(0, 0, 0, 0.38)',
             }}
           />
         )

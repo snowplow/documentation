@@ -5,7 +5,7 @@ sidebar_position: 50
 
 You can use existing attributes that are already in your warehouse, or use the Signals batch engine to calculate new attributes in a new table.
 
-To use historical, warehouse attributes in your real-time use cases, you will need to sync the data to the Profiles Store. Signals includes a materialization engine to do this.
+To use historical, warehouse attributes in your real-time use cases, you will need to sync the data to the Profiles Store. Signals includes a sync engine to do this.
 
 :::note Warehouse support
 Only Snowflake is supported currently.
@@ -59,7 +59,7 @@ The table below lists all available arguments for a `BatchSource`:
 | `owner`                    | The owner of the source, typically the email of the primary maintainer              | `string`   | ❌         |
 | `tags`                     | String key-value pairs of arbitrary metadata                                        | dictionary | ❌         |
 
-The `timestamp_field` is optional but recommended for incremental or snapshot-based tables. It should show the last modified time of a record. It's used during materialization to identify which rows have changed since the last sync. The materialization engine only sends those with a newer timestamp to the Profiles Store.
+The `timestamp_field` is optional but recommended for incremental or snapshot-based tables. It should show the last modified time of a record. It's used during materialization to identify which rows have changed since the last sync. The sync engine only sends those with a newer timestamp to the Profiles Store.
 
 ### Defining a view with fields
 
@@ -120,7 +120,7 @@ To send the attributes to the Profiles Store, change the `online` parameter to `
 sp_signals.apply([view])
 ```
 
-The sync will begin: the materialization engine will look for new records at a given interval, based on the `timestamp_field` and the last time it ran. The default time interval is 5 minutes.
+The sync will begin: the sync engine will look for new records at a given interval, based on the `timestamp_field` and the last time it ran. The default time interval is 5 minutes.
 
 ## Creating new attribute tables
 
@@ -159,9 +159,9 @@ It will help you create the required dbt models and tables in your warehouse, an
 
 Check out the full instructions in [Creating new batch attributes](/docs/signals/configuration/batch-calculations/batch-engine/index.md).
 
-## Materialization engine
+## Sync engine
 
-The materialization engine is a cron job that sends warehouse attributes to the Profiles Store.
+The sync engine is a cron job that sends warehouse attributes to the Profiles Store.
 
 The engine will be enabled when you either:
 * Apply an `ExternalBatchView` for an existing table

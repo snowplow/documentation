@@ -1,0 +1,5 @@
+{
+  "title": "Track user consent on web",
+  "label": "Solution accelerator",
+  "description": "Collect detailed consent preference data from your CMP, model it with dbt, and create health check dashboards."
+}

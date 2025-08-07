@@ -98,6 +98,17 @@ catalog = "xxx"
 
 Edit the warehouse you are using on line 10 of the `Dashboard.py` file to one of `snowflake`, `bigquery` or `databricks`.
 
+## Update table references
+
+:::warning Update for Unified Digital package
+The Streamlit dashboard code was built for the deprecated snowplow-web package. You'll need to update table references in the Python code from:
+- `snowplow_web_page_views` → `snowplow_unified_views`
+- `snowplow_web_sessions` → `snowplow_unified_sessions`  
+- `snowplow_web_users` → `snowplow_unified_users`
+
+Search for these table names in the dashboard Python files and update them accordingly.
+:::
+
 ## Run the Streamlit dashboard
 
 Run the command below to run the streamlit locally:

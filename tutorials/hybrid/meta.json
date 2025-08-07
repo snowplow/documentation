@@ -1,5 +1,8 @@
 {
   "title": "Build analytics for hybrid apps",
   "label": "Solution accelerator",
-  "description": "Track events from both native code and web views in hybrid mobile apps, then model and visualize the unified behavioral data."
+  "description": "Track events from both native code and web views in hybrid mobile apps, then model and visualize the unified behavioral data.",
+  "useCases": ["Composable analytics"],
+  "technologies": ["dbt", "Streamlit"],
+  "snowplowTech": []
 }

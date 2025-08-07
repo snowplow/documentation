@@ -1,5 +1,8 @@
 {
   "title": "Build end-to-end attribution modeling",
   "label": "Solution accelerator",
-  "description": "Perform attribution modeling on your Snowplow data to calculate ROAS and make data-driven marketing decisions."
+  "description": "Perform attribution modeling on your Snowplow data to calculate ROAS and make data-driven marketing decisions.",
+  "useCases": ["Composable analytics"],
+  "technologies": ["dbt"],
+  "snowplowTech": []
 }

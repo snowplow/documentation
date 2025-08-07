@@ -1,5 +1,8 @@
 {
   "title": "Build analytics for media players",
   "label": "Solution accelerator",
-  "description": "Track and analyze video engagement across different media players and platforms."
+  "description": "Track and analyze video engagement across different media players and platforms.",
+  "useCases": ["Composable analytics"],
+  "technologies": ["dbt"],
+  "snowplowTech": ["Micro", "Inspector"]
 }

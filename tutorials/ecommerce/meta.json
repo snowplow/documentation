@@ -1,5 +1,8 @@
 {
   "title": "Track and analyze ecommerce behavior",
   "label": "Solution accelerator",
-  "description": "Set up comprehensive ecommerce tracking, and model customer behavior data."
+  "description": "Set up comprehensive ecommerce tracking, and model customer behavior data.",
+  "useCases": ["Composable analytics"],
+  "technologies": ["dbt", "Streamlit"],
+  "snowplowTech": ["Inspector"]
 }

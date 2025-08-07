@@ -8,7 +8,7 @@ Signals has two attribute groupings:
 * Attribute groups, for defining attributes
 * Services, for consuming attributes
 
-An Attribute Group is a versioned collection of attributes; the attributes are the properties of the Attribute Group. Each Attribute Group is specific to one attribute keys and one data source (stream or batch).
+An Attribute Group is a versioned collection of attributes; the attributes are the properties of the Attribute Group. Each Attribute Group is specific to one attribute key and one data source (stream or batch).
 
 ## Attribute management
 

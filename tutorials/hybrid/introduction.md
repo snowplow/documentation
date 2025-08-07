@@ -46,9 +46,9 @@ Please note that **Snowflake, BigQuery and Databricks** will be used for illustr
 
 ## What you will build
 
-**Mobile & Hybrid Apps Analytics Dashboard**
+**Mobile and Hybrid Apps Analytics Dashboard**
 
-![Mobile & Hybrid Apps Analytics Dashboard](images/visualisation/streamlit.png)
+![Mobile and Hybrid Apps Analytics Dashboard](images/visualisation/streamlit.png)
 
 ## System overview
 

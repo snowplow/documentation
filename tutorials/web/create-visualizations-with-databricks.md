@@ -37,7 +37,13 @@ To attach a notebook to a cluster:
 
 ## Change source table schemas and variables
 
-The predefined SQL statements all refer to the `derived` schema. Make sure to update this to your own schema before attempting to run the notebook. It should be `[your_dbt_schema]_derived`.
+The predefined SQL statements all refer to the `derived` schema and use table names from the deprecated snowplow-web package. Make sure to update both the schema name and table names before running the notebook:
+
+1. **Schema**: Change from `derived` to `[your_dbt_schema]_derived`
+2. **Table names**: Update table references from:
+   - `snowplow_web_page_views` → `snowplow_unified_views`
+   - `snowplow_web_sessions` → `snowplow_unified_sessions`
+   - `snowplow_web_users` → `snowplow_unified_users`
 
 You can do this quickly by using the **Edit / Find and replace** functionality.
 

@@ -20,7 +20,7 @@ Similar to the predefined events, a number of entities are available to implemen
 
 ## Enable predefined entities
 
-The `webPage` entity is enabled by default in the JavaScript tracker. This is **required** for modeling your data using the `dbt-web-model`.
+The `webPage` entity is enabled by default in the JavaScript tracker. This is **required** for modeling your data using the `snowplow-unified` dbt package.
 
 ### JavaScript
 
@@ -75,7 +75,7 @@ Each event sent with this tracker will now contain the data from each of these e
 
 ### Google Tag Manager
 
-The `webPage` entity is enabled by default in GTM. This is **required** for modeling your data using the `dbt-web-model`.
+The `webPage` entity is enabled by default in GTM. This is **required** for modeling your data using the `snowplow-unified` dbt package.
 
 Enable the context by including the context options below in your variable template editor, under predefined contexts.
 

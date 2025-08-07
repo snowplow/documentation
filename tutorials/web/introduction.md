@@ -5,18 +5,18 @@ position: 1
 
 Welcome to the **analytics for web** tutorial. Once finished, you will be able to build a deeper understanding of customer behavior on your website and use your data to influence business decisions.
 
-Here you will learn to model and visualize Snowplow data using the [snowplow-web](https://hub.getdbt.com/snowplow/snowplow_web/latest/) dbt package and Streamlit, set up Snowplow tracking and enrichment, and apply what you have learned on your own pipeline to gain insights.
+Here you will learn to model and visualize Snowplow data using the [snowplow-unified](https://hub.getdbt.com/snowplow/snowplow_unified/latest/) dbt package and Streamlit, set up Snowplow tracking and enrichment, and apply what you have learned on your own pipeline to gain insights.
 
 ## Who this tutorial is for
 
-This tutorial is designed for data practitioners who would like to get familiar with Snowplow data, and those who want to learn how to use the snowplow-web dbt package and set up tracking using their company's website or single page application to gain insight from their customers' behavioral data as quickly as possible.
+This tutorial is designed for data practitioners who would like to get familiar with Snowplow data, and those who want to learn how to use the snowplow-unified dbt package and set up tracking using their company's website or single page application to gain insight from their customers' behavioral data as quickly as possible.
 
 ## What you will learn
 
 In approximately 8 working hours you can achieve the following:
 
 - **Upload data** - Upload a sample Snowplow events dataset to your warehouse
-- **Model** - Configure and run the snowplow-web data model
+- **Model** - Configure and run the snowplow-unified data model
 - **Visualize** - Visualize the modeled data with Streamlit or Databricks notebook
 - **Track** - Set up and deploy tracking to your website or single page application
 - **Enrich** - Add enrichments to your data
@@ -38,7 +38,7 @@ In approximately 8 working hours you can achieve the following:
 - Snowplow pipeline
 - Web app to implement tracking
 
-Please note that Snowflake, Databricks, or BigQuery will be used for illustration but the snowplow-web dbt package also supports Postgres and Redshift.
+Please note that Snowflake, Databricks, or BigQuery will be used for illustration but the snowplow-unified dbt package also supports Postgres and Redshift.
 
 ## What you will build
 

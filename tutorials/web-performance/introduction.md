@@ -31,7 +31,7 @@ In an estimated minimum of a day (~5.5 hours) you can achieve the following:
 
 ## Prerequisites
 
-- It is assumed that you are already familiar with the [snowplow-web](https://hub.getdbt.com/snowplow/snowplow_web/latest/) dbt package. If not, we recommend completing the [Advanced Analytics for Web](https://docs.snowplow.io/accelerators/web) accelerator.
+- It is assumed that you are already familiar with the [snowplow-web](https://hub.getdbt.com/snowplow/snowplow_web/latest/) dbt package.
 
 **Tracking and Enrichment**
 - Snowplow pipeline

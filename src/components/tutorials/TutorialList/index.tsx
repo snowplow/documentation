@@ -124,6 +124,55 @@ function topicFilter(selectedTopics: string[], tutorial?: Tutorial): boolean {
 
 const TopicValues: string[] = Object.values(TopicType.Values)
 
+// Get available options based on current filters
+function getFilteredAvailableOptions(
+  tutorials: Tutorial[],
+  search: string,
+  selectedTopics: string[],
+  selectedUseCases: string[],
+  selectedTechnologies: string[],
+  selectedSnowplowTech: string[]
+) {
+  // Filter tutorials based on current selections (excluding the filter we're calculating for)
+  const getFilteredTutorials = (excludeFilter: string) => {
+    return tutorials
+      .filter((tutorial) => searchFilter(search, tutorial))
+      .filter((tutorial) => excludeFilter !== 'topics' ? topicFilter(selectedTopics, tutorial) : true)
+      .filter((tutorial) => excludeFilter !== 'useCases' ? useCaseFilter(selectedUseCases, tutorial) : true)
+      .filter((tutorial) => excludeFilter !== 'technologies' ? technologyFilter(selectedTechnologies, tutorial) : true)
+      .filter((tutorial) => excludeFilter !== 'snowplowTech' ? snowplowTechFilter(selectedSnowplowTech, tutorial) : true)
+  }
+
+  // Get available options for each filter type
+  const availableTopics = new Set<string>()
+  const availableUseCases = new Set<string>()
+  const availableTechnologies = new Set<string>()
+  const availableSnowplowTech = new Set<string>()
+
+  getFilteredTutorials('topics').forEach(tutorial => {
+    availableTopics.add(tutorial.meta.label)
+  })
+
+  getFilteredTutorials('useCases').forEach(tutorial => {
+    tutorial.meta.useCases.forEach(useCase => availableUseCases.add(useCase))
+  })
+
+  getFilteredTutorials('technologies').forEach(tutorial => {
+    tutorial.meta.technologies.forEach(tech => availableTechnologies.add(tech))
+  })
+
+  getFilteredTutorials('snowplowTech').forEach(tutorial => {
+    tutorial.meta.snowplowTech.forEach(tech => availableSnowplowTech.add(tech))
+  })
+
+  return {
+    availableTopics: Array.from(availableTopics),
+    availableUseCases: Array.from(availableUseCases),
+    availableTechnologies: Array.from(availableTechnologies),
+    availableSnowplowTech: Array.from(availableSnowplowTech)
+  }
+}
+
 // Extract unique use cases from all tutorials
 function getAvailableUseCases(tutorials: Tutorial[]): string[] {
   const useCases = new Set<string>()
@@ -190,18 +239,30 @@ const TutorialList: FC = () => {
     () => getParsedTutorials(getMetaData()),
     []
   )
-  const availableUseCases = useMemo<string[]>(
+  const allAvailableUseCases = useMemo<string[]>(
     () => getAvailableUseCases(parsedTutorials),
     [parsedTutorials]
   )
-  const availableTechnologies = useMemo<string[]>(
+  const allAvailableTechnologies = useMemo<string[]>(
     () => getAvailableTechnologies(parsedTutorials),
     [parsedTutorials]
   )
-  const availableSnowplowTech = useMemo<string[]>(
+  const allAvailableSnowplowTech = useMemo<string[]>(
     () => getAvailableSnowplowTech(parsedTutorials),
     [parsedTutorials]
   )
+  
+  // Calculate filtered available options based on current selections
+  const filteredAvailableOptions = useMemo(() => {
+    return getFilteredAvailableOptions(
+      parsedTutorials,
+      search,
+      selectedTopics,
+      selectedUseCases,
+      selectedTechnologies,
+      selectedSnowplowTech
+    )
+  }, [parsedTutorials, search, selectedTopics, selectedUseCases, selectedTechnologies, selectedSnowplowTech])
   const tutorials = useMemo<Tutorial[]>(
     () =>
       filterTutorials(
@@ -227,13 +288,14 @@ const TutorialList: FC = () => {
           setSelectedTopics={setSelectedTopics}
           selectedUseCases={selectedUseCases}
           setSelectedUseCases={setSelectedUseCases}
-          availableUseCases={availableUseCases}
+          allAvailableUseCases={allAvailableUseCases}
           selectedTechnologies={selectedTechnologies}
           setSelectedTechnologies={setSelectedTechnologies}
-          availableTechnologies={availableTechnologies}
+          allAvailableTechnologies={allAvailableTechnologies}
           selectedSnowplowTech={selectedSnowplowTech}
           setSelectedSnowplowTech={setSelectedSnowplowTech}
-          availableSnowplowTech={availableSnowplowTech}
+          allAvailableSnowplowTech={allAvailableSnowplowTech}
+          filteredAvailableOptions={filteredAvailableOptions}
           tutorials={tutorials}
         />
       ) : (
@@ -243,13 +305,14 @@ const TutorialList: FC = () => {
           setSelectedTopics={setSelectedTopics}
           selectedUseCases={selectedUseCases}
           setSelectedUseCases={setSelectedUseCases}
-          availableUseCases={availableUseCases}
+          allAvailableUseCases={allAvailableUseCases}
           selectedTechnologies={selectedTechnologies}
           setSelectedTechnologies={setSelectedTechnologies}
-          availableTechnologies={availableTechnologies}
+          allAvailableTechnologies={allAvailableTechnologies}
           selectedSnowplowTech={selectedSnowplowTech}
           setSelectedSnowplowTech={setSelectedSnowplowTech}
-          availableSnowplowTech={availableSnowplowTech}
+          allAvailableSnowplowTech={allAvailableSnowplowTech}
+          filteredAvailableOptions={filteredAvailableOptions}
           tutorials={tutorials}
         />
       )}
@@ -279,13 +342,19 @@ const MobileTutorialList: FC<{
   setSelectedTopics: React.Dispatch<React.SetStateAction<string[]>>
   selectedUseCases: string[]
   setSelectedUseCases: React.Dispatch<React.SetStateAction<string[]>>
-  availableUseCases: string[]
+  allAvailableUseCases: string[]
   selectedTechnologies: string[]
   setSelectedTechnologies: React.Dispatch<React.SetStateAction<string[]>>
-  availableTechnologies: string[]
+  allAvailableTechnologies: string[]
   selectedSnowplowTech: string[]
   setSelectedSnowplowTech: React.Dispatch<React.SetStateAction<string[]>>
-  availableSnowplowTech: string[]
+  allAvailableSnowplowTech: string[]
+  filteredAvailableOptions: {
+    availableTopics: string[]
+    availableUseCases: string[]
+    availableTechnologies: string[]
+    availableSnowplowTech: string[]
+  }
   tutorials: Tutorial[]
 }> = ({
   setSearch,
@@ -293,13 +362,14 @@ const MobileTutorialList: FC<{
   setSelectedTopics,
   selectedUseCases,
   setSelectedUseCases,
-  availableUseCases,
+  allAvailableUseCases,
   selectedTechnologies,
   setSelectedTechnologies,
-  availableTechnologies,
+  allAvailableTechnologies,
   selectedSnowplowTech,
   setSelectedSnowplowTech,
-  availableSnowplowTech,
+  allAvailableSnowplowTech,
+  filteredAvailableOptions,
   tutorials,
 }) => {
   return (
@@ -309,21 +379,25 @@ const MobileTutorialList: FC<{
         <UseCaseFilter
           selectedUseCases={selectedUseCases}
           setSelectedUseCases={setSelectedUseCases}
-          availableUseCases={availableUseCases}
+          allAvailableUseCases={allAvailableUseCases}
+          availableUseCases={filteredAvailableOptions.availableUseCases}
         />
         <TopicFilter
           selectedTopics={selectedTopics}
           setSelectedTopics={setSelectedTopics}
+          availableTopics={filteredAvailableOptions.availableTopics}
         />
         <TechnologyFilter
           selectedTechnologies={selectedTechnologies}
           setSelectedTechnologies={setSelectedTechnologies}
-          availableTechnologies={availableTechnologies}
+          allAvailableTechnologies={allAvailableTechnologies}
+          availableTechnologies={filteredAvailableOptions.availableTechnologies}
         />
         <SnowplowTechFilter
           selectedSnowplowTech={selectedSnowplowTech}
           setSelectedSnowplowTech={setSelectedSnowplowTech}
-          availableSnowplowTech={availableSnowplowTech}
+          allAvailableSnowplowTech={allAvailableSnowplowTech}
+          availableSnowplowTech={filteredAvailableOptions.availableSnowplowTech}
         />
 
         {tutorials.map((tutorial: Tutorial) => (
@@ -342,13 +416,19 @@ const DesktopTutorialList: FC<{
   setSelectedTopics: React.Dispatch<React.SetStateAction<string[]>>
   selectedUseCases: string[]
   setSelectedUseCases: React.Dispatch<React.SetStateAction<string[]>>
-  availableUseCases: string[]
+  allAvailableUseCases: string[]
   selectedTechnologies: string[]
   setSelectedTechnologies: React.Dispatch<React.SetStateAction<string[]>>
-  availableTechnologies: string[]
+  allAvailableTechnologies: string[]
   selectedSnowplowTech: string[]
   setSelectedSnowplowTech: React.Dispatch<React.SetStateAction<string[]>>
-  availableSnowplowTech: string[]
+  allAvailableSnowplowTech: string[]
+  filteredAvailableOptions: {
+    availableTopics: string[]
+    availableUseCases: string[]
+    availableTechnologies: string[]
+    availableSnowplowTech: string[]
+  }
   tutorials: Tutorial[]
 }> = ({
   setSearch,
@@ -356,13 +436,14 @@ const DesktopTutorialList: FC<{
   setSelectedTopics,
   selectedUseCases,
   setSelectedUseCases,
-  availableUseCases,
+  allAvailableUseCases,
   selectedTechnologies,
   setSelectedTechnologies,
-  availableTechnologies,
+  allAvailableTechnologies,
   selectedSnowplowTech,
   setSelectedSnowplowTech,
-  availableSnowplowTech,
+  allAvailableSnowplowTech,
+  filteredAvailableOptions,
   tutorials,
 }) => {
   return (
@@ -375,21 +456,25 @@ const DesktopTutorialList: FC<{
             <UseCaseFilter
               selectedUseCases={selectedUseCases}
               setSelectedUseCases={setSelectedUseCases}
-              availableUseCases={availableUseCases}
+              allAvailableUseCases={allAvailableUseCases}
+              availableUseCases={filteredAvailableOptions.availableUseCases}
             />
             <TopicFilter
               selectedTopics={selectedTopics}
               setSelectedTopics={setSelectedTopics}
+              availableTopics={filteredAvailableOptions.availableTopics}
             />
             <TechnologyFilter
               selectedTechnologies={selectedTechnologies}
               setSelectedTechnologies={setSelectedTechnologies}
-              availableTechnologies={availableTechnologies}
+              allAvailableTechnologies={allAvailableTechnologies}
+              availableTechnologies={filteredAvailableOptions.availableTechnologies}
             />
             <SnowplowTechFilter
               selectedSnowplowTech={selectedSnowplowTech}
               setSelectedSnowplowTech={setSelectedSnowplowTech}
-              availableSnowplowTech={availableSnowplowTech}
+              allAvailableSnowplowTech={allAvailableSnowplowTech}
+              availableSnowplowTech={filteredAvailableOptions.availableSnowplowTech}
             />
           </TopicFilterSidebar>
         </Grid>
@@ -432,8 +517,9 @@ const SearchBar: FC<{
 const SnowplowTechFilter: FC<{
   selectedSnowplowTech: string[]
   setSelectedSnowplowTech: React.Dispatch<React.SetStateAction<string[]>>
+  allAvailableSnowplowTech: string[]
   availableSnowplowTech: string[]
-}> = ({ selectedSnowplowTech, setSelectedSnowplowTech, availableSnowplowTech }) => {
+}> = ({ selectedSnowplowTech, setSelectedSnowplowTech, allAvailableSnowplowTech, availableSnowplowTech }) => {
   const handleSnowplowTechChange = (tech: string, checked: boolean) => {
     if (checked) {
       setSelectedSnowplowTech((prev) => [...prev, tech])
@@ -450,20 +536,32 @@ const SnowplowTechFilter: FC<{
       >
         Filter by Snowplow technology
       </Typography>
-      {availableSnowplowTech.map((tech) => (
-        <FormControlLabel
-          key={tech}
-          control={
-            <Checkbox
-              checked={selectedSnowplowTech.includes(tech)}
-              onChange={(e) => handleSnowplowTechChange(tech, e.target.checked)}
-              sx={{ '&.Mui-checked': { color: 'rgba(102, 56, 184, 1)' } }}
-            />
-          }
-          label={tech}
-          sx={{ display: 'block', mb: 1 }}
-        />
-      ))}
+      {allAvailableSnowplowTech.map((tech) => {
+        const isAvailable = availableSnowplowTech.includes(tech) || selectedSnowplowTech.includes(tech)
+        return (
+          <FormControlLabel
+            key={tech}
+            control={
+              <Checkbox
+                checked={selectedSnowplowTech.includes(tech)}
+                onChange={(e) => handleSnowplowTechChange(tech, e.target.checked)}
+                disabled={!isAvailable}
+                sx={{ 
+                  '&.Mui-checked': { color: 'rgba(102, 56, 184, 1)' },
+                  '&.Mui-disabled': { opacity: 0.5 }
+                }}
+              />
+            }
+            label={tech}
+            sx={{ 
+              display: 'block', 
+              mb: 1,
+              opacity: isAvailable ? 1 : 0.5,
+              color: isAvailable ? 'inherit' : 'rgba(0, 0, 0, 0.38)'
+            }}
+          />
+        )
+      })}
     </Box>
   )
 }
@@ -471,8 +569,9 @@ const SnowplowTechFilter: FC<{
 const TechnologyFilter: FC<{
   selectedTechnologies: string[]
   setSelectedTechnologies: React.Dispatch<React.SetStateAction<string[]>>
+  allAvailableTechnologies: string[]
   availableTechnologies: string[]
-}> = ({ selectedTechnologies, setSelectedTechnologies, availableTechnologies }) => {
+}> = ({ selectedTechnologies, setSelectedTechnologies, allAvailableTechnologies, availableTechnologies }) => {
   const handleTechnologyChange = (technology: string, checked: boolean) => {
     if (checked) {
       setSelectedTechnologies((prev) => [...prev, technology])
@@ -489,20 +588,32 @@ const TechnologyFilter: FC<{
       >
         Filter by technology
       </Typography>
-      {availableTechnologies.map((technology) => (
-        <FormControlLabel
-          key={technology}
-          control={
-            <Checkbox
-              checked={selectedTechnologies.includes(technology)}
-              onChange={(e) => handleTechnologyChange(technology, e.target.checked)}
-              sx={{ '&.Mui-checked': { color: 'rgba(102, 56, 184, 1)' } }}
-            />
-          }
-          label={technology}
-          sx={{ display: 'block', mb: 1 }}
-        />
-      ))}
+      {allAvailableTechnologies.map((technology) => {
+        const isAvailable = availableTechnologies.includes(technology) || selectedTechnologies.includes(technology)
+        return (
+          <FormControlLabel
+            key={technology}
+            control={
+              <Checkbox
+                checked={selectedTechnologies.includes(technology)}
+                onChange={(e) => handleTechnologyChange(technology, e.target.checked)}
+                disabled={!isAvailable}
+                sx={{ 
+                  '&.Mui-checked': { color: 'rgba(102, 56, 184, 1)' },
+                  '&.Mui-disabled': { opacity: 0.5 }
+                }}
+              />
+            }
+            label={technology}
+            sx={{ 
+              display: 'block', 
+              mb: 1,
+              opacity: isAvailable ? 1 : 0.5,
+              color: isAvailable ? 'inherit' : 'rgba(0, 0, 0, 0.38)'
+            }}
+          />
+        )
+      })}
     </Box>
   )
 }
@@ -510,8 +621,9 @@ const TechnologyFilter: FC<{
 const UseCaseFilter: FC<{
   selectedUseCases: string[]
   setSelectedUseCases: React.Dispatch<React.SetStateAction<string[]>>
+  allAvailableUseCases: string[]
   availableUseCases: string[]
-}> = ({ selectedUseCases, setSelectedUseCases, availableUseCases }) => {
+}> = ({ selectedUseCases, setSelectedUseCases, allAvailableUseCases, availableUseCases }) => {
   const handleUseCaseChange = (useCase: string, checked: boolean) => {
     if (checked) {
       setSelectedUseCases((prev) => [...prev, useCase])
@@ -528,20 +640,32 @@ const UseCaseFilter: FC<{
       >
         Filter by use case
       </Typography>
-      {availableUseCases.map((useCase) => (
-        <FormControlLabel
-          key={useCase}
-          control={
-            <Checkbox
-              checked={selectedUseCases.includes(useCase)}
-              onChange={(e) => handleUseCaseChange(useCase, e.target.checked)}
-              sx={{ '&.Mui-checked': { color: 'rgba(102, 56, 184, 1)' } }}
-            />
-          }
-          label={useCase}
-          sx={{ display: 'block', mb: 1 }}
-        />
-      ))}
+      {allAvailableUseCases.map((useCase) => {
+        const isAvailable = availableUseCases.includes(useCase) || selectedUseCases.includes(useCase)
+        return (
+          <FormControlLabel
+            key={useCase}
+            control={
+              <Checkbox
+                checked={selectedUseCases.includes(useCase)}
+                onChange={(e) => handleUseCaseChange(useCase, e.target.checked)}
+                disabled={!isAvailable}
+                sx={{ 
+                  '&.Mui-checked': { color: 'rgba(102, 56, 184, 1)' },
+                  '&.Mui-disabled': { opacity: 0.5 }
+                }}
+              />
+            }
+            label={useCase}
+            sx={{ 
+              display: 'block', 
+              mb: 1,
+              opacity: isAvailable ? 1 : 0.5,
+              color: isAvailable ? 'inherit' : 'rgba(0, 0, 0, 0.38)'
+            }}
+          />
+        )
+      })}
     </Box>
   )
 }
@@ -549,7 +673,8 @@ const UseCaseFilter: FC<{
 const TopicFilter: FC<{
   selectedTopics: string[]
   setSelectedTopics: React.Dispatch<React.SetStateAction<string[]>>
-}> = ({ selectedTopics, setSelectedTopics }) => {
+  availableTopics: string[]
+}> = ({ selectedTopics, setSelectedTopics, availableTopics }) => {
   const handleTopicChange = (topic: string, checked: boolean) => {
     if (checked) {
       setSelectedTopics((prev) => [...prev, topic])
@@ -566,20 +691,32 @@ const TopicFilter: FC<{
       >
         Filter by topic
       </Typography>
-      {TopicValues.map((topic) => (
-        <FormControlLabel
-          key={topic}
-          control={
-            <Checkbox
-              checked={selectedTopics.includes(topic)}
-              onChange={(e) => handleTopicChange(topic, e.target.checked)}
-              sx={{ '&.Mui-checked': { color: 'rgba(102, 56, 184, 1)' } }}
-            />
-          }
-          label={topic}
-          sx={{ display: 'block', mb: 1 }}
-        />
-      ))}
+      {TopicValues.map((topic) => {
+        const isAvailable = availableTopics.includes(topic) || selectedTopics.includes(topic)
+        return (
+          <FormControlLabel
+            key={topic}
+            control={
+              <Checkbox
+                checked={selectedTopics.includes(topic)}
+                onChange={(e) => handleTopicChange(topic, e.target.checked)}
+                disabled={!isAvailable}
+                sx={{ 
+                  '&.Mui-checked': { color: 'rgba(102, 56, 184, 1)' },
+                  '&.Mui-disabled': { opacity: 0.5 }
+                }}
+              />
+            }
+            label={topic}
+            sx={{ 
+              display: 'block', 
+              mb: 1,
+              opacity: isAvailable ? 1 : 0.5,
+              color: isAvailable ? 'inherit' : 'rgba(0, 0, 0, 0.38)'
+            }}
+          />
+        )
+      })}
     </Box>
   )
 }

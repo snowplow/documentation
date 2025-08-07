@@ -7,7 +7,6 @@ import {
   FormControl,
   OutlinedInput,
   Paper,
-  Select,
   styled,
   Typography,
 } from '@mui/material'
@@ -78,22 +77,20 @@ export const SearchBarInput = styled(OutlinedInput)(({ theme }) => ({
   height: '44px',
 }))
 
-export const TopicFilterFormControl = styled(FormControl)(({ theme }) => ({
-  border: grey[300],
-  boxShadow: shadow,
-  width: '12rem',
-  mb: theme.spacing(4),
-}))
-
 export const SearchBarFormControl = styled(FormControl)(({ theme }) => ({
-  width: '22rem',
+  width: '100%',
   marginBottom: theme.spacing(4),
 }))
 
-export const TopicFilterSelect = styled(Select)(({ theme }) => ({
+export const TopicFilterSidebar = styled(Box)(({ theme }) => ({
+  padding: theme.spacing(2),
   backgroundColor: cssVar.MuiPaletteBackgroundPaper,
-  color: cssVar.MuiPaletteTextPrimary,
-  height: '44px',
+  borderRadius: theme.spacing(1),
+  border: '1px solid ' + grey[200],
+  boxShadow: shadow,
+  position: 'sticky',
+  top: theme.spacing(2),
+  height: 'fit-content',
 }))
 
 export const SnowplowPurpleSearchIcon = styled(Search)(({ theme }) => ({

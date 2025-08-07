@@ -8,7 +8,9 @@ import {
   Box,
   Grid,
   InputAdornment,
-  MenuItem,
+  Checkbox,
+  FormControlLabel,
+  Typography,
   useMediaQuery,
   useTheme,
 } from '@mui/material'
@@ -18,10 +20,9 @@ import {
   SearchBarFormControl,
   SearchBarInput,
   SnowplowPurpleSearchIcon,
-  TopicFilterFormControl,
-  TopicFilterSelect,
   TutorialCardTitle,
   Grid as TutorialGrid,
+  TopicFilterSidebar,
 } from './styledComponents'
 import { Meta, Topic as TopicType, Tutorial } from '../models'
 import { Card, Description, StartButton, Topic } from './styledComponents'
@@ -92,17 +93,13 @@ function searchFilter(term: string, tutorial?: Tutorial): boolean {
     : false
 }
 
-function topicFilter(topic: TopicDropdown, tutorial?: Tutorial): boolean {
+function topicFilter(selectedTopics: string[], tutorial?: Tutorial): boolean {
   if (!tutorial) return false
-  if (topic === 'All topics') return true
-  return tutorial ? tutorial?.meta.label === topic : false
+  if (selectedTopics.length === 0) return true
+  return selectedTopics.includes(tutorial.meta.label)
 }
 
-type TopicDropdown = keyof typeof TopicType.Values | 'All topics'
-const TopicDropdownValues: TopicDropdown[] = [
-  'All topics',
-  ...Object.values(TopicType.Values),
-]
+const TopicValues: string[] = Object.values(TopicType.Values)
 
 function getParsedTutorials(tutorials: Meta[]): Tutorial[] {
   return Object.values(tutorials).map((metaJson) => {
@@ -135,14 +132,14 @@ const TutorialList: FC = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
 
   const [search, setSearch] = useState('')
-  const [topic, setTopic] = useState<TopicDropdown>('All topics')
+  const [selectedTopics, setSelectedTopics] = useState<string[]>([])
   const parsedTutorials = useMemo<Tutorial[]>(
     () => getParsedTutorials(getMetaData()),
     []
   )
   const tutorials = useMemo<Tutorial[]>(
-    () => filterTutorials(search, topic, parsedTutorials),
-    [search, topic, parsedTutorials]
+    () => filterTutorials(search, selectedTopics, parsedTutorials),
+    [search, selectedTopics, parsedTutorials]
   )
 
   return (
@@ -153,15 +150,15 @@ const TutorialList: FC = () => {
       {isMobile ? (
         <MobileTutorialList
           setSearch={setSearch}
-          topic={topic}
-          setTopic={setTopic}
+          selectedTopics={selectedTopics}
+          setSelectedTopics={setSelectedTopics}
           tutorials={tutorials}
         />
       ) : (
         <DesktopTutorialList
           setSearch={setSearch}
-          topic={topic}
-          setTopic={setTopic}
+          selectedTopics={selectedTopics}
+          setSelectedTopics={setSelectedTopics}
           tutorials={tutorials}
         />
       )}
@@ -171,12 +168,12 @@ const TutorialList: FC = () => {
 
 function filterTutorials(
   search: string,
-  topic: TopicDropdown,
+  selectedTopics: string[],
   tutorials: Tutorial[]
 ): Tutorial[] {
   return tutorials
     .filter((tutorial) => searchFilter(search, tutorial))
-    .filter((tutorial) => topicFilter(topic, tutorial))
+    .filter((tutorial) => topicFilter(selectedTopics, tutorial))
 }
 
 const IntroductionText: FC = () => {
@@ -192,15 +189,15 @@ const IntroductionText: FC = () => {
 
 const MobileTutorialList: FC<{
   setSearch: React.Dispatch<React.SetStateAction<string>>
-  topic: TopicDropdown
-  setTopic: React.Dispatch<React.SetStateAction<TopicDropdown>>
+  selectedTopics: string[]
+  setSelectedTopics: React.Dispatch<React.SetStateAction<string[]>>
   tutorials: Tutorial[]
-}> = ({ setSearch, topic, setTopic, tutorials }) => {
+}> = ({ setSearch, selectedTopics, setSelectedTopics, tutorials }) => {
   return (
     <Box sx={{ mt: 1 }}>
       <Grid container direction="column" rowSpacing={2}>
         <SearchBar setSearch={setSearch} />
-        <TopicFilter topic={topic} setTopic={setTopic} />
+        <TopicFilter selectedTopics={selectedTopics} setSelectedTopics={setSelectedTopics} />
 
         <IntroductionText />
 
@@ -216,26 +213,33 @@ const MobileTutorialList: FC<{
 
 const DesktopTutorialList: FC<{
   setSearch: React.Dispatch<React.SetStateAction<string>>
-  topic: TopicDropdown
-  setTopic: React.Dispatch<React.SetStateAction<TopicDropdown>>
+  selectedTopics: string[]
+  setSelectedTopics: React.Dispatch<React.SetStateAction<string[]>>
   tutorials: Tutorial[]
-}> = ({ setSearch, topic, setTopic, tutorials }) => {
+}> = ({ setSearch, selectedTopics, setSelectedTopics, tutorials }) => {
   return (
     <Box marginX={8} marginY={3} sx={{ minWidth: '90vw', mr: 0 }}>
-      <Grid container columnSpacing={2}>
-        <SearchBar setSearch={setSearch} />
-        <TopicFilter topic={topic} setTopic={setTopic} />
+      <Grid container columnSpacing={4}>
+        {/* Left sidebar with filters */}
+        <Grid item xs={3}>
+          <TopicFilterSidebar>
+            <SearchBar setSearch={setSearch} />
+            <TopicFilter selectedTopics={selectedTopics} setSelectedTopics={setSelectedTopics} />
+          </TopicFilterSidebar>
+        </Grid>
+        
+        {/* Main content area */}
+        <Grid item xs={9}>
+          <IntroductionText />
+          <TutorialGrid mb={2}>
+            {tutorials.map((tutorial: Tutorial) => (
+              <Grid item key={tutorial.meta.id}>
+                <TutorialCard tutorial={tutorial} />
+              </Grid>
+            ))}
+          </TutorialGrid>
+        </Grid>
       </Grid>
-
-      <IntroductionText />
-
-      <TutorialGrid mb={2}>
-        {tutorials.map((tutorial: Tutorial) => (
-          <Grid item key={tutorial.meta.id}>
-            <TutorialCard tutorial={tutorial} />
-          </Grid>
-        ))}
-      </TutorialGrid>
     </Box>
   )
 }
@@ -261,24 +265,37 @@ const SearchBar: FC<{
 }
 
 const TopicFilter: FC<{
-  topic: TopicDropdown
-  setTopic: React.Dispatch<React.SetStateAction<TopicDropdown>>
-}> = ({ topic, setTopic }) => {
+  selectedTopics: string[]
+  setSelectedTopics: React.Dispatch<React.SetStateAction<string[]>>
+}> = ({ selectedTopics, setSelectedTopics }) => {
+  const handleTopicChange = (topic: string, checked: boolean) => {
+    if (checked) {
+      setSelectedTopics((prev) => [...prev, topic])
+    } else {
+      setSelectedTopics((prev) => prev.filter((t) => t !== topic))
+    }
+  }
+
   return (
-    <Grid item>
-      <TopicFilterFormControl variant="outlined">
-        <TopicFilterSelect
-          value={topic}
-          onChange={(e) => setTopic(e.target.value as TopicDropdown)}
-        >
-          {TopicDropdownValues.map((topic) => (
-            <MenuItem key={topic} value={topic}>
-              {topic}
-            </MenuItem>
-          ))}
-        </TopicFilterSelect>
-      </TopicFilterFormControl>
-    </Grid>
+    <Box sx={{ mt: 2 }}>
+      <Typography variant="h6" sx={{ mb: 2, fontSize: '16px', fontWeight: 600 }}>
+        Filter by Topic
+      </Typography>
+      {TopicValues.map((topic) => (
+        <FormControlLabel
+          key={topic}
+          control={
+            <Checkbox
+              checked={selectedTopics.includes(topic)}
+              onChange={(e) => handleTopicChange(topic, e.target.checked)}
+              sx={{ '&.Mui-checked': { color: 'rgba(102, 56, 184, 1)' } }}
+            />
+          }
+          label={topic}
+          sx={{ display: 'block', mb: 1 }}
+        />
+      ))}
+    </Box>
   )
 }
 

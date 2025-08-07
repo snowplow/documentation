@@ -8,15 +8,15 @@ Signals has two attribute groupings:
 * Attribute groups, for defining attributes
 * Services, for consuming attributes
 
-An Attribute Group is a versioned collection of attributes; the attributes are the properties of the Attribute Group. Each Attribute Group is specific to one attribute key and one data source (stream or batch).
+An attribute group is a versioned collection of attributes; the attributes are the properties of the attribute group. Each attribute group is specific to one attribute key and one data source (stream or batch).
 
 ## Attribute management
 
-Every Attribute Group has a version number.
+Every attribute group has a version number.
 
-Signals provides functionality for separating attribute definition from calculation. This allows you to set up your attributes and business logic before putting them into production. The options are different depending on whether the Attribute Group is for stream or batch attributes.
+Signals provides functionality for separating attribute definition from calculation. This allows you to set up your attributes and business logic before putting them into production. The options are different depending on whether the attribute group is for stream or batch attributes.
 
-To configure a table for batch attributes, you may choose to set up an Attribute Group using that source without defining any attributes initially. This ensures that the table is ready and tested for adding and calculating attributes. Read more about configuring batch attributes and attribute groups in the [batch calculations](/docs/signals/configuration/batch-calculations/index.md) section.
+To configure a table for batch attributes, you may choose to set up an attribute group using that source without defining any attributes initially. This ensures that the table is ready and tested for adding and calculating attributes. Read more about configuring batch attributes and attribute groups in the [batch calculations](/docs/signals/configuration/batch-calculations/index.md) section.
 
 For stream attributes, you can choose to configure and apply attribute groups that don't calculate their attribute values.
 
@@ -26,7 +26,7 @@ This means that configuration, calculation, materialization, and retrieval are f
 
 TODO
 
-## Types of Attribute groups
+## Types of attribute groups
 
 Signals includes three types of attribute groups. Choose which one to use depending on how you want to calculate and materialize the attributes:
 
@@ -107,23 +107,23 @@ my_external_batch_attribute_group = ExternalBatchAttributeGroup(
 
 
 
-## Attribute Group options
+## Attribute group options
 
 The table below lists all available arguments for all types of `attribute groups`:
 
-Below is a summary of all options available for configuring attribute groups in Signals. The "Applies to" column shows which Attribute Group types each option is relevant for.
+Below is a summary of all options available for configuring attribute groups in Signals. The "Applies to" column shows which attribute group types each option is relevant for.
 
 | Argument       | Description                                            | Type                | Default | Required? | Applies to                                           |
 | -------------- | ------------------------------------------------------ | ------------------- | ------- | --------- | -----------------------------------------------------|
-| `name`         | The name of the Attribute Group                        | `string`            |         | ✅         | All                                                 |
-| `version`      | The version of the Attribute Group                     | `int`               | 1       | ❌         | All                                                 |
-| `attribute_key`| The attribute key associated with the Attribute Group  | `AttributeKey`      |         | ✅         | All                                                 |
-| `owner`        | The owner of the Attribute Group                       | `Email`             |         | ✅         | All                                                 |
-| `description`  | A description of the Attribute Group                   | `string`            |         | ❌         | All                                                 |
+| `name`         | The name of the attribute group                        | `string`            |         | ✅         | All                                                 |
+| `version`      | The version of the attribute group                     | `int`               | 1       | ❌         | All                                                 |
+| `attribute_key`| The attribute key associated with the attribute group  | `AttributeKey`      |         | ✅         | All                                                 |
+| `owner`        | The owner of the attribute group                       | `Email`             |         | ✅         | All                                                 |
+| `description`  | A description of the attribute group                   | `string`            |         | ❌         | All                                                 |
 | `ttl`          | Time-to-live for attributes in the Profile Store       | `timedelta`         |         | ❌         | All                                                 |
 | `tags`         | Metadata key-value pairs                               | `dict`              |         | ❌         | All                                                 |
 | `attributes`   | List of attributes to calculate                        | list of `Attribute` |         | ✅         | `StreamAttributeGroup`, `BatchAttributeGroup`       |
-| `batch_source` | The batch data source for the Attribute Group          | `BatchSource`       |         | ✅/❌      | `BatchAttributeGroup`/`ExternalBatchAttributeGroup` |
+| `batch_source` | The batch data source for the attribute group          | `BatchSource`       |         | ✅/❌      | `BatchAttributeGroup`/`ExternalBatchAttributeGroup` |
 | `fields`       | Table columns for materialization                      | `Field`             |         | ✅         | `ExternalBatchAttributeGroup`                       |
 | `offline`      | Calculate in warehouse (`True`) or real-time (`False`) | `bool`              | varies  | ❌         | All                                                 |
 | `online`       | Enable online retrieval (`True`) or not (`False`)      | `bool`              | `True`  | ❌         | All                                                 |
@@ -131,11 +131,11 @@ Below is a summary of all options available for configuring attribute groups in 
 
 If no `ttl` is set, the attribute key's `ttl` will be used. If the attribute key also has no `ttl`, there will be no time limit for attributes.
 
-## Extended stream Attribute Group example
+## Extended stream attribute group example
 
-This example shows all the available configuration options for a stream Attribute Group. To find out how to configure a batch Attribute Group, see the [batch calculations](/docs/signals/configuration/batch-calculations/index.md) section.
+This example shows all the available configuration options for a stream attribute group. To find out how to configure a batch attribute group, see the [batch calculations](/docs/signals/configuration/batch-calculations/index.md) section.
 
-This Attribute Group groups attributes for a user attribute key, to be calculated in real-time.
+This attribute group groups attributes for a user attribute key, to be calculated in real-time.
 
 ```python
 from snowplow_signals import StreamAttributeGroup, user_id
@@ -161,11 +161,11 @@ stream_attribute_group = StreamAttributeGroup(
 )
 ```
 
-Signals will start calculating attributes as soon as this Attribute Group configuration is applied.
+Signals will start calculating attributes as soon as this attribute group configuration is applied.
 
 ## Testing attribute groups
 
-To understand what the output of an Attribute Group will look like, use the Signals `test` method. This will output a table of attributes calculated from your `atomic` events table.
+To understand what the output of an attribute group will look like, use the Signals `test` method. This will output a table of attributes calculated from your `atomic` events table.
 
 ```python
 from snowplow_signals import Signals
@@ -187,7 +187,7 @@ test_data = sp_signals.test(
 While you can filter on specific app_ids during testing, both the streaming and batch engines may be configured to process only a subset of relevant app_ids to avoid unnecessary compute. As a result, testing with an arbitrary app_id may not yield expected data if it isn’t included in the configured subset.
 :::
 
-To see which attributes an Attribute Group has, use `get_attribute_group()`. Here's an example:
+To see which attributes an attribute group has, use `get_attribute_group()`. Here's an example:
 
 ```python
 attribute_definitions = sp_signals.get_attribute_group(
@@ -202,8 +202,8 @@ The table below lists all available arguments for `get_attribute_group()`
 
 | Argument  | Description                          | Type     | Required? |
 | --------- | ------------------------------------ | -------- | --------- |
-| `name`    | The name of the Attribute Group      | `string` | ✅        |
-| `version` | The Attribute Group version          | `int`    | ❌        |
+| `name`    | The name of the attribute group      | `string` | ✅        |
+| `version` | The attribute group version          | `int`    | ❌        |
 
 If you don't specify a version, Signals will retrieve the latest version.
 

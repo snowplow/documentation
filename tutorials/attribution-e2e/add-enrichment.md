@@ -44,6 +44,6 @@ For Open Source users adding enrichments can be achieved by adding the following
 }
 ```
 
-Enabling this enrichment will populate the mkt_medium, mkt_source, mkt_term, mkt_content and mkt_campaign columns in your events table, according to the mapping specified in the enrichment.
+Enabling this enrichment will populate the `mkt_medium`, `mkt_source`, `mkt_term`, `mkt_content` and `mkt_campaign` columns in your events table, according to the mapping specified in the enrichment.
 
-For full details on each of these enriched fields please refer to the full documentation available [here](https://docs.snowplow.io/docs/enriching-your-data/available-enrichments/campaign-attribution-enrichment/).
+For full details on each of these enriched fields please refer to the [full documentation](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/).

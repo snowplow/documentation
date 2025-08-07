@@ -117,7 +117,7 @@ Now the tracker has everything required to start collecting web performance data
 
 ## The web_vitals event
 
-After adding the web-vitals plugin to your setup, the tracker will send a `web_vitals` event every time a user navigates away from one of your pages. This event will include as accurate information about web vital metrics as possible. 
+After adding the web-vitals plugin to your setup, the tracker will send a `web_vitals` event every time a user navigates away from one of your pages. This event will include as accurate information about web vital metrics as possible.
 
 Currently the event will collect the following key metrics:
 
@@ -128,9 +128,8 @@ Currently the event will collect the following key metrics:
 - Interaction to next paint (INP)
 - Time to first byte (TTFB)
 
-For more information you can browse the relevant [iglu schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/web_vitals/jsonschema/).
+For more information you can browse the relevant [Iglu schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/web_vitals/jsonschema/).
 
-{{% notice note %}}
+:::note
 Currently the web performance data collection methods and metrics are more fit towards multi-page applications. For single-page applications (SPAs), the required measurements will need to be refined in a different way.
-**If you have questions on how single-page application web performance metrics can be measured and collected, reach out to us on [Community](https://community.snowplow.io/), or contact [Support](https://support.snowplow.io/) if you are on BDP Cloud or Enterprise.**
-{{% /notice %}}
+:::

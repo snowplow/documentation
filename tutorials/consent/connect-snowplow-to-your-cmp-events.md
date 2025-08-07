@@ -7,9 +7,9 @@ Most companies use consent management platforms to manage consent selection for 
 
 We'll demonstrate how you can use [Cookiebot](https://www.cookiebot.com/) and [Onetrust](https://www.onetrust.com/products/cookie-consent/) methods to hook into consent preference selection programmatically and send this data to Snowplow. Most CMPs have similar functionality so everything shown in this guide can be adjusted to suit your needs.
 
-{{% notice info %}}
+:::note
 The examples below assume that `partial consent` is when the visitor does not accept all the available scopes, but a selection of them. The use case for your application could as well be targeting the type of button that was pressed which reveals different intent. The API is designed to fit a variety of use-cases, you just need to add the code modified for your selected consent management platform.
-{{% /notice %}}
+:::
 
 ## Using Cookiebot
 
@@ -130,7 +130,7 @@ Based on the OneTrust developer [documentation](https://developer.onetrust.com/o
 To do that we're going to create a function called `trackConsent` and call it using the `OnConsentChanged` hook.
 
 ```js
-/** 
+/**
  * The OptanonWrapper function will be called by the OneTrust CMP when it loads.
  * If you will use the OptanonWrapper function will depend on your setup.
  */

@@ -56,9 +56,9 @@ Click **Create key** and configure with the following settings:
 
 - **Key Administrators**: Select the roles/users from your security team that
   need administrative access to the key
-- **Other AWS Accounts**: **CRITICAL - Add your Snowplow pipeline account ID here
+- **Other AWS Accounts**: **CRITICAL** - Add your Snowplow pipeline account ID here
 
-*⚠️ Important: The "Other AWS Accounts" step is essential. Without adding the 
+*⚠️ Important: The "Other AWS Accounts" step is essential. Without adding the
 Snowplow pipeline account ID, the encryption will not work.*
 
 ## Step 2: Key Policy Configuration

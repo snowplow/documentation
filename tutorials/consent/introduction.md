@@ -32,10 +32,6 @@ In approximately 5 working hours you can achieve the following:
 
 ## Prerequisites
 
-{{% notice tip %}}
-Complete our [Advanced Analytics for Web](https://docs.snowplow.io/accelerators/web/) accelerator if you don't have any Snowplow modeled web data in your warehouse yet. You don't need a working Snowplow pipeline, a sample events dataset is provided.
-{{% /notice %}}
-
 **Modeling and Visualization**
 - [dbt CLI](https://docs.getdbt.com/docs/core/installation) installed or [dbt Cloud](https://docs.getdbt.com/docs/cloud/about-cloud-setup) account available
 - New dbt [project](https://docs.getdbt.com/docs/build/projects) created and configured
@@ -43,7 +39,7 @@ Complete our [Advanced Analytics for Web](https://docs.snowplow.io/accelerators/
 - Snowflake, BigQuery or Databricks account (apart from the Streamlit visualization you should be able to follow along if you are on Redshift / Postgres as the data model supports those, too!)
 
 **Tracking and Enrichment**
-- Snowplow pipeline
+- Snowplow pipeline and events
 - Web app to implement tracking
 - CMP set up
 

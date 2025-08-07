@@ -39,9 +39,9 @@ models:
 
 There are configurable default sql scripts that you might want to overwrite (mainly the one defined in `core_web_vital_page_groups()` macro). Please take a look at them and, if needed, copy the original sql file from the macros within the dbt_packages folder (which should appear after you executed `dbt deps`), add it to the macros of your own dbt project without changing the name. Update the sql to your preference and save the file.
 
-{{% notice info %}}
+:::note
 For information about overriding our macros, see [here](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-advanced-usage/dbt-advanced-operation/#overriding-macros)
-{{% /notice %}}
+:::
 
 - The `core_web_vital_page_groups()` macro is used to let the user classify their urls to specific page groups. It returns the sql to provide the classification expected in the form of case when statements. ([source](https://github.com/snowplow/dbt-snowplow-web/blob/main/macros/core_web_vital_page_groups.sql))
 

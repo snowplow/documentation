@@ -53,7 +53,7 @@ def get_duid_values(duid: str):
     # Retrieve attributes from Signals
     response = sp_signals.get_service_attributes(
         name="prospect_scoring_tutorial_service",
-        entity="domain_userid",
+        attribute_key="domain_userid",
         identifier=duid,
     )
     df = pd.DataFrame([response])

@@ -33,7 +33,7 @@ The core Signals infrastructure components are:
   * These attributes are directly sent to the Profiles Store
 * Batch engine to compute attributes from warehouse tables
   * This runs in the warehouse
-* Sync service/Materialization engine to periodically update the Profiles Store with batch attributes
+* Sync engine to periodically update the Profiles Store with batch attributes
 * Signals API to define, publish, and fetch attributes and interventions
 
 ![](./images/signals-pipeline.png)
@@ -82,7 +82,7 @@ flowchart TD
         G --> H[Apply the group]
     end
 
-    H --> I[View defined attributes<br/>in Console]
+    H --> I[Attribute group defined attributes<br/>in Console]
 
     style SDK stroke:#333,stroke-width:2px
 ```

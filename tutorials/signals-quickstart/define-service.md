@@ -3,9 +3,9 @@ position: 4.5
 title: Define a service for retrieving attributes
 ---
 
-To retrieve the calculated attributes from the Profiles Store, Signals provides a configuration wrapper called a service. It allows you to retrieve attributes in bulk, from multiple views.
+To retrieve the calculated attributes from the Profiles Store, Signals provides a configuration wrapper called a service. It allows you to retrieve attributes in bulk, from multiple attribute groups.
 
-Using services is optional: you could also reference the views directly in your application code.
+Using services is optional: you could also reference the Attribute Group directly in your application code.
 
 To define a service, run this code. Again, update the `owner` field to your email address.
 
@@ -15,6 +15,6 @@ from snowplow_signals import Service
 my_service = Service(
     name='my_quickstart_service',
     owner="user@company.com", # UPDATE THIS
-    views=[my_view]
+    attribute_groups=[my_attribute_group]
 )
 ```

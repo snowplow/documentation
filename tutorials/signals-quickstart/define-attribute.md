@@ -3,7 +3,7 @@ position: 3
 title: Define what attributes to calculate
 ---
 
-An `Attribute` describes a specific fact about user behavior. They're grouped into views for management and deployment.
+An `Attribute` describes a specific fact about user behavior. They're grouped into attribute groups for management and deployment.
 
 ## Define attributes
 
@@ -39,7 +39,7 @@ Note that there's a limit on how many events can be considered for time-windowed
 
 The second attribute stores the last seen browser name (e.g. "Safari"), using the `last` aggregation. The `property` tells Signals where to look in the event for the value.
 
-Browser information is appended to every event by the [YAUAA enrichment](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/) as an entity with schema URI `iglu:nl.basjes/yauaa_context/jsonschema/1-0-1`. Within the event payload, this URI becomes `contexts_nl_basjes_yauaa_context_1`. The `property` defined in this attribute uses the `agentName` field from the YAUAA entity. Note the `[0]` index to access the entity data.
+Browser information is appended to every event by the [YAUAA enrichment](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/) as an attribute key with schema URI `iglu:nl.basjes/yauaa_context/jsonschema/1-0-1`. Within the event payload, this URI becomes `contexts_nl_basjes_yauaa_context_1`. The `property` defined in this attribute uses the `agentName` field from the YAUAA attribute key. Note the `[0]` index to access the attribute key data.
 
 In general, your attribute `property` definitions will be based on a column or field from the event, with the column name as seen in your warehouse.
 
@@ -99,19 +99,19 @@ first_referrer = Attribute(
 
 Add all three attribute definitions to your notebook, and run the cell.
 
-## Define a view
+## Define an Attribute Group
 
-Single attribute definitions can't be deployed to Signals, as they don't make sense without the additional context defined in a `View`.
+Single attribute definitions can't be deployed to Signals, as they don't make sense without the additional context defined in an `AttributeGroup`.
 
-Group the attributes together, adding the session entity identifier `domain_sessionid`. You'll need to update the `owner` field to your email address.
+Group the attributes together, adding the session attribute key identifier `domain_sessionid`. You'll need to update the `owner` field to your email address.
 
 ```python
-from snowplow_signals import StreamView, domain_sessionid
+from snowplow_signals import StreamAttributeGroup, domain_sessionid
 
-my_view = StreamView(
-    name="my_quickstart_view",
+my_attribute_group = StreamAttributeGroup(
+    name="my_quickstart_attribute_group",
     version=1,
-    entity=domain_sessionid,
+    attribute_key=domain_sessionid,
     owner="user@company.com", # UPDATE THIS
     attributes=[
         page_view_count,
@@ -121,9 +121,9 @@ my_view = StreamView(
 )
 ```
 
-Because of the session entity, Signals will calculate these attributes as follows:
+Because of the session attribute key, Signals will calculate these attributes as follows:
 * How many page views in the last 5 minutes for each session
 * The last seen browser name for each session
 * The first seen referrer for each session
 
-Add this view definition to your notebook, and run the cell.
+Add this Attribute Group definition to your notebook, and run the cell.

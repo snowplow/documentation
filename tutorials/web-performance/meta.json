@@ -1,5 +1,8 @@
 {
   "title": "Monitor website performance with core web vitals",
   "label": "Solution accelerator",
-  "description": "Track, model, and visualize core web vitals to monitor website performance and optimize user experience."
+  "description": "Track, model, and visualize core web vitals to monitor website performance and optimize user experience.",
+  "useCases": ["Composable analytics"],
+  "technologies": ["dbt"],
+  "snowplowTech": ["Inspector"]
 }

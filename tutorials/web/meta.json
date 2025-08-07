@@ -1,5 +1,8 @@
 {
   "title": "Build analytics for web data",
   "label": "Solution accelerator",
-  "description": "Model web behavioral data, set up tracking, and create visualizations."
+  "description": "Model web behavioral data, set up tracking, and create visualizations.",
+  "useCases": ["Composable analytics"],
+  "technologies": ["dbt", "Streamlit"],
+  "snowplowTech": []
 }

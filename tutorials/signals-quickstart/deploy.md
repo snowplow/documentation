@@ -7,7 +7,7 @@ Once you're satisfied with the definitions, deploy them to the Signals API using
 
 ```python
 sp_signals.apply(
-    [my_view, my_service]
+    [my_attribute_group, my_service]
 )
 ```
 

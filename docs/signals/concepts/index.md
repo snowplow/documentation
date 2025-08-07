@@ -9,17 +9,17 @@ Signals introduces a new set of data governance concepts to Snowplow. As with sc
 **Attributes** define a specific fact about user behavior.
 
 They don't include any configuration for real-time or batch processing, versioning, or calculation context. To define that important metadata, you'll need to configure attribute groups. Signals has two attribute groupings:
-* **Views**, for defining attributes
+* **Attribute groups**, for defining attributes
 * **Services**, for consuming attributes
 
-Start by creating views. At this point, you'll define:
+Start by creating attribute groups. At this point, you'll define:
 * The data source - whether to calculate the attributes from the real-time stream, or in batch from the warehouse
-* What **entity** to calculate the attributes for
-* The version number of the view
+* What **attribute key** to calculate the attributes for
+* The version number of the Attribute Group
 
-Apply the view configuration to Signals, so that it can start calculating attributes and populating your Profiles Store. You'll need additional configuration if you're using batch processing.
+Apply the Attribute Group configuration to Signals, so that it can start calculating attributes and populating your Profiles Store. You'll need additional configuration if you're using batch processing.
 
-Next, choose which attributes from which views you want to consume in your applications. Group them into services, and apply the configuration to Signals.
+Next, choose which attributes from which attribute groups you want to consume in your applications. Group them into services, and apply the configuration to Signals.
 
 Finally, retrieve calculated attributes in your application, and use them to trigger actions.
 
@@ -30,12 +30,12 @@ This diagram shows a simple example configuration:
 ```mermaid
 flowchart TD
     subgraph Section1[Defining what to calculate]
-        subgraph View[View]
-            V_Entity[Entity]
-            V_Attr1[Attribute 1]
+        subgraph AttributeGroup[AttributeGroup]
+            AG_AttributeKey[AttributeKey]
+            AG_Attr1[Attribute 1]
         end
 
-        View --> ProfilesStore[Profiles Store]
+        AttributeGroup --> ProfilesStore[Profiles Store]
     end
 
     subgraph Section2[Using attributes]
@@ -51,10 +51,10 @@ flowchart TD
 A single attribute has been defined, calculated, and retrieved to use in an application.
 
 The next diagram shows a more complex example configuration. Things to note:
-* Views can have multiple attributes, but only one entity
-* Attributes can be reused across views
+* Attribute groups can have multiple attributes, but only one attribute key
+* Attributes can be reused across attribute groups
 * All calculated attributes are stored in the Profiles Store
-* Services can selectively retrieve attribute values from different views
+* Services can selectively retrieve attribute values from different attribute groups
 
 ```mermaid
 flowchart TD
@@ -65,33 +65,33 @@ flowchart TD
             Attr3[Attribute 3]
         end
 
-        subgraph StreamView[StreamView]
-            SV_Entity[Entity]
-            SV_Attr1[Attribute 1]
-            SV_Attr2[Attribute 2]
+        subgraph StreamAttributeGroup[StreamAttributeGroup]
+            SAG_AttributeKey[AttributeKey]
+            SAG_Attr1[Attribute 1]
+            SAG_Attr2[Attribute 2]
         end
 
-        subgraph BatchView[BatchView]
-            BV_Entity[Entity]
-            BV_Attr2[Attribute 2]
-            BV_Attr3[Attribute 3]
+        subgraph BatchAttributeGroup[BatchAttributeGroup]
+            BAG_AttributeKey[AttributeKey]
+            BAG_Attr2[Attribute 2]
+            BAG_Attr3[Attribute 3]
         end
 
-        Attr1 -.-> SV_Attr1
-        Attr2 -.-> SV_Attr2
-        Attr2 -.-> BV_Attr2
-        Attr3 -.-> BV_Attr3
+        Attr1 -.-> SAG_Attr1
+        Attr2 -.-> SAG_Attr2
+        Attr2 -.-> BAG_Attr2
+        Attr3 -.-> BAG_Attr3
 
-        StreamView --> ProfilesStore[Profiles Store]
-        BatchView --> ProfilesStore
+        StreamAttributeGroup --> ProfilesStore[Profiles Store]
+        BatchAttributeGroup --> ProfilesStore
     end
 
     subgraph Section2[Using attributes]
         ProfilesStore --> Service[Service]
 
         subgraph Service
-            S_Attr1[Attribute 1 from StreamView]
-            S_Attr2[Attribute 2 from BatchView]
+            SAG_Attr1[Attribute 1 from StreamAttributeGroup]
+            BAG_Attr2[Attribute 2 from BatchAttributeGroup]
         end
 
         Service --> Application[Application]
@@ -120,17 +120,13 @@ Real-time attribute calculation uses the Snowplow event stream, and therefore in
 
 Calculated attribute values are stored in the Profiles Store.
 
-## Entities
+## Attribute keys
 
-An entity is an identifier that provides the analytical context for attribute calculations. The identifier can be any field of a Snowplow event, such as `domain_userid`.
+An attribute key is an identifier that provides the analytical context for attribute calculations. The identifier can be any field of a Snowplow event, such as `domain_userid`.
 
-:::note Nomenclature
-This is distinct from a standard [Snowplow entity](/docs/fundamentals/entities/index.md).
-:::
+To demonstrate the necessity of attribute keys, consider the attribute `num_views_in_last_10_min`. This table lists some possible meanings of the attribute, based on the attribute key it's calculated against:
 
-To demonstrate the necessity of entities, consider the attribute `num_views_in_last_10_min`. This table lists some possible meanings of the attribute, based on the entity it's calculated against:
-
-| Attribute                  | Entity             | Description                                                                         |
+| Attribute                  | Attribute key      | Description                                                                         |
 | -------------------------- | ------------------ | ----------------------------------------------------------------------------------- |
 | `num_views_in_last_10_min` | User               | How many pages a user has viewed within the last 10 minutes                         |
 | `num_views_in_last_10_min` | Page               | How many page views a page has received within the last 10 minutes                  |
@@ -143,30 +139,30 @@ To demonstrate the necessity of entities, consider the attribute `num_views_in_l
 
 Each of these is likely to have a different calculated value.
 
-You can define your own entities, or use the built-in ones. Signals comes with predefined entities for user, device, and session. Their identifiers are from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) in all Snowplow events.
+You can define your own attribute keys, or use the built-in ones. Signals comes with predefined attribute keys for user, device, and session. Their identifiers are from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) in all Snowplow events.
 
-This table lists the built-in entities, and suggests others that could be useful:
+This table lists the built-in attribute keys, and suggests others that could be useful:
 
-| Entity            | Identifier                                                                                                                 | Built-in |
+| Attribute key     | Identifier                                                                                                                 | Built-in |
 | ----------------- | -------------------------------------------------------------------------------------------------------------------------- | -------- |
 | User              | `user_id` from [atomic fields](/docs/fundamentals/canonical-event/index.md#user-related-fields)                            | ✅        |
 | Device            | `domain_userid` and `network_userid` from [atomic fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) | ✅        |
 | Session           | `domain_sessionid` from [atomic fields](/docs/fundamentals/canonical-event/index.md#user-related-fields)                   | ✅        |
 | App               | `app_id` from [atomic fields](/docs/fundamentals/canonical-event/index.md#application-fields)                              |          |
 | Page              | `page_urlpath` from [atomic fields](/docs/fundamentals/canonical-event/index.md#platform-specific-fields)                  |          |
-| Product           | `id` from [ecommerce product](/docs/events/ootb-data/ecommerce-events/index.md#product) or custom entity                   |          |
-| Screen view       | `id` in `screen_view` entity                                                                                               |          |
+| Product           | `id` from [ecommerce product](/docs/events/ootb-data/ecommerce-events/index.md#product) or custom attribute key            |          |
+| Screen view       | `id` in `screen_view` attribute key                                                                                        |          |
 | Geographic region | `geo_country` from [IP Enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md)         |          |
-| Content category  | from custom entity                                                                                                         |          |
-| Video game level  | from custom entity                                                                                                         |          |
+| Content category  | from custom attribute key                                                                                                  |          |
+| Video game level  | from custom attribute key                                                                                                  |          |
 
-## Views
+## Attribute groups
 
-Views are where you define the metrics that you want to calculate.
+Attribute groups are where you define the metrics that you want to calculate.
 
-A view is a versioned set of attributes that are calculated against a specific entity, from a specific source. The source could be the real-time event stream, or a warehouse table batch source.
+An Attribute Group is a versioned set of attributes that are calculated against a specific attribute key, from a specific source. The source could be the real-time event stream, or a warehouse table batch source.
 
-An example configuration for a view based on a user entity, with a stream (default) source:
+An example configuration for an Attribute Group based on a user attribute key, with a stream (default) source:
 
 ```mermaid
 flowchart TD
@@ -175,16 +171,16 @@ flowchart TD
         SA2[`last_product_viewed`]
     end
 
-    Stream --> View
+    Stream --> AttributeGroup
 
-    subgraph View[View: `user_attributes_realtime`]
-        V_User[User entity: `user_id`]
-        V_SA1[`number_of_pageviews`]
-        V_SA2[`last_product_viewed`]
+    subgraph AttributeGroup[AttributeGroup: `user_attributes_realtime`]
+        AG_User[user_attribute_key: `user_id`]
+        AG_SA1[`number_of_pageviews`]
+        AG_SA2[`last_product_viewed`]
     end
 ```
 
-When this view configuration is applied to Signals, the attributes will be calculated and stored in the Profiles Store. On retrieval, this view might look something like this as a table:
+When this Attribute Group configuration is applied to Signals, the attributes will be calculated and stored in the Profiles Store. On retrieval, this Attribute Group might look something like this as a table:
 
 | `user_id`            | `number_of_pageviews` | `last_product_viewed` |
 | -------------------- | --------------------- | --------------------- |
@@ -195,50 +191,50 @@ When this view configuration is applied to Signals, the attributes will be calcu
 
 Services are where you define how to use the calculated attributes in your applications.
 
-Each service can contain multiple entire views, or individual attributes from different views, even if they have different entities or different sources.
 
-They provide a stable interface to use in your applications: by pinning specific view versions, they provide a consistent set of consumable attributes.
+Each service can contain multiple entire attribute groups, or individual attributes from different attribute groups, even if they have different attribute keys or different sources.
+They provide a stable interface to use in your applications: by pinning specific Attribute Group versions, they provide a consistent set of consumable attributes.
 
 By using services you can:
 * Iterate on attribute definitions without worrying about breaking downstream processes
-* Migrate to new view versions by updating the service definition, without having to update the application code
+* Migrate to new Attribute Group versions by updating the service definition, without having to update the application code
 
-Here's a service that combines the same view as before with an additional batch view:
+Here's a service that combines the same Attribute Group as before with an additional batch Attribute Group:
 
 ```mermaid
 flowchart TD
     subgraph Attributes[Attributes]
-        SA1[`number_of_pageviews`]
-        SA2[`last_product_viewed`]
-        BA1[`previous_purchases`]
-        BA2[`previous_returns`]
+        SAG1[`number_of_pageviews`]
+        SAG2[`last_product_viewed`]
+        BAG1[`previous_purchases`]
+        BAG2[`previous_returns`]
     end
 
-    Attributes --> StreamView
-    Attributes --> BatchView
+    Attributes --> StreamAttributeGroup
+    Attributes --> BatchAttributeGroup
 
-    subgraph StreamView[View: `user_attributes_realtime`]
+    subgraph StreamAttributeGroup[AttributeGroup: `user_attributes_realtime`]
         SV_User[User: `user_id`]
-        SV_SA1[`number_of_pageviews`]
-        SV_SA2[`last_product_viewed`]
+        SV_SAG1[`number_of_pageviews`]
+        SV_SAG2[`last_product_viewed`]
     end
 
-    subgraph BatchView[View: `user_attributes_warehouse`]
+    subgraph BatchAttributeGroup[AttributeGroup: `user_attributes_warehouse`]
         BV_User[User: `user_id`]
-        BV_BA1[`previous_purchases`]
-        BV_BA2[`previous_returns`]
+        BV_BAG1[`previous_purchases`]
+        BV_BAG2[`previous_returns`]
     end
 
-    StreamView --> Service
-    BatchView --> Service
+    StreamAttributeGroup --> Service
+    BatchAttributeGroup --> Service
 
     subgraph Service[Service]
-        S_StreamView[`user_attributes_realtime`]
-        S_BatchView[`user_attributes_warehouse`]
+        S_StreamAttributeGroup[`user_attributes_realtime`]
+        S_BatchAttributeGroup[`user_attributes_warehouse`]
     end
 ```
 
-In this example, both views have the same entity, and all attributes from both views are included in the service.
+In this example, both attribute groups have the same attribute key, and all attributes from both attribute groups are included in the service.
 
 This service could be imagined like this as a table:
 
@@ -263,10 +259,10 @@ flowchart TD
     intervention -->|influences| user
 ```
 
-Like attributes, interventions target specific entity instances.
+Like attributes, interventions target specific attribute key instances.
 
 Interventions can be triggered automatically [based on attribute changes](/docs/signals/configuration/interventions/index.md), or manually [using the Signals API](/docs/signals/interventions/index.md#custom-intervention-via-the-api).
-Subscribe [within your application](/docs/signals/interventions/index.md#retrieving-interventions-with-the-signals-sdk) for real-time updates to interventions for entities of interest, or [user devices can subscribe](/docs/signals/interventions/index.md#retrieving-interventions-on-the-web-with-the-browser-tracker-plugin) to interventions that apply to their own entities while they use your application.
+Subscribe [within your application](/docs/signals/interventions/index.md#retrieving-interventions-with-the-signals-sdk) for real-time updates to interventions for attribute keys of interest, or [user devices can subscribe](/docs/signals/interventions/index.md#retrieving-interventions-on-the-web-with-the-browser-tracker-plugin) to interventions that apply to their own attribute keys while they use your application.
 
 For example, you could subscribe to interventions for a specific `domain_userid`, the current `app_id`, the current `page`, and the current `product`.
 When new interventions are published for any of those, they are delivered and the contents include any relevant attribute values, that can be used by your application to react.

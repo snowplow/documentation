@@ -3,7 +3,7 @@ position: 4
 title: Test the definitions
 ---
 
-Signals will start processing events and computing attributes as soon as you apply the view configuration.
+Signals will start processing events and computing attributes as soon as you apply the Attribute Group configuration.
 
 It's a good idea to test the definitions before deployment.
 
@@ -11,7 +11,7 @@ Add a new cell to your notebook with the following code:
 
 ```python
 data = sp_signals.test(
-    view=my_view
+    attribute_group=my_attribute_group
 )
 print(data)
 ```
@@ -32,20 +32,20 @@ You should see something like this:
 | 7   | `4da52032-f6d1-41b4-9cf2-b40e164cbe6e` | 1                 | "Chrome"              | None             |
 | 8   | `2ee80a4a-86dd-4a24-b697-0709b29ed079` | 0                 | "Safari"              | None             |
 
-The test method returns results from a random 10 entities. The first column shows the entity values, in this case for the session entity `domain_sessionid`.
+The test method returns results from a random 10 attribute key values. The first column shows the attribute key values, in this case for the session attribute key `domain_sessionid`.
 
-The attributes look as expected, so the view is ready to deploy.
+The attributes look as expected, so the Attribute Group is ready to deploy.
 
 ## Testing for individual entities
 
-You can also test specific entity instances, by providing a list of IDs.
+You can also test specific attribute key instances, by providing a list of IDs.
 
 This example will be calculated for just these two `domain_sessionid`s:
 
 ```python
 data = sp_signals.test(
-    view=my_view,
-    entity_ids=["d99f6db1-7b28-46ca-a3ef-f0aace99ed86", "08d833ec-5eef-461c-b452-842e7bd27067"]
+    attribute_group=my_attribute_group,
+    attribute_key_ids=["d99f6db1-7b28-46ca-a3ef-f0aace99ed86", "08d833ec-5eef-461c-b452-842e7bd27067"]
 )
 ```
 
@@ -60,7 +60,7 @@ Depending on your Snowplow tracking configuration, you might want to test only o
 
 ```python
 data = sp_signals.test(
-    view=my_view,
+    attribute_group=my_attribute_group,
     app_ids=["website"],
 )
 print(data)

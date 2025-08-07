@@ -24,7 +24,7 @@ Here's an example:
 
 calculated_values = sp_signals.get_service_attributes(
     source="my_service",
-    entity="domain_userid",
+    attribute_key="domain_userid",
     identifier="218e8926-3858-431d-b2ed-66da03a1cbe5",
 )
 
@@ -33,42 +33,42 @@ print(calculated_values)
 
 The table below lists all available arguments for `get_service_attributes()`
 
-| Argument     | Description                                | Type     | Required? |
-| ------------ | ------------------------------------------ | -------- | --------- |
-| `name`       | The name of the service                    | `string` | ✅         |
-| `entity`     | The entity name to retrieve attributes for | `string` | ✅         |
-| `identifier` | The specific entity value                  | `string` | ✅         |
+| Argument            | Description                                       | Type     | Required? |
+| ------------------- | ------------------------------------------------- | -------- | --------- |
+| `name`              | The name of the service                           | `string` | ✅         |
+| `attribute_key`     | The attribute key to retrieve attributes for      | `string` | ✅         |
+| `identifier`        | The specific attribute key value                  | `string` | ✅         |
 
 
-### Attributes from a view
+### Attributes from an Attribute Group
 
-You can also retrieve a subset of attributes from a specific view using `get_view_attributes()`. Signals will return the attributes as a dictionary.
+You can also retrieve a subset of attributes from a specific Attribute Group using `get_attributes()`. Signals will return the attributes as a dictionary.
 
 Here's an example:
 
 ```python
 # The Signals connection object has been created as sp_signals
 
-calculated_values = sp_signals.get_view_attributes(
-    name="my_view",
+calculated_values = sp_signals.get_attributes(
+    name="my_attribute_group",
     version=1,
     attributes=["page_view_count"],
-    entity="domain_userid",
+    attribute_key="domain_userid",
     identifier="218e8926-3858-431d-b2ed-66da03a1cbe5",
 )
 
 print(calculated_values)
 ```
 
-The table below lists all available arguments for `get_view_attributes()`
+The table below lists all available arguments for `get_attributes()`
 
-| Argument     | Description                             | Type                         | Required? |
-| ------------ | --------------------------------------- | ---------------------------- | --------- |
-| `name`       | The name of the view                    | `string`                     | ✅         |
-| `version`    | The view version                        | `int`                        | ✅         |
-| `attributes` | The names of the attributes to retrieve | `string` or list of `string` | ✅         |
-| `entity`     | The entity name                         | `string`                     | ✅         |
-| `identifier` | The specific entity value               | `string`                     | ✅         |
+| Argument            | Description                             | Type                         | Required? |
+| ------------------- | --------------------------------------- | ---------------------------- | --------- |
+| `name`              | The name of the Attribute Group         | `string`                     | ✅         |
+| `version`           | The Attribute Group version             | `int`                        | ✅         |
+| `attributes`        | The names of the attributes to retrieve | `string` or list of `string` | ✅         |
+| `attribute_key`     | The attribute_key name                  | `string`                     | ✅         |
+| `identifier`        | The specific attribute key value        | `string`                     | ✅         |
 
 ## Node.js SDK TODO
 

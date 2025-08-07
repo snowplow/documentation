@@ -11,12 +11,12 @@ For this tutorial, you'll retrieve attributes into your notebook. Add a new cell
 
 ## Using a service (recommended)
 
-When retrieving calculated attributes, specify an instance of the relevant entity, in this case a `domain_sessionid`. This will return all the attributes defined in `my_quickstart_service` for this session.
+When retrieving calculated attributes, specify an instance of the relevant attribute key, in this case a `domain_sessionid`. This will return all the attributes defined in `my_quickstart_service` for this session.
 
 ```python
 response = sp_signals.get_service_attributes(
     source="my_quickstart_service",
-    entity="domain_sessionid",
+    attribute_key="domain_sessionid",
     identifier="d99f6db1-7b28-46ca-a3ef-f0aace99ed86",
 )
 
@@ -24,25 +24,25 @@ df=response.to_dataframe()
 df
 ```
 
-## Using a view
+## Using an Attribute Group
 
-You can also retrieve calculated attributes for individual views. This isn't recommended for production use, where services are a better idea, but it can be useful for testing.
+You can also retrieve calculated attributes for individual attribute groups. This isn't recommended for production use, where services are a better idea, but it can be useful for testing.
 
-There are two methods to do this, depending if you have the view instance available or not:
+There are two methods to do this, depending if you have the Attribute Group instance available or not:
 
 ```python
-# Option 1 (if you have the View instance)
-response = my_view.get_attributes(
+# Option 1 (if you have the Attribute Group instance)
+response = my_attribute_group.get_attributes(
     signals=sp_signals,
     identifier="d99f6db1-7b28-46ca-a3ef-f0aace99ed86",
 )
 
-# Option 2 (if you don't have the View instance)
-response = sp_signals.get_view_attributes(
-    name="my_quickstart_view",
+# Option 2 (if you don't have the Attribute Group instance)
+response = sp_signals.get_attributes(
+    name="my_quickstart_attribute_group",
     version=1,
     attributes=["page_view_count", "most_recent_browser", "first_referrer"],
-    entity="domain_sessionid",
+    attribute_key="domain_sessionid",
     identifiers=["d99f6db1-7b28-46ca-a3ef-f0aace99ed86"]
 )
 

@@ -40,9 +40,9 @@ The table below lists all available arguments for `get_service_attributes()`
 | `identifier`        | The specific attribute key value                  | `string` | ✅         |
 
 
-### Attributes from an Attribute Group
+### Attributes from an attribute group
 
-You can also retrieve a subset of attributes from a specific Attribute Group using `get_attributes()`. Signals will return the attributes as a dictionary.
+You can also retrieve a subset of attributes from a specific attribute group using `get_attributes()`. Signals will return the attributes as a dictionary.
 
 Here's an example:
 
@@ -64,8 +64,8 @@ The table below lists all available arguments for `get_attributes()`
 
 | Argument            | Description                             | Type                         | Required? |
 | ------------------- | --------------------------------------- | ---------------------------- | --------- |
-| `name`              | The name of the Attribute Group         | `string`                     | ✅         |
-| `version`           | The Attribute Group version             | `int`                        | ✅         |
+| `name`              | The name of the attribute group         | `string`                     | ✅         |
+| `version`           | The attribute group version             | `int`                        | ✅         |
 | `attributes`        | The names of the attributes to retrieve | `string` or list of `string` | ✅         |
 | `attribute_key`     | The attribute_key name                  | `string`                     | ✅         |
 | `identifier`        | The specific attribute key value        | `string`                     | ✅         |

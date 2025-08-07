@@ -15,9 +15,9 @@ They don't include any configuration for real-time or batch processing, versioni
 Start by creating attribute groups. At this point, you'll define:
 * The data source - whether to calculate the attributes from the real-time stream, or in batch from the warehouse
 * What **attribute key** to calculate the attributes for
-* The version number of the Attribute Group
+* The version number of the attribute group
 
-Apply the Attribute Group configuration to Signals, so that it can start calculating attributes and populating your Profiles Store. You'll need additional configuration if you're using batch processing.
+Apply the attribute group configuration to Signals, so that it can start calculating attributes and populating your Profiles Store. You'll need additional configuration if you're using batch processing.
 
 Next, choose which attributes from which attribute groups you want to consume in your applications. Group them into services, and apply the configuration to Signals.
 
@@ -160,9 +160,9 @@ This table lists the built-in attribute keys, and suggests others that could be 
 
 Attribute groups are where you define the metrics that you want to calculate.
 
-An Attribute Group is a versioned set of attributes that are calculated against a specific attribute key, from a specific source. The source could be the real-time event stream, or a warehouse table batch source.
+An attribute group is a versioned set of attributes that are calculated against a specific attribute key, from a specific source. The source could be the real-time event stream, or a warehouse table batch source.
 
-An example configuration for an Attribute Group based on a user attribute key, with a stream (default) source:
+An example configuration for an attribute group based on a user attribute key, with a stream (default) source:
 
 ```mermaid
 flowchart TD
@@ -180,7 +180,7 @@ flowchart TD
     end
 ```
 
-When this Attribute Group configuration is applied to Signals, the attributes will be calculated and stored in the Profiles Store. On retrieval, this Attribute Group might look something like this as a table:
+When this attribute group configuration is applied to Signals, the attributes will be calculated and stored in the Profiles Store. On retrieval, this attribute group might look something like this as a table:
 
 | `user_id`            | `number_of_pageviews` | `last_product_viewed` |
 | -------------------- | --------------------- | --------------------- |
@@ -193,13 +193,13 @@ Services are where you define how to use the calculated attributes in your appli
 
 
 Each service can contain multiple entire attribute groups, or individual attributes from different attribute groups, even if they have different attribute keys or different sources.
-They provide a stable interface to use in your applications: by pinning specific Attribute Group versions, they provide a consistent set of consumable attributes.
+They provide a stable interface to use in your applications: by pinning specific attribute group versions, they provide a consistent set of consumable attributes.
 
 By using services you can:
 * Iterate on attribute definitions without worrying about breaking downstream processes
-* Migrate to new Attribute Group versions by updating the service definition, without having to update the application code
+* Migrate to new attribute group versions by updating the service definition, without having to update the application code
 
-Here's a service that combines the same Attribute Group as before with an additional batch Attribute Group:
+Here's a service that combines the same attribute group as before with an additional batch attribute group:
 
 ```mermaid
 flowchart TD

@@ -61,11 +61,11 @@ The table below lists all available arguments for a `BatchSource`:
 
 The `timestamp_field` is optional but recommended for incremental or snapshot-based tables. It should show the last modified time of a record. It's used during materialization to identify which rows have changed since the last sync. The sync engine only sends those with a newer timestamp to the Profiles Store.
 
-### Defining an Attribute Group with fields
+### Defining an attribute group with fields
 
 Pass your source to a new `ExternalBatchAttributeGroup` so that Signals does not materialize the attributes. This will be done later, once Signals has connected to the table.
 
-For stream or batch attributes that are calculated by Signals, an Attribute Group contains references to your attribute definitions. In this case, the attributes are already defined elsewhere and pre-calculated in the warehouse. Instead of `attributes`, this Attribute Group will have `fields`.
+For stream or batch attributes that are calculated by Signals, an attribute group contains references to your attribute definitions. In this case, the attributes are already defined elsewhere and pre-calculated in the warehouse. Instead of `attributes`, this attribute group will have `fields`.
 
 Specify the fields (columns) you want to use from the source table, using `Field`. Here's an example:
 
@@ -106,15 +106,15 @@ The table below lists all available arguments for a `Field`:
 
 ### Registering the table with Signals
 
-Apply the Attribute Group configuration to Signals.
+Apply the attribute group configuration to Signals.
 
 ```python
 sp_signals.apply([attribute_group])
 ```
 
-Signals will connect to the table, but the attributes will not be materialized into Signals yet because the Attribute Group has `online=False`.
+Signals will connect to the table, but the attributes will not be materialized into Signals yet because the attribute group has `online=False`.
 
-To send the attributes to the Profiles Store, change the `online` parameter to `True`, and apply the Attribute Group again.
+To send the attributes to the Profiles Store, change the `online` parameter to `True`, and apply the attribute group again.
 
 ```python
 sp_signals.apply([attribute_group])
@@ -128,7 +128,7 @@ To create new batch attributes, you'll need to define attributes and attribute g
 
 The included batch engine CLI tool will help you with this process. Check out the full instructions in [Creating new batch attributes](/docs/signals/configuration/batch-calculations/batch-engine/index.md) or the [batch engine tutorial](/tutorials/signals-batch-engine/start/).
 
-### Defining an Attribute Group with attributes
+### Defining an attribute group with attributes
 
 The key difference between a standard stream [attribute_group](/docs/signals/configuration/attribute-groups/index.md) and one meant for batch processing is the `offline=True` parameter.
 
@@ -153,7 +153,7 @@ attribute_group = BatchAttributeGroup(
 
 ### Creating and registering tables
 
-Signals uses dbt to create Attribute Group specific attribute tables. The Signals Python SDK includes an optional CLI tool called the batch engine for configuring this.
+Signals uses dbt to create attribute group specific attribute tables. The Signals Python SDK includes an optional CLI tool called the batch engine for configuring this.
 
 It will help you create the required dbt models and tables in your warehouse, and register them with Signals.
 

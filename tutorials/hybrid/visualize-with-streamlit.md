@@ -111,7 +111,7 @@ Run the command below to run the streamlit locally:
 streamlit run Dashboard.py
 ```
 
-![Mobile & Hybrid Apps Analytics Dashboard](images/visualisation/streamlit.png)
+![Mobile and Hybrid Apps Analytics Dashboard](images/visualisation/streamlit.png)
 
 The dashboard provides comprehensive insights into your hybrid app performance, including:
 

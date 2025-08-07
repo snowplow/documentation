@@ -3,7 +3,7 @@ title: Add enrichments
 position: 4
 ---
 
-An enrichment either updates or populates fields of the atomic event or adds a self-describing context to derived_contexts. For this project, you need to enable the [YAUAA](https://docs.snowplow.io/docs/enriching-your-data/available-enrichments/yauaa-enrichment/) enrichment and it is highly advised to enable the [IAB](https://docs.snowplow.io/docs/enriching-your-data/available-enrichments/iab-enrichment/) Spiders & Robots enrichment.
+An enrichment either updates or populates fields of the atomic event or adds a self-describing context to derived_contexts. For this project, you need to enable the [YAUAA](https://docs.snowplow.io/docs/enriching-your-data/available-enrichments/yauaa-enrichment/) enrichment and it is highly advised to enable the [IAB](https://docs.snowplow.io/docs/enriching-your-data/available-enrichments/iab-enrichment/) Spiders and Robots enrichment.
 
 ## YAUAA
 
@@ -23,11 +23,11 @@ For BDP users, you can navigate under your selected pipeline **Enrichments** sec
 
 For Snowplow open source users, you can refer to the enrichment [documentation](https://docs.snowplow.io/docs/enriching-your-data/available-enrichments/yauaa-enrichment/).
 
-## IAB Spiders & Robots
+## IAB Spiders and Robots
 
-The IAB Spiders & Robots enrichment uses the [IAB/ABC International Spiders and Bots List](https://iabtechlab.com/software/iababc-international-spiders-and-bots-list/) to determine whether an event was produced by a user or a robot/spider based on its IP address and user agent.
+The IAB Spiders and Robots enrichment uses the [IAB/ABC International Spiders and Bots List](https://iabtechlab.com/software/iababc-international-spiders-and-bots-list/) to determine whether an event was produced by a user or a robot/spider based on its IP address and user agent.
 
-Spiders & bots are sometimes considered a necessary evil of the web. We want search engine crawlers to find our site, but we also don't want a lot of non-human traffic clouding our reporting.
+Spiders and bots are sometimes considered a necessary evil of the web. We want search engine crawlers to find our site, but we also don't want a lot of non-human traffic clouding our reporting.
 
 The Interactive Advertising Bureau (IAB) is an advertising business organization that develops industry standards, conducts research, and provides legal support for the online advertising industry. Their internationally recognized list of spiders and bots is regularly maintained to try and identify the IP addresses of known bots and spiders.
 

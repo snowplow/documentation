@@ -93,6 +93,17 @@ function searchFilter(term: string, tutorial?: Tutorial): boolean {
     : false
 }
 
+function useCaseFilter(
+  selectedUseCases: string[],
+  tutorial?: Tutorial
+): boolean {
+  if (!tutorial) return false
+  if (selectedUseCases.length === 0) return true
+  return tutorial.meta.useCases.some((useCase) =>
+    selectedUseCases.includes(useCase)
+  )
+}
+
 function topicFilter(selectedTopics: string[], tutorial?: Tutorial): boolean {
   if (!tutorial) return false
   if (selectedTopics.length === 0) return true
@@ -100,6 +111,15 @@ function topicFilter(selectedTopics: string[], tutorial?: Tutorial): boolean {
 }
 
 const TopicValues: string[] = Object.values(TopicType.Values)
+
+// Extract unique use cases from all tutorials
+function getAvailableUseCases(tutorials: Tutorial[]): string[] {
+  const useCases = new Set<string>()
+  tutorials.forEach((tutorial) => {
+    tutorial.meta.useCases.forEach((useCase) => useCases.add(useCase))
+  })
+  return Array.from(useCases).sort()
+}
 
 function getParsedTutorials(tutorials: Meta[]): Tutorial[] {
   return Object.values(tutorials).map((metaJson) => {
@@ -133,13 +153,24 @@ const TutorialList: FC = () => {
 
   const [search, setSearch] = useState('')
   const [selectedTopics, setSelectedTopics] = useState<string[]>([])
+  const [selectedUseCases, setSelectedUseCases] = useState<string[]>([])
   const parsedTutorials = useMemo<Tutorial[]>(
     () => getParsedTutorials(getMetaData()),
     []
   )
+  const availableUseCases = useMemo<string[]>(
+    () => getAvailableUseCases(parsedTutorials),
+    [parsedTutorials]
+  )
   const tutorials = useMemo<Tutorial[]>(
-    () => filterTutorials(search, selectedTopics, parsedTutorials),
-    [search, selectedTopics, parsedTutorials]
+    () =>
+      filterTutorials(
+        search,
+        selectedTopics,
+        selectedUseCases,
+        parsedTutorials
+      ),
+    [search, selectedTopics, selectedUseCases, parsedTutorials]
   )
 
   return (
@@ -152,6 +183,9 @@ const TutorialList: FC = () => {
           setSearch={setSearch}
           selectedTopics={selectedTopics}
           setSelectedTopics={setSelectedTopics}
+          selectedUseCases={selectedUseCases}
+          setSelectedUseCases={setSelectedUseCases}
+          availableUseCases={availableUseCases}
           tutorials={tutorials}
         />
       ) : (
@@ -159,6 +193,9 @@ const TutorialList: FC = () => {
           setSearch={setSearch}
           selectedTopics={selectedTopics}
           setSelectedTopics={setSelectedTopics}
+          selectedUseCases={selectedUseCases}
+          setSelectedUseCases={setSelectedUseCases}
+          availableUseCases={availableUseCases}
           tutorials={tutorials}
         />
       )}
@@ -169,11 +206,13 @@ const TutorialList: FC = () => {
 function filterTutorials(
   search: string,
   selectedTopics: string[],
+  selectedUseCases: string[],
   tutorials: Tutorial[]
 ): Tutorial[] {
   return tutorials
     .filter((tutorial) => searchFilter(search, tutorial))
     .filter((tutorial) => topicFilter(selectedTopics, tutorial))
+    .filter((tutorial) => useCaseFilter(selectedUseCases, tutorial))
 }
 
 const IntroductionText: FC = () => {
@@ -191,13 +230,32 @@ const MobileTutorialList: FC<{
   setSearch: React.Dispatch<React.SetStateAction<string>>
   selectedTopics: string[]
   setSelectedTopics: React.Dispatch<React.SetStateAction<string[]>>
+  selectedUseCases: string[]
+  setSelectedUseCases: React.Dispatch<React.SetStateAction<string[]>>
+  availableUseCases: string[]
   tutorials: Tutorial[]
-}> = ({ setSearch, selectedTopics, setSelectedTopics, tutorials }) => {
+}> = ({
+  setSearch,
+  selectedTopics,
+  setSelectedTopics,
+  selectedUseCases,
+  setSelectedUseCases,
+  availableUseCases,
+  tutorials,
+}) => {
   return (
     <Box sx={{ mt: 1 }}>
       <Grid container direction="column" rowSpacing={2}>
         <SearchBar setSearch={setSearch} />
-        <TopicFilter selectedTopics={selectedTopics} setSelectedTopics={setSelectedTopics} />
+        <UseCaseFilter
+          selectedUseCases={selectedUseCases}
+          setSelectedUseCases={setSelectedUseCases}
+          availableUseCases={availableUseCases}
+        />
+        <TopicFilter
+          selectedTopics={selectedTopics}
+          setSelectedTopics={setSelectedTopics}
+        />
 
         <IntroductionText />
 
@@ -215,8 +273,19 @@ const DesktopTutorialList: FC<{
   setSearch: React.Dispatch<React.SetStateAction<string>>
   selectedTopics: string[]
   setSelectedTopics: React.Dispatch<React.SetStateAction<string[]>>
+  selectedUseCases: string[]
+  setSelectedUseCases: React.Dispatch<React.SetStateAction<string[]>>
+  availableUseCases: string[]
   tutorials: Tutorial[]
-}> = ({ setSearch, selectedTopics, setSelectedTopics, tutorials }) => {
+}> = ({
+  setSearch,
+  selectedTopics,
+  setSelectedTopics,
+  selectedUseCases,
+  setSelectedUseCases,
+  availableUseCases,
+  tutorials,
+}) => {
   return (
     <Box marginX={8} marginY={3} sx={{ minWidth: '90vw', mr: 0 }}>
       <Grid container columnSpacing={4}>
@@ -224,10 +293,18 @@ const DesktopTutorialList: FC<{
         <Grid item xs={3}>
           <TopicFilterSidebar>
             <SearchBar setSearch={setSearch} />
-            <TopicFilter selectedTopics={selectedTopics} setSelectedTopics={setSelectedTopics} />
+            <UseCaseFilter
+              selectedUseCases={selectedUseCases}
+              setSelectedUseCases={setSelectedUseCases}
+              availableUseCases={availableUseCases}
+            />
+            <TopicFilter
+              selectedTopics={selectedTopics}
+              setSelectedTopics={setSelectedTopics}
+            />
           </TopicFilterSidebar>
         </Grid>
-        
+
         {/* Main content area */}
         <Grid item xs={9}>
           <IntroductionText />
@@ -264,6 +341,45 @@ const SearchBar: FC<{
   )
 }
 
+const UseCaseFilter: FC<{
+  selectedUseCases: string[]
+  setSelectedUseCases: React.Dispatch<React.SetStateAction<string[]>>
+  availableUseCases: string[]
+}> = ({ selectedUseCases, setSelectedUseCases, availableUseCases }) => {
+  const handleUseCaseChange = (useCase: string, checked: boolean) => {
+    if (checked) {
+      setSelectedUseCases((prev) => [...prev, useCase])
+    } else {
+      setSelectedUseCases((prev) => prev.filter((uc) => uc !== useCase))
+    }
+  }
+
+  return (
+    <Box sx={{ mt: 2 }}>
+      <Typography
+        variant="h6"
+        sx={{ mb: 2, fontSize: '16px', fontWeight: 600 }}
+      >
+        Filter by use case
+      </Typography>
+      {availableUseCases.map((useCase) => (
+        <FormControlLabel
+          key={useCase}
+          control={
+            <Checkbox
+              checked={selectedUseCases.includes(useCase)}
+              onChange={(e) => handleUseCaseChange(useCase, e.target.checked)}
+              sx={{ '&.Mui-checked': { color: 'rgba(102, 56, 184, 1)' } }}
+            />
+          }
+          label={useCase}
+          sx={{ display: 'block', mb: 1 }}
+        />
+      ))}
+    </Box>
+  )
+}
+
 const TopicFilter: FC<{
   selectedTopics: string[]
   setSelectedTopics: React.Dispatch<React.SetStateAction<string[]>>
@@ -278,8 +394,11 @@ const TopicFilter: FC<{
 
   return (
     <Box sx={{ mt: 2 }}>
-      <Typography variant="h6" sx={{ mb: 2, fontSize: '16px', fontWeight: 600 }}>
-        Filter by Topic
+      <Typography
+        variant="h6"
+        sx={{ mb: 2, fontSize: '16px', fontWeight: 600 }}
+      >
+        Filter by topic
       </Typography>
       {TopicValues.map((topic) => (
         <FormControlLabel

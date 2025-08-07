@@ -93,6 +93,12 @@ function searchFilter(term: string, tutorial?: Tutorial): boolean {
     : false
 }
 
+function snowplowTechFilter(selectedSnowplowTech: string[], tutorial?: Tutorial): boolean {
+  if (!tutorial) return false
+  if (selectedSnowplowTech.length === 0) return true
+  return tutorial.meta.snowplowTech.some(tech => selectedSnowplowTech.includes(tech))
+}
+
 function technologyFilter(selectedTechnologies: string[], tutorial?: Tutorial): boolean {
   if (!tutorial) return false
   if (selectedTechnologies.length === 0) return true
@@ -136,6 +142,15 @@ function getAvailableTechnologies(tutorials: Tutorial[]): string[] {
   return Array.from(technologies).sort()
 }
 
+// Extract unique Snowplow technologies from all tutorials
+function getAvailableSnowplowTech(tutorials: Tutorial[]): string[] {
+  const snowplowTech = new Set<string>()
+  tutorials.forEach((tutorial) => {
+    tutorial.meta.snowplowTech.forEach((tech) => snowplowTech.add(tech))
+  })
+  return Array.from(snowplowTech).sort()
+}
+
 function getParsedTutorials(tutorials: Meta[]): Tutorial[] {
   return Object.values(tutorials).map((metaJson) => {
     const meta = Meta.parse(metaJson)
@@ -170,6 +185,7 @@ const TutorialList: FC = () => {
   const [selectedTopics, setSelectedTopics] = useState<string[]>([])
   const [selectedUseCases, setSelectedUseCases] = useState<string[]>([])
   const [selectedTechnologies, setSelectedTechnologies] = useState<string[]>([])
+  const [selectedSnowplowTech, setSelectedSnowplowTech] = useState<string[]>([])
   const parsedTutorials = useMemo<Tutorial[]>(
     () => getParsedTutorials(getMetaData()),
     []
@@ -182,6 +198,10 @@ const TutorialList: FC = () => {
     () => getAvailableTechnologies(parsedTutorials),
     [parsedTutorials]
   )
+  const availableSnowplowTech = useMemo<string[]>(
+    () => getAvailableSnowplowTech(parsedTutorials),
+    [parsedTutorials]
+  )
   const tutorials = useMemo<Tutorial[]>(
     () =>
       filterTutorials(
@@ -189,9 +209,10 @@ const TutorialList: FC = () => {
         selectedTopics,
         selectedUseCases,
         selectedTechnologies,
+        selectedSnowplowTech,
         parsedTutorials
       ),
-    [search, selectedTopics, selectedUseCases, selectedTechnologies, parsedTutorials]
+    [search, selectedTopics, selectedUseCases, selectedTechnologies, selectedSnowplowTech, parsedTutorials]
   )
 
   return (
@@ -210,6 +231,9 @@ const TutorialList: FC = () => {
           selectedTechnologies={selectedTechnologies}
           setSelectedTechnologies={setSelectedTechnologies}
           availableTechnologies={availableTechnologies}
+          selectedSnowplowTech={selectedSnowplowTech}
+          setSelectedSnowplowTech={setSelectedSnowplowTech}
+          availableSnowplowTech={availableSnowplowTech}
           tutorials={tutorials}
         />
       ) : (
@@ -223,6 +247,9 @@ const TutorialList: FC = () => {
           selectedTechnologies={selectedTechnologies}
           setSelectedTechnologies={setSelectedTechnologies}
           availableTechnologies={availableTechnologies}
+          selectedSnowplowTech={selectedSnowplowTech}
+          setSelectedSnowplowTech={setSelectedSnowplowTech}
+          availableSnowplowTech={availableSnowplowTech}
           tutorials={tutorials}
         />
       )}
@@ -235,6 +262,7 @@ function filterTutorials(
   selectedTopics: string[],
   selectedUseCases: string[],
   selectedTechnologies: string[],
+  selectedSnowplowTech: string[],
   tutorials: Tutorial[]
 ): Tutorial[] {
   return tutorials
@@ -242,6 +270,7 @@ function filterTutorials(
     .filter((tutorial) => topicFilter(selectedTopics, tutorial))
     .filter((tutorial) => useCaseFilter(selectedUseCases, tutorial))
     .filter((tutorial) => technologyFilter(selectedTechnologies, tutorial))
+    .filter((tutorial) => snowplowTechFilter(selectedSnowplowTech, tutorial))
 }
 
 const MobileTutorialList: FC<{
@@ -254,6 +283,9 @@ const MobileTutorialList: FC<{
   selectedTechnologies: string[]
   setSelectedTechnologies: React.Dispatch<React.SetStateAction<string[]>>
   availableTechnologies: string[]
+  selectedSnowplowTech: string[]
+  setSelectedSnowplowTech: React.Dispatch<React.SetStateAction<string[]>>
+  availableSnowplowTech: string[]
   tutorials: Tutorial[]
 }> = ({
   setSearch,
@@ -265,6 +297,9 @@ const MobileTutorialList: FC<{
   selectedTechnologies,
   setSelectedTechnologies,
   availableTechnologies,
+  selectedSnowplowTech,
+  setSelectedSnowplowTech,
+  availableSnowplowTech,
   tutorials,
 }) => {
   return (
@@ -284,6 +319,11 @@ const MobileTutorialList: FC<{
           selectedTechnologies={selectedTechnologies}
           setSelectedTechnologies={setSelectedTechnologies}
           availableTechnologies={availableTechnologies}
+        />
+        <SnowplowTechFilter
+          selectedSnowplowTech={selectedSnowplowTech}
+          setSelectedSnowplowTech={setSelectedSnowplowTech}
+          availableSnowplowTech={availableSnowplowTech}
         />
 
         {tutorials.map((tutorial: Tutorial) => (
@@ -306,6 +346,9 @@ const DesktopTutorialList: FC<{
   selectedTechnologies: string[]
   setSelectedTechnologies: React.Dispatch<React.SetStateAction<string[]>>
   availableTechnologies: string[]
+  selectedSnowplowTech: string[]
+  setSelectedSnowplowTech: React.Dispatch<React.SetStateAction<string[]>>
+  availableSnowplowTech: string[]
   tutorials: Tutorial[]
 }> = ({
   setSearch,
@@ -317,6 +360,9 @@ const DesktopTutorialList: FC<{
   selectedTechnologies,
   setSelectedTechnologies,
   availableTechnologies,
+  selectedSnowplowTech,
+  setSelectedSnowplowTech,
+  availableSnowplowTech,
   tutorials,
 }) => {
   return (
@@ -339,6 +385,11 @@ const DesktopTutorialList: FC<{
               selectedTechnologies={selectedTechnologies}
               setSelectedTechnologies={setSelectedTechnologies}
               availableTechnologies={availableTechnologies}
+            />
+            <SnowplowTechFilter
+              selectedSnowplowTech={selectedSnowplowTech}
+              setSelectedSnowplowTech={setSelectedSnowplowTech}
+              availableSnowplowTech={availableSnowplowTech}
             />
           </TopicFilterSidebar>
         </Grid>
@@ -375,6 +426,45 @@ const SearchBar: FC<{
         />
       </SearchBarFormControl>
     </Grid>
+  )
+}
+
+const SnowplowTechFilter: FC<{
+  selectedSnowplowTech: string[]
+  setSelectedSnowplowTech: React.Dispatch<React.SetStateAction<string[]>>
+  availableSnowplowTech: string[]
+}> = ({ selectedSnowplowTech, setSelectedSnowplowTech, availableSnowplowTech }) => {
+  const handleSnowplowTechChange = (tech: string, checked: boolean) => {
+    if (checked) {
+      setSelectedSnowplowTech((prev) => [...prev, tech])
+    } else {
+      setSelectedSnowplowTech((prev) => prev.filter((t) => t !== tech))
+    }
+  }
+
+  return (
+    <Box sx={{ mt: 2 }}>
+      <Typography
+        variant="h6"
+        sx={{ mb: 2, fontSize: '16px', fontWeight: 600 }}
+      >
+        Filter by Snowplow technology
+      </Typography>
+      {availableSnowplowTech.map((tech) => (
+        <FormControlLabel
+          key={tech}
+          control={
+            <Checkbox
+              checked={selectedSnowplowTech.includes(tech)}
+              onChange={(e) => handleSnowplowTechChange(tech, e.target.checked)}
+              sx={{ '&.Mui-checked': { color: 'rgba(102, 56, 184, 1)' } }}
+            />
+          }
+          label={tech}
+          sx={{ display: 'block', mb: 1 }}
+        />
+      ))}
+    </Box>
   )
 }
 

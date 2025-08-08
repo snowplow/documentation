@@ -16,6 +16,8 @@ full control over encryption keys used by your data infrastructure.
 **Important**: This is a bolt-on security feature available for enterprise
 customers using BDP PMC (Private Managed Cloud) or BDP Cloud deployments.
 
+:::
+
 ## What This Feature Provides
 
 AWS Custom KMS Keys ensure that all data stored at-rest in AWS services

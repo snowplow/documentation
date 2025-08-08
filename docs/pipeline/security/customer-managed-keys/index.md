@@ -247,7 +247,7 @@ If surge protection is enabled, SQS queues will use your custom key:
 - Good events queue
 - Bad events queue
 
-### 5.4 EKS Cluster secrets Enrcyption
+### 5.4 EKS Cluster secrets Encryption
 
 The EKS cluster will use your custom KMS key for encryption of Secrets. However
 please keep in mind the following:

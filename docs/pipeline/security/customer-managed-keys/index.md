@@ -11,6 +11,8 @@ KMS (Key Management Service) custom keys for your Snowplow pipeline.
 Custom KMS keys provide enhanced security by allowing you to maintain
 full control over encryption keys used by your data infrastructure.
 
+:::note
+
 **Important**: This is a bolt-on security feature available for enterprise
 customers using BDP PMC (Private Managed Cloud) or BDP Cloud deployments.
 

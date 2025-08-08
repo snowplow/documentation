@@ -1,5 +1,8 @@
 {
   "title": "Create live viewer profiles using Kafka",
   "label": "Solution accelerator",
-  "description": "Build a real-time viewer profile for a video streaming site, leveraging Kafka and DynamoDB."
+  "description": "Build a real-time viewer profile for a video streaming site, leveraging Kafka and DynamoDB.",
+  "useCases": ["Real-time personalization"],
+  "technologies": ["Kafka"],
+  "snowplowTech": ["Local"]
 }

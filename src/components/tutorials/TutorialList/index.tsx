@@ -8,7 +8,9 @@ import {
   Box,
   Grid,
   InputAdornment,
-  MenuItem,
+  Checkbox,
+  FormControlLabel,
+  Typography,
   useMediaQuery,
   useTheme,
 } from '@mui/material'
@@ -18,10 +20,9 @@ import {
   SearchBarFormControl,
   SearchBarInput,
   SnowplowPurpleSearchIcon,
-  TopicFilterFormControl,
-  TopicFilterSelect,
   TutorialCardTitle,
   Grid as TutorialGrid,
+  TopicFilterSidebar,
 } from './styledComponents'
 import { Meta, Topic as TopicType, Tutorial } from '../models'
 import { Card, Description, StartButton, Topic } from './styledComponents'
@@ -92,17 +93,142 @@ function searchFilter(term: string, tutorial?: Tutorial): boolean {
     : false
 }
 
-function topicFilter(topic: TopicDropdown, tutorial?: Tutorial): boolean {
+function snowplowTechFilter(
+  selectedSnowplowTech: string[],
+  tutorial?: Tutorial
+): boolean {
   if (!tutorial) return false
-  if (topic === 'All topics') return true
-  return tutorial ? tutorial?.meta.label === topic : false
+  if (selectedSnowplowTech.length === 0) return true
+  return tutorial.meta.snowplowTech.some((tech) =>
+    selectedSnowplowTech.includes(tech)
+  )
 }
 
-type TopicDropdown = keyof typeof TopicType.Values | 'All topics'
-const TopicDropdownValues: TopicDropdown[] = [
-  'All topics',
-  ...Object.values(TopicType.Values),
-]
+function technologyFilter(
+  selectedTechnologies: string[],
+  tutorial?: Tutorial
+): boolean {
+  if (!tutorial) return false
+  if (selectedTechnologies.length === 0) return true
+  return tutorial.meta.technologies.some((tech) =>
+    selectedTechnologies.includes(tech)
+  )
+}
+
+function useCaseFilter(
+  selectedUseCases: string[],
+  tutorial?: Tutorial
+): boolean {
+  if (!tutorial) return false
+  if (selectedUseCases.length === 0) return true
+  return tutorial.meta.useCases.some((useCase) =>
+    selectedUseCases.includes(useCase)
+  )
+}
+
+function topicFilter(selectedTopics: string[], tutorial?: Tutorial): boolean {
+  if (!tutorial) return false
+  if (selectedTopics.length === 0) return true
+  return selectedTopics.includes(tutorial.meta.label)
+}
+
+const TopicValues: string[] = Object.values(TopicType.Values)
+
+// Get available options based on current filters
+function getFilteredAvailableOptions(
+  tutorials: Tutorial[],
+  search: string,
+  selectedTopics: string[],
+  selectedUseCases: string[],
+  selectedTechnologies: string[],
+  selectedSnowplowTech: string[]
+) {
+  // Filter tutorials based on current selections (excluding the filter we're calculating for)
+  const getFilteredTutorials = (excludeFilter: string) => {
+    return tutorials
+      .filter((tutorial) => searchFilter(search, tutorial))
+      .filter((tutorial) =>
+        excludeFilter !== 'topics'
+          ? topicFilter(selectedTopics, tutorial)
+          : true
+      )
+      .filter((tutorial) =>
+        excludeFilter !== 'useCases'
+          ? useCaseFilter(selectedUseCases, tutorial)
+          : true
+      )
+      .filter((tutorial) =>
+        excludeFilter !== 'technologies'
+          ? technologyFilter(selectedTechnologies, tutorial)
+          : true
+      )
+      .filter((tutorial) =>
+        excludeFilter !== 'snowplowTech'
+          ? snowplowTechFilter(selectedSnowplowTech, tutorial)
+          : true
+      )
+  }
+
+  // Get available options for each filter type
+  const availableTopics = new Set<string>()
+  const availableUseCases = new Set<string>()
+  const availableTechnologies = new Set<string>()
+  const availableSnowplowTech = new Set<string>()
+
+  getFilteredTutorials('topics').forEach((tutorial) => {
+    availableTopics.add(tutorial.meta.label)
+  })
+
+  getFilteredTutorials('useCases').forEach((tutorial) => {
+    tutorial.meta.useCases.forEach((useCase) => availableUseCases.add(useCase))
+  })
+
+  getFilteredTutorials('technologies').forEach((tutorial) => {
+    tutorial.meta.technologies.forEach((tech) =>
+      availableTechnologies.add(tech)
+    )
+  })
+
+  getFilteredTutorials('snowplowTech').forEach((tutorial) => {
+    tutorial.meta.snowplowTech.forEach((tech) =>
+      availableSnowplowTech.add(tech)
+    )
+  })
+
+  return {
+    availableTopics: Array.from(availableTopics),
+    availableUseCases: Array.from(availableUseCases),
+    availableTechnologies: Array.from(availableTechnologies),
+    availableSnowplowTech: Array.from(availableSnowplowTech),
+  }
+}
+
+// Extract unique use cases from all tutorials
+function getAvailableUseCases(tutorials: Tutorial[]): string[] {
+  const useCases = new Set<string>()
+  tutorials.forEach((tutorial) => {
+    tutorial.meta.useCases.forEach((useCase) => useCases.add(useCase))
+  })
+  return Array.from(useCases).sort()
+}
+
+// Extract unique technologies from all tutorials
+function getAvailableTechnologies(tutorials: Tutorial[]): string[] {
+  const technologies = new Set<string>()
+  tutorials.forEach((tutorial) => {
+    tutorial.meta.technologies.forEach((tech) => technologies.add(tech))
+  })
+  return Array.from(technologies).sort()
+}
+
+// Extract unique Snowplow technologies from all tutorials
+function getAvailableSnowplowTech(tutorials: Tutorial[]): string[] {
+  const snowplowTech = new Set<string>()
+  tutorials.forEach((tutorial) => {
+    tutorial.meta.snowplowTech.forEach((tech) => snowplowTech.add(tech))
+  })
+  return Array.from(snowplowTech).sort()
+}
 
 function getParsedTutorials(tutorials: Meta[]): Tutorial[] {
   return Object.values(tutorials).map((metaJson) => {
@@ -135,14 +261,63 @@ const TutorialList: FC = () => {
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
 
   const [search, setSearch] = useState('')
-  const [topic, setTopic] = useState<TopicDropdown>('All topics')
+  const [selectedTopics, setSelectedTopics] = useState<string[]>([])
+  const [selectedUseCases, setSelectedUseCases] = useState<string[]>([])
+  const [selectedTechnologies, setSelectedTechnologies] = useState<string[]>([])
+  const [selectedSnowplowTech, setSelectedSnowplowTech] = useState<string[]>([])
   const parsedTutorials = useMemo<Tutorial[]>(
     () => getParsedTutorials(getMetaData()),
     []
   )
+  const allAvailableUseCases = useMemo<string[]>(
+    () => getAvailableUseCases(parsedTutorials),
+    [parsedTutorials]
+  )
+  const allAvailableTechnologies = useMemo<string[]>(
+    () => getAvailableTechnologies(parsedTutorials),
+    [parsedTutorials]
+  )
+  const allAvailableSnowplowTech = useMemo<string[]>(
+    () => getAvailableSnowplowTech(parsedTutorials),
+    [parsedTutorials]
+  )
+
+  // Calculate filtered available options based on current selections
+  const filteredAvailableOptions = useMemo(() => {
+    return getFilteredAvailableOptions(
+      parsedTutorials,
+      search,
+      selectedTopics,
+      selectedUseCases,
+      selectedTechnologies,
+      selectedSnowplowTech
+    )
+  }, [
+    parsedTutorials,
+    search,
+    selectedTopics,
+    selectedUseCases,
+    selectedTechnologies,
+    selectedSnowplowTech,
+  ])
   const tutorials = useMemo<Tutorial[]>(
-    () => filterTutorials(search, topic, parsedTutorials),
-    [search, topic, parsedTutorials]
+    () =>
+      filterTutorials(
+        search,
+        selectedTopics,
+        selectedUseCases,
+        selectedTechnologies,
+        selectedSnowplowTech,
+        parsedTutorials
+      ),
+    [
+      search,
+      selectedTopics,
+      selectedUseCases,
+      selectedTechnologies,
+      selectedSnowplowTech,
+      parsedTutorials,
+    ]
   )
 
   return (
@@ -153,15 +328,35 @@ const TutorialList: FC = () => {
       {isMobile ? (
         <MobileTutorialList
           setSearch={setSearch}
-          topic={topic}
-          setTopic={setTopic}
+          selectedTopics={selectedTopics}
+          setSelectedTopics={setSelectedTopics}
+          selectedUseCases={selectedUseCases}
+          setSelectedUseCases={setSelectedUseCases}
+          allAvailableUseCases={allAvailableUseCases}
+          selectedTechnologies={selectedTechnologies}
+          setSelectedTechnologies={setSelectedTechnologies}
+          allAvailableTechnologies={allAvailableTechnologies}
+          selectedSnowplowTech={selectedSnowplowTech}
+          setSelectedSnowplowTech={setSelectedSnowplowTech}
+          allAvailableSnowplowTech={allAvailableSnowplowTech}
+          filteredAvailableOptions={filteredAvailableOptions}
           tutorials={tutorials}
         />
       ) : (
         <DesktopTutorialList
           setSearch={setSearch}
-          topic={topic}
-          setTopic={setTopic}
+          selectedTopics={selectedTopics}
+          setSelectedTopics={setSelectedTopics}
+          selectedUseCases={selectedUseCases}
+          setSelectedUseCases={setSelectedUseCases}
+          allAvailableUseCases={allAvailableUseCases}
+          selectedTechnologies={selectedTechnologies}
+          setSelectedTechnologies={setSelectedTechnologies}
+          allAvailableTechnologies={allAvailableTechnologies}
+          selectedSnowplowTech={selectedSnowplowTech}
+          setSelectedSnowplowTech={setSelectedSnowplowTech}
+          allAvailableSnowplowTech={allAvailableSnowplowTech}
+          filteredAvailableOptions={filteredAvailableOptions}
           tutorials={tutorials}
         />
       )}
@@ -171,38 +366,83 @@ const TutorialList: FC = () => {
 
 function filterTutorials(
   search: string,
-  topic: TopicDropdown,
+  selectedTopics: string[],
+  selectedUseCases: string[],
+  selectedTechnologies: string[],
+  selectedSnowplowTech: string[],
   tutorials: Tutorial[]
 ): Tutorial[] {
   return tutorials
     .filter((tutorial) => searchFilter(search, tutorial))
-    .filter((tutorial) => topicFilter(topic, tutorial))
-}
-
-const IntroductionText: FC = () => {
-  return (
-    <div>
-      <p>
-        Solution accelerators are advanced tutorials that guide you through use
-        cases combining Snowplow with other tools.
-      </p>
-    </div>
-  )
+    .filter((tutorial) => topicFilter(selectedTopics, tutorial))
+    .filter((tutorial) => useCaseFilter(selectedUseCases, tutorial))
+    .filter((tutorial) => technologyFilter(selectedTechnologies, tutorial))
+    .filter((tutorial) => snowplowTechFilter(selectedSnowplowTech, tutorial))
 }
 
 const MobileTutorialList: FC<{
   setSearch: React.Dispatch<React.SetStateAction<string>>
-  topic: TopicDropdown
-  setTopic: React.Dispatch<React.SetStateAction<TopicDropdown>>
+  selectedTopics: string[]
+  setSelectedTopics: React.Dispatch<React.SetStateAction<string[]>>
+  selectedUseCases: string[]
+  setSelectedUseCases: React.Dispatch<React.SetStateAction<string[]>>
+  allAvailableUseCases: string[]
+  selectedTechnologies: string[]
+  setSelectedTechnologies: React.Dispatch<React.SetStateAction<string[]>>
+  allAvailableTechnologies: string[]
+  selectedSnowplowTech: string[]
+  setSelectedSnowplowTech: React.Dispatch<React.SetStateAction<string[]>>
+  allAvailableSnowplowTech: string[]
+  filteredAvailableOptions: {
+    availableTopics: string[]
+    availableUseCases: string[]
+    availableTechnologies: string[]
+    availableSnowplowTech: string[]
+  }
   tutorials: Tutorial[]
-}> = ({ setSearch, topic, setTopic, tutorials }) => {
+}> = ({
+  setSearch,
+  selectedTopics,
+  setSelectedTopics,
+  selectedUseCases,
+  setSelectedUseCases,
+  allAvailableUseCases,
+  selectedTechnologies,
+  setSelectedTechnologies,
+  allAvailableTechnologies,
+  selectedSnowplowTech,
+  setSelectedSnowplowTech,
+  allAvailableSnowplowTech,
+  filteredAvailableOptions,
+  tutorials,
+}) => {
   return (
     <Box sx={{ mt: 1 }}>
       <Grid container direction="column" rowSpacing={2}>
         <SearchBar setSearch={setSearch} />
-        <TopicFilter topic={topic} setTopic={setTopic} />
-
-        <IntroductionText />
+        <UseCaseFilter
+          selectedUseCases={selectedUseCases}
+          setSelectedUseCases={setSelectedUseCases}
+          allAvailableUseCases={allAvailableUseCases}
+          availableUseCases={filteredAvailableOptions.availableUseCases}
+        />
+        <TechnologyFilter
+          selectedTechnologies={selectedTechnologies}
+          setSelectedTechnologies={setSelectedTechnologies}
+          allAvailableTechnologies={allAvailableTechnologies}
+          availableTechnologies={filteredAvailableOptions.availableTechnologies}
+        />
+        <SnowplowTechFilter
+          selectedSnowplowTech={selectedSnowplowTech}
+          setSelectedSnowplowTech={setSelectedSnowplowTech}
+          allAvailableSnowplowTech={allAvailableSnowplowTech}
+          availableSnowplowTech={filteredAvailableOptions.availableSnowplowTech}
+        />
+        <TopicFilter
+          selectedTopics={selectedTopics}
+          setSelectedTopics={setSelectedTopics}
+          availableTopics={filteredAvailableOptions.availableTopics}
+        />
 
         {tutorials.map((tutorial: Tutorial) => (
           <Grid item key={tutorial.meta.id}>
@@ -216,26 +456,88 @@ const MobileTutorialList: FC<{
 
 const DesktopTutorialList: FC<{
   setSearch: React.Dispatch<React.SetStateAction<string>>
-  topic: TopicDropdown
-  setTopic: React.Dispatch<React.SetStateAction<TopicDropdown>>
+  selectedTopics: string[]
+  setSelectedTopics: React.Dispatch<React.SetStateAction<string[]>>
+  selectedUseCases: string[]
+  setSelectedUseCases: React.Dispatch<React.SetStateAction<string[]>>
+  allAvailableUseCases: string[]
+  selectedTechnologies: string[]
+  setSelectedTechnologies: React.Dispatch<React.SetStateAction<string[]>>
+  allAvailableTechnologies: string[]
+  selectedSnowplowTech: string[]
+  setSelectedSnowplowTech: React.Dispatch<React.SetStateAction<string[]>>
+  allAvailableSnowplowTech: string[]
+  filteredAvailableOptions: {
+    availableTopics: string[]
+    availableUseCases: string[]
+    availableTechnologies: string[]
+    availableSnowplowTech: string[]
+  }
   tutorials: Tutorial[]
-}> = ({ setSearch, topic, setTopic, tutorials }) => {
+}> = ({
+  setSearch,
+  selectedTopics,
+  setSelectedTopics,
+  selectedUseCases,
+  setSelectedUseCases,
+  allAvailableUseCases,
+  selectedTechnologies,
+  setSelectedTechnologies,
+  allAvailableTechnologies,
+  selectedSnowplowTech,
+  setSelectedSnowplowTech,
+  allAvailableSnowplowTech,
+  filteredAvailableOptions,
+  tutorials,
+}) => {
   return (
     <Box marginX={8} marginY={3} sx={{ minWidth: '90vw', mr: 0 }}>
-      <Grid container columnSpacing={2}>
-        <SearchBar setSearch={setSearch} />
-        <TopicFilter topic={topic} setTopic={setTopic} />
+      <Grid container columnSpacing={4}>
+        {/* Left sidebar with filters */}
+        <Grid item xs={3}>
+          <TopicFilterSidebar>
+            <SearchBar setSearch={setSearch} />
+            <UseCaseFilter
+              selectedUseCases={selectedUseCases}
+              setSelectedUseCases={setSelectedUseCases}
+              allAvailableUseCases={allAvailableUseCases}
+              availableUseCases={filteredAvailableOptions.availableUseCases}
+            />
+            <TechnologyFilter
+              selectedTechnologies={selectedTechnologies}
+              setSelectedTechnologies={setSelectedTechnologies}
+              allAvailableTechnologies={allAvailableTechnologies}
+              availableTechnologies={
+                filteredAvailableOptions.availableTechnologies
+              }
+            />
+            <SnowplowTechFilter
+              selectedSnowplowTech={selectedSnowplowTech}
+              setSelectedSnowplowTech={setSelectedSnowplowTech}
+              allAvailableSnowplowTech={allAvailableSnowplowTech}
+              availableSnowplowTech={
+                filteredAvailableOptions.availableSnowplowTech
+              }
+            />
+            <TopicFilter
+              selectedTopics={selectedTopics}
+              setSelectedTopics={setSelectedTopics}
+              availableTopics={filteredAvailableOptions.availableTopics}
+            />
+          </TopicFilterSidebar>
+        </Grid>
+
+        {/* Main content area */}
+        <Grid item xs={9}>
+          <TutorialGrid mb={2}>
+            {tutorials.map((tutorial: Tutorial) => (
+              <Grid item key={tutorial.meta.id}>
+                <TutorialCard tutorial={tutorial} />
+              </Grid>
+            ))}
+          </TutorialGrid>
+        </Grid>
       </Grid>
-
-      <IntroductionText />
-
-      <TutorialGrid mb={2}>
-        {tutorials.map((tutorial: Tutorial) => (
-          <Grid item key={tutorial.meta.id}>
-            <TutorialCard tutorial={tutorial} />
-          </Grid>
-        ))}
-      </TutorialGrid>
     </Box>
   )
 }
@@ -253,32 +555,245 @@ const SearchBar: FC<{
             </InputAdornment>
           }
           onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search by name of the tutorial or guide..."
+          placeholder="Search by tutorial name"
         />
       </SearchBarFormControl>
     </Grid>
   )
 }
 
-const TopicFilter: FC<{
-  topic: TopicDropdown
-  setTopic: React.Dispatch<React.SetStateAction<TopicDropdown>>
-}> = ({ topic, setTopic }) => {
+const SnowplowTechFilter: FC<{
+  selectedSnowplowTech: string[]
+  setSelectedSnowplowTech: React.Dispatch<React.SetStateAction<string[]>>
+  allAvailableSnowplowTech: string[]
+  availableSnowplowTech: string[]
+}> = ({
+  selectedSnowplowTech,
+  setSelectedSnowplowTech,
+  allAvailableSnowplowTech,
+  availableSnowplowTech,
+}) => {
+  const handleSnowplowTechChange = (tech: string, checked: boolean) => {
+    if (checked) {
+      setSelectedSnowplowTech((prev) => [...prev, tech])
+    } else {
+      setSelectedSnowplowTech((prev) => prev.filter((t) => t !== tech))
+    }
+  }
+
   return (
-    <Grid item>
-      <TopicFilterFormControl variant="outlined">
-        <TopicFilterSelect
-          value={topic}
-          onChange={(e) => setTopic(e.target.value as TopicDropdown)}
-        >
-          {TopicDropdownValues.map((topic) => (
-            <MenuItem key={topic} value={topic}>
-              {topic}
-            </MenuItem>
-          ))}
-        </TopicFilterSelect>
-      </TopicFilterFormControl>
-    </Grid>
+    <Box sx={{ mt: 2 }}>
+      <Typography
+        variant="h6"
+        sx={{ mb: 2, fontSize: '16px', fontWeight: 600 }}
+      >
+        Filter by Snowplow technology
+      </Typography>
+      {allAvailableSnowplowTech.map((tech) => {
+        const isAvailable =
+          availableSnowplowTech.includes(tech) ||
+          selectedSnowplowTech.includes(tech)
+        return (
+          <FormControlLabel
+            key={tech}
+            control={
+              <Checkbox
+                checked={selectedSnowplowTech.includes(tech)}
+                onChange={(e) =>
+                  handleSnowplowTechChange(tech, e.target.checked)
+                }
+                disabled={!isAvailable}
+                sx={{
+                  '&.Mui-checked': { color: 'rgba(102, 56, 184, 1)' },
+                  '&.Mui-disabled': { opacity: 0.5 },
+                }}
+              />
+            }
+            label={tech}
+            sx={{
+              display: 'block',
+              mb: 1,
+              opacity: isAvailable ? 1 : 0.5,
+              color: isAvailable ? 'inherit' : 'rgba(0, 0, 0, 0.38)',
+            }}
+          />
+        )
+      })}
+    </Box>
+  )
+}
+
+const TechnologyFilter: FC<{
+  selectedTechnologies: string[]
+  setSelectedTechnologies: React.Dispatch<React.SetStateAction<string[]>>
+  allAvailableTechnologies: string[]
+  availableTechnologies: string[]
+}> = ({
+  selectedTechnologies,
+  setSelectedTechnologies,
+  allAvailableTechnologies,
+  availableTechnologies,
+}) => {
+  const handleTechnologyChange = (technology: string, checked: boolean) => {
+    if (checked) {
+      setSelectedTechnologies((prev) => [...prev, technology])
+    } else {
+      setSelectedTechnologies((prev) =>
+        prev.filter((tech) => tech !== technology)
+      )
+    }
+  }
+
+  return (
+    <Box sx={{ mt: 2 }}>
+      <Typography
+        variant="h6"
+        sx={{ mb: 2, fontSize: '16px', fontWeight: 600 }}
+      >
+        Filter by technology
+      </Typography>
+      {allAvailableTechnologies.map((technology) => {
+        const isAvailable =
+          availableTechnologies.includes(technology) ||
+          selectedTechnologies.includes(technology)
+        return (
+          <FormControlLabel
+            key={technology}
+            control={
+              <Checkbox
+                checked={selectedTechnologies.includes(technology)}
+                onChange={(e) =>
+                  handleTechnologyChange(technology, e.target.checked)
+                }
+                disabled={!isAvailable}
+                sx={{
+                  '&.Mui-checked': { color: 'rgba(102, 56, 184, 1)' },
+                  '&.Mui-disabled': { opacity: 0.5 },
+                }}
+              />
+            }
+            label={technology}
+            sx={{
+              display: 'block',
+              mb: 1,
+              opacity: isAvailable ? 1 : 0.5,
+              color: isAvailable ? 'inherit' : 'rgba(0, 0, 0, 0.38)',
+            }}
+          />
+        )
+      })}
+    </Box>
+  )
+}
+
+const UseCaseFilter: FC<{
+  selectedUseCases: string[]
+  setSelectedUseCases: React.Dispatch<React.SetStateAction<string[]>>
+  allAvailableUseCases: string[]
+  availableUseCases: string[]
+}> = ({
+  selectedUseCases,
+  setSelectedUseCases,
+  allAvailableUseCases,
+  availableUseCases,
+}) => {
+  const handleUseCaseChange = (useCase: string, checked: boolean) => {
+    if (checked) {
+      setSelectedUseCases((prev) => [...prev, useCase])
+    } else {
+      setSelectedUseCases((prev) => prev.filter((uc) => uc !== useCase))
+    }
+  }
+
+  return (
+    <Box sx={{ mt: 2 }}>
+      <Typography
+        variant="h6"
+        sx={{ mb: 2, fontSize: '16px', fontWeight: 600 }}
+      >
+        Filter by use case
+      </Typography>
+      {allAvailableUseCases.map((useCase) => {
+        const isAvailable =
+          availableUseCases.includes(useCase) ||
+          selectedUseCases.includes(useCase)
+        return (
+          <FormControlLabel
+            key={useCase}
+            control={
+              <Checkbox
+                checked={selectedUseCases.includes(useCase)}
+                onChange={(e) => handleUseCaseChange(useCase, e.target.checked)}
+                disabled={!isAvailable}
+                sx={{
+                  '&.Mui-checked': { color: 'rgba(102, 56, 184, 1)' },
+                  '&.Mui-disabled': { opacity: 0.5 },
+                }}
+              />
+            }
+            label={useCase}
+            sx={{
+              display: 'block',
+              mb: 1,
+              opacity: isAvailable ? 1 : 0.5,
+              color: isAvailable ? 'inherit' : 'rgba(0, 0, 0, 0.38)',
+            }}
+          />
+        )
+      })}
+    </Box>
+  )
+}
+
+const TopicFilter: FC<{
+  selectedTopics: string[]
+  setSelectedTopics: React.Dispatch<React.SetStateAction<string[]>>
+  availableTopics: string[]
+}> = ({ selectedTopics, setSelectedTopics, availableTopics }) => {
+  const handleTopicChange = (topic: string, checked: boolean) => {
+    if (checked) {
+      setSelectedTopics((prev) => [...prev, topic])
+    } else {
+      setSelectedTopics((prev) => prev.filter((t) => t !== topic))
+    }
+  }
+
+  return (
+    <Box sx={{ mt: 2 }}>
+      <Typography
+        variant="h6"
+        sx={{ mb: 2, fontSize: '16px', fontWeight: 600 }}
+      >
+        Filter by topic
+      </Typography>
+      {TopicValues.map((topic) => {
+        const isAvailable =
+          availableTopics.includes(topic) || selectedTopics.includes(topic)
+        return (
+          <FormControlLabel
+            key={topic}
+            control={
+              <Checkbox
+                checked={selectedTopics.includes(topic)}
+                onChange={(e) => handleTopicChange(topic, e.target.checked)}
+                disabled={!isAvailable}
+                sx={{
+                  '&.Mui-checked': { color: 'rgba(102, 56, 184, 1)' },
+                  '&.Mui-disabled': { opacity: 0.5 },
+                }}
+              />
+            }
+            label={topic}
+            sx={{
+              display: 'block',
+              mb: 1,
+              opacity: isAvailable ? 1 : 0.5,
+              color: isAvailable ? 'inherit' : 'rgba(0, 0, 0, 0.38)',
+            }}
+          />
+        )
+      })}
+    </Box>
   )
 }
 

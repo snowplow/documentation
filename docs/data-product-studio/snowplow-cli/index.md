@@ -68,7 +68,7 @@ The organization ID, which can be retrieved from the URL immediately following t
 Snowplow CLI can take its configuration from a variety of sources. More details are available from `./snowplow-cli data-structures --help`. Variations on these three examples should serve most cases.
 
 <Tabs groupId="config">
-  <TabItem value="env" label="env variables" default>
+  <TabItem value="env" label="env variables or .dotenv file" default>
 
   ```bash
   SNOWPLOW_CONSOLE_API_KEY_ID=********-****-****-****-************
@@ -91,15 +91,6 @@ Snowplow CLI can take its configuration from a variety of sources. More details 
 
   ```bash
   ./snowplow-cli data-structures --api-key-id ********-****-****-****-************ --api-key ********-****-****-****-************ --org-id ********-****-****-****-************
-  ```
-
-  </TabItem>
-  <TabItem value="dotenv" label=".env" >
-
-  ```bash
-  SNOWPLOW_CONSOLE_API_KEY="********-****-****-****-************"
-  SNOWPLOW_CONSOLE_API_KEY_ID="********-****-****-****-************"
-  SNOWPLOW_CONSOLE_ORG_ID="********-****-****-****-************"
   ```
 
   </TabItem>

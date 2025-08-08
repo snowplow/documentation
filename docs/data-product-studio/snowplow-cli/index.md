@@ -121,7 +121,7 @@ This command will:
 - Confirm your organization access
 - Provide helpful troubleshooting information if issues are found
 
-If the status check fails, the command will suggest next steps such as running `snowplow-cli setup` to reconfigure your credentials.
+If the status check fails, the command will suggest the next steps such as running `snowplow-cli setup` to reconfigure your credentials.
 
 ### Configure YAML language server (optional)
 

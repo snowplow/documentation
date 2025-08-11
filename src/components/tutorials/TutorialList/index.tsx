@@ -567,6 +567,64 @@ const SearchBar: FC<{
   )
 }
 
+interface GenericFilterProps {
+  title: string
+  options: string[]
+  selectedValues: string[]
+  availableValues: string[]
+  onChange: (value: string, checked: boolean) => void
+  customOrdering?: (options: string[]) => string[]
+}
+
+const GenericFilter: FC<GenericFilterProps> = ({
+  title,
+  options,
+  selectedValues,
+  availableValues,
+  onChange,
+  customOrdering,
+}) => {
+  const orderedOptions = customOrdering ? customOrdering(options) : options
+
+  return (
+    <Box sx={{ mt: 2 }}>
+      <Typography
+        variant="h6"
+        sx={{ mb: 2, fontSize: '16px', fontWeight: 600 }}
+      >
+        {title}
+      </Typography>
+      {orderedOptions.map((option) => {
+        const isAvailable =
+          availableValues.includes(option) || selectedValues.includes(option)
+        return (
+          <FormControlLabel
+            key={option}
+            control={
+              <Checkbox
+                checked={selectedValues.includes(option)}
+                onChange={(e) => onChange(option, e.target.checked)}
+                disabled={!isAvailable}
+                sx={{
+                  '&.Mui-checked': { color: 'rgba(102, 56, 184, 1)' },
+                  '&.Mui-disabled': { opacity: 0.5 },
+                }}
+              />
+            }
+            label={option}
+            sx={{
+              display: 'block',
+              mb: 1,
+              opacity: isAvailable ? 1 : 0.5,
+              color: isAvailable ? 'inherit' : 'rgba(0, 0, 0, 0.38)',
+            }}
+          />
+        )
+      })}
+    </Box>
+  )
+}
+
 const SnowplowTechFilter: FC<{
   selectedSnowplowTech: string[]
   setSelectedSnowplowTech: React.Dispatch<React.SetStateAction<string[]>>
@@ -578,7 +636,7 @@ const SnowplowTechFilter: FC<{
   allAvailableSnowplowTech,
   availableSnowplowTech,
 }) => {
-  const handleSnowplowTechChange = (tech: string, checked: boolean) => {
+  const handleChange = (tech: string, checked: boolean) => {
     if (checked) {
       setSelectedSnowplowTech((prev) => [...prev, tech])
     } else {
@@ -587,44 +645,13 @@ const SnowplowTechFilter: FC<{
   }
 
   return (
-    <Box sx={{ mt: 2 }}>
-      <Typography
-        variant="h6"
-        sx={{ mb: 2, fontSize: '16px', fontWeight: 600 }}
-      >
-        Filter by Snowplow technology
-      </Typography>
-      {allAvailableSnowplowTech.map((tech) => {
-        const isAvailable =
-          availableSnowplowTech.includes(tech) ||
-          selectedSnowplowTech.includes(tech)
-        return (
-          <FormControlLabel
-            key={tech}
-            control={
-              <Checkbox
-                checked={selectedSnowplowTech.includes(tech)}
-                onChange={(e) =>
-                  handleSnowplowTechChange(tech, e.target.checked)
-                }
-                disabled={!isAvailable}
-                sx={{
-                  '&.Mui-checked': { color: 'rgba(102, 56, 184, 1)' },
-                  '&.Mui-disabled': { opacity: 0.5 },
-                }}
-              />
-            }
-            label={tech}
-            sx={{
-              display: 'block',
-              mb: 1,
-              opacity: isAvailable ? 1 : 0.5,
-              color: isAvailable ? 'inherit' : 'rgba(0, 0, 0, 0.38)',
-            }}
-          />
-        )
-      })}
-    </Box>
+    <GenericFilter
+      title="Filter by Snowplow technology"
+      options={allAvailableSnowplowTech}
+      selectedValues={selectedSnowplowTech}
+      availableValues={availableSnowplowTech}
+      onChange={handleChange}
+    />
   )
 }
 
@@ -639,7 +666,7 @@ const TechnologyFilter: FC<{
   allAvailableTechnologies,
   availableTechnologies,
 }) => {
-  const handleTechnologyChange = (technology: string, checked: boolean) => {
+  const handleChange = (technology: string, checked: boolean) => {
     if (checked) {
       setSelectedTechnologies((prev) => [...prev, technology])
     } else {
@@ -650,44 +677,13 @@ const TechnologyFilter: FC<{
   }
 
   return (
-    <Box sx={{ mt: 2 }}>
-      <Typography
-        variant="h6"
-        sx={{ mb: 2, fontSize: '16px', fontWeight: 600 }}
-      >
-        Filter by technology
-      </Typography>
-      {allAvailableTechnologies.map((technology) => {
-        const isAvailable =
-          availableTechnologies.includes(technology) ||
-          selectedTechnologies.includes(technology)
-        return (
-          <FormControlLabel
-            key={technology}
-            control={
-              <Checkbox
-                checked={selectedTechnologies.includes(technology)}
-                onChange={(e) =>
-                  handleTechnologyChange(technology, e.target.checked)
-                }
-                disabled={!isAvailable}
-                sx={{
-                  '&.Mui-checked': { color: 'rgba(102, 56, 184, 1)' },
-                  '&.Mui-disabled': { opacity: 0.5 },
-                }}
-              />
-            }
-            label={technology}
-            sx={{
-              display: 'block',
-              mb: 1,
-              opacity: isAvailable ? 1 : 0.5,
-              color: isAvailable ? 'inherit' : 'rgba(0, 0, 0, 0.38)',
-            }}
-          />
-        )
-      })}
-    </Box>
+    <GenericFilter
+      title="Filter by technology"
+      options={allAvailableTechnologies}
+      selectedValues={selectedTechnologies}
+      availableValues={availableTechnologies}
+      onChange={handleChange}
+    />
   )
 }
 
@@ -702,7 +698,7 @@ const UseCaseFilter: FC<{
   allAvailableUseCases,
   availableUseCases,
 }) => {
-  const handleUseCaseChange = (useCase: string, checked: boolean) => {
+  const handleChange = (useCase: string, checked: boolean) => {
     if (checked) {
       setSelectedUseCases((prev) => [...prev, useCase])
     } else {
@@ -711,42 +707,13 @@ const UseCaseFilter: FC<{
   }
 
   return (
-    <Box sx={{ mt: 2 }}>
-      <Typography
-        variant="h6"
-        sx={{ mb: 2, fontSize: '16px', fontWeight: 600 }}
-      >
-        Filter by use case
-      </Typography>
-      {allAvailableUseCases.map((useCase) => {
-        const isAvailable =
-          availableUseCases.includes(useCase) ||
-          selectedUseCases.includes(useCase)
-        return (
-          <FormControlLabel
-            key={useCase}
-            control={
-              <Checkbox
-                checked={selectedUseCases.includes(useCase)}
-                onChange={(e) => handleUseCaseChange(useCase, e.target.checked)}
-                disabled={!isAvailable}
-                sx={{
-                  '&.Mui-checked': { color: 'rgba(102, 56, 184, 1)' },
-                  '&.Mui-disabled': { opacity: 0.5 },
-                }}
-              />
-            }
-            label={useCase}
-            sx={{
-              display: 'block',
-              mb: 1,
-              opacity: isAvailable ? 1 : 0.5,
-              color: isAvailable ? 'inherit' : 'rgba(0, 0, 0, 0.38)',
-            }}
-          />
-        )
-      })}
-    </Box>
+    <GenericFilter
+      title="Filter by use case"
+      options={allAvailableUseCases}
+      selectedValues={selectedUseCases}
+      availableValues={availableUseCases}
+      onChange={handleChange}
+    />
   )
 }
 
@@ -755,7 +722,7 @@ const TopicFilter: FC<{
   setSelectedTopics: React.Dispatch<React.SetStateAction<string[]>>
   availableTopics: string[]
 }> = ({ selectedTopics, setSelectedTopics, availableTopics }) => {
-  const handleTopicChange = (topic: string, checked: boolean) => {
+  const handleChange = (topic: string, checked: boolean) => {
     if (checked) {
       setSelectedTopics((prev) => [...prev, topic])
     } else {
@@ -764,50 +731,25 @@ const TopicFilter: FC<{
   }
 
   // Put "Solution accelerator" first, then the rest in their original order
-  const orderedTopics = useMemo(() => {
-    const solutionAccelerator = 'Solution accelerator'
-    const otherTopics = TopicValues.filter(topic => topic !== solutionAccelerator)
-    return TopicValues.includes(solutionAccelerator) 
-      ? [solutionAccelerator, ...otherTopics]
-      : TopicValues
+  const customOrdering = useMemo(() => {
+    return (topics: string[]) => {
+      const solutionAccelerator = 'Solution accelerator'
+      const otherTopics = topics.filter(topic => topic !== solutionAccelerator)
+      return topics.includes(solutionAccelerator) 
+        ? [solutionAccelerator, ...otherTopics]
+        : topics
+    }
   }, [])
 
   return (
-    <Box sx={{ mt: 2 }}>
-      <Typography
-        variant="h6"
-        sx={{ mb: 2, fontSize: '16px', fontWeight: 600 }}
-      >
-        Filter by topic
-      </Typography>
-      {orderedTopics.map((topic) => {
-        const isAvailable =
-          availableTopics.includes(topic) || selectedTopics.includes(topic)
-        return (
-          <FormControlLabel
-            key={topic}
-            control={
-              <Checkbox
-                checked={selectedTopics.includes(topic)}
-                onChange={(e) => handleTopicChange(topic, e.target.checked)}
-                disabled={!isAvailable}
-                sx={{
-                  '&.Mui-checked': { color: 'rgba(102, 56, 184, 1)' },
-                  '&.Mui-disabled': { opacity: 0.5 },
-                }}
-              />
-            }
-            label={topic}
-            sx={{
-              display: 'block',
-              mb: 1,
-              opacity: isAvailable ? 1 : 0.5,
-              color: isAvailable ? 'inherit' : 'rgba(0, 0, 0, 0.38)',
-            }}
-          />
-        )
-      })}
-    </Box>
+    <GenericFilter
+      title="Filter by topic"
+      options={TopicValues}
+      selectedValues={selectedTopics}
+      availableValues={availableTopics}
+      onChange={handleChange}
+      customOrdering={customOrdering}
+    />
   )
 }
 

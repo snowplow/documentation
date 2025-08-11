@@ -261,33 +261,34 @@ function getParsedTutorials(tutorials: Meta[]): Tutorial[] {
   })
 }
 
-const TutorialList: FC = () => {
-  const theme = useTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
-
+// Custom hook to manage all filter state and derived data
+const useTutorialFilters = () => {
   const [search, setSearch] = useState('')
   const [selectedTopics, setSelectedTopics] = useState<string[]>([])
   const [selectedUseCases, setSelectedUseCases] = useState<string[]>([])
   const [selectedTechnologies, setSelectedTechnologies] = useState<string[]>([])
   const [selectedSnowplowTech, setSelectedSnowplowTech] = useState<string[]>([])
+  
   const parsedTutorials = useMemo<Tutorial[]>(
     () => getParsedTutorials(getMetaData()),
     []
   )
+  
   const allAvailableUseCases = useMemo<string[]>(
     () => getAvailableUseCases(parsedTutorials),
     [parsedTutorials]
   )
+  
   const allAvailableTechnologies = useMemo<string[]>(
     () => getAvailableTechnologies(parsedTutorials),
     [parsedTutorials]
   )
+  
   const allAvailableSnowplowTech = useMemo<string[]>(
     () => getAvailableSnowplowTech(parsedTutorials),
     [parsedTutorials]
   )
 
-  // Calculate filtered available options based on current selections
   const filteredAvailableOptions = useMemo(() => {
     return getFilteredAvailableOptions(
       parsedTutorials,
@@ -305,7 +306,8 @@ const TutorialList: FC = () => {
     selectedTechnologies,
     selectedSnowplowTech,
   ])
-  const tutorials = useMemo<Tutorial[]>(
+  
+  const filteredTutorials = useMemo<Tutorial[]>(
     () =>
       filterTutorials(
         search,
@@ -325,105 +327,47 @@ const TutorialList: FC = () => {
     ]
   )
 
-  return (
-    <>
-      <Head>
-        <title>Tutorials | Snowplow Documentation</title>
-      </Head>{' '}
-      {isMobile ? (
-        <MobileTutorialList
-          setSearch={setSearch}
-          selectedTopics={selectedTopics}
-          setSelectedTopics={setSelectedTopics}
-          selectedUseCases={selectedUseCases}
-          setSelectedUseCases={setSelectedUseCases}
-          allAvailableUseCases={allAvailableUseCases}
-          selectedTechnologies={selectedTechnologies}
-          setSelectedTechnologies={setSelectedTechnologies}
-          allAvailableTechnologies={allAvailableTechnologies}
-          selectedSnowplowTech={selectedSnowplowTech}
-          setSelectedSnowplowTech={setSelectedSnowplowTech}
-          allAvailableSnowplowTech={allAvailableSnowplowTech}
-          filteredAvailableOptions={filteredAvailableOptions}
-          tutorials={tutorials}
-        />
-      ) : (
-        <DesktopTutorialList
-          setSearch={setSearch}
-          selectedTopics={selectedTopics}
-          setSelectedTopics={setSelectedTopics}
-          selectedUseCases={selectedUseCases}
-          setSelectedUseCases={setSelectedUseCases}
-          allAvailableUseCases={allAvailableUseCases}
-          selectedTechnologies={selectedTechnologies}
-          setSelectedTechnologies={setSelectedTechnologies}
-          allAvailableTechnologies={allAvailableTechnologies}
-          selectedSnowplowTech={selectedSnowplowTech}
-          setSelectedSnowplowTech={setSelectedSnowplowTech}
-          allAvailableSnowplowTech={allAvailableSnowplowTech}
-          filteredAvailableOptions={filteredAvailableOptions}
-          tutorials={tutorials}
-        />
-      )}
-    </>
-  )
-}
-
-function filterTutorials(
-  search: string,
-  selectedTopics: string[],
-  selectedUseCases: string[],
-  selectedTechnologies: string[],
-  selectedSnowplowTech: string[],
-  tutorials: Tutorial[]
-): Tutorial[] {
-  return tutorials
-    .filter((tutorial) => searchFilter(search, tutorial))
-    .filter((tutorial) => topicFilter(selectedTopics, tutorial))
-    .filter((tutorial) => useCaseFilter(selectedUseCases, tutorial))
-    .filter((tutorial) => technologyFilter(selectedTechnologies, tutorial))
-    .filter((tutorial) => snowplowTechFilter(selectedSnowplowTech, tutorial))
-}
-
-const MobileTutorialList: FC<{
-  setSearch: React.Dispatch<React.SetStateAction<string>>
-  selectedTopics: string[]
-  setSelectedTopics: React.Dispatch<React.SetStateAction<string[]>>
-  selectedUseCases: string[]
-  setSelectedUseCases: React.Dispatch<React.SetStateAction<string[]>>
-  allAvailableUseCases: string[]
-  selectedTechnologies: string[]
-  setSelectedTechnologies: React.Dispatch<React.SetStateAction<string[]>>
-  allAvailableTechnologies: string[]
-  selectedSnowplowTech: string[]
-  setSelectedSnowplowTech: React.Dispatch<React.SetStateAction<string[]>>
-  allAvailableSnowplowTech: string[]
-  filteredAvailableOptions: {
-    availableTopics: string[]
-    availableUseCases: string[]
-    availableTechnologies: string[]
-    availableSnowplowTech: string[]
+  return {
+    search,
+    setSearch,
+    selectedTopics,
+    setSelectedTopics,
+    selectedUseCases,
+    setSelectedUseCases,
+    selectedTechnologies,
+    setSelectedTechnologies,
+    selectedSnowplowTech,
+    setSelectedSnowplowTech,
+    allAvailableUseCases,
+    allAvailableTechnologies,
+    allAvailableSnowplowTech,
+    filteredAvailableOptions,
+    filteredTutorials,
   }
-  tutorials: Tutorial[]
-}> = ({
-  setSearch,
-  selectedTopics,
-  setSelectedTopics,
-  selectedUseCases,
-  setSelectedUseCases,
-  allAvailableUseCases,
-  selectedTechnologies,
-  setSelectedTechnologies,
-  allAvailableTechnologies,
-  selectedSnowplowTech,
-  setSelectedSnowplowTech,
-  allAvailableSnowplowTech,
-  filteredAvailableOptions,
-  tutorials,
-}) => {
-  return (
-    <Box sx={{ mt: 1 }}>
-      <Grid container direction="column" rowSpacing={2}>
+}
+
+// Shared filter and tutorial content hook
+const useTutorialContent = () => {
+  const {
+    setSearch,
+    selectedTopics,
+    setSelectedTopics,
+    selectedUseCases,
+    setSelectedUseCases,
+    allAvailableUseCases,
+    selectedTechnologies,
+    setSelectedTechnologies,
+    allAvailableTechnologies,
+    selectedSnowplowTech,
+    setSelectedSnowplowTech,
+    allAvailableSnowplowTech,
+    filteredAvailableOptions,
+    filteredTutorials,
+  } = useTutorialFilters()
+
+  return {
+    filters: (
+      <>
         <SearchBar setSearch={setSearch} />
         <UseCaseFilter
           selectedUseCases={selectedUseCases}
@@ -448,98 +392,83 @@ const MobileTutorialList: FC<{
           allAvailableSnowplowTech={allAvailableSnowplowTech}
           availableSnowplowTech={filteredAvailableOptions.availableSnowplowTech}
         />
+      </>
+    ),
+    tutorials: filteredTutorials.map((tutorial: Tutorial) => (
+      <Grid item key={tutorial.meta.id}>
+        <TutorialCard tutorial={tutorial} />
+      </Grid>
+    ))
+  }
+}
 
-        {tutorials.map((tutorial: Tutorial) => (
-          <Grid item key={tutorial.meta.id}>
-            <TutorialCard tutorial={tutorial} />
-          </Grid>
-        ))}
+const TutorialList: FC = () => {
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
+  const content = useTutorialContent()
+
+  return (
+    <>
+      <Head>
+        <title>Tutorials | Snowplow Documentation</title>
+      </Head>
+      {isMobile ? (
+        <MobileTutorialLayout filters={content.filters} tutorials={content.tutorials} />
+      ) : (
+        <DesktopTutorialLayout filters={content.filters} tutorials={content.tutorials} />
+      )}
+    </>
+  )
+}
+
+function filterTutorials(
+  search: string,
+  selectedTopics: string[],
+  selectedUseCases: string[],
+  selectedTechnologies: string[],
+  selectedSnowplowTech: string[],
+  tutorials: Tutorial[]
+): Tutorial[] {
+  return tutorials
+    .filter((tutorial) => searchFilter(search, tutorial))
+    .filter((tutorial) => topicFilter(selectedTopics, tutorial))
+    .filter((tutorial) => useCaseFilter(selectedUseCases, tutorial))
+    .filter((tutorial) => technologyFilter(selectedTechnologies, tutorial))
+    .filter((tutorial) => snowplowTechFilter(selectedSnowplowTech, tutorial))
+}
+
+const MobileTutorialLayout: FC<{
+  filters: React.ReactNode
+  tutorials: React.ReactNode[]
+}> = ({ filters, tutorials }) => {
+  return (
+    <Box sx={{ mt: 1 }}>
+      <Grid container direction="column" rowSpacing={2}>
+        {filters}
+        {tutorials}
       </Grid>
     </Box>
   )
 }
 
-const DesktopTutorialList: FC<{
-  setSearch: React.Dispatch<React.SetStateAction<string>>
-  selectedTopics: string[]
-  setSelectedTopics: React.Dispatch<React.SetStateAction<string[]>>
-  selectedUseCases: string[]
-  setSelectedUseCases: React.Dispatch<React.SetStateAction<string[]>>
-  allAvailableUseCases: string[]
-  selectedTechnologies: string[]
-  setSelectedTechnologies: React.Dispatch<React.SetStateAction<string[]>>
-  allAvailableTechnologies: string[]
-  selectedSnowplowTech: string[]
-  setSelectedSnowplowTech: React.Dispatch<React.SetStateAction<string[]>>
-  allAvailableSnowplowTech: string[]
-  filteredAvailableOptions: {
-    availableTopics: string[]
-    availableUseCases: string[]
-    availableTechnologies: string[]
-    availableSnowplowTech: string[]
-  }
-  tutorials: Tutorial[]
-}> = ({
-  setSearch,
-  selectedTopics,
-  setSelectedTopics,
-  selectedUseCases,
-  setSelectedUseCases,
-  allAvailableUseCases,
-  selectedTechnologies,
-  setSelectedTechnologies,
-  allAvailableTechnologies,
-  selectedSnowplowTech,
-  setSelectedSnowplowTech,
-  allAvailableSnowplowTech,
-  filteredAvailableOptions,
-  tutorials,
-}) => {
+const DesktopTutorialLayout: FC<{
+  filters: React.ReactNode
+  tutorials: React.ReactNode[]
+}> = ({ filters, tutorials }) => {
   return (
     <Box marginX={8} marginY={3} sx={{ minWidth: '90vw', mr: 0 }}>
       <Grid container columnSpacing={4}>
         {/* Left sidebar with filters */}
         <Grid item xs={3}>
           <TopicFilterSidebar>
-            <SearchBar setSearch={setSearch} />
-            <UseCaseFilter
-              selectedUseCases={selectedUseCases}
-              setSelectedUseCases={setSelectedUseCases}
-              allAvailableUseCases={allAvailableUseCases}
-              availableUseCases={filteredAvailableOptions.availableUseCases}
-            />
-            <TopicFilter
-              selectedTopics={selectedTopics}
-              setSelectedTopics={setSelectedTopics}
-              availableTopics={filteredAvailableOptions.availableTopics}
-            />
-            <TechnologyFilter
-              selectedTechnologies={selectedTechnologies}
-              setSelectedTechnologies={setSelectedTechnologies}
-              allAvailableTechnologies={allAvailableTechnologies}
-              availableTechnologies={
-                filteredAvailableOptions.availableTechnologies
-              }
-            />
-            <SnowplowTechFilter
-              selectedSnowplowTech={selectedSnowplowTech}
-              setSelectedSnowplowTech={setSelectedSnowplowTech}
-              allAvailableSnowplowTech={allAvailableSnowplowTech}
-              availableSnowplowTech={
-                filteredAvailableOptions.availableSnowplowTech
-              }
-            />
+            {filters}
           </TopicFilterSidebar>
         </Grid>
 
         {/* Main content area */}
         <Grid item xs={9}>
           <TutorialGrid mb={2}>
-            {tutorials.map((tutorial: Tutorial) => (
-              <Grid item key={tutorial.meta.id}>
-                <TutorialCard tutorial={tutorial} />
-              </Grid>
-            ))}
+            {tutorials}
           </TutorialGrid>
         </Grid>
       </Grid>

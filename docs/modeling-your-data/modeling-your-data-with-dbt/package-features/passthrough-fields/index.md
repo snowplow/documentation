@@ -170,7 +170,7 @@ When using passthrough fields with entities or self-describing events, always co
 
 ## Usage Notes
 
-Which event the field(s) are taken from depends on the derived table; for example in the Views table in the Unified package the the field value from the `page_view` event itself, _not_ the pings. 
+The event that the passthrough fields are taken from depends on the derived table you are adding them to. For example, in the `snowplow_unified_views` table, the `page_view` event is used, not other events, such as `page_ping` or any other custom events. Therefore, if you are adding a passthrough field to the `snowplow_unified_views` table, you must access a property or custom entity that is attached to a `page_view` event.
 
 A general rule of thumb is that the field comes from the *first* event of that type at that table level. If you are unsure, you can always check the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md) for the variable description or the model sql.
 

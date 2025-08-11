@@ -213,13 +213,6 @@ If surge protection is enabled, **SQS queues** will use your custom key:
 - Good events queue
 - Bad events queue
 
-The **EKS cluster** will use your custom KMS key for encryption of Secrets. However please keep in mind the following:
-- The process of switching to a customer-managed KMS key is irreversible. An EKS cluster cannot return back to use an AWS-managed key. In order to do that we need to destroy and recreate the cluster which will result in downtime.
-- A customer-managed KMS key that is being used for secrets encryption will be bound to the cluster, it is not possible to change the key and accidentally deleting it will result in a degraded EKS cluster which will require redeployment (which will result in downtime).
-- Updating an existing cluster from AWS-managed key to customer-managed one is possible but there are the following issues:
-  - Only new secrets will be encrypted with the customer-managed key
-  - Existing secrets remain encrypted with AWS-owned keys until rotated
-
 **Other pipeline components** like Snowbridge will be granted access to decrypt/encrypt data using your key.
 
 ## Step 5: Post-configuration

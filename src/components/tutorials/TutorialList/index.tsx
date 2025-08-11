@@ -426,6 +426,11 @@ const MobileTutorialList: FC<{
           allAvailableUseCases={allAvailableUseCases}
           availableUseCases={filteredAvailableOptions.availableUseCases}
         />
+        <TopicFilter
+          selectedTopics={selectedTopics}
+          setSelectedTopics={setSelectedTopics}
+          availableTopics={filteredAvailableOptions.availableTopics}
+        />
         <TechnologyFilter
           selectedTechnologies={selectedTechnologies}
           setSelectedTechnologies={setSelectedTechnologies}
@@ -437,11 +442,6 @@ const MobileTutorialList: FC<{
           setSelectedSnowplowTech={setSelectedSnowplowTech}
           allAvailableSnowplowTech={allAvailableSnowplowTech}
           availableSnowplowTech={filteredAvailableOptions.availableSnowplowTech}
-        />
-        <TopicFilter
-          selectedTopics={selectedTopics}
-          setSelectedTopics={setSelectedTopics}
-          availableTopics={filteredAvailableOptions.availableTopics}
         />
 
         {tutorials.map((tutorial: Tutorial) => (
@@ -503,6 +503,11 @@ const DesktopTutorialList: FC<{
               allAvailableUseCases={allAvailableUseCases}
               availableUseCases={filteredAvailableOptions.availableUseCases}
             />
+            <TopicFilter
+              selectedTopics={selectedTopics}
+              setSelectedTopics={setSelectedTopics}
+              availableTopics={filteredAvailableOptions.availableTopics}
+            />
             <TechnologyFilter
               selectedTechnologies={selectedTechnologies}
               setSelectedTechnologies={setSelectedTechnologies}
@@ -518,11 +523,6 @@ const DesktopTutorialList: FC<{
               availableSnowplowTech={
                 filteredAvailableOptions.availableSnowplowTech
               }
-            />
-            <TopicFilter
-              selectedTopics={selectedTopics}
-              setSelectedTopics={setSelectedTopics}
-              availableTopics={filteredAvailableOptions.availableTopics}
             />
           </TopicFilterSidebar>
         </Grid>

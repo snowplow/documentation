@@ -99,7 +99,7 @@ first_referrer = Attribute(
 
 Add all three attribute definitions to your notebook, and run the cell.
 
-## Define an Attribute Group
+## Define an attribute group
 
 Single attribute definitions can't be deployed to Signals, as they don't make sense without the additional context defined in an `AttributeGroup`.
 
@@ -126,4 +126,4 @@ Because of the session attribute key, Signals will calculate these attributes as
 * The last seen browser name for each session
 * The first seen referrer for each session
 
-Add this Attribute Group definition to your notebook, and run the cell.
+Add this attribute group definition to your notebook, and run the cell.

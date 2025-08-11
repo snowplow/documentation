@@ -271,7 +271,7 @@ num_engaged_campaigns_l30d = Attribute(
 )
 ```
 
-Group the attributes into an Attribute Group with the `domain_userid` device attribute key. You'll need to provide your own email address for the `owner` field.
+Group the attributes into an attribute group with the `domain_userid` device attribute key. You'll need to provide your own email address for the `owner` field.
 
 ```python
 from snowplow_signals import StreamAttributeGroup, domain_userid
@@ -336,7 +336,7 @@ prospect_scoring_tutorial_service = Service(
 
 ## Deploy configuration to Signals
 
-Apply the Attribute Group and service configurations to Signals.
+Apply the attribute group and service configurations to Signals.
 
 ```python
 from snowplow_signals import Signals

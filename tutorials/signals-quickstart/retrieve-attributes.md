@@ -24,20 +24,20 @@ df=response.to_dataframe()
 df
 ```
 
-## Using an Attribute Group
+## Using an attribute group
 
 You can also retrieve calculated attributes for individual attribute groups. This isn't recommended for production use, where services are a better idea, but it can be useful for testing.
 
-There are two methods to do this, depending if you have the Attribute Group instance available or not:
+There are two methods to do this, depending if you have the attribute group instance available or not:
 
 ```python
-# Option 1 (if you have the Attribute Group instance)
+# Option 1 (if you have the attribute group instance)
 response = my_attribute_group.get_attributes(
     signals=sp_signals,
     identifier="d99f6db1-7b28-46ca-a3ef-f0aace99ed86",
 )
 
-# Option 2 (if you don't have the Attribute Group instance)
+# Option 2 (if you don't have the attribute group instance)
 response = sp_signals.get_attributes(
     name="my_quickstart_attribute_group",
     version=1,

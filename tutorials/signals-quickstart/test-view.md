@@ -3,7 +3,7 @@ position: 4
 title: Test the definitions
 ---
 
-Signals will start processing events and computing attributes as soon as you apply the Attribute Group configuration.
+Signals will start processing events and computing attributes as soon as you apply the attribute group configuration.
 
 It's a good idea to test the definitions before deployment.
 
@@ -34,7 +34,7 @@ You should see something like this:
 
 The test method returns results from a random 10 attribute key values. The first column shows the attribute key values, in this case for the session attribute key `domain_sessionid`.
 
-The attributes look as expected, so the Attribute Group is ready to deploy.
+The attributes look as expected, so the attribute group is ready to deploy.
 
 ## Testing for individual entities
 

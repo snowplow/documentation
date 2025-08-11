@@ -205,7 +205,7 @@ After creating your key, collect the following information:
 - **Key ID**: The unique identifier for your key
 - **Region**: The AWS region where the key was created
 
-## Provide to Snowplow
+### Provide to Snowplow
 
 Share this information with your Snowplow Customer Success Manager or through a
 support ticket:

@@ -107,7 +107,7 @@ export default function SchemaProperties(props) {
 
           {(props.overview && props.overview.event) && (
             <details>
-              <summary className="cursor-pointer text-base font-semibold"><b>Warehouse query</b></summary>
+              <summary className="cursor-pointer text-base font-semibold">Warehouse query</summary>
               <div className="mt-2 text-base not-prose">
                 <EventQuery
                   vendor={props.schema.self.vendor}

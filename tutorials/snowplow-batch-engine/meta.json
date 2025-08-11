@@ -1,5 +1,0 @@
-{
-  "title": "Snowplow Signals Batch Engine Tutorial",
-  "description": "Learn how to use the Snowplow Signals SDK CLI tool to manage dbt projects and generate data models",
-  "label": "Solution accelerator"
-}

@@ -65,7 +65,7 @@ snowplow-batch-autogen init --verbose
 
 ## Creating and registering tables
 
-Check out the [batch engine tutorial](/tutorials/snowplow-batch-engine/start/) for a walkthrough of the required steps.
+Check out the [batch engine tutorial](/tutorials/signals-batch-engine/start/) for a walkthrough of the required steps.
 
 ### Incremental data models
 

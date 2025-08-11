@@ -1,33 +1,24 @@
 ---
-title: "Customer Managed Keys"
+title: "Customer managed keys"
 sidebar_position: 1
-sidebar_label: Customer Managed Keys
 ---
 
-## Overview
-
-This guide provides step-by-step instructions for setting up AWS
-KMS (Key Management Service) custom keys for your Snowplow pipeline.
-Custom KMS keys provide enhanced security by allowing you to maintain
-full control over encryption keys used by your data infrastructure.
+This guide provides step-by-step instructions for setting up AWS KMS (Key Management Service) custom keys for your Snowplow pipeline. Custom KMS keys provide enhanced security by allowing you to maintain full control over encryption keys used by your data infrastructure.
 
 :::note
 
-This is a bolt-on security feature available for enterprise
-customers using BDP PMC (Private Managed Cloud) or BDP Cloud deployments.
+This is a bolt-on security feature available for enterprise customers using BDP PMC (Private Managed Cloud) or BDP Cloud deployments.
 
 :::
 
-## What This Feature Provides
+## What this feature provides
 
-AWS Custom KMS Keys ensure that all data stored at-rest in AWS services
-(Kinesis, SQS, and S3) are encrypted with a key that you own and control.
-This provides:
+AWS Custom KMS Keys ensure that all data stored at-rest in AWS services (Kinesis, SQS, and S3) are encrypted with a key that you own and control. This provides:
 
-- **Enhanced Security**: Full control over encryption keys
-- **Compliance**: Meet regulatory requirements for data encryption
-- **Audit Control**: Ability to revoke access to encrypted data
-- **Key Management**: Centralized control over data encryption
+- Enhanced security: full control over encryption keys
+- Compliance: meet regulatory requirements for data encryption
+- Audit control: ability to revoke access to encrypted data
+- Key management: centralized control over data encryption
 
 ## Prerequisites
 
@@ -36,41 +27,38 @@ This provides:
 - Snowplow pipeline account ID (provided by your Customer Success Manager)
 - Security team approval for cross-account key sharing
 
-## Step 1: Create Your Custom KMS Key
+## Create your custom KMS key
 
 ### Navigate to KMS Console
 
 - Go to the AWS Console in the same region as your Snowplow pipeline
-- Navigate to: KMS → Customer managed keys
+- Navigate to: **KMS** → **Customer managed keys**
 - Example URL: `https://us-east-1.console.aws.amazon.com/kms/home?region=us-east-1#/kms/keys`
 
-### Configure Key Settings
+### Configure key settings
 
 Click **Create key** and configure with the following settings:
 
-| Setting | Value |
-|:---:|:---:|
-| **Key type** | Symmetric |
-| **Key usage** | Encrypt and decrypt |
-| **Key material origin** | KMS |
-| **Regionality** | Single region |
-| **Alias** | `snowplow-pipeline-key` (or your preferred name) |
+|       Setting       |                      Value                       |
+| :-----------------: | :----------------------------------------------: |
+|      Key type       |                    Symmetric                     |
+|      Key usage      |               Encrypt and decrypt                |
+| Key material origin |                       KMS                        |
+|     Regionality     |                  Single region                   |
+|        Alias        | `snowplow-pipeline-key` (or your preferred name) |
 
-### Set Key Administrators
+### Set key administrators
 
-- **Key Administrators**: Select the roles/users from your security team that
-  need administrative access to the key
-- **Other AWS Accounts**: **CRITICAL** - Add your Snowplow pipeline account ID here
+- Key administrators: select the roles/users from your security team that need administrative access to the key
+- Other AWS Accounts: add your Snowplow pipeline account ID here
 
-*⚠️ Important: The "Other AWS Accounts" step is essential. Without adding the
-Snowplow pipeline account ID, the encryption will not work.*
+The "Other AWS Accounts" step is essential. Without adding the Snowplow pipeline account ID, the encryption will not work.
 
-## Step 2: Key Policy Configuration
+## Key policy configuration
 
-### Recommended Key Policy (Root Access)
+### Recommended key policy (root access)
 
-The key creation process will generate a policy similar to this. We strongly
-recommend allowing root access for the Snowplow pipeline account as shown below:
+The key creation process will generate a policy similar to this. We strongly recommend allowing root access for the Snowplow pipeline account as shown below:
 
 ```json
 {
@@ -151,19 +139,18 @@ recommend allowing root access for the Snowplow pipeline account as shown below:
 }
 ```
 
-### Replace Placeholder Values
+### Replace placeholder values
 
-| Placeholder | Replace With | Example |
-|:---:|:---:|:---:|
-| `YOUR_ACCOUNT_ID` | Your AWS account ID | `123456789012` |
-| `YourSecurityRole` | Your security team's role name | `SecurityTeamRole` |
-| `YourAdminRole` | Your administrative role name | `AdminRole` |
-| `SNOWPLOW_PIPELINE_ACCOUNT_ID` | Snowplow pipeline account ID | Provided by Snowplow |
+|          Placeholder           |          Replace With          |       Example        |
+| :----------------------------: | :----------------------------: | :------------------: |
+|       `YOUR_ACCOUNT_ID`        |      Your AWS account ID       |    `123456789012`    |
+|       `YourSecurityRole`       | Your security team's role name |  `SecurityTeamRole`  |
+|        `YourAdminRole`         | Your administrative role name  |     `AdminRole`      |
+| `SNOWPLOW_PIPELINE_ACCOUNT_ID` |  Snowplow pipeline account ID  | Provided by Snowplow |
 
-## Step 3: Alternative - Non-Root Key Policy
+## Alternative - non-root key policy
 
-If your security policies don't allow root access (`arn:aws:iam::<account_id>:root`),
-you can use these specific role patterns instead:
+If your security policies don't allow root access (`arn:aws:iam::<account_id>:root`), you can use these specific role patterns instead:
 
 ```json
 {
@@ -190,36 +177,32 @@ you can use these specific role patterns instead:
 }
 ```
 
-*⚠️ Important: Using non-root policies requires coordination with Snowplow
-support to ensure all necessary roles are included. We strongly recommend the
-root access approach for simplicity.*
+Using non-root policies requires coordination with Snowplow support to ensure all necessary roles are included. We strongly recommend the root access approach for simplicity.
 
-## Step 4: Share Key Information with Snowplow
+## Share key information with Snowplow
 
-### Gather Key Details
+### Gather key details
 
 After creating your key, collect the following information:
 
-- **Key ARN**: Found in the key details page
+- Key ARN: found in the key details page
   - Format: `arn:aws:kms:REGION:YOUR_ACCOUNT_ID:key/KEY_ID`
-- **Key ID**: The unique identifier for your key
-- **Region**: The AWS region where the key was created
+- Key ID: the unique identifier for your key
+- Region: the AWS region where the key was created
 
 ### Provide to Snowplow
 
-Share this information with your Snowplow Customer Success Manager or through a
-support ticket:
+Share this information with your Snowplow Customer Success Manager or through a support ticket:
 
 - Key ARN
 - Confirmation that cross-account access is configured
 - Any specific requirements or restrictions
 
-## Step 5: Snowplow Configuration
+## Snowplow configuration
 
-Once you've shared the key information, Snowplow will configure the following
-pipeline components to use your custom KMS key:
+Once you've shared the key information, Snowplow will configure the following pipeline components to use your custom KMS key:
 
-### S3 Bucket Encryption
+### S3 bucket encryption
 
 All pipeline S3 buckets will be configured with your custom KMS key:
 
@@ -230,7 +213,7 @@ All pipeline S3 buckets will be configured with your custom KMS key:
 - Kinesis S3 enriched events bucket
 - Kinesis S3 raw events bucket
 
-### Kinesis Stream Encryption
+### Kinesis stream encryption
 
 Pipeline Kinesis streams will be encrypted with your key:
 
@@ -240,45 +223,36 @@ Pipeline Kinesis streams will be encrypted with your key:
 - PII events stream
 - Incomplete events stream
 
-### SQS Queue Encryption
+### SQS queue encryption
 
 If surge protection is enabled, SQS queues will use your custom key:
 
 - Good events queue
 - Bad events queue
 
-### EKS Cluster secrets Encryption
+### EKS cluster secrets encryption
 
-The EKS cluster will use your custom KMS key for encryption of Secrets. However
-please keep in mind the following:
+The EKS cluster will use your custom KMS key for encryption of Secrets. However please keep in mind the following:
 
-- The process of switching to a customer-managed KMS key is irreversible. An EKS
-  cluster cannot return back to use an AWS-managed key. In order to do that we
-  need to destroy and recreate the cluster which will result in downtime.
-- A customer-managed KMS key that is being used for secrets encryption will be
-  bound to the cluster, it is not possible to change the key and accidentally
-  deleting it will result in a degraded EKS cluster which will require
-  redeployment (which will result in downtime).
-- Updating an existing cluster from AWS-managed key to customer-managed one is
-  possible but there are the following issues:
-  - Only new secrets will be encrypted with the customer-managed key.
+- The process of switching to a customer-managed KMS key is irreversible. An EKS cluster cannot return back to use an AWS-managed key. In order to do that we need to destroy and recreate the cluster which will result in downtime.
+- A customer-managed KMS key that is being used for secrets encryption will be bound to the cluster, it is not possible to change the key and accidentally deleting it will result in a degraded EKS cluster which will require redeployment (which will result in downtime).
+- Updating an existing cluster from AWS-managed key to customer-managed one is possible but there are the following issues:
+  - Only new secrets will be encrypted with the customer-managed key
   - Existing secrets remain encrypted with AWS-owned keys until rotated
 
-### Additional Services
+### Additional services
 
-Other pipeline components like Snowbridge will be granted access to
-decrypt/encrypt data using your key.
+Other pipeline components like Snowbridge will be granted access to decrypt/encrypt data using your key.
 
-## Step 6: Post-Configuration
+## Post-configuration
 
-### What to Expect
+### What to expect
 
 After Snowplow applies your custom KMS key:
 
-- **Immediate Effect**: Encryption settings change immediately on resources
-- **Temporary Disruption**: Services may briefly fail until proper access is configured
-- **Drift Application**: Snowplow will apply necessary IAM policy updates to
-  resolve access issues
+- Immediate effect: encryption settings change immediately on resources
+- Temporary disruption: services may briefly fail until proper access is configured
+- Drift application: Snowplow will apply necessary IAM policy updates to resolve access issues
 
 ### Validation
 
@@ -291,20 +265,20 @@ You can verify the configuration by:
 
 ## Troubleshooting
 
-### Common Issues
+### Common issues
 
-#### Access Denied Errors
+#### Access denied errors
 
 - Verify the key policy includes the correct Snowplow pipeline account ID
 - Ensure the key is in the same region as your pipeline
-- Check that "Other AWS Accounts" was properly configured during key creation
+- Check that **Other AWS Accounts** was properly configured during key creation
 
-#### Pipeline Failures After KMS Implementation
+#### Pipeline failures after KMS implementation
 
 - This is expected temporarily while Snowplow applies the necessary IAM policy updates
 - Contact support if issues persist beyond the expected configuration window
 
-#### Key Policy Validation
+#### Key policy validation
 
 ```bash
 # Check current key policy
@@ -313,50 +287,25 @@ aws kms get-key-policy \
   --policy-name default
 ```
 
-## Security Best Practices
+## Security best practices
 
-### Recommended Settings
+### Recommended settings
 
-- **Enable Key Rotation**: Turn on automatic key rotation for enhanced security
-- **Monitor Usage**: Use AWS CloudTrail to track key usage
-- **Regular Audits**: Periodically review key policies and access patterns
-- **Documentation**: Maintain internal documentation of key management procedures
+- Enable key rotation: turn on automatic key rotation for enhanced security
+- Monitor usage: use AWS CloudTrail to track key usage
+- Regular audits: periodically review key policies and access patterns
+- Documentation: maintain internal documentation of key management procedures
 
-### Key Management
+### Key management
 
-- **Backup Procedures**: Ensure key policies are backed up and version controlled
-- **Access Reviews**: Regular review of who has administrative access to keys
-- **Incident Response**: Plan for key compromise or rotation scenarios
+- Backup procedures: ensure key policies are backed up and version controlled
+- Access reviews: regular review of who has administrative access to keys
+- Incident response: plan for key compromise or rotation scenarios
 
 ## Limitations
 
-### Known Constraints
+### Known constraints
 
-- **EMR Shredder**: The legacy EMR shredder process may not fully respect
-  custom KMS keys for all output. This system is being deprecated.
-- **Single Key Recommendation**: While technically possible to use different
-  keys for different services, we recommend using a single key for all pipeline
-  resources for simplicity.
-- **Regional Restrictions**: Keys must be created in the same region as your
-  pipeline infrastructure.
-
-## Support and Next Steps
-
-### After Setup
-
-- **Test Configuration**: Verify data is flowing correctly through your pipeline
-- **Monitor Performance**: Check for any performance impacts from encryption
-- **Document Procedures**: Update your internal security documentation
-- **Schedule Reviews**: Plan regular key policy and access reviews
-
-### Getting Help
-
-For assistance with KMS key setup or pipeline integration:
-
-- **Primary Contact**: Your Snowplow Customer Success Manager
-- **Support Portal**: Submit tickets through the Snowplow support portal
-- **Documentation**: Reference this guide and include your key ARN in support requests
-
-## Related Resources
-
-- [AWS KMS Developer Guide](https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html)
+- EMR Shredder: the legacy EMR shredder process may not fully respect custom KMS keys for all output. This system is being deprecated.
+- Single key recommendation: while technically possible to use different keys for different services, we recommend using a single key for all pipeline resources for simplicity.
+- Regional restrictions: keys must be created in the same region as your pipeline infrastructure.

@@ -411,6 +411,7 @@ aside.theme-doc-sidebar-container {
         background-color: hsla(261.56, 53.33%, 47.06%, 0.12);
         border-radius: 0px var(--radius) var(--radius)  0px;
         border-left: 1px solid hsl(var(--primary));
+        margin-left: -1px;
 }
 
 
@@ -433,7 +434,8 @@ aside.theme-doc-sidebar-container {
 .menu__link:hover, .menu__caret:hover {
     background: var(--ifm-menu-color-background-hover);
     border-radius: 0px var(--radius) var(--radius)  0px;
-     border-left: 1px solid hsl(var(--foreground));
+    border-left: 1px solid hsl(var(--foreground));
+    margin-left: -1px;
   }
 
 .menu__link {
@@ -472,17 +474,20 @@ aside.theme-doc-sidebar-container {
         color: var(--ifm-menu-color-active);
         border-radius: 0px var(--radius) var(--radius)  0px;
         border-left: 1px solid hsl(var(--primary));
+        margin-left: -1px;
 }
 .menu__list-item-collapsible .menu__link:hover, .menu__list-item-collapsible .menu__link--active{
   color: var(--ifm-menu-color-active);
         border-radius: 0px var(--radius) var(--radius)  0px;
         border-left: 1px solid hsl(var(--primary));
+        margin-left: -1px;
 }
 
 .menu__link--active:not(.menu__link--sublist) {
         background-color: hsla(261.56, 53.33%, 47.06%, 0.12);
         border-radius: 0px var(--radius) var(--radius)  0px;
         border-left: 1px solid hsl(var(--primary));
+        margin-left: -1px;
       }
 
 .menu__caret {

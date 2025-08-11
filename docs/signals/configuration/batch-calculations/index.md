@@ -15,9 +15,9 @@ Only Snowflake is supported currently.
 
 Signals is configured slightly differently depending if you're using existing tables or creating new ones.
 
-| Signals component              | Required for existing attributes | Required for creating new attributes |
-| ------------------------------ | -------------------------------- | ------------------------------------ |
-| `BatchSource`                  | ✅                                | ❌                                   |
+| Signals component             | Required for existing attributes | Required for creating new attributes |
+| ----------------------------- | -------------------------------- | ------------------------------------ |
+| `BatchSource`                 | ✅                                | ❌                                    |
 | `BatchAttributeGroup`         | ❌                                | ✅ using `attributes`                 |
 | `ExternalBatchAttributeGroup` | ✅ using `fields`                 | ❌                                    |
 
@@ -153,7 +153,7 @@ attribute_group = BatchAttributeGroup(
 
 ### Creating and registering tables
 
-Signals uses dbt to create attribute group specific attribute tables. The Signals Python SDK includes an optional CLI tool called the batch engine for configuring this.
+Signals uses dbt to create attribute group-specific attribute tables. The Signals Python SDK includes an optional CLI tool called the batch engine for configuring this.
 
 It will help you create the required dbt models and tables in your warehouse, and register them with Signals.
 

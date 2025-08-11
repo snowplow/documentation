@@ -58,16 +58,16 @@ Authenticated users can request interventions in bulk for many attribute key IDs
 
 Once delivered, interventions contain the following information:
 
-| Argument | Description | Type | Required? |
-| --- | --- | --- | --- |
-| `intervention_id` | A unique identifier for this triggered instance | `string` | ✅ |
-| `name` | The unique name/identifier of the intervention | `string` | ✅ |
-| `version` | A numeric version for this intervention's definition (if applicable) | `integer` | ✅ |
-| `method` | The type of action the intervention triggers | One of:  `clear_attribute`, `set_attribute`, `script`, `computer_use_agent`, `remote_agent` | ✅ |
-| `target_agents` | List of agents intended to handle the action of this intervention | `string[]` | ❌ |
-| `script_uri` | URI of the resource to execute to perform the intended action of this intervention | `string` | ❌ |
-| `context` | Custom data to provide as context to the agent that will perform the action of this intervention | `object` | ✅ |
-| `context.$attributes` | An object containing the target attribute key's attributes when the intervention was triggered | `object` | ❌ |
+| Argument              | Description                                                                                      | Type                                                                                        | Required? |
+| --------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------- | --------- |
+| `intervention_id`     | A unique identifier for this triggered instance                                                  | `string`                                                                                    | ✅         |
+| `name`                | The unique name/identifier of the intervention                                                   | `string`                                                                                    | ✅         |
+| `version`             | A numeric version for this intervention's definition (if applicable)                             | `integer`                                                                                   | ✅         |
+| `method`              | The type of action the intervention triggers                                                     | One of:  `clear_attribute`, `set_attribute`, `script`, `computer_use_agent`, `remote_agent` | ✅         |
+| `target_agents`       | List of agents intended to handle the action of this intervention                                | `string[]`                                                                                  | ❌         |
+| `script_uri`          | URI of the resource to execute to perform the intended action of this intervention               | `string`                                                                                    | ❌         |
+| `context`             | Custom data to provide as context to the agent that will perform the action of this intervention | `object`                                                                                    | ✅         |
+| `context.$attributes` | An object containing the target attribute key's attributes when the intervention was triggered   | `object`                                                                                    | ❌         |
 
 :::warning
 
@@ -138,12 +138,12 @@ attribute keys will be requested for the following:
 ```typescript
 subscribeToInterventions({
   endpoint: "00000000-0000-0000-0000-000000000000.svc.snplow.net", // Signals API endpoint
-  AttributeKeyTargets: {
+  attributeKeyTargets: {
     pageview_id: "context/com.snowplowanalytics.snowplow/web_page/id",
     app: "app_id",
     mistake: "not_a_real_field",
   },
-  AttributeKeyIds: {
+  attributeKeyIds: {
     myCustomAttributeKey: "unique value",
   },
 });

@@ -113,20 +113,20 @@ The table below lists all available arguments for all types of `attribute groups
 
 Below is a summary of all options available for configuring attribute groups in Signals. The "Applies to" column shows which attribute group types each option is relevant for.
 
-| Argument       | Description                                            | Type                | Default | Required? | Applies to                                           |
-| -------------- | ------------------------------------------------------ | ------------------- | ------- | --------- | -----------------------------------------------------|
-| `name`         | The name of the attribute group                        | `string`            |         | ✅         | All                                                 |
-| `version`      | The version of the attribute group                     | `int`               | 1       | ❌         | All                                                 |
-| `attribute_key`| The attribute key associated with the attribute group  | `AttributeKey`      |         | ✅         | All                                                 |
-| `owner`        | The owner of the attribute group                       | `Email`             |         | ✅         | All                                                 |
-| `description`  | A description of the attribute group                   | `string`            |         | ❌         | All                                                 |
-| `ttl`          | Time-to-live for attributes in the Profile Store       | `timedelta`         |         | ❌         | All                                                 |
-| `tags`         | Metadata key-value pairs                               | `dict`              |         | ❌         | All                                                 |
-| `attributes`   | List of attributes to calculate                        | list of `Attribute` |         | ✅         | `StreamAttributeGroup`, `BatchAttributeGroup`       |
-| `batch_source` | The batch data source for the attribute group          | `BatchSource`       |         | ✅/❌      | `BatchAttributeGroup`/`ExternalBatchAttributeGroup` |
-| `fields`       | Table columns for materialization                      | `Field`             |         | ✅         | `ExternalBatchAttributeGroup`                       |
-| `offline`      | Calculate in warehouse (`True`) or real-time (`False`) | `bool`              | varies  | ❌         | All                                                 |
-| `online`       | Enable online retrieval (`True`) or not (`False`)      | `bool`              | `True`  | ❌         | All                                                 |
+| Argument        | Description                                            | Type                | Default | Required? | Applies to                                          |
+| --------------- | ------------------------------------------------------ | ------------------- | ------- | --------- | --------------------------------------------------- |
+| `name`          | The name of the attribute group                        | `string`            |         | ✅         | All                                                 |
+| `version`       | The version of the attribute group                     | `int`               | 1       | ❌         | All                                                 |
+| `attribute_key` | The attribute key associated with the attribute group  | `AttributeKey`      |         | ✅         | All                                                 |
+| `owner`         | The owner of the attribute group                       | `Email`             |         | ✅         | All                                                 |
+| `description`   | A description of the attribute group                   | `string`            |         | ❌         | All                                                 |
+| `ttl`           | Time-to-live for attributes in the Profile Store       | `timedelta`         |         | ❌         | All                                                 |
+| `tags`          | Metadata key-value pairs                               | `dict`              |         | ❌         | All                                                 |
+| `attributes`    | List of attributes to calculate                        | list of `Attribute` |         | ✅         | `StreamAttributeGroup`, `BatchAttributeGroup`       |
+| `batch_source`  | The batch data source for the attribute group          | `BatchSource`       |         | ✅/❌       | `BatchAttributeGroup`/`ExternalBatchAttributeGroup` |
+| `fields`        | Table columns for materialization                      | `Field`             |         | ✅         | `ExternalBatchAttributeGroup`                       |
+| `offline`       | Calculate in warehouse (`True`) or real-time (`False`) | `bool`              | varies  | ❌         | All                                                 |
+| `online`        | Enable online retrieval (`True`) or not (`False`)      | `bool`              | `True`  | ❌         | All                                                 |
 
 
 If no `ttl` is set, the attribute key's `ttl` will be used. If the attribute key also has no `ttl`, there will be no time limit for attributes.
@@ -200,14 +200,14 @@ print(attribute_definitions)
 
 The table below lists all available arguments for `get_attribute_group()`
 
-| Argument  | Description                          | Type     | Required? |
-| --------- | ------------------------------------ | -------- | --------- |
-| `name`    | The name of the attribute group      | `string` | ✅        |
-| `version` | The attribute group version          | `int`    | ❌        |
+| Argument  | Description                     | Type     | Required? |
+| --------- | ------------------------------- | -------- | --------- |
+| `name`    | The name of the attribute group | `string` | ✅         |
+| `version` | The attribute group version     | `int`    | ❌         |
 
 If you don't specify a version, Signals will retrieve the latest version.
 
-## attribute groups can be set to expire
+## Attribute groups can be set to expire
 
 Some attributes will only be relevant for a certain amount of time, and eventually stop being updated.
 

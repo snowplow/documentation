@@ -51,7 +51,7 @@ The table below lists all available arguments for an `Attribute`:
 | `aggregation`   | The calculation to be performed                                                                                                              | One of:  `counter`, `sum`, `min`, `max`, `mean`, `first`, `last`, `unique_list`                                                                                                                                     | ✅         |
 | `type`          | The type of the aggregation result                                                                                                           | One of: `bytes`, `string`, `int32`, `int64`, `double`, `float`, `bool`, `unix_timestamp`, `bytes_list`, `string_list`, `int32_list`, `int64_list`, `double_list`, `float_list`, `bool_list`, `unix_timestamp_list`, | ✅         |
 | `criteria`      | List of `Criteria` to filter the events                                                                                                      | List of `Criteria` type                                                                                                                                                                                             | ❌         |
-| `property`      | The property of the event or attribute key you wish to use in the aggregation                                                                | `string`                                                                                                                                                                                                            | ❌         |
+| `property`      | The property of the event or entity you wish to use in the aggregation                                                                       | `string`                                                                                                                                                                                                            | ❌         |
 | `period`        | The time period window over which the aggregation should be calculated                                                                       | Python `timedelta`                                                                                                                                                                                                  | ❌         |
 | `default_value` | The default value to use if the aggregation returns no results. If not set, the default value is automatically assigned based on the `type`. |                                                                                                                                                                                                                     | ❌         |
 | `tags`          | Metadata for the attribute, as a dictionary                                                                                                  |                                                                                                                                                                                                                     | ❌         |
@@ -137,11 +137,11 @@ The `criteria` list takes a `Criteria` type, with possible arguments:
 
 A `Criterion` specifies the individual filter conditions for an attribute, using the following properties:
 
-| Argument   | Description                                                                | Type                                                                                    |
-| ---------- | -------------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `property` | The path to the property on the event or attribute key you wish to filter. | `string`                                                                                |
-| `operator` | The operator used to compare the property to the value.                    | One of: `=`, `!=`, `<`, `>`, `<=`, `>=`, `like`, `in`                                   |
-| `value`    | The value to compare the property to.                                      | `str`, `int`, `float`, `bool`, `List[str]`, `List[int]`, `List[float]`, or `List[bool]` |
+| Argument   | Description                                                         | Type                                                                                    |
+| ---------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
+| `property` | The path to the property on the event or entity you wish to filter. | `string`                                                                                |
+| `operator` | The operator used to compare the property to the value.             | One of: `=`, `!=`, `<`, `>`, `<=`, `>=`, `like`, `in`                                   |
+| `value`    | The value to compare the property to.                               | `str`, `int`, `float`, `bool`, `List[str]`, `List[int]`, `List[float]`, or `List[bool]` |
 
 For example, if you want to calculate an attribute for page views of either the FAQs or "contact us" page, the `Criteria` could be:
 
@@ -250,7 +250,7 @@ This attribute will be updated to the most recent referrer URL every time a page
 
 This example shows how to use the `property` option to access values in any part of a tracked event.
 
-Tthe attribute is based on product prices, tracked within the product attribute key in an ecommerce transaction event:
+Tthe attribute is based on product prices, tracked within the product entity in an ecommerce transaction event:
 
 ```python
 from snowplow_signals import Attribute, Event, Criteria, Criterion
@@ -283,4 +283,4 @@ my_new_attribute = Attribute(
 )
 ```
 
-This attribute will be calculated for Snowplow ecommerce events with schema [`iglu:com.snowplowanalytics.snowplow.ecommerce/snowplow_ecommerce_action/jsonschema/1-0-2`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.ecommerce/snowplow_ecommerce_action/jsonschema/1-0-2) and the `type` property `transaction`. The products in a transaction are stored as [product attribute keys](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.ecommerce/product/jsonschema/1-0-0) in the `contexts_com_snowplowanalytics_snowplow_ecommerce_product_1` array. The `price` property of the first product is used to calculate the attribute.
+This attribute will be calculated for Snowplow ecommerce events with schema [`iglu:com.snowplowanalytics.snowplow.ecommerce/snowplow_ecommerce_action/jsonschema/1-0-2`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.ecommerce/snowplow_ecommerce_action/jsonschema/1-0-2) and the `type` property `transaction`. The products in a transaction are stored as [product entities](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.ecommerce/product/jsonschema/1-0-0) in the `contexts_com_snowplowanalytics_snowplow_ecommerce_product_1` array. The `price` property of the first product is used to calculate the attribute.

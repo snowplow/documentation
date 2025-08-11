@@ -150,11 +150,11 @@ This table lists the built-in attribute keys, and suggests others that could be 
 | Session           | `domain_sessionid` from [atomic fields](/docs/fundamentals/canonical-event/index.md#user-related-fields)                   | ✅        |
 | App               | `app_id` from [atomic fields](/docs/fundamentals/canonical-event/index.md#application-fields)                              |          |
 | Page              | `page_urlpath` from [atomic fields](/docs/fundamentals/canonical-event/index.md#platform-specific-fields)                  |          |
-| Product           | `id` from [ecommerce product](/docs/events/ootb-data/ecommerce-events/index.md#product) or custom attribute key            |          |
-| Screen view       | `id` in `screen_view` attribute key                                                                                        |          |
+| Product           | `id` from [ecommerce product](/docs/events/ootb-data/ecommerce-events/index.md#product) or custom entity                   |          |
+| Screen view       | `id` in `screen_view` entity                                                                                               |          |
 | Geographic region | `geo_country` from [IP Enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md)         |          |
-| Content category  | from custom attribute key                                                                                                  |          |
-| Video game level  | from custom attribute key                                                                                                  |          |
+| Content category  | from custom entity                                                                                                         |          |
+| Video game level  | from custom entity                                                                                                         |          |
 
 ## Attribute groups
 

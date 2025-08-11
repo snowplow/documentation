@@ -62,13 +62,13 @@ sp_signals = Signals(
 
 The created `Signals` object has the following methods:
 
-| Method                   | Description                                                                    |
-| ------------------------ | ------------------------------------------------------------------------------ |
-| `apply`                  | Registers the provided objects with Signals                                    |
-| `test`                   | Tests an attribute group against the atomic events table                       |
-| `get_attribute_group`    | Retrieves an attribute group from the Profiles Store                           |
-| `get_service_attributes` | Retrieves attributes for a specific service from the Profiles Store            |
-| `get_attributes`         | Retrieves attributes for a specific attribute group from the Profiles Store    |
+| Method                   | Description                                                                 |
+| ------------------------ | --------------------------------------------------------------------------- |
+| `apply`                  | Registers the provided objects with Signals                                 |
+| `test`                   | Tests an attribute group against the atomic events table                    |
+| `get_attribute_group`    | Retrieves an attribute group from the Profiles Store                        |
+| `get_service_attributes` | Retrieves attributes for a specific service from the Profiles Store         |
+| `get_attributes`         | Retrieves attributes for a specific attribute group from the Profiles Store |
 
 Read more about retrieving calculated attributes in [Retrieving values](/docs/signals/retrieval/index.md)
 
@@ -94,10 +94,10 @@ TODO
 
 The created `Signals` object has the following methods:
 
-| Method                 | Description                                                                    |
-| ---------------------- | ------------------------------------------------------------------------------ |
-| `getServiceAttributes` | Retrieves attributes for a specific service from the Profiles Store            |
-| `get_attributes`       | Retrieves attributes for a specific attribute group from the Profiles Store    |
+| Method                 | Description                                                                 |
+| ---------------------- | --------------------------------------------------------------------------- |
+| `getServiceAttributes` | Retrieves attributes for a specific service from the Profiles Store         |
+| `getAttributes`        | Retrieves attributes for a specific attribute group from the Profiles Store |
 
 ## Signals API
 

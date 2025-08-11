@@ -4,15 +4,15 @@ sidebar_position: 15
 sidebar_label: "Attribute keys"
 ---
 
-An `attribute key` is the identifier that attributes are calculated against.
+An attribute key is the identifier that attributes are calculated against.
 
 Signals includes a number of out-of-the-box attribute keys based on commonly used identifiers from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) in all Snowplow events.
 
-| attribute key  | Out-of-the-box identifier           | Type     |
-| -------------- | ----------------------------------- | -------- |
-| User           | `user_id`                           | `string` |
-| Device         | `domain_userid` and`network_userid` | `uuid`   |
-| Session        | `domain_sessionid`                  | `uuid`   |
+| Attribute key | Out-of-the-box identifier           | Type     |
+| ------------- | ----------------------------------- | -------- |
+| User          | `user_id`                           | `string` |
+| Device        | `domain_userid` and`network_userid` | `uuid`   |
+| Session       | `domain_sessionid`                  | `uuid`   |
 
 Import them into your notebook like this:
 
@@ -29,13 +29,13 @@ All the attributes within a specific attribute group are calculated based on the
 
 ## Custom attribute keys
 
-You can also define custom attribute keys, which allows you to calculate attributes on any other Snowplow atomic property you want. Atomic properties are those that are defined in the [atomic fields](/docs/fundamentals/canonical-event/index.md#atomic-fields) of the core Snowplow event, not properties tracked as part of an attribute key.
+You can also define custom attribute keys, which allows you to calculate attributes on any other Snowplow atomic property you want. Atomic properties are those that are defined in the [atomic fields](/docs/fundamentals/canonical-event/index.md#atomic-fields) of the core Snowplow event, not properties tracked as part of an entity.
 
 For example, an attribute key that groups by `app_id` can be defined as:
 
 ```python
 app_id_attribute_key = AttributeKey(
-    name="app_id_attribute_keys",
+    name="app_id_attribute_key",
     description="The id for the app"
     key="app_id",
 )
@@ -43,7 +43,7 @@ app_id_attribute_key = AttributeKey(
 
 ## Options
 
-The table below lists all available arguments for a custom `attribute key`:
+The table below lists all available arguments for a custom attribute key:
 
 | Argument      | Description                                                                              | Type        | Required? |
 | ------------- | ---------------------------------------------------------------------------------------- | ----------- | --------- |
@@ -63,7 +63,7 @@ from datetime import timedelta
 
 platform_attribute_key = AttributeKey(
     name="platform_tracking_attribute_key",
-    description="attribute key for analyzing user behavior patterns across different platforms (web, mobile, server-side) to understand cross-platform engagement and optimize user experience",
+    description="Attribute key for analyzing user behavior patterns across different platforms (web, mobile, server-side) to understand cross-platform engagement and optimize user experience",
     key="platform",
     owner="analytics-team@snowplow.com",
     ttl=timedelta(days=365),

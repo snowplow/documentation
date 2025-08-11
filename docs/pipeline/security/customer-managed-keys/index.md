@@ -38,25 +38,25 @@ This provides:
 
 ## Step 1: Create Your Custom KMS Key
 
-### 1.1 Navigate to KMS Console
+### Navigate to KMS Console
 
 - Go to the AWS Console in the same region as your Snowplow pipeline
 - Navigate to: KMS → Customer managed keys
 - Example URL: `https://us-east-1.console.aws.amazon.com/kms/home?region=us-east-1#/kms/keys`
 
-### 1.2 Configure Key Settings
+### Configure Key Settings
 
 Click **Create key** and configure with the following settings:
 
 | Setting | Value |
 |:---:|:---:|
 | **Key type** | Symmetric |
-| **Key usage** | Encrypt + Decrypt |
+| **Key usage** | Encrypt and decrypt |
 | **Key material origin** | KMS |
-| **Regionality** | Single Region |
+| **Regionality** | Single region |
 | **Alias** | `snowplow-pipeline-key` (or your preferred name) |
 
-### 1.3 Set Key Administrators
+### Set Key Administrators
 
 - **Key Administrators**: Select the roles/users from your security team that
   need administrative access to the key
@@ -67,7 +67,7 @@ Snowplow pipeline account ID, the encryption will not work.*
 
 ## Step 2: Key Policy Configuration
 
-### 2.1 Recommended Key Policy (Root Access)
+### Recommended Key Policy (Root Access)
 
 The key creation process will generate a policy similar to this. We strongly
 recommend allowing root access for the Snowplow pipeline account as shown below:
@@ -151,7 +151,7 @@ recommend allowing root access for the Snowplow pipeline account as shown below:
 }
 ```
 
-### 2.2 Replace Placeholder Values
+### Replace Placeholder Values
 
 | Placeholder | Replace With | Example |
 |:---:|:---:|:---:|
@@ -196,7 +196,7 @@ root access approach for simplicity.*
 
 ## Step 4: Share Key Information with Snowplow
 
-### 4.1 Gather Key Details
+### Gather Key Details
 
 After creating your key, collect the following information:
 
@@ -205,7 +205,7 @@ After creating your key, collect the following information:
 - **Key ID**: The unique identifier for your key
 - **Region**: The AWS region where the key was created
 
-## 4.2 Provide to Snowplow
+## Provide to Snowplow
 
 Share this information with your Snowplow Customer Success Manager or through a
 support ticket:
@@ -219,7 +219,7 @@ support ticket:
 Once you've shared the key information, Snowplow will configure the following
 pipeline components to use your custom KMS key:
 
-### 5.1 S3 Bucket Encryption
+### S3 Bucket Encryption
 
 All pipeline S3 buckets will be configured with your custom KMS key:
 
@@ -230,7 +230,7 @@ All pipeline S3 buckets will be configured with your custom KMS key:
 - Kinesis S3 enriched events bucket
 - Kinesis S3 raw events bucket
 
-### 5.2 Kinesis Stream Encryption
+### Kinesis Stream Encryption
 
 Pipeline Kinesis streams will be encrypted with your key:
 
@@ -240,14 +240,14 @@ Pipeline Kinesis streams will be encrypted with your key:
 - PII events stream
 - Incomplete events stream
 
-### 5.3 SQS Queue Encryption
+### SQS Queue Encryption
 
 If surge protection is enabled, SQS queues will use your custom key:
 
 - Good events queue
 - Bad events queue
 
-### 5.4 EKS Cluster secrets Encryption
+### EKS Cluster secrets Encryption
 
 The EKS cluster will use your custom KMS key for encryption of Secrets. However
 please keep in mind the following:
@@ -264,14 +264,14 @@ please keep in mind the following:
   - Only new secrets will be encrypted with the customer-managed key.
   - Existing secrets remain encrypted with AWS-owned keys until rotated
 
-### 5.5 Additional Services
+### Additional Services
 
 Other pipeline components like Snowbridge will be granted access to
 decrypt/encrypt data using your key.
 
 ## Step 6: Post-Configuration
 
-### 6.1 What to Expect
+### What to Expect
 
 After Snowplow applies your custom KMS key:
 
@@ -280,7 +280,7 @@ After Snowplow applies your custom KMS key:
 - **Drift Application**: Snowplow will apply necessary IAM policy updates to
   resolve access issues
 
-### 6.2 Validation
+### Validation
 
 You can verify the configuration by:
 

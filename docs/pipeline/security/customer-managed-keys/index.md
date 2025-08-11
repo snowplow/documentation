@@ -13,7 +13,7 @@ full control over encryption keys used by your data infrastructure.
 
 :::note
 
-**Important**: This is a bolt-on security feature available for enterprise
+This is a bolt-on security feature available for enterprise
 customers using BDP PMC (Private Managed Cloud) or BDP Cloud deployments.
 
 :::

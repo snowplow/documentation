@@ -32,7 +32,7 @@ You should see something like this:
 | 7   | `4da52032-f6d1-41b4-9cf2-b40e164cbe6e` | 1                 | "Chrome"              | None             |
 | 8   | `2ee80a4a-86dd-4a24-b697-0709b29ed079` | 0                 | "Safari"              | None             |
 
-The test method returns the most recent 10 rows. The first column shows the entity values, in this case for the session entity `domain_sessionid`.
+The test method returns results from a random 10 entities. The first column shows the entity values, in this case for the session entity `domain_sessionid`.
 
 The attributes look as expected, so the view is ready to deploy.
 

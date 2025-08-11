@@ -9,9 +9,9 @@ You can use the Python SDK and Node.js SDKs to retrieve attributes from the Prof
 
 For this tutorial, you'll retrieve attributes into your notebook. Add a new cell for getting values.
 
-## Using a service
+## Using a service (recommended)
 
-When retrieving calculated attributes, you have to specify an instance of the relevant entity, in this case a `domain_sessionid`. This will return all the attributes defined in `my_quickstart_service` for this session.
+When retrieving calculated attributes, specify an instance of the relevant entity, in this case a `domain_sessionid`. This will return all the attributes defined in `my_quickstart_service` for this session.
 
 ```python
 response = sp_signals.get_service_attributes(
@@ -26,7 +26,9 @@ df
 
 ## Using a view
 
-You can also retrieve calculated attributes for individual views. There are two methods to do this, depending if you have the view instance available or not:
+You can also retrieve calculated attributes for individual views. This isn't recommended for production use, where services are a better idea, but it can be useful for testing.
+
+There are two methods to do this, depending if you have the view instance available or not:
 
 ```python
 # Option 1 (if you have the View instance)
@@ -48,7 +50,7 @@ df=response.to_dataframe()
 df
 ```
 
-## Finding your current session ID
+## Retrieving attributes for your current session
 
 In your real application code, you can access the current session ID and use it to retrieve the relevant attribute values. The attributes are being calculated in near real time, in session. Read about how to access IDs such as `domain_sessionid` in your web application in [Getting cookie information](/docs/sources/trackers/web-trackers/cookies-and-local-storage/getting-cookie-values/#getdomainuserid).
 

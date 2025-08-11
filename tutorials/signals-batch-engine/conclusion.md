@@ -15,4 +15,6 @@ This is the process workflow:
 
 ## Next steps
 
-Learn more about the Signals possibilities in our other Signals tutorials.
+Learn more about the Signals possibilities in our other Signals tutorials:
+* [Signals Quick Start](/tutorials/signals-quickstart/)
+* [Score prospects in real time using Signals and ML](/tutorials/signals-ml-prospect-scoring/)

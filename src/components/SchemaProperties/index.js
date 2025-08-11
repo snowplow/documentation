@@ -58,7 +58,7 @@ export default function SchemaProperties(props) {
           )}
 
           <details>
-            <summary className="cursor-pointer text-base font-semibold"><b>Schema</b></summary>
+            <summary className="cursor-pointer text-base font-semibold">Schema</summary>
             <div className="mt-2">
               <Tabs className="text-base not-prose" groupId="schema-view" queryString>
                 <TabItem value="table" label="Table">

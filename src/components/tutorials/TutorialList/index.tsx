@@ -63,7 +63,12 @@ const TutorialCard: FC<{ tutorial: Tutorial }> = ({ tutorial }) => {
             )}
           </Grid>
           <Grid item>
-            <Topic label={tutorial.meta.label} sx={{ mb: 2 }}></Topic>
+            <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
+              {tutorial.meta.useCases.length > 0 && (
+                <Topic label={tutorial.meta.useCases[0]}></Topic>
+              )}
+              <Topic label={tutorial.meta.label}></Topic>
+            </Box>
           </Grid>
           <Grid item>
             <Description>{tutorial.meta.description}</Description>
@@ -758,6 +763,15 @@ const TopicFilter: FC<{
     }
   }
 
+  // Put "Solution accelerator" first, then the rest in their original order
+  const orderedTopics = useMemo(() => {
+    const solutionAccelerator = 'Solution accelerator'
+    const otherTopics = TopicValues.filter(topic => topic !== solutionAccelerator)
+    return TopicValues.includes(solutionAccelerator) 
+      ? [solutionAccelerator, ...otherTopics]
+      : TopicValues
+  }, [])
+
   return (
     <Box sx={{ mt: 2 }}>
       <Typography
@@ -766,7 +780,7 @@ const TopicFilter: FC<{
       >
         Filter by topic
       </Typography>
-      {TopicValues.map((topic) => {
+      {orderedTopics.map((topic) => {
         const isAvailable =
           availableTopics.includes(topic) || selectedTopics.includes(topic)
         return (

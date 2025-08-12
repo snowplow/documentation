@@ -1,5 +1,13 @@
 # Documentation guidelines for Claude
 
+## Quick reference (30 seconds)
+* US spelling, active voice, technical tone (no marketing language)
+* File names: kebab-case, always create `index.md` in new directories
+* Internal links end with `/index.md`, use absolute paths from docs root
+* Headings: sentence case, H2/H3 only, 3-5 H2 sections max per page
+* Snowplow terminology: "entity" not "context"
+* Every section starts with prose before lists or technical details
+
 ## ALWAYS FOLLOW THESE RULES
 
 ### Writing style
@@ -19,10 +27,11 @@
 * Prefer "*" for unordered lists
 * For list items, treat the punctuation like a sentence, not like a heading (`Like: this` not `Like: This`)
 
-### File structure
+### File structure ⚠️ CRITICAL
 * File names: kebab-case (`google-tag-manager-server-side.md`)
-* Main topics: always `index.md` - if creating a new directory for a topic, the main file MUST be named `index.md`
-* ALL internal links end with `/index.md` for validation
+* **Main topics: always `index.md`** - when creating a new page, ALWAYS create a new directory with the page name and put `index.md` inside it
+* Example: create `/segment-audience-hub/index.md`, NOT `segment-audience-hub.md`
+* **ALL internal links end with `/index.md`** for validation
 * Absolute paths from docs root: `/docs/sources/trackers/.../index.md`
 * Split long pages into multiple files
 
@@ -30,7 +39,11 @@
 * Sentence case: "Configuring how events are sent"
 * Only H2 (##), H3 (###), rarely H4 (####)
 * Paragraph after frontmatter, not heading
-* Not too many headings per page
+* Not too many headings per page - aim for 3-5 H2 sections maximum
+* Each heading should have substantial content (multiple paragraphs) underneath it where possible
+* Avoid fragmenting information across many small sections - consolidate related concepts
+* Every section should start with explanatory prose before lists or technical details
+* Mix prose and lists appropriately: use prose to explain concepts, lists for configuration options or step-by-step items
 
 ### Snowplow terminology
 * **Capitalized**: Data Product Studio, Snowtype, Snowplow BDP, Signals
@@ -56,7 +69,8 @@ description: "Brief description"  # For SEO purposes
 ### Quick patterns
 * Information architecture: conceptual docs in `/docs/fundamentals/`, implementation in feature directories
 * Feature structure: description → when/why → basic example → configuration → advanced
-* Lists: introduce with colon, capitalize first word, no ending punctuation unless multiple sentences
+* Lists: introduce with colon, lowercase first word after colon (treat like continuation of sentence), no ending punctuation unless multiple sentences
+* Example: `* **API Key**: your authentication key` NOT `* **API Key**: Your authentication key`
 * Tables: capital letters, consistent punctuation, `code` stays as code
 
 ### Key concept links (always use these)
@@ -85,17 +99,22 @@ import TabItem from '@theme/TabItem';
 ### Admonitions
 ```mdx
 :::note
-General information
+General information, context, or clarifications
 :::
 
 :::tip
-Encourage specific actions
+Best practices, recommendations, or encouraging specific actions
 :::
 
 :::warning
-Important cautions about data loss or security
+Important cautions about data loss, security, or breaking changes
 :::
 ```
+
+**When to use each type:**
+* **Note**: Background info, alternative approaches, version differences
+* **Tip**: Performance improvements, recommended workflows, pro tips
+* **Warning**: Data loss risks, deprecated features, security considerations
 
 ### BDP vs self-hosted
 * Mark BDP-only features in frontmatter: `sidebar_custom_props: offerings: - bdp`
@@ -108,14 +127,23 @@ Important cautions about data loss or security
 * Place in `images/` subdirectory
 
 ### Quality checklist
+**Content:**
 - [ ] US spelling throughout
-- [ ] Links end with `/index.md`
-- [ ] Concepts linked, not explained
-- [ ] No marketing language
-- [ ] Terminology consistent (entity not context)
-- [ ] Sentence case headings
+- [ ] No marketing language, technical tone maintained
+- [ ] Concepts linked to fundamentals, not re-explained
+- [ ] Every section starts with prose explanation before lists
+- [ ] Information consolidated, not fragmented across small sections
+
+**Structure:**
+- [ ] Proper frontmatter with title, sidebar_position, description
+- [ ] 3-5 H2 sections maximum, each with substantial content
+- [ ] Sentence case headings, H2/H3 only
 - [ ] Platform tabs where needed
-- [ ] Proper frontmatter
+
+**Technical:**
+- [ ] Links end with `/index.md`, absolute paths used
+- [ ] Terminology consistent (entity not context, JavaScript tracker)
+- [ ] Code/UI formatting correct (`backticks`, **bold UI**)
 
 ### Common pitfalls to avoid
 * Don't explain fundamental concepts (link to Fundamentals instead)

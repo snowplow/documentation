@@ -26,6 +26,7 @@
 * Use "and" not "&"
 * Prefer "*" for unordered lists
 * For list items, treat the punctuation like a sentence, not like a heading (`Like: this` not `Like: This`)
+* **CRITICAL**: Bold labels followed by colons should have lowercase first word after colon: `**Schema validation**: test your schemas` NOT `**Schema validation**: Test your schemas`
 
 ### File structure ⚠️ CRITICAL
 * File names: kebab-case (`google-tag-manager-server-side.md`)
@@ -34,6 +35,7 @@
 * **ALL internal links end with `/index.md`** for validation
 * Absolute paths from docs root: `/docs/sources/trackers/.../index.md`
 * Split long pages into multiple files
+* **VERIFY LINKS EXIST**: always check that internal links point to actual files before publishing. Search the docs directory to confirm paths are correct.
 
 ### Headings and organization
 * Sentence case: "Configuring how events are sent"
@@ -112,13 +114,14 @@ Important cautions about data loss, security, or breaking changes
 ```
 
 **When to use each type:**
-* **Note**: Background info, alternative approaches, version differences
-* **Tip**: Performance improvements, recommended workflows, pro tips
-* **Warning**: Data loss risks, deprecated features, security considerations
+* **Note**: background info, alternative approaches, version differences
+* **Tip**: performance improvements, recommended workflows, pro tips
+* **Warning**: data loss risks, security considerations
 
 ### BDP vs self-hosted
 * Mark BDP-only features in frontmatter: `sidebar_custom_props: offerings: - bdp`
 * Note when BDP provides built-in functionality, mention self-hosted alternatives
+* **Do not mention "Community Edition"** - use "self-hosted" instead but otherwise prefer not to mention
 
 ### Images
 * Formats: `.webp` (preferred), `.png`, `.jpg`

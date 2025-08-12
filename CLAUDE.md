@@ -24,6 +24,7 @@
 * Main topics: always `index.md`
 * ALL internal links end with `/index.md` for validation
 * Absolute paths from docs root: `/docs/sources/trackers/.../index.md`
+* Split long pages into multiple files
 
 ### Headings and organization
 * Sentence case: "Configuring how events are sent"

@@ -182,15 +182,15 @@ There are several key concepts in Snowplow: events (self-describing, structured)
 * If you are writing about schemas, pick “schema” or “data structure” and stick with it
 
 **Please, do not over-explain these in any of your writing.** Instead, just link to one of the existing concept pages:
-* Events in general: `/docs/understanding-your-pipeline/events/index.md`
-* Custom events: `/docs/understanding-your-pipeline/events/index.md#self-describing-events`
-* Self-describing events: `/docs/understanding-your-pipeline/events/index.md#self-describing-events`
-* Structured events: `/docs/understanding-your-pipeline/events/index.md#structured-events`
-* Entities in general: `/docs/understanding-your-pipeline/entities/index.md`
-* Custom entities: `/docs/understanding-your-pipeline/events/index.md#custom-entities`
-* Schemas: `/docs/understanding-your-pipeline/schemas/index.md`
-* Iglu resolvers/registries: `/docs/understanding-your-pipeline/schemas/index.md#iglu`
-* Failed events: `/docs/understanding-your-pipeline/failed-events/index.md`
+* Events in general: `/docs/fundamentals/events/index.md`
+* Custom events: `/docs/fundamentals/events/index.md#self-describing-events`
+* Self-describing events: `/docs/fundamentals/events/index.md#self-describing-events`
+* Structured events: `/docs/fundamentals/events/index.md#structured-events`
+* Entities in general: `/docs/fundamentals/entities/index.md`
+* Custom entities: `/docs/fundamentals/entities/index.md#custom-entities`
+* Schemas: `/docs/fundamentals/schemas/index.md`
+* Iglu resolvers/registries: `/docs/fundamentals/schemas/index.md#iglu`
+* Failed events: `/docs/fundamentals/failed-events/index.md`
 
 ### Reusable fragments
 

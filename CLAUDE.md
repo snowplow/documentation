@@ -26,7 +26,7 @@
 * Use "and" not "&"
 * Prefer "*" for unordered lists
 * For list items, treat the punctuation like a sentence, not like a heading (`Like: this` not `Like: This`)
-* **CRITICAL**: Bold labels followed by colons should have lowercase first word after colon: `**Schema validation**: test your schemas` NOT `**Schema validation**: Test your schemas`
+* **CRITICAL**: bold labels followed by colons should have lowercase first word after colon: `**Schema validation**: test your schemas` NOT `**Schema validation**: Test your schemas`
 
 ### File structure ⚠️ CRITICAL
 * File names: kebab-case (`google-tag-manager-server-side.md`)

@@ -21,7 +21,7 @@
 
 ### File structure
 * File names: kebab-case (`google-tag-manager-server-side.md`)
-* Main topics: always `index.md`
+* Main topics: always `index.md` - if creating a new directory for a topic, the main file MUST be named `index.md`
 * ALL internal links end with `/index.md` for validation
 * Absolute paths from docs root: `/docs/sources/trackers/.../index.md`
 * Split long pages into multiple files

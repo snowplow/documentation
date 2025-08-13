@@ -488,37 +488,37 @@ aside.theme-doc-sidebar-container {
 }
 
 /* button to collapse */
-.collapseSidebarButton_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-CollapseButton-styles-module {
-  display: none;
+aside.theme-doc-sidebar-container .button.button--secondary.button--outline {
   margin: 4px!important;
 }
 @media (min-width: 997px) {
-  .sidebar_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-styles-module { 
-    padding-top: 72px !important;
-    width: 272px !important;
+  aside.theme-doc-sidebar-container nav.menu {
+      padding: 1rem 0 0.5rem 0.5rem;
   }
-  .collapseSidebarButton_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-CollapseButton-styles-module {
-      display: inline-flex !important
-;
-      background-color: hsl(var(--accent))!important;
-      border-radius: var(--radius)!important;
-      border: 1px solid hsl(var(--border))!important;
-      align-items: center;
-      justify-content: center;
+  aside.theme-doc-sidebar-container .button.button--secondary.button--outline {
+        display: inline-flex !important;
+        background-color: hsl(var(--accent))!important;
+        border-radius: var(--radius)!important;
+        border: 1px solid hsl(var(--border))!important;
+        align-items: center;
+        justify-content: center;
   }
-  .collapseSidebarButtonIcon_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-CollapseButton-styles-module {
-    transform: rotate(180deg) scale(.5) !important;
+  aside.theme-doc-sidebar-container button svg{
+      transform: rotate(180deg) scale(.5) !important;
   }
-  .expandButton_node_modules-\@docusaurus-theme-classic-lib-theme-DocPage-Layout-Sidebar-ExpandButton-styles-module {
+  .expandButton_m80_ {
     border-right: 1px solid hsl(var(--border));
     background-color: hsl(var(--background))!important;
   }
-  .expandButtonIcon_node_modules-\@docusaurus-theme-classic-lib-theme-DocPage-Layout-Sidebar-ExpandButton-styles-module {
+  .expandButtonIcon_BlDH {
     transform: rotate(0) scale(.5)!important;
   }
 }
 /* Left side bar CSS END */
 
+.theme-doc-toc-desktop{
+  position: static!important;
+}
 
 li.hidden,
 article.hidden {

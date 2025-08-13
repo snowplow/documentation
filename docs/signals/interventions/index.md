@@ -116,7 +116,7 @@ addInterventionHandlers({
 });
 
 subscribeToInterventions({
-  endpoint: "00000000-0000-0000-0000-000000000000.svc.snplow.net", // subscribe to interventions
+  endpoint: "000000000000.signals.snowplowanalytics.com", // subscribe to interventions
 });
 ```
 
@@ -137,7 +137,7 @@ Entities will be requested for the following entities:
 
 ```typescript
 subscribeToInterventions({
-  endpoint: "00000000-0000-0000-0000-000000000000.svc.snplow.net", // Signals API endpoint
+  endpoint: "000000000000.signals.snowplowanalytics.com", // Signals API endpoint
   entityTargets: {
     pageview_id: "context/com.snowplowanalytics.snowplow/web_page/id",
     app: "app_id",

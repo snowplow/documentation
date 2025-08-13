@@ -54,7 +54,7 @@ export const Description = styled(Box)(({ theme }) => ({
   fontSize: theme.typography.body2.fontSize,
   marginBottom: theme.spacing(2),
   display: ['block', '-webkit-box'], // First fallback to "block" if "-webkit-box" is not supported
-  WebkitLineClamp: '2',
+  WebkitLineClamp: '3',
   WebkitBoxOrient: 'vertical',
   overflow: 'hidden',
   textOverflow: 'ellipsis',

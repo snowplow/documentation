@@ -37,6 +37,16 @@ async function fetchApiKey() {
     }
 
     const apiKey = await response.text()
+
+    // The Product Fruits API key is 16 characters
+    if (typeof apiKey !== 'string' || apiKey.length !== 16) {
+      throw new Error(
+        `Invalid API key format: expected 16 character string, got ${typeof apiKey} with length ${
+          apiKey.length
+        }`
+      )
+    }
+
     return apiKey
   } catch (error) {
     console.error('Error fetching API key:', error)

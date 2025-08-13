@@ -36,7 +36,28 @@ Verify the installation with
 
 ## Configure
 
-You will need three values.
+### Automated Setup
+
+The easiest way to configure Snowplow CLI is using the built-in `setup` command:
+
+```bash
+snowplow-cli setup
+```
+
+This command will:
+- Guide you through device authentication with Snowplow Console
+- Automatically create and configure your API credentials
+- Set up your organization ID
+
+**Prerequisites:** Your Snowplow Console account must have sufficient permissions to create API keys.
+
+You can also use optional flags:
+- `--read-only`: Create a read-only API key
+- `--dotenv`: Store configuration as .env file in current working directory
+
+### Manual Configuration
+
+If you prefer manual configuration, you will need three values:
 
 An API Key Id and the corresponding API Key (secret), which are generated from the [credentials section](https://console.snowplowanalytics.com/credentials) in BDP Console.
 
@@ -47,7 +68,7 @@ The organization ID, which can be retrieved from the URL immediately following t
 Snowplow CLI can take its configuration from a variety of sources. More details are available from `./snowplow-cli data-structures --help`. Variations on these three examples should serve most cases.
 
 <Tabs groupId="config">
-  <TabItem value="env" label="env variables" default>
+  <TabItem value="env" label="env variables or .dotenv file" default>
 
   ```bash
   SNOWPLOW_CONSOLE_API_KEY_ID=********-****-****-****-************
@@ -76,6 +97,22 @@ Snowplow CLI can take its configuration from a variety of sources. More details 
 </Tabs>
 
 Snowplow CLI defaults to yaml format. It can be changed to json by either providing a `--output-format json` flag or setting the `output-format: json` config value. It will work for all commands where it matters, not only for `generate`.
+
+### Verify Configuration
+
+After configuration, you can verify that everything is working correctly using the `status` command:
+
+```bash
+snowplow-cli status
+```
+
+This command will:
+- Check that your API credentials are properly configured
+- Verify connectivity to Snowplow Console
+- Confirm your organization access
+- Provide helpful troubleshooting information if issues are found
+
+If the status check fails, the command will suggest the next steps such as running `snowplow-cli setup` to reconfigure your credentials.
 
 ### Configure YAML language server (optional)
 

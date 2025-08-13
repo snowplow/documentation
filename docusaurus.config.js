@@ -184,7 +184,6 @@ module.exports = {
           'bash',
           'diff',
           'json',
-          'hcl',
         ],
       },
       algolia: {

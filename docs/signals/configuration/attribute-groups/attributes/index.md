@@ -124,39 +124,76 @@ event=Event(
 
 ### Filtering events by specific values
 
-The `criteria` list filters the events used to calculate an attribute.
+The `criteria` list contains the filters used to calculate an attribute from the specified event.
 
-It allows you to be specific about which subsets of events should trigger attribute updates. For example, instead of counting all page views in a user's session, you may wish to calculate only views for an FAQs page, or a "contact us" page.
+It allows you to be specific about which subsets of events should trigger attribute updates. For example, instead of counting all page views in a user's session, you may want to calculate only views for an FAQs page, or a "contact us" page.
 
 The `criteria` list takes a `Criteria` type, with possible arguments:
 
 | Argument | Description                                                                            | Type                |
 | -------- | -------------------------------------------------------------------------------------- | ------------------- |
-| `all`    | Conditions used to filter the events, where all conditions must be met                 | list of `Criterion` |
-| `any`    | Conditions used to filter the events, where at least one of the conditions must be met | list of `Criterion` |
+| `all`    | All conditions, `Criterion` definitions must be true on the processed event                | list of `Criterion` |
+| `any`    | At least one of the conditions, `Criterion` definitions, must be true | list of `Criterion` |
 
-A `Criterion` specifies the individual filter conditions for an attribute, using the following properties:
+A `Criterion` specifies a filtering rule on the specified event.
+
+When creating a `Criterion`, you can use its operator-like methods to define the filtering for a property of the event payload. Available methods are:
+- `.eq` Checks equality similar to using the `=` operator.
+- `.neq` Checks non-equality similar to using the `!=` operator.
+- `.gt` Checks if a property is greater than a value.
+- `.gte` Checks if a property is greater than or equal to a value.
+- `.lt` Checks if a property is less than a value.
+- `.lte` Checks if a property is less than or equal to a value.
+- `.like` Checks if a property matches a value using a `LIKE` operator.
+- `.in_list` Checks if a property is in the list of values using an `IN` operator.
+
+These methods accept the property as a first argument and then the value to filter against.
 
 | Argument   | Description                                                         | Type                                                                                    |
 | ---------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `property` | The path to the property on the event or entity you wish to filter. | `string`                                                                                |
-| `operator` | The operator used to compare the property to the value.             | One of: `=`, `!=`, `<`, `>`, `<=`, `>=`, `like`, `in`                                   |
-| `value`    | The value to compare the property to.                               | `str`, `int`, `float`, `bool`, `List[str]`, `List[int]`, `List[float]`, or `List[bool]` |
+| `property` | The property of the event payload you want the criterion to run against. |  `AtomicProperty` or `EventProperty` or `EntityProperty`  |
+| `value`    | The value to compare the property to.                               | Type-checked based on the operator. |
 
-For example, if you want to calculate an attribute for page views of either the FAQs or "contact us" page, the `Criteria` could be:
+The `AtomicProperty`, `EventProperty` and `EntityProperty` are classes to help you target a property of an event to be filtered.
+- `AtomicProperty` is used to target atomic properties in the event payload.
+- `EventProperty` is used to target properties in the event data structure in the event payload.
+- `EntityProperty` is used to target properties in the context data structures in the event payload.
+
+Some examples:
+
+```py
+# Targets the app_id atomic property in the event payload.
+AtomicProperty(name="app_id")
+
+# Targets the `action` property of the com.example/test_event/jsonschema/1-*-*.
+EventProperty(
+    vendor="com.example",
+    name="test_event",
+    major_version=1,
+    path="action"
+)
+
+# Targets the `age` property of the first com.example/user_context/jsonschema/1-*-* context.
+EntityProperty(
+    vendor="com.example",
+    name="user_context",
+    major_version=1,
+    path="age"
+)
+```
+
+A more complete example, say you want to calculate an attribute for page views of either the FAQs or "contact us" page, the `Criteria` could be:
 
 ```python
 criteria=Criteria(
     any=[
-        Criterion(
-            property="page_url",
-            operator="like",
-            value="%/faq%"
+        Criterion.like(
+            AtomicProperty(name="page_url"),
+            "%/faq%"
         ),
-        Criterion(
-            property="page_url",
-            operator="like",
-            value="%/contact-us%"
+        Criterion.like(
+            AtomicProperty(name="page_url"),
+            "%/contact-us%"
         )
     ]
 )
@@ -173,10 +210,10 @@ These examples use all the available configuration options.
 This example extends the previous minimal example. Now the attribute is only calculated for `button_click` events where the `id` property is equal to `generate_emoji_btn`.
 
 ```python
-from snowplow_signals import Attribute, Event, Criteria, Criterion
+from snowplow_signals import Attribute, Event, Criteria, Criterion, EventProperty
 from datetime import timedelta
 
-my_attribute = Attribute(
+button_click_counter_attribute = Attribute(
     name="emoji_button_click_counter",
     description="The number of clicks for the 'generate emoji' button",
     type="int32",
@@ -190,10 +227,14 @@ my_attribute = Attribute(
     aggregation="counter"
     criteria=Criteria(
         all=[
-            Criterion(
-                property="id",
-                operator="=",
-                value="generate_emoji_btn"
+            Criterion.eq(
+                EventProperty(
+                    vendor="com.snowplowanalytics.snowplow",
+                    name="button_click",
+                    major_version=1,
+                    path="id"
+                ),
+                "generate_emoji_btn"
             )
         ]
     ),
@@ -219,7 +260,7 @@ In this example the attribute is calculated from either a page view or a custom 
 ```python
 from snowplow_signals import Attribute, Event
 
-my_new_attribute = Attribute(
+referrer_source_attribute = Attribute(
     name="referrer_source",
     description="Referrer",
     type="string",
@@ -253,7 +294,7 @@ This example shows how to use the `property` option to access values in any part
 Tthe attribute is based on product prices, tracked within the product entity in an ecommerce transaction event:
 
 ```python
-from snowplow_signals import Attribute, Event, Criteria, Criterion
+from snowplow_signals import Attribute, Event, Criteria, Criterion, EventProperty
 
 my_new_attribute = Attribute(
     name="products_total_purchase_value",
@@ -269,10 +310,14 @@ my_new_attribute = Attribute(
     aggregation="sum"
     criteria=Criteria(
         all=[
-            Criterion(
-                property="unstruct_event_com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1:type",
-                operator="=",
-                value="transaction"
+            Criterion.eq(
+                EventProperty(
+                    vendor="com.snowplowanalytics.snowplow.ecommerce",
+                    name="snowplow_ecommerce_action",
+                    major_version=1,
+                    path="type"
+                ),
+                "transaction"
             )
         ]
     ),

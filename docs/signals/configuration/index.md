@@ -51,10 +51,10 @@ Create a `Signals` object by passing in the required values. This example shows 
 from snowplow_signals import Signals
 
 sp_signals = Signals(
-    api_url=userdata.get('SP_API_URL'),
-    api_key=userdata.get('SP_API_KEY'),
-    api_key_id=userdata.get('SP_API_KEY_ID'),
-    org_id=userdata.get('SP_ORG_ID'),
+    api_url=SIGNALS_DEPLOYED_URL,
+    api_key=CONSOLE_API_KEY,
+    api_key_id=CONSOLE_API_KEY_ID,
+    org_id=ORG_ID,
 )
 ```
 
@@ -67,27 +67,36 @@ The created `Signals` object has the following methods:
 | `apply`                  | Registers the provided objects with Signals                         |
 | `test`                   | Tests a view against the atomic events table                        |
 | `get_view`               | Retrieves a view from the Profiles Store                            |
-| `get_service_attributes` | Retrieves attributes for a specific service from the Profiles Store |
-| `get_view_attributes`    | Retrieves attributes for a specific view from the Profiles Store    |
+| `get_service_attributes` | Retrieves attributes for a service from the Profiles Store |
+| `get_view_attributes`    | Retrieves attributes for a view from the Profiles Store    |
 
 Read more about retrieving calculated attributes in [Retrieving values](/docs/signals/retrieval/index.md)
 
 ## Setting up the Node.js SDK
 
-The [Signals Node.js SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk) only retrieves attributes, and can't be used to apply configuration.
+The [Signals Node.js SDK](https://www.npmjs.com/package/@snowplow/signals-node) allows only for fetching attributes from views and services.
 
 Install the SDK into your project:
 
 ```bash
-npm install snowplow-signals-typescript-sdk
+npm i @snowplow/signals-node
+# or
+yarn add @snowplow/signals-node
+# or
+pnpm i @snowplow/signals-node
 ```
 
-To connect to Signals using this SDK, you will need the same values as for the Python SDK. Create a Signals object like this:
+To connect to Signals using this SDK create a Signals object like this:
 
 ```typescript
-import { Signals } from 'snowplow-signals-typescript-sdk';
+import { Signals } from '@snowplow/signals-node';
 
-TODO
+const signals = new Signals({
+  baseUrl: SIGNALS_DEPLOYED_URL,
+  apiKey: CONSOLE_API_KEY,
+  apiKeyId: CONSOLE_API_KEY_ID,
+  organizationId: ORG_ID,
+});
 ```
 
 ### Available TypeScript methods
@@ -96,8 +105,8 @@ The created `Signals` object has the following methods:
 
 | Method                 | Description                                                         |
 | ---------------------- | ------------------------------------------------------------------- |
-| `getServiceAttributes` | Retrieves attributes for a specific service from the Profiles Store |
-| `getViewAttributes`    | Retrieves attributes for a specific view from the Profiles Store    |
+| `getServiceAttributes` | Retrieves attributes for a service from the Profiles Store |
+| `getViewAttributes`    | Retrieves attributes for a view from the Profiles Store    |
 
 ## Signals API
 

@@ -58,7 +58,7 @@ export default function SchemaProperties(props) {
           )}
 
           <details>
-            <summary className="cursor-pointer text-base font-semibold"><b>Schema</b></summary>
+            <summary className="cursor-pointer text-base font-semibold">Schema</summary>
             <div className="mt-2">
               <Tabs className="text-base not-prose" groupId="schema-view" queryString>
                 <TabItem value="table" label="Table">
@@ -107,7 +107,7 @@ export default function SchemaProperties(props) {
 
           {(props.overview && props.overview.event) && (
             <details>
-              <summary className="cursor-pointer text-base font-semibold"><b>Warehouse query</b></summary>
+              <summary className="cursor-pointer text-base font-semibold">Warehouse query</summary>
               <div className="mt-2 text-base not-prose">
                 <EventQuery
                   vendor={props.schema.self.vendor}

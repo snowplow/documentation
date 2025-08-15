@@ -1,7 +1,7 @@
 import React from 'react';
 import { useColorMode } from '@docusaurus/theme-common';
 import { Sun, Moon } from 'lucide-react';
-import { Button } from './button.jsx';
+import { Button } from './button';
 
 const ThemeSwitcher = () => {
   const { colorMode, setColorMode } = useColorMode();

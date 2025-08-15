@@ -123,20 +123,21 @@ module.exports = {
             label: 'Community',
             position: 'right',
           },
-          {
-            href: 'https://github.com/snowplow/',
-            label: 'GitHub',
-            position: 'right',
-          },
-          {
-            to: 'https://snowplow.io/get-started/book-a-demo-of-snowplow-bdp/',
-            label: 'Book a demo',
-            className: 'snowplow-button',
-            position: 'right',
-          },
+
+          // {
+          //   href: 'https://github.com/snowplow/',
+          // label: 'GitHub',
+          // position: 'right',
+          // },
+          // {
+          //   to: 'https://snowplow.io/get-started/book-a-demo-of-snowplow-bdp/',
+          //   label: 'Book a demo',
+          //   className: 'snowplow-button',
+          //   position: 'right',
+          // },
           {
             type: 'custom-docsTrackerNavbarButton',
-            position: 'right',
+            position: 'left',
           },
         ],
       },

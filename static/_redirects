@@ -387,3 +387,6 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/sources/trackers/javascript-trackers/ /docs/sources/trackers/web-trackers 301
 
 /docs/resources/recipes-tutorials/* /tutorials 301
+
+# Event Forwarding restructure
+/docs/destinations/forwarding-events/native-integrations /docs/destinations/forwarding-events/event-forwarding/destinations 301

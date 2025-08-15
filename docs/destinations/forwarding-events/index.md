@@ -3,9 +3,23 @@ title: "Event forwarding"
 sidebar_position: 2
 ---
 
-Snowplow supports many ways to forward events to a variety of platforms. Snowplow has native integrations as well as supporting Snowplow, vendor and community authored destinations via Google Tag Manager Server Side.
+Snowplow supports multiple approaches to forward events to third-party platforms in real-time. Choose the approach that best fits your use case and technical requirements.
 
-- [Native Integrations](/docs/destinations/forwarding-events/native-integrations/index.md) (Kafka, Azure Event Hubs)
-- [Google Tag Manager Server Side Snowplow Tags](/docs/destinations/forwarding-events/google-tag-manager-server-side/index.md) (Amplitude, Braze, Iterable, etc)
-- Google Tag Manager Server Side Vendor and Community Tags (Facebook Conversions, Google Ads, etc)
-- [Custom Integrations](/docs/destinations/forwarding-events/custom-integrations/index.md) (AWS Lambdas, GCP Cloud Functions, Kinesis and PubSub Applications)
+## Event Forwarding (Recommended)
+
+[Event Forwarding](event-forwarding/index.md) provides a simple, managed solution for sending events to popular SaaS platforms directly from the Snowplow Console.
+
+- **Pre-built integrations**: Braze, Amplitude, and more coming soon
+- **Easy configuration**: Set up through Console with filtering and field mapping
+- **Reliable delivery**: Built-in retries and error handling
+- **Low latency**: Near real-time event delivery
+
+Event Forwarding is best for most real-time forwarding use cases, especially when sending to supported destinations.
+
+## Advanced options
+
+For more complex requirements or unsupported destinations, choose from these advanced options:
+
+- **[Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md)**: Flexible event forwarding with custom transformations and destinations (Kafka, Kinesis, HTTP APIs)
+- **[Google Tag Manager Server Side](/docs/destinations/forwarding-events/google-tag-manager-server-side/index.md)**: Tag-based event forwarding for GTM workflows (Amplitude, Braze, Iterable)
+- **[Custom Integrations](/docs/destinations/forwarding-events/custom-integrations/index.md)**: Build your own solutions using AWS Lambda, GCP Cloud Functions, or stream processing

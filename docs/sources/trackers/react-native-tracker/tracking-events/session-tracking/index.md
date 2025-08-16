@@ -116,3 +116,11 @@ This method returns a promise to resolve to the number of foreground transitions
 ```javascript
 const fgIndex = await tracker.getForegroundIndex();
 ```
+
+### getSessionState
+
+This method returns a promise to resolve to the object containing the full state used to build the `client_session` entity in a single call, rather than the individual fields returned by the other methods.
+
+```javascript
+const sessionState = await tracker.getSessionState();
+```

@@ -1,6 +1,6 @@
 ---
 title: "Braze"
-sidebar_position: 10
+sidebar_position: 1
 ---
 
 ```mdx-code-block

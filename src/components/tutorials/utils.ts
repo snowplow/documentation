@@ -31,7 +31,7 @@ export function getSteps(id: string): Step[] {
   // Filter to ones that are in the `tutorialname` dir
   const steps = context
     .keys()
-    .filter((key) => key.includes(id) && key.endsWith('md'))
+    .filter((key) => key.split('/')[1] === id && key.endsWith('md'))
     .map((key) => [key, context(key)])
     .map(([path, mdFile]) =>
       Step.parse({ ...mdFile.frontMatter, path: pathToHistory(path) })

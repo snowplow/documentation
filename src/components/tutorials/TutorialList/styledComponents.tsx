@@ -34,6 +34,11 @@ export const Grid = styled(Box)(({ theme }) => ({
 export const Card = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(3),
   flexDirection: 'column',
+  transition: 'all 0.15s ease-in-out',
+  cursor: 'pointer',
+  '&:hover': {
+    boxShadow: '0px 4px 12px 0px rgba(16, 24, 40, 0.15), 0px 0px 0px 1px rgba(102, 56, 184, 0.12)',
+  },
 }))
 
 export const Title = styled(Box)(({ theme }) => ({

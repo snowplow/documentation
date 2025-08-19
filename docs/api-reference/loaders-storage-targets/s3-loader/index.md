@@ -1,6 +1,6 @@
 ---
 title: "S3 Loader"
-sidebar_position: 4
+sidebar_position: 5
 ---
 
 ```mdx-code-block

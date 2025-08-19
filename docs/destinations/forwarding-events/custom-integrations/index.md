@@ -1,6 +1,6 @@
 ---
 title: "Custom integrations"
-date: "2021-11-24"
+description: "Build custom consumers for Snowplow event streams using AWS Lambda, GCP Cloud Functions, KCL applications, or Pub/Sub client libraries to integrate with any third-party platform."
 sidebar_position: 60
 ---
 

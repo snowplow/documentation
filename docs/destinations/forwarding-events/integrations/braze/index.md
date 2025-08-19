@@ -1,13 +1,12 @@
 ---
 title: "Braze"
+description: "Send Snowplow events to Braze for real-time personalization and campaign automation using the Track Users API with support for user attributes, custom events, and purchases."
 sidebar_position: 1
 ---
 
 ```mdx-code-block
 import EventForwardingSchemaTable from '@site/src/components/EventForwardingSchemaTable';
 ```
-
-## Overview
 
 Send Snowplow events to Braze for real-time personalization, user tracking, and campaign automation using the [Track Users API](https://www.braze.com/docs/api/endpoints/user_data/post_user_track). 
 
@@ -17,13 +16,13 @@ Event Forwarding supports the following Braze object types:
 - **[Custom events](https://www.braze.com/docs/api/objects_filters/event_object)**: User actions and behaviors
 - **[Purchases](https://www.braze.com/docs/api/objects_filters/purchase_object)**: Transaction data with product details
 
-## Getting Started
+## Getting started
 
-### 0. Prerequisites
+### Prerequisites
 
 Before setting up the forwarder in Console, you'll need the following from your Braze account:
 
-- **Braze REST API key** with these permissions:
+- Braze REST API key with these permissions:
   - `users.track`
   - `users.alias.new`
   - `users.identify`
@@ -31,9 +30,9 @@ Before setting up the forwarder in Console, you'll need the following from your 
   - `users.merge`
   - `users.external_ids.rename`
   - `users.alias.update`
-- **Braze REST API endpoint** – found in Braze under **Settings** > **APIs and Identifiers**
+- Braze REST API endpoint, found in Braze under **Settings** > **APIs and Identifiers**
 
-### 1. Create a connection
+### Step 1: Create a connection
 
 1. In Console, navigate to **Destinations** > **Connections**
 2. Select **Set up connection**
@@ -41,7 +40,7 @@ Before setting up the forwarder in Console, you'll need the following from your 
 4. Enter your API key and endpoint
 5. Select **Confirm** to deploy the connection
 
-### 2. Create the forwarder
+### Step 2: Create the forwarder
 
 1. From Console, navigate to **Destinations** \> **Destination list**. Navigate to the **Available** tab, filter for **SaaS applications**, and select **Configure** under Braze.  
 2. **Select your pipeline**: Choose the pipeline where you want to deploy your destination.  
@@ -51,11 +50,11 @@ Before setting up the forwarder in Console, you'll need the following from your 
    - **[Events](https://www.braze.com/docs/api/objects_filters/event_object)**: Custom user actions
    - **[Purchases](https://www.braze.com/docs/api/objects_filters/purchase_object)**: Transaction events
 
-### 3. Configure filtering and mapping
+### Step 3: Configure filtering and mapping
 
 Use JavaScript expressions to define which events to forward and how to map Snowplow data to Braze fields:
 
-1. **Event filtering**: Use JavaScript expressions to select which events to forward. Only events matching your filter will be sent to Braze. Leave blank to forward all events of the selected type. For example:
+1. **Event filtering**: use JavaScript expressions to select which events to forward. Only events matching your filter will be sent to Braze. Leave blank to forward all events of the selected type. For example:
   ```javascript
   // Forward page views from website
   event.app_id == "website" && event.event_name == "page_view"
@@ -63,16 +62,14 @@ Use JavaScript expressions to define which events to forward and how to map Snow
   // Forward a list of custom events
   ["add_to_cart", "purchase"].includes(event.event_name)
   ```
-
-2. **Field mapping**: Configure how Snowplow data maps to Braze fields using the default mappings or custom expressions.
-
-3. **Custom functions**: Write JavaScript functions for complex data transformations such as converting date formats, transforming enum values, combining multiple fields, or applying business logic. Functions are then available to use in both the event filter and field mapping sections.
+2. **Field mapping**: configure how Snowplow data maps to Braze fields using the default mappings or custom expressions.
+3. **Custom functions**: write JavaScript functions for complex data transformations such as converting date formats, transforming enum values, combining multiple fields, or applying business logic. Functions are then available to use in both the event filter and field mapping sections.
 
 :::info 
 To learn more about the supported filter and mapping expressions, check out the [filter and mapping reference](/docs/destinations/forwarding-events/reference/index.md).
 :::
 
-### 4. Deploy and validate
+### Step 4: Deploy and validate
 
 Select **Deploy** to create the forwarder. This will deploy the underlying Snowbridge instance to your cloud account and begin forwarding events based on your configuration.
 
@@ -83,7 +80,9 @@ You can confirm events are reaching Braze using these methods:
 2. **Braze API Usage Dashboard**: Braze > **Settings** > **API and Identifiers**
 <!-- TODO: add screenshot -->
 
-## Default field mapping
+## Schema information
+
+The sections below contain information on the Braze API schemas, including field names, data types, required fields, and default Snowplow mapping expressions.
 
 ### User attributes
 

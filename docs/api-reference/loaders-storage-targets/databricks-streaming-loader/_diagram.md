@@ -17,7 +17,7 @@ flowchart LR
   stream-->loader-->|REST API|databricks
 `}/>
 
-In the second part, you use a Databricks Lakeflow Declarative Pipeline to load the staging files into a Delta table
+In the second part, you use a Databricks Lakeflow Declarative Pipeline to load the staging files into a Streaming Live Table
 
 <Mermaid value={`
 flowchart LR

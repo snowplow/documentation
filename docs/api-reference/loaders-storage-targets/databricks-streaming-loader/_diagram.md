@@ -25,7 +25,7 @@ flowchart LR
       direction LR
       volume[("<b>Volume</b>")]
       pipeline{{"<b>Lakeflow Declarative Pipeline</b>"}}
-      table[("<b>Delta Table</b>")]
+      table[("<b>Streaming Live Table</b>")]
       volume-->pipeline-->table
   end
 `}/>

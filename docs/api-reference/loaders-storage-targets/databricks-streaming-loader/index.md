@@ -73,7 +73,7 @@ The Databricks Streaming Loader requires an [Iglu resolver file](/docs/api-refer
 
 ## Configuring the Databricks Lakeflow Declarative Pipeline
 
-Create a Pipeline in your Databricks workspace, and copy the following sql into the associated notebook:
+Create a Pipeline in your Databricks workspace, and copy the following SQL into the associated `.sql` file:
 
 ```sql
 CREATE STREAMING LIVE TABLE events

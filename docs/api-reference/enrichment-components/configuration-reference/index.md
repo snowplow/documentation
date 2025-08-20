@@ -10,9 +10,9 @@ Enrich is released under the [Snowplow Limited Use License](https://docs.snowplo
 
 To accept the terms of license and run Enrich, set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable. Alternatively, you can configure the `license.accept` option, like this:
 
-```hcl
-license {
-  accept = true
+```json
+"license": {
+  "accept": true
 }
 ```
 

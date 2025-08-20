@@ -90,7 +90,7 @@ FROM cloud_files(
   "parquet",
   map(
     "cloudfiles.inferColumnTypes", "false",
-    "cloudfiles.includeExistingFiles", "true",
+    "cloudfiles.includeExistingFiles", "false", -- set to true to load files already present in the volume
     "cloudfiles.schemaEvolutionMode", "addNewColumns",
     "cloudfiles.partitionColumns", "",
     "cloudfiles.useManagedFileEvents", "true",

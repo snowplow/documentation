@@ -1,9 +1,8 @@
-import React, { FC, useMemo, useState } from 'react'
+import React, { FC } from 'react'
 
 import Link from '@docusaurus/Link'
 import Head from '@docusaurus/Head'
-import { useHistory } from '@docusaurus/router'
-import { ChevronRight } from '@mui/icons-material'
+
 import {
   Box,
   Grid,
@@ -22,7 +21,7 @@ import {
   TopicFilterSidebar,
 } from './styledComponents'
 import { Meta, Tutorial } from '../models'
-import { Card, Description, StartButton, Topic } from './styledComponents'
+import { Card, Description, Topic } from './styledComponents'
 import {
   useTutorialFilters,
   UseCaseFilter,
@@ -86,58 +85,42 @@ function getFirstStepPath(meta: Meta): string | null {
 }
 
 const TutorialCard: FC<{ tutorial: Tutorial }> = ({ tutorial }) => {
-  const history = useHistory()
   const firstStep = getFirstStepPath(tutorial.meta)
 
-  return (
-    <Card sx={{ height: '100%' }}>
-      <Grid
-        container
-        direction="column"
-        sx={{ height: '100%' }}
-        justifyContent="space-between"
-      >
-        <Grid item container direction="column">
-          <Grid item>
-            {firstStep ? (
-              <Link
-                style={{ color: 'inherit', cursor: 'pointer' }}
-                to={firstStep}
-              >
-                <TutorialCardTitle>{tutorial.meta.title}</TutorialCardTitle>
-              </Link>
-            ) : (
-              <TutorialCardTitle sx={{ color: 'red' }}>
-                {tutorial.meta.title} (No steps found)
-              </TutorialCardTitle>
-            )}
-          </Grid>
-          <Grid item>
-            <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
-              {tutorial.meta.useCases.length > 0 && (
-                <Topic label={tutorial.meta.useCases[0]}></Topic>
-              )}
-              <Topic label={tutorial.meta.label}></Topic>
-            </Box>
-          </Grid>
-          <Grid item>
-            <Description>{tutorial.meta.description}</Description>
-          </Grid>
-        </Grid>
-        <Grid item>
-          <StartButton
-            disabled={!firstStep}
-            onClick={() => {
-              const [first] = getSteps(tutorial.meta.id)
-              history.push(first.path)
-            }}
-            endIcon={<ChevronRight />}
-          >
-            Start Learning
-          </StartButton>
-        </Grid>
-      </Grid>
+  const cardContent = (
+    <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+      <TutorialCardTitle>
+        {firstStep
+          ? tutorial.meta.title
+          : `${tutorial.meta.title} (No steps found)`}
+      </TutorialCardTitle>
+      <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
+        {tutorial.meta.useCases.length > 0 && (
+          <Topic label={tutorial.meta.useCases[0]}></Topic>
+        )}
+        <Topic label={tutorial.meta.label}></Topic>
+      </Box>
+      <Box sx={{ flexGrow: 1 }}>
+        <Description>{tutorial.meta.description}</Description>
+      </Box>
     </Card>
+  )
+
+  return firstStep ? (
+    <Link
+      style={{
+        color: 'inherit',
+        cursor: 'pointer',
+        textDecoration: 'none',
+        display: 'block',
+        height: '100%',
+      }}
+      to={firstStep}
+    >
+      {cardContent}
+    </Link>
+  ) : (
+    <Box sx={{ opacity: 0.6, height: '100%' }}>{cardContent}</Box>
   )
 }
 

@@ -2,7 +2,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { Search } from '@mui/icons-material'
 import {
   Box,
-  Button,
   Chip,
   FormControl,
   OutlinedInput,
@@ -26,15 +25,20 @@ const cssVar = {
 
 export const Grid = styled(Box)(({ theme }) => ({
   display: 'grid',
-  gridTemplateColumns: 'repeat(auto-fill, minMax(390px, 1fr))',
+  gridTemplateColumns: 'repeat(auto-fill, minmax(390px, 1fr))',
   columnGap: theme.spacing(2),
   rowGap: theme.spacing(2),
-  gridAutoRows: 'minMax(204px, 1fr)',
+  gridAutoRows: 'minmax(204px, 1fr)',
 }))
 
 export const Card = styled(Paper)(({ theme }) => ({
   padding: theme.spacing(3),
   flexDirection: 'column',
+  transition: 'all 0.15s ease-in-out',
+  cursor: 'pointer',
+  '&:hover': {
+    boxShadow: '0px 4px 12px 0px rgba(16, 24, 40, 0.15), 0px 0px 0px 1px rgba(102, 56, 184, 0.12)',
+  },
 }))
 
 export const Title = styled(Box)(({ theme }) => ({
@@ -51,7 +55,6 @@ export const Topic = styled(Chip)(({ theme }) => ({
 
 export const Description = styled(Box)(({ theme }) => ({
   fontSize: theme.typography.body2.fontSize,
-  marginBottom: theme.spacing(2),
   display: ['block', '-webkit-box'], // First fallback to "block" if "-webkit-box" is not supported
   WebkitLineClamp: '3',
   WebkitBoxOrient: 'vertical',
@@ -61,14 +64,6 @@ export const Description = styled(Box)(({ theme }) => ({
 
 const shadow =
   '0px 0px 2px 0px rgba(16, 24, 40, 0.06), 0px 1px 3px 0px rgba(16, 24, 40, 0.1);'
-
-export const StartButton = styled(Button)(({ theme }) => ({
-  color: 'var(--mui-palette-text-primary)',
-  textTransform: 'none',
-  border: '1px solid ' + grey[300],
-  paddingLeft: theme.spacing(2),
-  paddingRight: theme.spacing(2),
-}))
 
 export const SearchBarInput = styled(OutlinedInput)(({ theme }) => ({
   backgroundColor: cssVar.MuiPaletteBackgroundPaper,

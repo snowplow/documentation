@@ -1,23 +1,31 @@
+---
+title: "Recovering failed events with SQL"
+sidebar_position: 10
+description: "Learn how to recover failed events from your failed events table back into your good events table using SQL queries."
+---
+
 # Recovering failed events with SQL
 
-## Overview
+This guide will walk you through the process of recovering [failed events](/docs/fundamentals/failed-events/index.md) from your failed events table back into your good events table. Failed events occur when [events](/docs/fundamentals/events/index.md) don't pass validation during processing, typically due to [schema](/docs/fundamentals/schemas/index.md) violations or enrichment failures.
 
-This guide will walk you through the process of recovering failed events from your failed events table back into your good events table.
+## Recovery process
 
-## Steps
+Recovering failed events involves identifying the failure type, reconstructing the data, and reinserting it into your good events table. The process varies depending on the specific failure that occurred.
 
-1. First identify the type of failure. There are many possible reasons an event can fail and end up in your failed events table. The failed events table only includes schema violations and enrichment failures, but there are still many different types:
-    1. Missing schema - the schema referenced (or specific version) isn't present in your prod Iglu repository
-    2. Missing required property
-    3. Extra properties that are not allowed in this schema version
-    4. Referencing an incorrect schema version
-    5. Incorrect data type
-    6. Breaching a validation rule (a `min`, `max`, `minLength`, `maxLength`, `pattern`, `format`, `enum` etc)
-2. Reconstruct the offending row. How you do this will depend on the type of failure that has occurred, and your specific business logic. For example, if you have a missing schema, because you started tracking before pushing the schema to Prod, then you should push the schema to Prod, and then essentially just select the values from the failure context. However, if you have a string that is too long for the `maxLength` validation rule for example, then you must choose how to resolve this (trim to the max allowed value, or push a new schema with an increased limit, and change the schema version in the offending row from the original to the new version).
-3. Create a prep `SELECT` statement that addresses the issue. You can test this by attempting to `UNION` your prep table to a `SELECT` from the good `events` table to check for type inconsistencies.
-4. Create an `INSERT` command to add the repaired row back to the main `events` table, leaving all other values unaltered. You can either type this out by hand, or if you don't want to do this (your events table may have hundreds of columns which is time consuming and error prone to type out manually) you can use the `INFORMATION_SCHEMA.COLUMNS` metadata table in your warehouse to construct the `INSERT` command programmatically.
+The main steps are:
 
-### Identifying the nature of the failed event
+1. **Identify the type of failure**: there are many possible reasons an event can fail and end up in your failed events table. The failed events table only includes schema violations and enrichment failures, but there are still many different types:
+    * Missing schema - the schema referenced (or specific version) isn't present in your prod Iglu repository
+    * Missing required property
+    * Extra properties that are not allowed in this schema version
+    * Referencing an incorrect schema version
+    * Incorrect data type
+    * Breaching a validation rule (a `min`, `max`, `minLength`, `maxLength`, `pattern`, `format`, `enum` etc)
+2. **Reconstruct the offending row**: how you do this will depend on the type of failure that has occurred, and your specific business logic. For example, if you have a missing schema, because you started tracking before pushing the schema to Prod, then you should push the schema to Prod, and then essentially just select the values from the failure entity. However, if you have a string that is too long for the `maxLength` validation rule for example, then you must choose how to resolve this (trim to the max allowed value, or push a new schema with an increased limit, and change the schema version in the offending row from the original to the new version).
+3. **Create a prep `SELECT` statement**: create a statement that addresses the issue. You can test this by attempting to `UNION` your prep table to a `SELECT` from the good `events` table to check for type inconsistencies.
+4. **Create an `INSERT` command**: add the repaired row back to the main `events` table, leaving all other values unaltered. You can either type this out by hand, or if you don't want to do this (your events table may have hundreds of columns which is time consuming and error prone to type out manually) you can use the `INFORMATION_SCHEMA.COLUMNS` metadata table in your warehouse to construct the `INSERT` command programmatically.
+
+## Identifying the nature of the failed event
 
 In your failed events table, there is a column called `contexts_com_snowplowanalytics_snowplow_failure_1` which contains information about why the event failed. All the other columns are as-is when the event was tracked and enriched.
 
@@ -85,28 +93,30 @@ WITH
   ORDER BY timestamp DESC 
 ```
 
-Here we are filtering for our `test-app` app ID, and the specific schema failures we're looking for (`WHERE schema_name = 'user_entity'` ).
+Here we are filtering for our `test-app` app ID, and the specific schema failures we're looking for (`WHERE schema_name = 'user_entity'`).
 
-The `data` field is a JSON object of the data that was included in the event, untouched from when it was tracked. We can access these using dot notion on the `data` object - e.g. `data.user_name`
+The `data` field is a JSON object of the data that was included in the event, untouched from when it was tracked. We can access these using dot notation on the `data` object - e.g. `data.user_name`
 
-In this example, we can see that in the `schema_version` field, the version is `2-0-1` when the most up to date version of this schema is `2-0-0` and we've therefore had a `ResolutionError` in the `failure_type` column - meaning that Iglu wasn't able to find the schema that was included in the event. Therefore, we need to reconstruct the contexts columns, with the correct schema version and the correct corresponding column name for that version. This is a relatively straightforward fix, as we don't have to mutate the data in place at all.
+In this example, we can see that in the `schema_version` field, the version is `2-0-1` when the most up to date version of this schema is `2-0-0` and we've therefore had a `ResolutionError` in the `failure_type` column - meaning that Iglu wasn't able to find the schema that was included in the event. Therefore, we need to reconstruct the entity columns, with the correct schema version and the correct corresponding column name for that version. This is a relatively straightforward fix, as we don't have to mutate the data in place at all.
 
-### Reconstructing the failed event row
+## Reconstructing the failed event row
 
 Even though this is a fairly straightforward fix (essentially in this case it is a passthrough) we must use some knowledge of how Snowplow constructs data in our good `events` table in order to correctly reconstruct the event before inserting.
 
-- The properties types defined in the JSON schema for an event or entity are deterministically converted into column types in the data warehouse
-- Custom events are analogous to JSON objects - key-value pairs of data on the event. The values in this object can be primitive types (strings, numerics, booleans etc) or complex types (objects and arrays). The keys become the column names.
-- Custom entities or contexts are stored as arrays of objects - this is because it is possible (and common) to attach multiple of the same entity to a single event. So even if there is only one of a given entity attached to an event, they are always stored as arrays in the data warehouse. Each entity object is semantically identical to that of a custom event i.e. a key-value object
-- The `contexts_com_snowplowanalytics_snowplow_failure_1` column is itself an array as it is a context, and a single event can have multiple failures, each that should be addressed before reinserting
-- The target column names also follow a deterministic naming convention
-    - Custom event columns are of the format `unstruct_event_{vendor_name}_{schema_name}_{version_number | major_version_numer}`
-    - Custom entity columns are of the format `contexts_{vendor_name}_{schema_name}_{version_number | major_version_numer}`
-    - Column names also are "snake-ified", so camelCase names in your schemas will be converted to snake_case, and dots (`.`) in your vendor name will also be snake-ified
+Key principles for reconstructing events:
 
-### Create a prep query that reconstruct the failing rows
+* The properties types defined in the JSON schema for an event or entity are deterministically converted into column types in the data warehouse
+* Custom events are analogous to JSON objects - key-value pairs of data on the event. The values in this object can be primitive types (strings, numerics, booleans etc) or complex types (objects and arrays). The keys become the column names.
+* Custom entities are stored as arrays of objects - this is because it is possible (and common) to attach multiple of the same entity to a single event - e.g. an array of `product` entities being attached to a `product_list` event. So even if there is only one of a given entity attached to an event, they are always stored as arrays in the data warehouse. Each entity object is semantically identical to that of a custom event i.e. a key-value object
+* The `contexts_com_snowplowanalytics_snowplow_failure_1` column is itself an array as it is an entity, and a single event can have multiple failures, each that should be addressed before reinserting
+* The target column names also follow a deterministic naming convention:
+    * Custom event columns are of the format `unstruct_event_{vendor_name}_{schema_name}_{version_number | major_version_numer}`
+    * Custom entity columns are of the format `contexts_{vendor_name}_{schema_name}_{version_number | major_version_numer}`
+    * Column names also are "snake-ified", so camelCase names in your schemas will be converted to snake_case, and dots (`.`) in your vendor name will also be snake-ified
 
-In this example, the `user_entity` is obviously an entity, so will be in an array. I'm using BigQuery here, so we need an array containing a single struct value. In BigQuery, Snowplow stores the `data` object as a `JSON` type, so the individual values must be cast to their correct types.
+## Creating a prep query
+
+In this example, the `user_entity` is obviously an entity, so will be in an array. We're using BigQuery here, so we need an array containing a single struct value. In BigQuery, Snowplow stores the `data` object as a `JSON` type, so the individual values must be cast to their correct types.
 
 ```sql
 WITH
@@ -131,14 +141,16 @@ SELECT
 FROM prep;
 ```
 
-### Reinsert the repaired rows back into the good events table
+## Reinserting the repaired rows
 
-Now we have successfully identified our problematic rows and corrected them, we can now insert them back to the events table. While you can hand write an `INSERT` statement for the rows, the Snowplow events tables tend to have very large and complex table schemas, with hundreds or thousands of columns, with many complex nested columns. This process is time consuming and error prone, so we recommend using the `INFORMATION_SCHEMA` tables to programmatically construct the `INSERT` command before running it. There are some complexities to bear in mind when doing this:
+Now we have successfully identified our problematic rows and corrected them, we can now insert them back to the events table. While you can hand write an `INSERT` statement for the rows, the Snowplow events tables tend to have very large and complex table schemas, with hundreds or thousands of columns, with many complex nested columns. This process is time consuming and error prone, so we recommend using the `INFORMATION_SCHEMA` tables to programmatically construct the `INSERT` command before running it.
 
-- There may well be columns that are not in the failed event table that are in the event table. Your insert command must include `CAST(NULL AS ... )` in place for all of those columns
-- You must ensure that you have the correct structure for your repaired columns as otherwise they will not insert and the warehouse will reject the inserted rows
-- In newer versions of Snowplow data warehouse loaders (such as BigQuery Loader V2), entity columns also have a `_schema_version` column. This must also be set for reprocessed entity columns in order for the insert to be successful
-- If the recovered events are net-new to your good events table (say you've encountered failures on the first time using this schema) then that column won't exist in your good events table yet. We'd recommend sending a hand crafted good event for that schema to your prod pipeline FIRST. This will allow the Snowplow loader to correctly create the column in your good events table so it is ready to be inserted into
+There are some complexities to bear in mind when doing this:
+
+* There may well be columns that are not in the failed events table that are in the events table. Your insert command must include `CAST(NULL AS ... )` in place for all of those columns
+* You must ensure that you have the correct structure for your repaired columns as otherwise they will not insert and the warehouse will reject the inserted rows
+* In newer versions of Snowplow data warehouse loaders (such as BigQuery Loader V2), entity columns also have a `_schema_version` column. This must also be set for reprocessed entity columns in order for the insert to be successful
+* If the recovered events are net-new to your good events table (say you've encountered failures on the first time using this schema) then that column won't exist in your good events table yet. We'd recommend sending a hand crafted good event for that schema to your prod pipeline FIRST. This will allow the Snowplow loader to correctly create the column in your good events table so it is ready to be inserted into
 
 Here is a script using BigQuery SQL to create you the `INSERT` command:
 
@@ -188,19 +200,19 @@ column_mappings AS (                 -- this CTE checks if columns are missing,
     target_type,
     status,
     CASE 
-      -- Handle your specific replaced context column 
+      -- Handle your specific replaced entity column 
       WHEN column_name = 'contexts_com_example_user_entity_2_0_0' THEN -- isolate the target column 
                                                                               -- paste in your reprocess logic as a string (including newline characters (`\n`) if you wish
         'array(select STRUCT(\n    int64(contexts_com_snowplowanalytics_snowplow_failure_1[0].data.user_id) AS user_id,\n    string(contexts_com_snowplowanalytics_snowplow_failure_1[0].data.user_name) AS user_name\n  )) AS contexts_com_example_user_entity_2_0_0'
       
-      -- Exclude the failure context from source
+      -- Exclude the failure entity from source
       WHEN column_name = 'contexts_com_snowplowanalytics_snowplow_failure_1' THEN
         'CAST(NULL AS ARRAY<STRUCT<schema STRING, data JSON>>) AS contexts_com_snowplowanalytics_snowplow_failure_1'
       
       -- Handle missing columns with appropriate NULL casting
       WHEN status = 'MISSING_IN_FAILED' THEN
         CASE 
-          -- Context columns
+          -- Entity columns
           WHEN STARTS_WITH(column_name, 'contexts_') THEN
             FORMAT('CAST(NULL AS %s) AS %s', target_type, column_name)
           -- Standard columns  

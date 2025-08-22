@@ -1,0 +1,86 @@
+Snowplow Docs — Technical Guide for Customer Data Infrastructure
+
+Summary
+Authoritative documentation for implementing event tracking, validation, enrichment, governance, and delivery of clean event-level behavioral data. Focus areas include composable analytics, composable CDP, in-product personalization, AI agentic applications, and feeding AI-ready real-time data into warehouses, lakes, streams, and real-time tools.
+
+How to use this file
+LLMs and agents prioritize links under each section below. Treat this as a curated AI sitemap for docs.snowplow.io.
+
+Introduction
+Docs home - https://docs.snowplow.io/docs/
+About the docs and navigation - https://docs.snowplow.io/docs/
+Glossary overview - https://docs.snowplow.io/docs/glossary/
+
+Get started
+Tracking your first events - https://docs.snowplow.io/docs/get-started/tracking/
+Community Edition quick start - https://docs.snowplow.io/docs/get-started/snowplow-community-edition/quick-start/
+Web tracker quick start - https://docs.snowplow.io/docs/sources/trackers/web-trackers/quick-start-guide/
+Data Modeling with DBT quick start - https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/
+
+Fundamentals
+Canonical event model - https://docs.snowplow.io/docs/fundamentals/canonical-event/
+Schemas and entities fundamentals - https://docs.snowplow.io/docs/fundamentals/schemas/
+Sessions, identity, context, and governance - https://docs.snowplow.io/docs/fundamentals/
+
+Data Product Studio
+Overview - https://docs.snowplow.io/docs/data-product-studio/
+Data Structures manager - https://docs.snowplow.io/docs/data-product-studio/data-structures/
+Manage via API - https://docs.snowplow.io/docs/data-product-studio/data-structures/manage/api/
+Snowtype CLI (type-safe codegen) - https://docs.snowplow.io/docs/data-product-studio/snowtype/using-the-cli/
+Data quality controls and tests - https://docs.snowplow.io/docs/data-product-studio/data-quality/
+
+Events
+Event types and tracking concepts - https://docs.snowplow.io/docs/sources/trackers/web-trackers/tracking-events/
+Self-describing events and contexts - https://docs.snowplow.io/docs/fundamentals/schemas/
+Designing new events and entities - https://docs.snowplow.io/docs/data-product-studio/
+
+Sources
+Trackers overview - https://docs.snowplow.io/docs/sources/trackers/
+Web trackers - https://docs.snowplow.io/docs/sources/trackers/web-trackers/
+Mobile trackers - https://docs.snowplow.io/docs/sources/trackers/mobile-trackers/
+Server-side trackers - https://docs.snowplow.io/docs/sources/trackers/#server-side-trackers
+Client-side Trackers - https://docs.snowplow.io/docs/sources/trackers/#client-side-trackers
+GTM template - https://docs.snowplow.io/docs/sources/trackers/google-tag-manager/snowplow-template/
+
+Pipeline
+Pipeline overview and components - https://docs.snowplow.io/docs/pipeline/
+Collectors - https://docs.snowplow.io/docs/pipeline/collector/
+Enrichment and validation - https://docs.snowplow.io/docs/pipeline/enrichments/
+Loaders and orchestration - https://docs.snowplow.io/docs/destinations/warehouses-lakes/loading-process/
+Local validation with Snowplow Micro - https://docs.snowplow.io/docs/api-reference/snowplow-micro/
+
+Destinations
+Destinations index - https://docs.snowplow.io/docs/destinations/
+Warehouse and lake loaders - https://docs.snowplow.io/docs/api-reference/loaders-storage-targets/
+Real-time destinations - https://docs.snowplow.io/docs/destinations/forwarding-events/
+
+Data models
+dbt packages and modeling - https://docs.snowplow.io/docs/modeling-your-data/
+Identity stitching with dbt package - https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/
+Web model and engagement - https://docs.snowplow.io/docs/modeling-your-data/
+Mobile and app modeling concepts - https://docs.snowplow.io/docs/modeling-your-data/
+
+Account management
+Account setup and roles - https://docs.snowplow.io/docs/account-management/
+API keys and authentication - https://docs.snowplow.io/docs/account-management/
+
+API reference
+Index of API docs - https://docs.snowplow.io/docs/api-reference/
+Data Structures API - https://docs.snowplow.io/docs/data-product-studio/data-structures/manage/api/
+Snowplow Micro API - https://docs.snowplow.io/docs/api-reference/snowplow-micro/
+
+Resources
+Glossary - https://docs.snowplow.io/docs/glossary/
+Examples and guides - https://docs.snowplow.io/docs/
+Release notes and updates - https://docs.snowplow.io/docs/
+
+Sitemap
+Full docs sitemap - https://docs.snowplow.io/sitemap.xml
+
+Style and terminology
+Say Snowplow, not Snowplow Analytics.
+Avoid the word unlock.
+Use consistent terms: events, entities (contexts), schemas, validation, governance, identity, predictions, interventions.
+
+Change log
+2025-08-15: Initial docs-specific version aligned to the technical IA above.

@@ -1157,6 +1157,7 @@ mediaTracking.track(new MediaAdBreakStartEvent(), null, null, adBreak);`}
 
 <>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
 {`m.global.snowplow.trackMediaEvent = {
+    media: m.Video,
     schema: "iglu:com.snowplowanalytics.snowplow.media/ad_break_start_event/jsonschema/1-0-0",
     data: {},
     adBreak: {
@@ -1245,6 +1246,7 @@ trackMediaPlay({
 
 <>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
 {`m.global.snowplow.trackMediaEvent = {
+    media: m.Video,
     schema: "iglu:org.example/custom_event/jsonschema/1-0-0",
     data: {},
     ad: {},
@@ -1508,6 +1510,7 @@ The `newRate` is passed when tracking the event and is automatically updated in 
 
 <>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
 {`m.global.snowplow.trackMediaEvent = {
+    media: m.Video,
     schema: "iglu:com.snowplowanalytics.snowplow.media/playback_rate_change_event/jsonschema/1-0-0",
     data: {
         "newRate": 1.5
@@ -1558,6 +1561,7 @@ The `newVolume` is passed when tracking the event and is automatically updated i
 
 <>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
 {`m.global.snowplow.trackMediaEvent = {
+    media: m.Video,
     schema: "iglu:com.snowplowanalytics.snowplow.media/volume_change_event/jsonschema/1-0-0",
     data: {
         "newVolume": 50
@@ -1606,6 +1610,7 @@ The `fullscreen` value is passed when tracking the event and is automatically up
 
 <>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
 {`m.global.snowplow.trackMediaEvent = {
+    media: m.Video,
     schema: "iglu:com.snowplowanalytics.snowplow.media/fullscreen_change_event/jsonschema/1-0-0",
     data: {
         fullscreen: true
@@ -1654,6 +1659,7 @@ The `pictureInPicture` value is passed when tracking the event and is automatica
 
 <>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
 {`m.global.snowplow.trackMediaEvent = {
+    media: m.Video,
     schema: "iglu:com.snowplowanalytics.snowplow.media/picture_in_picture_change_event/jsonschema/1-0-0",
     data: {
         pictureInPicture: false
@@ -1698,6 +1704,7 @@ Tracking this event will increase the counter of `adBreaks` in the session entit
 
 <>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
 {`m.global.snowplow.trackMediaEvent = {
+    media: m.Video,
     schema: "iglu:com.snowplowanalytics.snowplow.media/ad_break_start_event/jsonschema/1-0-0",
     data: {},
     ad: {},
@@ -1738,6 +1745,7 @@ Tracks a media player ad break end event that signals the end of an ad break.
 
 <>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
 {`m.global.snowplow.trackMediaEvent = {
+    media: m.Video,
     schema: "iglu:com.snowplowanalytics.snowplow.media/ad_break_end_event/jsonschema/1-0-0",
     data: {},
     ad: {},
@@ -1780,6 +1788,7 @@ Tracking this event will increase the counter of `ads` in the session entity.
 
 <>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
 {`m.global.snowplow.trackMediaEvent = {
+    media: m.Video,
     schema: "iglu:com.snowplowanalytics.snowplow.media/ad_start_event/jsonschema/1-0-0",
     data: {},
     ad: {},
@@ -1828,6 +1837,7 @@ Tracking this event will increase the counter of `adsSkipped` in the session ent
 
 <>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
 {`m.global.snowplow.trackMediaEvent = {
+    media: m.Video,
     schema: "iglu:com.snowplowanalytics.snowplow.media/ad_skip_event/jsonschema/1-0-0",
     data: {},
     ad: {},
@@ -1874,6 +1884,7 @@ The event schema has one required property – it is set automatically to 25%:
 
 <>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
 {`m.global.snowplow.trackMediaEvent = {
+    media: m.Video,
     schema: "iglu:com.snowplowanalytics.snowplow.media/ad_quartile_event/jsonschema/1-0-0",
     data: {
         "percentProgress": 25
@@ -1922,6 +1933,7 @@ The event schema has one required property – it is set automatically to 50%:
 
 <>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
 {`m.global.snowplow.trackMediaEvent = {
+    media: m.Video,
     schema: "iglu:com.snowplowanalytics.snowplow.media/ad_quartile_event/jsonschema/1-0-0",
     data: {
         "percentProgress": 50
@@ -1971,6 +1983,7 @@ The event schema has one required property – it is set automatically to 75%:
 
 <>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
 {`m.global.snowplow.trackMediaEvent = {
+    media: m.Video,
     schema: "iglu:com.snowplowanalytics.snowplow.media/ad_quartile_event/jsonschema/1-0-0",
     data: {
         "percentProgress": 75
@@ -2013,6 +2026,7 @@ Tracks a media player ad complete event that signals the ad creative was played 
 
 <>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
 {`m.global.snowplow.trackMediaEvent = {
+    media: m.Video,
     schema: "iglu:com.snowplowanalytics.snowplow.media/ad_complete_event/jsonschema/1-0-0",
     data: {},
     ad: {},
@@ -2061,6 +2075,7 @@ Tracking this event will increase the counter of `adsClicked` in the session ent
 
 <>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
 {`m.global.snowplow.trackMediaEvent = {
+    media: m.Video,
     schema: "iglu:com.snowplowanalytics.snowplow.media/ad_click_event/jsonschema/1-0-0",
     data: {},
     ad: {},
@@ -2107,6 +2122,7 @@ The event schema has one optional property:
 
 <>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
 {`m.global.snowplow.trackMediaEvent = {
+    media: m.Video,
     schema: "iglu:com.snowplowanalytics.snowplow.media/ad_pause_event/jsonschema/1-0-0",
     data: {},
     ad: {},
@@ -2147,6 +2163,7 @@ Tracks a media player ad resume event fired when the user resumed playing the ad
 
 <>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
 {`m.global.snowplow.trackMediaEvent = {
+    media: m.Video,
     schema: "iglu:com.snowplowanalytics.snowplow.media/ad_resume_event/jsonschema/1-0-0",
     data: {},
     ad: {},
@@ -2437,6 +2454,7 @@ When tracked within the context of a media tracking, the tracker will attach the
 
 <>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
 {`m.global.snowplow.trackMediaEvent = {
+    media: m.Video,
     schema: "iglu:com.snowplowanalytics.snowplow.media/quality_change_event/jsonschema/1-0-0",
     data: { }
 }`}

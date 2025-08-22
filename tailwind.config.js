@@ -62,6 +62,7 @@ module.exports = {
             '--tw-prose-captions': 'hsl(var(--muted-foreground))',
             '--tw-prose-code': 'hsl(var(--foreground))',
             '--tw-prose-pre-code': 'hsl(var(--foreground))',
+            '--tw-prose-pre-bg': 'hsl(var(--prism-background-color))',
             '--tw-prose-th-borders': 'hsl(var(--border))',
             '--tw-prose-td-borders': 'hsl(var(--border))',
             '--tw-prose-invert-body': 'hsl(var(--foreground))',

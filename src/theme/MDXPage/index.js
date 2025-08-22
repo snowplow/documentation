@@ -28,7 +28,7 @@ export default function MDXPage(props) {
         <main className="container container--fluid margin-vert--lg">
           <div className={clsx('row', styles.mdxPageWrapper)}>
             <div className={clsx('col', !hideTableOfContents && 'col--7')}>
-              <article className="overflow-x-auto max-w-none leading-relaxed prose prose-p:mt-0 prose-table:rounded-lg prose-td:ps-3 prose-td:pe-3 prose-th:ps-3 prose-th:pe-3 prose-ul:mt-0 prose-ol:mt-0 prose-code:before:content-none prose-code:after:content-none prose-code:font-normal prose-code:text-base prose-img:mx-auto prose-img:block">
+              <article className="overflow-x-auto max-w-none leading-relaxed prose-headings:font-bold prose-p:mt-0 prose-table:rounded-lg prose-td:ps-3 prose-td:pe-3 prose-th:ps-3 prose-th:pe-3 prose-ul:mt-0 prose-ol:mt-0 prose-code:before:content-none prose-code:after:content-none prose-code:font-normal prose-code:text-sm prose-img:mx-auto prose-img:block">
                 <MDXContent>
                   <MDXPageContent />
                 </MDXContent>
@@ -40,7 +40,7 @@ export default function MDXPage(props) {
                   toc={MDXPageContent.toc}
                   minHeadingLevel={frontMatter.toc_min_heading_level}
                   maxHeadingLevel={frontMatter.toc_max_heading_level}
-                />
+                />  
               </div>
             )}
           </div>

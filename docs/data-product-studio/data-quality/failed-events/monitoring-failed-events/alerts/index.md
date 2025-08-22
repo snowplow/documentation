@@ -1,31 +1,24 @@
 ---
-title: "Setting up data quality alerts"
-date: "2021-01-14"
-sidebar_label: "Set up alerts"
+title: "Setting up failed event alerts"
+date: "2025-01-14"
+sidebar_label: "Alerts"
 sidebar_position: 2500
 ---
 
-## Overview
 
-Snowplow can send two types of alerts to help you monitor Failed Events:
+Snowplow can alert you when a new failed event has occurred. There are two different implementations available to choose from:
 
-- **New failed event:** receive an alert within 10 minutes of a new type of event failure being detected on your pipeline.
-- **Failed event digest**: receive a daily digest of all Failed Event activity in the previous 48-hour period.
+- [Failed event alerts](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/alerts/failed-event-alerts/index.md) run queries directly against the your data warehouse every 10 minutes. This approach keeps warehouse workers continuously active, resulting in higher compute costs compared to classic alerts, but provides faster detection, are richer alert context, and are more configurable.
 
-## Pre-requisites
+- [Classic alerts](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/alerts/classic-alerts/index.md) offer cost-effective monitoring by executing queries against our internal telemetry data warehouse tables. This approach minimizes your costs since the computational load runs on our systems.
 
-To receive alerts you must have the Failed Events monitoring feature switched on in the Snowplow BDP console.
+## Feature comparison
 
-## Subscribing to alerts
-
-- Login to Snowplow BDP console
-- Locate the pipeline you wish to set up alerts for in the left-hand navigation
-- Click on the `Configuration` tab, then the `Pipeline alerts` section
-
-![](images/image.png)
-
-- Click `Manage` for the alert you wish to subscribe to
-- Add one or more email addresses by typing them into the input and clicking `Add recipient`
-- Once you have added all recipients, click `Save Changes`
-
-![](images/image-1.png)
+| Feature                                       | Classic alerts | Failed event alerts |
+| :-------------------------------------------- | :------------: | :-----------------: |
+| Can alert on new failed events                |       ✅        |          ✅          |
+| Can send a digest of failed events for a week |       ✅        |          ✅          |
+| Notify via Email                              |       ✅        |          ✅          |
+| Notify via Slack                              |       ❌        |          ✅          |
+| Filters                                       |       ❌        |          ✅          |
+| Does not affect pipeline cost                 |       ✅        |          ❌          |

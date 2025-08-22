@@ -4,6 +4,11 @@ date: "2022-10-20"
 sidebar_position: 200
 ---
 
+```mdx-code-block
+import {versions} from '@site/src/componentVersions';
+import CodeBlock from '@theme/CodeBlock';
+```
+
 You can configure any number of transformations to run on the data one after another - transformations will run in the order provided. (You can repeatedly specify the same transformation more than once, if needed.) All transformations operate on a single message basis.
 
 If you're filtering the data, it's best to provide the filter first, for efficiency.
@@ -26,6 +31,6 @@ Example:
 
 The below first filters out any `event_name` which does not match the regex `^page_view$`, then runs a custom javascript script to change the app_id value to `"1"`
 
-```hcl reference
-https://github.com/snowplow/snowbridge/blob/master/assets/docs/configuration/transformations/transformations-overview-example.hcl
-```
+<CodeBlock language="hcl" reference>{`
+https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/transformations-overview-example.hcl
+`}</CodeBlock>

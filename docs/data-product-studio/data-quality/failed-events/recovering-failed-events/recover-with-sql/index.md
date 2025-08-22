@@ -97,6 +97,8 @@ Here we are filtering for our `test-app` app ID, and the specific schema failure
 
 The `data` field is a JSON object of the data that was included in the event, untouched from when it was tracked. We can access these using dot notation on the `data` object - e.g. `data.user_name`
 
+![Failed events query results showing ResolutionError failures](images/failed-events-results-table.png)
+
 In this example, we can see that in the `schema_version` field, the version is `2-0-1` when the most up to date version of this schema is `2-0-0` and we've therefore had a `ResolutionError` in the `failure_type` column - meaning that Iglu wasn't able to find the schema that was included in the event. Therefore, we need to reconstruct the entity columns, with the correct schema version and the correct corresponding column name for that version. This is a relatively straightforward fix, as we don't have to mutate the data in place at all.
 
 ## Reconstructing the failed event row

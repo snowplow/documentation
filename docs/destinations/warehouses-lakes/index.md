@@ -1,5 +1,5 @@
 ---
-title: "Storing and querying data"
+title: "Supported warehouse and data lake destinations"
 sidebar_position: 1
 sidebar_label: "Warehouses and lakes"
 description: "An overview of the available options for storing Snowplow data in data warehouses and lakes"
@@ -12,6 +12,16 @@ import TabItem from '@theme/TabItem';
 
 Data warehouses and data lakes are primary destinations for Snowplow data. For other options, see the [destinations overview](/docs/fundamentals/destinations/index.md) page.
 
+## How loading works
+
+The Snowplow data loading process is engineered for large volumes of data. In addition, for each data warehouse, our loader applications ensure the best representation of Snowplow events. That includes [automatically adjusting the database types](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md) for [self-describing events](/docs/fundamentals/events/index.md#self-describing-events) and [entities](/docs/fundamentals/entities/index.md) according to their [schemas](/docs/fundamentals/schemas/index.md).
+
+:::tip
+
+For more details on the loading flow, pick a destination below and follow the link in the _Loader_ column, where you will find additional information and diagrams.
+
+:::
+
 ## Data warehouse loaders
 
 :::note Cloud
@@ -23,12 +33,13 @@ The cloud selection is for where your Snowplow pipeline runs. The warehouse itse
 <Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
 
-| Destination                                    | Type                                         | Loader application                                                                                            | Status                             |
-| ---------------------------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
-| Redshift<br/>_(including Redshift serverless)_ | Batching (recommended)<br/>or micro-batching | [RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md)                        | Production-ready                   |
-| BigQuery                                       | Streaming                                    | [BigQuery Loader](/docs/api-reference/loaders-storage-targets/bigquery-loader/index.md)                       | Production-ready                   |
-| Snowflake                                      | Streaming                                    | [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md) | Production-ready                      |
-| Databricks                                     | Batching (recommended)<br/>or micro-batching | [Snowplow RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md)               | Production-ready                   |
+| Destination                                    | Type                                         | Loader application                                                                                              | Status                             |
+| ---------------------------------------------- | -------------------------------------------- | --------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
+| Redshift<br/>_(including Redshift serverless)_ | Batching (recommended)<br/>or micro-batching | [RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md)                          | Production-ready                   |
+| BigQuery                                       | Streaming                                    | [BigQuery Loader](/docs/api-reference/loaders-storage-targets/bigquery-loader/index.md)                         | Production-ready                   |
+| Snowflake                                      | Streaming                                    | [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md)   | Production-ready                   |
+| Databricks                                     | Batching (recommended)<br/>or micro-batching | [Snowplow RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md)                 | Production-ready                   |
+| Databricks                                     | Streaming                                    | [Databricks Streaming Loader](/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/index.md) | Early release                      |
 
   </TabItem>
   <TabItem value="gcp" label="GCP">
@@ -36,18 +47,20 @@ The cloud selection is for where your Snowplow pipeline runs. The warehouse itse
 | Destination | Type           | Loader application                                                                                            | Status                             |
 | ----------- | -------------- | ------------------------------------------------------------------------------------------------------------- | ---------------------------------- |
 | BigQuery    | Streaming      | [BigQuery Loader](/docs/api-reference/loaders-storage-targets/bigquery-loader/index.md)                       | Production-ready                   |
-| Snowflake   | Streaming      | [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md) | Production-ready                      |
-| Databricks        | Micro-batching<br/>_(via a [data lake](#data-lake-loaders))_ | [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                               | Production-ready    |
+| Snowflake   | Streaming      | [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md) | Production-ready                   |
+| Databricks  | Micro-batching<br/>_(via a [data lake](#data-lake-loaders))_ | [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md) | Production-ready   |
+| Databricks  | Streaming      | [Databricks Streaming Loader](/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/index.md) | Early release                    |
 
   </TabItem>
     <TabItem value="azure" label="Azure">
 
-| Destination       | Type                                                         | Loader application                                                                                            | Status           |
-| ----------------- | ------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- | ---------------- |
-| BigQuery          | Streaming                                                    | [BigQuery Loader](/docs/api-reference/loaders-storage-targets/bigquery-loader/index.md)                       | Production-ready |
-| Snowflake         | Streaming                                                    | [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md) | Production-ready    |
-| Databricks        | Micro-batching<br/>_(via a [data lake](#data-lake-loaders))_ | [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                               | Production-ready    |
-| Synapse Analytics | Micro-batching<br/>_(via a [data lake](#data-lake-loaders))_ | [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                               | Production-ready    |
+| Destination       | Type                                                         | Loader application                                                                                              | Status           |
+| ----------------- | ------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------- | ---------------- |
+| BigQuery          | Streaming                                                    | [BigQuery Loader](/docs/api-reference/loaders-storage-targets/bigquery-loader/index.md)                         | Production-ready |
+| Snowflake         | Streaming                                                    | [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md)   | Production-ready |
+| Databricks        | Micro-batching<br/>_(via a [data lake](#data-lake-loaders))_ | [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                                 | Production-ready |
+| Databricks        | Streaming                                                    | [Databricks Streaming Loader](/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/index.md) | Early release    |
+| Synapse Analytics | Micro-batching<br/>_(via a [data lake](#data-lake-loaders))_ | [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                                 | Production-ready |
 
   </TabItem>
 </Tabs>

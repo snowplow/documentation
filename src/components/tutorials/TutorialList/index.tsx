@@ -8,23 +8,74 @@ import {
   Box,
   Grid,
   InputAdornment,
-  MenuItem,
   useMediaQuery,
   useTheme,
 } from '@mui/material'
 
-import { getMetaData, getSteps } from '../utils'
+import { getSteps } from '../utils'
 import {
   SearchBarFormControl,
   SearchBarInput,
   SnowplowPurpleSearchIcon,
-  TopicFilterFormControl,
-  TopicFilterSelect,
   TutorialCardTitle,
   Grid as TutorialGrid,
+  TopicFilterSidebar,
 } from './styledComponents'
-import { Meta, Topic as TopicType, Tutorial } from '../models'
+import { Meta, Tutorial } from '../models'
 import { Card, Description, StartButton, Topic } from './styledComponents'
+import {
+  useTutorialFilters,
+  UseCaseFilter,
+  TopicFilter,
+  TechnologyFilter,
+  SnowplowTechFilter,
+} from './filters'
+
+function getParsedTutorials(tutorials: Meta[]): Tutorial[] {
+  return Object.values(tutorials).map((metaJson) => {
+    const meta = Meta.parse(metaJson)
+    const steps = getSteps(meta.id)
+    const tutorial = { meta, steps }
+    const parsedTutorials = Tutorial.parse(tutorial)
+
+    // Ensure no duplicate positions
+    const duplicates = new Set<number>()
+    for (const step of parsedTutorials.steps) {
+      if (duplicates.has(step.position)) {
+        throw new Error(
+          `Duplicate step position ${step.position} in tutorial "${parsedTutorials.meta.id}"` +
+            `\nCheck steps: \n${parsedTutorials.steps
+              .filter((s) => s.position === step.position)
+              .map((s) => s.path)
+              .join('\n')}\n`
+        )
+      }
+      duplicates.add(step.position)
+    }
+
+    return parsedTutorials
+  })
+}
+
+const SearchBar: FC<{
+  setSearch: React.Dispatch<React.SetStateAction<string>>
+}> = ({ setSearch }) => {
+  return (
+    <Grid item>
+      <SearchBarFormControl variant="outlined">
+        <SearchBarInput
+          startAdornment={
+            <InputAdornment position="start">
+              <SnowplowPurpleSearchIcon />
+            </InputAdornment>
+          }
+          onChange={(e) => setSearch(e.target.value)}
+          placeholder="Search by tutorial name"
+        />
+      </SearchBarFormControl>
+    </Grid>
+  )
+}
 
 function getFirstStepPath(meta: Meta): string | null {
   const steps = getSteps(meta.id)
@@ -62,7 +113,12 @@ const TutorialCard: FC<{ tutorial: Tutorial }> = ({ tutorial }) => {
             )}
           </Grid>
           <Grid item>
-            <Topic label={tutorial.meta.label} sx={{ mb: 2 }}></Topic>
+            <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
+              {tutorial.meta.useCases.length > 0 && (
+                <Topic label={tutorial.meta.useCases[0]}></Topic>
+              )}
+              <Topic label={tutorial.meta.label}></Topic>
+            </Box>
           </Grid>
           <Grid item>
             <Description>{tutorial.meta.description}</Description>
@@ -85,200 +141,119 @@ const TutorialCard: FC<{ tutorial: Tutorial }> = ({ tutorial }) => {
   )
 }
 
-function searchFilter(term: string, tutorial?: Tutorial): boolean {
-  return tutorial
-    ? tutorial?.meta.title.toLowerCase().includes(term.toLowerCase()) ||
-        tutorial?.meta.description.toLowerCase().includes(term.toLowerCase())
-    : false
-}
+// Shared filter and tutorial content hook
+const useTutorialContent = () => {
+  const {
+    setSearch,
+    selectedTopics,
+    setSelectedTopics,
+    selectedUseCases,
+    setSelectedUseCases,
+    allAvailableUseCases,
+    selectedTechnologies,
+    setSelectedTechnologies,
+    allAvailableTechnologies,
+    selectedSnowplowTech,
+    setSelectedSnowplowTech,
+    allAvailableSnowplowTech,
+    filteredAvailableOptions,
+    filteredTutorials,
+  } = useTutorialFilters(getParsedTutorials)
 
-function topicFilter(topic: TopicDropdown, tutorial?: Tutorial): boolean {
-  if (!tutorial) return false
-  if (topic === 'All topics') return true
-  return tutorial ? tutorial?.meta.label === topic : false
-}
-
-type TopicDropdown = keyof typeof TopicType.Values | 'All topics'
-const TopicDropdownValues: TopicDropdown[] = [
-  'All topics',
-  ...Object.values(TopicType.Values),
-]
-
-function getParsedTutorials(tutorials: Meta[]): Tutorial[] {
-  return Object.values(tutorials).map((metaJson) => {
-    const meta = Meta.parse(metaJson)
-    const steps = getSteps(meta.id)
-    const tutorial = { meta, steps }
-    const parsedTutorials = Tutorial.parse(tutorial)
-
-    // Ensure no duplicate positions
-    const duplicates = new Set<number>()
-    for (const step of parsedTutorials.steps) {
-      if (duplicates.has(step.position)) {
-        throw new Error(
-          `Duplicate step position ${step.position} in tutorial "${parsedTutorials.meta.id}"` +
-            `\nCheck steps: \n${parsedTutorials.steps
-              .filter((s) => s.position === step.position)
-              .map((s) => s.path)
-              .join('\n')}\n`
-        )
-      }
-      duplicates.add(step.position)
-    }
-
-    return parsedTutorials
-  })
+  return {
+    filters: (
+      <>
+        <SearchBar setSearch={setSearch} />
+        <UseCaseFilter
+          selectedUseCases={selectedUseCases}
+          setSelectedUseCases={setSelectedUseCases}
+          allAvailableUseCases={allAvailableUseCases}
+          availableUseCases={filteredAvailableOptions.availableUseCases}
+        />
+        <TopicFilter
+          selectedTopics={selectedTopics}
+          setSelectedTopics={setSelectedTopics}
+          availableTopics={filteredAvailableOptions.availableTopics}
+        />
+        <TechnologyFilter
+          selectedTechnologies={selectedTechnologies}
+          setSelectedTechnologies={setSelectedTechnologies}
+          allAvailableTechnologies={allAvailableTechnologies}
+          availableTechnologies={filteredAvailableOptions.availableTechnologies}
+        />
+        <SnowplowTechFilter
+          selectedSnowplowTech={selectedSnowplowTech}
+          setSelectedSnowplowTech={setSelectedSnowplowTech}
+          allAvailableSnowplowTech={allAvailableSnowplowTech}
+          availableSnowplowTech={filteredAvailableOptions.availableSnowplowTech}
+        />
+      </>
+    ),
+    tutorials: filteredTutorials.map((tutorial: Tutorial) => (
+      <Grid item key={tutorial.meta.id}>
+        <TutorialCard tutorial={tutorial} />
+      </Grid>
+    )),
+  }
 }
 
 const TutorialList: FC = () => {
   const theme = useTheme()
   const isMobile = useMediaQuery(theme.breakpoints.down('md'))
-
-  const [search, setSearch] = useState('')
-  const [topic, setTopic] = useState<TopicDropdown>('All topics')
-  const parsedTutorials = useMemo<Tutorial[]>(
-    () => getParsedTutorials(getMetaData()),
-    []
-  )
-  const tutorials = useMemo<Tutorial[]>(
-    () => filterTutorials(search, topic, parsedTutorials),
-    [search, topic, parsedTutorials]
-  )
+  const content = useTutorialContent()
 
   return (
     <>
       <Head>
         <title>Tutorials | Snowplow Documentation</title>
-      </Head>{' '}
+      </Head>
       {isMobile ? (
-        <MobileTutorialList
-          setSearch={setSearch}
-          topic={topic}
-          setTopic={setTopic}
-          tutorials={tutorials}
+        <MobileTutorialLayout
+          filters={content.filters}
+          tutorials={content.tutorials}
         />
       ) : (
-        <DesktopTutorialList
-          setSearch={setSearch}
-          topic={topic}
-          setTopic={setTopic}
-          tutorials={tutorials}
+        <DesktopTutorialLayout
+          filters={content.filters}
+          tutorials={content.tutorials}
         />
       )}
     </>
   )
 }
 
-function filterTutorials(
-  search: string,
-  topic: TopicDropdown,
-  tutorials: Tutorial[]
-): Tutorial[] {
-  return tutorials
-    .filter((tutorial) => searchFilter(search, tutorial))
-    .filter((tutorial) => topicFilter(topic, tutorial))
-}
-
-const IntroductionText: FC = () => {
-  return (
-    <div>
-      <p>
-        Solution accelerators are advanced tutorials that guide you through use
-        cases combining Snowplow with other tools.
-      </p>
-    </div>
-  )
-}
-
-const MobileTutorialList: FC<{
-  setSearch: React.Dispatch<React.SetStateAction<string>>
-  topic: TopicDropdown
-  setTopic: React.Dispatch<React.SetStateAction<TopicDropdown>>
-  tutorials: Tutorial[]
-}> = ({ setSearch, topic, setTopic, tutorials }) => {
+const MobileTutorialLayout: FC<{
+  filters: React.ReactNode
+  tutorials: React.ReactNode[]
+}> = ({ filters, tutorials }) => {
   return (
     <Box sx={{ mt: 1 }}>
       <Grid container direction="column" rowSpacing={2}>
-        <SearchBar setSearch={setSearch} />
-        <TopicFilter topic={topic} setTopic={setTopic} />
-
-        <IntroductionText />
-
-        {tutorials.map((tutorial: Tutorial) => (
-          <Grid item key={tutorial.meta.id}>
-            <TutorialCard tutorial={tutorial} />
-          </Grid>
-        ))}
+        {filters}
+        {tutorials}
       </Grid>
     </Box>
   )
 }
 
-const DesktopTutorialList: FC<{
-  setSearch: React.Dispatch<React.SetStateAction<string>>
-  topic: TopicDropdown
-  setTopic: React.Dispatch<React.SetStateAction<TopicDropdown>>
-  tutorials: Tutorial[]
-}> = ({ setSearch, topic, setTopic, tutorials }) => {
+const DesktopTutorialLayout: FC<{
+  filters: React.ReactNode
+  tutorials: React.ReactNode[]
+}> = ({ filters, tutorials }) => {
   return (
     <Box marginX={8} marginY={3} sx={{ minWidth: '90vw', mr: 0 }}>
-      <Grid container columnSpacing={2}>
-        <SearchBar setSearch={setSearch} />
-        <TopicFilter topic={topic} setTopic={setTopic} />
+      <Grid container columnSpacing={4}>
+        {/* Left sidebar with filters */}
+        <Grid item xs={3}>
+          <TopicFilterSidebar>{filters}</TopicFilterSidebar>
+        </Grid>
+
+        {/* Main content area */}
+        <Grid item xs={9}>
+          <TutorialGrid mb={2}>{tutorials}</TutorialGrid>
+        </Grid>
       </Grid>
-
-      <IntroductionText />
-
-      <TutorialGrid mb={2}>
-        {tutorials.map((tutorial: Tutorial) => (
-          <Grid item key={tutorial.meta.id}>
-            <TutorialCard tutorial={tutorial} />
-          </Grid>
-        ))}
-      </TutorialGrid>
     </Box>
-  )
-}
-
-const SearchBar: FC<{
-  setSearch: React.Dispatch<React.SetStateAction<string>>
-}> = ({ setSearch }) => {
-  return (
-    <Grid item>
-      <SearchBarFormControl variant="outlined">
-        <SearchBarInput
-          startAdornment={
-            <InputAdornment position="start">
-              <SnowplowPurpleSearchIcon />
-            </InputAdornment>
-          }
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search by name of the tutorial or guide..."
-        />
-      </SearchBarFormControl>
-    </Grid>
-  )
-}
-
-const TopicFilter: FC<{
-  topic: TopicDropdown
-  setTopic: React.Dispatch<React.SetStateAction<TopicDropdown>>
-}> = ({ topic, setTopic }) => {
-  return (
-    <Grid item>
-      <TopicFilterFormControl variant="outlined">
-        <TopicFilterSelect
-          value={topic}
-          onChange={(e) => setTopic(e.target.value as TopicDropdown)}
-        >
-          {TopicDropdownValues.map((topic) => (
-            <MenuItem key={topic} value={topic}>
-              {topic}
-            </MenuItem>
-          ))}
-        </TopicFilterSelect>
-      </TopicFilterFormControl>
-    </Grid>
   )
 }
 

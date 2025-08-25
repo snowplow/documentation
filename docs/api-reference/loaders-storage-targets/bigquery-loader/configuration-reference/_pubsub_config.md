@@ -8,12 +8,12 @@
 </tr>
 <tr>
     <td><code>input.durationPerAckExtension</code></td>
-    <td>Optional. Default value <code>60 seconds</code>. Pubsub ack deadlines are extended for this duration when needed.</td>
+    <td>Optional. Default value <code>60 seconds</code>. Pub/Sub ack deadlines are extended for this duration when needed.</td>
 </tr>
 <tr>
     <td><code>input.minRemainingAckDeadline</code></td>
     <td>
-      Optional. Default value 0.1.
+      Optional. Default value <code>0.1</code>.
       Controls when ack deadlines are re-extended, for a message that is close to exceeding its ack deadline.
       For example, if <code>durationPerAckExtension</code> is <code>60 seconds</code> and <code>minRemainingAckDeadline</code> is <code>0.1</code> then the loader
       will wait until there is <code>6 seconds</code> left of the remining deadline, before re-extending the message deadline.

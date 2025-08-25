@@ -14,6 +14,14 @@ import DeployOverview from '@site/docs/api-reference/loaders-storage-targets/dat
 
 ## Overview
 
+:::info Early release
+
+This is an early release. It relies on Databricks features that are in preview as of August 2025, e.g. [File Events](https://docs.databricks.com/aws/en/ingestion/cloud-object-storage/auto-loader/file-notification-mode#file-events).
+
+Also, you will need a premium Databricks plan to use Lakeflow Declarative Pipelines.
+
+:::
+
 <Tabs groupId="cloud" queryString lazy>
   <TabItem value="aws" label="AWS" default>
     <LoaderDiagram stream="Kinesis" cloud="AWS"/>
@@ -45,21 +53,21 @@ The simplest possible config file just needs a description of your pipeline inpu
   <TabItem value="aws" label="AWS" default>
 
 ```json reference
-https://github.com/snowplow-incubator/databricks-loader/blob/main/config/config.kinesis.minimal.hocon
+https://github.com/snowplow-incubator/databricks-loader/blob/develop/config/config.kinesis.minimal.hocon
 ```
 
   </TabItem>
   <TabItem value="gcp" label="GCP">
 
 ```json reference
-https://github.com/snowplow-incubator/databricks-loader/blob/main/config/config.pubsub.minimal.hocon
+https://github.com/snowplow-incubator/databricks-loader/blob/develop/config/config.pubsub.minimal.hocon
 ```
 
   </TabItem>
   <TabItem value="azure" label="Azure">
 
 ```json reference
-https://github.com/snowplow-incubator/databricks-loader/blob/main/config/config.kafka.minimal.hocon
+https://github.com/snowplow-incubator/databricks-loader/blob/develop/config/config.azure.minimal.hocon
 ```
 
   </TabItem>

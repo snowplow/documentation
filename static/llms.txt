@@ -46,7 +46,7 @@ Pipeline
 Pipeline overview and components - https://docs.snowplow.io/docs/pipeline/
 Collectors - https://docs.snowplow.io/docs/pipeline/collector/
 Enrichment and validation - https://docs.snowplow.io/docs/pipeline/enrichments/
-Loaders and orchestration - https://docs.snowplow.io/docs/destinations/warehouses-lakes/loading-process/
+Loaders and orchestration - https://docs.snowplow.io/docs/destinations/warehouses-lakes/
 Local validation with Snowplow Micro - https://docs.snowplow.io/docs/api-reference/snowplow-micro/
 
 Destinations

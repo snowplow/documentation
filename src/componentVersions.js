@@ -38,6 +38,7 @@ export const versions = {
   s3Loader22x: '2.2.9',
   lakeLoader: '0.6.3',
   snowflakeStreamingLoader: '0.5.1',
+  databricksStreamingLoader: '0.1.0',
 
   // Data Modelling
   // dbt

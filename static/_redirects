@@ -400,3 +400,6 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/sources/webhooks/unbounce/* /docs/sources/webhooks/:splat 301
 /docs/sources/webhooks/urban-airship-connect/* /docs/sources/webhooks/:splat 301
 /docs/sources/webhooks/vero/* /docs/sources/webhooks/:splat 301
+
+# Removing loading-process in favor of individual loader reference pages
+/docs/destinations/warehouses-lakes/loading-process/* /docs/destinations/warehouses-lakes/ 301

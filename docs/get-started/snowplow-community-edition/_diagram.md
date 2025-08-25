@@ -58,6 +58,6 @@ flowchart LR
 <>{props.warehouse != 'Postgres' && props.warehouse != 'Data Lake' && (<>
   <h4>{props.warehouse} Loader</h4>
   <ReactMarkdown children={`
-For more information about the ${props.warehouse} Loader, see the [documentation on the loading process](/docs/destinations/warehouses-lakes/loading-process/index.md?warehouse=${props.warehouse.toLowerCase()}&cloud=${props.cloud == 'aws' ? 'aws-micro-batching' : props.cloud}).
+For more information about the ${props.warehouse} Loader, see the [documentation on the available destinations](/docs/destinations/warehouses-lakes/index.md?cloud=${props.cloud}).
   `}/>
 </>)}</>

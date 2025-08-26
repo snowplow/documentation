@@ -1,5 +1,6 @@
 ---
 title: "Analytics SDK - Scala"
+description: "Scala Analytics SDK for processing Snowplow enriched events in Apache Spark, Apache Flink, AWS Lambda, and JVM-compatible data processing frameworks."
 date: "2020-11-02"
 sidebar_position: 100
 ---

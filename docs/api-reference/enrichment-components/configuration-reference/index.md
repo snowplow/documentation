@@ -1,5 +1,6 @@
 ---
 title: "Configuration"
+description: "Configuration reference for Snowplow Enrich applications including common parameters, platform-specific settings, and enrichment validation options."
 date: "2021-08-14"
 sidebar_position: 50
 ---

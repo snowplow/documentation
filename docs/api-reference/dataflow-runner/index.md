@@ -1,5 +1,6 @@
 ---
 title: "Dataflow Runner"
+description: "System for creating and running AWS EMR jobflow clusters and steps using templated playbooks for Spark, Hadoop, and distributed data processing workflows."
 date: "2020-03-02"
 sidebar_position: 100
 ---

@@ -1,5 +1,6 @@
 ---
 title: "Enrich Pubsub (GCP)"
+description: "Standalone JVM application for reading collector payloads from Google Cloud PubSub topics and writing enriched events back to PubSub for GCP deployments."
 date: "2020-10-22"
 sidebar_position: 20
 ---

@@ -1,5 +1,6 @@
 ---
 title: "Failed event types"
+description: "Comprehensive guide to Snowplow failed event types including schema violations, enrichment failures, and pipeline processing errors."
 sidebar_position: 15
 ---
 

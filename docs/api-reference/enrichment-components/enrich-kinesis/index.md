@@ -1,5 +1,6 @@
 ---
 title: "Enrich Kinesis (AWS)"
+description: "Standalone JVM application for reading collector payloads from AWS Kinesis streams and writing enriched events back to Kinesis."
 date: "2020-10-22"
 sidebar_position: 10
 ---

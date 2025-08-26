@@ -119,7 +119,7 @@ The following are our recommendations, but in general, it's more important to be
 
 * Use snake case for both the schema and properties. This will ensure that the names are consistent with how the properties end up in the warehouse (for some warehouses, property names are converted to snake case regardless of how they are defined in the schemas). Avoid using hyphens to separate words, instead use underscores.
 * Use the verb – noun convention for event names. For instance, `add_to_cart`, `play_video`.
-* Be consistent about the tense (present or past). Make sure that all your events use the same tense (e.g., `play` and `pause` instead of `played` and `paused`).
+* Be consistent about the tense (present or past) for event and property names. For example, `play` and `pause` events, instead of `played` (past tense) and `pause` (present tense).
 * Use singular in the entity name (e.g., `product` instead of `products`).
 * Prefer not to use nested objects in the JSON schema as this will make it more difficult to work with the data in Redshift.
 

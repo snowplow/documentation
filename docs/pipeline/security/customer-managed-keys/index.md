@@ -59,7 +59,7 @@ The "Other AWS Accounts" step is essential. Without adding the Snowplow pipeline
 The key creation process will generate a policy similar to the one below. We strongly recommend allowing root access for the Snowplow pipeline account:
 
 <details>
-  <summary>IAM Policy</summary>
+
 ```json
 {
   "Id": "key-consolepolicy-3",
@@ -176,6 +176,7 @@ If your security policies don't allow root access (`arn:aws:iam::<account_id>:ro
 ```
 
 </details>
+
 Using non-root policies requires coordination with Snowplow support to ensure all necessary roles are included. We strongly recommend the root access approach for simplicity.
 
 ## Step 3: Share key information with Snowplow

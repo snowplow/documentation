@@ -42,15 +42,13 @@ These instructions are also provided as part of the setup flow in Snowplow BDP C
 
 1. Access the IAM control panel within the sub-account
 2. Go to Access management > Roles and select Create role
-3. Select "Another AWS account"
-    (Account ID: 793733611312 Require MFA: true)
+3. Select "Another AWS account" (Account ID: 793733611312 Require MFA: false). We use Okta to assume roles, which uses delegated MFA and not direct MFA authentication to AWS 
 4. Select the policy you created earlier
 5. Call the role "SnowplowAdmin" (please use this specific name)
 
 You will need to share this role with us as part of filling out the setup form in Snowplow BDP Console.
 
 ### JSON Policy Document
-
 
 ```json
 {
@@ -140,7 +138,7 @@ The last step is to set up the Snowplow deployment role. This is a role assumed 
 2. Select Create role and for trusted entity type select AWS account.
 - Account ID: 793733611312
 - Do not select Require MFA as Snowplow needs to be able to assume the role via headless jobs
-- If setting this up via IAM, do not add `"aws:MultiFactorAuthPresent": "false"` condition, as this will prevent the role being assumed by Snowplow SRE staff as part of investigations
+- If setting this up via IAM, do not add `"aws:MultiFactorAuthPresent": "false"` condition, as this will prevent the role being assumed by Snowplow SRE staff. We use Okta to assume roles, which uses delegated MFA and not direct MFA authentication to AWS
 3. Attach the `IAMFullAccess` policy. If a Permission Boundary was set on the admin role, then add this boundary to the bottom section of permissions page.
 - Role name: SnowplowDeployment (please use this specific name)
 - Role description: Allows the Snowplow Team to programmatically deploy to this account.

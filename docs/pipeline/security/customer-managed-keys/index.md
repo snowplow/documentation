@@ -24,10 +24,10 @@ To use custom KMS keys, you will need:
 - AWS account with appropriate permissions to create and manage KMS keys
 - Access to your AWS Console in the same region as your Snowplow pipeline
 - Snowplow pipeline account ID (provided by your Customer Success Manager)
-- Security team approval for cross-account key sharing
+- Your security team approval for cross-account key sharing
 
 This feature has some limitations:
-- EMR shredder: if you're using the legacy EMR shredder process, it may not fully respect custom KMS keys for all output. This system is being deprecated.
+- EMR cluster: if you're using the legacy RDB Transformer process, it will need additional permissions adding (`kms:Decrypt`, `kms:GenerateDataKey*`) to enable access to customer S3 buckets with customer-managed KMS keys.
 - Single key recommendation: while it's technically possible to use different keys for different services, we recommend using a single key for all pipeline resources for simplicity.
 - Regional restrictions: keys must be created in the same region as your pipeline infrastructure.
 
@@ -195,18 +195,16 @@ Share this information with your Snowplow Customer Success Manager or through a 
 Once you've shared the key information, Snowplow will configure the following pipeline components to use your custom KMS key.
 
 All **pipeline S3 buckets** will be configured with your custom KMS key:
-- Batch archive bucket
-- Batch output bucket
+- Batch archive bucket (used in RDB Transformer process)
+- Batch output bucket (used in RDB Transformer process)
 - Batch processing bucket
-- Kinesis S3 bad events bucket
-- Kinesis S3 enriched events bucket
-- Kinesis S3 raw events bucket
+- S3 bad events bucket
+- S3 enriched events bucket
 
 Pipeline **Kinesis streams** will be encrypted with your key:
 - Good events stream
 - Bad events stream
 - Enriched events stream
-- PII events stream
 - Incomplete events stream
 
 If surge protection is enabled, **SQS queues** will use your custom key:

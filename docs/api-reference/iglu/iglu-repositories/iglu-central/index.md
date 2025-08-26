@@ -1,5 +1,6 @@
 ---
 title: "Iglu Central"
+description: "Public machine-readable JSON Schema repository hosted by Snowplow Analytics as a static Iglu registry on Amazon S3."
 date: "2021-03-26"
 sidebar_position: 1000
 ---

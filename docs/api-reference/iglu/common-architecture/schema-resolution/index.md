@@ -1,5 +1,6 @@
 ---
 title: "Schema Resolution"
+description: "Standard schema resolution algorithm for Iglu clients covering lookup procedures, registry prioritization, and caching mechanisms."
 date: "2021-03-26"
 sidebar_position: 400
 ---

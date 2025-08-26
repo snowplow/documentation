@@ -1,5 +1,6 @@
 ---
 title: "Iglu Common Architecture"
+description: "Technical design documentation for Iglu's common architecture including self-describing JSON schemas, SchemaVer, and schema resolution algorithms."
 date: "2021-03-26"
 sidebar_position: 0
 ---

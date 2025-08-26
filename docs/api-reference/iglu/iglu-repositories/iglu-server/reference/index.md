@@ -1,5 +1,6 @@
 ---
 title: "Iglu Server configuration reference"
+description: "Complete configuration reference for Iglu Server including database settings, API endpoints, webhooks, and advanced thread pool options."
 date: "2021-08-03"
 sidebar_position: 0
 ---

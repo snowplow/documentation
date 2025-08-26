@@ -1,5 +1,6 @@
 ---
 title: "ObjC client"
+description: "Iglu Objective-C client library for resolving JSON schemas from embedded and remote repositories in macOS and iOS applications."
 date: "2021-03-26"
 sidebar_position: 30
 ---

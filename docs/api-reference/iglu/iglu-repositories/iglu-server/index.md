@@ -1,5 +1,6 @@
 ---
 title: "Iglu Server"
+description: "RESTful Iglu schema registry server with HTTP API for publishing, validating, and serving schemas with authentication and draft schema support."
 date: "2021-03-26"
 sidebar_position: 2000
 ---

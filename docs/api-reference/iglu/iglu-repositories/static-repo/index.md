@@ -1,5 +1,6 @@
 ---
 title: "Static repo"
+description: "Static Iglu repository server structured as a website hosting JSON schemas via HTTP using Amazon S3 or other web servers."
 date: "2021-03-26"
 sidebar_position: 4000
 ---

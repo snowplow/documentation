@@ -1,5 +1,6 @@
 ---
 title: "Setup Iglu Server"
+description: "Installation and setup guide for Iglu Server including Docker deployment, database initialization, and API key generation."
 date: "2021-03-26"
 sidebar_position: 1000
 ---

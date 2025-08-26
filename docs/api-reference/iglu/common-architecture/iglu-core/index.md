@@ -1,5 +1,6 @@
 ---
 title: "Iglu Core"
+description: "Core Iglu data structures and functions including SchemaKey, SchemaVer, and SchemaCriterion for cross-language schema registry implementations."
 date: "2021-03-26"
 sidebar_position: 120
 ---

@@ -1,5 +1,6 @@
 ---
 title: "Iglu Clients"
+description: "Iglu client libraries for interacting with schema repositories and resolving schemas from embedded and remote Iglu registries."
 date: "2021-03-26"
 sidebar_position: 40
 ---

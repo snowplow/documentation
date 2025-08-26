@@ -1,5 +1,6 @@
 ---
 title: "Self-describing JSON Schemas"
+description: "Self-describing JSON Schema extensions with vendor, name, format, and version metadata for semantic identification and versioning."
 date: "2021-03-26"
 sidebar_position: 30
 ---

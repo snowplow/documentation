@@ -1,5 +1,6 @@
 ---
 title: "JVM Embedded Repo"
+description: "Embedded Iglu repository stored within Java or Scala applications for bundling schemas in the application resources folder."
 date: "2021-03-26"
 sidebar_position: 5000
 ---

@@ -1,5 +1,6 @@
 ---
 title: "Self describing JSONs"
+description: "Standardized JSON format that co-locates schema references with instance data using Iglu URI notation for self-describing behavioral events."
 date: "2021-03-26"
 sidebar_position: 50
 ---

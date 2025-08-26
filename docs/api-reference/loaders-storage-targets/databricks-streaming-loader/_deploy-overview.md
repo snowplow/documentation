@@ -20,4 +20,4 @@ To run the loader, mount your config file into the docker image, and then provid
   --config=/myconfig/loader.hocon
 `}</CodeBlock>
 
-Where `loader.hocon` is loader's [configuration file](/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/index.md#configuring-the-loader) and `iglu.hocon` is [iglu resolver](/docs/api-reference/iglu/iglu-resolver/index.md) configuration.
+Where `loader.hocon` is the loader's [configuration file](/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/index.md#configuring-the-loader) and `iglu.hocon` is the [iglu resolver](/docs/api-reference/iglu/iglu-resolver/index.md) configuration.

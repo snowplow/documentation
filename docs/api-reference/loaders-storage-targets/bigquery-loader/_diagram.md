@@ -2,7 +2,7 @@
 import Mermaid from '@theme/Mermaid';
 import Link from '@docusaurus/Link';
 ```
-<p>The BigQuery Streaming Loader on {props.cloud} is a fully streaming application that continually pulls events from {props.stream} and writes to BigQuery using the <Link to="https://cloud.google.com/bigquery/docs/write-api">BigQuery Storage API</Link>.</p>
+<p>On {props.cloud}, the BigQuery Streaming Loader continually pulls events from {props.stream} and writes to BigQuery using the <Link to="https://cloud.google.com/bigquery/docs/write-api">BigQuery Storage API</Link>.</p>
 
 <Mermaid value={`
 flowchart LR

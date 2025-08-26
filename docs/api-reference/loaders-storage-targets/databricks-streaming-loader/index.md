@@ -12,8 +12,6 @@ import LoaderDiagram from '@site/docs/api-reference/loaders-storage-targets/data
 import DeployOverview from '@site/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/_deploy-overview.md';
 ```
 
-## Overview
-
 :::info Early release
 
 This is an early release. It relies on Databricks features that are in preview as of August 2025, e.g. [File Events](https://docs.databricks.com/aws/en/ingestion/cloud-object-storage/auto-loader/file-notification-mode#file-events).
@@ -21,6 +19,8 @@ This is an early release. It relies on Databricks features that are in preview a
 Also, you will need a premium Databricks plan to use Lakeflow Declarative Pipelines.
 
 :::
+
+The Databricks Streaming Loader is an application that integrates with a Databricks [Lakeflow Declarative Pipeline](https://docs.databricks.com/aws/en/dlt/) to load Snowplow events into Databricks with low latency.
 
 <Tabs groupId="cloud" queryString lazy>
   <TabItem value="aws" label="AWS" default>

@@ -13,9 +13,7 @@ import DeployOverview from '@site/docs/api-reference/loaders-storage-targets/sno
 import StreamingVsRDB from '@site/docs/api-reference/loaders-storage-targets/_snowflake-streaming-vs-rdb.md';
 ```
 
-## Overview
-
-The Snowflake Streaming Loader is an application that loads Snowplow events to Snowflake using the [Snowpipe Streaming API](https://docs.snowflake.com/en/user-guide/data-load-snowpipe-streaming-overview).
+The Snowflake Streaming Loader is an application that loads Snowplow events to Snowflake.
 
 <StreamingVsRDB/>
 

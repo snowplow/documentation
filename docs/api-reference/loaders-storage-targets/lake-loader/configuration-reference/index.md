@@ -1,5 +1,6 @@
 ---
 title: "Lake Loader configuration reference"
+description: "Configuration reference for Lake Loader supporting Delta Lake and Iceberg table formats with stream configurations for AWS Kinesis, GCP Pub/Sub, and Azure Kafka."
 sidebar_label: "Configuration reference"
 sidebar_position: 1
 ---

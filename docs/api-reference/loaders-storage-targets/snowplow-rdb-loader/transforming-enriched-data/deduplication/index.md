@@ -1,5 +1,6 @@
 ---
 title: "Deduplication"
+description: "Event deduplication strategies for Spark transformer including in-batch and cross-batch natural and synthetic deduplication using DynamoDB for duplicate storage."
 date: "2022-04-04"
 sidebar_position: 30
 ---

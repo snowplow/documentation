@@ -1,5 +1,6 @@
 ---
 title: "S3 loader configuration reference"
+description: "Complete configuration reference for S3 Loader including stream settings, output options, monitoring, and partitioning for AWS Kinesis to S3 data loading."
 date: "2021-10-04"
 sidebar_position: 50
 ---

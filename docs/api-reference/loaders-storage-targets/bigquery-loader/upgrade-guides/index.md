@@ -1,5 +1,6 @@
 ---
 title: "Upgrade guides"
+description: "Upgrade guides and migration instructions for BigQuery Loader versions with breaking changes and configuration updates."
 sidebar_position: 40
 ---
 

@@ -1,5 +1,6 @@
 ---
 title: "Configuration reference"
+description: "Complete configuration reference for BigQuery Loader 1.x with required options, monitoring settings, advanced parameters, and config parser hints."
 date: "2021-10-07"
 sidebar_position: 0
 ---

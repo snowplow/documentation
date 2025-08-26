@@ -1,5 +1,6 @@
 ---
 title: "Postgres Loader Configuration Reference"
+description: "Complete configuration reference for Postgres Loader with input sources, output destinations, connection settings, and advanced options for PostgreSQL data loading."
 date: "2021-07-07"
 sidebar_position: 0
 ---

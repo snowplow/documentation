@@ -1,5 +1,6 @@
 ---
 title: "R35 Upgrade Guide"
+description: "Migration guide for upgrading RDB Loader to R35 with major architecture changes including EmrEtlRunner deprecation, standalone Loader, and SQS integration."
 date: "2021-01-27"
 sidebar_position: 300
 ---

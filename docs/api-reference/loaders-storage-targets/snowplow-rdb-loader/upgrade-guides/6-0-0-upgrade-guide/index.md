@@ -1,5 +1,6 @@
 ---
 title: "6.0.0 upgrade guide"
+description: "Migration guide for upgrading RDB Loader to 6.0.0 with enhanced schema evolution support, recovery tables for Redshift, and improved migration mechanisms."
 sidebar_position: -20
 ---
 

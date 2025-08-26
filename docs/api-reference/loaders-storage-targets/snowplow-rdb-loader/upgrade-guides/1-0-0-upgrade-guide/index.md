@@ -1,5 +1,6 @@
 ---
 title: "1.0.0 Upgrade Guide"
+description: "Migration guide for upgrading RDB Loader to 1.0.0 with new Stream Shredder, manifest table changes, configuration updates, and directory structure modifications."
 date: "2021-04-14"
 sidebar_position: 200
 ---

@@ -1,5 +1,6 @@
 ---
 title: "BigQuery Loader configuration reference"
+description: "Complete configuration reference for BigQuery Loader including BigQuery settings, stream configurations for AWS Kinesis, GCP Pub/Sub, and Azure Kafka, plus common options."
 sidebar_label: "Configuration reference"
 sidebar_position: 1
 ---

@@ -1,5 +1,6 @@
 ---
 title: "Transformer Kafka"
+description: "Stream transformer for Azure environments that reads enriched Snowplow events from Kafka streams and transforms them for warehouse loading without Spark dependencies."
 sidebar_position: 30
 ---
 

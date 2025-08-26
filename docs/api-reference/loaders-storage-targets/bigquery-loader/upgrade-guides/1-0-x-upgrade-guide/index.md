@@ -1,5 +1,6 @@
 ---
 title: "1.0.x upgrade guide"
+description: "Migration guide for upgrading BigQuery Loader from 0.6.x to 1.0.x covering configuration changes, new HOCON format, and StreamLoader introduction."
 date: "2021-10-07"
 sidebar_position: 0
 ---

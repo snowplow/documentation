@@ -1,5 +1,6 @@
 ---
 title: "Spark transformer"
+description: "Batch transformation of enriched Snowplow data using Spark on EMR with deduplication support for shredded and wide row format output for data warehouses."
 date: "2022-04-04"
 sidebar_position: 10
 ---

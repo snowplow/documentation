@@ -1,5 +1,6 @@
 ---
 title: "2.0.0 upgrade guide"
+description: "Migration guide for upgrading BigQuery Loader from 1.x to 2.0.0 covering configuration changes, simplified infrastructure, and new column naming strategy."
 sidebar_position: -20
 ---
 

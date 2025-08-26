@@ -1,5 +1,6 @@
 ---
 title: "BigQuery Loader (0.4.x)"
+description: "Documentation for BigQuery Loader version 0.4.x with technical architecture details including Loader, Mutator, Repeater, and Forwarder microservices for Google Cloud."
 date: "2020-03-11"
 sidebar_position: 30
 ---

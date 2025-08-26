@@ -1,5 +1,6 @@
 ---
 title: "Databricks loader"
+description: "Load transformed Snowplow data into Databricks with support for Unity Catalog, OAuth authentication, and automatic table optimization for lakehouse analytics."
 date: "2022-05-27"
 sidebar_position: 300
 ---

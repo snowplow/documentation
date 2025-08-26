@@ -1,5 +1,6 @@
 ---
 title: "Transformer Kinesis configuration reference"
+description: "Configuration reference for Transformer Kinesis with AWS Kinesis stream settings, S3 output options, and stream transformer parameters for real-time processing."
 date: "2022-10-13"
 sidebar_position: 12
 ---

@@ -1,5 +1,6 @@
 ---
 title: "Snowflake Streaming Loader"
+description: "Load Snowplow events to Snowflake using the Snowpipe Streaming API with real-time processing from AWS Kinesis, GCP Pub/Sub, and Azure Kafka streams."
 sidebar_label: "Snowflake Streaming Loader"
 sidebar_position: 0
 ---

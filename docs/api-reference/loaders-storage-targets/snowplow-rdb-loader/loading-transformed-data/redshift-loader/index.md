@@ -1,5 +1,6 @@
 ---
 title: "Redshift loader"
+description: "Load transformed Snowplow data into Amazon Redshift with automatic table creation, schema evolution, and configurable authentication methods for data warehousing."
 date: "2022-04-05"
 sidebar_position: 10
 ---

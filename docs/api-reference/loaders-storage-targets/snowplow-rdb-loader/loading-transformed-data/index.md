@@ -1,5 +1,6 @@
 ---
 title: "Loading transformed data"
+description: "Load transformed Snowplow data into Redshift, Snowflake, or Databricks with specialized loader applications that handle table updates and SQL COPY operations."
 date: "2022-04-05"
 sidebar_position: 20
 ---

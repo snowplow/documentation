@@ -1,5 +1,6 @@
 ---
 title: "Stream transformer"
+description: "Real-time transformation of enriched Snowplow data using streaming applications that read directly from data streams without Spark or EMR dependencies."
 date: "2022-04-04"
 sidebar_position: 20
 ---

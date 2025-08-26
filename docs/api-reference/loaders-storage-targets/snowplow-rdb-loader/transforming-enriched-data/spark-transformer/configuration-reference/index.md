@@ -1,5 +1,6 @@
 ---
 title: "Spark transformer configuration reference"
+description: "Configuration reference for Spark transformer with batch processing settings, deduplication options, and output format configurations for EMR deployments."
 date: "2022-10-13"
 sidebar_position: 12
 ---

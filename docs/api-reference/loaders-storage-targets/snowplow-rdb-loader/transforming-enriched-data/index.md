@@ -1,5 +1,6 @@
 ---
 title: "Transforming enriched data"
+description: "Transform enriched Snowplow events into shredded data for Redshift or wide row format for Snowflake and Databricks using Spark or streaming transformers."
 date: "2022-04-04"
 sidebar_position: 10
 ---

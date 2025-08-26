@@ -1,5 +1,6 @@
 ---
 title: "Transformer Kafka configuration reference"
+description: "Configuration reference for Transformer Kafka with Azure Kafka stream settings, blob storage options, and common transformer parameters for stream processing."
 sidebar_position: 22
 ---
 

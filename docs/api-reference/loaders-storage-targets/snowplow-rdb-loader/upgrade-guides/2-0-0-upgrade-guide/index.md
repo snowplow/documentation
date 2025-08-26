@@ -1,5 +1,6 @@
 ---
 title: "2.0.0 Upgrade Guide"
+description: "Migration guide for upgrading RDB Loader to 2.0.0 with SNS message support, separate Loader and Shredder configurations, and new asset distribution."
 date: "2021-12-01"
 sidebar_position: -10
 ---

@@ -1,5 +1,6 @@
 ---
 title: "R32 Upgrade Guide"
+description: "Migration guide for upgrading to R32 with automigrations, Iglu Server 0.6.0 requirement, tabular blacklisting, and new TSV shredding capabilities."
 date: "2020-03-06"
 sidebar_position: 700
 ---

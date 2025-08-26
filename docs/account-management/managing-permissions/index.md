@@ -1,5 +1,6 @@
 ---
 title: "Managing user permissions in Console"
+description: "Configure user permissions and access levels in Snowplow BDP Console, including admin roles, custom permissions, and feature-specific access controls."
 sidebar_label: "Permissions"
 sidebar_position: 2
 ---

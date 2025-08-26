@@ -195,9 +195,9 @@ Share this information with your Snowplow Customer Success Manager or through a 
 Once you've shared the key information, Snowplow will configure the following pipeline components to use your custom KMS key.
 
 All **pipeline S3 buckets** will be configured with your custom KMS key:
-- Batch archive bucket (used in RDB Transformer process)
-- Batch output bucket (used in RDB Transformer process)
-- Batch processing bucket
+- Batch archive bucket
+- Batch output bucket (used in RDB Transformer/Loader process)
+- Batch processing bucket (used in RDB Transformer/Loader process)
 - S3 bad events bucket
 - S3 enriched events bucket
 

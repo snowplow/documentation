@@ -4,15 +4,15 @@ description: "Send Snowplow events to third-party platforms in real-time using S
 sidebar_position: 2
 ---
 
-Event Forwarding is the recommended approach for sending Snowplow events to third-party platforms in real-time. It provides a simple, managed solution through BDP Console with built-in filtering, field mapping, and JavaScript transformations. For detailed setup guides and field mappings, check out the list of [available integrations](/docs/destinations/forwarding-events/integrations/index.md).
+Event forwarders let you filter, transform, and send Snowplow events to third-party platforms in real-time. They are separately deployed, fully managed apps that sit alongside warehouse and lake loaders and provide a self-serve setup process through BDP Console.
 
-Event Forwarding uses [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md) under the hood, deployed within your existing Snowplow cloud account, to transform and deliver events reliably. For complex requirements or unsupported destinations, [advanced alternatives](#alternative-approaches) are available.
+Event forwarding uses [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md) under the hood, deployed within your existing Snowplow cloud account, to transform and deliver events reliably. For detailed setup guides and field mappings, check out the list of [available integrations](/docs/destinations/forwarding-events/integrations/index.md). For complex requirements or unsupported destinations, [advanced alternatives](#alternative-approaches) are also available.
 
 ## Use cases
 
-Event Forwarding works best for use cases where you need low-latency event delivery and don't require complex aggregations across multiple events. For more complex transformations or batch processing, consider using [reverse ETL](/docs/destinations/reverse-etl/) instead. 
+Event forwarding works best for use cases where you need low-latency event delivery and don't require complex aggregations across multiple events. For more complex transformations or batch processing, consider using [reverse ETL](/docs/destinations/reverse-etl/) instead. 
 
-Event Forwarding is a good fit for use cases such as:
+Event forwarding is a good fit for use cases such as:
 
 - **Real-time personalization**: send events to marketing automation or customer engagement platforms for immediate campaign triggers
 - **Product analytics**: forward specific user actions to analytics tools for real-time product insights
@@ -22,25 +22,25 @@ Event Forwarding is a good fit for use cases such as:
 
 ## How it works
 
-Event Forwarders are deployed as managed Snowbridge apps that consume events from your your enriched stream in near real-time. Below is the lifecycle of an event flowing through the system:
+Event forwarders are deployed as managed Snowbridge apps that consume events from your enriched stream in near real-time. Below is the lifecycle of an event flowing through the system:
 
 1. **Stream consumption**: the event forwarder reads enriched events from your cloud message queue (Kinesis, Pub/Sub, or EventHub) as they're produced by your Snowplow pipeline
 2. **Filter evaluation**: each event is evaluated against your configured JavaScript filter expressions to determine if it should be forwarded
 3. **Data transformation**: matching events undergo field mapping and any custom JavaScript transformations you've configured, converting Snowplow event data into the format required by your destination API
 4. **Delivery attempt**: transformed events are sent to the destination via HTTP API calls with appropriate authentication and headers
 5. **Success handling**: successfully delivered events are acknowledged and processing continues to the next event
-6. **Failure handling**: failed events follow the configured retry policy, and unrecoverable failures are routed to your failure destination for inspection
+6. **Failure handling**: failed events follow the configured retry policy, and unrecoverable failures are saved to cloud storage for troubleshooting
 
-The entire process typically completes within seconds of the original event collection, enabling near real-time use cases.
+The end-to-end latency from event collection to destination delivery is on the order of seconds. Latency depends on overall pipeline event volume, complexity of transformation logic, and destination rate limits.
 
 ## Getting started
 
-The following describes the workflow for configuring a new Event Forwarder.
+The following describes the workflow for configuring a new event forwarder.
 
 1. **Create a connection**: configure credentials and endpoint details for your destination
 2. **Create a forwarder**: select your pipeline, connection, and event types to forward
-3. **Configure filtering**: define which events to send using JavaScript expressions
-4. **Set up field mapping**: map Snowplow event data to destination API fields
+    a. **Configure filtering**: define which events to send using JavaScript expressions
+    b. **Set up field mapping**: map Snowplow event data to destination API fields
 5. **Deploy**: launch the forwarder to begin sending events
 6. **Monitor**: track delivery metrics and troubleshoot issues
 
@@ -52,8 +52,8 @@ For detailed information on JavaScript expressions, field transformations, and m
 
 ## Alternative approaches
 
-Event Forwarding is the recommended starting point for most real-time forwarding use cases. For more complex requirements or unsupported destinations, consider these alternatives:
+Event forwarders are the recommended starting point for most real-time delivery use cases. For more complex requirements or unsupported destinations, consider these alternatives:
 
-- **[Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md)**: flexible event forwarding with custom transformations and destinations (Kafka, Kinesis, HTTP APIs). Use when you need destinations not yet supported by Event Forwarding, complex custom transformations, non-HTTP destinations, or advanced batching and retry configurations.
-- **[Google Tag Manager Server Side](/docs/destinations/forwarding-events/google-tag-manager-server-side/index.md)**: use GTM SS to relay enriched events to destinations using rich libraries of tags. Best if your organization is heavily invested in GTM or if you need destinations not yet supported by Event Forwarding, but supported by GTM SS, such as Google Analytics.
+- **[Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md)**: flexible event routing with custom transformations and destinations (Kafka, Kinesis, HTTP APIs). Use when you need destinations not yet supported by Event Forwarding, complex custom transformations, non-HTTP destinations, or advanced batching and retry configurations.
+- **[Google Tag Manager Server Side](/docs/destinations/forwarding-events/google-tag-manager-server-side/index.md)**: use GTM SS to relay enriched events to destinations using rich libraries of tags. Best if your organization is heavily invested in GTM or if you need destinations not yet supported by event forwarders, but supported by GTM SS, such as Google Analytics.
 - **[Custom Integrations](/docs/destinations/forwarding-events/custom-integrations/index.md)**: build your own solutions using AWS Lambda, GCP Cloud Functions, or other stream processing systems for fully bespoke requirements.

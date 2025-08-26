@@ -4,11 +4,11 @@ description: "Complete reference for Snowplow Event Forwarding JavaScript expres
 sidebar_position: 20
 ---
 
-Event forwarders use JavaScript expressions for filtering events and mapping Snowplow data to destination fields. This reference covers the syntax and available data for both operations.
+Event forwarders use JavaScript expressions for filtering events and mapping Snowplow data to destination fields. These expressions are entered during [forwarder setup](/docs/destinations/forwarding-events/index.md#getting-started) in BDP Console, specifically in the **Event filtering**, **Field mapping**, and **Custom functions** sections. This reference covers the syntax and available data for these operations.
 
 ## Event filtering
 
-Event filters determine which events are forwarded to your destination. Only events matching your filter criteria(JavaScript expression evaluating to `true`) will be processed and sent.
+Event filters determine which events are forwarded to your destination. Only events matching your filter criteria (JavaScript expression evaluating to `true`) will be processed and sent.
 
 ### Basic filters
 
@@ -109,7 +109,11 @@ isHighValueUser(event) && event.event_name == "purchase"
 
 ## Field mapping
 
-Field mapping defines how Snowplow event data is transformed and sent to destination APIs. Each mapping consists of a destination field name and a JavaScript expression that extracts the value from your Snowplow event.
+Field mapping defines how Snowplow event data is transformed and sent to destination APIs. Each mapping consists of a destination field name and a JavaScript expression that extracts the value from your Snowplow event. 
+
+:::info
+The code snippets below contain JavaScript expressions that you can include in the **Snowplow Expression** mapping field in the UI.
+:::
 
 ### Available event fields
 
@@ -279,7 +283,7 @@ function buildUserProfile(event) {
 
 ## Schema name transformation
 
-Event Forwarding transforms Iglu schema URIs to JavaScript-safe field names:
+Forwarders transform Iglu schema URIs to JavaScript-safe field names:
 
 | Original schema | Transformed field name |
 |----------------|----------------------|

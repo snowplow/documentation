@@ -10,7 +10,7 @@ import EventForwardingSchemaTable from '@site/src/components/EventForwardingSche
 
 Send Snowplow events to Braze for real-time personalization, user tracking, and campaign automation using the [Track Users API](https://www.braze.com/docs/api/endpoints/user_data/post_user_track). 
 
-Event Forwarding supports the following Braze object types:
+Snowplow supports the following Braze object types:
 
 - **[User attributes](https://www.braze.com/docs/api/objects_filters/user_attributes_object)**: Profile data and custom user properties
 - **[Custom events](https://www.braze.com/docs/api/objects_filters/event_object)**: User actions and behaviors

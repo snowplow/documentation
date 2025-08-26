@@ -50,58 +50,6 @@ Each destination has specific requirements for API credentials, field mappings, 
 For detailed information on JavaScript expressions, field transformations, and mapping syntax, see the [filter and mapping reference](/docs/destinations/forwarding-events/reference/index.md).
 :::
 
-## Error handling and troubleshooting
-
-### Failure types and retry logic
-
-Event Forwarding uses the same retry logic and failure handling as the underlying [Snowbridge failure model](/docs/destinations/forwarding-events/snowbridge/concepts/failure-model/index.md). The system handles different failure types:
-
-- **Invalid data failures**: events that fail transformation or violate destination API requirements are treated as unrecoverable. These create [event forwarding error failed events](https://iglucentral.com/?q=event_forwarding_error) and are sent to your  failure destination without retry.
-
-- **Transformation failures**: JavaScript transformation errors are treated as invalid data and create failed events without retry.
-
-- **Destination failures**: when API requests fail (e.g., HTTP 4xx/5xx responses), the system retries based on the destination-specific retry policy. See the list of [available destinations](/docs/destinations/forwarding-events/integrations/index.md) for destination-specific details.
-
-- **Oversized data failures**: events exceeding destination size limits create [size violation failed events](docs/api-reference/failed-events/index.md) and are sent to the failure destination without retry.
-
-Failed events are automatically routed to your configured failure destination (typically your cloud storage bucket) where they can be inspected. For how to query these metrics, see [Inspecing and debugging failures](#inspecting-and-debugging-failures).
-
-### Monitoring and metrics
-
-<!-- TODO: add details on how to find these metrics in cloudwatch -->
-
-You can monitor your Event Forwarding deployment in a few ways:
-
-- **Console metrics**: view high-level delivery statistics in the Snowplow Console. You can see filtered, failed, and successfuly delivered events over the last 7 days.
-- **Cloud monitoring metrics**: track detailed performance metrics in your cloud platform.
-- **Failed event logs**: review detailed errors in your cloud storage bucket.
-
-Event Forwarding produces detailed metrics in your cloud account:
-
-- **AWS**: CloudWatch metrics under `snowplow/event-forwarding` namespace
-- **GCP**: Cloud Monitoring metrics with `snowplow_event_forwarding` prefix
-
-**Key metrics to monitor:**
-
-- `target_success`: Events successfully delivered to destinations
-- `target_failed`: Events that failed delivery and were retried
-- `message_filtered`: Events filtered out by your criteria
-- `failure_target_success`: Events routed to failure destination after unrecoverable errors
-
-### Inspecting and debugging failures
-
-Failed events are automatically stored in your Snowplow cloud storage bucket under the prefix:
-`/{pipeline_name}/partitioned/com.snowplowanalytics.snowplow.badrows.event_forwarding_errors/`
-
-Failed event follow [event_forwarding_error schema](https://iglucentral.com/?q=event_forwarding_error) and contain:
-
-- **Original event data**: the complete Snowplow event that failed
-- **Error details**: specific error type and message
-- **Failure timestamp**: when the error occurred
-- **Transformation state**: data state at the point of failure
-
-<!-- TODO: add link to athena queries https://snplow.atlassian.net/browse/PDP-1939?focusedCommentId=125579 -->
-
 ## Alternative approaches
 
 Event Forwarding is the recommended starting point for most real-time forwarding use cases. For more complex requirements or unsupported destinations, consider these alternatives:

@@ -2,6 +2,7 @@
 title: "Snowplow Mini"
 date: "2021-08-14"
 sidebar_position: 120
+description: "Snowplow Mini is a development pipeline for debugging tracker updates and testing schema and pipeline configuration changes."
 ---
 
 [Snowplow Mini](/docs/api-reference/snowplow-mini/index.md) is a single-instance version of Snowplow that primarily serves as a development sandbox, giving you a quick way to debug tracker updates and changes to your schema and pipeline configuration.

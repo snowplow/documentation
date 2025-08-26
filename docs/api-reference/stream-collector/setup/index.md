@@ -2,6 +2,7 @@
 title: "Set up"
 date: "2021-08-04"
 sidebar_position: 1
+description: "Setup guide for deploying the Snowplow Collector using Docker or JAR files with health check verification."
 ---
 
 ```mdx-code-block

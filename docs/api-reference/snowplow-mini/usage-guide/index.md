@@ -2,6 +2,7 @@
 title: "Usage Guide"
 date: "2021-05-11"
 sidebar_position: 3
+description: "Comprehensive usage guide for Snowplow Mini including configuration, sending events, and accessing data via Opensearch."
 ---
 
 ## Overview

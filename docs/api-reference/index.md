@@ -3,6 +3,7 @@ title: "Components & applications"
 date: "2020-03-24"
 sidebar_position: 10
 sidebar_label: "Reference"
+description: "Technical reference documentation for Snowplow components and applications including loaders, Iglu schema registry, the event Collector, analytics SDKs, and pipeline tools."
 ---
 
 This section contains detailed technical information about Snowplow components.

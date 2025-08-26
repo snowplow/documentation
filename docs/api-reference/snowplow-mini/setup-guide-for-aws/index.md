@@ -2,6 +2,7 @@
 title: "Setup Guide for AWS"
 date: "2021-05-11"
 sidebar_position: 1
+description: "Complete setup guide for deploying Snowplow Mini on Amazon Web Services (AWS) EC2 instances."
 ---
 
 ```mdx-code-block

@@ -2,6 +2,7 @@
 title: "Collector"
 date: "2020-11-02"
 sidebar_position: 20
+description: "The Snowplow Collector receives HTTP events from trackers and webhooks, serializes them to Thrift format, and writes to supported sinks including Kinesis, PubSub, and Kafka."
 ---
 
 The collector receives raw Snowplow events sent over HTTP by [trackers](/docs/sources/trackers/index.md) or [webhooks](/docs/sources/webhooks/index.md). It serializes them to a [Thrift](http://thrift.apache.org/) record format, and then writes them to a sink. Currently supported sinks are:

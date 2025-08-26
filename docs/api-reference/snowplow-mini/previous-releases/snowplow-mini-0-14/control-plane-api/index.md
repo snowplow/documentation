@@ -2,6 +2,7 @@
 title: "Control Plane API"
 date: "2021-05-11"
 sidebar_position: -10
+description: "Control Plane API documentation for Snowplow Mini 0.14.x version."
 ---
 
 Snowplow Mini Control Plane API is created for controlling and configuring the Snowplow Mini instance without ssh to it.

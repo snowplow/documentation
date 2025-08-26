@@ -70,7 +70,7 @@ Enrichment failure schema can be found [here](https://github.com/snowplow/iglu-c
 
 ## Collector payload format violation
 
-This failure type is produced by the [Enrich](/docs/pipeline/enrichments/index.md) application, when Collector payloads from the raw stream are deserialized from thrift format.
+This failure type is produced by the [Enrich](/docs/pipeline/enrichments/index.md) application, when Collector payloads from the raw stream are deserialized.
 
 <details>
 

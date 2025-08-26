@@ -21,8 +21,8 @@ export const versions = {
   webViewTracker: '0.3.0',
 
   // Core pipeline
-  collector: '3.5.0',
-  enrich: '6.0.0',
+  collector: '3.6.0',
+  enrich: '6.1.0',
   sqs2kinesis: '1.0.4',
   dataflowRunner: '0.7.5',
   snowbridge: '3.5.0',

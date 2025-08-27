@@ -19,5 +19,5 @@ This transformation base64 decodes the message's data from a base64 byte array, 
 ## Configuration options
 
 <CodeBlock language="hcl" reference>{`
-https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/builtin/base64Decode-minimal-example.hcl
+https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/transformations/builtin/base64Decode-minimal-example.hcl
 `}</CodeBlock>

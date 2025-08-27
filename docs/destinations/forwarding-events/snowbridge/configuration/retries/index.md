@@ -27,5 +27,5 @@ Retries will be attempted with an exponential backoff. In other words, on each s
 ## Configuration options
 
 <CodeBlock language="hcl" reference>{`
-https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/retry-example.hcl
+https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/retry-example.hcl
 `}</CodeBlock>

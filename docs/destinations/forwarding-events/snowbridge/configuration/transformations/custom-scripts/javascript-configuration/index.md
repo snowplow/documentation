@@ -24,11 +24,11 @@ Scripts must be available to the runtime of the application at the path provided
 Minimal configuration:
 
 <CodeBlock language="hcl" reference>{`
-https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/custom-scripts/js-configuration-minimal-example.hcl
+https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/transformations/custom-scripts/js-configuration-minimal-example.hcl
 `}</CodeBlock>
 
 Every configuration option:
 
 <CodeBlock language="hcl" reference>{`
-https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/custom-scripts/js-configuration-full-example.hcl
+https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/transformations/custom-scripts/js-configuration-full-example.hcl
 `}</CodeBlock>

@@ -59,7 +59,7 @@ In addition to all base functions available in the Go text/template package, the
 The following example provides an API key via environment variable, and iterates the batch to provide JSON-formatted data one by one into a new key, inserting a comma before all but the first event.
 
 <CodeBlock language="hcl" reference>{`
-https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/targets/http-template-full-example.file
+https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/targets/http-template-full-example.file
 `}</CodeBlock>
 
 ## Response rules (beta)
@@ -89,14 +89,14 @@ Data that matches a setup response rule is handled by a retry as determined in t
 Here is an example of the minimum required configuration:
 
 <CodeBlock language="hcl" reference>{`
-https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/targets/http-minimal-example.hcl
+https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/targets/http-minimal-example.hcl
 `}</CodeBlock>
 
 If you want to use this as a [failure target](/docs/destinations/forwarding-events/snowbridge/concepts/failure-model/index.md#failure-targets), then use failure_target instead of target.
 Here is an example of every configuration option:
 
 <CodeBlock language="hcl" reference>{`
-https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/targets/http-full-example.hcl
+https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/targets/http-full-example.hcl
 `}</CodeBlock>
 
 If you want to use this as a [failure target](/docs/destinations/forwarding-events/snowbridge/concepts/failure-model/index.md#failure-targets), then use failure_target instead of target.

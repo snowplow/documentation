@@ -1,5 +1,6 @@
 ---
 title: "Ruby client"
+description: "Iglu Ruby client library for resolving and validating JSON schemas with support for embedded repositories and JRuby compatibility."
 date: "2021-03-26"
 sidebar_position: 60
 ---

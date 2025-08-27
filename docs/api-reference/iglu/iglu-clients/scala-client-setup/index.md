@@ -1,5 +1,6 @@
 ---
 title: "Scala client"
+description: "Iglu Scala client library setup and integration guide for schema resolution in Scala applications with SBT and Gradle configurations."
 date: "2021-03-26"
 sidebar_position: 70
 ---

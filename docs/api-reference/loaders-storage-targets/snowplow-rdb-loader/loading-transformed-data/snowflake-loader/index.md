@@ -1,5 +1,6 @@
 ---
 title: "Snowflake loader"
+description: "Load transformed Snowplow data into Snowflake across AWS, GCP, and Azure with support for multiple authentication methods and automatic stage management."
 date: "2022-04-05"
 sidebar_position: 20
 ---

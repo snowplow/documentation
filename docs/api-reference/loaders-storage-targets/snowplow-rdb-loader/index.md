@@ -1,5 +1,6 @@
 ---
 title: "RDB Loader (Redshift, Snowflake, Databricks)"
+description: "Load Snowplow events into Redshift, Snowflake, or Databricks data warehouses using RDB Loader with Spark or streaming transformers and dedicated loader applications."
 sidebar_position: 1
 ---
 

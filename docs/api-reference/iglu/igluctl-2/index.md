@@ -1,5 +1,6 @@
 ---
 title: "Igluctl"
+description: "Command-line interface for Iglu schema registry operations including schema validation, static repository management, and server interactions."
 sidebar_position: 10
 ---
 

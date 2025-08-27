@@ -2,6 +2,7 @@
 title: "Setup Guide for GCP"
 date: "2021-05-11"
 sidebar_position: 2
+description: "Complete setup guide for deploying Snowplow Mini on Google Cloud Platform (GCP) Compute Engine instances."
 ---
 
 ```mdx-code-block

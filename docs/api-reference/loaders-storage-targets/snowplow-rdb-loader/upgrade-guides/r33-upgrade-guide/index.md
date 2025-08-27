@@ -1,5 +1,6 @@
 ---
 title: "R33/R34 Upgrade Guide"
+description: "Migration guide for upgrading RDB Loader to R33/R34 with performance improvements, bug fixes, and updated EMR configuration for Spark 3."
 date: "2020-12-01"
 sidebar_position: 400
 ---

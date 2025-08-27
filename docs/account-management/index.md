@@ -1,5 +1,6 @@
 ---
 title: "Managing your account"
+description: "Manage your Snowplow BDP Console account configuration, user access, and API key generation for programmatic platform access."
 date: "2020-02-15"
 sidebar_position: 9
 sidebar_custom_props:

@@ -1,5 +1,6 @@
 ---
 title: "Analytics SDK - Python"
+description: "Python Analytics SDK for processing Snowplow enriched events in Apache Spark, AWS Lambda, and Python-compatible data processing frameworks."
 date: "2020-11-03"
 sidebar_position: 400
 ---

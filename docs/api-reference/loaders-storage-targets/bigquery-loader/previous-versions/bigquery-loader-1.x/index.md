@@ -1,5 +1,6 @@
 ---
 title: "BigQuery Loader (1.x)"
+description: "BigQuery Loader 1.x documentation with StreamLoader, Loader, Mutator, and Repeater applications for loading enriched Snowplow data into BigQuery with automatic schema updates."
 sidebar_position: 0
 ---
 

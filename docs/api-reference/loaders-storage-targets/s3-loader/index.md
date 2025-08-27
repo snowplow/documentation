@@ -1,5 +1,6 @@
 ---
 title: "S3 Loader"
+description: "Load Snowplow data from AWS Kinesis streams to Amazon S3 with configurable compression formats including LZO and Gzip for raw, enriched, and failed event storage."
 sidebar_position: 4
 ---
 

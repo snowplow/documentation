@@ -1,5 +1,6 @@
 ---
 title: "Analytics SDK - Go"
+description: "Go Analytics SDK for processing Snowplow enriched events in AWS Lambda, Google Cloud Functions, and Go-compatible data processing frameworks."
 date: "2021-05-26"
 sidebar_position: 300
 ---

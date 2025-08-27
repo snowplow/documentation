@@ -1,5 +1,6 @@
 ---
 title: "Google Cloud Storage Loader"
+description: "Load Snowplow events from Google Cloud Pub/Sub to Google Cloud Storage using Apache Beam and Dataflow with configurable partitioning and compression options."
 sidebar_position: 5
 ---
 

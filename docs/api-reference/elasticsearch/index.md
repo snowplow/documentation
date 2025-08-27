@@ -1,5 +1,6 @@
 ---
 title: "Elasticsearch Loader"
+description: "Load Snowplow enriched events and failed events from Kinesis or NSQ streams into Elasticsearch with support for geo-point mapping and entity flattening."
 date: "2020-11-25"
 sidebar_position: 50
 ---

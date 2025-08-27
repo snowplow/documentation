@@ -1,5 +1,6 @@
 ---
 title: "Postgres Loader"
+description: "Load enriched Snowplow data and failed events into PostgreSQL database with support for Kinesis, Pub/Sub, and local file inputs with automatic table creation."
 sidebar_position: 6
 ---
 

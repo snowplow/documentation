@@ -1,5 +1,6 @@
 ---
 title: "RDB Loader 1.0.0"
+description: "Documentation for RDB Loader version 1.0.0 with Shredder and Loader applications, stateless algorithm, SQS integration, and Redshift data loading architecture."
 date: "2021-01-28"
 sidebar_position: 20
 ---

@@ -1,5 +1,6 @@
 ---
 title: "Monitoring"
+description: "Monitoring and observability for Snowplow Enrich applications using StatsD metrics and Sentry error reporting for pipeline operations."
 date: "2021-10-04"
 sidebar_position: 60
 ---

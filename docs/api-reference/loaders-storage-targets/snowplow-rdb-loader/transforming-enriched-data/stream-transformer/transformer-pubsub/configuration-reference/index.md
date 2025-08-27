@@ -1,5 +1,6 @@
 ---
 title: "Transformer Pubsub configuration reference"
+description: "Configuration reference for Transformer Pubsub with GCP Pub/Sub stream settings, Cloud Storage output options, and stream transformer parameters for real-time processing."
 date: "2022-10-13"
 sidebar_position: 12
 ---

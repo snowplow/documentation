@@ -1,5 +1,6 @@
 ---
 title: "Enrich"
+description: "Technical documentation for Snowplow enrichment components including Kinesis, PubSub, Kafka, and NSQ applications for processing collector payloads."
 date: "2020-11-09"
 sidebar_position: 50
 ---

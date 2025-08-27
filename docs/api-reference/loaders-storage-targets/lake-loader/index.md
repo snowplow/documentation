@@ -1,5 +1,6 @@
 ---
 title: "Lake Loader"
+description: "Load Snowplow events to cloud storage using open table formats like Delta and Iceberg with support for AWS S3, GCP BigLake, and Azure ADLS Gen 2."
 sidebar_position: 3
 ---
 

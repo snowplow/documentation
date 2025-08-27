@@ -1,5 +1,6 @@
 ---
 title: "Monitoring"
+description: "Monitoring options for RDB Loader including webhook alerts, folder monitoring, warehouse health checks, StatsD metrics, Sentry error reporting, and Snowplow tracking."
 date: "2022-04-05"
 sidebar_position: 400
 ---

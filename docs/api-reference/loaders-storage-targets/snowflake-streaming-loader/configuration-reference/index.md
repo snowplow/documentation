@@ -1,5 +1,6 @@
 ---
 title: "Snowflake Streaming Loader configuration reference"
+description: "Configuration reference for Snowflake Streaming Loader with Snowflake settings and stream configurations for AWS Kinesis, GCP Pub/Sub, and Azure Kafka integration."
 sidebar_label: "Configuration reference"
 sidebar_position: 1
 ---

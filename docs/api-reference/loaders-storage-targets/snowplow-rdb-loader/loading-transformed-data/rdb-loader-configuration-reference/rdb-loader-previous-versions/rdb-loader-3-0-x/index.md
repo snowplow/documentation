@@ -1,5 +1,6 @@
 ---
 title: "RDB Loader 3.0.x"
+description: "Configuration reference for RDB Loader version 3.0.x with Redshift and Snowflake storage settings, monitoring options, and common loader parameters."
 date: "2022-05-27"
 sidebar_position: 10
 ---

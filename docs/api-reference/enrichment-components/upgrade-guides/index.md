@@ -1,5 +1,6 @@
 ---
 title: "Upgrade guides"
+description: "Version upgrade guides and migration information for Snowplow Enrich applications across different releases."
 sidebar_position: 0
 ---
 

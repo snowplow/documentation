@@ -1,5 +1,6 @@
 ---
 title: "Iglu schema registry"
+description: "Iglu schema registry documentation covering self-describing JSON schemas, schema resolution, and repository management for behavioral data validation."
 sidebar_position: 90
 ---
 

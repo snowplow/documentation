@@ -1,5 +1,6 @@
 ---
 title: "Iglu Resolver"
+description: "Iglu Resolver configuration for fetching schemas from registries and validating data in Snowplow applications with cache and priority settings."
 date: "2020-10-22"
 sidebar_position: 30
 ---

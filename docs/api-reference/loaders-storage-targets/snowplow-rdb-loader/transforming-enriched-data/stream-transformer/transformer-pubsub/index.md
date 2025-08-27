@@ -1,5 +1,6 @@
 ---
 title: "Transformer Pubsub"
+description: "Stream transformer for GCP environments that reads enriched Snowplow events from Pub/Sub subscriptions and transforms them for data warehouse loading."
 date: "2022-10-13"
 sidebar_position: 20
 ---

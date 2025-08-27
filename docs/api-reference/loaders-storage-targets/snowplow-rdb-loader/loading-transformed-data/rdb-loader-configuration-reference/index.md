@@ -1,5 +1,6 @@
 ---
 title: "RDB Loader configuration reference"
+description: "Complete configuration reference for RDB Loader 5.0.0+ with settings for Redshift, Snowflake, and Databricks including authentication, monitoring, and retry options."
 date: "2022-04-05"
 sidebar_position: 500
 ---

@@ -1,5 +1,6 @@
 ---
 title: "BigQuery Loader (0.6.x)"
+description: "Documentation for BigQuery Loader version 0.6.x with Loader, StreamLoader, Mutator, and Repeater components plus experimental StreamLoader alternative to Dataflow."
 date: "2021-10-06"
 sidebar_position: 10
 ---

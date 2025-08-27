@@ -1,5 +1,6 @@
 ---
 title: "Snowplow event extractor"
+description: "Azure Data Lake Analytics custom extractor for parsing Snowplow enriched events in U-SQL queries and data processing workflows."
 date: "2021-03-26"
 sidebar_position: 1040
 ---

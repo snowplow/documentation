@@ -1,6 +1,7 @@
 ---
 title: "3.0.x upgrade guide"
 sidebar_position: 0
+description: "Migration guide for upgrading the Snowplow Collector to version 3.0.x, with breaking changes including new licensing, HTTP stack replacement, and configuration updates."
 ---
 
 ## Breaking changes

@@ -1,5 +1,6 @@
 ---
 title: "Analytics SDK - .NET"
+description: ".NET Analytics SDK for processing Snowplow enriched events in Azure Data Lake Analytics, Azure Functions, AWS Lambda, and .NET-compatible frameworks."
 date: "2020-11-03"
 sidebar_position: 500
 ---

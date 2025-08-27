@@ -1,5 +1,6 @@
 ---
 title: "S3 loader monitoring"
+description: "Monitoring options for S3 Loader including StatsD metrics, Sentry error reporting, and Snowplow tracking for pipeline health and performance visibility."
 date: "2021-10-04"
 sidebar_position: 30
 ---

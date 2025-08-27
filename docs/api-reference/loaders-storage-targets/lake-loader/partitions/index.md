@@ -1,5 +1,6 @@
 ---
 title: "Partitioning of your lake"
+description: "Lake partitioning strategy by load timestamp and event name for optimal query performance with Delta Lake and Iceberg tables in Lake Loader."
 sidebar_label: "Partitioning"
 sidebar_position: 2
 ---

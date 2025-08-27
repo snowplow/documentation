@@ -2,6 +2,7 @@
 title: "Versions and compatibility"
 date: "2021-04-29"
 sidebar_position: -1000
+description: "Latest versions and compatibility information for all Snowplow components, trackers, data models, and analytics SDKs across AWS, GCP, and Azure platforms."
 ---
 
 ```mdx-code-block

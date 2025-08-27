@@ -1,5 +1,6 @@
 ---
 title: "Iglu Central Setup"
+description: "Setup guide for creating public mirrors or private clones of Iglu Central schema registry with static repositories and server configurations."
 date: "2021-03-26"
 sidebar_position: 50
 ---

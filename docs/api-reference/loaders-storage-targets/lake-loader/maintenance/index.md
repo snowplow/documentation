@@ -1,5 +1,6 @@
 ---
 title: "Lake maintenance"
+description: "Maintenance procedures and optimization tasks for Delta Lake and Iceberg tables created by Lake Loader including compaction and cleanup operations."
 sidebar_label: "Maintenance"
 sidebar_position: 3
 ---

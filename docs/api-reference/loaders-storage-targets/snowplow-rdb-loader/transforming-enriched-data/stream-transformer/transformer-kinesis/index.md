@@ -1,5 +1,6 @@
 ---
 title: "Transformer Kinesis"
+description: "Stream transformer for AWS environments that reads enriched Snowplow events from Kinesis streams and transforms them for data warehouse loading in real-time."
 date: "2022-10-13"
 sidebar_position: 20
 ---

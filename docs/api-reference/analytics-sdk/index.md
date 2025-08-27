@@ -1,5 +1,6 @@
 ---
 title: "Analytics SDKs"
+description: "Analytics SDKs for processing Snowplow enriched events in Scala, JavaScript, Python, Go, and .NET environments for data engineering and machine learning workflows."
 date: "2020-11-02"
 sidebar_position: 80
 ---

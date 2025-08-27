@@ -1,5 +1,6 @@
 ---
 title: "SchemaVer"
+description: "SchemaVer semantic versioning specification for JSON schemas using MODEL-REVISION-ADDITION format to track schema evolution and compatibility."
 date: "2021-03-26"
 sidebar_position: 10
 ---

@@ -1,5 +1,6 @@
 ---
 title: "Previous versions"
+description: "Documentation for previous versions of BigQuery Loader including setup guides and configuration references for legacy deployments."
 date: "2021-08-18"
 sidebar_position: 10
 sidebar_custom_props:

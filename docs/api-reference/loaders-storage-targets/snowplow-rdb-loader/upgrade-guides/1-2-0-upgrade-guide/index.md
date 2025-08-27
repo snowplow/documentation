@@ -1,5 +1,6 @@
 ---
 title: "1.2.0 Upgrade Guide"
+description: "Migration guide for upgrading RDB Loader to 1.2.0 with enhanced monitoring subsystem, webhook monitoring, and folder monitoring capabilities."
 date: "2021-09-03"
 sidebar_position: 190
 ---

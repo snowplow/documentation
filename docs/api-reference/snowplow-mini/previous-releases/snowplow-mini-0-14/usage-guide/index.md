@@ -2,6 +2,7 @@
 title: "Usage Guide"
 date: "2021-05-11"
 sidebar_position: -10
+description: "Usage guide for Snowplow Mini 0.14.x version."
 ---
 
 ## Overview

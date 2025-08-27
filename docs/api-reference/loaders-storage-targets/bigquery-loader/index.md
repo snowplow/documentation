@@ -1,5 +1,6 @@
 ---
 title: "BigQuery Loader"
+description: "Load Snowplow events to Google BigQuery from Kinesis, Pub/Sub, and Kafka streams with real-time processing and configurable windowing."
 sidebar_label: "BigQuery Loader"
 sidebar_position: 2
 ---

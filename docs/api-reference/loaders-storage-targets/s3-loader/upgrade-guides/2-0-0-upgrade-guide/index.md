@@ -1,5 +1,6 @@
 ---
 title: "2.0.0 upgrade guide"
+description: "Migration guide for upgrading S3 Loader from 1.x to 2.0.0 covering configuration refactoring, credential changes, NSQ removal, and new monitoring features."
 date: "2021-07-05"
 sidebar_position: 11
 ---

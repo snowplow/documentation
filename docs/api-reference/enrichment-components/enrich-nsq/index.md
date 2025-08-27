@@ -1,5 +1,6 @@
 ---
 title: "Enrich NSQ (cloud agnostic)"
+description: "Standalone JVM application for reading collector payloads from NSQ message queues and writing enriched events back to NSQ for cloud-agnostic deployments."
 sidebar_position: 35
 ---
 

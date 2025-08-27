@@ -1,5 +1,6 @@
 ---
 title: "Analytics SDK - JavaScript"
+description: "JavaScript and TypeScript Analytics SDK for processing Snowplow enriched events in Node.js, AWS Lambda, and Google Cloud Functions environments."
 date: "2021-10-18"
 sidebar_position: 200
 ---

@@ -1,5 +1,6 @@
 ---
 title: "Migrating to Snowflake Streaming Loader from RDB Loader"
+description: "Migration guide for transitioning from RDB Loader to Snowflake Streaming Loader with strategies for same-table loading or fresh table deployment."
 sidebar_label: "Migrating from RDB Loader"
 sidebar_position: 2
 ---

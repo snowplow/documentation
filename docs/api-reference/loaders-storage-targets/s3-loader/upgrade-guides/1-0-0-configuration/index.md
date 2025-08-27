@@ -1,5 +1,6 @@
 ---
 title: "1.0.0 configuration"
+description: "Configuration reference for S3 Loader version 1.0.0 with HOCON format settings for Kinesis, NSQ sources, S3 output, and monitoring options."
 date: "2021-07-16"
 sidebar_position: 12
 ---

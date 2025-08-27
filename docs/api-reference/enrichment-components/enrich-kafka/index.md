@@ -1,5 +1,6 @@
 ---
 title: "Enrich Kafka (Azure)"
+description: "Standalone JVM application for reading collector payloads from Kafka topics and writing enriched events back to Kafka for Azure cloud deployments."
 date: "2022-10-03"
 sidebar_position: 30
 ---

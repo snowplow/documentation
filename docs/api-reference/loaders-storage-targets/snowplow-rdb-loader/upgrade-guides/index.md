@@ -1,5 +1,6 @@
 ---
 title: "Upgrade guides"
+description: "Upgrade guides and migration instructions for Snowplow RDB Loader versions with configuration changes and breaking updates."
 sidebar_position: 40
 ---
 

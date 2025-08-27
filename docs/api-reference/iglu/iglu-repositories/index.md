@@ -1,5 +1,6 @@
 ---
 title: "Iglu Repositories"
+description: "Iglu repository types including remote HTTP repositories, embedded repositories, Iglu Server, and static repositories for schema storage."
 date: "2021-03-26"
 sidebar_position: 20
 ---

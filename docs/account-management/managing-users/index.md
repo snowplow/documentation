@@ -1,5 +1,6 @@
 ---
 title: "User management"
+description: "Add and manage users in Snowplow BDP Console through direct user management or Single Sign-On (SSO) integration with SAML and OpenID Connect providers."
 date: "2020-02-15"
 sidebar_position: 1
 sidebar_label: "User management"

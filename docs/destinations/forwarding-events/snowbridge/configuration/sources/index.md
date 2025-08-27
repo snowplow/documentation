@@ -18,11 +18,11 @@ Stdin source simply treats stdin as the input. It has one optional configuration
 Here is an example of the minimum required configuration:
 
 <CodeBlock language="hcl" reference>{`
-https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/sources/stdin-minimal-example.hcl
+https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/sources/stdin-minimal-example.hcl
 `}</CodeBlock>
 
 Here is an example of every configuration option:
 
 <CodeBlock language="hcl" reference>{`
-https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/sources/stdin-full-example.hcl
+https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/sources/stdin-full-example.hcl
 `}</CodeBlock>

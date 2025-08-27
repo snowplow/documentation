@@ -16,7 +16,7 @@ import CodeBlock from '@theme/CodeBlock';
 `SpEnrichedSetPk` only takes one option — the field to use for the partition key.
 
 <CodeBlock language="hcl" reference>{`
-https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/snowplow-builtin/spEnrichedSetPk-minimal-example.hcl
+https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/transformations/snowplow-builtin/spEnrichedSetPk-minimal-example.hcl
 `}</CodeBlock>
 
 Note: currently, setting partition key to fields in custom events and contexts is unsupported.

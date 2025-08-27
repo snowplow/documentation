@@ -15,7 +15,7 @@ import CodeBlock from '@theme/CodeBlock';
 ## Configuration options
 
 <CodeBlock language="hcl" reference>{`
-https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/snowplow-builtin/spEnrichedToJson-minimal-example.hcl
+https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/transformations/snowplow-builtin/spEnrichedToJson-minimal-example.hcl
 `}</CodeBlock>
 
 The transformation to JSON is done via the [analytics SDK](/docs/api-reference/analytics-sdk/index.md) logic, specifically in this case the [Golang analytics SDK](/docs/api-reference/analytics-sdk/analytics-sdk-go/index.md).

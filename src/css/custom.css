@@ -647,23 +647,26 @@ img.shield {
   vertical-align: text-bottom;
 }
 
-.tabs-container:hover {
-  border: 2px solid var(--ifm-color-primary);
+/* Tabs component inside of Articles Start */
+.tabs-container div {
+  overflow-x: scroll;
 }
-
+.tabs-container:hover {
+  border: 1px solid hsl(var(--primary));
+}
 .tabs-container {
   padding: 7px 14px 14px;
   border: 2px solid transparent;
   border-radius: var(--ifm-alert-border-radius);
   transition: 0.4s cubic-bezier(0.38, 0.14, 0.58, 1) all;
 }
-
 .tabs__item {
   align-self: stretch;
   align-items: center;
   justify-content: center;
   text-align: center;
 }
+/* Tabs component inside of Articles End*/
 
 abbr[data-title] {
   position: relative;

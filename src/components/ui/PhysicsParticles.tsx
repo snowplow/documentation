@@ -19,18 +19,16 @@ interface Particle {
 interface PhysicsParticlesProps {
   isHovered: boolean
   onClick: boolean
-  containerRef: React.RefObject<HTMLDivElement>
+  containerRef: React.RefObject<HTMLDivElement | null>
 }
 
 export default function PhysicsParticles({ isHovered, onClick, containerRef }: PhysicsParticlesProps) {
   const [particles, setParticles] = useState<Particle[]>([])
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
-  const [scrollForce, setScrollForce] = useState({ direction: 0, intensity: 0 })
-  const animationRef = useRef<number>()
+  const animationRef = useRef<number | null>(null)
   const lastTimeRef = useRef<number>(0)
-  const lastScrollY = useRef<number>(0)
-  const scrollVelocity = useRef<number>(0)
   const [containerBounds, setContainerBounds] = useState({ width: 0, height: 0 })
+  const clickImpulseRef = useRef<number>(0)
 
   const PRIMARY_COLOR = 'hsl(var(--primary))'
   const GRAVITY = 0.25
@@ -38,8 +36,6 @@ export default function PhysicsParticles({ isHovered, onClick, containerRef }: P
   const BOUNCE_DAMPING = 1
   const COLLISION_DAMPING = 0.8
   const MOUSE_FORCE = 25
-  const SCROLL_FORCE_MULTIPLIER = 0.25
-  const SCROLL_DECAY = 0.95
   const TRAIL_LENGTH = 8
 
   // Initialize particles
@@ -63,59 +59,7 @@ export default function PhysicsParticles({ isHovered, onClick, containerRef }: P
     }))
   }, [containerRef, PRIMARY_COLOR])
 
-  // Scroll detection and force calculation
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY
-      const deltaY = currentScrollY - lastScrollY.current
-      
-      // Calculate scroll velocity (pixels per frame)
-      scrollVelocity.current = deltaY
-      
-      // Update scroll force based on direction and speed
-      const intensity = Math.min(Math.abs(deltaY) * 0.5, 10) // Cap intensity
-      const direction = deltaY > 0 ? 1 : -1 // 1 for down, -1 for up
-      
-      setScrollForce({
-        direction,
-        intensity
-      })
-      
-      lastScrollY.current = currentScrollY
-    }
-
-    // Throttled scroll handler for better performance
-    let ticking = false
-    const throttledScrollHandler = () => {
-      if (!ticking) {
-        requestAnimationFrame(() => {
-          handleScroll()
-          ticking = false
-        })
-        ticking = true
-      }
-    }
-
-    window.addEventListener('scroll', throttledScrollHandler, { passive: true })
-    
-    return () => {
-      window.removeEventListener('scroll', throttledScrollHandler)
-    }
-  }, [])
-
-  // Decay scroll force over time
-  useEffect(() => {
-    if (scrollForce.intensity > 0) {
-      const timer = setTimeout(() => {
-        setScrollForce(prev => ({
-          ...prev,
-          intensity: prev.intensity * SCROLL_DECAY
-        }))
-      }, 16) // ~60fps
-      
-      return () => clearTimeout(timer)
-    }
-  }, [scrollForce.intensity])
+  // Removed scroll-based movement
 
   // Mouse position tracking
   useEffect(() => {
@@ -196,33 +140,9 @@ export default function PhysicsParticles({ isHovered, onClick, containerRef }: P
       const newParticles = prevParticles.map(particle => {
         let { x, y, vx, vy } = particle
 
-        // Apply gravity
-        vy += GRAVITY * deltaTime
-
-        // Apply scroll-based forces
-        if (scrollForce.intensity > 0.1) {
-          // Scroll down = particles get pushed down and bounce up
-          // Scroll up = particles get pushed up and bounce down
-          const scrollVelocityForce = scrollForce.direction * scrollForce.intensity * SCROLL_FORCE_MULTIPLIER
-          
-          // Apply vertical force based on scroll direction
-          vy += scrollVelocityForce * deltaTime
-          
-          // Add some horizontal randomness for more dynamic movement
-          vx += (Math.random() - 0.5) * scrollForce.intensity * 2 * deltaTime
-          
-          // Create a "shake" effect by applying forces based on particle position
-          const centerY = containerBounds.height / 2
-          const distanceFromCenter = Math.abs(y - centerY) / centerY
-          const positionBasedForce = (1 - distanceFromCenter) * scrollForce.intensity * 2
-          
-          if (scrollForce.direction > 0) {
-            // Scrolling down - push particles down then they bounce back up
-            vy += positionBasedForce * deltaTime
-          } else {
-            // Scrolling up - push particles up then they bounce back down
-            vy -= positionBasedForce * deltaTime
-          }
+        // No gravity or movement unless hovered
+        if (isHovered) {
+          vy += GRAVITY * deltaTime
         }
 
         // Mouse interaction (attraction/repulsion)
@@ -241,26 +161,28 @@ export default function PhysicsParticles({ isHovered, onClick, containerRef }: P
           }
         }
 
-        // Click explosion effect
-        if (onClick) {
+        // Subtle click pulse effect (decaying outward nudge)
+        if (clickImpulseRef.current > 0.001) {
           const centerX = containerBounds.width / 2
           const centerY = containerBounds.height / 2
-          const explosionDistance = Math.sqrt(
-            Math.pow(centerX - x, 2) + Math.pow(centerY - y, 2)
-          )
-          
-          if (explosionDistance > 0) {
-            const explosionForce = 500
-            const explosionNx = (x - centerX) / explosionDistance
-            const explosionNy = (y - centerY) / explosionDistance
-            
-            vx += explosionNx * explosionForce * deltaTime
-            vy += explosionNy * explosionForce * deltaTime
+          const distance = Math.sqrt(Math.pow(centerX - x, 2) + Math.pow(centerY - y, 2))
+
+          if (distance > 0) {
+            const nx = (x - centerX) / distance
+            const ny = (y - centerY) / distance
+            // Base force kept small; scales with the current impulse
+            const baseForce = 60
+            const force = baseForce * clickImpulseRef.current
+            vx += nx * force * deltaTime
+            vy += ny * force * deltaTime
           }
+
+          // Decay the impulse each frame
+          clickImpulseRef.current *= 0.9
         }
 
-        // Add some random movement for continuous motion
-        if (Math.random() < 0.03) {
+        // No random movement unless hovered
+        if (isHovered && Math.random() < 0.03) {
           vx += (Math.random() - 0.5) * 0.3
           vy += (Math.random() - 0.5) * 0.3
         }
@@ -269,12 +191,14 @@ export default function PhysicsParticles({ isHovered, onClick, containerRef }: P
         vx *= FRICTION
         vy *= FRICTION
 
-        // Update position
-        x += vx * deltaTime * 60 // 60fps normalization
-        y += vy * deltaTime * 60
+        // Update position only when hovered
+        if (isHovered) {
+          x += vx * deltaTime * 60 // 60fps normalization
+          y += vy * deltaTime * 60
+        }
 
         // Enhanced boundary collision detection with more energetic bouncing
-        const bounceMultiplier = scrollForce.intensity > 0.5 ? 1.2 : 1.0 // More energetic bouncing during scroll
+        const bounceMultiplier = 1.0
         
         if (x - particle.radius < 0) {
           x = particle.radius
@@ -287,17 +211,9 @@ export default function PhysicsParticles({ isHovered, onClick, containerRef }: P
         if (y - particle.radius < 0) {
           y = particle.radius
           vy = -vy * BOUNCE_DAMPING * bounceMultiplier
-          // Add some extra energy when hitting top during scroll
-          if (scrollForce.direction < 0 && scrollForce.intensity > 1) {
-            vy += scrollForce.intensity * 2
-          }
         } else if (y + particle.radius > containerBounds.height) {
           y = containerBounds.height - particle.radius
           vy = -vy * BOUNCE_DAMPING * bounceMultiplier
-          // Add some extra energy when hitting bottom during scroll
-          if (scrollForce.direction > 0 && scrollForce.intensity > 1) {
-            vy -= scrollForce.intensity * 2
-          }
         }
 
         // Update trail
@@ -321,18 +237,20 @@ export default function PhysicsParticles({ isHovered, onClick, containerRef }: P
         }
       })
 
-      // Handle particle-to-particle collisions
-      for (let i = 0; i < newParticles.length; i++) {
-        for (let j = i + 1; j < newParticles.length; j++) {
-          if (checkCollision(newParticles[i], newParticles[j])) {
-            handleCollision(newParticles[i], newParticles[j])
+      // Handle collisions only during hover for calmer idle state
+      if (isHovered) {
+        for (let i = 0; i < newParticles.length; i++) {
+          for (let j = i + 1; j < newParticles.length; j++) {
+            if (checkCollision(newParticles[i], newParticles[j])) {
+              handleCollision(newParticles[i], newParticles[j])
+            }
           }
         }
       }
 
       return newParticles
     })
-  }, [isHovered, onClick, mousePos, containerBounds, scrollForce, GRAVITY, FRICTION, BOUNCE_DAMPING, COLLISION_DAMPING, MOUSE_FORCE])
+  }, [isHovered, onClick, mousePos, containerBounds, GRAVITY, FRICTION, BOUNCE_DAMPING, COLLISION_DAMPING, MOUSE_FORCE])
 
   // Animation loop
   useEffect(() => {
@@ -350,21 +268,16 @@ export default function PhysicsParticles({ isHovered, onClick, containerRef }: P
     animationRef.current = requestAnimationFrame(animate)
 
     return () => {
-      if (animationRef.current) {
-        cancelAnimationFrame(animationRef.current)
-      }
+      if (animationRef.current !== null) cancelAnimationFrame(animationRef.current)
     }
   }, [updatePhysics])
 
-  // Reset particles on click
+  // Remove click pulse to keep idle calm
   useEffect(() => {
     if (onClick) {
-      const timer = setTimeout(() => {
-        setParticles(initializeParticles())
-      }, 1000)
-      return () => clearTimeout(timer)
+      clickImpulseRef.current = 0
     }
-  }, [onClick, initializeParticles])
+  }, [onClick])
 
   return (
     <div className="absolute inset-0 overflow-hidden pointer-events-none">
@@ -400,9 +313,8 @@ export default function PhysicsParticles({ isHovered, onClick, containerRef }: P
               boxShadow: `0 0 ${particle.radius * 4}px ${particle.color}40`,
             }}
             animate={{
-              scale: isHovered ? [1, 1.2, 1] : 1,
-              // Add subtle glow during scroll interaction
-              boxShadow: scrollForce.intensity > 1 
+              scale: isHovered ? [1, 1.1, 1] : 1,
+              boxShadow: isHovered
                 ? `0 0 ${particle.radius * 6}px ${particle.color}60`
                 : `0 0 ${particle.radius * 4}px ${particle.color}40`,
             }}
@@ -414,21 +326,7 @@ export default function PhysicsParticles({ isHovered, onClick, containerRef }: P
         </div>
       ))}
 
-      {/* Scroll intensity indicator (subtle visual feedback) */}
-      {scrollForce.intensity > 0.5 && (
-        <motion.div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background: `radial-gradient(circle at center, ${PRIMARY_COLOR}05 0%, transparent 70%)`,
-          }}
-          animate={{
-            opacity: Math.min(scrollForce.intensity / 5, 0.3),
-          }}
-          transition={{
-            duration: 0.1,
-          }}
-        />
-      )}
+      {/* Removed scroll intensity indicator */}
     </div>
   )
 }

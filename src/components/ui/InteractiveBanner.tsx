@@ -15,7 +15,7 @@ function Frame941() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.2 }}
       >
-        <h3 className="p-0 m-0 font-extrabold text-lg text-foreground text-pretty">Want a custom <span className="inline-block">technical Demo?</span></h3>
+        <h3 className="p-0 m-0 font-extrabold text-lg text-foreground text-pretty">Want to see a <span className="inline-block">custom demo?</span></h3>
       </motion.div>
       <motion.div 
         className="flex flex-col justify-center relative shrink-0  w-full"
@@ -24,7 +24,7 @@ function Frame941() {
         transition={{ duration: 0.6, delay: 0.4 }}
       >
         <p className="font-normal text-base text-balance text-muted-foreground">
-          Our technical experts are <span className="inline-block">here to help</span>.
+        Our technical experts <span className="inline-block">are here to help.</span>
         </p>
       </motion.div>
     </div>

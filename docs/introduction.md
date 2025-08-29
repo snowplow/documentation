@@ -1,14 +1,16 @@
 ---
-title: "Introduction"
+title: "Welcome to the Snowplow Documentation"
 slug: "/"
 sidebar_position: 0
+sidebar_label: "Introduction"
+description: "Welcome to Snowplow, the leader in customer data infrastructure (CDI) for AI"
 ---
 
 <head>
   <meta name='zd-site-verification' content='fly2zzu1qcv51s1ma9jds' />
 </head>
 
-Welcome to Snowplow, the leader in customer data infrastructure (CDI) for AI, enabling every organization to transform raw behavioral data into governed, high-fidelity fuel for AI-powered applications—including advanced analytics, real-time personalization engines, and AI agents.
+We are the leader in customer data infrastructure (CDI) for AI, enabling every organization to transform raw behavioral data into governed, high-fidelity fuel for AI-powered applications—including advanced analytics, real-time personalization engines, and AI agents.
 
 Digital-first companies like Strava, HelloFresh, Auto Trader, Burberry, and DPG Media rely on Snowplow to collect and process event-level data in real time, delivering it securely to their warehouse, lake, or stream, and to integrate deep customer context into their applications.
 

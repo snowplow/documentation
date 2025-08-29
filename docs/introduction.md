@@ -1,5 +1,5 @@
 ---
-title: "Welcome to Snowplow Documentation"
+title: "Welcome to the Snowplow Documentation"
 slug: "/"
 sidebar_position: 0
 sidebar_label: "Introduction"

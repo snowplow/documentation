@@ -8,6 +8,23 @@ An attribute key is the identifier that attributes are calculated against.
 
 Signals includes a number of out-of-the-box attribute keys based on commonly used identifiers from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) in all Snowplow events.
 
+This table lists the built-in attribute keys, and suggests others that could be useful:
+
+| Attribute key     | Identifier                                                                                                                 | Built-in |
+| ----------------- | -------------------------------------------------------------------------------------------------------------------------- | -------- |
+| User              | `user_id` from [atomic fields](/docs/fundamentals/canonical-event/index.md#user-related-fields)                            | ✅        |
+| Device            | `domain_userid` and `network_userid` from [atomic fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) | ✅        |
+| Session           | `domain_sessionid` from [atomic fields](/docs/fundamentals/canonical-event/index.md#user-related-fields)                   | ✅        |
+| App               | `app_id` from [atomic fields](/docs/fundamentals/canonical-event/index.md#application-fields)                              |          |
+| Page              | `page_urlpath` from [atomic fields](/docs/fundamentals/canonical-event/index.md#platform-specific-fields)                  |          |
+| Product           | `id` from [ecommerce product](/docs/events/ootb-data/ecommerce-events/index.md#product) or custom entity                   |          |
+| Screen view       | `id` in `screen_view` entity                                                                                               |          |
+| Geographic region | `geo_country` from [IP Enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md)         |          |
+| Content category  | from custom entity                                                                                                         |          |
+| Video game level  | from custom entity                                                                                                         |          |
+
+These are the built-in attribute keys provided by Signals:
+
 | Attribute key | Out-of-the-box identifier           | Type     |
 | ------------- | ----------------------------------- | -------- |
 | User          | `user_id`                           | `string` |

@@ -6,16 +6,12 @@ sidebar_label: "Concepts"
 
 Signals introduces a new set of data governance concepts to Snowplow. As with schemas for Snowplow event data, Signals components are strictly defined, structured, and versioned.
 
-**Attributes** define a specific fact about user behavior.
+Signals has two main configuration components:
+* **Attribute groups**, for defining and calculating attributes from behavioral data
+* **Services**, for consuming calculated attributes in your applications
 
-They don't include any configuration for real-time or batch processing, versioning, or calculation context. To define that important metadata, you'll need to configure attribute groups. Signals has two attribute groupings:
-* **Attribute groups**, for defining attributes
-* **Services**, for consuming attributes
+**Attribute groups** are where you define the behavioral data you want to calculate. Each attribute group contains multiple **attributes** - the specific facts about user behavior you want to measure - along with the configuration that defines how to calculate them, and from what data. Attributes can only be defined within attribute groups: they are effectively properties of the attribute group.
 
-Start by creating attribute groups. At this point, you'll define:
-* The data source - whether to calculate the attributes from the real-time stream, or in batch from the warehouse
-* What **attribute key** to calculate the attributes for
-* The version number of the attribute group
 
 Apply the attribute group configuration to Signals, so that it can start calculating attributes and populating your Profiles Store. You'll need additional configuration if you're using batch processing.
 
@@ -23,86 +19,19 @@ Next, choose which attributes from which attribute groups you want to consume in
 
 Finally, retrieve calculated attributes in your application, and use them to trigger actions.
 
-## Overview diagrams
+## Attribute groups
 
-This diagram shows a simple example configuration:
+Attribute groups are where you define the behavioral data you want to calculate. Each attribute group is a versioned collection that specifies:
+* The **attributes** to calculate - the specific behavioral facts about users
+* The **attribute key** that provides the analytical context
+* The **data source** - whether to calculate from the real-time stream, or in batch from the warehouse
+* Processing and versioning configuration
 
-```mermaid
-flowchart TD
-    subgraph Section1[Defining what to calculate]
-        subgraph AttributeGroup[AttributeGroup]
-            AG_AttributeKey[AttributeKey]
-            AG_Attr1[Attribute 1]
-        end
+Attributes can only be defined within attribute groups. They describe what kind of calculation to perform and what event data to evaluate.
 
-        AttributeGroup --> ProfilesStore[Profiles Store]
-    end
+### Attribute types
 
-    subgraph Section2[Using attributes]
-        ProfilesStore --> Service[Service]
-
-        subgraph Service
-            S_Attr1[Attribute 1]
-        end
-
-        Service --> Application[Application]
-    end
-```
-A single attribute has been defined, calculated, and retrieved to use in an application.
-
-The next diagram shows a more complex example configuration. Things to note:
-* Attribute groups can have multiple attributes, but only one attribute key
-* Attributes can be reused across attribute groups
-* All calculated attributes are stored in the Profiles Store
-* Services can selectively retrieve attribute values from different attribute groups
-
-```mermaid
-flowchart TD
-    subgraph Section1[Defining what to calculate]
-        subgraph Attributes[Attributes]
-            Attr1[Attribute 1]
-            Attr2[Attribute 2]
-            Attr3[Attribute 3]
-        end
-
-        subgraph StreamAttributeGroup[StreamAttributeGroup]
-            SAG_AttributeKey[AttributeKey]
-            SAG_Attr1[Attribute 1]
-            SAG_Attr2[Attribute 2]
-        end
-
-        subgraph BatchAttributeGroup[BatchAttributeGroup]
-            BAG_AttributeKey[AttributeKey]
-            BAG_Attr2[Attribute 2]
-            BAG_Attr3[Attribute 3]
-        end
-
-        Attr1 -.-> SAG_Attr1
-        Attr2 -.-> SAG_Attr2
-        Attr2 -.-> BAG_Attr2
-        Attr3 -.-> BAG_Attr3
-
-        StreamAttributeGroup --> ProfilesStore[Profiles Store]
-        BatchAttributeGroup --> ProfilesStore
-    end
-
-    subgraph Section2[Using attributes]
-        ProfilesStore --> Service[Service]
-
-        subgraph Service
-            SAG_Attr1[Attribute 1 from StreamAttributeGroup]
-            BAG_Attr2[Attribute 2 from BatchAttributeGroup]
-        end
-
-        Service --> Application[Application]
-    end
-```
-
-## Attributes
-
-An attribute describes what kind of calculation to perform, and what event data to evaluate.
-
-There are four main types of attribute, depending on the type of user behavior you want to understand:
+Within attribute groups, you can define four main types of attributes, depending on the type of user behavior you want to understand:
 
 | Type          | Description                                            | Example                              |
 | ------------- | ------------------------------------------------------ | ------------------------------------ |
@@ -111,7 +40,9 @@ There are four main types of attribute, depending on the type of user behavior y
 | First touch   | The first event or property that happened              | `first_mkt_source`                   |
 | Last touch    | The most recent event or property that happened        | `last_device_class`                  |
 
-Attribute values can be updated in multiple ways, depending how they're configured:
+### Data sources and updates
+
+Attribute values within groups can be updated in multiple ways, depending how the attribute group is configured:
 * Events in real time (stream source only)
 * Data in warehouse (batch source only)
 * Interventions
@@ -120,11 +51,31 @@ Real-time attribute calculation uses the Snowplow event stream, and therefore in
 
 Calculated attribute values are stored in the Profiles Store.
 
+### Example attribute group configuration
+
+Here's an example configuration for an attribute group based on a user attribute key, with a stream (default) source:
+
+```mermaid
+flowchart TD
+    subgraph AttributeGroup[AttributeGroup: `user_attributes_realtime`]
+        AG_User[user_attribute_key: `user_id`]
+        AG_SA1[`number_of_pageviews`]
+        AG_SA2[`last_product_viewed`]
+    end
+```
+
+When this attribute group configuration is applied to Signals, the attributes will be calculated and stored in the Profiles Store. On retrieval, this attribute group might look something like this as a table:
+
+| `user_id`            | `number_of_pageviews` | `last_product_viewed` |
+| -------------------- | --------------------- | --------------------- |
+| `abc123@example.com` | 5                     | `"Red Shoes"`         |
+| `def456@example.com` | 10                    | `"Blue Hat"`          |
+
 ## Attribute keys
 
-An attribute key is an identifier that provides the analytical context for attribute calculations. The identifier can be any field of a Snowplow event, such as `domain_userid`.
+An attribute key is an identifier that provides the analytical context for all attribute calculations within an attribute group. The identifier can be any field of a Snowplow event, such as `domain_userid`.
 
-To demonstrate the necessity of attribute keys, consider the attribute `num_views_in_last_10_min`. This table lists some possible meanings of the attribute, based on the attribute key it's calculated against:
+To demonstrate the necessity of attribute keys, consider the attribute `num_views_in_last_10_min` defined within different attribute groups. This table lists some possible meanings of the attribute, based on the attribute key configured for its attribute group:
 
 | Attribute                  | Attribute key      | Description                                                                         |
 | -------------------------- | ------------------ | ----------------------------------------------------------------------------------- |
@@ -156,37 +107,6 @@ This table lists the built-in attribute keys, and suggests others that could be 
 | Content category  | from custom entity                                                                                                         |          |
 | Video game level  | from custom entity                                                                                                         |          |
 
-## Attribute groups
-
-Attribute groups are where you define the metrics that you want to calculate.
-
-An attribute group is a versioned set of attributes that are calculated against a specific attribute key, from a specific source. The source could be the real-time event stream, or a warehouse table batch source.
-
-An example configuration for an attribute group based on a user attribute key, with a stream (default) source:
-
-```mermaid
-flowchart TD
-    subgraph Stream[Attributes]
-        SA1[`number_of_pageviews`]
-        SA2[`last_product_viewed`]
-    end
-
-    Stream --> AttributeGroup
-
-    subgraph AttributeGroup[AttributeGroup: `user_attributes_realtime`]
-        AG_User[user_attribute_key: `user_id`]
-        AG_SA1[`number_of_pageviews`]
-        AG_SA2[`last_product_viewed`]
-    end
-```
-
-When this attribute group configuration is applied to Signals, the attributes will be calculated and stored in the Profiles Store. On retrieval, this attribute group might look something like this as a table:
-
-| `user_id`            | `number_of_pageviews` | `last_product_viewed` |
-| -------------------- | --------------------- | --------------------- |
-| `abc123@example.com` | 5                     | `"Red Shoes"`         |
-| `def456@example.com` | 10                    | `"Blue Hat"`          |
-
 ## Services
 
 Services are where you define how to use the calculated attributes in your applications.
@@ -199,20 +119,10 @@ By using services you can:
 * Iterate on attribute definitions without worrying about breaking downstream processes
 * Migrate to new attribute group versions by updating the service definition, without having to update the application code
 
-Here's a service that combines the same attribute group as before with an additional batch attribute group:
+Here's a service that combines the stream attribute group from before with an additional batch attribute group:
 
 ```mermaid
 flowchart TD
-    subgraph Attributes[Attributes]
-        SAG1[`number_of_pageviews`]
-        SAG2[`last_product_viewed`]
-        BAG1[`previous_purchases`]
-        BAG2[`previous_returns`]
-    end
-
-    Attributes --> StreamAttributeGroup
-    Attributes --> BatchAttributeGroup
-
     subgraph StreamAttributeGroup[AttributeGroup: `user_attributes_realtime`]
         SV_User[User: `user_id`]
         SV_SAG1[`number_of_pageviews`]

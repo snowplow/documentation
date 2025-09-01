@@ -19,11 +19,11 @@ Real-time personalization use cases that are unlocked by Signals include:
 * Contextually relevant advertising
 * Paywall optimization
 
-Your Signals infrastructure is deployed by us into the same cloud as your Snowplow BDP pipeline. You can use the Snowplow BDP Console to first define the data you're interested in, then use the Signals APIs and SDKs to retrieve the calculated attributes in your applications to alter your customer's experience and behavior.
+Your Signals infrastructure is deployed by us into the same cloud as your Snowplow BDP pipeline. You can use the Snowplow BDP Console to first define the data you're interested in, then use the Signals APIs and SDKs to retrieve the calculated [attributes](/docs/signals/concepts/index.md) in your applications to alter your customer's experience and behavior.
 
-As well as attributes, Signals allows you to define interventions. This is a way to specify the business logic, based on attribute values, that should trigger actions such as notifications in your application.
+As well as attributes, Signals allows you to define [interventions](/docs/signals/interventions/index.md). This is a way to specify the business logic, based on attribute values, that should trigger actions such as notifications in your application.
 
-Every attribute group and intervention that is published to the Signals API is versioned, allowing you to maintain strong data governance within the Profiles Store, and to test new Signals configurations without affecting production.
+Every attribute group and intervention published to the Signals API is versioned, allowing you to maintain strong data governance within the Profiles Store, and to test new Signals configurations without affecting production.
 
 ## How does Signals fit into the Snowplow pipeline?
 
@@ -39,8 +39,6 @@ The core Signals components are:
 ![](./images/signals-bdp-overview.png)
 
 ## How Signals calculates attributes
-
-Stream attributes are calculated automatically.
 
 When Signals is deployed in your Snowplow BDP pipeline, the event stream is read by the streaming engine. All tracked events are inspected. If you've configured Signals to calculate an attribute from a certain type of event, when that event type is received, the engine will compute the attribute data and forward it to the Profiles Store, in real time. If that event type isn't registered as containing attribute data, nothing happens.
 
@@ -82,7 +80,7 @@ flowchart TD
 
 ## Using Signals
 
-Snowplow will deploy all the Signals infrastructure for you.
+Speak to our team about buying Signals. Once you've signed up, it'll be available in BDP Console under the **Signals** tab. Follow the steps to deploy the infrastructure.
 
 Steps for using Signals:
 1. Decide on the business logic
@@ -97,13 +95,11 @@ Check out the [quick start tutorial](/tutorials/signals-quickstart/start) to get
 
 ### 1. Decide on the business logic
 
-Your first step is to decide which attributes you want to calculate, and which interventions you're interested in tracking.
-
-Read more about attributes and interventions on the [concepts](/docs/signals/concepts/index.md) page.
-
-Signals includes a range of different aggregations for calculating attributes, including `mean`, `counter`, or `unique_list`. See the full list in the [attribute configuration](/docs/signals/configuration/attribute-groups/attributes/index.md) page.
+Your first step is to decide what changes in user behavior you're aiming for. What systems or data will you need to achieve this? This planning will help you decide which attributes you want to calculate, and which interventions you're interested in defining.
 
 You'll also need to decide whether to calculate attributes from your real-time event stream (default), or from warehouse data, or both.
+
+Read more about attributes and interventions on the [concepts](/docs/signals/concepts/index.md) page.
 
 ### 2. Apply the configuration
 

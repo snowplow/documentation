@@ -6,32 +6,31 @@ sidebar_label: "Concepts"
 
 Signals introduces a new set of data governance concepts to Snowplow. As with schemas for Snowplow event data, Signals components are strictly defined, structured, and versioned.
 
-Signals has two main configuration components:
-* **Attribute groups**, for defining and calculating attributes from behavioral data
+Signals has three main configurable components:
+* **Attribute groups**, for defining and calculating attributes
 * **Services**, for consuming calculated attributes in your applications
+* **Interventions**, for consuming calculated attributes and triggering actions in your applications
 
-**Attribute groups** are where you define the behavioral data you want to calculate. Each attribute group contains multiple **attributes** - the specific facts about user behavior you want to measure - along with the configuration that defines how to calculate them, and from what data. Attributes can only be defined within attribute groups: they are effectively properties of the attribute group.
+**Attribute groups** are where you define the behavioral data you want to calculate. Each attribute group contains multiple **attributes** - the specific facts about user behavior you want to measure - along with the configuration that defines how to calculate them, and from what data. Attributes can only be defined within attribute groups; they are effectively properties of the attribute group.
 
+To use attributes to trigger actions such as in-app messages, discounts, or personalized journeys, use services or interventions.
 
-Apply the attribute group configuration to Signals, so that it can start calculating attributes and populating your Profiles Store. You'll need additional configuration if you're using batch processing.
-
-Next, choose which attributes from which attribute groups you want to consume in your applications. Group them into services, and apply the configuration to Signals.
-
-Finally, retrieve calculated attributes in your application, and use them to trigger actions.
+**Services** provide a stable interface layer between your calculated attributes and your applications. Each service can contain multiple attribute groups, pinned to specific versions. You'd build the logic within your application for how to use the retrieved attributes. **Interventions** are a separate abstraction for defining when to trigger actions in your application.
 
 ## Attribute groups
 
-Attribute groups are where you define the behavioral data you want to calculate. Each attribute group is a versioned collection that specifies:
+Attribute groups are where you define the data you want to calculate. Each attribute group is a versioned collection that specifies:
 * The **attributes** to calculate - the specific behavioral facts about users
-* The **attribute key** that provides the analytical context
 * The **data source** - whether to calculate from the real-time stream, or in batch from the warehouse
-* Processing and versioning configuration
+* The **attribute key** that provides the analytical context
+* Other metadata such as description or owner
 
-Attributes can only be defined within attribute groups. They describe what kind of calculation to perform and what event data to evaluate.
 
-### Attribute types
+### Types of attribute
 
-Within attribute groups, you can define four main types of attributes, depending on the type of user behavior you want to understand:
+Attributes describe what kind of calculation to perform, and what event data to evaluate. They can only exist within attribute groups.
+
+Attributes can be categorized into four main types, depending on the type of user behavior you want to understand:
 
 | Type          | Description                                            | Example                              |
 | ------------- | ------------------------------------------------------ | ------------------------------------ |
@@ -40,16 +39,41 @@ Within attribute groups, you can define four main types of attributes, depending
 | First touch   | The first event or property that happened              | `first_mkt_source`                   |
 | Last touch    | The most recent event or property that happened        | `last_device_class`                  |
 
-### Data sources and updates
+Signals includes a range of different aggregations for calculating attributes, including `mean`, `counter`, or `unique_list`. See the full list in the [attribute configuration](/docs/signals/configuration/attribute-groups/attributes/index.md) page.
 
-Attribute values within groups can be updated in multiple ways, depending how the attribute group is configured:
-* Events in real time (stream source only)
-* Data in warehouse (batch source only)
-* Interventions
+### Attribute keys
 
-Real-time attribute calculation uses the Snowplow event stream, and therefore ingests only Snowplow events. For historical warehouse attributes, you can import values from any table—whether created by Signals or not, even whether derived from Snowplow data or not.
+An attribute key is an identifier that provides the analytical context for all attribute calculations within a group. The identifier can be any field of a Snowplow event, such as `domain_userid`.
+
+To demonstrate the necessity of attribute keys, consider the attribute `num_views_in_last_10_min` defined within different attribute groups. This table lists some possible meanings of the attribute, based on the attribute key configured for its attribute group:
+
+| Attribute                  | Attribute key      | Description                                                                         |
+| -------------------------- | ------------------ | ----------------------------------------------------------------------------------- |
+| `num_views_in_last_10_min` | User               | How many pages a user has viewed within the last 10 minutes                         |
+| `num_views_in_last_10_min` | Page               | How many page views a page has received within the last 10 minutes                  |
+| `num_views_in_last_10_min` | Product            | How many times a product has been viewed within the last 10 minutes                 |
+| `num_views_in_last_10_min` | App                | How many page views occurred within an app in the last 10 minutes                   |
+| `num_views_in_last_10_min` | Device             | How many page views came from a specific device in the last 10 minutes              |
+| `num_views_in_last_10_min` | Marketing campaign | How many page views were generated by a campaign in the last 10 minutes             |
+| `num_views_in_last_10_min` | Geographic region  | How many page views came from users in one region within the last 10 minutes        |
+| `num_views_in_last_10_min` | Customer segment   | How many page views were generated by users in a segment within the last 10 minutes |
+
+Each of these is likely to have a different calculated value.
+
+You can define your own attribute keys, or use the built-in ones. Signals comes with predefined attribute keys for user, device, and session. Their identifiers are from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) in all Snowplow events.
+
+### How are attributes updated?
 
 Calculated attribute values are stored in the Profiles Store.
+
+Signals will calculate or update attribute values based on the configuration you provide. There are three ways to update attribute values:
+* Based on events in real time (stream source only)
+* Synced from data in warehouse (batch source only)
+* Interventions can be configured to update attributes
+
+Real-time attribute calculation uses the Snowplow event stream, and therefore ingests only Snowplow events. For historical warehouse attributes, you can import values from any table — whether created by Signals or not, even whether derived from Snowplow data or not. For example, you may want to include transactional data in your Signals use case.
+
+To learn more about stream and batch sources, see the [stream vs batch](/docs/signals/stream-vs-batch/index.md) page.
 
 ### Example attribute group configuration
 
@@ -71,49 +95,11 @@ When this attribute group configuration is applied to Signals, the attributes wi
 | `abc123@example.com` | 5                     | `"Red Shoes"`         |
 | `def456@example.com` | 10                    | `"Blue Hat"`          |
 
-## Attribute keys
-
-An attribute key is an identifier that provides the analytical context for all attribute calculations within an attribute group. The identifier can be any field of a Snowplow event, such as `domain_userid`.
-
-To demonstrate the necessity of attribute keys, consider the attribute `num_views_in_last_10_min` defined within different attribute groups. This table lists some possible meanings of the attribute, based on the attribute key configured for its attribute group:
-
-| Attribute                  | Attribute key      | Description                                                                         |
-| -------------------------- | ------------------ | ----------------------------------------------------------------------------------- |
-| `num_views_in_last_10_min` | User               | How many pages a user has viewed within the last 10 minutes                         |
-| `num_views_in_last_10_min` | Page               | How many page views a page has received within the last 10 minutes                  |
-| `num_views_in_last_10_min` | Product            | How many times a product has been viewed within the last 10 minutes                 |
-| `num_views_in_last_10_min` | App                | How many page views occurred within an app in the last 10 minutes                   |
-| `num_views_in_last_10_min` | Device             | How many page views came from a specific device in the last 10 minutes              |
-| `num_views_in_last_10_min` | Marketing campaign | How many page views were generated by a campaign in the last 10 minutes             |
-| `num_views_in_last_10_min` | Geographic region  | How many page views came from users in a region within the last 10 minutes          |
-| `num_views_in_last_10_min` | Customer segment   | How many page views were generated by users in a segment within the last 10 minutes |
-
-Each of these is likely to have a different calculated value.
-
-You can define your own attribute keys, or use the built-in ones. Signals comes with predefined attribute keys for user, device, and session. Their identifiers are from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) in all Snowplow events.
-
-This table lists the built-in attribute keys, and suggests others that could be useful:
-
-| Attribute key     | Identifier                                                                                                                 | Built-in |
-| ----------------- | -------------------------------------------------------------------------------------------------------------------------- | -------- |
-| User              | `user_id` from [atomic fields](/docs/fundamentals/canonical-event/index.md#user-related-fields)                            | ✅        |
-| Device            | `domain_userid` and `network_userid` from [atomic fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) | ✅        |
-| Session           | `domain_sessionid` from [atomic fields](/docs/fundamentals/canonical-event/index.md#user-related-fields)                   | ✅        |
-| App               | `app_id` from [atomic fields](/docs/fundamentals/canonical-event/index.md#application-fields)                              |          |
-| Page              | `page_urlpath` from [atomic fields](/docs/fundamentals/canonical-event/index.md#platform-specific-fields)                  |          |
-| Product           | `id` from [ecommerce product](/docs/events/ootb-data/ecommerce-events/index.md#product) or custom entity                   |          |
-| Screen view       | `id` in `screen_view` entity                                                                                               |          |
-| Geographic region | `geo_country` from [IP Enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md)         |          |
-| Content category  | from custom entity                                                                                                         |          |
-| Video game level  | from custom entity                                                                                                         |          |
-
 ## Services
 
 Services are where you define how to use the calculated attributes in your applications.
 
-
-Each service can contain multiple entire attribute groups, or individual attributes from different attribute groups, even if they have different attribute keys or different sources.
-They provide a stable interface to use in your applications: by pinning specific attribute group versions, they provide a consistent set of consumable attributes.
+Rather than connecting applications directly to attribute groups, services allow you to consume specific attribute group versions. This provides a consistent set of consumable attributes. We strongly recommend using services in production applications.
 
 By using services you can:
 * Iterate on attribute definitions without worrying about breaking downstream processes
@@ -155,8 +141,7 @@ This service could be imagined like this as a table:
 
 ## Interventions
 
-Interventions are a way to trigger actions in your application, such as in-app messages, discounts, or personalized journeys.
-They're calculated on top of changes in attribute values, or fired by your own applications.
+Interventions are calculated on top of changes in attribute values, or fired by your own applications.
 
 This allows you to influence user behavior without requiring application updates, since you can control when the intervention should fire through Signals.
 

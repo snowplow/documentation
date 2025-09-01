@@ -19,96 +19,30 @@ Real-time personalization use cases that are unlocked by Signals include:
 * Contextually relevant advertising
 * Paywall optimization
 
-Your Signals infrastructure is deployed by us into the same cloud as your Snowplow BDP pipeline. You can use the Signals APIs and SDKs to first define the data you're interested in, then to retrieve the calculated attributes to alter your customer's experience and behavior.
+Your Signals infrastructure is deployed by us into the same cloud as your Snowplow BDP pipeline. You can use the Snowplow BDP Console to first define the data you're interested in, then use the Signals APIs and SDKs to retrieve the calculated attributes in your applications to alter your customer's experience and behavior.
 
 As well as attributes, Signals allows you to define interventions. This is a way to specify the business logic, based on attribute values, that should trigger actions such as notifications in your application.
 
-Every attribute grouping and intervention that is published to the Signals API is versioned, allowing you to maintain strong data governance within the Profiles Store, and to test new Signals configurations without affecting production.
+Every attribute group and intervention that is published to the Signals API is versioned, allowing you to maintain strong data governance within the Profiles Store, and to test new Signals configurations without affecting production.
 
 ## How does Signals fit into the Snowplow pipeline?
 
-The core Signals infrastructure components are:
-* Profiles Store
-* Streaming engine to compute attributes from Snowplow events in stream
-  * These attributes are directly sent to the Profiles Store
-* Batch engine to compute attributes from warehouse tables
-  * This runs in the warehouse
-* Sync engine to periodically update the Profiles Store with batch attributes
-* Signals API to define, publish, and fetch attributes and interventions
+Signals consists of several new infrastructure components. When running Signals, your Snowplow pipeline will continue to process events as usual.
 
-![](./images/signals-pipeline.png)
+The core Signals components are:
+* **Profiles Store**: stores calculated attributes and configurations
+* Signals **SDKs** and **API**: allow you to manage and fetch attributes and interventions
+* **Streaming engine**: computes attributes from Snowplow events in stream, and sends them directly to the Profiles Store
+* **Sync engine**: periodically updates the Profiles Store with batch attributes
+* **Batch engine**: runs in your warehouse to compute attributes from warehouse tables
 
-## Using Signals
-
-Steps for using Signals:
-
-0. Deploy the infrastructure - Snowplow will do this for you
-1. Define and test attributes
-2. Publish the attribute definitions
-3. (Optional) Configure the batch engine for historical warehouse attributes
-4. Use the attributes in your application
-
-:::note Warehouse support
-Only Snowflake is supported currently.
-:::
-
-Check out the [quick start tutorial](/tutorials/signals-quickstart/start) to get started.
-
-### Defining the business logic
-
-Your first step is to define the attributes and interventions you're interested in tracking. This is done using our [Signals Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk). Once defined, apply the attributes configuration to the Signals infrastructure.
-
-Example attributes:
-* `num_page_views_last_5_min`
-* `add_to_cart_events_count`
-* `product_view_events_count`
-* `last_login_date`
-* `previous_purchases_count`
-* `latest_refr_source`
-
-Defining stream attributes:
-
-```mermaid
-flowchart TD
-    A[Create GitHub repo] --> B[Create Jupyter notebook]
-    B --> C[Import Signals Python SDK]
-    C --> D{Decide on what<br/>attributes to track}
-
-    D --> E[Define attributes]
-
-    subgraph SDK[Using SDK API]
-        E --> F[Create versioned groupings]
-        F --> G[Test the group]
-        G --> H[Apply the group]
-    end
-
-    H --> I[Attribute group defined attributes<br/>in Console]
-
-    style SDK stroke:#333,stroke-width:2px
-```
-
-Interventions are defined in a similar way.
-
-For batch attributes, you'll also need to set up a dbt project to run the attribute calculation models, and to provide Signals with details of the created table. Alternatively, you can use any pre-existing table. Check out the [batch engine tutorial](/tutorials/signals-batch-engine/start/) to learn more.
-
-You don't have to use both stream and historical sources. It's more powerful to combine attributes from both sources, but feel free to configure just one if that makes more sense for your business.
-
-Once Signals receives the applied configurations it will start calculating attributes and populating the Profiles Store.
-
-### Retrieving the attributes in your application
-
-Snowplow provide SDKs for Node.js and Python to retrieve attributes in your application.
-
-| Feature             | [Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk) | [Node.js SDK](https://github.com/snowplow-incubator/snowplow-signals-typescript-sdk) |
-| ------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
-| Define Attributes   | ✅                                                                        | ❌                                                                                    |
-| Retrieve Attributes | ✅                                                                        | ✅                                                                                    |
+![](./images/signals-bdp-overview.png)
 
 ## How Signals calculates attributes
 
 Stream attributes are calculated automatically.
 
-When Signals is deployed in your Snowplow BDP pipeline, the event stream is read by the stream engine. All tracked events are inspected. If you've configured Signals to calculate an attribute from a certain type of event, when that event type is received, the engine will extract the attribute data and forward it to the Profiles Store, in real time. If that event type isn't registered as containing attribute data, nothing happens.
+When Signals is deployed in your Snowplow BDP pipeline, the event stream is read by the streaming engine. All tracked events are inspected. If you've configured Signals to calculate an attribute from a certain type of event, when that event type is received, the engine will compute the attribute data and forward it to the Profiles Store, in real time. If that event type isn't registered as containing attribute data, nothing happens.
 
 Real-time stream flow:
 
@@ -130,7 +64,7 @@ flowchart TD
     I -->     J[Attribute pushed to<br/>the Profiles Store]
 ```
 
-Conversely, batch attributes are calculated via dbt models and pushed to the Profiles Store periodically:
+Conversely, batch attributes are calculated via dbt models, and pushed to the Profiles Store periodically using the sync engine:
 
 ```mermaid
 flowchart TD
@@ -146,6 +80,39 @@ flowchart TD
     E -->|Yes| H[Attributes synced to<br/>the Profiles Store]
 ```
 
-## Example real-time Signals user journey
+## Using Signals
 
-TODO
+Snowplow will deploy all the Signals infrastructure for you.
+
+Steps for using Signals:
+1. Decide on the business logic
+2. Apply the configurations to Signals
+3. Use the attributes and interventions to take action in your application
+
+:::note Warehouse support
+Only Snowflake is supported currently.
+:::
+
+Check out the [quick start tutorial](/tutorials/signals-quickstart/start) to get started.
+
+### 1. Decide on the business logic
+
+Your first step is to decide which attributes you want to calculate, and which interventions you're interested in tracking.
+
+Read more about attributes and interventions on the [concepts](/docs/signals/concepts/index.md) page.
+
+Signals includes a range of different aggregations for calculating attributes, including `mean`, `counter`, or `unique_list`. See the full list in the [attribute configuration](/docs/signals/configuration/attribute-groups/attributes/index.md) page.
+
+You'll also need to decide whether to calculate attributes from your real-time event stream (default), or from warehouse data, or both.
+
+### 2. Apply the configuration
+
+We recommend using the BDP Console to define your configurations. You could also use the [Signals Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk), or even the Signals API.
+
+Once you've created your attribute group or intervention configurations, apply them to Signals by publishing them. It will start calculating attributes and populating the Profiles Store.
+
+### 3. Take action in your application
+
+Retrieve calculated attributes in your application using the [Node.js](https://github.com/snowplow-incubator/snowplow-signals-typescript-sdk) or [Python](https://github.com/snowplow-incubator/snowplow-signals-sdk) Signals SDKs. You could also use the Signals API.
+
+Use the attributes to update the user experience, or subscribe to interventions to take action based on user behavior. Read more about interventions on the [concepts](/docs/signals/concepts/index.md) page.

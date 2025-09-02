@@ -4,7 +4,7 @@ sidebar_position: 30
 sidebar_label: "Attribute groups"
 ---
 
-Define the behavior you want to capture in attribute groups. Choose whether to calculate attributes from your event stream or warehouse.
+Define the behavior you want to capture in [attribute groups](/docs/signals/concepts/#attribute-groups). Choose whether to calculate attributes from your event stream or warehouse.
 
 To create an attribute group, go to **Signals** > **Attribute groups** in BDP Console and follow the instructions.
 
@@ -15,9 +15,6 @@ The first step is to specify:
 * An optional description
 * The email address of the primary owner or maintainer
 * Which data source you want to use
-
-All attribute groups need an [attribute key](/docs/signals/configuration/attribute-groups/attribute-keys/index.md).
-
 
 ## Data source
 
@@ -52,11 +49,39 @@ Provide the warehouse and table details, and which fields you want to send to Si
 
 We recommend providing a timestamp field for incremental or snapshot-based tables. To minimize latency, Signals will use this to determine which rows have changed since the last sync. The sync engine will only send the new rows to the Profiles Store.
 
+## Attribute keys
+
+All attribute groups need an attribute key.
+
+Signals includes four built-in attribute keys, based on commonly used identifiers from the atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) in all Snowplow events.
+
+| Attribute key      | Type     |
+| ------------------ | -------- |
+| `user_id`          | `string` |
+| `domain_userid`    | `uuid`   |
+| `network_userid`   | `uuid`   |
+| `domain_sessionid` | `uuid`   |
+
+The `domain_userid` property is intended for use in web applications.
+
+### Creating a custom attribute key
+
+To create a custom attribute key, navigate to **Signals** > **Attribute keys** within BDP Console. Click the **Create attribute key** button.
+
+<!-- TODO image example -->
+
+You will need to provide:
+* A unique name
+* An optional description
+* An optional email address for the primary owner or maintainer
+* Which [atomic](/docs/fundamentals/canonical-event/index.md#atomic-fields) property you want to calculate attributes against
+
+
 ## Attribute lifetimes
 
-You can optionally set a Time to live (TTL) value for each attribute group.
+You can optionally set a Time to live (TTL) value for each attribute group. Some attributes will only be relevant for a certain amount of time, and eventually stop being updated. To avoid stale attributes staying in your Profiles Store forever, configure a TTL for the attribute group.
 
-Some attributes will only be relevant for a certain amount of time, and eventually stop being updated. To avoid stale attributes staying in your Profiles Store forever, configure TTL lifetimes for [attribute keys](/docs/signals/configuration/attribute-groups/attribute-keys/index.md) and attribute groups. When none of the attributes for an attribute key or attribute group have been updated for the defined lifespan, the attribute key or attribute group expires. Any attribute values for this attribute key or attribute group will be deleted: fetching them will return `None` values.
+When none of the attributes for an attribute group have been updated for the defined lifespan, the attribute group expires. Any attribute values for this group will be deleted: fetching them will return `None` values.
 
 If Signals then processes a new event that calculates the attribute again, or materializes the attribute from the warehouse again, the expiration timer is reset.
 

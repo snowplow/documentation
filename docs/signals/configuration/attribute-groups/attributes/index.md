@@ -50,7 +50,7 @@ A property isn't used for `counter` aggregation. To only count events with a spe
 ## Property selection
 
 You can calculate attributes based on properties in any part of your events:
-* Atomic properties: these are available for all events
+* [Atomic](/docs/fundamentals/canonical-event/index.md) properties: these are available for all events
 * Event schema properties: choose properties within your chosen event schema
 * Entity properties: choose properties from schemas that you are tracking as entities with your chosen event schema
 

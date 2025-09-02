@@ -1,331 +1,90 @@
 ---
-title: "Defining Attributes"
+title: "Attributes"
 sidebar_position: 10
 sidebar_label: "Attributes"
 ---
 
-Attributes represent specific facts about user behavior, and are calculated based on events in your Snowplow pipeline.
-
-To configure an attribute, you will need to set:
+To configure an attribute, you'll need to set:
 * A name, ideally one that describes the attribute
-* Which event schemas it will be calculated from, and what property in those schemas
+* Which event schema to calculate it from
+* What property in the schema to consider for the calculation
 * What kind of aggregation you want to calculate over time, e.g. `mean` or `last`
-* What type of value you want the attribute to hold, e.g. `double` or `string`
 
-Attribute calculation starts when the definitions are applied, and aren't backdated.
+<!-- TODO image attribute creation thingy on group creation page -->
 
-All configuration is defined using the Signals Python SDK.
+## Event selection
 
-## Minimal example
+Use the event filter to choose which event type to calculate the attribute from.
 
-This is the minimum configuration needed to create an attribute:
+<!-- TODO image event filter -->
 
-```python
-from snowplow_signals import Attribute, Event
+Click the dropdown to see the available schemas, listed by name and vendor:
 
-my_attribute = Attribute(
-    name="button_click_counter",
-    type="int32",
-    events=[
-        Event(
-            vendor="com.snowplowanalytics.snowplow",
-            name="button_click",
-            version="1-0-0",
-        )
-    ],
-    aggregation="counter"
-)
-```
+* **Snowplow events**: select any built-in Snowplow or [Iglu Central](https://iglucentral.com) schema. For legacy reasons, to calculate an attribute from structured events find `event (com.google.analytics.measurement-protocol)`.
 
-Once applied and active, this attribute definition will trigger every time Signals processes an event with the schema [`iglu:com.snowplowanalytics.snowplow/button_click/jsonschema/1-0-0`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/button_click/jsonschema/1-0-0). Starting from 0, the stored attribute will be an integer value that increases by 1 with every `button_click` event.
+* **Custom events**: select any schema or data structure that's available within your pipeline.
 
-## Options
+:::note Searching for schemas
+The schema search finds direct matches only, so use the exact name of the schema or vendor.
+:::
 
-The table below lists all available arguments for an `Attribute`:
+Once you've selected an event and version, click **Confirm** to add the attribute to your attribute group.
 
-| Argument        | Description                                                                                                                                  | Type                                                                                                                                                                                                                | Required? |
-| --------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
-| `name`          | The name of the attribute                                                                                                                    | `string`                                                                                                                                                                                                            | ✅         |
-| `description`   | The description of the attribute                                                                                                             | `string`                                                                                                                                                                                                            | ❌         |
-| `events`        | List of Snowplow `Event`s that the attribute is calculated on                                                                                | List of `Event` type                                                                                                                                                                                                | ✅         |
-| `aggregation`   | The calculation to be performed                                                                                                              | One of:  `counter`, `sum`, `min`, `max`, `mean`, `first`, `last`, `unique_list`                                                                                                                                     | ✅         |
-| `type`          | The type of the aggregation result                                                                                                           | One of: `bytes`, `string`, `int32`, `int64`, `double`, `float`, `bool`, `unix_timestamp`, `bytes_list`, `string_list`, `int32_list`, `int64_list`, `double_list`, `float_list`, `bool_list`, `unix_timestamp_list`, | ✅         |
-| `criteria`      | List of `Criteria` to filter the events                                                                                                      | List of `Criteria` type                                                                                                                                                                                             | ❌         |
-| `property`      | The property of the event or entity you wish to use in the aggregation                                                                       | `string`                                                                                                                                                                                                            | ❌         |
-| `period`        | The time period window over which the aggregation should be calculated                                                                       | Python `timedelta`                                                                                                                                                                                                  | ❌         |
-| `default_value` | The default value to use if the aggregation returns no results. If not set, the default value is automatically assigned based on the `type`. |                                                                                                                                                                                                                     | ❌         |
-| `tags`          | Metadata for the attribute, as a dictionary                                                                                                  |                                                                                                                                                                                                                     | ❌         |
+## Aggregation options
 
-### Specifying events
+Signals supports a number of different aggregation types.
 
-The `events` list describes the types of events that the attribute is calculated from. They're references to Snowplow events that exist in your Snowplow account, based on event schemas.
+| Aggregation | Description                    | Required property type                |
+| ----------- | ------------------------------ | ------------------------------------- |
+| Counter     | Count events                   | No property used for this aggregation |
+| Sum         | Sum of property values         | Numeric                               |
+| Min         | Minimum property value         | Numeric                               |
+| Max         | Maximum property value         | Numeric                               |
+| Mean        | Average of property values     | Numeric                               |
+| First       | First property value seen      | Any                                   |
+| Last        | Last property value seen       | Any                                   |
+| Unique list | List of unique property values | Any                                   |
 
-An `Event` accepts the following parameters:
+A property isn't used for `counter` aggregation. To only count events with a specific property value, use a criteria filter.
 
-| Argument  | Description                                     | Type     |
-| --------- | ----------------------------------------------- | -------- |
-| `name`    | `event_name` column in `atomic.events` table    | `string` |
-| `vendor`  | `event_vendor` column in `atomic.events` table  | `string` |
-| `version` | `event_version` column in `atomic.events` table | `string` |
+## Property selection
 
-Use the following details for Snowplow page view, page ping, or structured events:
+You can calculate attributes based on properties in any part of your events:
+* Atomic properties: these are available for all events
+* Event schema properties: choose properties within your chosen event schema
+* Entity properties: choose properties from schemas that you are tracking as entities with your chosen event schema
 
-```python
-# Page view event
-sp_page_view=Event(
-    name="page_view",
-    vendor="com.snowplowanalytics.snowplow",
-    version="1-0-0"
-)
+<!-- TODO image example -->
 
-# Page ping event
-sp_page_ping=Event(
-    name="page_ping",
-    vendor="com.snowplowanalytics.snowplow",
-    version="1-0-0"
-)
+Click **Confirm** to specify the property for this attribute.
 
-# Structured event
-sp_structured=Event(
-    name="event",
-    vendor="com.google.analytics",
-    version="1-0-0"
-)
-```
+## Time period
 
-All of these parameters are optional, and work like wildcards.
+Add an optional time period to the attribute to aggregate it over a rolling window. Signals won't include events older than the specified time period in the calculation.
 
-To calculate an attribute for version 2-0-2 only of an event data structure with the schema `iglu:com.snowplowanalytics.snowplow.media/destination/jsonschema/2-0-2`, the `Event` would be:
+Find the time period option within **More options**. Click **Done** to save it.
 
-```python
-event=Event(
-    name="destination",
-    vendor="com.snowplowanalytics.snowplow.media",
-    version="2-0-2"
-)
-```
+<!-- TODO image example -->
 
-To calculate an attribute for all versions of that event:
+:::info Time period for stream attributes
+Note the [100 event consideration limit](/docs/signals/stream-vs-batch/index.md) for stream attributes with time periods.
+:::
 
-```python
-event=Event(
-    name="destination",
-    vendor="com.snowplowanalytics.snowplow.media",
-)
-```
+## Filtering with criteria
 
-To calculate an attribute for all events for a specific vendor:
+Use criteria to filter the events used to calculate an attribute. They allow you to be specific about which subsets of events should trigger attribute updates. For example, instead of counting all page views in a user's session, you may wish to calculate only views for the homepage, or a login page.
 
-```python
-event=Event(
-    vendor="com.snowplowanalytics.snowplow.media",
-)
-```
+Find the criteria option within **More options**.
 
-### Filtering events by specific values
+<!-- TODO image example -->
 
-The `criteria` list contains the filters used to calculate an attribute from the specified event.
+Defining criteria has three steps:
+1. Select which property to filter on, similarly to the property selection for the attribute
+2. Choose which logical operator to use
+3. Enter the value to filter on
 
-It allows you to be specific about which subsets of events should trigger attribute updates. For example, instead of counting all page views in a user's session, you may want to calculate only views for an FAQs page, or a "contact us" page.
+If you enter multiple criteria, you will have the option to require all or any of them to be met for the attribute to update.
 
-The `criteria` list takes a `Criteria` type, with possible arguments:
+<!-- TODO image example -->
 
-| Argument | Description                                                                            | Type                |
-| -------- | -------------------------------------------------------------------------------------- | ------------------- |
-| `all`    | All conditions, `Criterion` definitions must be true on the processed event                | list of `Criterion` |
-| `any`    | At least one of the conditions, `Criterion` definitions, must be true | list of `Criterion` |
-
-A `Criterion` specifies a filtering rule on the specified event.
-
-When creating a `Criterion`, you can use its operator-like methods to define the filtering for a property of the event payload. Available methods are:
-- `.eq` Checks equality similar to using the `=` operator.
-- `.neq` Checks non-equality similar to using the `!=` operator.
-- `.gt` Checks if a property is greater than a value.
-- `.gte` Checks if a property is greater than or equal to a value.
-- `.lt` Checks if a property is less than a value.
-- `.lte` Checks if a property is less than or equal to a value.
-- `.like` Checks if a property matches a value using a `LIKE` operator.
-- `.in_list` Checks if a property is in the list of values using an `IN` operator.
-
-These methods accept the property as a first argument and then the value to filter against.
-
-| Argument   | Description                                                         | Type                                                                                    |
-| ---------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `property` | The property of the event payload you want the criterion to run against. |  `AtomicProperty` or `EventProperty` or `EntityProperty`  |
-| `value`    | The value to compare the property to.                               | Type-checked based on the operator. |
-
-The `AtomicProperty`, `EventProperty` and `EntityProperty` are classes to help you target a property of an event to be filtered.
-- `AtomicProperty` is used to target atomic properties in the event payload.
-- `EventProperty` is used to target properties in the event data structure in the event payload.
-- `EntityProperty` is used to target properties in the context data structures in the event payload.
-
-Some examples:
-
-```py
-# Targets the app_id atomic property in the event payload.
-AtomicProperty(name="app_id")
-
-# Targets the `action` property of the com.example/test_event/jsonschema/1-*-*.
-EventProperty(
-    vendor="com.example",
-    name="test_event",
-    major_version=1,
-    path="action"
-)
-
-# Targets the `age` property of the first com.example/user_context/jsonschema/1-*-* context.
-EntityProperty(
-    vendor="com.example",
-    name="user_context",
-    major_version=1,
-    path="age"
-)
-```
-
-A more complete example, say you want to calculate an attribute for page views of either the FAQs or "contact us" page, the `Criteria` could be:
-
-```python
-criteria=Criteria(
-    any=[
-        Criterion.like(
-            AtomicProperty(name="page_url"),
-            "%/faq%"
-        ),
-        Criterion.like(
-            AtomicProperty(name="page_url"),
-            "%/contact-us%"
-        )
-    ]
-)
-```
-
-The `page_url` property is from the built-in [atomic event properties](/docs/fundamentals/canonical-event/index.md) in all Snowplow events.
-
-## Extended examples
-
-These examples use all the available configuration options.
-
-### Example 1
-
-This example extends the previous minimal example. Now the attribute is only calculated for `button_click` events where the `id` property is equal to `generate_emoji_btn`.
-
-```python
-from snowplow_signals import Attribute, Event, Criteria, Criterion, EventProperty
-from datetime import timedelta
-
-button_click_counter_attribute = Attribute(
-    name="emoji_button_click_counter",
-    description="The number of clicks for the 'generate emoji' button",
-    type="int32",
-    events=[
-        Event(
-            vendor="com.snowplowanalytics.snowplow",
-            name="button_click",
-            version="1-0-0",
-        )
-    ],
-    aggregation="counter"
-    criteria=Criteria(
-        all=[
-            Criterion.eq(
-                EventProperty(
-                    vendor="com.snowplowanalytics.snowplow",
-                    name="button_click",
-                    major_version=1,
-                    path="id"
-                ),
-                "generate_emoji_btn"
-            )
-        ]
-    ),
-    period=timedelta(minutes=10),
-    default_value=0
-    tags={
-        "component": "emoji_generator",
-        "feature": "user_interaction",
-        "priority": "medium"
-    },
-    property=None,
-)
-```
-
-The attribute will be calculated over the last 10 minutes as a rolling window.
-
-### Example 2
-
-Here's a new example showing how to use the `property` option to access one of the [atomic event properties](/docs/fundamentals/canonical-event/index.md), in this case `mkt_medium`.
-
-In this example the attribute is calculated from either a page view or a custom event:
-
-```python
-from snowplow_signals import Attribute, Event
-
-referrer_source_attribute = Attribute(
-    name="referrer_source",
-    description="Referrer",
-    type="string",
-    events=[
-        Event(
-            name="page_view",
-            vendor="com.snowplowanalytics.snowplow",
-            version="1-0-0"
-        ),
-        Event(
-            name="login_landing",
-            vendor="com.business.example",
-            version="1-0-0"
-        )
-    ],
-    aggregation="last"
-    criteria=None,
-    property="mkt_medium",
-    period=None,
-    default_value=None
-    tags={},
-)
-```
-
-This attribute will be updated to the most recent referrer URL every time a page view or `login_landing` event is processed.
-
-### Example 3
-
-This example shows how to use the `property` option to access values in any part of a tracked event.
-
-Tthe attribute is based on product prices, tracked within the product entity in an ecommerce transaction event:
-
-```python
-from snowplow_signals import Attribute, Event, Criteria, Criterion, EventProperty
-
-my_new_attribute = Attribute(
-    name="products_total_purchase_value",
-    description="Total purchase value for all products",
-    type="int64",
-    events=[
-        Event(
-            vendor="com.snowplowanalytics.snowplow.ecommerce",
-            name="snowplow_ecommerce_action",
-            version="1-0-2",
-        )
-    ],
-    aggregation="sum"
-    criteria=Criteria(
-        all=[
-            Criterion.eq(
-                EventProperty(
-                    vendor="com.snowplowanalytics.snowplow.ecommerce",
-                    name="snowplow_ecommerce_action",
-                    major_version=1,
-                    path="type"
-                ),
-                "transaction"
-            )
-        ]
-    ),
-    property="contexts_com_snowplowanalytics_snowplow_ecommerce_product_1[0].price",
-    period=None,
-    default_value=0
-    tags={},
-)
-```
-
-This attribute will be calculated for Snowplow ecommerce events with schema [`iglu:com.snowplowanalytics.snowplow.ecommerce/snowplow_ecommerce_action/jsonschema/1-0-2`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.ecommerce/snowplow_ecommerce_action/jsonschema/1-0-2) and the `type` property `transaction`. The products in a transaction are stored as [product entities](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.ecommerce/product/jsonschema/1-0-0) in the `contexts_com_snowplowanalytics_snowplow_ecommerce_product_1` array. The `price` property of the first product is used to calculate the attribute.
+Click **Done** to save the criteria when you're finished.

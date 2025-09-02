@@ -27,7 +27,7 @@ To use custom KMS keys, you will need:
 - Your security team approval for cross-account key sharing
 
 This feature has some limitations:
-- EMR cluster: if you're using the legacy RDB Transformer process, it will need additional permissions adding (`kms:Decrypt`, `kms:GenerateDataKey*`) to enable access to customer S3 buckets with customer-managed KMS keys.
+- EMR cluster: if you're using the RDB Transformer component (only required for batch loading to Redshift and Databricks), it will need additional permissions adding (`kms:Decrypt`, `kms:GenerateDataKey*`) to enable access to customer S3 buckets with customer-managed KMS keys.
 - Single key recommendation: while it's technically possible to use different keys for different services, we recommend using a single key for all pipeline resources for simplicity.
 - Regional restrictions: keys must be created in the same region as your pipeline infrastructure.
 
@@ -200,8 +200,8 @@ Once you've shared the key information, Snowplow will configure the following pi
 
 All **pipeline S3 buckets** will be configured with your custom KMS key:
 - Batch archive bucket
-- Batch output bucket (used in RDB Transformer/Loader process)
-- Batch processing bucket (used in RDB Transformer/Loader process)
+- Batch output bucket (used in RDB Transformer/Loader process for Redshift and Databricks)
+- Batch processing bucket (used in RDB Transformer/Loader process for Redshift and Databricks)
 - S3 bad events bucket
 - S3 enriched events bucket
 

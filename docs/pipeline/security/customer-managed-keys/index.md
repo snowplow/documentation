@@ -250,7 +250,7 @@ If you encounter access denied errors:
 - Ensure the key is in the same region as your pipeline
 - Check that **Other AWS Accounts** was properly configured during key creation
 
-Pipeline failures after KMS implementation are expected temporarily while Snowplow applies the necessary IAM policy updates. Contact support if issues persist beyond the expected configuration window.
+Pipeline failures after KMS implementation are expected temporarily while Snowplow applies the necessary IAM policy updates. Contact Support if issues persist beyond the expected configuration window.
 
 To validate your key policy:
 

@@ -27,7 +27,7 @@ This isn't the case for stream attributes that don't have a `period` window defi
 ## Using non-Snowplow data
 
 Signals allows you to use existing warehouse tables in two ways:
-* Batch source: generate and calculate new tables of attributes from existing data, and sync them to the Profiles Store
+* Batch source: generate and calculate new tables of attributes from warehouse data, and sync them to the Profiles Store
 * External batch source: sync tables of existing, pre-calculated values to the Profiles Store
 
 The batch source tables can be any data, whether it's derived from Snowplow events or not. For example, you may want to include transactional data in your Signals use case.

@@ -103,7 +103,7 @@ Read more about attributes and interventions on the [concepts](/docs/signals/con
 
 ### 2. Apply the configuration
 
-We recommend using the BDP Console to define your configurations. You could also use the [Signals Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk), or even the Signals API.
+We recommend using the BDP Console to define your [configurations](/docs/signals/configuration/index.md). You could also use the Signals Python SDK, or even the Signals API.
 
 Once you've created your attribute group or intervention configurations, apply them to Signals by publishing them. It will start calculating attributes and populating the Profiles Store.
 

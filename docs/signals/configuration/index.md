@@ -118,6 +118,8 @@ The Signals API allows you to manually configure and retrieve attributes and int
 {{API_URL}}/docs/
 ```
 
-## Example use cases TODO
+## Example use cases
 
-link to Signals tutorials here ADD LINKs
+Check out the Signals tutorials:
+* [Quick Start](/tutorials/signals-quickstart/start) for defining stream attributes
+* [Real-time prospect scoring with ML](/tutorials/signals-ml-prospect-scoring/intro) solution accelerator

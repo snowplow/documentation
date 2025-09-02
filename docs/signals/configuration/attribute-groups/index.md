@@ -4,213 +4,82 @@ sidebar_position: 30
 sidebar_label: "Attribute groups"
 ---
 
-Signals has two attribute groupings:
-* Attribute groups, for defining attributes
-* Services, for consuming attributes
+Define the behavior you want to capture in attribute groups. Choose whether to calculate attributes from your event stream or warehouse.
 
-An attribute group is a versioned collection of attributes; the attributes are the properties of the attribute group. Each attribute group is specific to one attribute key and one data source (stream or batch).
+To create an attribute group, go to **Signals** > **Attribute groups** in BDP Console and follow the instructions.
 
-## Attribute management
+<!-- TODO image create group page-->
 
-Every attribute group has a version number.
+The first step is to specify:
+* A unique name
+* An optional description
+* The email address of the primary owner or maintainer
+* Which data source you want to use
 
-Signals provides functionality for separating attribute definition from calculation. This allows you to set up your attributes and business logic before putting them into production. The options are different depending on whether the attribute group is for stream or batch attributes.
-
-To configure a table for batch attributes, you may choose to set up an attribute group using that source without defining any attributes initially. This ensures that the table is ready and tested for adding and calculating attributes. Read more about configuring batch attributes and attribute groups in the [batch calculations](/docs/signals/configuration/batch-calculations/index.md) section.
-
-For stream attributes, you can choose to configure and apply attribute groups that don't calculate their attribute values.
-
-This means that configuration, calculation, materialization, and retrieval are fully decoupled.
-
-## Versioning
-
-TODO
-
-## Types of attribute groups
-
-Signals includes three types of attribute groups. Choose which one to use depending on how you want to calculate and materialize the attributes:
-
-- `StreamAttributeGroup`: processed from the real-time event stream
-- `BatchAttributeGroup`: processed using the batch engine
-- `ExternalBatchAttributeGroup`: uses precalculated attributes from an existing warehouse table that's materialized into Signals
-
-### StreamAttributeGroup
-
-Use a `StreamAttributeGroup` to calculate attributes from the real-time event stream. Read more about this in the [Stream calculations](/docs/signals/configuration/stream-calculations/index.md) section.
-
-```python
-from snowplow_signals import StreamAttributeGroup, domain_sessionid
-
-my_stream_attribute_group = StreamAttributeGroup(
-    name="my_stream_attribute_group",
-    version=1,
-    attribute_key=domain_sessionid,
-    owner="user@company.com",
-    attributes=[
-        # Previously defined attributes
-        page_view_count,
-        products_added_to_cart_feature,
-    ],
-)
-```
-
-### BatchAttributeGroup
-
-Use a `BatchAttributeGroup` to calculate attributes from batch data sources (e.g., warehouse tables).
-
-```python
-from snowplow_signals import BatchAttributeGroup, domain_sessionid
-
-my_batch_attribute_group = BatchAttributeGroup(
-    name="my_batch_attribute_group",
-    version=1,
-    attribute_key=domain_sessionid,
-    owner="user@company.com",
-    attributes=[
-        # Previously defined attributes
-        page_view_count,
-        products_added_to_cart_feature,
-    ],
-)
-```
-
-### ExternalBatchAttributeGroup
-
-Use an `ExternalBatchAttributeGroup` to materialize attributes from an existing warehouse table.
+All attribute groups need an [attribute key](/docs/signals/configuration/attribute-groups/attribute-keys/index.md).
 
 
-```python
-from snowplow_signals import ExternalBatchAttributeGroup, domain_sessionid
+## Data source
 
-my_external_batch_attribute_group = ExternalBatchAttributeGroup(
-    name="my_external_batch_attribute_group",
-    version=1,
-    attribute_key=domain_sessionid,
-    owner="user@company.com",
-    batch_source=data_source, # Assuming Data source previously configured
-    fields=[
-        Field(
-            name="TOTAL_TRANSACTIONS",
-            type="int32",
-        ),
-        Field(
-            name="TOTAL_REVENUE",
-            type="int32",
-        ),
-        Field(
-            name="AVG_TRANSACTION_REVENUE",
-            type="int32",
-        ),
-    ],
-)
-```
+There are three sources to choose from:
+* Stream: real-time Snowplow event stream
+* Batch: a new warehouse table created by Signals, calculated from your `atomic` events table
+* External batch: pre-calculated values in a warehouse table that you can sync to the Profiles Store
 
+Each of the different data sources is configured differently.
 
+### Stream source
 
-## Attribute group options
+You'll need to define the [attributes](/docs/signals/configuration/attribute-groups/attributes/index.md) you want to calculate from your real-time event stream.
 
-The table below lists all available arguments for all types of `attribute groups`:
+<!-- TODO image with attributes -->
 
-Below is a summary of all options available for configuring attribute groups in Signals. The "Applies to" column shows which attribute group types each option is relevant for.
+### Batch source
 
-| Argument        | Description                                            | Type                | Default | Required? | Applies to                                          |
-| --------------- | ------------------------------------------------------ | ------------------- | ------- | --------- | --------------------------------------------------- |
-| `name`          | The name of the attribute group                        | `string`            |         | ✅         | All                                                 |
-| `version`       | The version of the attribute group                     | `int`               | 1       | ❌         | All                                                 |
-| `attribute_key` | The attribute key associated with the attribute group  | `AttributeKey`      |         | ✅         | All                                                 |
-| `owner`         | The owner of the attribute group                       | `Email`             |         | ✅         | All                                                 |
-| `description`   | A description of the attribute group                   | `string`            |         | ❌         | All                                                 |
-| `ttl`           | Time-to-live for attributes in the Profile Store       | `timedelta`         |         | ❌         | All                                                 |
-| `tags`          | Metadata key-value pairs                               | `dict`              |         | ❌         | All                                                 |
-| `attributes`    | List of attributes to calculate                        | list of `Attribute` |         | ✅         | `StreamAttributeGroup`, `BatchAttributeGroup`       |
-| `batch_source`  | The batch data source for the attribute group          | `BatchSource`       |         | ✅/❌       | `BatchAttributeGroup`/`ExternalBatchAttributeGroup` |
-| `fields`        | Table columns for materialization                      | `Field`             |         | ✅         | `ExternalBatchAttributeGroup`                       |
-| `offline`       | Calculate in warehouse (`True`) or real-time (`False`) | `bool`              | varies  | ❌         | All                                                 |
-| `online`        | Enable online retrieval (`True`) or not (`False`)      | `bool`              | `True`  | ❌         | All                                                 |
+You'll need to define the [attributes](/docs/signals/configuration/attribute-groups/attributes/index.md) you want to calculate from your `atomic` events table.
 
+<!-- TODO image with attributes -->
 
-If no `ttl` is set, the attribute key's `ttl` will be used. If the attribute key also has no `ttl`, there will be no time limit for attributes.
+TODO dbt
 
-## Extended stream attribute group example
+### External batch source
 
-This example shows all the available configuration options for a stream attribute group. To find out how to configure a batch attribute group, see the [batch calculations](/docs/signals/configuration/batch-calculations/index.md) section.
+Attribute groups with an external batch source don't require attribute definition, as no calculation will be performed. This source type allows you to sync existing warehouse values with Signals so they're available in your Profiles Store.
 
-This attribute group groups attributes for a user attribute key, to be calculated in real-time.
+Provide the warehouse and table details, and which fields you want to send to Signals.
 
-```python
-from snowplow_signals import StreamAttributeGroup, user_id
+<!-- TODO image  define fields -->
 
-stream_attribute_group = StreamAttributeGroup(
-    name="comprehensive_stream_attribute_group",
-    version=2,
-    attribute_key=user_id,
-    owner="data-team@company.com",
-    attributes=[
-        page_view_count,
-        session_duration,
-        conversion_rate,
-    ],
-    description="User engagement attributes in real-time",
-    ttl=timedelta(days=90),  # Attributes live in the Profiles Store for 90 days
-    tags={
-        "team": "growth",
-        "priority": "high",
-    },
+We recommend providing a timestamp field for incremental or snapshot-based tables. To minimize latency, Signals will use this to determine which rows have changed since the last sync. The sync engine will only send the new rows to the Profiles Store.
 
-    # Note: batch_source and fields are not used for stream attribute groups
-)
-```
+## Attribute lifetimes
 
-Signals will start calculating attributes as soon as this attribute group configuration is applied.
+You can optionally set a Time to live (TTL) value for each attribute group.
 
-## Testing attribute groups
-
-To understand what the output of an attribute group will look like, use the Signals `test` method. This will output a table of attributes calculated from your `atomic` events table.
-
-```python
-from snowplow_signals import Signals
-
-# Connect to Signals
-# See the main Configuration section for more on this
-sp_signals = Signals(
-        {{ config }}
-    )
-
-# Run the test
-test_data = sp_signals.test(
-    attribute_group=my_attribute_group,
-    app_ids=["website"] # The app_id in your Snowplow events
-)
-```
-
-:::note
-While you can filter on specific app_ids during testing, both the streaming and batch engines may be configured to process only a subset of relevant app_ids to avoid unnecessary compute. As a result, testing with an arbitrary app_id may not yield expected data if it isn’t included in the configured subset.
-:::
-
-To see which attributes an attribute group has, use `get_attribute_group()`. Here's an example:
-
-```python
-attribute_definitions = sp_signals.get_attribute_group(
-    name="my_attribute_group",
-    version=1,
-)
-
-print(attribute_definitions)
-```
-
-The table below lists all available arguments for `get_attribute_group()`
-
-| Argument  | Description                     | Type     | Required? |
-| --------- | ------------------------------- | -------- | --------- |
-| `name`    | The name of the attribute group | `string` | ✅         |
-| `version` | The attribute group version     | `int`    | ❌         |
-
-If you don't specify a version, Signals will retrieve the latest version.
-
-## Attribute groups can be set to expire
-
-Some attributes will only be relevant for a certain amount of time, and eventually stop being updated.
-
-To avoid stale attributes staying in your Profiles Store forever, you can configure TTL lifetimes for attribute keys and attribute groups. When none of the attributes for an attribute key or attribute group have been updated for the defined lifespan, the attribute key or attribute group expires. Any attribute values for this attribute key or attribute group will be deleted: fetching them will return `None` values.
+Some attributes will only be relevant for a certain amount of time, and eventually stop being updated. To avoid stale attributes staying in your Profiles Store forever, configure TTL lifetimes for [attribute keys](/docs/signals/configuration/attribute-groups/attribute-keys/index.md) and attribute groups. When none of the attributes for an attribute key or attribute group have been updated for the defined lifespan, the attribute key or attribute group expires. Any attribute values for this attribute key or attribute group will be deleted: fetching them will return `None` values.
 
 If Signals then processes a new event that calculates the attribute again, or materializes the attribute from the warehouse again, the expiration timer is reset.
+
+## Testing the attribute definitions
+
+After defining one or more [attributes](/docs/signals/configuration/attribute-groups/attributes/index.md) for groups with a stream or batch source, you can test out the configuration with the **Run preview** button.
+
+This will output a table of attributes calculated from your `atomic` events table, using a random subset of events from the last hour.
+
+## Publishing the attribute group
+
+Once you're happy with your attribute group configuration, click **Create attribute group** to save it. It will be saved as a draft, and not yet available to Signals.
+
+<!-- TODO image details page, not yet published -->
+
+Click the **Edit** button if you want to make changes to the attribute group.
+
+To send the attribute group configuration to your Signals infrastructure, click the **Publish** button. This will allow Signals to start calculating attributes or syncing tables, and populating the Profiles Store.
+
+### Versioning
+
+Attribute groups are versioned. This allows you to iterate on the definitions without breaking downstream processes. You'll select specific attribute group versions when you define [services](/docs/signals/configuration/services/index.md).
+
+All attribute groups start as `v1`. If you make changes to the definition, the version will be automatically incremented.
+
+<!-- TODO image with many attribute groups of different versions -->

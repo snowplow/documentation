@@ -177,7 +177,7 @@ If your security policies don't allow root access (`arn:aws:iam::<account_id>:ro
 
 </details>
 
-Using non-root policies requires coordination with Snowplow support to ensure all necessary roles are included. We strongly recommend the root access approach for simplicity.
+Using non-root policies requires coordination with Snowplow Support to ensure all necessary roles are included. We strongly recommend the root access approach for simplicity.
 
 ## Step 3: Share key information with Snowplow
 

@@ -3,35 +3,22 @@ title: "Services"
 sidebar_position: 32
 ---
 
-Signals has two attribute groupings:
-* Attribute groups, for defining attributes
-* Services, for consuming attributes
+[Services](/docs/signals/concepts/#services) group attribute groups together for serving to your applications.
 
-Here's an example showing how to create a service to manage attributes from two attribute groups:
+To create a service, go to **Signals** > **Services** in BDP Console and follow the instructions.
 
-```python
-from snowplow_signals import Service
+<!-- TODO image create service page-->
 
-my_service = Service(
-    name='my_service',
-    description='A collection of attribute groups',
-    owner="user@company.com",
-    attribute_groups=[
-        # Previously defined attribute groups
-        my_attribute_group,
-        another_attribute_group
-    ],
-)
-```
+To configure a service, you'll need to specify:
+* A unique name
+* An optional description
+* The email address of the primary owner or maintainer
+* Which attribute groups to include
 
-### Service options
+## Versioning
 
-The table below lists all available arguments for a `Service`
+When choosing which attribute groups to include, you'll select a specific version of each attribute group.
 
-| Argument                 | Description                                                             | Type        | Required?   |
-| ------------------------ | ----------------------------------------------------------------------- | ----------- | ----------- |
-| `name`                   | The name of the service                                                 | `string`    | ✅          |
-| `description`            | A description of the service                                            | `string`    | ❌          |
-| `owner`                  | The owner of the service, typically the email of the primary maintainer | `string`    | ✅          |
-| `attribute_groups`       | A list of attribute groups                                              | `timedelta` | ❌          |
-| `tags`                   | String key-value pairs of arbitrary metadata                            | dictionary  | ❌          |
+Services themselves are not versioned. You can update them to use different attribute groups, or different attribute group versions, at any time.
+
+<!-- TODO image create service page showing group versions -->

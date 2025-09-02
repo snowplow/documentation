@@ -5,7 +5,7 @@ sidebar_label: "Configure programmatically"
 ---
 
 :::info
-We strongly recommend using the BDP Console to configure and manage your Signals attributes and interventions.
+We strongly recommend using the BDP Console to configure and manage your Signals attributes and interventions. The UI includes error checking and versioning, for a safer and easier to use experience.
 :::
 
 There are two programmatical options for managing Signals:

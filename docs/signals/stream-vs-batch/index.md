@@ -10,13 +10,13 @@ Whether to compute attributes in real-time from the event stream or in batch fro
 
 This table summarizes the options for different types of processing:
 
-| Feature                            | Supported in real-time stream                                                 | Supported in batch |
-| ---------------------------------- | ----------------------------------------------------------------------------- | ------------------ |
-| Real-time calculation              | ✅                                                                             | ❌                  |
-| Computing user lifetime attributes | ✅ from the point at which the attribute was defined                           | ✅                  |
-| Time windowing operations          | ✅ but only the last 100 values might be included, depending on the definition | ✅                  |
-| Reprocessing data                  | ❌ attributes are only calculated from the moment they are defined             | ✅                  |
-| Non-Snowplow data                  | ❌                                                                             | ✅                  |
+| Feature                            | Supported in real-time stream                                                 | Supported in batch            |
+| ---------------------------------- | ----------------------------------------------------------------------------- | ----------------------------- |
+| Real-time calculation              | ✅                                                                             | ❌                             |
+| Computing user lifetime attributes | ✅ from the point at which the attribute was defined                           | ✅                             |
+| Time windowing operations          | ✅ but only the last 100 values might be included, depending on the definition | ✅                             |
+| Reprocessing data                  | ❌ attributes are only calculated from the moment they are defined             | ✅                             |
+| Non-Snowplow data                  | ❌                                                                             | ✅ using external batch source |  |
 
 ## Stream windowing attributes
 
@@ -30,6 +30,8 @@ Signals allows you to use existing warehouse tables in two ways:
 * Batch source: generate and calculate new tables of attributes from warehouse data, and sync them to the Profiles Store
 * External batch source: sync tables of existing, pre-calculated values to the Profiles Store
 
-The batch source tables can be any data, whether it's derived from Snowplow events or not. For example, you may want to include transactional data in your Signals use case.
+The standard batch source calculates attributes from the Snowplow atomic events table. This is not configurable.
 
-Read more about using warehouse data in the [configuration](/docs/signals/configuration/batch-calculations/index.md) section.
+However, the external batch tables can be any data, whether it's derived from Snowplow events or not. For example, you may want to include transactional data in your Signals use case.
+
+Read more about using warehouse data in the [configuration](/docs/signals/configuration/index.md) section.

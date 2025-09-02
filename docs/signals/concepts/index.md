@@ -11,7 +11,7 @@ Signals has three main configurable components:
 * **Services**, for consuming calculated attributes in your applications
 * **Interventions**, for consuming calculated attributes and triggering actions in your applications
 
-**Attribute groups** are where you define the behavioral data you want to calculate. Each attribute group contains multiple **attributes** - the specific facts about user behavior you want to measure - along with the configuration that defines how to calculate them, and from what data. Attributes can only be defined within attribute groups; they are effectively properties of the attribute group.
+**Attribute groups** are where you define the behavioral data you want to calculate. Each attribute group contains multiple **attributes** - the specific facts about user behavior you want to measure or take action on - along with the configuration that defines how to calculate them, and from what data. Attributes can only be defined within attribute groups; they are effectively properties of the attribute group.
 
 To use attributes to trigger actions such as in-app messages, discounts, or personalized journeys, use services or interventions.
 

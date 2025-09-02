@@ -29,13 +29,13 @@ This example filters out all data that doesn't have an `app_id` key.
 Minimal configuration:
 
 <CodeBlock language="hcl" reference>{`
-https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/builtin/jqFilter-minimal-example.hcl
+https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/transformations/builtin/jqFilter-minimal-example.hcl
 `}</CodeBlock>
 
 Every configuration option:
 
 <CodeBlock language="hcl" reference>{`
-https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/builtin/jqFilter-full-example.hcl
+https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/transformations/builtin/jqFilter-full-example.hcl
 `}</CodeBlock>
 
 ## Helper Functions

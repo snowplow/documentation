@@ -22,10 +22,10 @@ export const versions = {
 
   // Core pipeline
   collector: '3.5.0',
-  enrich: '5.4.0',
+  enrich: '6.0.0',
   sqs2kinesis: '1.0.4',
   dataflowRunner: '0.7.5',
-  snowbridge: '3.3.0',
+  snowbridge: '3.5.0',
 
   // Loaders
   bqLoader: '2.0.1',

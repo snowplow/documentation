@@ -18,7 +18,7 @@ Authentication is done via the [AWS authentication environment variables](https:
 Here is an example of the minimum required configuration:
 
 <CodeBlock language="hcl" reference>{`
-https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/targets/sqs-minimal-example.hcl
+https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/targets/sqs-minimal-example.hcl
 `}</CodeBlock>
 
 If you want to use this as a [failure target](/docs/destinations/forwarding-events/snowbridge/concepts/failure-model/index.md#failure-targets), then use failure_target instead of target.
@@ -26,7 +26,7 @@ If you want to use this as a [failure target](/docs/destinations/forwarding-even
 Here is an example of every configuration option:
 
 <CodeBlock language="hcl" reference>{`
-https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/targets/sqs-full-example.hcl
+https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/targets/sqs-full-example.hcl
 `}</CodeBlock>
 
 If you want to use this as a [failure target](/docs/destinations/forwarding-events/snowbridge/concepts/failure-model/index.md#failure-targets), then use failure_target instead of target.

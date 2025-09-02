@@ -390,3 +390,16 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 
 # Event Forwarding restructure
 /docs/destinations/forwarding-events/native-integrations /docs/destinations/forwarding-events/integrations 301
+
+# Removing deprecated webhooks
+/docs/sources/webhooks/callrail/* /docs/sources/webhooks/:splat 301
+/docs/sources/webhooks/hubspot/* /docs/sources/webhooks/:splat 301
+/docs/sources/webhooks/mailchimp/* /docs/sources/webhooks/:splat 301
+/docs/sources/webhooks/marketo/* /docs/sources/webhooks/:splat 301
+/docs/sources/webhooks/olark/* /docs/sources/webhooks/:splat 301
+/docs/sources/webhooks/pagerduty/* /docs/sources/webhooks/:splat 301
+/docs/sources/webhooks/pingdom/* /docs/sources/webhooks/:splat 301
+/docs/sources/webhooks/statusgator/* /docs/sources/webhooks/:splat 301
+/docs/sources/webhooks/unbounce/* /docs/sources/webhooks/:splat 301
+/docs/sources/webhooks/urban-airship-connect/* /docs/sources/webhooks/:splat 301
+/docs/sources/webhooks/vero/* /docs/sources/webhooks/:splat 301

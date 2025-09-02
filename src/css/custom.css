@@ -68,6 +68,7 @@
  * bundles Infima by default. Infima is a CSS framework designed to
  * work well for content-centric websites.
  */
+
 @font-face {
   font-family: 'InterVariable';
   src: url('/fonts/Inter-VariableFont_opsz,wght.ttf') format('truetype');
@@ -82,8 +83,8 @@
   font-style: italic;
   font-display: swap;
 }
-
 /* You can override the default Infima variables here. */
+
 :root {
   
   --ifm-color-primary: #6638b8;
@@ -270,14 +271,11 @@ button.snowplow-button:focus {
 table {
   display: inline-table;
 }
-
-
 .table-of-contents__left-border {
   border-left-color: hsl(var(--border));
   margin-left: 5px;
   padding: 8px 4px;
   font-size: .875rem;
-
 }
 .table-of-contents li {
   padding: 0;
@@ -297,6 +295,15 @@ table {
 }
 .theme-doc-toc-desktop ul ul {
   padding-left: 16px!important;
+}
+
+/* Left side bar CSS START */
+
+aside.theme-doc-sidebar-container {
+  border: none;
+}
+.sidebar_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-styles-module {
+  width: 100%!important;
 }
 
 /* Left side bar CSS START */
@@ -420,6 +427,124 @@ aside.theme-doc-sidebar-container {
   border: none;
   background: none;
   padding: 4px;
+}
+
+.menu__link,
+  .menu__caret {
+    align-items: center;
+    border-radius: 0.25rem;
+    display: flex;
+    transition: background var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+  }
+
+.menu__link:hover, .menu__caret:hover {
+    background: var(--ifm-menu-color-background-hover);
+    border-radius: 0px var(--radius) var(--radius)  0px;
+     border-left: 1px solid hsl(var(--foreground));
+  }
+
+.menu__link {
+    color: hsl(var(--muted-foreground));
+    flex: 1;
+    line-height: 1.4286;
+    font-size: .93825rem;
+    padding: var(--ifm-menu-link-padding-vertical)
+      var(--ifm-menu-link-padding-horizontal);
+  }
+
+.menu__link:hover {
+      text-decoration: none;
+      color: hsl(var(--foreground));
+      transition: color var(--ifm-transition-fast) var(--ifm-transition-timing-default);
+    }
+
+.menu__link--sublist-caret:after {
+      content: '';
+      margin-left: auto;
+      min-width: 1.25rem;
+      background: var(--ifm-menu-link-sublist-icon) 50% / 1.25rem 1.25rem;
+      filter: var(--ifm-menu-link-sublist-icon-filter);
+      height: 1.25rem;
+      transform: rotate(180deg);
+      width: 1.25rem;
+      transition: transform var(--ifm-transition-fast) linear;
+    }
+
+.menu__link--active {
+      color: hsl(var(--primary));
+      background-color: hsla(261.56, 53.33%, 47.06%, 0.12);
+    }
+
+.menu__link--active:hover {
+        color: var(--ifm-menu-color-active);
+        border-radius: 0px var(--radius) var(--radius)  0px;
+        border-left: 1px solid hsl(var(--primary));
+}
+.menu__list-item-collapsible .menu__link:hover, .menu__list-item-collapsible .menu__link--active{
+  color: var(--ifm-menu-color-active);
+        border-radius: 0px var(--radius) var(--radius)  0px;
+        border-left: 1px solid hsl(var(--primary));
+}
+
+.menu__link--active:not(.menu__link--sublist) {
+        background-color: hsla(261.56, 53.33%, 47.06%, 0.12);
+        border-radius: 0px var(--radius) var(--radius)  0px;
+        border-left: 1px solid hsl(var(--primary));
+      }
+
+.menu__caret {
+    padding: var(--ifm-menu-link-padding-vertical)
+      var(--ifm-menu-link-padding-horizontal);
+      display: none;
+  }
+
+.menu__caret:before {
+      content: '';
+      background: var(--ifm-menu-link-sublist-icon) 50% / 1.25rem 1.25rem;
+      filter: var(--ifm-menu-link-sublist-icon-filter);
+      height: 1.25rem;
+      transform: rotate(180deg);
+      width: 1.25rem;
+      transition: transform var(--ifm-transition-fast) linear;
+}
+.menu__list-item-collapsible:hover .menu__caret {
+  display: flex;
+  border: none;
+  background: none;
+  padding: 4px;
+}
+
+/* button to collapse */
+aside.theme-doc-sidebar-container .button.button--secondary.button--outline {
+  margin: 4px!important;
+}
+@media (min-width: 997px) {
+  aside.theme-doc-sidebar-container nav.menu {
+      padding: 1rem 0 0.5rem 0.5rem;
+  }
+  aside.theme-doc-sidebar-container .button.button--secondary.button--outline {
+        display: inline-flex !important;
+        background-color: hsl(var(--accent))!important;
+        border-radius: var(--radius)!important;
+        border: 1px solid hsl(var(--border))!important;
+        align-items: center;
+        justify-content: center;
+  }
+  aside.theme-doc-sidebar-container button svg{
+      transform: rotate(180deg) scale(.5) !important;
+  }
+  .expandButton_m80_ {
+    border-right: 1px solid hsl(var(--border));
+    background-color: hsl(var(--background))!important;
+  }
+  .expandButtonIcon_BlDH {
+    transform: rotate(0) scale(.5)!important;
+  }
+}
+/* Left side bar CSS END */
+
+.theme-doc-toc-desktop{
+  position: static!important;
 }
 
 
@@ -647,23 +772,26 @@ img.shield {
   vertical-align: text-bottom;
 }
 
-.tabs-container:hover {
-  border: 2px solid var(--ifm-color-primary);
+/* Tabs component inside of Articles Start */
+.tabs-container div {
+  overflow-x: scroll;
 }
-
+.tabs-container:hover {
+  border: 1px solid hsl(var(--primary));
+}
 .tabs-container {
   padding: 7px 14px 14px;
   border: 2px solid transparent;
   border-radius: var(--ifm-alert-border-radius);
   transition: 0.4s cubic-bezier(0.38, 0.14, 0.58, 1) all;
 }
-
 .tabs__item {
   align-self: stretch;
   align-items: center;
   justify-content: center;
   text-align: center;
 }
+/* Tabs component inside of Articles End*/
 
 abbr[data-title] {
   position: relative;

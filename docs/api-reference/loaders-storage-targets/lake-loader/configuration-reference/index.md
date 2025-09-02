@@ -20,6 +20,18 @@ import Admonition from '@theme/Admonition';
 
 <p>The configuration reference in this page is written for Lake Loader <code>{`${versions.lakeLoader}`}</code></p>
 
+### License
+
+The Lake Loader is released under the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.1/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).
+
+To accept the terms of license and run the loader, set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable. Alternatively, configure the `license.accept` option in the config file:
+
+```json
+"license": {
+  "accept": true
+}
+```
+
 ### Table configuration
 
 <Tabs groupId="lake-format" queryString>

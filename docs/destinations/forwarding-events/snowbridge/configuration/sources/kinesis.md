@@ -40,11 +40,11 @@ Assuming your AWS credentials have sufficient permission for Kinesis and DynamoD
 Here is an example of the minimum required configuration:
 
 <CodeBlock language="hcl" reference>{`
-https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/sources/kinesis-minimal-example.hcl
+https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/sources/kinesis-minimal-example.hcl
 `}</CodeBlock>
 
 Here is an example of every configuration option:
 
 <CodeBlock language="hcl" reference>{`
-https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/sources/kinesis-full-example.hcl
+https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/sources/kinesis-full-example.hcl
 `}</CodeBlock>

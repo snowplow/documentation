@@ -18,7 +18,7 @@ Stdout target doesn't have any configurable options - when configured it simply 
 Here is an example of the configuration:
 
 <CodeBlock language="hcl" reference>{`
-https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/targets/stdout-full-example.hcl
+https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/targets/stdout-full-example.hcl
 `}</CodeBlock>
 
 If you want to use this as a [failure target](/docs/destinations/forwarding-events/snowbridge/concepts/failure-model/index.md#failure-targets), then use `failure_target` instead of `target`.

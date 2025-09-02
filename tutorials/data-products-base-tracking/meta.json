@@ -1,5 +1,8 @@
 {
   "title": "Track web events with base data products",
   "label": "Data governance",
-  "description": "Use the BDP Console to create and manage data products for a web application."
+  "description": "Use the BDP Console to create and manage data products for a web application.",
+  "useCases": ["Composable analytics"],
+  "technologies": [],
+  "snowplowTech": ["Snowtype", "BDP Console"]
 }

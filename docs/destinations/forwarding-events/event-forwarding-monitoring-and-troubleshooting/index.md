@@ -35,7 +35,7 @@ To view these metrics, navigate to **Destinations** > **Destinations list** and 
 
 ### Cloud monitoring metrics
 
-:::INFO
+:::info
 Forwarder cloud metrics are only available for [BDP Enterprise](/docs/get-started/snowplow-bdp/index.md#enterprise-in-your-own-cloud) customers.
 :::
 

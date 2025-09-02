@@ -4,7 +4,9 @@ description: "Send Snowplow events to third-party platforms in real-time using S
 sidebar_position: 2
 ---
 
-Event forwarders let you filter, transform, and send Snowplow events to third-party platforms in real-time. They are separately deployed, fully managed apps that sit alongside warehouse and lake loaders and provide a self-serve setup process through BDP Console.
+Event forwarders let you filter, transform, and send Snowplow events to third-party platforms in real-time. They're separately deployed, fully managed apps that sit alongside warehouse and lake loaders and provide a self-serve setup process through BDP Console.
+
+![](./images/event-forwarding-diagram.drawio.svg)
 
 Event forwarding uses [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md) under the hood, deployed within your existing Snowplow cloud account, to transform and deliver events reliably. For detailed setup guides and field mappings, check out the list of [available integrations](/docs/destinations/forwarding-events/integrations/index.md). For complex requirements or unsupported destinations, [advanced alternatives](#alternative-approaches) are also available.
 

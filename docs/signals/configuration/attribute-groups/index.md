@@ -76,6 +76,9 @@ You will need to provide:
 * An optional email address for the primary owner or maintainer
 * Which [atomic](/docs/fundamentals/canonical-event/index.md#atomic-fields) property you want to calculate attributes against
 
+To edit or delete a custom attribute key, go to the attribute key details page and click the **Edit** button, or the 3 dots button followed by **Delete**.
+
+<!-- TODO image example -->
 
 ## Attribute lifetimes
 
@@ -108,3 +111,17 @@ Attribute groups are versioned. This allows you to iterate on the definitions wi
 All attribute groups start as `v1`. If you make changes to the definition, the version will be automatically incremented.
 
 <!-- TODO image with many attribute groups of different versions -->
+
+## Deleting an attribute group
+
+To unpublish or delete an attribute group, click the 3 dots button on the group details page.
+
+<!-- TODO image details page button -->
+
+Unpublishing is version specific. It will stop Signals from calculating attributes for this version of this group. Existing attribute values will remain in your Profiles Store, but they won't be updated. You can republish it later if needed.
+
+Choose **Delete** to permanently delete all versions of the attribute group, along with attribute values in your Profiles Store for this group.
+
+If the attribute group version is used by a [service](/docs/signals/concepts/#services), you'll need to update the service definition before unpublishing or deleting.
+
+If the attribute group version is used by a published [intervention](/docs/signals/concepts/#interventions), deleting or unpublishing it will unpublish the intervention.

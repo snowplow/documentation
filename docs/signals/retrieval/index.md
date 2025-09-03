@@ -1,19 +1,37 @@
 ---
 title: "Retrieving calculated values from the Profiles Store"
 sidebar_position: 30
-sidebar_label: "Retrieving values"
+sidebar_label: "Retrieving attributes"
 ---
 
-Your calculated attributes are stored in the Profiles Store. To retrieve them, you can use:
+Your calculated attributes are stored in the Profiles Store, and retrieved using [services](/docs/signals/concepts/#services).
+
+To use attributes in your applications, you can use:
+* Signals Node.js SDK (TypeScript)
 * Signals Python SDK
-* Signals Node.js SDK
 * Signals API
 
-## Python SDK
+## Connecting to Signals
 
-Install the SDK into your project, and connect to Signals as described in [Configuration](/docs/signals/configuration/index.md#connecting-to-signals).
+For all of these methods, you'll need to connect to your Signals deployment. Use the credentials shown on the Signals overview page in BDP Console.
 
-### Retrieve attributes from a service
+<!-- TODO image landing page -->
+
+## Node.js SDK
+
+Install the SDK into your project, and connect to Signals as described in [Configuration](/docs/signals/configuration/index.md).
+
+## Connecting to Signals
+
+For all of these methods, you'll need to connect to your Signals deployment. Use the credentials shown on the Signals overview page in BDP Console.
+
+<!-- TODO image landing page -->
+
+## Node.js SDK
+
+Install the SDK into your project, and connect to Signals as described in [Configuration](/docs/signals/configuration/index.md).
+
+### Attributes from a service
 
 Use `get_service_attributes()` to retrieve attributes from a service. Signals will return the attributes as a dictionary.
 
@@ -33,11 +51,11 @@ print(service_attributes)
 
 The table below lists all available arguments for `get_service_attributes()`
 
-| Argument     | Description                                | Type     | Required? |
-| ------------ | ------------------------------------------ | -------- | --------- |
-| `name`       | The name of the service                    | `string` | ✅         |
-| `entity`     | The entity name to retrieve attributes for | `string` | ✅         |
-| `identifier` | The entity value                  | `string` | ✅         |
+| Argument        | Description                                  | Type     | Required? |
+| --------------- | -------------------------------------------- | -------- | --------- |
+| `name`          | The name of the service                      | `string` | ✅         |
+| `attribute_key` | The attribute key to retrieve attributes for | `string` | ✅         |
+| `identifier`    | The specific attribute key value             | `string` | ✅         |
 
 
 ### Retrieve attributes from a view
@@ -62,70 +80,14 @@ print(view_attributes)
 
 The table below lists all available arguments for `get_view_attributes()`
 
-| Argument     | Description                             | Type                         | Required? |
-| ------------ | --------------------------------------- | ---------------------------- | --------- |
-| `name`       | The name of the view                    | `string`                     | ✅         |
-| `version`    | The view version                        | `int`                        | ✅         |
-| `attributes` | The names of the attributes to retrieve | `string` or list of `string` | ✅         |
-| `entity`     | The entity name                         | `string`                     | ✅         |
-| `identifier` | The specific entity value               | `string`                     | ✅         |
+| Argument        | Description                             | Type                         | Required? |
+| --------------- | --------------------------------------- | ---------------------------- | --------- |
+| `name`          | The name of the attribute group         | `string`                     | ✅         |
+| `version`       | The attribute group version             | `int`                        | ✅         |
+| `attributes`    | The names of the attributes to retrieve | `string` or list of `string` | ✅         |
+| `attribute_key` | The attribute_key name                  | `string`                     | ✅         |
+| `identifier`    | The specific attribute key value        | `string`                     | ✅         |
 
-## Node.js SDK
-
-Install the SDK into your project, and connect to Signals as described in [Configuration](/docs/signals/configuration/index.md#setting-up-the-nodejs-sdk).
-
-### Retrieve attributes from a service
-
-Use `getServiceAttributes()` to retrieve attributes from a service. Signals will return the attributes as an object.
-
-Here's an example:
-
-```typescript
-//  The Signals connection object has been created as signals
-
-serviceAttributes = signals.getServiceAttributes(
-    name="my_service",
-    entity="domain_userid",
-    identifier="218e8926-3858-431d-b2ed-66da03a1cbe5",
-)
-```
-
-The table below lists all available arguments for `getServiceAttributes()`
-
-| Argument     | Description                                | Type     | Required? |
-| ------------ | ------------------------------------------ | -------- | --------- |
-| `name`       | The name of the service                    | `string` | ✅         |
-| `entity`     | The entity name to retrieve attributes for | `string` | ✅         |
-| `identifier` | The entity value                  | `string` | ✅         |
-
-
-### Retrieve attributes from a view
-
-You can also retrieve a subset of attributes from a view using `getViewAttributes()`. Signals will return the attributes as an object.
-
-Here's an example:
-
-```typescript
-//  The Signals connection object has been created as signals
-
-viewAttributes = signals.getViewAttributes(
-    name="my_view",
-    version=1,
-    attributes=["page_view_count"],
-    entity="domain_userid",
-    identifier="218e8926-3858-431d-b2ed-66da03a1cbe5",
-)
-```
-
-The table below lists all available arguments for `getViewAttributes()`
-
-| Argument     | Description                             | Type                         | Required? |
-| ------------ | --------------------------------------- | ---------------------------- | --------- |
-| `name`       | The name of the view                    | `string`                     | ✅         |
-| `version`    | The view version                        | `int`                        | ✅         |
-| `attributes` | The names of the attributes to retrieve | array of `string` | ✅         |
-| `entity`     | The entity name                         | `string`                     | ✅         |
-| `identifier` | The entity value               | `string`                     | ✅         |
 
 
 ## Signals API TODO

@@ -47,7 +47,16 @@ sp_signals = Signals(
 </TabItem>
 <TabItem value="nodejs" label="Node.js">
 
-TODO
+```typescript
+import { Signals } from '@snowplow/signals-node';
+
+const signals = new Signals({
+  baseUrl: SIGNALS_API_URL,
+  apiKey: API_KEY,
+  apiKeyId: API_KEY_ID,
+  organizationId: ORG_ID,
+});
+```
 
 </TabItem>
 </Tabs>
@@ -84,7 +93,27 @@ The table below lists all available arguments for `get_service_attributes()`
 </TabItem>
 <TabItem value="nodejs" label="Node.js">
 
-TODO
+Use `getServiceAttributes()` to retrieve attributes from a specific service. Signals will return the attributes as a JavaScript object.
+
+Here's an example:
+
+```typescript
+// The Signals connection object has been created as signals
+
+const calculatedValues = await signals.getServiceAttributes({
+  name: "my_service",
+  attribute_key: "domain_userid",
+  identifier: "218e8926-3858-431d-b2ed-66da03a1cbe5",
+});
+```
+
+The table below lists all available arguments for `getServiceAttributes()`
+
+| Argument        | Description                                  | Type     | Required? |
+| --------------- | -------------------------------------------- | -------- | --------- |
+| `name`          | The name of the service                      | `string` | ✅         |
+| `attribute_key` | The attribute key to retrieve attributes for | `string` | ✅         |
+| `identifier`    | The specific attribute key value             | `string` | ✅         |
 
 </TabItem>
 </Tabs>
@@ -121,13 +150,37 @@ The table below lists all available arguments for `get_view_attributes()`
 | `name`          | The name of the attribute group         | `string`                     | ✅         |
 | `version`       | The attribute group version             | `int`                        | ✅         |
 | `attributes`    | The names of the attributes to retrieve | `string` or list of `string` | ✅         |
-| `attribute_key` | The attribute_key name                  | `string`                     | ✅         |
+| `attribute_key` | The attribute key name                  | `string`                     | ✅         |
 | `identifier`    | The specific attribute key value        | `string`                     | ✅         |
 
 </TabItem>
 <TabItem value="nodejs" label="Node.js">
 
-TODO
+Use `getViewAttributes()` to retrieve specific attributes from an attribute group. Signals will return the attributes as a JavaScript object.
+
+Here's an example:
+
+```typescript
+// The Signals connection object has been created as signals
+
+const calculatedValues = await signals.getViewAttributes({
+  name: "my_attribute_group",
+  version: 1,
+  attributes: ["page_view_count"],
+  attribute_key: "domain_userid",
+  identifier: "218e8926-3858-431d-b2ed-66da03a1cbe5",
+});
+```
+
+The table below lists all available arguments for `getViewAttributes()`
+
+| Argument        | Description                             | Type       | Required? |
+| --------------- | --------------------------------------- | ---------- | --------- |
+| `name`          | The name of the attribute group         | `string`   | ✅         |
+| `version`       | The attribute group version             | `number`   | ✅         |
+| `attributes`    | The names of the attributes to retrieve | `string[]` | ✅         |
+| `attribute_key` | The attribute key name                  | `string`   | ✅         |
+| `identifier`    | The specific attribute key value        | `string`   | ✅         |
 
 </TabItem>
 </Tabs>

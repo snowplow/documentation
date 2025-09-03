@@ -15,7 +15,7 @@ When retrieving calculated attributes, specify an instance of the relevant attri
 
 ```python
 response = sp_signals.get_service_attributes(
-    source="my_quickstart_service",
+    name="quickstart_service",
     attribute_key="domain_sessionid",
     identifier="d99f6db1-7b28-46ca-a3ef-f0aace99ed86",
 )
@@ -39,7 +39,7 @@ response = my_attribute_group.get_group_attributes(
 
 # Option 2 (if you don't have the attribute group instance)
 response = sp_signals.get_group_attributes(
-    name="my_quickstart_attribute_group",
+    name="quickstart_group",
     version=1,
     attributes=["page_view_count", "most_recent_browser", "first_referrer"],
     attribute_key="domain_sessionid",

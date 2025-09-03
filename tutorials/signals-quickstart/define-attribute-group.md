@@ -3,196 +3,128 @@ position: 3
 title: Define an attribute group
 ---
 
-An `Attribute` describes a specific fact about user behavior. They're grouped into attribute groups for management and deployment.
+Attribute groups are where you define the data you want to calculate. To create an [attribute group](/docs/signals/configuration/attribute-groups/), go to **Signals** > **Attribute groups** in BDP Console and click **Create attribute group**.
+
+<!-- TODO image {{create attribute group page}} -->
+
+Follow these instructions to configure Signals to calculate three different session metrics from page views in your real-time event stream:
+* How many page views in the last 15 minutes for each session
+* The last seen browser name for each session
+* The first seen page referrer for each session
+
+## Configure group information
+
+Specify the basic configuration for your attribute group:
+
+* **Name**: `quickstart_group`
+* **Description**: quickstart tutorial page view session metrics
+* **Source**: stream
+* **Primary owner**: your email address
+
+The name will be the group's unique identifier. The description and owner are optional.
+
+Under the Configuration section, select the following:
+* **Attribute key**: `domain_sessionid`
+* **TTL**: leave blank
+
+<!-- TODO image {{basic settings form with stream data source and domain_sessionid selected}} -->
 
 ## Define attributes
 
-In this tutorial you will define three attributes based on page view events.
+Click **Add attribute** to create each one.
+
+<!-- TODO image {{add attribute button clicked}} -->
 
 ### Page view counter
 
-The first attribute counts the number of page view events within the last 15 minutes. It uses the `counter` aggregation. The time window is defined by the `period` parameter.
+The first attribute is a count of the number of page view events within the last 15 minutes. Enter `page_view_count` in the attribute name field.
 
-```python
-from snowplow_signals import Attribute, Event
-from datetime import timedelta
+To set the event to calculate this attribute from:
+1. Click on the event filter field to bring up the event selection options
+2. Page views are a built-in Snowplow event, so they'll be listed within the default **Snowplow events** tab
+3. Click in the search box to find `page_view`
+4. Select the version `1-0-0`
+5. Click **Confirm** to add the event to the attribute
 
-page_view_count = Attribute(
-    name="page_view_count",
-    description="Page views in the last 15 minutes.",
-    type="int32",
-    events=[
-        Event(
-            vendor="com.snowplowanalytics.snowplow",
-            name="page_view",
-            version="1-0-0",
-        )
-    ],
-    aggregation="counter",
-    period=timedelta(minutes=15),
-)
-```
+<!-- TODO image {{named attribute with page view v1-0-0 selected in filter thing}} -->
 
-Note that there's a limit on how many events can be considered for time-windowed [event processing in stream](/docs/signals/configuration/stream-calculations).
+Leave the aggregation as `Counter`. No property is used for this aggregation, so leave the property field blank.
+
+To set the time period:
+1. Click on the **More** button
+2. Update the time period to 15 minutes
+3. Click **Done** to save
+
+<!-- TODO image {{named attribute with page view v1-0-0 selected, showing more options with time period}} -->
+
+:::info Event processing limits
+There's a limit on how many events can be considered for time-windowed [event processing in stream](/docs/signals/configuration/stream-calculations).
+:::
 
 ### Most recent browser
 
-The second attribute stores the last seen browser name (e.g. "Safari"), using the `last` aggregation. The `property` tells Signals where to look in the event for the value.
+The second attribute is the last seen browser name. The calculation makes use of the [YAUAA enrichment](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/): the browser name is a field in the `yauaa_context` entity.
 
-Browser information is appended to every event by the [YAUAA enrichment](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/) as an entity with schema URI `iglu:nl.basjes/yauaa_context/jsonschema/1-0-1`. Within the event payload, this URI becomes `contexts_nl_basjes_yauaa_context_1`. The `property` defined in this attribute uses the `agentName` field from the YAUAA entity. Note the `[0]` index to access the entity data.
+Create an attribute named `most_recent_browser`, and select `page_view` as before.
 
-In general, your attribute `property` definitions will be based on a column or field from the event, with the column name as seen in your warehouse.
+Choose the `Last` aggregation.
 
-```python
-from snowplow_signals import Attribute, Event
-from datetime import timedelta
+To set the property:
+1. Click on the property selection field
+2. Choose the **Entity** tab to search through all schemas that have been tracked as entities with your events
+3. Use the search bar to search for `yauaa_context`
+4. Select the entity `yauaa_context (nl.basjes)`
+5. Select the `agentName` property
+6. Click **Confirm** to save
 
-most_recent_browser = Attribute(
-    name="most_recent_browser",
-    description="The last browser name tracked.",
-    type="string",
-    events=[
-        Event(
-            vendor="com.snowplowanalytics.snowplow",
-            name="page_view",
-            version="1-0-0",
-        )
-    ],
-    aggregation="last",
-    property="contexts_nl_basjes_yauaa_context_1[0].agentName",
-)
-```
+<!-- TODO image {{property selection thing showing yauaa_context}} -->
 
 ### First referrer
 
-The third attribute stores the first seen referrer path, based on the `refr_urlhost` [atomic event property](/docs/fundamentals/canonical-event/#platform-specific-fields) and the `first` aggregation. By using a `criteria` filter, it's only calculated for page views where the referrer isn't an empty string.
+The third attribute stores the first seen referrer path, based on the `refr_urlhost` [atomic event property](/docs/fundamentals/canonical-event/#platform-specific-fields).
 
-```python
-from snowplow_signals import Attribute, Event, Criteria, Criterion
-from datetime import timedelta
+Create an attribute named `first_referrer`, and select `page_view` as before.
 
-first_referrer = Attribute(
-    name="first_referrer",
-    description="The first referrer tracked.",
-    type="string",
-    events=[
-        Event(
-            vendor="com.snowplowanalytics.snowplow",
-            name="page_view",
-            version="1-0-0",
-        )
-    ],
-    aggregation="first",
-    property="refr_urlhost",
-    criteria=Criteria(
-        all=[
-            Criterion(
-                property="page_referrer",
-                operator="!=",
-                value=""
-            )
-        ]
-    ),
-    default_value=None
-)
-```
+Choose the `First` aggregation.
 
-Add all three attribute definitions to your notebook, and run the cell.
+To set the property:
+1. Click on the property selection field
+2. Stay on the default **Atomic** tab to search through all atomic properties
+3. Use the search bar to search for and select `refr_urlhost`
+6. Click **Confirm** to save
 
-## Define an attribute group
+<!-- TODO image {{property selection thing showing refr_urlhost}} -->
 
-Single attribute definitions can't be deployed to Signals, as they don't make sense without the additional context defined in an `AttributeGroup`.
+For a trivial example of using criteria filters, add a filter to only consider events where the referrer is not an empty string.
 
-Group the attributes together, adding the session attribute key identifier `domain_sessionid`. You'll need to update the `owner` field to your email address.
+To set the criteria filter:
+1. Click on the **More** button
+2. Click **Add criteria**
+3. Choose the `page_referrer` atomic property and click **Confirm**
+4. Change the operator to `not equals`
+5. Leave the value blank
+6. Click **Done** to return to the group details page
 
-```python
-from snowplow_signals import StreamAttributeGroup, domain_sessionid
+<!-- TODO image {{more options showing criteria}}} -->
 
-my_attribute_group = StreamAttributeGroup(
-    name="quickstart_group",
-    version=1,
-    attribute_key=domain_sessionid,
-    owner="user@company.com", # UPDATE THIS
-    attributes=[
-        page_view_count,
-        most_recent_browser,
-        first_referrer
-    ],
-)
-```
+## Test the attribute definitions
 
-Because of the session attribute key, Signals will calculate these attributes as follows:
-* How many page views in the last 5 minutes for each session
-* The last seen browser name for each session
-* The first seen referrer for each session
+Once you've added attributes, click **Run preview** to test your attribute group configuration.
 
-Add this attribute group definition to your notebook, and run the cell.
+<!-- TODO image {{run preview button}} -->
 
-
-## Testing
-
-
-Signals will start processing events and computing attributes as soon as you apply the attribute group configuration.
-
-It's a good idea to test the definitions before deployment.
-
-Add a new cell to your notebook with the following code:
-
-```python
-data = sp_signals.test(
-    attribute_group=my_attribute_group
-)
-print(data)
-```
-
-Running this will calculate the attributes from your atomic events table. By default, events from the last hour are considered.
+This will calculate the attributes from your atomic events table using 10 random events from the last hour.
 
 You should see something like this:
 
-|     | `domain_sessionid`                     | `page_view_count` | `most_recent_browser` | `first_referrer` |
-| --- | -------------------------------------- | ----------------- | --------------------- | ---------------- |
-| 0   | `d99f6db1-7b28-46ca-a3ef-f0aace99ed86` | 0                 | "Firefox"             | None             |
-| 1   | `08d833ec-5eef-461c-b452-842e7bd27067` | 1                 | "Chrome"              | "www.google.com" |
-| 2   | `c4311466-231a-41ca-89d8-f2ff85e62a29` | 0                 | "Chrome"              | "duckduckgo.com" |
-| 3   | `23937e09-b640-447e-82d9-c01bc16decb2` | 0                 | "Chrome"              | "www.google.com" |
-| 4   | `61fb46c9-bfd3-48cd-a991-7a8484d1de8c` | 0                 | None                  | None             |
-| 5   | `b0625a55-8382-4bfb-be9f-fefd75ad7e63` | 1                 | "Chrome"              | None             |
-| 6   | `d97140c3-3c5e-426e-8527-15314efb2be3` | 0                 | "Chrome"              | None             |
-| 7   | `4da52032-f6d1-41b4-9cf2-b40e164cbe6e` | 1                 | "Chrome"              | None             |
-| 8   | `2ee80a4a-86dd-4a24-b697-0709b29ed079` | 0                 | "Safari"              | None             |
+<!-- TODO image {{preview results table}} -->
 
-The test method returns results from a random 10 attribute key values. The first column shows the attribute key values, in this case for the session attribute key `domain_sessionid`.
+The first column shows the unique attribute key values, in this case for the session attribute key `domain_sessionid`.
 
-The attributes look as expected, so the attribute group is ready to deploy.
+## Save the attribute group
 
-## Testing for individual entities
+Once you're satisfied with the preview results, click **Create attribute group** to save it as a draft.
 
-You can also test specific attribute key instances, by providing a list of IDs.
+Click **Publish** to push this configuration to Signals and start calculating attributes.
 
-This example will be calculated for just these two `domain_sessionid`s:
-
-```python
-data = sp_signals.test(
-    attribute_group=my_attribute_group,
-    attribute_key_ids=["d99f6db1-7b28-46ca-a3ef-f0aace99ed86", "08d833ec-5eef-461c-b452-842e7bd27067"]
-)
-```
-
-|     | `domain_sessionid`                     | `page_view_count` | `most_recent_browser` | `first_referrer` |
-| --- | -------------------------------------- | ----------------- | --------------------- | ---------------- |
-| 0   | `d99f6db1-7b28-46ca-a3ef-f0aace99ed86` | 0                 | "Firefox"             | None             |
-| 1   | `08d833ec-5eef-461c-b452-842e7bd27067` | 1                 | "Chrome"              | "www.google.com" |
-
-## Testing on a subset of events
-
-Depending on your Snowplow tracking configuration, you might want to test only on events from specific applications, using `app_ids`:
-
-```python
-data = sp_signals.test(
-    attribute_group=my_attribute_group,
-    app_ids=["website"],
-)
-print(data)
-```
-
-If you don't see any results, check your Signals configuration to confirm that it's processing events from those `app_id`s.
+<!-- TODO image {{attribute group details page showing draft status}} -->

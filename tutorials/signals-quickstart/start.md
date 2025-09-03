@@ -15,7 +15,7 @@ It should take less than 10 minutes from starting to retrieving calculated attri
 
 This tutorial assumes that you have:
 
-* Deployed Snowplow page view tracking from a web application
+* Snowplow page view tracking on a web application
 * Snowflake warehouse
 * A Signals connection
 

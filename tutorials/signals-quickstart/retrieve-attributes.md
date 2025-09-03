@@ -3,54 +3,11 @@ position: 6
 title: Retrieve calculated attributes
 ---
 
-For a real use case, you'll want to retrieve calculated attributes into your applications.
+For a real use case, you'll want to consume calculated attributes in your applications. Read more about this [in the Signals documentation](/docs/signals/retrieval/).
 
-You can use the Python SDK and Node.js SDKs to retrieve attributes from the Profiles Store, or the Signals API directly. Read about these options [in the Signals documentation](/docs/signals/retrieval/).
+For this tutorial, we've provided a Jupyter notebook ADD LINK so you can quickly explore attribute retrieval, using the Signals Python SDK.
 
-For this tutorial, you'll retrieve attributes into your notebook. Add a new cell for getting values.
-
-## Using a service (recommended)
-
-When retrieving calculated attributes, specify an instance of the relevant attribute key, in this case a `domain_sessionid`. This will return all the attributes defined in `my_quickstart_service` for this session.
-
-```python
-response = sp_signals.get_service_attributes(
-    name="quickstart_service",
-    attribute_key="domain_sessionid",
-    identifier="d99f6db1-7b28-46ca-a3ef-f0aace99ed86",
-)
-
-df=response.to_dataframe()
-df
-```
-
-## Using an attribute group
-
-You can also retrieve calculated attributes for individual attribute groups. This isn't recommended for production use, where services are a better idea, but it can be useful for testing.
-
-There are two methods to do this, depending if you have the attribute group instance available or not:
-
-```python
-# Option 1 (if you have the attribute group instance)
-response = my_attribute_group.get_group_attributes(
-    signals=sp_signals,
-    identifier="d99f6db1-7b28-46ca-a3ef-f0aace99ed86",
-)
-
-# Option 2 (if you don't have the attribute group instance)
-response = sp_signals.get_group_attributes(
-    name="quickstart_group",
-    version=1,
-    attributes=["page_view_count", "most_recent_browser", "first_referrer"],
-    attribute_key="domain_sessionid",
-    identifiers=["d99f6db1-7b28-46ca-a3ef-f0aace99ed86"]
-)
-
-df=response.to_dataframe()
-df
-```
-
-## Retrieving attributes for your current session
+## Finding your current session ID
 
 In your real application code, you can access the current session ID and use it to retrieve the relevant attribute values. The attributes are being calculated in near real time, in session. Read about how to access IDs such as `domain_sessionid` in your web application in [Getting cookie information](/docs/sources/trackers/web-trackers/cookies-and-local-storage/getting-cookie-values/#getdomainuserid).
 
@@ -58,8 +15,69 @@ To test this out, use the [Snowplow Inspector](/docs/data-product-studio/data-qu
 
 ![Screenshot showing the session ID in the Snowplow Inspector](./images/inspector-session.png)
 
-Use this identifier to retrieve the attributes that Signals has just calculated about your session.
+## Connecting to Signals
+
+Install the Signals Python SDK into the notebook, and connect to Signals.
+
+1. Go to **Signals** > **Overview** in BDP Console to find your Signals credentials
+2. Add them to the notebook secrets:
+
+![Screenshot showing how to add secrets](./images/notebook-secrets.png)
+
+3. Install the SDK:
+
+```python
+%pip install snowplow-signals
+```
+
+4. Connect to Signals:
+
+```python
+from snowplow_signals import Signals
+from google.colab import userdata
+
+sp_signals = Signals(
+    api_url=userdata.get('SP_API_URL'),
+    api_key=userdata.get('SP_API_KEY'),
+    api_key_id=userdata.get('SP_API_KEY_ID'),
+    org_id=userdata.get('SP_ORG_ID'),
+)
+```
+
+## Retrieving your session attributes
+
+Use your current session ID to retrieve the attributes that Signals has just calculated about your session.
+
+```python
+response = sp_signals.get_service_attributes(
+    name="quickstart_service",
+    attribute_key="domain_sessionid",
+    identifier="472f97c1-eec1-45fe-b081-3ff695c30415", # UPDATE THIS
+)
+
+df=response.to_dataframe()
+df
+```
+
+The result should look something like this:
 
 |     | `domain_sessionid`                     | `page_view_count` | `most_recent_browser` | `first_referrer` |
 | --- | -------------------------------------- | ----------------- | --------------------- | ---------------- |
 | 0   | `472f97c1-eec1-45fe-b081-3ff695c30415` | 2.0               | `Firefox`             | `snowplow.io`    |
+
+### Retrieving single attributes
+
+To retrieve individual attributes rather than using a service, use the `get_group_attributes()` method.
+
+```python
+response = sp_signals.get_group_attributes(
+    name="quickstart_group",
+    version=1,
+    attributes=["page_view_count"],
+    attribute_key="domain_sessionid",
+    identifiers=["472f97c1-eec1-45fe-b081-3ff695c30415"]
+)
+
+df=response.to_dataframe()
+df
+```

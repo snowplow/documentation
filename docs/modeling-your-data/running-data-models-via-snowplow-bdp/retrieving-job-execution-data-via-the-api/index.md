@@ -23,9 +23,7 @@ The endpoints focus on the main operations in the workflow around:
 3. Retrieving only the steps of a particular job run without any additional information.
 4. Getting the full data available about the execution of a particular step of a particular job run, including `stdout`/`stderr`.
 
-Each request will need to include your company’s `organizationID` which is a UUID that can be retrieved from the URL immediately following the .com when visiting console:
-
-![](images/orgID.png)
+Each request will need to include your Organization ID. You can find it [on the _Manage organization_ page](https://console.snowplowanalytics.com/settings) in Console.
 
 ```mdx-code-block
 import GetConsoleApiKey from "@site/docs/reusable/get-console-api-key/_index.md"

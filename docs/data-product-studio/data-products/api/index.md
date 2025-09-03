@@ -28,9 +28,7 @@ The endpoints focus on the main operations in the workflow around:
 3. Viewing the data product history
 4. Managing subscriptions for change notifications
 
-Each request will need to include your company's `organizationID`, the UUID that can be retrieved from the URL immediately following `snowplowanalytics.com` when visiting the BDP console:
-
-![](images/orgID.png)
+Each request will need to include your Organization ID. You can find it [on the _Manage organization_ page](https://console.snowplowanalytics.com/settings) in Console.
 
 ```mdx-code-block
 import GetConsoleApiKey from "@site/docs/reusable/get-console-api-key/_index.md"

@@ -1,13 +1,25 @@
 ---
 title: "Retrieving calculated values from the Profiles Store"
 sidebar_position: 30
-sidebar_label: "Retrieving values"
+sidebar_label: "Retrieving attributes"
 ---
 
-Your calculated attributes are stored in the Profiles Store. To retrieve them, you can use:
-* Signals Python SDK
+Your calculated attributes are stored in the Profiles Store, and retrieved using [services](/docs/signals/concepts/#services).
+
+To use attributes in your applications, you can use:
 * Signals Node.js SDK (TypeScript)
+* Signals Python SDK
 * Signals API
+
+## Connecting to Signals
+
+For all of these methods, you'll need to connect to your Signals deployment. Use the credentials shown on the Signals overview page in BDP Console.
+
+<!-- TODO image landing page -->
+
+## Node.js SDK
+
+Install the SDK into your project, and connect to Signals as described in [Configuration](/docs/signals/configuration/index.md).
 
 ## Python SDK
 
@@ -33,11 +45,11 @@ print(calculated_values)
 
 The table below lists all available arguments for `get_service_attributes()`
 
-| Argument            | Description                                       | Type     | Required? |
-| ------------------- | ------------------------------------------------- | -------- | --------- |
-| `name`              | The name of the service                           | `string` | ✅         |
-| `attribute_key`     | The attribute key to retrieve attributes for      | `string` | ✅         |
-| `identifier`        | The specific attribute key value                  | `string` | ✅         |
+| Argument        | Description                                  | Type     | Required? |
+| --------------- | -------------------------------------------- | -------- | --------- |
+| `name`          | The name of the service                      | `string` | ✅         |
+| `attribute_key` | The attribute key to retrieve attributes for | `string` | ✅         |
+| `identifier`    | The specific attribute key value             | `string` | ✅         |
 
 
 ### Attributes from an attribute group
@@ -62,16 +74,14 @@ print(calculated_values)
 
 The table below lists all available arguments for `get_attributes()`
 
-| Argument            | Description                             | Type                         | Required? |
-| ------------------- | --------------------------------------- | ---------------------------- | --------- |
-| `name`              | The name of the attribute group         | `string`                     | ✅         |
-| `version`           | The attribute group version             | `int`                        | ✅         |
-| `attributes`        | The names of the attributes to retrieve | `string` or list of `string` | ✅         |
-| `attribute_key`     | The attribute_key name                  | `string`                     | ✅         |
-| `identifier`        | The specific attribute key value        | `string`                     | ✅         |
+| Argument        | Description                             | Type                         | Required? |
+| --------------- | --------------------------------------- | ---------------------------- | --------- |
+| `name`          | The name of the attribute group         | `string`                     | ✅         |
+| `version`       | The attribute group version             | `int`                        | ✅         |
+| `attributes`    | The names of the attributes to retrieve | `string` or list of `string` | ✅         |
+| `attribute_key` | The attribute_key name                  | `string`                     | ✅         |
+| `identifier`    | The specific attribute key value        | `string`                     | ✅         |
 
-## Node.js SDK TODO
 
-Install the SDK into your project, and connect to Signals as described in [Configuration](/docs/signals/configuration/index.md).
 
 ## Signals API TODO

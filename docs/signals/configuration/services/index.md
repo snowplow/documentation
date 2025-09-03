@@ -3,7 +3,7 @@ title: "Services"
 sidebar_position: 32
 ---
 
-[Services](/docs/signals/concepts/#services) group attribute groups together for serving to your applications.
+[Services](/docs/signals/concepts/index.md#services) group attribute groups together for serving to your applications.
 
 To create a service, go to **Signals** > **Services** in BDP Console and follow the instructions.
 

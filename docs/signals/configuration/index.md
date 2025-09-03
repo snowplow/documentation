@@ -4,21 +4,15 @@ sidebar_position: 20
 sidebar_label: "Configuration"
 ---
 
-You can configure Signals attributes using the BDP Console (recommended), or programmatically using the Python SDK or Signals API.
-
-By default, Signals calculates attributes in real time, in stream. Check out the [quick start tutorial](/tutorials/signals-quickstart/start) to get started.
-
-## Using BDP Console (recommended)
-
-The easiest way to configure Signals is through the [BDP Console](https://console.snowplowanalytics.com) interface. This provides a visual way to define attributes, attribute groups, and manage your Signals configuration without writing code.
+Configure your Signals attributes and interventions using the BDP Console. This provides a visual way to define attributes, attribute groups, and manage your Signals configuration without writing code.
 
 1. Log in to [Console](https://console.snowplowanalytics.com)
 2. Navigate to the **Signals** section
-3. Use the configuration interface to define [attribute groups](/docs/signals/configuration/attribute-groups/index.md), [services](/docs/signals/configuration/services/index.md), and [interventions](/docs/signals/interventions/index.md)
+3. Use the configuration interface to define [attribute groups](/docs/signals/configuration/attribute-groups/index.md), [services](/docs/signals/configuration/services/index.md), and [interventions](/docs/signals/configuration/interventions/index.md)
 
 <!-- TODO image landing page with deployment, shows credentials -->
 
-### Setting up Signals
+## Setting up a new connection
 
 If you're new to Signals, you'll need to set up a Signals connection. Log in to [Console](https://console.snowplowanalytics.com) and navigate to the **Signals** section.
 
@@ -40,7 +34,7 @@ For programmatic configuration, you can use the [Signals Python SDK](https://git
 
 ### Signals API
 
-The Signals API allows you to manually configure and retrieve attributes and interventions. To access the full Swagger API documentation for your Signals deployment, use your Signals API URL followed by `/docs/`:
+The Signals API allows you to manually configure attributes and interventions. To access the full Swagger API documentation for your Signals deployment, use your Signals API URL followed by `/docs/`:
 
 ```bash
 {{API_URL}}/docs/

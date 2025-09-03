@@ -4,7 +4,7 @@ sidebar_position: 30
 sidebar_label: "Attribute groups"
 ---
 
-Define the behavior you want to capture in [attribute groups](/docs/signals/concepts/#attribute-groups). Choose whether to calculate attributes from your event stream or warehouse.
+Define the behavior you want to capture in [attribute groups](/docs/signals/concepts/index.md#attribute-groups). Choose whether to calculate attributes from your event stream or warehouse.
 
 To create an attribute group, go to **Signals** > **Attribute groups** in BDP Console and follow the instructions.
 
@@ -19,27 +19,31 @@ The first step is to specify:
 ## Data source
 
 There are three sources to choose from:
-* Stream: real-time Snowplow event stream
-* Batch: a new warehouse table created by Signals, calculated from your `atomic` events table
-* External batch: pre-calculated values in a warehouse table that you can sync to the Profiles Store
+* **Stream**: real-time Snowplow event stream
+* **Batch**: a new warehouse table created by Signals, calculated from your `atomic` events table
+* **External batch**: pre-calculated values in a warehouse table that you can sync to the Profiles Store
 
-Each of the different data sources is configured differently.
+Attribute groups are configured differently based on the data source.
 
-### Stream source
+### Stream
 
-You'll need to define the [attributes](/docs/signals/configuration/attribute-groups/attributes/index.md) you want to calculate from your real-time event stream.
+By default, Signals will calculate attributes from events in your real-time stream: the stream source. Check out the [quick start tutorial](/tutorials/signals-quickstart/start) for a step-by-step guide.
 
-<!-- TODO image with attributes -->
-
-### Batch source
-
-You'll need to define the [attributes](/docs/signals/configuration/attribute-groups/attributes/index.md) you want to calculate from your `atomic` events table.
+You'll need to define the [attributes](/docs/signals/configuration/attribute-groups/attributes/index.md) you want to calculate from your event stream.
 
 <!-- TODO image with attributes -->
 
-TODO dbt
+### Batch
 
-### External batch source
+Attribute groups with a batch source use dbt to calculate the defined attributes as a new table. Signals will sync the calculated attributes to the Profiles Store.
+
+First, define the [attributes](/docs/signals/configuration/attribute-groups/attributes/index.md) you want to calculate from your `atomic` events table.
+
+<!-- TODO image with attributes -->
+
+Once you've created the group, create and configure the dbt models. Follow the instructions shown, or check out the [batch engine tutorial](/tutorials/signals-batch-engine/start) for a step-by-step guide.
+
+### External batch
 
 Attribute groups with an external batch source don't require attribute definition, as no calculation will be performed. This source type allows you to sync existing warehouse values with Signals so they're available in your Profiles Store.
 
@@ -51,7 +55,7 @@ We recommend providing a timestamp field for incremental or snapshot-based table
 
 ## Attribute keys
 
-All attribute groups need an attribute key.
+All attribute groups need an [attribute key](/docs/signals/concepts/index.md#attribute-keys).
 
 Signals includes four built-in attribute keys, based on commonly used identifiers from the atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) in all Snowplow events.
 
@@ -61,8 +65,6 @@ Signals includes four built-in attribute keys, based on commonly used identifier
 | `domain_userid`    | `uuid`   |
 | `network_userid`   | `uuid`   |
 | `domain_sessionid` | `uuid`   |
-
-The `domain_userid` property is intended for use in web applications.
 
 ### Creating a custom attribute key
 
@@ -104,6 +106,10 @@ Click the **Edit** button if you want to make changes to the attribute group.
 
 To send the attribute group configuration to your Signals infrastructure, click the **Publish** button. This will allow Signals to start calculating attributes or syncing tables, and populating the Profiles Store.
 
+:::note
+If the attribute group has a batch source, Signals won't be able to do anything until you've completed the dbt configuration steps. Complete the dbt steps before publishing the group.
+:::
+
 ### Versioning
 
 Attribute groups are versioned. This allows you to iterate on the definitions without breaking downstream processes. You'll select specific attribute group versions when you define [services](/docs/signals/configuration/services/index.md).
@@ -122,6 +128,6 @@ Unpublishing is version specific. It will stop Signals from calculating attribut
 
 Choose **Delete** to permanently delete all versions of the attribute group, along with attribute values in your Profiles Store for this group.
 
-If the attribute group version is used by a [service](/docs/signals/concepts/#services), you'll need to update the service definition before unpublishing or deleting.
+If the attribute group version is used by a [service](/docs/signals/concepts/index.md#services), you'll need to update the service definition before unpublishing or deleting.
 
-If the attribute group version is used by a published [intervention](/docs/signals/concepts/#interventions), deleting or unpublishing it will unpublish the intervention.
+If the attribute group version is used by a published [intervention](/docs/signals/concepts/index.md#interventions), deleting or unpublishing it will unpublish the intervention.

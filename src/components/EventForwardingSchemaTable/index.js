@@ -1,134 +1,184 @@
-import React from 'react';
+import React from 'react'
 
 export default function EventForwardingSchemaTable({ schema }) {
   if (!schema) {
-    return <p>No schema provided.</p>;
+    return <p>No schema provided.</p>
   }
 
   // Handle array schemas (like Braze purchases)
-  let properties, requiredFields, schemaForConditionals;
+  let properties, requiredFields, schemaForConditionals
   if (schema.type === 'array' && schema.items && schema.items.properties) {
-    properties = schema.items.properties;
-    requiredFields = schema.items.required || [];
-    schemaForConditionals = schema.items;
+    properties = schema.items.properties
+    requiredFields = schema.items.required || []
+    schemaForConditionals = schema.items
   } else if (schema.properties) {
-    properties = schema.properties;
-    requiredFields = schema.required || [];
-    schemaForConditionals = schema;
+    properties = schema.properties
+    requiredFields = schema.required || []
+    schemaForConditionals = schema
   } else {
-    return <p>No schema properties found.</p>;
+    return <p>No schema properties found.</p>
   }
-  
+
   // Check for conditional requirements (anyOf/oneOf)
-  const conditionallyRequired = new Set();
+  const conditionallyRequired = new Set()
   if (schemaForConditionals.anyOf) {
-    schemaForConditionals.anyOf.forEach(condition => {
+    schemaForConditionals.anyOf.forEach((condition) => {
       if (condition.oneOf) {
-        condition.oneOf.forEach(subCondition => {
+        condition.oneOf.forEach((subCondition) => {
           if (subCondition.required) {
-            subCondition.required.forEach(field => conditionallyRequired.add(field));
+            subCondition.required.forEach((field) =>
+              conditionallyRequired.add(field)
+            )
           }
-        });
+        })
       }
       if (condition.required) {
-        condition.required.forEach(field => conditionallyRequired.add(field));
+        condition.required.forEach((field) => conditionallyRequired.add(field))
       }
-    });
+    })
   }
-  
+
   if (schemaForConditionals.oneOf) {
-    schemaForConditionals.oneOf.forEach(condition => {
+    schemaForConditionals.oneOf.forEach((condition) => {
       if (condition.required) {
-        condition.required.forEach(field => conditionallyRequired.add(field));
+        condition.required.forEach((field) => conditionallyRequired.add(field))
       }
-    });
+    })
   }
 
   const formatType = (property) => {
     if (property.type === 'array' && property.items) {
-      return `array of ${property.items.type || 'object'}`;
+      return `array of ${property.items.type || 'object'}`
     }
-    return property.type || 'unknown';
-  };
+    return property.type || 'unknown'
+  }
 
   const formatDefault = (property) => {
     if (property.consoleDefault) {
-      return <code>{property.consoleDefault}</code>;
+      return <code>{property.consoleDefault}</code>
     }
     if (property.default !== undefined) {
       if (typeof property.default === 'string') {
-        return <code>"{property.default}"</code>;
+        return <code>"{property.default}"</code>
       }
-      return <code>{property.default}</code>;
+      return <code>{property.default}</code>
     }
-    return 'N/A';
-  };
+    return null
+  }
+
+  const hasDefault = (property) => {
+    return property.consoleDefault || property.default !== undefined
+  }
 
   const isRequired = (fieldName, parentRequired = requiredFields) => {
     // Don't mark as required if it's conditionally required (anyOf/oneOf)
     if (conditionallyRequired.has(fieldName)) {
-      return false;
+      return false
     }
-    return parentRequired.includes(fieldName);
-  };
+    return parentRequired.includes(fieldName)
+  }
 
   const formatEnums = (property) => {
     if (property.enum) {
-      const enumValues = property.enum.map(value => 
-        value === null ? <code key={value}>null</code> : <code key={value}>{value}</code>
-      );
+      const enumValues = property.enum.map((value) =>
+        value === null ? (
+          <code key={value}>null</code>
+        ) : (
+          <code key={value}>{value}</code>
+        )
+      )
       return (
         <>
-          <br />Must be one of: {enumValues.reduce((prev, curr, index) => 
-            index === 0 ? [curr] : [...prev, ', ', curr], []
+          Must be one of:{' '}
+          {enumValues.reduce(
+            (prev, curr, index) =>
+              index === 0 ? [curr] : [...prev, ', ', curr],
+            []
           )}
         </>
-      );
+      )
     }
-    return null;
-  };
+    return null
+  }
 
-  const renderPropertyRow = (fieldName, property, parentRequired = requiredFields, parentFieldPath = '', isNested = false) => {
-    const type = formatType(property);
-    const required = isRequired(fieldName, parentRequired);
-    const defaultValue = formatDefault(property);
-    const enumInfo = formatEnums(property);
-    
-    const requiredText = required ? <><em>Required.</em> </> : <><em>Optional.</em> </>;
-    const description = property.description || '';
-    
-    const fullFieldPath = parentFieldPath ? `${parentFieldPath}.${fieldName}` : fieldName;
-    const rowKey = fullFieldPath;
-    const displayName = isNested ? fullFieldPath : fieldName;
-    
-    const rows = [(
+  const renderPropertyRow = (
+    fieldName,
+    property,
+    parentRequired = requiredFields,
+    parentFieldPath = '',
+    isNested = false
+  ) => {
+    const type = formatType(property)
+    const required = isRequired(fieldName, parentRequired)
+    const defaultValue = formatDefault(property)
+    const enumInfo = formatEnums(property)
+
+    const requiredText = required ? (
+      <>
+        <em>Required.</em>{' '}
+      </>
+    ) : (
+      <>
+        <em>Optional.</em>{' '}
+      </>
+    )
+    const description = property.description || ''
+
+    const fullFieldPath = parentFieldPath
+      ? `${parentFieldPath}.${fieldName}`
+      : fieldName
+    const rowKey = fullFieldPath
+    const displayName = isNested ? fullFieldPath : fieldName
+
+    const rows = [
       <tr key={rowKey}>
-        <td>{isNested ? '↳ ' : ''}<code>{displayName}</code> <em>({type})</em></td>
         <td>
-          {requiredText}{description}{enumInfo}<br />
-          Default: {defaultValue}
+          <code>{displayName}</code>
+          <br />
+          <em className="text-sm">{type}</em>
         </td>
-      </tr>
-    )];
-    
+        <td>
+          {requiredText}
+          {description}
+          {enumInfo}
+          {hasDefault(property) && (
+            <>
+              <br />
+              Default mapping: {defaultValue}
+            </>
+          )}
+        </td>
+      </tr>,
+    ]
+
     // Handle nested object properties
     if (property.type === 'object' && property.properties) {
-      const nestedRequired = property.required || [];
-      Object.entries(property.properties).forEach(([nestedFieldName, nestedProperty]) => {
-        rows.push(...renderPropertyRow(nestedFieldName, nestedProperty, nestedRequired, fullFieldPath, true));
-      });
+      const nestedRequired = property.required || []
+      Object.entries(property.properties).forEach(
+        ([nestedFieldName, nestedProperty]) => {
+          rows.push(
+            ...renderPropertyRow(
+              nestedFieldName,
+              nestedProperty,
+              nestedRequired,
+              fullFieldPath,
+              true
+            )
+          )
+        }
+      )
     }
-    
-    return rows;
-  };
+
+    return rows
+  }
 
   const renderTableRows = () => {
-    const allRows = [];
+    const allRows = []
     Object.entries(properties).forEach(([fieldName, property]) => {
-      allRows.push(...renderPropertyRow(fieldName, property));
-    });
-    return allRows;
-  };
+      allRows.push(...renderPropertyRow(fieldName, property))
+    })
+    return allRows
+  }
 
   return (
     <div>
@@ -139,10 +189,8 @@ export default function EventForwardingSchemaTable({ schema }) {
             <th>Details</th>
           </tr>
         </thead>
-        <tbody>
-          {renderTableRows()}
-        </tbody>
+        <tbody>{renderTableRows()}</tbody>
       </table>
     </div>
-  );
+  )
 }

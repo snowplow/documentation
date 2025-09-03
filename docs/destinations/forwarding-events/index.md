@@ -4,7 +4,7 @@ description: "Send Snowplow events to third-party platforms in real-time using S
 sidebar_position: 2
 ---
 
-Event forwarders let you filter, transform, and send Snowplow events to third-party platforms in real-time. They're separately deployed, fully managed apps that sit alongside warehouse and lake loaders and provide a self-serve setup process through BDP Console.
+Event forwarders let you filter, transform, and send Snowplow events to third-party platforms in real-time. They're separately deployed, fully managed apps that sit alongside warehouse and lake loaders and have a self-serve setup process through BDP Console.
 
 ![](./images/event-forwarding-diagram.drawio.svg)
 
@@ -12,12 +12,12 @@ Event forwarding uses [Snowbridge](/docs/destinations/forwarding-events/snowbrid
 
 ## Use cases
 
-Event forwarding works best for use cases where you need low-latency event delivery and don't require complex aggregations across multiple events. For more complex transformations or batch processing, consider using [reverse ETL](/docs/destinations/reverse-etl/) instead. 
+Event forwarding works best for use cases where you need low-latency event delivery and don't require complex aggregations across multiple events. For more complex transformations or batch processing, consider using [reverse ETL](/docs/destinations/reverse-etl/) instead.
 
 Event forwarding is a good fit for use cases such as:
 
 - **Real-time personalization**: send events to marketing automation or customer engagement platforms for immediate campaign triggers
-- **Product analytics**: forward specific user actions to analytics tools for real-time product insights
+- **Product analytics**: forward user actions to analytics tools for real-time product insights
 - **A/B testing**: send experiment events to testing platforms for real-time optimization and analytics
 - **Fraud detection**: forward security-relevant events to monitoring systems
 - **Customer support**: stream events to support platforms for context-aware assistance

@@ -76,7 +76,7 @@ You will need to provide:
 * An optional email address for the primary owner or maintainer
 * Which [atomic](/docs/fundamentals/canonical-event/index.md#atomic-fields) property you want to calculate attributes against
 
-To edit or delete a custom attribute key, go to the attribute key details page and click the **Edit** button, or the 3 dots button followed by **Delete**.
+To edit or delete a custom attribute key, go to the key details page and click the **Edit** button, or the 3 dots button followed by **Delete**.
 
 <!-- TODO image example -->
 

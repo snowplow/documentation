@@ -32,6 +32,6 @@ Signals allows you to use existing warehouse tables in two ways:
 
 The standard batch source calculates attributes from the Snowplow atomic events table. This is not configurable.
 
-However, the external batch tables can be any data, whether it's derived from Snowplow events or not. For example, you may want to include transactional data in your Signals use case.
+However, the external batch tables can be any data. For example, you may want to include transactional data in your Signals use case.
 
 Read more about using warehouse data in the [configuration](/docs/signals/configuration/index.md) section.

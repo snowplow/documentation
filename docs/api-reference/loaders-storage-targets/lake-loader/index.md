@@ -11,8 +11,6 @@ import DeployOverview from '@site/docs/api-reference/loaders-storage-targets/lak
 import LakeLoaderDiagram from '@site/docs/api-reference/loaders-storage-targets/lake-loader/_diagram.md';
 ```
 
-## Overview
-
 The Lake Loader is an application that loads Snowplow events to a cloud storage bucket using Open Table Formats.
 
 :::info Open Table Formats

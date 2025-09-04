@@ -67,7 +67,7 @@ https://github.com/snowplow-incubator/databricks-loader/blob/develop/config/conf
   <TabItem value="azure" label="Azure">
 
 ```json reference
-https://github.com/snowplow-incubator/databricks-loader/blob/develop/config/config.azure.minimal.hocon
+https://github.com/snowplow-incubator/databricks-loader/blob/develop/config/config.kafka.minimal.hocon
 ```
 
   </TabItem>

@@ -43,9 +43,9 @@ Signals includes a range of different aggregations for calculating attributes, i
 
 ### Attribute keys
 
-An attribute key is an identifier that provides the analytical context for all attribute calculations within a group. The identifier can be any field of a Snowplow event, such as `domain_userid`.
+An attribute key is an identifier that provides the analytical context for all attribute calculations within a group. The identifier can be any atomic field of a Snowplow event, such as `domain_userid`.
 
-To demonstrate the necessity of attribute keys, consider the attribute `num_views_in_last_10_min` defined within different attribute groups. This table lists some possible meanings of the attribute, based on the attribute key configured for its attribute group:
+To demonstrate the necessity of attribute keys, consider the attribute `num_views_in_last_10_min`. It represents a count of page view events, with a 10 minute time limit. This table lists some possible meanings of the attribute, based on the attribute key configured for its attribute group:
 
 | Attribute                  | Attribute key      | Description                                                                         |
 | -------------------------- | ------------------ | ----------------------------------------------------------------------------------- |
@@ -60,7 +60,7 @@ To demonstrate the necessity of attribute keys, consider the attribute `num_view
 
 Each of these is likely to have a different calculated value.
 
-You can define your own attribute keys, or use the built-in ones. Signals comes with predefined attribute keys for user, device, and session. Their identifiers are from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) in all Snowplow events.
+You can [define your own attribute keys](/docs/signals/configuration/attribute-groups/index.md#creating-a-custom-attribute-key), or use the built-in ones. Signals comes with predefined attribute keys for user, device, and session. Their identifiers are from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) in all Snowplow events.
 
 ### How are attributes updated?
 
@@ -68,10 +68,10 @@ Calculated attribute values are stored in the Profiles Store.
 
 Signals will calculate or update attribute values based on the configuration you provide. There are three ways to update attribute values:
 * Based on events in real time (stream source only)
-* Synced from data in warehouse (batch source only)
+* Synced from data in warehouse (batch or external batch source only)
 * Interventions can be configured to update attributes
 
-Real-time attribute calculation uses the Snowplow event stream, and therefore ingests only Snowplow events. For historical warehouse attributes, you can import values from any table — whether created by Signals or not, even whether derived from Snowplow data or not. For example, you may want to include transactional data in your Signals use case.
+Real-time attribute calculation uses the Snowplow event stream, and therefore ingests only Snowplow events. For historical warehouse attributes, you can import values from any table — whether created by Signals or not, even whether derived from Snowplow data or not.
 
 To learn more about stream and batch sources, see the [stream vs batch](/docs/signals/stream-vs-batch/index.md) page.
 
@@ -79,14 +79,7 @@ To learn more about stream and batch sources, see the [stream vs batch](/docs/si
 
 Here's an example configuration for an attribute group based on a user attribute key, with a stream (default) source:
 
-```mermaid
-flowchart TD
-    subgraph AttributeGroup[AttributeGroup: `user_attributes_realtime`]
-        AG_User[user_attribute_key: `user_id`]
-        AG_SA1[`number_of_pageviews`]
-        AG_SA2[`last_product_viewed`]
-    end
-```
+<!-- TODO image attribute group -->
 
 When this attribute group configuration is applied to Signals, the attributes will be calculated and stored in the Profiles Store. On retrieval, this attribute group might look something like this as a table:
 
@@ -107,30 +100,9 @@ By using services you can:
 
 Here's a service that combines the stream attribute group from before with an additional batch attribute group:
 
-```mermaid
-flowchart TD
-    subgraph StreamAttributeGroup[AttributeGroup: `user_attributes_realtime`]
-        SV_User[User: `user_id`]
-        SV_SAG1[`number_of_pageviews`]
-        SV_SAG2[`last_product_viewed`]
-    end
+<!-- TODO image service -->
 
-    subgraph BatchAttributeGroup[AttributeGroup: `user_attributes_warehouse`]
-        BV_User[User: `user_id`]
-        BV_BAG1[`previous_purchases`]
-        BV_BAG2[`previous_returns`]
-    end
-
-    StreamAttributeGroup --> Service
-    BatchAttributeGroup --> Service
-
-    subgraph Service[Service]
-        S_StreamAttributeGroup[`user_attributes_realtime`]
-        S_BatchAttributeGroup[`user_attributes_warehouse`]
-    end
-```
-
-In this example, both attribute groups have the same attribute key, and all attributes from both attribute groups are included in the service.
+In this example, both attribute groups have the same attribute key.
 
 This service could be imagined like this as a table:
 
@@ -162,3 +134,9 @@ Subscribe [within your application](/docs/signals/interventions/index.md#retriev
 For example, you could subscribe to interventions for a specific `domain_userid`, the current `app_id`, the current `page`, and the current `product`.
 When new interventions are published for any of those, they are delivered and the contents include any relevant attribute values, that can be used by your application to react.
 This enables both individual-level and broadcast-level real-time messaging: for example, offering a specific user a personalized message, while also notifying all users on a specific product page that limited stock is selling fast.
+
+## Profiles Store
+
+The Profiles Store is a database where Signals saves all your calculated attribute values. When Signals calculates attributes from your events or warehouse data, or syncs pre-calculated data, it stores them here organized by attribute group. Your applications retrieve these stored values using the Signals SDKs or API.
+
+The Profiles Store keeps track of current attribute values, and automatically removes old data based on the TTL settings you configure for each attribute group. It acts as the central source of truth for your Signals deployment.

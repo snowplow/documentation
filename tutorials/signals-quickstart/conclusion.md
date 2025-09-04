@@ -6,9 +6,9 @@ title: Conclusion
 In this tutorial you've learned how to use Signals to calculate and serve information about user behavior in near real time.
 
 This is the process workflow:
-* Define attributes
-* Test definitions
-* Apply attribute configurations to Signals
+* Create attribute group
+* Publish the attribute group to Signals
+* Create service
 * Retrieve calculated attribute values from the Profiles Store
 
 ## Next steps

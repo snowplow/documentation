@@ -28,7 +28,7 @@ flowchart TD
     K -->|No| L[Debug model issues]
     L --> J
     K -->|Yes| M[Update batch source config]
-    M --> N[Materialize tables to Signals]
+    M --> N[Sync tables to Signals]
     N --> O[Attributes are available to use]
 ```
 
@@ -42,7 +42,7 @@ Choose where your new Signals dbt projects will live. Install the CLI tool there
 pip install 'snowplow-signals[batch-engine]'
 ```
 
-This adds the `snowplow-batch-autogen` tool to your environment.
+This adds the `snowplow-batch-engine` tool to your environment.
 
 ### CLI commands
 
@@ -51,7 +51,7 @@ The available options are:
 ```
   init              # Initialize dbt project structure and base configuration
   generate          # Generate dbt project assets
-  materialize       # Registers the attribute table as a data source with Signals
+  sync       # Registers the attribute table as a data source with Signals and publishes the Attribute Group so that syncing can begin
   test_connection   # Test the connection to the authentication and API services
 ```
 
@@ -60,7 +60,7 @@ A `--verbose` flag is available for every command.
 Here's an example of using the CLI:
 
 ```bash
-snowplow-batch-autogen init --verbose
+snowplow-batch-engine init --verbose
 ```
 
 ## Creating and registering tables
@@ -85,8 +85,6 @@ You will need to update the variables for each attribute group individually, by 
 | `snowplow__backfill_limit_days`        | Limit backfill increments for the `filtered_events_table`                                             | `1`            |
 | `snowplow__late_event_lookback_days`   | The number of days to allow for late arriving data to be reprocessed during daily aggregation         | `5`            |
 | `snowplow__min_late_events_to_process` | The threshold number of skipped daily events to process during daily aggregation                      | `1`            |
-| `snowplow__allow_refresh`              | If set to true, the incremental manifest will be dropped when running with a `--full-refresh` flag    | `false`        |
-| `snowplow__dev_target_name`            | The target name of your development environment as defined in your dbt `profiles.yml` file            | `dev`          |
 | `snowplow__atomic_schema`              | Change this if you aren't using `atomic` schema for Snowplow event data                               | `'atomic'`     |
 | `snowplow__database`                   | Change this if you aren't using `target.database` for Snowplow event data                             |                |
 | `snowplow__events_table`               | Change this if you aren't using `events` table for Snowplow event data                                | `"events"`     |

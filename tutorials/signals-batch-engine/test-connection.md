@@ -16,13 +16,13 @@ The connection test checks several important components:
 Test your connection using the following command:
 
 ```bash
-snowplow-batch-autogen test-connection --verbose
+snowplow-batch-engine test-connection --verbose
 ```
 
 If you didn't set up environment variables, you can also provide the credentials as command-line flags:
 
 ```bash
-snowplow-batch-autogen test-connection \
+snowplow-batch-engine test-connection \
   --api-url "YOUR_API_URL" \
   --api-key "YOUR_API_KEY" \
   --api-key-id "YOUR_API_KEY_ID" \

@@ -5,7 +5,7 @@ sidebar_position: 50
 
 You can use existing attributes that are already in your warehouse, or use the Signals batch engine to calculate new attributes in a new table.
 
-To use historical, warehouse attributes in your real-time use cases, you will need to sync the data to the Profiles Store. Signals includes a materialization engine to do this.
+To use historical, warehouse attributes in your real-time use cases, you will need to sync the data to the Profiles Store. Signals includes a sync engine to do this.
 
 :::note Warehouse support
 Only Snowflake is supported currently.
@@ -15,11 +15,11 @@ Only Snowflake is supported currently.
 
 Signals is configured slightly differently depending if you're using existing tables or creating new ones.
 
-| Signals component   | Required for existing attributes | Required for creating new attributes |
-| ------------------- | -------------------------------- | ------------------------------------ |
-| `BatchSource`       | ✅                                | ❌                                    |
-| `BatchView`         | ❌                                | ✅ using `attributes`                 |
-| `ExternalBatchView` | ✅ using `fields`                 | ❌                                    |
+| Signals component             | Required for existing attributes | Required for creating new attributes |
+| ----------------------------- | -------------------------------- | ------------------------------------ |
+| `BatchSource`                 | ✅                                | ❌                                    |
+| `BatchAttributeGroup`         | ❌                                | ✅ using `attributes`                 |
+| `ExternalBatchAttributeGroup` | ✅ using `fields`                 | ❌                                    |
 
 To create new attribute tables, the batch engine will help you set up the required dbt projects and models.
 
@@ -59,23 +59,23 @@ The table below lists all available arguments for a `BatchSource`:
 | `owner`                    | The owner of the source, typically the email of the primary maintainer              | `string`   | ❌         |
 | `tags`                     | String key-value pairs of arbitrary metadata                                        | dictionary | ❌         |
 
-The `timestamp_field` is optional but recommended for incremental or snapshot-based tables. It should show the last modified time of a record. It's used during materialization to identify which rows have changed since the last sync. The materialization engine only sends those with a newer timestamp to the Profiles Store.
+The `timestamp_field` is optional but recommended for incremental or snapshot-based tables. It should show the last modified time of a record. It's used during materialization to identify which rows have changed since the last sync. The sync engine only sends those with a newer timestamp to the Profiles Store.
 
-### Defining a view with fields
+### Defining an attribute group with fields
 
-Pass your source to a new `ExternalBatchView` so that Signals does not materialize the attributes. This will be done later, once Signals has connected to the table.
+Pass your source to a new `ExternalBatchAttributeGroup` so that Signals does not materialize the attributes. This will be done later, once Signals has connected to the table.
 
-For stream or batch attributes that are calculated by Signals, a view contains references to your attribute definitions. In this case, the attributes are already defined elsewhere and pre-calculated in the warehouse. Instead of `attributes`, this view will have `fields`.
+For stream or batch attributes that are calculated by Signals, an attribute group contains references to your attribute definitions. In this case, the attributes are already defined elsewhere and pre-calculated in the warehouse. Instead of `attributes`, this attribute group will have `fields`.
 
 Specify the fields (columns) you want to use from the source table, using `Field`. Here's an example:
 
 ```python
-from snowplow_signals import ExternalBatchView, domain_userid, Field
+from snowplow_signals import ExternalBatchAttributeGroup, domain_userid, Field
 
-view = ExternalBatchView(
+attribute_group = ExternalBatchAttributeGroup(
     name="ecommerce_transaction_interactions_attributes",
     version=1,
-    entity=domain_userid,
+    attribute_key=domain_userid,
     owner="user@company.com",
     batch_source=data_source,
     fields=[
@@ -106,41 +106,41 @@ The table below lists all available arguments for a `Field`:
 
 ### Registering the table with Signals
 
-Apply the view configuration to Signals.
+Apply the attribute group configuration to Signals.
 
 ```python
-sp_signals.apply([view])
+sp_signals.publish([attribute_group])
 ```
 
-Signals will connect to the table, but the attributes will not be materialized into Signals yet because the view has `online=False`.
+Signals will connect to the table, but the attributes will not be materialized into Signals yet because the attribute group has `online=False`.
 
-To send the attributes to the Profiles Store, change the `online` parameter to `True`, and apply the view again.
+To send the attributes to the Profiles Store, change the `online` parameter to `True`, and apply the attribute group again.
 
 ```python
-sp_signals.apply([view])
+sp_signals.publish([attribute_group])
 ```
 
-The sync will begin: the materialization engine will look for new records at a given interval, based on the `timestamp_field` and the last time it ran. The default time interval is 5 minutes.
+The sync will begin: the sync engine will look for new records at a given interval, based on the `timestamp_field` and the last time it ran. The default time interval is 5 minutes.
 
 ## Creating new attribute tables
 
-To create new batch attributes, you'll need to define attributes and views as for stream attributes. However, further steps are necessary to create the required dbt models and tables in your warehouse, and register them with Signals.
+To create new batch attributes, you'll need to define attributes and attribute groups as for stream attributes. However, further steps are necessary to create the required dbt models and tables in your warehouse, and register them with Signals.
 
 The included batch engine CLI tool will help you with this process. Check out the full instructions in [Creating new batch attributes](/docs/signals/configuration/batch-calculations/batch-engine/index.md) or the [batch engine tutorial](/tutorials/signals-batch-engine/start/).
 
-### Defining a view with attributes
+### Defining an attribute group with attributes
 
-The key difference between a standard stream [view](/docs/signals/configuration/attribute-groups/index.md) and one meant for batch processing is the `offline=True` parameter.
+The key difference between a standard stream [attribute_group](/docs/signals/configuration/attribute-groups/index.md) and one meant for batch processing is the `offline=True` parameter.
 
-The entity here is typically the user, which may be the `domain_userid` or other Snowplow identifier fields, such as the logged in `user_id`.
+The attribute key here is typically the user, which may be the `domain_userid` or other Snowplow identifier fields, such as the logged in `user_id`.
 
 ```python
-from snowplow_signals import BatchView, domain_userid
+from snowplow_signals import BatchAttributeGroup, domain_userid
 
-view = BatchView(
+attribute_group = BatchAttributeGroup(
     name="batch_ecommerce_attributes",
     version=1,
-    entity=domain_userid,
+    attribute_key=domain_userid,
     owner="user@company.com"
     attributes=[
         products_added_to_cart_last_7_days,
@@ -153,18 +153,18 @@ view = BatchView(
 
 ### Creating and registering tables
 
-Signals uses dbt to create view-specific attribute tables. The Signals Python SDK includes an optional CLI tool called the batch engine for configuring this.
+Signals uses dbt to create attribute group-specific attribute tables. The Signals Python SDK includes an optional CLI tool called the batch engine for configuring this.
 
 It will help you create the required dbt models and tables in your warehouse, and register them with Signals.
 
 Check out the full instructions in [Creating new batch attributes](/docs/signals/configuration/batch-calculations/batch-engine/index.md).
 
-## Materialization engine
+## Sync engine
 
-The materialization engine is a cron job that sends warehouse attributes to the Profiles Store.
+The sync engine is a cron job that sends warehouse attributes to the Profiles Store.
 
 The engine will be enabled when you either:
-* Apply an `ExternalBatchView` for an existing table
+* Apply an `ExternalBatchAttributeGroup` for an existing table
 * Run the batch engine `materialize` command after creating new attribute tables
 
 Once enabled, syncs begin at a fixed interval. By default, this is every 5 minutes. Only the records that have changed since the last sync are sent to the Profiles Store.

@@ -157,6 +157,7 @@ html[data-theme='dark'] {
   padding: 0 12px !important;
   font-size: .75rem !important;
   line-height: 20px !important;
+  transition: none !important;
 }
 .DocSearch-Search-Icon {  
   height: 16px;
@@ -1009,10 +1010,16 @@ img.full-width {
   font-weight: 600;
   font-size: .875rem;
 }
+
+li.footer__item::first-letter {
+  text-transform: uppercase!important;
+}
 .footer__link-item{
   color: hsl(var(--muted-foreground));
   font-size: .875rem;
+  text-transform: lowercase;
 }
+
 .footer__link-item svg {
   width: 10px;
   height: 10px;

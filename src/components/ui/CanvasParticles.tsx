@@ -27,15 +27,17 @@ export default function CanvasParticles({ isHovered, onClick, containerRef }: Ca
   const [size, setSize] = useState({ width: 0, height: 0 })
   const clickImpulseRef = useRef<number>(0)
   const [particles, setParticles] = useState<Particle[]>([])
+  const [hoverActive, setHoverActive] = useState<boolean>(false)
 
   const primaryColorRef = useRef<string>('')
   const GRAVITY = 0.2
   const FRICTION = 0.97
   const BOUNCE_DAMPING = 0.95
   const MOUSE_FORCE = 18
-  const TRAIL_LENGTH = isHovered ? 6 : 0
-  const TARGET_FPS = 30
+  const TRAIL_LENGTH = hoverActive ? 3 : 0
+  const TARGET_FPS = 20
   const FRAME_INTERVAL_MS = 1000 / TARGET_FPS
+  const FRAME_BUDGET_MS = 4 // hard cap per frame drawing time
 
   // Track container size
   useEffect(() => {
@@ -54,19 +56,19 @@ export default function CanvasParticles({ isHovered, onClick, containerRef }: Ca
   // Init particles when size available
   const initializeParticles = useCallback(() => {
     if (!size.width || !size.height) return [] as Particle[]
-    const count = isHovered ? 10 : 8
+    const count = hoverActive ? 8 : 2
     return Array.from({ length: count }, () => ({
       x: Math.random() * (size.width - 40) + 20,
       y: Math.random() * (size.height - 40) + 20,
       vx: (Math.random() - 0.5) * 1.5,
       vy: (Math.random() - 0.5) * 1.5,
-      radius: Math.random() * 3 + 2.5,
+      radius: Math.random() * 2.5 + 2,
       mass: Math.random() * 2 + 1,
       opacity: 0.2 + Math.random() * 0.35,
       color: primaryColorRef.current || '#6638B8',
       trail: [],
     }))
-  }, [size, isHovered])
+  }, [size, hoverActive])
 
   useEffect(() => {
     setParticles(initializeParticles())
@@ -93,9 +95,19 @@ export default function CanvasParticles({ isHovered, onClick, containerRef }: Ca
       const rect = containerRef.current.getBoundingClientRect()
       mousePosRef.current = { x: e.clientX - rect.left, y: e.clientY - rect.top }
     }
-    if (isHovered) document.addEventListener('mousemove', handleMove)
+    if (hoverActive) document.addEventListener('mousemove', handleMove)
     return () => document.removeEventListener('mousemove', handleMove)
-  }, [isHovered, containerRef])
+  }, [hoverActive, containerRef])
+
+  // Debounce hover start to avoid rapid toggling work
+  useEffect(() => {
+    if (isHovered) {
+      const t = setTimeout(() => setHoverActive(true), 100)
+      return () => clearTimeout(t)
+    } else {
+      setHoverActive(false)
+    }
+  }, [isHovered])
 
   // Clear click pulse
   useEffect(() => {
@@ -108,7 +120,7 @@ export default function CanvasParticles({ isHovered, onClick, containerRef }: Ca
       const next = prev.map(p => {
         let { x, y, vx, vy } = p
 
-        if (isHovered) {
+        if (hoverActive) {
           vy += GRAVITY * dt
           const dx = x - mousePosRef.current.x
           const dy = y - mousePosRef.current.y
@@ -137,7 +149,7 @@ export default function CanvasParticles({ isHovered, onClick, containerRef }: Ca
           clickImpulseRef.current *= 0.9
         }
 
-        if (isHovered && Math.random() < 0.02) {
+        if (hoverActive && Math.random() < 0.02) {
           vx += (Math.random() - 0.5) * 0.25
           vy += (Math.random() - 0.5) * 0.25
         }
@@ -145,7 +157,7 @@ export default function CanvasParticles({ isHovered, onClick, containerRef }: Ca
         vx *= FRICTION
         vy *= FRICTION
 
-        if (isHovered) {
+        if (hoverActive) {
           x += vx * dt * 60
           y += vy * dt * 60
         }
@@ -166,52 +178,69 @@ export default function CanvasParticles({ isHovered, onClick, containerRef }: Ca
       })
       return next
     })
-  }, [isHovered, size.width, size.height, GRAVITY, MOUSE_FORCE, FRICTION, BOUNCE_DAMPING, TRAIL_LENGTH])
+  }, [hoverActive, size.width, size.height, GRAVITY, MOUSE_FORCE, FRICTION, BOUNCE_DAMPING, TRAIL_LENGTH])
 
   // Draw
-  const draw = useCallback(() => {
+  const draw = useCallback((frameStart?: number) => {
     const canvas = canvasRef.current
     if (!canvas) return
     const ctx = canvas.getContext('2d')
     if (!ctx) return
     ctx.clearRect(0, 0, canvas.width, canvas.height)
 
-    for (const p of particles) {
-      if (isHovered && TRAIL_LENGTH > 0) {
+    const start = frameStart ?? performance.now()
+    for (let pi = 0; pi < particles.length; pi++) {
+      const p = particles[pi]
+      if (hoverActive && TRAIL_LENGTH > 0) {
         for (let i = 0; i < p.trail.length; i++) {
+          if (performance.now() - start > FRAME_BUDGET_MS) break
           const t = p.trail[i]
           ctx.beginPath()
           ctx.arc(t.x, t.y, 1, 0, Math.PI * 2)
+          // Precompute alpha per trail step; avoid changing shadow state
+          const alpha = Math.max(0, Math.min(1, t.opacity * (1 - i / (TRAIL_LENGTH || 1))))
           ctx.fillStyle = `${p.color}`
-          ctx.globalAlpha = Math.max(0, Math.min(1, t.opacity * (1 - i / (TRAIL_LENGTH || 1))))
+          ctx.globalAlpha = alpha
           ctx.fill()
-          ctx.globalAlpha = 1
         }
+        ctx.globalAlpha = 1
       }
 
+      if (performance.now() - start > FRAME_BUDGET_MS) break
       ctx.beginPath()
       ctx.arc(p.x, p.y, p.radius, 0, Math.PI * 2)
       ctx.fillStyle = p.color
       ctx.globalAlpha = p.opacity
-      ctx.shadowColor = p.color
-      ctx.shadowBlur = p.radius * 2
+      // Remove expensive shadows
       ctx.fill()
-      ctx.shadowBlur = 0
       ctx.globalAlpha = 1
     }
-  }, [particles, isHovered, TRAIL_LENGTH])
+  }, [particles, hoverActive, TRAIL_LENGTH, FRAME_BUDGET_MS])
 
   // RAF loop (throttled)
   useEffect(() => {
     if (!size.width || !size.height) return
+    const ric: ((cb: (dl: { timeRemaining: () => number }) => void) => number) | null =
+      typeof (window as any).requestIdleCallback === 'function' ? (window as any).requestIdleCallback : null
+
     const run = (ts: number) => {
       if (!lastTimeRef.current) lastTimeRef.current = ts
       const elapsed = ts - lastTimeRef.current
       if (elapsed >= FRAME_INTERVAL_MS) {
-        const dt = Math.min(elapsed / 1000, 0.05)
-        lastTimeRef.current = ts
-        step(dt)
-        draw()
+        const doWork = () => {
+          const start = performance.now()
+          const dt = Math.min(elapsed / 1000, 0.05)
+          lastTimeRef.current = ts
+          step(dt)
+          draw(start)
+        }
+        if (ric) {
+          ric((deadline: { timeRemaining: () => number }) => {
+            if (deadline.timeRemaining() > FRAME_BUDGET_MS) doWork()
+          })
+        } else {
+          doWork()
+        }
       }
       animationRef.current = requestAnimationFrame(run)
     }
@@ -220,7 +249,7 @@ export default function CanvasParticles({ isHovered, onClick, containerRef }: Ca
       if (animationRef.current !== null) cancelAnimationFrame(animationRef.current)
       animationRef.current = null
     }
-  }, [size.width, size.height, FRAME_INTERVAL_MS, step, draw])
+  }, [size.width, size.height, FRAME_INTERVAL_MS, FRAME_BUDGET_MS, step, draw])
 
   // Sync canvas size to layout size and device pixel ratio
   useEffect(() => {

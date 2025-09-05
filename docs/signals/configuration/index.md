@@ -62,13 +62,15 @@ sp_signals = Signals(
 
 The created `Signals` object has the following methods:
 
-| Method                   | Description                                                         |
-| ------------------------ | ------------------------------------------------------------------- |
-| `apply`                  | Registers the provided objects with Signals                         |
-| `test`                   | Tests a view against the atomic events table                        |
-| `get_view`               | Retrieves a view from the Profiles Store                            |
-| `get_service_attributes` | Retrieves attributes for a service from the Profiles Store |
-| `get_view_attributes`    | Retrieves attributes for a view from the Profiles Store    |
+| Method                   | Description                                                                |
+| ------------------------ | -------------------------------------------------------------------------- |
+| `apply`                  | Registers the provided objects with Signals                                |
+| `test`                   | Tests a view against the atomic events table                               |
+| `get_view`               | Retrieves a view from the Profiles Store                                   |
+| `get_service_attributes` | Retrieves attributes for a service from the Profiles Store                 |
+| `get_view_attributes`    | Retrieves attributes for a view from the Profiles Store                    |
+| `push_intervention`      | Push an intervention to subscribers for a set of attribute keys            |
+| `pull_interventions`     | Open a streaming subscription of interventions for a set of attribute keys |
 
 Read more about retrieving calculated attributes in [Retrieving values](/docs/signals/retrieval/index.md)
 

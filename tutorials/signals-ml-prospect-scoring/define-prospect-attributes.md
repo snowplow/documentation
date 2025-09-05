@@ -348,7 +348,7 @@ sp_signals = Signals(
     org_id=ENV_SP_ORG_ID
 )
 
-applied = sp_signals.apply([user_attribute_group, prospect_scoring_tutorial_service])
+applied = sp_signals.publish([user_attribute_group, prospect_scoring_tutorial_service])
 
 # This should print "2 objects applied"
 print(f"{len(applied)} objects applied")

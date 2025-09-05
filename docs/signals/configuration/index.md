@@ -64,7 +64,7 @@ The created `Signals` object has the following methods:
 
 | Method                   | Description                                                                |
 | ------------------------ | -------------------------------------------------------------------------- |
-| `apply`                  | Registers the provided objects with Signals                                |
+| `publish`                | Registers the provided objects with Signals                                |
 | `test`                   | Tests a view against the atomic events table                               |
 | `get_attribute_group`    | Retrieves an attribute group from the Profiles Store                       |
 | `get_service_attributes` | Retrieves attributes for a service from the Profiles Store                 |

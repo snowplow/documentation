@@ -7,7 +7,7 @@ To calculate attributes in near real time, apply a `StreamAttributeGroup` [attri
 
 If you've defined a service, you'll also need to apply that configuration to Signals.
 
-Apply the configurations using the `apply` method:
+Deploy the configurations using the `publish` method:
 
 ```python
 from snowplow_signals import Signals
@@ -19,13 +19,13 @@ sp_signals = Signals(
     )
 
 # Apply attribute groups
-sp_signals.apply([
+sp_signals.publish([
         my_attribute_group,
         my_other_attribute_group
     ])
 
 # Apply services
-sp_signals.apply([
+sp_signals.publish([
         my_service,
         my_other_service
     ])

@@ -109,7 +109,7 @@ The table below lists all available arguments for a `Field`:
 Apply the attribute group configuration to Signals.
 
 ```python
-sp_signals.apply([attribute_group])
+sp_signals.publish([attribute_group])
 ```
 
 Signals will connect to the table, but the attributes will not be materialized into Signals yet because the attribute group has `online=False`.
@@ -117,7 +117,7 @@ Signals will connect to the table, but the attributes will not be materialized i
 To send the attributes to the Profiles Store, change the `online` parameter to `True`, and apply the attribute group again.
 
 ```python
-sp_signals.apply([attribute_group])
+sp_signals.publish([attribute_group])
 ```
 
 The sync will begin: the sync engine will look for new records at a given interval, based on the `timestamp_field` and the last time it ran. The default time interval is 5 minutes.

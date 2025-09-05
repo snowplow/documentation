@@ -3,10 +3,10 @@ position: 5
 title: Deploy configuration
 ---
 
-Once you're satisfied with the definitions, deploy them to the Signals API using the `apply` method:
+Once you're satisfied with the definitions, deploy them to the Signals API using the `publish` method:
 
 ```python
-sp_signals.apply(
+sp_signals.publish(
     [my_attribute_group, my_service]
 )
 ```

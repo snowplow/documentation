@@ -99,9 +99,10 @@ module.exports = {
         },
       },
       navbar: {
+        hideOnScroll: false,
         logo: {
-          alt: 'Snowplow Logo',
-          src: 'img/snowplow-logo.svg',
+            alt: 'Snowplow Logo',
+            src: 'img/snowplow-logo.svg',
         },
         items: [
           {
@@ -113,46 +114,97 @@ module.exports = {
             position: 'left',
             className: 'mobile-only',
           },
+
+          // {
+          //   href: 'https://support.snowplow.io/',
+          //   label: 'Contact Support',
+          //   position: 'right',
+          // },
+          // {
+           //  href: 'https://community.snowplow.io/',
+          //   label: 'Community',
+          //   position: 'right',
+          // },
+
+          // {
+          // href: 'https://github.com/snowplow/',
+          // label: 'GitHub',
+          // position: 'right',
+          // },
+          // {
+          //   to: 'https://snowplow.io/get-started/book-a-demo-of-snowplow-bdp/',
+          //   label: 'Book a demo',
+          //   className: 'snowplow-button',
+          //   position: 'right',
+          // },
           {
-            href: 'https://support.snowplow.io/',
-            label: 'Contact Support',
-            position: 'right',
-          },
-          {
-            href: 'https://community.snowplow.io/',
-            label: 'Community',
-            position: 'right',
-          },
-          {
-            href: 'https://github.com/snowplow/',
-            label: 'GitHub',
-            position: 'right',
-          },
-          {
-            to: 'https://snowplow.io/get-started/book-a-demo-of-snowplow-bdp/',
-            label: 'Book a demo',
-            className: 'snowplow-button',
-            position: 'right',
-          },
-          {
-            type: 'custom-docsTrackerNavbarButton',
-            position: 'right',
+             type: 'custom-docsTrackerNavbarButton',
+             position: 'left',
           },
         ],
       },
       footer: {
-        style: 'dark',
+        style: 'light',
+        logo: {
+          alt: 'Snowplow',
+          src: '/img/Snowplow_icoOnly.svg',
+          width: 32,
+          height: 28.5,
+        },
         links: [
           {
-            label: 'Change cookie preferences',
-            href: '/cookie-preferences',
+            title: 'Resources',
+            items: [
+              {
+                href: 'https://github.com/snowplow/',
+                label: 'Github',
+              },
+              {
+                href: 'https://snowplow.io/',
+                label: 'Snowplow.io',
+              },
+              {
+                href: '/docs/glossary/',
+                label: 'Glossary',
+              },
+         
+            ],
           },
           {
-            label: 'Terms and conditions',
-            href: '/terms-and-conditions',
+            title: 'Community',
+            items: [
+              {
+                href: 'https://community.snowplow.io/',
+                label: 'Snowplow Community',
+                className: 'capitalize text-sm text-muted-foreground',
+              },
+              {
+                href: 'https://support.snowplow.io/',
+                label: 'Support',
+              },
+            ],
+          },
+          {
+            title: 'Legal',
+            items: [
+              {
+                label: 'Cookie preferences',
+                href: '/cookie-preferences',
+              },
+              {
+                label: 'Terms and Conditions',
+                href: '/terms-and-conditions',
+              },
+              {
+                label: 'Licensing Overview',
+                href: '/docs/resources/copyright-license',
+              },
+             
+            ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Snowplow Analytics Ltd. Built with Docusaurus.`,
+
+        copyright: `Copyright © ${new Date().getFullYear()} Snowplow Analytics Ltd.`,
       },
       prism: {
         theme: require('prism-react-renderer').themes.shadesOfPurple,

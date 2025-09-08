@@ -41,11 +41,7 @@ curl \
   https://console.snowplowanalytics.com/api/msc/v1/organizations/<ORGANIZATION_ID>/credentials/v3/token
 ```
 
-You can find your organization's ID in the BDP Console URL:
-
-![This image has an empty alt attribute; its file name is orgID.png](images/orgID.png)
-
-The organization ID is the UUID in the first URL segment after the host
+You can find your Organization ID [on the _Manage organization_ page](https://console.snowplowanalytics.com/settings) in Console.
 
 The curl command above will return a JWT as follows:
 
@@ -80,11 +76,7 @@ curl \
   https://console.snowplowanalytics.com/api/msc/v1/organizations/<ORGANIZATION_ID>/credentials/v2/token
 ```
 
-You can find your organization's ID within the BDP Console URL:
-
-![This image has an empty alt attribute; its file name is orgID.png](images/orgID.png)
-
-The organization ID is the UUID in the first URL segment after the host.
+You can find your Organization ID [on the _Manage organization_ page](https://console.snowplowanalytics.com/settings) in Console.
 
 The curl command above will return a JWT as follows:
 

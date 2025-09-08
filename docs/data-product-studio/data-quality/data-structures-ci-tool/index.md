@@ -16,9 +16,7 @@ This is available as a [Github Action](#setting-up-as-a-github-action) and as a 
 
 In order to be able to perform tasks with the tool, you will need to supply both your Organization ID and an API key.
 
-The Organization ID is a UUID that can be retrieved from the URL immediately following the .com when visiting console
-
-![](images/orgID.png)
+You can find your Organization ID [on the _Manage organization_ page](https://console.snowplowanalytics.com/settings) in Console.
 
 An API Key can be created [here](https://console.snowplowanalytics.com/credentials).
 

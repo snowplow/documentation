@@ -10,9 +10,9 @@ Enrich is released under the [Snowplow Limited Use License](https://docs.snowplo
 
 To accept the terms of license and run Enrich, set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable. Alternatively, you can configure the `license.accept` option, like this:
 
-```hcl
-license {
-  accept = true
+```json
+"license": {
+  "accept": true
 }
 ```
 
@@ -20,171 +20,107 @@ license {
 
 | parameter | description |
 |-|-|
-| `concurrency.enrich` | Optional. Default: `256`. Number of events that can get enriched at the same time within a chunk (events are processed by chunks in the app). |
-| `concurrency.sink` | Optional. Default for `enrich-pubsub`: `3`. Default for `enrich-kinesis`: `1`. Number of chunks that can get sunk at the same time. *WARNING* for `enrich-kinesis`: if greater than `1`, records can get checkpointed before they are sunk. |
+| `cpuParallelismFraction` (since *6.0.0*) | Optional. Default: `1`. Controls how the app splits the workload into concurrent batches which can be run in parallel. E.g. If there are 4 available processors, and cpuParallelismFactor = 0.75, then we process 3 batches concurrently. Adjusting this value can cause the app to use more or less of the available CPU. |
+| `sinkParallelismFraction` (since *6.0.0*) | Optional. Default: `2`. Controls number of sink job that can be run in parallel. E.g. If there are 4 available processors, and sinkParallelismFraction = 2, then we run 8 sink job concurrently. Adjusting this value can cause the app to use more or less of the available CPU. |
 | `assetsUpdatePeriod` | Optional. E.g. `7 days`. Period after which enrich assets (e.g. the maxmind database for the IpLookups enrichment) should be checked for udpates. Assets will never be updated if this key is missing. |
 | `monitoring.sentry.dsn` | Optional. E.g. `http://sentry.acme.com`. To track uncaught runtime exceptions in Sentry. |
+| `monitoring.sentry.tags.*` | Optional. A map of key/value strings which are passed as tags when reporting exceptions to Sentry. |
 | `monitoring.metrics.statsd.hostname` | Optional. E.g. `localhost`. Hostname of the StatsD server to send enrichment metrics (latency and event counts) to. |
 | `monitoring.metrics.statsd.port` | Optional. E.g. `8125`. Port of the StatsD server. |
 | `monitoring.metrics.statsd.period` | Optional. E.g. `10 seconds`. How frequently to send metrics to StatsD server. |
 | `monitoring.metrics.statsd.tags` | Optional. E.g. `{ "env": "prod" }`. Key-value pairs attached to each metric sent to StatsD to provide contextual information. |
 | `monitoring.metrics.statsd.prefix` | Optional. Default: `snowplow.enrich`. Pefix of StatsD metric names. |
-| `monitoring.metrics.stdout.period` | Optional. E.g. `10 seconds`. If set, metrics will be printed in the logs with this frequency. |
-| `monitoring.metrics.stdout.prefix` | Optional. Default: `snowplow.enrich`. Prefix for the metrics appearing in the logs. |
+| `monitoring.healthProbe.port` (since *6.0.0*) | Optional. Default: `8000`. Open a HTTP server that returns OK only if the app is healthy. |
+| `monitoring.healthProbe.unhealthyLatency` (since *6.0.0*) | Optional. Default: `2 minutes`. Health probe becomes unhealthy if any received event is still not fully processed before this cutoff time. |
 | `telemetry.disable` | Optional. Set to `true` to disable [telemetry](/docs/get-started/snowplow-community-edition/telemetry/index.md). |
 | `telemetry.userProvidedId` | Optional. See [here](/docs/get-started/snowplow-community-edition/telemetry/index.md#how-can-i-help) for more information. |
-| `featureFlags.acceptInvalid` | Optional. Default: `false`. Enrich *3.0.0* introduces the validation of the enriched events against atomic schema before emitting. If set to `false`, a failed event will be emitted instead of the enriched event if validation fails. If set to `true`, invalid enriched events will be emitted, as before. |
+| `validation.acceptInvalid` (since *6.0.0*) | Optional. Default: `false`. Enrich *3.0.0* introduces the validation of the enriched events against atomic schema before emitting. If set to `false`, a failed event will be emitted instead of the enriched event if validation fails. If set to `true`, invalid enriched events will be emitted, as before. |
 | `validation.atomicFieldsLimits` (since *4.0.0*) | Optional. For the defaults, see [here](https://github.com/snowplow/enrich/blob/master/modules/common/src/main/resources/reference.conf). Configuration for custom maximum atomic fields (strings) length. It's a map-like structure with keys being atomic field names and values being their max allowed length. |
-
-Instead of a message queue, it's also possible to read collector payloads from files on disk. This can be used for instance for testing purposes. In this case the configuration needs to be as below.
-
-| parameter | description |
-|-|-|
-| `input.type`| Required. Must be `FileSystem`. |
-| `input.dir`| Required. E.g. `/input/collectorPayloads/`. Directory containing collector payloads encoded with Thrift. |
-
-Likewise, it's possible to write enriched events, pii events and failed events to files instead of PubSub or Kinesis.
-
-To write enriched events to files:
-
-| parameter | description |
-|------------------------|------------------------------------------------------------------------------------|
-| `output.good.type` | Required. Must be `FileSystem`. |
-| `output.good.file` | Required. E.g. `/output/enriched`. File where enriched events will be written. |
-| `output.good.maxBytes` | Optional. E.g. `1048576`. Maximum size of a file in bytes. Triggers file rotation. |
-
-To write failed events to files:
-
-| parameter | description |
-|-|-|
-| `output.bad.type` | Required. Must be `FileSystem`. |
-| `output.bad.file` | Required. E.g. `/output/bad`. File where failed events will be written. |
-| `output.bad.maxBytes` | Optional. E.g. `1048576`. Maximum size of a file in bytes. Triggers file rotation. |
-
-To write pii events to files:
-
-| parameter | description |
-|-|-|
-| `output.pii.type` | Required. Must be `FileSystem`. |
-| `output.pii.file` | Required. E.g. `/output/pii`. File where pii events will be written. |
-| `output.pii.maxBytes` | Optional. E.g. `1048576`. Maximum size of a file in bytes. Triggers file rotation. |
+| `validation.maxJsonDepth` (since *6.0.0*) | Optional. Default: `40`. Maximum allowed depth for the JSON entities in the events. Event will be sent to bad row stream if it contains JSON entity with a depth that exceeds this value. |
+| `validation.exitOnJsCompileError` (since *6.0.0*) | Optional. Default: `true`. If it is set to true, Enrich will exit with error if JS enrichment script is invalid. If it is set to false, Enrich will continue to run if JS enrichment script is invalid but every event will end up as bad row. |
+| `decompression.maxBytesInBatch` (since *6.1.0*) | Optional. Default: `10000000` (10MB). Although a compressed message from the Collector is limited to 1MB, it could become several times bigger after decompression. To avoid loading an enormous amount of data into memory, Enrich will decompress the message in portions (batches). This parameter specifies the maximum size of such a batch. As soon as the decompressed batch reaches `maxBytesInBatch`, it is a emitted for further processing, and a new batch is started. |
+| `decompression.maxBytesSinglePayload` (since *6.1.0*) | Optional. Default: `10000000` (10 MB). Each compressed Collector message contains a number of payloads, which contain one or more events. While the Collector already enforces some payload size limits, this setting exists as a safety check to prevent Enrich from loading large amounts of data into memory. Specifically, if an individual payload exceeds `maxBytesSinglePayload`, it will result in a [size violation](docs/api-reference/failed-events/index.md#size-violation). |
 
 ## enrich-pubsub
 
-A minimal configuration file can be found on the [Github repo](https://github.com/snowplow/enrich/blob/master/config/config.pubsub.minimal.hocon), as well as a [comprehensive one](https://github.com/snowplow/enrich/blob/master/config/config.pubsub.extended.hocon).
+A minimal configuration file can be found on the [Github repo](https://github.com/snowplow/enrich/blob/master/config/config.pubsub.minimal.hocon), as well as a [comprehensive one](https://github.com/snowplow/enrich/blob/master/config/config.pubsub.reference.hocon).
 
 | parameter | description |
 |-|-|
 | `input.subscription` | Required. E.g. `projects/example-project/subscriptions/collectorPayloads`. PubSub subscription identifier for the collector payloads. |
-| `input.parallelPullCount` | Optional. Default: `1`. Number of threads used internally by permutive library to handle incoming messages. These threads do very little "work" apart from writing the message to a concurrent queue. |
-| `input.maxQueueSize` | Optional. Default: `3000`. Configures the "max outstanding element count" of PubSub. This is the principal way we control concurrency in the app; it puts an upper bound on the number of events in memory at once. An event counts towards this limit starting from when it received by the permutive library, until we ack it (after publishing to output). The value must be large enough that it does not cause the sink to block whilst it is waiting for a batch to be completed. The first of `maxQueueSize` and `maxRequestBytes` being reached will pause the consumption. |
-| `input.maxRequestBytes` | Optional. Default: `50000000` (50MB). Configures the "maximum outstanding request bytes" of PubSub subscriber. It puts an upper bound on the events' bytes that can be hold in memory at once before getting acked. The value must be large enough to not cause the sink to block whilst it is waiting for a batch to be completed. The first of `maxQueueSize` and `maxRequestBytes` being reached will pause the consumption. |
-| `input.maxAckExtensionPeriod` | Optional. Default: `1 hour`. Maximum period a message ack deadline can be extended. A zero duration disables auto deadline extension. |
+| `input.parallelPullFactor` | Optional. Default: `0.5`. Controls how many threads are used internally by the pubsub client library for fetching events. The number of threads is equal to this factor multiplied by the number of availble cpu cores. |
+| `input.durationPerAckExtension` | Optional. Default: `60 seconds`. Pubsub ack deadlines are extended for this duration when needed. |
+| `input.minRemainingAckDeadline` | Optional. Default: `0.1`. Controls when ack deadlines are re-extended, for a message that is close to exceeding its ack deadline. For example, if `durationPerAckExtension` is `60 seconds` and `minRemainingAckDeadline` is `0.1` then the Source will wait until there is `6 seconds` left of the remining deadline, before re-extending the message deadline. |
+| `input.maxMessagesPerPull` | Optional. Default: `1000`. How many pubsub messages to pull from the server in a single request. |
+| `input.debounceRequests` | Optional. Default: `100 millis`. Adds an artifical delay between consecutive requests to pubsub for more messages. Under some circumstances, this was found to slightly alleviate a problem in which pubsub might re-deliver the same messages multiple times. |
 | `output.good.topic` | Required. E.g. `projects/example-project/topics/enriched`. Name of the PubSub topic that will receive the enriched events. |
 | `output.good.attributes` | Optional. Enriched event fields to add as PubSub message attributes. For example, if this is `[ "app_id" ]` then the enriched event's `app_id` field will be an attribute of the PubSub message, as well as being a field within the enriched event. |
-| `output.good.delayThreshold` | Optional. Default: `200 milliseconds`. Delay threshold to use for batching. After this amount of time has elapsed, before `maxBatchSize` and `maxBatchBytes` have been reached, messages from the buffer will be sent. |
-| `output.good.maxBatchSize` | Optional. Default: `1000` (PubSub maximum). Maximum number of messages sent within a batch. When the buffer reaches this number of messages they are sent. |
-| `output.good.maxBatchBytes` | Optional. Default: `8000000` (PubSub maximum is 10MB). Maximum number of bytes sent within a batch. When the buffer reaches this size messages are sent. |
-| `output.incomplete.topic` | Required. E.g. `projects/example-project/topics/incomplete`. Name of the PubSub topic that will receive the failed events (same format as the enriched events). |
-| `output.incomplete.delayThreshold` | Same as `output.good.delayThreshold` for failed events. |
-| `output.incomplete.maxBatchSize` | Same as `output.good.maxBatchSize` for failed events. |
-| `output.incomplete.maxBatchBytes` | Same as `output.good.maxBatchBytes` for failed events. |
+| `output.good.batchSize` | Optional. Default: `100`. Enriched events are sent to pubsub in batches not exceeding this size. |
+| `output.good.requestByteThreshold` | Optional. Default: `1000000`. Enriched events are sent to pubsub in batches not exceeding this size number of bytes. |
+| `output.failed.topic` | Required. E.g. `projects/example-project/topics/failed`. Name of the PubSub topic that will receive the failed events (same format as the enriched events). |
+| `output.failed.batchSize` | Same as `output.good.batchSize` for failed events. |
+| `output.failed.requestByteThreshold` | Same as `output.good.requestByteThreshold` for failed events. |
 | `output.bad.topic` | Required. E.g. `projects/example-project/topics/bad`. Name of the PubSub topic that will receive the failed events in the "bad row" format (JSON). |
-| `output.bad.delayThreshold` | Same as `output.good.delayThreshold` for failed events in the "bad row" format (JSON). |
-| `output.bad.maxBatchSize` | Same as `output.good.maxBatchSize` for failed events in the "bad row" format (JSON). |
-| `output.bad.maxBatchBytes` | Same as `output.good.maxBatchBytes` for failed events in the "bad row" format (JSON). |
-| `output.pii.topic` | Optional. Example: `projects/test-project/topics/pii`. Should be used in conjunction with the PII pseudonymization enrichment. When configured, enables an extra output topic for writing a `pii_transformation` event. |
-| `output.pii.attributes` | Same as `output.good.attributes` for pii events. |
-| `output.pii.delayThreshold` | Same as `output.good.delayThreshold` for pii events. |
-| `output.pii.maxBatchSize` | Same as `output.good.maxBatchSize` for pii events. |
-| `output.pii.maxBatchBytes` | Same as `output.good.maxBatchBytes` for pii events. |
+| `output.bad.batchSize` | Same as `output.good.batchSize` for failed events in the "bad row" format (JSON). |
+| `output.bad.requestByteThreshold` | Same as `output.good.requestByteThreshold` for failed events in the "bad row" format (JSON). |
 
 ## enrich-kinesis
 
-A minimal configuration file can be found on the [Github repo](https://github.com/snowplow/enrich/blob/master/config/config.kinesis.minimal.hocon), as well as a [comprehensive one](https://github.com/snowplow/enrich/blob/master/config/config.kinesis.extended.hocon).
+A minimal configuration file can be found on the [Github repo](https://github.com/snowplow/enrich/blob/master/config/config.kinesis.minimal.hocon), as well as a [comprehensive one](https://github.com/snowplow/enrich/blob/master/config/config.kinesis.reference.hocon).
 
 | parameter | description |
 |-|-|
 | `input.appName` | Optional. Default: `snowplow-enrich-kinesis`. Name of the application which the KCL daemon should assume. A DynamoDB table with this name will be created. |
 | `input.streamName` | Required. E.g. `raw`. Name of the Kinesis stream with the collector payloads to read from. |
-| `input.region` | Optional. E.g. `eu-central-1`. Region where the Kinesis stream is located. This field is optional if it can be resolved with AWS region provider chain. It checks places like env variables, system properties, AWS profile file. |
 | `input.initialPosition.type` | Optional. Default: `TRIM_HORIZON`. Set the initial position to consume the Kinesis stream. Possible values: `LATEST` (most recent data), `TRIM_HORIZON` (oldest available data), `AT_TIMESTAMP` (start from the record at or after the specified timestamp). |
 | `input.initialPosition.timestamp` | Required for `AT_TIMESTAMP`. E.g. `2020-07-17T10:00:00Z`. |
 | `input.retrievalMode.type` | Optional. Default: `Polling`. Set the mode for retrieving records. Possible values: `Polling` or `FanOut`. |
-| `input.retrievalMode.maxRecords` | Required for `Polling`. Default: `10000`. Maximum size of a batch returned by a call to `getRecords`. Records are checkpointed after a batch has been fully processed, thus the smaller `maxRecords`, the more often records can be checkpointed into DynamoDb, but possibly reducing the throughput. |
-| `input.bufferSize` | Optional. Default: `3`. Size of the internal buffer used when reading messages from Kinesis, each buffer holding up to `maxRecords` from above. |
-| `input.customEndpoint` | Optional. E.g. `http://localhost:4566`. Endpoint url configuration to override aws kinesis endpoints. Can be used to specify local endpoint when using localstack. |
-| `input.dynamodbCustomEndpoint` | Optional. E.g. `http://localhost:4566`. Endpoint url configuration to override aws dyanomdb endpoint for Kinesis checkpoints lease table. Can be used to specify local endpoint when using localstack. |
-| `input.cloudwatchCustomEndpoint` | Optional. E.g. `http://localhost:4566`. Endpoint url configuration to override aws cloudwatch endpoint for metrics. Can be used to specify local endpoint when using localstack. |
+| `input.retrievalMode.maxRecords` | Required for `Polling`. Default: `1000`. Maximum size of a batch returned by a call to `getRecords`. Records are checkpointed after a batch has been fully processed, thus the smaller `maxRecords`, the more often records can be checkpointed into DynamoDb, but possibly reducing the throughput. |
+| `input.workerIdentifier` (since *6.0.0*) | Required. Name of this KCL worker used in the DynamoDB lease table. |
+| `input.leaseDuration` (since *6.0.0*) | Optional. Default: `10 seconds`. Duration of shard leases. KCL workers must periodically refresh leases in the DynamoDB table before this duration expires. |
+| `input.maxLeasesToStealAtOneTimeFactor` (since *6.0.0*) | Optional. Default: `2.0`. Controls how to pick the max number of leases to steal at one time. E.g. If there are 4 available processors, and maxLeasesToStealAtOneTimeFactor = 2.0, then allow the KCL to steal up to 8 leases. Allows bigger instances to more quickly acquire the shard-leases they need to combat latency. |
+| `input.checkpointThrottledBackoffPolicy.minBackoff` (since *6.0.0*) | Optional. Default: `100 millis`. Minimum backoff before retrying when DynamoDB provisioned throughput exceeded. |
+| `input.checkpointThrottledBackoffPolicy.maxBackoff` (since *6.0.0*) | Optional. Default: `1 second`.  Maximum backoff before retrying when DynamoDB provisioned throughput limit exceeded. |
+| `input.debounceCheckpoints` (since *6.0.0*) | Optional. Default: `10 seconds`.  How frequently to checkpoint our progress to the DynamoDB table. By increasing this value, we can decrease the write-throughput requirements of the DynamoDB table. |
 | `output.good.streamName` | Required. E.g. `enriched`. Name of the Kinesis stream to write to the enriched events. |
-| `output.good.region` | Same as input.region for enriched events stream. |
 | `output.good.partitionKey` | Optional. How the output stream will be partitioned in Kinesis. Events with the same partition key value will go to the same shard. Possible values: `event_id`, `event_fingerprint`, `domain_userid`, `network_userid`, `user_ipaddress`, `domain_sessionid`, `user_fingerprint`. If not specified, the partition key will be a random UUID. |
-| `output.good.backoffPolicy.minBackoff` | Optional. Default: `100 milliseconds`. Minimum backoff before retrying when writing fails with internal errors. |
-| `output.good.backoffPolicy.maxBackoff` | Optional. Default: `10 seconds`. Maximum backoff before retrying when writing fails with internal errors. |
-| `output.good.backoffPolicy.maxRetries` | Optional. Default: `10`. Maximum number of retries for internal errors. |
-| `output.good.throttledBackoffPolicy.minBackoff` (since *3.4.1*) | Optional. Default: `100 milliseconds`. Minimum backoff before retrying when writing fails in case of throughput exceeded. |
-| `output.good.throttledBackoffPolicy.maxBackoff` (since *3.4.1*) | Optional. Default: `1 second`. Maximum backoff before retrying when writing fails in case of throughput exceeded. Writing is retried forever. |
-| `output.good.recordLimit` | Optional. Default: `500` (maximum allowed). Limits the number of events in a single PutRecords request. Several requests are made in parallel. |
-| `output.good.customEndpoint` | Optional. E.g. `http://localhost:4566`. To use a custom Kinesis endpoint. |
-| `output.incomplete.streamName` | Required. E.g. `incomplete`. Name of the Kinesis stream that will receive the failed events (same format as the enriched events). |
-| `output.incomplete.region` | Same as `output.good.region` for failed events. |
-| `output.incomplete.backoffPolicy.minBackoff` | Same as `output.good.backoffPolicy.minBackoff` for failed events. |
-| `output.incomplete.backoffPolicy.maxBackoff` | Same as `output.good.backoffPolicy.maxBackoff` for failed events. |
-| `output.incomplete.backoffPolicy.maxRetries` | Same as `output.good.backoffPolicy.maxRetries` for failed events. |
-| `output.incomplete.throttledBackoffPolicy.minBackoff` (since *3.4.1*) | Same as `output.good.throttledBackoffPolicy.minBackoff` for failed events. |
-| `output.incomplete.throttledBackoffPolicy.maxBackoff` (since *3.4.1*) | Same as `output.good.throttledBackoffPolicy.maxBackoff` for failed events. |
-| `output.incomplete.recordLimit` | Same as `output.good.recordLimit` for failed events. |
-| `output.incomplete.customEndpoint` | Same as `output.good.customEndpoint` for failed events. |
+| `output.good.throttledBackoffPolicy.minBackoff` (since *6.0.0*) | Optional. Default: `100 milliseconds`. Minimum backoff before retrying when writing fails with exceeded kinesis write throughput. |
+| `output.good.throttledBackoffPolicy.maxBackoff` (since *6.0.0*) | Optional. Default: `1 second`. Maximum backoff before retrying when writing fails with exceeded kinesis write throughput. |
+| `output.good.recordLimit` | Optional. Default: `500`. Maximum allowed to records we are allowed to send to Kinesis in 1 PutRecords request. |
+| `output.good.byteLimit` | Optional. Default: `5242880`. Maximum allowed to bytes we are allowed to send to Kinesis in 1 PutRecords request. |
+| `output.failed.streamName` | Required. E.g. `failed`. Name of the Kinesis stream that will receive the failed events (same format as the enriched events). |
+| `output.failed.throttledBackoffPolicy.minBackoff` (since *6.0.0*) | Same as `output.good.throttledBackoffPolicy.minBackoff` for failed events. |
+| `output.failed.throttledBackoffPolicy.maxBackoff` (since *6.0.0*) | Same as `output.good.throttledBackoffPolicy.maxBackoff` for failed events. |
+| `output.failed.recordLimit` | Same as `output.good.recordLimit` for failed events. |
+| `output.failed.byteLimit` | Same as `output.good.byteLimit` for failed events. |
 | `output.bad.streamName` | Required. E.g. `bad`. Name of the Kinesis stream that will receive the failed events in the "bad row" format (JSON). |
-| `output.bad.region` | Same as `output.good.region` for failed events in the "bad row" format (JSON). |
-| `output.bad.backoffPolicy.minBackoff` | Same as `output.good.backoffPolicy.minBackoff` for failed events in the "bad row" format (JSON). |
-| `output.bad.backoffPolicy.maxBackoff` | Same as `output.good.backoffPolicy.maxBackoff` for failed events in the "bad row" format (JSON). |
-| `output.bad.backoffPolicy.maxRetries` | Same as `output.good.backoffPolicy.maxRetries` for failed events in the "bad row" format (JSON). |
-| `output.bad.throttledBackoffPolicy.minBackoff` (since *3.4.1*) | Same as `output.good.throttledBackoffPolicy.minBackoff` for failed events in the "bad row" format (JSON). |
-| `output.bad.throttledBackoffPolicy.maxBackoff` (since *3.4.1*) | Same as `output.good.throttledBackoffPolicy.maxBackoff` for failed events in the "bad row" format (JSON). |
+| `output.bad.throttledBackoffPolicy.minBackoff` (since *6.0.0*) | Same as `output.good.throttledBackoffPolicy.minBackoff` for failed events in the "bad row" format (JSON). |
+| `output.bad.throttledBackoffPolicy.maxBackoff` (since *6.0.0*) | Same as `output.good.throttledBackoffPolicy.maxBackoff` for failed events in the "bad row" format (JSON). |
 | `output.bad.recordLimit` | Same as `output.good.recordLimit` for failed events in the "bad row" format (JSON). |
-| `output.bad.customEndpoint` | Same as `output.good.customEndpoint` for failed events in the "bad row" format (JSON). |
-| `output.pii.streamName` | Optional. E.g. `pii`. Should be used in conjunction with the PII pseudonymization enrichment. When configured, enables an extra output stream for writing a `pii_transformation` event. |
-| `output.pii.region` | Same as `output.good.region` for pii events. |
-| `output.pii.partitionKey` | Same as `output.good.partitionKey` for pii events. |
-| `output.pii.backoffPolicy.minBackoff` | Same as `output.good.backoffPolicy.minBackoff` for pii events. |
-| `output.pii.backoffPolicy.maxBackoff` | Same as `output.good.backoffPolicy.maxBackoff` for pii events. |
-| `output.pii.backoffPolicy.maxRetries` | Same as `output.good.backoffPolicy.maxRetries` for pii events. |
-| `output.pii.throttledBackoffPolicy.minBackoff` (since *3.4.1*) | Same as `output.good.throttledBackoffPolicy.minBackoff` for pii events. |
-| `output.pii.throttledBackoffPolicy.maxBackoff` (since *3.4.1*) | Same as `output.good.throttledBackoffPolicy.maxBackoff` for pii events. |
-| `output.pii.recordLimit` | Same as `output.good.recordLimit` for pii events. |
-| `output.pii.customEndpoint` | Same as `output.good.customEndpoint` for pii events. |
+| `output.bad.byteLimit` | Same as `output.good.byteLimit` for failed events in the "bad row" format (JSON). |
 
 ## enrich-kafka
 
-A minimal configuration file can be found on the [Github repo](https://github.com/snowplow/enrich/blob/master/config/config.kafka.minimal.hocon), as well as a [comprehensive one](https://github.com/snowplow/enrich/blob/master/config/config.kafka.extended.hocon).
+A minimal configuration file can be found on the [Github repo](https://github.com/snowplow/enrich/blob/master/config/config.kafka.minimal.hocon), as well as a [comprehensive one](https://github.com/snowplow/enrich/blob/master/config/config.kafka.reference.hocon).
 
 | parameter | description |
 |-|-|
 | `input.topicName` | Required. Name of the Kafka topic to read collector payloads from. |
 | `input.bootstrapServers` | Required. A list of `host:port` pairs to use for establishing the initial connection to the Kafka cluster |
+| `input.debounceCommitOffsets` (since *6.0.0*) | Optional. Default: `10 seconds`. How frequently to commit our progress back to kafka. By increasing this value, we decrease the number of requests made to the kafka broker. |
 | `input.consumerConf` | Optional. Kafka consumer configuration. See [the docs](https://kafka.apache.org/documentation/#consumerconfigs) for all properties. |
 | `output.good.topicName` | Required. Name of the Kafka topic to write to |
 | `output.good.bootstrapServers` | Required. A list of host:port pairs to use for establishing the initial connection to the Kafka cluster |
 | `output.good.producerConf` | Optional. Kafka producer configuration. See [the docs](https://kafka.apache.org/documentation/#producerconfigs) for all properties |
 | `output.good.partitionKey` | Optional. Enriched event field to use as Kafka partition key |
-| `output.good.headers` | Optional. Enriched event fields to add as Kafka record headers |
-| `output.incomplete.topicName` | Optional. Name of the Kafka topic that will receive the failed events (same format as the enriched events) |
-| `output.incomplete.bootstrapServers` | Optional. A list of host:port pairs to use for establishing the initial connection to the Kafka cluster |
-| `output.incomplete.producerConf` | Optional. Kafka producer configuration. See [the docs](https://kafka.apache.org/documentation/#producerconfigs) for all properties |
-| `output.bad.topicName` | Optional. Name of the Kafka topic that will receive the failed events in the “bad row” format (JSON |
-| `output.bad.bootstrapServers` | Optional. A list of host:port pairs to use for establishing the initial connection to the Kafka cluster |
-| `output.bad.producerConf` | Optional. Kafka producer configuration. See [the docs](https://kafka.apache.org/documentation/#producerconfigs) for all properties |
-| `output.pii.topicName` | Optional. Name of the Kafka topic to write to |
-| `output.pii.bootstrapServers` | Optional. A list of host:port pairs to use for establishing the initial connection to the Kafka cluster |
-| `output.pii.producerConf` | Optional. Kafka producer configuration. See [the docs](https://kafka.apache.org/documentation/#producerconfigs) for all properties |
-| `output.pii.partitionKey` | Optional. Enriched event field to use as Kafka partition key |
-| `output.pii.headers` | Optional. Enriched event fields to add as Kafka record headers |
-| `blobStorage.s3` (since *4.0.0*) | Optional. Set to `true` if S3 client should be initialized to download enrichments assets. |
-| `blobStorage.gcs` (since *4.0.0*) | Optional. Set to `true` if GCS client should be initialized to download enrichments assets. |
-| `blobStorage.azureStorage` (since *4.0.0*) | Optional. Azure Blob Storage client configuration. ABS client won't be enabled if it isn't given. |
-| `blobStorage.azureStorage.accounts` (since *4.0.0*) | Array of accounts to download from Azure Blob Storage. |
-
+| `output.good.attributes` | Optional. Enriched event fields to add as Kafka record headers |
+| `output.failed.topicName` | Optional. Name of the Kafka topic that will receive the failed events (same format as the enriched events) |
+| `output.failed.bootstrapServers` | Same as `output.good.bootstrapServers` for failed events. |
+| `output.failed.producerConf` | Same as `output.good.producerConf` for failed events. |
+| `output.bad.topicName` | Optional. Name of the Kafka topic that will receive the failed events in the “bad row” format (JSON) |
+| `output.bad.bootstrapServers` | Same as `output.good.bootstrapServers` for failed events in the "bad row" format (JSON). |
+| `output.bad.producerConf` | Same as `output.good.producerConf` for failed events in the "bad row" format (JSON). |
+| `blobClients.accounts` (since *6.0.0*) | Optional. Array of Azure Blob Storage accounts to download enrichment assets. |
 Example values for the Azure storage accounts :
 - `{ "name": "storageAccount1"}`: public account with no auth
 - `{ "name": "storageAccount2", "auth": { "type": "default"} }`: private account using default auth chain
@@ -192,7 +128,7 @@ Example values for the Azure storage accounts :
 
 ## enrich-nsq
 
-A minimal configuration file can be found on the [Github repo](https://github.com/snowplow/enrich/blob/master/config/config.nsq.minimal.hocon), as well as a [comprehensive one](https://github.com/snowplow/enrich/blob/master/config/config.nsq.extended.hocon).
+A minimal configuration file can be found on the [Github repo](https://github.com/snowplow/enrich/blob/master/config/config.nsq.minimal.hocon), as well as a [comprehensive one](https://github.com/snowplow/enrich/blob/master/config/config.nsq.reference.hocon).
 
 | parameter | description |
 |-|-|
@@ -203,15 +139,13 @@ A minimal configuration file can be found on the [Github repo](https://github.co
 | `output.good.topic` | Required. Name of the NSQ topic that will receive the enriched events. |
 | `output.good.nsqdHost` | Required. The host name of nsqd application. |
 | `output.good.nsqdPort` | Required. The port number of nsqd application. |
-| `output.incomplete.topic` | Required. Name of the NSQ topic that will receive the failed events (same format as the enriched events). |
-| `output.incomplete.nsqdHost` | Required. The host name of nsqd application. |
-| `output.incomplete.nsqdPort` | Required. The port number of nsqd application. |
+| `output.failed.topic` | Required. Name of the NSQ topic that will receive the failed events (same format as the enriched events). |
+| `output.failed.nsqdHost` | Required. The host name of nsqd application. |
+| `output.failed.nsqdPort` | Required. The port number of nsqd application. |
 | `output.bad.topic` | Required. Name of the NSQ topic that will receive the failed events in the "bad row" format (JSON). |
 | `output.bad.nsqdHost` | Required. The host name of nsqd application. |
 | `output.bad.nsqdPort` | Required. The port number of nsqd application. |
-| `output.pii.topic` | Optional. Name of the NSQ topic that will receive the pii events. |
-| `output.pii.nsqdHost` | Optional. The host name of nsqd application. |
-| `output.pii.nsqdPort` | Optional. The port number of nsqd application. |
+| `blobClients.accounts` (since *6.0.0*) | Optional. Array of Azure Blob Storage accounts to download enrichment assets. |
 
 ## Enriched events validation against atomic schema
 
@@ -222,7 +156,7 @@ However, this is a breaking change, and we want to give some time to users to ad
 For this reason, this new validation was added as a feature that can be deactivated like that:
 
 ```json
-"featureFlags": {
+"validation": {
   "acceptInvalid": true
 }
 ```

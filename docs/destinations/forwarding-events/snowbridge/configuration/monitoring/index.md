@@ -20,19 +20,19 @@ Snowbridge comes with configurable logging, [pprof](https://github.com/google/pp
 Use the log_level parameter to specify the log level.
 
 <CodeBlock language="hcl" reference>{`
-https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/monitoring/log-level-example.hcl
+https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/monitoring/log-level-example.hcl
 `}</CodeBlock>
 
 ### Sentry Configuration
 
 <CodeBlock language="hcl" reference>{`
-https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/monitoring/sentry-example.hcl
+https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/monitoring/sentry-example.hcl
 `}</CodeBlock>
 
 ### StatsD stats receiver configuration
 
 <CodeBlock language="hcl" reference>{`
-https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/monitoring/statsd-example.hcl
+https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/monitoring/statsd-example.hcl
 `}</CodeBlock>
 
 ### End-to-end latency configuration
@@ -40,7 +40,7 @@ https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/c
 Snowplow Enriched data only:
 
 <CodeBlock language="hcl" reference>{`
-https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/metrics/e2e-latency-example.hcl
+https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/metrics/e2e-latency-example.hcl
 `}</CodeBlock>
 
 Snowbridge sends the following metrics to statsd:

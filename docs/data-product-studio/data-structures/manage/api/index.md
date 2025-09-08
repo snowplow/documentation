@@ -34,9 +34,7 @@ The endpoints focus on the main operations in the workflow around:
 3. Validating a data structure
 4. Deploying a data structure to a registry
 
-Each request will need to include your company's `organizationID` which is a UUID that can be retrieved from the URL immediately following the .com when visiting console:
-
-![](images/orgID.png)
+Each request will need to include your Organization ID. You can find it [on the _Manage organization_ page](https://console.snowplowanalytics.com/settings) in Console.
 
 ```mdx-code-block
 import GetConsoleApiKey from "@site/docs/reusable/get-console-api-key/_index.md"

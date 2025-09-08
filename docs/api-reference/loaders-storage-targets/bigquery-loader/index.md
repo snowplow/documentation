@@ -12,7 +12,7 @@ import LoaderDiagram from '@site/docs/api-reference/loaders-storage-targets/bigq
 import DeployOverview from '@site/docs/api-reference/loaders-storage-targets/bigquery-loader/_deploy-overview.md';
 ```
 
-## Overview
+The BigQuery Streaming Loader is an application that loads Snowplow events to BigQuery.
 
 <Tabs groupId="cloud" queryString lazy>
   <TabItem value="aws" label="AWS" default>
@@ -45,21 +45,21 @@ The simplest possible config file just needs a description of your pipeline inpu
   <TabItem value="aws" label="AWS" default>
 
 ```json reference
-https://github.com/snowplow-incubator/snowplow-bigquery-loader/blob/v2/config/config.kinesis.minimal.hocon
+https://github.com/snowplow-incubator/snowplow-bigquery-loader/blob/master/config/config.kinesis.minimal.hocon
 ```
 
   </TabItem>
   <TabItem value="gcp" label="GCP">
 
 ```json reference
-https://github.com/snowplow-incubator/snowplow-bigquery-loader/blob/v2/config/config.pubsub.minimal.hocon
+https://github.com/snowplow-incubator/snowplow-bigquery-loader/blob/master/config/config.pubsub.minimal.hocon
 ```
 
   </TabItem>
   <TabItem value="azure" label="Azure">
 
 ```json reference
-https://github.com/snowplow-incubator/snowplow-bigquery-loader/blob/v2/config/config.azure.minimal.hocon
+https://github.com/snowplow-incubator/snowplow-bigquery-loader/blob/master/config/config.azure.minimal.hocon
 ```
 
   </TabItem>

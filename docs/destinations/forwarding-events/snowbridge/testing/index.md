@@ -76,7 +76,7 @@ To test transformations, you only need to add the `transform` block(s) to your c
 
 To test specific sources or targets, add the respective `source` or `target` blocks. For example, see the [configuration](/docs/destinations/forwarding-events/snowbridge/configuration/targets/http/google-tag-manager.md) for an HTTP target sending data to Google Tag Manager Server Side.
 
-### Adding custom transformation scripts
+### Adding a custom transformation script
 
 You can add custom scripts by mounting a file, similarly to the above. Assuming the script is in `script.js`, that looks like this:
 
@@ -94,6 +94,31 @@ The transformation config should point to the path of the script _inside_ the co
 transform {
   use "js" {
     script_path = "/tmp/script.js"
+  }
+}
+```
+
+### Adding an HTTP request template
+
+For the HTTP target, you can add a custom HTTP request template by mounting a file, similarly to above. Assuming the template is in `template.tpl`, that looks like this:
+
+<CodeBlock language="bash">{
+`cat data.tsv | docker run -i \\
+    --env ACCEPT_LIMITED_USE_LICENSE=yes \\
+    --mount type=bind,source=$(pwd)/config.hcl,target=/tmp/config.hcl \\
+    --mount type=bind,source=$(pwd)/template.tpl,target=/tmp/template.tpl \\
+    snowplow/snowbridge:${versions.snowbridge}`
+}</CodeBlock>
+
+
+
+The HTTP target config should point to the path of the script _inside_ the container (`/tmp/template.tpl` above). For example, the HTTP target block in the configuration might look like this:
+
+```hcl
+target {
+  use "http" {
+    url             = "http://myApi.com/events"
+    template_file   = "/tmp/template.tpl"
   }
 }
 ```

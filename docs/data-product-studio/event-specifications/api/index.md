@@ -21,9 +21,7 @@ For comprehensive details regarding each request, including query parameters and
 
 To post sample requests in the documentation, you must click the `Authorize` button at the top of the document and authenticate with your token. The token field value in each individual request is overwritten by this authorization.
 
-For each request, you are required to include your company's `organizationId`, which is a UUID retrievable from the URL immediately following `.com` when visiting the console:
-
-![](images/orgID.png)
+For each request, you are required to include your Organization ID. You can find it [on the _Manage organization_ page](https://console.snowplowanalytics.com/settings) in Console.
 
 ```mdx-code-block
 import GetConsoleApiKey from "@site/docs/reusable/get-console-api-key/_index.md"

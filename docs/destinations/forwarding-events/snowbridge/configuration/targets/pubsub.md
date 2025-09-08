@@ -19,7 +19,7 @@ Snowbridge connects to PubSub using [Google's Go Pubsub sdk](https://cloud.googl
 The PubSub Target has only two required options, and no optional ones.
 
 <CodeBlock language="hcl" reference>{`
-https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/targets/pubsub-full-example.hcl
+https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/targets/pubsub-full-example.hcl
 `}</CodeBlock>
 
 If you want to use this as a [failure target](/docs/destinations/forwarding-events/snowbridge/concepts/failure-model/index.md#failure-targets), then use failure_target instead of target.

@@ -27,11 +27,11 @@ The below example keeps messages which contain `prod` in the `environment` field
 Minimal configuration:
 
 <CodeBlock language="hcl" reference>{`
-https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/snowplow-builtin/spEnrichedFilterContext-minimal-example.hcl
+https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/transformations/snowplow-builtin/spEnrichedFilterContext-minimal-example.hcl
 `}</CodeBlock>
 
 Every configuration option:
 
 <CodeBlock language="hcl" reference>{`
-https://github.com/snowplow/snowbridge/blob/${versions.snowbridge}/assets/docs/configuration/transformations/snowplow-builtin/spEnrichedFilterContext-full-example.hcl
+https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/transformations/snowplow-builtin/spEnrichedFilterContext-full-example.hcl
 `}</CodeBlock>

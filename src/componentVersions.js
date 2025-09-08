@@ -21,11 +21,11 @@ export const versions = {
   webViewTracker: '0.3.0',
 
   // Core pipeline
-  collector: '3.5.0',
-  enrich: '5.4.0',
+  collector: '3.6.0',
+  enrich: '6.1.0',
   sqs2kinesis: '1.0.4',
   dataflowRunner: '0.7.5',
-  snowbridge: '3.3.0',
+  snowbridge: '3.5.0',
 
   // Loaders
   bqLoader: '2.0.1',
@@ -37,7 +37,8 @@ export const versions = {
   s3Loader: '2.3.0',
   s3Loader22x: '2.2.9',
   lakeLoader: '0.6.3',
-  snowflakeStreamingLoader: '0.5.0',
+  snowflakeStreamingLoader: '0.5.1',
+  databricksStreamingLoader: '0.1.0',
 
   // Data Modelling
   // dbt
@@ -46,7 +47,7 @@ export const versions = {
   dbtSnowplowWeb: '1.0.1',
   dbtSnowplowMobile: '1.0.0',
   dbtSnowplowMediaPlayer: '0.9.3',
-  dbtSnowplowUtils: '0.17.3',
+  dbtSnowplowUtils: '0.17.4',
   dbtSnowplowNormalize: '0.4.1',
   dbtSnowplowFractribution: '0.3.6',
   dbtSnowplowEcommerce: '0.9.3',

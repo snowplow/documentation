@@ -6,6 +6,71 @@ sidebar_position: 20
 
 Event forwarders use JavaScript expressions for filtering events and mapping Snowplow data to destination fields. These expressions are entered during [forwarder setup](/docs/destinations/forwarding-events/index.md#getting-started) in BDP Console, specifically in the **Event filtering**, **Field mapping**, and **Custom functions** sections. This reference covers the syntax and available data for these operations.
 
+## Available event fields
+
+All fields on your Snowplow events can be referenced for both filters and field mappings.
+
+### Standard atomic fields
+
+Access [standard Snowplow fields](https://docs.snowplow.io/docs/fundamentals/canonical-event/) in your filters and mappings:
+
+```javascript
+// Standard atomic fields
+event.app_id
+event.event_name
+event.platform
+event.collector_tstamp
+event.event_id
+event.domain_userid
+event.user_id
+event.page_url
+event.page_title
+event.useragent
+event.network_userid
+```
+
+### Custom events
+
+For a self-describing event with schema `com.acme/signup/jsonschema/1-0-0`:
+
+```javascript
+// Access event properties
+event?.unstruct_event_com_acme_signup_1?.signup_method
+event?.unstruct_event_com_acme_signup_1?.user_type
+```
+
+### Custom entities
+
+For entities with schema `com.acme/user_profile/jsonschema/1-0-0`:
+
+```javascript
+// Access entity properties (entities are arrays)
+event?.contexts_com_acme_user_profile_1?.[0]?.subscription_tier
+event?.contexts_com_acme_user_profile_1?.[0]?.account_created
+```
+
+:::info
+**Important**: Always use [optional chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) (`?.`) when accessing custom events and entities to handle cases where they're not present.
+:::
+
+### Schema name transformation
+
+Forwarders transform Iglu schema URIs to JavaScript-safe field names:
+
+| Original schema | Transformed field name |
+|----------------|----------------------|
+| `com.acme/signup/jsonschema/1-0-0` | `unstruct_event_com_acme_signup_1` |
+| `com.acme/user_profile/jsonschema/2-1-0` | `contexts_com_acme_user_profile_2` |
+| `nl.basjes/yauaa_context/jsonschema/1-0-4` | `contexts_nl_basjes_yauaa_context_1` |
+
+**Schema names follow these transformation rules**:
+
+- Self-describing events: `unstruct_event_` prefix
+- Entities: `contexts_` prefix
+- Dots and slashes become underscores
+- Only major version number retained
+- Hyphens in vendor/name become underscores
+
 ## Event filtering
 
 Event filters determine which events are forwarded to your destination. Only events matching your filter criteria (JavaScript expression evaluating to `true`) will be processed and sent.
@@ -31,51 +96,6 @@ event.event_name == "add_to_cart" || event.event_name == "purchase"
 event.app_id == "website" && event.event_name != "link_click"
 ```
 
-### Available event fields
-
-Access [standard Snowplow fields](https://docs.snowplow.io/docs/fundamentals/canonical-event/) in your filters and mappings, such as:
-
-```javascript
-// Standard atomic fields
-event.app_id
-event.event_name
-event.platform
-event.collector_tstamp
-event.event_id
-event.domain_userid
-event.user_id
-event.page_url
-event.page_title
-event.useragent
-event.network_userid
-```
-
-### Custom events and entities
-
-Access custom event and entity data using transformed schema names:
-
-**Custom events:**
-For a self-describing event with schema `com.acme/signup/jsonschema/1-0-0`:
-
-```javascript
-// Access event properties in filters
-event?.unstruct_event_com_acme_signup_1?.signup_method == "email"
-event?.unstruct_event_com_acme_signup_1?.user_type == "premium"
-```
-
-**Custom entities:**
-For entities with schema `com.acme/user_profile/jsonschema/1-0-0`:
-
-```javascript
-// Access entity properties (entities are arrays)
-event?.contexts_com_acme_user_profile_1?.[0]?.subscription_tier == "pro"
-event?.contexts_com_acme_user_profile_1?.[0]?.account_created
-```
-
-:::info
-**Important**: Always use [optional chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) (`?.`) when accessing custom events and entities to handle cases where they're not present.
-:::
-
 ### Advanced filtering patterns
 
 **Regular expressions**
@@ -99,7 +119,7 @@ Define reusable logic in the Custom Functions section:
 // Defined in the Custom Function editor panel
 function isHighValueUser(event) {
   const profile = event?.contexts_com_acme_user_profile_1?.[0];
-  return profile?.subscription_tier == "premium" || 
+  return profile?.subscription_tier == "premium" ||
          profile?.lifetime_value > 1000;
 }
 
@@ -109,30 +129,11 @@ isHighValueUser(event) && event.event_name == "purchase"
 
 ## Field mapping
 
-Field mapping defines how Snowplow event data is transformed and sent to destination APIs. Each mapping consists of a destination field name and a JavaScript expression that extracts the value from your Snowplow event. 
+Field mapping defines how Snowplow event data is transformed and sent to destination APIs. Each mapping consists of a destination field name and a JavaScript expression that extracts the value from your Snowplow event.
 
 :::info
 The code snippets below contain JavaScript expressions that you can include in the **Snowplow Expression** mapping field in the UI.
 :::
-
-### Available event fields
-
-Access [standard Snowplow fields](https://docs.snowplow.io/docs/fundamentals/canonical-event/) in your mappings:
-
-```javascript
-// Standard atomic fields
-event.app_id
-event.event_name
-event.platform
-event.collector_tstamp
-event.event_id
-event.domain_userid
-event.user_id
-event.page_url
-event.page_title
-event.useragent
-event.network_userid
-```
 
 ### Basic mappings
 
@@ -153,32 +154,6 @@ true
 // Conditional mapping
 event.platform == "web" ? event.page_url : event.screen_name
 ```
-
-### Custom events and entities
-
-Access custom event and entity data using transformed schema names:
-
-**Custom events:**
-For a self-describing event with schema `com.acme/signup/jsonschema/1-0-0`:
-
-```javascript
-// Access event properties in mappings
-event?.unstruct_event_com_acme_signup_1?.signup_method
-event?.unstruct_event_com_acme_signup_1?.user_type
-```
-
-**Custom entities:**
-For entities with schema `com.acme/user_profile/jsonschema/1-0-0`:
-
-```javascript
-// Access entity properties (entities are arrays)
-event?.contexts_com_acme_user_profile_1?.[0]?.subscription_tier
-event?.contexts_com_acme_user_profile_1?.[0]?.account_created
-```
-
-:::info
-**Important**: Always use [optional chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) (`?.`) when accessing custom events and entities to handle cases where they're not present.
-:::
 
 ### Data transformation
 
@@ -256,7 +231,7 @@ function formatEventName(event) {
 function extractProductInfo(event) {
   const product = event?.unstruct_event_com_acme_product_1;
   if (!product) return null;
-  
+
   return {
     id: product.product_id,
     name: product.product_name,
@@ -270,7 +245,7 @@ function extractProductInfo(event) {
 function buildUserProfile(event) {
   const session = event?.contexts_com_snowplowanalytics_snowplow_client_session_1?.[0];
   const geo = event?.contexts_com_snowplowanalytics_snowplow_geolocation_context_1?.[0];
-  
+
   return {
     user_id: event.domain_userid,
     session_id: session?.sessionId,
@@ -280,23 +255,6 @@ function buildUserProfile(event) {
   };
 }
 ```
-
-## Schema name transformation
-
-Forwarders transform Iglu schema URIs to JavaScript-safe field names:
-
-| Original schema | Transformed field name |
-|----------------|----------------------|
-| `com.acme/signup/jsonschema/1-0-0` | `unstruct_event_com_acme_signup_1` |
-| `com.acme/user_profile/jsonschema/2-1-0` | `contexts_com_acme_user_profile_2` |
-| `nl.basjes/yauaa_context/jsonschema/1-0-4` | `contexts_nl_basjes_yauaa_context_1` |
-
-**Schema names follow these transformation rules**:
-- Self-describing events: `unstruct_event_` prefix
-- Entities: `contexts_` prefix  
-- Dots and slashes become underscores
-- Only major version number retained
-- Hyphens in vendor/name become underscores
 
 ## Other common patterns
 
@@ -320,8 +278,8 @@ new Date(event.collector_tstamp).toLocaleDateString()
 event.platform == "web" ? event.page_url : event.screen_name
 
 // Event-type specific properties
-event.event_name == "purchase" ? 
-  event.unstruct_event_com_acme_purchase_1?.total_value : 
+event.event_name == "purchase" ?
+  event.unstruct_event_com_acme_purchase_1?.total_value :
   null
 ```
 

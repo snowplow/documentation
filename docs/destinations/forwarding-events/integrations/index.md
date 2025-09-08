@@ -10,4 +10,5 @@ Event forwarding supports third-party destinations through pre-built integration
 
 Snowplow event forwarding supports the following destinations:
 
+- [Amplitude](/docs/destinations/forwarding-events/integrations/amplitude/index.md)
 - [Braze](/docs/destinations/forwarding-events/integrations/braze/index.md)

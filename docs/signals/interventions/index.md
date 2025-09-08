@@ -211,7 +211,7 @@ If an intervention is published to any of these attribute keys while the subscri
 #### Intervention tracking
 
 When the plugin receives interventions and dispatches them to handler functions, it will generate Snowplow tracking events.
-The following self-describing events are generated, and include the intervention payload as a custom entity:
+The following self-describing events are generated, and include the intervention payload as a custom attribute key:
 
 <!-- TODO: link to iglu central once published -->
 - `iglu:com.snowplowanalytics.signals/intervention_receive/jsonschema/1-0-0`: Fires when an intervention is received by the plugin

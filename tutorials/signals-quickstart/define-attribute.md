@@ -3,7 +3,7 @@ position: 3
 title: Define what attributes to calculate
 ---
 
-An `Attribute` describes a specific fact about user behavior. They're grouped into views for management and deployment.
+An `Attribute` describes a specific fact about user behavior. They're grouped into attribute groups for management and deployment.
 
 ## Define attributes
 
@@ -99,19 +99,19 @@ first_referrer = Attribute(
 
 Add all three attribute definitions to your notebook, and run the cell.
 
-## Define a view
+## Define an attribute group
 
-Single attribute definitions can't be deployed to Signals, as they don't make sense without the additional context defined in a `View`.
+Single attribute definitions can't be deployed to Signals, as they don't make sense without the additional context defined in an `AttributeGroup`.
 
-Group the attributes together, adding the session entity identifier `domain_sessionid`. You'll need to update the `owner` field to your email address.
+Group the attributes together, adding the session attribute key identifier `domain_sessionid`. You'll need to update the `owner` field to your email address.
 
 ```python
-from snowplow_signals import StreamView, domain_sessionid
+from snowplow_signals import StreamAttributeGroup, domain_sessionid
 
-my_view = StreamView(
-    name="my_quickstart_view",
+my_attribute_group = StreamAttributeGroup(
+    name="my_quickstart_attribute_group",
     version=1,
-    entity=domain_sessionid,
+    attribute_key=domain_sessionid,
     owner="user@company.com", # UPDATE THIS
     attributes=[
         page_view_count,
@@ -121,9 +121,9 @@ my_view = StreamView(
 )
 ```
 
-Because of the session entity, Signals will calculate these attributes as follows:
+Because of the session attribute key, Signals will calculate these attributes as follows:
 * How many page views in the last 5 minutes for each session
 * The last seen browser name for each session
 * The first seen referrer for each session
 
-Add this view definition to your notebook, and run the cell.
+Add this attribute group definition to your notebook, and run the cell.

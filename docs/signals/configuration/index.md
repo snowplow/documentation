@@ -6,7 +6,7 @@ sidebar_label: "Configuration"
 
 By default, Signals calculates attributes in real time, in stream. Stream attributes are ideal for real-time use cases such as tracking the latest video a user played, or the number of page views in a session.
 
-Use the Python SDK to define the attributes you want to calculate, as well as the entities that the attributes relate to. Group them together into a view, and apply this configuration to Signals.
+Use the Python SDK to define the attributes you want to calculate, as well as the attribute keys that the attributes relate to. Group them together into an attribute group, and apply this configuration to Signals.
 
 All configuration is defined using the [Signals Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk), or manually via the Signals API.
 
@@ -64,11 +64,11 @@ The created `Signals` object has the following methods:
 
 | Method                   | Description                                                                |
 | ------------------------ | -------------------------------------------------------------------------- |
-| `apply`                  | Registers the provided objects with Signals                                |
+| `publish`                | Registers the provided objects with Signals                                |
 | `test`                   | Tests a view against the atomic events table                               |
-| `get_view`               | Retrieves a view from the Profiles Store                                   |
+| `get_attribute_group`    | Retrieves an attribute group from the Profiles Store                       |
 | `get_service_attributes` | Retrieves attributes for a service from the Profiles Store                 |
-| `get_view_attributes`    | Retrieves attributes for a view from the Profiles Store                    |
+| `get_group_attributes`   | Retrieves attributes for a specific attribute group from the Profiles Store|
 | `push_intervention`      | Push an intervention to subscribers for a set of attribute keys            |
 | `pull_interventions`     | Open a streaming subscription of interventions for a set of attribute keys |
 
@@ -105,10 +105,10 @@ const signals = new Signals({
 
 The created `Signals` object has the following methods:
 
-| Method                 | Description                                                         |
-| ---------------------- | ------------------------------------------------------------------- |
-| `getServiceAttributes` | Retrieves attributes for a service from the Profiles Store |
-| `getViewAttributes`    | Retrieves attributes for a view from the Profiles Store    |
+| Method                 | Description                                                                 |
+| ---------------------- | --------------------------------------------------------------------------- |
+| `getServiceAttributes` | Retrieves attributes for a specific service from the Profiles Store         |
+| `getGroupAttributes`   | Retrieves attributes for a specific attribute group from the Profiles Store |
 
 ## Signals API
 

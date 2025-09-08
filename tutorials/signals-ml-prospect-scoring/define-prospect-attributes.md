@@ -5,7 +5,7 @@ position: 3
 
 To use Signals, you need to define which attributes to calculate, and then apply the configuration. Signals will calculate the attributes from your real-time event stream.
 
-For this prospect scoring use case, use the following set of attributes. They'll be calculated against the `domain_userid` device entity. Choosing this entity allows Signals to calculate attributes from events across multiple sessions for each prospect.
+For this prospect scoring use case, use the following set of attributes. They'll be calculated against the `domain_userid` device attribute key. Choosing this attribute key allows Signals to calculate attributes from events across multiple sessions for each prospect.
 
 Some attributes are calculated for two different time windows. We've chosen 7 and 30 days to cover both short- and long-term user behavior on the website.
 
@@ -271,15 +271,15 @@ num_engaged_campaigns_l30d = Attribute(
 )
 ```
 
-Group the attributes into a view with the `domain_userid` device entity. You'll need to provide your own email address for the `owner` field.
+Group the attributes into an attribute group with the `domain_userid` device attribute key. You'll need to provide your own email address for the `owner` field.
 
 ```python
-from snowplow_signals import StreamView, domain_userid
+from snowplow_signals import StreamAttributeGroup, domain_userid
 
-user_attributes_view = StreamView(
+user_attribute_group = StreamAttributeGroup(
     name="prospect_scoring_tutorial",
     version=1,
-    entity=domain_userid,
+    attribute_key=domain_userid,
     owner="YOUR EMAIL HERE", # UPDATE THIS
     attributes=[
         latest_app_id,
@@ -309,7 +309,7 @@ Test the attribute outputs on a subset of recent event data. The `test` command 
 
 ```python
 sp_signals_test = sp_signals.test(
-    view=user_attributes_view,
+    attribute_group=user_attribute_group,
     app_ids=["website"]
 )
 
@@ -330,13 +330,13 @@ from snowplow_signals import Service
 prospect_scoring_tutorial_service = Service(
     name='prospect_scoring_tutorial_service',
     owner="YOUR EMAIL HERE", # UPDATE THIS
-    views=[user_attributes_view],
+    attribute_group=[user_attribute_group],
 )
 ```
 
 ## Deploy configuration to Signals
 
-Apply the view and service configurations to Signals.
+Apply the attribute group and service configurations to Signals.
 
 ```python
 from snowplow_signals import Signals
@@ -348,7 +348,7 @@ sp_signals = Signals(
     org_id=ENV_SP_ORG_ID
 )
 
-applied = sp_signals.apply([user_attributes_view, prospect_scoring_tutorial_service])
+applied = sp_signals.publish([user_attribute_group, prospect_scoring_tutorial_service])
 
 # This should print "2 objects applied"
 print(f"{len(applied)} objects applied")
@@ -367,7 +367,7 @@ Use your `domain_userid` to retrieve the attributes that Signals has calculated 
 ```python
 sp_signals_result = sp_signals.get_service_attributes(
     name="prospect_scoring_tutorial_service",
-    entity="domain_userid",
+    attribute_key="domain_userid",
     identifier="8e554b10-4fcf-49e9-a0d8-48b6b6458df3", # UPDATE THIS
 )
 sp_signals_result

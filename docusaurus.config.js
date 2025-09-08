@@ -176,6 +176,7 @@ module.exports = {
               {
                 href: 'https://community.snowplow.io/',
                 label: 'Snowplow Community',
+                className: 'capitalize text-sm text-muted-foreground',
               },
               {
                 href: 'https://support.snowplow.io/',

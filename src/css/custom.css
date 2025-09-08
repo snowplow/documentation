@@ -145,6 +145,7 @@ html[data-theme='dark'] {
 }
 .DocSearch-Button {
   position: fixed;
+  top: 32px;
   left: 50%;
   transform: translate(-50%, -50%);
   max-width: 360px;
@@ -157,7 +158,6 @@ html[data-theme='dark'] {
   padding: 0 12px !important;
   font-size: .75rem !important;
   line-height: 20px !important;
-  transition: none !important;
 }
 .DocSearch-Search-Icon {  
   height: 16px;

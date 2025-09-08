@@ -1,32 +1,12 @@
 ---
-title: "Configuring Signals programmatically"
+title: "Defining attributes using the Python SDK"
 sidebar_position: 200
-sidebar_label: "Configure programmatically"
+sidebar_label: "Using the Python SDK"
 ---
-
-:::info
-We strongly recommend using the BDP Console to configure and manage your Signals attributes and interventions. The UI includes error checking and versioning, for a safer and easier to use experience.
-:::
-
-There are two programmatical options for managing Signals:
-* Signals API
-* Signals Python SDK
-
-Both of these methods require you to first deploy Signals using the self-serve process in Console, under the **Signals** section. After deployment, you'll have access to the Signals API URL needed for both API access and Python SDK usage.
-
-## Using the Signals API
-
-To access the full Swagger API documentation for your Signals deployment, use your Signals API URL followed by `/docs/`:
-
-```bash
-{{API_URL}}/docs/
-```
-
-## Using the Python SDK
 
 The pages in this section describe how to use the [Signals Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk) to define attribute groups, services, and interventions.
 
-We recommend against choosing this route, especially for production use. The Console UI will help you safely configure your Signals deployment.
+You must first deploy Signals using the self-serve process in Console, under the **Signals** section. After deployment, you'll have access to the Signals API URL needed for Python SDK usage.
 
 To use the Python SDK, first choose where to store your Signals configurations. We recommend creating a new repository. The easiest way to use the SDK is within a Jupyter notebook.
 

@@ -111,4 +111,4 @@ Once you've created your attribute group or intervention configurations, apply t
 
 Retrieve calculated attributes in your application using the [Node.js](https://github.com/snowplow-incubator/snowplow-signals-typescript-sdk) or [Python](https://github.com/snowplow-incubator/snowplow-signals-sdk) Signals SDKs. You could also use the Signals API.
 
-Use the attributes to update the user experience, or subscribe to interventions to take action based on user behavior. Read more about interventions on the [concepts](/docs/signals/concepts/index.md) page.
+Use the attributes to update the user experience, or subscribe to [interventions](/docs/signals/concepts/index.md) to take action based on user behavior.

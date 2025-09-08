@@ -5,12 +5,9 @@ position: 2
 
 This tutorial uses a Google Colab Juypter [notebook](https://colab.research.google.com/github/snowplow-incubator/signals-notebooks/blob/main/web/web_prospect_scoring_end_to_end.ipynb). Follow along in the notebook using your own data.
 
-Start by configuring your credentials in the notebook.
-
-Add secrets like this:
+Start by configuring your credentials in the notebook. Go to **Signals** > **Overview** in BDP Console to find your Signals credentials. Add them, along with your warehouse and ngrok details, to the notebook secrets:
 
 ![](./images/colab_credentials.jpeg)
-
 
 Here's a list of all the credentials you may need to configure, saved as variables:
 

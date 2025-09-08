@@ -38,13 +38,9 @@ We're calculating aggregated attributes based off real-time stream event data, s
   * Page pings
   * Form tracking
   * Optional: media events
-* Valid API credentials for your Signals account:
-  * Signals API URL
-  * Snowplow API key
-  * Snowplow API key ID
-  * Snowplow organization ID
+* Snowplow events in Snowflake
+* A Signals connection
 * [ngrok](https://dashboard.ngrok.com/) account and Authtoken API key
-* Snowplow events in Snowflake: if you are using a different warehouse, adjust the connection code
 * Google Colab
 
 Check out the [Signals configuration](/docs/signals/configuration) documentation to find out how to get the Signals credentials.
@@ -64,3 +60,15 @@ The system consists of three main blocks:
 :::note
 You can replace the ML model with any other back-end system that you'd use to act on live prospects' attributes.
 :::
+
+## Connecting to Signals
+
+Log in to [Console](https://console.snowplowanalytics.com) and navigate to the **Signals** section.
+
+If your Overview page looks like this, you'll need to [set up a Signals connection](/docs/signals/configuration/) to deploy the required infrastructure:
+
+<!-- TODO image initial landing page no deployment -->
+
+If it looks like this, continue with the tutorial:
+
+<!-- TODO image overview page with connection -->

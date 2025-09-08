@@ -25,7 +25,7 @@ This tutorial assumes that you have:
 
 Log in to [Console](https://console.snowplowanalytics.com) and navigate to the **Signals** section.
 
-If your Overview page looks like this, you'll need to [set up a Signals connection](/docs/signals/configuration/) to deploy the required infrastructure:
+If your Overview page looks like this, you'll need to [set up a Signals connection](/docs/signals/define-attributes/) to deploy the required infrastructure:
 
 <!-- TODO image initial landing page no deployment -->
 

@@ -11,7 +11,7 @@ There are two steps for materialization:
 
 You'll need to materialize each project individually.
 
-The `materialize` command uses the [materialization engine](/docs/signals/configuration/batch-calculations#materialization-engine) under the hood.
+The `materialize` command uses the [materialization engine](/docs/signals/define-attributes/using-python-sdk//batch-calculations#materialization-engine) under the hood.
 
 ## Update configuration file
 

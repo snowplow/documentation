@@ -9,7 +9,7 @@ For this prospect scoring use case, use the following set of attributes. They'll
 
 Some attributes are calculated for two different time windows. We've chosen 7 and 30 days to cover both short- and long-term user behavior on the website.
 
-Since the attributes will be calculated in stream, those with a defined `period` will be limited to the last 100 relevant events. Read more about this in the [Signals documentation](/docs/signals/stream-vs-batch/#stream-windowing-operations). For our marketing website, these attributes are unlikely to ever reach 100, but this may be something to be aware of for your site.
+Since the attributes will be calculated in stream, those with a defined `period` will be limited to the [last 100 relevant events](/docs/signals/define-attributes/attribute-groups/). For our marketing website, these attributes are unlikely to ever reach 100, but this may be something to be aware of for your site.
 
 | Feature name                 | Description                                                                                     | Type   | Aggregation    |
 | ---------------------------- | ----------------------------------------------------------------------------------------------- | ------ | -------------- |

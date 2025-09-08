@@ -3,7 +3,7 @@ position: 3
 title: Define an attribute group
 ---
 
-Attribute groups are where you define the data you want to calculate. To create an [attribute group](/docs/signals/configuration/attribute-groups/), go to **Signals** > **Attribute groups** in BDP Console and click **Create attribute group**.
+Attribute groups are where you define the data you want to calculate. To create an [attribute group](/docs/signals/concepts), go to **Signals** > **Attribute groups** in BDP Console and click **Create attribute group**.
 
 <!-- TODO image {{create attribute group page}} -->
 
@@ -60,7 +60,7 @@ To set the time period:
 <!-- TODO image {{named attribute with page view v1-0-0 selected, showing more options with time period}} -->
 
 :::info Event processing limits
-There's a limit on how many events can be considered for time-windowed [event processing in stream](/docs/signals/configuration/stream-calculations).
+There's a limit on how many events can be considered for time-windowed [event processing in stream](/docs/signals/define-attributes/).
 :::
 
 ### Most recent browser

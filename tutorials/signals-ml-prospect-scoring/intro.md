@@ -43,7 +43,7 @@ We're calculating aggregated attributes based off real-time stream event data, s
 * [ngrok](https://dashboard.ngrok.com/) account and Authtoken API key
 * Google Colab
 
-Check out the [Signals configuration](/docs/signals/configuration) documentation to find out how to get the Signals credentials.
+Check out the [Signals](/docs/signals/define-attributes) documentation to find out how to get the Signals credentials.
 
 ## Architecture
 
@@ -65,7 +65,7 @@ You can replace the ML model with any other back-end system that you'd use to ac
 
 Log in to [Console](https://console.snowplowanalytics.com) and navigate to the **Signals** section.
 
-If your Overview page looks like this, you'll need to [set up a Signals connection](/docs/signals/configuration/) to deploy the required infrastructure:
+If your Overview page looks like this, you'll need to [set up a Signals connection](/docs/signals/define-attributes/) to deploy the required infrastructure:
 
 <!-- TODO image initial landing page no deployment -->
 

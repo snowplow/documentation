@@ -7,30 +7,28 @@ Welcome to the [Snowplow Signals](/docs/signals/) Quick Start tutorial.
 
 Snowplow Signals is a real-time personalization engine for customer intelligence, built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in near real time.
 
-This guide will walk you through the steps to calculate user behavior attributes from your Snowplow event stream, and retrieve them for use in your application. This will unlock real-time personalization use cases for your business.
+This guide will walk you through the steps to calculate user behavior attributes from your Snowplow event stream, and to retrieve them for use in your application. This will unlock real-time personalization use cases for your business.
 
 It should take less than 10 minutes from starting to retrieving calculated attributes.
+
+This tutorial shows how to define attributes using the BDP Console UI, as well as programmatically using the Python SDK.
 
 ## Prerequisites
 
 This tutorial assumes that you have:
 
-* Python 3.11+ installed in your environment
-* Basic Python and [Jupyter notebook](https://jupyter.org/) knowledge
-* Deployed Snowplow page view tracking from a web application
+* Snowplow page view tracking on a web application
 * Snowflake warehouse
-* Valid API credentials for your Signals account:
-  * Signals API URL
-  * Snowplow API key
-  * Snowplow API key ID
-  * Snowplow organization ID
+* A Signals connection
 
-Check out the [Signals configuration](/docs/signals/configuration) documentation to find out how to generate these credentials.
+## Connecting to Signals
 
-## Interactive version
+Log in to [Console](https://console.snowplowanalytics.com) and navigate to the **Signals** section.
 
-Try out an interactive version of this tutorial on Google Colab [here](https://colab.research.google.com/drive/1ExqheS4lIuJRs0wk0B6sxaYfnZGcTYUv).
+If your Overview page looks like this, you'll need to [set up a Signals connection](/docs/signals/define-attributes/) to deploy the required infrastructure:
 
-You'll need to log in with a Google account to use the Colab notebook.
+<!-- TODO image initial landing page no deployment -->
 
-Once you've added the secrets, start working through the tutorial. If you prefer to run the cells in one go with Run all, update your details in the required places first - they're marked with `UPDATE THIS`.
+If it looks like this, continue with the tutorial:
+
+<!-- TODO image overview page with connection -->

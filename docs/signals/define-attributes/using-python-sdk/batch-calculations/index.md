@@ -126,11 +126,11 @@ The sync will begin: the sync engine will look for new records at a given interv
 
 To create new batch attributes, you'll need to define attributes and attribute groups as for stream attributes. However, further steps are necessary to create the required dbt models and tables in your warehouse, and register them with Signals.
 
-The included batch engine CLI tool will help you with this process. Check out the full instructions in [Creating new batch attributes](/docs/signals/configuration/batch-calculations/batch-engine/index.md) or the [batch engine tutorial](/tutorials/signals-batch-engine/start/).
+The included batch engine CLI tool will help you with this process. Check out the full instructions in [Creating new batch attributes](/docs/signals/define-attributes/using-python-sdk/batch-calculations/batch-engine/index.md) or the [batch engine tutorial](/tutorials/signals-batch-engine/start/).
 
 ### Defining an attribute group with attributes
 
-The key difference between a standard stream [attribute_group](/docs/signals/configuration/attribute-groups/index.md) and one meant for batch processing is the `offline=True` parameter.
+The key difference between a standard stream [attribute_group](/docs/signals/define-attributes/using-python-sdk/attribute-groups/index.md) and one meant for batch processing is the `offline=True` parameter.
 
 The attribute key here is typically the user, which may be the `domain_userid` or other Snowplow identifier fields, such as the logged in `user_id`.
 
@@ -157,7 +157,7 @@ Signals uses dbt to create attribute group-specific attribute tables. The Signal
 
 It will help you create the required dbt models and tables in your warehouse, and register them with Signals.
 
-Check out the full instructions in [Creating new batch attributes](/docs/signals/configuration/batch-calculations/batch-engine/index.md).
+Check out the full instructions in [Creating new batch attributes](/docs/signals/define-attributes/using-python-sdk/batch-calculations/batch-engine/index.md).
 
 ## Sync engine
 

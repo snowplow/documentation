@@ -16,7 +16,7 @@ The batch engine helps by:
 * Testing and validating your data pipelines
 * Materializing calulated attributes to Signals for production use
 
-To use tables of pre-existing, already calculated values, see the [Signals documentation](/docs/signals/configuration/batch-calculations).
+To use tables of pre-existing, already calculated values, read up on external batch sources in the [Signals documentation](/docs/signals/concepts/).
 
 This guide will walk you through the steps to set up the batch engine and calculate attributes.
 
@@ -36,4 +36,4 @@ This tutorial assumes that you have:
   * Snowplow organization ID
 * BatchView definitions already applied to Signals
 
-Check out the [Signals configuration](/docs/signals/configuration) documentation to find out how to generate these credentials, and how to apply attribute configurations.
+Check out the [Signals configuration](/docs/signals/) documentation to find out where to find these credentials, and how to apply attribute configurations.

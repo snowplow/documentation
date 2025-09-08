@@ -1,5 +1,5 @@
 ---
-title: "Defining Attributes"
+title: "Defining attributes"
 sidebar_position: 10
 sidebar_label: "Attributes"
 ---
@@ -126,46 +126,46 @@ event=Event(
 
 The `criteria` list contains the filters used to calculate an attribute from the specified event.
 
-It allows you to be specific about which subsets of events should trigger attribute updates. For example, instead of counting all page views in a user's session, you may want to calculate only views for an FAQs page, or a "contact us" page.
+It allows you to be specific about which subsets of events should trigger attribute updates. For example, instead of counting all page views in a user's session, you may wish to calculate only views for an FAQs page, or a "contact us" page.
 
 The `criteria` list takes a `Criteria` type, with possible arguments:
 
-| Argument | Description                                                                            | Type                |
-| -------- | -------------------------------------------------------------------------------------- | ------------------- |
-| `all`    | All conditions, `Criterion` definitions must be true on the processed event                | list of `Criterion` |
-| `any`    | At least one of the conditions, `Criterion` definitions, must be true | list of `Criterion` |
+| Argument | Description                                          | Type                |
+| -------- | ---------------------------------------------------- | ------------------- |
+| `all`    | All criterion conditions must be met                 | list of `Criterion` |
+| `any`    | At least one of the criterion conditions must be met | list of `Criterion` |
 
 A `Criterion` specifies a filtering rule on the specified event.
 
-When creating a `Criterion`, you can use its operator-like methods to define the filtering for a property of the event payload. Available methods are:
-- `.eq` Checks equality similar to using the `=` operator.
-- `.neq` Checks non-equality similar to using the `!=` operator.
-- `.gt` Checks if a property is greater than a value.
-- `.gte` Checks if a property is greater than or equal to a value.
-- `.lt` Checks if a property is less than a value.
-- `.lte` Checks if a property is less than or equal to a value.
-- `.like` Checks if a property matches a value using a `LIKE` operator.
-- `.in_list` Checks if a property is in the list of values using an `IN` operator.
-
+When creating a `Criterion`, you can use its operator-like methods to define the filtering for a property of the event payload. The available methods are:
+- `.eq` checks equality similar to using the `=` operator
+- `.neq` checks non-equality similar to using the `!=` operator
+- `.gt` checks if a property is greater than a value
+- `.gte` checks if a property is greater than or equal to a value
+- `.lt` checks if a property is less than a value
+- `.lte` checks if a property is less than or equal to a value
+- `.like` checks if a property matches a value using a `LIKE` operator
+- `.in_list` checks if a property is in the list of values using an `IN` operator
+-
 These methods accept the property as a first argument and then the value to filter against.
 
-| Argument   | Description                                                         | Type                                                                                    |
-| ---------- | ------------------------------------------------------------------- | --------------------------------------------------------------------------------------- |
-| `property` | The property of the event payload you want the criterion to run against. |  `AtomicProperty` or `EventProperty` or `EntityProperty`  |
-| `value`    | The value to compare the property to.                               | Type-checked based on the operator. |
+| Argument   | Description                                                             | Type                                                   |
+| ---------- | ----------------------------------------------------------------------- | ------------------------------------------------------ |
+| `property` | The property of the event payload you want the criterion to run against | `AtomicProperty`, `EventProperty`, or `EntityProperty` |
+| `value`    | The value to compare the property to                                    | Type-checked based on the operator                     |
 
-The `AtomicProperty`, `EventProperty` and `EntityProperty` are classes to help you target a property of an event to be filtered.
-- `AtomicProperty` is used to target atomic properties in the event payload.
-- `EventProperty` is used to target properties in the event data structure in the event payload.
-- `EntityProperty` is used to target properties in the context data structures in the event payload.
+The `AtomicProperty`, `EventProperty` and `EntityProperty` are classes to help you target a property of an event to be filtered. Use:
+- `AtomicProperty` to target atomic properties in the event payload
+- `EventProperty` to target properties in the event data structure in the event payload
+- `EntityProperty` to target properties in the entity data structures in the event payload
 
 Some examples:
 
-```py
-# Targets the app_id atomic property in the event payload.
+```python
+# Targets the app_id atomic property in the event payload
 AtomicProperty(name="app_id")
 
-# Targets the `action` property of the com.example/test_event/jsonschema/1-*-*.
+# Targets the action property of the com.example/test_event/jsonschema/1-*-*
 EventProperty(
     vendor="com.example",
     name="test_event",
@@ -173,7 +173,7 @@ EventProperty(
     path="action"
 )
 
-# Targets the `age` property of the first com.example/user_context/jsonschema/1-*-* context.
+# Targets the age property of the first com.example/user_context/jsonschema/1-*-* entity
 EntityProperty(
     vendor="com.example",
     name="user_context",
@@ -182,7 +182,7 @@ EntityProperty(
 )
 ```
 
-A more complete example, say you want to calculate an attribute for page views of either the FAQs or "contact us" page, the `Criteria` could be:
+For a more complete example, if you want to calculate an attribute for page views of either the FAQs or "contact us" page, the `Criteria` could be:
 
 ```python
 criteria=Criteria(

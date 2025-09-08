@@ -1,6 +1,6 @@
 ---
 title: "Attribute groups"
-sidebar_position: 30
+sidebar_position: 1
 sidebar_label: "Attribute groups"
 ---
 
@@ -29,7 +29,7 @@ Attribute groups are configured differently based on the data source.
 
 By default, Signals will calculate attributes from events in your real-time stream: the stream source. Check out the [quick start tutorial](/tutorials/signals-quickstart/start) for a step-by-step guide.
 
-You'll need to define the [attributes](/docs/signals/configuration/attribute-groups/attributes/index.md) you want to calculate from your event stream.
+You'll need to define the [attributes](/docs/signals/define-attributes/attributes/index.md) you want to calculate from your event stream.
 
 <!-- TODO image with attributes -->
 
@@ -37,7 +37,7 @@ You'll need to define the [attributes](/docs/signals/configuration/attribute-gro
 
 Attribute groups with a batch source use dbt to calculate the defined attributes as a new table. Signals will sync the calculated attributes to the Profiles Store.
 
-First, define the [attributes](/docs/signals/configuration/attribute-groups/attributes/index.md) you want to calculate from your `atomic` events table.
+First, define the [attributes](/docs/signals/define-attributes/attributes/index.md) you want to calculate from your `atomic` events table.
 
 <!-- TODO image with attributes -->
 
@@ -92,7 +92,7 @@ If Signals then processes a new event that calculates the attribute again, or ma
 
 ## Testing the attribute definitions
 
-After defining one or more [attributes](/docs/signals/configuration/attribute-groups/attributes/index.md) for groups with a stream or batch source, you can test out the configuration with the **Run preview** button.
+After defining one or more [attributes](/docs/signals/define-attributes/attributes/index.md) for groups with a stream or batch source, you can test out the configuration with the **Run preview** button.
 
 This will output a table of attributes calculated from your `atomic` events table, using a random subset of events from the last hour.
 
@@ -112,7 +112,7 @@ If the attribute group has a batch source, Signals won't be able to do anything 
 
 ### Versioning
 
-Attribute groups are versioned. This allows you to iterate on the definitions without breaking downstream processes. You'll select specific attribute group versions when you define [services](/docs/signals/configuration/services/index.md).
+Attribute groups are versioned. This allows you to iterate on the definitions without breaking downstream processes. You'll select specific attribute group versions when you define [services](/docs/signals/define-attributes/services/index.md).
 
 All attribute groups start as `v1`. If you make changes to the definition, the version will be automatically incremented.
 

@@ -1,7 +1,7 @@
 ---
-title: "Configuring Signals"
+title: "Defining attributes"
 sidebar_position: 20
-sidebar_label: "Defining attributes"
+sidebar_label: "Define attributes"
 ---
 
 There are three methods for defining attributes and interventions in Signals:
@@ -25,13 +25,13 @@ Click **Test and create connection** to trigger the Signals deployment. You'll b
 
 To use the UI to manage Signals, log in to [Console](https://console.snowplowanalytics.com) and navigate to the **Signals** section.
 
-Use the configuration interface to define [attribute groups](/docs/signals/configuration/attribute-groups/index.md), [services](/docs/signals/configuration/services/index.md), and [interventions](/docs/signals/configuration/interventions/index.md).
+Use the configuration interface to define [attribute groups](/docs/signals/define-attributes/attribute-groups/index.md), [services](/docs/signals/define-attributes/services/index.md), and [interventions](/docs/signals/interventions/index.md).
 
 <!-- TODO image initial landing page -->
 
 ## Signals Python SDK
 
-Use the [Signals Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk) to define attribute groups, services, and interventions via code. Check out the [SDK configuration section](/docs/signals/configuration/using-python-sdk/index.md) for instructions.
+Use the [Signals Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk) to define attribute groups, services, and interventions via code. Check out the [SDK configuration section](/docs/signals/define-attributes/using-python-sdk/index.md) for instructions.
 
 ## Signals API
 

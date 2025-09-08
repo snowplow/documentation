@@ -16,7 +16,7 @@ Every attribute group has a version number.
 
 Signals provides functionality for separating attribute definition from calculation. This allows you to set up your attributes and business logic before putting them into production. The options are different depending on whether the attribute group is for stream or batch attributes.
 
-To configure a table for batch attributes, you may choose to set up an attribute group using that source without defining any attributes initially. This ensures that the table is ready and tested for adding and calculating attributes. Read more about configuring batch attributes and attribute groups in the [batch calculations](/docs/signals/configuration/using-python-sdk/batch-calculations/index.md) section.
+To configure a table for batch attributes, you may choose to set up an attribute group using that source without defining any attributes initially. This ensures that the table is ready and tested for adding and calculating attributes. Read more about configuring batch attributes and attribute groups in the [batch calculations](/docs/signals/define-attributes/using-python-sdk/batch-calculations/index.md) section.
 
 For stream attributes, you can choose to configure and apply attribute groups that don't calculate their attribute values.
 
@@ -36,7 +36,7 @@ Signals includes three types of attribute groups. Choose which one to use depend
 
 ### StreamAttributeGroup
 
-Use a `StreamAttributeGroup` to calculate attributes from the real-time event stream. Read more about this in the [Stream calculations](/docs/signals/configuration/using-python-sdk/stream-calculations/index.md) section.
+Use a `StreamAttributeGroup` to calculate attributes from the real-time event stream. Read more about this in the [Stream calculations](/docs/signals/define-attributes/using-python-sdk/stream-calculations/index.md) section.
 
 ```python
 from snowplow_signals import StreamAttributeGroup, domain_sessionid
@@ -133,7 +133,7 @@ If no `ttl` is set, the attribute key's `ttl` will be used. If the attribute key
 
 ## Extended stream attribute group example
 
-This example shows all the available configuration options for a stream attribute group. To find out how to configure a batch attribute group, see the [batch calculations](/docs/signals/configuration/using-python-sdk/batch-calculations/index.md) section.
+This example shows all the available configuration options for a stream attribute group. To find out how to configure a batch attribute group, see the [batch calculations](/docs/signals/define-attributes/using-python-sdk/batch-calculations/index.md) section.
 
 This attribute group groups attributes for a user attribute key, to be calculated in real-time.
 

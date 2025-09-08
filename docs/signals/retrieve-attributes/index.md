@@ -1,7 +1,7 @@
 ---
 title: "Retrieving calculated values from the Profiles Store"
 sidebar_position: 30
-sidebar_label: "Retrieving attributes"
+sidebar_label: "Retrieve attributes"
 ---
 
 ```mdx-code-block

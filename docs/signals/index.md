@@ -61,12 +61,12 @@ Read more about attributes and interventions on the [concepts](/docs/signals/con
 
 ### 2. Apply the configuration
 
-We recommend using the BDP Console to define your [configurations](/docs/signals/configuration/index.md). You could also use the Signals Python SDK, or even the Signals API.
+We recommend using the BDP Console to define your attributes and interventions. You could also use the Signals Python SDK, or even the Signals API.
 
-Once you've created your attribute group or intervention configurations, apply them to Signals by publishing them. It will start calculating attributes and populating the Profiles Store.
+Once you've created your configurations, apply them to Signals by publishing them. It will start calculating attributes and populating the Profiles Store.
 
 ### 3. Take action in your application
 
-Retrieve calculated attributes in your application using the [Node.js](https://github.com/snowplow-incubator/snowplow-signals-typescript-sdk) or [Python](https://github.com/snowplow-incubator/snowplow-signals-sdk) Signals SDKs. You could also use the Signals API.
+Retrieve calculated attributes in your application using the [Node.js](https://www.npmjs.com/package/@snowplow/signals-node) or [Python](https://github.com/snowplow-incubator/snowplow-signals-sdk) Signals SDKs. You could also use the Signals API.
 
 Use the attributes to update the user experience, or subscribe to [interventions](/docs/signals/concepts/index.md) to take action based on user behavior.

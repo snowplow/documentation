@@ -38,7 +38,7 @@ Attributes can be categorized into four main types, depending on the type of use
 | First touch   | The first event or property that happened              | `first_mkt_source`                   |
 | Last touch    | The most recent event or property that happened        | `last_device_class`                  |
 
-Signals includes a range of different aggregations for calculating attributes, including `mean`, `counter`, or `unique_list`. See the full list in the [attribute configuration](/docs/signals/configuration/attribute-groups/attributes/index.md) page.
+Signals includes a range of different aggregations for calculating attributes, including `mean`, `counter`, or `unique_list`. See the full list in the [attribute configuration](/docs/signals/define-attributes/attributes/index.md) page.
 
 ### Attribute keys
 
@@ -59,7 +59,7 @@ To demonstrate the necessity of attribute keys, consider the attribute `num_view
 
 Each of these is likely to have a different calculated value.
 
-You can [define your own attribute keys](/docs/signals/configuration/attribute-groups/index.md#creating-a-custom-attribute-key), or use the built-in ones. Signals comes with predefined attribute keys for user, device, and session. Their identifiers are from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) in all Snowplow events.
+You can [define your own attribute keys](/docs/signals/define-attributes/attribute-groups/index.md#creating-a-custom-attribute-key), or use the built-in ones. Signals comes with predefined attribute keys for user, device, and session. Their identifiers are from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) in all Snowplow events.
 
 ## Data sources
 
@@ -164,7 +164,7 @@ flowchart TD
 
 Like attributes, interventions target specific attribute key instances.
 
-Interventions can be triggered automatically [based on attribute changes](/docs/signals/configuration/interventions/index.md), or manually [using the Signals API](/docs/signals/interventions/index.md#custom-intervention-via-the-api).
+Interventions can be triggered automatically based on attribute changes, or manually [using the Signals API](/docs/signals/interventions/index.md#custom-intervention-via-the-api).
 Subscribe [within your application](/docs/signals/interventions/index.md#retrieving-interventions-with-the-signals-sdk) for real-time updates to interventions for attribute keys of interest, or [user devices can subscribe](/docs/signals/interventions/index.md#retrieving-interventions-on-the-web-with-the-browser-tracker-plugin) to interventions that apply to their own attribute keys while they use your application.
 
 For example, you could subscribe to interventions for a specific `domain_userid`, the current `app_id`, the current `page`, and the current `product`.

@@ -33,27 +33,39 @@ Install the SDK into your project, and connect to Signals.
 <Tabs groupId="signals" queryString>
 <TabItem value="python" label="Python" default>
 
+```bash
+pip install snowplow-signals
+```
+
 ```python
 from snowplow_signals import Signals
 
 sp_signals = Signals(
-    api_url=SP_API_URL,
-    api_key=SP_API_KEY,
-    api_key_id=SP_API_KEY_ID,
-    org_id=SP_ORG_ID,
+    api_url=SIGNALS_DEPLOYED_URL,
+    api_key=CONSOLE_API_KEY,
+    api_key_id=CONSOLE_API_KEY_ID,
+    org_id=ORG_ID,
 )
 ```
 
 </TabItem>
 <TabItem value="nodejs" label="Node.js">
 
+```bash
+npm i @snowplow/signals-node
+# or
+yarn add @snowplow/signals-node
+# or
+pnpm i @snowplow/signals-node
+```
+
 ```typescript
 import { Signals } from '@snowplow/signals-node';
 
 const signals = new Signals({
-  baseUrl: SIGNALS_API_URL,
-  apiKey: API_KEY,
-  apiKeyId: API_KEY_ID,
+  baseUrl: SIGNALS_DEPLOYED_URL,
+  apiKey: CONSOLE_API_KEY,
+  apiKeyId: CONSOLE_API_KEY_ID,
   organizationId: ORG_ID,
 });
 ```

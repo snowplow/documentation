@@ -12,7 +12,7 @@ Follow these instructions to configure Signals to calculate three different sess
 * The last seen browser name for each session
 * The first seen page referrer for each session
 
-To learn how to define attribute groups using the Python SDK, check out the Quick Start notebook ADD LINK, hosted on Google Colab.
+To learn how to define attribute groups using the Python SDK, check out the [Quick Start notebook](https://colab.research.google.com/github/snowplow-incubator/signals-notebooks/blob/main/quickstart.ipynb), hosted on Google Colab.
 
 ## Configure group information
 

@@ -1,5 +1,5 @@
 ---
-title: "Defining Attributes"
+title: "Defining attributes"
 sidebar_position: 10
 sidebar_label: "Attributes"
 ---
@@ -130,10 +130,10 @@ It allows you to be specific about which subsets of events should trigger attrib
 
 The `criteria` list takes a `Criteria` type, with possible arguments:
 
-| Argument | Description                                                                            | Type                |
-| -------- | -------------------------------------------------------------------------------------- | ------------------- |
-| `all`    | Conditions used to filter the events, where all conditions must be met                 | list of `Criterion` |
-| `any`    | Conditions used to filter the events, where at least one of the conditions must be met | list of `Criterion` |
+| Argument | Description                                          | Type                |
+| -------- | ---------------------------------------------------- | ------------------- |
+| `all`    | All criterion conditions must be met                 | list of `Criterion` |
+| `any`    | At least one of the criterion conditions must be met | list of `Criterion` |
 
 A `Criterion` specifies a filtering rule on the specified event.
 
@@ -149,23 +149,23 @@ When creating a `Criterion`, you can use its operator-like methods to define the
 -
 These methods accept the property as a first argument and then the value to filter against.
 
-| Argument   | Description                                                              | Type                                                    |
-| ---------- | ------------------------------------------------------------------------ | ------------------------------------------------------- |
-| `property` | The property of the event payload you want the criterion to run against. | `AtomicProperty` or `EventProperty` or `EntityProperty` |
-| `value`    | The value to compare the property to.                                    | Type-checked based on the operator.                     |
+| Argument   | Description                                                             | Type                                                   |
+| ---------- | ----------------------------------------------------------------------- | ------------------------------------------------------ |
+| `property` | The property of the event payload you want the criterion to run against | `AtomicProperty`, `EventProperty`, or `EntityProperty` |
+| `value`    | The value to compare the property to                                    | Type-checked based on the operator                     |
 
-The `AtomicProperty`, `EventProperty` and `EntityProperty` are classes to help you target a property of an event to be filtered:
-- `AtomicProperty` is used to target atomic properties in the event payload.
-- `EventProperty` is used to target properties in the event data structure in the event payload.
-- `EntityProperty` is used to target properties in the context data structures in the event payload.
+The `AtomicProperty`, `EventProperty` and `EntityProperty` are classes to help you target a property of an event to be filtered. Use:
+- `AtomicProperty` to target atomic properties in the event payload
+- `EventProperty` to target properties in the event data structure in the event payload
+- `EntityProperty` to target properties in the entity data structures in the event payload
 
 Some examples:
 
 ```python
-# Targets the app_id atomic property in the event payload.
+# Targets the app_id atomic property in the event payload
 AtomicProperty(name="app_id")
 
-# Targets the `action` property of the com.example/test_event/jsonschema/1-*-*.
+# Targets the action property of the com.example/test_event/jsonschema/1-*-*
 EventProperty(
     vendor="com.example",
     name="test_event",
@@ -173,7 +173,7 @@ EventProperty(
     path="action"
 )
 
-# Targets the `age` property of the first com.example/user_context/jsonschema/1-*-* context.
+# Targets the age property of the first com.example/user_context/jsonschema/1-*-* entity
 EntityProperty(
     vendor="com.example",
     name="user_context",
@@ -181,7 +181,6 @@ EntityProperty(
     path="age"
 )
 ```
-
 
 For a more complete example, if you want to calculate an attribute for page views of either the FAQs or "contact us" page, the `Criteria` could be:
 

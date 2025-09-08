@@ -3,9 +3,9 @@ position: 6
 title: Retrieve calculated attributes
 ---
 
-For a real use case, you'll want to consume calculated attributes in your applications. Read more about this [in the Signals documentation](/docs/signals/retrieval/).
+For a real use case, you'll want to consume calculated attributes in your applications. Read more about this [in the Signals documentation](/docs/signals/retrieve-attributes/).
 
-For this tutorial, we've provided a Jupyter notebook ADD LINK so you can quickly explore attribute retrieval, using the Signals Python SDK.
+For this tutorial, we've provided a [Jupyter notebook](https://colab.research.google.com/github/snowplow-incubator/signals-notebooks/blob/main/quickstart.ipynb) so you can quickly explore attribute retrieval using the Signals Python SDK.
 
 ## Finding your current session ID
 

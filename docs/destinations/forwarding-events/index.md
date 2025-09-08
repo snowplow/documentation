@@ -39,15 +39,15 @@ The end-to-end latency from event collection to destination delivery is on the o
 
 The following describes the workflow for configuring a new event forwarder.
 
-1. **Create a connection**: configure credentials and endpoint details for your destination
-2. **Create a forwarder**: select your pipeline, connection, and event types to forward
-    a. **Configure filtering**: define which events to send using JavaScript expressions
-    b. **Set up field mapping**: map Snowplow event data to destination API fields
-5. **Deploy**: launch the forwarder to begin sending events
-6. **Monitor**: track delivery metrics and troubleshoot issues
+1. **Create a connection**: configure credentials and endpoint details for your destination.
+2. **Create a forwarder**: Select your pipeline and connection. Define a filter for which events to send, and mapp Snowplow event data to destination API fields using Javascript expressions.
+5. **Deploy**: launch the forwarder to begin sending events.
+6. **Monitor**: track delivery metrics and troubleshoot issues.
+
+<!-- TODO: link to Managing Forwarders page -->
 
 :::note
-Each destination has specific requirements for API credentials, field mappings, and setup steps. See the [supported destinations](#supported-destinations) section below for destination-specific guides.
+Each destination has specific requirements for API credentials, field mappings, and setup steps. See the [available integrations](/docs/destinations/forwarding-events/integrations/index.md) for destination-specific guides.
 
 For detailed information on JavaScript expressions, field transformations, and mapping syntax, see the [filter and mapping reference](/docs/destinations/forwarding-events/reference/index.md).
 :::

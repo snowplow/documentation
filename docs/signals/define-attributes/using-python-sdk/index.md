@@ -56,7 +56,7 @@ The created `Signals` object has the following methods:
 | `get_group_attributes`   | Retrieves attributes for a specific attribute group from the Profiles Store |
 | `get_attribute_group`    | Retrieves an attribute group from the Profiles Store                        |
 | `push_intervention`      | Push an intervention to subscribers for a set of attribute keys             |
-| `pull_intervention`      | Open a streaming subscription of interventions for a set of attribute keys  |
+| `pull_interventions`     | Open a streaming subscription of interventions for a set of attribute keys  |
 
 Check out the [attribute groups](/docs/signals/define-attributes/using-python-sdk/attribute-groups/index.md), [services](/docs/signals/define-attributes/using-python-sdk/services/index.md), and [interventions](/docs/signals/define-attributes/using-python-sdk/index.md) pages to learn how to configure them programmatically.
 

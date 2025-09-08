@@ -122,7 +122,7 @@ The table below lists all available arguments for `getServiceAttributes()`
 
 You can also retrieve attributes directly from a specific [attribute group](/docs/signals/concepts/index.md#attribute-groups). This is useful when:
 * You want to retrieve only a small subset of attributes
-* You haven't defined a service
+* You haven't defined a service yet
 
 <Tabs groupId="signals" queryString>
 <TabItem value="python" label="Python" default>

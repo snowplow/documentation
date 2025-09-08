@@ -25,7 +25,6 @@ Attribute groups are where you define the data you want to calculate. Each attri
 * The **attribute key** that provides the analytical context
 * Other metadata such as description or owner
 
-
 ### Types of attribute
 
 Attributes describe what kind of calculation to perform, and what event data to evaluate. They can only exist within attribute groups.
@@ -62,31 +61,68 @@ Each of these is likely to have a different calculated value.
 
 You can [define your own attribute keys](/docs/signals/configuration/attribute-groups/index.md#creating-a-custom-attribute-key), or use the built-in ones. Signals comes with predefined attribute keys for user, device, and session. Their identifiers are from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) in all Snowplow events.
 
-### How are attributes updated?
+## Data sources
 
-Calculated attribute values are stored in the Profiles Store.
+Whether to compute attributes in real-time from the event stream or in batch from the warehouse is an important decision. Broadly, you might use:
+* **Stream** for real-time use cases, such as tracking the latest product a user viewed, or the number of page views in a session
+* **Batch** sources (warehouse tables) for historical analysis, such as calculating a user's purchase history or average session length
 
-Signals will calculate or update attribute values based on the configuration you provide. There are three ways to update attribute values:
-* Based on events in real time (stream source only)
-* Synced from data in warehouse (batch or external batch source only)
-* Interventions can be configured to update attributes
+This table summarizes the options for different types of processing:
 
-Real-time attribute calculation uses the Snowplow event stream, and therefore ingests only Snowplow events. For historical warehouse attributes, you can import values from any table — whether created by Signals or not, even whether derived from Snowplow data or not.
+| Feature                            | Supported in real-time stream                                                 | Supported in batch            |
+| ---------------------------------- | ----------------------------------------------------------------------------- | ----------------------------- |
+| Real-time calculation              | ✅                                                                             | ❌                             |
+| Computing user lifetime attributes | ✅ from the point at which the attribute was defined                           | ✅                             |
+| Time windowing operations          | ✅ but only the last 100 values might be included, depending on the definition | ✅                             |
+| Reprocessing data                  | ❌ attributes are only calculated from the moment they are defined             | ✅                             |
+| Non-Snowplow data                  | ❌                                                                             | ✅ using external batch source |  |
 
-To learn more about stream and batch sources, see the [stream vs batch](/docs/signals/stream-vs-batch/index.md) page.
+### Stream source
 
-### Example attribute group configuration
+When Signals is deployed in your Snowplow BDP pipeline, the event stream is read by the streaming engine. All tracked events are inspected. If you've configured Signals to calculate an attribute from a certain type of event, when that event type is received, the engine will compute the attribute data and forward it to the Profiles Store, in real time. If that event type isn't registered as containing attribute data, nothing happens.
 
-Here's an example configuration for an attribute group based on a user attribute key, with a stream (default) source:
+Real-time stream flow:
 
-<!-- TODO image attribute group -->
+```mermaid
+flowchart TD
+    subgraph Stream[Real-time event stream]
+        A[Behavioral data event<br/>is received by Collector] --> B[Event is enriched<br/>by Enrich]
+        B --> D[Event is read from stream by<br/>Signals stream engine]
+    end
 
-When this attribute group configuration is applied to Signals, the attributes will be calculated and stored in the Profiles Store. On retrieval, this attribute group might look something like this as a table:
+    B --> C[Event is loaded into<br/>the warehouse by Loader]
 
-| `user_id`            | `number_of_pageviews` | `last_product_viewed` |
-| -------------------- | --------------------- | --------------------- |
-| `abc123@example.com` | 5                     | `"Red Shoes"`         |
-| `def456@example.com` | 10                    | `"Blue Hat"`          |
+    D --> E[Stream engine checks<br/>attribute definitions]
+    E --> F{Attributes defined<br/>for this event?}
+
+    F -->|No| G[Nothing happens]
+
+    F -->|Yes| I[Attribute calculated]
+    I -->     J[Attribute pushed to<br/>the Profiles Store]
+```
+
+### Batch source
+
+The batch data source uses dbt to generate and calculate new tables of attributes from your
+ Snowplow atomic events table. Signals then syncs them to the Profiles Store periodically using the sync engine.
+
+```mermaid
+flowchart TD
+    subgraph Batch[Warehouse]
+        A[Behavioral data events<br/>arrive in the warehouse] --> B[Events are modeled<br/>into tables]
+        B --> D[Signals checks for<br/>new rows in connected tables]
+    end
+
+    D --> E{Are there<br/>new rows?}
+
+    E -->|No| F[Nothing happens]
+
+    E -->|Yes| H[Attributes synced to<br/>the Profiles Store]
+```
+
+### External batch source
+
+Use an external batch source to sync tables of existing, pre-calculated values to the Profiles Store. The external batch tables can be any data. For example, you may want to include transactional data in your Signals use case.
 
 ## Services
 

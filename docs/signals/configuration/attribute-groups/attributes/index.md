@@ -66,9 +66,11 @@ Find the time period option within **More options**. Click **Done** to save it.
 
 <!-- TODO image example -->
 
-:::info Time period for stream attributes
-Note the [100 event consideration limit](/docs/signals/stream-vs-batch/index.md) for stream attributes with time periods.
-:::
+### Stream attributes limit
+
+Stream attributes defined with a `period` setting, e.g., last 15 minutes, are limited to the 100 most recent relevant events. Relevant events are those that cause the attribute value to be updated. As a result, if you need to analyze user behavior or aggregate data over longer periods, such as counting page views over several hours or tracking all purchases in the past year, stream attributes may not capture the full picture.
+
+This isn't the case for stream attributes that don't have a `period` window defined. In this case, Signals considers all events—starting from the time the attribute was defined—and values aren't forgotten.
 
 ## Filtering with criteria
 

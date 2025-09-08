@@ -38,49 +38,7 @@ The core Signals components are:
 
 ![](./images/signals-bdp-overview.png)
 
-## How Signals calculates attributes
-
-When Signals is deployed in your Snowplow BDP pipeline, the event stream is read by the streaming engine. All tracked events are inspected. If you've configured Signals to calculate an attribute from a certain type of event, when that event type is received, the engine will compute the attribute data and forward it to the Profiles Store, in real time. If that event type isn't registered as containing attribute data, nothing happens.
-
-Real-time stream flow:
-
-```mermaid
-flowchart TD
-    subgraph Stream[Real-time event stream]
-        A[Behavioral data event<br/>is received by Collector] --> B[Event is enriched<br/>by Enrich]
-        B --> D[Event is read from stream by<br/>Signals stream engine]
-    end
-
-    B --> C[Event is loaded into<br/>the warehouse by Loader]
-
-    D --> E[Stream engine checks<br/>attribute definitions]
-    E --> F{Attributes defined<br/>for this event?}
-
-    F -->|No| G[Nothing happens]
-
-    F -->|Yes| I[Attribute calculated]
-    I -->     J[Attribute pushed to<br/>the Profiles Store]
-```
-
-Conversely, batch attributes are calculated via dbt models, and pushed to the Profiles Store periodically using the sync engine:
-
-```mermaid
-flowchart TD
-    subgraph Batch[Warehouse]
-        A[Behavioral data events<br/>arrive in the warehouse] --> B[Events are modeled<br/>into tables]
-        B --> D[Signals checks for<br/>new rows in connected tables]
-    end
-
-    D --> E{Are there<br/>new rows?}
-
-    E -->|No| F[Nothing happens]
-
-    E -->|Yes| H[Attributes synced to<br/>the Profiles Store]
-```
-
 ## Using Signals
-
-Speak to our team about buying Signals. Once you've signed up, it'll be available in BDP Console under the **Signals** tab. Follow the steps to deploy the infrastructure.
 
 Steps for using Signals:
 1. Decide on the business logic

@@ -8,7 +8,7 @@ Event forwarders let you filter, transform, and send Snowplow events to third-pa
 
 ![](./images/event-forwarding-diagram.drawio.svg)
 
-Event forwarding uses [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md) under the hood, deployed within your existing Snowplow cloud account, to transform and deliver events reliably. For detailed setup guides and field mappings, check out the list of [available integrations](/docs/destinations/forwarding-events/integrations/index.md). For complex requirements or unsupported destinations, [advanced alternatives](#alternative-approaches) are also available.
+Event forwarding uses [Snowbridge](/docs/api-reference/snowbridge/index.md) under the hood, deployed within your existing Snowplow cloud account, to transform and deliver events reliably. For detailed setup guides and field mappings, check out the list of [available integrations](/docs/destinations/forwarding-events/integrations/index.md). For complex requirements or unsupported destinations, [advanced alternatives](#alternative-approaches) are also available.
 
 ## Use cases
 
@@ -56,6 +56,6 @@ For detailed information on JavaScript expressions, field transformations, and m
 
 Event forwarders are the recommended starting point for most real-time delivery use cases. For more complex requirements or unsupported destinations, consider these alternatives:
 
-- **[Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md)**: flexible event routing with custom transformations and destinations (Kafka, Kinesis, HTTP APIs). Use when you need destinations not yet supported by Event Forwarding, complex custom transformations, non-HTTP destinations, or advanced batching and retry configurations.
+- **[Snowbridge](/docs/api-reference/snowbridge/index.md)**: flexible event routing with custom transformations and destinations (Kafka, Kinesis, HTTP APIs). Use when you need destinations not yet supported by Event Forwarding, complex custom transformations, non-HTTP destinations, or advanced batching and retry configurations.
 - **[Google Tag Manager Server Side](/docs/destinations/forwarding-events/google-tag-manager-server-side/index.md)**: use GTM SS to relay enriched events to destinations using rich libraries of tags. Best if your organization is heavily invested in GTM or if you need destinations not yet supported by event forwarders, but supported by GTM SS, such as Google Analytics.
 - **[Custom Integrations](/docs/destinations/forwarding-events/custom-integrations/index.md)**: build your own solutions using AWS Lambda, GCP Cloud Functions, or other stream processing systems for fully bespoke requirements.

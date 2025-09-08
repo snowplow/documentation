@@ -8,7 +8,7 @@ This page is an overview of how to monitoring event forwarder performance and di
 
 ## Failure types and retry logic
 
-Forwarders uses the same retry logic and failure handling as the underlying [Snowbridge failure model](/docs/destinations/forwarding-events/snowbridge/concepts/failure-model/index.md). Snowplow handles event forwarding failures differently depending on the type:
+Forwarders uses the same retry logic and failure handling as the underlying [Snowbridge failure model](/docs/api-reference/snowbridge/concepts/failure-model/index.md). Snowplow handles event forwarding failures differently depending on the type:
 
 - **Invalid data failures**: Snowplow treats events that fail transformation or violate destination API requirements as unrecoverable. Event forwarding creates [event forwarding error failed events](https://iglucentral.com/?q=event_forwarding_error) and logs them in your cloud storage bucket without retry.
 - **Transformation failures**: Snowplow treats JavaScript transformation errors as invalid data and logs them to your cloud storage bucket without retry.

@@ -68,7 +68,7 @@ The created `Signals` object has the following methods:
 | `test`                   | Tests a view against the atomic events table                               |
 | `get_attribute_group`    | Retrieves an attribute group from the Profiles Store                       |
 | `get_service_attributes` | Retrieves attributes for a service from the Profiles Store                 |
-| `get_attributes`         | Retrieves attributes for a specific attribute group from the Profiles Store|
+| `get_group_attributes`   | Retrieves attributes for a specific attribute group from the Profiles Store|
 | `push_intervention`      | Push an intervention to subscribers for a set of attribute keys            |
 | `pull_interventions`     | Open a streaming subscription of interventions for a set of attribute keys |
 
@@ -108,7 +108,7 @@ The created `Signals` object has the following methods:
 | Method                 | Description                                                                 |
 | ---------------------- | --------------------------------------------------------------------------- |
 | `getServiceAttributes` | Retrieves attributes for a specific service from the Profiles Store         |
-| `getAttributes`        | Retrieves attributes for a specific attribute group from the Profiles Store |
+| `getGroupAttributes`   | Retrieves attributes for a specific attribute group from the Profiles Store |
 
 ## Signals API
 

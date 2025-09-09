@@ -11,7 +11,6 @@ There are two steps to enable syncing:
 
 You'll need to sync each attributes table individually.
 
-The `sync` command uses the [sync engine](/docs/signals/configuration/batch-calculations#sync-engine) under the hood.
 
 ## Update configuration file
 

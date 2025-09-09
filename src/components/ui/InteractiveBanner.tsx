@@ -3,7 +3,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'motion/react'
 import { Loader2 } from 'lucide-react'
-import CanvasParticles from './CanvasParticles'
 import { Button } from './button.tsx'
 
 function Frame941() {
@@ -160,17 +159,12 @@ export default function InteractiveBanner() {
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleClick}
     >
-      {/* Animated background */}
-      <AnimatedBackground />
+      {/* Subtle Tailwind-only gradient background */}
+      <div
+        className="absolute inset-0 rounded-lg bg-[linear-gradient(135deg,hsl(var(--primary)/0.18)_0%,hsl(var(--primary)/0.06)_35%,hsl(var(--background)/1)_100%)] bg-[length:300%_300%] animate-subtle-gradient"
+      />
       
-      {/* Canvas-based particles to minimize DOM mutations */}
-      {shouldRenderParticles && (
-        <CanvasParticles 
-          isHovered={isHovered}
-          onClick={clickEffect} 
-          containerRef={containerRef}
-        />
-      )}
+      {/* Particles removed for near-zero CPU usage */}
       
       {/* Border */}
       <div

@@ -124,7 +124,7 @@ dark: require('./images/stray_sessions_dark.drawio.png').default
 ### Page Views
 For page views, because we cannot guarantee the sessions with the `page_view` event and all subsequent `page_ping` events are processed within the same run, we choose to discard all stray page pings. Without doing this it could be possible that you would get different results from different run configurations.
 
-<div style ={{overflow:'hidden'}}>
+<div style={{overflow:'hidden'}}>
 <div style={{float: 'left', width: '45%'}}>
 <p align="center"><strong>Without enforcing within-session view</strong></p>
 <ThemedImage

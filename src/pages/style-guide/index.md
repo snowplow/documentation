@@ -670,4 +670,4 @@ Here are two pieces of older content that only partially follow the style guide.
 
     | ✅                                                          |
     | ---------------------------------------------------------- |
-    | \`\`\`json<br></br>{"accessToken":"string"}<br></br>\`\`\` |
+    | \`\`\`json<br></br>\{"accessToken":"string"}<br></br>\`\`\` |

@@ -47,7 +47,7 @@ You can also use any valid sql supported by your warehouse that can be used in a
 
 ```yml title="dbt_project.yml"
 snowplow__view_passthroughs: [
-  {'sql': 'COALESCE(page_url, refr_url)', 'alias': 'final_url'}
+  \{'sql': 'COALESCE(page_url, refr_url)', 'alias': 'final_url'}
 ]
 ```
 
@@ -70,7 +70,7 @@ It is unlikely, although not impossible, that when using the SQL approach you ma
 
 ```yml
 snowplow__entities_or_sdes: [
-      {'schema': 'custom_table_name', 'prefix': 'my_entity_1', 'alias': 'entity_1', 'single_entity': true},
+      \{'schema': 'custom_table_name', 'prefix': 'my_entity_1', 'alias': 'entity_1', 'single_entity': true},
 ]
 ```
 
@@ -83,7 +83,7 @@ snowplow__view_passthroughs: [
   'my_entity_1_field_x',
   'my_entity_1_field_y',
   'my_entity_1_field_z',
-  {'sql': 'COALESCE(my_entity_1_field_x, my_entity_1_field_y)', 'alias': 'entity_field_combined'}
+  \{'sql': 'COALESCE(my_entity_1_field_x, my_entity_1_field_y)', 'alias': 'entity_field_combined'}
 ]
 ```
 
@@ -106,7 +106,7 @@ snowplow__view_passthroughs: [
   # Extract specific fields from a custom context field
   {'sql': 'contexts_my_entity_1_0_0[SAFE_OFFSET(0)].field_name', 'alias': 'entity_field'},
   # Custom sql example (coalescing different major versions of the same field)
-  {'sql': 'COALESCE(contexts_entity_1[SAFE_OFFSET(0)].field, contexts_entity_2[SAFE_OFFSET(0)].field)', 'alias': 'entity_field_combined'}
+  \{'sql': 'COALESCE(contexts_entity_1[SAFE_OFFSET(0)].field, contexts_entity_2[SAFE_OFFSET(0)].field)', 'alias': 'entity_field_combined'}
 ]
 ```
 
@@ -129,7 +129,7 @@ snowplow__view_passthroughs: [
   # Extract specific fields from a custom context field
   {'sql': 'contexts_my_entity_1[0]:fieldName::varchar', 'alias': 'entity_field'},
   # Custom sql example (coalescing different major versions of the same field)
-  {'sql': 'COALESCE(contexts_my_entity_1[0]:field::varchar, contexts_my_entity_2[0]:field::varchar)', 'alias': 'entity_field_combined'}
+  \{'sql': 'COALESCE(contexts_my_entity_1[0]:field::varchar, contexts_my_entity_2[0]:field::varchar)', 'alias': 'entity_field_combined'}
 ]
 ```
 
@@ -152,7 +152,7 @@ snowplow__view_passthroughs: [
   # Extract specific fields from a custom context field
   {'sql': 'contexts_my_entity_1[0].field_name', 'alias': 'entity_field'},
   # Custom sql example (coalescing different major versions of the same field)
-  {'sql': 'COALESCE(contexts_my_entity_1[0].field, contexts_my_entity_2[0].field)', 'alias': 'entity_field_combined'}
+  \{'sql': 'COALESCE(contexts_my_entity_1[0].field, contexts_my_entity_2[0].field)', 'alias': 'entity_field_combined'}
 ]
 ```
 

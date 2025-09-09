@@ -1,7 +1,7 @@
-```mdx-code-block
 import Link from '@docusaurus/Link';
-```
 
+<table>
+<tbody>
 <tr>
     <td><code>batching.maxBytes</code></td>
     <td>Optional. Default value <code>10000000</code>. Events are emitted to BigQuery when the batch reaches this size in bytes</td>
@@ -56,7 +56,7 @@ import Link from '@docusaurus/Link';
 <tr>
     <td><code>skipSchemas</code></td>
     <td>
-      Optional, e.g. <code>["iglu:com.example/skipped1/jsonschema/1-0-0"]</code> or with wildcards <code>["iglu:com.example/skipped2/jsonschema/1-*-*"]</code>.
+      Optional, e.g. <code>\["iglu:com.example/skipped1/jsonschema/1-0-0"]</code> or with wildcards <code>\["iglu:com.example/skipped2/jsonschema/1-*-*"]</code>.
       A list of schemas that won't be loaded to BigQuery.
       This feature could be helpful when recovering from edge-case schemas which for some reason cannot be loaded to the table.
     </td>
@@ -72,7 +72,7 @@ import Link from '@docusaurus/Link';
 <tr>
     <td><code>legacyColumns</code></td>
     <td>
-      Optional, e.g. <code>["iglu:com.example/legacy/jsonschema/1-0-0"]</code> or with wildcards <code>["iglu:com.example/legacy/jsonschema/1-*-*"]</code>.
+      Optional, e.g. <code>\["iglu:com.example/legacy/jsonschema/1-0-0"]</code> or with wildcards <code>\["iglu:com.example/legacy/jsonschema/1-*-*"]</code>.
       Schemas for which to use the legacy column style used by the v1 BigQuery loader, even when <code>legacyColumnMode</code> is disabled.
     </td>
 </tr>
@@ -137,3 +137,5 @@ import Link from '@docusaurus/Link';
     <td><code>http.client.maxConnectionsPerServer</code></td>
     <td> Optional. Default value 4. Configures the internal HTTP client used for iglu resolver, alerts and telemetry. The maximum number of open HTTP requests to any single server at any one time.</td>
 </tr>
+</tbody>
+</table>

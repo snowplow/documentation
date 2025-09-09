@@ -15,6 +15,7 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@algolia/client-search": "^5.0.0",
     "@braintree/sanitize-url": "^6.0.1",
     "@docusaurus/core": "^3.0.0",
     "@docusaurus/plugin-client-redirects": "^3.0.0",
@@ -46,6 +47,7 @@
     "@snowplow/browser-plugin-link-click-tracking": "^4.0.4",
     "@snowplow/browser-plugin-media": "^4.0.4",
     "@snowplow/browser-tracker": "^4.0.4",
+    "algoliasearch": "^5.0.0",
     "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
     "cookie-though": "^1.5.0",
@@ -69,8 +71,10 @@
     "react-player": "^2.10.1",
     "react-product-fruits": "^2.2.61",
     "rehype-katex": "5",
+    "rehype-raw": "^7.0.0",
     "remark-gfm": "^3.0.1",
     "remark-math": "3",
+    "search-insights": "^2.0.0",
     "semver": "^7.3.8",
     "tailwind-merge": "^3.0.2",
     "ua-parser-js": "^0.7.33",
@@ -86,7 +90,7 @@
     "@tailwindcss/typography": "^0.5.16",
     "@types/mdx-js__react": "^2.0.0",
     "@types/webpack-env": "^1.18.5",
-    "autoprefixer": "10.4.14",
+    "autoprefixer": "^10.4.21",
     "css-loader": "6.8.1",
     "postcss": "8.4.31",
     "postcss-loader": "7.3.3",
@@ -99,13 +103,19 @@
     "production": [
       ">0.5%",
       "not dead",
-      "not op_mini all"
+      "not op_mini all",
+      "last 2 versions",
+      "Firefox ESR"
     ],
     "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+      "last 2 chrome versions",
+      "last 2 firefox versions",
+      "last 2 safari versions"
     ]
+  },
+  "resolutions": {
+    "algoliasearch": "^5.0.0",
+    "@algolia/client-search": "^5.0.0"
   },
   "engines": {
     "node": ">=18.0"

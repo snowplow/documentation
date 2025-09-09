@@ -5,6 +5,7 @@ const sidebar = require('./sidebars')
 const abbreviations = require('./src/remark/abbreviations')
 const math = require('remark-math')
 const katex = require('rehype-katex')
+const raw = require('rehype-raw')
 const path = require('path')
 
 /** @type {import('@docusaurus/types').Config} */
@@ -48,7 +49,21 @@ module.exports = {
           showLastUpdateTime: true,
           editUrl: 'https://github.com/snowplow/documentation/tree/main/',
           remarkPlugins: [abbreviations, math],
-          rehypePlugins: [katex],
+          rehypePlugins: [
+            [
+              raw,
+              {
+                passThrough: [
+                  'mdxjsEsm',
+                  'mdxJsxFlowElement',
+                  'mdxJsxTextElement',
+                  'mdxFlowExpression',
+                  'mdxTextExpression',
+                ],
+              },
+            ],
+            katex,
+          ],
           async sidebarItemsGenerator({
             defaultSidebarItemsGenerator,
             ...args

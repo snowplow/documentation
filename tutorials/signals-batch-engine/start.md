@@ -34,6 +34,8 @@ This tutorial assumes that you have:
   * Snowplow API key
   * Snowplow API key ID
   * Snowplow organization ID
-* Batch Attribute Group(s) already created for Signals in `unnaplied` status (due to missing batch source configurations that can't be done before the attributes table is available)
+* Batch attribute groups already created for Signals, but not yet published
+
+The batch source configuration can't be done before the attributes table has been created.
 
 Check out the [Signals configuration](/docs/signals/) documentation to find out where to find these credentials, and how to apply attribute configurations.

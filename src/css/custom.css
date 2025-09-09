@@ -83,6 +83,16 @@
   font-style: italic;
   font-display: swap;
 }
+
+@keyframes subtle-gradient-shift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.animate-subtle-gradient {
+  animation: subtle-gradient-shift 12s linear infinite;
+}
 /* You can override the default Infima variables here. */
 
 :root {

@@ -98,7 +98,7 @@ The calculation for engaged time is more complicated, it is derived based on pag
 To adjust for these gaps we calculate engaged time as the time to trigger each ping (your heartbeat) times the number of pings (ignoring the first one), and add to that the time delay to the first ping (your minimum visit length). The formula is:
 
 $$
-engaged\_time=t_{heartbeat}\times (n_{distinct\_pings} -1) + t_{min\_visit\_length}
+engaged\_time=t_\{heartbeat}\times (n_\{distinct\_pings} -1) + t_\{min\_visit\_length}
 $$
 
 and the below shows an example visually for a single page view.

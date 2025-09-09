@@ -9,7 +9,7 @@ Snowplow Signals is a real-time personalization engine for customer intelligence
 
 The Signals batch engine is a CLI tool to create the attributes in your warehouse to compute over larger historical data that otherwise would not be possible / efficient to do so in real time. It isn't required to use Signals: it's only necessary if you want to:
 * Calculate attributes from Snowplow events in your warehouse
-* Sync those attributes to the Profiles Store so they can be served in real time alongside Stream Attributes
+* Sync those attributes to the Profiles Store so they can be served in real time alongside stream attributes
 
 The batch engine helps by:
 * Generating separate dbt projects for each batch attribute group definition

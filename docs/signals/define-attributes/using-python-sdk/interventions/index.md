@@ -7,11 +7,11 @@ sidebar_label: "Interventions"
 Interventions are opportunities to take actions to improve user outcomes.
 Your applications or end-user devices can subscribe to interventions intended for their current attribute keys, and respond to them once they trigger.
 
-You can publish interventions from your own applications at any time, or the Signals streaming engine itself can publish them when it updates attributes and the new attributes match certain rules.
+You can publish interventions from your own applications at any time, or the Signals streaming engine itself can publish them when it updates attributes and the new attributes match certain rules; this avoids consuming the event stream yourself to trigger interventions in simple scenarios.
 
 To configure a rule-based intervention, you will need to define an intervention, and the set of rules to determine if it should trigger or not.
 
-The rule syntax is similar to that used for defining Attribute event filter criteria.
+The rule syntax is similar to that used for defining attribute event filter criteria.
 
 All configuration is defined using the Signals Python SDK.
 
@@ -25,7 +25,6 @@ from snowplow_signals import RuleIntervention, InterventionCriterion
 hello_intervention = RuleIntervention(
     name="say_hello",
     owner="me@example.com",
-    method="script",
     criteria=InterventionCriterion(
         attribute="example_attribute_group:test_attribute",
         operator="is not null",
@@ -46,18 +45,15 @@ The table below lists all available arguments for a `RuleIntervention`:
 | `description` | A human-readable description of the intervention | `string` | ❌ |
 | `tags` | Metadata for the intervention, as a dictionary | `object` | ❌ |
 | `version` | A numeric version for this definition | `integer` | ❌ |
-| `method` | The type of action the intervention triggers | One of:  `clear_attribute`, `set_attribute`, `script`, `computer_use_agent`, `remote_agent` | ✅ |
-| `target_agents` | List of agents intended to handle the action of this intervention | `string[]` | ❌ |
-| `script_uri` | URI of the resource to execute to perform the intended action of this intervention | `string` | ❌ |
-| `context` | Custom data to provide as context to the agent that will perform the action of this intervention | `object` | ❌ |
+| `target_attribute_keys` | List of attribute key names to publish this intervention to. Any attribute keys in this list that have a value in the event that triggered the update will be targeted with the intervention. If not defined, defaults to the attribute keys associated with any attribute groups you reference in `criteria`. | `string[]` | ❌ |
 | `criteria` | Tree of `Criterion` expressions to evaluate against attribute key attributes | One of: `InterventionCriterion`, `InterventionCriteriaAll`, `InterventionCriteriaAny`, `InterventionCriteriaNone` | ✅ |
 
 ### Evaluating attributes
 
 The `criteria` tree defines the conditions that an attribute key's attributes should meet to be eligible for the intervention to trigger.
 
-When a referenced attribute is updated, the updated and previous states are evaluated against the criteria; if the previous state did not meet the conditions but the newly updated state does, the trigger activates and the intervention gets published to the attribute key those attributes belong to.
-Criterion always refer to the latest current version of a attribute group's attributes.
+When a referenced attribute is updated, the updated and previous states are evaluated against the criteria; if the previous state did not meet the conditions but the newly updated state does, the trigger activates and the intervention gets published to the attribute key the keys in the `target_attributes_key` setting that have a value in the triggering event.
+Criterion always refer to the latest version of an attribute group that contains the attribute.
 
 The simplest `criteria` tree takes an `InterventionCriterion` instance, with possible arguments:
 

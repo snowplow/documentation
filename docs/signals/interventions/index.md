@@ -113,7 +113,7 @@ Interventions can be published to current subscribers of any combination of attr
 
 ### Automatic stream-based interventions via Signals
 
-You can [define interventions](/docs/signals/interventions/index.md) with a set of rules to trigger them via the [Signals Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk).
+You can define interventions with a set of rules to trigger them via the [Signals Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk).
 
 As the Signals streaming engine processes Snowplow events, it will calculate any attributes you have configured.
 As the attribute values get updated, the streaming engine will evaluate the associated attribute key's attributes against the rules you have defined.
@@ -126,9 +126,8 @@ Any users currently subscribed to interventions on their attribute keys will the
 You can also publish custom interventions to any attribute keys you like at any time using the Signals SDK and API.
 If the intervention is valid, it will immediately be published to any subscribers for the targeted attribute key IDs, which can then react and perform actions based on it.
 
-<!-- TODO: rename EntityIdentifiers -->
 ```python
-from snowplow_signals import EntityIdentifiers, InterventionInstance, Signals
+from snowplow_signals import AttributeKeyIdentifiers, InterventionInstance, Signals
 
 # regular signals SDK authentication
 sp_signals = Signals(
@@ -139,7 +138,7 @@ sp_signals = Signals(
 )
 
 # attribute keys to publish the intervention to
-targets = EntityIdentifiers({
+targets = AttributeKeyIdentifiers({
   "domain_sessionid": ["8c9104e3-c300-4b20-82f2-93b7fa0b8feb"],
 })
 
@@ -159,7 +158,7 @@ You and your applications can request interventions for specific attribute keys 
 
 ### Intervention payload
 
-Once delivered, interventions contain the following information:
+When delivered, interventions contain the following information:
 
 | Argument                    | Description                                                                                    | Type      | Required? |
 | --------------------------- | ---------------------------------------------------------------------------------------------- | --------- | --------- |
@@ -168,8 +167,8 @@ Once delivered, interventions contain the following information:
 | `version`                   | A numeric version for this intervention's definition (if applicable)                           | `integer` | ✅         |
 | `attributes`                | An object containing the target attribute key's attributes when the intervention was triggered | `object`  | ✅         |
 | `target_attribute_key`      | An object containing the attribute key information used to target this intervention            | `object`  | ✅         |
-| `target_attribute_key.name` | They name of the attribute key used to target this intervention                                | `object`  | ✅         |
-| `target_attribute_key.id`   | The attribute key value used to target this intervention                                       | `object`  | ✅         |
+| `target_attribute_key.name` | They name of the attribute key used to target this intervention                                | `string`  | ✅         |
+| `target_attribute_key.id`   | The attribute key value used to target this intervention                                       | `string`  | ✅         |
 
 ### Limitations of intervention subscriptions
 
@@ -186,9 +185,8 @@ All subscribers to interventions are subject to the following limitations:
 
 The Signals SDK allows subscribing to interventions for arbitrary attribute keys.
 
-<!-- TODO: rename EntityIdentifiers -->
 ```python
-from snowplow_signals import EntityIdentifiers, InterventionInstance, Signals
+from snowplow_signals import AttributeKeyIdentifiers, InterventionInstance, Signals
 
 # regular signals SDK authentication
 sp_signals = Signals(
@@ -199,7 +197,7 @@ sp_signals = Signals(
 )
 
 # attribute keys to subscribe to
-targets = EntityIdentifiers({
+targets = AttributeKeyIdentifiers({
   "domain_sessionid": ["8c9104e3-c300-4b20-82f2-93b7fa0b8feb"],
 })
 
@@ -268,16 +266,15 @@ Interventions will be requested targeting the following attribute keys:
 
 (The `mistake` attribute key will not be subscribed to because the plugin can not find an ID value to use since that isn't a valid event field)
 
-<!-- TODO: rename entityTargets & entityIds -->
 ```typescript
 subscribeToInterventions({
   endpoint: "000000000000.signals.snowplowanalytics.com", // Signals API endpoint
-  entityTargets: {
+  attributeKeyTargets: {
     pageview_id: "context/com.snowplowanalytics.snowplow/web_page/id",
     app: "app_id",
     mistake: "not_a_real_field",
   },
-  entityIds: {
+  attributeKeyIds: {
     myCustomAttributeKey: "unique value",
   },
 });
@@ -290,7 +287,7 @@ If an intervention is published to any of these attribute keys while the subscri
 #### Intervention tracking
 
 When the plugin receives interventions and dispatches them to handler functions, it will generate Snowplow tracking events.
-The following self-describing events are generated, and include the intervention payload as a custom attribute key:
+The following self-describing events are generated, and include the intervention payload as a custom entity:
 
 <!-- TODO: link to iglu central once published -->
 - `iglu:com.snowplowanalytics.signals/intervention_receive/jsonschema/1-0-0`: Fires when an intervention is received by the plugin

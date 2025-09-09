@@ -3,7 +3,6 @@
 
 This file contains guidelines for writing Snowplow tutorials and accelerators.
 
-
 ## Writing style
 
 Best practise for writing the text:
@@ -114,12 +113,14 @@ Tutorials have:
 * A metadata file, `meta.json`, defining what will show on the card on the Tutorials landing page
   * For titles and description:
     * Be concise
-    * Use infinitive form - it should sound right if you imagine putting "how to" in front of each
+    * Use imperative form - it should sound right if you imagine putting "how to" in front of each
   * There's a short list of labels to choose from, pick one
     * `Data governance`, `Data modeling`, `Signals`, `Solution accelerator`, `Tracking implementation`
-  * Solution accelerators are a specific thing, they:
-    * Use other tools alongside Snowplow
-    * Describe projects that wouldn't be someone's first use case
+  * There's a short list of use cases to choose from, pick one
+    * `Composable analytics`, `Composable CDP`, `Real-time personalization`, `Customer-aware AI`
+  * Solution accelerators are a specific thing, they are:
+    * Focused on business use cases
+    * End-to-end solutions
 * Images in a subfolder called `images`
 * Separate pages as separate `.md` files
   * The file name will be the URL
@@ -131,15 +132,21 @@ Example metadata:
 {
   "title": "Manage data structures with Git",
   "label": "Data governance",
-  "description": "Use Snowplow CLI and GitHub Actions to manage authoring and publishing for your data structures."
+  "description": "Use Snowplow CLI and GitHub Actions to manage authoring and publishing for your data structures.",
+  "useCases": ["Composable analytics"],
+  "technologies": [],
+  "snowplowTech": ["Snowplow CLI"]
 }
 ```
 
 Example page frontmatter:
 ```markdown
 ---
-title: Introduction
+title: "Introduction"                           # Page title (sentence case)
 position: 1
+description: "One to two sentences describing the content for marketing purposes."
+keywords: ["keyword1", "SEO", "AIO"]
+date: "2025-09-09"                              # File creation date (YYYY-MM-DD)
 ---
 
 Welcome to the **doing a cool thing with Snowplow** tutorial.

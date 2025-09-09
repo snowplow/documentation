@@ -836,7 +836,7 @@ img.shield {
 }
 .tabs-container {
   padding: 7px 14px 14px;
-  border: 2px solid transparent;
+  border: 1px solid transparent;
   border-radius: var(--ifm-alert-border-radius);
   transition: 0.4s cubic-bezier(0.38, 0.14, 0.58, 1) all;
 }

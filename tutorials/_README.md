@@ -115,7 +115,7 @@ Tutorials have:
     * Be concise
     * Use imperative form - it should sound right if you imagine putting "how to" in front of each
   * There's a short list of labels to choose from, pick one
-    * `Data governance`, `Data modeling`, `Signals`, `Solution accelerator`, `Tracking implementation`
+    * `Data governance`, `Data modeling`, `Signals implementation`, `Solution accelerator`, `Tracking implementation`
   * There's a short list of use cases to choose from, pick one
     * `Composable analytics`, `Composable CDP`, `Real-time personalization`, `Customer-aware AI`
   * Solution accelerators are a specific thing, they are:

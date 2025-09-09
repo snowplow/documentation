@@ -13,7 +13,7 @@ The batch engine is part of the Signals Python SDK. It's not installed by defaul
 pip install 'snowplow-signals[batch-engine]'
 ```
 
-This will install the CLI tool as `snowplow-batch-autogen`, along with the necessary dependencies.
+This will install the CLI tool as `snowplow-batch-engine`, along with the necessary dependencies.
 
 ## Available commands
 
@@ -22,7 +22,7 @@ The available options are:
 ```bash
   init              # Initialize dbt project structure and base configuration
   generate          # Generate dbt project assets
-  materialize       # Registers the attribute table as a data source with Signals
+  sync       # Registers the attribute table as a data source with Signals
   test_connection   # Test the connection to the authentication and API services
 ```
 

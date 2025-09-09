@@ -14,7 +14,7 @@ To configure an attribute, you will need to set:
 
 Attribute calculation starts when the definitions are applied, and aren't backdated.
 
-All configuration is defined using the Signals Python SDK.
+All configuration is defined using the [Signals Python SDK](https://pypi.org/project/snowplow-signals/).
 
 ## Minimal example
 

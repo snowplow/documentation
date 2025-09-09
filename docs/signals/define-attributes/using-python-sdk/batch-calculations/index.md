@@ -8,7 +8,7 @@ You can use existing attributes that are already in your warehouse, or use the S
 To use historical, warehouse attributes in your real-time use cases, you will need to sync the data to the Profiles Store. Signals includes a sync engine to do this.
 
 :::note Warehouse support
-Only Snowflake is supported currently.
+Only Snowflake and BigQuery are supported currently.
 :::
 
 ## Existing or new attributes?
@@ -53,17 +53,16 @@ The table below lists all available arguments for a `BatchSource`:
 | `database`                 | The database where the attributes are stored                                        | `string`   | ✅         |
 | `schema`                   | The schema for the table of interest                                                | `string`   | ✅         |
 | `table`                    | The table where the attributes are stored                                           | `string`   | ✅         |
-| `timestamp_field`          | The timestamp field to use for point-in-time joins of attribute values              | `string`   | ❌         |
-| `created_timestamp_column` | A timestamp column indicating when the row was created, used for deduplicating rows | `string`   | ❌         |
-| `date_partition_column`    | A timestamp column used for partitioning data                                       | `string`   | ❌         |
+| `timestamp_field`          | Primary timestamp of the attribute value, the sync engine uses this to incrementally process only the rows that have changed since the last run              | `string`   | ❌         |
 | `owner`                    | The owner of the source, typically the email of the primary maintainer              | `string`   | ❌         |
 | `tags`                     | String key-value pairs of arbitrary metadata                                        | dictionary | ❌         |
 
-The `timestamp_field` is optional but recommended for incremental or snapshot-based tables. It should show the last modified time of a record. It's used during materialization to identify which rows have changed since the last sync. The sync engine only sends those with a newer timestamp to the Profiles Store.
+The sync engine only sends rows with a newer timestamp to the Profiles Store, based on the `timestamp_field`. For each attribute key, make sure there is only one row per timestamp — otherwise, one value may be discarded arbitrarily.
+
 
 ### Defining an attribute group with fields
 
-Pass your source to a new `ExternalBatchAttributeGroup` so that Signals does not materialize the attributes. This will be done later, once Signals has connected to the table.
+Pass your source to a new `ExternalBatchAttributeGroup` so that Signals does not sync the attributes. This will be done later, once Signals has connected to the table.
 
 For stream or batch attributes that are calculated by Signals, an attribute group contains references to your attribute definitions. In this case, the attributes are already defined elsewhere and pre-calculated in the warehouse. Instead of `attributes`, this attribute group will have `fields`.
 
@@ -112,7 +111,7 @@ Apply the attribute group configuration to Signals.
 sp_signals.publish([attribute_group])
 ```
 
-Signals will connect to the table, but the attributes will not be materialized into Signals yet because the attribute group has `online=False`.
+Signals will connect to the table, but the attributes will not be synced into Signals yet because the attribute group has `online=False`.
 
 To send the attributes to the Profiles Store, change the `online` parameter to `True`, and apply the attribute group again.
 
@@ -120,7 +119,7 @@ To send the attributes to the Profiles Store, change the `online` parameter to `
 sp_signals.publish([attribute_group])
 ```
 
-The sync will begin: the sync engine will look for new records at a given interval, based on the `timestamp_field` and the last time it ran. The default time interval is 5 minutes.
+The sync will begin: the sync engine will look for new records at a given interval, based on the `timestamp_field` and the last time it ran. The default time interval is 1 hour.
 
 ## Creating new attribute tables
 
@@ -165,6 +164,6 @@ The sync engine is a cron job that sends warehouse attributes to the Profiles St
 
 The engine will be enabled when you either:
 * Apply an `ExternalBatchAttributeGroup` for an existing table
-* Run the batch engine `materialize` command after creating new attribute tables
+* Run the batch engine `sync` command after creating new attribute tables
 
 Once enabled, syncs begin at a fixed interval. By default, this is every 5 minutes. Only the records that have changed since the last sync are sent to the Profiles Store.

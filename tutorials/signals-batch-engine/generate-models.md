@@ -8,11 +8,11 @@ Each project will have its own set of models generated based on its specific sch
 For each project, the generation process will:
 
 1. Create dbt configuration files
-2. Generate SQL models based on the batch view's schema
+2. Generate SQL models based on the batch attribute group's schema
 3. Set up necessary macros and functions
 4. Update any existing files if needed
 
-For each batch view, the generated models are specifically designed for batch processing:
+For each batch attribute group, the generated models are specifically designed for batch processing:
 
 * Base models: raw data transformations
 * Filtered events: event filtering and cleaning
@@ -23,22 +23,25 @@ For each batch view, the generated models are specifically designed for batch pr
 
 Depending on how you initialized your projects, you can generate models in two ways.
 
-If you created projects for all views, you can generate models for all of them at once:
+If you created projects for all attribute groups, you can generate models for all of them at once:
 
 ```bash
-# For all views
-snowplow-batch-autogen generate --verbose
+# For all attribute groups
+snowplow-batch-engine generate --verbose
 ```
 
 To generate models for a specific project:
 
 ```bash
-snowplow-batch-autogen generate \
+snowplow-batch-engine generate \
   --project-name "user_attributes_1" \
+  --target-type snowflake \
   --verbose
 ```
 
-Remember that project names follow the format `{view_name}_{view_version}`.
+Adjust the target-type to `bigquery`, if relevant.
+
+Remember that project names follow the format `{attribute_group_name}_{attribute_group_version}`.
 
 ## Project structure
 
@@ -59,7 +62,7 @@ my_snowplow_repo/
 │   │   └── dbt_config.json
 │   │   └── batch_source_config.json
 │   └── macros/                # Reusable SQL functions
-├── product_views_2/
+├── product_attribute_groups_2/
 │   └── ... (same structure)
 └── user_segments_1/
     └── ... (same structure)

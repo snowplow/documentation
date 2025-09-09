@@ -7,27 +7,30 @@ Having tested the connection, you can now initialize your projects.
 
 When you run the initialization command, the CLI will:
 
-1. Create a separate project directory for each relevant view
+1. Create a separate project directory for each relevant attribute group
 2. Set up the basic configuration files for each project
 3. Initialize the necessary folder structure for each project
 4. Prepare each project for model generation
 
 ## Run initialize
 
-You can generate projects for all the relevant views in Signals at once, or one at a time.
+You can generate projects for all the relevant attribute groups in Signals at once, or one at a time. Change your target-type to `bigquery` if relevant.
 
 ```bash
-# For all views
-snowplow-batch-autogen init --verbose
+# For all attribute groups
+snowplow-batch-engine init \ 
+  --target-type snowflake \
+  --verbose
 
-# For a specific view
-snowplow-batch-autogen init \
-  --view-name "user_attributes" \
-  --view-version 1 \
+# For a specific attribute group
+snowplow-batch-engine init \
+  --attribute-group-name "user_attributes" \
+  --attribute-group-version 1 \
+  --target-type snowflake \
   --verbose
 ```
 
-Each view will have its own separate dbt project, with the project name following the format `{view_name}_{view_version}`.
+Each attribute group will have its own separate dbt project, with the project name following the format `{attribute_group_name}_{attribute_group_version}`.
 
 The files will be generated at the path specified in your `SNOWPLOW_REPO_PATH` environment variable.
 
@@ -37,20 +40,20 @@ After initialization, your repository will have a structure like this:
 
 ```
 my_repo/
-├── my_view_1/
+├── my_attribute_group_1/
 │   └── configs/
 │       └── base_config.json
 ├── etc.
 ```
 
-In this example, projects were generated for three views: `user_attributes` v1, `product_views` v2, and `user_segments` v3:
+In this example, projects were generated for three attribute groups: `user_attributes` v1, `product_attribute_groups` v2, and `user_segments` v3:
 
 ```
 my_snowplow_repo/
 ├── user_attributes_1/
 │   └── configs/
 │       └── base_config.json
-├── product_views_2/
+├── product_attribute_groups_2/
 │   └── configs/
 │       └── base_config.json
 └── user_segments_1/

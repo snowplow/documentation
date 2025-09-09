@@ -20,7 +20,7 @@ To configure a table for batch attributes, you may choose to set up an attribute
 
 For stream attributes, you can choose to configure and apply attribute groups that don't calculate their attribute values.
 
-This means that configuration, calculation, materialization, and retrieval are fully decoupled.
+This means that configuration, calculation, syncing, and retrieval are fully decoupled.
 
 ## Versioning
 
@@ -28,11 +28,11 @@ TODO
 
 ## Types of attribute groups
 
-Signals includes three types of attribute groups. Choose which one to use depending on how you want to calculate and materialize the attributes:
+Signals includes three types of attribute groups. Choose which one to use depending on how you want to calculate and sync the attributes:
 
 - `StreamAttributeGroup`: processed from the real-time event stream
 - `BatchAttributeGroup`: processed using the batch engine
-- `ExternalBatchAttributeGroup`: uses precalculated attributes from an existing warehouse table that's materialized into Signals
+- `ExternalBatchAttributeGroup`: uses precalculated attributes from an existing warehouse table that's synced into Signals
 
 ### StreamAttributeGroup
 
@@ -76,7 +76,7 @@ my_batch_attribute_group = BatchAttributeGroup(
 
 ### ExternalBatchAttributeGroup
 
-Use an `ExternalBatchAttributeGroup` to materialize attributes from an existing warehouse table.
+Use an `ExternalBatchAttributeGroup` to sync attributes from an existing warehouse table.
 
 
 ```python
@@ -124,7 +124,7 @@ Below is a summary of all options available for configuring attribute groups in 
 | `tags`          | Metadata key-value pairs                               | `dict`              |         | ❌         | All                                                 |
 | `attributes`    | List of attributes to calculate                        | list of `Attribute` |         | ✅         | `StreamAttributeGroup`, `BatchAttributeGroup`       |
 | `batch_source`  | The batch data source for the attribute group          | `BatchSource`       |         | ✅/❌       | `BatchAttributeGroup`/`ExternalBatchAttributeGroup` |
-| `fields`        | Table columns for materialization                      | `Field`             |         | ✅         | `ExternalBatchAttributeGroup`                       |
+| `fields`        | Table columns for syncing                      | `Field`             |         | ✅         | `ExternalBatchAttributeGroup`                       |
 | `offline`       | Calculate in warehouse (`True`) or real-time (`False`) | `bool`              | varies  | ❌         | All                                                 |
 | `online`        | Enable online retrieval (`True`) or not (`False`)      | `bool`              | `True`  | ❌         | All                                                 |
 
@@ -213,4 +213,4 @@ Some attributes will only be relevant for a certain amount of time, and eventual
 
 To avoid stale attributes staying in your Profiles Store forever, you can configure TTL lifetimes for attribute keys and attribute groups. When none of the attributes for an attribute key or attribute group have been updated for the defined lifespan, the attribute key or attribute group expires. Any attribute values for this attribute key or attribute group will be deleted: fetching them will return `None` values.
 
-If Signals then processes a new event that calculates the attribute again, or materializes the attribute from the warehouse again, the expiration timer is reset.
+If Signals then processes a new event that calculates the attribute again, or syncs the attribute from the warehouse again, the expiration timer is reset.

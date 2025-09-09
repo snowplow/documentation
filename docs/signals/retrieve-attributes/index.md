@@ -139,23 +139,23 @@ You can also retrieve attributes directly from a specific [attribute group](/doc
 <Tabs groupId="signals" queryString>
 <TabItem value="python" label="Python" default>
 
-Use `get_attributes()` to retrieve specific attributes. Signals will return the attributes as a dictionary.
+Use `get_group_attribtues()` to retrieve specific attributes. Signals will return the attributes as a dictionary.
 
 Here's an example:
 
 ```python
 # The Signals connection object has been created as sp_signals
 
-view_attributes = sp_signals.get_view_attributes(
-    name="my_view",
+calculated_values = sp_signals.get_group_attribtues(
+    name="my_attribute_group",
     version=1,
     attributes=["page_view_count"],
-    entity="domain_userid",
+    attribute_key="domain_userid",
     identifier="218e8926-3858-431d-b2ed-66da03a1cbe5",
 )
 ```
 
-The table below lists all available arguments for `get_view_attributes()`
+The table below lists all available arguments for `get_group_attribtues()`
 
 | Argument        | Description                             | Type                         | Required? |
 | --------------- | --------------------------------------- | ---------------------------- | --------- |
@@ -168,14 +168,14 @@ The table below lists all available arguments for `get_view_attributes()`
 </TabItem>
 <TabItem value="nodejs" label="Node.js">
 
-Use `getViewAttributes()` to retrieve specific attributes from an attribute group. Signals will return the attributes as a JavaScript object.
+Use `getGroupAttributes()` to retrieve specific attributes from an attribute group. Signals will return the attributes as a JavaScript object.
 
 Here's an example:
 
 ```typescript
 // The Signals connection object has been created as signals
 
-const calculatedValues = await signals.getViewAttributes({
+const calculatedValues = await signals.getGroupAttributes({
   name: "my_attribute_group",
   version: 1,
   attributes: ["page_view_count"],
@@ -184,7 +184,7 @@ const calculatedValues = await signals.getViewAttributes({
 });
 ```
 
-The table below lists all available arguments for `getViewAttributes()`
+The table below lists all available arguments for `getGroupAttributes()`
 
 | Argument        | Description                             | Type       | Required? |
 | --------------- | --------------------------------------- | ---------- | --------- |

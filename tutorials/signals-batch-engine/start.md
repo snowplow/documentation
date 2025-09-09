@@ -14,7 +14,7 @@ The Signals batch engine is a CLI tool to create the attributes in your warehous
 The batch engine helps by:
 * Generating separate dbt projects for each batch attribute group definition
 * Building efficient modeled datasets at different aggregation levels, instead of querying directly against large atomic event tables
-* Producing an attributes table optimized for downstream use
+* Producing attributes tables optimized for downstream use
 * Syncing the calculated attributes to Signals, making them available for production use
 
 To use tables of pre-existing, already calculated values, read up on external batch sources in the [Signals documentation](/docs/signals/concepts/).

@@ -38,7 +38,7 @@ module.exports = {
     mermaid: true,
   },
 
-  themes: ['docusaurus-theme-github-codeblock', '@docusaurus/theme-mermaid'],
+  themes: ['@docusaurus/theme-mermaid'],
 
   presets: [
     [

@@ -1,7 +1,7 @@
 {
   "title": "Set up Signals for real-time calculation",
   "description": "Set up Signals to calculate attributes in near real time.",
-  "label": "Signals",
+  "label": "Signals implementation",
   "useCases": ["Real-time personalization"],
   "technologies": ["Jupyter notebook"],
   "snowplowTech": ["Signals", "BDP Console"]

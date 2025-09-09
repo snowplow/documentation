@@ -9,7 +9,7 @@ Before running your new models, you'll need to configure their dbt connection pr
 
 During the run process:
 * dbt will compile your SQL models
-* Tables and attribute groups will be created in your data warehouse
+* Tables will be created in your data warehouse
 * You'll see progress updates in the terminal
 * Any errors will be clearly displayed
 

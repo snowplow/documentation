@@ -83,7 +83,7 @@ You can confirm events are reaching Braze by checking the following pages in you
 2. **Braze API Usage Dashboard**: Braze > **Settings** > **API and Identifiers**
 <!-- TODO: add screenshot -->
 
-## Mapping schema
+## Schema reference
 
 The sections below contain information on the fields you can send to Braze, including field names, data types, required fields, and default Snowplow mapping expressions.
 

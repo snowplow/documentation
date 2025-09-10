@@ -4,225 +4,259 @@
   "properties": {
     "user_id": {
       "$ref": "#/$defs/id",
-      "description": "ID for the user",
-      "consoleDefault": "event?.user_id"
+      "description": "ID for the user. Required if `device_id` isn't provided.",
+      "consoleDefault": "event?.user_id",
+      "consoleRequired": false
     },
     "device_id": {
       "$ref": "#/$defs/id",
-      "description": "A device-specific identifier, such as the Identifier for Vendor on iOS",
-      "consoleDefault": "event?.domain_userid ??  event?.contexts_com_snowplowanalytics_snowplow_client_session_1?.[0]?.userId"
+      "description": "A device-specific identifier, such as the Identifier for Vendor on iOS. Required if `user_id` isn't provided.",
+      "consoleDefault": "event?.domain_userid ??  event?.contexts_com_snowplowanalytics_snowplow_client_session_1?.[0]?.userId",
+      "consoleRequired": false
     },
     "event_type": {
       "type": "string",
       "minLength": 1,
       "maxLength": 1024,
-      "description": "A unique identifier for your event",
-      "consoleDefault": "event?.event_name"
+      "description": "A unique identifier for your event.",
+      "consoleDefault": "event?.event_name",
+      "consoleRequired": true
     },
     "event_id": {
       "type": "integer",
-      "description": "An incrementing counter to distinguish events with the same user_id and timestamp from each other"
+      "description": "An incrementing counter to distinguish events with the same user_id and timestamp from each other.",
+      "consoleRequired": false
     },
     "session_id": {
       "type": "integer",
-      "description": "The start time of the session in milliseconds since epoch, necessary if you want to associate events with a particular system",
-      "consoleDefault": "spTstampToEpochMillis(event?.contexts_com_snowplowanalytics_snowplow_client_session_1?.[0]?.firstEventTimestamp)"
+      "description": "The start time of the session in milliseconds since epoch (Unix timestamp). Necessary if you want to associate events with a particular system.",
+      "consoleDefault": "spTstampToEpochMillis(event?.contexts_com_snowplowanalytics_snowplow_client_session_1?.[0]?.firstEventTimestamp)",
+      "consoleRequired": false
     },
     "insert_id": {
       "type": "string",
       "minLength": 1,
       "maxLength": 1024,
-      "description": "A unique identifier for the event. Amplitude deduplicates subsequent events sent with the same device_id and insert_id within the past 7 days",
-      "consoleDefault": "event?.event_id"
+      "description": "A unique identifier for the event. Amplitude deduplicates subsequent events sent with the same device_id and insert_id within the past 7 days.",
+      "consoleDefault": "event?.event_id",
+      "consoleRequired": false
     },
     "time": {
       "type": "integer",
-      "description": "The timestamp of the event in milliseconds since epoch",
-      "consoleDefault": "spTstampToEpochMillis(event?.derived_tstamp)"
+      "description": "The timestamp of the event in milliseconds since epoch. If time isn't sent with the event, then it's set to the request upload time.",
+      "consoleDefault": "spTstampToEpochMillis(event?.derived_tstamp)",
+      "consoleRequired": false
     },
     "event_properties": {
       "type": "object",
       "additionalProperties": true,
-      "description": "Arbitrary key-value pairs assigned to the event"
+      "description": "Arbitrary key-value pairs assigned to the event.",
+      "consoleRequired": false
     },
     "user_properties": {
       "type": "object",
       "additionalProperties": true,
-      "description": "Arbitrary key-value pairs assigned to the user"
+      "description": "Arbitrary key-value pairs assigned to the user.",
+      "consoleRequired": false
     },
     "groups": {
       "type": "object",
       "additionalProperties": true,
-      "description": "Arbitrary key-value pairs representing groups of users"
+      "description": "Arbitrary key-value pairs representing groups of users.",
+      "consoleRequired": false
     },
     "group_properties": {
       "type": "object",
       "additionalProperties": true,
-      "description": "Arbitrary key-value pairs assigned to the groups listed in the 'groups'"
+      "description": "Arbitrary key-value pairs assigned to the groups listed in the `groups`.",
+      "consoleRequired": false
     },
     "$skip_user_properties_sync": {
       "type": "boolean",
-      "description": "When true user properties aren't synced. Defaults to false",
-      "consoleDefault": "false"
+      "description": "When true user properties aren't synced. Defaults to false.",
+      "consoleDefault": "false",
+      "consoleRequired": false
     },
     "app_version": {
       "type": "string",
       "minLength": 1,
       "maxLength": 1024,
-      "description": "The current version of your application",
-      "consoleDefault": "event?.contexts_com_snowplowanalytics_mobile_application_1?.[0]?.version"
+      "description": "The current version of your application.",
+      "consoleDefault": "event?.contexts_com_snowplowanalytics_mobile_application_1?.[0]?.version",
+      "consoleRequired": false
     },
     "platform": {
       "type": "string",
       "minLength": 1,
       "maxLength": 1024,
-      "description": "Platform of the device",
-      "consoleDefault": "event?.platform"
+      "description": "Platform of the device.",
+      "consoleDefault": "event?.platform",
+      "consoleRequired": false
     },
     "os_name": {
       "type": "string",
       "minLength": 1,
       "maxLength": 1024,
-      "description": "The name of the mobile operating system or browser that the user is using",
-      "consoleDefault": "event?.os_name"
+      "description": "The name of the mobile operating system or browser that the user is using.",
+      "consoleDefault": "event?.os_name",
+      "consoleRequired": false
     },
     "os_version": {
       "type": "string",
       "minLength": 1,
       "maxLength": 1024,
-      "description": "The version of the mobile operating system or browser the user is using",
-      "consoleDefault": "event?.contexts_nl_basjes_yauaa_context_1?.[0]?.operatingSystemVersion"
+      "description": "The version of the mobile operating system or browser the user is using.",
+      "consoleDefault": "event?.contexts_nl_basjes_yauaa_context_1?.[0]?.operatingSystemVersion",
+      "consoleRequired": false
     },
     "device_brand": {
       "type": "string",
       "minLength": 1,
       "maxLength": 1024,
-      "description": "The device brand that the user is using",
-      "consoleDefault": "event?.contexts_nl_basjes_yauaa_context_1?.[0]?.deviceBrand"
+      "description": "The device brand that the user is using.",
+      "consoleDefault": "event?.contexts_nl_basjes_yauaa_context_1?.[0]?.deviceBrand",
+      "consoleRequired": false
     },
     "device_manufacturer": {
       "type": "string",
       "minLength": 1,
       "maxLength": 1024,
-      "description": "The device manufacturer that the user is using"
+      "description": "The device manufacturer that the user is using.",
+      "consoleRequired": false
     },
     "device_model": {
       "type": "string",
       "minLength": 1,
       "maxLength": 1024,
-      "description": "The device model that the user is using",
-      "consoleDefault": "event?.contexts_nl_basjes_yauaa_context_1?.[0]?.deviceName"
+      "description": "The device model that the user is using.",
+      "consoleDefault": "event?.contexts_nl_basjes_yauaa_context_1?.[0]?.deviceName",
+      "consoleRequired": false
     },
     "carrier": {
       "type": "string",
       "minLength": 1,
       "maxLength": 1024,
-      "description": "The carrier that the user is using",
-      "consoleDefault": "event?.contexts_nl_basjes_yauaa_context_1?.[0]?.carrier"
+      "description": "The carrier that the user is using.",
+      "consoleDefault": "event?.contexts_nl_basjes_yauaa_context_1?.[0]?.carrier",
+      "consoleRequired": false
     },
     "country": {
       "type": "string",
       "minLength": 1,
       "maxLength": 1024,
-      "description": "The current country of the user",
-      "consoleDefault": "event?.geo_country"
+      "description": "The current country of the user.",
+      "consoleDefault": "event?.geo_country",
+      "consoleRequired": false
     },
     "region": {
       "type": "string",
       "minLength": 1,
       "maxLength": 1024,
-      "description": "The current region of the user",
-      "consoleDefault": "event?.geo_region"
+      "description": "The current region of the user.",
+      "consoleDefault": "event?.geo_region",
+      "consoleRequired": false
     },
     "city": {
       "type": "string",
       "minLength": 1,
       "maxLength": 1024,
-      "description": "The current city of the user",
-      "consoleDefault": "event?.geo_city"
+      "description": "The current city of the user.",
+      "consoleDefault": "event?.geo_city",
+      "consoleRequired": false
     },
     "dma": {
       "type": "string",
       "minLength": 1,
       "maxLength": 1024,
-      "description": "The current Designated Market Area of the user"
+      "description": "The current Designated Market Area of the user.",
+      "consoleRequired": false
     },
     "language": {
       "type": "string",
       "minLength": 1,
       "maxLength": 1024,
-      "description": "The language set by the user",
-      "consoleDefault": "event?.br_lang"
+      "description": "The language set by the user.",
+      "consoleDefault": "event?.br_lang",
+      "consoleRequired": false
     },
     "price": {
       "type": "number",
-      "description": "The price of the item purchased. Required for revenue data if the revenue field isn't sent. You can use negative values for refunds"
+      "description": "The price of the item purchased. Required for revenue data if the revenue field isn't sent. You can use negative values for refunds",
+      "consoleRequired": false
     },
     "quantity": {
       "type": "integer",
-      "description": "The quantity of the item purchased"
+      "description": "The quantity of the item purchased.",
+      "consoleRequired": false
     },
     "revenue": {
       "type": "number",
-      "description": "Revenue = (price x quantity). If you send all 3 fields of price, quantity, and revenue, then the revenue value is (price x quantity). Use negative values for refunds."
+      "description": "Revenue = (price x quantity). If you send all 3 fields of price, quantity, and revenue, then the revenue value is (price x quantity). Use negative values for refunds.",
+      "consoleRequired": false
     },
     "productId": {
       "type": "string",
       "minLength": 1,
       "maxLength": 1024,
-      "description": "An identifier for the item purchased. You must send a price and quantity or revenue with this field"
+      "description": "An identifier for the item purchased. You must send a price and quantity or revenue with this field.",
+      "consoleRequired": false
     },
     "revenueType": {
       "type": "string",
       "minLength": 1,
       "maxLength": 1024,
-      "description": "The type of revenue for the item purchased. You must send a price and quantity or revenue with this field"
+      "description": "The type of revenue for the item purchased. You must send a price and quantity or revenue with this field.",
+      "consoleRequired": false
     },
     "location_lat": {
       "type": "number",
-      "description": "The current Latitude of the user",
-      "consoleDefault": "event?.geo_latitude"
+      "description": "The current Latitude of the user.",
+      "consoleDefault": "event?.geo_latitude",
+      "consoleRequired": false
     },
     "location_lng": {
       "type": "number",
-      "description": "The current Longitude of the user",
-      "consoleDefault": "event?.geo_longitude"
+      "description": "The current Longitude of the user.",
+      "consoleDefault": "event?.geo_longitude",
+      "consoleRequired": false
     },
     "ip": {
       "type": "string",
-      "oneOf": [
-        { "format": "ipv4" },
-        { "format": "ipv6" }
-      ],
-      "description": "The IP address of the user",
-      "consoleDefault": "event?.user_ipaddress"
+      "oneOf": [{ "format": "ipv4" }, { "format": "ipv6" }],
+      "description": "The IP address of the user.",
+      "consoleDefault": "event?.user_ipaddress",
+      "consoleRequired": false
     },
     "idfa": {
       "type": "string",
       "minLength": 1,
       "maxLength": 1024,
-      "description": "(iOS) Identifier for Advertiser",
-      "consoleDefault": "event?.contexts_com_snowplowanalytics_snowplow_mobile_context_1?.[0]?.appleIdfa"
+      "description": "(iOS) Identifier for Advertiser.",
+      "consoleDefault": "event?.contexts_com_snowplowanalytics_snowplow_mobile_context_1?.[0]?.appleIdfa",
+      "consoleRequired": false
     },
     "idfv": {
       "type": "string",
       "minLength": 1,
       "maxLength": 1024,
-      "description": "(iOS) Identifier for Vendor",
-      "consoleDefault": "event?.contexts_com_snowplowanalytics_snowplow_mobile_context_1?.[0]?.appleIdfv"
+      "description": "(iOS) Identifier for Vendor.",
+      "consoleDefault": "event?.contexts_com_snowplowanalytics_snowplow_mobile_context_1?.[0]?.appleIdfv",
+      "consoleRequired": false
     },
     "adid": {
       "type": "string",
       "minLength": 1,
       "maxLength": 1024,
-      "description": "(Android) Google Play Services advertising ID",
-      "consoleDefault": "event?.contexts_com_snowplowanalytics_snowplow_mobile_context_1?.[0]?.androidIdf"
+      "description": "(Android) Google Play Services advertising ID.",
+      "consoleDefault": "event?.contexts_com_snowplowanalytics_snowplow_mobile_context_1?.[0]?.androidIdf",
+      "consoleRequired": false
     },
     "android_id": {
       "type": "string",
       "minLength": 1,
       "maxLength": 1024,
-      "description": "(Android) Android ID (not the advertising ID)"
+      "description": "(Android) Android ID (not the advertising ID).",
+      "consoleRequired": false
     },
     "plan": {
       "type": "object",
@@ -231,29 +265,27 @@
           "type": "string",
           "minLength": 1,
           "maxLength": 1024,
-          "description": "The tracking plan branch name"
+          "description": "The tracking plan branch name."
         },
         "source": {
           "type": "string",
           "minLength": 1,
           "maxLength": 1024,
-          "description": "The tracking plan source"
+          "description": "The tracking plan source."
         },
         "version": {
           "type": "string",
           "minLength": 1,
           "maxLength": 1024,
-          "description": "The tracking plan version"
+          "description": "The tracking plan version."
         }
       },
       "additionalProperties": false,
-      "description": "Tracking plan properties"
+      "description": "Tracking plan properties.",
+      "consoleRequired": false
     }
   },
-  "anyOf": [
-    { "required": ["user_id"] },
-    { "required": ["device_id"] }
-  ],
+  "anyOf": [{ "required": ["user_id"] }, { "required": ["device_id"] }],
   "required": ["event_type"],
   "additionalProperties": false,
   "$defs": {

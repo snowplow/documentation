@@ -8,83 +8,101 @@
         "type": "string",
         "minLength": 1,
         "maxLength": 988,
-        "description": "Braze identifier for externally created IDs"
+        "description": "A unique user identifier. Required if `user alias`, `braze_id`, `email`, or `phone` is not provided."
+      },
+      "braze_id": {
+        "type": "string",
+        "description": "Identifier reserved for the Braze SDK. Required if `external_id`, `user alias`, `email`, or `phone` is not provided. Not recommended for use with the Snowplow integration."
+      },
+      "phone": {
+        "type": "string",
+        "description": "The user's phone number."
       },
       "user_alias": {
         "type": "object",
         "properties": {
           "alias_name": {
             "type": "string",
-            "description": "The actual value of the alias identifier"
+            "description": "The actual value of the alias identifier."
           },
           "alias_label": {
             "type": "string",
-            "description": "The 'label' of the alias identifier - eg domain_userid"
+            "description": "Indicates the type of alias. E.g. `domain_userid`."
           }
         },
-        "description": "Braze user Alias object",
+        "description": "Braze user alias object.",
         "required": ["alias_name", "alias_label"],
         "additionalProperties": false
       },
       "_update_existing_only": {
         "type": "boolean",
-        "description": "If true, update only mode is used. false recommended"
+        "description": "If `true`, API requests will only update existing user profiles in Braze. `false` recommended."
       },
       "time": {
         "type": "string",
         "format": "date-time",
-        "description": "Time of the purchase, required. Must be ISO 8601 format"
+        "description": "Time of the purchase, required. Must be ISO 8601 format."
       },
       "product_id": {
         "type": "string",
         "minLength": 1,
-        "description": "Product ID, required"
+        "description": "Identifier for the product purchased."
       },
       "currency": {
         "type": "string",
         "pattern": "^[A-Z]+$",
         "minLength": 3,
         "maxLength": 3,
-        "description": "ISO 4217 Alphabetic Currency Code, required"
+        "description": "ISO 4217 Alphabetic Currency Code."
       },
       "price": {
         "type": "number",
-        "description": "Price per item, required"
+        "description": "Price per item."
       },
       "quantity": {
         "type": "integer",
         "minimum": 1,
         "maximum": 100,
-        "description": "Quantity of the item purchased, optional. Braze treats this as multiple individual purchases"
+        "description": "Quantity of the item purchased. Braze treats this as multiple individual purchases."
       },
       "email": {
         "type": "string",
         "format": "email",
         "minLength": 1,
         "maxLength": 75,
-        "description": "Email address"
+        "description": "The user's email address."
       },
       "app_id": {
         "type": "string",
         "format": "uuid",
-        "description": "Keyword in Braze. if set, should match a Braze App Identifier, found in Braze console's API section. Can be omitted, but incorrect values may result in data loss in Braze."
+        "description": "Associates activity with a specific app in your Braze workspace. If set, should match a Braze App Identifier, found in Braze console's API section. Can be omitted, but incorrect values may result in data loss in Braze."
       },
       "properties": {
         "type": "object",
         "additionalProperties": true,
-        "description": "Arbitrary key-value pairs assigned to the purchase in Braze"
+        "description": "Arbitrary key-value pairs assigned to the purchase in Braze."
       }
     },
     "anyOf": [
       {
         "oneOf": [
-          { "required": ["external_id"] },
-          { "required": ["user_alias"] },
-          { "required": ["braze_id"] }
+          {
+            "required": ["external_id"]
+          },
+          {
+            "required": ["user_alias"]
+          },
+          {
+            "required": ["braze_id"]
+          }
         ]
       },
-      { "required": ["phone"] },
-      { "required": ["email"] }
+      {
+        "required": ["phone"]
+      },
+      {
+        "required": ["email"]
+      }
     ],
     "required": ["product_id", "time", "currency", "price"],
     "additionalProperties": false

@@ -1,119 +1,193 @@
 import React from 'react'
 
+// Utility functions
+const formatType = (property) => {
+  if (property.type === 'array' && property.items) {
+    return `array of ${property.items.type || 'object'}`
+  }
+  return property.type || 'unknown'
+}
+
+const formatDefaultValue = (property) => {
+  if (property.consoleDefault) {
+    return <code>{property.consoleDefault}</code>
+  }
+  if (property.default !== undefined) {
+    const value =
+      typeof property.default === 'string'
+        ? `"${property.default}"`
+        : property.default
+    return <code>{value}</code>
+  }
+  return null
+}
+
+const hasDefaultValue = (property) => {
+  return property.consoleDefault || property.default !== undefined
+}
+
+const formatEnumValues = (property) => {
+  if (!property.enum) return null
+
+  const enumValues = property.enum.map((value) =>
+    value === null ? (
+      <code key="null">null</code>
+    ) : (
+      <code key={value}>{value}</code>
+    )
+  )
+
+  return (
+    <>
+      Must be one of:{' '}
+      {enumValues.reduce(
+        (prev, curr, index) => (index === 0 ? [curr] : [...prev, ', ', curr]),
+        []
+      )}
+    </>
+  )
+}
+
+const renderMarkdownCode = (text) => {
+  if (!text) return text
+
+  const parts = text.split(/(`[^`]+`)/g)
+  return parts.map((part, index) => {
+    if (part.startsWith('`') && part.endsWith('`')) {
+      const codeContent = part.slice(1, -1)
+      return <code key={index}>{codeContent}</code>
+    }
+    return part
+  })
+}
+
+// Schema parsing functions
+const parseSchemaStructure = (schema) => {
+  if (!schema) {
+    return { properties: null, requiredFields: [], schemaForConditionals: null }
+  }
+
+  // Handle array schemas (like Braze purchases)
+  if (schema.type === 'array' && schema.items?.properties) {
+    return {
+      properties: schema.items.properties,
+      requiredFields: schema.items.required || [],
+      schemaForConditionals: schema.items,
+    }
+  }
+
+  // Handle object schemas
+  if (schema.properties) {
+    return {
+      properties: schema.properties,
+      requiredFields: schema.required || [],
+      schemaForConditionals: schema,
+    }
+  }
+
+  return { properties: null, requiredFields: [], schemaForConditionals: null }
+}
+
+const extractConditionallyRequiredFields = (schema) => {
+  const conditionallyRequiredFields = new Set()
+
+  const processConditions = (conditions) => {
+    conditions?.forEach((condition) => {
+      if (condition.oneOf) {
+        condition.oneOf.forEach((subCondition) => {
+          subCondition.required?.forEach((field) =>
+            conditionallyRequiredFields.add(field)
+          )
+        })
+      }
+      condition.required?.forEach((field) =>
+        conditionallyRequiredFields.add(field)
+      )
+    })
+  }
+
+  processConditions(schema.anyOf)
+  processConditions(schema.oneOf)
+
+  return conditionallyRequiredFields
+}
+
 export default function EventForwardingSchemaTable({ schema }) {
+  const { properties, requiredFields, schemaForConditionals } =
+    parseSchemaStructure(schema)
+  const conditionallyRequiredFields = extractConditionallyRequiredFields(
+    schemaForConditionals || {}
+  )
+
+  const isFieldRequired = (
+    fieldName,
+    parentRequiredFields = requiredFields
+  ) => {
+    // Don't mark as required if it's conditionally required (anyOf/oneOf)
+    if (conditionallyRequiredFields.has(fieldName)) {
+      return false
+    }
+    return parentRequiredFields.includes(fieldName)
+  }
+
+  const sortedProperties = !properties
+    ? []
+    : Object.entries(properties).sort(([fieldNameA], [fieldNameB]) => {
+        const isRequiredA = isFieldRequired(fieldNameA)
+        const isRequiredB = isFieldRequired(fieldNameB)
+
+        if (isRequiredA && !isRequiredB) return -1
+        if (!isRequiredA && isRequiredB) return 1
+        return 0
+      })
+
+  // Early returns for invalid schemas
   if (!schema) {
     return <p>No schema provided.</p>
   }
 
-  // Handle array schemas (like Braze purchases)
-  let properties, requiredFields, schemaForConditionals
-  if (schema.type === 'array' && schema.items && schema.items.properties) {
-    properties = schema.items.properties
-    requiredFields = schema.items.required || []
-    schemaForConditionals = schema.items
-  } else if (schema.properties) {
-    properties = schema.properties
-    requiredFields = schema.required || []
-    schemaForConditionals = schema
-  } else {
+  if (!properties) {
     return <p>No schema properties found.</p>
   }
 
-  // Check for conditional requirements (anyOf/oneOf)
-  const conditionallyRequired = new Set()
-  if (schemaForConditionals.anyOf) {
-    schemaForConditionals.anyOf.forEach((condition) => {
-      if (condition.oneOf) {
-        condition.oneOf.forEach((subCondition) => {
-          if (subCondition.required) {
-            subCondition.required.forEach((field) =>
-              conditionallyRequired.add(field)
-            )
-          }
-        })
-      }
-      if (condition.required) {
-        condition.required.forEach((field) => conditionallyRequired.add(field))
-      }
-    })
-  }
+  const renderNestedProperties = (nestedProps, nestedRequiredFields = []) => (
+    <>
+      <br />
+      Properties:
+      <ul>
+        {Object.entries(nestedProps).map(([fieldName, property]) => {
+          const type = formatType(property)
+          const isRequired = isFieldRequired(fieldName, nestedRequiredFields)
+          const requirementLabel = isRequired ? ', required' : ', optional'
+          const enumInfo = formatEnumValues(property)
 
-  if (schemaForConditionals.oneOf) {
-    schemaForConditionals.oneOf.forEach((condition) => {
-      if (condition.required) {
-        condition.required.forEach((field) => conditionallyRequired.add(field))
-      }
-    })
-  }
+          return (
+            <li key={fieldName}>
+              <code>{fieldName}</code> ({type}
+              {requirementLabel}):{' '}
+              {renderMarkdownCode(property.description) || ''}
+              {enumInfo && (
+                <>
+                  <br />
+                  {type}
+                  {enumInfo}
+                </>
+              )}
+            </li>
+          )
+        })}
+      </ul>
+    </>
+  )
 
-  const formatType = (property) => {
-    if (property.type === 'array' && property.items) {
-      return `array of ${property.items.type || 'object'}`
-    }
-    return property.type || 'unknown'
-  }
-
-  const formatDefault = (property) => {
-    if (property.consoleDefault) {
-      return <code>{property.consoleDefault}</code>
-    }
-    if (property.default !== undefined) {
-      if (typeof property.default === 'string') {
-        return <code>"{property.default}"</code>
-      }
-      return <code>{property.default}</code>
-    }
-    return null
-  }
-
-  const hasDefault = (property) => {
-    return property.consoleDefault || property.default !== undefined
-  }
-
-  const isRequired = (fieldName, parentRequired = requiredFields) => {
-    // Don't mark as required if it's conditionally required (anyOf/oneOf)
-    if (conditionallyRequired.has(fieldName)) {
-      return false
-    }
-    return parentRequired.includes(fieldName)
-  }
-
-  const formatEnums = (property) => {
-    if (property.enum) {
-      const enumValues = property.enum.map((value) =>
-        value === null ? (
-          <code key={value}>null</code>
-        ) : (
-          <code key={value}>{value}</code>
-        )
-      )
-      return (
-        <>
-          Must be one of:{' '}
-          {enumValues.reduce(
-            (prev, curr, index) =>
-              index === 0 ? [curr] : [...prev, ', ', curr],
-            []
-          )}
-        </>
-      )
-    }
-    return null
-  }
-
-  const renderPropertyRow = (
-    fieldName,
-    property,
-    parentRequired = requiredFields,
-    parentFieldPath = '',
-    isNested = false
-  ) => {
+  const renderPropertyRow = (fieldName, property) => {
     const type = formatType(property)
-    const required = isRequired(fieldName, parentRequired)
-    const defaultValue = formatDefault(property)
-    const enumInfo = formatEnums(property)
+    const isRequired = isFieldRequired(fieldName)
+    const defaultValue = formatDefaultValue(property)
+    const enumInfo = formatEnumValues(property)
+    const description = property.description || ''
 
-    const requiredText = required ? (
+    const requirementLabel = isRequired ? (
       <>
         <em>Required.</em>{' '}
       </>
@@ -122,62 +196,33 @@ export default function EventForwardingSchemaTable({ schema }) {
         <em>Optional.</em>{' '}
       </>
     )
-    const description = property.description || ''
 
-    const fullFieldPath = parentFieldPath
-      ? `${parentFieldPath}.${fieldName}`
-      : fieldName
-    const rowKey = fullFieldPath
-    const displayName = isNested ? fullFieldPath : fieldName
-
-    const rows = [
-      <tr key={rowKey}>
+    return (
+      <tr key={fieldName}>
         <td>
-          <code>{displayName}</code>
+          <code>{fieldName}</code>
           <br />
-          <em className="text-sm">{type}</em>
+          <em>{type}</em>
         </td>
         <td>
-          {requiredText}
-          {description}
+          {requirementLabel}
+          {renderMarkdownCode(description)}
           {enumInfo}
-          {hasDefault(property) && (
+          {hasDefaultValue(property) && (
             <>
               <br />
               Default mapping: {defaultValue}
             </>
           )}
+          {property.type === 'object' &&
+            property.properties &&
+            renderNestedProperties(
+              property.properties,
+              property.required || []
+            )}
         </td>
-      </tr>,
-    ]
-
-    // Handle nested object properties
-    if (property.type === 'object' && property.properties) {
-      const nestedRequired = property.required || []
-      Object.entries(property.properties).forEach(
-        ([nestedFieldName, nestedProperty]) => {
-          rows.push(
-            ...renderPropertyRow(
-              nestedFieldName,
-              nestedProperty,
-              nestedRequired,
-              fullFieldPath,
-              true
-            )
-          )
-        }
-      )
-    }
-
-    return rows
-  }
-
-  const renderTableRows = () => {
-    const allRows = []
-    Object.entries(properties).forEach(([fieldName, property]) => {
-      allRows.push(...renderPropertyRow(fieldName, property))
-    })
-    return allRows
+      </tr>
+    )
   }
 
   return (
@@ -189,7 +234,11 @@ export default function EventForwardingSchemaTable({ schema }) {
             <th>Details</th>
           </tr>
         </thead>
-        <tbody>{renderTableRows()}</tbody>
+        <tbody>
+          {sortedProperties.map(([fieldName, property]) =>
+            renderPropertyRow(fieldName, property)
+          )}
+        </tbody>
       </table>
     </div>
   )

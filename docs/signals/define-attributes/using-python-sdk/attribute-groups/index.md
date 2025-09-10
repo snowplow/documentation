@@ -5,19 +5,21 @@ sidebar_label: "Attribute groups"
 description: "Configure stream, batch, and external batch attribute groups programmatically using the Snowplow Signals Python SDK."
 ---
 
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
 Define the behavior you want to capture in [attribute groups](/docs/signals/concepts/index.md#attribute-groups).
 
 ## Attribute groups by data source
 
-Each of the three available data sources has its own attribute group class. Choose which one to use depending on how you want to calculate and sync the attributes:
+Each of the three available data sources has its own attribute group class. Choose which one to use depending on how you want to calculate and sync the attributes.
 
-- `StreamAttributeGroup`: stream source, processed from the real-time event stream
-- `BatchAttributeGroup`: batch source, processed using the batch engine
-- `ExternalBatchAttributeGroup`: external batch source, uses precalculated attributes from an existing warehouse table that's synced into Signals
+<Tabs groupId="source" queryString>
+<TabItem value="stream" label="StreamAttributeGroup" default>
 
-### StreamAttributeGroup
-
-Use a `StreamAttributeGroup` to calculate attributes from the real-time event stream. Read more about this in the [Stream calculations](/docs/signals/define-attributes/using-python-sdk/stream-calculations/index.md) section.
+Use a `StreamAttributeGroup` to calculate attributes from the real-time event stream. Read more about this in the [stream calculations](/docs/signals/define-attributes/using-python-sdk/stream-calculations/index.md) section.
 
 ```python
 from snowplow_signals import StreamAttributeGroup, domain_sessionid
@@ -35,9 +37,10 @@ my_stream_attribute_group = StreamAttributeGroup(
 )
 ```
 
-### BatchAttributeGroup
+</TabItem>
+<TabItem value="batch" label="BatchAttributeGroup">
 
-Use a `BatchAttributeGroup` to calculate attributes from batch data sources (e.g., warehouse tables).
+Use a `BatchAttributeGroup` to calculate attributes from the atomic events table. Read more about this in the [batch calculations](/docs/signals/define-attributes/using-python-sdk/batch-calculations/index.md) section.
 
 ```python
 from snowplow_signals import BatchAttributeGroup, domain_sessionid
@@ -55,13 +58,13 @@ my_batch_attribute_group = BatchAttributeGroup(
 )
 ```
 
-### ExternalBatchAttributeGroup
+</TabItem>
+<TabItem value="external" label="ExternalBatchAttributeGroup">
 
-Use an `ExternalBatchAttributeGroup` to sync attributes from an existing warehouse table.
-
+Use an `ExternalBatchAttributeGroup` to sync attributes from an existing warehouse table. Read more about this in the [batch calculations](/docs/signals/define-attributes/using-python-sdk/batch-calculations/index.md) section.
 
 ```python
-from snowplow_signals import ExternalBatchAttributeGroup, domain_sessionid
+from snowplow_signals import ExternalBatchAttributeGroup, domain_sessionid, Field
 
 my_external_batch_attribute_group = ExternalBatchAttributeGroup(
     name="my_external_batch_attribute_group",
@@ -86,35 +89,72 @@ my_external_batch_attribute_group = ExternalBatchAttributeGroup(
 )
 ```
 
-
+</TabItem>
+</Tabs>
 
 ## Attribute group options
 
-The table below lists all available arguments for all types of `attribute groups`:
+The tables below list all available arguments for each type of attribute group:
 
-Below is a summary of all options available for configuring attribute groups in Signals. The "Applies to" column shows which attribute group types each option is relevant for.
+<Tabs groupId="source" queryString>
+<TabItem value="stream" label="StreamAttributeGroup" default>
 
-| Argument        | Description                                            | Type                | Default | Required? | Applies to                                          |
-| --------------- | ------------------------------------------------------ | ------------------- | ------- | --------- | --------------------------------------------------- |
-| `name`          | The name of the attribute group                        | `string`            |         | ✅         | All                                                 |
-| `version`       | The version of the attribute group                     | `int`               | 1       | ❌         | All                                                 |
-| `attribute_key` | The attribute key associated with the attribute group  | `AttributeKey`      |         | ✅         | All                                                 |
-| `owner`         | The owner of the attribute group                       | `Email`             |         | ✅         | All                                                 |
-| `description`   | A description of the attribute group                   | `string`            |         | ❌         | All                                                 |
-| `ttl`           | Time-to-live for attributes in the Profile Store       | `timedelta`         |         | ❌         | All                                                 |
-| `tags`          | Metadata key-value pairs                               | `dict`              |         | ❌         | All                                                 |
-| `attributes`    | List of attributes to calculate                        | list of `Attribute` |         | ✅         | `StreamAttributeGroup`, `BatchAttributeGroup`       |
-| `batch_source`  | The batch data source for the attribute group          | `BatchSource`       |         | ✅/❌       | `BatchAttributeGroup`/`ExternalBatchAttributeGroup` |
-| `fields`        | Table columns for syncing                              | `Field`             |         | ✅         | `ExternalBatchAttributeGroup`                       |
-| `offline`       | Calculate in warehouse (`True`) or real-time (`False`) | `bool`              | varies  | ❌         | All                                                 |
-| `online`        | Enable online retrieval (`True`) or not (`False`)      | `bool`              | `True`  | ❌         | All                                                 |
+| Argument        | Description                                           | Type                | Default | Required? |
+| --------------- | ----------------------------------------------------- | ------------------- | ------- | --------- |
+| `name`          | The name of the attribute group                       | `string`            |         | ✅         |
+| `version`       | The version of the attribute group                    | `int`               | 1       | ❌         |
+| `attribute_key` | The attribute key associated with the attribute group | `AttributeKey`      |         | ✅         |
+| `owner`         | The owner of the attribute group                      | `Email`             |         | ✅         |
+| `description`   | A description of the attribute group                  | `string`            |         | ❌         |
+| `ttl`           | Time-to-live for attributes in the Profile Store      | `timedelta`         |         | ❌         |
+| `tags`          | Metadata key-value pairs                              | `dict`              |         | ❌         |
+| `attributes`    | List of attributes to calculate                       | list of `Attribute` |         | ✅         |
+| `online`        | Enable online retrieval (`True`) or not (`False`)     | `bool`              | `True`  | ❌         |
 
+</TabItem>
+<TabItem value="batch" label="BatchAttributeGroup">
+
+| Argument        | Description                                           | Type                | Default | Required? |
+| --------------- | ----------------------------------------------------- | ------------------- | ------- | --------- |
+| `name`          | The name of the attribute group                       | `string`            |         | ✅         |
+| `version`       | The version of the attribute group                    | `int`               | 1       | ❌         |
+| `attribute_key` | The attribute key associated with the attribute group | `AttributeKey`      |         | ✅         |
+| `owner`         | The owner of the attribute group                      | `Email`             |         | ✅         |
+| `description`   | A description of the attribute group                  | `string`            |         | ❌         |
+| `ttl`           | Time-to-live for attributes in the Profile Store      | `timedelta`         |         | ❌         |
+| `tags`          | Metadata key-value pairs                              | `dict`              |         | ❌         |
+| `attributes`    | List of attributes to calculate                       | list of `Attribute` |         | ✅         |
+| `batch_source`  | The batch data source for the attribute group         | `BatchSource`       |         | ❌         |
+| `online`        | Enable online retrieval (`True`) or not (`False`)     | `bool`              | `True`  | ❌         |
+
+</TabItem>
+<TabItem value="external" label="ExternalBatchAttributeGroup">
+
+| Argument        | Description                                           | Type            | Default | Required? |
+| --------------- | ----------------------------------------------------- | --------------- | ------- | --------- |
+| `name`          | The name of the attribute group                       | `string`        |         | ✅         |
+| `version`       | The version of the attribute group                    | `int`           | 1       | ❌         |
+| `attribute_key` | The attribute key associated with the attribute group | `AttributeKey`  |         | ✅         |
+| `owner`         | The owner of the attribute group                      | `Email`         |         | ✅         |
+| `description`   | A description of the attribute group                  | `string`        |         | ❌         |
+| `ttl`           | Time-to-live for attributes in the Profile Store      | `timedelta`     |         | ❌         |
+| `tags`          | Metadata key-value pairs                              | `dict`          |         | ❌         |
+| `batch_source`  | The batch data source for the attribute group         | `BatchSource`   |         | ✅         |
+| `fields`        | Table columns for syncing                             | list of `Field` |         | ✅         |
+| `online`        | Enable online retrieval (`True`) or not (`False`)     | `bool`          | `True`  | ❌         |
+
+</TabItem>
+</Tabs>
 
 If no `ttl` is set, the attribute key's `ttl` will be used. If the attribute key also has no `ttl`, there will be no time limit for attributes.
 
+### Versioning
+
+Use `version=1` for the first version of an attribute group. After publishing, if you want to change the definition in any way, iterate the version number.
+
 ## Extended stream attribute group example
 
-This example shows all the available configuration options for a stream attribute group. To find out how to configure a batch attribute group, see the [batch calculations](/docs/signals/define-attributes/using-python-sdk/batch-calculations/index.md) section.
+This example shows all the available configuration options for a stream attribute group.
 
 This attribute group groups attributes for a user attribute key, to be calculated in real-time.
 
@@ -143,10 +183,6 @@ stream_attribute_group = StreamAttributeGroup(
 ```
 
 Signals will start calculating attributes as soon as this attribute group configuration is applied.
-
-## Versioning
-
-Use `version=1` for the first version of an attribute group. After publishing, if you want to change the definition before republishing, iterate the version number. Use integers.
 
 ## Testing attribute groups
 

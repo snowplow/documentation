@@ -16,11 +16,10 @@ Only Snowflake and BigQuery are supported currently.
 
 Signals is configured slightly differently depending if you're using existing tables or creating new ones.
 
-| Signals component             | Required for existing attributes | Required for creating new attributes |
-| ----------------------------- | -------------------------------- | ------------------------------------ |
-| `BatchSource`                 | ✅                                | ❌                                    |
-| `BatchAttributeGroup`         | ❌                                | ✅ using `attributes`                 |
-| `ExternalBatchAttributeGroup` | ✅ using `fields`                 | ❌                                    |
+| Attribute group class         | Calculates new attributes | Define attributes or fields? | Requires `BatchSource` |
+| ----------------------------- | ------------------------- | ---------------------------- | ---------------------- |
+| `BatchAttributeGroup`         | ✅                         | `attributes`                 | ✅                      |
+| `ExternalBatchAttributeGroup` | ❌                         | `fields`                     | ❌                      |
 
 To create new attribute tables, the batch engine will help you set up the required dbt projects and models.
 

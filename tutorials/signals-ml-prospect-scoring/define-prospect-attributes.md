@@ -89,7 +89,7 @@ l30d=timedelta(days=30)
 Next, define the attributes to calculate.
 
 ```python
-from snowplow_signals import Attribute, Criteria, Criterion
+from snowplow_signals import Attribute, Criteria, Criterion, AtomicProperty
 
 # Latest page_view behavior
 latest_app_id = Attribute(
@@ -151,15 +151,13 @@ num_pricing_views_l7d = Attribute(
     aggregation="counter",
     criteria=Criteria(
         all=[
-            Criterion(
-                property="page_url",
-                operator="like",
-                value="%pricing%"
+            Criterion.like(
+                AtomicProperty(name="page_url"),
+                "%pricing%"
             )
         ]
     )
 )
-
 num_conversions_l7d = Attribute(
     name="num_conversions_l7d",
     type="int32",
@@ -219,15 +217,13 @@ num_pricing_views_l30d = Attribute(
     aggregation="counter",
     criteria=Criteria(
         all=[
-            Criterion(
-                property="page_url",
-                operator="like",
-                value="%pricing%"
+            Criterion.like(
+                AtomicProperty(name="page_url"),
+                "%pricing%"
             )
         ]
     )
 )
-
 num_conversions_l30d = Attribute(
     name="num_conversions_l30d",
     type="int32",

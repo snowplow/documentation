@@ -18,8 +18,6 @@ Snowplow supports the following Braze object types:
 
 ## Getting started
 
-### Prerequisites
-
 Before setting up the forwarder in Console, you'll need the following from your Braze account:
 
 - Braze REST API key with these permissions:
@@ -43,12 +41,12 @@ Before setting up the forwarder in Console, you'll need the following from your 
 ### Step 2: Create a forwarder
 
 1. From Console, navigate to **Destinations** \> **Destination list**. Navigate to the **Available** tab, filter for **SaaS applications**, and select **Configure** under Braze.
-2. **Select a pipeline**: Choose the pipeline where you want to deploy your destination.
-3. **Select yoaur connection**: Choose the Braze connection you configured in step 1.
+2. **Select a pipeline**: choose the pipeline where you want to deploy your destination.
+3. **Select yoaur connection**: choose the Braze connection you configured in step 1.
 4. Choose from the following **Braze object types**:
-   - **[Attributes](https://www.braze.com/docs/api/objects_filters/user_attributes_object)**: User profile data
-   - **[Events](https://www.braze.com/docs/api/objects_filters/event_object)**: Custom user actions
-   - **[Purchases](https://www.braze.com/docs/api/objects_filters/purchase_object)**: Transaction events
+   - **[Attributes](https://www.braze.com/docs/api/objects_filters/user_attributes_object)**: user profile data
+   - **[Events](https://www.braze.com/docs/api/objects_filters/event_object)**: custom user actions
+   - **[Purchases](https://www.braze.com/docs/api/objects_filters/purchase_object)**: transaction events
 4. Optionally, you can choose to **Import configuration from** an existing forwarder. This is helpful when migrating a forwarder setup from development to production.
 5. Click **Continue** to configure event filters and data mapping.
 
@@ -64,7 +62,7 @@ Use JavaScript expressions to define which events to forward and how to map Snow
   // Forward a list of custom events
   ["add_to_cart", "purchase"].includes(event.event_name)
   ```
-2. **Field mapping**: configure how Snowplow data maps to Braze fields. For each mapping, **Braze Field** represents the property name and **Snowplow expression** is a Javascript expression used to extract data from your Snowplow event. Snowplow provides default mappings based on common fields which can be overridden or deleted.
+2. **Field mapping**: configure how Snowplow data maps to Braze fields. For each mapping, **Braze Field** represents the property name and **Snowplow expression** is a JavaScript expression used to extract data from your Snowplow event. Snowplow provides default mappings based on common fields which can be overridden or deleted.
 3. **Custom functions**: write JavaScript functions for complex data transformations such as converting date formats, transforming enum values, combining multiple fields, or applying business logic. Functions are then available to use in both the event filter and field mapping sections.
 
 :::info
@@ -104,7 +102,7 @@ export const brazeEvents = {"$schema":"http://json-schema.org/draft-07/schema#",
 
 ### Purchases
 
-The purchase object represents a user purchasing a single item by a user at a particular time. Each purchase object is located within a purchase array, which can represent a transaction with multiple items. The purchase object has fields that allow the Braze backend to store and use this information for messages, data collection, and personalization.
+The purchase object represents a user purchasing a single item by a user at a particular time. Each purchase object is located within a purchase array, which can represent a transaction with multiple items. The purchase object has fields that allow the Braze back-end to store and use this information for messages, data collection, and personalization.
 
 export const brazePurchases = {"$schema":"http://json-schema.org/draft-07/schema#","type":"array","items":{"type":"object","properties":{"external_id":{"type":"string","minLength":1,"maxLength":988,"description":"Braze identifier for externally created IDs"},"user_alias":{"type":"object","properties":{"alias_name":{"type":"string","description":"The actual value of the alias identifier"},"alias_label":{"type":"string","description":"The 'label' of the alias identifier - eg domain_userid"}},"description":"Braze user Alias object","required":["alias_name","alias_label"],"additionalProperties":false},"_update_existing_only":{"type":"boolean","description":"If true, update only mode is used. false recommended"},"time":{"type":"string","format":"date-time","description":"Time of the purchase, required. Must be ISO 8601 format"},"product_id":{"type":"string","minLength":1,"description":"Product ID, required"},"currency":{"type":"string","pattern":"^[A-Z]+$","minLength":3,"maxLength":3,"description":"ISO 4217 Alphabetic Currency Code, required"},"price":{"type":"number","description":"Price per item, required"},"quantity":{"type":"integer","minimum":1,"maximum":100,"description":"Quantity of the item purchased, optional. Braze treats this as multiple individual purchases"},"email":{"type":"string","format":"email","minLength":1,"maxLength":75,"description":"Email address"},"app_id":{"type":"string","format":"uuid","description":"Keyword in Braze. if set, should match a Braze App Identifier, found in Braze console's API section. Can be omitted, but incorrect values may result in data loss in Braze."},"properties":{"type":"object","additionalProperties":true,"description":"Arbitrary key-value pairs assigned to the purchase in Braze"}},"anyOf":[{"oneOf":[{"required":["external_id"]},{"required":["user_alias"]},{"required":["braze_id"]}]},{"required":["phone"]},{"required":["email"]}],"required":["product_id","time","currency","price"],"additionalProperties":false},"consoleDefault":"customPurchasesFunction(event)"}
 

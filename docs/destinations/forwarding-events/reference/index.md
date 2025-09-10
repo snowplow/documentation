@@ -8,11 +8,11 @@ Event forwarders use JavaScript expressions for filtering events and mapping Sno
 
 ## Available event fields
 
-All fields on your Snowplow events can be referenced for both filters and field mappings.
+All fields in your Snowplow events can be referenced for both filters and field mappings.
 
 ### Standard atomic fields
 
-Access [standard Snowplow fields](https://docs.snowplow.io/docs/fundamentals/canonical-event/) in your filters and mappings:
+Access [standard Snowplow fields](https://docs.snowplow.io/docs/fundamentals/canonical-event/) in your filters and mappings like this:
 
 ```javascript
 // Standard atomic fields
@@ -29,7 +29,29 @@ event.useragent
 event.network_userid
 ```
 
-### Custom events
+### Custom events and entities
+
+You can also access fields in Snowplow or custom event and entity schemas.
+
+Forwarders transform Iglu schema URIs to JavaScript-safe field names:
+
+| Original schema                            | Transformed field name               |
+| ------------------------------------------ | ------------------------------------ |
+| `com.acme/signup/jsonschema/1-0-0`         | `unstruct_event_com_acme_signup_1`   |
+| `com.acme/user_profile/jsonschema/2-1-0`   | `contexts_com_acme_user_profile_2`   |
+| `nl.basjes/yauaa_context/jsonschema/1-0-4` | `contexts_nl_basjes_yauaa_context_1` |
+
+Schema names follow these transformation rules:
+
+- Self-describing events: `unstruct_event_` prefix
+- Entities: `contexts_` prefix
+- Dots and slashes become underscores
+- Only major version number retained
+- Hyphens in vendor/name become underscores
+
+:::info Optional chaining
+Always use [optional chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) (`?.`) when accessing custom events and entities to handle cases where they're not present.
+:::
 
 For a self-describing event with schema `com.acme/signup/jsonschema/1-0-0`:
 
@@ -39,8 +61,6 @@ event?.unstruct_event_com_acme_signup_1?.signup_method
 event?.unstruct_event_com_acme_signup_1?.user_type
 ```
 
-### Custom entities
-
 For entities with schema `com.acme/user_profile/jsonschema/1-0-0`:
 
 ```javascript
@@ -48,28 +68,6 @@ For entities with schema `com.acme/user_profile/jsonschema/1-0-0`:
 event?.contexts_com_acme_user_profile_1?.[0]?.subscription_tier
 event?.contexts_com_acme_user_profile_1?.[0]?.account_created
 ```
-
-:::info
-**Important**: Always use [optional chaining](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Optional_chaining) (`?.`) when accessing custom events and entities to handle cases where they're not present.
-:::
-
-### Schema name transformation
-
-Forwarders transform Iglu schema URIs to JavaScript-safe field names:
-
-| Original schema | Transformed field name |
-|----------------|----------------------|
-| `com.acme/signup/jsonschema/1-0-0` | `unstruct_event_com_acme_signup_1` |
-| `com.acme/user_profile/jsonschema/2-1-0` | `contexts_com_acme_user_profile_2` |
-| `nl.basjes/yauaa_context/jsonschema/1-0-4` | `contexts_nl_basjes_yauaa_context_1` |
-
-**Schema names follow these transformation rules**:
-
-- Self-describing events: `unstruct_event_` prefix
-- Entities: `contexts_` prefix
-- Dots and slashes become underscores
-- Only major version number retained
-- Hyphens in vendor/name become underscores
 
 ## Event filtering
 
@@ -98,8 +96,7 @@ event.app_id == "website" && event.event_name != "link_click"
 
 ### Advanced filtering patterns
 
-**Regular expressions**
-Apply these pattern matching techniques for flexible filtering:
+Regular expressions:
 
 ```javascript
 // Match multiple domains
@@ -112,7 +109,6 @@ event.event_name.match(/^purchase_/)
 event?.unstruct_event_com_acme_product_view_1?.category.match(/electronics|computers/)
 ```
 
-**Custom filter functions**
 Define reusable logic in the Custom Functions section:
 
 ```javascript
@@ -129,10 +125,12 @@ isHighValueUser(event) && event.event_name == "purchase"
 
 ## Field mapping
 
-Field mapping defines how Snowplow event data is transformed and sent to destination APIs. Each mapping consists of a destination field name and a JavaScript expression that extracts the value from your Snowplow event.
+Field mapping defines how Snowplow event data is transformed and sent to destination APIs. Each mapping consists of:
+* A destination field name
+* A JavaScript expression that extracts the value from your Snowplow event
 
 :::info
-The code snippets below contain JavaScript expressions that you can include in the **Snowplow Expression** mapping field in the UI.
+The code snippets below contain JavaScript expressions that you can include in the **Snowplow expression** mapping field in the UI.
 :::
 
 ### Basic mappings
@@ -157,7 +155,7 @@ event.platform == "web" ? event.page_url : event.screen_name
 
 ### Data transformation
 
-**Type conversion**
+Type conversion:
 
 ```javascript
 // String to number
@@ -173,7 +171,7 @@ new Date(event.collector_tstamp).toISOString()
 // returns '2025-08-15T20:02:10.106Z'
 ```
 
-**String manipulation**
+String manipulation:
 
 ```javascript
 // Case conversion
@@ -186,16 +184,14 @@ event.page_title.substring(0, 100)
 event.refr_urlhost?.split('.').pop()
 ```
 
-**Nested field mapping**
-
 Map to nested objects using dot notation in field names:
 
-| Field name | Snowplow expression |
-| ---------- | ------------------- |
-| `user.id` | `event.domain_userid` |
-| `properties.page_title` | `event.page_title` |
-| `properties.page_url` | `event.page_url` |
-| `properties.referrer` | `event.refr_urlhost` |
+| Field name              | Snowplow expression   |
+| ----------------------- | --------------------- |
+| `user.id`               | `event.domain_userid` |
+| `properties.page_title` | `event.page_title`    |
+| `properties.page_url`   | `event.page_url`      |
+| `properties.referrer`   | `event.refr_urlhost`  |
 
 Results in the following nested object:
 
@@ -258,7 +254,7 @@ function buildUserProfile(event) {
 
 ## Other common patterns
 
-### Timestamp formatting
+Timestamp formatting:
 
 ```javascript
 // ISO 8601 format
@@ -271,7 +267,7 @@ Math.floor(new Date(event.collector_tstamp).getTime() / 1000)
 new Date(event.collector_tstamp).toLocaleDateString()
 ```
 
-### Conditional field mapping
+Conditional field mapping:
 
 ```javascript
 // Platform-specific mapping
@@ -283,7 +279,7 @@ event.event_name == "purchase" ?
   null
 ```
 
-### Array handling
+Array handling:
 
 ```javascript
 // Get first entity

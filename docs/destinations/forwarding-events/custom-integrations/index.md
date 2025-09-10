@@ -4,7 +4,7 @@ description: "Build custom consumers for Snowplow event streams using AWS Lambda
 sidebar_position: 60
 ---
 
-Snowplow is underpinned by Event Streams, either AWS Kinesis, GCP PubSub or Apache Kafka. Before a Snowplow pipeline loads the events to a Data Warehouse, the enriched events are available on a stream and a custom consumer can be built to consume these events. Below we describe some high level concepts which can be used to consume the enriched event streams.
+Snowplow is underpinned by Event Streams, either AWS Kinesis, GCP PubSub or Apache Kafka. Before a Snowplow pipeline loads the events to a data warehouse, the enriched events are available on a stream. A custom consumer can be built to consume these events. Below we describe some high level concepts which can be used to consume the enriched event streams.
 
 ## Transforming the Enriched Stream to JSON
 

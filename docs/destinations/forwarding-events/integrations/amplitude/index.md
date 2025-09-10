@@ -12,17 +12,15 @@ Send Snowplow events to Amplitude to power product and marketing analytics or gu
 
 ## Getting started
 
-### Prerequisites
-
 Before setting up the forwarder in BDP Console, you'll need an Amplitude API Key. To find your API key:
 
 1. Log in to your Amplitude workspace
-2. Click **Settings** in the top right, then click **Organization Settings**.
-3. From the sidebar, select **Projects**, then select your Project to view its details.
-3. Copy the **API Key**.
+2. Click **Settings** in the top right, then click **Organization Settings**
+3. From the sidebar, select **Projects**, then select your Project to view its details
+4. Copy the **API Key**
 
-:::tip Test in a non-prod Project first
-To avoid introducing bad data in your production Amplitude project, we recommend using a test or dev Amplitude project to test your transformations first. Then, in Console, you can create a new Connection with your prod API key and a new forwarder that imports the configuration from your dev forwarder.
+:::tip Test in a non-production project first
+To avoid introducing bad data in your production Amplitude project, we recommend using a test or development Amplitude project to test your transformations first. Then, create a new Connection in Console with your production API key, and a new forwarder that imports the configuration from your development forwarder.
 :::
 
 ### Step 1: Create a connection
@@ -30,14 +28,14 @@ To avoid introducing bad data in your production Amplitude project, we recommend
 1. In Console, navigate to **Destinations** > **Connections**
 2. Select **Set up connection**
 3. Choose **Loader connection**, then **Amplitude**
-4. Enter your API key and select the **Server Location** where your Amplitude project is hosted.
+4. Enter your API key and select the **Server Location** where your Amplitude project is hosted
 5. Select **Confirm** to deploy the connection
 
 ### Step 2: Create a forwarder
 
 1. From Console, navigate to **Destinations** > **Destination list**. Navigate to the **Available** tab, filter for **SaaS applications**, and select **Configure** under Braze.
-2. **Select a pipeline**: Choose the pipeline where you want to deploy your destination.
-3. **Select a connection**: Choose the Amplitude connection you configured in step 1.
+2. **Select a pipeline**: choose the pipeline where you want to deploy your destination.
+3. **Select a connection**: choose the Amplitude connection you configured in step 1.
 4. Optionally, you can choose to **Import configuration from** an existing forwarder. This is helpful when migrating a forwarder setup from development to production.
 5. Click **Continue** to configure event filters and data mapping.
 

@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "array",
+  "items": {
+    "type": "object",
+    "properties": {
+      "external_id": {
+        "type": "string",
+        "minLength": 1,
+        "maxLength": 988,
+        "description": "Braze identifier for externally created IDs"
+      },
+      "user_alias": {
+        "type": "object",
+        "properties": {
+          "alias_name": {
+            "type": "string",
+            "description": "The actual value of the alias identifier"
+          },
+          "alias_label": {
+            "type": "string",
+            "description": "The 'label' of the alias identifier - eg domain_userid"
+          }
+        },
+        "description": "Braze user Alias object",
+        "required": ["alias_name", "alias_label"],
+        "additionalProperties": false
+      },
+      "_update_existing_only": {
+        "type": "boolean",
+        "description": "If true, update only mode is used. false recommended"
+      },
+      "time": {
+        "type": "string",
+        "format": "date-time",
+        "description": "Time of the purchase, required. Must be ISO 8601 format"
+      },
+      "product_id": {
+        "type": "string",
+        "minLength": 1,
+        "description": "Product ID, required"
+      },
+      "currency": {
+        "type": "string",
+        "pattern": "^[A-Z]+$",
+        "minLength": 3,
+        "maxLength": 3,
+        "description": "ISO 4217 Alphabetic Currency Code, required"
+      },
+      "price": {
+        "type": "number",
+        "description": "Price per item, required"
+      },
+      "quantity": {
+        "type": "integer",
+        "minimum": 1,
+        "maximum": 100,
+        "description": "Quantity of the item purchased, optional. Braze treats this as multiple individual purchases"
+      },
+      "email": {
+        "type": "string",
+        "format": "email",
+        "minLength": 1,
+        "maxLength": 75,
+        "description": "Email address"
+      },
+      "app_id": {
+        "type": "string",
+        "format": "uuid",
+        "description": "Keyword in Braze. if set, should match a Braze App Identifier, found in Braze console's API section. Can be omitted, but incorrect values may result in data loss in Braze."
+      },
+      "properties": {
+        "type": "object",
+        "additionalProperties": true,
+        "description": "Arbitrary key-value pairs assigned to the purchase in Braze"
+      }
+    },
+    "anyOf": [
+      {
+        "oneOf": [
+          { "required": ["external_id"] },
+          { "required": ["user_alias"] },
+          { "required": ["braze_id"] }
+        ]
+      },
+      { "required": ["phone"] },
+      { "required": ["email"] }
+    ],
+    "required": ["product_id", "time", "currency", "price"],
+    "additionalProperties": false
+  },
+  "consoleDefault": "customPurchasesFunction(event)"
+}

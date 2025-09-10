@@ -19,7 +19,7 @@ Each of the three available data sources has its own attribute group class. Choo
 <Tabs groupId="source" queryString>
 <TabItem value="stream" label="StreamAttributeGroup" default>
 
-Use a `StreamAttributeGroup` to calculate attributes from the real-time event stream. Read more about this in the [stream calculations](/docs/signals/define-attributes/using-python-sdk/stream-calculations/index.md) section.
+Use a `StreamAttributeGroup` to calculate attributes from the real-time event stream.
 
 ```python
 from snowplow_signals import StreamAttributeGroup, domain_sessionid
@@ -63,6 +63,8 @@ my_batch_attribute_group = BatchAttributeGroup(
 
 Use an `ExternalBatchAttributeGroup` to sync attributes from an existing warehouse table. Read more about this in the [batch calculations](/docs/signals/define-attributes/using-python-sdk/batch-calculations/index.md) section.
 
+In this case, the attributes are already defined elsewhere and pre-calculated in the warehouse. Instead of `attributes`, this attribute group has `fields`.
+
 ```python
 from snowplow_signals import ExternalBatchAttributeGroup, domain_sessionid, Field
 
@@ -71,7 +73,7 @@ my_external_batch_attribute_group = ExternalBatchAttributeGroup(
     version=1,
     attribute_key=domain_sessionid,
     owner="user@company.com",
-    batch_source=data_source, # Assuming Data source previously configured
+    batch_source=data_source,   # Assuming this object has been previously defined
     fields=[
         Field(
             name="TOTAL_TRANSACTIONS",
@@ -109,7 +111,7 @@ The tables below list all available arguments for each type of attribute group:
 | `ttl`           | Time-to-live for attributes in the Profile Store      | `timedelta`         |         | ❌         |
 | `tags`          | Metadata key-value pairs                              | `dict`              |         | ❌         |
 | `attributes`    | List of attributes to calculate                       | list of `Attribute` |         | ✅         |
-| `online`        | Enable online retrieval (`True`) or not (`False`)     | `bool`              | `True`  | ❌         |
+| `online`        | Calculate attributes (`True`) or not (`False`)        | `bool`              | `True`  | ❌         |
 
 </TabItem>
 <TabItem value="batch" label="BatchAttributeGroup">
@@ -125,7 +127,9 @@ The tables below list all available arguments for each type of attribute group:
 | `tags`          | Metadata key-value pairs                              | `dict`              |         | ❌         |
 | `attributes`    | List of attributes to calculate                       | list of `Attribute` |         | ✅         |
 | `batch_source`  | The batch data source for the attribute group         | `BatchSource`       |         | ❌         |
-| `online`        | Enable online retrieval (`True`) or not (`False`)     | `bool`              | `True`  | ❌         |
+| `online`        | Calculate attributes (`True`) or not (`False`)        | `bool`              | `True`  | ❌         |
+
+For `BatchAttributeGroup` groups, it's a good idea to publish initially with `online=False`. This is because Signals will be unable to calculate the attributes until the dbt project has been configured to create the new table. Once you've configured dbt, republish the attribute group with `online=True` to start calculating the attributes.
 
 </TabItem>
 <TabItem value="external" label="ExternalBatchAttributeGroup">
@@ -141,48 +145,18 @@ The tables below list all available arguments for each type of attribute group:
 | `tags`          | Metadata key-value pairs                              | `dict`          |         | ❌         |
 | `batch_source`  | The batch data source for the attribute group         | `BatchSource`   |         | ✅         |
 | `fields`        | Table columns for syncing                             | list of `Field` |         | ✅         |
-| `online`        | Enable online retrieval (`True`) or not (`False`)     | `bool`          | `True`  | ❌         |
+| `online`        | Calculate attributes (`True`) or not (`False`)        | `bool`          | `True`  | ❌         |
 
 </TabItem>
 </Tabs>
 
 If no `ttl` is set, the attribute key's `ttl` will be used. If the attribute key also has no `ttl`, there will be no time limit for attributes.
 
+Use the `online` property to control whether or not Signals should actively compute the attributes, or just register the configuration.
+
 ### Versioning
 
 Use `version=1` for the first version of an attribute group. After publishing, if you want to change the definition in any way, iterate the version number.
-
-## Extended stream attribute group example
-
-This example shows all the available configuration options for a stream attribute group.
-
-This attribute group groups attributes for a user attribute key, to be calculated in real-time.
-
-```python
-from snowplow_signals import StreamAttributeGroup, user_id
-
-stream_attribute_group = StreamAttributeGroup(
-    name="comprehensive_stream_attribute_group",
-    version=2,
-    attribute_key=user_id,
-    owner="data-team@company.com",
-    attributes=[
-        page_view_count,
-        session_duration,
-        conversion_rate,
-    ],
-    description="User engagement attributes in real-time",
-    ttl=timedelta(days=90),  # Attributes live in the Profiles Store for 90 days
-    tags={
-        "team": "growth",
-        "priority": "high",
-    },
-
-    # Note: batch_source and fields are not used for stream attribute groups
-)
-```
-
-Signals will start calculating attributes as soon as this attribute group configuration is applied.
 
 ## Testing attribute groups
 
@@ -228,6 +202,28 @@ The table below lists all available arguments for `get_attribute_group()`
 
 If you don't specify a version, Signals will retrieve the latest version.
 
+## Publishing attribute groups
+
+Use the `publish()` method to [register attribute groups](/docs/signals/define-attributes/using-python-sdk/index.md#publishing-and-deleting) with Signals. This makes them available for real-time calculation and retrieval.
+
+```python
+from snowplow_signals import Signals
+
+# Connect to Signals
+# See the main configuration section for more on this
+sp_signals = Signals(
+        {{ config }}
+    )
+
+# Publish attribute groups
+sp_signals.publish([
+        my_attribute_group,
+        my_other_attribute_group
+    ])
+```
+
+If you only want to publish the attribute group definitions, and don't want to calculate the attribute values now, set the `online=False` option.
+
 ## Attribute groups can be set to expire
 
 Some attributes will only be relevant for a certain amount of time, and eventually stop being updated.
@@ -235,3 +231,33 @@ Some attributes will only be relevant for a certain amount of time, and eventual
 To avoid stale attributes staying in your Profiles Store forever, you can configure TTL lifetimes for attribute keys and attribute groups. When none of the attributes for an attribute key or attribute group have been updated for the defined lifespan, the attribute key or attribute group expires. Any attribute values for this attribute key or attribute group will be deleted: fetching them will return `None` values.
 
 If Signals then processes a new event that calculates the attribute again, or syncs the attribute from the warehouse again, the expiration timer is reset.
+
+## Extended stream attribute group example
+
+This example shows all the available configuration options for a stream attribute group.
+
+This attribute group groups attributes for a user attribute key, to be calculated in real-time.
+
+```python
+from snowplow_signals import StreamAttributeGroup, user_id
+
+stream_attribute_group = StreamAttributeGroup(
+    name="comprehensive_stream_attribute_group",
+    version=2,
+    attribute_key=user_id,
+    owner="data-team@company.com",
+    attributes=[
+        page_view_count,
+        session_duration,
+        conversion_rate,
+    ],
+    description="User engagement attributes in real-time",
+    ttl=timedelta(days=90),  # Attributes live in the Profiles Store for 90 days
+    tags={
+        "team": "growth",
+        "priority": "high",
+    },
+)
+```
+
+Signals will start calculating attributes as soon as this attribute group configuration is applied.

@@ -34,3 +34,23 @@ The table below lists all available arguments for a `Service`
 | `owner`            | The owner of the service, typically the email of the primary maintainer | `string`    | ✅         |
 | `attribute_groups` | A list of attribute groups                                              | `timedelta` | ❌         |
 | `tags`             | String key-value pairs of arbitrary metadata                            | dictionary  | ❌         |
+
+## Publishing services
+
+Use the `publish()` method to [register services](/docs/signals/define-attributes/using-python-sdk/index.md#publishing-and-deleting) with Signals. This makes them available for use.
+
+```python
+from snowplow_signals import Signals
+
+# Connect to Signals
+# See the main configuration section for more on this
+sp_signals = Signals(
+        {{ config }}
+    )
+
+# Publish services
+sp_signals.publish([
+        my_service,
+        my_other_service
+    ])
+```

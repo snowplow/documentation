@@ -16,147 +16,8 @@ Only Snowflake and BigQuery are supported currently.
 
 Signals is configured slightly differently depending if you're using existing tables or creating new ones.
 
-| Attribute group class         | Calculates new attributes | Define attributes or fields? | Requires `BatchSource` |
-| ----------------------------- | ------------------------- | ---------------------------- | ---------------------- |
-| `BatchAttributeGroup`         | ✅                         | `attributes`                 | ✅                      |
-| `ExternalBatchAttributeGroup` | ❌                         | `fields`                     | ❌                      |
-
-To create new attribute tables, the batch engine will help you set up the required dbt projects and models.
-
-## Using existing attributes
-
-Using existing tables in your warehouse is the more straight-forward approach, as it doesn't require any additional modeling.
-
-The `BatchSource` defines how to connect to the table of interest in your warehouse. Here's an example:
-
-```python
-from snowplow_signals import BatchSource
-
-data_source = BatchSource(
-    name="ecommerce_transaction_interactions_source",
-    database="SNOWPLOW_DEV1",
-    schema="SIGNALS",
-    table="SNOWPLOW_ECOMMERCE_TRANSACTION_INTERACTIONS_FEATURES",
-    timestamp_field="UPDATED_AT",
-    owner="user@company.com",
-)
-```
-
-### Source options
-
-The table below lists all available arguments for a `BatchSource`:
-
-| Argument          | Description                                                                                                                                     | Type       | Required? |
-| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------- |
-| `name`            | The name of the source                                                                                                                          | `string`   | ✅         |
-| `description`     | A description of the source                                                                                                                     | `string`   | ❌         |
-| `database`        | The database where the attributes are stored                                                                                                    | `string`   | ✅         |
-| `schema`          | The schema for the table of interest                                                                                                            | `string`   | ✅         |
-| `table`           | The table where the attributes are stored                                                                                                       | `string`   | ✅         |
-| `timestamp_field` | Primary timestamp of the attribute value, the sync engine uses this to incrementally process only the rows that have changed since the last run | `string`   | ❌         |
-| `owner`           | The owner of the source, typically the email of the primary maintainer                                                                          | `string`   | ❌         |
-| `tags`            | String key-value pairs of arbitrary metadata                                                                                                    | dictionary | ❌         |
-
-The sync engine only sends rows with a newer timestamp to the Profiles Store, based on the `timestamp_field`. For each attribute key, make sure there is only one row per timestamp — otherwise, one value may be discarded arbitrarily.
-
-
-### Defining an attribute group with fields
-
-Pass your source to a new `ExternalBatchAttributeGroup` so that Signals does not sync the attributes. This will be done later, once Signals has connected to the table.
-
-For stream or batch attributes that are calculated by Signals, an attribute group contains references to your attribute definitions. In this case, the attributes are already defined elsewhere and pre-calculated in the warehouse. Instead of `attributes`, this attribute group will have `fields`.
-
-Specify the fields (columns) you want to use from the source table, using `Field`. Here's an example:
-
-```python
-from snowplow_signals import ExternalBatchAttributeGroup, domain_userid, Field
-
-attribute_group = ExternalBatchAttributeGroup(
-    name="ecommerce_transaction_interactions_attributes",
-    version=1,
-    attribute_key=domain_userid,
-    owner="user@company.com",
-    batch_source=data_source,
-    fields=[
-        Field(
-            name="TOTAL_TRANSACTIONS",
-            type="int32",
-        ),
-        Field(
-            name="TOTAL_REVENUE",
-            type="int32",
-        ),
-        Field(
-            name="AVG_TRANSACTION_REVENUE",
-            type="int32",
-        ),
-    ],
-)
-```
-
-The table below lists all available arguments for a `Field`:
-
-| Argument      | Description                                  | Type                                                                                                                                                                                                                | Required? |
-| ------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
-| `name`        | The name of the field                        | `string`                                                                                                                                                                                                            | ✅         |
-| `description` | A description of the field                   | `string`                                                                                                                                                                                                            | ❌         |
-| `type`        | The type of the field                        | One of: `bytes`, `string`, `int32`, `int64`, `double`, `float`, `bool`, `unix_timestamp`, `bytes_list`, `string_list`, `int32_list`, `int64_list`, `double_list`, `float_list`, `bool_list`, `unix_timestamp_list`, | ✅         |
-| `tags`        | String key-value pairs of arbitrary metadata |                                                                                                                                                                                                                     | ❌         |
-
-### Registering the table with Signals
-
-Apply the attribute group configuration to Signals.
-
-```python
-sp_signals.publish([attribute_group])
-```
-
-Signals will connect to the table, but the attributes will not be synced into Signals yet because the attribute group has `online=False`.
-
-To send the attributes to the Profiles Store, change the `online` parameter to `True`, and apply the attribute group again.
-
-```python
-sp_signals.publish([attribute_group])
-```
-
-The sync will begin: the sync engine will look for new records at a given interval, based on the `timestamp_field` and the last time it ran. The default time interval is 1 hour.
-
-## Creating new attribute tables
-
-To create new batch attributes, you'll need to define attributes and attribute groups as for stream attributes. However, further steps are necessary to create the required dbt models and tables in your warehouse, and register them with Signals.
-
-The included batch engine CLI tool will help you with this process. Check out the full instructions in [Creating new batch attributes](/docs/signals/define-attributes/using-python-sdk/batch-calculations/batch-engine/index.md) or the [batch engine tutorial](/tutorials/signals-batch-engine/start/).
-
-### Defining an attribute group with attributes
-
-The key difference between a standard stream [attribute_group](/docs/signals/define-attributes/using-python-sdk/attribute-groups/index.md) and one meant for batch processing is the `offline=True` parameter.
-
-The attribute key here is typically the user, which may be the `domain_userid` or other Snowplow identifier fields, such as the logged in `user_id`.
-
-```python
-from snowplow_signals import BatchAttributeGroup, domain_userid
-
-attribute_group = BatchAttributeGroup(
-    name="batch_ecommerce_attributes",
-    version=1,
-    attribute_key=domain_userid,
-    owner="user@company.com"
-    attributes=[
-        products_added_to_cart_last_7_days,
-        total_product_price_clv,
-        first_mkt_source,
-        last_device_class
-    ],
-)
-```
-
-### Creating and registering tables
-
-Signals uses dbt to create attribute group-specific attribute tables. The Signals Python SDK includes an optional CLI tool called the batch engine for configuring this.
-
-It will help you create the required dbt models and tables in your warehouse, and register them with Signals.
-
-Check out the full instructions in [Creating new batch attributes](/docs/signals/define-attributes/using-python-sdk/batch-calculations/batch-engine/index.md).
+* `BatchAttributeGroup`: create a new warehouse table with new attributes, calculated from your `atomic` events table
+* `ExternalBatchAttributeGroup`: sync pre-calculated values to Signals from an existing warehouse table
 
 ## Sync engine
 
@@ -166,4 +27,78 @@ The engine will be enabled when you either:
 * Apply an `ExternalBatchAttributeGroup` for an existing table
 * Run the batch engine `sync` command after creating new attribute tables
 
-Once enabled, syncs begin at a fixed interval. By default, this is every 5 minutes. Only the records that have changed since the last sync are sent to the Profiles Store.
+Once enabled, syncs begin at a fixed interval. By default, this is every 1 hour. Only the records that have changed since the last sync are sent to the Profiles Store.
+
+## Using existing attributes
+
+Using existing tables in your warehouse is the more straight-forward approach, as it doesn't require any additional modeling. You'll need to define an `ExternalBatchAttributeGroup`, including a `BatchSource` warehouse configuration object. Check out the TODO ADD LINK
+
+To start syncing existing tables, [publish](/docs/signals/define-attributes/using-python-sdk/index.md#publishing-and-deleting) your `ExternalBatchAttributeGroup` group to Signals.
+
+```python
+sp_signals.publish([attribute_group])
+```
+
+The sync will begin: the sync engine will look for new records at a given interval, based on the `timestamp_field` and the last time it ran. The default time interval is 1 hour.
+
+## Creating new attribute tables
+
+To create new batch attributes, you'll need to define a `BatchAttributeGroup`, ADD LINK and publish it to Signals. However, further steps are necessary to create the required dbt models and tables in your warehouse, and register them with Signals.
+
+The included batch engine CLI tool will help you with this process. Check out the [batch engine tutorial](/tutorials/signals-batch-engine/start/) for a step-by-step guide.
+
+### Installing the CLI tool
+
+The [Signals Python SDK](https://pypi.org/project/snowplow-signals/) includes an optional CLI tool called the batch engine. It will help you create the required dbt models and tables in your warehouse, and register them with Signals.
+
+The batch engine is installed separately from the main Python SDK.
+
+Choose where your new Signals dbt projects will live. Install the CLI tool there with:
+
+```bash
+pip install 'snowplow-signals[batch-engine]'
+```
+
+This adds the `snowplow-batch-engine` tool to your environment.
+
+### CLI commands
+
+The available options are:
+
+```
+  init              # Initialize dbt project structure and base configuration
+  generate          # Generate dbt project assets
+  sync       # Registers the attribute table as a data source with Signals and publishes the Attribute Group so that syncing can begin
+  test_connection   # Test the connection to the authentication and API services
+```
+
+A `--verbose` flag is available for every command.
+
+Here's an example of using the CLI:
+
+```bash
+snowplow-batch-engine init --verbose
+```
+
+### Creating and registering tables
+
+Check out the [batch engine tutorial](/tutorials/signals-batch-engine/start/) for a walkthrough of the required steps.
+
+The dbt models generated by the batch engine process events incrementally. This avoids unnecessary reprocessing, and along with the pre-aggregation logic, minimizes computational costs.
+
+### Model variables
+
+The model created for each attribute group has configurable variables. The most important one to update before running is the `snowplow__start_date` variable. This will depend on how far back you have data, and how much of it you want to process.
+
+You will need to update the variables for each attribute group individually, by editing the `dbt_project.yml` files. The table below lists the configurable variables for each model:
+
+| Variable                               | Description                                                                                           | Default Value  |
+| -------------------------------------- | ----------------------------------------------------------------------------------------------------- | -------------- |
+| `snowplow__start_date`                 | Date from where the model starts looking for events, based on both `load_tstamp` and `derived_tstamp` | `'2025-01-01'` |
+| `snowplow__app_id`                     | Filter the data on specific `app_id`s                                                                 | `[]`           |
+| `snowplow__backfill_limit_days`        | Limit backfill increments for the `filtered_events_table`                                             | `1`            |
+| `snowplow__late_event_lookback_days`   | The number of days to allow for late arriving data to be reprocessed during daily aggregation         | `5`            |
+| `snowplow__min_late_events_to_process` | The threshold number of skipped daily events to process during daily aggregation                      | `1`            |
+| `snowplow__atomic_schema`              | Change this if you aren't using `atomic` schema for Snowplow event data                               | `'atomic'`     |
+| `snowplow__database`                   | Change this if you aren't using `target.database` for Snowplow event data                             |                |
+| `snowplow__events_table`               | Change this if you aren't using `events` table for Snowplow event data                                | `'events'`     |

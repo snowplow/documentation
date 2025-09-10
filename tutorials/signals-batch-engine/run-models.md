@@ -5,8 +5,6 @@ title: Run and test models
 
 Now that your models are generated, it's time to run them and verify that everything works as expected. This step allows you to test your models locally before moving them to production.
 
-Before running your new models, you'll need to configure their dbt connection profile. Read more about this in the [dbt documentation](https://docs.getdbt.com/docs/core/connect-data-platform/connection-profiles). The batch engine doesn't generate a `profiles.yml` because it isn't best practice to store credentials in the same place as models.
-
 During the run process:
 * dbt will compile your SQL models
 * Tables will be created in your data warehouse
@@ -19,6 +17,10 @@ Best practice to ensure successful model runs:
 * Document any custom modifications you make
 * Keep track of model versions
 * Regularly update your models as your data evolves
+
+## Configure dbt
+
+Before running your new models, you'll need to configure their dbt connection profile. Read more about this in the [dbt documentation](https://docs.getdbt.com/docs/core/connect-data-platform/connection-profiles). The batch engine doesn't generate a `profiles.yml` because it isn't best practice to store credentials in the same place as models.
 
 ## Run the models
 

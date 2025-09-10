@@ -31,3 +31,4 @@ manifests
 
 # Local Netlify folder
 .netlify
+.claude

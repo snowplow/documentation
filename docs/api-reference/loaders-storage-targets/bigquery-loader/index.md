@@ -12,7 +12,7 @@ import LoaderDiagram from '@site/docs/api-reference/loaders-storage-targets/bigq
 import DeployOverview from '@site/docs/api-reference/loaders-storage-targets/bigquery-loader/_deploy-overview.md';
 ```
 
-## Overview
+The BigQuery Streaming Loader is an application that loads Snowplow events to BigQuery.
 
 <Tabs groupId="cloud" queryString lazy>
   <TabItem value="aws" label="AWS" default>

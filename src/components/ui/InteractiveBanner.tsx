@@ -1,9 +1,8 @@
 'use client'
 
-import React, { useState, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'motion/react'
 import { Loader2 } from 'lucide-react'
-import PhysicsParticles from './PhysicsParticles'
 import { Button } from './button.tsx'
 
 function Frame941() {
@@ -113,11 +112,37 @@ export default function InteractiveBanner() {
   const [isHovered, setIsHovered] = useState(false)
   const [clickEffect, setClickEffect] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
+  const [isVisible, setIsVisible] = useState(true)
+  const [isPageVisible, setIsPageVisible] = useState(true)
 
   const handleClick = () => {
     setClickEffect(true)
     setTimeout(() => setClickEffect(false), 1200)
   }
+
+  // Observe banner visibility in viewport
+  useEffect(() => {
+    if (!containerRef.current || typeof IntersectionObserver === 'undefined') return
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const entry = entries[0]
+        setIsVisible(entry.isIntersecting)
+      },
+      { root: null, threshold: 0.1 }
+    )
+    observer.observe(containerRef.current)
+    return () => observer.disconnect()
+  }, [])
+
+  // Page/tab visibility
+  useEffect(() => {
+    const handleVisibility = () => setIsPageVisible(!document.hidden)
+    document.addEventListener('visibilitychange', handleVisibility)
+    handleVisibility()
+    return () => document.removeEventListener('visibilitychange', handleVisibility)
+  }, [])
+
+  const shouldRenderParticles = isHovered && isVisible && isPageVisible
 
   return (
     <motion.div
@@ -134,15 +159,12 @@ export default function InteractiveBanner() {
       onMouseLeave={() => setIsHovered(false)}
       onClick={handleClick}
     >
-      {/* Animated background */}
-      <AnimatedBackground />
-      
-      {/* Physics-based particles with collision detection */}
-      <PhysicsParticles 
-        isHovered={isHovered} 
-        onClick={clickEffect} 
-        containerRef={containerRef}
+      {/* Subtle Tailwind-only gradient background */}
+      <div
+        className="absolute inset-0 rounded-lg bg-[linear-gradient(135deg,hsl(var(--primary)/0.18)_0%,hsl(var(--primary)/0.06)_35%,hsl(var(--background)/1)_100%)] bg-[length:300%_300%] animate-subtle-gradient"
       />
+      
+      {/* Particles removed for near-zero CPU usage */}
       
       {/* Border */}
       <div

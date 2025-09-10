@@ -1,6 +1,7 @@
 ---
 position: 3
 title: Define an attribute group
+description: "Create an attribute group in Snowplow Signals to calculate session metrics like page views, browser, and referrer data in real time."
 ---
 
 Attribute groups are where you define the data you want to calculate. To create an [attribute group](/docs/signals/concepts), go to **Signals** > **Attribute groups** in BDP Console and click **Create attribute group**.

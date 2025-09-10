@@ -1,6 +1,7 @@
 ---
 title: Create intermediary API endpoint
 position: 5
+description: "Build a FastAPI endpoint to serve Snowplow Signals attributes and ML predictions for real-time prospect scoring."
 ---
 
 You now have attribute values in your Profiles Store, and a trained ML model. The next step is to create and deploy an endpoint to serve attributes and predictions.

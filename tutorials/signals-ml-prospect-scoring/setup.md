@@ -1,6 +1,7 @@
 ---
 title: Set up notebook
 position: 2
+description: "Configure Google Colab notebook with Snowplow Signals credentials for the prospect scoring machine learning tutorial."
 ---
 
 This tutorial uses a Google Colab Juypter [notebook](https://colab.research.google.com/github/snowplow-incubator/signals-notebooks/blob/main/web/web_prospect_scoring_end_to_end.ipynb). Follow along in the notebook using your own data.

@@ -1,6 +1,7 @@
 ---
 position: 1.5
 title: Install the CLI
+description: "Install the Snowplow Signals batch engine CLI tool, and configure environment variables for warehouse attribute processing."
 ---
 
 Choose where to generate your Signals dbt models. We recommend creating a new repository.

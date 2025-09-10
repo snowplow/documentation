@@ -1,6 +1,7 @@
 ---
 position: 4
 title: Generate data models
+description: "Create dbt SQL models for Snowplow Signals batch attribute processing with base models, filtered events, and aggregations."
 ---
 
 Each project will have its own set of models generated based on its specific schema and requirements.

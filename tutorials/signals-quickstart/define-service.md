@@ -1,6 +1,7 @@
 ---
 position: 4.5
 title: Define a service
+description: "Configure a Snowplow Signals service to group attribute groups for easy consumption in applications."
 ---
 
 [Services](/docs/signals/concepts/#services) group attribute groups together for serving to your applications.

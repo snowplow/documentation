@@ -1,6 +1,7 @@
 ---
 position: 5
 title: Run and test models
+description: "Run dbt models to create Snowplow Signals attribute tables in your warehouse, and validate data quality."
 ---
 
 Now that your models are generated, it's time to run them and verify that everything works as expected. This step allows you to test your models locally before moving them to production.

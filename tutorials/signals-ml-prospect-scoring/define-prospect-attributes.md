@@ -1,6 +1,7 @@
 ---
 title: Configure Signals attributes
 position: 3
+description: "Define behavioral data attributes in Snowplow Signals for prospect scoring, including page views, sessions, and conversion events."
 ---
 
 To use Signals, you need to define which attributes to calculate, and then apply the configuration. Signals will calculate the attributes from your real-time event stream.

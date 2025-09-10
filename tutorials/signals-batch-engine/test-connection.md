@@ -1,6 +1,7 @@
 ---
 position: 2
 title: Test the connection
+description: "Verify connectivity to Snowplow Signals API and check database, cache, and storage service health."
 ---
 
 The first step is to confirm that you can connect to all the necessary services.

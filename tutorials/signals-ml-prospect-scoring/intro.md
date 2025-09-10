@@ -1,6 +1,7 @@
 ---
 title: Introduction
 position: 1
+description: "Build a real-time prospect scoring system using Snowplow Signals and machine learning to predict conversion likelihood."
 ---
 
 Welcome to the [Snowplow Signals](/docs/signals/) real-time prospect scoring tutorial.

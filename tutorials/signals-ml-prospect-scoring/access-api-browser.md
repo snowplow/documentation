@@ -1,6 +1,7 @@
 ---
 title: See scores in the browser
 position: 5.5
+description: "Deploy the prospect scoring API using ngrok, and display real-time conversion predictions in the browser console."
 ---
 
 The final requirement is to see the prospect scores and predictions in the browser. In this tutorial, we'll call the API every 10 seconds.

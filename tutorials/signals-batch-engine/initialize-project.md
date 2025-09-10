@@ -1,6 +1,7 @@
 ---
 position: 3
 title: Create projects
+description: "Initialize dbt projects for Snowplow Signals batch attribute groups, and set up the required folder structure."
 ---
 
 Having tested the connection, you can now initialize your projects.
@@ -18,7 +19,7 @@ You can generate projects for all the relevant attribute groups in Signals at on
 
 ```bash
 # For all attribute groups
-snowplow-batch-engine init \ 
+snowplow-batch-engine init \
   --target-type snowflake \
   --verbose
 

@@ -1,6 +1,7 @@
 ---
 position: 10
 title: Conclusion
+description: "Complete the Snowplow Signals batch engine tutorial, and explore next steps for warehouse-based customer intelligence."
 ---
 
 In this tutorial you've learned how to calculate attributes from your warehouse data, and apply them to Signals.

@@ -1,6 +1,7 @@
 ---
 position: 10
 title: Conclusion
+description: "Complete the Snowplow Signals machine learning prospect scoring tutorial, and explore advanced real-time personalization use cases."
 ---
 
 In this tutorial you've learned how to build a prospect scoring system using Snowplow Signals together with a machine learning model, your own website, and your own Snowplow data.

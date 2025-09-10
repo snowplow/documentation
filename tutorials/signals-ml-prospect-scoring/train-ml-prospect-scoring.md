@@ -1,6 +1,7 @@
 ---
 title: Train the ML prospect scoring model
 position: 4
+description: "Create and train an XGBoost machine learning model using historical Snowplow behavioral data to predict prospect conversion."
 ---
 
 As prospects browse your website, Signals will calculate the aggregated attributes in near real time.

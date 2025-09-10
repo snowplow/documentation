@@ -5,35 +5,15 @@ sidebar_label: "Attribute groups"
 description: "Configure stream, batch, and external batch attribute groups programmatically using the Snowplow Signals Python SDK."
 ---
 
-Signals has two attribute groupings:
-* Attribute groups, for defining attributes
-* Services, for consuming attributes
+Define the behavior you want to capture in [attribute groups](/docs/signals/concepts/index.md#attribute-groups).
 
-An attribute group is a versioned collection of attributes; the attributes are the properties of the attribute group. Each attribute group is specific to one attribute key and one data source (stream or batch).
+## Attribute groups by data source
 
-## Attribute management
+Each of the three available data sources has its own attribute group class. Choose which one to use depending on how you want to calculate and sync the attributes:
 
-Every attribute group has a version number.
-
-Signals provides functionality for separating attribute definition from calculation. This allows you to set up your attributes and business logic before putting them into production. The options are different depending on whether the attribute group is for stream or batch attributes.
-
-To configure a table for batch attributes, you may choose to set up an attribute group using that source without defining any attributes initially. This ensures that the table is ready and tested for adding and calculating attributes. Read more about configuring batch attributes and attribute groups in the [batch calculations](/docs/signals/define-attributes/using-python-sdk/batch-calculations/index.md) section.
-
-For stream attributes, you can choose to configure and apply attribute groups that don't calculate their attribute values.
-
-This means that configuration, calculation, syncing, and retrieval are fully decoupled.
-
-## Versioning
-
-TODO
-
-## Types of attribute groups
-
-Signals includes three types of attribute groups. Choose which one to use depending on how you want to calculate and sync the attributes:
-
-- `StreamAttributeGroup`: processed from the real-time event stream
-- `BatchAttributeGroup`: processed using the batch engine
-- `ExternalBatchAttributeGroup`: uses precalculated attributes from an existing warehouse table that's synced into Signals
+- `StreamAttributeGroup`: stream source, processed from the real-time event stream
+- `BatchAttributeGroup`: batch source, processed using the batch engine
+- `ExternalBatchAttributeGroup`: external batch source, uses precalculated attributes from an existing warehouse table that's synced into Signals
 
 ### StreamAttributeGroup
 
@@ -125,7 +105,7 @@ Below is a summary of all options available for configuring attribute groups in 
 | `tags`          | Metadata key-value pairs                               | `dict`              |         | ❌         | All                                                 |
 | `attributes`    | List of attributes to calculate                        | list of `Attribute` |         | ✅         | `StreamAttributeGroup`, `BatchAttributeGroup`       |
 | `batch_source`  | The batch data source for the attribute group          | `BatchSource`       |         | ✅/❌       | `BatchAttributeGroup`/`ExternalBatchAttributeGroup` |
-| `fields`        | Table columns for syncing                      | `Field`             |         | ✅         | `ExternalBatchAttributeGroup`                       |
+| `fields`        | Table columns for syncing                              | `Field`             |         | ✅         | `ExternalBatchAttributeGroup`                       |
 | `offline`       | Calculate in warehouse (`True`) or real-time (`False`) | `bool`              | varies  | ❌         | All                                                 |
 | `online`        | Enable online retrieval (`True`) or not (`False`)      | `bool`              | `True`  | ❌         | All                                                 |
 
@@ -163,6 +143,10 @@ stream_attribute_group = StreamAttributeGroup(
 ```
 
 Signals will start calculating attributes as soon as this attribute group configuration is applied.
+
+## Versioning
+
+Use `version=1` for the first version of an attribute group. After publishing, if you want to change the definition before republishing, iterate the version number. Use integers.
 
 ## Testing attribute groups
 

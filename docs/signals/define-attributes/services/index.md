@@ -1,6 +1,7 @@
 ---
 title: "Services"
 sidebar_position: 32
+description: "Group multiple attribute groups together using services to create stable interfaces for consuming calculated attributes in applications."
 ---
 
 [Services](/docs/signals/concepts/index.md#services) group attribute groups together for serving to your applications.

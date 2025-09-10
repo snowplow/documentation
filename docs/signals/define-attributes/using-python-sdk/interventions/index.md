@@ -2,6 +2,7 @@
 title: "Defining Rule-based Interventions"
 sidebar_position: 70
 sidebar_label: "Interventions"
+description: "Configure rule-based interventions using the Python SDK to trigger automated actions when attribute conditions are met."
 ---
 
 Interventions are opportunities to take actions to improve user outcomes.

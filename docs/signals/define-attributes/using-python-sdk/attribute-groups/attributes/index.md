@@ -2,6 +2,7 @@
 title: "Defining attributes"
 sidebar_position: 10
 sidebar_label: "Attributes"
+description: "Create attributes programmatically using the Python SDK by specifying event schemas, aggregations, and filtering criteria."
 ---
 
 Attributes represent specific facts about user behavior, and are calculated based on events in your Snowplow pipeline.

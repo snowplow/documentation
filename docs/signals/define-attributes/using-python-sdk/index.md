@@ -2,6 +2,7 @@
 title: "Defining attributes using the Python SDK"
 sidebar_position: 200
 sidebar_label: "Using the Python SDK"
+description: "Use the Snowplow Signals Python SDK to programmatically define attribute groups, services, and interventions via code."
 ---
 
 The pages in this section describe how to use the [Signals Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk) to define attribute groups, services, and interventions.

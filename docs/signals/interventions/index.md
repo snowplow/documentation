@@ -1,6 +1,7 @@
 ---
 title: "Interventions"
 sidebar_position: 40
+description: "Configure and deploy interventions to trigger real-time actions based on user attribute changes in Snowplow Signals."
 ---
 
 Interventions are a way to communicate that an action should be performed to work towards better outcomes for particular users.

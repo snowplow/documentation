@@ -1,7 +1,7 @@
 ---
 title: "Snowplow Signals"
 sidebar_position: 8
-description: "An overview of Signals."
+description: "Real-time personalization engine for customer intelligence that computes and acts on behavioral data from Snowplow's data pipeline."
 sidebar_label: "Signals"
 sidebar_custom_props:
   offerings:

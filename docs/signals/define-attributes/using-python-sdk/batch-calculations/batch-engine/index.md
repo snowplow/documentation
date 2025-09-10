@@ -1,7 +1,7 @@
 ---
 title: "Creating new batch attributes using the batch engine"
 sidebar_position: 50
-description: "In depth explanation on how the Batch Engine works."
+description: "Use the Signals batch engine CLI tool with dbt to create new warehouse attribute tables and sync them to the Profiles Store."
 sidebar_label: "Creating new attributes"
 ---
 

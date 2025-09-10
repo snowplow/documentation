@@ -2,6 +2,7 @@
 title: "Attribute groups"
 sidebar_position: 1
 sidebar_label: "Attribute groups"
+description: "Create and manage attribute groups to define behavioral data calculations from real-time streams or warehouse sources."
 ---
 
 Define the behavior you want to capture in [attribute groups](/docs/signals/concepts/index.md#attribute-groups). Choose whether to calculate attributes from your event stream or warehouse.

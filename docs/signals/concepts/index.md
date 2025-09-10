@@ -2,6 +2,7 @@
 title: "Signals concepts"
 sidebar_position: 10
 sidebar_label: "Concepts"
+description: "Learn about Snowplow Signals core concepts including attribute groups, services, interventions, and data sources for real-time customer intelligence."
 ---
 
 Signals introduces a new set of data governance concepts to Snowplow. As with schemas for Snowplow event data, Signals components are strictly defined, structured, and versioned.

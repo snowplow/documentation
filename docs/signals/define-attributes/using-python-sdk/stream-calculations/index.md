@@ -1,6 +1,7 @@
 ---
 title: "Calculate in real-time"
 sidebar_position: 49
+description: "Deploy stream attribute groups to calculate behavioral data attributes in near real-time from Snowplow event streams."
 ---
 
 To calculate attributes in near real time, apply a `StreamAttributeGroup` attribute group configuration to Signals.

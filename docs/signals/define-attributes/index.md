@@ -2,6 +2,7 @@
 title: "Defining attributes"
 sidebar_position: 20
 sidebar_label: "Define attributes"
+description: "Configure Snowplow Signals attributes using the BDP Console, Python SDK, or API to start calculating behavioral insights."
 ---
 
 There are three methods for defining attributes and interventions in Signals:

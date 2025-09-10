@@ -1,6 +1,7 @@
 ---
 title: "Calculate from warehouse"
 sidebar_position: 50
+description: "Use existing warehouse data or create new batch attribute tables with dbt to sync historical attributes to the Signals Profiles Store."
 ---
 
 You can use existing attributes that are already in your warehouse, or use the Signals batch engine to calculate new attributes in a new table.
@@ -46,16 +47,16 @@ data_source = BatchSource(
 
 The table below lists all available arguments for a `BatchSource`:
 
-| Argument                   | Description                                                                         | Type       | Required? |
-| -------------------------- | ----------------------------------------------------------------------------------- | ---------- | --------- |
-| `name`                     | The name of the source                                                              | `string`   | ✅         |
-| `description`              | A description of the source                                                         | `string`   | ❌         |
-| `database`                 | The database where the attributes are stored                                        | `string`   | ✅         |
-| `schema`                   | The schema for the table of interest                                                | `string`   | ✅         |
-| `table`                    | The table where the attributes are stored                                           | `string`   | ✅         |
-| `timestamp_field`          | Primary timestamp of the attribute value, the sync engine uses this to incrementally process only the rows that have changed since the last run              | `string`   | ❌         |
-| `owner`                    | The owner of the source, typically the email of the primary maintainer              | `string`   | ❌         |
-| `tags`                     | String key-value pairs of arbitrary metadata                                        | dictionary | ❌         |
+| Argument          | Description                                                                                                                                     | Type       | Required? |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------- |
+| `name`            | The name of the source                                                                                                                          | `string`   | ✅         |
+| `description`     | A description of the source                                                                                                                     | `string`   | ❌         |
+| `database`        | The database where the attributes are stored                                                                                                    | `string`   | ✅         |
+| `schema`          | The schema for the table of interest                                                                                                            | `string`   | ✅         |
+| `table`           | The table where the attributes are stored                                                                                                       | `string`   | ✅         |
+| `timestamp_field` | Primary timestamp of the attribute value, the sync engine uses this to incrementally process only the rows that have changed since the last run | `string`   | ❌         |
+| `owner`           | The owner of the source, typically the email of the primary maintainer                                                                          | `string`   | ❌         |
+| `tags`            | String key-value pairs of arbitrary metadata                                                                                                    | dictionary | ❌         |
 
 The sync engine only sends rows with a newer timestamp to the Profiles Store, based on the `timestamp_field`. For each attribute key, make sure there is only one row per timestamp — otherwise, one value may be discarded arbitrarily.
 

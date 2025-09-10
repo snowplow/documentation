@@ -2,6 +2,7 @@
 title: "Retrieving calculated values from the Profiles Store"
 sidebar_position: 30
 sidebar_label: "Retrieve attributes"
+description: "Access calculated attributes from the Profiles Store using Snowplow Signals SDKs or API for real-time personalization."
 ---
 
 ```mdx-code-block

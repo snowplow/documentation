@@ -30,9 +30,17 @@ Depending on the cloud provider for your Snowplow pipeline, there are different 
 
 _*Delta+Databricks combination is currently not supported for AWS pipelines. The loader uses DynamoDB tables for mutually exclusive writes to S3, a feature of Delta. Databricks, however, does not support this (as of September 2025). This means that it’s not possible to alter the data via Databricks (e.g. to run `OPTIMIZE` or to delete PII)._
 
-## Prerequisites
+## What you will need
 
-To set up a Databricks destination, keep in mind that you will need a few things.
+Connecting to a destination always involves configuring cloud resources and granting permissions. It's a good idea to make sure you have sufficient priviliges before you begin the setup process.
+
+:::tip
+
+The list below is just a heads up. The Snowplow Console will guide you through the exact steps to set up the integration.
+
+:::
+
+Keep in mind that you will need a few things.
 
 <Tabs groupId="databricks-integration" queryString lazy>
 <TabItem value="rdb-loader" label="Batch-based (AWS)" default>
@@ -66,12 +74,6 @@ Note that Lakeflow features require a Premium Databricks account. You might also
 
 </TabItem>
 </Tabs>
-
-:::tip
-
-Before going through the instructions below, make sure you have sufficient access to create these resources and to provide the details.
-
-:::
 
 ## Getting started
 

@@ -18,9 +18,17 @@ The Snowflake integration is available for Snowplow pipelines running on **AWS**
 
 Snowflake is a cloud data platform that provides data warehousing capabilities. The Snowplow Snowflake integration allows you to load enriched event data (as well as [failed events](/docs/fundamentals/failed-events/index.md)) directly into your Snowflake warehouse.
 
-## Prerequisites
+## What you will need
 
-To set up a Snowflake destination, keep in mind that you will need to:
+Connecting to a destination always involves configuring cloud resources and granting permissions. It's a good idea to make sure you have sufficient priviliges before you begin the setup process.
+
+:::tip
+
+The list below is just a heads up. The Snowplow Console will guide you through the exact steps to set up the integration.
+
+:::
+
+Keep in mind that you will need to:
 
 * Provide your Snowflake account locator URL, cloud provider and region
 * Allow-list Snowplow IP addresses
@@ -30,12 +38,6 @@ To set up a Snowflake destination, keep in mind that you will need to:
   * `USAGE`, `OPERATE` on warehouse
   * `USAGE` on database
   * `ALL` privileges on the target schema
-
-:::tip
-
-Before going through the instructions below, make sure you have sufficient access to create these resources and to provide the details.
-
-:::
 
 ## Getting started
 

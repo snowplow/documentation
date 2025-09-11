@@ -17,9 +17,17 @@ The Redshift integration is available for Snowplow pipelines running on **AWS** 
 
 Amazon Redshift is a fully managed, petabyte-scale data warehouse service in the cloud. The Snowplow Redshift integration allows you to load enriched event data directly into your Redshift cluster for analytics and downstream processing.
 
-## Prerequisites
+## What you will need
 
-To set up a Redshift destination, keep in mind that you will need to:
+Connecting to a destination always involves configuring cloud resources and granting permissions. It's a good idea to make sure you have sufficient priviliges before you begin the setup process.
+
+:::tip
+
+The list below is just a heads up. The Snowplow Console will guide you through the exact steps to set up the integration.
+
+:::
+
+Keep in mind that you will need to:
 
 * Provide your Redshift cluster endpoint and connection details
 * Allow-list Snowplow IP addresses
@@ -27,12 +35,6 @@ To set up a Redshift destination, keep in mind that you will need to:
 * Create a user and a role with the following permissions:
   * Schema ownership (`CREATE SCHEMA ... AUTHORIZATION`)
   * `SELECT` on system tables (`svv_table_info`, `svv_interleaved_columns`, `stv_interleaved_counts`) — this is required for maintenance jobs
-
-:::tip
-
-Before going through the instructions below, make sure you have sufficient access to create these resources and to provide the details.
-
-:::
 
 ## Getting started
 

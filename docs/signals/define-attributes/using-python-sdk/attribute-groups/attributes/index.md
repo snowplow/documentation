@@ -314,10 +314,10 @@ my_new_attribute = Attribute(
         ]
     ),
     property=EntityProperty(
-                vendor="com.snowplowanalytics.snowplow.ecommerce",
-                name="product",
-                major_version=1,
-                path="price",
+        vendor="com.snowplowanalytics.snowplow.ecommerce",
+        name="product",
+        major_version=1,
+        path="price",
     ),
     period=None,
     default_value=0

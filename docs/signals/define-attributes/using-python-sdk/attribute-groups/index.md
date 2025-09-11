@@ -109,7 +109,6 @@ The tables below list all available arguments for each type of attribute group:
 | `owner`         | The owner of the attribute group                      | `Email`             |         | ✅         |
 | `description`   | A description of the attribute group                  | `string`            |         | ❌         |
 | `ttl`           | Time-to-live for attributes in the Profile Store      | `timedelta`         |         | ❌         |
-| `tags`          | Metadata key-value pairs                              | `dict`              |         | ❌         |
 | `attributes`    | List of attributes to calculate                       | list of `Attribute` |         | ✅         |
 | `online`        | Calculate attributes (`True`) or not (`False`)        | `bool`              | `True`  | ❌         |
 
@@ -124,7 +123,6 @@ The tables below list all available arguments for each type of attribute group:
 | `owner`         | The owner of the attribute group                      | `Email`             |         | ✅         |
 | `description`   | A description of the attribute group                  | `string`            |         | ❌         |
 | `ttl`           | Time-to-live for attributes in the Profile Store      | `timedelta`         |         | ❌         |
-| `tags`          | Metadata key-value pairs                              | `dict`              |         | ❌         |
 | `attributes`    | List of attributes to calculate                       | list of `Attribute` |         | ✅         |
 | `batch_source`  | The batch data source for the attribute group         | `BatchSource`       |         | ❌         |
 | `online`        | Calculate attributes (`True`) or not (`False`)        | `bool`              | `True`  | ❌         |
@@ -142,7 +140,6 @@ For `BatchAttributeGroup` groups, it's a good idea to publish initially with `on
 | `owner`         | The owner of the attribute group                      | `Email`         |         | ✅         |
 | `description`   | A description of the attribute group                  | `string`        |         | ❌         |
 | `ttl`           | Time-to-live for attributes in the Profile Store      | `timedelta`     |         | ❌         |
-| `tags`          | Metadata key-value pairs                              | `dict`          |         | ❌         |
 | `batch_source`  | The batch data source for the attribute group         | `BatchSource`   |         | ✅         |
 | `fields`        | Table columns for syncing                             | list of `Field` |         | ✅         |
 | `online`        | Calculate attributes (`True`) or not (`False`)        | `bool`          | `True`  | ❌         |
@@ -253,10 +250,6 @@ stream_attribute_group = StreamAttributeGroup(
     ],
     description="User engagement attributes in real-time",
     ttl=timedelta(days=90),  # Attributes live in the Profiles Store for 90 days
-    tags={
-        "team": "growth",
-        "priority": "high",
-    },
 )
 ```
 

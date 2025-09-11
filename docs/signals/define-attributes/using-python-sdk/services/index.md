@@ -48,7 +48,6 @@ The table below lists all available arguments for a `Service`
 | `description`      | A description of the service                                            | `string`                         | ❌         |
 | `owner`            | The owner of the service, typically the email of the primary maintainer | `string`                         | ✅         |
 | `attribute_groups` | List of attribute groups with optional version specification            | list of `AttributeGroup` or dict | ❌         |
-| `tags`             | String key-value pairs of arbitrary metadata                            | `dict`                           | ❌         |
 
 ## Publishing services
 

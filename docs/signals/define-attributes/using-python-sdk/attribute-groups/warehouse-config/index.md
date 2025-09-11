@@ -34,16 +34,15 @@ data_source = BatchSource(
 
 The table below lists all available arguments for a `BatchSource`:
 
-| Argument          | Description                                                            | Type       | Required? |
-| ----------------- | ---------------------------------------------------------------------- | ---------- | --------- |
-| `name`            | The name of the source                                                 | `string`   | ✅         |
-| `description`     | A description of the source                                            | `string`   | ❌         |
-| `database`        | The database where the attributes are stored                           | `string`   | ✅         |
-| `schema`          | The schema for the table of interest                                   | `string`   | ✅         |
-| `table`           | The table where the attributes are stored                              | `string`   | ✅         |
-| `timestamp_field` | Primary timestamp of the attribute value                               | `string`   | ❌         |
-| `owner`           | The owner of the source, typically the email of the primary maintainer | `string`   | ❌         |
-| `tags`            | String key-value pairs of arbitrary metadata                           | dictionary | ❌         |
+| Argument          | Description                                                            | Type     | Required? |
+| ----------------- | ---------------------------------------------------------------------- | -------- | --------- |
+| `name`            | The name of the source                                                 | `string` | ✅         |
+| `description`     | A description of the source                                            | `string` | ❌         |
+| `database`        | The database where the attributes are stored                           | `string` | ✅         |
+| `schema`          | The schema for the table of interest                                   | `string` | ✅         |
+| `table`           | The table where the attributes are stored                              | `string` | ✅         |
+| `timestamp_field` | Primary timestamp of the attribute value                               | `string` | ❌         |
+| `owner`           | The owner of the source, typically the email of the primary maintainer | `string` | ❌         |
 
 The sync engine only sends rows with a newer timestamp to the Profiles Store, based on the `timestamp_field`. For each attribute key, make sure there is only one row per timestamp — otherwise, one value may be discarded arbitrarily.
 
@@ -81,9 +80,8 @@ attribute_group = ExternalBatchAttributeGroup(
 
 The table below lists all available arguments for a `Field`:
 
-| Argument      | Description                                  | Type                                                                                                                                                                                                                | Required? |
-| ------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
-| `name`        | The name of the field                        | `string`                                                                                                                                                                                                            | ✅         |
-| `description` | A description of the field                   | `string`                                                                                                                                                                                                            | ❌         |
-| `type`        | The type of the field                        | One of: `bytes`, `string`, `int32`, `int64`, `double`, `float`, `bool`, `unix_timestamp`, `bytes_list`, `string_list`, `int32_list`, `int64_list`, `double_list`, `float_list`, `bool_list`, `unix_timestamp_list`, | ✅         |
-| `tags`        | String key-value pairs of arbitrary metadata |
+| Argument      | Description                | Type                                                                                                                                                                                                                | Required? |
+| ------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------- |
+| `name`        | The name of the field      | `string`                                                                                                                                                                                                            | ✅         |
+| `description` | A description of the field | `string`                                                                                                                                                                                                            | ❌         |
+| `type`        | The type of the field      | One of: `bytes`, `string`, `int32`, `int64`, `double`, `float`, `bool`, `unix_timestamp`, `bytes_list`, `string_list`, `int32_list`, `int64_list`, `double_list`, `float_list`, `bool_list`, `unix_timestamp_list`, | ✅         |

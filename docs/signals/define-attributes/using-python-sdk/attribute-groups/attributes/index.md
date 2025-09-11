@@ -53,7 +53,6 @@ The table below lists all available arguments for an `Attribute`:
 | `property`      | The property of the event or entity you wish to use in the aggregation                                                                       | `string`                                                                                                                                                                                                            | ❌         |
 | `period`        | The time period window over which the aggregation should be calculated                                                                       | Python `timedelta`                                                                                                                                                                                                  | ❌         |
 | `default_value` | The default value to use if the aggregation returns no results. If not set, the default value is automatically assigned based on the `type`. |                                                                                                                                                                                                                     | ❌         |
-| `tags`          | Metadata for the attribute, as a dictionary                                                                                                  |                                                                                                                                                                                                                     | ❌         |
 
 ### Specifying events
 
@@ -239,11 +238,6 @@ button_click_counter_attribute = Attribute(
     ),
     period=timedelta(minutes=10),
     default_value=0
-    tags={
-        "component": "emoji_generator",
-        "feature": "user_interaction",
-        "priority": "medium"
-    },
 )
 ```
 
@@ -279,7 +273,6 @@ referrer_source_attribute = Attribute(
     property=AtomicProperty(name="mkt_medium"),
     period=None,
     default_value=None
-    tags={},
 )
 ```
 
@@ -328,7 +321,6 @@ my_new_attribute = Attribute(
     )
     period=None,
     default_value=0
-    tags={},
 )
 ```
 

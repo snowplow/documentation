@@ -47,7 +47,6 @@ The table below lists all available arguments for a custom attribute key:
 | `key`         | The key used to join this attribute key to an attribute table                            | `string`    | ❌         |
 | `owner`       | The owner of the attribute key, typically the email of the primary maintainer            | `string`    | ❌         |
 | `ttl`         | The amount of time that attributes for the attribute key will live in the Profiles Store | `timedelta` | ❌         |
-| `tags`        | String key-value pairs of arbitrary metadata                                             | `dict`      | ❌         |
 
 If a `key` isn't specified, the `name` will be used.
 
@@ -63,11 +62,6 @@ platform_attribute_key = AttributeKey(
     key="platform",
     owner="analytics-team@snowplow.com",
     ttl=timedelta(days=365),
-    tags={
-        "category": "platform_analytics",
-        "business_unit": "product",
-        "created_by": "data_engineering_team"
-    }
 )
 ```
 

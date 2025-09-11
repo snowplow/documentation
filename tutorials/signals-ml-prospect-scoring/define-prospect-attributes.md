@@ -97,7 +97,7 @@ latest_app_id = Attribute(
     type="string",
     events=[sp_page_view],
     aggregation="last",
-    property="app_id"
+    property=AtomicProperty(name="app_id")
 )
 
 latest_device_class = Attribute(
@@ -105,7 +105,12 @@ latest_device_class = Attribute(
     type="string",
     events=[sp_page_view],
     aggregation="last",
-    property="contexts_nl_basjes_yauaa_context_1[0].deviceClass"
+    property=EntityProperty(
+        vendor="nl.basjes",
+        name="yauaa_context",
+        major_version=1,
+        path="deviceClass"
+    )
 )
 
 # Behavior over the last 7 days
@@ -115,7 +120,7 @@ num_sessions_l7d = Attribute(
     events=[sp_page_view],
     period=l7d,
     aggregation="unique_list",
-    property="domain_sessionid"
+    property=AtomicProperty(name="domain_sessionid")
 )
 
 num_apps_l7d = Attribute(
@@ -124,7 +129,7 @@ num_apps_l7d = Attribute(
     events=[sp_page_view],
     period=l7d,
     aggregation="unique_list",
-    property="app_id"
+    property=AtomicProperty(name="app_id")
 )
 
 num_page_views_l7d = Attribute(
@@ -181,7 +186,7 @@ num_sessions_l30d = Attribute(
     events=[sp_page_view],
     period=l30d,
     aggregation="unique_list",
-    property="domain_sessionid"
+    property=AtomicProperty(name="domain_sessionid")
 )
 
 num_apps_l30d = Attribute(
@@ -190,7 +195,7 @@ num_apps_l30d = Attribute(
     events=[sp_page_view],
     period=l30d,
     aggregation="unique_list",
-    property="app_id"
+    property=AtomicProperty(name="app_id")
 )
 
 num_page_views_l30d = Attribute(
@@ -246,7 +251,7 @@ first_refr_medium_l30d = Attribute(
     events=[sp_page_view],
     period=l30d,
     aggregation="first",
-    property="refr_medium"
+    property=AtomicProperty(name="refr_medium")
 )
 
 first_mkt_medium_l30d = Attribute(
@@ -255,7 +260,7 @@ first_mkt_medium_l30d = Attribute(
     events=[sp_page_view],
     period=l30d,
     aggregation="first",
-    property="mkt_medium"
+    property=AtomicProperty(name="mkt_medium")
 )
 
 num_engaged_campaigns_l30d = Attribute(
@@ -264,7 +269,7 @@ num_engaged_campaigns_l30d = Attribute(
     events=[sp_page_view],
     period=l30d,
     aggregation="unique_list",
-    property="mkt_campaign"
+    property=AtomicProperty(name="mkt_campaign")
 )
 ```
 

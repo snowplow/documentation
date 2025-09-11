@@ -279,7 +279,7 @@ referrer_source_attribute = Attribute(
     ],
     aggregation="last"
     criteria=None,
-    property="mkt_medium",
+    property=AtomicProperty(name="mkt_medium"),
     period=None,
     default_value=None
     tags={},
@@ -323,7 +323,7 @@ my_new_attribute = Attribute(
             )
         ]
     ),
-    property="mkt_medium",
+    property=AtomicProperty(name="mkt_medium"),
     period=None,
     default_value=0
     tags={},

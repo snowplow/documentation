@@ -1097,3 +1097,13 @@ abbr[data-title]:hover:after {
 }
 
 /* END  Control rest of the elements erase after we upgrade */
+
+@media print {
+  aside.cookie-though {
+    display: none !important;
+    visibility: hidden !important;
+  }
+  [data-name="Book a demo"] {
+    display: none;
+  }
+}

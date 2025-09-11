@@ -14,9 +14,9 @@ Import them into your notebook like this:
 ```python
 from snowplow_signals import (
     domain_userid,
-    domain_sessionid
-    user_id
-    network_userid
+    domain_sessionid,
+    user_id,
+    network_userid,
 )
 ```
 
@@ -27,9 +27,11 @@ You can also define custom attribute keys, which allows you to calculate attribu
 For example, an attribute key that groups by `app_id` can be defined as:
 
 ```python
+from snowplow_signals import AttributeKey
+
 app_id_attribute_key = AttributeKey(
     name="app_id_attribute_key",
-    description="The id for the app"
+    description="The id for the app",
     key="app_id",
 )
 ```
@@ -45,7 +47,7 @@ The table below lists all available arguments for a custom attribute key:
 | `key`         | The key used to join this attribute key to an attribute table                            | `string`    | ❌         |
 | `owner`       | The owner of the attribute key, typically the email of the primary maintainer            | `string`    | ❌         |
 | `ttl`         | The amount of time that attributes for the attribute key will live in the Profiles Store | `timedelta` | ❌         |
-| `tags`        | String key-value pairs of arbitrary metadata                                             | dictionary  | ❌         |
+| `tags`        | String key-value pairs of arbitrary metadata                                             | `dict`      | ❌         |
 
 If a `key` isn't specified, the `name` will be used.
 
@@ -53,6 +55,7 @@ Here's an extended example using all possible arguments, based on the atomic `pl
 
 ```python
 from datetime import timedelta
+from snowplow_signals import AttributeKey
 
 platform_attribute_key = AttributeKey(
     name="platform_tracking_attribute_key",

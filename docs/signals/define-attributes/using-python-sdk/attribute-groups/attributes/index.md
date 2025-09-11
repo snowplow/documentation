@@ -304,7 +304,7 @@ my_new_attribute = Attribute(
             Criterion.eq(
                 EntityProperty(
                         vendor="com.snowplowanalytics.snowplow.ecommerce",
-                        name="ecommerce_product",
+                        name="product",
                         major_version=1,
                         index=[0],
                         path="price"

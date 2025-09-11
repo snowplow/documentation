@@ -50,7 +50,7 @@ At the moment, opt-out telemetry is present in the following:
 * Enrich ([Enrich Kinesis](/docs/api-reference/enrichment-components/enrich-kinesis/index.md), [Enrich PubSub](/docs/api-reference/enrichment-components/enrich-pubsub/index.md), [Enrich Kafka](/docs/api-reference/enrichment-components/enrich-kafka/index.md).
 * RDB Loader ([Transformer Kinesis](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/stream-transformer/transformer-kinesis/index.md), [Transformer PubSub](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/stream-transformer/transformer-pubsub/index.md), [Redshift Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/redshift-loader/index.md), [Snowflake Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/snowflake-loader/index.md), [Databricks Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/databricks-loader/index.md)).
 * Snowplow Mini for [AWS](/docs/api-reference/snowplow-mini/setup-guide-for-aws/index.md) and [GCP](/docs/api-reference/snowplow-mini/setup-guide-for-gcp/index.md).
-* [Snowbridge](/docs/destinations/forwarding-events/snowbridge/getting-started/index.md).
+* [Snowbridge](/docs/api-reference/snowbridge/getting-started/index.md).
 * [Lake loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md).
 
 See the telemetry notice for each component linked above for more details.

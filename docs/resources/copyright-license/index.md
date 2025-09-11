@@ -77,7 +77,7 @@ All pipeline apps:
 * [BigQuery Loader](/docs/api-reference/loaders-storage-targets/bigquery-loader/index.md) _(2.0.0+)_
 * [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md) _(0.2.0+)_
 * Other loaders
-* [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md) _(2.4.0+)_
+* [Snowbridge](/docs/api-reference/snowbridge/index.md) _(2.4.0+)_
 * Community Edition terraform modules _(2024+)_
 
 </td>

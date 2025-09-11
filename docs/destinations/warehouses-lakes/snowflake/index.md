@@ -1,0 +1,60 @@
+---
+title: "Snowflake"
+sidebar_position: 10
+description: "Send Snowplow data to Snowflake for analytics and data warehousing"
+---
+
+```mdx-code-block
+import SetupInstructions from '../_setup-instructions.mdx';
+import HowLoadingWorks from '../_how-loading-works.mdx';
+import SingleTableFormat from '../_single-table-format.mdx';
+```
+
+:::info Cloud availability
+
+The Snowflake integration is available for Snowplow pipelines running on **AWS**, **Azure** and **GCP**.
+
+:::
+
+Snowflake is a cloud data platform that provides data warehousing capabilities. The Snowplow Snowflake integration allows you to load enriched event data (as well as [failed events](/docs/fundamentals/failed-events/index.md)) directly into your Snowflake warehouse.
+
+## Prerequisites
+
+To set up a Snowflake destination, keep in mind that you will need to:
+
+* Provide your Snowflake account locator URL, cloud provider and region
+* Allow-list Snowplow IP addresses
+* Generate a key pair for key-based authentication
+* Specify the desired database and schema names, as well as a warehouse name
+* Create a role with the following permissions:
+  * `USAGE`, `OPERATE` on warehouse
+  * `USAGE` on database
+  * `ALL` privileges on the target schema
+
+:::tip
+
+Before going through the instructions below, make sure you have sufficient access to create these resources and to provide the details.
+
+:::
+
+## Getting started
+
+You can add a Snowflake destination through the Snowplow Console. (For self-hosted customers, please refer to the [Loader API reference](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md) instead.)
+
+<SetupInstructions destinationName="Snowflake" connectionType="Snowflake" />
+
+## How loading works
+
+<HowLoadingWorks/>
+
+For more details on the loading flow, see the [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md) reference page, where you will find additional information and diagrams.
+
+## Snowplow data format in Snowflake
+
+<SingleTableFormat eventType={<>a <code>VARIANT</code> object</>} entitiesType={<>a <code>VARIANT</code> array</>}/>
+
+:::tip
+
+Check this [guide on querying](/docs/destinations/warehouses-lakes/querying-data/index.md?warehouse=snowflake) Snowplow data.
+
+:::

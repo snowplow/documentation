@@ -30,7 +30,7 @@ There are two differences compared to regular events.
 * Likewise, any column containing the JSON for a self-describing event (`unstruct_...`) will be set to `null` if that JSON fails validation.
 * Finally, for entity columns (`contexts_`), if one entity is invalid, it will be removed from the array of entities. If all entities are invalid, the whole column will be set to `null`.
 
-For more information about the different columns in Snowplow data, see [how Snowplow data is stored in the warehouse](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md).
+For more information about the different columns in Snowplow data, see [how Snowplow data is stored in the warehouse](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md).
 
 **There is an extra column with failure details.** The column is named `contexts_com_snowplowanalytics_snowplow_failure_1`. In most cases, it will also contain the invalid data in some form. See the [next section](#example-failed-event) for an example.
 

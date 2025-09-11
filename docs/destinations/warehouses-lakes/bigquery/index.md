@@ -1,0 +1,60 @@
+---
+title: "BigQuery"
+sidebar_position: 30
+description: "Send Snowplow data to BigQuery for analytics and data warehousing"
+---
+
+```mdx-code-block
+import SetupInstructions from '../_setup-instructions.mdx';
+import HowLoadingWorks from '../_how-loading-works.mdx';
+import SingleTableFormat from '../_single-table-format.mdx';
+```
+
+:::info Cloud availability
+
+The BigQuery integration is available for Snowplow pipelines running on **AWS**, **Azure** and **GCP**.
+
+:::
+
+BigQuery is Google Cloud's fully managed, serverless data warehouse. The Snowplow BigQuery integration allows you to enriched event data (as well as [failed events](/docs/fundamentals/failed-events/index.md)) directly into your BigQuery datasets for analytics and downstream processing.
+
+## Prerequisites
+
+To set up a BigQuery destination, keep in mind that you will need to:
+
+* Provide your Google Cloud Project ID and region
+* Allow-list Snowplow IP addresses
+* Specify the desired dataset name
+* Create a service account with the `roles/bigquery.dataEditor` permission (more permissions will be required for loading failed events and setting up [Data Quality Dashboard](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/index.md#data-quality-dashboard))
+
+:::tip
+
+Before going through the instructions below, make sure you have sufficient access to create these resources and to provide the details.
+
+:::
+
+## Getting started
+
+You can add a BigQuery destination through the Snowplow Console. (For self-hosted customers, please refer to the [Loader API reference](/docs/api-reference/loaders-storage-targets/bigquery-loader/index.md) instead.)
+
+<SetupInstructions destinationName="BigQuery" connectionType="BigQuery" />
+
+## How loading works
+
+<HowLoadingWorks/>
+
+:::tip
+
+For more details on the loading flow, see the [BigQuery Loader](/docs/api-reference/loaders-storage-targets/bigquery-loader/index.md) reference page, where you will find additional information and diagrams.
+
+:::
+
+## Snowplow data format in BigQuery
+
+<SingleTableFormat eventType={<code>RECORD</code>} entitiesType={<code>REPEATED RECORD</code>}/>
+
+:::tip
+
+Check this [guide on querying](/docs/destinations/warehouses-lakes/querying-data/index.md?warehouse=bigquery) Snowplow data.
+
+:::

@@ -27,7 +27,7 @@ We use the name RDB Loader (from "relational database") for a set of application
 
 :::tip Schemas in Redshift, Snowflake and Databricks
 
-For more information on how events are stored in the warehouse, check the [mapping between Snowplow schemas and the corresponding warehouse column types](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md).
+For more information on how events are stored in the warehouse, check the [mapping between Snowplow schemas and the corresponding warehouse column types](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md).
 
 :::
 

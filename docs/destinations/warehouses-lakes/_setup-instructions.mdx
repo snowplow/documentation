@@ -1,0 +1,21 @@
+### Step 1: Create a connection
+
+<ol>
+<li>In Console, navigate to <strong>Destinations</strong>&nbsp;&gt;&nbsp;<strong>Connections</strong></li>
+<li>Select <strong>Set up connection</strong></li>
+<li>Choose <strong>Loader connection</strong>, then <strong>{props.connectionType}</strong></li>
+<li>Follow the steps to provide all the necessary values</li>
+<li>Click <strong>Complete setup</strong> to create the connection</li>
+</ol>
+
+### Step 2: Create a loader
+
+<ol>
+<li>In Console, navigate to <strong>Destinations</strong>&nbsp;&gt;&nbsp;<strong>Destination list</strong>. Switch to the <strong>Available</strong> tab and select <strong>{props.destinationName}</strong></li>
+<li><strong>Select a pipeline</strong>: choose the pipeline where you want to deploy the loader.</li>
+<li><strong>Select your connection</strong>: choose the connection you configured in step 1.</li>
+{!props.noFailedEvents && <li><strong>Select the type of events</strong>: enriched events or failed events</li>}
+<li>Click <strong>Continue</strong> to deploy the loader</li>
+</ol>
+
+You can review active destinations and loaders by navigating to **Destinations**&nbsp;&gt;&nbsp;**Destination list**.

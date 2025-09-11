@@ -223,7 +223,7 @@ button_click_counter_attribute = Attribute(
             version="1-0-0",
         )
     ],
-    aggregation="counter"
+    aggregation="counter",
     criteria=Criteria(
         all=[
             Criterion.eq(
@@ -244,7 +244,6 @@ button_click_counter_attribute = Attribute(
         "feature": "user_interaction",
         "priority": "medium"
     },
-    property=None,
 )
 ```
 
@@ -275,7 +274,7 @@ referrer_source_attribute = Attribute(
             version="1-0-0"
         )
     ],
-    aggregation="last"
+    aggregation="last",
     criteria=None,
     property="mkt_medium",
     period=None,
@@ -306,7 +305,7 @@ my_new_attribute = Attribute(
             version="1-0-2",
         )
     ],
-    aggregation="sum"
+    aggregation="sum",
     criteria=Criteria(
         all=[
             Criterion.eq(

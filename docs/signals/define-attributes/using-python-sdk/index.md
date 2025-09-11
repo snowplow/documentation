@@ -5,7 +5,7 @@ sidebar_label: "Using the Python SDK"
 description: "Use the Snowplow Signals Python SDK to programmatically define attribute groups, services, and interventions via code."
 ---
 
-The pages in this section describe how to use the [Signals Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk) to define attribute groups, services, and interventions.
+The pages in this section describe how to use the [Signals Python SDK](https://pypi.org/project/snowplow-signals/) to define attribute groups, services, and interventions.
 
 You must first deploy Signals using the self-serve process in Console, under the **Signals** section. After deployment, you'll have access to the Signals API URL needed for Python SDK usage.
 
@@ -19,7 +19,7 @@ pip install snowplow-signals
 
 Once installed, you can start to define your configuration components. To test or apply your configuration, or retrieve calculated attributes from the Profiles Store, you'll need to connect to your Signals deployment.
 
-### Required credentials
+## Required credentials
 
 To connect to Signals, you will need 4 values:
 
@@ -32,7 +32,7 @@ To connect to Signals, you will need 4 values:
 
 Add these four tokens to your environment or notebook secrets.
 
-### Connecting to Signals
+## Connecting to Signals
 
 Create a `Signals` object by passing in the required values.
 
@@ -52,6 +52,8 @@ The created `Signals` object has the following methods:
 | Method                   | Description                                                                 |
 | ------------------------ | --------------------------------------------------------------------------- |
 | `publish`                | Registers the provided objects with Signals                                 |
+| `unpublish`              | Unpublishes objects from Signals                                            |
+| `delete`                 | Fully deletes objects from Signals (must unpublish first)                   |
 | `test`                   | Tests an attribute group against the atomic events table                    |
 | `get_service_attributes` | Retrieves attributes for a specific service from the Profiles Store         |
 | `get_group_attributes`   | Retrieves attributes for a specific attribute group from the Profiles Store |
@@ -62,3 +64,26 @@ The created `Signals` object has the following methods:
 Check out the [attribute groups](/docs/signals/define-attributes/using-python-sdk/attribute-groups/index.md), [services](/docs/signals/define-attributes/using-python-sdk/services/index.md), and [interventions](/docs/signals/define-attributes/using-python-sdk/index.md) pages to learn how to configure them programmatically.
 
 Read more about retrieving calculated attributes in [Retrieving values](/docs/signals/retrieve-attributes/index.md).
+
+## Publishing and deleting
+
+Use the same object management methods for attribute groups, services, attribute keys, and interventions:
+* Use `publish()` to register objects with Signals. This makes them available for real-time calculation and retrieval.
+* Use `unpublish()` to stop active calculation without losing the object definitions.
+* Use `delete()` to permanently remove objects from Signals. Objects must be unpublished before deletion. If you delete an attribute group, the calculated attributes in the Profiles Store will also be deleted.
+
+```python
+from snowplow_signals import StreamAttributeGroup, Service, RuleIntervention
+
+# Define your objects (assuming these are already created)
+objects_to_manage = [my_attribute_group, my_service, my_intervention]
+
+# 1. Publish objects
+published_objects = sp_signals.publish(objects_to_manage)
+
+# 2. Unpublish objects
+unpublished_objects = sp_signals.unpublish(objects_to_manage)
+
+# 3. Delete objects permanently - must unpublish first
+sp_signals.delete(objects_to_manage)
+```

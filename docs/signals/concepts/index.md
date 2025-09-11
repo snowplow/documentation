@@ -64,6 +64,13 @@ Each of these is likely to have a different calculated value.
 
 You can [define your own attribute keys](/docs/signals/define-attributes/attribute-groups/index.md#creating-a-custom-attribute-key), or use the built-in ones. Signals comes with predefined attribute keys for user, device, and session. Their identifiers are from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) in all Snowplow events.
 
+| Attribute key      | Type     |
+| ------------------ | -------- |
+| `user_id`          | `string` |
+| `domain_userid`    | `uuid`   |
+| `network_userid`   | `uuid`   |
+| `domain_sessionid` | `uuid`   |
+
 ## Data sources
 
 Whether to compute attributes in real-time from the event stream or in batch from the warehouse is an important decision. Broadly, you might use:
@@ -152,7 +159,7 @@ This service could be imagined like this as a table:
 
 ## Interventions
 
-Interventions are calculated on top of changes in attribute values, or fired by your own applications.
+Interventions are opportunities to take actions to improve user outcomes. They're calculated on top of changes in attribute values, or fired by your own applications.
 
 This allows you to influence user behavior without requiring application updates, since you can control when the intervention should fire through Signals.
 

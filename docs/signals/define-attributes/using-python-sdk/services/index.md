@@ -4,15 +4,30 @@ sidebar_position: 32
 description: "Create services programmatically using the Python SDK to group attribute groups for stable consumption interfaces."
 ---
 
-Signals has two attribute groupings:
-* Attribute groups, for defining attributes
-* Services, for consuming attributes
+[Services](/docs/signals/concepts/index.md#services) group attribute groups together for serving to your applications.
 
-Here's an example showing how to create a service to manage attributes from two attribute groups:
+There are two ways to define the attribute groups in your service:
+- `AttributeGroup` objects: use the objects directly if you have them available in your code
+- Dictionaries: refer to the attribute group by name and version, in the format `{"name": "group_name", "version": 1}`
+
+This example code shows both options:
 
 ```python
 from snowplow_signals import Service
 
+# Refers to the attribute groups by name
+my_service = Service(
+    name='my_service',
+    description='A collection of attribute groups',
+    owner="user@company.com",
+    attribute_groups=[
+        # Specify exact versions using dictionaries
+        {"name": "user_attributes", "version": 2},
+        {"name": "session_attributes", "version": 1},
+    ],
+)
+
+# Uses the objects directly
 my_service = Service(
     name='my_service',
     description='A collection of attribute groups',
@@ -25,14 +40,31 @@ my_service = Service(
 )
 ```
 
-### Service options
-
 The table below lists all available arguments for a `Service`
 
-| Argument                 | Description                                                             | Type        | Required?   |
-| ------------------------ | ----------------------------------------------------------------------- | ----------- | ----------- |
-| `name`                   | The name of the service                                                 | `string`    | ✅          |
-| `description`            | A description of the service                                            | `string`    | ❌          |
-| `owner`                  | The owner of the service, typically the email of the primary maintainer | `string`    | ✅          |
-| `attribute_groups`       | A list of attribute groups                                              | `timedelta` | ❌          |
-| `tags`                   | String key-value pairs of arbitrary metadata                            | dictionary  | ❌          |
+| Argument           | Description                                                             | Type                             | Required? |
+| ------------------ | ----------------------------------------------------------------------- | -------------------------------- | --------- |
+| `name`             | The name of the service                                                 | `string`                         | ✅         |
+| `description`      | A description of the service                                            | `string`                         | ❌         |
+| `owner`            | The owner of the service, typically the email of the primary maintainer | `string`                         | ✅         |
+| `attribute_groups` | List of attribute groups with optional version specification            | list of `AttributeGroup` or dict | ❌         |
+
+## Publishing services
+
+Use the `publish()` method to [register services](/docs/signals/define-attributes/using-python-sdk/index.md#publishing-and-deleting) with Signals. This makes them available for use.
+
+```python
+from snowplow_signals import Signals
+
+# Connect to Signals
+# See the main configuration section for more on this
+sp_signals = Signals(
+        {{ config }}
+    )
+
+# Publish services
+sp_signals.publish([
+        my_service,
+        my_other_service
+    ])
+```

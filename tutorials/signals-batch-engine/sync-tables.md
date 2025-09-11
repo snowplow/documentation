@@ -32,7 +32,7 @@ During data model generation, a config file is generated in `config/batch_source
 
 Fill out the `database` (for BigQuery this should be the project) and `wh_schema` values as per your [dbt target](https://docs.getdbt.com/reference/dbt-jinja-functions/target) setup.
 
-The warehouse schema should be the `schema` defined in your dbt target, suffixed with _derived (`target_schema}_derived`). This is where the generated attributes tables are located by default.
+The warehouse schema should be the `schema` defined in your dbt target, suffixed with `_derived` (`{target_schema}_derived`). This is where the generated attributes tables are located by default.
 
 ## Run the sync command
 
@@ -46,7 +46,7 @@ snowplow-batch-engine sync \
   --verbose
 ```
 
-The batch engine will first register the batch source for the attribute group. It will also publish the attribute group so that syncing can begin. 
+The batch engine will first register the batch source for the attribute group. It will also publish the attribute group so that syncing can begin.
 
 Signals will check for updates to the table every hour. Your attributes will soon be available to retrieve in your applications.
 

@@ -25,8 +25,8 @@ Since the attributes will be calculated in stream, those with a defined `period`
 | `num_form_engagements_l7d`   | Number of recent form engagements, e.g., `focus_form`, `change_form` events, in the last 7 days | int    | `counter`      |
 | `num_media_events_l30d`      | Engagements with media events in the last 30 days                                               | int    | `counter`      |
 | `first_refr_medium_l30d`     | First referrer medium in the last 30 days                                                       | string | `first`        |
-| `first_mkt_medium_l30d`      | First `utm_medium` in the last 30 days                                                          | string | `first`        |
-| `num_engaged_campaigns_l30d` | Number of distinct engaged `utm_campaign`s in the last 30 days                                  | int    | `unique_list`* |
+| `first_mkt_medium_l30d`      | First `mkt_medium` in the last 30 days                                                          | string | `first`        |
+| `num_engaged_campaigns_l30d` | Number of distinct engaged `mkt_campaign`s in the last 30 days                                  | int    | `unique_list`* |
 
 :::note Count distinct
 Signals doesn't have a "count distinct" aggregation. For "count distinct" features like `num_sessions_l7d` or `num_engaged_campaigns_l30d`, we'll use Signal's `unique_list` aggregation, and count the number of distinct elements later, in the intermediary API.
@@ -89,7 +89,7 @@ l30d=timedelta(days=30)
 Next, define the attributes to calculate.
 
 ```python
-from snowplow_signals import Attribute, Criteria, Criterion
+from snowplow_signals import Attribute, Criteria, Criterion, AtomicProperty
 
 # Latest page_view behavior
 latest_app_id = Attribute(
@@ -97,7 +97,7 @@ latest_app_id = Attribute(
     type="string",
     events=[sp_page_view],
     aggregation="last",
-    property="app_id"
+    property=AtomicProperty(name="app_id")
 )
 
 latest_device_class = Attribute(
@@ -105,7 +105,12 @@ latest_device_class = Attribute(
     type="string",
     events=[sp_page_view],
     aggregation="last",
-    property="contexts_nl_basjes_yauaa_context_1[0].deviceClass"
+    property=EntityProperty(
+        vendor="nl.basjes",
+        name="yauaa_context",
+        major_version=1,
+        path="deviceClass"
+    )
 )
 
 # Behavior over the last 7 days
@@ -115,7 +120,7 @@ num_sessions_l7d = Attribute(
     events=[sp_page_view],
     period=l7d,
     aggregation="unique_list",
-    property="domain_sessionid"
+    property=AtomicProperty(name="domain_sessionid")
 )
 
 num_apps_l7d = Attribute(
@@ -124,7 +129,7 @@ num_apps_l7d = Attribute(
     events=[sp_page_view],
     period=l7d,
     aggregation="unique_list",
-    property="app_id"
+    property=AtomicProperty(name="app_id")
 )
 
 num_page_views_l7d = Attribute(
@@ -151,15 +156,13 @@ num_pricing_views_l7d = Attribute(
     aggregation="counter",
     criteria=Criteria(
         all=[
-            Criterion(
-                property="page_url",
-                operator="like",
-                value="%pricing%"
+            Criterion.like(
+                AtomicProperty(name="page_url"),
+                "%pricing%"
             )
         ]
     )
 )
-
 num_conversions_l7d = Attribute(
     name="num_conversions_l7d",
     type="int32",
@@ -183,7 +186,7 @@ num_sessions_l30d = Attribute(
     events=[sp_page_view],
     period=l30d,
     aggregation="unique_list",
-    property="domain_sessionid"
+    property=AtomicProperty(name="domain_sessionid")
 )
 
 num_apps_l30d = Attribute(
@@ -192,7 +195,7 @@ num_apps_l30d = Attribute(
     events=[sp_page_view],
     period=l30d,
     aggregation="unique_list",
-    property="app_id"
+    property=AtomicProperty(name="app_id")
 )
 
 num_page_views_l30d = Attribute(
@@ -219,15 +222,13 @@ num_pricing_views_l30d = Attribute(
     aggregation="counter",
     criteria=Criteria(
         all=[
-            Criterion(
-                property="page_url",
-                operator="like",
-                value="%pricing%"
+            Criterion.like(
+                AtomicProperty(name="page_url"),
+                "%pricing%"
             )
         ]
     )
 )
-
 num_conversions_l30d = Attribute(
     name="num_conversions_l30d",
     type="int32",
@@ -250,7 +251,7 @@ first_refr_medium_l30d = Attribute(
     events=[sp_page_view],
     period=l30d,
     aggregation="first",
-    property="refr_medium"
+    property=AtomicProperty(name="refr_medium")
 )
 
 first_mkt_medium_l30d = Attribute(
@@ -259,7 +260,7 @@ first_mkt_medium_l30d = Attribute(
     events=[sp_page_view],
     period=l30d,
     aggregation="first",
-    property="mkt_medium"
+    property=AtomicProperty(name="mkt_medium")
 )
 
 num_engaged_campaigns_l30d = Attribute(
@@ -268,7 +269,7 @@ num_engaged_campaigns_l30d = Attribute(
     events=[sp_page_view],
     period=l30d,
     aggregation="unique_list",
-    property="mkt_campaign"
+    property=AtomicProperty(name="mkt_campaign")
 )
 ```
 

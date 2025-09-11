@@ -15,8 +15,6 @@ To configure an attribute, you will need to set:
 
 Attribute calculation starts when the definitions are applied, and aren't backdated.
 
-All configuration is defined using the [Signals Python SDK](https://pypi.org/project/snowplow-signals/).
-
 ## Minimal example
 
 This is the minimum configuration needed to create an attribute:
@@ -55,7 +53,6 @@ The table below lists all available arguments for an `Attribute`:
 | `property`      | The property of the event or entity you wish to use in the aggregation                                                                       | `string`                                                                                                                                                                                                            | ❌         |
 | `period`        | The time period window over which the aggregation should be calculated                                                                       | Python `timedelta`                                                                                                                                                                                                  | ❌         |
 | `default_value` | The default value to use if the aggregation returns no results. If not set, the default value is automatically assigned based on the `type`. |                                                                                                                                                                                                                     | ❌         |
-| `tags`          | Metadata for the attribute, as a dictionary                                                                                                  |                                                                                                                                                                                                                     | ❌         |
 
 ### Specifying events
 
@@ -225,7 +222,7 @@ button_click_counter_attribute = Attribute(
             version="1-0-0",
         )
     ],
-    aggregation="counter"
+    aggregation="counter",
     criteria=Criteria(
         all=[
             Criterion.eq(
@@ -241,12 +238,6 @@ button_click_counter_attribute = Attribute(
     ),
     period=timedelta(minutes=10),
     default_value=0
-    tags={
-        "component": "emoji_generator",
-        "feature": "user_interaction",
-        "priority": "medium"
-    },
-    property=None,
 )
 ```
 
@@ -277,12 +268,11 @@ referrer_source_attribute = Attribute(
             version="1-0-0"
         )
     ],
-    aggregation="last"
+    aggregation="last",
     criteria=None,
-    property="mkt_medium",
+    property=AtomicProperty(name="mkt_medium"),
     period=None,
     default_value=None
-    tags={},
 )
 ```
 
@@ -308,24 +298,29 @@ my_new_attribute = Attribute(
             version="1-0-2",
         )
     ],
-    aggregation="sum"
+    aggregation="sum",
     criteria=Criteria(
         all=[
             Criterion.eq(
-                EventProperty(
-                    vendor="com.snowplowanalytics.snowplow.ecommerce",
-                    name="snowplow_ecommerce_action",
-                    major_version=1,
-                    path="type"
+                EntityProperty(
+                        vendor="com.snowplowanalytics.snowplow.ecommerce",
+                        name="product",
+                        major_version=1,
+                        index=[0],
+                        path="price"
                 ),
                 "transaction"
             )
         ]
     ),
-    property="contexts_com_snowplowanalytics_snowplow_ecommerce_product_1[0].price",
+    property=EntityProperty(
+        vendor="com.snowplowanalytics.snowplow.ecommerce",
+        name="product",
+        major_version=1,
+        path="price",
+    ),
     period=None,
     default_value=0
-    tags={},
 )
 ```
 

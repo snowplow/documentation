@@ -1,5 +1,7 @@
 ---
 title: "Declarative entities with Global Context"
+description: "Configure global context entities in React Native tracker for consistent behavioral event enrichment."
+keywords: ["Global Context", "React Native", "Event Context", "Context Data", "Global Entities", "Context Tracking"]
 date: "2022-08-30"
 sidebar_position: 20
 ---
@@ -13,7 +15,7 @@ Here is an example that adds a global context entity to all subsequently tracked
 ```typescript
 // Create a context entity and add it to global context
 let contextEntity = {
-  schema: 'iglu:com.acme/user_context/jsonschema/1-0-0',
+schema: "TechArticle"
   data: { userid: 1234, name: 'John Doe' }
 };
 tracker.addGlobalContexts([contextEntity]);
@@ -38,7 +40,7 @@ A sample context generator that conditionally generates a context entity could l
 const contextGenerator = (args) => {
     if (args.eventType == 'pv') {
         return {
-            schema: 'iglu:com.acme.marketing/some_event/jsonschema/1-0-0',
+schema: "TechArticle"
             data: { test: 1 },
         };
     }
@@ -231,7 +233,7 @@ For example:
 
 ```javascript
 var entity = {
-  schema: 'iglu:com.acme.marketing/some_event/jsonschema/1-0-0',
+schema: "TechArticle"
   data: { test: 1 },
 };
 tracker.addGlobalContexts([entity]); // add a global context

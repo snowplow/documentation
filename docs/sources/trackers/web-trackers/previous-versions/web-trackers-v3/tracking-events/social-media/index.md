@@ -1,5 +1,7 @@
 ---
 title: "Social media"
+description: "Track social media interactions using web trackers v3 for behavioral engagement analytics."
+schema: "TechArticle"
 sidebar_position: 140
 ---
 

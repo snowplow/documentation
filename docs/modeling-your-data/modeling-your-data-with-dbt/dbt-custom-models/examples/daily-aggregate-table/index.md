@@ -1,5 +1,8 @@
 ---
 title: "Daily Aggregate Model"
+description: "Create daily aggregate tables in dbt for behavioral data summarization and reporting."
+schema: "TechArticle"
+keywords: ["Daily Aggregates", "Aggregate Tables", "Daily Reports", "Aggregation Models", "Daily Analytics", "Aggregate Data"]
 sidebar_position: 20
 ---
 

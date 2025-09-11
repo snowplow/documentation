@@ -1,6 +1,8 @@
 ---
 title: "Timestamps"
-description: ""
+description: "Understand event timestamps in Snowplow behavioral data for accurate temporal analysis and ordering."
+schema: "TechArticle"
+keywords: ["Event Timestamps", "Time Data", "Event Time", "Temporal Data", "Time Analytics", "Event Timing"]
 date: "2025-05-15"
 sidebar_position: 4
 ---

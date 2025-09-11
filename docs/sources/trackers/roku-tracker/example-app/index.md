@@ -1,5 +1,8 @@
 ---
 title: "Example Roku app with Snowplow tracking"
+description: "Example Roku application demonstrating behavioral event tracking implementation for streaming analytics."
+schema: "TechArticle"
+keywords: ["Roku Example", "TV Example", "Roku Demo", "OTT Demo", "Connected TV", "Roku Sample"]
 date: "2021-11-16"
 sidebar_position: 5000
 ---

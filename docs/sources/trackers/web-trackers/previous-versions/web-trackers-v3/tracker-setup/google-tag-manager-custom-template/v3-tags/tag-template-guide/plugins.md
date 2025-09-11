@@ -1,5 +1,8 @@
 ---
 title: "Using Plugins"
+description: "Plugin configuration for Google Tag Manager v3 behavioral event tracking templates."
+schema: "TechArticle"
+keywords: ["Web V3 GTM Plugins", "GTM V3 Plugins", "Legacy GTM", "Tag Plugins", "GTM Extensions", "Plugin Guide"]
 date: "2023-12-20"
 sidebar_position: 200
 ---

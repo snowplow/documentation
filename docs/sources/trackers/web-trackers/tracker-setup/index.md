@@ -1,5 +1,8 @@
 ---
 title: "Tracker setup"
+description: "Set up JavaScript web trackers for comprehensive behavioral event collection in web applications."
+schema: "TechArticle"
+keywords: ["Web Tracker Setup", "JavaScript Setup", "Tracker Installation", "Web Analytics", "Getting Started", "Tracker Config"]
 date: "2021-03-31"
 sidebar_position: 1000
 ---

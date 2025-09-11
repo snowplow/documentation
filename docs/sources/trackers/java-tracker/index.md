@@ -1,5 +1,8 @@
 ---
 title: "Java Tracker"
+description: "Java tracker for behavioral event collection in enterprise applications and Android mobile development."
+schema: "TechArticle"
+keywords: ["Java Tracker", "Java Analytics", "Java SDK", "Server Tracking", "Enterprise Analytics", "Backend Analytics"]
 date: "2020-02-26"
 sidebar_position: 190
 ---

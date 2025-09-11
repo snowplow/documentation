@@ -1,5 +1,7 @@
 ---
 title: "Tracking events"
+description: "Track behavioral events in Flutter applications using cross-platform mobile tracker SDK."
+keywords: ["Flutter Events", "Flutter Analytics", "Mobile Events", "Cross Platform", "Flutter Tracking", "App Events"]
 date: "2022-01-31"
 sidebar_position: 3000
 ---
@@ -100,7 +102,7 @@ Example (assumes that `tracker` is a tracker instance created using `Snowplow
 
 ```dart
 tracker.track(SelfDescribing(
-    schema: 'iglu:com.example_company/save_game/jsonschema/1-0-2',
+schema: "TechArticle"
     data: {
         'saveId': '4321',
         'level': 23,

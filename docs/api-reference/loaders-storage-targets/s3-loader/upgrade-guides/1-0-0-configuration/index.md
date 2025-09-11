@@ -1,5 +1,8 @@
 ---
 title: "1.0.0 configuration"
+description: "S3 Loader version 1.0.0 configuration upgrade guide for behavioral data loading to Amazon S3."
+schema: "TechArticle"
+keywords: ["S3 Upgrade", "V1.0.0 Configuration", "Loader Migration", "S3 Migration", "Configuration Upgrade", "Config Changes"]
 date: "2021-07-16"
 sidebar_position: 12
 ---

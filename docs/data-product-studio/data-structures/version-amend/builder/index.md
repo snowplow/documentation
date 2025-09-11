@@ -1,5 +1,8 @@
 ---
 title: "Versioning Data Structures with the Data Structures Builder"
+description: "Visual schema builder tools for creating and amending data structures through an intuitive user interface."
+schema: "TechArticle"
+keywords: ["Schema Builder", "Visual Editor", "Schema Creation", "Structure Builder", "Schema Design", "Visual Tool"]
 date: "2023-03-01"
 sidebar_label: "Using the Data Structures Builder"
 sidebar_position: 20

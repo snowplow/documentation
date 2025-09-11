@@ -1,5 +1,8 @@
 ---
 title: "Node.js Tracker"
+description: "Node.js tracker for server-side behavioral event collection in JavaScript backend applications."
+schema: "TechArticle"
+keywords: ["Node.js Tracker", "NodeJS Analytics", "Server Tracking", "Backend Analytics", "JavaScript Server", "Server SDK"]
 date: "2021-03-24"
 sidebar_position: 165
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Vimeo"
+description: "Track Vimeo video player interactions using web trackers for behavioral video engagement analytics."
+schema: "TechArticle"
+keywords: ["Vimeo Tracking", "Video Analytics", "Vimeo Events", "Video Engagement", "Vimeo Integration", "Video Metrics"]
 sidebar_position: 15
 ---
 

@@ -1,5 +1,8 @@
 ---
 title: "Installation and set-up"
+description: "Installation and setup guide for Java tracker in enterprise applications and Android development."
+schema: "TechArticle"
+keywords: ["Java Installation", "Java Setup", "Installation Guide", "Java Config", "Getting Started", "Java Integration"]
 date: "2022-03-24"
 sidebar_position: 10
 ---

@@ -1,6 +1,8 @@
 ---
 title: "Understanding the structure of Snowplow data"
-description: A summary of the Snowplow events table and its fields, including custom events and entities
+description: "Understand Snowplow's canonical event structure and how behavioral data is organized across warehouse tables and platforms."
+schema: "TechArticle"
+keywords: ["Canonical Event", "Event Model", "Snowplow Events", "Data Schema", "Event Structure", "Analytics Model"]
 sidebar_label: "What the data looks like"
 sidebar_position: 4
 ---

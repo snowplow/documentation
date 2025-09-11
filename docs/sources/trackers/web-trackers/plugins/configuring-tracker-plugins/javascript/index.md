@@ -1,5 +1,8 @@
 ---
 title: "Javascript (tag) tracker"
+description: "Configure JavaScript plugins for web trackers to extend behavioral event collection functionality."
+schema: "TechArticle"
+keywords: ["JavaScript Plugins", "JS Configuration", "Web Features", "JS Analytics", "Browser JavaScript", "Client Side"]
 date: "2023-03-22"
 sidebar_position: 400
 ---

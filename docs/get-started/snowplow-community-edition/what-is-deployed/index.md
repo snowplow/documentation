@@ -1,5 +1,8 @@
 ---
 title: "What is deployed?"
+description: "Understand the infrastructure components deployed with Snowplow Community Edition behavioral data platform."
+schema: "TechArticle"
+keywords: ["Community Deployment", "What Deployed", "Infrastructure Overview", "Deployment Guide", "Community Setup", "Architecture Overview"]
 sidebar_position: 3
 ---
 

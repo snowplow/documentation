@@ -1,5 +1,8 @@
 ---
 title: "Configuration"
+description: "Complete configuration guide for Snowbridge behavioral event forwarding and transformation workflows."
+schema: "TechArticle"
+keywords: ["Snowbridge Configuration", "Event Forwarding", "Export Setup", "Configuration Guide", "Setup Process", "Export Configuration"]
 date: "2022-10-20"
 sidebar_position: 300
 ---

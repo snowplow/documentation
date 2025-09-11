@@ -1,5 +1,8 @@
 ---
 title: "Static repo"
+description: "Static Iglu repository configuration for behavioral data schema hosting and version control."
+schema: "TechArticle"
+keywords: ["Static Repository", "Static Repo", "Schema Repository", "File Repository", "Static Registry", "Local Registry"]
 date: "2021-03-26"
 sidebar_position: 4000
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Ecommerce"
+description: "Ecommerce plugin for browser tracker v3 to track behavioral commerce and purchase analytics."
+schema: "TechArticle"
+keywords: ["Browser V3 Ecommerce", "Legacy Ecommerce", "Shopping Analytics", "Commerce Events", "Retail Analytics", "Transaction Events"]
 date: "2021-04-07"
 sidebar_position: 6000
 ---

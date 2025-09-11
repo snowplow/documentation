@@ -1,5 +1,8 @@
 ---
 title: "Snowplow v3 Ecommerce"
+description: "Version 3 ecommerce tag template for Google Tag Manager behavioral commerce analytics."
+schema: "TechArticle"
+keywords: ["GTM V3 Ecommerce", "Ecommerce Template", "Legacy GTM", "Shopping Template", "Commerce Tags", "Retail Template"]
 sidebar_position: 2000
 ---
 

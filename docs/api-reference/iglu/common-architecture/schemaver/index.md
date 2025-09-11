@@ -1,5 +1,8 @@
 ---
 title: "SchemaVer"
+description: "SchemaVer versioning scheme for behavioral data schema evolution and compatibility management."
+schema: "TechArticle"
+keywords: ["SchemaVer", "Schema Versioning", "Version Control", "Schema Evolution", "Version Management", "Schema Versions"]
 date: "2021-03-26"
 sidebar_position: 10
 ---

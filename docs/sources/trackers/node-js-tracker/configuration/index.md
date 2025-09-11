@@ -1,5 +1,8 @@
 ---
 title: "Configuration"
+description: "Configure Node.js tracker settings for optimal server-side behavioral event collection."
+schema: "TechArticle"
+keywords: ["Node.js Configuration", "Server Configuration", "Node Setup", "NodeJS Analytics", "Backend Config", "Server Analytics"]
 date: "2021-04-07"
 sidebar_position: 2
 ---

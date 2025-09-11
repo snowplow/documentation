@@ -1,5 +1,7 @@
 ---
 title: "Enhanced"
+description: "Track enhanced ecommerce events using web trackers v3 for detailed behavioral commerce analytics."
+schema: "TechArticle"
 sidebar_position: 70
 ---
 

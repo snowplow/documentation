@@ -1,5 +1,7 @@
 ---
 title: "Quick start guide"
+description: "Quick start guide for React Native v2 tracker implementation in mobile applications."
+keywords: ["React Native Quick Start", "Mobile Quick Start", "Getting Started", "Setup Guide", "Installation Guide", "Mobile Setup"]
 date: "2021-08-06"
 sidebar_position: 0
 ---
@@ -125,11 +127,11 @@ const tracker = createTracker(
                 tag: 'my-first-gc-tag',
                 globalContexts: [
                     {
-                        schema: 'my-gc-schema-01',
+schema: "TechArticle"
                         data: {gcData: 'some data'}
                     },
                     {
-                        schema: 'my-gc-schema-02'
+schema: "TechArticle"
                         data: {moreGCData: 'some more data'}
                     },
                 ]
@@ -138,7 +140,7 @@ const tracker = createTracker(
                 tag: 'another-gc-tag',
                 globalContexts: [
                     {
-                        schema: 'my-gc-schema-03'
+schema: "TechArticle"
                         data: {gcProp: 'some value'}
                     },
                 ]

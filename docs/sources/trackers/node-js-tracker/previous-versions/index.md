@@ -1,5 +1,7 @@
 ---
 title: "Previous versions"
+description: "Previous versions of Node.js tracker for server-side behavioral event collection."
+schema: "TechArticle"
 date: "2020-02-26"
 sidebar_position: 300
 sidebar_custom_props:

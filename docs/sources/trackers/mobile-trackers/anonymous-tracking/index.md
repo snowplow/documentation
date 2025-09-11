@@ -1,5 +1,8 @@
 ---
 title: "Anonymous tracking"
+description: "Implement anonymous user tracking in mobile applications for privacy-compliant behavioral analytics."
+schema: "TechArticle"
+keywords: ["Anonymous Mobile", "Mobile Privacy", "Anonymous Analytics", "Privacy Protection", "Mobile Privacy", "GDPR Mobile"]
 date: "2022-08-30"
 sidebar_position: 60
 ---

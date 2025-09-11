@@ -1,5 +1,8 @@
 ---
 title: "Setup"
+description: "Set up Unity tracker for behavioral event collection in Unity games and interactive applications."
+schema: "TechArticle"
+keywords: ["Unity Setup", "Game Setup", "Unity Configuration", "Unity Analytics", "Game Analytics", "Unity Integration"]
 date: "2020-02-26"
 sidebar_position: 10
 ---

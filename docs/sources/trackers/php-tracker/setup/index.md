@@ -1,5 +1,8 @@
 ---
 title: "Setup"
+description: "Set up PHP tracker for server-side behavioral event collection in PHP applications."
+schema: "TechArticle"
+keywords: ["PHP Setup", "PHP Configuration", "PHP Analytics", "Server PHP", "PHP Integration", "Backend PHP"]
 date: "2020-02-26"
 sidebar_position: 10
 ---

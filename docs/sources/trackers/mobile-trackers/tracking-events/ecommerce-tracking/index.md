@@ -1,5 +1,8 @@
 ---
 title: "Ecommerce tracking"
+description: "Track ecommerce transactions and shopping behavior in mobile applications using native trackers."
+schema: "TechArticle"
+keywords: ["Mobile Ecommerce", "App Commerce", "Mobile Shopping", "M-commerce", "Mobile Retail", "App Purchases"]
 sidebar_position: 70
 ---
 

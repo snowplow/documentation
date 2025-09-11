@@ -1,5 +1,8 @@
 ---
 title: "Snowplow Tag Configuration"
+description: "Configure Snowplow tags in Google Tag Manager Server-Side for behavioral event processing and forwarding."
+schema: "TechArticle"
+keywords: ["Snowplow Tag Config", "GTM Configuration", "Tag Setup", "Server Side Config", "Tag Configuration", "GTM Setup"]
 date: "2021-11-24"
 sidebar_position: 100
 ---

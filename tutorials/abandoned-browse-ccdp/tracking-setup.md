@@ -1,6 +1,9 @@
 ---
 position: 2
 title: Tracking Setup
+description: "Set up tracking for abandoned browse behavioral events to power customer re-engagement campaigns."
+schema: "HowTo"
+keywords: ["CCDP Tracking", "Tracking Setup", "Behavioral Tracking", "Customer Tracking", "Event Setup", "CCDP Events"]
 ---
 
 ## Initialize Snowplow JavaScript tracker

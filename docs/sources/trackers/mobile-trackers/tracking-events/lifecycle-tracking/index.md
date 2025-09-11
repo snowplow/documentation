@@ -1,5 +1,8 @@
 ---
 title: "App lifecycle tracking"
+description: "Track application lifecycle events in mobile trackers for user engagement analysis."
+schema: "TechArticle"
+keywords: ["App Lifecycle", "Mobile Lifecycle", "App Events", "Lifecycle Events", "App State", "Mobile Sessions"]
 sidebar_position: 30
 ---
 

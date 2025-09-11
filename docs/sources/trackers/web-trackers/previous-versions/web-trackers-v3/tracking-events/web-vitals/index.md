@@ -1,5 +1,7 @@
 ---
 title: "Core web vitals"
+description: "Track Core Web Vitals using web trackers v3 for behavioral performance analytics."
+schema: "TechArticle"
 sidebar_position: 95
 ---
 

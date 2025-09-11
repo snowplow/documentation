@@ -1,5 +1,8 @@
 ---
 title: "Screen views"
+description: "Track screen views and viewport changes using web trackers for behavioral analytics in single-page apps."
+schema: "TechArticle"
+keywords: ["Screen Views", "Page Views", "View Tracking", "Page Analytics", "Navigation Tracking", "View Events"]
 sidebar_position: 60
 ---
 

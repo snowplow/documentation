@@ -1,5 +1,8 @@
 ---
 title: "Platform and application data tracking"
+description: "Add platform and application context to behavioral events in React Native tracker implementations."
+schema: "TechArticle"
+keywords: ["Platform Context", "App Context", "React Native", "Device Context", "Application Data", "Platform Data"]
 sidebar_position: 10
 ---
 

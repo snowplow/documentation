@@ -1,5 +1,8 @@
 ---
 title: "Anonymous tracking"
+description: "Implement anonymous user tracking in Flutter applications for privacy-compliant behavioral analytics."
+schema: "TechArticle"
+keywords: ["Flutter Anonymous", "Flutter Privacy", "Anonymous Analytics", "Privacy Protection", "Flutter GDPR", "Mobile Privacy"]
 date: "2022-01-31"
 sidebar_position: 6000
 ---

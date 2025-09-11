@@ -1,5 +1,8 @@
 ---
 title: "Getting the most out of performance timing"
+description: "Optimize performance timing measurement in JavaScript tracker v2 for behavioral analytics."
+schema: "TechArticle"
+keywords: ["JavaScript V2 Performance", "Performance Timing", "Legacy Performance", "Performance Optimization", "Timing Analytics", "Web Performance"]
 date: "2020-02-26"
 sidebar_position: 30
 ---

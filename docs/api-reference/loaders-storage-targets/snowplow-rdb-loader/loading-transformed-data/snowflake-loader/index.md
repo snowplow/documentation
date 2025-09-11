@@ -1,5 +1,8 @@
 ---
 title: "Snowflake loader"
+description: "Load behavioral data into Snowflake data cloud for advanced analytics and data warehousing."
+schema: "TechArticle"
+keywords: ["Snowflake Loader", "Snowflake Integration", "Cloud Warehouse", "Data Cloud", "Snowflake Analytics", "Modern Warehouse"]
 date: "2022-04-05"
 sidebar_position: 20
 ---

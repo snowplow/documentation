@@ -1,5 +1,8 @@
 ---
 title: "Subject methods"
+description: "Subject methods in Scala tracker version 0.5.0 for behavioral event context configuration."
+schema: "TechArticle"
+keywords: ["Scala V0.5.0", "Legacy Subject", "Previous Version", "Subject Methods", "Deprecated Subject", "Legacy Context"]
 date: "2020-02-26"
 sidebar_position: 40
 ---

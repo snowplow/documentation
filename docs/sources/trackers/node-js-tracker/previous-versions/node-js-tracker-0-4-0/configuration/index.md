@@ -1,5 +1,8 @@
 ---
 title: "Configuration"
+description: "Configuration guide for Node.js tracker version 0.4.0 behavioral event collection settings."
+schema: "TechArticle"
+keywords: ["Node.js V0.4.0", "Legacy Version", "Previous Configuration", "Old Version", "Deprecated Version", "Legacy Config"]
 date: "2020-09-03"
 sidebar_position: 300
 ---

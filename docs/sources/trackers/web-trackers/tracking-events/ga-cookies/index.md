@@ -1,5 +1,8 @@
 ---
 title: "GA cookies"
+description: "Track Google Analytics cookie data using web trackers for behavioral analytics migration."
+schema: "TechArticle"
+keywords: ["Google Analytics", "GA Cookies", "Analytics Migration", "Cookie Data", "GA Integration", "Analytics Transition"]
 sidebar_position: 130
 ---
 

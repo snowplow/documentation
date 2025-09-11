@@ -1,5 +1,8 @@
 ---
 title: "Transformations and filters"
+description: "Core concepts and patterns for transforming behavioral events during Snowbridge forwarding workflows."
+schema: "TechArticle"
+keywords: ["Transformation Concepts", "Data Transformation", "Event Processing", "Transform Logic", "Data Mapping", "Processing Concepts"]
 date: "2022-10-20"
 sidebar_position: 300
 ---

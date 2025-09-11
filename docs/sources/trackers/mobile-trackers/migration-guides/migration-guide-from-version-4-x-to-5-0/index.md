@@ -1,5 +1,8 @@
 ---
 title: "From version 4.x to 5.0"
+description: "Migration guide for mobile trackers upgrade from version 4.x to 5.0 with advanced features."
+schema: "TechArticle"
+keywords: ["Mobile Migration", "V4 to V5", "Mobile Upgrade", "Version Migration", "Migration Guide", "Breaking Changes"]
 sidebar_position: -4
 ---
 

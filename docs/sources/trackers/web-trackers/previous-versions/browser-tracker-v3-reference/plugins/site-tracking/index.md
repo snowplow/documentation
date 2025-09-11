@@ -1,5 +1,8 @@
 ---
 title: "Site Tracking"
+description: "Site tracking plugin for browser tracker v3 to capture comprehensive behavioral website analytics."
+schema: "TechArticle"
+keywords: ["Browser V3 Site", "Site Tracking", "Legacy Site", "Site Analytics", "Website Analytics", "Site Events"]
 date: "2021-04-07"
 sidebar_position: 15000
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Exception tracking"
+description: "Track application exceptions and crashes in mobile trackers for behavioral analytics and debugging."
+schema: "TechArticle"
+keywords: ["Exception Tracking", "Error Tracking", "Mobile Errors", "App Crashes", "Exception Analytics", "Error Monitoring"]
 sidebar_position: 50
 ---
 

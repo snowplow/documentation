@@ -1,5 +1,8 @@
 ---
 title: "Social media"
+description: "Track social media interactions and sharing behavior using web trackers for engagement analytics."
+schema: "TechArticle"
+keywords: ["Social Media", "Social Tracking", "Social Events", "Social Analytics", "Social Engagement", "Social Buttons"]
 sidebar_position: 140
 ---
 

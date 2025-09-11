@@ -1,5 +1,8 @@
 ---
 title: "Sending events"
+description: "Send behavioral events using Scala tracker version 1.0.0 in functional programming applications."
+schema: "TechArticle"
+keywords: ["Scala V1.0.0", "Legacy Events", "Previous Version", "Event Sending", "Deprecated Events", "Legacy Tracking"]
 date: "2020-12-02"
 sidebar_position: 20
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Using Different Sessionisation"
+description: "Implement custom sessionization logic in dbt for specialized behavioral analytics requirements."
+schema: "TechArticle"
+keywords: ["Custom Sessionization", "Session Logic", "Session Rules", "Custom Sessions", "Session Definition", "Session Models"]
 sidebar_position: 50
 ---
 

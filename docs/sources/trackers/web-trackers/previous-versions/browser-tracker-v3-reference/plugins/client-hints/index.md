@@ -1,5 +1,8 @@
 ---
 title: "Client Hints"
+description: "Client Hints plugin for browser tracker v3 to capture behavioral analytics device context."
+schema: "TechArticle"
+keywords: ["Browser V3 Hints", "Client Hints", "Legacy Hints", "Browser Intelligence", "Device Detection", "User Agent"]
 date: "2021-04-07"
 sidebar_position: 3000
 ---

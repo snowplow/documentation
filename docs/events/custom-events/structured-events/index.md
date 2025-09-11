@@ -1,5 +1,8 @@
 ---
 title: "Structured events"
+description: "Create structured behavioral events with predefined parameters for standardized analytics tracking."
+schema: "TechArticle"
+keywords: ["Structured Events", "Event Structure", "Event Schema", "Structured Data", "Event Format", "Standard Events"]
 ---
 
 :::info

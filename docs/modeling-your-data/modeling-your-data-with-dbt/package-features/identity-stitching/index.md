@@ -1,6 +1,8 @@
 ---
 title: "Users and Identity Stitching"
-description: "Details on mapping between `domain_userid` and `user_id` in our packages."
+description: "Implement identity stitching in dbt packages for unified behavioral analytics across user sessions."
+schema: "TechArticle"
+keywords: ["Identity Stitching", "User Stitching", "Identity Resolution", "User Matching", "Cross Device", "Identity Linking"]
 sidebar_position: 10
 ---
 ```mdx-code-block

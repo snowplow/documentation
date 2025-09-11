@@ -1,5 +1,8 @@
 ---
 title: "Databricks loader"
+description: "Load transformed behavioral data into Databricks for advanced analytics and machine learning workflows."
+schema: "TechArticle"
+keywords: ["Databricks Loader", "Databricks Integration", "Data Lakehouse", "Spark Warehouse", "Analytics Platform", "Databricks Analytics"]
 date: "2022-05-27"
 sidebar_position: 300
 ---

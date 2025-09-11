@@ -1,5 +1,8 @@
 ---
 title: "Quick Start Guide"
+description: "Quick start guide for mobile trackers version 2.x behavioral event collection implementation."
+schema: "TechArticle"
+keywords: ["Mobile V2.x Guide", "Legacy Guide", "Quick Start", "Previous Version", "Deprecated Guide", "Old Guide"]
 date: "2021-04-12"
 sidebar_position: 200
 ---

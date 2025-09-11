@@ -1,5 +1,8 @@
 ---
 title: "YouTube Tracking"
+description: "YouTube tracking plugin for browser tracker v3 to analyze behavioral video engagement analytics."
+schema: "TechArticle"
+keywords: ["Browser V3 YouTube", "YouTube Tracking", "Legacy YouTube", "Video Analytics", "YouTube Events", "Video Engagement"]
 date: "2022-01-12"
 sidebar_position: 17000
 ---

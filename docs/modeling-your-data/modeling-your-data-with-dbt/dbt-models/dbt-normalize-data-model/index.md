@@ -1,7 +1,9 @@
 ---
 title: "Normalize"
 sidebar_position: 50
-description: "The Snowplow Normalize dbt Package"
+description: "Normalize behavioral data using dbt for consistent formatting and standardization across analytics workflows."
+schema: "TechArticle"
+keywords: ["DBT Normalize", "Data Normalization", "Schema Normalization", "Data Structure", "DBT Package", "Data Organization"]
 hide_title: true
 ---
 

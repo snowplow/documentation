@@ -2,7 +2,9 @@
 title: "Querying your first events"
 sidebar_position: 6
 sidebar_label: "Query the data"
-description: "Inspecting the events you tracked"
+description: "Query and analyze behavioral data in your data warehouse using SQL for business intelligence and insights."
+schema: "TechArticle"
+keywords: ["Data Querying", "SQL Queries", "Getting Started", "Data Analysis", "Query Guide", "Analytics Queries"]
 ---
 
 ```mdx-code-block

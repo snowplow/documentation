@@ -1,5 +1,8 @@
 ---
 title: "Monitoring failed events"
+description: "Monitor failed events in your behavioral data pipeline to maintain data quality and identify collection issues."
+schema: "TechArticle"
+keywords: ["Event Monitoring", "Failed Events", "Quality Monitoring", "Event Tracking", "Data Quality", "Monitor Events"]
 sidebar_position: 2
 sidebar_custom_props:
   offerings:

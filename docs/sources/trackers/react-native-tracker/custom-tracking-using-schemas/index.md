@@ -1,5 +1,7 @@
 ---
 title: "Custom event tracking"
+description: "Create custom behavioral events with schemas in React Native tracker for flexible event tracking."
+keywords: ["Custom Tracking", "React Native", "Custom Events", "Schema Tracking", "Event Schemas", "Custom Analytics"]
 date: "2021-08-06"
 sidebar_position: 21
 ---
@@ -30,7 +32,7 @@ For example, to track a link-click event, which is one whose schema is already p
 
 ```typescript
 tracker.trackSelfDescribingEvent({
-    schema: 'iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1',
+schema: "TechArticle"
     data: {targetUrl: 'http://a-target-url.com'}
 });
 ```
@@ -51,7 +53,7 @@ For example, a custom context to describe a screen could be:
 
 ```typescript
 const myScreenContext: EventContext = {
-    schema: 'iglu:com.example/screen/jsonschema/1-2-1',
+schema: "TechArticle"
     data: {
         screenType: 'test',
         lastUpdated: '2021-06-11'
@@ -63,7 +65,7 @@ Another example custom context to describe a user on a screen could be:
 
 ```typescript
 const myUserEntity: EventContext = {
-    schema: 'iglu:com.example/user/jsonschema/2-0-0',
+schema: "TechArticle"
     data: {
         userType: 'tester'
     }

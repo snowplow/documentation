@@ -1,5 +1,7 @@
 ---
 title: "Opt-outs and anonymous tracking"
+description: "Implement anonymous tracking in web trackers v3 for privacy-compliant behavioral analytics."
+schema: "TechArticle"
 date: "2022-08-30"
 sidebar_position: 2860
 ---

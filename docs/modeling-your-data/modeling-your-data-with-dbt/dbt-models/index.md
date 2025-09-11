@@ -1,7 +1,9 @@
 ---
 title: "Our packages"
 sidebar_position: 10
-description: "All Snowplow dbt packages"
+description: "Pre-built dbt data models for transforming behavioral data into analytics-ready datasets."
+schema: "TechArticle"
+keywords: ["DBT Models", "Data Models", "Analytics Models", "DBT Package", "Data Transformation", "SQL Models"]
 ---
 
 Snowplow provides several dbt packages to help you get value from your data.

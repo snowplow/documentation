@@ -1,5 +1,8 @@
 ---
 title: "Iglu Clients"
+description: "Iglu client libraries for behavioral data schema resolution across multiple programming languages."
+schema: "TechArticle"
+keywords: ["Iglu Clients", "Registry Clients", "Schema Clients", "Client Libraries", "SDK Clients", "Integration Clients"]
 date: "2021-03-26"
 sidebar_position: 40
 ---

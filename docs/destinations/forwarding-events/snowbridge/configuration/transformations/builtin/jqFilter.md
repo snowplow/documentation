@@ -1,6 +1,8 @@
 ---
 title: "jqFilter"
-description: "Filters messages based on the output of a jq command."
+description: "Apply jq-based filtering to behavioral events for selective forwarding using Snowbridge transformations."
+schema: "TechArticle"
+keywords: ["JQ Filter", "JSON Filter", "Query Filter", "Data Filter", "JSON Query", "Filter Expression"]
 ---
 
 ```mdx-code-block

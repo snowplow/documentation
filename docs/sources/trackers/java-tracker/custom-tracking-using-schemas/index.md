@@ -1,5 +1,8 @@
 ---
 title: "Custom tracking using schemas"
+description: "Create custom behavioral events with schemas in Java tracker for flexible enterprise tracking."
+schema: "TechArticle"
+keywords: ["Java Custom Tracking", "Custom Events", "Schema Tracking", "Java Analytics", "Custom Schemas", "Event Schemas"]
 date: "2022-03-24"
 sidebar_position: 30
 ---

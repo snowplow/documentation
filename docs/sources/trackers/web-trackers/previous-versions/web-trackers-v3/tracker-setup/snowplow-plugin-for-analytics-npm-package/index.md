@@ -1,5 +1,7 @@
 ---
 title: "Snowplow Plugin for getanalytics.io"
+description: "Integrate web trackers v3 with analytics npm package for behavioral event collection."
+schema: "TechArticle"
 date: "2020-08-10"
 sidebar_position: 4000
 ---

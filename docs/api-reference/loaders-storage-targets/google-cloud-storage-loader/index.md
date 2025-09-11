@@ -1,5 +1,8 @@
 ---
 title: "Google Cloud Storage Loader"
+description: "Load behavioral event data into Google Cloud Storage for data lake analytics and long-term archival."
+schema: "TechArticle"
+keywords: ["GCS Loader", "Cloud Storage", "Google Storage", "GCP Storage", "Cloud Loader", "Storage Loader"]
 sidebar_position: 6
 ---
 

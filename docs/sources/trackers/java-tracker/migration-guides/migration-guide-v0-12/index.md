@@ -1,5 +1,8 @@
 ---
 title: "From version 0.11 to 0.12"
+description: "Migration guide for upgrading Java tracker from version 0.12 with behavioral tracking improvements."
+schema: "TechArticle"
+keywords: ["Java Migration", "V0.12 Migration", "Version Migration", "Upgrade Guide", "Migration Guide", "Breaking Changes"]
 date: "2022-03-24"
 sidebar_position: 100
 ---

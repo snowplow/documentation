@@ -1,7 +1,9 @@
 ---
 title: "Running on data lakes"
 sidebar_position: 50
-description: "How to run our models on lakehouses"
+description: "Deploy dbt models for behavioral data processing in data lake environments and architectures."
+schema: "TechArticle"
+keywords: ["DBT Lakes", "Data Lakes", "Lake Models", "Big Data", "Lake Analytics", "Data Lake"]
 ---
 
 ```mdx-code-block

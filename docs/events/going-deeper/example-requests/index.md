@@ -1,5 +1,8 @@
 ---
 title: "Example tracker requests"
+description: "Example HTTP requests and payload structures for Snowplow behavioral event collection."
+schema: "TechArticle"
+keywords: ["Request Examples", "HTTP Examples", "Event Examples", "API Examples", "Request Format", "Event Format"]
 ---
 
 :::note

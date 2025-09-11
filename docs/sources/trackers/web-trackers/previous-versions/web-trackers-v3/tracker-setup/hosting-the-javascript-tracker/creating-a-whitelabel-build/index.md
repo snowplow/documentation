@@ -1,5 +1,7 @@
 ---
 title: "Creating a white-label build"
+description: "Create whitelabel builds of web trackers v3 for behavioral event collection branding."
+schema: "TechArticle"
 date: "2022-09-14"
 sidebar_position: 4000
 ---

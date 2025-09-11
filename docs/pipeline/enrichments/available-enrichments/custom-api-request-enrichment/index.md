@@ -1,5 +1,8 @@
 ---
 title: "Custom API Request enrichment"
+description: "Enrich events with external API data by making custom HTTP requests during the Snowplow pipeline processing."
+schema: "TechArticle"
+keywords: ["API Enrichment", "Custom Enrichment", "External API", "Data Enrichment", "Third Party", "API Integration"]
 sidebar_position: 13
 sidebar_label: Custom API Request
 ---

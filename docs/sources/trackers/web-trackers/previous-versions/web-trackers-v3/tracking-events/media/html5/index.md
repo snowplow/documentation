@@ -1,5 +1,7 @@
 ---
 title: "HTML5"
+description: "Track HTML5 media interactions using web trackers v3 for behavioral video analytics."
+schema: "TechArticle"
 sidebar_position: 10
 ---
 

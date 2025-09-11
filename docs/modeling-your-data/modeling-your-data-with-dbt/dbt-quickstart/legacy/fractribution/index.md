@@ -2,6 +2,9 @@
 sidebar_label: "Fractribution"
 sidebar_position: 900
 title: "Fractribution Quickstart"
+description: "Quick start guide for legacy dbt fractribution data model implementation for behavioral attribution analytics."
+schema: "TechArticle"
+keywords: ["Fractribution Quickstart", "Attribution Setup", "Marketing Attribution", "Attribution Guide", "Marketing DBT", "Attribution Models"]
 ---
 
 ```mdx-code-block

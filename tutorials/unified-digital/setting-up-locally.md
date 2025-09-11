@@ -1,5 +1,8 @@
 ---
 title: Setting up locally
+description: "Set up unified digital analytics locally for combining web and mobile behavioral data analysis."
+schema: "HowTo"
+keywords: ["Unified Local", "Local Setup", "Development Setup", "Local Analytics", "Unified Tutorial", "Local Development"]
 position: 2
 ---
 

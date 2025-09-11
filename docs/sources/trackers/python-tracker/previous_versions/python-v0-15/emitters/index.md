@@ -1,5 +1,8 @@
 ---
 title: "Emitters"
+description: "Configure event emitters in Python tracker version 0.15 for behavioral data transmission."
+schema: "TechArticle"
+keywords: ["Python V0.15", "Legacy Emitters", "Previous Version", "Event Sending", "Deprecated Emitters", "Legacy Transport"]
 date: "2020-02-26"
 sidebar_position: 60
 ---

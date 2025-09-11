@@ -1,5 +1,8 @@
 ---
 title: "Performance Navigation Timing"
+description: "Performance navigation timing plugin for browser tracker v3 to measure behavioral page performance."
+schema: "TechArticle"
+keywords: ["Browser V3 Navigation", "Navigation Timing", "Legacy Navigation", "Performance Timing", "Page Performance", "Load Metrics"]
 date: "2023-05-10"
 sidebar_position: 14500
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Snowplow v3 Settings Variable"
+description: "Version 3 settings variable configuration for Google Tag Manager behavioral event tracking."
+schema: "TechArticle"
+keywords: ["GTM V3 Settings", "Legacy GTM", "Previous Version", "Tag Manager", "GTM Configuration", "Settings Variable"]
 sidebar_position: 2000
 ---
 

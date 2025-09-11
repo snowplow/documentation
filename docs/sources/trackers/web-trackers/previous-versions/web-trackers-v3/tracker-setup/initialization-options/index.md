@@ -1,5 +1,7 @@
 ---
 title: "Initialization and configuration"
+description: "Configure initialization options for web trackers v3 behavioral event collection."
+schema: "TechArticle"
 date: "2021-03-31"
 sidebar_position: 2000
 ---

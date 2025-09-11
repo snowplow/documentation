@@ -1,5 +1,8 @@
 ---
 title: "Versioning Data Structures using Iglu"
+description: "Use Iglu repository features for advanced data structure versioning and schema registry management workflows."
+schema: "TechArticle"
+keywords: ["Iglu Schema", "Schema Registry", "Iglu Server", "Schema Storage", "Schema Repository", "Iglu Management"]
 sidebar_label: "Using Iglu"
 sidebar_position: 30
 sidebar_custom_props:

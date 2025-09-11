@@ -1,5 +1,8 @@
 ---
 title: "Incorporating non-snowplow data"
+description: "Incorporate external data sources into dbt behavioral analytics models for comprehensive analysis."
+schema: "TechArticle"
+keywords: ["External Data", "Third Party", "Non Snowplow", "Data Integration", "External Sources", "Data Blending"]
 sidebar_position: 100
 ---
 

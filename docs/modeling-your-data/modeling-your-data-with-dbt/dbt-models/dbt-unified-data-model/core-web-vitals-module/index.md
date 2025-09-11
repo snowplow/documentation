@@ -1,5 +1,8 @@
 ---
 title: "Core Web Vitals Module"
+description: "Core Web Vitals module in dbt unified model for behavioral website performance analytics."
+schema: "TechArticle"
+keywords: ["Unified Vitals", "Web Vitals", "Performance DBT", "Core Vitals", "UX Analytics", "Performance Models"]
 sidebar_position: 300
 hide_title: true
 ---

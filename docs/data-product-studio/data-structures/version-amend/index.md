@@ -1,5 +1,8 @@
 ---
 title: "Versioning data structures"
+description: "Version control and amendment strategies for evolving data structures without breaking your behavioral data collection."
+schema: "TechArticle"
+keywords: ["Schema Versioning", "Version Control", "Schema Evolution", "Structure Updates", "Version Management", "Schema Changes"]
 date: "2020-02-25"
 sidebar_position: 2
 sidebar_label: "Version and amend"

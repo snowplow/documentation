@@ -1,5 +1,8 @@
 ---
 title: "Troubleshooting data quality dashboard"
+description: "Diagnose and resolve issues with failed event monitoring to ensure continuous behavioral data quality oversight."
+schema: "TechArticle"
+keywords: ["Monitoring Troubleshooting", "Alert Issues", "Monitor Problems", "Debug Monitoring", "Alert Debugging", "Monitor Troubleshooting"]
 sidebar_position: 4
 sidebar_custom_props:
   offerings:

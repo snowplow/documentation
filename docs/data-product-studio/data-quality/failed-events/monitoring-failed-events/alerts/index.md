@@ -1,5 +1,8 @@
 ---
 title: "Setting up failed event alerts"
+description: "Set up comprehensive alerting systems to proactively monitor failed events and behavioral data quality issues."
+schema: "TechArticle"
+keywords: ["Event Alerts", "Monitoring Alerts", "Quality Alerts", "Alert System", "Notification Management", "Alert Configuration"]
 date: "2025-01-14"
 sidebar_label: "Alerts"
 sidebar_position: 2500

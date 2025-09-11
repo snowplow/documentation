@@ -1,5 +1,8 @@
 ---
 title: "Additional options"
+description: "Additional configuration options for browser tracker v3 behavioral event collection setup."
+schema: "TechArticle"
+keywords: ["Browser V3 Options", "Additional Options", "Legacy Options", "Setup Options", "Configuration Options", "Advanced Config"]
 sidebar_position: 3000
 ---
 

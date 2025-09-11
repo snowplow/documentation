@@ -1,5 +1,8 @@
 ---
 title: "Getting started"
+description: "Quick start guide for setting up Snowbridge to forward behavioral events to external systems and platforms."
+schema: "TechArticle"
+keywords: ["Snowbridge Setup", "Getting Started", "Installation Guide", "Initial Setup", "Quick Start", "Setup Guide"]
 date: "2022-10-20"
 sidebar_position: 100
 ---

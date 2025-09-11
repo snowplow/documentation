@@ -1,6 +1,8 @@
 ---
 title: "Custom Aggregations"
-description: "Details on custom aggregations in our packages"
+description: "Create custom aggregations in dbt packages for specialized behavioral data analysis requirements."
+schema: "TechArticle"
+keywords: ["Custom Aggregations", "Custom Metrics", "Aggregation Logic", "Custom Calculations", "Metric Creation", "Custom Analytics"]
 sidebar_position: 60
 ---
 

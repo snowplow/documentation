@@ -1,5 +1,8 @@
 ---
 title: Viewing the Output Data  
+description: "View and analyze unified digital analytics output data for cross-platform behavioral insights."
+schema: "HowTo"
+keywords: ["Output Data", "Data Viewing", "Results Analysis", "Data Output", "Analytics Results", "Data Visualization"]
 position: 4
 ---
 

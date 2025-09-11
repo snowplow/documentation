@@ -1,5 +1,8 @@
 ---
 title: "Setup"
+description: "Set up the Go tracker for server-side behavioral event collection in Go applications and services."
+schema: "TechArticle"
+keywords: ["Golang Setup", "Go Tracker", "Go Configuration", "Setup Guide", "Go Analytics", "Golang Integration"]
 date: "2020-02-26"
 sidebar_position: 10
 ---

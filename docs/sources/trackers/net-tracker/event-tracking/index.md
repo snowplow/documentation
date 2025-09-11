@@ -1,5 +1,8 @@
 ---
 title: "Event Tracking"
+description: "Track behavioral events in .NET applications using Snowplow's Windows-focused tracker SDK."
+schema: "TechArticle"
+keywords: [".NET Events", "Event Tracking", ".NET Analytics", "C# Events", "Desktop Events", "Framework Events"]
 date: "2020-02-26"
 sidebar_position: 60
 ---

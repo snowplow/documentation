@@ -1,5 +1,8 @@
 ---
 title: "Conversions"
+description: "Conversion tracking in legacy dbt web model for behavioral website optimization analytics."
+schema: "TechArticle"
+keywords: ["Web Conversions", "Conversion Analytics", "Web DBT", "Conversion Models", "Goal Analytics", "Conversion Tracking"]
 sidebar_position: 100
 hide_title: true
 ---

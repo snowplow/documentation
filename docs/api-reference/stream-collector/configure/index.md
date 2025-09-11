@@ -1,5 +1,8 @@
 ---
 title: "Configure"
+description: "Configure Snowplow Stream Collector for optimal behavioral event collection and pipeline performance."
+schema: "TechArticle"
+keywords: ["Collector Configuration", "Stream Collector", "Event Collection", "Collector Setup", "Data Ingestion", "Collection Config"]
 sidebar_position: 2
 ---
 

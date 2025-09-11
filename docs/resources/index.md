@@ -1,5 +1,8 @@
 ---
 title: "Community & contributing"
+description: "Community resources, licensing information, and support options for Snowplow behavioral data platform users."
+schema: "TechArticle"
+keywords: ["Snowplow Resources", "Documentation Resources", "Learning Resources", "Support Resources", "Community Resources", "Help Resources"]
 date: "2020-10-28"
 sidebar_position: 11
 sidebar_label: "Resources"

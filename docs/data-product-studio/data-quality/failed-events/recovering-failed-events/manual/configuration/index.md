@@ -1,5 +1,8 @@
 ---
 title: "Configuration"
+description: "Configure failed event recovery parameters and settings for optimal data quality restoration workflows."
+schema: "TechArticle"
+keywords: ["Recovery Configuration", "Recovery Setup", "Config Management", "Recovery Settings", "Configuration Guide", "Setup Process"]
 date: "2020-08-25"
 sidebar_position: 10
 ---

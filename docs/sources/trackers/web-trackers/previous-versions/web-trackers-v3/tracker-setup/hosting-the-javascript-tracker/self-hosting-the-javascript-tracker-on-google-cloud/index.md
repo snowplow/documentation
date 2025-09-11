@@ -1,5 +1,7 @@
 ---
 title: "Self Hosting the JavaScript Tracker on GCP"
+description: "Self-host JavaScript tracker on Google Cloud using web trackers v3 for behavioral event infrastructure."
+schema: "TechArticle"
 date: "2020-04-28"
 sidebar_position: 200
 ---

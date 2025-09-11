@@ -1,6 +1,9 @@
 ---
 position: 2
 title: Enabling via Terraform
+description: "Enable Snowplow enrichments using Terraform for automated behavioral data processing configuration."
+schema: "HowTo"
+keywords: ["Terraform Enrichments", "Infrastructure Code", "Enrichment Deployment", "Terraform Setup", "IaC Enrichments", "Automated Enrichments"]
 ---
 
 To enable an extra enrichment, such as the [IP anonymisation enrichment](https://docs.snowplow.io/docs/enriching-your-data/available-enrichments/ip-anonymization-enrichment/):

@@ -1,5 +1,7 @@
 ---
 title: "Ads"
+description: "Track advertising interactions using web trackers v3 for behavioral ad analytics."
+schema: "TechArticle"
 sidebar_position: 95
 ---
 

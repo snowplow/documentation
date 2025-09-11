@@ -1,5 +1,8 @@
 ---
 title: "Migrating to the v5.4 Ecommerce package"
+description: "Migration guide for upgrading to new ecommerce tracking in mobile trackers for behavioral commerce analytics."
+schema: "TechArticle"
+keywords: ["Mobile Ecommerce Migration", "Ecommerce Upgrade", "Commerce Migration", "Mobile Commerce", "Ecommerce Guide", "Shopping Migration"]
 sidebar_position: -6
 ---
 

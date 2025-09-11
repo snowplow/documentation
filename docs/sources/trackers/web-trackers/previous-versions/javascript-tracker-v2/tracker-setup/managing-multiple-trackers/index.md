@@ -1,5 +1,8 @@
 ---
 title: "Managing multiple trackers"
+description: "Manage multiple JavaScript tracker v2 instances for complex behavioral analytics."
+schema: "TechArticle"
+keywords: ["JavaScript V2 Multiple", "Multiple Trackers", "Legacy Multiple", "Multi Tracker", "Tracker Management", "Multi Instance"]
 date: "2020-03-03"
 sidebar_position: 40
 ---

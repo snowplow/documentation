@@ -1,5 +1,7 @@
 ---
 title: "Automated testing with Snowplow Micro"
+description: "Implement automated testing workflows using Snowplow Micro for continuous behavioral data quality assurance."
+keywords: ["Automated Testing", "Test Automation", "Micro Testing", "Testing Framework", "Automated QA", "Test Suite"]
 sidebar_position: 0
 sidebar_label: "Automated testing"
 ---
@@ -188,14 +190,14 @@ window.snowplow('enableFormTracking', { options: options });
 // TRACK cart_action_event (add)
 window.snowplow('trackSelfDescribingEvent', {
     event: {
-        schema: 'iglu:test.example.iglu/cart_action_event/jsonschema/1-0-0',
+schema: "TechArticle"
         data: {
             type: 'add',
         },
     },
     context: [
         {
-            schema: 'iglu:test.example.iglu/product_entity/jsonschema/1-0-0',
+schema: "TechArticle"
             data: {
                 sku: sku,
                 name: title,
@@ -209,14 +211,14 @@ window.snowplow('trackSelfDescribingEvent', {
 // TRACK cart_action_event (remove)
 window.snowplow('trackSelfDescribingEvent', {
     event: {
-        schema: 'iglu:test.example.iglu/cart_action_event/jsonschema/1-0-0',
+schema: "TechArticle"
         data: {
             type: 'remove',
         },
     },
     context: [
         {
-            schema: 'iglu:test.example.iglu/product_entity/jsonschema/1-0-0',
+schema: "TechArticle"
             data: {
                 sku: sku,
                 name: title,
@@ -239,7 +241,7 @@ window.snowplow('trackSelfDescribingEvent', {
 let productsContext = [];
 userCart.forEach(function(elt) {
     productsContext.push({
-        schema: 'iglu:test.example.iglu/product_entity/jsonschema/1-0-0',
+schema: "TechArticle"
         data: {
             sku: elt.itemSku,
             name: elt.itemTitle,
@@ -252,7 +254,7 @@ userCart.forEach(function(elt) {
 // TRACK purchase_event
 window.snowplow('trackSelfDescribingEvent', {
     event: {
-        schema: 'iglu:test.example.iglu/purchase_event/jsonschema/1-0-0',
+schema: "TechArticle"
         data: {
             total: parseFloat(total),
         },

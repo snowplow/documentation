@@ -1,7 +1,8 @@
 ---
 title: "Adding custom schemas"
 sidebar_position: 4
-description: "How to add custom schemas to Snowplow Micro."
+description: "Add custom schemas to Snowplow Micro for testing self-describing events and entities locally."
+keywords: ["Micro Schemas", "Testing Schemas", "Local Schemas", "Schema Testing", "Development Schemas", "Schema Setup"]
 ---
 
 ```mdx-code-block
@@ -24,7 +25,7 @@ import { trackSelfDescribingEvent } from '@snowplow/browser-tracker';
 
 trackSelfDescribingEvent({
   event: {
-    schema: 'iglu:com.example/my-schema/jsonschema/1-0-0',
+schema: "TechArticle"
     data: {
         ...
     }

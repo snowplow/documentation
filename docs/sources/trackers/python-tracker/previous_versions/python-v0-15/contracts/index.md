@@ -1,5 +1,8 @@
 ---
 title: "Contracts"
+description: "Data contracts and validation in Python tracker v0.15 for behavioral event structure."
+schema: "TechArticle"
+keywords: ["Python Contracts", "Python V0.15", "Type Contracts", "Legacy Contracts", "Previous Version", "Deprecated Contracts"]
 sidebar_position: 70
 ---
 

@@ -1,5 +1,8 @@
 ---
 title: "Webhooks - collecting data from third parties"
+description: "Webhook integrations for collecting behavioral events from third-party platforms and services."
+schema: "TechArticle"
+keywords: ["Webhook Sources", "Event Webhooks", "API Integration", "Third Party", "External Events", "Webhook Analytics"]
 date: "2020-02-15"
 sidebar_position: 10
 sidebar_label: "Webhooks"

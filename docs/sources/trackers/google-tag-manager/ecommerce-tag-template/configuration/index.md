@@ -1,5 +1,8 @@
 ---
 title: Ecommerce Tag Configuration
+description: "Configure ecommerce tracking template in Google Tag Manager for behavioral commerce analytics."
+schema: "TechArticle"
+keywords: ["Ecommerce GTM", "GTM Ecommerce", "Ecommerce Tags", "Shopping Analytics", "GTM Configuration", "Ecommerce Tracking"]
 sidebar_position: 100
 ---
 

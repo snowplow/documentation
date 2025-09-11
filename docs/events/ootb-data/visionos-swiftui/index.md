@@ -1,5 +1,8 @@
 ---
 title: "visionOS and SwiftUI"
+description: "VisionOS and SwiftUI specific behavioral event data captured by Snowplow for spatial computing analytics."
+schema: "TechArticle"
+keywords: ["VisionOS Events", "SwiftUI Events", "Apple Vision", "Spatial Computing", "VR Events", "Vision Pro"]
 ---
 
 ```mdx-code-block

@@ -1,5 +1,8 @@
 ---
 title: "Versioning Data Structures with the JSON Editor"
+description: "Enterprise-grade schema versioning and amendment workflows for large-scale behavioral data governance and compliance."
+schema: "TechArticle"
+keywords: ["Enterprise Schema", "Schema Management", "Enterprise Features", "Advanced Schema", "Business Schema", "Schema Governance"]
 sidebar_label: "Using the JSON Editor"
 sidebar_position: 10
 sidebar_custom_props:

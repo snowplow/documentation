@@ -1,5 +1,8 @@
 ---
 title: "Self-describing JSON Schemas"
+description: "Self-describing JSON Schema format for behavioral data structure definition and validation."
+schema: "TechArticle"
+keywords: ["Self Describing Schemas", "JSON Schema", "Schema Definition", "Self Describing", "Schema Format", "JSON Validation"]
 date: "2021-03-26"
 sidebar_position: 30
 ---

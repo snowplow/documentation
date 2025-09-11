@@ -1,5 +1,8 @@
 ---
 title: "Campaigns and UTMs"
+description: "Track UTM campaign parameters and marketing attribution using web trackers for campaign analytics."
+schema: "TechArticle"
+keywords: ["Campaign Tracking", "UTM Parameters", "Marketing Campaigns", "Campaign Analytics", "UTM Tracking", "Marketing Attribution"]
 sidebar_position: 90
 ---
 

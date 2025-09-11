@@ -1,5 +1,7 @@
 ---
 title: "Upgrade guides"
+description: "Version upgrade guides for BigQuery Loader with behavioral data loading improvements and features."
+schema: "TechArticle"
 sidebar_position: 40
 ---
 

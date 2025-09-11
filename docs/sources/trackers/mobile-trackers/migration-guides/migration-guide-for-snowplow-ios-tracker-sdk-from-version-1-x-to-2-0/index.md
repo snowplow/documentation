@@ -1,5 +1,8 @@
 ---
 title: "From version 1.x to 2.0 for iOS"
+description: "Migration guide for iOS tracker upgrade from version 1.x to 2.0 with behavioral tracking improvements."
+schema: "TechArticle"
+keywords: ["iOS Migration", "V1 to V2", "iOS Upgrade", "Mobile Migration", "Version Migration", "Breaking Changes"]
 date: "2021-03-24"
 sidebar_position: -1
 ---

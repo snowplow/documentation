@@ -1,5 +1,8 @@
 ---
 title: "Ruby client"
+description: "Iglu Ruby client API reference for behavioral data schema resolution in Ruby applications."
+schema: "TechArticle"
+keywords: ["Ruby Client", "Iglu Ruby", "Ruby Integration", "Ruby Registry", "Ruby Schema", "Ruby Validation"]
 date: "2021-03-26"
 sidebar_position: 60
 ---

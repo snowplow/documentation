@@ -1,5 +1,8 @@
 ---
 title: "6.0.x Upgrade Guide"
+description: "Upgrade guide for enrichment components version 6.0.x with enhanced behavioral data processing capabilities."
+schema: "TechArticle"
+keywords: ["Enrichment Upgrade", "V6.0.x Upgrade", "Component Migration", "Enrichment Migration", "Version Upgrade", "Breaking Changes"]
 sidebar_position: 50
 ---
 

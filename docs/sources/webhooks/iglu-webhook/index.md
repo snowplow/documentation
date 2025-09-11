@@ -1,5 +1,8 @@
 ---
 title: "Iglu Webhook"
+description: "Generic Iglu webhook for collecting behavioral events from third-party systems via HTTP requests."
+schema: "TechArticle"
+keywords: ["Iglu Webhook", "Schema Webhook", "Schema Events", "Registry Webhook", "Schema Management", "Iglu Integration"]
 date: "2020-02-25"
 sidebar_position: 30
 ---

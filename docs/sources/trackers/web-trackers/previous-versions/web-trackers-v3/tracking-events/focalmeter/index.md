@@ -1,5 +1,7 @@
 ---
 title: "Kantar Focal Meter"
+description: "Track attention metrics using Focalmeter and web trackers v3 for behavioral engagement analytics."
+schema: "TechArticle"
 sidebar_position: 180
 ---
 

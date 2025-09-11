@@ -1,5 +1,8 @@
 ---
 title: "Quick start guide"
+description: "Quick start guide for implementing JavaScript web trackers for behavioral event collection."
+schema: "TechArticle"
+keywords: ["Web Quick Start", "JavaScript Guide", "Web Setup", "Getting Started", "Tracker Guide", "Web Analytics"]
 date: "2021-03-24"
 sidebar_position: 100
 ---

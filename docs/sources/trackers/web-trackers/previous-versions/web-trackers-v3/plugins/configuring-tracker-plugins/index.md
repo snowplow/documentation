@@ -1,5 +1,7 @@
 ---
 title: "Configuring tracker plugins"
+description: "Configure and manage plugins in web trackers v3 for enhanced behavioral analytics."
+schema: "TechArticle"
 sidebar_position: 750
 ---
 

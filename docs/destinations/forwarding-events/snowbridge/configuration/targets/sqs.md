@@ -1,6 +1,8 @@
 ---
 title: "SQS"
-description: "Write data to an SQS queue."
+description: "Set up Amazon SQS queues as destinations for reliable behavioral event forwarding and processing."
+schema: "TechArticle"
+keywords: ["SQS Target", "Amazon SQS", "AWS Integration", "Message Queue", "Queue Export", "Event Queuing"]
 ---
 
 ```mdx-code-block

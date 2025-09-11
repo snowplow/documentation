@@ -1,5 +1,8 @@
 ---
 title: "Emitter"
+description: "Configure event emitters in .NET tracker for reliable behavioral data transmission."
+schema: "TechArticle"
+keywords: [".NET Emitter", "Event Sending", ".NET Configuration", "Transport Layer", "Event Delivery", ".NET Analytics"]
 date: "2020-02-26"
 sidebar_position: 40
 ---

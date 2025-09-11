@@ -1,5 +1,8 @@
 ---
 title: "Adjust"
+description: "Integrate Adjust mobile attribution webhook events into Snowplow for behavioral mobile analytics."
+schema: "TechArticle"
+keywords: ["Adjust Webhook", "Mobile Attribution", "App Attribution", "Marketing Attribution", "Install Attribution", "Performance Marketing"]
 sidebar_position: -1
 ---
 

@@ -1,5 +1,7 @@
 ---
 title: "Advanced Event Settings"
+description: "Advanced configuration options for Snowplow tags in Google Tag Manager Server-Side implementations."
+keywords: ["Advanced Settings", "Tag Configuration", "Event Settings", "Advanced Config", "Tag Options", "Configuration Options"]
 date: "2022-11-22"
 sidebar_position: 100
 ---
@@ -224,14 +226,14 @@ The Variables referenced must return an array of context entities. For example, 
 ```javascript
 [
   {
-    schema: "iglu:com.example_company/page/jsonschema/1-2-1",
+schema: "TechArticle"
     data: {
       pageType: 'test',
       lastUpdated: '2022-11-18T17:59:00',
     }
   },
   {
-    schema: "iglu:com.example_company/user/jsonschema/2-0-0",
+schema: "TechArticle"
     data: {
       userType: 'tester',
     }

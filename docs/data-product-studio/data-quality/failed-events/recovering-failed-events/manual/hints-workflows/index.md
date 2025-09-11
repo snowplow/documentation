@@ -1,5 +1,8 @@
 ---
 title: "Hints & Workflows"
+description: "Best practices and workflow recommendations for efficient failed event recovery and data quality management."
+schema: "TechArticle"
+keywords: ["Recovery Workflows", "Process Hints", "Recovery Tips", "Workflow Guide", "Best Practices", "Process Optimization"]
 date: "2020-08-26"
 sidebar_position: 60
 ---

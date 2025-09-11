@@ -1,5 +1,8 @@
 ---
 title: "Device and browser information"
+description: "Device and browser information captured automatically by Snowplow for behavioral analytics context."
+schema: "TechArticle"
+keywords: ["Device Data", "Browser Data", "Device Analytics", "Browser Analytics", "Device Information", "Browser Intelligence"]
 ---
 
 ```mdx-code-block

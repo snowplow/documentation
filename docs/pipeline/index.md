@@ -1,5 +1,8 @@
 ---
 title: "Pipeline"
+description: "Overview of Snowplow's real-time behavioral data pipeline architecture, components, and processing flow."
+schema: "TechArticle"
+keywords: ["Data Pipeline", "Event Processing", "Analytics Pipeline", "Data Flow", "Processing Engine", "Pipeline Architecture"]
 date: "2024-12-04"
 sidebar_position: 5
 ---

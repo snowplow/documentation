@@ -1,5 +1,8 @@
 ---
 title: "Upgrading to Newer Versions"
+description: "Upgrade guide for Python tracker version 0.15 with behavioral tracking improvements."
+schema: "TechArticle"
+keywords: ["Python V0.15", "Legacy Upgrade", "Previous Version", "Version Upgrade", "Deprecated Upgrade", "Legacy Migration"]
 date: "2023-01-25"
 sidebar_position: 100
 ---

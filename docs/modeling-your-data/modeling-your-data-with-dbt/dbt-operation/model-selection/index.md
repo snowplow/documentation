@@ -1,5 +1,8 @@
 ---
 title: "Model selection"
+description: "Select and run specific dbt models for targeted behavioral data transformation workflows."
+schema: "TechArticle"
+keywords: ["Model Selection", "DBT Selection", "Model Targeting", "DBT Filter", "Model Scope", "DBT Targeting"]
 sidebar_position: 30
 ---
 

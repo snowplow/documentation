@@ -1,5 +1,8 @@
 ---
 title: "Analytics SDK - Python"
+description: "Python Analytics SDK for processing and analyzing Snowplow behavioral event data in data science workflows."
+schema: "TechArticle"
+keywords: ["Python SDK", "Analytics SDK", "Python API", "Data Science", "Python Analytics", "Server SDK"]
 date: "2020-11-03"
 sidebar_position: 400
 ---

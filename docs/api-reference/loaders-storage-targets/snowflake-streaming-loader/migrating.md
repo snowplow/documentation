@@ -1,5 +1,8 @@
 ---
 title: "Migrating to Snowflake Streaming Loader from RDB Loader"
+description: "Migration guide for upgrading to Snowflake Streaming Loader for enhanced behavioral data loading."
+schema: "TechArticle"
+keywords: ["Snowflake Migration", "Streaming Migration", "Loader Migration", "Snowflake Upgrade", "Migration Guide", "Breaking Changes"]
 sidebar_label: "Migrating from RDB Loader"
 sidebar_position: 2
 ---

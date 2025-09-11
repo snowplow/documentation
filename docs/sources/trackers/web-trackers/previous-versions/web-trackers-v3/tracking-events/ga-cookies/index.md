@@ -1,5 +1,7 @@
 ---
 title: "GA cookies"
+description: "Track Google Analytics cookies using web trackers v3 for behavioral analytics migration."
+schema: "TechArticle"
 sidebar_position: 130
 ---
 

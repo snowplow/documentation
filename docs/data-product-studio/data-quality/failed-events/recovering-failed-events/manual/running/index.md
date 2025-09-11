@@ -1,5 +1,8 @@
 ---
 title: "Running"
+description: "Manual processes for running failed event recovery to restore data quality in your behavioral analytics pipeline."
+schema: "TechArticle"
+keywords: ["Manual Recovery", "Event Recovery", "Failed Events", "Data Recovery", "Event Repair", "Manual Process"]
 date: "2020-07-22"
 sidebar_position: 30
 ---

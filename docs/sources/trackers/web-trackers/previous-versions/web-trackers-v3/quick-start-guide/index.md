@@ -1,5 +1,7 @@
 ---
 title: "Quick start guide"
+description: "Quick start guide for web trackers v3 behavioral event collection implementation."
+schema: "TechArticle"
 date: "2021-03-24"
 sidebar_position: 100
 ---

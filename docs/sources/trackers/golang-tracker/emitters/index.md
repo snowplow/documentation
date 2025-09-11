@@ -1,5 +1,8 @@
 ---
 title: "Emitters"
+description: "Configure event emitters in Go tracker for reliable behavioral data transmission to collectors."
+schema: "TechArticle"
+keywords: ["Go Emitters", "Event Sending", "Go Configuration", "Batch Processing", "Event Delivery", "Transport Layer"]
 date: "2020-02-26"
 sidebar_position: 50
 ---

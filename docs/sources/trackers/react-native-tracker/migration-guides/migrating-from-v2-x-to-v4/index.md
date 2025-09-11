@@ -1,5 +1,8 @@
 ---
 title: "Migrating from v2 to v4"
+description: "Migration guide for upgrading React Native tracker from version 2.x to 4 with enhanced features."
+schema: "TechArticle"
+keywords: ["React Native Migration", "V2 to V4", "Version Migration", "Upgrade Guide", "Migration Guide", "Breaking Changes"]
 sidebar_position: 90
 ---
 

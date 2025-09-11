@@ -2,7 +2,9 @@
 title: "Snowplow fundamentals"
 sidebar_position: 2
 sidebar_label: "Fundamentals"
-description: "An overview of what a Snowplow pipeline does and what steps it includes"
+description: "Essential concepts and building blocks for understanding Snowplow's behavioral data infrastructure and event analytics platform."
+schema: "TechArticle"
+keywords: ["Snowplow Fundamentals", "Analytics Platform", "Event Tracking", "Data Pipeline", "Customer Analytics", "Behavioral Data"]
 ---
 
 ![Pipeline architecture diagram](images/architecture.png)

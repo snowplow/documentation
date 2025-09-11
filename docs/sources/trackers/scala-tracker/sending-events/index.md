@@ -1,5 +1,8 @@
 ---
 title: "Sending events"
+description: "Send behavioral events using Scala tracker for functional programming and big data applications."
+schema: "TechArticle"
+keywords: ["Scala Events", "Event Sending", "Scala Analytics", "Functional Programming", "Scala Tracking", "JVM Analytics"]
 date: "2022-9-15"
 sidebar_position: 20
 ---

@@ -1,7 +1,8 @@
 ---
 title: "Writing your enrichment"
 sidebar_position: 1
-description: "How to write the enrichment code in JavaScript."
+description: "Best practices and guidelines for writing effective custom JavaScript enrichments for your Snowplow pipeline."
+keywords: ["Writing JavaScript", "JS Development", "Enrichment Code", "Custom Functions", "JavaScript Guide", "Code Writing"]
 ---
 
 Your JavaScript enrichment code should contain a function called `process`:
@@ -133,7 +134,7 @@ function process(event) {
 
   return [
     {
-      schema: 'iglu:com.my-company/traffic-source/jsonschema/1-0-0',
+schema: "TechArticle"
       data: {
         traffic_source: 'internal'
       }

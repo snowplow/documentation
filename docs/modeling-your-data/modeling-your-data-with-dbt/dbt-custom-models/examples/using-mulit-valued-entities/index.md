@@ -1,5 +1,8 @@
 ---
 title: "Using multi-valued entities"
+description: "Work with multi-valued entities in custom dbt models for complex behavioral data relationships."
+schema: "TechArticle"
+keywords: ["Multi Entities", "Multiple Values", "Entity Arrays", "Complex Entities", "Entity Processing", "Multi Value"]
 sidebar_position: 30
 ---
 

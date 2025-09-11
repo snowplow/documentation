@@ -1,5 +1,8 @@
 ---
 title: "BDP Enterprise on GCP"
+description: "Set up Snowplow Behavioral Data Platform on Google Cloud Platform for enterprise behavioral analytics infrastructure."
+schema: "TechArticle"
+keywords: ["BDP GCP", "Google Cloud", "BDP Setup", "Cloud Setup", "GCP Guide", "Enterprise Setup"]
 date: "2020-01-30"
 sidebar_position: 30
 coverImage: "gcp_logo.png"

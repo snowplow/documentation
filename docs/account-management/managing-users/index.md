@@ -1,5 +1,8 @@
 ---
 title: "User management"
+description: "Manage user accounts, roles, and access permissions within your Snowplow organization and behavioral data platform."
+schema: "TechArticle"
+keywords: ["User Management", "Account Users", "User Administration", "Access Control", "User Permissions", "Account Access"]
 date: "2020-02-15"
 sidebar_position: 1
 sidebar_label: "User management"

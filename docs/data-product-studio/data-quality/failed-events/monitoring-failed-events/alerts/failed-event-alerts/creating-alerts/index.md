@@ -1,5 +1,8 @@
 ---
 title: "Creating alerts"
+description: "Create custom alerts for specific failed event patterns and data quality thresholds in your behavioral pipeline."
+schema: "TechArticle"
+keywords: ["Creating Alerts", "Alert Setup", "Alert Configuration", "Alert Creation", "Notification Setup", "Alert Builder"]
 sidebar_position: 1
 ---
 

@@ -1,5 +1,7 @@
 ---
 title: "Snowplow media"
+description: "Track Snowplow media player using web trackers v3 for behavioral media analytics."
+schema: "TechArticle"
 sidebar_position: 5
 ---
 

@@ -1,5 +1,8 @@
 ---
 title: "Initialization and configuration"
+description: "Initialize and configure Flutter tracker for cross-platform mobile behavioral event collection."
+schema: "TechArticle"
+keywords: ["Flutter Configuration", "Flutter Setup", "Mobile Flutter", "Cross Platform", "Flutter Analytics", "Flutter Config"]
 sidebar_position: 2000
 ---
 

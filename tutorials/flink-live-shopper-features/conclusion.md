@@ -1,6 +1,9 @@
 ---
 position: 5
 title: Conclusion
+description: "Conclusion and optimization strategies for Flink live shopper features using behavioral data streaming."
+schema: "HowTo"
+keywords: ["Flink Conclusion", "Real Time", "Stream Processing", "Flink Tutorial", "Live Analytics", "Stream Analytics"]
 ---
 
 Real-time streams let you see what a shopper is doing while the session is still active. Events leave the browser, flow through Snowplow, and reach Flink within milliseconds. This is important because the system can trigger actions that improve conversion.

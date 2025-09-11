@@ -1,5 +1,8 @@
 ---
 title: "Managing Event Specifications in the Console"
+description: "Define and manage event specifications to ensure consistent behavioral data collection across your organization."
+schema: "TechArticle"
+keywords: ["Event Specifications", "Event Specs", "Analytics Specifications", "Event Definition", "Tracking Specs", "Event Documentation"]
 sidebar_label: "Event specifications"
 sidebar_position: 4
 sidebar_custom_props:

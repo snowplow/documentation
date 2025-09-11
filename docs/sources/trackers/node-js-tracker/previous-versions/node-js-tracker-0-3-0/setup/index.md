@@ -1,5 +1,8 @@
 ---
 title: "Setup"
+description: "Setup guide for Node.js tracker version 0.3.0 in server-side JavaScript applications."
+schema: "TechArticle"
+keywords: ["Node.js V0.3.0", "Legacy Setup", "Previous Version", "Old Setup", "Deprecated Setup", "Legacy Installation"]
 date: "2020-09-03"
 sidebar_position: 100
 ---

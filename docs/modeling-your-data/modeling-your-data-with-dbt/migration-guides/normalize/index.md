@@ -1,5 +1,8 @@
 ---
 title: "Normalize"
+description: "Migration guide for dbt normalize package with behavioral data normalization improvements."
+schema: "TechArticle"
+keywords: ["Normalize Migration", "Data Normalization", "DBT Migration", "Schema Migration", "Data Structure", "DBT Upgrade"]
 sidebar_position: 40
 ---
 

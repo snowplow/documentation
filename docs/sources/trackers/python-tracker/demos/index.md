@@ -1,5 +1,8 @@
 ---
 title: "Example Applications"
+description: "Demo applications showcasing Python tracker behavioral event collection capabilities and implementation."
+schema: "TechArticle"
+keywords: ["Python Demos", "Python Examples", "Sample Applications", "Demo Scripts", "Python Samples", "Example Code"]
 sidebar_position: 9999
 ---
 

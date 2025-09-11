@@ -1,6 +1,8 @@
 ---
 title: "Opt-outs and anonymous tracking"
-description: "Capture Snowplow web events without user or session identifiers, without IP addresses and without setting any cookies"
+description: "Implement anonymous user tracking in web applications for privacy-compliant behavioral analytics."
+schema: "TechArticle"
+keywords: ["Anonymous Tracking", "Privacy Protection", "Web Privacy", "GDPR Compliance", "Anonymous Analytics", "Privacy Mode"]
 date: "2022-08-30"
 sidebar_position: 2860
 ---

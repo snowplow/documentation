@@ -1,5 +1,8 @@
 ---
 title: "IP Lookup enrichment"
+description: "Enhance events with geographic location data using IP address lookup enrichment for geographic analytics."
+schema: "TechArticle"
+keywords: ["IP Geolocation", "IP Lookup", "Geographic Data", "Location Enrichment", "GeoIP", "IP Intelligence"]
 sidebar_position: 10
 sidebar_label: IP Lookup 
 ---

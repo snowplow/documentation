@@ -1,6 +1,9 @@
 ---
 position: 1
 title: Installation and Setup
+description: "Install and configure Android tracker for behavioral event collection in mobile applications."
+schema: "HowTo"
+keywords: ["Android Installation", "Mobile Setup", "Android SDK", "App Installation", "Mobile Integration", "Android Guide"]
 ---
 
 ### Requirements

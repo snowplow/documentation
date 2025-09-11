@@ -2,7 +2,9 @@
 title: "Structuring your data with schemas"
 sidebar_label: "Schemas (data structures)"
 sidebar_position: 3
-description: "Schemas are a powerful feature that ensures your data is clean and descriptive"
+description: "Learn about JSON Schema validation in Snowplow for ensuring data quality and structure across your behavioral data pipeline."
+schema: "TechArticle"
+keywords: ["JSON Schema", "Data Validation", "Schema Registry", "Event Schema", "Iglu Schema", "Data Structure"]
 ---
 
 **Schemas** are one of the most powerful features of Snowplow. They define the structure of the data that you collect. Each schema defines what fields are recorded with each [event](/docs/fundamentals/events/index.md), and provides validation criteria for each field. Schemas are also used to describe the structure of [entities that are attached to events](/docs/fundamentals/entities/index.md).

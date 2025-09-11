@@ -1,5 +1,8 @@
 ---
 title: "Tracking specific events"
+description: "Track specific behavioral events using C tracker in embedded systems and native applications."
+schema: "TechArticle"
+keywords: ["C Events", "Event Tracking", "C Analytics", "Native Events", "System Events", "Embedded Events"]
 date: "2020-02-25"
 sidebar_position: 50
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Mobile data model"
+description: "Build mobile analytics data models using SQL Runner for behavioral mobile app analysis."
+schema: "TechArticle"
+keywords: ["SQL Runner Mobile", "Mobile SQL", "Mobile Analytics", "SQL Models", "Mobile Data", "App Analytics"]
 date: "2020-10-30"
 sidebar_position: 200
 ---

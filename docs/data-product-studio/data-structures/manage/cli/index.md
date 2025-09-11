@@ -1,6 +1,8 @@
 ---
 title: "Managing data structures via the CLI"
-description: "Use the 'snowplow-cli data-structures' command to manage your data structures."
+description: "Command-line interface tools for managing data structures and automating schema development workflows."
+schema: "TechArticle"
+keywords: ["CLI Management", "Command Line", "Schema CLI", "Developer Tools", "Terminal Interface", "CLI Commands"]
 sidebar_label: "Snowplow CLI"
 sidebar_position: 2
 sidebar_custom_props:

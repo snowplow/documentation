@@ -1,5 +1,7 @@
 ---
 title: "Consent and GDPR"
+description: "Track GDPR consent and privacy preferences using web trackers v3 for compliance analytics."
+schema: "TechArticle"
 sidebar_position: 100
 ---
 

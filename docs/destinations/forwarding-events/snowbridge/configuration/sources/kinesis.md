@@ -1,6 +1,8 @@
 ---
 title: "Kinesis"
-description: "Read data from a Kinesis stream."
+description: "Set up Amazon Kinesis as a source for behavioral event forwarding using Snowbridge data processing."
+schema: "TechArticle"
+keywords: ["Kinesis Source", "AWS Kinesis", "Stream Source", "AWS Integration", "Data Ingestion", "Event Streaming"]
 ---
 
 ```mdx-code-block

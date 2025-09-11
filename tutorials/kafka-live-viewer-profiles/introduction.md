@@ -1,6 +1,9 @@
 ---
 position: 1
 title: Introduction
+description: "Introduction to Kafka live viewer profiles for real-time behavioral data streaming and analysis."
+schema: "HowTo"
+keywords: ["Kafka Tutorial", "Real Time", "Stream Processing", "Kafka Introduction", "Live Analytics", "Stream Analytics"]
 ---
 
 ## About This Accelerator

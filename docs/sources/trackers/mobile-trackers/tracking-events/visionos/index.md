@@ -1,5 +1,8 @@
 ---
 title: "visionOS tracking"
+description: "Track behavioral events in visionOS applications using mobile trackers for spatial computing analytics."
+schema: "TechArticle"
+keywords: ["VisionOS Tracking", "Apple Vision", "Spatial Computing", "VR Analytics", "Vision Pro", "Spatial Events"]
 sidebar_position: 110
 ---
 

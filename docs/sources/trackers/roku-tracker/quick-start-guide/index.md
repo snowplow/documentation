@@ -1,5 +1,8 @@
 ---
 title: "Getting started"
+description: "Quick start guide for implementing Roku tracker in streaming TV applications for behavioral analytics."
+schema: "TechArticle"
+keywords: ["Roku Quick Start", "Roku Setup", "TV Setup", "OTT Setup", "Connected TV", "Roku Guide"]
 date: "2021-11-16"
 sidebar_position: 1000
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Emitters"
+description: "Configure event emitters in PHP tracker for reliable behavioral data transmission."
+schema: "TechArticle"
+keywords: ["PHP Emitters", "Event Sending", "PHP Configuration", "Transport Layer", "PHP Analytics", "Event Delivery"]
 date: "2020-02-26"
 sidebar_position: 40
 ---

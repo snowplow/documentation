@@ -1,6 +1,8 @@
 ---
 title: "Disabling models"
-description: "How to disable a model in our packages"
+description: "Disable and manage dbt models for behavioral data processing workflow optimization."
+schema: "TechArticle"
+keywords: ["Disable Models", "DBT Control", "Model Management", "DBT Configuration", "Model Toggle", "DBT Settings"]
 sidebar_position: 40
 ---
 

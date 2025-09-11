@@ -1,5 +1,7 @@
 ---
 title: "Google Tag Manager"
+description: "Custom Google Tag Manager template for web trackers v3 behavioral event collection."
+schema: "TechArticle"
 date: "2020-08-10"
 sidebar_position: 3100
 ---

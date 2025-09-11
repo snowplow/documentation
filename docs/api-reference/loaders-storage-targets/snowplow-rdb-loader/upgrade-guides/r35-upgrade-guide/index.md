@@ -1,5 +1,8 @@
 ---
 title: "R35 Upgrade Guide"
+description: "RDB Loader R35 upgrade guide with advanced behavioral data processing and loading features."
+schema: "TechArticle"
+keywords: ["RDB Upgrade", "R35 Upgrade", "Loader Migration", "RDB Migration", "Version Upgrade", "Breaking Changes"]
 date: "2021-01-27"
 sidebar_position: 300
 ---

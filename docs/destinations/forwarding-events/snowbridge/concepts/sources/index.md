@@ -1,5 +1,8 @@
 ---
 title: "Sources"
+description: "Source system concepts and integration patterns for behavioral event ingestion into Snowbridge."
+schema: "TechArticle"
+keywords: ["Source Concepts", "Input Sources", "Source Architecture", "Source Design", "Input Strategy", "Source Types"]
 date: "2022-10-20"
 sidebar_position: 200
 ---

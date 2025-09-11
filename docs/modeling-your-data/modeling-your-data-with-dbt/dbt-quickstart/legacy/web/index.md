@@ -2,6 +2,9 @@
 sidebar_label: "Web"
 sidebar_position: 700
 title: "Web Quickstart"
+description: "Quick start guide for legacy dbt web data model implementation for behavioral website analytics."
+schema: "TechArticle"
+keywords: ["Web Quickstart", "Website Setup", "Web Analytics", "Web DBT", "Website Guide", "Web Models"]
 ---
 
 ```mdx-code-block

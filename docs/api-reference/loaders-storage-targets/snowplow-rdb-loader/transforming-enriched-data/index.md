@@ -1,5 +1,8 @@
 ---
 title: "Transforming enriched data"
+description: "Transform enriched behavioral data for loading into relational databases with RDB Loader components."
+schema: "TechArticle"
+keywords: ["Data Transformation", "ETL Transform", "Data Processing", "Enriched Data", "Data Pipeline", "Transform Stage"]
 date: "2022-04-04"
 sidebar_position: 10
 ---

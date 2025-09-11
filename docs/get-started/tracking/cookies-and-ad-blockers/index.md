@@ -1,5 +1,8 @@
 ---
 title: "Strong cookies and ad-blockers"
+description: "Handle cookies and ad blockers in behavioral event tracking for accurate data collection and user privacy."
+schema: "TechArticle"
+keywords: ["Cookie Blockers", "Ad Blockers", "Privacy Tracking", "Tracking Challenges", "Analytics Blocking", "Privacy Issues"]
 ---
 
 # How to set up tracking to support strong cookies and avoid ad-blockers?

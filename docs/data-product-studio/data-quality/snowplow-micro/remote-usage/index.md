@@ -1,7 +1,9 @@
 ---
 title: "Connecting remote sites and apps"
 sidebar_position: 5
-description: "How to use Micro with websites and apps that are not running locally."
+description: "Deploy and use Snowplow Micro remotely for team-based testing and behavioral data validation workflows."
+schema: "TechArticle"
+keywords: ["Remote Micro", "Remote Testing", "Micro Remote", "Distributed Testing", "Remote Access", "Remote Development"]
 ---
 
 ```mdx-code-block

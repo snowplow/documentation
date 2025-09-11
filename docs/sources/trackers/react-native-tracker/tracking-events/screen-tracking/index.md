@@ -1,5 +1,8 @@
 ---
 title: "Screen view tracking"
+description: "Track screen views and navigation in React Native tracker for mobile user journey analysis."
+schema: "TechArticle"
+keywords: ["Screen Tracking", "Screen Views", "React Native", "Navigation Tracking", "Screen Analytics", "Page Views"]
 sidebar_position: 40
 ---
 

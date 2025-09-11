@@ -1,5 +1,8 @@
 ---
 title: "Introduction and configuration"
+description: "Introduction to React Native v2 tracker for behavioral event collection in mobile applications."
+schema: "TechArticle"
+keywords: ["React Native Introduction", "Mobile Introduction", "React Native Guide", "Mobile Setup", "Cross Platform", "Getting Started"]
 date: "2021-08-06"
 sidebar_position: 10
 ---

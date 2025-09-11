@@ -1,5 +1,7 @@
 ---
 title: "Browser support"
+description: "Browser compatibility guide for web trackers v3 behavioral event collection."
+schema: "TechArticle"
 date: "2021-04-07"
 sidebar_position: 2950
 ---

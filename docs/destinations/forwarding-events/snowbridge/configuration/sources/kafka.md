@@ -1,6 +1,8 @@
 ---
 title: "Kafka"
-description: "Read data from a Kafka topic."
+description: "Configure Apache Kafka as a source for behavioral event forwarding using Snowbridge data pipelines."
+schema: "TechArticle"
+keywords: ["Kafka Source", "Kafka Input", "Stream Input", "Event Ingestion", "Kafka Integration", "Message Source"]
 ---
 
 ```mdx-code-block

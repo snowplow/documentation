@@ -1,6 +1,8 @@
 ---
 title: "Cookie Extension service"
-description: "How to create and use a Cookie Extension service, previously known as ID service, to mitigate against ITP"
+description: "Cookie extension capabilities in Snowplow for enhanced behavioral analytics data collection."
+schema: "TechArticle"
+keywords: ["Cookie Extension", "Cookie Analytics", "Cookie Data", "Browser Cookies", "Cookie Tracking", "Web Cookies"]
 date: "2020-02-26"
 sidebar_position: 3.5
 ---

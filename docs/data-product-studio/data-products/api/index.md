@@ -1,5 +1,8 @@
 ---
 title: "Managing Data Products via the API"
+description: "REST API endpoints for programmatically managing behavioral data products and governance automation."
+schema: "TechArticle"
+keywords: ["Data Products API", "Product API", "Management API", "Product Integration", "API Interface", "Product Endpoints"]
 sidebar_label: "Using the API"
 sidebar_position: 3
 sidebar_custom_props:

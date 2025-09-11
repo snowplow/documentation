@@ -1,5 +1,8 @@
 ---
 title: "Managing Data Product using Console"
+description: "User interface guide for managing behavioral data products through Snowplow's visual data governance platform."
+schema: "TechArticle"
+keywords: ["Data Products UI", "Product Interface", "Management UI", "Product Dashboard", "Visual Interface", "Product Management"]
 date: "2024-01-18"
 sidebar_label: "Using the UI"
 sidebar_position: 1

@@ -1,5 +1,7 @@
 ---
 title: "Configuring cookie and storage settings"
+description: "Configure cookies in web trackers v3 for behavioral analytics data persistence."
+schema: "TechArticle"
 sidebar_position: 100
 ---
 

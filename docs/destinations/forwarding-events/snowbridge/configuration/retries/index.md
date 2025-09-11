@@ -1,6 +1,8 @@
 ---
 title: "Retry behavior (beta)"
-description: "Configure retry behaviour."
+description: "Configure retry policies and error handling for reliable behavioral event forwarding in Snowbridge."
+schema: "TechArticle"
+keywords: ["Retry Configuration", "Error Handling", "Retry Logic", "Failure Recovery", "Retry Strategy", "Error Recovery"]
 ---
 
 ```mdx-code-block

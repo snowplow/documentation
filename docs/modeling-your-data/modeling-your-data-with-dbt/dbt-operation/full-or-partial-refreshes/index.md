@@ -1,5 +1,8 @@
 ---
 title: "Full or partial refreshes"
+description: "Manage full and partial refreshes in dbt for efficient behavioral data model updates."
+schema: "TechArticle"
+keywords: ["DBT Refresh", "Model Refresh", "Full Refresh", "Partial Refresh", "DBT Operations", "Model Updates"]
 sidebar_position: 20
 ---
 

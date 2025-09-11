@@ -1,5 +1,8 @@
 ---
 title: "Data Product Studio"
+description: "Comprehensive behavioral data governance platform for managing schemas, data quality, and event specifications."
+schema: "TechArticle"
+keywords: ["Data Product Studio", "Product Management", "Data Products", "Analytics Studio", "Product Analytics", "Data Management"]
 date: "2020-02-15"
 sidebar_position: 3
 sidebar_label: "Data Product Studio"

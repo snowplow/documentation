@@ -1,5 +1,8 @@
 ---
 title: "Setup"
+description: "Set up Scala tracker for behavioral event collection in Scala applications and big data systems."
+schema: "TechArticle"
+keywords: ["Scala Setup", "Scala Configuration", "Scala Analytics", "JVM Analytics", "Functional Programming", "Scala Integration"]
 date: "2022-9-15"
 sidebar_position: 0
 ---

@@ -1,5 +1,8 @@
 ---
 title: Snowtype
+description: "Type-safe behavioral event tracking in Google Tag Manager using Snowtype code generation."
+schema: "TechArticle"
+keywords: ["GTM Snowtype", "TypeScript GTM", "Type Safety", "GTM Types", "Tag Manager", "TypeScript Integration"]
 sidebar_position: 600
 ---
 

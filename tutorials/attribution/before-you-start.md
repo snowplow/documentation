@@ -1,5 +1,8 @@
 ---
 title: Before you start
+description: "Prerequisites and preparation for marketing attribution modeling with Snowplow behavioral data."
+schema: "HowTo"
+keywords: ["Attribution Prerequisites", "Before Start", "Attribution Setup", "Prerequisites", "Getting Ready", "Attribution Prep"]
 position: 2
 ---
 

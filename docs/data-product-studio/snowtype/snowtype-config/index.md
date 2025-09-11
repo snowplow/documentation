@@ -1,5 +1,8 @@
 ---
 title: "Snowtype configuration options"
+description: "Configure Snowtype settings and parameters for optimal behavioral event validation and type generation."
+schema: "TechArticle"
+keywords: ["Snowtype Configuration", "TypeScript Config", "Type Configuration", "Config Setup", "Type Settings", "Configuration Guide"]
 sidebar_position: 3
 sidebar_label: "Configuration options"
 ---

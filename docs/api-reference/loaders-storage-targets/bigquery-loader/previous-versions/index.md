@@ -1,5 +1,7 @@
 ---
 title: "Previous versions"
+description: "Previous versions of BigQuery Loader for behavioral data loading with historical documentation."
+schema: "TechArticle"
 date: "2021-08-18"
 sidebar_position: 10
 sidebar_custom_props:

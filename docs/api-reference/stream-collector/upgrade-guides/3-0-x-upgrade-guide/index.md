@@ -1,5 +1,8 @@
 ---
 title: "3.0.x upgrade guide"
+description: "Stream Collector upgrade guide for version 3.0.x with enhanced behavioral event collection capabilities."
+schema: "TechArticle"
+keywords: ["Collector Upgrade", "V3.0.x Upgrade", "Collector Migration", "Stream Collector", "Version Upgrade", "Breaking Changes"]
 sidebar_position: 0
 ---
 

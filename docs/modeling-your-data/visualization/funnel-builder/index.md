@@ -1,5 +1,8 @@
 ---
 title: "Funnel Builder"
+description: "Build conversion funnels from behavioral data for user journey analysis and optimization insights."
+schema: "TechArticle"
+keywords: ["Funnel Builder", "Conversion Funnel", "Funnel Analytics", "Conversion Analysis", "User Journey", "Funnel Visualization"]
 sidebar_position: 2
 sidebar_label: "Funnel Builder"
 ---

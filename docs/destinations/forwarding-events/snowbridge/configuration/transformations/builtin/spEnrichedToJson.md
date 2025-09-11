@@ -1,6 +1,8 @@
 ---
 title: "spEnrichedToJson"
-description: "Transforms a message's data from Snowplow Enriched tsv string format to a JSON object."
+description: "Convert enriched behavioral events to JSON format for flexible forwarding to various destination systems."
+schema: "TechArticle"
+keywords: ["JSON Conversion", "Event JSON", "Data Format", "JSON Transform", "Format Conversion", "JSON Output"]
 ---
 
 ```mdx-code-block

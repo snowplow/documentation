@@ -1,5 +1,8 @@
 ---
 title: "Tracker"
+description: "Initialize and configure the .NET tracker for behavioral event collection in Microsoft applications."
+schema: "TechArticle"
+keywords: [".NET Tracker", "Tracker Class", ".NET Analytics", "Event Tracking", ".NET SDK", "Analytics Framework"]
 date: "2020-02-26"
 sidebar_position: 30
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Google Analytics Plugin"
+description: "Google Analytics plugin for Snowplow to enable behavioral event collection from existing GA implementations."
+schema: "TechArticle"
+keywords: ["Google Analytics", "GA Plugin", "Analytics Integration", "GA Migration", "Universal Analytics", "GA4 Integration"]
 date: "2020-08-21"
 sidebar_position: 280
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Working with the Snowtype CLI"
+description: "Command-line interface usage guide for Snowtype behavioral event validation and TypeScript generation tools."
+schema: "TechArticle"
+keywords: ["Snowtype CLI", "Type CLI", "Command Usage", "CLI Guide", "TypeScript CLI", "CLI Interface"]
 sidebar_position: 2
 sidebar_label: "Snowtype CLI"
 ---

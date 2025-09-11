@@ -1,5 +1,8 @@
 ---
 title: "Customer managed keys"
+description: "Configure customer-managed encryption keys for enhanced security of your Snowplow pipeline data and infrastructure."
+schema: "TechArticle"
+keywords: ["Customer Keys", "Data Encryption", "Security Pipeline", "Key Management", "Privacy Security", "Data Protection"]
 sidebar_position: 1
 ---
 

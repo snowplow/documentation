@@ -1,5 +1,8 @@
 ---
 title: "Using the Data Structures CI tool"
+description: "Continuous integration tools for automated testing and validation of behavioral data schemas and structures."
+schema: "TechArticle"
+keywords: ["CI Tool", "Continuous Integration", "Schema CI", "Automated Testing", "CI Pipeline", "Schema Validation"]
 date: "2020-06-01"
 sidebar_position: 4
 sidebar_custom_props:

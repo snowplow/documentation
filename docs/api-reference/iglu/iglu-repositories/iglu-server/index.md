@@ -1,5 +1,8 @@
 ---
 title: "Iglu Server"
+description: "Iglu Server API reference for schema registry management and behavioral data structure governance."
+schema: "TechArticle"
+keywords: ["Iglu Server", "Schema Registry", "Schema Repository", "Schema Management", "Registry Server", "Schema Server"]
 date: "2021-03-26"
 sidebar_position: 2000
 ---

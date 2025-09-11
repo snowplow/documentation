@@ -1,5 +1,8 @@
 ---
 title: "Targets"
+description: "Architecture and design patterns for Snowbridge destination targets and behavioral event forwarding."
+schema: "TechArticle"
+keywords: ["Target Concepts", "Export Targets", "Destination Types", "Target Architecture", "Export Strategy", "Target Design"]
 date: "2022-10-20"
 sidebar_position: 400
 ---

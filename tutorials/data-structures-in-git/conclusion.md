@@ -1,5 +1,8 @@
 ---
 title: Summary
+description: "Conclusion and best practices for managing Snowplow data structures using Git version control workflows."
+schema: "HowTo"
+keywords: ["Git Conclusion", "Schema Git", "Version Control", "Git Tutorial", "Schema Management", "Git Workflow"]
 position: 7
 ---
 

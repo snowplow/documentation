@@ -1,5 +1,8 @@
 ---
 title: "Subject"
+description: "Configure user and session subjects in .NET tracker for behavioral event context."
+schema: "TechArticle"
+keywords: [".NET Subject", "User Context", "Subject Class", "User Data", ".NET Context", "User Information"]
 date: "2020-02-26"
 sidebar_position: 50
 ---

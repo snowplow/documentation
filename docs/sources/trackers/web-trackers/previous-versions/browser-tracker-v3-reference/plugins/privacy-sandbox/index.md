@@ -1,5 +1,8 @@
 ---
 title: "Privacy Sandbox"
+description: "Privacy Sandbox plugin for browser tracker v3 to track behavioral analytics with privacy compliance."
+schema: "TechArticle"
+keywords: ["Browser V3 Privacy", "Privacy Sandbox", "Legacy Privacy", "Chrome Privacy", "Privacy API", "Attribution API"]
 sidebar_position: 14500
 ---
 

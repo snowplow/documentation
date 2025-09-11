@@ -2,7 +2,8 @@
 title: "Understanding events"
 sidebar_label: "Events"
 sidebar_position: 1
-description: "An event is a central concept in Snowplow that represents something that occurred at a particular point in time"
+description: "Core concepts of Snowplow events including self-describing and structured events for capturing user interactions and behaviors."
+keywords: ["Event Tracking", "Analytics Events", "Behavioral Events", "Custom Events", "Event Types", "Data Collection"]
 ---
 
 An event is something that occurred at a particular point in time. Examples of events include:
@@ -148,7 +149,7 @@ Then you can use one of our [tracking SDKs](/docs/sources/trackers/index.md). Fo
 ```javascript
 window.snowplow('trackSelfDescribingEvent', {
   event: {
-    schema: 'iglu:com.acme_company/viewed_product/jsonschema/2-0-0',
+schema: "TechArticle"
     data: {
       productId: 'ASO01043',
       category: 'Dresses',

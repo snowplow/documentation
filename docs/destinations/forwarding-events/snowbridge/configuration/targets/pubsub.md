@@ -1,6 +1,8 @@
 ---
 title: "PubSub"
-description: "Write data to a Pubsub topic."
+description: "Set up Google Cloud Pub/Sub as a destination for scalable behavioral event streaming and processing."
+schema: "TechArticle"
+keywords: ["PubSub Target", "Google PubSub", "Message Queue", "GCP Integration", "Stream Export", "Event Streaming"]
 ---
 
 ```mdx-code-block

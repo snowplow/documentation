@@ -1,5 +1,8 @@
 ---
 title: "iOS Tracker (1.3.0)"
+description: "iOS tracker documentation for behavioral event collection in iPhone and iPad applications."
+schema: "TechArticle"
+keywords: ["iOS Tracker Legacy", "iOS Legacy", "Legacy iOS", "Previous Version", "Deprecated iOS", "Old iOS"]
 date: "2020-04-22"
 sidebar_position: 30
 ---

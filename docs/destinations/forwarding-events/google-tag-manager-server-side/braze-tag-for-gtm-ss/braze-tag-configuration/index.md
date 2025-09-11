@@ -1,5 +1,8 @@
 ---
 title: "Braze Tag Configuration"
+description: "Configure Braze tags in Google Tag Manager Server-Side for behavioral event forwarding to customer engagement platforms."
+schema: "TechArticle"
+keywords: ["Braze Tag Config", "Braze Integration", "GTM Braze", "Tag Configuration", "Marketing Automation", "Braze Setup"]
 date: "2022-01-17"
 sidebar_position: 100
 ---

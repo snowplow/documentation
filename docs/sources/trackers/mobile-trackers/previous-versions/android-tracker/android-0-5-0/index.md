@@ -1,5 +1,8 @@
 ---
 title: "Android (0.5.0)"
+description: "Android tracker version 0.5.0 documentation for behavioral event collection in Android applications."
+schema: "TechArticle"
+keywords: ["Android V0.5.0", "Android Legacy", "Legacy Android", "Previous Version", "Deprecated Android", "Old Android"]
 date: "2020-03-02"
 sidebar_position: 960
 ---

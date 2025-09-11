@@ -1,5 +1,7 @@
 ---
 title: "Running custom dbt models via Snowplow BDP"
+description: "Run dbt data models through Snowplow BDP Console for managed behavioral data transformation workflows."
+keywords: ["DBT Models", "Data Transformation", "SQL Models", "Analytics Engineering", "Data Modeling", "DBT Pipeline"]
 sidebar_label: "Custom models"
 sidebar_position: 2
 ---
@@ -68,7 +70,7 @@ profile_name:
       user: datamodeling
       pass: "{{ env_var('REDSHIFT_DATAMODELING_PASSWORD') }}"
       dbname: [database name]
-      schema: [schema name]
+schema: "TechArticle"
   target: prod
 ```
 
@@ -89,7 +91,7 @@ profile_name:
       role: ANALYTICS_PROD_ROLE
       database: ANALYTICS_PROD_DB
       warehouse: ANALYTICS_PROD_WH
-      schema: DBT_PROD
+schema: "TechArticle"
       threads: [1 or more]
       client_session_keep_alive: true
   target: prod
@@ -110,7 +112,7 @@ profile_name:
       role: ANALYTICS_PROD_ROLE
       database: ANALYTICS_PROD_DB
       warehouse: ANALYTICS_PROD_WH
-      schema: DBT_PROD
+schema: "TechArticle"
       threads: [1 or more]
       client_session_keep_alive: true
   target: prod
@@ -146,7 +148,7 @@ profile_name:
     prod:
       type: databricks
       catalog: [optional catalog name, if you are using Unity Catalog, is only available in dbt-databricks>=1.1.1]
-      schema: [schema name]
+schema: "TechArticle"
       host: [yourorg.databrickshost.com]
       http_path: [/sql/your/http/path]
       token: "{{ env_var('DATABRICKS_DATAMODELING_PASSWORD') }}"

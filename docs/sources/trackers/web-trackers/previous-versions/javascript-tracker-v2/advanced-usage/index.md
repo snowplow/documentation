@@ -1,5 +1,7 @@
 ---
 title: "Advanced Usage"
+description: "Advanced usage patterns for JavaScript tracker v2 behavioral event collection."
+schema: "TechArticle"
 date: "2020-02-21"
 sidebar_position: 60
 ---

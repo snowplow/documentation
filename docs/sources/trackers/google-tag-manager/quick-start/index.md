@@ -1,5 +1,8 @@
 ---
 title: Quick start
+description: "Quick start guide for implementing Snowplow behavioral tracking through Google Tag Manager."
+schema: "TechArticle"
+keywords: ["GTM Quick Start", "GTM Setup", "Tag Manager", "Getting Started", "GTM Guide", "Quick Setup"]
 sidebar_position: 100
 ---
 

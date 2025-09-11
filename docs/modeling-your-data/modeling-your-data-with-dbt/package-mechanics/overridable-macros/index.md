@@ -1,5 +1,8 @@
 ---
 title: "Overridable macros"
+description: "Customize overridable macros in dbt packages for flexible behavioral data transformation logic."
+schema: "TechArticle"
+keywords: ["Macro Override", "DBT Macros", "Custom Macros", "Macro Customization", "DBT Functions", "Custom Logic"]
 sidebar_position: 20
 ---
 ```mdx-code-block

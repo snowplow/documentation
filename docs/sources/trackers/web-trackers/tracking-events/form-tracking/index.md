@@ -1,5 +1,8 @@
 ---
 title: "Forms"
+description: "Track form interactions and submissions using web trackers for conversion and usability analytics."
+schema: "TechArticle"
+keywords: ["Form Tracking", "Form Analytics", "Form Events", "User Input", "Form Behavior", "Input Tracking"]
 sidebar_position: 60
 ---
 

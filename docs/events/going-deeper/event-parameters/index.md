@@ -1,5 +1,8 @@
 ---
 title: "Event parameters"
+description: "Detailed breakdown of event parameters and fields in Snowplow behavioral data collection."
+schema: "TechArticle"
+keywords: ["Event Parameters", "Event Properties", "Event Data", "Parameter Mapping", "Event Attributes", "Data Properties"]
 ---
 
 This page lists all the parameters that Snowplow trackers use when firing events to push data into the Snowplow collectors. Each parameter maps onto one or more fields in the Snowplow events table employed in storage.

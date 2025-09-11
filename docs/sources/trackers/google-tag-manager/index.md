@@ -1,5 +1,8 @@
 ---
 title: "Google Tag Manager"
+description: "Implement Snowplow behavioral event tracking through Google Tag Manager with pre-built templates."
+schema: "TechArticle"
+keywords: ["Google Tag Manager", "GTM Integration", "Tag Manager", "Web Tracking", "GTM Snowplow", "Tag Management"]
 date: "2020-08-10"
 sidebar_position: 135
 ---

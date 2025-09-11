@@ -1,5 +1,8 @@
 ---
 title: "Iglu Core"
+description: "Iglu Core libraries for behavioral data schema validation and self-describing JSON processing."
+schema: "TechArticle"
+keywords: ["Iglu Core", "Core Components", "Registry Core", "Core Architecture", "Iglu Foundation", "Core System"]
 date: "2021-03-26"
 sidebar_position: 120
 ---

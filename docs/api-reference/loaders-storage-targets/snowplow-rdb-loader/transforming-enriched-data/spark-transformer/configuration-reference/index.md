@@ -1,5 +1,8 @@
 ---
 title: "Spark transformer configuration reference"
+description: "Configuration reference for Spark Transformer in RDB Loader behavioral data processing pipelines."
+schema: "TechArticle"
+keywords: ["Spark Configuration", "Transformer Config", "Spark Setup", "Big Data Config", "Spark Settings", "Transform Config"]
 date: "2022-10-13"
 sidebar_position: 12
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Web to Unified Digital"
+description: "Migration guide from dbt web model to unified model for comprehensive behavioral analytics."
+schema: "TechArticle"
+keywords: ["Web to Unified", "Model Migration", "Unified Models", "Analytics Migration", "DBT Migration", "Model Upgrade"]
 sidebar_position: 1000
 ---
 ```mdx-code-block

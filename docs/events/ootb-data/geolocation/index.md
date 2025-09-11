@@ -1,5 +1,8 @@
 ---
 title: "Geolocation"
+description: "Geolocation data captured by Snowplow trackers for behavioral analytics with geographic context."
+schema: "TechArticle"
+keywords: ["Geolocation Data", "Location Analytics", "Geographic Data", "Location Tracking", "Geo Analytics", "Spatial Data"]
 ---
 
 ```mdx-code-block

@@ -1,6 +1,8 @@
 ---
 title: "Web"
-description: "The Snowplow Web dbt Package"
+description: "Legacy dbt web data model for behavioral website analytics and user journey tracking."
+schema: "TechArticle"
+keywords: ["DBT Web", "Web Analytics", "Website Analytics", "Web Models", "Web DBT", "Website DBT"]
 sidebar_position: 700
 hide_title: true
 ---

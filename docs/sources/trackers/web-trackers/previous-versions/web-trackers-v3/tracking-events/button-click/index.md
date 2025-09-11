@@ -1,5 +1,7 @@
 ---
 title: "Button clicks"
+description: "Track button clicks using web trackers v3 for behavioral user interface analytics."
+schema: "TechArticle"
 sidebar_position: 50
 ---
 

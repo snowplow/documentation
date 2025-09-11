@@ -1,5 +1,8 @@
 ---
 title: Setting up via Snowplow Console
+description: "Configure marketing attribution models through Snowplow Console for behavioral campaign analysis."
+schema: "HowTo"
+keywords: ["Attribution Console", "Console Setup", "Attribution Tutorial", "Marketing Console", "Attribution Guide", "Console Attribution"]
 position: 5
 ---
 

@@ -1,5 +1,8 @@
 ---
 title: "Snowplow Ecommerce"
+description: "Snowplow ecommerce plugin for browser tracker v3 to track behavioral commerce analytics."
+schema: "TechArticle"
+keywords: ["Browser V3 Snowplow Commerce", "Snowplow Ecommerce", "Legacy Commerce", "Native Ecommerce", "Commerce Analytics", "Shopping Events"]
 sidebar_position: 16000
 ---
 

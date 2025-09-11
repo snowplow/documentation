@@ -1,5 +1,8 @@
 ---
 title: "E-commerce"
+description: "Migration guide for dbt ecommerce data model with behavioral commerce analytics improvements."
+schema: "TechArticle"
+keywords: ["Ecommerce Migration", "DBT Migration", "Commerce Models", "Retail Migration", "Shopping Analytics", "DBT Upgrade"]
 sidebar_position: 30
 ---
 ```mdx-code-block

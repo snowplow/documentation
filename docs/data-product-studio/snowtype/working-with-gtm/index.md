@@ -1,5 +1,8 @@
 ---
 title: "Using Snowtype with Google Tag Manager"
+description: "Integrate Snowtype with Google Tag Manager for type-safe behavioral event tracking in tag management workflows."
+schema: "TechArticle"
+keywords: ["GTM Integration", "Google Tag Manager", "GTM Setup", "Tag Management", "GTM Configuration", "Tag Integration"]
 sidebar_position: 6
 ---
 

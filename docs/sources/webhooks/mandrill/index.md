@@ -1,5 +1,8 @@
 ---
 title: "Mandrill"
+description: "Integrate Mandrill email webhook events into Snowplow for behavioral email engagement analytics."
+schema: "TechArticle"
+keywords: ["Mandrill Webhook", "Email Events", "Email Analytics", "Transactional Email", "Email Delivery", "Email Service"]
 date: "2020-02-25"
 sidebar_position: 60
 ---

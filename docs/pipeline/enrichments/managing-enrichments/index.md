@@ -1,5 +1,8 @@
 ---
 title: "Managing enrichments"
+description: "Configure, deploy, and manage enrichments in your Snowplow pipeline for enhanced behavioral data processing."
+schema: "TechArticle"
+keywords: ["Enrichment Management", "Pipeline Config", "Enrichment Setup", "Data Processing", "Pipeline Management", "Configuration"]
 sidebar_position: 30
 sidebar_custom_props:
   offerings:

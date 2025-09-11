@@ -1,5 +1,7 @@
 ---
 title: "Browser (npm) tracker"
+description: "Configure browser-specific plugins for web trackers to optimize behavioral event collection."
+keywords: ["Browser Plugins", "Web Configuration", "Browser Setup", "Plugin Config", "Web Analytics", "Browser Features"]
 date: "2021-04-19"
 sidebar_position: 500
 ---
@@ -87,7 +89,7 @@ newTracker('sp', '{{collector_url_here}}', {
 addPlugin({
   plugin: WebVitalsPlugin({ context: [
     function(vitals) { return {
-      schema: "iglu:com.example/page_speed/jsonschema/1-0-0",
+schema: "TechArticle"
       data: {
         speed: vitals.fid < 2 ? "fast" : "slow"
       }

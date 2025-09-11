@@ -1,5 +1,8 @@
 ---
 title: "Community Edition quick start: frequently asked questions"
+description: "Frequently asked questions about Snowplow Community Edition open-source behavioral data platform."
+schema: "TechArticle"
+keywords: ["Community FAQ", "Community Edition", "Open Source", "FAQ Guide", "Common Questions", "Community Help"]
 sidebar_label: "Frequently asked questions"
 sidebar_position: 5
 ---

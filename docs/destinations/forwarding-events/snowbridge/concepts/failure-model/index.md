@@ -1,5 +1,8 @@
 ---
 title: "Failure model"
+description: "Error handling and failure recovery strategies for reliable behavioral event forwarding in Snowbridge."
+schema: "TechArticle"
+keywords: ["Failure Model", "Error Handling", "Failure Strategy", "Error Recovery", "Fault Tolerance", "Resilience Design"]
 date: "2022-10-20"
 sidebar_position: 600
 ---

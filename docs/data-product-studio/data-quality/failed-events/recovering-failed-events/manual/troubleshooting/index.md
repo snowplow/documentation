@@ -1,5 +1,8 @@
 ---
 title: "Troubleshooting"
+description: "Troubleshoot and resolve issues with failed event recovery processes to maintain behavioral data quality."
+schema: "TechArticle"
+keywords: ["Recovery Troubleshooting", "Error Resolution", "Debug Guide", "Problem Solving", "Issue Resolution", "Recovery Issues"]
 date: "2020-08-26"
 sidebar_position: 50
 ---

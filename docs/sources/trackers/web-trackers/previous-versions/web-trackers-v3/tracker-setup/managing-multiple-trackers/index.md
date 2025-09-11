@@ -1,5 +1,6 @@
 ---
 title: "Managing multiple trackers"
+description: "Manage multiple web trackers v3 instances for complex behavioral analytics implementations."
 date: "2021-03-31"
 sidebar_position: 4000
 ---
@@ -98,7 +99,7 @@ snowplow('trackStructEvent:sp1', {
 /* Only the second tracker will fire this self-describing event */
 snowplow('trackSelfDescribingEvent:sp2', { 
   event: {
-    schema: 'iglu:com.acme_company/viewed_product/jsonschema/1-0-0',
+schema: "TechArticle"
     data: {
         product_id: 'ASO01043',
         category: 'Dresses',
@@ -166,7 +167,7 @@ trackStructEvent({
 /* Only the second tracker will fire this self-describing event */
 trackSelfDescribingEvent({ 
   event: {
-    schema: 'iglu:com.acme_company/viewed_product/jsonschema/1-0-0',
+schema: "TechArticle"
     data: {
         product_id: 'ASO01043',
         category: 'Dresses',

@@ -1,5 +1,7 @@
 ---
 title: "Screen view and engagement tracking"
+description: "Track screen views and navigation patterns in mobile applications using native trackers."
+keywords: ["Screen Tracking", "Mobile Screens", "App Screens", "Screen Views", "Mobile Navigation", "Screen Analytics"]
 sidebar_position: 40
 ---
 
@@ -61,7 +63,7 @@ struct ProductDetail: View {
             name: "ProductDetail",
             entities: [ // list of context entities attached to the events
                 (
-                    schema: "iglu:com.acme_company/example/jsonschema/2-1-1",
+schema: "TechArticle"
                     data: [ "name": product.name ]
                 )
             ],

@@ -1,5 +1,7 @@
 ---
 title: "Cookies and local storage"
+description: "Manage cookies and local storage in web trackers v3 for behavioral analytics."
+schema: "TechArticle"
 sidebar_position: 2850
 ---
 

@@ -1,5 +1,8 @@
 ---
 title: "Managing data quality"
+description: "Comprehensive guide to handling failed events in Snowplow for maintaining high-quality behavioral data collection."
+schema: "TechArticle"
+keywords: ["Failed Events", "Data Quality", "Event Errors", "Quality Management", "Event Validation", "Error Handling"]
 date: "2020-02-15"
 sidebar_position: 3
 sidebar_label: "Failed events"

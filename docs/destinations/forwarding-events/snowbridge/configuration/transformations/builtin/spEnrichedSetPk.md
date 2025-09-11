@@ -1,6 +1,8 @@
 ---
 title: "spEnrichedSetPk"
-description: "Sets the message's destination partition key to an atomic field."
+description: "Set primary key fields in enriched behavioral events for downstream processing and identification."
+schema: "TechArticle"
+keywords: ["Partition Key", "Event Partitioning", "Key Setting", "Data Partitioning", "PK Setting", "Partition Strategy"]
 ---
 
 ```mdx-code-block

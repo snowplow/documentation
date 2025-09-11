@@ -1,5 +1,8 @@
 ---
 title: "Transformer Kafka configuration reference"
+description: "Configuration reference for Kafka Transformer in RDB Loader behavioral data processing pipelines."
+schema: "TechArticle"
+keywords: ["Kafka Config", "Stream Config", "Transformer Config", "Kafka Settings", "Message Config", "Stream Settings"]
 sidebar_position: 22
 ---
 

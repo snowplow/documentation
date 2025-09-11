@@ -1,5 +1,8 @@
 ---
 title: "Tracking specific client-side properties"
+description: "Configure client-side properties in React Native tracker for enhanced behavioral event context."
+schema: "TechArticle"
+keywords: ["Client Properties", "React Native", "Device Properties", "Client Data", "Device Information", "Client Context"]
 date: "2022-08-30"
 sidebar_position: 23
 ---

@@ -1,5 +1,8 @@
 ---
 title: Command reference
+description: "Complete command reference for Snowplow CLI tools and behavioral data management automation capabilities."
+schema: "TechArticle"
+keywords: ["CLI Reference", "Command Reference", "CLI Documentation", "Command Guide", "CLI Commands", "Reference Guide"]
 date: 2025-08-01
 sidebar_position: 1
 ---

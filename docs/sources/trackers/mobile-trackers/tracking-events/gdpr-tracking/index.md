@@ -1,5 +1,8 @@
 ---
 title: "GDPR tracking"
+description: "Track GDPR consent and privacy preferences in mobile trackers for compliance analytics."
+schema: "TechArticle"
+keywords: ["GDPR Mobile", "Mobile Consent", "Privacy Tracking", "Consent Management", "Mobile Privacy", "GDPR Compliance"]
 sidebar_position: 61
 ---
 

@@ -1,5 +1,8 @@
 ---
 title: "From version 2.x to 3.0 for iOS"
+description: "Migration guide for iOS tracker upgrade from version 2.x to 3.0 with behavioral analytics improvements."
+schema: "TechArticle"
+keywords: ["iOS Migration", "V2 to V3", "iOS Upgrade", "Mobile Migration", "Version Migration", "Breaking Changes"]
 date: "2021-11-23"
 sidebar_position: -2
 ---

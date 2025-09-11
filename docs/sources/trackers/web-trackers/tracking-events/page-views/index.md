@@ -1,5 +1,7 @@
 ---
 title: "Page views"
+description: "Track page view events and navigation behavior using web trackers for website analytics."
+keywords: ["Page Views", "Page Tracking", "Navigation Analytics", "Page Events", "Web Analytics", "Page Performance"]
 sidebar_position: 20
 ---
 
@@ -79,7 +81,7 @@ snowplow('enableActivityTracking', {
 snowplow('trackPageView', {
   // The usual array of static context entities
   context: [{
-    schema: 'iglu:com.acme/static_context/jsonschema/1-0-0',
+schema: "TechArticle"
     data: {
       staticValue: new Date().toString()
     }
@@ -88,7 +90,7 @@ snowplow('trackPageView', {
   // Gets called once per page view / page ping
   contextCallback: function() {
     return [{
-      schema: 'iglu:com.acme/dynamic_context/jsonschema/1-0-0',
+schema: "TechArticle"
       data: {
         dynamicValue: new Date().toString()
       }
@@ -115,7 +117,7 @@ enableActivityTracking({
 trackPageView({
   // The usual array of static context entities
   context: [{
-    schema: 'iglu:com.acme/static_context/jsonschema/1-0-0',
+schema: "TechArticle"
     data: {
       staticValue: new Date().toString()
     }
@@ -124,7 +126,7 @@ trackPageView({
   // Gets called once per page view / page ping
   contextCallback: function() {
     return [{
-      schema: 'iglu:com.acme/dynamic_context/jsonschema/1-0-0',
+schema: "TechArticle"
       data: {
         dynamicValue: new Date().toString()
       }

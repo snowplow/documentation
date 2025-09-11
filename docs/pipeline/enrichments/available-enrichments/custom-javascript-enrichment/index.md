@@ -1,5 +1,8 @@
 ---
 title: "Custom JavaScript enrichment"
+description: "Create custom JavaScript enrichments to add business-specific logic and data transformations to your events."
+schema: "TechArticle"
+keywords: ["JavaScript Enrichment", "Custom JS", "Event Processing", "JavaScript Logic", "Custom Code", "JS Enhancement"]
 sidebar_position: 11
 sidebar_label: Custom JavaScript
 ---

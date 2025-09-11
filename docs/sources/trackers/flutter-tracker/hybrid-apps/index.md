@@ -1,5 +1,8 @@
 ---
 title: "Hybrid Apps (WebViews)"
+description: "Implement Flutter tracker in hybrid applications for unified behavioral analytics across platforms."
+schema: "TechArticle"
+keywords: ["Flutter Hybrid", "Hybrid Apps", "WebView Flutter", "Cross Platform", "Flutter WebView", "Hybrid Analytics"]
 sidebar_position: 5000
 ---
 

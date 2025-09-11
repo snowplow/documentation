@@ -1,5 +1,8 @@
 ---
 title: "S3 Loader"
+description: "Load behavioral event data into Amazon S3 for data lake analytics and scalable storage solutions."
+schema: "TechArticle"
+keywords: ["S3 Loader", "Amazon S3", "AWS Storage", "S3 Integration", "Cloud Storage", "AWS Loader"]
 sidebar_position: 5
 ---
 

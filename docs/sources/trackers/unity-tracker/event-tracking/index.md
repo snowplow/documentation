@@ -1,5 +1,8 @@
 ---
 title: "Event tracking"
+description: "Track behavioral events in Unity games using Snowplow's game development tracker SDK."
+schema: "TechArticle"
+keywords: ["Unity Events", "Game Events", "Unity Analytics", "Game Analytics", "Player Events", "Gaming Events"]
 date: "2020-02-26"
 sidebar_position: 80
 ---

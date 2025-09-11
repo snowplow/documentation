@@ -1,5 +1,8 @@
 ---
 title: "Web data model"
+description: "Build web analytics data models using SQL Runner for behavioral website analysis and reporting."
+schema: "TechArticle"
+keywords: ["SQL Runner Web", "Web SQL", "Web Analytics", "SQL Models", "Web Data", "Website Analytics"]
 date: "2021-07-27"
 sidebar_position: 100
 ---

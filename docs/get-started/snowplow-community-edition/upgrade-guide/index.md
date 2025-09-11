@@ -1,5 +1,8 @@
 ---
 title: "Upgrade guide"
+description: "Upgrade guide for Snowplow Community Edition with behavioral data platform improvements and new features."
+schema: "TechArticle"
+keywords: ["Community Upgrade", "Version Upgrade", "Migration Guide", "Upgrade Process", "Community Migration", "Version Update"]
 date: "2021-09-01"
 sidebar_position: 4
 ---

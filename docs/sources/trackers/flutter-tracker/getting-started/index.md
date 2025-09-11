@@ -1,5 +1,8 @@
 ---
 title: "Getting started"
+description: "Quick start guide for implementing behavioral event tracking with Flutter tracker in mobile apps."
+schema: "TechArticle"
+keywords: ["Flutter Tracker", "Getting Started", "Flutter Setup", "Flutter Guide", "Mobile Flutter", "Cross Platform"]
 date: "2022-01-31"
 sidebar_position: 10
 ---

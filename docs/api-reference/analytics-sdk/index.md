@@ -1,5 +1,8 @@
 ---
 title: "Analytics SDKs"
+description: "Analytics SDK libraries for processing and analyzing Snowplow behavioral event data across multiple programming languages."
+schema: "TechArticle"
+keywords: ["Analytics SDK", "SDK Reference", "Analytics API", "Data SDK", "SDK Documentation", "Analytics Library"]
 date: "2020-11-02"
 sidebar_position: 80
 ---

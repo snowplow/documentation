@@ -1,5 +1,8 @@
 ---
 title: "Event deduplication"
+description: "Event deduplication strategies in RDB Loader for maintaining behavioral data quality and accuracy."
+schema: "TechArticle"
+keywords: ["RDB Deduplication", "Event Deduplication", "Legacy RDB", "Duplicate Removal", "Data Quality", "Event Dedup"]
 date: "2020-03-05"
 sidebar_position: 20
 ---

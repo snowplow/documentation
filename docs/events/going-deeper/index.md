@@ -1,5 +1,8 @@
 ---
 title: "Going deeper into event properties"
+description: "Deep dive into Snowplow behavioral event structure, processing, and advanced collection concepts."
+schema: "TechArticle"
+keywords: ["Event Deep Dive", "Advanced Events", "Event Details", "Event Structure", "Event Analysis", "Event Internals"]
 sidebar_position: 3
 ---
 

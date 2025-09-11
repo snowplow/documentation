@@ -1,5 +1,7 @@
 ---
 title: "Configuring how events are sent"
+description: "Configure event transmission settings in web trackers v3 for optimal behavioral data delivery."
+schema: "TechArticle"
 date: "2021-04-07"
 sidebar_position: 2750
 ---

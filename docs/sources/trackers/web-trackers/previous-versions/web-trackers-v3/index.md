@@ -1,5 +1,7 @@
 ---
 title: "Web trackers (v3)"
+description: "Web trackers version 3 documentation for behavioral event collection in web applications."
+schema: "TechArticle"
 date: "2021-03-24"
 sidebar_position: 100
 ---

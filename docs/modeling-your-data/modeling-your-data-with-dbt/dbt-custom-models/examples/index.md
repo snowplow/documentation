@@ -1,6 +1,8 @@
 ---
 title: "Examples"
-description: "Example custom models"
+description: "Practical examples of custom dbt models for specialized behavioral data analysis scenarios."
+schema: "TechArticle"
+keywords: ["Model Examples", "DBT Examples", "Custom Examples", "Model Samples", "Implementation Examples", "Code Examples"]
 sidebar_position: 10
 ---
 

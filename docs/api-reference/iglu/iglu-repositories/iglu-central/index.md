@@ -1,5 +1,8 @@
 ---
 title: "Iglu Central"
+description: "Iglu Central repository for community-maintained behavioral data schemas and structures."
+schema: "TechArticle"
+keywords: ["Iglu Central", "Central Registry", "Public Registry", "Schema Hub", "Central Repository", "Public Schemas"]
 date: "2021-03-26"
 sidebar_position: 1000
 ---

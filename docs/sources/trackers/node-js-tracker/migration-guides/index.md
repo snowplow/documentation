@@ -1,5 +1,7 @@
 ---
 title: "Migration guides"
+description: "Version migration guides for Node.js tracker with behavioral event tracking improvements."
+schema: "TechArticle"
 date: "2021-04-12"
 sidebar_position: 4800
 ---

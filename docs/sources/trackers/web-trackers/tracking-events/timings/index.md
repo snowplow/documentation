@@ -1,5 +1,8 @@
 ---
 title: "Performance timings"
+description: "Track custom timing events and performance metrics using web trackers for behavioral analytics."
+schema: "TechArticle"
+keywords: ["Performance Timing", "Page Timing", "Navigation Timing", "Performance Metrics", "Load Times", "Timing Events"]
 sidebar_position: 98
 ---
 

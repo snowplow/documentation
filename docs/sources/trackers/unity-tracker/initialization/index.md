@@ -1,5 +1,8 @@
 ---
 title: "Initialization"
+description: "Initialize Unity tracker for behavioral event tracking in Unity games and applications."
+schema: "TechArticle"
+keywords: ["Unity Initialization", "Game Init", "Unity Setup", "Unity Configuration", "Game Analytics", "Unity Init"]
 date: "2020-02-26"
 sidebar_position: 20
 ---

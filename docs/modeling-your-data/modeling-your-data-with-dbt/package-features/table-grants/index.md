@@ -1,6 +1,8 @@
 ---
 title: "Table Grants"
-description: "Details for granted access to our tables to other users/roles"
+description: "Manage table permissions and grants in dbt packages for secure behavioral data access."
+schema: "TechArticle"
+keywords: ["Table Grants", "Access Control", "Permissions", "DBT Security", "Table Access", "Data Permissions"]
 sidebar_position: 30
 ---
 

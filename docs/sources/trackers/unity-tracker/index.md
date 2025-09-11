@@ -1,5 +1,8 @@
 ---
 title: "Unity Tracker"
+description: "Unity tracker for behavioral event collection in Unity games and interactive entertainment applications."
+schema: "TechArticle"
+keywords: ["Unity Tracker", "Game Analytics", "Unity Analytics", "Game Development", "Unity SDK", "Gaming Analytics"]
 date: "2020-02-26"
 sidebar_position: 250
 ---

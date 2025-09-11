@@ -1,5 +1,8 @@
 ---
 title: "Sendgrid"
+description: "Integrate SendGrid email webhook events into Snowplow for behavioral email marketing analytics."
+schema: "TechArticle"
+keywords: ["SendGrid Webhook", "Email Events", "Email Analytics", "Transactional Email", "Email Delivery", "Email Marketing"]
 date: "2020-02-26"
 sidebar_position: 110
 ---

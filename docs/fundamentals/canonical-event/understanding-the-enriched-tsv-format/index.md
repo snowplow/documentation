@@ -1,5 +1,8 @@
 ---
 title: "Understanding the enriched TSV format"
+description: "Learn about Snowplow's enriched TSV file format structure and field organization for processing behavioral data in your pipeline."
+schema: "TechArticle"
+keywords: ["Canonical Event", "Enriched TSV", "Event Format", "TSV Schema", "Data Structure", "Event Processing"]
 sidebar_label: "Enriched TSV format"
 sidebar_position: 1000
 ---

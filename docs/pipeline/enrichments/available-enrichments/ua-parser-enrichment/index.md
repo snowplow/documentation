@@ -1,5 +1,8 @@
 ---
 title: "UA parser enrichment"
+description: "Parse user agent strings to extract browser, operating system, and device information for behavioral analysis."
+schema: "TechArticle"
+keywords: ["User Agent", "UA Parsing", "Browser Detection", "Device Analysis", "Browser Intelligence", "Agent Parser"]
 sidebar_position: 1
 sidebar_label: UA parser 
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Link Click Tracking"
+description: "Link click tracking plugin for browser tracker v3 to analyze behavioral navigation patterns."
+schema: "TechArticle"
+keywords: ["Browser V3 Links", "Link Tracking", "Legacy Links", "Click Events", "Link Analytics", "Click Tracking"]
 date: "2021-04-07"
 sidebar_position: 12000
 ---

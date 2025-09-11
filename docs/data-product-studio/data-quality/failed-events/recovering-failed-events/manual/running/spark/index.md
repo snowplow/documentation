@@ -1,5 +1,8 @@
 ---
 title: "Spark"
+description: "Process failed events using Apache Spark for large-scale batch recovery of behavioral data quality issues."
+schema: "TechArticle"
+keywords: ["Spark Recovery", "Batch Processing", "Spark Jobs", "Event Recovery", "Big Data", "Spark Processing"]
 date: "2020-04-14"
 sidebar_position: 20
 ---

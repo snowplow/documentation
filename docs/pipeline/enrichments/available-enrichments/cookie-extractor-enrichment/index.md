@@ -1,5 +1,8 @@
 ---
 title: "Cookie extractor enrichment"
+description: "Extract and parse HTTP cookie values to enhance your behavioral events with additional user context data."
+schema: "TechArticle"
+keywords: ["Cookie Extraction", "Cookie Parsing", "Cookie Data", "Web Analytics", "Session Data", "Browser Cookies"]
 sidebar_position: 7
 sidebar_label: Cookie extractor
 ---

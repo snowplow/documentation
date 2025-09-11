@@ -1,6 +1,9 @@
 ---
 position: 3
 title: Configurable Enrichment List
+description: "Configurable enrichment options for customizing behavioral data processing and enhancement workflows."
+schema: "HowTo"
+keywords: ["Enrichment List", "Available Enrichments", "Enrichment Catalog", "Enhancement Options", "Enrichment Types", "Processing Options"]
 ---
 
 

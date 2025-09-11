@@ -1,5 +1,8 @@
 ---
 title: "Adding data to your events: context and more"
+description: "Add custom data and context to behavioral events using the Snowplow Ruby tracker."
+schema: "TechArticle"
+keywords: ["Ruby Data", "Event Data", "Ruby Events", "Custom Data", "Ruby Analytics", "Event Context"]
 date: "2021-10-19"
 sidebar_position: 20
 ---

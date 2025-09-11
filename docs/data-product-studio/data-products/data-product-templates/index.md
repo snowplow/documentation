@@ -1,5 +1,8 @@
 ---
 title: "Data product templates"
+description: "Pre-built templates for common behavioral data products to accelerate implementation and ensure best practices."
+schema: "TechArticle"
+keywords: ["Product Templates", "Data Templates", "Template Library", "Product Blueprints", "Template Gallery", "Reusable Templates"]
 date: "2024-06-17"
 sidebar_label: "Using data product templates"
 sidebar_position: 2

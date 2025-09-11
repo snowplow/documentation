@@ -1,5 +1,8 @@
 ---
 title: "Payload and logging"
+description: "Configure payload structure and logging in Java tracker version 0.11 for behavioral events."
+schema: "TechArticle"
+keywords: ["Java V0.11", "Legacy Payload", "Previous Version", "Logging", "Deprecated Version", "Legacy Data"]
 date: "2022-05-12"
 sidebar_position: 100
 ---

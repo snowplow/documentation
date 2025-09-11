@@ -1,5 +1,8 @@
 ---
 title: "Adding extra data: the Subject class"
+description: "Add user and session context using Java tracker version 0.11 subject class."
+schema: "TechArticle"
+keywords: ["Java V0.11", "Legacy Subject", "Previous Version", "Subject Class", "Deprecated Version", "Legacy Context"]
 date: "2022-05-12"
 sidebar_position: 70
 ---

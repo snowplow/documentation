@@ -1,5 +1,8 @@
 ---
 title: "BigQuery Loader configuration reference"
+description: "Complete configuration reference for BigQuery Loader behavioral data loading settings and optimization."
+schema: "TechArticle"
+keywords: ["BigQuery Configuration", "Loader Config", "BigQuery Setup", "Warehouse Config", "GCP Configuration", "BigQuery Settings"]
 sidebar_label: "Configuration reference"
 sidebar_position: 1
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Pixel Tracker"
+description: "Pixel tracker for server-side behavioral event collection through image pixel requests."
+schema: "TechArticle"
+keywords: ["Pixel Tracker", "Image Tracking", "Pixel Analytics", "Email Tracking", "Pixel Beacon", "Tracking Pixel"]
 sidebar_position: 160
 ---
 

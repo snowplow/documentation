@@ -1,5 +1,8 @@
 ---
 title: 'Vimeo Tracking'
+description: "Vimeo tracking plugin for browser tracker v3 to analyze behavioral video engagement."
+schema: "TechArticle"
+keywords: ["Browser V3 Vimeo", "Vimeo Tracking", "Legacy Vimeo", "Video Analytics", "Media Tracking", "Video Events"]
 sidebar_position: 16500
 ---
 

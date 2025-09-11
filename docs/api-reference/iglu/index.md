@@ -1,5 +1,8 @@
 ---
 title: "Iglu schema registry"
+description: "Iglu schema registry system for behavioral data structure management and validation workflows."
+schema: "TechArticle"
+keywords: ["Iglu Registry", "Schema Registry", "Schema Management", "Registry System", "Schema Repository", "Data Schemas"]
 sidebar_position: 90
 ---
 

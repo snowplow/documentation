@@ -1,5 +1,8 @@
 ---
 title: "Setup"
+description: "Setup guide for Scala tracker version 0.6.0 in functional programming applications."
+schema: "TechArticle"
+keywords: ["Scala V0.6.0", "Legacy Setup", "Previous Version", "Scala Setup", "Deprecated Setup", "Legacy Installation"]
 date: "2020-10-28"
 sidebar_position: 1000
 ---

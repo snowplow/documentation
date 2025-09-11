@@ -1,5 +1,7 @@
 ---
 title: "Tracking Events"
+description: "Track behavioral events using mobile trackers version 3.x in iOS and Android applications."
+keywords: ["Mobile V3.x Events", "Legacy Events", "Mobile Events", "Previous Version", "Deprecated Events", "Old Events"]
 date: "2021-11-23"
 sidebar_position: 30
 ---
@@ -96,7 +98,7 @@ Here are two example custom context JSONs. One describes a screen:
 
 ```javascript
 {
-    schema: 'iglu:com.example/screen/jsonschema/1-2-1',
+schema: "TechArticle"
     data: {
         screenType: 'test',
         lastUpdated: '2021-06-11'
@@ -108,7 +110,7 @@ and the other describes a user on that screen:
 
 ```javascript
 {
-    schema: 'iglu:com.example/user/jsonschema/2-0-0',
+schema: "TechArticle"
     data: {
       userType: 'tester'
     }
@@ -395,7 +397,7 @@ Here are two example custom context JSONs. One describes a screen:
 
 ```javascript
 {
-    schema: 'iglu:com.example/screen/jsonschema/1-2-1',
+schema: "TechArticle"
     data: {
         screenType: 'test',
         lastUpdated: '2021-06-11'
@@ -407,7 +409,7 @@ and the other describes a user on that screen:
 
 ```javascript
 {
-    schema: 'iglu:com.example/user/jsonschema/2-0-0',
+schema: "TechArticle"
     data: {
       userType: 'tester'
     }

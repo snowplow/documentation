@@ -1,6 +1,9 @@
 ---
 position: 1
 title: Introduction
+description: "Introduction to building live shopper features using Apache Flink and behavioral data streaming."
+schema: "HowTo"
+keywords: ["Flink Tutorial", "Stream Processing", "Real Time", "Flink Introduction", "Live Analytics", "Stream Analytics"]
 ---
 
 Welcome to the **real-time shopper features using Apache Flink** solution accelerator for ecommerce.

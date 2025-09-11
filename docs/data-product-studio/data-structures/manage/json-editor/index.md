@@ -1,6 +1,8 @@
 ---
 title: "Managing data structures with the JSON Editor"
-description: "The JSON editor is best suited for defining complex data structures that require heavy nesting and advanced data types."
+description: "Direct JSON editing interface for advanced users to create and modify behavioral data schemas with full control."
+schema: "TechArticle"
+keywords: ["JSON Editor", "Schema Editor", "Code Editor", "JSON Schema", "Manual Editing", "Schema Code"]
 sidebar_label: "Console: JSON editor"
 sidebar_position: 1
 sidebar_custom_props:

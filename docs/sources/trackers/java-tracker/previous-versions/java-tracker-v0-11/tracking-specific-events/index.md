@@ -1,5 +1,8 @@
 ---
 title: "Tracking specific events"
+description: "Track specific behavioral events using Java tracker version 0.11 in enterprise applications."
+schema: "TechArticle"
+keywords: ["Java V0.11", "Legacy Events", "Previous Version", "Event Tracking", "Deprecated Version", "Legacy Tracking"]
 date: "2020-02-26"
 sidebar_position: 40
 ---

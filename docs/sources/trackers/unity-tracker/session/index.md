@@ -1,5 +1,8 @@
 ---
 title: "Session"
+description: "Manage player sessions in Unity tracker for behavioral analytics and game engagement tracking."
+schema: "TechArticle"
+keywords: ["Unity Sessions", "Game Sessions", "Player Sessions", "Game Analytics", "Unity Analytics", "Gaming Sessions"]
 date: "2020-02-26"
 sidebar_position: 70
 ---

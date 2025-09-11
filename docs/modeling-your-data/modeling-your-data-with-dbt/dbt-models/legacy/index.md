@@ -1,7 +1,9 @@
 ---
 title: "Legacy packages"
 sidebar_position: 9999
-description: "All legacy Snowplow dbt packages"
+description: "Legacy dbt data models for behavioral analytics with historical implementation patterns."
+schema: "TechArticle"
+keywords: ["Legacy DBT", "Legacy Models", "Deprecated Models", "Old Models", "Previous Versions", "Legacy Analytics"]
 ---
 
 :::caution

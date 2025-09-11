@@ -1,7 +1,9 @@
 ---
 title: "Modeling data"
 sidebar_position: 7
-description: "An overview of the purpose of data modeling."
+description: "Transform raw behavioral events into analytics-ready data models for business intelligence and data science."
+schema: "TechArticle"
+keywords: ["Data Modeling", "Analytics Models", "Data Transformation", "Data Engineering", "Analytics Engineering", "Data Pipeline"]
 sidebar_label: "Data models"
 ---
 

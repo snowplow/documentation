@@ -1,5 +1,8 @@
 ---
 title: "Adding data to your events: context and more"
+description: "Add custom data and context to behavioral events using the Snowplow Rust tracker SDK."
+schema: "TechArticle"
+keywords: ["Rust Data", "Event Data", "Tracker Data", "Data Collection", "Rust Events", "Custom Data"]
 date: "2022-10-24"
 sidebar_position: 4000
 ---

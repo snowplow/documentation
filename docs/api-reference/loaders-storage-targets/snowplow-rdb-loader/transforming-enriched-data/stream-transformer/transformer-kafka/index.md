@@ -1,5 +1,8 @@
 ---
 title: "Transformer Kafka"
+description: "Transform behavioral data using Apache Kafka streams in RDB Loader processing workflows."
+schema: "TechArticle"
+keywords: ["Kafka Transformer", "Stream Transform", "Kafka Processing", "Real Time", "Message Processing", "Stream Processing"]
 sidebar_position: 30
 ---
 

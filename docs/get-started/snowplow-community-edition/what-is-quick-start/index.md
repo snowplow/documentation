@@ -1,5 +1,8 @@
 ---
 title: "What to expect from the quick start guide"
+description: "Overview of Snowplow Community Edition Quick Start deployment options for behavioral data infrastructure."
+schema: "TechArticle"
+keywords: ["Quick Start", "Community Quick Start", "Rapid Setup", "Fast Deployment", "Quick Setup", "Instant Setup"]
 sidebar_label: "Before you begin"
 sidebar_position: 1
 ---

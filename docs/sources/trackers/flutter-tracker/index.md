@@ -1,5 +1,8 @@
 ---
 title: "Flutter Tracker"
+description: "Flutter tracker for cross-platform mobile behavioral event collection in iOS and Android applications."
+schema: "TechArticle"
+keywords: ["Flutter Tracker", "Flutter Analytics", "Cross Platform", "Mobile Flutter", "Flutter SDK", "Dart Analytics"]
 date: "2022-01-31"
 sidebar_position: 130
 ---

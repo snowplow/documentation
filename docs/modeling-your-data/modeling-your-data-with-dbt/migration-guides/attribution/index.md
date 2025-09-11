@@ -1,5 +1,8 @@
 ---
 title: "Attribution"
+description: "Migration guide for dbt attribution data model with behavioral marketing attribution improvements."
+schema: "TechArticle"
+keywords: ["Attribution Migration", "Marketing Migration", "Attribution Models", "Marketing Analytics", "DBT Migration", "Attribution DBT"]
 sidebar_position: 20
 ---
 

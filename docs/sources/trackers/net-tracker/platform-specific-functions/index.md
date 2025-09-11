@@ -1,5 +1,8 @@
 ---
 title: "Platform specific functions"
+description: "Platform-specific functions in .NET tracker for Windows-optimized behavioral event collection."
+schema: "TechArticle"
+keywords: [".NET Platform", "Platform Functions", ".NET Features", "Framework Features", "Platform Specific", ".NET Integration"]
 date: "2020-02-26"
 sidebar_position: 70
 ---

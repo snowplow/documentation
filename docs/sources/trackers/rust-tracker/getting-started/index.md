@@ -1,5 +1,8 @@
 ---
 title: "Getting started"
+description: "Quick start guide for implementing behavioral event tracking with Snowplow's Rust tracker in systems applications."
+schema: "TechArticle"
+keywords: ["Rust Tracker", "Getting Started", "Rust Setup", "Quick Start", "Installation Guide", "Rust Guide"]
 date: "2022-10-24"
 sidebar_position: 10
 ---

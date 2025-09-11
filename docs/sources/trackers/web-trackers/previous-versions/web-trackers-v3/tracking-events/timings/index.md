@@ -1,5 +1,7 @@
 ---
 title: "Timings"
+description: "Track custom timing events using web trackers v3 for behavioral performance analytics."
+schema: "TechArticle"
 sidebar_position: 98
 ---
 

@@ -1,5 +1,8 @@
 ---
 title: "Enrichments"
+description: "Transform raw behavioral events with Snowplow enrichments to add context, validation, and business logic."
+schema: "TechArticle"
+keywords: ["Data Enrichments", "Event Enhancement", "Pipeline Processing", "Data Transformation", "Analytics Enhancement", "Event Processing"]
 date: "2020-02-15"
 sidebar_position: 2
 ---

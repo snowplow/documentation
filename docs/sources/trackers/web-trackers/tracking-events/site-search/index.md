@@ -1,5 +1,8 @@
 ---
 title: "Site search"
+description: "Track internal site search behavior using web trackers for content discovery analytics."
+schema: "TechArticle"
+keywords: ["Site Search", "Search Analytics", "Search Tracking", "Internal Search", "Search Events", "Search Behavior"]
 sidebar_position: 120
 ---
 

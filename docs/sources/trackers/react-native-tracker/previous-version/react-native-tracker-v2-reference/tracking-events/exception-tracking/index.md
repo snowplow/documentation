@@ -1,5 +1,8 @@
 ---
 title: "Exception tracking"
+description: "Track application exceptions and errors in React Native v2 tracker for behavioral analytics."
+schema: "TechArticle"
+keywords: ["React Native Exceptions", "Exception Tracking", "Error Tracking", "Mobile Errors", "App Crashes", "Error Analytics"]
 sidebar_position: 50
 ---
 

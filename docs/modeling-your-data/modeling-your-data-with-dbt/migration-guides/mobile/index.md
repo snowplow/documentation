@@ -1,5 +1,8 @@
 ---
 title: "Mobile"
+description: "Migration guide for dbt mobile data model with behavioral mobile analytics improvements."
+schema: "TechArticle"
+keywords: ["Mobile Migration", "App Migration", "Mobile Models", "Mobile Analytics", "DBT Migration", "App DBT"]
 sidebar_position: 910
 ---
 

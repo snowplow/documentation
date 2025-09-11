@@ -1,5 +1,8 @@
 ---
 title: "The RedisWorker class"
+description: "RedisWorker class in Python tracker v0.15 for behavioral event queue processing."
+schema: "TechArticle"
+keywords: ["Python Redis", "RedisWorker Class", "Python V0.15", "Legacy Redis", "Previous Version", "Deprecated Redis"]
 date: "2020-02-26"
 sidebar_position: 90
 ---

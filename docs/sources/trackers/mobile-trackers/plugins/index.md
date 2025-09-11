@@ -1,5 +1,8 @@
 ---
 title: "Tracker plugins"
+description: "Plugin system for mobile trackers to extend behavioral event collection functionality."
+schema: "TechArticle"
+keywords: ["Mobile Plugins", "Tracker Plugins", "Mobile Extensions", "Analytics Plugins", "Mobile Features", "Plugin System"]
 sidebar_position: 45
 ---
 

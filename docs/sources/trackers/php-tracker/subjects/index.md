@@ -1,5 +1,8 @@
 ---
 title: "Subjects"
+description: "Configure user subjects in PHP tracker for behavioral event context and identification."
+schema: "TechArticle"
+keywords: ["PHP Subjects", "User Context", "PHP Context", "Subject Class", "PHP Analytics", "User Data"]
 date: "2020-02-26"
 sidebar_position: 30
 ---

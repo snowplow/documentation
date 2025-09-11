@@ -1,5 +1,8 @@
 ---
 title: "Product features"
+description: "Compare Snowplow Community Edition and Behavioral Data Platform features for choosing the right behavioral analytics solution."
+schema: "TechArticle"
+keywords: ["Feature Comparison", "Edition Comparison", "Platform Features", "Feature Matrix", "Product Comparison", "Feature Overview"]
 sidebar_position: 2
 hide_table_of_contents: true
 sidebar_label: "Feature comparison"

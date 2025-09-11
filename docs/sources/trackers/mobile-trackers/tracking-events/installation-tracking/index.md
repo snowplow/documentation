@@ -1,5 +1,8 @@
 ---
 title: "Installation tracking"
+description: "Track app installation events in mobile trackers for user acquisition analytics."
+schema: "TechArticle"
+keywords: ["App Installation", "Install Tracking", "First Launch", "Mobile Install", "App Install", "Installation Events"]
 sidebar_position: 60
 ---
 

@@ -1,5 +1,8 @@
 ---
 title: "Geolocation"
+description: "Geolocation plugin for browser tracker v3 to add geographic context to behavioral analytics."
+schema: "TechArticle"
+keywords: ["Browser V3 Location", "Geolocation", "Legacy Location", "Location Analytics", "Geographic Data", "Location Tracking"]
 date: "2021-04-07"
 sidebar_position: 11000
 ---

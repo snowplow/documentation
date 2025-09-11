@@ -1,5 +1,8 @@
 ---
 title: "YAUAA enrichment"
+description: "Enhance events with detailed user agent parsing using YAUAA for device, browser, and platform identification."
+schema: "TechArticle"
+keywords: ["User Agent", "Device Detection", "Browser Analysis", "YAUAA Parser", "Device Intelligence", "Browser Parsing"]
 sidebar_position: 9
 sidebar_label: YAUAA
 ---

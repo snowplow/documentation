@@ -1,5 +1,8 @@
 ---
 title: Ecommerce Template
+description: "Ecommerce tag template for Google Tag Manager to track purchase behavior and commerce events."
+schema: "TechArticle"
+keywords: ["GTM Ecommerce", "Ecommerce Template", "Shopping Tags", "Ecommerce Analytics", "GTM Template", "Retail Analytics"]
 sidebar_position: 600
 ---
 

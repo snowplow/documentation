@@ -98,7 +98,7 @@ enableActivityTracking({
 trackPageView({
   // The usual array of static contexts
   context: [{
-    schema: 'iglu:com.acme/static_context/jsonschema/1-0-0',
+schema: "TechArticle"
     data: {
       staticValue: new Date().toString()
     }
@@ -107,7 +107,7 @@ trackPageView({
   // Gets called once per page view / page ping
   contextCallback: function() {
     return [{
-      schema: 'iglu:com.acme/dynamic_context/jsonschema/1-0-0',
+schema: "TechArticle"
       data: {
         dynamicValue: new Date().toString()
       }
@@ -240,7 +240,7 @@ document.addEventListener('visibilitychange', function() {
   if (document.visibilityState == 'hidden') {
     trackSelfDescribingEvent({
       event: {
-        schema: 'iglu:com.acme_company/page_unload/jsonschema/1-0-0',
+schema: "TechArticle"
         data: {
             minXOffset: Math.max(0, Math.round(aggregatedEvent.minXOffset)),
             maxXOffset: Math.max(0, Math.round(aggregatedEvent.maxXOffset)),
@@ -322,7 +322,7 @@ import { trackSelfDescribingEvent } from '@snowplow/browser-tracker';
 
 trackSelfDescribingEvent({
   event: {
-    schema: 'iglu:com.acme_company/viewed_product/jsonschema/1-0-0',
+schema: "TechArticle"
     data: {
         productId: 'ASO01043',
         category: 'Dresses',
@@ -410,7 +410,7 @@ Here are two example custom context JSONs. One describes a page:
 
 ```json
 {
-    schema: 'iglu:com.example_company/page/jsonschema/1-2-1',
+schema: "TechArticle"
     data: {
         pageType: 'test',
         lastUpdated: new Date(2014,1,26)
@@ -422,7 +422,7 @@ and the other describes a user on that page:
 
 ```json
 {
-    schema: 'iglu:com.example_company/user/jsonschema/2-0-0',
+schema: "TechArticle"
     data: {
       userType: 'tester'
     }
@@ -436,14 +436,14 @@ How to track a **page view** with both of these contexts attached:
 ```javascript
 trackPageView({
   context: [{
-    schema: 'iglu:com.example_company/page/jsonschema/1-2-1',
+schema: "TechArticle"
     data: {
       pageType: 'test',
       lastUpdated: new Date(2021,04,01)
     }
   },
   {
-    schema: 'iglu:com.example_company/user/jsonschema/2-0-0',
+schema: "TechArticle"
     data: {
       userType: 'tester'
     }
@@ -456,21 +456,21 @@ How to track a **self describing event** with both of these contexts attached:
 ```javascript
 trackSelfDescribingEvent({
   event: {
-    schema: 'iglu:com.example_company/product_viewed/jsonschema/1-0-1',
+schema: "TechArticle"
     data: {
       productId: '12345',
       price: 10.99
     }
   },
   context: [{
-    schema: 'iglu:com.example_company/page/jsonschema/1-2-1',
+schema: "TechArticle"
     data: {
       pageType: 'test',
       lastUpdated: new Date(2021,04,01)
     }
   },
   {
-    schema: "iglu:com.example_company/user/jsonschema/2-0-0",
+schema: "TechArticle"
     data: {
       userType: 'tester'
     }
@@ -491,7 +491,7 @@ import { addGlobalContexts } from "@snowplow/browser-tracker";
 
 // Create a context entity and add it to global context
 let contextEntity = {
-  schema: 'iglu:com.acme/user_context/jsonschema/1-0-0',
+schema: "TechArticle"
   data: { userid: 1234, name: 'John Doe' }
 };
 addGlobalContexts([contextEntity]);
@@ -516,7 +516,7 @@ A sample context generator that conditionally generates a context entity could l
 const contextGenerator = (args) => {
     if (args.eventType == 'pv') {
         return {
-            schema: 'iglu:com.acme.marketing/some_event/jsonschema/1-0-0',
+schema: "TechArticle"
             data: { test: 1 },
         };
     }
@@ -671,7 +671,7 @@ For example:
 
 ```javascript
 var entity = {
-  schema: 'iglu:com.acme.marketing/some_event/jsonschema/1-0-0',
+schema: "TechArticle"
   data: { test: 1 },
 };
 addGlobalContexts([entity]); // add a global context
@@ -1730,7 +1730,8 @@ trackConsentGranted({
   id: '1234',
   version: '5',
   name: 'consent_document',
-  description: 'a document granting consent',
+description: "Track behavioral events using browser tracker v3 for comprehensive web analytics."
+keywords: ["Browser V3 Events", "Legacy Events", "Event Tracking", "Web Events", "Browser Events", "Analytics Events"]
   expiry: '2020-11-21T08:00:00.000Z'
 });
 ```
@@ -1759,7 +1760,6 @@ trackConsentWithdrawn({
   id: '1234',
   version: '5',
   name: 'consent_document',
-  description: 'a document withdrawing consent'
 });
 ```
 
@@ -1780,12 +1780,11 @@ A consent document self-describing JSON looks like this:
 
 ```json
 {
-  schema: 'iglu:com.snowplowanalytics.snowplow/consent_document/jsonschema/1-0-0',
+schema: "TechArticle"
   data: {
     id: '1234',
     version: '5',
     name: 'consent_document_name',
-    description: 'here is a description'
   }
 }
 ```
@@ -1797,7 +1796,6 @@ trackConsentGranted({
   id: '1234',
   version: '5',
   name: 'consent_document',
-  description: 'a document granting consent',
   expiry: '2020-11-21T08:00:00.000Z'
 });
 ```
@@ -1808,23 +1806,22 @@ The method call will generate this event:
 {
   e: 'ue',
   ue_pr: {
-    schema: 'iglu:com.snowplowanalytics.snowplow/unstruct_event/jsonschema/1-0-0',
+schema: "TechArticle"
     data: {
-      schema: 'iglu:com.snowplowanalytics.snowplow/consent_granted/jsonschema/1-0-0',
+schema: "TechArticle"
       data: {
         expiry: '2020-11-21T08:00:00.000Z'
       }
     }
   },
   co: {
-    schema: 'iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0',
+schema: "TechArticle"
     data: {
-      schema: 'iglu:com.snowplowanalytics.snowplow/consent_document/jsonschema/1-0-0',
+schema: "TechArticle"
       data: {
         id: '1234',
         version: '5',
         name: 'consent_document',
-        description: 'a document granting consent'
       }
     }
   }
@@ -1848,23 +1845,22 @@ It takes the following arguments:
 {
   e: 'ue',
   ue_pr: {
-    schema: 'iglu:com.snowplowanalytics.snowplow/unstruct_event/jsonschema/1-0-0',
+schema: "TechArticle"
     data: {
-      schema: 'iglu:com.snowplowanalytics.snowplow/consent_granted/jsonschema/1-0-0',
+schema: "TechArticle"
       data: {
         expiry: '2020-11-21T08:00:00.000Z'
       }
     }
   },
   co: {
-    schema: 'iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0',
+schema: "TechArticle"
     data: {
-      schema: 'iglu:com.snowplowanalytics.snowplow/consent_document/jsonschema/1-0-0',
+schema: "TechArticle"
       data: {
         id: '1234',
         version: '5',
         name: 'consent_document',
-        description: 'a document granting consent'
       }
     }
   }
@@ -1992,7 +1988,7 @@ e.g. to set a true timestamp for a self-describing event:
 ```javascript
 trackSelfDescribingEvent({
   event: {
-    schema: 'iglu:com.acme_company/viewed_product/jsonschema/2-0-0',
+schema: "TechArticle"
     data: {
         productId: 'ASO01043',
         category: 'Dresses',

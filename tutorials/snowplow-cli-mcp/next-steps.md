@@ -1,6 +1,9 @@
 ---
 position: 4
 title: Next steps
+description: "Next steps and advanced usage for Snowplow CLI Model Context Protocol behavioral data management."
+schema: "HowTo"
+keywords: ["MCP Next Steps", "CLI Advanced", "Next Steps", "MCP Progression", "CLI Development", "Advanced Tutorial"]
 ---
 
 Beyond creating individual files, AI assistants can help analyze tracking requirements and suggest comprehensive solutions:

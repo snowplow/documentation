@@ -1,6 +1,8 @@
 ---
 title: "Duplicates"
-description: "How we deal with duplicate events in our packages."
+description: "Implement deduplication logic in dbt packages for clean behavioral data processing."
+schema: "TechArticle"
+keywords: ["Data Deduplication", "Duplicate Removal", "DBT Dedup", "Data Cleaning", "Unique Records", "Data Quality"]
 sidebar_position: 60
 ---
 

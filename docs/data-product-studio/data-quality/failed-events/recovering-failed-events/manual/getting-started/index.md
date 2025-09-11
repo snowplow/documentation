@@ -1,5 +1,8 @@
 ---
 title: "Getting Started"
+description: "Quick start guide for implementing failed event recovery to maintain high-quality behavioral data collection."
+schema: "TechArticle"
+keywords: ["Recovery Guide", "Getting Started", "Recovery Setup", "Initial Setup", "Recovery Basics", "Start Guide"]
 date: "2020-07-22"
 sidebar_position: 0
 ---

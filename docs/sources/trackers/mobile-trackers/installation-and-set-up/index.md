@@ -1,5 +1,8 @@
 ---
 title: "Installation and initialization"
+description: "Installation and setup guide for native mobile trackers in iOS and Android applications."
+schema: "TechArticle"
+keywords: ["Mobile Installation", "Mobile Setup", "App Setup", "Mobile Configuration", "Getting Started", "Mobile Guide"]
 date: "2022-08-30"
 sidebar_position: 0
 ---

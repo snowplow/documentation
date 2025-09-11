@@ -1,6 +1,8 @@
 ---
 title: "Backfilling"
-description: "Steps for backfilling the data models"
+description: "Backfill historical behavioral data using dbt for complete analytics datasets and reporting."
+schema: "TechArticle"
+keywords: ["DBT Backfill", "Historical Data", "Data Backfill", "Model Backfill", "DBT History", "Data Recovery"]
 sidebar_position: 10
 ---
 

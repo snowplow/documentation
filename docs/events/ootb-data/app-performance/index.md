@@ -1,5 +1,8 @@
 ---
 title: "App performance"
+description: "Application performance metrics captured automatically by Snowplow for behavioral analytics optimization."
+schema: "TechArticle"
+keywords: ["App Performance", "Performance Analytics", "Mobile Performance", "Performance Metrics", "App Optimization", "Performance Tracking"]
 ---
 
 ```mdx-code-block

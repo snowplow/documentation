@@ -1,5 +1,8 @@
 ---
 title: "Analytics SDK - Scala"
+description: "Scala Analytics SDK API reference for processing behavioral event data in big data and streaming applications."
+schema: "TechArticle"
+keywords: ["Scala SDK", "Analytics SDK", "Scala API", "JVM SDK", "Functional SDK", "Scala Analytics"]
 date: "2020-11-02"
 sidebar_position: 100
 ---

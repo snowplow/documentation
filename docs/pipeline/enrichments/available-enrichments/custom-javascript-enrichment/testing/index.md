@@ -1,7 +1,9 @@
 ---
 title: "Testing your enrichment"
 sidebar_position: 2
-description: "How to test and debug your enrichment code."
+description: "Test and debug custom JavaScript enrichments before deploying them to your Snowplow production pipeline."
+schema: "TechArticle"
+keywords: ["JavaScript Testing", "Enrichment Testing", "Custom Logic", "JS Validation", "Test Framework", "Code Testing"]
 ---
 
 ```mdx-code-block

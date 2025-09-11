@@ -2,6 +2,9 @@
 sidebar_label: "Normalize"
 sidebar_position: 50
 title: "Normalize Quickstart"
+description: "Quick start guide for dbt normalize package implementation for behavioral data standardization."
+schema: "TechArticle"
+keywords: ["Normalize Quickstart", "Normalization Setup", "Data Structure", "Schema Setup", "Normalize Guide", "Data Organization"]
 ---
 
 ## Requirements

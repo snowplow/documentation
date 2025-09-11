@@ -1,5 +1,8 @@
 ---
 title: "Sources"
+description: "Complete guide to Snowplow data sources including trackers, webhooks, and behavioral event collection methods."
+schema: "TechArticle"
+keywords: ["Data Sources", "Event Sources", "Tracking Sources", "Data Collection", "Analytics Sources", "Event Collection"]
 date: "2020-02-15"
 sidebar_position: 4
 ---

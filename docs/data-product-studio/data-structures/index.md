@@ -1,5 +1,8 @@
 ---
 title: "Data structures"
+description: "Create and manage JSON Schema data structures for consistent behavioral data validation across your Snowplow implementation."
+schema: "TechArticle"
+keywords: ["Data Structures", "Schema Management", "Event Schema", "Data Models", "Structure Definition", "Schema Design"]
 date: "2024-12-04"
 sidebar_position: 3
 ---

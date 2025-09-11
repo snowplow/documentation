@@ -1,5 +1,8 @@
 ---
 title: "Scala Tracker"
+description: "Scala tracker for behavioral event collection in big data applications and functional programming systems."
+schema: "TechArticle"
+keywords: ["Scala Tracker", "Scala Analytics", "JVM Analytics", "Functional Programming", "Server Tracking", "Backend Analytics"]
 sidebar_position: 210
 ---
 

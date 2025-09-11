@@ -1,6 +1,9 @@
 ---
 position: 9
 title: Install Snowtype
+description: "Use Snowtype for type-safe behavioral event tracking code generation in data products workflow."
+schema: "HowTo"
+keywords: ["Snowtype Tutorial", "TypeScript Types", "Type Generation", "Type Safety", "Code Generation", "TypeScript Tutorial"]
 ---
 
 After defining your Event Specifications, the next step is implementing those events on your app. To do that you are going to use Snowtype to generate the required APIs for tracking the Event Specifications.

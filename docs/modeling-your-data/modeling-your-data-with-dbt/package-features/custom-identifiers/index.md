@@ -1,5 +1,8 @@
 ---
 title: "Custom Sessionization"
+description: "Configure custom user identifiers in dbt packages for behavioral analytics identity resolution."
+schema: "TechArticle"
+keywords: ["Custom Identifiers", "Custom IDs", "Identifier Logic", "ID Management", "Custom Keys", "Identity Features"]
 sidebar_position: 50
 toc_max_heading_level: 5
 ---

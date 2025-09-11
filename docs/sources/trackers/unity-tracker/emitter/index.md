@@ -1,5 +1,8 @@
 ---
 title: "Emitter"
+description: "Configure event emitters in Unity tracker for reliable behavioral data transmission from games."
+schema: "TechArticle"
+keywords: ["Unity Emitter", "Game Analytics", "Unity Configuration", "Event Sending", "Unity Events", "Game Events"]
 date: "2020-02-26"
 sidebar_position: 50
 ---

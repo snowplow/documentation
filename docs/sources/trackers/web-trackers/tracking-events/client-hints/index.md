@@ -1,5 +1,8 @@
 ---
 title: "Client Hints"
+description: "Track Client Hints data for device and browser information using web trackers for behavioral context."
+schema: "TechArticle"
+keywords: ["Client Hints", "Browser Hints", "Device Detection", "User Agent", "Client Information", "Browser Features"]
 sidebar_position: 150
 ---
 

@@ -1,5 +1,8 @@
 ---
 title: "Tracking events"
+description: "Track behavioral events using Java tracker version 0.12 in enterprise applications."
+schema: "TechArticle"
+keywords: ["Java V0.12", "Legacy Events", "Previous Version", "Event Tracking", "Deprecated Version", "Legacy Tracking"]
 date: "2022-03-24"
 sidebar_position: 20
 ---

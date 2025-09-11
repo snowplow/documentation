@@ -1,5 +1,8 @@
 ---
 title: Optional - Adding Marketing Spend Source for ROAS
+description: "Add marketing spend data sources to attribution models for ROI behavioral analysis optimization."
+schema: "HowTo"
+keywords: ["Marketing Spend", "Spend Attribution", "Marketing Costs", "ROI Attribution", "Campaign Spend", "Marketing Investment"]
 position: 7
 ---
 

@@ -1,5 +1,8 @@
 ---
 title: "Concepts"
+description: "Fundamental concepts and architecture of Snowbridge for behavioral event forwarding and transformation."
+schema: "TechArticle"
+keywords: ["Snowbridge Concepts", "Architecture Overview", "Core Concepts", "Design Principles", "System Architecture", "Conceptual Model"]
 date: "2022-10-20"
 sidebar_position: 200
 ---

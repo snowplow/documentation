@@ -1,5 +1,8 @@
 ---
 title: "Marketing Attribution"
+description: "Build marketing attribution models from behavioral data for multi-touch campaign analysis and optimization."
+schema: "TechArticle"
+keywords: ["Attribution Modeling", "Marketing Attribution", "Attribution Analytics", "Touch Attribution", "Attribution Analysis", "Marketing ROI"]
 sidebar_position: 3
 sidebar_label: "Marketing Attribution"
 ---

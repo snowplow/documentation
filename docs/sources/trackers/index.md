@@ -1,5 +1,8 @@
 ---
 title: "Trackers - collecting data from your own applications"
+description: "Complete guide to Snowplow tracker SDKs for behavioral event collection across web, mobile, and server platforms."
+schema: "TechArticle"
+keywords: ["Event Trackers", "Analytics SDKs", "Data Collection", "Tracking Libraries", "Analytics Tracking", "Event Collection"]
 date: "2020-02-15"
 sidebar_position: 0
 sidebar_label: "Trackers"

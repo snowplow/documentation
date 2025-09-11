@@ -1,5 +1,8 @@
 ---
 title: "Transformations"
+description: "Transform behavioral events during forwarding using Snowbridge's flexible data transformation capabilities."
+schema: "TechArticle"
+keywords: ["Event Transformations", "Data Transformation", "Event Processing", "Data Mapping", "Event Modification", "Transform Events"]
 date: "2022-10-20"
 sidebar_position: 200
 ---

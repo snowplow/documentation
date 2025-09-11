@@ -1,5 +1,8 @@
 ---
 title: "Tracking out-of-the-box events"
+description: "Track behavioral events in mobile applications using native iOS and Android tracker SDKs."
+schema: "TechArticle"
+keywords: ["Mobile Events", "App Events", "Mobile Analytics", "Mobile Tracking", "App Analytics", "Mobile Behavior"]
 date: "2022-08-30"
 sidebar_position: 10
 ---

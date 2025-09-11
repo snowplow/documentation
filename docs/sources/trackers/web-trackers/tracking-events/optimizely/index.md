@@ -1,5 +1,8 @@
 ---
 title: "Optimizely"
+description: "Track Optimizely A/B test interactions using web trackers for experimentation and behavioral analytics."
+schema: "TechArticle"
+keywords: ["Optimizely Integration", "A/B Testing", "Experimentation", "Test Analytics", "Conversion Testing", "Optimization"]
 sidebar_position: 170
 ---
 

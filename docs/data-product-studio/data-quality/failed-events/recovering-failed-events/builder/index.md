@@ -1,5 +1,8 @@
 ---
 title: "Using the Console to request data recovery"
+description: "Visual interface for building failed event recovery workflows without requiring technical implementation knowledge."
+schema: "TechArticle"
+keywords: ["Builder Recovery", "Visual Recovery", "GUI Recovery", "Recovery Interface", "Visual Tools", "Builder Interface"]
 sidebar_label: "Using the Console"
 sidebar_position: 0
 sidebar_custom_props:

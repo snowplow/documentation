@@ -1,5 +1,8 @@
 ---
 title: "Script transformation examples"
+description: "Practical examples of custom transformation scripts for common behavioral event forwarding scenarios."
+schema: "TechArticle"
+keywords: ["Script Examples", "Transformation Examples", "Code Examples", "Script Samples", "Example Scripts", "Code Samples"]
 date: "2022-10-20"
 sidebar_position: 900
 ---

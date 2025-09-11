@@ -1,5 +1,8 @@
 ---
 title: "First-party tracking"
+description: "Implement first-party behavioral event tracking to improve data accuracy and bypass ad blockers."
+schema: "TechArticle"
+keywords: ["First Party Tracking", "Cookie Less", "Server Side", "Privacy First", "Direct Tracking", "First Party Data"]
 sidebar_position: 40
 sidebar_custom_props:
   offerings:

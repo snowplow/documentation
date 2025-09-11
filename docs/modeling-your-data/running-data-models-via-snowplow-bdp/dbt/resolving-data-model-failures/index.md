@@ -1,5 +1,8 @@
 ---
 title: "Resolving data model failures"
+description: "Troubleshoot and resolve dbt model failures in Snowplow BDP for reliable behavioral data processing."
+schema: "TechArticle"
+keywords: ["DBT Troubleshooting", "Model Failures", "DBT Debugging", "Model Errors", "Data Issues", "DBT Resolution"]
 date: "2022-10-14"
 sidebar_position: 200
 ---

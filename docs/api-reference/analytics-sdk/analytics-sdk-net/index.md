@@ -1,5 +1,8 @@
 ---
 title: "Analytics SDK - .NET"
+description: ".NET Analytics SDK API reference for processing behavioral event data in Microsoft ecosystem applications."
+schema: "TechArticle"
+keywords: [".NET SDK", "Analytics SDK", ".NET API", "C# SDK", "Desktop SDK", "Framework SDK"]
 date: "2020-11-03"
 sidebar_position: 500
 ---

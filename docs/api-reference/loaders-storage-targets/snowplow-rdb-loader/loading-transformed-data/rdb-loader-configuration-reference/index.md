@@ -1,5 +1,8 @@
 ---
 title: "RDB Loader configuration reference"
+description: "Complete configuration reference for RDB Loader behavioral data loading into relational databases."
+schema: "TechArticle"
+keywords: ["RDB Configuration", "Loader Configuration", "RDB Config", "Database Config", "Loader Settings", "RDB Settings"]
 date: "2022-04-05"
 sidebar_position: 500
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Control Plane API"
+description: "Control plane API reference for managing Snowplow Mini behavioral data pipeline configurations."
+schema: "TechArticle"
+keywords: ["Mini API", "Control Plane", "Mini Management", "API Interface", "Mini Control", "Management API"]
 date: "2021-05-11"
 sidebar_position: 4
 ---

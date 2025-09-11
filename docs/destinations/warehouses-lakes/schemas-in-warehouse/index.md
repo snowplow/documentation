@@ -2,7 +2,9 @@
 title: "How schema definitions translate to the warehouse"
 sidebar_label: "Schemas in the warehouse"
 sidebar_position: 4
-description: "A detailed explanation of how Snowplow data is represented in Redshift, Postgres, BigQuery, Snowflake, Databricks and Synapse Analytics"
+description: "Learn how Snowplow schemas translate to table structures in data warehouses and lake environments."
+schema: "TechArticle"
+keywords: ["Warehouse Schemas", "Data Schemas", "Table Structure", "Database Schema", "Data Models", "Schema Design"]
 ---
 
 ```mdx-code-block

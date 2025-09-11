@@ -1,5 +1,8 @@
 ---
 title: "Destinations"
+description: "Stream behavioral data to warehouses, lakes, and real-time destinations for analytics and operational use cases."
+schema: "TechArticle"
+keywords: ["Data Destinations", "Event Export", "Data Warehouses", "Storage Targets", "Analytics Destinations", "Data Output"]
 sidebar_label: "Destinations"
 sidebar_position: 6
 ---

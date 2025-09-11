@@ -1,5 +1,8 @@
 ---
 title: "HTTP header extractor enrichment"
+description: "Extract and parse HTTP header information to add technical context and metadata to your behavioral events."
+schema: "TechArticle"
+keywords: ["HTTP Headers", "Header Extraction", "Request Headers", "Web Headers", "HTTP Data", "Header Parsing"]
 sidebar_position: 8
 sidebar_label: HTTP header extractor
 ---

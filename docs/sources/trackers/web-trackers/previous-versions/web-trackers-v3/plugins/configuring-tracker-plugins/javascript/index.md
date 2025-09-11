@@ -1,5 +1,7 @@
 ---
 title: "Javascript (tag) tracker"
+description: "Configure JavaScript plugins for web trackers v3 to extend behavioral event functionality."
+schema: "TechArticle"
 date: "2023-03-22"
 sidebar_position: 400
 ---

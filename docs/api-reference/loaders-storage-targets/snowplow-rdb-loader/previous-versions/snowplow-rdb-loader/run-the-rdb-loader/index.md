@@ -1,5 +1,8 @@
 ---
 title: "Run the RDB loader"
+description: "Execute RDB Loader for behavioral data transformation and loading into relational databases."
+schema: "TechArticle"
+keywords: ["Run RDB Loader", "Loader Execution", "Legacy RDB", "Running Loader", "Loader Operation", "RDB Execution"]
 date: "2021-09-14"
 sidebar_position: 50
 ---

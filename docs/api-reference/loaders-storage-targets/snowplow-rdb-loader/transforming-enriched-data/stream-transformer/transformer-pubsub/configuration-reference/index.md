@@ -1,5 +1,8 @@
 ---
 title: "Transformer Pubsub configuration reference"
+description: "Configuration reference for Pub/Sub Transformer in RDB Loader behavioral data processing pipelines."
+schema: "TechArticle"
+keywords: ["PubSub Config", "GCP Config", "Stream Config", "Transformer Config", "PubSub Settings", "Cloud Settings"]
 date: "2022-10-13"
 sidebar_position: 12
 ---

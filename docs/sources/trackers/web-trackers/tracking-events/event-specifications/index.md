@@ -1,5 +1,8 @@
 ---
 title: "Event specifications"
+description: "Implement event specifications and tracking plans using web trackers for consistent behavioral data."
+schema: "TechArticle"
+keywords: ["Event Specifications", "Event Standards", "Tracking Standards", "Event Documentation", "Analytics Standards", "Event Rules"]
 sidebar_position: 115
 ---
 

@@ -1,6 +1,8 @@
 ---
 title: "This run tables"
-description: "Details about the this run table approach use in our packages."
+description: "Understand this-run tables in dbt packages for incremental behavioral data processing."
+schema: "TechArticle"
+keywords: ["This Run", "DBT Tables", "Run Tables", "DBT Mechanics", "Incremental Processing", "DBT Internals"]
 sidebar_position: 40
 ---
 

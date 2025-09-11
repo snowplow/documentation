@@ -1,5 +1,8 @@
 ---
 title: "LaunchDarkly Tag Configuration"
+description: "Configure LaunchDarkly tags in Google Tag Manager Server-Side for feature flag behavioral event forwarding."
+schema: "TechArticle"
+keywords: ["LaunchDarkly Config", "Feature Flag Config", "Experimentation Setup", "A/B Test Config", "Feature Management", "Flag Configuration"]
 sidebar_position: 100
 ---
 

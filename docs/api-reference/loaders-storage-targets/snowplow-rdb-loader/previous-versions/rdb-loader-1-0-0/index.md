@@ -1,5 +1,8 @@
 ---
 title: "RDB Loader 1.0.0"
+description: "RDB Loader version 1.0.0 documentation for legacy behavioral data loading implementations."
+schema: "TechArticle"
+keywords: ["RDB Loader V1.0.0", "Legacy RDB", "Previous Version", "Deprecated Loader", "Legacy Version", "Old RDB"]
 date: "2021-01-28"
 sidebar_position: 20
 ---

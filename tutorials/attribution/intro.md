@@ -1,5 +1,8 @@
 ---
 title: Introduction
+description: "Introduction to marketing attribution modeling using Snowplow behavioral data for multi-touch analysis."
+schema: "HowTo"
+keywords: ["Attribution Tutorial", "Marketing Attribution", "Attribution Introduction", "Attribution Guide", "Marketing Analytics", "Attribution Overview"]
 position: 1
 ---
 

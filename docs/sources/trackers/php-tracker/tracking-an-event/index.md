@@ -1,5 +1,8 @@
 ---
 title: "Tracking an event"
+description: "Track behavioral events using PHP tracker for server-side analytics in PHP applications."
+schema: "TechArticle"
+keywords: ["PHP Events", "Event Tracking", "PHP Analytics", "Server Events", "Backend Events", "PHP Tracking"]
 date: "2020-02-26"
 sidebar_position: 50
 ---

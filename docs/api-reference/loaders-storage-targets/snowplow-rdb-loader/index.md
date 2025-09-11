@@ -1,5 +1,8 @@
 ---
 title: "RDB Loader (Redshift, Snowflake, Databricks)"
+description: "Relational Database Loader for transforming and loading behavioral data into structured database formats."
+schema: "TechArticle"
+keywords: ["RDB Loader", "Relational Database", "Database Loader", "SQL Warehouse", "Data Pipeline", "ETL Component"]
 sidebar_position: 1
 ---
 

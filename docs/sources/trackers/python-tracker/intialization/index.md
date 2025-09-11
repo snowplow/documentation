@@ -1,5 +1,8 @@
 ---
 title: "Initialization"
+description: "Initialize Python tracker for behavioral event tracking in server-side Python applications."
+schema: "TechArticle"
+keywords: ["Python Initialization", "Python Init", "Python Setup", "Python Configuration", "Python Analytics", "Server Init"]
 sidebar_position: 20
 ---
 

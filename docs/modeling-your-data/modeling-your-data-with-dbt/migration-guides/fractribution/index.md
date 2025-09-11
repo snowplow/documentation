@@ -1,5 +1,8 @@
 ---
 title: "Fractribution"
+description: "Migration guide for dbt fractribution data model with behavioral attribution analytics improvements."
+schema: "TechArticle"
+keywords: ["Fractribution Migration", "Attribution Migration", "Marketing Migration", "Fractional Attribution", "DBT Migration", "Attribution DBT"]
 sidebar_position: 920
 ---
 

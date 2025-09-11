@@ -1,5 +1,8 @@
 ---
 title: "Migrating from v3 to v4"
+description: "Migration guide for upgrading web trackers from version 3 to 4 with advanced behavioral features."
+schema: "TechArticle"
+keywords: ["Web Tracker Migration", "V3 to V4", "Version Migration", "Upgrade Guide", "Migration Guide", "Breaking Changes"]
 sidebar_position: 1100
 ---
 

@@ -2,7 +2,9 @@
 title: "Running data models"
 date: "2020-12-01"
 sidebar_position: 2
-description: "Guides to run data models in Snowplow BDP, both dbt and SQL Runner."
+description: "Execute and manage data models through Snowplow BDP Console for streamlined behavioral analytics workflows."
+schema: "TechArticle"
+keywords: ["Snowplow BDP", "Managed Models", "BDP Pipeline", "Managed Analytics", "Cloud Pipeline", "Enterprise Analytics"]
 sidebar_label: "Running data models"
 sidebar_custom_props:
   offerings:

@@ -1,5 +1,8 @@
 ---
 title: "Initialization options"
+description: "Initialize JavaScript tracker v2 for behavioral event tracking in web applications."
+schema: "TechArticle"
+keywords: ["JavaScript V2 Init", "Tracker Initialization", "Legacy Init", "Setup Process", "Configuration", "JavaScript Setup"]
 sidebar_position: 10
 ---
 

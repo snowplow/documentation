@@ -1,5 +1,8 @@
 ---
 title: "Debugger"
+description: "Debugger plugin for browser tracker v3 to troubleshoot behavioral event collection issues."
+schema: "TechArticle"
+keywords: ["Browser V3 Debug", "Debug Tools", "Legacy Debug", "Development Tools", "Testing Tools", "Debug Analytics"]
 date: "2021-04-07"
 sidebar_position: 5000
 ---

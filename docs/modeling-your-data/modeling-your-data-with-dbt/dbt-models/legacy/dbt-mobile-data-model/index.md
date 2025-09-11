@@ -1,6 +1,8 @@
 ---
 title: "Mobile"
-description: "The Snowplow Mobile dbt Package"
+description: "Legacy dbt mobile data model for behavioral mobile app analytics and user engagement tracking."
+schema: "TechArticle"
+keywords: ["DBT Mobile", "Mobile Analytics", "App Analytics", "Mobile Models", "Mobile DBT", "App DBT"]
 sidebar_position: 800
 hide_title: true
 ---

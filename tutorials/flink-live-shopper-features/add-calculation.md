@@ -1,6 +1,9 @@
 ---
 position: 4
 title: (Optional) Add your own calculation
+description: "Add custom calculations to Flink live shopper features for real-time behavioral data processing."
+schema: "HowTo"
+keywords: ["Flink Calculations", "Stream Calculations", "Real Time", "Live Calculations", "Stream Processing", "Flink Analytics"]
 ---
 
 This page describes how to add an additional feature to the product window. The process would be similar for other parts of the system, such as cart or purchase features.

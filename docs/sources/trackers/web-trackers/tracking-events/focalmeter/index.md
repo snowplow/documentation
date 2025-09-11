@@ -1,5 +1,8 @@
 ---
 title: "Kantar Focal Meter"
+description: "Track attention and focus metrics using Focalmeter integration with web trackers for behavioral analysis."
+schema: "TechArticle"
+keywords: ["Focalmeter Integration", "Attention Analytics", "Focus Tracking", "Attention Metrics", "Eye Tracking", "Engagement Metrics"]
 sidebar_position: 180
 ---
 

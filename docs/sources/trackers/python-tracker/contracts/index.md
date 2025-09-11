@@ -1,5 +1,8 @@
 ---
 title: "Contracts"
+description: "Data contracts and validation in Python tracker for behavioral event structure integrity."
+schema: "TechArticle"
+keywords: ["Python Contracts", "Type Contracts", "Python Types", "Data Contracts", "Python Analytics", "Type Safety"]
 sidebar_position: 70
 ---
 

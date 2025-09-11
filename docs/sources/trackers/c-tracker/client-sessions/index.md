@@ -1,5 +1,8 @@
 ---
 title: "Client Sessions"
+description: "Manage client sessions in C tracker for behavioral analytics in native applications."
+schema: "TechArticle"
+keywords: ["C Sessions", "Session Tracking", "Client Sessions", "C Analytics", "Session Management", "Native Sessions"]
 date: "2020-02-25"
 sidebar_position: 70
 ---

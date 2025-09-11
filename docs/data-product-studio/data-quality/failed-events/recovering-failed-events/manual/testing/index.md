@@ -1,5 +1,8 @@
 ---
 title: "Testing"
+description: "Test failed event recovery configurations and processes before deploying to production behavioral data systems."
+schema: "TechArticle"
+keywords: ["Recovery Testing", "Test Recovery", "Validation Testing", "Recovery Verification", "Test Process", "Quality Testing"]
 date: "2020-08-26"
 sidebar_position: 20
 ---

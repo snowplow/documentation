@@ -1,5 +1,8 @@
 ---
 title: "Currency conversion enrichment"
+description: "Convert monetary values between currencies in ecommerce events for consistent financial analysis and reporting."
+schema: "TechArticle"
+keywords: ["Currency Conversion", "Exchange Rates", "Multi Currency", "Financial Data", "Currency Analytics", "Conversion Rates"]
 sidebar_position: 2
 sidebar_label: Currency conversion
 ---

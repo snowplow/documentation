@@ -1,5 +1,8 @@
 ---
 title: "Anonymous Tracking"
+description: "Implement anonymous user tracking in React Native v2 tracker for privacy-compliant behavioral analytics."
+schema: "TechArticle"
+keywords: ["React Native Anonymous", "Anonymous Tracking", "Privacy Protection", "React Native Privacy", "Anonymous Analytics", "Privacy Mode"]
 date: "2022-08-30"
 sidebar_position: 25
 ---

@@ -1,6 +1,8 @@
 ---
 title: "Kinesis"
-description: "Write data to a Kinesis stream."
+description: "Set up Amazon Kinesis streams for real-time behavioral event forwarding and analytics processing."
+schema: "TechArticle"
+keywords: ["Kinesis Target", "AWS Kinesis", "Stream Export", "AWS Integration", "Data Streaming", "Event Streaming"]
 ---
 
 ```mdx-code-block

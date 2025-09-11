@@ -1,5 +1,8 @@
 ---
 title: "GA Cookies"
+description: "Google Analytics cookies plugin for browser tracker v3 to migrate behavioral analytics data."
+schema: "TechArticle"
+keywords: ["Browser V3 GA", "Google Analytics", "Legacy GA", "GA Cookies", "Analytics Migration", "Cookie Data"]
 date: "2021-04-07"
 sidebar_position: 10000
 ---

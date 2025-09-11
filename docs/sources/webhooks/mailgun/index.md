@@ -1,5 +1,8 @@
 ---
 title: "MailGun"
+description: "Integrate Mailgun email webhook events into Snowplow for behavioral email delivery analytics."
+schema: "TechArticle"
+keywords: ["Mailgun Webhook", "Email Events", "Email Analytics", "Email Service", "Email Delivery", "Transactional Email"]
 date: "2020-02-26"
 sidebar_position: 50
 ---

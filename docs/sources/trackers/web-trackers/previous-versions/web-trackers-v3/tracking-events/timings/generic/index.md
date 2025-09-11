@@ -1,5 +1,7 @@
 ---
 title: "Generic timing"
+description: "Track generic timing events using web trackers v3 for behavioral interaction analytics."
+schema: "TechArticle"
 sidebar_position: 98
 ---
 

@@ -1,5 +1,8 @@
 ---
 title: Introduction
+description: "Introduction to managing Snowplow data structures using Git for collaborative schema development workflows."
+schema: "HowTo"
+keywords: ["Git Tutorial", "Schema Git", "Version Control", "Git Introduction", "Schema Management", "Git Workflow"]
 position: 1
 ---
 

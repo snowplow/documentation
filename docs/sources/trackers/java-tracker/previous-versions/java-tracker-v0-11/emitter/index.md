@@ -1,5 +1,8 @@
 ---
 title: "Emitter"
+description: "Configure event emitters in Java tracker version 0.11 for behavioral data transmission."
+schema: "TechArticle"
+keywords: ["Java V0.11", "Legacy Emitter", "Previous Version", "Event Sending", "Deprecated Version", "Legacy Transport"]
 date: "2022-05-12"
 sidebar_position: 80
 ---

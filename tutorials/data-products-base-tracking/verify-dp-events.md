@@ -1,6 +1,9 @@
 ---
 position: 5
 title: Verify base events received
+description: "Verify data product events for accurate behavioral data collection and schema compliance validation."
+schema: "HowTo"
+keywords: ["Verify Events", "Event Verification", "Data Validation", "Event Testing", "Product Validation", "Event Checking"]
 ---
 
 As mentioned previously, if you check the `Todo - Base Web` Data Product you created, you will be able to see the events coming in from the correct environment based on the app ID.

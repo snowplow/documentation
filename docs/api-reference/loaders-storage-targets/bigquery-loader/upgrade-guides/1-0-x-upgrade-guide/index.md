@@ -1,5 +1,8 @@
 ---
 title: "1.0.x upgrade guide"
+description: "BigQuery Loader upgrade guide for version 1.0.x with enhanced behavioral data loading capabilities."
+schema: "TechArticle"
+keywords: ["BigQuery Upgrade", "V1.0.x Upgrade", "Loader Migration", "BigQuery Migration", "Version Upgrade", "Breaking Changes"]
 date: "2021-10-07"
 sidebar_position: 0
 ---

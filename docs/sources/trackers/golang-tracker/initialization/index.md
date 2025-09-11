@@ -1,5 +1,8 @@
 ---
 title: "Initialization"
+description: "Initialize the Go tracker for behavioral event tracking in server-side Go applications."
+schema: "TechArticle"
+keywords: ["Go Initialization", "Tracker Init", "Go Setup", "Golang Config", "Go Analytics", "Tracker Configuration"]
 date: "2020-02-26"
 sidebar_position: 20
 ---

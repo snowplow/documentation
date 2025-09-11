@@ -113,7 +113,9 @@ resourceName: 0edb4b95-3308-40c4-b266-eae2910d5d2a
 data:
     name: Login
     owner: me@example.com
-    description: Login page
+description: "Follow up data structure management with data products for comprehensive behavioral data governance."
+schema: "HowTo"
+keywords: ["Data Products", "Schema Products", "Product Follow-up", "Data Management", "Schema Integration", "Product Tutorial"]
     sourceApplications:
         - $ref: ./source-apps/website.yaml
     eventSpecifications:

@@ -2,7 +2,9 @@
 title: "Understanding failed events"
 sidebar_label: "Failed events"
 sidebar_position: 5
-description: "Failed events represent data that did not pass validation or otherwise failed to be processed"
+description: "Understand how Snowplow handles failed events and strategies for maintaining high data quality in your pipeline."
+schema: "TechArticle"
+keywords: ["Failed Events", "Error Handling", "Event Validation", "Data Quality", "Pipeline Errors", "Event Recovery"]
 ---
 
 _Failed events_ is an umbrella term for events that the pipeline had some problem processing.

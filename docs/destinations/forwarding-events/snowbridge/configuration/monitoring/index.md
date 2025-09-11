@@ -1,5 +1,8 @@
 ---
 title: "Monitoring"
+description: "Monitor Snowbridge performance and behavioral event forwarding health with comprehensive observability tools."
+schema: "TechArticle"
+keywords: ["Monitoring Configuration", "System Monitoring", "Performance Monitoring", "Health Monitoring", "Monitoring Setup", "Observability"]
 date: "2022-10-20"
 sidebar_position: 400
 ---

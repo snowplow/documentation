@@ -1,5 +1,8 @@
 ---
 title: "Initialization"
+description: "Initialize Python tracker version 0.15 for behavioral event tracking in Python applications."
+schema: "TechArticle"
+keywords: ["Python V0.15", "Legacy Initialization", "Previous Version", "Python Init", "Deprecated Init", "Legacy Setup"]
 date: "2020-02-26"
 sidebar_position: 20
 ---

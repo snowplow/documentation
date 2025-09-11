@@ -1,5 +1,8 @@
 ---
 title: "Configuring how events are sent"
+description: "Configure event transmission settings in Java tracker for optimal behavioral data delivery."
+schema: "TechArticle"
+keywords: ["Java Configuration", "Event Sending", "Java Setup", "Transport Config", "Java Analytics", "Event Delivery"]
 date: "2022-03-24"
 sidebar_position: 50
 ---

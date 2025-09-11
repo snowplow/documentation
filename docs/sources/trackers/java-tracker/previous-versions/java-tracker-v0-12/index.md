@@ -1,5 +1,7 @@
 ---
 title: "Java Tracker v0.12"
+description: "Java tracker version 0.12 documentation for behavioral event collection in enterprise applications."
+schema: "TechArticle"
 date: "2020-02-26"
 sidebar_position: 100
 ---

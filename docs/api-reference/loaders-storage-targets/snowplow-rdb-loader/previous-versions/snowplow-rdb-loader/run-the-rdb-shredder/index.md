@@ -1,5 +1,8 @@
 ---
 title: "Run the RDB shredder"
+description: "Execute RDB Shredder for behavioral event data transformation and preparation for database loading."
+schema: "TechArticle"
+keywords: ["Run RDB Shredder", "Shredder Execution", "Legacy RDB", "Running Shredder", "Shredder Operation", "RDB Processing"]
 date: "2021-09-14"
 sidebar_position: 40
 ---

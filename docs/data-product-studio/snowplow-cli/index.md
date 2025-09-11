@@ -1,5 +1,8 @@
 ---
 title: Snowplow CLI
+description: "Command-line interface for managing Snowplow data structures, schemas, and behavioral data governance workflows."
+schema: "TechArticle"
+keywords: ["Snowplow CLI", "Command Line", "Developer Tools", "CLI Interface", "Terminal Tools", "Command Interface"]
 sidebar_label: Snowplow CLI
 sidebar_position: 7
 ---

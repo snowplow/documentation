@@ -1,5 +1,8 @@
 ---
 title: "Custom integrations"
+description: "Create custom integrations for forwarding behavioral events to proprietary systems and specialized platforms."
+schema: "TechArticle"
+keywords: ["Custom Integrations", "Custom Export", "Custom Destinations", "Integration Development", "Custom Connectors", "Bespoke Integration"]
 date: "2021-11-24"
 sidebar_position: 30
 ---

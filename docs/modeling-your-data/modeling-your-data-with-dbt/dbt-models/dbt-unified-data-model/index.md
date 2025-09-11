@@ -1,7 +1,9 @@
 ---
 title: "Unified Digital"
 sidebar_position: 10
-description: "The Snowplow Unified dbt Package"
+description: "Unified dbt data model for combining web and mobile behavioral data into comprehensive cross-platform analytics."
+schema: "TechArticle"
+keywords: ["DBT Unified", "Unified Analytics", "Cross Platform", "Unified Models", "Multi Platform", "Unified DBT"]
 hide_title: true
 ---
 

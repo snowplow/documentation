@@ -1,5 +1,8 @@
 ---
 title: "Unified Digital"
+description: "Migration guide for dbt unified data model with cross-platform behavioral analytics improvements."
+schema: "TechArticle"
+keywords: ["Unified Migration", "Model Migration", "DBT Migration", "Unified Analytics", "Cross Platform", "DBT Upgrade"]
 sidebar_position: 10
 ---
 ```mdx-code-block

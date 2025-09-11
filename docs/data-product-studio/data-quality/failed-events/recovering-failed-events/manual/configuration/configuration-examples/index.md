@@ -1,5 +1,8 @@
 ---
 title: "Configuration Examples"
+description: "Practical configuration examples for common failed event recovery scenarios and data quality issues."
+schema: "TechArticle"
+keywords: ["Config Examples", "Recovery Examples", "Configuration Samples", "Setup Examples", "Config Templates", "Example Configs"]
 date: "2020-07-22"
 sidebar_position: 0
 ---

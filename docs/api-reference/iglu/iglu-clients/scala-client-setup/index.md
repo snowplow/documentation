@@ -1,5 +1,8 @@
 ---
 title: "Scala client"
+description: "Set up Iglu Scala client for behavioral data schema resolution in Scala applications."
+schema: "TechArticle"
+keywords: ["Scala Client", "Iglu Scala", "Scala Integration", "JVM Client", "Scala Registry", "Scala Schema"]
 date: "2021-03-26"
 sidebar_position: 70
 ---

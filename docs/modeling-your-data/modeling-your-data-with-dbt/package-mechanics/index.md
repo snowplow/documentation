@@ -1,6 +1,8 @@
 ---
 title: "Package mechanics"
-description: "Key mechanics of our packages"
+description: "Technical mechanics of dbt Snowplow packages for behavioral data modeling and transformation workflows."
+schema: "TechArticle"
+keywords: ["Package Mechanics", "DBT Internals", "Package Architecture", "DBT Framework", "Package Design", "DBT Structure"]
 sidebar_position: 70
 ---
 

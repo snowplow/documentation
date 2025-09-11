@@ -1,5 +1,8 @@
 ---
 title: "Custom event tracking"
+description: "Create custom behavioral events with schemas in mobile trackers for flexible mobile analytics."
+schema: "TechArticle"
+keywords: ["Mobile Custom Tracking", "Custom Events", "Mobile Events", "Schema Tracking", "Mobile Analytics", "Custom Mobile"]
 date: "2022-08-30"
 sidebar_position: 20
 ---

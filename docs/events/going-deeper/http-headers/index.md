@@ -1,5 +1,8 @@
 ---
 title: "HTTP request headers"
+description: "HTTP headers used in Snowplow behavioral event collection for context and metadata transmission."
+schema: "TechArticle"
+keywords: ["HTTP Headers", "Request Headers", "Header Data", "HTTP Analytics", "Header Information", "Web Headers"]
 ---
 
 Snowplow Collectors will collect any standard HTTP headers and the values of these headers can be extracted during Enrichment. The [HTTP header extractor enrichment](/docs/pipeline/enrichments/available-enrichments/http-header-extractor-enrichment/index.md) can be configured for the headers you wish to extract.

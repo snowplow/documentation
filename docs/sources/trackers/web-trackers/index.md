@@ -1,5 +1,8 @@
 ---
 title: "Web Trackers"
+description: "JavaScript web trackers for comprehensive behavioral event collection from websites and web applications."
+schema: "TechArticle"
+keywords: ["Web Tracker", "JavaScript Tracker", "Web Analytics", "Browser Tracking", "Client Analytics", "Frontend Tracking"]
 date: "2021-03-24"
 sidebar_position: 100
 ---

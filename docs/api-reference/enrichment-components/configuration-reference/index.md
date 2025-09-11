@@ -1,5 +1,8 @@
 ---
 title: "Configuration"
+description: "Complete configuration reference for Snowplow enrichment components and behavioral data processing settings."
+schema: "TechArticle"
+keywords: ["Enrichment Configuration", "Component Config", "Enrichment Setup", "Config Reference", "Setup Guide", "Component Settings"]
 date: "2021-08-14"
 sidebar_position: 50
 ---

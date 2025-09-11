@@ -1,5 +1,8 @@
 ---
 title: "Consent"
+description: "Consent plugin for browser tracker v3 to manage behavioral analytics privacy compliance."
+schema: "TechArticle"
+keywords: ["Browser V3 Consent", "Consent Tracking", "Legacy Consent", "GDPR Compliance", "Privacy Consent", "Cookie Consent"]
 date: "2021-04-07"
 sidebar_position: 4000
 ---

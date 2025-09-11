@@ -1,5 +1,8 @@
 ---
 title: "R32 Upgrade Guide"
+description: "RDB Loader R32 upgrade guide with behavioral data loading performance improvements."
+schema: "TechArticle"
+keywords: ["RDB Upgrade", "R32 Upgrade", "Loader Migration", "RDB Migration", "Version Upgrade", "Breaking Changes"]
 date: "2020-03-06"
 sidebar_position: 700
 ---

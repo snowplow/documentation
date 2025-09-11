@@ -1,5 +1,8 @@
 ---
 title: "RDB shredder configuration reference"
+description: "Configuration reference for RDB Shredder component in behavioral data transformation workflows."
+schema: "TechArticle"
+keywords: ["RDB Shredder Config", "Shredder Configuration", "Legacy Configuration", "RDB Config", "Shredder Settings", "Processing Config"]
 date: "2021-12-01"
 sidebar_position: 450
 ---

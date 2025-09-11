@@ -1,5 +1,7 @@
 ---
 title: "Tracker Setup"
+description: "Set up JavaScript tracker v2 for behavioral event collection in web applications."
+schema: "TechArticle"
 date: "2020-02-21"
 sidebar_position: 30
 ---

@@ -1,5 +1,7 @@
 ---
 title: "Custom event tracking"
+description: "Create custom behavioral events with schemas in web trackers for flexible website analytics."
+keywords: ["Custom Tracking", "Web Events", "Custom Events", "Schema Tracking", "Event Schemas", "Custom Analytics"]
 date: "2022-08-30"
 sidebar_position: 2600
 ---
@@ -35,7 +37,7 @@ For example:
 ```javascript
 snowplow('trackSelfDescribingEvent', {
   event: {
-    schema: 'iglu:com.acme_company/viewed_product/jsonschema/1-0-0',
+schema: "TechArticle"
     data: {
         productId: 'ASO01043',
         category: 'Dresses',
@@ -56,7 +58,7 @@ import { trackSelfDescribingEvent } from '@snowplow/browser-tracker';
 
 trackSelfDescribingEvent({
   event: {
-    schema: 'iglu:com.acme_company/viewed_product/jsonschema/1-0-0',
+schema: "TechArticle"
     data: {
         productId: 'ASO01043',
         category: 'Dresses',
@@ -155,14 +157,14 @@ Tracking a **page view** with both of these example entities attached:
 ```javascript
 snowplow('trackPageView', {
   context: [{
-    schema: "iglu:com.example_company/page/jsonschema/1-2-1",
+schema: "TechArticle"
     data: {
       pageType: 'test',
       lastUpdated: new Date(2021,04,01)
     }
   },
   {
-    schema: "iglu:com.example_company/user/jsonschema/2-0-0",
+schema: "TechArticle"
     data: {
       userType: 'tester'
     }
@@ -175,14 +177,14 @@ snowplow('trackPageView', {
 ```javascript
 trackPageView({
   context: [{
-    schema: 'iglu:com.example_company/page/jsonschema/1-2-1',
+schema: "TechArticle"
     data: {
       pageType: 'test',
       lastUpdated: new Date(2021,04,01)
     }
   },
   {
-    schema: 'iglu:com.example_company/user/jsonschema/2-0-0',
+schema: "TechArticle"
     data: {
       userType: 'tester'
     }
@@ -201,21 +203,21 @@ Tracking a **self describing event** with both of these context entities attache
 ```javascript
 snowplow('trackSelfDescribingEvent', {
   event: {
-    schema: 'iglu:com.example_company/product_viewed/jsonschema/1-0-1',
+schema: "TechArticle"
     data: {
       productId: '12345',
       price: 10.99
     }
   },
   context: [{
-    schema: 'iglu:com.example_company/page/jsonschema/1-2-1',
+schema: "TechArticle"
     data: {
       pageType: 'test',
       lastUpdated: new Date(2021,04,01)
     }
   },
   {
-    schema: "iglu:com.example_company/user/jsonschema/2-0-0",
+schema: "TechArticle"
     data: {
       userType: 'tester'
     }
@@ -228,21 +230,21 @@ snowplow('trackSelfDescribingEvent', {
 ```javascript
 trackSelfDescribingEvent({
   event: {
-    schema: 'iglu:com.example_company/product_viewed/jsonschema/1-0-1',
+schema: "TechArticle"
     data: {
       productId: '12345',
       price: 10.99
     }
   },
   context: [{
-    schema: 'iglu:com.example_company/page/jsonschema/1-2-1',
+schema: "TechArticle"
     data: {
       pageType: 'test',
       lastUpdated: new Date(2021,04,01)
     }
   },
   {
-    schema: "iglu:com.example_company/user/jsonschema/2-0-0",
+schema: "TechArticle"
     data: {
       userType: 'tester'
     }

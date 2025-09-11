@@ -1,5 +1,8 @@
 ---
 title: "Accessing failed events in file storage"
+description: "Access and analyze failed events stored in file systems for detailed behavioral data quality investigation."
+schema: "TechArticle"
+keywords: ["File Storage", "Event Storage", "Failed Events", "Storage Analysis", "File Analysis", "Storage Explorer"]
 sidebar_label: "Raw failed events"
 sidebar_position: 2
 ---

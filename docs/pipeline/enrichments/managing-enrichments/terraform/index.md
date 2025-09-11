@@ -1,5 +1,8 @@
 ---
 title: "Managing enrichments in Snowplow Community Edition"
+description: "Deploy and manage Snowplow enrichments using Terraform infrastructure as code for automated pipeline configuration."
+schema: "TechArticle"
+keywords: ["Terraform Management", "Infrastructure Code", "Enrichment Deployment", "IaC", "Terraform Config", "Infrastructure Automation"]
 date: "2021-10-06"
 sidebar_label: "Community Edition: Terraform"
 sidebar_position: 15

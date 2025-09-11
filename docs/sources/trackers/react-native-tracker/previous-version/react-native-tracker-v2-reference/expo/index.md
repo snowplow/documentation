@@ -1,5 +1,8 @@
 ---
 title: "Support for Expo"
+description: "Integrate Snowplow React Native v2 tracker with Expo for managed mobile app behavioral analytics."
+schema: "TechArticle"
+keywords: ["React Native Expo", "Expo Integration", "Expo Setup", "Cross Platform", "Mobile Development", "Expo Analytics"]
 date: "2022-02-03"
 sidebar_position: 35
 ---

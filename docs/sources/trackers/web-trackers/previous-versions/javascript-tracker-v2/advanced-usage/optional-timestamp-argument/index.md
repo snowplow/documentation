@@ -1,5 +1,7 @@
 ---
 title: "Optional timestamp argument"
+description: "Use optional timestamp arguments in JavaScript tracker v2 for behavioral event timing."
+keywords: ["JavaScript V2 Timestamp", "Optional Timestamp", "Legacy Timestamp", "Event Timing", "Custom Timing", "Time Data"]
 date: "2021-03-24"
 sidebar_position: -10
 ---
@@ -18,7 +20,7 @@ Here is an example tracking a structured event and supplying the optional timest
 
 ```javascript
 window.snowplow("trackSelfDescribingEvent", {
-    schema: "iglu:com.acme/event/jsonschema/1-0-0", 
+schema: "TechArticle"
     data: {"type": "user_action"}
   }, 
   [], 
@@ -32,7 +34,7 @@ Also you can attach a true timestamp to the event, replacing the device timestam
 
 ```javascript
 window.snowplow("trackSelfDescribingEvent", {
-    schema: "iglu:com.acme/event/jsonschema/1-0-0", 
+schema: "TechArticle"
     data: {"type": "user_action"}
   }, 
   [], 

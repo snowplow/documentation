@@ -1,5 +1,8 @@
 ---
 title: "BDP Enterprise on AWS"
+description: "Set up Snowplow Behavioral Data Platform on Amazon Web Services for enterprise behavioral analytics infrastructure."
+schema: "TechArticle"
+keywords: ["BDP AWS", "AWS Setup", "BDP Setup", "Cloud Setup", "AWS Guide", "Enterprise Setup"]
 date: "2020-01-30"
 sidebar_position: 10
 coverImage: "aws_logo_0.png"

@@ -1,5 +1,8 @@
 ---
 title: "React Native Tracker"
+description: "React Native tracker for cross-platform mobile behavioral event collection and analytics."
+schema: "TechArticle"
+keywords: ["React Native Tracker", "Mobile Analytics", "React Native", "Mobile Tracking", "Cross Platform", "Mobile SDK"]
 date: "2020-07-09"
 sidebar_position: 120
 ---

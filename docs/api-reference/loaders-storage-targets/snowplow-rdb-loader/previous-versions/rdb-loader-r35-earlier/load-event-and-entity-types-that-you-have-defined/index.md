@@ -1,5 +1,8 @@
 ---
 title: "Load event and entity types that you have defined"
+description: "Load custom event and entity types using RDB Loader R35 and earlier versions for behavioral data."
+schema: "TechArticle"
+keywords: ["RDB R35 Events", "Custom Events", "Entity Types", "Legacy RDB", "Event Types", "Custom Entities"]
 date: "2020-02-26"
 sidebar_position: 30
 ---

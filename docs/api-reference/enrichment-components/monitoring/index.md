@@ -1,5 +1,8 @@
 ---
 title: "Monitoring"
+description: "Monitor enrichment component performance and behavioral data processing health with observability tools."
+schema: "TechArticle"
+keywords: ["Enrichment Monitoring", "Component Monitoring", "Performance Monitoring", "Health Monitoring", "Enrichment Metrics", "System Monitoring"]
 date: "2021-10-04"
 sidebar_position: 60
 ---

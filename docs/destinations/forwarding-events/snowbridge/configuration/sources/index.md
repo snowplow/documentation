@@ -1,5 +1,8 @@
 ---
 title: "Sources"
+description: "Configure source systems for reading behavioral events into Snowbridge forwarding and transformation pipelines."
+schema: "TechArticle"
+keywords: ["Event Sources", "Data Sources", "Input Configuration", "Source Setup", "Event Ingestion", "Input Sources"]
 date: "2022-10-20"
 sidebar_position: 100
 ---

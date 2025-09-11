@@ -1,5 +1,7 @@
 ---
 title: "Errors"
+description: "Track JavaScript errors using web trackers v3 for behavioral analytics and debugging."
+schema: "TechArticle"
 sidebar_position: 110
 ---
 

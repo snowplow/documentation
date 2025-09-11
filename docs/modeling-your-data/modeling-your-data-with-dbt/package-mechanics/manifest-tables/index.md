@@ -1,6 +1,8 @@
 ---
 title: "Manifest tables"
-description: "Details around the manifest tables we use in our packages."
+description: "Manifest tables in dbt packages for tracking behavioral data processing state and metadata."
+schema: "TechArticle"
+keywords: ["Manifest Tables", "DBT Manifest", "Model Registry", "Table Registry", "DBT Metadata", "Model Tracking"]
 sidebar_position: 50
 ---
 

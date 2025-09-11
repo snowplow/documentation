@@ -1,6 +1,9 @@
 ---
 position: 3
 title: Deploy on AWS with Terraform
+description: "Deploy Kafka live viewer on AWS using Terraform for scalable behavioral data streaming infrastructure."
+schema: "HowTo"
+keywords: ["Kafka AWS", "Terraform Kafka", "AWS Deployment", "Infrastructure Code", "Kafka Terraform", "Cloud Kafka"]
 ---
 
 # Deploy on AWS with Terraform

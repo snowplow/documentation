@@ -1,5 +1,8 @@
 ---
 title: "Commands"
+description: "Complete command reference for Snowtype CLI tools and automated TypeScript code generation workflows."
+schema: "TechArticle"
+keywords: ["Snowtype Commands", "Type Commands", "CLI Commands", "TypeScript CLI", "Command Reference", "Type Generation"]
 sidebar_position: 4
 ---
 

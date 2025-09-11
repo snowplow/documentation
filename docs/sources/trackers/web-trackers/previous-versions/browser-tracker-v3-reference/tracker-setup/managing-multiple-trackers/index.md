@@ -1,5 +1,7 @@
 ---
 title: "Managing multiple trackers"
+description: "Manage multiple browser tracker v3 instances for complex behavioral analytics implementations."
+keywords: ["Browser V3 Multiple", "Multiple Trackers", "Legacy Multiple", "Multi Tracker", "Tracker Management", "Multi Instance"]
 date: "2021-03-31"
 sidebar_position: 4000
 ---
@@ -76,7 +78,7 @@ trackStructEvent({
 /* Only the second tracker will fire this self-describing event */
 trackSelfDescribingEvent({ 
   event: {
-    schema: 'iglu:com.acme_company/viewed_product/jsonschema/1-0-0',
+schema: "TechArticle"
     data: {
         product_id: 'ASO01043',
         category: 'Dresses',

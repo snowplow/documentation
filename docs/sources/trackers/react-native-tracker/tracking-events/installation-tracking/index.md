@@ -1,5 +1,8 @@
 ---
 title: "Installation tracking"
+description: "Track app installation events in React Native tracker for user acquisition analytics."
+schema: "TechArticle"
+keywords: ["Installation Tracking", "App Install", "React Native", "Install Events", "First Launch", "App Installation"]
 sidebar_position: 60
 ---
 

@@ -1,5 +1,8 @@
 ---
 title: "Elasticsearch Loader"
+description: "Load behavioral event data into Elasticsearch for real-time search and analytics capabilities."
+schema: "TechArticle"
+keywords: ["Elasticsearch Integration", "Search Analytics", "Elasticsearch Loader", "Search Engine", "Data Search", "Analytics Search"]
 date: "2020-11-25"
 sidebar_position: 50
 ---

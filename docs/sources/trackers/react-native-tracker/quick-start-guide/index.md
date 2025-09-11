@@ -1,5 +1,8 @@
 ---
 title: "Quick start guide"
+description: "Quick start guide for React Native tracker implementation in mobile applications."
+schema: "TechArticle"
+keywords: ["React Native Guide", "Quick Start", "Getting Started", "Setup Guide", "Installation Guide", "Mobile Setup"]
 date: "2021-08-06"
 sidebar_position: 0
 ---

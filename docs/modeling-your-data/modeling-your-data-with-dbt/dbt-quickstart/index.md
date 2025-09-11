@@ -1,5 +1,8 @@
 ---
 title: "Quick Start"
+description: "Quick start guides for implementing dbt data models for behavioral analytics and data transformation."
+schema: "TechArticle"
+keywords: ["DBT Quickstart", "DBT Setup", "Getting Started", "DBT Guide", "Quick Setup", "DBT Installation"]
 sidebar_position: 20
 ---
 

@@ -1,5 +1,8 @@
 ---
 title: "Modeling Entities and Self-Describing Events"
+description: "Model context entities in dbt packages for rich behavioral data analysis and reporting."
+schema: "TechArticle"
+keywords: ["Entity Modeling", "Entity Processing", "Entity Analytics", "Entity Models", "Context Modeling", "Entity Data"]
 sidebar_position: 40
 ---
 

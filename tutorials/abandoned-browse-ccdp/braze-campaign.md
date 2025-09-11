@@ -1,6 +1,9 @@
 ---
 position: 5
 title: Braze Campaign Setup
+description: "Create Braze campaigns using abandoned browse behavioral data for personalized customer re-engagement."
+schema: "HowTo"
+keywords: ["Braze Campaign", "Marketing Campaign", "Customer Engagement", "Braze Integration", "Marketing Automation", "Campaign Tutorial"]
 ---
 
 This guide will walk you through setting up and testing an abandoned browse campaign in Braze using the product view data synced from Census.

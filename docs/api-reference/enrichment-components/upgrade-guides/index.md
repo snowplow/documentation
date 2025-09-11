@@ -1,5 +1,7 @@
 ---
 title: "Upgrade guides"
+description: "Version upgrade guides for Snowplow enrichment components and behavioral data processing systems."
+schema: "TechArticle"
 sidebar_position: 0
 ---
 

@@ -77,6 +77,7 @@ module.exports = {
         showLastUpdateTime: true,
       },
     ],
+  './plugins/docusaurus-plugin-snowplow-schema',
   ],
 
   stylesheets: [

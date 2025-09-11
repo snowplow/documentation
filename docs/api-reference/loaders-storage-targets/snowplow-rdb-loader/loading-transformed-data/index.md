@@ -1,5 +1,8 @@
 ---
 title: "Loading transformed data"
+description: "Load transformed behavioral data into relational databases for structured analytics and reporting."
+schema: "TechArticle"
+keywords: ["Data Loading", "Transformed Data", "RDB Loading", "Warehouse Loading", "Data Pipeline", "ETL Loading"]
 date: "2022-04-05"
 sidebar_position: 20
 ---

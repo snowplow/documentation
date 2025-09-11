@@ -1,6 +1,9 @@
 ---
 position: 2
 title: Quickstart with Localstack
+description: "Quick start guide for Kafka live viewer with LocalStack for behavioral data streaming development."
+schema: "HowTo"
+keywords: ["Kafka Localstack", "Local Kafka", "Localstack Setup", "Development Kafka", "Local Stream", "Kafka Development"]
 ---
 
 # Quickstart with Localstack

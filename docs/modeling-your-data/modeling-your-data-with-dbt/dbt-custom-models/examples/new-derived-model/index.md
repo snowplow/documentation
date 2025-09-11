@@ -1,5 +1,8 @@
 ---
 title: "New Derived Model"
+description: "Example of creating new derived models in dbt for custom behavioral data analysis requirements."
+schema: "TechArticle"
+keywords: ["Derived Model", "Custom Model", "Model Creation", "New Model", "Model Development", "DBT Examples"]
 sidebar_position: 20
 ---
 

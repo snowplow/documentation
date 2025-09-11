@@ -1,5 +1,8 @@
 ---
 title: "Monitoring"
+description: "Monitor failed event recovery processes and track data quality improvements in your behavioral analytics pipeline."
+schema: "TechArticle"
+keywords: ["Recovery Monitoring", "Process Monitoring", "Recovery Metrics", "Performance Monitoring", "Recovery Tracking", "Monitoring Tools"]
 date: "2020-08-26"
 sidebar_position: 40
 ---

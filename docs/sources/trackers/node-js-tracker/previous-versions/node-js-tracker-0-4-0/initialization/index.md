@@ -1,5 +1,8 @@
 ---
 title: "Initialization"
+description: "Initialize Node.js tracker version 0.4.0 for behavioral event tracking in JavaScript servers."
+schema: "TechArticle"
+keywords: ["Node.js V0.4.0", "Legacy Initialization", "Previous Version", "Old Init", "Deprecated Init", "Legacy Setup"]
 date: "2020-09-03"
 sidebar_position: 200
 ---

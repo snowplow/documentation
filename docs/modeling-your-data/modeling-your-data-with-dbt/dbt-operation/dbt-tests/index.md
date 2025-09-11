@@ -1,5 +1,8 @@
 ---
 title: "Tests"
+description: "Implement dbt tests for behavioral data quality validation and model integrity assurance."
+schema: "TechArticle"
+keywords: ["DBT Tests", "Data Testing", "Quality Tests", "DBT Validation", "Test Framework", "Data Quality"]
 sidebar_position: 50
 ---
 

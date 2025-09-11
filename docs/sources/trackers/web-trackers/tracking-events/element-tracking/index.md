@@ -1,5 +1,8 @@
 ---
 title: "Element tracking"
+description: "Track HTML element interactions and clicks using web trackers for detailed behavioral analytics."
+schema: "TechArticle"
+keywords: ["Element Tracking", "DOM Tracking", "Page Elements", "Element Events", "UI Tracking", "Web Elements"]
 sidebar_position: 55
 ---
 

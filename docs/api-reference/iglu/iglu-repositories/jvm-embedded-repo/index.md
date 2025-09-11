@@ -1,5 +1,8 @@
 ---
 title: "JVM Embedded Repo"
+description: "JVM embedded Iglu repository for behavioral data schema resolution in Java applications."
+schema: "TechArticle"
+keywords: ["JVM Repository", "Embedded Repository", "JVM Registry", "Java Registry", "Embedded Schema", "JVM Schema"]
 date: "2021-03-26"
 sidebar_position: 5000
 ---

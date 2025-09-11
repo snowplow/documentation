@@ -1,5 +1,8 @@
 ---
 title: "Page and screen engagement"
+description: "Page activity tracking capabilities in Snowplow for behavioral engagement and attention analytics."
+schema: "TechArticle"
+keywords: ["Page Activity", "Engagement Tracking", "Activity Analytics", "User Engagement", "Page Engagement", "Activity Events"]
 ---
 
 ```mdx-code-block

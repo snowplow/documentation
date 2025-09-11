@@ -1,5 +1,8 @@
 ---
 title: "Web"
+description: "Migration guide for dbt web data model with behavioral website analytics improvements."
+schema: "TechArticle"
+keywords: ["Web Migration", "DBT Migration", "Web Models", "Website Migration", "Web Analytics", "DBT Upgrade"]
 sidebar_position: 900
 ---
 ```mdx-code-block

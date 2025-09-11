@@ -1,5 +1,7 @@
 ---
 title: "Hosting the JavaScript tracker"
+description: "Host JavaScript tracker infrastructure using web trackers v3 for behavioral event collection."
+schema: "TechArticle"
 date: "2021-03-24"
 sidebar_position: 3200
 ---

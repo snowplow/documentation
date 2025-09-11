@@ -1,5 +1,8 @@
 ---
 title: "Managing Event Specifications via the API"
+description: "REST API for programmatically managing event specifications and automating behavioral data governance workflows."
+schema: "TechArticle"
+keywords: ["Specifications API", "Event API", "Specs API", "API Management", "Specification Management", "API Interface"]
 sidebar_label: "Using the API"
 sidebar_position: 1
 sidebar_custom_props:

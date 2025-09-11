@@ -1,5 +1,8 @@
 ---
 title: "Upgrading to Newer Versions"
+description: "Upgrade guide for C tracker with behavioral event tracking improvements and new features."
+schema: "TechArticle"
+keywords: ["C Tracker Upgrade", "Version Upgrade", "Migration Guide", "C Migration", "Upgrade Guide", "Breaking Changes"]
 date: "2022-04-21"
 sidebar_position: 100
 ---

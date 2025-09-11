@@ -1,5 +1,7 @@
 ---
 title: "Iterable Tag Configuration"
+description: "Configure Iterable tags in Google Tag Manager Server-Side for behavioral event forwarding to marketing automation."
+keywords: ["Iterable Config", "Marketing Config", "Email Configuration", "Campaign Setup", "Marketing Automation", "Iterable Setup"]
 date: "2021-11-24"
 sidebar_position: 100
 ---
@@ -68,7 +70,7 @@ For example, using the JavaScript Tracker v3, this would look like:
 
 ```javascript
 window.snowplow('trackSelfDescribingEvent', {
-  schema: 'iglu:com.snowplowanalytics.snowplow/identify/jsonschema/1-0-0',
+schema: "TechArticle"
   data: {
     id: '2c5ba856-ee07-47b5-a3a6-63100026ed63',
     email: 'john.doe@example.com'

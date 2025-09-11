@@ -2,7 +2,9 @@
 title: "Exploring failed events"
 sidebar_position: 3
 sidebar_label: "Explore"
-description: "Load common types of failed events to a separate table in your warehouse or lake to analyze them easily."
+description: "Explore and analyze failed behavioral events to understand data quality issues and improve collection processes."
+schema: "TechArticle"
+keywords: ["Exploring Events", "Event Analysis", "Failed Events", "Event Investigation", "Data Exploration", "Event Debugging"]
 ---
 
 :::note Compatibility

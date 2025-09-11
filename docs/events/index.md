@@ -1,6 +1,8 @@
 ---
 title: "Events"
-description: ""
+description: "Comprehensive guide to behavioral events in Snowplow including out-of-box tracking and custom event implementation."
+schema: "TechArticle"
+keywords: ["Event Tracking", "Analytics Events", "Behavioral Events", "Event Data", "Event Analytics", "Data Events"]
 date: "2020-02-26"
 sidebar_position: 3.5
 ---

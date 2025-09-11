@@ -1,5 +1,8 @@
 ---
 title: "Licensing overview"
+description: "Copyright and licensing information for Snowplow behavioral data platform software and documentation."
+schema: "TechArticle"
+keywords: ["Copyright License", "Intellectual Property", "License Terms", "Copyright FAQ", "Legal Terms", "License Information"]
 sidebar_position: 10
 hide_table_of_contents: true
 ---

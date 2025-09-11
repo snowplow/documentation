@@ -1,5 +1,8 @@
 ---
 title: "Consent"
+description: "Track user consent and GDPR compliance using web trackers for privacy-compliant behavioral analytics."
+schema: "TechArticle"
+keywords: ["Consent Tracking", "GDPR Compliance", "Privacy Consent", "Cookie Consent", "Privacy Analytics", "Consent Management"]
 sidebar_position: 100
 ---
 

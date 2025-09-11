@@ -1,7 +1,9 @@
 ---
 title: "Legacy packages"
 sidebar_position: 9999
-description: "All legacy Snowplow dbt packages"
+description: "Configuration guides for legacy dbt data models behavioral analytics settings and parameters."
+schema: "TechArticle"
+keywords: ["Legacy Config", "Legacy Configuration", "Old Settings", "Deprecated Config", "Legacy Setup", "Previous Config"]
 ---
 
 :::caution

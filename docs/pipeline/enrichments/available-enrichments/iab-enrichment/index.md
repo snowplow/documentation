@@ -1,5 +1,8 @@
 ---
 title: "IAB enrichment"
+description: "Enable IAB enrichment to classify web traffic and filter invalid or non-human interactions from your behavioral data."
+schema: "TechArticle"
+keywords: ["IAB Enrichment", "Ad Blocking", "Traffic Classification", "Bot Detection", "IAB Standards", "Quality Filter"]
 sidebar_position: 0
 sidebar_label: IAB
 ---

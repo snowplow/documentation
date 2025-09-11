@@ -1,6 +1,8 @@
 ---
 title: "Managing data products via the CLI"
-description: "Use the 'snowplow-cli data-products' command to manage your data products."
+description: "Command-line tools for creating and managing behavioral data products in automated governance workflows."
+schema: "TechArticle"
+keywords: ["Data Products CLI", "Product CLI", "Command Interface", "CLI Management", "Product Commands", "CLI Tools"]
 sidebar_label: "Using the CLI"
 sidebar_position: 999
 ---

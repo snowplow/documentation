@@ -1,5 +1,8 @@
 ---
 title: "Media tracking"
+description: "Track media player interactions and engagement in mobile applications using native trackers."
+schema: "TechArticle"
+keywords: ["Mobile Media", "App Media", "Mobile Video", "Media Analytics", "Video Tracking", "Audio Tracking"]
 sidebar_position: 100
 ---
 

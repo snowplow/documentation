@@ -1,5 +1,8 @@
 ---
 title: "Objective-C (iOS) (1.2.0)"
+description: "Objective-C tracker version 1.2.0 documentation for iOS behavioral event collection."
+schema: "TechArticle"
+keywords: ["Objective-C V1.2.0", "iOS Legacy", "Legacy iOS", "Previous Version", "Deprecated iOS", "Old iOS"]
 date: "2020-03-19"
 sidebar_position: 840
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Iglu Common Architecture"
+description: "Iglu common architecture components for behavioral data schema registry and validation systems."
+schema: "TechArticle"
+keywords: ["Iglu Architecture", "Registry Architecture", "Schema Architecture", "System Architecture", "Component Architecture", "Design Principles"]
 date: "2021-03-26"
 sidebar_position: 0
 ---

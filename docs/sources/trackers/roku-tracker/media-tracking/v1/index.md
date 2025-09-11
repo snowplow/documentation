@@ -1,5 +1,8 @@
 ---
 title: "Media tracking (v1)"
+description: "Media tracking version 1 for Roku tracker to analyze streaming behavioral engagement analytics."
+schema: "TechArticle"
+keywords: ["Roku Media V1", "TV Media", "Video Analytics", "Roku Video", "Media Tracking", "Streaming Media"]
 date: "2021-12-23"
 ---
 

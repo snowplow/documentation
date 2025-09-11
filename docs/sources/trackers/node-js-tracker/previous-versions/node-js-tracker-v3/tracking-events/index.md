@@ -1,5 +1,7 @@
 ---
 title: "Tracking Events"
+description: "Track behavioral events using Node.js tracker version 3 in server-side applications."
+keywords: ["Node.js V3", "Legacy Events", "Previous Version", "V3 Events", "Deprecated Events", "Legacy Tracking"]
 date: "2021-04-07"
 sidebar_position: 4000
 ---
@@ -151,7 +153,7 @@ Example:
 ```javascript
 t.track(buildSelfDescribingEvent({
   event: {
-    schema: "iglu:com.example_company/save-game/jsonschema/1-0-2",
+schema: "TechArticle"
     data: {
       save_id: "4321",
       level: 23,

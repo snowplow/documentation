@@ -1,5 +1,8 @@
 ---
 title: "Enrich Kinesis (AWS)"
+description: "Amazon Kinesis enrichment component API reference for real-time behavioral event processing."
+schema: "TechArticle"
+keywords: ["Enrich Kinesis", "Stream Enrichment", "AWS Kinesis", "Real Time", "Stream Processing", "Kinesis Enrichment"]
 date: "2020-10-22"
 sidebar_position: 10
 ---

@@ -1,6 +1,9 @@
 ---
 position: 4
 title: Setup basic tracking
+description: "Set up basic tracking implementation using data products for behavioral event collection workflows."
+schema: "HowTo"
+keywords: ["Basic Tracking", "Tracking Setup", "Event Setup", "Basic Analytics", "Tracking Tutorial", "Event Tracking"]
 ---
 
 For this example application, we will use the [Browser tracker](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/quick-start-guide/#quick-start-basic) which is distributed through npm.

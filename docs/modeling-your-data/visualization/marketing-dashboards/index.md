@@ -1,5 +1,8 @@
 ---
 title: "User and Marketing Analytics"
+description: "Build marketing performance dashboards from behavioral data for campaign analysis and optimization."
+schema: "TechArticle"
+keywords: ["Marketing Dashboards", "Marketing Analytics", "Campaign Analytics", "Marketing Insights", "Marketing ROI", "Campaign Performance"]
 sidebar_position: 2
 sidebar_label: "User and Marketing Analytics"
 ---

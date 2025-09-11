@@ -1,5 +1,8 @@
 ---
 title: "Using an ID service"
+description: "Integrate ID service with browser tracker v3 for behavioral analytics user identification."
+schema: "TechArticle"
+keywords: ["Browser V3 ID", "ID Service", "Legacy ID", "Identity Service", "User Identification", "ID Management"]
 sidebar_position: 3000
 ---
 

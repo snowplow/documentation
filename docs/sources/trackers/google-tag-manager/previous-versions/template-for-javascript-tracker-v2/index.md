@@ -1,5 +1,8 @@
 ---
 title: JavaScript Tracker v2 Templates 
+description: "JavaScript tracker v2 template for Google Tag Manager behavioral event collection."
+schema: "TechArticle"
+keywords: ["GTM JavaScript V2", "Legacy JavaScript", "JS Tracker V2", "Previous Version", "Old Template", "Deprecated Template"]
 date: "2021-11-18"
 sidebar_position: 1000
 ---

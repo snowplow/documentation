@@ -1,6 +1,8 @@
 ---
 title: "Media Player"
-description: "The Snowplow Media Player dbt Package"
+description: "Transform media player behavioral data using dbt for video engagement and content performance analytics."
+schema: "TechArticle"
+keywords: ["DBT Media", "Video DBT", "Media Analytics", "Video Models", "Media Transformation", "Content Analytics"]
 sidebar_position: 20
 hide_title: true
 ---

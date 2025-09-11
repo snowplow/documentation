@@ -1,6 +1,8 @@
 ---
 title: "Managing data structures with the Data Structures Builder"
-description: "The Data Structures Builder is ideal for quickly creating an event or entity with our guided setup and automated versioning."
+description: "User-friendly visual tools for creating and managing behavioral data schemas without requiring JSON expertise."
+schema: "TechArticle"
+keywords: ["Builder Management", "Visual Management", "Schema Builder", "GUI Management", "Visual Control", "Builder Interface"]
 sidebar_label: "Console: data structures builder"
 sidebar_position: 1
 sidebar_custom_props:

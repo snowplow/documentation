@@ -1,5 +1,8 @@
 ---
 title: "Transformer Kinesis"
+description: "Transform behavioral data using Amazon Kinesis streams in RDB Loader processing workflows."
+schema: "TechArticle"
+keywords: ["Kinesis Transformer", "Stream Transform", "AWS Kinesis", "Real Time", "Stream Processing", "Kinesis Processing"]
 date: "2022-10-13"
 sidebar_position: 20
 ---

@@ -1,6 +1,8 @@
 ---
 title: "Incremental sessionization logic"
-description: "A detailed overview of our incremental run logic using manifest tables."
+description: "Incremental processing mechanics in dbt packages for scalable behavioral data transformations."
+schema: "TechArticle"
+keywords: ["Incremental Processing", "DBT Incremental", "Incremental Models", "Delta Processing", "Incremental Updates", "Stream Processing"]
 sidebar_position: 10
 ---
 

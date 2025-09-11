@@ -1,5 +1,8 @@
 ---
 title: "Introduction"
+description: "Introduction to mobile trackers version 2.x for behavioral event collection in mobile applications."
+schema: "TechArticle"
+keywords: ["Mobile V2.x Introduction", "Legacy Mobile", "Mobile Introduction", "Previous Version", "Deprecated Mobile", "Old Mobile"]
 date: "2021-04-12"
 sidebar_position: 100
 ---

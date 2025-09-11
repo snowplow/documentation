@@ -1,5 +1,8 @@
 ---
 title: "Loading tracker with the Snowplow tag"
+description: "Load and initialize JavaScript tracker v2 for behavioral event collection."
+schema: "TechArticle"
+keywords: ["JavaScript V2 Loading", "Script Loading", "Legacy Loading", "Tracker Loading", "JavaScript Loading", "Async Loading"]
 date: "2020-03-03"
 sidebar_position: 0
 ---

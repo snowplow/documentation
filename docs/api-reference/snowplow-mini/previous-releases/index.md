@@ -1,5 +1,7 @@
 ---
 title: "Previous versions"
+description: "Previous releases of Snowplow Mini for behavioral data pipeline development and testing."
+schema: "TechArticle"
 date: "2020-04-03"
 sidebar_position: 5
 sidebar_custom_props:

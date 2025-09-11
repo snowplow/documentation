@@ -323,7 +323,12 @@ my_new_attribute = Attribute(
             )
         ]
     ),
-    property=AtomicProperty(name="mkt_medium"),
+    property=EntityProperty(
+                vendor="com.snowplowanalytics.snowplow",
+                name="ecommerce_product",
+                major_version=1,
+                path="price",
+    )
     period=None,
     default_value=0
     tags={},

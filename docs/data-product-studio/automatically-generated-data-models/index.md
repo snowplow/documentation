@@ -10,12 +10,13 @@ This feature lets you **generate Data Models directly from a Data Product**, rem
 
 ## Key Capabilities
 
-### 1. Flexible Inclusion of Events and Entities
+### Flexible Inclusion of Events and Entities
 - Include **all** or a **subset** of event specifications or entities.
 - Choose exactly which **out-of-the-box columns** to include in the model.
+
 These two features make it possible to create data models as fine-grained and targeted as required, providing you with full control over the level of detail.
 
-### 2. Automatic Data Flattening
+### Automatic Data Flattening
 To create a **clean, wide table**, the tool automatically flattens data structures into individual columns.
 
 **How flattening works:**
@@ -24,12 +25,12 @@ To create a **clean, wide table**, the tool automatically flattens data structur
   - **Single entities** (e.g., `user`) → Flattened into separate columns, e.g., `user_id`, `user_email`.
   - **Multiple entities** (e.g., arrays like `products`) → Stored as a single array column, which you can **unnest later**.
 
-### 3. Event Specification Inference
+### Event Specification Inference
 For customers **not using Snowtype tracking**:
 - Filter events based on **event specification instructions** instead of Snowtype context.
 - Both filtering options are available in the interface.
 
-### 4. Deployment Options
+### Deployment Options
 Choose between two generation methods:
 
 - **View** → Best for lightweight use cases when you need **immediate access to data** with minimal setup.

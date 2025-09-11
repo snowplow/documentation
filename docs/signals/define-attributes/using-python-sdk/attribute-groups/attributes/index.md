@@ -276,7 +276,7 @@ referrer_source_attribute = Attribute(
     ],
     aggregation="last",
     criteria=None,
-    property="mkt_medium",
+    property=AtomicProperty(name="mkt_medium"),
     period=None,
     default_value=None
     tags={},
@@ -309,17 +309,23 @@ my_new_attribute = Attribute(
     criteria=Criteria(
         all=[
             Criterion.eq(
-                EventProperty(
-                    vendor="com.snowplowanalytics.snowplow.ecommerce",
-                    name="snowplow_ecommerce_action",
-                    major_version=1,
-                    path="type"
+                EntityProperty(
+                        vendor="com.snowplowanalytics.snowplow",
+                        name="ecommerce_product",
+                        major_version=1,
+                        index=[0],
+                        path="price"
                 ),
                 "transaction"
             )
         ]
     ),
-    property="contexts_com_snowplowanalytics_snowplow_ecommerce_product_1[0].price",
+    property=EntityProperty(
+                vendor="com.snowplowanalytics.snowplow",
+                name="ecommerce_product",
+                major_version=1,
+                path="price",
+    )
     period=None,
     default_value=0
     tags={},

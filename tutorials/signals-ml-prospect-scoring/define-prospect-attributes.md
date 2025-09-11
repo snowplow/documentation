@@ -25,8 +25,8 @@ Since the attributes will be calculated in stream, those with a defined `period`
 | `num_form_engagements_l7d`   | Number of recent form engagements, e.g., `focus_form`, `change_form` events, in the last 7 days | int    | `counter`      |
 | `num_media_events_l30d`      | Engagements with media events in the last 30 days                                               | int    | `counter`      |
 | `first_refr_medium_l30d`     | First referrer medium in the last 30 days                                                       | string | `first`        |
-| `first_mkt_medium_l30d`      | First `utm_medium` in the last 30 days                                                          | string | `first`        |
-| `num_engaged_campaigns_l30d` | Number of distinct engaged `utm_campaign`s in the last 30 days                                  | int    | `unique_list`* |
+| `first_mkt_medium_l30d`      | First `mkt_medium` in the last 30 days                                                          | string | `first`        |
+| `num_engaged_campaigns_l30d` | Number of distinct engaged `mkt_campaign`s in the last 30 days                                  | int    | `unique_list`* |
 
 :::note Count distinct
 Signals doesn't have a "count distinct" aggregation. For "count distinct" features like `num_sessions_l7d` or `num_engaged_campaigns_l30d`, we'll use Signal's `unique_list` aggregation, and count the number of distinct elements later, in the intermediary API.

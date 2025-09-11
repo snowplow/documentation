@@ -36,7 +36,7 @@ The core Signals components are:
 * **Sync engine**: periodically updates the Profiles Store with batch attributes
 * **Batch engine**: runs in your warehouse to compute attributes from warehouse tables
 
-![](./images/signals-bdp-overview.png)
+![](./images/overview-simple.png)
 
 ## Using Signals
 

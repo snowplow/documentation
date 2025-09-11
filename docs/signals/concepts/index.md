@@ -18,6 +18,8 @@ To use attributes to trigger actions such as in-app messages, discounts, or pers
 
 **Services** provide a stable interface layer between your calculated attributes and your applications. Each service can contain multiple attribute groups, pinned to specific versions. You'd build the logic within your application for how to use the retrieved attributes. **Interventions** are a separate abstraction for defining when to trigger actions in your application.
 
+![](./../images/overview-detailed.png)
+
 ## Attribute groups
 
 Attribute groups are where you define the data you want to calculate. Each attribute group is a versioned collection that specifies:

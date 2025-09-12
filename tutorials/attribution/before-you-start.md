@@ -9,9 +9,9 @@ In the subsequent setup steps, we will only include the absolute minimum that's 
 
 
 - `snowplow__conversion_hosts`: url_hosts to process, if left empty it will include all
-- `snowplow__conversion_clause`: A user defined sql script to filter on specific conversions if needed. Defaulted to 'cv_value > 0'
-- `snowplow__path_transforms`: A dictionary of path transforms and their arguments (see [Transform Paths](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/#transform-paths) section which includes other relevant variable changes including changing the `snowplow_path_lookback_days` and `snowplow_path_lookback_steps` variables.)
-- `snowplow__conversion_window_days`: By default the package processes the last complete n number of days (calculated from the last processed path in the path source) to dynamically define the conversion window for each incremental run
+- `snowplow__conversion_clause`: a user defined sql script to filter on specific conversions if needed. Defaulted to 'cv_value > 0'
+- `snowplow__path_transforms`: a dictionary of path transforms and their arguments (see [Transform Paths](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/#transform-paths) section which includes other relevant variable changes including changing the `snowplow_path_lookback_days` and `snowplow_path_lookback_steps` variables.)
+- `snowplow__conversion_window_days`: by default the package processes the last complete n number of days (calculated from the last processed path in the path source) to dynamically define the conversion window for each incremental run
 - `snowplow__enable_attribution_overview`. By default, the package creates a model called snowplow_attribution_overview which can be used directly for BI reporting. If you are using the Attribution Modeling Data Model Pack, this is not required to be enabled as the Data Model Pack will take care of querying this data for you
 
 :::info

@@ -18,15 +18,15 @@ The Databricks integration is available for Snowplow pipelines running on **AWS*
 
 :::
 
-Databricks is a unified analytics platform that combines data engineering, data science, and machine learning. The Snowplow Databricks integration allows you to load enriched event data directly into your Databricks environment for analytics and downstream processing.
+The Snowplow Databricks integration allows you to load enriched event data (as well as [failed events](/docs/fundamentals/failed-events/index.md)) into your Databricks environment for analytics, data modeling, and more.
 
 Depending on the cloud provider for your Snowplow pipeline, there are different options for this integration:
 
-| Integration | AWS | Azure | GCP |
-| ----------- |:---:|:-----:|:---:|
-| Direct, batch-based ([RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md)) | :white_check_mark: | :x: | :x: |
-| Via Delta Lake ([Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)) | :x:* | :white_check_mark: | :white_check_mark: |
-| _Early release:_ Streaming / Lakeflow ([Streaming Loader](/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/index.md)) | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Integration | AWS | Azure | GCP | Failed events support |
+| ----------- |:---:|:-----:|:---:|:---------------------:|
+| Direct, batch-based ([RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md)) | :white_check_mark: | :x: | :x: | :x: |
+| Via Delta Lake ([Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)) | :x:* | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| _Early release:_ Streaming / Lakeflow ([Streaming Loader](/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/index.md)) | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 
 _*Delta+Databricks combination is currently not supported for AWS pipelines. The loader uses DynamoDB tables for mutually exclusive writes to S3, a feature of Delta. Databricks, however, does not support this (as of September 2025). This means that it’s not possible to alter the data via Databricks (e.g. to run `OPTIMIZE` or to delete PII)._
 
@@ -46,7 +46,7 @@ Keep in mind that you will need a few things.
 <TabItem value="rdb-loader" label="Batch-based (AWS)" default>
 
 * Provide a Databricks cluster along with its URL
-* Specify the catalog name (if using Unity catalog) and schema name
+* Specify the Unity catalog name and schema name
 * Create an access token with the following permissions:
   * `USE CATALOG` on the catalog
   * `USE SCHEMA` and `CREATE TABLE` on the schema

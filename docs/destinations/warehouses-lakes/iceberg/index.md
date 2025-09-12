@@ -18,11 +18,12 @@ The Iceberg integration is available for Snowplow pipelines running on **AWS** o
 
 :::
 
-Apache Iceberg is an open table format for huge analytic datasets. The Snowplow Iceberg integration allows you to load enriched event data (as well as [failed events](/docs/fundamentals/failed-events/index.md)) into Iceberg tables in your data lake for analytics, querying, and downstream processing.
+Apache Iceberg is an open table format for data lake architectures. The Snowplow Iceberg integration allows you to load enriched event data (as well as [failed events](/docs/fundamentals/failed-events/index.md)) into Iceberg tables in your data lake for analytics, data modeling, and more.
 
 Iceberg data can be consumed using various tools and products, for example:
 * Amazon Athena
 * Amazon Redshift Spectrum
+* Apache Spark or Amazon EMR
 * Snowflake
 * ClickHouse
 

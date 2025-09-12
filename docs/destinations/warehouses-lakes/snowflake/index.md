@@ -16,7 +16,7 @@ The Snowflake integration is available for Snowplow pipelines running on **AWS**
 
 :::
 
-Snowflake is a cloud data platform that provides data warehousing capabilities. The Snowplow Snowflake integration allows you to load enriched event data (as well as [failed events](/docs/fundamentals/failed-events/index.md)) directly into your Snowflake warehouse.
+The Snowplow Snowflake integration allows you to load enriched event data (as well as [failed events](/docs/fundamentals/failed-events/index.md)) directly into your Snowflake warehouse for analytics, data modeling, and more.
 
 ## What you will need
 
@@ -35,7 +35,7 @@ Keep in mind that you will need to:
 * Generate a key pair for key-based authentication
 * Specify the desired database and schema names, as well as a warehouse name
 * Create a role with the following permissions:
-  * `USAGE`, `OPERATE` on warehouse
+  * `USAGE`, `OPERATE` on warehouse (for testing the connection and monitoring, e.g. as part of the [Data Quality Dashboard](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/index.md#data-quality-dashboard))
   * `USAGE` on database
   * `ALL` privileges on the target schema
 

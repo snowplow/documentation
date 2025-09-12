@@ -15,7 +15,7 @@ The Redshift integration is available for Snowplow pipelines running on **AWS** 
 
 :::
 
-Amazon Redshift is a fully managed, petabyte-scale data warehouse service in the cloud. The Snowplow Redshift integration allows you to load enriched event data directly into your Redshift cluster for analytics and downstream processing.
+The Snowplow Redshift integration allows you to load enriched event data directly into your Redshift cluster (including Redshift serverless) for analytics, data modeling, and more.
 
 ## What you will need
 

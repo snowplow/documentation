@@ -18,11 +18,12 @@ The Delta Lake integration is available for Snowplow pipelines running on **AWS*
 
 :::
 
-Delta Lake is an open-source storage framework that enables building a Lakehouse architecture. The Snowplow Delta integration allows you to load enriched event data (as well as [failed events](/docs/fundamentals/failed-events/index.md)) into Delta tables in your data lake for analytics, machine learning, and downstream processing.
+Delta Lake is an open table format for data lake architectures. The Snowplow Delta integration allows you to load enriched event data (as well as [failed events](/docs/fundamentals/failed-events/index.md)) into Delta tables in your data lake for analytics, data modeling, and more.
 
 Data in Delta Lake can be consumed using various tools and products, for example:
 
 * Amazon Athena
+* Apache Spark or Amazon EMR
 * Databricks*
 * Microsoft Synapse Analytics
 * Microsoft Fabric

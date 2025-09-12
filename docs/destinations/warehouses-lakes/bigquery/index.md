@@ -16,7 +16,7 @@ The BigQuery integration is available for Snowplow pipelines running on **AWS**,
 
 :::
 
-BigQuery is Google Cloud's fully managed, serverless data warehouse. The Snowplow BigQuery integration allows you to enriched event data (as well as [failed events](/docs/fundamentals/failed-events/index.md)) directly into your BigQuery datasets for analytics and downstream processing.
+The Snowplow BigQuery integration allows you to load enriched event data (as well as [failed events](/docs/fundamentals/failed-events/index.md)) directly into your BigQuery datasets for analytics, data modeling, and more.
 
 ## What you will need
 

@@ -1,7 +1,7 @@
 ---
-title: "Code Generation - automatically generate code for Snowplow tracking SDKs"
+title: "Snowtype (Code Generation) - automatically generate code for Snowplow tracking SDKs"
 sidebar_position: 6
-sidebar_label: "Code generation (Snowtype)"
+sidebar_label: "Snowtype (Code generation)"
 sidebar_custom_props:
   offerings:
     - bdp
@@ -12,7 +12,15 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-**Snowtype** is a tool that assists with instrumenting, verifying and maintaining tracking code. Snowtype works with Snowplow tracking SDKs.
+**Snowtype** is a code generation tool that automates the creation of type-safe tracking code for Snowplow SDKs. By connecting directly to your data structures and event specifications, Snowtype eliminates manual instrumentation work while ensuring schema compliance and data quality throughout your tracking implementation.
+
+Snowtype streamlines the development workflow by providing several key advantages:
+
+- **Type safety enforcement:** Generates strongly-typed code that validates events and entities at compile time, preventing schema violations before data reaches your pipeline.
+- **Automated code generation:** Converts event specifications into production-ready SDK code, reducing implementation time from weeks to days.
+- **Integrated documentation:** Syncs inline code documentation with your data structures and products, maintaining consistency between design and implementation.
+- **Development workflow integration:** Fits seamlessly into CI/CD processes, enabling GitOps-style data product management and automated updates when schemas evolve.
+- **Reduced maintenance overhead:** Automatically updates tracking code when data structures change, eliminating the need for manual synchronization across multiple codebases.
 
 ## Supported trackers
 

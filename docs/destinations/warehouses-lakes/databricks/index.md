@@ -40,7 +40,7 @@ The list below is just a heads up. The Snowplow Console will guide you through t
 
 :::
 
-Keep in mind that you will need a few things.
+Keep in mind that you will need to be able to do a few things.
 
 <Tabs groupId="databricks-integration" queryString lazy>
 <TabItem value="rdb-loader" label="Batch-based (AWS)" default>

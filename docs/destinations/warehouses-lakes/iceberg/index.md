@@ -39,7 +39,7 @@ The list below is just a heads up. The Snowplow Console will guide you through t
 
 :::
 
-Keep in mind that you will need to:
+Keep in mind that you will need to be able to:
 
 * Specify your AWS account ID
 * Provide an S3 bucket and an AWS Glue database
@@ -53,12 +53,15 @@ Keep in mind that you will need to:
     * `glue:CreateTable`
     * `glue:GetTable`
     * `glue:UpdateTable`
+* Schedule a regular job to optimize the lake
 
 ## Getting started
 
 You can add an Iceberg destination through the Snowplow Console. (For self-hosted customers, please refer to the [Loader API reference](/docs/api-reference/loaders-storage-targets/lake-loader/index.md) instead.)
 
 <SetupInstructions destinationName="Iceberg" connectionType="Iceberg" />
+
+We recommend scheduling regular [lake maintenance jobs](/docs/api-reference/loaders-storage-targets/lake-loader/maintenance/index.md?lake-format=iceberg) to ensure the best long-term performance.
 
 ## How loading works
 

@@ -28,7 +28,7 @@ The list below is just a heads up. The Snowplow Console will guide you through t
 
 :::
 
-Keep in mind that you will need to:
+Keep in mind that you will need to be able to:
 
 * Provide your Google Cloud Project ID and region
 * Allow-list Snowplow IP addresses

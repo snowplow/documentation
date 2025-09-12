@@ -40,7 +40,7 @@ The list below is just a heads up. The Snowplow Console will guide you through t
 
 :::
 
-Keep in mind that you will need to:
+Keep in mind that you will need to be able to:
 
 <Tabs groupId="cloud" queryString lazy>
   <TabItem value="aws" label="AWS" default>
@@ -63,6 +63,7 @@ Keep in mind that you will need to:
     * `dynamodb:PutItem`
     * `dynamodb:UpdateItem`
     * `dynamodb:DeleteItem`
+* Schedule a regular job to optimize the lake
 
 
   </TabItem>
@@ -89,6 +90,8 @@ Keep in mind that you will need to:
 You can add a Delta Lake destination through the Snowplow Console. (For self-hosted customers, please refer to the [Loader API reference](/docs/api-reference/loaders-storage-targets/lake-loader/index.md) instead.)
 
 <SetupInstructions destinationName="Delta" connectionType="Delta" />
+
+We recommend scheduling regular [lake maintenance jobs](/docs/api-reference/loaders-storage-targets/lake-loader/maintenance/index.md?lake-format=delta) to ensure the best long-term performance.
 
 ## How loading works
 

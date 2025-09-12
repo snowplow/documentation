@@ -28,7 +28,7 @@ The list below is just a heads up. The Snowplow Console will guide you through t
 
 :::
 
-Keep in mind that you will need to:
+Keep in mind that you will need to be able to:
 
 * Provide your Snowflake account locator URL, cloud provider and region
 * Allow-list Snowplow IP addresses

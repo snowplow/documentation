@@ -29,4 +29,4 @@ The `newTracker` call now accepts configuration objects for the tracker and emit
 
 The support for the following Node.JS versions has been dropped:
 
-* Drop Node.js <18 support
+* Drop Node.js \<18 support

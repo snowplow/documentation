@@ -1,6 +1,9 @@
 ---
 position: 4
 title: Conclusion
+description: "Conclusion and next steps for Kafka live viewer profiles tutorial for real-time behavioral data streaming."
+schema: "HowTo"
+keywords: ["Kafka Conclusion", "Tutorial Conclusion", "Kafka Tutorial", "Real Time", "Stream Processing", "Live Data"]
 ---
 
 # Conclusion

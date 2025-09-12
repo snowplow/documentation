@@ -2,7 +2,9 @@
 title: "First steps with Snowplow"
 sidebar_position: 1
 sidebar_label: "Get started"
-description: "Details on where and how Snowplow is deployed"
+description: "Complete getting started guide for implementing Snowplow behavioral data infrastructure and event analytics platform."
+schema: "TechArticle"
+keywords: ["Getting Started", "Snowplow Introduction", "Quick Start", "Platform Overview", "Analytics Platform", "First Steps"]
 ---
 
 For production use, you can choose between Snowplow BDP Enterprise and Snowplow BDP Cloud. For non-production use cases, use Snowplow Community Edition, or play around with Snowplow Micro. See the [feature comparison page](/docs/get-started/feature-comparison/index.md) for more information.

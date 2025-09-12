@@ -1,5 +1,7 @@
 ---
 title: "Event specifications"
+description: "Implement event specifications using web trackers v3 for consistent behavioral data collection."
+schema: "TechArticle"
 sidebar_position: 115
 ---
 

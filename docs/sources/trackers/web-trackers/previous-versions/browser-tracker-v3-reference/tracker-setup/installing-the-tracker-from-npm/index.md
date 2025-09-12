@@ -1,5 +1,8 @@
 ---
 title: "Installing the tracker from npm"
+description: "Install browser tracker v3 from npm for behavioral event collection in JavaScript applications."
+schema: "TechArticle"
+keywords: ["Browser V3 NPM", "NPM Installation", "Legacy NPM", "Package Manager", "JavaScript Package", "NPM Setup"]
 date: "2021-03-31"
 sidebar_position: -10
 ---

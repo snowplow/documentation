@@ -1,5 +1,7 @@
 ---
 title: "Site search"
+description: "Track internal site search behavior using web trackers v3 for content discovery analytics."
+schema: "TechArticle"
 sidebar_position: 120
 ---
 

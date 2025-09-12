@@ -1,5 +1,8 @@
 ---
 title: "Web Vitals"
+description: "Web Vitals plugin for browser tracker v3 to track Core Web Vitals behavioral performance metrics."
+schema: "TechArticle"
+keywords: ["Browser V3 Vitals", "Web Vitals", "Legacy Vitals", "Performance Metrics", "UX Metrics", "Core Vitals"]
 sidebar_position: 17000
 ---
 

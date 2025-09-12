@@ -2,7 +2,9 @@
 title: "Snowplow Micro User Interface"
 sidebar_position: 2
 sidebar_label: "Using the UI"
-description: "How to view, filter and investigate events in the Micro UI."
+description: "Navigate Snowplow Micro's user interface for testing and debugging behavioral event tracking implementations."
+schema: "TechArticle"
+keywords: ["Micro UI", "Testing Interface", "Micro Interface", "Testing Tool", "Development UI", "Micro Dashboard"]
 ---
 
 To view the Micro UI, head to [http://localhost:9090/micro/ui](http://localhost:9090/micro/ui) in your web browser (assuming you followed the [basic usage](/docs/data-product-studio/data-quality/snowplow-micro/basic-usage/index.md) instructions).

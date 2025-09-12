@@ -1,6 +1,9 @@
 ---
 position: 2
 title: Run the project
+description: "Run and deploy Flink live shopper features for real-time behavioral data processing and personalization."
+schema: "HowTo"
+keywords: ["Flink Run", "Stream Execution", "Flink Execution", "Real Time", "Stream Run", "Live Processing"]
 ---
 
 1. [Clone the repository](https://github.com/snowplow-industry-solutions/flink-live-shopper)

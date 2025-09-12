@@ -1,5 +1,8 @@
 ---
 title: "GCP - Beam"
+description: "Deploy failed event recovery using Google Cloud Dataflow and Apache Beam for scalable data processing."
+schema: "TechArticle"
+keywords: ["Beam Recovery", "Google Cloud", "Dataflow Recovery", "Beam Processing", "GCP Pipeline", "Cloud Recovery"]
 date: "2020-08-03"
 sidebar_position: 0
 ---

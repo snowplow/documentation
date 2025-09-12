@@ -1,5 +1,8 @@
 ---
 title: "Snowflake Streaming Loader"
+description: "Stream behavioral event data directly into Snowflake for real-time analytics and data warehousing."
+schema: "TechArticle"
+keywords: ["Snowflake Streaming", "Real Time Snowflake", "Stream Loading", "Continuous Loading", "Streaming Warehouse", "Real Time Warehouse"]
 sidebar_label: "Snowflake Streaming Loader"
 sidebar_position: 0
 ---

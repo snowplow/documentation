@@ -1,5 +1,8 @@
 ---
 title: "Usage Guide"
+description: "Usage guide for Snowplow Mini version 0.14 behavioral data pipeline development and testing."
+schema: "TechArticle"
+keywords: ["Mini V0.14 Usage", "Legacy Usage", "Previous Version", "Usage Guide", "Deprecated Mini", "Old Guide"]
 date: "2021-05-11"
 sidebar_position: -10
 ---

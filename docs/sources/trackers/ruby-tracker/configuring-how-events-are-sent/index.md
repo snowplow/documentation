@@ -1,5 +1,8 @@
 ---
 title: "Configuring how events are sent"
+description: "Configure event transmission settings in Ruby tracker for optimal behavioral data delivery."
+schema: "TechArticle"
+keywords: ["Ruby Configuration", "Event Sending", "Ruby Setup", "Transport Config", "Ruby Analytics", "Event Delivery"]
 date: "2021-10-26"
 sidebar_position: 30
 ---

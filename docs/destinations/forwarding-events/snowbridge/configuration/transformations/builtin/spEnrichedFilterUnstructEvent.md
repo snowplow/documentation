@@ -1,6 +1,8 @@
 ---
 title: "spEnrichedFilterUnstructEvent"
-description: "Filters messages based on a regex match against a field in a custom event."
+description: "Filter self-describing events from behavioral data streams using built-in Snowbridge transformation capabilities."
+schema: "TechArticle"
+keywords: ["Event Filtering", "Unstructured Events", "Event Selection", "Custom Events", "Event Types", "Event Processing"]
 ---
 
 ```mdx-code-block

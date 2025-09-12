@@ -1,5 +1,8 @@
 ---
 title: "Deduplication"
+description: "Deduplicate enriched behavioral events during RDB transformation to ensure data quality and accuracy."
+schema: "TechArticle"
+keywords: ["Data Deduplication", "Duplicate Removal", "Data Quality", "Event Dedup", "Unique Events", "Data Cleaning"]
 date: "2022-04-04"
 sidebar_position: 30
 ---

@@ -1,5 +1,8 @@
 ---
 title: Verify GitHub setup
+description: "Verify GitHub setup for Snowplow data structure management and collaborative schema development workflows."
+schema: "HowTo"
+keywords: ["GitHub Verification", "Git Setup", "GitHub Config", "Repository Setup", "Git Verification", "GitHub Tutorial"]
 position: 5
 ---
 

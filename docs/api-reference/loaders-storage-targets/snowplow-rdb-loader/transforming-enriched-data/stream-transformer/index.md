@@ -1,5 +1,8 @@
 ---
 title: "Stream transformer"
+description: "Stream-based transformation of behavioral data for RDB Loader relational database loading workflows."
+schema: "TechArticle"
+keywords: ["Stream Transformer", "Real Time Transform", "Stream Processing", "Data Transformation", "Real Time ETL", "Stream Pipeline"]
 date: "2022-04-04"
 sidebar_position: 20
 ---

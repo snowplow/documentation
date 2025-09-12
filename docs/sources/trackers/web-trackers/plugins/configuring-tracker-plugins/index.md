@@ -1,5 +1,8 @@
 ---
 title: "Configuring tracker plugins"
+description: "Configure and manage plugins in web trackers for enhanced behavioral event tracking capabilities."
+schema: "TechArticle"
+keywords: ["Plugin Configuration", "Web Plugins", "Plugin Setup", "Analytics Config", "Feature Config", "Plugin Management"]
 sidebar_position: 750
 ---
 

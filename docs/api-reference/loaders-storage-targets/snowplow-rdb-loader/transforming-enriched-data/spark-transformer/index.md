@@ -1,5 +1,8 @@
 ---
 title: "Spark transformer"
+description: "Transform behavioral data using Apache Spark for scalable RDB Loader processing workflows."
+schema: "TechArticle"
+keywords: ["Spark Transformer", "Apache Spark", "Big Data", "Batch Processing", "Data Transformation", "Spark Processing"]
 date: "2022-04-04"
 sidebar_position: 10
 ---

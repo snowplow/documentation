@@ -1,6 +1,8 @@
 ---
 title: "Modeling your data with SQL Runner"
-description: "Guides for setting up SQL Runner and running our web and mobile models."
+description: "Transform behavioral data using SQL Runner for custom analytics models and data processing workflows."
+schema: "TechArticle"
+keywords: ["SQL Runner", "SQL Models", "Data Transformation", "SQL Analytics", "Legacy Models", "SQL Pipeline"]
 sidebar_label: "SQL Runner models (legacy)"
 sidebar_position: 99999
 ---

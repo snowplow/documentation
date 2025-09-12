@@ -1,5 +1,8 @@
 ---
 title: "Tracker Maintenance Classification"
+description: "Maintenance classification and support status for different Snowplow tracker SDKs and implementations."
+schema: "TechArticle"
+keywords: ["Tracker Maintenance", "SDK Status", "Support Level", "Tracker Lifecycle", "Maintenance Policy", "SDK Support"]
 date: "2020-07-08"
 sidebar_position: 90
 ---

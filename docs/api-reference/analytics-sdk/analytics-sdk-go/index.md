@@ -1,5 +1,8 @@
 ---
 title: "Analytics SDK - Go"
+description: "Go Analytics SDK API reference for processing behavioral event data in scalable backend services."
+schema: "TechArticle"
+keywords: ["Go SDK", "Golang SDK", "Go API", "Server SDK", "Backend SDK", "Go Analytics"]
 date: "2021-05-26"
 sidebar_position: 300
 ---

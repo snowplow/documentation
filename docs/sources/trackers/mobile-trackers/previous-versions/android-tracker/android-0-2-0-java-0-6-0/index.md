@@ -1,5 +1,8 @@
 ---
 title: "Android (0.2.0) / Java (0.6.0)"
+description: "Android tracker version 0.2.0 and Java 0.6.0 documentation for behavioral event collection."
+schema: "TechArticle"
+keywords: ["Android V0.2.0", "Java V0.6.0", "Android Legacy", "Previous Version", "Deprecated Android", "Old Android"]
 date: "2020-03-02"
 sidebar_position: 990
 ---

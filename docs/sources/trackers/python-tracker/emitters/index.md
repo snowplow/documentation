@@ -1,5 +1,8 @@
 ---
 title: "Emitters"
+description: "Configure event emitters in Python tracker for reliable behavioral data transmission to collectors."
+schema: "TechArticle"
+keywords: ["Python Emitters", "Event Sending", "Python Configuration", "Transport Layer", "Python Analytics", "Event Delivery"]
 sidebar_position: 30
 ---
 

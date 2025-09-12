@@ -1,5 +1,8 @@
 ---
 title: "Session tracking"
+description: "Track user sessions in React Native tracker for mobile engagement and retention analysis."
+schema: "TechArticle"
+keywords: ["Session Tracking", "User Sessions", "React Native", "Session Analytics", "Session Management", "User Activity"]
 sidebar_position: 20
 ---
 

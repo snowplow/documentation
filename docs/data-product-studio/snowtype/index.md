@@ -1,5 +1,8 @@
 ---
 title: "Code Generation - automatically generate code for Snowplow tracking SDKs"
+description: "TypeScript code generation tool for type-safe behavioral event tracking and data structure validation."
+schema: "TechArticle"
+keywords: ["Snowtype", "TypeScript Types", "Type Generation", "Type Safety", "TypeScript Integration", "Code Generation"]
 sidebar_position: 6
 sidebar_label: "Code generation (Snowtype)"
 sidebar_custom_props:

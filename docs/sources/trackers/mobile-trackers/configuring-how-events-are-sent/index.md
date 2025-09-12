@@ -1,5 +1,8 @@
 ---
 title: "Configuring how events are sent"
+description: "Configure event transmission settings in mobile trackers for optimal behavioral data delivery."
+schema: "TechArticle"
+keywords: ["Mobile Configuration", "Event Sending", "Mobile Setup", "Transport Config", "Mobile Analytics", "Event Delivery"]
 date: "2022-08-30"
 sidebar_position: 40
 ---

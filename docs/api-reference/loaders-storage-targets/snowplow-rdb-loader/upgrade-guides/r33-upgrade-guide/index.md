@@ -1,5 +1,8 @@
 ---
 title: "R33/R34 Upgrade Guide"
+description: "RDB Loader R33 upgrade guide with enhanced behavioral data processing and loading capabilities."
+schema: "TechArticle"
+keywords: ["RDB Upgrade", "R33 Upgrade", "Loader Migration", "RDB Migration", "Version Upgrade", "Breaking Changes"]
 date: "2020-12-01"
 sidebar_position: 400
 ---

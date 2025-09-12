@@ -1,6 +1,8 @@
 ---
 title: "Fractribution"
-description: "The Snowplow Fractribution dbt Package"
+description: "Legacy dbt fractribution model for behavioral marketing attribution and campaign analysis."
+schema: "TechArticle"
+keywords: ["DBT Fractribution", "Fractional Attribution", "Attribution Analytics", "Marketing DBT", "Attribution Models", "Marketing Analytics"]
 sidebar_position: 900
 hide_title: true
 ---

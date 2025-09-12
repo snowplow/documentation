@@ -1,5 +1,8 @@
 ---
 title: "Managing data structures"
+description: "Comprehensive guide to managing data structure lifecycles from creation to deployment in behavioral data systems."
+schema: "TechArticle"
+keywords: ["Schema Management", "Structure Admin", "Schema Control", "Data Governance", "Schema Operations", "Structure Management"]
 sidebar_position: 1
 sidebar_label: "Manage"
 sidebar_custom_props:

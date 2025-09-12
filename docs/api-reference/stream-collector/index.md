@@ -1,5 +1,8 @@
 ---
 title: "Collector"
+description: "Snowplow Stream Collector API reference for behavioral event collection and real-time data ingestion."
+schema: "TechArticle"
+keywords: ["Stream Collector", "Event Collection", "Data Ingestion", "Collection Pipeline", "Event Ingestion", "Collector Component"]
 date: "2020-11-02"
 sidebar_position: 20
 ---

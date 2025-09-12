@@ -1,6 +1,8 @@
 ---
 title: "base64Encode"
-description: "Base64 encodes the message's data."
+description: "Encode behavioral event data using Base64 transformation for secure forwarding to external systems."
+schema: "TechArticle"
+keywords: ["Base64 Encode", "Data Encoding", "Binary Encoding", "String Encoding", "Encode Transform", "Data Conversion"]
 ---
 
 ```mdx-code-block

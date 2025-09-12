@@ -1,5 +1,8 @@
 ---
 title: "RDB Loader R35 and earlier"
+description: "RDB Loader R35 and earlier versions for behavioral data transformation and relational database loading."
+schema: "TechArticle"
+keywords: ["RDB R35 Earlier", "Legacy RDB", "Previous Version", "Deprecated Loader", "Legacy Version", "Old RDB"]
 sidebar_position: 30
 ---
 

@@ -1,6 +1,8 @@
 ---
 title: "SQS"
-description: "Read data from an SQS queue."
+description: "Configure Amazon SQS as a source for behavioral event forwarding using Snowbridge processing pipelines."
+schema: "TechArticle"
+keywords: ["SQS Source", "Amazon SQS", "AWS Source", "Queue Source", "Message Source", "Event Ingestion"]
 ---
 
 ```mdx-code-block

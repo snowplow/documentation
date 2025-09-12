@@ -1,5 +1,8 @@
 ---
 title: "HTML5 Media Tracking"
+description: "Media tracking plugin for browser tracker v3 to analyze behavioral media engagement analytics."
+schema: "TechArticle"
+keywords: ["Browser V3 Media", "Media Tracking", "Legacy Media", "Video Analytics", "Audio Analytics", "Media Events"]
 date: "2022-01-11"
 sidebar_position: 12500
 ---

@@ -1,6 +1,8 @@
 ---
 title: "HTTP"
-description: "Send data over HTTP."
+description: "Configure HTTP endpoints as destinations for behavioral event forwarding using Snowbridge webhooks."
+schema: "TechArticle"
+keywords: ["HTTP Target", "HTTP Export", "Webhook Export", "API Export", "HTTP Integration", "REST Export"]
 ---
 
 ```mdx-code-block

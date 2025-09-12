@@ -1,6 +1,8 @@
 ---
 title: "Dispatch setup"
-description: "Details on how to setup the dispatch order for macros"
+description: "Macro dispatch mechanism in dbt packages for behavioral data processing across different warehouses."
+schema: "TechArticle"
+keywords: ["DBT Dispatch", "Macro Dispatch", "Function Dispatch", "DBT Routing", "Macro Selection", "DBT Framework"]
 sidebar_position: 30
 ---
 

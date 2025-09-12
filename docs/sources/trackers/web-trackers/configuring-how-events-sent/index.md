@@ -1,5 +1,8 @@
 ---
 title: "Configuring how events are sent"
+description: "Configure event transmission settings in web trackers for optimal behavioral data delivery."
+schema: "TechArticle"
+keywords: ["Event Configuration", "Transport Config", "Web Analytics", "Event Sending", "Browser Config", "Analytics Setup"]
 date: "2021-04-07"
 sidebar_position: 2750
 ---

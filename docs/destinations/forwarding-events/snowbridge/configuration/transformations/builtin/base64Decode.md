@@ -1,6 +1,8 @@
 ---
 title: "base64Decode"
-description: "Base64 decodes the message's data."
+description: "Decode Base64-encoded behavioral event data using built-in Snowbridge transformation functions."
+schema: "TechArticle"
+keywords: ["Base64 Decode", "Data Decoding", "Binary Decoding", "String Decoding", "Decode Transform", "Data Conversion"]
 ---
 
 ```mdx-code-block

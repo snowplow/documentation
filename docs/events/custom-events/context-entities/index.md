@@ -1,5 +1,8 @@
 ---
 title: "Context entities"
+description: "Add context entities to behavioral events for rich contextual information and enhanced analytics."
+schema: "TechArticle"
+keywords: ["Context Entities", "Event Context", "Entity Data", "Context Data", "Event Entities", "Contextual Data"]
 ---
 
 ```mdx-code-block

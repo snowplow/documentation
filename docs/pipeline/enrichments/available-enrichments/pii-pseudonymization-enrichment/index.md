@@ -1,5 +1,8 @@
 ---
 title: "PII pseudonymization enrichment"
+description: "Implement PII pseudonymization to protect sensitive user data while maintaining behavioral analytics capabilities."
+schema: "TechArticle"
+keywords: ["PII Pseudonymization", "Privacy Protection", "Data Anonymization", "GDPR Compliance", "Personal Data", "Privacy Enhancement"]
 sidebar_position: 15
 sidebar_label: PII pseudonymization
 ---

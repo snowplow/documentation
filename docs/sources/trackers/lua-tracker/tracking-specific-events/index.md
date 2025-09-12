@@ -1,5 +1,8 @@
 ---
 title: "Tracking events"
+description: "Track specific behavioral events using Lua tracker in embedded systems and gaming applications."
+schema: "TechArticle"
+keywords: ["Lua Events", "Event Tracking", "Lua Analytics", "Game Events", "Scripting Events", "Custom Events"]
 date: "2020-02-26"
 sidebar_position: 40
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Tracking specific client-side properties"
+description: "Track client-side properties using Java tracker version 0.12 for enhanced behavioral context."
+schema: "TechArticle"
+keywords: ["Java V0.12", "Legacy Properties", "Previous Version", "Client Properties", "Deprecated Version", "Legacy Context"]
 date: "2022-03-24"
 sidebar_position: 40
 ---

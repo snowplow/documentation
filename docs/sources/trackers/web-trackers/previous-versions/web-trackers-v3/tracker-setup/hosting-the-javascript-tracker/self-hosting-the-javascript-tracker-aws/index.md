@@ -1,5 +1,7 @@
 ---
 title: "Self Hosting the JavaScript Tracker on AWS"
+description: "Self-host JavaScript tracker on AWS using web trackers v3 for behavioral event infrastructure."
+schema: "TechArticle"
 sidebar_position: 100
 ---
 

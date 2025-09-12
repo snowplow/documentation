@@ -88,7 +88,9 @@ snowplow('trackConsentGranted', {
   id: '1234',
   version: '5',
   name: 'consent_document',
-  description: 'a document granting consent',
+description: "Track original GDPR consent using web trackers v3 for behavioral privacy compliance analytics."
+schema: "TechArticle"
+keywords: ["Web V3 Original Consent", "Original Consent", "Legacy Consent", "Traditional Consent", "Old Consent", "Classic GDPR"]
   expiry: '2020-11-21T08:00:00.000Z'
 });
 ```
@@ -101,7 +103,6 @@ trackConsentGranted({
   id: '1234',
   version: '5',
   name: 'consent_document',
-  description: 'a document granting consent',
   expiry: '2020-11-21T08:00:00.000Z'
 });
 ```
@@ -136,7 +137,6 @@ snowplow('trackConsentWithdrawn', {
   id: '1234',
   version: '5',
   name: 'consent_document',
-  description: 'a document withdrawing consent'
 });
 ```
 
@@ -149,7 +149,6 @@ trackConsentWithdrawn({
   id: '1234',
   version: '5',
   name: 'consent_document',
-  description: 'a document withdrawing consent'
 });
 ```
 
@@ -196,7 +195,6 @@ snowplow('trackConsentGranted',
   id: '1234',
   version: '5',
   name: 'consent_document',
-  description: 'a document granting consent',
   expiry: '2020-11-21T08:00:00.000Z'
 );
 ```
@@ -209,7 +207,6 @@ trackConsentGranted({
   id: '1234',
   version: '5',
   name: 'consent_document',
-  description: 'a document granting consent',
   expiry: '2020-11-21T08:00:00.000Z'
 });
 ```

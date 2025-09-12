@@ -1,5 +1,8 @@
 ---
 title: "2.0.0 upgrade guide"
+description: "BigQuery Loader upgrade guide for version 2.0.0 with major behavioral data loading enhancements."
+schema: "TechArticle"
+keywords: ["BigQuery Upgrade", "V2.0.0 Upgrade", "Loader Migration", "BigQuery Migration", "Version Upgrade", "Breaking Changes"]
 sidebar_position: -20
 ---
 

@@ -1,5 +1,8 @@
 ---
 title: "Initialization"
+description: "Initialize Scala tracker for behavioral event tracking in functional programming applications."
+schema: "TechArticle"
+keywords: ["Scala Initialization", "Scala Init", "Scala Setup", "Scala Configuration", "JVM Analytics", "Functional Programming"]
 date: "2022-9-15"
 sidebar_position: 10
 ---

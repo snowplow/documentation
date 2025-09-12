@@ -1,6 +1,8 @@
 ---
 title: "Passthrough Fields"
-description: "Details for how to pass additional fields through to the derived tables."
+description: "Configure passthrough fields in dbt packages to include additional behavioral data columns."
+schema: "TechArticle"
+keywords: ["Passthrough Fields", "Custom Fields", "Field Passthrough", "Additional Columns", "Field Extension", "Custom Data"]
 sidebar_position: 20
 ---
 ```mdx-code-block

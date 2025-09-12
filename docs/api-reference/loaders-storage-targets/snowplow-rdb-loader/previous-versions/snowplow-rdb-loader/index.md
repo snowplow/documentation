@@ -1,5 +1,7 @@
 ---
 title: "RDB Loader 2.x.x"
+description: "Previous version of Snowplow RDB Loader for behavioral data transformation and relational database loading."
+schema: "TechArticle"
 date: "2020-03-05"
 sidebar_position: 0
 ---

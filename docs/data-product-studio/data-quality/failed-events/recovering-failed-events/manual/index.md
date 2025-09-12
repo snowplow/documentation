@@ -5,7 +5,9 @@ sidebar_position: 40
 sidebar_custom_props:
   offerings:
     - community
-description: "Low level tooling for manual event recovery in Community Edition."
+description: "Manual workflows for recovering failed behavioral events and restoring data quality in your Snowplow pipeline."
+schema: "TechArticle"
+keywords: ["Manual Recovery", "Event Recovery", "Failed Events", "Data Recovery", "Manual Process", "Event Repair"]
 ---
 
 Snowplow pipelines are "non-lossy", this means if something is wrong with an event during any part of the pipeline, the event is stored in a separate storage environment rather than just discarded. See the [failed events section](/docs/fundamentals/failed-events/index.md) for more information on the types of failures that may occur.

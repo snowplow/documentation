@@ -1,5 +1,8 @@
 ---
 title: "Initialisation"
+description: "Initialize C tracker for behavioral event tracking in embedded systems and native applications."
+schema: "TechArticle"
+keywords: ["C Initialization", "Tracker Init", "C Setup", "Native Init", "C Configuration", "System Init"]
 date: "2020-02-25"
 sidebar_position: 20
 ---

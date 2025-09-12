@@ -1,5 +1,8 @@
 ---
 title: "Application error events"
+description: "Application error events tracked automatically by Snowplow for behavioral analytics debugging."
+schema: "TechArticle"
+keywords: ["App Errors", "Error Events", "Exception Events", "Error Analytics", "Crash Analytics", "Error Tracking"]
 ---
 
 ```mdx-code-block

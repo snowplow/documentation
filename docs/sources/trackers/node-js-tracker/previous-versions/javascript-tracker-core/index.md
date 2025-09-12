@@ -1,5 +1,8 @@
 ---
 title: "Javascript Tracker Core"
+description: "JavaScript tracker core library for shared behavioral event tracking functionality."
+schema: "TechArticle"
+keywords: ["JavaScript Core", "Tracker Core", "Core Library", "Core Components", "Base Library", "Foundation Library"]
 date: "2020-02-26"
 sidebar_position: 400
 ---

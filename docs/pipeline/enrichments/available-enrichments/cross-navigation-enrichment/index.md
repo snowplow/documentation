@@ -1,5 +1,8 @@
 ---
 title: "Cross Navigation Enrichment"
+description: "Track user navigation patterns across domains and subdomains for comprehensive cross-site behavioral analysis."
+schema: "TechArticle"
+keywords: ["Cross Navigation", "Navigation Analysis", "User Journey", "Session Flow", "Page Flow", "Navigation Tracking"]
 sidebar_position: 5
 sidebar_label: Cross Navigation
 ---

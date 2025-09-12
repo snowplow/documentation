@@ -1,5 +1,8 @@
 ---
 title: "HTTP Request Tag for GTM SS"
+description: "Configure HTTP request tags in Google Tag Manager Server-Side for behavioral event forwarding workflows."
+schema: "TechArticle"
+keywords: ["GTM HTTP Tag", "Server Side", "HTTP Request", "Tag Manager", "GTM Integration", "Server Side Tags"]
 date: "2022-01-06"
 sidebar_position: 700
 ---

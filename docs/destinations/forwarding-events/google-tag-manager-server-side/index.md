@@ -1,5 +1,8 @@
 ---
 title: "Google Tag Manager Server Side"
+description: "Forward behavioral events through Google Tag Manager Server-Side for enhanced privacy and performance."
+schema: "TechArticle"
+keywords: ["GTM Server Side", "Google Tag Manager", "Server Side", "Tag Manager", "GTM Integration", "Server Side Tagging"]
 date: "2021-11-24"
 sidebar_position: 10
 ---

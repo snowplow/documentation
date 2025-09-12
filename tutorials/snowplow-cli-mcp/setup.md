@@ -1,6 +1,9 @@
 ---
 position: 2
 title: Installation and setup
+description: "Set up Snowplow CLI with Model Context Protocol for advanced behavioral data management automation."
+schema: "HowTo"
+keywords: ["CLI MCP", "MCP Setup", "CLI Configuration", "MCP Integration", "Command Line", "MCP Tutorial"]
 ---
 
 To use the MCP tools with your AI assistant, you'll need to install the Snowplow CLI and configure your chosen MCP client. This guide walks you through both steps.

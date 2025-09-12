@@ -1,5 +1,8 @@
 ---
 title: "Iglu Server configuration reference"
+description: "Complete API reference for Iglu Server schema registry endpoints and behavioral data structure management."
+schema: "TechArticle"
+keywords: ["Iglu Reference", "Server Reference", "Schema Registry", "API Reference", "Iglu API", "Registry API"]
 date: "2021-08-03"
 sidebar_position: 0
 ---

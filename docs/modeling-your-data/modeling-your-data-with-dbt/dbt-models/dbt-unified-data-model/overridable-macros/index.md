@@ -1,7 +1,9 @@
 ---
 title: "Overridable Macros"
 sidebar_position: 100
-description: "Overridable macros in the Unified package"
+description: "Customizable macros in dbt unified model for flexible behavioral data transformation workflows."
+schema: "TechArticle"
+keywords: ["DBT Macros", "Custom Macros", "Overridable Functions", "DBT Customization", "Macro Overrides", "Custom Logic"]
 hide_title: true
 ---
 

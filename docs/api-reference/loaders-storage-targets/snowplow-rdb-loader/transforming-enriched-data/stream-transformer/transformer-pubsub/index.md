@@ -1,5 +1,8 @@
 ---
 title: "Transformer Pubsub"
+description: "Transform behavioral data using Google Pub/Sub streams in RDB Loader processing workflows."
+schema: "TechArticle"
+keywords: ["PubSub Transformer", "Google PubSub", "Stream Transform", "GCP Processing", "Real Time", "Cloud Processing"]
 date: "2022-10-13"
 sidebar_position: 20
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Custom SQL enrichment"
+description: "Enrich events with database lookups using custom SQL queries to add business context and reference data."
+schema: "TechArticle"
+keywords: ["SQL Enrichment", "Custom SQL", "Database Query", "SQL Logic", "Data Query", "SQL Processing"]
 sidebar_position: 12
 sidebar_label: Custom SQL
 ---

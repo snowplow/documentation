@@ -1,5 +1,8 @@
 ---
 title: "Configuring how events are sent"
+description: "Configure Roku tracker settings for optimal behavioral event collection in streaming applications."
+schema: "TechArticle"
+keywords: ["Roku Configuration", "Roku Setup", "TV Configuration", "Roku Analytics", "OTT Setup", "Connected TV"]
 date: "2021-11-16"
 sidebar_position: 4000
 ---

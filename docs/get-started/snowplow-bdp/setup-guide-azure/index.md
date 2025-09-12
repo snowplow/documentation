@@ -1,5 +1,8 @@
 ---
 title: "BDP Enterprise on Azure"
+description: "Deploy Snowplow Behavioral Data Platform on Microsoft Azure for enterprise behavioral analytics infrastructure."
+schema: "TechArticle"
+keywords: ["BDP Azure", "Azure Setup", "BDP Setup", "Cloud Setup", "Azure Guide", "Enterprise Setup"]
 sidebar_position: 30
 ---
 

@@ -1,7 +1,9 @@
 ---
 title: "Configuring enrichments"
 sidebar_position: 3
-description: "How to add enrichments to Snowplow Micro."
+description: "Configure enrichments in Snowplow Micro for local testing of behavioral data processing logic."
+schema: "TechArticle"
+keywords: ["Micro Enrichments", "Testing Enrichments", "Local Enrichments", "Enrichment Testing", "Development Setup", "Micro Configuration"]
 ---
 
 ```mdx-code-block

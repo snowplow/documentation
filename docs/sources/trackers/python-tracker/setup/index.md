@@ -1,5 +1,8 @@
 ---
 title: "Setup"
+description: "Set up Python tracker for server-side behavioral event collection in Python applications."
+schema: "TechArticle"
+keywords: ["Python Setup", "Python Configuration", "Python Analytics", "Server Python", "Python Integration", "Backend Python"]
 date: "2023-06-14"
 sidebar_position: 10
 ---

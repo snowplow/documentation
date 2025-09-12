@@ -1,6 +1,8 @@
 ---
 title: "Modeling your data with dbt"
-description: "Information for our dbt packages including quickstarts, configurations, and building custom models."
+description: "Model behavioral data using dbt (data build tool) for scalable analytics transformations and data warehousing."
+schema: "TechArticle"
+keywords: ["DBT Models", "Data Transformation", "SQL Models", "Analytics Engineering", "DBT Package", "Data Modeling"]
 sidebar_position: 1
 ---
 

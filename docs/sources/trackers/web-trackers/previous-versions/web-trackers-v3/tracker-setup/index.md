@@ -1,5 +1,7 @@
 ---
 title: "Tracker setup"
+description: "Set up web trackers v3 for behavioral event collection in web applications."
+schema: "TechArticle"
 date: "2021-03-31"
 sidebar_position: 1000
 ---

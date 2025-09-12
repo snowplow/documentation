@@ -1,5 +1,8 @@
 ---
 title: "2.0.0 upgrade guide"
+description: "S3 Loader upgrade guide for version 2.0.0 with major behavioral data loading enhancements."
+schema: "TechArticle"
+keywords: ["S3 Upgrade", "V2.0.0 Upgrade", "Loader Migration", "S3 Migration", "Version Upgrade", "Breaking Changes"]
 date: "2021-07-05"
 sidebar_position: 11
 ---

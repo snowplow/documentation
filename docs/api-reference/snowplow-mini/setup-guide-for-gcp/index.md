@@ -1,5 +1,8 @@
 ---
 title: "Setup Guide for GCP"
+description: "Set up Snowplow Mini on Google Cloud Platform for lightweight behavioral data pipeline testing."
+schema: "TechArticle"
+keywords: ["Mini GCP", "Mini Setup", "Google Cloud", "Testing Environment", "Development Platform", "GCP Mini"]
 date: "2021-05-11"
 sidebar_position: 2
 ---

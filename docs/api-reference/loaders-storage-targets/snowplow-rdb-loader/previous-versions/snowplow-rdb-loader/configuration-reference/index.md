@@ -1,5 +1,8 @@
 ---
 title: "RDB loader configuration reference"
+description: "Configuration reference for legacy RDB Loader behavioral data processing and loading settings."
+schema: "TechArticle"
+keywords: ["RDB Legacy Config", "Legacy Configuration", "RDB Configuration", "Previous Config", "Deprecated Config", "Old Settings"]
 date: "2021-06-08"
 sidebar_position: 380
 ---

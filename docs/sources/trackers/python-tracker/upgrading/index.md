@@ -1,5 +1,7 @@
 ---
 title: "Upgrading to Newer Versions"
+description: "Upgrade guide for Python tracker with behavioral event tracking improvements and new features."
+schema: "TechArticle"
 sidebar_position: 100
 ---
 

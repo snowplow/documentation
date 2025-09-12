@@ -2,7 +2,9 @@
 title: "Tracking your first events"
 sidebar_position: 5
 sidebar_label: "Track events"
-description: "Tracking your first Snowplow events"
+description: "Implement behavioral event tracking across web, mobile, and server-side applications using Snowplow trackers."
+schema: "TechArticle"
+keywords: ["Event Tracking", "Analytics Tracking", "Getting Started", "Data Collection", "Tracking Setup", "Behavioral Tracking"]
 ---
 
 ```mdx-code-block

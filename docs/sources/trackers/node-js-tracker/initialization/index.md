@@ -1,5 +1,8 @@
 ---
 title: "Installation and initialization"
+description: "Initialize Node.js tracker for server-side behavioral event collection in JavaScript applications."
+schema: "TechArticle"
+keywords: ["Node.js Init", "Server Init", "NodeJS Setup", "Backend Setup", "Server Analytics", "Tracker Init"]
 date: "2021-04-07"
 sidebar_position: 1
 ---

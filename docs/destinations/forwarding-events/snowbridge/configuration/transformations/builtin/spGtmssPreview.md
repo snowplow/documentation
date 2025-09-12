@@ -1,6 +1,8 @@
 ---
 title: "spGtmssPreview"
-description: "Extracts a value from the x-gtm-server-preview field and attaches it as the GTM SS preview mode header."
+description: "Transform behavioral events for Google Tag Manager Server-Side preview and debugging workflows."
+schema: "TechArticle"
+keywords: ["GTM Preview", "Server Side", "GTM Processing", "Tag Manager", "Preview Mode", "GTM Integration"]
 ---
 
 ```mdx-code-block

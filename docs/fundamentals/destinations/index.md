@@ -1,7 +1,9 @@
 ---
 title: "Destinations"
 sidebar_position: 6
-description: "Different options for storing and forwarding Snowplow data"
+description: "Overview of Snowplow destination options for streaming behavioral data to warehouses, lakes, and real-time applications."
+schema: "TechArticle"
+keywords: ["Data Destinations", "Event Storage", "Warehouse Loading", "Data Export", "Pipeline Output", "Analytics Storage"]
 ---
 
 ![](images/usecasearch.png)

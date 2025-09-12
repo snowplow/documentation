@@ -1,5 +1,7 @@
 ---
 title: "Previous versions"
+description: "Previous versions of web trackers for behavioral event collection in web applications."
+schema: "TechArticle"
 date: "2021-04-12"
 sidebar_position: 5000
 sidebar_custom_props:

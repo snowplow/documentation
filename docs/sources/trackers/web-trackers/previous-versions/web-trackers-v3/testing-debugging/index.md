@@ -1,5 +1,7 @@
 ---
 title: "Testing, debugging and troubleshooting"
+description: "Test and debug web trackers v3 implementations for accurate behavioral event collection."
+schema: "TechArticle"
 date: "2021-04-07"
 sidebar_position: 2950
 ---

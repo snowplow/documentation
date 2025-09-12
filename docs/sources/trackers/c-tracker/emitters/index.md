@@ -1,5 +1,8 @@
 ---
 title: "Emitters"
+description: "Configure event emitters in C tracker for reliable behavioral data transmission from native apps."
+schema: "TechArticle"
+keywords: ["C Emitters", "Event Sending", "C Configuration", "Transport Layer", "Native Analytics", "C SDK"]
 date: "2020-02-25"
 sidebar_position: 60
 ---

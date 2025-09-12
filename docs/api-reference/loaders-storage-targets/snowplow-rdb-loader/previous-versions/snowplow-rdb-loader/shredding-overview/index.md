@@ -1,5 +1,8 @@
 ---
 title: "Shredding Overview"
+description: "Overview of data shredding process in RDB Loader for behavioral event transformation and loading."
+schema: "TechArticle"
+keywords: ["RDB Shredding", "Data Shredding", "Legacy RDB", "Data Processing", "Event Processing", "Data Transformation"]
 date: "2020-03-06"
 sidebar_position: 10
 ---

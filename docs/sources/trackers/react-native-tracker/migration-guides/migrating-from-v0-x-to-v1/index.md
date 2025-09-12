@@ -1,5 +1,8 @@
 ---
 title: "Migrating from v0 to v1"
+description: "Migration guide for upgrading React Native tracker from version 0.x to 1 with foundational improvements."
+schema: "TechArticle"
+keywords: ["React Native Migration", "V0 to V1", "Version Migration", "Upgrade Guide", "Migration Guide", "Breaking Changes"]
 date: "2021-08-09"
 sidebar_position: 200
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Tracking events"
+description: "Track behavioral events in Rust applications using Snowplow's systems programming tracker SDK."
+schema: "TechArticle"
+keywords: ["Rust Events", "Event Tracking", "Rust Analytics", "Behavior Tracking", "Event Collection", "Analytics Events"]
 date: "2022-10-24"
 sidebar_position: 3000
 ---

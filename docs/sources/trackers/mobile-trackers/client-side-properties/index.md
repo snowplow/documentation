@@ -1,5 +1,8 @@
 ---
 title: "Tracking specific client-side properties"
+description: "Configure client-side properties in mobile trackers for enhanced behavioral event context."
+schema: "TechArticle"
+keywords: ["Mobile Properties", "Device Properties", "Client Data", "Mobile Context", "Device Information", "App Properties"]
 date: "2022-08-30"
 sidebar_position: 30
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Initialization options"
+description: "Configure browser tracker v3 initialization options for optimal behavioral event collection."
+schema: "TechArticle"
+keywords: ["Browser V3 Init", "Initialization Options", "Legacy Init", "Setup Options", "Configuration Options", "Init Config"]
 date: "2021-03-31"
 sidebar_position: 2000
 ---

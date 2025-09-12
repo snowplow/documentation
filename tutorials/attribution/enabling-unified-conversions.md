@@ -1,5 +1,8 @@
 ---
 title: Enabling Conversions within Unified Package
+description: "Enable unified conversions tracking for comprehensive behavioral attribution modeling across platforms."
+schema: "HowTo"
+keywords: ["Unified Conversions", "Attribution Conversions", "Cross Platform", "Conversion Attribution", "Unified Attribution", "Marketing Conversions"]
 position: 3
 ---
 

@@ -1,5 +1,8 @@
 ---
 title: "Sessions"
+description: "Track user sessions and engagement duration using web trackers for behavioral analytics."
+schema: "TechArticle"
+keywords: ["Session Tracking", "User Sessions", "Session Analytics", "Session Management", "User Activity", "Session Events"]
 sidebar_position: 35
 ---
 

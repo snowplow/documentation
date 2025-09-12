@@ -1,5 +1,8 @@
 ---
 title: "Managing data structures via the API"
+description: "REST API endpoints for programmatically managing data structures and automating schema governance workflows."
+schema: "TechArticle"
+keywords: ["Schema API", "Management API", "REST API", "API Integration", "Programmatic Access", "API Endpoints"]
 sidebar_label: "Data structures API"
 sidebar_position: 3
 sidebar_custom_props:

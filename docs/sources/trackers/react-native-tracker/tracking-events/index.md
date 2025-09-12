@@ -1,5 +1,8 @@
 ---
 title: "Tracking out-of-the-box events"
+description: "Track behavioral events in React Native applications for mobile analytics and user insights."
+schema: "TechArticle"
+keywords: ["React Native Events", "Event Tracking", "Mobile Events", "App Analytics", "Event Collection", "Mobile Analytics"]
 date: "2021-08-06"
 sidebar_position: 20
 ---

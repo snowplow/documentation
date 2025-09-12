@@ -1,6 +1,8 @@
 ---
 title: "spEnrichedFilterContext"
-description: "Filters messages based on a regex match against a field in an entity."
+description: "Filter behavioral events by context entities using built-in Snowbridge transformation capabilities."
+schema: "TechArticle"
+keywords: ["Context Filter", "Event Context", "Context Processing", "Entity Filtering", "Context Data", "Event Entities"]
 ---
 
 ```mdx-code-block

@@ -1,5 +1,8 @@
 ---
 title: "Asynchronous runs"
+description: "Execute asynchronous dbt runs for scalable behavioral data transformation processing."
+schema: "TechArticle"
+keywords: ["Async DBT", "Parallel Processing", "DBT Performance", "Concurrent Runs", "Async Models", "Performance Optimization"]
 sidebar_position: 60
 ---
 

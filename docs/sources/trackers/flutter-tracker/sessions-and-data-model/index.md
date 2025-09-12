@@ -1,5 +1,8 @@
 ---
 title: "Sessions and data model"
+description: "Manage user sessions and data models in Flutter tracker for behavioral analytics."
+schema: "TechArticle"
+keywords: ["Flutter Sessions", "Data Model", "Flutter Analytics", "Session Management", "Flutter Data", "App Sessions"]
 date: "2022-01-31"
 sidebar_position: 5000
 ---

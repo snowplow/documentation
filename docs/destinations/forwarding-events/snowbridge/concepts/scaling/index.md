@@ -1,5 +1,8 @@
 ---
 title: "Scaling"
+description: "Scaling strategies and performance optimization for high-volume behavioral event forwarding with Snowbridge."
+schema: "TechArticle"
+keywords: ["Scaling Concepts", "Performance Scaling", "Load Management", "Capacity Planning", "Scale Strategy", "Throughput Scaling"]
 sidebar_position: 150
 ---
 

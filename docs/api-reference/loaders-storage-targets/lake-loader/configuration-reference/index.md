@@ -1,5 +1,8 @@
 ---
 title: "Lake Loader configuration reference"
+description: "Complete configuration reference for Lake Loader behavioral data loading settings and optimization."
+schema: "TechArticle"
+keywords: ["Lake Configuration", "Loader Config", "Lake Setup", "Storage Config", "Lake Settings", "Data Lake Config"]
 sidebar_label: "Configuration reference"
 sidebar_position: 1
 ---

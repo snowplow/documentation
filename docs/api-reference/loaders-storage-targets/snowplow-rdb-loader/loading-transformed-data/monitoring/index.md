@@ -1,5 +1,8 @@
 ---
 title: "Monitoring"
+description: "Monitor RDB Loader performance and behavioral data loading health into relational databases."
+schema: "TechArticle"
+keywords: ["RDB Monitoring", "Loader Monitoring", "Pipeline Monitoring", "ETL Monitoring", "Data Monitoring", "Loading Metrics"]
 date: "2022-04-05"
 sidebar_position: 400
 ---

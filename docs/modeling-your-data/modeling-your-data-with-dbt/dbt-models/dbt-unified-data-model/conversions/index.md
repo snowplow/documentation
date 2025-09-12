@@ -1,5 +1,8 @@
 ---
 title: "Conversions"
+description: "Conversion tracking in dbt unified model for cross-platform behavioral optimization analytics."
+schema: "TechArticle"
+keywords: ["Unified Conversions", "Conversion Analytics", "Cross Platform", "Unified DBT", "Conversion Models", "Goal Analytics"]
 sidebar_position: 100
 hide_title: true
 ---

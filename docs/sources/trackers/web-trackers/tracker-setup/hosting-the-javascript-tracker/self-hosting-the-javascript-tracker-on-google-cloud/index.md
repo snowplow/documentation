@@ -1,5 +1,8 @@
 ---
 title: "Self Hosting the JavaScript Tracker on GCP"
+description: "Self-host JavaScript tracker on Google Cloud Platform for behavioral event collection infrastructure."
+schema: "TechArticle"
+keywords: ["GCP Hosting", "Google Cloud", "Self Hosting", "JavaScript Hosting", "Cloud Hosting", "GCP CDN"]
 date: "2020-04-28"
 sidebar_position: 200
 ---

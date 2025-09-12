@@ -1,5 +1,8 @@
 ---
 title: "RDB Loader 4.0.x"
+description: "RDB Loader version 4.0.x configuration reference for enhanced behavioral data loading capabilities."
+schema: "TechArticle"
+keywords: ["RDB Loader V4.0.x", "Legacy RDB", "Previous Version", "Deprecated Loader", "Legacy Configuration", "Old Version"]
 date: "2022-10-17"
 sidebar_position: 100
 ---

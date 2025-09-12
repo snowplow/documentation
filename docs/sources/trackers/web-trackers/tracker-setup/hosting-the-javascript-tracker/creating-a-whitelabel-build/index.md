@@ -1,5 +1,8 @@
 ---
 title: "Creating a white-label build"
+description: "Create custom whitelabel builds of JavaScript tracker for behavioral event collection branding."
+schema: "TechArticle"
+keywords: ["White Label", "Custom Build", "Branded Tracker", "Custom Tracker", "White Label Build", "Custom Branding"]
 date: "2022-09-14"
 sidebar_position: 4000
 ---

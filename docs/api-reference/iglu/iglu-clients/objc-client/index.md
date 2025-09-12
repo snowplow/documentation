@@ -1,5 +1,8 @@
 ---
 title: "ObjC client"
+description: "Iglu Objective-C client API reference for behavioral data schema resolution in iOS applications."
+schema: "TechArticle"
+keywords: ["Objective-C Client", "iOS Client", "Iglu iOS", "Mobile Registry", "iOS Schema", "Objective-C Registry"]
 date: "2021-03-26"
 sidebar_position: 30
 ---

@@ -1,6 +1,9 @@
 ---
 position: 2
 title: Tracking Screen views
+description: "Track screen view events in Android applications for mobile behavioral analytics and user journey analysis."
+schema: "HowTo"
+keywords: ["Android Screens", "Screen Views", "Mobile Screens", "Android Navigation", "Screen Analytics", "Mobile Tracking"]
 ---
 
 In a Jetpack Compose app, screen views aren't tracked automatically. Screen view tracking can be manually added to every screen, but it’s more efficient to add a navigation listener. Here's how to track screen views using the navigation component:

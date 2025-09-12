@@ -2,7 +2,9 @@
 title: "Running your first data models"
 sidebar_position: 7
 sidebar_label: "Run a data model"
-description: "Using a data model to aggregate your data"
+description: "Introduction to data modeling concepts and approaches for transforming behavioral events into analytics insights."
+schema: "TechArticle"
+keywords: ["Data Modeling", "Getting Started", "Model Introduction", "Analytics Modeling", "Data Transformation", "Model Basics"]
 ---
 
 ```mdx-code-block

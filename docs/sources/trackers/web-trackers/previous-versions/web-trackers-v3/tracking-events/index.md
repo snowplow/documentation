@@ -1,5 +1,6 @@
 ---
 title: "Tracking data out-of-the-box"
+description: "Track behavioral events using web trackers v3 for comprehensive website analytics."
 date: "2022-08-30"
 sidebar_position: 2500
 ---
@@ -83,7 +84,7 @@ For example, here is a page view with an additional custom context entity.
 ```javascript
 snowplow('trackPageView', {
   context: [{
-    schema: "iglu:com.example_company/page/jsonschema/1-2-1",
+schema: "TechArticle"
     data: {
       pageType: 'test',
       lastUpdated: new Date(2021,04,01)
@@ -97,7 +98,7 @@ snowplow('trackPageView', {
 ```javascript
 trackPageView({
   context: [{
-    schema: 'iglu:com.example_company/page/jsonschema/1-2-1',
+schema: "TechArticle"
     data: {
       pageType: 'test',
       lastUpdated: new Date(2021,04,01)
@@ -468,7 +469,7 @@ E.g. to set a true timestamp for a self-describing event:
 ```javascript
 snowplow('trackSelfDescribingEvent', {
   event: {
-    schema: 'iglu:com.acme_company/viewed_product/jsonschema/2-0-0',
+schema: "TechArticle"
     data: {
         productId: 'ASO01043',
         category: 'Dresses',
@@ -489,7 +490,7 @@ snowplow('trackSelfDescribingEvent', {
 ```javascript
 trackSelfDescribingEvent({
   event: {
-    schema: 'iglu:com.acme_company/viewed_product/jsonschema/2-0-0',
+schema: "TechArticle"
     data: {
         productId: 'ASO01043',
         category: 'Dresses',

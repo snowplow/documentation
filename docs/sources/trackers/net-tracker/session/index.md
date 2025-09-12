@@ -1,5 +1,8 @@
 ---
 title: "Session"
+description: "Manage user sessions in .NET tracker for behavioral analytics and engagement tracking."
+schema: "TechArticle"
+keywords: [".NET Sessions", "Session Tracking", "User Sessions", ".NET Analytics", "Session Management", "Desktop Sessions"]
 date: "2020-02-26"
 sidebar_position: 60
 ---

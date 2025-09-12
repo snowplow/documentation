@@ -1,5 +1,8 @@
 ---
 title: "Contributor License Agreement"
+description: "Contributor License Agreement for participating in Snowplow behavioral data platform open-source development."
+schema: "TechArticle"
+keywords: ["Contributor License", "CLA Agreement", "Contribution Terms", "Developer Agreement", "Open Source", "Contributor Agreement"]
 date: "2020-11-24"
 sidebar_position: 0
 ---

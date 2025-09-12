@@ -1,5 +1,8 @@
 ---
 title: "Creating a tracking plan with event specifications"
+description: "Create and manage tracking plans to standardize behavioral event collection across teams and applications."
+schema: "TechArticle"
+keywords: ["Tracking Plans", "Event Planning", "Analytics Plan", "Event Specification", "Tracking Strategy", "Event Documentation"]
 sidebar_label: "Creating a tracking plan"
 sidebar_position: 2
 sidebar_custom_props:

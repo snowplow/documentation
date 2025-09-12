@@ -1,5 +1,8 @@
 ---
 title: "Configuring the Collector"
+description: "Configure and deploy Snowplow Collector to receive and validate behavioral events from trackers and webhooks."
+schema: "TechArticle"
+keywords: ["Event Collector", "Data Collection", "Tracking Endpoint", "Event Ingestion", "Data Intake", "Collection Pipeline"]
 sidebar_position: 1
 sidebar_label: "Collector"
 ---

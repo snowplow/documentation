@@ -1,5 +1,8 @@
 ---
 title: "Redshift loader"
+description: "Load behavioral data into Amazon Redshift for high-performance analytics and data warehousing."
+schema: "TechArticle"
+keywords: ["Redshift Loader", "Amazon Redshift", "Data Warehouse", "AWS Analytics", "Redshift Integration", "Cloud Warehouse"]
 date: "2022-04-05"
 sidebar_position: 10
 ---

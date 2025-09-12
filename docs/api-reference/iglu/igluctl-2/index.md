@@ -1,5 +1,8 @@
 ---
 title: "Igluctl"
+description: "Igluctl command-line tool for managing behavioral data schemas and Iglu repository operations."
+schema: "TechArticle"
+keywords: ["Igluctl", "Schema CLI", "Registry CLI", "Command Line", "Schema Tools", "CLI Tool"]
 sidebar_position: 10
 ---
 

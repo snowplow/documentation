@@ -1,5 +1,8 @@
 ---
 title: "Utilities"
+description: "Utility functions and helper methods for Unity tracker behavioral event collection implementation."
+schema: "TechArticle"
+keywords: ["Unity Utilities", "Game Utilities", "Helper Functions", "Unity Tools", "Game Tools", "Unity Helpers"]
 date: "2020-02-26"
 sidebar_position: 90
 ---

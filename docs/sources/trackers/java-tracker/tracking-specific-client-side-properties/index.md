@@ -1,5 +1,8 @@
 ---
 title: "Tracking specific client-side properties"
+description: "Track client-side properties using Java tracker for enhanced behavioral event context."
+schema: "TechArticle"
+keywords: ["Java Properties", "Client Properties", "Java Context", "Client Data", "Java Analytics", "Context Data"]
 date: "2022-03-24"
 sidebar_position: 40
 ---

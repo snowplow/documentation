@@ -1,5 +1,8 @@
 ---
 title: "Iglu Central Setup"
+description: "Set up connection to Iglu Central for community behavioral data schemas and structures."
+schema: "TechArticle"
+keywords: ["Iglu Central Setup", "Central Registry", "Public Registry", "Registry Setup", "Central Repository", "Registry Installation"]
 date: "2021-03-26"
 sidebar_position: 50
 ---

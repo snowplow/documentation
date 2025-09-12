@@ -1,6 +1,8 @@
 ---
 title: "Snowplow optimized materialization"
-description: "Details on our optimized version of the dbt incremental materialization and how to enable it."
+description: "Optimized upsert operations in dbt packages for efficient behavioral data updates."
+schema: "TechArticle"
+keywords: ["DBT Upserts", "Data Upserts", "Optimized Updates", "Merge Operations", "Data Sync", "Incremental Updates"]
 sidebar_position: 80
 ---
 

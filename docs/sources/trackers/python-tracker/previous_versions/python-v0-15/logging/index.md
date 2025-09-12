@@ -1,5 +1,8 @@
 ---
 title: "Logging"
+description: "Configure logging in Python tracker version 0.15 for behavioral event debugging."
+schema: "TechArticle"
+keywords: ["Python V0.15", "Legacy Logging", "Previous Version", "Debug Logging", "Deprecated Logging", "Legacy Debug"]
 date: "2020-02-26"
 sidebar_position: 80
 ---

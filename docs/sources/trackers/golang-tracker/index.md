@@ -1,5 +1,8 @@
 ---
 title: "Golang Tracker"
+description: "Go tracker for server-side behavioral event collection in scalable backend applications and services."
+schema: "TechArticle"
+keywords: ["Golang Tracker", "Go Analytics", "Go SDK", "Server Analytics", "Go Tracking", "Backend Analytics"]
 sidebar_position: 170
 ---
 

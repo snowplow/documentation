@@ -1,5 +1,7 @@
 ---
 title: "Plugins"
+description: "Plugin system for web trackers v3 to enhance behavioral event collection functionality."
+schema: "TechArticle"
 date: "2021-04-07"
 sidebar_position: 2800
 ---

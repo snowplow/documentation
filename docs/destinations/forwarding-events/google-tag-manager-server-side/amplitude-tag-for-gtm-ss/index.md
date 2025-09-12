@@ -1,5 +1,8 @@
 ---
 title: "Amplitude Tag for GTM SS"
+description: "Send behavioral events to Amplitude analytics platform via Google Tag Manager Server-Side forwarding."
+schema: "TechArticle"
+keywords: ["Amplitude Tag", "Analytics Integration", "GTM Amplitude", "Product Analytics", "Event Tracking", "Analytics Tag"]
 date: "2021-11-24"
 sidebar_position: 300
 ---

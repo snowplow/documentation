@@ -1,6 +1,9 @@
 ---
 position: 1
 title: Getting started with the Snowplow MCP server for tracking design
+description: "Introduction to Snowplow CLI Model Context Protocol integration for behavioral data management workflows."
+schema: "HowTo"
+keywords: ["CLI MCP", "MCP Introduction", "Command Line", "MCP Tutorial", "CLI Integration", "Model Context"]
 ---
 
 The Snowplow CLI MCP (Model Context Protocol) tool integrates Snowplow's data structure management capabilities directly into AI assistants like Claude. This enables natural language interaction for creating, validating, and managing your Snowplow tracking plans **locally**.

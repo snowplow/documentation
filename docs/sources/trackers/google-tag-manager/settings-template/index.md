@@ -1,5 +1,8 @@
 ---
 title: Settings Template
+description: "Settings template for configuring Snowplow tracker parameters in Google Tag Manager implementations."
+schema: "TechArticle"
+keywords: ["GTM Settings", "Tag Manager", "GTM Configuration", "Settings Template", "GTM Setup", "Tag Configuration"]
 sidebar_position: 500
 ---
 

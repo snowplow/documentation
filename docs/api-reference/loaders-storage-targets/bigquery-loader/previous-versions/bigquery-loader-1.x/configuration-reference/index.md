@@ -1,5 +1,8 @@
 ---
 title: "Configuration reference"
+description: "Configuration reference for BigQuery Loader version 1.x behavioral data loading settings and parameters."
+schema: "TechArticle"
+keywords: ["BigQuery V1.x Config", "Legacy Configuration", "Previous Config", "Deprecated Config", "Legacy Settings", "Old Configuration"]
 date: "2021-10-07"
 sidebar_position: 0
 ---

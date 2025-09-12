@@ -1,6 +1,9 @@
 ---
 position: 7
 title: Create a custom Data Product
+description: "Create custom data products for specialized behavioral data collection and governance requirements."
+schema: "HowTo"
+keywords: ["Custom Data Product", "Product Creation", "Custom Analytics", "Data Product", "Product Development", "Custom DP"]
 ---
 
 As in every application, there are interactions that are important to the business and are measured in a custom way. For this application the interactions you need to measure are:

@@ -1,5 +1,7 @@
 ---
 title: "Creating your own plugins"
+description: "Create custom plugins for web trackers to extend behavioral event collection with specialized functionality."
+keywords: ["Custom Plugins", "Plugin Development", "Web Extensions", "JavaScript Plugins", "Custom Features", "Plugin Creation"]
 sidebar_position: 750
 ---
 
@@ -101,7 +103,7 @@ const myPlugin = {
       contexts: () => {
         return [
           {
-            schema: 'iglu:com.acme/my_context/jsonschema/1-0-0',
+schema: "TechArticle"
             data: {
               property: 'value',
             },
@@ -130,7 +132,7 @@ const myPlugin = {
   contexts: () => {
     return [
       {
-        schema: 'iglu:com.acme/my_context/jsonschema/1-0-0',
+schema: "TechArticle"
         data: {
           property: 'value',
         },

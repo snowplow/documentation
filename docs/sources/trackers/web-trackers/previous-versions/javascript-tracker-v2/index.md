@@ -1,5 +1,7 @@
 ---
 title: "JavaScript (tag) tracker v2"
+description: "JavaScript tracker version 2 documentation for behavioral event collection in web applications."
+schema: "TechArticle"
 sidebar_position: 2000
 ---
 

@@ -1,5 +1,8 @@
 ---
 title: "App Errors"
+description: "App errors module in legacy dbt mobile model for behavioral mobile application debugging analytics."
+schema: "TechArticle"
+keywords: ["Mobile Errors", "App Errors", "Error Analytics", "Mobile DBT", "App Analytics", "Error Models"]
 sidebar_position: 100
 hide_title: true
 ---

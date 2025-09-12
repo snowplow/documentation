@@ -1,5 +1,8 @@
 ---
 title: "Retrieve data model execution data"
+description: "Retrieve job execution data via Snowplow BDP API for behavioral data model monitoring and debugging."
+schema: "TechArticle"
+keywords: ["Job Execution", "API Data", "Execution Analytics", "Job Monitoring", "Pipeline API", "Execution Metrics"]
 sidebar_position: 3
 sidebar_label: "Retrieve job execution data"
 ---

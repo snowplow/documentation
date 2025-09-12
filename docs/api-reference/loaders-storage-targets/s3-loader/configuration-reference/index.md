@@ -1,5 +1,8 @@
 ---
 title: "S3 loader configuration reference"
+description: "Complete configuration reference for S3 Loader behavioral data loading settings and optimization."
+schema: "TechArticle"
+keywords: ["S3 Configuration", "Loader Config", "S3 Setup", "Storage Config", "AWS Configuration", "S3 Settings"]
 date: "2021-10-04"
 sidebar_position: 50
 ---

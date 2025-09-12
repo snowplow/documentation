@@ -1,5 +1,8 @@
 ---
 title: "Browser Features"
+description: "Browser features plugin for browser tracker v3 to track behavioral analytics browser capabilities."
+schema: "TechArticle"
+keywords: ["Browser V3 Features", "Browser Features", "Legacy Features", "Browser Intelligence", "Feature Detection", "Capability Detection"]
 date: "2021-04-07"
 sidebar_position: 2000
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Enrich NSQ (cloud agnostic)"
+description: "NSQ enrichment component API reference for distributed behavioral event processing workflows."
+schema: "TechArticle"
+keywords: ["Enrich NSQ", "NSQ Processing", "Message Queue", "NSQ Enrichment", "Queue Processing", "NSQ Integration"]
 sidebar_position: 35
 ---
 

@@ -1,5 +1,8 @@
 ---
 title: "Ruby Tracker"
+description: "Ruby tracker for server-side behavioral event collection in Ruby on Rails applications and services."
+schema: "TechArticle"
+keywords: ["Ruby Tracker", "Ruby Analytics", "Ruby SDK", "Server Tracking", "Ruby Integration", "Backend Analytics"]
 date: "2020-02-26"
 sidebar_position: 220
 ---

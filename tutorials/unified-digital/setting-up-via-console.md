@@ -1,5 +1,8 @@
 ---
 title: Setting up via Snowplow Console
+description: "Configure unified digital analytics through Snowplow Console for cross-platform behavioral data modeling."
+schema: "HowTo"
+keywords: ["Console Setup", "Unified Console", "Web Console", "Console Tutorial", "Unified Setup", "Console Guide"]
 position: 3
 ---
 

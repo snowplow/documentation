@@ -1,5 +1,8 @@
 ---
 title: "App & tracker information"
+description: "Application information captured automatically by Snowplow trackers for behavioral context analytics."
+schema: "TechArticle"
+keywords: ["App Information", "Application Data", "App Context", "App Analytics", "Application Context", "App Properties"]
 ---
 
 ```mdx-code-block

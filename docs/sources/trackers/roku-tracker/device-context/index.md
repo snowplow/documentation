@@ -1,5 +1,8 @@
 ---
 title: "Device info context"
+description: "Configure device context in Roku tracker for behavioral analytics with streaming device information."
+schema: "TechArticle"
+keywords: ["Roku Context", "Device Context", "TV Context", "Roku Data", "Device Information", "TV Analytics"]
 date: "2021-12-23"
 sidebar_position: 4750
 ---

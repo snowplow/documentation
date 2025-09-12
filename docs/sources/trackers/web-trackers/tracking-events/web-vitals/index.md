@@ -1,5 +1,8 @@
 ---
 title: "Core web vitals"
+description: "Track Core Web Vitals and performance metrics using web trackers for behavioral performance analytics."
+schema: "TechArticle"
+keywords: ["Web Vitals", "Performance Metrics", "Core Vitals", "Page Performance", "User Experience", "Performance Analytics"]
 sidebar_position: 95
 ---
 

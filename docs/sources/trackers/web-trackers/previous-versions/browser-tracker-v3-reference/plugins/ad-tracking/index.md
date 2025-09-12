@@ -1,5 +1,8 @@
 ---
 title: "Ad Tracking"
+description: "Ad tracking plugin for browser tracker v3 to monitor behavioral advertising analytics."
+schema: "TechArticle"
+keywords: ["Browser V3 Ads", "Ad Tracking", "Legacy Ads", "Advertisement Analytics", "Ad Events", "Marketing Analytics"]
 date: "2021-04-07"
 sidebar_position: 1000
 ---

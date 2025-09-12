@@ -1,5 +1,8 @@
 ---
 title: "Tracking Events"
+description: "Additional configuration options for Node.js tracker version 0.3.0 behavioral event settings."
+schema: "TechArticle"
+keywords: ["Node.js V0.3.0", "Legacy Configuration", "Previous Config", "Old Configuration", "Deprecated Config", "Legacy Settings"]
 date: "2020-02-26"
 sidebar_position: 400
 ---

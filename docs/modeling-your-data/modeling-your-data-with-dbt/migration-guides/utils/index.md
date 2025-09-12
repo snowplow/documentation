@@ -1,5 +1,8 @@
 ---
 title: "Utils"
+description: "Migration guide for dbt utils package with behavioral data modeling utility improvements."
+schema: "TechArticle"
+keywords: ["Utils Migration", "DBT Utils", "Utility Migration", "Helper Migration", "DBT Utilities", "Support Migration"]
 sidebar_position: 50
 ---
 

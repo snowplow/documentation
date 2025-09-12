@@ -1,5 +1,8 @@
 ---
 title: "Setting up classic alerts"
+description: "Configure traditional alert systems for monitoring failed events and maintaining behavioral data quality standards."
+schema: "TechArticle"
+keywords: ["Classic Alerts", "Legacy Alerts", "Traditional Alerts", "Alert System", "Notification System", "Alert Management"]
 date: "2021-01-14"
 sidebar_label: "Classic alerts"
 sidebar_position: 2

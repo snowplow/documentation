@@ -1,5 +1,8 @@
 ---
 title: "Batching model"
+description: "Understand Snowbridge's batching strategies for efficient behavioral event forwarding and processing."
+schema: "TechArticle"
+keywords: ["Batching Model", "Batch Processing", "Event Batching", "Batch Strategy", "Performance Optimization", "Throughput Management"]
 date: "2022-10-20"
 sidebar_position: 500
 ---

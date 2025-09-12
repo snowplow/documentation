@@ -1,5 +1,8 @@
 ---
 title: "Glossary"
+description: "Comprehensive glossary of behavioral data analytics terms, Snowplow concepts, and event tracking terminology."
+schema: "TechArticle"
+keywords: ["Snowplow Glossary", "Analytics Terms", "Platform Terms", "Terminology", "Definitions", "Analytics Glossary"]
 date: "2025-05-12"
 sidebar_position: 100
 ---

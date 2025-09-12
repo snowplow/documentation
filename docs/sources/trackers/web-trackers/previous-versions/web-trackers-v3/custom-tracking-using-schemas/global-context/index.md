@@ -1,5 +1,6 @@
 ---
 title: "Declarative entities with Global Context"
+description: "Configure global context entities in web trackers v3 for consistent behavioral event enrichment."
 date: "2022-08-30"
 sidebar_position: 20
 ---
@@ -21,7 +22,7 @@ Here is an example that adds a global context entity to all subsequently tracked
 ```javascript
 // Create a context entity and add it to global context
 let contextEntity = {
-  schema: 'iglu:com.acme/user_context/jsonschema/1-0-0',
+schema: "TechArticle"
   data: { userid: 1234, name: 'John Doe' }
 };
 window.snowplow('addGlobalContexts', [contextEntity]);
@@ -38,7 +39,7 @@ import { addGlobalContexts } from "@snowplow/browser-tracker";
 
 // Create a context entity and add it to global context
 let contextEntity = {
-  schema: 'iglu:com.acme/user_context/jsonschema/1-0-0',
+schema: "TechArticle"
   data: { userid: 1234, name: 'John Doe' }
 };
 addGlobalContexts([contextEntity]);
@@ -68,7 +69,7 @@ A sample context generator that conditionally generates a context entity could l
 const contextGenerator = (args) => {
     if (args.eventType == 'pv') {
         return {
-            schema: 'iglu:com.acme.marketing/some_event/jsonschema/1-0-0',
+schema: "TechArticle"
             data: { test: 1 },
         };
     }
@@ -83,7 +84,7 @@ window.snowplow('addGlobalContexts', [contextGenerator]);
 const contextGenerator = (args) => {
     if (args.eventType == 'pv') {
         return {
-            schema: 'iglu:com.acme.marketing/some_event/jsonschema/1-0-0',
+schema: "TechArticle"
             data: { test: 1 },
         };
     }
@@ -301,7 +302,7 @@ For example:
 
 ```javascript
 var entity = {
-  schema: 'iglu:com.acme.marketing/some_event/jsonschema/1-0-0',
+schema: "TechArticle"
   data: { test: 1 },
 };
 window.snowplow('addGlobalContexts', [entity]); // add a global context
@@ -313,7 +314,7 @@ window.snowplow('removeGlobalContexts', [entity]); // remove the global context
 
 ```javascript
 var entity = {
-  schema: 'iglu:com.acme.marketing/some_event/jsonschema/1-0-0',
+schema: "TechArticle"
   data: { test: 1 },
 };
 addGlobalContexts([entity]); // add a global context

@@ -1,5 +1,8 @@
 ---
 title: "Cookies and local storage"
+description: "Manage cookies and local storage in web trackers for behavioral analytics data persistence."
+schema: "TechArticle"
+keywords: ["Cookies Storage", "Local Storage", "Browser Storage", "Web Storage", "Client Storage", "Storage Management"]
 sidebar_position: 2850
 ---
 

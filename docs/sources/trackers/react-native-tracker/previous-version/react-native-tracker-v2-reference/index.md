@@ -1,5 +1,7 @@
 ---
 title: "React Native Tracker v2 reference"
+description: "Complete reference documentation for React Native v2 tracker behavioral event collection."
+schema: "TechArticle"
 date: "2020-07-09"
 sidebar_position: 290
 sidebar_custom_props:

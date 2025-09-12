@@ -1,7 +1,8 @@
 ---
 title: "Example code"
 sidebar_position: 3
-description: "Examples of enrichment code in JavaScript."
+description: "Practical examples of custom JavaScript enrichments for common use cases and business logic implementation."
+keywords: ["JS Examples", "Enrichment Examples", "JavaScript Code", "Custom Logic", "Code Samples", "Implementation Guide"]
 ---
 
 ## Labeling internal and external traffic
@@ -19,7 +20,7 @@ function process(event) {
   const traffic_source = internalIPs.has(ip) ? 'internal' : 'external';
 
   return [{
-    schema: "iglu:com.my-company/traffic_source/jsonschema/1-0-0",
+schema: "TechArticle"
     data: { traffic_source }
   }];
 }

@@ -1,6 +1,9 @@
 ---
 position: 3
 title: Create a Base Data Product
+description: "Create base data products for foundational behavioral data collection and schema management."
+schema: "HowTo"
+keywords: ["Base Data Product", "Product Creation", "Data Product", "Base Analytics", "Product Foundation", "Core DP"]
 ---
 
 After creating a Source Application, the recommended way to keep track of what we consider base events for a tracking setup is through the Base Data Product templates. For this application you can use the [Base Web](https://docs.snowplow.io/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-products/data-product-templates/#base-web).

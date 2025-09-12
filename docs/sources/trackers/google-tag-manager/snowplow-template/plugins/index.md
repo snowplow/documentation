@@ -1,5 +1,8 @@
 ---
 title: "Plugins"
+description: "Configure plugins for Snowplow Google Tag Manager template to enhance behavioral event tracking."
+schema: "TechArticle"
+keywords: ["GTM Plugins", "Tag Manager", "GTM Extensions", "Snowplow GTM", "Tag Plugins", "GTM Features"]
 sidebar_position: 200
 ---
 

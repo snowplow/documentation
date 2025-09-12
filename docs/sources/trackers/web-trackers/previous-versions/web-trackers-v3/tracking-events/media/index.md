@@ -1,5 +1,7 @@
 ---
 title: "Media"
+description: "Track media player interactions using web trackers v3 for behavioral video and audio analytics."
+schema: "TechArticle"
 sidebar_position: 75
 ---
 

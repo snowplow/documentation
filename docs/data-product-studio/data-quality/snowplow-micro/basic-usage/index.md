@@ -1,7 +1,9 @@
 ---
 title: "Basic usage"
 sidebar_position: 1
-description: "How to run Snowplow Micro and send events to it."
+description: "Basic Snowplow Micro setup and usage for testing behavioral event tracking in development environments."
+schema: "TechArticle"
+keywords: ["Micro Basics", "Basic Testing", "Getting Started", "Micro Introduction", "Testing Basics", "Basic Setup"]
 ---
 
 ```mdx-code-block

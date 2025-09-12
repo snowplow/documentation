@@ -1,5 +1,8 @@
 ---
 title: "Dataflow Runner"
+description: "Dataflow Runner for executing behavioral data processing jobs on cloud platforms and clusters."
+schema: "TechArticle"
+keywords: ["Dataflow Runner", "Batch Processing", "Job Runner", "Pipeline Runner", "Batch Jobs", "Processing Engine"]
 date: "2020-03-02"
 sidebar_position: 100
 ---

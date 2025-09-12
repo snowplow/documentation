@@ -1,5 +1,7 @@
 ---
 title: "Tracking events"
+description: "Track behavioral events in Roku streaming applications using connected TV tracker SDK."
+keywords: ["Roku Events", "TV Events", "Roku Analytics", "OTT Analytics", "Connected TV", "Streaming Events"]
 date: "2021-11-16"
 sidebar_position: 2000
 ---
@@ -55,7 +57,7 @@ m.global.snowplow.selfDescribing = {
         difficultyLevel: "HARD",
         dlContent: true
     },
-    schema: "iglu:com.example_company/save_game/jsonschema/1-0-2"
+schema: "TechArticle"
 }
 ```
 

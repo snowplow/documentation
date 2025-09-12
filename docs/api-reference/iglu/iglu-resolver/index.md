@@ -1,5 +1,8 @@
 ---
 title: "Iglu Resolver"
+description: "Iglu Resolver API reference for behavioral data schema resolution and validation workflows."
+schema: "TechArticle"
+keywords: ["Iglu Resolver", "Schema Resolution", "Registry Resolution", "Schema Lookup", "Registry Client", "Schema Client"]
 date: "2020-10-22"
 sidebar_position: 30
 ---

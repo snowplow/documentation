@@ -1,6 +1,8 @@
 ---
 title: "PubSub"
-description: "Read data from a PubSub topic."
+description: "Set up Google Cloud Pub/Sub as a source for behavioral event forwarding and transformation workflows."
+schema: "TechArticle"
+keywords: ["PubSub Source", "Google PubSub", "GCP Source", "Stream Input", "Message Source", "Event Ingestion"]
 ---
 
 ```mdx-code-block

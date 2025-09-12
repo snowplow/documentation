@@ -1,5 +1,7 @@
 ---
 title: "Client Hints"
+description: "Track Client Hints data using web trackers v3 for behavioral analytics device context."
+schema: "TechArticle"
 sidebar_position: 150
 ---
 

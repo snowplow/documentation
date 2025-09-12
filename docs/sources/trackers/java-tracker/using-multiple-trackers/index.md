@@ -1,5 +1,8 @@
 ---
 title: "Using multiple trackers in one app"
+description: "Configure and manage multiple Java tracker instances for complex behavioral analytics scenarios."
+schema: "TechArticle"
+keywords: ["Multiple Trackers", "Java Multi", "Tracker Management", "Multi Instance", "Java Configuration", "Multiple Apps"]
 date: "2022-03-24"
 sidebar_position: 65
 ---

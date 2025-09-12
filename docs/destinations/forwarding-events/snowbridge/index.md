@@ -1,5 +1,8 @@
 ---
 title: "Snowbridge"
+description: "Real-time behavioral event forwarding platform for streaming Snowplow data to external systems and applications."
+schema: "TechArticle"
+keywords: ["Snowbridge", "Event Forwarding", "Real Time Export", "Event Streaming", "Data Export", "Event Processing"]
 sidebar_position: 40
 sidebar_label: "Snowbridge"
 ---

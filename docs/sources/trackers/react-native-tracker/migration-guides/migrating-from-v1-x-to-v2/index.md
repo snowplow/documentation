@@ -1,5 +1,8 @@
 ---
 title: "Migrating from v1 to v2"
+description: "Migration guide for upgrading React Native tracker from version 1.x to 2 with behavioral tracking improvements."
+schema: "TechArticle"
+keywords: ["React Native Migration", "V1 to V2", "Version Migration", "Upgrade Guide", "Migration Guide", "Breaking Changes"]
 date: "2021-08-09"
 sidebar_position: 100
 ---

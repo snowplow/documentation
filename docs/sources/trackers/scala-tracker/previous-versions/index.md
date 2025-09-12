@@ -1,5 +1,7 @@
 ---
 title: "Previous versions"
+description: "Previous versions of Scala tracker for behavioral event collection in functional programming applications."
+schema: "TechArticle"
 date: "2020-10-28"
 sidebar_position: 210
 sidebar_custom_props:

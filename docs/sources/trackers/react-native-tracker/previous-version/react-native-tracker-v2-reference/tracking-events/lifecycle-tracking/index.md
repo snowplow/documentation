@@ -1,5 +1,8 @@
 ---
 title: "App lifecycle tracking"
+description: "Track application lifecycle events in React Native v2 tracker for user engagement analysis."
+schema: "TechArticle"
+keywords: ["React Native Lifecycle", "App Lifecycle", "Mobile Lifecycle", "App Events", "Lifecycle Events", "App State"]
 sidebar_position: 30
 ---
 

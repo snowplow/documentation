@@ -1,5 +1,8 @@
 ---
 title: "Initialization"
+description: "Initialize Java tracker version 0.11 for behavioral event tracking in enterprise systems."
+schema: "TechArticle"
+keywords: ["Java V0.11", "Legacy Initialization", "Previous Version", "Setup Guide", "Deprecated Version", "Legacy Init"]
 date: "2022-05-12"
 sidebar_position: 20
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Campaign attribution enrichment"
+description: "Track marketing campaign performance by enriching events with campaign attribution data from UTM parameters."
+schema: "TechArticle"
+keywords: ["Campaign Attribution", "Marketing Attribution", "UTM Tracking", "Campaign Analysis", "Attribution Model", "Marketing Analytics"]
 sidebar_position: 4
 sidebar_label: Campaign attribution
 ---

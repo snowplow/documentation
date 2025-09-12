@@ -1,5 +1,8 @@
 ---
 title: "Hosting the JavaScript tracker"
+description: "Host JavaScript tracker infrastructure for behavioral event collection with various deployment options."
+schema: "TechArticle"
+keywords: ["JavaScript Hosting", "Self Hosting", "CDN Hosting", "Tracker Hosting", "Web Hosting", "Asset Hosting"]
 date: "2021-03-24"
 sidebar_position: 3200
 ---

@@ -1,5 +1,8 @@
 ---
 title: "JavaScript transformation configuration"
+description: "Configure JavaScript transformations for custom behavioral event processing in Snowbridge forwarding workflows."
+schema: "TechArticle"
+keywords: ["JavaScript Config", "JS Transformation", "Custom JavaScript", "Script Configuration", "JS Config", "JavaScript Setup"]
 date: "2022-10-20"
 sidebar_position: 200
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Performance Timing"
+description: "Performance timing plugin for browser tracker v3 to measure behavioral analytics performance metrics."
+schema: "TechArticle"
+keywords: ["Browser V3 Performance", "Performance Timing", "Legacy Performance", "Web Performance", "Timing Metrics", "Browser Metrics"]
 date: "2021-04-07"
 sidebar_position: 14000
 ---

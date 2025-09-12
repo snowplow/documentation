@@ -1,5 +1,8 @@
 ---
 title: "Consent events (Enhanced Consent)"
+description: "Consent and privacy events tracked automatically by Snowplow for behavioral compliance analytics."
+schema: "TechArticle"
+keywords: ["Consent Events", "Privacy Events", "GDPR Events", "Consent Analytics", "Privacy Analytics", "Consent Management"]
 ---
 
 ```mdx-code-block

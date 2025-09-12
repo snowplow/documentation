@@ -1,5 +1,8 @@
 ---
 title: "Enhanced"
+description: "Track enhanced ecommerce events with detailed product and purchase data using web trackers."
+schema: "TechArticle"
+keywords: ["Enhanced Ecommerce", "Advanced Commerce", "Detailed Shopping", "Commerce Analytics", "Shopping Funnel", "Product Analytics"]
 sidebar_position: 70
 ---
 

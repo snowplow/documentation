@@ -1,5 +1,7 @@
 ---
 title: "Snowplow v3 Tags"
+description: "Tag templates for Google Tag Manager v3 behavioral event tracking implementation."
+schema: "TechArticle"
 sidebar_position: 1000
 ---
 

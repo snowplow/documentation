@@ -1,5 +1,8 @@
 ---
 title: "High volume optimizations"
+description: "Optimize dbt models for high-volume behavioral data processing and performance requirements."
+schema: "TechArticle"
+keywords: ["High Volume", "Performance Optimization", "Scale Optimization", "Big Data", "Volume Handling", "Performance Tuning"]
 sidebar_position: 20
 ---
 

@@ -1,5 +1,8 @@
 ---
 title: "Postgres Loader"
+description: "Load behavioral event data into PostgreSQL databases for relational analytics and reporting."
+schema: "TechArticle"
+keywords: ["Postgres Loader", "PostgreSQL Loader", "Database Loader", "SQL Loader", "Relational Database", "Postgres Integration"]
 sidebar_position: 7
 ---
 

@@ -1,5 +1,8 @@
 ---
 title: "Self describing JSONs"
+description: "Self-describing JSON format for behavioral events and entities with embedded schema references."
+schema: "TechArticle"
+keywords: ["Self Describing JSON", "JSON Format", "Self Describing", "JSON Structure", "Event Format", "Data Format"]
 date: "2021-03-26"
 sidebar_position: 50
 ---

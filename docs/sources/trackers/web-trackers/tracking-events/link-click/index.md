@@ -1,5 +1,8 @@
 ---
 title: "Link clicks"
+description: "Track link clicks and outbound navigation using web trackers for behavioral navigation analytics."
+schema: "TechArticle"
+keywords: ["Link Tracking", "Click Events", "Link Analytics", "Click Tracking", "User Interactions", "Link Behavior"]
 sidebar_position: 40
 ---
 

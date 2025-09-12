@@ -1,5 +1,8 @@
 ---
 title: "Timezone and geolocation"
+description: "Track timezone and geolocation data in web applications for behavioral analytics with geographic context."
+schema: "TechArticle"
+keywords: ["Geolocation Tracking", "Timezone Data", "Location Analytics", "Geographic Data", "Web Location", "Timezone Tracking"]
 sidebar_position: 100
 ---
 

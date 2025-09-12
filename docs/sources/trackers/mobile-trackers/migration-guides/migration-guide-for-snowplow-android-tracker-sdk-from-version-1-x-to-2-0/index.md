@@ -1,5 +1,8 @@
 ---
 title: "From version 1.x to 2.0 for Android"
+description: "Migration guide for Android tracker upgrade from version 1.x to 2.0 with behavioral tracking improvements."
+schema: "TechArticle"
+keywords: ["Android Migration", "V1 to V2", "Android Upgrade", "Mobile Migration", "Version Migration", "Breaking Changes"]
 date: "2021-03-19"
 sidebar_position: -1
 ---

@@ -1,6 +1,8 @@
 ---
 title: "Package features"
-description: "Top level page for features contained in our packages"
+description: "Advanced features in dbt Snowplow packages for enhanced behavioral data modeling capabilities."
+schema: "TechArticle"
+keywords: ["Package Features", "DBT Features", "Model Features", "Package Capabilities", "Advanced Features", "DBT Tools"]
 sidebar_position: 30
 ---
 

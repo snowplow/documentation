@@ -1,5 +1,8 @@
 ---
 title: "Tracking CLI"
+description: "Command-line interface tool for behavioral event tracking and testing Snowplow implementations."
+schema: "TechArticle"
+keywords: ["Snowplow CLI", "Tracking CLI", "Command Line", "CLI Tools", "Terminal Tracking", "CLI Analytics"]
 date: "2020-10-12"
 sidebar_position: 260
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Failed event types"
+description: "API reference for handling and processing failed behavioral events in Snowplow data quality workflows."
+schema: "TechArticle"
+keywords: ["Failed Events API", "Error API", "Event Errors", "API Reference", "Error Handling", "Failed Event API"]
 sidebar_position: 15
 ---
 

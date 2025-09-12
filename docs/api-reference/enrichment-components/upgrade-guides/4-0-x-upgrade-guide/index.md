@@ -1,5 +1,8 @@
 ---
 title: "4.0.x Upgrade Guide"
+description: "Upgrade guide for enrichment components version 4.0.x with behavioral data processing improvements."
+schema: "TechArticle"
+keywords: ["Enrichment Upgrade", "V4.0.x Upgrade", "Component Migration", "Enrichment Migration", "Version Upgrade", "Breaking Changes"]
 sidebar_position: 0
 ---
 

@@ -1,5 +1,7 @@
 ---
 title: "Adding data to your events: context and more"
+description: "Add custom data and context to behavioral events using Roku tracker for streaming analytics."
+keywords: ["Roku Data", "Roku Events", "TV Analytics", "Roku Tracking", "OTT Analytics", "Connected TV"]
 date: "2021-11-16"
 sidebar_position: 3000
 ---
@@ -31,7 +33,7 @@ m.global.snowplow.screenView = {
     id: "screen23",
     context: [
         {
-            schema: "iglu:com.my_company/movie_poster/jsonschema/1-0-0",
+schema: "TechArticle"
             data: {
                 movie_name: "Solaris",
                 poster_country: "JP",
@@ -39,7 +41,7 @@ m.global.snowplow.screenView = {
             }
         },
         {
-            schema: "iglu:com.my_company/customer/jsonschema/1-0-0",
+schema: "TechArticle"
             data: {
                 p_buy: 0.23,
                 segment: "young_adult"

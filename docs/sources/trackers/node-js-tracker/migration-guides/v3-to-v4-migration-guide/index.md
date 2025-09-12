@@ -1,5 +1,8 @@
 ---
 title: "Migrating from v3 to v4"
+description: "Migration guide for upgrading Node.js tracker from version 3 to 4 with enhanced features."
+schema: "TechArticle"
+keywords: ["Node.js Migration", "V3 to V4", "Version Migration", "Upgrade Guide", "Migration Guide", "Breaking Changes"]
 sidebar_position: 1100
 ---
 

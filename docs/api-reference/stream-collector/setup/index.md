@@ -1,5 +1,8 @@
 ---
 title: "Set up"
+description: "Set up Snowplow Stream Collector to receive and process behavioral events from trackers and webhooks."
+schema: "TechArticle"
+keywords: ["Collector Setup", "Stream Collector", "Collection Setup", "Event Ingestion", "Data Collection", "Collector Installation"]
 date: "2021-08-04"
 sidebar_position: 1
 ---

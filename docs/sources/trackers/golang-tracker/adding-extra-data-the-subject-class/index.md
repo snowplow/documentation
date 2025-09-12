@@ -1,5 +1,8 @@
 ---
 title: "Tracking the Subject"
+description: "Add user and session context data to behavioral events using Go tracker subject class."
+schema: "TechArticle"
+keywords: ["Go Subject", "User Data", "Subject Class", "User Context", "Go Context", "User Information"]
 date: "2020-02-26"
 sidebar_position: 30
 ---

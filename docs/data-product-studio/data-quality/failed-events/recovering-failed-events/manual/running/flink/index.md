@@ -1,5 +1,8 @@
 ---
 title: "Flink"
+description: "Execute failed event recovery jobs using Apache Flink for real-time processing of invalid behavioral data."
+schema: "TechArticle"
+keywords: ["Flink Recovery", "Stream Processing", "Event Recovery", "Flink Jobs", "Real Time", "Stream Recovery"]
 date: "2020-04-14"
 sidebar_position: 10
 ---

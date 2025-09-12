@@ -1,5 +1,8 @@
 ---
 title: "Enrich Pubsub (GCP)"
+description: "Google Cloud Pub/Sub enrichment component API reference for scalable behavioral data processing."
+schema: "TechArticle"
+keywords: ["Enrich PubSub", "Google PubSub", "GCP Enrichment", "Stream Processing", "PubSub Integration", "Cloud Processing"]
 date: "2020-10-22"
 sidebar_position: 20
 ---

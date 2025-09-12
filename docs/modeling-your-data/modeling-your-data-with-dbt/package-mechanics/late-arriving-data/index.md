@@ -1,6 +1,8 @@
 ---
 title: "Late arriving data"
-description: "A detailed overview of how the data flows and how to manage variables for handling edge cases."
+description: "Handle late-arriving behavioral data in dbt packages for accurate analytics and reporting."
+schema: "TechArticle"
+keywords: ["Late Data", "Delayed Data", "Data Arrival", "Late Events", "DBT Handling", "Data Timeliness"]
 sidebar_position: 70
 ---
 

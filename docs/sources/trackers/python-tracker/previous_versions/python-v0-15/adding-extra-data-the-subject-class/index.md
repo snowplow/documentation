@@ -1,5 +1,8 @@
 ---
 title: "Adding extra data: The Subject class"
+description: "Add user context using Python tracker v0.15 subject class for behavioral event enrichment."
+schema: "TechArticle"
+keywords: ["Python V0.15", "Legacy Subject", "Previous Version", "Subject Class", "Deprecated Subject", "Legacy Context"]
 date: "2020-02-26"
 sidebar_position: 30
 ---

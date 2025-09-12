@@ -1,5 +1,8 @@
 ---
 title: "Analytics SDK - JavaScript"
+description: "JavaScript Analytics SDK for processing and analyzing Snowplow behavioral event data in web applications."
+schema: "TechArticle"
+keywords: ["JavaScript SDK", "Analytics SDK", "JS Analytics", "JavaScript API", "Web SDK", "Client SDK"]
 date: "2021-10-18"
 sidebar_position: 200
 ---

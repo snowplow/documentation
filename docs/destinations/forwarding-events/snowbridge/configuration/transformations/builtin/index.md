@@ -1,5 +1,8 @@
 ---
 title: "Built-in transformations"
+description: "Built-in transformation functions for common behavioral event processing patterns in Snowbridge forwarding."
+schema: "TechArticle"
+keywords: ["Built-in Transformations", "Native Transforms", "Standard Transforms", "Default Processing", "Core Transforms", "Built-in Functions"]
 date: "2022-10-20"
 sidebar_position: 200
 ---

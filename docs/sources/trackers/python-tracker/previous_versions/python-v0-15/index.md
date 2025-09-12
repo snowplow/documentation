@@ -1,5 +1,7 @@
 ---
 title: "Version 0.15"
+description: "Python tracker version 0.15 documentation for server-side behavioral event collection."
+schema: "TechArticle"
 date: "2020-02-26"
 sidebar_position: 200
 ---

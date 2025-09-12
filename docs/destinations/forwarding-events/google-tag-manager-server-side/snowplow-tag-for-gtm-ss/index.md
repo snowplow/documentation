@@ -1,5 +1,8 @@
 ---
 title: "Snowplow Tag for GTM SS"
+description: "Snowplow tag implementation for Google Tag Manager Server-Side behavioral event processing workflows."
+schema: "TechArticle"
+keywords: ["Snowplow GTM Tag", "Server Side Tag", "GTM Integration", "Tag Manager", "Snowplow Tag", "Server Side"]
 date: "2021-11-24"
 sidebar_position: 200
 ---

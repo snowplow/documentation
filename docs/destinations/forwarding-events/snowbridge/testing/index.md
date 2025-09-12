@@ -1,5 +1,8 @@
 ---
 title: "Testing Snowbridge locally"
+description: "Test Snowbridge configurations and behavioral event forwarding workflows before production deployment."
+schema: "TechArticle"
+keywords: ["Snowbridge Testing", "Integration Testing", "Testing Framework", "Export Testing", "Test Configuration", "Quality Testing"]
 date: "2023-04-14"
 sidebar_position: 300
 ---

@@ -1,5 +1,8 @@
 ---
 title: "S3 loader monitoring"
+description: "Monitor S3 Loader performance and behavioral data loading health with comprehensive observability tools."
+schema: "TechArticle"
+keywords: ["S3 Monitoring", "Loader Monitoring", "Storage Monitoring", "AWS Monitoring", "Performance Monitoring", "S3 Metrics"]
 date: "2021-10-04"
 sidebar_position: 30
 ---

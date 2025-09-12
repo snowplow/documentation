@@ -1,5 +1,8 @@
 ---
 title: "IP anonymization enrichment"
+description: "Anonymize IP addresses in behavioral events to comply with privacy regulations while preserving geographic insights."
+schema: "TechArticle"
+keywords: ["IP Anonymization", "Privacy Protection", "IP Masking", "GDPR Compliance", "Data Privacy", "IP Security"]
 sidebar_position: 14
 sidebar_label: IP anonymization
 ---

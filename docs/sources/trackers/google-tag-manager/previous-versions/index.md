@@ -1,5 +1,7 @@
 ---
 title: "Previous versions"
+description: "Previous versions of Google Tag Manager templates for behavioral event tracking implementations."
+schema: "TechArticle"
 sidebar_position: 1000
 sidebar_custom_props:
   outdated: true

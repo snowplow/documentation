@@ -1,5 +1,8 @@
 ---
 title: "Consent Module"
+description: "Consent module in dbt unified model for behavioral privacy compliance analytics across platforms."
+schema: "TechArticle"
+keywords: ["Unified Consent", "Privacy DBT", "GDPR Models", "Consent Analytics", "Privacy Models", "Cross Platform"]
 sidebar_position: 200
 hide_title: true
 ---

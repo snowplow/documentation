@@ -1,5 +1,8 @@
 ---
 title: Automate with Github Actions
+description: "Automate data structure workflows using GitHub Actions for continuous behavioral data schema management."
+schema: "HowTo"
+keywords: ["GitHub Actions", "Schema Automation", "CI/CD", "Git Automation", "Schema CI", "Automated Workflows"]
 position: 4
 ---
 ### Set up repository

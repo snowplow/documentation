@@ -1,5 +1,8 @@
 ---
 title: "Snowplow v3"
+description: "Version 3 tag template guide for Google Tag Manager behavioral event tracking implementation."
+schema: "TechArticle"
+keywords: ["GTM V3 Tags", "Tag Template", "Legacy GTM", "Tag Guide", "Tag Manager", "Template Guide"]
 date: "2021-11-18"
 sidebar_position: 100
 ---

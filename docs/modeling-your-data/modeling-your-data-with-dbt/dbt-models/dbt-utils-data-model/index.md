@@ -1,7 +1,9 @@
 ---
 title: "Utils"
 sidebar_position: 60
-description: "The Snowplow Utils dbt Package"
+description: "Utility functions and macros in dbt utils package for behavioral data modeling workflows."
+schema: "TechArticle"
+keywords: ["DBT Utils", "DBT Utilities", "Helper Functions", "DBT Tools", "Utility Models", "Support Functions"]
 hide_title: true
 ---
 

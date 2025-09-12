@@ -1,6 +1,9 @@
 ---
 position: 10
 title: Generate tracking code and implementation instructions
+description: "Generate tracking code from data products for consistent behavioral event collection implementation."
+schema: "HowTo"
+keywords: ["Code Generation", "Tracking Code", "Generated Code", "Code Tutorial", "SDK Generation", "Code Creation"]
 ---
 
 ### Generating code and implementation instructions

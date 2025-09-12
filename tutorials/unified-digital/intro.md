@@ -1,5 +1,8 @@
 ---
 title: Introduction
+description: "Introduction to unified digital analytics for comprehensive cross-platform behavioral data insights."
+schema: "HowTo"
+keywords: ["Unified Tutorial", "Unified Analytics", "Cross Platform", "Tutorial Introduction", "Multi Platform", "Unified Guide"]
 position: 1
 ---
 

@@ -1,5 +1,8 @@
 ---
 title: "Platform and application data tracking"
+description: "Add platform and application context to behavioral events in mobile tracker implementations."
+schema: "TechArticle"
+keywords: ["Mobile Platform", "App Context", "Platform Context", "Device Context", "Mobile Data", "App Information"]
 sidebar_position: 10
 ---
 

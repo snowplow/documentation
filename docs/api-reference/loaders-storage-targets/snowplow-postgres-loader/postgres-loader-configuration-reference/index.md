@@ -1,5 +1,8 @@
 ---
 title: "Postgres Loader Configuration Reference"
+description: "Configuration reference for PostgreSQL Loader behavioral data loading settings and optimization."
+schema: "TechArticle"
+keywords: ["Postgres Configuration", "PostgreSQL Config", "Database Config", "Postgres Settings", "SQL Config", "Database Settings"]
 date: "2021-07-07"
 sidebar_position: 0
 ---

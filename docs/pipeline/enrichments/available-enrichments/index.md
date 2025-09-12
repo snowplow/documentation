@@ -1,5 +1,8 @@
 ---
 title: "Available enrichments"
+description: "Complete guide to Snowplow's built-in enrichments for enhancing behavioral events with contextual data and validation."
+schema: "TechArticle"
+keywords: ["Data Enrichments", "Pipeline Enrichment", "Event Enhancement", "Data Processing", "Analytics Enhancement", "Event Enrichment"]
 sidebar_position: 20
 ---
 

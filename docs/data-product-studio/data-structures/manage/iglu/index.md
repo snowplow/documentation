@@ -1,5 +1,8 @@
 ---
 title: "Managing schemas using Iglu"
+description: "Integrate with Iglu Schema Registry for enterprise-scale data structure management and version control."
+schema: "TechArticle"
+keywords: ["Iglu Management", "Schema Registry", "Iglu Admin", "Schema Control", "Registry Management", "Iglu Operations"]
 date: "2020-02-15"
 sidebar_label: "Iglu"
 sidebar_position: 4

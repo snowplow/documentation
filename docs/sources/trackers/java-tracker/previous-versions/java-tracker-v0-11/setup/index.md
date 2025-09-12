@@ -1,5 +1,8 @@
 ---
 title: "Setup"
+description: "Set up Java tracker version 0.11 for behavioral event collection in enterprise applications."
+schema: "TechArticle"
+keywords: ["Java V0.11", "Legacy Setup", "Previous Version", "Installation Guide", "Deprecated Version", "Legacy Installation"]
 date: "2022-05-12"
 sidebar_position: 10
 ---

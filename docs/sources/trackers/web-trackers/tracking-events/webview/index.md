@@ -1,5 +1,8 @@
 ---
 title: "WebViews"
+description: "Track behavioral events in WebView components using web trackers for hybrid app analytics."
+schema: "TechArticle"
+keywords: ["WebView Tracking", "Hybrid Apps", "Mobile WebView", "Cross Platform", "WebView Integration", "Hybrid Analytics"]
 sidebar_position: 180
 ---
 

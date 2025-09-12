@@ -1,5 +1,8 @@
 ---
 title: "Sending user identifier to Kantar Focal Meter"
+description: "Focal Meter plugin for mobile trackers to measure behavioral attention and engagement analytics."
+schema: "TechArticle"
+keywords: ["FocalMeter Mobile", "Attention Analytics", "Mobile Attention", "Eye Tracking", "Engagement Metrics", "Mobile Focus"]
 date: "2023-01-04"
 sidebar_position: 20
 ---

@@ -1,6 +1,7 @@
 ---
 title: "Configuration"
-description: "Information for the configuration of our dbt packages"
+description: "Configuration guides for dbt Snowplow packages behavioral data modeling settings and parameters."
+keywords: ["DBT Configuration", "DBT Config", "Model Configuration", "DBT Settings", "Package Config", "DBT Setup"]
 sidebar_position: 40
 ---
 
@@ -55,7 +56,7 @@ spark:
   host: localhost
   method: thrift
   port: 10000
-  schema: default
+schema: "TechArticle"
 ```
 
 In your dbt_project.yml, the file_format is set to `iceberg` by default for Spark. While you can override this in your project's dbt YAML file to use a different file format, please note that Iceberg is currently the only officially supported format.

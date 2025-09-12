@@ -1,6 +1,8 @@
 ---
 title: "Custom Implementations"
-description: "Custom Implementations"
+description: "Implement custom attribution models using dbt for specialized behavioral marketing analysis requirements."
+schema: "TechArticle"
+keywords: ["Custom Attribution", "Attribution Custom", "Bespoke Attribution", "Marketing Custom", "Attribution Logic", "Custom Models"]
 sidebar_position: 30
 hide_title: true
 ---

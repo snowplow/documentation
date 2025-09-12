@@ -1,6 +1,9 @@
 ---
 position: 6
 title: Setup custom Data Structures
+description: "Set up custom data structures for specialized behavioral event tracking and validation requirements."
+schema: "HowTo"
+keywords: ["Custom Data Structure", "Schema Setup", "Custom Schema", "Data Structure", "Schema Creation", "Custom DS"]
 ---
 
 Before you create the custom Data Product for these interactions, you need to create a couple of Data Structures, `todo` and `todo_action`, fitting the use case of the Todo web application.

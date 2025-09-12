@@ -1,5 +1,8 @@
 ---
 title: "Configuration"
+description: "Configuration guide for Node.js tracker version 3 behavioral event collection settings."
+schema: "TechArticle"
+keywords: ["Node.js V3", "Legacy Version", "Previous Configuration", "V3 Configuration", "Deprecated Version", "Legacy Config"]
 date: "2021-04-07"
 sidebar_position: 3000
 ---

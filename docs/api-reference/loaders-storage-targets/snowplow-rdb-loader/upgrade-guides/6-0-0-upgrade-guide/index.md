@@ -1,5 +1,8 @@
 ---
 title: "6.0.0 upgrade guide"
+description: "RDB Loader upgrade guide for version 6.0.0 with major behavioral data loading enhancements."
+schema: "TechArticle"
+keywords: ["RDB Upgrade", "V6.0.0 Upgrade", "Loader Migration", "RDB Migration", "Version Upgrade", "Breaking Changes"]
 sidebar_position: -20
 ---
 

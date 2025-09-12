@@ -1,5 +1,8 @@
 ---
 title: "Session tracking"
+description: "Track user sessions and engagement in mobile applications using native trackers."
+schema: "TechArticle"
+keywords: ["Mobile Sessions", "App Sessions", "Session Tracking", "Mobile Analytics", "User Sessions", "App Usage"]
 sidebar_position: 20
 ---
 

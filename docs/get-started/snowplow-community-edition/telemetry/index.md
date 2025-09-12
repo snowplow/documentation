@@ -1,5 +1,8 @@
 ---
 title: "Telemetry principles"
+description: "Telemetry and usage analytics collected by Snowplow Community Edition for platform improvement."
+schema: "TechArticle"
+keywords: ["Community Telemetry", "Usage Telemetry", "Anonymous Metrics", "Community Analytics", "Platform Telemetry", "Usage Data"]
 date: "2021-07-09"
 sidebar_position: 6
 ---

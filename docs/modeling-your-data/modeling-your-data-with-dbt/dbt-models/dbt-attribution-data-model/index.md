@@ -1,6 +1,8 @@
 ---
 title: "Attribution"
-description: "The Snowplow Attribution dbt Package"
+description: "Build marketing attribution models using dbt for multi-touch behavioral campaign analysis and optimization."
+schema: "TechArticle"
+keywords: ["DBT Attribution", "Marketing Attribution", "Attribution Analytics", "Marketing Models", "Attribution DBT", "Marketing DBT"]
 sidebar_position: 10
 hide_title: true
 ---

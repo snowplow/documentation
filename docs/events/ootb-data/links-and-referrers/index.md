@@ -1,5 +1,8 @@
 ---
 title: "Referrers, deep links and cross-navigation events"
+description: "Out-of-the-box link and referrer tracking in Snowplow for behavioral navigation and traffic analytics."
+schema: "TechArticle"
+keywords: ["Referrer Data", "Link Tracking", "Traffic Sources", "Referrer Analytics", "Source Attribution", "Link Analytics"]
 ---
 
 ```mdx-code-block

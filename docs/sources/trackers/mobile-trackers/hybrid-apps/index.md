@@ -1,5 +1,8 @@
 ---
 title: "Hybrid mobile and web apps"
+description: "Implement mobile trackers in hybrid applications for unified behavioral analytics across platforms."
+schema: "TechArticle"
+keywords: ["Hybrid Mobile", "Mobile WebView", "Cross Platform", "Hybrid Analytics", "WebView Integration", "Mobile Hybrid"]
 date: "2022-08-30"
 sidebar_position: 70
 ---

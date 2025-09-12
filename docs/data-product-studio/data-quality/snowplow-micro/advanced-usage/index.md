@@ -1,7 +1,9 @@
 ---
 title: "Advanced usage"
 sidebar_position: 6
-description: "How to configure more aspects of Snowplow Micro."
+description: "Advanced Snowplow Micro configurations and workflows for complex behavioral data testing scenarios."
+schema: "TechArticle"
+keywords: ["Advanced Micro", "Micro Advanced", "Advanced Testing", "Power Features", "Expert Usage", "Advanced Features"]
 ---
 
 ```mdx-code-block

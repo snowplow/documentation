@@ -1,6 +1,9 @@
 ---
 position: 3
 title: Basic workflow
+description: "Basic workflow for using Snowplow CLI with Model Context Protocol for behavioral data operations."
+schema: "HowTo"
+keywords: ["MCP Workflow", "CLI Workflow", "Basic Workflow", "MCP Process", "Command Workflow", "CLI Process"]
 ---
 
 Here's a typical interaction pattern for creating a data structure.

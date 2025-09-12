@@ -1,5 +1,8 @@
 ---
 title: "Partitioning of your lake"
+description: "Configure data partitioning strategies in Lake Loader for optimal behavioral data organization and querying."
+schema: "TechArticle"
+keywords: ["Lake Partitions", "Data Partitioning", "Partition Strategy", "Data Lake", "Partition Optimization", "Data Organization"]
 sidebar_label: "Partitioning"
 sidebar_position: 2
 ---

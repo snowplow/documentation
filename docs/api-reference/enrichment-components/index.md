@@ -1,5 +1,8 @@
 ---
 title: "Enrich"
+description: "API reference for Snowplow enrichment components that process and enhance behavioral event data."
+schema: "TechArticle"
+keywords: ["Enrichment Components", "Data Enrichment", "Processing Components", "Enrichment Pipeline", "Event Processing", "Component Reference"]
 date: "2020-11-09"
 sidebar_position: 50
 ---

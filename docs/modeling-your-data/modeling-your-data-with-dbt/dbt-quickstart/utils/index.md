@@ -2,6 +2,9 @@
 sidebar_label: "Utils"
 sidebar_position: 60
 title: "Utils Quickstart"
+description: "Quick start guide for dbt utils package implementation for behavioral data modeling utilities."
+schema: "TechArticle"
+keywords: ["Utils Quickstart", "Utilities Setup", "Helper Setup", "Utils Guide", "DBT Utilities", "Support Tools"]
 ---
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

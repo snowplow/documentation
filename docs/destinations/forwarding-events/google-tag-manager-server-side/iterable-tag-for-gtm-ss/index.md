@@ -1,5 +1,8 @@
 ---
 title: "Iterable Tag for GTM SS"
+description: "Forward behavioral events to Iterable marketing platform using Google Tag Manager Server-Side integration."
+schema: "TechArticle"
+keywords: ["Iterable Tag", "Email Marketing", "Marketing Automation", "GTM Iterable", "Campaign Management", "Customer Engagement"]
 date: "2021-11-24"
 sidebar_position: 500
 ---

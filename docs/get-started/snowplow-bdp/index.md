@@ -1,5 +1,8 @@
 ---
 title: "Setting up Snowplow Behavioral Data Platform"
+description: "Get started with Snowplow Behavioral Data Platform for enterprise-scale customer data infrastructure and analytics."
+schema: "TechArticle"
+keywords: ["Snowplow BDP", "Behavioral Data Platform", "Enterprise Analytics", "Managed Platform", "Cloud Analytics", "BDP Overview"]
 sidebar_position: 3
 sidebar_label: "Snowplow BDP"
 sidebar_custom_props:

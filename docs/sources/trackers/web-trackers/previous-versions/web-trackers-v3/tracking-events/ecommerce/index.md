@@ -1,5 +1,7 @@
 ---
 title: "Ecommerce"
+description: "Track ecommerce transactions using web trackers v3 for behavioral retail analytics."
+schema: "TechArticle"
 sidebar_position: 70
 ---
 

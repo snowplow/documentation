@@ -1,5 +1,8 @@
 ---
 title: "Lua Tracker"
+description: "Lua tracker for behavioral event collection in embedded systems and game development environments."
+schema: "TechArticle"
+keywords: ["Lua Tracker", "Lua Analytics", "Lua SDK", "Scripting Analytics", "Lua Integration", "Game Analytics"]
 date: "2020-02-26"
 sidebar_position: 270
 ---

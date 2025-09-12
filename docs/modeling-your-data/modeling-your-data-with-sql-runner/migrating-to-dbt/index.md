@@ -1,7 +1,9 @@
 ---
 title: "Migrating from SQL Runner to dbt"
 sidebar_position: 0
-description: SQL Runner is no longer actively developed and users should try to migrate to dbt where possible, this guide helps you do that
+description: "Migrate from SQL Runner to dbt for more sophisticated behavioral data modeling and transformation workflows."
+schema: "TechArticle"
+keywords: ["SQL to DBT", "Migration Guide", "DBT Migration", "SQL Migration", "Model Migration", "Analytics Migration"]
 ---
 
 ```mdx-code-block

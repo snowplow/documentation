@@ -1,5 +1,7 @@
 ---
 title: "Optimizely"
+description: "Track Optimizely experiments using web trackers v3 for behavioral A/B testing analytics."
+schema: "TechArticle"
 sidebar_position: 170
 ---
 

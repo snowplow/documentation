@@ -1,5 +1,8 @@
 ---
 title: "YouTube"
+description: "Track YouTube video player interactions using web trackers for behavioral video analytics."
+schema: "TechArticle"
+keywords: ["YouTube Tracking", "Video Analytics", "YouTube Events", "Video Engagement", "YouTube Integration", "Video Metrics"]
 sidebar_position: 20
 ---
 

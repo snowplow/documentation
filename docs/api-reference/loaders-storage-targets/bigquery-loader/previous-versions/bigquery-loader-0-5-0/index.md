@@ -1,5 +1,8 @@
 ---
 title: "BigQuery Loader (0.5.x)"
+description: "BigQuery Loader version 0.5.0 documentation for legacy behavioral data loading implementations."
+schema: "TechArticle"
+keywords: ["BigQuery V0.5.0", "Legacy Loader", "Previous Version", "Deprecated Loader", "Legacy BigQuery", "Old Version"]
 date: "2020-05-18"
 sidebar_position: 20
 ---

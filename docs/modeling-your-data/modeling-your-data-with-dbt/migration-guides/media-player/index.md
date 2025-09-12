@@ -1,5 +1,8 @@
 ---
 title: "Media Player"
+description: "Migration guide for dbt media player data model with behavioral video analytics improvements."
+schema: "TechArticle"
+keywords: ["Media Migration", "Video Migration", "Media Models", "Video Analytics", "DBT Migration", "Media DBT"]
 sidebar_position: 20
 ---
 

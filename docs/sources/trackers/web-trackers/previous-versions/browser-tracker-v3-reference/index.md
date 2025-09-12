@@ -1,5 +1,7 @@
 ---
 title: "Browser (npm) tracker v3"
+description: "Browser tracker version 3 reference documentation for behavioral event collection."
+schema: "TechArticle"
 sidebar_position: 1200
 ---
 

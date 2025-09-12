@@ -1,5 +1,7 @@
 ---
 title: "WebView Tracker"
+description: "WebView tracker for behavioral event collection in hybrid mobile applications and embedded browsers."
+keywords: ["WebView Tracker", "Hybrid Analytics", "Mobile WebView", "WebView Integration", "Cross Platform", "Hybrid Apps"]
 date: "2020-02-26"
 sidebar_position: 135
 ---
@@ -133,7 +135,7 @@ Use the `trackSelfDescribingEvent` function to track a [fully custom event](/doc
 ```javascript
 trackSelfDescribingEvent({
     event: {
-        schema: 'iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1',
+schema: "TechArticle"
         data: {
             targetUrl: 'http://a-target-url.com'
         }
@@ -147,7 +149,7 @@ trackSelfDescribingEvent({
 ```javascript
 window.snowplow('trackSelfDescribingEvent', {
     event: {
-        schema: 'iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1',
+schema: "TechArticle"
         data: {
             targetUrl: 'http://a-target-url.com'
         }
@@ -333,7 +335,7 @@ trackScreenView({
       id: '2c295365-eae9-4243-a3ee-5c4b7baccc8f',
       context: [
         {
-          schema: 'iglu:com.my_company/movie_poster/jsonschema/1-0-0',
+schema: "TechArticle"
           data: {
             movie_name: 'Solaris',
             poster_country: 'JP',
@@ -341,7 +343,7 @@ trackScreenView({
           },
         },
         {
-          schema: 'iglu:com.my_company/customer/jsonschema/1-0-0',
+schema: "TechArticle"
           data: {
             p_buy: 0.23,
             segment: 'young_adult',
@@ -358,7 +360,7 @@ window.snowplow('trackScreenView', {
     id: '2c295365-eae9-4243-a3ee-5c4b7baccc8f',
     context: [
         {
-          schema: 'iglu:com.my_company/movie_poster/jsonschema/1-0-0',
+schema: "TechArticle"
           data: {
             movie_name: 'Solaris',
             poster_country: 'JP',
@@ -366,7 +368,7 @@ window.snowplow('trackScreenView', {
           },
         },
         {
-          schema: 'iglu:com.my_company/customer/jsonschema/1-0-0',
+schema: "TechArticle"
           data: {
             p_buy: 0.23,
             segment: 'young_adult',

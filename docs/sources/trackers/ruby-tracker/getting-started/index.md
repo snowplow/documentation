@@ -1,5 +1,8 @@
 ---
 title: "Getting started"
+description: "Quick start guide for implementing behavioral event tracking with Snowplow's Ruby tracker."
+schema: "TechArticle"
+keywords: ["Ruby Tracker", "Getting Started", "Ruby Setup", "Quick Start", "Ruby Guide", "Installation Guide"]
 date: "2021-10-15"
 sidebar_position: 0
 ---

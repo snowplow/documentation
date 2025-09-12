@@ -1,5 +1,8 @@
 ---
 title: "C++ Tracker"
+description: "C tracker for behavioral event collection in embedded systems and high-performance native applications."
+schema: "TechArticle"
+keywords: ["C Tracker", "C Analytics", "Native Tracking", "System Analytics", "C SDK", "Embedded Analytics"]
 date: "2020-02-25"
 sidebar_position: 240
 ---

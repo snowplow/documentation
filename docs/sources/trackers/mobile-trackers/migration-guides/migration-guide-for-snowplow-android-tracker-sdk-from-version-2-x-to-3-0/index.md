@@ -1,5 +1,8 @@
 ---
 title: "From version 2.x to 3.0 for Android"
+description: "Migration guide for Android tracker upgrade from version 2.x to 3.0 with behavioral analytics improvements."
+schema: "TechArticle"
+keywords: ["Android Migration", "V2 to V3", "Android Upgrade", "Mobile Migration", "Version Migration", "Breaking Changes"]
 date: "2021-11-23"
 sidebar_position: -1
 ---

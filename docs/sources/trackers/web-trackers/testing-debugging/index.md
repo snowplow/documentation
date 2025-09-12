@@ -1,5 +1,8 @@
 ---
 title: "Testing, debugging and troubleshooting"
+description: "Test and debug web tracker implementations for accurate behavioral event collection and validation."
+schema: "TechArticle"
+keywords: ["Web Testing", "Debug Tools", "Testing Framework", "Debugging Guide", "Analytics Testing", "Tracker Testing"]
 date: "2021-04-07"
 sidebar_position: 2950
 ---

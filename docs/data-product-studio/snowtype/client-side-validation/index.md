@@ -34,15 +34,15 @@ Suppose we are tracking against a custom schema for button clicks:
 ```json
 {
     type: 'object',
-    description: 'Data structure for custom button clicks ',
+description: "Implement client-side validation of behavioral events using Snowtype for real-time data quality assurance."
+schema: "TechArticle"
+keywords: ["Client Validation", "TypeScript Validation", "Client Side", "Type Validation", "Frontend Validation", "Browser Validation"]
     properties: {
         label: {
             type: 'string',
-            description: 'The text on the button, or a user-provided override'
         },
         id: { 
             type: 'string', 
-            description: 'The identifier of the button'
         },
     },
     /* Other attributes... */
@@ -182,7 +182,6 @@ type ErrorType = {
   /* Error message */
   message: string;
   /* Description of the violation */
-  description: string;
   /* Violations occurred */
   errors: (ErrorObject | Record<string, unknown>)[];
 };

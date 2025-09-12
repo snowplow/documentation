@@ -1,5 +1,8 @@
 ---
 title: "Timezone"
+description: "Timezone plugin for browser tracker v3 to add temporal context to behavioral analytics."
+schema: "TechArticle"
+keywords: ["Browser V3 Timezone", "Timezone Detection", "Legacy Timezone", "Geographic Data", "Time Analytics", "Location Data"]
 date: "2021-04-07"
 sidebar_position: 16000
 ---

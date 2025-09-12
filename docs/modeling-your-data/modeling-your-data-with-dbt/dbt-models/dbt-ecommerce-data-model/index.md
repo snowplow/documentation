@@ -1,7 +1,9 @@
 ---
 title: "Ecommerce"
 sidebar_position: 40
-description: "The Snowplow Ecommerce dbt Package"
+description: "Transform ecommerce behavioral data using dbt for retail analytics and customer purchase analysis."
+schema: "TechArticle"
+keywords: ["DBT Ecommerce", "Commerce Analytics", "Retail DBT", "Shopping Analytics", "Ecommerce Models", "Sales Analytics"]
 hide_title: true
 ---
 

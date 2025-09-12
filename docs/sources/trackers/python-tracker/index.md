@@ -1,5 +1,8 @@
 ---
 title: "Python Tracker"
+description: "Python tracker for server-side behavioral event collection in web applications and data processing pipelines."
+schema: "TechArticle"
+keywords: ["Python Tracker", "Python Analytics", "Server Tracking", "Backend Analytics", "Python SDK", "Data Science"]
 date: "2023-06-14"
 sidebar_position: 200
 ---

@@ -1,5 +1,7 @@
 ---
 title: "RDB Loader previous versions"
+description: "Previous versions of RDB Loader configuration for behavioral data loading into relational databases."
+schema: "TechArticle"
 date: "2022-05-27"
 sidebar_position: 10
 sidebar_custom_props:

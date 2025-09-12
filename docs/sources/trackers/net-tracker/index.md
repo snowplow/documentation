@@ -1,5 +1,8 @@
 ---
 title: ".NET Tracker"
+description: ".NET tracker for behavioral event collection in Windows applications and Microsoft ecosystem services."
+schema: "TechArticle"
+keywords: [".NET Tracker", ".NET Analytics", "C# Tracking", "Desktop Analytics", ".NET SDK", "Framework Analytics"]
 sidebar_position: 180
 ---
 

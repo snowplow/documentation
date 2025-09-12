@@ -1,5 +1,8 @@
 ---
 title: "Example Applications"
+description: "Demo applications showcasing mobile tracker behavioral event collection capabilities and implementation."
+schema: "TechArticle"
+keywords: ["Mobile Demos", "Mobile Examples", "Sample Apps", "Demo Applications", "Mobile Samples", "Example Code"]
 sidebar_position: 9999
 ---
 

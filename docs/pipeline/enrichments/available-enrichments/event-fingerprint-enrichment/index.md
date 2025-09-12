@@ -1,5 +1,8 @@
 ---
 title: "Event fingerprint enrichment"
+description: "Generate unique fingerprints for events to enable deduplication and data quality monitoring in your pipeline."
+schema: "TechArticle"
+keywords: ["Event Fingerprint", "Event Deduplication", "Duplicate Detection", "Data Quality", "Event Uniqueness", "Fingerprinting"]
 sidebar_position: 6
 sidebar_label: Event fingerprint
 ---

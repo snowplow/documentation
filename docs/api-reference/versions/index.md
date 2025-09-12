@@ -1,5 +1,8 @@
 ---
 title: "Versions and compatibility"
+description: "Version compatibility matrix and release information for Snowplow behavioral data platform components."
+schema: "TechArticle"
+keywords: ["API Versions", "Version History", "API Documentation", "Version Control", "API Changes", "Version Guide"]
 date: "2021-04-29"
 sidebar_position: -1000
 ---

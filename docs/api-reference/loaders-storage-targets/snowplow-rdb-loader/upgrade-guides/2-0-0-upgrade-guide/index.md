@@ -1,5 +1,8 @@
 ---
 title: "2.0.0 Upgrade Guide"
+description: "RDB Loader upgrade guide for version 2.0.0 with significant behavioral data loading improvements."
+schema: "TechArticle"
+keywords: ["RDB Upgrade", "V2.0.0 Upgrade", "Loader Migration", "RDB Migration", "Version Upgrade", "Breaking Changes"]
 date: "2021-12-01"
 sidebar_position: -10
 ---

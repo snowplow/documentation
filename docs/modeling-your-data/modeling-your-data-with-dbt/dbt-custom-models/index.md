@@ -1,6 +1,8 @@
 ---
 title: "Custom models"
-description: "How to create, update, and remove custom models in our dbt packages"
+description: "Create custom dbt models for specialized behavioral data analysis and business-specific requirements."
+schema: "TechArticle"
+keywords: ["Custom Models", "Bespoke Models", "Custom DBT", "Model Development", "Custom Analytics", "Tailored Models"]
 sidebar_position: 60
 ---
 

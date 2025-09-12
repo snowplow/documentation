@@ -1,5 +1,8 @@
 ---
 title: "Tracking specific events"
+description: "Track specific behavioral events using the Go tracker for targeted server-side analytics."
+schema: "TechArticle"
+keywords: ["Go Events", "Golang Events", "Event Tracking", "Go Analytics", "Custom Events", "Behavior Tracking"]
 date: "2020-02-26"
 sidebar_position: 40
 ---

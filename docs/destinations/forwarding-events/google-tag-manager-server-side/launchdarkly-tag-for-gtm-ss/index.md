@@ -1,5 +1,8 @@
 ---
 title: "LaunchDarkly Tag for GTM SS"
+description: "Send behavioral events to LaunchDarkly feature management platform via Google Tag Manager Server-Side."
+schema: "TechArticle"
+keywords: ["LaunchDarkly Tag", "Feature Flags", "A/B Testing", "Feature Management", "GTM LaunchDarkly", "Experimentation"]
 sidebar_position: 600
 ---
 

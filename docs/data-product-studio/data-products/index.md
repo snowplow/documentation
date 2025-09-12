@@ -1,5 +1,8 @@
 ---
 title: "Defining the data to collect with Data Products"
+description: "Organize and govern behavioral data collection with data products that encapsulate schemas and business logic."
+schema: "TechArticle"
+keywords: ["Data Products", "Product Analytics", "Analytics Products", "Product Management", "Data Assets", "Product Suite"]
 sidebar_position: 5
 sidebar_label: "Data products"
 ---

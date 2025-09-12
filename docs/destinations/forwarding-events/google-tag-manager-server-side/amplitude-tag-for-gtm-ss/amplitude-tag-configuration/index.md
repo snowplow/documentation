@@ -1,5 +1,8 @@
 ---
 title: "Amplitude Tag Configuration"
+description: "Configure Amplitude tags in Google Tag Manager Server-Side for behavioral analytics event forwarding."
+schema: "TechArticle"
+keywords: ["Amplitude Config", "Analytics Config", "Tag Configuration", "Amplitude Setup", "Analytics Integration", "Event Configuration"]
 date: "2021-11-24"
 sidebar_position: 100
 ---

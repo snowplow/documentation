@@ -1,6 +1,8 @@
 ---
 title: "spEnrichedFilter"
-description: "Filters messages based on a regex match against an atomic field."
+description: "Filter enriched behavioral events based on specified criteria using built-in Snowbridge transformations."
+schema: "TechArticle"
+keywords: ["Event Filter", "Enriched Filter", "Event Processing", "Data Filtering", "Event Selection", "Filter Logic"]
 ---
 
 ```mdx-code-block

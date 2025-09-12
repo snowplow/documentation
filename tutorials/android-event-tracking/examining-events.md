@@ -1,6 +1,9 @@
 ---
 position: 3
 title: Examining the Events
+description: "Examine and validate Android behavioral events for mobile analytics implementation verification."
+schema: "HowTo"
+keywords: ["Android Events", "Event Examination", "Mobile Events", "Android Analytics", "Event Analysis", "Mobile Tutorial"]
 ---
 
 After implementing tracking, you'll want to verify and analyze the events being sent. You can use a Snowplow Micro pipeline for testing and development. Here's how to examine the events:

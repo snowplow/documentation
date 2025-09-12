@@ -1,5 +1,8 @@
 ---
 title: "Adding plugins to your tracker"
+description: "Add and configure plugins for browser tracker v3 to enhance behavioral event collection."
+schema: "TechArticle"
+keywords: ["Browser V3 Setup", "Plugin Setup", "Legacy Plugins", "Plugin Configuration", "Web Features", "Plugin Management"]
 date: "2021-04-19"
 sidebar_position: 500
 ---

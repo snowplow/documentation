@@ -1,5 +1,8 @@
 ---
 title: "Snowplow Client Configuration"
+description: "Detailed configuration guide for Snowplow client in Google Tag Manager Server-Side environments."
+schema: "TechArticle"
+keywords: ["Client Configuration", "GTM Client Config", "Client Setup", "Server Side Config", "Client Options", "GTM Configuration"]
 date: "2021-11-24"
 sidebar_position: 100
 ---

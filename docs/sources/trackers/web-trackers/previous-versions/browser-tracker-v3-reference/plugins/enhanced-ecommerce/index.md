@@ -1,5 +1,8 @@
 ---
 title: "Enhanced Ecommerce"
+description: "Enhanced ecommerce plugin for browser tracker v3 to track detailed behavioral commerce analytics."
+schema: "TechArticle"
+keywords: ["Browser V3 Enhanced", "Enhanced Ecommerce", "Legacy Enhanced", "Advanced Commerce", "Shopping Funnel", "Product Analytics"]
 date: "2021-04-07"
 sidebar_position: 7000
 ---

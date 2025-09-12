@@ -1,5 +1,8 @@
 ---
 title: "Snowplow Mini"
+description: "Lightweight Snowplow pipeline for development, testing, and proof-of-concept behavioral data implementations."
+schema: "TechArticle"
+keywords: ["Snowplow Mini", "Testing Platform", "Development Environment", "Mini Pipeline", "Testing Framework", "Development Tool"]
 date: "2021-08-14"
 sidebar_position: 120
 ---

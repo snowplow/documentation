@@ -1,5 +1,8 @@
 ---
 title: "From version 3.x to 4.0"
+description: "Migration guide for mobile trackers upgrade from version 3.x to 4.0 with enhanced features."
+schema: "TechArticle"
+keywords: ["Mobile Migration", "V3 to V4", "Mobile Upgrade", "Version Migration", "Migration Guide", "Breaking Changes"]
 date: "2022-08-30"
 sidebar_position: -3
 ---

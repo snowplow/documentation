@@ -1,5 +1,7 @@
 ---
 title: "Timezone and geolocation"
+description: "Track timezone and geolocation data in web trackers v3 for behavioral analytics context."
+schema: "TechArticle"
 sidebar_position: 100
 ---
 

@@ -1,5 +1,8 @@
 ---
 title: "Setup Guide for GCP"
+description: "Setup guide for Snowplow Mini version 0.14 on Google Cloud Platform for behavioral data testing."
+schema: "TechArticle"
+keywords: ["Mini V0.14 GCP", "Legacy Mini", "Previous Version", "GCP Setup", "Deprecated Mini", "Old Version"]
 date: "2021-05-11"
 sidebar_position: -10
 ---

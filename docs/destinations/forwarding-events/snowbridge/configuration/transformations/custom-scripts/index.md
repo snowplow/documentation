@@ -1,5 +1,8 @@
 ---
 title: "Custom script transformations"
+description: "Write custom scripts for advanced behavioral event transformations during Snowbridge forwarding processes."
+schema: "TechArticle"
+keywords: ["Custom Scripts", "Transformation Scripts", "Custom Logic", "Script Processing", "Custom Code", "Script Transformation"]
 date: "2022-10-20"
 sidebar_position: 100
 ---

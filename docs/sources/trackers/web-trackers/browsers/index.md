@@ -1,5 +1,8 @@
 ---
 title: "Browser entity"
+description: "Browser compatibility and support information for web trackers across different behavioral tracking scenarios."
+schema: "TechArticle"
+keywords: ["Browser Support", "Browser Compatibility", "Web Browsers", "Cross Browser", "Browser Analytics", "Browser Testing"]
 date: "2021-04-07"
 sidebar_position: 2950
 ---

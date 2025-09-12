@@ -1,5 +1,8 @@
 ---
 title: "Setup"
+description: "Set up the C tracker for behavioral event collection in embedded systems and native applications."
+schema: "TechArticle"
+keywords: ["C Tracker Setup", "C Configuration", "C Analytics", "Native Tracking", "C SDK", "System Analytics"]
 date: "2020-02-25"
 sidebar_position: 10
 ---

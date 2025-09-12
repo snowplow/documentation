@@ -1,6 +1,8 @@
 ---
 title: "Debugging data modeling issues"
-description: "Guide for debugging data modeling issues"
+description: "Debug dbt models and transformations for reliable behavioral data processing workflows."
+schema: "TechArticle"
+keywords: ["DBT Debugging", "Model Debugging", "DBT Troubleshooting", "Debug Tools", "Model Issues", "DBT Errors"]
 sidebar_position: 10
 ---
 

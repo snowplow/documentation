@@ -1,5 +1,8 @@
 ---
 title: "HTTP Request Tag Configuration"
+description: "Detailed configuration options for HTTP request tags in GTM Server-Side behavioral event forwarding."
+schema: "TechArticle"
+keywords: ["HTTP Tag Config", "GTM Configuration", "Tag Setup", "HTTP Configuration", "Server Side Config", "Tag Configuration"]
 date: "2022-01-06"
 sidebar_position: 100
 ---

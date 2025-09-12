@@ -1,6 +1,9 @@
 ---
 position: 1
 title: Installation and Setup
+description: "Getting started with data products for behavioral event tracking and schema governance workflows."
+schema: "HowTo"
+keywords: ["Tutorial Start", "Getting Started", "Data Products", "Product Tutorial", "Tutorial Beginning", "Start Guide"]
 ---
 
 This guide will help you understand some of the basic capabilities of Data Products and how they can be used in practice for most tracking implementation setups.

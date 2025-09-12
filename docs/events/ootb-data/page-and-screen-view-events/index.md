@@ -1,5 +1,8 @@
 ---
 title: "Page and screen views"
+description: "Page view and screen view events captured automatically by Snowplow trackers for behavioral analytics."
+schema: "TechArticle"
+keywords: ["Page Views", "Screen Views", "View Events", "Navigation Analytics", "View Tracking", "Page Analytics"]
 ---
 
 ```mdx-code-block

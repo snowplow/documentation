@@ -1,5 +1,7 @@
 ---
 title: "Forms"
+description: "Track form interactions using web trackers v3 for behavioral conversion analytics."
+schema: "TechArticle"
 sidebar_position: 60
 ---
 

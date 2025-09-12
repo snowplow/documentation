@@ -1,5 +1,8 @@
 ---
 title: "Initialization"
+description: "Initialize .NET tracker for behavioral event tracking in Windows and .NET Framework applications."
+schema: "TechArticle"
+keywords: [".NET Initialization", "Tracker Init", ".NET Setup", "Framework Init", ".NET Configuration", "Analytics Init"]
 date: "2020-02-26"
 sidebar_position: 20
 ---

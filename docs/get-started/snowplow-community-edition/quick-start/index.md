@@ -1,5 +1,8 @@
 ---
 title: "Quick start guide"
+description: "Quick start guide for deploying Snowplow Community Edition behavioral data platform infrastructure."
+schema: "TechArticle"
+keywords: ["Community Quickstart", "Open Source", "Community Setup", "Quick Start", "Free Setup", "Community Guide"]
 sidebar_position: 2
 ---
 

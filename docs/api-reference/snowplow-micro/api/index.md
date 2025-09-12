@@ -1,7 +1,9 @@
 ---
 title: "REST API"
 sidebar_position: 1
-description: Snowplow Micro REST API.
+description: "REST API reference for Snowplow Micro behavioral event testing and validation endpoints."
+schema: "TechArticle"
+keywords: ["Micro API", "Testing API", "Local API", "Development API", "Micro Interface", "Testing Interface"]
 ---
 
 ```mdx-code-block

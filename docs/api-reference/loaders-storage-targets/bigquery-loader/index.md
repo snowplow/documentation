@@ -1,5 +1,8 @@
 ---
 title: "BigQuery Loader"
+description: "Load behavioral event data into Google BigQuery for large-scale analytics and data warehousing."
+schema: "TechArticle"
+keywords: ["BigQuery Loader", "Google BigQuery", "Data Warehouse", "BigQuery Integration", "Cloud Warehouse", "GCP Loader"]
 sidebar_label: "BigQuery Loader"
 sidebar_position: 2
 ---

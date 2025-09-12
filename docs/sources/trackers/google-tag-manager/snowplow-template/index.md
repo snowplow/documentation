@@ -1,5 +1,7 @@
 ---
 title: Snowplow Template
+description: "Snowplow template for Google Tag Manager to implement behavioral event tracking without custom code."
+keywords: ["GTM Template", "Snowplow GTM", "Tag Manager", "GTM Integration", "Tag Template", "Google Tags"]
 sidebar_position: 200
 ---
 
@@ -281,7 +283,7 @@ For example to manually attach the web page context, create a custom JavaScript 
 ```js
 function() {
     return [{
-        schema: 'iglu:com.example/web_page/jsonschema/1-0-0',
+schema: "TechArticle"
         data: {
             id: '12345',
             title: 'Example Page',

@@ -1,5 +1,8 @@
 ---
 title: "Setting up Snowplow Community Edition"
+description: "Deploy Snowplow Community Edition for open-source behavioral data collection and analytics infrastructure."
+schema: "TechArticle"
+keywords: ["Community Edition", "Open Source", "Free Version", "Community Platform", "OSS Analytics", "Community Setup"]
 date: "2020-10-30"
 sidebar_position: 4
 sidebar_label: "Snowplow Community Edition"

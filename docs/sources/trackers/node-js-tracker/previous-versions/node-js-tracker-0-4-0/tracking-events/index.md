@@ -1,5 +1,8 @@
 ---
 title: "Tracking Events"
+description: "Track behavioral events using Node.js tracker version 0.4.0 in server-side applications."
+schema: "TechArticle"
+keywords: ["Node.js V0.4.0", "Legacy Events", "Previous Version", "Old Events", "Deprecated Events", "Legacy Tracking"]
 date: "2020-09-03"
 sidebar_position: 400
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Configuring cookie and storage settings"
+description: "Configure cookie settings in web trackers for behavioral analytics while respecting user privacy."
+schema: "TechArticle"
+keywords: ["Cookie Configuration", "Cookie Settings", "Web Cookies", "Cookie Management", "Browser Storage", "Cookie Options"]
 sidebar_position: 100
 ---
 

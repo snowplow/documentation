@@ -1,5 +1,8 @@
 ---
 title: "Subject"
+description: "Configure user subjects in Python tracker for behavioral event context and identification."
+schema: "TechArticle"
+keywords: ["Python Subject", "User Context", "Subject Class", "Python Analytics", "User Data", "Python Context"]
 sidebar_position: 40
 ---
 

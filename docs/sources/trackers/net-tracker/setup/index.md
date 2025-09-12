@@ -1,5 +1,8 @@
 ---
 title: "Setup"
+description: "Set up the .NET tracker for behavioral event collection in Windows and .NET applications."
+schema: "TechArticle"
+keywords: [".NET Setup", "Tracker Setup", ".NET Configuration", "Setup Guide", ".NET Analytics", ".NET Integration"]
 date: "2020-02-26"
 sidebar_position: 10
 ---

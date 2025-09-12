@@ -1,5 +1,8 @@
 ---
 title: "Tracker Callbacks"
+description: "Configure callbacks in JavaScript tracker v2 for behavioral event processing workflows."
+schema: "TechArticle"
+keywords: ["JavaScript V2 Callbacks", "Legacy Callbacks", "Event Callbacks", "Callback Functions", "JavaScript Events", "Async Handling"]
 date: "2020-02-26"
 sidebar_position: 0
 ---

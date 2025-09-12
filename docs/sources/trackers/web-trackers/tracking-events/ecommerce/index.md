@@ -1,5 +1,8 @@
 ---
 title: "Ecommerce"
+description: "Track ecommerce transactions and shopping behavior using web trackers for retail analytics."
+schema: "TechArticle"
+keywords: ["Ecommerce Tracking", "Shopping Analytics", "Purchase Events", "Retail Analytics", "Transaction Tracking", "Commerce Events"]
 sidebar_position: 70
 ---
 

@@ -1,5 +1,8 @@
 ---
 title: "RDB loader monitoring"
+description: "Monitor RDB Loader components for behavioral data processing performance and health tracking."
+schema: "TechArticle"
+keywords: ["RDB Monitoring", "Legacy Monitoring", "Loader Monitoring", "RDB Metrics", "Performance Monitoring", "Legacy RDB"]
 date: "2021-09-29"
 sidebar_position: 350
 ---

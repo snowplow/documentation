@@ -1,5 +1,8 @@
 ---
 title: "Failed event alerts"
+description: "Advanced alert configurations for detecting and responding to failed events in real-time behavioral data streams."
+schema: "TechArticle"
+keywords: ["Failed Event Alerts", "Event Monitoring", "Quality Alerts", "Error Alerts", "Event Notifications", "Failure Alerts"]
 sidebar_position: 1
 ---
 

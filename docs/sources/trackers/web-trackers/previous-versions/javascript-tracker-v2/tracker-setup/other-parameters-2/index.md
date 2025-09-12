@@ -1,5 +1,8 @@
 ---
 title: "Additional options"
+description: "Configure additional parameters in JavaScript tracker v2 for behavioral event collection."
+schema: "TechArticle"
+keywords: ["JavaScript V2 Parameters", "Other Parameters", "Legacy Parameters", "Configuration Parameters", "Setup Options", "Additional Config"]
 sidebar_position: 20
 ---
 

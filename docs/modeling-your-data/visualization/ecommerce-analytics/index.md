@@ -1,5 +1,8 @@
 ---
 title: "Ecommerce Analytics"
+description: "Create ecommerce analytics dashboards from behavioral data for retail performance and customer insights."
+schema: "TechArticle"
+keywords: ["Ecommerce Analytics", "Retail Analytics", "Shopping Analytics", "Commerce Insights", "Revenue Analytics", "Sales Analytics"]
 sidebar_position: 2
 sidebar_label: "Ecommerce Analytics"
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Snowflake Streaming Loader configuration reference"
+description: "Configuration reference for Snowflake Streaming Loader behavioral data loading settings and optimization."
+schema: "TechArticle"
+keywords: ["Snowflake Stream Config", "Streaming Config", "Real Time Config", "Snowflake Settings", "Stream Settings", "Warehouse Config"]
 sidebar_label: "Configuration reference"
 sidebar_position: 1
 ---

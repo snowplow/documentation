@@ -1,5 +1,8 @@
 ---
 title: "Privacy Sandbox"
+description: "Track Privacy Sandbox APIs and features using web trackers for privacy-compliant behavioral analytics."
+schema: "TechArticle"
+keywords: ["Privacy Sandbox", "Chrome Privacy", "Privacy API", "Attribution API", "Privacy Enhanced", "Chrome Features"]
 sidebar_position: 160
 ---
 

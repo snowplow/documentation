@@ -1,5 +1,8 @@
 ---
 title: "DynamoDB Table"
+description: "DynamoDB table configuration for RDB Loader behavioral data processing and state management."
+schema: "TechArticle"
+keywords: ["RDB DynamoDB", "DynamoDB Table", "Legacy RDB", "Database Table", "DynamoDB Config", "NoSQL Integration"]
 date: "2021-03-26"
 sidebar_position: 30
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Update tracker configuration remotely"
+description: "Configure mobile trackers remotely for behavioral analytics settings and parameter management."
+schema: "TechArticle"
+keywords: ["Remote Configuration", "Mobile Config", "Dynamic Config", "Remote Setup", "App Configuration", "Mobile Management"]
 date: "2022-08-30"
 sidebar_position: 50
 ---

@@ -1,5 +1,6 @@
 ---
 title: "Activity (page pings)"
+description: "Track page activity and engagement using web trackers v3 for behavioral attention analytics."
 sidebar_position: 30
 ---
 
@@ -237,7 +238,7 @@ document.addEventListener('visibilitychange', function() {
   if (document.visibilityState == 'hidden') {
     window.snowplow('trackSelfDescribingEvent', {
       event: {
-        schema: 'iglu:com.acme_company/page_unload/jsonschema/1-0-0',
+schema: "TechArticle"
         data: {
             minXOffset: Math.max(0, Math.round(aggregatedEvent.minXOffset)),
             maxXOffset: Math.max(0, Math.round(aggregatedEvent.maxXOffset)),
@@ -291,7 +292,7 @@ document.addEventListener('visibilitychange', function() {
   if (document.visibilityState == 'hidden') {
     trackSelfDescribingEvent({
       event: {
-        schema: 'iglu:com.acme_company/page_unload/jsonschema/1-0-0',
+schema: "TechArticle"
         data: {
             minXOffset: Math.max(0, Math.round(aggregatedEvent.minXOffset)),
             maxXOffset: Math.max(0, Math.round(aggregatedEvent.maxXOffset)),

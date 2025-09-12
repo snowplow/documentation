@@ -1,6 +1,8 @@
 ---
 title: "Additional SQL on events this run"
-description: "Details on how to add sql to the events this run table"
+description: "Add custom SQL logic to events-this-run tables for enhanced behavioral data processing."
+schema: "TechArticle"
+keywords: ["Custom SQL", "Additional SQL", "SQL Enhancement", "Event SQL", "Custom Logic", "SQL Extension"]
 sidebar_position: 40
 ---
 

@@ -1,5 +1,8 @@
 ---
 title: "Targets"
+description: "Configure destination targets for forwarding behavioral events to streaming platforms and data systems."
+schema: "TechArticle"
+keywords: ["Export Targets", "Data Targets", "Event Destinations", "Output Configuration", "Target Setup", "Export Configuration"]
 date: "2022-10-20"
 sidebar_position: 300
 ---

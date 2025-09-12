@@ -1,5 +1,8 @@
 ---
 title: "Ecommerce Tag Configuration"
+description: "Version 3 ecommerce tag configuration for Google Tag Manager behavioral commerce tracking."
+schema: "TechArticle"
+keywords: ["GTM V3 Ecommerce", "Ecommerce Configuration", "Legacy GTM", "Shopping Tags", "Ecommerce Setup", "Commerce Configuration"]
 sidebar_position: 100
 ---
 

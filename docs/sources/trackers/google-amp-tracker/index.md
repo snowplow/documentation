@@ -1,5 +1,8 @@
 ---
 title: "Google AMP Tracker"
+description: "Google AMP tracker for behavioral event collection in Accelerated Mobile Pages implementations."
+schema: "TechArticle"
+keywords: ["AMP Tracker", "AMP Analytics", "Google AMP", "Mobile Pages", "AMP Integration", "Accelerated Pages"]
 date: "2020-02-25"
 sidebar_position: 150
 ---

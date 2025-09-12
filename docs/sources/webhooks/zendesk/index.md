@@ -1,5 +1,8 @@
 ---
 title: "ZenDesk"
+description: "Integrate Zendesk support webhook events into Snowplow for behavioral customer service analytics."
+schema: "TechArticle"
+keywords: ["Zendesk Webhook", "Support Events", "Customer Service", "Ticket Analytics", "Support Analytics", "Help Desk"]
 date: "2020-02-26"
 sidebar_position: 150
 ---

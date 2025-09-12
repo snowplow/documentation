@@ -1,5 +1,8 @@
 ---
 title: "Roku Tracker"
+description: "Roku tracker for behavioral event collection in streaming TV applications and connected TV analytics."
+schema: "TechArticle"
+keywords: ["Roku Tracker", "Roku Analytics", "Connected TV", "OTT Analytics", "TV Analytics", "Streaming Analytics"]
 date: "2021-11-16"
 sidebar_position: 140
 ---

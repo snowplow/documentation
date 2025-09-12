@@ -1,5 +1,8 @@
 ---
 title: "Advanced usage"
+description: "Advanced configuration and usage patterns for React Native v2 tracker behavioral event collection."
+schema: "TechArticle"
+keywords: ["React Native Advanced", "Advanced Usage", "Advanced Features", "Expert Guide", "Advanced Analytics", "Power Features"]
 date: "2021-08-09"
 sidebar_position: 40
 ---

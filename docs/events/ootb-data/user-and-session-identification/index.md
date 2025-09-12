@@ -1,5 +1,8 @@
 ---
 title: "User and session identification"
+description: "User and session identification mechanisms in Snowplow for behavioral analytics user tracking."
+schema: "TechArticle"
+keywords: ["User Identification", "Session ID", "User Analytics", "Identity Resolution", "User Tracking", "Session Management"]
 ---
 
 ```mdx-code-block

@@ -1,5 +1,8 @@
 ---
 title: "Native integrations"
+description: "Built-in integrations for forwarding behavioral events to popular marketing and analytics platforms."
+schema: "TechArticle"
+keywords: ["Native Integrations", "Event Forwarding", "Built-in Integrations", "Native Connectors", "Platform Integrations", "Event Export"]
 date: "2021-11-24"
 sidebar_position: 0
 ---

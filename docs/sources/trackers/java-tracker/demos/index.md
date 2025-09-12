@@ -1,5 +1,8 @@
 ---
 title: "Example Applications"
+description: "Demo applications and examples showcasing Java tracker behavioral event collection capabilities."
+schema: "TechArticle"
+keywords: ["Java Demos", "Java Examples", "Sample Applications", "Demo Apps", "Java Samples", "Example Code"]
 sidebar_position: 9999
 ---
 

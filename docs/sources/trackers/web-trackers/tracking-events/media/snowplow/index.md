@@ -1,5 +1,8 @@
 ---
 title: "Snowplow media"
+description: "Track Snowplow media player interactions using web trackers for comprehensive behavioral video analytics."
+schema: "TechArticle"
+keywords: ["Snowplow Media", "Media Tracking", "Video Analytics", "Media Events", "Video Engagement", "Media Analytics"]
 sidebar_position: 5
 ---
 

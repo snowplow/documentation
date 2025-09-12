@@ -1,5 +1,8 @@
 ---
 title: "Cross-domain tracking"
+description: "Implement cross-domain tracking using web trackers for unified behavioral analytics across multiple sites."
+schema: "TechArticle"
+keywords: ["Cross Domain", "Domain Tracking", "Multi Domain", "Cross Site", "Domain Analytics", "Cross Origin"]
 date: "2022-08-30"
 sidebar_position: 2850
 ---

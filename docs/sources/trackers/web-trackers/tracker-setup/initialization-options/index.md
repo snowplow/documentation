@@ -1,5 +1,8 @@
 ---
 title: "Initialization and configuration"
+description: "Configure JavaScript tracker initialization options for optimal behavioral event collection settings."
+schema: "TechArticle"
+keywords: ["Initialization Options", "Tracker Config", "Setup Options", "Web Configuration", "Tracker Settings", "Init Configuration"]
 date: "2021-03-31"
 sidebar_position: 2000
 ---

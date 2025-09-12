@@ -1,5 +1,8 @@
 ---
 title: "Event Tracking"
+description: "Track specific behavioral events using Python tracker for targeted server-side analytics."
+schema: "TechArticle"
+keywords: ["Python Events", "Event Tracking", "Python Analytics", "Server Events", "Backend Events", "Python Tracking"]
 sidebar_position: 50
 ---
 

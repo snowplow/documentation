@@ -1,5 +1,8 @@
 ---
 title: "Original"
+description: "Track original ecommerce events using web trackers v3 for behavioral commerce analytics."
+schema: "TechArticle"
+keywords: ["Web V3 Original", "Original Ecommerce", "Legacy Ecommerce", "Traditional Commerce", "Old Commerce", "Classic Ecommerce"]
 sidebar_position: 70
 ---
 

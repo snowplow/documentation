@@ -1,5 +1,8 @@
 ---
 title: "Ecommerce events"
+description: "Built-in ecommerce event tracking in Snowplow for behavioral commerce and transaction analytics."
+schema: "TechArticle"
+keywords: ["Ecommerce Events", "Shopping Events", "Purchase Events", "Retail Analytics", "Commerce Analytics", "Transaction Events"]
 ---
 
 ```mdx-code-block

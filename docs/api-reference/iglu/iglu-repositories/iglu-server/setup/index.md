@@ -1,5 +1,8 @@
 ---
 title: "Setup Iglu Server"
+description: "Set up Iglu Server for centralized schema registry management in behavioral data infrastructure."
+schema: "TechArticle"
+keywords: ["Iglu Server Setup", "Schema Registry", "Iglu Installation", "Registry Setup", "Schema Management", "Iglu Configuration"]
 date: "2021-03-26"
 sidebar_position: 1000
 ---

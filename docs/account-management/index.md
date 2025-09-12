@@ -1,5 +1,8 @@
 ---
 title: "Managing your account"
+description: "Administrative tools and settings for managing your Snowplow organization, users, and behavioral data platform access."
+schema: "TechArticle"
+keywords: ["Account Management", "User Administration", "Account Settings", "Organization Management", "Account Control", "User Access"]
 date: "2020-02-15"
 sidebar_position: 9
 sidebar_custom_props:

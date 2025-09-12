@@ -1,5 +1,8 @@
 ---
 title: "Tracker Information"
+description: "Access tracker information and metadata in browser tracker v3 for behavioral analytics debugging."
+schema: "TechArticle"
+keywords: ["Browser V3 Info", "Tracker Information", "Legacy Info", "Tracker Details", "System Information", "Analytics Info"]
 date: "2021-04-07"
 sidebar_position: 2000
 ---

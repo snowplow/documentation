@@ -1,5 +1,8 @@
 ---
 title: "Iglu Repositories"
+description: "Iglu repository types and configurations for behavioral data schema storage and management."
+schema: "TechArticle"
+keywords: ["Iglu Repositories", "Schema Repositories", "Schema Registry", "Registry Types", "Schema Storage", "Repository Management"]
 date: "2021-03-26"
 sidebar_position: 20
 ---

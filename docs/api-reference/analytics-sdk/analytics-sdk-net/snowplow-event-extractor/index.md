@@ -1,5 +1,8 @@
 ---
 title: "Snowplow event extractor"
+description: ".NET event extractor for parsing and processing Snowplow behavioral event data in Windows applications."
+schema: "TechArticle"
+keywords: [".NET Extractor", "Event Extractor", ".NET SDK", "Data Extraction", ".NET API", "Event Processing"]
 date: "2021-03-26"
 sidebar_position: 1040
 ---

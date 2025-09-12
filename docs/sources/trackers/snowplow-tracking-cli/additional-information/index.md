@@ -1,5 +1,8 @@
 ---
 title: "Additional Information"
+description: "Additional information and advanced usage for Snowplow CLI tracking tool."
+schema: "TechArticle"
+keywords: ["CLI Information", "Tracking CLI", "Command Line", "CLI Tools", "Terminal Tracking", "CLI Analytics"]
 date: "2020-10-12"
 sidebar_position: 300
 ---

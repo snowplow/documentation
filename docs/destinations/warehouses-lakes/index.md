@@ -2,7 +2,9 @@
 title: "Supported warehouse and data lake destinations"
 sidebar_position: 1
 sidebar_label: "Warehouses and lakes"
-description: "An overview of the available options for storing Snowplow data in data warehouses and lakes"
+description: "Load behavioral data into warehouses and lakes for long-term storage and large-scale analytics processing."
+schema: "TechArticle"
+keywords: ["Data Warehouses", "Data Lakes", "Storage Solutions", "Analytics Storage", "Big Data Storage", "Data Storage"]
 ---
 
 ```mdx-code-block

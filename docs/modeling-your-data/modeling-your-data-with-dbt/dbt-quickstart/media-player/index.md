@@ -2,6 +2,9 @@
 sidebar_label: "Media Player"
 sidebar_position: 20
 title: "Media Player Quickstart"
+description: "Quick start guide for dbt media player data model implementation for behavioral video analytics."
+schema: "TechArticle"
+keywords: ["Media Quickstart", "Video Setup", "Media Analytics", "Video DBT", "Media Guide", "Content Analytics"]
 ---
 
 ```mdx-code-block

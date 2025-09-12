@@ -1,5 +1,8 @@
 ---
 title: "Third Party CDN Hosting"
+description: "Host JavaScript tracker using third-party CDN services for behavioral event collection distribution."
+schema: "TechArticle"
+keywords: ["Third Party CDN", "CDN Hosting", "External CDN", "CDN Services", "Third Party", "CDN Setup"]
 date: "2020-10-12"
 sidebar_position: 4100
 ---

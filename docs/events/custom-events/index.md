@@ -1,5 +1,8 @@
 ---
 title: "Custom events and context entities"
+description: "Create custom behavioral events to capture unique business interactions and user behaviors."
+schema: "TechArticle"
+keywords: ["Custom Events", "Custom Analytics", "Bespoke Events", "Event Creation", "Custom Tracking", "Tailored Events"]
 sidebar_position: 1
 ---
 

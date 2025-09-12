@@ -1,5 +1,8 @@
 ---
 title: "HTML5"
+description: "Track HTML5 media player interactions using web trackers for behavioral video and audio analytics."
+schema: "TechArticle"
+keywords: ["HTML5 Media", "Video Tracking", "Audio Tracking", "Media Analytics", "HTML5 Events", "Media Events"]
 sidebar_position: 10
 ---
 

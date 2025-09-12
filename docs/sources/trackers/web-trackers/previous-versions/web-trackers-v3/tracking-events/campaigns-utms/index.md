@@ -1,5 +1,7 @@
 ---
 title: "Campaigns and UTMs"
+description: "Track UTM campaign parameters using web trackers v3 for behavioral marketing attribution."
+schema: "TechArticle"
 sidebar_position: 90
 ---
 

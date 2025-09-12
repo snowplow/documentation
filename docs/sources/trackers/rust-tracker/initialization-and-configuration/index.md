@@ -1,5 +1,8 @@
 ---
 title: "Initialization and configuration"
+description: "Initialize and configure the Rust tracker for behavioral event collection in systems programming applications."
+schema: "TechArticle"
+keywords: ["Rust Tracker", "Rust Configuration", "Tracker Setup", "Rust Analytics", "Configuration Guide", "Rust Integration"]
 date: "2022-10-24"
 sidebar_position: 2000
 ---

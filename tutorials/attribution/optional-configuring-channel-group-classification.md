@@ -1,5 +1,8 @@
 ---
 title: Optional - Configuring Channel Group Classification
+description: "Configure channel group classification for marketing attribution behavioral data analysis customization."
+schema: "HowTo"
+keywords: ["Channel Classification", "Marketing Channels", "Channel Groups", "Attribution Channels", "Marketing Categories", "Channel Mapping"]
 position: 6
 ---
 

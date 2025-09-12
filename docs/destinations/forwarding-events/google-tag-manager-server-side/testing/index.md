@@ -1,5 +1,7 @@
 ---
 title: "Debugging Google Tag Manager Server Side Tags"
+description: "Test and debug Google Tag Manager Server-Side configurations for behavioral event forwarding accuracy."
+keywords: ["GTM Testing", "Server Side Testing", "Tag Testing", "GTM Validation", "Testing Framework", "Tag Validation"]
 sidebar_label: "Testing & debugging"
 sidebar_position: 800
 ---
@@ -39,7 +41,7 @@ For example, if you are using the [JavaScript tracker](/docs/sources/trackers/we
 ```javascript
 snowplow('trackPageView', {
   context: [{
-    schema: 'iglu:com.google.tag-manager.server-side/preview_mode/jsonschema/1-0-0',
+schema: "TechArticle"
     data: {
       // paste your header value here
       'x-gtm-server-preview': 'sTjhMcUdkNldaM2RsOThwWTRvNzE3VkZtb1BwK0E9PQo='
@@ -52,7 +54,7 @@ You can also add it as a [global context](/docs/sources/trackers/web-trackers/cu
 
 ```javascript
 const gtmPreviewContext = {
-  schema: 'iglu:com.google.tag-manager.server-side/preview_mode/jsonschema/1-0-0',
+schema: "TechArticle"
   data: {
     // paste your header value here
     'x-gtm-server-preview': 'sTjhMcUdkNldaM2RsOThwWTRvNzE3VkZtb1BwK0E9PQo='

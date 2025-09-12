@@ -1,5 +1,8 @@
 ---
 title: "Initialization"
+description: "Initialize PHP tracker for behavioral event tracking in server-side PHP applications."
+schema: "TechArticle"
+keywords: ["PHP Initialization", "PHP Init", "PHP Setup", "PHP Configuration", "PHP Analytics", "Server Init"]
 date: "2020-02-26"
 sidebar_position: 20
 ---

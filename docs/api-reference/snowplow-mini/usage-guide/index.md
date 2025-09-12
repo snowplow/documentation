@@ -1,5 +1,8 @@
 ---
 title: "Usage Guide"
+description: "Usage guide for Snowplow Mini behavioral data pipeline testing and development workflows."
+schema: "TechArticle"
+keywords: ["Mini Usage", "Testing Guide", "Mini Guide", "Development Guide", "Testing Framework", "Mini Tutorial"]
 date: "2021-05-11"
 sidebar_position: 3
 ---

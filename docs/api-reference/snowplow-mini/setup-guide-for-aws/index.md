@@ -1,5 +1,8 @@
 ---
 title: "Setup Guide for AWS"
+description: "Deploy Snowplow Mini on Amazon Web Services for behavioral data pipeline development and testing."
+schema: "TechArticle"
+keywords: ["Mini AWS", "Mini Setup", "AWS Setup", "Testing Environment", "Development Platform", "AWS Mini"]
 date: "2021-05-11"
 sidebar_position: 1
 ---

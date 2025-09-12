@@ -1,5 +1,8 @@
 ---
 title: "Usage"
+description: "Usage guide for Snowplow CLI tracking tool for command-line behavioral event collection."
+schema: "TechArticle"
+keywords: ["CLI Usage", "Command Usage", "CLI Guide", "Terminal Usage", "CLI Commands", "Tracking CLI"]
 date: "2020-10-12"
 sidebar_position: 200
 ---

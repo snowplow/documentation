@@ -1,5 +1,8 @@
 ---
 title: "Plugins"
+description: "Web tracker plugins for enhanced behavioral event collection including ecommerce, media, and form tracking."
+schema: "TechArticle"
+keywords: ["Web Plugins", "Tracker Plugins", "JavaScript Extensions", "Analytics Plugins", "Web Features", "Plugin System"]
 date: "2021-04-07"
 sidebar_position: 2800
 ---

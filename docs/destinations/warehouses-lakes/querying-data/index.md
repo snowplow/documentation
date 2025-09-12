@@ -2,7 +2,9 @@
 title: "Querying Snowplow data"
 sidebar_label: "Querying data"
 sidebar_position: 3
-description: "An introduction to querying Snowplow data, including self-describing events and entities, as well tips for dealing with duplicate events"
+description: "Query behavioral data stored in warehouses and lakes using SQL for analytics and business intelligence."
+schema: "TechArticle"
+keywords: ["Data Querying", "SQL Queries", "Analytics Queries", "Data Analysis", "Query Optimization", "Data Exploration"]
 ---
 
 ```mdx-code-block

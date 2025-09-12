@@ -1,5 +1,8 @@
 ---
 title: "Android (1.4.0)"
+description: "Android tracker version 1.4.0 documentation for behavioral event collection in Android applications."
+schema: "TechArticle"
+keywords: ["Android V1.4.0", "Android Legacy", "Legacy Android", "Previous Version", "Deprecated Android", "Old Android"]
 date: "2020-03-19"
 sidebar_position: 870
 ---

@@ -1,5 +1,7 @@
 ---
 title: "React Native Tracker v0 reference"
+description: "React Native v0 tracker reference documentation for legacy behavioral event collection implementations."
+keywords: ["React Native V0", "Legacy Version", "Previous Version", "Old Version", "Version Zero", "Deprecated Version"]
 date: "2021-08-09"
 sidebar_position: 300
 sidebar_custom_props:
@@ -96,7 +98,7 @@ Custom events may be tracked using the `trackSelfDescribingEvent()` method:
 
 ```typescript
 tracker.trackSelfDescribingEvent({
-  schema: 'iglu:com.acme/example/jsonschema/1-0-0',
+schema: "TechArticle"
   data: {someExampleField: 'Hello World'}
 });
 ```
@@ -112,7 +114,7 @@ tracker.trackScreenViewEvent(
    { screenName: 'myScreenName' },
    [
      {
-       schema: 'iglu:com.acme/example_entity/jsonschema/1-0-0',
+schema: "TechArticle"
        data: {someOtherExampleField: 'Foo Bar Baz'}
      },
    ]
@@ -120,12 +122,12 @@ tracker.trackScreenViewEvent(
 
  tracker.trackSelfDescribingEvent(
    {
-     schema: 'iglu:com.acme/example_event/jsonschema/1-0-0',
+schema: "TechArticle"
      data: {someExampleField: 'Hello World'}
    },
    [
      {
-       schema: 'iglu:com.acme/example_entity/jsonschema/1-0-0',
+schema: "TechArticle"
        data: {someOtherExampleField: 'Foo Bar Baz'}
      },
    ]
@@ -255,7 +257,7 @@ To attach custom contexts, pass a second argument to the function, containing an
 tracker.trackScreenViewEvent(
   {screenName: 'myScreenName'},
   [{
-    schema: 'iglu:com.acme/example_entity/jsonschema/1-0-0',
+schema: "TechArticle"
     data: {someExampleField: 'Foo Bar Baz'}
   }]
 );
@@ -267,7 +269,7 @@ Track Custom events using the `trackSelfDescribingEvent()` method.
 
 ```typescript
 tracker.trackSelfDescribingEvent({
-  schema: 'iglu:com.acme/example/jsonschema/1-0-0',
+schema: "TechArticle"
   data: {someExampleField: 'Hello World'}
 });
 ```
@@ -282,11 +284,11 @@ To attach custom contexts, pass a second argument to the function, containing an
 ```typescript
 tracker.trackSelfDescribingEvent(
   {
-    schema: 'iglu:com.acme/example_event/jsonschema/1-0-0',
+schema: "TechArticle"
     data: {someExampleField: 'Hello World'}
   },
   [{
-    schema: 'iglu:com.acme/example_entity/jsonschema/1-0-0',
+schema: "TechArticle"
     data: {someOtherExampleField: 'Foo Bar Baz'}
   }]
 );
@@ -329,7 +331,7 @@ tracker.trackStructuredEvent(
     value: 50.00
   },
   [{
-    schema: 'iglu:com.acme/example_entity/jsonschema/1-0-0',
+schema: "TechArticle"
     data: {someOtherExampleField: 'Foo Bar Baz'}
   }]
 );

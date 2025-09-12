@@ -1,5 +1,7 @@
 ---
 title: "Node.js Tracker v3"
+description: "Node.js tracker version 3 documentation for behavioral event collection in JavaScript applications."
+schema: "TechArticle"
 date: "2021-03-24"
 sidebar_position: 200
 ---

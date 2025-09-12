@@ -1,5 +1,8 @@
 ---
 title: "Reverse ETL"
+description: "Send behavioral data from your warehouse back to operational systems using reverse ETL patterns and integrations."
+schema: "TechArticle"
+keywords: ["Reverse ETL", "Data Activation", "Customer Data", "Data Sync", "Operational Analytics", "Data Export"]
 sidebar_position: 3
 ---
 

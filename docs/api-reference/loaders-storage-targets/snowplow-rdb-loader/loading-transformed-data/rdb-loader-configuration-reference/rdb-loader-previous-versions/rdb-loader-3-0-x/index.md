@@ -1,5 +1,8 @@
 ---
 title: "RDB Loader 3.0.x"
+description: "RDB Loader version 3.0.x configuration reference for behavioral data loading into relational databases."
+schema: "TechArticle"
+keywords: ["RDB Loader V3.0.x", "Legacy RDB", "Previous Version", "Deprecated Loader", "Legacy Configuration", "Old Version"]
 date: "2022-05-27"
 sidebar_position: 10
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Organize data sources with Source Applications"
+description: "Organize and manage source applications that generate behavioral events in your Snowplow data ecosystem."
+schema: "TechArticle"
+keywords: ["Source Applications", "App Management", "Application Sources", "App Configuration", "Source Setup", "Application Registry"]
 sidebar_position: 2
 sidebar_label: "Source applications"
 ---

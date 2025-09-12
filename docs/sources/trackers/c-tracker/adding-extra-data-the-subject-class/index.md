@@ -1,5 +1,8 @@
 ---
 title: "Adding extra data: the Subject class"
+description: "Add user and session context using C tracker subject class for behavioral event enrichment."
+schema: "TechArticle"
+keywords: ["C Subject", "User Context", "Subject Class", "C Analytics", "User Data", "Native Context"]
 date: "2020-02-25"
 sidebar_position: 30
 ---

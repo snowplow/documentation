@@ -1,5 +1,8 @@
 ---
 title: "Transformer Kinesis configuration reference"
+description: "Configuration reference for Kinesis Transformer in RDB Loader behavioral data processing pipelines."
+schema: "TechArticle"
+keywords: ["Kinesis Config", "Stream Config", "Transformer Config", "AWS Config", "Kinesis Settings", "Stream Settings"]
 date: "2022-10-13"
 sidebar_position: 12
 ---

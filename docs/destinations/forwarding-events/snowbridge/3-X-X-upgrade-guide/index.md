@@ -1,5 +1,8 @@
 ---
 title: "3.X.X upgrade guide"
+description: "Upgrade guide for migrating to Snowbridge 3.x with new behavioral event forwarding features and improvements."
+schema: "TechArticle"
+keywords: ["Snowbridge Upgrade", "Version Migration", "Upgrade Guide", "Migration Guide", "Version Update", "Breaking Changes"]
 sidebar_position: 400
 ---
 

@@ -1,5 +1,8 @@
 ---
 title: "Error Tracking"
+description: "Error tracking plugin for browser tracker v3 to monitor behavioral analytics JavaScript errors."
+schema: "TechArticle"
+keywords: ["Browser V3 Errors", "Error Tracking", "Legacy Errors", "JavaScript Errors", "Error Analytics", "Bug Tracking"]
 date: "2021-04-07"
 sidebar_position: 8000
 ---

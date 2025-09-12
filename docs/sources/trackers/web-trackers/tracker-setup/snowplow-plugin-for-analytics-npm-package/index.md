@@ -1,5 +1,8 @@
 ---
 title: "Snowplow Plugin for getanalytics.io"
+description: "Integrate Snowplow with analytics npm package for behavioral event collection in JavaScript applications."
+schema: "TechArticle"
+keywords: ["NPM Analytics", "Analytics Package", "NPM Plugin", "Package Manager", "JavaScript Package", "Analytics NPM"]
 date: "2020-08-10"
 sidebar_position: 4000
 ---

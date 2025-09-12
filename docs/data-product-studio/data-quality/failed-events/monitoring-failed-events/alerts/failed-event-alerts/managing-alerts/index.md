@@ -1,5 +1,8 @@
 ---
 title: "Managing alerts"
+description: "Manage and maintain failed event alert configurations for ongoing behavioral data quality monitoring."
+schema: "TechArticle"
+keywords: ["Alert Management", "Managing Alerts", "Alert Administration", "Alert Control", "Notification Management", "Alert Operations"]
 sidebar_position: 2
 ---
 

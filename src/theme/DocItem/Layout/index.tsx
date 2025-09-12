@@ -17,6 +17,7 @@ import { Paper } from '@mui/material'
 
 import { useTutorial, TutorialKind } from '@site/src/components/tutorials/hooks'
 import { AlignLeft } from 'lucide-react';
+import HeadJSONLD from '../../../components/SchemaPlugin'
 
 import Demo_Ad from '../../../components/ui/Demo_Ad';
 
@@ -50,6 +51,8 @@ export default function DocItemLayout({ children }: Props): JSX.Element {
   const tutorial = useTutorial()
 
   return (
+    <>
+          <HeadJSONLD />
     <div className="row">
       <div className={clsx('col', !docTOC.hidden && styles.docItemCol)}>
         <DocVersionBanner />
@@ -82,6 +85,7 @@ export default function DocItemLayout({ children }: Props): JSX.Element {
         </div>
       </div>
       }
-    </div>
+      </div>
+      </>
   )
 }

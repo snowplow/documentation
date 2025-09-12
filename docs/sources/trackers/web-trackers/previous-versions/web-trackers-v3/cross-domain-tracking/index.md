@@ -1,5 +1,7 @@
 ---
 title: "Cross-domain tracking"
+description: "Implement cross-domain tracking using web trackers v3 for unified behavioral analytics."
+schema: "TechArticle"
 date: "2022-08-30"
 sidebar_position: 2850
 ---

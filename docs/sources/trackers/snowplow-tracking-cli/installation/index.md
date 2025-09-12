@@ -1,5 +1,8 @@
 ---
 title: "Installation"
+description: "Install Snowplow CLI tracking tool for command-line behavioral event collection and testing."
+schema: "TechArticle"
+keywords: ["CLI Installation", "CLI Setup", "Command Line", "CLI Tools", "Terminal Setup", "CLI Guide"]
 date: "2020-10-12"
 sidebar_position: 100
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Initialization"
+description: "Initialize Node.js tracker version 3 for behavioral event tracking in JavaScript servers."
+schema: "TechArticle"
+keywords: ["Node.js V3", "Legacy Initialization", "Previous Version", "V3 Init", "Deprecated Init", "Legacy Setup"]
 date: "2021-04-07"
 sidebar_position: 2000
 ---

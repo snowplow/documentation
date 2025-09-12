@@ -1,5 +1,8 @@
 ---
 title: "Self Hosting the JavaScript Tracker on AWS"
+description: "Self-host JavaScript tracker on Amazon Web Services for behavioral event collection infrastructure."
+schema: "TechArticle"
+keywords: ["Self Hosting AWS", "AWS Hosting", "JavaScript Hosting", "CDN Hosting", "AWS CDN", "Self Hosted"]
 sidebar_position: 100
 ---
 

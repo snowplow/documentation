@@ -1,5 +1,8 @@
 ---
 title: "Mobile Native Trackers"
+description: "Native mobile trackers for iOS and Android behavioral event collection in mobile applications and games."
+schema: "TechArticle"
+keywords: ["Mobile Tracker", "Mobile Analytics", "App Tracking", "iOS Android", "Mobile SDK", "App Analytics"]
 date: "2021-04-12"
 sidebar_position: 110
 ---

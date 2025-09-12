@@ -1,5 +1,8 @@
 ---
 title: "Errors"
+description: "Track JavaScript errors and exceptions using web trackers for behavioral analytics and debugging."
+schema: "TechArticle"
+keywords: ["Error Tracking", "JavaScript Errors", "Error Analytics", "Bug Tracking", "Error Monitoring", "Client Errors"]
 sidebar_position: 110
 ---
 

@@ -1,5 +1,8 @@
 ---
 title: "App Errors Module"
+description: "App errors module in dbt unified model for cross-platform behavioral application debugging analytics."
+schema: "TechArticle"
+keywords: ["Unified Errors", "App Errors", "Error Analytics", "Unified DBT", "Error Models", "Cross Platform"]
 sidebar_position: 50
 hide_title: true
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Recovering failed events"
+description: "Recover and fix failed behavioral events to maintain data quality and completeness in your analytics pipeline."
+schema: "TechArticle"
+keywords: ["Event Recovery", "Failed Events", "Data Recovery", "Event Repair", "Quality Recovery", "Data Restoration"]
 sidebar_position: 4
 sidebar_label: "Recover"
 ---

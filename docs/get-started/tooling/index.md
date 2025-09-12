@@ -2,7 +2,9 @@
 title: "Useful tools for working with Snowplow"
 sidebar_position: 10
 sidebar_label: "Useful tools"
-description: "Tools that help test and debug Snowplow"
+description: "Essential tools and platforms for implementing Snowplow behavioral data infrastructure and analytics workflows."
+schema: "TechArticle"
+keywords: ["Snowplow Tooling", "Analytics Tools", "Development Tools", "Platform Tools", "Getting Started", "Tool Overview"]
 ---
 
 ## Snowplow Inspector

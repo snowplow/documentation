@@ -1,6 +1,8 @@
 ---
 title: "Amending schemas"
-description: "Fixing a mistake in an existing schema version"
+description: "Amend existing data structure versions to fix issues while maintaining backward compatibility in your schema evolution."
+schema: "TechArticle"
+keywords: ["Schema Amending", "Version Control", "Schema Updates", "Structure Changes", "Schema Evolution", "Version Management"]
 sidebar_position: 40
 ---
 

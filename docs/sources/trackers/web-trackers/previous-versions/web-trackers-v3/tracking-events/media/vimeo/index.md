@@ -1,5 +1,7 @@
 ---
 title: "Vimeo"
+description: "Track Vimeo video interactions using web trackers v3 for behavioral media analytics."
+schema: "TechArticle"
 sidebar_position: 15
 ---
 

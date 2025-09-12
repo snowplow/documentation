@@ -1,5 +1,8 @@
 ---
 title: "Data quality"
+description: "Maintain and improve behavioral data quality across your Snowplow implementation with monitoring and validation tools."
+schema: "TechArticle"
+keywords: ["Data Quality", "Quality Management", "Data Validation", "Quality Control", "Data Monitoring", "Quality Assurance"]
 date: "2024-12-04"
 sidebar_position: 8
 ---

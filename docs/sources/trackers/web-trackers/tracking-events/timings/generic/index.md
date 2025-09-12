@@ -1,5 +1,8 @@
 ---
 title: "Generic timing"
+description: "Track generic timing events and user interactions using web trackers for performance analysis."
+schema: "TechArticle"
+keywords: ["Generic Timing", "Custom Timing", "Performance Events", "Timing Metrics", "Custom Performance", "Timing Analytics"]
 sidebar_position: 98
 ---
 

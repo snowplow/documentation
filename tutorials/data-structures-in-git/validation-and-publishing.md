@@ -1,5 +1,8 @@
 ---
 title: Modify, validate and publish
+description: "Validate and publish Snowplow data structures through Git workflows for behavioral data schema governance."
+schema: "HowTo"
+keywords: ["Schema Validation", "Schema Publishing", "Git Validation", "Schema CI", "Schema Deployment", "Git Publishing"]
 position: 3
 ---
 

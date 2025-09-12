@@ -1,5 +1,8 @@
 ---
 title: "From version 0.12 to 1.0"
+description: "Migration guide for upgrading Java tracker to version 1 with enhanced behavioral event capabilities."
+schema: "TechArticle"
+keywords: ["Java Migration", "V1 Migration", "Version Migration", "Upgrade Guide", "Migration Guide", "Breaking Changes"]
 date: "2022-03-24"
 sidebar_position: 90
 ---

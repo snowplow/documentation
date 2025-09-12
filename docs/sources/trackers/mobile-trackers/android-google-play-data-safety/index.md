@@ -1,5 +1,8 @@
 ---
 title: "Google Play Data safety (Android)"
+description: "Android Google Play data safety compliance guide for mobile tracker behavioral analytics implementation."
+schema: "TechArticle"
+keywords: ["Android Safety", "Play Store", "Data Safety", "Privacy Labels", "Google Play", "Android Privacy"]
 date: "2021-11-24"
 sidebar_position: 200
 ---

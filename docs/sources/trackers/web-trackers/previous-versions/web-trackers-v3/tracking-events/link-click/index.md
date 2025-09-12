@@ -1,5 +1,7 @@
 ---
 title: "Link clicks"
+description: "Track link clicks using web trackers v3 for behavioral navigation analytics."
+schema: "TechArticle"
 sidebar_position: 40
 ---
 

@@ -1,5 +1,8 @@
 ---
 title: "Ads"
+description: "Track advertising interactions and impressions using web trackers for behavioral ad analytics."
+schema: "TechArticle"
+keywords: ["Ad Tracking", "Advertisement Analytics", "Ad Events", "Marketing Analytics", "Ad Performance", "Advertising Data"]
 sidebar_position: 95
 ---
 

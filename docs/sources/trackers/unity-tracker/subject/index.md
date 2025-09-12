@@ -1,5 +1,8 @@
 ---
 title: "Subject"
+description: "Configure user subjects in Unity tracker for behavioral event context and player identification."
+schema: "TechArticle"
+keywords: ["Unity Subject", "Player Context", "Game Context", "Unity Analytics", "Player Data", "Game Data"]
 date: "2020-02-26"
 sidebar_position: 60
 ---

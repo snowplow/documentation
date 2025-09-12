@@ -1,7 +1,9 @@
 ---
 title: "Snowplow Micro"
 sidebar_position: 115
-description: "Snowplow Micro arguments and environment variables."
+description: "Snowplow Micro API reference for lightweight behavioral event validation and testing workflows."
+schema: "TechArticle"
+keywords: ["Snowplow Micro", "Local Testing", "Testing Tool", "Development Environment", "Micro Pipeline", "Local Analytics"]
 ---
 
 See [this guide](/docs/data-product-studio/data-quality/snowplow-micro/index.md) for learning about Snowplow Micro and getting started with it.

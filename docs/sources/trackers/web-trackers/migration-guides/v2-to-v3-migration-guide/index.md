@@ -1,5 +1,6 @@
 ---
 title: "Migrating from v2 to v3"
+description: "Migration guide for upgrading web trackers from version 2 to 3 with enhanced behavioral tracking features."
 date: "2021-03-24"
 sidebar_position: 1200
 ---
@@ -21,9 +22,9 @@ The track methods now accept an Object which contains the event data, instead of
 ```javascript
 window.snowplow('trackPageView', 'My Title', [ // Set page title; add page context
   {
-    schema: "iglu:org.schema/WebPage/jsonschema/1-0-0",
+schema: "TechArticle"
     data: {
-      keywords: ['tester']
+keywords: ["Web Tracker Migration", "V2 to V3", "Version Migration", "Upgrade Guide", "Migration Guide", "Breaking Changes"]
     }
   }
 ]);
@@ -36,9 +37,8 @@ window.snowplow('trackPageView', {
   title: 'My Title',
   context: [
     {
-      schema: 'iglu:org.schema/WebPage/jsonschema/1-0-0',
+schema: "TechArticle"
       data: {
-        keywords: ['tester'],
       },
     },
   ],

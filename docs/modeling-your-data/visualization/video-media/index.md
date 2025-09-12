@@ -1,5 +1,8 @@
 ---
 title: "Video and Media Analytics"
+description: "Visualize video and media engagement analytics from behavioral data for content performance insights."
+schema: "TechArticle"
+keywords: ["Video Analytics", "Media Analytics", "Video Insights", "Media Visualization", "Video Metrics", "Content Analytics"]
 sidebar_position: 5
 sidebar_label: "Video and Media Analytics"
 ---

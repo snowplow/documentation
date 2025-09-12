@@ -1,5 +1,8 @@
 ---
 title: "Self-describing events"
+description: "Create self-describing behavioral events with JSON schemas for flexible and extensible event tracking."
+schema: "TechArticle"
+keywords: ["Self Describing Events", "Schema Events", "Custom Events", "Event Schema", "Flexible Events", "JSON Events"]
 ---
 
 ```mdx-code-block

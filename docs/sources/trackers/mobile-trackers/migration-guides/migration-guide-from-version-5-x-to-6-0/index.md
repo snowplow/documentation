@@ -1,5 +1,8 @@
 ---
 title: "From version 5.x to 6.0"
+description: "Migration guide for mobile trackers upgrade from version 5.x to 6.0 with enhanced capabilities."
+schema: "TechArticle"
+keywords: ["Mobile Migration", "V5 to V6", "Mobile Upgrade", "Version Migration", "Migration Guide", "Breaking Changes"]
 sidebar_position: -7
 ---
 

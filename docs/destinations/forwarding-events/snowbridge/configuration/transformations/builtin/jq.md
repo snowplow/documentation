@@ -1,6 +1,8 @@
 ---
 title: "jq"
-description: "Runs a jq command on the message data and outputs the result."
+description: "Use jq JSON processor for powerful behavioral event transformations in Snowbridge forwarding pipelines."
+schema: "TechArticle"
+keywords: ["JQ Transformation", "JSON Processing", "JQ Filter", "JSON Manipulation", "Data Processing", "JQ Query"]
 ---
 
 ```mdx-code-block

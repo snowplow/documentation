@@ -1,5 +1,8 @@
 ---
 title: "Mobile app install and lifecycle events"
+description: "Mobile application lifecycle events tracked automatically by Snowplow for behavioral mobile analytics."
+schema: "TechArticle"
+keywords: ["Mobile Lifecycle", "App Lifecycle", "Mobile Events", "App State", "Lifecycle Analytics", "Mobile Sessions"]
 ---
 
 ```mdx-code-block

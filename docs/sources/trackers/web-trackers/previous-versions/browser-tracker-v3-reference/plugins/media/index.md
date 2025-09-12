@@ -1,5 +1,8 @@
 ---
 title: "Snowplow Media"
+description: "Media plugins for browser tracker v3 to track behavioral video and audio analytics."
+schema: "TechArticle"
+keywords: ["Browser V3 Media", "Media Plugin", "Legacy Media", "Media Analytics", "Video Tracking", "Audio Tracking"]
 sidebar_position: 12500
 ---
 

@@ -1,5 +1,8 @@
 ---
 title: "Extending"
+description: "Extend failed event recovery capabilities with custom logic for specific behavioral data quality requirements."
+schema: "TechArticle"
+keywords: ["Recovery Extension", "Custom Recovery", "Extended Recovery", "Advanced Recovery", "Recovery Enhancement", "Custom Logic"]
 date: "2020-04-13"
 sidebar_position: 70
 ---

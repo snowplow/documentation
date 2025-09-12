@@ -1,5 +1,8 @@
 ---
 title: "Initialization"
+description: "Initialize Scala tracker version 0.6.0 for behavioral event tracking in Scala applications."
+schema: "TechArticle"
+keywords: ["Scala V0.6.0", "Legacy Initialization", "Previous Version", "Scala Init", "Deprecated Init", "Legacy Setup"]
 date: "2020-10-28"
 sidebar_position: 2000
 ---

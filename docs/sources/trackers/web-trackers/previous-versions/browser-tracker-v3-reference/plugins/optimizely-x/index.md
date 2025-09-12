@@ -1,5 +1,8 @@
 ---
 title: "Optimizely X"
+description: "Optimizely X plugin for browser tracker v3 to track behavioral experimentation analytics."
+schema: "TechArticle"
+keywords: ["Browser V3 OptimizelyX", "Optimizely X", "Legacy OptimizelyX", "A/B Testing", "Experimentation", "Test Analytics"]
 date: "2021-04-07"
 sidebar_position: 14000
 ---

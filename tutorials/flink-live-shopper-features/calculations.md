@@ -1,6 +1,9 @@
 ---
 position: 3
 title: Understand the calculations
+description: "Implement behavioral data calculations for live shopper features using Apache Flink stream processing."
+schema: "HowTo"
+keywords: ["Flink Calculations", "Stream Calculations", "Real Time", "Live Calculations", "Stream Processing", "Analytics Calculations"]
 ---
 
 This section explains what is calculated, how each metric is updated, and where the values are stored.

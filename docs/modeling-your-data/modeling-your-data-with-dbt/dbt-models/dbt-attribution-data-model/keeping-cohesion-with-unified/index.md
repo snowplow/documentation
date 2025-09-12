@@ -1,6 +1,8 @@
 ---
 title: "Keeping cohesion between the Unified and Attribution packages"
-description: "Keeping cohesion between the Unified and Attribution packages"
+description: "Maintain data cohesion between attribution and unified models for comprehensive behavioral marketing analytics."
+schema: "TechArticle"
+keywords: ["Attribution Unified", "Model Cohesion", "Unified Attribution", "Cross Platform", "Attribution Analytics", "Model Integration"]
 sidebar_position: 10
 ---
 

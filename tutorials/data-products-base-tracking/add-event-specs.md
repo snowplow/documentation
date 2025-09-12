@@ -1,6 +1,9 @@
 ---
 position: 8
 title: Add Event Specifications
+description: "Add event specifications to data products for standardized behavioral data collection workflows."
+schema: "HowTo"
+keywords: ["Event Specifications", "Event Specs", "Specification Setup", "Event Definition", "Spec Creation", "Event Documentation"]
 ---
 
 ### Create the "Add todo" Event Specification

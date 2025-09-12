@@ -1,5 +1,8 @@
 ---
 title: "Adding Fields to a Derived Table"
+description: "Add custom fields to derived tables in dbt for enhanced behavioral data analysis capabilities."
+schema: "TechArticle"
+keywords: ["Custom Fields", "Additional Fields", "Field Extension", "Table Enhancement", "Custom Columns", "Field Addition"]
 sidebar_position: 10
 ---
 

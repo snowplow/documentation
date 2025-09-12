@@ -1,5 +1,8 @@
 ---
 title: "Media playback events"
+description: "Media player events tracked automatically by Snowplow for behavioral video and audio analytics."
+schema: "TechArticle"
+keywords: ["Media Events", "Video Events", "Audio Events", "Media Analytics", "Video Analytics", "Media Tracking"]
 ---
 
 ```mdx-code-block

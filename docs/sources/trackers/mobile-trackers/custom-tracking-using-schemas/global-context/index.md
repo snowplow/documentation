@@ -1,5 +1,8 @@
 ---
 title: "Declarative entities with Global Context"
+description: "Configure global context entities in mobile trackers for consistent behavioral event enrichment."
+schema: "TechArticle"
+keywords: ["Mobile Context", "Global Context", "Event Context", "Mobile Data", "Context Tracking", "Mobile Entities"]
 date: "2022-08-30"
 sidebar_position: 20
 ---

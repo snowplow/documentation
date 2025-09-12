@@ -2,7 +2,8 @@
 title: "Understanding entities"
 sidebar_label: "Entities (context)"
 sidebar_position: 2
-description: "Entities are a good way to deal with common fields across various events"
+description: "Learn about Snowplow entities (contexts) that provide rich contextual information to enhance your behavioral event data."
+keywords: ["Event Entities", "Context Data", "Entity Schema", "Event Context", "Data Enrichment", "Structured Data"]
 ---
 
 When an event occurs, it generally involves a number of entities, which provide additional information.
@@ -104,7 +105,7 @@ Then you can use one of the [tracking SDKs](/docs/sources/trackers/index.md) to 
 ```javascript
 snowplow('trackPageView', {
   context: [{
-    schema: 'iglu:com.example_company/product/jsonschema/1-2-1',
+schema: "TechArticle"
     data: {
       productId: 'ASO01043',
       brand: 'ACME'

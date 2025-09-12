@@ -1,5 +1,7 @@
 ---
 title: "Optional timestamp argument"
+description: "Use optional timestamp arguments in browser tracker v3 for behavioral analytics event timing."
+keywords: ["Browser V3 Timestamp", "Optional Timestamp", "Legacy Timestamp", "Event Timing", "Time Data", "Custom Timing"]
 date: "2021-04-07"
 sidebar_position: 1000
 ---
@@ -19,7 +21,7 @@ Here is an example tracking a self describing event and supplying the optional t
 ```javascript
 trackSelfDescribingEvent({
   event: {
-    schema: 'iglu:com.acme/event/jsonschema/1-0-0', 
+schema: "TechArticle"
     data: { type: 'user_action' }
   }, 
   timestamp: 1368725287000
@@ -33,7 +35,7 @@ Also you can attach a true timestamp to the event, replacing the device timestam
 ```javascript
 trackSelfDescribingEvent({
   event: {
-    schema: 'iglu:com.acme/event/jsonschema/1-0-0', 
+schema: "TechArticle"
     data: { type: 'user_action' }
   },
   timestamp: { type: 'ttm', value: 1368725287000 }

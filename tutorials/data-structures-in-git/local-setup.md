@@ -1,5 +1,8 @@
 ---
 title: Create a local data structure
+description: "Set up local development environment for Git-based Snowplow data structure management workflows."
+schema: "HowTo"
+keywords: ["Git Local", "Local Git", "Git Setup", "Local Development", "Git Configuration", "Development Setup"]
 position: 2
 ---
 

@@ -1,5 +1,7 @@
 ---
 title: "Sessions"
+description: "Track user sessions using web trackers v3 for behavioral engagement analytics."
+schema: "TechArticle"
 sidebar_position: 35
 ---
 

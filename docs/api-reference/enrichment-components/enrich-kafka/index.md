@@ -1,5 +1,8 @@
 ---
 title: "Enrich Kafka (Azure)"
+description: "Apache Kafka enrichment component API reference for stream-based behavioral event processing."
+schema: "TechArticle"
+keywords: ["Enrich Kafka", "Kafka Processing", "Stream Processing", "Kafka Enrichment", "Real Time", "Message Processing"]
 date: "2022-10-03"
 sidebar_position: 30
 ---

@@ -1,5 +1,8 @@
 ---
 title: "PHP Tracker"
+description: "PHP tracker for server-side behavioral event collection in PHP web applications and services."
+schema: "TechArticle"
+keywords: ["PHP Tracker", "PHP Analytics", "Server Tracking", "Backend Analytics", "PHP SDK", "Server Analytics"]
 date: "2020-02-26"
 sidebar_position: 230
 ---

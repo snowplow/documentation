@@ -1,5 +1,8 @@
 ---
 title: Setting up locally
+description: "Set up marketing attribution modeling locally for behavioral data analysis and campaign optimization."
+schema: "HowTo"
+keywords: ["Attribution Local", "Local Attribution", "Attribution Setup", "Marketing Local", "Local Analytics", "Attribution Development"]
 position: 4
 ---
 

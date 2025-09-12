@@ -1,5 +1,8 @@
 ---
 title: "Enhanced Consent"
+description: "Enhanced consent plugin for browser tracker v3 to manage advanced behavioral analytics privacy."
+schema: "TechArticle"
+keywords: ["Browser V3 Enhanced Consent", "Enhanced Consent", "Legacy Consent", "Advanced Consent", "Privacy Management", "Consent Analytics"]
 sidebar_position: 6500
 ---
 

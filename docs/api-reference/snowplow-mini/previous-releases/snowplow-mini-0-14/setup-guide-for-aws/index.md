@@ -1,5 +1,8 @@
 ---
 title: "Setup Guide for AWS"
+description: "Setup guide for Snowplow Mini version 0.14 on Amazon Web Services for behavioral data testing."
+schema: "TechArticle"
+keywords: ["Mini V0.14 AWS", "Legacy Mini", "Previous Version", "AWS Setup", "Deprecated Mini", "Old Version"]
 date: "2021-05-11"
 sidebar_position: -10
 ---

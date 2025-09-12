@@ -1,5 +1,8 @@
 ---
 title: "Snowplow Client for GTM SS"
+description: "Snowplow client configuration for Google Tag Manager Server-Side behavioral event processing integration."
+schema: "TechArticle"
+keywords: ["Snowplow Client", "GTM Client", "Server Side Client", "Client Template", "GTM Integration", "Client Setup"]
 date: "2021-11-24"
 sidebar_position: 100
 ---

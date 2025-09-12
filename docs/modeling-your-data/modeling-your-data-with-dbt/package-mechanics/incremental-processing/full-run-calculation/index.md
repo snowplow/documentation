@@ -1,6 +1,8 @@
 ---
 title: "Full calculation for run timestamps"
-description: "A detailed deep dive into how we calculate which events to process in a run."
+description: "Full run calculations in incremental dbt processing for comprehensive behavioral data analysis."
+schema: "TechArticle"
+keywords: ["Full Run", "Complete Processing", "DBT Calculation", "Full Refresh", "Complete Analysis", "Full Processing"]
 sidebar_position: 40
 ---
 

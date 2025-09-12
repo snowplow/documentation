@@ -2,6 +2,9 @@
 sidebar_label: "Ecommerce"
 sidebar_position: 40
 title: "Ecommerce Quickstart"
+description: "Quick start guide for dbt ecommerce data model implementation for behavioral commerce analytics."
+schema: "TechArticle"
+keywords: ["Ecommerce Quickstart", "Commerce Setup", "Retail Analytics", "Shopping Analytics", "Ecommerce DBT", "Commerce Guide"]
 ---
 
 ```mdx-code-block

@@ -1,5 +1,8 @@
 ---
 title: "Visualizations"
+description: "Create compelling data visualizations and dashboards from transformed behavioral analytics data."
+schema: "TechArticle"
+keywords: ["Data Visualization", "Analytics Dashboard", "Data Charts", "Visual Analytics", "BI Tools", "Data Insights"]
 sidebar_position: 8
 sidebar_label: "Visualizations"
 sidebar_custom_props:

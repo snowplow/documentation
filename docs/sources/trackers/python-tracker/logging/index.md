@@ -1,5 +1,8 @@
 ---
 title: "Logging"
+description: "Configure logging in Python tracker for behavioral event debugging and troubleshooting."
+schema: "TechArticle"
+keywords: ["Python Logging", "Debug Logging", "Python Analytics", "Log Management", "Error Logging", "Debug Tools"]
 date: "2020-02-26"
 sidebar_position: 80
 ---

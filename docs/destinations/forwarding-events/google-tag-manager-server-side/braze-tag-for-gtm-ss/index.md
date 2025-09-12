@@ -1,5 +1,8 @@
 ---
 title: "Braze Tag for GTM SS"
+description: "Forward behavioral events to Braze using Google Tag Manager Server-Side for personalized customer experiences."
+schema: "TechArticle"
+keywords: ["Braze GTM Tag", "Braze Integration", "Marketing Tag", "Customer Engagement", "GTM Braze", "Marketing Automation"]
 date: "2022-01-17"
 sidebar_position: 400
 ---

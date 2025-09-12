@@ -1,5 +1,8 @@
 ---
 title: "Lake Loader"
+description: "Load behavioral event data into data lakes for flexible analytics and large-scale data processing."
+schema: "TechArticle"
+keywords: ["Lake Loader", "Data Lake", "Big Data Storage", "Lake Storage", "Analytics Lake", "Data Lake Loader"]
 sidebar_position: 3
 ---
 

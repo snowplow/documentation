@@ -1,7 +1,9 @@
 ---
 title: "Snowplow Micro"
 sidebar_position: 2
-description: "Snowplow Micro is a lightweight version of the Snowplow pipeline that’s great for getting familiar with Snowplow, debugging and testing."
+description: "Lightweight testing tool for validating behavioral event tracking and schema compliance during development."
+schema: "TechArticle"
+keywords: ["Snowplow Micro", "Local Testing", "Development Tool", "Testing Environment", "Micro Pipeline", "Testing Framework"]
 ---
 
 

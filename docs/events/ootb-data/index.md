@@ -1,5 +1,8 @@
 ---
 title: "Out-of-the-box data"
+description: "Out-of-the-box behavioral data collected automatically by Snowplow trackers without custom implementation."
+schema: "TechArticle"
+keywords: ["Out of Box", "Default Events", "Standard Events", "Built-in Events", "Core Events", "Base Analytics"]
 sidebar_position: 2
 ---
 

@@ -1,5 +1,8 @@
 ---
 title: "Referer parser enrichment"
+description: "Parse and classify referrer URLs to understand traffic sources and user journey patterns in your behavioral data."
+schema: "TechArticle"
+keywords: ["Referrer Parsing", "Traffic Source", "Referrer Analysis", "Source Attribution", "Web Analytics", "Traffic Analysis"]
 sidebar_position: 3
 sidebar_label: Referer parser
 ---

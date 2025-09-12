@@ -1,6 +1,9 @@
 ---
 position: 4
 title: Reverse ETL Integration
+description: "Implement reverse ETL for abandoned browse campaigns using behavioral data for customer re-engagement."
+schema: "HowTo"
+keywords: ["Reverse ETL", "Data Activation", "Customer Data", "CCDP Tutorial", "Data Sync", "Operational Analytics"]
 ---
 
 Next we will set up a Census sync to build an audience using our query from Snowflake, filter the audience to focus on users who have shown interest in products but haven't purchased, and sync the data to Braze.

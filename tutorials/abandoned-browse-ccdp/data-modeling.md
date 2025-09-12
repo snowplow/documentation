@@ -1,6 +1,9 @@
 ---
 position: 3
 title: Data Modeling
+description: "Model abandoned browse behavioral data for customer engagement and re-targeting campaign analysis."
+schema: "HowTo"
+keywords: ["CCDP Modeling", "Data Modeling", "Customer Analytics", "Behavioral Modeling", "CCDP Analytics", "Customer Insights"]
 ---
 
 ## Sending events and verifying data

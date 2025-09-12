@@ -1,5 +1,8 @@
 ---
 title: "Getting cookie information"
+description: "Retrieve and analyze cookie values using web trackers for behavioral analytics context."
+schema: "TechArticle"
+keywords: ["Cookie Values", "Cookie Data", "Reading Cookies", "Cookie Access", "Cookie Retrieval", "Cookie Information"]
 sidebar_position: 500
 ---
 

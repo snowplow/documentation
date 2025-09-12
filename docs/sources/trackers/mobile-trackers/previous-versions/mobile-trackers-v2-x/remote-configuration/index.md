@@ -1,5 +1,8 @@
 ---
 title: "Remote Configuration"
+description: "Configure mobile trackers version 2.x remotely for behavioral analytics settings management."
+schema: "TechArticle"
+keywords: ["Mobile V2.x Config", "Remote Configuration", "Legacy Config", "Previous Version", "Deprecated Config", "Old Config"]
 date: "2021-06-21"
 sidebar_position: 4000
 ---

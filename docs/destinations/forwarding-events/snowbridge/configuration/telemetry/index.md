@@ -1,5 +1,8 @@
 ---
 title: "Telemetry"
+description: "Configure telemetry and metrics collection for monitoring Snowbridge behavioral event forwarding performance."
+schema: "TechArticle"
+keywords: ["Telemetry Configuration", "Monitoring Setup", "Metrics Collection", "Performance Monitoring", "System Monitoring", "Observability"]
 date: "2022-10-20"
 sidebar_position: 500
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Tracking specific events"
+description: "Track specific behavioral events using Python tracker version 0.15 in server applications."
+schema: "TechArticle"
+keywords: ["Python V0.15", "Legacy Events", "Previous Version", "Event Tracking", "Deprecated Events", "Legacy Tracking"]
 sidebar_position: 40
 ---
 

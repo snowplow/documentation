@@ -1,5 +1,8 @@
 ---
 title: "Hybrid Apps"
+description: "Implement React Native v2 tracker in hybrid mobile applications for unified behavioral analytics."
+schema: "TechArticle"
+keywords: ["React Native Hybrid", "Hybrid Apps", "WebView Tracking", "Cross Platform", "Hybrid Analytics", "WebView Integration"]
 date: "2022-08-30"
 sidebar_position: 70
 ---

@@ -1,5 +1,7 @@
 ---
 title: "Tracking events"
+description: "Track behavioral events in Node.js applications using Snowplow's server-side JavaScript tracker."
+keywords: ["Node.js Events", "Server Events", "NodeJS Analytics", "Backend Tracking", "Server Analytics", "Event Collection"]
 date: "2021-04-07"
 sidebar_position: 3
 ---
@@ -147,7 +149,7 @@ Example:
 ```javascript
 t.track(buildSelfDescribingEvent({
   event: {
-    schema: "iglu:com.example_company/save-game/jsonschema/1-0-2",
+schema: "TechArticle"
     data: {
       save_id: "4321",
       level: 23,

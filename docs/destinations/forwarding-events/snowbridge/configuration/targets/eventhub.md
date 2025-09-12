@@ -1,6 +1,8 @@
 ---
 title: "EventHub"
-description: "Write data to an EventHub."
+description: "Configure Azure Event Hubs for high-throughput behavioral event streaming using Snowbridge forwarding."
+schema: "TechArticle"
+keywords: ["Event Hub", "Azure EventHub", "Azure Integration", "Stream Export", "Message Queue", "Event Streaming"]
 ---
 
 ```mdx-code-block

@@ -1,5 +1,8 @@
 ---
 title: "Media"
+description: "Track media player interactions and video engagement using web trackers for behavioral media analytics."
+schema: "TechArticle"
+keywords: ["Media Tracking", "Video Analytics", "Audio Analytics", "Media Events", "Video Engagement", "Media Performance"]
 sidebar_position: 75
 ---
 

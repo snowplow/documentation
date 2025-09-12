@@ -1,5 +1,8 @@
 ---
 title: "Rust Tracker"
+description: "Snowplow Rust tracker for behavioral event collection in high-performance systems programming applications."
+schema: "TechArticle"
+keywords: ["Rust Tracker", "Rust Analytics", "Event Tracking", "Rust SDK", "Analytics SDK", "Rust Integration"]
 date: "2022-10-24"
 sidebar_position: 225
 ---

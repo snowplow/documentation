@@ -1,5 +1,8 @@
 ---
 title: "Form Tracking"
+description: "Form tracking plugin for browser tracker v3 to analyze behavioral form interaction analytics."
+schema: "TechArticle"
+keywords: ["Browser V3 Forms", "Form Tracking", "Legacy Forms", "Form Analytics", "User Input", "Form Behavior"]
 date: "2021-04-07"
 sidebar_position: 9000
 ---

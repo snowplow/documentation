@@ -1,5 +1,7 @@
 ---
 title: "Privacy Sandbox"
+description: "Track Privacy Sandbox APIs using web trackers v3 for privacy-compliant behavioral analytics."
+schema: "TechArticle"
 sidebar_position: 160
 ---
 

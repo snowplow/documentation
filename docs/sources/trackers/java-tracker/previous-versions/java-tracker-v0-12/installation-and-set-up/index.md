@@ -1,5 +1,8 @@
 ---
 title: "Installation and set-up"
+description: "Installation and setup guide for Java tracker version 0.12 in enterprise applications."
+schema: "TechArticle"
+keywords: ["Java V0.12", "Legacy Installation", "Previous Version", "Setup Guide", "Deprecated Version", "Legacy Setup"]
 date: "2022-03-24"
 sidebar_position: 10
 ---

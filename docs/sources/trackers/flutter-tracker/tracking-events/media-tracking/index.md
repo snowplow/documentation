@@ -1,5 +1,8 @@
 ---
 title: "Media tracking"
+description: "Track media player interactions and engagement in Flutter applications using mobile tracker."
+schema: "TechArticle"
+keywords: ["Flutter Media", "Media Tracking", "Flutter Video", "Video Analytics", "Flutter Audio", "Media Events"]
 sidebar_position: 100
 ---
 

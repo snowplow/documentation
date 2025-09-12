@@ -1,5 +1,7 @@
 ---
 title: "Adding data to your events: context and more"
+description: "Add custom data and context to behavioral events using Flutter tracker SDK."
+keywords: ["Flutter Data", "Flutter Events", "Custom Data", "Flutter Analytics", "Event Data", "Flutter Tracking"]
 date: "2022-01-31"
 sidebar_position: 4000
 ---
@@ -28,7 +30,7 @@ tracker.track(
     Structured(category: 'shop', action: 'add-to-basket'),
     contexts: [
         const SelfDescribing(
-            schema: 'iglu:com.my_company/movie_poster/jsonschema/1-0-0',
+schema: "TechArticle"
             data: {
                 'movie_name': 'Solaris',
                 'poster_country': 'JP',
@@ -36,7 +38,7 @@ tracker.track(
             }
         ),
         const SelfDescribing(
-            schema: 'iglu:com.my_company/customer/jsonschema/1-0-0',
+schema: "TechArticle"
             data: {
                 'p_buy': 0.23,
                 'segment': 'young_adult'

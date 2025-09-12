@@ -1,5 +1,8 @@
 ---
 title: "Event forwarding"
+description: "Forward behavioral events from Snowplow to external platforms and systems for real-time activation and analysis."
+schema: "TechArticle"
+keywords: ["Event Forwarding", "Real Time Export", "Event Streaming", "Data Export", "Event Distribution", "Live Data"]
 sidebar_position: 2
 ---
 

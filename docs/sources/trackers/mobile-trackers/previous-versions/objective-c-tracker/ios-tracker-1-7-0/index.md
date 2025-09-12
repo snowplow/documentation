@@ -1,5 +1,8 @@
 ---
 title: "iOS Tracker (1.7.0)"
+description: "iOS tracker version 1.7.0 documentation for behavioral event collection in iOS applications."
+schema: "TechArticle"
+keywords: ["iOS Tracker V1.7.0", "iOS Legacy", "Legacy iOS", "Previous Version", "Deprecated iOS", "Old iOS"]
 date: "2021-04-02"
 sidebar_position: -10
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Setup"
+description: "Setup guide for Python tracker version 0.15 in server-side applications."
+schema: "TechArticle"
+keywords: ["Python V0.15", "Legacy Setup", "Previous Version", "Python Setup", "Deprecated Setup", "Legacy Installation"]
 date: "2020-02-26"
 sidebar_position: 10
 ---

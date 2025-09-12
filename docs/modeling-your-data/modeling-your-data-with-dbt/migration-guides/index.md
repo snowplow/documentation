@@ -1,7 +1,9 @@
 ---
 title: "Migration guides"
 sidebar_position: 80
-description: "Migration guides for upgrading from previous versions of our packages"
+description: "Version migration guides for dbt packages with behavioral data modeling improvements and features."
+schema: "TechArticle"
+keywords: ["DBT Migration", "Model Migration", "Version Migration", "Upgrade Guide", "Breaking Changes", "Migration Guide"]
 ---
 
 With each package release, new features and fixes become available, as well as changes to existing functionalities. In many cases, including some breaking changes, nothing needs to be done by the user of the packages to use these new features beyond simply installing the new version, although the logic within the package may have changed. All such changes are always listed in the package changelog and release posts on [Community](https://community.snowplow.io/).

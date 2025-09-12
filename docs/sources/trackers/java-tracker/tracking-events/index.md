@@ -1,5 +1,8 @@
 ---
 title: "Tracking events"
+description: "Track behavioral events in Java applications using Snowplow's enterprise-focused tracker SDK."
+schema: "TechArticle"
+keywords: ["Java Events", "Event Tracking", "Java Analytics", "Behavior Tracking", "Java SDK", "Event Collection"]
 date: "2022-03-24"
 sidebar_position: 20
 ---

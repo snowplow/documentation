@@ -1,5 +1,8 @@
 ---
 title: "Schema Resolution"
+description: "Schema resolution mechanisms in Iglu for behavioral data validation and processing workflows."
+schema: "TechArticle"
+keywords: ["Schema Resolution", "Registry Resolution", "Schema Lookup", "Resolution Process", "Schema Discovery", "Registry Query"]
 date: "2021-03-26"
 sidebar_position: 400
 ---

@@ -1,5 +1,7 @@
 ---
 title: "Button clicks"
+description: "Track button clicks and user interface interactions using web trackers for behavioral UX analytics."
+keywords: ["Button Tracking", "Click Events", "Button Analytics", "UI Interactions", "Button Events", "Click Analytics"]
 sidebar_position: 50
 ---
 
@@ -257,7 +259,7 @@ To add a static list of context entities to the events, use the following config
 window.snowplow('enableButtonClickTracking', {
   context: [
     {
-      schema: 'iglu:com.example_company/page/jsonschema/1-2-1',
+schema: "TechArticle"
       data: { pageType: 'test' }
     }
   ],
@@ -273,7 +275,7 @@ import { enableButtonClickTracking } from '@snowplow/browser-plugin-button-click
 enableButtonClickTracking({
   context: [
     {
-      schema: 'iglu:com.example_company/page/jsonschema/1-2-1',
+schema: "TechArticle"
       data: { pageType: 'test' }
     }
   ],
@@ -295,7 +297,7 @@ You can define a callback function that takes the click event and button element
 window.snowplow('enableButtonClickTracking', {
   context: function (event, element) {
     return {
-      schema: 'iglu:com.example_company/click/jsonschema/1-2-1',
+schema: "TechArticle"
       data: { content: element.textContent }
     };
   },
@@ -311,7 +313,7 @@ import { enableButtonClickTracking } from '@snowplow/browser-plugin-button-click
 enableButtonClickTracking({
   context: function (event, element) {
     return {
-      schema: 'iglu:com.example_company/click/jsonschema/1-2-1',
+schema: "TechArticle"
       data: { content: element.textContent }
     };
   },

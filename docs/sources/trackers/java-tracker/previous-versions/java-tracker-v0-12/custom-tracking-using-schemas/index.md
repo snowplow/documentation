@@ -1,5 +1,8 @@
 ---
 title: "Custom tracking using schemas"
+description: "Create custom behavioral events with schemas in Java tracker version 0.12."
+schema: "TechArticle"
+keywords: ["Java V0.12", "Legacy Custom", "Previous Version", "Custom Tracking", "Deprecated Version", "Legacy Events"]
 date: "2022-03-24"
 sidebar_position: 30
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Subject methods"
+description: "Configure user subjects in Scala tracker for behavioral event context and identification methods."
+schema: "TechArticle"
+keywords: ["Scala Subject", "Subject Methods", "User Context", "Scala Analytics", "Functional Analytics", "Subject Class"]
 date: "2022-9-15"
 sidebar_position: 30
 ---

@@ -1,5 +1,8 @@
 ---
 title: "Media tracking"
+description: "Track media playback and streaming behavior in Roku applications for connected TV analytics."
+schema: "TechArticle"
+keywords: ["Roku Media", "TV Media", "Video Analytics", "Roku Video", "OTT Media", "Connected TV"]
 date: "2021-12-23"
 sidebar_position: 4500
 ---

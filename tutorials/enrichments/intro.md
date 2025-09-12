@@ -1,5 +1,8 @@
 ---
 title: Introduction
+description: "Introduction to Snowplow enrichments for enhancing behavioral events with additional context and validation."
+schema: "HowTo"
+keywords: ["Enrichment Tutorial", "Data Enrichment", "Event Enhancement", "Enrichment Guide", "Tutorial Introduction", "Processing Tutorial"]
 position: 1
 ---
 

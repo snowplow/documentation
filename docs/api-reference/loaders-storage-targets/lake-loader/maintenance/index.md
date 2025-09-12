@@ -1,5 +1,8 @@
 ---
 title: "Lake maintenance"
+description: "Maintain and optimize Lake Loader performance for continuous behavioral data loading into data lakes."
+schema: "TechArticle"
+keywords: ["Lake Maintenance", "Data Maintenance", "Lake Operations", "Storage Maintenance", "Data Management", "Lake Optimization"]
 sidebar_label: "Maintenance"
 sidebar_position: 3
 ---

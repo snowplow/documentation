@@ -1,5 +1,8 @@
 ---
 title: "Optimizely Classic"
+description: "Optimizely Classic plugin for browser tracker v3 to track behavioral A/B testing analytics."
+schema: "TechArticle"
+keywords: ["Browser V3 Optimizely", "Optimizely Classic", "Legacy Optimizely", "A/B Testing", "Experimentation", "Test Analytics"]
 date: "2021-04-07"
 sidebar_position: 13000
 ---

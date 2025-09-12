@@ -2,6 +2,9 @@
 sidebar_label: "Mobile"
 sidebar_position: 800
 title: "Mobile Quickstart"
+description: "Quick start guide for legacy dbt mobile data model implementation for behavioral mobile analytics."
+schema: "TechArticle"
+keywords: ["Mobile Quickstart", "App Setup", "Mobile Analytics", "Mobile DBT", "App Guide", "Mobile Models"]
 ---
 
 

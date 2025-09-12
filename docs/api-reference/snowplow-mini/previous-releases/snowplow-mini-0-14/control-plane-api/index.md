@@ -1,5 +1,8 @@
 ---
 title: "Control Plane API"
+description: "Control plane API reference for Snowplow Mini version 0.14 behavioral data pipeline management."
+schema: "TechArticle"
+keywords: ["Mini V0.14 API", "Legacy API", "Previous Version", "Control Plane", "Deprecated API", "Old API"]
 date: "2021-05-11"
 sidebar_position: -10
 ---

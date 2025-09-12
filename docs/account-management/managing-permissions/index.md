@@ -1,5 +1,8 @@
 ---
 title: "Managing user permissions in Console"
+description: "Configure role-based access control and permissions for secure behavioral data platform administration."
+schema: "TechArticle"
+keywords: ["Permission Management", "Access Control", "User Permissions", "Role Management", "Security Permissions", "Access Rights"]
 sidebar_label: "Permissions"
 sidebar_position: 2
 ---

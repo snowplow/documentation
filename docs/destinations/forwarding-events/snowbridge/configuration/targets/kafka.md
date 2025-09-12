@@ -1,6 +1,8 @@
 ---
 title: "Kafka"
-description: "Write data to a Kafka topic."
+description: "Configure Apache Kafka as a destination for real-time behavioral event streaming using Snowbridge."
+schema: "TechArticle"
+keywords: ["Kafka Target", "Kafka Export", "Stream Export", "Kafka Integration", "Message Queue", "Event Streaming"]
 ---
 
 ```mdx-code-block

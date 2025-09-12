@@ -1,5 +1,8 @@
 ---
 title: "Iterable"
+description: "Integrate Iterable webhook events into Snowplow for behavioral marketing automation analytics."
+schema: "TechArticle"
+keywords: ["Iterable Webhook", "Email Marketing", "Marketing Automation", "Campaign Data", "Customer Engagement", "Marketing Events"]
 date: "2022-05-17"
 sidebar_position: 30
 ---

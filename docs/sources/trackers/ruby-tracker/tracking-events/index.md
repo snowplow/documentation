@@ -1,5 +1,8 @@
 ---
 title: "Tracking events"
+description: "Track behavioral events in Ruby applications using Snowplow's Ruby tracker SDK."
+schema: "TechArticle"
+keywords: ["Ruby Events", "Event Tracking", "Ruby Analytics", "Behavior Tracking", "Ruby SDK", "Event Collection"]
 date: "2021-10-15"
 sidebar_position: 10
 ---

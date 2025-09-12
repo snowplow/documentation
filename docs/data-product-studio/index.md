@@ -199,9 +199,7 @@ It is not obvious from the event name `website_action` what it captures. The eve
 ```
 :::
 
-</div>
 Below is a much better option:
-<div style={{ width: "100%" }}>
 
 :::tip `view_product` and `click_list_item` events
 Each action is represented using a single event schema.

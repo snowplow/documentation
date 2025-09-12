@@ -25,10 +25,19 @@ To create a **clean, wide table**, the tool automatically flattens data structur
   - **Single entities** (e.g., `user`) → Flattened into separate columns, e.g., `user_id`, `user_email`.
   - **Multiple entities** (e.g., arrays like `products`) → Stored as a single array column, which you can **unnest later**.
 
-### Event Specification Inference
-For customers **not using Snowtype tracking**:
-- Filter events based on **event specification instructions** instead of Snowtype context.
-- Both filtering options are available in the interface.
+### 3. Event Specification Inference
+The system determines which events to include in the final data model through **two distinct approaches**:
+
+**Using Snowtype:**
+- Generated data models are **automatically filtered** to event specification IDs added by Snowtype.
+- Guarantees that **all events were sent with the intent** to implement this Data Product.
+- Ensures **high data quality** and tracking consistency.
+
+**Not Using Snowtype:**
+- Generated data models include **all rows matching** the Data Product definition.
+- Uses **"best effort" matching** based on events, entities, cardinalities, and rules.
+- May include some **unintended events** but allows access to **historical data**.
+- Requires **no adjustments** to existing tracking implementations.
 
 ### Deployment Options
 Choose between two generation methods:

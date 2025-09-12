@@ -12,7 +12,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-**Snowtype** is a code generation tool that automates the creation of type-safe tracking code for Snowplow SDKs. By connecting directly to your data structures and event specifications, Snowtype eliminates manual instrumentation work while ensuring schema compliance and data quality throughout your tracking implementation.
+**Snowtype** is a code generation tool that automates the creation of type-safe tracking code for Snowplow SDKs. Snowtype connects directly to your data structures and event specifications. This eliminates manual instrumentation work and ensures that your tracking code is compliant with the schemas and produces high quality data.
 
 Snowtype streamlines the development workflow by providing several key advantages:
 

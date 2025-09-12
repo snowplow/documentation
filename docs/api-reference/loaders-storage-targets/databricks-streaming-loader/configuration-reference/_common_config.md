@@ -11,8 +11,12 @@ import Link from '@docusaurus/Link';
     <td>Optional. Default value <code>1 second</code>.  Events are uploaded to the Databricks volume after a maximum of this duration, even if the <code>maxBytes</code> size has not been reached</td>
 </tr>
 <tr>
-    <td><code>batching.uploadConcurrency</code></td>
-    <td>Optional. Default value 3.  Controls how many batches can we send simultaneously over the network to Databricks</td>
+    <td><code>batching.uploadParallelismFactor</code></td>
+    <td>Optional. Default value 3. Controls how many batches can we send simultaneously over the network to Databricks. E.g. If there are 4 available processors, and <code>uploadParallelismFactor</code> is 3.5, then the loader sends up to 14 batches in parallel. Adjusting this value can cause the app to use more or less of the available CPU.</td>
+</tr>
+<tr>
+    <td><code>cpuParallelismFactor</code></td>
+    <td>Optional. Default value 0.75. Controls how the app splits the workload into concurrent batches which can be run in parallel. E.g. If there are 4 available processors, and <code>cpuParallelismFactor</code> is 0.75, then the loader processes 3 batches concurrently. Adjusting this value can cause the app to use more or less of the available CPU.</td>
 </tr>
 <tr>
     <td><code>retries.setupErrors.delay</code></td>

@@ -77,6 +77,7 @@ module.exports = {
         showLastUpdateTime: true,
       },
     ],
+    './plugins/docusaurus-plugin-snowplow-schema',
   ],
 
   stylesheets: [
@@ -101,8 +102,8 @@ module.exports = {
       navbar: {
         hideOnScroll: false,
         logo: {
-            alt: 'Snowplow Logo',
-            src: 'img/snowplow-logo.svg',
+          alt: 'Snowplow Logo',
+          src: 'img/snowplow-logo.svg',
         },
         items: [
           {
@@ -121,7 +122,7 @@ module.exports = {
           //   position: 'right',
           // },
           // {
-           //  href: 'https://community.snowplow.io/',
+          //  href: 'https://community.snowplow.io/',
           //   label: 'Community',
           //   position: 'right',
           // },
@@ -138,8 +139,8 @@ module.exports = {
           //   position: 'right',
           // },
           {
-             type: 'custom-docsTrackerNavbarButton',
-             position: 'left',
+            type: 'custom-docsTrackerNavbarButton',
+            position: 'left',
           },
         ],
       },
@@ -167,7 +168,6 @@ module.exports = {
                 href: '/docs/glossary/',
                 label: 'Glossary',
               },
-         
             ],
           },
           {
@@ -199,7 +199,6 @@ module.exports = {
                 label: 'Licensing Overview',
                 href: '/docs/resources/copyright-license',
               },
-             
             ],
           },
         ],

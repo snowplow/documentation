@@ -24,7 +24,6 @@ To create a **clean, wide table**, the tool automatically flattens data structur
   - **Single entities** (e.g., `user`) → Flattened into separate columns, e.g., `user_id`, `user_email`.
   - **Multiple entities** (e.g., arrays like `products`) → Stored as a single array column, which you can **unnest later**.
 
-
 ### 3. Event Specification Inference
 The system determines which events to include in the final data model through **two distinct approaches**:
 
@@ -39,13 +38,11 @@ The system determines which events to include in the final data model through **
 - May include some **unintended events** but allows access to **historical data**.
 - Requires **no adjustments** to existing tracking implementations.
 
-
 ### 4. Deployment Options
 Choose between two generation methods:
 
 - **View** → Best for lightweight use cases when you need **immediate access to data** with minimal setup.
 - **Incremental dbt Model** → Ideal for production pipelines when you want to **materialize data efficiently** and integrate it into existing **dbt projects**.
-
 
 ## Use Cases
 

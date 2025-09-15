@@ -1,6 +1,6 @@
 ---
 title: "Automated testing with Snowplow Micro"
-sidebar_position: 0
+sidebar_position: 5.5
 sidebar_label: "Automated testing"
 ---
 

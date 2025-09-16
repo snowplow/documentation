@@ -1035,6 +1035,9 @@ from elements with a subsequent element that has a top margin. */
 .theme-doc-markdown p:has(+ h3),
 .theme-doc-markdown p:has(+ div > table),
 .theme-doc-markdown p:has(+ table),
+.theme-doc-markdown h2:has(+ p > img),
+.theme-doc-markdown p:has(+ p > img),
+.theme-doc-markdown h3:has(+ p > img),
 .theme-doc-markdown div.theme-admonition:has(+ h2),
 .theme-doc-markdown div.theme-admonition:has(+ h3),
 .theme-doc-markdown details:has(+ h2),
@@ -1131,7 +1134,7 @@ abbr[data-title]:hover:after {
     display: none !important;
     visibility: hidden !important;
   }
-  [data-name="Book a demo"] {
+  [data-name='Book a demo'] {
     display: none;
   }
 }

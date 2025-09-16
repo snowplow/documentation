@@ -4,18 +4,40 @@ description: "Monitor event forwarder performance, debug failures, and understan
 sidebar_position: 15
 ---
 
-This page is an overview of how to monitor event forwarder performance and diagnose delivery issues. Snowplow provides both summary metrics and detailed failed event logs, to help you understand failure patterns and troubleshoot specific problems.
+This page outlines how to monitor event forwarder performance and diagnose delivery issues. Snowplow provides both summary metrics and detailed failed event logs to help you understand failure patterns and troubleshoot specific problems.
 
-## Failure types and retry logic
+## Failure types and handling
 
-Forwarders uses the same retry logic and failure handling as the underlying [Snowbridge failure model](/docs/api-reference/snowbridge/concepts/failure-model/index.md). Snowplow handles event forwarding failures differently depending on the type:
+Snowplow handles event forwarding failures differently depending on the type of error.
 
-- **Invalid data failures**: Snowplow treats events that fail transformation or violate destination API requirements as unrecoverable. Event forwarding creates [event forwarding error failed events](https://iglucentral.com/?q=event_forwarding_error) and logs them in your cloud storage bucket without retry.
-- **Transformation failures**: Snowplow treats JavaScript transformation errors as invalid data and logs them to your cloud storage bucket without retry.
-- **Destination failures**: when API requests fail (e.g., HTTP 4xx/5xx responses), Snowplow retries based on the destination-specific retry policy. See the list of [available destinations](/docs/destinations/forwarding-events/integrations/index.md) for destination-specific details.
-- **Oversized data failures**: Snowplow creates [size violation failed events](docs/api-reference/failed-events/index.md) for events exceeding destination size limits and logs them to your cloud storage bucket without retry.
+### Data processing failures
 
-Failed events are automatically routed to your configured failure destination, which is typically your cloud storage bucket, where you can inspect them further. For how to query these metrics, see [Inspecting and debugging failures](#inspecting-and-debugging-failures).
+These failures occur when there are issues with the event data itself or how in how it's transformed before reaching the destination.
+
+**Transformation failures** occur when Snowplow hits an exception when applying your configured JavaScript transformation. While there are safeguards against deploying invalid JavaScript, transformations may still result in runtime errors. Snowplow treats transformation failures as invalid data and logs them as failed events in your cloud storage bucket without retrying.
+
+**Oversized data failures** results from events exceeding the destination's size limits. Snowplow creates [size violation failed events](docs/api-reference/failed-events/index.md) for these events and logs them to your cloud storage bucket without retrying.
+
+### Destination failures
+
+These failures occur when the destination's API cannot accept or process the event data.
+
+**Transient failures** are those that are expected to succeed on retry. This includes temporary network errors, HTTP 5xx server errors, or rate limiting. Transient failures are automatically retried
+
+**Setup failures** result from configuration issues that typically require human intervention to resolve, such as invalid API keys or insufficient permissions. When a setup error occurs, Snowplow will trigger email alerts to the configured list of users. For more information on alerting, see [TODO: configuring alerts](link)
+<!-- TODO: what happens when we hit a setup failure?-->
+
+**Unrecoverable failures** are bad requests that won't succeed on retry, such as those with missing or invalid fields. These often map to HTTP 400 response codes. Snowplow will log them as failed events in your cloud storage bucket without retrying.
+
+Failure types are defined per destination based on their expected HTTP response codes. See the list of [available destinations](/docs/destinations/forwarding-events/integrations/index.md) for destination-specific details on retry policies and error handling.
+
+### What happens when events fail
+
+When any type of failure occurs, Snowplow can take one or more of the following actions:
+
+- **Automatic retries**: transient failures are automatically retried according to each destination's retry policy.
+- **Failed event logging**: all non-retryable failures are routed to your configured failure destination, which is typically a cloud storage bucket, where you can inspect them further. This includes transformation failures, oversized data failures, unrecoverable failures, and transient failures that have exceeded their retry limit. For how to query these logs, see [Inspecting and debugging failures](#inspecting-and-debugging-failures).
+- **Email alerts**: just like warehouse loaders, setup failures trigger email alerts to notify configured users of authentication or configuration problems.
 
 ## Monitoring and metrics
 

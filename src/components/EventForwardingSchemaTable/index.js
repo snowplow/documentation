@@ -152,7 +152,6 @@ export default function EventForwardingSchemaTable({ schema }) {
 
   const renderNestedProperties = (nestedProps, nestedRequiredFields = []) => (
     <>
-      <br />
       Properties:
       <ul>
         {Object.entries(nestedProps).map(([fieldName, property]) => {
@@ -205,15 +204,11 @@ export default function EventForwardingSchemaTable({ schema }) {
           <em>{type}</em>
         </td>
         <td>
-          {requirementLabel}
-          {renderMarkdownCode(description)}
-          {enumInfo}
-          {hasDefaultValue(property) && (
-            <>
-              <br />
-              Default mapping: {defaultValue}
-            </>
-          )}
+          <p>
+            {requirementLabel}
+            {renderMarkdownCode(description)} {enumInfo}
+          </p>
+          {hasDefaultValue(property) && <>Default mapping: {defaultValue}</>}
           {property.type === 'object' &&
             property.properties &&
             renderNestedProperties(

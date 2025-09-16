@@ -70,7 +70,7 @@ You can confirm events are reaching Amplitude by checking the **Ingestion Debugg
 2. Select the **Ingestion Debugger** tab
 3. Filter the graphs to show only events from the **HTTP API** to confirm data is flowing as expected from Snowplow.
 
-## Mapping schema
+## Schema reference
 
 This section contains information on the fields you can send to Amplitude, including field names, data types, required fields, and default Snowplow mapping expressions.
 

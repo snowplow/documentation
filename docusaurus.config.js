@@ -5,7 +5,6 @@ const sidebar = require('./sidebars')
 const abbreviations = require('./src/remark/abbreviations')
 const math = require('remark-math')
 const katex = require('rehype-katex')
-const raw = require('rehype-raw')
 const path = require('path')
 
 /** @type {import('@docusaurus/types').Config} */
@@ -51,7 +50,7 @@ module.exports = {
           remarkPlugins: [abbreviations, math],
           rehypePlugins: [
             [
-              raw,
+              require('rehype-raw').default,
               {
                 passThrough: [
                   'mdxjsEsm',

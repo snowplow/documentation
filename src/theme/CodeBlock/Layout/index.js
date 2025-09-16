@@ -12,7 +12,7 @@ import styles from './styles.module.css'
 
 export default function CodeBlockLayout({className}) {
   const {metadata} = useCodeBlockContext()
-  
+
   // Check if this code block should have a run button
   const isRunnable = parseRunnable(metadata.metastring) || metadata.runnable
 

@@ -56,6 +56,14 @@ To use this image, add `-distroless` to the tag:
 
 :::
 
+If Docker is not available on your system, you can also run Micro as a Java application (since version 2.3.1). The `jar` files are availble via [GitHub releases](https://github.com/snowplow-incubator/snowplow-micro/releases).
+
+<CodeBlock language="bash">{
+`java -jar micro-${versions.snowplowMicro}.jar`
+}</CodeBlock>
+
+Most of the examples on this and the following pages will show the Docker option, but feel free to adapt them accordingly.
+
 ## Sending events to Micro
 
 Follow the documentation for one of [our trackers](/docs/sources/trackers/index.md) to implement some tracking code on your website or application.

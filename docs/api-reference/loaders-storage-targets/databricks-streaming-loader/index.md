@@ -39,7 +39,7 @@ The Databricks Streaming Loader is an application that integrates with a Databri
 
 :::tip Schemas in Databricks
 
-For more information on how events are stored in Databricks, check the [mapping between Snowplow schemas and the corresponding Databricks column types](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md?warehouse=databricks).
+For more information on how events are stored in Databricks, check the [mapping between Snowplow schemas and the corresponding Databricks column types](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md?warehouse=databricks).
 
 :::
 

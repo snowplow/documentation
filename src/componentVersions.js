@@ -22,7 +22,7 @@ export const versions = {
 
   // Core pipeline
   collector: '3.6.0',
-  enrich: '6.1.0',
+  enrich: '6.1.1',
   sqs2kinesis: '1.0.4',
   dataflowRunner: '0.7.5',
   snowbridge: '3.5.0',
@@ -38,7 +38,7 @@ export const versions = {
   s3Loader22x: '2.2.9',
   lakeLoader: '0.6.3',
   snowflakeStreamingLoader: '0.5.1',
-  databricksStreamingLoader: '0.1.0',
+  databricksStreamingLoader: '0.2.0',
 
   // Data Modelling
   // dbt
@@ -76,6 +76,6 @@ export const versions = {
   igluScalaClient: '2.2.1',
 
   // Testing & debugging
-  snowplowMicro: '2.3.0',
+  snowplowMicro: '2.3.1',
   snowplowMini: '0.23.2',
 }

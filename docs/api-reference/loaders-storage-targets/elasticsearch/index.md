@@ -31,7 +31,7 @@ The `geo_latitude` and `geo_longitude` fields are combined into a single `g
 
 ### Self-describing events
 
-Each [self-describing event](/docs/fundamentals/events/index.md#self-describing-events) gets its own field (same [naming rules](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md?warehouse=snowflake#location) as for Snowflake). For example:
+Each [self-describing event](/docs/fundamentals/events/index.md#self-describing-events) gets its own field (same [naming rules](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md?warehouse=snowflake#location) as for Snowflake). For example:
 
 ```json
 {
@@ -46,7 +46,7 @@ Each [self-describing event](/docs/fundamentals/events/index.md#self-describing-
 
 ### Entities
 
-Each [entity](/docs/fundamentals/entities/index.md) type attached to the event gets its own field (same [naming rules](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md?warehouse=snowflake#location) as for Snowflake). The field contains an array with the data for all entities of the given type. For example:
+Each [entity](/docs/fundamentals/entities/index.md) type attached to the event gets its own field (same [naming rules](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md?warehouse=snowflake#location) as for Snowflake). The field contains an array with the data for all entities of the given type. For example:
 
 ```json
 {

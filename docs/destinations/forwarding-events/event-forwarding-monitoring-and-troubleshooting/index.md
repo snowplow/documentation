@@ -37,9 +37,19 @@ When any type of failure occurs, Snowplow can take one or more of the following 
 
 - **Automatic retries**: transient failures are automatically retried according to each destination's retry policy.
 - **Failed event logging**: all non-retryable failures are routed to your configured failure destination, which is typically a cloud storage bucket, where you can inspect them further. This includes transformation failures, oversized data failures, unrecoverable failures, and transient failures that have exceeded their retry limit. For how to query these logs, see [Inspecting and debugging failures](#inspecting-and-debugging-failures).
-- **Email alerts**: just like warehouse loaders, setup failures trigger email alerts to notify configured users of authentication or configuration problems.
+- **Setup alerts**: just like warehouse loaders, setup failures trigger email alerts to notify configured users of authentication or configuration problems.
 
-## Monitoring and metrics
+## Configuring setup alerts
+
+Once a forwarder is deployed, you can configure one or more email addresses to send alerts when setup failures occur. Follow the steps below to configure the alerts.
+
+1. Navigate to **Destinations** > **Destinations list** from the navigation bar and click the **Details** button on a destination card to open the **Destination details** page.
+2. On the table of forwarders, click the three dots next to the forwarder you want to configure alerting for and select **Alerts**.
+3. You'll see a modal where you can enter the email addresses you want to be alerted in case of setup errors. Click **Save Changes** to confirm.
+
+![](./images/setup-alerting-screenshot.png)
+
+## Metrics and monitoring
 
 You can monitor forwarders in a few ways:
 

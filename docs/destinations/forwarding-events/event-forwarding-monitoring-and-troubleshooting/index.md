@@ -61,7 +61,7 @@ To view these metrics, navigate to **Destinations** > **Destinations list** and 
 Forwarder cloud metrics are only available for [BDP Enterprise](/docs/get-started/snowplow-bdp/index.md#enterprise-in-your-own-cloud) customers.
 :::
 
-Forwarders produce the following metrics in your cloud provider's monitoring service:
+Forwarders emit the following metrics in your cloud provider's monitoring service:
 
 - `target_success`: events successfully delivered to your destination
 - `target_failed`: events that failed delivery but are eligible for retry
@@ -77,7 +77,7 @@ To get notified of any issues, you can use these metrics to define [CloudWatch a
 
 ## Inspecting and debugging failures
 
-This section explains how to view failed event logs, and how to query them.
+This section explains how to find and query failed event logs.
 
 ### Finding failed event logs
 
@@ -95,7 +95,13 @@ Failed event logs are formatted according to the [event_forwarding_error](https:
 
 ### Querying failed event logs
 
-On AWS, you can use [Athena](https://aws.amazon.com/athena/) to query your failed events using the cloud storage files as a data source. Follow the steps below to:
+On AWS, you can use [Athena](https://aws.amazon.com/athena/) to query your failed events using the cloud storage files as a data source.
+
+:::tip Querying failed events on GCP
+For GCP-hosted Snowplow deployments, failed events can be queried via external tables in BigQuery.
+:::
+
+<!-- TODO: add BigQuery steps as well -->
 
 **1. Create a table and load the data**
 

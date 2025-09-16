@@ -3,7 +3,7 @@ title: Introduction
 position: 1
 ---
 
-[Shaped.ai](https://sha[ed.ai]) is a ML-based solution to provide personalization, recommendations, and search optimization capabilities to end-users. It can use Snowplow data [to build different use cases](https://docs.shaped.ai/docs/use_cases/overview/). 
+[Shaped.ai](https://shaped.ai) is a ML-based solution to provide personalization, recommendations, and search optimization capabilities to end-users. It can use Snowplow data [to build different use cases](https://docs.shaped.ai/docs/use_cases/overview/). 
 
 Shaped.ai offers a [REST API](https://docs.shaped.ai/docs/api), as well as [SDKs for Python and JavaScript](https://docs.shaped.ai/docs/overview/install-sdk), a [CLI in Python](https://docs.shaped.ai/docs/overview/installing-shaped-cli), and a [UI/UX interface (the dashboard)](https://dashboard.shaped.ai/).
 

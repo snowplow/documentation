@@ -35,7 +35,7 @@ In version 6.0.0, some of the config fields are renamed or moved to a different 
 
 * In enrich-kinesis, it is no longer possible to send KCL metrics to Cloudwatch.
 
-## New metrics
+## Metrics Changes
 
 Existing metrics will continue to be emitted. Three new metrics are added:
 
@@ -44,3 +44,5 @@ Existing metrics will continue to be emitted. Three new metrics are added:
 * `e2e_latency_millis`: Same value as the `latency` metric, for transition. The goal is to remove `latency` metric so that the naming is consistent across applications
 
 * `latency_millis`: Delay between the input record getting written to the stream and Enrich starting to process it
+
+Furthermore, the old `latency` metric has changed subtly. Before, it represented the latency of the most recently processed event. Now it refers to the _maximum latency of all events_ since the previous metric was emitted.

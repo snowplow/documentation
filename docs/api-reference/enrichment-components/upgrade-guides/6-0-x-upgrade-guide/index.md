@@ -45,4 +45,4 @@ Existing metrics will continue to be emitted. Three new metrics are added:
 
 * `latency_millis`: Delay between the input record getting written to the stream and Enrich starting to process it
 
-Furthermore, the old `latency` metric has changed subtly: it now represents the maximum latency over the reporting period, whereas before it represented latency for the most recently processed event only.
+Furthermore, the old `latency` metric has changed subtly. Before, it represented the latency of the most recently processed event. Now it refers to the _maximum latency of all events_ since the previous metric was emitted.

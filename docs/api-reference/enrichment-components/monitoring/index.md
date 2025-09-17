@@ -32,6 +32,8 @@ snowplow.enrich.invalid_enriched:0|c|#tag1:value1
 
 Note, the count metrics (`raw`, `good`, `bad` and `invalid_enriched`) refer to the updated count since the previous metric was emitted. A collector payload can carry multiple events, so it is possible for `good` to be larger than `raw`.
 
+The latency metrics (`e2e_latency_millis` and `latency_millis`) refer to the maximum latency of all events since the previous metric was emitted.
+
 Statsd monitoring is configured by setting the `monitoring.metrics.statsd` section in [the hocon file](/docs/api-reference/loaders-storage-targets/s3-loader/configuration-reference/index.md):
 
 ```json

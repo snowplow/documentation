@@ -55,7 +55,7 @@ module.exports = function snowplowSchemaPlugin(context, options) {
     path.join(__dirname, 'schemaData/keywords.md'),
     true
   )
-
+  
 function loadMDXMetadata(folderPath, basePrefix) {
   if (!fs.existsSync(folderPath)) return {}
   const metadata = {}
@@ -69,6 +69,9 @@ function loadMDXMetadata(folderPath, basePrefix) {
       if (stat.isDirectory()) {
         walk(fullPath, path.join(base, file))
       } else if (file.endsWith('.md') || file.endsWith('.mdx')) {
+        // Skip partials: files starting with "_"
+        if (file.startsWith('_')) continue
+
         const rawContent = fs.readFileSync(fullPath, 'utf8')
         const parsed = matter(rawContent)
         const { data } = parsed
@@ -80,33 +83,27 @@ function loadMDXMetadata(folderPath, basePrefix) {
         const filename = file.replace(/\.mdx?$/, '')
         let slug
 
-        if (rawSlug) {
-          slug = rawSlug
-        } else {
-          slug = '/' + path.join(base, filename).replace(/\\/g, '/')
-          if (filename === 'index') slug = '/' + base.replace(/\\/g, '/')
-          const pathParts = slug.split('/')
-          const last = pathParts[pathParts.length - 1]
-          const secondLast = pathParts[pathParts.length - 2]
-          if (last === secondLast) slug = pathParts.slice(0, -1).join('/')
-        }
+ if (rawSlug) {
+  // Always resolve against basePrefix (docs semantics)
+  const cleanedRaw = String(rawSlug).replace(/^\/+/, '') // drop leading slash
+  slug = '/' + normalizeSlug([basePrefix, cleanedRaw].filter(Boolean).join('/'))
+} else {
+  // Derive from path, then resolve against basePrefix
+  slug = '/' + path.join(base, filename).replace(/\\/g, '/')
+  if (filename === 'index') slug = '/' + base.replace(/\\/g, '/')
+  const parts = slug.split('/')
+  const last = parts[parts.length - 1]
+  const secondLast = parts[parts.length - 2]
+  if (last === secondLast) slug = parts.slice(0, -1).join('/')
 
-        slug = '/' + normalizeSlug(path.join(basePrefix, slug).replace(/\\/g, '/'))
+  const cleaned = String(slug || '').replace(/^\/+/, '')
+  slug = '/' + normalizeSlug([basePrefix, cleaned].filter(Boolean).join('/'))
+}
 
         const relPath = normalizePath(path.join(basePrefix, base, file))
-        let lookupPath = relPath
+        const lookupPath = relPath
 
-        // Special case: homepage
-        if (slug === '/' && file === 'introduction.md') {
-          lookupPath = 'docs/introduction.md'
-
-          // 🚨 Force override: never use frontmatter, only map or fallback
-          data.description = descriptionMap[lookupPath] || 'Snowplow documentation'
-        } else {
-          // Normal pages → apply mapping overrides
-          data.description = descriptionMap[lookupPath] || 'Snowplow documentation'
-        }
-
+        data.description = descriptionMap[lookupPath] || 'Snowplow documentation'
         if (keywordsMap[lookupPath]) {
           data.keywords = keywordsMap[lookupPath]
         }
@@ -115,12 +112,16 @@ function loadMDXMetadata(folderPath, basePrefix) {
         if (!data.title) {
           data.title = 'Snowplow documentation'
         }
-
-        if (!data.keywords || !Array.isArray(data.keywords) || data.keywords.length === 0) {
+        if (!Array.isArray(data.keywords) || data.keywords.length === 0) {
           data.keywords = ['Snowplow', 'Behavioral data', 'Customer data integration']
         }
 
         metadata[slug] = data
+
+        // Extra safety: if this doc explicitly set slug: '/' store an alias at '/'
+        if (rawSlug && rawSlug.trim() === '/') {
+          metadata['/'] = data
+        }
       }
     }
   }
@@ -128,7 +129,6 @@ function loadMDXMetadata(folderPath, basePrefix) {
   walk(folderPath)
   return metadata
 }
-
 
 
   return {

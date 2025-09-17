@@ -14,13 +14,20 @@ function normalizeSlug(slug: string): string {
   return slug.replace(/\/$/, '')
 }
 
-export function generateSchema(frontMatter: BaseFrontMatter, pageMeta: any) {
+const DEFAULT_KEYWORDS = ['Snowplow', 'Behavioral data', 'Customer data integration']
+
+export function generateSchema(frontMatter: BaseFrontMatter, pageMeta: any, siteUrl: string) {
   const { title, slug, image, author } = frontMatter
 
   const safeTitle = title || 'Snowplow Documentation'
-  const description = pageMeta.description || 'Snowplow documentation'
-  const keywords = pageMeta.keywords || []
-  const fullUrl = `https://snowplow.io${slug || ''}`
+  const description = pageMeta?.description || 'Snowplow documentation'
+  const keywords = Array.isArray(pageMeta?.keywords) && pageMeta.keywords.length > 0
+    ? pageMeta.keywords
+    : DEFAULT_KEYWORDS
+
+  const site = (siteUrl || 'https://docs.snowplow.io').replace(/\/$/, '')
+  const pathPart = !slug || slug === '' ? '/' : slug
+  const fullUrl = `${site}${pathPart}`
 
   const publisher = {
     '@type': 'Organization',
@@ -34,7 +41,7 @@ export function generateSchema(frontMatter: BaseFrontMatter, pageMeta: any) {
 
   const schemaData: Record<string, any> = {
     '@context': 'https://schema.org',
-    '@type': 'TechArticle', // always TechArticle
+    '@type': 'TechArticle',
     headline: safeTitle,
     description,
     keywords,
@@ -63,23 +70,24 @@ export default function HeadJSONLD() {
   }
 
   const allPagesMetadata = pluginData.allPagesMetadata || {}
+  const siteUrl = pluginData.siteUrl || 'https://docs.snowplow.io'
 
-  const rawSlug =
-    frontMatter.slug ||
-    metadata.permalink ||
-    `/${frontMatter.title?.replace(/\s+/g, '-').toLowerCase()}`
-  const slug = normalizeSlug(rawSlug)
+  // Prefer permalink, then slug, then root
+  let slug = normalizeSlug(metadata.permalink || frontMatter.slug || '/')
+  if (slug === '') slug = '/' // homepage should resolve to "/"
 
-  const pageMeta = allPagesMetadata[slug] || {}
+  // Try exact key, then root as a last resort
+  const pageMeta = allPagesMetadata[slug] || allPagesMetadata['/'] || {}
 
   const schemas = generateSchema(
     {
       title: frontMatter.title,
       slug,
-      image: (frontMatter as any).image, // safe cast, optional
-      author: (frontMatter as any).author, // safe cast, optional
+      image: (frontMatter as any).image,
+      author: (frontMatter as any).author,
     },
-    pageMeta
+    pageMeta,
+    siteUrl
   )
 
   return (

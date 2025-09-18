@@ -22,18 +22,20 @@ Choose how you want to receive notifications:
 ### Email notifications
 
 1. Select **Email** as destination
-2. Enter alert name (e.g., "mobile-app")
-3. Add recipient email addresses
-4. Click **Add filters** to configure triggers
+2. Add recipient email addresses
+3. Click **Add filters** to configure filters
+4. Configure triggers as needed
+5. Enter alert name (e.g., "mobile-app")
 
 ![Email destination configuration](images/dq_create_email_alert.png)
 
 ### Slack notifications
 
 1. Select **Slack** as destination
-2. Enter alert name (e.g., "web-app")
-3. Select Slack channel from dropdown
-4. Click **Add filters** to configure triggers
+2. Select Slack channel from dropdown
+3. Click **Add filters** to configure filters
+4. Configure triggers as needed
+5. Enter alert name (e.g., "web-app")
 
 ![Slack destination configuration](images/dq_create_slack_alert.png)
 
@@ -66,6 +68,31 @@ Configure when alerts should trigger:
 3. **App IDs**: filter by application identifiers
 
 ![Filter configuration](images/dq_filters.png)
+
+## Configure triggers
+
+Set up when alerts should be triggered based on failed event conditions:
+
+### Trigger types
+
+Choose from the available trigger options:
+
+- **When above value**: Set an absolute threshold for failed events (e.g., 1,500 failed events per hour)
+- **On any issue**: Alert immediately when any failed events are detected
+
+![Trigger configuration showing trigger type selection](images/dq_trigger_types.png)
+
+### Threshold configuration
+
+When using "When above value" trigger:
+
+1. **Value**: Enter the threshold number of failed events
+2. **Time period**: Select the time window (10 minutes, hour, or day)
+3. **Deliver**: Choose notification frequency (daily, weekly, or monthly)
+
+![Value threshold configuration with insights panel](images/dq_absolute_threshold.png)
+
+An alert will be sent once per the selected delivery frequency if the trigger condition is met.
 
 ## Complete setup
 

@@ -1,0 +1,8 @@
+{
+  "title": "Set up the Signals batch engine",
+  "description": "Use the Signals batch engine CLI tool to calculate attributes from your warehouse data.",
+  "label": "Signals implementation",
+  "useCases": ["Real-time personalization"],
+  "technologies": ["dbt"],
+  "snowplowTech": ["Signals"]
+}

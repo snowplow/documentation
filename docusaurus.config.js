@@ -37,7 +37,7 @@ module.exports = {
     mermaid: true,
   },
 
-  themes: ['docusaurus-theme-github-codeblock', '@docusaurus/theme-mermaid'],
+  themes: ['@docusaurus/theme-mermaid'],
 
   presets: [
     [
@@ -48,7 +48,21 @@ module.exports = {
           showLastUpdateTime: true,
           editUrl: 'https://github.com/snowplow/documentation/tree/main/',
           remarkPlugins: [abbreviations, math],
-          rehypePlugins: [katex],
+          rehypePlugins: [
+            [
+              require('rehype-raw').default,
+              {
+                passThrough: [
+                  'mdxjsEsm',
+                  'mdxJsxFlowElement',
+                  'mdxJsxTextElement',
+                  'mdxFlowExpression',
+                  'mdxTextExpression',
+                ],
+              },
+            ],
+            katex,
+          ],
           async sidebarItemsGenerator({
             defaultSidebarItemsGenerator,
             ...args

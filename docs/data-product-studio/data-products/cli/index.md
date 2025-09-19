@@ -4,10 +4,9 @@ description: "Use the 'snowplow-cli data-products' command to manage your data p
 sidebar_label: "Using the CLI"
 sidebar_position: 999
 ---
-```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-```
+
 The `data-products` subcommand of [Snowplow CLI](/docs/data-product-studio/snowplow-cli/index.md) provides a collection of functionality to ease the integration of custom development and publishing workflows.
 ## Snowplow CLI Prerequisites
 Installed and configured [Snowplow CLI](/docs/data-product-studio/snowplow-cli/index.md)

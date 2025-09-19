@@ -24,11 +24,17 @@ Data in Delta Lake can be consumed using various tools and products, for example
 
 * Amazon Athena
 * Apache Spark or Amazon EMR
-* Databricks*
+* Databricks¹
 * Microsoft Synapse Analytics
 * Microsoft Fabric
 
-_*Delta+Databricks combination is currently not supported for AWS pipelines. The loader uses DynamoDB tables for mutually exclusive writes to S3, a feature of Delta. Databricks, however, does not support this (as of September 2025). This means that it’s not possible to alter the data via Databricks (e.g. to run `OPTIMIZE` or to delete PII)._
+_¹ Delta+Databricks combination is currently not supported for AWS pipelines. The loader uses DynamoDB tables for mutually exclusive writes to S3, a feature of Delta. Databricks, however, does not support this (as of September 2025). This means that it’s not possible to alter the data via Databricks (e.g. to run `OPTIMIZE` or to delete PII)._
+
+:::note
+
+Currently, we only support loading to a lake in the same cloud as your Snowplow pipeline.
+
+:::
 
 ## What you will need
 

@@ -25,10 +25,12 @@ Depending on the cloud provider for your Snowplow pipeline, there are different 
 | Integration | AWS | Azure | GCP | Failed events support |
 | ----------- |:---:|:-----:|:---:|:---------------------:|
 | Direct, batch-based ([RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md)) | :white_check_mark: | :x: | :x: | :x: |
-| Via Delta Lake ([Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)) | :x:* | :white_check_mark: | :white_check_mark: | :white_check_mark: |
+| Via Delta Lake ([Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)) | :x:¹ | :white_check_mark:² | :white_check_mark:² | :white_check_mark: |
 | _Early release:_ Streaming / Lakeflow ([Streaming Loader](/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/index.md)) | :white_check_mark: | :white_check_mark: | :white_check_mark: | :white_check_mark: |
 
-_*Delta+Databricks combination is currently not supported for AWS pipelines. The loader uses DynamoDB tables for mutually exclusive writes to S3, a feature of Delta. Databricks, however, does not support this (as of September 2025). This means that it’s not possible to alter the data via Databricks (e.g. to run `OPTIMIZE` or to delete PII)._
+_¹ Delta+Databricks combination is currently not supported for AWS pipelines. The loader uses DynamoDB tables for mutually exclusive writes to S3, a feature of Delta. Databricks, however, does not support this (as of September 2025). This means that it’s not possible to alter the data via Databricks (e.g. to run `OPTIMIZE` or to delete PII)._
+
+_² The lake must be in the same cloud as the pipeline._
 
 ## What you will need
 
@@ -99,6 +101,8 @@ Then create an external table in Databricks pointing to the Delta Lake location.
 (For self-hosted customers, please refer to the [Loader API reference](/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/index.md) instead.)
 
 <SetupInstructions destinationName="Databricks" connectionType="Databricks Streaming" />
+
+Once the loader is up and running, click on the “...” button in the **Loaders** table and select **Databricks setup instructions**. Follow the outlined steps to create a Lakeflow pipeline within Databricks.
 
 </TabItem>
 </Tabs>

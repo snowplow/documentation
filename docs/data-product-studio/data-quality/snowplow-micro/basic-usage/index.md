@@ -56,7 +56,7 @@ To use this image, add `-distroless` to the tag:
 
 :::
 
-If Docker is not available on your system, you can also run Micro as a Java application (since version 2.3.1). The `jar` files are availble via [GitHub releases](https://github.com/snowplow-incubator/snowplow-micro/releases).
+If Docker is not available on your system, you can also run Micro as a Java application (since version 2.3.1). The `jar` files are availble via [GitHub releases](https://github.com/snowplow/snowplow-micro/releases).
 
 <CodeBlock language="bash">{
 `java -jar micro-${versions.snowplowMicro}.jar`

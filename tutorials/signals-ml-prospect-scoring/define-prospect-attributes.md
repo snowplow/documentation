@@ -343,6 +343,7 @@ Apply the attribute group and service configurations to Signals.
 ```python
 from snowplow_signals import Signals
 
+# NOTE: Use the SignalsSandbox class instead of Signals if using the Sandbox experience
 sp_signals = Signals(
     api_url=ENV_SP_API_URL,
     api_key=ENV_SP_API_KEY,

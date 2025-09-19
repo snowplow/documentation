@@ -11,7 +11,7 @@ This page explains how to edit, delete, or review existing failed event alerts.
 2. Click **Manage alerts** in the top-right corner
 3. View all configured alerts with their destinations
 
-![Manage alerts interface](images/dq_list_alerts.png)
+![Manage alerts interface](images/data_quality_list_alerts.png)
 
 ## Edit an alert
 

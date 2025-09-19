@@ -129,7 +129,7 @@ If the intervention is valid, it will immediately be published to any subscriber
 ```python
 from snowplow_signals import AttributeKeyIdentifiers, InterventionInstance, Signals
 
-# regular signals SDK authentication
+# regular signals SDK authentication (use the SignalsSandbox class instead of Signals if using the Sandbox experience)
 sp_signals = Signals(
     api_url=SIGNALS_DEPLOYED_URL,
     api_key=CONSOLE_API_KEY,
@@ -188,7 +188,7 @@ The Signals SDK allows subscribing to interventions for arbitrary attribute keys
 ```python
 from snowplow_signals import AttributeKeyIdentifiers, InterventionInstance, Signals
 
-# regular signals SDK authentication
+# regular signals SDK authentication (use the SignalsSandbox class instead of Signals if using the Sandbox experience)
 sp_signals = Signals(
     api_url=SIGNALS_DEPLOYED_URL,
     api_key=CONSOLE_API_KEY,

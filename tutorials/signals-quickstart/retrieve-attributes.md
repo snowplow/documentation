@@ -45,6 +45,19 @@ sp_signals = Signals(
 )
 ```
 
+:::info Using Signals Sandbox authentication
+
+In case you are trying out Signals using the Sandbox experience, you can authenticate using the sandbox token as follows:
+
+```py
+from snowplow_signals import SignalsSandbox
+
+sp_signals = SignalsSandbox(
+    api_url=SANDBOX_URL,
+    sandbox_token=SANDBOX_TOKEN,
+)
+```
+
 ## Retrieving your session attributes
 
 Use your current session ID to retrieve the attributes that Signals has just calculated about your session.

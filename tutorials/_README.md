@@ -39,7 +39,7 @@ Conclusion
 ### Introduction
 
 The first page of the tutorial:
-* It should have `title: "Introduction"`
+* Has `title: "Introduction"`
 * Start with a sentence like "Welcome to the XYZ tutorial."
 * Explain in the opening paragraphs:
   * What the focus of the tutorial is
@@ -67,7 +67,7 @@ The first page of the tutorial:
 ### Main pages
 
 The tutorial content pages:
-* Should be titled in imperative case
+* Are titled in imperative case
   * E.g. "Install the SDK", "Generate models"
   * It should sound right if you imagine putting "how to" in front of each
 * The first page after the introduction would normally be "Install the X" or "Set up Y"
@@ -82,7 +82,7 @@ The tutorial content pages:
 ### Conclusion
 
 The last page of the tutorial:
-* It should have `title: "Conclusion"`
+* Has `title: "Conclusion"`
 * Summarise what they've learned or achieved, especially in the context of business value
 * End with a **Next steps** subsection
 

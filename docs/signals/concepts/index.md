@@ -238,6 +238,17 @@ By default, interventions trigger automatically when their criteria are met.
 You can also publish custom interventions to any attribute keys you like at any time using the Signals SDK and API.
 If the intervention is valid, it will immediately be published to any subscribers for the targeted attribute key IDs, which can then react and perform actions based on it.
 
+---
+Used for: Manually sending custom interventions to specific users/entities at any time, bypassing automatic rule-based triggers.
+When to use:
+
+Real-time business decisions - Flash sales, stock alerts, breaking news
+External system triggers - CRM system detects opportunity, payment processor flags fraud
+Manual campaign targeting - Marketing team wants to target specific user segments
+A/B testing - Sending different intervention variants to test groups
+Emergency notifications - System outages, security alerts
+---
+
 ## Profiles Store
 
 The Profiles Store is a database where Signals saves all your calculated attribute values. When Signals calculates attributes from your events or warehouse data, or syncs pre-calculated data, it stores them here organized by attribute group. Your applications retrieve these stored values using the Signals SDKs or API.

@@ -4,7 +4,7 @@ sidebar_position: 50
 description: "Configure and deploy interventions to trigger real-time actions based on user attribute changes in Snowplow Signals."
 ---
 
-
+[Interventions](/docs/signals/concepts/index.md#interventions) are automated triggers that enable real-time actions based on user behavior.
 
 You can request interventions from the Signals API.
 You and your applications can request interventions for specific attribute keys using the Signals Python SDK, and anonymous users can request interventions for their own attribute keys directly from your apps and webpages.

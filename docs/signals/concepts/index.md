@@ -159,7 +159,19 @@ This service could be imagined like this as a table:
 
 ## Interventions
 
-Interventions are opportunities to take actions to improve user outcomes. They're calculated on top of changes in attribute values, or fired by your own applications.
+Interventions are automated triggers that enable real-time actions based on user behavior.
+
+They can be thought of as "if-then" rules that run in real time. For example:
+* If a user has viewed five products in the last ten minutes
+* Then automatically send that user a personalized offer
+
+---
+Criteria evaluate attribute values against defined conditions. When Signals processes behavioral data and updates attributes, it checks whether the new attribute values meet your criteria conditions. If they do, the intervention triggers.
+
+---
+you could  a user viewing their fifth product in ten minutes, the intervention automatically triggers and can send personalized messages, offers, or other actions to that user.
+
+opportunities to take actions to improve user outcomes. They're calculated on top of changes in attribute values, or fired by your own applications.
 
 This allows you to influence user behavior without requiring application updates, since you can control when the intervention should fire through Signals.
 
@@ -206,6 +218,25 @@ Because [attribute keys are configurable](/docs/signals/define-attributes/attrib
 - A specific pageview that a user is in the middle of
 - All users on a specific page
 - All users currently on your site/app
+
+
+---
+### Automatic stream-based interventions via Signals
+
+You can define interventions with a set of rules to trigger them via the [Signals Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk).
+
+As the Signals streaming engine processes Snowplow events, it will calculate any attributes you have configured.
+As the attribute values get updated, the streaming engine will evaluate the associated attribute key's attributes against the rules you have defined.
+If the attributes match the rule conditions, the rest of your intervention definition gets published as an intervention targeting that attribute key.
+
+Any users currently subscribed to interventions on their attribute keys will then receive the intervention, and your application can then react to it and perform actions.
+
+## Custom interventions using the API
+
+By default, interventions trigger automatically when their criteria are met.
+
+You can also publish custom interventions to any attribute keys you like at any time using the Signals SDK and API.
+If the intervention is valid, it will immediately be published to any subscribers for the targeted attribute key IDs, which can then react and perform actions based on it.
 
 ## Profiles Store
 

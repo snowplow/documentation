@@ -5,18 +5,22 @@ sidebar_label: "Using the Python SDK"
 description: "Use the Snowplow Signals Python SDK to programmatically define attribute groups, services, and interventions via code."
 ---
 
-The pages in this section describe how to use the [Signals Python SDK](https://pypi.org/project/snowplow-signals/) to define attribute groups, services, and interventions.
+To use the [Signals Python SDK](https://pypi.org/project/snowplow-signals/) to define interventions, start by [connecting to Signals](/docs/signals/connection/index.md) to create a `Signals` object:
 
-You must first deploy Signals using the self-serve process in Console, under the **Signals** section. After deployment, you'll have access to the Signals API URL needed for Python SDK usage.
+```python
+from snowplow_signals import Signals
 
+sp_signals = Signals(
+    api_url=SIGNALS_DEPLOYED_URL,
+    api_key=CONSOLE_API_KEY,
+    api_key_id=CONSOLE_API_KEY_ID,
+    org_id=ORG_ID,
+)
+```
 
----
+You'll need this connection to publish interventions.
 
-## Defining interventions
-
-All configuration is defined using the Signals Python SDK, as shown here, or the Signals API.
-
-### Minimal example
+## Minimal example
 
 This is the minimum configuration needed to create an intervention definition:
 
@@ -35,7 +39,7 @@ hello_intervention = RuleIntervention(
 
 Once applied and active, this intervention will trigger the first time Signals processes an event that first sets the `example_group` attribute group's `test_attribute` attribute to a value that is not null (e.g. the first time it gets set).
 
-### Options
+## Options
 
 The table below lists all available arguments for a `RuleIntervention`:
 
@@ -48,7 +52,7 @@ The table below lists all available arguments for a `RuleIntervention`:
 | `target_attribute_keys` | List of attribute key names to publish this intervention to. Any attribute keys in this list that have a value in the event that triggered the update will be targeted with the intervention. If not defined, defaults to the attribute keys associated with any attribute groups you reference in `criteria`. | `string[]`                                                                                                        | ❌         |
 | `criteria`              | Tree of `Criterion` expressions to evaluate against attribute key attributes                                                                                                                                                                                                                                   | One of: `InterventionCriterion`, `InterventionCriteriaAll`, `InterventionCriteriaAny`, `InterventionCriteriaNone` | ✅         |
 
-#### Evaluating attributes
+## Evaluating attributes
 
 The `criteria` tree defines the conditions that an attribute key's attributes should meet to be eligible for the intervention to trigger.
 
@@ -94,20 +98,15 @@ criteria = InterventionCriteriaAll(all=[
 
 Interventions can be published to current subscribers of any combination of attribute keys via the API -- or automatically published when attribute changes meet rules you set.
 
-### Automatic stream-based interventions via Signals
+TODO
 
-You can define interventions with a set of rules to trigger them via the [Signals Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk).
+## Direct interventions
 
-As the Signals streaming engine processes Snowplow events, it will calculate any attributes you have configured.
-As the attribute values get updated, the streaming engine will evaluate the associated attribute key's attributes against the rules you have defined.
-If the attributes match the rule conditions, the rest of your intervention definition gets published as an intervention targeting that attribute key.
+By default, interventions are rule-based, and trigger automatically when their criteria are met.
 
-Any users currently subscribed to interventions on their attribute keys will then receive the intervention, and your application can then react to it and perform actions.
+You can also directly publish interventions to any attribute keys using the Signals Python SDK or API. Direct interventions have no criteria, and are not tied to attribute values.
 
-### Custom intervention via the API
-
-You can also publish custom interventions to any attribute keys you like at any time using the Signals SDK and API.
-If the intervention is valid, it will immediately be published to any subscribers for the targeted attribute key IDs, which can then react and perform actions based on it.
+If the intervention is valid, it will immediately be pushed to any subscribers for the targeted attribute key IDs, which can then react and perform actions based on it. Note that the method is `push_intervention`, not `publish`.
 
 ```python
 from snowplow_signals import AttributeKeyIdentifiers, InterventionInstance, Signals

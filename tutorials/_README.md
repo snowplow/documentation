@@ -114,10 +114,17 @@ Tutorials have:
   * For titles and description:
     * Be concise
     * Use imperative form - it should sound right if you imagine putting "how to" in front of each
-  * There's a short list of labels to choose from, pick one
-    * `Data governance`, `Data modeling`, `Signals implementation`, `Solution accelerator`, `Tracking implementation`
-  * There's a short list of use cases to choose from, pick one
-    * `Composable analytics`, `Composable CDP`, `Real-time personalization`, `Customer-aware AI`
+  * There's a short list of **labels** to choose from, pick one:
+    * `Data governance`
+    * `Data modeling`
+    * `Signals implementation`
+    * `Solution accelerator`
+    * `Tracking implementation`
+  * There's a short list of **use cases** to choose from, pick one:
+    * `Composable analytics`
+    * `Composable CDP`
+    * `Real-time personalization`
+    * `Customer-aware AI`
   * Solution accelerators are a specific thing, they are:
     * Focused on business use cases
     * End-to-end solutions
@@ -145,7 +152,7 @@ Example page frontmatter:
 title: "Introduction"                           # Page title (sentence case)
 position: 1
 description: "One to two sentences describing the content for marketing purposes."
-keywords: ["keyword1", "SEO", "AIO"]
+keywords: ["keyword1", "keyword2", "keyword3"]  # Marketing keywords
 date: "2025-09-09"                              # File creation date (YYYY-MM-DD)
 ---
 

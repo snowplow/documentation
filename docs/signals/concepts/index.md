@@ -181,6 +181,32 @@ For example, you could subscribe to interventions for a specific `domain_userid`
 When new interventions are published for any of those, they are delivered and the contents include any relevant attribute values, that can be used by your application to react.
 This enables both individual-level and broadcast-level real-time messaging: for example, offering a specific user a personalized message, while also notifying all users on a specific product page that limited stock is selling fast.
 
+TODO
+Interventions are a way to communicate that an action should be performed to work towards better outcomes for particular users.
+
+Each intervention is usually only valid "in the moment", so they have a limited lifetime and are not repeatedly sent if consumers aren't requesting them.
+This pairs well with the Signals streaming engine, which:
+- Processes data in near-real-time for users that are using your offering right now
+- Can publish interventions at an individual attribute key level in real time based on changes to its attributes
+
+```mermaid
+flowchart LR
+    behavior[user behavior] -->|generates| events
+    events -->|update| attributes
+    attributes -->|trigger| interventions
+    interventions -->|activate| functionality
+    functionality -->|influences| behavior
+    systems -->|trigger| interventions
+```
+
+Your application decides how to react to a delivered intervention.
+
+Because [attribute keys are configurable](/docs/signals/define-attributes/attribute-groups/index.md), the targeting used for interventions can be as broad or specific as you like, including:
+- A specific user/session
+- A specific pageview that a user is in the middle of
+- All users on a specific page
+- All users currently on your site/app
+
 ## Profiles Store
 
 The Profiles Store is a database where Signals saves all your calculated attribute values. When Signals calculates attributes from your events or warehouse data, or syncs pre-calculated data, it stores them here organized by attribute group. Your applications retrieve these stored values using the Signals SDKs or API.

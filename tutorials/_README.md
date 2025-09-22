@@ -120,14 +120,15 @@ Tutorials have:
     * `Signals implementation`
     * `Solution accelerator`
     * `Tracking implementation`
+  * Solution accelerators are a specific thing, they are:
+    * Focused on business use cases
+    * End-to-end solutions
   * There's a short list of **use cases** to choose from, pick one:
     * `Composable analytics`
     * `Composable CDP`
     * `Real-time personalization`
     * `Customer-aware AI`
-  * Solution accelerators are a specific thing, they are:
-    * Focused on business use cases
-    * End-to-end solutions
+  * For **technologies** and **Snowplow technologies**, you can specify more than one
 * Images in a subfolder called `images`
 * Separate pages as separate `.md` files
   * The file name will be the URL

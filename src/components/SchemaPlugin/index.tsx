@@ -35,7 +35,7 @@ export function generateSchema(frontMatter: BaseFrontMatter, pageMeta: any, site
     url: 'https://snowplow.io',
     logo: {
       '@type': 'ImageObject',
-      url: 'https://snowplow.io/images/logo.png',
+      url: `${site}/img/snowplow-logo.svg`,
     },
   }
 

@@ -1,0 +1,5 @@
+{
+  "title": "Event Volume Anomaly Detection",
+  "label": "Solution accelerator",
+  "description": "How to build a real-time event volume anomaly detection system using Snowplow and BigQuery"
+}

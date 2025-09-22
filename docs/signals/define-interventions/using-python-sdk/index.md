@@ -5,7 +5,7 @@ sidebar_label: "Using the Python SDK"
 description: "Use the Snowplow Signals Python SDK to programmatically define attribute groups, services, and interventions via code."
 ---
 
-The pages in this section describe how to use the [Signals Python SDK](https://pypi.org/project/snowplow-signals/) to define attribute groups and services. See the [interventions section](/docs/signals/define-interventions/index.md) to learn how to [define interventions](/docs/signals/define-interventions/using-python-sdk/index.md) using the SDK.
+The pages in this section describe how to use the [Signals Python SDK](https://pypi.org/project/snowplow-signals/) to define attribute groups, services, and interventions.
 
 You must first deploy Signals using the self-serve process in Console, under the **Signals** section. After deployment, you'll have access to the Signals API URL needed for Python SDK usage.
 

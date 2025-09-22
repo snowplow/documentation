@@ -26,7 +26,7 @@ Click **Test and create connection** to trigger the Signals deployment. You'll b
 
 To use the UI to manage Signals, log in to [Console](https://console.snowplowanalytics.com) and navigate to the **Signals** section.
 
-Use the configuration interface to define [attribute groups](/docs/signals/define-attributes/attribute-groups/index.md), [services](/docs/signals/define-attributes/services/index.md), and [interventions](/docs/signals/interventions/index.md).
+Use the configuration interface to define [attribute groups](/docs/signals/define-attributes/attribute-groups/index.md), [services](/docs/signals/define-attributes/services/index.md), and [interventions](/docs/signals/define-interventions/index.md).
 
 <!-- TODO image initial landing page -->
 
@@ -36,7 +36,7 @@ Use the [Signals Python SDK](https://github.com/snowplow-incubator/snowplow-sign
 
 ## Signals API
 
-The Signals API allows you to manually configure attributes and interventions. To access the full Swagger API documentation for your Signals deployment, use your Signals API URL followed by `/docs/`:
+The Signals API allows you to directly configure attributes and interventions. To access the full Swagger API documentation for your Signals deployment, use your Signals API URL followed by `/docs/`:
 
 ```bash
 {{API_URL}}/docs/

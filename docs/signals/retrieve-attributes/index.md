@@ -19,60 +19,9 @@ For example, use the current user's unique `domain_userid` identifier to retriev
 You have three options for consuming attributes, depending on your use case or application:
 * Signals Node.js SDK (TypeScript)
 * Signals Python SDK
-* Signals API
+* [Signals API](/docs/signals/connection/index.md#signals-api)
 
-## Connecting to Signals
-
-To retrieve attributes, you'll need to connect to your Signals deployment. Use the credentials shown on the Signals overview page in BDP Console.
-
-Save the credentials into your environment or project secrets.
-
-<!-- TODO image landing page -->
-
-Install the SDK into your project, and connect to Signals.
-
-<Tabs groupId="signals" queryString>
-<TabItem value="python" label="Python" default>
-
-```bash
-pip install snowplow-signals
-```
-
-```python
-from snowplow_signals import Signals
-
-sp_signals = Signals(
-    api_url=SIGNALS_DEPLOYED_URL,
-    api_key=CONSOLE_API_KEY,
-    api_key_id=CONSOLE_API_KEY_ID,
-    org_id=ORG_ID,
-)
-```
-
-</TabItem>
-<TabItem value="nodejs" label="Node.js">
-
-```bash
-npm i @snowplow/signals-node
-# or
-yarn add @snowplow/signals-node
-# or
-pnpm i @snowplow/signals-node
-```
-
-```typescript
-import { Signals } from '@snowplow/signals-node';
-
-const signals = new Signals({
-  baseUrl: SIGNALS_DEPLOYED_URL,
-  apiKey: CONSOLE_API_KEY,
-  apiKeyId: CONSOLE_API_KEY_ID,
-  organizationId: ORG_ID,
-});
-```
-
-</TabItem>
-</Tabs>
+Start by [connecting to Signals](/docs/signals/connection/index.md).
 
 ## Using a service
 
@@ -197,11 +146,3 @@ The table below lists all available arguments for `getGroupAttributes()`
 
 </TabItem>
 </Tabs>
-
-## Using the Signals API
-
-For use cases where you aren't able to use the Signals SDKs, use the Signals API to retrieve attributes. To access the full Swagger API documentation for your Signals deployment, use your Signals API URL followed by `/docs/`:
-
-```bash
-{{API_URL}}/docs/
-```

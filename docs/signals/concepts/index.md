@@ -182,9 +182,13 @@ Standard rule-based interventions can have multiple conditions, or trigger crite
 
 Interventions are targeted based on attribute keys, which determine both the scope and specificity of when they're delivered.
 
+:::note Key constraints
+Interventions can be defined against any attribute key, as long as its values are UUIDs.
+:::
+
 For individual-level targeting, use user-specific attribute keys. For example, use `domain_userid` to target individual users, or `domain_sessionid` to target users during specific sessions, when session-level conditions are met.
 
-For broadcast-level targeting, use attribute keys related to the application context. For example, use `page_url` to target all users on a specific page, or `app_id` to target all users within a specific application.
+For broadcast-level targeting, use attribute keys related to the application context. For example, you could use `campaign_id` to target all users who arrived from a specific marketing campaign.
 
 Interventions can have multiple attribute keys. By default, the intervention will target the attribute keys associated with their criteria attributes.
 

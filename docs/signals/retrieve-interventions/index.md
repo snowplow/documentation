@@ -6,35 +6,13 @@ description: "Configure and deploy interventions to trigger real-time actions ba
 
 [Interventions](/docs/signals/concepts/index.md#interventions) are automated triggers that enable real-time actions based on user behavior.
 
-Subscription is by attribute key, not by intervention.
+Subscribe to intervention changes to automatically respond within your application. You have three options for receiving interventions, depending on your use case or application:
+* Plugin for the JavaScript tracker
+* Signals Python SDK
+* Signals API
 
-You can request interventions from the Signals API.
-You and your applications can request interventions for specific attribute keys using the Signals Python SDK, and anonymous users can request interventions for their own attribute keys directly from your apps and webpages.
+Subscription is by attribute key, not by individual intervention.
 
-## Intervention payload
-
-When delivered, interventions contain the following information:
-
-| Argument                    | Description                                                                                    | Type      | Required? |
-| --------------------------- | ---------------------------------------------------------------------------------------------- | --------- | --------- |
-| `intervention_id`           | A unique identifier for this triggered intervention                                            | `string`  | ✅         |
-| `name`                      | The unique name/identifier of the intervention                                                 | `string`  | ✅         |
-| `version`                   | A numeric version for this intervention's definition (if applicable)                           | `integer` | ✅         |
-| `attributes`                | An object containing the target attribute key's attributes when the intervention was triggered | `object`  | ✅         |
-| `target_attribute_key`      | An object containing the attribute key information used to target this intervention            | `object`  | ✅         |
-| `target_attribute_key.name` | The name of the attribute key used to target this intervention                                 | `string`  | ✅         |
-| `target_attribute_key.id`   | The attribute key value used to target this intervention                                       | `string`  | ✅         |
-
-## Limitations of intervention subscriptions
-
-All subscribers to interventions are subject to the following limitations:
-
-- Only a single ID per attribute key is allowed per subscription
-- No more than 5 attribute keys may be subscribed at a time (this is configurable via support ticket)
-- You can not subscribe to the `user_id` attribute key
-- You can only subscribe to attribute key IDs that are not enumerable (i.e. UUIDs) (this is configurable via support ticket)
-
-<!-- TODO: per-ip connection limits? -->
 
 ## Retrieving interventions with the Signals SDK
 
@@ -148,3 +126,18 @@ The following self-describing events are generated, and include the intervention
 - `iglu:com.snowplowanalytics.signals/intervention_receive/jsonschema/1-0-0`: Fires when an intervention is received by the plugin
 - `iglu:com.snowplowanalytics.signals/intervention_handle/jsonschema/1-0-0`: Fires when a custom handler is passed the intervention payload and reports successful handling (does not return an error)
 - `iglu:com.snowplowanalytics.signals/intervention_handle_error/jsonschema/1-0-0`: Fires when a custom handler is passed the intervention payload and reports failure (throws an error)
+
+
+## Intervention payload
+
+When delivered, interventions contain the following information:
+
+| Argument                    | Description                                                                                    | Type      | Required? |
+| --------------------------- | ---------------------------------------------------------------------------------------------- | --------- | --------- |
+| `intervention_id`           | A unique identifier for this triggered intervention                                            | `string`  | ✅         |
+| `name`                      | The unique name/identifier of the intervention                                                 | `string`  | ✅         |
+| `version`                   | A numeric version for this intervention's definition (if applicable)                           | `integer` | ✅         |
+| `attributes`                | An object containing the target attribute key's attributes when the intervention was triggered | `object`  | ✅         |
+| `target_attribute_key`      | An object containing the attribute key information used to target this intervention            | `object`  | ✅         |
+| `target_attribute_key.name` | The name of the attribute key used to target this intervention                                 | `string`  | ✅         |
+| `target_attribute_key.id`   | The attribute key value used to target this intervention                                       | `string`  | ✅         |

@@ -55,7 +55,7 @@ The table below lists all available arguments for `get_service_attributes()`
 </TabItem>
 <TabItem value="nodejs" label="Node.js">
 
-Use `getServiceAttributes()` to retrieve attributes from a specific service. Signals will return the attributes as a JavaScript object.
+Use `getServiceAttributes()` to retrieve attributes for a single identifier from a specific service. Signals will return the attributes as a JavaScript object.
 
 Here's an example:
 
@@ -76,6 +76,29 @@ The table below lists all available arguments for `getServiceAttributes()`
 | `name`          | The name of the service                      | `string` | ✅         |
 | `attribute_key` | The attribute key to retrieve attributes for | `string` | ✅         |
 | `identifier`    | The specific attribute key value             | `string` | ✅         |
+
+Use `getBatchServiceAttributes()` to retrieve attributes for multiple identifiers from a service in a single API call. This is more efficient than calling `getServiceAttributes()` multiple times.
+
+```typescript
+// Retrieve cart data for multiple users
+const batchResults = await signals.getBatchServiceAttributes({
+  name: "shopping_cart_service",
+  attribute_key: "domain_userid",
+  identifiers: [
+    "218e8926-3858-431d-b2ed-66da03a1cbe5",
+    "f47ac10b-58cc-4372-a567-0e02b2c3d479",
+    "6ba7b810-9dad-11d1-80b4-00c04fd430c8"
+  ]
+});
+```
+
+The table below lists all available arguments for `getBatchServiceAttributes()`
+
+| Argument        | Description                                  | Type       | Required? |
+| --------------- | -------------------------------------------- | ---------- | --------- |
+| `name`          | The name of the service                      | `string`   | ✅         |
+| `attribute_key` | The attribute key to retrieve attributes for | `string`   | ✅         |
+| `identifiers`   | Array of attribute key values to look up     | `string[]` | ✅         |
 
 </TabItem>
 </Tabs>

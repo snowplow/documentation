@@ -5,20 +5,7 @@ sidebar_label: "Using the Python SDK"
 description: "Use the Snowplow Signals Python SDK to programmatically define interventions via code."
 ---
 
-To use the [Signals Python SDK](https://pypi.org/project/snowplow-signals/) to define interventions, start by [connecting to Signals](/docs/signals/connection/index.md) to create a `Signals` object:
-
-```python
-from snowplow_signals import Signals
-
-sp_signals = Signals(
-    api_url=SIGNALS_DEPLOYED_URL,
-    api_key=CONSOLE_API_KEY,
-    api_key_id=CONSOLE_API_KEY_ID,
-    org_id=ORG_ID,
-)
-```
-
-You'll need this connection to publish interventions.
+To use the [Signals Python SDK](https://pypi.org/project/snowplow-signals/) to define interventions, start by [connecting to Signals](/docs/signals/connection/index.md) to create a `Signals` object. You'll need this connection to publish interventions.
 
 There are two ways to define an intervention using the SDK or API:
 * Rule-based interventions (default)

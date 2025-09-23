@@ -195,7 +195,7 @@ Interventions can have multiple attribute keys. By default, the intervention wil
 ### Subscribing
 
 To receive and take action on interventions, you'll need to:
-* [Subscribe](/docs/signals/retrieve-interventions/index.md) to them within your application
+* [Subscribe](/docs/signals/receive-interventions/index.md) to them within your application
 * Define the logic of how the application should react
 
 :::note Attribute key IDs
@@ -207,6 +207,27 @@ A subscription using a specific attribute key ID, for example a `domain_userid` 
 Once subscribed, all triggered interventions will be streamed to the consumer application.
 
 For back-end applications using the Signals Python SDK, Signals Node.js SDK, or Signals API ADD LINK, subscribe within the application code by passing in the relevant attribute key IDs. For web applications, use the SignalsInterventions plugin ADD LINK for the JavaScript tracker to subscribe automatically to relevant interventions.
+
+### Targeting example
+
+As an example, consider these two interventions:
+* `intervention1` targets the `domain_userid` and `domain_sessionid` attribute keys
+  * It has two criteria rules, where `any` must be met
+  * The first rule is: `attribute_group1:page_view_count == 10`
+  * The second rule is: `attribute_group2:ad_count is not null`
+* `intervention2` targets the `domain_userid` attribute key
+  * It has one criteria rule, `attribute_group3:button_click_count > 20`
+
+To receive interventions for the current user and session, subscribe to their interventions by providing the `domain_userid` and `domain_sessionid` ID values.
+
+Interventions will be received when:
+* The user views 10 pages, or the session has an ad event
+  * `intervention1` will be delivered to the subscribed user and to the subscribed session, as two separate payloads
+  * A triggered intervention is sent to all target attribute keys
+* The user exceeds 20 button clicks
+  * `intervention2` will be delivered to the subscribed user
+  * This intervention will be triggered on every subsequent button click, so repeated payloads will be sent
+  * Each payload has its own intervention ID
 
 ### Types of intervention
 

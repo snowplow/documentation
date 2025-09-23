@@ -11,45 +11,44 @@ Subscribe to intervention changes to automatically respond within your applicati
 * Signals Python SDK
 * Signals API
 
-Subscription is by attribute key, not by individual intervention.
+Subscription is by attribute key ID, not by individual intervention. Start by [connecting to Signals](/docs/signals/connection/index.md).
 
 
-## Retrieving interventions with the Signals SDK
+## Using the Signals Python SDK
 
-The Signals SDK allows subscribing to interventions for arbitrary attribute keys.
+Subscribe by providing IDs for the attribute keys you're interested in receiving interventions for. The IDs must be UUIDs.
 
 ```python
-from snowplow_signals import AttributeKeyIdentifiers, InterventionInstance, Signals
+from snowplow_signals import AttributeKeyIdentifiers, InterventionInstance
 
-# regular signals SDK authentication
-sp_signals = Signals(
-    api_url=SIGNALS_DEPLOYED_URL,
-    api_key=CONSOLE_API_KEY,
-    api_key_id=CONSOLE_API_KEY_ID,
-    org_id=ORG_ID,
-)
-
-# attribute keys to subscribe to
+# Attribute keys to subscribe to
 targets = AttributeKeyIdentifiers({
   "domain_sessionid": ["8c9104e3-c300-4b20-82f2-93b7fa0b8feb"],
+  "domain_userid": ["218e8926-3858-431d-b2ed-66da03a1cbe5"],
 })
 
+# Define the subscription
 subscription = sp_signals.pull_interventions(targets)
 
-subscription.add_handler(print) # add a custom handler to be called with each intervention received
+# Add a custom handler to be called with each intervention received
+subscription.add_handler(print)
 
-subscription.start() # open the subscription request and begin fetching interventions as they are published
+# Open the subscription request and begin fetching interventions as they are published
+subscription.start()
 
-intervention_instance = subscription.get() # blocks waiting for an intervention
+# Block until an intervention is received
+# Because of the `print` handler above, the intervention will be printed out
+intervention_instance = subscription.get()
 
-# the intervention will be printed because we added `print` as a handler above
-
-print(intervention_instance) # print the received intervention a second time
-
-subscription.stop() # cancel the subscription and abort the connection/background thread
+# Cancel the subscription and abort the connection/background thread
+subscription.stop()
 ```
 
-## Retrieving interventions on the web with the Browser Tracker plugin
+This code would receive interventions when:
+* Attribute value changes related to session `8c9104e3-c300-4b20-82f2-93b7fa0b8feb` trigger an intervention
+* Attribute value changes related to user `218e8926-3858-431d-b2ed-66da03a1cbe5` trigger an intervention
+
+## Using the browser tracker plugin
 
 You can deploy the [Signals Interventions plugin](https://github.com/snowplow-incubator/signals-browser-plugin) <!-- TODO: Update URL to non-private repo --> on your website with the [Snowplow web trackers](/docs/sources/trackers/web-trackers/index.md) to allow individual visitors to subscribe to interventions relevant to them.
 

@@ -37,7 +37,7 @@ Add these four tokens to your environment secrets.
 
 ## Signals Python SDK
 
-Use the Signals Python SDK ADD LINK to define attribute groups, services, and interventions via code. You can also retrieve calculated attributes and subscribe to interventions using this SDK.
+Use the [Signals Python SDK](https://pypi.org/project/snowplow-signals/) to define attribute groups, services, and interventions via code. You can also retrieve calculated attributes and subscribe to interventions using this SDK.
 
 To use the Python SDK, first choose where to store your Signals configurations. We recommend creating a new repository. The easiest way to use the SDK is within a Jupyter notebook.
 
@@ -78,7 +78,7 @@ The created `Signals` object has the following methods:
 
 Check out the [attribute groups](/docs/signals/define-attributes/using-python-sdk/attribute-groups/index.md), [services](/docs/signals/define-attributes/using-python-sdk/services/index.md), and [interventions](/docs/signals/define-attributes/using-python-sdk/index.md) pages to learn how to configure them programmatically.
 
-Read more about retrieving calculated attributes in [Retrieving values](/docs/signals/retrieve-attributes/index.md). ADD LINK interventions
+Read more about retrieving calculated attributes [here](/docs/signals/retrieve-attributes/index.md), and about interventions [here](/docs/signals/receive-interventions/index.md).
 
 ### Publishing and deleting
 
@@ -105,7 +105,7 @@ sp_signals.delete(objects_to_manage)
 
 ## Signals Node.js SDK
 
-Use the Signals Node.js SDK ADD LINK to retrieve calculated attributes and subscribe to interventions.
+Use the [Node.js SDK](https://www.npmjs.com/package/@snowplow/signals-node) to retrieve calculated attributes and subscribe to interventions.
 
 Install the SDK into your application:
 
@@ -138,7 +138,7 @@ The created `Signals` object has the following methods:
 | `getGroupAttributes`        | Retrieves attributes for a specific attribute group from the Profiles Store |
 | `getBatchServiceAttributes` | Retrieves attributes for multiple identifiers from a service                |
 
-Read more about retrieving calculated attributes in [Retrieving values](/docs/signals/retrieve-attributes/index.md). ADD LINK interventions
+Read more about retrieving calculated attributes [here](/docs/signals/retrieve-attributes/index.md), and about interventions [here](/docs/signals/receive-interventions/index.md).
 
 ## Signals API
 

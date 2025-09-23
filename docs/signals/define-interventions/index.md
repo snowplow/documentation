@@ -41,7 +41,7 @@ This intervention would trigger when either TODO describe screenshot interventio
 
 ## Attribute keys
 
-Define the intervention target scope by selecting [attribute keys](/docs/signals/concepts/index.md#attribute-keys).
+Define the intervention target scope by selecting [attribute keys](/docs/signals/concepts/index.md#attribute-keys). These are the attribute keys that will receive the information.
 
 By default, the intervention will target the attribute keys of the attribute groups defined in the criteria. Specify attribute keys here if you want different targets.
 

@@ -140,4 +140,4 @@ READMEs
 [vV]iewport
 [wW]alkthrough
 
-agentic
+[aA]gentic

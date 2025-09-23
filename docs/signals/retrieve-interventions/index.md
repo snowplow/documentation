@@ -20,7 +20,7 @@ When delivered, interventions contain the following information:
 | `version`                   | A numeric version for this intervention's definition (if applicable)                           | `integer` | ✅         |
 | `attributes`                | An object containing the target attribute key's attributes when the intervention was triggered | `object`  | ✅         |
 | `target_attribute_key`      | An object containing the attribute key information used to target this intervention            | `object`  | ✅         |
-| `target_attribute_key.name` | They name of the attribute key used to target this intervention                                | `string`  | ✅         |
+| `target_attribute_key.name` | The name of the attribute key used to target this intervention                                 | `string`  | ✅         |
 | `target_attribute_key.id`   | The attribute key value used to target this intervention                                       | `string`  | ✅         |
 
 ## Limitations of intervention subscriptions

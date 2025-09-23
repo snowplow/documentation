@@ -159,95 +159,70 @@ This service could be imagined like this as a table:
 
 ## Interventions
 
-Interventions are automated triggers that enable real-time actions based on user behavior.
+Interventions are automated triggers that enable real-time actions based on user behavior, as captured by attribute changes. Your application decides how to react to a delivered intervention.
 
 They can be thought of as "if-then" rules that run in real time. For example:
-* If a user has viewed five products in the last ten minutes
-* Then automatically send that user a personalized offer
+* `If` a user has viewed five products in the last ten minutes
+* `Then` automatically send that user a personalized offer
 
----
-Criteria evaluate attribute values against defined conditions. When Signals processes behavioral data and updates attributes, it checks whether the new attribute values meet your criteria conditions. If they do, the intervention triggers.
+In practise, this rule could work like this:
+1. User views product pages
+2. The application tracks the user behavior and sends events
+3. Signals evaluates the events and updates attribute values
+4. Signals checks whether the new attribute values meet any intervention conditions
+5. The attribute `product_view_count_last_10_min` has just been updated to `5`, so the intervention is triggered
+6. The application receives the subscribed intervention payload
+7. The application sends a personalized offer to the user
 
----
-you could  a user viewing their fifth product in ten minutes, the intervention automatically triggers and can send personalized messages, offers, or other actions to that user.
+Interventions are usually relevant only within a certain moment.
 
-opportunities to take actions to improve user outcomes. They're calculated on top of changes in attribute values, or fired by your own applications.
+Standard rule-based interventions can have multiple conditions, or trigger criteria, based on the values of different attributes.
 
-This allows you to influence user behavior without requiring application updates, since you can control when the intervention should fire through Signals.
+### Targeting
 
-```mermaid
-flowchart TD
-    user -->|uses| application
-    application -->|sends| event
-    event -->|updates| attribute
-    attribute -->|triggers| intervention
-    intervention -->|influences| user
-```
+Interventions are targeted based on attribute keys, which determine both the scope and specificity of when they're delivered.
 
-Like attributes, interventions target specific attribute key instances.
+For individual-level targeting, use user-specific attribute keys. For example, use `domain_userid` to target individual users, or `domain_sessionid` to target users during specific sessions, when session-level conditions are met.
 
-Interventions can be triggered automatically based on attribute changes, or directly using the Signals API.
-Subscribe [within your application](/docs/signals/retrieve-interventions/index.md) for real-time updates to interventions for attribute keys of interest, or [user devices can subscribe](/docs/signals/retrieve-interventions/index.md) to interventions that apply to their own attribute keys while they use your application.
+For broadcast-level targeting, use attribute keys related to the application context. For example, use `page_url` to target all users on a specific page, or `app_id` to target all users within a specific application.
 
-For example, you could subscribe to interventions for a specific `domain_userid`, the current `app_id`, the current `page`, and the current `product`.
-When new interventions are published for any of those, they are delivered and the contents include any relevant attribute values, that can be used by your application to react.
-This enables both individual-level and broadcast-level real-time messaging: for example, offering a specific user a personalized message, while also notifying all users on a specific product page that limited stock is selling fast.
+Interventions can have multiple attribute keys. By default, the intervention will target the attribute keys associated with their criteria attributes.
 
-TODO
-Interventions are a way to communicate that an action should be performed to work towards better outcomes for particular users.
+### Subscribing
 
-Each intervention is usually only valid "in the moment", so they have a limited lifetime and are not repeatedly sent if consumers aren't requesting them.
-This pairs well with the Signals streaming engine, which:
-- Processes data in near-real-time for users that are using your offering right now
-- Can publish interventions at an individual attribute key level in real time based on changes to its attributes
+To use interventions, you'll need to:
+* Subscribe to them within your application
+* Define the logic of how the application should react
 
-```mermaid
-flowchart LR
-    behavior[user behavior] -->|generates| events
-    events -->|update| attributes
-    attributes -->|trigger| interventions
-    interventions -->|activate| functionality
-    functionality -->|influences| behavior
-    systems -->|trigger| interventions
-```
+[Subscription](/docs/signals/retrieve-interventions/index.md) is by attribute key, not by intervention. A subscription using a specific attribute key ID, for example a `domain_userid` UUID for the current user, will receive all triggered interventions for that ID.
 
-Your application decides how to react to a delivered intervention.
+For back-end applications using the Signals Python SDK, Signals Node.js SDK, or Signals API ADD LINK, subscribe within the application code by passing in the relevant attribute key IDs.
 
-Because [attribute keys are configurable](/docs/signals/define-attributes/attribute-groups/index.md), the targeting used for interventions can be as broad or specific as you like, including:
-- A specific user/session
-- A specific pageview that a user is in the middle of
-- All users on a specific page
-- All users currently on your site/app
+For web applications, use the Signals plugin for the JavaScript tracker to subscribe automatically to relevant interventions.
 
+### Types of intervention
 
----
-### Automatic stream-based interventions via Signals
+Signals has two types of interventions: rule-based or direct.
 
-You can define interventions with a set of rules to trigger them via the [Signals Python SDK](https://github.com/snowplow-incubator/snowplow-signals-sdk).
+**Rule-based** interventions are the default, and are:
+* Based on attribute values
+* Defined in advance via Snowplow Console, Python SDK, or API
+* Triggered automatically when their criteria are met
 
-As the Signals streaming engine processes Snowplow events, it will calculate any attributes you have configured.
-As the attribute values get updated, the streaming engine will evaluate the associated attribute key's attributes against the rules you have defined.
-If the attributes match the rule conditions, the rest of your intervention definition gets published as an intervention targeting that attribute key.
+Use cases include:
+* Real-time personalization
+* Agentic chatbots
+* Dynamic pricing
 
-Any users currently subscribed to interventions on their attribute keys will then receive the intervention, and your application can then react to it and perform actions.
+**Direct** interventions are:
+* Not based on attribute values or rules
+* Configurable only via the Python SDK or API
+* Sent directly on pushing an intervention configuration to Signals
 
-## Custom interventions using the API
-
-By default, interventions trigger automatically when their criteria are met.
-
-You can also publish custom interventions to any attribute keys you like at any time using the Signals SDK and API.
-If the intervention is valid, it will immediately be published to any subscribers for the targeted attribute key IDs, which can then react and perform actions based on it.
-
----
-Used for: Manually sending custom interventions to specific users/entities at any time, bypassing automatic rule-based triggers.
-When to use:
-
-Real-time business decisions - Flash sales, stock alerts, breaking news
-External system triggers - CRM system detects opportunity, payment processor flags fraud
-Manual campaign targeting - Marketing team wants to target specific user segments
-A/B testing - Sending different intervention variants to test groups
-Emergency notifications - System outages, security alerts
----
+Use cases for direct interventions include:
+* Emergency notifications, e.g. system outages
+* Real-time business decisions, e.g. breaking news
+* Manual campaign targeting
 
 ## Profiles Store
 

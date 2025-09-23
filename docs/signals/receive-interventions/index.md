@@ -44,20 +44,14 @@ intervention_instance = subscription.get()
 subscription.stop()
 ```
 
-This code would receive interventions when:
-* Attribute value changes related to session `8c9104e3-c300-4b20-82f2-93b7fa0b8feb` trigger an intervention
-* Attribute value changes related to user `218e8926-3858-431d-b2ed-66da03a1cbe5` trigger an intervention
-
 ## Using the browser tracker plugin
 
-You can deploy the [Signals Interventions plugin](https://github.com/snowplow-incubator/signals-browser-plugin) <!-- TODO: Update URL to non-private repo --> on your website with the [Snowplow web trackers](/docs/sources/trackers/web-trackers/index.md) to allow individual visitors to subscribe to interventions relevant to them.
+For web applications using the Snowplow browser tracker, you can subscribe to interventions using the [Signals Interventions plugin](https://github.com/snowplow-incubator/signals-browser-plugin) <!-- TODO: Update URL to non-private repo -->.
 
-In the below example we:
-
-1. use the Browser Tracker to create a Snowplow tracker
-2. install the plugin
-3. add custom handlers to react to the interventions
-4. subscribe to interventions
+The workflow is:
+1. Create a Snowplow tracker with the plugin configured
+3. Add custom handlers to react to the interventions
+4. Subscribe to interventions
 
 ```typescript
 import { newTracker } from '@snowplow/browser-tracker';
@@ -67,76 +61,85 @@ import {
   subscribeToInterventions,
 } from '@snowplow/browser-plugin-signals-interventions';
 
+// Install the Signals Intervention plugin
 newTracker('sp1', '{{collector_url}}', {
   appId: 'my-app-id',
-  plugins: [ SignalsInterventionsPlugin() ], // install the Signals Intervention plugin
+  plugins: [ SignalsInterventionsPlugin() ],
 });
 
+// Add custom handlers
 addInterventionHandlers({
   myHandler(intervention) {
-    console.log("intervention received!", intervention); // add custom handlers
+    console.log("intervention received!", intervention);
   },
 });
 
+// Subscribe to interventions using your Signals API endpoint
 subscribeToInterventions({
-  endpoint: "000000000000.signals.snowplowanalytics.com", // subscribe to interventions
+  endpoint: "000000000000.signals.snowplowanalytics.com",
 });
 ```
 
-By default the plugin will automatically subscribe to interventions for the `domain_userid` and `domain_sessionid` attribute keys.
-Any rule-based interventions triggered by attributes that target those attribute keys will be published as they get processed by the stream engine.
+By default, the plugin will automatically subscribe to interventions for the `domain_userid` and `domain_sessionid` attribute keys.
 
-You can optionally configure the plugin to listen for additional attribute keys as well.
-In the below example, we configure a specific attribute key and instructions for how to extract further attribute keys from Snowplow events that the tracker generates.
-Interventions will be requested targeting the following attribute keys:
+You can optionally configure the plugin for additional attribute keys. There are two options:
+* `attributeKeyTargets`: dynamically subscribe to attribute key IDs extracted from the tracker's generated events
+* `attributeKeyIds`: subscribe to a specific attribute key ID
 
-- `domain_userid`: (unique visitor ID value)
-- `domain_sessionid`: (unique session ID value)
-- `pageview_id`: (unique page view ID value)
-- `app`: (configured tracker app ID value)
-- `myCustomAttributeKey`: `unique value`
-
-(The `mistake` attribute key will not be subscribed to because the plugin can not find an ID value to use since that isn't a valid event field)
+This example assumes you've defined a `pageview_id` attribute key, based on the `web_page` entity added by default to all web events.
 
 ```typescript
 subscribeToInterventions({
   endpoint: "000000000000.signals.snowplowanalytics.com", // Signals API endpoint
   attributeKeyTargets: {
-    pageview_id: "context/com.snowplowanalytics.snowplow/web_page/id",
-    app: "app_id",
-    mistake: "not_a_real_field",
+    pageview_id: "/co/com.snowplowanalytics.snowplow/web_page/id",
   },
   attributeKeyIds: {
-    myCustomAttributeKey: "unique value",
+    network_userid: "177234df-d421-412e-ad8d-8bf97515b2807",
   },
 });
 ```
 
-If you track multiple pageviews and the `pageview_id` attribute key value changes, the plugin will automatically disconnect and resubscribe to the new attribute key value as value changes are observed.
+### Intervention events
 
-If an intervention is published to any of these attribute keys while the subscription is open, the `myHandler` function above will be called with the intervention payload.
-
-### Intervention tracking
-
-When the plugin receives interventions and dispatches them to handler functions, it will generate Snowplow tracking events.
-The following self-describing events are generated, and include the intervention payload as a custom entity:
+The plugin generates Snowplow events to track interventions. The events include the intervention payload as a custom entity.
 
 <!-- TODO: link to iglu central once published -->
-- `iglu:com.snowplowanalytics.signals/intervention_receive/jsonschema/1-0-0`: Fires when an intervention is received by the plugin
-- `iglu:com.snowplowanalytics.signals/intervention_handle/jsonschema/1-0-0`: Fires when a custom handler is passed the intervention payload and reports successful handling (does not return an error)
-- `iglu:com.snowplowanalytics.signals/intervention_handle_error/jsonschema/1-0-0`: Fires when a custom handler is passed the intervention payload and reports failure (throws an error)
+- `iglu:com.snowplowanalytics.signals/intervention_receive/jsonschema/1-0-0`: tracked when an intervention is received by the plugin
+- `iglu:com.snowplowanalytics.signals/intervention_handle/jsonschema/1-0-0`: tracked when a custom handler is passed the intervention payload and reports successful handling (does not return an error)
+- `iglu:com.snowplowanalytics.signals/intervention_handle_error/jsonschema/1-0-0`: tracked when a custom handler is passed the intervention payload and reports failure (throws an error)
 
-
-## Intervention payload
+## Payload
 
 When delivered, interventions contain the following information:
 
-| Argument                    | Description                                                                                    | Type      | Required? |
-| --------------------------- | ---------------------------------------------------------------------------------------------- | --------- | --------- |
-| `intervention_id`           | A unique identifier for this triggered intervention                                            | `string`  | ✅         |
-| `name`                      | The unique name/identifier of the intervention                                                 | `string`  | ✅         |
-| `version`                   | A numeric version for this intervention's definition (if applicable)                           | `integer` | ✅         |
-| `attributes`                | An object containing the target attribute key's attributes when the intervention was triggered | `object`  | ✅         |
-| `target_attribute_key`      | An object containing the attribute key information used to target this intervention            | `object`  | ✅         |
-| `target_attribute_key.name` | The name of the attribute key used to target this intervention                                 | `string`  | ✅         |
-| `target_attribute_key.id`   | The attribute key value used to target this intervention                                       | `string`  | ✅         |
+| Argument                    | Description                                                             | Type      |
+| --------------------------- | ----------------------------------------------------------------------- | --------- |
+| `intervention_id`           | A unique identifier for this triggered intervention                     | `string`  |
+| `name`                      | The unique name/identifier of the intervention                          | `string`  |
+| `version`                   | The intervention version                                                | `integer` |
+| `attributes`                | An object containing the target's attributes on intervention triggering | `object`  |
+| `target_attribute_key`      | An object containing the target attribute key information               | `object`  |
+| `target_attribute_key.name` | The name of the target attribute key                                    | `string`  |
+| `target_attribute_key.id`   | The value of the target attribute key                                   | `string`  |
+
+Here's an example intervention payload:
+
+```json
+{
+  "intervention_id": "550e8400-e29b-41d4-a716-446655440000",
+  "name": "high_value_cart_abandonment",
+  "version": 2,
+  "attributes": {
+    "cart_value": 250.00,
+    "items_in_cart": 3,
+    "time_on_checkout_page": 120,
+    "previous_purchases": 8,
+    "last_activity_timestamp": "2025-09-23T14:30:15Z"
+  },
+  "target_attribute_key": {
+    "name": "domain_userid",
+    "id": "218e8926-3858-431d-b2ed-66da03a1cbe5"
+  }
+}
+```

@@ -59,7 +59,7 @@ Click the **Edit** button if you want to make changes to the intervention.
 
 To send the intervention configuration to your Signals infrastructure, click the **Publish** button. This will allow Signals to start monitoring attribute value changes.
 
-TODO link mention subscribing
+<!-- TODO mention the subscription code -->
 
 ### Versioning
 

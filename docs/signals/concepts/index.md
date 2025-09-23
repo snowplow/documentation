@@ -190,15 +190,19 @@ Interventions can have multiple attribute keys. By default, the intervention wil
 
 ### Subscribing
 
-To use interventions, you'll need to:
-* Subscribe to them within your application
+To receive and take action on interventions, you'll need to:
+* [Subscribe](/docs/signals/retrieve-interventions/index.md) to them within your application
 * Define the logic of how the application should react
 
-[Subscription](/docs/signals/retrieve-interventions/index.md) is by attribute key, not by intervention. A subscription using a specific attribute key ID, for example a `domain_userid` UUID for the current user, will receive all triggered interventions for that ID.
+:::note Attribute key IDs
+Subscription is by attribute key, not by intervention.
 
-For back-end applications using the Signals Python SDK, Signals Node.js SDK, or Signals API ADD LINK, subscribe within the application code by passing in the relevant attribute key IDs.
+A subscription using a specific attribute key ID, for example a `domain_userid` ID for the current user, will receive all triggered interventions for that ID.
+:::
 
-For web applications, use the Signals plugin for the JavaScript tracker to subscribe automatically to relevant interventions.
+Once subscribed, all triggered interventions will be streamed to the consumer application.
+
+For back-end applications using the Signals Python SDK, Signals Node.js SDK, or Signals API ADD LINK, subscribe within the application code by passing in the relevant attribute key IDs. For web applications, use the SignalsInterventions plugin ADD LINK for the JavaScript tracker to subscribe automatically to relevant interventions.
 
 ### Types of intervention
 

@@ -67,6 +67,38 @@ Choose between a Simple, Normalize, or Unified incremental dbt model:
 | **Query performance** | Fast (pre-computed) | Fast (pre-computed) | Depends on underlying data volume |
 | **Data freshness** | Batch incremental updates | Batch incremental updates | Real-time |
 
+
+## Instructions
+
+### Views
+Creates a dbt view that queries your atomic events table directly without materializing data, providing real-time access to transformed data with minimal storage overhead.
+
+Steps:
+1. Download the view model from the Snowplow Console
+2. Configure the model schema to decide where to create the view
+3. Run the model to create the view in your data warehouse
+
+### Simple
+Compatible with any dbt project with no package dependencies, this model materializes all data on the first run while processing only new events for subsequent runs.
+
+Steps:
+1. Download the simple dbt model from the Snowplow Console
+2. Add the SQL file to your dbt project's models directory
+3. Run the dbt model:
+	**Initial run**: Materializes all historical data from your atomic events table
+	**Subsequent runs**: Processes only new events since the last run timestamp
+
+### Unified & Normalize
+Integrates with existing Snowplow dbt packages for efficient incremental processing, leveraging our events_this_run tables and established infrastructure.
+
+Steps:
+1. Download the unified dbt model from the Snowplow Console
+2. Add the SQL file to your dbt project's models directory
+3. Configure dbt project variables:
+	Set `snowplow__start_date` in your dbt project variables (new models begin processing from this date since they're not yet tracked in the Snowplow Manifest table)
+	Configure `snowplow__backfill_limit_days` to control the volume of data processed per run
+4. Run the dbt model iteratively until the new model catches up to your existing models (monitor progress through dbt logs and manifest updates)
+
 ## Use Cases
 
 ### Use Case 1 — Quick Data Exploration

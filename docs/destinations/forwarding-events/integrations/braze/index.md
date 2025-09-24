@@ -19,7 +19,7 @@ Snowplow supports the following Braze object types:
 - **[Custom events](https://www.braze.com/docs/api/objects_filters/event_object)**: User actions and behaviors
 - **[Purchases](https://www.braze.com/docs/api/objects_filters/purchase_object)**: Transaction data with product details
 
-## Getting started
+## What you will need
 
 Before setting up the forwarder in Console, you'll need the following from your Braze account:
 
@@ -33,54 +33,26 @@ Before setting up the forwarder in Console, you'll need the following from your 
   - `users.alias.update`
 - Braze REST API endpoint, found in Braze under **Settings** > **APIs and Identifiers**
 
-### Step 1: Create a connection
+## Getting started
 
-1. In Console, navigate to **Destinations** > **Connections**
-2. Select **Set up connection**
-3. Choose **Loader connection**, then **Braze**
-4. Enter your API key and endpoint
-5. Select **Confirm** to deploy the connection
+### Configure the forwarder
 
-### Step 2: Create a forwarder
+To create the forwarder, follow the steps in [Creating forwarders](/docs/destinations/forwarding-events/creating-forwarders/index.md).
 
-1. From Console, navigate to **Destinations** \> **Destination list**. Navigate to the **Available** tab, filter for **SaaS applications**, and select **Configure** under Braze.
-2. **Select a pipeline**: choose the pipeline where you want to deploy your destination.
-3. **Select yoaur connection**: choose the Braze connection you configured in step 1.
-4. Choose from the following **Braze object types**:
-   - **[Attributes](https://www.braze.com/docs/api/objects_filters/user_attributes_object)**: user profile data
-   - **[Events](https://www.braze.com/docs/api/objects_filters/event_object)**: custom user actions
-   - **[Purchases](https://www.braze.com/docs/api/objects_filters/purchase_object)**: transaction events
-4. Optionally, you can choose to **Import configuration from** an existing forwarder. This is helpful when migrating a forwarder setup from development to production.
-5. Click **Continue** to configure event filters and data mapping.
+When configuring the connection, select **Braze** for the connection type and enter your API key and endpoint.
 
-### Step 3: Configure event filters and field mappings
+When configuring the forwarder, you can choose from the following **Braze object types** to map:
+   - **[Attributes](https://www.braze.com/docs/api/objects_filters/user_attributes_object)**: update user profile data
+   - **[Events](https://www.braze.com/docs/api/objects_filters/event_object)**: send custom user actions
+   - **[Purchases](https://www.braze.com/docs/api/objects_filters/purchase_object)**: send transaction events
 
-Use JavaScript expressions to define which events to forward and how to map Snowplow data to Braze fields:
-
-1. **Event filtering**: use JavaScript expressions to select which events to forward. Only events matching your filter will be sent to Braze. Leave blank to forward all events of the selected type. For example:
-  ```javascript
-  // Forward page views from website
-  event.app_id == "website" && event.event_name == "page_view"
-
-  // Forward a list of custom events
-  ["add_to_cart", "purchase"].includes(event.event_name)
-  ```
-2. **Field mapping**: configure how Snowplow data maps to Braze fields. For each mapping, **Braze Field** represents the property name and **Snowplow expression** is a JavaScript expression used to extract data from your Snowplow event. Snowplow provides default mappings based on common fields which can be overridden or deleted.
-3. **Custom functions**: write JavaScript functions for complex data transformations such as converting date formats, transforming enum values, combining multiple fields, or applying business logic. Functions are then available to use in both the event filter and field mapping sections.
-
-:::info
-To learn more about the supported filter and mapping expressions, check out the [filter and mapping reference](/docs/destinations/forwarding-events/reference/index.md).
-:::
-
-### Step 4: Deploy and validate
-
-Select **Deploy** to create the forwarder. This will deploy the underlying Snowbridge instance to your cloud account and begin forwarding events based on your configuration.
+### Validate data flow
 
 You can confirm events are reaching Braze by checking the following pages in your Braze account:
 
-1. **Braze Custom Events Report**: Braze > **Analytics** > **Custom Events Report**
+1. Braze Custom Events Report: in Braze, navigate to **Analytics** > **Custom Events Report**
 <!-- TODO: add screenshot -->
-2. **Braze API Usage Dashboard**: Braze > **Settings** > **API and Identifiers**
+2. Braze API Usage Dashboard: in Braze, navigate to **Settings** > **API and Identifiers**
 <!-- TODO: add screenshot -->
 
 ## Schema reference
@@ -89,7 +61,7 @@ The sections below contain information on the fields you can send to Braze, incl
 
 ### User attributes
 
-The user attributes object can be used to update standard user profile fields or add your own custom attribute data to the user.
+Use the user attributes object to update standard user profile fields or add your own custom attribute data to the user.
 
 <EventForwardingSchemaTable schema={brazeAttributes} />
 

@@ -1049,6 +1049,10 @@ from elements with a subsequent element that has a top margin. */
   margin-top: 0rem;
 }
 
+.theme-doc-markdown img {
+  margin: 0 0;
+}
+
 /* doc markdown grid layout control END*/
 
 .footer {
@@ -1131,7 +1135,7 @@ abbr[data-title]:hover:after {
     display: none !important;
     visibility: hidden !important;
   }
-  [data-name="Book a demo"] {
+  [data-name='Book a demo'] {
     display: none;
   }
 }

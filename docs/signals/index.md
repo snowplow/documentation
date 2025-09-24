@@ -33,7 +33,7 @@ The core Signals components are:
 * **Sync engine**: periodically updates the Profiles Store with batch attributes
 * **Batch engine**: runs in your warehouse to compute attributes from warehouse tables
 
-![](./images/overview-simple.png)
+![Snowplow Signals architecture diagram showing core components including Profiles Store, SDKs, streaming engine, and batch engine](./images/overview-simple.png)
 
 ## Using Signals
 

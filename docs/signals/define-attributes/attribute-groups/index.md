@@ -9,7 +9,7 @@ Define the behavior you want to capture in [attribute groups](/docs/signals/conc
 
 To create an attribute group, go to **Signals** > **Attribute groups** in BDP Console and follow the instructions.
 
-![](../../images/attribute-group-create.png)
+![Create attribute group form with name, description, data source, and owner fields](../../images/attribute-group-create.png)
 
 The first step is to specify:
 * A unique name
@@ -40,7 +40,7 @@ First, define the [attributes](/docs/signals/define-attributes/attributes/index.
 
 Once you've created and published the group, create and configure the dbt models. Follow the instructions shown, or check out the [batch engine tutorial](/tutorials/signals-batch-engine/start) for a step-by-step guide.
 
-![](../../images/attribute-group-batch-instructions.png)
+![Batch configuration instructions showing dbt setup steps](../../images/attribute-group-batch-instructions.png)
 
 ### External batch
 
@@ -48,7 +48,7 @@ Attribute groups with an external batch source don't require attribute definitio
 
 Provide the warehouse and table details, and which fields you want to send to Signals.
 
-![](../../images/attribute-group-external-batch-fields.png)
+![External batch source configuration showing warehouse table and field mapping options](../../images/attribute-group-external-batch-fields.png)
 
 We recommend providing a timestamp field for incremental or snapshot-based tables. To minimize latency, Signals will use this to determine which rows have changed since the last sync. The sync engine will only send the new rows to the Profiles Store.
 
@@ -69,7 +69,7 @@ Signals includes four built-in attribute keys, based on commonly used identifier
 
 To create a custom attribute key, navigate to **Signals** > **Attribute keys** within BDP Console. Click the **Create attribute key** button.
 
-![](../../images/attribute-key-create.png)
+![Create attribute key form with name, description, and atomic property selection](../../images/attribute-key-create.png)
 
 You will need to provide:
 * A unique name
@@ -99,13 +99,13 @@ This will output a table of attributes calculated from your `atomic` events tabl
 
 Once you're happy with your attribute group configuration, click **Create attribute group** to save it. It will be saved as a draft, and not yet available to Signals.
 
-![](../../images/attribute-group-draft.png)
+![Draft attribute group page showing Edit and Publish buttons](../../images/attribute-group-draft.png)
 
 Click the **Edit** button if you want to make changes to the attribute group.
 
 To send the attribute group configuration to your Signals infrastructure, click the **Publish** button. This will allow Signals to start calculating attributes or syncing tables, and populating the Profiles Store.
 
-![](../../images/attribute-group-published.png)
+![Published attribute group page showing active status and management options](../../images/attribute-group-published.png)
 
 :::note
 If the attribute group has a batch source, Signals won't be able to do anything until you've completed the dbt configuration steps. Complete the dbt steps before publishing the group.
@@ -121,7 +121,7 @@ All attribute groups start as `v1`. If you make changes to the definition, the v
 
 To unpublish or delete an attribute group, click the `⋮` button on the group details page.
 
-![](../../images/attribute-group-edit-delete.png)
+![Attribute group management menu showing Edit, Unpublish, and Delete options](../../images/attribute-group-edit-delete.png)
 
 Unpublishing is version specific. It will stop Signals from calculating attributes for this version of this group. Existing attribute values will remain in your Profiles Store, but they won't be updated. You can republish it later if needed.
 

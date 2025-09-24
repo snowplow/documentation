@@ -6,7 +6,7 @@ description: "Create an attribute group in Snowplow Signals to calculate session
 
 Attribute groups are where you define the data you want to calculate. To create an [attribute group](/docs/signals/concepts), go to **Signals** > **Attribute groups** in BDP Console and click **Create attribute group**.
 
-![](./images/attribute-group-create.png)
+![Create attribute group form for quickstart tutorial](./images/attribute-group-create.png)
 
 Follow these instructions to configure Signals to calculate three different session metrics from page views in your real-time event stream:
 * How many page views in the last 15 minutes for each session
@@ -34,7 +34,7 @@ Under the Configuration section, select the following:
 
 Click **Add attribute** to create each one.
 
-![](./images/attribute-group-add-attribute.png)
+![Add attribute button in attribute group configuration](./images/attribute-group-add-attribute.png)
 
 ### Page view counter
 
@@ -46,7 +46,7 @@ To set the event to calculate this attribute from:
 3. Click in the search box to find `page_view`
 4. Click **Confirm** to add the event to the attribute
 
-![](./images/attribute1-specify-page-view.png)
+![Event selection showing page_view event in Snowplow events list](./images/attribute1-specify-page-view.png)
 
 Leave the aggregation as `Counter`. No property is used for this aggregation, so leave the property field blank.
 
@@ -55,11 +55,11 @@ To set the time period:
 2. Update the time period to 15 minutes
 3. Click **Done** to save
 
-![](./images/attribute1-set-period.png)
+![Time period configuration set to 15 minutes for page view counter](./images/attribute1-set-period.png)
 
 The purple dot next to **More** indicates that you have extended settings.
 
-![](./images/attribute1-complete.png)
+![Completed page view counter attribute with time period indicator](./images/attribute1-complete.png)
 
 :::info Event processing limits
 There's a limit on how many events can be considered for time-windowed [event processing in stream](/docs/signals/define-attributes/).
@@ -81,7 +81,7 @@ To set the property:
 5. Select the `agentName` property
 6. Click **Confirm** to save
 
-![](./images/attribute2-property-selector.png)
+![Property selection showing YAUAA context agentName field for browser attribute](./images/attribute2-property-selector.png)
 
 ### First referrer
 
@@ -97,7 +97,7 @@ To set the property:
 3. Use the search bar to search for and select `refr_urlhost`
 6. Click **Confirm** to save
 
-![](./images/attribute3-property-selector.png)
+![Property selection showing refr_urlhost atomic field for referrer attribute](./images/attribute3-property-selector.png)
 
 For a trivial example of using criteria filters, add a filter to only consider events where the referrer is not an empty string.
 
@@ -109,19 +109,19 @@ To set the criteria filter:
 5. Leave the value blank
 6. Click **Done** to return to the group details page
 
-![](./images/attribute3-criteria.png)
+![Criteria configuration filtering for non-empty referrer values](./images/attribute3-criteria.png)
 
 ## Test the attribute definitions
 
 Once you've added attributes, click **Run preview** to test your attribute group configuration.
 
-![](./images/attribute-group-ready-to-test.png)
+![Attribute group with three attributes ready for preview testing](./images/attribute-group-ready-to-test.png)
 
 This will calculate the attributes from your atomic events table using 10 random events from the last hour.
 
 You should see something like this:
 
-![](./images/attribute-group-test-results.png)
+![Test results showing calculated attributes for sample session IDs](./images/attribute-group-test-results.png)
 
 The first column shows the unique attribute key values, in this case for the session attribute key `domain_sessionid`.
 
@@ -129,8 +129,8 @@ The first column shows the unique attribute key values, in this case for the ses
 
 Once you're satisfied with the preview results, click **Create attribute group** to save it as a draft.
 
-![](./images/attribute-group-draft.png)
+![Draft attribute group page after saving configuration](./images/attribute-group-draft.png)
 
 Click **Publish** to push this configuration to Signals and start calculating attributes.
 
-![](./images/attribute-group-published.png)
+![Published attribute group showing active calculation status](./images/attribute-group-published.png)

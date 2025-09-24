@@ -11,13 +11,13 @@ Attributes are defined as part of attribute groups. To create an attribute, you'
 * What property in the schema to consider for the calculation
 * What kind of aggregation you want to calculate over time, e.g. `mean` or `last`
 
-![](../../images/attribute-group-attributes.png)
+![Attribute configuration interface showing name, event filter, and aggregation options](../../images/attribute-group-attributes.png)
 
 ## Event selection
 
 Use the event filter to choose which event type to calculate the attribute from.
 
-![](../../images/attribute-event-filter.png)
+![Event filter dropdown showing available Snowplow and custom event schemas](../../images/attribute-event-filter.png)
 
 Click the dropdown to see the available schemas, listed by name and vendor:
 
@@ -55,7 +55,7 @@ You can calculate attributes based on properties in any part of your events:
 * Event schema properties: choose properties within your chosen event
 * Entity properties: choose properties from schemas that you are tracking as entities with your chosen event
 
-![](../../images/attribute-property-selector.png)
+![Property selection interface with atomic, event schema, and entity property tabs](../../images/attribute-property-selector.png)
 
 Click **Confirm** to specify the property for this attribute.
 
@@ -65,7 +65,7 @@ Add an optional time period to the attribute to aggregate it over a rolling wind
 
 Find the time period option within **More options**. Click **Done** to save it.
 
-![](../../images/attribute-set-period.png)
+![Time period configuration dialog for setting rolling window attributes](../../images/attribute-set-period.png)
 
 ### Stream attributes limit
 
@@ -86,6 +86,6 @@ Defining criteria has three steps:
 
 If you enter multiple criteria, you will have the option to require `all` or `any` of them to be met for the attribute to update.
 
-![](../../images/attribute-criteria.png)
+![Criteria filter configuration with property selection, operator, and value fields](../../images/attribute-criteria.png)
 
 Click **Done** to save the criteria when you're finished.

@@ -8,7 +8,7 @@ description: "Configure a Snowplow Signals service to group attribute groups for
 
 To create a service, go to **Signals** > **Services** in BDP Console and click **Create service**.
 
-![](./images/service-create.png)
+![Create service form for quickstart tutorial service](./images/service-create.png)
 
 ## Configure basic service information
 
@@ -30,12 +30,12 @@ To add an attribute group:
 
 If `quickstart_group (v1)` attribute group isn't showing up, check that it's published.
 
-![](./images/service-choose-groups.png)
+![Attribute group selector showing quickstart_group v1 selection](./images/service-choose-groups.png)
 
 ## Create the service
 
 Click **Create service** to save your service configuration. Services are automatically published as soon as they're created.
 
-![](./images/service-published.png)
+![Published quickstart service ready for attribute retrieval](./images/service-published.png)
 
 Your service is ready to use for retrieving attributes from the Profiles Store.

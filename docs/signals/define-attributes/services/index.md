@@ -8,7 +8,7 @@ description: "Group multiple attribute groups together using services to create 
 
 To create a service, go to **Signals** > **Services** in BDP Console and follow the instructions.
 
-![](../../images/service-create.png)
+![Create service form with name, description, owner, and attribute group selection](../../images/service-create.png)
 
 To configure a service, you'll need to specify:
 * A unique name
@@ -22,7 +22,7 @@ When choosing which attribute groups to include, you'll select a specific versio
 
 Services themselves are not versioned. You can update them to use different attribute groups, or different attribute group versions, at any time.
 
-![](../../images/service-groups.png)
+![Service configuration showing selected attribute groups with version numbers](../../images/service-groups.png)
 
 ## Managing services
 
@@ -32,4 +32,4 @@ To edit a service definition, go to the service details page and click the **Edi
 
 To delete a service, go to the service details page and click the `⋮` button, then choose **Delete**.
 
-![](../../images/service-edit-delete.png)
+![Service management menu with Edit and Delete options](../../images/service-edit-delete.png)

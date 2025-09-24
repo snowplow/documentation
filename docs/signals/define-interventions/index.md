@@ -27,7 +27,7 @@ Next, configure when the intervention should trigger.
 Criteria are the conditional rules that determine when an intervention should trigger.
 
 Defining intervention criteria has three steps:
-1. Select which attribute to evaluate
+1. Select which attribute from a published attribute group to evaluate
 2. Choose which logical operator to use
 3. Enter the value to trigger on
 
@@ -37,15 +37,13 @@ When adding more than one criteria, you can require all or any of them to be met
 
 <!-- TODO image 2 criteria -->
 
-This intervention would trigger when either TODO describe screenshot intervention.
+<!-- This intervention would trigger when either TODO describe screenshot intervention. -->
 
 ## Attribute keys
 
-Define the intervention target scope by selecting [attribute keys](/docs/signals/concepts/index.md#attribute-keys). These are the attribute keys that will receive the information.
+Define the intervention target scope by selecting [attribute keys](/docs/signals/concepts/index.md#targeting). These are the attribute keys that will receive the information.
 
 By default, the intervention will target the attribute keys of the attribute groups defined in the criteria. Specify attribute keys here if you want different targets.
-
-For example, choose `domain_userid` to target specific individual users, or `domain_sessionid` to target specific sessions. You can select multiple attribute keys.
 
 <!-- TODO image add attribute keys -->
 
@@ -65,9 +63,9 @@ To send the intervention configuration to your Signals infrastructure, click the
 
 Interventions are versioned. This allows you to iterate on the definitions without breaking downstream processes. All interventions start as `v1`. If you make changes to the definition, the version will be automatically incremented.
 
-Within criteria, the attributes are always evaluated based on the latest published version of the attribute group.
+Within criteria, the attributes are always evaluated based on the latest published version of the attribute group that contains the attribute. For example, if `attribute_group` v1, v2, and v3 all have the required `attribute`, v3 will be used. If you then publish `attribute_group` v4, which removes `attribute`, v3 will still be used.
 
-## Deleting an attribute group
+## Deleting an intervention
 
 To unpublish or delete an intervention, click the 3 dots button on the details page.
 

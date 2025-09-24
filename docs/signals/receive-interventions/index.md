@@ -104,10 +104,9 @@ subscribeToInterventions({
 
 The plugin generates Snowplow events to track interventions. The events include the intervention payload as a custom entity.
 
-<!-- TODO: link to iglu central once published -->
-- `iglu:com.snowplowanalytics.signals/intervention_receive/jsonschema/1-0-0`: tracked when an intervention is received by the plugin
-- `iglu:com.snowplowanalytics.signals/intervention_handle/jsonschema/1-0-0`: tracked when a custom handler is passed the intervention payload and reports successful handling (does not return an error)
-- `iglu:com.snowplowanalytics.signals/intervention_handle_error/jsonschema/1-0-0`: tracked when a custom handler is passed the intervention payload and reports failure (throws an error)
+- [`iglu:com.snowplowanalytics.signals/intervention_receive/jsonschema/1-0-0`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.signals/intervention_receive/jsonschema/1-0-0): tracked when the plugin receives an intervention
+- [`iglu:com.snowplowanalytics.signals/intervention_handle/jsonschema/1-0-0`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.signals/intervention_handle/jsonschema/1-0-0): tracked when a custom handler is passed the intervention payload and reports successful handling (does not return an error)
+- [`iglu:com.snowplowanalytics.signals/intervention_handle_error/jsonschema/1-0-0`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.signals/intervention_handle_error/jsonschema/1-0-0): tracked when a custom handler is passed the intervention payload and reports failure (throws an error)
 
 ## Payload
 

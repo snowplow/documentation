@@ -52,7 +52,7 @@ The table below lists all available arguments for a `RuleIntervention`:
 The `criteria` tree defines the conditions that an attribute key's attributes should meet to be eligible for the intervention to trigger.
 
 When a referenced attribute is updated, the updated and previous states are evaluated against the criteria. If the previous state did not meet the conditions but the newly updated state does, the trigger activates and the intervention gets published to the attribute keys that have a value and are defined in the `target_attributes_key` setting.
-Criterion always refer to the latest published version of the attribute group that contained that attribute.
+Criteria always refer to the latest published version of the attribute group that contained that attribute.
 
 The simplest `criteria` tree takes an `InterventionCriterion` instance, with possible arguments:
 

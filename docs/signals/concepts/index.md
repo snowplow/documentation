@@ -159,7 +159,7 @@ This service could be imagined like this as a table:
 
 ## Interventions
 
-Interventions are automated triggers that enable real-time actions based on user behavior, as captured by attribute changes. Your application decides how to react to a delivered intervention.
+Interventions are opportunities to take actions to improve user outcomes. They're automated triggers fired by changes in attribute values, or by your own applications.
 
 They can be thought of as "if-then" rules that run in real time. For example:
 * `If` a user has viewed five products in the last ten minutes
@@ -183,7 +183,7 @@ Standard rule-based interventions can have multiple conditions, or trigger crite
 Interventions are targeted based on attribute keys, which determine both the scope and specificity of when they're delivered.
 
 :::note Key constraints
-Interventions can be defined against any attribute key, as long as its values are UUIDs.
+Interventions can be defined against any attribute key, as long as its values are non-enumerable. For example, the built-in Snowplow attribute keys `domain_userid`, `domain_sessionid`, and `network_userid` are suitable targets since their values are UUIDs.
 :::
 
 For individual-level targeting, use user-specific attribute keys. For example, use `domain_userid` to target individual users, or `domain_sessionid` to target users during specific sessions, when session-level conditions are met.
@@ -191,6 +191,10 @@ For individual-level targeting, use user-specific attribute keys. For example, u
 For broadcast-level targeting, use attribute keys related to the application context. For example, you could use `campaign_id` to target all users who arrived from a specific marketing campaign.
 
 Interventions can have multiple attribute keys. By default, the intervention will target the attribute keys associated with their criteria attributes.
+
+Custom targeting can be useful when you have broad criteria but want a more narrow target. For example, if your criteria use a broad attribute like `page_id`, you might not want to send the intervention to everyone on that page. If you're also checking user-specific criteria, target `domain_userid` to reach only the specific user who meets all conditions.
+
+Another use for custom targeting is when you want to target an attribute key that's available in the triggering event, but isn't part of your intervention logic. For example, to send an intervention to a `domain_userid` when they do a certain number of things in a single `pageview_id`. You might want to target the user so that the intervention is received even if they've gone onto a new page by the time the triggering event is processed, or if the application is not subscribed to the `pageview_id`.
 
 ### Subscribing
 
@@ -222,12 +226,25 @@ To receive interventions for the current user and session, subscribe to their in
 
 Interventions will be received when:
 * The user views 10 pages, or the session has an ad event
-  * `intervention1` will be delivered to the subscribed user and to the subscribed session, as two separate payloads
-  * A triggered intervention is sent to all target attribute keys
-* The user exceeds 20 button clicks
-  * `intervention2` will be delivered to the subscribed user
-  * This intervention will be triggered on every subsequent button click, so repeated payloads will be sent
-  * Each payload has its own intervention ID
+  * `intervention1` will be delivered to one of the subscribed targets.
+  * Signals will initially create a payload for each target. However, they'll have the same ID as they're triggered by a single event, and will be deduped.
+* The user exceeds 20 button clicks for the first time
+  * `intervention2` will be delivered to the subscribed user.
+
+Assuming it's the user's first session, the flow looks like this:
+* First page view
+* First ad event
+  * `intervention1` is triggered and delivered to one of the targets
+* More page views, button clicks, and ad events
+* Tenth page view
+  * Nothing happens: because `intervention1` triggered already on seeing the ad event in this session, it's not triggered again
+* Twenty-first button click
+  * The attribute value changes from 20 to 21, crossing the required threshold
+  * `intervention2` is triggered and delivered to the user target
+* Twenty-second button click
+  * Nothing happens: the threshold has already passed
+
+This user has already seen more than 10 pages, so `intervention1` can never be triggered by that rule for them. However, if their current session expires, and the application subscribes to their new `domain_sessionid` ID, `intervention1` can be triggered again by the first ad event of the session.
 
 ### Types of intervention
 

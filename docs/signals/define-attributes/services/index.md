@@ -6,7 +6,7 @@ description: "Group multiple attribute groups together using services to create 
 
 [Services](/docs/signals/concepts/index.md#services) group attribute groups together for serving to your applications.
 
-To create a service, go to **Signals** > **Services** in BDP Console and follow the instructions.
+To create a service, go to **Signals** > **Services** in Snowplow Console and follow the instructions.
 
 ![Create service form with name, description, owner, and attribute group selection](../../images/service-create.png)
 

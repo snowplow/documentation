@@ -7,7 +7,7 @@ description: "Configure and deploy interventions to trigger real-time actions ba
 [Interventions](/docs/signals/concepts/index.md#interventions) are automated triggers that enable real-time actions based on user behavior.
 
 There are three methods for defining interventions in Signals:
-* BDP Console UI
+* Snowplow Console UI
 * [Signals Python SDK](/docs/signals/define-interventions/using-python-sdk/index.md)
 * [Signals API](/docs/signals/connection/index.md#signals-api)
 

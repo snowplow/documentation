@@ -6,7 +6,7 @@ description: "Configure a Snowplow Signals service to group attribute groups for
 
 [Services](/docs/signals/concepts/#services) group attribute groups together for serving to your applications.
 
-To create a service, go to **Signals** > **Services** in BDP Console and click **Create service**.
+To create a service, go to **Signals** > **Services** in Snowplow Console and click **Create service**.
 
 ![Create service form for quickstart tutorial service](./images/service-create.png)
 

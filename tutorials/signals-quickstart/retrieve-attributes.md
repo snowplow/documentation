@@ -20,7 +20,7 @@ To test this out, use the [Snowplow Inspector](/docs/data-product-studio/data-qu
 
 Install the Signals Python SDK into the notebook, and connect to Signals.
 
-1. Go to **Signals** > **Overview** in BDP Console to find your Signals credentials
+1. Go to **Signals** > **Overview** in Snowplow Console to find your Signals credentials
 2. Add them to the notebook secrets:
 
 ![Screenshot showing how to add secrets](./images/notebook-secrets.png)

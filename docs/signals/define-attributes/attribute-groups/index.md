@@ -7,7 +7,7 @@ description: "Create and manage attribute groups to define behavioral data calcu
 
 Define the behavior you want to capture in [attribute groups](/docs/signals/concepts/index.md#attribute-groups). Choose whether to calculate attributes from your event stream or warehouse.
 
-To create an attribute group, go to **Signals** > **Attribute groups** in BDP Console and follow the instructions.
+To create an attribute group, go to **Signals** > **Attribute groups** in Snowplow Console and follow the instructions.
 
 ![Create attribute group form with name, description, data source, and owner fields](../../images/attribute-group-create.png)
 
@@ -67,7 +67,7 @@ Signals includes four built-in attribute keys, based on commonly used identifier
 
 ### Creating a custom attribute key
 
-To create a custom attribute key, navigate to **Signals** > **Attribute keys** within BDP Console. Click the **Create attribute key** button.
+To create a custom attribute key, navigate to **Signals** > **Attribute keys** within Console. Click the **Create attribute key** button.
 
 ![Create attribute key form with name, description, and atomic property selection](../../images/attribute-key-create.png)
 

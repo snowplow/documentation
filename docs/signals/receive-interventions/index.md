@@ -46,12 +46,12 @@ subscription.stop()
 
 ## Using the browser tracker plugin
 
-For web applications using the Snowplow browser tracker, you can subscribe to interventions using the [Signals Interventions plugin](https://github.com/snowplow-incubator/signals-browser-plugin) <!-- TODO: Update URL to non-private repo -->.
+For web applications using the Snowplow browser tracker, you can subscribe to interventions using the [Signals Interventions plugin](https://github.com/snowplow-incubator/signals-browser-plugin).
 
 The workflow is:
 1. Create a Snowplow tracker with the plugin configured
-3. Add custom handlers to react to the interventions
-4. Subscribe to interventions
+2. Add custom handlers to react to the interventions
+3. Subscribe to interventions
 
 ```typescript
 import { newTracker } from '@snowplow/browser-tracker';

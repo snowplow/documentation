@@ -6,17 +6,21 @@ description: "Configure Snowplow Signals attributes using the BDP Console, Pytho
 
 If you're new to Signals, you'll need to set up a Signals connection. Log in to [Snowplow Console](https://console.snowplowanalytics.com) and navigate to the **Signals** section.
 
-<!-- TODO image initial landing page no deployment -->
+![](../images/console-no-connection.png)
 
-Click **Enable** to start setting up a Signals connection. You'll need to provide your warehouse account details.
+Click **Enable** to start setting up a Signals connection.
 
-<!-- TODO image setup page -->
+You'll need to:
+* Select which warehouse to use
+* Specify your warehouse account details
+* Specify your Snowplow atomic events table
+* Run the provided script
 
 Click **Test and create connection** to trigger the Signals deployment. You'll be able to start using Signals as soon as the infrastructure is ready.
 
 ## Snowplow BDP Console
 
-To use the UI to manage Signals, log in to [Console](https://console.snowplowanalytics.com) and navigate to the **Signals** section.
+To use the UI to manage Signals, navigate to the **Signals** section.
 
 Use the configuration interface to define [attribute groups](/docs/signals/define-attributes/attribute-groups/index.md), [services](/docs/signals/define-attributes/services/index.md), and [interventions](/docs/signals/define-interventions/index.md).
 

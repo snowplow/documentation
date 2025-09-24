@@ -42,7 +42,30 @@ Not Using Snowtype:
 Choose between two generation methods:
 
 - View → Best for lightweight use cases when you need immediate access to data with minimal setup.
+
+View statements can be run directly in your data warehouse without the need for additional tools, it is recommended when your atomic events table is smaller or you will not be regularly querying the data model. When using a View, ensure you reference the partition key of the atomic table to ensure your queries are performant and cost efficient.
+
 - Incremental dbt Model → Ideal for production pipelines when you want to materialize data efficiently and integrate it into existing dbt projects.
+
+Multiple types of incremental dbt models are able to be created. This allows for more efficient querying of the table and is recommended when you have a large atomic events table or will be regularly querying your modeled data.
+
+Choose between a Simple, Normalize, or Unified incremental dbt model:
+
+- Simple: compatible with any dbt project with no package dependencies, this model will materialize all data for the model on the first run, whilst processing only new events for every subsequent run.
+
+- [Normalize](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-normalize-data-model/) and [Unified](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/) models: designed to work our existing dbt packages for efficient incremental processing building upon our events_this_run tables.
+
+
+| Consideration | Simple | Unified & Normalize | Views |
+|---------------|--------|--------------------| ------|
+| **Best for** | Standalone projects, new dbt implementations | Existing Snowplow dbt package users | Real-time data access, exploratory analysis |
+| **Dependencies** | None | Requires Snowplow dbt packages | None |
+| **Setup complexity** | Minimal | Moderate (variable configuration required) | Minimal |
+| **Processing efficiency** | Standard incremental | Optimized with `events_this_run` tables | Query-time processing |
+| **Integration** | Independent operation | Coordinated with existing Snowplow models | Independent operation |
+| **Storage requirements** | Materializes data | Materializes data | No additional storage |
+| **Query performance** | Fast (pre-computed) | Fast (pre-computed) | Depends on underlying data volume |
+| **Data freshness** | Batch incremental updates | Batch incremental updates | Real-time |
 
 ## Use Cases
 

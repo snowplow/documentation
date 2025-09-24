@@ -3,9 +3,6 @@ title: "Snowplow Signals"
 sidebar_position: 8
 description: "Real-time personalization engine for customer intelligence that computes and acts on behavioral data from Snowplow's data pipeline."
 sidebar_label: "Signals"
-sidebar_custom_props:
-  offerings:
-    - bdp
 ---
 
 Snowplow Signals is a real-time personalization engine for customer intelligence, built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in real time.

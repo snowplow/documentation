@@ -16,7 +16,7 @@ Subscription is by attribute key ID, not by individual intervention. Start by [c
 
 ## Using the Signals Python SDK
 
-Subscribe by providing IDs for the attribute keys you're interested in receiving interventions for. The IDs must be UUIDs.
+Subscribe by providing IDs for the attribute keys you're interested in receiving interventions for. The IDs must be in a non-enumerable format, such as UUIDs.
 
 ```python
 from snowplow_signals import AttributeKeyIdentifiers, InterventionInstance

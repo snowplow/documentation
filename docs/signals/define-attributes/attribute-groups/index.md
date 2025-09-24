@@ -77,7 +77,7 @@ You will need to provide:
 * An optional email address for the primary owner or maintainer
 * Which [atomic](/docs/fundamentals/canonical-event/index.md#atomic-fields) property you want to calculate attributes against
 
-To edit or delete a custom attribute key, go to the key details page and click the **Edit** button, or the 3 dots button followed by **Delete**.
+To edit or delete a custom attribute key, go to the key details page and click the **Edit** button, or the `⋮` button followed by **Delete**.
 
 ## Attribute lifetimes
 
@@ -119,7 +119,7 @@ All attribute groups start as `v1`. If you make changes to the definition, the v
 
 ## Deleting an attribute group
 
-To unpublish or delete an attribute group, click the 3 dots button on the group details page.
+To unpublish or delete an attribute group, click the `⋮` button on the group details page.
 
 ![](../../images/attribute-group-edit-delete.png)
 

@@ -100,6 +100,8 @@ subscribeToInterventions({
 });
 ```
 
+The plugin will automatically disconnect/reconnect whenever the attribute key IDs change. The browser will close the connection on navigation away from the page.
+
 ### Intervention events
 
 The plugin generates Snowplow events to track interventions. The events include the intervention payload as a custom entity.

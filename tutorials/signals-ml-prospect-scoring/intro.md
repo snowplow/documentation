@@ -44,8 +44,6 @@ We're calculating aggregated attributes based off real-time stream event data, s
 * [ngrok](https://dashboard.ngrok.com/) account and Authtoken API key
 * Google Colab
 
-Check out the [Signals](/docs/signals/define-attributes) documentation to find out how to get the Signals credentials.
-
 ## Architecture
 
 This tutorial uses this [Jupyter notebook](https://colab.research.google.com/github/snowplow-incubator/signals-notebooks/blob/main/web/web_prospect_scoring_end_to_end.ipynb).

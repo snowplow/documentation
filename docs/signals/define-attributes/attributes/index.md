@@ -5,7 +5,7 @@ sidebar_label: "Attributes"
 description: "Configure individual attributes within attribute groups to specify event schemas, properties, and aggregation methods for Signals calculations."
 ---
 
-Attributes are defined as part of attribute groups. To create an attribute, you'll need to set:
+[Attributes](/docs/signals/concepts/index.md#attribute-groups) are defined as part of attribute groups. To create an attribute, you'll need to set:
 * A name, ideally one that describes the attribute
 * Which event schema to calculate it from
 * What property in the schema to consider for the calculation

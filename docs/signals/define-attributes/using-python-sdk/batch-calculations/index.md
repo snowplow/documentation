@@ -12,8 +12,6 @@ To use historical, warehouse attributes in your real-time use cases, you will ne
 Only Snowflake and BigQuery are supported currently.
 :::
 
-## Existing or new attributes?
-
 Signals is configured slightly differently depending if you're using existing tables or creating new ones.
 
 * `BatchAttributeGroup`: create a new warehouse table with new attributes, calculated from your `atomic` events table
@@ -31,7 +29,7 @@ Once enabled, syncs begin at a fixed interval. By default, this is every 1 hour.
 
 ## Using existing attributes
 
-Using existing tables in your warehouse is the more straight-forward approach, as it doesn't require any additional modeling. You'll need to define an `ExternalBatchAttributeGroup`, including a `BatchSource` warehouse configuration object. Check out the [attribute group configuration](/docs/signals/define-attributes/using-python-sdk/attribute-groups/index.md) page for more details.
+Using existing tables in your warehouse is the more straight-forward approach, as it doesn't require any additional modeling. You'll need to [define an `ExternalBatchAttributeGroup`](/docs/signals/define-attributes/using-python-sdk/attribute-groups/warehouse-config/index.md), including a `BatchSource` warehouse configuration object.
 
 To start syncing existing tables, [publish](/docs/signals/define-attributes/using-python-sdk/index.md#publishing-and-deleting) your `ExternalBatchAttributeGroup` group to Signals.
 

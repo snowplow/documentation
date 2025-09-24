@@ -51,13 +51,12 @@ The table below lists all available arguments for a `Service`
 
 ## Publishing services
 
-Use the `publish()` method to [register services](/docs/signals/define-attributes/using-python-sdk/index.md#publishing-and-deleting) with Signals. This makes them available for use.
+Use the [`publish()` method](/docs/signals/connection/index.md#publishing-and-deleting) to register services with Signals. This makes them available for use.
 
 ```python
 from snowplow_signals import Signals
 
 # Connect to Signals
-# See the main configuration section for more on this
 sp_signals = Signals(
         {{ config }}
     )

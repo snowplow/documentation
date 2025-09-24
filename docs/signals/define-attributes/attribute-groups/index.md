@@ -19,7 +19,7 @@ The first step is to specify:
 
 ## Data source
 
-There are three sources to choose from:
+There are three [sources](/docs/signals/concepts/index.md#data-sources) to choose from:
 * **Stream**: real-time Snowplow event stream
 * **Batch**: a new warehouse table created by Signals, calculated from your `atomic` events table
 * **External batch**: pre-calculated values in a warehouse table that you can sync to the Profiles Store
@@ -50,22 +50,13 @@ Provide the warehouse and table details, and which fields you want to send to Si
 
 ![External batch source configuration showing warehouse table and field mapping options](../../images/attribute-group-external-batch-fields.png)
 
-We recommend providing a timestamp field for incremental or snapshot-based tables. To minimize latency, Signals will use this to determine which rows have changed since the last sync. The sync engine will only send the new rows to the Profiles Store.
+To minimize latency, Signals will use the timestamp field to determine which rows have changed since the last sync. The sync engine will only send the new rows to the Profiles Store.
 
 ## Attribute keys
 
 All attribute groups need an [attribute key](/docs/signals/concepts/index.md#attribute-keys).
 
 Signals includes four built-in attribute keys, based on commonly used identifiers from the atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) in all Snowplow events.
-
-| Attribute key      | Type     |
-| ------------------ | -------- |
-| `user_id`          | `string` |
-| `domain_userid`    | `uuid`   |
-| `network_userid`   | `uuid`   |
-| `domain_sessionid` | `uuid`   |
-
-### Creating a custom attribute key
 
 To create a custom attribute key, navigate to **Signals** > **Attribute keys** within Console. Click the **Create attribute key** button.
 

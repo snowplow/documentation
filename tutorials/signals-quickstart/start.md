@@ -12,7 +12,7 @@ This guide will walk you through the steps to calculate user behavior attributes
 
 It should take less than 10 minutes from starting to retrieving calculated attributes.
 
-This tutorial shows how to define attributes using the Snowplow Console UI, as well as programmatically using the Python SDK.
+This tutorial shows how to define attributes using the Snowplow Console UI, as well as programmatically using the [Signals Python SDK](https://pypi.org/project/snowplow-signals/).
 
 ## Prerequisites
 

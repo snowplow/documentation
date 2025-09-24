@@ -16,7 +16,7 @@ Signals has three main configurable components:
 
 To use attributes to trigger actions such as in-app messages, discounts, or personalized journeys, use services or interventions.
 
-**Services** provide a stable interface layer between your calculated attributes and your applications. Each service can contain multiple attribute groups, pinned to specific versions. You'd build the logic within your application for how to use the retrieved attributes. **Interventions** are a separate abstraction for defining when to trigger actions in your application.
+**Services** group attribute groups together for serving to your applications. **Interventions** are a separate abstraction for defining when to trigger actions in your application.
 
 ![Detailed Signals architecture showing how attribute groups, services, and interventions connect to the Profiles Store](../images/overview-detailed.png)
 
@@ -136,9 +136,9 @@ Use an external batch source to sync tables of existing, pre-calculated values t
 
 ## Services
 
-Services are where you define how to use the calculated attributes in your applications.
+Services provide a stable interface layer between your calculated attributes and your applications.
 
-Rather than connecting applications directly to attribute groups, services allow you to consume specific attribute group versions. This provides a consistent set of consumable attributes. We strongly recommend using services in production applications.
+Each service can contain multiple attribute groups, pinned to specific versions. This provides a consistent set of consumable attributes. We strongly recommend using services in production applications.
 
 By using services you can:
 * Iterate on attribute definitions without worrying about breaking downstream processes
@@ -169,7 +169,7 @@ Standard rule-based interventions can have multiple conditions, or trigger crite
 
 Interventions are targeted based on attribute keys, which determine both the scope and specificity of when they're delivered.
 
-:::note Key constraints
+:::info Key constraints
 Interventions can be defined against any attribute key, as long as its values are non-enumerable. For example, the built-in Snowplow attribute keys `domain_userid`, `domain_sessionid`, and `network_userid` are suitable targets since their values are canonically formatted UUIDs, e.g. `8c9104e3-c300-4b20-82f2-93b7fa0b8feb`.
 :::
 
@@ -189,7 +189,7 @@ To receive and take action on interventions, you'll need to:
 * [Subscribe](/docs/signals/receive-interventions/index.md) to them within your application
 * Define the logic of how the application should react
 
-:::note Attribute key IDs
+:::info Attribute key IDs
 Subscription is by attribute key, not by intervention.
 
 A subscription using a specific attribute key ID, for example a `domain_userid` ID for the current user, will receive all triggered interventions for that ID.

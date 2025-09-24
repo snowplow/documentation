@@ -17,15 +17,15 @@ To use attributes to take action in your application, you'll want to retrieve on
 For example, use the current user's unique `domain_userid` identifier to retrieve attributes defined against the `domain_userid` attribute key.
 
 You have three options for consuming attributes, depending on your use case or application:
-* Signals Node.js SDK (TypeScript)
-* Signals Python SDK
+* [Signals Node.js SDK](https://www.npmjs.com/package/@snowplow/signals-node) (TypeScript)
+* [Signals Python SDK](https://pypi.org/project/snowplow-signals/)
 * [Signals API](/docs/signals/connection/index.md#signals-api)
 
 Start by [connecting to Signals](/docs/signals/connection/index.md).
 
 ## Using a service
 
-The easiest way to retrieve attributes is by using a [service](/docs/signals/concepts/index.md#services). This allows you to retrieve attributes in bulk, from multiple attribute groups.
+The preferred way to retrieve attributes is by using a [service](/docs/signals/concepts/index.md#services). This allows you to retrieve attributes in bulk, from multiple attribute groups.
 
 <Tabs groupId="signals" queryString>
 <TabItem value="python" label="Python" default>

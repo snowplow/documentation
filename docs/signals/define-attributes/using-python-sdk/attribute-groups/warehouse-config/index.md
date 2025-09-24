@@ -5,9 +5,9 @@ sidebar_label: "Warehouse configuration"
 description: "Create an attribute group for connecting Signals to an existing warehouse table using the Python SDK."
 ---
 
-To sync existing, pre-calculated attributes to Signals, define which source table to use, and which fields (columns) to use from the table. Using existing warehouse tables doesn't require any additional modeling.
+To sync existing, pre-calculated attributes to Signals, use an `ExternalBatchAttributeGroup` attribute group to define which source table to use, and which fields (columns) to use from the table. Using existing warehouse tables doesn't require any additional modeling.
 
-Use an `ExternalBatchAttributeGroup` attribute group, and configure which table to sync by specifying a `BatchSource` object for the group.
+Configure which table to sync by specifying a `BatchSource` object for the group.
 
 :::info
 

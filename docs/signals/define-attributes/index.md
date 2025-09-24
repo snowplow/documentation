@@ -15,5 +15,3 @@ There are three methods for defining attributes in Signals:
 To use the UI to manage Signals, log in to [Console](https://console.snowplowanalytics.com) and navigate to the **Signals** section.
 
 Use the configuration interface to define [attribute groups](/docs/signals/define-attributes/attribute-groups/index.md) and [services](/docs/signals/define-attributes/services/index.md).
-
-<!-- TODO image initial landing page -->

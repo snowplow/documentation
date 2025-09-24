@@ -144,19 +144,6 @@ By using services you can:
 * Iterate on attribute definitions without worrying about breaking downstream processes
 * Migrate to new attribute group versions by updating the service definition, without having to update the application code
 
-Here's a service that combines the stream attribute group from before with an additional batch attribute group:
-
-<!-- TODO image service -->
-
-In this example, both attribute groups have the same attribute key.
-
-This service could be imagined like this as a table:
-
-| `user_id`            | `number_of_pageviews` | `last_product_viewed` | `previous_purchases`       | `previous_returns` |
-| -------------------- | --------------------- | --------------------- | -------------------------- | ------------------ |
-| `abc123@example.com` | 5                     | `"Red Shoes"`         | `[Blue Shoes", "Red Hat"]` | `["Red Hat"]`      |
-| `def456@example.com` | 10                    | `"Yellow Hat"`        | `[]`                       | `[]`               |
-
 ## Interventions
 
 Interventions are opportunities to take actions to improve user outcomes. They're automated triggers fired by changes in attribute values, or by your own applications.

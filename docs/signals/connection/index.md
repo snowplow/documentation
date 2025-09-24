@@ -20,11 +20,11 @@ To use the UI to manage Signals, log in to [Console](https://console.snowplowana
 
 Use the configuration interface to define [attribute groups](/docs/signals/define-attributes/attribute-groups/index.md), [services](/docs/signals/define-attributes/services/index.md), and [interventions](/docs/signals/define-interventions/index.md).
 
-<!-- TODO image initial landing page -->
+![](../images/console-landing.png)
 
 ## Connection credentials
 
-To connect to Signals using the Signals SDKs or API, you will need 4 values:
+To connect to Signals using the Signals SDKs or API, you will need four values. Use the Console **Overview** page to access them.
 
 | Value           | Description                             | Where to get it                                                      | Format                                             |
 | --------------- | --------------------------------------- | -------------------------------------------------------------------- | -------------------------------------------------- |

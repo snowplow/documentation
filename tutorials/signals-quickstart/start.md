@@ -6,7 +6,7 @@ description: "Get started with Snowplow Signals to calculate user behavior attri
 
 Welcome to the [Snowplow Signals](/docs/signals/) Quick Start tutorial.
 
-Snowplow Signals is a real-time personalization engine for customer intelligence, built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in near real time.
+Snowplow Signals is a real-time personalization engine for customer intelligence, built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in real time.
 
 This guide will walk you through the steps to calculate user behavior attributes from your Snowplow event stream, and to retrieve them for use in your application. This will unlock real-time personalization use cases for your business.
 

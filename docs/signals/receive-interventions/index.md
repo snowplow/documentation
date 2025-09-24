@@ -6,10 +6,10 @@ description: "Configure and deploy interventions to trigger real-time actions ba
 
 [Interventions](/docs/signals/concepts/index.md#interventions) are automated triggers that enable real-time actions based on user behavior.
 
-Subscribe to intervention changes to automatically respond within your application. You have three options for receiving interventions, depending on your use case or application:
-* Plugin for the JavaScript tracker
+Subscribe to interventions to automatically respond within your application. You have three options for receiving interventions, depending on your use case or application:
 * Signals Python SDK
-* Signals API
+* Plugin for the JavaScript tracker
+* [Signals API](/docs/signals/connection/index.md#signals-api)
 
 Subscription is by attribute key ID, not by individual intervention. Start by [connecting to Signals](/docs/signals/connection/index.md).
 

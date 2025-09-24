@@ -85,7 +85,9 @@ To edit or delete a custom attribute key, go to the key details page and click t
 
 ## Attribute lifetimes
 
-You can optionally set a Time to live (TTL) value for each attribute group. Some attributes will only be relevant for a certain amount of time, and eventually stop being updated. To avoid stale attributes staying in your Profiles Store forever, configure a TTL for the attribute group.
+We recommend setting a Time to live (TTL) value for each attribute group. Some attributes will only be relevant for a certain amount of time, and eventually stop being updated. To avoid stale attributes staying in your Profiles Store forever, configure a TTL for the attribute group.
+
+The suggested default is 7 days for stream attribute groups, and 365 days for batch attribute groups.
 
 When none of the attributes for an attribute group have been updated for the defined lifespan, the attribute group expires. Any attribute values for this group will be deleted: fetching them will return `None` values.
 

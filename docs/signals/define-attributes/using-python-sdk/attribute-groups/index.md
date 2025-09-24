@@ -147,7 +147,7 @@ For `BatchAttributeGroup` groups, it's a good idea to publish initially with `on
 </TabItem>
 </Tabs>
 
-If no `ttl` is set, the attribute key's `ttl` will be used. If the attribute key also has no `ttl`, there will be no time limit for attributes.
+If no `ttl` is set, the attribute key's `ttl` will be used. If the attribute key also has no `ttl`, there will be no time limit for attributes. We highly recommend setting a TTL. Our suggested default is 7 days for stream attribute groups, and 365 days for batch attribute groups.
 
 Use the `online` property to control whether or not Signals should actively compute the attributes, or just register the configuration.
 

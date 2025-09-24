@@ -24,7 +24,7 @@ These failures occur when the destination's API cannot accept or process the eve
 
 **Transient failures** are those that are expected to succeed on retry. This includes temporary network errors, HTTP 5xx server errors, or rate limiting. Transient failures are automatically retried.
 
-**Setup failures** result from configuration issues that typically require human intervention to resolve, such as invalid API keys or insufficient permissions. When a setup error occurs, Snowplow will trigger email alerts to the configured list of users. For more information on alerting, see [TODO: configuring alerts](link)
+**Setup failures** result from configuration issues that typically require human intervention to resolve, such as invalid API keys or insufficient permissions. When a setup error occurs, Snowplow will trigger email alerts to the configured list of users. For more information on alerting, see [configuring setup alerts](#configuring-setup-alerts).
 <!-- TODO: what happens when we hit a setup failure?-->
 
 **Other unrecoverable failures** are bad requests that won't succeed on retry, such as those with missing or invalid fields. These often map to HTTP 400 response codes. Snowplow will log them as failed events in your cloud storage bucket without retrying.
@@ -47,23 +47,23 @@ Once a forwarder is deployed, you can configure one or more email addresses to s
 2. On the table of forwarders, click the three dots next to the forwarder you want to configure alerting for and select **Alerts**.
 3. You'll see a modal where you can enter the email addresses you want to be alerted in case of setup errors. Click **Save Changes** to confirm.
 
-![](./images/setup-alerting-screenshot.png)
+![Setup alerts modal dialog for configuring email addresses to receive forwarder error notifications](images/setup-alerting-screenshot.png)
 
 ## Metrics and monitoring
 
 You can monitor forwarders in a few ways:
 
 - **Console metrics**: you can view high-level delivery statistics in BDP Console.
-- **Cloud monitoring metrics**: forwarders emit a set of metrics to your cloud providers's observabilty service.
+- **Cloud monitoring metrics**: forwarders emit a set of metrics to your cloud provider's observability service.
 - **Failed event logs**: for failed deliveries, Snowplow saves detailed logs to your cloud storage bucket. Consume these logs for automated monitoring in your observability platform of choice.
 
 ### Console metrics
 
-In BDP Console, you can see the number of filtered, failed, and successfuly delivered events over the last seven days.
+In Snowplow Console, you can see the number of filtered, failed, and successfully delivered events over the last seven days.
 
 To view these metrics, navigate to **Destinations** > **Destinations list** and select the destination you'd like to view. On the event forwarders overview table, you will see metrics for each forwarder configured for that destination.
 
-![](./images/event-forwarding-console-metrics.png)
+![Console metrics dashboard showing forwarder statistics including filtered, failed, and delivered event counts](images/event-forwarding-console-metrics.png)
 
 ### Cloud monitoring metrics
 
@@ -96,7 +96,7 @@ To better understand why a failure has occurred, you can directly access and rev
 
 For more details on where to find failed events, see [Accessing failed events in file storage](/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/file-storage/index.md).
 
-Failed event logs are formatted according to the [event_forwarding_error](https://iglucentral.com/?q=event_forwarding_error) schema and contain:
+Failed event logs are formatted according to the [`event_forwarding_error`](https://iglucentral.com/?q=event_forwarding_error) schema and contain:
 
 - **Original event data**: the complete Snowplow event that failed
 - **Error details**: specific error type and message
@@ -108,7 +108,7 @@ Failed event logs are formatted according to the [event_forwarding_error](https:
 On AWS, you can use [Athena](https://aws.amazon.com/athena/) to query your failed events using the cloud storage files as a data source.
 
 :::tip Querying failed events on GCP
-For GCP-hosted Snowplow deployments, failed events can be queried via external tables in BigQuery.
+For GCP-hosted Snowplow deployments, you can query failed events via external tables in BigQuery.
 :::
 
 <!-- TODO: add BigQuery steps as well -->

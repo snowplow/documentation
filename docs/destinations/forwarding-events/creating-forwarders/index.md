@@ -12,7 +12,7 @@ A **connection** is a resource that stores the credentials and endpoint details 
 
 To create a connection from Snowplow console, first go to **Destinations** > **Connections**, then select **Set up connection**. From the dropdown, choose **Loader connection**, then select the destination you want to forward events to. Each destination will have specific authentication and endpoint details required.
 
-![](images/event-forwarding-connection.png)
+![Console interface for creating a new destination connection with authentication and endpoint configuration fields](images/event-forwarding-connection.png)
 
 When finished, click **Deploy**. Once a connection is deployed, you can use it in one or more forwarders to connect to your destination.
 
@@ -44,7 +44,7 @@ event.app_id == "website" && event.event_name == "page_view"
 
 Leave the filter blank to forward all events.
 
-![](images/event-forwarding-filters.png)
+![Event filtering configuration panel showing JavaScript expression field for defining which events to forward](images/event-forwarding-filters.png)
 
 ### Field mapping
 
@@ -56,7 +56,7 @@ Define how Snowplow data maps to your destination fields. For each mapping, **De
 
 You can also write JavaScript functions for complex data transformations. Examples include converting date formats, transforming enum values, combining multiple fields, or applying other business logic. You can then reference functions in both the event filter and field mapping sections.
 
-![](images/event-forwarding-custom-functions.png)
+![Custom functions editor with JavaScript code for complex data transformations in event forwarding](images/event-forwarding-custom-functions.png)
 
 :::info
 To learn more about the supported filter and mapping expressions, check out the [filter and mapping reference](/docs/destinations/forwarding-events/reference/index.md).
@@ -66,7 +66,7 @@ To learn more about the supported filter and mapping expressions, check out the 
 
 Once you've defined your filter and mapping configuration, you can test it against a sample event and preview what the output JSON payload looks like. Choose an event from the **Select sample input event** dropdown and selecting **Run test**.
 
-![](images/event-forwarding-test-transformations.png)
+![Test transformation interface showing sample event input and JSON output preview with run test button](images/event-forwarding-test-transformations.png)
 
 Snowplow provides a few out-of-the-box sample events to test with, which you can edit as needed. You can also choose **Custom event** to paste in your own JSON-formatted Snowplow event. You can use [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/) with the `--output-json` flag to generate your own events to test with.
 

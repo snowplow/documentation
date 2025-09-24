@@ -66,10 +66,4 @@ You can replace the ML model with any other back-end system that you'd use to ac
 
 Log in to [Console](https://console.snowplowanalytics.com) and navigate to the **Signals** section.
 
-If your Overview page looks like this, you'll need to [set up a Signals connection](/docs/signals/define-attributes/) to deploy the required infrastructure:
-
-<!-- TODO image initial landing page no deployment -->
-
-If it looks like this, continue with the tutorial:
-
-<!-- TODO image overview page with connection -->
+You'll need to [set up a Signals connection](/docs/signals/connection/) if you don't have one yet.

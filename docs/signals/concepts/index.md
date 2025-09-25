@@ -269,6 +269,15 @@ Use cases for direct interventions include:
 * Emergency notifications, e.g. system outages
 * Real-time business decisions, e.g. breaking news
 * Manual campaign targeting
+* Sensitive communications requiring authentication or authorization
+
+:::info Intervention endpoints
+
+Direct interventions use the [Signals API](/docs/signals/connection/index.md#signals-api) `api/v1/registry/interventions` endpoints under the hood. These endpoints check that the submitted bearer token in the API call is valid and authorized.
+
+Conversely, subscription to automated rule-based interventions uses the `api/v1/interventions` endpoint. This endpoint is public: it doesn't perform authentication or authorization, just sanity checks for the requested attribute keys.
+
+:::
 
 ## Profiles Store
 

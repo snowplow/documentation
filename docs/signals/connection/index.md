@@ -142,13 +142,13 @@ Read more about retrieving calculated attributes [here](/docs/signals/retrieve-a
 
 ## Signals API
 
-The Signals API allows you to directly configure attributes and interventions. To access the full Swagger API documentation for your Signals deployment, use your Signals API URL followed by `/docs/`:
+The Signals API allows you to directly configure and retrieve attributes and interventions. To access the full Swagger API documentation for your Signals deployment, use your Signals API URL followed by `/docs/`:
 
 ```bash
 {{API_URL}}/docs/
 ```
 
-Your Signals API URL will be available within Console once you've deployed Signals.
+Your API documentation is linked in Console on the **Overview** page, under **Configuration details**.
 
 ## Example use cases
 

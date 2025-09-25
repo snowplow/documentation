@@ -16,7 +16,7 @@ Signals has three main configurable components:
 
 To use attributes to trigger actions such as in-app messages, discounts, or personalized journeys, use services or interventions.
 
-**Services** group attribute groups together for serving to your applications. **Interventions** are a separate abstraction for defining when to trigger actions in your application.
+**Services** provide a stable interface layer between your calculated attributes and your applications. Each service can contain multiple attribute groups, pinned to specific versions. You'd build the logic within your application for how to use the retrieved attributes. **Interventions** are a separate abstraction for defining when to trigger actions in your application.
 
 ![Detailed Signals architecture showing how attribute groups, services, and interventions connect to the Profiles Store](../images/overview-detailed.png)
 
@@ -92,43 +92,28 @@ This table summarizes the options for different types of processing:
 When Signals is deployed in your Snowplow BDP pipeline, the event stream is read by the streaming engine. All tracked events are inspected. If you've configured Signals to calculate an attribute from a certain type of event, when that event type is received, the engine will compute the attribute data and forward it to the Profiles Store, in real time. If that event type isn't registered as containing attribute data, nothing happens.
 
 Real-time stream flow:
-
-```mermaid
-flowchart TD
-    subgraph Stream[Real-time event stream]
-        A[Behavioral data event<br/>is received by Collector] --> B[Event is enriched<br/>by Enrich]
-        B --> D[Event is read from stream by<br/>Signals stream engine]
-    end
-
-    B --> C[Event is loaded into<br/>the warehouse by Loader]
-
-    D --> E[Stream engine checks<br/>attribute definitions]
-    E --> F{Attributes defined<br/>for this event?}
-
-    F -->|No| G[Nothing happens]
-
-    F -->|Yes| I[Attribute calculated]
-    I -->     J[Attribute pushed to<br/>the Profiles Store]
-```
+1. Behavioral data event is received by [Collector](/docs/pipeline/collector/index.md)
+2. Event is enriched by [Enrich](/docs/pipeline/enrichments/index.md)
+3. The Signals stream engine reads from the events stream
+4. The stream engine checks if attributes are defined for the event
+5. Are there any attributes to calculate?
+   * No: nothing happens, and the process ends
+   * Yes: processing continues
+6. Signals evaluates and computes the attributes
+7. Updated attributes are pushed to the Profiles Store
 
 ### Batch source
 
 The batch data source uses dbt to generate and calculate new tables of attributes from your
- Snowplow atomic events table. Signals then syncs them to the Profiles Store periodically using the sync engine.
+Snowplow atomic events table. Signals then syncs them to the Profiles Store periodically using the sync engine.
 
-```mermaid
-flowchart TD
-    subgraph Batch[Warehouse]
-        A[Behavioral data events<br/>arrive in the warehouse] --> B[Events are modeled<br/>into tables]
-        B --> D[Signals checks for<br/>new rows in connected tables]
-    end
-
-    D --> E{Are there<br/>new rows?}
-
-    E -->|No| F[Nothing happens]
-
-    E -->|Yes| H[Attributes synced to<br/>the Profiles Store]
-```
+Batch flow:
+1. Behavioral data events arrive in the warehouse
+2. Events are modeled into tables
+3. Signals compares timestamps to check for new rows in connected tables
+4. Are there any new rows?
+   * No: nothing happens
+   * Yes: Signals syncs them to the Profiles Store
 
 ### External batch source
 
@@ -136,9 +121,9 @@ Use an external batch source to sync tables of existing, pre-calculated values t
 
 ## Services
 
-Services provide a stable interface layer between your calculated attributes and your applications.
+Services are where you define how to use the calculated attributes in your applications.
 
-Each service can contain multiple attribute groups, pinned to specific versions. This provides a consistent set of consumable attributes. We strongly recommend using services in production applications.
+Rather than connecting applications directly to attribute groups, services allow you to consume specific attribute group versions. This provides a consistent set of consumable attributes. We strongly recommend using services in production applications.
 
 By using services you can:
 * Iterate on attribute definitions without worrying about breaking downstream processes
@@ -169,7 +154,7 @@ Standard rule-based interventions can have multiple conditions, or trigger crite
 
 Interventions are targeted based on attribute keys, which determine both the scope and specificity of when they're delivered.
 
-:::info Key constraints
+:::note Key constraints
 Interventions can be defined against any attribute key, as long as its values are non-enumerable. For example, the built-in Snowplow attribute keys `domain_userid`, `domain_sessionid`, and `network_userid` are suitable targets since their values are canonically formatted UUIDs, e.g. `8c9104e3-c300-4b20-82f2-93b7fa0b8feb`.
 :::
 
@@ -189,7 +174,7 @@ To receive and take action on interventions, you'll need to:
 * [Subscribe](/docs/signals/receive-interventions/index.md) to them within your application
 * Define the logic of how the application should react
 
-:::info Attribute key IDs
+:::note Attribute key IDs
 Subscription is by attribute key, not by intervention.
 
 A subscription using a specific attribute key ID, for example a `domain_userid` ID for the current user, will receive all triggered interventions for that ID.

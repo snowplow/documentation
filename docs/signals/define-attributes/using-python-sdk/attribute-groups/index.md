@@ -14,7 +14,7 @@ Define the behavior you want to capture in [attribute groups](/docs/signals/conc
 
 ## Attribute groups by data source
 
-Each of the three available data sources has its own attribute group class. Choose which one to use depending on how you want to calculate and sync the attributes.
+Each of the three available [data sources](/docs/signals/concepts/index.md#data-sources) has its own attribute group class. Choose which one to use depending on how you want to calculate and sync the attributes.
 
 <Tabs groupId="source" queryString>
 <TabItem value="stream" label="StreamAttributeGroup" default>
@@ -163,7 +163,6 @@ To understand what the output of an attribute group will look like, use the Sign
 from snowplow_signals import Signals
 
 # Connect to Signals
-# See the main Configuration section for more on this
 sp_signals = Signals(
         {{ config }}
     )
@@ -201,13 +200,12 @@ If you don't specify a version, Signals will retrieve the latest version.
 
 ## Publishing attribute groups
 
-Use the `publish()` method to [register attribute groups](/docs/signals/define-attributes/using-python-sdk/index.md#publishing-and-deleting) with Signals. This makes them available for real-time calculation and retrieval.
+Use the [`publish()` method](/docs/signals/connection/index.md#publishing-and-deleting) to register attribute groups with Signals. This makes them available for real-time calculation and retrieval.
 
 ```python
 from snowplow_signals import Signals
 
 # Connect to Signals
-# See the main configuration section for more on this
 sp_signals = Signals(
         {{ config }}
     )

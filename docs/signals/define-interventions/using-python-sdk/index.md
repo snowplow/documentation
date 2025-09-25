@@ -7,13 +7,13 @@ description: "Use the Snowplow Signals Python SDK to programmatically define int
 
 To use the [Signals Python SDK](https://pypi.org/project/snowplow-signals/) to define interventions, start by [connecting to Signals](/docs/signals/connection/index.md) to create a `Signals` object. You'll need this connection to publish interventions.
 
-There are two ways to define an intervention using the SDK or API:
+There are two ways to define an intervention using the SDK or [Signals API](/docs/signals/connection/index.md#signals-api):
 * Rule-based interventions (default)
 * Direct interventions
 
 ## Rule-based interventions
 
-Rule-based interventions are triggered automatically when their criteria are met. They use `RuleIntervention` objects, and are published to Signals using `publish`, similar to other configuration objects.
+Rule-based interventions are triggered automatically when their criteria are met. They use `RuleIntervention` objects, and are published to Signals using [`publish()`](/docs/signals/connection/index.md#publishing-and-deleting), similar to other configuration objects.
 
 This is the minimum configuration needed to create an intervention definition:
 
@@ -147,7 +147,11 @@ It will trigger based on attribute changes within the `shopping` attribute group
 
 Direct interventions have no criteria, and are not tied to attribute values. They use `InterventionInstance` objects, and are pushed to Signals using `push_intervention`, rather than being published like other configuration objects.
 
-You can directly push these interventions to any attribute keys using the Signals Python SDK or API. If the intervention is valid, Signals will immediately push it to any subscribers for the targeted attribute key IDs.
+:::note Not available in Snowplow Console
+Direct interventions are only available using the [Signals Python SDK](https://pypi.org/project/snowplow-signals/) or [Signals API](/docs/signals/connection/index.md#signals-api).
+:::
+
+You can directly push these interventions to any attribute keys. If the intervention is valid, Signals will immediately deliver it to any subscribers for the targeted attribute key IDs.
 
 ```python
 from snowplow_signals import AttributeKeyIdentifiers, InterventionInstance, Signals

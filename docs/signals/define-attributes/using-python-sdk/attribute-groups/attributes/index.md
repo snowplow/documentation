@@ -5,15 +5,14 @@ sidebar_label: "Attributes"
 description: "Create attributes programmatically using the Python SDK by specifying event schemas, aggregations, and filtering criteria."
 ---
 
-Attributes represent specific facts about user behavior, and are calculated based on events in your Snowplow pipeline.
-
-To configure an attribute, you will need to set:
+[Attributes](/docs/signals/concepts/index.md#attribute-groups) are defined as part of attribute groups. To create an attribute, you'll need to set:
 * A name, ideally one that describes the attribute
-* Which event schemas it will be calculated from, and what property in those schemas
+* Which event schema to calculate it from
+* What property in the schema to consider for the calculation
 * What kind of aggregation you want to calculate over time, e.g. `mean` or `last`
 * What type of value you want the attribute to hold, e.g. `double` or `string`
 
-Attribute calculation starts when the definitions are applied, and aren't backdated.
+Attribute calculation starts when the definitions are published, and aren't backdated.
 
 ## Minimal example
 

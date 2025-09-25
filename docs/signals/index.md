@@ -3,9 +3,6 @@ title: "Snowplow Signals"
 sidebar_position: 8
 description: "Real-time personalization engine for customer intelligence that computes and acts on behavioral data from Snowplow's data pipeline."
 sidebar_label: "Signals"
-sidebar_custom_props:
-  offerings:
-    - bdp
 ---
 
 Snowplow Signals is a real-time personalization engine for customer intelligence, built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in real time.
@@ -19,11 +16,11 @@ Real-time personalization use cases that are unlocked by Signals include:
 * Contextually relevant advertising
 * Paywall optimization
 
-Your Signals infrastructure is deployed by us into the same cloud as your Snowplow BDP pipeline. You can use the Snowplow BDP Console to first define the data you're interested in, then use the Signals APIs and SDKs to retrieve the calculated [attributes](/docs/signals/concepts/index.md) in your applications to alter your customer's experience and behavior.
+Your Signals infrastructure is deployed by us into the same cloud as your Snowplow BDP pipeline. You can use the Snowplow Console to first define the data you're interested in, then use the Signals API and SDKs to retrieve the calculated [attributes](/docs/signals/concepts/index.md) in your applications to alter your customer's experience and behavior.
 
 As well as attributes, Signals allows you to define [interventions](/docs/signals/concepts/index.md#interventions). This is a way to specify the business logic, based on attribute values, that should trigger actions such as notifications in your application.
 
-Every attribute group and intervention published to the Signals API is versioned, allowing you to maintain strong data governance within the Profiles Store, and to test new Signals configurations without affecting production.
+Every [attribute group](/docs/signals/concepts/index.md#attribute-groups) and intervention published to the Signals API is versioned, allowing you to maintain strong data governance within the Profiles Store, and to test new Signals configurations without affecting production.
 
 ## How does Signals fit into the Snowplow pipeline?
 
@@ -36,7 +33,7 @@ The core Signals components are:
 * **Sync engine**: periodically updates the Profiles Store with batch attributes
 * **Batch engine**: runs in your warehouse to compute attributes from warehouse tables
 
-![](./images/overview-simple.png)
+![Snowplow Signals architecture diagram showing core components including Profiles Store, SDKs, streaming engine, and batch engine](./images/overview-simple.png)
 
 ## Using Signals
 
@@ -46,7 +43,7 @@ Steps for using Signals:
 3. Use the attributes and interventions to take action in your application
 
 :::note Warehouse support
-Only Snowflake is supported currently.
+Only Snowflake and BigQuery are supported currently.
 :::
 
 Check out the [quick start tutorial](/tutorials/signals-quickstart/start) to get started.
@@ -61,7 +58,7 @@ Read more about attributes and interventions on the [concepts](/docs/signals/con
 
 ### 2. Apply the configuration
 
-We recommend using the BDP Console to define your attributes and interventions. You could also use the Signals Python SDK, or even the Signals API.
+We recommend using the Console to define your attributes and interventions. You could also use the [Signals Python SDK](https://pypi.org/project/snowplow-signals/), or even the [Signals API](/docs/signals/connection/index.md#signals-api).
 
 Once you've created your configurations, apply them to Signals by publishing them. It will start calculating attributes and populating the Profiles Store.
 
@@ -69,4 +66,4 @@ Once you've created your configurations, apply them to Signals by publishing the
 
 Retrieve calculated attributes in your application using the [Node.js](https://www.npmjs.com/package/@snowplow/signals-node) or [Python](https://pypi.org/project/snowplow-signals/) Signals SDKs. You could also use the Signals API.
 
-Use the attributes to update the user experience, or subscribe to [interventions](/docs/signals/concepts/index.md) to take action based on user behavior.
+Use the attributes to update the user experience, or subscribe to [interventions](/docs/signals/concepts/index.md) to automatically take action based on user behavior.

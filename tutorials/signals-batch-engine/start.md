@@ -6,7 +6,7 @@ description: "Set up the Snowplow Signals batch engine to calculate historical b
 
 Welcome to the [Snowplow Signals](/docs/signals/) batch engine tutorial.
 
-Snowplow Signals is a real-time personalization engine for customer intelligence, built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in near real time.
+Snowplow Signals is a real-time personalization engine for customer intelligence, built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in real time.
 
 The Signals batch engine is a CLI tool to create the attributes in your warehouse to compute over larger historical data that otherwise would not be possible / efficient to do so in real time. It isn't required to use Signals: it's only necessary if you want to:
 * Calculate attributes from Snowplow events in your warehouse

@@ -6,7 +6,7 @@ description: "Build a real-time prospect scoring system using Snowplow Signals a
 
 Welcome to the [Snowplow Signals](/docs/signals/) real-time prospect scoring tutorial.
 
-Snowplow Signals is a real-time personalization engine for customer intelligence, built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in near real time.
+Snowplow Signals is a real-time personalization engine for customer intelligence, built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in real time.
 
 This guide will through the process of building a real-time prospect scoring system using Signals together with a machine learning model. You'll learn how to leverage Snowplow event data to predict a prospect's likelihood to convert on your website, and how to trigger personalized engagements.
 
@@ -44,8 +44,6 @@ We're calculating aggregated attributes based off real-time stream event data, s
 * [ngrok](https://dashboard.ngrok.com/) account and Authtoken API key
 * Google Colab
 
-Check out the [Signals](/docs/signals/define-attributes) documentation to find out how to get the Signals credentials.
-
 ## Architecture
 
 This tutorial uses this [Jupyter notebook](https://colab.research.google.com/github/snowplow-incubator/signals-notebooks/blob/main/web/web_prospect_scoring_end_to_end.ipynb).
@@ -53,7 +51,7 @@ This tutorial uses this [Jupyter notebook](https://colab.research.google.com/git
 The system consists of three main blocks:
 
 1. **Your marketing website**: as users browse the website, Snowplow events are sent to the Snowplow Collector
-2. **Snowplow Infrastructure**: the Collector captures the events, and Signals calculates aggregated user attributes in near real time e.g., `num_pageviews`, `num_sessions`
+2. **Snowplow Infrastructure**: the Collector captures the events, and Signals calculates aggregated user attributes in real time e.g., `num_pageviews`, `num_sessions`
 3. **Intermediary `/predict` API**:  an API that calls the Signals API to get the latest attributes, runs an ML model on the Signals output, and sends the response back
 
 ![](./images/solution_overview.png)
@@ -66,10 +64,4 @@ You can replace the ML model with any other back-end system that you'd use to ac
 
 Log in to [Console](https://console.snowplowanalytics.com) and navigate to the **Signals** section.
 
-If your Overview page looks like this, you'll need to [set up a Signals connection](/docs/signals/define-attributes/) to deploy the required infrastructure:
-
-<!-- TODO image initial landing page no deployment -->
-
-If it looks like this, continue with the tutorial:
-
-<!-- TODO image overview page with connection -->
+You'll need to [set up a Signals connection](/docs/signals/connection/) if you don't have one yet.

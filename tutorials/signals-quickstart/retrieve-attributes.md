@@ -10,7 +10,7 @@ For this tutorial, we've provided a [Jupyter notebook](https://colab.research.go
 
 ## Finding your current session ID
 
-In your real application code, you can access the current session ID and use it to retrieve the relevant attribute values. The attributes are being calculated in near real time, in session. Read about how to access IDs such as `domain_sessionid` in your web application in [Getting cookie information](/docs/sources/trackers/web-trackers/cookies-and-local-storage/getting-cookie-values/#getdomainuserid).
+In your real application code, you can access the current session ID and use it to retrieve the relevant attribute values. The attributes are being calculated in real time, in session. Read about how to access IDs such as `domain_sessionid` in your web application in [the JavaScript tracker](/docs/sources/trackers/web-trackers/cookies-and-local-storage/getting-cookie-values/#getdomainuserid) documentation.
 
 To test this out, use the [Snowplow Inspector](/docs/data-product-studio/data-quality/snowplow-inspector/) browser extension to find out your current session ID on your web application. Click around and generate some page view events. Then find your `Domain Session ID` in the Inspector.
 
@@ -18,9 +18,9 @@ To test this out, use the [Snowplow Inspector](/docs/data-product-studio/data-qu
 
 ## Connecting to Signals
 
-Install the Signals Python SDK into the notebook, and connect to Signals.
+Install the [Signals Python SDK](https://pypi.org/project/snowplow-signals/) into the notebook, and connect to Signals.
 
-1. Go to **Signals** > **Overview** in BDP Console to find your Signals credentials
+1. Go to **Signals** > **Overview** in Snowplow Console to find your Signals credentials
 2. Add them to the notebook secrets:
 
 ![Screenshot showing how to add secrets](./images/notebook-secrets.png)

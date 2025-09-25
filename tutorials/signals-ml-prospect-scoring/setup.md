@@ -6,7 +6,7 @@ description: "Configure Google Colab notebook with Snowplow Signals credentials 
 
 This tutorial uses a Google Colab Juypter [notebook](https://colab.research.google.com/github/snowplow-incubator/signals-notebooks/blob/main/web/web_prospect_scoring_end_to_end.ipynb). Follow along in the notebook using your own data.
 
-Start by configuring your credentials in the notebook. Go to **Signals** > **Overview** in BDP Console to find your Signals credentials. Add them, along with your warehouse and ngrok details, to the notebook secrets:
+Start by configuring your credentials in the notebook. Go to **Signals** > **Overview** in Snowplow Console to find your Signals credentials. Add them, along with your warehouse and ngrok details, to the notebook secrets:
 
 ![](./images/colab_credentials.jpeg)
 

@@ -6,9 +6,9 @@ description: "Group multiple attribute groups together using services to create 
 
 [Services](/docs/signals/concepts/index.md#services) group attribute groups together for serving to your applications.
 
-To create a service, go to **Signals** > **Services** in BDP Console and follow the instructions.
+To create a service, go to **Signals** > **Services** in Snowplow Console and follow the instructions.
 
-<!-- TODO image create service page-->
+![Create service form with name, description, owner, and attribute group selection](../../images/service-create.png)
 
 To configure a service, you'll need to specify:
 * A unique name
@@ -22,7 +22,7 @@ When choosing which attribute groups to include, you'll select a specific versio
 
 Services themselves are not versioned. You can update them to use different attribute groups, or different attribute group versions, at any time.
 
-<!-- TODO image create service page showing group versions -->
+![Service configuration showing selected attribute groups with version numbers](../../images/service-groups.png)
 
 ## Managing services
 
@@ -30,8 +30,6 @@ Services are automatically published as soon as they're created. They're a wrapp
 
 To edit a service definition, go to the service details page and click the **Edit** button.
 
-<!-- TODO image details page -->
+To delete a service, go to the service details page and click the `⋮` button, then choose **Delete**.
 
-To delete a service, go to the service details page and click the 3 dots button, then choose **Delete**.
-
-<!-- TODO image details page button -->
+![Service management menu with Edit and Delete options](../../images/service-edit-delete.png)

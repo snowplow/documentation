@@ -4,7 +4,7 @@ position: 4
 description: "Create and train an XGBoost machine learning model using historical Snowplow behavioral data to predict prospect conversion."
 ---
 
-As prospects browse your website, Signals will calculate the aggregated attributes in near real time.
+As prospects browse your website, Signals will calculate the aggregated attributes in real time.
 
 We want to score the combination of these attributes using an ML model to better understand if a specific prospect is likely to submit a form.
 

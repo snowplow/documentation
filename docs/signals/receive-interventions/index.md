@@ -7,8 +7,8 @@ description: "Configure and deploy interventions to trigger real-time actions ba
 [Interventions](/docs/signals/concepts/index.md#interventions) are automated triggers that enable real-time actions based on user behavior.
 
 Subscribe to interventions to automatically respond within your application. You have three options for receiving interventions, depending on your use case or application:
-* Signals Python SDK
-* Plugin for the JavaScript tracker
+* [Signals Python SDK](https://pypi.org/project/snowplow-signals/)
+* Plugin for the [browser tracker](/docs/sources/trackers/web-trackers/index.md)
 * [Signals API](/docs/signals/connection/index.md#signals-api)
 
 Subscription is by attribute key ID, not by individual intervention. Start by [connecting to Signals](/docs/signals/connection/index.md).
@@ -16,7 +16,7 @@ Subscription is by attribute key ID, not by individual intervention. Start by [c
 
 ## Using the Signals Python SDK
 
-Subscribe by providing IDs for the attribute keys you're interested in receiving interventions for. The IDs must be UUIDs.
+Subscribe by providing IDs for the attribute keys you're interested in receiving interventions for. The IDs must be in a non-enumerable format, such as UUIDs.
 
 ```python
 from snowplow_signals import AttributeKeyIdentifiers, InterventionInstance
@@ -46,12 +46,12 @@ subscription.stop()
 
 ## Using the browser tracker plugin
 
-For web applications using the Snowplow browser tracker, you can subscribe to interventions using the [Signals Interventions plugin](https://github.com/snowplow-incubator/signals-browser-plugin) <!-- TODO: Update URL to non-private repo -->.
+For web applications using the Snowplow [browser tracker](/docs/sources/trackers/web-trackers/index.md), you can subscribe to interventions using the [Signals Interventions plugin](https://github.com/snowplow-incubator/signals-browser-plugin).
 
 The workflow is:
 1. Create a Snowplow tracker with the plugin configured
-3. Add custom handlers to react to the interventions
-4. Subscribe to interventions
+2. Add custom handlers to react to the interventions
+3. Subscribe to interventions
 
 ```typescript
 import { newTracker } from '@snowplow/browser-tracker';

@@ -153,9 +153,3 @@ The Signals API allows you to directly configure and retrieve attributes and int
 ```
 
 Your API documentation is linked in Console on the **Overview** page, under **Configuration details**.
-
-## Example use cases
-
-Check out the Signals tutorials:
-* [Quick Start](/tutorials/signals-quickstart/start) for defining stream attributes using the UI or the Python SDK
-* [Real-time prospect scoring with ML](/tutorials/signals-ml-prospect-scoring/intro) solution accelerator uses the Python SDK

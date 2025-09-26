@@ -73,7 +73,7 @@ In order to make use of the plugin, you will need to register it with the tracke
 window.snowplow(
     'addPlugin',
     'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-screen-tracking@latest/dist/index.umd.min.js',
-    ['snowplowScreenTrackingPlugin', 'ScreenTrackingPlugin']
+    ['snowplowScreenTracking', 'ScreenTrackingPlugin']
 );
 ```
 
@@ -140,8 +140,8 @@ trackScreenView({
 ```javascript
 window.snowplow(
     'addPlugin',
-    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-button-click-tracking@latest/dist/index.umd.min.js',
-    ['snowplowScreenTrackingPlugin', 'ScreenTrackingPlugin'],
+    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-screen-tracking@latest/dist/index.umd.min.js',
+    ['snowplowScreenTracking', 'ScreenTrackingPlugin'],
     [
       {
         screenContext: true, // enabled by default
@@ -181,8 +181,8 @@ The `Screen` entity is based off the internal state of the tracker only. To make
 ```javascript
 window.snowplow(
     'addPlugin',
-    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-button-click-tracking@latest/dist/index.umd.min.js',
-    ['snowplowScreenTrackingPlugin', 'ScreenTrackingPlugin'],
+    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-screen-tracking@latest/dist/index.umd.min.js',
+    ['snowplowScreenTracking', 'ScreenTrackingPlugin'],
     [
       {
         screenEngagementAutotracking: true, // enabled by default

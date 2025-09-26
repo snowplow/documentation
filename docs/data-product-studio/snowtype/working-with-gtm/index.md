@@ -44,17 +44,17 @@ cd snowtype-gtm-container-id
 # This will create a few needed files for the project.
 npm init -y
 # This will install the latest version of Snowtype.
-npm install @snowplow/snowtype@latest
+npm install @snowplow/snowtype@latest@latest
 # This will start the Snowtype init flow, 
 # in which you should select 'Google Tag Manager' when 
 # prompted to select a tracker.
-npx @snowplow/snowtype init
+npx @snowplow/snowtype@latest init
 ```
 
 After you have completed the `init` flow and have added your desired configuration, you can go ahead and generate the code you need to use:
 
 ```bash
-npx @snowplow/snowtype generate
+npx @snowplow/snowtype@latest generate
 ```
 
 After that you can find the code in the specified `outpath` attribute of your configuration file.

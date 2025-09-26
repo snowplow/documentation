@@ -13,7 +13,7 @@ Using Snowtype you can get notified, at runtime, about schema validation errors 
 To opt-in to client-side validation you should include the `--validations` flag when you are generating your code.
 
 ```sh
-npx @snowplow/snowtype generate --validations
+npx @snowplow/snowtype@latest generate --validations
 ```
 
 For validations to work, you will also need to install `ajv@8`, `ajv-formats@2` and `ajv-draft-04@1`.

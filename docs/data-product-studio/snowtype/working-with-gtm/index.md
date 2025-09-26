@@ -44,7 +44,7 @@ cd snowtype-gtm-container-id
 # This will create a few needed files for the project.
 npm init -y
 # This will install the latest version of Snowtype.
-npm install @snowplow/snowtype@latest@latest
+npm install @snowplow/snowtype@latest
 # This will start the Snowtype init flow, 
 # in which you should select 'Google Tag Manager' when 
 # prompted to select a tracker.

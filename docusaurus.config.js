@@ -27,6 +27,10 @@ module.exports = {
     locales: ['en'],
   },
 
+  future: {
+    v4: true,
+  },
+
   clientModules: [
     require.resolve('./cookieConsent.js'),
     require.resolve('./snowplow.js'),

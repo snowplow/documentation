@@ -13,6 +13,9 @@ Subscribe to interventions to automatically respond within your application. You
 
 Subscription is by attribute key ID, not by individual intervention. Start by [connecting to Signals](/docs/signals/connection/index.md).
 
+:::note Sent once
+An intervention is sent only the first time the criteria are met. Read an example of how this works on the [Concepts page](/docs/signals/concepts/index.md#targeting-example).
+:::
 
 ## Using the Signals Python SDK
 

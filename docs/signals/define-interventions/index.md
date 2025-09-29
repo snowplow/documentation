@@ -26,6 +26,10 @@ Next, configure when the intervention should trigger.
 
 Criteria are the conditional rules that determine when an intervention should trigger.
 
+:::note Sent once
+An intervention is sent only the first time the criteria are met. Read an example of how this works on the [Concepts page](/docs/signals/concepts/index.md#targeting-example).
+:::
+
 Defining intervention criteria has three steps:
 1. Select which attribute from a published attribute group to evaluate
 2. Choose which logical operator to use

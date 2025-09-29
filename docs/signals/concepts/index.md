@@ -196,8 +196,8 @@ As an example, consider these two interventions:
 
 To receive interventions for the current user and session, subscribe to their interventions by providing the `domain_userid` and `domain_sessionid` ID values.
 
-Interventions will be received when:
-* The user views 10 pages, or the session has an ad event
+Interventions will be triggered when:
+* The user views 10 pages, **or** the session has an ad event
   * `intervention1` will be delivered to one of the subscribed targets.
   * Signals will initially create a payload for each target. However, they'll have the same ID as they're triggered by a single event, and will be deduped.
 * The user exceeds 20 button clicks for the first time
@@ -209,7 +209,7 @@ Assuming it's the user's first session, the flow looks like this:
   * `intervention1` is triggered and delivered to one of the targets
 * More page views, button clicks, and ad events
 * Tenth page view
-  * Nothing happens: because `intervention1` triggered already on seeing the ad event in this session, it's not triggered again
+  * Nothing happens: because `intervention1` sent already on seeing the ad event in this session, it's not triggered again
 * Twenty-first button click
   * The attribute value changes from 20 to 21, crossing the required threshold
   * `intervention2` is triggered and delivered to the user target
@@ -217,6 +217,8 @@ Assuming it's the user's first session, the flow looks like this:
   * Nothing happens: the threshold has already passed
 
 This user has already seen more than 10 pages, so `intervention1` can never be triggered by that rule for them. However, if their current session expires, and the application subscribes to their new `domain_sessionid` ID, `intervention1` can be triggered again by the first ad event of the session.
+
+Likewise, the user has already clicked a button more than 20 times, so `intervention2` will never be sent to them again.
 
 ### Types of intervention
 

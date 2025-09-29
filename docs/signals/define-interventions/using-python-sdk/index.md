@@ -15,6 +15,10 @@ There are two ways to define an intervention using the SDK or [Signals API](/doc
 
 Rule-based interventions are triggered automatically when their criteria are met. They use `RuleIntervention` objects, and are published to Signals using [`publish()`](/docs/signals/connection/index.md#publishing-and-deleting), similar to other configuration objects.
 
+:::note Sent once
+An intervention is sent only the first time the criteria are met. Read an example of how this works on the [Concepts page](/docs/signals/concepts/index.md#targeting-example).
+:::
+
 This is the minimum configuration needed to create an intervention definition:
 
 ```python

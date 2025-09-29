@@ -62,28 +62,28 @@ If enabled, the [activity tracking function](/docs/sources/trackers/web-trackers
 
 Page pings are identified by `e=pp`. As well as all the standard web fields, there are four additional fields that `pp` includes, which are used to identify how users are scrolling over web pages:
 
-| **Parameter** | **Table Column** | **Type** | **Description**                                    | **Example values** |
-| ------------- | ---------------- | -------- | -------------------------------------------------- |
-| `pp_mix`      | `pp_xoffset_min` | integer  | Minimum page x offset seen in the last ping period | `0`                |
-| `pp_max`      | `pp_xoffset_max` | integer  | Maximum page x offset seen in the last ping period | `100`              |
-| `pp_miy`      | `pp_yoffset_min` | integer  | Minimum page y offset seen in the last ping period | `0`                |
-| `pp_may`      | `pp_yoffset_max` | integer  | Maximum page y offset seen in the last ping period | `100`              |
+| Parameter | Table Column     | Type    | Description                                        | Example values |
+| --------- | ---------------- | ------- | -------------------------------------------------- | -------------- |
+| `pp_mix`  | `pp_xoffset_min` | integer | Minimum page x offset seen in the last ping period | `0`            |
+| `pp_max`  | `pp_xoffset_max` | integer | Maximum page x offset seen in the last ping period | `100`          |
+| `pp_miy`  | `pp_yoffset_min` | integer | Minimum page y offset seen in the last ping period | `0`            |
+| `pp_may`  | `pp_yoffset_max` | integer | Maximum page y offset seen in the last ping period | `100`          |
 
 #### Transaction tracking
 
 Transaction events allow you to track a transaction. The items of the transaction can be tracked using [Transaction Item events](#transaction-item-events).
 
-| **Parameter** | **Table Column** | **Type** | **Description**                                     | **Example values** |
-| ------------- | ---------------- | -------- | --------------------------------------------------- |
-| `tr_id`       | `tr_orderid`     | text     | Order ID                                            | `12345`            |
-| `tr_af`       | `tr_affiliation` | text     | Transaction affiliation (e.g. channel)              | `Web`              |
-| `tr_tt`       | `tr_total`       | decimal  | Transaction total value                             | `9.99`             |
-| `tr_tx`       | `tr_tax`         | decimal  | Transaction tax value (i.e. amount of VAT included) | `1.98`             |
-| `tr_sh`       | `tr_shipping`    | decimal  | Delivery cost charged                               | `3.00`             |
-| `tr_ci`       | `tr_city`        | text     | Delivery address: city                              | `London`           |
-| `tr_st`       | `tr_state`       | text     | Delivery address: state                             | `Denver`           |
-| `tr_co`       | `tr_country`     | text     | Delivery address: country                           | `United Kingdom`   |
-| `tr_cu`       | `tr_currency`    | text     | Transaction Currency                                | `GBP`              |
+| Parameter | Table Column     | Type    | Description                                         | Example values   |
+| --------- | ---------------- | ------- | --------------------------------------------------- | ---------------- |
+| `tr_id`   | `tr_orderid`     | text    | Order ID                                            | `12345`          |
+| `tr_af`   | `tr_affiliation` | text    | Transaction affiliation (e.g. channel)              | `Web`            |
+| `tr_tt`   | `tr_total`       | decimal | Transaction total value                             | `9.99`           |
+| `tr_tx`   | `tr_tax`         | decimal | Transaction tax value (i.e. amount of VAT included) | `1.98`           |
+| `tr_sh`   | `tr_shipping`    | decimal | Delivery cost charged                               | `3.00`           |
+| `tr_ci`   | `tr_city`        | text    | Delivery address: city                              | `London`         |
+| `tr_st`   | `tr_state`       | text    | Delivery address: state                             | `Denver`         |
+| `tr_co`   | `tr_country`     | text    | Delivery address: country                           | `United Kingdom` |
+| `tr_cu`   | `tr_currency`    | text    | Transaction Currency                                | `GBP`            |
 
 #### Transaction item events
 

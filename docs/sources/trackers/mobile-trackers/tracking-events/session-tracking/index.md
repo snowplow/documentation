@@ -103,7 +103,7 @@ For instance, with this configuration:
 SessionConfiguration(
     foregroundTimeout: Measurement(value: 360, unit: .seconds),
     backgroundTimeout: Measurement(value: 15, unit: .seconds)
-)       
+)
 ```
 
   </TabItem>
@@ -212,30 +212,23 @@ Snowplow.createTracker(getApplicationContext(), namespace, networkConfig, sessio
 
 ## Decorating outgoing links using cross-navigation tracking
 
-:::note Not available before v6
+:::note
 This feature was introduced in version 6.0.0 of the iOS and Android trackers.
 :::
 
-The tracker provides a `decorateLink` API to decorate outgoing links from the mobile app to another mobile app or to a website.
-This API adds an `_sp` parameter to the links containing information about the user, app, and current session.
-This is useful for tracking the movement of users across different apps and platforms.
-It is part of our cross-navigation solution and is equivalent to [cross-domain tracking on the JavaScript tracker](/docs/sources/trackers/web-trackers/cross-domain-tracking/index.md).
+The `decorateLink` function is part of Snowplow's [cross-navigation solution](/docs/events/cross-navigation/index.md) for tracking the movement of users across different apps and platforms.
 
-For example, calling `decorateLink` on `appSchema://path/to/page` will produce the following result:
+Choose which parameters to include using a `CrossDeviceParameterConfiguration` object. The `domainUserId` and `timestamp` are always included automatically.
 
-```
-appSchema://path/to/page?_sp=domainUserId.timestamp.sessionId.subjectUserId.sourceId.platform.reason
-```
+This table shows the options:
 
-The `decorateLink` function adds the following information to the link (configurable using the `CrossDeviceParameterConfiguration` object passed to the method):
-
-- `domainUserId` – The current tracker generated user identifier (value of `SessionController.userId`) – required.
-- `timestamp` – The current ms precision epoch timestamp – required.
-- `sessionId` - The current session identifier (value of `SessionController.sessionId`) – optional.
-- `subjectUserId` - The custom business user identifier (value of `SubjectController.userId`) – optional.
-- `sourceId` – The `appId` (value of `TrackerConfiguration.appId`) – optional.
-- `platform` - The platform of the current device (value of `TrackerController.devicePlatform` – optional.
-- `reason` – Identifier/information for cross-navigation – optional.
+| Property         | Description                      | Value used                         |
+| ---------------- | -------------------------------- | ---------------------------------- |
+| `sessionId`      | Current session UUID identifier  | `SessionController.sessionId`      |
+| `subjectUserId`  | Custom business user identifier  | `SubjectController.userId`         |
+| `sourceId`       | Application identifier           | `TrackerConfiguration.appId`       |
+| `sourcePlatform` | Platform of the current device   | `TrackerController.devicePlatform` |
+| `reason`         | Custom information or identifier | Custom string                      |
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>

@@ -46,6 +46,12 @@ The directory _inside_ the container (what goes after `destination=`) must be ex
 
 :::
 
+Alternatively, if you are running Micro as a Java application, put your enrichment configurations in `some-directory/enrichments` on your machine (`enrichments` must be called exactly that) and use the following command:
+
+<CodeBlock language="bash">{
+`java -cp micro-${versions.snowplowMicro}.jar:some-directory com.snowplowanalytics.snowplow.micro.Main`
+}</CodeBlock>
+
 Once Micro starts, you should see messages like these:
 
 ```

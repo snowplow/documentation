@@ -16,10 +16,10 @@ import styles from './styles.module.css'
 import { Paper } from '@mui/material'
 
 import { useTutorial, TutorialKind } from '@site/src/components/tutorials/hooks'
-import { AlignLeft } from 'lucide-react';
+import { AlignLeft } from 'lucide-react'
+import HeadJSONLD from '../../../components/SchemaPlugin'
 
-import Demo_Ad from '../../../components/ui/Demo_Ad';
-
+import Demo_Ad from '../../../components/ui/Demo_Ad'
 
 /**
  * Decide if the toc should be rendered, on mobile or desktop viewports
@@ -50,38 +50,43 @@ export default function DocItemLayout({ children }: Props): JSX.Element {
   const tutorial = useTutorial()
 
   return (
-    <div className="row">
-      <div className={clsx('col', !docTOC.hidden && styles.docItemCol)}>
-        <DocVersionBanner />
-        <div className={styles.docItemContainer}>
-          <article className="overflow-x-auto max-w-fit leading-relaxed prose prose-headings:font-bold prose-p:mt-0 prose-table:rounded-lg prose-td:ps-3 prose-td:pe-3 prose-th:ps-3 prose-th:pe-3 prose-ul:mt-0 prose-ol:mt-0 prose-code:before:content-none prose-code:after:content-none prose-code:font-normal prose-code:text-sm prose-img:mx-auto prose-img:block ">
-            <DocBreadcrumbs />
-            <DocVersionBadge />
-            {docTOC.mobile}
-            {tutorial === TutorialKind.Tutorial ? (
-              <Paper sx={{ p: 2, pt: 2 }}>
+    <>
+      <HeadJSONLD />
+      <div className="row">
+        <div className={clsx('col', !docTOC.hidden && styles.docItemCol)}>
+          <DocVersionBanner />
+          <div className={styles.docItemContainer}>
+            <article className="overflow-x-auto max-w-fit leading-relaxed prose prose-headings:font-bold prose-p:mt-0 prose-table:rounded-lg prose-td:ps-3 prose-td:pe-3 prose-th:ps-3 prose-th:pe-3 prose-ul:mt-0 prose-ol:mt-0 prose-code:before:content-none prose-code:after:content-none prose-code:font-normal prose-code:text-sm prose-img:mx-auto prose-img:block ">
+              <DocBreadcrumbs />
+              <DocVersionBadge />
+              {docTOC.mobile}
+              {tutorial === TutorialKind.Tutorial ? (
+                <Paper sx={{ p: 2, pt: 2 }}>
+                  <DocItemContent>{children}</DocItemContent>
+                </Paper>
+              ) : (
                 <DocItemContent>{children}</DocItemContent>
-              </Paper>
-            ) : (
-              <DocItemContent>{children}</DocItemContent>
-            )}
-            <DocItemFooter />
-          </article>
-          <DocItemPaginator />
+              )}
+              <DocItemFooter />
+            </article>
+            <DocItemPaginator />
+          </div>
         </div>
+        {docTOC.desktop && (
+          <div className="col col--3">
+            <div className="sticky top-16">
+              <div className="flex items-center gap-2 my-1">
+                <AlignLeft size={16} className="opacity-70 text-foreground" />
+                <p className="text-[0.825rem] font-normal opacity-70 text-foreground m-0 pl-1">
+                  On this page
+                </p>
+              </div>
+              {docTOC.desktop}
+              <Demo_Ad />
+            </div>
+          </div>
+        )}
       </div>
-      {docTOC.desktop && 
-      <div className="col col--3">
-        <div className="sticky top-16">
-        <div className='flex items-center gap-2 my-1'>
-          <AlignLeft size={16} className='opacity-70 text-foreground' />
-          <p className="text-[0.825rem] font-normal opacity-70 text-foreground m-0 pl-1">On this page</p>
-        </div>
-        {docTOC.desktop}
-        <Demo_Ad />
-        </div>
-      </div>
-      }
-    </div>
+    </>
   )
 }

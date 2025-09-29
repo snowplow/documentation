@@ -1,5 +1,5 @@
 ---
-title: "RDB Loader (Redshift, Snowflake, Databricks)"
+title: "RDB Loader (Redshift, Databricks)"
 sidebar_position: 1
 ---
 
@@ -10,7 +10,7 @@ import CrossCloudDiagram from '@site/docs/api-reference/loaders-storage-targets/
 import StreamingVsRDB from '@site/docs/api-reference/loaders-storage-targets/_snowflake-streaming-vs-rdb.md';
 ```
 
-We use the name RDB Loader (from "relational database") for a set of applications that can be used to load Snowplow events into a data warehouse. Use these tools if you want to load into **Redshift** (including Redshift serverless), **Snowflake** or **Databricks**. For other destinations, see [here](/docs/api-reference/loaders-storage-targets/index.md).
+We use the name RDB Loader (from "relational database") for a set of applications that can be used to load Snowplow events into a data warehouse. Use these tools if you want to load into **Redshift** (including Redshift serverless), **Databricks**, or **Snowflake** (the latter not recommended). For other destinations, see [here](/docs/api-reference/loaders-storage-targets/index.md).
 
 <Tabs groupId="warehouse" queryString lazy>
   <TabItem value="redshift" label="Redshift" default>
@@ -27,7 +27,7 @@ We use the name RDB Loader (from "relational database") for a set of application
 
 :::tip Schemas in Redshift, Snowflake and Databricks
 
-For more information on how events are stored in the warehouse, check the [mapping between Snowplow schemas and the corresponding warehouse column types](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md).
+For more information on how events are stored in the warehouse, check the [mapping between Snowplow schemas and the corresponding warehouse column types](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md).
 
 :::
 

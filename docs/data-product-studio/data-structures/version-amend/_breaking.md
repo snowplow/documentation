@@ -8,6 +8,6 @@ Different data warehouses handle schema evolution slightly differently. Use the 
 
 :::warning
 
-In Redshift and Databricks, changing _size_ may also mean _type_ change; e.g. changing the `maximum` integer from `30000` to `100000`. See our documentation on [how schemas translate to database types](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md).
+In Redshift and Databricks, changing _size_ may also mean _type_ change; e.g. changing the `maximum` integer from `30000` to `100000`. See our documentation on [how schemas translate to database types](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md).
 
 :::

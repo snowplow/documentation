@@ -79,7 +79,7 @@ For more extensive changes, you can also bring your own configuration file (`mic
 <summary>Example</summary>
 
 ```hcl reference title="micro.conf"
-https://github.com/snowplow-incubator/snowplow-micro/blob/master/example/micro.conf
+https://github.com/snowplow/snowplow-micro/blob/master/example/micro.conf
 ```
 
 </details>

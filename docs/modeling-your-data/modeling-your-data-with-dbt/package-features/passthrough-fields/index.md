@@ -59,7 +59,7 @@ A more useful case for the SQL block is to extract a specific field from an enti
 
 **Step 1. Making fields available in the events table**
 
-For Redshift and Postgres users, entities and self describing events are not part of the standard events table. Instead, each type of entity/sde is in its own table. The table name and the fields in the table will be determined by the entity’s schema. See [how schemas translate to the warehouse](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md) for more details.
+For Redshift and Postgres users, entities and self describing events are not part of the standard events table. Instead, each type of entity/sde is in its own table. The table name and the fields in the table will be determined by the entity’s schema. See [how schemas translate to the warehouse](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md) for more details.
 
 In order for you to use fields from there through passthrough fields, you would need to first make sure that those fields are part of the [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md#events-this-run) table. Any custom entities or self-describing events can be added to this table (which get de-duped by taking the earliest `collector_tstamp` record) by using the `snowplow__entities_or_sdes` variable in our package. See [modeling entities](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/modeling-entities/index.md) for more information and examples.
 

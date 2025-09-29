@@ -8,9 +8,8 @@ hide_title: true
 ```mdx-code-block
 import Badges from '@site/src/components/Badges';
 import ThemedImage from '@theme/ThemedImage';
-import ReactMarkdown from 'react-markdown';
-import remarkGfm from 'remark-gfm';
 import {versions} from '@site/src/componentVersions';
+import Apperrors from "@site/docs/reusable/data-modeling/app-errors/_index.md"
 ```
 
 <Badges badgeType="dbt-package Release" pkg="mobile"></Badges>&nbsp;
@@ -31,7 +30,6 @@ The package contains a fully incremental model that transforms raw mobile event 
 
 The Snowplow mobile data model aggregates Snowplow's out-of-the-box mobile events to create a set of derived tables - screen views, sessions, and users. These contain many useful dimensions, as well as calculated measures such as screen views per session.
 
-<p align="center">
 <ThemedImage
 alt='Mobile Package data flow'
 sources={{
@@ -39,17 +37,14 @@ light: require('./images/mobile-process-light.drawio.png').default,
 dark: require('./images/mobile-process-dark.drawio.png').default
 }}
 />
-</p>
 
-<ReactMarkdown children={`
-| snowplow-mobile version       | dbt versions       | BigQuery | Databricks | Redshift | Snowflake | Postgres |
-| ----------------------------- | ------------------ | :------: | :--------: | :------: | :-------: | :------: |
-| ${versions.dbtSnowplowMobile} | >=1.6.0 to <2.0.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
-| 0.7.2                         | >=1.3.0 to <2.0.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
-| 0.6.3                         | >=1.3.0 to <2.0.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
-| 0.5.5                         | >=1.0.0 to <1.3.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
-| 0.2.0                         | >=0.20.0 to <1.0.0 |    ✅     |     ❌      |    ✅     |     ✅     |    ✅     |
-`} remarkPlugins={[remarkGfm]} />
+| snowplow-mobile version      | dbt versions        | BigQuery | Databricks | Redshift | Snowflake | Postgres |
+| ---------------------------- | ------------------- | :------: | :--------: | :------: | :-------: | :------: |
+| {versions.dbtSnowplowMobile} | >=1.6.0 to \<2.0.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
+| 0.7.2                        | >=1.3.0 to \<2.0.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
+| 0.6.3                        | >=1.3.0 to \<2.0.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
+| 0.5.5                        | >=1.0.0 to \<1.3.0  |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |
+| 0.2.0                        | >=0.20.0 to \<1.0.0 |    ✅     |     ❌      |    ✅     |     ✅     |    ✅     |
 
 ## Overview
 
@@ -76,8 +71,4 @@ By default they are disabled. They can be enabled by configuring the `dbt_projec
 
 Currently the App Errors module, used for crash reporting, is the only optional module. More will be added in the future as the tracker's functionality expands.
 
-```mdx-code-block
-import Apperrors from "@site/docs/reusable/data-modeling/app-errors/_index.md"
-
 <Apperrors packageName="mobile" variable="snowplow__enable_app_errors_module"/>
-```

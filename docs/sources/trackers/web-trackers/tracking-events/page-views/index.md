@@ -19,7 +19,7 @@ Page view events must be **manually tracked**.
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)">
 
-```javascript runnable
+```javascript
 snowplow('trackPageView');
 ```
 
@@ -43,7 +43,7 @@ If you wish, you can also override the title with a custom value:
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)">
 
-```javascript runnable
+```javascript
 snowplow('trackPageView', { title: 'my custom page title' });
 ```
 
@@ -151,7 +151,7 @@ To disable this entity, set `"webPage": false` in the `"contexts"` object within
 The [web_page](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0) context entity consists of the following property:
 
 | Attribute | Description                             | Required? |
-|-----------|-----------------------------------------|-----------|
+| --------- | --------------------------------------- | --------- |
 | `id`      | An identifier (UUID) for the page view. | Yes       |
 
 </details>

@@ -165,7 +165,7 @@ An example of tracking a user listening to a music mix:
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
 
-```javascript runnable
+```javascript
 snowplow('trackStructEvent', {
   category: 'Mixes',
   action: 'Play',

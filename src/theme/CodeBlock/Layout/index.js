@@ -6,15 +6,11 @@ import Title from '@theme/CodeBlock/Title'
 import Content from '@theme/CodeBlock/Content'
 import Buttons from '@theme/CodeBlock/Buttons'
 import Box from '@mui/material/Box'
-import RunButton from '@site/src/components/RunnableSnippets/RunButton'
-import { parseRunnable } from '@site/src/components/RunnableSnippets/docsTrackerUtils'
 import styles from './styles.module.css'
 
 export default function CodeBlockLayout({className}) {
   const {metadata} = useCodeBlockContext()
 
-  // Check if this code block should have a run button
-  const isRunnable = parseRunnable(metadata.metastring) || metadata.runnable
 
   return (
     <Container as="div" className={clsx(className, metadata.className)}>
@@ -26,11 +22,6 @@ export default function CodeBlockLayout({className}) {
       <div className={styles.codeBlockContent}>
         <Content />
         <div className={styles.buttonGroup}>
-          <Box>
-            {isRunnable && (
-              <RunButton className={styles.codeButton} code={metadata.code} />
-            )}
-          </Box>
           <Box className={styles.rightCodeButtons}>
             <Buttons />
           </Box>

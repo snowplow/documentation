@@ -44,7 +44,7 @@ module.exports = {
     },
   },
 
-  themes: ['@docusaurus/theme-mermaid'],
+  themes: ['@docusaurus/theme-mermaid', 'docusaurus-theme-github-codeblock'],
 
   presets: [
     [
@@ -119,6 +119,10 @@ module.exports = {
           autoCollapseCategories: true,
           hideable: true,
         },
+      },
+      codeblock: {
+        showGithubLink: true,
+        githubLinkLabel: 'View on GitHub',
       },
       navbar: {
         hideOnScroll: false,

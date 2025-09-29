@@ -92,6 +92,7 @@
     "@types/webpack-env": "^1.18.5",
     "autoprefixer": "^10.4.21",
     "css-loader": "6.8.1",
+    "docusaurus-theme-github-codeblock": "^2.0.2",
     "postcss": "8.4.31",
     "postcss-loader": "7.3.3",
     "prettier": "2.7.1",

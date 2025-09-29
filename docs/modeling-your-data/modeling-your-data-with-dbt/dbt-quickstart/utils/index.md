@@ -82,7 +82,7 @@ my_dbt_project
 ```
 Once you've created all of these models, you need to call the correct macros in each model to ensure that the correct SQL gets generated for each model. If you'd like to rename any of the models, all you need to do is rename the `.sql` files listed above.
 
-:::caution
+:::warning
 Please only rename the models with caution and be sure to read the subsequent steps carefully as you may need to modify some of the boilerplate code outlined below to have the macros adapt properly to your naming conventions.
 :::
 
@@ -212,7 +212,7 @@ There are several important parameters to consider. The first one is `snowplow__
 
 Next, we have `snowplow__session_identifiers` and `snowplow__user_identifiers`, which expect a map object defining the location of session or user identifiers. In this map, the key represents the name of the context or entity where the identifier can be found. If the identifier is a field in the atomic columns, the key can be set to `atomic`. The value specifies the name of the field in either the context/entity or the atomic columns.
 
-:::caution
+:::warning
 Currently, we only support session and user identifiers found in atomic fields for Redshift/Postgres. We don't support nested level fields for any warehouses, and for BigQuery you will currently need to do the version management yourself. We will be getting around to supporting this extra functionality soon.
 :::
 

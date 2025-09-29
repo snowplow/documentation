@@ -75,7 +75,7 @@ If you `throw` in your JavaScript code to [discard the event](/docs/pipeline/enr
 
 You can also add temporary `print` statements to your code to inspect certain values.
 
-:::caution
+:::warning
 
 Make sure to remove all debug printing when adding the enrichment to a production pipeline.
 

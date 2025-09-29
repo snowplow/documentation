@@ -36,7 +36,7 @@ data:
           event:
             source: iglu:com.snowplowanalytics.snowplow/button_click/jsonschema/1-0-0
 ```
-:::caution Warning
+:::warning Warning
 The `source` fields of events and entities must refer to a deployed data structure. Referring to a locally created data structure is not yet supported.
 :::
 ### Linking data product to a source application
@@ -78,7 +78,7 @@ In this example event specification `All source apps` is related to both `generi
 ```bash
 ./snowplow-cli dp download
 ```
-This command retrieves all organization data products, event specifications, and source applications. By default, it creates a folder named `data-products` in your current working directory. You can specify a different folder name as an argument if needed. 
+This command retrieves all organization data products, event specifications, and source applications. By default, it creates a folder named `data-products` in your current working directory. You can specify a different folder name as an argument if needed.
 The command creates the following structure:
 - A main `data-products` folder containing your data product files
 - A `source-apps` subfolder containing source application definitions

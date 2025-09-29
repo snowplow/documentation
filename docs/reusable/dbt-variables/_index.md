@@ -1,4 +1,4 @@
-:::caution
+:::warning
 
 When using multiple dbt packages you must be careful to specify which scope a variable or configuration is defined within. In general, always specify each value in your `dbt_project.yml` nested under the specific package e.g.
 

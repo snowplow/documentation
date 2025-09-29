@@ -43,7 +43,7 @@ The name of each column is the name of the schema field converted to snake case.
 
 :::
 
-:::caution
+:::warning
 
 If an event or entity includes fields not defined in the schema, those fields will not be stored in the warehouse.
 
@@ -107,7 +107,7 @@ The name of each record field is the name of the schema field converted to snake
 
 :::
 
-:::caution
+:::warning
 
 If an event or entity includes fields not defined in the schema, those fields will not be stored in the warehouse.
 
@@ -196,7 +196,7 @@ The name of each record field is the name of the schema field converted to snake
 
 :::
 
-:::caution
+:::warning
 
 If an event or entity includes fields not defined in the schema, those fields will not be stored in the warehouse.
 
@@ -243,7 +243,7 @@ The name of each JSON field is the name of the schema field converted to snake c
 
 :::
 
-:::caution
+:::warning
 
 If an event or entity includes fields not defined in the schema, those fields will not be stored in the data lake, and will not be availble in Synapse.
 

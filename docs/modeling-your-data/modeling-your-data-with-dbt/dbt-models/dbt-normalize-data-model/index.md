@@ -106,7 +106,7 @@ The script should always be run from the **root** of your dbt project (the same 
 
 ### Install python packages
 
-:::caution
+:::warning
 Python versions between 3.7 and 3.10 (inclusive) are currently supported
 
 :::
@@ -118,7 +118,7 @@ pip install -r dbt_packages/snowplow_normalize/utils/requirements.txt
 ```
 
 ### Configuration File
-:::caution
+:::warning
 
 There may be changes to the config file between versions, this page will always contain the latest information but if you are using an older version you should call the python script with the `--configHelp` flag.
 
@@ -519,5 +519,5 @@ If you want to not select all columns from your self describing event or context
 ### Removing models
 You can remove all models that don't exist in your config by running the script with the `--cleanUp` flag. This will scan the `models_folder` folder provided in your config and list all models in this folder that don't match those listed in your config file; you will then be asked to confirm deletion of these. If you may wish to re-enable these models at a later date you can [disable them in your project](https://docs.getdbt.com/reference/resource-configs/enabled) instead.
 
-:::caution
+:::warning
 If you have other models in the same sub-folder that were not generated via this package then this will attempt to delete those files.

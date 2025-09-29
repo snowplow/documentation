@@ -210,7 +210,7 @@ Please note that some of the libraries are adapter specific. These are listed in
 <details>
 <summary>M1 Instructions (for Snowflake only)</summary>
 
-:::caution
+:::warning
 There is an issue with running Snowpark on M1 chips. A workaround recommended by Snowflake is to set up a virtual environment that uses x86 Python:
 
 ```

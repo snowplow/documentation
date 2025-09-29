@@ -12,15 +12,15 @@ Passthrough fields are the term used to define any field from your [events this 
 
 ## Availability
 
-| Package | Minimum Required Version |
-|---------|--------------------------|
-| Unified | 0.3.0 |
-| Media Player | 0.7.0 |
-| Ecommerce | 0.6.0 |
+| Package      | Minimum Required Version |
+| ------------ | ------------------------ |
+| Unified      | 0.3.0                    |
+| Media Player | 0.7.0                    |
+| Ecommerce    | 0.6.0                    |
 
 ## Usage
 
-To enable the passthrough fields, you need to set the relevant variable in your root `dbt_project.yml` file. E.g. `snowplow__view_passthroughs` (see your package [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md) for a full list of passthrough variables). 
+To enable the passthrough fields, you need to set the relevant variable in your root `dbt_project.yml` file. E.g. `snowplow__view_passthroughs` (see your package [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md) for a full list of passthrough variables).
 
 :::info
 Note that in some cases you may be able to specify multiple variables for the same table for the first and last of a given record (e.g. first and last session for a user).
@@ -63,7 +63,7 @@ For Redshift and Postgres users, entities and self describing events are not par
 
 In order for you to use fields from there through passthrough fields, you would need to first make sure that those fields are part of the [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md#events-this-run) table. Any custom entities or self-describing events can be added to this table (which get de-duped by taking the earliest `collector_tstamp` record) by using the `snowplow__entities_or_sdes` variable in our package. See [modeling entities](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/modeling-entities/index.md) for more information and examples.
 
-:::caution
+:::warning
 It is unlikely, although not impossible, that when using the SQL approach you may need to provide a table alias to avoid ambiguous references, in this case please see the model sql file for the specific alias used for the `snowplow_unified_base_events_this_run` table in each case.
 :::
 
@@ -164,7 +164,7 @@ When using passthrough fields with entities or self-describing events, always co
 1. Field type casting may be required (especially in Snowflake)
 2. Array indexes start at 0 for the first occurrence
 3. Use COALESCE when dealing with multiple versions of the same field
-4. Please note you are unable to use dbt macros in this variable, and also not able to use lateral flatten / explode type extractions. 
+4. Please note you are unable to use dbt macros in this variable, and also not able to use lateral flatten / explode type extractions.
 :::
 
 
@@ -176,12 +176,8 @@ A general rule of thumb is that the field comes from the *first* event of that t
 
 As mentioned, the fields are passed through _as is_, which means it is not currently possible aggregate the value of a field across a page view or session as we do some other fields in the table. In the case where this is required you should use the [custom aggregations](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/custom-aggregations/index.md) if that is supported by the package, or build a [custom model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md).
 
-:::caution
+:::warning
 
 In certain cases, such as the users table in Unified, it may be required to first set passthrough fields on an upstream table (the sessions table in that case) to make sure it is available for selection. The best way to identify this is to look at the DAG in the dbt docs for the package you are using.
 
 :::
-
-
-
-

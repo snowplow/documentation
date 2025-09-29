@@ -808,6 +808,22 @@ code {
   vertical-align: baseline;
 }
 
+/* Remove margin-bottom from code blocks */
+.prose pre.prism-code {
+  margin-bottom: 0;
+}
+
+/* Fix code block button overlap */
+div[class^='codeBlockContent'] {
+  position: relative;
+  padding-top: 1rem;
+}
+
+/* Always show copy buttons */
+div[class^='codeBlockContent'] div[class^='buttonGroup'] button {
+  opacity: 50%;
+}
+
 input[type='text'],
 input[type='email'],
 textarea {

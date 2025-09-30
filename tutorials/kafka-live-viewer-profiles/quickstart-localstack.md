@@ -3,7 +3,6 @@ position: 2
 title: Quickstart with Localstack
 ---
 
-# Quickstart with Localstack
 
 ## Steps to Run the Application
 

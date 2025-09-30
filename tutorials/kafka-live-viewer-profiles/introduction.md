@@ -50,7 +50,7 @@ The solution comprises several interconnected components:
 The following diagram maps out where each component sits in the end to end communication flow.
 ![Architecture Diagram](images/architecture.png)
 
-### Components & Configuration
+### Components and Configuration
 The following files in the [GitHub repository](https://github.com/snowplow-industry-solutions/kafka-live-viewer-profiles) can be used  to configure the project's components.
 - **Snowplow components**: `docker/compose.snowplow.yaml`
 - **Kafka infrastructure**: `docker/compose.kafka.yaml`

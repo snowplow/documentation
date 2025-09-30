@@ -139,3 +139,5 @@ READMEs
 [uU]tils
 [vV]iewport
 [wW]alkthrough
+
+[aA]gentic

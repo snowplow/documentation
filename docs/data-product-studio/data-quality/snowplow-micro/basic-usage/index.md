@@ -108,7 +108,7 @@ Alternatively, you can inspect the events via [the API](/docs/api-reference/snow
 curl localhost:9090/micro/good
 ```
 
-## Exporting events to TSV
+## Exporting events
 
 Snowplow pipelines output data in the [_enriched TSV format_](/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md). Typically, this is picked up by one of our [loaders](/docs/destinations/warehouses-lakes/index.md) or by tools such as [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md).
 
@@ -118,10 +118,23 @@ With Micro, you can see what your data would look like in this format — useful
 `docker run -p 9090:9090 snowplow/snowplow-micro:${versions.snowplowMicro} --output-tsv`
 }</CodeBlock>
 
+Since version 2.4.0, you can alternatively output the data in JSON format (the same as provided in [Snowplow Analytics SDKs](/docs/api-reference/analytics-sdk/index.md)):
+
+<CodeBlock language="bash">{
+`docker run -p 9090:9090 snowplow/snowplow-micro:${versions.snowplowMicro} --output-json`
+}</CodeBlock>
+
+Also since version 2.4.0 you can send the data in either format to an HTTP endpoint, rather then standard output:
+
+<CodeBlock language="bash">{
+`docker run -p 9090:9090 snowplow/snowplow-micro:${versions.snowplowMicro} --output-tsv \\
+  --destination http://some-url.com`
+}</CodeBlock>
+
 <details>
 <summary>Output vs logs</summary>
 
-The TSV data will be printed to the [standard output](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_(stdout)). As you saw above, Micro also prints logs, which go into the [standard error stream](https://en.wikipedia.org/wiki/Standard_streams#Standard_error_(stderr)).
+The TSV or JSON data will be printed to the [standard output](https://en.wikipedia.org/wiki/Standard_streams#Standard_output_(stdout)). As you saw above, Micro also prints logs, which go into the [standard error stream](https://en.wikipedia.org/wiki/Standard_streams#Standard_error_(stderr)).
 
 Depending on how you are running Micro, you might find the logs distracting. If so, you can turn off event logs with an extra option:
 
@@ -140,18 +153,8 @@ docker run -p 9090:9090 snowplow/snowplow-micro:${versions.snowplowMicro} --outp
 
 </details>
 
-You can also save the TSV output to a file:
+Finally, you can save the output to a file:
 
 <CodeBlock language="bash">{
 `docker run -p 9090:9090 snowplow/snowplow-micro:${versions.snowplowMicro} --output-tsv > output.tsv`
 }</CodeBlock>
-
-:::tip
-
-If you prefer CSV to TSV, you can use the `csvformat` utility that comes with [csvkit](https://csvkit.readthedocs.io/en/latest/):
-
-<CodeBlock language="bash">{
-`docker run -p 9090:9090 snowplow/snowplow-micro:${versions.snowplowMicro} --output-tsv | csvformat -t > output.csv`
-}</CodeBlock>
-
-:::

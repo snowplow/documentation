@@ -404,3 +404,5 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 # Removing loading-process in favor of individual loader reference pages
 /docs/destinations/warehouses-lakes/loading-process/* /docs/destinations/warehouses-lakes/ 301
 /docs/destinations/warehouses-lakes/schemas-in-warehouse/* /docs/api-reference/loaders-storage-targets/schemas-in-warehouse/:splat 301
+
+/docs/sources/trackers/google-tag-manager/snowtype/* /docs/data-product-studio/snowtype/working-with-gtm 301

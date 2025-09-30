@@ -821,7 +821,7 @@ div[class^='codeBlockContent'] {
 
 /* Always show copy buttons */
 div[class^='codeBlockContent'] div[class^='buttonGroup'] button {
-  opacity: 50%;
+  opacity: 50% !important;
 }
 
 input[type='text'],

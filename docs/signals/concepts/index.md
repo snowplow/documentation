@@ -89,7 +89,7 @@ This table summarizes the options for different types of processing:
 
 ### Stream source
 
-When Signals is deployed in your Snowplow BDP pipeline, the event stream is read by the streaming engine. All tracked events are inspected. If you've configured Signals to calculate an attribute from a certain type of event, when that event type is received, the engine will compute the attribute data and forward it to the Profiles Store, in real time. If that event type isn't registered as containing attribute data, nothing happens.
+When Signals is deployed in your BDP pipeline, the event stream is read by the streaming engine. All tracked events are inspected. If you've configured Signals to calculate an attribute from a certain type of event, when that event type is received, the engine will compute the attribute data and forward it to the Profiles Store, in real time. If that event type isn't registered as containing attribute data, nothing happens.
 
 Real-time stream flow:
 1. Behavioral data event is received by [Collector](/docs/pipeline/collector/index.md)

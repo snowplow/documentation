@@ -16,7 +16,7 @@ Real-time personalization use cases that are unlocked by Signals include:
 * Contextually relevant advertising
 * Paywall optimization
 
-Your Signals infrastructure is deployed by us into the same cloud as your Snowplow BDP pipeline. You can use the Snowplow Console to first define the data you're interested in, then use the Signals API and SDKs to retrieve the calculated [attributes](/docs/signals/concepts/index.md) in your applications to alter your customer's experience and behavior.
+Your Signals infrastructure is deployed by us into the same cloud as your BDP pipeline. You can use [Snowplow Console](https://console.snowplowanalytics.com) to first define the data you're interested in, then use the Signals API and SDKs to retrieve the calculated [attributes](/docs/signals/concepts/index.md) in your applications to alter your customer's experience and behavior.
 
 As well as attributes, Signals allows you to define [interventions](/docs/signals/concepts/index.md#interventions). This is a way to specify the business logic, based on attribute values, that should trigger actions such as notifications in your application.
 
@@ -33,7 +33,7 @@ The core Signals components are:
 * **Sync engine**: periodically updates the Profiles Store with batch attributes
 * **Batch engine**: runs in your warehouse to compute attributes from warehouse tables
 
-![Snowplow Signals architecture diagram showing core components including Profiles Store, SDKs, streaming engine, and batch engine](./images/overview-simple.png)
+![Snowplow Signals architecture diagram showing core components including Profiles Store, SDKs, streaming engine, and batch engine](./images/overview-incl-batch-engine.svg)
 
 ## Using Signals
 

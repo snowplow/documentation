@@ -45,8 +45,7 @@ module.exports = {
       /** @type {import('@docusaurus/preset-classic').Options} */
       {
         docs: {
-          showLastUpdateTime: true,
-          editUrl: 'https://github.com/snowplow/documentation/tree/main/',
+          showLastUpdateTime: false,
           remarkPlugins: [abbreviations, math],
           rehypePlugins: [katex],
           async sidebarItemsGenerator({

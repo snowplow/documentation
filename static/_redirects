@@ -405,4 +405,4 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/destinations/warehouses-lakes/loading-process/* /docs/destinations/warehouses-lakes/ 301
 /docs/destinations/warehouses-lakes/schemas-in-warehouse/* /docs/api-reference/loaders-storage-targets/schemas-in-warehouse/:splat 301
 
-/docs/sources/trackers/google-tag-manager/snowtype/* /docs/data-product-studio/snowtype/working-with-gtm 301
+/docs/sources/trackers/google-tag-manager/snowtype/* /docs/data-product-studio/snowtype/working-with-gtm/ 301

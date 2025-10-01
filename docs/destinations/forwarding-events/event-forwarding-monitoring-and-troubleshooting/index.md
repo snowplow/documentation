@@ -24,7 +24,7 @@ These failures occur when the destination's API cannot accept or process the eve
 
 **Transient failures** are those that are expected to succeed on retry. This includes temporary network errors, HTTP 5xx server errors, or rate limiting. Transient failures are automatically retried.
 
-**Setup failures** result from configuration issues that typically require human intervention to resolve, such as invalid API keys or insufficient permissions. When a setup error occurs, Snowplow will trigger email alerts to the configured list of users. For more information on alerting, see [configuring setup alerts](#configuring-setup-alerts).
+**Setup failures** result from configuration issues that typically require human intervention to resolve, such as invalid API keys or insufficient permissions. When a setup error occurs, Snowplow will trigger email alerts to the configured list of users. For more information on alerting, see [configuring setup alerts](#configuring-setup-alerts) on this page.
 <!-- TODO: what happens when we hit a setup failure?-->
 
 **Other unrecoverable failures** are bad requests that won't succeed on retry, such as those with missing or invalid fields. These often map to HTTP 400 response codes. Snowplow will log them as failed events in your cloud storage bucket without retrying.
@@ -36,7 +36,7 @@ Failure types are defined per destination based on their expected HTTP response 
 When any type of failure occurs, Snowplow can take one or more of the following actions:
 
 - **Automatic retries**: transient failures are automatically retried according to each destination's retry policy. For all HTTP API destinations, Snowplow will retry up to 5 times with exponential backoff.
-- **Failed event logging**: all non-retryable failures are routed to your configured failure destination, which is typically a cloud storage bucket, where you can inspect them further. This includes transformation failures, oversized data failures, unrecoverable failures, and transient failures that have exceeded their retry limit. For how to query these logs, see [Inspecting and debugging failures](#inspecting-and-debugging-failures).
+- **Failed event logging**: all non-retryable failures are routed to your configured failure destination, which is typically a cloud storage bucket, where you can inspect them further. This includes transformation failures, oversized data failures, unrecoverable failures, and transient failures that have exceeded their retry limit. For how to query these logs, see [Inspecting and debugging failures](#inspecting-and-debugging-failures) on this page.
 - **Setup alerts**: just like warehouse loaders, setup failures trigger email alerts to notify configured users of authentication or configuration problems.
 
 ## Configuring setup alerts

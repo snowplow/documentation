@@ -77,7 +77,7 @@ npm run cypress:open
 
 ## Github Actions
 
-Inside the `.github/workflows/` directory you can find the `.yml` files we use to test this exaple app with Micro and Nightwatch/Cypress. A general workflow file would definitely use the [Snowplow Micro](https://github.com/snowplow-incubator/snowplow-micro) step, which for our example is:
+Inside the `.github/workflows/` directory you can find the `.yml` files we use to test this exaple app with Micro and Nightwatch/Cypress. A general workflow file would definitely use the [Snowplow Micro](https://github.com/snowplow/snowplow-micro) step, which for our example is:
 
 ```yaml
 - name: Start Micro

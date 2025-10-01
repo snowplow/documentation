@@ -15,7 +15,7 @@ We are the leader in customer data infrastructure (CDI) for AI, enabling every o
 Digital-first companies like Strava, HelloFresh, Auto Trader, Burberry, and DPG Media rely on Snowplow to collect and process event-level data in real time, delivering it securely to their warehouse, lake, or stream, and to integrate deep customer context into their applications.
 
 
-![diagram of snowplow architecture](@site/static/img/snowplow-cdi.png)
+![diagram of snowplow architecture](@site/static/img/snowplow-cdi-signals.png)
 
 ### Why Customer Data Infrastructure (CDI)?​​
 
@@ -36,3 +36,4 @@ Key benefits of Snowplow's CDI:
 * A unique approach based on **[schemas and validation](/docs/fundamentals/schemas/index.md)** ensures your data is as clean as possible
 * **Over [15 enrichments](/docs/pipeline/enrichments/available-enrichments/index.md)** to get the most out of your data
 * Stream data to your data warehouse/lakehouse or SaaS destinations of choice
+* Enable real time personalization with **[Signals](/docs/signals/)**

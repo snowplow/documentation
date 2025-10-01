@@ -1035,6 +1035,9 @@ from elements with a subsequent element that has a top margin. */
 .theme-doc-markdown p:has(+ h3),
 .theme-doc-markdown p:has(+ div > table),
 .theme-doc-markdown p:has(+ table),
+.theme-doc-markdown h2:has(+ p > img),
+.theme-doc-markdown p:has(+ p > img),
+.theme-doc-markdown h3:has(+ p > img),
 .theme-doc-markdown div.theme-admonition:has(+ h2),
 .theme-doc-markdown div.theme-admonition:has(+ h3),
 .theme-doc-markdown details:has(+ h2),
@@ -1047,10 +1050,6 @@ from elements with a subsequent element that has a top margin. */
 .theme-doc-markdown p + ul > li:first-child,
 .theme-doc-markdown p + ol > li:first-child {
   margin-top: 0rem;
-}
-
-.theme-doc-markdown img {
-  margin: 0 0;
 }
 
 /* doc markdown grid layout control END*/

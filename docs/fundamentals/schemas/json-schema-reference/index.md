@@ -619,26 +619,6 @@ Use consistent naming patterns across your schemas:
 }
 ```
 
-### Performance considerations
-
-Keep schemas focused and avoid unnecessary complexity:
-
-```json
-{
-  // Good: Focused schema for specific event
-  "search_event": {
-    "type": "object",
-    "properties": {
-      "query": {"type": "string", "maxLength": 256},
-      "results_count": {"type": "integer", "minimum": 0},
-      "category": {"type": ["string", "null"]}
-    },
-    "required": ["query", "results_count"],
-    "additionalProperties": false
-  }
-}
-```
-
 ## Limitations and unsupported features
 
 While Snowplow supports most JSON Schema Draft 4 features, there are some limitations to be aware of:

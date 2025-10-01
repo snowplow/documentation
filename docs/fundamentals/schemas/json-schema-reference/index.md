@@ -566,59 +566,6 @@ Create sophisticated data structures with multiple levels of nesting:
 }
 ```
 
-## Best practices
-
-### Descriptive documentation
-
-Always include meaningful descriptions for schemas and fields:
-
-```json
-{
-  "video_play": {
-    "description": "Tracks when a video starts playing",
-    "type": "object",
-    "properties": {
-      "video_id": {
-        "type": "string",
-        "description": "Unique identifier for the video content"
-      },
-      "duration_seconds": {
-        "type": "integer",
-        "minimum": 1,
-        "description": "Total duration of the video in seconds"
-      },
-      "quality": {
-        "type": "string",
-        "enum": ["240p", "360p", "480p", "720p", "1080p", "4K"],
-        "description": "Video quality setting selected by user"
-      },
-      "autoplay": {
-        "type": "boolean",
-        "description": "Whether the video started automatically or was manually initiated"
-      }
-    },
-    "required": ["video_id", "duration_seconds"],
-    "additionalProperties": false
-  }
-}
-```
-
-### Consistent naming conventions
-
-Use consistent naming patterns across your schemas:
-
-```json
-{
-  "properties": {
-    "user_id": {"type": "string"},
-    "session_id": {"type": "string"},
-    "page_url": {"type": "string"},
-    "timestamp_utc": {"type": "string"},
-    "is_authenticated": {"type": "boolean"}
-  }
-}
-```
-
 ## Limitations and unsupported features
 
 While Snowplow supports most JSON Schema Draft 4 features, there are some limitations to be aware of:

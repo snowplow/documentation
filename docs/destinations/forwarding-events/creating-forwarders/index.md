@@ -10,7 +10,7 @@ Follow the steps below to configure a new event forwarder. See [available integr
 
 A **connection** is a resource that stores the credentials and endpoint details needed to send events to your destination.
 
-To create a connection from Snowplow console, first go to **Destinations** > **Connections**, then select **Set up connection**. From the dropdown, choose **Loader connection**, then select the destination you want to forward events to. Each destination will have specific authentication and endpoint details required.
+To create a connection from [Snowplow Console](https://console.snowplowanalytics.com), first go to **Destinations** > **Connections**, then select **Set up connection**. From the dropdown, choose **Loader connection**, then select the destination you want to forward events to. Each destination will have specific authentication and endpoint details required.
 
 ![Console interface for creating a new destination connection with authentication and endpoint configuration fields](images/event-forwarding-connection.png)
 

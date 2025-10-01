@@ -16,7 +16,7 @@ Real-time personalization use cases that are unlocked by Signals include:
 * Contextually relevant advertising
 * Paywall optimization
 
-Your Signals infrastructure is deployed by us into the same cloud as your BDP pipeline. You can use [Snowplow Console](https://console.snowplowanalytics.com) to first define the data you're interested in, then use the Signals API and SDKs to retrieve the calculated [attributes](/docs/signals/concepts/index.md) in your applications to alter your customer's experience and behavior.
+Your Signals infrastructure is deployed into the same cloud as your BDP pipeline. You can use [Snowplow Console](https://console.snowplowanalytics.com) to first define the data you're interested in, then use the Signals SDKs and API to retrieve the calculated [attributes](/docs/signals/concepts/index.md) in your applications to alter your customer's experience and behavior.
 
 As well as attributes, Signals allows you to define [interventions](/docs/signals/concepts/index.md#interventions). This is a way to specify the business logic, based on attribute values, that should trigger actions such as notifications in your application.
 
@@ -58,7 +58,7 @@ Read more about attributes and interventions on the [concepts](/docs/signals/con
 
 ### 2. Apply the configuration
 
-We recommend using the Console to define your attributes and interventions. You could also use the [Signals Python SDK](https://pypi.org/project/snowplow-signals/), or even the [Signals API](/docs/signals/connection/index.md#signals-api).
+We recommend using [Console](https://console.snowplowanalytics.com) to define your attributes and interventions. You could also use the [Signals Python SDK](https://pypi.org/project/snowplow-signals/), or even the [Signals API](/docs/signals/connection/index.md#signals-api).
 
 Once you've created your configurations, apply them to Signals by publishing them. It will start calculating attributes and populating the Profiles Store.
 

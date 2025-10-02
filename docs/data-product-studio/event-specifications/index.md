@@ -4,7 +4,7 @@ sidebar_label: "Event specifications"
 sidebar_position: 4
 sidebar_custom_props:
   offerings:
-    - bdp
+    - cdi
 ---
 
 ## Creating a new Event Specification through Console

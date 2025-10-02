@@ -5,7 +5,7 @@ sidebar_label: "Using the Data Structures Builder"
 sidebar_position: 20
 sidebar_custom_props:
   offerings:
-    - bdp
+    - cdi
 ---
 
 # Versioning with the Data Structures Builder

@@ -4,7 +4,7 @@ sidebar_position: 3
 sidebar_label: "Snowplow BDP"
 sidebar_custom_props:
   offerings:
-    - bdp
+    - cdi
 ---
 
 ```mdx-code-block

@@ -5,7 +5,7 @@ sidebar_label: "Snowplow CLI"
 sidebar_position: 2
 sidebar_custom_props:
   offerings:
-    - bdp
+    - cdi
 ---
 
 ```mdx-code-block

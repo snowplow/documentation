@@ -4,7 +4,7 @@ sidebar_label: "Using the JSON Editor"
 sidebar_position: 10
 sidebar_custom_props:
   offerings:
-    - bdp
+    - cdi
 ---
 
 ## How do I version?

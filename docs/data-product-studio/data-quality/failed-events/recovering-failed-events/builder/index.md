@@ -4,7 +4,7 @@ sidebar_label: "Using the Console"
 sidebar_position: 0
 sidebar_custom_props:
   offerings:
-    - bdp
+    - cdi
 ---
 
 You can use BDP Console to [submit a data recovery request](https://console.snowplowanalytics.com/recovery) to our Support team.

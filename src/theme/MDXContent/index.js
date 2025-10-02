@@ -6,12 +6,12 @@ import { useSidebarBreadcrumbs } from '@docusaurus/theme-common/internal'
 import _ from 'lodash'
 
 const offeringNames = {
-  bdp: "Snowplow BDP",
-  community: "Snowplow Community Edition",
+  cdi: 'Snowplow CDI',
+  community: 'Snowplow Community Edition',
 }
 
 export default function MDXContentWrapper(props) {
-  let breadcrumbs;
+  let breadcrumbs
   try {
     breadcrumbs = useSidebarBreadcrumbs()
   } catch {
@@ -21,13 +21,26 @@ export default function MDXContentWrapper(props) {
 
   const admonitions = []
 
-  const legacy = _.some(_.initial(breadcrumbs), item => item.customProps?.legacy)
-  const outdated = !legacy && _.some(_.initial(breadcrumbs), item => item.customProps?.outdated)
-  const hidden = _.some(_.initial(breadcrumbs), item => item.customProps?.hidden)
-  const offerings = _.findLast(breadcrumbs, item => item.customProps?.offerings)
+  const legacy = _.some(
+    _.initial(breadcrumbs),
+    (item) => item.customProps?.legacy
+  )
+  const outdated =
+    !legacy &&
+    _.some(_.initial(breadcrumbs), (item) => item.customProps?.outdated)
+  const hidden = _.some(
+    _.initial(breadcrumbs),
+    (item) => item.customProps?.hidden
+  )
+  const offerings = _.findLast(
+    breadcrumbs,
+    (item) => item.customProps?.offerings
+  )
 
   if (outdated) {
-    const latest = _.last(_.takeWhile(breadcrumbs, item => !item.customProps?.outdated)).href
+    const latest = _.last(
+      _.takeWhile(breadcrumbs, (item) => !item.customProps?.outdated)
+    ).href
     admonitions.push(
       <Admonition type="caution" key="outdated">
         You are reading documentation for an outdated version. Here’s the{' '}
@@ -37,11 +50,13 @@ export default function MDXContentWrapper(props) {
   }
 
   if (offerings) {
-    const names = offerings.customProps.offerings.map(o => offeringNames[o])
+    const names = offerings.customProps.offerings.map((o) => offeringNames[o])
     admonitions.push(
       <Admonition type="info" key="offering">
-        This documentation only applies to <strong>{names.join(' and ')}</strong>.
-        See the <a href="/docs/feature-comparison/">feature comparison</a> page for more information about the different Snowplow offerings.
+        This documentation only applies to{' '}
+        <strong>{names.join(' and ')}</strong>. See the{' '}
+        <a href="/docs/feature-comparison/">feature comparison</a> page for more
+        information about the different Snowplow offerings.
       </Admonition>
     )
   }

@@ -5,7 +5,7 @@ sidebar_position: 9
 sidebar_custom_props:
   header: " "
   offerings:
-    - bdp
+    - cdi
 sidebar_label: "Account management"
 ---
 

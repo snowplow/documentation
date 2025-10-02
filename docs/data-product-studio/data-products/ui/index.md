@@ -5,7 +5,7 @@ sidebar_label: "Using the UI"
 sidebar_position: 1
 sidebar_custom_props:
   offerings:
-    - bdp
+    - cdi
 ---
 
 ## Creating and editing a new Data Product using Console

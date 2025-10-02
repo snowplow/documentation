@@ -5,7 +5,7 @@ sidebar_label: "Using data product templates"
 sidebar_position: 2
 sidebar_custom_props:
   offerings:
-    - bdp
+    - cdi
 ---
 
 ## Creating a Data Product based on Templates using Console

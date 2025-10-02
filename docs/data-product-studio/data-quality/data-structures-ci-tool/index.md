@@ -4,7 +4,7 @@ date: "2020-06-01"
 sidebar_position: 4
 sidebar_custom_props:
   offerings:
-    - bdp
+    - cdi
 sidebar_label: "Data Structures CI tool"
 ---
 

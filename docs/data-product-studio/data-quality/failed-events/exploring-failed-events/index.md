@@ -89,7 +89,7 @@ Here is an example of what the `contexts_com_snowplowanalytics_snowplow_failure_
 
 To use this feature, you will first need to enable the stream that contains failed events in the [Snowplow TSV format](/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md) suitable for loading into your warehouse or lake.
 
-The instructions below are for Snowplow BDP users. For Community Edition, you will need to configure this manually via Terraform.
+The instructions below are for Snowplow customers. For Community Edition, you will need to configure this manually via Terraform. <--TODO check this re. self-hosted -->
 
 :::note Infrastructure costs
 

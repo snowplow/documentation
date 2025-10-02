@@ -10,7 +10,7 @@ sidebar_position: 120
 
 Snowplow Mini is similar to [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md), with the following differences:
 * Micro is more portable and can easily run on your machine or in automated tests.
-* Mini has more features, mainly an OpenSearch Dashboards UI, and is better integrated with Snowplow BDP.
+* Mini has more features, mainly an OpenSearch Dashboards UI, and is better integrated with Snowplow.
 
 :::
 
@@ -21,7 +21,7 @@ You might use Snowplow Mini when:
 
 ## Getting started
 
-Snowplow BDP users can request a Snowplow Mini instance through the console (go to `“Environments” → “Sandboxes” → “Setup a sandbox”`).
+Snowplow users can request a Snowplow Mini instance through Console (go to `“Environments” → “Sandboxes” → “Setup a sandbox”`).
 
 For Community Edition, see the setup guides for [AWS](/docs/api-reference/snowplow-mini/setup-guide-for-aws/index.md) and [GCP](/docs/api-reference/snowplow-mini/setup-guide-for-gcp/index.md).
 

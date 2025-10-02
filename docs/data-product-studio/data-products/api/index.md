@@ -7,7 +7,7 @@ sidebar_custom_props:
     - cdi
 ---
 
-As well as managing [data products](/docs/data-product-studio/data-products/index.md) through the Snowplow BDP Console, Snowplow BDP customers can also manage them programmatically through an API.
+As well as managing [data products](/docs/data-product-studio/data-products/index.md) through Snowplow Console, Snowplow customers can also manage them programmatically through an API.
 
 This functionality is key to automating existing processes and frequent manual tasks, including workflows in version control systems like GitHub.
 

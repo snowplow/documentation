@@ -20,9 +20,9 @@ You might encounter specific restrictions when following the documentation, for 
 
 ## Upgrades and deprecation
 
-:::info Snowplow BDP
+:::info Snowplow CDI
 
-If you are using Snowplow BDP, you don’t need to deal with upgrading your pipeline, as we perform upgrades for you.
+If you are a Snowplow CDI customer, rather than self-hosted, you don't need to deal with upgrading your pipeline. We'll perform upgrades for you.
 
 :::
 
@@ -36,9 +36,9 @@ From time to time, we develop better applications for certain tasks and deprecat
 
 ### Core pipeline
 
-:::info Snowplow BDP
+:::info Snowplow CDI
 
-If you are using Snowplow BDP, you don’t need to install any of the core pipeline components yourself. We deploy your pipeline and keep it up to date.
+If you are a Snowplow CDI customer, rather than self-hosted, you don't need to install any of the core pipeline components yourself. We'll deploy your pipeline and keep it up to date.
 
 :::
 
@@ -96,9 +96,9 @@ If you are using Snowplow BDP, you don’t need to install any of the core pipel
 
 ### Iglu (schema registry)
 
-:::info Snowplow BDP
+:::info Snowplow CDI
 
-If you are using Snowplow BDP, you don’t need to install Iglu Server yourself. It’s also unlikely that you need to use any of the other components in this section. You can manage your data structures [in the UI or via the API](/docs/data-product-studio/data-structures/manage/index.md).
+If you are a Snowplow CDI customer, rather than self-hosted, you don't need to install Iglu Server yourself. It's also unlikely that you need to use any of the other components in this section. You can manage your data structures [in the UI or via the API](/docs/data-product-studio/data-structures/manage/index.md).
 
 :::
 
@@ -173,9 +173,9 @@ import ModelVersionsSqlRunner from '@site/docs/modeling-your-data/modeling-your-
 
 ### Testing and debugging
 
-:::info Snowplow BDP
+:::info Snowplow CDI
 
-If you are using Snowplow BDP, you don’t need to install Snowplow Mini yourself. We (optionally) deploy it and keep it up to date for you.
+If you are a Snowplow CDI customer, rather than self-hosted, you don't need to install Snowplow Mini yourself. We can deploy it as required, and keep it up to date for you.
 
 :::
 

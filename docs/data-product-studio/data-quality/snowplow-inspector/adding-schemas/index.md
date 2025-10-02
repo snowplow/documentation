@@ -69,12 +69,12 @@ These schemas are managed within the extension and stored on your own machine.
 The only required configuration is a name, and the schemas themselves.
 
 ## Data Structures API registries
-This type is recommended for use with Snowplow BDP via the [Data Structures API](/docs/data-product-studio/data-structures/manage/api/index.md).
+This type is recommended for use with the [Data Structures API](/docs/data-product-studio/data-structures/manage/api/index.md).
 
 In order to function, the extension requires:
 
-- Organization ID: This is usually found in the URL when logged into the Snowplow BDP console. See more at [Managing Console API authentication](/docs/account-management/index.md#version-2).
-- API Key: When logged into the Snowplow BDP console, should be available in [API keys for managing Snowplow](https://console.snowplowanalytics.com/credentials) (within "Manage organization"). See more at [Managing Console API authentication](/docs/account-management/index.md#version-2).
+- Organization ID: this is usually found in the URL when logged into Snowplow Console. See more at [Managing Console API authentication](/docs/account-management/index.md#version-2).
+- API Key: when logged into Console, should be available in [API keys for managing Snowplow](https://console.snowplowanalytics.com/credentials) (within "Manage organization"). See more at [Managing Console API authentication](/docs/account-management/index.md#version-2).
 
 ## Iglu Server registries
 [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) is a more full-featured dedicated service for hosting server that is more flexible than Static Registries.
@@ -84,7 +84,7 @@ To authenticate with your server, the extension will require:
 - Iglu API Endpoint: This is the base URL the extension will use when contacting the API. If you include a path component, the API request will be made as `api/*`, relative to this path; you may need to add or remove trailing slashes if the API is not hosted at the root.
 - Iglu API Key: See [API keys and the authentication service](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md#5-api-keys-and-the-authentication-service-apiauth) for instructions on generating an Iglu API key.
 
-When logged into the Snowplow BDP console, these details should be available in [API keys for utilities](https://console.snowplowanalytics.com/iglu-keys) (within "Manage organization").
+When logged into Snowplow Console, these details should be available in [API keys for utilities](https://console.snowplowanalytics.com/iglu-keys) (within "Manage organization").
 
 ## Static registries
 Most other registries, such as those hosted as websites or via [S3](https://aws.amazon.com/s3/) or [GCS](https://cloud.google.com/products/storage/) buckets will use this  ["static"](/docs/api-reference/iglu/iglu-repositories/static-repo/index.md) type.

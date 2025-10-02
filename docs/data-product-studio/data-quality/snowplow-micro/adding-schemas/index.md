@@ -34,7 +34,7 @@ trackSelfDescribingEvent({
 
 For Micro to understand this event, it will need to know about `com.example/my-schema/jsonschema/1-0-0` or any other relevant schemas. There are two ways you can achieve this:
 
-* **Point Micro to an Iglu registry that contains your schemas.** This is a good option if you use Snowplow BDP [UI](/docs/data-product-studio/data-structures/manage/index.md) or [API](/docs/data-product-studio/data-structures/manage/api/index.md) to create schemas, or if you have deployed your own Iglu registry.
+* **Point Micro to an Iglu registry that contains your schemas.** This is a good option if you use Snowplow [Console](/docs/data-product-studio/data-structures/manage/index.md) UI or [API](/docs/data-product-studio/data-structures/manage/api/index.md) to create schemas, or if you have deployed your own Iglu registry.
 * **Add schemas to Micro directly.** This can be handy for quickly testing a schema.
 
 Whichever approach you choose, you can use the [the API](/docs/api-reference/snowplow-micro/api/index.md#microiglu) to check if Micro is able to reach your schemas (replace `com.example` and `my-schema` as appropriate).
@@ -47,11 +47,11 @@ curl localhost:9090/micro/iglu/com.example/my-schema/jsonschema/1-0-0
 
 Place your Iglu registry URL and API key (if any) into two [environment variables](https://en.wikipedia.org/wiki/Environment_variable): `MICRO_IGLU_REGISTRY_URL` and `MICRO_IGLU_API_KEY`.
 
-Make sure to fully spell out the URL, including the protocol (`http://` or `https://`). For most Iglu registries, including those provided by Snowplow BDP, the URL will end with `/api` — make sure to include that part too, for example: `https://com-example.iglu.snplow.net/api`. [Static registries](/docs/api-reference/iglu/iglu-repositories/static-repo/index.md), such as `http://iglucentral.com`, are an exception — you don’t need to append `/api` to the URL.
+Make sure to fully spell out the URL, including the protocol (`http://` or `https://`). For most Iglu registries, including those provided by Snowplow CDI, the URL will end with `/api` — make sure to include that part too, for example: `https://com-example.iglu.snplow.net/api`. [Static registries](/docs/api-reference/iglu/iglu-repositories/static-repo/index.md), such as `http://iglucentral.com`, are an exception — you don’t need to append `/api` to the URL. <--TODO check this re. self-hosted -->
 
 :::tip
 
-In Snowplow BDP, you can find your Iglu registry URLs and generate API keys [via the console](https://console.snowplowanalytics.com/iglu-keys).
+You can find your Iglu registry URLs and generate API keys [via the console](https://console.snowplowanalytics.com/iglu-keys).
 
 :::
 

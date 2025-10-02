@@ -55,7 +55,7 @@ The CLI download command only retrieves data structures that have been deployed 
 ./snowplow-cli ds validate ./folder-name
 ```
 
-This command will find all files under `./folder-name` (if omitted then `./data-structures`) and attempt to validate them using BDP console. It will assert the following
+This command will find all files under `./folder-name` (if omitted then `./data-structures`) and attempt to validate them using Snowplow Console. It will assert the following
 
 1. Is each file a valid format (yaml/json) with expected fields
 2. Does the schema in the file conform to [snowplow expectations](/docs/fundamentals/schemas/index.md#the-anatomy-of-a-schema)
@@ -70,6 +70,6 @@ If any validations fail the command will report the problems to stdout and exit 
 ./snowplow-cli ds publish dev ./folder-name
 ```
 
-This command will find all files under `./folder-name` (if omitted then `./data-structures`) and attempt to publish them to BDP console in the environment provided (`dev` or `prod`).
+This command will find all files under `./folder-name` (if omitted then `./data-structures`) and attempt to publish them to Snowplow Console in the environment provided (`dev` or `prod`).
 
 Publishing to `dev` will also cause data structures to be validated with the `validate` command before upload. Publishing to `prod` will not validate but requires all data structures referenced to be present on `dev`.

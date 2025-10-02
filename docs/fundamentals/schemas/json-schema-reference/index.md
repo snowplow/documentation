@@ -4,7 +4,7 @@ sidebar_position: 10
 description: "Complete reference for JSON Schema features supported in Snowplow schemas"
 ---
 
-Snowplow schemas are based on the [JSON Schema](https://json-schema.org/) standard ([draft 4](https://datatracker.ietf.org/doc/html/draft-fge-json-schema-validation-00)). This reference provides comprehensive documentation for all JSON Schema features that are supported in Snowplow.
+[Snowplow schemas](/docs/fundamentals/schemas/index.md) are based on the [JSON Schema](https://json-schema.org/) standard ([draft 4](https://datatracker.ietf.org/doc/html/draft-fge-json-schema-validation-00)). This reference provides comprehensive documentation for all JSON Schema features that are supported in Snowplow.
 
 Understanding the full capabilities of JSON Schema allows you to create more precise and robust [data structures](/docs/fundamentals/schemas/index.md) that ensure your data quality and provide clear documentation for your tracking implementation.
 

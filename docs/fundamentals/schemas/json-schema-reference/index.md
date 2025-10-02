@@ -31,6 +31,28 @@ Every Snowplow schema must follow this basic structure with Snowplow-specific me
 }
 ```
 
+### Required components
+
+Every Snowplow schema must include these components:
+
+* **`$schema`**: Must be `"http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#"`
+* **`self`** object containing:
+  * **`vendor`**: Your organization identifier (e.g., `"com.example"`)
+  * **`name`**: The schema name
+  * **`format`**: Must be `"jsonschema"`
+  * **`version`**: Semantic version (e.g., `"1-0-0"`)
+* **`type`**: Must be `"object"` for the root level
+
+### Optional components
+
+These components are optional but commonly used:
+
+* **`description`**: Human-readable description of the schema purpose (highly recommended)
+* **`properties`**: Object defining the fields and their validation rules
+* **`additionalProperties`**: Whether additional properties are allowed (commonly set to `false`)
+* **`required`**: Array of required field names
+* **`minProperties`** / **`maxProperties`**: Constraints on number of properties
+
 ## Core validation keywords
 
 ### Type validation

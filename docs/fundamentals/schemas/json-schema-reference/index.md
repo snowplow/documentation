@@ -154,6 +154,25 @@ Control the minimum and maximum length of string values:
 }
 ```
 
+### Enumeration
+
+Restrict values to a specific set of allowed strings:
+
+```json
+{
+  "status": {
+    "type": "string",
+    "enum": ["active", "inactive", "pending", "suspended"],
+    "description": "Account status"
+  },
+  "color": {
+    "type": "string",
+    "enum": ["red", "green", "blue", "yellow"],
+    "description": "Primary color selection"
+  }
+}
+```
+
 ### Pattern matching
 
 Use regular expressions to validate string format:
@@ -178,25 +197,6 @@ Use regular expressions to validate string format:
 For common formats like email addresses, URLs, and dates, prefer using the `format` keyword instead of regular expressions for better readability and standardized validation.
 
 :::
-
-### Enumeration
-
-Restrict values to a specific set of allowed strings:
-
-```json
-{
-  "status": {
-    "type": "string",
-    "enum": ["active", "inactive", "pending", "suspended"],
-    "description": "Account status"
-  },
-  "color": {
-    "type": "string",
-    "enum": ["red", "green", "blue", "yellow"],
-    "description": "Primary color selection"
-  }
-}
-```
 
 ### Format validation
 
@@ -242,6 +242,7 @@ Use the `format` keyword to validate common string formats:
 * **`date`**: ISO 8601 date (e.g., "2023-12-25")
 * **`hostname`**: Internet hostname
 * **`uuid`**: UUID string
+
 
 ## Numeric validation
 

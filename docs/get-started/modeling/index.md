@@ -15,12 +15,12 @@ Querying the events table directly — as you would have done in the previous st
 We recommend [dbt](https://www.getdbt.com/) for data modeling. Here’s how to get started.
 
 <Tabs groupId="offering" queryString>
-  <TabItem value="enterprise" label="BDP Enterprise" default>
+  <TabItem value="enterprise" label="Snowplow Enterprise" default>
 
 Refer to the [setup instructions](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/index.md) to add and configure your models in the Console, so that they can be run automatically by Snowplow.
 
   </TabItem>
-  <TabItem value="cloud" label="BDP Cloud">
+  <TabItem value="cloud" label="Snowplow Cloud">
 
 Refer to the [setup instructions](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/index.md) to add and configure your models in the Console, so that they can be run automatically by Snowplow.
 

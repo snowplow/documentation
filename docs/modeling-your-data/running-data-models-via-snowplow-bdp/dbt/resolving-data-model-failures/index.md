@@ -20,7 +20,7 @@ You will be able to see the details of your data model failure in the jobs inter
 
 ![](images/dbt-dag.png)
 
-The 'Error Output' will show you the error logs from the `dbt run` call. These logs will contain the information that dbt and the database relayed back to BDP from the failure, and will match the dbt logs you get if you run it locally.
+The 'Error Output' will show you the error logs from the `dbt run` call. These logs will contain the information that dbt and the database relayed back to Snowplow from the failure, and will match the dbt logs you get if you run it locally.
 
 ![](images/dbt-step-error-output.png)
 

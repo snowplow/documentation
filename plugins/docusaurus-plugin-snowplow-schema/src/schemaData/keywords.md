@@ -1280,7 +1280,7 @@ docs/modeling-your-data/running-data-models-via-snowplow-bdp/retrieving-job-exec
 "Job Execution", "API Data", "Execution Analytics", "Job Monitoring", "Pipeline API", "Execution Metrics"
 
 docs/modeling-your-data/running-data-models-via-snowplow-bdp/index.md
-"Snowplow", "Managed Models", "BDP Pipeline", "Managed Analytics", "Cloud Pipeline", "Enterprise Analytics"
+"Snowplow", "Managed Models", "Snowplow Pipeline", "Managed Analytics", "Cloud Pipeline", "Enterprise Analytics"
 
 docs/modeling-your-data/modeling-your-data-with-sql-runner/sql-runner-mobile-data-model/index.md
 "SQL Runner Mobile", "Mobile SQL", "Mobile Analytics", "SQL Models", "Mobile Data", "App Analytics"
@@ -1598,16 +1598,16 @@ docs/get-started/tracking/index.md
 "Event Tracking", "Analytics Tracking", "Getting Started", "Data Collection", "Tracking Setup", "Behavioral Tracking"
 
 docs/get-started/snowplow-bdp/setup-guide-gcp/index.md
-"BDP GCP", "Google Cloud", "BDP Setup", "Cloud Setup", "GCP Guide", "Enterprise Setup"
+"Snowplow GCP", "Google Cloud", "Snowplow Setup", "Cloud Setup", "GCP Guide", "Enterprise Setup"
 
 docs/get-started/snowplow-bdp/index.md
-"Snowplow", "Behavioral Data Platform", "Enterprise Analytics", "Managed Platform", "Cloud Analytics", "BDP Overview"
+"Snowplow", "Behavioral Data Platform", "Enterprise Analytics", "Managed Platform", "Cloud Analytics", "Snowplow Overview"
 
 docs/get-started/snowplow-bdp/setup-guide-azure/index.md
-"BDP Azure", "Azure Setup", "BDP Setup", "Cloud Setup", "Azure Guide", "Enterprise Setup"
+"Snowplow Azure", "Azure Setup", "Snowplow Setup", "Cloud Setup", "Azure Guide", "Enterprise Setup"
 
 docs/get-started/snowplow-bdp/setup-guide-aws/index.md
-"BDP AWS", "AWS Setup", "BDP Setup", "Cloud Setup", "AWS Guide", "Enterprise Setup"
+"Snowplow AWS", "AWS Setup", "Snowplow Setup", "Cloud Setup", "AWS Guide", "Enterprise Setup"
 
 docs/get-started/querying/index.md
 "Data Querying", "SQL Queries", "Getting Started", "Data Analysis", "Query Guide", "Analytics Queries"

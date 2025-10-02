@@ -4,5 +4,5 @@
   "description": "Enrich your event data by adding and amending event properties in the Snowplow pipeline.",
   "useCases": ["Composable analytics"],
   "technologies": [],
-  "snowplowTech": ["BDP Console"]
+  "snowplowTech": ["Snowplow Console"]
 }

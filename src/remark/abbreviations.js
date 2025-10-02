@@ -5,7 +5,7 @@ const plugin = () => {
     AAID: 'Android Advertising ID',
     ADLS: 'Azure Data Lake Storage',
     AWS: 'Amazon Web Services',
-    BDP: 'Behavioral Data Platform',
+    Snowplow: 'Behavioral Data Platform',
     CDI: 'Customer Data Infrastructure',
     CDN: 'Content Delivery Network',
     CDP: 'Customer Data Platform',

@@ -1,5 +1,5 @@
 ---
-title: "BDP Enterprise on Azure"
+title: "Snowplow Enterprise on Azure"
 sidebar_position: 30
 ---
 

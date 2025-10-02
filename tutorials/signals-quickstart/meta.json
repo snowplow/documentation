@@ -4,5 +4,5 @@
   "label": "Signals implementation",
   "useCases": ["Real-time personalization"],
   "technologies": ["Jupyter notebook"],
-  "snowplowTech": ["Signals", "BDP Console"]
+  "snowplowTech": ["Signals", "Snowplow Console"]
 }

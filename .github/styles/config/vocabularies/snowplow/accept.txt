@@ -53,7 +53,7 @@ Data Product Studio
 Data Model Packs
 Data Model Pack
 AWS Console
-BDP Console
+Snowplow Console
 Iglu Central
 Iglu Server
 Igluctl

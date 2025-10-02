@@ -14,11 +14,11 @@ import TabItem from '@theme/TabItem';
 
 ## Enterprise: in your own cloud
 
-BDP Enterprise is a version of [Snowplow](https://snowplow.io) hosted in your own cloud account (AWS, Azure or GCP). It enables you to create rich and well-structured data to power your advanced analytics and AI use cases.
+Snowplow Enterprise is a version of [Snowplow](https://snowplow.io) hosted in your own cloud account (AWS, Azure or GCP). It enables you to create rich and well-structured data to power your advanced analytics and AI use cases.
 
-:::tip BDP Cloud
+:::tip Snowplow Cloud
 
-Consider [BDP Cloud](#cloud-hosted-by-snowplow) for a faster setup time if you don’t wish to host your own cloud infrastructure (besides the data warehouse or lake). See [deployment model](docs/get-started/index.md) for a comparison between BDP Enterprise and BDP Cloud.
+Consider [Snowplow Cloud](#cloud-hosted-by-snowplow) for a faster setup time if you don’t wish to host your own cloud infrastructure (besides the data warehouse or lake). See [deployment model](docs/get-started/index.md) for a comparison between Snowplow Enterprise and Snowplow Cloud.
 
 :::
 
@@ -52,9 +52,9 @@ If you’d like to learn more about Snowplow you can **[book a demo with our tea
 
 ## Cloud: hosted by Snowplow
 
-BDP Cloud is a hosted version of [Snowplow](https://snowplow.io) designed to get your organization up and running and delivering value from behavioral data as quickly as possible. It enables you to create rich and well-structured data to power your advanced analytics and AI use cases.
+Snowplow Cloud is a hosted version of [Snowplow](https://snowplow.io) designed to get your organization up and running and delivering value from behavioral data as quickly as possible. It enables you to create rich and well-structured data to power your advanced analytics and AI use cases.
 
-With BDP Cloud, you don’t need to set up any cloud infrastructure yourself. See [deployment model](docs/get-started/index.md) for a comparison between BDP Cloud and BDP Enterprise.
+With Snowplow Cloud, you don’t need to set up any cloud infrastructure yourself. See [deployment model](docs/get-started/index.md) for a comparison between Snowplow Cloud and Snowplow Enterprise.
 
 ### Where is the Snowplow pipeline hosted?
 

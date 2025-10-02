@@ -13,7 +13,7 @@ The Snowplow Console's UI has facilities to get started quickly with data struct
 
 A common solution when faced with these requirements is to move management to some form of version control platform (github/gitlab). This opens up an entire ecosystem of tools and patterns enabling all manner of custom workflows.
 
-We have built [Snowplow CLI](https://docs.snowplow.io/docs/data-product-studio/snowplow-cli) to help you bridge the gap between these repository-based workflows and BDP Console.
+We have built [Snowplow CLI](https://docs.snowplow.io/docs/data-product-studio/snowplow-cli) to help you bridge the gap between these repository-based workflows and Snowplow Console.
 
 ## Prerequisites
 

@@ -1,5 +1,5 @@
 ---
-title: "BDP Enterprise on GCP"
+title: "Snowplow Enterprise on GCP"
 date: "2020-01-30"
 sidebar_position: 30
 coverImage: "gcp_logo.png"

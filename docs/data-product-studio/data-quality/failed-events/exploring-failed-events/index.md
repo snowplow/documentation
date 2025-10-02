@@ -93,7 +93,7 @@ The instructions below are for Snowplow users. For Community Edition, you will n
 
 :::note Infrastructure costs
 
-An additional stream (Kinesis, Pub/Sub or Event Hubs on AWS, GCP and Azure respectively) will be reflected in your cloud infrastructure costs (unless you are using BDP Cloud). That said, failed events are usually a tiny fraction of all events, so this stream will be minimally sized.
+An additional stream (Kinesis, Pub/Sub or Event Hubs on AWS, GCP and Azure respectively) will be reflected in your cloud infrastructure costs (unless you are using Snowplow Cloud). That said, failed events are usually a tiny fraction of all events, so this stream will be minimally sized.
 
 :::
 

@@ -73,7 +73,7 @@ For example, if you own both `gardening.primary-domain.co.uk` and `insurance.pri
 ![enter_domain](images/Screenshot_enter_domain.png)
 
 ## Configuring DNS records
-In the next step, BDP will generate the required DNS records. This may take several minutes.
+In the next step, Snowplow will generate the required DNS records. This may take several minutes.
 
 When the records are ready, you will receive a confirmation by email.
 
@@ -81,13 +81,13 @@ When the records are ready, you will receive a confirmation by email.
 
 Once the DNS records are available, copy them into your domain provider.
 
-The set of DNS records will contain a special record that allows BDP to verify that the setup is correct.
+The set of DNS records will contain a special record that allows Snowplow to verify that the setup is correct.
 
 :::info
-You will have to conclude this step within 72 hours. If BDP is unable to verify the setup within that timeframe, you will have to restart the process from the beginning.
+You will have to conclude this step within 72 hours. If Snowplow is unable to verify the setup within that timeframe, you will have to restart the process from the beginning.
 :::
 
-Once BDP verifies your DNS setup, the status in the bottom left will change and you will receive a confirmation by email.
+Once Snowplow verifies your DNS setup, the status in the bottom left will change and you will receive a confirmation by email.
 
 ![dns_records](images/Screenshot_dns_records.png)
 

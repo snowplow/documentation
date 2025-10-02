@@ -23,7 +23,7 @@ This tutorial demonstrates how to implement an abandoned browse tracking and re-
 - **Snowplow instance**:  
     - [Localstack](https://github.com/snowplow-incubator/snowplow-local) (recommended)  
     - [Community edition](/docs/get-started/snowplow-community-edition)  
-    - BDP Enterprise if you're already a customer  
+    - Snowplow Enterprise if you're already a customer  
 - **Access to a data warehouse**: e.g., [Snowflake](https://www.snowflake.com)
 - **Reverse ETL**: [Census Reverse ETL](https://www.getcensus.com) or Snowplow Reverse ETL
 - **Marketing automation platform**: e.g., [Braze](https://www.braze.com)

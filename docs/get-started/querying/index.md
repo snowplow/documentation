@@ -15,12 +15,12 @@ Once you’ve tracked some events, you will want to look at them in your data wa
 ## Connection details
 
 <Tabs groupId="offering" queryString>
-  <TabItem value="enterprise" label="BDP Enterprise" default>
+  <TabItem value="enterprise" label="Snowplow Enterprise" default>
 
 You can find the connection details in the [Console](https://console.snowplowanalytics.com/destinations/catalog), under the destination you’ve selected.
 
   </TabItem>
-  <TabItem value="cloud" label="BDP Cloud">
+  <TabItem value="cloud" label="Snowplow Cloud">
 
 You can find the connection details in the [Console](https://console.snowplowanalytics.com/destinations/catalog), under the destination you’ve selected.
 

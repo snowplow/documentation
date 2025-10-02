@@ -7,9 +7,9 @@ description: "Details on where and how Snowplow is deployed"
 
 For production use, you can choose between Snowplow Enterprise and Snowplow Cloud. For non-production use cases, use Snowplow Community Edition, or play around with Snowplow Micro. See the [feature comparison page](/docs/get-started/feature-comparison/index.md) for more information.
 
-## BDP Enterprise
+## Snowplow Enterprise
 
-Snowplow [BDP Enterprise](/docs/get-started/snowplow-bdp/index.md) is deployed using a "private SaaS" or "Bring Your Own Cloud (BYOC)" deployment model. This means the data pipeline is hosted and run in your own cloud environment, using your data warehouse or lake. These comprise the **data plane**. Ongoing pipeline maintenance, such as upgrades and security patches, are managed by Snowplow.
+Snowplow [Snowplow Enterprise](/docs/get-started/snowplow-bdp/index.md) is deployed using a "private SaaS" or "Bring Your Own Cloud (BYOC)" deployment model. This means the data pipeline is hosted and run in your own cloud environment, using your data warehouse or lake. These comprise the **data plane**. Ongoing pipeline maintenance, such as upgrades and security patches, are managed by Snowplow.
 
 The **control plane**, which includes a UI and an API for [defining your data](/docs/data-product-studio/data-products/index.md) and managing your infrastructure, is hosted by Snowplow.
 
@@ -22,9 +22,9 @@ The **control plane**, which includes a UI and an API for [defining your data](/
 | Pipeline infrastructure (AWS / Azure / GCP) |                    |       ✅       |
 | Data destination (warehouse / lake)         |                    |       ✅       |
 
-## BDP Cloud
+## Snowplow Cloud
 
-Snowplow [BDP Cloud](/docs/get-started/snowplow-bdp/index.md) differs from BDP Enterprise in that your data pipeline is deployed in Snowplow's cloud account, and is entirely managed by Snowplow.
+Snowplow [Snowplow Cloud](/docs/get-started/snowplow-bdp/index.md) differs from Snowplow Enterprise in that your data pipeline is deployed in Snowplow's cloud account, and is entirely managed by Snowplow.
 
 |                                             | Hosted by Snowplow | Hosted by you |
 | :------------------------------------------ | :----------------: | :-----------: |

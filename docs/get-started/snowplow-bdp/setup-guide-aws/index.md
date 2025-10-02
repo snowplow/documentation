@@ -1,5 +1,5 @@
 ---
-title: "BDP Enterprise on AWS"
+title: "Snowplow Enterprise on AWS"
 date: "2020-01-30"
 sidebar_position: 10
 coverImage: "aws_logo_0.png"

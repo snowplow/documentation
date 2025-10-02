@@ -496,7 +496,6 @@ While Snowplow supports most JSON Schema Draft 4 features, there are some limita
 * **`dependencies`**: Property dependencies are not supported
 * **`exclusiveMinimum`** and **`exclusiveMaximum`**: Exclusive bounds are not supported
 
-### Recommended alternatives
 
 Instead of unsupported features, use these approaches:
 

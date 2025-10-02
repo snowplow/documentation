@@ -102,13 +102,14 @@
 /* You can override the default Infima variables here. */
 
 :root {
-  --ifm-color-primary: hsl(var(--primary));
-  --ifm-color-primary-dark: #522d93;
-  --ifm-color-primary-darker: #472781;
-  --ifm-color-primary-darkest: #29164a;
-  --ifm-color-primary-light: #7345c6;
-  --ifm-color-primary-lighter: #926ed3;
-  --ifm-color-primary-lightest: #b198df;
+  --ifm-color-primary: hsl(var(--primary))!important;
+  --ifm-link-color: hsl(var(--primary))!important;
+  --ifm-color-primary-dark: #5d32a5;
+  --ifm-color-primary-darker: #58309c;
+  --ifm-color-primary-darkest: #482780;
+  --ifm-color-primary-light: #7242c5;
+  --ifm-color-primary-lighter: #794bc8;
+  --ifm-color-primary-lightest: #8e66d0;
   --ifm-color-accent: #fc5e35;
   --ifm-color-accent-darker: #e5481f;
   --ifm-color-announcement: #e6f6fe;
@@ -116,7 +117,7 @@
   --ifm-code-padding-vertical: 0.05rem;
   --ifm-font-family-base: 'InterVariable', var(--font-fallback);
   --ifm-menu-color-active: hsl(var(--primary));
-  --ifm-font-color-base: var(--muted-foreground);
+  --ifm-font-color-base: hsl(var(--muted-foreground));
   --ifm-font-color-base-inverse: rgb(218, 221, 225);
   --ifm-toc-padding-horizontal: 20px;
   --docusaurus-highlighted-code-line-bg: rgba(224, 199, 50, 0.2);
@@ -127,13 +128,6 @@
     Roboto, 'Helvetica Neue', Arial, sans-serif;
   --font-variable: 'InterVariable', var(--font-fallback);
 }
-
-body {
-  font-family: var(--font-variable);
-  font-weight: 400;
-  letter-spacing: -0.0125em;
-}
-
 /* For readability concerns, you should choose a lighter palette in dark mode. */
 html[data-theme='dark'] {
   --ifm-menu-color-active: #b198df;
@@ -149,6 +143,88 @@ html[data-theme='dark'] {
   --docusaurus-highlighted-code-line-bg: rgba(224, 199, 50, 0.2);
   --ifm-font-color-base: rgb(218, 221, 225);
   --ifm-font-color-base-inverse: #000000;
+}
+
+body {
+  font-family: var(--font-variable);
+  font-weight: 400;
+  letter-spacing: -0.0125em;
+}
+
+/* Fix MDX prose content styling - preserve Tailwind typography */
+.markdown,
+article.markdown,
+.prose {
+  color: hsl(var(--muted-foreground));
+}
+
+.markdown h1,
+.markdown h2,
+.markdown h3,
+.markdown h4,
+.markdown h5,
+.markdown h6,
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4,
+.prose h5,
+.prose h6 {
+  color: hsl(var(--foreground)) !important;
+}
+
+.markdown a,
+.prose a {
+  color: hsl(var(--primary)) !important;
+}
+
+/* Let prose handle font sizes and line heights - only override color */
+.markdown p,
+.prose p,
+.markdown li,
+.prose li,
+.markdown blockquote,
+.prose blockquote {
+  color: hsl(var(--muted-foreground));
+}
+
+/* Ensure prose typography classes work properly */
+.prose-sm,
+.prose-base,
+.prose-lg,
+.prose-xl,
+.prose-2xl {
+  color: hsl(var(--muted-foreground));
+}
+
+/* Override Docusaurus article styles that interfere with prose */
+article[class*="markdown"] p {
+  font-size: inherit !important;
+  line-height: inherit !important;
+}
+
+/* Allow prose to control heading sizes and line heights */
+.prose h1 { font-size: 2.25rem !important; line-height: 2.5rem !important; }
+.prose h2 { font-size: 1.875rem !important; line-height: 2.25rem !important; }
+.prose h3 { font-size: 1.5rem !important; line-height: 2rem !important; }
+.prose h4 { font-size: 1.25rem !important; line-height: 1.75rem !important; }
+
+/* Prose paragraph and text line heights */
+.prose p { line-height: 1.75 !important; }
+.prose li { line-height: 1.75 !important; }
+.prose blockquote { line-height: 1.75 !important; }
+
+/* Prose size variants with proper line heights */
+.prose-sm p, .prose-sm li { font-size: 0.875rem !important; line-height: 1.5 !important; }
+.prose-base p, .prose-base li { font-size: 1rem !important; line-height: 1.75 !important; }
+.prose-lg p, .prose-lg li { font-size: 1.125rem !important; line-height: 1.75 !important; }
+.prose-xl p, .prose-xl li { font-size: 1.25rem !important; line-height: 1.8 !important; }
+.prose-2xl p, .prose-2xl li { font-size: 1.5rem !important; line-height: 1.67 !important; }
+
+/* Reset any Docusaurus interference with typography */
+.markdown, .prose {
+  font-size: unset !important;
+  line-height: unset !important;
 }
 
 [data-theme='dark'] .breadcrumbs__item--active .breadcrumbs__link {
@@ -481,7 +557,7 @@ aside.theme-doc-sidebar-container {
 .menu__link,
 .menu__caret {
   align-items: center;
-  border-radius: 0.25rem;
+  border-radius: 0!important;
   display: flex;
   transition: background var(--ifm-transition-fast)
     var(--ifm-transition-timing-default);
@@ -501,6 +577,7 @@ aside.theme-doc-sidebar-container {
   font-size: 0.93825rem;
   padding: var(--ifm-menu-link-padding-vertical)
     var(--ifm-menu-link-padding-horizontal);
+  border-radius: 0!important;
 }
 
 .menu__link:hover {
@@ -525,6 +602,7 @@ aside.theme-doc-sidebar-container {
 .menu__link--active {
   color: hsl(var(--primary));
   background-color: hsla(261.56, 53.33%, 47.06%, 0.12);
+  border-radius: 0!important;
 }
 
 .menu__link--active:hover {
@@ -543,6 +621,7 @@ aside.theme-doc-sidebar-container {
   background-color: hsla(261.56, 53.33%, 47.06%, 0.12);
   border-radius: 0px var(--radius) var(--radius) 0px;
   border-left: 1px solid hsl(var(--primary));
+  border-radius: 0!important;
 }
 
 .menu__caret {
@@ -774,20 +853,70 @@ a.card:hover::after {
   padding-left: 0;
 }
 
+/* Fix breadcrumb sizing and alignment */
+.breadcrumbs {
+  display: flex;
+  align-items: center;
+  padding: 12px 0;
+  min-height: 48px;
+}
+
 .breadcrumbs__link {
-  font-size: 14px;
+  font-size: 16px !important;
+  display: inline-flex;
+  align-items: center;
+  padding: 8px 4px;
+}
+
+.breadcrumbs__item {
+  display: inline-flex;
+  align-items: center;
 }
 
 .breadcrumbs__item:not(:last-child):after {
-  margin: 0 0 0 3px;
+  margin: 0 8px;
+  display: inline-flex;
+  align-items: center;
 }
 
 ul.breadcrumbs {
-  --ifm-breadcrumb-size-multiplier: 0.4;
+  --ifm-breadcrumb-size-multiplier: 1;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
 }
 
 ul.breadcrumbs > li.breadcrumbs__item > a.breadcrumbs__link > svg {
-  top: 2px;
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  vertical-align: middle;
+  display: inline-block;
+}
+
+/* Fix home icon alignment specifically */
+.breadcrumbs__link[aria-label*="Home"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none !important;
+  border-radius: 0 !important;
+  padding: 8px 4px;
+}
+
+/* Remove any circular background from home icon */
+.breadcrumbs__item:first-child .breadcrumbs__link {
+  background: transparent !important;
+  border-radius: 0 !important;
+}
+
+/* Ensure all breadcrumb items align properly */
+.breadcrumbs__item .breadcrumbs__link {
+  display: inline-flex;
+  align-items: center;
+  vertical-align: middle;
+  line-height: 1;
 }
 
 .card .text--truncate {

@@ -5,7 +5,7 @@ sidebar_label: "Get started"
 description: "Details on where and how Snowplow is deployed"
 ---
 
-For production use, you can choose between Snowplow BDP Enterprise and Snowplow BDP Cloud. For non-production use cases, use Snowplow Community Edition, or play around with Snowplow Micro. See the [feature comparison page](/docs/get-started/feature-comparison/index.md) for more information.
+For production use, you can choose between Snowplow Enterprise and Snowplow Cloud. For non-production use cases, use Snowplow Community Edition, or play around with Snowplow Micro. See the [feature comparison page](/docs/get-started/feature-comparison/index.md) for more information.
 
 ## BDP Enterprise
 

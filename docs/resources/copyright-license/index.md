@@ -101,4 +101,4 @@ When in doubt, consult each component’s GitHub repository for the LICENSE file
 
 ## Proprietary components
 
-[Snowplow BDP](https://snowplow.io/snowplow-bdp/) is built upon the above components, but adds a vast set of proprietary, closed source ones (UI, API, highly available deployment logic, and so on). These are only available under a commercial license for Snowplow customers.
+[Snowplow](https://snowplow.io/snowplow-bdp/) is built upon the above components, but adds a vast set of proprietary, closed source ones (UI, API, highly available deployment logic, and so on). These are only available under a commercial license for Snowplow customers.

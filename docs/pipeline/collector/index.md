@@ -8,9 +8,9 @@ Once your [event collector](/docs/fundamentals/index.md) is set up, along with [
 
 Read more about the technical aspects of the collector [here](/docs/api-reference/stream-collector/index.md).
 
-## Viewing collector configuration in Snowplow BDP Console
+## Viewing collector configuration in Snowplow Console
 
-The easiest way to access collector configuration is to view it within the Snowplow BDP Console. To do that, after you log in click on _Pipeline Configuration_ under the respective pipeline's navigation menu:
+The easiest way to access collector configuration is to view it within the Snowplow Console. To do that, after you log in click on _Pipeline Configuration_ under the respective pipeline's navigation menu:
 
 ![](images/image-1.png)
 
@@ -26,7 +26,7 @@ This view is consuming the respective API that you can also access, as discussed
 
 ## Consuming the collector configuration API
 
-As a Snowplow BDP customer you already benefit from 24x7 monitoring of pipeline collector health. If you wish to add collector monitoring to your internal monitoring systems nevertheless, the maintainable way to do this is to retrieve collector endpoints and other configuration values via the available API, then invoke your health checks on them.
+As a Snowplow customer you already benefit from 24x7 monitoring of pipeline collector health. If you wish to add collector monitoring to your internal monitoring systems nevertheless, the maintainable way to do this is to retrieve collector endpoints and other configuration values via the available API, then invoke your health checks on them.
 
 ### Authorization
 

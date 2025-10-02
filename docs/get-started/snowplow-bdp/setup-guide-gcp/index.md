@@ -5,9 +5,9 @@ sidebar_position: 30
 coverImage: "gcp_logo.png"
 ---
 
-## Request your pipeline through Snowplow BDP Console
+## Request your pipeline through Snowplow Console
 
-Login to Snowplow BDP Console where you'll be able to follow a step-by-step guide to getting started (including the steps below).
+Login to Snowplow Console where you'll be able to follow a step-by-step guide to getting started (including the steps below).
 
 ## Setting up your Google project
 

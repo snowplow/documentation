@@ -26,7 +26,7 @@ Before starting, ensure you can access and edit the configuration of your hostin
 
 :::info
 
-The flow described below might differ depending on the version of Snowplow BDP you are using.
+The flow described below might differ depending on the version of Snowplow you are using.
 
 :::
 

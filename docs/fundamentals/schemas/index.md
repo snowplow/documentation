@@ -9,7 +9,7 @@ description: "Schemas are a powerful feature that ensures your data is clean and
 
 :::info Terminology
 
-We often use the terms “schema” and “data structure” interchangeably, although in [Snowplow BDP](/docs/get-started/feature-comparison/index.md), “data structure” usually refers to a combination of a schema with some additional metadata.
+We often use the terms “schema” and “data structure” interchangeably, although in [Snowplow](/docs/get-started/feature-comparison/index.md), “data structure” usually refers to a combination of a schema with some additional metadata.
 
 :::
 
@@ -48,7 +48,7 @@ We use the terms “schema repository” and “schema registry” interchangeab
 
 There is a [central Iglu repository](http://iglucentral.com/) that holds public schemas for use with Snowplow, including ones for some of the [out-of-the-box self-described events](/docs/fundamentals/events/index.md#out-of-the-box-and-custom-events) and [out-of-the-box entities](/docs/fundamentals/entities/index.md#out-of-the-box-entities).
 
-To host schemas for your [custom self-described events](/docs/fundamentals/events/index.md#self-describing-events) and [custom entities](/docs/fundamentals/entities/index.md#custom-entities), you can run your own Iglu, either using [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) (recommended), or a [static repository](/docs/api-reference/iglu/iglu-repositories/static-repo/index.md). _(This is not required for Snowplow BDP customers, as Snowplow BDP already includes a private Iglu repository.)_
+To host schemas for your [custom self-described events](/docs/fundamentals/events/index.md#self-describing-events) and [custom entities](/docs/fundamentals/entities/index.md#custom-entities), you can run your own Iglu, either using [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) (recommended), or a [static repository](/docs/api-reference/iglu/iglu-repositories/static-repo/index.md). _(This is not required for Snowplow customers, as Snowplow already includes a private Iglu repository.)_
 
 ## The anatomy of a schema
 

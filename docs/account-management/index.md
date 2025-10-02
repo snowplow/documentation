@@ -9,7 +9,7 @@ sidebar_custom_props:
 sidebar_label: "Account management"
 ---
 
-Manage your account configuration and users using the Snowplow BDP Console. You can also use the underlying API directly. This page describes how to acquire an API key.
+Manage your account configuration and users using the Snowplow Console. You can also use the underlying API directly. This page describes how to acquire an API key.
 
 ## Credentials API
 
@@ -99,6 +99,6 @@ Previously, BDP Console was using the Password authentication flow to support ma
 
 ![](images/image-2.png)
 
-Legacy Snowplow BDP credentials management
+Legacy Snowplow credentials management
 
 This method and the respective credentials still work for those who have been using them, however we strongly advise that customers upgrade to the current iteration where the only secret to be used by m2m applications is an API key which can be exchanged for a JWT.

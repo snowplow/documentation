@@ -6,7 +6,7 @@ import { useSidebarBreadcrumbs } from '@docusaurus/theme-common/internal'
 import _ from 'lodash'
 
 const offeringNames = {
-  bdp: "Snowplow BDP",
+  bdp: "Snowplow",
   community: "Snowplow Community Edition",
 }
 

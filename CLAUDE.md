@@ -48,7 +48,7 @@
 * Mix prose and lists appropriately: use prose to explain concepts, lists for configuration options or step-by-step items
 
 ### Snowplow terminology
-* **Capitalized**: Data Product Studio, Snowtype, Snowplow BDP, Signals
+* **Capitalized**: Data Product Studio, Snowtype, Snowplow, Signals
 * **Context-capitalized**: Collector, Enrich, specific Loaders
 * **Not capitalized**: entities, events, schemas, data structures
 * Use "entity" not "context", "self-describing event" not "unstructured event"

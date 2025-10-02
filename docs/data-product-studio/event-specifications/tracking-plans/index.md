@@ -53,5 +53,5 @@ The event validation part allows you to set the instructions for tracking implem
 The [Entities](/docs/fundamentals/entities/index.md) part allows you to declare which entities should be tracked with the event. You can also define whether the entity should be mandatory or optional, or whether more than one instance should be tracked with this event.
 
 :::info
-Snowplow BDP provides both a UI and an API to manage your Event Specifications. For information about managing event specifications see [How to manage Event Specifications](/docs/data-product-studio/event-specifications/index.md).
+Snowplow provides both a UI and an API to manage your Event Specifications. For information about managing event specifications see [How to manage Event Specifications](/docs/data-product-studio/event-specifications/index.md).
 :::

@@ -2,7 +2,7 @@
 title: "Running data models"
 date: "2020-12-01"
 sidebar_position: 2
-description: "Guides to run data models in Snowplow BDP, both dbt and SQL Runner."
+description: "Guides to run data models in Snowplow, both dbt and SQL Runner."
 sidebar_label: "Running data models"
 sidebar_custom_props:
   offerings:
@@ -38,4 +38,4 @@ To create a new data model, click the "Add data model" button in the [Data Model
 ![](images/data-models.png)
 
 ## Monitor data model runs
-After you've set everything up, Snowplow BDP Console will run the model according to the provided schedule. You can monitor your data model runs on the [Jobs page](https://console.snowplowanalytics.com/jobs).
+After you've set everything up, Snowplow Console will run the model according to the provided schedule. You can monitor your data model runs on the [Jobs page](https://console.snowplowanalytics.com/jobs).

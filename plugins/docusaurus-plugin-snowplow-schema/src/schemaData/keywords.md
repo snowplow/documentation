@@ -1280,7 +1280,7 @@ docs/modeling-your-data/running-data-models-via-snowplow-bdp/retrieving-job-exec
 "Job Execution", "API Data", "Execution Analytics", "Job Monitoring", "Pipeline API", "Execution Metrics"
 
 docs/modeling-your-data/running-data-models-via-snowplow-bdp/index.md
-"Snowplow BDP", "Managed Models", "BDP Pipeline", "Managed Analytics", "Cloud Pipeline", "Enterprise Analytics"
+"Snowplow", "Managed Models", "BDP Pipeline", "Managed Analytics", "Cloud Pipeline", "Enterprise Analytics"
 
 docs/modeling-your-data/modeling-your-data-with-sql-runner/sql-runner-mobile-data-model/index.md
 "SQL Runner Mobile", "Mobile SQL", "Mobile Analytics", "SQL Models", "Mobile Data", "App Analytics"
@@ -1601,7 +1601,7 @@ docs/get-started/snowplow-bdp/setup-guide-gcp/index.md
 "BDP GCP", "Google Cloud", "BDP Setup", "Cloud Setup", "GCP Guide", "Enterprise Setup"
 
 docs/get-started/snowplow-bdp/index.md
-"Snowplow BDP", "Behavioral Data Platform", "Enterprise Analytics", "Managed Platform", "Cloud Analytics", "BDP Overview"
+"Snowplow", "Behavioral Data Platform", "Enterprise Analytics", "Managed Platform", "Cloud Analytics", "BDP Overview"
 
 docs/get-started/snowplow-bdp/setup-guide-azure/index.md
 "BDP Azure", "Azure Setup", "BDP Setup", "Cloud Setup", "Azure Guide", "Enterprise Setup"

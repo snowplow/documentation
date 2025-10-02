@@ -457,7 +457,7 @@ Here are two pieces of older content that only partially follow the style guide.
 
 ### Pipeline components
 - Console is capitalized, and doesn't have a definite article (no "the")
-- It can also be called "BDP Console" or "Snowplow BDP Console"
+- It can also be called "BDP Console" or "Snowplow Console"
   - This is fine at the start of a piece of writing but feels overly wordy if used throughout, so maybe open with that then just call it "Console" subsequently
 
    | ✅                              | ❌                                       |

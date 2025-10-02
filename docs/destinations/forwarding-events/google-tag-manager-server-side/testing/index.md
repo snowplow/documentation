@@ -10,7 +10,7 @@ You can direct some (or all) of your Snowplow events to the Preview Mode, instea
 
 :::note Snowbridge 2.3+
 
-To follow the steps below, you will need to be running [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md) 2.3+. You will also need to have the [`spGtmssPreview` transformation](/docs/destinations/forwarding-events/snowbridge/configuration/transformations/builtin/spGtmssPreview.md) activated (this is the default for Snowplow BDP customers using Snowbridge with GTM Server Side).
+To follow the steps below, you will need to be running [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md) 2.3+. You will also need to have the [`spGtmssPreview` transformation](/docs/destinations/forwarding-events/snowbridge/configuration/transformations/builtin/spGtmssPreview.md) activated (this is the default for Snowplow customers using Snowbridge with GTM Server Side).
 
 :::
 

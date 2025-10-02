@@ -16,7 +16,7 @@ The SPAL is based on the [PolyForm Noncommercial License](https://polyformprojec
 
 ## I have commercially licensed software from Snowplow. Does this impact me?
 
-No. If you have entered into a separate commercial licensing with Snowplow, for example, buying a Snowplow BDP commercial product, then the commercial license terms you have agreed to will continue to govern your use of the software.
+No. If you have entered into a separate commercial licensing with Snowplow, for example, buying a Snowplow commercial product, then the commercial license terms you have agreed to will continue to govern your use of the software.
 
 ## Why make the source available?
 

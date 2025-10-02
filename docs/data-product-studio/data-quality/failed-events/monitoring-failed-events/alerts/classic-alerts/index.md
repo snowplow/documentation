@@ -16,7 +16,7 @@ To receive alerts you must have the failed events [monitoring](/docs/data-produc
 
 ## Subscribing to alerts
 
-- Login to Snowplow console
+- Login to Snowplow Console
 - Locate the pipeline you wish to set up alerts for in the left-hand navigation
 - Click on the `Configuration` tab, then the `Pipeline alerts` section
 

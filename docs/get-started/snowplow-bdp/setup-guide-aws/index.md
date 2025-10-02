@@ -142,7 +142,7 @@ The last step is to set up the Snowplow deployment role. This is a role assumed 
 3. Attach the `IAMFullAccess` policy. If a Permission Boundary was set on the admin role, then add this boundary to the bottom section of permissions page.
 - Role name: SnowplowDeployment (please use this specific name)
 - Role description: Allows the Snowplow Team to programmatically deploy to this account.
-4. Copy the Snowplow deployment role ARN. You will need to share this role with us as part of filling out the setup form in Snowplow console.
+4. Copy the Snowplow deployment role ARN. You will need to share this role with us as part of filling out the setup form in Snowplow Console.
 
 ### Provide a CIDR range for VPC peering or using a custom VPC (optional)
 

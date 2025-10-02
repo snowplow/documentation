@@ -489,7 +489,6 @@ Validate that data matches one or more of several schemas:
 
 While Snowplow supports most JSON Schema Draft 4 features, there are some limitations to be aware of:
 
-### Unsupported JSON Schema features
 
 * **`$ref`**: Schema references are not supported in property definitions
 * **`allOf`**: Schema intersection is not supported

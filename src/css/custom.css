@@ -1052,6 +1052,10 @@ from elements with a subsequent element that has a top margin. */
   margin-top: 0rem;
 }
 
+.theme-doc-markdown div > video {
+  margin: 0; /* Video inside React Player div */
+}
+
 /* doc markdown grid layout control END*/
 
 .footer {

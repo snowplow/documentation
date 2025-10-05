@@ -30,6 +30,7 @@ module.exports = {
   clientModules: [
     require.resolve('./cookieConsent.js'),
     require.resolve('./snowplow.js'),
+    require.resolve('./reoTracking.js'),
     require.resolve('./google.js'),
   ],
 

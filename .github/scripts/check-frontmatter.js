@@ -107,7 +107,7 @@ module.exports = async ({ github, context, core }) => {
         const descStatus = result.descriptionOk ? '✅' : '❌'
 
         commentBody += `**${result.path}**\n`
-        commentBody += `date ${dateStatus} description ${descStatus} __`
+        commentBody += `date ${dateStatus} description ${descStatus} _`
 
         // Build helpful message
         const fixes = []
@@ -132,7 +132,7 @@ module.exports = async ({ github, context, core }) => {
           if (fixes.length > 1) {
             commentBody += '; ' + fixes.slice(1).join('; ')
           }
-          commentBody += '.__\n'
+          commentBody += '._\n'
         }
       }
       commentBody += `\nPlease update the frontmatter of these files.\n\n`

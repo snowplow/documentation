@@ -94,27 +94,57 @@ module.exports = async ({ github, context, core }) => {
   )
 
   if (filesWithIssues.length > 0) {
-    let commentBody = `## Metadata check\n\n`
+    let commentBody = `Found issues in the following files:\n\n`
 
     if (filesWithIssues.length > 5) {
-      commentBody += `⚠️ Found ${filesWithIssues.length} files with frontmatter issues:\n\n`
-
       for (const result of filesWithIssues) {
-        commentBody += `- \`${result.path}\`\n`
+        commentBody += `${result.path}\n`
+
+        const dateStatus = result.dateOk ? '✅' : '❌'
+        const descStatus = result.descriptionOk ? '✅' : '❌'
+
+        commentBody += `date ${dateStatus}`
+        if (result.dateIssue) {
+          commentBody += ` ${result.dateIssue}`
+        }
+        commentBody += ` | description ${descStatus}`
+        if (result.descriptionIssue) {
+          commentBody += ` ${result.descriptionIssue}`
+        }
+        commentBody += `\n\n`
       }
     } else {
-      commentBody += `Found issues in the following files:\n\n`
-
       for (const result of filesWithIssues) {
-        const dateIcon = result.dateOk ? '✅' : '❌'
-        const descIcon = result.descriptionOk ? '✅' : '❌'
+        const dateStatus = result.dateOk ? '✅' : '❌'
+        const descStatus = result.descriptionOk ? '✅' : '❌'
 
         commentBody += `**${result.path}**\n`
-        commentBody += `**date** ${dateIcon} ${result.dateIssue || ''} | `
-        commentBody += `**description** ${descIcon} ${
-          result.descriptionIssue || ''
-        }\n\n`
+        commentBody += `**date** ${dateStatus}  **description** ${descStatus}\n`
+
+        // Build helpful message
+        const fixes = []
+        if (result.dateIssue === 'Out of date' || result.dateIssue === 'Missing') {
+          fixes.push('specify a date within the last month')
+        } else if (result.dateIssue === 'Invalid format') {
+          fixes.push('use YYYY-MM-DD format for date')
+        }
+
+        if (result.descriptionIssue === 'Missing' || result.descriptionIssue === 'Empty') {
+          fixes.push('add a page description')
+        }
+
+        if (fixes.length > 0) {
+          commentBody += fixes[0].charAt(0).toUpperCase() + fixes[0].slice(1)
+          if (fixes.length > 1) {
+            commentBody += '; ' + fixes.slice(1).join('; ')
+          }
+          commentBody += '.\n'
+        }
+
+        commentBody += `\n`
       }
+
+      commentBody += `Page descriptions and up-to-date modified dates are important for SEO.\n`
     }
 
     await github.rest.issues.createComment({

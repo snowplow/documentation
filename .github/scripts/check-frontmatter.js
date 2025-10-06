@@ -94,13 +94,17 @@ module.exports = async ({ github, context, core }) => {
   )
 
   if (filesWithIssues.length > 0) {
-    let commentBody = `## Metadata problems\n\nPage descriptions and accurate modified dates are important for SEO. Found issues in the following ${filesWithIssues.length} files:\n\n`
+    const fileWord = filesWithIssues.length === 1 ? 'file' : 'files'
+    const theseWord = filesWithIssues.length === 1 ? 'this' : 'these'
+    const countText = filesWithIssues.length === 1 ? '' : `${filesWithIssues.length} `
+
+    let commentBody = `## Metadata problems\n\nPage descriptions and accurate modified dates are important for SEO. Found issues in the following ${countText}${fileWord}:\n\n`
 
     if (filesWithIssues.length > 5) {
       for (const result of filesWithIssues) {
         commentBody += `${result.path}\n`
       }
-      commentBody += `\nPlease update the frontmatter of these files.\n\n`
+      commentBody += `\nPlease update the frontmatter of ${theseWord} ${fileWord}.\n\n`
     } else {
       for (const result of filesWithIssues) {
         const dateStatus = result.dateOk ? '✅' : '❌'
@@ -136,7 +140,7 @@ module.exports = async ({ github, context, core }) => {
         }
         commentBody += '\n'
       }
-      commentBody += `\nPlease update the frontmatter of these files.\n\n`
+      commentBody += `\nPlease update the frontmatter of ${theseWord} ${fileWord}.\n\n`
     }
 
     await github.rest.issues.createComment({

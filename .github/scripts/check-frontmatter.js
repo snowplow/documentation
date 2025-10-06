@@ -99,9 +99,8 @@ module.exports = async ({ github, context, core }) => {
     if (filesWithIssues.length > 5) {
       for (const result of filesWithIssues) {
         commentBody += `${result.path}\n`
-
-        commentBody += `Please update these files.\n\n`
       }
+      commentBody += `\nPlease update these files.\n\n`
     } else {
       for (const result of filesWithIssues) {
         const dateStatus = result.dateOk ? '✅' : '❌'

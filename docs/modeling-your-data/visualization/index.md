@@ -4,7 +4,7 @@ sidebar_position: 8
 sidebar_label: "Visualizations"
 sidebar_custom_props:
   offerings:
-    - bdp
+    - cdi
 ---
 
 ```mdx-code-block

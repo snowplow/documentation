@@ -4,7 +4,7 @@ sidebar_position: 6
 sidebar_label: "Snowtype (Code generation)"
 sidebar_custom_props:
   offerings:
-    - bdp
+    - cdi
 ---
 
 ```mdx-code-block

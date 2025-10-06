@@ -3,7 +3,7 @@ title: "First-party tracking"
 sidebar_position: 40
 sidebar_custom_props:
   offerings:
-    - bdp
+    - cdi
   # hide from sidebar and external search until these instructions apply more universally
   hidden: true
 ---

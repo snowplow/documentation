@@ -13,11 +13,11 @@ The Snowplow Console's UI has facilities to get started quickly with data struct
 
 A common solution when faced with these requirements is to move management to some form of version control platform (github/gitlab). This opens up an entire ecosystem of tools and patterns enabling all manner of custom workflows.
 
-We have built [Snowplow CLI](https://docs.snowplow.io/docs/data-product-studio/snowplow-cli) to help you bridge the gap between these repository-based workflows and BDP Console.
+We have built [Snowplow CLI](https://docs.snowplow.io/docs/data-product-studio/snowplow-cli) to help you bridge the gap between these repository-based workflows and Snowplow Console.
 
 ## Prerequisites
 
-* A deployed Snowplow BDP pipeline
+* A deployed Snowplow pipeline
 * [Snowplow CLI](https://docs.snowplow.io/docs/data-product-studio/snowplow-cli) installed and configured
 * A familiarity with [git](https://git-scm.com/) and an understanding of [GitHub Actions](https://docs.github.com/en/actions/writing-workflows)
 * A sensible [terminal emulator](https://en.wikipedia.org/wiki/Terminal_emulator) and shell
@@ -25,5 +25,3 @@ We have built [Snowplow CLI](https://docs.snowplow.io/docs/data-product-studio/s
 ## What you'll be doing
 
 This tutorial will walk through creating and deploying a data structure from the command line using [Snowplow CLI](https://docs.snowplow.io/docs/data-product-studio/snowplow-cli). It will then show how it is possible to automate the validation and deployment process using [GitHub Actions](https://docs.github.com/en/actions/writing-workflows).
-
-

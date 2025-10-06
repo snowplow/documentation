@@ -641,7 +641,7 @@ docs/api-reference/failed-events/index.md
 description: "API reference for handling and processing failed behavioral events in Snowplow data quality workflows."
 
 docs/api-reference/console-api.md
-description: "Snowplow BDP Console API reference for programmatic management of behavioral data platform resources."
+description: "Snowplow Console API reference for programmatic management of behavioral data platform resources."
 
 docs/api-reference/index.md
 description: "Complete API reference documentation for Snowplow behavioral data platform components and services."
@@ -2618,7 +2618,7 @@ docs/modeling-your-data/visualization/marketing-dashboards/index.md
 description: "Build marketing performance dashboards from behavioral data for campaign analysis and optimization."
 
 docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/index.md
-description: "Run dbt data models through Snowplow BDP Console for managed behavioral data transformation workflows."
+description: "Run dbt data models through Snowplow Console for managed behavioral data transformation workflows."
 
 docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/resolving-data-model-failures/index.md
 description: "Troubleshoot and resolve dbt model failures in Snowplow BDP for reliable behavioral data processing."
@@ -2627,7 +2627,7 @@ docs/modeling-your-data/running-data-models-via-snowplow-bdp/retrieving-job-exec
 description: "Retrieve job execution data via Snowplow BDP API for behavioral data model monitoring and debugging."
 
 docs/modeling-your-data/running-data-models-via-snowplow-bdp/index.md
-description: "Execute and manage data models through Snowplow BDP Console for streamlined behavioral analytics workflows."
+description: "Execute and manage data models through Snowplow Console for streamlined behavioral analytics workflows."
 
 docs/modeling-your-data/modeling-your-data-with-sql-runner/sql-runner-mobile-data-model/index.md
 description: "Build mobile analytics data models using SQL Runner for behavioral mobile app analysis."

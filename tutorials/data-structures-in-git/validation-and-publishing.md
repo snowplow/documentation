@@ -75,7 +75,7 @@ The command should output something close to the following:
 Publishing to `dev` will also run validation. It will only fail on ERROR notifications.
 :::
 
-You should now be able to see your published data structure in [BDP Console UI](https://console.snowplowanalytics.com/data-structures). If you click through from the data structure listing to view the `login` data structure you should see the following banner.
+You should now be able to see your published data structure in [Console UI](https://console.snowplowanalytics.com/data-structures). If you click through from the data structure listing to view the `login` data structure you should see the following banner.
 
 ![](./images/locked.png)
 

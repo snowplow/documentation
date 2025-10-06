@@ -5,7 +5,7 @@ sidebar_label: "Console: data structures builder"
 sidebar_position: 1
 sidebar_custom_props:
   offerings:
-    - bdp
+    - cdi
 ---
 
 :::info Supported properties

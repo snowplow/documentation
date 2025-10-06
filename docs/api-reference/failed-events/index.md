@@ -32,7 +32,7 @@ In order for an event to be processed successfully:
 
 If your pipeline is generating schema violations, it might mean there is a problem with your tracking, or a problem with your [Iglu resolver](/docs/api-reference/iglu/iglu-resolver/index.md) which lists where schemas should be found. The error details in the schema violation JSON object should give you a hint about what the problem might be.
 
-Snowplow BDP customers should check in the Snowplow BDP Console that all data structures are correct and have been [promoted to production](/docs/data-product-studio/data-structures/manage/index.md). Snowplow Community Edition users should check that the Enrichment app is configured with an [Iglu resolver file](/docs/api-reference/iglu/iglu-resolver/index.md) that points to a repository containing the schemas.
+Snowplow customers should check in the Snowplow Console that all data structures are correct and have been [promoted to production](/docs/data-product-studio/data-structures/manage/index.md). Snowplow Community Edition users should check that the Enrichment app is configured with an [Iglu resolver file](/docs/api-reference/iglu/iglu-resolver/index.md) that points to a repository containing the schemas.
 
 Next, check the tracking code in your custom application, and make sure the entities you are sending conform to the schema definition.
 

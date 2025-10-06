@@ -4,7 +4,7 @@ sidebar_label: "Creating a tracking plan"
 sidebar_position: 2
 sidebar_custom_props:
   offerings:
-    - bdp
+    - cdi
 ---
 
 As explained in [Introduction to tracking design](/docs/data-product-studio/index.md), to use Snowplow successfully, you need to have a good idea of:

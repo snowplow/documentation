@@ -3,7 +3,7 @@ title: "Troubleshooting data quality dashboard"
 sidebar_position: 4
 sidebar_custom_props:
   offerings:
-    - bdp
+    - cdi
 sidebar_label: "Troubleshooting"
 ---
 
@@ -109,7 +109,7 @@ Long-running queries or resource pool exhaustion can cause the data quality dash
 #### Error code range
 - `12xxx`
 - `22xxx`
-  
+
 #### Error description
 `Query exceeded timeout` or `Query execution time limit exceeded`
 

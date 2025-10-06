@@ -3,11 +3,11 @@ title: "Managing enrichments"
 sidebar_position: 30
 sidebar_custom_props:
   offerings:
-    - bdp
+    - cdi
 ---
 
 
-Snowplow BDP Console enables you to manage the Enrichments that run on each of your pipelines.
+Snowplow Console enables you to manage the Enrichments that run on each of your pipelines.
 
 To start managing Enrichments, navigate to the pipeline you'd like to manage and click on the _Enrichments_ tab.
 

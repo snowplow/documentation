@@ -159,7 +159,7 @@ profile_name:
 
 :::info
 
-The warehouse password should be sent by [secure form from the Snowplow BDP Console](https://console.snowplowanalytics.com/secure-messaging/freeform) in order to set the environment variables.
+The warehouse password should be sent by [secure form from Snowplow Console](https://console.snowplowanalytics.com/secure-messaging/freeform) in order to set the environment variables.
 
 :::
 
@@ -173,7 +173,7 @@ import DbtPrivs from "@site/docs/reusable/dbt-privs/_index.md"
 
 ### 2. The data modeling configuration
 
-Data models can be configured via the [Data Models](https://console.snowplowanalytics.com/data-models) page in Snowplow BDP Console:
+Data models can be configured via the [Data Models](https://console.snowplowanalytics.com/data-models) page in Snowplow Console:
 
 ![](images/data-models-navbar.png)
 
@@ -234,7 +234,7 @@ Please make sure all your dbt project files are merged to the default branch in 
 
 ### 3. Model execution
 
-Once everything is set up, Snowplow BDP Console will run the following commands in this order:
+Once everything is set up, Console will run the following commands in this order:
 1. `dbt deps` (if a `packages.yml` file is present)
 2. `dbt seed`
 3. `dbt snapshot`
@@ -243,6 +243,6 @@ Once everything is set up, Snowplow BDP Console will run the following commands 
 
 This ensures that the correct package dependencies are installed, that seeds are uploaded and refreshed, that snapshots are taken, that the dbt models are created, and that all specified tests are run.
 
-### 4. Monitor your model in the Snowplow BDP Console
+### 4. Monitor your model in Console
 
-After everything has been set up and has executed, you can now monitor your data models running against your data warehouse from the Snowplow BDP Console, in the Jobs UI! There you can see the data modeling DAG generated, and monitor the status, duration and run times of the data model. You can also browse through the logs that dbt generates during it's runs. If all seeds, snapshots, models, and tests pass you will see the `Result: SUCCEEDED` status in the Jobs UI. If any of the steps fail (including tests that result in a warning), you will see the `Result: FAILED` status.
+After everything has been set up and has executed, you can now monitor your data models running against your data warehouse from Console, in the Jobs UI. There you can see the data modeling DAG generated, and monitor the status, duration and run times of the data model. You can also browse through the logs that dbt generates during it's runs. If all seeds, snapshots, models, and tests pass you will see the `Result: SUCCEEDED` status in the Jobs UI. If any of the steps fail (including tests that result in a warning), you will see the `Result: FAILED` status.

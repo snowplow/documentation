@@ -48,7 +48,7 @@
 * Mix prose and lists appropriately: use prose to explain concepts, lists for configuration options or step-by-step items
 
 ### Snowplow terminology
-* **Capitalized**: Data Product Studio, Snowtype, Snowplow BDP, Signals
+* **Capitalized**: Data Product Studio, Snowtype, Snowplow CDI, Signals
 * **Context-capitalized**: Collector, Enrich, specific Loaders
 * **Not capitalized**: entities, events, schemas, data structures
 * Use "entity" not "context", "self-describing event" not "unstructured event"
@@ -117,11 +117,6 @@ Important cautions about data loss, security, or breaking changes
 * **Note**: background info, alternative approaches, version differences
 * **Tip**: performance improvements, recommended workflows, pro tips
 * **Warning**: data loss risks, security considerations
-
-### BDP vs self-hosted
-* Mark BDP-only features in frontmatter: `sidebar_custom_props: offerings: - bdp`
-* Note when BDP provides built-in functionality, mention self-hosted alternatives
-* **Do not mention "Community Edition"** - use "self-hosted" instead but otherwise prefer not to mention
 
 ### Images
 * Formats: `.webp` (preferred), `.png`, `.jpg`

@@ -6,7 +6,7 @@ sidebar_position: 200
 
 :::note
 
-This documentation assumes you are running your data models via the data modeling UI in Snowplow BDP Console, as described in [the documentation for running data models via Snowplow BDP](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/index.md#2-the-data-modeling-configuration).
+This documentation assumes you are running your data models via the data modeling UI in Snowplow Console, as described in [the documentation for running data models](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/index.md#2-the-data-modeling-configuration).
 
 :::
 
@@ -20,7 +20,7 @@ You will be able to see the details of your data model failure in the jobs inter
 
 ![](images/dbt-dag.png)
 
-The 'Error Output' will show you the error logs from the `dbt run` call. These logs will contain the information that dbt and the database relayed back to BDP from the failure, and will match the dbt logs you get if you run it locally.
+The 'Error Output' will show you the error logs from the `dbt run` call. These logs will contain the information that dbt and the database relayed back to Console from the failure, and will match the dbt logs you get if you run it locally.
 
 ![](images/dbt-step-error-output.png)
 

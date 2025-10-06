@@ -45,7 +45,7 @@ Identify the event you wish to track. This may be opening a particular email tha
 
 ### Use the pixel tag generator
 
-Snowplow BDP customers can generate a pixel tracker aimed at structured events via the [Snowplow BDP Console](https://console.snowplowanalytics.com/pixel-tracker).
+Snowplow customers can generate a pixel tracker aimed at structured events via [Snowplow Console](https://console.snowplowanalytics.com/pixel-tracker).
 
 #### Choose your collector domain
 
@@ -78,7 +78,7 @@ You can use the Pixel tracker for click tracking aka URI redirects:
 - On clicking this link, the collector will register the link and then do a 302 redirect to the supplied `{{uri}}`
 - As well as the `&u={{uri}}` parameter, you can populate the collector URI with any other fields from the [Snowplow Tracker Protocol](/docs/events/index.md)
 
-Redirect tracking is usually disabled by default, and is disabled by default for all Snowplow BDP users. To use this feature, you need to enable this in your collector configuration. Snowplow BDP customers can enable this from within the Pipeline Configuration screen of the Snowplow BDP Console.
+Redirect tracking is usually disabled by default, and is disabled by default for all Snowplow customers. To use this feature, you need to enable this in your collector configuration. Snowplow customers can enable this from within the Pipeline Configuration screen of Snowplow Console.
 
 You should also restrict values which are allowed within the `u` parameter to prevent phising attacks using this redirect endpoint. One option is to use [AWS WAF](https://aws.amazon.com/waf/) or [Google Cloud Armor](https://cloud.google.com/armor) (depending on your cloud). They let you block traffic that matches rules you define, such as a regex that the value of the `u` parameter must match.
 

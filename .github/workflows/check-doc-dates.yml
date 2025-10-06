@@ -1,0 +1,35 @@
+name: Check Documentation Dates
+
+on:
+  pull_request:
+    paths:
+      - '**.md'
+
+jobs:
+  check-dates:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      pull-requests: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install dependencies
+        run: npm install gray-matter
+        working-directory: .github/scripts
+
+      - name: Check documentation dates
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const script = require('./.github/scripts/check-doc-dates.js');
+            await script({github, context, core});

@@ -119,7 +119,7 @@ module.exports = async ({ github, context, core }) => {
         const descStatus = result.descriptionOk ? '✅' : '❌'
 
         commentBody += `**${result.path}**\n`
-        commentBody += `date ${dateStatus}  description ${descStatus} `
+        commentBody += `\`date\` ${dateStatus}  \`description\` ${descStatus} Fix: `
 
         // Build helpful message
         const fixes = []
@@ -140,7 +140,7 @@ module.exports = async ({ github, context, core }) => {
         }
 
         if (fixes.length > 0) {
-          commentBody += fixes[0].charAt(0).toUpperCase() + fixes[0].slice(1)
+          commentBody += fixes[0].charAt(0) + fixes[0].slice(1)
           if (fixes.length > 1) {
             commentBody += '; ' + fixes.slice(1).join('; ')
           }

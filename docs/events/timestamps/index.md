@@ -1,7 +1,6 @@
 ---
 title: "Timestamps"
 description: ""
-date: "2025-10-02"
 sidebar_position: 4
 ---
 

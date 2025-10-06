@@ -5,4 +5,4 @@ sidebar_position: 3
 
 This section contains details on the parameters included in each event.
 
-Requests to the collector endpoint can contain more than one event, depending how your tracker is configured.
+Requests to the Collector endpoint can contain more than one event, depending how your tracker is configured.

@@ -1,6 +1,7 @@
 ---
 title: "Timestamps"
-description: ""
+description: "Explains the different timestamps used in Snowplow events, and how the derived timestamp is calculated."
+date: "2025-10-5"
 sidebar_position: 4
 ---
 

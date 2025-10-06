@@ -134,6 +134,7 @@ module.exports = async ({ github, context, core }) => {
           }
           commentBody += '._\n'
         }
+        commentBody += '\n'
       }
       commentBody += `\nPlease update the frontmatter of these files.\n\n`
     }

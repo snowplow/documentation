@@ -86,6 +86,8 @@ module.exports = async ({github, context, core}) => {
 
   // Post review comments with suggestions
   if (issues.length > 0) {
+    const todayFormatted = today.toISOString().split('T')[0];
+
     if (issues.length > 5) {
       // Too many files to suggest individually, post a single comment
       const fileList = issues.map(issue => `- ${issue.path}`).join('\n');
@@ -94,36 +96,32 @@ module.exports = async ({github, context, core}) => {
         owner,
         repo,
         issue_number: pull_number,
-        body: `⚠️ Found ${issues.length} files with date issues. Please update the \`date\` field in frontmatter to today's date (${today.toISOString().split('T')[0]}) for the following files:\n\n${fileList}`,
+        body: `⚠️ Found ${issues.length} files with date issues. Please update the \`date\` field in frontmatter to today's date (${todayFormatted}) for the following files:\n\n${fileList}`,
       });
 
       core.warning(`Found ${issues.length} date issue(s) in documentation files - too many to post suggestions`);
     } else {
-      // Post individual suggestions
-      const comments = issues.map(issue => {
-        const comment = {
-          path: issue.path,
-          line: issue.line,
-          body: issue.message,
-        };
+      // Post individual comments for each file
+      let commentBody = `⚠️ **Documentation date check**\n\nThe following files need their \`date\` field updated:\n\n`;
 
-        // Add suggestion if we have one
-        if (issue.suggestion && issue.newDate) {
-          comment.body += `\n\n\`\`\`suggestion\ndate: "${issue.newDate}"\n\`\`\``;
+      for (const issue of issues) {
+        commentBody += `**${issue.path}**\n`;
+        commentBody += `- ${issue.message}\n`;
+
+        if (issue.newDate) {
+          commentBody += `- Suggested update: \`date: "${issue.newDate}"\`\n`;
         } else if (issue.suggestion) {
-          comment.body += `\n\n${issue.suggestion}`;
+          commentBody += `- ${issue.suggestion}\n`;
         }
 
-        return comment;
-      });
+        commentBody += `\n`;
+      }
 
-      // Create a review with comments
-      await github.rest.pulls.createReview({
+      await github.rest.issues.createComment({
         owner,
         repo,
-        pull_number,
-        event: 'COMMENT',
-        comments,
+        issue_number: pull_number,
+        body: commentBody,
       });
 
       core.warning(`Found ${issues.length} date issue(s) in documentation files`);

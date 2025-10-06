@@ -8,7 +8,7 @@ sidebar_position: 3.5
 # Snowplow event specification
 
 At its heart, Snowplow is a platform for granular tracking of events.
-Snowplow trackers fire _events_, which are either HTTP GET or POST requests to a Snowplow Collector. By adding parameters to these requests, trackers can pass data into the collector for processing by Snowplow.
+Snowplow trackers fire _events_, which are either HTTP GET or POST requests to a Snowplow collector. By adding parameters to these requests, trackers can pass data into the collector for processing by Snowplow.
 
 This section aims to give an overview of Snowplow events.
 It lists the available data types and links to the tracking and modeling documentation for them.

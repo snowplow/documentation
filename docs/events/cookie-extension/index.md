@@ -5,7 +5,7 @@ date: "2020-02-26"
 sidebar_position: 3.5
 ---
 
-A Cookie Extension service works with the Snowplow [browser tracker](/docs/sources/trackers/web-trackers/index.md) to help you maintain consistent user identification despite browser privacy restrictions like Safari's Intelligent Tracking Prevention.
+A Cookie Extension service works with the Snowplow [JavaScript tracker](/docs/sources/trackers/web-trackers/index.md) to help you maintain consistent user identification despite browser privacy restrictions like Safari's Intelligent Tracking Prevention.
 
 Deployed within your website's IP space, the service creates and manages persistent browser identifiers.
 

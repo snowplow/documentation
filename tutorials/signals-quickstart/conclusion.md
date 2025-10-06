@@ -20,5 +20,5 @@ Here are some ideas for further exploration:
 * Retrieve calculated attributes in your real applications
 * Try out [interventions](/docs/signals/concepts/#interventions)
 * Explore our other Signals tutorials:
-  * [Score prospects in real time using Signals and ML](/tutorials/signals-ml-prospect-scoring/)
+  * [Score prospects in real time using Signals and ML](/tutorials/signals-ml-prospect-scoring/intro)
   * [Set up the Signals batch engine](/tutorials/signals-batch-engine/start) for calculating attributes from your warehouse

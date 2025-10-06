@@ -94,24 +94,13 @@ module.exports = async ({ github, context, core }) => {
   )
 
   if (filesWithIssues.length > 0) {
-    let commentBody = `## Metadata check\n\nPage descriptions and accurate modified dates are important for SEO. Found issues in the following ${filesWithIssues.length}files:\n\n`
+    let commentBody = `## Metadata check\n\nPage descriptions and accurate modified dates are important for SEO. Found issues in the following ${filesWithIssues.length} files:\n\n`
 
     if (filesWithIssues.length > 5) {
       for (const result of filesWithIssues) {
         commentBody += `${result.path}\n`
 
-        const dateStatus = result.dateOk ? '✅' : '❌'
-        const descStatus = result.descriptionOk ? '✅' : '❌'
-
-        commentBody += `date ${dateStatus}`
-        if (result.dateIssue) {
-          commentBody += ` ${result.dateIssue}`
-        }
-        commentBody += ` | description ${descStatus}`
-        if (result.descriptionIssue) {
-          commentBody += ` ${result.descriptionIssue}`
-        }
-        commentBody += `\n\n`
+        commentBody += `Please update these files.\n\n`
       }
     } else {
       for (const result of filesWithIssues) {

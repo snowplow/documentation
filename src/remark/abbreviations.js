@@ -26,6 +26,7 @@ const plugin = () => {
     OSS: 'Open Source Software',
     QA: 'Quality Assurance',
     PII: 'Personally Identifiable Information',
+    PMC: 'Private Managed Cloud',
     RDS: 'Amazon Relational Database Service',
     S3: 'Amazon Cloud Object Storage',
     SS: 'Server Side',

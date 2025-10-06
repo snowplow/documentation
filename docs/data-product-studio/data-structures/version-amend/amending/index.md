@@ -44,8 +44,8 @@ flowchart LR
 ```
 
 We call this approach “patching”. To patch the schema, i.e. apply changes to it without updating the version:
-* If you are using Snowplow BDP, select the “Patch” option [in the UI](/docs/data-product-studio/data-structures/manage/index.md) when saving the schema
-* If you are using Snowplow Community Edition, do not increment the schema version when [uploading it with `igluctl`](/docs/data-product-studio/data-structures/manage/iglu/index.md)
+* If you are using Snowplow CDI, select the “Patch” option [in the UI](/docs/data-product-studio/data-structures/manage/index.md) when saving the schema
+* If you are using Snowplow Self-Hosted or Community Edition, do not increment the schema version when [uploading it with `igluctl`](/docs/data-product-studio/data-structures/manage/iglu/index.md)
 
 :::danger
 
@@ -55,7 +55,7 @@ Also, never patch a schema version that exists in a production environment, even
 
 :::
 
-For Snowplow BDP customers, patching is disabled for production pipelines. Community Edition users have to explicitly enable patching (if desired) in the [Iglu Server configuration](/docs/api-reference/iglu/iglu-repositories/iglu-server/reference/index.md) (`patchesAllowed`) at their own risk.
+For Snowplow CDI customers, patching is disabled for production pipelines. Community Edition users have to explicitly enable patching (if desired) in the [Iglu Server configuration](/docs/api-reference/iglu/iglu-repositories/iglu-server/reference/index.md) (`patchesAllowed`) at their own risk.
 
 :::tip Schema caching
 

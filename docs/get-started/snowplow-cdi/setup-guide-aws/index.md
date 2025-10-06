@@ -1,11 +1,11 @@
 ---
-title: "BDP Enterprise on AWS"
+title: "Private Managed Cloud on AWS"
 date: "2020-01-30"
 sidebar_position: 10
 coverImage: "aws_logo_0.png"
 ---
 
-To set up Snowplow, simply follow the ['Getting Started' steps in the Snowplow BDP Console](https://console.snowplowanalytics.com/getting-started). You will receive an account as part of your onboarding.
+To set up Snowplow, follow the ['Getting Started' steps in the Snowplow Console](https://console.snowplowanalytics.com/getting-started). You will receive an account as part of your onboarding.
 
 ## What are the steps
 
@@ -25,11 +25,11 @@ To set up your cloud environment as required you will need:
 - to know which AWS region you’d like us to install your Snowplow pipeline into
 - to know whether or not you will need to use an existing VPC or require VPC peering (note: VPC peering and using a custom VPC are additional bolt-ons)
 
-We often find our point of contact requires support from their DevOps or Networking colleagues to complete the cloud setup step; in Snowplow BDP Console you can [easily create accounts for colleagues](/docs/account-management/managing-users/index.md) who can complete this step for you.
+We often find our point of contact requires support from their DevOps or Networking colleagues to complete the cloud setup step; in Console you can [easily create accounts for colleagues](/docs/account-management/managing-users/index.md) who can complete this step for you.
 
 ## Preparing your AWS sub-account
 
-These instructions are also provided as part of the setup flow in Snowplow BDP Console.
+These instructions are also provided as part of the setup flow in Console.
 
 ### Create sub-account
 
@@ -42,11 +42,11 @@ These instructions are also provided as part of the setup flow in Snowplow BDP C
 
 1. Access the IAM control panel within the sub-account
 2. Go to Access management > Roles and select Create role
-3. Select "Another AWS account" (Account ID: 793733611312 Require MFA: false). We use Okta to assume roles, which uses delegated MFA and not direct MFA authentication to AWS 
+3. Select "Another AWS account" (Account ID: 793733611312 Require MFA: false). We use Okta to assume roles, which uses delegated MFA and not direct MFA authentication to AWS
 4. Select the policy you created earlier
 5. Call the role "SnowplowAdmin" (please use this specific name)
 
-You will need to share this role with us as part of filling out the setup form in Snowplow BDP Console.
+You will need to share this role with us as part of filling out the setup form in Console.
 
 ### JSON Policy Document
 
@@ -140,9 +140,9 @@ The last step is to set up the Snowplow deployment role. This is a role assumed 
 - Do not select Require MFA as Snowplow needs to be able to assume the role via headless jobs
 - If setting this up via IAM, do not add `"aws:MultiFactorAuthPresent": "false"` condition, as this will prevent the role being assumed by Snowplow SRE staff. We use Okta to assume roles, which uses delegated MFA and not direct MFA authentication to AWS
 3. Attach the `IAMFullAccess` policy. If a Permission Boundary was set on the admin role, then add this boundary to the bottom section of permissions page.
-- Role name: SnowplowDeployment (please use this specific name)
-- Role description: Allows the Snowplow Team to programmatically deploy to this account.
-4. Copy the Snowplow deployment role ARN. You will need to share this role with us as part of filling out the setup form in Snowplow BDP console.
+- Role name: `SnowplowDeployment` (please use this specific name)
+- Role description: allows the Snowplow Team to programmatically deploy to this account.
+4. Copy the Snowplow deployment role ARN. You will need to share this role with us as part of filling out the setup form in Console.
 
 ### Provide a CIDR range for VPC peering or using a custom VPC (optional)
 

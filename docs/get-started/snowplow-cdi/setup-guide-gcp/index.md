@@ -1,17 +1,15 @@
 ---
-title: "BDP Enterprise on GCP"
+title: "Private Managed Cloud on GCP"
 date: "2020-01-30"
 sidebar_position: 30
 coverImage: "gcp_logo.png"
 ---
 
-## Request your pipeline through Snowplow BDP Console
-
-Login to Snowplow BDP Console where you'll be able to follow a step-by-step guide to getting started (including the steps below).
+To set up Snowplow, log in to Snowplow [Console](https://console.snowplowanalytics.com) where you'll be able to follow a step-by-step guide to getting started, including the steps below.
 
 ## Setting up your Google project
 
-To set up your cloud environment ready for your Snowplow pipeline to be installed:
+The following steps explain how to set up your cloud environment ready for your Snowplow pipeline to be installed.
 
 ### Create a new project
 

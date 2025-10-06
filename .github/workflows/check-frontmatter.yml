@@ -1,4 +1,4 @@
-name: Check Frontmatter
+name: Metadata checks
 
 on:
   pull_request:
@@ -6,7 +6,7 @@ on:
       - '**.md'
 
 jobs:
-  check-dates:
+  check-frontmatter:
     runs-on: ubuntu-latest
     permissions:
       contents: read

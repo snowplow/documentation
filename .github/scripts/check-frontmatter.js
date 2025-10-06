@@ -106,7 +106,7 @@ module.exports = async ({ github, context, core }) => {
         const dateStatus = result.dateOk ? '✅' : '❌'
         const descStatus = result.descriptionOk ? '✅' : '❌'
 
-        commentBody += `**${result.path}**\n`
+        commentBody += `${result.path}\n`
         commentBody += `\`date\` ${dateStatus}  \`description\` ${descStatus} **Fix**: `
 
         // Build helpful message

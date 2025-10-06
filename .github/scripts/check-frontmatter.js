@@ -94,7 +94,7 @@ module.exports = async ({ github, context, core }) => {
   )
 
   if (filesWithIssues.length > 0) {
-    let commentBody = `Found issues in the following files:\n\n`
+    let commentBody = `## Metadata check\n\nPage descriptions and up-to-date modified dates are important for SEO.\n\nFound issues in the following files:\n\n`
 
     if (filesWithIssues.length > 5) {
       for (const result of filesWithIssues) {
@@ -119,17 +119,23 @@ module.exports = async ({ github, context, core }) => {
         const descStatus = result.descriptionOk ? '✅' : '❌'
 
         commentBody += `**${result.path}**\n`
-        commentBody += `**date** ${dateStatus}  **description** ${descStatus}\n`
+        commentBody += `date ${dateStatus}  description ${descStatus} `
 
         // Build helpful message
         const fixes = []
-        if (result.dateIssue === 'Out of date' || result.dateIssue === 'Missing') {
+        if (
+          result.dateIssue === 'Out of date' ||
+          result.dateIssue === 'Missing'
+        ) {
           fixes.push('specify a date within the last month')
         } else if (result.dateIssue === 'Invalid format') {
           fixes.push('use YYYY-MM-DD format for date')
         }
 
-        if (result.descriptionIssue === 'Missing' || result.descriptionIssue === 'Empty') {
+        if (
+          result.descriptionIssue === 'Missing' ||
+          result.descriptionIssue === 'Empty'
+        ) {
           fixes.push('add a page description')
         }
 
@@ -143,8 +149,6 @@ module.exports = async ({ github, context, core }) => {
 
         commentBody += `\n`
       }
-
-      commentBody += `Page descriptions and up-to-date modified dates are important for SEO.\n`
     }
 
     await github.rest.issues.createComment({

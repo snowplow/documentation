@@ -19,7 +19,7 @@ Snowplow supports the following Braze object types:
 - **[Custom events](https://www.braze.com/docs/api/objects_filters/event_object)**: User actions and behaviors
 - **[Purchases](https://www.braze.com/docs/api/objects_filters/purchase_object)**: Transaction data with product details
 
-## What you will need
+## Prerequisites
 
 Before setting up the forwarder in Console, you'll need the following from your Braze account:
 
@@ -35,7 +35,7 @@ Before setting up the forwarder in Console, you'll need the following from your 
 
 ## Getting started
 
-### Configure the forwarder
+### Configure the destination
 
 To create the forwarder, follow the steps in [Creating forwarders](/docs/destinations/forwarding-events/creating-forwarders/index.md).
 
@@ -46,14 +46,16 @@ When configuring the forwarder, you can choose from the following **Braze object
    - **[Events](https://www.braze.com/docs/api/objects_filters/event_object)**: send custom user actions
    - **[Purchases](https://www.braze.com/docs/api/objects_filters/purchase_object)**: send transaction events
 
-### Validate data flow
+### Validate the integration
 
 You can confirm events are reaching Braze by checking the following pages in your Braze account:
 
-1. Braze Custom Events Report: in Braze, navigate to **Analytics** > **Custom Events Report**
-<!-- TODO: add screenshot -->
-2. Braze API Usage Dashboard: in Braze, navigate to **Settings** > **API and Identifiers**
-<!-- TODO: add screenshot -->
+1. Query Builder: in Braze, navigate to **Analytics** > **Query Builder**. You can write queries on the following tables to preview the data forwarded from Snowplow: `USER_BEHAVIORS_CUSTOMEVENT_SHARED`, `USERS_BEHAVIORS_PURCHASE_SHARED`.
+2. API Usage Dashboard: in Braze, navigate to **Settings** > **API and Identifiers** to see a chart of API usage over time. You can filter specifically for the API key used by Snowplow and see both successes and failures.
+
+## Limitations
+
+**Rate limits:** Braze enforces a rate limit of 3,000 API calls every three seconds for the Track Users API. Because Snowplow does not currently support batching for event forwarders, this API rate limit also functions as the event rate limit. If your input throughput exceeds 3,000 events per three seconds, you will experience increased latency.
 
 ## Schema reference
 
@@ -76,5 +78,3 @@ Each event object represents a single occurrence of a custom event by a particul
 The purchase object represents a user purchasing a single item by a user at a particular time. Each purchase object is located within a purchase array, which can represent a transaction with multiple items. The purchase object has fields that allow the Braze back-end to store and use this information for messages, data collection, and personalization.
 
 <EventForwardingSchemaTable schema={brazePurchases} />
-
-<!-- TODO: Add troubleshooting steps when feedback is received -->

@@ -8,11 +8,11 @@ Event forwarders use JavaScript expressions for filtering events and mapping Sno
 
 ## Available event fields
 
-All fields in your Snowplow events can be referenced for both filters and field mappings.
+You can reference any field in your Snowplow events for both filters and field mappings.
 
 ### Standard atomic fields
 
-Access [standard Snowplow fields](https://docs.snowplow.io/docs/fundamentals/canonical-event/) in your filters and mappings like this:
+Access [standard Snowplow fields](https://docs.snowplow.io/docs/fundamentals/canonical-event/) in your filters and mappings using JavaScript dot notation:
 
 ```javascript
 // Standard atomic fields
@@ -75,7 +75,7 @@ Event filters determine which events are forwarded to your destination. Only eve
 
 ### Basic filters
 
-Filter events using these standard JavaScript comparison operators:
+Filter events can contain standard JavaScript comparison operators:
 
 ```javascript
 // Single condition
@@ -126,8 +126,9 @@ isHighValueUser(event) && event.event_name == "purchase"
 ## Field mapping
 
 Field mapping defines how Snowplow event data is transformed and sent to destination APIs. Each mapping consists of:
-* A destination field name
-* A JavaScript expression that extracts the value from your Snowplow event
+
+* A destination field name (key)
+* A JavaScript expression that extracts the value from your Snowplow event (value)
 
 :::info
 The code snippets below contain JavaScript expressions that you can include in the **Snowplow expression** mapping field in the UI.
@@ -135,43 +136,54 @@ The code snippets below contain JavaScript expressions that you can include in t
 
 ### Basic mappings
 
-Map these standard event fields directly:
+Map standard event fields directly:
 
-```javascript
-// Direct field mapping
-event.domain_userid
+![](images/event-forwarding-basic-mapping.png)
 
-// With fallback values
-event.user_id ?? event.domain_userid
+```json
+// sample output
+{ "event_type": "page_view" }
+```
 
-// Static values
-"snowplow"
-true
-1234
+You can also apply fallback and conditional logic:
 
-// Conditional mapping
-event.platform == "web" ? event.page_url : event.screen_name
+![](images/event-forwarding-conditional-mapping.png)
+
+```json
+// sample output
+{
+  "user_id": "a50d3dfe-ba21-432e-a165-1a1d2d633693"
+  "source": "website"
+}
+```
+
+You can also send static values:
+
+![](images/event-forwarding-static-mapping.png)
+
+```json
+// sample output
+{ "source": "snowplow" }
 ```
 
 ### Data transformation
 
-Type conversion:
+Convert data types, such as strings, boolean values, and dates:
 
-```javascript
-// String to number
-parseInt(event.page_width)
-parseFloat(event.page_height)
+![](images/event-forwarding-type-conversions.png)
 
-// Boolean conversion
-event.mobile_device == "1"
-// returns true
-
-// Date formatting
-new Date(event.collector_tstamp).toISOString()
-// returns '2025-08-15T20:02:10.106Z'
+```json
+// sample output
+{
+  "page_width": 720,
+  "page_height": 600,
+  "is_mobile": true,
+  "timestamp": "2025-10-01T18:35:38.563Z"
+}
 ```
 
-String manipulation:
+
+Use standard [Javascript String methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String#instance_methods) to manipuate strings:
 
 ```javascript
 // Case conversion
@@ -181,21 +193,15 @@ event.page_title.toUpperCase()
 // String operations
 event.page_url.replace("http://", "https://")
 event.page_title.substring(0, 100)
-event.refr_urlhost?.split('.').pop()
+event.page_urlpath.split('/')
 ```
 
 Map to nested objects using dot notation in field names:
 
-| Field name              | Snowplow expression   |
-| ----------------------- | --------------------- |
-| `user.id`               | `event.domain_userid` |
-| `properties.page_title` | `event.page_title`    |
-| `properties.page_url`   | `event.page_url`      |
-| `properties.referrer`   | `event.refr_urlhost`  |
-
-Results in the following nested object:
+![](images/event-forwarding-nested-mapping.png)
 
 ```json
+// sample output
 {
   "user": {
     "id": "user123"
@@ -210,7 +216,7 @@ Results in the following nested object:
 
 ### Custom mapping functions
 
-Define complex transformations in the custom functions section. Below are a few example transformations:
+Define complex transformations as functions in the custom functions section. You can then reference these functions in filters and mappings. Below are a few example transformations:
 
 ```javascript
 // Event name formatting

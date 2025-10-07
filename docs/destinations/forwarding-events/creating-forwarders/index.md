@@ -50,7 +50,7 @@ Leave the filter blank to forward all events.
 
 Define how Snowplow data maps to your destination fields. For each mapping, **Destination Field** represents the property name and **Snowplow expression** is a JavaScript expression used to extract data from your Snowplow event. Snowplow provides default mappings based on common fields, but you can overwrite or delete them as needed.
 
-<!-- TODO: Screenshot once UI is updated -->
+![Field mapping configuration panel showing key/value pairs with JavaScript property selection expressions](images/event-forwarding-mapping.png)
 
 ### Custom functions
 

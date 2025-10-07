@@ -11,7 +11,7 @@ import amplitudeSchema from '@site/src/components/EventForwardingSchemaTable/Sch
 
 Send Snowplow events to Amplitude to power product and marketing analytics or guide and survey personalization using Amplitude's [HTTP API v2](https://www.docs.developers.amplitude.com/analytics/apis/http-v2-api/).
 
-## What you will need
+## Prerequisites
 
 Before setting up the forwarder in Console, you'll need an Amplitude API Key. To find your API key:
 
@@ -26,13 +26,13 @@ To avoid introducing bad data in your production Amplitude project, we recommend
 
 ## Getting started
 
-### Configure the forwarder
+### Configure the destination
 
 To create the connection and forwarder, follow the steps in [Creating forwarders](/docs/destinations/forwarding-events/creating-forwarders/index.md).
 
 When configuring the connection, select **Amplitude** for the connection type, enter your API key, and select the **Server Location** where your Amplitude project is hosted.
 
-### Validate data flow
+### Validate the integration
 
 You can confirm events are reaching Amplitude by checking the **Ingestion Debugger** page in your Amplitude account:
 

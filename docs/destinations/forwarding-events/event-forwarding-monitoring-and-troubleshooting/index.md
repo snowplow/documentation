@@ -111,7 +111,7 @@ On AWS, you can use [Athena](https://aws.amazon.com/athena/) to query your faile
 For GCP-hosted Snowplow deployments, you can query failed events via external tables in BigQuery.
 :::
 
-<!-- TODO: add BigQuery steps as well -->
+### Querying failed events on AWS Athena
 
 **1. Create a table and load the data**
 
@@ -156,7 +156,7 @@ FROM event_forwarding_failures
 LIMIT 10
 ```
 
-### Example failed event queries
+### Example Athena failed event queries
 
 Summarize the most common types of errors:
 
@@ -249,4 +249,164 @@ FROM event_forwarding_failures
 -- Here we need the full path prefix
 WHERE "$path" > 's3://{BUCKET_NAME}/{PIPELINE_NAME}/partitioned/com.snowplowanalytics.snowplow.badrows.event_forwarding_error/2025-07-29-16'
 AND "$path" < 's3://{BUCKET_NAME}/{PIPELINE_NAME}/partitioned/com.snowplowanalytics.snowplow.badrows.event_forwarding_error/2025-07-29-20'
+```
+
+### Querying failed events on GCP BigQuery
+
+For GCP deployments, you can use BigQuery to query your failed events using external tables that reference the cloud storage files.
+
+**1. Create a dataset**
+
+First, create a dataset to organize your failed event tables:
+
+```sql
+CREATE SCHEMA snowplow_failed_events
+OPTIONS (
+  description = "Dataset for Snowplow failed event analysis",
+  location = "EU"  -- Should match the location of your bad rows bucket
+);
+```
+
+**2. Create an external table and load the data**
+
+To make the logs easier to query, run the following query to create an external table:
+
+```sql
+  CREATE OR REPLACE EXTERNAL TABLE snowplow_failed_events.event_forwarding_failures (
+    schema STRING,
+    data STRUCT<
+      failure STRUCT<
+        errorCode STRING,
+        errorMessage STRING,
+        errorType STRING,
+        latestState STRING,
+        timestamp TIMESTAMP
+      >,
+      payload STRING,
+      processor STRUCT<
+        artifact STRING,
+        version STRING
+      >
+    >
+  )
+  OPTIONS (
+    description="Event Forwarding failures",
+    format="NEWLINE_DELIMITED_JSON",
+    ignore_unknown_values=true,
+    uris=["gs://{BUCKET}/partitioned/com.snowplowanalytics.snowplow.badrows.event_forwarding_error/*"]
+  );
+```
+
+**3. Explore failure records**
+
+Use the query below to view a sample of failure records:
+
+```sql
+SELECT
+    data.failure.timestamp,
+    data.failure.errorType,
+    data.failure.errorCode,
+    data.failure.errorMessage,
+    data.processor.artifact,
+    data.processor.version,
+    data.failure.latestState, -- these are last because they can be quite large
+    data.payload
+FROM snowplow_failed_events.event_forwarding_failures
+LIMIT 10
+```
+
+### Example BigQuery failed event queries
+
+Summarize the most common types of errors:
+
+```sql
+SELECT
+    data.failure.errorType,
+    data.failure.errorCode,
+    -- time range for each - is the issue still happening?
+    MIN(data.failure.timestamp) AS minTstamp,
+    MAX(data.failure.timestamp) AS maxTstamp,
+    -- How many errors overall,
+    COUNT(*) AS errorCount,
+    -- There might just be lots of different messages for the same error
+    -- If this close to error count, the messages for a single error might just have high cardinality - worth checking the messages themselves
+    -- If it's a low number, we might have more than one issue
+    -- If it's 1, we have only one issue and the below message is shared by all
+    COUNT(DISTINCT data.failure.errorMessage) AS distinctErrorMessages,
+    -- a sample of error message. You may need to look at them individually to get the full picture
+    MIN(data.failure.errorMessage) AS sampleErrorMessage
+FROM snowplow_failed_events.event_forwarding_failures
+GROUP BY 1, 2
+ORDER BY errorCount DESC -- Most errors first
+LIMIT 10
+```
+
+View transformation errors:
+
+```sql
+SELECT
+    data.failure.timestamp,
+    data.failure.errorType,
+    data.failure.errorCode,
+    data.failure.errorMessage,
+    data.processor.artifact,
+    data.processor.version,
+    data.failure.latestState,
+    data.payload
+FROM snowplow_failed_events.event_forwarding_failures
+WHERE data.failure.errorType = 'transformation'
+LIMIT 50
+```
+
+View API errors:
+
+```sql
+SELECT
+    data.failure.timestamp,
+    data.failure.errorType,
+    data.failure.errorCode,
+    data.failure.errorMessage,
+    data.processor.artifact,
+    data.processor.version,
+    data.failure.latestState
+FROM snowplow_failed_events.event_forwarding_failures
+WHERE data.failure.errorType = 'api'
+LIMIT 50
+```
+
+Filter based on a date and hour:
+
+```sql
+-- Note that the times in the file paths are for the creation of the file, not the failure time
+
+SELECT
+    data.failure.timestamp,
+    data.failure.errorType,
+    data.failure.errorCode,
+    data.failure.errorMessage,
+    data.processor.artifact,
+    data.processor.version,
+    data.failure.latestState, -- these are last because they can be quite large
+    data.payload
+FROM snowplow_failed_events.event_forwarding_failures
+WHERE _FILE_NAME LIKE '%2025/07/29/16%' -- File paths are timestamped like this, so we can limit our queries this way
+LIMIT 50
+```
+
+Filter for a range of timestamps:
+
+```sql
+SELECT
+    data.failure.timestamp,
+    data.failure.errorType,
+    data.failure.errorCode,
+    data.failure.errorMessage,
+    data.processor.artifact,
+    data.processor.version,
+    data.failure.latestState, -- these are last because they can be quite large
+    data.payload
+FROM snowplow_failed_events.event_forwarding_failures
+-- Here we need the full path prefix
+WHERE _FILE_NAME > 'gs://{BUCKET}/partitioned/com.snowplowanalytics.snowplow.badrows.event_forwarding_error/jsonschema-1/2025/07/29/16'
+AND _FILE_NAME < 'gs://{BUCKET}/partitioned/com.snowplowanalytics.snowplow.badrows.event_forwarding_error/jsonschema-1/2025/07/29/20'
 ```

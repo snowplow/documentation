@@ -110,7 +110,7 @@ curl localhost:9090/micro/good
 
 ## Exporting events
 
-Snowplow pipelines output data in the [_enriched TSV format_](/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md). Typically, this is picked up by one of our [loaders](/docs/destinations/warehouses-lakes/index.md) or by tools such as [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md).
+Snowplow pipelines output data in the [_enriched TSV format_](/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md). Typically, this is picked up by one of our [loaders](/docs/destinations/warehouses-lakes/index.md) or by tools such as [Snowbridge](/docs/api-reference/snowbridge/index.md).
 
 With Micro, you can see what your data would look like in this format — useful if you want to test any logic that is parsing this data.
 

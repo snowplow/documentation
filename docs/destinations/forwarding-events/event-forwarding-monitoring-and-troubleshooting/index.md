@@ -105,13 +105,15 @@ Failed event logs are formatted according to the [`event_forwarding_error`](http
 
 ### Querying failed event logs
 
-On AWS, you can use [Athena](https://aws.amazon.com/athena/) to query your failed events using the cloud storage files as a data source.
+You can query failed events using [Athena](https://aws.amazon.com/athena/) on AWS or [BigQuery external tables](https://cloud.google.com/bigquery/docs/external-tables) on GCP.
 
-:::tip Querying failed events on GCP
-For GCP-hosted Snowplow deployments, you can query failed events via external tables in BigQuery.
-:::
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
 
-### Querying failed events on AWS Athena
+<Tabs groupId="cloud" queryString>
+  <TabItem value="aws" label="AWS" default>
+```
 
 **1. Create a table and load the data**
 
@@ -156,7 +158,7 @@ FROM event_forwarding_failures
 LIMIT 10
 ```
 
-### Example Athena failed event queries
+**3. Example queries**
 
 Summarize the most common types of errors:
 
@@ -251,9 +253,10 @@ WHERE "$path" > 's3://{BUCKET_NAME}/{PIPELINE_NAME}/partitioned/com.snowplowanal
 AND "$path" < 's3://{BUCKET_NAME}/{PIPELINE_NAME}/partitioned/com.snowplowanalytics.snowplow.badrows.event_forwarding_error/2025-07-29-20'
 ```
 
-### Querying failed events on GCP BigQuery
-
-For GCP deployments, you can use BigQuery to query your failed events using external tables that reference the cloud storage files.
+```mdx-code-block
+  </TabItem>
+  <TabItem value="gcp" label="GCP">
+```
 
 **1. Create a dataset**
 
@@ -315,7 +318,7 @@ FROM snowplow_failed_events.event_forwarding_failures
 LIMIT 10
 ```
 
-### Example BigQuery failed event queries
+**4. Example queries**
 
 Summarize the most common types of errors:
 
@@ -409,4 +412,9 @@ FROM snowplow_failed_events.event_forwarding_failures
 -- Here we need the full path prefix
 WHERE _FILE_NAME > 'gs://{BUCKET}/partitioned/com.snowplowanalytics.snowplow.badrows.event_forwarding_error/jsonschema-1/2025/07/29/16'
 AND _FILE_NAME < 'gs://{BUCKET}/partitioned/com.snowplowanalytics.snowplow.badrows.event_forwarding_error/jsonschema-1/2025/07/29/20'
+```
+
+```mdx-code-block
+  </TabItem>
+</Tabs>
 ```

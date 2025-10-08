@@ -1158,7 +1158,7 @@ Controls the display of navbar/sidebar items
 /*Tutorial on same grid as rest of ducumentation site */
 
 .theme-doc-markdown .MuiBox-root {
-  grid-column: 1;
+  grid-column: 1 !important;
 }
 .theme-doc-markdown .MuiBox-root.css-pehwr4 {
   grid-column: 3;

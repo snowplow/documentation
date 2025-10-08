@@ -77,7 +77,7 @@ const DefaultDocPageLayout: FC<Props> = ({
     >
       <div
         className={clsx(
-          'container padding-top--md padding-bottom--lg',
+          'doc_wrapper py-4',
           styles.docItemWrapper,
           hiddenSidebarContainer && styles.docItemWrapperEnhanced
         )}

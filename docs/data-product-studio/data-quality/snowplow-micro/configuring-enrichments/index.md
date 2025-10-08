@@ -9,7 +9,25 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-By default, Micro does not come with any [enrichments](/docs/pipeline/enrichments/available-enrichments/index.md) enabled — this helps us keep the docker image smaller. You can enable any enrichments you like by passing corresponding configuration files to Micro.
+By default, Micro does not have any [enrichments](/docs/pipeline/enrichments/available-enrichments/index.md) enabled. This page shows how you can enable them.
+
+## YAUAA (Yet Another User Agent Analyzer)
+
+One of the most useful enrichments, [YAUAA](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md), requires no configuration, and can be turned on simply with the `--yauaa` flag (since version 3.0.1):
+
+<CodeBlock language="bash">{
+`docker run -p 9090:9090 snowplow/snowplow-micro:${versions.snowplowMicro} --yauaa`
+}</CodeBlock>
+
+:::tip Memory usage
+
+We recommend not enabling this enrichment in a CI setting unless necessary, because it consumes a few extra hundred MB of RAM.
+
+:::
+
+## Other enrichments
+
+You can enable any enrichments you like by passing corresponding configuration files to Micro.
 
 <details>
 <summary>Limitations for enrichments that rely on data files</summary>

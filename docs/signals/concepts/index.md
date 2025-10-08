@@ -183,7 +183,7 @@ A subscription using a specific attribute key ID, for example a `domain_userid` 
 
 Once subscribed, all triggered interventions will be streamed to the consumer application.
 
-For back-end applications using the [Signals Python SDK](https://pypi.org/project/snowplow-signals/), [Signals Node.js SDK](https://www.npmjs.com/package/@snowplow/signals-node), or [Signals API](/docs/signals/connection/index.md#signals-api), subscribe within the application code by passing in the relevant attribute key IDs. For web applications, use the [Signals Interventions plugin](/docs/signals/receive-interventions/index.md) for the JavaScript tracker to subscribe automatically to relevant interventions.
+For back-end applications using the [Signals Python SDK](https://pypi.org/project/snowplow-signals/), [Signals Node.js SDK](https://www.npmjs.com/package/@snowplow/signals-node), or [Signals API](/docs/signals/connection/index.md#signals-api), subscribe within the application code by passing in the relevant attribute key IDs. For web applications, use the [Signals browser plugin](/docs/signals/receive-interventions/index.md) for the JavaScript tracker to subscribe automatically to relevant interventions.
 
 ### Targeting example
 

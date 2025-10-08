@@ -24,8 +24,7 @@ These failures occur when the destination's API cannot accept or process the eve
 
 **Transient failures** are those that are expected to succeed on retry. This includes temporary network errors, HTTP 5xx server errors, or rate limiting. Transient failures are automatically retried.
 
-**Setup failures** result from configuration issues that typically require human intervention to resolve, such as invalid API keys or insufficient permissions. When a setup error occurs, Snowplow will trigger email alerts to the configured list of users. For more information on alerting, see [configuring setup alerts](#configuring-setup-alerts) on this page.
-<!-- TODO: what happens when we hit a setup failure?-->
+**Setup failures** result from configuration issues that typically require human intervention to resolve, such as invalid API keys or insufficient permissions. When a setup error occurs, Snowplow will trigger email alerts to the configured list of users and occassionally retry the request to check if the issue has been resolved. For more information on alerting, see [configuring setup alerts](#configuring-setup-alerts) on this page.
 
 **Other unrecoverable failures** are bad requests that won't succeed on retry, such as those with missing or invalid fields. These often map to HTTP 400 response codes. Snowplow will log them as failed events in your cloud storage bucket without retrying.
 

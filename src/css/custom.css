@@ -821,6 +821,7 @@ a.card:hover::after {
 }
 .breadcrumbs {
   padding-left: 0;
+  flex-wrap: wrap!important;
 }
 
 .breadcrumbs__item:not(:last-child):after {
@@ -833,6 +834,7 @@ a.card:hover::after {
 .breadcrumbs__item .breadcrumbs__link {
   color: var(--ifm-color-primary);
   text-decoration: underline;
+  font-weight: 400 !important;
 }
 
 .breadcrumbs__item .breadcrumbs__link:hover {

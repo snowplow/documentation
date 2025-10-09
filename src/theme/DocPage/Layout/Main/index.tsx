@@ -68,6 +68,8 @@ const DefaultDocPageLayout: FC<Props> = ({
   children,
 }) => {
   const sidebar = useDocsSidebar()
+
+
   return (
     <main
       className={clsx(
@@ -77,10 +79,17 @@ const DefaultDocPageLayout: FC<Props> = ({
     >
       <div
         className={clsx(
-          'doc_wrapper py-4',
+          'doc_wrapper', 'py-4',
           styles.docItemWrapper,
           hiddenSidebarContainer && styles.docItemWrapperEnhanced
         )}
+        style={{
+          maxWidth: 'none',
+          paddingLeft: 0,
+          paddingRight: 0,
+          marginLeft: 0,
+          marginRight: 0
+        }}
       >
         {children}
       </div>

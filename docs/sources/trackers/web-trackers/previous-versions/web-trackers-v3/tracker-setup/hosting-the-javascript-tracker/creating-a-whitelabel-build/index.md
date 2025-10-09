@@ -23,7 +23,7 @@ To create the _white-label_ build, as we call it, you need to follow the steps a
 4. Run the custom white-label build command `rushx build --whitelabel=MyWhitelabel` replacing MyWhitelabel with the namespace you want. This will replace all references of `GlobalSnowplowNamespace` with `MyWhitelabel`.
 5. If the build finished successfully, you can retrieve the updated loader files from the `tags` folder and the updated tracker files from the `dist` folder.
 
-:::caution
+:::warning
 
 Since the build depends on your local copy of the Snowplow JavaScript repository, make sure you keep up to date with the latest developments and updating your files and build accordingly.
 

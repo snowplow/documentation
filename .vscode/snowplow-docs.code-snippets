@@ -88,11 +88,11 @@
     "body": [":::info", "", "$0", "", ":::"],
     "description": "Info admonition"
   },
-  "Caution Admonition": {
+  "Warning Admonition": {
     "scope": "markdown",
-    "prefix": "admon_caution",
-    "body": [":::caution", "", "$0", "", ":::"],
-    "description": "Caution admonition"
+    "prefix": "admon_warning",
+    "body": [":::warning", "", "$0", "", ":::"],
+    "description": "Warning admonition"
   },
   "Danger Admonition": {
     "scope": "markdown",

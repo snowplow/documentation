@@ -43,7 +43,7 @@ The name of each column is the name of the schema field converted to snake case.
 
 :::
 
-:::caution
+:::warning
 
 If an event or entity includes fields not defined in the schema, those fields will not be stored in the warehouse.
 
@@ -107,7 +107,7 @@ The name of each record field is the name of the schema field converted to snake
 
 :::
 
-:::caution
+:::warning
 
 If an event or entity includes fields not defined in the schema, those fields will not be stored in the warehouse.
 
@@ -196,7 +196,7 @@ The name of each record field is the name of the schema field converted to snake
 
 :::
 
-:::caution
+:::warning
 
 If an event or entity includes fields not defined in the schema, those fields will not be stored in the warehouse.
 
@@ -212,6 +212,53 @@ For example, suppose you have the following field in the schema:
 ```
 
 It will be translated into a field called `last_name` (notice the underscore), of type `STRING`.
+
+  </TabItem>
+  <TabItem value="synapse" label="Synapse Analytics">
+
+Each type of self-describing event and each type of entity get their own dedicated columns in the underlying data lake table. The name of such a column is composed of the schema vendor, schema name and major schema version (more on versioning [later](#versioning)).
+
+The column name is prefixed by `unstruct_event_` for self-describing events, and by `contexts_` for entities. _(In case you were wondering, those are the legacy terms for self-describing events and entities, respectively.)_
+
+:::note
+
+All characters are converted to lowercase and all symbols (like `.`) are replaced with an underscore.
+
+:::
+
+Examples:
+
+| Kind                  | Schema                                      | Resulting column                                   |
+| --------------------- | ------------------------------------------- | -------------------------------------------------- |
+| Self-describing event | `com.example/button_press/jsonschema/1-0-0` | `events.unstruct_event_com_example_button_press_1` |
+| Entity                | `com.example/user/jsonschema/1-0-0`         | `events.contexts_com_example_user_1`               |
+
+The column will be formatted as JSON — an object for self-describing events and an array of objects for entities (because an event can have more than one entity attached).
+
+Inside the JSON object, there will be fields corresponding to the fields in the schema.
+
+:::note
+
+The name of each JSON field is the name of the schema field converted to snake case.
+
+:::
+
+:::warning
+
+If an event or entity includes fields not defined in the schema, those fields will not be stored in the data lake, and will not be availble in Synapse.
+
+:::
+
+For example, suppose you have the following field in the schema:
+
+```json
+"lastName": {
+  "type": "string",
+  "maxLength": 100
+}
+```
+
+It will be translated into a field called `last_name` (notice the underscore) inside the JSON object.
 
   </TabItem>
 </Tabs>

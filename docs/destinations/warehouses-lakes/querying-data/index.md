@@ -31,7 +31,7 @@ WHERE event_name = 'page_view'
 
 You will need to replace `<events>` with the appropriate location — the database, schema and table name will depend on your setup. See this [first steps section](/docs/get-started/querying/index.md#connection-details) for details.
 
-:::caution
+:::warning
 
 With large data volumes (read: any production system), you should always include a filter on the partition key (normally, `collector_tstamp`), for example:
 
@@ -64,7 +64,7 @@ LEFT JOIN
     ON sde.root_id = ev.event_id AND sde.root_tstamp = ev.collector_tstamp
 ```
 
-:::caution
+:::warning
 
 You may need to take care of [duplicate events](#dealing-with-duplicates).
 
@@ -87,7 +87,7 @@ FROM
 ```
 
 :::note
-The column name produced by previous versions of the BigQuery Loader (<2.0.0) would contain full schema version, e.g. `unstruct_event_my_example_event_1_0_0`.
+The column name produced by previous versions of the BigQuery Loader (\<2.0.0) would contain full schema version, e.g. `unstruct_event_my_example_event_1_0_0`.
 The [BigQuery Loader upgrade guide](/docs/api-reference/loaders-storage-targets/bigquery-loader/upgrade-guides/2-0-0-upgrade-guide/index.md) describes how to enable the legacy column names in the 2.0.0 loader.
 :::
 
@@ -163,7 +163,7 @@ LEFT JOIN -- assumes no duplicates, and will return all events regardless of if 
     ON ent.root_id = ev.event_id AND ent.root_tstamp = ev.collector_tstamp
 ```
 
-:::caution
+:::warning
 
 You may need to take care of [duplicate events](#dealing-with-duplicates).
 
@@ -198,7 +198,7 @@ LEFT JOIN
     unnest(contexts_my_entity_1) AS my_ent -- left join to avoid discarding events without values in this entity
 ```
 :::note
-Column name produced by previous versions of the BigQuery Loader (<2.0.0) would contain full schema version, e.g.  `contexts_my_entity_1_0_0`.
+Column name produced by previous versions of the BigQuery Loader (\<2.0.0) would contain full schema version, e.g.  `contexts_my_entity_1_0_0`.
 :::
 
 </TabItem>

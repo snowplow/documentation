@@ -51,41 +51,41 @@ Keep in mind that you will need to be able to:
 <Tabs groupId="cloud" queryString lazy>
   <TabItem value="aws" label="AWS" default>
 
-* Provide an S3 bucket
-* Create a DynamoDB table (required for file locking)
-* Create an IAM role with the following permissions:
-  * For the S3 bucket:
-    * `s3:ListBucket`
-    * `s3:GetObject`
-    * `s3:PutObject`
-    * `s3:DeleteObject`
-    * `s3:ListBucketMultipartUploads`
-    * `s3:AbortMultipartUpload`
-  * For the DynamoDB table:
-    * `dynamodb:DescribeTable`
-    * `dynamodb:Query`
-    * `dynamodb:Scan`
-    * `dynamodb:GetItem`
-    * `dynamodb:PutItem`
-    * `dynamodb:UpdateItem`
-    * `dynamodb:DeleteItem`
-* Schedule a regular job to optimize the lake
+  * Provide an S3 bucket
+  * Create a DynamoDB table (required for file locking)
+  * Create an IAM role with the following permissions:
+    * For the S3 bucket:
+      * `s3:ListBucket`
+      * `s3:GetObject`
+      * `s3:PutObject`
+      * `s3:DeleteObject`
+      * `s3:ListBucketMultipartUploads`
+      * `s3:AbortMultipartUpload`
+    * For the DynamoDB table:
+      * `dynamodb:DescribeTable`
+      * `dynamodb:Query`
+      * `dynamodb:Scan`
+      * `dynamodb:GetItem`
+      * `dynamodb:PutItem`
+      * `dynamodb:UpdateItem`
+      * `dynamodb:DeleteItem`
+  * Schedule a regular job to optimize the lake
 
 
   </TabItem>
   <TabItem value="gcp" label="GCP">
 
-* Provide a GCS bucket
-* Create a service account with the `roles/storage.objectUser` role on the bucket
-* Create and provide a service account key
+  * Provide a GCS bucket
+  * Create a service account with the `roles/storage.objectUser` role on the bucket
+  * Create and provide a service account key
 
 
   </TabItem>
   <TabItem value="azure" label="Azure">
 
-* Provide an ADLS storage container
-* Create a new App Registration with the `Storage Blob Data Contributor` permission
-* Provide the registration tenant ID, client ID and client secret
+  * Provide an ADLS storage container
+  * Create a new App Registration with the `Storage Blob Data Contributor` permission
+  * Provide the registration tenant ID, client ID and client secret
 
 
   </TabItem>

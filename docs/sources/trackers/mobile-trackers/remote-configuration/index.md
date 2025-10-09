@@ -27,7 +27,7 @@ A tracker that will be remotely configured is created slightly differently from 
 ```swift
 // Indicate the URL where to download the config file
 let remoteConfig = RemoteConfiguration(
-  endpoint: "https://remote-config.com", 
+  endpoint: "https://remote-config.com",
   method: .get
 )
 
@@ -72,7 +72,7 @@ Snowplow.setup(
   remoteConfiguration = remoteConfig,
   defaultBundles = defaultConfig,
   defaultBundleVersion = 1
-) { 
+) {
   // This optional callback can be used for last minute, post-configuration, updates once the tracker instance is enabled and configured.
   configurationPair: Pair<List<String>, ConfigurationState?>? ->
     val namespaces = configurationPair?.first
@@ -190,7 +190,7 @@ The required fields are:
 
 - `$schema`: It specifies the format of the configuration file and it's used by the tracker to check if the format is compatible with that version of the tracker.
 - `configurationVersion`: It's an incremental version number that identifies the current configuration. The tracker compares this value with the configurationVersion of the cached configuration to decide whether to update or not the tracker configuration.
-  :::caution
+  :::warning
   The version MUST be increased on each update.
   :::
 - `configurationBundle`: This is a list of configurations for the various tracker instances the developer wants to activate in the app. Usually there is a unique tracker instance for the app so the configurationBundle will likely be an array of a single object like in the example above.

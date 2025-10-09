@@ -76,7 +76,7 @@ tracker = SnowplowTracker::Tracker.new([emitter])
 
 This Tracker will send events via GET to `http://collector.example.com/i`. To use other settings, such as POST or HTTPS, see "[Configuring how events are sent](/docs/sources/trackers/ruby-tracker/configuring-how-events-are-sent/index.md)".
 
-:::caution
+:::warning
 Do not include the protocol (HTTP or HTTPS) in your collector address. It will be added automatically.
 :::
 

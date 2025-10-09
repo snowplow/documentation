@@ -53,7 +53,7 @@ The Snowplow Stream Collector cannot process requests bigger than 1MB because th
 
 From v3.2.0, you are able to set custom headers with an `eventMethod: "post"` and `eventMethod: "get"` (Except for IE9). This functionality should only be used in the case where a Proxy or other Collector type is being used which allows for custom headers to be set on the request.
 
-:::caution
+:::warning
 Adding additional headers without returning the appropriate CORS Headers on the OPTIONS request will cause events to fail to send.
 :::
 
@@ -107,7 +107,7 @@ newTracker('sp', 'https://{{collector_url_here}}', {
 
 ### GET support
 
-By default, events are sent by GET. This can be changed using the `eventMethod` field of the [configuration object](/docs/sources/trackers/web-trackers/tracker-setup/initialization-options/index.md). 
+By default, events are sent by GET. This can be changed using the `eventMethod` field of the [configuration object](/docs/sources/trackers/web-trackers/tracker-setup/initialization-options/index.md).
 
 ### POST support
 

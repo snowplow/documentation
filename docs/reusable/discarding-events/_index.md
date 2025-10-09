@@ -16,7 +16,7 @@ function process(event) {
 
 This mechanism can be used to drop not only good events, but also invalid events. The dropped events will not be sent to any stream or destination, thus lowering the infrastructure costs.
 
-:::caution
+:::warning
 
 There is no way to recover dropped events therefore use it with caution.
 
@@ -36,7 +36,7 @@ function process(event) {
 }
 ```
 
-:::caution
+:::warning
 
 This will create an “enrichment failure” failed event, which may be tricky to distinguish from genuine failures in your enrichment code, e.g. due to a mistake.
 

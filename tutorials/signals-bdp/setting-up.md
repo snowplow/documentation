@@ -79,8 +79,8 @@ docker compose --profile travel-site up
 5. Open the travel website in your browser at [http://localhost:8086](http://localhost:8086). You should now see the homepage of the travel site loaded successfully.
 
 
-6. Open the dev console (Ctrl+Shift+I) in your browser and open the Snowplow Inspector tab. Click on some filters on the [destinations](http://localhost:8086/destinations) page (e.g., 'Food') to observe some events firing - you should now see some self-describing events firing into your Snowplow pipeline.
+6. Open the dev console (Ctrl+Shift+I or equivalent) in your browser and open the Snowplow Inspector tab. Click on some filters on the [destinations](http://localhost:8086/destinations) page (e.g., 'Food') to observe some events firing - you should now see some self-describing events firing into your Snowplow pipeline.
 
 Now that you have the website up and run feel free to explore the site a little bit and think about what attributes we might be able to define in Signals in order to customize the site towards the behavior and preferences of a user.
 
-In the next step we will go ahead and define the attributes we will use to personalize the site.
+In the next step we will go ahead and begin defining the attributes we will use to personalize the site.

@@ -4,13 +4,13 @@ position: 3
 ---
 
 
-## Using the Signals Python SDK
+## Defining attributes in Signals
 
-In order to personalize our site experience we need to define some attributes in Signals that capture user behavior and preferences. This will allow us to tailor the content and interactions on the site to better meet the needs of individual users.
+In order to personalize our site experience we need to define some attributes in Signals that capture user behavior and preferences as you interact with the website. This will allow us to tailor the content and interactions on the site to better meet the needs of individual users.
 
 We'll use the same attributes for both the on-site personalization and the conversational agent responses. This means that the attributes we define will be used to customize both the content displayed on the travel site as well as the responses provided by the agent when users ask questions.
 
-To define these attributes, we'll use the [Signals Python SDK](https://pypi.org/project/snowplow-signals/) in a Jupyter notebook to create a set of attributes that capture and aggregate user preferences.
+To define these attributes, we will use the [Signals Python SDK](https://pypi.org/project/snowplow-signals/) in a Jupyter notebook to create a set of attributes that capture and aggregate user preferences.
 
 To run this notebook you can either download it locally or alternately run it on Google Colab [here](https://colab.research.google.com/github/snowplow/documentation/blob/main/tutorials/signals-bdp/signals.ipynb) if you have a Google account.
 

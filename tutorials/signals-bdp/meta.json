@@ -1,5 +1,5 @@
 {
-  "title": "Running a Snowplow Signals demo",
+  "title": "Integrating Snowplow Signals into a demo travel site",
   "label": "Signals",
-  "description": "Set up a demo travel site for Snowplow Signals."
+  "description": "Set up a demo travel site and integrating with Snowplow Signals."
 }

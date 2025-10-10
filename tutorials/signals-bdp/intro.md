@@ -7,7 +7,7 @@ This accelerator walks you through how to set up Snowplow Signals with a Snowplo
 
 It assumes you already have either 
 1. a BDP pipeline with Signals setup already OR
-2. Have signed up for a trial of the Signals through [XXX] and are using [Snowplow Local](https://docs.snowplowanalytics.com/docs/installation-guides/snowplow-local/) as your local pipeline.
+2. Have signed up for a trial of the Signals through [Try Signals](https://try-signals.snowplow.io) and are using [Snowplow Local](https://docs.snowplowanalytics.com/docs/installation-guides/snowplow-local/) as your local pipeline.
 
 This will help provide an introduction to not just the basic concepts of Signals but also how you can retrieve and work with this data to provide on-site personalisation by changing both the content displayed as well as the responses an agent provides to the user.
 
@@ -23,7 +23,7 @@ In this accelerator you will:
 ### Prerequisites
 
 - have Signals enabled for your BDP pipeline OR have Snowplow Local setup and Signals Sandbox
-- have the [Snowplow Inspector](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm?hl=en) installed in your browser to view [Attribute groups](https://docs.snowplow.io/docs/signals/concepts/#attribute-groups) and [Interventions](https://docs.snowplow.io/docs/signals/concepts/#interventions)
+- have the [Snowplow Inspector](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm?hl=en) installed in your browser to view events, [Attribute groups](https://docs.snowplow.io/docs/signals/concepts/#attribute-groups) and [Interventions](https://docs.snowplow.io/docs/signals/concepts/#interventions)
 - some familiarity with running Jupyter notebooks (either locally on your machine or in Google Colab)
 - have [Docker](https://www.docker.com/) installed and configured on your computer
 - Access to Google Colab or Github to run the Jupyter [notebook](https://colab.research.google.com/github/snowplow/documentation/blob/main/tutorials/signals-bdp/signals.ipynb)

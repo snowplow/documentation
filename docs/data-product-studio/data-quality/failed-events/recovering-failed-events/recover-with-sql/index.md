@@ -147,7 +147,7 @@ WITH failed_events AS (
     SPLIT_PART(f.value:schema::string, '/', 2) AS schema_name,
     SPLIT_PART(f.value:schema::string, '/', 4) AS schema_version
   FROM SNOWPLOW_FAILED.EVENTS,  -- Use your failed events schema
-       LATERAL FLATTEN(input => contexts_com_snowplowanalytics_snowplow_failure_1) f. -- using flatten allows for instances where multiple entities have failed on the same event
+       LATERAL FLATTEN(input => contexts_com_snowplowanalytics_snowplow_failure_1) f -- using flatten allows for instances where multiple entities have failed on the same event
   WHERE load_tstamp::DATE > CURRENT_DATE - INTERVAL '7 DAYS'
 )
 SELECT
@@ -231,7 +231,7 @@ WITH prep AS (
     FROM SNOWPLOW_FAILED.EVENTS
     WHERE load_tstamp::DATE > CURRENT_DATE - INTERVAL '7 DAY'
     AND app_id = 'test-app'
-    AND SPLIT_PART(contexts_com_snowplowanalytics_snowplow_failure_1[0]:schema::STRING, '/', 4) AS schema_version
+    AND contexts_com_snowplowanalytics_snowplow_failure_1[0]:schema = 'iglu:com.example/user_entity/jsonschema/2-0-1'
   )
 SELECT
   ARRAY_CONSTRUCT( -- since this is an entity, it must be an array

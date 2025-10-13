@@ -23,7 +23,7 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
   const [visitedSteps, setVisitedSteps] = useState<Set<string>>(new Set())
   const [stepReadingProgress, setStepReadingProgress] = useState<Map<string, number>>(new Map())
 
-  // Load visited steps from localStorage
+  // Load visited steps from localStorage and re-load when activeStep changes
   useEffect(() => {
     if (!meta?.id) return
 
@@ -31,7 +31,7 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
     if (storedVisited) {
       setVisitedSteps(new Set(JSON.parse(storedVisited)))
     }
-  }, [meta?.id])
+  }, [meta?.id, activeStep]) // Re-load when activeStep changes
 
   // Don't automatically mark steps as visited - only when explicitly completed
   // This effect is removed to prevent auto-completion

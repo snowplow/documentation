@@ -10,7 +10,33 @@ export const Paginators: React.FC<{
   setActiveStep: (step: Step) => void
   isMobile?: boolean
   className?: string
-}> = ({ next, prev, setActiveStep, isMobile = false, className }) => {
+  currentStep?: Step | null
+  tutorialId?: string
+}> = ({ next, prev, setActiveStep, isMobile = false, className, currentStep, tutorialId }) => {
+
+  // Function to mark current step as completed in localStorage
+  const markCurrentStepCompleted = () => {
+    if (!currentStep || !tutorialId) return
+
+    const stepKey = currentStep.path || currentStep.id
+    if (!stepKey) return
+
+    // Get existing completed steps from localStorage
+    const storedVisited = localStorage.getItem(`tutorial-progress-${tutorialId}`)
+    const visitedSteps = storedVisited ? new Set(JSON.parse(storedVisited)) : new Set()
+
+    // Add current step to completed steps
+    visitedSteps.add(stepKey)
+
+    // Save back to localStorage
+    localStorage.setItem(`tutorial-progress-${tutorialId}`, JSON.stringify([...visitedSteps]))
+  }
+
+  // Enhanced setActiveStep that also marks completion
+  const handleNextClick = (step: Step) => {
+    markCurrentStepCompleted()
+    setActiveStep(step)
+  }
   return (
     <Box
       className={className}
@@ -44,7 +70,7 @@ export const Paginators: React.FC<{
         {next && (
           <Grid item xs={6}>
             <PaginatorNavLink
-              onClick={() => setActiveStep(next)}
+              onClick={() => handleNextClick(next)}
               isNext={true}
               permalink={next.path}
               title={next.title}

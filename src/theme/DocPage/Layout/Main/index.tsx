@@ -185,6 +185,9 @@ const DocPageLayoutMain: FC<Props> = ({ hiddenSidebarContainer, children }) => {
   const tutorial = useTutorial()
   const location = useLocation()
 
+  // Debug logging to understand what's happening
+  console.log('DocPageLayoutMain - Location:', location.pathname)
+  console.log('DocPageLayoutMain - Tutorial type:', tutorial)
 
 
   switch (tutorial) {

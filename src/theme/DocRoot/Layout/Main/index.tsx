@@ -118,6 +118,16 @@ const TutorialLayout: React.FC<{children: ReactNode}> = ({ children }) => {
             <div className={clsx("tutorial-content", styles.docItemWrapper)}>
               {children}
             </div>
+            <div style={{ marginTop: '2rem', marginBottom: '2rem', maxWidth: '100%' }}>
+              <Paginators
+                next={next}
+                prev={prev}
+                setActiveStep={setActiveStep}
+                isMobile
+                currentStep={activeStep}
+                tutorialId={meta?.id}
+              />
+            </div>
           </Grid>
         </Grid>
       </main>
@@ -145,6 +155,15 @@ const TutorialLayout: React.FC<{children: ReactNode}> = ({ children }) => {
               <Grid sx={{ width: '100%' }} item>
                 <div className={clsx("tutorial-content", styles.docItemWrapper)}>
                   {children}
+                </div>
+                <div style={{ marginTop: '2rem', marginBottom: '2rem', maxWidth: '75%' }}>
+                  <Paginators
+                    next={next}
+                    prev={prev}
+                    setActiveStep={setActiveStep}
+                    currentStep={activeStep}
+                    tutorialId={meta?.id}
+                  />
                 </div>
               </Grid>
             </Grid>

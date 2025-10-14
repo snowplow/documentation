@@ -48,11 +48,11 @@ export const Paginators: React.FC<{
     >
       <Grid
         justifyContent="space-between"
-        direction={isMobile ? 'column' : 'row'}
+        direction="row"
         container
-        columnSpacing={2}
+        spacing={isMobile ? 1 : 2}
       >
-        <Grid item xs={6}>
+        <Grid item xs={prev ? 6 : 0}>
           {prev ? (
             <PaginatorNavLink
               onClick={() => setActiveStep(prev)}
@@ -68,7 +68,7 @@ export const Paginators: React.FC<{
         </Grid>
 
         {next && (
-          <Grid item xs={6}>
+          <Grid item xs={prev ? 6 : 12}>
             <PaginatorNavLink
               onClick={() => handleNextClick(next)}
               isNext={true}

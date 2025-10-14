@@ -16,7 +16,6 @@ import { getSteps } from '@site/src/components/tutorials/utils';
 import { Meta, Step } from '@site/src/components/tutorials/models';
 import { useTutorial, TutorialKind } from '@site/src/components/tutorials/hooks';
 import TutorialProgressTracker from '@site/src/components/tutorials/TutorialProgressTracker';
-import TutorialProgressTrackerMobile from '@site/src/components/tutorials/TutorialProgressTrackerMobile';
 import { Paginators } from '@site/src/theme/DocPage/Layout/Main/Paginators';
 
 import styles from './styles.module.css';
@@ -106,7 +105,8 @@ const TutorialLayout: React.FC<{children: ReactNode}> = ({ children }) => {
           className='p-4'
         >
           <Grid item>
-            <TutorialProgressTrackerMobile
+            <TutorialProgressTracker
+              className="w-full max-w-none"
               meta={meta}
               steps={steps}
               activeStep={activeStep}
@@ -139,8 +139,11 @@ const TutorialLayout: React.FC<{children: ReactNode}> = ({ children }) => {
       <Grid container sx={{width: '100%' }} columnSpacing={2} className='px-4 py-8'>
         <Grid container item direction="column">
           <Grid container item wrap="nowrap" columnGap={3}>
-            {/* Progress Tracker Sidebar - Moved to Left */}
-            <Grid item xs={3} sx={{ minWidth: '280px' }}>
+            {/* Progress Tracker Sidebar - Responsive sizing */}
+            <Grid item xs={12} sm={4} md={3} lg={3} sx={{
+              minWidth: { xs: '200px', sm: '220px', md: '240px', lg: '280px' },
+              maxWidth: { xs: '200px', sm: '220px', md: '240px', lg: '280px' }
+            }}>
               <TutorialProgressTracker
                 className="sticky top-4"
                 meta={meta}
@@ -150,8 +153,8 @@ const TutorialLayout: React.FC<{children: ReactNode}> = ({ children }) => {
               />
             </Grid>
 
-            {/* Main Content - Expanded */}
-            <Grid container item xs={9}>
+            {/* Main Content - Responsive sizing */}
+            <Grid container item xs={12} sm={8} md={9} lg={9}>
               <Grid sx={{ width: '100%' }} item>
                 <div className={clsx("tutorial-content", styles.docItemWrapper)}>
                   {children}

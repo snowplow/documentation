@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useMemo } from 'react'
-import { ChevronRight, ArrowLeft, Check } from 'lucide-react'
+import { ChevronRight, ArrowLeft, Check, X, ListChecks } from 'lucide-react'
 import { cn } from '@site/src/lib/utils'
 import { Button } from '@site/src/components/ui/button'
 import RadialProgress from './RadialProgress'
+import styles from './TutorialProgressTracker.module.css'
 
 interface TutorialProgressTrackerProps {
   className?: string
@@ -22,6 +23,7 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
   const [scrollProgress, setScrollProgress] = useState(0)
   const [visitedSteps, setVisitedSteps] = useState<Set<string>>(new Set())
   const [stepReadingProgress, setStepReadingProgress] = useState<Map<string, number>>(new Map())
+  const [isSheetOpen, setIsSheetOpen] = useState(false)
 
   // Load visited steps from localStorage and re-load when activeStep changes
   useEffect(() => {
@@ -130,9 +132,36 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
   }
 
   return (
-    <div className={cn("w-80 h-fit sticky top-8", className)}>
-      {/* Header Card */}
-      <div className="bg-slate-800 text-white rounded-lg p-6 mb-4 leading-tight">
+    <>
+      {/* Tutorial Chapters Button - Mobile Only */}
+      <div className="w-full flex justify-end mb-4 block md:hidden">
+        <Button
+          variant="outline"
+          size="lg"
+          className="w-auto justify-between border border-border bg-card hover:bg-accent text-foreground font-regular py-3 px-4 rounded-lg shadow-sm"
+          onClick={() => setIsSheetOpen(true)}
+        >
+          <span className="text-base font-regular">Tutorial Chapters</span>
+          <ListChecks className="w-5 h-5 ml-2 text-foreground" />
+        </Button>
+      </div>
+
+      <div className={cn("h-fit sticky", styles.tutorialProgressTracker, className)} style={{ zIndex: 10 }}>
+        {/* Header Card */}
+      <div className="bg-indigo-950 text-white rounded-lg p-6 mb-4 leading-tight">
+      <div className="flex flex-wrap gap-1 mb-4">
+          {meta?.label && (
+            <div className="bg-purple-200 text-purple-800 px-2 py-1 rounded-lg text-xs  font-normal">
+              {meta.label}
+            </div>
+          )}
+          {meta?.useCases && meta.useCases.map((useCase: string, index: number) => (
+            <div key={index} className="bg-purple-200 text-purple-800 px-1 py-1 rounded-lg text-xs font-normal">
+              {useCase}
+            </div>
+          ))}
+        </div>
+
         <h3 className="text-xl font-semibold mb-2">
           {meta?.title || 'Tutorial'}
         </h3>
@@ -140,18 +169,7 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
           {meta?.description || 'Track your progress through this tutorial'}
         </p>
 
-        <div className="flex gap-1 mb-4">
-          {meta?.label && (
-            <div className="bg-purple-200 text-purple-800 px-2 py-1 rounded-lg text-xs font-medium">
-              {meta.label}
-            </div>
-          )}
-          {meta?.useCases && meta.useCases.map((useCase: string, index: number) => (
-            <div key={index} className="bg-purple-200 text-purple-800 px-2 py-1 rounded-lg text-xs font-medium">
-              {useCase}
-            </div>
-          ))}
-        </div>
+        
 
         {/* Overall Progress Bar */}
         <div className="mt-4">
@@ -168,8 +186,8 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
         </div>
       </div>
 
-      {/* Tutorial Steps List */}
-      <div className="space-y-2">
+      {/* Tutorial Steps List - Hidden on mobile since they're in the sheet */}
+      <div className="space-y-2 hidden md:block">
         {steps.map((step, index) => {
           const isActive = isStepCurrent(step)
           const isCompleted = isStepCompleted(step)
@@ -239,8 +257,8 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
       </div>
 
 
-      {/* Back to Tutorials Button */}
-      <div className="mt-4">
+      {/* Back to Tutorials Button - Hidden on mobile */}
+      <div className="mt-4 hidden md:block">
         <Button
           variant="outline"
           size="lg"
@@ -252,6 +270,106 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
         </Button>
       </div>
     </div>
+
+    {/* Mobile Tutorial Chapters Sheet */}
+    {isSheetOpen && (
+      <div className="fixed inset-0 z-50 block md:hidden">
+        {/* Overlay */}
+        <div
+          className="fixed inset-0 bg-black/50"
+          onClick={() => setIsSheetOpen(false)}
+        />
+
+        {/* Sheet Content */}
+        <div className="fixed bottom-0 left-0 right-0 bg-white rounded-t-lg max-h-[80vh] overflow-y-auto">
+          {/* Sheet Header */}
+          <div className="flex items-center justify-between p-4 border-b">
+            <h2 className="text-lg font-semibold">Tutorial Chapters</h2>
+            <Button
+              variant="ghost"
+              size="sm"
+              onClick={() => setIsSheetOpen(false)}
+            >
+              <X className="w-4 h-4" />
+            </Button>
+          </div>
+
+          {/* Tutorial Steps List */}
+          <div className="p-4 space-y-2">
+            {steps.map((step, index) => {
+              const isActive = isStepCurrent(step)
+              const isCompleted = isStepCompleted(step)
+              const isFuture = !isActive && !isCompleted
+
+              return (
+                <div
+                  key={step.path || step.id}
+                  onClick={() => {
+                    navigateToStep(step)
+                    setIsSheetOpen(false)
+                  }}
+                  className={cn(
+                    "flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200",
+                    "hover:bg-accent/50",
+                    isActive && "bg-primary/10 border border-primary/20",
+                    isCompleted && "bg-transparent hover:bg-accent",
+                    isFuture && "bg-transparent border border-border"
+                  )}
+                >
+                  {/* Step Number with Radial Progress or Check */}
+                  <div className="flex-shrink-0 mr-3">
+                    {isCompleted ? (
+                      <div className="w-8 h-8 rounded-full bg-green-500 flex items-center justify-center">
+                        <Check className="w-4 h-4 text-white" />
+                      </div>
+                    ) : (
+                      <RadialProgress
+                        progress={getStepReadingProgress(step)}
+                        size={32}
+                        strokeWidth={4}
+                        className={cn(
+                          isActive && "text-primary",
+                          isFuture && "text-foreground"
+                        )}
+                      >
+                        <span className={cn(
+                          "text-xs font-medium",
+                          isActive && "text-primary",
+                          isFuture && "text-muted-foreground"
+                        )}>
+                          {step.position || index + 1}
+                        </span>
+                      </RadialProgress>
+                    )}
+                  </div>
+
+                  {/* Step Title */}
+                  <div className="flex-1 min-w-0">
+                    <p className={cn(
+                      "font-light truncate m-0",
+                      isActive && "text-primary",
+                      isCompleted && "text-muted-foreground",
+                      isFuture && "text-foreground"
+                    )}>
+                      {step.title}
+                    </p>
+                  </div>
+
+                  {/* Navigation Arrow */}
+                  <ChevronRight className={cn(
+                    "w-4 h-4 ml-2 flex-shrink-0",
+                    isActive && "text-primary",
+                    isCompleted && "text-foreground",
+                    isFuture && "text-muted-foreground"
+                  )} />
+                </div>
+              )
+            })}
+          </div>
+        </div>
+      </div>
+    )}
+  </>
   )
 }
 

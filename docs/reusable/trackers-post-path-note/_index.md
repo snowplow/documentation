@@ -1,4 +1,4 @@
-:::caution
+:::warning
 
 Changing `postPath` is non-standard behavior that does not conform to the default Collector protocol.
 

@@ -46,10 +46,10 @@ To process raw web vitals event data, we have included an optional module to mod
 
 This custom module consists of a series of dbt models which produce the following aggregated models from the raw web vitals events:
 
-Derived table | Table description | 
----|---|---
-`snowplow_web_vitals` | Incremental table used as a base for storing core web vital events (first event per page view). | [Docs](https://snowplow.github.io/dbt-snowplow-web/#!/model/model.snowplow_web.snowplow_web_vitals)
-`snowplow_web_vital_measurements` | Drop and recompute table to use for visualizations that takes core web vital measurements at the user specified percentile point (defaulted to 75). | [Docs](https://snowplow.github.io/dbt-snowplow-web/#!/model/model.snowplow_web.snowplow_web_vital_measurements)
+| Derived table                     | Table description                                                                                                                                   | dbt                                                                                                             |
+| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `snowplow_web_vitals`             | Incremental table used as a base for storing core web vital events (first event per page view).                                                     | [Docs](https://snowplow.github.io/dbt-snowplow-web/#!/model/model.snowplow_web.snowplow_web_vitals)             |
+| `snowplow_web_vital_measurements` | Drop and recompute table to use for visualizations that takes core web vital measurements at the user specified percentile point (defaulted to 75). | [Docs](https://snowplow.github.io/dbt-snowplow-web/#!/model/model.snowplow_web.snowplow_web_vital_measurements) |
 
 
 ### Performance navigation timing context entity

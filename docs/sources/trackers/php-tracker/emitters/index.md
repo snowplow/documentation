@@ -46,16 +46,16 @@ public function __construct($uri, $protocol = NULL, $type = NULL, $buffer_size =
 
 Arguments:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `$uri` | Collector hostname | Yes | Non-empty string |
-| `$protocol` | Collector Protocol (HTTP or HTTPS) | No | String |
-| `$type` | Request Type (POST or GET) | No | String |
-| `$buffer_size` | Amount of events to store before flush | No | Int |
-| `$debug` | Whether or not to log errors | No | Boolean |
-| `$max_retry_attempts` | The maximum number of times to retry a request. Defaults to 1. | No | Int |
-| `$retry_backoff_ms` | The number of milliseconds to backoff before retrying a request. Defaults to 100 ms, increases exponentially in subsequent retries. | No | Int |
-| `$server_anonymization` | Enable Server Anonymization for sent events; IP and Network User ID information isn't associated with tracked events | No | Int |
+| **Argument**            | **Description**                                                                                                                     | **Required?** | **Validation**   |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------- | ---------------- |
+| `$uri`                  | Collector hostname                                                                                                                  | Yes           | Non-empty string |
+| `$protocol`             | Collector Protocol (HTTP or HTTPS)                                                                                                  | No            | String           |
+| `$type`                 | Request Type (POST or GET)                                                                                                          | No            | String           |
+| `$buffer_size`          | Amount of events to store before flush                                                                                              | No            | Int              |
+| `$debug`                | Whether or not to log errors                                                                                                        | No            | Boolean          |
+| `$max_retry_attempts`   | The maximum number of times to retry a request. Defaults to 1.                                                                      | No            | Int              |
+| `$retry_backoff_ms`     | The number of milliseconds to backoff before retrying a request. Defaults to 100 ms, increases exponentially in subsequent retries. | No            | Int              |
+| `$server_anonymization` | Enable Server Anonymization for sent events; IP and Network User ID information isn't associated with tracked events                | No            | Int              |
 
 ### Socket
 
@@ -82,17 +82,17 @@ public function __construct($uri, $ssl = NULL, $type = NULL, $timeout = NULL, $b
 
 Arguments:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `$uri` | Collector hostname | Yes | Non-empty string |
-| `$ssl` | Whether to use SSL encryption | No | Boolean |
-| `$type` | Request Type (POST or GET) | No | String |
-| `$timeout` | Socket Timeout Limit | No | Int or Float |
-| `$buffer_size` | Amount of events to store before flush | No | Int |
-| `$debug` | Whether or not to log errors | No | Boolean |
-| `$max_retry_attempts` | The maximum number of times to retry a request. Defaults to 1. | No | Int |
-| `$retry_backoff_ms` | The number of milliseconds to backoff before retrying a request. Defaults to 100 ms, increases exponentially in subsequent retries. | No | Int |
-| `$server_anonymization` | Enable Server Anonymization for sent events; IP and Network User ID information isn't associated with tracked events | No | Int |
+| **Argument**            | **Description**                                                                                                                     | **Required?** | **Validation**   |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------------- | ---------------- |
+| `$uri`                  | Collector hostname                                                                                                                  | Yes           | Non-empty string |
+| `$ssl`                  | Whether to use SSL encryption                                                                                                       | No            | Boolean          |
+| `$type`                 | Request Type (POST or GET)                                                                                                          | No            | String           |
+| `$timeout`              | Socket Timeout Limit                                                                                                                | No            | Int or Float     |
+| `$buffer_size`          | Amount of events to store before flush                                                                                              | No            | Int              |
+| `$debug`                | Whether or not to log errors                                                                                                        | No            | Boolean          |
+| `$max_retry_attempts`   | The maximum number of times to retry a request. Defaults to 1.                                                                      | No            | Int              |
+| `$retry_backoff_ms`     | The number of milliseconds to backoff before retrying a request. Defaults to 100 ms, increases exponentially in subsequent retries. | No            | Int              |
+| `$server_anonymization` | Enable Server Anonymization for sent events; IP and Network User ID information isn't associated with tracked events                | No            | Int              |
 
 ### Curl
 
@@ -121,7 +121,7 @@ public function __construct($uri, $protocol = NULL, $type = NULL, $buffer_size =
 Arguments:
 
 | **Argument**            | **Description**                                         | **Required?** | **Validation**   |
-|-------------------------|---------------------------------------------------------|---------------|------------------|
+| ----------------------- | ------------------------------------------------------- | ------------- | ---------------- |
 | `$uri`                  | Collector hostname                                      | Yes           | Non-empty string |
 | `$protocol`             | Collector Protocol (HTTP or HTTPS)                      | No            | String           |
 | `$type`                 | Request Type (POST or GET)                              | No            | String           |
@@ -148,7 +148,7 @@ Since version 0.8 of the PHP tracker, you can change these settings using the fo
 
 ### File
 
-:::caution
+:::warning
 
 When running under Windows, PHP can't spawn truly separate processes, and slowly eats more and more resources when more processes are spawned. Thus, Windows might crash under high load when using the File Emitter.
 
@@ -180,16 +180,16 @@ public function __construct($uri, $protocol = NULL, $type = NULL, $workers = NUL
 
 Arguments:
 
-| **Argument** | **Description** | **Required?** | **Validation** |
-| --- | --- | --- | --- |
-| `$uri` | Collector hostname | Yes | Non-empty string |
-| `$protocol` | Collector Protocol (HTTP or HTTPS) | No | String |
-| `$type` | Request Type (POST or GET) | No | String |
-| `$workers` | Amount of background workers | No | Int |
-| `$timeout` | Worker Timeout | No | Int or Float |
-| `$buffer_size` | Amount of events to store before flush | No | Int |
-| `$debug` | Whether or not to log errors | No | Boolean |
-| `$log_dir` | The directory for event log and worker log subdirectories to be created in | No | String |
+| **Argument**   | **Description**                                                            | **Required?** | **Validation**   |
+| -------------- | -------------------------------------------------------------------------- | ------------- | ---------------- |
+| `$uri`         | Collector hostname                                                         | Yes           | Non-empty string |
+| `$protocol`    | Collector Protocol (HTTP or HTTPS)                                         | No            | String           |
+| `$type`        | Request Type (POST or GET)                                                 | No            | String           |
+| `$workers`     | Amount of background workers                                               | No            | Int              |
+| `$timeout`     | Worker Timeout                                                             | No            | Int or Float     |
+| `$buffer_size` | Amount of events to store before flush                                     | No            | Int              |
+| `$debug`       | Whether or not to log errors                                               | No            | Boolean          |
+| `$log_dir`     | The directory for event log and worker log subdirectories to be created in | No            | String           |
 
 ### Emitter debug mode
 

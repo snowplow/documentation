@@ -60,7 +60,7 @@ let event_store = InMemoryEventStore::builder()
     .build()?;
 ```
 
-:::caution Events in the `InMemoryEventStore` will be lost if the process is unexpectedly terminated.
+:::warning Events in the `InMemoryEventStore` will be lost if the process is unexpectedly terminated.
 :::
 
 ## HTTP Client
@@ -105,7 +105,7 @@ A retry policy can be passed into the Emitter to define how many times a request
 
 The available policies are:
 
-- `RetryForever` A RetryPolicy with no cap on maximum of attempts to send an event to the collector. This policy might appear attractive where it is critical to avoid data loss because it never deliberately drops events. However, it could cause a backlog of events in the buffered queue if the collector is unavailable for too long. 
+- `RetryForever` A RetryPolicy with no cap on maximum of attempts to send an event to the collector. This policy might appear attractive where it is critical to avoid data loss because it never deliberately drops events. However, it could cause a backlog of events in the buffered queue if the collector is unavailable for too long.
 - `MaxAttempts(max: u32)` A RetryPolicy which drops events after failing to contact the collector within a fixed number of attempts. This policy can smooth over short outages of connection to the collector. Events will be dropped only if the collector is unreachable for a relatively long span of time. Dropping events can be a safety mechanism against a growing backlog of unsent events.
 - `NoRetry` A RetryPolicy that drops events immediately after a failed attempt to send to the collector.
 

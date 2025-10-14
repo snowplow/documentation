@@ -114,7 +114,7 @@ Adding these two configurations to your `dbt_project.yml` will ensure that the c
 If you want to temporarily disable a module, or you just find it easier to use the command line, you can also do this in the command line when executing the `dbt run` command. You will need to run the following command to disable the carts module
 
 ```bash
-dbt run --exclude carts --select snowplow_ecommerce --vars '{snowplow__disable_ecommerce_carts: true}'
+dbt run --exclude carts --select snowplow_ecommerce --vars '\{snowplow__disable_ecommerce_carts: true}'
 ```
 
 ### 7. Enable mobile ecommerce events

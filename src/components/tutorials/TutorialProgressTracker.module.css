@@ -1,0 +1,28 @@
+.tutorialProgressTracker {
+  top: 4rem !important;
+  width: 20rem; /* 320px - w-80 equivalent */
+  max-width: 280px; /* Constrain on smaller screens */
+}
+
+/* Responsive adjustments */
+@media (max-width: 1280px) {
+  .tutorialProgressTracker {
+    max-width: 240px; /* Smaller on medium screens */
+  }
+}
+
+@media (max-width: 1024px) {
+  .tutorialProgressTracker {
+    max-width: 200px; /* Even smaller on tablets */
+  }
+}
+
+/* Mobile adjustments - full width and no sticky positioning */
+@media (max-width: 768px) {
+  .tutorialProgressTracker {
+    position: relative !important;
+    top: 0 !important;
+    width: 100% !important;
+    max-width: none !important;
+  }
+}

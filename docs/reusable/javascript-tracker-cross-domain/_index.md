@@ -119,7 +119,7 @@ If further links get added to the page after the tracker has loaded, you can use
 });`
 }</CodeBlock>}</>
 
-:::caution Warning
+:::warning Warning
 
 If you enable link decoration, you should also make sure that at least one event is fired on the page.
 Firing an event causes the tracker to write the `domain_userid` to a cookie.

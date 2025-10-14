@@ -16,7 +16,7 @@ module.exports = {
   baseUrl: '/',
   // reset this back to throw, set to warn so that site builds
   onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'throw',
+  onBrokenAnchors: 'warn',
   favicon: 'img/favicon.ico',
   trailingSlash: true,
   organizationName: 'snowplow',
@@ -25,6 +25,10 @@ module.exports = {
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
+  },
+
+  future: {
+    v4: true,
   },
 
   clientModules: [
@@ -36,9 +40,12 @@ module.exports = {
 
   markdown: {
     mermaid: true,
+    hooks: {
+      onBrokenMarkdownLinks: 'throw',
+    },
   },
 
-  themes: ['docusaurus-theme-github-codeblock', '@docusaurus/theme-mermaid'],
+  themes: ['@docusaurus/theme-mermaid', 'docusaurus-theme-github-codeblock'],
 
   presets: [
     [
@@ -49,7 +56,21 @@ module.exports = {
           showLastUpdateTime: true,
           editUrl: 'https://github.com/snowplow/documentation/tree/main/',
           remarkPlugins: [abbreviations, math],
-          rehypePlugins: [katex],
+          rehypePlugins: [
+            [
+              require('rehype-raw').default,
+              {
+                passThrough: [
+                  'mdxjsEsm',
+                  'mdxJsxFlowElement',
+                  'mdxJsxTextElement',
+                  'mdxFlowExpression',
+                  'mdxTextExpression',
+                ],
+              },
+            ],
+            katex,
+          ],
           async sidebarItemsGenerator({
             defaultSidebarItemsGenerator,
             ...args
@@ -100,6 +121,10 @@ module.exports = {
           hideable: true,
         },
       },
+      codeblock: {
+        showGithubLink: true,
+        githubLinkLabel: 'View on GitHub',
+      },
       navbar: {
         hideOnScroll: false,
         logo: {
@@ -139,10 +164,6 @@ module.exports = {
           //   className: 'snowplow-button',
           //   position: 'right',
           // },
-          {
-            type: 'custom-docsTrackerNavbarButton',
-            position: 'left',
-          },
         ],
       },
       footer: {

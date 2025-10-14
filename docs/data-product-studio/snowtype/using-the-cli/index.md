@@ -91,7 +91,7 @@ The contents of a generated file from the Snowtype CLI will be:
     - A method that sends a Self Describing Event with the schema as the main event entity.
 - For each Event Specification, a method/class to track the event specification with the set event and context entity schemas.
 
-:::caution
+:::warning
 The Snowtype CLI does not automatically install the required Snowplow tracking libraries. For now it generates code that use the tracking libraries which are expected to be installed on the project.
 :::
 

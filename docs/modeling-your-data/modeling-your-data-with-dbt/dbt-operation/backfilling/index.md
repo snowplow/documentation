@@ -6,7 +6,7 @@ sidebar_position: 10
 
 When you first start using our packages, when you add [new custom models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md), or following on from a [full refresh](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/full-or-partial-refreshes/index.md), you may have a large period of data that needs to be processed before your models are *caught up* with your live data and the package does a [standard run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md#state-4-standard-run).
 
-As described in [incremental processing](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md) by default our packages are set up to avoid processing large periods of data in one go, this helps to reduce the workload on your cloud, as well as reducing the impact of any issues in the data causing a single run to fail. 
+As described in [incremental processing](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md) by default our packages are set up to avoid processing large periods of data in one go, this helps to reduce the workload on your cloud, as well as reducing the impact of any issues in the data causing a single run to fail.
 
 When backfilling your data, it is recommended to increase the `snowplow__backfill_limit_days` variable to as high as you feel comfortable with to reduce the number of runs that need to complete to get your processed data up to date. In general increasing this to cover 3-6 months is a good balance between speed and number of runs.
 
@@ -22,7 +22,7 @@ If you have added a new model it will be processed from the value in your `snowp
 
 As the process of backfilling data may take a long time depending on your data volumes, and during this time no new data will be processed, it may be preferable to backfill your model(s) in a staging environment and then deploy these derived tables into your production schema at a later date.
 
-:::caution
+:::warning
 
 This process involves manually editing the manifest table, which is dangerous and should be done only with understanding of our [incremental sessionization logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md) and [manifest tables](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/manifest-tables/index.md).
 
@@ -35,8 +35,8 @@ Let's assume you have one schema named `prod` that is used by a regularly schedu
 %%{init: { 'gantt': {'barHeight': 100, 'fontSize': 30, 'sectionFontSize': 30, 'leftPadding': 200, 'numberSectionStyles':3, 'displayMode': 'compact'}}}%%
 gantt
     dateFormat  YYYY-MM-DD
-    %% This comment is here to trigger a git change when spaces at the end of lines are removed, do not do that on this page it is required for the axis formatting    
-    axisFormat  
+    %% This comment is here to trigger a git change when spaces at the end of lines are removed, do not do that on this page it is required for the axis formatting
+    axisFormat
     tickInterval 1day
     section New Model
     Unprocessed :crit, n1, 2020-01-01, 5d
@@ -58,7 +58,7 @@ dbt run --select +my_new_model --vars "{'models_to_run': '$(dbt ls --select  +my
 %%{init: { 'gantt': {'barHeight': 100, 'fontSize': 30, 'sectionFontSize': 30, 'leftPadding': 200, 'numberSectionStyles':3, 'displayMode': 'compact'}}}%%
 gantt
     dateFormat  YYYY-MM-DD
-    axisFormat  
+    axisFormat
     tickInterval 1day
     section New Model
     Unprocessed :crit, n1, after n2, 4d
@@ -73,7 +73,7 @@ Once you have run this enough times that the data is up-to-date, which you can i
 %%{init: { 'gantt': {'barHeight': 100, 'fontSize': 30, 'sectionFontSize': 30, 'leftPadding': 200, 'numberSectionStyles':3, 'displayMode': 'compact'}}}%%
 gantt
     dateFormat  YYYY-MM-DD
-    axisFormat  
+    axisFormat
     tickInterval 1day
     section New Model
     Processed (in staging) :active, n2, 2020-01-01, 5d

@@ -23,6 +23,8 @@ In version 6.0.0, some of the config fields are renamed or moved to a different 
 
 * In enrich-kafka, `blobStorage.azureStorage.accounts` section is moved to the `blobClients.accounts`.
 
+* In enrich-kafka, we are now using [static membership](https://cwiki.apache.org/confluence/display/KAFKA/KIP-345%3A+Introduce+static+membership+protocol+to+reduce+consumer+rebalances) for the consumer, to reduce rebalancing in case of pod restart or crash. The default value for `group.instance.id` is set to the host name.
+
 ### Feature Deprecations
 
 * Output `pii` stream is removed as in our experience it is not used. There will no longer be an option to write `pii_transformation` events to an extra output stream.

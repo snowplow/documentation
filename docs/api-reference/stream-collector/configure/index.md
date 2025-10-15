@@ -266,7 +266,7 @@ Note: If you don't have a verified certificate, you need to disable SSL verifica
 
 On AWS, the lack of auto-scaling in Kinesis results in throttled streams in case of traffic spikes and the collector starts accumulating events to retry them later. If accumulation continues long enough, the collector will run out of memory. To prevent the possibility of a broken collector, we decided to make it possible to configure an SQS buffer which can provide additional assurance during extreme traffic spikes.
 
-SQS is used to queue any message that the collector failed to send to Kinesis. The [Snowbridge application](/docs/destinations/forwarding-events/snowbridge/index.md) can then read the messages from SQS and write them to Kinesis once Kinesis is ready. In the event of any AWS API glitches, there is a retry mechanism which retries sending to the SQS queue 10 times.
+SQS is used to queue any message that the collector failed to send to Kinesis. The [Snowbridge application](/docs/api-reference/snowbridge/index.md) can then read the messages from SQS and write them to Kinesis once Kinesis is ready. In the event of any AWS API glitches, there is a retry mechanism which retries sending to the SQS queue 10 times.
 
 The keys set up for the Kinesis stream are stored as SQS message attributes in order to preserve the information.
 

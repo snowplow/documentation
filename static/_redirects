@@ -388,6 +388,10 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 
 /docs/resources/recipes-tutorials/* /tutorials 301
 
+# Event Forwarding restructure
+/docs/destinations/forwarding-events/native-integrations /docs/destinations/forwarding-events/integrations 301
+/docs/destinations/forwarding-events/snowbridge/* /docs/api-reference/snowbridge/:splat 301
+
 # Removing deprecated webhooks
 /docs/sources/webhooks/callrail/* /docs/sources/webhooks/:splat 301
 /docs/sources/webhooks/hubspot/* /docs/sources/webhooks/:splat 301
@@ -400,6 +404,8 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/sources/webhooks/unbounce/* /docs/sources/webhooks/:splat 301
 /docs/sources/webhooks/urban-airship-connect/* /docs/sources/webhooks/:splat 301
 /docs/sources/webhooks/vero/* /docs/sources/webhooks/:splat 301
+
+/docs/api-reference/elasticsearch/* /docs/api-reference/loaders-storage-targets/elasticsearch/:splat 301
 
 # Removing loading-process in favor of individual loader reference pages
 /docs/destinations/warehouses-lakes/loading-process/* /docs/destinations/warehouses-lakes/ 301

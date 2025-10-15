@@ -89,7 +89,7 @@ This table summarizes the options for different types of processing:
 
 ### Stream source
 
-When Signals is deployed in your BDP pipeline, the event stream is read by the streaming engine. All tracked events are inspected. If you've configured Signals to calculate an attribute from a certain type of event, when that event type is received, the engine will compute the attribute data and forward it to the Profiles Store, in real time. If that event type isn't registered as containing attribute data, nothing happens.
+When Signals is deployed in your pipeline, the event stream is read by the streaming engine. All tracked events are inspected.
 
 Real-time stream flow:
 1. Behavioral data event is received by [Collector](/docs/pipeline/collector/index.md)
@@ -109,11 +109,12 @@ Snowplow atomic events table. Signals then syncs them to the Profiles Store peri
 
 Batch flow:
 1. Behavioral data events arrive in the warehouse
-2. Events are modeled into tables
-3. Signals compares timestamps to check for new rows in connected tables
-4. Are there any new rows?
+2. Signals compares timestamps to check for new rows in the atomic events table
+3. Are there any new rows?
    * No: nothing happens
-   * Yes: Signals syncs them to the Profiles Store
+   * Yes: processing continues
+4. Signals runs dbt models to update the attribute tables
+5. Updated tables are synced to the Profiles Store
 
 ### External batch source
 
@@ -142,11 +143,11 @@ In practise, this rule could work like this:
 2. The application tracks the user behavior and sends events
 3. Signals evaluates the events and updates attribute values
 4. Signals checks whether the new attribute values meet any intervention conditions
-5. The attribute `product_view_count_last_10_min` has just been updated to `5`, so the intervention is triggered
+5. The attribute `product_view_count_last_10_min` has just been updated to `5`, matching the intervention's trigger criteria
 6. The application receives the subscribed intervention payload
 7. The application sends a personalized offer to the user
 
-Interventions are usually relevant only within a certain moment.
+Interventions are usually relevant only within a certain moment. Therefore, an intervention is sent only the first time the criteria are met.
 
 Standard rule-based interventions can have multiple conditions, or trigger criteria, based on the values of different attributes.
 
@@ -166,7 +167,7 @@ Interventions can have multiple attribute keys. By default, the intervention wil
 
 Custom targeting can be useful when you have broad criteria but want a more narrow target. For example, if your criteria use a broad attribute like `page_id`, you might not want to send the intervention to everyone on that page. If you're also checking user-specific criteria, target `domain_userid` to reach only the specific user who meets all conditions.
 
-Another use for custom targeting is when you want to target an attribute key that's available in the triggering event, but isn't part of your intervention logic. For example, to send an intervention to a `domain_userid` when they do a certain number of things in a single `pageview_id`. You might want to target the user so that the intervention is received even if they've gone onto a new page by the time the triggering event is processed, or if the application is not subscribed to the `pageview_id`.
+Another use for custom targeting is when you want to target an attribute key that's available in the triggering event, but isn't part of your intervention logic. For example, to send an intervention to a `domain_userid` when they do a certain number of things in a single `pageview_id`. By targeting the user rather than the page, you can ensure that the intervention is received even if they've gone onto a new page by the time the triggering event is processed, or if the application is not subscribed to the `pageview_id`.
 
 ### Subscribing
 
@@ -249,7 +250,7 @@ Use cases for direct interventions include:
 
 Direct interventions use the [Signals API](/docs/signals/connection/index.md#signals-api) `api/v1/registry/interventions` endpoints under the hood. These endpoints check that the submitted bearer token in the API call is valid and authorized.
 
-Conversely, subscription to automated rule-based interventions uses the `api/v1/interventions` endpoint. This endpoint is public: it doesn't perform authentication or authorization, just sanity checks for the requested attribute keys.
+Conversely, subscription to automated rule-based interventions uses the `api/v1/interventions` endpoint. This endpoint is public: it doesn't perform authentication or authorization, just checks for the requested attribute keys.
 
 :::
 

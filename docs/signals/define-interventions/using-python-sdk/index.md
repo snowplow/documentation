@@ -8,6 +8,7 @@ description: "Use the Snowplow Signals Python SDK to programmatically define int
 To use the [Signals Python SDK](https://pypi.org/project/snowplow-signals/) to define interventions, start by [connecting to Signals](/docs/signals/connection/index.md) to create a `Signals` object. You'll need this connection to publish interventions.
 
 There are two ways to define an intervention using the SDK or [Signals API](/docs/signals/connection/index.md#signals-api):
+
 * Rule-based interventions (default)
 * Direct interventions
 
@@ -121,6 +122,7 @@ from snowplow_signals import (
     RuleIntervention,
     InterventionCriterion,
     InterventionCriteriaAll,
+    LinkAttributeKey,
 )
 
 cart_abandonment = RuleIntervention(
@@ -139,7 +141,9 @@ cart_abandonment = RuleIntervention(
             value=15
         ),
     ]),
-    target_attribute_keys=["domain_userid"]  # Target individual users
+    target_attribute_keys=[
+        LinkAttributeKey(name="domain_userid")
+    ]  # Target individual users
 )
 
 sp_signals.publish([cart_abandonment])

@@ -1054,6 +1054,10 @@ from elements with a subsequent element that has a top margin. */
   margin-top: 0rem;
 }
 
+.theme-doc-markdown div > video {
+  margin: 0; /* Video inside React Player div */
+}
+
 /* Images are wrapped within paragraphs, so the default paragraph
 margins already apply. We don't need even more margin on top of that.*/
 img {

@@ -151,12 +151,12 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
       <div className="bg-indigo-950 text-white rounded-lg p-6 mb-4 leading-tight">
       <div className="flex flex-wrap gap-1 mb-4">
           {meta?.label && (
-            <div className="bg-purple-200 text-purple-800 px-2 py-1 rounded-lg text-xs  font-normal">
+            <div className="bg-purple-200 text-purple-800 px-2 py-1 rounded-lg text-[.675rem] font-normal">
               {meta.label}
             </div>
           )}
           {meta?.useCases && meta.useCases.map((useCase: string, index: number) => (
-            <div key={index} className="bg-purple-200 text-purple-800 px-1 py-1 rounded-lg text-xs font-normal">
+            <div key={index} className="bg-purple-200 text-purple-800 px-2 py-1 rounded-lg text-[.675rem] font-normal">
               {useCase}
             </div>
           ))}

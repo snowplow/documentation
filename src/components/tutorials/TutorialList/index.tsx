@@ -1,27 +1,10 @@
-import React, { FC } from 'react'
-
-import Link from '@docusaurus/Link'
+import React, { FC, useState, useEffect } from 'react'
 import Head from '@docusaurus/Head'
-
-import {
-  Box,
-  Grid,
-  InputAdornment,
-  useMediaQuery,
-  useTheme,
-} from '@mui/material'
-
-import { getSteps } from '../utils'
-import {
-  SearchBarFormControl,
-  SearchBarInput,
-  SnowplowPurpleSearchIcon,
-  TutorialCardTitle,
-  Grid as TutorialGrid,
-  TopicFilterSidebar,
-} from './styledComponents'
 import { Meta, Tutorial } from '../models'
-import { Card, Description, Topic } from './styledComponents'
+import { getSteps } from '../utils'
+import TutorialGrid from '../TutorialGrid'
+import TutorialSearch from '../TutorialSearch'
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@site/src/components/ui/accordion'
 import {
   useTutorialFilters,
   UseCaseFilter,
@@ -56,76 +39,22 @@ function getParsedTutorials(tutorials: Meta[]): Tutorial[] {
   })
 }
 
-const SearchBar: FC<{
-  setSearch: React.Dispatch<React.SetStateAction<string>>
-}> = ({ setSearch }) => {
-  return (
-    <Grid item>
-      <SearchBarFormControl variant="outlined">
-        <SearchBarInput
-          startAdornment={
-            <InputAdornment position="start">
-              <SnowplowPurpleSearchIcon />
-            </InputAdornment>
-          }
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search by tutorial name"
-        />
-      </SearchBarFormControl>
-    </Grid>
-  )
-}
 
-function getFirstStepPath(meta: Meta): string | null {
-  const steps = getSteps(meta.id)
-  if (steps.length === 0) {
-    return null
-  }
-  return steps[0].path
-}
-
-const TutorialCard: FC<{ tutorial: Tutorial }> = ({ tutorial }) => {
-  const firstStep = getFirstStepPath(tutorial.meta)
-
-  const cardContent = (
-    <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
-      <TutorialCardTitle>
-        {firstStep
-          ? tutorial.meta.title
-          : `${tutorial.meta.title} (No steps found)`}
-      </TutorialCardTitle>
-      <Box sx={{ display: 'flex', gap: 1, mb: 2 }}>
-        {tutorial.meta.useCases.length > 0 && (
-          <Topic label={tutorial.meta.useCases[0]}></Topic>
-        )}
-        <Topic label={tutorial.meta.label}></Topic>
-      </Box>
-      <Box sx={{ flexGrow: 1 }}>
-        <Description>{tutorial.meta.description}</Description>
-      </Box>
-    </Card>
-  )
-
-  return firstStep ? (
-    <Link
-      style={{
-        color: 'inherit',
-        cursor: 'pointer',
-        textDecoration: 'none',
-        display: 'block',
-        height: '100%',
-      }}
-      to={firstStep}
-    >
-      {cardContent}
-    </Link>
-  ) : (
-    <Box sx={{ opacity: 0.6, height: '100%' }}>{cardContent}</Box>
-  )
-}
 
 // Shared filter and tutorial content hook
 const useTutorialContent = () => {
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024)
+    }
+
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
+
   const {
     setSearch,
     selectedTopics,
@@ -143,46 +72,76 @@ const useTutorialContent = () => {
     filteredTutorials,
   } = useTutorialFilters(getParsedTutorials)
 
+  const defaultAccordionValue = isMobile ? [] : ["use-cases", "topics", "technology"]
+
   return {
     filters: (
-      <>
-        <SearchBar setSearch={setSearch} />
-        <UseCaseFilter
-          selectedUseCases={selectedUseCases}
-          setSelectedUseCases={setSelectedUseCases}
-          allAvailableUseCases={allAvailableUseCases}
-          availableUseCases={filteredAvailableOptions.availableUseCases}
-        />
-        <TopicFilter
-          selectedTopics={selectedTopics}
-          setSelectedTopics={setSelectedTopics}
-          availableTopics={filteredAvailableOptions.availableTopics}
-        />
-        <TechnologyFilter
-          selectedTechnologies={selectedTechnologies}
-          setSelectedTechnologies={setSelectedTechnologies}
-          allAvailableTechnologies={allAvailableTechnologies}
-          availableTechnologies={filteredAvailableOptions.availableTechnologies}
-        />
-        <SnowplowTechFilter
-          selectedSnowplowTech={selectedSnowplowTech}
-          setSelectedSnowplowTech={setSelectedSnowplowTech}
-          allAvailableSnowplowTech={allAvailableSnowplowTech}
-          availableSnowplowTech={filteredAvailableOptions.availableSnowplowTech}
-        />
-      </>
+      <div className="space-y-4">
+        <TutorialSearch onSearch={setSearch} />
+
+        <Accordion type="multiple" variant="outline" className="w-full" defaultValue={defaultAccordionValue}>
+          <AccordionItem value="use-cases">
+            <AccordionTrigger>
+              Filter by use case
+            </AccordionTrigger>
+            <AccordionContent>
+              <UseCaseFilter
+                selectedUseCases={selectedUseCases}
+                setSelectedUseCases={setSelectedUseCases}
+                allAvailableUseCases={allAvailableUseCases}
+                availableUseCases={filteredAvailableOptions.availableUseCases}
+              />
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="topics">
+            <AccordionTrigger>
+              Filter by topic
+            </AccordionTrigger>
+            <AccordionContent>
+              <TopicFilter
+                selectedTopics={selectedTopics}
+                setSelectedTopics={setSelectedTopics}
+                availableTopics={filteredAvailableOptions.availableTopics}
+              />
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="technology">
+            <AccordionTrigger>
+              Filter by technology
+            </AccordionTrigger>
+            <AccordionContent>
+              <TechnologyFilter
+                selectedTechnologies={selectedTechnologies}
+                setSelectedTechnologies={setSelectedTechnologies}
+                allAvailableTechnologies={allAvailableTechnologies}
+                availableTechnologies={filteredAvailableOptions.availableTechnologies}
+              />
+            </AccordionContent>
+          </AccordionItem>
+
+          <AccordionItem value="snowplow-tech">
+            <AccordionTrigger>
+              Filter by Snowplow technology
+            </AccordionTrigger>
+            <AccordionContent>
+              <SnowplowTechFilter
+                selectedSnowplowTech={selectedSnowplowTech}
+                setSelectedSnowplowTech={setSelectedSnowplowTech}
+                allAvailableSnowplowTech={allAvailableSnowplowTech}
+                availableSnowplowTech={filteredAvailableOptions.availableSnowplowTech}
+              />
+            </AccordionContent>
+          </AccordionItem>
+        </Accordion>
+      </div>
     ),
-    tutorials: filteredTutorials.map((tutorial: Tutorial) => (
-      <Grid item key={tutorial.meta.id}>
-        <TutorialCard tutorial={tutorial} />
-      </Grid>
-    )),
+    tutorials: filteredTutorials,
   }
 }
 
 const TutorialList: FC = () => {
-  const theme = useTheme()
-  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
   const content = useTutorialContent()
 
   return (
@@ -190,53 +149,33 @@ const TutorialList: FC = () => {
       <Head>
         <title>Tutorials | Snowplow Documentation</title>
       </Head>
-      {isMobile ? (
-        <MobileTutorialLayout
-          filters={content.filters}
-          tutorials={content.tutorials}
-        />
-      ) : (
-        <DesktopTutorialLayout
-          filters={content.filters}
-          tutorials={content.tutorials}
-        />
-      )}
+
+      <div className="w-full">
+        {/* Mobile filters - Only shown on mobile */}
+        <div className="block lg:hidden max-w-7xl mx-auto px-6 pt-6">
+          <div className="p-4 mb-6">
+            {content.filters}
+          </div>
+        </div>
+
+        <div className="flex">
+          {/* Sidebar - Hidden on mobile, shown on desktop - Sticks to left edge */}
+          <div className="hidden lg:block w-[320px] flex-shrink-0">
+            <div className="p-6 sticky top-12">
+              {content.filters}
+            </div>
+          </div>
+
+          {/* Main content - Center aligned with page */}
+          <div className="flex-1 flex justify-center px-6 pb-6">
+            <div className="w-full max-w-6xl">
+              {/* Tutorial Grid */}
+              <TutorialGrid tutorials={content.tutorials} />
+            </div>
+          </div>
+        </div>
+      </div>
     </>
-  )
-}
-
-const MobileTutorialLayout: FC<{
-  filters: React.ReactNode
-  tutorials: React.ReactNode[]
-}> = ({ filters, tutorials }) => {
-  return (
-    <Box sx={{ mt: 1 }}>
-      <Grid container direction="column" rowSpacing={2}>
-        {filters}
-        {tutorials}
-      </Grid>
-    </Box>
-  )
-}
-
-const DesktopTutorialLayout: FC<{
-  filters: React.ReactNode
-  tutorials: React.ReactNode[]
-}> = ({ filters, tutorials }) => {
-  return (
-    <Box marginX={8} marginY={3} sx={{ minWidth: '90vw', mr: 0 }}>
-      <Grid container columnSpacing={4}>
-        {/* Left sidebar with filters */}
-        <Grid item xs={3}>
-          <TopicFilterSidebar>{filters}</TopicFilterSidebar>
-        </Grid>
-
-        {/* Main content area */}
-        <Grid item xs={9}>
-          <TutorialGrid mb={2}>{tutorials}</TutorialGrid>
-        </Grid>
-      </Grid>
-    </Box>
   )
 }
 

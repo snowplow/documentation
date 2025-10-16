@@ -12,6 +12,7 @@ import {
   TechnologyFilter,
   SnowplowTechFilter,
 } from './filters'
+import '../tutorials-page.css'
 
 function getParsedTutorials(tutorials: Meta[]): Tutorial[] {
   return Object.values(tutorials).map((metaJson) => {

@@ -153,7 +153,7 @@ const TutorialList: FC = () => {
 
       <div className="w-full">
         {/* Mobile filters - Only shown on mobile */}
-        <div className="block lg:hidden max-w-7xl mx-auto px-6 pt-6">
+        <div className="hidden lg:block max-w-7xl mx-auto px-6 pt-6">
           <div className="p-4 mb-6">
             {content.filters}
           </div>
@@ -161,7 +161,7 @@ const TutorialList: FC = () => {
 
         <div className="flex">
           {/* Sidebar - Hidden on mobile, shown on desktop - Sticks to left edge */}
-          <div className="hidden lg:block w-[320px] flex-shrink-0">
+          <div className="block lg:hidden  w-[320px] flex-shrink-0">
             <div className="p-6 sticky top-12">
               {content.filters}
             </div>

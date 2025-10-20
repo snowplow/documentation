@@ -138,7 +138,7 @@ They can be thought of as "if-then" rules that run in real time. For example:
 * `If` a user has viewed five products in the last ten minutes
 * `Then` automatically send that user a personalized offer
 
-In practise, this rule could work like this:
+In practice, this rule could work like this:
 1. User views product pages
 2. The application tracks the user behavior and sends events
 3. Signals evaluates the events and updates attribute values

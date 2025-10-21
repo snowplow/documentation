@@ -26,3 +26,7 @@ import Link from '@docusaurus/Link';
     <td><code>output.bad.producerConf.*</code></td>
     <td>Optional. A map of key/value pairs for <Link to="https://docs.confluent.io/platform/current/installation/configuration/producer-configs.html">any standard Kafka producer configuration option</Link>.</td>
 </tr>
+<tr>
+    <td><code>output.bad.maxRecordSize</code></td>
+    <td>Optional.  Default value 1000000.  Any single failed event sent to Kafka should not exceed this size in bytes</td>
+</tr>

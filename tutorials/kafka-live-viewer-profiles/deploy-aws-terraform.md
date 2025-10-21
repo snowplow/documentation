@@ -3,9 +3,7 @@ position: 3
 title: Deploy on AWS with Terraform
 ---
 
-# Deploy on AWS with Terraform
 
-## Introduction
 
 The following [Steps](#steps) will deploy the solution accelerator to AWS using Terraform. There is no need to manually install [Terraform](https://www.terraform.io/). It is executed via [Docker](https://www.docker.com/) using the `terraform.sh` script.
 

@@ -109,3 +109,9 @@ Next, you will need to place the schemas in `/config/iglu-client-embedded/` insi
 You can read more about bind mounts in the [Docker documentation](https://docs.docker.com/storage/bind-mounts/).
 
 :::
+
+Alternatively, if you are running Micro as a Java application, place your schemas — using the same structure as above — in `some-directory/iglu-client-embedded` on your machine (`iglu-client-embedded` must be called exactly that) and use the following command:
+
+<CodeBlock language="bash">{
+`java -cp micro-${versions.snowplowMicro}.jar:some-directory com.snowplowanalytics.snowplow.micro.Main`
+}</CodeBlock>

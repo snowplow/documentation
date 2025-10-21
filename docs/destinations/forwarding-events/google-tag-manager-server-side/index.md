@@ -1,7 +1,6 @@
 ---
 title: "Google Tag Manager Server Side"
-date: "2021-11-24"
-sidebar_position: 10
+sidebar_position: 40
 ---
 
 To support sending events to adjacent destinations, Snowplow works with Google Tag Manager Server Side. There are both Snowplow Authored and Vendor/Community authored Tags which will allow event data to be forwarded to different destinations.
@@ -25,7 +24,7 @@ GTM SS with Snowplow can be setup in two different configurations.
 
 Use GTM SS to relay enriched events to destinations. Events are sent to GTM SS via Snowbridge after being processed by your Snowplow Pipeline.
 
-* For Community Edition, see [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md).
+* For Community Edition, see [Snowbridge](/docs/api-reference/snowbridge/index.md).
 * For Snowplow BDP, you can [request setup](https://console.snowplowanalytics.com/destinations/catalog) through the Console.
 
 :::note

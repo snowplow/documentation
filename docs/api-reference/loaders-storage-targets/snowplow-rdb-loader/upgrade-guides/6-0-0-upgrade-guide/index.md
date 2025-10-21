@@ -144,7 +144,7 @@ In order to solve this problem, we should patch `1-0-0` with `{ "type": "integer
 
 After identifying all the offending schemas, you should patch them to reflect the changes in the warehouse.
 
-Schema casting rules could be found [here](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md?warehouse=redshift#types).
+Schema casting rules could be found [here](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md?warehouse=redshift#types).
 
 #### `$.featureFlags.disableRecovery` configuration
 

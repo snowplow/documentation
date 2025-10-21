@@ -13,7 +13,7 @@ import {
   XCircle,
   Info
 } from 'lucide-react';
-import { Button } from '../components/ui/button.jsx';
+import { Button } from '../components/ui/button';
 import Navigation from '../components/ui/navigation.jsx';
 
 export default function TailwindTest() {

@@ -56,7 +56,7 @@ To host schemas for your [custom self-described events](/docs/fundamentals/event
 BDP customers can create custom schemas using the [Data Structures Builder](/docs/data-product-studio/data-structures/manage/builder/index.md) without worrying about how it works under the hood.
 :::
 
-Snowplow schemas are based on the [JSON Schema](https://json-schema.org/) standard ([draft 4](https://datatracker.ietf.org/doc/html/draft-fge-json-schema-validation-00)). Let’s take a look at an example schema to talk about its constituent parts:
+Snowplow schemas are based on the [JSON Schema](https://json-schema.org/) standard ([draft 4](https://datatracker.ietf.org/doc/html/draft-fge-json-schema-validation-00)). For a comprehensive guide to all Snowplow supported validation options, see the [Snowplow JSON Schema reference](/docs/fundamentals/schemas/json-schema-reference/index.md). Let’s take a look at an example schema to talk about its constituent parts:
 
 ```json
 {
@@ -118,6 +118,6 @@ After the self section, the remainder of the schema is where you will begin desc
 
 - **“description”** - Similar to the description field for the schema, this argument is where you should put detailed information on what this field represents to avoid any misunderstanding or misinterpretation during analysis.
 - **"type"** - This denotes the type of data that is collected through this field. The most common types of data collected are `string`, `number`, `integer`, `object`, `array`, `boolean` and `null`. A single field can allow multiple types as shown in the field `job role` in the example schema which allows both `string` and `null`
-- Validation arguments can then be passed into the field such as `minLength`, `maxLength` and `enum` for strings and `minimum` and `maximum` for integers. A full set of valid arguments can be found on the [JSON schema specification](https://datatracker.ietf.org/doc/html/draft-fge-json-schema-validation-00#section-5).
+- Validation arguments can then be passed into the field such as `minLength`, `maxLength` and `enum` for strings and `minimum` and `maximum` for integers.
 
 **“$supersedes”** / **“$supersededBy”** - _Optional, not shown_. See [marking schemas as superseded](/docs/data-product-studio/data-structures/version-amend/amending/index.md#marking-the-schema-as-superseded).

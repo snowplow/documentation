@@ -59,7 +59,7 @@ This command will find all files under `./folder-name` (if omitted then `./data-
 
 1. Is each file a valid format (yaml/json) with expected fields
 2. Does the schema in the file conform to [snowplow expectations](/docs/fundamentals/schemas/index.md#the-anatomy-of-a-schema)
-3. Given the organization's [loading configuration](/docs/destinations/warehouses-lakes/loading-process/index.md) will any schema version number choices have a potentially negative effect on data loading
+3. Given the organization's [loading configuration](/docs/destinations/warehouses-lakes/index.md) will any schema version number choices have a potentially negative effect on data loading
 
 If any validations fail the command will report the problems to stdout and exit with status code 1.
 

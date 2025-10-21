@@ -24,7 +24,7 @@ The Streaming Loader is fully compatible with the table created and managed by t
 
 :::tip
 
-[This page](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md) explains how Snowplow data maps to the warehouse in more detail.
+[This page](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md) explains how Snowplow data maps to the warehouse in more detail.
 
 :::
 

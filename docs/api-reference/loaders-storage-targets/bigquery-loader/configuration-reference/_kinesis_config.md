@@ -7,7 +7,7 @@
     <td>Optional, default <code>snowplow-bigquery-loader</code>. Name to use for the dynamodb table, used by the underlying Kinesis Consumer Library for managing leases.</td>
 </tr>
 <tr>
-    <td><code>input.initialPosition</code></td>
+    <td><code>input.initialPosition.type</code></td>
     <td>Optional, default <code>LATEST</code>. Allowed values are <code>LATEST</code>, <code>TRIM_HORIZON</code>, <code>AT_TIMESTAMP</code>. When the loader is deployed for the first time, this controls from where in the kinesis stream it should start consuming events.  On all subsequent deployments of the loader, the loader will resume from the offsets stored in the DynamoDB table.</td>
 </tr>
 <tr>
@@ -63,6 +63,6 @@
     <td>Optional.  Default value 5242880.  The maximum number of bytes we are allowed to send to Kinesis in 1 PutRecords request.</td>
 </tr>
 <tr>
-    <td><code>output.bad.maxRecordSize.*</code></td>
+    <td><code>output.bad.maxRecordSize</code></td>
     <td>Optional.  Default value 1000000.  Any single event failed event sent to Kinesis should not exceed this size in bytes</td>
 </tr>

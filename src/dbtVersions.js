@@ -474,6 +474,13 @@ export const dbtVersions = {
                 "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
                 "snowplow/snowplow_utils": ">=0.17.3 <0.18.0"
             }
+        },
+        "0.9.4": {
+            "dbtversion": ">=1.4.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
+                "snowplow/snowplow_utils": ">=0.17.3 <0.18.0"
+            }
         }
     },
     "snowplow/snowplow_mobile": {
@@ -873,66 +880,6 @@ export const dbtVersions = {
                 "fishtown-analytics/dbt_utils": ">=0.6.0 <0.7.0"
             }
         },
-        "0.2.0": {
-            "dbtversion": ">=0.18.0 <0.20.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=0.6.0 <0.7.0"
-            }
-        },
-        "0.3.0": {
-            "dbtversion": ">=0.18.0 <0.20.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=0.6.0 <0.7.0"
-            }
-        },
-        "0.3.1": {
-            "dbtversion": ">=0.18.0 <0.20.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=0.6.0 <0.7.0"
-            }
-        },
-        "0.4.0": {
-            "dbtversion": ">=0.18.0 <0.20.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=0.6.0 <0.7.0"
-            }
-        },
-        "0.4.1": {
-            "dbtversion": ">=0.18.0 <0.20.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=0.6.0 <0.7.0"
-            }
-        },
-        "0.5.0": {
-            "dbtversion": ">=0.20.0 <1.1.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=0.7.0 <0.8.0"
-            }
-        },
-        "0.6.0": {
-            "dbtversion": ">=0.20.0 <1.1.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=0.7.0 <0.8.0"
-            }
-        },
-        "0.7.0": {
-            "dbtversion": ">=1.0.0 <2.0.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=0.8.0 <0.9.0"
-            }
-        },
-        "0.8.0": {
-            "dbtversion": ">=1.0.0 <2.0.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=0.8.0 <0.9.0"
-            }
-        },
-        "0.9.0": {
-            "dbtversion": ">=1.0.0 <2.0.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=0.8.0 <0.9.0"
-            }
-        },
         "0.10.0": {
             "dbtversion": ">=1.0.0 <2.0.0",
             "packages": {
@@ -987,6 +934,12 @@ export const dbtVersions = {
                 "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0"
             }
         },
+        "0.14.0": {
+            "dbtversion": ">=1.4.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0"
+            }
+        },
         "0.14.0-rc1": {
             "dbtversion": ">=1.4.0 <2.0.0",
             "packages": {
@@ -994,12 +947,6 @@ export const dbtVersions = {
             }
         },
         "0.14.0-rc2": {
-            "dbtversion": ">=1.4.0 <2.0.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0"
-            }
-        },
-        "0.14.0": {
             "dbtversion": ">=1.4.0 <2.0.0",
             "packages": {
                 "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0"
@@ -1023,13 +970,13 @@ export const dbtVersions = {
                 "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0"
             }
         },
-        "0.15.0-rc1": {
+        "0.15.0": {
             "dbtversion": ">=1.4.0 <2.0.0",
             "packages": {
                 "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0"
             }
         },
-        "0.15.0": {
+        "0.15.0-rc1": {
             "dbtversion": ">=1.4.0 <2.0.0",
             "packages": {
                 "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0"
@@ -1124,6 +1071,72 @@ export const dbtVersions = {
             "packages": {
                 "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0"
             }
+        },
+        "0.17.4": {
+            "dbtversion": ">=1.4.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0"
+            }
+        },
+        "0.2.0": {
+            "dbtversion": ">=0.18.0 <0.20.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=0.6.0 <0.7.0"
+            }
+        },
+        "0.3.0": {
+            "dbtversion": ">=0.18.0 <0.20.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=0.6.0 <0.7.0"
+            }
+        },
+        "0.3.1": {
+            "dbtversion": ">=0.18.0 <0.20.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=0.6.0 <0.7.0"
+            }
+        },
+        "0.4.0": {
+            "dbtversion": ">=0.18.0 <0.20.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=0.6.0 <0.7.0"
+            }
+        },
+        "0.4.1": {
+            "dbtversion": ">=0.18.0 <0.20.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=0.6.0 <0.7.0"
+            }
+        },
+        "0.5.0": {
+            "dbtversion": ">=0.20.0 <1.1.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=0.7.0 <0.8.0"
+            }
+        },
+        "0.6.0": {
+            "dbtversion": ">=0.20.0 <1.1.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=0.7.0 <0.8.0"
+            }
+        },
+        "0.7.0": {
+            "dbtversion": ">=1.0.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=0.8.0 <0.9.0"
+            }
+        },
+        "0.8.0": {
+            "dbtversion": ">=1.0.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=0.8.0 <0.9.0"
+            }
+        },
+        "0.9.0": {
+            "dbtversion": ">=1.0.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=0.8.0 <0.9.0"
+            }
         }
     },
     "snowplow/snowplow_web": {
@@ -1133,6 +1146,160 @@ export const dbtVersions = {
                 "fishtown-analytics/dbt_utils": ">=0.6.0 <0.7.0",
                 "snowplow/snowplow_utils": ">=0.1.1 <0.2.0",
                 "calogica/dbt_date": ">=0.3.0 <0.4.0"
+            }
+        },
+        "0.10.0": {
+            "dbtversion": ">=1.0.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=0.8.0 <0.10.0",
+                "snowplow/snowplow_utils": ">=0.12.3 <0.13.0"
+            }
+        },
+        "0.11.0": {
+            "dbtversion": ">=1.0.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=0.8.0 <0.10.0",
+                "snowplow/snowplow_utils": ">=0.12.3 <0.13.0"
+            }
+        },
+        "0.12.0": {
+            "dbtversion": ">=1.3.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
+                "snowplow/snowplow_utils": ">=0.13.0 <0.14.0"
+            }
+        },
+        "0.12.1": {
+            "dbtversion": ">=1.3.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
+                "snowplow/snowplow_utils": ">=0.13.0 <0.14.0"
+            }
+        },
+        "0.12.2": {
+            "dbtversion": ">=1.3.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
+                "snowplow/snowplow_utils": ">=0.13.0 <0.14.0"
+            }
+        },
+        "0.12.3": {
+            "dbtversion": ">=1.3.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
+                "snowplow/snowplow_utils": ">=0.13.0 <0.14.0"
+            }
+        },
+        "0.12.4": {
+            "dbtversion": ">=1.3.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
+                "snowplow/snowplow_utils": ">=0.13.0 <0.14.0"
+            }
+        },
+        "0.13.0": {
+            "dbtversion": ">=1.3.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
+                "snowplow/snowplow_utils": ">=0.13.1 <0.14.0"
+            }
+        },
+        "0.13.1": {
+            "dbtversion": ">=1.3.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
+                "snowplow/snowplow_utils": ">=0.13.1 <0.14.0"
+            }
+        },
+        "0.13.2": {
+            "dbtversion": ">=1.3.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
+                "snowplow/snowplow_utils": ">=0.13.1 <0.14.0"
+            }
+        },
+        "0.13.3": {
+            "dbtversion": ">=1.3.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
+                "snowplow/snowplow_utils": ">=0.13.1 <0.14.0"
+            }
+        },
+        "0.14.0": {
+            "dbtversion": ">=1.4.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
+                "snowplow/snowplow_utils": ">=0.14.0 <0.15.0"
+            }
+        },
+        "0.14.0-rc1": {
+            "dbtversion": ">=1.4.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
+                "snowplow/snowplow_utils": "0.14.0-rc1"
+            }
+        },
+        "0.14.0-rc2": {
+            "dbtversion": ">=1.4.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
+                "snowplow/snowplow_utils": "0.14.0-rc2"
+            }
+        },
+        "0.14.1": {
+            "dbtversion": ">=1.4.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
+                "snowplow/snowplow_utils": ">=0.14.0 <0.15.0"
+            }
+        },
+        "0.15.0": {
+            "dbtversion": ">=1.4.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
+                "snowplow/snowplow_utils": ">=0.14.2 <0.15.0"
+            }
+        },
+        "0.15.1": {
+            "dbtversion": ">=1.4.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
+                "snowplow/snowplow_utils": ">=0.14.3 <0.15.0"
+            }
+        },
+        "0.15.2": {
+            "dbtversion": ">=1.4.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
+                "snowplow/snowplow_utils": ">=0.14.3 <0.15.0"
+            }
+        },
+        "0.16.0": {
+            "dbtversion": ">=1.5.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
+                "snowplow/snowplow_utils": ">=0.15.0 <0.16.0"
+            }
+        },
+        "0.16.0-rc1": {
+            "dbtversion": ">=1.5.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
+                "snowplow/snowplow_utils": "0.15.0-rc1"
+            }
+        },
+        "0.16.1": {
+            "dbtversion": ">=1.5.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
+                "snowplow/snowplow_utils": ">=0.15.0 <0.16.0"
+            }
+        },
+        "0.16.2": {
+            "dbtversion": ">=1.5.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
+                "snowplow/snowplow_utils": ">=0.15.0 <0.16.0"
             }
         },
         "0.2.0": {
@@ -1238,160 +1405,6 @@ export const dbtVersions = {
             "packages": {
                 "dbt-labs/dbt_utils": ">=0.8.0 <0.9.0",
                 "snowplow/snowplow_utils": ">=0.12.0 <0.13.0"
-            }
-        },
-        "0.10.0": {
-            "dbtversion": ">=1.0.0 <2.0.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=0.8.0 <0.10.0",
-                "snowplow/snowplow_utils": ">=0.12.3 <0.13.0"
-            }
-        },
-        "0.11.0": {
-            "dbtversion": ">=1.0.0 <2.0.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=0.8.0 <0.10.0",
-                "snowplow/snowplow_utils": ">=0.12.3 <0.13.0"
-            }
-        },
-        "0.12.0": {
-            "dbtversion": ">=1.3.0 <2.0.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
-                "snowplow/snowplow_utils": ">=0.13.0 <0.14.0"
-            }
-        },
-        "0.12.1": {
-            "dbtversion": ">=1.3.0 <2.0.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
-                "snowplow/snowplow_utils": ">=0.13.0 <0.14.0"
-            }
-        },
-        "0.12.2": {
-            "dbtversion": ">=1.3.0 <2.0.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
-                "snowplow/snowplow_utils": ">=0.13.0 <0.14.0"
-            }
-        },
-        "0.12.3": {
-            "dbtversion": ">=1.3.0 <2.0.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
-                "snowplow/snowplow_utils": ">=0.13.0 <0.14.0"
-            }
-        },
-        "0.12.4": {
-            "dbtversion": ">=1.3.0 <2.0.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
-                "snowplow/snowplow_utils": ">=0.13.0 <0.14.0"
-            }
-        },
-        "0.13.0": {
-            "dbtversion": ">=1.3.0 <2.0.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
-                "snowplow/snowplow_utils": ">=0.13.1 <0.14.0"
-            }
-        },
-        "0.13.1": {
-            "dbtversion": ">=1.3.0 <2.0.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
-                "snowplow/snowplow_utils": ">=0.13.1 <0.14.0"
-            }
-        },
-        "0.13.2": {
-            "dbtversion": ">=1.3.0 <2.0.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
-                "snowplow/snowplow_utils": ">=0.13.1 <0.14.0"
-            }
-        },
-        "0.13.3": {
-            "dbtversion": ">=1.3.0 <2.0.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
-                "snowplow/snowplow_utils": ">=0.13.1 <0.14.0"
-            }
-        },
-        "0.14.0-rc1": {
-            "dbtversion": ">=1.4.0 <2.0.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
-                "snowplow/snowplow_utils": "0.14.0-rc1"
-            }
-        },
-        "0.14.0-rc2": {
-            "dbtversion": ">=1.4.0 <2.0.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
-                "snowplow/snowplow_utils": "0.14.0-rc2"
-            }
-        },
-        "0.14.0": {
-            "dbtversion": ">=1.4.0 <2.0.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
-                "snowplow/snowplow_utils": ">=0.14.0 <0.15.0"
-            }
-        },
-        "0.14.1": {
-            "dbtversion": ">=1.4.0 <2.0.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
-                "snowplow/snowplow_utils": ">=0.14.0 <0.15.0"
-            }
-        },
-        "0.15.0": {
-            "dbtversion": ">=1.4.0 <2.0.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
-                "snowplow/snowplow_utils": ">=0.14.2 <0.15.0"
-            }
-        },
-        "0.15.1": {
-            "dbtversion": ">=1.4.0 <2.0.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
-                "snowplow/snowplow_utils": ">=0.14.3 <0.15.0"
-            }
-        },
-        "0.15.2": {
-            "dbtversion": ">=1.4.0 <2.0.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
-                "snowplow/snowplow_utils": ">=0.14.3 <0.15.0"
-            }
-        },
-        "0.16.0-rc1": {
-            "dbtversion": ">=1.5.0 <2.0.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
-                "snowplow/snowplow_utils": "0.15.0-rc1"
-            }
-        },
-        "0.16.0": {
-            "dbtversion": ">=1.5.0 <2.0.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
-                "snowplow/snowplow_utils": ">=0.15.0 <0.16.0"
-            }
-        },
-        "0.16.1": {
-            "dbtversion": ">=1.5.0 <2.0.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
-                "snowplow/snowplow_utils": ">=0.15.0 <0.16.0"
-            }
-        },
-        "0.16.2": {
-            "dbtversion": ">=1.5.0 <2.0.0",
-            "packages": {
-                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
-                "snowplow/snowplow_utils": ">=0.15.0 <0.16.0"
             }
         },
         "1.0.0": {

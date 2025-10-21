@@ -7,7 +7,7 @@
     <td>Optional, default <code>snowplow-snowflake-loader</code>. Name to use for the dynamodb table, used by the underlying Kinesis Consumer Library for managing leases.</td>
 </tr>
 <tr>
-    <td><code>input.initialPosition</code></td>
+    <td><code>input.initialPosition.type</code></td>
     <td>Optional, default <code>LATEST</code>. Allowed values are <code>LATEST</code>, <code>TRIM_HORIZON</code>, <code>AT_TIMESTAMP</code>. When the loader is deployed for the first time, this controls from where in the kinesis stream it should start consuming events.  On all subsequent deployments of the loader, the loader will resume from the offsets stored in the DynamoDB table.</td>
 </tr>
 <tr>
@@ -32,7 +32,15 @@
 </tr>
 <tr>
     <td><code>input.maxLeasesToStealAtOneTimeFactor</code></td>
-    <td>Optional. Default value <code>2.0</code>. Controls how to pick the max number of shard-leases to steal at one time. E.g. If there are 4 available processors, and <code>maxLeasesToStealAtOneTimeFactor</code> is 2.0, then allow the KCL to steal up to 8 leases. Allows bigger instances to more quickly acquire the shard-leases they need to combat latency.</td>
+    <td>Optional. Default value <code>2.0</code>. Controls how to pick the max number of shard leases to steal at one time. E.g. If there are 4 available processors, and <code>maxLeasesToStealAtOneTimeFactor = 2.0</code>, then allow the loader to steal up to 8 leases. Allows bigger instances to more quickly acquire the shard-leases they need to combat latency.</td>
+</tr>
+<tr>
+    <td><code>input.checkpointThrottledBackoffPolicy.minBackoff</code></td>
+    <td>Optional.  Default value <code>100 milliseconds</code>.  Initial backoff used to retry checkpointing if we exceed the DynamoDB provisioned write limits.</td>
+</tr>
+<tr>
+    <td><code>input.checkpointThrottledBackoffPolicy.maxBackoff</code></td>
+    <td>Optional.  Default value <code>1 second</code>.  Maximum backoff used to retry checkpointing if we exceed the DynamoDB provisioned write limits.</td>
 </tr>
 <tr>
     <td><code>output.bad.streamName</code></td>

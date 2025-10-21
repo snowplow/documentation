@@ -1,6 +1,6 @@
 ---
 title: Command reference
-date: 2025-08-01
+date: 2025-10-02
 sidebar_position: 1
 ---
 
@@ -476,6 +476,7 @@ snowplow-cli data-structures download {directory ./data-structures} [flags]
 
 ```
   -h, --help                   help for download
+      --include-drafts         Include drafts data structures
       --include-legacy         Include legacy data structures with empty schemaType (will be set to 'entity')
       --match stringArray      Match for specific data structure to download (eg. --match com.example/event_name or --match com.example)
   -f, --output-format string   Format of the files to read/write. json or yaml are supported (default "yaml")

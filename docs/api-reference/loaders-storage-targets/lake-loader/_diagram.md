@@ -2,7 +2,7 @@
 import Mermaid from '@theme/Mermaid';
 ```
 
-<p>The Lake Loader on {props.cloud} is a fully streaming application that continually pulls events from {props.stream} and writes to {props.bucket}.</p>
+<p>On {props.cloud} the Lake Loader continually pulls events from {props.stream} and writes to {props.bucket}.</p>
 
 <Mermaid value={`
 flowchart LR

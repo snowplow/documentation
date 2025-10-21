@@ -19,11 +19,11 @@ Completing the forms for these initial steps should take you around 30 minutes.
 
 ## What will I need
 
-To setup your cloud environment as required you will need
+To set up your cloud environment as required you will need:
 
 - to be able to set up a sub-account and appropriate permissions on AWS
 - to know which AWS region you’d like us to install your Snowplow pipeline into
-- to know whether or not you want VPC peering, and for which /21 or /22 CIDR range (note: [VPC peering and using a custom VPC is an additional bolt-on](https://snowplow.io/snowplow-behavioral-data-platform-product-description/#h-vpc-peering-aws-gcp))
+- to know whether or not you will need to use an existing VPC or require VPC peering (note: VPC peering and using a custom VPC are additional bolt-ons)
 
 We often find our point of contact requires support from their DevOps or Networking colleagues to complete the cloud setup step; in Snowplow BDP Console you can [easily create accounts for colleagues](/docs/account-management/managing-users/index.md) who can complete this step for you.
 
@@ -42,15 +42,13 @@ These instructions are also provided as part of the setup flow in Snowplow BDP C
 
 1. Access the IAM control panel within the sub-account
 2. Go to Access management > Roles and select Create role
-3. Select "Another AWS account"
-    (Account ID: 793733611312 Require MFA: true)
+3. Select "Another AWS account" (Account ID: 793733611312 Require MFA: false). We use Okta to assume roles, which uses delegated MFA and not direct MFA authentication to AWS 
 4. Select the policy you created earlier
 5. Call the role "SnowplowAdmin" (please use this specific name)
 
 You will need to share this role with us as part of filling out the setup form in Snowplow BDP Console.
 
 ### JSON Policy Document
-
 
 ```json
 {
@@ -132,7 +130,7 @@ We also provide a CloudFormation template that will create a role named Snowplow
 
 For complete documentation from Amazon go [here](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html).
 
-### Setup the Snowplow deployment role
+### Set up the Snowplow deployment role
 
 The last step is to set up the Snowplow deployment role. This is a role assumed by the machine user to make changes with Terraform.
 
@@ -140,15 +138,19 @@ The last step is to set up the Snowplow deployment role. This is a role assumed 
 2. Select Create role and for trusted entity type select AWS account.
 - Account ID: 793733611312
 - Do not select Require MFA as Snowplow needs to be able to assume the role via headless jobs
-- If setting this up via IAM, do not add `"aws:MultiFactorAuthPresent": "false"` condition, as this will prevent the role being assumed by Snowplow SRE staff as part of investigations
+- If setting this up via IAM, do not add `"aws:MultiFactorAuthPresent": "false"` condition, as this will prevent the role being assumed by Snowplow SRE staff. We use Okta to assume roles, which uses delegated MFA and not direct MFA authentication to AWS
 3. Attach the `IAMFullAccess` policy. If a Permission Boundary was set on the admin role, then add this boundary to the bottom section of permissions page.
 - Role name: SnowplowDeployment (please use this specific name)
 - Role description: Allows the Snowplow Team to programmatically deploy to this account.
 4. Copy the Snowplow deployment role ARN. You will need to share this role with us as part of filling out the setup form in Snowplow BDP console.
 
-### Determine if Snowplow requires a specific VPC CIDR range (optional)
+### Provide a CIDR range for VPC peering or using a custom VPC (optional)
 
-If you require Snowplow to be deployed into a specific VPC CIDR range, this should be provided at the same time. We need a /18 provided for the VPC so that we can create /20 and /23 subnets (note: [VPC peering and using a custom VPC is an additional bolt-on](https://snowplow.io/snowplow-behavioral-data-platform-product-description/#h-vpc-peering-aws-gcp)).
+For VPC peering, you will need to select a peering-compatible /21 or /22 CIDR range (2048 or 1024 addresses).
+
+If you require Snowplow to be deployed into a custom VPC, you will need to specify a /18 CIDR range (16,384 addresses) for that VPC so that we can create /20 and /23 subnets. This ensures that we have an ample room for scaling, as well as deploying additional services.
+
+Note: VPC peering and using a custom VPC are additional bolt-ons.
 
 ### Determine if Snowplow requires a specific IAM Permission Boundary (optional)
 
@@ -160,5 +162,5 @@ If you are sending a request to our team to set up your account for you. Please 
 1. SnowplowAdmin role ARN
 2. SnowplowDeployment role ARN
 3. AWS region to deploy into
-4. VPC CIDR requirements for VPC peering (optional)
+4. VPC CIDR requirements for VPC peering or a custom VPC (optional)
 5. The IAM Permission Boundary ARN (optional)

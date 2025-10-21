@@ -1,6 +1,6 @@
 ---
 title: "Postgres Loader"
-sidebar_position: 6
+sidebar_position: 7
 ---
 
 ```mdx-code-block
@@ -18,7 +18,7 @@ The Postgres loader is not recommended for production use, especially with large
 
 :::tip Schemas in Postgres
 
-For more information on how events are stored in Postgres, check the [mapping between Snowplow schemas and the corresponding Postgres column types](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md?warehouse=postgres).
+For more information on how events are stored in Postgres, check the [mapping between Snowplow schemas and the corresponding Postgres column types](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md?warehouse=postgres).
 
 :::
 

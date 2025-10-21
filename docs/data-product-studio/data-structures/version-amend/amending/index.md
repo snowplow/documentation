@@ -15,7 +15,7 @@ Sometimes, small mistakes creep into your schemas. For example, you might mark a
 
 It might be tempting to somehow “overwrite” the schema without updating the version. But this can bring several problems:
 * Events that were previously valid could become invalid against the new changes.
-* Your warehouse loader, which updates the table [according to the schema](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md#versioning), could get stuck if it’s not possible to cast the data in the existing table column to the new definition (e.g. if you change a field type from a string to a number).
+* Your warehouse loader, which updates the table [according to the schema](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md#versioning), could get stuck if it’s not possible to cast the data in the existing table column to the new definition (e.g. if you change a field type from a string to a number).
 * Similarly, data models or other applications consuming the data downstream might not be able to deal with the changes.
 
 The best approach is to just create a new schema version and update your tracking code to use it. However, there are two alternatives for when it’s not ideal.

@@ -1,3 +1,7 @@
+```mdx-code-block
+import Link from '@docusaurus/Link';
+```
+
 <tr>
     <td><code>input.topicName</code></td>
     <td>Required.  Name of the Kafka topic for the source of enriched events.</td>
@@ -20,7 +24,7 @@
 </tr>
 <tr>
     <td><code>output.bad.producerConf.*</code></td>
-    <td>Optional. A map of key/value pairs for <a href="https://docs.confluent.io/platform/current/installation/configuration/producer-configs.html" target="_blank">any standard Kafka producer configuration option</a>.</td>
+    <td>Optional. A map of key/value pairs for <Link to="https://docs.confluent.io/platform/current/installation/configuration/producer-configs.html">any standard Kafka producer configuration option</Link>.</td>
 </tr>
 <tr>
     <td><code>output.bad.maxRecordSize</code></td>

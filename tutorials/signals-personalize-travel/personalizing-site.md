@@ -19,14 +19,13 @@ The travel website will use micro-segmentation based on behavioral data to custo
 The personalization system uses five different attributes that represent micro-segments based on user behavior patterns:
 
 These are:
-- culinary_tourist: Users who appear to be interested in food and culinary experiences
-- cultural_explorer: Users who appear to be interested in cultural experiences
-- family_fun: Users who appear to be interested in more family friendly based experiences and destinations
-- modern_urbanite: Users who appear to be interested in more modern and urban based experiences and destinations like architecture, nightlife and shopping
-- tranquil_seeker: Users who appear to be interested in more tranquil and relaxing experiences and destinations like beaches, spas and nature
+- `culinary_tourist`: users who appear to be interested in food and culinary experiences
+- `cultural_explorer`: users who appear to be interested in cultural experiences
+- `family_fun`: users who appear to be interested in more family friendly based experiences and destinations
+- `modern_urbanite`: users who appear to be interested in more modern and urban based experiences and destinations like architecture, nightlife and shopping
+- `tranquil_seeker`: users who appear to be interested in more tranquil and relaxing experiences and destinations like beaches, spas and nature
 
-To determine the most appropriate micro-segment for a user we will look at the value for each of these attributes (that are counters) and take the highest value and use that.
-
+To determine the most appropriate micro-segment for a user, you'll look at the value for each of these attributes (that are counters) and take the highest value and use that.
 
 ## Data flow
 
@@ -91,4 +90,3 @@ Before Signals personalization
 After Signals personalization (culinary explorer microsegment)
 
 ![After personalization](screenshots/with-pers.jpg "After personalization (culinary explorer segment)")
-

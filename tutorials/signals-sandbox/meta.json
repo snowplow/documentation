@@ -1,0 +1,8 @@
+{
+  "title": "Try Signals with the Sandbox demo",
+  "description": "Get hands-on with Signals using the Sandbox environment and demo e-shop application.",
+  "label": "Signals implementation",
+  "useCases": ["Real-time personalization"],
+  "technologies": ["Python", "Jupyter notebook", "React"],
+  "snowplowTech": ["Signals", "JavaScript tracker"]
+}

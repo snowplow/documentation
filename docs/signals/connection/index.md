@@ -10,7 +10,7 @@ import TabItem from '@theme/TabItem';
 
 If you're new to Signals, you'll need to set up a Signals connection in one of two ways:
 
-- Log in to [Snowplow Console](https://console.snowplowanalytics.com) and navigate to the **Signals** section (for BDP users with Signals).
+- Log in to [Snowplow Console](https://console.snowplowanalytics.com) and navigate to the **Signals** section (for Snowplow customers with Signals).
 - Set up a temporary Signals instance with [Signals Sandbox](https://try-signals.snowplow.io/dashboard) to explore the product's features and capabilities.
 
 
@@ -45,7 +45,7 @@ Alternatively, you can use the Signals Sandbox to test out the functionality and
 You will need different connection values depending on your deployment type.
 
 <Tabs groupId="connection" queryString>
-  <TabItem value="bdp" label="BDP" default>
+  <TabItem value="console" label="Console" default>
 
 To connect to Signals using the Signals SDKs or API, you will need four values. Use the Console **Overview** page to access them.
 
@@ -91,7 +91,7 @@ Create a `Signals` object by passing in the required values depending on your de
 
 
 <Tabs groupId="connection" queryString>
-  <TabItem value="bdp" label="BDP" default>
+  <TabItem value="console" label="Console" default>
 
 ```python
 from snowplow_signals import Signals
@@ -180,7 +180,7 @@ Create a `Signals` object by passing in the required values.
 
 
 <Tabs groupId="connection" queryString>
-  <TabItem value="bdp" label="BDP" default>
+  <TabItem value="console" label="Console" default>
 
 ```typescript
 import { Signals } from '@snowplow/signals-node';

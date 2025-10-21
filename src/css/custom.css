@@ -62,13 +62,6 @@
     --chart-5: 220.66 71.03% 58.04%;
   }
 }
-
-/**
- * Any CSS included here will be global. The classic template
- * bundles Infima by default. Infima is a CSS framework designed to
- * work well for content-centric websites.
- */
-
 @font-face {
   font-family: 'InterVariable';
   src: url('/fonts/Inter-VariableFont_opsz,wght.ttf') format('truetype');
@@ -100,6 +93,14 @@
   animation: subtle-gradient-shift 12s linear infinite;
 }
 /* You can override the default Infima variables here. */
+
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+
 
 :root {
   --ifm-color-primary: hsl(var(--primary))!important;
@@ -178,24 +179,6 @@ article.markdown,
   color: hsl(var(--primary)) !important;
 }
 
-/* Let prose handle font sizes and line heights - only override color */
-.markdown p,
-.prose p,
-.markdown li,
-.prose li,
-.markdown blockquote,
-.prose blockquote {
-  color: hsl(var(--muted-foreground));
-}
-
-/* Ensure prose typography classes work properly */
-.prose-sm,
-.prose-base,
-.prose-lg,
-.prose-xl,
-.prose-2xl {
-  color: hsl(var(--muted-foreground));
-}
 
 /* Override Docusaurus article styles that interfere with prose */
 article[class*="markdown"] p {
@@ -220,6 +203,8 @@ article[class*="markdown"] p {
 .prose-lg p, .prose-lg li { font-size: 1.125rem !important; line-height: 1.75 !important; }
 .prose-xl p, .prose-xl li { font-size: 1.25rem !important; line-height: 1.8 !important; }
 .prose-2xl p, .prose-2xl li { font-size: 1.5rem !important; line-height: 1.67 !important; }
+
+
 
 /* Reset any Docusaurus interference with typography */
 .markdown, .prose {
@@ -424,16 +409,7 @@ table {
 /* Left side bar CSS START */
 
 aside.theme-doc-sidebar-container {
-  border: none;
-}
-.sidebar_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-styles-module {
-  width: 100% !important;
-}
-
-/* Left side bar CSS START */
-
-aside.theme-doc-sidebar-container {
-  border: none;
+  border: none!important;
 }
 .sidebar_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-styles-module {
   width: 100% !important;
@@ -542,9 +518,12 @@ aside.theme-doc-sidebar-container {
 
 .menu__list-item-collapsible--active {
   background-color: hsla(261.56, 53.33%, 47.06%, 0.12);
-  border-radius: 0px var(--radius) var(--radius) 0px;
+  border-radius: 0px var(--radius) var(--radius) 0px!important;
   border-left: 1px solid hsl(var(--primary));
   margin-left: -1px;
+}
+..menu__list-item-collapsible.menu__list-item-collapsible--active{
+  border-radius: 0px var(--radius) var(--radius) 0px!important;
 }
 
 .menu__list-item-collapsible--active .menu__caret {

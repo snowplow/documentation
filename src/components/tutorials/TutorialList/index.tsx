@@ -144,6 +144,17 @@ const useTutorialContent = () => {
 
 const TutorialList: FC = () => {
   const content = useTutorialContent()
+  const [isMobile, setIsMobile] = useState(false)
+
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth < 1024)
+    }
+
+    checkMobile()
+    window.addEventListener('resize', checkMobile)
+    return () => window.removeEventListener('resize', checkMobile)
+  }, [])
 
   return (
     <>
@@ -153,19 +164,23 @@ const TutorialList: FC = () => {
 
       <div className="w-full">
         {/* Mobile filters - Only shown on mobile */}
-        <div className="hidden lg:block max-w-7xl mx-auto px-6 pt-6">
-          <div className="p-4 mb-6">
-            {content.filters}
-          </div>
-        </div>
-
-        <div className="flex">
-          {/* Sidebar - Hidden on mobile, shown on desktop - Sticks to left edge */}
-          <div className="block lg:hidden  w-[320px] flex-shrink-0">
-            <div className="p-6 sticky top-12">
+        {isMobile && (
+          <div className="max-w-7xl mx-auto px-6 pt-6">
+            <div className="p-4 mb-6">
               {content.filters}
             </div>
           </div>
+        )}
+
+        <div className="flex">
+          {/* Sidebar - Hidden on mobile, shown on desktop - Sticks to left edge */}
+          {!isMobile && (
+            <div className="w-[320px] flex-shrink-0">
+              <div className="p-6 sticky top-12">
+                {content.filters}
+              </div>
+            </div>
+          )}
 
           {/* Main content - Center aligned with page */}
           <div className="flex-1 flex justify-center px-6 pb-6">

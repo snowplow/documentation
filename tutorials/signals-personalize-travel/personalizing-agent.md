@@ -10,7 +10,7 @@ date: "2025-01-21"
 import Mermaid from '@theme/Mermaid';
 ```
 
-You'll now personalize a chatbot experience by integrating Signals with an AI agent that uses OpenAI as the backend. The chatbot fetches user attributes via a tool call, allowing it to provide contextual, personalized responses based on the user's browsing behavior.
+You'll now optionally personalize a chatbot experience by integrating Signals with an AI agent that uses OpenAI as the backend. The chatbot fetches user attributes via a tool call, allowing it to provide contextual, personalized responses based on the user's browsing behavior.
 
 The demo site includes all necessary tools and SDKs, so you'll only need an OpenAI API key to implement this feature.
 
@@ -58,13 +58,13 @@ First, test without personalization:
 1. Turn the toggle switch off (gray means off, green means on)
 2. Ask a question like "What are some good destinations for me in Southeast Asia?"
 3. Note the generic response
+4.
+![Chat widget without personalization](images/chat-nops.jpg)
 
 Then test with personalization:
 1. Turn the toggle switch on (green)
 2. Ask the same question
 3. Compare the response - it should now be tailored to your browsing behavior
-
-![Chat widget without personalization](images/chat-nops.jpg)
 
 ![Chat widget with personalization](images/chat-ps1.jpg)
 

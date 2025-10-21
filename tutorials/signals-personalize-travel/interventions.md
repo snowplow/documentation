@@ -20,7 +20,26 @@ When the user views their fourth destination page, the agent will automatically 
 
 ## Create the intervention
 
-Open your Jupyter notebook and run the final cell labeled "Interventions". This creates an intervention based on the `dest_page_view_count` attribute.
+Open your Jupyter notebook and run the final cell. This creates an intervention based on the `dest_page_view_count` attribute.
+
+```python
+from snowplow_signals import RuleIntervention, InterventionCriterion, LinkAttributeKey
+
+destination_assistance_intervention = RuleIntervention(
+    name="destination_help",
+    owner="you@email.com",
+    description="Assist the user if they are looking at 3 or more destinations in a given session.",
+    target_attribute_keys=[LinkAttributeKey(name="domain_sessionid")],
+    version=1,
+    criteria=InterventionCriterion(
+        attribute="travel_view:destination_page_view_count",
+        operator=">=",
+        value=3,
+    ),
+)
+
+sp_signals.publish([destination_assistance_intervention])
+```
 
 ## Test the intervention
 

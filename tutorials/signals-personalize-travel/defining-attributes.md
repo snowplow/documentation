@@ -1,16 +1,18 @@
 ---
-title: Defining attributes in Signals
+title: "Define behavioral attributes"
 position: 3
+description: "Create behavioral attributes using the Snowplow Signals Python SDK to capture user preferences and interests from website interactions."
+keywords: ["Snowplow Signals", "attributes", "Python SDK", "behavioral data", "user preferences"]
+date: "2025-01-21"
 ---
 
+Personalization requires understanding user behavior and preferences through their interactions with your website. Snowplow Signals enables this by processing behavioral events in real-time and aggregating them into meaningful attributes that represent user interests.
 
-## Defining attributes in Signals
+In this section, you'll define behavioral attributes that capture different types of travel preferences based on how users interact with the website. These attributes will serve as the foundation for both on-site content personalization and AI chatbot customization.
 
-In order to personalize our site experience we need to define some attributes in Signals that capture user behavior and preferences as you interact with the website. This will allow us to tailor the content and interactions on the site to better meet the needs of individual users.
+The attributes you create will track user engagement with different types of content, destinations, and features. For example, users who frequently view food-related content will have their culinary interest attribute incremented, while those who browse luxury destinations will see their luxury preference attribute increase.
 
-We'll use the same attributes for both the on-site personalization and the conversational agent responses. This means that the attributes we define will be used to customize both the content displayed on the travel site as well as the responses provided by the agent when users ask questions.
-
-To define these attributes, we will use the [Signals Python SDK](https://pypi.org/project/snowplow-signals/) in a Jupyter notebook to create a set of attributes that capture and aggregate user preferences.
+To define these attributes, you'll use the Snowplow Signals Python SDK in a Jupyter notebook to create a comprehensive set of attributes that capture and aggregate user preferences across their entire session.
 
 To run this notebook you can either download it locally or alternately run it on Google Colab [here](https://colab.research.google.com/github/snowplow/documentation/blob/main/tutorials/signals-bdp/signals.ipynb) if you have a Google account.
 

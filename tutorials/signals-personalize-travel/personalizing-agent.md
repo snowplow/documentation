@@ -1,15 +1,20 @@
 ---
-title: Personalizing an agent based on Signals (Optional)
+title: "Personalize chatbot responses (Optional)"
 position: 6
+description: "Integrate Snowplow Signals with an AI chatbot to provide personalized travel recommendations based on user behavioral data."
+keywords: ["chatbot", "AI personalization", "OpenAI", "conversational AI", "behavioral data"]
+date: "2025-01-21"
 ---
 
 ```mdx-code-block
 import Mermaid from '@theme/Mermaid';
 ```
 
-In this optional section we'll now look at how we can personalize a chatbot experience by integrating Signals into a chatbot that uses OpenAI as the backend and fetches attributes via a tool call using  [AI SDK](https://ai-sdk.dev/).
+Personalized chatbot experiences represent one of the most powerful applications of behavioral data. Instead of providing generic responses, a chatbot can use real-time behavioral insights to offer recommendations that align with a user's demonstrated preferences and interests.
 
-These tools and SDKs are already built into the demo site so you will not require anything additional other than an [OpenAI API key](https://platform.openai.com/api-keys) to run this section.
+This section demonstrates how to integrate Snowplow Signals with an AI chatbot that uses OpenAI as the backend. The chatbot fetches user attributes via a tool call using the AI SDK, allowing it to provide contextual, personalized responses based on the user's browsing behavior.
+
+The demo site includes all necessary tools and SDKs, so you'll only need an OpenAI API key to implement this personalization feature.
 
 ## How it will work
 

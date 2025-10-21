@@ -1,11 +1,16 @@
 ---
-title: Personalizing when an agent appears using Interventions (Optional)
+title: "Control chatbot timing with interventions (Optional)"
 position: 7
+description: "Use Snowplow Signals interventions to automatically trigger chatbot appearance based on specific user behaviors and engagement patterns."
+keywords: ["interventions", "chatbot timing", "user engagement", "behavioral triggers", "proactive assistance"]
+date: "2025-01-21"
 ---
 
-In the previous section we used Signals to personalize the responses an agent gave to a user based on their behavior on the site. In this optional section we will look at how we can use [Interventions](https://docs.snowplow.io/docs/signals/concepts/#interventions) to control when an agent appears to the user based on their behavior.
+Proactive customer assistance often proves more effective than waiting for users to request help. Snowplow Signals interventions enable you to automatically trigger specific actions when users exhibit particular behavioral patterns, creating timely and contextual interactions.
 
-Previously the a user would have to click on the chat icon to start a conversation with the agent. Using Interventions we can automatically trigger the agent to appear when a user has exhibited certain behaviors on the site and predict what the user may need assistance with at the right time.
+In the previous section, you personalized chatbot responses based on user behavior. This section explores how to use interventions to control when the chatbot appears, transforming reactive customer support into proactive assistance based on behavioral triggers.
+
+Traditionally, users must actively engage with a chat interface to receive assistance. With interventions, you can automatically present the chatbot when users demonstrate specific behaviors that suggest they might benefit from help, such as browsing extensively without taking action or showing signs of decision fatigue.
 
 ## How it will work
 

@@ -1,14 +1,20 @@
 ---
-title: Testing attributes in Signals
+title: "Test your behavioral attributes"
 position: 4
+description: "Verify that your Snowplow Signals attributes are working correctly by generating behavioral events and checking attribute values."
+keywords: ["testing", "attributes", "Snowplow Inspector", "behavioral events", "verification"]
+date: "2025-01-21"
 ---
 
+After defining your attributes, you need to verify they're working correctly by generating behavioral events and checking that the attribute values update as expected. This testing phase ensures your personalization system will function properly when users interact with your website.
 
-## Viewing attribute values
+You'll use the Snowplow Inspector browser extension to monitor both the events being sent to your collector and the resulting attribute values. This provides real-time visibility into how user behavior translates into attribute data.
+
+## View attribute values in real-time
 
 Once you have defined and published your attributes, attribute group, and service using the notebook, you can verify that they have been successfully created in your Snowplow Signals instance.
 
-We will do this by going back to our [demo site](http://localhost:8086) and opening the developer console (Ctrl+Shift+I or equivalent) in your browser. Navigate to the Snowplow Inspector tab and then to the 'Attributes' tab.
+You'll verify this by returning to your [demo site](http://localhost:8086) and opening the developer console (Ctrl+Shift+I or equivalent) in your browser. Navigate to the Snowplow Inspector tab and then to the 'Attributes' tab.
 
 ## Performing some events
 

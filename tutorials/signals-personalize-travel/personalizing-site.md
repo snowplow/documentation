@@ -1,15 +1,22 @@
 ---
-title: Personalizing the site based on Signals
+title: "Personalize content with behavioral data"
 position: 5
+description: "Use Snowplow Signals attributes to customize website content, including images, descriptions, and layout based on user behavior."
+keywords: ["personalization", "content customization", "Signals SDK", "user experience", "behavioral data"]
+date: "2025-01-21"
 ---
 
 ```mdx-code-block
 import Mermaid from '@theme/Mermaid';
 ```
 
-## Figuring out what to personalize
+Now that your behavioral attributes are collecting data, you can use this information to personalize the website experience in real-time. Effective personalization goes beyond simply showing different content; it involves understanding user preferences and adapting the entire experience to match their interests.
 
-To personalize we are going to use five different attributes that represent micro-segments that users might fall into.
+The travel website will use micro-segmentation based on behavioral data to customize various elements of the user experience. This approach allows for dynamic personalization that evolves as users interact with different types of content.
+
+## Identify user micro-segments
+
+The personalization system uses five different attributes that represent micro-segments based on user behavior patterns:
 
 These are:
 - culinary_tourist: Users who appear to be interested in food and culinary experiences

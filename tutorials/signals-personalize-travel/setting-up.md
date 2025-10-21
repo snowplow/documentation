@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 
 You'll now install and run the example travel website that you'll use to test Snowplow Signals personalization. This website represents a typical e-commerce travel platform where users browse destinations, read content, and interact with various features.
 
-The demo website is part of the [Snowplow Local](https://github.com/snowplow-incubator/snowplow-local) repository.
+The demo website is part of the [Snowplow Local](https://github.com/snowplow-incubator/snowplow-local) repository. It's a React application.
 
 ## Clone Snowplow Local
 

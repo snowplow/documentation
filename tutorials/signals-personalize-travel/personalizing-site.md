@@ -20,7 +20,7 @@ The system personalizes content using these micro-segments:
 
 * `culinary_tourist`: users interested in food and culinary experiences
 * `cultural_explorer`: users interested in cultural experiences
-* `family_fun`: users interested in family-friendly experiences and destinations
+* `family_fun`: users interested in family friendly experiences and destinations
 * `modern_urbanite`: users interested in urban experiences like architecture, nightlife, and shopping
 * `tranquil_seeker`: users interested in relaxing experiences like beaches, spas, and nature
 
@@ -56,10 +56,12 @@ You can test the personalization by performing different actions across the webs
 
 Once you've performed 4 or more actions that align with a specific segment, refresh the destinations page. It should now be customized to your segment.
 
-Here's what the page looks like before and after personalization:
+Here's what the page looks like before:
 
-![Before personalization](images/no-pers.jpg "Before personalization")
+![Before personalization](images/no-pers.jpg)
 
-![After personalization (culinary explorer segment)](images/with-pers.jpg "After personalization (culinary explorer segment)")
+After personalization for a `culinary_tourist` user, the images and descriptions have been updated to focus on food, and the food star rating has been put first:
 
-You can see how the same destination is presented differently based on the user's demonstrated interests and behaviors.
+![After personalization (culinary explorer segment)](images/with-pers.jpg)
+
+The same destination is presented differently based on the user's demonstrated interests and behaviors.

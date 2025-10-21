@@ -6,30 +6,21 @@ keywords: ["Snowplow Signals", "personalization", "real-time", "travel", "chatbo
 date: "2025-01-21"
 ---
 
-Welcome to the **Build personalized experiences with Signals** tutorial.
+Welcome to the **Build personalized experiences with Snowplow Signals** tutorial.
 
-This tutorial walks you through building personalized experiences on a travel website using [Snowplow Signals](/docs/signals/). You'll learn how to capture user behavior and define attributes that represent user preferences, and how to use these insights to customize both website content and chatbot responses in real-time.
+This tutorial walks you through building personalized experiences on a travel website using Snowplow Signals. You'll learn how to capture user behavior, define attributes that represent user preferences, and use these insights to customize both website content and chatbot responses in real-time.
 
 Personalization has become essential for creating engaging user experiences. Traditional approaches often rely on static user profiles or require manual segmentation. Snowplow Signals enables dynamic personalization by processing behavioral data in real-time and making it immediately available for customization.
 
-This tutorial is designed for developers, engineers, and analysts who want to implement real-time personalization.
+This tutorial is designed for developers, engineers, and analysts who want to implement real-time personalization. You'll work with a demo travel website focused on Southeast Asian destinations, creating a practical example of how behavioral data can drive personalized experiences.
 
-In this tutorial, you will:
-
-1. Set up and run an example travel website for exploring Southeast Asian destinations
-2. Define behavioral attributes using the Snowplow Signals Python SDK in a Jupyter notebook
-3. Connect the website to Snowplow Signals to personalize displayed content based on user behavior
-4. Integrate an AI chatbot that provides personalized recommendations using Signals data
-5. Implement interventions to control when personalized features appear based on user behavior
-
+You'll build a complete personalization system that captures user interests through their browsing behavior, processes this data into meaningful attributes using Snowplow Signals, and applies these insights to customize both the content displayed on the website and the responses provided by an AI-powered chatbot.
 
 ## Prerequisites
 
-You will need:
-- Signals enabled for your pipeline **or** have set up [Snowplow Local](https://github.com/snowplow-incubator/snowplow-local) and [Signals Sandbox](https://try-signals.snowplow.io/dashboard)
-- The [Snowplow Inspector](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm?hl=en) installed in your browser to view events, attribute groups and interventions
-- Some familiarity with running Jupyter notebooks, either locally on your machine or in Google Colab
-- [Docker](https://www.docker.com/) installed and configured on your computer
-- Access to Google Colab or GitHub to run the Jupyter [notebook](https://colab.research.google.com/github/snowplow/documentation/blob/main/tutorials/signals-bdp/signals.ipynb)
-
-- Optional: an [OpenAI API key](https://platform.openai.com/api-keys) if you wish to customise the agent responses based on Signals
+* Signals enabled for your BDP pipeline or [Snowplow Local](https://github.com/snowplow-incubator/snowplow-local) set up with [Signals Sandbox](https://try-signals.snowplow.io/dashboard)
+* The [Snowplow Inspector](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm?hl=en) browser extension installed
+* Familiarity with running Jupyter notebooks, either locally or in Google Colab
+* [Docker](https://www.docker.com/) installed and configured
+* Access to the Jupyter [notebook](https://colab.research.google.com/github/snowplow/documentation/blob/main/tutorials/signals-bdp/signals.ipynb)
+* Optional: an [OpenAI API key](https://platform.openai.com/api-keys) to customize agent responses

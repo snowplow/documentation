@@ -1,5 +1,5 @@
 ---
-title: "Personalize chatbot responses (Optional)"
+title: "Personalize the AI agent (Optional)"
 position: 6
 description: "Integrate Snowplow Signals with an AI chatbot to provide personalized travel recommendations based on user behavioral data."
 keywords: ["chatbot", "AI personalization", "OpenAI", "conversational AI", "behavioral data"]
@@ -10,17 +10,15 @@ date: "2025-01-21"
 import Mermaid from '@theme/Mermaid';
 ```
 
-Personalized chatbot experiences represent one of the most powerful applications of behavioral data. Instead of providing generic responses, a chatbot can use real-time behavioral insights to offer recommendations that align with a user's demonstrated preferences and interests.
+You'll now personalize a chatbot experience by integrating Signals with an AI agent that uses OpenAI as the backend. The chatbot fetches user attributes via a tool call, allowing it to provide contextual, personalized responses based on the user's browsing behavior.
 
-This section demonstrates how to integrate Snowplow Signals with an AI chatbot that uses OpenAI as the backend. The chatbot fetches user attributes via a tool call using the AI SDK, allowing it to provide contextual, personalized responses based on the user's browsing behavior.
+The demo site includes all necessary tools and SDKs, so you'll only need an OpenAI API key to implement this feature.
 
-The demo site includes all necessary tools and SDKs, so you'll only need an OpenAI API key to implement this personalization feature.
+## How it works
 
-## How it will work
+When a user asks the agent a question, the system fetches the attribute values for the user using the Signals API and uses these to modify the prompt sent to OpenAI. This allows personalized responses based on the user's preferences and behavior.
 
-When a user asks a question of the agent we will fetch the attribute values for the user using the Signals API and use these to modify the prompt that is sent to OpenAI via a tool call which will use the Typescript SDK. This will allow us to provide more personalized responses based on the user's preferences and behavior.
-
-A toggle button on the chat widget itself will allow us to enable or disable the tool call so we can see the difference in responses with and without Signals personalization.
+A toggle button on the chat widget allows you to enable or disable the tool call so you can see the difference in responses with and without Signals personalization.
 
 ## Data flow
 
@@ -29,16 +27,16 @@ sequenceDiagram
     Agent->>+OpenAI: Message
     Agent->>+Tool call: domain_sessionid
     Tool call->>+Typescript SDK: domain_sessionid
-    Typescript SDK->>+Signals API: domain_sessiond, service_name
+    Typescript SDK->>+Signals API: domain_sessionid, service_name
     Signals API->>+Typescript SDK: attributes
     Typescript SDK->>+Tool call: attributes
     Tool call->>+OpenAI: attributes
     OpenAI->>+Agent: personalized response
   `}/>
 
-## Setup
+## Configure the agent
 
-In order to configure the agent to use Signals you will need to have the following additional variables set in your `.env` file in the `snowplow-local` directory.
+Add these variables to your `.env` file in the `snowplow-local` directory:
 
 ```
 AI_MODEL_PROVIDER=openai
@@ -46,26 +44,30 @@ AI_MODEL_NAME=gpt-4o-mini
 OPENAI_API_KEY=your_openai_api_key
 ```
 
-## Create a source of personalization data
+## Generate personalization data
 
-Similar to the last section on personalizing the site you will also need some attribute data in order to personalize the agent. This time as we are not strictly limited to customising the user interface in a hardcoded way feel free to explore different filters, destinations and blog pages in order to generate additional attribute values.
+You'll need some attribute data to personalize the agent responses. Browse different filters, destinations, and blog pages to generate additional attribute values.
 
-Check that you have some valid attribute values (these are the same ones the agent will see) by using the Snowplow Inspector and clicking on the 'Attributes' tab. You should see this under the 'travel_view' label.
+Check your attribute values using the Snowplow Inspector **Attributes** tab. You should see values under the `travel_view` label.
 
-## Chatting to the agent
+## Test the agent
 
-Once you have your attribute data set up, you can start chatting with the agent. You can do this by selecting the chat icon in the lower right hand portion of the screen. Initially we want to turn the Signals tool call off - to find out how the agent responds in the absence of any behavioral information.
+Start chatting with the agent by selecting the chat icon in the lower right portion of the screen.
 
-To do this hit the toggle switch so that it turns gray (green indicates on).
+First, test without personalization:
+1. Turn the toggle switch off (gray means off, green means on)
+2. Ask a question like "What are some good destinations for me in Southeast Asia?"
+3. Note the generic response
 
-You can now ask the agent a question - for example "What are some good destinations for me in South East Asia?" and see how it responds.
+Then test with personalization:
+1. Turn the toggle switch on (green)
+2. Ask the same question
+3. Compare the response - it should now be tailored to your browsing behavior
 
-[![Chat widget](./screenshots/chat-nops.jpg)](./screenshots/chat-nops.jpg)
+![Chat widget without personalization](images/chat-nops.jpg)
 
-You can see that the response you get back is not bad, but it is fairly generic and does take into account any of the personalized preferences you've expressed through your behavior on the site throughout your current session.
+![Chat widget with personalization](images/chat-ps1.jpg)
 
-Next turn the toggle switch on (green) and ask the same identical question. The response should now differ significantly. Some of the destinations suggested may be identical but you should find the that the justification and reasoning for selecting each destination is curated to preferences derived from your on-site behavior.
+![Chat widget with personalization continued](images/chat-ps2.jpg)
 
-
-[![Chat widget](./screenshots/chat-ps1.jpg)](./screenshots/chat-ps1.jpg)
-[![Chat widget](./screenshots/chat-ps2.jpg)](./screenshots/chat-ps2.jpg)
+The personalized responses should provide destination suggestions and justifications that align with the preferences you've demonstrated through your behavior on the site.

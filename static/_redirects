@@ -414,3 +414,4 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/sources/trackers/google-tag-manager/snowtype/* /docs/data-product-studio/snowtype/working-with-gtm/ 301
 /docs/get-started/snowplow-bdp/* /docs/get-started/private-managed-cloud/:splat 301
 /docs/modeling-your-data/running-data-models-via-snowplow-bdp/* /docs/modeling-your-data/running-data-models-via-console/:splat 301
+/docs/get-started/snowplow-community-edition/* /docs/get-started/self-hosted/:splat 301

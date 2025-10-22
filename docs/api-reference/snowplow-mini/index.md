@@ -23,7 +23,7 @@ You might use Snowplow Mini when:
 
 Snowplow users can request a Snowplow Mini instance through Console (go to `“Environments” → “Sandboxes” → “Setup a sandbox”`).
 
-For Community Edition, see the setup guides for [AWS](/docs/api-reference/snowplow-mini/setup-guide-for-aws/index.md) and [GCP](/docs/api-reference/snowplow-mini/setup-guide-for-gcp/index.md).
+For Snowplow Self-Hosted, see the setup guides for [AWS](/docs/api-reference/snowplow-mini/setup-guide-for-aws/index.md) and [GCP](/docs/api-reference/snowplow-mini/setup-guide-for-gcp/index.md).
 
 ## Conceptual diagram
 

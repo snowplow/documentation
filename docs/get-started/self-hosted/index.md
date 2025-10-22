@@ -1,8 +1,18 @@
 ---
-title: "What to expect from the quick start guide"
-sidebar_label: "Before you begin"
-sidebar_position: 1
+title: "Setting up Snowplow Self-Hosted"
+date: "2020-10-30"
+sidebar_position: 4
+sidebar_label: "Setting up Self-Hosted"
+sidebar_custom_props:
+  offerings:
+    - community
 ---
+
+```mdx-code-block
+import LicenseNotice from '@site/docs/get-started/self-hosted/_license-notice.md';
+```
+
+This page is an introduction for the Self-Hosted [Quick Start guide](docs/get-started/self-hosted/quick-start/index.md). Follow the Quick Start to set up a [Snowplow Self-Hosted](/docs/get-started/index.md#self-hosted) deployment, whether High Availability (production) or Community Edition (non-production).
 
 We have built a set of [terraform](https://www.terraform.io/docs/language/modules/develop/index.html) modules, which automates the setup and deployment of the required infrastructure and applications for an operational Snowplow Community Edition pipeline, with just a handful of input variables required on your side.
 
@@ -13,7 +23,7 @@ After following this guide, you will be able to: 
 - Easily enable and disable our suite of [out-of-the-box enrichments](/docs/pipeline/enrichments/available-enrichments/index.md)
 - Consume your rich data from the data warehouse, database, lake and/or real-time stream
 
-Here’s some key information.
+<LicenseNotice/>
 
 ## Required time
 
@@ -36,5 +46,3 @@ Out of the box, the deployed pipeline will handle up to ~100 events per second (
 ## Getting help
 
 Check out our [Community](https://community.snowplow.io/). If you run into any problems or have any questions, we are here to help.
-
-If you are interested in receiving the latest updates from Product & Engineering, such as critical bug fixes, security updates, new features and the rest, then [join our mailing list](https://info.snowplow.io/newsletter-signup).

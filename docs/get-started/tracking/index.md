@@ -13,7 +13,7 @@ import EventComponent from '@site/src/components/FirstSteps';
 import { sampleTrackingCode } from '@site/src/components/FirstSteps/sampleTrackingCode';
 ```
 
-Once your pipeline is set up, you will want to send some events to it. Here’s an overview of the different options.
+Once your pipeline is set up, you will want to send some events to it. Here's an overview of the different options.
 
 :::tip Latency
 
@@ -43,9 +43,9 @@ You can find the Collector URL (Collector endpoint) in [Console](https://console
 You can find the Collector URL (Collector endpoint) in [Console](https://console.snowplowanalytics.com/environments).
 
   </TabItem>
-  <TabItem value="community" label="Community Edition">
+  <TabItem value="self-hosted" label="Snowplow Self-Hosted">
 
-Input the Collector URL you chose when deploying your Community Edition pipeline.
+Input the Collector URL you chose when deploying your Snowplow Self-Hosted pipeline.
 
 If you have not yet configured an SSL certificate and a custom domain name for your Collector, you can use `http://<collector_dns_name>` (`http`, not `https`), where `collector_dns_name` is the output of the pipeline Terraform module.
 
@@ -91,9 +91,9 @@ CDI Private Managed Cloud can automatically generate the snippet for you. Go to 
 You can find the pre-generated snippet in the [Getting started](https://console.snowplowanalytics.com/environments/start-tracking-events?fromDocs) section.
 
   </TabItem>
-  <TabItem value="community" label="Community Edition">
+  <TabItem value="self-hosted" label="Snowplow Self-Hosted">
 
-Take note of the Collector URL you’ve chosen when deploying your Community Edition pipeline.
+Take note of the Collector URL you’ve chosen when deploying your Snowplow Self-Hosted pipeline.
 
 If you have not yet configured an SSL certificate and a custom domain name for your Collector, you can use `http://<collector_dns_name>` (`http`, not `https`), where `collector_dns_name` is the output of the pipeline Terraform module.
 

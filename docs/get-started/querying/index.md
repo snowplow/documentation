@@ -16,7 +16,7 @@ For **Snowplow CDI** Private Managed Cloud or Cloud customers, you can find your
 
 Follow [our querying guide](/docs/destinations/warehouses-lakes/querying-data/index.md) for advice on querying your data.
 
-## Snowplow Self-Hosted and Community Edition
+## Snowplow Self-Hosted
 
 If you don't have access to Snowplow Console, follow these instructions to connect to your Snowplow data:
 
@@ -78,7 +78,7 @@ To connect, you can use either Snowflake dashboard or [SnowSQL](https://docs.sno
 
 :::info Azure-specific instructions
 
-On Azure, you have created an external table in the [last step of the guide](/docs/get-started/snowplow-community-edition/quick-start/index.md#configure-the-destination). Use this table and ignore the text below.
+On Azure, you have created an external table in the [last step of the guide](/docs/get-started/self-hosted/quick-start/index.md#configure-the-destination). Use this table and ignore the text below.
 
 :::
 
@@ -95,11 +95,11 @@ See the [Databricks tutorial](https://docs.databricks.com/getting-started/quick-
 
 In Synapse Analytics, you can connect directly to the data residing in ADLS. You will need to know the names of the storage account (set in the `storage_account_name` Terraform variable) and the storage container (it’s a fixed value: `lake-container`).
 
-Follow [the Synapse documentation](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/query-delta-lake-format) and use the `OPENROWSET` function. If you created a data source in the [last step](/docs/get-started/snowplow-community-edition/quick-start/index.md#configure-the-destination) of the quick start guide, your queries will be a bit simpler.
+Follow [the Synapse documentation](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/query-delta-lake-format) and use the `OPENROWSET` function. If you created a data source in the [last step](/docs/get-started/self-hosted/quick-start/index.md#configure-the-destination) of the quick start guide, your queries will be a bit simpler.
 
 :::tip Fabric and OneLake
 
-If you created a OneLake shortcut in the [last step](/docs/get-started/snowplow-community-edition/quick-start/index.md#configure-the-destination) of the quick start guide, you will be able to explore Snowplow data in Fabric, for example, using Spark SQL.
+If you created a OneLake shortcut in the [last step](/docs/get-started/self-hosted/quick-start/index.md#configure-the-destination) of the quick start guide, you will be able to explore Snowplow data in Fabric, for example, using Spark SQL.
 
 :::
 

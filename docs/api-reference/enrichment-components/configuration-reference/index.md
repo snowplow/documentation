@@ -32,8 +32,8 @@ To accept the terms of license and run Enrich, set the `ACCEPT_LIMITED_USE_LICEN
 | `monitoring.metrics.statsd.prefix` | Optional. Default: `snowplow.enrich`. Pefix of StatsD metric names. |
 | `monitoring.healthProbe.port` (since *6.0.0*) | Optional. Default: `8000`. Open a HTTP server that returns OK only if the app is healthy. |
 | `monitoring.healthProbe.unhealthyLatency` (since *6.0.0*) | Optional. Default: `2 minutes`. Health probe becomes unhealthy if any received event is still not fully processed before this cutoff time. |
-| `telemetry.disable` | Optional. Set to `true` to disable [telemetry](/docs/get-started/snowplow-community-edition/telemetry/index.md). |
-| `telemetry.userProvidedId` | Optional. See [here](/docs/get-started/snowplow-community-edition/telemetry/index.md#how-can-i-help) for more information. |
+| `telemetry.disable` | Optional. Set to `true` to disable [telemetry](/docs/get-started/self-hosted/telemetry/index.md). |
+| `telemetry.userProvidedId` | Optional. See [here](/docs/get-started/self-hosted/telemetry/index.md#how-can-i-help) for more information. |
 | `validation.acceptInvalid` (since *6.0.0*) | Optional. Default: `false`. Enrich *3.0.0* introduces the validation of the enriched events against atomic schema before emitting. If set to `false`, a failed event will be emitted instead of the enriched event if validation fails. If set to `true`, invalid enriched events will be emitted, as before. |
 | `validation.atomicFieldsLimits` (since *4.0.0*) | Optional. For the defaults, see [here](https://github.com/snowplow/enrich/blob/master/modules/common/src/main/resources/reference.conf). Configuration for custom maximum atomic fields (strings) length. It's a map-like structure with keys being atomic field names and values being their max allowed length. |
 | `validation.maxJsonDepth` (since *6.0.0*) | Optional. Default: `40`. Maximum allowed depth for the JSON entities in the events. Event will be sent to bad row stream if it contains JSON entity with a depth that exceeds this value. |

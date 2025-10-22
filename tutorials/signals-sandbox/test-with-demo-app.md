@@ -4,7 +4,15 @@ title: Test with the demo application
 description: "Use the interactive demo e-shop to see your Signals configuration in action."
 ---
 
-Now that you've defined attributes and interventions, it's time to see them work in a real application. We have a prepared a demo React application that can integrate with your Sandbox instance to demonstrate real-time personalization.
+Now that you've defined attributes and interventions, it's time to see them work in a real application. We've a prepared a demo React application with Snowplow tracking that can integrate with your Sandbox instance to demonstrate real-time personalization.
+
+The demo application features:
+
+* **Product catalog**: products fetched from an external API
+* **Snowplow tracking**: the [JavaScript tracker](/docs/sources/trackers/web-trackers/) with the [ecommerce plugin](/docs/sources/trackers/web-trackers/tracking-events/ecommerce/)
+* **Intervention display**: the [browser tracker plugin](/docs/signals/receive-interventions/#using-the-browser-tracker-plugin) to receive and show intervention banners
+* **Logging**: the app prints to the console when it tracks an event, or receives an intervention
+* **Reset functionality**: ability to clear your user data and start fresh
 
 ## Access the demo application
 
@@ -16,8 +24,6 @@ When you first open the app, you'll see a configuration screen.
 
 ![Screenshot showing the configuration page of the demo app.](./images/demo-configure.png)
 
-## Configure the demo app
-
 Enter your Sandbox credentials from the setup step:
 
 * **Collector URL**: your Snowplow Collector endpoint
@@ -27,18 +33,9 @@ The app will store these values in your browser's local storage, so you won't ne
 
 Click **Start Shopping** to proceed to the e-shop.
 
-## Understanding the demo app
-
-The demo application features:
-
-* **Product catalog**: products fetched from an external API
-* **Snowplow tracking**: the [JavaScript tracker](/docs/sources/trackers/web-trackers/) with the [e-commerce plugin](/docs/sources/trackers/web-trackers/tracking-events/ecommerce/)
-* **Intervention display**: the [browser tracker plugin](/docs/signals/receive-interventions/#using-the-browser-tracker-plugin) to receive and show intervention banners
-* **Reset functionality**: ability to clear your user data and start fresh
-
 ## Test your interventions
 
-Follow these steps to trigger each intervention:
+Follow these steps to trigger each intervention.
 
 ### Trigger the discount intervention
 
@@ -67,7 +64,7 @@ Follow these steps to trigger each intervention:
 
 Here's what happens when you interact with the demo app:
 
-1. **Event tracking**: when you view a product or add to cart, the JavaScript tracker sends an e-commerce event to your Sandbox Collector
+1. **Event tracking**: when you view a product or add to cart, the JavaScript tracker sends an ecommerce event to your Sandbox Collector
 2. **Attribute calculation**: Signals processes the event and updates your user attributes in real time
 3. **Intervention evaluation**: Signals checks if any intervention criteria are now met
 4. **Delivery**: if an intervention triggers, Signals sends it to the browser via Server-Sent Events (SSE)
@@ -77,12 +74,10 @@ Here's what happens when you interact with the demo app:
 
 You can click **Reset User Data** to clear your current user session and start testing again with a fresh profile. This generates a new `domain_userid` so you can re-trigger interventions.
 
-## Exploring the implementation
-
 The demo app is open source. You can explore the implementation in the [GitHub repository](https://github.com/snowplow-incubator/signals-sandbox-ecom-demo):
 
 * **Tracker setup**: see how the Snowplow tracker and Signals plugin are initialized in `app/src/snowplow.ts`
 * **Intervention handling**: see how interventions are received and displayed in `app/src/App.tsx`
 * **Attribute definitions**: review the Python notebook `attributes_and_interventions.ipynb` that you followed in this tutorial
 
-You've successfully configured Signals to calculate real-time attributes and trigger personalized interventions based on user behavior!
+You've successfully configured Signals to calculate real-time attributes and trigger personalized interventions based on user behavior.

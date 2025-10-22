@@ -4,5 +4,5 @@
   "label": "Signals implementation",
   "useCases": ["Real-time personalization"],
   "technologies": ["Python", "Jupyter notebook", "React"],
-  "snowplowTech": ["Signals", "JavaScript tracker"]
+  "snowplowTech": ["Signals"]
 }

@@ -8,9 +8,9 @@ The first step is to create your Signals Sandbox deployment. This will provide y
 
 ## Deploy your Sandbox instance
 
-1. Visit the [Signals Sandbox website](https://try-signals.snowplow.io/)
-2. Click the button to sign in with your Github account.
-5. Wait for the deployment to complete (this typically takes a few minutes)
+1. Visit the [Signals Sandbox website](https://try-signals.snowplow.io/).
+2. Click the button to sign in with your GitHub account.
+5. Wait for the deployment to complete. This typically takes a few minutes.
 
 Once your deployment is ready, you'll receive three important pieces of information:
 
@@ -20,7 +20,7 @@ Once your deployment is ready, you'll receive three important pieces of informat
 
 ![Screenshot showing information about a deployed Signals instance using the Sandbox.](./images/sandbox.png)
 
-:::warning
+:::note
 
 Keep your credentials safe. The Sandbox Token provides access to your Signals instance. While the Sandbox is temporary and for testing purposes only, treat these credentials carefully.
 
@@ -37,21 +37,23 @@ If you want to skip ahead, you can make use of the following notebook that conta
 
 ### Using Google Colab
 
-1. Open a new notebook at [Google Colab](https://colab.research.google.com/)
-2. Install the Signals Python SDK:
+You can use the provided notebook, or create your own. To create a new notebook, open a new notebook at [Google Colab](https://colab.research.google.com/).
+
+You'll need to add credentials as Colab secrets. Click the key icon in the left sidebar, and add three secrets:
+  * `SP_API_URL`: your Profiles API URL
+  * `SP_SANDBOX_TOKEN`: your Sandbox Token
+  * `SP_COLLECTOR_URL`: your Collector URL (optional, for reference)
+
+When you run the notebook, it will ask for access to the secrets. Choose to grant access.
+
+If you're using your own notebook, follow these steps:
+1. Install the Signals Python SDK:
 
 ```python
 %pip install snowplow-signals
 ```
 
-3. Store your credentials as Colab secrets:
-   * Click the key icon in the left sidebar
-   * Add three secrets:
-     * `SP_API_URL`: your Profiles API URL
-     * `SP_SANDBOX_TOKEN`: your Sandbox Token
-     * `SP_COLLECTOR_URL`: your Collector URL (optional, for reference)
-
-4. Load your credentials in the notebook:
+2. Load your credentials in the notebook:
 
 ```python
 from google.colab import userdata
@@ -62,6 +64,8 @@ os.environ["SP_SANDBOX_TOKEN"] = userdata.get('SP_SANDBOX_TOKEN')
 ```
 
 ### Using local Jupyter
+
+Navigate into your working directory and environment, then follow these steps:
 
 1. Install Jupyter and the Signals SDK:
 
@@ -105,7 +109,7 @@ sp_signals = SignalsSandbox(
 
 :::tip
 
-The `SignalsSandbox` class is specifically designed for Sandbox environments. For production Snowplow BDP deployments, you would use the `Signals` class instead, which requires API keys.
+The `SignalsSandbox` class is specifically designed for Sandbox environments. For production Snowplow deployments, you would use the `Signals` class instead, which requires API keys.
 
 :::
 

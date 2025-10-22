@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 If you're new to Signals, you'll need to set up a Signals connection in one of two ways:
 
 - Log in to [Snowplow Console](https://console.snowplowanalytics.com) and navigate to the **Signals** section (for Snowplow customers with Signals).
-- Set up a temporary Signals instance with [Signals Sandbox](https://try-signals.snowplow.io/dashboard) to explore the product's features and capabilities.
+- Set up a Signals instance with [Signals Sandbox](https://try-signals.snowplow.io/dashboard) to explore the product's features and capabilities.
 
 
 ## Snowplow Console

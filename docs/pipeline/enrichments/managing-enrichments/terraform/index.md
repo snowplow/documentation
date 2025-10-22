@@ -1,5 +1,5 @@
 ---
-title: "Managing enrichments in Snowplow Snowplow Self-Hosted"
+title: "Managing enrichments in Snowplow Self-Hosted"
 date: "2021-10-06"
 sidebar_label: "Snowplow Self-Hosted: Terraform"
 sidebar_position: 15

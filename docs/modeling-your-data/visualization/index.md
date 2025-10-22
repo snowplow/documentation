@@ -65,7 +65,7 @@ The installation workflow will look something like this:
 
 ### Data model dependencies
 
-Generally, visualizations will depend on data models. If there are dependencies, the installation flow will highlight which models are required and what models you currently have [running via BDP](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/index.md). It will also highlight any properties that you need to enable or configure for these data models.
+Generally, visualizations will depend on data models. If there are dependencies, the installation flow will highlight which models are required and what models you currently have [running via BDP](/docs/modeling-your-data/running-data-models-via-console/index.md). It will also highlight any properties that you need to enable or configure for these data models.
 
 :::note Manual configuration for Open Source
 If you are running the necessary data models yourself outside of BDP, then you will need to manually check that your setup satisfies the requirements for each visualization. These requirements are listed within the documentation pages for each visualization.

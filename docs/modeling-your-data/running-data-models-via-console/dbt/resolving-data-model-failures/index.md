@@ -6,7 +6,7 @@ sidebar_position: 200
 
 :::note
 
-This documentation assumes you are running your data models via the data modeling UI in Snowplow Console, as described in [the documentation for running data models](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/index.md#2-the-data-modeling-configuration).
+This documentation assumes you are running your data models via the data modeling UI in Snowplow Console, as described in [the documentation for running data models](/docs/modeling-your-data/running-data-models-via-console/dbt/index.md#2-the-data-modeling-configuration).
 
 :::
 

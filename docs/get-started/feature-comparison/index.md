@@ -38,7 +38,7 @@ Here is a detailed list of product features, including which are available as pa
 | Advanced enrichments (PII, IP anonymization, JS, API, SQL enrichments)                                                    |   ✅   | ✅ (no UI or API) | ✅ (no UI or API)  |
 | [Data structures tooling and API](/docs/data-product-studio/data-structures/manage/index.md)                              |   ✅   |        ❌         |         ❌         |
 | [Data products](/docs/data-product-studio/data-products/index.md)                                                         |   ✅   |        ❌         |         ❌         |
-| [Data modeling management tooling](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/index.md)            |   ✅   |        ❌         |         ❌         |
+| [Data modeling management tooling](/docs/modeling-your-data/running-data-models-via-console/dbt/index.md)            |   ✅   |        ❌         |         ❌         |
 | Jobs monitoring dashboard                                                                                                 |   ✅   |        ❌         |         ❌         |
 | Failed events alerting                                                                                                    |   ✅   |        ❌         |         ❌         |
 | Failed events in the warehouse                                                                                            |   ✅   |        ❌         |         ❌         |

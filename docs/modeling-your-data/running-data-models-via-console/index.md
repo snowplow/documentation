@@ -17,7 +17,7 @@ import TabItem from '@theme/TabItem';
 
 [Standard data models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/index.md) are authored and maintained by Snowplow. Follow the steps below to create and run one.
 
-You can also create [custom data models](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/index.md).
+You can also create [custom data models](/docs/modeling-your-data/running-data-models-via-console/dbt/index.md).
 
 ## Create a warehouse connection
 Begin by creating a new warehouse connection. It will be used by a data model to connect to your warehouse. Go to [Destinations/Connections](https://console.snowplowanalytics.com/connections), click on "Set up connection", and fill in all the necessary details.

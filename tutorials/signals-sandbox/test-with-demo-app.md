@@ -41,7 +41,7 @@ Follow these steps to trigger each intervention.
 
 1. Browse the product catalog
 2. Click on different products to view their details
-3. After viewing more than 3 products, you should see a banner appear at the top:
+3. After viewing four products, you should see a banner appear at the top:
    * **Message**: "10% off your next purchase!"
    * **Code**: `SAVE10`
 

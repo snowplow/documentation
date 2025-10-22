@@ -48,21 +48,26 @@ A minimal configuration file can be found on the [Github repo](https://github.co
 | parameter | description |
 |-|-|
 | `input.subscription` | Required. E.g. `projects/example-project/subscriptions/collectorPayloads`. PubSub subscription identifier for the collector payloads. |
-| `input.parallelPullFactor` | Optional. Default: `0.5`. Controls how many threads are used internally by the pubsub client library for fetching events. The number of threads is equal to this factor multiplied by the number of availble cpu cores. |
-| `input.durationPerAckExtension` | Optional. Default: `60 seconds`. Pubsub ack deadlines are extended for this duration when needed. |
+| `input.durationPerAckExtension` | Optional. Default: `15 seconds`. Pubsub ack deadlines are extended for this duration when needed. |
 | `input.minRemainingAckDeadline` | Optional. Default: `0.1`. Controls when ack deadlines are re-extended, for a message that is close to exceeding its ack deadline. For example, if `durationPerAckExtension` is `60 seconds` and `minRemainingAckDeadline` is `0.1` then the Source will wait until there is `6 seconds` left of the remining deadline, before re-extending the message deadline. |
-| `input.maxMessagesPerPull` | Optional. Default: `1000`. How many pubsub messages to pull from the server in a single request. |
-| `input.debounceRequests` | Optional. Default: `100 millis`. Adds an artifical delay between consecutive requests to pubsub for more messages. Under some circumstances, this was found to slightly alleviate a problem in which pubsub might re-deliver the same messages multiple times. |
+| `input.retries.transientErrors.delay` (since *6.2.0*) | Optional. Default: `100 millis`. Backoff delay for follow-up attempts of transient GRPC failures retries. |
+| `input.retries.transientErrors.attempts` (since *6.2.0*) | Optional. Default: `10`. Max number of attempts for transient GRPC failures retries. |
 | `output.good.topic` | Required. E.g. `projects/example-project/topics/enriched`. Name of the PubSub topic that will receive the enriched events. |
 | `output.good.attributes` | Optional. Enriched event fields to add as PubSub message attributes. For example, if this is `[ "app_id" ]` then the enriched event's `app_id` field will be an attribute of the PubSub message, as well as being a field within the enriched event. |
 | `output.good.batchSize` | Optional. Default: `100`. Enriched events are sent to pubsub in batches not exceeding this size. |
 | `output.good.requestByteThreshold` | Optional. Default: `1000000`. Enriched events are sent to pubsub in batches not exceeding this size number of bytes. |
+| `output.good.retries.transientErrors.delay` (since *6.2.0*) | Same as `input.retries.transientErrors.delay` for good events. |
+| `output.good.retries.transientErrors.attempts` (since *6.2.0*) | Same as `input.retries.transientErrors.attempts` for good events. |
 | `output.failed.topic` | Required. E.g. `projects/example-project/topics/failed`. Name of the PubSub topic that will receive the failed events (same format as the enriched events). |
 | `output.failed.batchSize` | Same as `output.good.batchSize` for failed events. |
 | `output.failed.requestByteThreshold` | Same as `output.good.requestByteThreshold` for failed events. |
+| `output.failed.retries.transientErrors.delay` (since *6.2.0*) | Same as `input.retries.transientErrors.delay` for failed events. |
+| `output.failed.retries.transientErrors.attempts` (since *6.2.0*) | Same as `input.retries.transientErrors.attempts` for failed events. |
 | `output.bad.topic` | Required. E.g. `projects/example-project/topics/bad`. Name of the PubSub topic that will receive the failed events in the "bad row" format (JSON). |
 | `output.bad.batchSize` | Same as `output.good.batchSize` for failed events in the "bad row" format (JSON). |
 | `output.bad.requestByteThreshold` | Same as `output.good.requestByteThreshold` for failed events in the "bad row" format (JSON). |
+| `output.bad.retries.transientErrors.delay` (since *6.2.0*) | Same as `input.retries.transientErrors.delay` for failed events in the "bad row" format (JSON). |
+| `output.bad.retries.transientErrors.attempts` (since *6.2.0*) | Same as `input.retries.transientErrors.attempts` for failed events in the "bad row" format (JSON). |
 
 ## enrich-kinesis
 

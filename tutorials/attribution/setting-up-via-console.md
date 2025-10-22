@@ -3,7 +3,6 @@ title: Setting up via Snowplow Console
 position: 5
 ---
 
-# Setting up via Snowplow Console
 
 Snowplow provides a fully managed service for running data models. We recommend this if you are just getting started out, or don’t anticipate needing to build your own custom models. To get started, follow these steps:
 
@@ -24,9 +23,9 @@ Snowplow provides a fully managed service for running data models. We recommend 
 5. Open up your newly created data model
 
 6. Configure the Recommended Configuration Variables:
-    - Attribution Start Date: The date to start processing events from in the package on first run or a full refresh, based on the cv_tstamp (conversion timestamp).
-    - Path Lookback Days: Restricts the model to marketing channels within this many days of the conversion (values of 30, 14 or 7 are recommended).
-    - Path Lookback Steps: The limit for the number of marketing channels to look at before the conversion.
+    - Attribution Start Date: the date to start processing events from in the package on first run or a full refresh, based on the cv_tstamp (conversion timestamp).
+    - Path Lookback Days: restricts the model to marketing channels within this many days of the conversion (values of 30, 14 or 7 are recommended).
+    - Path Lookback Steps: the limit for the number of marketing channels to look at before the conversion.
     
 ![](./screenshots/Screenshot51.png)
 

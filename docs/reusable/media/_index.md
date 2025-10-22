@@ -400,7 +400,7 @@ player.setVolume(100); // Volume level`}
 </CodeBlock>)}</>
 
 <>{(props.tracker == 'roku') && (<CodeBlock language="brightscript">
-{`m.global.snowplow.disableMediaTracking = {
+{`m.global.snowplow.enableMediaTracking = {
     media: m.Video,
     label: "Sample video"
 }`}
@@ -1427,7 +1427,7 @@ Tracks a media player seek start event sent when a seek operation begins.
 </CodeBlock>)}</>
 
 <>{(props.tracker == 'flutter') && (<CodeBlock language="dart">
-{`await mediaTracking.track(MediaEndEvent());`}
+{`await mediaTracking.track(MediaSeekStartEvent());`}
 </CodeBlock>)}</>
 
 <>{(props.tracker == 'roku') && (<p>This event automatically fires for Video nodes using the native trickplay bar, or can be tracked manually via <code>trackMediaEvent</code> if disabled via <code>captureEvents</code> or using a custom seek implementation.</p>)}</>

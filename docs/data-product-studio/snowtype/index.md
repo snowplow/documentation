@@ -42,21 +42,21 @@ Navigate to your project and install Snowtype using your favorite package manage
   <TabItem value="npm" label="npm" default>
 
 ```bash
-npm install --save-dev @snowplow/snowtype
+npm install --save-dev @snowplow/snowtype@latest
 ```
 
   </TabItem>
   <TabItem value="yarn" label="Yarn">
 
 ```bash
-yarn add --dev @snowplow/snowtype
+yarn add --dev @snowplow/snowtype@latest
 ```
 
   </TabItem>
   <TabItem value="pnpm" label="pnpm">
 
 ```bash
-pnpm add --save-dev @snowplow/snowtype
+pnpm add --save-dev @snowplow/snowtype@latest
 ```
 
   </TabItem>
@@ -70,7 +70,7 @@ Installing Snowtype will also create a local executable `snowtype` which you can
   <TabItem value="npm" label="npm" default>
 
 ```bash
-npx @snowplow/snowtype init
+npx @snowplow/snowtype@latest init
 # Same as
 npx snowtype init
 ```
@@ -79,7 +79,7 @@ npx snowtype init
   <TabItem value="yarn" label="Yarn">
 
 ```bash
-yarn @snowplow/snowtype init
+yarn @snowplow/snowtype@latest init
 # Same as
 yarn snowtype init
 ```
@@ -88,7 +88,7 @@ yarn snowtype init
   <TabItem value="pnpm" label="pnpm">
 
 ```bash
-pnpm @snowplow/snowtype init
+pnpm @snowplow/snowtype@latest init
 # Same as
 pnpm snowtype init
 ```

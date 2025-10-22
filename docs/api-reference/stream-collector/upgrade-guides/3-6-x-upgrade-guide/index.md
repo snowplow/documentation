@@ -28,3 +28,9 @@ compression {
   enabled = true
 }
 ```
+
+### Impact on metrics
+
+When compression is enabled, there will be a big decrease in the number of messages sent to the `raw` event stream, i.e. Kinesis, Pub/Sub or Event Hubs, depending on your cloud. You will notice this decrease if you monitor metrics on messages in the `raw` stream.
+
+This is perfectly normal and does not indicate any drop in event volumes. It happens because the compression feature batches together many Snowplow events into a single message sent to the `raw` stream.

@@ -37,13 +37,9 @@ When debugging a JavaScript enrichment with Micro, there are a few sources of us
 
 ### User Interface
 
-The overview will show you which events are enriched successfully and which fail:
+The Micro user interface will show you which events are enriched successfully and which fail.
 
-![Micro UI overview](../../../../../data-product-studio/data-quality/snowplow-micro/images/overview.png)
-
-For each failed event, you can also expand the details and look at the failure message:
-
-![Micro UI failure message](../../../../../data-product-studio/data-quality/snowplow-micro/images/failure-details.png)
+For each failed event, you can also click on the failure badge to look at the detailed failure message.
 
 ### Logs
 

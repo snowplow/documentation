@@ -54,8 +54,8 @@ If you are using Snowplow BDP, you don’t need to install any of the core pipel
 | [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                                          |        ${versions.lakeLoader}        |
 | [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md)            | ${versions.snowflakeStreamingLoader} |
 | [S3 Loader](/docs/api-reference/loaders-storage-targets/s3-loader/index.md)                                              |         ${versions.s3Loader}         |
-| [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md)                                                   |        ${versions.snowbridge}        |
-| [Elasticsearch Loader](/docs/api-reference/elasticsearch/index.md)                                                       |         ${versions.esLoader}         |
+| [Snowbridge](/docs/api-reference/snowbridge/index.md)                                                   |        ${versions.snowbridge}        |
+| [Elasticsearch Loader](/docs/api-reference/loaders-storage-targets/elasticsearch/index.md)                                                       |         ${versions.esLoader}         |
 | [Postgres Loader](/docs/api-reference/loaders-storage-targets/snowplow-postgres-loader/index.md)                         |      ${versions.postgresLoader}      |
 | [Dataflow Runner](/docs/api-reference/dataflow-runner/index.md)                                                          |      ${versions.dataflowRunner}      |
 `} remarkPlugins={[remarkGfm]} />
@@ -73,7 +73,7 @@ If you are using Snowplow BDP, you don’t need to install any of the core pipel
 | [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                                |        ${versions.lakeLoader}        |
 | [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md)  | ${versions.snowflakeStreamingLoader} |
 | [GCS Loader](/docs/api-reference/loaders-storage-targets/google-cloud-storage-loader/index.md)                 |        ${versions.gcsLoader}         |
-| [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md)                                         |        ${versions.snowbridge}        |
+| [Snowbridge](/docs/api-reference/snowbridge/index.md)                                         |        ${versions.snowbridge}        |
 | [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                                |        ${versions.lakeLoader}        |
 | [Postgres Loader](/docs/api-reference/loaders-storage-targets/snowplow-postgres-loader/index.md)               |      ${versions.postgresLoader}      |
 `} remarkPlugins={[remarkGfm]} />

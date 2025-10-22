@@ -34,3 +34,7 @@ import Link from '@docusaurus/Link';
     <td><code>output.good.compression</code></td>
     <td>Optional. Default value <code>snappy</code>. Compression algorithm for the uploaded staging parquet files.</td>
 </tr>
+<tr>
+    <td><code>output.good.httpTimeout</code></td>
+    <td>Optional. Default value <code>20 seconds</code>. Timeout duration of Databricks SDK's HTTP client.</td>
+</tr>

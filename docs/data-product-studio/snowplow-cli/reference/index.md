@@ -20,10 +20,10 @@ Work with Snowplow data products
 ### Options
 
 ```
-  -S, --api-key string        BDP console api key
-  -a, --api-key-id string     BDP console api key id
+  -S, --api-key string        Snowplow Console api key
+  -a, --api-key-id string     Snowplow Console api key id
   -h, --help                  help for data-products
-  -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
+  -H, --host string           Snowplow Console host (default "https://console.snowplowanalytics.com")
   -m, --managed-from string   Link to a github repo where the data structure is managed
   -o, --org-id string         Your organization id
 ```
@@ -82,8 +82,8 @@ snowplow-cli data-products add-event-spec {path} [flags]
 ### Options inherited from parent commands
 
 ```
-  -S, --api-key string        BDP console api key
-  -a, --api-key-id string     BDP console api key id
+  -S, --api-key string        Snowplow Console api key
+  -a, --api-key-id string     Snowplow Console api key id
       --config string         Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
                               Then on:
                                 Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
@@ -95,7 +95,7 @@ snowplow-cli data-products add-event-spec {path} [flags]
                                 Unix $HOME/.config/snowplow/.env
                                 Darwin $HOME/Library/Application Support/snowplow/.env
                                 Windows %AppData%\snowplow\.env
-  -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
+  -H, --host string           Snowplow Console host (default "https://console.snowplowanalytics.com")
       --json-output           Log output as json
   -m, --managed-from string   Link to a github repo where the data structure is managed
   -o, --org-id string         Your organization id
@@ -108,11 +108,11 @@ snowplow-cli data-products add-event-spec {path} [flags]
 ## Data-Products Download
 
 
-Download all data products, event specs and source apps from BDP Console
+Download all data products, event specs and source apps from Snowplow Console
 
 ### Synopsis
 
-Downloads the latest versions of all data products, event specs and source apps from BDP Console.
+Downloads the latest versions of all data products, event specs and source apps from Snowplow Console.
 
 If no directory is provided then defaults to 'data-products' in the current directory. Source apps are stored in the nested 'source-apps' directory
 
@@ -138,8 +138,8 @@ snowplow-cli data-products download {directory ./data-products} [flags]
 ### Options inherited from parent commands
 
 ```
-  -S, --api-key string        BDP console api key
-  -a, --api-key-id string     BDP console api key id
+  -S, --api-key string        Snowplow Console api key
+  -a, --api-key-id string     Snowplow Console api key id
       --config string         Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
                               Then on:
                                 Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
@@ -151,7 +151,7 @@ snowplow-cli data-products download {directory ./data-products} [flags]
                                 Unix $HOME/.config/snowplow/.env
                                 Darwin $HOME/Library/Application Support/snowplow/.env
                                 Windows %AppData%\snowplow\.env
-  -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
+  -H, --host string           Snowplow Console host (default "https://console.snowplowanalytics.com")
       --json-output           Log output as json
   -m, --managed-from string   Link to a github repo where the data structure is managed
   -o, --org-id string         Your organization id
@@ -203,8 +203,8 @@ snowplow-cli data-products generate [paths...] [flags]
 ### Options inherited from parent commands
 
 ```
-  -S, --api-key string        BDP console api key
-  -a, --api-key-id string     BDP console api key id
+  -S, --api-key string        Snowplow Console api key
+  -a, --api-key-id string     Snowplow Console api key id
       --config string         Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
                               Then on:
                                 Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
@@ -216,7 +216,7 @@ snowplow-cli data-products generate [paths...] [flags]
                                 Unix $HOME/.config/snowplow/.env
                                 Darwin $HOME/Library/Application Support/snowplow/.env
                                 Windows %AppData%\snowplow\.env
-  -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
+  -H, --host string           Snowplow Console host (default "https://console.snowplowanalytics.com")
       --json-output           Log output as json
   -m, --managed-from string   Link to a github repo where the data structure is managed
   -o, --org-id string         Your organization id
@@ -229,11 +229,11 @@ snowplow-cli data-products generate [paths...] [flags]
 ## Data-Products Publish
 
 
-Publish all data products, event specs and source apps to BDP Console
+Publish all data products, event specs and source apps to Snowplow Console
 
 ### Synopsis
 
-Publish the local version versions of all data products, event specs and source apps from BDP Console.
+Publish the local version versions of all data products, event specs and source apps from Snowplow Console.
 
 If no directory is provided then defaults to 'data-products' in the current directory. Source apps are stored in the nested 'source-apps' directory
 
@@ -260,8 +260,8 @@ snowplow-cli data-products publish {directory ./data-products} [flags]
 ### Options inherited from parent commands
 
 ```
-  -S, --api-key string        BDP console api key
-  -a, --api-key-id string     BDP console api key id
+  -S, --api-key string        Snowplow Console api key
+  -a, --api-key-id string     Snowplow Console api key id
       --config string         Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
                               Then on:
                                 Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
@@ -273,7 +273,7 @@ snowplow-cli data-products publish {directory ./data-products} [flags]
                                 Unix $HOME/.config/snowplow/.env
                                 Darwin $HOME/Library/Application Support/snowplow/.env
                                 Windows %AppData%\snowplow\.env
-  -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
+  -H, --host string           Snowplow Console host (default "https://console.snowplowanalytics.com")
       --json-output           Log output as json
   -m, --managed-from string   Link to a github repo where the data structure is managed
   -o, --org-id string         Your organization id
@@ -315,8 +315,8 @@ snowplow-cli data-products purge {directory ./data-products} [flags]
 ### Options inherited from parent commands
 
 ```
-  -S, --api-key string        BDP console api key
-  -a, --api-key-id string     BDP console api key id
+  -S, --api-key string        Snowplow Console api key
+  -a, --api-key-id string     Snowplow Console api key id
       --config string         Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
                               Then on:
                                 Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
@@ -328,7 +328,7 @@ snowplow-cli data-products purge {directory ./data-products} [flags]
                                 Unix $HOME/.config/snowplow/.env
                                 Darwin $HOME/Library/Application Support/snowplow/.env
                                 Windows %AppData%\snowplow\.env
-  -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
+  -H, --host string           Snowplow Console host (default "https://console.snowplowanalytics.com")
       --json-output           Log output as json
   -m, --managed-from string   Link to a github repo where the data structure is managed
   -o, --org-id string         Your organization id
@@ -341,11 +341,11 @@ snowplow-cli data-products purge {directory ./data-products} [flags]
 ## Data-Products Validate
 
 
-Validate data products and source applications with BDP Console
+Validate data products and source applications with Snowplow Console
 
 ### Synopsis
 
-Sends all data products and source applications from \<path\> for validation by BDP Console.
+Sends all data products and source applications from \<path\> for validation by Snowplow Console.
 
 ```
 snowplow-cli data-products validate [paths...] [flags]
@@ -370,8 +370,8 @@ snowplow-cli data-products validate [paths...] [flags]
 ### Options inherited from parent commands
 
 ```
-  -S, --api-key string        BDP console api key
-  -a, --api-key-id string     BDP console api key id
+  -S, --api-key string        Snowplow Console api key
+  -a, --api-key-id string     Snowplow Console api key id
       --config string         Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
                               Then on:
                                 Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
@@ -383,7 +383,7 @@ snowplow-cli data-products validate [paths...] [flags]
                                 Unix $HOME/.config/snowplow/.env
                                 Darwin $HOME/Library/Application Support/snowplow/.env
                                 Windows %AppData%\snowplow\.env
-  -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
+  -H, --host string           Snowplow Console host (default "https://console.snowplowanalytics.com")
       --json-output           Log output as json
   -m, --managed-from string   Link to a github repo where the data structure is managed
   -o, --org-id string         Your organization id
@@ -409,10 +409,10 @@ Work with Snowplow data structures
 ### Options
 
 ```
-  -S, --api-key string        BDP console api key
-  -a, --api-key-id string     BDP console api key id
+  -S, --api-key string        Snowplow Console api key
+  -a, --api-key-id string     Snowplow Console api key id
   -h, --help                  help for data-structures
-  -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
+  -H, --host string           Snowplow Console host (default "https://console.snowplowanalytics.com")
   -m, --managed-from string   Link to a github repo where the data structure is managed
   -o, --org-id string         Your organization id
 ```
@@ -441,11 +441,11 @@ Work with Snowplow data structures
 ## Data-Structures Download
 
 
-Download all data structures from BDP Console
+Download all data structures from Snowplow Console
 
 ### Synopsis
 
-Downloads the latest versions of all data structures from BDP Console.
+Downloads the latest versions of all data structures from Snowplow Console.
 
 Will retrieve schema contents from your development environment.
 If no directory is provided then defaults to 'data-structures' in the current directory.
@@ -486,8 +486,8 @@ snowplow-cli data-structures download {directory ./data-structures} [flags]
 ### Options inherited from parent commands
 
 ```
-  -S, --api-key string        BDP console api key
-  -a, --api-key-id string     BDP console api key id
+  -S, --api-key string        Snowplow Console api key
+  -a, --api-key-id string     Snowplow Console api key id
       --config string         Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
                               Then on:
                                 Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
@@ -499,7 +499,7 @@ snowplow-cli data-structures download {directory ./data-structures} [flags]
                                 Unix $HOME/.config/snowplow/.env
                                 Darwin $HOME/Library/Application Support/snowplow/.env
                                 Windows %AppData%\snowplow\.env
-  -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
+  -H, --host string           Snowplow Console host (default "https://console.snowplowanalytics.com")
       --json-output           Log output as json
   -m, --managed-from string   Link to a github repo where the data structure is managed
   -o, --org-id string         Your organization id
@@ -553,8 +553,8 @@ snowplow-cli data-structures generate login_click {directory ./data-structures} 
 ### Options inherited from parent commands
 
 ```
-  -S, --api-key string        BDP console api key
-  -a, --api-key-id string     BDP console api key id
+  -S, --api-key string        Snowplow Console api key
+  -a, --api-key-id string     Snowplow Console api key id
       --config string         Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
                               Then on:
                                 Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
@@ -566,7 +566,7 @@ snowplow-cli data-structures generate login_click {directory ./data-structures} 
                                 Unix $HOME/.config/snowplow/.env
                                 Darwin $HOME/Library/Application Support/snowplow/.env
                                 Windows %AppData%\snowplow\.env
-  -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
+  -H, --host string           Snowplow Console host (default "https://console.snowplowanalytics.com")
       --json-output           Log output as json
   -m, --managed-from string   Link to a github repo where the data structure is managed
   -o, --org-id string         Your organization id
@@ -585,7 +585,7 @@ Publishing commands for data structures
 
 Publishing commands for data structures
 
-Publish local data structures to BDP console.
+Publish local data structures to Snowplow Console.
 
 
 ### Options
@@ -597,8 +597,8 @@ Publish local data structures to BDP console.
 ### Options inherited from parent commands
 
 ```
-  -S, --api-key string        BDP console api key
-  -a, --api-key-id string     BDP console api key id
+  -S, --api-key string        Snowplow Console api key
+  -a, --api-key-id string     Snowplow Console api key id
       --config string         Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
                               Then on:
                                 Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
@@ -610,7 +610,7 @@ Publish local data structures to BDP console.
                                 Unix $HOME/.config/snowplow/.env
                                 Darwin $HOME/Library/Application Support/snowplow/.env
                                 Windows %AppData%\snowplow\.env
-  -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
+  -H, --host string           Snowplow Console host (default "https://console.snowplowanalytics.com")
       --json-output           Log output as json
   -m, --managed-from string   Link to a github repo where the data structure is managed
   -o, --org-id string         Your organization id
@@ -627,11 +627,11 @@ Publish data structures to your development environment
 
 ### Synopsis
 
-Publish modified data structures to BDP Console and your development environment
+Publish modified data structures to Snowplow Console and your development environment
 
-The 'meta' section of a data structure is not versioned within BDP Console.
+The 'meta' section of a data structure is not versioned within Snowplow Console.
 Changes to it will be published by this command.
-	
+
 
 ```
 snowplow-cli data-structures publish dev [paths...] default: [./data-structures] [flags]
@@ -656,8 +656,8 @@ snowplow-cli data-structures publish dev [paths...] default: [./data-structures]
 ### Options inherited from parent commands
 
 ```
-  -S, --api-key string        BDP console api key
-  -a, --api-key-id string     BDP console api key id
+  -S, --api-key string        Snowplow Console api key
+  -a, --api-key-id string     Snowplow Console api key id
       --config string         Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
                               Then on:
                                 Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
@@ -669,7 +669,7 @@ snowplow-cli data-structures publish dev [paths...] default: [./data-structures]
                                 Unix $HOME/.config/snowplow/.env
                                 Darwin $HOME/Library/Application Support/snowplow/.env
                                 Windows %AppData%\snowplow\.env
-  -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
+  -H, --host string           Snowplow Console host (default "https://console.snowplowanalytics.com")
       --json-output           Log output as json
   -m, --managed-from string   Link to a github repo where the data structure is managed
   -o, --org-id string         Your organization id
@@ -690,7 +690,7 @@ Publish data structures from your development to your production environment
 
 Data structures found on \<path...\> which are deployed to your development
 environment will be published to your production environment.
-	
+
 
 ```
 snowplow-cli data-structures publish prod [paths...] default: [./data-structures] [flags]
@@ -703,7 +703,7 @@ snowplow-cli data-structures publish prod [paths...] default: [./data-structures
 	$ snowplow-cli ds publish prod
 	$ snowplow-cli ds publish prod --dry-run
 	$ snowplow-cli ds publish prod --dry-run ./my-data-structures ./my-other-data-structures
-	
+
 ```
 
 ### Options
@@ -716,8 +716,8 @@ snowplow-cli data-structures publish prod [paths...] default: [./data-structures
 ### Options inherited from parent commands
 
 ```
-  -S, --api-key string        BDP console api key
-  -a, --api-key-id string     BDP console api key id
+  -S, --api-key string        Snowplow Console api key
+  -a, --api-key-id string     Snowplow Console api key id
       --config string         Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
                               Then on:
                                 Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
@@ -729,7 +729,7 @@ snowplow-cli data-structures publish prod [paths...] default: [./data-structures
                                 Unix $HOME/.config/snowplow/.env
                                 Darwin $HOME/Library/Application Support/snowplow/.env
                                 Windows %AppData%\snowplow\.env
-  -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
+  -H, --host string           Snowplow Console host (default "https://console.snowplowanalytics.com")
       --json-output           Log output as json
   -m, --managed-from string   Link to a github repo where the data structure is managed
   -o, --org-id string         Your organization id
@@ -742,11 +742,11 @@ snowplow-cli data-structures publish prod [paths...] default: [./data-structures
 ## Data-Structures Validate
 
 
-Validate data structures with BDP Console
+Validate data structures with Snowplow Console
 
 ### Synopsis
 
-Sends all data structures from \<path\> for validation by BDP Console.
+Sends all data structures from \<path\> for validation by Snowplow Console.
 
 ```
 snowplow-cli data-structures validate [paths...] default: [./data-structures] [flags]
@@ -769,8 +769,8 @@ snowplow-cli data-structures validate [paths...] default: [./data-structures] [f
 ### Options inherited from parent commands
 
 ```
-  -S, --api-key string        BDP console api key
-  -a, --api-key-id string     BDP console api key id
+  -S, --api-key string        Snowplow Console api key
+  -a, --api-key-id string     Snowplow Console api key id
       --config string         Config file. Defaults to $HOME/.config/snowplow/snowplow.yml
                               Then on:
                                 Unix $XDG_CONFIG_HOME/snowplow/snowplow.yml
@@ -782,7 +782,7 @@ snowplow-cli data-structures validate [paths...] default: [./data-structures] [f
                                 Unix $HOME/.config/snowplow/.env
                                 Darwin $HOME/Library/Application Support/snowplow/.env
                                 Windows %AppData%\snowplow\.env
-  -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
+  -H, --host string           Snowplow Console host (default "https://console.snowplowanalytics.com")
       --json-output           Log output as json
   -m, --managed-from string   Link to a github repo where the data structure is managed
   -o, --org-id string         Your organization id
@@ -856,12 +856,12 @@ Setup options:
 ### Options
 
 ```
-  -S, --api-key string          BDP console api key
-  -a, --api-key-id string       BDP console api key id
+  -S, --api-key string          Snowplow Console api key
+  -a, --api-key-id string       Snowplow Console api key id
       --base-directory string   The base path to use for relative file lookups. Useful for clients that pass in relative file paths.
       --dump-context            Dumps the result of the get_context tool to stdout and exits.
   -h, --help                    help for mcp
-  -H, --host string             BDP console host (default "https://console.snowplowanalytics.com")
+  -H, --host string             Snowplow Console host (default "https://console.snowplowanalytics.com")
   -m, --managed-from string     Link to a github repo where the data structure is managed
   -o, --org-id string           Your organization id
 ```
@@ -910,13 +910,13 @@ snowplow-cli setup [flags]
 ### Options
 
 ```
-  -S, --api-key string        BDP console api key
-  -a, --api-key-id string     BDP console api key id
+  -S, --api-key string        Snowplow Console api key
+  -a, --api-key-id string     Snowplow Console api key id
       --auth0-domain string   Auth0 domain (default "id.snowplowanalytics.com")
       --client-id string      Auth0 Client ID for device auth (default "EXQ3csSDr6D7wTIiebNPhXpgkSsOzCzi")
       --dotenv                Store as .env file in current working directory
   -h, --help                  help for setup
-  -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
+  -H, --host string           Snowplow Console host (default "https://console.snowplowanalytics.com")
   -m, --managed-from string   Link to a github repo where the data structure is managed
   -o, --org-id string         Your organization id
       --read-only             Create a read-only API key
@@ -965,10 +965,10 @@ snowplow-cli status [flags]
 ### Options
 
 ```
-  -S, --api-key string        BDP console api key
-  -a, --api-key-id string     BDP console api key id
+  -S, --api-key string        Snowplow Console api key
+  -a, --api-key-id string     Snowplow Console api key id
   -h, --help                  help for status
-  -H, --host string           BDP console host (default "https://console.snowplowanalytics.com")
+  -H, --host string           Snowplow Console host (default "https://console.snowplowanalytics.com")
   -m, --managed-from string   Link to a github repo where the data structure is managed
   -o, --org-id string         Your organization id
 ```
@@ -991,6 +991,3 @@ snowplow-cli status [flags]
   -q, --quiet             Log output level to Warn
   -s, --silent            Disable output
 ```
-
-
-

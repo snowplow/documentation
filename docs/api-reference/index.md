@@ -7,4 +7,4 @@ sidebar_label: "Reference"
 
 This section contains detailed technical information about Snowplow components.
 
-Some of the information is relevant only for [Community Edition](/docs/get-started/snowplow-community-edition/index.md) users, as [Snowplow](/docs/get-started/snowplow-cdi/index.md) customers won't need to configure all their own components.
+Some of the information is relevant only for [Community Edition](/docs/get-started/snowplow-community-edition/index.md) users, as [Snowplow](/docs/get-started/private-managed-cloud/index.md) customers won't need to configure all their own components.

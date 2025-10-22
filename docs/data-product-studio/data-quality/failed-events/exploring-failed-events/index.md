@@ -93,7 +93,7 @@ The instructions below are for Snowplow CDI customers. For Community Edition, yo
 
 :::note Infrastructure costs
 
-An additional stream (Kinesis, Pub/Sub or Event Hubs on AWS, GCP and Azure respectively) will be reflected in your cloud infrastructure costs (unless you are using [Snowplow Cloud](/docs/get-started/snowplow-cdi/index.md#cloud-hosted-by-snowplow)). That said, failed events are usually a tiny fraction of all events, so this stream will be minimally sized.
+An additional stream (Kinesis, Pub/Sub or Event Hubs on AWS, GCP and Azure respectively) will be reflected in your cloud infrastructure costs (unless you are using [Snowplow Cloud](/docs/get-started/private-managed-cloud/index.md#cloud-hosted-by-snowplow)). That said, failed events are usually a tiny fraction of all events, so this stream will be minimally sized.
 
 :::
 

@@ -10,22 +10,15 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Once you’ve tracked some events, you will want to look at them in your data warehouse or database. The exact steps will depend on your choice of storage and the Snowplow offering.
+Once you've tracked some events, you'll want to look at them in your data warehouse, database, or lake. The exact steps will depend on your choice of storage and your Snowplow platform.
 
-## Connection details
+For **Snowplow CDI** Private Managed Cloud or Cloud customers, you can find your connection details in [Snowplow Console](https://console.snowplowanalytics.com/destinations/catalog), under the destination you've selected.
 
-<Tabs groupId="offering" queryString>
-  <TabItem value="enterprise" label="BDP Enterprise" default>
+Follow [our querying guide](/docs/destinations/warehouses-lakes/querying-data/index.md) for advice on querying your data.
 
-You can find the connection details in the [Console](https://console.snowplowanalytics.com/destinations/catalog), under the destination you’ve selected.
+## Snowplow Self-Hosted and Community Edition
 
-  </TabItem>
-  <TabItem value="cloud" label="BDP Cloud">
-
-You can find the connection details in the [Console](https://console.snowplowanalytics.com/destinations/catalog), under the destination you’ve selected.
-
-  </TabItem>
-  <TabItem value="community" label="Community Edition">
+If you don't have access to Snowplow Console, follow these instructions to connect to your Snowplow data:
 
 <Tabs groupId="warehouse" queryString>
   <TabItem value="postgres" label="Postgres" default>
@@ -112,10 +105,3 @@ If you created a OneLake shortcut in the [last step](/docs/get-started/snowplow-
 
   </TabItem>
 </Tabs>
-
-</TabItem>
-</Tabs>
-
-## Writing queries
-
-Follow [our querying guide](/docs/destinations/warehouses-lakes/querying-data/index.md) for more information.

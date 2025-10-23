@@ -2617,16 +2617,16 @@ description: "Create compelling data visualizations and dashboards from transfor
 docs/modeling-your-data/visualization/marketing-dashboards/index.md
 description: "Build marketing performance dashboards from behavioral data for campaign analysis and optimization."
 
-docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/index.md
+docs/modeling-your-data/running-data-models-via-console/dbt/index.md
 description: "Run dbt data models through Snowplow Console for managed behavioral data transformation workflows."
 
-docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/resolving-data-model-failures/index.md
-description: "Troubleshoot and resolve dbt model failures in Snowplow BDP for reliable behavioral data processing."
+docs/modeling-your-data/running-data-models-via-console/dbt/resolving-data-model-failures/index.md
+description: "Troubleshoot and resolve dbt model failures in Snowplow CDI for reliable behavioral data processing."
 
-docs/modeling-your-data/running-data-models-via-snowplow-bdp/retrieving-job-execution-data-via-the-api/index.md
-description: "Retrieve job execution data via Snowplow BDP API for behavioral data model monitoring and debugging."
+docs/modeling-your-data/running-data-models-via-console/retrieving-job-execution-data-via-the-api/index.md
+description: "Retrieve job execution data via Snowplow CDI API for behavioral data model monitoring and debugging."
 
-docs/modeling-your-data/running-data-models-via-snowplow-bdp/index.md
+docs/modeling-your-data/running-data-models-via-console/index.md
 description: "Execute and manage data models through Snowplow Console for streamlined behavioral analytics workflows."
 
 docs/modeling-your-data/modeling-your-data-with-sql-runner/sql-runner-mobile-data-model/index.md
@@ -2944,16 +2944,16 @@ description: "Handle cookies and ad blockers in behavioral event tracking for ac
 docs/get-started/tracking/index.md
 description: "Implement behavioral event tracking across web, mobile, and server-side applications using Snowplow trackers."
 
-docs/get-started/snowplow-bdp/setup-guide-gcp/index.md
+docs/get-started/snowplow-CDI/setup-guide-gcp/index.md
 description: "Set up Snowplow Behavioral Data Platform on Google Cloud Platform for enterprise behavioral analytics infrastructure."
 
-docs/get-started/snowplow-bdp/index.md
+docs/get-started/snowplow-CDI/index.md
 description: "Get started with Snowplow Behavioral Data Platform for enterprise-scale customer data infrastructure and analytics."
 
-docs/get-started/snowplow-bdp/setup-guide-azure/index.md
+docs/get-started/snowplow-CDI/setup-guide-azure/index.md
 description: "Deploy Snowplow Behavioral Data Platform on Microsoft Azure for enterprise behavioral analytics infrastructure."
 
-docs/get-started/snowplow-bdp/setup-guide-aws/index.md
+docs/get-started/snowplow-CDI/setup-guide-aws/index.md
 description: "Set up Snowplow Behavioral Data Platform on Amazon Web Services for enterprise behavioral analytics infrastructure."
 
 docs/get-started/querying/index.md

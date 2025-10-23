@@ -1,5 +1,5 @@
 ---
-title: Tracking Setup
+title: Tracking setup
 position: 3
 ---
 

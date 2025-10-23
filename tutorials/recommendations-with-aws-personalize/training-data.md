@@ -1,14 +1,14 @@
 ---
-title: Training Data
+title: Training data
 position: 4
 ---
 
 In order for the AWS Personalize model to serve usable results, we need to give it some initial training on our actual store.
 Out of the box Personalize will have no idea about our customers or products, let alone the relationships between them and what makes a good recommendation.
 
-To solve this "cold start" problem, we need to export our catalog information for AWS Personalize to read, and give it an initial training dataset of interactions for it to build a model off of.
+To solve this "cold start" problem, we need to export our catalog information for AWS Personalize to read, and give it an initial training dataset of interactions for it to build a model from.
 
-## Creating The Cloud Infrastructures
+## Creating the cloud infrastructure
 
 From here, you have two options:
 
@@ -116,4 +116,3 @@ III. Go into the folder of the data warehouse your dbt package will be operating
     3. Run `terraform init` in this folder (i.e. `terraform_utilities/databricks/`). This will initialise Terraform and download the necessary providers.
 
     4. Due to the nature of the required role on AWS for the Databricks Storage Credentials be self referential and the current limiting factor of Terraform to create a trust policy on a new role in the same `apply` phase, the TF file for Databricks will need to be applied twice. So please run `terraform apply` and you'll see the error regarding the failure in creating the external location because the AWS IAM role does not have the READ permission on the S3 bucket TF would have just created. Upon running `terraform apply` a second time this will be amended and the external location as well as the new external catalog (with a managed location) will both be successfully created.
-

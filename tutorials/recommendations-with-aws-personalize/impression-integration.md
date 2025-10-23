@@ -1,5 +1,5 @@
 ---
-title: Impression Integration
+title: Impression integration
 position: 8
 ---
 
@@ -154,7 +154,7 @@ The custom transform then needs to be aware of them:
         if (ec.parent_name !== "recommendation-impression") return;
         items.push(ec.attributes[0].value);
       });
-      
+
       ep.Data.item_ids = items; // for simplicity we will pretend the first item was the clicked one
       ep.Data.impression_id = impressionId;
       break;

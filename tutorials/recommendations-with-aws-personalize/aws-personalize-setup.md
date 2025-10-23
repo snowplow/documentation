@@ -1,5 +1,5 @@
 ---
-title: AWS Personalize Setup
+title: AWS Personalize setup
 position: 5
 ---
 

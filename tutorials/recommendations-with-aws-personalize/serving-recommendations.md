@@ -1,5 +1,5 @@
 ---
-title: Serving Recommendations
+title: Serving recommendations
 position: 6
 ---
 

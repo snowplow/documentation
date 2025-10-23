@@ -10,9 +10,11 @@ The current supported warehouses for this tutorial are:
 - Snowflake
 - Databricks
 
-The dbt packages running on either of the above data warehouses will write/unload the models as csv files on to an AWS S3 bucket that AWS Personalize can access and import from for training datasets to create the recommendations. Currently the media tracking from Snowplow does not provide a `click` event, which prevents Personalize from generating the Video On Demand's recommendation of `More Like X` and it is also why the `click` event types won't be available in our VOD's 'interactions' datasets.
+The dbt packages running on either of the above data warehouses will write/unload the models as csv files on to an AWS S3 bucket that AWS Personalize can access and import from for training datasets to create the recommendations.
 
-Different stages of this tutorial use Python for code examples, although any programming language with support for AWS SDK can be used. 
+Currently the media tracking from Snowplow does not provide a `click` event, which prevents Personalize from generating the Video On Demand's recommendation of `More Like X` and it is also why the `click` event types won't be available in our VOD's 'interactions' datasets.
+
+Different stages of this tutorial use Python for code examples, although any programming language with support for AWS SDK can be used.
 
 Supporting files can be found at [the corresponding GitHub repository](https://github.com/snowplow-industry-solutions/ecommerce-recsys-with-amazon-personalize). In there you should find:
 
@@ -27,8 +29,8 @@ AWS Personalize generally requires custom infrastructure to run. Some of that in
 ### Permissions and Access
 - AWS: IAM permissions to create and manage IAM policies and roles.
 
-### Snowplow DBT packages
-- Snowplow: An implementation of the 'dbt-snowplow-ecommerce' and or 'dbt-snowplow-media-player' packages. These dbt packages will create the interactions tables, which is used by this dbt package to create the datasets for AWS Personalize to train its recommendations. If you don't have the interactions table, you can create it by following the instructions on the docs for e-commerce [here](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/ecommerce/) and media player [here](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/media-player/)
+### Snowplow dbt packages
+- Snowplow: An implementation of the 'dbt-snowplow-ecommerce' and or 'dbt-snowplow-media-player' packages. These dbt packages will create the interactions tables, which is used by this dbt package to create the datasets for AWS Personalize to train its recommendations. If you don't have the interactions table, you can create it by following the instructions on the docs for ecommerce [here](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/ecommerce/) and media player [here](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/media-player/)
 
 ## Third Party Applications
 ### Boto3
@@ -42,11 +44,11 @@ In your AWS account, create an access key for your user - https://docs.aws.amazo
     aws_access_key_id = YOUR_ACCESS_KEY
     aws_secret_access_key = YOUR_SECRET_KEY
     You can also ensure that if you have a config file in the .aws folder that it has the correct region in it. The file should look like this:
-    
+
     [default]
     region=YOUR_REGION
 ```
-    
+
 To use a non-default profile, you will have to specify a `AWS_PROFILE` environment variable for the later commands in this guide.
 
 ### Terraform (optional)

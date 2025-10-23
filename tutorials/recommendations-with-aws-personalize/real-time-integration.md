@@ -3,9 +3,9 @@ title: Real-time Integration
 position: 7
 ---
 
-Having recommendations being served on site and influencing behaviour, the next step is to give AWS Personalize a feed of events as they occur so it can keep up to date with its suggestions.
+Having recommendations being served on site and influencing behavior, the next step is to give AWS Personalize a feed of events as they occur so it can keep up to date with its suggestions.
 
-To do this, utilize Snowbridge to intercept events coming from the site, and send them to AWS Personalize.
+To do this, utilize [Snowbridge](/docs/api-reference/snowbridge) to intercept events coming from the site, and send them to AWS Personalize.
 
 While Snowbridge has support for making requests to HTTP APIs, it unfortunately isn't sophisticated enough to do the authentication required to send events to an AWS API, so the AWS Lambda function should be adjusted to do that part, and just have Snowbridge send the events to it.
 
@@ -37,7 +37,7 @@ target {
 }
 ```
 
-This configuration requires a `transform.js` file that will describe how to translate different e-commerce events into interactions AWS Personaize is expecting:
+This configuration requires a `transform.js` file that will describe how to translate different ecommerce events into interactions AWS Personaize is expecting:
 
 ```js
 /**
@@ -137,4 +137,4 @@ Snowbridge will:
 The Lambda will then:
 - Submit the interaction to AWS Personalize as a real-time event
 
-This allows AWS Personalize to react to new behaviour, and it will periodically retrain itself and adjust its models to accomodate the newer observations.
+This allows AWS Personalize to react to new behavior, and it will periodically retrain itself and adjust its models to accomodate the newer observations.

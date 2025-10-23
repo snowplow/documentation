@@ -1,8 +1,8 @@
 {
-  "title": "Recommendations system with AWS Personalize",
+  "title": "Build a recommendations system with AWS Personalize",
   "label": "Solution accelerator",
   "description": "Use Snowplow data to build a recommendations system with AWS Personalize.",
-  "useCases": ["Ecommerce", "Recommendations"],
-  "technologies": [],
+  "useCases": ["Real-time personalization"],
+  "technologies": ["AWS Personalize"],
   "snowplowTech": ["Snowbridge"]
 }

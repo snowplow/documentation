@@ -218,12 +218,12 @@ article[class*="markdown"] p {
   text-decoration: none;
 }
 .DocSearch-Button {
-  position: fixed;
-  top: 32px;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  max-width: 360px;
-  width: 100%;
+  position: fixed !important;
+  top: 32px!important;
+  left: 50%!important;
+  transform: translate(-50%, -50%)!important;
+  max-width: 360px!important;
+  width: 100%!important;
   border-radius: 8px !important;
   background-color: hsl(var(--accent)) !important;
   color: hsl(var(--muted-foreground)) !important;
@@ -239,15 +239,17 @@ article[class*="markdown"] p {
 }
 @media screen and (max-width: 1280px) {
   .DocSearch-Button {
-    max-width: 240px;
+    max-width: 240px!important;
   }
 }
 @media screen and (max-width: 640px) {
   .DocSearch-Button {
-    max-width: 40px;
-    position: relative;
-    left: auto;
-    transform: none;
+    max-width: 40px!important;
+    position: relative!important;
+    left: auto!important;
+    transform: none!important;
+    width: fit-content !important;
+    top: auto!important;
   }
 }
 

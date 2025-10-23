@@ -3,9 +3,6 @@ title: "Setting up Snowplow Self-Hosted"
 date: "2020-10-30"
 sidebar_position: 4
 sidebar_label: "Setting up Self-Hosted"
-sidebar_custom_props:
-  offerings:
-    - community
 ---
 
 ```mdx-code-block

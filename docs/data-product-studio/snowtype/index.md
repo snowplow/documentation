@@ -2,9 +2,6 @@
 title: "Snowtype (Code generation) - automatically generate code for Snowplow tracking SDKs"
 sidebar_position: 6
 sidebar_label: "Snowtype (Code generation)"
-sidebar_custom_props:
-  offerings:
-    - cdi
 ---
 
 ```mdx-code-block

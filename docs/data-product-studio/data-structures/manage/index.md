@@ -2,9 +2,6 @@
 title: "Managing data structures"
 sidebar_position: 1
 sidebar_label: "Manage"
-sidebar_custom_props:
-  offerings:
-    - cdi
 ---
 
 import ThemedImage from '@theme/ThemedImage';

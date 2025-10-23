@@ -2,9 +2,6 @@
 title: "Managing data structures via the API"
 sidebar_label: "Data structures API"
 sidebar_position: 3
-sidebar_custom_props:
-  offerings:
-    - cdi
 ---
 
 As well as managing [data structures](/docs/fundamentals/schemas/index.md) through Snowplow Console, Snowplow customers can also manage them programmatically through the data structures API.

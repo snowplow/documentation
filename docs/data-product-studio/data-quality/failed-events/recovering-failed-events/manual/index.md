@@ -2,9 +2,6 @@
 title: "Event Recovery for Snowplow Self-Hosted"
 sidebar_label: "Manual recovery"
 sidebar_position: 40
-sidebar_custom_props:
-  offerings:
-    - community
 description: "Low level tooling for manual event recovery in Snowplow Self-Hosted."
 ---
 

@@ -10,7 +10,6 @@ This is the source for https://docs.snowplow.io/docs.
 - [Organizing content](#organizing-content)
   - [Sidebar](#sidebar)
     - [Updating sidebar attributes for multiple sections at once](#updating-sidebar-attributes-for-multiple-sections-at-once)
-  - [Offerings](#offerings)
   - [Links](#links)
   - [Concepts](#concepts)
   - [Reusable fragments](#reusable-fragments)
@@ -142,26 +141,6 @@ ruby update_index_attributes.rb
 It'll update the `index.md` files as appropriate.
 
 You can now delete the `update_attributes_here.txt` file.
-
-### Offerings
-
-Some documentation is only relevant to a particular offering. You can indicate it like this:
-```
----
-title: ...
-...
-sidebar_custom_props:
-  offerings:
-    - cdi
-...
----
-```
-
-This will result in an icon appearing in the sidebar, as well as an automatic banner on the page, specifying that the docs only apply to a given offering.
-
-The available values are: `cdi` and `community`. Do not specify both values at once — if a piece of documentation is relevant to all offerings, there should be no `offerings` property as that’s the default.
-
-Whenever the same functionality can be achieved in multiple offerings but in a different way (e.g. managing schemas), create a parent folder (“Managing schemas”) that’s offering-neutral, and then add offering-specific pages inside it. This way, other pages can link to the generic page without having to specify different methods for different offerings.
 
 ### Links
 

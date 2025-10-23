@@ -2,9 +2,6 @@
 title: "Visualizations"
 sidebar_position: 8
 sidebar_label: "Visualizations"
-sidebar_custom_props:
-  offerings:
-    - cdi
 ---
 
 ```mdx-code-block

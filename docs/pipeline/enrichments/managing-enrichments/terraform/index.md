@@ -3,9 +3,6 @@ title: "Managing enrichments in Snowplow Self-Hosted"
 date: "2021-10-06"
 sidebar_label: "Snowplow Self-Hosted: Terraform"
 sidebar_position: 15
-sidebar_custom_props:
-  offerings:
-    - community
 ---
 
 If you have installed Snowplow via [Quick Start](/docs/get-started/self-hosted/index.md), you will have the following enrichments enabled by default:

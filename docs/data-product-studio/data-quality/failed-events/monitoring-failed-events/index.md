@@ -1,9 +1,6 @@
 ---
 title: "Monitoring failed events"
 sidebar_position: 2
-sidebar_custom_props:
-  offerings:
-    - cdi
 sidebar_label: "Monitor"
 ---
 

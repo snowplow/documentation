@@ -1,9 +1,6 @@
 ---
 title: "Managing enrichments"
 sidebar_position: 30
-sidebar_custom_props:
-  offerings:
-    - cdi
 ---
 
 

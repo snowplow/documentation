@@ -3,9 +3,6 @@ title: "Managing data structures via the CLI"
 description: "Use the 'snowplow-cli data-structures' command to manage your data structures."
 sidebar_label: "Snowplow CLI"
 sidebar_position: 2
-sidebar_custom_props:
-  offerings:
-    - cdi
 ---
 
 ```mdx-code-block

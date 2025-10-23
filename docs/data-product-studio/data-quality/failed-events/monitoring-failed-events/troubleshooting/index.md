@@ -1,9 +1,6 @@
 ---
 title: "Troubleshooting data quality dashboard"
 sidebar_position: 4
-sidebar_custom_props:
-  offerings:
-    - cdi
 sidebar_label: "Troubleshooting"
 ---
 

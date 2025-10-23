@@ -3,9 +3,6 @@ title: "Managing Data Product using Console"
 date: "2024-01-18"
 sidebar_label: "Using the UI"
 sidebar_position: 1
-sidebar_custom_props:
-  offerings:
-    - cdi
 ---
 
 ## Creating and editing a new Data Product using Console

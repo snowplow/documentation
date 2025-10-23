@@ -2,9 +2,6 @@
 title: "Setting up Snowplow CDI"
 sidebar_position: 3
 sidebar_label: "Setting up Snowplow CDI"
-sidebar_custom_props:
-  offerings:
-    - cdi
 ---
 
 To get started with Snowplow Customer Data Infrastructure, follow the **Getting Started** steps in [Snowplow Console](https://console.snowplowanalytics.com/getting-started). You will receive an account as part of your onboarding.

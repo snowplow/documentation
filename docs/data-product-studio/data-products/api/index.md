@@ -2,9 +2,6 @@
 title: "Managing Data Products via the API"
 sidebar_label: "Using the API"
 sidebar_position: 3
-sidebar_custom_props:
-  offerings:
-    - cdi
 ---
 
 As well as managing [data products](/docs/data-product-studio/data-products/index.md) through Snowplow Console, Snowplow customers can also manage them programmatically through an API.

@@ -2,9 +2,6 @@
 title: "Versioning Data Structures with the JSON Editor"
 sidebar_label: "Using the JSON Editor"
 sidebar_position: 10
-sidebar_custom_props:
-  offerings:
-    - cdi
 ---
 
 ## How do I version?

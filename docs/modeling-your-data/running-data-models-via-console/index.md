@@ -4,9 +4,6 @@ date: "2020-12-01"
 sidebar_position: 2
 description: "Guides to run data models in Snowplow, both dbt and SQL Runner."
 sidebar_label: "Running data models"
-sidebar_custom_props:
-  offerings:
-    - cdi
 ---
 
 

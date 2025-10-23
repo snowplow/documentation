@@ -73,8 +73,8 @@ This type is recommended for use with the [Data Structures API](/docs/data-produ
 
 In order to function, the extension requires:
 
-- Organization ID: this is usually found in the URL when logged into Snowplow Console. See more at [Managing Console API authentication](/docs/account-management/index.md#version-2).
-- API Key: when logged into Console, should be available in [API keys for managing Snowplow](https://console.snowplowanalytics.com/credentials) (within "Manage organization"). See more at [Managing Console API authentication](/docs/account-management/index.md#version-2).
+- Organization ID: find this under **Settings** > **Manage organization** in [Console](https://console.snowplowanalytics.com).
+- API Key: go to **Settings** > **Manage organization** in Console to manage your API keys.
 
 ## Iglu Server registries
 [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) is a more full-featured dedicated service for hosting server that is more flexible than Static Registries.

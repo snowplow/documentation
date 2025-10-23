@@ -39,7 +39,7 @@ Other failures generally fall into 3 categories:
 
 * **Bots or malicious activity**. Bots, vulnerability scans, and so on, can send completely invalid events to the Collector. The format might be wrong, or the payload size might be extraordinarily large.
 
-* **Pipeline misconfiguration**. For example, a loader could be reading from the wrong stream (with events in the wrong format). This is quite rare, unless you're self-hosting, as all relevant pipeline configuration is automatic.
+* **Pipeline misconfiguration**. For example, a loader could be reading from the wrong stream (with events in the wrong format). This is quite rare, unless you're self-hosting Snowplow, as all relevant pipeline configuration is automatic.
 
 * **Temporary infrastructure issue**. This is again rare. One example would be Iglu Server (schema registry) not being available.
 

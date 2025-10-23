@@ -38,7 +38,7 @@ Private Managed Cloud is a version of [Snowplow](https://snowplow.io) hosted in 
 
 Cloud is a hosted version of Snowplow designed to get your organization up and running and delivering value from behavioral data as quickly as possible. With Cloud, you don't need to set up any cloud infrastructure yourself.
 
-All data processed and collected with Snowplow Cloud is undertaken within Snowplow's own cloud account. We store your data for seven days to provide resilience against potential failures.
+All data processed and collected with Snowplow Cloud is undertaken within Snowplow's own cloud account.
 
 |                                             | Hosted by Snowplow | Hosted by you |
 | :------------------------------------------ | :----------------: | :-----------: |

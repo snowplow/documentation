@@ -11,9 +11,9 @@ We offer two fully featured Customer Data Infrastructure (CDI) platforms:
 * **Snowplow CDI Private Managed Cloud**: hosted in your own cloud, managed by Snowplow
 * **Snowplow CDI Cloud**: hosted and managed by Snowplow
 
-For self-hosted deployments, you can buy a production or a non-production license:
-* **Snowplow High Availability**: for production use, hosted and managed by you
+For self-hosted deployments, we have:
 * **Snowplow Community Edition**: not for production use, hosted and managed by you
+* **Snowplow Self-Hosted**: for production use, for existing Snowplow users
 
 ## Customer Data Infrastructure
 
@@ -51,11 +51,13 @@ All data processed and collected with Snowplow Cloud is undertaken within Snowpl
 
 ## Self-Hosted
 
-Choose Snowplow Self-Hosted to host and manage your Snowplow infrastructure, for complete control over your deployment. With Self-Hosted, you deploy and host everything. Many features, including the **control plane**, are not available in Self-Hosted.
+With Self-Hosted, you deploy and host everything. Many features, including the **control plane**, are not available in Self-Hosted.
 
-### High Availability
+### Community Edition
 
-Snowplow High Availability is ideal if you have an existing Snowplow deployment, and prefer to manage all upgrades and maintenance yourself. The infrastructure is provided under a proprietary, production-use license.
+Snowplow [Community Edition](/docs/get-started/self-hosted/index.md) is for **non-production** use cases. It's a starter template: use it to evaluate Snowplow for testing purposes.
+
+Community Edition infrastructure is provided under the [SLULA license](/docs/resources/copyright-license/index.md).
 
 |                                             | Hosted by Snowplow | Hosted by you |
 | :------------------------------------------ | :----------------: | :-----------: |
@@ -66,11 +68,9 @@ Snowplow High Availability is ideal if you have an existing Snowplow deployment,
 | Pipeline infrastructure (AWS / Azure / GCP) |                    |       ✅       |
 | Data destination (warehouse / lake)         |                    |       ✅       |
 
-### Community Edition
+### Production Self-Hosted license
 
-Snowplow [Community Edition](/docs/get-started/self-hosted/index.md) is for **non-production** use cases.
-
-Community Edition infrastructure is provided under the [SLULA license](/docs/resources/copyright-license/index.md).
+If you have an existing Snowplow implementation, either Community Edition or a legacy deployment, you're eligible for Snowplow Self-Hosted. It's a production-use license.
 
 |                                             | Hosted by Snowplow | Hosted by you |
 | :------------------------------------------ | :----------------: | :-----------: |

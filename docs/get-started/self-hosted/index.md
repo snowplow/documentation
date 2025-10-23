@@ -12,7 +12,7 @@ sidebar_custom_props:
 import LicenseNotice from '@site/docs/get-started/self-hosted/_license-notice.md';
 ```
 
-This page is an introduction for the Self-Hosted [Quick Start guide](docs/get-started/self-hosted/quick-start/index.md). Follow the Quick Start to set up a [Snowplow Self-Hosted](/docs/get-started/index.md#self-hosted) deployment, whether High Availability (production) or Community Edition (non-production).
+This page is an introduction for the [Self-Hosted](/docs/get-started/index.md#self-hosted) [Quick Start guide](docs/get-started/self-hosted/quick-start/index.md). Follow the Quick Start to set up a self-hosted deployment.
 
 We have built a set of [terraform](https://www.terraform.io/docs/language/modules/develop/index.html) modules, which automates the setup and deployment of the required infrastructure and applications for an operational Snowplow Community Edition pipeline, with just a handful of input variables required on your side.
 

@@ -51,14 +51,15 @@ export default function MDXContentWrapper(props) {
 
   if (offerings) {
     const names = offerings.customProps.offerings.map((o) => offeringNames[o])
-    admonitions.push(
-      <Admonition type="info" key="offering">
-        This documentation only applies to{' '}
-        <strong>{names.join(' and ')}</strong>. See the{' '}
-        <a href="/docs/feature-comparison/">feature comparison</a> page for more
-        information about the different Snowplow offerings.
-      </Admonition>
-    )
+    admonitions
+      .push
+      // <Admonition type="info" key="offering">
+      //   This documentation only applies to{' '}
+      //   <strong>{names.join(' and ')}</strong>. See the{' '}
+      //   <a href="/docs/feature-comparison/">feature comparison</a> page for more
+      //   information about the different Snowplow offerings.
+      // </Admonition>
+      ()
   }
 
   return (

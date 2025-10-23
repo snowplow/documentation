@@ -266,7 +266,7 @@ Note: If you don't have a verified certificate, you need to disable SSL verifica
 
 On AWS, the lack of auto-scaling in Kinesis results in throttled streams in case of traffic spikes and the collector starts accumulating events to retry them later. If accumulation continues long enough, the collector will run out of memory. To prevent the possibility of a broken collector, we decided to make it possible to configure an SQS buffer which can provide additional assurance during extreme traffic spikes.
 
-SQS is used to queue any message that the collector failed to send to Kinesis. The [Snowbridge application](/docs/destinations/forwarding-events/snowbridge/index.md) can then read the messages from SQS and write them to Kinesis once Kinesis is ready. In the event of any AWS API glitches, there is a retry mechanism which retries sending to the SQS queue 10 times.
+SQS is used to queue any message that the collector failed to send to Kinesis. The [Snowbridge application](/docs/api-reference/snowbridge/index.md) can then read the messages from SQS and write them to Kinesis once Kinesis is ready. In the event of any AWS API glitches, there is a retry mechanism which retries sending to the SQS queue 10 times.
 
 The keys set up for the Kinesis stream are stored as SQS message attributes in order to preserve the information.
 
@@ -299,7 +299,8 @@ Since version 3.0.0 networking settings are configured in its own `collector.net
 |--------------------------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
 | `collector.networking.maxConnections` (since *3.0.0*)        | Optional. Default: `1024`. Maximum number of concurrent active connection.                                                                         |
 | `collector.networking.idleTimeout` (since *3.0.0*)           | Optional. Default: `610 seconds`. Maximum inactivity time for a network connection. If no data is sent within that time, the connection is closed. |
-| `collector.networking.responseHeaderTimeout` (since *3.2.0*) | Optional. Default: `30 seconds`. Time from when the request is made until a response line is generated before a 503 response is returned.          |
+| `collector.networking.bodyReadTimeout` (since *3.7.0*)       | Optional. Default: `25 seconds`. Maximum time from receiving request headers to receiving end of request body.  If exceeded returns a 408 Request Timeout. |
+| `collector.networking.responseHeaderTimeout` (since *3.2.0*) | Optional. Default: `30 seconds`. Time from when the request is made until a response line is generated before a 503 response is returned. It is recommended to make this slightly larger than `bodyReadTimeout`. |
 | `collector.networking.maxRequestLineLength` (since *3.2.0*)  | Optional. Default: `20480`. Maximum request line to parse. If exceeded returns a 400 Bad Request.                                                  |
 | `collector.networking.maxHeadersLength` (since *3.2.0*)      | Optional. Default: `40960`. Maximum data that composes the headers. If exceeded returns a 400 Bad Request.                                         |
 | `collector.networking.maxPayloadSize` (since *3.3.0*)        | Optional. Default: `1048576` (1 MB). Maximum size of an event within payload allowed before emitting an Size Violation event. Returns 200 OK.      |

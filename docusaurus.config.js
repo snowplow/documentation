@@ -30,6 +30,7 @@ module.exports = {
   clientModules: [
     require.resolve('./cookieConsent.js'),
     require.resolve('./snowplow.js'),
+    require.resolve('./reoTracking.js'),
     require.resolve('./google.js'),
   ],
 
@@ -77,6 +78,7 @@ module.exports = {
         showLastUpdateTime: true,
       },
     ],
+    './plugins/docusaurus-plugin-snowplow-schema',
   ],
 
   stylesheets: [
@@ -101,8 +103,8 @@ module.exports = {
       navbar: {
         hideOnScroll: false,
         logo: {
-            alt: 'Snowplow Logo',
-            src: 'img/snowplow-logo.svg',
+          alt: 'Snowplow Logo',
+          src: 'img/snowplow-logo.svg',
         },
         items: [
           {
@@ -121,7 +123,7 @@ module.exports = {
           //   position: 'right',
           // },
           // {
-           //  href: 'https://community.snowplow.io/',
+          //  href: 'https://community.snowplow.io/',
           //   label: 'Community',
           //   position: 'right',
           // },
@@ -138,8 +140,8 @@ module.exports = {
           //   position: 'right',
           // },
           {
-             type: 'custom-docsTrackerNavbarButton',
-             position: 'left',
+            type: 'custom-docsTrackerNavbarButton',
+            position: 'left',
           },
         ],
       },
@@ -167,7 +169,6 @@ module.exports = {
                 href: '/docs/glossary/',
                 label: 'Glossary',
               },
-         
             ],
           },
           {
@@ -199,7 +200,6 @@ module.exports = {
                 label: 'Licensing Overview',
                 href: '/docs/resources/copyright-license',
               },
-             
             ],
           },
         ],
@@ -244,6 +244,18 @@ module.exports = {
         contextualSearch: true,
       },
     }),
+
+  headTags: [
+    {
+      tagName: 'meta',
+      attributes: {
+        property: 'og:image',
+        content:
+          'https://cdn.prod.website-files.com/661fd4aa0185c5022e931990/66714f936876397066d5fba7_thumbnail-post-category.avif',
+      },
+    },
+  ],
+
 
   customFields: {
     webpack: {

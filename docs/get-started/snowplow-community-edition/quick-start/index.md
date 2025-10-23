@@ -100,7 +100,7 @@ As part of the deployment, your data will be available in real-time streams corr
 | Pub/Sub | :x: | :white_check_mark: |:x: |
 | EventHubs | :x: | :x: | :white_check_mark: |
 
-For an out-of-the-box solution to accessing this data in real-time streams, you can [check out our Snowbridge tool](/docs/destinations/forwarding-events/snowbridge/index.md). Alternatively, if you want to develop a custom consumer, you can [leverage our Analytics SDKs](/docs/api-reference/analytics-sdk/index.md) to parse the event formats more easily.
+For an out-of-the-box solution to accessing this data in real-time streams, you can [check out our Snowbridge tool](/docs/api-reference/snowbridge/index.md). Alternatively, if you want to develop a custom consumer, you can [leverage our Analytics SDKs](/docs/api-reference/analytics-sdk/index.md) to parse the event formats more easily.
 
 :::note
 

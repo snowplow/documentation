@@ -1,0 +1,104 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "external_id": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 988,
+      "description": "A unique user identifier. Required if `user alias`, `braze_id`, `email`, or `phone` is not provided.",
+      "consoleDefault": "event?.user_id",
+      "consoleRequired": false
+    },
+    "braze_id": {
+      "type": "string",
+      "description": "Identifier reserved for the Braze SDK. Required if `external_id`, `user alias`, `email`, or `phone` is not provided. Not recommended for use with the Snowplow integration.",
+      "consoleRequired": false
+    },
+    "phone": {
+      "type": "string",
+      "description": "The user's phone number.",
+      "consoleRequired": false
+    },
+    "user_alias": {
+      "type": "object",
+      "properties": {
+        "alias_name": {
+          "type": "string",
+          "description": "The actual value of the alias identifier."
+        },
+        "alias_label": {
+          "type": "string",
+          "description": "Indicates the type of alias. E.g. `domain_userid`."
+        }
+      },
+      "description": "Braze user alias object.",
+      "required": ["alias_name", "alias_label"],
+      "additionalProperties": false,
+      "consoleRequired": false
+    },
+    "_update_existing_only": {
+      "type": "boolean",
+      "description": "If `true`, API requests will only update existing user profiles in Braze. `false` recommended.",
+      "consoleDefault": "false",
+      "consoleRequired": false
+    },
+    "time": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Time of the event, required. Must be ISO 8601 format.",
+      "consoleDefault": "spTstampToJSDate(event?.collector_tstamp)?.toISOString()",
+      "consoleRequired": true
+    },
+    "name": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Name of the type of event.",
+      "consoleDefault": "event?.event_name",
+      "consoleRequired": true
+    },
+    "email": {
+      "type": "string",
+      "format": "email",
+      "minLength": 1,
+      "maxLength": 75,
+      "description": "The user's email address.",
+      "consoleRequired": false
+    },
+    "app_id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Associates activity with a specific app in your Braze workspace. If set, should match a Braze App Identifier, found in Braze console's API section. Can be omitted, but incorrect values may result in data loss in Braze.",
+      "consoleRequired": false
+    },
+    "properties": {
+      "type": "object",
+      "additionalProperties": true,
+      "description": "Arbitrary key-value pairs assigned to the event in Braze.",
+      "consoleRequired": false
+    }
+  },
+  "anyOf": [
+    {
+      "oneOf": [
+        {
+          "required": ["external_id"]
+        },
+        {
+          "required": ["user_alias"]
+        },
+        {
+          "required": ["braze_id"]
+        }
+      ]
+    },
+    {
+      "required": ["phone"]
+    },
+    {
+      "required": ["email"]
+    }
+  ],
+  "required": ["name", "time"],
+  "additionalProperties": false
+}

@@ -34,7 +34,7 @@ Here is a detailed list of product features, showing which are available as part
 | • Kinesis                                                                                                                 |   ✅   |        ✅         |
 | • PubSub                                                                                                                  |   ✅   |        ✅         |
 | • Kafka / Azure Event Hubs / Confluent Cloud                                                                              |   ✅   |        ✅         |
-| <h3>Data Product Studio</h3>                                                                                              |  BDP  |   Self-Hosted    |
+| <h3>Data Product Studio</h3>                                                                                              |  CDI  |   Self-Hosted    |
 | Advanced enrichments (PII, IP anonymization, JS, API, SQL enrichments)                                                    |   ✅   | ✅ (no UI or API) |
 | [Data structures tooling and API](/docs/data-product-studio/data-structures/manage/index.md)                              |   ✅   |        ❌         |
 | [Data products](/docs/data-product-studio/data-products/index.md)                                                         |   ✅   |        ❌         |
@@ -45,7 +45,7 @@ Here is a detailed list of product features, showing which are available as part
 | QA pipeline                                                                                                               |   ✅   |  do-it-yourself  |
 | Fine-grained user permissions using access control lists                                                                  |   ✅   |        ❌         |
 | API key access                                                                                                            |   ✅   |        ❌         |
-| <h3>[Data Model Packs](/docs/modeling-your-data/visualization/index.md)</h3>                                              |  BDP  |   Self-Hosted    |
+| <h3>[Data Model Packs](/docs/modeling-your-data/visualization/index.md)</h3>                                              |  CDI  |   Self-Hosted    |
 | **Digital Analytics**                                                                                                     |       |                  |
 | Funnel builder                                                                                                            |   ✅   |        ❌         |
 | User and Marketing Analytics                                                                                              |   ✅   |        ❌         |
@@ -55,13 +55,13 @@ Here is a detailed list of product features, showing which are available as part
 | **Ecommerce Analytics**                                                                                                   |       |                  |
 | Ecommerce Analytics                                                                                                       |   ✅   |        ❌         |
 | [Ecommerce data model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md) |   ✅   |        ❌         |
-| <h3>Extensions</h3>                                                                                                       |  BDP  |   Self-Hosted    |
+| <h3>Extensions</h3>                                                                                                       |  CDI  |   Self-Hosted    |
 | Reverse ETL, powered by Census                                                                                            |   ✅   |        ❌         |
 | Audience Hub, powered by Census                                                                                           |   ✅   |        ❌         |
-| <h3>Performance and Resilience</h3>                                                                                       |  BDP  |   Self-Hosted    |
+| <h3>Performance and Resilience</h3>                                                                                       |  CDI  |   Self-Hosted    |
 | Outage Protection                                                                                                         |   ✅   |        ❌         |
 | Global Availability                                                                                                       |   ✅   |        ❌         |
-| <h3>Infrastructure and Security</h3>                                                                                      |  BDP  |   Self-Hosted    |
+| <h3>Infrastructure and Security</h3>                                                                                      |  CDI  |   Self-Hosted    |
 | **High**                                                                                                                  |       |                  |
 | HTTP access controls                                                                                                      |   ✅   |        ❌         |
 | VPC peering                                                                                                               |   ✅   |        ❌         |
@@ -72,6 +72,6 @@ Here is a detailed list of product features, showing which are available as part
 | Custom VPC integration                                                                                                    |   ✅   |        ❌         |
 | Custom IAM policy                                                                                                         |   ✅   |        ❌         |
 | Custom security agents                                                                                                    |   ✅   |        ❌         |
-| <h3>SLAs</h3>                                                                                                             |  BDP  |   Self-Hosted    |
+| <h3>SLAs</h3>                                                                                                             |  CDI  |   Self-Hosted    |
 | Collector uptime SLA                                                                                                      |   ✅   |        ❌         |
 | Warehouse loading latency SLA                                                                                             |   ✅   |        ❌         |

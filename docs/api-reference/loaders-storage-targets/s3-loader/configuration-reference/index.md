@@ -22,7 +22,7 @@ This is a complete list of the options that can be configured in the S3 loader H
 | parameter | description |
 |-----------|-------------|
 | `input.streamName`                                                | Required. Name of the kinesis stream from which to read |
-| `input.appName`                                                   | Optional. Default: `snowplow-blob-loader-aws`. Kinesis Client Lib app name (corresponds to DynamoDB table name) |
+| `input.appName`                                                   | Optional. Default: `snowplow-s3-loader`. Kinesis Client Lib app name (corresponds to DynamoDB table name) |
 | `input.initialPosition.type` (since 3.0.0)                        | Optional. Default: `TRIM_HORIZON`. Set the initial position to consume the Kinesis stream. Possible values: `LATEST` (most recent data), `TRIM_HORIZON` (oldest available data), `AT_TIMESTAMP` (start from the record at or after the specified timestamp) |
 | `input.initialPosition.timestamp` (since 3.0.0)                   | Required for `AT_TIMESTAMP`. E.g. `2020-07-17T10:00:00Z` |
 | `input.retrievalMode.type` (since 3.0.0)                          | Optional. Default: `Polling`. Set the mode for retrieving records. Possible values: `Polling` or `FanOut` |

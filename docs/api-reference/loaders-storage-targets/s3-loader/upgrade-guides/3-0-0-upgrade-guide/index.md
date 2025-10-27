@@ -11,7 +11,6 @@ import CodeBlock from '@theme/CodeBlock';
 
 S3 loader was using AWS SDK v1 which goes EOL at the end of the year.
 Bumping to AWS SDK v2 required a full rewrite of the app.
-We took the opportunity to rewrite it with [common-streams](https://github.com/snowplow-incubator/common-streams) libraries.
 
 ## Buffering
 
@@ -37,7 +36,7 @@ In `3.0.0` S3 Loader went through a major configuration refactoring. A [sample c
 
 These config fields have been removed:
 
-- `region`: it is now retrieved from the credentials provider chain.
+- `region`: it is now retrieved from the region provider chain.
 - `buffer.recordLimit`: only `maxDelay` and `maxBytes` are now used for the buffering.
 - `monitoring.snowplow`: Snowplow tracking (sending events e.g. `app_initialized` or `app_heartbeat`) got removed.
 - `output.s3.maxTimeout`

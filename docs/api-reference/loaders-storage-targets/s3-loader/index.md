@@ -52,11 +52,3 @@ Here is a standard command to run the loader on a EC2 instance in AWS:
       snowplow/snowplow-s3-loader:${versions.s3Loader} \\
       --config /snowplow/config/config.hocon
 `}</CodeBlock>
-
-### Jar
-
-JARs can be found attached to the [Github release](https://github.com/snowplow/snowplow-s3-loader/releases).
-
-<CodeBlock language="bash">{
-`java -jar snowplow-s3-loader-${versions.s3Loader}.jar --config config.hocon
-`}</CodeBlock>

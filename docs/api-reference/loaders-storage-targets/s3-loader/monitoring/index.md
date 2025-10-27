@@ -19,10 +19,10 @@ snowplow.s3loader.latency_millis:56|g|#tag1:value1
 snowplow.s3loader.e2e_latency_millis:123|g|#tag1:value1
 ```
 
-- `count_good`: the total number of events in the batch that was loaded.
-- `latency_collector_to_load`: this is the time difference between reaching the collector and getting loaded to S3 (only for enriched events).
+- `count`: total number of events that got written to S3.
+- `latency_collector_to_load`: time difference between reaching the collector and getting loaded to S3 (only for enriched events). Will get deprecated eventually in favor of `e2e_latency_millis`.
 - `latency_millis`: delay between the input record getting written to the stream and S3 loader starting to process it.
-- `e2e_latency_millis`: same as `latency_collector_to_load` (which will get deprecated eventually).
+- `e2e_latency_millis`: same as `latency_collector_to_load`, which will get deprecated eventually and replaced with this metric.
 
 Statsd monitoring is configured by setting the `monitoring.metrics.statsd` section in [the hocon file](/docs/api-reference/loaders-storage-targets/s3-loader/configuration-reference/index.md):
 

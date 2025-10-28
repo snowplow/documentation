@@ -151,6 +151,16 @@ body {
   font-weight: 400;
   letter-spacing: -0.0125em;
 }
+.main-wrapper {
+  margin-top: 1em;
+}
+main[class*=docMainContainer]>div:first-child .row {
+  margin: 0 !important;
+}
+main[class*=docMainContainer]>div:first-child .col {
+  padding: 0 2rem !important;
+}
+
 
 /* Fix MDX prose content styling - preserve Tailwind typography */
 .markdown,
@@ -212,11 +222,7 @@ article[class*="markdown"] p {
   line-height: unset !important;
 }
 
-[data-theme='dark'] .breadcrumbs__item--active .breadcrumbs__link {
-  color: var(--ifm-font-color-base);
-  background: none;
-  text-decoration: none;
-}
+
 .DocSearch-Button {
   position: fixed !important;
   top: 32px!important;
@@ -832,7 +838,7 @@ a.card:hover::after {
 }
 
 .breadcrumbs__link {
-  font-size: 16px !important;
+  font-size: .875rem !important;
   display: inline-flex;
   align-items: center;
   padding: 8px 4px;
@@ -1168,6 +1174,10 @@ from elements with a subsequent element that has a top margin. */
 }
 
 /* doc markdown grid layout control END*/
+
+div[class^=codeBlockContent] {
+  padding-top: 2rem!important;
+}
 
 .footer {
   background-color: hsl(var(--accent));

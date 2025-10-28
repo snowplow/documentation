@@ -148,7 +148,7 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
 
       <div className={cn("h-fit sticky", styles.tutorialProgressTracker, className)} style={{ zIndex: 10 }}>
         {/* Header Card */}
-      <div className="bg-indigo-950 text-white rounded-lg p-6 mb-4 leading-tight">
+      <div className="bg-accent text-foreground rounded-lg p-6 mb-4 leading-tight">
       <div className="flex flex-wrap gap-1 mb-4">
           {meta?.label && (
             <div className="bg-purple-200 text-purple-800 px-2 py-1 rounded-lg text-[.675rem] font-normal">
@@ -165,28 +165,27 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
         <h3 className="text-xl font-semibold mb-2">
           {meta?.title || 'Tutorial'}
         </h3>
-        <p className="text-slate-300 text-sm mb-4">
+        <p className="text-muted-foreground text-sm mb-4">
           {meta?.description || 'Track your progress through this tutorial'}
         </p>
 
         
 
         {/* Overall Progress Bar */}
-        <div className="mt-4">
-          <div className="flex justify-between text-xs text-slate-400 mb-1">
+        <div className="my-4">
+          <div className="flex justify-between text-xs text-muted-foreground mb-1">
             <span>Progress</span>
             <span>{Math.round(getCurrentStepProgress())}%</span>
           </div>
-          <div className="w-full bg-slate-700 rounded-full h-1.5">
+          <div className="w-full bg-muted/90 rounded-full h-1.5">
             <div
               className="bg-primary h-1.5 rounded-full transition-all duration-300"
               style={{ width: `${getCurrentStepProgress()}%` }}
             />
           </div>
         </div>
-      </div>
 
-      {/* Tutorial Steps List - Hidden on mobile since they're in the sheet */}
+              {/* Tutorial Steps List - Hidden on mobile since they're in the sheet */}
       <div className="space-y-2 hidden md:block">
         {steps.map((step, index) => {
           const isActive = isStepCurrent(step)
@@ -200,9 +199,10 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
               className={cn(
                 "flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200",
                 "hover:bg-accent/50",
-                isActive && "bg-primary/10 border border-primary/20",
-                isCompleted && "bg-transparent hover:bg-accent",
-                isFuture && "bg-transparent border border-border"
+                isActive && isCompleted && "bg-primary/10 border border-green-300/40 hover:bg-foreground/5",
+                isActive && !isCompleted && "bg-primary/25 border border-primary/20 hover:bg-foreground/5",
+                !isActive && isCompleted && "bg-transparent hover:bg-foreground/5",
+                isFuture && "bg-transparent border border-border hover:bg-foreground/5"
               )}
             >
               {/* Step Number with Radial Progress or Check */}
@@ -244,17 +244,21 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
                 </p>
               </div>
 
-              {/* Navigation Arrow */}
+              {/* Navigation Arrow 
               <ChevronRight className={cn(
                 "w-4 h-4 ml-2 flex-shrink-0",
                 isActive && "text-primary",
                 isCompleted && "text-foreground",
                 isFuture && "text-muted-foreground"
               )} />
+              */}
             </div>
           )
         })}
       </div>
+      </div>
+
+
 
 
       {/* Back to Tutorials Button - Hidden on mobile */}
@@ -311,8 +315,9 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
                   className={cn(
                     "flex items-center p-3 rounded-lg cursor-pointer transition-all duration-200",
                     "hover:bg-accent/50",
-                    isActive && "bg-primary/10 border border-primary/20",
-                    isCompleted && "bg-transparent hover:bg-accent",
+                    isActive && isCompleted && "bg-green-100/80 border border-green-300/40 hover:bg-green-100",
+                    isActive && !isCompleted && "bg-primary/10 border border-primary/20",
+                    !isActive && isCompleted && "bg-transparent hover:bg-accent",
                     isFuture && "bg-transparent border border-border"
                   )}
                 >

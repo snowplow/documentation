@@ -1088,7 +1088,7 @@ Controls the display of navbar/sidebar items
 /*START doc markdown grid layout control */
 .theme-doc-markdown {
   --padding-inline: 1rem;
-  --content-max-width: 720px;
+  --content-max-width: 740px;
   --breakout-max-width: 960px;
 
   --breakout-size: calc(
@@ -1115,7 +1115,6 @@ Controls the display of navbar/sidebar items
 }
 
 .theme-doc-markdown > .breakout,
-.theme-doc-markdown table,
 .theme-doc-markdown p:has(img, table),
 .theme-doc-markdown
   div:has(div.css-yu4ftp-MuiDataGrid-root, div.css-m0j720-MuiDataGrid-root) {

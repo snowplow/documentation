@@ -40,7 +40,7 @@ export const RadialProgress: React.FC<RadialProgressProps> = ({
           stroke="currentColor"
           strokeWidth={strokeWidth}
           fill="transparent"
-          className="text-muted/30"
+          className="text-muted/60"
         />
         {/* Progress circle */}
         <circle

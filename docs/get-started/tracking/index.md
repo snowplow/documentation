@@ -13,7 +13,7 @@ import EventComponent from '@site/src/components/FirstSteps';
 import { sampleTrackingCode } from '@site/src/components/FirstSteps/sampleTrackingCode';
 ```
 
-Once your pipeline is set up, you will want to send some events to it. Here’s an overview of the different options.
+Once your pipeline is set up, you will want to send some events to it. Here's an overview of the different options.
 
 :::tip Latency
 
@@ -33,19 +33,19 @@ This is because web browsers block traffic from HTTPS-enabled sites (such as `ht
 :::
 
 <Tabs groupId="offering" queryString>
-  <TabItem value="enterprise" label="BDP Enterprise" default>
+  <TabItem value="pmc" label="CDI Private Managed Cloud" default>
 
-You can find the Collector URL (Collector Endpoint) in the [Console](https://console.snowplowanalytics.com/environments).
-
-  </TabItem>
-  <TabItem value="cloud" label="BDP Cloud">
-
-You can find the Collector URL (Collector Endpoint) in the [Console](https://console.snowplowanalytics.com/environments).
+You can find the Collector URL (Collector endpoint) in [Console](https://console.snowplowanalytics.com/environments).
 
   </TabItem>
-  <TabItem value="community" label="Community Edition">
+  <TabItem value="cloud" label="CDI Cloud">
 
-Input the Collector URL you’ve chosen when deploying your Community Edition pipeline.
+You can find the Collector URL (Collector endpoint) in [Console](https://console.snowplowanalytics.com/environments).
+
+  </TabItem>
+  <TabItem value="self-hosted" label="Snowplow Self-Hosted">
+
+Input the Collector URL you chose when deploying your Snowplow Self-Hosted pipeline.
 
 If you have not yet configured an SSL certificate and a custom domain name for your Collector, you can use `http://<collector_dns_name>` (`http`, not `https`), where `collector_dns_name` is the output of the pipeline Terraform module.
 
@@ -81,19 +81,19 @@ The [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/i
 To use the JavaScript tracker on your site, you will need to obtain a code snippet first.
 
 <Tabs groupId="offering" queryString>
-  <TabItem value="enterprise" label="BDP Enterprise" default>
+  <TabItem value="pmc" label="CDI Private Managed Cloud" default>
 
-BDP Enterprise can automatically generate the snippet for you. Go to the [tag generator](https://console.snowplowanalytics.com/tag-generator) screen, fill in the necessary parameters, and copy the snippet at the bottom.
+CDI Private Managed Cloud can automatically generate the snippet for you. Go to the [tag generator](https://console.snowplowanalytics.com/tag-generator) screen, fill in the necessary parameters, and copy the snippet at the bottom.
 
   </TabItem>
-  <TabItem value="cloud" label="BDP Cloud">
+  <TabItem value="cloud" label="CDI Cloud">
 
 You can find the pre-generated snippet in the [Getting started](https://console.snowplowanalytics.com/environments/start-tracking-events?fromDocs) section.
 
   </TabItem>
-  <TabItem value="community" label="Community Edition">
+  <TabItem value="self-hosted" label="Snowplow Self-Hosted">
 
-Take note of the Collector URL you’ve chosen when deploying your Community Edition pipeline.
+Take note of the Collector URL you’ve chosen when deploying your Snowplow Self-Hosted pipeline.
 
 If you have not yet configured an SSL certificate and a custom domain name for your Collector, you can use `http://<collector_dns_name>` (`http`, not `https`), where `collector_dns_name` is the output of the pipeline Terraform module.
 

@@ -45,7 +45,7 @@ We also appreciate if you provide your email (or just a UUID) in the `user_provi
 ## Which components have telemetry?
 
 At the moment, opt-out telemetry is present in the following:
-* Terraform modules for the [quick start guide](/docs/get-started/snowplow-community-edition/quick-start/index.md).
+* Terraform modules for the [quick start guide](/docs/get-started/self-hosted/quick-start/index.md).
 * [Collector](/docs/api-reference/stream-collector/setup/index.md).
 * Enrich ([Enrich Kinesis](/docs/api-reference/enrichment-components/enrich-kinesis/index.md), [Enrich PubSub](/docs/api-reference/enrichment-components/enrich-pubsub/index.md), [Enrich Kafka](/docs/api-reference/enrichment-components/enrich-kafka/index.md).
 * RDB Loader ([Transformer Kinesis](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/stream-transformer/transformer-kinesis/index.md), [Transformer PubSub](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/stream-transformer/transformer-pubsub/index.md), [Redshift Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/redshift-loader/index.md), [Snowflake Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/snowflake-loader/index.md), [Databricks Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/databricks-loader/index.md)).

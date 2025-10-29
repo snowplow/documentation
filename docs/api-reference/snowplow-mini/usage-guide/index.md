@@ -198,7 +198,7 @@ where `service_name` can be one of the following: `collector`, `enrich`, `esLoad
 
 ## Configuring telemetry
 
-See our [telemetry principles](/docs/get-started/snowplow-community-edition/telemetry/index.md) for more information on telemetry.
+See our [telemetry principles](/docs/get-started/self-hosted/telemetry/index.md) for more information on telemetry.
 
 HTTP GET to get current configuration
 

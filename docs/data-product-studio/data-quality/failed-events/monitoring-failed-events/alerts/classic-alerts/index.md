@@ -12,11 +12,11 @@ Snowplow can send two types of pipeline alerts to help you monitor failed events
 - **Failed event digest**: receive a daily digest of all failed event activity in the previous 48-hour period.
 
 
-To receive alerts you must have the failed events [monitoring](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/index.md) feature switched on in Snowplow BDP Console.
+To receive alerts you must have the failed events [monitoring](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/index.md) feature switched on in Snowplow Console.
 
 ## Subscribing to alerts
 
-- Login to Snowplow BDP console
+- Login to Snowplow Console
 - Locate the pipeline you wish to set up alerts for in the left-hand navigation
 - Click on the `Configuration` tab, then the `Pipeline alerts` section
 

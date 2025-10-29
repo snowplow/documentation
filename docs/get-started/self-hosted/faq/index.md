@@ -1,5 +1,5 @@
 ---
-title: "Community Edition quick start: frequently asked questions"
+title: "Snowplow Self-Hosted quick start: frequently asked questions"
 sidebar_label: "Frequently asked questions"
 sidebar_position: 5
 ---

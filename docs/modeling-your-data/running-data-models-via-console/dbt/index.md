@@ -1,5 +1,5 @@
 ---
-title: "Running custom dbt models via Snowplow BDP"
+title: "Running custom dbt models via Snowplow CDI"
 sidebar_label: "Custom models"
 sidebar_position: 2
 ---
@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 ### Overview
 
-If you are a Snowplow BDP customer, you can get started with configuring and deploying dbt projects as outlined in the steps below. For more information about setting up your dbt project you can look at the [Snowplow dbt docs](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md).
+If you are a Snowplow CDI customer, you can get started with configuring and deploying dbt projects as outlined in the steps below. For more information about setting up your dbt project you can look at the [Snowplow dbt docs](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md).
 
 As an initial overview, in your snowplow-pipeline repository, your data models reside in the dbt directory. To start with, your GitHub repository will look like this (you may have additional folders based on your project e.g. `dbt_packages` or `docs`):
 
@@ -46,11 +46,11 @@ When the schedule kicks off, the data model configuration is loaded and validate
 
 :::
 
-Read below for more details on the steps to configure and run your dbt data models with Snowplow BDP.
+Read below for more details on the steps to configure and run your dbt data models with Snowplow.
 
 ### 1. Setup your dbt profile
 
-You need to provide your prod connection profile for the warehouse you are connecting to in the `profiles.yml` file for **each datamodel**. Ensure that your profile and target are set to `prod`. See [the dbt adapters docs](https://docs.getdbt.com/docs/supported-data-platforms#verified-adapters) for more specific configuration information for each database.
+You need to provide your prod connection profile for the warehouse you are connecting to in the `profiles.yml` file for **each data model**. Ensure that your profile and target are set to `prod`. See [the dbt adapters docs](https://docs.getdbt.com/docs/supported-data-platforms#verified-adapters) for more specific configuration information for each database.
 
 <Tabs groupId="warehouse" queryString>
 <TabItem value="redshift" label="Redshift" default>
@@ -159,7 +159,7 @@ profile_name:
 
 :::info
 
-The warehouse password should be sent by [secure form from the Snowplow BDP Console](https://console.snowplowanalytics.com/secure-messaging/freeform) in order to set the environment variables.
+The warehouse password should be sent by [secure form from Snowplow Console](https://console.snowplowanalytics.com/secure-messaging/freeform) in order to set the environment variables.
 
 :::
 
@@ -173,7 +173,7 @@ import DbtPrivs from "@site/docs/reusable/dbt-privs/_index.md"
 
 ### 2. The data modeling configuration
 
-Data models can be configured via the [Data Models](https://console.snowplowanalytics.com/data-models) page in Snowplow BDP Console:
+Data models can be configured via the [Data Models](https://console.snowplowanalytics.com/data-models) page in Snowplow Console:
 
 ![](images/data-models-navbar.png)
 
@@ -234,7 +234,7 @@ Please make sure all your dbt project files are merged to the default branch in 
 
 ### 3. Model execution
 
-Once everything is set up, Snowplow BDP Console will run the following commands in this order:
+Once everything is set up, Console will run the following commands in this order:
 1. `dbt deps` (if a `packages.yml` file is present)
 2. `dbt seed`
 3. `dbt snapshot`
@@ -243,6 +243,6 @@ Once everything is set up, Snowplow BDP Console will run the following commands 
 
 This ensures that the correct package dependencies are installed, that seeds are uploaded and refreshed, that snapshots are taken, that the dbt models are created, and that all specified tests are run.
 
-### 4. Monitor your model in the Snowplow BDP Console
+### 4. Monitor your model in Console
 
-After everything has been set up and has executed, you can now monitor your data models running against your data warehouse from the Snowplow BDP Console, in the Jobs UI! There you can see the data modeling DAG generated, and monitor the status, duration and run times of the data model. You can also browse through the logs that dbt generates during it's runs. If all seeds, snapshots, models, and tests pass you will see the `Result: SUCCEEDED` status in the Jobs UI. If any of the steps fail (including tests that result in a warning), you will see the `Result: FAILED` status.
+After everything has been set up and has executed, you can now monitor your data models running against your data warehouse from Console, in the Jobs UI. There you can see the data modeling DAG generated, and monitor the status, duration and run times of the data model. You can also browse through the logs that dbt generates during it's runs. If all seeds, snapshots, models, and tests pass you will see the `Result: SUCCEEDED` status in the Jobs UI. If any of the steps fail (including tests that result in a warning), you will see the `Result: FAILED` status.

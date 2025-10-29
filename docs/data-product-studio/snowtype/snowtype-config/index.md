@@ -35,7 +35,7 @@ The Data Product IDs you wish to generate tracking code for. By providing the Da
 
 ### `organizationId`
 
-The Organization ID for your Snowplow BDP account. The Organization ID is a UUID that can be retrieved from the URL immediately following the .com when visiting console.
+The Organization ID for your Snowplow account. The Organization ID is a UUID that can be retrieved from the URL immediately following the .com when visiting console.
 
 ### `tracker`
 

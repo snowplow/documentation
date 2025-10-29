@@ -17,9 +17,9 @@ When you install Snowplow via Quick Start, several enrichments are enabled by de
 - **UA Parser**: parses user-agent strings into structured data.
 - **Page View ID**: adds a unique identifier to each page view event
 
-## Managing Enrichments via BDP
+## Managing Enrichments via Console
 
-To start managing Enrichments in our hosted BDP platform, follow these steps:
+To start managing Enrichments in our hosted CDI platform UI, Snowplow Console, follow these steps:
 
 1. Navigate to the environment you'd like to manage
 2. Select *Enrichments* in the environment menu.

@@ -79,7 +79,7 @@ In this example event specification `All source apps` is related to both `generi
 ```bash
 ./snowplow-cli dp download
 ```
-This command retrieves all organization data products, event specifications, and source applications. By default, it creates a folder named `data-products` in your current working directory. You can specify a different folder name as an argument if needed. 
+This command retrieves all organization data products, event specifications, and source applications. By default, it creates a folder named `data-products` in your current working directory. You can specify a different folder name as an argument if needed.
 The command creates the following structure:
 - A main `data-products` folder containing your data product files
 - A `source-apps` subfolder containing source application definitions
@@ -88,7 +88,7 @@ The command creates the following structure:
 ```bash
 ./snowplow-cli dp validate
 ```
-This command scans all files under `./data-products` and validates them using the BDP console. It checks:
+This command scans all files under `./data-products` and validates them using Snowplow Console. It checks:
 1. Whether each file is in a valid format (YAML/JSON) with correctly formatted fields
 2. Whether all source application references in the data product files are valid
 3. Whether event specification rules are compatible with their schemas
@@ -97,4 +97,4 @@ If validation fails, the command displays the errors in the console and exits wi
 ```bash
 ./snowplow-cli dp publish
 ```
-This command locates all files under `./data-products`, validates them, and publishes them to the BDP console.
+This command locates all files under `./data-products`, validates them, and publishes them to Console.

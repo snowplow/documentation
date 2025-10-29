@@ -10,7 +10,7 @@ Abandoned browse is a common ecommerce problem where users show interest in prod
 
 ---
 
-This tutorial demonstrates how to implement an abandoned browse tracking and re-engagement system using [Snowplow](https://snowplow.io/), [Snowflake](https://www.snowflake.com/), and [Census](https://www.getcensus.com/). This solution helps ecommerce businesses identify and re-engage users who have shown interest in a product (e.g., viewed something for 10+ seconds) but haven't proceeded further. 
+This tutorial demonstrates how to implement an abandoned browse tracking and re-engagement system using [Snowplow](https://snowplow.io/), [Snowflake](https://www.snowflake.com/), and [Census](https://www.getcensus.com/). This solution helps ecommerce businesses identify and re-engage users who have shown interest in a product (e.g., viewed something for 10+ seconds) but haven't proceeded further.
 
 ---
 ![Composable CDP](images/retl-snowplow-composable-cdp.png)
@@ -20,10 +20,10 @@ This tutorial demonstrates how to implement an abandoned browse tracking and re-
 ## Prerequisites
 
 - An ecommerce website with a product catalog to track events from
-- **Snowplow instance**:  
-    - [Localstack](https://github.com/snowplow-incubator/snowplow-local) (recommended)  
-    - [Community edition](/docs/get-started/snowplow-community-edition)  
-    - BDP Enterprise if you're already a customer  
+- **Snowplow instance**:
+    - [Localstack](https://github.com/snowplow-incubator/snowplow-local) (recommended)
+    - [Community edition](/docs/get-started/snowplow-community-edition)
+    - Snowplow CDI if you're already a customer
 - **Access to a data warehouse**: e.g., [Snowflake](https://www.snowflake.com)
 - **Reverse ETL**: [Census Reverse ETL](https://www.getcensus.com) or Snowplow Reverse ETL
 - **Marketing automation platform**: e.g., [Braze](https://www.braze.com)

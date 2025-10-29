@@ -59,7 +59,7 @@ You can also use optional flags:
 
 If you prefer manual configuration, you will need these values:
 
-* An API Key ID and the corresponding API Key (secret), which are generated from the [credentials section](https://console.snowplowanalytics.com/credentials) in BDP Console.
+* An API Key ID and the corresponding API Key (secret), which are generated from the [credentials section](https://console.snowplowanalytics.com/credentials) in Console.
 * Your Organization ID, which you can find [on the _Manage organization_ page](https://console.snowplowanalytics.com/settings) in Console.
 
 Snowplow CLI can take its configuration from a variety of sources. More details are available from `./snowplow-cli data-structures --help`. Variations on these three examples should serve most cases.

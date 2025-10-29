@@ -1,14 +1,11 @@
 ---
-title: "Managing enrichments in Snowplow Community Edition"
+title: "Managing enrichments in Snowplow Self-Hosted"
 date: "2021-10-06"
-sidebar_label: "Community Edition: Terraform"
+sidebar_label: "Snowplow Self-Hosted: Terraform"
 sidebar_position: 15
-sidebar_custom_props:
-  offerings:
-    - community
 ---
 
-If you have installed Snowplow via [Quick Start](/docs/get-started/snowplow-community-edition/what-is-quick-start/index.md), you will have the following enrichments enabled by default:
+If you have installed Snowplow via [Quick Start](/docs/get-started/self-hosted/index.md), you will have the following enrichments enabled by default:
 
 - [UA parser](/docs/pipeline/enrichments/available-enrichments/ua-parser-enrichment/index.md)
 - [YAUAA](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md)

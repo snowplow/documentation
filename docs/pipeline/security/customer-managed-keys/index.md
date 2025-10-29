@@ -7,7 +7,7 @@ This guide provides step-by-step instructions for setting up AWS KMS (Key Manage
 
 :::note
 
-This is a bolt-on security feature available for enterprise customers using BDP PMC (Private Managed Cloud) or BDP Cloud deployments.
+This is a bolt-on security feature available for enterprise customers using CDI Private Managed Cloud or CDI Cloud deployments.
 
 :::
 

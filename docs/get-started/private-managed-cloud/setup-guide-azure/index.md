@@ -1,15 +1,13 @@
 ---
-title: "BDP Enterprise on Azure"
+title: "Private Managed Cloud on Azure"
 sidebar_position: 30
 ---
 
-## Request your pipeline through Snowplow BDP Console
-
-Login to Snowplow BDP Console where you'll be able to follow a step-by-step guide to getting started (including the steps below).
+To set up Snowplow, log in to Snowplow [Console](https://console.snowplowanalytics.com) where you'll be able to follow a step-by-step guide to getting started, including the steps below.
 
 ## Setting up your Azure account
 
-To get your cloud environment ready for your Snowplow pipeline to be installed:
+The following steps explain how to set up your cloud environment ready for your Snowplow pipeline to be installed.
 
 ### Create a new subscription
 
@@ -23,21 +21,21 @@ Enable billing in the tenant by creating a subscription. Otherwise, the pipeline
 
 Snowplow deploys into your tenant using a verified [application service principal](https://learn.microsoft.com/en-us/entra/identity-platform/app-objects-and-service-principals?tabs=browser#service-principal-object) (Enterprise application). We require a custom role to be assigned to the application service principal. This will allow us to create custom pipeline roles needed for deploying and managing different components of your infrastructure.
 
-#### Consent to Snowplow BDP Enterprise Deployment application
+#### Consent to Snowplow Private Managed Cloud Deployment application
 
 You will need to grant our verified application service principal the access into your Azure tenant. Once that’s done, you should see the application service principal under _Microsoft Entra ID_ → _Enterprise Applications_.
 
 1. Grab your Azure tenant ID by navigating to Microsoft Entra ID
-2. Complete the consent URL where `<TenantID>` is your tenant ID. The `client_id` set is for “Snowplow BDP Enterprise Deployment” application service principal. Go to this URL in a browser window
+2. Complete the consent URL where `<TenantID>` is your tenant ID. The `client_id` set is for “Snowplow Private Managed Cloud Deployment” application service principal. Go to this URL in a browser window
     ```
     https://login.microsoftonline.com/<TenantID>/oauth2/authorize?client_id=0581feb4-b614-42c7-b8e7-b4e7fba9153a&response_type=code
     ```
 3. A consent window will appear detailing that an Enterprise application is being set up in your tenant. It needs to be accepted by your Azure tenant admin for the organization (there is a tick box that must be ticked). After accepting, Microsoft redirects you to a page unrelated to the Azure Portal, so close this window
-4. Verify the trust has been established by viewing “Snowplow BDP Enterprise Deployment” application in the Enterprise Applications section of Entra ID
+4. Verify the trust has been established by viewing “Snowplow Private Managed Cloud Deployment” application in the Enterprise Applications section of Entra ID
 
 #### Create and assign role to application service principal
 
-Create a custom role and assign it the “Snowplow BDP Enterprise Deployment” application service principal under your subscription. This grants the permission to create distinct roles for deploying and managing infrastructure resources that make up your pipeline.
+Create a custom role and assign it the “Snowplow Private Managed Cloud Deployment” application service principal under your subscription. This grants the permission to create distinct roles for deploying and managing infrastructure resources that make up your pipeline.
 
 1. Navigate to your newly created subscription
 2. Click into “Access Control (IAM)”
@@ -71,7 +69,7 @@ Create a custom role and assign it the “Snowplow BDP Enterprise Deployment” 
     }
     ```
 5. Within “Access Control (IAM)”, click “Add role assignment”
-6. Assign the `Snowplow-Deployment-Role-Creator-Role` to service principal “Snowplow BDP Enterprise Deployment”. The role can be found under the “Privileged administrator roles” tab. The Conditions tab should be selected and you must select the third option. This is required to enable the [Lighthouse Offer to be created as detailed in Microsoft documentation](https://learn.microsoft.com/en-us/azure/lighthouse/how-to/deploy-policy-remediation#create-a-user-who-can-assign-roles-to-a-managed-identity-in-the-customer-tenant:~:text=To%20allow%20a,Administrator%20or%20Owner)
+6. Assign the `Snowplow-Deployment-Role-Creator-Role` to service principal “Snowplow Private Managed Cloud Deployment”. The role can be found under the “Privileged administrator roles” tab. The Conditions tab should be selected and you must select the third option. This is required to enable the [Lighthouse Offer to be created as detailed in Microsoft documentation](https://learn.microsoft.com/en-us/azure/lighthouse/how-to/deploy-policy-remediation#create-a-user-who-can-assign-roles-to-a-managed-identity-in-the-customer-tenant:~:text=To%20allow%20a,Administrator%20or%20Owner)
 ![IAM role assignment conditions](./images/azure_role_assignment_conditions.png)
 
 ### Determine if Snowplow requires a specific VPC (optional)

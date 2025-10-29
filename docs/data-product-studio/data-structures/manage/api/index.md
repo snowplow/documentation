@@ -2,12 +2,9 @@
 title: "Managing data structures via the API"
 sidebar_label: "Data structures API"
 sidebar_position: 3
-sidebar_custom_props:
-  offerings:
-    - bdp
 ---
 
-As well as managing [data structures](/docs/fundamentals/schemas/index.md) through the Snowplow BDP Console, Snowplow BDP customers can also manage them programmatically through the data structures API.
+As well as managing [data structures](/docs/fundamentals/schemas/index.md) through Snowplow Console, Snowplow customers can also manage them programmatically through the data structures API.
 
 This functionality is key to automating any existing process you may have, including workflows in version control systems like GitHub.
 

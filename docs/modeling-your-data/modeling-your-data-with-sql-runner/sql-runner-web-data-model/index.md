@@ -37,7 +37,7 @@ Password can be left as a `PASSWORD_PLACEHOLDER`, and set as an environment var
 
 Variables in each module's playbook can also optionally be configured also. See each playbook directory's README for more detail on configuration of each module.
 
-You can then run the model, either by running playbooks individually by running SQL-runner locally, or via your Snowplow BDP GitHub repository. Of course, as a Snowplow BDP customer you can also reach out to Support to get the model deployed for you.
+You can then run the model, either by running playbooks individually by running SQL-runner locally, or via your Snowplow GitHub repository. Of course, as a Snowplow customer you can also reach out to Support to get the model deployed for you.
 
 ## Technical architecture
 

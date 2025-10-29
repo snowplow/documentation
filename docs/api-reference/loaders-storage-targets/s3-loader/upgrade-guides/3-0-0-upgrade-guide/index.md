@@ -9,26 +9,51 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-S3 loader was using AWS SDK v1 which goes EOL at the end of the year.
+S3 loader was using AWS SDK v1 which goes EOL at the end of 2025.
 Bumping to AWS SDK v2 required a full rewrite of the app.
 
 ## Buffering
 
-S3 loader buffers the events into memory before writing them to disk. There are 2 key differences between the previous loader and the new one:
+S3 loader buffers the events into memory before writing them to S3. There are 2 key differences between the previous loader and the new one:
 
-- In the previous loader we had one buffer per shard, each buffer getting written to one file. In the new loader, records from all the shards go to the same buffer and file. The consequence is that the new loader writes fewer bigger files.
+- In the previous loader we had one buffer per Kinesis shard, each buffer getting written to one file. In the new loader, records from all the Kinesis shards go to the same buffer and file. The consequence is that the new loader writes fewer but bigger files.
 
 - In the previous loader, records were compressed after the buffer was full, before getting written to disk. In the new loader, records get compressed before getting added to the buffer. The consequence is that the new loader writes bigger files (very close to `maxBytes` if this limit is reached before `maxDelay`).
 
-![differences in buffering](@site/static/img/s3-loader-3.x.jpeg)
+```mermaid
+flowchart LR
+  subgraph "Old S3 loader"
+    buffer1["buffer"]
+    buffer2["buffer"]
+    buffer3["buffer"]
+  end
+  shard1["Kinesis shard"] --> buffer1 -->|"compression"| file1["file/"]
+  shard2["Kinesis shard"] --> buffer2 -->|"compression"| file2["file/"]
+  shard3["Kinesis shard"] --> buffer3 -->|"compression"| file3["file/"]
+  classDef noborder stroke:none,fill:none
+  class shard1,shard2,shard3,file1,file2,file3 noborder
+```
+
+```mermaid
+flowchart LR
+  subgraph "New S3 loader"
+    buffer["buffer"]
+  end
+  shard1["Kinesis shard"] & shard2["Kinesis shard"] & shard3["Kinesis shard"] -->|"compression"| buffer --> file["file/"]
+  classDef noborder stroke:none,fill:none
+  class shard1,shard2,shard3,file noborder
+
+```
 
 ## LZO deprecation
 
-Starting from `3.0.0` S3 loader should only be used to load enriched events and bad rows (no more `purpose = "RAW"`).
-LZO compression format is not supported any more and only the following Docker images with GZIP get published:
+Starting from version `3.0.0`, S3 loader should only be used to load enriched events and bad rows (no more `purpose = "RAW"`).
+The reason for this is that storing the events emitted by the collector is redundant and it is not compatible with features that we have on the roadmap.
+LZO compression format is not supported any more (it was used in old batch pipelines).
+Only the following Docker images with GZIP get published:
 
-- <p><code>{`snowplow/snowplow-s3-loader:${versions.s3Loader22x}`}</code></p>
-- <p><code>{`snowplow/snowplow-s3-loader:${versions.s3Loader22x}-distroless`}</code> (lightweight alternative)</p>
+- <p><code>{`snowplow/snowplow-s3-loader:${versions.s3Loader}`}</code></p>
+- <p><code>{`snowplow/snowplow-s3-loader:${versions.s3Loader}-distroless`}</code> (lightweight alternative)</p>
 
 ## Config file
 

@@ -136,6 +136,21 @@ This is an array of strings used to turn on tracking. Any form with a CSS class 
 
 This is a function used to determine which elements are tracked. The element is passed as the argument to the function and is tracked if and only if the value returned by the function is truthy.
 
+**Event phase**
+
+From v4 onwards, this plugin uses [capture-phase](https://developer.mozilla.org/en-US/docs/Web/API/Event/eventPhase#value) event listeners to detect form events.
+The capture phase is the earliest phase of event handlers, so events might be tracked before other code executes (e.g. form validation).
+If your filter or transform functions are relying on other event handlers to have executed to function correctly, they may not behave as expected when using capture-phase event handlers.
+
+From v4.6.8 onwards, the plugin supports a `useCapture` option, which you can set to `false` (default is `true`) to revert to the v3 behavior of using bubble-phase event handlers.
+This allows other event handlers time to execute before the event is detected and your filter/transform functions are executed.
+
+When using the bubble phase, other event handlers may [cancel the event's propagation](https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation) and the plugin will not receive the event and nothing will be tracked.
+This may be desirable if you want to wait for the form to validate before tracking a "form_submit" event, for example.
+Native HTML form validation automatically prevents the "submit" event firing until the form is valid, so only validation code that doesn't integrate with native APIs should require explicitly using the bubble phase.
+
+The `focus` event for form fields [does not bubble](https://developer.mozilla.org/en-US/docs/Web/API/Element/focus_event), so this setting is ignored for `form_focus` tracking, which will always use capture-phase event listeners; only "change" and "submit" handlers will use the bubble phase when setting `useCapture: false`.
+
 ### Transform functions
 
 This is a function used to transform data in each form field. The value and element are passed as arguments to the function and the tracked value is replaced by the value returned.
@@ -333,6 +348,26 @@ var options = {
 };
 
 enableFormTracking({ options });
+```
+  </TabItem>
+</Tabs>
+
+To use the bubble-phase event listeners:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('enableFormTracking', { options: { useCapture: false } });
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { enableFormTracking } from '@snowplow/browser-plugin-form-tracking';
+
+enableFormTracking({ options: { useCapture: false } });
 ```
   </TabItem>
 </Tabs>

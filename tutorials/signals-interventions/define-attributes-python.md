@@ -4,6 +4,11 @@ title: Define attributes and service with Python
 description: "Use the Signals Python SDK to programmatically define real-time ecommerce attributes."
 ---
 
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
 In this section, you'll define [attributes](/docs/signals/concepts/#attribute-groups) that calculate real-time user behavior metrics from ecommerce events. These attributes will track product views, cart additions, and cart value.
 
 You'll create three attributes to track user shopping behavior:
@@ -176,7 +181,7 @@ stream_service = Service(
 
 ## Publish to Signals
 
-Now publish both the attribute group and service to your Sandbox:
+Now publish both the attribute group and service to your Signals instance:
 
 ```python
 sp_signals.publish([attribute_group, stream_service])

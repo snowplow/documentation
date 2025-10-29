@@ -1,6 +1,6 @@
 {
-  "title": "Try Signals with the Sandbox demo",
-  "description": "Get hands-on with Signals using the Sandbox environment and demo e-shop application.",
+  "title": "Implement Real-Time Interventions in an Ecommerce App Using Signals",
+  "description": "Get hands-on with Signals interventions and a demo e-shop application.",
   "label": "Signals implementation",
   "useCases": ["Real-time personalization"],
   "technologies": ["Python", "Jupyter notebook", "React"],

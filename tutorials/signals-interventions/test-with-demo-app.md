@@ -103,7 +103,7 @@ To configure the extension to show Signals attributes and interventions:
 1. In Chrome, navigate to [the Extensions settings page](chrome://extensions/).
 2. Click on "Details" for the Snowplow Inspector extension.
 3. Scroll down and click on "Extension options".
-4. Open "Advanced options" and enter you Signals Sandbox URL and token.
+4. Open "Advanced options" and enter your Signals Sandbox URL and token.
 
 ![Screenshot showing the Snowplow Inspector extension options page with fields to enter Signals API URL and Token.](./images/inspector-advanced-options.png)
 

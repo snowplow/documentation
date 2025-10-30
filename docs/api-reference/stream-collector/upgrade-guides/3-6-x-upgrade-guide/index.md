@@ -31,7 +31,7 @@ compression {
 
 :::tip
 
-Take note of the `streams.buffer.timeLimit` Collector configuration parameter, which already existed in previous versions. This controls how many events are batched (or, technically, for how long) before appling compression. Bigger values lead to higher compression rates (lower infrastructure costs), but also higher latency. We recommend starting with a value around 300ms and fine-tuning it from there.
+Take note of the `streams.buffer.timeLimit` Collector configuration parameter, which already existed in previous versions. This controls how many events are batched (or, technically, for how long) before appling compression. Bigger values lead to higher compression rates (lower infrastructure costs), but also higher latency. We recommend starting with a value around 300–500ms and fine-tuning it from there.
 
 :::
 

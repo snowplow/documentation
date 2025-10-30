@@ -34,14 +34,14 @@ Enter your credentials from the setup step.
 <Tabs groupId="connection" queryString>
 <TabItem value="console" label="Snowplow Console" default>
 
-* **Collector URL**: your Snowplow Collector endpoint for the pipeline you enabled Signals on
+* **Collector URL**: your Snowplow Collector endpoint for the pipeline you enabled Signals on (see the "Pipelines" section in Snowplow Console)
 * **Profiles API URL**: your Signals API URL (from Snowplow Console > **Signals** > **Overview**)
 
 </TabItem>
 <TabItem value="sandbox" label="Signals Sandbox">
 
-* **Collector URL**: your Snowplow Collector endpoint
-* **Profiles API URL**: your Signals Profiles API endpoint
+* **Collector URL**: your Snowplow Collector endpoint provided by Signals Sandbox
+* **Profiles API URL**: your Signals Profiles API endpoint provided by Signals Sandbox
 
 </TabItem>
 </Tabs>

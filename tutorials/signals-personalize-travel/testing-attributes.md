@@ -21,7 +21,9 @@ Start by generating events on your travel website:
 
 ## Check attribute values
 
-Open your browser's developer console (Ctrl+Shift+I or equivalent) and navigate to the Snowplow Inspector tab:
+Open your browser's developer console (Ctrl+Shift+I or equivalent) and navigate to the [Snowplow Inspector](https://chrome.google.com/webstore/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm?hl=en) tab:
+
+![Snowplow Inspector](images/inspector.jpg)
 
 1. In the **Events** tab, verify you can see page view events being sent to your collector endpoint
 2. In the **Attributes** tab, check that the `page_view_count` and `dest_page_view_count` attributes have non-zero values

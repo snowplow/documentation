@@ -62,7 +62,7 @@ SNOWPLOW_SIGNALS_TRIAL_TOKEN=
   </TabItem>
 </Tabs>
 
-If you plan to use the AI agent, add either an OpenAI API key (`OPENAI_API_KEY`) or an AWS Bearer token for Bedrock (`AWS_BEARER_TOKEN_BEDROCK`).
+If you plan to use the AI agent add an OpenAI API key (`OPENAI_API_KEY`) to your `.env` file.
 
 ## Run the travel website
 

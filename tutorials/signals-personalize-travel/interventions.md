@@ -1,5 +1,5 @@
 ---
-title: "Optional: Create an intervention"
+title: "Create an intervention"
 position: 7
 description: "Use Snowplow Signals interventions to automatically trigger chatbot appearance based on specific user behaviors."
 keywords: ["interventions", "chatbot timing", "user engagement", "behavioral triggers", "proactive assistance"]

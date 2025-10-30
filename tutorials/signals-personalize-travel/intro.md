@@ -6,7 +6,9 @@ keywords: ["Snowplow Signals", "personalization", "real-time", "travel", "chatbo
 date: "2025-01-21"
 ---
 
-Welcome to the **Build personalized experiences with Snowplow Signals** tutorial.
+Welcome to the **Personalize content and agentic responses using Signals** tutorial.
+
+[![Personalized Travel Experiences](./images/demo-site.jpg)](./images/demo-site.jpg)
 
 This tutorial walks you through building personalized experiences on a travel website using Snowplow Signals. You'll learn how to capture user behavior, define attributes that represent user preferences, and use these insights to customize both website content and chatbot responses in real-time.
 

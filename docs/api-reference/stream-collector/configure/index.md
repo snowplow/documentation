@@ -91,7 +91,7 @@ collector {
 | `collector.streams.backoffPolicy.maxBackoff` | Optional. Default: `600000`. Time (in milliseconds) for retrying sending to kinesis / SQS after failure. |
 | `collector.streams.buffer.byteLimit` | Optional. Default: `3145728`. Incoming events are stored in an internal buffer before being sent to Kinesis. This configures the maximum total size of pending events. |
 | `collector.streams.buffer.recordLimit` | Optional. Default: `500`. Configures the maximum number of pending events before flushing to Kinesis. |
-| `collector.streams.buffer.timeLimit`| Optional. Default: `5000`. Configures the maximum time in milliseconds before flushing pending buffered events to Kinesis. Setting it to `0` disables the timeout. |
+| `collector.streams.buffer.timeLimit`| Optional. Default: `5000`. Configures the maximum time in milliseconds before flushing pending buffered events to Kinesis. |
 
 ### SQS collector options
 
@@ -110,7 +110,7 @@ collector {
 | `collector.streams.backoffPolicy.maxBackoff` | Optional. Default: `600000`. Time (in milliseconds) for retrying sending to SQS after failure. |
 | `collector.streams.buffer.byteLimit` | Optional. Default: `3145728`. Incoming events are stored in an internal buffer before being sent to SQS. This configures the maximum total size of pending events. |
 | `collector.streams.buffer.recordLimit` | Optional. Default: `500`. Configures the maximum number of pending events before flushing to SQS. |
-| `collector.streams.buffer.timeLimit` | Optional. Default: `5000`. Configures the maximum time in milliseconds before flushing pending buffered events to SQS. Setting it to `0` disables the timeout.|
+| `collector.streams.buffer.timeLimit` | Optional. Default: `5000`. Configures the maximum time in milliseconds before flushing pending buffered events to SQS. |
 
 ### Pubsub collector options
 
@@ -131,7 +131,7 @@ collector {
 | `collector.streams.sink.{good,bad}.retryInterval` (since *2.9.0*) | Optional. Default: `10 seconds`. Collector uses built-in retry mechanism of PubSub API. In case of failure of these retries, the events are added to a buffer and every `retryInterval` collector retries to send them. |
 | `collector.streams.{good,bad}.buffer.byteLimit` | Optional. Default: `1000000`. Incoming events are stored in an internal buffer before being sent to Pubsub. This configures the maximum total size of pending events |
 | `collector.streams.{good,bad}.buffer.recordLimit` | Optional. Default: `40`. Maximum number of pending events before flushing to Pubsub. |
-| `collector.streams.{good,bad}.buffer.timeLimit` | Optional. Default: `1000`. Maximum time (in milliseconds) before flushing pending buffered events to Pubsub. Setting it to `0` disables the timeout. |
+| `collector.streams.{good,bad}.buffer.timeLimit` | Optional. Default: `1000`. Maximum time (in milliseconds) before flushing pending buffered events to Pubsub. |
 
 ### Kafka collector options
 
@@ -145,7 +145,7 @@ collector {
 | `collector.streams.{good,bad}.startupCheckInterval` | Optional. Default: `10 second`.  When collector starts, it checks if Kafka topics exist. This is the interval for the calls. `/sink-health` is made healthy as soon as requests are successful or records are successfully inserted. |
 | `collector.streams.{good,bad}.buffer.byteLimit` | Optional. Default: `3145728`. Incoming events are stored in an internal buffer before being sent to Kafka. This configures the maximum total size of pending events. |
 | `collector.streams.{good,bad}.buffer.recordLimit` | Optional. Default: `500`. Configures the maximum number of pending events before flushing to Kafka. |
-| `collector.streams.{good,bad}.buffer.timeLimit` | Optional. Default: `5000`. Configures the maximum time in milliseconds before flushing pending buffered events to Kafka. Setting it to `0` disables the timeout. |
+| `collector.streams.{good,bad}.buffer.timeLimit` | Optional. Default: `5000`. Configures the maximum time in milliseconds before flushing pending buffered events to Kafka. |
 | `collector.streams.{good,bad}.retryInterval` | Optional. Default: `10 seconds`. Collector uses built-in retry mechanism of Kafka API. In case of failure of these retries, the events are added to a buffer and every `retryInterval` collector retries to send them. |
 
 

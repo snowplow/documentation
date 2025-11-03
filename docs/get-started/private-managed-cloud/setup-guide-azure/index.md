@@ -35,7 +35,7 @@ You will need to grant our verified application service principal the access int
 
 #### Create and assign role to application service principal
 
-Create a custom role and assign it the “Snowplow Private Managed Cloud Deployment” application service principal under your subscription. This grants the permission to create distinct roles for deploying and managing infrastructure resources that make up your pipeline.
+Create a custom role and assign it the “Snowplow BDP Enterprise Deployment” application service principal under your subscription. This grants the permission to create distinct roles for deploying and managing infrastructure resources that make up your pipeline.
 
 1. Navigate to your newly created subscription
 2. Click into “Access Control (IAM)”
@@ -69,7 +69,7 @@ Create a custom role and assign it the “Snowplow Private Managed Cloud Deploym
     }
     ```
 5. Within “Access Control (IAM)”, click “Add role assignment”
-6. Assign the `Snowplow-Deployment-Role-Creator-Role` to service principal “Snowplow Private Managed Cloud Deployment”. The role can be found under the “Privileged administrator roles” tab. The Conditions tab should be selected and you must select the third option. This is required to enable the [Lighthouse Offer to be created as detailed in Microsoft documentation](https://learn.microsoft.com/en-us/azure/lighthouse/how-to/deploy-policy-remediation#create-a-user-who-can-assign-roles-to-a-managed-identity-in-the-customer-tenant:~:text=To%20allow%20a,Administrator%20or%20Owner)
+6. Assign the `Snowplow-Deployment-Role-Creator-Role` to service principal “Snowplow BDP Enterprise Deployment”. The role can be found under the “Privileged administrator roles” tab. The Conditions tab should be selected and you must select the third option. This is required to enable the [Lighthouse Offer to be created as detailed in Microsoft documentation](https://learn.microsoft.com/en-us/azure/lighthouse/how-to/deploy-policy-remediation#create-a-user-who-can-assign-roles-to-a-managed-identity-in-the-customer-tenant:~:text=To%20allow%20a,Administrator%20or%20Owner)
 ![IAM role assignment conditions](./images/azure_role_assignment_conditions.png)
 
 ### Determine if Snowplow requires a specific VPC (optional)

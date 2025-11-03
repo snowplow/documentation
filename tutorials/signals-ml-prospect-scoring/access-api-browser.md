@@ -1,50 +1,29 @@
 ---
 title: See scores in the browser
 position: 5.5
-description: "Deploy the prospect scoring API using ngrok, and display real-time conversion predictions in the browser console."
+description: "Deploy the prospect scoring API, and display real-time conversion predictions in the browser console."
 ---
 
 The final requirement is to see the prospect scores and predictions in the browser. In this tutorial, we'll call the API every 10 seconds.
 
-You need an API endpoint that you can access from your local machine, or from JavaScript in the browser. This tutorial uses ngrok.
+You need an API endpoint that you can access from your local machine, or from JavaScript in the browser. 
 
-## Install ngrok
-
-Run `pip install pyngrok` to install the required library.
-
-## Set up proxy
-
-On running this code, ngrok will expose Colab's `localhost:8000` port behind a one-time HTTPS URL with the format `https://00ab-11-22-333-44.ngrok-free.app`.
-
-```python
-import nest_asyncio
-from pyngrok import ngrok, conf
-import uvicorn
-
-conf.get_default().auth_token = userdata.get('NGROK_TOKEN')
-ngrok_tunnel = ngrok.connect(8000)
-print('Public URL:', ngrok_tunnel.public_url)
-nest_asyncio.apply()
-uvicorn.run(app, port=8000)
-```
-
-As a result you should see this in the output:
+In the previous step we used TryCloudflare tunnels to expose Colab notebook behind a public HTTPS endpoint. In the server output you will find your public URL similar to this one:
 
 ```
-Public URL: https://00ab-11-22-333-44.ngrok-free.app
 ...
-INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+ * Running on https://aaa-bbb-ccc-ddd.trycloudflare.com
 ```
 
 ## Test with cURL
 
 Test the endpoint using `cURL`, passing in your `domain_userid` that you got earlier using the Snowplow Inspector.
 
-The URL is your ngrok API URL plus `/predict`, the endpoint address you defined earlier.
+Update the URL with your TryCloudflare tunnel URL.
 
 ```bash
 curl -X POST \
-  "https://00ab-11-22-333-44.ngrok-free.app/predict" \
+  "https://aaa-bbb-ccc-ddd.trycloudflare.com/predict" \
   -H "Content-Type: application/json" \
   -d '{"domain_userid": "8e554b10-4fcf-49e9-a0d8-48b6b6458df3"}'
 ```
@@ -53,67 +32,18 @@ You should see an output like this:
 
 ```json
 {
-  "signals": {
-    "domain_userid": "8e554b10-4fcf-49e9-a0d8-48b6b6458df3",
-    "num_form_engagements_l7d": null,
-    "num_sessions_l30d": [
-      "d100158b-c1f9-4833-9211-1f7d2c2ae5ec"
-    ],
-    "num_pricing_views_l7d": null,
-    "first_refr_medium_l30d": null,
-    "latest_device_class": "Desktop",
-    "first_mkt_medium_l30d": null,
-    "num_sessions_l7d": [
-      "d100158b-c1f9-4833-9211-1f7d2c2ae5ec"
-    ],
-    "num_media_events_l30d": null,
-    "num_pricing_views_l30d": null,
-    "num_page_pings_l30d": 3,
-    "num_page_views_l7d": 1,
-    "num_apps_l7d": [
-      "website"
-    ],
-    "num_page_pings_l7d": 3,
-    "num_page_views_l30d": 1,
-    "latest_app_id": "website",
-    "num_apps_l30d": [
-      "website"
-    ],
-    "num_conversions_l30d": null,
-    "num_conversions_l7d": null,
-    "num_engaged_campaigns_l30d": null
-  },
+  "score": 0.35080923483101656,
   "scoring_attributes": {
-    "latest_app_id": "website",
-    "day_of_week": 1,
-    "latest_device_class": "Desktop",
-    "num_sessions_l7d": 1,
-    "num_apps_l7d": 1,
-    "num_page_views_l7d": 1,
-    "num_page_pings_l7d": 3,
-    "num_pricing_views_l7d": 0,
-    "had_conversions_l7d": 0,
-    "num_form_engagements_l7d": 0,
-    "num_sessions_l30d": 1,
-    "num_apps_l30d": 1,
-    "num_page_views_l30d": 1,
-    "num_page_pings_l30d": 3,
-    "num_pricing_views_l30d": 0,
-    "had_conversions_l30d": 0,
-    "num_media_events_l30d": 0,
-    "first_refr_medium_l30d": null,
-    "first_mkt_medium_l30d": null,
-    "num_engaged_campaigns_l30d": 0
+    "num_customers_views": 0,
+    "num_page_views": 0,
+    "num_pricing_views": 0
   },
-  "explanations": {
-    "num_sessions_l30d": 0.4983027254906483,
-    "num_page_views_l7d": -0.39927947099437006,
-    "num_page_views_l30d": 0.2720082590635866,
-    "num_page_pings_l30d": -0.1769901583553292,
-    "num_page_pings_l7d": 0.15350821211002766,
-    "__sum_of_others": -0.09441755977226424
-  },
-  "score": 0.07480665296316147
+  "signals": {
+    "domain_userid": "00000000-1111-2222-3333-444455556666",
+    "num_customers_views": null,
+    "num_page_views": null,
+    "num_pricing_views": null
+  }
 }
 ```
 
@@ -126,7 +56,7 @@ You may need to update this if your tracker name is different. Check the tracker
 Run this in your browser console to see your predictions:
 
 ```js
-let api_url = "https://00ab-11-22-333-44.ngrok-free.app/predict"; // UPDATE THIS
+let api_url = "https://aaa-bbb-ccc-ddd.trycloudflare.com/predict"; // UPDATE THIS
 let tracker_name = "sp"; // MAYBE UPDATE THIS
 
 // Calls the API every 10s from the front-end

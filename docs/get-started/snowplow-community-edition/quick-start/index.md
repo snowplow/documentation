@@ -83,8 +83,7 @@ The sections below will guide you through setting up your destination to receive
 
 | Warehouse | AWS | GCP | Azure |
 |:----------|:---:|:---:|:-----:|
-| Postgres | :white_check_mark: | :white_check_mark: | :x: |
-| Snowflake | :white_check_mark: | :x: |:white_check_mark: |
+| Snowflake | :white_check_mark: | :x: | :x: |
 | Databricks | :white_check_mark: | :x: | :white_check_mark: |
 | Redshift | :white_check_mark: | — | — |
 | BigQuery | — | :white_check_mark: | — |
@@ -111,23 +110,19 @@ EventHubs topics are deployed in a Kafka-compatible model, so you can consume fr
 <Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
 
-There are four main storage options for you to select: Postgres, Redshift, Snowflake and Databricks. For Snowflake, you can choose between the newest [Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md) (recommended) or [RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md). Additionally, there is an S3 option, which is primarily used to archive enriched (and/or raw) events and to store [failed events](/docs/fundamentals/failed-events/index.md).
+There are three main storage options for you to select: Redshift, Snowflake and Databricks. Additionally, there is an S3 option, which is primarily used to archive enriched events and to store [failed events](/docs/fundamentals/failed-events/index.md).
 
 We recommend to only load data into a single destination, but nothing prevents you from loading into multiple destinations with the same pipeline (e.g. for testing purposes).
 
   </TabItem>
   <TabItem value="gcp" label="GCP">
 
-There are two alternative storage options for you to select: Postgres and BigQuery.
-
-We recommend to only load data into a single destination, but nothing prevents you from loading into multiple destinations with the same pipeline (e.g. for testing purposes).
+Only one storage option is provided: BigQuery.
 
   </TabItem>
   <TabItem value="azure" label="Azure">
 
-There are two storage options for you to select: Snowflake and data lake (ADLS). The latter option enables querying data from Databricks and Synapse Analytics.
-
-We recommend to only load data into a single destination (Snowflake or data lake), but nothing prevents you from loading into both with the same pipeline (e.g. for testing purposes).
+Only a data lake (ADLS) storage option is provided. This enables querying data from Databricks and Synapse Analytics.
 
   </TabItem>
 </Tabs>
@@ -288,11 +283,6 @@ Feel free to go ahead with these while your Iglu Server stack is deploying.
 :::
 
 <Tabs groupId="warehouse" queryString>
-  <TabItem value="postgres" label="Postgres" default>
-
-No extra steps needed — the necessary resources like a PostgreSQL instance, database, table and user will be created by the Terraform modules.
-
-  </TabItem>
   <TabItem value="redshift" label="Redshift">
 
 Assuming you already have an active Redshift cluster, execute the following SQL (replace the `${...}` variables with your desired values). You will need the permissions to create databases, users and schemas in the cluster.
@@ -327,9 +317,7 @@ No extra steps needed.
   </TabItem>
   <TabItem value="snowflake" label="Snowflake">
 
-If you are going to use the [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md) (currently, only provided for AWS), you will need to generate a key pair following the [Snowflake documentation](https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-the-private-key). Make sure to enter an empty passphrase, as the terraform module below does not support keys with passphrases (for simplicity).
-
-If you are not using the Snowflake Streaming Loader, you will need to pick a password.
+You will need to generate a key pair following the [Snowflake documentation](https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-the-private-key). Make sure to enter an empty passphrase, as the terraform module below does not support keys with passphrases (for simplicity).
 
 Execute the following SQL (replace the `${...}` variables with your desired values). You will need access to both `SYSADMIN` and `SECURITYADMIN` level roles to action this:
 
@@ -351,8 +339,7 @@ GRANT ALL ON SCHEMA ${snowflake_database}.${snowflake_schema} TO ROLE ${snowflak
 
 -- 5. Create a user that can be used for loading data
 CREATE USER IF NOT EXISTS ${snowflake_loader_user}
-  RSA_PUBLIC_KEY='MIIBIj...' -- fill out if using Snowflake Streaming Loader
-  PASSWORD='...'             -- fill out otherwise
+  RSA_PUBLIC_KEY='MIIBIj...'
   MUST_CHANGE_PASSWORD = FALSE
   DEFAULT_ROLE = ${snowflake_loader_role}
   EMAIL = 'loader@acme.com';
@@ -571,9 +558,9 @@ As mentioned [above](#storage-options), there are several options for the pipeli
 When in doubt, refer back to the [destination setup](#prepare-the-destination) section where you have picked values for many of the variables.
 
 <details>
-<summary>Snowflake + Streaming Loader</summary>
+<summary>Snowflake</summary>
 
-If you are using Snowflake with the Streaming Loader, you will need to provide a private key you’ve generated during [destination setup](#prepare-the-destination).
+If you are using Snowflake, you will need to provide a private key you’ve generated during [destination setup](#prepare-the-destination).
 
 Here’s how to do it:
 
@@ -594,35 +581,17 @@ EOT
 
 For all active destinations, change any `_password` setting to a value that _only you_ know.
 
-If you are using Postgres, set the `postgres_db_ip_allowlist` to a list of CIDR addresses that will need to access the database — this can be systems like BI Tools, or your local IP address, so that you can query the database from your laptop.
-
 :::
 
   </TabItem>
   <TabItem value="gcp" label="GCP">
 
-As mentioned [above](#storage-options), there are two options for pipeline’s destination database. For each destination you’d like to configure, set the `<destination>_enabled` variable (e.g. `postgres_db_enabled`) to `true` and fill all the relevant configuration options (starting with `<destination>_`).
-
-:::caution Postgres only
-
-Change the `postgres_db_password` setting to a value that _only you_ know.
-
-Set the `postgres_db_authorized_networks` to a list of CIDR addresses that will need to access the database — this can be systems like BI Tools, or your local IP address, so that you can query the database from your laptop.
-
-:::
+Set `bigquery_db_enabled` to `true` to enable loading to BigQuery.
 
   </TabItem>
   <TabItem value="azure" label="Azure">
 
-As mentioned [above](#storage-options), there are two options for the pipeline’s destination: Snowflake and data lake (the latter enabling Databricks and Synapse Analytics). For each destination you’d like to configure, set the `<destination>_enabled` variable (e.g. `snowflake_enabled`) to `true` and fill all the relevant configuration options (starting with `<destination>_`).
-
-When in doubt, refer back to the [destination setup](#prepare-the-destination) section where you have picked values for many of the variables.
-
-:::caution
-
-If loading into Snowflake, change the `snowflake_loader_password` setting to a value that _only you_ know.
-
-:::
+Set `lake_enabled` to `true` to enable loading to a data lake.
 
   </TabItem>
 </Tabs>
@@ -640,7 +609,7 @@ terraform plan
 terraform apply
 ```
 
-This will output your `collector_dns_name`, `postgres_db_address`, `postgres_db_port` and `postgres_db_id`.
+This will output your `collector_dns_name`.
 
   </TabItem>
   <TabItem value="gcp" label="GCP">
@@ -651,7 +620,7 @@ terraform plan
 terraform apply
 ```
 
-This will output your `collector_ip_address`, `postgres_db_address`, `postgres_db_port`, `bigquery_db_dataset_id`, `bq_loader_dead_letter_bucket_name` and `bq_loader_bad_rows_topic_name`.
+This will output your `collector_ip_address`, `bigquery_db_dataset_id`, `bq_loader_dead_letter_bucket_name` and `bq_loader_bad_rows_topic_name`.
 
   </TabItem>
   <TabItem value="azure" label="Azure">
@@ -686,11 +655,6 @@ For solutions to some common Terraform errors that you might encounter when runn
 ## Configure the destination
 
 <Tabs groupId="warehouse" queryString>
-  <TabItem value="postgres" label="Postgres" default>
-
-No extra steps needed.
-
-  </TabItem>
   <TabItem value="redshift" label="Redshift">
 
 No extra steps needed.

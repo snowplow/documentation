@@ -33,11 +33,6 @@ You can very easily edit the script or run each of the Terraform modules indepen
   <TabItem value="aws" label="AWS" default>
 
 <Tabs groupId="warehouse" queryString lazy>
-  <TabItem value="postgres" label="Postgres" default>
-
-<Diagram cloud="aws" warehouse="Postgres" compute="EC2" stream="Kinesis" bucket="S3" igludb="RDS"/>
-
-  </TabItem>
   <TabItem value="redshift" label="Redshift">
 
 <Diagram cloud="aws" warehouse="Redshift" compute="EC2" stream="Kinesis" bucket="S3" igludb="RDS"/>
@@ -60,11 +55,6 @@ You can very easily edit the script or run each of the Terraform modules indepen
 
 <!-- see https://github.com/facebook/docusaurus/issues/8357 -->
 <Tabs groupId="warehouse" queryString lazy>
-  <TabItem value="postgres" label="Postgres" default>
-
-<Diagram cloud="gcp" warehouse="Postgres" compute="CE" stream="Pub/Sub" bucket="GCS" igludb="CloudSQL"/>
-
-  </TabItem>
   <TabItem value="bigquery" label="BigQuery">
 
 <Diagram cloud="gcp" warehouse="BigQuery" compute="CE" stream="Pub/Sub" bucket="GCS" igludb="CloudSQL"/>
@@ -76,11 +66,6 @@ You can very easily edit the script or run each of the Terraform modules indepen
 <TabItem value="azure" label="Azure">
 
 <Tabs groupId="warehouse" queryString lazy>
-  <TabItem value="snowflake" label="Snowflake" default>
-
-<Diagram cloud="azure" warehouse="Snowflake" compute="VMSS" stream="Kafka" bucket="ADLS Gen2" igludb="Postgres"/>
-
-  </TabItem>
   <TabItem value="databricks" label="Databricks" default>
 
 <Diagram cloud="azure" warehouse="Data Lake" compute="VMSS" stream="Kafka" bucket="ADLS Gen2" igludb="Postgres"/>
@@ -185,12 +170,6 @@ You can find further details in the [DynamoDB Terraform module](https://registry
 
 Collector payloads are written to the raw stream, before being picked up by the Enrich application.
 
-:::note AWS only
-
-The S3 loader (raw) also reads from this raw stream and writes to the raw S3 folder.
-
-:::
-
 ### Enriched stream
 
 Events that have been validated and enriched by the Enrich application are written to the enriched stream. Depending on your cloud and destination, different loaders pick up the data from this stream, as shown on the diagram [above](#overview).
@@ -237,18 +216,14 @@ Aside from your main destination, the data is written to S3 by the S3 Loader app
 See the [S3 Loader](https://registry.terraform.io/modules/snowplow-devops/s3-loader-kinesis-ec2/aws/latest) and [S3](https://registry.terraform.io/modules/snowplow-devops/s3-bucket/aws/latest) Terraform modules for further details on the resources, default and required input variables, and outputs.
 
 The following loaders and folders are available:
-* Raw loader, `raw/`: events that come straight out of the Collector and have not yet been validated or enriched by the Enrich application. They are a little tricky to decode. There are not many reasons to use this data, but backing this data up gives you the flexibility to replay this data should something go wrong further downstream in the pipeline.
 * Enriched loader, `enriched/`: enriched events, in GZipped blobs of [enriched TSV](/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md). Historically, this has been used as the staging ground for loading into data warehouses via the [Batch transformer](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/spark-transformer/index.md) application. However, it’s no longer used in the quick start examples.
 * Bad loader, `bad/`: [failed events](/docs/fundamentals/failed-events/index.md). You can [query them using Athena](/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/file-storage/index.md).
 
-Also, if you choose Postgres as your destination, the Postgres loader will load all failed events into Postgres.
 
   </TabItem>
   <TabItem value="gcp" label="GCP">
 
-If you choose Postgres as your destination, the Postgres loader will load all [failed events](/docs/fundamentals/failed-events/index.md) into Postgres, although not to GCS.
-
-If you choose BigQuery as your destination, there will be a “dead letter” GCS bucket. It will have the suffix `-bq-loader-dead-letter` and will contain events that the loader fails to be insert into BigQuery, _but not_ any other kind of failed events. To store all failed events, you will need to manually deploy the [GCS Loader](/docs/api-reference/loaders-storage-targets/google-cloud-storage-loader/index.md) application.
+If enable the BigQuery destination, there will be a “dead letter” GCS bucket. It will have the suffix `-bq-loader-dead-letter` and will contain events that the loader fails to be insert into BigQuery, _but not_ any other kind of failed events. To store all failed events, you will need to manually deploy the [GCS Loader](/docs/api-reference/loaders-storage-targets/google-cloud-storage-loader/index.md) application.
 
   </TabItem>
   <TabItem value="azure" label="Azure">
@@ -261,16 +236,6 @@ Currently, [failed events](/docs/fundamentals/failed-events/index.md) are only a
 ## Loaders
 
 <Tabs groupId="warehouse" queryString>
-  <TabItem value="postgres" label="Postgres" default>
-
-The [Postgres Loader](/docs/api-reference/loaders-storage-targets/snowplow-postgres-loader/index.md) loads enriched events and failed events to Postgres.
-
-<TerraformLinks
-  aws="https://registry.terraform.io/modules/snowplow-devops/postgres-loader-kinesis-ec2/aws/latest"
-  gcp="https://registry.terraform.io/modules/snowplow-devops/postgres-loader-pubsub-ce/google/latest"
-/>
-
-  </TabItem>
   <TabItem value="redshift" label="Redshift">
 
 [RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) is a set of applications that loads enriched events into Redshift.
@@ -291,14 +256,9 @@ There will be a new dataset available in BigQuery with the suffix `_snowplow_db`
   </TabItem>
   <TabItem value="snowflake" label="Snowflake">
 
-[RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) is a set of applications that loads enriched events into Snowflake.
+[Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md) is an application that loads data into Snowflake.
 
-Alternatively, for AWS you can choose the newer [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md), which is a single application.
-
-See the following Terraform modules for further details on the resources, default and required input variables, and outputs:
-* RDB Loader:
-  * Transformer component ([AWS — Kinesis](https://registry.terraform.io/modules/snowplow-devops/transformer-kinesis-ec2/aws/latest), [Azure — Kafka / Event Hubs](https://registry.terraform.io/modules/snowplow-devops/transformer-event-hub-vmss/azurerm/latest))
-  * Snowflake Loader component ([AWS](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-ec2/aws/latest), [Azure](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-vmss/azurerm/latest))
+See the following Terraform module for further details on the resources, default and required input variables, and outputs:
 * Snowflake Streaming Loader ([AWS](https://registry.terraform.io/modules/snowplow-devops/snowflake-streaming-loader-ec2/aws/latest))
 
 </TabItem>

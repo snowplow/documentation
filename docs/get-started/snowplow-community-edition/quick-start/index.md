@@ -620,7 +620,7 @@ terraform plan
 terraform apply
 ```
 
-This will output your `collector_ip_address`, `bigquery_db_dataset_id`, `bq_loader_dead_letter_bucket_name` and `bq_loader_bad_rows_topic_name`.
+This will output your `collector_ip_address`, `bigquery_db_dataset_id` and `bq_loader_bad_rows_topic_name`.
 
   </TabItem>
   <TabItem value="azure" label="Azure">

@@ -8,7 +8,7 @@ export const versions = {
   googleAmpTracker: '1.1.0',
   iosTracker: '6.2.1',
   javaTracker: '2.1.0',
-  javaScriptTracker: '4.6.3',
+  javaScriptTracker: '4.6.8',
   luaTracker: '0.2.0',
   phpTracker: '0.9.2',
   pixelTracker: '0.3.0',
@@ -25,7 +25,7 @@ export const versions = {
   enrich: '6.2.1',
   sqs2kinesis: '1.0.4',
   dataflowRunner: '0.7.5',
-  snowbridge: '3.5.0',
+  snowbridge: '3.6.1',
 
   // Loaders
   bqLoader: '2.0.1',
@@ -47,7 +47,7 @@ export const versions = {
   dbtSnowplowWeb: '1.0.1',
   dbtSnowplowMobile: '1.0.0',
   dbtSnowplowMediaPlayer: '0.9.4',
-  dbtSnowplowUtils: '0.17.4',
+  dbtSnowplowUtils: '0.17.5',
   dbtSnowplowNormalize: '0.4.1',
   dbtSnowplowFractribution: '0.3.6',
   dbtSnowplowEcommerce: '0.9.3',

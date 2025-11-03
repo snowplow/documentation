@@ -60,8 +60,6 @@ collector {
 | `collector.rootResponse.body` | Optional. The http response body to use when root response is enabled. |
 | `collector.cors.accessControlMaxAge` | Optional. Default: `60 minutes`. Configures how long a the results of a preflight request can be cached by the browser. `-1` seconds disables the cache. |
 | `collector.preTerminationPeriod` (since *2.5.0*) | Optional. Default: `10 seconds`. Configures how long the collector should pause after receiving a sigterm before starting the graceful shutdown. During this period the collector continues to accept new connections and respond to requests. |
-| `collector.preTerminationUnhealthy` (since *2.5.0*) | Optional. Default: `false`. During the `preTerminationPeriod`, the collector can be configured to return `503`s on the `/health` endpoint. Can be helpful for removing the collector from a load balancer's targets. |
-| `collector.terminationDeadline` (since *2.5.0*) | Optional. Default: `10 seconds`. The server's deadline for closing connections during graceful shutdown. |
 | `collector.prometheusMetrics.enabled` (deprecated since *2.6.0*) | Optional. Default: `false`. When enabled, all requests are logged as prometheus metrics and the `/metrics` endpoint returns the report about the metrics. |
 | `collector.prometheusMetrics.durationBucketsInSeconds` (deprecated since *2.6.0*) | Optional. E.g. `[0.1, 3, 10]`. Custom buckets for the `http_request_duration_seconds_bucket` duration prometheus metric. |
 | `collector.telemetry.disable` | Optional. Set to `true` to disable [telemetry](/docs/get-started/self-hosted/telemetry/index.md). |

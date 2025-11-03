@@ -29,6 +29,12 @@ compression {
 }
 ```
 
+:::tip
+
+Take note of the `streams.buffer.timeLimit` Collector configuration parameter, which already existed in previous versions. This controls how many events are batched (or, technically, for how long) before appling compression. Bigger values lead to higher compression rates (lower infrastructure costs), but also higher latency. We recommend starting with a value around 300–500ms and fine-tuning it from there.
+
+:::
+
 ### Impact on metrics
 
 When compression is enabled, there will be a big decrease in the number of messages sent to the `raw` event stream, i.e. Kinesis, Pub/Sub or Event Hubs, depending on your cloud. You will notice this decrease if you monitor metrics on messages in the `raw` stream.

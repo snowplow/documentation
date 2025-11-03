@@ -3004,15 +3004,6 @@ description: "Introduction to Kafka live viewer profiles for real-time behaviora
 tutorials/kafka-live-viewer-profiles/deploy-aws-terraform.md
 description: "Deploy Kafka live viewer on AWS using Terraform for scalable behavioral data streaming infrastructure."
 
-tutorials/enrichments/enabling-via-terraform.md
-description: "Enable Snowplow enrichments using Terraform for automated behavioral data processing configuration."
-
-tutorials/enrichments/intro.md
-description: "Introduction to Snowplow enrichments for enhancing behavioral events with additional context and validation."
-
-tutorials/enrichments/configurable-enrichment-list.md
-description: "Configurable enrichment options for customizing behavioral data processing and enhancement workflows."
-
 tutorials/android-event-tracking/examining-events.md
 description: "Examine and validate Android behavioral events for mobile analytics implementation verification."
 

@@ -1657,15 +1657,6 @@ tutorials/kafka-live-viewer-profiles/introduction.md
 tutorials/kafka-live-viewer-profiles/deploy-aws-terraform.md
 "Kafka AWS", "Terraform Kafka", "AWS Deployment", "Infrastructure Code", "Kafka Terraform", "Cloud Kafka"
 
-tutorials/enrichments/enabling-via-terraform.md
-"Terraform Enrichments", "Infrastructure Code", "Enrichment Deployment", "Terraform Setup", "IaC Enrichments", "Automated Enrichments"
-
-tutorials/enrichments/intro.md
-"Enrichment Tutorial", "Data Enrichment", "Event Enhancement", "Enrichment Guide", "Tutorial Introduction", "Processing Tutorial"
-
-tutorials/enrichments/configurable-enrichment-list.md
-"Enrichment List", "Available Enrichments", "Enrichment Catalog", "Enhancement Options", "Enrichment Types", "Processing Options"
-
 tutorials/android-event-tracking/examining-events.md
 "Android Events", "Event Examination", "Mobile Events", "Android Analytics", "Event Analysis", "Mobile Tutorial"
 
@@ -2902,15 +2893,6 @@ tutorials/kafka-live-viewer-profiles/introduction.md
 
 tutorials/kafka-live-viewer-profiles/deploy-aws-terraform.md
 "Kafka AWS", "Terraform Kafka", "AWS Deployment", "Infrastructure Code", "Kafka Terraform", "Cloud Kafka"
-
-tutorials/enrichments/enabling-via-terraform.md
-"Terraform Enrichments", "Infrastructure Code", "Enrichment Deployment", "Terraform Setup", "IaC Enrichments", "Automated Enrichments"
-
-tutorials/enrichments/intro.md
-"Enrichment Tutorial", "Data Enrichment", "Event Enhancement", "Enrichment Guide", "Tutorial Introduction", "Processing Tutorial"
-
-tutorials/enrichments/configurable-enrichment-list.md
-"Enrichment List", "Available Enrichments", "Enrichment Catalog", "Enhancement Options", "Enrichment Types", "Processing Options"
 
 tutorials/android-event-tracking/examining-events.md
 "Android Events", "Event Examination", "Mobile Events", "Android Analytics", "Event Analysis", "Mobile Tutorial"

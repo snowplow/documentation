@@ -20,7 +20,6 @@ For tracking from third-party applications, use our [webhooks](/docs/sources/web
     <img src={require('@site/docs/sources/images/dotnet.png').default} alt=".NET" width="200" />
     <img src={require('@site/docs/sources/images/flutter.png').default} alt="Flutter" width="200" />
     <img src={require('@site/docs/sources/images/golang.png').default} alt="Golang" width="200" />
-    <img src={require('@site/docs/sources/images/googleanalytics.png').default} alt="Google Analytics" width="200" />
     <img src={require('@site/docs/sources/images/gtm.png').default} alt="Google Tag Manager" width="200" />
     <img src={require('@site/docs/sources/images/ios.png').default} alt="iOS" width="200" />
     <img src={require('@site/docs/sources/images/java.png').default} alt="Java" width="200" />

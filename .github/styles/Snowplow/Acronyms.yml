@@ -65,7 +65,7 @@ exceptions:
   - ZIP
 
   # Added for Snowplow
-  - BDP
+  - CDI
   - DNS
   - SQS
   - UUID

@@ -2,14 +2,11 @@
 title: "Managing data structures"
 sidebar_position: 1
 sidebar_label: "Manage"
-sidebar_custom_props:
-  offerings:
-    - bdp
 ---
 
 import ThemedImage from '@theme/ThemedImage';
 
-To create a new [data structure](/docs/fundamentals/schemas/index.md) using Snowplow BDP Console, first navigate to **Data structures** in the menu and click the **Create a data structure** button.
+To create a new [data structure](/docs/fundamentals/schemas/index.md) using Snowplow Console, first navigate to **Data structures** in the menu and click the **Create a data structure** button.
 
 ![](images/image-1.png)
 

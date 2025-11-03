@@ -1270,17 +1270,17 @@ docs/modeling-your-data/visualization/index.md
 docs/modeling-your-data/visualization/marketing-dashboards/index.md
 "Marketing Dashboards", "Marketing Analytics", "Campaign Analytics", "Marketing Insights", "Marketing ROI", "Campaign Performance"
 
-docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/index.md
+docs/modeling-your-data/running-data-models-via-console/dbt/index.md
 "DBT Models", "Data Transformation", "SQL Models", "Analytics Engineering", "Data Modeling", "DBT Pipeline"
 
-docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/resolving-data-model-failures/index.md
+docs/modeling-your-data/running-data-models-via-console/dbt/resolving-data-model-failures/index.md
 "DBT Troubleshooting", "Model Failures", "DBT Debugging", "Model Errors", "Data Issues", "DBT Resolution"
 
-docs/modeling-your-data/running-data-models-via-snowplow-bdp/retrieving-job-execution-data-via-the-api/index.md
+docs/modeling-your-data/running-data-models-via-console/retrieving-job-execution-data-via-the-api/index.md
 "Job Execution", "API Data", "Execution Analytics", "Job Monitoring", "Pipeline API", "Execution Metrics"
 
-docs/modeling-your-data/running-data-models-via-snowplow-bdp/index.md
-"Snowplow BDP", "Managed Models", "BDP Pipeline", "Managed Analytics", "Cloud Pipeline", "Enterprise Analytics"
+docs/modeling-your-data/running-data-models-via-console/index.md
+"Snowplow CDI", "Managed Models", "CDI Pipeline", "Managed Analytics", "Cloud Pipeline", "Enterprise Analytics"
 
 docs/modeling-your-data/modeling-your-data-with-sql-runner/sql-runner-mobile-data-model/index.md
 "SQL Runner Mobile", "Mobile SQL", "Mobile Analytics", "SQL Models", "Mobile Data", "App Analytics"
@@ -1597,17 +1597,17 @@ docs/get-started/tracking/cookies-and-ad-blockers/index.md
 docs/get-started/tracking/index.md
 "Event Tracking", "Analytics Tracking", "Getting Started", "Data Collection", "Tracking Setup", "Behavioral Tracking"
 
-docs/get-started/snowplow-bdp/setup-guide-gcp/index.md
-"BDP GCP", "Google Cloud", "BDP Setup", "Cloud Setup", "GCP Guide", "Enterprise Setup"
+docs/get-started/snowplow-CDI/setup-guide-gcp/index.md
+"CDI GCP", "Google Cloud", "CDI Setup", "Cloud Setup", "GCP Guide", "Enterprise Setup"
 
-docs/get-started/snowplow-bdp/index.md
-"Snowplow BDP", "Behavioral Data Platform", "Enterprise Analytics", "Managed Platform", "Cloud Analytics", "BDP Overview"
+docs/get-started/snowplow-CDI/index.md
+"Snowplow CDI", "Behavioral Data Platform", "Enterprise Analytics", "Managed Platform", "Cloud Analytics", "CDI Overview"
 
-docs/get-started/snowplow-bdp/setup-guide-azure/index.md
-"BDP Azure", "Azure Setup", "BDP Setup", "Cloud Setup", "Azure Guide", "Enterprise Setup"
+docs/get-started/snowplow-CDI/setup-guide-azure/index.md
+"CDI Azure", "Azure Setup", "CDI Setup", "Cloud Setup", "Azure Guide", "Enterprise Setup"
 
-docs/get-started/snowplow-bdp/setup-guide-aws/index.md
-"BDP AWS", "AWS Setup", "BDP Setup", "Cloud Setup", "AWS Guide", "Enterprise Setup"
+docs/get-started/snowplow-CDI/setup-guide-aws/index.md
+"CDI AWS", "AWS Setup", "CDI Setup", "Cloud Setup", "AWS Guide", "Enterprise Setup"
 
 docs/get-started/querying/index.md
 "Data Querying", "SQL Queries", "Getting Started", "Data Analysis", "Query Guide", "Analytics Queries"

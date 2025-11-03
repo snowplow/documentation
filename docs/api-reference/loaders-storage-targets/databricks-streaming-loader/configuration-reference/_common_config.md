@@ -94,11 +94,11 @@ import Link from '@docusaurus/Link';
 </tr>
 <tr>
     <td><code>telemetry.disable</code></td>
-    <td>Optional. Set to <code>true</code> to disable <Link to="/docs/get-started/snowplow-community-edition/telemetry/">telemetry</Link>.</td>
+    <td>Optional. Set to <code>true</code> to disable <Link to="/docs/get-started/self-hosted/telemetry/">telemetry</Link>.</td>
 </tr>
 <tr>
     <td><code>telemetry.userProvidedId</code></td>
-    <td>Optional. See <Link to="/docs/get-started/snowplow-community-edition/telemetry/#how-can-i-help">here</Link> for more information.</td>
+    <td>Optional. See <Link to="/docs/get-started/self-hosted/telemetry/#how-can-i-help">here</Link> for more information.</td>
 </tr>
 <tr>
     <td><code>http.client.maxConnectionsPerServer</code></td>

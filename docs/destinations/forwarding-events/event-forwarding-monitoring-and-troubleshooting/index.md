@@ -1,6 +1,6 @@
 ---
 title: "Monitoring and troubleshooting forwarders"
-description: "Monitor event forwarder performance, debug failures, and understand retry logic with cloud metrics, failed event logs, and BDP Console statistics."
+description: "Monitor event forwarder performance, debug failures, and understand retry logic with cloud metrics, failed event logs, and Console statistics."
 sidebar_position: 15
 ---
 
@@ -52,7 +52,7 @@ Once a forwarder is deployed, you can configure one or more email addresses to s
 
 You can monitor forwarders in a few ways:
 
-- **Console metrics**: you can view high-level delivery statistics in BDP Console.
+- **Console metrics**: you can view high-level delivery statistics in Console.
 - **Cloud monitoring metrics**: forwarders emit a set of metrics to your cloud provider's observability service.
 - **Failed event logs**: for failed deliveries, Snowplow saves detailed logs to your cloud storage bucket. Consume these logs for automated monitoring in your observability platform of choice.
 
@@ -67,7 +67,7 @@ To view these metrics, navigate to **Destinations** > **Destinations list** and 
 ### Cloud monitoring metrics
 
 :::info
-Forwarder cloud metrics are only available for [BDP Enterprise](/docs/get-started/snowplow-bdp/index.md#enterprise-in-your-own-cloud) customers.
+Forwarder cloud metrics are only available for [CDI Private Managed Cloud](/docs/get-started/index.md#cdi-private-managed-cloud) customers.
 :::
 
 Forwarders emit the following metrics in your cloud provider's monitoring service:

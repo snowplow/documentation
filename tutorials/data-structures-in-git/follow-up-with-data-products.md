@@ -75,7 +75,7 @@ When we're happy with the proposed changes, we can publish by removing the `--dr
 snowplow-cli dp publish
 ```
 
-After publishing, you'll be able to see your new source application in the BDP Console UI.
+After publishing, you'll be able to see your new source application in the Snowplow Console UI.
 
 ## Create a data product and an event specification
 

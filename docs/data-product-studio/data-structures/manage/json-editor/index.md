@@ -3,9 +3,6 @@ title: "Managing data structures with the JSON Editor"
 description: "The JSON editor is best suited for defining complex data structures that require heavy nesting and advanced data types."
 sidebar_label: "Console: JSON editor"
 sidebar_position: 1
-sidebar_custom_props:
-  offerings:
-    - bdp
 ---
 
 :::info

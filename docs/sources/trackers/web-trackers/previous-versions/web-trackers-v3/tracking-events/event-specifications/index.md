@@ -10,9 +10,9 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-The plugin allows you to integrate with Event Specifications for a selected set of plugins. The configuration for the plugin should be retrieved directly from your [Data Product](https://docs.snowplow.io/docs/fundamentals/data-products/) in the [Snowplow BDP Console](https://console.snowplowanalytics.com).
+The plugin allows you to integrate with Event Specifications for a selected set of plugins. The configuration for the plugin should be retrieved directly from your [Data Product](https://docs.snowplow.io/docs/fundamentals/data-products/) in [Snowplow Console](https://console.snowplowanalytics.com).
 
-The plugin will automatically add an Event Specification context to the events matching the configuration added. 
+The plugin will automatically add an Event Specification context to the events matching the configuration added.
 
 :::note
 The plugin is available since version 3.23 of the tracker.
@@ -24,7 +24,7 @@ The plugin is available since version 3.23 of the tracker.
   <TabItem value="js" label="JavaScript (tag)">
 
 | Tracker Distribution | Included |
-|----------------------|----------|
+| -------------------- | -------- |
 | `sp.js`              | ❌        |
 | `sp.lite.js`         | ❌        |
 
@@ -52,8 +52,8 @@ window.snowplow(
 import { newTracker } from '@snowplow/browser-tracker';
 import { WebVitalsPlugin } from '@snowplow/browser-plugin-event-specifications';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ EventSpecificationsPlugin(/* plugin configuration */) ],
 });
 ```
@@ -75,10 +75,10 @@ window.snowplow(
     ['eventSpecifications', 'EventSpecificationsPlugin'],
     [
         {
-            [Plugin integration name]: { 
+            [Plugin integration name]: {
                 /* Key value pairs of event names and event specification ids */
             },
-            /* More integrations */ 
+            /* More integrations */
         }
     ]
 );
@@ -89,7 +89,7 @@ window.snowplow(
 
 ```javascript
 EventSpecificationsPlugin({
-    [Plugin integration name]: { 
+    [Plugin integration name]: {
         /* Key value pairs of event names and event specification ids */
     },
     /* More integrations */

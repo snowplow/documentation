@@ -11,9 +11,9 @@ import TabItem from '@theme/TabItem';
 
 On AWS and GCP, when failed events are generated on your pipeline, the raw event payload along with details about the failure are saved into file storage (S3 on AWS, GCS on Google Cloud).
 
-:::info Community Edition quick start guide on GCP
+:::info Snowplow Self-Hosted quick start guide on GCP
 
-If you followed the [Community Edition quick start guide](/docs/get-started/snowplow-community-edition/quick-start/index.md) on GCP, you will need to manually deploy the [GCS Loader](/docs/api-reference/loaders-storage-targets/google-cloud-storage-loader/index.md) to save failed events into GCS, as it’s currently not included in the Terraform scripts.
+If you followed the [Snowplow Self-Hosted quick start guide](/docs/get-started/self-hosted/quick-start/index.md) on GCP, you will need to manually deploy the [GCS Loader](/docs/api-reference/loaders-storage-targets/google-cloud-storage-loader/index.md) to save failed events into GCS, as it’s currently not included in the Terraform scripts.
 
 :::
 
@@ -112,9 +112,9 @@ Note that the SQL statements contain a few placeholders which you will need to e
   </TabItem>
   <TabItem value="gcp" label="GCP">
 
-:::info Community Edition quick start guide on GCP
+:::info Snowplow Self-Hosted quick start guide on GCP
 
-If you followed the [Community Edition quick start guide](/docs/get-started/snowplow-community-edition/quick-start/index.md), you will need to manually deploy the [GCS Loader](/docs/api-reference/loaders-storage-targets/google-cloud-storage-loader/index.md) to save failed events into GCS, as it’s currently not included in the Terraform scripts.
+If you followed the [Snowplow Self-Hosted Quick Start guide](/docs/get-started/self-hosted/quick-start/index.md), you will need to manually deploy the [GCS Loader](/docs/api-reference/loaders-storage-targets/google-cloud-storage-loader/index.md) to save failed events into GCS, as it’s currently not included in the Terraform scripts.
 
 :::
 

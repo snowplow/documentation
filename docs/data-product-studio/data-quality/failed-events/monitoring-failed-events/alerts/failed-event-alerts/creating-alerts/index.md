@@ -8,7 +8,7 @@ Set up failed event alerts to receive notifications when failed events occur in 
 
 You'll need access to the [data quality dashboard](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/index.md#data-quality-dashboard).
 
-To create an alert, go to the BDP Console:
+To create an alert, go to Snowplow Console:
 1. Navigate to **Data Quality** in the left sidebar
 2. Click **Manage alerts** in the top-right corner
 3. Click **Create alert**

@@ -6,7 +6,7 @@ sidebar_position: 2
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import LicenseNotice from '@site/docs/get-started/snowplow-community-edition/_license-notice.md';
+import LicenseNotice from '@site/docs/get-started/self-hosted/_license-notice.md';
 ```
 
 This guide will take you through how to spin up a Snowplow Community Edition pipeline using the [Snowplow Terraform modules](https://registry.terraform.io/namespaces/snowplow-devops). _(Not familiar with Terraform? Take a look at [Infrastructure as code with Terraform](https://learn.hashicorp.com/tutorials/terraform/infrastructure-as-code?in=terraform/aws-get-started).)_
@@ -645,7 +645,7 @@ If you have attached a custom SSL certificate and set up your own DNS records, t
 
 :::tip Terraform errors
 
-For solutions to some common Terraform errors that you might encounter when running `terraform plan` or `terraform apply`, see the [FAQs section](/docs/get-started/snowplow-community-edition/faq/index.md#troubleshooting-terraform-errors).
+For solutions to some common Terraform errors that you might encounter when running `terraform plan` or `terraform apply`, see the [FAQs section](/docs/get-started/self-hosted/faq/index.md#troubleshooting-terraform-errors).
 
 :::
 
@@ -810,4 +810,4 @@ You should now be able to access your service over HTTPS. Verify this by going t
 
 ---
 
-If you are curious, here’s [what has been deployed](/docs/get-started/snowplow-community-edition/what-is-deployed/index.md). Now it’s time to [send your first events to your pipeline](/docs/get-started/tracking/index.md)!
+If you are curious, here’s [what has been deployed](/docs/get-started/self-hosted/what-is-deployed/index.md). Now it’s time to [send your first events to your pipeline](/docs/get-started/tracking/index.md)!

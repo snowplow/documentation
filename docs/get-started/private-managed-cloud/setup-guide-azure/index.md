@@ -1,15 +1,13 @@
 ---
-title: "BDP Enterprise on Azure"
+title: "Private Managed Cloud on Azure"
 sidebar_position: 30
 ---
 
-## Request your pipeline through Snowplow BDP Console
-
-Login to Snowplow BDP Console where you'll be able to follow a step-by-step guide to getting started (including the steps below).
+To set up Snowplow, log in to Snowplow [Console](https://console.snowplowanalytics.com) where you'll be able to follow a step-by-step guide to getting started, including the steps below.
 
 ## Setting up your Azure account
 
-To get your cloud environment ready for your Snowplow pipeline to be installed:
+The following steps explain how to set up your cloud environment ready for your Snowplow pipeline to be installed.
 
 ### Create a new subscription
 
@@ -23,7 +21,7 @@ Enable billing in the tenant by creating a subscription. Otherwise, the pipeline
 
 Snowplow deploys into your tenant using a verified [application service principal](https://learn.microsoft.com/en-us/entra/identity-platform/app-objects-and-service-principals?tabs=browser#service-principal-object) (Enterprise application). We require a custom role to be assigned to the application service principal. This will allow us to create custom pipeline roles needed for deploying and managing different components of your infrastructure.
 
-#### Consent to Snowplow BDP Enterprise Deployment application
+#### Consent to Snowplow Private Managed Cloud Deployment application
 
 You will need to grant our verified application service principal the access into your Azure tenant. Once that’s done, you should see the application service principal under _Microsoft Entra ID_ → _Enterprise Applications_.
 
@@ -33,7 +31,7 @@ You will need to grant our verified application service principal the access int
     https://login.microsoftonline.com/<TenantID>/oauth2/authorize?client_id=0581feb4-b614-42c7-b8e7-b4e7fba9153a&response_type=code
     ```
 3. A consent window will appear detailing that an Enterprise application is being set up in your tenant. It needs to be accepted by your Azure tenant admin for the organization (there is a tick box that must be ticked). After accepting, Microsoft redirects you to a page unrelated to the Azure Portal, so close this window
-4. Verify the trust has been established by viewing “Snowplow BDP Enterprise Deployment” application in the Enterprise Applications section of Entra ID
+4. Verify the trust has been established by viewing “Snowplow Private Managed Cloud Deployment” application in the Enterprise Applications section of Entra ID
 
 #### Create and assign role to application service principal
 

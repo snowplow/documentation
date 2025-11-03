@@ -62,8 +62,8 @@ collector {
 | `collector.preTerminationPeriod` (since *2.5.0*) | Optional. Default: `10 seconds`. Configures how long the collector should pause after receiving a sigterm before starting the graceful shutdown. During this period the collector continues to accept new connections and respond to requests. |
 | `collector.prometheusMetrics.enabled` (deprecated since *2.6.0*) | Optional. Default: `false`. When enabled, all requests are logged as prometheus metrics and the `/metrics` endpoint returns the report about the metrics. |
 | `collector.prometheusMetrics.durationBucketsInSeconds` (deprecated since *2.6.0*) | Optional. E.g. `[0.1, 3, 10]`. Custom buckets for the `http_request_duration_seconds_bucket` duration prometheus metric. |
-| `collector.telemetry.disable` | Optional. Set to `true` to disable [telemetry](/docs/get-started/snowplow-community-edition/telemetry/index.md). |
-| `collector.telemetry.userProvidedId` | Optional. See [here](/docs/get-started/snowplow-community-edition/telemetry/index.md#how-can-i-help) for more information. |
+| `collector.telemetry.disable` | Optional. Set to `true` to disable [telemetry](/docs/get-started/self-hosted/telemetry/index.md). |
+| `collector.telemetry.userProvidedId` | Optional. See [here](/docs/get-started/self-hosted/telemetry/index.md#how-can-i-help) for more information. |
 | `collector.compression.enabled` (since *3.6.0*) | Optional. Default: `false`. Enable compression on the output. Compression should only be enabled with Enrich >=6.1.0. |
 | `collector.compression.type` (since *3.6.0*) | Optional. Default: `zstd`. Compression algorithm to use. |
 | `collector.compression.gzipCompressionLevel` (since *3.6.0*) | Optional. Default: `6`. The compression level for GZIP compression. It is between 1 and 9. Lower levels have faster compression speed, but worse compression ratio.  |

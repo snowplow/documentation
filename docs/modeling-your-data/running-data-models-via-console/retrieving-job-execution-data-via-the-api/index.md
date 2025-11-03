@@ -4,7 +4,7 @@ sidebar_position: 3
 sidebar_label: "Retrieve job execution data"
 ---
 
-The API that powers the warehouse jobs monitoring view in Snowplow BDP Console (Jobs) is also available for consumption by other authenticated clients.
+The API that powers the warehouse jobs monitoring view in Snowplow Console (Jobs) is also available for consumption by other authenticated clients.
 
 The exact same data about past and current jobs executions can be retrieved and processed programmatically. Hence, it possible to integrate with your monitoring infrastructure and enable additional alerting or insights.
 

@@ -7,7 +7,7 @@ sidebar_position: 3
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import Link from '@docusaurus/Link';
-import Diagram from '@site/docs/get-started/snowplow-community-edition/_diagram.md';
+import Diagram from '@site/docs/get-started/self-hosted/_diagram.md';
 
 export const TerraformLinks = (props) => <p>
   For further details on the resources, default and required input variables, and outputs, see the Terraform module (

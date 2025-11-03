@@ -19,7 +19,7 @@ This will let you best manage changes you make to the available Application Cont
 To illustrate, let's consider Snowplow. We can identify several applications designed for distinct purposes, each serving as a separate data source for behavioral data, or in other words, a Source Application:
 
 - The Snowplow website that corresponds to the application served under www.snowplow.io
-- The BDP Console application that is served under console.snowplowanalytics.com.
+- The Console application that is served under console.snowplowanalytics.com.
 - The documentation website serving as our information hub, for all things related to our product, served under docs.snowplow.io.
 
 Source Applications are a foundational component that enables you to establish the overarching relationships that connect application IDs and [Application Entites](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/global-context/index.md) and [Data Products](/docs/data-product-studio/data-products/index.md).

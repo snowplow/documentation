@@ -223,7 +223,7 @@ The following loaders and folders are available:
   </TabItem>
   <TabItem value="gcp" label="GCP">
 
-If enable the BigQuery destination, there will be a “dead letter” GCS bucket. It will have the suffix `-bq-loader-dead-letter` and will contain events that the loader fails to be insert into BigQuery, _but not_ any other kind of failed events. To store all failed events, you will need to manually deploy the [GCS Loader](/docs/api-reference/loaders-storage-targets/google-cloud-storage-loader/index.md) application.
+To store all failed events, you will need to manually deploy the [GCS Loader](/docs/api-reference/loaders-storage-targets/google-cloud-storage-loader/index.md) application.
 
   </TabItem>
   <TabItem value="azure" label="Azure">

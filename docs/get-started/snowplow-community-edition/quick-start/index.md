@@ -161,6 +161,7 @@ After the deployment completes, you should get an output like this:
 vnet_subnets_name_id = {
   "collector-agw1" = "/subscriptions/<...>/resourceGroups/<...>/providers/Microsoft.Network/virtualNetworks/<...>/subnets/collector-agw1"
   "iglu-agw1" = "/subscriptions/<...>/resourceGroups/<...>/providers/Microsoft.Network/virtualNetworks/<...>/subnets/iglu-agw1"
+  "iglu-vmss1" = "/subscriptions/<...>/resourceGroups/<...>/providers/Microsoft.Network/virtualNetworks/<...>/subnets/iglu-vmss1"
   "iglu1" = "/subscriptions/<...>/resourceGroups/<...>/providers/Microsoft.Network/virtualNetworks/<...>/subnets/iglu1"
   "pipeline1" = "/subscriptions/<...>/resourceGroups/<...>/providers/Microsoft.Network/virtualNetworks/<...>/subnets/pipeline1"
 }
@@ -208,8 +209,8 @@ nano terraform.tfvars # or other text editor of your choosing
 If you [used our `base` module](#set-up-a-vpc-to-deploy-into), you will need to set these variables as follows:
 
 * `resource_group_name`: use the same value as you supplied in `base`
-* `subnet_id_lb`: use the identifier of the `iglu-agw1` subnet from `base`
-* `subnet_id_servers`: use the identifier of the `iglu1` subnet from `base`
+* `subnet_id_database`: use the identifier of the `iglu1` subnet from `base`
+* `subnet_id_servers`: use the identifier of the `iglu-vmss1` subnet from `base`
 
 </TabItem>
 </Tabs>
@@ -328,24 +329,20 @@ CREATE DATABASE IF NOT EXISTS ${snowflake_database};
 -- 2. Create a schema within the database
 CREATE SCHEMA IF NOT EXISTS ${snowflake_database}.${snowflake_schema};
 
--- 3. Create a warehouse which will be used to load data
-CREATE WAREHOUSE IF NOT EXISTS ${snowflake_warehouse} WITH WAREHOUSE_SIZE = 'XSMALL' WAREHOUSE_TYPE = 'STANDARD' AUTO_SUSPEND = 60 AUTO_RESUME = TRUE;
-
--- 4. Create a role that will be used for loading data
+-- 3. Create a role that will be used for loading data
 CREATE ROLE IF NOT EXISTS ${snowflake_loader_role};
-GRANT USAGE, OPERATE ON WAREHOUSE ${snowflake_warehouse} TO ROLE ${snowflake_loader_role};
 GRANT USAGE ON DATABASE ${snowflake_database} TO ROLE ${snowflake_loader_role};
 GRANT ALL ON SCHEMA ${snowflake_database}.${snowflake_schema} TO ROLE ${snowflake_loader_role};
 
--- 5. Create a user that can be used for loading data
+-- 4. Create a user that can be used for loading data
 CREATE USER IF NOT EXISTS ${snowflake_loader_user}
   RSA_PUBLIC_KEY='MIIBIj...'
-  MUST_CHANGE_PASSWORD = FALSE
+  TYPE = SERVICE
   DEFAULT_ROLE = ${snowflake_loader_role}
   EMAIL = 'loader@acme.com';
 GRANT ROLE ${snowflake_loader_role} TO USER ${snowflake_loader_user};
 
--- 6. (Optional) Grant this role to SYSADMIN to make debugging easier from admin users
+-- 5. (Optional) Grant this role to SYSADMIN to make debugging easier from admin users
 GRANT ROLE ${snowflake_loader_role} TO ROLE SYSADMIN;
 ```
 

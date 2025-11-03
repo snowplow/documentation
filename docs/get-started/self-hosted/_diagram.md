@@ -33,13 +33,9 @@ flowchart LR
       <Mermaid value={`
       flowchart LR
         ${props.bucket == 'S3' ?
-          `raw[["<b>Raw Stream</b>\n(${props.stream})"]]
-          blobloaderraw{{"<b>${props.bucket} Loader Raw</b>\n(${props.compute})"}}
-          blobraw[("<b>Raw Events</b>\n(${props.bucket})")]
-          good[["<b>Enriched Stream</b>\n(${props.stream})"]]
+          `good[["<b>Enriched Stream</b>\n(${props.stream})"]]
           blobloadergood{{"<b>${props.bucket} Loader Good</b>\n(${props.compute})"}}
           blobgood[("<b>Enriched Events</b>\n(${props.bucket})")]
-          raw-->blobloaderraw-->blobraw
           good-->blobloadergood-->blobgood
           bad[["<b>Bad Stream</b>\n(${props.stream})"]]
           blobloaderbad{{"<b>${props.bucket} Loader Bad</b>\n(${props.compute})"}}

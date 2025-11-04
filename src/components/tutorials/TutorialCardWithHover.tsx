@@ -41,11 +41,11 @@ export const TutorialCardWithHover: React.FC<TutorialCardWithHoverProps> = ({ tu
         {/* Topic/Use Case Tags */}
         <div className="flex flex-wrap gap-2 mb-4">
           {tutorial.meta.useCases.length > 0 && (
-            <div className="bg-purple-200 text-purple-800 px-2 py-1 rounded-lg text-[.675rem] font-normal transition-all duration-300 group-hover:bg-purple-300 group-hover:shadow-sm">
+            <div className="bg-primary text-primary-foreground px-2 py-1 rounded-lg text-[.675rem] font-normal transition-all duration-300 group-hover:bg-foreground group-hover:shadow-sm">
               {tutorial.meta.useCases[0]}
             </div>
           )}
-          <div className="bg-purple-200 text-purple-800 px-2 py-1 rounded-lg text-[.675rem] font-normal transition-all duration-300 group-hover:bg-purple-300 group-hover:shadow-sm">
+          <div className="bg-primary text-primary-foreground px-2 py-1 rounded-lg text-[.675rem] font-normal transition-all duration-300 group-hover:bg-foreground group-hover:shadow-sm">
             {tutorial.meta.label}
           </div>
         </div>

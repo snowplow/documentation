@@ -256,7 +256,13 @@ const TutorialDocPageLayoutMobile: FC<{
 
       {/* Mobile Progress Tracker */}
       <Grid item>
-        <TutorialProgressTrackerMobile className={styles.tutorialProgressTrackerMobile} />
+        <TutorialProgressTrackerMobile
+          className={styles.tutorialProgressTrackerMobile}
+          meta={meta}
+          steps={steps}
+          activeStep={activeStep}
+          setActiveStep={setActiveStep}
+        />
       </Grid>
 
       <Grid item>
@@ -307,7 +313,13 @@ const TutorialDocPageLayoutDesktop: FC<{
 
           {/* Progress Tracker Sidebar */}
           <Grid item xs={3} sx={{ minWidth: '280px' }}>
-            <TutorialProgressTracker className={styles.tutorialProgressTracker} />
+            <TutorialProgressTracker
+              className={styles.tutorialProgressTracker}
+              meta={meta}
+              steps={steps}
+              activeStep={activeStep}
+              setActiveStep={setActiveStep}
+            />
           </Grid>
         </Grid>
       </Grid>

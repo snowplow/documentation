@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect } from 'react'
 import { ChevronRight, ArrowLeft, Check, X, ListChecks } from 'lucide-react'
 import { cn } from '@site/src/lib/utils'
 import { Button } from '@site/src/components/ui/button'
 import RadialProgress from './RadialProgress'
 import styles from './TutorialProgressTracker.module.css'
+import { useHistory } from '@docusaurus/router'
 
 interface TutorialProgressTrackerProps {
   className?: string
@@ -20,23 +21,80 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
   activeStep,
   setActiveStep
 }) => {
+  const history = useHistory()
   const [scrollProgress, setScrollProgress] = useState(0)
   const [visitedSteps, setVisitedSteps] = useState<Set<string>>(new Set())
   const [stepReadingProgress, setStepReadingProgress] = useState<Map<string, number>>(new Map())
   const [isSheetOpen, setIsSheetOpen] = useState(false)
+  const [isClient, setIsClient] = useState(false)
 
-  // Load visited steps from localStorage and re-load when activeStep changes
+  // Set client flag once component mounts
   useEffect(() => {
-    if (!meta?.id) return
+    setIsClient(true)
+  }, [])
 
-    const storedVisited = localStorage.getItem(`tutorial-progress-${meta.id}`)
-    if (storedVisited) {
-      setVisitedSteps(new Set(JSON.parse(storedVisited)))
+  // Load visited steps from localStorage
+  useEffect(() => {
+    if (!meta?.id || typeof window === 'undefined' || !isClient) return
+
+    const loadProgress = () => {
+      try {
+        const storedVisited = localStorage.getItem(`tutorial-progress-${meta.id}`)
+        if (storedVisited) {
+          const parsed = JSON.parse(storedVisited)
+          if (Array.isArray(parsed)) {
+            const validSteps = parsed.filter(item => typeof item === 'string' && item.length > 0)
+            if (validSteps.length > 0) {
+              setVisitedSteps(new Set(validSteps))
+            } else {
+              localStorage.removeItem(`tutorial-progress-${meta.id}`)
+            }
+          }
+        }
+      } catch (error) {
+        localStorage.removeItem(`tutorial-progress-${meta.id}`)
+      }
     }
-  }, [meta?.id, activeStep]) // Re-load when activeStep changes
 
-  // Don't automatically mark steps as visited - only when explicitly completed
-  // This effect is removed to prevent auto-completion
+    if (typeof localStorage !== 'undefined') {
+      loadProgress()
+    } else {
+      setTimeout(loadProgress, 100)
+    }
+  }, [meta?.id, isClient])
+
+
+
+
+  // Helper function to get consistent step key
+  const getStepKey = (step: any) => {
+    return step.path || step.id
+  }
+
+  // Auto-complete current step when user scrolls to bottom
+  useEffect(() => {
+    if (!activeStep || !meta?.id || typeof window === 'undefined') return
+
+    const isScrolledToBottom = scrollProgress >= 90
+    const stepKey = getStepKey(activeStep)
+
+    if (isScrolledToBottom && stepKey && !visitedSteps.has(stepKey)) {
+      // Ensure we only store strings, not nested Sets
+      const currentSteps = Array.from(visitedSteps).filter(item => typeof item === 'string')
+      const newSteps = [...currentSteps, stepKey].filter((item, index, arr) =>
+        typeof item === 'string' && arr.indexOf(item) === index // deduplicate
+      )
+      const newVisited = new Set(newSteps)
+      setVisitedSteps(newVisited)
+
+      try {
+        const dataToSave = Array.from(newVisited)
+        localStorage.setItem(`tutorial-progress-${meta.id}`, JSON.stringify(dataToSave))
+      } catch (error) {
+        // Silently fail - tutorial progress is not critical
+      }
+    }
+  }, [scrollProgress, activeStep, meta?.id, visitedSteps])
 
   // Scroll progress tracking
   useEffect(() => {
@@ -56,40 +114,17 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
     if (setActiveStep) {
       setActiveStep(step)
     }
-    // Navigate to the step's path
-    window.location.href = step.path
+    // Navigate to the step's path using React Router
+    history.push(step.path)
   }
 
-  // Mark current step as completed and navigate to next
-  const completeCurrentStep = () => {
-    if (!activeStep || !meta?.id) return
 
-    const stepKey = activeStep.path || activeStep.id
-    if (stepKey && !visitedSteps.has(stepKey)) {
-      const newVisited = new Set([...visitedSteps, stepKey])
-      setVisitedSteps(newVisited)
-      localStorage.setItem(`tutorial-progress-${meta.id}`, JSON.stringify([...newVisited]))
-    }
-
-    // Find next step
-    const currentIndex = steps.findIndex(step =>
-      isStepCurrent(step)
-    )
-
-    if (currentIndex !== -1 && currentIndex < steps.length - 1) {
-      const nextStep = steps[currentIndex + 1]
-      navigateToStep(nextStep)
-    }
-  }
-
-  // Check if user has scrolled to bottom (90% threshold)
-  const isScrolledToBottom = scrollProgress >= 90
 
   // Get progress percentage based on completed steps
   const getCurrentStepProgress = () => {
     if (steps.length === 0) return 0
     const completedCount = steps.filter(step => {
-      const stepKey = step.path || step.id
+      const stepKey = getStepKey(step)
       return visitedSteps.has(stepKey)
     }).length
     return (completedCount / steps.length) * 100
@@ -97,7 +132,7 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
 
   // Check if step is completed
   const isStepCompleted = (step: any) => {
-    const stepKey = step.path || step.id
+    const stepKey = getStepKey(step)
     return visitedSteps.has(stepKey)
   }
 
@@ -151,12 +186,12 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
       <div className="bg-accent text-foreground rounded-lg p-6 mb-4 leading-tight">
       <div className="flex flex-wrap gap-1 mb-4">
           {meta?.label && (
-            <div className="bg-purple-200 text-purple-800 px-2 py-1 rounded-lg text-[.675rem] font-normal">
+            <div className="bg-primary text-primary-foreground px-2 py-1 rounded-lg text-[.675rem] font-normal">
               {meta.label}
             </div>
           )}
           {meta?.useCases && meta.useCases.map((useCase: string, index: number) => (
-            <div key={index} className="bg-purple-200 text-purple-800 px-2 py-1 rounded-lg text-[.675rem] font-normal">
+            <div key={index} className="bg-primary text-primary-foreground px-2 py-1 rounded-lg text-[.675rem] font-normal">
               {useCase}
             </div>
           ))}

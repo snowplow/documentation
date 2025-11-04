@@ -864,21 +864,22 @@ ul.breadcrumbs {
 }
 
 ul.breadcrumbs > li.breadcrumbs__item > a.breadcrumbs__link > svg {
-  width: 20px;
-  height: 20px;
-  margin-right: 8px;
+  width: 16px;
+  height: 16px;
+  margin-right: 4px;
   vertical-align: middle;
   display: inline-block;
 }
 
-/* Fix home icon alignment specifically */
+/* Fix home icon alignment specifically - tighten spacing */
 .breadcrumbs__link[aria-label*="Home"] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
   background: none !important;
   border-radius: 0 !important;
-  padding: 8px 4px;
+  padding: 4px 0px !important;
+  margin-right: 2px !important;
 }
 
 /* Remove any circular background from home icon */

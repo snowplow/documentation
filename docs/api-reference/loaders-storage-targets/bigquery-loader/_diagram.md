@@ -1,7 +1,6 @@
-```mdx-code-block
 import Mermaid from '@theme/Mermaid';
 import Link from '@docusaurus/Link';
-```
+
 <p>On {props.cloud}, the BigQuery Streaming Loader continually pulls events from {props.stream} and writes to BigQuery using the <Link to="https://cloud.google.com/bigquery/docs/write-api">BigQuery Storage API</Link>.</p>
 
 <Mermaid value={`

@@ -26,7 +26,7 @@ Install [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2
 
 [Configure](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-config) the CLI against a role that has the `AdminstratorAccess` policy attached.
 
-:::caution
+:::warning
 
 `AdminstratorAccess` allows all actions on all AWS services and shouldn't be used in production
 
@@ -62,7 +62,7 @@ If your organisation has an existing Azure account, make sure your user has been
 * [User Access Administrator](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#user-access-administrator)
 * [Storage Blob Data Contributor](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#storage-blob-data-contributor)
 
-:::caution
+:::warning
 
 `User Access Administrator` allows the user to modify, create and delete permissions across Azure resources, and shouldn’t be used in production. Instead, you can use a custom role with the following permissions:
 * `Microsoft.Authorization/roleAssignments/write` to deploy the stacks below
@@ -81,23 +81,23 @@ Details on how to configure the Azure Terraform Provider can be found [on the re
 
 The sections below will guide you through setting up your destination to receive Snowplow data, but for now here is an overview.
 
-| Warehouse | AWS | GCP | Azure |
-|:----------|:---:|:---:|:-----:|
-| Snowflake | :white_check_mark: | :x: | :x: |
-| Databricks | :white_check_mark: | :x: | :white_check_mark: |
-| Redshift | :white_check_mark: | — | — |
-| BigQuery | — | :white_check_mark: | — |
-| Synapse Analytics | — | — | :white_check_mark: |
+| Warehouse         |        AWS         |        GCP         |       Azure        |
+| :---------------- | :----------------: | :----------------: | :----------------: |
+| Snowflake         | :white_check_mark: |        :x:         |        :x:         |
+| Databricks        | :white_check_mark: |        :x:         | :white_check_mark: |
+| Redshift          | :white_check_mark: |         —          |         —          |
+| BigQuery          |         —          | :white_check_mark: |         —          |
+| Synapse Analytics |         —          |         —          | :white_check_mark: |
 
 ## Real-time streaming options
 
 As part of the deployment, your data will be available in real-time streams corresponding to the cloud provider you have chosen. You can consume data directly from these streams, either in addition to or instead of the data warehouse.
 
-| Stream | AWS | GCP | Azure |
-|:----------|:---:|:---:|:-----:|
-| Kinesis | :white_check_mark: | :x: | :x: |
-| Pub/Sub | :x: | :white_check_mark: |:x: |
-| EventHubs | :x: | :x: | :white_check_mark: |
+| Stream    |        AWS         |        GCP         |       Azure        |
+| :-------- | :----------------: | :----------------: | :----------------: |
+| Kinesis   | :white_check_mark: |        :x:         |        :x:         |
+| Pub/Sub   |        :x:         | :white_check_mark: |        :x:         |
+| EventHubs |        :x:         |        :x:         | :white_check_mark: |
 
 For an out-of-the-box solution to accessing this data in real-time streams, you can [check out our Snowbridge tool](/docs/api-reference/snowbridge/index.md). Alternatively, if you want to develop a custom consumer, you can [leverage our Analytics SDKs](/docs/api-reference/analytics-sdk/index.md) to parse the event formats more easily.
 
@@ -390,7 +390,7 @@ You can configure your cluster with [an instance profile](https://docs.databrick
 
 #### Step 3: Create an access token for the loader
 
-:::caution
+:::warning
 
 The access token must not have a specified lifetime. Otherwise, the loader will stop working when the token expires.
 
@@ -574,7 +574,7 @@ EOT
 
 </details>
 
-:::caution
+:::warning
 
 For all active destinations, change any `_password` setting to a value that _only you_ know.
 

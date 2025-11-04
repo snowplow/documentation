@@ -2,7 +2,7 @@ import React from 'react'
 import MDXContent from '@theme-original/MDXContent'
 import Admonition from '@theme-original/Admonition'
 import Head from '@docusaurus/Head'
-import { useSidebarBreadcrumbs } from '@docusaurus/theme-common/internal'
+import { useSidebarBreadcrumbs } from '@docusaurus/plugin-content-docs/client'
 import _ from 'lodash'
 
 export default function MDXContentWrapper(props) {

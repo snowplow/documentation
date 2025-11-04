@@ -48,7 +48,7 @@ If you have a Snowplow account, you can [enable Signals through Snowplow Console
 
 :::note
 
-The Signals Sandbox is designed for experimentation and learning. For production use cases, you'll need a [Snowplow](/docs/getting-started-with-snowplow-bdp/) account with [Signals enabled](/docs/signals/connection/).
+The Signals Sandbox is designed for experimentation and learning. For production use cases, you'll need a [Snowplow](/docs/get-started/private-managed-cloud/) account with [Signals enabled](/docs/signals/connection/).
 
 :::
 

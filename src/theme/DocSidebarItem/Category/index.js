@@ -9,8 +9,12 @@ import {
 } from '@docusaurus/theme-common'
 import {
   isActiveSidebarItem,
-  findFirstCategoryLink,
+} from '@docusaurus/plugin-content-docs/client'
+import {
+  findFirstSidebarItemLink,
   useDocSidebarItemsExpandedState,
+} from '@docusaurus/plugin-content-docs/client'
+import {
   isSamePath,
 } from '@docusaurus/theme-common/internal'
 import Link from '@docusaurus/Link'
@@ -49,7 +53,7 @@ function useCategoryHrefWithSSRFallback(item) {
     if (isBrowser || !item.collapsible) {
       return undefined
     }
-    return findFirstCategoryLink(item)
+    return findFirstSidebarItemLink(item)
   }, [item, isBrowser])
 }
 

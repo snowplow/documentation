@@ -91,7 +91,7 @@ The contents of a generated file from the Snowtype CLI will be:
     - A method that sends a Self Describing Event with the schema as the main event entity.
 - For each Event Specification, a method/class to track the event specification with the set event and context entity schemas.
 
-:::caution
+:::warning
 The Snowtype CLI does not automatically install the required Snowplow tracking libraries. For now it generates code that use the tracking libraries which are expected to be installed on the project.
 :::
 
@@ -443,7 +443,7 @@ npx @snowplow/snowtype@latest update --maximumBump=patch
 
 ## Disallow generating code using schemas not deployed on production environment.
 
-While developing or testing, it might be useful to use [Snowplow Mini](../../../pipeline-components-and-applications/snowplow-mini/) to validate against your new schemas in your development environment.
+While developing or testing, it might be useful to use [Snowplow Mini](/docs/api-reference/snowplow-mini/index.md) to validate against your new schemas in your development environment.
 In this and any other case you are developing a schema and eventually publishing the tracking to production, you need to make sure all the schemas you are using are deployed to the production environment for the pipeline to use. Failing to do that will result in failed events.
 
 Snowtype by default will print a warning when code is generated using schemas only published to development environment. To make sure that there are no schemas not yet deployed to production, you can use the `--disallowDevSchemas` flag or option when using the `generate` command. Using this flag will make sure each generation attempt will fail, indicating the schemas that are not yet deployed to the production environment.

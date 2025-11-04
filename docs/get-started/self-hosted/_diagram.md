@@ -17,7 +17,8 @@ flowchart LR
     `loader("<b>${props.warehouse} Loader</b>\n<i>(see below)</i>")`
   }
   atomic[("<b>Events</b>\n(${props.warehouse == 'Data Lake' ? props.bucket : props.warehouse})")]
-  collect---iglu %% invisible link for alignment
+  collect---iglu
+  %% above line is an invisible link for alignment
   enrich-.-oiglu<-.->igludb
   collect-->|"<b>Raw Stream</b><br/>(${props.stream})"| enrich
   enrich-->|"<b>Enriched Stream</b><br/>(${props.stream})"| loader-->atomic

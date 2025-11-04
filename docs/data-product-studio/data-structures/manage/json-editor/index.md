@@ -50,7 +50,7 @@ The versioning dialog will appear, at this point you have three options:
 - Increment a major version to indicate a breaking change to the schema. In our example, this would increment the schema from `1-0-1` to `2-0-0`.
 - [Patch the current version](/docs/data-product-studio/data-structures/version-amend/amending/index.md#patching-the-schema), this will overwrite the existing schema without increasing the version. In our example, this would leave the schema at 1-0-1.
 
-:::caution Selecting the "patch" option
+:::warning Selecting the "patch" option
 
 Patching can be useful in development environments, but should be done carefully and should never be done in production. See [amending schemas](/docs/data-product-studio/data-structures/version-amend/amending/index.md) for an explanation and some suggestions.
 

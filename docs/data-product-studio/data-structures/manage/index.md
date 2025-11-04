@@ -128,6 +128,6 @@ When a data structure is managed this way it becomes locked in the UI disabling 
 
 ![](images/locked-ds.png)
 
-:::caution
+:::warning
 Having a single source of truth for a data structure is a good idea. If your source of truth is an external repository then unlocking and editing will cause conflicts.
 :::

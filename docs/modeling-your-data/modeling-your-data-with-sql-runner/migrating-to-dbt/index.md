@@ -114,7 +114,7 @@ The following SQL will merge the existing web records in your SQL Runner derived
 
 **If you are using Redshift, be sure to `commit` your changes.**
 
-:::caution
+:::warning
 
 It is possible, particularly for columns which may have been null, that the types of columns across the two tables don't entirely match. Your warehouse may manage this for you, or you may have to use a `cast(col_name as new_type)` in place of just selecting the column based on any error message you receive.
 
@@ -635,7 +635,7 @@ The following SQL will merge the existing mobile records in your SQL Runner deri
 
 **If you are using Redshift, be sure to `commit` your changes.**
 
-:::caution
+:::warning
 
 It is possible, particularly for columns which may have been null, that the types of columns across the two tables don't entirely match. Your warehouse may manage this for you, or you may have to use a `cast(col_name as new_type)` in place of just selecting the column based on any error message you receive.
 

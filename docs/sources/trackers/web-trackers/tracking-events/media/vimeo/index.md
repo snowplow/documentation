@@ -171,7 +171,7 @@ endVimeoTracking(id)
   </TabItem>
 </Tabs>
 
-:::caution
+:::warning
 
 It's important to call `endVimeoTracking` as this will end any recurring ping events, clear all listeners set by the Vimeo plugin, along with resetting statistics counters used by the Snowplow Media plugin.
 

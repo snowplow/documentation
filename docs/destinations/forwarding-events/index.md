@@ -24,14 +24,14 @@ Event forwarding is a good fit for use cases such as:
 
 ## How it works
 
-Event forwarders are deployed as managed [Snowbridge](/docs/api-reference/snowbridge/index.md) apps that consume events from your enriched event stream in near real-time. It uses a [JavaScript transformation function](docs/api-reference/snowbridge/configuration/transformations/custom-scripts/javascript-configuration/index.md) generated from your configuration to filter and transform events.
+Event forwarders are deployed as managed [Snowbridge](/docs/api-reference/snowbridge/index.md) apps that consume events from your enriched event stream in near real-time. It uses a [JavaScript transformation function](/docs/api-reference/snowbridge/configuration/transformations/custom-scripts/javascript-configuration/index.md) generated from your configuration to filter and transform events.
 
 Here's how forwarders process events:
 
 1. **Read events**: reads enriched events from your stream (Kinesis, Pub/Sub, or EventHub) as the Snowplow pipeline produces them
-2. **Apply filters**: checks each event against your configured [JavaScript filters](docs/destinations/forwarding-events/reference/#event-filtering) to decide whether to forward it
-3. **Transform data**: transforms matching events using [field mapping expressions](docs/destinations/forwarding-events/reference/#field-mapping) and custom JavaScript to convert Snowplow event data into your destination's API format
-4. **Delivery handling**: sends transformed events to the destination via HTTP API calls. Retries failures depending on the [failure type](docs/destinations/forwarding-events/event-forwarding-monitoring-and-troubleshooting/index.md#failure-types-and-handling) and [logs non-retryable failures](docs/destinations/forwarding-events/event-forwarding-monitoring-and-troubleshooting/#what-happens-when-events-fail) to cloud storage
+2. **Apply filters**: checks each event against your configured [JavaScript filters](/docs/destinations/forwarding-events/reference/index.md#event-filtering) to decide whether to forward it
+3. **Transform data**: transforms matching events using [field mapping expressions](/docs/destinations/forwarding-events/reference/index.md#field-mapping) and custom JavaScript to convert Snowplow event data into your destination's API format
+4. **Delivery handling**: sends transformed events to the destination via HTTP API calls. Retries failures depending on the [failure type](/docs/destinations/forwarding-events/event-forwarding-monitoring-and-troubleshooting/index.md#failure-types-and-handling) and [logs non-retryable failures](/docs/destinations/forwarding-events/event-forwarding-monitoring-and-troubleshooting/index.md#what-happens-when-events-fail) to cloud storage
 
 The end-to-end latency from event collection to destination delivery is on the order of seconds. Latency depends on overall pipeline event volume, complexity of transformation logic, and destination rate limits.
 

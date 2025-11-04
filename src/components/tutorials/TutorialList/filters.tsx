@@ -1,10 +1,6 @@
 import React, { FC, useMemo, useState } from 'react'
-import {
-  Box,
-  Checkbox,
-  FormControlLabel,
-  Typography,
-} from '@mui/material'
+import { Checkbox } from '@site/src/components/ui/checkbox'
+import { Label } from '@site/src/components/ui/label'
 
 import { getMetaData } from '../utils'
 import { Meta, Topic as TopicType, Tutorial } from '../models'
@@ -276,41 +272,31 @@ const GenericFilter: FC<GenericFilterProps> = ({
   const orderedOptions = customOrdering ? customOrdering(options) : options
 
   return (
-    <Box sx={{ mt: 2 }}>
-      <Typography
-        variant="h6"
-        sx={{ mb: 2, fontSize: '16px', fontWeight: 600 }}
-      >
-        {title}
-      </Typography>
+    <div className="space-y-3">
       {orderedOptions.map((option) => {
         const isAvailable =
           availableValues.includes(option) || selectedValues.includes(option)
         return (
-          <FormControlLabel
-            key={option}
-            control={
-              <Checkbox
-                checked={selectedValues.includes(option)}
-                onChange={(e) => onChange(option, e.target.checked)}
-                disabled={!isAvailable}
-                sx={{
-                  '&.Mui-checked': { color: 'rgba(102, 56, 184, 1)' },
-                  '&.Mui-disabled': { opacity: 0.5 },
-                }}
-              />
-            }
-            label={option}
-            sx={{
-              display: 'block',
-              mb: 1,
-              opacity: isAvailable ? 1 : 0.5,
-              color: isAvailable ? 'inherit' : 'rgba(0, 0, 0, 0.38)',
-            }}
-          />
+          <div key={option} className="flex items-center space-x-2">
+            <Checkbox
+              id={`${title}-${option}`}
+              checked={selectedValues.includes(option)}
+              onCheckedChange={(checked) => onChange(option, !!checked)}
+              disabled={!isAvailable}
+              className={`${!isAvailable ? 'opacity-50' : ''}`}
+            />
+            <Label
+              htmlFor={`${title}-${option}`}
+              className={`text-sm leading-none cursor-pointer ${
+                !isAvailable ? 'opacity-50 text-muted-foreground' : 'text-foreground'
+              }`}
+            >
+              {option}
+            </Label>
+          </div>
         )
       })}
-    </Box>
+    </div>
   )
 }
 

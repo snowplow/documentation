@@ -12,6 +12,8 @@ import { getSteps } from '@site/src/components/tutorials/utils'
 import { useDocsSidebar } from '@docusaurus/theme-common/internal'
 import { Meta, Step } from '@site/src/components/tutorials/models'
 import { useTutorial } from '@site/src/components/tutorials/hooks'
+import TutorialProgressTracker from '@site/src/components/tutorials/TutorialProgressTracker'
+import TutorialProgressTrackerMobile from '@site/src/components/tutorials/TutorialProgressTrackerMobile'
 
 import styles from './styles.module.css'
 import { Paginators } from './Paginators'
@@ -68,6 +70,8 @@ const DefaultDocPageLayout: FC<Props> = ({
   children,
 }) => {
   const sidebar = useDocsSidebar()
+
+
   return (
     <main
       className={clsx(
@@ -77,10 +81,17 @@ const DefaultDocPageLayout: FC<Props> = ({
     >
       <div
         className={clsx(
-          'container padding-top--md padding-bottom--lg',
+          'doc_wrapper', 'py-4',
           styles.docItemWrapper,
           hiddenSidebarContainer && styles.docItemWrapperEnhanced
         )}
+        style={{
+          maxWidth: 'none',
+          paddingLeft: 0,
+          paddingRight: 0,
+          marginLeft: 0,
+          marginRight: 0
+        }}
       >
         {children}
       </div>
@@ -172,6 +183,12 @@ const TutorialDocPageLayout: FC<Props> = ({
 
 const DocPageLayoutMain: FC<Props> = ({ hiddenSidebarContainer, children }) => {
   const tutorial = useTutorial()
+  const location = useLocation()
+
+  // Debug logging to understand what's happening
+  console.log('DocPageLayoutMain - Location:', location.pathname)
+  console.log('DocPageLayoutMain - Tutorial type:', tutorial)
+
 
   switch (tutorial) {
     case TutorialKind.Tutorial:
@@ -236,11 +253,25 @@ const TutorialDocPageLayoutMobile: FC<{
           isMobile
         />
       </Grid>
-      
-      <Grid item>{children}
-      <Paginators next={next} prev={prev} setActiveStep={setActiveStep} />
+
+      {/* Mobile Progress Tracker */}
+      <Grid item>
+        <TutorialProgressTrackerMobile
+          className={styles.tutorialProgressTrackerMobile}
+          meta={meta}
+          steps={steps}
+          activeStep={activeStep}
+          setActiveStep={setActiveStep}
+        />
       </Grid>
-      
+
+      <Grid item>
+        <div className={clsx("tutorial-content", styles.tutorialContent)}>
+          {children}
+        </div>
+        <Paginators next={next} prev={prev} setActiveStep={setActiveStep} />
+      </Grid>
+
     </Grid>
   )
 }
@@ -255,12 +286,13 @@ const TutorialDocPageLayoutDesktop: FC<{
   prev: Step | null
 }> = ({ children, meta, steps, activeStep, setActiveStep, next, prev }) => {
   return (
-    <Grid container sx={{width: '100%' }} columnSpacing={1} className='px-4 py-8'>
+    <Grid container sx={{width: '100%' }} columnSpacing={2} className='px-4 py-8'>
       <Grid container item direction="column">
         <Grid item>
           <Header title={meta?.title || ''} label={meta?.label || ''} />
         </Grid>
         <Grid container item wrap="nowrap" columnGap={3}>
+          {/* Tutorial Steps Sidebar */}
           <Grid item xs={2} sx={{ minWidth: '240px' }}>
             <Steps
               steps={steps}
@@ -268,12 +300,26 @@ const TutorialDocPageLayoutDesktop: FC<{
               setActiveStep={setActiveStep}
             />
           </Grid>
-          <Grid container item xs={9}>
+
+          {/* Main Content */}
+          <Grid container item xs={7}>
             <Grid sx={{ width: '100%' }} item>
-              {children}
+              <div className={clsx("tutorial-content", styles.tutorialContent)}>
+                {children}
+              </div>
               <Paginators className="max-w-[75%]" next={next} prev={prev} setActiveStep={setActiveStep} />
             </Grid>
-            
+          </Grid>
+
+          {/* Progress Tracker Sidebar */}
+          <Grid item xs={3} sx={{ minWidth: '280px' }}>
+            <TutorialProgressTracker
+              className={styles.tutorialProgressTracker}
+              meta={meta}
+              steps={steps}
+              activeStep={activeStep}
+              setActiveStep={setActiveStep}
+            />
           </Grid>
         </Grid>
       </Grid>

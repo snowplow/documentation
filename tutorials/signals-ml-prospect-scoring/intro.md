@@ -24,7 +24,7 @@ At the end of the tutorial, you will:
 
 Prospects on the Snowplow marketing website visit product and pricing pages, watch videos, etc. The key call to action is a form submission to request a demo.
 
-We want to predict if a specific prospect is likely to submit a form in the next hour, given their behavior for up to the last month until the prediction moment.
+We want to predict if a specific prospect is likely to submit a form in the next hour, given their behavior before the prediction moment.
 
 ![](./images/prediction-structure.png)
 
@@ -34,24 +34,18 @@ We're calculating aggregated attributes based off real-time stream event data, s
 
 ## Prerequisites
 
-* A website with Snowplow tracking enabled
-  * Page views
-  * Page pings
-  * Form tracking
-  * Optional: media events
-* Snowplow events in Snowflake
-* A Signals connection
-* [ngrok](https://dashboard.ngrok.com/) account and Authtoken API key
-* Google Colab
+1. Please follow [Connect to Signals](/docs/signals/connection/) page to setup the Signals connection (Console or Sandbox)
+    1. Signals Sandbox: follow the Sandbox setup flow
+    2. Signals Customers: follow the Console setup flow
+2. Open this [Google Colab](https://colab.research.google.com/github/snowplow-incubator/signals-notebooks/blob/main/web/web_prospect_scoring_end_to_end.ipynb) notebook to follow along
+3. [Optional] Integrate Snowplow into your website. If you use Signals Sandbox - find your collector URL in the UI
 
 ## Architecture
-
-This tutorial uses this [Jupyter notebook](https://colab.research.google.com/github/snowplow-incubator/signals-notebooks/blob/main/web/web_prospect_scoring_end_to_end.ipynb).
 
 The system consists of three main blocks:
 
 1. **Your marketing website**: as users browse the website, Snowplow events are sent to the Snowplow Collector
-2. **Snowplow Infrastructure**: the Collector captures the events, and Signals calculates aggregated user attributes in real time e.g., `num_pageviews`, `num_sessions`
+2. **Snowplow Infrastructure**: the Collector captures the events, and Signals calculates aggregated user attributes in real time e.g., `num_page_views`, `num_customers_views`
 3. **Intermediary `/predict` API**:  an API that calls the Signals API to get the latest attributes, runs an ML model on the Signals output, and sends the response back
 
 ![](./images/solution_overview.png)
@@ -59,9 +53,3 @@ The system consists of three main blocks:
 :::note
 You can replace the ML model with any other back-end system that you'd use to act on live prospects' attributes.
 :::
-
-## Connecting to Signals
-
-Log in to [Console](https://console.snowplowanalytics.com) and navigate to the **Signals** section.
-
-You'll need to [set up a Signals connection](/docs/signals/connection/) if you don't have one yet.

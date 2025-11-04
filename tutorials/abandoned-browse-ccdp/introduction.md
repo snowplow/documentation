@@ -22,7 +22,7 @@ This tutorial demonstrates how to implement an abandoned browse tracking and re-
 - An ecommerce website with a product catalog to track events from
 - **Snowplow instance**:
     - [Localstack](https://github.com/snowplow-incubator/snowplow-local) (recommended)
-    - [Community edition](/docs/get-started/snowplow-community-edition)
+    - [Community edition](/docs/get-started/self-hosted/)
     - Snowplow CDI if you're already a customer
 - **Access to a data warehouse**: e.g., [Snowflake](https://www.snowflake.com)
 - **Reverse ETL**: [Census Reverse ETL](https://www.getcensus.com) or Snowplow Reverse ETL

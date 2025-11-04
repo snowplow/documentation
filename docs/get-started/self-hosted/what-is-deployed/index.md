@@ -211,13 +211,13 @@ No other streams.
 <Tabs groupId="cloud" queryString>
   <TabItem value="aws" label="AWS" default>
 
-Aside from your main destination, the data is written to S3 by the S3 Loader applications for archival and to deal with [failed events](/docs/fundamentals/failed-events/index.md).
+  Aside from your main destination, the data is written to S3 by the S3 Loader applications for archival and to deal with [failed events](/docs/fundamentals/failed-events/index.md).
 
-See the [S3 Loader](https://registry.terraform.io/modules/snowplow-devops/s3-loader-kinesis-ec2/aws/latest) and [S3](https://registry.terraform.io/modules/snowplow-devops/s3-bucket/aws/latest) Terraform modules for further details on the resources, default and required input variables, and outputs.
+  See the [S3 Loader](https://registry.terraform.io/modules/snowplow-devops/s3-loader-kinesis-ec2/aws/latest) and [S3](https://registry.terraform.io/modules/snowplow-devops/s3-bucket/aws/latest) Terraform modules for further details on the resources, default and required input variables, and outputs.
 
-The following loaders and folders are available:
-* Enriched loader, `enriched/`: enriched events, in GZipped blobs of [enriched TSV](/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md). Historically, this has been used as the staging ground for loading into data warehouses via the [Batch transformer](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/spark-transformer/index.md) application. However, it’s no longer used in the quick start examples.
-* Bad loader, `bad/`: [failed events](/docs/fundamentals/failed-events/index.md). You can [query them using Athena](/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/file-storage/index.md).
+  The following loaders and folders are available:
+  * Enriched loader, `enriched/`: enriched events, in GZipped blobs of [enriched TSV](/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md). Historically, this has been used as the staging ground for loading into data warehouses via the [Batch transformer](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/spark-transformer/index.md) application. However, it’s no longer used in the quick start examples.
+  * Bad loader, `bad/`: [failed events](/docs/fundamentals/failed-events/index.md). You can [query them using Athena](/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/file-storage/index.md).
 
 
   </TabItem>

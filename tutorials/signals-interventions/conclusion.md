@@ -37,7 +37,7 @@ Now that you understand how Signals works, here are some ways to continue your j
 
 ### Try other tutorials
 
-These tutorials require a [Snowplow account](/docs/getting-started-with-snowplow-bdp/) with Signals configured:
+These tutorials require a [Snowplow account](/docs/get-started/private-managed-cloud/) with Signals configured:
 
 * [Set up Signals for real-time calculation](/tutorials/signals-quickstart/start) using the Snowplow Console UI
 * [Score prospects in real time using Signals and ML](/tutorials/signals-ml-prospect-scoring/intro) for machine learning integration
@@ -47,7 +47,7 @@ These tutorials require a [Snowplow account](/docs/getting-started-with-snowplow
 
 Ready to use Signals in production? You'll need:
 
-* A [Snowplow](/docs/getting-started-with-snowplow-bdp/) account
+* A [Snowplow](/docs/get-started/private-managed-cloud/) account
 * A [Signals connection](/docs/signals/connection/) configured
 * Integration of the [browser tracker plugin](/docs/signals/receive-interventions/#using-the-browser-tracker-plugin) or API calls in your application
 

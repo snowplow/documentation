@@ -641,7 +641,7 @@ docs/api-reference/failed-events/index.md
 description: "API reference for handling and processing failed behavioral events in Snowplow data quality workflows."
 
 docs/api-reference/console-api.md
-description: "Snowplow BDP Console API reference for programmatic management of behavioral data platform resources."
+description: "Snowplow Console API reference for programmatic management of behavioral data platform resources."
 
 docs/api-reference/index.md
 description: "Complete API reference documentation for Snowplow behavioral data platform components and services."
@@ -2617,17 +2617,17 @@ description: "Create compelling data visualizations and dashboards from transfor
 docs/modeling-your-data/visualization/marketing-dashboards/index.md
 description: "Build marketing performance dashboards from behavioral data for campaign analysis and optimization."
 
-docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/index.md
-description: "Run dbt data models through Snowplow BDP Console for managed behavioral data transformation workflows."
+docs/modeling-your-data/running-data-models-via-console/dbt/index.md
+description: "Run dbt data models through Snowplow Console for managed behavioral data transformation workflows."
 
-docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/resolving-data-model-failures/index.md
-description: "Troubleshoot and resolve dbt model failures in Snowplow BDP for reliable behavioral data processing."
+docs/modeling-your-data/running-data-models-via-console/dbt/resolving-data-model-failures/index.md
+description: "Troubleshoot and resolve dbt model failures in Snowplow CDI for reliable behavioral data processing."
 
-docs/modeling-your-data/running-data-models-via-snowplow-bdp/retrieving-job-execution-data-via-the-api/index.md
-description: "Retrieve job execution data via Snowplow BDP API for behavioral data model monitoring and debugging."
+docs/modeling-your-data/running-data-models-via-console/retrieving-job-execution-data-via-the-api/index.md
+description: "Retrieve job execution data via Snowplow CDI API for behavioral data model monitoring and debugging."
 
-docs/modeling-your-data/running-data-models-via-snowplow-bdp/index.md
-description: "Execute and manage data models through Snowplow BDP Console for streamlined behavioral analytics workflows."
+docs/modeling-your-data/running-data-models-via-console/index.md
+description: "Execute and manage data models through Snowplow Console for streamlined behavioral analytics workflows."
 
 docs/modeling-your-data/modeling-your-data-with-sql-runner/sql-runner-mobile-data-model/index.md
 description: "Build mobile analytics data models using SQL Runner for behavioral mobile app analysis."
@@ -2944,16 +2944,16 @@ description: "Handle cookies and ad blockers in behavioral event tracking for ac
 docs/get-started/tracking/index.md
 description: "Implement behavioral event tracking across web, mobile, and server-side applications using Snowplow trackers."
 
-docs/get-started/snowplow-bdp/setup-guide-gcp/index.md
+docs/get-started/snowplow-CDI/setup-guide-gcp/index.md
 description: "Set up Snowplow Behavioral Data Platform on Google Cloud Platform for enterprise behavioral analytics infrastructure."
 
-docs/get-started/snowplow-bdp/index.md
+docs/get-started/snowplow-CDI/index.md
 description: "Get started with Snowplow Behavioral Data Platform for enterprise-scale customer data infrastructure and analytics."
 
-docs/get-started/snowplow-bdp/setup-guide-azure/index.md
+docs/get-started/snowplow-CDI/setup-guide-azure/index.md
 description: "Deploy Snowplow Behavioral Data Platform on Microsoft Azure for enterprise behavioral analytics infrastructure."
 
-docs/get-started/snowplow-bdp/setup-guide-aws/index.md
+docs/get-started/snowplow-CDI/setup-guide-aws/index.md
 description: "Set up Snowplow Behavioral Data Platform on Amazon Web Services for enterprise behavioral analytics infrastructure."
 
 docs/get-started/querying/index.md
@@ -3003,15 +3003,6 @@ description: "Introduction to Kafka live viewer profiles for real-time behaviora
 
 tutorials/kafka-live-viewer-profiles/deploy-aws-terraform.md
 description: "Deploy Kafka live viewer on AWS using Terraform for scalable behavioral data streaming infrastructure."
-
-tutorials/enrichments/enabling-via-terraform.md
-description: "Enable Snowplow enrichments using Terraform for automated behavioral data processing configuration."
-
-tutorials/enrichments/intro.md
-description: "Introduction to Snowplow enrichments for enhancing behavioral events with additional context and validation."
-
-tutorials/enrichments/configurable-enrichment-list.md
-description: "Configurable enrichment options for customizing behavioral data processing and enhancement workflows."
 
 tutorials/android-event-tracking/examining-events.md
 description: "Examine and validate Android behavioral events for mobile analytics implementation verification."

@@ -48,7 +48,7 @@
 * Mix prose and lists appropriately: use prose to explain concepts, lists for configuration options or step-by-step items
 
 ### Snowplow terminology
-* **Capitalized**: Data Product Studio, Snowtype, Snowplow BDP, Signals
+* **Capitalized**: Data Product Studio, Snowtype, Snowplow CDI, Signals
 * **Context-capitalized**: Collector, Enrich, specific Loaders
 * **Not capitalized**: entities, events, schemas, data structures
 * Use "entity" not "context", "self-describing event" not "unstructured event"
@@ -57,10 +57,12 @@
 ### Required frontmatter
 ```yaml
 ---
-title: "Page title"               # Sentence case
-sidebar_position: 10              # Controls ordering
-sidebar_label: "Short title"      # If different from title
-description: "Brief description"  # For SEO purposes
+title: "Page title"                             # Sentence case
+sidebar_position: 10                            # Controls ordering
+sidebar_label: "Short title"                    # If different from title
+description: "One to two sentences describing the content for marketing purposes. Should be grammatically correct."  # For SEO purposes
+keywords: ["keyword1", "keyword2", "keyword3"]  # Marketing keywords
+date: "2025-09-09"                              # File creation date (YYYY-MM-DD)
 ---
 ```
 
@@ -118,11 +120,6 @@ Important cautions about data loss, security, or breaking changes
 * **Tip**: performance improvements, recommended workflows, pro tips
 * **Warning**: data loss risks, security considerations
 
-### BDP vs self-hosted
-* Mark BDP-only features in frontmatter: `sidebar_custom_props: offerings: - bdp`
-* Note when BDP provides built-in functionality, mention self-hosted alternatives
-* **Do not mention "Community Edition"** - use "self-hosted" instead but otherwise prefer not to mention
-
 ### Images
 * Formats: `.webp` (preferred), `.png`, `.jpg`
 * Descriptive filenames and alt text
@@ -155,3 +152,12 @@ Important cautions about data loss, security, or breaking changes
 * Don't use more than 3 heading levels
 * Don't end list items with periods (unless multiple sentences)
 * Don't use "&" instead of "and"
+
+### Tutorials
+For tutorial-specific guidelines, see `/tutorials/_README.md`
+
+### Development workflow
+* **Package manager**: use `yarn` commands, not `npm`
+* **Development server**: `yarn start` or `yarn dev`
+* **Build**: `yarn build`
+* **Install dependencies**: `yarn install` or `yarn add <package>`

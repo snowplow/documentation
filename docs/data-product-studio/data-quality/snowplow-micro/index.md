@@ -13,7 +13,7 @@ description: "Snowplow Micro is a lightweight version of the Snowplow pipeline t
 
 Just like a real Snowplow pipeline, Micro receives, validates and enriches events sent by your [tracking code](/docs/sources/trackers/index.md).
 
-Unlike a real pipeline, Micro is missing a few features:
+Unlike a real pipeline:
 * It does not store the events in a data warehouse or database, although a [UI](/docs/data-product-studio/data-quality/snowplow-micro/ui/index.md) and an [API](/docs/api-reference/snowplow-micro/api/index.md) are available to look at the data
 * It’s not meant for production traffic
 

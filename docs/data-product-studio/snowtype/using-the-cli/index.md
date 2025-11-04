@@ -62,7 +62,7 @@ npx @snowplow/snowtype@latest init
 ```
 
 The input required for the initialization to work, it the following:
-- The organization ID from the BDP console.
+- The organization ID from Snowplow Console.
 - The [tracker](./index.md#available-trackerslanguages) you wish to generate code for.
 -  _If applicable,_ the language for that tracker.
 - The output path you wish the CLI to generate the code to.

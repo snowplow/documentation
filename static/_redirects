@@ -388,6 +388,10 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 
 /docs/resources/recipes-tutorials/* /tutorials 301
 
+# Event Forwarding restructure
+/docs/destinations/forwarding-events/native-integrations /docs/destinations/forwarding-events/integrations 301
+/docs/destinations/forwarding-events/snowbridge/* /docs/api-reference/snowbridge/:splat 301
+
 # Removing deprecated webhooks
 /docs/sources/webhooks/callrail/* /docs/sources/webhooks/:splat 301
 /docs/sources/webhooks/hubspot/* /docs/sources/webhooks/:splat 301
@@ -401,6 +405,15 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/sources/webhooks/urban-airship-connect/* /docs/sources/webhooks/:splat 301
 /docs/sources/webhooks/vero/* /docs/sources/webhooks/:splat 301
 
+/docs/api-reference/elasticsearch/* /docs/api-reference/loaders-storage-targets/elasticsearch/:splat 301
+
 # Removing loading-process in favor of individual loader reference pages
 /docs/destinations/warehouses-lakes/loading-process/* /docs/destinations/warehouses-lakes/ 301
 /docs/destinations/warehouses-lakes/schemas-in-warehouse/* /docs/api-reference/loaders-storage-targets/schemas-in-warehouse/:splat 301
+
+/docs/sources/trackers/google-tag-manager/snowtype/* /docs/data-product-studio/snowtype/working-with-gtm/ 301
+
+# Removing BDP name
+/docs/get-started/snowplow-bdp/* /docs/get-started/private-managed-cloud/:splat 301
+/docs/modeling-your-data/running-data-models-via-snowplow-bdp/* /docs/modeling-your-data/running-data-models-via-console/:splat 301
+/docs/get-started/snowplow-community-edition/* /docs/get-started/self-hosted/:splat 301

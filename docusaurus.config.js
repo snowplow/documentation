@@ -34,6 +34,7 @@ module.exports = {
   clientModules: [
     require.resolve('./cookieConsent.js'),
     require.resolve('./snowplow.js'),
+    require.resolve('./reoTracking.js'),
     require.resolve('./google.js'),
   ],
 
@@ -264,6 +265,18 @@ module.exports = {
         contextualSearch: true,
       },
     }),
+
+  headTags: [
+    {
+      tagName: 'meta',
+      attributes: {
+        property: 'og:image',
+        content:
+          'https://cdn.prod.website-files.com/661fd4aa0185c5022e931990/66714f936876397066d5fba7_thumbnail-post-category.avif',
+      },
+    },
+  ],
+
 
   customFields: {
     webpack: {

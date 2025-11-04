@@ -28,7 +28,11 @@ You can always run Micro with the `--help` argument to find out what is supporte
 | ---------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `--collector-config`                     | Configuration file for collector ([usage](/docs/data-product-studio/data-quality/snowplow-micro/advanced-usage/index.md#adding-custom-collector-configuration))       |
 | `--iglu`                                 | Configuration file for Iglu Client ([usage](/docs/data-product-studio/data-quality/snowplow-micro/advanced-usage/index.md#adding-custom-iglu-resolver-configuration)) |
-| `-t`, `--output-tsv`<br/>_(since 1.4.0)_ | Print events in TSV format to standard output ([usage](/docs/data-product-studio/data-quality/snowplow-micro/basic-usage/index.md#exporting-events-to-tsv))           |
+| `-t`, `--output-tsv`<br/>_(since 1.4.0)_ | Print events in TSV format to standard output ([usage](/docs/data-product-studio/data-quality/snowplow-micro/basic-usage/index.md#exporting-events))           |
+| `-j`, `--output-json`<br/>_(since 2.4.0)_ | Print events in JSON format to standard output ([usage](/docs/data-product-studio/data-quality/snowplow-micro/basic-usage/index.md#exporting-events))           |
+| `-d`, `--destination`<br/>_(since 2.4.0)_ | Send data to an HTTP endpoint instead of outputting it via standard output. Requires either `--output-tsv` or `--output-json` ([usage](/docs/data-product-studio/data-quality/snowplow-micro/basic-usage/index.md#exporting-events))           |
+| `--yauaa` | Enable YAUAA user agent enrichment ([usage](/docs/data-product-studio/data-quality/snowplow-micro/configuring-enrichments/index.md#yauaa-yet-another-user-agent-analyzer)) |
+| `-m`, `--max-events`<br/>_(since 3.0.1)_ | Maximum number of events of each kind (good, bad) to keep in memory (setting this to 0 disables all /micro endpoints) |
 
 ## Environment variables
 

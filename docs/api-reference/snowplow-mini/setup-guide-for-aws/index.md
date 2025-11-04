@@ -33,13 +33,13 @@ This service is available as an EC2 image within the AWS Community AMIs in the f
 
 <p>Version {versions.snowplowMini} (recommended) comes with:</p>
 
-- Snowplow Collector NSQ 3.3.0
-- Snowplow Enrich NSQ 5.4.0
+- Snowplow Collector NSQ 3.7.0
+- Snowplow Enrich NSQ 6.1.2
 - Snowplow Elasticsearch Loader 2.1.2
 - Snowplow Iglu Server 0.13.0
 - Opensearch 2.4.0
 - Opensearch Dashboards 2.4.0
-- Postgresql 15.1
+- Postgresql 16.10
 - NSQ v1.3.0
 
 Note: All services are configured to start automatically so everything should happily survive restarts/shutdowns.

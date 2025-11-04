@@ -457,13 +457,13 @@ Here are two pieces of older content that only partially follow the style guide.
 
 ### Pipeline components
 - Console is capitalized, and doesn't have a definite article (no "the")
-- It can also be called "BDP Console" or "Snowplow BDP Console"
+- It can also be called "Snowplow Console"
   - This is fine at the start of a piece of writing but feels overly wordy if used throughout, so maybe open with that then just call it "Console" subsequently
 
-   | ✅                              | ❌                                       |
-   | ------------------------------ | --------------------------------------- |
-   | data structures in Console     | data structures in the console          |
-   | data structures in BDP Console | data structures in the Snowplow Console |
+   | ✅                                   | ❌                                       |
+   | ----------------------------------- | --------------------------------------- |
+   | data structures in Console          | data structures in the console          |
+   | data structures in Snowplow Console | data structures in the Snowplow Console |
 
 - Collector is capitalized, and gets a definite article ("the")
     - Use "the Collector endpoint" where possible for clarity - the reader might not know what we mean by "Collector", but they probably know what an endpoint is
@@ -556,7 +556,7 @@ Here are two pieces of older content that only partially follow the style guide.
   | SDKs         |       |
   | URLs         |       |
 
-- For the **documentation** website, we have a docs plugin that adds a dotted line and a tooltip explanation to acronyms, e.g. hovering over "BDP" will show that it stands for "Behavioral Data Platform": add new acronym definitions to the `src/remark/abbreviations.js` file to enable this behavior
+- For the **documentation** website, we have a docs plugin that adds a dotted line and a tooltip explanation to acronyms, e.g. hovering over "CDI" will show that it stands for "Customer Data Infrastructure": add new acronym definitions to the `src/remark/abbreviations.js` file to enable this behavior
 - (Technically, these are all initialisms, not acronyms)
 
 ### Capitalization

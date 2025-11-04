@@ -2,12 +2,9 @@
 title: "Using the Console to request data recovery"
 sidebar_label: "Using the Console"
 sidebar_position: 0
-sidebar_custom_props:
-  offerings:
-    - bdp
 ---
 
-You can use BDP Console to [submit a data recovery request](https://console.snowplowanalytics.com/recovery) to our Support team.
+You can use Snowplow Console to [submit a data recovery request](https://console.snowplowanalytics.com/recovery) to our Support team.
 
 :::warning
 

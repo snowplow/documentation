@@ -87,7 +87,7 @@ The command creates the following structure:
 ```bash
 ./snowplow-cli dp validate
 ```
-This command scans all files under `./data-products` and validates them using the BDP console. It checks:
+This command scans all files under `./data-products` and validates them using Snowplow Console. It checks:
 1. Whether each file is in a valid format (YAML/JSON) with correctly formatted fields
 2. Whether all source application references in the data product files are valid
 3. Whether event specification rules are compatible with their schemas
@@ -96,4 +96,4 @@ If validation fails, the command displays the errors in the console and exits wi
 ```bash
 ./snowplow-cli dp publish
 ```
-This command locates all files under `./data-products`, validates them, and publishes them to the BDP console.
+This command locates all files under `./data-products`, validates them, and publishes them to Console.

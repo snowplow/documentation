@@ -1157,20 +1157,33 @@ from elements with a subsequent element that has a top margin. */
 .theme-doc-markdown p:has(+ div > table),
 .theme-doc-markdown p:has(+ table),
 .theme-doc-markdown h2:has(+ p > img),
-.theme-doc-markdown p:has(+ p > img),
+/*.theme-doc-markdown p:has(+ p > img),*/
 .theme-doc-markdown h3:has(+ p > img),
 .theme-doc-markdown div.theme-admonition:has(+ h2),
 .theme-doc-markdown div.theme-admonition:has(+ h3),
 .theme-doc-markdown details:has(+ h2),
 .theme-doc-markdown details:has(+ h3),
 .theme-doc-markdown div.tabs-container:has(+ h2),
-.theme-doc-markdown div.tabs-container:has(+ h3) {
+.theme-doc-markdown div.tabs-container:has(+ h3)
+.theme-doc-markdown div.theme-code-block:has(+ h2),
+.theme-doc-markdown div.theme-code-block:has(+ h3) {
   margin-bottom: 0rem;
 }
 
 .theme-doc-markdown p + ul > li:first-child,
 .theme-doc-markdown p + ol > li:first-child {
   margin-top: 0rem;
+}
+
+.theme-doc-markdown div > video {
+  margin: 0; /* Video inside React Player div */
+}
+
+/* Images are wrapped within paragraphs, so the default paragraph
+margins already apply. We don't need even more margin on top of that.*/
+img {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
 }
 
 /* doc markdown grid layout control END*/

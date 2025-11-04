@@ -89,11 +89,11 @@ Here is an example of what the `contexts_com_snowplowanalytics_snowplow_failure_
 
 To use this feature, you will first need to enable the stream that contains failed events in the [Snowplow TSV format](/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md) suitable for loading into your warehouse or lake.
 
-The instructions below are for Snowplow BDP users. For Community Edition, you will need to configure this manually via Terraform.
+The instructions below are for Snowplow CDI customers. For Snowplow Self-Hosted, you will need to configure this manually via Terraform.
 
 :::note Infrastructure costs
 
-An additional stream (Kinesis, Pub/Sub or Event Hubs on AWS, GCP and Azure respectively) will be reflected in your cloud infrastructure costs (unless you are using BDP Cloud). That said, failed events are usually a tiny fraction of all events, so this stream will be minimally sized.
+An additional stream (Kinesis, Pub/Sub or Event Hubs on AWS, GCP and Azure respectively) will be reflected in your cloud infrastructure costs (unless you are using [Snowplow Cloud](/docs/get-started/index.md#cdi-cloud)). That said, failed events are usually a tiny fraction of all events, so this stream will be minimally sized.
 
 :::
 

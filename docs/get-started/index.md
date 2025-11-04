@@ -5,13 +5,25 @@ sidebar_label: "Get started"
 description: "Details on where and how Snowplow is deployed"
 ---
 
-For production use, you can choose between Snowplow BDP Enterprise and Snowplow BDP Cloud. For non-production use cases, use Snowplow Community Edition, or play around with Snowplow Micro. See the [feature comparison page](/docs/get-started/feature-comparison/index.md) for more information.
+Choose the [Snowplow](https://snowplow.io) platform that works for your business. See the [feature comparison page](/docs/get-started/feature-comparison/index.md) for more information.
 
-## BDP Enterprise
+We offer two fully featured Customer Data Infrastructure (CDI) platforms:
+* **Snowplow CDI Private Managed Cloud**: hosted in your own cloud, managed by Snowplow
+* **Snowplow CDI Cloud**: hosted and managed by Snowplow
 
-Snowplow [BDP Enterprise](/docs/get-started/snowplow-bdp/index.md) is deployed using a "private SaaS" or "Bring Your Own Cloud (BYOC)" deployment model. This means the data pipeline is hosted and run in your own cloud environment, using your data warehouse or lake. These comprise the **data plane**. Ongoing pipeline maintenance, such as upgrades and security patches, are managed by Snowplow.
+For self-hosted deployments, we have:
+* **Snowplow Community Edition**: not for production use, hosted and managed by you
+* **Snowplow Self-Hosted**: for production use, for existing Snowplow users
 
-The **control plane**, which includes a UI and an API for [defining your data](/docs/data-product-studio/data-products/index.md) and managing your infrastructure, is hosted by Snowplow.
+## Customer Data Infrastructure
+
+Snowplow CDI is our full infrastructure offering. Choose whether you'd like the **data plane** to be entirely hosted in your cloud account, or whether you'd prefer Snowplow to host the pipeline infrastructure for you.
+
+The **control plane**, which includes a UI and an API for [defining your data](/docs/data-product-studio/data-products/index.md) and managing your infrastructure, is always hosted by Snowplow.
+
+### CDI Private Managed Cloud
+
+Private Managed Cloud is a version of [Snowplow](https://snowplow.io) hosted in your own cloud account, using your data warehouse or lake. Ongoing pipeline maintenance, such as upgrades and security patches, are managed by Snowplow.
 
 |                                             | Hosted by Snowplow | Hosted by you |
 | :------------------------------------------ | :----------------: | :-----------: |
@@ -22,9 +34,11 @@ The **control plane**, which includes a UI and an API for [defining your data](/
 | Pipeline infrastructure (AWS / Azure / GCP) |                    |       ✅       |
 | Data destination (warehouse / lake)         |                    |       ✅       |
 
-## BDP Cloud
+### CDI Cloud
 
-Snowplow [BDP Cloud](/docs/get-started/snowplow-bdp/index.md) differs from BDP Enterprise in that your data pipeline is deployed in Snowplow's cloud account, and is entirely managed by Snowplow.
+Cloud is a hosted version of Snowplow designed to get your organization up and running and delivering value from behavioral data as quickly as possible. With Cloud, you don't need to set up any cloud infrastructure yourself.
+
+All data processed and collected with Snowplow Cloud is undertaken within Snowplow's own cloud account.
 
 |                                             | Hosted by Snowplow | Hosted by you |
 | :------------------------------------------ | :----------------: | :-----------: |
@@ -35,9 +49,15 @@ Snowplow [BDP Cloud](/docs/get-started/snowplow-bdp/index.md) differs from BDP E
 | Pipeline infrastructure (AWS / Azure / GCP) |         ✅          |               |
 | Data destination (warehouse / lake)         |                    |       ✅       |
 
-## Community Edition
+## Self-Hosted
 
-With Snowplow [Community Edition](/docs/get-started/snowplow-community-edition/index.md), you deploy and host everything. Note that the **control plane** functionality isn't available in Community Edition.
+With Self-Hosted, you deploy and host everything. Many features, including the **control plane**, are not available in Self-Hosted.
+
+### Community Edition
+
+Snowplow [Community Edition](/docs/get-started/self-hosted/index.md) is for **non-production** use cases. It's a starter template: use it to evaluate Snowplow for testing purposes.
+
+Community Edition infrastructure is provided under the [SLULA license](/docs/resources/copyright-license/index.md).
 
 |                                             | Hosted by Snowplow | Hosted by you |
 | :------------------------------------------ | :----------------: | :-----------: |
@@ -48,6 +68,15 @@ With Snowplow [Community Edition](/docs/get-started/snowplow-community-edition/i
 | Pipeline infrastructure (AWS / Azure / GCP) |                    |       ✅       |
 | Data destination (warehouse / lake)         |                    |       ✅       |
 
-## Micro
+### Production Self-Hosted license
 
-While not a full substitute for a Snowplow pipeline, [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md) could be a quick way to get a feel for how Snowplow works for more technical users. Micro doesn't store data in any warehouse or database, but you will be able to look at the available fields.
+If you have an existing Snowplow implementation, either Community Edition or a legacy deployment, you're eligible for Snowplow Self-Hosted. It's a production-use license.
+
+|                                             | Hosted by Snowplow | Hosted by you |
+| :------------------------------------------ | :----------------: | :-----------: |
+| **Control plane**                           |                    |               |
+| Management Console                          |        N/A         |      N/A      |
+| API endpoints                               |        N/A         |      N/A      |
+| **Data plane**                              |                    |               |
+| Pipeline infrastructure (AWS / Azure / GCP) |                    |       ✅       |
+| Data destination (warehouse / lake)         |                    |       ✅       |

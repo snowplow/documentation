@@ -3,6 +3,6 @@
   "description": "Get hands-on with Signals interventions and a demo e-shop application.",
   "label": "Signals implementation",
   "useCase": "Real-time personalization",
-  "technologies": ["Python", "Jupyter notebook", "React"],
+  "technologies": ["Jupyter notebook", "React"],
   "snowplowTech": ["Signals"]
 }

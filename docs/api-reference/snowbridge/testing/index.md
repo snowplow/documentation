@@ -9,11 +9,11 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-The easiest way to test Snowbridge configuration (e.g. transformations) is to run it locally. Ideally, you should also use a sample of data that is as close to the real world as possible. The sample file should contain the events/messages you’d like to test with, one per line.
+The easiest way to test Snowbridge configuration (e.g. transformations) is to run it locally. Ideally, you should also use a sample of data that is as close to your real world data as possible. The sample file should contain the events/messages you’d like to test with, one per line.
 
 ## Snowplow data
 
-You can get started working with Snowplow data by [downloading this file](./assets/input.txt) that contains a sample of web and mobile Snowplow events in TSV format. However, if you need events that match your actual events, generate your own events sample.
+You can get started working with Snowplow data by [downloading this file](./assets/input.txt) which contains a sample of web and mobile Snowplow events in TSV format. However, if you need events that match your actual events, generate your own events sample.
 
 In order to generate your own sample of Snowplow data, you can follow the [guide to use Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/basic-usage/index.md) to generate test data, using the `--output-tsv` to get the data into a file, as per the [exporting to tsv section](/docs/data-product-studio/data-quality/snowplow-micro/basic-usage/index.md#exporting-events).
 
@@ -170,4 +170,4 @@ configs:
 
 ## Further testing
 
-You can use the above methods (whether with a TSV file or Docker Compose) to test all aspects of the app from a local environment too, including sources, targets, failure targets, metrics endpoints etc. In some cases, you'll need to ensure that the local environment has access to any required resources and can authenticate (e.g. connecting from a laptop to a cloud account/local mock of cloud resources, or setting up a local metrics server for testing). Once that’s done, provide Snowbridge with an hcl file configuring it to connect to those resources, and run it the same way as in the examples above.
+You can use either method above (TSV file or Docker Compose) to test all aspects of the app from a local environment too, including sources, targets, failure targets, metrics endpoints etc. In some cases, you'll need to ensure that the local environment has access to any required resources and can authenticate, such as connecting from a laptop to a cloud account/local mock of cloud resources, or setting up a local metrics server for testing. Once that’s done, provide Snowbridge with an hcl file configuring it to connect to those resources, and run it the same way as in the examples above.

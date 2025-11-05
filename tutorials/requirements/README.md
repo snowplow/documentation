@@ -116,3 +116,30 @@ The `description`, `keywords`, and `date` improve SEO. This is important for UX 
 * Increases discoverability within the docs
 * Increases external search rankings
 * Helps AIs scrape the pages
+
+## How to review a tutorial or accelerator
+
+Before publishing, tutorials and accelerators are reviewed across three aspects:
+1. Technical review: do the steps work?
+2. UX review: does the workflow make sense?
+3. Brand review: does it align with our existing content and objectives?
+
+To review a tutorial or accelerator, put yourself in character as someone with minimal prior knowledge of Snowplow. Follow all the steps exactly as written. Here are some questions to consider.
+
+The technical review is the simplest:
+* Do the code examples run without errors?
+* Does the demo app build and run?
+* Is all the source code accessible?
+
+The UX review focuses on providing value to the user:
+* Are the steps comprehensive and easy to follow?
+* Did you understand why each step was required, and what the outcome was?
+* Are you satisfied that you learned what was promised in the introduction?
+* Is the prerequisites list correct?
+* Is it possible to complete the accelerator within one day?
+
+Finally, the brand review:
+* Does the topic support our strategic marketing objectives?
+* Is the content differentiated from existing tutorials or accelerators?
+* Does the structure match the framework shown in the example files?
+* Is the content consistent with our brand voice and editorial style guidelines?

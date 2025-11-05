@@ -75,7 +75,7 @@ Once the tracker SDK is correctly set as a dependency in your app project you ha
    Snowplow.defaultTracker()?.track(event)
    ```
 
-You can override the default configuration with a fine grained configuration when you create the tracker. See the API docs for the `Configuration` classes to see all the options and defaults.
+You can override the default configuration with a fine grained configuration when you create the tracker. See the [API docs](https://snowplow.github.io/snowplow-ios-tracker/documentation/snowplowtracker/trackerconfiguration/) for the `Configuration` classes to see all the options and defaults.
 
 ```swift
 Snowplow.createTracker(namespace: "appTracker", endpoint: "https://snowplow-collector-url.com") {

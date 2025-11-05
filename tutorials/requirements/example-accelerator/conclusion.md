@@ -1,6 +1,6 @@
 ---
 title: "Conclusion"
-position: 5
+position: 3
 description: "Summary and next steps for the accelerator."
 keywords: ["conclusion", "summary", "next steps"]
 date: "2025-11-05"

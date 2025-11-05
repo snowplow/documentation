@@ -1,7 +1,11 @@
 
 # Snowplow tutorials and accelerators
 
-This file contains guidelines for writing Snowplow tutorials and accelerators.
+This file describes the requirements for Snowplow tutorials and accelerators.
+
+Tutorials and accelerators are step-by-step how-to guides. Users follow the steps to:
+* Learn how to achieve a goal
+* Gain a better understanding of Snowplow
 
 Check out the example tutorial and accelerator files in this folder to see how to structure them, and what to include on each page.
 
@@ -22,10 +26,9 @@ Whether it's a tutorial or accelerator affects what information you need to incl
 
 Here are some things to consider:
 * Who is this for?
-  * Could it be used by both Snowplow customers and prospects?
-* Is this the simplest possible implementation that supports the outcome?
+  * Could you provide instructions for both Snowplow customers and prospects?
+* Is this the simplest possible implementation?
   * One happy path, with minimal options or decisions
-* Could someone inexperienced achieve the title outcome?
 
 The usual Snowplow [style guide](https://docs.snowplow.io/style-guide/) rules apply. All headings are in sentence case.
 
@@ -68,7 +71,7 @@ Formatting:
 
 ### Label and use case
 
-The `label` and `useCase` categories help users find the right tutorial or accelerator, support our marketing messaging, and clarify the goal of each one. They are enums; there's a short list of choices for each.
+The `label` and `useCase` categories help users find the right tutorial or accelerator, support our marketing messaging, and clarify the goal of each one. They're enums; there's a short list of choices for each.
 
 The use case options are:
   * `Composable analytics`
@@ -90,3 +93,26 @@ The `technologies` and `snowplowTech` properties allow users to filter for speci
 The `technologies` list is for non-Snowplow tools. It's most relevant for accelerators. Include any third-party products from your accelerator that a user might want to search by.
 
 Use the `snowplowTech` list for key Snowplow products used.
+
+## Understanding the page metadata
+
+Every full markdown file in the docs repo has a block of metadata at the top.
+
+Here's an example metadata block for a tutorial or accelerator page:
+
+```yaml
+---
+title: "Introduction"
+position: 1
+description: "One to two sentences describing the content."
+keywords: ["keyword1", "keyword2", "keyword3"]
+date: "2025-09-09"    # The date the file was created
+---
+```
+
+The `title` unsurprisingly becomes the page title. The `position` can be any number, and is used to order the pages relative to each other.
+
+The `description`, `keywords`, and `date` improve SEO. This is important for UX and marketing:
+* Increases discoverability within the docs
+* Increases external search rankings
+* Helps AIs scrape the pages

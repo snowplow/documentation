@@ -1,7 +1,7 @@
 ---
 title: "Do something"
 position: 2
-description: "Set up the required SDK for the tutorial."
+description: "Set up the required SDK for the accelerator."
 keywords: ["install", "setup", "sdk"]
 date: "2025-11-05"
 ---

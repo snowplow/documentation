@@ -17,7 +17,7 @@ export const Meta = z.object({
   title: z.string(),
   label: Topic,
   description: z.string(),
-  useCases: z.array(z.string()),
+  useCase: z.string(),
   technologies: z.array(z.string()),
   snowplowTech: z.array(z.string()),
 })

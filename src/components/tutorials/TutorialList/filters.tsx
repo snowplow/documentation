@@ -40,9 +40,7 @@ function useCaseFilter(
 ): boolean {
   if (!tutorial) return false
   if (selectedUseCases.length === 0) return true
-  return tutorial.meta.useCases.some((useCase) =>
-    selectedUseCases.includes(useCase)
-  )
+  return selectedUseCases.includes(tutorial.meta.useCase)
 }
 
 function topicFilter(selectedTopics: string[], tutorial?: Tutorial): boolean {
@@ -72,7 +70,7 @@ function getFilteredAvailableOptions(
           : true
       )
       .filter((tutorial) =>
-        excludeFilter !== 'useCases'
+        excludeFilter !== 'useCase'
           ? useCaseFilter(selectedUseCases, tutorial)
           : true
       )
@@ -98,8 +96,10 @@ function getFilteredAvailableOptions(
     availableTopics.add(tutorial.meta.label)
   })
 
-  getFilteredTutorials('useCases').forEach((tutorial) => {
-    tutorial.meta.useCases.forEach((useCase) => availableUseCases.add(useCase))
+  getFilteredTutorials('useCase').forEach((tutorial) => {
+    if (tutorial.meta.useCase) {
+      availableUseCases.add(tutorial.meta.useCase)
+    }
   })
 
   getFilteredTutorials('technologies').forEach((tutorial) => {
@@ -126,7 +126,9 @@ function getFilteredAvailableOptions(
 function getAvailableUseCases(tutorials: Tutorial[]): string[] {
   const useCases = new Set<string>()
   tutorials.forEach((tutorial) => {
-    tutorial.meta.useCases.forEach((useCase) => useCases.add(useCase))
+    if (tutorial.meta.useCase) {
+      useCases.add(tutorial.meta.useCase)
+    }
   })
   return Array.from(useCases).sort()
 }

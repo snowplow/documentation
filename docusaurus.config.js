@@ -97,6 +97,7 @@ module.exports = {
         routeBasePath: 'tutorials',
         sidebarPath: false,
         showLastUpdateTime: true,
+        exclude: ['**/requirements/**'],
       },
     ],
     './plugins/docusaurus-plugin-snowplow-schema',

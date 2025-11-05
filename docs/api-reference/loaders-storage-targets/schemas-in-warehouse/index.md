@@ -986,7 +986,7 @@ The row order in this table is important. Type lookup stops after the first matc
 }
 ```
 
-If the `"properties"` key is missing, the type for the entire object will be `STRING` instead of `RECORD`.
+If the `"properties"` key is missing, the type for the entire object will be `JSON` instead of `RECORD`.
 
 Objects can be nullable. Nested fields can also be nullable (same rules as for everything else).
 
@@ -1008,9 +1008,7 @@ Objects can be nullable. Nested fields can also be nullable (same rules as for e
 }
 ```
 
-If the `"items"` key is missing, the type for the entire array will be `STRING` instead of `REPEATED`.
-
-Arrays can be nullable. Nested fields can also be nullable (same rules as for everything else).
+The type of the repeated value is determined by the `"items"` key of the schema. If the `"items"` key is missing, then the repeated type is `JSON`.
 
 </td>
 <td>
@@ -1167,18 +1165,36 @@ OR
 
 ```json
 {
-  "enum": [A1, A2, ...]
+  "enum": [S1, S2, ...]
 }
 ```
 
-- Any of `Ax`, `Ax` has a type other than integer or number.
+- All `Sx` are strings
 
 </td>
 <td>
 
 `STRING`
 
-_Values will be quoted as in JSON._
+</td>
+</tr>
+<tr>
+<td >
+
+```json
+{
+  "enum": [A1, A2, ...]
+}
+```
+
+- `Ax` are a mix of different types
+
+</td>
+<td>
+
+`JSON`
+
+_String values will be quoted as in JSON._
 
 </td>
 </tr>
@@ -1188,9 +1204,7 @@ If nothing matches above, this is a catch-all.
 </td>
 <td>
 
-`STRING`
-
-_Values will be quoted as in JSON._
+`JSON`
 
 </td>
 </tr>
@@ -1216,6 +1230,52 @@ The row order in this table is important. Type lookup stops after the first matc
 <td>Databricks Type</td>
 </thead>
 <tbody>
+<tr>
+<td>
+
+```json
+{
+  "type": "object",
+  "properties": {...}
+}
+```
+
+The `STRUCT` has nested fields, whose types are determined by the `"properties"` key of the schema.
+
+If the `"properties"` key is missing, the type for the entire object will be `STRING` instead of `STRUCT`, and data will be JSON-serialized in the string column.
+
+Objects can be nullable. Nested fields can also be nullable (same rules as for everything else).
+
+</td>
+<td>
+
+`STRUCT`
+
+</td>
+</tr>
+
+<tr>
+<td>
+
+```json
+{
+  "type": "array",
+  "items": {...}
+}
+```
+
+The type of values within the `ARRAY` is determined by the `"items"` key of the schema. If the `"items"` key is missing, then the values within the array will have type `STRING`, and array items will be JSON-serialized.
+
+Arrays can be nullable. Nested fields can also be nullable (same rules as for everything else).
+
+</td>
+<td>
+
+`REPEATED`
+
+</td>
+</tr>
+
 <tr>
 <td>
 
@@ -1726,7 +1786,7 @@ _`P` is rounded up to either `9`, `18` or `38`._
 
 `STRING`
 
-_Values will be quoted as in JSON._
+_String values will be quoted as in JSON._
 
 </td>
 </tr>

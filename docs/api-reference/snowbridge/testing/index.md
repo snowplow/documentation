@@ -133,38 +133,38 @@ Here is an example setup. Copy the code into `docker-compose.yml` and run with `
 
 <CodeBlock language="yaml">{
 `services:
-  micro:
-    image: snowplow/snowplow-micro:${versions.snowplowMicro}
-    ports:
-      - "9090:9090"
-    command: --output-tsv --destination http://snowbridge:8080
-  snowbridge:
-    image: snowplow/snowbridge:${versions.snowbridge}
-    environment:
-      - SNOWBRIDGE_CONFIG_FILE=/tmp/config.hcl
-    configs:
-      - source: snowbridge_config
-        target: /tmp/config.hcl
+    micro:
+      image: snowplow/snowplow-micro:${versions.snowplowMicro}
+      ports:
+        - "9090:9090"
+      command: --output-tsv --destination http://snowbridge:8080
+    snowbridge:
+      image: snowplow/snowbridge:${versions.snowbridge}
+      environment:
+        - SNOWBRIDGE_CONFIG_FILE=/tmp/config.hcl
+      configs:
+        - source: snowbridge_config
+          target: /tmp/config.hcl
 
 configs:
-  snowbridge_config:
-    content: |
-      license {
-        accept = true
-      }
-
-      source {
-        use "http" {
-          url = "0.0.0.0:8080"
+    snowbridge_config:
+      content: |
+        license {
+          accept = true
         }
-      }
 
-      transform {
-        use "spEnrichedToJson" {
+        source {
+          use "http" {
+            url = "0.0.0.0:8080"
+          }
         }
-      }
 
-      # any other Snowbridge configuration
+        transform {
+          use "spEnrichedToJson" {
+          }
+        }
+
+        # any other Snowbridge configuration
 `
 }</CodeBlock>
 

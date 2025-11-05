@@ -3,161 +3,89 @@
 
 This file contains guidelines for writing Snowplow tutorials and accelerators.
 
-## Writing style
+Check out the example tutorial and accelerator files in this folder to see how to structure them, and what to include on each page.
 
-Best practise for writing the text:
-* The usual Snowplow [style guide](https://docs.snowplow.io/style-guide/) rules apply
-  * All headings should be in sentence case
-  * No exclamation marks, no emojis
-* Keep the tutorial streamlined and opinionated
-  * One happy path without too many options or decisions
-  * It's good to include some troubleshooting help too where necessary
-* Write in the second person
-  * It's clearer about what's going on
-  * "You'll create" not "let's create" or "we'll create"
-  * "This tutorial uses X library" not "We'll be using X library"
-* Although a tutorial may be designed for a specific persona, they are part of our technical marketing collateral
-  * It's good for tutorials to be understandable to broader audiences
-  * Explain even "obvious" things
+## Is it a tutorial or accelerator?
 
-## Tutorial structure
+This table explains the differences between tutorials and solution accelerators:
 
-Tutorials have the following structure:
+| Feature                       | Tutorial                        | Solution accelerator         |
+| ----------------------------- | ------------------------------- | ---------------------------- |
+| Provides a walkthrough for    | Standard Snowplow functionality | A specific business use case |
+| Includes third-party products | No                              | Often                        |
+| Uses a demo application       | No                              | Yes                          |
+| Uses a notebook               | Sometimes                       | Sometimes                    |
 
-```text
-Introduction
-	Architecture <-- optional
-	Prerequisites
-	Acknowledgements <-- for external contributions
-Install X
-Do some stuff
-Deploy the thing
-Conclusion
-	Next steps
-```
+Whether it's a tutorial or accelerator affects what information you need to include, and what label you can assign in the metadata.
 
-### Introduction
+## What to think about when writing a tutorial or accelerator
 
-The first page of the tutorial:
-* Has `title: "Introduction"`
-* Start with a sentence like "Welcome to the XYZ tutorial."
-* Explain in the opening paragraphs:
-  * What the focus of the tutorial is
-  * What's the business use case or value
-  * Who the tutorial is for
-  * What they'll be doing
-* Include:
-  * Links to the relevant docs
-  * Links to the relevant other repo(s)
-  * A diagram if possible
-  * A **Prerequisites** heading
-  * An optional **Acknowledgements** heading, for tutorials written by external collaborators
-* Prerequisites:
-  * Usually a bullet point list
-  * These can be anything from permissions to knowledge to codebases
-  * Add links for third-party tool websites
-  * Add links to instructions for getting credentials if necessary
-* Add an optional **Architecture** heading if the tutorial is complicated
-  * This section needs a diagram
-* Don't include:
-  * Explanations of Snowplow concepts that are already explained in the docs
-  * Code blocks
-  * Actions or instructions for them to follow as part of the tutorial
+Here are some things to consider:
+* Who is this for?
+* Is this the simplest possible implementation that supports the outcome?
+  * One happy path, with minimal options or decisions
+* Could someone new to Snowplow, or inexperienced in general, follow the instructions and achieve the outcome?
 
-### Main pages
+The usual Snowplow [style guide](https://docs.snowplow.io/style-guide/) rules apply. All headings are in sentence case.
 
-The tutorial content pages:
-* Are titled in imperative case
-  * E.g. "Install the SDK", "Generate models"
-  * It should sound right if you imagine putting "how to" in front of each
-* The first page after the introduction would normally be "Install the X" or "Set up Y"
-* Each page should start with at least one paragraph about the goal of this section, or what the steps will do
-* Subheadings are good to break up different sections on the page
-  * Each subsection needs at least a sentence introducing the next steps, and maybe why the steps are required
-  * Avoid numbering the headings - the order of operations is the order in which they appear on the page
-* Be explicit about where in their project or machine the code should be added or run
-* Use screenshots liberally
-* Show the expected outcome of the steps
+Write in the second person, for example "you'll create", not "let's create" or "we'll create".
 
-### Conclusion
+## Incorporating demo apps and notebooks
 
-The last page of the tutorial:
-* Has `title: "Conclusion"`
-* Summarise what they've learned or achieved, especially in the context of business value
-* End with a **Next steps** subsection
+Solution accelerators showcase how to use Snowplow to achieve a certain business outcome. This usually requires a supporting demo application or notebook.
 
-## Notebooks
+All source code must be available on GitHub, and linked to in the accelerator.
 
-For tutorials that incorporate a Jupyter notebook:
-* Link to the notebook in the Introduction and the install/set up page
-* The tutorial and notebook should have the same structure and code examples
-* Add a link in the notebook to the tutorial
-* The notebook should have minimal text and explanation
-  * Maximum one or two sentences per subheading
-  * It shouldn't be a complete, standalone project
-  * Think single source of truth
+Demo application:
+* Link to the accelerator in the README
+* As simple and lightweight as possible
+* If it has additional dependencies, consider Dockerizing the app
+* Instructions for running the app are in the accelerator, not in the README
 
-## Resource repos
+Notebook:
+* Link to the accelerator in the introduction
+* Has the same structure and headings as the accelerator pages
 
-For tutorials that are based around a demo project in another repo:
-* Link to the repo in the Introduction and the install/set up page
-* Add a link in the README to the tutorial
-* The repo README should have minimal text and explanation
-  * Information about running the project should all be in the tutorial
-  * Think single source of truth
+The demo application or notebook should be supporting materials for the accelerator, not standalone projects with full instructions. Think single source of truth. There are several downsides to having information duplicated or spread across multiple locations:
+* It's harder to maintain
+* Potentially confusing for users
+* Reduces our ability to measure the accelerator's value
 
-## File structure
+## How to fill out the metadata file
 
-Tutorials have:
-* Their own directory inside the documentation codebase, in `tutorials/`
-* A metadata file, `meta.json`, defining what will show on the card on the Tutorials landing page
-  * For titles and description:
-    * Be concise
-    * Use imperative form - it should sound right if you imagine putting "how to" in front of each
-  * There's a short list of **labels** to choose from, pick one:
-    * `Data governance`
-    * `Data modeling`
-    * `Signals implementation`
-    * `Solution accelerator`
-    * `Tracking implementation`
-  * Solution accelerators are a specific thing, they are:
-    * Focused on business use cases
-    * End-to-end solutions
-  * There's a short list of **use cases** to choose from, pick one:
-    * `Composable analytics`
-    * `Composable CDP`
-    * `Real-time personalization`
-    * `Customer-aware AI`
-  * For **technologies** and **Snowplow technologies**, you can specify more than one
-* Images in a subfolder called `images`
-* Separate pages as separate `.md` files
-  * The file name will be the URL
-  * The title will be the page main heading
-  * Specify what order the pages appear in by defining the page `position` (doesn't have to be integers)
+Each tutorial or accelerator requires metadata in a `meta.json` file.
 
-Example metadata:
-```json
-{
-  "title": "Manage data structures with Git",
-  "label": "Data governance",
-  "description": "Use Snowplow CLI and GitHub Actions to manage authoring and publishing for your data structures.",
-  "useCase": "Composable analytics",
-  "technologies": [],
-  "snowplowTech": ["Snowplow CLI"]
-}
-```
+### Title and description
 
-Example page frontmatter:
-```markdown
----
-title: "Introduction"                           # Page title (sentence case)
-position: 1
-description: "One to two sentences describing the content for marketing purposes."
-keywords: ["keyword1", "keyword2", "keyword3"]  # Marketing keywords
-date: "2025-09-09"                              # File creation date (YYYY-MM-DD)
----
+The `title` and `description` explain what the user will achieve by following the instructions.
 
-Welcome to the **doing a cool thing with Snowplow** tutorial.
+Formatting:
+* Sentence case - no capitalization except for the first word and any product names
+* Imperative form - it should sound right if you imagine putting "how to" in front
+* Starts with a verb
+* One sentence for the description
 
-etc
-```
+### Label and use case
+
+The `label` and `useCase` categories help users find the right tutorial or accelerator, support our marketing messaging, and clarify the goal of each one. They are enums; there's a short list of choices for each.
+
+The use case options are:
+  * `Composable analytics`
+  * `Composable CDP`
+  * `Real-time personalization`
+  * `Customer-aware AI`
+
+For labels, the options are:
+  * `Solution accelerator` - all solution accelerators get this label
+  * `Data governance`
+  * `Data modeling`
+  * `Signals implementation`
+  * `Tracking implementation`
+
+### Technology
+
+The `technologies` and `snowplowTech` properties allow users to filter for specific products. You can add multiple items for each.
+
+The `technologies` list is for non-Snowplow tools. It's most relevant for accelerators. Include any third-party products from your accelerator that a user might want to search by.
+
+Use the `snowplowTech` list for key Snowplow products used.

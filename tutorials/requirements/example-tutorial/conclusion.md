@@ -13,5 +13,5 @@ Include a screenshot if it helps consolidate the outcome.
 ## Next steps
 
 End with a next steps subsection:
-    * Use a bullet point list to suggest further actions to learn about the topic
-    * Link to other relevant tutorials or accelerators
+* Use a bullet point list to suggest further actions to learn about the topic
+* Link to other relevant tutorials or accelerators

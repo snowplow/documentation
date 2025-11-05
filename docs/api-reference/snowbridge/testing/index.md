@@ -123,6 +123,51 @@ target {
 }
 ```
 
+## Using Docker Compose
+
+Instead of creating an intermediate output file with Snowplow Micro and then processing that file in Snowbridge, you can also use Docker Compose to run Micro and Snowbridge together (since Micro 3.0.0 and Snowbridge 3.6.2).
+
+This way, any events sent to Micro will immediately make it to Snowbridge.
+
+Here is an example setup. Copy the code into `docker-compose.yml` and run with `docker-compose up`:
+
+<CodeBlock language="yaml">{
+`services:
+  micro:
+    image: snowplow/snowplow-micro:${versions.snowplowMicro}
+    ports:
+      - "9090:9090"
+    command: --output-tsv --destination http://snowbridge:8080
+  snowbridge:
+    image: snowplow/snowbridge:${versions.snowbridge}
+    environment:
+      - SNOWBRIDGE_CONFIG_FILE=/tmp/config.hcl
+    configs:
+      - source: snowbridge_config
+        target: /tmp/config.hcl
+
+configs:
+  snowbridge_config:
+    content: |
+      license {
+        accept = true
+      }
+
+      source {
+        use "http" {
+          url = "0.0.0.0:8080"
+        }
+      }
+
+      transform {
+        use "spEnrichedToJson" {
+        }
+      }
+
+      # any other Snowbridge configuration
+`
+}</CodeBlock>
+
 ## Further testing
 
-You can use the above method to test all aspects of the app from a local environment too, including sources, targets, failure targets, metrics endpoints etc. In some cases, you'll need to ensure that the local environment has access to any required resources and can authenticate (e.g. connecting from a laptop to a cloud account/local mock of cloud resources, or setting up a local metrics server for testing). Once that’s done, provide Snowbridge with an hcl file configuring it to connect to those resources, and run it the same way as in the examples above.
+You can use the above methods (whether with a TSV file or Docker Compose) to test all aspects of the app from a local environment too, including sources, targets, failure targets, metrics endpoints etc. In some cases, you'll need to ensure that the local environment has access to any required resources and can authenticate (e.g. connecting from a laptop to a cloud account/local mock of cloud resources, or setting up a local metrics server for testing). Once that’s done, provide Snowbridge with an hcl file configuring it to connect to those resources, and run it the same way as in the examples above.

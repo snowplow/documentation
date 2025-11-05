@@ -73,7 +73,7 @@ export const versions = {
   igluctl: '0.13.0',
   igluObjCClient: '0.1.1',
   igluRubyClient: '0.2.0',
-  igluScalaClient: '2.2.1',
+  igluScalaClient: '4.0.3',
 
   // Testing & debugging
   snowplowMicro: '3.0.1',

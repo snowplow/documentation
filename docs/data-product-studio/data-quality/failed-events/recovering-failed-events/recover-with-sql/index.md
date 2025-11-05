@@ -18,7 +18,7 @@ Recovering failed events involves identifying the failure type, reconstructing t
 The main steps are:
 
 1. **Identify the type of failure**: there are many possible reasons an event can fail and end up in your failed events table. The failed events table only includes schema violations and enrichment failures, but there are still many different types:
-    * Missing schema - the schema referenced (or specific version) isn't present in your prod Iglu repository.
+    * Missing schema - the schema referenced (or specific version of that schema) isn't present in your prod Iglu repository.
     * Missing required property.
     * Extra properties that are not allowed in this schema version.
     * Referencing an incorrect schema version.
@@ -48,7 +48,7 @@ SELECT
     contexts_com_snowplowanalytics_snowplow_failure_1[0].failure_type AS failure_type,
     contexts_com_snowplowanalytics_snowplow_failure_1[0].schema AS schema,
     contexts_com_snowplowanalytics_snowplow_failure_1[0].timestamp AS timestamp,
-    SPLIT(split(contexts_com_snowplowanalytics_snowplow_failure_1[0].schema,
+    SPLIT(SPLIT(contexts_com_snowplowanalytics_snowplow_failure_1[0].schema,
         '/')[0], ':')[1] AS schema_vendor,
     SPLIT(contexts_com_snowplowanalytics_snowplow_failure_1[0].schema, '/')[1] AS schema_name,
     SPLIT(contexts_com_snowplowanalytics_snowplow_failure_1[0].schema, '/')[3] AS schema_version
@@ -102,7 +102,7 @@ WITH
     contexts_com_snowplowanalytics_snowplow_failure_1[0].failure_type AS failure_type,
     contexts_com_snowplowanalytics_snowplow_failure_1[0].schema AS schema,
     contexts_com_snowplowanalytics_snowplow_failure_1[0].timestamp AS timestamp,
-    SPLIT(split(contexts_com_snowplowanalytics_snowplow_failure_1[0].schema,
+    SPLIT(SPLIT(contexts_com_snowplowanalytics_snowplow_failure_1[0].schema,
         '/')[0], ':')[1] AS schema_vendor,
     SPLIT(contexts_com_snowplowanalytics_snowplow_failure_1[0].schema, '/')[1] AS schema_name,
     SPLIT(contexts_com_snowplowanalytics_snowplow_failure_1[0].schema, '/')[3] AS schema_version
@@ -184,7 +184,7 @@ Even though this is a fairly straightforward fix (essentially in this case it is
 Key principles for reconstructing events:
 
 * The properties types defined in the JSON schema for an event or entity are deterministically converted into column types in the data warehouse.
-* Custom events are analogous to JSON objects - key-value pairs of data on the event. The values in this object can be primitive types (strings, numerics, booleans etc) or complex types (objects and arrays). The keys become the column names.
+* Custom events are analogous to JSON objects - key-value pairs of data on the event. The values in this object can be primitive types (strings, numbers, boolean values etc) or complex types (objects and arrays). The keys become the column names.
 * Custom entities are stored as arrays of objects - this is because it is possible (and common) to attach multiple of the same entity to a single event - e.g. an array of `product` entities being attached to a `product_list` event. So even if there is only one of a given entity attached to an event, they are always stored as arrays in the data warehouse. Each entity object is semantically identical to that of a custom event i.e. a key-value object.
 * The `contexts_com_snowplowanalytics_snowplow_failure_1` column is itself an array as it is an entity, and a single event can have multiple failures, each that should be addressed before reinserting.
 * The target column names also follow a deterministic naming convention:
@@ -255,7 +255,7 @@ There are some complexities to bear in mind when doing this:
 
 * There may well be columns that are not in the failed events table that are in the good events table. Your insert command must include `CAST(NULL AS ... )` in place for all of those columns.
 * You must ensure that you have the correct structure for your repaired columns as otherwise they will not insert and the warehouse will reject the inserted rows.
-* In newer versions of Snowplow data warehouse loaders (such as Snoflake Streaming Loader & BigQuery Loader V2), entity columns also have a `_schema_version` column. This must also be set for reprocessed entity columns in order for the insert to be successful.
+* In newer versions of Snowplow data warehouse loaders (such as Snowflake Streaming Loader and the BigQuery Loader V2), entity columns also have a `_schema_version` column. This must also be set for reprocessed entity columns in order for the insert to be successful.
 * If the recovered events are net-new to your good events table (say you've encountered failures on the first time using this schema) then that column won't exist in your good events table yet. We'd recommend sending a hand crafted good event for that schema to your prod pipeline **first**. This will allow the Snowplow loader to correctly create the column in your good events table so it is ready to be inserted into.
 
 Here is a script using BigQuery SQL to create you the `INSERT` command:
@@ -302,8 +302,8 @@ schema_comparison AS ( -- this CTE joins the previous two, and labels them if th
   LEFT JOIN failed_table_columns f ON t.column_name = f.column_name
 ),
 
-column_mappings AS (   -- this CTE checks if columns are missing, 
-  SELECT               -- handles thos missing columns by inserting NULLs
+column_mappings AS (   -- this CTE checks if columns are missing,
+  SELECT               -- handles those missing columns by inserting NULLs
     ordinal_position,  -- and also inserts your repaired event columns
     column_name,
     target_type,
@@ -365,16 +365,11 @@ FROM prep;""",
   ) AS insert_statement
   FROM select_clause
 )
-
-  </TabItem>
-  <TabItem value="snowflake" label="Snowflake" default>
-
 -- Output the complete INSERT statement
-SELECT 
+SELECT
   insert_statement AS generated_sql
 FROM generated_insert
 ```
-
   </TabItem>
   <TabItem value="snowflake" label="Snowflake" default>
 
@@ -479,7 +474,7 @@ SELECT
   ',
     columns_sql,
     '
-FROM prep'
+    FROM prep;'
   ) AS insert_statement
   FROM select_clause
 )

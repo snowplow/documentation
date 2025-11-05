@@ -2,7 +2,7 @@
   "title": "Example tutorial title",
   "label": "Data modeling",
   "description": "Example description for the tutorial card on the landing page.",
-  "useCases": ["Composable analytics"],
+  "useCase": "Composable analytics",
   "technologies": [],
   "snowplowTech": ["Snowplow CLI"]
 }

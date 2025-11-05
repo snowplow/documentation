@@ -141,7 +141,7 @@ Example metadata:
   "title": "Manage data structures with Git",
   "label": "Data governance",
   "description": "Use Snowplow CLI and GitHub Actions to manage authoring and publishing for your data structures.",
-  "useCases": ["Composable analytics"],
+  "useCase": "Composable analytics",
   "technologies": [],
   "snowplowTech": ["Snowplow CLI"]
 }

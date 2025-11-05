@@ -2,7 +2,7 @@
   "title": "Track web events with base data products",
   "label": "Data governance",
   "description": "Use the Snowplow Console to create and manage data products for a web application.",
-  "useCases": ["Composable analytics"],
+  "useCase": "Composable analytics",
   "technologies": [],
   "snowplowTech": ["Snowtype", "Console"]
 }

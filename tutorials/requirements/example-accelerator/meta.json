@@ -2,7 +2,7 @@
   "title": "Example accelerator title",
   "label": "Solution accelerator",
   "description": "Example description for the card on the landing page.",
-  "useCases": ["Composable analytics"],
+  "useCase": "Composable analytics",
   "technologies": ["dbt"],
   "snowplowTech": ["Snowplow CLI"]
 }

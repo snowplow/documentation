@@ -321,7 +321,10 @@ column_mappings AS (   -- this CTE checks if columns are missing,
       -- Exclude the failure entity from source
       WHEN column_name = 'contexts_com_snowplowanalytics_snowplow_failure_1' THEN
         'cast(null as array<struct<schema string, data json>>) AS contexts_com_snowplowanalytics_snowplow_failure_1'
-      
+
+      -- Handle the load_tstamp column so that the inserted rows have the correct timestamp
+      WHEN column_name = 'load_tstamp' THEN 'current_timestamp() AS load_tstamp'
+
       -- Handle missing columns with appropriate NULL casting
       WHEN status = 'MISSING_IN_FAILED' THEN
         CASE 
@@ -352,7 +355,7 @@ generated_insert AS (
   SELECT FORMAT("""INSERT INTO `snowplow_good.events`
 WITH prep AS (
   SELECT 
-    contexts_com_snowplowanalytics_snowplow_failure_1
+    * -- include all columns from the failed events table
   FROM `snowplow_failed.events`
   WHERE DATE(load_tstamp) > DATE_SUB(CURRENT_DATE(), INTERVAL 7 day)
     AND app_id = 'test-app'
@@ -383,8 +386,8 @@ WITH target_table_columns AS ( -- this CTE finds all the columns in the good eve
     data_type,
     is_nullable
   FROM SNOWPLOW_GOOD_DATABASE.INFORMATION_SCHEMA.COLUMNS -- Use the database which has your SNOWPLOW_GOOD schema 
-  WHERE table_name = 'EVENTS'
-    AND table_schema = 'SNOWPLOW_GOOD'
+  WHERE lower(table_name) = 'events'
+    AND lower(table_schema) = 'snowplow_good'
 ),
 
 failed_table_columns AS ( -- this CTE finds all the columns in the failed events table
@@ -393,8 +396,8 @@ failed_table_columns AS ( -- this CTE finds all the columns in the failed events
     data_type,
     is_nullable
   FROM SNOWPLOW_FAILED_DATABASE.INFORMATION_SCHEMA.COLUMNS   --Use the database which has your SNOWPLOW_FAILED schema 
-  WHERE table_name = 'EVENTS'
-    AND table_schema = 'SNOWPLOW_FAILED'
+  WHERE lower(table_name) = 'events'
+    AND lower(table_schema) = 'snowplow_failed'
 ),
 
 schema_comparison AS ( -- this CTE joins the previous two, and labels them if they are missing
@@ -433,7 +436,10 @@ column_mappings AS (   -- this CTE checks if columns are missing,
       -- Exclude the failure entity from source
       WHEN column_name = 'contexts_com_snowplowanalytics_snowplow_failure_1' THEN
         'CAST(NULL AS ARRAY<OBJECT<schema STRING, data VARIANT>>) AS contexts_com_snowplowanalytics_snowplow_failure_1'
-      
+
+      -- Handle the load_tstamp column so that the inserted rows have the correct timestamp
+      WHEN column_name = 'load_tstamp' THEN 'CURRENT_TIMESTAMP() AS load_tstamp'
+
       -- Handle missing columns with appropriate NULL casting
       WHEN status = 'MISSING_IN_FAILED' THEN
         CASE 
@@ -464,7 +470,7 @@ generated_insert AS (
   SELECT CONCAT(
     'INSERT INTO SNOWPLOW_GOOD.EVENTS
     WITH prep AS (
-    SELECT *
+    SELECT * -- include all columns from the failed events table
     FROM SNOWPLOW_FAILED.EVENTS
     WHERE load_tstamp::DATE > CURRENT_DATE - INTERVAL ''7 DAY''
     AND app_id = ''test-app''

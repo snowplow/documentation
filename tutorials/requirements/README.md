@@ -22,9 +22,10 @@ Whether it's a tutorial or accelerator affects what information you need to incl
 
 Here are some things to consider:
 * Who is this for?
+  * Could it be used by both Snowplow customers and prospects?
 * Is this the simplest possible implementation that supports the outcome?
   * One happy path, with minimal options or decisions
-* Could someone new to Snowplow, or inexperienced in general, follow the instructions and achieve the outcome?
+* Could someone inexperienced achieve the title outcome?
 
 The usual Snowplow [style guide](https://docs.snowplow.io/style-guide/) rules apply. All headings are in sentence case.
 

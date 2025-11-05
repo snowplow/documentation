@@ -258,7 +258,11 @@ There are some complexities to bear in mind when doing this:
 * In newer versions of Snowplow data warehouse loaders (such as Snowflake Streaming Loader and the BigQuery Loader V2), entity columns also have a `_schema_version` column. This must also be set for reprocessed entity columns in order for the insert to be successful.
 * If the recovered events are net-new to your good events table (say you've encountered failures on the first time using this schema) then that column won't exist in your good events table yet. We'd recommend sending a hand crafted good event for that schema to your prod pipeline **first**. This will allow the Snowplow loader to correctly create the column in your good events table so it is ready to be inserted into.
 
-Here is a script using BigQuery SQL to create you the `INSERT` command:
+:::info
+We would recommend using a staging table to insert the repaired rows before running this process on your main events table. This will allow you to review the repaired rows before inserting them into your main events table. To do so you can take a cut of your main events table, and run the `INSERT` command against that table, and verify you get the behaviour you expect.
+:::
+
+Below are scripts for BigQuery and Snowflake to create you the `INSERT` command:
 
 <Tabs groupId="warehouse" queryString>
   <TabItem value="bigQuery" label="BigQuery" default>

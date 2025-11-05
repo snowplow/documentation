@@ -92,17 +92,17 @@ When using "When above value" trigger:
 
 ![Value threshold configuration with insights panel](images/data_quality_absolute_threshold.png)
 
-#### Insights from historical data
+#### Insights from recent data
 
-When configuring a threshold alert, an insights panel appears showing data from the past 7 days to help you set appropriate thresholds:
+When configuring a threshold alert, the Insights panel displays data from the last 7 days to help you choose an appropriate threshold:
 
-- **Average events for the selected time period**: Shows the average number of valid and failed events
-- **Suggested threshold value**: Provides a recommended threshold
-- **Apply suggestion**: Click to automatically populate the threshold value field with the suggested value
+- **Average events volume** - Shows the average counts of valid and failed events (per relevant time unit)
+- **Suggested threshold** - Provides a recommended threshold value based on recent patterns
+- **Apply suggestion** - Click to automatically populate the threshold value field with the suggested value
 
-This helps you set realistic thresholds based on your actual event patterns.
+Use these insights to set realistic thresholds that reflect your actual event patterns.
 
-An alert will be sent once per the selected delivery frequency if the trigger condition is met.
+**Alert delivery:** If the trigger condition is met, the alert is sent once per delivery interval you selected.
 
 ## Complete setup
 

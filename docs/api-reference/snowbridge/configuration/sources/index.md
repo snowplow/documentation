@@ -9,7 +9,7 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-**Stdin source** is the default. We also support Kafka, Kinesis, PubSub, and SQS sources.
+**Stdin source** is the default. We also support Kafka, Kinesis, PubSub, SQS and experimental HTTP sources.
 
 Stdin source simply treats stdin as the input. It has one optional configuration to set the concurrency.
 

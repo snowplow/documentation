@@ -36,6 +36,15 @@ Solution accelerators must include a demo app and/or a notebook:
 
 All source code must be available.
 
+### Snowplow implementation
+
+If your demo app includes Snowplow tracking or other Snowplow components, add this section:
+* Describe how they're implemented
+* Say why each Snowplow component is used
+* Explain what events are generated
+* Link to the appropriate docs pages
+* Provide paths to the relevant implementation files
+
 ## Prerequisites
 
 Add a bullet point list of requirements:
@@ -43,6 +52,8 @@ Add a bullet point list of requirements:
 * Any specific technical knowledge required? Aim to make the accelerator as accessible as possible for new users.
 * Do they need an account for a third-party product?
 * Is there a minimum release version required for any of the components?
+
+Where possible, explain very briefly why each prerequisite is required.
 
 Don't list API keys as a prerequisite: include how to get them as one of the accelerator steps.
 

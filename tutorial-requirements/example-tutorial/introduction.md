@@ -30,4 +30,6 @@ Add a bullet point list of requirements:
 * Any other third-party tools required?
 * Is there a minimum release version required for any of the components?
 
+Where possible, explain very briefly why each prerequisite is required.
+
 Don't list API keys as a prerequisite: include how to get them as one of the tutorial steps.

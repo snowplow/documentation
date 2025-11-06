@@ -1,5 +1,5 @@
 
-# Snowplow tutorials and accelerators
+# Snowplow tutorials and solution accelerators
 
 This file describes the requirements for Snowplow tutorials and accelerators.
 
@@ -46,6 +46,8 @@ Demo application:
 * If it has additional dependencies, consider Dockerizing the app
 * Instructions for running the app are in the accelerator, not in the README
 
+There's an example README in this folder - `./example-app-README.md`.
+
 Notebook:
 * Link to the accelerator in the introduction
 * Has the same structure and headings as the accelerator pages
@@ -54,6 +56,8 @@ The demo application or notebook should be supporting materials for the accelera
 * It's harder to maintain
 * Potentially confusing for users
 * Reduces our ability to measure the accelerator's value
+
+If your demo application includes Snowplow functionality, describe it fully in the accelerator introduction. This supports our goal of helping users to understand how to get value from Snowplow.
 
 ## How to fill out the metadata file
 
@@ -96,7 +100,7 @@ Use the `snowplowTech` list for key Snowplow products used.
 
 ## Understanding the page metadata
 
-Every full markdown file in the docs repo has a block of metadata at the top.
+Every full markdown file in the documentation repo has a block of metadata at the top.
 
 Here's an example metadata block for a tutorial or accelerator page:
 

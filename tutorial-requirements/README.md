@@ -27,7 +27,7 @@ Whether it's a tutorial or accelerator affects what information you need to incl
 Here are some things to consider:
 * Who is this for?
   * Could you provide instructions for both Snowplow customers and prospects?
-* Is this the simplest possible implementation?
+* **Is this the simplest possible implementation**?
   * One happy path, with minimal options or decisions
 
 The usual Snowplow [style guide](https://docs.snowplow.io/style-guide/) rules apply. All headings are in sentence case.
@@ -46,7 +46,7 @@ Demo application:
 * If it has additional dependencies, consider Dockerizing the app
 * Instructions for running the app are in the accelerator, not in the README
 
-There's an example README in this folder - `./example-app-README.md`.
+There's an example README at `./example-app-README.md`.
 
 Notebook:
 * Link to the accelerator in the introduction
@@ -61,7 +61,7 @@ If your demo application includes Snowplow functionality, describe it fully in t
 
 ## How to fill out the metadata file
 
-Each tutorial or accelerator requires metadata in a `meta.json` file.
+Each tutorial or accelerator requires metadata in a `meta.json` file. Look at the `example-accelerator` or `example-tutorial` folders for full examples.
 
 ### Title and description
 
@@ -130,19 +130,19 @@ Before publishing, tutorials and accelerators are reviewed across three aspects:
 
 To review a tutorial or accelerator, put yourself in character as someone with minimal prior knowledge of Snowplow. Follow all the steps exactly as written. Here are some questions to consider.
 
-The technical review is the simplest:
+The **technical** review is the simplest:
 * Do the code examples run without errors?
 * Does the demo app build and run?
 * Is all the source code accessible?
 
-The UX review focuses on providing value to the user:
+The **UX** review focuses on providing value to the user:
 * Are the steps comprehensive and easy to follow?
 * Did you understand why each step was required, and what the outcome was?
 * Are you satisfied that you learned what was promised in the introduction?
 * Is the prerequisites list correct?
 * Is it possible to complete the accelerator within one day?
 
-Finally, the brand review:
+Finally, the **brand** review:
 * Does the topic support our strategic marketing objectives?
 * Is the content differentiated from existing tutorials or accelerators?
 * Does the structure match the framework shown in the example files?

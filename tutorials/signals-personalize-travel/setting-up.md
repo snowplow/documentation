@@ -40,7 +40,7 @@ cp .env.example .env
 Edit the `.env` file with your Signals connection credentials:
 
 <Tabs groupId="cloud" queryString lazy>
-  <TabItem value="cdi" label="BDP" default>
+  <TabItem value="cdi" label="CDI" default>
 
 ```bash
 NEXT_PUBLIC_SNOWPLOW_SIGNALS_API_URL=signals.snowplow.com
@@ -69,7 +69,7 @@ If you plan to use the AI agent add an OpenAI API key (`OPENAI_API_KEY`) to your
 Run the following Docker command:
 
 <Tabs groupId="cloud" queryString lazy>
-  <TabItem value="cdi" label="BDP" default>
+  <TabItem value="cdi" label="CDI" default>
 
 ```bash
 docker compose --profile travel-site up

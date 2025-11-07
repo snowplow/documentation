@@ -56,10 +56,35 @@ module.exports = {
           from: { height: "var(--radix-accordion-content-height)", opacity: "1" },
           to: { height: "0", opacity: "0" },
         },
+        "fade-out": {
+          from: { opacity: "1" },
+          to: { opacity: "0" },
+        },
+        "fade-in": {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
+        "slide-in-from-top": {
+          from: { transform: "translateY(-100%)" },
+          to: { transform: "translateY(0)" },
+        },
+        "slide-in-from-bottom": {
+          from: { transform: "translateY(100%)" },
+          to: { transform: "translateY(0)" },
+        },
+        "slide-out-to-right": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(100%)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.15s ease-in-out",
         "accordion-up": "accordion-up 0.15s ease-in-out",
+        "fade-out-80": "fade-out 0.15s ease-in-out",
+        "fade-in": "fade-in 0.15s ease-in-out",
+        "slide-in-from-top-full": "slide-in-from-top 0.15s ease-out",
+        "slide-in-from-bottom-full": "slide-in-from-bottom 0.15s ease-out",
+        "slide-out-to-right-full": "slide-out-to-right 0.15s ease-in",
       },
       typography: {
         DEFAULT: {

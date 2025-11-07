@@ -82,7 +82,6 @@ You will need to share this role with us as part of filling out the setup form i
         "lambda:*",
         "logs:*",
         "rds:*",
-        "redshift:*",
         "route53:*",
         "route53resolver:*",
         "s3:*",

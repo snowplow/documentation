@@ -12,7 +12,9 @@
     "serve": "docusaurus serve",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "check-badges": "node scripts/check-badges.js",
+    "fix-badges": "node scripts/check-badges.js --fix"
   },
   "dependencies": {
     "@algolia/client-search": "^5.0.0",

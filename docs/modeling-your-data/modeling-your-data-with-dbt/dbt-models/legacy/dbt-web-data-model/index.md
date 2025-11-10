@@ -7,14 +7,17 @@ hide_title: true
 
 ```mdx-code-block
 import Badges from '@site/src/components/Badges';
+import BadgeGroup from '@site/src/components/BadgeGroup';
 import ThemedImage from '@theme/ThemedImage';
 import DocCardList from '@theme/DocCardList';
 import {versions} from '@site/src/componentVersions';
 
 ```
-<Badges badgeType="dbt-package Release" pkg="web"></Badges>&nbsp;
-<Badges badgeType="Maintained"></Badges>&nbsp;
+<BadgeGroup>
+<Badges badgeType="dbt-package Release" pkg="web"></Badges>
+<Badges badgeType="Maintained"></Badges>
 <Badges badgeType="SCL"></Badges>
+</BadgeGroup>
 
 :::info
 

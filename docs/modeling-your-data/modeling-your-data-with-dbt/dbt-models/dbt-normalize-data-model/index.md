@@ -10,11 +10,14 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
+import BadgeGroup from '@site/src/components/BadgeGroup';
 ```
 
-<Badges badgeType="dbt-package Release" pkg="normalize"></Badges>&nbsp;
-<Badges badgeType="Maintained"></Badges>&nbsp;
+<BadgeGroup>
+<Badges badgeType="dbt-package Release" pkg="normalize"></Badges>
+<Badges badgeType="Maintained"></Badges>
 <Badges badgeType="SPAL"></Badges>
+</BadgeGroup>
 
 # Snowplow Normalize Package
 

@@ -6,6 +6,7 @@ hide_title: true
 
 ```mdx-code-block
 import Badges from '@site/src/components/Badges';
+import BadgeGroup from '@site/src/components/BadgeGroup';
 ```
 
 <Badges badgeType="dbt-package Release" pkg="mobile"></Badges>

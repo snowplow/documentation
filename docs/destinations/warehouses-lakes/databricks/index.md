@@ -70,7 +70,7 @@ See [Delta Lake](../delta/index.md).
   * `USE CATALOG` on the catalog
   * `USE SCHEMA` and `CREATE TABLE` on the schema
   * `READ VOLUME` and `WRITE VOLUME` on the volume
-  * `CAN USE` on the SQL warehouse (for testing the connection and monitoring, e.g. as part of the [Data Quality Dashboard](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/index.md#data-quality-dashboard))
+  * `CAN USE` on the SQL warehouse (for testing the connection and monitoring, e.g. as part of the [Data Quality Dashboard](/docs/monitoring/monitoring-failed-events/index.md#data-quality-dashboard))
 
 Note that Lakeflow features require a Premium Databricks account. You might also need Databricks metastore admin privileges for some of the steps.
 

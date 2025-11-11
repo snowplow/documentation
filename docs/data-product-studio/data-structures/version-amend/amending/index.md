@@ -70,7 +70,7 @@ If your events are failing in production because of an incorrect schema, you mig
 
 :::note
 
-You need to be on Enrich 3.8.0+ and Iglu Server 0.11.0+ to use this feature. Additionally, if you are using [Snowplow Mini](/docs/api-reference/snowplow-mini/index.md) or [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md), you will need version 0.17.0+ or 1.7.1+ respectively.
+You need to be on Enrich 3.8.0+ and Iglu Server 0.11.0+ to use this feature. Additionally, if you are using [Snowplow Mini](/docs/api-reference/snowplow-mini/index.md) or [Snowplow Micro](/docs/testing/snowplow-micro/index.md), you will need version 0.17.0+ or 1.7.1+ respectively.
 
 :::
 

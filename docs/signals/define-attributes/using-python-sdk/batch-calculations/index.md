@@ -100,6 +100,6 @@ You will need to update the variables for each attribute group individually, by 
 | `snowplow__atomic_schema`              | Change this if you aren't using `atomic` schema for Snowplow event data                               | `'atomic'`     |
 | `snowplow__database`                   | Change this if you aren't using `target.database` for Snowplow event data                             |                |
 | `snowplow__events_table`               | Change this if you aren't using `events` table for Snowplow event data                                | `'events'`     |
-| `snowplow__include_current_day_in_windows` | false | If set to true, the current_day with incomplete data is also taken into account for last_x_day type windows
+| `snowplow__include_current_day_in_windows` | false | If set to true, the `current_day` with incomplete data is also taken into account for `last_x_day` type windows
 | `snowplow__databricks_catalog` | `hive_metastore` | Catalog used for the atomic events table (Databricks only)
     

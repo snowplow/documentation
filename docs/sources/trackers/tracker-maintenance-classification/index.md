@@ -10,6 +10,7 @@ Snowplow Trackers and dbt packages have been categorized into 4 maintenance grou
 
 ```mdx-code-block
 import Badges from '@site/src/components/Badges';
+import BadgeGroup from '@site/src/components/BadgeGroup';
 
 <Badges badgeType="Unsupported"></Badges>
 ```
@@ -20,7 +21,7 @@ Deprecated.
 * * *
 
 ```mdx-code-block
-<Badges badgeType="Early Release"></Badges> 
+<Badges badgeType="Early Release"></Badges>
 ```
 
 Pre-Version 1.0.0, may be missing core tracker features.  
@@ -32,7 +33,7 @@ Will be released less frequently.
 * * *
 
 ```mdx-code-block
-<Badges badgeType="Maintained"></Badges> 
+<Badges badgeType="Maintained"></Badges>
 ```
 
 Currently production ready.  
@@ -44,7 +45,7 @@ Scanned daily for vulnerabilities, Snowplow Team will fix critical or high sever
 * * *
 
 ```mdx-code-block
-<Badges badgeType="Actively Maintained"></Badges> 
+<Badges badgeType="Actively Maintained"></Badges>
 ```
 
 Currently production ready.  
@@ -57,7 +58,9 @@ Scanned daily for vulnerabilities, Snowplow Team will fix all vulnerabilities pr
 
 | Status                                            | Production Ready | Release Frequency               | Accepting Contributions | Dependency and Vulnerability Updates                                                                                          |
 |---------------------------------------------------|:----------------:|---------------------------------|:-----------------------:|:------------------------------------------------------------------------------------------------------------------------------|
-| <Badges badgeType="Unsupported"></Badges>         |        ❌         | Never                           |            ❌            | None                                                                                                                          |
-| <Badges badgeType="Early Release"></Badges>       |      Varies      | As required                     |           ✔️            | \- Updates for critical and high severity vulnerabilities                                                                     |
-| <Badges badgeType="Maintained"></Badges>          |        ✔️        | As required  <br/>Low frequency |           ✔️            | \- Daily scans <br/>\- Passive updates to dependencies  <br/>\- Active updates for critical and high severity vulnerabilities |
-| <Badges badgeType="Actively Maintained"></Badges> |        ✔️        | Frequent release schedule       |           ✔️            | \- Daily scans <br/>\- Active updates to dependencies and all levels of vulnerabilities                                       |
+<BadgeGroup>
+<Badges badgeType="Unsupported"></Badges>
+<Badges badgeType="Early Release"></Badges>
+<Badges badgeType="Maintained"></Badges>
+<Badges badgeType="Actively Maintained"></Badges>
+</BadgeGroup>

@@ -1,7 +1,7 @@
 ---
 title: "Troubleshooting data quality dashboard"
 sidebar_position: 4
-sidebar_label: "Troubleshooting"
+sidebar_label: "Dashboard troubleshooting"
 ---
 
 This guide helps you troubleshoot common errors when using the data quality dashboard with your warehouse.

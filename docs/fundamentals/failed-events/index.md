@@ -51,7 +51,7 @@ All of these are internal failures you typically can’t address upstream.
 
 ## Dealing with failed events
 
-Snowplow provides a dashboard and alerts for failed events. See [Monitoring failed events](/docs/monitoring/monitoring-failed-events/index.md).
+Snowplow provides a dashboard and alerts for failed events. See [Monitoring failed events](/docs/monitoring/index.md).
 
 ---
 

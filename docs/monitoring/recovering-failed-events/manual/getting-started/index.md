@@ -6,7 +6,7 @@ sidebar_position: 0
 
 Event recovery at its core, is the ability to fix events that have failed and replay them through your pipeline.
 
-After inspecting failed events either in [Snowplow Console](/docs/monitoring/monitoring-failed-events/index.md), or in the [partitioned failure buckets](/docs/monitoring/exploring-failed-events/file-storage/index.md), you can determine which events are possible to recover based on what the fix entails.
+After inspecting failed events either in [Snowplow Console](/docs/monitoring/index.md), or in the [partitioned failure buckets](/docs/monitoring/exploring-failed-events/file-storage/index.md), you can determine which events are possible to recover based on what the fix entails.
 
 With recovery it is possible to:
 

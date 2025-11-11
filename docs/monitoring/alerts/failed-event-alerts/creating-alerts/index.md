@@ -6,7 +6,7 @@ sidebar_position: 1
 Set up failed event alerts to receive notifications when failed events occur in your data pipeline.
 
 
-You'll need access to the [data quality dashboard](/docs/monitoring/monitoring-failed-events/index.md#data-quality-dashboard).
+You'll need access to the [data quality dashboard](/docs/monitoring/index.md#data-quality-dashboard).
 
 To create an alert, go to Snowplow Console:
 1. Navigate to **Data Quality** in the left sidebar

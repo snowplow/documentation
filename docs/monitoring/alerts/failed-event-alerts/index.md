@@ -5,7 +5,7 @@ sidebar_position: 1
 
 Failed event alerts automatically notify you when [failed events](/docs/fundamentals/failed-events/index.md) occur in your data pipeline. Set up alerts to receive notifications via email or Slack when validation errors, resolution errors, or other data quality issues arise.
 
-- The alerting system monitors your failed events and sends notifications based on the filters you configure. 
+- The alerting system monitors your failed events and sends notifications based on the filters you configure.
 - Alerts are checked every 10 minutes and sent to your specified destinations when matching failed events are detected.
 
 These alert destinations are supported:
@@ -24,7 +24,7 @@ Configure alerts to trigger only for specific types of failed events:
 
 1. Navigate to the data quality dashboard
 2. View your failed events overview
-3. Click **[Manage](/docs/monitoring/monitoring-failed-events/alerts/failed-event-alerts/managing-alerts/index.md)** alerts to set up notifications
-4. **[Create](/docs/monitoring/monitoring-failed-events/alerts/failed-event-alerts/creating-alerts/index.md)** and configure your first alert
+3. Click **[Manage](/docs/monitoring/alerts/failed-event-alerts/managing-alerts/index.md)** alerts to set up notifications
+4. **[Create](/docs/monitoring/alerts/failed-event-alerts/creating-alerts/index.md)** and configure your first alert
 
 ![Data Quality Dashboard overview](images/dq_manage_alerts_button.png)

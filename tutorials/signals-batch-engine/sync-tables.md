@@ -45,7 +45,7 @@ snowplow-batch-engine sync \
 
 The batch engine will first register the batch source for the attribute group. It will also publish the attribute group so that syncing can begin.
 
-Signals will check for updates to the table every hour. In case both your dbt run and the dbt snapshot update finishes, the changes should be captured in the next sync. Your attributes will then become available to retrieve in your applications.
+Signals will check for updates to the table every hour. Changes will be captured in the next sync if both the dbt run and the dbt snapshot update have finished. Your attributes will then become available to retrieve in your applications.
 
 ```bash
 # Progress messages

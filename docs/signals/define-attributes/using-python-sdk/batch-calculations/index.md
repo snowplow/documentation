@@ -37,7 +37,7 @@ To start syncing existing tables, [publish](/docs/signals/define-attributes/usin
 sp_signals.publish([attribute_group])
 ```
 
-The sync will begin: the sync engine will look for new records at a given interval, based on the `timestamp_field` and the last time it ran. The default time interval is 1 hour. If you use dbt, consider creating a dbt snapshot over your attributes table to capture changes if it is refreshed in a drop and recompute manner. This way you can use the `dbt_valid_from` as the timestamp_field for optimal incremental syncs.
+The sync will begin: the sync engine will look for new records at a given interval, based on the `timestamp_field` and the last time it ran. The default time interval is 1 hour. If you use dbt, consider creating a dbt snapshot over your attributes table to capture changes if it is refreshed in a drop and recompute manner. This way you can use the `dbt_valid_from` as the `timestamp_field` for optimal incremental syncs.
 
 ## Creating new attribute tables
 

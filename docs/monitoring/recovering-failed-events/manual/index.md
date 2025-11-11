@@ -1,6 +1,6 @@
 ---
-title: "Event Recovery for Snowplow Self-Hosted"
-sidebar_label: "Manual recovery"
+title: "Event recovery without Failed Events Loader"
+sidebar_label: "Recover events from buckets"
 sidebar_position: 40
 description: "Low level tooling for manual event recovery in Snowplow Self-Hosted."
 ---

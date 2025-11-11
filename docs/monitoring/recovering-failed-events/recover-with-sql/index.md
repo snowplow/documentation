@@ -1,5 +1,5 @@
 ---
-title: "Recovering failed events with SQL"
+title: "Recover loaded events with SQL"
 sidebar_position: 10
 description: "Learn how to recover failed events from your failed events table back into your good events table using SQL queries."
 ---
@@ -72,7 +72,7 @@ SELECT
     contexts_com_snowplowanalytics_snowplow_failure_1[0]:failure_type AS failure_type,
     contexts_com_snowplowanalytics_snowplow_failure_1[0]:schema AS schema,
     contexts_com_snowplowanalytics_snowplow_failure_1[0]:timestamp AS timestamp,
-    
+
     SPLIT_PART(SPLIT_PART(contexts_com_snowplowanalytics_snowplow_failure_1[0]:schema::STRING, '/', 1), ':', 2) AS schema_vendor,
     SPLIT_PART(contexts_com_snowplowanalytics_snowplow_failure_1[0]:schema::STRING, '/', 2) AS schema_name,
     SPLIT_PART(contexts_com_snowplowanalytics_snowplow_failure_1[0]:schema::STRING, '/', 4) AS schema_version
@@ -106,7 +106,7 @@ WITH
         '/')[0], ':')[1] AS schema_vendor,
     SPLIT(contexts_com_snowplowanalytics_snowplow_failure_1[0].schema, '/')[1] AS schema_name,
     SPLIT(contexts_com_snowplowanalytics_snowplow_failure_1[0].schema, '/')[3] AS schema_version
-  FROM `snowplow_failed.events` -- Use your failed events schema 
+  FROM `snowplow_failed.events` -- Use your failed events schema
   WHERE 1=1
     AND DATE(load_tstamp) > DATE_SUB(CURRENT_DATE(), INTERVAL 7 day)
     AND contexts_com_snowplowanalytics_snowplow_failure_1 IS NOT NULL
@@ -125,7 +125,7 @@ WITH
   WHERE 1=1
     AND schema_name = 'user_entity'
     AND app_id = 'test-app'
-  ORDER BY timestamp DESC 
+  ORDER BY timestamp DESC
 ```
 
   </TabItem>
@@ -202,22 +202,22 @@ In this example, the `user_entity` is obviously an entity, so will be in an arra
 ```sql
 WITH prep AS (
   SELECT
-    contexts_com_snowplowanalytics_snowplow_failure_1 
+    contexts_com_snowplowanalytics_snowplow_failure_1
   FROM `snowplow_failed.events`
   WHERE 1=1
     AND DATE(load_tstamp) > DATE_SUB(CURRENT_DATE(), INTERVAL 7 day)
     AND app_id = 'test-app'
-    AND contexts_com_snowplowanalytics_snowplow_failure_1[0].schema = 'iglu:com.example/user_entity/jsonschema/2-0-1' -- filter for my offending schema 
+    AND contexts_com_snowplowanalytics_snowplow_failure_1[0].schema = 'iglu:com.example/user_entity/jsonschema/2-0-1' -- filter for my offending schema
 )
 SELECT
   ARRAY( -- since this is an entity, it must be an array
     SELECT
-      STRUCT( 
+      STRUCT(
         '2-0-0' AS _schema_version, -- set the schema version to the correct entity version for BigQuery Loader V2
         INT64(contexts_com_snowplowanalytics_snowplow_failure_1[0].data.user_id) AS user_id, -- use the `[0]` syntax to extract the first (and only) instance of this entity from the failure array
         STRING(contexts_com_snowplowanalytics_snowplow_failure_1[0].data.user_name) AS user_name -- use the `INT64(...)` and the `STRING(...)` functions to cast the raw JSON values to their appropriate types
       )
-    ) 
+    )
   AS contexts_com_example_user_entity_2_0_0 -- correctly name the column name to be inserted
 FROM prep;
 ```
@@ -270,8 +270,8 @@ Below are scripts for BigQuery and Snowflake to create you the `INSERT` command:
 ```sql
 -- Schema-aware INSERT generator for Snowplow failed events reprocessing
 
-WITH target_table_columns AS ( -- this CTE finds all the columns in the good events table 
-  SELECT 
+WITH target_table_columns AS ( -- this CTE finds all the columns in the good events table
+  SELECT
     ordinal_position,
     column_name,
     data_type,
@@ -282,7 +282,7 @@ WITH target_table_columns AS ( -- this CTE finds all the columns in the good eve
 ),
 
 failed_table_columns AS ( -- this CTE finds all the columns in the failed events table
-  SELECT 
+  SELECT
     column_name,
     data_type,
     is_nullable
@@ -292,13 +292,13 @@ failed_table_columns AS ( -- this CTE finds all the columns in the failed events
 ),
 
 schema_comparison AS ( -- this CTE joins the previous two, and labels them if they are missing
-  SELECT 
+  SELECT
     t.ordinal_position,
     t.column_name,
     t.data_type AS target_type,
     f.data_type AS failed_type,
     t.is_nullable,
-    CASE 
+    CASE
       WHEN f.column_name IS NULL THEN 'MISSING_IN_FAILED'
       ELSE 'MATCH'
     END AS status
@@ -312,16 +312,16 @@ column_mappings AS (   -- this CTE checks if columns are missing,
     column_name,
     target_type,
     status,
-    CASE 
-      -- Handle your specific replaced entity column 
-      WHEN column_name = 'contexts_com_example_user_entity_2_0_0' THEN -- isolate the target column 
+    CASE
+      -- Handle your specific replaced entity column
+      WHEN column_name = 'contexts_com_example_user_entity_2_0_0' THEN -- isolate the target column
       -- paste in your reprocess logic as a string (including newline characters (`\n`) if you wish)
         '''array(select struct(
         \'2-0-0\' AS _schema_version,
         int64(contexts_com_snowplowanalytics_snowplow_failure_1[0].data.user_id) AS user_id,
         string(contexts_com_snowplowanalytics_snowplow_failure_1[0].data.user_name) AS user_name
         )) AS contexts_com_example_user_entity_2_0_0'''
-      
+
       -- Exclude the failure entity from source
       WHEN column_name = 'contexts_com_snowplowanalytics_snowplow_failure_1' THEN
         'cast(null as array<struct<schema string, data json>>) AS contexts_com_snowplowanalytics_snowplow_failure_1'
@@ -331,19 +331,19 @@ column_mappings AS (   -- this CTE checks if columns are missing,
 
       -- Handle missing columns with appropriate NULL casting
       WHEN status = 'MISSING_IN_FAILED' THEN
-        CASE 
+        CASE
           -- Entity columns
           WHEN STARTS_WITH(lower(column_name), 'contexts_') THEN
             FORMAT('cast(null as %s) AS %s', target_type, column_name)
-          -- Standard columns  
+          -- Standard columns
           ELSE
             FORMAT('cast(null as %s) AS %s', target_type, column_name)
         END
-      
+
       -- Handle type mismatches with explicit casting
       WHEN status = 'TYPE_MISMATCH' THEN
         FORMAT('cast(%s as %s) AS %s', column_name, target_type, column_name)
-      
+
       -- Pass through matching columns
       ELSE column_name
     END AS select_expression
@@ -358,16 +358,16 @@ select_clause AS ( -- this CTE lists all the columns to go in the `INSERT` state
 generated_insert AS (
   SELECT FORMAT("""INSERT INTO `snowplow_good.events`
 WITH prep AS (
-  SELECT 
+  SELECT
     * -- include all columns from the failed events table
   FROM `snowplow_failed.events`
   WHERE DATE(load_tstamp) > DATE_SUB(CURRENT_DATE(), INTERVAL 7 day)
     AND app_id = 'test-app'
     AND contexts_com_snowplowanalytics_snowplow_failure_1[0].schema = 'iglu:com.example/user_entity/jsonschema/2-0-1'
 )
-SELECT 
+SELECT
   %s
-FROM prep;""", 
+FROM prep;""",
     columns_sql
   ) AS insert_statement
   FROM select_clause
@@ -383,35 +383,35 @@ FROM generated_insert
 ```sql
 -- Schema-aware INSERT generator for Snowplow failed events reprocessing
 
-WITH target_table_columns AS ( -- this CTE finds all the columns in the good events table 
-  SELECT 
+WITH target_table_columns AS ( -- this CTE finds all the columns in the good events table
+  SELECT
     ordinal_position,
     column_name,
     data_type,
     is_nullable
-  FROM SNOWPLOW_GOOD_DATABASE.INFORMATION_SCHEMA.COLUMNS -- Use the database which has your SNOWPLOW_GOOD schema 
+  FROM SNOWPLOW_GOOD_DATABASE.INFORMATION_SCHEMA.COLUMNS -- Use the database which has your SNOWPLOW_GOOD schema
   WHERE lower(table_name) = 'events'
     AND lower(table_schema) = 'snowplow_good'
 ),
 
 failed_table_columns AS ( -- this CTE finds all the columns in the failed events table
-  SELECT 
+  SELECT
     column_name,
     data_type,
     is_nullable
-  FROM SNOWPLOW_FAILED_DATABASE.INFORMATION_SCHEMA.COLUMNS   --Use the database which has your SNOWPLOW_FAILED schema 
+  FROM SNOWPLOW_FAILED_DATABASE.INFORMATION_SCHEMA.COLUMNS   --Use the database which has your SNOWPLOW_FAILED schema
   WHERE lower(table_name) = 'events'
     AND lower(table_schema) = 'snowplow_failed'
 ),
 
 schema_comparison AS ( -- this CTE joins the previous two, and labels them if they are missing
-  SELECT 
+  SELECT
     t.ordinal_position,
     t.column_name,
     t.data_type AS target_type,
     f.data_type AS failed_type,
     t.is_nullable,
-    CASE 
+    CASE
       WHEN f.column_name IS NULL THEN 'MISSING_IN_FAILED'
       ELSE 'MATCH'
     END AS status
@@ -425,9 +425,9 @@ column_mappings AS (   -- this CTE checks if columns are missing,
     column_name,
     target_type,
     status,
-    CASE 
-      -- Handle your specific replaced entity column 
-      WHEN column_name = 'CONTEXTS_COM_EXAMPLE_USER_ENTITY_2' THEN  -- isolate the target column 
+    CASE
+      -- Handle your specific replaced entity column
+      WHEN column_name = 'CONTEXTS_COM_EXAMPLE_USER_ENTITY_2' THEN  -- isolate the target column
       -- paste in your reprocess logic as a string (newline characters (`\n`) also work)
         'ARRAY_CONSTRUCT(
         OBJECT_CONSTRUCT(
@@ -436,7 +436,7 @@ column_mappings AS (   -- this CTE checks if columns are missing,
         ''user_name'', contexts_com_snowplowanalytics_snowplow_failure_1[0]:data:user_name::STRING
         )
         ) AS CONTEXTS_COM_EXAMPLE_USER_ENTITY_2'
-      
+
       -- Exclude the failure entity from source
       WHEN column_name = 'contexts_com_snowplowanalytics_snowplow_failure_1' THEN
         'CAST(NULL AS ARRAY<OBJECT<schema STRING, data VARIANT>>) AS contexts_com_snowplowanalytics_snowplow_failure_1'
@@ -446,19 +446,19 @@ column_mappings AS (   -- this CTE checks if columns are missing,
 
       -- Handle missing columns with appropriate NULL casting
       WHEN status = 'MISSING_IN_FAILED' THEN
-        CASE 
+        CASE
           -- Entity columns
           WHEN STARTSWITH(lower(column_name), 'contexts_') THEN
             CONCAT('CAST(NULL AS ', target_type, ') AS ', column_name)
-          -- Standard columns  
+          -- Standard columns
           ELSE
             CONCAT('CAST(NULL AS ', target_type, ') AS ', column_name)
         END
-      
+
       -- Handle type mismatches with explicit casting
       WHEN status = 'TYPE_MISMATCH' THEN
         CONCAT('CAST(', column_name, ' AS ', target_type, ') AS ', column_name)
-      
+
       -- Pass through matching columns
       ELSE column_name
     END AS select_expression
@@ -480,7 +480,7 @@ generated_insert AS (
     AND app_id = ''test-app''
     AND contexts_com_snowplowanalytics_snowplow_failure_1[0]:schema = ''iglu:com.example/user_entity/jsonschema/2-0-1''
 )
-SELECT 
+SELECT
   ',
     columns_sql,
     '
@@ -490,7 +490,7 @@ SELECT
 )
 
 -- Output the complete INSERT statement
-SELECT 
+SELECT
   insert_statement AS generated_sql
 FROM generated_insert;
 ```

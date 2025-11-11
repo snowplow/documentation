@@ -5,13 +5,18 @@ sidebar_position: 8.6
 sidebar_label: "Monitoring"
 ---
 
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+```
+
 [Failed events](/docs/fundamentals/failed-events/index.md) are events the pipeline had some problem processing. Snowplow pipelines separate events that are problematic in order to keep data quality high in downstream systems.
 
 We provide tooling for [monitoring](/docs/monitoring/index.md), [inspecting](/docs/monitoring/exploring-failed-events/index.md), and [recovering](/docs/monitoring/index.md) failed events.
 
 Snowplow offers three different ways to monitor failed events:
-- The data quality dashboard that surfaces failed events directly from your warehouse in a secure manner, making debugging easier
-- The default view
+- In Console, the data quality dashboard that surfaces failed events directly from your warehouse in a secure manner, making debugging easier
+- In Console, the default view
 - The Console API
 
 ## Dashboard comparison
@@ -57,9 +62,140 @@ Finally, you can click on the **View SQL query** button to see the SQL query tha
 
 ![](images/sql-query.png)
 
-### Troubleshooting
+### Missing warehouse permissions
 
-The most likely errors when using the data quality dashboard are caused by missing warehouse permissions or query timeouts. Check out the dashboard troubleshooting page for information on how to solve these issues.
+When deploying a loader with the data quality add-on (API), you may encounter permission errors that prevent the dashboard from querying your warehouse.
+
+<Tabs groupId="warehouse" queryString>
+  <TabItem value="bigquery" label="BigQuery" default>
+
+If your service account lacks the required [permission](https://cloud.google.com/iam/docs/service-accounts) to create BigQuery jobs, you may receive the following error:
+* Error code: `21xxx`
+* Description: `Missing permission 'bigquery.jobs.create' on Bigquery...`
+
+Check if your service account has the [required role](https://cloud.google.com/bigquery/docs/access-control#bigquery):
+
+```bash
+gcloud projects get-iam-policy <PROJECT_ID> \
+  --flatten="bindings[].members" \
+  --filter="bindings.members:<SERVICE_ACCOUNT_EMAIL>" \
+  --format="table(bindings.role)"
+```
+
+To fix the error, grant the required role to your service account (recommended):
+
+```bash
+gcloud projects add-iam-policy-binding <PROJECT_ID> \
+  --member="serviceAccount:<SERVICE_ACCOUNT_EMAIL>" \
+  --role="roles/bigquery.jobUser"
+```
+
+Alternatively, if you need more granular control, create a custom role with only the `bigquery.jobs.create` permission:
+
+```bash
+gcloud iam roles create customBigQueryJobCreator \
+  --project=<PROJECT_ID> \
+  --title="BigQuery Job Creator" \
+  --description="Create BigQuery jobs for Data Quality Dashboard" \
+  --permissions="bigquery.jobs.create"
+
+gcloud projects add-iam-policy-binding <PROJECT_ID> \
+  --member="serviceAccount:<SERVICE_ACCOUNT_EMAIL>" \
+  --role="projects/<PROJECT_ID>/roles/customBigQueryJobCreator"
+```
+
+  </TabItem>
+  <TabItem value="snowflake" label="Snowflake">
+
+If your role lacks `USAGE` [privilege](https://docs.snowflake.com/en/user-guide/security-access-control-privileges#warehouse-privileges) on the active warehouse, queries cannot be performed. You may receive the following error:
+* Error code: `11xxx`
+* Description: `Missing required privileges on Snowflake: No active warehouse selected in the current session...`
+
+Verify current warehouse privileges for your role:
+
+```sql
+SHOW GRANTS ON WAREHOUSE <WAREHOUSE_NAME>;
+SHOW GRANTS TO ROLE <ROLE_NAME>;
+```
+
+If necessary, [grant](https://docs.snowflake.com/en/user-guide/security-access-control-overview) the `USAGE` privilege on the warehouse:
+
+```sql
+GRANT USAGE ON WAREHOUSE <WAREHOUSE_NAME> TO ROLE <ROLE_NAME>;
+```
+
+Ensure the grant is properly applied:
+
+```sql
+-- Verify the grant
+SHOW GRANTS ON WAREHOUSE <WAREHOUSE_NAME>;
+```
+
+  </TabItem>
+</Tabs>
+
+
+### Query timeouts
+
+Long-running queries, a large volume of failed events, or resource pool exhaustion can cause the data quality dashboard to time out when fetching failed events. You may receive the following errors:
+* Error codes: `12xxx` or `22xxx`
+* Description: `Query exceeded timeout` or `Query execution time limit exceeded`
+
+<Tabs groupId="warehouse" queryString>
+  <TabItem value="bigquery" label="BigQuery" default>
+
+Diagnose the cause of the error by running:
+
+```sql
+-- Check recent query performance
+SELECT
+  job_id,
+  user_email,
+  total_slot_ms,
+  total_bytes_processed,
+  TIMESTAMP_DIFF(end_time, start_time, SECOND) as duration_seconds
+FROM `<PROJECT_ID>.region-us.INFORMATION_SCHEMA.JOBS_BY_PROJECT`
+WHERE creation_time >= TIMESTAMP_SUB(CURRENT_TIMESTAMP(), INTERVAL 1 DAY)
+  AND state = 'DONE'
+  AND statement_type = 'SELECT'
+ORDER BY total_slot_ms DESC
+LIMIT 10;
+```
+
+  </TabItem>
+  <TabItem value="snowflake" label="Snowflake">
+
+Diagnose the cause of the error by running:
+
+```sql
+-- Check query history
+SELECT
+  query_id,
+  query_text,
+  warehouse_name,
+  execution_time,
+  queued_overload_time,
+  bytes_scanned
+FROM table(information_schema.query_history())
+WHERE start_time >= DATEADD('day', -1, CURRENT_TIMESTAMP())
+  AND execution_status = 'SUCCESS'
+ORDER BY execution_time DESC
+LIMIT 10;
+```
+
+  </TabItem>
+</Tabs>
+
+To fix these errors, try:
+* Reducing query scope
+  * For Console, try switching to using legacy failed events based on telemetry data
+  * If using the API, try using smaller time windows, e.g., "Last hour" or "Last day" instead of "Last 30 days"
+  * Query specific error types or schemas rather than all failed events
+* Optimizing warehouse performance
+  * Review your warehouse configuration and query patterns
+  * Consider implementing partitioning, clustering, or other optimization strategies
+  * Monitor resource usage, and adjust warehouse size as needed
+
 
 ## Default view
 

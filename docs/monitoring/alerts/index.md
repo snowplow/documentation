@@ -2,7 +2,7 @@
 title: "Setting up failed event alerts"
 date: "2025-01-14"
 sidebar_label: "Alerts"
-sidebar_position: 2500
+sidebar_position: 1
 ---
 
 

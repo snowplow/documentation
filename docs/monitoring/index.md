@@ -12,14 +12,15 @@ import TabItem from '@theme/TabItem';
 
 [Failed events](/docs/fundamentals/failed-events/index.md) are events the pipeline had some problem processing. Snowplow pipelines separate events that are problematic in order to keep data quality high in downstream systems.
 
-We provide tooling for [monitoring](/docs/monitoring/index.md), [inspecting](/docs/monitoring/exploring-failed-events/index.md), and [recovering](/docs/monitoring/index.md) failed events.
+We provide tooling for monitoring, [loading](/docs/monitoring/exploring-failed-events/index.md), and [recovering](/docs/monitoring/recovering-failed-events/index.md) failed events.
 
-Snowplow offers three different ways to monitor failed events:
-- In Console, the data quality dashboard that surfaces failed events directly from your warehouse in a secure manner, making debugging easier
-- In Console, the default view
-- The Console API
+Snowplow offers two different ways to monitor failed events in [Snowplow Console](https://console.snowplowanalytics.com):
+- The data quality dashboard that surfaces failed events directly from your warehouse in a secure manner, making debugging easier
+- The default view
 
-## Dashboard comparison
+You can also use the Console API to monitor failed events.
+
+## Monitoring dashboard comparison
 
 The data quality dashboard and the default view are both useful in monitoring for failed events. Which one to choose depends on your requirements. This table summarises the differences:
 

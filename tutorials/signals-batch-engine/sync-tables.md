@@ -1,5 +1,5 @@
 ---
-position: 6
+position: 7
 title: Sync attribute tables
 description: "Connect warehouse attribute tables to Snowplow Signals for periodic syncing to the Profiles Store."
 ---

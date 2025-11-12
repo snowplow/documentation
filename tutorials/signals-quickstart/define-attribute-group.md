@@ -1,5 +1,5 @@
 ---
-position: 3
+position: 2
 title: Define an attribute group
 description: "Create an attribute group in Snowplow Signals to calculate session metrics like page views, browser, and referrer data in real time."
 ---

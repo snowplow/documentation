@@ -1,5 +1,5 @@
 ---
-position: 4.5
+position: 3
 title: Define a service
 description: "Configure a Snowplow Signals service to group attribute groups for easy consumption in applications."
 ---

@@ -1,6 +1,6 @@
 ---
 title: "Conclusion"
-position: 100
+position: 8
 description: "Summary of what you've accomplished and recommended next steps for expanding your Snowplow Signals implementation."
 keywords: ["conclusion", "next steps", "personalization", "real-time", "behavioral data"]
 date: "2025-01-21"

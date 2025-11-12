@@ -1,6 +1,6 @@
 ---
 title: See scores in the browser
-position: 5.5
+position: 6
 description: "Deploy the prospect scoring API, and display real-time conversion predictions in the browser console."
 ---
 

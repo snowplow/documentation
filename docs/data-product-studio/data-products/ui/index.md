@@ -104,3 +104,38 @@ If the new version of the Data Structure introduces incompatibilities with the e
 ![Conflict resolution Event Specification](images/conflict_resolution.png)
 
 This mechanism ensures that teams can benefit from updated Data Structures while maintaining the integrity and accuracy of their Event Specifications. Users are empowered to make informed decisions during the upgrade process, with clear visual cues and options to handle conflicts effectively.
+
+## Event Specification Code Generation
+
+To accelerate your implementation of event tracking, Snowplow Console includes pre-generated code snippets specifically for custom self-describing events. These snippets can be accessed directly within the Console interface to significantly reduce the time and effort required for integrating event tracking functionality into your applications.
+
+### Working with Event Specifications
+
+When viewing an event specification, the "Working with this event" section provides two key tabs:
+
+- **Implementation**: Access ready-to-use tracking code for your event
+- **Querying**: View example SQL queries to retrieve your event data from the warehouse
+
+:::note
+_For standard Snowplow events (page views, screen views, page pings, and self-describing events), tracking code is available out of the box without requiring any additional configuration._
+:::
+
+### Implementation - Code Snippets
+
+The Implementation tab generates tracking code snippets tailored to your event specification. You can:
+
+- **Select your tracker type**: Choose between JavaScript tracker options (tag-based or npm-based)
+- **Toggle Snowtype integration**: Enable Snowtype to generate type-safe tracking code with full TypeScript support
+- **Copy code directly**: Use the generated code snippets immediately in your application
+
+:::note
+_Draft data structures can't be used for event validation during testing or production._
+:::
+
+### Querying - SQL Examples
+
+The Querying tab provides example SQL queries to help you retrieve and analyze your event data. You can:
+
+- **Select your warehouse**: Choose from Snowflake, BigQuery, Redshift, Databricks, and other supported warehouses
+- **View tailored queries**: See SQL examples optimized for your selected warehouse
+- **Access event data**: Query both the event properties and attached entities

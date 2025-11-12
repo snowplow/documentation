@@ -131,6 +131,8 @@ The Implementation tab generates tracking code snippets tailored to your event s
 Draft data structures can't be used for event validation during testing or production.
 :::
 
+![Implementation code snippets](images/code-snippets.png)
+
 ### Querying - SQL Examples
 
 The Querying tab provides example SQL queries to help you retrieve and analyze your event data. You can:
@@ -138,3 +140,5 @@ The Querying tab provides example SQL queries to help you retrieve and analyze y
 - **Select your warehouse**: choose from Snowflake, BigQuery, Redshift, Databricks, and other supported warehouses
 - **View tailored queries**: see SQL examples optimized for your selected warehouse
 - **Access event data**: query both the event properties and attached entities
+
+![Querying SQL Examples](images/sql-example.png)

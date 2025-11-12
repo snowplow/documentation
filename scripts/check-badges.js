@@ -17,6 +17,62 @@ function log(color, message) {
   console.log(`${colors[color]}${message}${colors.reset}`);
 }
 
+// Function to prompt user for backup cleanup
+async function promptCleanupBackups() {
+  const readline = require('readline');
+
+  const rl = readline.createInterface({
+    input: process.stdin,
+    output: process.stdout
+  });
+
+  return new Promise((resolve) => {
+    log('blue', '\n🧹 Badge fixes completed successfully!');
+    log('yellow', 'Backup files (.bak) were created during the update process.');
+
+    rl.question('\nWould you like to delete the backup files? (y/N): ', (answer) => {
+      rl.close();
+
+      if (answer.toLowerCase() === 'y' || answer.toLowerCase() === 'yes') {
+        cleanupBackups();
+      } else {
+        log('blue', '📁 Backup files kept. You can manually delete *.bak files when ready.');
+      }
+
+      resolve();
+    });
+  });
+}
+
+// Function to clean up backup files
+function cleanupBackups() {
+  try {
+    const { execSync } = require('child_process');
+
+    // Find and count backup files
+    const backupFiles = glob.sync('docs/**/*.md.bak', { absolute: true });
+
+    if (backupFiles.length === 0) {
+      log('blue', '📁 No backup files found.');
+      return;
+    }
+
+    log('blue', `🗑️  Deleting ${backupFiles.length} backup files...`);
+
+    // Delete backup files
+    backupFiles.forEach(file => {
+      fs.unlinkSync(file);
+    });
+
+    log('green', `✅ Successfully deleted ${backupFiles.length} backup files!`);
+    log('blue', '💡 Your documentation is now clean and ready to commit.');
+
+  } catch (error) {
+    log('red', `❌ Error cleaning up backups: ${error.message}`);
+    log('yellow', 'You may need to manually delete *.bak files.');
+  }
+}
+
 // Check if a file needs BadgeGroup wrapper
 function checkFile(filePath) {
   const content = fs.readFileSync(filePath, 'utf8');
@@ -59,8 +115,16 @@ function checkFile(filePath) {
   return null;
 }
 
-function main() {
+async function main() {
   const fix = process.argv.includes('--fix');
+  const cleanupOnly = process.argv.includes('--cleanup');
+
+  // If cleanup only, just clean and exit
+  if (cleanupOnly) {
+    log('blue', '🧹 Cleaning up backup files...\n');
+    cleanupBackups();
+    return;
+  }
 
   log('blue', '🔍 Checking badge formatting...\n');
 
@@ -107,6 +171,10 @@ function main() {
       // Run the badge update script
       execSync('python3 scripts/update-badge-groups.py', { stdio: 'inherit' });
       log('green', '✅ Fixed badge formatting issues!');
+
+      // Ask user about cleanup
+      await promptCleanupBackups();
+
     } catch (error) {
       log('red', '❌ Failed to fix issues automatically');
       log('red', 'Please run the update script manually or fix the files listed above');
@@ -121,10 +189,8 @@ function main() {
 }
 
 if (require.main === module) {
-  try {
-    main();
-  } catch (error) {
+  main().catch(error => {
     log('red', `Error: ${error.message}`);
     process.exit(1);
-  }
+  });
 }

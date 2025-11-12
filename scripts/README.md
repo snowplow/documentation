@@ -17,6 +17,11 @@ yarn check-badges
 yarn fix-badges
 ```
 
+**Clean up backup files only:**
+```bash
+yarn cleanup-backups
+```
+
 ### What it does
 - Scans all `.md` files in the `docs/` directory
 - Identifies files with multiple `<Badges>` components that aren't wrapped in `<BadgeGroup>`
@@ -47,7 +52,14 @@ import BadgeGroup from '@site/src/components/BadgeGroup';
 </BadgeGroup>
 ```
 
+### Backup Management
+When using `yarn fix-badges`, the script:
+1. Creates backup files (`.bak` extension) before making changes
+2. After successful completion, asks if you want to delete backup files
+3. You can choose to keep backups or clean them up automatically
+
 ### Notes
 - Single badges don't need `<BadgeGroup>` wrapping
-- The script creates backups before making changes
+- The script creates backups before making changes for safety
 - Run `yarn check-badges` first to see what will be changed before using `--fix`
+- After confirming everything works correctly, you can clean up backup files when prompted

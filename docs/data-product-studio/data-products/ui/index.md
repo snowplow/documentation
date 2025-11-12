@@ -19,7 +19,7 @@ After selecting "Create from scratch" a form will appear on the page. Enter your
 
 :::note
 _The name of your data product must be unique to ensure proper identification and avoid conflicts._
-:::note
+:::
 
 ![Event specifications](images/event-specifications.png)
 
@@ -113,29 +113,28 @@ To accelerate your implementation of event tracking, Snowplow Console includes p
 
 When viewing an event specification, the "Working with this event" section provides two key tabs:
 
-- **Implementation**: Access ready-to-use tracking code for your event
-- **Querying**: View example SQL queries to retrieve your event data from the warehouse
+- **Implementation**: access ready-to-use tracking code for your event
+- **Querying**: view example SQL queries to retrieve your event data from the warehouse
 
 :::note
-_For standard Snowplow events (page views, screen views, page pings, and self-describing events), tracking code is available out of the box without requiring any additional configuration._
+For standard Snowplow events (page views, screen views, page pings, and self-describing events), tracking code is available out of the box without requiring any additional configuration.
 :::
 
 ### Implementation - Code Snippets
 
 The Implementation tab generates tracking code snippets tailored to your event specification. You can:
 
-- **Select your tracker type**: Choose between JavaScript tracker options (tag-based or npm-based)
-- **Toggle Snowtype integration**: Enable Snowtype to generate type-safe tracking code with full TypeScript support
-- **Copy code directly**: Use the generated code snippets immediately in your application
+- **Select your tracker type**: choose between JavaScript tracker options (tag-based or npm-based)
+- **Copy code directly**: use the generated code snippets immediately in your application
 
 :::note
-_Draft data structures can't be used for event validation during testing or production._
+Draft data structures can't be used for event validation during testing or production.
 :::
 
 ### Querying - SQL Examples
 
 The Querying tab provides example SQL queries to help you retrieve and analyze your event data. You can:
 
-- **Select your warehouse**: Choose from Snowflake, BigQuery, Redshift, Databricks, and other supported warehouses
-- **View tailored queries**: See SQL examples optimized for your selected warehouse
-- **Access event data**: Query both the event properties and attached entities
+- **Select your warehouse**: choose from Snowflake, BigQuery, Redshift, Databricks, and other supported warehouses
+- **View tailored queries**: see SQL examples optimized for your selected warehouse
+- **Access event data**: query both the event properties and attached entities

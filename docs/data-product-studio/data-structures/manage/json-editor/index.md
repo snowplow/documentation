@@ -58,7 +58,7 @@ Patching can be useful in development environments, but should be done carefully
 
 For more information see [Versioning your data structures](/docs/data-product-studio/data-structures/version-amend/index.md).
 
-Once you have selected the appropriate version, click **Deploy to development environment** and your data structure will be deployed to your development environment ready [for you to test](/docs/data-product-studio/data-quality/index.md).
+Once you have selected the appropriate version, click **Deploy to development environment** and your data structure will be deployed to your development environment ready [for you to test](/docs/testing/index.md).
 
 You can identify data structures where the Development version is ahead of the Production version by the yellow background on the version number. In this example both `user` and `alert` have been edited on development.
 

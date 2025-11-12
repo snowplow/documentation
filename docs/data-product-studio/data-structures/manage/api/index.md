@@ -8,7 +8,7 @@ As well as managing [data structures](/docs/fundamentals/schemas/index.md) throu
 
 This functionality is key to automating any existing process you may have, including workflows in version control systems like GitHub.
 
-Partnered with other tools like our [CI tool](/docs/data-product-studio/data-quality/data-structures-ci-tool/index.md) and / or [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md), it's possible to have a very robust and automated data structure workflow that ensures data quality upstream of data hitting your pipeline.
+Partnered with other tools like our [CI tool](/docs/testing/data-structures-ci-tool/index.md) and / or [Snowplow Micro](/docs/testing/snowplow-micro/index.md), it's possible to have a very robust and automated data structure workflow that ensures data quality upstream of data hitting your pipeline.
 
 :::note
 

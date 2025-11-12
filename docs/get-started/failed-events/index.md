@@ -22,4 +22,4 @@ curl 'https://{{COLLECTOR_URL}}/com.snowplowanalytics.snowplow/tp2' \
 
 :::
 
-Follow the [documentation](/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/index.md) to explore your failed events.
+Follow the [documentation](/docs/monitoring/exploring-failed-events/index.md) to explore your failed events.

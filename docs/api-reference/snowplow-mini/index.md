@@ -8,7 +8,7 @@ sidebar_position: 120
 
 :::tip
 
-Snowplow Mini is similar to [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md), with the following differences:
+Snowplow Mini is similar to [Snowplow Micro](/docs/testing/snowplow-micro/index.md), with the following differences:
 * Micro is more portable and can easily run on your machine or in automated tests.
 * Mini has more features, mainly an OpenSearch Dashboards UI, and is better integrated with Snowplow.
 

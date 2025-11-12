@@ -35,7 +35,7 @@ Keep in mind that you will need to be able to:
 * Generate a key pair for key-based authentication
 * Specify the desired database and schema names, as well as a warehouse name
 * Create a role with the following permissions:
-  * `USAGE`, `OPERATE` on warehouse (for testing the connection and monitoring, e.g. as part of the [Data Quality Dashboard](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/index.md#data-quality-dashboard))
+  * `USAGE`, `OPERATE` on warehouse (for testing the connection and monitoring, e.g. as part of the [Data Quality Dashboard](/docs/monitoring/index.md#data-quality-dashboard))
   * `USAGE` on database
   * `ALL` privileges on the target schema
 

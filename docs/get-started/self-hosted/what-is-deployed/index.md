@@ -217,7 +217,7 @@ No other streams.
 
   The following loaders and folders are available:
   * Enriched loader, `enriched/`: enriched events, in GZipped blobs of [enriched TSV](/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md). Historically, this has been used as the staging ground for loading into data warehouses via the [Batch transformer](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/spark-transformer/index.md) application. However, it’s no longer used in the quick start examples.
-  * Bad loader, `bad/`: [failed events](/docs/fundamentals/failed-events/index.md). You can [query them using Athena](/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/file-storage/index.md).
+  * Bad loader, `bad/`: [failed events](/docs/fundamentals/failed-events/index.md). You can [query them using Athena](/docs/monitoring/exploring-failed-events/file-storage/index.md).
 
 
   </TabItem>

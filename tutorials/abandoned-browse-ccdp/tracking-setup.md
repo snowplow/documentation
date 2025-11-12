@@ -66,7 +66,7 @@ snowplow('trackPageView');
 
 ### Test your tracking
 
-To verify your tracking implementation, use the [Snowplow Chrome extension](https://chrome.google.com/webstore/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm). This extension allows you to inspect Snowplow events in real-time as they are sent from your website. Navigate to your product pages and add items to cart while monitoring the extension to ensure events are firing correctly with all expected parameters. The extension will show you the full event payload including all entities and properties, making it easy to debug your implementation.
+To verify your tracking implementation, use the [Snowplow Chrome extension](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm). This extension allows you to inspect Snowplow events in real-time as they are sent from your website. Navigate to your product pages and add items to cart while monitoring the extension to ensure events are firing correctly with all expected parameters. The extension will show you the full event payload including all entities and properties, making it easy to debug your implementation.
 
 ![Chrome Extension](images/retl-chrome-extension.png)
 

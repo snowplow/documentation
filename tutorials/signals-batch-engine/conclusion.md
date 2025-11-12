@@ -1,5 +1,5 @@
 ---
-position: 10
+position: 8
 title: Conclusion
 description: "Complete the Snowplow Signals batch engine tutorial, and explore next steps for warehouse-based customer intelligence."
 ---

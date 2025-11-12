@@ -1,5 +1,5 @@
 ---
-position: 10
+position: 5
 title: Conclusion
 description: "Complete the Snowplow Signals quickstart tutorial, and explore next steps for real-time customer intelligence."
 ---

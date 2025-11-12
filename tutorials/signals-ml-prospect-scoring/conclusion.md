@@ -1,5 +1,5 @@
 ---
-position: 10
+position: 7
 title: Conclusion
 description: "Complete the Snowplow Signals machine learning prospect scoring tutorial, and explore advanced real-time personalization use cases."
 ---

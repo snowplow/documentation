@@ -1,5 +1,5 @@
 ---
-position: 3
+position: 4
 title: Create projects
 description: "Initialize dbt projects for Snowplow Signals batch attribute groups, and set up the required folder structure."
 ---

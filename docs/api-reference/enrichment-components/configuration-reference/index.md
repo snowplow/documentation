@@ -93,16 +93,19 @@ A minimal configuration file can be found on the [Github repo](https://github.co
 | `output.good.throttledBackoffPolicy.maxBackoff` (since *6.0.0*) | Optional. Default: `1 second`. Maximum backoff before retrying when writing fails with exceeded kinesis write throughput. |
 | `output.good.recordLimit` | Optional. Default: `500`. Maximum allowed to records we are allowed to send to Kinesis in 1 PutRecords request. |
 | `output.good.byteLimit` | Optional. Default: `5242880`. Maximum allowed to bytes we are allowed to send to Kinesis in 1 PutRecords request. |
+| `output.good.maxRetries` (since *6.3.0*) | Optional. Default: `10`. Maximum number of retries by Kinesis Client. |
 | `output.failed.streamName` | Required. E.g. `failed`. Name of the Kinesis stream that will receive the failed events (same format as the enriched events). |
 | `output.failed.throttledBackoffPolicy.minBackoff` (since *6.0.0*) | Same as `output.good.throttledBackoffPolicy.minBackoff` for failed events. |
 | `output.failed.throttledBackoffPolicy.maxBackoff` (since *6.0.0*) | Same as `output.good.throttledBackoffPolicy.maxBackoff` for failed events. |
 | `output.failed.recordLimit` | Same as `output.good.recordLimit` for failed events. |
 | `output.failed.byteLimit` | Same as `output.good.byteLimit` for failed events. |
+| `output.failed.maxRetries` (since *6.3.0*) | Same as `output.good.maxRetries` for failed events. |
 | `output.bad.streamName` | Required. E.g. `bad`. Name of the Kinesis stream that will receive the failed events in the "bad row" format (JSON). |
 | `output.bad.throttledBackoffPolicy.minBackoff` (since *6.0.0*) | Same as `output.good.throttledBackoffPolicy.minBackoff` for failed events in the "bad row" format (JSON). |
 | `output.bad.throttledBackoffPolicy.maxBackoff` (since *6.0.0*) | Same as `output.good.throttledBackoffPolicy.maxBackoff` for failed events in the "bad row" format (JSON). |
 | `output.bad.recordLimit` | Same as `output.good.recordLimit` for failed events in the "bad row" format (JSON). |
 | `output.bad.byteLimit` | Same as `output.good.byteLimit` for failed events in the "bad row" format (JSON). |
+| `output.bad.maxRetries` (since *6.3.0*) | Same as `output.good.maxRetries` for failed events in the "bad row" format (JSON). |
 
 ## enrich-kafka
 
@@ -113,6 +116,7 @@ A minimal configuration file can be found on the [Github repo](https://github.co
 | `input.topicName` | Required. Name of the Kafka topic to read collector payloads from. |
 | `input.bootstrapServers` | Required. A list of `host:port` pairs to use for establishing the initial connection to the Kafka cluster |
 | `input.debounceCommitOffsets` (since *6.0.0*) | Optional. Default: `10 seconds`. How frequently to commit our progress back to kafka. By increasing this value, we decrease the number of requests made to the kafka broker. |
+| `input.commitTimeout` (since *6.3.0*) | Optional. Default: `15 seconds`. The time to wait for offset commits to complete. If an offset commit doesn't complete within this time, a CommitTimeoutException will be raised instead. |
 | `input.consumerConf` | Optional. Kafka consumer configuration. See [the docs](https://kafka.apache.org/documentation/#consumerconfigs) for all properties. |
 | `output.good.topicName` | Required. Name of the Kafka topic to write to |
 | `output.good.bootstrapServers` | Required. A list of host:port pairs to use for establishing the initial connection to the Kafka cluster |

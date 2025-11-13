@@ -5,21 +5,23 @@
 ### Purpose
 Ensures all Badges components are properly wrapped with `<BadgeGroup>` for consistent horizontal layout and responsive wrapping.
 
+This is a development utility script - run directly like other scripts in this directory.
+
 ### Usage
 
 **Check for badge formatting issues:**
 ```bash
-yarn check-badges
+node scripts/check-badges.js
 ```
 
 **Automatically fix badge formatting issues:**
 ```bash
-yarn fix-badges
+node scripts/check-badges.js --fix
 ```
 
 **Clean up backup files only:**
 ```bash
-yarn cleanup-backups
+node scripts/check-badges.js --cleanup
 ```
 
 ### What it does
@@ -53,10 +55,11 @@ import BadgeGroup from '@site/src/components/BadgeGroup';
 ```
 
 ### Backup Management
-When using `yarn fix-badges`, the script:
-1. Creates backup files (`.bak` extension) before making changes
-2. After successful completion, asks if you want to delete backup files
+When using the fix command, the Python script:
+1. Creates backup files (`.bak` extension) and backup directories before making changes
+2. After successful completion, asks if you want to delete all backups
 3. You can choose to keep backups or clean them up automatically
+4. Cleanup removes both `.bak` files and any `backups/` directories
 
 ### Notes
 - Single badges don't need `<BadgeGroup>` wrapping

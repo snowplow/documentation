@@ -44,32 +44,48 @@ async function promptCleanupBackups() {
   });
 }
 
-// Function to clean up backup files
+// Function to clean up backup files and directories
 function cleanupBackups() {
   try {
     const { execSync } = require('child_process');
 
-    // Find and count backup files
+    // Find backup files (.bak)
     const backupFiles = glob.sync('docs/**/*.md.bak', { absolute: true });
 
-    if (backupFiles.length === 0) {
-      log('blue', '📁 No backup files found.');
+    // Find backup directories (pattern: backups/badge-update-*)
+    const backupDirs = glob.sync('backups/badge-update-*', { absolute: true });
+
+    const totalItems = backupFiles.length + backupDirs.length;
+
+    if (totalItems === 0) {
+      log('blue', '📁 No backup files or directories found.');
       return;
     }
 
-    log('blue', `🗑️  Deleting ${backupFiles.length} backup files...`);
+    let deletedCount = 0;
 
-    // Delete backup files
-    backupFiles.forEach(file => {
-      fs.unlinkSync(file);
-    });
+    if (backupFiles.length > 0) {
+      log('blue', `🗑️  Deleting ${backupFiles.length} backup files...`);
+      backupFiles.forEach(file => {
+        fs.unlinkSync(file);
+        deletedCount++;
+      });
+    }
 
-    log('green', `✅ Successfully deleted ${backupFiles.length} backup files!`);
+    if (backupDirs.length > 0) {
+      log('blue', `🗑️  Deleting ${backupDirs.length} backup directories...`);
+      backupDirs.forEach(dir => {
+        fs.rmSync(dir, { recursive: true, force: true });
+        deletedCount++;
+      });
+    }
+
+    log('green', `✅ Successfully deleted ${deletedCount} backup items!`);
     log('blue', '💡 Your documentation is now clean and ready to commit.');
 
   } catch (error) {
     log('red', `❌ Error cleaning up backups: ${error.message}`);
-    log('yellow', 'You may need to manually delete *.bak files.');
+    log('yellow', 'You may need to manually delete backup files/directories.');
   }
 }
 
@@ -181,7 +197,7 @@ async function main() {
     }
   } else {
     log('blue', '\n💡 To automatically fix these issues, run:');
-    log('blue', '   yarn check-badges --fix');
+    log('blue', '   node scripts/check-badges.js --fix');
     console.log();
     log('yellow', '⚠️  Badge formatting check failed!');
     process.exit(1);

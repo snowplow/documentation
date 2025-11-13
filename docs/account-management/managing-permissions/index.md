@@ -8,7 +8,7 @@ To set a users permissions, navigate to `Manage users` and then to the user whos
 
 ## What permissions can be set?
 
-Snowplow BDP Console sets permissions for each area of Console as summarized below:
+Snowplow Console sets permissions for each area of Console as summarized below:
 
 | **Console feature** | **Description**                                                                                                               | **Possible permissions**                                                     |
 | ------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |

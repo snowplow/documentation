@@ -1,6 +1,6 @@
 ---
 title: "Google Cloud Storage Loader"
-sidebar_position: 5
+sidebar_position: 6
 ---
 
 
@@ -9,19 +9,15 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-## Overview
-
 [Cloud Storage Loader](https://github.com/snowplow-incubator/snowplow-google-cloud-storage-loader/) is a [Dataflow](https://cloud.google.com/dataflow/) job which dumps event from an input [PubSub](https://cloud.google.com/pubsub/) subscription into a [Cloud Storage](https://cloud.google.com/storage/) bucket.
 
 Cloud Storage loader is built on top of [Apache Beam](https://beam.apache.org/) and its Scala wrapper [SCIO](https://github.com/spotify/scio).
 
-## Setup guide
-
-### Running
+## Running
 
 Cloud Storage Loader comes both as a Docker image and a ZIP archive.
 
-#### Docker image
+### Docker
 
 Docker image can be found on [Docker Hub](https://hub.docker.com/r/snowplow/snowplow-google-cloud-storage-loader).
 
@@ -61,7 +57,7 @@ To display documentation about Cloud Storage Loader-specific options:
   --help=com.snowplowanalytics.storage.googlecloudstorage.loader.Options
 `}</CodeBlock>
 
-#### ZIP archive
+### ZIP archive
 
 Archive is hosted on GitHub at this URI:
 <CodeBlock language="bash">{
@@ -98,9 +94,9 @@ To display documentation about Cloud Storage Loader-specific options:
 ./bin/snowplow-google-cloud-storage-loader --help=com.snowplowanalytics.storage.googlecloudstorage.loader.Options
 ```
 
-### Configuration
+## Configuration
 
-#### Cloud Storage Loader specific options
+### Cloud Storage Loader specific options
 
 - `--inputSubscription=String` The Cloud Pub/Sub subscription to read from, formatted like projects/[PROJECT]/subscriptions/[SUB]. Required.
 - `--outputDirectory=gs://[BUCKET]/` The Cloud Storage directory to output files to, ending in /. Required.
@@ -125,7 +121,7 @@ For example, the date format `YYYY/MM/dd/HH/` would produce a directory structur
   ```
 - `--partitionedOutputDirectory=gs://[BUCKET]/` The Cloud Storage directory to output files to, partitioned by schema, ending with /. Unpartitioned data will be sent to `outputDirectory`. Optional.
 
-#### Dataflow options
+### Dataflow options
 
 To run the Cloud Storage Loader on Dataflow, it is also necessary to specify additional configuration options. None of these options have default values, and they are all required.
 

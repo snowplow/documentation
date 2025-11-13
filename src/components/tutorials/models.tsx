@@ -4,9 +4,9 @@ import { z } from 'zod'
 export const Topic = z.enum([
   'Data modeling',
   'Data governance',
-  'Signals',
   'Solution accelerator',
   'Tracking implementation',
+  'Signals implementation',
 ])
 
 export type Topic = z.infer<typeof Topic>
@@ -17,6 +17,9 @@ export const Meta = z.object({
   title: z.string(),
   label: Topic,
   description: z.string(),
+  useCases: z.array(z.string()),
+  technologies: z.array(z.string()),
+  snowplowTech: z.array(z.string()),
 })
 
 export type Meta = z.infer<typeof Meta>

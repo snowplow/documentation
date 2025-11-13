@@ -153,7 +153,7 @@ Your array of entities will be passed to `JSON.stringify()` before being attache
 
 If you are still iterating on the schema while writing the JavaScript code, you might find the setup described in the [testing guide](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/testing/index.md#iterating-on-code-and-schemas) very useful.
 
-:::caution
+:::warning
 
 Make sure that the schemas of your entities are defined and accessible to your pipeline.
 
@@ -163,7 +163,7 @@ Make sure that the schemas of your entities are defined and accessible to your p
 
 Sometimes you will want to modify the original event fields directly.
 
-:::caution
+:::warning
 
 Keep in mind that the old value of a modified field will not be available in your data warehouse or lake. However, that might be your goal.
 

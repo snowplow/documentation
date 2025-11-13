@@ -110,4 +110,4 @@ If events with incorrectly evolved schemas never arrive, then the recovery colum
 
 :::
 
-You can read more about schema evolution and how recovery columns work [here](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md?warehouse=bigquery#versioning).
+You can read more about schema evolution and how recovery columns work [here](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md?warehouse=bigquery#versioning).

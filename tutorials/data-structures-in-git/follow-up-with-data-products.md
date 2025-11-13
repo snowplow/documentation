@@ -75,7 +75,7 @@ When we're happy with the proposed changes, we can publish by removing the `--dr
 snowplow-cli dp publish
 ```
 
-After publishing, you'll be able to see your new source application in the BDP Console UI.
+After publishing, you'll be able to see your new source application in the Snowplow Console UI.
 
 ## Create a data product and an event specification
 
@@ -127,7 +127,7 @@ data:
 You'll need to come up with a valid uuid V4 for the `resourceName` of an event specification. You can do so by using an [online generator](https://www.uuidgenerator.net), or running the `uuidgen` command in your terminal
 :::
 
-:::caution Warning
+:::warning
 
 The `iglu:com.example/login/jsonschema/1-0-1` data structure has to be deployed at least to a develop envinroment. Currently referencing local data structures is not supported
 

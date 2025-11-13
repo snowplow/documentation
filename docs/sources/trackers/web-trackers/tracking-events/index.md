@@ -116,16 +116,16 @@ The tracker can be set up to automatically track certain events, or automaticall
 
 However, the following autotracked context entities can be configured directly when instrumenting the tracker. To enable them, simply add their names and boolean to the `contexts` field of the [configuration object](/docs/sources/trackers/web-trackers/tracker-setup/initialization-options/index.md). They will be added to every event tracked.
 
-| Entity                                                                                                                         | Usage                             | Enabled by default |
-| ------------------------------------------------------------------------------------------------------------------------------ | --------------------------------- | ------------------ |
+| Entity                                                                                                      | Usage                             | Enabled by default |
+| ----------------------------------------------------------------------------------------------------------- | --------------------------------- | ------------------ |
 | [`webPage`](/docs/sources/trackers/web-trackers/tracking-events/page-views/index.md#webpage-context-entity) | A UUID for the page view.         | `true`             |
 | [`session`](/docs/sources/trackers/web-trackers/tracking-events/session/index.md)                           | Data about the current session.   | `false`            |
 | [`browser`](/docs/sources/trackers/web-trackers/browsers/index.md)                                          | Properties of the user's browser. | `false`            |
 
 The following context entities can be configured by plugin, or when setting up the **JavaScript tracker** configuration object only. To automatically track these context entities when using the Browser tracker, use the plugin versions.
 
-| Entity                                                                                                                | Usage                          | Enabled by default |
-| --------------------------------------------------------------------------------------------------------------------- | ------------------------------ | ------------------ |
+| Entity                                                                                             | Usage                          | Enabled by default |
+| -------------------------------------------------------------------------------------------------- | ------------------------------ | ------------------ |
 | [`performanceTiming`](/docs/sources/trackers/web-trackers/tracking-events/timings/index.md)        | Performance timing metrics.    | `true`             |
 | [`gaCookies`](/docs/sources/trackers/web-trackers/tracking-events/ga-cookies/index.md)             | Extract GA cookie values.      | `true`             |
 | [`geolocation`](/docs/sources/trackers/web-trackers/tracking-events/timezone-geolocation/index.md) | User's geolocation.            | `false`            |
@@ -165,7 +165,7 @@ An example of tracking a user listening to a music mix:
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
 
-```javascript runnable
+```javascript
 snowplow('trackStructEvent', {
   category: 'Mixes',
   action: 'Play',

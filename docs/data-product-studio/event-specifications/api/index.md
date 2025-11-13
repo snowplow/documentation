@@ -2,9 +2,6 @@
 title: "Managing Event Specifications via the API"
 sidebar_label: "Using the API"
 sidebar_position: 1
-sidebar_custom_props:
-  offerings:
-    - bdp
 ---
 
 With the [**Event Specifications API**](https://console.snowplowanalytics.com/api/msc/v1/docs), you can efficiently manage event specifications programmatically. Whether you want to retrieve, create, edit, publish, deprecate, or delete event specifications, the API provides the necessary endpoints and functionalities.
@@ -21,9 +18,7 @@ For comprehensive details regarding each request, including query parameters and
 
 To post sample requests in the documentation, you must click the `Authorize` button at the top of the document and authenticate with your token. The token field value in each individual request is overwritten by this authorization.
 
-For each request, you are required to include your company's `organizationId`, which is a UUID retrievable from the URL immediately following `.com` when visiting the console:
-
-![](images/orgID.png)
+For each request, you are required to include your Organization ID. You can find it [on the _Manage organization_ page](https://console.snowplowanalytics.com/settings) in Console.
 
 ```mdx-code-block
 import GetConsoleApiKey from "@site/docs/reusable/get-console-api-key/_index.md"

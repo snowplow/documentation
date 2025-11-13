@@ -1,7 +1,6 @@
 ---
 title: "Google Tag Manager Server Side"
-date: "2021-11-24"
-sidebar_position: 10
+sidebar_position: 40
 ---
 
 To support sending events to adjacent destinations, Snowplow works with Google Tag Manager Server Side. There are both Snowplow Authored and Vendor/Community authored Tags which will allow event data to be forwarded to different destinations.
@@ -23,14 +22,14 @@ GTM SS with Snowplow can be setup in two different configurations.
 
 ### Destinations Hub (Post-pipeline)
 
-Use GTM SS to relay enriched events to destinations. Events are sent to GTM SS via Snowbridge after being processed by your Snowplow Pipeline.
+Use GTM SS to relay enriched events to destinations. Events are sent to GTM SS via Snowbridge after being processed by your Snowplow pipeline.
 
-* For Community Edition, see [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md).
-* For Snowplow BDP, you can [request setup](https://console.snowplowanalytics.com/destinations/catalog) through the Console.
+* For Snowplow CDI, you can [request setup](https://console.snowplowanalytics.com/destinations/catalog) through Console
+* For Snowplow Self-Hosted, see [Snowbridge](/docs/api-reference/snowbridge/index.md)
 
 :::note
 
-Destinations Hub is the recommended way to setup GTM Server-side because it allows you to take full advantage of the Snowplow pipeline, and forward validated and enriched data to downstream destinations.
+Destinations Hub is the recommended way to set up GTM Server-Side because it allows you to take full advantage of the Snowplow pipeline, and forward validated and enriched data to downstream destinations.
 
 :::
 
@@ -40,7 +39,7 @@ Use GTM SS to relay raw events before the Snowplow pipeline to destinations, inc
 
 ### Principles for AWS deployment
 
-:::info For Snowplow BDP customers
+:::info For Snowplow customers
 
 GTM SS **should** be deployed into a different account to the Snowplow sub-account to maintain full segmentation of the infrastructure that Snowplow manages from that which is managed by the Snowplow customer.
 

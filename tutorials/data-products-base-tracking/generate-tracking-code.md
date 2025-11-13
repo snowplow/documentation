@@ -5,7 +5,7 @@ title: Generate tracking code and implementation instructions
 
 ### Generating code and implementation instructions
 
-On your terminal now run `npx @snowplow/snowtype generate --instructions`. If all is as expected, after a few seconds, you will have the following files generated:
+On your terminal now run `npx @snowplow/snowtype@latest generate --instructions`. If all is as expected, after a few seconds, you will have the following files generated:
 
 ![](./images/fs.png)
 

@@ -39,7 +39,7 @@ To optimism performance of large Postgres datasets you can create [indexes](http
 {{
   config(
     ...
-    indexes=[{'columns': [‘domain_sessionid’], 'unique': True}]
+    indexes=[\{'columns': ['domain_sessionid'], 'unique': True}]
   )
 }}
 ```
@@ -73,15 +73,15 @@ Since there are many different situations, we've created the following table to 
 
 |                                             | Adapter supports UC and UC Enabled                                                                   | Adapter supports UC and UC not enabled         | Adapter does not support UC                                                                         |
 | ------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| Events land in default `atomic` schema      | `snowplow__databricks_catalog = '{name_of_catalog}'`                                                 | Nothing needed                                 | `snowplow__databricks_catalog = 'atomic'`                                                           |
-| Events land in custom schema (not `atomic`) | `snowplow__atomic_schema = '{name_of_schema}'`  `snowplow__databricks_catalog = '{name_of_catalog}'` | `snowplow__atomic_schema = '{name_of_schema}'` | `snowplow__atomic_schema = '{name_of_schema}'`  `snowplow__databricks_catalog = '{name_of_schema}'` |
+| Events land in default `atomic` schema      | `snowplow__databricks_catalog = '\{name_of_catalog}'`                                                 | Nothing needed                                 | `snowplow__databricks_catalog = 'atomic'`                                                           |
+| Events land in custom schema (not `atomic`) | `snowplow__atomic_schema = '\{name_of_schema}'`  `snowplow__databricks_catalog = '\{name_of_catalog}'` | `snowplow__atomic_schema = '\{name_of_schema}'` | `snowplow__atomic_schema = '\{name_of_schema}'`  `snowplow__databricks_catalog = '\{name_of_schema}'` |
 
 #### Optimization of models
 
 The `dbt-databricks` adapter allows our data models to take advantage of the auto-optimization features in Databricks. If you are using the `dbt-spark` adapter, you will need to manually alter the table properties of your derived and manifest tables using the following command after running the data model at least once. You will need to run the command in your Databricks environment once for each table, and we would recommend applying this to the tables in the `_derived` and `_snowplow_manifest` schemas:
 
 ```SQL
-ALTER TABLE {TABLE_NAME} SET TBLPROPERTIES (delta.autoOptimize.optimizeWrite = true, delta.autoOptimize.autoCompact = true);
+ALTER TABLE \{TABLE_NAME} SET TBLPROPERTIES (delta.autoOptimize.optimizeWrite = true, delta.autoOptimize.autoCompact = true);
 ```
 
 ### BigQuery

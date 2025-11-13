@@ -313,7 +313,7 @@ trackPageView();
 For this technique of sending on visibility change to work reliably, we recommend initialising the Snowplow tracker with `eventMethod: 'beacon'` and/or `stateStorageStrategy: 'cookieAndLocalStorage'` (if navigating to a page that also contains the JS Tracker). Using the visibility change technique may not work as expected for Single Page Applications (SPA), you would need to send the aggregated event to the Snowplow collector on navigation within your application.
 :::
 
-:::caution
+:::warning
 The `iglu:com.acme_company/page_unload/jsonschema/1-0-0` schema used in the example is not a valid schema. Please define your own schema for these events. Otherwise, they will fail validation and go to the bad event queue.
 :::
 

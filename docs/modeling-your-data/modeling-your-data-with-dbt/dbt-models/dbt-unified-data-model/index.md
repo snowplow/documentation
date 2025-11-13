@@ -79,7 +79,7 @@ The calculation for engaged time on web is more complicated, it is derived based
 To adjust for these gaps we calculate engaged time as the time to trigger each ping (your heartbeat) times the number of pings (ignoring the first one), and add to that the time delay to the first ping (your minimum visit length). The formula is:
 
 $$
-engaged\_time=t_{heartbeat}\times (n_{distinct\_pings} -1) + t_{min\_visit\_length}
+engaged\_time=t_\{heartbeat}\times (n_\{distinct\_pings} -1) + t_\{min\_visit\_length}
 $$
 
 and the below shows an example visually for a single page view.
@@ -124,7 +124,7 @@ dark: require('./images/stray_sessions_dark.drawio.png').default
 ### Page Views
 For page views, because we cannot guarantee the sessions with the `page_view` event and all subsequent `page_ping` events are processed within the same run, we choose to discard all stray page pings. Without doing this it could be possible that you would get different results from different run configurations.
 
-<div style ={{overflow:'hidden'}}>
+<div style={{overflow:'hidden'}}>
 <div style={{float: 'left', width: '45%'}}>
 <p align="center"><strong>Without enforcing within-session view</strong></p>
 <ThemedImage

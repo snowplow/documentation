@@ -196,7 +196,7 @@ newTracker('namespace', '{{collector_url_here}}', {
 
 :::note PII in user ID
 
-If your `userId` values contains PII, check that you're not leaking them to third party sites in your link decoration.
+If your `userId` values contains PII, check that you're not leaking them to third-party sites in your link decoration.
 
 :::
 

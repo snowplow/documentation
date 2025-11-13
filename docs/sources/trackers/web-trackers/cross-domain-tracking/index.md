@@ -11,17 +11,11 @@ import TabItem from '@theme/TabItem';
 
 Configure [cross-domain tracking](/docs/events/cross-navigation/index.md) using the `crossDomainLinker` and `useExtendedCrossDomainLinker` fields of the [configuration object](/docs/sources/trackers/web-trackers/tracker-setup/initialization-options/index.md).
 
-:::tip
-
-If you enable link decoration, aim to track at least one event on the starting page. The tracker writes the `domain_userid` to a cookie when it tracks an event. If the cookie doesn't exist when the user navigates to the cross-domain destination, the tracker will generate a new ID for them when they return, rather than keeping the old ID. This can make user stitching difficult.
-
-:::
-
 ## Choose which links to decorate
 
 Provide a callback for the `crossDomainLinker` option to configure which links to decorate. It should be a function taking one argument, the link element, that returns `true` if the tracker should decorate the link element and `false` otherwise.
 
-We recommend specifying a subset of links to decorate. This means that you won't end up decorating links within the same domain, or "links" that are actually email addresses or telephone numbers, for example.
+We recommend specifying a subset of links to decorate, to avoid decorating unintended links. For example, links within the same domain, or "links" that are actually email addresses or telephone numbers.
 
 This function would only decorate those links whose destination is `http://acme.de/` or whose HTML ID is `crossDomainLink`:
 
@@ -98,7 +92,7 @@ Here, link decoration will only occur when links are to different sites within t
 
 When the tracker loads it doesn't immediately decorate links. Instead, it adds event listeners to links which decorate them when a user clicks on them or navigates to them using the keyboard. This ensures that the timestamp added to the querystring is fresh.
 
-If further links get added to the page after the tracker has loaded, you can use the tracker's `crossDomainLinker` method to add listeners again. Listeners won't be added to links which already have them so it's good practice to make sure you use the same linker function every call, as it won't be updated.
+If further links get added to the page after the tracker has loaded, you can use the tracker's `crossDomainLinker` method to add listeners again. Listeners won't be added to links which already have them, so it's good practice to use the same linker function every call.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -199,6 +193,12 @@ newTracker('namespace', '{{collector_url_here}}', {
 
   </TabItem>
 </Tabs>
+
+:::note PII in user ID
+
+If your `userId` values contains PII, check that you're not leaking them to third party sites in your link decoration.
+
+:::
 
 Provide a callback to `reason` in the form `((evt: Event) => string)` to add custom information to the querystring. If set to `true`, the link text will be used.
 

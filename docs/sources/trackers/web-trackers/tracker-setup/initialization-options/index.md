@@ -28,10 +28,9 @@ Here is a simple example of how to initialise a tracker, setting a few configura
 snowplow('newTracker', 'sp', '{{collector_url_here}}', {
   appId: 'my-app-id',
   appVersion: '0.1.0',
-  discoverRootDomain: true, // default, can be omitted
   cookieSameSite: 'Lax', // Recommended
   contexts: {
-    webPage: true // default, can be omitted
+    session: true
   }
 });
 ```
@@ -44,10 +43,9 @@ snowplow('newTracker', 'sp', '{{collector_url_here}}', {
 newTracker('sp', '{{collector_url_here}}', {
   appId: 'my-app-id',
   appVersion: '0.1.0',
-  discoverRootDomain: true, // default, can be omitted
   cookieSameSite: 'Lax', // Recommended
   contexts: {
-    webPage: true // default, can be omitted
+    session: true
   }
 });
 ```
@@ -55,7 +53,7 @@ newTracker('sp', '{{collector_url_here}}', {
   </TabItem>
 </Tabs>
 
-The tracker will send events to the Collector URL you specify by replacing `{{collector_url_here}}`. The final argument is the configuration object. Here it's used to set the app ID and the webPage entity for each event. Each event the tracker sends will have an `app_id` field set to `my-app-id`.
+The tracker will send events to the Collector URL you specify by replacing `{{collector_url_here}}`. The final argument is the configuration object. Here it's used to set the app ID and enable the [session](/docs/sources/trackers/web-trackers/tracking-events/session/index.md) entity for each event. Each event the tracker sends will have an `app_id` field set to `my-app-id`.
 
 If your code calls `newTracker` multiple times with the same namespace, only the first call is taken into account.
 

@@ -8,9 +8,9 @@ This enrichment parses the extended cross-navigation format in the `_sp` queryst
 
 Check out the [cross-navigation](/docs/events/cross-navigation/index.md) page to learn why this can be useful.
 
-The extended cross-navigation format is `_sp={domainUserId}.{timestamp}.{sessionId}.{subjectUserId}.{sourceId}.{sourcePlatform}.{reason}`.
+The extended cross-navigation format is `_sp={domainUserId}.{timestamp}.{sessionId}.{subjectUserId}.{sourceId}.{sourcePlatform}.{reason}`. The `domainUserId` and `timestamp` fields will always be present, but some of the other fields may be null or empty. They're configured within the tracker.
 
-If this enrichment isn't enabled, Enrich parses the `_sp` querystring parameter according to the old format, `_sp={domainUserId}.{timestamp}`
+If this enrichment isn't enabled, Enrich parses the `_sp` querystring parameter according to the short format, `_sp={domainUserId}.{timestamp}`
 
 ## Configuration
 
@@ -29,13 +29,10 @@ import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_in
 
 ## Input
 
-This enrichment extracts `_sp` querystring parameter from the following inputs:
-
-- The `page_url` field from the Snowplow event
-- The `referer` URI extracted from corresponding HTTP header in the raw event
+This enrichment extracts the `_sp` querystring parameter from the `page_url` field from the Snowplow event.
 
 ## Output
 
 This enrichment adds a new derived entity to the enriched event based on [this schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/cross_navigation/jsonschema/1-0-0).
 
-Also, it continues to populate `refr_domain_userid` and `refr_dvce_tstamp` enriched event fields as before.
+Also, it populates the `refr_domain_userid` and `refr_dvce_tstamp` enriched event fields.

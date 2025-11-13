@@ -5,7 +5,11 @@ date: "2025-07-26"
 sidebar_position: 5
 ---
 
-When users navigate between different domains in your ecosystem—such as from your main website to a subdomain, partner site, or mobile app—their user identity is typically lost. This creates gaps in your user journey data and makes it difficult to understand the complete customer experience across your digital properties.
+When users navigate between different domains in your ecosystem, their user identity may get fragmented. Examples include navigation from your main website to a partner site, or to a mobile app. This creates gaps in your user journey data and makes it difficult to understand the complete customer experience across your digital properties.
+
+:::info Web subdomains
+This problem doesn't usually apply for navigation between web subdomains, as the web trackers have `discoverRootDomain` [enabled by default](/docs/sources/trackers/web-trackers/tracker-setup/initialization-options/index.md).
+:::
 
 Cross-navigation (also called cross-domain) tracking solves this problem by passing user identification data in URL parameters when users click links to other domains. This enables you to maintain user continuity across your applications.
 
@@ -29,7 +33,7 @@ Available properties:
 | `sourcePlatform` | Platform of the current device                 | ✅        |       |
 | `reason`         | Custom information or identifier               | ✅        |       |
 
-For example, the link `appSchema://path/to/page` would look like this after decoration:
+For example, the link `appSchema://path/to/page` would look like this after decoration with the full extended format:
 
 ```
 appSchema://path/to/page?_sp=domainUserId.timestamp.sessionId.subjectUserId.sourceId.sourcePlatform.reason

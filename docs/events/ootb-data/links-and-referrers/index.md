@@ -16,7 +16,7 @@ The URL is tracked in the atomic event properties, under the `page_referrer` pro
 
 | **Table Column**                                 | **Type** | **Description**                                               | **Example values**                                                                                                      |
 |---------------------------------------------|----------|---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| `page_referrer`                             | text     | Referrer URL                                                  | `http://www.snowplow.io/`                                                                                       |
+| `page_referrer`                             | text     | Referrer URL                                                  | `https://www.snowplow.io/`                                                                                       |
 
 ## Deep links in mobile apps
 

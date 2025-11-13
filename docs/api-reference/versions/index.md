@@ -26,7 +26,7 @@ If you are a Snowplow CDI customer, rather than self-hosted, you don't need to d
 
 Some major upgrades might have breaking changes. In this case, we provide upgrade guides, such as the ones for [RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/upgrade-guides/index.md).
 
-From time to time, we develop better applications for certain tasks and deprecate the old ones. Deprecations are announced on [Community](http://community.snowplow.io/).
+From time to time, we develop better applications for certain tasks and deprecate the old ones. Deprecations are announced on [Community](https://community.snowplow.io/).
 
 ---
 

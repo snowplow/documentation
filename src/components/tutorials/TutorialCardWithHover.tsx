@@ -40,9 +40,9 @@ export const TutorialCardWithHover: React.FC<TutorialCardWithHoverProps> = ({ tu
       <div className="p-6 flex-1 flex flex-col">
         {/* Topic/Use Case Tags */}
         <div className="flex flex-wrap gap-2 mb-4">
-          {tutorial.meta.useCases.length > 0 && (
+          {tutorial.meta.useCase && (
             <div className="bg-primary text-primary-foreground px-2 py-1 rounded-lg text-[.675rem] font-normal transition-all duration-300 group-hover:bg-foreground group-hover:shadow-sm">
-              {tutorial.meta.useCases[0]}
+              {tutorial.meta.useCase}
             </div>
           )}
           <div className="bg-primary text-primary-foreground px-2 py-1 rounded-lg text-[.675rem] font-normal transition-all duration-300 group-hover:bg-foreground group-hover:shadow-sm">

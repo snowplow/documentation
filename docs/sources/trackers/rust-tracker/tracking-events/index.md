@@ -1,5 +1,5 @@
 ---
-title: "Tracking events"
+title: "Tracking Events with the Rust Tracker"
 date: "2022-10-24"
 sidebar_position: 3000
 ---

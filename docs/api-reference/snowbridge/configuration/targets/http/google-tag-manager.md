@@ -1,3 +1,6 @@
+---
+title: "Configuring GTM as an HTTP Target in Snowbridge"
+---
 # Example: Google Tag Manager Server Side
 
 You can use the HTTP target to send events to Google Tag Manager Server Side, where the [Snowplow Client tag](/docs/destinations/forwarding-events/google-tag-manager-server-side/snowplow-client-for-gtm-ss/index.md) is installed.

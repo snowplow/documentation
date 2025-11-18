@@ -1,5 +1,5 @@
 ---
-title: "Installation and initialization"
+title: "Installation & Initialization for the Node.js Tracker"
 date: "2021-04-07"
 sidebar_position: 1
 ---

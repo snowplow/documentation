@@ -1,5 +1,5 @@
 ---
-title: "Tracking specific events"
+title: "Tracking Specific Events with the Golang Tracker"
 date: "2020-02-26"
 sidebar_position: 40
 ---

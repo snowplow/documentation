@@ -1,5 +1,5 @@
 ---
-title: "Emitter"
+title: "Emitter Configuration for the .NET Tracker"
 date: "2020-02-26"
 sidebar_position: 40
 ---

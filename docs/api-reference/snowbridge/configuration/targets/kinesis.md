@@ -1,5 +1,5 @@
 ---
-title: "Kinesis"
+title: "Configuring Kinesis as a Snowbridge Target"
 description: "Write data to a Kinesis stream."
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "Media tracking"
+title: "Media Tracking with the Flutter Tracker"
 sidebar_position: 100
 ---
 

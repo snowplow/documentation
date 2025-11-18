@@ -1,5 +1,5 @@
 ---
-title: "App lifecycle tracking"
+title: "App Lifecycle Tracking for Mobile Trackers"
 sidebar_position: 30
 ---
 

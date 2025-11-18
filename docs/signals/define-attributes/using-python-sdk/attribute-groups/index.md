@@ -1,5 +1,5 @@
 ---
-title: "Attribute groups"
+title: "Attribute Groups via the Python SDK"
 sidebar_position: 30
 sidebar_label: "Attribute groups"
 description: "Configure stream, batch, and external batch attribute groups programmatically using the Snowplow Signals Python SDK."

@@ -1,5 +1,5 @@
 ---
-title: "Kafka"
+title: "Configuring Kafka as a Snowbridge Source"
 description: "Read data from a Kafka topic."
 ---
 

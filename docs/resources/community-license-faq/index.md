@@ -1,3 +1,7 @@
+---
+title: "Community License FAQ"
+---
+
 # FAQ: Snowplow Community License (SCL)
 
 :::info Note

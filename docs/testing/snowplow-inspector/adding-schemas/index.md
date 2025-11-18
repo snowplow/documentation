@@ -1,5 +1,5 @@
 ---
-title: "Adding custom schemas"
+title: "Adding Custom Schemas in Snowplow Inspector"
 sidebar_position: 10
 description: "How to add custom schemas to Snowplow Inspector"
 ---

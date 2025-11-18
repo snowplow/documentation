@@ -1,5 +1,5 @@
 ---
-title: "Anonymous tracking"
+title: "Anonymous Tracking for Flutter Tracker"
 date: "2022-01-31"
 sidebar_position: 6000
 ---

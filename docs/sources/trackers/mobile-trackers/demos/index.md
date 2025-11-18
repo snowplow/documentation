@@ -1,5 +1,5 @@
 ---
-title: "Example Applications"
+title: "Example Applications for Mobile Trackers"
 sidebar_position: 9999
 ---
 

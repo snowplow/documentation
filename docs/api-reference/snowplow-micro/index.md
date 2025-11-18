@@ -1,5 +1,5 @@
 ---
-title: "Snowplow Micro"
+title: "Snowplow Micro API Reference"
 sidebar_position: 115
 description: "Snowplow Micro arguments and environment variables."
 ---

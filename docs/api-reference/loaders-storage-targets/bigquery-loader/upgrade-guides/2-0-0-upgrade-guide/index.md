@@ -1,5 +1,5 @@
 ---
-title: "2.0.0 upgrade guide"
+title: "BigQuery Loader 2.0.0 Upgrade Guide"
 sidebar_position: -20
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "Previous versions"
+title: "Previous Releases of Snowplow Mini"
 date: "2020-04-03"
 sidebar_position: 5
 sidebar_custom_props:

@@ -1,5 +1,5 @@
 ---
-title: "Event Tracking"
+title: "Event Tracking with the .NET Tracker"
 date: "2020-02-26"
 sidebar_position: 60
 ---

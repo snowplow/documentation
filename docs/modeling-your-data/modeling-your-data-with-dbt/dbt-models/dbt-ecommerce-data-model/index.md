@@ -1,5 +1,5 @@
 ---
-title: "Ecommerce"
+title: "Ecommerce Data Model for dbt"
 sidebar_position: 40
 description: "The Snowplow Ecommerce dbt Package"
 hide_title: true

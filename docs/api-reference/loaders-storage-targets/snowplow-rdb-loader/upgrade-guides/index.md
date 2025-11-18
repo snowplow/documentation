@@ -1,5 +1,5 @@
 ---
-title: "Upgrade guides"
+title: "Upgrade Guides for the Snowplow RDB Loader"
 sidebar_position: 40
 ---
 

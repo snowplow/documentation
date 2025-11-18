@@ -1,6 +1,6 @@
 ---
 position: 1
-title: Introduction
+title: Introduction to Flink Live Shopper Features
 ---
 
 Welcome to the **real-time shopper features using Apache Flink** solution accelerator for ecommerce.

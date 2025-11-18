@@ -1,5 +1,5 @@
 ---
-title: "Mobile"
+title: "Legacy Mobile Data Model (dbt) Overview"
 description: "The Snowplow Mobile dbt Package"
 sidebar_position: 800
 hide_title: true

@@ -1,5 +1,5 @@
 ---
-title: "Initialization and configuration"
+title: "Initialization & Configuration Options for Web Trackers"
 date: "2021-03-31"
 sidebar_position: 2000
 ---

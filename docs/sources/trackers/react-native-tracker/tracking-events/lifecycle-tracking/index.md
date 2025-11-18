@@ -1,5 +1,5 @@
 ---
-title: "App lifecycle tracking"
+title: "App Lifecycle Tracking with the React Native Tracker"
 sidebar_position: 30
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "Getting started"
+title: "Getting Started with the Roku Tracker"
 date: "2021-11-16"
 sidebar_position: 1000
 ---

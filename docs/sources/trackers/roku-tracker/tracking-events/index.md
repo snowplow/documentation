@@ -1,5 +1,5 @@
 ---
-title: "Tracking events"
+title: "Tracking Events with the Roku Tracker"
 date: "2021-11-16"
 sidebar_position: 2000
 ---

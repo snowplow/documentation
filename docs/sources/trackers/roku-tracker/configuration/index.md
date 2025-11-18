@@ -1,5 +1,5 @@
 ---
-title: "Configuring how events are sent"
+title: "Configuring How Events Are Sent (Roku Tracker)"
 date: "2021-11-16"
 sidebar_position: 4000
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Tracking out-of-the-box events"
+title: "Tracking Out-of-the-Box Events for Mobile Trackers"
 date: "2022-08-30"
 sidebar_position: 10
 ---

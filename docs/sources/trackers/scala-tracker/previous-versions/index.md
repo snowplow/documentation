@@ -1,5 +1,5 @@
 ---
-title: "Previous versions"
+title: "Previous Versions of the Scala Tracker"
 date: "2020-10-28"
 sidebar_position: 210
 sidebar_custom_props:

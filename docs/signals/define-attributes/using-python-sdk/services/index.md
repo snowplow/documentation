@@ -1,5 +1,5 @@
 ---
-title: "Services"
+title: "Services in Signals Attributes (Python SDK)"
 sidebar_position: 32
 description: "Create services programmatically using the Python SDK to group attribute groups for stable consumption interfaces."
 ---

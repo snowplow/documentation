@@ -1,5 +1,5 @@
 ---
-title: "Fractribution"
+title: "Fractribution Migration Guide"
 sidebar_position: 920
 ---
 

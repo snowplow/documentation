@@ -1,5 +1,5 @@
 ---
-title: "Legacy packages"
+title: "Overview of Legacy dbt Models"
 sidebar_position: 9999
 description: "All legacy Snowplow dbt packages"
 ---

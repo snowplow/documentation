@@ -1,5 +1,5 @@
 ---
-title: "Tracking events"
+title: "Tracking Events with the Lua Tracker"
 date: "2020-02-26"
 sidebar_position: 40
 ---

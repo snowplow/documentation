@@ -1,5 +1,5 @@
 ---
-title: "Setup"
+title: "Setup Guide for the Golang Tracker"
 date: "2020-02-26"
 sidebar_position: 10
 ---

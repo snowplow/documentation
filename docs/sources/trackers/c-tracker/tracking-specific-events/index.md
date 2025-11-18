@@ -1,5 +1,5 @@
 ---
-title: "Tracking specific events"
+title: "Tracking Specific Events with the C/C++ Tracker"
 date: "2020-02-25"
 sidebar_position: 50
 ---

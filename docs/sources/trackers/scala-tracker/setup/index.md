@@ -1,5 +1,5 @@
 ---
-title: "Setup"
+title: "Setup Guide for the Scala Tracker"
 date: "2022-9-15"
 sidebar_position: 0
 ---

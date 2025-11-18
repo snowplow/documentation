@@ -1,5 +1,5 @@
 ---
-title: "Setup"
+title: "Setup Guide for the Python Tracker"
 date: "2023-06-14"
 sidebar_position: 10
 ---

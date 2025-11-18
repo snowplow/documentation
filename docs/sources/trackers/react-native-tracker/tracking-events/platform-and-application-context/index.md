@@ -1,5 +1,5 @@
 ---
-title: "Platform and application data tracking"
+title: "Platform & Application Context Tracking for React Native Tracker"
 sidebar_position: 10
 ---
 

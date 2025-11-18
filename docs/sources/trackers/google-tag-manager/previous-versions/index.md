@@ -1,5 +1,5 @@
 ---
-title: "Previous versions"
+title: "Previous Versions of the Google Tag Manager Tracker"
 sidebar_position: 1000
 sidebar_custom_props:
   outdated: true

@@ -1,5 +1,5 @@
 ---
-title: "Tracking specific client-side properties"
+title: "Tracking Client-Side Properties for Mobile Trackers"
 date: "2022-08-30"
 sidebar_position: 30
 ---

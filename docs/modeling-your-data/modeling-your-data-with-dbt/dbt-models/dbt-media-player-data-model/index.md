@@ -1,5 +1,5 @@
 ---
-title: "Media Player"
+title: "Media Player dbt Data Model Overview"
 description: "The Snowplow Media Player dbt Package"
 sidebar_position: 20
 hide_title: true

@@ -1,5 +1,5 @@
 ---
-title: "Custom event tracking"
+title: "Custom Event Tracking with React Native Tracker"
 date: "2021-08-06"
 sidebar_position: 21
 ---

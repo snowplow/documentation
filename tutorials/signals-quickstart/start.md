@@ -1,6 +1,6 @@
 ---
 position: 1
-title: Introduction
+title: Introduction to Signals Quick Start
 description: "Get started with Snowplow Signals to calculate user behavior attributes in real time, to build personalization use cases."
 ---
 

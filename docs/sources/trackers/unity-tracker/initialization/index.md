@@ -1,5 +1,5 @@
 ---
-title: "Initialization"
+title: "Introduction to Unity Tracker Initialization"
 date: "2020-02-26"
 sidebar_position: 20
 ---

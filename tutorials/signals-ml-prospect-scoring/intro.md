@@ -1,5 +1,5 @@
 ---
-title: Introduction
+title: Introduction to Signals ML Prospect Scoring
 position: 1
 description: "Build a real-time prospect scoring system using Snowplow Signals and machine learning to predict conversion likelihood."
 ---

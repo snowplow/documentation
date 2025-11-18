@@ -1,6 +1,6 @@
 ---
 position: 1
-title: Installation and Setup
+title: Android Event Tracking – Installation Guide
 ---
 
 ### Requirements

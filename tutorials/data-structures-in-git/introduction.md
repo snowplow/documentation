@@ -1,5 +1,5 @@
 ---
-title: Introduction
+title: Introduction to Data Structures in Git
 position: 1
 ---
 

@@ -1,6 +1,6 @@
 ---
 position: 1
-title: Introduction
+title: Introduction to Kafka Live Viewer Profiles
 ---
 
 ## About This Accelerator

@@ -1,5 +1,5 @@
 ---
-title: "Media Player"
+title: "Media Player Migration Guide"
 sidebar_position: 20
 ---
 

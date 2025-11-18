@@ -1,5 +1,5 @@
 ---
-title: "Platform and application data tracking"
+title: "Platform and Application Context Tracking for Mobile Trackers"
 sidebar_position: 10
 ---
 

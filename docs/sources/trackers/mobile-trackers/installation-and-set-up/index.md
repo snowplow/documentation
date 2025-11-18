@@ -1,5 +1,5 @@
 ---
-title: "Installation and initialization"
+title: "Installation & Initialization for Mobile Trackers"
 date: "2022-08-30"
 sidebar_position: 0
 ---

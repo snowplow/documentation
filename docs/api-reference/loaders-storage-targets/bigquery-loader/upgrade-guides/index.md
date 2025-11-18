@@ -1,5 +1,5 @@
 ---
-title: "Upgrade guides"
+title: "Upgrade Guides for the BigQuery Loader"
 sidebar_position: 40
 ---
 

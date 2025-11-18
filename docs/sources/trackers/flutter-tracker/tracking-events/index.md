@@ -1,5 +1,5 @@
 ---
-title: "Tracking events"
+title: "Tracking Events with the Flutter Tracker"
 date: "2022-01-31"
 sidebar_position: 3000
 ---

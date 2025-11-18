@@ -1,5 +1,5 @@
 ---
-title: "Tracking specific client-side properties"
+title: "Tracking Client-Side Properties with the React Native Tracker"
 date: "2022-08-30"
 sidebar_position: 23
 ---

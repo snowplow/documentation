@@ -1,5 +1,5 @@
 ---
-title: "Kafka"
+title: "Configuring Kafka as a Snowbridge Target"
 description: "Write data to a Kafka topic."
 ---
 

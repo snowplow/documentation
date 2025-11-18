@@ -1,5 +1,5 @@
 ---
-title: "Previous versions"
+title: "Previous Versions of the React Native Tracker"
 date: "2021-08-09"
 sidebar_position: 100
 sidebar_custom_props:

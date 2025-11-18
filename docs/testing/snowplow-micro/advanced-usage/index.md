@@ -1,5 +1,5 @@
 ---
-title: "Advanced usage"
+title: "Advanced Usage of Snowplow Micro"
 sidebar_position: 6
 description: "How to configure more aspects of Snowplow Micro."
 ---

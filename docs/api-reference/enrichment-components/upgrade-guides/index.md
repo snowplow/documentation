@@ -1,5 +1,5 @@
 ---
-title: "Upgrade guides"
+title: "Upgrade Guides for Enrichment Components"
 sidebar_position: 0
 ---
 

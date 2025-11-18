@@ -1,5 +1,5 @@
 ---
-title: "Quick start guide"
+title: "Quick Start Guide for Snowplow Self-Hosted"
 sidebar_position: 2
 ---
 

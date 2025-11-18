@@ -1,5 +1,5 @@
 ---
-title: "Configuration"
+title: "Configuration for Recovering Failed Events"
 date: "2020-08-25"
 sidebar_position: 10
 ---

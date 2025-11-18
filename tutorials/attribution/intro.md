@@ -1,5 +1,5 @@
 ---
-title: Introduction
+title: Introduction to Attribution DBT Package
 position: 1
 ---
 

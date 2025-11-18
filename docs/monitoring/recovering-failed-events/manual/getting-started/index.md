@@ -1,5 +1,5 @@
 ---
-title: "Getting Started"
+title: "Getting Started with Manual Recovery of Failed Events"
 date: "2020-07-22"
 sidebar_position: 0
 ---

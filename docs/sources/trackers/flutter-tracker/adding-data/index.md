@@ -1,5 +1,5 @@
 ---
-title: "Adding data to your events: context and more"
+title: "Adding Context & Data to Events in the Flutter Tracker"
 date: "2022-01-31"
 sidebar_position: 4000
 ---

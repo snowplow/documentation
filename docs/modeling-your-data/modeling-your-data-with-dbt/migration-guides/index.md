@@ -1,5 +1,5 @@
 ---
-title: "Migration guides"
+title: "Migration Guides for dbt Data Models"
 sidebar_position: 80
 description: "Migration guides for upgrading from previous versions of our packages"
 ---

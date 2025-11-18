@@ -1,5 +1,5 @@
 ---
-title: "Example Applications"
+title: "Example Applications for the Java Tracker"
 sidebar_position: 9999
 ---
 

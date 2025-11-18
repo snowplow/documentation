@@ -1,5 +1,5 @@
 ---
-title: Quick start
+title: Quick Start Guide for Google Tag Manager Tracker
 sidebar_position: 100
 ---
 

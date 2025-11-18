@@ -1,5 +1,5 @@
 ---
-title: "Targets"
+title: "Understanding Targets in Snowbridge"
 date: "2022-10-20"
 sidebar_position: 400
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Anonymous tracking"
+title: "Anonymous Tracking for Mobile Trackers"
 date: "2022-08-30"
 sidebar_position: 60
 ---

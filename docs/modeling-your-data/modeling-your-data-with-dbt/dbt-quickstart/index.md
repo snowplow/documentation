@@ -1,5 +1,5 @@
 ---
-title: "Quick Start"
+title: "Quick Start with dbt for Snowplow Modeling"
 sidebar_position: 20
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "HTTP"
+title: "Configuring HTTP as a Snowbridge Source"
 description: "Receive data over HTTP."
 ---
 

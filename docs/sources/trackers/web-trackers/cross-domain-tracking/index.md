@@ -219,7 +219,7 @@ The URL-updating code runs in a [callback](/docs/sources/trackers/web-trackers/t
 snowplow('trackPageView'); // page URL is https://example.com/?example=123&_sp=6de9024e-17b9-4026-bd4d-efec50ae84cb.1680681134458
 snowplow(function(){
   if (/[?&]_sp=/.test(window.location.href)) {
-    history.replaceState(history.state, "", window.location.replace(/&?_sp=[^&]+/, "")); // page URL is now https://example.com/?example=123
+    history.replaceState(history.state, "", window.location.href.replace(/&?_sp=[^&#]+/, "")); // page URL is now https://example.com/?example=123
   }
 });
 ```
@@ -230,7 +230,7 @@ snowplow(function(){
 ```javascript
 trackPageView(); // page URL is https://example.com/?example=123&_sp=6de9024e-17b9-4026-bd4d-efec50ae84cb.1680681134458
 if (/[?&]_sp=/.test(window.location.href)) {
-  history.replaceState(history.state, "", window.location.replace(/&?_sp=[^&]+/, "")); // page URL is now https://example.com/?example=123
+  history.replaceState(history.state, "", window.location.href.replace(/&?_sp=[^&#]+/, "")); // page URL is now https://example.com/?example=123
 }
 ```
 

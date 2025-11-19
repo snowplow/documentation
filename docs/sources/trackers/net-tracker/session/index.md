@@ -1,5 +1,6 @@
 ---
-title: "Session Tracking with the .NET Tracker"
+title: "Session tracking with the .NET tracker"
+sidebar_label: "Session"
 date: "2020-02-26"
 sidebar_position: 60
 ---

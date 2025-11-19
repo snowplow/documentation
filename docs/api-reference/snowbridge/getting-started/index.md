@@ -1,5 +1,6 @@
 ---
-title: "Getting Started with Snowbridge"
+title: "Getting started with Snowbridge"
+sidebar_label: "Getting started"
 date: "2022-10-20"
 sidebar_position: 100
 ---

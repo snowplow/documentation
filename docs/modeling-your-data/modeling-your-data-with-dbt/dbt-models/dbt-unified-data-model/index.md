@@ -1,5 +1,6 @@
 ---
-title: "Unified Digital Data Model Overview"
+title: "Unified digital data model overview"
+sidebar_label: "Unified Digital"
 sidebar_position: 10
 description: "The Snowplow Unified dbt Package"
 hide_title: true

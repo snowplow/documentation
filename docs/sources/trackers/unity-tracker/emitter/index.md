@@ -1,5 +1,6 @@
 ---
-title: "Emitter Configuration for the Unity Tracker"
+title: "Emitter configuration for the Unity tracker"
+sidebar_label: "Emitter"
 date: "2020-02-26"
 sidebar_position: 50
 ---

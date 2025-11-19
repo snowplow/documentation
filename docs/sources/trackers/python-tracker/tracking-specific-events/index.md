@@ -1,5 +1,6 @@
 ---
-title: "Tracking Specific Events with the Python Tracker"
+title: "Tracking specific events with the Python tracker"
+sidebar_label: "Event Tracking"
 sidebar_position: 50
 ---
 

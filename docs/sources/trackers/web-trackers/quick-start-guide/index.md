@@ -1,5 +1,6 @@
 ---
-title: "Web Trackers Quick Start Guide"
+title: "Web trackers quick start guide"
+sidebar_label: "Quick start guide"
 date: "2021-03-24"
 sidebar_position: 100
 ---

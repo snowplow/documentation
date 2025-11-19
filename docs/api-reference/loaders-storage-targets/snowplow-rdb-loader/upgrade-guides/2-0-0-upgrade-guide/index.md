@@ -1,5 +1,6 @@
 ---
-title: "Snowplow RDB Loader 2.0.0 Upgrade Guide"
+title: "Snowplow RDB Loader 2.0.0 upgrade guide"
+sidebar_label: "2.0.0 Upgrade Guide"
 date: "2021-12-01"
 sidebar_position: -10
 ---

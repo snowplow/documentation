@@ -1,5 +1,6 @@
 ---
-title: "Tracking Events with the Node.js Tracker"
+title: "Tracking events with the Node.js tracker"
+sidebar_label: "Tracking events"
 date: "2021-04-07"
 sidebar_position: 3
 ---

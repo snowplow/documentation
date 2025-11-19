@@ -1,5 +1,6 @@
 ---
-title: "Configuration Guide for dbt Modeling"
+title: "Configuration guide for dbt modeling"
+sidebar_label: "Configuration"
 description: "Information for the configuration of our dbt packages"
 sidebar_position: 40
 ---

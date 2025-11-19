@@ -1,5 +1,6 @@
 ---
-title: "Unity Tracker Guide"
+title: "Unity tracker guide"
+sidebar_label: "Tracker"
 date: "2020-02-26"
 sidebar_position: 40
 ---

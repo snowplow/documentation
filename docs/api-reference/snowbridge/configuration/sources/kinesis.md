@@ -1,5 +1,6 @@
 ---
-title: "Configuring Kinesis as a Snowbridge Source"
+title: "Configuring Kinesis as a Snowbridge source"
+sidebar_label: "Kinesis"
 description: "Read data from a Kinesis stream."
 ---
 

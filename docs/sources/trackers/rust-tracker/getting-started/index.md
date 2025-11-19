@@ -1,5 +1,6 @@
 ---
-title: "Getting Started with the Rust Tracker"
+title: "Getting started with the Rust tracker"
+sidebar_label: "Getting started"
 date: "2022-10-24"
 sidebar_position: 10
 ---

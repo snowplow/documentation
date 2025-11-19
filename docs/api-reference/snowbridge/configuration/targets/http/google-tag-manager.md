@@ -1,5 +1,5 @@
 ---
-title: "Configuring GTM as an HTTP Target in Snowbridge"
+title: "Configuring GTM as an HTTP target in Snowbridge"
 ---
 # Example: Google Tag Manager Server Side
 

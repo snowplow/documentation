@@ -1,5 +1,6 @@
 ---
-title: "Previous Versions of the Python Tracker"
+title: "Previous versions of the Python tracker"
+sidebar_label: "Previous versions"
 sidebar_position: 10000
 sidebar_custom_props:
   outdated: true

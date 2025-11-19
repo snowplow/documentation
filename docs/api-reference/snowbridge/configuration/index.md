@@ -1,5 +1,6 @@
 ---
-title: "Configuration Guide for Snowbridge"
+title: "Configuration guide for Snowbridge"
+sidebar_label: "Configuration"
 date: "2022-10-20"
 sidebar_position: 300
 ---

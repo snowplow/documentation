@@ -1,5 +1,6 @@
 ---
-title: "Unified Digital Migration Guide"
+title: "Unified digital migration guide"
+sidebar_label: "Unified Digital"
 sidebar_position: 10
 ---
 ```mdx-code-block

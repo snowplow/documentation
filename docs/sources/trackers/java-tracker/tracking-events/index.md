@@ -1,5 +1,6 @@
 ---
-title: "Tracking Events with the Java Tracker"
+title: "Tracking events with the Java tracker"
+sidebar_label: "Tracking events"
 date: "2022-03-24"
 sidebar_position: 20
 ---

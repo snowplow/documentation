@@ -1,5 +1,6 @@
 ---
-title: "Configuring SQS as a Snowbridge Source"
+title: "Configuring SQS as a Snowbridge source"
+sidebar_label: "SQS"
 description: "Read data from an SQS queue."
 ---
 

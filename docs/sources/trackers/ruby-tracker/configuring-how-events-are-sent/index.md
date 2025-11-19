@@ -1,5 +1,6 @@
 ---
-title: "Configuring How Events Are Sent (Ruby Tracker)"
+title: "Configuring how events are sent for the Ruby tracker"
+sidebar_label: "Configuring how events are sent"
 date: "2021-10-26"
 sidebar_position: 30
 ---

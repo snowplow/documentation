@@ -1,5 +1,6 @@
 ---
-title: "Utils Package Migration Guide"
+title: "Utils package migration guide"
+sidebar_label: "Utils"
 sidebar_position: 50
 ---
 

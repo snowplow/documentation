@@ -1,6 +1,7 @@
 ---
 position: 1
-title: Introduction to Signals Interventions
+title: "Introduction to Signals interventions"
+sidebar_label: "Introduction"
 description: "Get hands-on with Snowplow Signals using Snowplow Console or the Signals Sandbox trial environment to create real-time personalization."
 ---
 

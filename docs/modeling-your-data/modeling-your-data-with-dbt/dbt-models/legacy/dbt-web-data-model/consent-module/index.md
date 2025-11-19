@@ -1,5 +1,6 @@
 ---
-title: "Consent Module for the Legacy Web Data Model"
+title: "Consent module for the legacy web data model"
+sidebar_label: "Consent Module"
 sidebar_position: 200
 hide_title: true
 ---

@@ -1,6 +1,7 @@
 ---
 position: 1
-title: Introduction to Kafka Live Viewer Profiles
+title: "Introduction to Kafka live viewer profiles"
+sidebar_label: "Introduction"
 ---
 
 ## About This Accelerator
@@ -19,12 +20,10 @@ This accelerator is open source and can serve as the foundation to build practic
 Please start by reviewing how the application works in the next page on Localstack, even if you're planning to deploy with Terraform.
 
 ---
-
 ## Solution Accelerator Code
 [**The code for this infrastructure is available on here on GitHub.**](https://github.com/snowplow-industry-solutions/kafka-live-viewer-profiles)
 
 ---
-
 ## Architecture
 
 The solution comprises several interconnected components:

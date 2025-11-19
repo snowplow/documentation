@@ -1,5 +1,6 @@
 ---
-title: "Emitters Configuration for the Golang Tracker"
+title: "Emitters configuration for the Golang tracker"
+sidebar_label: "Emitters"
 date: "2020-02-26"
 sidebar_position: 50
 ---

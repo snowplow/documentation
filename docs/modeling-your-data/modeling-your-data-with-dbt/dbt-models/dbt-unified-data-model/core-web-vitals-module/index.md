@@ -1,5 +1,6 @@
 ---
-title: "Core Web Vitals Module (Unified Data Model)"
+title: "Core web vitals module for the unified data model"
+sidebar_label: "Core Web Vitals Module"
 sidebar_position: 300
 hide_title: true
 ---

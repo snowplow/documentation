@@ -1,5 +1,6 @@
 ---
-title: "Configuration Guide for Node.js Tracker"
+title: "Configuration guide for Node.js tracker"
+sidebar_label: "Configuration"
 date: "2021-04-07"
 sidebar_position: 2
 ---

@@ -1,5 +1,6 @@
 ---
-title: "Example Applications for the Python Tracker"
+title: "Example applications for the Python tracker"
+sidebar_label: "Example Applications"
 sidebar_position: 9999
 ---
 

@@ -1,5 +1,6 @@
 ---
-title: "Custom Event Tracking for Mobile Trackers"
+title: "Custom event tracking for mobile trackers"
+sidebar_label: "Custom event tracking"
 date: "2022-08-30"
 sidebar_position: 20
 ---

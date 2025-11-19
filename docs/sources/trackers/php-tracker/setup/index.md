@@ -1,5 +1,6 @@
 ---
-title: "Setup Guide for the PHP Tracker"
+title: "Setup guide for the PHP tracker"
+sidebar_label: "Setup"
 date: "2020-02-26"
 sidebar_position: 10
 ---

@@ -1,5 +1,6 @@
 ---
-title: Introduction to Attribution DBT Package
+title: "Introduction to attribution dbt package"
+sidebar_label: "Introduction"
 position: 1
 ---
 

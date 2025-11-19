@@ -1,5 +1,6 @@
 ---
-title: "Upgrade Guides for the Snowplow RDB Loader"
+title: "Upgrade guides for the Snowplow RDB Loader"
+sidebar_label: "Upgrade guides"
 sidebar_position: 40
 ---
 

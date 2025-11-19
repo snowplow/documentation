@@ -1,5 +1,6 @@
 ---
-title: "Legacy dbt Packages Quickstart"
+title: "Legacy dbt packages quickstart"
+sidebar_label: "Legacy packages"
 sidebar_position: 9999
 description: "All legacy Snowplow dbt packages"
 ---

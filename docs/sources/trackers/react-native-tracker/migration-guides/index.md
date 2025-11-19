@@ -1,5 +1,6 @@
 ---
-title: "Migration Guides for the React Native Tracker"
+title: "Migration guides for the React Native tracker"
+sidebar_label: "Migration guides"
 sidebar_position: 90
 ---
 

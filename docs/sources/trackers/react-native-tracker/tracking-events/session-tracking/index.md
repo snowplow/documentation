@@ -1,5 +1,6 @@
 ---
-title: "Session Tracking with the React Native Tracker"
+title: "Session tracking with the React Native tracker"
+sidebar_label: "Session tracking"
 sidebar_position: 20
 ---
 

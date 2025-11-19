@@ -1,5 +1,6 @@
 ---
-title: "Attribution Data Model (dbt) Overview"
+title: "Attribution data model in dbt overview"
+sidebar_label: "Attribution"
 description: "The Snowplow Attribution dbt Package"
 sidebar_position: 10
 hide_title: true

@@ -1,5 +1,6 @@
 ---
-title: "Configuring How Events Are Sent (Mobile Trackers)"
+title: "Configuring how events are sent for mobile trackers"
+sidebar_label: "Configuring how events are sent"
 date: "2022-08-30"
 sidebar_position: 40
 ---

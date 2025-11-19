@@ -1,5 +1,6 @@
 ---
-title: "Session Tracking for Mobile Trackers"
+title: "Session tracking for mobile trackers"
+sidebar_label: "Session tracking"
 sidebar_position: 20
 ---
 

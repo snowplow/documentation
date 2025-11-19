@@ -1,5 +1,6 @@
 ---
-title: "Monitoring Configuration for Snowbridge"
+title: "Monitoring configuration for Snowbridge"
+sidebar_label: "Monitoring"
 date: "2022-10-20"
 sidebar_position: 400
 ---

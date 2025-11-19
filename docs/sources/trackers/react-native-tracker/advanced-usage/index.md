@@ -1,5 +1,6 @@
 ---
-title: "Advanced Usage of the React Native Tracker"
+title: "Advanced usage of the React Native tracker"
+sidebar_label: "Advanced usage"
 date: "2021-08-09"
 sidebar_position: 40
 ---

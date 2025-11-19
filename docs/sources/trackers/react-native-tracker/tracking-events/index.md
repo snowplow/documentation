@@ -1,5 +1,6 @@
 ---
-title: "Tracking Out-of-the-Box Events with the React Native Tracker"
+title: "Tracking out of the box events with the React Native tracker"
+sidebar_label: "Tracking out-of-the-box events"
 date: "2021-08-06"
 sidebar_position: 20
 ---

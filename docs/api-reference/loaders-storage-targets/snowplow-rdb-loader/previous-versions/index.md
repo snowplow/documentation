@@ -1,5 +1,6 @@
 ---
-title: "Previous Versions of the Snowplow RDB Loader"
+title: "Previous versions of the Snowplow RDB Loader"
+sidebar_label: "Previous versions"
 date: "2022-04-05"
 sidebar_position: 30
 sidebar_custom_props:

@@ -1,5 +1,6 @@
 ---
-title: "Introduction to Scala Tracker Initialization"
+title: "Introduction to Scala tracker initialization"
+sidebar_label: "Initialization"
 date: "2022-9-15"
 sidebar_position: 10
 ---

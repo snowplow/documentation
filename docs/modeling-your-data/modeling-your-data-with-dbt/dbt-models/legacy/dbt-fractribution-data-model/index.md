@@ -1,5 +1,6 @@
 ---
-title: "Fractribution Legacy Data Model (dbt)"
+title: "Fractribution legacy data model in dbt"
+sidebar_label: "Fractribution"
 description: "The Snowplow Fractribution dbt Package"
 sidebar_position: 900
 hide_title: true

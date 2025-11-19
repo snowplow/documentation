@@ -1,5 +1,6 @@
 ---
-title: "Previous Versions of the BigQuery Loader"
+title: "Previous versions of the BigQuery Loader"
+sidebar_label: "Previous versions"
 date: "2021-08-18"
 sidebar_position: 10
 sidebar_custom_props:

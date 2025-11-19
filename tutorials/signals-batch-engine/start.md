@@ -1,6 +1,7 @@
 ---
 position: 1
-title: Introduction to Signals Batch Engine
+title: "Introduction to Signals batch engine"
+sidebar_label: "Introduction"
 description: "Set up the Snowplow Signals batch engine to calculate historical behavioral data attributes from warehouse data using dbt."
 ---
 

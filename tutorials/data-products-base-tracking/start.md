@@ -1,6 +1,7 @@
 ---
 position: 1
-title: Base Tracking for Data Products – Setup Guide
+title: "Base tracking for data products setup guide"
+sidebar_label: "Installation and Setup"
 ---
 
 This guide will help you understand some of the basic capabilities of Data Products and how they can be used in practice for most tracking implementation setups.

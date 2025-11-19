@@ -1,5 +1,6 @@
 ---
-title: "Subject Configuration for Python Tracker"
+title: "Subject configuration for Python tracker"
+sidebar_label: "Subject"
 sidebar_position: 40
 ---
 

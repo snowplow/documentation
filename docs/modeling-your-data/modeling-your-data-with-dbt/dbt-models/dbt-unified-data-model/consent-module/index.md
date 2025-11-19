@@ -1,5 +1,6 @@
 ---
-title: "Consent Module for the Unified Data Model"
+title: "Consent module for the unified data model"
+sidebar_label: "Consent Module"
 sidebar_position: 200
 hide_title: true
 ---

@@ -1,5 +1,6 @@
 ---
-title: "Snowplow Sources Overview"
+title: "Snowplow sources overview"
+sidebar_label: "Sources"
 date: "2020-02-15"
 sidebar_position: 4
 ---

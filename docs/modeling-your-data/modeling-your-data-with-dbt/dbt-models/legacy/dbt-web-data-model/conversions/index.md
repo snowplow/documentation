@@ -1,5 +1,6 @@
 ---
-title: "Conversions Module (Legacy Web Data Model)"
+title: "Conversions module for the legacy web data model"
+sidebar_label: "Conversions"
 sidebar_position: 100
 hide_title: true
 ---

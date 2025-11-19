@@ -1,5 +1,6 @@
 ---
-title: "Configuring Pub/Sub as a Snowbridge Source"
+title: "Configuring Pub/Sub as a Snowbridge source"
+sidebar_label: "PubSub"
 description: "Read data from a PubSub topic."
 ---
 

@@ -1,5 +1,6 @@
 ---
-title: "React Native Tracker Quick Start Guide"
+title: "React Native tracker quick start guide"
+sidebar_label: "Quick start guide"
 date: "2021-08-06"
 sidebar_position: 0
 ---

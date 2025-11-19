@@ -1,5 +1,6 @@
 ---
-title: "Upgrading the Python Tracker"
+title: "Upgrading the Python tracker"
+sidebar_label: "Upgrading to Newer Versions"
 sidebar_position: 100
 ---
 

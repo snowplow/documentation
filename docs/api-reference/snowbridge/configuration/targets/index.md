@@ -1,5 +1,6 @@
 ---
-title: "Configuring Targets in Snowbridge"
+title: "Configuring targets in Snowbridge"
+sidebar_label: "Targets"
 date: "2022-10-20"
 sidebar_position: 300
 ---

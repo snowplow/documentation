@@ -1,5 +1,6 @@
 ---
-title: "Migration Guide: Node.js Tracker v3 → v4"
+title: "Migration guide for Node.js tracker v3 to v4"
+sidebar_label: "Migrating from v3 to v4"
 sidebar_position: 1100
 ---
 

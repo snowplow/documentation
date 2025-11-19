@@ -1,5 +1,6 @@
 ---
-title: "Getting Started with the Ruby Tracker"
+title: "Getting started with the Ruby tracker"
+sidebar_label: "Getting started"
 date: "2021-10-15"
 sidebar_position: 0
 ---

@@ -1,5 +1,6 @@
 ---
-title: "Adding Context & Data to Events in the Rust Tracker"
+title: "Adding context and data to events in the Rust tracker"
+sidebar_label: "Adding data to your events: context and more"
 date: "2022-10-24"
 sidebar_position: 4000
 ---

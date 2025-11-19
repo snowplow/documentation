@@ -1,5 +1,6 @@
 ---
-title: Introduction to the Unified Digital DBT Package
+title: "Introduction to the unified digital dbt package"
+sidebar_label: "Introduction"
 position: 1
 ---
 

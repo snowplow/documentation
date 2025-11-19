@@ -12,6 +12,11 @@ The extended cross-navigation format is `_sp={domainUserId}.{timestamp}.{session
 
 If this enrichment isn't enabled, Enrich parses the `_sp` querystring parameter according to the short format, `_sp={domainUserId}.{timestamp}`
 
+:::note Event fields always populated
+The pipeline will always populate the `refr_domain_userid` and `refr_dvce_tstamp` enriched event fields, even if this enrichment isn't enabled.
+:::
+
+
 ## Configuration
 
 - [Schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/cross_navigation_config/jsonschema/1-0-0)
@@ -35,4 +40,4 @@ This enrichment extracts the `_sp` querystring parameter from the `page_url` fie
 
 This enrichment adds a new derived entity to the enriched event based on [this schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/cross_navigation/jsonschema/1-0-0).
 
-Also, it populates the `refr_domain_userid` and `refr_dvce_tstamp` enriched event fields.
+Enrich always populates the `refr_domain_userid` and `refr_dvce_tstamp` enriched event fields.

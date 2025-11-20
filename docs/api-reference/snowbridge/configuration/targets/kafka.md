@@ -1,5 +1,6 @@
 ---
-title: "Kafka"
+title: "Configuring Kafka as a Snowbridge target"
+sidebar_label: "Kafka"
 description: "Write data to a Kafka topic."
 ---
 

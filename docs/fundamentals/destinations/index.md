@@ -1,5 +1,6 @@
 ---
-title: "Destinations"
+title: "Fundamentals of destinations in Snowplow"
+sidebar_label: "Destinations"
 sidebar_position: 6
 description: "Different options for storing and forwarding Snowplow data"
 ---

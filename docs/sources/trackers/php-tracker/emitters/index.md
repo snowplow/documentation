@@ -1,5 +1,6 @@
 ---
-title: "Emitters"
+title: "Emitters configuration for the PHP tracker"
+sidebar_label: "Emitters"
 date: "2020-02-26"
 sidebar_position: 40
 ---

@@ -1,5 +1,6 @@
 ---
-title: "Initialization"
+title: "Introduction to .NET tracker initialization"
+sidebar_label: "Initialization"
 date: "2020-02-26"
 sidebar_position: 20
 ---

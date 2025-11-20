@@ -1,5 +1,6 @@
 ---
-title: "Overridable macros"
+title: "Overridable macros in dbt package mechanics"
+sidebar_label: "Overridable macros"
 sidebar_position: 20
 ---
 ```mdx-code-block

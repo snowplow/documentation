@@ -1,5 +1,6 @@
 ---
-title: "SQS"
+title: "Configuring SQS as a Snowbridge target"
+sidebar_label: "SQS"
 description: "Write data to an SQS queue."
 ---
 

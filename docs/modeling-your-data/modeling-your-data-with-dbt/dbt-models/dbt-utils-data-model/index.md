@@ -1,5 +1,6 @@
 ---
-title: "Utils"
+title: "Utils dbt data model overview"
+sidebar_label: "Utils"
 sidebar_position: 60
 description: "The Snowplow Utils dbt Package"
 hide_title: true

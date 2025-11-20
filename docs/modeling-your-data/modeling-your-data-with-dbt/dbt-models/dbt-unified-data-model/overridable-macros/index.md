@@ -1,5 +1,6 @@
 ---
-title: "Overridable Macros"
+title: "Overridable macros in the unified data model in dbt"
+sidebar_label: "Overridable Macros"
 sidebar_position: 100
 description: "Overridable macros in the Unified package"
 hide_title: true

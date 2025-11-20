@@ -1,5 +1,6 @@
 ---
-title: "Web"
+title: "Migration guide for legacy web data model"
+sidebar_label: "Web"
 sidebar_position: 900
 ---
 ```mdx-code-block

@@ -1,5 +1,6 @@
 ---
-title: "Mobile"
+title: "Migration guide for the mobile data model"
+sidebar_label: "Mobile"
 sidebar_position: 910
 ---
 

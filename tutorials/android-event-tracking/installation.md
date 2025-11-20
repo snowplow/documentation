@@ -1,6 +1,7 @@
 ---
 position: 1
-title: Installation and Setup
+title: "Android event tracking installation guide"
+sidebar_label: "Installation and Setup"
 ---
 
 ### Requirements

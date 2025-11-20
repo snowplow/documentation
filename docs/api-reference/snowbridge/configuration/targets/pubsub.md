@@ -1,5 +1,6 @@
 ---
-title: "PubSub"
+title: "Configuring Pub/Sub as a Snowbridge target"
+sidebar_label: "PubSub"
 description: "Write data to a Pubsub topic."
 ---
 

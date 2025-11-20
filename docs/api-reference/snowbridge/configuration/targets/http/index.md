@@ -1,5 +1,6 @@
 ---
-title: "HTTP"
+title: "Configuring HTTP as a Snowbridge target"
+sidebar_label: "HTTP"
 description: "Send data over HTTP."
 ---
 

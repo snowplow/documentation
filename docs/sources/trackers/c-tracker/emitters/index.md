@@ -1,5 +1,6 @@
 ---
-title: "Emitters"
+title: "Emitters configuration for the C tracker"
+sidebar_label: "Emitters"
 date: "2020-02-25"
 sidebar_position: 60
 ---

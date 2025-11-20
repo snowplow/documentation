@@ -1,5 +1,6 @@
 ---
-title: "Adding data to your events: context and more"
+title: "Adding context and data to events in the Roku tracker"
+sidebar_label: "Adding data to your events: context and more"
 date: "2021-11-16"
 sidebar_position: 3000
 ---

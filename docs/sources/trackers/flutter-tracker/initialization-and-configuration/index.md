@@ -1,5 +1,6 @@
 ---
-title: "Initialization and configuration"
+title: "Initialization and configuration for the Flutter tracker"
+sidebar_label: "Initialization and configuration"
 sidebar_position: 2000
 ---
 

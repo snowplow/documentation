@@ -1,5 +1,6 @@
 ---
-title: "Kafka"
+title: "Configuring Kafka as a Snowbridge source"
+sidebar_label: "Kafka"
 description: "Read data from a Kafka topic."
 ---
 

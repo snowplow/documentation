@@ -1,5 +1,6 @@
 ---
-title: "Event tracking"
+title: "Event tracking with the Unity tracker"
+sidebar_label: "Event tracking"
 date: "2020-02-26"
 sidebar_position: 80
 ---

@@ -1,5 +1,6 @@
 ---
-title: Introduction
+title: "Introduction to the unified digital dbt package"
+sidebar_label: "Introduction"
 position: 1
 ---
 

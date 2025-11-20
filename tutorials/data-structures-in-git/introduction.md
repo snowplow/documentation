@@ -1,5 +1,6 @@
 ---
-title: Introduction
+title: "Introduction to data structures in Git"
+sidebar_label: "Introduction"
 position: 1
 ---
 

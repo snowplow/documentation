@@ -1,5 +1,6 @@
 ---
-title: "Declarative entities with Global Context"
+title: "Declarative entities with global context for React Native tracker"
+sidebar_label: "Declarative entities with Global Context"
 date: "2022-08-30"
 sidebar_position: 20
 ---

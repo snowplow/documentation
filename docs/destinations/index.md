@@ -1,5 +1,5 @@
 ---
-title: "Destinations"
+title: "Snowplow destinations overview"
 sidebar_label: "Destinations"
 sidebar_position: 6
 ---

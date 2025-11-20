@@ -1,5 +1,6 @@
 ---
-title: "Ecommerce"
+title: "Ecommerce event tracking for web trackers"
+sidebar_label: "Ecommerce"
 sidebar_position: 70
 ---
 

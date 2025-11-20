@@ -1,5 +1,6 @@
 ---
-title: "Configuration"
+title: "Configuration reference for enrichment components"
+sidebar_label: "Configuration"
 date: "2021-08-14"
 sidebar_position: 50
 ---

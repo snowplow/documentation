@@ -1,5 +1,6 @@
 ---
-title: "Media tracking"
+title: "Media tracking with the Roku tracker"
+sidebar_label: "Media tracking"
 date: "2021-12-23"
 sidebar_position: 4500
 ---

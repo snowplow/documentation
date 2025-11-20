@@ -1,5 +1,6 @@
 ---
-title: "Anonymous Tracking"
+title: "Anonymous tracking for React Native tracker"
+sidebar_label: "Anonymous Tracking"
 date: "2022-08-30"
 sidebar_position: 25
 ---

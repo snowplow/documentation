@@ -1,0 +1,141 @@
+/* Reset any table-of-contents or sidebar styles */
+.tutorials-page-wrapper .table-of-contents,
+.tutorials-page-wrapper .theme-doc-sidebar-container {
+  display: none !important;
+}
+
+/* Specific isolation for tutorials layout */
+.tutorials-isolated {
+  /* Remove any inherited constraints */
+  width: 100% !important;
+  max-width: 80rem !important;
+}
+
+/* Override any docs-specific card or component styling */
+.tutorials-isolated .grid {
+  display: grid !important;
+}
+
+.tutorials-isolated .gap-6 {
+  gap: 1.5rem !important;
+}
+
+/* Ensure proper grid behavior with more specific targeting */
+.tutorials-isolated .grid-cols-12 {
+  grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+  display: grid !important;
+}
+
+.tutorials-isolated .col-span-3,
+.tutorials-isolated .hidden.lg\\:block.lg\\:col-span-3 {
+  grid-column: span 3 / span 3 !important;
+}
+
+.tutorials-isolated .col-span-9,
+.tutorials-isolated .col-span-12.lg\\:col-span-9 {
+  grid-column: span 9 / span 9 !important;
+}
+
+.tutorials-isolated .col-span-12 {
+  grid-column: span 12 / span 12 !important;
+}
+
+/* Force desktop grid layout */
+@media (min-width: 1024px) {
+  .tutorials-isolated .hidden.lg\\:block {
+    display: block !important;
+  }
+
+  .tutorials-isolated .lg\\:col-span-3 {
+    grid-column: span 3 / span 3 !important;
+  }
+
+  .tutorials-isolated .lg\\:col-span-9 {
+    grid-column: span 9 / span 9 !important;
+  }
+}
+
+/* Responsive behavior */
+@media (max-width: 1023px) {
+  .tutorials-isolated .lg\:block {
+    display: none !important;
+  }
+
+  .tutorials-isolated .lg\:hidden {
+    display: block !important;
+  }
+
+  .tutorials-isolated .lg\:col-span-9 {
+    grid-column: span 12 / span 12 !important;
+  }
+}
+
+/* Extra wide screens - limit layout and center */
+@media (min-width: 1600px) {
+  .tutorials-container {
+    max-width: 1600px !important;
+    margin: 0 auto !important;
+    justify-content: center !important;
+    display: flex !important;
+  }
+
+  .tutorials-layout {
+    max-width: 1400px !important;
+    margin: 0 auto !important;
+  }
+
+}
+
+/* Force clean accordion styling - override Docusaurus theme */
+.tutorials-isolated [data-slot="accordion"] {
+  background: transparent !important;
+}
+
+.tutorials-isolated [data-slot="accordion-item"] {
+  background: white !important;
+  border: 1px solid hsl(var(--border)) !important;
+  border-radius: 0.5rem !important;
+  padding: 0 1rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.tutorials-isolated [data-slot="accordion-trigger"] {
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 0.75rem 0 !important;
+  font-weight: 500 !important;
+  color: hsl(var(--foreground)) !important;
+}
+
+.tutorials-isolated [data-slot="accordion-trigger"]:hover {
+  background: transparent !important;
+  color: hsl(var(--foreground) / 0.8) !important;
+}
+
+.tutorials-isolated [data-slot="accordion-content"] {
+  background: transparent !important;
+  padding-bottom: 1rem !important;
+  padding-top: 0 !important;
+}
+
+/* Dark mode accordion overrides */
+@media (prefers-color-scheme: dark) {
+  .tutorials-isolated [data-slot="accordion-item"] {
+    background: hsl(var(--background)) !important;
+  }
+}
+
+/* Remove default margins from headings within accordions */
+.tutorials-isolated [data-slot="accordion-trigger"] h3,
+.tutorials-isolated [data-slot="accordion-trigger"] h2,
+.tutorials-isolated [data-slot="accordion-trigger"] h1 {
+  margin: 0 !important;
+}
+
+/* Adjust accordion content spacing */
+.tutorials-isolated [data-slot="accordion-content"] > div {
+  padding-top: 0 !important;
+  padding-bottom: 1rem !important;
+}
+

@@ -1,0 +1,108 @@
+import React from 'react'
+import Link from '@docusaurus/Link'
+import { Card, CardContent } from '@site/src/components/ui/card'
+import { cn } from '@site/src/lib/utils'
+import { Tutorial } from './models'
+import { getSteps } from './utils'
+
+// Function to get tutorial progress from localStorage
+function getTutorialProgress(tutorialId: string, totalSteps: number): { completed: number, percentage: number } {
+  if (typeof window === 'undefined') return { completed: 0, percentage: 0 }
+
+  const storedVisited = localStorage.getItem(`tutorial-progress-${tutorialId}`)
+  const visitedSteps = storedVisited ? new Set(JSON.parse(storedVisited)) : new Set()
+  const completed = visitedSteps.size
+  const percentage = totalSteps > 0 ? Math.round((completed / totalSteps) * 100) : 0
+  return { completed, percentage }
+}
+
+function getFirstStepPath(tutorialId: string): string | null {
+  const steps = getSteps(tutorialId)
+  if (steps.length === 0) {
+    return null
+  }
+  return steps[0].path
+}
+
+interface TutorialCardProps {
+  tutorial: Tutorial
+  className?: string
+}
+
+export const TutorialCard: React.FC<TutorialCardProps> = ({ tutorial, className }) => {
+  const firstStep = getFirstStepPath(tutorial.meta.id)
+  const progress = getTutorialProgress(tutorial.meta.id, tutorial.steps.length)
+
+  const cardContent = (
+    <Card className={cn(
+      "h-full bg-indigo-950 text-white border-0 rounded-lg overflow-hidden transition-all duration-200 hover:shadow-lg hover:shadow-indigo-500/20",
+      className
+    )}>
+      <CardContent className="p-6 h-full flex flex-col">
+        {/* Topic/Use Case Tags */}
+        <div className="flex flex-wrap gap-2 mb-4">
+          {tutorial.meta.useCases.length > 0 && (
+            <div className="bg-purple-200 text-purple-800 px-2 py-1 rounded-lg text-[.675rem] font-normal">
+              {tutorial.meta.useCases[0]}
+            </div>
+          )}
+          <div className="bg-purple-200 text-purple-800 px-2 py-1 rounded-lg text-[.675rem] font-normal">
+            {tutorial.meta.label}
+          </div>
+        </div>
+
+        {/* Title and Description */}
+        <div className="flex-1 mb-4">
+          <h3 className="text-xl font-semibold mb-2 text-white leading-tight">
+            {firstStep
+              ? tutorial.meta.title
+              : `${tutorial.meta.title} (No steps found)`}
+          </h3>
+          <p className="text-slate-300 text-sm leading-relaxed">
+            {tutorial.meta.description}
+          </p>
+        </div>
+
+        {/* Progress Section */}
+        <div className="mt-auto">
+          <div className="flex justify-between items-center mb-2">
+            <span className="text-slate-300 text-sm">Progress</span>
+            <span className="text-slate-300 text-sm">
+              {progress.completed}/{tutorial.steps.length}
+            </span>
+          </div>
+
+          {/* Segmented Progress Bar */}
+          <div className="flex gap-1">
+            {Array.from({ length: tutorial.steps.length }, (_, index) => (
+              <div
+                key={index}
+                className={cn(
+                  "flex-1 h-2 rounded-sm transition-colors duration-300",
+                  index < progress.completed
+                    ? "bg-green-500 rounded-full"
+                    : "bg-white/20 rounded-full"
+                )}
+              />
+            ))}
+          </div>
+        </div>
+      </CardContent>
+    </Card>
+  )
+
+  return firstStep ? (
+    <Link
+      to={firstStep}
+      className="block h-full text-inherit hover:text-inherit hover:no-underline"
+    >
+      {cardContent}
+    </Link>
+  ) : (
+    <div className="h-full opacity-60">
+      {cardContent}
+    </div>
+  )
+}
+
+export default TutorialCard

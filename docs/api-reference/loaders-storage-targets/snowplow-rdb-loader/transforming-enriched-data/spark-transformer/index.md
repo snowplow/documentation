@@ -45,7 +45,7 @@ where `region` is one of `us-east-1`, `us-east-2`, `us-west-1`, `us-west-2`, `eu
 
 ## Configuring the EMR cluster
 
-:::caution
+:::warning
 
 Starting from version `5.5.0`, batch transformer requires to use Java 11 on EMR ([default is Java 8](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/configuring-java8.html)). See the `bootstrapActionConfigs` section in the configuration below.
 

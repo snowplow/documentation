@@ -65,7 +65,7 @@ exceptions:
   - ZIP
 
   # Added for Snowplow
-  - BDP
+  - CDI
   - DNS
   - SQS
   - UUID
@@ -75,3 +75,5 @@ exceptions:
   - SSO
   - AWS
   - GCP
+  - HAR
+  - GCS

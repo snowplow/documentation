@@ -4,23 +4,21 @@ date: "2020-02-15"
 sidebar_position: 9
 sidebar_custom_props:
   header: " "
-  offerings:
-    - bdp
 sidebar_label: "Account management"
 ---
 
-Manage your account configuration and users using the Snowplow BDP Console. You can also use the underlying API directly. This page describes how to acquire an API key.
+Manage your account configuration and users using the Snowplow Console. You can also use the underlying API directly. This page describes how to acquire an API key.
 
 ## Credentials API
 
-The API that drives BDP Console's functionality is [publicly documented](https://console.snowplowanalytics.com/api/msc/v1/docs/index.html?url=/api/msc/v1/docs/docs.yaml) and available for our customers to invoke via code. All calls to it need to be properly authenticated using JSON Web Tokens (JWT) that can be acquired via the Credentials API.
+The API that drives Console's functionality is [publicly documented](https://console.snowplowanalytics.com/api/msc/v1/docs/index.html?url=/api/msc/v1/docs/docs.yaml) and available for our customers to invoke via code. All calls to it need to be properly authenticated using JSON Web Tokens (JWT) that can be acquired via the Credentials API.
 
 The process for creating a key has been improved over time. We recommend using the v3 process.
 
 
 ### Version 3
 
-The following view is available to all customers under [BDP Console settings](https://console.snowplowanalytics.com/credentials):
+The following view is available to all customers under [Console settings](https://console.snowplowanalytics.com/credentials):
 
 ![](images/accessing-generated-api-keys.png)
 
@@ -41,11 +39,7 @@ curl \
   https://console.snowplowanalytics.com/api/msc/v1/organizations/<ORGANIZATION_ID>/credentials/v3/token
 ```
 
-You can find your organization's ID in the BDP Console URL:
-
-![This image has an empty alt attribute; its file name is orgID.png](images/orgID.png)
-
-The organization ID is the UUID in the first URL segment after the host
+You can find your Organization ID [on the _Manage organization_ page](https://console.snowplowanalytics.com/settings) in Console.
 
 The curl command above will return a JWT as follows:
 
@@ -80,11 +74,7 @@ curl \
   https://console.snowplowanalytics.com/api/msc/v1/organizations/<ORGANIZATION_ID>/credentials/v2/token
 ```
 
-You can find your organization's ID within the BDP Console URL:
-
-![This image has an empty alt attribute; its file name is orgID.png](images/orgID.png)
-
-The organization ID is the UUID in the first URL segment after the host.
+You can find your Organization ID [on the _Manage organization_ page](https://console.snowplowanalytics.com/settings) in Console.
 
 The curl command above will return a JWT as follows:
 
@@ -103,10 +93,10 @@ Authenticating with v2 only required the API key secret. While this method and t
 
 ### Version 1
 
-Previously, BDP Console was using the Password authentication flow to support machine-to-machine (m2m) applications. Under that scenario a BDP customer had to create a bot user in their account, retrieve a client ID and a client secret, and use all three to acquire a JWT. Customers who have enabled these credentials in the past will see the following panel in their Console account settings:
+Previously, Console was using the Password authentication flow to support machine-to-machine (m2m) applications. Under that scenario a customer had to create a bot user in their account, retrieve a client ID and a client secret, and use all three to acquire a JWT. Customers who have enabled these credentials in the past will see the following panel in their Console account settings:
 
 ![](images/image-2.png)
 
-Legacy Snowplow BDP credentials management
+Legacy Snowplow credentials management
 
 This method and the respective credentials still work for those who have been using them, however we strongly advise that customers upgrade to the current iteration where the only secret to be used by m2m applications is an API key which can be exchanged for a JWT.

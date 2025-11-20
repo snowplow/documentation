@@ -10,7 +10,6 @@ This is the source for https://docs.snowplow.io/docs.
 - [Organizing content](#organizing-content)
   - [Sidebar](#sidebar)
     - [Updating sidebar attributes for multiple sections at once](#updating-sidebar-attributes-for-multiple-sections-at-once)
-  - [Offerings](#offerings)
   - [Links](#links)
   - [Concepts](#concepts)
   - [Reusable fragments](#reusable-fragments)
@@ -143,26 +142,6 @@ It'll update the `index.md` files as appropriate.
 
 You can now delete the `update_attributes_here.txt` file.
 
-### Offerings
-
-Some documentation is only relevant to a particular offering. You can indicate it like this:
-```
----
-title: ...
-...
-sidebar_custom_props:
-  offerings:
-    - bdp
-...
----
-```
-
-This will result in an icon appearing in the sidebar, as well as an automatic banner on the page, specifying that the docs only apply to a given offering.
-
-The available values are: `bdp` and `community`. Do not specify both values at once — if a piece of documentation is relevant to all offerings, there should be no `offerings` property as that’s the default.
-
-Whenever the same functionality can be achieved in multiple offerings but in a different way (e.g. managing schemas), create a parent folder (“Managing schemas”) that’s offering-neutral, and then add offering-specific pages inside it. This way, other pages can link to the generic page without having to specify different methods for different offerings.
-
 ### Links
 
 For links within this documentation, please end the link with `/index.md`. This way all links will be checked, and you’ll get an error if a link is broken at any point.
@@ -182,15 +161,15 @@ There are several key concepts in Snowplow: events (self-describing, structured)
 * If you are writing about schemas, pick “schema” or “data structure” and stick with it
 
 **Please, do not over-explain these in any of your writing.** Instead, just link to one of the existing concept pages:
-* Events in general: `/docs/understanding-your-pipeline/events/index.md`
-* Custom events: `/docs/understanding-your-pipeline/events/index.md#self-describing-events`
-* Self-describing events: `/docs/understanding-your-pipeline/events/index.md#self-describing-events`
-* Structured events: `/docs/understanding-your-pipeline/events/index.md#structured-events`
-* Entities in general: `/docs/understanding-your-pipeline/entities/index.md`
-* Custom entities: `/docs/understanding-your-pipeline/events/index.md#custom-entities`
-* Schemas: `/docs/understanding-your-pipeline/schemas/index.md`
-* Iglu resolvers/registries: `/docs/understanding-your-pipeline/schemas/index.md#iglu`
-* Failed events: `/docs/understanding-your-pipeline/failed-events/index.md`
+* Events in general: `/docs/fundamentals/events/index.md`
+* Custom events: `/docs/fundamentals/events/index.md#self-describing-events`
+* Self-describing events: `/docs/fundamentals/events/index.md#self-describing-events`
+* Structured events: `/docs/fundamentals/events/index.md#structured-events`
+* Entities in general: `/docs/fundamentals/entities/index.md`
+* Custom entities: `/docs/fundamentals/entities/index.md#custom-entities`
+* Schemas: `/docs/fundamentals/schemas/index.md`
+* Iglu resolvers/registries: `/docs/fundamentals/schemas/index.md#iglu`
+* Failed events: `/docs/fundamentals/failed-events/index.md`
 
 ### Reusable fragments
 

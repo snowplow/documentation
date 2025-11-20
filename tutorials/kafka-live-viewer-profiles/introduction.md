@@ -30,11 +30,11 @@ Please start by reviewing how the application works in the next page on Localsta
 The solution comprises several interconnected components:
 
 - **Web Tracking Application**:
-  - A React application with a video to watch. Snowplow's media tracking has been configured to send events (e.g., play, pause, ad skipped) to the [Snowplow Collector](/docs/fundamentals/architecture-overview).
+  - A React application with a video to watch. Snowplow's media tracking has been configured to send events (e.g., play, pause, ad skipped) to the [Snowplow Collector](/docs/fundamentals/).
   - Code available in [tracker-frontend](https://github.com/snowplow-industry-solutions/kafka-live-viewer-profiles/tree/main/tracker-frontend) folder in GitHub
 
 - **Snowplow Collector**:
-  - Collects and forwards events via [Stream Enrich](/docs/fundamentals/architecture-overview) and Kinesis to [Snowbridge](/docs/destinations/forwarding-events/snowbridge).
+  - Collects and forwards events via [Stream Enrich](/docs/fundamentals/) and Kinesis to [Snowbridge](/docs/api-reference/snowbridge).
 
 - **Snowplow Snowbridge**:
   - Publishes events to Kafka for the Live Viewer Backend to consume
@@ -50,7 +50,7 @@ The solution comprises several interconnected components:
 The following diagram maps out where each component sits in the end to end communication flow.
 ![Architecture Diagram](images/architecture.png)
 
-### Components & Configuration
+### Components and Configuration
 The following files in the [GitHub repository](https://github.com/snowplow-industry-solutions/kafka-live-viewer-profiles) can be used  to configure the project's components.
 - **Snowplow components**: `docker/compose.snowplow.yaml`
 - **Kafka infrastructure**: `docker/compose.kafka.yaml`

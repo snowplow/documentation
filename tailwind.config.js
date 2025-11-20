@@ -47,6 +47,45 @@ module.exports = {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      keyframes: {
+        "accordion-down": {
+          from: { height: "0", opacity: "0" },
+          to: { height: "var(--radix-accordion-content-height)", opacity: "1" },
+        },
+        "accordion-up": {
+          from: { height: "var(--radix-accordion-content-height)", opacity: "1" },
+          to: { height: "0", opacity: "0" },
+        },
+        "fade-out": {
+          from: { opacity: "1" },
+          to: { opacity: "0" },
+        },
+        "fade-in": {
+          from: { opacity: "0" },
+          to: { opacity: "1" },
+        },
+        "slide-in-from-top": {
+          from: { transform: "translateY(-100%)" },
+          to: { transform: "translateY(0)" },
+        },
+        "slide-in-from-bottom": {
+          from: { transform: "translateY(100%)" },
+          to: { transform: "translateY(0)" },
+        },
+        "slide-out-to-right": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(100%)" },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.15s ease-in-out",
+        "accordion-up": "accordion-up 0.15s ease-in-out",
+        "fade-out-80": "fade-out 0.15s ease-in-out",
+        "fade-in": "fade-in 0.15s ease-in-out",
+        "slide-in-from-top-full": "slide-in-from-top 0.15s ease-out",
+        "slide-in-from-bottom-full": "slide-in-from-bottom 0.15s ease-out",
+        "slide-out-to-right-full": "slide-out-to-right 0.15s ease-in",
+      },
       typography: {
         DEFAULT: {
           css: {
@@ -57,11 +96,13 @@ module.exports = {
             '--tw-prose-counters': 'hsl(var(--muted-foreground))',
             '--tw-prose-bullets': 'hsl(var(--muted-foreground))',
             '--tw-prose-hr': 'hsl(var(--border))',
+            '--tw-prose-kbd': 'hsl(var(--foreground))',
             '--tw-prose-quotes': 'hsl(var(--foreground))',
             '--tw-prose-quote-borders': 'hsl(var(--border))',
             '--tw-prose-captions': 'hsl(var(--muted-foreground))',
             '--tw-prose-code': 'hsl(var(--foreground))',
             '--tw-prose-pre-code': 'hsl(var(--foreground))',
+            '--tw-prose-pre-bg': 'hsl(var(--prism-background-color))',
             '--tw-prose-th-borders': 'hsl(var(--border))',
             '--tw-prose-td-borders': 'hsl(var(--border))',
             '--tw-prose-invert-body': 'hsl(var(--foreground))',

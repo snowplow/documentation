@@ -2,10 +2,10 @@
 title: "Timestamps"
 description: ""
 date: "2025-05-15"
-sidebar_position: 4
+sidebar_position: 400
 ---
 
-Snowplow events have multiple timestamps that are added as the payload moves through the pipeline. The set of timestamps is designed to account for devices with incorrectly set clocks, or delays in event sending due to network outages.
+Snowplow events have multiple timestamps that are added as the payload moves through the pipeline. The set of timestamps is designed to account for devices with incorrectly set clocks, or delays in event sending due to network outages. All timestamps are converted to UTC for consistency across events.
 
 The timestamps are:
 
@@ -18,7 +18,7 @@ The timestamps are:
 | `derived_tstamp`      | [Enrich](/docs/api-reference/enrichment-components/index.md)                        | Calculated from other timestamps, or the same as `true_tstamp`                                                                                                         | ✅             |
 | `etl_tstamp`          | [Enrich](/docs/api-reference/enrichment-components/index.md)                        | The time at which Enrich started processing the event                                                                                                                  | ✅             |
 | `refr_device_tstamp`  | [Enrich](/docs/api-reference/enrichment-components/index.md)                        | Timestamp extracted from the [cross-domain navigation query string](/docs/pipeline/enrichments/available-enrichments/cross-navigation-enrichment/index.md), if present | ❌             |
-| `load_tstamp`         | [Loader](/docs/destinations/warehouses-lakes/loading-process/index.md) or warehouse | Timestamp when the event was loaded into the warehouse                                                                                                                 | ✅             |
+| `load_tstamp`         | [Loader](/docs/destinations/warehouses-lakes/index.md) or warehouse | Timestamp when the event was loaded into the warehouse                                                                                                                 | ✅             |
 
 The `load_tstamp` is added either by the Loader or by the warehouse at the point of loading, depending on the Loader/warehouse. Use this timestamp for incremental processing.
 

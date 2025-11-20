@@ -359,7 +359,7 @@ For more information on this topic please check out the relevant [Tracking Docum
 
 For each type of self-describing event, there will be a dedicated column (or table, in case of Redshift and Postgres) that holds the event-specific fields.
 
-See [querying data](/docs/destinations/warehouses-lakes/querying-data/index.md#self-describing-events) for more details on the structure and how to query it in different warehouses. You might also want to check [how schema definitions translate to the warehouse](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md).
+See [querying data](/docs/destinations/warehouses-lakes/querying-data/index.md#self-describing-events) for more details on the structure and how to query it in different warehouses. You might also want to check [how schema definitions translate to the warehouse](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md).
 
 For more information on this topic please check out the relevant [Tracking Documentation](/docs/events/custom-events/self-describing-events/index.md).
 
@@ -369,7 +369,7 @@ For more information on this topic please check out the relevant [Tracking Docum
 
 For each type of entity, there will be a dedicated column (or table, in case of Redshift and Postgres) that holds entity-specific fields. Note that an event can have any number of entities attached, including multiple entities of the same type. For this reason, the data inside the entity columns is an array.
 
-See [querying data](/docs/destinations/warehouses-lakes/querying-data/index.md#entities) for more details on the structure and how to query it in different warehouses. You might also want to check [how schema definitions translate to the warehouse](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md).
+See [querying data](/docs/destinations/warehouses-lakes/querying-data/index.md#entities) for more details on the structure and how to query it in different warehouses. You might also want to check [how schema definitions translate to the warehouse](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md).
 
 For more information on this topic please check out the relevant [Tracking Documentation](/docs/events/custom-events/context-entities/index.md).
 

@@ -3,9 +3,6 @@ title: "Managing Data Product using Console"
 date: "2024-01-18"
 sidebar_label: "Using the UI"
 sidebar_position: 1
-sidebar_custom_props:
-  offerings:
-    - bdp
 ---
 
 ## Creating and editing a new Data Product using Console
@@ -22,7 +19,7 @@ After selecting "Create from scratch" a form will appear on the page. Enter your
 
 :::note
 _The name of your data product must be unique to ensure proper identification and avoid conflicts._
-:::note
+:::
 
 ![Event specifications](images/event-specifications.png)
 
@@ -44,7 +41,7 @@ In the image below, you can see an example of a data product. It not only provid
 - **Subscribe**; receive notifications of any changes in the data product
 - **Implement tracking**; automatically generate the code for your data product to be included in your application (to learn more visit [Code Generation - automatically generate code for Snowplow tracking SDKs](/docs/data-product-studio/snowtype/index.md))
 
-*Notes: sharing and subscribing is only available for users registered in Snowplow BDP Console.*
+*Notes: sharing and subscribing is only available for users registered in Snowplow Console.*
 
 ![Data product overview](images/data-product-overview.png)
 
@@ -58,7 +55,7 @@ Data Products created prior to the release of [Source Applications](/docs/data-p
 
 ![Updating existing Data Products](images/edit-existing-data-product.png)
 
-Event specifications which contain previously added application IDs will need to be updated to use the identifiers inherited from the Source Applications selected at Data Product level. This process can be done manually but you can reach out to our Support team to help you with that by either logging a request through our Snowplow [BDP Console](https://console.snowplowanalytics.com/) or by directly emailing [support@snowplow.io](mailto:support@snowplow.io).
+Event specifications which contain previously added application IDs will need to be updated to use the identifiers inherited from the Source Applications selected at Data Product level. This process can be done manually but you can reach out to our Support team to help you with that by either logging a request through Snowplow [Console](https://console.snowplowanalytics.com/) or by directly emailing [support@snowplow.io](mailto:support@snowplow.io).
 
 ![Updating existing Event Specifications](images/edit-existing-event-specification.png)
 
@@ -107,3 +104,4 @@ If the new version of the Data Structure introduces incompatibilities with the e
 ![Conflict resolution Event Specification](images/conflict_resolution.png)
 
 This mechanism ensures that teams can benefit from updated Data Structures while maintaining the integrity and accuracy of their Event Specifications. Users are empowered to make informed decisions during the upgrade process, with clear visual cues and options to handle conflicts effectively.
+

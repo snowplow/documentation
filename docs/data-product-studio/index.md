@@ -9,7 +9,7 @@ sidebar_custom_props:
 
 Data Product Studio is a set of tooling for designing and implementing behavioral data event tracking, including schemas (data structures), ownership, observability, and code generation. The tools help you improve data quality, and allow you to add a data contracts/governance guarantee.
 
-The Data Product Studio UI is included in the Snowplow BDP Console.
+The Data Product Studio UI is included in Snowplow Console.
 
 ## Tracking design basics
 
@@ -40,7 +40,7 @@ This is where creating a **Tracking Plan** comes into play. It is a comprehensiv
 - Other relevant information.
 
 :::info
-Snowplow BDP customers can create tracking plans directly in Snowplow instead of using an external document. See [Creating tracking plans](/docs/data-product-studio/event-specifications/tracking-plans/index.md) for more information.
+Snowplow customers can create tracking plans directly in Snowplow instead of using an external document. See [Creating tracking plans](/docs/data-product-studio/event-specifications/tracking-plans/index.md) for more information.
 :::
 
 Snowplow also uses a **schema registry** to store the definition of these data structures.
@@ -119,7 +119,7 @@ The following are our recommendations, but in general, it's more important to be
 
 * Use snake case for both the schema and properties. This will ensure that the names are consistent with how the properties end up in the warehouse (for some warehouses, property names are converted to snake case regardless of how they are defined in the schemas). Avoid using hyphens to separate words, instead use underscores.
 * Use the verb – noun convention for event names. For instance, `add_to_cart`, `play_video`.
-* Be consistent about the tense (present or past). Make sure that all your events use the same tense (e.g., `play` and `pause` instead of `played` and `pause`).
+* Be consistent about the tense (present or past) for event and property names. For example, `play` and `pause` events, instead of `played` (past tense) and `pause` (present tense).
 * Use singular in the entity name (e.g., `product` instead of `products`).
 * Prefer not to use nested objects in the JSON schema as this will make it more difficult to work with the data in Redshift.
 
@@ -153,7 +153,7 @@ These questions may help when defining your events:
 * When should the events happen? What are the triggers of the events?
 
 :::note Event Specifications
-The last two questions above can be captured using [event specifications in BDP Enterprise and Cloud](https://snowplow.io/blog/tracking-scenarios-release/).
+The last two questions above can be captured using [event specifications](https://snowplow.io/blog/tracking-scenarios-release/).
 :::
 
 A common challenge in defining event schemas is the choice of their granularity.
@@ -199,8 +199,7 @@ It is not obvious from the event name `website_action` what it captures. The eve
 ```
 :::
 
-</div>
-<div style={{ width: "100%" }}>
+Below is a much better option:
 
 :::tip `view_product` and `click_list_item` events
 Each action is represented using a single event schema.

@@ -120,7 +120,7 @@ The Site Search tag can be used to track searches on your website, using the [Si
 | Name           | Required? | Description                     | Example                  |
 | -------------- | --------- | ------------------------------- | ------------------------ |
 | `terms`        | Yes       | Search terms                    | ['unified, log']         |
-| `filters`      | No        | Search filters                  | {'category': 'clothing'} |
+| `filters`      | No        | Search filters                  | \{'category': 'clothing'} |
 | `totalResults` | No        | Results found                   | 10                       |
 | `pageResults`  | No        | Results displayed on first page | 5                        |
 
@@ -211,7 +211,7 @@ The Errors tracker tag provides a way to manually track any errors that occur on
 | `filename` | No            | Filename or URL                     | 'shop.js'                |
 | `lineno`   | No            | Line number of problem code chunk   | 23                       |
 | `colno`    | No            | Column number of problem code chunk | 45                       |
-| `error`    | No            | JS `ErrorEvent`                     | {Stack trace string}     |
+| `error`    | No            | JS `ErrorEvent`                     | \{Stack trace string}     |
 
 </details>
 

@@ -1,7 +1,7 @@
 ---
 title: "Querying Snowplow data"
 sidebar_label: "Querying data"
-sidebar_position: 3
+sidebar_position: 1
 description: "An introduction to querying Snowplow data, including self-describing events and entities, as well tips for dealing with duplicate events"
 ---
 
@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 ## Basic queries
 
-You will typically find most of your Snowplow data in the `events` table. If you are using Redshift or Postgres, there will be extra tables for [self-describing events](/docs/fundamentals/events/index.md#self-describing-events) and [entities](/docs/fundamentals/entities/index.md) — see [below](#self-describing-events).
+You will typically find most of your Snowplow data in the `events` table. If you are using Redshift, there will be extra tables for [self-describing events](/docs/fundamentals/events/index.md#self-describing-events) and [entities](/docs/fundamentals/entities/index.md) — see [below](#self-describing-events).
 
 Please refer to [the structure of Snowplow data](/docs/fundamentals/canonical-event/index.md) for the principles behind our approach, as well as the descriptions of the various standard columns.
 
@@ -31,7 +31,7 @@ WHERE event_name = 'page_view'
 
 You will need to replace `<events>` with the appropriate location — the database, schema and table name will depend on your setup. See this [first steps section](/docs/get-started/querying/index.md#connection-details) for details.
 
-:::caution
+:::warning
 
 With large data volumes (read: any production system), you should always include a filter on the partition key (normally, `collector_tstamp`), for example:
 
@@ -48,9 +48,9 @@ This ensures that you read from the minimum number of (micro-)partitions necessa
 [Self-describing events](/docs/fundamentals/events/index.md#self-describing-events) can contain their own set of fields, defined by their [schema](/docs/fundamentals/schemas/index.md).
 
 <Tabs groupId="warehouse" queryString>
-<TabItem value="redshift/postgres" label="Redshift, Postgres" default>
+<TabItem value="redshift" label="Redshift" default>
 
-For Redshift and Postgres users, self-describing events are not part of the standard `events` table. Instead, each type of event is in its own table. The table name and the fields in the table will be determined by the event’s schema. See [how schemas translate to the warehouse](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md) for more details.
+For Redshift users, self-describing events are not part of the standard `events` table. Instead, each type of event is in its own table. The table name and the fields in the table will be determined by the event’s schema. See [how schemas translate to the warehouse](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md) for more details.
 
 You can query just the table for that particular self-describing event, if that's all that's required for your analysis, or join that table back to the `events` table:
 
@@ -64,7 +64,7 @@ LEFT JOIN
     ON sde.root_id = ev.event_id AND sde.root_tstamp = ev.collector_tstamp
 ```
 
-:::caution
+:::warning
 
 You may need to take care of [duplicate events](#dealing-with-duplicates).
 
@@ -73,7 +73,7 @@ You may need to take care of [duplicate events](#dealing-with-duplicates).
 </TabItem>
 <TabItem value="bigquery" label="BigQuery">
 
-Each type of self-describing event is in a dedicated `RECORD`-type column. The column name and the fields in the record will be determined by the event’s schema. See [how schemas translate to the warehouse](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md) for more details.
+Each type of self-describing event is in a dedicated `RECORD`-type column. The column name and the fields in the record will be determined by the event’s schema. See [how schemas translate to the warehouse](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md) for more details.
 
 You can query fields in the self-describing event like so:
 
@@ -87,14 +87,14 @@ FROM
 ```
 
 :::note
-The column name produced by previous versions of the BigQuery Loader (<2.0.0) would contain full schema version, e.g. `unstruct_event_my_example_event_1_0_0`.
+The column name produced by previous versions of the BigQuery Loader (\<2.0.0) would contain full schema version, e.g. `unstruct_event_my_example_event_1_0_0`.
 The [BigQuery Loader upgrade guide](/docs/api-reference/loaders-storage-targets/bigquery-loader/upgrade-guides/2-0-0-upgrade-guide/index.md) describes how to enable the legacy column names in the 2.0.0 loader.
 :::
 
 </TabItem>
 <TabItem value="snowflake" label="Snowflake">
 
-Each type of self-describing event is in a dedicated `OBJECT`-type column. The column name will be determined by the event’s schema. See [how schemas translate to the warehouse](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md) for more details.
+Each type of self-describing event is in a dedicated `OBJECT`-type column. The column name will be determined by the event’s schema. See [how schemas translate to the warehouse](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md) for more details.
 
 You can query fields in the self-describing event like so:
 
@@ -110,7 +110,7 @@ FROM
 </TabItem>
 <TabItem value="databricks" label="Databricks, Spark SQL">
 
-Each type of self-describing event is in a dedicated `STRUCT`-type column. The column name and the fields in the `STRUCT` will be determined by the event’s schema. See [how schemas translate to the warehouse](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md) for more details.
+Each type of self-describing event is in a dedicated `STRUCT`-type column. The column name and the fields in the `STRUCT` will be determined by the event’s schema. See [how schemas translate to the warehouse](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md) for more details.
 
 You can query fields in the self-describing event by extracting them like so:
 
@@ -126,7 +126,7 @@ FROM
 </TabItem>
 <TabItem value="synapse" label="Synapse Analytics">
 
-Each type of self-describing event is in a dedicated column in JSON format. The column name will be determined by the event’s schema. See [how schemas translate to the warehouse](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md) for more details.
+Each type of self-describing event is in a dedicated column in JSON format. The column name will be determined by the event’s schema. See [how schemas translate to the warehouse](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md) for more details.
 
 You can query fields in the self-describing event like so:
 
@@ -147,9 +147,9 @@ FROM
 [Entities](/docs/fundamentals/entities/index.md) (also known as contexts) provide extra information about the event, such as data describing a product or a user.
 
 <Tabs groupId="warehouse" queryString>
-<TabItem value="redshift/postgres" label="Redshift, Postgres" default>
+<TabItem value="redshift" label="Redshift" default>
 
-For Redshift and Postgres users, entities are not part of the standard `events` table. Instead, each type of entity is in its own table. The table name and the fields in the table will be determined by the entity’s schema. See [how schemas translate to the warehouse](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md) for more details.
+For Redshift users, entities are not part of the standard `events` table. Instead, each type of entity is in its own table. The table name and the fields in the table will be determined by the entity’s schema. See [how schemas translate to the warehouse](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md) for more details.
 
 The entities can be joined back to the core `events` table by the following, which is a one-to-one join (for a single record entity) or a one-to-many join (for a multi-record entity), assuming no duplicates.
 
@@ -163,7 +163,7 @@ LEFT JOIN -- assumes no duplicates, and will return all events regardless of if 
     ON ent.root_id = ev.event_id AND ent.root_tstamp = ev.collector_tstamp
 ```
 
-:::caution
+:::warning
 
 You may need to take care of [duplicate events](#dealing-with-duplicates).
 
@@ -172,7 +172,7 @@ You may need to take care of [duplicate events](#dealing-with-duplicates).
 </TabItem>
 <TabItem value="bigquery" label="BigQuery">
 
-Each type of entity is in a dedicated `REPEATED RECORD`-type column. The column name and the fields in the record will be determined by the entity’s schema. See [how schemas translate to the warehouse](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md) for more details.
+Each type of entity is in a dedicated `REPEATED RECORD`-type column. The column name and the fields in the record will be determined by the entity’s schema. See [how schemas translate to the warehouse](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md) for more details.
 
 You can query a single entity’s fields by extracting them like so:
 
@@ -198,13 +198,13 @@ LEFT JOIN
     unnest(contexts_my_entity_1) AS my_ent -- left join to avoid discarding events without values in this entity
 ```
 :::note
-Column name produced by previous versions of the BigQuery Loader (<2.0.0) would contain full schema version, e.g.  `contexts_my_entity_1_0_0`.
+Column name produced by previous versions of the BigQuery Loader (\<2.0.0) would contain full schema version, e.g.  `contexts_my_entity_1_0_0`.
 :::
 
 </TabItem>
 <TabItem value="snowflake" label="Snowflake">
 
-Each type of entity is in a dedicated `ARRAY`-type column. The column name will be determined by the entity’s schema. See [how schemas translate to the warehouse](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md) for more details.
+Each type of entity is in a dedicated `ARRAY`-type column. The column name will be determined by the entity’s schema. See [how schemas translate to the warehouse](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md) for more details.
 
 You can query a single entity’s fields by extracting them like so:
 
@@ -232,7 +232,7 @@ FROM
 </TabItem>
 <TabItem value="databricks" label="Databricks, Spark SQL">
 
-Each type of entity is in a dedicated `ARRAY<STRUCT>`-type column. The column name and the fields in the `STRUCT` will be determined by the entity’s schema. See [how schemas translate to the warehouse](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md) for more details.
+Each type of entity is in a dedicated `ARRAY<STRUCT>`-type column. The column name and the fields in the `STRUCT` will be determined by the entity’s schema. See [how schemas translate to the warehouse](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md) for more details.
 
 You can query a single entity’s fields by extracting them like so:
 
@@ -260,7 +260,7 @@ FROM
 </TabItem>
 <TabItem value="synapse" label="Synapse Analytics">
 
-Each type of entity is in a dedicated column in JSON format. The column name will be determined by the entity’s schema. See [how schemas translate to the warehouse](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md) for more details.
+Each type of entity is in a dedicated column in JSON format. The column name will be determined by the entity’s schema. See [how schemas translate to the warehouse](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md) for more details.
 
 You can query a single entity’s fields by extracting them like so:
 
@@ -290,7 +290,7 @@ FROM
 
 ## Failed events
 
-See [Exploring failed events](/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/index.md).
+See [Exploring failed events](/docs/monitoring/exploring-failed-events/index.md).
 
 ## Dealing with duplicates
 
@@ -299,9 +299,9 @@ In some cases, your data might contain duplicate events (full deduplication _bef
 While our [data models](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md) deal with duplicates for you, there may be cases where you need to de-duplicate the events table yourself.
 
 <Tabs groupId="warehouse" queryString>
-<TabItem value="redshift/postgres" label="Redshift, Postgres" default>
+<TabItem value="redshift" label="Redshift" default>
 
-In Redshift/Postgres you must first generate a `ROW_NUMBER()` on your events and use this to de-duplicate.
+In Redshift, you must first generate a `ROW_NUMBER()` on your events and use this to de-duplicate.
 
 ```sql
 WITH unique_events AS (

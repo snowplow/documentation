@@ -39,9 +39,9 @@ Some of these are [baked-in events](#baked-in-events), while others are [self-de
 
 You can also create custom events to match your business requirements. For that purpose, you can either define your own [self-describing events](#self-describing-events) (recommended), or use [structured events](#structured-events).
 
-| Out-of-the-box events | Custom events |
-|:-:|:-:|
-| Baked-in events | Structured events |
+|                  Out-of-the-box events                  |                  Custom events                  |
+| :-----------------------------------------------------: | :---------------------------------------------: |
+|                     Baked-in events                     |                Structured events                |
 | Self-describing events <br/> _(predefined by Snowplow)_ | Self-describing events <br/> _(defined by you)_ |
 
 ## Baked-in events
@@ -74,15 +74,15 @@ In the data warehouse, any event-specific information for these events will be i
 
 ## Structured events
 
-:::caution
+:::warning
 
 We recommend using [self-describing events](#self-describing-events) instead of structured events whenever possible. While structured events are simpler to create (as you don’t need to define a [schema](/docs/fundamentals/schemas/index.md)), they have a number of disadvantages:
 
-| | Structured events | Self-describing events |
-|---|---|---|
-| Format | :x: Data must fit the 5 fields below | :white_check_mark: JSON, as complex as you want |
-| Validation | :x: No validation (beyond field types) | :white_check_mark: Schema includes validation criteria |
-| Meaning | :x: Can only infer what each field represents | :white_check_mark: Schema includes field descriptions |
+|            | Structured events                             | Self-describing events                                 |
+| ---------- | --------------------------------------------- | ------------------------------------------------------ |
+| Format     | :x: Data must fit the 5 fields below          | :white_check_mark: JSON, as complex as you want        |
+| Validation | :x: No validation (beyond field types)        | :white_check_mark: Schema includes validation criteria |
+| Meaning    | :x: Can only infer what each field represents | :white_check_mark: Schema includes field descriptions  |
 
 :::
 
@@ -101,9 +101,9 @@ To track a structured event, use one of the [tracking SDKs](/docs/sources/tracke
 
 ```javascript
 snowplow('trackStructEvent', {
-  category: 'Product', 
-  action: 'View', 
-  label: 'ASO01043', 
+  category: 'Product',
+  action: 'View',
+  label: 'ASO01043',
   property: 'Dress',
   value: 49.95
 });

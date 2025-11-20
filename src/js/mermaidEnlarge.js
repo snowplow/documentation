@@ -3,6 +3,9 @@
  * Automatically adds click-to-enlarge to all Mermaid diagrams
  */
 
+// Only run in browser environment (not during SSR)
+if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+
 function initMermaidEnlargement() {
   // Function to add click-to-enlarge to a Mermaid diagram
   function addEnlargementToMermaid(mermaidElement) {
@@ -144,3 +147,6 @@ if (document.readyState === 'loading') {
 
 // Also initialize on window load as backup
 window.addEventListener('load', initMermaidEnlargement);
+
+// End of browser environment check
+}

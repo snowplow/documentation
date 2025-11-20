@@ -36,6 +36,7 @@ module.exports = {
     require.resolve('./snowplow.js'),
     require.resolve('./reoTracking.js'),
     require.resolve('./google.js'),
+    require.resolve('./src/js/mermaidEnlarge.js'),
   ],
 
   markdown: {

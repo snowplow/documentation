@@ -1,7 +1,6 @@
 ---
-title: "Snowplow limited use license agreement v1.1"
+title: "Snowplow Limited Use License Agreement v1.1"
 ---
-# Snowplow Limited Use License Agreement
 
 _Version 1.1, November, 2024_
 

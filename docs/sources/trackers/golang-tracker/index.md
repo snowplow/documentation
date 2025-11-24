@@ -1,5 +1,5 @@
 ---
-title: "Golang Tracker"
+title: "Golang tracker"
 sidebar_position: 170
 ---
 

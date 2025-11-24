@@ -1,5 +1,5 @@
 ---
-title: "Python Tracker"
+title: "Python tracker"
 date: "2023-06-14"
 sidebar_position: 200
 ---

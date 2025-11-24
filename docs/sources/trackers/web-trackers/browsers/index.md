@@ -1,5 +1,6 @@
 ---
-title: "Browser entity"
+title: "Tracking the browser entity with the web trackers"
+sidebar_label: "Browser entity"
 date: "2021-04-07"
 sidebar_position: 2950
 ---

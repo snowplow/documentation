@@ -1,5 +1,5 @@
 ---
-title: "Tracking data out-of-the-box"
+title: "Tracking data out-of-the-box with the web trackers"
 date: "2022-08-30"
 sidebar_position: 2500
 ---

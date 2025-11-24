@@ -1,5 +1,5 @@
 ---
-title: "Getting cookie information"
+title: "Getting cookie information to use in web tracking"
 sidebar_position: 500
 ---
 

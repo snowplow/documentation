@@ -1,5 +1,5 @@
 ---
-title: "Custom event tracking with web trackers"
+title: "Custom event tracking on web"
 sidebar_label: "Custom event tracking"
 date: "2022-08-30"
 sidebar_position: 2600

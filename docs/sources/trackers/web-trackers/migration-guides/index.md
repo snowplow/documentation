@@ -1,5 +1,5 @@
 ---
-title: "Migration guides for web trackers"
+title: "Migration guides for the web trackers"
 sidebar_label: "Migration guides"
 date: "2021-04-12"
 sidebar_position: 4800

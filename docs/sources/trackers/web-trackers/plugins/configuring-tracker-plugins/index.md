@@ -1,5 +1,6 @@
 ---
-title: "Configuring tracker plugins"
+title: "Configuring web tracker plugins"
+sidebar_label: "Configuring tracker plugins"
 sidebar_position: 750
 ---
 

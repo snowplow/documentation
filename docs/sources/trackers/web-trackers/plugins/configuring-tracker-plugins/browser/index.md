@@ -1,5 +1,6 @@
 ---
-title: "Browser (npm) tracker"
+title: "Configuring plugins for the browser (npm) tracker"
+sidebar_label: "Browser (npm) tracker"
 date: "2021-04-19"
 sidebar_position: 500
 ---
@@ -63,8 +64,8 @@ Some plugins, such as the Performance Timing plugin shown above, work automatica
 For example, form tracking:
 
 ```javascript
-newTracker('sp1', '{{collector_url}}', { 
-  appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+  appId: 'my-app-id',
   plugins: [ FormTrackingPlugin() ],
 });
 

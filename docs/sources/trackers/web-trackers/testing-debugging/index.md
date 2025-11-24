@@ -1,5 +1,6 @@
 ---
-title: "Testing, debugging and troubleshooting"
+title: "Testing, debugging and troubleshooting the web trackers"
+sidebar_label: "Testing, debugging and troubleshooting"
 date: "2021-04-07"
 sidebar_position: 2950
 ---

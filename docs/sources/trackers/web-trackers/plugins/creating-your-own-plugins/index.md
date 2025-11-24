@@ -1,5 +1,6 @@
 ---
-title: "Creating your own plugins"
+title: "Creating your own web tracker plugins"
+sidebar_label: "Creating your own plugins"
 sidebar_position: 750
 ---
 
@@ -62,7 +63,7 @@ interface BrowserPlugin {
  to the active logger
  */
  logger?: (logger: Logger) => void;
-} 
+}
 ```
 
 ## Plugin Templates
@@ -124,7 +125,7 @@ window.snowplow('trackMyEvent', { eventProp: 'value' });
   <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
-import { addPlugin } from '@snowplow/browser-tracker'; 
+import { addPlugin } from '@snowplow/browser-tracker';
 
 const myPlugin = {
   contexts: () => {
@@ -171,7 +172,7 @@ window.snowplow('trackPageView');
   <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
-import { newTracker } from '@snowplow/browser-tracker'; 
+import { newTracker } from '@snowplow/browser-tracker';
 
 const myPlugin = {
   filter: (payload) => {

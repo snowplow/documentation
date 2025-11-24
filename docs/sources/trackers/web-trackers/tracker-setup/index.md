@@ -1,5 +1,6 @@
 ---
-title: "Tracker setup"
+title: "Setting up the web trackers"
+sidebar_label: "Tracker setup"
 date: "2021-03-31"
 sidebar_position: 1000
 ---

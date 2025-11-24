@@ -1,6 +1,6 @@
 ---
-title: "Platform and application context tracking for React Native tracker"
-sidebar_label: "Platform and application data tracking"
+title: "Tracking platform and application data with the React Native tracker"
+sidebar_label: "Platform and application data"
 sidebar_position: 10
 ---
 
@@ -55,15 +55,15 @@ The [platform context entity](/docs/events/ootb-data/device-and-browser/index.md
 
 By default only the following properties are tracked automatically:
 
-| Property | Type | Description | Required in schema |
-| --- | --- | --- | --- |
-| `osType` | String | Type of the operating system (e.g., "ios", "tvos", "watchos", "osx", "android") | Yes |
-| `osVersion` | String | Version of the mobile operating system. | Yes |
-| `deviceManufacturer` | String | Device vendor. | Yes |
-| `deviceModel` | String | Model of the device. | Yes |
-| `language` | String | System language currently used on the device (ISO 639) | No |
-| `resolution` | String | Screen resolution in pixels. Arrives in the form of WIDTHxHEIGHT (e.g., 1200x900). Doesn't change when device orientation changes | No |
-| `scale` | Number | Scale factor used to convert logical coordinates to device coordinates of the screen (uses UIScreen.scale on iOS and DisplayMetrics.density on Android) | No |
+| Property             | Type   | Description                                                                                                                                             | Required in schema |
+| -------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| `osType`             | String | Type of the operating system (e.g., "ios", "tvos", "watchos", "osx", "android")                                                                         | Yes                |
+| `osVersion`          | String | Version of the mobile operating system.                                                                                                                 | Yes                |
+| `deviceManufacturer` | String | Device vendor.                                                                                                                                          | Yes                |
+| `deviceModel`        | String | Model of the device.                                                                                                                                    | Yes                |
+| `language`           | String | System language currently used on the device (ISO 639)                                                                                                  | No                 |
+| `resolution`         | String | Screen resolution in pixels. Arrives in the form of WIDTHxHEIGHT (e.g., 1200x900). Doesn't change when device orientation changes                       | No                 |
+| `scale`              | Number | Scale factor used to convert logical coordinates to device coordinates of the screen (uses UIScreen.scale on iOS and DisplayMetrics.density on Android) | No                 |
 
 The platform context entity can be used to track more information.
 However, you will need to pass it manually using callback functions.
@@ -83,23 +83,23 @@ const tracker = await newTracker({
 
 The following table lists all the extra properties that can be set:
 
-| Property | Type | Description | Required in schema |
-| --- | --- | --- | --- |
-| `carrier` | String | Carrier of the SIM inserted in the device. | No |
-| `networkType` | String | One of: "mobile", "wifi", "offline" | No |
-| `networkTechnology` | String | Radio access technology that the device is using. | No |
-| `openIdfa` | String | Deprecated property. | No |
-| `appleIdfa` | String | Advertising identifier on iOS. | No |
-| `appleIdfv` | String | UUID [identifier for vendors](https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor) on iOS. | No |
-| `androidIdfa` | String | Advertising identifier on Android. | No |
-| `physicalMemory` | Integer | Total physical system memory in bytes | No |
-| `systemAvailableMemory` | Integer | Available memory on the system in bytes (Android only) | No |
-| `appAvailableMemory` | Integer | Amount of memory in bytes available to the current app (iOS only) | No |
-| `batteryLevel` | Integer | Remaining battery level as an integer percentage of total battery capacity | No |
-| `batteryState` | String | Battery state for the device. One of: "unplugged", "charging", "full". | No |
-| `lowPowerMode` | Boolean | A Boolean indicating whether Low Power Mode is enabled (iOS only) | No |
-| `availableStorage` | Integer | Bytes of storage remaining | No |
-| `totalStorage` | Integer | Total size of storage in bytes | No |
-| `isPortrait` | Boolean | A Boolean indicating whether the device orientation is portrait (either upright or upside down) | No |
-| `appSetId` | String | Android vendor ID scoped to the set of apps published under the same Google Play developer account (see https://developer.android.com/training/articles/app-set-id) | No |
-| `appSetIdScope` | String (either "app" or "developer") | Scope of the `appSetId`. Can be scoped to the app or to a developer account on an app store (all apps from the same developer on the same device will have the same ID) | No |
+| Property                | Type                                 | Description                                                                                                                                                             | Required in schema |
+| ----------------------- | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------ |
+| `carrier`               | String                               | Carrier of the SIM inserted in the device.                                                                                                                              | No                 |
+| `networkType`           | String                               | One of: "mobile", "wifi", "offline"                                                                                                                                     | No                 |
+| `networkTechnology`     | String                               | Radio access technology that the device is using.                                                                                                                       | No                 |
+| `openIdfa`              | String                               | Deprecated property.                                                                                                                                                    | No                 |
+| `appleIdfa`             | String                               | Advertising identifier on iOS.                                                                                                                                          | No                 |
+| `appleIdfv`             | String                               | UUID [identifier for vendors](https://developer.apple.com/documentation/uikit/uidevice/1620059-identifierforvendor) on iOS.                                             | No                 |
+| `androidIdfa`           | String                               | Advertising identifier on Android.                                                                                                                                      | No                 |
+| `physicalMemory`        | Integer                              | Total physical system memory in bytes                                                                                                                                   | No                 |
+| `systemAvailableMemory` | Integer                              | Available memory on the system in bytes (Android only)                                                                                                                  | No                 |
+| `appAvailableMemory`    | Integer                              | Amount of memory in bytes available to the current app (iOS only)                                                                                                       | No                 |
+| `batteryLevel`          | Integer                              | Remaining battery level as an integer percentage of total battery capacity                                                                                              | No                 |
+| `batteryState`          | String                               | Battery state for the device. One of: "unplugged", "charging", "full".                                                                                                  | No                 |
+| `lowPowerMode`          | Boolean                              | A Boolean indicating whether Low Power Mode is enabled (iOS only)                                                                                                       | No                 |
+| `availableStorage`      | Integer                              | Bytes of storage remaining                                                                                                                                              | No                 |
+| `totalStorage`          | Integer                              | Total size of storage in bytes                                                                                                                                          | No                 |
+| `isPortrait`            | Boolean                              | A Boolean indicating whether the device orientation is portrait (either upright or upside down)                                                                         | No                 |
+| `appSetId`              | String                               | Android vendor ID scoped to the set of apps published under the same Google Play developer account (see https://developer.android.com/training/articles/app-set-id)     | No                 |
+| `appSetIdScope`         | String (either "app" or "developer") | Scope of the `appSetId`. Can be scoped to the app or to a developer account on an app store (all apps from the same developer on the same device will have the same ID) | No                 |

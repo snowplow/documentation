@@ -5,7 +5,6 @@ sidebar_position: 1200
 
 ```mdx-code-block
 import Badges from '@site/src/components/Badges';
-import BadgeGroup from '@site/src/components/BadgeGroup';
 import DocCardList from '@theme/DocCardList';
 ```
 

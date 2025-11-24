@@ -6,7 +6,6 @@ sidebar_position: 0
 
 ```mdx-code-block
 import Badges from '@site/src/components/Badges';
-import BadgeGroup from '@site/src/components/BadgeGroup';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

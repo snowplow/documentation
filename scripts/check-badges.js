@@ -93,6 +93,16 @@ function cleanupBackups() {
 function checkFile(filePath) {
   const content = fs.readFileSync(filePath, 'utf8');
 
+  // Skip special case files that explain how badges work
+  const specialCaseFiles = [
+    'docs/sources/trackers/tracker-maintenance-classification/index.md'
+  ];
+
+  const relativePath = path.relative(process.cwd(), filePath);
+  if (specialCaseFiles.includes(relativePath)) {
+    return null; // Skip special case files
+  }
+
   // Skip if no badges
   if (!content.includes('Badges badgeType')) {
     return null;
@@ -185,7 +195,7 @@ async function main() {
 
     try {
       // Run the badge update script
-      execSync('python3 scripts/update-badge-groups.py', { stdio: 'inherit' });
+      execSync('node scripts/update-badges.js', { stdio: 'inherit' });
       log('green', '✅ Fixed badge formatting issues!');
 
       // Ask user about cleanup

@@ -1,5 +1,5 @@
 ---
-title: "Declarative entities with global context for mobile trackers"
+title: "Declarative entities with global context for the native mobile trackers"
 sidebar_label: "Declarative entities with Global Context"
 date: "2022-08-30"
 sidebar_position: 20
@@ -146,16 +146,16 @@ An entity can be an immutable static entity, or a dynamic entity based off the e
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
 
-|             | All events                 | By event type                                | By event schema                           |
-|-------------|----------------------------|----------------------------------------------|-------------------------------------------|
+|             | All events             | By event type                       | By event schema                       |
+| ----------- | ---------------------- | ----------------------------------- | ------------------------------------- |
 | **Static**  | `[SelfDescribingJson]` | `[SelfDescribingJson], FilterBlock` | `[SelfDescribingJson], SchemaRuleSet` |
-| **Dynamic** | `GeneratorBlock`      | `GeneratorBlock, FilterBlock`      | `GeneratorBlock, SchemaRuleSet`      |
+| **Dynamic** | `GeneratorBlock`       | `GeneratorBlock, FilterBlock`       | `GeneratorBlock, SchemaRuleSet`       |
 
   </TabItem>
   <TabItem value="android" label="Android (Kotlin)">
 
 |             | All events                 | By event type                                | By event schema                           |
-|-------------|----------------------------|----------------------------------------------|-------------------------------------------|
+| ----------- | -------------------------- | -------------------------------------------- | ----------------------------------------- |
 | **Static**  | `List<SelfDescribingJson>` | `List<SelfDescribingJson>, FunctionalFilter` | `List<SelfDescribingJson>, SchemaRuleSet` |
 | **Dynamic** | `FunctionalGenerator`      | `FunctionalGenerator, FunctionalFilter`      | `FunctionalGenerator, SchemaRuleSet`      |
 
@@ -163,7 +163,7 @@ An entity can be an immutable static entity, or a dynamic entity based off the e
   <TabItem value="android-java" label="Android (Java)">
 
 |             | All events                 | By event type                                | By event schema                           |
-|-------------|----------------------------|----------------------------------------------|-------------------------------------------|
+| ----------- | -------------------------- | -------------------------------------------- | ----------------------------------------- |
 | **Static**  | `List<SelfDescribingJson>` | `List<SelfDescribingJson>, FunctionalFilter` | `List<SelfDescribingJson>, SchemaRuleSet` |
 | **Dynamic** | `FunctionalGenerator`      | `FunctionalGenerator, FunctionalFilter`      | `FunctionalGenerator, SchemaRuleSet`      |
 

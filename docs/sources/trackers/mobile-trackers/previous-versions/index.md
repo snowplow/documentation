@@ -1,5 +1,5 @@
 ---
-title: "Previous versions of mobile trackers"
+title: "Previous versions of the native mobile trackers"
 sidebar_label: "Previous versions"
 date: "2021-04-12"
 sidebar_position: 900

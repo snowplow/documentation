@@ -1,6 +1,6 @@
 ---
-title: "Example applications for mobile trackers"
-sidebar_label: "Example Applications"
+title: "Example applications for the native mobile trackers"
+sidebar_label: "Example applications"
 sidebar_position: 9999
 ---
 

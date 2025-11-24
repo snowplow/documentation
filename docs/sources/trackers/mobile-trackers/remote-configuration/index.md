@@ -1,5 +1,6 @@
 ---
-title: "Update tracker configuration remotely"
+title: "Update the native mobile trackers configuration remotely"
+sidebar_label: "Update tracker configuration remotely"
 date: "2022-08-30"
 sidebar_position: 50
 ---

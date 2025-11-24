@@ -1,5 +1,5 @@
 ---
-title: "Limited use license FAQ"
+title: "FAQ: Snowplow Limited Use License Agreement (SLULA)"
 ---
 
 # FAQ: Snowplow Limited Use License Agreement (SLULA)

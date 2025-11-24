@@ -1,5 +1,5 @@
 ---
-title: "Hints & Workflows"
+title: "Hints and workflows"
 date: "2020-08-26"
 sidebar_position: 60
 ---

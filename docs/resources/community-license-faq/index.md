@@ -1,5 +1,5 @@
 ---
-title: "Community license FAQ"
+title: "FAQ: Snowplow Community License (SCL)"
 ---
 
 # FAQ: Snowplow Community License (SCL)

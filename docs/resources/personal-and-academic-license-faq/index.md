@@ -1,5 +1,5 @@
 ---
-title: "Personal and academic license FAQ"
+title: "FAQ: Snowplow Personal & Academic License (SPAL)"
 ---
 # FAQ: Snowplow Personal & Academic License (SPAL)
 

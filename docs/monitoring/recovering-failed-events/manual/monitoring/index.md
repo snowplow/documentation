@@ -1,5 +1,5 @@
 ---
-title: "Monitoring manual recovery of failed events"
+title: "Monitoring the event recovery"
 sidebar_label: "Monitoring"
 date: "2020-08-26"
 sidebar_position: 40

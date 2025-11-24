@@ -1,5 +1,5 @@
 ---
-title: "Migration guide for legacy web data model"
+title: "Migration guide for Web"
 sidebar_label: "Web"
 sidebar_position: 900
 ---
@@ -7,6 +7,8 @@ sidebar_position: 900
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
+
+This is a legacy package.
 
 ### Upgrading to 0.16.0
 

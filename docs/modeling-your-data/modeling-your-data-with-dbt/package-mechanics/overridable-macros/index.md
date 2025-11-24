@@ -1,5 +1,5 @@
 ---
-title: "Overridable macros in dbt package mechanics"
+title: "Overridable macros in Snowplow dbt packages"
 sidebar_label: "Overridable macros"
 sidebar_position: 20
 ---

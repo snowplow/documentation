@@ -1,15 +1,11 @@
 ---
-title: "Configuration guide for dbt modeling"
+title: "Configure Snowplow dbt packages"
 sidebar_label: "Configuration"
 description: "Information for the configuration of our dbt packages"
 sidebar_position: 40
 ---
 
-:::info
-
-This page details general configurations that can apply across many of our packages, each package has specific configuration variables that define how the models run, please see each child page for the specifics of each package.
-
-:::
+This page details general configurations that can apply across many of our packages. Each package has specific configuration variables that define how the models run, please see each child page for the specifics of each package.
 
 ## Variables
 
@@ -72,9 +68,9 @@ With the rollout of Unity Catalog (UC), the `dbt-databricks` adapter has added s
 
 Since there are many different situations, we've created the following table to help guide your setup process (this should help resolve the `Cannot set database in Databricks!` error):
 
-|                                             | Adapter supports UC and UC Enabled                                                                   | Adapter supports UC and UC not enabled         | Adapter does not support UC                                                                         |
-| ------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ---------------------------------------------- | --------------------------------------------------------------------------------------------------- |
-| Events land in default `atomic` schema      | `snowplow__databricks_catalog = '\{name_of_catalog}'`                                                 | Nothing needed                                 | `snowplow__databricks_catalog = 'atomic'`                                                           |
+|                                             | Adapter supports UC and UC Enabled                                                                     | Adapter supports UC and UC not enabled          | Adapter does not support UC                                                                           |
+| ------------------------------------------- | ------------------------------------------------------------------------------------------------------ | ----------------------------------------------- | ----------------------------------------------------------------------------------------------------- |
+| Events land in default `atomic` schema      | `snowplow__databricks_catalog = '\{name_of_catalog}'`                                                  | Nothing needed                                  | `snowplow__databricks_catalog = 'atomic'`                                                             |
 | Events land in custom schema (not `atomic`) | `snowplow__atomic_schema = '\{name_of_schema}'`  `snowplow__databricks_catalog = '\{name_of_catalog}'` | `snowplow__atomic_schema = '\{name_of_schema}'` | `snowplow__atomic_schema = '\{name_of_schema}'`  `snowplow__databricks_catalog = '\{name_of_schema}'` |
 
 #### Optimization of models

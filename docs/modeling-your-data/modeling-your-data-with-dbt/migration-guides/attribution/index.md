@@ -1,5 +1,5 @@
 ---
-title: "Migration guide for attribution data model"
+title: "Migration guide for Attribution"
 sidebar_label: "Attribution"
 sidebar_position: 20
 ---

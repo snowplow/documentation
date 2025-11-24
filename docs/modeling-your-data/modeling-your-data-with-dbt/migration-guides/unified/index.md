@@ -1,5 +1,5 @@
 ---
-title: "Unified digital migration guide"
+title: "Migration guide for Unified Digital"
 sidebar_label: "Unified Digital"
 sidebar_position: 10
 ---

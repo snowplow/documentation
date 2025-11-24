@@ -1,5 +1,5 @@
 ---
-title: "Conversions module for the unified data model"
+title: "Modeling conversion events with the Unified Digital package"
 sidebar_label: "Conversions"
 sidebar_position: 100
 hide_title: true

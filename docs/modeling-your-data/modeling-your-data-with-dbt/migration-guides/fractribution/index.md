@@ -1,8 +1,10 @@
 ---
-title: "Fractribution migration guide"
+title: "Migration guide for Fractribution"
 sidebar_label: "Fractribution"
 sidebar_position: 920
 ---
+
+This is a legacy package.
 
 ### Upgrading to 0.3.0
 - Version 1.4.0 of `dbt-core` now required

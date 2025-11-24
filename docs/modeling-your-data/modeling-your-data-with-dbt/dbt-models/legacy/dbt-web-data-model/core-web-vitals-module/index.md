@@ -1,6 +1,6 @@
 ---
-title: "Core web vitals module for the legacy web data model"
-sidebar_label: "Core Web Vitals Module"
+title: "Core web vitals module for the Web package"
+sidebar_label: "Core web vitals module"
 sidebar_position: 300
 hide_title: true
 ---

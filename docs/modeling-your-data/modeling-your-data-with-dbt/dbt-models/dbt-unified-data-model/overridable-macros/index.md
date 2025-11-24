@@ -1,6 +1,6 @@
 ---
-title: "Overridable macros in the unified data model in dbt"
-sidebar_label: "Overridable Macros"
+title: "Overriding macros in the Unified Digital package"
+sidebar_label: "Overridable macros"
 sidebar_position: 100
 description: "Overridable macros in the Unified package"
 hide_title: true
@@ -21,7 +21,7 @@ export const datagridProps = {
 ```
 
 
-### [<Icon icon="fa-brands fa-github"/>](https://github.com/snowplow/dbt-snowplow-unified/blob/main/macros/unify_fields_query.sql) `unify_fields_query` 
+### [<Icon icon="fa-brands fa-github"/>](https://github.com/snowplow/dbt-snowplow-unified/blob/main/macros/unify_fields_query.sql) `unify_fields_query`
 #### Details
 Used to populate the `snowplow_unified_events_this_run` table; groups together fields that come from multiple entities or SDEs depending on whether the platform is mobile or web. Should be overwritten if there is other grouping or complex SQL you wish to run on the `events this run` table.
 
@@ -34,7 +34,7 @@ Defines the filter to remove bot events from events processed by the package. Of
 
 ### [<Icon icon="fa-brands fa-github"/>](https://github.com/snowplow/dbt-snowplow-unified/blob/main/macros/field_definitions/channel_group_query.sql) `channel_group_query`
 #### Details
-Defines the channel a user arrived at using various fields, populates the `default_channel_group` field in the `views` and `sessions` tables. Must be a valid sql `select` object e.g. a complete `case when` statement. Used as part of the `platform_independent_fields` macro. 
+Defines the channel a user arrived at using various fields, populates the `default_channel_group` field in the `views` and `sessions` tables. Must be a valid sql `select` object e.g. a complete `case when` statement. Used as part of the `platform_independent_fields` macro.
 
 The defaults can be altered by overwriting the macro in your project with the same name to generate your expected channels if they differ from the default macro which most likely will, as default values will not consider any custom marketing parameters you may have. It will most likely be a long list of case statements where `mkt_source` and `mkt_medium` fields are used for the classification. You can also rely on the help of the `source_category` field that you will get as the package automatically joins the seed file generated table `snowplow_unified_dim_ga4_source_categories` where this macro gets used.
 

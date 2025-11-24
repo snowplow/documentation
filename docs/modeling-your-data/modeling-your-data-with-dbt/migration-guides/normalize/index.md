@@ -1,5 +1,6 @@
 ---
-title: "Normalize"
+title: "Migration guide for Normalize"
+sidebar_label: "Normalize"
 sidebar_position: 40
 ---
 

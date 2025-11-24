@@ -1,6 +1,7 @@
 ---
-title: "App Errors Module"
-sidebar_position: 50
+title: "App Errors module for Unified Digital"
+sidebar_label: "App errors module"
+sidebar_position: 101
 hide_title: true
 ---
 

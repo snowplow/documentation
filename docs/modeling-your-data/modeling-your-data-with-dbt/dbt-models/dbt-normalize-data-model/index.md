@@ -1,5 +1,6 @@
 ---
-title: "Normalize"
+title: "Snowplow Normalize dbt package"
+sidebar_label: "Normalize"
 sidebar_position: 50
 description: "The Snowplow Normalize dbt Package"
 hide_title: true

@@ -1,5 +1,5 @@
 ---
-title: "Conversions module for the legacy web data model"
+title: "Modeling conversions with the Web package"
 sidebar_label: "Conversions"
 sidebar_position: 100
 hide_title: true

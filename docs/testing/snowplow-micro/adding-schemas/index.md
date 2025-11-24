@@ -1,5 +1,5 @@
 ---
-title: "Adding custom schemas in Snowplow Micro"
+title: "Adding custom schemas to Snowplow Micro"
 sidebar_label: "Adding custom schemas"
 sidebar_position: 4
 description: "How to add custom schemas to Snowplow Micro."

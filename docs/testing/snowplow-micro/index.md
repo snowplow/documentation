@@ -1,5 +1,5 @@
 ---
-title: "Snowplow Micro in data product studio"
+title: "Snowplow Micro test pipeline"
 sidebar_label: "Snowplow Micro"
 sidebar_position: 2
 description: "Snowplow Micro is a lightweight version of the Snowplow pipeline that’s great for getting familiar with Snowplow, debugging and testing."

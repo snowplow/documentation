@@ -1,5 +1,5 @@
 ---
-title: "Snowplow Inspector"
+title: "Snowplow Inspector browser extension"
 sidebar_position: 1
 description: "Snowplow Inspector is a useful tool for debugging Snowplow events on web-pages and more"
 ---

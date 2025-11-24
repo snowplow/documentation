@@ -1,5 +1,6 @@
 ---
-title: "Basic usage"
+title: "Basic Snowplow Micro usage"
+sidebar_label: "Basic usage"
 sidebar_position: 1
 description: "How to run Snowplow Micro and send events to it."
 ---

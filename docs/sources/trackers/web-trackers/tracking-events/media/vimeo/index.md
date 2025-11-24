@@ -4,8 +4,6 @@ sidebar_label: "Vimeo"
 sidebar_position: 15
 ---
 
-# Vimeo media tracking
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

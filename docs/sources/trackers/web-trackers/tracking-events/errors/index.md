@@ -4,8 +4,6 @@ sidebar_label: "Errors"
 sidebar_position: 110
 ---
 
-# Error tracking
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

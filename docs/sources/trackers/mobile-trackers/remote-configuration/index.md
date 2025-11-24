@@ -5,8 +5,6 @@ date: "2022-08-30"
 sidebar_position: 50
 ---
 
-# Update tracker configuration remotely
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

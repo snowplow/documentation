@@ -4,8 +4,6 @@ sidebar_label: "Kantar Focal Meter"
 sidebar_position: 180
 ---
 
-# Kantar Focal Meter integration
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

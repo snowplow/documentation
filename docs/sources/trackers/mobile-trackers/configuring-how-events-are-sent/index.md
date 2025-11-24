@@ -5,8 +5,6 @@ date: "2022-08-30"
 sidebar_position: 40
 ---
 
-# Configuring how events are sent
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

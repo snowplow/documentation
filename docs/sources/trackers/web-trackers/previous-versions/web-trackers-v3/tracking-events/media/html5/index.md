@@ -3,8 +3,6 @@ title: "HTML5"
 sidebar_position: 10
 ---
 
-# HTML5 media tracking
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -20,7 +18,7 @@ HTML5 media events and entities are **automatically tracked** once configured.
   <TabItem value="js" label="JavaScript (tag)" default>
 
 | Tracker Distribution | Included |
-|----------------------|----------|
+| -------------------- | -------- |
 | `sp.js`              | ❌        |
 | `sp.lite.js`         | ❌        |
 
@@ -160,7 +158,7 @@ enableMediaTracking({
 
 
 | Parameter                              | Type       | Default             | Description                                                                                                    | Required |
-|----------------------------------------|------------|---------------------|----------------------------------------------------------------------------------------------------------------|----------|
+| -------------------------------------- | ---------- | ------------------- | -------------------------------------------------------------------------------------------------------------- | -------- |
 | `id`                                   | `string`   | \-                  | The HTML id attribute of the media element                                                                     | Yes      |
 | `options.label`                        | `string`   | \-                  | An identifiable custom label sent with the event                                                               | No       |
 | `options.captureEvents`                | `string[]` | `['DefaultEvents']` | The events or Event Group to capture. For a full list of events and groups, check the [section below](#events) | No       |
@@ -301,7 +299,7 @@ enableMediaTracking({
 Below is a table of all the events that can be used in `options.captureEvents`
 
 | Name                  | Fire Condition                                                                                                                                                                |
-|-----------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | abort                 | The resource was not fully loaded, but not as the result of an error.                                                                                                         |
 | canplay               | The user agent can play the media, but estimates that not enough data has been loaded to play the media up to its end without having to stop for further buffering of content |
 | canplaythrough        | The user agent can play the media, and estimates that enough data has been loaded to play the media up to its end without having to stop for further buffering of content.    |
@@ -344,7 +342,7 @@ Not all events are available in all browsers (though most are). To check, use th
 You can also use a pre-made event group in `options.captureEvents`:
 
 | Name            | Events                                                                                                      |
-|-----------------|-------------------------------------------------------------------------------------------------------------|
+| --------------- | ----------------------------------------------------------------------------------------------------------- |
 | `DefaultEvents` | `['pause', 'play', 'seeked', 'ratechange', 'volumechange', 'ended', 'fullscreenchange', 'percentprogress']` |
 | `AllEvents`     | Every event listed in [Capturable Events](#capturable-events)                                               |
 

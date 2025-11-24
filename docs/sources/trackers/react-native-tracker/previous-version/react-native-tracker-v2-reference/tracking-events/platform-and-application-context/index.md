@@ -3,8 +3,6 @@ title: "Platform and application data tracking"
 sidebar_position: 10
 ---
 
-# Platform and application data tracking
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

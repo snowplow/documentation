@@ -4,8 +4,6 @@ sidebar_label: "Element tracking"
 sidebar_position: 55
 ---
 
-# Element visibility and lifecycle tracking
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

@@ -4,8 +4,6 @@ sidebar_label: "Generic timing"
 sidebar_position: 98
 ---
 
-# Generic site timing tracking
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

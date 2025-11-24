@@ -6,8 +6,6 @@ sidebar_custom_props:
   hidden: true
 ---
 
-# First-party tracking
-
 This feature lets you configure a custom collector domain to match your primary domain, enabling first-party cookies.
 
 When your collector domain (e.g. `collector.snwplow.net`) does not match your primary domain (e.g. `flowershop.ai`), web browsers can impose limitations on the collected data. For example, cookies set by the collector might be only kept for 7 days.

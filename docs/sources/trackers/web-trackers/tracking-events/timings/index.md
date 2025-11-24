@@ -4,8 +4,6 @@ sidebar_label: "Performance timings"
 sidebar_position: 98
 ---
 
-# Performance Navigation Timing
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

@@ -4,8 +4,6 @@ sidebar_label: "YouTube"
 sidebar_position: 20
 ---
 
-# YouTube iFrame media tracking
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

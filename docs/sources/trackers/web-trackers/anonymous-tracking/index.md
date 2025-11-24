@@ -5,8 +5,6 @@ date: "2022-08-30"
 sidebar_position: 2860
 ---
 
-# Opt-outs and anonymous tracking
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

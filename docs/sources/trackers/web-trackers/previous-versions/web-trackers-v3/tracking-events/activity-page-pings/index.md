@@ -3,8 +3,6 @@ title: "Activity (page pings)"
 sidebar_position: 30
 ---
 
-# Activity tracking (page pings)
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

@@ -4,8 +4,6 @@ sidebar_label: "Hybrid applications"
 sidebar_position: 180
 ---
 
-# WebView integration for mobile
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

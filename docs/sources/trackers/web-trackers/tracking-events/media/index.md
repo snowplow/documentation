@@ -4,8 +4,6 @@ sidebar_label: "Media"
 sidebar_position: 75
 ---
 
-# Media tracking
-
 There are four media tracking plugins to choose from. Choosing the right plugin for you depends on the following questions:
 
 1. What media player do you use in your app?
@@ -25,9 +23,9 @@ The v2 schemas:
 
 :::
 
-| Plugin | Media schemas version | Provides auto-tracking? | Player |
-| --- | --- | --- | --- |
-| [Snowplow media](/docs/sources/trackers/web-trackers/tracking-events/media/snowplow/index.md) | v2 | ❌ | Any |
-| [Vimeo](/docs/sources/trackers/web-trackers/tracking-events/media/vimeo/index.md)  | v2 | ✅ | Vimeo |
-| [HTML5](/docs/sources/trackers/web-trackers/tracking-events/media/html5/index.md) | v2 | ✅ | HTML5 |
-| [YouTube](/docs/sources/trackers/web-trackers/tracking-events/media/youtube/index.md) | v2 | ✅ | YouTube |
+| Plugin                                                                                        | Media schemas version | Provides auto-tracking? | Player  |
+| --------------------------------------------------------------------------------------------- | --------------------- | ----------------------- | ------- |
+| [Snowplow media](/docs/sources/trackers/web-trackers/tracking-events/media/snowplow/index.md) | v2                    | ❌                       | Any     |
+| [Vimeo](/docs/sources/trackers/web-trackers/tracking-events/media/vimeo/index.md)             | v2                    | ✅                       | Vimeo   |
+| [HTML5](/docs/sources/trackers/web-trackers/tracking-events/media/html5/index.md)             | v2                    | ✅                       | HTML5   |
+| [YouTube](/docs/sources/trackers/web-trackers/tracking-events/media/youtube/index.md)         | v2                    | ✅                       | YouTube |

@@ -3,8 +3,6 @@ title: "Social media"
 sidebar_position: 140
 ---
 
-# Social media interactions tracking
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

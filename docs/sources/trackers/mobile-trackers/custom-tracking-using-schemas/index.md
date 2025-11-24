@@ -5,8 +5,6 @@ date: "2022-08-30"
 sidebar_position: 20
 ---
 
-# Custom event tracking
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -29,7 +27,7 @@ You may wish to track events in your app which are not directly supported by Sno
   <TabItem value="ios" label="iOS" default>
 
 ```swift
-let data = ["targetUrl": "http://a-target-url.com"];       
+let data = ["targetUrl": "http://a-target-url.com"];
 let event = SelfDescribing(schema: "iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1", payload: data)
 
 tracker.track(event)
@@ -140,9 +138,9 @@ event.entities.add(
         andDictionary: [
              "screenType": "test",
              "lastUpdated": "2021-06-11"
-        ])!)     
+        ])!)
 event.entities.add(
-    SelfDescribingJson(schema: "iglu:com.example/user/jsonschema/2-0-0", 
+    SelfDescribingJson(schema: "iglu:com.example/user/jsonschema/2-0-0",
         andDictionary: [
              "userType": "tester"
         ])!)

@@ -3,8 +3,6 @@ title: "Kantar Focal Meter"
 sidebar_position: 180
 ---
 
-# Kantar Focal Meter integration
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -29,7 +27,7 @@ The Focal Meter integration is **automatic** once configured.
   <TabItem value="js" label="JavaScript (tag)" default>
 
 | Tracker Distribution | Included |
-|----------------------|----------|
+| -------------------- | -------- |
 | `sp.js`              | ❌        |
 | `sp.lite.js`         | ❌        |
 

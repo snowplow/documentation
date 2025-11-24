@@ -4,8 +4,6 @@ sidebar_label: "Tracker plugins"
 sidebar_position: 45
 ---
 
-# Tracker plugins
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

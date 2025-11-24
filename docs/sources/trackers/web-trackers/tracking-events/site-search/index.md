@@ -4,8 +4,6 @@ sidebar_label: "Site search"
 sidebar_position: 120
 ---
 
-# Site search tracking
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

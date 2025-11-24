@@ -5,8 +5,6 @@ date: "2022-08-30"
 sidebar_position: 70
 ---
 
-# Hybrid Apps
-
 :::info
 
 This feature is available since v1.3. To use the Web plugin, you will need v4.2+ of the React Native tracker.

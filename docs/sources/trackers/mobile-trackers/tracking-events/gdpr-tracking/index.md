@@ -4,8 +4,6 @@ sidebar_label: "Consent"
 sidebar_position: 61
 ---
 
-# GDPR tracking
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

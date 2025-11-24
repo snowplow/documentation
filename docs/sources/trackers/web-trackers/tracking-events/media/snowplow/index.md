@@ -4,8 +4,6 @@ sidebar_label: "Snowplow media"
 sidebar_position: 5
 ---
 
-# Snowplow media tracking
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

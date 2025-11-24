@@ -9,8 +9,6 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-# SQS Source
-
 Read data from an SQS queue.
 
 ## Authentication

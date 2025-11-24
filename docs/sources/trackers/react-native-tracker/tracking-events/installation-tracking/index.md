@@ -4,8 +4,6 @@ sidebar_label: "Installs"
 sidebar_position: 60
 ---
 
-# Installation tracking
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

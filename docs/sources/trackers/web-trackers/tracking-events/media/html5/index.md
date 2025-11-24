@@ -4,8 +4,6 @@ sidebar_label: "HTML5"
 sidebar_position: 10
 ---
 
-# HTML5 media tracking
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

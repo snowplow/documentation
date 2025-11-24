@@ -4,8 +4,6 @@ sidebar_label: "Screen view and engagement"
 sidebar_position: 40
 ---
 
-# Screen view and engagement tracking
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

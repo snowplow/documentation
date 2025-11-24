@@ -3,8 +3,6 @@ title: "Timings"
 sidebar_position: 98
 ---
 
-# Timings tracking
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

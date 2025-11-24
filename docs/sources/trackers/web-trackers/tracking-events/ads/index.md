@@ -4,8 +4,6 @@ sidebar_label: "Ads"
 sidebar_position: 95
 ---
 
-# Ad tracking
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

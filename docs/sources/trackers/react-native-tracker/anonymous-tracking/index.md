@@ -5,8 +5,6 @@ date: "2022-08-30"
 sidebar_position: 25
 ---
 
-# Anonymous Tracking
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

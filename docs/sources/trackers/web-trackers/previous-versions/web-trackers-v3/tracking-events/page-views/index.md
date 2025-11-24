@@ -3,8 +3,6 @@ title: "Page views"
 sidebar_position: 20
 ---
 
-# Page view tracking
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

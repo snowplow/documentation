@@ -1,5 +1,6 @@
 ---
-title: "Utilities"
+title: "Unity tracker utilities"
+sidebar_label: "Utilities"
 date: "2020-02-26"
 sidebar_position: 90
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Emitters configuration for the C tracker"
+title: "Configuring emitters in the C++ tracker"
 sidebar_label: "Emitters"
 date: "2020-02-25"
 sidebar_position: 60
@@ -35,7 +35,7 @@ struct EventStore {
 The `EventStore` struct defines functions to insert, retrieve, and remove events from the queue. Events are represented using their `Payload` instance which is persisted in a `EventRow` wrapper that also assigns IDs to each stored event (these event row IDs are different from event IDs used in the event payloads). There are three supported operations:
 
 | Function                     | Description                                                 |
-|------------------------------|-------------------------------------------------------------|
+| ---------------------------- | ----------------------------------------------------------- |
 | `add_event`                  | Insert event payload into event queue.                      |
 | `get_event_rows_batch`       | Retrieve event rows from event queue up to the given limit. |
 | `delete_event_rows_with_ids` | Remove event rows with the given event row IDs.             |

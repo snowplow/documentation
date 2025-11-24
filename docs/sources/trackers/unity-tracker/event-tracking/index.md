@@ -1,5 +1,5 @@
 ---
-title: "Event tracking with the Unity tracker"
+title: "Tracking events with the Unity tracker"
 sidebar_label: "Event tracking"
 date: "2020-02-26"
 sidebar_position: 80
@@ -16,14 +16,14 @@ You can use `Track(PageView)` to track a user viewing a web page within your a
 
 Arguments are:
 
-| **Argument** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `pageUrl` | The URL of the page | Yes | `string` |
-| `pageTitle` | The title of the page | No | `string` |
-| `referrer` | The address which linked to the page | No | `string` |
-| `customContexts` | Optional custom context | No | `List<IContext>` |
-| `timestamp` | Optional timestamp | No | `long` |
-| `eventId` | Optional custom event id | No | `string` |
+| **Argument**     | **Description**                      | **Required?** | **Type**         |
+| ---------------- | ------------------------------------ | ------------- | ---------------- |
+| `pageUrl`        | The URL of the page                  | Yes           | `string`         |
+| `pageTitle`      | The title of the page                | No            | `string`         |
+| `referrer`       | The address which linked to the page | No            | `string`         |
+| `customContexts` | Optional custom context              | No            | `List<IContext>` |
+| `timestamp`      | Optional timestamp                   | No            | `long`           |
+| `eventId`        | Optional custom event id             | No            | `string`         |
 
 Examples:
 
@@ -48,18 +48,18 @@ t1.Track(new PageView()
 
 Use `Track(MobileScreenView)` to track a user viewing a screen (or equivalent) within your app. You **must** provide a `name` property. The `id` of the screen view will be automatically assigned (as an UUID) but you may also provide it manually. Arguments are:
 
-| **Argument** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `name` | Human-readable name for this screen | Yes | `string` |
-| `id` | Unique identifier for this screen view (can be auto-generated) | Yes | `string` |
-| `type` | The type of screen that was viewed e.g feed / carousel | No | `string` |
-| `previousName` | The name of the previous screen | No | `string` |
-| `previousId` | The screen view ID of the previous screen view | No | `string` |
-| `previousType` | The screen type of the previous screen view | No | `string` |
-| `previousType` | The screen type of the previous screen view | No | `string` |
-| `customContexts` | Optional custom context | No | `List<IContext>` |
-| `timestamp` | Optional timestamp | No | `long` |
-| `eventId` | Optional custom event id | No | `string` |
+| **Argument**     | **Description**                                                | **Required?** | **Type**         |
+| ---------------- | -------------------------------------------------------------- | ------------- | ---------------- |
+| `name`           | Human-readable name for this screen                            | Yes           | `string`         |
+| `id`             | Unique identifier for this screen view (can be auto-generated) | Yes           | `string`         |
+| `type`           | The type of screen that was viewed e.g feed / carousel         | No            | `string`         |
+| `previousName`   | The name of the previous screen                                | No            | `string`         |
+| `previousId`     | The screen view ID of the previous screen view                 | No            | `string`         |
+| `previousType`   | The screen type of the previous screen view                    | No            | `string`         |
+| `previousType`   | The screen type of the previous screen view                    | No            | `string`         |
+| `customContexts` | Optional custom context                                        | No            | `List<IContext>` |
+| `timestamp`      | Optional timestamp                                             | No            | `long`           |
+| `eventId`        | Optional custom event id                                       | No            | `string`         |
 
 Examples:
 
@@ -87,16 +87,16 @@ However, this class used the older schema for screen views and has been deprecat
 
 Use `Track(Structured)` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required):
 
-| **Argument** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `category` | The grouping of structured events which this `action` belongs to | Yes | `string` |
-| `action` | Defines the type of user interaction which this event involves | Yes | `string` |
-| `label` | A string to provide additional dimensions to the event data | No | `string` |
-| `property` | A string describing the object or the action performed on it | No | `string` |
-| `value` | A value to provide numerical data about the event | No | `double` |
-| `customContexts` | Optional custom context | No | `List<IContext>` |
-| `timestamp` | Optional timestamp | No | `long` |
-| `eventId` | Optional custom event id | No | `string` |
+| **Argument**     | **Description**                                                  | **Required?** | **Type**         |
+| ---------------- | ---------------------------------------------------------------- | ------------- | ---------------- |
+| `category`       | The grouping of structured events which this `action` belongs to | Yes           | `string`         |
+| `action`         | Defines the type of user interaction which this event involves   | Yes           | `string`         |
+| `label`          | A string to provide additional dimensions to the event data      | No            | `string`         |
+| `property`       | A string describing the object or the action performed on it     | No            | `string`         |
+| `value`          | A value to provide numerical data about the event                | No            | `double`         |
+| `customContexts` | Optional custom context                                          | No            | `List<IContext>` |
+| `timestamp`      | Optional timestamp                                               | No            | `long`           |
+| `eventId`        | Optional custom event id                                         | No            | `string`         |
 
 Examples:
 
@@ -122,15 +122,15 @@ t1.Track(new Structured()
 
 Use `Track(Timing)` to track an event related to a custom timing.
 
-| **Argument** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `category` | The category of the timed event | Yes | `string` |
-| `label` | The label of the timed event | No | `string` |
-| `timing` | The timing measurement in milliseconds | Yes | `int` |
-| `variable` | The name of the timed event | Yes | `string` |
-| `customContexts` | Optional custom context | No | `List<IContext>` |
-| `timestamp` | Optional timestamp | No | `long` |
-| `eventId` | Optional custom event id | No | `string` |
+| **Argument**     | **Description**                        | **Required?** | **Type**         |
+| ---------------- | -------------------------------------- | ------------- | ---------------- |
+| `category`       | The category of the timed event        | Yes           | `string`         |
+| `label`          | The label of the timed event           | No            | `string`         |
+| `timing`         | The timing measurement in milliseconds | Yes           | `int`            |
+| `variable`       | The name of the timed event            | Yes           | `string`         |
+| `customContexts` | Optional custom context                | No            | `List<IContext>` |
+| `timestamp`      | Optional timestamp                     | No            | `long`           |
+| `eventId`        | Optional custom event id               | No            | `string`         |
 
 Examples:
 
@@ -165,12 +165,12 @@ Use `Track(SelfDescribing)` to track a custom event which consists of a name a
 
 The arguments are as follows:
 
-| **Argument** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `eventData` | The properties of the event | Yes | [`SelfDescribingJson`](#selfdescribingjson) |
-| `customContexts` | Optional custom context | No | `List<IContext>` |
-| `timestamp` | Optional timestamp | No | `long` |
-| `eventId` | Optional custom event id | No | `string` |
+| **Argument**     | **Description**             | **Required?** | **Type**                                    |
+| ---------------- | --------------------------- | ------------- | ------------------------------------------- |
+| `eventData`      | The properties of the event | Yes           | [`SelfDescribingJson`](#selfdescribingjson) |
+| `customContexts` | Optional custom context     | No            | `List<IContext>`                            |
+| `timestamp`      | Optional timestamp          | No            | `long`                                      |
+| `eventId`        | Optional custom event id    | No            | `string`                                    |
 
 Example event json to track:
 
@@ -217,21 +217,21 @@ Use `Track(EcommerceTransaction)` to track an ecommerce transaction.
 
 Arguments:
 
-| **Argument** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `orderId` | ID of the eCommerce transaction | Yes | `string` |
-| `totalValue` | Total transaction value | Yes | `double` |
-| `affiliation` | Transaction affiliation | No | `string` |
-| `taxValue` | Transaction tax value | No | `double` |
-| `shipping` | Delivery cost charged | No | `double` |
-| `city` | Delivery address city | No | `string` |
-| `state` | Delivery address state | No | `string` |
-| `country` | Delivery address country | No | `string` |
-| `currency` | Transaction currency | No | `string` |
-| `items` | Items in the transaction | Yes | `List<EcommerceTransactionItem>` |
-| `customContexts` | Optional custom context | No | `List<IContext>` |
-| `timestamp` | Optional timestamp | No | `long` |
-| `eventId` | Optional custom event id | No | `string` |
+| **Argument**     | **Description**                 | **Required?** | **Type**                         |
+| ---------------- | ------------------------------- | ------------- | -------------------------------- |
+| `orderId`        | ID of the eCommerce transaction | Yes           | `string`                         |
+| `totalValue`     | Total transaction value         | Yes           | `double`                         |
+| `affiliation`    | Transaction affiliation         | No            | `string`                         |
+| `taxValue`       | Transaction tax value           | No            | `double`                         |
+| `shipping`       | Delivery cost charged           | No            | `double`                         |
+| `city`           | Delivery address city           | No            | `string`                         |
+| `state`          | Delivery address state          | No            | `string`                         |
+| `country`        | Delivery address country        | No            | `string`                         |
+| `currency`       | Transaction currency            | No            | `string`                         |
+| `items`          | Items in the transaction        | Yes           | `List<EcommerceTransactionItem>` |
+| `customContexts` | Optional custom context         | No            | `List<IContext>`                 |
+| `timestamp`      | Optional timestamp              | No            | `long`                           |
+| `eventId`        | Optional custom event id        | No            | `string`                         |
 
 The `items` argument is a `List` of individual `EcommerceTransactionItem` elements representing the items in the e-commerce transaction. Note that `Track(EcommerceTransaction)` fires multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the `items` `List`.
 
@@ -253,15 +253,15 @@ EcommerceTransactionItem item = new EcommerceTransactionItem ()
 
 These are the fields that can appear as elements in each `EcommerceTransactionItem` element of the transaction item's `List`:
 
-| **Field** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `sku` | Item SKU | Yes | `string` |
-| `price` | Item price | Yes | `double` |
-| `quantity` | Item quantity | Yes | `int` |
-| `name` | Item name | No | `string` |
-| `category` | Item category | No | `string` |
-| `customContexts` | Optional custom context | No | `List<IContext>` |
-| `eventId` | Optional custom event id | No | `string` |
+| **Field**        | **Description**          | **Required?** | **Type**         |
+| ---------------- | ------------------------ | ------------- | ---------------- |
+| `sku`            | Item SKU                 | Yes           | `string`         |
+| `price`          | Item price               | Yes           | `double`         |
+| `quantity`       | Item quantity            | Yes           | `int`            |
+| `name`           | Item name                | No            | `string`         |
+| `category`       | Item category            | No            | `string`         |
+| `customContexts` | Optional custom context  | No            | `List<IContext>` |
+| `eventId`        | Optional custom event id | No            | `string`         |
 
 Example of tracking a transaction containing two items:
 
@@ -315,15 +315,15 @@ All of these contexts will need to be combined into a `List<IContext>` before 
 
 The following arguments can be used in a DesktopContext:
 
-| **Field** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `osType` | The Operating System Type | Yes | `string` |
-| `osVersion` | The Version of the Operating System | Yes | `string` |
-| `osServicePack` | Service Pack information | No | `string` |
-| `osIs64Bit` | If the OS is 32 or 64 bit | No | `bool` |
-| `deviceManufacturer` | Who made the device | No | `string` |
-| `deviceModel` | What is the device model | No | `string` |
-| `processorCount` | How many cores does the device have | No | `int` |
+| **Field**            | **Description**                     | **Required?** | **Type** |
+| -------------------- | ----------------------------------- | ------------- | -------- |
+| `osType`             | The Operating System Type           | Yes           | `string` |
+| `osVersion`          | The Version of the Operating System | Yes           | `string` |
+| `osServicePack`      | Service Pack information            | No            | `string` |
+| `osIs64Bit`          | If the OS is 32 or 64 bit           | No            | `bool`   |
+| `deviceManufacturer` | Who made the device                 | No            | `string` |
+| `deviceModel`        | What is the device model            | No            | `string` |
+| `processorCount`     | How many cores does the device have | No            | `int`    |
 
 An example of a DesktopContext construction:
 
@@ -343,19 +343,19 @@ DesktopContext context = new DesktopContext ()
 
 The following arguments can be used in a MobileContext:
 
-| **Field** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `osType` | The Operating System Type | Yes | `string` |
-| `osVersion` | The Version of the Operating System | Yes | `string` |
-| `deviceManufacturer` | Who made the device | Yes | `string` |
-| `deviceModel` | What is the device model | Yes | `string` |
-| `carrier` | The name of the carrier | No | `string` |
-| `networkType` | The type of network | No | `NetworkType` |
-| `networkTechnology` | The networks technlogy | No | `string` |
-| `openIdfa` | An OpenIDFA UUID | No | `string` |
-| `appleIdfa` | An Apple IDFA UUID | No | `string` |
-| `appleIdfv` | An Apple IDFV UUID | No | `string` |
-| `androidIdfa` | An Android IDFA UUID | No | `string` |
+| **Field**            | **Description**                     | **Required?** | **Type**      |
+| -------------------- | ----------------------------------- | ------------- | ------------- |
+| `osType`             | The Operating System Type           | Yes           | `string`      |
+| `osVersion`          | The Version of the Operating System | Yes           | `string`      |
+| `deviceManufacturer` | Who made the device                 | Yes           | `string`      |
+| `deviceModel`        | What is the device model            | Yes           | `string`      |
+| `carrier`            | The name of the carrier             | No            | `string`      |
+| `networkType`        | The type of network                 | No            | `NetworkType` |
+| `networkTechnology`  | The networks technlogy              | No            | `string`      |
+| `openIdfa`           | An OpenIDFA UUID                    | No            | `string`      |
+| `appleIdfa`          | An Apple IDFA UUID                  | No            | `string`      |
+| `appleIdfv`          | An Apple IDFV UUID                  | No            | `string`      |
+| `androidIdfa`        | An Android IDFA UUID                | No            | `string`      |
 
 An example of a MobileContext construction:
 
@@ -375,16 +375,16 @@ MobileContext context = new MobileContext ()
 
 The following arguments can be used in a GeoLocationContext:
 
-| **Field** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `latitude` | The user latitude | Yes | `double` |
-| `longitude` | The user longitude | Yes | `double` |
-| `latitudeLongitudeAccuracy` | The user lat-long accuracy | No | `double` |
-| `altitude` | The user altitude | No | `double` |
-| `altitudeAccuracy` | The user alt accuracy | No | `double` |
-| `bearing` | The user bearing | No | `double` |
-| `speed` | The user speed | No | `double` |
-| `timestamp` | A timestamp in ms | No | `long` |
+| **Field**                   | **Description**            | **Required?** | **Type** |
+| --------------------------- | -------------------------- | ------------- | -------- |
+| `latitude`                  | The user latitude          | Yes           | `double` |
+| `longitude`                 | The user longitude         | Yes           | `double` |
+| `latitudeLongitudeAccuracy` | The user lat-long accuracy | No            | `double` |
+| `altitude`                  | The user altitude          | No            | `double` |
+| `altitudeAccuracy`          | The user alt accuracy      | No            | `double` |
+| `bearing`                   | The user bearing           | No            | `double` |
+| `speed`                     | The user speed             | No            | `double` |
+| `timestamp`                 | A timestamp in ms          | No            | `long`   |
 
 An example of a GeoLocationContext construction:
 
@@ -437,7 +437,7 @@ This object is now ready to be Tracked within a SelfDescribing Event.
 
 You can create a SelfDescribingJson with the following arguments:
 
-| **Argument** | **Description** | **Required?** | **Type** |
-| --- | --- | --- | --- |
-| `schema` | JsonSchema that describes the data | Yes | `string` |
-| `data` | Data that will be validated by the schema | No | `Dictionary<string,object`\> |
+| **Argument** | **Description**                           | **Required?** | **Type**                     |
+| ------------ | ----------------------------------------- | ------------- | ---------------------------- |
+| `schema`     | JsonSchema that describes the data        | Yes           | `string`                     |
+| `data`       | Data that will be validated by the schema | No            | `Dictionary<string,object`\> |

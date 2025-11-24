@@ -1,5 +1,5 @@
 ---
-title: "Setup guide for the Unity tracker"
+title: "Installing the Unity tracker"
 sidebar_label: "Setup"
 date: "2020-02-26"
 sidebar_position: 10

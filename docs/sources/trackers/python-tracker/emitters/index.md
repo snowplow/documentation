@@ -1,5 +1,5 @@
 ---
-title: "Emitters configuration for the Python tracker"
+title: "Configuring emitters in the Python tracker"
 sidebar_label: "Emitters"
 sidebar_position: 30
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Installation and set-up"
+title: "Installing the Java tracker"
 date: "2022-03-24"
 sidebar_position: 10
 ---
@@ -11,9 +11,9 @@ import CodeBlock from '@theme/CodeBlock';
 
 ## Installing
 
-The Snowplow Java tracker has been built and tested using Java versions 8, 11 and 17, so should work within any Java application built using JDK8 upwards. The Java tracker is also usable from Scala. 
+The Snowplow Java tracker has been built and tested using Java versions 8, 11 and 17, so should work within any Java application built using JDK8 upwards. The Java tracker is also usable from Scala.
 
-<p>The current tracker version is {versions.javaTracker}. New issues and pull requests are very welcome! Find the Github repository <a href="https://github.com/snowplow/snowplow-java-tracker">here.</a></p> 
+<p>The current tracker version is {versions.javaTracker}. New issues and pull requests are very welcome! Find the Github repository <a href="https://github.com/snowplow/snowplow-java-tracker">here.</a></p>
 
 ### Install using Maven
 Add into your project’s `pom.xml`:
@@ -26,7 +26,7 @@ Add into your project’s `pom.xml`:
 `}</CodeBlock>
 
 ### Install using Gradle
-From version 0.10.1 onwards, we provide out-of-the-box support for sending events via OkHttp or Apache HTTP. The appropriate dependencies must be specified. The default tracker configuration uses OkHttp.  
+From version 0.10.1 onwards, we provide out-of-the-box support for sending events via OkHttp or Apache HTTP. The appropriate dependencies must be specified. The default tracker configuration uses OkHttp.
 
 Add this into your project’s `build.gradle` for the default installation with OkHttp support:
 <CodeBlock language="gradle">{
@@ -78,7 +78,7 @@ import com.snowplowanalytics.snowplow.tracker.Tracker;
 
 Tracker tracker = Snowplow.createTracker("trackerNamespace", "appId", "http://collectorEndpoint");
 ```
-The URL path for your collector endpoint should include the protocol, "http" or "https". The Java tracker is able to send events to either.  
+The URL path for your collector endpoint should include the protocol, "http" or "https". The Java tracker is able to send events to either.
 
 The `Snowplow` interface, added in v1, contains static methods to help initialise and manage `Tracker` objects. This is especially useful when multiple trackers are needed (see [here](/docs/sources/trackers/java-tracker/using-multiple-trackers/index.md)). See the API docs for the full [Snowplow](https://snowplow.github.io/snowplow-java-tracker/index.html?com/snowplowanalytics/snowplow/tracker/Snowplow.html) details.
 
@@ -87,7 +87,7 @@ The [Java tracker Github repository](https://github.com/snowplow/snowplow-java-t
 These are the required objects for tracking using the Java tracker:
 
 | Class                 | Function               |
-|-----------------------|------------------------|
+| --------------------- | ---------------------- |
 | `Tracker`             | Tracks events          |
 | subclasses of `Event` | What you want to track |
 
@@ -95,13 +95,13 @@ These are the required objects for tracking using the Java tracker:
 
 The `Tracker` class has the responsibility for tracking [events](/docs/sources/trackers/java-tracker/tracking-events/index.md). Certain properties can or must also be set when creating a `Tracker`, which will be attached to all events. These are `trackerNamespace`, `appId`, and `platform`.
 
-Both `trackerNamespace` and `appId` are required arguments when creating a `Tracker`. Snowplow events are designed to be stored in a single data warehouse/lake, regardless of their source, to make data modeling easier and provide a single valuable source of truth for your business. The tracker namespace allows you to distinguish events sent by this specific `Tracker`, if you are using multiple `Tracker` instances within your app. It's also the identifier for `Tracker` objects in the `Snowplow` class. The `appId` allows you to identify events from this specific application, if you are tracking from multiple places. 
+Both `trackerNamespace` and `appId` are required arguments when creating a `Tracker`. Snowplow events are designed to be stored in a single data warehouse/lake, regardless of their source, to make data modeling easier and provide a single valuable source of truth for your business. The tracker namespace allows you to distinguish events sent by this specific `Tracker`, if you are using multiple `Tracker` instances within your app. It's also the identifier for `Tracker` objects in the `Snowplow` class. The `appId` allows you to identify events from this specific application, if you are tracking from multiple places.
 
 The other Tracker property that will be added to all tracked events is `platform`. This is set by default to `srv` - "server-side app". To set another valid platform type, use the `DevicePlatform` enum during construction.
 
 The final two `Tracker` configuration options are whether to use base-64 encoding, and whether to add a `Subject` object (see [here](/docs/sources/trackers/java-tracker/tracking-specific-client-side-properties/index.md) for details about `Subject`). By default, JSONs within the event are sent base-64 encoded. This can be set to `false` here at `Tracker` initialization.
 
-To create a `Tracker` with custom configuration, use the `TrackerConfiguration` class. 
+To create a `Tracker` with custom configuration, use the `TrackerConfiguration` class.
 ```java
 TrackerConfiguration trackerConfig = new TrackerConfiguration("namespace", "appId")
         .base64Encoded(false)

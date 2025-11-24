@@ -1,5 +1,5 @@
 ---
-title: "Subject configuration for .NET tracker"
+title: "Configuring a subject with the .NET tracker"
 sidebar_label: "Subject"
 date: "2020-02-26"
 sidebar_position: 50

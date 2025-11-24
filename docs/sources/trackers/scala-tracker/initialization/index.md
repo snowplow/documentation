@@ -1,5 +1,5 @@
 ---
-title: "Introduction to Scala tracker initialization"
+title: "Initializing the Scala tracker"
 sidebar_label: "Initialization"
 date: "2022-9-15"
 sidebar_position: 10
@@ -43,7 +43,7 @@ tracker.trackTransaction("order1234", 42.0) // returns Unit
 
 The `SyncEmitter` blocks the whole thread when it sends events to the collector. The `AsyncEmitter` sends requests asynchronously from the tracker's main thread of execution, but in doing so it blocks a thread on the provided execution for each http request. The blocking calls are wrapped in scala's [blocking construct](https://www.scala-lang.org/api/current/scala/concurrent/index.html#blocking[T](body:=%3ET):T), which is respected by the global execution context.
 
-We reccomend using `AsyncEmitter` if possible as to not block threads, only using `SyncEmitter` if you have a specific need for sync in your setup. 
+We reccomend using `AsyncEmitter` if possible as to not block threads, only using `SyncEmitter` if you have a specific need for sync in your setup.
 
 ### Http4s Emitter
 
@@ -204,9 +204,9 @@ import com.snowplowanalytics.snowplow.scalatracker.Emitter._
 def emitterCallback(params: EndpointParams, req: Request, res: Result): Unit = {
   res match {
     case Result.Success(_) => ()
-    case Result.Failure(code) => 
+    case Result.Failure(code) =>
       devopsIncident(s"Scala Tracker got unexpected HTTP code $code from ${params.getUri}")
-    case Result.TrackerFailure(exception) => 
+    case Result.TrackerFailure(exception) =>
       devopsIncident(s"Scala Tracker failed to reach ${params.getUri} with following exception $exception after ${req.attempt} attempt")
     case Result.RetriesExceeded(failure) =>
       devopsIncident(s"Scala Tracker has stopped trying to deliver payload after following failure: $failure")

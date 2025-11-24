@@ -1,5 +1,6 @@
 ---
-title: "Additional Information"
+title: "Additional information for the Tracking CLI"
+sidebar_label: "Additional information"
 date: "2020-10-12"
 sidebar_position: 300
 ---

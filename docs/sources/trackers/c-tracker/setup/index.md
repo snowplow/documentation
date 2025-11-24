@@ -1,5 +1,5 @@
 ---
-title: "Setup guide for the C tracker"
+title: "Installing the C++ tracker"
 sidebar_label: "Setup"
 date: "2020-02-25"
 sidebar_position: 10

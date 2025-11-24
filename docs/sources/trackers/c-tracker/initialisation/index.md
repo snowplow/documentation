@@ -1,5 +1,6 @@
 ---
-title: "Initialisation"
+title: "Initializing the C++ tracker"
+sidebar_label: "Initialisation"
 date: "2020-02-25"
 sidebar_position: 20
 ---

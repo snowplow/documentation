@@ -1,5 +1,6 @@
 ---
-title: "Screen view and engagement tracking"
+title: "Tracking screen views and engagement with the native mobile trackers"
+sidebar_label: "Screen view and engagement"
 sidebar_position: 40
 ---
 

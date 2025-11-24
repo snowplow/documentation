@@ -1,6 +1,6 @@
 ---
-title: "Media tracking for mobile trackers"
-sidebar_label: "Media tracking"
+title: "Tracking media events with the native mobile trackers"
+sidebar_label: "Media"
 sidebar_position: 100
 ---
 

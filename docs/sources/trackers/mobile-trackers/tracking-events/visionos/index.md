@@ -1,5 +1,6 @@
 ---
-title: "visionOS tracking"
+title: "Tracking visionOS events with the iOS tracker"
+sidebar_label: "visionOS"
 sidebar_position: 110
 ---
 

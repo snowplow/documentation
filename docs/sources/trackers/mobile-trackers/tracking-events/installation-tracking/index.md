@@ -1,5 +1,6 @@
 ---
-title: "Installation tracking"
+title: "Tracking application installs with the native mobile trackers"
+sidebar_label: "Installs"
 sidebar_position: 60
 ---
 
@@ -55,12 +56,12 @@ The Android tracker can make use of the library to retrieve the referral informa
 It attaches the information in an entity attached to the install event.
 The entity uses the `iglu:com.android.installreferrer.api/referrer_details/jsonschema/1-0-0` schema with the following properties:
 
-Property | Type | Description
---|--|--
-`installReferrer` | String | The referrer URL of the installed package
-`referrerClickTimestamp` | Datetime | The timestamp when referrer click happens
-`installBeginTimestamp` | Datetime | The timestamp when installation begins
-`googlePlayInstantParam` | Boolean | Boolean indicating if the user has interacted with the app's instant experience in the past 7 days
+| Property                 | Type     | Description                                                                                        |
+| ------------------------ | -------- | -------------------------------------------------------------------------------------------------- |
+| `installReferrer`        | String   | The referrer URL of the installed package                                                          |
+| `referrerClickTimestamp` | Datetime | The timestamp when referrer click happens                                                          |
+| `installBeginTimestamp`  | Datetime | The timestamp when installation begins                                                             |
+| `googlePlayInstantParam` | Boolean  | Boolean indicating if the user has interacted with the app's instant experience in the past 7 days |
 
 To enable tracking the entity, you will need to have `installAutotracking` enabled (it's on by default) and add the following line to the dependencies section of the `build.gradle` file in your app:
 

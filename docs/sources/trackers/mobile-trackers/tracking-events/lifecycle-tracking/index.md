@@ -1,6 +1,6 @@
 ---
-title: "App lifecycle tracking for mobile trackers"
-sidebar_label: "App lifecycle tracking"
+title: "Tracking application lifecycle changes with the native mobile trackers"
+sidebar_label: "Application lifecycle"
 sidebar_position: 30
 ---
 

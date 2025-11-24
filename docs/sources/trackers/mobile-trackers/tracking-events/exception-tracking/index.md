@@ -1,5 +1,6 @@
 ---
-title: "Exception tracking"
+title: "Tracking exceptions with the native mobile trackers"
+sidebar_label: "Exceptions"
 sidebar_position: 50
 ---
 

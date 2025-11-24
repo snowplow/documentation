@@ -1,6 +1,6 @@
 ---
-title: "Session tracking for mobile trackers"
-sidebar_label: "Session tracking"
+title: "Tracking sessions with the native mobile trackers"
+sidebar_label: "Sessions"
 sidebar_position: 20
 ---
 
@@ -104,7 +104,7 @@ For instance, with this configuration:
 SessionConfiguration(
     foregroundTimeout: Measurement(value: 360, unit: .seconds),
     backgroundTimeout: Measurement(value: 15, unit: .seconds)
-)       
+)
 ```
 
   </TabItem>

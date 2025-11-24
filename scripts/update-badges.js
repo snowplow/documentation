@@ -80,31 +80,47 @@ function updateMarkdownFile(filePath) {
 
       // Check if this line contains a badge
       if (line.includes('Badges badgeType')) {
-        // Look ahead to find consecutive badge lines
-        const badgeLines = [];
-        let j = i;
+        // Check if this is a badge-only line or has other content
+        const trimmedLine = line.trim();
+        const isBadgeOnlyLine = /^<Badges[^>]*><\/Badges>\s*$/.test(trimmedLine);
 
-        while (j < lines.length && lines[j].includes('Badges badgeType')) {
-          badgeLines.push(lines[j]);
-          j++;
-        }
+        if (isBadgeOnlyLine) {
+          // Look ahead to find consecutive badge-only lines
+          const badgeLines = [];
+          let j = i;
 
-        // If we found multiple consecutive badge lines, wrap them
-        if (badgeLines.length > 1) {
-          newLines.push('<BadgeGroup>');
-          badgeLines.forEach(badgeLine => {
-            // Clean up the badge line
-            const cleanedLine = badgeLine
-              .replace(/&nbsp;/g, '')
-              .replace(/<br\/?>/g, '')
-              .trim();
-            newLines.push(cleanedLine);
-          });
-          newLines.push('</BadgeGroup>');
-          hasChanges = true;
-          i = j; // Skip the processed lines
+          while (j < lines.length && lines[j].includes('Badges badgeType')) {
+            const nextTrimmedLine = lines[j].trim();
+            const isNextBadgeOnly = /^<Badges[^>]*><\/Badges>\s*$/.test(nextTrimmedLine);
+            if (isNextBadgeOnly) {
+              badgeLines.push(lines[j]);
+              j++;
+            } else {
+              break; // Stop if we hit a line with mixed content
+            }
+          }
+
+          // If we found multiple consecutive badge-only lines, wrap them
+          if (badgeLines.length > 1) {
+            newLines.push('<BadgeGroup>');
+            badgeLines.forEach(badgeLine => {
+              // Clean up the badge line
+              const cleanedLine = badgeLine
+                .replace(/&nbsp;/g, '')
+                .replace(/<br\/?>/g, '')
+                .trim();
+              newLines.push(cleanedLine);
+            });
+            newLines.push('</BadgeGroup>');
+            hasChanges = true;
+            i = j; // Skip the processed lines
+          } else {
+            // Single badge-only line, keep as is
+            newLines.push(line);
+            i++;
+          }
         } else {
-          // Single badge line, keep as is
+          // Line has badges mixed with other content, don't modify it
           newLines.push(line);
           i++;
         }

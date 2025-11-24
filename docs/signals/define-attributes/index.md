@@ -1,5 +1,5 @@
 ---
-title: "Defining attributes in Snowplow Signals"
+title: "Defining attributes in Signals"
 sidebar_position: 20
 sidebar_label: "Define attributes"
 description: "Configure Snowplow Signals attributes using Console, Python SDK, or API to start calculating behavioral insights."

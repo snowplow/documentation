@@ -1,5 +1,5 @@
 ---
-title: "Attributes"
+title: "Defining attributes in Console"
 sidebar_position: 10
 sidebar_label: "Attributes"
 description: "Configure individual attributes within attribute groups to specify event schemas, properties, and aggregation methods for Signals calculations."

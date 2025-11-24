@@ -1,5 +1,5 @@
 ---
-title: "Attribute groups overview"
+title: "Defining attribute groups in Console"
 sidebar_position: 1
 sidebar_label: "Attribute groups"
 description: "Create and manage attribute groups to define behavioral data calculations from real-time streams or warehouse sources."

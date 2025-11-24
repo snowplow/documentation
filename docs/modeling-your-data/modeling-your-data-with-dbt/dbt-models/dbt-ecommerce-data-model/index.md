@@ -3,7 +3,6 @@ title: "Snowplow Ecommerce dbt package"
 sidebar_label: "Ecommerce"
 sidebar_position: 40
 description: "The Snowplow Ecommerce dbt Package"
-hide_title: true
 ---
 
 ```mdx-code-block
@@ -13,8 +12,6 @@ import Badges from '@site/src/components/Badges';
 <Badges badgeType="dbt-package Release" pkg="ecommerce"></Badges>&nbsp;
 <Badges badgeType="Actively Maintained"></Badges>
 <Badges badgeType="SPAL"></Badges>
-
-# Snowplow Ecommerce Package
 
 **The package source code can be found in the [snowplow/dbt-snowplow-ecommerce repo](https://github.com/snowplow/dbt-snowplow-ecommerce), and the docs for the [model design here](https://snowplow.github.io/dbt-snowplow-ecommerce/#!/overview/snowplow_ecommerce).**
 

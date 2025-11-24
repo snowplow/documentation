@@ -3,7 +3,6 @@ title: "Snowplow Normalize dbt package"
 sidebar_label: "Normalize"
 sidebar_position: 50
 description: "The Snowplow Normalize dbt Package"
-hide_title: true
 ---
 
 ```mdx-code-block
@@ -16,8 +15,6 @@ import Badges from '@site/src/components/Badges';
 <Badges badgeType="dbt-package Release" pkg="normalize"></Badges>&nbsp;
 <Badges badgeType="Maintained"></Badges>&nbsp;
 <Badges badgeType="SPAL"></Badges>
-
-# Snowplow Normalize Package
 
 :::note
 Normalize in this context means [database normalization](https://en.wikipedia.org/wiki/Database_normalization), as these models produce flatter data, not statistical normalization.

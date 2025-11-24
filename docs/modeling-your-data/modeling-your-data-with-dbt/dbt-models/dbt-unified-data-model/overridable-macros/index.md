@@ -3,7 +3,6 @@ title: "Overriding macros in the Unified Digital package"
 sidebar_label: "Overridable macros"
 sidebar_position: 100
 description: "Overridable macros in the Unified package"
-hide_title: true
 ---
 
 :::tip
@@ -12,13 +11,6 @@ For information about overriding our macros, see [here](/docs/modeling-your-data
 
 :::
 
-```mdx-code-block
-import MarkdownTableToMuiDataGrid from '@site/src/components/MarkdownTableAsMui'
-
-export const datagridProps = {
-    hideFooter: true
-  };
-```
 
 
 ### [<Icon icon="fa-brands fa-github"/>](https://github.com/snowplow/dbt-snowplow-unified/blob/main/macros/unify_fields_query.sql) `unify_fields_query`

@@ -2,7 +2,6 @@
 title: "Consent module for the Web package"
 sidebar_label: "Consent module"
 sidebar_position: 200
-hide_title: true
 ---
 
 ```mdx-code-block

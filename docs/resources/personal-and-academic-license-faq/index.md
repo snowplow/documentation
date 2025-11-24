@@ -1,7 +1,6 @@
 ---
 title: "FAQ: Snowplow Personal & Academic License (SPAL)"
 ---
-# FAQ: Snowplow Personal & Academic License (SPAL)
 
 :::info Note
 

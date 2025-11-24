@@ -3,7 +3,6 @@ title: "Snowplow Mobile dbt package"
 sidebar_label: "Mobile"
 description: "The Snowplow Mobile dbt Package"
 sidebar_position: 800
-hide_title: true
 ---
 
 ```mdx-code-block
@@ -22,8 +21,6 @@ import Apperrors from "@site/docs/reusable/data-modeling/app-errors/_index.md"
 This package has been superseded by the [Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) that combines data from both web and mobile sources. For more information, see the Unified Digital page.
 
 :::
-
-# Snowplow Mobile Package
 
 **The package source code can be found in the [snowplow/dbt-snowplow-mobile repo](https://github.com/snowplow/dbt-snowplow-mobile), and the docs for the [model design here](https://snowplow.github.io/dbt-snowplow-mobile/#!/overview/snowplow_mobile).**
 

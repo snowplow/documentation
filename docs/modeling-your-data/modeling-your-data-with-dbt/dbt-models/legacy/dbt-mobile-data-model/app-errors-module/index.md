@@ -2,7 +2,6 @@
 title: "App errors in Mobile package"
 sidebar_label: "App errors"
 sidebar_position: 100
-hide_title: true
 ---
 
 ```mdx-code-block
@@ -10,8 +9,6 @@ import Badges from '@site/src/components/Badges';
 ```
 
 <Badges badgeType="dbt-package Release" pkg="mobile"></Badges>
-
-# App Errors
 
 Exception tracking captures any unhandled exceptions within the application. The exception tracking is enabled by default, and it allows the tracker to intercept critical exceptions in the app. Exceptions can crash the app so it's likely that the event will be sent after the restart of the app. Being a critical situation we can't be 100% sure that all the exception stacktraces are reliably stored for sending before the crash of the app.
 

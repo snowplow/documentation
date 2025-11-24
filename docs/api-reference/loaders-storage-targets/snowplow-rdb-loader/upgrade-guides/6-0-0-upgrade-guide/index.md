@@ -1,5 +1,6 @@
 ---
-title: "6.0.0 upgrade guide"
+title: "RDB Loader v6.0.0 upgrade guide"
+sidebar_label: "6.0.0 upgrade guide"
 sidebar_position: -20
 ---
 
@@ -115,7 +116,7 @@ Let's see how we can use `igluctl` to solve this problem.
 ```bash
 mkdir <schemas_folder> <sql_folder>
 igluctl static pull <schemas_folder> <iglu_url> <iglu_key>
-igluctl static generate <schemas_folder> <sql_folder> 
+igluctl static generate <schemas_folder> <sql_folder>
 # ...
 # iglu:com.test/test/jsonschema/1-0-1 has a breaking change Incompatible types in column example_field old RedshiftSmallInt new RedshiftInteger
 # ...
@@ -135,7 +136,7 @@ igluctl table-check \
         --dbschema <schema>
 # ...
 # * Column doesn't match, expected: 'example_field SMALLINT', actual: 'example_field INT'
-# ...   
+# ...
 ```
 
 We got the `Column doesn't match` output with the above example because the table column had been migrated manually from `SMALLINT` to `INT`. Since the latest schema version that doesn't contain any breaking change is `1-0-0`, `table-check` command expects to see `SMALLINT` in the table therefore it gives the `Column doesn't match` output.

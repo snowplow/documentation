@@ -1,5 +1,6 @@
 ---
-title: "R33/R34 Upgrade Guide"
+title: "RDB Loader R33/R34 upgrade guide"
+sidebar_label: "R33/R34 upgrade guide"
 date: "2020-12-01"
 sidebar_position: 400
 ---

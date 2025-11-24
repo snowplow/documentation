@@ -1,5 +1,6 @@
 ---
-title: "R32 Upgrade Guide"
+title: "RDB Loader R32 upgrade guide"
+sidebar_label: "R32 upgrade guide"
 date: "2020-03-06"
 sidebar_position: 700
 ---

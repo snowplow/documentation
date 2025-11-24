@@ -56,7 +56,7 @@ An example tile:
 
 ![Visualization tile showing start install process](images/install-app-tile.png)
 
-During installation, you will need to [provide a connection](#warehouse-connections) to the warehouse you would like the visualization to use. It will also highlight any required pipeline and data model dependencies.
+During installation, you will need to provide a connection to the warehouse you would like the visualization to use. It will also highlight any required pipeline and data model dependencies.
 
 The installation workflow will look something like this:
 

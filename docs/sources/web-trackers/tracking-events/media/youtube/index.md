@@ -449,7 +449,7 @@ enableYouTubeTracking({ id, options?: { label?, captureEvents?, boundaries?, upd
 | `id`                    | `string` or `YT.Player` | \-                  | The HTML id attribute of the media element                                                                     | Yes      |
 | `options.label`         | `string`                | \-                  | An identifiable custom label sent with the event                                                               | No       |
 | `options.captureEvents` | `string[]`              | `['DefaultEvents']` | The events or Event Group to capture. For a full list of events and groups, check the [section below](#events) | No       |
-| `options.boundaries`    | `number[]`              | `[10, 25, 50, 75]`  | The progress percentages to fire an event at (valid values 1 - 99 inclusive) [[1]](#1)                         | No       |
+| `options.boundaries`    | `number[]`              | `[10, 25, 50, 75]`  | The progress percentages to fire an event at (valid values 1 - 99 inclusive) | No       |
 | `options.*`             | `any`                   |                     | Any other options are passed through to `startMediaTracking`                                                   | No       |
 
 Below is an example of the full `enableYouTubeTracking` function:

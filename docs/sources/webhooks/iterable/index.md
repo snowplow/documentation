@@ -27,7 +27,7 @@ If you want, you can also manually override the event's `platform` parameter b
 https://<collector host>/com.snowplowanalytics.iglu/v1?schema=iglu%3Acom.iterable%2Fsystem_webhook%2Fjsonschema%2F1-0-0&aid=<company>&p=<platform code>
 ```
 
-Supported platform codes can again be found in the [Snowplow Tracker Protocol](/docs/events/index.md#application-parameters); if not set, then the value for `platform` will default to `srv` for a server-side application.
+Supported platform codes can again be found in the [Snowplow Tracker Protocol](/docs/fundamentals/canonical-event/index.md#application-fields); if not set, then the value for `platform` will default to `srv` for a server-side application.
 
 Having entered the endpoint URL, click on **Create**. This will open a form where you can set up authentication of the callbacks – leave that to "None". In the bottom part of the page, you will be able to select which events to subscribe to as shown in this screenshot:
 

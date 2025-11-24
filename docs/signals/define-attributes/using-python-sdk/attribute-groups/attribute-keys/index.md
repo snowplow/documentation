@@ -8,7 +8,7 @@ keywords: ["attribute keys", "custom attribute keys", "analytical context", "ato
 
 An [attribute key](/docs/signals/concepts/index.md#attribute-keys) is the identifier that attributes are calculated against.
 
-Signals includes a number of out-of-the-box attribute keys based on commonly used identifiers from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) in all Snowplow events.
+Signals includes a number of out-of-the-box attribute keys based on commonly used identifiers from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-fields) in all Snowplow events.
 
 Import them into your notebook like this:
 
@@ -23,7 +23,7 @@ from snowplow_signals import (
 
 ## Custom attribute keys
 
-You can also define custom attribute keys, which allows you to calculate attributes on any other Snowplow atomic property you want. Atomic properties are those that are defined in the [atomic fields](/docs/fundamentals/canonical-event/index.md#atomic-fields) of the core Snowplow event, not properties tracked as part of an entity.
+You can also define custom attribute keys, which allows you to calculate attributes on any other Snowplow atomic property you want. Atomic properties are those that are defined in the [atomic fields](/docs/fundamentals/canonical-event/index.md#common-fields) of the core Snowplow event, not properties tracked as part of an entity.
 
 For example, an attribute key that groups by `app_id` can be defined as:
 

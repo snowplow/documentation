@@ -97,8 +97,6 @@ Optional modules are disabled by default. Please enable where appropriate by set
 
 #### Running the model
 
-[Locally](#tablocally)[In orchestration](#tabin-orchestration)
-
 ##### Authentication
 
 1. Set database password as an environmental variable.
@@ -117,6 +115,8 @@ bash .scripts/run_config.sh -b ~/pathTo/sql-runner -c mobile/v1/{warehouse}/sql-
 ```
 
 For more details please see the README within the `.scripts` directory.
+
+##### In orchestration
 
 ##### Authentication
 

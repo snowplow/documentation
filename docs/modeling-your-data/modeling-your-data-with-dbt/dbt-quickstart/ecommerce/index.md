@@ -15,7 +15,7 @@ import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
 In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web events dataset being available in your database, the requirements are:
 
 - A dataset of ecommerce events from the [Snowplow JavaScript tracker](/docs/sources/web-trackers/index.md), or the [iOS/Android](/docs/sources/mobile-trackers/tracking-events/ecommerce-tracking/index.md) trackers must be available in the database.
-- Have the [`webPage` context](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md#adding-predefined-contexts) enabled. (Note if you have only tracked mobile ecommerce events, you will need other events in your warehouse to have used this context as we require the column to exist).
+- Have the [`webPage` context](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md) enabled. (Note if you have only tracked mobile ecommerce events, you will need other events in your warehouse to have used this context as we require the column to exist).
 - Have the following ecommerce contexts enabled: `cart`, `checkout_step`, `page` `transaction`, `user`
 - Track the ecommerce tracking action events on your website/mobile application
 
@@ -43,7 +43,7 @@ If you do not do this the package will still work, but the incremental upserts w
 
 ### 2. Adding the `selectors.yml` file
 
-Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the ecommerce model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#yaml-selectors) section.
+Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the ecommerce model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/model-selection/index.md) section.
 
 These are defined in the `selectors.yml` file ([source](https://github.com/snowplow/dbt-snowplow-ecommerce/blob/main/selectors.yml)) within the package, however in order to use these selectors you will need to copy this file into your own dbt project directory. This is a top-level file and therefore should sit alongside your `dbt_project.yml` file. If you are using multiple packages in your project you will need to combine the contents of these into a single file.
 

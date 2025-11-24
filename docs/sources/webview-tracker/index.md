@@ -281,7 +281,7 @@ Use this method to track any kind of Snowplow event e.g. a page ping. You will n
 
 | Argument     | Description                                                                                               | Required? |
 | ------------ | --------------------------------------------------------------------------------------------------------- | --------- |
-| `properties` | Event properties that are ["baked-in"](/docs/fundamentals/canonical-event/index.md#out-of-the-box-fields) | Yes       |
+| `properties` | Event properties that are ["baked-in"](/docs/fundamentals/canonical-event/index.md#common-fields) | Yes       |
 | `event`      | An optional self-describing event, with `schema` and `data` properties                                    | No        |
 | `context`    | List of context entities as self-describing JSON                                                          | No        |
 

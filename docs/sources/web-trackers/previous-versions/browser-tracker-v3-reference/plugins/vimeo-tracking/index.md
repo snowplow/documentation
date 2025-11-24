@@ -168,7 +168,7 @@ video.on('pause', () => {
 
 ### Tracking Advertising Events
 
-Advertising events are not tracked automatically, but can be tracked using the `trackAd*` functions provided by Snowplow Media. For a full list of available functions, see the [Snowplow Media Plugin documentation](/docs/sources/web-trackers/previous-versions/browser-tracker-v3-reference/plugins/media/index.md#update-ad-and-ad-break-properties).
+Advertising events are not tracked automatically, but can be tracked using the `trackAd*` functions provided by Snowplow Media. For a full list of available functions, see the [Snowplow Media Plugin documentation](/docs/sources/web-trackers/previous-versions/browser-tracker-v3-reference/plugins/media-tracking/index.md).
 
 ```javascript
 import { trackMediaAdBreakStart, trackMediaAdBreakEnd } from '@snowplow/browser-plugin-media';

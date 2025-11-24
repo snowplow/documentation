@@ -85,8 +85,8 @@ The context entity is enabled by default but the information that is included is
 
 ### How to track?
 
-* [iOS and Android tracker](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md#platform-context).
-* [React Native tracker](/docs/sources/react-native-tracker/tracking-events/platform-and-application-context/index.md#platform-context).
+* [iOS and Android tracker](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md#platform-mobile-context).
+* [React Native tracker](/docs/sources/react-native-tracker/tracking-events/platform-and-application-context/index.md).
 
 ## Context entities added during enrichment
 

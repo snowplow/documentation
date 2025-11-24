@@ -34,7 +34,7 @@ const TrackerConfiguration()
 
 On web, setting `userAnonymisation` stops any user identifiers or session information being stored in cookies or localStorage. This means that `domain_userid`, `domain_sessionid`, and `domain_sessionidx` will be anonymised. These properties are already not present in any mobile events.
 
-On mobile, setting `userAnonymisation` affects properties in the Session and Platform entities. In this example, the Platform entity is enabled. The `appleIdfv` Platform property would be anonymised, as well as `appleIdfa`/`androidIdfa` if your app is [configured](/docs/sources/react-native-tracker/advanced-usage/index.md#tracking-user-identifiers) to track those.
+On mobile, setting `userAnonymisation` affects properties in the Session and Platform entities. In this example, the Platform entity is enabled. The `appleIdfv` Platform property would be anonymised, as well as `appleIdfa`/`androidIdfa` if your app is configured to track those.
 
 
 ## 2. Client-side anonymisation with session tracking

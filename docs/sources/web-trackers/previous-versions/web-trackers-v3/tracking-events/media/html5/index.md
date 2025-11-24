@@ -164,8 +164,8 @@ enableMediaTracking({
 | `id`                                   | `string`   | \-                  | The HTML id attribute of the media element                                                                     | Yes      |
 | `options.label`                        | `string`   | \-                  | An identifiable custom label sent with the event                                                               | No       |
 | `options.captureEvents`                | `string[]` | `['DefaultEvents']` | The events or Event Group to capture. For a full list of events and groups, check the [section below](#events) | No       |
-| `options.boundaries`                   | `number[]` | `[10, 25, 50, 75]`  | The progress percentages to fire an event at (valid values 1 - 99 inclusive) [[1]](#1)                         | No       |
-| `options.volumeChangeTrackingInterval` | `number`   | `250`               | The rate at which volume events can be sent [[2]](#2)                                                          | No       |
+| `options.boundaries`                   | `number[]` | `[10, 25, 50, 75]`  | The progress percentages to fire an event at (valid values 1 - 99 inclusive) [*]                         | No       |
+| `options.volumeChangeTrackingInterval` | `number`   | `250`               | The rate at which volume events can be sent [**]                                                          | No       |
 
 1. To track when a video ends, use the 'ended' event.
 

@@ -24,8 +24,8 @@ The Snowplow web data model aggregates Snowplow's out of the box page view and p
 #### Requirements
 
 - [Snowplow Javascript tracker](/docs/sources/web-trackers/index.md) version 2 or later implemented.
-- Web Page context [enabled](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md#webpage-context) (enabled by default in [v3+](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md#webpage-context)).
-- [Page view events](/docs/sources/web-trackers/tracking-events/index.md#page-views) implemented.
+- Web Page context [enabled](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md) (enabled by default in [v3+](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md)).
+- [Page view events](/docs/sources/web-trackers/tracking-events/page-views/index.md) implemented.
 
 #### Prerequisites
 

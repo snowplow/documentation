@@ -49,7 +49,7 @@ This model consists of a series of modules, each producing a table which serves 
 - User Mapping: Provides a mapping between user identifiers, `user_identifier` and `user_id`, outputting the table `snowplow_unified_user_mapping`. This can be used for session stitching.
 
 ### Supported Entities
-While using any entity in our packages is possible thanks to [modeling entities](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/modeling-entities/index.md), a large set of common web and mobile entities are built into the processing of the package to add to your derived tables. Note these are in addition to those [required](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/unified/index.md#requirements) to run the package.
+While using any entity in our packages is possible thanks to [modeling entities](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/modeling-entities/index.md), a large set of common web and mobile entities are built into the processing of the package to add to your derived tables.
 
 | Entity                                                                                                          | Type   | Enabled via Variable                                                                                                                                            |
 | --------------------------------------------------------------------------------------------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -99,7 +99,7 @@ dark: require('./images/engaged_time_dark.drawio.png').default
 />
 </p>
 
-At a session level, this calculation is slightly more involved, as it needs to happen per page view and account for [stray page pings](#stray-page-pings), but the underlying idea is the same.
+At a session level, this calculation is slightly more involved, as it needs to happen per page view and account for stray page pings (see below), but the underlying idea is the same.
 
 ### Mobile Calculation
 For Mobile we use the `screen_summary` entity from the [mobile trackers](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md#screen-engagement-tracking) for the engaged time. Check out the [mobile engagement demo](https://snowplow-incubator.github.io/mobile-screen-engagement-demo/) for a live view of this.

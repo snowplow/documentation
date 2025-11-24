@@ -10,7 +10,7 @@ The Unified Digital package includes several macros you can override to customiz
 
 :::tip
 
-For information about overriding our macros, see [here](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/overridable-macros/index.md#overriding-macros)
+For information about overriding our macros, see [here](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/overridable-macros/index.md)
 
 :::
 

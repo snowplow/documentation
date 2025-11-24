@@ -90,7 +90,7 @@ Snowplow.createTracker(getApplicationContext(), namespace, networkConfig, sessio
   </TabItem>
 </Tabs>
 
-The lifecycle events (`Foreground` and `Background` events) have a role in the session expiration. The lifecycle events can be enabled as explained in [App Lifecycle Tracking](#lifecycle-tracking). Once enabled they will be fired automatically when the app moves from foreground state to background state and vice versa.
+The lifecycle events (`Foreground` and `Background` events) have a role in the session expiration. The lifecycle events can be enabled as explained in [App Lifecycle Tracking](/docs/sources/mobile-trackers/tracking-events/lifecycle-tracking/index.md). Once enabled they will be fired automatically when the app moves from foreground state to background state and vice versa.
 
 When the app moves from foreground to background, the `Background` event is fired. If session tracking is enabled, the session entity will be attached to the event checking the session expiration using the foreground timeout.
 When the app moves from background to foreground, the `Foreground` event is fired. If session tracking is enabled, the session entity will be attached to the event checking the session expiration using the background timeout.

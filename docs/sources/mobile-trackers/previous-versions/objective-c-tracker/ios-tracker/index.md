@@ -278,7 +278,7 @@ On the tracker setup you can override the device platform entry calling:
 
 It resets the parameter `p` (platform) to the new value.
 
-[Here](/docs/events/index.md#application-parameters) a full list of the supported platform values.
+[Here](/docs/fundamentals/canonical-event/index.md#application-fields) a full list of the supported platform values.
 
 ### Sending events
 

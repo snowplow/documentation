@@ -33,7 +33,7 @@ This is tracked in the `web_page` context entity in that page view event and for
 
 ### How to track?
 
-See the [documentation for the JavaScript tracker](/docs/sources/web-trackers/tracking-events/index.md#page-views) to learn how to track a page view event.
+See the [documentation for the JavaScript tracker](/docs/sources/web-trackers/tracking-events/page-views/index.md) to learn how to track a page view event.
 
 ## Screen view events
 

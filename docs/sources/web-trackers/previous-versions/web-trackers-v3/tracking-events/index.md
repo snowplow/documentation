@@ -118,7 +118,7 @@ However, the following autotracked context entities can be configured directly w
 
 | Entity                                                    | Usage                             | Enabled by default |
 | --------------------------------------------------------- | --------------------------------- | ------------------ |
-| [`webPage`](./page-views/index.md#webpage-context-entity) | A UUID for the page view.         | `true`             |
+| [`webPage`](./page-views/index.md#webpage-page-view-id-context-entity) | A UUID for the page view.         | `true`             |
 | [`session`](./session/index.md)                           | Data about the current session.   | `false`            |
 | [`browser`](../browsers/index.md)                         | Properties of the user's browser. | `false`            |
 
@@ -207,7 +207,7 @@ Set the application ID using the `appId` field of the [tracker configuration o
 
 ### Setting application platform
 
-Set the application platform using the `platform` field of the [tracker configuration object](../tracker-setup/initialization-options/index.md). This will be attached to every event the tracker fires. Its default value is “web”. For a list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/events/index.md#application-parameters).
+Set the application platform using the `platform` field of the [tracker configuration object](../tracker-setup/initialization-options/index.md). This will be attached to every event the tracker fires. Its default value is “web”. For a list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/fundamentals/canonical-event/index.md#application-fields).
 
 ### Setting the user ID
 

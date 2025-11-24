@@ -83,7 +83,7 @@ const tracker = createTracker(
 );
 ```
 
-See the the full [list of options in the configuration section](/docs/sources/react-native-tracker/index.md#subjectconfiguration).
+See the the full [list of options in the configuration section](/docs/sources/react-native-tracker/previous-version/react-native-tracker-v2-reference/introduction/index.md#configuring-the-tracker).
 
 ### Setting the subject data in a tracker instance
 

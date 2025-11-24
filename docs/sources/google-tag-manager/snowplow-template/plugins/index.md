@@ -9,7 +9,7 @@ keywords: ["gtm plugins", "tracker plugins", "javascript tracker plugins", "cust
 Plugins are supported to provide an easy way to extend the functionality of the tracker. This is similar to the [JavaScript Tracker](/docs/sources/web-trackers/plugins/creating-your-own-plugins/index.md) but with the caveat that plugins may be more limited in their functionality due to the constraints of the Google Tag Manager environment.
 
 Each plugin can be loaded from external URLs or provided inline within GTM, and can optionally take some custom configuration.
-A plugin may add new methods to the tracker that can be called via [Custom Commands](#custom-commands).
+A plugin may add new methods to the tracker that can be called via [Custom Commands](../index.md#custom-commands).
 
 :::note
 

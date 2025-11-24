@@ -17,7 +17,7 @@ To begin with, some of the caveats of using the Custom Template.
 
 - Any methods that require the parsing of HTML elements (e.g. link tracking filter functions, cross domain linking) will not work and are thus disabled.
 - Automatic error tracking does not work due to lack of support for the `ErrorEvent` API.
-- There is no implementation for the [standard ecommerce](/docs/sources/web-trackers/tracking-events/index.md#ecommerce-tracking) events. Users are encouraged to implement the [enhanced ecommerce](/docs/sources/web-trackers/tracking-events/index.md#enhanced-ecommerce-tracking) setup instead.
+- There is no implementation for the legacy ecommerce events. Users are encouraged to implement the [enhanced ecommerce](/docs/sources/web-trackers/tracking-events/ecommerce/index.md) setup instead.
 
 ## Instructions
 

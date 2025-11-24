@@ -28,7 +28,7 @@ To begin with, some of the caveats of using the Custom Template.
 
 - Any methods that require the parsing of HTML elements (e.g. link tracking filter functions, cross domain linking) will not work and are thus disabled.
 - Automatic error tracking does not work due to lack of support for the `ErrorEvent` API.
-- There is no implementation for the [standard ecommerce](../../../../tracking-events/index.md#ecommerce-tracking) events. Users are encouraged to implement the [enhanced ecommerce](../../../../tracking-events/index.md#enhanced-ecommerce-tracking) setup instead.
+- There is no implementation for the [standard ecommerce](../../../../tracking-events/ecommerce/index.md) events. Users are encouraged to implement the [enhanced ecommerce](../../../../tracking-events/ecommerce/enhanced/index.md) setup instead.
 
 ## Instructions
 
@@ -86,7 +86,7 @@ Tags that can derive their parameters from a Google Tag Manager variable are:
 - Structured Event
 - Timing
 
-You can set the **Retrieve Parameters From Variable** setting to a Google Tag Manager variable. This parameter _must_ return an object. In the object, the key-value pairs should reflect the named parameters in the [event documentation](../../../../tracking-events/index.md). For example, to have the variable populate an [Error event](../../../../tracking-events/index.md#error-tracking), you could use a Custom JavaScript variable like this:
+You can set the **Retrieve Parameters From Variable** setting to a Google Tag Manager variable. This parameter _must_ return an object. In the object, the key-value pairs should reflect the named parameters in the [event documentation](../../../../tracking-events/index.md). For example, to have the variable populate an [Error event](../../../../tracking-events/errors/index.md), you could use a Custom JavaScript variable like this:
 
 ```javascript
 function() {
@@ -138,7 +138,7 @@ If you check **Track HTML Content Of Clicked Link**, then the full text content 
 
 ##### Page View
 
-You can provide a **Custom Page Title** if you wish, and you can add a [custom context](../../../../tracking-events/index.md#custom-context) to the request, as also described [here](../../../../tracking-events/index.md#trackpageview).
+You can provide a **Custom Page Title** if you wish, and you can add a [custom context](../../../../custom-tracking-using-schemas/index.md) to the request, as also described [here](../../../../tracking-events/page-views/index.md).
 
 If you enable **Page Activity Tracking**, the tag will setup a _heartbeat_ tracker, and send page pings to Snowplow at intervals that you can specify.
 
@@ -164,11 +164,11 @@ And then use this variable as your Command Argument:
 
 #### Add Custom Context Entities
 
-Using the **Context Entities** table allows you to attach [custom context entities](../../../../tracking-events/index.md#custom-context) to the Snowplow event. Each row should be set to a variable value that must be an **array of custom context objects** that will all be concatenated to add to the Event.
+Using the **Context Entities** table allows you to attach [custom context entities](../../../../custom-tracking-using-schemas/index.md) to the Snowplow event. Each row should be set to a variable value that must be an **array of custom context objects** that will all be concatenated to add to the Event.
 
 #### Set Custom Timestamp
 
-You can also choose to [set the True Timestamp](../../../../tracking-events/index.md#setting-the-true-timestamp) with this field. The format must be UNIX time in milliseconds.
+You can also choose to [set the True Timestamp](../../../../tracking-events/index.md#adding-custom-timestamps-to-events) with this field. The format must be UNIX time in milliseconds.
 
 ## Acknowledgements
 

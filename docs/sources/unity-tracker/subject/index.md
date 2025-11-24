@@ -11,16 +11,16 @@ You may have additional information about your application's environment, curren
 
 The Subject class has a set of `Set...()` methods to attach extra data relating to the user to all tracked events:
 
-- [`SetUserId`](#set-user-id)
-- [`SetScreenResolution`](#set-screen-resolution)
-- [`SetViewport`](#set-viewport)
-- [`SetColorDepth`](#set-color-depth)
-- [`SetTimezone`](#set-timezone)
-- [`SetLanguage`](#set-language)
-- [`SetIpAddress`](#set-ip-address)
-- [`SetUseragent`](#set-useragent)
-- [`SetNetworkUserId`](#set-network-user-id)
-- [`SetDomainUserId`](#set-domain-user-id)
+- `SetUserId`
+- `SetScreenResolution`
+- `SetViewport`
+- `SetColorDepth`
+- `SetTimezone`
+- `SetLanguage`
+- `SetIpAddress`
+- `SetUseragent`
+- `SetNetworkUserId`
+- `SetDomainUserId`
 
 Here are some examples:
 

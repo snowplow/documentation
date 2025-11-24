@@ -40,7 +40,7 @@ You should see a message like this in the logs:
 [INFO] com.snowplowanalytics.snowplow.micro.Main$ - HTTPS REST interface bound to /0.0.0.0:9543
 ```
 
-As usual, you can change the ports to your liking (see [Running Micro](/docs/testing/snowplow-micro/basic-usage/index.md#running)).
+As usual, you can change the ports to your liking (see [Running Micro](/docs/testing/snowplow-micro/basic-usage/index.md)).
 
 ## Adding custom Iglu resolver configuration
 

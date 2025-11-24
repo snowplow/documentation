@@ -65,7 +65,7 @@ This is an external identifier given in the tracker by the app. Most commonly it
 The business user identifier is provided under the `user_id` field in the atomic events as well as our dbt packages.
 :::
 
-All our trackers have an API to set this identifier. You can find it in [the JavaScript tracker docs here](/docs/sources/web-trackers/tracking-events/index.md#setting-the-user-id) and [the mobile trackers docs here](/docs/sources/mobile-trackers/client-side-properties/index.md#set-the-subjectconfiguration).
+All our trackers have an API to set this identifier. You can find it in [the JavaScript tracker docs here](/docs/sources/web-trackers/tracking-events/index.md#setting-the-user-id) and [the mobile trackers docs here](/docs/sources/mobile-trackers/client-side-properties/index.md#set-the-subject-properties).
 
 This identifier can be very useful to stitch the generated tracker identifiers together in order to identify the same user across multiple browsers or devices. See below for more information on user stitching.
 
@@ -145,7 +145,7 @@ It contains the tracker generated user and session identifiers.
 
 ### Properties in the atomic events
 
-See the [table on this page](/docs/fundamentals/canonical-event/index.md#user-related-fields) to get an overview of the user and session related fields in the atomic events table.
+See the [table on this page](/docs/fundamentals/canonical-event/index.md#user-fields) to get an overview of the user and session related fields in the atomic events table.
 
 ## Anonymisation
 

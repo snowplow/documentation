@@ -908,7 +908,7 @@ code {
 /* Remove margin-bottom from code blocks */
 .prose pre.prism-code {
   margin-bottom: 0;
-  scrollbar-color: rgba(125, 118, 188, 0.5) transparent;
+  scrollbar-color: #ccc transparent;
 }
 
 .prose pre.prism-code:hover {
@@ -1261,6 +1261,57 @@ abbr[data-title]:hover:after {
 }
 
 /* END  Control rest of the elements erase after we upgrade */
+
+/* Custom code block header and button styling */
+.theme-code-block {
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+
+/* Ensure buttons are always visible in header */
+.theme-code-block button {
+  opacity: 1 !important;
+  background: hsl(var(--accent));
+  border: 1px solid hsl(var(--border));
+  color: hsl(var(--foreground));
+  border-radius: 0.375rem;
+  padding: 0.5rem;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 32px;
+  min-height: 32px;
+}
+
+.theme-code-block button:hover {
+  background: hsl(var(--muted));
+  border-color: hsl(var(--primary));
+}
+
+/* Ensure button icons are properly sized */
+.theme-code-block button svg {
+  width: 16px;
+  height: 16px;
+  display: block;
+}
+
+/* Remove the default button positioning */
+div[class*='buttonGroup'] {
+  position: static !important;
+}
+
+/* Code block pre should not have extra padding at top since header handles spacing */
+.theme-code-block pre {
+  margin: 0;
+  border-radius: 0;
+}
+
+/* Adjust the padding-top override to work with new header */
+.theme-code-block div[class^='codeBlockContent'] {
+  padding-top: 0 !important;
+}
 
 @media print {
   aside.cookie-though {

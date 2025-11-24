@@ -228,7 +228,8 @@ module.exports = {
         copyright: `Copyright © ${new Date().getFullYear()} Snowplow Analytics Ltd.`,
       },
       prism: {
-        theme: require('prism-react-renderer').themes.shadesOfPurple,
+        theme: require('prism-react-renderer').themes.github,
+        darkTheme: require('prism-react-renderer').themes.shadesOfPurple,
         // Docusaurus comes with a subset of commonly used languages -https://github.com/FormidableLabs/prism-react-renderer/blob/master/src/vendor/prism/includeLangs.js.
         // To add syntax highlighting for additional Prism supported languages, add reference from https://prismjs.com/#supported-languages.
         // NOTE: do a `yarn build` to ensure that it does build properly
@@ -276,7 +277,6 @@ module.exports = {
       },
     },
   ],
-
 
   customFields: {
     webpack: {

@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react'
 import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material/styles'
 import theme from '@site/src/components/MuiTheme'
 import { ProductFruits } from 'react-product-fruits'
-import { Toaster } from '@site/src/components/ui/toaster'
 
 const useCookie = () => {
   const [userId, setUserId] = useState('unknown_user')
@@ -89,10 +88,8 @@ export default function Root({ children }) {
         />
       )}
 
-      <CssVarsProvider theme={theme}>
-        {children}
-        <Toaster />
-      </CssVarsProvider>
+      {getInitColorSchemeScript()}
+      <CssVarsProvider theme={theme}>{children}</CssVarsProvider>
     </>
   )
 }

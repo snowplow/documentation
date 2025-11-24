@@ -1,5 +1,6 @@
 ---
-title: "WebViews"
+title: "Tracking WebViews and hybrid applications using the web trackers"
+sidebar_label: "Hybrid applications"
 sidebar_position: 180
 ---
 

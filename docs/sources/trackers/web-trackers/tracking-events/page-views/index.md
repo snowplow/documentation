@@ -1,5 +1,6 @@
 ---
-title: "Page views"
+title: "Tracking page views on web"
+sidebar_label: "Page views"
 sidebar_position: 20
 ---
 

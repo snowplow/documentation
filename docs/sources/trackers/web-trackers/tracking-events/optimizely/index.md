@@ -1,5 +1,6 @@
 ---
-title: "Optimizely"
+title: "Integrating Optimizely with the web trackers"
+sidebar_label: "Optimizely"
 sidebar_position: 170
 ---
 

@@ -1,5 +1,6 @@
 ---
-title: "YouTube"
+title: "YouTube media tracking on web"
+sidebar_label: "YouTube"
 sidebar_position: 20
 ---
 
@@ -20,9 +21,9 @@ YouTube media events and entities are **automatically tracked** once configured.
   <TabItem value="js" label="JavaScript (tag)" default>
 
 | Tracker Distribution | Included |
-|----------------------|----------|
-| `sp.js`              | ❌       |
-| `sp.lite.js`         | ❌       |
+| -------------------- | -------- |
+| `sp.js`              | ❌        |
+| `sp.lite.js`         | ❌        |
 
 **Download:**
 
@@ -321,27 +322,27 @@ endYouTubeTracking(mediaSessionId);
 
 Below is a table of all the core Snowplow Media plugin events that can be used in the `captureEvents` option:
 
-| Name                  | Fire Condition                                                    |
-|-----------------------|-------------------------------------------------------------------|
-| ready                 | The video player has loaded                                       |
-| play                  | The video is played                                               |
-| pause                 | The video is paused                                               |
-| end                   | When playback stops at the end of the video                       |
-| seek_start            | When seeking begins to jump to another position of the video      |
-| seek_end              | When seeking ends and another position of the video is jumped to  |
-| playback_rate_change  | Playback rate has changed                                         |
-| volume_change         | Volume has changed                                                |
-| ping                  | Fires periodically during playback                                |
-| percent_progress      | Fires at progress milestones defined by `boundaries` option       |
-| buffer_start          | Fires when playback pauses because content is not yet buffered    |
-| buffer_end            | Fires when playback resumes after content has been fetched        |
-| quality_change        | Playback quality has changed                                      |
-| error                 | An error occurs in the player                                     |
+| Name                 | Fire Condition                                                   |
+| -------------------- | ---------------------------------------------------------------- |
+| ready                | The video player has loaded                                      |
+| play                 | The video is played                                              |
+| pause                | The video is paused                                              |
+| end                  | When playback stops at the end of the video                      |
+| seek_start           | When seeking begins to jump to another position of the video     |
+| seek_end             | When seeking ends and another position of the video is jumped to |
+| playback_rate_change | Playback rate has changed                                        |
+| volume_change        | Volume has changed                                               |
+| ping                 | Fires periodically during playback                               |
+| percent_progress     | Fires at progress milestones defined by `boundaries` option      |
+| buffer_start         | Fires when playback pauses because content is not yet buffered   |
+| buffer_end           | Fires when playback resumes after content has been fetched       |
+| quality_change       | Playback quality has changed                                     |
+| error                | An error occurs in the player                                    |
 
 In addition, the following event names are also accepted for compatibility with v3, mapped to the equivalent event from above:
 
 | Name                  | Fire Condition                                                    |
-|-----------------------|-------------------------------------------------------------------|
+| --------------------- | ----------------------------------------------------------------- |
 | seek                  | On seek                                                           |
 | volumechange          | Volume has changed                                                |
 | ended                 | When playback stops at the end of the video                       |
@@ -351,30 +352,30 @@ In addition, the following event names are also accepted for compatibility with 
 
 The following events are defined by the core Snowplow Media plugin but _not_ supported by this plugin or the YouTube API:
 
-| Name                      | Fire Condition                                                |
-|---------------------------|---------------------------------------------------------------|
-| fullscreen_change         | Full screen state toggled                                     |
-| picture_in_picture_change | Picture-in-picture state toggled                              |
-| ad_break_start            | Beginning of an ad break                                      |
-| ad_break_end              | End of an ad break                                            |
-| ad_start                  | Beginning of an ad within an ad break                         |
-| ad_first_quartile         | 25% progress through an ad                                    |
-| ad_midpoint               | 50% progress through an ad                                    |
-| ad_third_quartile         | 75% progress through an ad                                    |
-| ad_complete               | 100% progress through an ad                                   |
-| ad_skip                   | User has opted to skip the ad before completion               |
-| ad_click                  | User has clicked the playing ad                               |
-| ad_pause                  | User has paused the playing ad                                |
-| ad_resume                 | User has resumed the paused ad                                |
+| Name                      | Fire Condition                                  |
+| ------------------------- | ----------------------------------------------- |
+| fullscreen_change         | Full screen state toggled                       |
+| picture_in_picture_change | Picture-in-picture state toggled                |
+| ad_break_start            | Beginning of an ad break                        |
+| ad_break_end              | End of an ad break                              |
+| ad_start                  | Beginning of an ad within an ad break           |
+| ad_first_quartile         | 25% progress through an ad                      |
+| ad_midpoint               | 50% progress through an ad                      |
+| ad_third_quartile         | 75% progress through an ad                      |
+| ad_complete               | 100% progress through an ad                     |
+| ad_skip                   | User has opted to skip the ad before completion |
+| ad_click                  | User has clicked the playing ad                 |
+| ad_pause                  | User has paused the playing ad                  |
+| ad_resume                 | User has resumed the paused ad                  |
 
 ### Event Groups
 
 You can also use a pre-made event group names in `captureEvents`:
 
-| Name            | Events                                                                                                                 |
-|-----------------|------------------------------------------------------------------------------------------------------------------------|
+| Name            | Events                                                                                                                                               |
+| --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `DefaultEvents` | `['ready', 'play', 'pause', 'ping', 'end', 'seek_start', 'seek_end', 'volume_change', 'percent_progress', 'playback_rate_change', 'quality_change']` |
-| `AllEvents`     | Every supported event listed in [Capturable Events](#capturable-events)                                                |
+| `AllEvents`     | Every supported event listed in [Capturable Events](#capturable-events)                                                                              |
 
 It is possible to extend an event group with any event in the Events table above. This could be useful if you want, for example, all the events contained in the 'DefaultEvents' group, along with the 'error' event. This is expressed in the following way:
 
@@ -444,12 +445,12 @@ enableYouTubeTracking({ id, options?: { label?, captureEvents?, boundaries?, upd
 
 
 | Parameter               | Type                    | Default             | Description                                                                                                    | Required |
-|-------------------------|-------------------------|---------------------|----------------------------------------------------------------------------------------------------------------|----------|
+| ----------------------- | ----------------------- | ------------------- | -------------------------------------------------------------------------------------------------------------- | -------- |
 | `id`                    | `string` or `YT.Player` | \-                  | The HTML id attribute of the media element                                                                     | Yes      |
 | `options.label`         | `string`                | \-                  | An identifiable custom label sent with the event                                                               | No       |
 | `options.captureEvents` | `string[]`              | `['DefaultEvents']` | The events or Event Group to capture. For a full list of events and groups, check the [section below](#events) | No       |
 | `options.boundaries`    | `number[]`              | `[10, 25, 50, 75]`  | The progress percentages to fire an event at (valid values 1 - 99 inclusive) [[1]](#1)                         | No       |
-| `options.*`             | `any`                   |                     | Any other options are passed through to `startMediaTracking`                         | No       |
+| `options.*`             | `any`                   |                     | Any other options are passed through to `startMediaTracking`                                                   | No       |
 
 Below is an example of the full `enableYouTubeTracking` function:
 

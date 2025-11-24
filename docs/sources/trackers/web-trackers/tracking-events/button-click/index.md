@@ -1,5 +1,6 @@
 ---
-title: "Button clicks"
+title: "Tracking button clicks on web"
+sidebar_label: "Button clicks"
 sidebar_position: 50
 ---
 

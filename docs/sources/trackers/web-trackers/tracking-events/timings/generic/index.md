@@ -1,5 +1,6 @@
 ---
-title: "Generic timing"
+title: "Tracking generic site timings on web"
+sidebar_label: "Generic timing"
 sidebar_position: 98
 ---
 

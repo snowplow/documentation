@@ -1,5 +1,6 @@
 ---
-title: "Campaigns and UTMs"
+title: "Tracking campaigns and UTMs on web"
+sidebar_label: "Campaigns and UTMs"
 sidebar_position: 90
 ---
 

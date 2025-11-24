@@ -1,5 +1,6 @@
 ---
-title: "Consent"
+title: "Tracking consent and GDPR on web"
+sidebar_label: "Consent"
 sidebar_position: 100
 ---
 

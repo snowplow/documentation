@@ -1,5 +1,6 @@
 ---
-title: "Client Hints"
+title: "Tracking client hints on web"
+sidebar_label: "Client Hints"
 sidebar_position: 150
 ---
 

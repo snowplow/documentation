@@ -1,5 +1,6 @@
 ---
-title: "Site search"
+title: "Tracking site search on web"
+sidebar_label: "Site search"
 sidebar_position: 120
 ---
 

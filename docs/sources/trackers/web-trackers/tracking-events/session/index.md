@@ -1,5 +1,6 @@
 ---
-title: "Sessions"
+title: "Tracking sessions on web"
+sidebar_label: "Sessions"
 sidebar_position: 35
 ---
 

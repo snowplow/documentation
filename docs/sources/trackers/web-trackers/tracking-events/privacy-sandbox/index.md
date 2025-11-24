@@ -1,5 +1,6 @@
 ---
-title: "Privacy Sandbox"
+title: "Tracking Privacy Sandbox browser data with the web trackers"
+sidebar_label: "Privacy Sandbox"
 sidebar_position: 160
 ---
 

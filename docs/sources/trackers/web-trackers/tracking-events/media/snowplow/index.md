@@ -1,5 +1,6 @@
 ---
-title: "Snowplow media"
+title: "Snowplow media tracking on web"
+sidebar_label: "Snowplow media"
 sidebar_position: 5
 ---
 
@@ -25,7 +26,7 @@ Snowplow media events and entities must be **manually tracked**.
   <TabItem value="js" label="JavaScript (tag)" default>
 
 | Tracker Distribution | Included |
-|----------------------|----------|
+| -------------------- | -------- |
 | `sp.js`              | ❌        |
 | `sp.lite.js`         | ❌        |
 

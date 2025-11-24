@@ -1,5 +1,6 @@
 ---
-title: "Forms"
+title: "Tracking form interactions on web"
+sidebar_label: "Forms"
 sidebar_position: 60
 ---
 

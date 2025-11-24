@@ -1,5 +1,6 @@
 ---
-title: "Screen views"
+title: "Tracking screen views on web"
+sidebar_label: "Screen views"
 sidebar_position: 60
 ---
 

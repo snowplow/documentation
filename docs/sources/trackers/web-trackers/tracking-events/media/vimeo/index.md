@@ -1,5 +1,6 @@
 ---
-title: "Vimeo"
+title: "Vimeo media tracking on web"
+sidebar_label: "Vimeo"
 sidebar_position: 15
 ---
 

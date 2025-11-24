@@ -1,5 +1,6 @@
 ---
-title: "Activity (page pings)"
+title: "Tracking activity with page pings on web"
+sidebar_label: "Activity (page pings)"
 sidebar_position: 30
 ---
 

@@ -1,5 +1,6 @@
 ---
-title: "Timezone and geolocation"
+title: "Tracking timezone and geolocation on web"
+sidebar_label: "Timezone and geolocation"
 sidebar_position: 100
 ---
 

@@ -1,5 +1,6 @@
 ---
-title: "Media"
+title: "Tracking media on web"
+sidebar_label: "Media"
 sidebar_position: 75
 ---
 

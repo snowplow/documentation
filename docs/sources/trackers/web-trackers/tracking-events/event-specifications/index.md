@@ -1,5 +1,6 @@
 ---
-title: "Event specifications"
+title: "Integrating with your event specifications on web"
+sidebar_label: "Event specifications"
 sidebar_position: 115
 ---
 

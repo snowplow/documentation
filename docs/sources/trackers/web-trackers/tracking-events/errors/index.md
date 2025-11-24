@@ -1,5 +1,6 @@
 ---
-title: "Errors"
+title: "Tracking errors on web"
+sidebar_label: "Errors"
 sidebar_position: 110
 ---
 

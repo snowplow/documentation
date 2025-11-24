@@ -1,5 +1,6 @@
 ---
-title: "Core web vitals"
+title: "Tracking core web vitals performance metrics with the web trackers"
+sidebar_label: "Core web vitals"
 sidebar_position: 95
 ---
 
@@ -26,7 +27,7 @@ Web vitals events are **automatically tracked** once configured.
   <TabItem value="js" label="JavaScript (tag)" default>
 
 | Tracker Distribution | Included |
-|----------------------|----------|
+| -------------------- | -------- |
 | `sp.js`              | ✅        |
 | `sp.lite.js`         | ❌        |
 
@@ -54,8 +55,8 @@ window.snowplow(
 import { newTracker } from '@snowplow/browser-tracker';
 import { WebVitalsPlugin } from '@snowplow/browser-plugin-web-vitals';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ WebVitalsPlugin() ],
 });
 ```
@@ -68,7 +69,7 @@ newTracker('sp1', '{{collector_url}}', {
 The Web Vitals plugin can be initialized with a couple of options allowing for customizing its behavior:
 
 |       Option        |       Type       |                                                                                    Description                                                                                     |                      Default value                       |
-|:-------------------:|:----------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------:|
+| :-----------------: | :--------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------: |
 | loadWebVitalsScript |    `boolean`     |                                             Should the plugin immediately load the Core Web Vitals measurement script from UNPKG CDN.                                              |                          `true`                          |
 |   webVitalsSource   |     `string`     |                                              The URL endpoint the Web Vitals script should be loaded from. Defaults to the UNPKG CDN.                                              | `https://unpkg.com/web-vitals@3/dist/web-vitals.iife.js` |
 |       context       | `DynamicContext` | Context entities to add to the tracked event. Can be provided either as an array of self-describing JSONs or function that returns a context entity. (available from version 3.19) |                                                          |
@@ -84,4 +85,3 @@ There could be cases where your page or one of the loaded JavaScript bundles alr
 The default Web Vitals measurement script is loaded from the [UNPKG](https://www.unpkg.com/) CDN. This choice is chosen as a default but you should consider your own setup when choosing the script source. Selecting a script source from a CDN which might already be used in your website might save you from yet another connection startup time (_Queueing_,_DNS lookup_,_TCP_, _SSL_).
 
 Another reasonable choice could be [jsDelivr](https://cdn.jsdelivr.net/npm/web-vitals@3/dist/web-vitals.iife.js).
-

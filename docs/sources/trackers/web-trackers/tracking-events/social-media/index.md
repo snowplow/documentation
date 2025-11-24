@@ -1,5 +1,6 @@
 ---
-title: "Social media"
+title: "Tracking social media interactions with the web trackers"
+sidebar_label: "Social media"
 sidebar_position: 140
 ---
 

@@ -1,5 +1,6 @@
 ---
-title: "EventHub"
+title: "Configuring EventHub as a Snowbridge target"
+sidebar_label: "EventHub"
 description: "Write data to an EventHub."
 ---
 

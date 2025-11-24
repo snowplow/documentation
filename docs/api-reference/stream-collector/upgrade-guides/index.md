@@ -1,5 +1,5 @@
 ---
-title: "Upgrade guides for the stream collector"
+title: "Upgrade guides for Collector"
 sidebar_label: "Upgrade guides"
 sidebar_position: 0
 ---

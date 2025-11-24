@@ -1,5 +1,5 @@
 ---
-title: "Snowbridge sources configuration"
+title: "Snowbridge source configuration"
 sidebar_label: "Sources"
 date: "2022-10-20"
 sidebar_position: 100

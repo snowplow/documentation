@@ -1,5 +1,5 @@
 ---
-title: "Monitoring transformed data loading with the RDB loader"
+title: "Monitoring in the RDB Loader"
 sidebar_label: "Monitoring"
 date: "2022-04-05"
 sidebar_position: 400

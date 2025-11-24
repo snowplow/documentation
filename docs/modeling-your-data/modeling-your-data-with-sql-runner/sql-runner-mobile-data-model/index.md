@@ -78,7 +78,7 @@ Within the base module's main playbook, `01-base-main.yml.tmpl`:
    :start_date:         2020-01-01 #Set as required
    ...
    #Enable contexts if desired
-   :mobile_context: false 
+   :mobile_context: false
    :geolocation_context: false
    :application_context: false
    :screen_context: false
@@ -93,8 +93,6 @@ The remaining variables are set to the recommended defaults. For more informatio
 Optional modules are disabled by default. Please enable where appropriate by setting `enabled: true` in the main playbook of each module.
 
 #### Running the model
-
-[Locally](#tablocally)[In orchestration](#tabin-orchestration)
 
 ##### Authentication
 
@@ -114,6 +112,8 @@ bash .scripts/run_config.sh -b ~/pathTo/sql-runner -c mobile/v1/{warehouse}/sql-
 ```
 
 For more details please see the README within the `.scripts` directory.
+
+##### In orchestration
 
 ##### Authentication
 

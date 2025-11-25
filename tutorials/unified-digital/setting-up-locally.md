@@ -4,7 +4,7 @@ sidebar_label: "Set up locally"
 position: 2
 ---
 
-## Installing the package
+Installing the package:
 
 1. Run the following command in a new directory to create a new dbt project
 

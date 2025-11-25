@@ -8,8 +8,6 @@ sidebar_position: 400
 import {versions} from '@site/src/componentVersions';
 ```
 
-## Overview
-
 The [Snowplow JavaScript Tracker Core](https://github.com/snowplow/snowplow-javascript-tracker/tree/master/core) is an node module, available on [npm,](https://www.npmjs.org/package/snowplow-tracker-core) providing functionality common to both the server-side [Snowplow Node.js](/docs/sources/trackers/node-js-tracker/index.md) Tracker and the client-side [Snowplow JavaScript Tracker](/docs/sources/trackers/web-trackers/index.md). It supports all the Snowplow event types. Custom contexts and timestamps can be added to all events.
 
 It is automatically included when using the Node.js or JavaScript trackers.

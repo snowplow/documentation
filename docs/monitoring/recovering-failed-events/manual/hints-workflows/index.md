@@ -4,8 +4,6 @@ date: "2020-08-26"
 sidebar_position: 60
 ---
 
-### Initial setup
-
 Most of the following workflows come from testing/working with elaborate bad row structures and configurations and rely heavily on the supplied scripting utility. To set it up locally follow [scripting utility intro](/docs/monitoring/recovering-failed-events/manual/testing/index.md#scripting) or starting with an empty ammonite script file (ie. `test.sc`), set up Snowplow's repository and dependencies:
 
 ```scala
@@ -15,7 +13,7 @@ import $url.{`https://raw.githubusercontent.com/snowplow-incubator/snowplow-even
 import $ivy.`com.snowplowanalytics::snowplow-event-recovery-core:0.2.0-rc10`, com.snowplowanalytics.snowplow.event.recovery._, config._, json._
 ```
 
-### Exploring data structures
+## Exploring data structures
 
 The new bad row format is designed to be, readable and self-contained, however some fields are not captured in [JSON schemas for bad row format](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.badrows).
 
@@ -30,7 +28,7 @@ val badrow = """{"schema":"iglu:com.snowplowanalytics.snowplow.badrows/enrichmen
 parse(badrow).foreach(println)
 ```
 
-### Building configurations
+## Building configurations
 
 After being able to explore the data structure and figuring out what amendments to introduce, this needs to be turned into a set of individual building blocks. Configuration building blocks can be tested individually using the scripting utility. To test particular steps you can use following pattern:
 
@@ -39,7 +37,7 @@ operations.cast("""{"int": "1"}""", "$.int", CastType.String, CastType.Array)
 operations.replace("""{"int": "1"}""", "$.int", "(?U)^.*$", "new")
 ```
 
-### Validating configurations
+## Validating configurations
 
 The rules about setting up configurations are fairly strict to prevent unnecessary delay in empty job evaluations. To validate a built configuration it is easy to simply run it through a validator using the scripting utility:
 
@@ -48,7 +46,7 @@ val cfg = """{ "schema": "iglu:com.snowplowanalytics.snowplow/recoveries/jsonsch
 configs.validate(cfg)
 ```
 
-### Testing jobs locally
+## Testing jobs locally
 
 After validating the configuration it makes sense to try out the full configuration locally using a sample, scrambled data:
 

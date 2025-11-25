@@ -1,11 +1,9 @@
 ---
-title: "Advanced usage of the React Native tracker"
-sidebar_label: "Advanced usage"
+title: "Remove the React Native tracker at runtime"
+sidebar_label: "Removing trackers at runtime"
 date: "2021-08-09"
 sidebar_position: 40
 ---
-
-## Removing a tracker at runtime
 
 The React Native tracker provides two functions that allow you to remove a tracker (or all of them) at runtime.
 

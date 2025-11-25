@@ -10,13 +10,9 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-## Installation
-
 Currently the only supported method of installation is through Composer. For a tutorial on setting up a PHP project with Composer please follow this [link](https://getcomposer.org/doc/00-intro.md).
 
-### Composer
-
-If using Composer to manage your dependencies, simply add the Snowplow PHP Tracker to your project by running:
+Add the Snowplow PHP Tracker to your project by running:
 
 ```bash
 composer require snowplow/snowplow-tracker

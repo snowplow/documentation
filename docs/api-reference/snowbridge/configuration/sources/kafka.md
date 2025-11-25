@@ -9,8 +9,6 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-## Authentication
-
 Authentication is done by providing valid credentials in the configuration.
 
 ## Configuration options

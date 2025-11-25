@@ -4,8 +4,6 @@ sidebar_position: 3
 description: "Examples of enrichment code in JavaScript."
 ---
 
-## Labeling internal and external traffic
-
 Suppose you want to extend your events with a label that distinguishes traffic from internal and external systems. This is a good use case for [adding an entity](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/writing/index.md#adding-extra-entities-to-the-event).
 
 ```js

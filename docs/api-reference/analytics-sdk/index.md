@@ -4,8 +4,6 @@ date: "2020-11-02"
 sidebar_position: 80
 ---
 
-## Overview
-
 The Snowplow Analytics SDKs are designed for data engineers and data scientists working with Snowplow in a number of languages.
 
 Some good use cases for the SDKs include:

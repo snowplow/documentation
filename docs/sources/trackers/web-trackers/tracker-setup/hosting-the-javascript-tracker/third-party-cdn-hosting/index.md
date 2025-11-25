@@ -5,8 +5,6 @@ date: "2020-10-12"
 sidebar_position: 4100
 ---
 
-## Hosting sp.js
-
 Whilst we’re offering CDN options, Snowplow does not recommend using third party providers in production for hosting JavaScript assets that you use on your websites. We encourage all users to host `sp.js` on their own servers, and this will always be the recommended best practice.
 
 If you wish to follow our recommended best practices, please follow our [self hosting guide](/docs/sources/trackers/web-trackers/tracker-setup/hosting-the-javascript-tracker/index.md).

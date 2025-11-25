@@ -8,8 +8,6 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-## Domain user information
-
 You can use the following function to extract the Domain User Information from the ID cookie:
 
 ```javascript

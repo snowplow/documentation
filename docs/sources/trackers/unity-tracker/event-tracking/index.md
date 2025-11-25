@@ -5,12 +5,10 @@ date: "2020-02-26"
 sidebar_position: 80
 ---
 
-## Event Types
-
 You track events by building an event payload using event-specific Builder objects, and passing the result to a tracker instance's `Track()` method.
 Your events can have common fields configured with the respective `SetCustomContexts()`, `SetTimestamp()`, and `SetEventId()` methods, in addition to event-specific fields covered below.
 
-#### Track page views with `Track(PageView)`
+## Track page views with `Track(PageView)`
 
 You can use `Track(PageView)` to track a user viewing a web page within your app.
 
@@ -44,7 +42,7 @@ t1.Track(new PageView()
     .Build());
 ```
 
-#### Track screen views with `Track(MobileScreenView)`
+## Track screen views with `Track(MobileScreenView)`
 
 Use `Track(MobileScreenView)` to track a user viewing a screen (or equivalent) within your app. You **must** provide a `name` property. The `id` of the screen view will be automatically assigned (as an UUID) but you may also provide it manually. Arguments are:
 
@@ -83,7 +81,7 @@ In tracker versions 0.7.0 and earlier, screen views were tracked using the `Scre
 However, this class used the older schema for screen views and has been deprecated in favour of the `MobileScreenView` in the 0.8.0 release of the tracker.
 :::
 
-#### Track structured events with `Track(Structured)`
+## Track structured events with `Track(Structured)`
 
 Use `Track(Structured)` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required):
 
@@ -118,7 +116,7 @@ t1.Track(new Structured()
     .Build());
 ```
 
-#### Track timing events with `Track(Timing)`
+## Track timing events with `Track(Timing)`
 
 Use `Track(Timing)` to track an event related to a custom timing.
 
@@ -152,7 +150,7 @@ t1.Track(new Timing()
     .Build());
 ```
 
-#### Track self-describing events with `Track(SelfDescribing)`
+## Track self-describing events with `Track(SelfDescribing)`
 
 Custom self-describing events are a flexible tool that enable Snowplow users to define their own event types and send them into Snowplow.
 
@@ -211,7 +209,7 @@ For more on JSON schema, see the [blog post](https://snowplowanalytics.com/blog
 In versions 0.7.0 and earlier, the `Unstructured` class was used to track self-describing events. This was deprecated in version 0.8.0 in favour of the `SelfDescribing` class.
 :::
 
-#### Track ecommerce transactions with `Track(EcommerceTransaction)`
+## Track ecommerce transactions with `Track(EcommerceTransaction)`
 
 Use `Track(EcommerceTransaction)` to track an ecommerce transaction.
 
@@ -311,7 +309,7 @@ For ease of development you are also able to extend the `IContext` interface o
 
 All of these contexts will need to be combined into a `List<IContext>` before being attachable to Snowplow Events.
 
-#### `DesktopContext`
+### `DesktopContext`
 
 The following arguments can be used in a DesktopContext:
 
@@ -339,7 +337,7 @@ DesktopContext context = new DesktopContext ()
     .Build ();
 ```
 
-#### `MobileContext`
+### `MobileContext`
 
 The following arguments can be used in a MobileContext:
 
@@ -371,7 +369,7 @@ MobileContext context = new MobileContext ()
     .Build ();
 ```
 
-#### `GeoLocationContext`
+### `GeoLocationContext`
 
 The following arguments can be used in a GeoLocationContext:
 
@@ -401,7 +399,7 @@ GeoLocationContext context = new GeoLocationContext ()
     .Build ();
 ```
 
-#### `GenericContext`
+### `GenericContext`
 
 The GenericContext is a simple builder with three functions:
 

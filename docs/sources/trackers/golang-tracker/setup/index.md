@@ -10,8 +10,6 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-## Tracker compatibility
-
 <p>The latest version of the Snowplow Golang Tracker is v{versions.golangTracker} which has been built and tested using Golang versions <code>1.19.x</code>, <code>1.18.x</code> and <code>1.17.x</code>.</p>
 
 ## Setup

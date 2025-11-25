@@ -4,8 +4,6 @@ title: "Model the data to identify unfinished purchases"
 sidebar_label: "Model the data"
 ---
 
-## Sending events and verifying data
-
 After implementing the tracking setup, send some events and test that they are arriving in your data warehouse. If you don't have a data warehouse, you can sign up for a [free trial of Snowflake](https://www.snowflake.com/).
 
 Once you have sent data to Snowflake, you can run the following query to verify the events are coming through. The [Snowflake Streaming loader](http://localhost:3000/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/) has a latency of several seconds so you should see results immediately.

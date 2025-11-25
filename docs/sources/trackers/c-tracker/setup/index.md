@@ -10,8 +10,6 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-## Tracker compatibility
-
 The Snowplow C++ Tracker has been built and tested using C++ 11 as a minimum.
 
 Supported operating systems:

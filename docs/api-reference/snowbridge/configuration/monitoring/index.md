@@ -10,11 +10,9 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-## Stats and metrics
-
 Snowbridge comes with configurable logging, [pprof](https://github.com/google/pprof) profiling, [statsD](https://www.datadoghq.com/statsd-monitoring) statistics and [Sentry](https://sentry.io/welcome/) integrations to ensure that you know what's going on.
 
-### Logging
+## Logging
 
 Use the `log_level` parameter to specify the log level.
 
@@ -22,19 +20,19 @@ Use the `log_level` parameter to specify the log level.
 https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/monitoring/log-level-example.hcl
 `}</CodeBlock>
 
-### Sentry Configuration
+## Sentry Configuration
 
 <CodeBlock language="hcl" reference>{`
 https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/monitoring/sentry-example.hcl
 `}</CodeBlock>
 
-### StatsD stats receiver configuration
+## StatsD stats receiver configuration
 
 <CodeBlock language="hcl" reference>{`
 https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/monitoring/statsd-example.hcl
 `}</CodeBlock>
 
-### End-to-end latency configuration
+## End-to-end latency configuration
 
 Snowplow Enriched data only:
 

@@ -5,7 +5,7 @@ date: "2020-02-26"
 sidebar_position: 40
 ---
 
-#### Using Snowplow.Tracker (.NET Standard) or Snowplow.Tracker.PlatformExtensions (PCL)
+These instructions are for Snowplow.Tracker (.NET Standard) or Snowplow.Tracker.PlatformExtensions (PCL).
 
 The Emitter object is responsible for sending and storing all events.
 
@@ -20,19 +20,17 @@ The Emitter depends on four other objects being built:
 - `IPersistentBlockingQueue`
 - `IPayloadToString`
 
-### Emitter Constructor
+## Emitter Constructor
 
-#### Using Snowplow.Tracker (.NET Standard) or Snowplow.Tracker.PlatformExtensions (PCL)
-
-| **Argument Name** | **Description** | **Required?** | **Default** |
-| --- | --- | --- | --- |
-| `endpoint` | The endpoint object configured for sending events | Yes | Null |
-| `queue` | The queue to be used to push and pop events from | Yes | Null |
-| `sendLimit` | The amount of events to get from the queue at a time | No | 100 |
-| `stopPollIntervalMs` | The amount of time to wait before checking for more events | No | 300 |
-| `sendSuccessMethod` | An optional callback function which will report event success and failure counts | No | Null |
-| `deviceOnlineMethod` | An optional delegate function which will be used to check if the device is online | No | Null |
-| `logger` | The logger to use within the application | No | Null |
+| **Argument Name**    | **Description**                                                                   | **Required?** | **Default** |
+| -------------------- | --------------------------------------------------------------------------------- | ------------- | ----------- |
+| `endpoint`           | The endpoint object configured for sending events                                 | Yes           | Null        |
+| `queue`              | The queue to be used to push and pop events from                                  | Yes           | Null        |
+| `sendLimit`          | The amount of events to get from the queue at a time                              | No            | 100         |
+| `stopPollIntervalMs` | The amount of time to wait before checking for more events                        | No            | 300         |
+| `sendSuccessMethod`  | An optional callback function which will report event success and failure counts  | No            | Null        |
+| `deviceOnlineMethod` | An optional delegate function which will be used to check if the device is online | No            | Null        |
+| `logger`             | The logger to use within the application                                          | No            | Null        |
 
 A full Emitter construction should look like the following:
 
@@ -48,23 +46,21 @@ AsyncEmitter emitter = new AsyncEmitter(endpoint, queue, l: logger);
 
 **WARNING**: If you are sending events via GET note that each event is sent as its own task, so this has the potential to launch 100 outbound tasks in parallel. It is recommended to lower this range if using GET to 10-15 as a maximum.
 
-### Endpoint Constructor
-
-#### Using Snowplow.Tracker (.NET Standard) or Snowplow.Tracker.PlatformExtensions (PCL)
+## Endpoint Constructor
 
 This is a container for information about how to reach your collector.
 
-| **Argument Name** | **Description** | **Required?** | **Default** |
-| --- | --- | --- | --- |
-| `host` | The collector uri to send events to | Yes | Null |
-| `protocol` | The protocol to use when sending events (HTTP / HTTPs) | No | HttpProtocol.HTTP |
-| `port` | If the collector is not on port 80 | No | Null |
-| `method` | The method to use when sending (GET / POST) | No | HttpMethod.GET |
-| `postMethod` | Custom method for sending events via POST | No | Null |
-| `getMethod` | Custom method for sending events via GET | No | Null |
-| `byteLimitPost` | Maximum byte limit when sending a POST request | No | 40000 |
-| `byteLimitGet` | Maximum byte limit when sending a GET request | No | 40000 |
-| `logger` | The logger to use within the application | No | Null |
+| **Argument Name** | **Description**                                        | **Required?** | **Default**       |
+| ----------------- | ------------------------------------------------------ | ------------- | ----------------- |
+| `host`            | The collector uri to send events to                    | Yes           | Null              |
+| `protocol`        | The protocol to use when sending events (HTTP / HTTPs) | No            | HttpProtocol.HTTP |
+| `port`            | If the collector is not on port 80                     | No            | Null              |
+| `method`          | The method to use when sending (GET / POST)            | No            | HttpMethod.GET    |
+| `postMethod`      | Custom method for sending events via POST              | No            | Null              |
+| `getMethod`       | Custom method for sending events via GET               | No            | Null              |
+| `byteLimitPost`   | Maximum byte limit when sending a POST request         | No            | 40000             |
+| `byteLimitGet`    | Maximum byte limit when sending a GET request          | No            | 40000             |
+| `logger`          | The logger to use within the application               | No            | Null              |
 
 We have one endpoint available currently:
 
@@ -78,13 +74,11 @@ SnowplowHttpCollectorEndpoint endpoint = new SnowplowHttpCollectorEndpoint("com.
 
 **NOTE**: If any individual event exceeds the byte limits set then this event will be sent - but it will be assumed to have succeeded. This is to prevent constanstly attempting to send overly large events.
 
-### Storage Constructor
+## Storage Constructor
 
-#### Using Snowplow.Tracker (.NET Standard) or Snowplow.Tracker.PlatformExtensions (PCL)
-
-| **Argument Name** | **Description** | **Required?** | **Default** |
-| --- | --- | --- | --- |
-| `path` | The file path to store the database file at | Yes | Null |
+| **Argument Name** | **Description**                             | **Required?** | **Default** |
+| ----------------- | ------------------------------------------- | ------------- | ----------- |
+| `path`            | The file path to store the database file at | Yes           | Null        |
 
 We have one storage target available currently:
 
@@ -121,14 +115,12 @@ public string GetLocalFilePath(string filename)
 }
 ```
 
-### Queue Constructor
+## Queue Constructor
 
-#### Using Snowplow.Tracker (.NET Standard) or Snowplow.Tracker.PlatformExtensions (PCL)
-
-| **Argument Name** | **Description** | **Required?** | **Default** |
-| --- | --- | --- | --- |
-| `storage` | The storage object to use with the queue | Yes | Null |
-| `payloadToString` | Serializer for Payload objects | Yes | Null |
+| **Argument Name** | **Description**                          | **Required?** | **Default** |
+| ----------------- | ---------------------------------------- | ------------- | ----------- |
+| `storage`         | The storage object to use with the queue | Yes           | Null        |
+| `payloadToString` | Serializer for Payload objects           | Yes           | Null        |
 
 We have one queue available currently:
 
@@ -140,9 +132,7 @@ A full queue construction should look like the following:
 PersistentBlockingQueue queue = new PersistentBlockingQueue(storage, new PayloadToJsonString());
 ```
 
-### Payload Serializer Constructor
-
-#### Using Snowplow.Tracker (.NET Standard) or Snowplow.Tracker.PlatformExtensions (PCL)
+## Payload Serializer Constructor
 
 We have one payload serializer available currently:
 

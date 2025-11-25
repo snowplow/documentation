@@ -3,8 +3,6 @@ title: "Modeling Entities and Self-Describing Events"
 sidebar_position: 40
 ---
 
-## Out-of-the-box Entities & Events
-
 Our dbt packages provide out-of-the-box modeling for many [entities](/docs/fundamentals/entities/index.md) that are relevant to each package. Fields from these contexts are added to the [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md#events-this-run) table for use within downstream models. For example our [unified package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) will add all fields from the [YAUAA](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md) entity by setting the `snowplow__enable_yauaa` to true.
 
 Relevant [self-describing events](/docs/fundamentals/events/index.md#self-describing-events) fields are extracted in the same way as needed per-package, and are often dependent on enabling optional modules.

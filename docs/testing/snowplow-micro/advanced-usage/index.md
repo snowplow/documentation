@@ -12,6 +12,8 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
+This page describes additional configuration options for Snowplow Micro.
+
 ## Enabling HTTPS
 
 While in most cases HTTP is sufficient, you may want to enable HTTPS in Micro (for an example of when that’s useful, see [Locally resolving an existing domain name to Micro](/docs/testing/snowplow-micro/remote-usage/index.md#locally-resolving-an-existing-domain-name-to-micro)).

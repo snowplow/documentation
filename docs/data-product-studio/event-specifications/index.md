@@ -4,8 +4,6 @@ sidebar_label: "Event specifications"
 sidebar_position: 4
 ---
 
-## Creating a new Event Specification through Console
-
 Event specifications serve as direct counterparts to [data structures](/docs/data-product-studio/data-structures/manage/index.md) and encapsulate the documented events within a data product.
 
 :::info
@@ -60,7 +58,7 @@ To facilitate making an informed selection of your entities, you can view a deta
 
 ![Entity Data Structures](images/entity-data-structures.png)
 
-### Event Triggers
+## Event Triggers
 
 This section defines the locations and circumstances under which this event is triggered.
 
@@ -70,7 +68,7 @@ A dialog will appear, allowing you to upload an image and provide additional con
 
 ![Event Triggers](images/event-triggers.png)
 
-### Properties
+## Properties
 
 This section allows you to specify how each property for a selected event or entity data structure should be populated.
 

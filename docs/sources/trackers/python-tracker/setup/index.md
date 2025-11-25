@@ -10,8 +10,6 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-### Tracker compatibility
-
 As a programming language that lets you work more quickly and integrate your systems more effectively, Python is available in a huge number of different computing environments and platforms, from Civilization IV through [Django framework](https://www.djangoproject.com/) to Ubuntu One.
 
 To make the Snowplow Python Tracker work out-of-the-box with as many different Python programs as possible, we have tried to:
@@ -19,7 +17,7 @@ To make the Snowplow Python Tracker work out-of-the-box with as many different P
 1. Minimize external dependencies and third party libraries
 2. Provide setup instructions
 
-### Dependencies
+## Dependencies
 
 To make the Snowplow Python Tracker work with as many different Python programs as possible, we have tried to keep external dependencies to a minimum. The main external dependencies currently are:
 
@@ -28,13 +26,13 @@ To make the Snowplow Python Tracker work with as many different Python programs 
 
 These dependencies can be installed from the package manager of the host system or through PyPi.
 
-### PyPI
+## PyPI
 
 The Snowplow Python Tracker is published to [PyPI](https://pypi.python.org/), the the official third-party software repository for the Python programming language.
 
 This makes it easy to either install the tracker locally, or to add it as a dependency into your own Python app.
 
-### pip
+## pip
 
 To install the Snowplow Python Tracker locally, assuming you already have `pip` installed:
 

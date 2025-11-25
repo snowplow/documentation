@@ -9,11 +9,11 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-## Installing
-
 The Snowplow Java tracker has been built and tested using Java versions 8, 11 and 17, so should work within any Java application built using JDK8 upwards. The Java tracker is also usable from Scala.
 
 <p>The current tracker version is {versions.javaTracker}. New issues and pull requests are very welcome! Find the Github repository <a href="https://github.com/snowplow/snowplow-java-tracker">here.</a></p>
+
+## Installing
 
 ### Install using Maven
 Add into your project’s `pom.xml`:

@@ -5,8 +5,6 @@ date: "2020-10-12"
 sidebar_position: 300
 ---
 
-## Under the hood
-
 There is no buffering in the Snowplow Tracking CLI - each event is sent as an individual payload whether `GET` or `POST`.
 
 Under the hood, the app uses the [**Snowplow Golang Tracker**](https://github.com/snowplow/snowplow-golang-tracker).

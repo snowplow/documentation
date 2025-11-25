@@ -10,9 +10,7 @@ import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
 <Accelerator href="https://docs.snowplow.io/accelerators/web/" name="Advanced Analytics for Web"/>
 ```
 
-## Requirements
-
-In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web events dataset being available in your database:
+In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web events dataset being available in your database, the requirements are:
 
 - [Snowplow Javascript tracker](/docs/sources/trackers/web-trackers/index.md) version 2 or later implemented.
 - Web Page context [enabled](/docs/sources/trackers/web-trackers/tracker-setup/initialization-options/index.md#webpage-context) (enabled by default in [v3+](/docs/sources/trackers/web-trackers/tracker-setup/initialization-options/index.md#webpage-context)).

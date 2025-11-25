@@ -5,8 +5,6 @@ date: "2020-02-26"
 sidebar_position: 20
 ---
 
-### Import the library
-
 Import the Golang Tracker library like so:
 
 ```go
@@ -37,7 +35,7 @@ The `Storage` interface can be found in `github.com/snowplow/snowplow-golang-tra
 
 That's it - you are now ready to initialize a tracker instance.
 
-### Creating a tracker
+## Creating a tracker
 
 The simplest tracker initialization only requires you to provide the URI of the collector to which the tracker will log events and a storage implementation:
 
@@ -51,14 +49,14 @@ tracker := sp.InitTracker(sp.RequireEmitter(emitter))
 
 There are other optional builder functions:
 
-| **Function Name** | **Description** | **Required?** | **Default** |
-| --- | --- | --- | --- |
-| `RequireEmitter` | The emitter to which events are sent | Yes | `nil` |
-| `OptionSubject` | The user being tracked | No | `nil` |
-| `OptionNamespace` | The name of the tracker instance | No | \`\` |
-| `OptionAppId` | The application ID | No | \`\` |
-| `OptionPlatform` | The platform the Tracker is running on | No | `srv` |
-| `OptionBase64Encode` | Whether to enable [base 64 encoding](https://en.wikipedia.org/wiki/Base64) | No | `true` |
+| **Function Name**    | **Description**                                                            | **Required?** | **Default** |
+| -------------------- | -------------------------------------------------------------------------- | ------------- | ----------- |
+| `RequireEmitter`     | The emitter to which events are sent                                       | Yes           | `nil`       |
+| `OptionSubject`      | The user being tracked                                                     | No            | `nil`       |
+| `OptionNamespace`    | The name of the tracker instance                                           | No            | \`\`        |
+| `OptionAppId`        | The application ID                                                         | No            | \`\`        |
+| `OptionPlatform`     | The platform the Tracker is running on                                     | No            | `srv`       |
+| `OptionBase64Encode` | Whether to enable [base 64 encoding](https://en.wikipedia.org/wiki/Base64) | No            | `true`      |
 
 A more complete example:
 
@@ -78,28 +76,28 @@ tracker := sp.InitTracker(
 )
 ```
 
-#### `RequireEmitter`
+### `RequireEmitter`
 
 Accepts an argument of an Emitter instance pointer; if the object is `nil` will `panic`. See Emitters for more on emitter configuration.
 
-#### `OptionSubject`
+### `OptionSubject`
 
 The user which the Tracker will track. Accepts an argument of a Subject instance pointer.
 
 You don't need to set this during Tracker construction; you can use the `tracker.SetSubject()` method afterwards. In fact, you don't need to create a subject at all. If you don't, though, your events won't contain user-specific data such as timezone and language.
 
-#### `OptionNamespace`
+### `OptionNamespace`
 
 If provided, the `namespace` argument will be attached to every event fired by the new tracker. This allows you to later identify which tracker fired which event if you have multiple trackers running.
 
-#### `OptionAppId`
+### `OptionAppId`
 
 The `appId` argument lets you set the application ID to any string.
 
-#### `OptionPlatform`
+### `OptionPlatform`
 
 By default we assume the Tracker will be running in a server environment. To override this provide your own platform string.
 
-#### `OptionBase64Encode`
+### `OptionBase64Encode`
 
 By default, unstructured events and custom contexts are encoded into Base64 to ensure that no data is lost or corrupted. You can turn encoding on or off using the Boolean `OptionBase64Encode` function with either `true` or `false` passed in.

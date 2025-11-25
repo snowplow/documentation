@@ -4,11 +4,7 @@ sidebar_position: 13
 sidebar_label: Custom API Request
 ---
 
-## Summary
-
 The API Request Enrichment lets you perform dimension widening on a Snowplow event via your own or third-party proprietary http(s) API.
-
-## Overview
 
 This enrichment gives you the flexibility to add additional data points for your events by pulling in data from other sources. Using a common key like a user ID or an email address for example, you might be able to add relevant information about a user to each event before it gets written to your database.
 

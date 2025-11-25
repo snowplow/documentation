@@ -1,5 +1,5 @@
 ---
-title: "Introduction to Signals ML prospect scoring"
+title: "Learn how to score prospects in real time using Signals and machine learning"
 sidebar_label: "Introduction"
 position: 1
 description: "Build a real-time prospect scoring system using Snowplow Signals and machine learning to predict conversion likelihood."

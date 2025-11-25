@@ -1,6 +1,7 @@
 ---
 position: 2
-title: Run the project
+title: "Run the Flink live shopper features project"
+sidebar_label: "Run the project"
 ---
 
 1. [Clone the repository](https://github.com/snowplow-industry-solutions/flink-live-shopper)

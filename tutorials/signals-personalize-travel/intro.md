@@ -1,5 +1,5 @@
 ---
-title: "Introduction to Signals personalize travel"
+title: "Learn how to build personalized experiences with Signals"
 sidebar_label: "Introduction"
 position: 1
 description: "Build personalized travel experiences using Snowplow Signals to customize content and chatbot responses based on real-time user behavior."

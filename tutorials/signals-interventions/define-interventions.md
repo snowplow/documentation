@@ -1,6 +1,7 @@
 ---
 position: 4
-title: Define interventions
+title: Define real-time ecommerce intervention triggers
+sidebar_label: Define interventions
 description: "Create rule-based interventions that trigger personalized experiences based on user behavior."
 ---
 

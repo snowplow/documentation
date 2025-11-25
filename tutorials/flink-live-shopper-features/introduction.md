@@ -1,6 +1,6 @@
 ---
 position: 1
-title: "Introduction to Flink live shopper features"
+title: "Learn how to calculate real-time shopper features using Apache Flink"
 sidebar_label: "Introduction"
 ---
 

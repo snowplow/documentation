@@ -1,12 +1,12 @@
 ---
-title: "Introduction to attribution dbt package"
+title: "Learn how to set up the Attribution dbt package"
 sidebar_label: "Introduction"
 position: 1
 ---
 
 This tutorial walks you through how to set up Snowplow’s Attribution dbt package. It assumes you have already followed our Snowplow Unified Package [tutorial](/tutorials/unified-digital/intro), or previously configured it, as the Attribution package requires the model outputs (e.g. unified views and conversions tables).
 
-### Prerequisites
+## Prerequisites
 
 - [dbt](https://github.com/dbt-labs/dbt) installed (and dbt profile configured for Data Warehouse connection)
 - have the [Campaign attribution enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/) enabled to generate the marketing campaign fields such as mkt_medium, mkt_source, mkt_term, mkt_content, and mkt_campaign which would be needed for channel and campaign classification to ultimately calculate the appropriate attribution

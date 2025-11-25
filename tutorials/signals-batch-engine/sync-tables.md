@@ -1,6 +1,7 @@
 ---
 position: 7
-title: Sync attribute tables
+title: Sync the attribute tables with the Signals Profiles Store
+sidebar_label: Sync attribute tables
 description: "Connect warehouse attribute tables to Snowplow Signals for periodic syncing to the Profiles Store."
 ---
 

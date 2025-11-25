@@ -1,5 +1,6 @@
 ---
-title: Modify, validate and publish
+title: "Modify, validate, and publish the data structure using Snowplow CLI"
+sidebar_label: "Modify, validate, and publish"
 position: 3
 ---
 

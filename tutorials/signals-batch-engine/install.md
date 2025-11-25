@@ -1,6 +1,7 @@
 ---
 position: 2
-title: Install the CLI
+title: Install the Signals Python SDK with batch engine CLI
+sidebar_label: Install the CLI
 description: "Install the Snowplow Signals batch engine CLI tool, and configure environment variables for warehouse attribute processing."
 ---
 

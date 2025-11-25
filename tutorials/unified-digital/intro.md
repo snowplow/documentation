@@ -1,12 +1,12 @@
 ---
-title: "Introduction to the unified digital dbt package"
+title: "Learn how to set up the Unified Digital dbt package"
 sidebar_label: "Introduction"
 position: 1
 ---
 
-This tutorial walks you through the process of setting up our Unified Digital DBT package.
+This tutorial walks you through the process of setting up our Unified Digital dbt package.
 
-### Prerequisites
+## Prerequisites
 
 - [DBT](https://github.com/dbt-labs/dbt) installed
 - Connection to a warehouse

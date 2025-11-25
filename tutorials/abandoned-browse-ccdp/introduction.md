@@ -1,6 +1,6 @@
 ---
 position: 1
-title: "Introduction to abandoned browse CCDP"
+title: "Learn how to implement an abandoned browse system with a composable CDP"
 sidebar_label: "Introduction"
 ---
 

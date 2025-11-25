@@ -1,6 +1,7 @@
 ---
 position: 3
-title: Deploy on AWS with Terraform
+title: "Deploy the Kafka live viewer profiles application on AWS using Terraform"
+sidebar_label: "Deploy on AWS using Terraform"
 ---
 
 

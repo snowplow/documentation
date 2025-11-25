@@ -1,7 +1,7 @@
 ---
 position: 1
-title: "Base tracking for data products setup guide"
-sidebar_label: "Installation and Setup"
+title: "Learn how to track web events with base data products"
+sidebar_label: "Introduction"
 ---
 
 This guide will help you understand some of the basic capabilities of Data Products and how they can be used in practice for most tracking implementation setups.

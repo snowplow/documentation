@@ -1,5 +1,6 @@
 ---
-title: Configure Signals attributes
+title: Define page view attributes for real-time prospect scoring
+sidebar_label: Define attributes
 position: 3
 description: "Define behavioral data attributes in Snowplow Signals for prospect scoring, including page views, sessions, and conversion events."
 ---
@@ -8,11 +9,11 @@ To use Signals, you need to define which attributes to calculate, and then apply
 
 Let's imagine that for this use case our data science team came up with the following set of attributes. They'll be calculated against the `domain_userid` device attribute key. Choosing this attribute key allows Signals to calculate attributes from events across multiple sessions for each prospect.
 
-| Feature name                 | Description                                                                                     | Type   | Aggregation    |
-| ---------------------------- | ----------------------------------------------------------------------------------------------- | ------ | -------------- |
-| `num_page_views`    | Number of `page_view` events                                           | int    | `counter`      |
-| `num_pricing_views` | Number of `page_view` events of the `/pricing` page                    | int    | `counter`      |
-| `num_customers_views` | Number of `page_view` events of the `*customers*` pages                    | int    | `counter`      |
+| Feature name          | Description                                             | Type | Aggregation |
+| --------------------- | ------------------------------------------------------- | ---- | ----------- |
+| `num_page_views`      | Number of `page_view` events                            | int  | `counter`   |
+| `num_pricing_views`   | Number of `page_view` events of the `/pricing` page     | int  | `counter`   |
+| `num_customers_views` | Number of `page_view` events of the `*customers*` pages | int  | `counter`   |
 
 ## Install Signals Python SDK
 

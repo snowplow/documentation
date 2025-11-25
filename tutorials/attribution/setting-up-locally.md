@@ -1,12 +1,13 @@
 ---
-title: Setting up locally
+title: "Set up the Attribution dbt package locally"
+sidebar_label: "Set up locally"
 position: 4
 ---
 
 
-1. Create a new dbt project in a new directory 
+1. Create a new dbt project in a new directory
 
-:::info 
+:::info
 Please Note: Skip this step if you want to add the Attribution package to the same project as Unified.
 :::
 
@@ -14,9 +15,9 @@ Please Note: Skip this step if you want to add the Attribution package to the sa
 dbt init
 ```
 
-2. Create a `packages.yml` file in the same directory as the newly created `dbt_project.yml` 
+2. Create a `packages.yml` file in the same directory as the newly created `dbt_project.yml`
 
-:::info 
+:::info
 Please Note: Skip this step if you want to add the Attribution package to the same project as Unified.
 :::
 
@@ -44,13 +45,13 @@ vars:
     # Attribution Package configuration
     snowplow__attribution_start_date: 'YYYY-MM-DD' # Required, the start date for conversions to be processed from.
     snowplow__attribution_list: ['first_touch', 'last_touch', 'linear', 'position_based'] # Optional, by default all are calculated
-    
+
     # Configure input sources
-    snowplow__conversion_path_source: 'my_schema_derived.snowplow_unified_views' # Location of your snowplow_unified_views table 
-    snowplow__conversions_source: 'my_schema_derived.snowplow_unified_conversions' # Location of your snowplow_unified_conversions table 
+    snowplow__conversion_path_source: 'my_schema_derived.snowplow_unified_views' # Location of your snowplow_unified_views table
+    snowplow__conversions_source: 'my_schema_derived.snowplow_unified_conversions' # Location of your snowplow_unified_conversions table
 ```
 
-:::info 
+:::info
 Please Note: If you are running Unified in the same project as Attribution and intend to run them in the same run, set the conversion_path_source and conversions_source to the following so that dbt can run the models in the correct order:
 :::
 
@@ -67,7 +68,7 @@ vars:
 ```yml
 dbt run --select snowplow_attribution
 ```
-:::info 
+:::info
 Please Note: If you are running Unified in the same project as Attribution and intend to run them in the same run, you can execute dbt run instead, but better handle it through a custom selectors.yml file
 :::
 

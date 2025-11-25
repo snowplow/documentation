@@ -17,7 +17,7 @@ After selecting "Create from scratch" a form will appear on the page. Enter your
 
 :::note
 _The name of your data product must be unique to ensure proper identification and avoid conflicts._
-:::note
+:::
 
 ![Event specifications](images/event-specifications.png)
 
@@ -102,3 +102,4 @@ If the new version of the Data Structure introduces incompatibilities with the e
 ![Conflict resolution Event Specification](images/conflict_resolution.png)
 
 This mechanism ensures that teams can benefit from updated Data Structures while maintaining the integrity and accuracy of their Event Specifications. Users are empowered to make informed decisions during the upgrade process, with clear visual cues and options to handle conflicts effectively.
+

@@ -1,81 +1,28 @@
 ---
-title: "Managing Event Specifications in the Console"
+title: "Event specifications"
 sidebar_label: "Event specifications"
 sidebar_position: 4
+date: "2025-11-14"
 ---
 
-Event specifications serve as direct counterparts to [data structures](/docs/data-product-studio/data-structures/manage/index.md) and encapsulate the documented events within a data product.
+Event specifications define the complete structure and requirements for [events](/docs/fundamentals/events/index.md) in your behavioral data pipeline. They serve as the single source of truth for what data should be collected, how it should be structured, and what business meaning it carries.
 
-:::info
-Please note that the creation of event specifications is exclusive to data products.
-:::
+## What are event specifications?
 
-Create event specifications in tandem with the latest deployed data structure version in development. This ensures tracking implementation instructions align with the validation criteria in the event specification.
+An event specification is a collection of [schemas](/docs/fundamentals/schemas/index.md) (also called data structures) that describes everything about a specific event you want to track. Each specification includes:
 
-Your event specification guarantees compatibility with the associated data structure version, being a specialization of it. This ensures events tracked using specified instructions pass validation for the associated data structure.
+- **Event schema**: defines the core properties specific to this event type
+- **Entity schemas**: defines any additional context data that is sent with the event
+- **Business metadata**: captures the purpose, ownership, and implementation requirements
+- **Triggers**: documents when and where the event should be collected
 
-## Creating and Editing Event Specifications
+Event specifications act as data contracts between teams. When you create an event specification, you are defining exactly what data your applications should send, what your data warehouse will receive, and what your downstream consumers can rely on.
 
-To create a new event specification, follow these steps:
+## How event specifications work
 
-1. Select a data product
-2. Click the "Create event" button
-3. A dialog will appear, prompting you to enter a name for your event specification and click "Save and continue"
-4. Your first event specification will be displayed on the page
+Event specifications bridge the gap between tracking design and data collection:
 
-![Create an Event Specification](images/create-event-specification.png)
-
-To add more information or modify an existing event specification, follow these steps:
-
-1. Navigate to the appropriate data product
-2. Select the desired event specification
-3. This action will open on overview of the selected event specification containing the details that have been added to date
-
-This interface is divided into focused sections; explore each section below for more details.
-
-![Example of an Event Specification Overview](images/event-specification-overview.png)
-
-### Event Information
-
-This section provides essential meta-information for your event specification, including the event name, description, and the applications in which this event is tracked.
-
-### Event Data Structure
-
-This section defines the event data structure that this event will validate against as it is processed by your pipeline.
-
-You can choose from two types of data structures:
-
-- **Standard**; Provided by the Snowplow tracker by default
-- **Custom**; Provided by your organization
-
-![Event Data Structure](images/event-data-structure.png)
-
-## Entity Data Structures
-
-Within this section, you have the flexibility to define the entities that should be associated with the event when it is triggered.
-
-To facilitate making an informed selection of your entities, you can view a detailed breakdown of the properties associated with the chosen entities (and its version) by a specific version.
-
-![Entity Data Structures](images/entity-data-structures.png)
-
-## Event Triggers
-
-This section defines the locations and circumstances under which this event is triggered.
-
-To create your first trigger, simply select the "Add trigger" button. You can edit or delete an existing trigger by clicking the dedicated buttons beside each entry in the triggers list.
-
-A dialog will appear, allowing you to upload an image and provide additional context, such as the URL to the page on which this trigger applies.
-
-![Event Triggers](images/event-triggers.png)
-
-## Properties
-
-This section allows you to specify how each property for a selected event or entity data structure should be populated.
-
-The dialog displays the list of properties for the selected data structure will be listed here, with the ability to provide the exact value/s or a description of how to populate these properties when the event is triggered.
-
-You can configure detailed instructions for any of the properties shown in the list by clicking the "Add instruction" or "Edit" buttons. Once you have selected the type of instruction you wish to add/edit and have filled in the required input fields, you are then able to click "Save and update instruction" and return to the properties list.
-
-*Notes: instructions for required properties are added by default and can be edited but they cannot be deleted.*
-
-![Implementation Instructions](images/implementation-instructions.png)
+- **Design phase**: you document your tracking requirements by creating event specifications that capture both technical structure and business context
+- **Implementation phase**: developers use these specifications to instrument tracking code, either manually or through code generation within the Snowplow Console or using tools like Snowtype. Snowtype generated code ensures type-safety and alignment with specifications, reducing implementation errors and accelerating development time
+- **Observability phase**: monitor event specification usage directly in the Console. See the total number of events collected for each specification and when each was last seen. This visibility helps you confirm implementations are live, identify unused specifications, and understand event volume patterns across your tracking plan
+- **Data modeling phase**: event specifications enable automatically generated dbt models that transform atomic events into analysis-ready tables. These models understand the structure defined in your specifications, creating consistent table schemas and joining related [entities](/docs/fundamentals/entities/index.md). As you update specifications, corresponding data models can be regenerated, keeping your warehouse transformations synchronized with your tracking design

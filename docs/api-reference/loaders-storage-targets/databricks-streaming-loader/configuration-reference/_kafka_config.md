@@ -15,6 +15,14 @@ import Link from '@docusaurus/Link';
     <td>Optional. A map of key/value pairs for <Link to="https://docs.confluent.io/platform/current/installation/configuration/consumer-configs.html" target="_blank">any standard Kafka consumer configuration option</Link>.</td>
 </tr>
 <tr>
+    <td><code>input.debounceCommitOffsets</code></td>
+    <td>Optional. Default value 10 seconds. How frequently to commit our progress back to kafka. By increasing this value, we decrease the number of requests made to the kafka broker.</td>
+</tr>
+<tr>
+    <td><code>input.commitTimeout</code> (since 0.4.0)</td>
+    <td>Optional. Default value 15 seconds. The time to wait for offset commits to complete. If an offset commit doesn't complete within this time, a CommitTimeoutException will be raised instead.</td>
+</tr>
+<tr>
     <td><code>output.bad.topicName</code></td>
     <td>Required. Name of the Kafka topic that will receive failed events.</td>
 </tr>

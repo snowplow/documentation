@@ -211,30 +211,25 @@ Snowplow.createTracker(getApplicationContext(), namespace, networkConfig, sessio
 
 ## Decorating outgoing links using cross-navigation tracking
 
-:::note Not available before v6
+:::note
 This feature was introduced in version 6.0.0 of the iOS and Android trackers.
 :::
 
-The tracker provides a `decorateLink` API to decorate outgoing links from the mobile app to another mobile app or to a website.
-This API adds an `_sp` parameter to the links containing information about the user, app, and current session.
-This is useful for tracking the movement of users across different apps and platforms.
-It is part of our cross-navigation solution and is equivalent to [cross-domain tracking on the JavaScript tracker](/docs/sources/trackers/web-trackers/cross-domain-tracking/index.md).
+The `decorateLink` function is part of Snowplow's [cross-navigation solution](/docs/events/cross-navigation/index.md) for tracking the movement of users across different apps and platforms.
 
-For example, calling `decorateLink` on `appSchema://path/to/page` will produce the following result:
+Choose which parameters to include using a `CrossDeviceParameterConfiguration` object. The `domainUserId` and `timestamp` are always included automatically. Use booleans to select which properties to include in the link decoration. The tracker will derive the required values from its configuration.
 
-```
-appSchema://path/to/page?_sp=domainUserId.timestamp.sessionId.subjectUserId.sourceId.platform.reason
-```
+This table shows the options:
 
-The `decorateLink` function adds the following information to the link (configurable using the `CrossDeviceParameterConfiguration` object passed to the method):
+| Property         | Description                      | Type    | Included by default? | Value used                         |
+| ---------------- | -------------------------------- | ------- | -------------------- | ---------------------------------- |
+| `sessionId`      | Current session UUID identifier  | Boolean | ✅                    | `SessionController.sessionId`      |
+| `subjectUserId`  | Custom business user identifier  | Boolean | ❌                    | `SubjectController.userId`         |
+| `sourceId`       | Application identifier           | Boolean | ✅                    | `TrackerConfiguration.appId`       |
+| `sourcePlatform` | Platform of the current device   | Boolean | ❌                    | `TrackerController.devicePlatform` |
+| `reason`         | Custom information or identifier | String  | ❌                    | Custom string provided by you      |
 
-- `domainUserId` – The current tracker generated user identifier (value of `SessionController.userId`) – required.
-- `timestamp` – The current ms precision epoch timestamp – required.
-- `sessionId` - The current session identifier (value of `SessionController.sessionId`) – optional.
-- `subjectUserId` - The custom business user identifier (value of `SubjectController.userId`) – optional.
-- `sourceId` – The `appId` (value of `TrackerConfiguration.appId`) – optional.
-- `platform` - The platform of the current device (value of `TrackerController.devicePlatform` – optional.
-- `reason` – Identifier/information for cross-navigation – optional.
+The `subjectUserId` property is not included by default, in case it contains personal data.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
@@ -244,7 +239,7 @@ let link = URL(string: "https://example.com")!
 let decoratedLink = Snowplow.defaultTracker()?.decorateLink(
   link,
   // optional configuration for which information to be added to the link
-  extendedParameters: CrossDeviceParameterConfiguration(sessionId: true, subjectUserId: true)
+  extendedParameters: CrossDeviceParameterConfiguration(sessionId: false, subjectUserId: true)
 )
 ```
 
@@ -256,7 +251,7 @@ val link = Uri.parse("http://example.com")
 val decoratedLink = Snowplow.defaultTracker.decorateLink(
   link,
   // optional configuration for which information to be added to the link
-  CrossDeviceParameterConfiguration(sessionId = true, subjectUserId = true)
+  CrossDeviceParameterConfiguration(sessionId = false, subjectUserId = true)
 )
 ```
 
@@ -266,7 +261,7 @@ val decoratedLink = Snowplow.defaultTracker.decorateLink(
 ```java
 Uri link = Uri.parse("http://example.com");
 Uri decoratedLink = Snowplow.getDefaultTracker().decorateLink(link, new CrossDeviceParameterConfiguration(
-    true, // sessionId
+    false, // sessionId
     true, // subjectUserId
     false, // sourceId
     false, // sourcePlatform

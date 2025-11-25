@@ -1,11 +1,12 @@
 ---
-title: Follow up with Data Products
+title: "Add GitHub workflow support for data products"
+sidebar_label: "Add data products"
 position: 6
 ---
 
 Now that we have our data structures set up, we can define data products to organize and document how these structures are used across our applications. We'll walk through creating source applications, data products, and event specifications using the CLI, then integrate them into our automated workflows.
 
-## Create a source applications
+## Create a source application
 
 First, we'll create a source application to represent our website that will send the `login` event we defined earlier.
 

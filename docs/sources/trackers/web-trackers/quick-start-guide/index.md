@@ -1,5 +1,6 @@
 ---
-title: "Quick start guide"
+title: "Quick start guide for the web trackers"
+sidebar_label: "Quick start guide"
 date: "2021-03-24"
 sidebar_position: 100
 ---
@@ -11,8 +12,6 @@ import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v
 
 <ReleaseBadge/>
 ```
-
-## Quick start (plus modelling!)
 
 We recommend looking at the [Advanced Analytics for Web accelerator](https://docs.snowplow.io/accelerators/web/) to walk through tracking and modelling web events. It's a more in depth look at how to use Snowplow than this page.
 

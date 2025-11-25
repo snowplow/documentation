@@ -1,8 +1,8 @@
 ---
-title: "Media Player"
+title: "Snowplow Media Player dbt package"
+sidebar_label: "Media Player"
 description: "The Snowplow Media Player dbt Package"
 sidebar_position: 20
-hide_title: true
 ---
 
 ```mdx-code-block
@@ -15,8 +15,6 @@ import Badges from '@site/src/components/Badges';
 <Badges badgeType="dbt-package Release" pkg="media-player"></Badges>&nbsp;
 <Badges badgeType="Actively Maintained"></Badges>&nbsp;
 <Badges badgeType="SPAL"></Badges>
-
-# Snowplow Media Player Package
 
 **The package source code can be found in the [snowplow/dbt-snowplow-media-player repo](https://github.com/snowplow/dbt-snowplow-media-player), and the docs for the [model design here](https://snowplow.github.io/dbt-snowplow-media-player/#!/overview/snowplow_media_player).**
 

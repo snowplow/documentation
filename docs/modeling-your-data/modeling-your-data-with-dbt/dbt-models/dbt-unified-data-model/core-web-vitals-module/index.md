@@ -1,7 +1,7 @@
 ---
-title: "Core Web Vitals Module"
+title: "Core web vitals module for Unified Digital"
+sidebar_label: "Core web vitals module"
 sidebar_position: 300
-hide_title: true
 ---
 
 ```mdx-code-block

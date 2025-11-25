@@ -1,8 +1,8 @@
 ---
-title: "Attribution"
+title: "Snowplow Attribution dbt package"
+sidebar_label: "Attribution"
 description: "The Snowplow Attribution dbt Package"
 sidebar_position: 10
-hide_title: true
 ---
 
 ```mdx-code-block
@@ -20,8 +20,6 @@ export const datagridProps = {
 <Badges badgeType="dbt-package Release" pkg="attribution"></Badges>&nbsp;
 <Badges badgeType="Early Release"></Badges>&nbsp;
 <Badges badgeType="SPAL"></Badges>
-
-# Snowplow Attribution Package
 
 :::info
 You will need Unified [version 0.4.0](https://github.com/snowplow/dbt-snowplow-unified/releases/tag/0.4.0) to use Attribution version 0.2.0.

@@ -1,5 +1,6 @@
 ---
-title: "Monitoring"
+title: "Monitoring the event recovery"
+sidebar_label: "Monitoring"
 date: "2020-08-26"
 sidebar_position: 40
 ---

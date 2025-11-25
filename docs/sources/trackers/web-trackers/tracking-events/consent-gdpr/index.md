@@ -1,9 +1,8 @@
 ---
-title: "Consent"
+title: "Tracking consent and GDPR on web"
+sidebar_label: "Consent"
 sidebar_position: 100
 ---
-
-# Consent
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
@@ -20,7 +19,7 @@ Enhanced consent events must be **manually tracked**. The GDPR context entity wi
   <TabItem value="js" label="JavaScript (tag)" default>
 
 | Tracker Distribution | Included |
-|----------------------|----------|
+| -------------------- | -------- |
 | `sp.js`              | ✅        |
 | `sp.lite.js`         | ❌        |
 
@@ -47,8 +46,8 @@ window.snowplow(
 import { newTracker } from '@snowplow/browser-tracker';
 import { EnhancedConsentPlugin } from '@snowplow/browser-plugin-enhanced-consent';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ EnhancedConsentPlugin() ],
 });
 ```
@@ -62,27 +61,27 @@ The plugin is available since version 3.8 of the tracker.
 
 ## Events
 
-API                     | Used for:
-------------------------|--------------------------------------------------------
-`trackConsentAllow`     | Track an acceptance of user consent.
-`trackConsentSelected`  | Track a specific selection of consented scopes.
-`trackConsentPending`   | Track the unconfirmed selection about user consent.
-`trackConsentImplicit`  | Track the implicit consent on user consent preferences.
-`trackConsentDeny`      | Track a denial of user consent.
-`trackConsentExpired`   | Track the expiration of a consent selection.
-`trackConsentWithdrawn` | Track the withdrawal of user consent.
-`trackCmpVisible`       | Track the render time of a CMP banner.
+| API                     | Used for:                                               |
+| ----------------------- | ------------------------------------------------------- |
+| `trackConsentAllow`     | Track an acceptance of user consent.                    |
+| `trackConsentSelected`  | Track a specific selection of consented scopes.         |
+| `trackConsentPending`   | Track the unconfirmed selection about user consent.     |
+| `trackConsentImplicit`  | Track the implicit consent on user consent preferences. |
+| `trackConsentDeny`      | Track a denial of user consent.                         |
+| `trackConsentExpired`   | Track the expiration of a consent selection.            |
+| `trackConsentWithdrawn` | Track the withdrawal of user consent.                   |
+| `trackCmpVisible`       | Track the render time of a CMP banner.                  |
 
 With the exception of the CMP visible event, these methods use the same [`consent_preferences`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/consent_preferences/jsonschema/1-0-0) event schema. It has the following properties:
 
-|     Attribute      |    Type    |                                                              Description                                                              | Required |
-|:------------------:|:----------:|-------------------------------------------------------------------------------------------------------------------------------------|:--------:|
-| basisForProcessing |  `string`  |                                          GDPR lawful basis for data collection & processing.                                          |    ✅     |
-|     consentUrl     |  `string`  |                                              URI of the privacy policy related document.                                              |    ✅     |
-|   consentVersion   |  `string`  |                                            Version of the privacy policy related document.                                            |    ✅     |
+|     Attribute      |    Type    | Description                                                                                                                           | Required |
+| :----------------: | :--------: | ------------------------------------------------------------------------------------------------------------------------------------- | :------: |
+| basisForProcessing |  `string`  | GDPR lawful basis for data collection & processing.                                                                                   |    ✅     |
+|     consentUrl     |  `string`  | URI of the privacy policy related document.                                                                                           |    ✅     |
+|   consentVersion   |  `string`  | Version of the privacy policy related document.                                                                                       |    ✅     |
 |   consentScopes    | `string[]` | The scopes allowed after the user finalized their selection of consent preferences. E.g ['analytics', 'functional', 'advertisement']. |    ✅     |
-|   domainsApplied   | `string[]` |                              The domains for which this consent allows these preferences to persist to.                               |    ✅     |
-|    gdprApplies     | `boolean`  |                                      Determine if GDPR applies based on the user's geo-location.                                      |    ✘     |
+|   domainsApplied   | `string[]` | The domains for which this consent allows these preferences to persist to.                                                            |    ✅     |
+|    gdprApplies     | `boolean`  | Determine if GDPR applies based on the user's geo-location.                                                                           |    ✘     |
 
 
 ### Consent allow

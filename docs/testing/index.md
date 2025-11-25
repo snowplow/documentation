@@ -1,5 +1,6 @@
 ---
-title: "Testing"
+title: "Testing your tracking and pipeline"
+sidebar_label: "Testing"
 date: "2024-12-04"
 sidebar_position: 8.5
 ---

@@ -1,5 +1,6 @@
 ---
-title: "Basic usage"
+title: "Basic Snowplow Micro usage"
+sidebar_label: "Basic usage"
 sidebar_position: 1
 description: "How to run Snowplow Micro and send events to it."
 ---
@@ -9,8 +10,6 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 import Badges from '@site/src/components/Badges';
 ```
-
-## Running
 
 The easiest way to run Micro is through [Docker](https://www.docker.com/). <Badges badgeType="Docker Pulls" repo="snowplow/snowplow-micro" />
 

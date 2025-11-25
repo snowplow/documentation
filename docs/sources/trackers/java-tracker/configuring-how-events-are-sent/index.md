@@ -1,5 +1,6 @@
 ---
-title: "Configuring how events are sent"
+title: "Configuring how events are sent for the Java tracker"
+sidebar_label: "Configuring how events are sent"
 date: "2022-03-24"
 sidebar_position: 50
 ---

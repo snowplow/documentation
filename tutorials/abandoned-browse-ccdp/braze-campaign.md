@@ -1,6 +1,7 @@
 ---
 position: 5
-title: Braze Campaign Setup
+title: "Set up an abandoned browse campaign in Braze"
+sidebar_label: "Set up Braze campaign"
 ---
 
 This guide will walk you through setting up and testing an abandoned browse campaign in Braze using the product view data synced from Census.
@@ -27,9 +28,9 @@ This guide will walk you through setting up and testing an abandoned browse camp
 2. Design your email using Braze's visual editor:
    ```html
    Subject: Don't miss out on {{custom_attribute.${product}}}!
-   
-   Hey {{${first_name}}} we saw you were interested in {{custom_attribute.${PRODUCT}}} 
-   
+
+   Hey {{${first_name}}} we saw you were interested in {{custom_attribute.${PRODUCT}}}
+
    <a href="{{custom_attribute.${product_url}}}?abandonedEmail=true">
      You spent {{custom_attribute.${TIME_ENGAGED_IN_S}}} seconds checking it out.... Why not check it out once more before it sells out?!!
    </a>
@@ -39,7 +40,7 @@ This guide will walk you through setting up and testing an abandoned browse camp
    - product name using `{{custom_attribute.${product}}}`
    - product URL using `{{custom_attribute.${product_url}}}`
    - add dynamic product images if available
-   
+
 :::tip
    - The `abandonedEmail=true` parameter in the URL helps track when users click through from abandoned browse emails
    - You can use this parameter to:

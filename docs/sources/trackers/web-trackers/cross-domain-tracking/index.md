@@ -1,5 +1,6 @@
 ---
-title: "Cross-domain tracking"
+title: "Cross-domain tracking on web"
+sidebar_label: "Cross-domain tracking"
 date: "2022-08-30"
 sidebar_position: 2850
 ---

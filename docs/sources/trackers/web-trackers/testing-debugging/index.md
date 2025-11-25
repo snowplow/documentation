@@ -1,5 +1,6 @@
 ---
-title: "Testing, debugging and troubleshooting"
+title: "Testing, debugging and troubleshooting the web trackers"
+sidebar_label: "Testing, debugging and troubleshooting"
 date: "2021-04-07"
 sidebar_position: 2950
 ---
@@ -12,15 +13,13 @@ import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v
 <ReleaseBadge/>
 ```
 
-## Testing your tracking implementation
-
 To prevent data loss and bad events, it's important to test and validate your tracking implementation. Snowplow provides two main tools for this, which work well together.
 
-### Snowplow Inspector for browsers
+## Snowplow Inspector for browsers
 
 Use our [browser extension](/docs/testing/snowplow-inspector/index.md) to inspect event requests in the browser Developer Tools window.
 
-### Snowplow Micro
+## Snowplow Micro
 
 A [lightweight, local Snowplow pipeline](/docs/testing/snowplow-micro/index.md) ideal for sending test events into. It's used as a Docker container.
 

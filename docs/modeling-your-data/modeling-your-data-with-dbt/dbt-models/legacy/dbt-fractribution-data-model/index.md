@@ -1,8 +1,8 @@
 ---
-title: "Fractribution"
+title: "Snowplow Fractribution dbt package"
+sidebar_label: "Fractribution"
 description: "The Snowplow Fractribution dbt Package"
 sidebar_position: 900
-hide_title: true
 ---
 
 ```mdx-code-block
@@ -16,9 +16,6 @@ import TabItem from '@theme/TabItem';
 ​<Badges badgeType="Docker Pulls" repo="snowplow/fractribution"></Badges>&nbsp;
 <Badges badgeType="Unsupported"></Badges>
 
-
-# Snowplow Fractribution Package
-​
 **The package source code can be found in the [snowplow/dbt-snowplow-fractribution repo](https://github.com/snowplow/dbt-snowplow-fractribution), and the docs for the [macro design are here](https://snowplow.github.io/dbt-snowplow-fractribution/#/overview/snowplow_fractribution). If you would like to follow the Fractribution accelerator, which includes sample data, [see here](https://docs.snowplow.io/accelerators/snowplow-fractribution/)**
 ​
 :::warning

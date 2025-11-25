@@ -1,5 +1,6 @@
 ---
-title: "Setup"
+title: "Installing the C++ tracker"
+sidebar_label: "Setup"
 date: "2020-02-25"
 sidebar_position: 10
 ---
@@ -8,8 +9,6 @@ sidebar_position: 10
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-## Tracker compatibility
 
 The Snowplow C++ Tracker has been built and tested using C++ 11 as a minimum.
 

@@ -5,8 +5,6 @@ sidebar_label: "Using the Data Structures Builder"
 sidebar_position: 20
 ---
 
-# Versioning with the Data Structures Builder
-
 Versioning is automated when using the Data Structure Builder to create or edit your custom [Data Structures](/docs/fundamentals/schemas/index.md) for your [Events](/docs/fundamentals/events/index.md) and [Entities](/docs/fundamentals/entities/index.md).
 
 **Breaking and non-breaking changes**

@@ -3,8 +3,6 @@ title: "Session tracking"
 sidebar_position: 20
 ---
 
-# Session tracking
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

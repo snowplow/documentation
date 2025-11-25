@@ -1,5 +1,6 @@
 ---
-title: "Kafka"
+title: "Configuring Kafka as a Snowbridge source"
+sidebar_label: "Kafka"
 description: "Read data from a Kafka topic."
 ---
 
@@ -7,8 +8,6 @@ description: "Read data from a Kafka topic."
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-## Authentication
 
 Authentication is done by providing valid credentials in the configuration.
 

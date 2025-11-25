@@ -10,8 +10,6 @@ import CodeBlock from '@theme/CodeBlock';
 import AutoSchemaCreation from '@site/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/_automatic-schema-creation.md';
 ```
 
-## Setting up Redshift
-
 <AutoSchemaCreation name="Redshift" grantDocs="https://docs.aws.amazon.com/redshift/latest/dg/r_GRANT.html" />
 
 ## Downloading the artifact

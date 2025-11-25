@@ -1,10 +1,9 @@
 ---
-title: "Tracking data out-of-the-box"
+title: "Tracking data out-of-the-box with the web trackers"
+sidebar_label: "Tracking data out-of-the-box"
 date: "2022-08-30"
 sidebar_position: 2500
 ---
-
-# Tracking data out-of-the-box
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

@@ -1,5 +1,6 @@
 ---
-title: "Getting started"
+title: "Getting started with the Flutter tracker"
+sidebar_label: "Getting started"
 date: "2022-01-31"
 sidebar_position: 10
 ---

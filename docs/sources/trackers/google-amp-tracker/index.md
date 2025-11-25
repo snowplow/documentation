@@ -1,5 +1,5 @@
 ---
-title: "Google AMP Tracker"
+title: "Google AMP tracker"
 date: "2020-02-25"
 sidebar_position: 150
 ---

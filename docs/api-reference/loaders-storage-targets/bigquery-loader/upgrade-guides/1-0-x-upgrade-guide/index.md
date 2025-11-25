@@ -1,5 +1,6 @@
 ---
-title: "1.0.x upgrade guide"
+title: "BigQuery Loader v1.0.x upgrade guide"
+sidebar_label: "1.0.x upgrade guide"
 date: "2021-10-07"
 sidebar_position: 0
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Web Trackers"
+title: "Web trackers"
 date: "2021-03-24"
 sidebar_position: 100
 ---

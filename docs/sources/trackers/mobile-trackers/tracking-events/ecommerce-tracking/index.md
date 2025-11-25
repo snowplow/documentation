@@ -1,9 +1,8 @@
 ---
-title: "Ecommerce tracking"
+title: "Tracking ecommerce events with the native mobile trackers"
+sidebar_label: "Ecommerce"
 sidebar_position: 70
 ---
-
-# Ecommerce tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
@@ -112,19 +111,19 @@ promotion.setType("popup");
 
 This table lists all the ecommerce events.
 
-`Event`                 | Used for
-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------
-`ProductViewEvent`      | Tracking a visit to a product detail screen. Also known as product detail view.
-`AddToCartEvent`        | Track an addition to cart.
-`RemoveFromCartEvent`   | Track a removal from cart.
-`ProductListViewEvent`  | Track an impression of a product list. The list could be a search results page, recommended products, upsells etc.
-`ProductListClickEvent` | Track the click/selection of a product from a product list.
-`PromotionViewEvent`    | Track an impression for an internal promotion banner or slider or any other type of content that showcases internal products/categories.
-`PromotionClickEvent`   | Track the click/selection of an internal promotion.
-`CheckoutStepEvent`     | Track a checkout step completion in the checkout process together with common step attributes for user choices throughout the checkout funnel.
-`TransactionEvent`      | Track a transaction/purchase completion.
-`TransactionErrorEvent` | Track a failed transaction.
-`RefundEvent`           | Track a transaction partial or complete refund.
+| `Event`                 | Used for                                                                                                                                       |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ProductViewEvent`      | Tracking a visit to a product detail screen. Also known as product detail view.                                                                |
+| `AddToCartEvent`        | Track an addition to cart.                                                                                                                     |
+| `RemoveFromCartEvent`   | Track a removal from cart.                                                                                                                     |
+| `ProductListViewEvent`  | Track an impression of a product list. The list could be a search results page, recommended products, upsells etc.                             |
+| `ProductListClickEvent` | Track the click/selection of a product from a product list.                                                                                    |
+| `PromotionViewEvent`    | Track an impression for an internal promotion banner or slider or any other type of content that showcases internal products/categories.       |
+| `PromotionClickEvent`   | Track the click/selection of an internal promotion.                                                                                            |
+| `CheckoutStepEvent`     | Track a checkout step completion in the checkout process together with common step attributes for user choices throughout the checkout funnel. |
+| `TransactionEvent`      | Track a transaction/purchase completion.                                                                                                       |
+| `TransactionErrorEvent` | Track a failed transaction.                                                                                                                    |
+| `RefundEvent`           | Track a transaction partial or complete refund.                                                                                                |
 
 
 Each ecommerce event is a [self-describing](/docs/sources/trackers/mobile-trackers/custom-tracking-using-schemas/index.md) event using a single schema,
@@ -134,8 +133,8 @@ Each ecommerce event is a [self-describing](/docs/sources/trackers/mobile-tracke
     <summary>Ecommerce action event properties</summary>
 
 | Request Key | Required | Type/Format | Description                                                                   |
-|-------------|----------|-------------|-------------------------------------------------------------------------------|
-| type        | Y        | string      | Specific ecommerce event type (automatically tracked).                                                |
+| ----------- | -------- | ----------- | ----------------------------------------------------------------------------- |
+| type        | Y        | string      | Specific ecommerce event type (automatically tracked).                        |
 | name        | N        | string      | For `ProductListView` and `ProductListClick` events: human-readable list name |
 </details>
 
@@ -696,7 +695,7 @@ It contains information about the product the user is interacting with.
     <summary>Product entity properties</summary>
 
 | Request Key     | Required | Type/Format | Description                                |
-|-----------------|----------|-------------|--------------------------------------------|
+| --------------- | -------- | ----------- | ------------------------------------------ |
 | id              | Y        | string      | The SKU or product ID.                     |
 | category        | Y        | string      | Category the product belongs to.           |
 | currency        | Y        | string      | Currency in which the product is priced.   |
@@ -724,7 +723,7 @@ The cart entity is used for `AddToCart` and `RemoveFromCart` events.
     <summary>Cart entity properties</summary>
 
 | Request Key | Required | Type/Format | Description                         |
-|-------------|----------|-------------|-------------------------------------|
+| ----------- | -------- | ----------- | ----------------------------------- |
 | totalValue  | Y        | number      | Total cart value after this action. |
 | currency    | Y        | string      | Currency used for the cart.         |
 | cartId      | N        | string      | Unique cart identifier.             |
@@ -741,7 +740,7 @@ The checkout step entity is used for `CheckoutStep` events.
     <summary>Checkout step entity properties</summary>
 
 | Request Key         | Required | Type/Format | Description                                                       |
-|---------------------|----------|-------------|-------------------------------------------------------------------|
+| ------------------- | -------- | ----------- | ----------------------------------------------------------------- |
 | step                | Y        | integer     | Checkout step index.                                              |
 | shippingPostcode    | N        | string      | Shipping address postcode.                                        |
 | billingPostcode     | N        | string      | Billing address postcode.                                         |
@@ -753,7 +752,7 @@ The checkout step entity is used for `CheckoutStep` events.
 | accountType         | N        | string      | Customer account type, e.g. guest                                 |
 | paymentMethod       | N        | string      | Payment method selected.                                          |
 | proofOfPayment      | N        | string      | e.g. invoice, receipt                                             |
-| marketingOptIn      | N        | boolean      | Whether the user email address is opted into marketing campaigns. |
+| marketingOptIn      | N        | boolean     | Whether the user email address is opted into marketing campaigns. |
 </details>
 
 *Schema:*
@@ -767,7 +766,7 @@ The transaction entity is used for `Transaction` and `TransactionError` events.
     <summary>Transaction entity properties</summary>
 
 | Request Key    | Required | Type/Format | Description                                |
-|----------------|----------|-------------|--------------------------------------------|
+| -------------- | -------- | ----------- | ------------------------------------------ |
 | transactionId  | Y        | string      | Unique transaction identifier.             |
 | revenue        | Y        | number      | Value of transaction.                      |
 | currency       | Y        | string      | Currency used in transaction.              |
@@ -792,7 +791,7 @@ The transaction error entity is used for `TransactionError` events.
     <summary>Transaction error entity properties</summary>
 
 | Request Key      | Required | Type/Format | Description                    |
-|------------------|----------|-------------|--------------------------------|
+| ---------------- | -------- | ----------- | ------------------------------ |
 | errorCode        | N        | string      | Error-identifying code.        |
 | errorShortcode   | N        | string      | Shortcode for the error.       |
 | errorDescription | N        | string      | Longer description.            |
@@ -812,7 +811,7 @@ The refund entity is used for `Refund` events.
     <summary>Refund entity properties</summary>
 
 | Request Key   | Required | Type/Format | Description                                   |
-|---------------|----------|-------------|-----------------------------------------------|
+| ------------- | -------- | ----------- | --------------------------------------------- |
 | transactionId | Y        | string      | The identifier from the original transaction. |
 | refundAmount  | Y        | number      | Amount to be refunded.                        |
 | currency      | Y        | string      | Currency used in transaction.                 |
@@ -831,7 +830,7 @@ The promotion entity is used for `PromotionView` and `PromotionClick` events.
     <summary>Promotion entity properties</summary>
 
 | Request Key | Required | Type/Format     | Description                                        |
-|-------------|----------|-----------------|----------------------------------------------------|
+| ----------- | -------- | --------------- | -------------------------------------------------- |
 | id          | Y        | string          | The unique promotion identifier.                   |
 | name        | N        | string          | Promotion name.                                    |
 | productIds  | N        | list of strings | IDs of products in the promotion.                  |
@@ -921,10 +920,10 @@ Snowplow.getDefaultTracker().getEcommerce().removeEcommerceScreen();
     <summary>Screen/Page entity properties</summary>
 
 | Request Key | Required | Type/Format | Description                   |
-|-------------|----------|-------------|-------------------------------|
+| ----------- | -------- | ----------- | ----------------------------- |
 | type        | Y        | string      | Type of screen.               |
 | language    | N        | string      | Language used for the screen. |
-| locale      | N        | string      | Locale version. |
+| locale      | N        | string      | Locale version.               |
 
 </details>
 
@@ -996,7 +995,7 @@ Snowplow.getDefaultTracker().getEcommerce().removeEcommerceUser();
     <summary>User entity properties</summary>
 
 | Request Key | Required | Type/Format | Description                  |
-|-------------|----------|-------------|------------------------------|
+| ----------- | -------- | ----------- | ---------------------------- |
 | id          | Y        | string      | The unique user identifier.  |
 | isGuest     | N        | boolean     | Whether the user is a guest. |
 | email       | N        | string      | User email address.          |

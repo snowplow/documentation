@@ -1,7 +1,7 @@
 ---
-title: "Conversions"
+title: "Modeling conversion events with the Unified Digital package"
+sidebar_label: "Conversions"
 sidebar_position: 100
-hide_title: true
 ---
 
 ```mdx-code-block
@@ -11,8 +11,6 @@ import TabItem from '@theme/TabItem';
 ```
 
 <Badges badgeType="dbt-package Release" pkg="unified"></Badges>
-
-# Conversions
 
 Conversion events are a type of event that's important to your business, be that a transaction, a sign up to a newsletter, or the view of a specific page. Whatever type of event matters to you, so long as it can be determined from a single event record, you'll be able to model and aggregate these conversions at a session level with our package.
 

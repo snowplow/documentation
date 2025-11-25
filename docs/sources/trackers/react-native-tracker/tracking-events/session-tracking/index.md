@@ -1,9 +1,8 @@
 ---
-title: "Session tracking"
+title: "Tracking sessions with the React Native tracker"
+sidebar_label: "Sessions"
 sidebar_position: 20
 ---
-
-# Session tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

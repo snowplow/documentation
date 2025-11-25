@@ -1,9 +1,8 @@
 ---
-title: "Event specifications"
+title: "Integrating with your event specifications on web"
+sidebar_label: "Event specifications"
 sidebar_position: 115
 ---
-
-# Event Specifications integration
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

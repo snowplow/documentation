@@ -1,5 +1,5 @@
 ---
-title: "React Native Tracker"
+title: "React Native tracker"
 date: "2020-07-09"
 sidebar_position: 120
 ---

@@ -1,10 +1,9 @@
 ---
-title: "Tracking specific client-side properties"
+title: "Tracking client side properties in the native mobile trackers"
+sidebar_label: "Tracking specific client-side properties"
 date: "2022-08-30"
 sidebar_position: 30
 ---
-
-# Tracking specific client-side properties
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

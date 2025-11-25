@@ -1,5 +1,6 @@
 ---
-title: "Setup"
+title: "Installing the Golang tracker"
+sidebar_label: "Setup"
 date: "2020-02-26"
 sidebar_position: 10
 ---
@@ -8,8 +9,6 @@ sidebar_position: 10
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-## Tracker compatibility
 
 <p>The latest version of the Snowplow Golang Tracker is v{versions.golangTracker} which has been built and tested using Golang versions <code>1.19.x</code>, <code>1.18.x</code> and <code>1.17.x</code>.</p>
 

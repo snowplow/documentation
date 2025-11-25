@@ -1,6 +1,7 @@
 ---
 position: 3
-title: Define attributes and service with Python
+title: Define attributes and service configuration using the Signals Python SDK
+sidebar_label: Define attributes and service
 description: "Use the Signals Python SDK to programmatically define real-time ecommerce attributes."
 ---
 

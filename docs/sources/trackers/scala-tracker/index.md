@@ -1,5 +1,5 @@
 ---
-title: "Scala Tracker"
+title: "Scala tracker"
 sidebar_position: 210
 ---
 

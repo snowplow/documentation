@@ -1,5 +1,6 @@
 ---
-title: "Quick start guide"
+title: "Quick start guide for Snowplow Self-Hosted"
+sidebar_label: "Quick start guide"
 sidebar_position: 2
 ---
 
@@ -809,5 +810,4 @@ You should now be able to access your service over HTTPS. Verify this by going t
 </Tabs>
 
 ---
-
 If you are curious, here’s [what has been deployed](/docs/get-started/self-hosted/what-is-deployed/index.md). Now it’s time to [send your first events to your pipeline](/docs/get-started/tracking/index.md)!

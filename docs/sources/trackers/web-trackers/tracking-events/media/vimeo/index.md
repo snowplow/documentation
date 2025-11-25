@@ -1,9 +1,8 @@
 ---
-title: "Vimeo"
+title: "Vimeo media tracking on web"
+sidebar_label: "Vimeo"
 sidebar_position: 15
 ---
-
-# Vimeo media tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

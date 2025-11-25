@@ -1,5 +1,6 @@
 ---
-title: "Initialization"
+title: "Initializing the Python tracker"
+sidebar_label: "Initialization"
 sidebar_position: 20
 ---
 

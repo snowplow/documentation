@@ -3,8 +3,6 @@ title: "Event specifications"
 sidebar_position: 115
 ---
 
-# Event Specifications integration
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

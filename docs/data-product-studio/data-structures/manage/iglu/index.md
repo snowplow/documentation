@@ -5,8 +5,6 @@ sidebar_label: "Iglu"
 sidebar_position: 4
 ---
 
-## Setup
-
 To manage your [schemas](/docs/fundamentals/schemas/index.md), you will need to have an [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) installed (you will already have one if you followed the [Snowplow Self-Hosted Quick Start](/docs/get-started/self-hosted/index.md)).
 
 Alternatively, you can host a [static Iglu registry](/docs/api-reference/iglu/iglu-repositories/static-repo/index.md) in Amazon S3 or Google Cloud Storage.

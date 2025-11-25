@@ -4,8 +4,6 @@ date: "2020-07-22"
 sidebar_position: 0
 ---
 
-### Minimal example
-
 The most basic configuration that will run for the particular failure type: `adapter-failure`, in a particular version, and mark all others as `failed` because of missing configuration mappings would look like this:
 
 ```json
@@ -25,7 +23,7 @@ The most basic configuration that will run for the particular failure type: `ada
 
 In above scenario we would be resubmitting all the received `adapter_failures` without any modifications.
 
-### Multiple flows example
+## Multiple flows example
 
 The next example shows a way of setting up multiple configuration flows for specific failure types. Configurations will be matched top to bottom and the first from the top will be chosen.
 
@@ -66,7 +64,7 @@ The next example shows a way of setting up multiple configuration flows for spec
 
 In above scenario we would only process the `1-0-0` version of `enrichment_failures`. We would be modifying those for which vendor in raw payload starts with `com.snowplow`. For those rows that match that field value, we replace the full `refererUri` contents with `https://console.snplow.com/`. All other `enrichment_failures` will be resubmitted as they were originally (pass-through scenario).
 
-### Putting it all together
+## Putting it all together
 
 Below is an advanced example making use of most of the features and performing multiple operations on a very specific subset of failed events.
 

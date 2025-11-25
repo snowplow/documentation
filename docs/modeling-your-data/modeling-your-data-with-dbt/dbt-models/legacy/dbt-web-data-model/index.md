@@ -1,8 +1,8 @@
 ---
-title: "Web"
+title: "Snowplow Web dbt package"
+sidebar_label: "Web"
 description: "The Snowplow Web dbt Package"
 sidebar_position: 700
-hide_title: true
 ---
 
 ```mdx-code-block
@@ -21,8 +21,6 @@ import {versions} from '@site/src/componentVersions';
 This package has been superseded by the [Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) that combines data from both web and mobile sources. For more information, see the Unified Digital page.
 
 :::
-
-# Snowplow Web Package
 
 **The package source code can be found in the [snowplow/dbt-snowplow-web repo](https://github.com/snowplow/dbt-snowplow-web), and the docs for the [model design here](https://snowplow.github.io/dbt-snowplow-web/#!/overview/snowplow_web).**
 

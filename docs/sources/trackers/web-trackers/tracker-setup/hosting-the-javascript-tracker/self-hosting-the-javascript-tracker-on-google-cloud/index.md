@@ -1,5 +1,6 @@
 ---
 title: "Self Hosting the JavaScript Tracker on GCP"
+sidebar_label: "Self hosting on GCP"
 date: "2020-04-28"
 sidebar_position: 200
 ---
@@ -36,12 +37,12 @@ We will continue referring to the file as `sp.js` throughout this guide, however
 2. Navigate to the [Storage section](https://console.cloud.google.com/storage/browser) of Google Cloud Console
 3. Create a new bucket with the following settings
 
-| Option                                                                                                                                                                                                                                                                             | Value                                                                                  |
-|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------------------------------------------------------------------------------|
+| Option                                                                               | Value                                                                                  |
+| ------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------- |
 | **Name** (also see [Add DNS Record for bucket](#add-dns-record-for-bucket-optional)) | For example, `[company-name]-sp-js`                                                    |
-| **Storage region**                                                                                                                                                                                                                                                                 | Select a suitable region, multi-region offers the widest availability and highest SLAs |
-| **Storage class**                                                                                                                                                                                                                                                                  | Standard                                                                               |
-| Access control options                                                                                                                                                                                                                                                             | Fine grained                                                                           |
+| **Storage region**                                                                   | Select a suitable region, multi-region offers the widest availability and highest SLAs |
+| **Storage class**                                                                    | Standard                                                                               |
+| Access control options                                                               | Fine grained                                                                           |
 
 Connecting your domain to your storage bucket (optional)
 
@@ -72,7 +73,7 @@ Open the [_Edit Access_ popup](https://cloud.google.com/storage/docs/access-cont
 Add a new item in the table, enter the following details and click Save.
 
 | Option | Value    |
-|--------|----------|
+| ------ | -------- |
 | Entity | Public   |
 | Name   | allUsers |
 | Access | Reader   |
@@ -89,7 +90,7 @@ This will only work correctly if:
 To connect your domain to your Cloud Storage bucket, you will need to create a `CNAME` record as below:
 
 | Option | Value                     |
-|--------|---------------------------|
+| ------ | ------------------------- |
 | Name   | [your domain]             |
 | Type   | CNAME                     |
 | Data   | c.storage.googleapis.com. |

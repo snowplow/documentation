@@ -1,5 +1,5 @@
 ---
-title: "Using multiple trackers in one app"
+title: "Using multiple trackers in one Java app"
 date: "2022-03-24"
 sidebar_position: 65
 ---

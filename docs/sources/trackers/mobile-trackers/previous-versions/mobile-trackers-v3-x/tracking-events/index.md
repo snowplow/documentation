@@ -16,7 +16,7 @@ import DefineCustomEntity from "@site/docs/reusable/define-custom-entity/_index.
 
 The mobile trackers capture two types of events, automatically captured and manual events.
 
-# Auto Tracking
+## Auto Tracking
 
 Automatically captured events in the iOS Tracker are:
 
@@ -39,7 +39,7 @@ let trackerConfig = TrackerConfiguration()
     .installAutotracking(true)
 ```
 
-## Session Context
+### Session Context
 
 Client session tracking is activated by default but it can be disabled through the TrackerConfiguration as explained above. When enabled the tracker appends a [client_session](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) context to each event it sends and it maintains this session information as long as the application is installed on the device.
 
@@ -86,7 +86,7 @@ let sessionConfig = SessionConfiguration()
 let tracker = Snowplow.createTracker(namespace: kNamespace, network: networkConfig, configurations: [sessionConfig])
 ```
 
-## Custom Event Context
+### Custom Event Context
 
 <DefineCustomEntity/>
 
@@ -115,7 +115,7 @@ and the other describes a user on that screen:
 }
 ```
 
-## Tracking events with Custom Context
+### Tracking events with Custom Context
 
 How to track a screen view with both of these contexts attached:
 
@@ -126,9 +126,9 @@ event.contexts.add(
         andDictionary: [
              "screenType": "test",
              "lastUpdated": "2021-06-11"
-        ])!)     
+        ])!)
 event.contexts.add(
-    SelfDescribingJson(schema: "iglu:com.example/user/jsonschema/2-0-0", 
+    SelfDescribingJson(schema: "iglu:com.example/user/jsonschema/2-0-0",
         andDictionary: [
              "userType": "tester"
         ])!)
@@ -137,15 +137,15 @@ tracker.track(event)
 
 It is also possible to add contexts in a declarative way (see GlobalContextsConfiguration [here](../introduction/index.md)), so that they are applied to all (or a subset of) events within an application.
 
-# Manual Tracking
+## Manual Tracking
 
-## Self Describing
+### Self Describing
 
 <DefineCustomEvent/>
 
 ```swift
-let data = ["targetUrl": "http://a-target-url.com" as NSObject];       
-let event = SelfDescribing(schema: "iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1", payload: data)       
+let data = ["targetUrl": "http://a-target-url.com" as NSObject];
+let event = SelfDescribing(schema: "iglu:com.snowplowanalytics.snowplow/link_click/jsonschema/1-0-1", payload: data)
 tracker.track(event)
 ```
 
@@ -154,7 +154,7 @@ A Self Describing event is a [self-describing JSON](http://snowplowanalytics.com
 - A `data` field, containing the properties of the event
 - A `schema` field, containing the location of the JSON schema against which the `data` field should be validated.
 
-## Structured
+### Structured
 
 Our philosophy in creating Snowplow is that users should capture important consumer interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](/docs/data-product-studio/index.md). Using `trackSelfDescribingEvent` captures these interactions with custom schemas, as desribed above.
 
@@ -168,17 +168,17 @@ let event = Structured(category: "Example", action: "my-action")
 tracker.track(event)
 ```
 
-## Timing
+### Timing
 
 Use the `Timing` events to track user timing events such as how long resources take to load.
 
 ```swift
 let event = Timing(category: "timing-category", variable: "timing-variable", timing: 5)
-    .label("optional-label")       
+    .label("optional-label")
 tracker.track(event)
 ```
 
-## Screen View
+### Screen View
 
 Track the user viewing a screen within the application. This type of tracking is typically used when automatic screen view tracking is not suitable within your application.
 
@@ -187,21 +187,21 @@ let event = ScreenView(name: "DemoScreenName", screenId: UUID())
 tracker.track(event)
 ```
 
-## Consent
+### Consent
 
-### Consent Granted
+#### Consent Granted
 
 Use the `ConsentGranted` event to track a user opting into data collection. A consent document context will be attached to the event using the `id` and `version` arguments supplied.
 
 ```swift
-let event = ConsentGranted(expiry: "2022-01-01T00:00:00Z", documentId: "1234abcd", version: "1.2")       
+let event = ConsentGranted(expiry: "2022-01-01T00:00:00Z", documentId: "1234abcd", version: "1.2")
     .name("document-name")
     .documentDescription("document-description")
-                
+
 tracker.track(event)
 ```
 
-### Consent Withdrawn
+#### Consent Withdrawn
 
 Use the `ConsentWithdrawn` event to track a user withdrawing consent for data collection. A consent document context will be attached to the event using the `id` and `version` arguments supplied. To specify that a user opts out of all data collection, `all` should be set to `true`.
 
@@ -209,35 +209,35 @@ Use the `ConsentWithdrawn` event to track a user withdrawing consent for data co
 let event = ConsentWithdrawn()
     .all(true)
     .documentId("1234abcd")
-    .version("1.2")       
+    .version("1.2")
     .name("document-name")
     .documentDescription("document-description")
-                
+
 tracker.track(event)
 ```
 
-## Ecommerce Transaction
+### Ecommerce Transaction
 
-Modelled on Google Analytics ecommerce tracking capability, Snowplow uses three steps that can be used together to track online transactions:
+Modeled on Google Analytics ecommerce tracking capability, Snowplow uses three steps that can be used together to track online transactions:
 
 1. **Create a Ecommerce event.** Use `Ecommerce` to initialize a transaction object. This will be the object that is loaded with all the data relevant to the specific transaction that is being tracked including all the items in the order, the prices of the items, the price of shipping and the `order_id`.
-    
+
 2. **Add items to the transaction.** Create an array of `EcommerceItem` to pass to the `Ecommerce` object.
-    
+
 3. **Submit the transaction to Snowplow** using the `track()` method, once all the relevant data has been loaded into the object.
-    
+
 
 ```swift
-let transactionID = "6a8078be"       
-                
-let itemArray = [       
+let transactionID = "6a8078be"
+
+let itemArray = [
   EcommerceItem(sku: "DemoItemSku", price: 0.75, quantity: 1)
-    .name("DemoItemName")       
-    .category("DemoItemCategory")       
-    .currency("USD")       
-]       
-                
-let event = Ecommerce(orderId: transactionID, totalValue: 350, items: itemArray)   
+    .name("DemoItemName")
+    .category("DemoItemCategory")
+    .currency("USD")
+]
+
+let event = Ecommerce(orderId: transactionID, totalValue: 350, items: itemArray)
     .affiliation("DemoTransactionAffiliation")
     .taxValue(10)
     .shipping(15)
@@ -248,7 +248,7 @@ let event = Ecommerce(orderId: transactionID, totalValue: 350, items: itemArray)
 tracker.track(event)
 ```
 
-## Push and Local Notification
+### Push and Local Notification
 
 To track an event when a push (or local) notification is used, it is possible to use the `MessageNotification` event:
 
@@ -267,7 +267,7 @@ let event = MessageNotification(title: "title", body: "body", trigger: .push)
 tracker.track(event)
 ```
 
-## Deep Link
+### Deep Link
 
 The Deep Link is received by the mobile operating system and passed to the related app. Our mobile tracker can't automatically track the Deep Link, but we provide an out-of-the-box event that can be used by the developer to manually track it as soon as the Deep Link is received in the app.
 
@@ -310,7 +310,7 @@ The `DeepLinkReceived` event can be used in pair with a `campaign-attribution-en
 
 The mobile trackers capture two types of events, automatically captured and manual events.
 
-# Auto Tracking
+## Auto Tracking
 
 Automatically captured events in the Android Tracker are:
 
@@ -322,7 +322,7 @@ Automatically captured events in the Android Tracker are:
 These are enabled in the tracker configuration. In this example, some helpful automatic contexts and all Autotracking is enabled:
 
 ```java
-TrackerConfiguration trackerConfiguration = new TrackerConfiguration(appId)       
+TrackerConfiguration trackerConfiguration = new TrackerConfiguration(appId)
     .sessionContext(true)
     .platformContext(true)
     .applicationContext(true)
@@ -333,7 +333,7 @@ TrackerConfiguration trackerConfiguration = new TrackerConfiguration(appId)
     .installAutotracking(true);
 ```
 
-## Session Context
+### Session Context
 
 Client session tracking is activated by default but it can be disabled through the TrackerConfiguration as explained above. When enabled the tracker appends a [client_session](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) context to each event it sends and it maintains this session information as long as the application is installed on the device.
 
@@ -362,7 +362,7 @@ time: 30s - application_foreground event - background timeout session check (30 
 
 In the above example the `application_foreground` event triggers a new session because the time spent on background (without tracked events) is bigger than the background timeout for the session.
 
-### Session callback
+#### Session callback
 
 (Available from v3.1)
 
@@ -385,7 +385,7 @@ Snowplow.createTracker(getApplicationContext(),
 );
 ```
 
-## Custom Event Context
+### Custom Event Context
 
 <DefineCustomEntity/>
 
@@ -414,7 +414,7 @@ and the other describes a user on that screen:
 }
 ```
 
-## Tracking events with Custom Context
+### Tracking events with Custom Context
 
 How to track a screen view with both of these contexts attached:
 
@@ -438,9 +438,9 @@ tracker.track(event);
 
 It is also possible to add contexts in a declarative way (see GlobalContextsConfiguration [here](../introduction/index.md)), so that they are applied to all (or a subset of) events within an application.
 
-# Manual Tracking
+## Manual Tracking
 
-## Self Describing
+### Self Describing
 
 <DefineCustomEvent/>
 
@@ -458,7 +458,7 @@ A Self Describing event is a [self-describing JSON](http://snowplowanalytics.com
 - A `data` field, containing the properties of the event
 - A `schema` field, containing the location of the JSON schema against which the `data` field should be validated.
 
-## Structured
+### Structured
 
 Our philosophy in creating Snowplow is that users should capture important consumer interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](/docs/data-product-studio/index.md). Using `trackSelfDescribingEvent` captures these interactions with custom schemas, as desribed above.
 
@@ -472,18 +472,18 @@ Structured event = Structured("my-category", "my-action")
 tracker.track(event);
 ```
 
-## Timing
+### Timing
 
 Use the `Timing` events to track user timing events such as how long resources take to load.
 
 ```java
 Timing event = new Timing("timing-category", "timing-variable", 5)
     .label("optional-label");
-                
+
 tracker.track(event);
 ```
 
-## Screen View
+### Screen View
 
 Track the user viewing a screen within the application. This type of tracking is typically used when automatic screen view tracking is not suitable within your application.
 
@@ -492,9 +492,9 @@ ScreenView event = new ScreenView("screen", UUID.<em>randomUUID</em>().toString(
 tracker.track(event);
 ```
 
-## Consent
+### Consent
 
-### Consent Granted
+#### Consent Granted
 
 Use the `ConsentGranted` event to track a user opting into data collection. A consent document context will be attached to the event using the `id` and `version` arguments supplied.
 
@@ -505,7 +505,7 @@ ConsentGranted event = new ConsentGranted("2018-05-08T18:12:02+00:00", "doc id",
 tracker.track(event);
 ```
 
-### Consent Withdrawn
+#### Consent Withdrawn
 
 Use the `ConsentWithdrawn` event to track a user withdrawing consent for data collection. A consent document context will be attached to the event using the `id` and `version` arguments supplied. To specify that a user opts out of all data collection, `all` should be set to `true`.
 
@@ -516,16 +516,16 @@ ConsentWithdrawn event = new ConsentWithdrawn(true, "doc id", "1.2")
 tracker.track(event);
 ```
 
-## Ecommerce Transaction
+### Ecommerce Transaction
 
-Modelled on Google Analytics ecommerce tracking capability, Snowplow uses three steps that can be used together to track online transactions:
+Modeled on Google Analytics ecommerce tracking capability, Snowplow uses three steps that can be used together to track online transactions:
 
 1. **Create a Ecommerce event.** Use `Ecommerce` to initialize a transaction object. This will be the object that is loaded with all the data relevant to the specific transaction that is being tracked including all the items in the order, the prices of the items, the price of shipping and the `order_id`.
-    
+
 2. **Add items to the transaction.** Create an array of `EcommerceItem` to pass to the `Ecommerce` object.
-    
+
 3. **Submit the transaction to Snowplow** using the `track()` method, once all the relevant data has been loaded into the object.
-    
+
 
 ```java
 EcommerceTransactionItem item = new EcommerceTransactionItem("sku-1", 35.00, 1)
@@ -539,7 +539,7 @@ EcommerceTransaction event = new EcommerceTransaction("order-1", 40.00, items)
 tracker.track(event);
 ```
 
-## Push and Local Notification
+### Push and Local Notification
 
 To track an event when a push (or local) notification is used, it is possible to use the `MessageNotification` event:
 
@@ -556,7 +556,7 @@ MessageNotification event =
 tracker.track(event);
 ```
 
-## Deep Link
+### Deep Link
 
 The Deep Link is received by the mobile operating system and passed to the related app. Our mobile tracker can't automatically track the Deep Link, but we provide an out-of-the-box event that can be used by the developer to manually track it as soon as the Deep Link is received in the app.
 

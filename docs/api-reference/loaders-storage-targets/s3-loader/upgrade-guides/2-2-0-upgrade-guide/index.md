@@ -1,5 +1,6 @@
 ---
-title: "2.2.x upgrade guide"
+title: "S3 Loader v2.2.x upgrade guide"
+sidebar_label: "2.2.x upgrade guide"
 date: "2022-05-19"
 sidebar_position: 10
 ---

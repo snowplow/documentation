@@ -1,10 +1,9 @@
 ---
-title: "Additional Information"
+title: "Additional information for the Tracking CLI"
+sidebar_label: "Additional information"
 date: "2020-10-12"
 sidebar_position: 300
 ---
-
-## Under the hood
 
 There is no buffering in the Snowplow Tracking CLI - each event is sent as an individual payload whether `GET` or `POST`.
 

@@ -1,9 +1,8 @@
 ---
-title: "Element tracking"
+title: "Tracking page element visibility and lifecycle on web"
+sidebar_label: "Element tracking"
 sidebar_position: 55
 ---
-
-# Element visibility and lifecycle tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

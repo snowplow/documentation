@@ -275,7 +275,7 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
                   isCompleted && "text-muted-foreground",
                   isFuture && "text-foreground"
                 )}>
-                  {step.title}
+                  {step.sidebar_label || step.title}
                 </p>
               </div>
 
@@ -391,7 +391,7 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
                       isCompleted && "text-muted-foreground",
                       isFuture && "text-foreground"
                     )}>
-                      {step.title}
+                      {step.sidebar_label || step.title}
                     </p>
                   </div>
 

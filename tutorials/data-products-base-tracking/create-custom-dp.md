@@ -1,6 +1,7 @@
 ---
 position: 7
-title: Create a custom Data Product
+title: Create a custom data product for todo behavior
+sidebar_label: Create a custom data product
 ---
 
 As in every application, there are interactions that are important to the business and are measured in a custom way. For this application the interactions you need to measure are:

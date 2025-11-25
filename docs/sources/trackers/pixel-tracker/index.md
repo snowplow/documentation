@@ -1,5 +1,5 @@
 ---
-title: "Pixel Tracker"
+title: "Pixel tracker"
 sidebar_position: 160
 ---
 

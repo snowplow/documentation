@@ -1,9 +1,8 @@
 ---
-title: "Sessions"
+title: "Tracking sessions on web"
+sidebar_label: "Sessions"
 sidebar_position: 35
 ---
-
-# Session tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
@@ -30,7 +29,7 @@ The session entity is **automatically tracked** once configured.
 The [client_session](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2/) context entity consists of the following properties:
 
 | Attribute             | Description                                                                                                   | Required? |
-|-----------------------|---------------------------------------------------------------------------------------------------------------|-----------|
+| --------------------- | ------------------------------------------------------------------------------------------------------------- | --------- |
 | `userId`              | An identifier for the user of the session (same as `domain_userid`).                                          | Yes       |
 | `sessionId`           | An identifier (UUID) for the session (same as `domain_sessionid`).                                            | Yes       |
 | `sessionIndex`        | The index of the current session for this user (same as `domain_sessionidx`).                                 | Yes       |

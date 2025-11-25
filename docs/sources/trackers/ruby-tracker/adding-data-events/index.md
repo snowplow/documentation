@@ -1,5 +1,6 @@
 ---
-title: "Adding data to your events: context and more"
+title: "Adding context and data to events in the Ruby tracker"
+sidebar_label: "Adding data to your events: context and more"
 date: "2021-10-19"
 sidebar_position: 20
 ---

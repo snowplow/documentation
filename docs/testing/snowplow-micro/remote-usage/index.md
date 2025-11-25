@@ -1,5 +1,6 @@
 ---
-title: "Connecting remote sites and apps"
+title: "Connecting remote sites and applications to Snowplow Micro"
+sidebar_label: "Connecting remote sites and apps"
 sidebar_position: 5
 description: "How to use Micro with websites and apps that are not running locally."
 ---
@@ -14,12 +15,12 @@ import XForwardedForPlugin from "@site/docs/reusable/x-forwarded-for-plugin/_ind
 
 If you are not running your website or app locally but would still like to use Micro for testing and debugging, there are two options:
 
-| | Option 1<br/>[Exposing Micro via a public domain name](#exposing-micro-via-a-public-domain-name) | Option 2<br/>[Locally resolving an existing domain name to Micro](#locally-resolving-an-existing-domain-name-to-micro) |
-|---|:-:|:-:|
-| Requires control over the tracking code | Yes | No |
-| Accessible from multiple devices | Yes | No |
-| Micro receives first-party cookies | No | Yes |
-| Micro receives external IP addresses | Yes | No |
+|                                         | Option 1<br/>[Exposing Micro via a public domain name](#exposing-micro-via-a-public-domain-name) | Option 2<br/>[Locally resolving an existing domain name to Micro](#locally-resolving-an-existing-domain-name-to-micro) |
+| --------------------------------------- | :----------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------: |
+| Requires control over the tracking code |                                               Yes                                                |                                                           No                                                           |
+| Accessible from multiple devices        |                                               Yes                                                |                                                           No                                                           |
+| Micro receives first-party cookies      |                                                No                                                |                                                          Yes                                                           |
+| Micro receives external IP addresses    |                                               Yes                                                |                                                           No                                                           |
 
 ## Exposing Micro via a public domain name
 
@@ -112,7 +113,7 @@ However, you will only get local IP addresses (like `192.168.0.42`) in your data
 
 Chances are that the website in question uses HTTPS. If so, you will need to configure Micro to [enable HTTPS](/docs/testing/snowplow-micro/advanced-usage/index.md#enabling-https). Otherwise, feel free to skip this step.
 
-First, install [`mkcert`](https://github.com/FiloSottile/mkcert). This tool allows you to easily generate SSL/TLS certificates that your machine trusts. 
+First, install [`mkcert`](https://github.com/FiloSottile/mkcert). This tool allows you to easily generate SSL/TLS certificates that your machine trusts.
 
 Now, run the following commands in a terminal (make sure to substitute your Collector domain for `c.example.com`):
 

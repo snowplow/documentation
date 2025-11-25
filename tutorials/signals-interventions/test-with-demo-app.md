@@ -1,6 +1,7 @@
 ---
 position: 5
-title: Test with the demo application
+title: Test your Signals interventions in the demo application
+sidebar_label: Test in the demo application
 description: "Use the interactive demo e-shop to see your Signals configuration in action."
 ---
 

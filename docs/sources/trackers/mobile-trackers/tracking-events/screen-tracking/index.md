@@ -1,9 +1,8 @@
 ---
-title: "Screen view and engagement tracking"
+title: "Tracking screen views and engagement with the native mobile trackers"
+sidebar_label: "Screen view and engagement"
 sidebar_position: 40
 ---
-
-# Screen view and engagement tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

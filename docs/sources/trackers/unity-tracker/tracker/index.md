@@ -1,5 +1,6 @@
 ---
-title: "Tracker"
+title: "Configuring a tracker with the Unity tracker"
+sidebar_label: "Tracker"
 date: "2020-02-26"
 sidebar_position: 40
 ---
@@ -8,15 +9,15 @@ The Tracker object is responsible for co-ordinating the saving and sending of ev
 
 ### Constructor
 
-| **Argument Name** | **Description** | **Required?** | **Default** |
-| --- | --- | --- | --- |
-| [`emitter`](/docs/sources/trackers/unity-tracker/emitter/index.md) | The Emitter object you create | Yes | Null |
-| `trackerNamespace` | The name of the tracker instance | Yes | Null |
-| `appId` | The application ID | Yes | Null |
-| [`subject`](/docs/sources/trackers/unity-tracker/subject/index.md) | The Subject that defines a user | No | Null |
-| [`session`](/docs/sources/trackers/unity-tracker/session/index.md) | The Session object you create | No | Null |
-| `platform` | The device the Tracker is running on | No | Mobile |
-| `base64Encoded` | If we [base 64 encode](https://en.wikipedia.org/wiki/Base64) json values | No | True |
+| **Argument Name**                                                  | **Description**                                                          | **Required?** | **Default** |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------- | ----------- |
+| [`emitter`](/docs/sources/trackers/unity-tracker/emitter/index.md) | The Emitter object you create                                            | Yes           | Null        |
+| `trackerNamespace`                                                 | The name of the tracker instance                                         | Yes           | Null        |
+| `appId`                                                            | The application ID                                                       | Yes           | Null        |
+| [`subject`](/docs/sources/trackers/unity-tracker/subject/index.md) | The Subject that defines a user                                          | No            | Null        |
+| [`session`](/docs/sources/trackers/unity-tracker/session/index.md) | The Session object you create                                            | No            | Null        |
+| `platform`                                                         | The device the Tracker is running on                                     | No            | Mobile      |
+| `base64Encoded`                                                    | If we [base 64 encode](https://en.wikipedia.org/wiki/Base64) json values | No            | True        |
 
 A full Tracker construction should look like the following:
 

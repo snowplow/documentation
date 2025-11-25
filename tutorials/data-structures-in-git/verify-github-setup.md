@@ -1,5 +1,6 @@
 ---
-title: Verify GitHub setup
+title: "Verify data structures GitHub Actions automation workflow"
+sidebar_label: "Verify GitHub workflow"
 position: 5
 ---
 

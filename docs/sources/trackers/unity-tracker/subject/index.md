@@ -1,5 +1,6 @@
 ---
-title: "Subject"
+title: "Configuring a subject with the Unity tracker"
+sidebar_label: "Subject"
 date: "2020-02-26"
 sidebar_position: 60
 ---

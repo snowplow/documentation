@@ -1,5 +1,6 @@
 ---
-title: "Getting started"
+title: "Getting started with the Ruby tracker"
+sidebar_label: "Getting started"
 date: "2021-10-15"
 sidebar_position: 0
 ---
@@ -10,8 +11,6 @@ import TabItem from '@theme/TabItem';
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-## Installation
 
 The Snowplow Ruby Tracker is compatible with Ruby 2.1+, including 3.0+. To add the Snowplow Tracker to your Ruby app or gem, add this line to your Gemfile:
 

@@ -1,5 +1,5 @@
 ---
-title: "Snowplow Micro User Interface"
+title: "Using the Snowplow Micro user interface"
 sidebar_position: 2
 sidebar_label: "Using the UI"
 description: "How to view, filter and investigate events in the Micro UI."
@@ -21,4 +21,3 @@ import videoUrl from '../images/ui-tour.mp4'
 ```
 
 <TrackedReactFilePlayer label="Micro UI" controls url={videoUrl} width='100%' height='100%' />
-

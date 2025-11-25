@@ -1,10 +1,9 @@
 ---
-title: "Declarative entities with Global Context"
+title: "Declarative entities with global context for React Native tracker"
+sidebar_label: "Declarative entities with Global Context"
 date: "2022-08-30"
 sidebar_position: 20
 ---
-
-# Declarative entities with Global Context
 
 **Global context** lets you define your own contexts once (e.g. on tracker initialization) and then have this context sent with every single event subsequently recorded in the app. This saves having to manually build and send the context array with every single event fired.
 
@@ -60,12 +59,12 @@ This argument is a string taken from the event payload field, `e`.
 
 `eventType` takes the following values:
 
-| Type                           | `e`       |
-|--------------------------------|-----------|
-| Screen view tracking           | ue        |
-| Pageview tracking              | pv        |
-| Custom structured event        | se        |
-| Custom self describing event   | ue        |
+| Type                         | `e` |
+| ---------------------------- | --- |
+| Screen view tracking         | ue  |
+| Pageview tracking            | pv  |
+| Custom structured event      | se  |
+| Custom self describing event | ue  |
 
 Further information about the event payload can be found in the [tracker protocol documentation](/docs/events/index.md).
 

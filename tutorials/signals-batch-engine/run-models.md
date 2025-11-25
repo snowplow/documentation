@@ -1,6 +1,7 @@
 ---
 position: 6
-title: Run and test models
+title: Run and test your new attribute dbt models
+sidebar_label: Run and test models
 description: "Run dbt models to create Snowplow Signals attribute tables in your warehouse, and validate data quality."
 ---
 

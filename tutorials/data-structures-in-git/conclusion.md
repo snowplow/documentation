@@ -1,9 +1,8 @@
 ---
-title: Summary
+title: "Conclusions from the data structures in Git tutorial"
+sidebar_label: "Conclusion"
 position: 7
 ---
-
-## Let's break down what we've done
 
 * We have seen how snowplow-cli can be used to work with data structures from the command line
 * We have applied that knowledge to build github workflows which support automated validation and publication

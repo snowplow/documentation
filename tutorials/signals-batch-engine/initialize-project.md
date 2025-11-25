@@ -1,6 +1,7 @@
 ---
 position: 4
-title: Create projects
+title: Create attribute group projects using the batch engine CLI
+sidebar_label: Create projects
 description: "Initialize dbt projects for Snowplow Signals batch attribute groups, and set up the required folder structure."
 ---
 

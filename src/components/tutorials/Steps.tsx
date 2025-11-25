@@ -116,7 +116,7 @@ const Steps: FC<{
                       step.position < activeStep?.position ? 'bold' : 'normal',
                   }}
                 >
-                  {step.title}
+                  {step.sidebar_label || step.title}
                 </Typography>
               </ListItemText>
             </ListItem>

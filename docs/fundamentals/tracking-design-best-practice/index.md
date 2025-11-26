@@ -52,7 +52,7 @@ Good tracking design comes from an understanding of the business use case. Ident
 
 One of the ways to think about this is to sketch the reports that you want to have - the derived tables that the modeling process will extract from the raw events. Based on the reports, you can identify the entities, events, and SQL queries to be performed on top of them.
 
-:::tip Example – abandoned carts in e-commerce
+:::tip Example – abandoned carts in ecommerce
 
 For example, if one of the use cases is to identify abandoned carts, we may want the following reports to explore the data:
 
@@ -72,7 +72,7 @@ Snowplow trackers and data models provide a rich set of events and entities to c
 
 * User and session identification
 * Device and browser information
-* E-commerce events and entities
+* Ecommerce events and entities
 * Media playback events and entities
 * Error and performance tracking
 

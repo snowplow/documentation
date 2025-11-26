@@ -118,7 +118,7 @@ These questions may help when defining your events:
 * When should the events happen? What are the triggers of the events?
 
 :::note Event Specifications
-Once you have defined your events and which entities they involve, you can create [Event Specifications](/docs/data-product-studio/event-specifications/overview/index.md) in the Snowplow Console to formally document them and manage their lifecycle.
+Once you have defined your events and which entities they involve, you can create [Event Specifications](/docs/data-product-studio/event-specifications/index.md) in the Snowplow Console to formally document them and manage their lifecycle.
 :::
 
 A common challenge in defining event schemas is the choice of their granularity. Should you define an event schema for every single action, or choose to group actions into fewer event schemas? This is a trade-off that does not have a single correct answer. Nevertheless, there are two recommendations that we can give.

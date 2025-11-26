@@ -265,6 +265,11 @@ module.exports = {
         apiKey: 'f22e24c1b333034a75914759b0f045c3',
         indexName: 'snowplow',
         contextualSearch: true,
+        askAi: {
+          assistantId: 'eYWyp8tELnNI',
+          indexName: 'markdown-llm',
+          suggestedQuestions: true,
+        },
       },
     }),
 
@@ -278,7 +283,6 @@ module.exports = {
       },
     },
   ],
-
 
   customFields: {
     webpack: {

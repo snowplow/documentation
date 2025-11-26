@@ -32,10 +32,10 @@ For each of these applications you would set up a unique application ID using th
 We often see, and recommend as a best practice, setting up a unique application ID for each deployment environment you are using. For example `${appId}-qa` for staging, `${appId}-dev` for development environments.
 :::
 
-## Application Context
+## Application Entities
 
-Application Context, also referred to as [Global Context](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/global-context/index.md), is a set of entities that can be sent with every event recorded in the application. Using Source Applications you can document which Application Contexts are expected. This is really useful for tracking implementation, data discovery and preventing information duplication in Data Products.
+Application Entities, also referred to as [Global Context](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/global-context/index.md), is a set of entities that can be sent with every event recorded in the application. Using Source Applications you can document which Application Entities are expected. This is really useful for tracking implementation, data discovery and preventing information duplication in Data Products.
 
 :::info
-Since Application Entities can also be set conditionally, you can mark any of them as optional with a note to better understand the condition or any extra information required. The method for conditionally adding an Application Context is through [rulesets](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/global-context/index.md#rulesets), [filter functions](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/global-context/index.md#filter-functions) and [context generators](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/global-context/index.md#context-generators).
+Since Application Entities can also be set conditionally, you can mark any of them as optional with a note to better understand the condition or any extra information required. The method for conditionally adding an Application Entity is through [rulesets](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/global-context/index.md#rulesets), [filter functions](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/global-context/index.md#filter-functions) and [context generators](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/global-context/index.md#context-generators).
 :::

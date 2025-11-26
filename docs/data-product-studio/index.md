@@ -36,6 +36,10 @@ To use Data Product Studio effectively, you should understand:
 - **[Event Specifications](/docs/data-product-studio/event-specifications/index.md)**: Documentation of business events you're tracking
 - **[Data Products](/docs/data-product-studio/data-products/index.md)**: Logical groupings of related business events with defined ownership
 
+The diagram below illustrates how these concepts relate to each other within Data Product Studio:
+
+![Tracking plan overview showing the relationship between data products, event specifications, data structures](images/tracking-plan-overview.png)
+
 :::tip
 New to tracking design? Start with our [Tracking Design Best Practices](/docs/fundamentals/tracking-design-best-practice/index.md) guide to learn how to approach designing your tracking implementation.
 :::

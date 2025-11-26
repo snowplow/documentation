@@ -61,6 +61,7 @@ const swap = (allItems, linkItems, descriptions) => {
 
     if (linkItems[item.id]) {
       return [
+        ...header,
         {
           type: 'link',
           label: linkItems[item.id].sidebar_label ?? linkItems[item.id].title,

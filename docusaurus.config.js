@@ -268,7 +268,6 @@ module.exports = {
         askAi: {
           assistantId: 'eYWyp8tELnNI',
           indexName: 'markdown-llm',
-          suggestedQuestions: true,
         },
       },
     }),

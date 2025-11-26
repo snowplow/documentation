@@ -213,10 +213,9 @@ Here are two pieces of older content that only partially follow the style guide.
 - Use "and" rather than "&"
 - This is partly for consistency and aesthetic reasons, but also helps with screen reader accessibility
 
-    | ✅                                          | ❌                                        |
-    | ------------------------------------------ | ---------------------------------------- |
-    | version and amend                          | version & amend                          |
-    | User and Marketing Analytics visualization | User & Marketing Analytics visualization |
+    | ✅                 | ❌               |
+    | ----------------- | --------------- |
+    | version and amend | version & amend |
 
 ## Writing style
 ### Tone
@@ -447,14 +446,6 @@ Here are two pieces of older content that only partially follow the style guide.
    | where your failed event files are | where your bad rows files are |
    | the bad rows format               |                               |
 
-
-- Use "visualization", not "data application"
-
-   | ✅                                       | ❌                                  |
-   | --------------------------------------- | ---------------------------------- |
-   | the Marketing Attribution visualization | the Marketing Attribution data app |
-
-
 ### Pipeline components
 - Console is capitalized, and doesn't have a definite article (no "the")
 - It can also be called "Snowplow Console"
@@ -668,6 +659,6 @@ Here are two pieces of older content that only partially follow the style guide.
 - Specify the language next to the opening backticks, so that the code block is rendered correctly
 - For the main **documentation** site only: if the rendering doesn't look right, make sure that the specified language is listed under `prism: additionalLanguages` in the `docusaurus.config.js` file
 
-    | ✅                                                          |
-    | ---------------------------------------------------------- |
+    | ✅                                                           |
+    | ----------------------------------------------------------- |
     | \`\`\`json<br></br>\{"accessToken":"string"}<br></br>\`\`\` |

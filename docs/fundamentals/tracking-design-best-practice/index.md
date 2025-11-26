@@ -215,4 +215,4 @@ Having identified your events and entities, you can now record them in a trackin
 
 Answering these questions will help you to have a comprehensive overview of your tracking design and ensure that all stakeholders are aligned on what data is being collected and how it is being used.
 
-We recommend using [Event Specifications](/docs/data-product-studio/event-specifications/overview/index.md) in Snowplow Console to document and manage your tracking plan.
+We recommend using [Event Specifications](/docs/data-product-studio/event-specifications/index.md) in Snowplow Console to document and manage your tracking plan.

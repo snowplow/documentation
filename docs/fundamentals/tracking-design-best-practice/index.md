@@ -39,7 +39,7 @@ A **Tracking Plan** is a comprehensive document that adds a semantic layer to th
 Snowplow customers can create tracking plans directly in Snowplow Console by using [Data Products](/docs/data-product-studio/data-products/index.md) and [Event Specifications](/docs/data-product-studio/event-specifications/index.md).
 :::
 
-![Tracking plan overview showing the relationship between data products, event specifications, data structures](/img/tracking-plan-overview.png)
+![Tracking plan overview showing the relationship between data products, event specifications, data structures](images/tracking-plan-overview.png)
 
 This diagram shows how tracking plans are represented in Snowplow Console.
 * A **Data Product** represents a tracking plan. It is a container for related event specifications that belong to the same tracking plan.

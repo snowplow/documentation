@@ -27,13 +27,13 @@ export default function CodeBlockLayout({ className }: Props): ReactNode {
           <div className="flex items-center gap-2 flex-1">
             {/* Language badge - hidden for 'text' language */}
             {metadata.language && metadata.language !== 'text' && (
-              <span className="inline-flex items-center px-2 py-1 rounded text-sm font-medium bg-muted text-muted-foreground border border-border leading-none">
+              <span className="inline-flex items-center px-2 py-1 rounded text-sm font-medium bg-muted text-foreground border border-border leading-none">
                 {metadata.language}
               </span>
             )}
             {/* Title if provided */}
             {metadata.title && (
-              <span className="text-sm font-medium text-foreground leading-none">
+              <span className="text-sm font-medium text-muted-foreground leading-none">
                 {metadata.title}
               </span>
             )}

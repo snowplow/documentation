@@ -1,6 +1,6 @@
 ---
 title: "Tracking Design Best Practice"
-date: "2025-11-26"
+date: "2020-02-15"
 sidebar_position: 8
 description: "Learn how to design effective behavioral data tracking by analyzing use cases, defining entities and events, and creating comprehensive tracking plans."
 keywords: ["tracking design", "event tracking", "entity design", "tracking plan", "schema design"]
@@ -41,10 +41,7 @@ Snowplow customers can create tracking plans directly in Snowplow Console by usi
 
 ![Tracking plan overview showing the relationship between data products, event specifications, data structures](images/tracking-plan-overview.png)
 
-This diagram shows how tracking plans are represented in Snowplow Console.
-* A **Data Product** represents a tracking plan. It is a container for related event specifications that belong to the same tracking plan.
-* An **Event Specification** represents a single business event in the tracking plan. It contains all the relevant information about the event, including its purpose, origin, and associated data structures.
-* **Event and Entity Data Structures** represent the JSON schemas that define the structure of the data captured by the events and are validated by the Snowplow pipeline.
+This diagram shows how tracking plans are represented in Snowplow Console. A **Data Product** represents a tracking plan and is a container for related event specifications that belong to the same tracking plan. An **Event Specification** represents a single business event in the tracking plan and contains all the relevant information about the event, including its purpose, origin, and associated data structures. **Event and Entity Data Structures** represent the JSON schemas that define the structure of the data captured by the events and are validated by the Snowplow pipeline.
 
 ## Step 1: Analyze your business use case and define reports
 
@@ -52,7 +49,7 @@ Good tracking design comes from an understanding of the business use case. Ident
 
 One of the ways to think about this is to sketch the reports that you want to have - the derived tables that the modeling process will extract from the raw events. Based on the reports, you can identify the entities, events, and SQL queries to be performed on top of them.
 
-:::tip Example – abandoned carts in ecommerce
+:::tip Example - abandoned carts in e-commerce
 
 For example, if one of the use cases is to identify abandoned carts, we may want the following reports to explore the data:
 
@@ -72,7 +69,7 @@ Snowplow trackers and data models provide a rich set of events and entities to c
 
 * User and session identification
 * Device and browser information
-* Ecommerce events and entities
+* E-commerce events and entities
 * Media playback events and entities
 * Error and performance tracking
 

@@ -1,19 +1,21 @@
 ---
 title: "Data Product Studio"
-date: "2025-11-26"
+date: "2020-02-15"
 sidebar_position: 3
 sidebar_label: "Data Product Studio"
+description: "Design and implement behavioral data tracking with schema management, governance, code generation, and tracking plans in Snowplow Console."
+keywords: ["data product studio", "tracking design", "schema management", "event specifications", "data governance"]
 sidebar_custom_props:
   header: " "
 ---
 
 Data Product Studio is a comprehensive set of tools for designing and implementing behavioral data event tracking. It provides:
 
-- **Schema Management**: Define and version data structures for events and entities
-- **Ownership & Governance**: Assign ownership and establish data contracts
-- **Observability**: Monitor data quality and tracking implementation
-- **Code Generation**: Automatically generate tracking code from your designs
-- **Tracking Plans**: Document and manage your tracking implementation
+* **Schema management**: define and version data structures for events and entities
+* **Ownership and governance**: assign ownership and establish data contracts
+* **Observability**: monitor data quality and tracking implementation
+* **Code generation**: automatically generate tracking code from your designs
+* **Tracking plans**: document and manage your tracking implementation
 
 The Data Product Studio UI is included in Snowplow Console.
 
@@ -21,20 +23,20 @@ The Data Product Studio UI is included in Snowplow Console.
 
 Data Product Studio helps organizations move from ad-hoc tracking implementations to a structured, governed approach:
 
-- **Improve Data Quality**: Validate data against schemas at collection time
-- **Enable Collaboration**: Provide a shared workspace for data teams, developers, and analysts
-- **Accelerate Implementation**: Generate tracking code automatically from your designs
-- **Ensure Governance**: Establish and enforce data contracts across your organization
-- **Maintain Documentation**: Keep tracking plans and implementation status in one place
+* **Improve data quality**: validate data against schemas at collection time
+* **Enable collaboration**: provide a shared workspace for data teams, developers, and analysts
+* **Accelerate implementation**: generate tracking code automatically from your designs
+* **Ensure governance**: establish and enforce data contracts across your organization
+* **Maintain documentation**: keep tracking plans and implementation status in one place
 
-## Key Concepts
+## Key concepts
 
-To use Data Product Studio effectively, you should understand:
+To use Data Product Studio effectively, you should understand these core concepts:
 
-- **[Events](/docs/fundamentals/events/index.md)**: Actions that occur in your systems
-- **[Entities](/docs/fundamentals/entities/index.md)**: The objects and context associated with events
-- **[Event Specifications](/docs/data-product-studio/event-specifications/index.md)**: Documentation of business events you're tracking
-- **[Data Products](/docs/data-product-studio/data-products/index.md)**: Logical groupings of related business events with defined ownership
+* **[Events](/docs/fundamentals/events/index.md)**: actions that occur in your systems
+* **[Entities](/docs/fundamentals/entities/index.md)**: the objects and context associated with events
+* **[Event Specifications](/docs/data-product-studio/event-specifications/index.md)**: documentation of business events you're tracking
+* **[Data Products](/docs/data-product-studio/data-products/index.md)**: logical groupings of related business events with defined ownership
 
 The diagram below illustrates how these concepts relate to each other within Data Product Studio:
 

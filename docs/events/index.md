@@ -1,5 +1,5 @@
 ---
-title: "Snowplow event specification"
+title: "Snowplow events"
 description: ""
 date: "2020-02-26"
 sidebar_label: "Events"

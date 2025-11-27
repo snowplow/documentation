@@ -1,23 +1,63 @@
 ---
-title: "Tracking Design Best Practice"
+title: "Tracking design best practice guide"
+sidebar_label: "Tracking design best practice"
 date: "2020-02-15"
 sidebar_position: 8
 description: "Learn how to design effective behavioral data tracking by analyzing use cases, defining entities and events, and creating comprehensive tracking plans."
 keywords: ["tracking design", "event tracking", "entity design", "tracking plan", "schema design"]
 ---
 
-Good tracking design is essential for successful data collection with Snowplow. This guide will help you approach the design process systematically by analyzing your business use cases, defining your data structures, and documenting your implementation.
-
-## Understanding your tracking needs
+Good tracking design is essential for successful data collection. This guide will help you approach the design process systematically.
 
 To use Snowplow successfully, you need to have a good idea of:
 
 * What events you care about in your business
-* What events occur in your website, mobile application, or server side systems
+* What events occur in your website, mobile application, or server-side systems
 * What decisions you make based on those events
 * What you need to know about those events to make those decisions
 
-Based on our experience, we recommend taking the following steps:
+The final outcome of your planning will be a set of tracking plans.
+
+## What is a tracking plan?
+
+A tracking plan is documentation that adds a semantic layer to the events your business is interested in tracking. For each event, it defines:
+
+* A description of the event, including:
+  * The trigger for the event
+  * Why it should be tracked
+  * Often, screenshots for illustration
+* What data is captured with the event, and its structure
+  * Which events, entities, and properties are included
+* The origin of the data, i.e. what platforms or apps this data is created by
+* The implementation status of the tracking
+* Other relevant information
+
+Each tracking plan groups related business events.
+
+![Tracking plan overview showing the relationship between data products, event specifications, data structures](images/tracking-plan-overview.png)
+
+This diagram shows how tracking plans are represented in Snowplow Console. A **data product** represents a tracking plan. It's a container for related event specifications. An **event specification** represents a single business event. It contains all the relevant information about the event, including its purpose, origin, and associated data structures. **Event and entity data structures** represent the JSON schemas that define the structure of the captured data.
+
+:::info Tracking plans in Console
+Snowplow customers can create tracking plans directly in [Snowplow Console](https://console.snowplowanalytics.com) using [data products](/docs/data-product-studio/data-products/index.md) and [event specifications](/docs/data-product-studio/event-specifications/index.md).
+:::
+
+## Naming conventions for tracking plans
+
+A common standard for naming and structuring events, entities, and properties makes it easier to understand and extend your tracking design.
+
+Here are our recommendations, but it's more important to be consistent across your tracking plans than to follow these guidelines:
+
+* **Snake case**: use snake case for both the schema and properties. This means using underscores rather than hyphens to separate words, for example `click_image` not `click-image`. Using snake case ensures that the names are consistent with how the properties end up in the warehouse. Some warehouses convert property names to snake case regardless of how they're defined in the schemas.
+* **Verb-noun convention**: use the verb-noun convention for event names. For instance, `add_to_cart` and `play_video`, rather than `cart_add` and `video_play`.
+* **Self-explanatory event names**: the name of the event should explain what it does. For example, use an event called `click_list_item`, rather than an `action` event with a `type` property of `click_list_item`.
+* **Consistent tense**: be consistent about the tense (present or past) for event and property names. For example, `play` and `pause` events, instead of `played` and `pause` which mix past and present tense.
+* **Singular names**: use singular in the entity name. For example, `product` instead of `products`.
+* **Avoid nesting**: prefer not to use nested objects in the JSON schema, as this can make it more difficult to work in the warehouse.
+
+## Create a tracking plan
+
+We recommend taking the following steps to create a tracking plan:
 
 1. Analyze the business use case and define the reports to be produced
 2. Check our out-of-the-box data products to see if you can reuse or build on top of them
@@ -26,87 +66,64 @@ Based on our experience, we recommend taking the following steps:
 5. Introduce events as interactions of the entities
 6. Bring it all together in a tracking plan
 
-## Tracking plans
+### 1. Analyze your business use case
 
-A **Tracking Plan** is a comprehensive document that adds a semantic layer to the events your business is interested in tracking. For each event, it defines:
+Identifying and analyzing the business use case is the first step. What business outcomes are you aiming to achieve? Examples include acquiring new customers, increasing the number of signups, or reducing the number of abandoned carts.
 
-* A description of the event, often illustrated with screenshots
-* The data that is captured with the event, and its structure
-* The origin of the data (what platforms or apps this data is created by)
-* Other relevant information
+What behavior do you want to capture? Thinking about this will help you identify which events and entities to define.
 
-:::info
-Snowplow customers can create tracking plans directly in Snowplow Console by using [Data Products](/docs/data-product-studio/data-products/index.md) and [Event Specifications](/docs/data-product-studio/event-specifications/index.md).
-:::
+Interview the stakeholders who will consume the data, including the analysts. Try sketching out the reports that you want to create. This includes the derived tables you'll need to model from the raw events.
 
-![Tracking plan overview showing the relationship between data products, event specifications, data structures](images/tracking-plan-overview.png)
+:::info Example: abandoned carts in ecommerce
 
-This diagram shows how tracking plans are represented in Snowplow Console. A **Data Product** represents a tracking plan and is a container for related event specifications that belong to the same tracking plan. An **Event Specification** represents a single business event in the tracking plan and contains all the relevant information about the event, including its purpose, origin, and associated data structures. **Event and Entity Data Structures** represent the JSON schemas that define the structure of the data captured by the events and are validated by the Snowplow pipeline.
+For example, if the use case is to identify abandoned carts, you may want the following reports to explore the data:
 
-## Step 1: Analyze your business use case and define reports
-
-Good tracking design comes from an understanding of the business use case. Identifying and analyzing the use case should be the first step before you design your tracking. This involves identifying the business outcomes that you want to achieve (for example, acquire new customers, increase the number of signups, minimize abandoned carts). It can often be answered by interviewing stakeholders who will consume the data in your organization. These are not only the end stakeholders but also the analysts who are the experts in the data.
-
-One of the ways to think about this is to sketch the reports that you want to have - the derived tables that the modeling process will extract from the raw events. Based on the reports, you can identify the entities, events, and SQL queries to be performed on top of them.
-
-:::tip Example - abandoned carts in e-commerce
-
-For example, if one of the use cases is to identify abandoned carts, we may want the following reports to explore the data:
-
-* What is the frequency of users abandoning carts for different segments of users?
+* What's the frequency of users abandoning carts for different segments of users?
 * What are the most commonly abandoned products in carts?
 * What leads users to return to the store and continue their purchase?
 
-We need to go deeper into specifying what exactly the derived tables for these reports should contain.
-However, we can already see a few reusable entities that we need to track: user, cart, product, page referrer.
-The reports can also tell us what events we'll need as interactions of these entities: add product to cart, checkout step, transaction, page view.
+The planned reports reveal a few reusable entities to track: `user`, `cart`, `product`, and maybe `campaign`.
+
+The analysis also suggests what events you'll need as interactions of these entities: `add product to cart`, `checkout step`, `transaction`, and `page view`.
+
+From here, you can start specifying what exactly the derived tables for these reports should contain.
 
 :::
 
-## Step 2: Make use of our out-of-the-box schemas
+### 2. Is this use case already supported by Snowplow?
 
-Snowplow trackers and data models provide a rich set of events and entities to cover common use cases. These include:
+Snowplow trackers and data models include a number of events and entity data structures to cover common use cases. These include:
 
 * User and session identification
 * Device and browser information
-* E-commerce events and entities
+* Ecommerce events and entities
 * Media playback events and entities
 * Error and performance tracking
 
-It is recommended to use and build on top of these data structures in order to save effort and make use of the existing Snowplow dbt packages and tooling. To get a comprehensive overview of the out-of-the-box provided schemas, [refer to the events documentation](/docs/events/index.md).
+We recommend building on the [out-of-the-box data structures](/docs/events/index.md) whenever possible. This saves time and allows you to make use of the existing Snowplow dbt packages and tooling.
 
-## Step 3: Choose your naming convention
+### 3. Start with entities
 
-Having a common standard for how to name events, entities and properties makes it easier to understand and extend the tracking design. The following are our recommendations, but in general, it's more important to be consistent across your schemas than to follow these recommendations:
+A good practice when designing tracking is to start with the [entities](/docs/fundamentals/entities/index.md).
+Entities contextualize and join events together, and are often the level of analysis a business is interested in e.g., sale, user, organization, or location.
 
-* **Snake case**: use snake case for both the schema and properties. This ensures that the names are consistent with how the properties end up in the warehouse (for some warehouses, property names are converted to snake case regardless of how they are defined in the schemas). Avoid using hyphens to separate words, instead use underscores
-* **Verb-noun convention**: use the verb-noun convention for event names. For instance, `add_to_cart`, `play_video`
-* **Consistent tense**: be consistent about the tense (present or past) for event and property names. For example, `play` and `pause` events, instead of `played` (past tense) and `pause` (present tense)
-* **Singular names**: use singular in the entity name (for example, `product` instead of `products`)
-* **Avoid nesting**: prefer not to use nested objects in the JSON schema as this can make it more difficult to work in the warehouse
+It may not be obvious whether to add some properties to events or entities. In general, it's preferable to place information in entities, as this enables them to be reused across multiple events. This will help with data modeling.
 
-## Step 4: Start with entities
+It's fine and common for events to not have any properties. Event properties should be limited to information that's strictly related to the event, and unlikely to be reused elsewhere, e.g. the error message for an application error event.
 
-A good practice when designing tracking is to start with [the entities](/docs/fundamentals/entities/index.md).
-Entities contextualize and join events together, and they are often the levels of analysis a business is interested in (e.g., sale, user, organization, location).
+:::tip Star schema analogy
+One way to think about events and entities is by relating them to the [star schema used in data warehouses](https://en.wikipedia.org/wiki/Star_schema): entities can be thought of as the dimension tables, while events map more to the fact tables.
 
-It may not be obvious whether some properties should be added to events or entities.
-In general, it is preferable to place information in entities as this will enable it to be reused across multiple events.
-It may often be the case that events do not have any properties – this is totally fine.
-Event properties should be limited only to information that is strictly related to the event and unlikely to be reused elsewhere (e.g., error message for an application error event).
-
-One useful way to think about events and entities is by relating them to the [star schema used in data warehouses](https://en.wikipedia.org/wiki/Star_schema): entities can be thought of as the dimension tables, while events map more to the fact tables. Make sure that information that would be represented using dimension tables is contained in entities rather than events.
-
-Finally, it is a good practice to ask whether certain data really needs to be captured. Tracking unnecessary information uses extra bandwidth and battery power and may add extra overhead to manage. Schemas can be [evolved](/docs/data-product-studio/data-structures/version-amend/index.md) to allow adding more information later. Refer to the business reports identified earlier in order to assess what data needs to be tracked.
-
-:::note Check your existing entities for re-use
-Make sure that you are re-using entities that you previously defined in your other data products.
-The more entities that you can re-use across your data, the more consistent and easier it will be to perform analyses.
+Contain any information that would be represented using dimension tables in entities, rather than events.
 :::
 
-## Step 5: Define the events
+If you've already defined other data products, check that you're re-using entities where possible. The more entities that you can re-use across your data, the more consistent and easier it will be to perform analyses.
 
-Using the entities, you can start to derive the [events](/docs/fundamentals/events/index.md). Events can be viewed as the interactions between entities that occur at a particular point in time (for example, add item to basket, share video, or click on a link).
+This is also a good time to consider whether certain data really needs to be captured. Tracking unnecessary information uses extra bandwidth and battery power, and may add extra overhead to manage. You can [evolve](/docs/data-product-studio/data-structures/version-amend/index.md) your data structures to add more information later. Refer to the business reports identified earlier to be clear on what data needs to be tracked now.
+
+### 4. Define the events
+
+Using the entities, you can start to derive the [events](/docs/fundamentals/events/index.md). Events can be thought of as the interactions between entities that occur at a particular point in time. For example, an `add_item_to_basket` event is an interaction between a `user`, an `item`, and a `basket`.
 
 These questions may help when defining your events:
 
@@ -114,22 +131,31 @@ These questions may help when defining your events:
 * Which entities go along with the events?
 * When should the events happen? What are the triggers of the events?
 
-:::note Event Specifications
-Once you have defined your events and which entities they involve, you can create [Event Specifications](/docs/data-product-studio/event-specifications/index.md) in the Snowplow Console to formally document them and manage their lifecycle.
-:::
+A common challenge in defining event schemas is the choice of their granularity. Check out the [action grouping](#event-action-granularity) section on this page for advice.
 
-A common challenge in defining event schemas is the choice of their granularity. Should you define an event schema for every single action, or choose to group actions into fewer event schemas? This is a trade-off that does not have a single correct answer. Nevertheless, there are two recommendations that we can give.
+### 5. Finalize the tracking plan
 
-### Recommendation 1: Avoid grouping multiple unrelated actions under the same schema
+Having identified your events and entities, you can now record them in a tracking plan. Create [event specifications](/docs/data-product-studio/event-specifications/index.md) in Console to formally document them and manage their lifecycle.
 
-A good rule of thumb is that the name of the event should be representative of what it does without having to look into additional properties.
+## Event action granularity
 
-Consider the following example where we use the `website_action` schema for all events on the page. This makes it difficult to understand what the event captures based on the event name. Also, versioning of the schema is less intuitive, because adding a new event type means updating the schema version for all other types as well. This makes the event schemas more difficult to evolve independently and may introduce undesired dependencies.
+A common challenge in defining event schemas is the choice of their granularity. Should you define an event schema for every single action, or choose to group actions into fewer event schemas? This will depend on your business use case.
 
-<div style={{ width: "100%"}}>
+Here are our recommendations to help you decide.
+
+### Avoid grouping unrelated actions into the same schema
+
+Each event schema should represent a single action, or type of action. To understand why, consider the following example that uses the `website_action` schema for all events on the page.
+
+This structure makes it difficult to understand what the event captures based on the event name. This could hinder collaboration across teams.
+
+Versioning of this schema is not intuitive and has unnecessary overhead, because adding a new event type means updating the schema version for all other types as well. This means that all the tracking needs to be updated, not just for the new action.
+
+This makes the event schemas more difficult to evolve, and may introduce undesired dependencies.
 
 :::warning `website_action` groups unrelated events
-It is not obvious from the event name `website_action` what it captures. The event also groups together two unrelated actions that are distinguished by the `type` property.
+
+It is not obvious from the event name `website_action` what it captures. The event groups together two unrelated actions, which are distinguished by the `type` property.
 
 ```json
 {
@@ -155,9 +181,10 @@ It is not obvious from the event name `website_action` what it captures. The eve
 ```
 :::
 
-Below is a much better option:
+A better option is to create two separate schemas:
 
 :::tip `view_product` and `click_list_item` events
+
 Each action is represented using a single event schema.
 
 ```json
@@ -191,25 +218,12 @@ Each action is represented using a single event schema.
 ```
 :::
 
-</div>
-<div style={{ clear: "both" }} />
+### Consider the granularity needed for your reporting
 
+When dealing with multiple related events targeting the same type of action, you could choose to define a single event schema or multiple event schemas, depending on how you want to use the data.
 
-### Recommendation 2: Consider the granularity needed for your reporting
+Consider the example of tracking button clicks on a page. You could choose to:
+* Define separate schemas for each button on the page, for example `contact_button_click`, `event_button_click`, and `checkout_button_click`
+* Define a single `button_click` schema for all the button clicks, and specify the button type as a property
 
-As stated in the previous recommendation, it is not desirable to group unrelated actions into a single event. However, when dealing with multiple events targeting the same type of action, you may choose to define a single event schema or multiple event schemas depending on how you want to use the data.
-
-Consider the example of tracking button clicks on a page. You need to decide whether to define separate schemas for each button on the page (for example, `contact_button_click`, `event_button_click`) or use a single `button_click` schema for all the button clicks. Make this choice based on how you want to use the events in your reports. If your reports look at the button clicks independently, it may be desirable to use separate schemas for them. However, if you want to report on interaction across the whole page, it may be preferable to use a single event schema for them.
-
-## Step 6: Putting it all together in a tracking plan
-
-Having identified your events and entities, you can now record them in a tracking plan. Tracking plans specify:
-
-1. What data (events, entities, and their properties) should be collected
-2. Why it needs to be tracked (purpose of the data)
-3. How the tracking should be implemented (what is the trigger for the events, which entities go with which events)
-4. What is the implementation status of the tracking
-
-Answering these questions will help you to have a comprehensive overview of your tracking design and ensure that all stakeholders are aligned on what data is being collected and how it is being used.
-
-We recommend using [Event Specifications](/docs/data-product-studio/event-specifications/index.md) in Snowplow Console to document and manage your tracking plan.
+Choose based on how you want to use the events in your reports. If they look at the button clicks independently, it may be desirable to use separate schemas. However, if you want to report on interaction across the whole page, it may be preferable to use a single event schema.

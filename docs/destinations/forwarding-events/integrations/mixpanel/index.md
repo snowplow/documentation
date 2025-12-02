@@ -18,7 +18,7 @@ Send Snowplow events to Mixpanel to power product analytics, user behavior track
 Before setting up the forwarder in Console, you'll need the following from your Mixpanel account:
 
 - **Project ID**: found in Mixpanel under **Settings** > **Project Settings**
-- **Service Account Username**: create a service account in Mixpanel under **Settings** > **Organization Settings** > **Service Accounts**
+- **Service Account Username**: create a service account in Mixpanel under **Settings** > **Organization Settings** > **Service Accounts**. The service account must have either **Admin** or **Owner** permissions.
 - **Service Account Password**: generated when you create the service account
 
 :::tip Test in a non-production project first

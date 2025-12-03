@@ -279,7 +279,6 @@ module.exports = {
     },
   ],
 
-
   customFields: {
     webpack: {
       configure: (config) => {

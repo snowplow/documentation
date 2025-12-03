@@ -835,6 +835,8 @@ a.card:hover::after {
   align-items: center;
   padding: 12px 0;
   min-height: 48px;
+  gap: 4px; /* gap-1 equivalent */
+  flex-wrap: wrap;
 }
 
 .breadcrumbs__link {
@@ -850,7 +852,7 @@ a.card:hover::after {
 }
 
 .breadcrumbs__item:not(:last-child):after {
-  margin: 0 8px;
+  margin: 0 2px;
   display: inline-flex;
   align-items: center;
 }
@@ -861,6 +863,8 @@ ul.breadcrumbs {
   padding: 0;
   display: flex;
   align-items: center;
+  gap: 4px; /* gap-1 equivalent */
+  flex-wrap: wrap;
 }
 
 ul.breadcrumbs > li.breadcrumbs__item > a.breadcrumbs__link > svg {
@@ -894,6 +898,63 @@ ul.breadcrumbs > li.breadcrumbs__item > a.breadcrumbs__link > svg {
   align-items: center;
   vertical-align: middle;
   line-height: 1;
+}
+
+/* Mobile responsive breadcrumbs */
+@media (max-width: 768px) {
+  .breadcrumbs {
+    gap: 2px; /* Tighter gap on mobile */
+    min-height: 40px; /* Smaller min-height on mobile */
+  }
+
+  .breadcrumbs__link {
+    font-size: 0.75rem !important; /* Smaller font on mobile */
+    padding: 4px 2px;
+  }
+
+  .breadcrumbs__item:not(:last-child):after {
+    margin: 0 1px; /* Even tighter separator margin on mobile */
+  }
+}
+
+/* Badge styling - automatic grouping for consecutive badges */
+.snowplow-badge-container {
+  display: inline-block;
+  vertical-align: middle;
+  white-space: nowrap;
+  margin-right: 4px; /* gap-1 equivalent */
+  margin-bottom: 4px; /* for wrapping */
+}
+
+/* Remove margin from last badge */
+.snowplow-badge-container:last-child {
+  margin-right: 0;
+}
+
+/* Auto-wrap consecutive badge containers */
+.theme-doc-markdown > p:has(.snowplow-badge-container) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 1rem;
+}
+
+/* Fallback for browsers without :has() support */
+.snowplow-badge-container + .snowplow-badge-container {
+  margin-left: 0; /* Use gap instead */
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .snowplow-badge-container {
+    margin-right: 2px;
+    margin-bottom: 2px;
+  }
+
+  .theme-doc-markdown > p:has(.snowplow-badge-container) {
+    gap: 2px;
+  }
 }
 
 .card .text--truncate {

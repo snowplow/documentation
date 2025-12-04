@@ -59,6 +59,18 @@ For Properties:
 * Be specific and descriptive to avoid ambiguity, e.g., use `purchase_amount` instead of just `amount`
 * Do not repeat information contained in the data structure name, e.g., avoid `order_id` in an `order` entity
 
+## Event Specification best practices
+
+Event Specifications represent the key business events you are tracking. They contain a name, description, trigger conditions, and associated data structures. Event Specifications are designed to represent a single event to be implemented and analyzed. Each Event Specification should have one primary purpose.
+
+For example, an `Add To Cart` Event Specification would represent the action of a user adding a product to their shopping cart. It would include:
+* A clear name: `Add To Cart`
+* A description of the event's purpose: "Tracks when a user adds a product to their shopping cart."
+* Trigger conditions: "Fired when the user clicks the 'Add to Cart' button on a product page."
+* Associated data structures: an `add_to_cart` event data structure and associated `product` and `cart` entity data structures.
+
+A bad example would be an `Ecommerce Action` Event Specification that tries to capture multiple actions like adding to cart, starting checkout, and completing a purchase in a single event. This can lead to confusion in implementation and complexity in analysis.
+
 ## Entity design best practices
 
 It is recommended that you adopt an "entity-first" approach to design. This means starting by defining the key entities in your business domain before defining the events that interact with those entities. This approach helps ensure consistency and reusability across your tracking design.

@@ -59,6 +59,25 @@ For Properties:
 * Be specific and descriptive to avoid ambiguity, e.g., use `purchase_amount` instead of just `amount`
 * Do not repeat information contained in the data structure name, e.g., avoid `order_id` in an `order` entity
 
+## Data product best practices
+
+Data Products are logical groupings of related business events with defined ownership. They help organize your tracking design and make it easier to manage and analyze your data. 
+
+When defining Data Products, consider who will own the data and what business domain or use-case the events relate to. If you have multiple teams or departments, it can be helpful to align Data Products with those organizational structures. Additionally, those teams can reflect implementation ownership or analysis ownership.
+
+Examples of Data Products include:
+* `Ecommerce Checkout Flow`: contains events related to the checkout process in an e-commerce application
+* `Mobile App User Engagement`: contains events related to user interactions within a mobile application
+* `SaaS Application Usage`: contains events related to user actions within a SaaS platform
+
+Bad examples of Data Products would be overly broad or vague groupings, such as `All User Events` or `Miscellaneous Events`, which do not provide clear context or ownership or overly specific groupings that limit reusability, such as `Product Page Views for Campaign X`.
+
+When defining Data Products, consider the following best practices:
+* **Clear purpose**: Each Data Product should have a well-defined purpose and scope
+* **Ownership**: Assign clear ownership to each Data Product to ensure accountability for data quality and governance
+* **Logical grouping**: Group related events that share a common business domain or use-case
+* **Reusability**: Design Data Products to promote reusability of event and entity data structures across different tracking plans
+
 ## Event Specification best practices
 
 Event Specifications represent the key business events you are tracking. They contain a name, description, trigger conditions, and associated data structures. Event Specifications are designed to represent a single event to be implemented and analyzed. Each Event Specification should have one primary purpose.

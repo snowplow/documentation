@@ -1343,6 +1343,7 @@ div[class*='buttonGroup'] {
 /* Adjust the padding-top override to work with new header */
 .theme-code-block div[class^='codeBlockContent'] {
   padding-top: 0 !important;
+}
 /* Mermaid diagrams responsive styles - FORCE fit viewport */
 .mermaid,
 div.mermaid,

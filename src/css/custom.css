@@ -100,11 +100,9 @@
  * work well for content-centric websites.
  */
 
-
-
 :root {
-  --ifm-color-primary: hsl(var(--primary))!important;
-  --ifm-link-color: hsl(var(--primary))!important;
+  --ifm-color-primary: hsl(var(--primary)) !important;
+  --ifm-link-color: hsl(var(--primary)) !important;
   --ifm-color-primary-dark: #5d32a5;
   --ifm-color-primary-darker: #58309c;
   --ifm-color-primary-darkest: #482780;
@@ -154,13 +152,12 @@ body {
 .main-wrapper {
   margin-top: 1em;
 }
-main[class*=docMainContainer]>div:first-child .row {
+main[class*='docMainContainer'] > div:first-child .row {
   margin: 0 !important;
 }
-main[class*=docMainContainer]>div:first-child .col {
+main[class*='docMainContainer'] > div:first-child .col {
   padding: 0 2rem !important;
 }
-
 
 /* Fix MDX prose content styling - preserve Tailwind typography */
 .markdown,
@@ -169,67 +166,58 @@ article.markdown,
   color: hsl(var(--muted-foreground));
 }
 
-.markdown h1,
-.markdown h2,
-.markdown h3,
-.markdown h4,
-.markdown h5,
-.markdown h6,
-.prose h1,
-.prose h2,
-.prose h3,
-.prose h4,
-.prose h5,
-.prose h6 {
-  color: hsl(var(--foreground)) !important;
-}
-
 .markdown a,
 .prose a {
   color: hsl(var(--primary)) !important;
 }
 
-
 /* Override Docusaurus article styles that interfere with prose */
-article[class*="markdown"] p {
+article[class*='markdown'] p {
   font-size: inherit !important;
   line-height: inherit !important;
 }
 
-/* Allow prose to control heading sizes and line heights */
-.prose h1 { font-size: 2.25rem !important; line-height: 2.5rem !important; }
-.prose h2 { font-size: 1.875rem !important; line-height: 2.25rem !important; }
-.prose h3 { font-size: 1.5rem !important; line-height: 2rem !important; }
-.prose h4 { font-size: 1.25rem !important; line-height: 1.75rem !important; }
-
-/* Prose paragraph and text line heights */
-.prose p { line-height: 1.75 !important; }
-.prose li { line-height: 1.75 !important; }
-.prose blockquote { line-height: 1.75 !important; }
-
 /* Prose size variants with proper line heights */
-.prose-sm p, .prose-sm li { font-size: 0.875rem !important; line-height: 1.5 !important; }
-.prose-base p, .prose-base li { font-size: 1rem !important; line-height: 1.75 !important; }
-.prose-lg p, .prose-lg li { font-size: 1.125rem !important; line-height: 1.75 !important; }
-.prose-xl p, .prose-xl li { font-size: 1.25rem !important; line-height: 1.8 !important; }
-.prose-2xl p, .prose-2xl li { font-size: 1.5rem !important; line-height: 1.67 !important; }
-
-
+.prose-sm p,
+.prose-sm li {
+  font-size: 0.875rem !important;
+  line-height: 1.5 !important;
+}
+.prose-base p,
+.prose-base li {
+  font-size: 1rem !important;
+  line-height: 1.75 !important;
+}
+.prose-lg p,
+.prose-lg li {
+  font-size: 1.125rem !important;
+  line-height: 1.75 !important;
+}
+.prose-xl p,
+.prose-xl li {
+  font-size: 1.25rem !important;
+  line-height: 1.8 !important;
+}
+.prose-2xl p,
+.prose-2xl li {
+  font-size: 1.5rem !important;
+  line-height: 1.67 !important;
+}
 
 /* Reset any Docusaurus interference with typography */
-.markdown, .prose {
+.markdown,
+.prose {
   font-size: unset !important;
   line-height: unset !important;
 }
 
-
 .DocSearch-Button {
   position: fixed !important;
-  top: 32px!important;
-  left: 50%!important;
-  transform: translate(-50%, -50%)!important;
-  max-width: 360px!important;
-  width: 100%!important;
+  top: 32px !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  max-width: 360px !important;
+  width: 100% !important;
   border-radius: 8px !important;
   background-color: hsl(var(--accent)) !important;
   color: hsl(var(--muted-foreground)) !important;
@@ -245,17 +233,17 @@ article[class*="markdown"] p {
 }
 @media screen and (max-width: 1280px) {
   .DocSearch-Button {
-    max-width: 240px!important;
+    max-width: 240px !important;
   }
 }
 @media screen and (max-width: 640px) {
   .DocSearch-Button {
-    max-width: 40px!important;
-    position: relative!important;
-    left: auto!important;
-    transform: none!important;
+    max-width: 40px !important;
+    position: relative !important;
+    left: auto !important;
+    transform: none !important;
     width: fit-content !important;
-    top: auto!important;
+    top: auto !important;
   }
 }
 
@@ -265,12 +253,12 @@ article[class*="markdown"] p {
   }
 
   /* Main content area spacing from sidebar */
-  main[role="main"] {
+  main[role='main'] {
     margin-left: 40px;
   }
 
   /* Fix for pages with sidebar_position: 1 - ensure content wrapper takes full width */
-  main[class*="docMainContainer"] > div:first-child {
+  main[class*='docMainContainer'] > div:first-child {
     width: 100% !important;
   }
 
@@ -410,7 +398,7 @@ table {
 /* Left side bar CSS START */
 
 aside.theme-doc-sidebar-container {
-  border: none!important;
+  border: none !important;
 }
 .sidebar_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-styles-module {
   width: 100% !important;
@@ -500,7 +488,7 @@ aside.theme-doc-sidebar-container {
 
 .menu__list-item--collapsed .menu__link--sublist:after,
 .menu__list-item--collapsed .menu__caret:before {
-  transform: rotateZ(0deg)!important;
+  transform: rotateZ(0deg) !important;
 }
 
 .menu__list-item-collapsible {
@@ -517,27 +505,27 @@ aside.theme-doc-sidebar-container {
 }
 
 .menu__list-item-collapsible--active {
-  background-color: hsla(261.56, 53.33%, 47.06%, 0.12)!important;
-  border-radius: 0px var(--radius) var(--radius) 0px!important;
+  background-color: hsla(261.56, 53.33%, 47.06%, 0.12) !important;
+  border-radius: 0px var(--radius) var(--radius) 0px !important;
   border-left: 1px solid hsl(var(--primary));
   margin-left: -1px;
 }
-.menu__list-item-collapsible.menu__list-item-collapsible--active{
-  border-radius: 0px var(--radius) var(--radius) 0px!important;
+.menu__list-item-collapsible.menu__list-item-collapsible--active {
+  border-radius: 0px var(--radius) var(--radius) 0px !important;
 }
 
 .menu__list-item-collapsible--active .menu__caret {
   border: none;
   background: none;
   padding: 4px;
-  opacity: 100%!important;
+  opacity: 100% !important;
   display: flex !important;
 }
 
 .menu__link,
 .menu__caret {
   align-items: center;
-  border-radius: 0!important;
+  border-radius: 0 !important;
   display: flex;
   transition: background var(--ifm-transition-fast)
     var(--ifm-transition-timing-default);
@@ -557,7 +545,7 @@ aside.theme-doc-sidebar-container {
   font-size: 0.93825rem;
   padding: var(--ifm-menu-link-padding-vertical)
     var(--ifm-menu-link-padding-horizontal);
-  border-radius: 0!important;
+  border-radius: 0 !important;
 }
 
 .menu__link:hover {
@@ -582,7 +570,7 @@ aside.theme-doc-sidebar-container {
 .menu__link--active {
   color: hsl(var(--primary));
   background-color: hsla(261.56, 53.33%, 47.06%, 0.12);
-  border-radius: 0!important;
+  border-radius: 0 !important;
 }
 
 .menu__link--active:hover {
@@ -593,7 +581,7 @@ aside.theme-doc-sidebar-container {
 .menu__list-item-collapsible .menu__link:hover,
 .menu__list-item-collapsible .menu__link--active {
   color: var(--ifm-menu-color-active);
-  border-radius: 0px var(--radius) var(--radius) 0px !important; 
+  border-radius: 0px var(--radius) var(--radius) 0px !important;
   border-left: 1px solid hsl(var(--primary));
 }
 
@@ -606,27 +594,30 @@ aside.theme-doc-sidebar-container {
 .menu__caret {
   padding: var(--ifm-menu-link-padding-vertical)
     var(--ifm-menu-link-padding-horizontal);
-  opacity: 0!important;
+  opacity: 0 !important;
 }
 
 .menu__caret:before {
   content: '';
-  background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none' stroke='%236638B8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='m9 18 6-6-6-6'/%3e%3c/svg%3e") center / 1rem 1rem no-repeat !important;
+  background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none' stroke='%236638B8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='m9 18 6-6-6-6'/%3e%3c/svg%3e")
+    center / 1rem 1rem no-repeat !important;
   filter: var(--ifm-menu-link-sublist-icon-filter);
   height: 1.25rem;
-  transform: rotate(90deg)!important;
+  transform: rotate(90deg) !important;
   width: 1.25rem;
   transition: transform var(--ifm-transition-fast) linear;
 }
 .menu__list-item-collapsible:hover .menu__caret {
   border: none;
-  background: none!important;
+  background: none !important;
   padding: 4px;
-  opacity: 100!important;
+  opacity: 100 !important;
 }
-.theme-doc-sidebar-item-category-level-2 .menu__list-item-collapsible .menu__caret {
+.theme-doc-sidebar-item-category-level-2
+  .menu__list-item-collapsible
+  .menu__caret {
   padding: 4px;
-  opacity: 100!important;
+  opacity: 100 !important;
 }
 
 /* button to collapse */
@@ -795,7 +786,7 @@ a.card:hover::after {
 }
 .breadcrumbs {
   padding-left: 0;
-  flex-wrap: wrap!important;
+  flex-wrap: wrap !important;
 }
 
 .breadcrumbs__item:not(:last-child):after {
@@ -840,7 +831,7 @@ a.card:hover::after {
 }
 
 .breadcrumbs__link {
-  font-size: .875rem !important;
+  font-size: 0.875rem !important;
   display: inline-flex;
   align-items: center;
   padding: 8px 4px;
@@ -876,7 +867,7 @@ ul.breadcrumbs > li.breadcrumbs__item > a.breadcrumbs__link > svg {
 }
 
 /* Fix home icon alignment specifically - tighten spacing */
-.breadcrumbs__link[aria-label*="Home"] {
+.breadcrumbs__link[aria-label*='Home'] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -978,17 +969,18 @@ code {
 /* Remove margin-bottom from code blocks */
 .prose pre.prism-code {
   margin-bottom: 0;
+  scrollbar-color: hsl(var(--muted-foreground)) transparent;
+  scrollbar-width: thin;
 }
 
-/* Fix code block button overlap */
+.prose pre.prism-code:hover {
+  scrollbar-color: hsl(var(--muted-foreground)) transparent;
+  scrollbar-width: thin;
+}
+
+/* Code block content styling */
 div[class^='codeBlockContent'] {
   position: relative;
-  padding-top: 1rem;
-}
-
-/* Always show copy buttons */
-div[class^='codeBlockContent'] div[class^='buttonGroup'] button {
-  opacity: 50% !important;
 }
 
 input[type='text'],
@@ -1208,7 +1200,7 @@ img.full-width {
 from elements with a subsequent element that has a top margin. */
 .theme-doc-markdown h1:has(+ h2),
 .theme-doc-markdown h1:has(+ h3),
-.theme-doc-markdown h2:has(+ h3),
+/*.theme-doc-markdown h2:has(+ h3),*/
 .theme-doc-markdown ul:has(+ h2),
 .theme-doc-markdown ul:has(+ h3),
 .theme-doc-markdown ol:has(+ h2),
@@ -1218,16 +1210,17 @@ from elements with a subsequent element that has a top margin. */
 .theme-doc-markdown p:has(+ div > table),
 .theme-doc-markdown p:has(+ table),
 .theme-doc-markdown h2:has(+ p > img),
-/*.theme-doc-markdown p:has(+ p > img),*/
 .theme-doc-markdown h3:has(+ p > img),
 .theme-doc-markdown div.theme-admonition:has(+ h2),
 .theme-doc-markdown div.theme-admonition:has(+ h3),
 .theme-doc-markdown details:has(+ h2),
 .theme-doc-markdown details:has(+ h3),
 .theme-doc-markdown div.tabs-container:has(+ h2),
-.theme-doc-markdown div.tabs-container:has(+ h3)
+.theme-doc-markdown div.tabs-container:has(+ h3),
 .theme-doc-markdown div.theme-code-block:has(+ h2),
-.theme-doc-markdown div.theme-code-block:has(+ h3) {
+.theme-doc-markdown div.theme-code-block:has(+ h3),
+.theme-doc-markdown div > table:has(+ h2), /* Tables generated by MDX components are typically put in divs */
+.theme-doc-markdown div > table:has(+ h3) {
   margin-bottom: 0rem;
 }
 
@@ -1249,8 +1242,8 @@ img {
 
 /* doc markdown grid layout control END*/
 
-div[class^=codeBlockContent] {
-  padding-top: 2rem!important;
+div[class^='codeBlockContent'] {
+  padding-top: 2rem !important;
 }
 
 .footer {
@@ -1328,6 +1321,29 @@ abbr[data-title]:hover:after {
 
 /* END  Control rest of the elements erase after we upgrade */
 
+/* Custom code block header and button styling */
+.theme-code-block {
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: none !important;
+}
+
+/* Remove the default button positioning */
+div[class*='buttonGroup'] {
+  position: static !important;
+}
+
+/* Code block pre should not have extra padding at top since header handles spacing */
+.theme-code-block pre {
+  margin: 0;
+  border-radius: 0;
+}
+
+/* Adjust the padding-top override to work with new header */
+.theme-code-block div[class^='codeBlockContent'] {
+  padding-top: 0 !important;
+}
 /* Mermaid diagrams responsive styles - FORCE fit viewport */
 .mermaid,
 div.mermaid,

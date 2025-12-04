@@ -1,5 +1,6 @@
 ---
-title: "Tracking events"
+title: "Tracking events with the Ruby tracker"
+sidebar_label: "Tracking events"
 date: "2021-10-15"
 sidebar_position: 10
 ---

@@ -1,9 +1,8 @@
 ---
-title: "Enhanced"
+title: "Legacy enhanced ecommerce plugin for web"
+sidebar_label: "Enhanced"
 sidebar_position: 70
 ---
-
-# Enhanced ecommerce tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

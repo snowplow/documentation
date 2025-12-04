@@ -3,8 +3,6 @@ title: "Hybrid Apps (WebViews)"
 sidebar_position: 5000
 ---
 
-# Hybrid Mobile Apps using WebViews
-
 :::info
 
 This feature is available since v0.8 of the Flutter tracker and supports WebView implemented using the [`webview_flutter` package](https://pub.dev/packages/webview_flutter).

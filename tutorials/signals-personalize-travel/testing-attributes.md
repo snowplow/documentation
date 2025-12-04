@@ -1,5 +1,6 @@
 ---
-title: "Test your attributes"
+title: "Test your Signals attribute definitions using the Snowplow Inspector"
+sidebar_label: "Test your attributes"
 position: 4
 description: "Verify that your Snowplow Signals attributes are working correctly by generating events and checking attribute values."
 keywords: ["testing", "attributes", "Snowplow Inspector", "behavioral events", "verification"]
@@ -21,7 +22,7 @@ Start by generating events on your travel website:
 
 ## Check attribute values
 
-Open your browser's developer console (Ctrl+Shift+I or equivalent) and navigate to the [Snowplow Inspector](https://chrome.google.com/webstore/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm?hl=en) tab:
+Open your browser's developer console (Ctrl+Shift+I or equivalent) and navigate to the [Snowplow Inspector](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm) tab:
 
 ![Snowplow Inspector](images/inspector.jpg)
 

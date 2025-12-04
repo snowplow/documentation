@@ -1,5 +1,5 @@
 ---
-title: "Platform specific functions"
+title: "Platform specific functions for the .NET Tracker"
 date: "2020-02-26"
 sidebar_position: 70
 ---

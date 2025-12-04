@@ -1,5 +1,6 @@
 ---
-title: "Tracker"
+title: "Configuring a tracker with the .NET tracker"
+sidebar_label: "Tracker"
 date: "2020-02-26"
 sidebar_position: 30
 ---
@@ -8,19 +9,19 @@ The Tracker object is responsible for co-ordinating the saving and sending of ev
 
 ## Constructor
 
-| **Argument Name** | **Description** | **Required?** | **Default** |
-| --- | --- | --- | --- |
-| `emitter` | The Emitter object you create | Yes | Null |
-| `subject` | The Subject that defines a user | No | Null |
-| `clientSession` | The Session object you create | No | Null |
-| `trackerNamespace` | The name of the tracker instance | No | Null |
-| `appId` | The application ID | No | Null |
-| `base64Encoded` | If we [base 64 encode](https://en.wikipedia.org/wiki/Base64) json values | No | True |
-| `synchronous` | If loading into storage is done in sync | No | True |
-| `desktopContextDelegate` | Function to get the desktop context | No | Null |
-| `mobileContextDelegate` | Function to get the mobile context | No | Null |
-| `geoLocationContextDelegate` | Function to get the geo-location context | No | Null |
-| `logger` | The logger to use within the application | No | Null |
+| **Argument Name**            | **Description**                                                          | **Required?** | **Default** |
+| ---------------------------- | ------------------------------------------------------------------------ | ------------- | ----------- |
+| `emitter`                    | The Emitter object you create                                            | Yes           | Null        |
+| `subject`                    | The Subject that defines a user                                          | No            | Null        |
+| `clientSession`              | The Session object you create                                            | No            | Null        |
+| `trackerNamespace`           | The name of the tracker instance                                         | No            | Null        |
+| `appId`                      | The application ID                                                       | No            | Null        |
+| `base64Encoded`              | If we [base 64 encode](https://en.wikipedia.org/wiki/Base64) json values | No            | True        |
+| `synchronous`                | If loading into storage is done in sync                                  | No            | True        |
+| `desktopContextDelegate`     | Function to get the desktop context                                      | No            | Null        |
+| `mobileContextDelegate`      | Function to get the mobile context                                       | No            | Null        |
+| `geoLocationContextDelegate` | Function to get the geo-location context                                 | No            | Null        |
+| `logger`                     | The logger to use within the application                                 | No            | Null        |
 
 A full Tracker construction should look like the following:
 

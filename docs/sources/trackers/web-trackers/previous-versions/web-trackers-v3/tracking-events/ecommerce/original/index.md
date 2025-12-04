@@ -1,9 +1,8 @@
 ---
-title: "Original"
+title: "Ecommerce tracking (original)"
+sidebar_label: "Original"
 sidebar_position: 70
 ---
-
-# Ecommerce tracking (original)
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

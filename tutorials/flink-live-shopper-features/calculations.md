@@ -1,6 +1,7 @@
 ---
 position: 3
-title: Understand the calculations
+title: "Understand the live shopper feature calculations"
+sidebar_label: "Understand the calculations"
 ---
 
 This section explains what is calculated, how each metric is updated, and where the values are stored.

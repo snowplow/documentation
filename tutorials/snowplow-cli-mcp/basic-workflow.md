@@ -1,6 +1,7 @@
 ---
 position: 3
-title: Basic workflow
+title: "Create and publish a data structure using the Snowplow CLI MCP tool"
+sidebar_label: "Create and publish a data structure"
 ---
 
 Here's a typical interaction pattern for creating a data structure.
@@ -67,5 +68,3 @@ The assistant will:
 ## 6. Publish to Console
 
 Use `snowplow-cli data-structures publish` and `snowplow-cli data-products publish` to push changes to Console.
-
-

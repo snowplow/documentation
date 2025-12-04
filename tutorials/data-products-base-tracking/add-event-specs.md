@@ -1,9 +1,8 @@
 ---
 position: 8
-title: Add Event Specifications
+title: Add event specifications to the todo data product
+sidebar_label: Add event specifications
 ---
-
-### Create the "Add todo" Event Specification
 
 Now you can create the Event Specification representing the todo addition. Click `Create new event specification`, fill the event information modal with the following inputs and click `Save and continue`.
 

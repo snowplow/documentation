@@ -3,8 +3,6 @@ title: "YouTube"
 sidebar_position: 20
 ---
 
-# YouTube iFrame media tracking
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -20,7 +18,7 @@ YouTube media events and entities are **automatically tracked** once configured.
   <TabItem value="js" label="JavaScript (tag)" default>
 
 | Tracker Distribution | Included |
-|----------------------|----------|
+| -------------------- | -------- |
 | `sp.js`              | ❌        |
 | `sp.lite.js`         | ❌        |
 
@@ -187,7 +185,7 @@ enableYouTubeTracking({ id, options?: { label?, captureEvents?, boundaries?, upd
 
 
 | Parameter               | Type                    | Default             | Description                                                                                                    | Required |
-|-------------------------|-------------------------|---------------------|----------------------------------------------------------------------------------------------------------------|----------|
+| ----------------------- | ----------------------- | ------------------- | -------------------------------------------------------------------------------------------------------------- | -------- |
 | `id`                    | `string` or `YT.Player` | \-                  | The HTML id attribute of the media element                                                                     | Yes      |
 | `options.label`         | `string`                | \-                  | An identifiable custom label sent with the event                                                               | No       |
 | `options.captureEvents` | `string[]`              | `['DefaultEvents']` | The events or Event Group to capture. For a full list of events and groups, check the [section below](#events) | No       |
@@ -236,7 +234,7 @@ enableYouTubeTracking({
 Below is a table of all the events that can be used in `options.captureEvents`
 
 | Name                  | Fire Condition                                                    |
-|-----------------------|-------------------------------------------------------------------|
+| --------------------- | ----------------------------------------------------------------- |
 | play                  | The video is played                                               |
 | pause                 | The video is paused                                               |
 | seek                  | On seek                                                           |
@@ -252,7 +250,7 @@ Below is a table of all the events that can be used in `options.captureEvents`
 You can also use a pre-made event group in `options.captureEvents`:
 
 | Name            | Events                                                                                                                 |
-|-----------------|------------------------------------------------------------------------------------------------------------------------|
+| --------------- | ---------------------------------------------------------------------------------------------------------------------- |
 | `DefaultEvents` | `['play', 'pause', 'seek', 'volumechange', 'ended', 'percentprogress', 'playbackratechange', 'playbackqualitychange']` |
 | `AllEvents`     | Every event listed in [Capturable Events](#capturable-events)                                                          |
 

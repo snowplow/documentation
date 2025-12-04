@@ -1,9 +1,8 @@
 ---
-title: "Media tracking"
+title: "Tracking media events with the native mobile trackers"
+sidebar_label: "Media"
 sidebar_position: 100
 ---
-
-# Media tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

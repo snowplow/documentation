@@ -1,5 +1,6 @@
 ---
-title: "Managing multiple trackers"
+title: "Managing multiple trackers on web"
+sidebar_label: "Managing multiple trackers"
 date: "2021-03-31"
 sidebar_position: 4000
 ---
@@ -12,9 +13,9 @@ import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v
 <ReleaseBadge/>
 ```
 
-You can have more than one tracker instance running on the same page at once. This may be useful if you want to log events to different collectors. By default, any Snowplow method you call will be executed by every tracker you have created so far. 
+You can have more than one tracker instance running on the same page at once. This may be useful if you want to log events to different collectors. By default, any Snowplow method you call will be executed by every tracker you have created so far.
 
-You can override this behavior and specify which trackers will execute a Snowplow method. 
+You can override this behavior and specify which trackers will execute a Snowplow method.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -27,7 +28,7 @@ snowplow('trackPageView:{{TRACKER_NAME}}');
 snowplow('trackPageView:{{TRACKER_NAME}};{{ANOTHER_TRACKER_NAME}}');
 
 /**
- * Where {{TRACKER_NAME}} and {{ANOTHER_TRACKER_NAME}} are names of 
+ * Where {{TRACKER_NAME}} and {{ANOTHER_TRACKER_NAME}} are names of
  * trackers initialized on the page using the `newTracker` API.
 */
 ```
@@ -43,7 +44,7 @@ trackPageView({}, [ '{{TRACKER_NAME}}' ]);
 trackPageView({}, [ '{{TRACKER_NAME}}', '{{ANOTHER_TRACKER_NAME}}' ]);
 
 /**
- * Where {{TRACKER_NAME}} and {{ANOTHER_TRACKER_NAME}} are names of 
+ * Where {{TRACKER_NAME}} and {{ANOTHER_TRACKER_NAME}} are names of
  * trackers initialized on the page using the `newTracker` API.
 */
 ```
@@ -96,7 +97,7 @@ snowplow('trackStructEvent:sp1', {
 });
 
 /* Only the second tracker will fire this self-describing event */
-snowplow('trackSelfDescribingEvent:sp2', { 
+snowplow('trackSelfDescribingEvent:sp2', {
   event: {
     schema: 'iglu:com.acme_company/viewed_product/jsonschema/1-0-0',
     data: {
@@ -119,11 +120,11 @@ snowplow('trackPageView:sp1;sp2');
   <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
-import { 
-  newTracker, 
-  setCustomUrl, 
-  trackStructEvent, 
-  trackSelfDescribingEvent, 
+import {
+  newTracker,
+  setCustomUrl,
+  trackStructEvent,
+  trackSelfDescribingEvent,
   trackPageView
 } from '@snowplow/browser-tracker';
 import { WebVitalsPlugin } from "@snowplow/browser-plugin-web-vitals";
@@ -164,7 +165,7 @@ trackStructEvent({
 [ 'sp1' ]);
 
 /* Only the second tracker will fire this self-describing event */
-trackSelfDescribingEvent({ 
+trackSelfDescribingEvent({
   event: {
     schema: 'iglu:com.acme_company/viewed_product/jsonschema/1-0-0',
     data: {

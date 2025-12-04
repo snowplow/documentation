@@ -1,5 +1,6 @@
 ---
-title: "Create behavioral attributes"
+title: "Define travel preference attributes using the Signals Python SDK"
+sidebar_label: "Define behavioral attributes"
 position: 3
 description: "Define behavioral attributes using the Snowplow Signals Python SDK to capture user preferences from website interactions."
 keywords: ["Snowplow Signals", "attributes", "Python SDK", "behavioral data", "user preferences"]

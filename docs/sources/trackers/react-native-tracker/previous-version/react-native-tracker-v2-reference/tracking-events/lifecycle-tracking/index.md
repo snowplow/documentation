@@ -3,8 +3,6 @@ title: "App lifecycle tracking"
 sidebar_position: 30
 ---
 
-# App lifecycle tracking
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

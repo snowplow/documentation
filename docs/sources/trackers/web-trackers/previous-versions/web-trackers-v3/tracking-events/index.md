@@ -4,8 +4,6 @@ date: "2022-08-30"
 sidebar_position: 2500
 ---
 
-# Tracking data out-of-the-box
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

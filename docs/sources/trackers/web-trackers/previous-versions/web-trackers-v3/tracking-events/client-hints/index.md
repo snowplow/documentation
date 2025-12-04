@@ -3,8 +3,6 @@ title: "Client Hints"
 sidebar_position: 150
 ---
 
-# Client Hints tracking
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

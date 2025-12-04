@@ -10,8 +10,6 @@ import TabItem from '@theme/TabItem';
 import {versions} from '@site/src/componentVersions';
 ```
 
-## Compatibility
-
 In short, almost everything is compatible with almost everything. We rarely change the core protocols that various components use to communicate.
 
 You might encounter specific restrictions when following the documentation, for example, some of our [data models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/index.md) might call for a reasonably recent version of the [warehouse loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md).
@@ -26,7 +24,7 @@ If you are a Snowplow CDI customer, rather than self-hosted, you don't need to d
 
 Some major upgrades might have breaking changes. In this case, we provide upgrade guides, such as the ones for [RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/upgrade-guides/index.md).
 
-From time to time, we develop better applications for certain tasks and deprecate the old ones. Deprecations are announced on [Community](http://community.snowplow.io/).
+From time to time, we develop better applications for certain tasks and deprecate the old ones. Deprecations are announced on [Community](https://community.snowplow.io/).
 
 ---
 
@@ -165,10 +163,10 @@ If you are a Snowplow CDI customer, rather than self-hosted, you don't need to i
 
 :::
 
-| Application                                                                      |      Latest version      |
-| :------------------------------------------------------------------------------- | :----------------------: |
-| [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md) | {versions.snowplowMicro} |
-| [Snowplow Mini](/docs/api-reference/snowplow-mini/usage-guide/index.md)          | {versions.snowplowMini}  |
+| Application                                                             |      Latest version      |
+| :---------------------------------------------------------------------- | :----------------------: |
+| [Snowplow Micro](/docs/testing/snowplow-micro/index.md)                 | {versions.snowplowMicro} |
+| [Snowplow Mini](/docs/api-reference/snowplow-mini/usage-guide/index.md) | {versions.snowplowMini}  |
 
 ### Analytics SDKs
 

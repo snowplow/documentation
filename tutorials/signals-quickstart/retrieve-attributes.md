@@ -1,6 +1,7 @@
 ---
-position: 6
-title: Retrieve calculated attributes
+position: 4
+title: Retrieve calculated attributes using the Signals Python SDK
+sidebar_label: Retrieve attributes using Python
 description: "Access and consume calculated behavioral data attributes from the Snowplow Signals Profiles Store using the Python SDK."
 ---
 

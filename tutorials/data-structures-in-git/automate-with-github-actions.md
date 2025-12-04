@@ -1,12 +1,12 @@
 ---
-title: Automate with Github Actions
+title: "Automate data structure workflows with GitHub Actions"
+sidebar_label: "Automate with GitHub Actions"
 position: 4
 ---
-### Set up repository
 
 We'll not go into the details of creating github repositories and initial commits here, the [github docs](https://docs.github.com/) do an excellent job of that already. The next few steps will assume a working github repository containing the directory and data structure we created in the previous section. It will have two branches named `main` and `develop` which should be in sync.
 
-### Publish to develop workflow
+## Publish to develop workflow
 
 We would like pushes to our `develop` branch to be automatically published to our [development](https://docs.snowplow.io/docs/data-product-studio/data-quality) environment. Github workflows can be [triggered](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/triggering-a-workflow) by all kinds of repository events. The one we are interested in here:
 ```yml
@@ -47,7 +47,7 @@ jobs:
 The value of the `--managed-from` flag will be displayed inside the 'This data structure is locked' banner we saw earlier in the UI. It is designed to help people track down the source of truth for this data structure.
 :::
 
-### Publish to production workflow
+## Publish to production workflow
 
 In the same way we want our `develop` branch to deploy to our `develop` environment we want our `main` branch to deploy to our `production` environment.
 
@@ -74,7 +74,7 @@ jobs:
       - run: snowplow-cli ds publish prod --managed-from $GITHUB_REPOSITORY
 ```
 
-### Validate on pull request workflow
+## Validate on pull request workflow
 
 A core component of version control based workflows is the [pull request](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests). For our repository we would like to ensure as best we can that any data structure changes are valid and problem free before they get merged into develop. Lucky for us there is a github workflow event for that.
 

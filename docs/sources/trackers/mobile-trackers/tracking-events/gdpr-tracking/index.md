@@ -1,9 +1,8 @@
 ---
-title: "GDPR tracking"
+title: "Tracking consent and GDPR with the native mobile trackers"
+sidebar_label: "Consent"
 sidebar_position: 61
 ---
-
-# GDPR tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
@@ -26,13 +25,13 @@ let gdprConfig = GDPRConfiguration(
 )
 
 let networkConfig = NetworkConfiguration(
-  endpoint: "https://collector-url.com", 
+  endpoint: "https://collector-url.com",
   method: .post
 )
 
 Snowplow.createTracker(
-  namespace: "namespace", 
-  network: networkConfig, 
+  namespace: "namespace",
+  network: networkConfig,
   configurations: [gdprConfig]
 )
 ```

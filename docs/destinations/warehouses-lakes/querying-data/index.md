@@ -10,8 +10,6 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-## Basic queries
-
 You will typically find most of your Snowplow data in the `events` table. If you are using Redshift, there will be extra tables for [self-describing events](/docs/fundamentals/events/index.md#self-describing-events) and [entities](/docs/fundamentals/entities/index.md) — see [below](#self-describing-events).
 
 Please refer to [the structure of Snowplow data](/docs/fundamentals/canonical-event/index.md) for the principles behind our approach, as well as the descriptions of the various standard columns.
@@ -290,7 +288,7 @@ FROM
 
 ## Failed events
 
-See [Exploring failed events](/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/index.md).
+See [Exploring failed events](/docs/monitoring/exploring-failed-events/index.md).
 
 ## Dealing with duplicates
 

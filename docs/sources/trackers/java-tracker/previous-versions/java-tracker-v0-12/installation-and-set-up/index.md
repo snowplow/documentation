@@ -4,13 +4,14 @@ date: "2022-03-24"
 sidebar_position: 10
 ---
 
-## Installing
 
 The Snowplow Java tracker ([GitHub](https://github.com/snowplow/snowplow-java-tracker)) has been built and tested using Java versions 8, 11 and 17, so should work within any Java application built using JDK8 upwards. The Java tracker is also usable from Scala.
 
 :::info These pages are for version 0.12
 See [here](/docs/sources/trackers/java-tracker/installation-and-set-up/index.md) for the documentation for the latest version.
 :::
+
+## Installing
 
 ### Install using Maven
 
@@ -96,7 +97,7 @@ The [Java tracker Github repository](https://github.com/snowplow/snowplow-java-t
 These are the required objects for tracking using the Java tracker:
 
 | Class                      | Function               |
-|----------------------------|------------------------|
+| -------------------------- | ---------------------- |
 | `Tracker`                  | Tracks events          |
 | `Emitter` (`BatchEmitter`) | Sends event payloads   |
 | subclasses of `Event`      | What you want to track |

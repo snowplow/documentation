@@ -1,9 +1,8 @@
 ---
-title: "Media tracking"
+title: "Media tracking with the Flutter tracker"
+sidebar_label: "Media tracking"
 sidebar_position: 100
 ---
-
-# Media tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

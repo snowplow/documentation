@@ -1,9 +1,8 @@
 ---
-title: "Ecommerce"
+title: "Tracking ecommerce events on web"
+sidebar_label: "Ecommerce"
 sidebar_position: 70
 ---
-
-# Snowplow ecommerce tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
@@ -28,7 +27,7 @@ Snowplow ecommerce events and entities must be **manually tracked**.
   <TabItem value="js" label="JavaScript (tag)" default>
 
 | Tracker Distribution | Included |
-|----------------------|----------|
+| -------------------- | -------- |
 | `sp.js`              | ✅        |
 | `sp.lite.js`         | ❌        |
 
@@ -55,8 +54,8 @@ window.snowplow(
 import { newTracker } from '@snowplow/browser-tracker';
 import { SnowplowEcommercePlugin } from '@snowplow/browser-plugin-snowplow-ecommerce';
 
-newTracker('sp1', '{{collector_url}}', { 
-   appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
    plugins: [ SnowplowEcommercePlugin() ],
 });
 ```
@@ -66,19 +65,19 @@ newTracker('sp1', '{{collector_url}}', {
 
 ## Events
 
-API                     | Used for:
-------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------
-`trackProductView`      | Tracking a visit to a product page. Known also as product detail view.
-`trackAddToCart`        | Track an addition to cart.
-`trackRemoveFromCart`   | Track a removal from cart.
-`trackProductListView`  | Track an impression of a product list. The list could be a search results page, recommended products, upsells etc.
-`trackProductListClick` | Track the click/selection of a product from a product list.
-`trackPromotionView`    | Track an impression for an internal promotion banner or slider or any other type of content that showcases internal products/categories.
-`trackPromotionClick`   | Track the click/selection of an internal promotion.
-`trackCheckoutStep`     | Track a checkout step completion in the checkout process together with common step attributes for user choices throughout the checkout funnel.
-`trackTransaction`      | Track a transaction/purchase completion.
-`trackRefund`           | Track a transaction partial or complete refund.
-`trackTransactionError` | Track an error happening during a transaction process.
+| API                     | Used for:                                                                                                                                      |
+| ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| `trackProductView`      | Tracking a visit to a product page. Known also as product detail view.                                                                         |
+| `trackAddToCart`        | Track an addition to cart.                                                                                                                     |
+| `trackRemoveFromCart`   | Track a removal from cart.                                                                                                                     |
+| `trackProductListView`  | Track an impression of a product list. The list could be a search results page, recommended products, upsells etc.                             |
+| `trackProductListClick` | Track the click/selection of a product from a product list.                                                                                    |
+| `trackPromotionView`    | Track an impression for an internal promotion banner or slider or any other type of content that showcases internal products/categories.       |
+| `trackPromotionClick`   | Track the click/selection of an internal promotion.                                                                                            |
+| `trackCheckoutStep`     | Track a checkout step completion in the checkout process together with common step attributes for user choices throughout the checkout funnel. |
+| `trackTransaction`      | Track a transaction/purchase completion.                                                                                                       |
+| `trackRefund`           | Track a transaction partial or complete refund.                                                                                                |
+| `trackTransactionError` | Track an error happening during a transaction process.                                                                                         |
 
 ### Product view
 
@@ -372,7 +371,7 @@ trackProductListClick({
 
 ```js
 /* Carousel slide 1 viewed */
-window.snowplow("trackPromotionView:{trackerName}", { 
+window.snowplow("trackPromotionView:{trackerName}", {
     id: 'IP1234',
     name: 'promo_winter',
     type: 'carousel',
@@ -381,7 +380,7 @@ window.snowplow("trackPromotionView:{trackerName}", {
 });
 
 /* On carousel slide 2 view */
-window.snowplow("trackPromotionView:{trackerName}", { 
+window.snowplow("trackPromotionView:{trackerName}", {
     id: 'IP1234',
     name: 'promo_winter',
     type: 'carousel',
@@ -396,7 +395,7 @@ window.snowplow("trackPromotionView:{trackerName}", {
 import { trackPromotionView } from '@snowplow/browser-plugin-snowplow-ecommerce';
 
 /* Carousel slide 1 viewed */
-trackPromotionView({ 
+trackPromotionView({
     id: 'IP1234',
     name: 'promo_winter',
     type: 'carousel',
@@ -405,7 +404,7 @@ trackPromotionView({
 });
 
 /* On carousel slide 2 view */
-trackPromotionView({ 
+trackPromotionView({
     id: 'IP1234',
     name: 'promo_winter',
     type: 'carousel',
@@ -424,7 +423,7 @@ trackPromotionView({
   <TabItem value="js" label="JavaScript (tag)" default>
 
 ```js
-window.snowplow("trackPromotionClick:{trackerName}", { 
+window.snowplow("trackPromotionClick:{trackerName}", {
     id: 'IP1234',
     name: 'promo_winter',
     type: 'carousel',
@@ -439,7 +438,7 @@ window.snowplow("trackPromotionClick:{trackerName}", {
 ```js
 import { trackPromotionClick } from "@snowplow/browser-plugin-snowplow-ecommerce";
 
-trackPromotionClick({ 
+trackPromotionClick({
     id: 'IP1234',
     name: 'promo_winter',
     type: 'carousel',
@@ -711,7 +710,7 @@ After setting the Page context entity, it will be attached to every subsequent S
 An ecommerce page entity can have the following attributes:
 
 | attribute |   type   |                                    description                                    | required |
-|:---------:|:--------:|:---------------------------------------------------------------------------------:|:--------:|
+| :-------: | :------: | :-------------------------------------------------------------------------------: | :------: |
 |   type    | `string` | The type of the page that was visited E.g. homepage, product page, checkout page. |    ✅     |
 | language  | `string` |                    The language that the web page is based in.                    |    ✘     |
 |  locale   | `string` |                  The locale version of the site that is running.                  |    ✘     |
@@ -745,7 +744,7 @@ After setting the User context entity, it will be attached to every subsequent S
 An ecommerce user entity can have the following attributes:
 
 | attribute |   type    |             description             | required |
-|:---------:|:---------:|:-----------------------------------:|:--------:|
+| :-------: | :-------: | :---------------------------------: | :------: |
 |    id     | `string`  |            The user ID.             |    ✅     |
 | is_guest  | `boolean` | Whether or not the user is a guest. |    ✘     |
 |   email   | `string`  |      The user's email address.      |    ✘     |
@@ -754,14 +753,14 @@ An ecommerce user entity can have the following attributes:
 
 ## Automatically generated entities
 
-All the provided data is sent as context entities attached to the generic Snowplow ecommerce action event. For example, tracking a product view results in an ecommerce action event (type "product_view") with one product entity attached. 
+All the provided data is sent as context entities attached to the generic Snowplow ecommerce action event. For example, tracking a product view results in an ecommerce action event (type "product_view") with one product entity attached.
 
 ### Product
 
 Whenever there is a product entity involved in the ecommerce interaction event, the `product` or array of `products` can have the following attributes:
 
 |    attribute     |   type   |                                                                           description                                                                           | required |
-|:----------------:|:--------:|:---------------------------------------------------------------------------------------------------------------------------------------------------------------:|:--------:|
+| :--------------: | :------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------: |
 |        id        | `string` |                                                                       SKU or product ID.                                                                        |    ✅     |
 |     currency     | `string` |                                                    Currency in which the product is being priced (ISO 4217).                                                    |    ✅     |
 |      price       | `number` |                                                            Price of the product at the current time.                                                            |    ✅     |
@@ -783,7 +782,7 @@ Whenever there is a product entity involved in the ecommerce interaction event, 
 On internal promotion events, an internal promotion can have the following attributes:
 
 |  attribute  |    type    |                                                     description                                                      | required |
-|:-----------:|:----------:|:--------------------------------------------------------------------------------------------------------------------:|:--------:|
+| :---------: | :--------: | :------------------------------------------------------------------------------------------------------------------: | :------: |
 |     id      |  `string`  |                                  The unique ID representing this promotion element.                                  |    ✅     |
 |    name     |  `string`  |                                    The friendly name for this promotion element.                                     |    ✘     |
 | product_ids | `string[]` |                         An array of SKUs or product IDs showcased in this promotion element.                         |    ✘     |
@@ -800,7 +799,7 @@ On internal promotion events, an internal promotion can have the following attri
 On cart interaction ecommerce events, a cart can have the following attributes:
 
 |  attribute  |   type   |                     description                     | required |
-|:-----------:|:--------:|:---------------------------------------------------:|:--------:|
+| :---------: | :------: | :-------------------------------------------------: | :------: |
 | total_value | `number` | The total value of the cart after this interaction. |    ✅     |
 |  currency   | `string` |     The currency used for this cart (ISO 4217).     |    ✅     |
 |   cart_id   | `string` |        The unique ID representing this cart.        |    ✘     |
@@ -812,7 +811,7 @@ On cart interaction ecommerce events, a cart can have the following attributes:
 Whenever there is a checkout entity involved in the ecommerce interaction event, it can have the following attributes:
 
 |       attribute       |   type    |                                                       description                                                       | required |
-|:---------------------:|:---------:|:-----------------------------------------------------------------------------------------------------------------------:|:--------:|
+| :-------------------: | :-------: | :---------------------------------------------------------------------------------------------------------------------: | :------: |
 |         step          | `number`  |                                                  Checkout step index.                                                   |    ✅     |
 |   shipping_postcode   | `string`  |                                               Shipping address postcode.                                                |    ✘     |
 |   billing_postcode    | `string`  |                                                Billing address postcode.                                                |    ✘     |
@@ -833,7 +832,7 @@ Whenever there is a checkout entity involved in the ecommerce interaction event,
 Whenever there is a transaction entity involved in the ecommerce interaction event, it can have the following attributes:
 
 |    attribute    |   type    |                    description                    | required |
-|:---------------:|:---------:|:-------------------------------------------------:|:--------:|
+| :-------------: | :-------: | :-----------------------------------------------: | :------: |
 | transaction_id  | `string`  |             The ID of the transaction             |    ✅     |
 |    currency     | `string`  | The currency used for the transaction (ISO 4217). |    ✅     |
 |     revenue     | `number`  |          The revenue of the transaction.          |    ✅     |
@@ -852,7 +851,7 @@ Whenever there is a transaction entity involved in the ecommerce interaction eve
 Whenever there is a refund entity involved in the ecommerce interaction event, it can have the following attributes:
 
 |   attribute    |   type   |                    description                    | required |
-|:--------------:|:--------:|:-------------------------------------------------:|:--------:|
+| :------------: | :------: | :-----------------------------------------------: | :------: |
 | transaction_id | `string` |             The ID of the transaction             |    ✅     |
 |    currency    | `string` | The currency used for the transaction (ISO 4217). |    ✅     |
 | refund_amount  | `number` |     The amount refunded from the transaction.     |    ✅     |
@@ -865,7 +864,7 @@ Whenever there is a refund entity involved in the ecommerce interaction event, i
 Whenever there is a transaction error entity involved in the ecommerce interaction event, it can have the following attributes:
 
 |     attribute     |     type      |                                                                                                                       description                                                                                                                        | required |
-|:-----------------:|:-------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:--------:|
+| :---------------: | :-----------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------: |
 |    error_code     |   `string`    |                                                                                               Error-identifying code for the transaction issue. E.g. E522                                                                                                |    ✘     |
 |  error_shortcode  |   `string`    |                                                      Shortcode for the error occurred in the transaction. E.g. declined_by_stock_api, declined_by_payment_method, card_declined, pm_card_radarBlock                                                      |    ✘     |
 | error_description |   `number`    |                                                                                              Longer description for the error occurred in the transaction.                                                                                               |    ✘     |
@@ -882,7 +881,7 @@ Available from version 3.10.
 
 If you already use Google Analytics 4 ecommerce or Universal Analytics Enhanced Ecommerce to collect information about the shopping behavior of your users, we have prepared a way to quickly implement Snowplow Ecommerce without making many changes on your current setup.
 
-The _transitional_ API that we provide, depends on the standardized [dataLayer](https://developers.google.com/tag-platform/tag-manager/web/datalayer) structure for both Google Analytics ecommerce implementations. This would make it easier for the transition to happen either through Google Tag Manager, which has more control over the dataLayer, or custom code that uses the standard ecommerce structures. 
+The _transitional_ API that we provide, depends on the standardized [dataLayer](https://developers.google.com/tag-platform/tag-manager/web/datalayer) structure for both Google Analytics ecommerce implementations. This would make it easier for the transition to happen either through Google Tag Manager, which has more control over the dataLayer, or custom code that uses the standard ecommerce structures.
 
 :::info
 To learn more about how to use this transitional API, you should go ahead and visit our [Ecommerce Web Accelerator](https://docs.snowplow.io/accelerators/ecommerce/tracking/ua_ga4_migration/) dedicated page which describes the usage of these methods and more.
@@ -1127,7 +1126,7 @@ trackEnhancedEcommercePurchase( {{dataLayer.ecommerce reference}}, {
   </TabItem>
 </Tabs>
 
-- Where `paymentMethod` is the payment method selected in this transaction. This attributes corresponds to the `payment_method` of the [transaction schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.ecommerce/transaction/jsonschema/1-0-0#L30). Defaults to `unknown`. 
+- Where `paymentMethod` is the payment method selected in this transaction. This attributes corresponds to the `payment_method` of the [transaction schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.ecommerce/transaction/jsonschema/1-0-0#L30). Defaults to `unknown`.
 
 ### Google Analytics 4 Ecommerce
 
@@ -1426,4 +1425,4 @@ trackGA4Transaction({
   </TabItem>
 </Tabs>
 
-- Where `paymentMethod` is the payment method selected in this transaction. This attributes corresponds to the `payment_method` of the [transaction schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.ecommerce/transaction/jsonschema/1-0-0#L30). Defaults to `unknown`. 
+- Where `paymentMethod` is the payment method selected in this transaction. This attributes corresponds to the `payment_method` of the [transaction schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.ecommerce/transaction/jsonschema/1-0-0#L30). Defaults to `unknown`.

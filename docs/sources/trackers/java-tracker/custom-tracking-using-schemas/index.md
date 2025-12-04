@@ -1,5 +1,5 @@
 ---
-title: "Custom tracking using schemas"
+title: "Custom tracking with the Java tracker"
 date: "2022-03-24"
 sidebar_position: 30
 ---

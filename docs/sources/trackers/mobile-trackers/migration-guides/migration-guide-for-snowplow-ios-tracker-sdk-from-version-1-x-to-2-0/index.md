@@ -1,10 +1,9 @@
 ---
-title: "From version 1.x to 2.0 for iOS"
+title: "Migration guide for Snowplow iOS Tracker SDK from version 1.x to 2.0"
 date: "2021-03-24"
+sidebar_label: "From version 1.x to 2.0 for iOS"
 sidebar_position: -1
 ---
-
-# Migration guide for Snowplow iOS Tracker SDK from version 1.x to 2.0
 
 This section describes the main changes when converting an applications instrumentation of the Snowplow iOS tracker SDK from version 1.x to version 2.0.
 
@@ -52,12 +51,12 @@ func initTracker(trackerNamespace: String) -> TrackerController {
             backgroundTimeout: Measurement(value: 30, unit: .seconds)
         )
         let gdprConfig = GDPRConfiguration(
-            basis: .consent, 
-            documentId: "id", 
-            documentVersion: "1.0", 
+            basis: .consent,
+            documentId: "id",
+            documentVersion: "1.0",
             documentDescription: "description"
         )
-        
+
         return Snowplow.createTracker(
             namespace: trackerNamespace,
             network: networkConfig,
@@ -72,29 +71,29 @@ The tracker can be controlled by the `TrackerController` (the `Tracker` class is
 ## Low level migration from 1.x
 
 - iOS minimum supported version is bumped to iOS 9.0.
-    
+
 - `lifecycleAutotracking` (background and foreground events and indexes on sessions) are optional and off by default.
-    
+
 - Enum `SPProtocol` items have been renamed to `SPProtocolHttp` and `SPProtocolHttps`.
-    
+
 - Enum `SPRequestOptions` has been renamed `SPHttpMethod` and its items are `SPHttpMethodGet` and `SPHttpMethodPost`.
-    
+
 - `Snowplow` class is now the entry point to create trackers. The old `Snowplow` class containing the constants has been renamed `SPTrackerConstants`.
-    
+
 - `SPPrimitive` and `SPSelfDescribing` have been renamed as `SPPrimitiveAbstract` and `SPSelfDescribingAbstract`.
-    
+
 - `SPUnstructured` class used for self-describing events has been renamed `SPSelfDescribing`.
-    
+
 - The property `trueTimestamp` changed the type from `NSNumber` to `NSDate`.
-    
+
 - `namespace` on Tracker is now mandatory for the correct operativity.
-    
+
 - `name` field on `ScreenView` is now mandatory.
-    
+
 - `EcommerceItem`s aren't forced to have the same timestamp of the `EcommerceTransaction` event.
-    
+
 - `SPEcommerceItem` constructor doesn't require `itemId` as it's added by the tracker when the e-commerce event is sent.
-    
+
 - Deprecated classes of the previous API (SPTracker, SPEmitter, SPSubject, ...).
-    
+
 - **For the versions 2.0 and 2.1**, the application install events report the timestamp of when installation happened in the `true_timestamp` rather than the `device_timestamp`. It caused an [issue](https://github.com/snowplow/snowplow-ios-tracker/issues/625) with the `derived_timestamp`. For this reason, since the version 2.2, the application install events report the timestamp of then installation happened in the `device_timestamp` like the previous 1.x versions.

@@ -15,7 +15,7 @@ The easiest way to test Snowbridge configuration (e.g. transformations) is to ru
 
 You can get started working with Snowplow data by [downloading this file](./assets/input.txt) which contains a sample of web and mobile Snowplow events in TSV format. However, if you need events that match your actual events, generate your own events sample.
 
-In order to generate your own sample of Snowplow data, you can follow the [guide to use Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/basic-usage/index.md) to generate test data, using the `--output-tsv` to get the data into a file, as per the [exporting to tsv section](/docs/data-product-studio/data-quality/snowplow-micro/basic-usage/index.md#exporting-events).
+In order to generate your own sample of Snowplow data, you can follow the [guide to use Snowplow Micro](/docs/testing/snowplow-micro/basic-usage/index.md) to generate test data, using the `--output-tsv` to get the data into a file, as per the [exporting to tsv section](/docs/testing/snowplow-micro/basic-usage/index.md#exporting-events).
 
 For example, here we’re using a file named `data.tsv`:
 
@@ -74,7 +74,7 @@ Note that docker expects absolute paths for mounted files - here we use `$(pwd)`
 
 To test transformations, you only need to add the `transform` block(s) to your configuration file. Don’t specify the `source` and `target` blocks to leave them on default (`stdin` and `stdout`).
 
-To test specific sources or targets, add the respective `source` or `target` blocks. For example, see the [configuration](/docs/api-reference/snowbridge/configuration/targets/http/google-tag-manager.md) for an HTTP target sending data to Google Tag Manager Server Side.
+To test specific sources or targets, add the respective `source` or `target` blocks. For example, see the [configuration](/docs/api-reference/snowbridge/configuration/targets/http/index.md#example-for-google-tag-manager-server-side) for an HTTP target sending data to Google Tag Manager Server Side.
 
 ### Adding a custom transformation script
 

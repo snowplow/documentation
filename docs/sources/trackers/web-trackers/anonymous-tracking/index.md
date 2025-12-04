@@ -1,11 +1,9 @@
 ---
-title: "Opt-outs and anonymous tracking"
+title: "Opt-outs and anonymous tracking on web"
 description: "Capture Snowplow web events without user or session identifiers, without IP addresses and without setting any cookies"
 date: "2022-08-30"
 sidebar_position: 2860
 ---
-
-# Opt-outs and anonymous tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

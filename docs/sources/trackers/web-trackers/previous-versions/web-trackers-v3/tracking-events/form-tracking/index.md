@@ -3,8 +3,6 @@ title: "Forms"
 sidebar_position: 60
 ---
 
-# Form tracking
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

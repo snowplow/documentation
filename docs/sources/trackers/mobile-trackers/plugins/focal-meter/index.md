@@ -4,8 +4,6 @@ date: "2023-01-04"
 sidebar_position: 20
 ---
 
-# Sending user identifier to Kantar Focal Meter
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

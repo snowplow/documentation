@@ -1,5 +1,6 @@
 ---
-title: "Previous versions"
+title: "Previous versions of the web trackers"
+sidebar_label: "Previous versions"
 date: "2021-04-12"
 sidebar_position: 5000
 sidebar_custom_props:

@@ -4,8 +4,6 @@ date: "2022-02-03"
 sidebar_position: 35
 ---
 
-# Support for the Expo framework
-
 The React Native tracker supports the [Expo framework](https://expo.dev/). However, the support is different for the bare and the managed workflow.
 
 You may install the tracker using:

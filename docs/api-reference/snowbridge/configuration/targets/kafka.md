@@ -1,5 +1,6 @@
 ---
-title: "Kafka"
+title: "Configuring Kafka as a Snowbridge target"
+sidebar_label: "Kafka"
 description: "Write data to a Kafka topic."
 ---
 
@@ -7,8 +8,6 @@ description: "Write data to a Kafka topic."
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-## Authentication
 
 Where SASL is used, it may be enabled via the `enable_sasl`, `sasl_username`, and `sasl_password` and `sasl_algorithm` options.
 

@@ -1,5 +1,6 @@
 ---
-title: "Creating a white-label build"
+title: "Creating a white-label JavaScript tracker build"
+sidebar_label: "Creating a white-label build"
 date: "2022-09-14"
 sidebar_position: 4000
 ---

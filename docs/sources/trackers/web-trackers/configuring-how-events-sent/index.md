@@ -1,10 +1,9 @@
 ---
-title: "Configuring how events are sent"
+title: "Configuring how events are sent by the web trackers"
+sidebar_label: "Configuring how events are sent"
 date: "2021-04-07"
 sidebar_position: 2750
 ---
-
-# Configuring how events are sent
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

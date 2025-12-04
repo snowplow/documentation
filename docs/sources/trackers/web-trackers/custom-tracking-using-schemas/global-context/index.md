@@ -1,10 +1,9 @@
 ---
-title: "Declarative entities with Global Context"
+title: "Declarative entities with global context for web trackers"
+sidebar_label: "Declarative entities with Global Context"
 date: "2022-08-30"
 sidebar_position: 20
 ---
-
-# Declarative entities with Global Context
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
@@ -109,7 +108,7 @@ This argument is a string taken from the event payload field, `e`.
 `eventType` takes the following values:
 
 | Type                           | `e`       |
-|--------------------------------|-----------|
+| ------------------------------ | --------- |
 | Pageview tracking              | pv        |
 | Page pings                     | pp        |
 | Link click                     | ue        |

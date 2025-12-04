@@ -1,9 +1,8 @@
 ---
-title: "HTML5"
+title: "HTML5 media tracking on web"
+sidebar_label: "HTML5"
 sidebar_position: 10
 ---
-
-# HTML5 media tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
@@ -20,7 +19,7 @@ HTML5 media events and entities are **automatically tracked** once configured.
   <TabItem value="js" label="JavaScript (tag)" default>
 
 | Tracker Distribution | Included |
-|----------------------|----------|
+| -------------------- | -------- |
 | `sp.js`              | ❌        |
 | `sp.lite.js`         | ❌        |
 
@@ -125,42 +124,42 @@ This function begins tracking media events for a given media element. It takes a
 
 #### Required Fields
 
-| Parameter | Type | Description |
-|-----------|------|-------------|
-| `config.id` | `string` | A unique session ID for each media element, used to identify and end tracking. |
-| `config.video` | `string \| HTMLMediaElement` | The ID of the media element (as a string) or the media element itself. |
+| Parameter      | Type                         | Description                                                                    |
+| -------------- | ---------------------------- | ------------------------------------------------------------------------------ |
+| `config.id`    | `string`                     | A unique session ID for each media element, used to identify and end tracking. |
+| `config.video` | `string \| HTMLMediaElement` | The ID of the media element (as a string) or the media element itself.         |
 
 ---
 
 #### Optional Fields
 
-| Parameter | Type | Description | Default Value |
-|-----------|------|-------------|---------------|
-| `config.label` | `string` | A human-readable label for the media element. | `undefined` |
-| `config.captureEvents` | `HTML5MediaEventTypes` | A list of media events to track. | All events tracked by default |
-| `config.boundaries` | `number[]` | Percentage thresholds (0-100) to trigger progress events. | Disabled |
-| `config.context` | [`DynamicContext`](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/global-context/index.md#global-contexts-methods) | Dynamic contexts attached to each tracking event. | `undefined` |
-| `config.updatePageActivityWhilePlaying` | `boolean` | Whether to update page activity while media is playing. | `true` |
-| `config.filterOutRepeatedEvents` | `FilterOutRepeatedEvents` | Whether to suppress consecutive identical events. | `false` |
+| Parameter                               | Type                                                                                                                                  | Description                                               | Default Value                 |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------- | ----------------------------- |
+| `config.label`                          | `string`                                                                                                                              | A human-readable label for the media element.             | `undefined`                   |
+| `config.captureEvents`                  | `HTML5MediaEventTypes`                                                                                                                | A list of media events to track.                          | All events tracked by default |
+| `config.boundaries`                     | `number[]`                                                                                                                            | Percentage thresholds (0-100) to trigger progress events. | Disabled                      |
+| `config.context`                        | [`DynamicContext`](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/global-context/index.md#global-contexts-methods) | Dynamic contexts attached to each tracking event.         | `undefined`                   |
+| `config.updatePageActivityWhilePlaying` | `boolean`                                                                                                                             | Whether to update page activity while media is playing.   | `true`                        |
+| `config.filterOutRepeatedEvents`        | `FilterOutRepeatedEvents`                                                                                                             | Whether to suppress consecutive identical events.         | `false`                       |
 
 ---
 
 #### Ping Configuration (Optional)
 
-| Parameter | Type | Description | Default Value |
-|-----------|------|-------------|---------------|
-| `config.pings.pingInterval` | `number` | Interval (in seconds) for sending ping events. | `30` (seconds) |
-| `config.pings.maxPausedPings` | `number` | Maximum number of ping events sent while playback is paused. | `1` |
+| Parameter                     | Type     | Description                                                  | Default Value  |
+| ----------------------------- | -------- | ------------------------------------------------------------ | -------------- |
+| `config.pings.pingInterval`   | `number` | Interval (in seconds) for sending ping events.               | `30` (seconds) |
+| `config.pings.maxPausedPings` | `number` | Maximum number of ping events sent while playback is paused. | `1`            |
 
 ---
 
 #### Filter Out Repeated Events Configuration (Optional)
 
-| Parameter | Type | Description | Default Value |
-|-----------|------|-------------|---------------|
-| `config.filterOutRepeatedEvents.seekEvents` | `boolean` | Whether to filter out seek start and end events tracked after each other. | `false` |
-| `config.filterOutRepeatedEvents.volumeChangeEvents` | `boolean` | Whether to filter out volume change events tracked after each other. | `false` |
-| `config.filterOutRepeatedEvents.flushTimeoutMs` | `number` | Timeout in milliseconds after which to send the events that are queued for filtering. | `5000` (milliseconds) |
+| Parameter                                           | Type      | Description                                                                           | Default Value         |
+| --------------------------------------------------- | --------- | ------------------------------------------------------------------------------------- | --------------------- |
+| `config.filterOutRepeatedEvents.seekEvents`         | `boolean` | Whether to filter out seek start and end events tracked after each other.             | `false`               |
+| `config.filterOutRepeatedEvents.volumeChangeEvents` | `boolean` | Whether to filter out volume change events tracked after each other.                  | `false`               |
+| `config.filterOutRepeatedEvents.flushTimeoutMs`     | `number`  | Timeout in milliseconds after which to send the events that are queued for filtering. | `5000` (milliseconds) |
 
 ---
 
@@ -252,22 +251,22 @@ endHtml5MediaTracking(sessionId)
 
 The HTML5 media plugin can track the following events:
 
-| Event Type                | Event String             | Description |
-|---------------------------|--------------------------|-------------|
-| **Ready**                  | `ready`                  | Fired when media tracking is successfully attached to the player and ready to track events. |
-| **Play**                   | `play`                   | Fired when the player transitions from a paused state to playing. |
-| **Pause**                  | `pause`                  | Fired when the user pauses the playback. |
-| **End**                    | `end`                    | Fired when playback stops because the media has reached its end or no more data is available. |
-| **SeekEnd**                | `seek_end`               | Fired when a seek operation is completed. |
-| **PlaybackRateChange**      | `playback_rate_change`   | Fired when the playback rate (speed) of the media changes. |
-| **VolumeChange**           | `volume_change`          | Fired when the volume level of the media changes. |
-| **FullscreenChange**       | `fullscreen_change`      | Fired when the browser enters or exits full-screen mode. |
-| **PictureInPictureChange** | `picture_in_picture_change` | Fired when the browser enters or exits picture-in-picture mode. |
-| **BufferStart**            | `buffer_start`           | Fired when the media player starts buffering (loading content to play). |
-| **BufferEnd**              | `buffer_end`             | Fired when buffering ends, and playback resumes. |
-| **Error**                  | `error`                  | Fired when an error occurs during the loading or playback of the media. |
-| **Ping**                   | `ping`                   | Fired periodically during media playback, regardless of other events. |
-| **PercentProgress**        | `percent_progress`       | Fired when a specific percentage of the media content has been played (as set by boundaries). |
+| Event Type                 | Event String                | Description                                                                                   |
+| -------------------------- | --------------------------- | --------------------------------------------------------------------------------------------- |
+| **Ready**                  | `ready`                     | Fired when media tracking is successfully attached to the player and ready to track events.   |
+| **Play**                   | `play`                      | Fired when the player transitions from a paused state to playing.                             |
+| **Pause**                  | `pause`                     | Fired when the user pauses the playback.                                                      |
+| **End**                    | `end`                       | Fired when playback stops because the media has reached its end or no more data is available. |
+| **SeekEnd**                | `seek_end`                  | Fired when a seek operation is completed.                                                     |
+| **PlaybackRateChange**     | `playback_rate_change`      | Fired when the playback rate (speed) of the media changes.                                    |
+| **VolumeChange**           | `volume_change`             | Fired when the volume level of the media changes.                                             |
+| **FullscreenChange**       | `fullscreen_change`         | Fired when the browser enters or exits full-screen mode.                                      |
+| **PictureInPictureChange** | `picture_in_picture_change` | Fired when the browser enters or exits picture-in-picture mode.                               |
+| **BufferStart**            | `buffer_start`              | Fired when the media player starts buffering (loading content to play).                       |
+| **BufferEnd**              | `buffer_end`                | Fired when buffering ends, and playback resumes.                                              |
+| **Error**                  | `error`                     | Fired when an error occurs during the loading or playback of the media.                       |
+| **Ping**                   | `ping`                      | Fired periodically during media playback, regardless of other events.                         |
+| **PercentProgress**        | `percent_progress`          | Fired when a specific percentage of the media content has been played (as set by boundaries). |
 
 ### Customizing Tracked Events
 

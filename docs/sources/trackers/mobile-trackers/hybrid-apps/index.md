@@ -1,10 +1,9 @@
 ---
-title: "Hybrid mobile and web apps"
+title: "Hybrid apps with the native mobile trackers"
+sidebar_label: "Hybrid mobile and web apps"
 date: "2022-08-30"
 sidebar_position: 70
 ---
-
-# Hybrid mobile and web apps
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

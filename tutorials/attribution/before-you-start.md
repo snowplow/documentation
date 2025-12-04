@@ -1,5 +1,6 @@
 ---
-title: Before you start
+title: "Optional Attribution dbt package configuration variables"
+sidebar_label: "Before you start"
 position: 2
 ---
 

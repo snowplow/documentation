@@ -1,9 +1,8 @@
 ---
-title: "GA cookies"
+title: "Tracking Google Analytics cookies with the web trackers"
+sidebar_label: "GA cookies"
 sidebar_position: 130
 ---
-
-# GA cookies tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

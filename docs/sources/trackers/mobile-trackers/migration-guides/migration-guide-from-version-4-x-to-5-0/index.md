@@ -1,9 +1,8 @@
 ---
-title: "From version 4.x to 5.0"
+title: "Migration guide from version 4.x to 5.0"
+sidebar_label: "From version 4.x to 5.0"
 sidebar_position: -4
 ---
-
-# Migration guide from version 4.x to 5.0
 
 Although the trackers underwent a huge internal rewrite (from Objective-C to Swift and from Java to Kotlin), we tried to keep the API with as little breaking changes as possible.
 

@@ -1,5 +1,5 @@
 ---
-title: "Configuring cookie and storage settings"
+title: "Configuring cookie and storage settings for the web trackers"
 sidebar_position: 100
 ---
 

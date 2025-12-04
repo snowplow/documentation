@@ -1,9 +1,8 @@
 ---
-title: "Link clicks"
+title: "Tracking link clicks on web"
+sidebar_label: "Link clicks"
 sidebar_position: 40
 ---
-
-# Link click tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

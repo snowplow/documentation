@@ -1,10 +1,9 @@
 ---
-title: "Configuring how events are sent"
+title: "Configuring how events are sent in the native mobile trackers"
+sidebar_label: "Configuring how events are sent"
 date: "2022-08-30"
 sidebar_position: 40
 ---
-
-# Configuring how events are sent
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

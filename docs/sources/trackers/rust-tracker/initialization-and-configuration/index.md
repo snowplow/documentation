@@ -1,5 +1,6 @@
 ---
-title: "Initialization and configuration"
+title: "Initialization and configuration for the Rust tracker"
+sidebar_label: "Initialization and configuration"
 date: "2022-10-24"
 sidebar_position: 2000
 ---

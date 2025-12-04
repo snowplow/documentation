@@ -2,8 +2,6 @@
 title: "Strong cookies and ad-blockers"
 ---
 
-# How to set up tracking to support strong cookies and avoid ad-blockers?
-
 This page details a few recommendations to set up your Snowplow tracking.
 Their goal is to make sure that:
 

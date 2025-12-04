@@ -1,5 +1,6 @@
 ---
-title: "Tracking specific client-side properties"
+title: "Tracking client side properties with the Java tracker"
+sidebar_label: "Tracking specific client-side properties"
 date: "2022-03-24"
 sidebar_position: 40
 ---

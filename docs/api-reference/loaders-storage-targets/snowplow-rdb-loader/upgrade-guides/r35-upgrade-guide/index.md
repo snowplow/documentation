@@ -1,5 +1,6 @@
 ---
-title: "R35 Upgrade Guide"
+title: "RDB Loader R35 upgrade guide"
+sidebar_label: "R35 upgrade guide"
 date: "2021-01-27"
 sidebar_position: 300
 ---

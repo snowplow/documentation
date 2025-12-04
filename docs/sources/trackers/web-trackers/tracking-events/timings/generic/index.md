@@ -1,9 +1,8 @@
 ---
-title: "Generic timing"
+title: "Tracking generic site timings on web"
+sidebar_label: "Generic timing"
 sidebar_position: 98
 ---
-
-# Generic site timing tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

@@ -3,8 +3,6 @@ title: "Core web vitals"
 sidebar_position: 95
 ---
 
-# Core web vitals tracking
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -26,7 +24,7 @@ Web vitals events are **automatically tracked** once configured.
   <TabItem value="js" label="JavaScript (tag)" default>
 
 | Tracker Distribution | Included |
-|----------------------|----------|
+| -------------------- | -------- |
 | `sp.js`              | ❌        |
 | `sp.lite.js`         | ❌        |
 
@@ -68,7 +66,7 @@ newTracker('sp1', '{{collector_url}}', {
 The Web Vitals plugin can be initialized with a couple of options allowing for customizing its behavior:
 
 |       Option        |       Type       |                                                                                    Description                                                                                     |                      Default value                       |
-|:-------------------:|:----------------:|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------:|
+| :-----------------: | :--------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------: |
 | loadWebVitalsScript |    `boolean`     |                                             Should the plugin immediately load the Core Web Vitals measurement script from UNPKG CDN.                                              |                          `true`                          |
 |   webVitalsSource   |     `string`     |                                              The URL endpoint the Web Vitals script should be loaded from. Defaults to the UNPKG CDN.                                              | `https://unpkg.com/web-vitals@3/dist/web-vitals.iife.js` |
 |       context       | `DynamicContext` | Context entities to add to the tracked event. Can be provided either as an array of self-describing JSONs or function that returns a context entity. (available from version 3.19) |                                                          |

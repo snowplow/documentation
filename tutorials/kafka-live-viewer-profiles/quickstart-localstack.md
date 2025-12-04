@@ -1,6 +1,7 @@
 ---
 position: 2
-title: Quickstart with Localstack
+title: "Run the Kafka live viewer profiles application using LocalStack"
+sidebar_label: "Run the application locally"
 ---
 
 
@@ -46,7 +47,7 @@ On the next screen, click `Custom media tracking demo`. This will bring up a vid
 
 ![Welcome page on tracking website](images/welcome-page.png)
 
-You must keep this window open with the video playing because everything here is running in real-time. You can use the [Snowplow Chrome Plugin](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm?hl=en&pli=1) to verify that the events are successfully sent from the web browser.
+You must keep this window open with the video playing because everything here is running in real-time. You can use the [Snowplow Chrome Plugin](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm) to verify that the events are successfully sent from the web browser.
 
 ![Video playing on the website](images/video.png)
 

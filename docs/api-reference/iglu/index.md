@@ -3,8 +3,6 @@ title: "Iglu schema registry"
 sidebar_position: 90
 ---
 
-## Overview
-
 **Iglu** is a machine-readable schema registry for [JSON](http://json-schema.org/) and Thrift schema. A schema registry is like npm, Maven, or Git but holds data schemas instead of software or code.
 
 Iglu consists of three key technical aspects:

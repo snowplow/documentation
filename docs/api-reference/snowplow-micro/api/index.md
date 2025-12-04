@@ -9,7 +9,7 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-This page documents the REST API of [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md#what-is-snowplow-micro).
+This page documents the REST API of [Snowplow Micro](/docs/testing/snowplow-micro/index.md#what-is-snowplow-micro).
 
 ## /micro/all
 

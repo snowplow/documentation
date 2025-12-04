@@ -1,9 +1,8 @@
 ---
-title: "Page views"
+title: "Tracking page views on web"
+sidebar_label: "Page views"
 sidebar_position: 20
 ---
-
-# Page view tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

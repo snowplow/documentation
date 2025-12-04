@@ -3,8 +3,6 @@ title: "Media"
 sidebar_position: 75
 ---
 
-# Media tracking
-
 There are four media tracking plugins to choose from. Choosing the right plugin for you depends on the following questions:
 
 1. What media player do you use in your app?
@@ -24,9 +22,9 @@ The v2 schemas:
 
 :::
 
-| Plugin | Media schemas version | Provides auto-tracking? | Player |
-| --- | --- | --- | --- |
-| [Snowplow media](./snowplow/index.md) | v2 | ❌ | Any |
-| [Vimeo](./vimeo/index.md)  | v2 | ✅ | Vimeo |
-| [HTML5](./html5/index.md) | v1 | ✅ | HTML5 |
-| [YouTube](./youtube/index.md) | v1 | ✅ | YouTube |
+| Plugin                                | Media schemas version | Provides auto-tracking? | Player  |
+| ------------------------------------- | --------------------- | ----------------------- | ------- |
+| [Snowplow media](./snowplow/index.md) | v2                    | ❌                       | Any     |
+| [Vimeo](./vimeo/index.md)             | v2                    | ✅                       | Vimeo   |
+| [HTML5](./html5/index.md)             | v1                    | ✅                       | HTML5   |
+| [YouTube](./youtube/index.md)         | v1                    | ✅                       | YouTube |

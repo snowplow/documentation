@@ -1,5 +1,6 @@
 ---
-title: "1.0.0 configuration"
+title: "S3 Loader v1.0.0 configuration"
+sidebar_label: "1.0.0 configuration"
 date: "2021-07-16"
 sidebar_position: 12
 ---

@@ -1,9 +1,8 @@
 ---
-title: "Social media"
+title: "Tracking social media interactions with the web trackers"
+sidebar_label: "Social media"
 sidebar_position: 140
 ---
-
-# Social media interactions tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

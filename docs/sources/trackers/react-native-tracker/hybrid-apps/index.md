@@ -1,10 +1,9 @@
 ---
-title: "Hybrid Apps"
+title: "React Native hybrid apps"
+sidebar_label: "Hybrid apps"
 date: "2022-08-30"
 sidebar_position: 70
 ---
-
-# Hybrid Apps
 
 :::info
 

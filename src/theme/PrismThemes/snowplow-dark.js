@@ -1,100 +1,81 @@
 /**
  * Snowplow Dark Theme for Prism
- * Based on Snowplow brand colors
+ * Following popular theme conventions (One Dark, GitHub, etc.)
+ * - Strings: teal/cyan
+ * - Numbers: orange/yellow
+ * - Keywords: purple/magenta
+ * - Functions: blue
+ * - Comments: muted gray
  */
-
 import { themes } from 'prism-react-renderer'
 
 const baseTheme = themes.vsDark
 
 export default {
   ...baseTheme,
+  plain: {
+    color: '#e6e6e6', // --foreground
+    backgroundColor: '#050505', // --background
+  },
   styles: [
     ...baseTheme.styles,
     {
-      types: ['title'],
+      types: ['comment', 'prolog', 'doctype', 'cdata'],
       style: {
-        color: '#d1a5ff', // Lighter purple for dark bg
-        fontWeight: 'bold',
+        color: '#999999', // --muted-foreground - gray for comments
+        fontStyle: 'italic',
       },
     },
     {
-      types: ['parameter'],
+      types: ['punctuation'],
       style: {
-        color: '#85d8c5', // Pale teal
+        color: '#e6e6e6', // --foreground - standard punctuation
       },
     },
     {
-      types: ['boolean', 'rule', 'color', 'number', 'constant', 'property'],
+      types: ['property', 'tag', 'constant', 'symbol', 'deleted'],
       style: {
-        color: '#7d7dff', // Lighter blue
+        color: '#e55887', // --chart-4 - pink for tags/constants
       },
     },
     {
-      types: ['atrule', 'tag'],
+      types: ['number', 'boolean', 'regex', 'important'],
       style: {
-        color: '#34caa6', // Mint
+        color: '#e9b957', // --chart-3 - orange for numbers/booleans/regex
+        fontWeight: '500',
       },
     },
     {
-      types: ['script'],
+      types: ['selector', 'attr-name', 'string', 'char', 'builtin', 'inserted'],
       style: {
-        color: '#f3f1ec', // Off-white
+        color: '#65bfc5', // --chart-2 - teal for strings
+        fontWeight: '500',
       },
     },
     {
-      types: ['operator', 'unit', 'rule'],
+      types: ['operator', 'entity', 'url', 'variable'],
       style: {
-        color: '#ff4b1d', // Orange-red
+        color: '#e6e6e6', // --foreground - operators in default color
       },
     },
     {
-      types: ['font-matter', 'string', 'attr-value'],
+      types: ['atrule', 'attr-value', 'keyword', 'class-name'],
       style: {
-        color: '#fdc7b9', // Light coral
-      },
-    },
-    {
-      types: ['class-name'],
-      style: {
-        color: '#6ae9f4', // Light cyan
-      },
-    },
-    {
-      types: ['attr-name'],
-      style: {
-        color: '#dec4f8', // Very light purple
-      },
-    },
-    {
-      types: ['keyword'],
-      style: {
-        color: '#aa58ff', // Bright purple
+        color: '#916ce7', // --primary - purple for keywords
+        fontWeight: '500',
       },
     },
     {
       types: ['function'],
       style: {
-        color: '#eddffb', // Pale purple
+        color: '#668fe5', // blue for functions
       },
     },
     {
-      types: ['selector'],
+      types: ['title'],
       style: {
-        color: '#7002fd', // Vibrant purple
-      },
-    },
-    {
-      types: ['variable'],
-      style: {
-        color: '#d1a5ff', // Lighter purple (consistent with light theme purple approach)
-      },
-    },
-    {
-      types: ['comment'],
-      style: {
-        color: '#9276c4', // Muted purple (consistent with light theme)
-        fontStyle: 'italic',
+        color: '#916ce7', // --primary - purple for titles
+        fontWeight: 'bold',
       },
     },
   ],

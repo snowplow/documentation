@@ -15,7 +15,3 @@ Hybrid apps are mobile apps that in addition to a React Native interface, provid
 ## WebView Tracker
 
 This use case is supported by implementing the [Snowplow WebView tracker](../../../../webview-tracker/index.md) in the Web view in your app. The WebView tracker is able to pass events to the React Native tracker which sends them to the collector.
-
-## Mobile & Hybrid Accelerator
-
-Please refer to the [Snowplow Hybrid Apps Tracking accelerator](https://docs.snowplow.io/accelerators/hybrid) for a step-by-step guide how to set up tracking in hybrid apps.

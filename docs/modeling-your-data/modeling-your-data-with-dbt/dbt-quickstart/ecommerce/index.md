@@ -4,12 +4,6 @@ sidebar_position: 40
 title: "Ecommerce Quickstart"
 ---
 
-```mdx-code-block
-import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
-
-<Accelerator href="https://docs.snowplow.io/accelerators/ecommerce/" name="E-Commerce"/>
-```
-
 In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web events dataset being available in your database, the requirements are:
 
 - A dataset of ecommerce events from the [Snowplow JavaScript tracker](/docs/sources/trackers/web-trackers/index.md), or the [iOS/Android](/docs/sources/trackers/mobile-trackers/tracking-events/ecommerce-tracking/index.md) trackers must be available in the database.

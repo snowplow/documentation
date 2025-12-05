@@ -4,13 +4,6 @@ sidebar_position: 800
 title: "Mobile Quickstart"
 ---
 
-
-```mdx-code-block
-import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
-
-<Accelerator href="https://docs.snowplow.io/accelerators/mobile/" name="Advanced Analytics for Mobile"/>
-```
-
 In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a mobile events dataset being available in your database, the requirements are:
 
 - Snowplow [Android](/docs/sources/trackers/mobile-trackers/previous-versions/android-tracker/index.md) or [iOS](/docs/sources/trackers/mobile-trackers/previous-versions/objective-c-tracker/index.md) mobile tracker version 1.1.0 or later implemented.

@@ -8,7 +8,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-The [Ecommerce tracking package](/docs/sources/trackers/mobile-trackers/tracking-events/ecommerce-tracking/index.md) was introduced in Android and iOS v5.4.0. It provides 11 out-of-the-box event types to make it easier to thoroughly track user activity in an e-commerce store. A complete setup journey, including data modeling and visualization, is showcased in the [Ecommerce Accelerator](https://snowplow.io/data-product-accelerators/ecommerce-analytics-dpa/).
+The [Ecommerce tracking package](/docs/sources/trackers/mobile-trackers/tracking-events/ecommerce-tracking/index.md) was introduced in Android and iOS v5.4.0. It provides 11 out-of-the-box event types to make it easier to thoroughly track user activity in an ecommerce store.
 
 :::note
 Migrating to the new ecommerce events is a breaking change for any relevant data models.
@@ -175,7 +175,7 @@ tracker.track(event)
   </TabItem>
 </Tabs>
 
-These code snippets show only the direct API replacement. Check out the [docs page](/docs/sources/trackers/mobile-trackers/tracking-events/ecommerce-tracking/index.md) or the [Ecommerce Accelerator](https://snowplow.io/data-product-accelerators/ecommerce-analytics-dpa/) for information about expanding your tracking with the other new event types.
+These code snippets show only the direct API replacement. Check out the [docs page](/docs/sources/trackers/mobile-trackers/tracking-events/ecommerce-tracking/index.md) for information about expanding your tracking with the other new event types.
 
 Note that address details and affiliation are not captured in `TransactionEvent`. To track these so that they are attached to the `TransactionEvent`, we suggest creating [custom schemas](/docs/sources/trackers/mobile-trackers/custom-tracking-using-schemas/index.md) and adding the data as an entity. Alternatively for addresses, you could use the `CheckoutStepEvent` which has address and postcode as optional parameters.
 
@@ -193,8 +193,8 @@ All of the new events are `SelfDescribingEvent` with `event_name` `snowplow_ecom
 
 Entities such as `ProductEntity` can be added to several of the new Ecommerce events, e.g. `ProductViewEvent` or `AddToCartEvent`. Reusing the same entities makes modeling easier and keeps the code cleaner.
 
-## Using the DBT data model
+## Using the dbt data model
 
 Since the structure of the events is so different, migrating to the new ecommerce events is a breaking change for any relevant data models.
 
-We provide a dbt package that creates a set of derived tables including carts, transactions, and products from the raw ecommerce event data. Find the details of configuring this inside the [Ecommerce Accelerator](https://snowplow.io/data-product-accelerators/ecommerce-analytics-dpa/).
+We provide a [dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md) that creates a set of derived tables including carts, transactions, and products from the raw ecommerce event data.

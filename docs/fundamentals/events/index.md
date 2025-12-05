@@ -55,7 +55,7 @@ The following events are “baked in”. They get special treatment because they
 
 The `transaction` and `transaction_item` events are not very convenient to use and exist mostly for legacy reasons. One of their significant downsides is that you have to send a separate event for the transaction itself and then an event for each of the order items in that transaction (as opposed to including all items in a single event).
 
-Over the years, it has become more idiomatic to use [entities](/docs/fundamentals/entities/index.md) for order items in e-commerce transactions. For instance, our [E-commerce Accelerator](https://docs.snowplow.io/accelerators/ecommerce/) uses this approach.
+Over the years, it has become more idiomatic to use [entities](/docs/fundamentals/entities/index.md) for order items in ecommerce transactions.
 
 :::
 

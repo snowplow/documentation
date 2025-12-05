@@ -4,12 +4,6 @@ sidebar_position: 700
 title: "Web Quickstart"
 ---
 
-```mdx-code-block
-import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
-
-<Accelerator href="https://docs.snowplow.io/accelerators/web/" name="Advanced Analytics for Web"/>
-```
-
 In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web events dataset being available in your database, the requirements are:
 
 - [Snowplow Javascript tracker](/docs/sources/trackers/web-trackers/index.md) version 2 or later implemented.

@@ -19,7 +19,7 @@ This guide assumes you are running the standard web and/or mobile SQL Runner mod
 
 SQL Runner is currently in maintenance mode, while we will continue to fix bugs when they are identified, we are not actively developing the tool or the models anymore and at some point in the future may deprecate it entirely. Our dbt models on the other hand are under active development, with new features and optimizations being made regularly. It is also a more widely used tool, meaning installation and management is far easier (or you can use tools like dbt Cloud, or our CDI customers can run dbt models the same way you can SQL Runner). We also have a far wider range of packages available in dbt including e-commerce, marketing attribution, and a package to normalize your Snowplow data.
 
-In dbt we also support Databricks & Postgres warehouses in addition to Snowflake, BigQuery, and Redshift. Our [Accelerators](https://snowplow.io/data-product-accelerators/) contain our dbt models, and newer tracking plugins are only being modeled within our dbt packages.
+In dbt we also support Databricks and Postgres warehouses in addition to Snowflake, BigQuery, and Redshift. Newer tracking plugins are only being modeled within our dbt packages.
 
 In general, if you are happy with SQL Runner and don't foresee a need to add more models in the future then there is no need to migrate; however if you are starting from scratch, or would like to make use of our wider range of models, then you should consider migrating to dbt.
 

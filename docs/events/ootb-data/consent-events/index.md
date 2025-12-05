@@ -53,10 +53,6 @@ This custom module consists of a series of dbt models which produce the followin
 | `snowplow_web_cmp_stats`            | Used for modeling cmp_visible events and related metrics                                                   | [Docs](https://snowplow.github.io/dbt-snowplow-web/#!/model/model.snowplow_web.snowplow_web_consent_cmp_stats)    |
 | `snowplow_web_consent_versions`     | Incremental table used to keep track of each consent version and its validity                              | [Docs](https://snowplow.github.io/dbt-snowplow-web/#!/model/model.snowplow_web.snowplow_web_consent_versions)     |
 
-## Consent Tracking for Marketing accelerator
-
-Visit the [Consent Tracking for Marketing accelerator](https://docs.snowplow.io/accelerators/consent/) for an end-to-end tutorial on how to track and model consent data using Snowplow.
-
 <details>
   <summary>Older consent APIs and events</summary>
   <div>

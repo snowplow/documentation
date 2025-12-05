@@ -9,7 +9,7 @@ import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v
 <ReleaseBadge/>
 ```
 
-This plugin is the recommended way to track ecommerce events on your store. Functions, usage and a complete setup journey is showcased on the [E-commerce Web Accelerator](https://docs.snowplow.io/accelerators/ecommerce/).
+This plugin is the recommended way to track ecommerce events on your store.
 
 ## Installation
 
@@ -35,21 +35,21 @@ newTracker('sp1', '{{collector_url}}', {
 
 ## Functions
 
-API | Used for:
--- | --
-`trackProductView` | Tracking a visit to a product page. Known also as product detail view.
-`trackAddToCart` | Track an addition to cart.
-`trackRemoveFromCart` | Track a removal from cart.
-`trackProductListView` | Track an impression of a product list. The list could be a search results page, recommended products, upsells etc.
-`trackProductListClick` | Track the click/selection of a product from a product list.
-`trackPromotionView` | Track an impression for an internal promotion banner or slider or any other type of content that showcases internal products/categories.
-`trackPromotionClick` | Track the click/selection of an internal promotion.
-`trackCheckoutStep` | Track a checkout step completion in the checkout process together with common step attributes for user choices throughout the checkout funnel.
-`trackTransaction` | Track a transaction/purchase completion.
-`trackRefund` | Track a transaction partial or complete refund.
-`trackTransactionError` | Track an error happening during a transaction process.
-`setPageType` | Set a Page type context which would allow the analyst to discern between types of pages with ecommerce value. E.g. Category Page, Product Page, Cart Page, etc.
-`setEcommerceUser` | Set a User type context with a few standard user attributes.
+| API                     | Used for:                                                                                                                                                       |
+| ----------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `trackProductView`      | Tracking a visit to a product page. Known also as product detail view.                                                                                          |
+| `trackAddToCart`        | Track an addition to cart.                                                                                                                                      |
+| `trackRemoveFromCart`   | Track a removal from cart.                                                                                                                                      |
+| `trackProductListView`  | Track an impression of a product list. The list could be a search results page, recommended products, upsells etc.                                              |
+| `trackProductListClick` | Track the click/selection of a product from a product list.                                                                                                     |
+| `trackPromotionView`    | Track an impression for an internal promotion banner or slider or any other type of content that showcases internal products/categories.                        |
+| `trackPromotionClick`   | Track the click/selection of an internal promotion.                                                                                                             |
+| `trackCheckoutStep`     | Track a checkout step completion in the checkout process together with common step attributes for user choices throughout the checkout funnel.                  |
+| `trackTransaction`      | Track a transaction/purchase completion.                                                                                                                        |
+| `trackRefund`           | Track a transaction partial or complete refund.                                                                                                                 |
+| `trackTransactionError` | Track an error happening during a transaction process.                                                                                                          |
+| `setPageType`           | Set a Page type context which would allow the analyst to discern between types of pages with ecommerce value. E.g. Category Page, Product Page, Cart Page, etc. |
+| `setEcommerceUser`      | Set a User type context with a few standard user attributes.                                                                                                    |
 
 ## Usage
 
@@ -376,11 +376,11 @@ Below is the set of entities and attributes that can be used in the Snowplow Eco
 
 An ecommerce page entity can have the following attributes:
 
-| attribute | type | description | required |
-| :--------------: | :------: | :----------------------------------------------------------------------------------------------------------------: | :------: |
-| type | `string` | The type of the page that was visited E.g. homepage, product page, checkout page. | ✅ |
-| language | `string` | The language that the web page is based in. | ✘ |
-| locale | `string` | The locale version of the site that is running. | ✘ |
+| attribute |   type   |                                    description                                    | required |
+| :-------: | :------: | :-------------------------------------------------------------------------------: | :------: |
+|   type    | `string` | The type of the page that was visited E.g. homepage, product page, checkout page. |    ✅     |
+| language  | `string` |                    The language that the web page is based in.                    |    ✘     |
+|  locale   | `string` |                  The locale version of the site that is running.                  |    ✘     |
 
 <a href="https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/page/jsonschema" target="_blank" rel="noreferrer noopener">Relevant Iglu schema</a>
 
@@ -388,11 +388,11 @@ An ecommerce page entity can have the following attributes:
 
 An ecommerce user entity can have the following attributes:
 
-| attribute | type | description | required |
-| :--------------: | :------: | :----------------------------------------------------------------------------------------------------------------: | :------: |
-| id | `string` | The user ID. | ✅ |
-| is_guest | `boolean` | Whether or not the user is a guest. | ✘ |
-| email | `string` | The user's email address. | ✘ |
+| attribute |   type    |             description             | required |
+| :-------: | :-------: | :---------------------------------: | :------: |
+|    id     | `string`  |            The user ID.             |    ✅     |
+| is_guest  | `boolean` | Whether or not the user is a guest. |    ✘     |
+|   email   | `string`  |      The user's email address.      |    ✘     |
 
 <a href="https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/user/jsonschema" target="_blank" rel="noreferrer noopener">Relevant Iglu schema</a>
 
@@ -400,21 +400,21 @@ An ecommerce user entity can have the following attributes:
 
 Whenever there is a product entity involved in the ecommerce interaction event, the `product` or array of `products` can have the following attributes:
 
-| attribute | type | description | required |
-| :--------------: | :------: | :----------------------------------------------------------------------------------------------------------------: | :------: |
-| id | `string` | SKU or product ID. | ✅ |
-| currency | `string` | Currency in which the product is being priced (ISO 4217). | ✅ |
-| price | `number` | Price of the product at the current time. | ✅ |
-| name | `string` | Name or title of the product. | ✘ |
-| category | `string` | Category the product belongs to. Use a consistent separator to express multiple levels. E.g. Woman/Shoes/Sneakers. The number of levels is defined by the user. | ✘ |
-| list_price | `number` | Recommended or list price of a product. | ✘ |
-| quantity | `number` | Quantity of the product taking part in the action. Used for Cart events. | ✘ |
-| size | `string` | Size of the product. E.g. XL, XS, M. | ✘ |
-| variant | `string` | Variant of the product. E.g. Red, Heavy, Leather. | ✘ |
-| brand | `string` | Brand of the product. | ✘ |
-| inventory_status | `string` | Inventory status of the product. E.g. in stock, out of stock, preorder, backorder. | ✘ |
-| position | `number` | Position the product was presented in a list of products. Used in Product List events. | ✘ |
-| creative_id | `string` | Identifier/Name/Url for the creative presented on a list or product view. | ✘ |
+|    attribute     |   type   |                                                                           description                                                                           | required |
+| :--------------: | :------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------: |
+|        id        | `string` |                                                                       SKU or product ID.                                                                        |    ✅     |
+|     currency     | `string` |                                                    Currency in which the product is being priced (ISO 4217).                                                    |    ✅     |
+|      price       | `number` |                                                            Price of the product at the current time.                                                            |    ✅     |
+|       name       | `string` |                                                                  Name or title of the product.                                                                  |    ✘     |
+|     category     | `string` | Category the product belongs to. Use a consistent separator to express multiple levels. E.g. Woman/Shoes/Sneakers. The number of levels is defined by the user. |    ✘     |
+|    list_price    | `number` |                                                             Recommended or list price of a product.                                                             |    ✘     |
+|     quantity     | `number` |                                            Quantity of the product taking part in the action. Used for Cart events.                                             |    ✘     |
+|       size       | `string` |                                                              Size of the product. E.g. XL, XS, M.                                                               |    ✘     |
+|     variant      | `string` |                                                        Variant of the product. E.g. Red, Heavy, Leather.                                                        |    ✘     |
+|      brand       | `string` |                                                                      Brand of the product.                                                                      |    ✘     |
+| inventory_status | `string` |                                       Inventory status of the product. E.g. in stock, out of stock, preorder, backorder.                                        |    ✘     |
+|     position     | `number` |                                     Position the product was presented in a list of products. Used in Product List events.                                      |    ✘     |
+|   creative_id    | `string` |                                            Identifier/Name/Url for the creative presented on a list or product view.                                            |    ✘     |
 
 <a href="https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/product/jsonschema" target="_blank" rel="noreferrer noopener">Relevant Iglu schema</a>
 
@@ -422,15 +422,15 @@ Whenever there is a product entity involved in the ecommerce interaction event, 
 
 On internal promotion events, an internal promotion can have the following attributes:
 
-| attribute | type | description | required |
-| :--------------: | :------: | :----------------------------------------------------------------------------------------------------------------: | :------: |
-| id | `string` | The unique ID representing this promotion element. | ✅ |
-| name | `string` | The friendly name for this promotion element. | ✘ |
-| product_ids | `string[]` | An array of SKUs or product IDs showcased in this promotion element. | ✘ |
-| position | `integer` | The position this promotion element was presented in a list of promotions E.g. banner, slider. | ✘ |
-| creative_id | `string` | Identifier/Name/Url for the creative presented on this promotion element. | ✘ |
-| type | `string` | The type of the promotion delivery mechanism. E.g. popup, banner, intra-content. | ✘ |
-| slot | `string` | The website slot in which the promotional content was added to. E.g. Identifier for slot sidebar-1, intra-content-2. | ✘ |
+|  attribute  |    type    |                                                     description                                                      | required |
+| :---------: | :--------: | :------------------------------------------------------------------------------------------------------------------: | :------: |
+|     id      |  `string`  |                                  The unique ID representing this promotion element.                                  |    ✅     |
+|    name     |  `string`  |                                    The friendly name for this promotion element.                                     |    ✘     |
+| product_ids | `string[]` |                         An array of SKUs or product IDs showcased in this promotion element.                         |    ✘     |
+|  position   | `integer`  |            The position this promotion element was presented in a list of promotions E.g. banner, slider.            |    ✘     |
+| creative_id |  `string`  |                      Identifier/Name/Url for the creative presented on this promotion element.                       |    ✘     |
+|    type     |  `string`  |                   The type of the promotion delivery mechanism. E.g. popup, banner, intra-content.                   |    ✘     |
+|    slot     |  `string`  | The website slot in which the promotional content was added to. E.g. Identifier for slot sidebar-1, intra-content-2. |    ✘     |
 
 
 <a href="https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/promotion/jsonschema" target="_blank" rel="noreferrer noopener">Relevant Iglu schema</a>
@@ -439,11 +439,11 @@ On internal promotion events, an internal promotion can have the following attri
 
 On cart interaction ecommerce events, a cart can have the following attributes:
 
-| attribute | type | description | required |
-| :--------------: | :------: | :----------------------------------------------------------------------------------------------------------------: | :------: |
-| total_value | `number` | The total value of the cart after this interaction. | ✅ |
-| currency | `string` | The currency used for this cart (ISO 4217). | ✅ |
-| cart_id | `string` | The unique ID representing this cart. | ✘ |
+|  attribute  |   type   |                     description                     | required |
+| :---------: | :------: | :-------------------------------------------------: | :------: |
+| total_value | `number` | The total value of the cart after this interaction. |    ✅     |
+|  currency   | `string` |     The currency used for this cart (ISO 4217).     |    ✅     |
+|   cart_id   | `string` |        The unique ID representing this cart.        |    ✘     |
 
 <a href="https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/cart/jsonschema" target="_blank" rel="noreferrer noopener">Relevant Iglu schema</a>
 
@@ -451,20 +451,20 @@ On cart interaction ecommerce events, a cart can have the following attributes:
 
 Whenever there is a checkout entity involved in the ecommerce interaction event, it can have the following attributes:
 
-| attribute | type | description | required |
-| :--------------: | :------: | :----------------------------------------------------------------------------------------------------------------: | :------: |
-| step | `number` | Checkout step index. | ✅ |
-| shipping_postcode | `string` | Shipping address postcode. | ✘ |
-| billing_postcode | `string` | Billing address postcode. | ✘ |
-| shipping_full_address | `string` | Full shipping address. | ✘ |
-| billing_full_address | `string` | Full billing address. | ✘ |
-| delivery_provider | `string` | Can be used to discern delivery providers DHL, PostNL etc. | ✘ |
-| delivery_method | `string` | Can be used to discern delivery methods selected E.g. store pickup, standard delivery, express delivery, international. | ✘ |
-| coupon_code | `string` | Coupon applied at checkout. | ✘ |
-| account_type | `string` | Type of account used on checkout. E.g. existing user, guest. | ✘ |
-| payment_method | `string` | Any kind of payment method the user selected to proceed E.g. card, PayPal, Alipay etc. | ✘ |
-| proof_of_payment | `string` | Invoice or receipt. | ✘ |
-| marketing_opt_in | `boolean` | If opted in to marketing campaigns. | ✘ |
+|       attribute       |   type    |                                                       description                                                       | required |
+| :-------------------: | :-------: | :---------------------------------------------------------------------------------------------------------------------: | :------: |
+|         step          | `number`  |                                                  Checkout step index.                                                   |    ✅     |
+|   shipping_postcode   | `string`  |                                               Shipping address postcode.                                                |    ✘     |
+|   billing_postcode    | `string`  |                                                Billing address postcode.                                                |    ✘     |
+| shipping_full_address | `string`  |                                                 Full shipping address.                                                  |    ✘     |
+| billing_full_address  | `string`  |                                                  Full billing address.                                                  |    ✘     |
+|   delivery_provider   | `string`  |                               Can be used to discern delivery providers DHL, PostNL etc.                                |    ✘     |
+|    delivery_method    | `string`  | Can be used to discern delivery methods selected E.g. store pickup, standard delivery, express delivery, international. |    ✘     |
+|      coupon_code      | `string`  |                                               Coupon applied at checkout.                                               |    ✘     |
+|     account_type      | `string`  |                              Type of account used on checkout. E.g. existing user, guest.                               |    ✘     |
+|    payment_method     | `string`  |                 Any kind of payment method the user selected to proceed E.g. card, PayPal, Alipay etc.                  |    ✘     |
+|   proof_of_payment    | `string`  |                                                   Invoice or receipt.                                                   |    ✘     |
+|   marketing_opt_in    | `boolean` |                                           If opted in to marketing campaigns.                                           |    ✘     |
 
 <a href="https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/checkout_step/jsonschema" target="_blank" rel="noreferrer noopener">Relevant Iglu schema</a>
 
@@ -472,18 +472,18 @@ Whenever there is a checkout entity involved in the ecommerce interaction event,
 
 Whenever there is a transaction entity involved in the ecommerce interaction event, it can have the following attributes:
 
-| attribute | type | description | required |
-| :--------------: | :------: | :----------------------------------------------------------------------------------------------------------------: | :------: |
-| transaction_id | `string` | The ID of the transaction | ✅ |
-| currency | `string` | The currency used for the transaction (ISO 4217). | ✅ |
-| revenue | `number` | The revenue of the transaction. | ✅ |
-| payment_method | `string` | The payment method used for the transaction. | ✅ |
-| total_quantity | `number` | Total quantity of items in the transaction. | ✅ |
-| tax | `number` | Total amount of tax on the transaction. | ✘ |
-| shipping | `number` | Total cost of shipping on the transaction. | ✘ |
-| discount_code | `string` | Discount code used. | ✘ |
-| discount_amount | `number` | Discount amount taken off. | ✘ |
-| credit_order | `boolean` | Whether the transaction is a credit order or not. | ✘ |
+|    attribute    |   type    |                    description                    | required |
+| :-------------: | :-------: | :-----------------------------------------------: | :------: |
+| transaction_id  | `string`  |             The ID of the transaction             |    ✅     |
+|    currency     | `string`  | The currency used for the transaction (ISO 4217). |    ✅     |
+|     revenue     | `number`  |          The revenue of the transaction.          |    ✅     |
+| payment_method  | `string`  |   The payment method used for the transaction.    |    ✅     |
+| total_quantity  | `number`  |    Total quantity of items in the transaction.    |    ✅     |
+|       tax       | `number`  |      Total amount of tax on the transaction.      |    ✘     |
+|    shipping     | `number`  |    Total cost of shipping on the transaction.     |    ✘     |
+|  discount_code  | `string`  |                Discount code used.                |    ✘     |
+| discount_amount | `number`  |            Discount amount taken off.             |    ✘     |
+|  credit_order   | `boolean` | Whether the transaction is a credit order or not. |    ✘     |
 
 <a href="https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/transaction/jsonschema" target="_blank" rel="noreferrer noopener">Relevant Iglu schema</a>
 
@@ -491,12 +491,12 @@ Whenever there is a transaction entity involved in the ecommerce interaction eve
 
 Whenever there is a refund entity involved in the ecommerce interaction event, it can have the following attributes:
 
-| attribute | type | description | required |
-| :--------------: | :------: | :----------------------------------------------------------------------------------------------------------------: | :------: |
-| transaction_id | `string` | The ID of the transaction | ✅ |
-| currency | `string` | The currency used for the transaction (ISO 4217). | ✅ |
-| refund_amount | `number` | The amount refunded from the transaction. | ✅ |
-| refund_reason | `string` | The reason that resulted in a refund. | ✘ |
+|   attribute    |   type   |                    description                    | required |
+| :------------: | :------: | :-----------------------------------------------: | :------: |
+| transaction_id | `string` |             The ID of the transaction             |    ✅     |
+|    currency    | `string` | The currency used for the transaction (ISO 4217). |    ✅     |
+| refund_amount  | `number` |     The amount refunded from the transaction.     |    ✅     |
+| refund_reason  | `string` |       The reason that resulted in a refund.       |    ✘     |
 
 <a href="https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/refund/jsonschema" target="_blank" rel="noreferrer noopener">Relevant Iglu schema</a>
 
@@ -504,13 +504,13 @@ Whenever there is a refund entity involved in the ecommerce interaction event, i
 
 Whenever there is a transaction error entity involved in the ecommerce interaction event, it can have the following attributes:
 
-| attribute | type | description | required |
-| :--------------: | :------: | :----------------------------------------------------------------------------------------------------------------: | :------: |
-| error_code | `string` | Error-identifying code for the transaction issue. E.g. E522 | ✘ |
-| error_shortcode | `string` | Shortcode for the error occurred in the transaction. E.g. declined_by_stock_api, declined_by_payment_method, card_declined, pm_card_radarBlock | ✘ |
-| error_description | `number` | Longer description for the error occurred in the transaction. | ✘ |
-| error_type | `Enum string` | Either `'hard'` or `'soft'`. Hard error types mean the customer must provide another form of payment e.g. an expired card. Soft errors can be the result of temporary issues where retrying might be successful e.g. processor declined the transaction. | ✘ |
-| resolution | `string` | The resolution selected for the error scenario. E.g. retry_allowed, user_blacklisted, block_gateway, contact_user, default | ✘ |
+|     attribute     |     type      |                                                                                                                       description                                                                                                                        | required |
+| :---------------: | :-----------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------: |
+|    error_code     |   `string`    |                                                                                               Error-identifying code for the transaction issue. E.g. E522                                                                                                |    ✘     |
+|  error_shortcode  |   `string`    |                                                      Shortcode for the error occurred in the transaction. E.g. declined_by_stock_api, declined_by_payment_method, card_declined, pm_card_radarBlock                                                      |    ✘     |
+| error_description |   `number`    |                                                                                              Longer description for the error occurred in the transaction.                                                                                               |    ✘     |
+|    error_type     | `Enum string` | Either `'hard'` or `'soft'`. Hard error types mean the customer must provide another form of payment e.g. an expired card. Soft errors can be the result of temporary issues where retrying might be successful e.g. processor declined the transaction. |    ✘     |
+|    resolution     |   `string`    |                                                                The resolution selected for the error scenario. E.g. retry_allowed, user_blacklisted, block_gateway, contact_user, default                                                                |    ✘     |
 
 <a href="https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.ecommerce/transaction_error/jsonschema" target="_blank" rel="noreferrer noopener">Relevant Iglu schema</a>
 
@@ -523,10 +523,6 @@ Available from version 3.10.
 If you already use Google Analytics 4 ecommerce or Universal Analytics Enhanced Ecommerce to collect information about the shopping behavior of your users, we have prepared a way to quickly implement Snowplow Ecommerce without making many changes on your current setup.
 
 The _transitional_ API that we provide, depends on the standardized [dataLayer](https://developers.google.com/tag-platform/tag-manager/web/datalayer) structure for both Google Analytics ecommerce implementations. This would make it easier for the transition to happen either through Google Tag Manager, which has more control over the dataLayer, or custom code that uses the standard ecommerce structures.
-
-:::info
-To learn more about how to use this transitional API, you should go ahead and visit our [Ecommerce Web Accelerator](https://docs.snowplow.io/accelerators/ecommerce/tracking/ua_ga4_migration/) dedicated page which describes the usage of these methods and more.
-:::
 
 ### Universal Analytics Enhanced Ecommerce
 

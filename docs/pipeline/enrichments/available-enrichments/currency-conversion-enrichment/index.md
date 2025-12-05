@@ -15,7 +15,7 @@ This is an older and less actively maintained enrichment, and as such it has sev
 * **It can only use the exchange rate from the end of the day prior to the event’s `collector_tstamp`.** You can’t apply a different rate (e.g. the one in effect when the event occurred), and you can’t pick a different timestamp field (e.g. `dvce_sent_tstamp`).
 * **It only works with the [`tr_` and `ti_` fields](/docs/fundamentals/canonical-event/index.md#e-commerce-transactions).** These fields are not very convenient to use and exist for legacy reasons. One of their significant downsides is that you have to send a separate event for the transaction itself and then an event for each of the order items in that transaction (as opposed to including all items in a single event).
 
-Over the years, it has become more idiomatic to use dedicated [entities](/docs/fundamentals/entities/index.md) for order items in e-commerce transactions. For instance, our [E-commerce Accelerator](https://docs.snowplow.io/accelerators/ecommerce/) uses this approach, which is _incompatible with this enrichment_.
+Over the years, it has become more idiomatic to use dedicated [entities](/docs/fundamentals/entities/index.md) for order items in ecommerce transactions.
 
 We recommend to manage currency conversion downstream instead of using this enrichment. For example, you could bring currency exchange rate information into your data warehouse and join that data with your Snowplow data.
 

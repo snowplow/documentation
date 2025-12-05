@@ -18,7 +18,7 @@ Congratulations on completing the tutorial on setting up an abandoned browse tra
 
 ## Recommended next steps
 
-- **Expand tracking**: extend your tracking setup to include additional user interactions, checkout steps, and campaign success metrics to create a more comprehensive view of user behavior and marketing effectiveness. You can follow our [ecommerce accelerator](https://docs.snowplow.io/accelerators/ecommerce) to learn more.
+- **Expand tracking**: extend your tracking setup to include additional user interactions, checkout steps, and campaign success metrics to create a more comprehensive view of user behavior and marketing effectiveness.
 
 - **Advanced segmentation**: use the data collected to create more advanced audience segments, such as users with high engagement but no purchase, or users who frequently view specific product categories.
 

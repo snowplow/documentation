@@ -57,6 +57,30 @@ You can confirm events are reaching Braze by checking the following pages in you
 
 **Rate limits:** Braze enforces a rate limit of 3,000 API calls every three seconds for the Track Users API. Because Snowplow does not currently support batching for event forwarders, this API rate limit also functions as the event rate limit. If your input throughput exceeds 3,000 events per three seconds, you will experience increased latency.
 
+## Sending custom properties
+
+The schema reference below defines the standard fields supported by the Braze integration. You can also send custom properties beyond these standard fields. The structure depending on which Braze object type you're using.
+
+### Custom user attributes
+
+Custom user attributes are added as top-level fields in the attributes object, alongside Braze's standard user profile fields. When configuring your forwarder, add additional field mappings with the destination field name as your custom attribute name (e.g., `subscription_tier`, `loyalty_points`, `preferred_category`).
+
+Custom attributes support strings, integers, floats, booleans, dates, arrays, and nested objects.
+
+### Custom event properties
+
+Custom event properties are nested under a `properties` object within each event. When configuring your forwarder, add additional field mappings with the destination field name formatted as `properties.your_custom_field` (e.g., `properties.plan_type`, `properties.feature_flag`).
+
+Event properties support numbers, booleans, strings (up to 255 characters), datetimes, arrays, and objects. Property names must be non-empty strings under 255 characters and cannot start with a dollar sign or use the reserved keys `time` or `event_name`. The total event property payload can be up to 100 KB. For property names containing spaces, use bracket notation (e.g., `properties["campaign source"]`).
+
+### Custom purchase properties
+
+Custom purchase properties are nested under a `properties` object within each purchase, similar to events. When configuring your forwarder, add additional field mappings with the destination field name formatted as `properties.your_custom_field` (e.g., `properties.color`, `properties.size`, `properties.shipping_method`).
+
+Purchase properties support the same data types as event properties, with a maximum payload size of 50 KB per purchase. For property names containing spaces, use bracket notation.
+
+You can extract custom property values from any field in your Snowplow events, including event properties, entities, or custom fields. See [Creating forwarders](/docs/destinations/forwarding-events/creating-forwarders/index.md) for details on configuring field mappings.
+
 ## Schema reference
 
 The sections below contain information on the fields you can send to Braze, including field names, data types, required fields, and default Snowplow mapping expressions.

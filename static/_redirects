@@ -427,3 +427,4 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/monitoring/monitoring-failed-events/* /docs/monitoring/:splat 301
 /docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md/* /docs/pipeline/enriched-tsv-format/index.md/:splat 301
 /docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/* /docs/pipeline/enriched-tsv-format/:splat 301
+/docs/fundamentals/schemas/json-schema-reference/* /docs/data-product-studio/json-schema-reference/:splat 301

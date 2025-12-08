@@ -1,5 +1,5 @@
 ---
-title: "Understanding events"
+title: "Introduction to Snowplow event types"
 sidebar_label: "Events"
 sidebar_position: 1
 description: "An event is a central concept in Snowplow that represents something that occurred at a particular point in time"

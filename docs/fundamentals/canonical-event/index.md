@@ -1,5 +1,5 @@
 ---
-title: "Understanding the structure of Snowplow data"
+title: "Introduction to the structure of Snowplow data"
 description: A summary of the Snowplow events table and its fields, including custom events and entities
 sidebar_label: "What the data looks like"
 sidebar_position: 4

@@ -1,5 +1,5 @@
 ---
-title: "Structuring your data with schemas"
+title: "Introduction to structuring your data with schemas"
 sidebar_label: "Schemas (data structures)"
 sidebar_position: 3
 description: "Schemas are a powerful feature that ensures your data is clean and descriptive"

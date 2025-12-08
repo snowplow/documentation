@@ -1,5 +1,5 @@
 ---
-title: "Understanding entities"
+title: "Introduction to Snowplow entities"
 sidebar_label: "Entities (context)"
 sidebar_position: 2
 description: "Entities are a good way to deal with common fields across various events"

@@ -19,10 +19,15 @@ The first step is to specify:
 
 ## Data source
 
+:::note Warehouse Connection 
+A warehouse connection is required to create `Batch` and `External Batch` attributes.
+:::
+
 There are three [sources](/docs/signals/concepts/index.md#data-sources) to choose from:
 * **Stream**: real-time Snowplow event stream
 * **Batch**: a new warehouse table created by Signals, calculated from your `atomic` events table
 * **External batch**: pre-calculated values in a warehouse table that you can sync to the Profiles Store
+
 
 Attribute groups are configured differently based on the data source.
 
@@ -81,6 +86,10 @@ When none of the attributes for an attribute group have been updated for the def
 If Signals then processes a new event that calculates the attribute again, or materializes the attribute from the warehouse again, the expiration timer is reset.
 
 ## Testing the attribute definitions
+
+:::note Warehouse Connection 
+A warehouse connection is required to test attribute definitions
+:::
 
 After defining one or more [attributes](/docs/signals/define-attributes/attributes/index.md) for groups with a stream or batch source, you can test out the configuration with the **Run preview** button.
 

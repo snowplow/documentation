@@ -45,15 +45,8 @@ Here is a detailed list of product features, showing which are available as part
 | QA pipeline                                                                                                               |   ✅   |  do-it-yourself  |
 | Fine-grained user permissions using access control lists                                                                  |   ✅   |        ❌         |
 | API key access                                                                                                            |   ✅   |        ❌         |
-| <h3>[Data Model Packs](/docs/modeling-your-data/visualization/index.md)</h3>                                              |  CDI  |   Self-Hosted    |
-| **Digital Analytics**                                                                                                     |       |                  |
-| Funnel builder                                                                                                            |   ✅   |        ❌         |
-| User and Marketing Analytics                                                                                              |   ✅   |        ❌         |
-| Marketing Attribution                                                                                                     |   ✅   |        ❌         |
-| Video and Media                                                                                                           |   ✅   |        ❌         |
+| <h3>Data Model Packs</h3>                                                                                                 |  CDI  |   Self-Hosted    |
 | [Unified Digital, Attribution, Media Player, Ecommerce, Normalize, Utils data models](/docs/modeling-your-data/index.md)  |   ✅   |        ❌         |
-| **Ecommerce Analytics**                                                                                                   |       |                  |
-| Ecommerce Analytics                                                                                                       |   ✅   |        ❌         |
 | [Ecommerce data model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md) |   ✅   |        ❌         |
 | <h3>Extensions</h3>                                                                                                       |  CDI  |   Self-Hosted    |
 | Reverse ETL, powered by Census                                                                                            |   ✅   |        ❌         |

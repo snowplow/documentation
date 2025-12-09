@@ -7,12 +7,6 @@ description: "Entities are a good way to deal with common fields across various 
 
 When an event occurs, it generally involves a number of entities, which provide additional information.
 
-TODO
-who what where when why how
-
-
-These are also self-describing JSON objects. Again, Snowplow provides a number of out-of-the-box entities, and you can also define your own custom entities.
-
 :::info Terminology
 
 In the past, what we now call “entities” was called “context”. We find the new term clearer, but you will still find `context` used in many of the existing APIs, database column names, and documentation, especially to refer to a set of _multiple_ entities. Sometimes, we will also use the two terms interchangeably.
@@ -93,7 +87,7 @@ window.snowplow("newTracker", "sp", "{{COLLECTOR_URL}}", {
 
 Other out-of-the-box entities are added to the events by certain [enrichments](/docs/pipeline/enrichments/available-enrichments/index.md).
 
-## Custom entities
+## Custom entities TODO I copied this to Events
 
 Custom entities are entities you define yourself.
 

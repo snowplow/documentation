@@ -121,3 +121,131 @@ After the self section, the remainder of the schema is where you will begin desc
 - Validation arguments can then be passed into the field such as `minLength`, `maxLength` and `enum` for strings and `minimum` and `maximum` for integers.
 
 **“$supersedes”** / **“$supersededBy”** - _Optional, not shown_. See [marking schemas as superseded](/docs/data-product-studio/data-structures/version-amend/amending/index.md#marking-the-schema-as-superseded).
+
+
+---
+Each individual entity is a self-describing JSON such as:
+
+```json
+{
+  "schema": "iglu:com.my_company/user/jsonschema/1-0-0",
+  "data": {
+    "fb_uid": "9999xyz"
+  }
+}
+```
+
+:::info
+
+`"iglu:com.my_company/user/jsonschema/1-0-0"` respresents a [self-describing JSON](/docs/api-reference/iglu/common-architecture/self-describing-jsons/index.md). It is used to validate the event data against a predefined JSON Schema as part of a Snowplow pipeline.
+
+:::
+
+
+---
+
+
+An example of a self-describing event for a product view event:
+
+```json
+{
+  "schema": "iglu:com.my_company/viewed_product/jsonschema/1-0-0",
+  "data": {
+    "product_id": "ASO01043",
+    "price": 49.95
+  }
+}
+```
+
+:::info
+
+`"iglu:com.my_company/viewed_product/jsonschema/1-0-0"` respresents a [self-describing JSON](/docs/api-reference/iglu/common-architecture/self-describing-jsons/index.md). It is used to validate the event data against a predefined JSON Schema as part of a Snowplow pipeline.
+
+:::
+
+---
+
+
+## Self-describing JSON serialization
+
+TODO this should probably go in the Fundamentals schema section
+
+<details>
+  <summary>How are self-describing events serialized in event payload?</summary>
+  <div>
+
+The tracker will wrap this self-describing JSON in an outer self-describing JSON, which is what gets sent in the payload:
+
+```json
+{
+
+  // Tells Snowplow this is an self-describing event
+  "schema": "iglu:com.snowplowanalytics.snowplow/unstruct_event/jsonschema/1-0-0",
+  "data": {
+
+    // Tells Snowplow this is a viewed_product event
+    "schema": "iglu:com.my_company/viewed_product/jsonschema/1-0-0",
+    "data": {
+
+      // The event data itself
+      "product_id": "ASO01043",
+      "price": 49.95
+    }
+  }
+}
+```
+
+As well as setting `e=ue`, there are two custom event specific parameters that can be populated with the outer self-describing JSON:
+
+| **Parameter** | **Table Column** | **Type**                       | **Description**             | **Example values**                                             |
+| ------------- | ---------------- | ------------------------------ | --------------------------- |
+| `ue_px`       | `unstruct_event` | JSON (URL-safe Base64 encoded) | The properties of the event | `eyAicHJvZHVjdF9pZCI6ICJBU08wMTA0MyIsICJwcmljZSI6IDQ5Ljk1IH0=` |
+| `ue_pr`       | `unstruct_event` | JSON                           | The properties of the event | `{ "product_id": "ASO01043", "price": 49.95 }`                 |
+
+The tracker can decide to pass the `ue_px` or the `ue_pr` parameter. Encoding properties into URL-safe Base64 allows is the recommended approach although does sacrifice readability.
+
+  </div>
+</details>
+
+
+
+
+<details>
+  <summary>How are context entities serialized in event payload?</summary>
+  <div>
+
+All entities attached to an event will be wrapped in an array by the user and passed to the tracker, which will wrap them in a self-describing JSON:
+
+```json
+{
+
+  // Tells Snowplow this is an array of custom contexts
+  "schema": "iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0",
+  "data": [
+    {
+
+      // Tells Snowplow that this is a "user" context
+      "schema": "iglu:com.my_company/user/jsonschema/1-0-0",
+      "data": {
+
+        // The context data itself
+        "fb_uid": "9999xyz"
+      }
+    }
+  ]
+}
+```
+
+Trackers can be configured to encode the context into URL-safe Base64 to ensure that no data is lost or corrupted. The downside is that the data will be bigger and less readable.
+
+| **Parameter** | **Table Column** | **Type**                       | **Description**             | **Example values**                                                                                                                                                                                                                                                                                             |
+| ------------- | ---------------- | ------------------------------ | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `co`          | `context`        | JSON                           | An array of custom contexts | `%7B%22schema%22:%22iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0%22,%22data%22:%5B%7B%22schema%22:%22iglu:com.my_company/user/jsonschema/1-0-0%22,%22data%22:%7B%22fb_uid%22:%229999xyz%22%7D%7D%5D%7D`                                                                                       |
+| `cx`          | `context`        | JSON (URL-safe Base64 encoded) | An array of custom contexts | `ew0KICBzY2hlbWE6ICdpZ2x1OmNvbS5zbm93cGxvd2FuYWx5dGljcy5zbm93cGxvdy9jb250ZXh0cy9qc29uc2NoZW1hLzEtMC0wJyANCiAgZGF0YToge1sNCiAgICB7DQogICAgICBzY2hlbWE6ICdpZ2x1OmNvbS5teV9jb21wYW55L3VzZXIvanNvbnNjaGVtYS8xLTAtMCcgDQogICAgICBkYXRhOiB7DQogICAgICAgIGZiX3VpZDogJzk5OTl4eXonDQogICAgICB9DQogICAgfQ0KICBdfQ0KfQ==` |
+
+:::note
+The exact field names may vary depending on your warehouse, for snowflake/bigquery/databricks you will find `unstruct_` or `context_` at the front and for bigquery you will see an extended version number at the end such as `1_0_0`.
+:::
+
+  </div>
+</details>

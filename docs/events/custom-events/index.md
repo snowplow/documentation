@@ -1,197 +1,105 @@
 ---
-title: "Custom events and context entities"
+title: "How to track custom events and entities"
+sidebar_label: "Custom data"
 sidebar_position: 1
 ---
 
-This section has more details on the event types introduced [here](/docs/fundamentals/events/index.md).
-
 Snowplow includes three ways to track custom data:
-* Self-describing events
-* Custom entities
-* Structured events
+* Self-describing [events](/docs/fundamentals/events/index.md#self-describing-events)
+* Custom [entities](/docs/fundamentals/entities/index.md#custom-entities)
+* Structured events (not recommended)
 
-## Self-describing events
+## Custom self-describing events
 
-```mdx-code-block
-import DefineCustomEvent from "@site/docs/reusable/define-custom-event/_index.md"
+Self-describing events are [based on JSON schemas](/docs/fundamentals/schemas/index.md) and can have arbitrarily many fields.
 
-<DefineCustomEvent/>
-```
+To define your own custom event, you will need to [create a corresponding schema](/docs/data-product-studio/data-structures/manage/index.md). Snowplow uses the schema to validate that the JSON containing the event properties is well-formed.
 
-
-An example of a self-describing event for a product view event:
-
-```json
-{
-  "schema": "iglu:com.my_company/viewed_product/jsonschema/1-0-0",
-  "data": {
-    "product_id": "ASO01043",
-    "price": 49.95
-  }
-}
-```
-
-:::info
-
-`"iglu:com.my_company/viewed_product/jsonschema/1-0-0"` respresents a [self-describing JSON](/docs/api-reference/iglu/common-architecture/self-describing-jsons/index.md). It is used to validate the event data against a predefined JSON Schema as part of a Snowplow pipeline.
-
-:::
-
-:::info Nomenclature
-Historically, Snowplow called custom self-describing events "unstructured events", in comparison with the legacy  "structured" custom events. You might find remnants of this nomenclature in some Snowplow APIs.
-:::
-
-
-<details>
-  <summary>How are self-describing events serialized in event payload?</summary>
-  <div>
-
-The tracker will wrap this self-describing JSON in an outer self-describing JSON, which is what gets sent in the payload:
-
-```json
-{
-
-  // Tells Snowplow this is an self-describing event
-  "schema": "iglu:com.snowplowanalytics.snowplow/unstruct_event/jsonschema/1-0-0",
-  "data": {
-
-    // Tells Snowplow this is a viewed_product event
-    "schema": "iglu:com.my_company/viewed_product/jsonschema/1-0-0",
-    "data": {
-
-      // The event data itself
-      "product_id": "ASO01043",
-      "price": 49.95
-    }
-  }
-}
-```
-
-As well as setting `e=ue`, there are two custom event specific parameters that can be populated with the outer self-describing JSON:
-
-| **Parameter** | **Table Column** | **Type**                       | **Description**             | **Example values**                                             |
-| ------------- | ---------------- | ------------------------------ | --------------------------- |
-| `ue_px`       | `unstruct_event` | JSON (URL-safe Base64 encoded) | The properties of the event | `eyAicHJvZHVjdF9pZCI6ICJBU08wMTA0MyIsICJwcmljZSI6IDQ5Ljk1IH0=` |
-| `ue_pr`       | `unstruct_event` | JSON                           | The properties of the event | `{ "product_id": "ASO01043", "price": 49.95 }`                 |
-
-The tracker can decide to pass the `ue_px` or the `ue_pr` parameter. Encoding properties into URL-safe Base64 allows is the recommended approach although does sacrifice readability.
-
-  </div>
-</details>
-
-
-TODO
-
-<details>
-<summary>Tracking and storage format</summary>
-
-Some self-describing events were predefined by Snowplow and are natively supported by tracking SDKs. For example, the mobile trackers automatically send [screen view](/docs/sources/trackers/mobile-trackers/tracking-events/screen-tracking/index.md) self-described events. You can find the schemas for these events [here](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow).
-
-To track your own _custom_ self-describing event, e.g. `viewed_product`, **you will first need to define its [schema](/docs/fundamentals/schemas/index.md)** (see [managing data structures](/docs/data-product-studio/data-structures/manage/index.md)). This schema might have fields such as `productId`, `brand`, etc.
-
-Then you can use one of our [tracking SDKs](/docs/sources/trackers/index.md). For example, with the [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md):
+This code shows how you could track a custom `article_share` event using the [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md):
 
 ```javascript
 window.snowplow('trackSelfDescribingEvent', {
   event: {
-    schema: 'iglu:com.acme_company/viewed_product/jsonschema/2-0-0',
+    schema: 'iglu:com.example_company/article_share/jsonschema/1-0-0',
     data: {
-      productId: 'ASO01043',
-      category: 'Dresses',
-      brand: 'ACME',
-      returning: true,
-      price: 49.95,
-      sizes: ['xs', 's', 'l', 'xl', 'xxl'],
-      availableSince: new Date(2013,3,7)
+      articleId: 'doc-12345',
+      shareMethod: 'email',
+      articleTitle: 'Getting Started with Snowplow'
     }
   }
 });
 ```
 
-In the data warehouse, these events still use the [standard columns](/docs/fundamentals/canonical-event/index.md) for general information, like timestamps. In addition, each type of self-describing event gets its own column (or its own table, in the case of Redshift) for event-specific fields defined in its schema. See the [structure of Snowplow data](/docs/fundamentals/canonical-event/index.md#self-describing-events) for more information.
+In addition to the [standard columns](/docs/fundamentals/canonical-event/index.md), each type of self-describing event gets its own warehouse column (or its own table, in the case of Redshift) for event-specific fields defined in its schema. See the [structure of Snowplow data](/docs/fundamentals/canonical-event/index.md#self-describing-events) for more information.
 
-</details>
+Check out the schema fundamentals page to learn how the trackers serialize the self-describing event data, and how it's loaded into the warehouse. ADD LINK
 
-
-## Entities
-
-```mdx-code-block
-import DefineCustomEntity from "@site/docs/reusable/define-custom-entity/_index.md"
-
-<DefineCustomEntity/>
-```
-
-Each individual entity is a self-describing JSON such as:
-
-```json
-{
-  "schema": "iglu:com.my_company/user/jsonschema/1-0-0",
-  "data": {
-    "fb_uid": "9999xyz"
-  }
-}
-```
-
-:::info
-
-`"iglu:com.my_company/user/jsonschema/1-0-0"` respresents a [self-describing JSON](/docs/api-reference/iglu/common-architecture/self-describing-jsons/index.md). It is used to validate the event data against a predefined JSON Schema as part of a Snowplow pipeline.
-
+:::info Terminology
+We originally called self-describing events "unstructured events", to distinguish them from structured events. This was misleading, because these events are actually more structured than structured events. The old term is deprecated, but you might still see it in some docs, APIs and database column names, such as `unstruct_event` or `ue`.
 :::
 
-<details>
-  <summary>How are context entities serialized in event payload?</summary>
-  <div>
+## Custom entities
 
-All entities attached to an event will be wrapped in an array by the user and passed to the tracker, which will wrap them in a self-describing JSON:
+All Snowplow events can be augmented with [entities](/docs/fundamentals/entities/index.md). Snowplow trackers add certain entities automatically. For example, the web trackers add a [`webPage` entity](/docs/sources/trackers/web-trackers/tracking-events/index.md#auto-tracked-entities) to all events by default.
 
-```json
-{
+Defining your own custom entities is useful when you have similar bits of business-specific context you want to attach to multiple different events. For example, if many of your events refer to a product or a user, you can create your own `user` and `product` entities with the fields you want. Check out our [tracking plan guide](/docs/fundamentals/tracking-design-best-practice/index.md) for best practice on designing entities.
 
-  // Tells Snowplow this is an array of custom contexts
-  "schema": "iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0",
-  "data": [
+As with custom self-describing events, if you want to create your own custom entity, you will need to [create a corresponding schema](/docs/data-product-studio/data-structures/manage/index.md). Snowplow uses the schema to validate that the JSON containing the entity properties is well-formed.
+
+Here's an example that shows how you could track custom `user` and `product` entities along with a page view event, using the [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md):
+
+```javascript
+// Track a page view with a custom entity
+window.snowplow('trackPageView', {
+  context: [
     {
-
-      // Tells Snowplow that this is a "user" context
-      "schema": "iglu:com.my_company/user/jsonschema/1-0-0",
-      "data": {
-
-        // The context data itself
-        "fb_uid": "9999xyz"
+      schema: 'iglu:com.example_company/user/jsonschema/1-0-0',
+      data: {
+        userId: 'user-12345',
+        accountType: 'enterprise',
+        subscriptionTier: 'premium'
       }
-    }
-  ]
-}
+    },
+    {
+      schema: 'iglu:com.example_company/product/jsonschema/1-2-1',
+      data: {
+        productId: 'ASO01043',
+        brand: 'ACME'
+      }
+    }]
+});
 ```
 
-Trackers can be configured to encode the context into URL-safe Base64 to ensure that no data is lost or corrupted. The downside is that the data will be bigger and less readable.
+Check out the schema fundamentals page to learn how the trackers serialize the entity data, and how it's loaded into the warehouse ADD LINK.
 
-| **Parameter** | **Table Column** | **Type**                       | **Description**             | **Example values**                                                                                                                                                                                                                                                                                             |
-| ------------- | ---------------- | ------------------------------ | --------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `co`          | `context`        | JSON                           | An array of custom contexts | `%7B%22schema%22:%22iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0%22,%22data%22:%5B%7B%22schema%22:%22iglu:com.my_company/user/jsonschema/1-0-0%22,%22data%22:%7B%22fb_uid%22:%229999xyz%22%7D%7D%5D%7D`                                                                                       |
-| `cx`          | `context`        | JSON (URL-safe Base64 encoded) | An array of custom contexts | `ew0KICBzY2hlbWE6ICdpZ2x1OmNvbS5zbm93cGxvd2FuYWx5dGljcy5zbm93cGxvdy9jb250ZXh0cy9qc29uc2NoZW1hLzEtMC0wJyANCiAgZGF0YToge1sNCiAgICB7DQogICAgICBzY2hlbWE6ICdpZ2x1OmNvbS5teV9jb21wYW55L3VzZXIvanNvbnNjaGVtYS8xLTAtMCcgDQogICAgICBkYXRhOiB7DQogICAgICAgIGZiX3VpZDogJzk5OTl4eXonDQogICAgICB9DQogICAgfQ0KICBdfQ0KfQ==` |
-
-:::note
-The exact field names may vary depending on your warehouse, for snowflake/bigquery/databricks you will find `unstruct_` or `context_` at the front and for bigquery you will see an extended version number at the end such as `1_0_0`.
+:::info Terminology
+In the past, what we now call "entity" or "entities" was called "context". You'll still find `context` used in many of the existing APIs, database column names, and documentation, especially to refer to a set of multiple entities. For example, the `context` parameter in the JavaScript tracker API above is an array of entities.
 :::
 
-  </div>
-</details>
+### Add custom entities to all events
+
+TODO
+global context - web, mobile, ?
+application entities is the same thing??
 
 ## Structured events
 
-
-:::info
-
+:::info Use self-describing events instead
 Structured event tracking is a legacy format used to track events that were not natively supported by Snowplow.
 
 We recommend using [self-describing events](#self-describing-events) for custom event tracking.
-
 :::
 
-As well as setting `e=se`, there are five custom event specific parameters that can be set:
+Structured events are simpler to create than custom self-describing events, as you don't need to define a [schema](/docs/fundamentals/schemas/index.md). However, they have a number of disadvantages:
 
-| **Table Column** | **Type** | **Description**                                                        | **Example values**            |
+|            | Structured events                             | Self-describing events                                 |
+| ---------- | --------------------------------------------- | ------------------------------------------------------ |
+| Format     | :x: Data must fit the fields below            | :white_check_mark: JSON, as complex as you want        |
+| Validation | :x: No validation (beyond field types)        | :white_check_mark: Schema includes validation criteria |
+| Meaning    | :x: Can only infer what each field represents | :white_check_mark: Schema includes field descriptions  |
+
+Structured events have five custom event specific parameters:
+| **Table column** | **Type** | **Description**                                                        | **Example values**            |
 | ---------------- | -------- | ---------------------------------------------------------------------- | ----------------------------- |
 | `se_category`    | text     | The category of event                                                  | `Ecomm`, `Media`              |
 | `se_action`      | text     | The action / event itself                                              | `add-to-basket`, `play-video` |
@@ -199,12 +107,7 @@ As well as setting `e=se`, there are five custom event specific parameters that
 | `se_property`    | text     | A property associated with either the action or the object             | `hd`                          |
 | `se_value`       | decimal  | A value associated with the user action                                | `13.99`                       |
 
-TODO
-
-<details>
-<summary>Tracking and storage format</summary>
-
-To track a structured event, use one of the [tracking SDKs](/docs/sources/trackers/index.md). For example, with the [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md):
+Here's how to track a structured event using the [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md):
 
 ```javascript
 snowplow('trackStructEvent', {
@@ -216,23 +119,4 @@ snowplow('trackStructEvent', {
 });
 ```
 
-In the data warehouse, these events still use the [standard columns](/docs/fundamentals/canonical-event/index.md) for general information, like timestamps. In addition, the above fields for all structured events are stored in a set of 5 standard columns. See the [structure of Snowplow data](/docs/fundamentals/canonical-event/index.md#structured-events) for more information.
-
-</details>
-
-
-Structured events are simpler to create than custom self-describing events, as you don't need to define a [schema](/docs/fundamentals/schemas/index.md). However, they have a number of disadvantages:
-
-|            | Structured events                             | Self-describing events                                 |
-| ---------- | --------------------------------------------- | ------------------------------------------------------ |
-| Format     | :x: Data must fit the fields below            | :white_check_mark: JSON, as complex as you want        |
-| Validation | :x: No validation (beyond field types)        | :white_check_mark: Schema includes validation criteria |
-| Meaning    | :x: Can only infer what each field represents | :white_check_mark: Schema includes field descriptions  |
-
-Structured events have five fields:
-
-- `Category`: the name for the group of objects you want to track
-- `Action`: a string used to define the user action for the category of object
-- `Label`: an optional string which identifies the specific object being actioned
-- `Property`: an optional string describing the object or the action performed on it
-- `Value`: an optional numeric value to quantify or further describe the user action
+In the warehouse, data tracked for any of these event-specific fields is stored in standard columns. See the [structure of Snowplow data](/docs/fundamentals/canonical-event/index.md#structured-events) for more information.

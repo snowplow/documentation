@@ -17,11 +17,11 @@ If you are interested in an overview of the properties in the atomic events tabl
 
 Snowplow data is designed to be able to tailor to your business needs using custom events and context entities.
 
-| Category                                                                             | Description                                                                                                   |
-| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------- |
-| [Context entities](/docs/events/custom-events/context-entities/index.md)             | Add information to events using reusable entities.                                                            |
-| [Self-describing events](/docs/events/custom-events/self-describing-events/index.md) | Track custom events with schemas.                                                                             |
-| [Structured events](/docs/events/custom-events/structured-events/index.md)           | Track custom events without schemas (not recommended – we recommend tracking self-describing events instead). |
+| Category                                                                                    | Description                                                                                                   |
+| ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- |
+| [Context entities](/docs/events/custom-events/index.md#custom-context-entities)             | Add information to events using reusable entities.                                                            |
+| [Self-describing events](/docs/events/custom-events/index.md#custom-self-describing-events) | Track custom events with schemas.                                                                             |
+| [Structured events](/docs/events/custom-events/index.md#structured-events)                  | Track custom events without schemas (not recommended – we recommend tracking self-describing events instead). |
 
 ## Out-of-the-box data
 

@@ -42,7 +42,7 @@ Additionally, [entities can be attached to events](#event-entity-tracking) which
 
 [Structuring your data with schemas](/docs/fundamentals/schemas/index.md) to perform self-describing event tracking is the defacto way to track events with Snowplow and allows any arbitrary name: value pairs to be captured with the event.
 
-To learn about self-describing events and how they are serialized in the tracker payload, [visit this page](/docs/events/custom-events/self-describing-events/index.md).
+To learn about self-describing events and how they are serialized in the tracker payload, visit this page. TODO ADD LINK
 
 ### Other Events
 
@@ -122,7 +122,7 @@ As well as setting `e=se`, there are five custom event specific parameters that 
 ### Event Entity Tracking
 
 Custom entities can be used to add additional context to an event.
-To learn about context entities and how they are serialized in the event payload, [visit this page](/docs/events/custom-events/context-entities/index.md).
+To learn about context entities and how they are serialized in the event payload, visit this page. TODO ADD LINK
 
 ## Common Parameters
 

@@ -1,7 +1,7 @@
 ---
 title: "Introduction to the structure of Snowplow data"
 description: A summary of the Snowplow events table and its fields, including custom events and entities
-sidebar_label: "What the data looks like TODO"
+sidebar_label: "Snowplow data structure"
 sidebar_position: 4
 ---
 
@@ -350,7 +350,7 @@ For more information on this topic please check out the relevant [Tracking Docum
 
 \* These fields are only required for `struct` events.
 
-For more information on this topic please check out the relevant [Tracking Documentation](/docs/events/custom-events/structured-events/index.md).
+For more information on this topic please check out the relevant [Tracking Documentation](/docs/events/custom-events/index.md#structured-events).
 
 
 #### Self-describing events
@@ -361,7 +361,7 @@ For each type of self-describing event, there will be a dedicated column (or tab
 
 See [querying data](/docs/destinations/warehouses-lakes/querying-data/index.md#self-describing-events) for more details on the structure and how to query it in different warehouses. You might also want to check [how schema definitions translate to the warehouse](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md).
 
-For more information on this topic please check out the relevant [Tracking Documentation](/docs/events/custom-events/self-describing-events/index.md).
+For more information on this topic please check out the relevant [Tracking Documentation](/docs/events/custom-events/index.md#custom-self-describing-events).
 
 #### Entities
 
@@ -371,7 +371,7 @@ For each type of entity, there will be a dedicated column (or table, in case of 
 
 See [querying data](/docs/destinations/warehouses-lakes/querying-data/index.md#entities) for more details on the structure and how to query it in different warehouses. You might also want to check [how schema definitions translate to the warehouse](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md).
 
-For more information on this topic please check out the relevant [Tracking Documentation](/docs/events/custom-events/context-entities/index.md).
+For more information on this topic please check out the relevant [Tracking Documentation](/docs/events/custom-events/index.md#custom-entities).
 
 
 ### Out-of-the-box self-describing events and entities

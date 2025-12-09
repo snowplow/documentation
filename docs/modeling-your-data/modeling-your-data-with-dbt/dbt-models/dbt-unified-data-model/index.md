@@ -7,13 +7,16 @@ description: "The Snowplow Unified dbt Package"
 
 ```mdx-code-block
 import Badges from '@site/src/components/Badges';
+import BadgeGroup from '@site/src/components/BadgeGroup';
 import ThemedImage from '@theme/ThemedImage';
 import DocCardList from '@theme/DocCardList';
 ```
 
-<Badges badgeType="dbt-package Release" pkg="unified"></Badges>&nbsp;
-<Badges badgeType="Actively Maintained"></Badges>&nbsp;
+<BadgeGroup>
+<Badges badgeType="dbt-package Release" pkg="unified"></Badges>
+<Badges badgeType="Actively Maintained"></Badges>
 <Badges badgeType="SPAL"></Badges>
+</BadgeGroup>
 
 **The package source code can be found in the [snowplow/dbt-snowplow-unified repo](https://github.com/snowplow/dbt-snowplow-unified), and the docs for the [model design here](https://snowplow.github.io/dbt-snowplow-unified/#!/overview/snowplow_unified).**
 

@@ -7,11 +7,14 @@ description: "The Snowplow Ecommerce dbt Package"
 
 ```mdx-code-block
 import Badges from '@site/src/components/Badges';
+import BadgeGroup from '@site/src/components/BadgeGroup';
 ```
 
-<Badges badgeType="dbt-package Release" pkg="ecommerce"></Badges>&nbsp;
+<BadgeGroup>
+<Badges badgeType="dbt-package Release" pkg="ecommerce"></Badges>
 <Badges badgeType="Actively Maintained"></Badges>
 <Badges badgeType="SPAL"></Badges>
+</BadgeGroup>
 
 **The package source code can be found in the [snowplow/dbt-snowplow-ecommerce repo](https://github.com/snowplow/dbt-snowplow-ecommerce), and the docs for the [model design here](https://snowplow.github.io/dbt-snowplow-ecommerce/#!/overview/snowplow_ecommerce).**
 

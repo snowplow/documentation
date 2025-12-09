@@ -1,91 +1,64 @@
-# Documentation guidelines for Claude
+# Documentation rules for Claude
 
-## Quick reference (30 seconds)
-* US spelling, active voice, technical tone (no marketing language)
-* File names: kebab-case, always create `index.md` in new directories
-* Internal links end with `/index.md`, use absolute paths from docs root
-* Headings: sentence case, H2/H3 only, 3-5 H2 sections max per page
-* Snowplow terminology: "entity" not "context"
-* Every section starts with prose before lists or technical details
+## Writing style
+* All documentation is written in Markdown (MDX).
+* Use US English spelling.
+* Use professional, technical tone. Never use marketing language.
+* Use active voice: "the Collector receives events".
+* Address readers as "you". Refer to the reader's users as "the user".
+* Link to concepts in `/docs/fundamentals/`. Never re-explain them inline.
+* Structure feature pages as: description → when/why → basic example → configuration.
+* For style reviews, read the extended style guide at `src/pages/style-guide/llm/index.md`.
 
-## ALWAYS FOLLOW THESE RULES
+## Headings and organization
+* Use sentence case: "Configure how events are sent".
+* Use imperative voice: "Configure the tracker" not "Tracker configuration".
+* Use only H2 (##) and H3 (###). Use H4 (####) rarely. Never use H1, H5, or H6.
+* Precede every heading with at least one paragraph of explanatory text.
+* Limit pages to 3-5 H2 sections. Create a new page if content exceeds this.
 
-### Writing style
-* US English spelling: "organize" not "organise", "modeled" not "modelled"
-* Professional, technical tone - NO marketing language
-* Active voice: "the Collector receives events"
-* Use "you" for readers, "the user" for the reader's users
-* Cross-reference concepts, don't explain them - link to `/docs/fundamentals/`
+## Grammar and formatting
+* Use the Oxford comma: "events, entities, and schemas".
+* Use `backticks` for code, file names, and table/field names.
+* Use **bold** only for UI elements (buttons, page titles).
+* **CRITICAL**: Use lowercase after colons in list items: `Like: this` not `Like: This`.
 
-### Grammar and formatting
-* Double quotes (") not smart quotes
-* Oxford comma: "events, entities, and schemas"
-* "Set up" (verb), "setup" (noun/adj); "log in" (verb), "login" (noun/adj)
-* Use `backticks` for code, file names, table/field names
-* **Bold** for UI elements only
-* Use "and" not "&"
-* Prefer "*" for unordered lists
-* For list items, treat the punctuation like a sentence, not like a heading (`Like: this` not `Like: This`)
-* **CRITICAL**: bold labels followed by colons should have lowercase first word after colon: `**Schema validation**: test your schemas` NOT `**Schema validation**: Test your schemas`
+## Snowplow terminology
+* **Always capitalized**: Data Product Studio, Snowtype, Snowplow CDI, Signals
+* **Never capitalized**: entities, events, schemas, data structures, data products
+* Use "entity", never "context". Use "self-describing event", never "unstructured event".
 
-### File structure ⚠️ CRITICAL
-* File names: kebab-case (`google-tag-manager-server-side.md`)
-* **Main topics: always `index.md`** - when creating a new page, ALWAYS create a new directory with the page name and put `index.md` inside it
-* Example: create `/segment-audience-hub/index.md`, NOT `segment-audience-hub.md`
-* **ALL internal links end with `/index.md`** for validation
-* Absolute paths from docs root: `/docs/sources/trackers/.../index.md`
-* Split long pages into multiple files
-* **VERIFY LINKS EXIST**: always check that internal links point to actual files before publishing. Search the docs directory to confirm paths are correct.
+## File structure ⚠️ CRITICAL
+* Use kebab-case for file names: `google-tag-manager-server-side.md`
+* **Always create a directory with `index.md` inside.** Never create standalone `.md` files for main topics.
+* Example: Create `/segment-audience-hub/index.md`, not `segment-audience-hub.md`.
+* **End all internal links with `/index.md`** for validation.
+* Use absolute paths from docs root: `/docs/sources/trackers/.../index.md`
+* **Verify every link exists.** Search the docs directory to confirm paths before publishing.
 
-### Headings and organization
-* Sentence case: "Configuring how events are sent"
-* Only H2 (##), H3 (###), rarely H4 (####)
-* Paragraph after frontmatter, not heading
-* Not too many headings per page - aim for 3-5 H2 sections maximum
-* Each heading should have substantial content (multiple paragraphs) underneath it where possible
-* Avoid fragmenting information across many small sections - consolidate related concepts
-* Every section should start with explanatory prose before lists or technical details
-* Mix prose and lists appropriately: use prose to explain concepts, lists for configuration options or step-by-step items
-
-### Snowplow terminology
-* **Capitalized**: Data Product Studio, Snowtype, Snowplow CDI, Signals
-* **Context-capitalized**: Collector, Enrich, specific Loaders
-* **Not capitalized**: entities, events, schemas, data structures
-* Use "entity" not "context", "self-describing event" not "unstructured event"
-* "JavaScript tracker", "native mobile trackers"
-
-### Required frontmatter
+## Required frontmatter
 ```yaml
 ---
-title: "Page title"                             # Sentence case
+title: "Full page title"                        # Descriptive title in sentence case
 sidebar_position: 10                            # Controls ordering
-sidebar_label: "Short title"                    # If different from title
-description: "One to two sentences describing the content for marketing purposes. Should be grammatically correct."  # For SEO purposes
-keywords: ["keyword1", "keyword2", "keyword3"]  # Marketing keywords
-date: "2025-09-09"                              # File creation date (YYYY-MM-DD)
+sidebar_label: "Short title"                    # To display in navigation sidebar
+description: "One to two sentences for SEO."    # Grammatically correct
+keywords: ["keyword1", "keyword2", "keyword3"]  # Marketing/SEO keywords
+date: "2025-09-09"                              # Creation date (YYYY-MM-DD)
 ---
 ```
 
----
-
-## REFERENCE SECTIONS
-
-### Quick patterns
-* Information architecture: conceptual docs in `/docs/fundamentals/`, implementation in feature directories
-* Feature structure: description → when/why → basic example → configuration → advanced
-* Lists: introduce with colon, lowercase first word after colon (treat like continuation of sentence), no ending punctuation unless multiple sentences
-* Example: `* **API Key**: your authentication key` NOT `* **API Key**: Your authentication key`
-* Tables: capital letters, consistent punctuation, `code` stays as code
-
-### Key concept links (always use these)
+## Key concept links
+Always link to these paths:
 * Events: `/docs/fundamentals/events/index.md`
 * Self-describing events: `/docs/fundamentals/events/index.md#self-describing-events`
 * Entities: `/docs/fundamentals/entities/index.md`
 * Schemas: `/docs/fundamentals/schemas/index.md`
 * Failed events: `/docs/fundamentals/failed-events/index.md`
 
-### Platform-specific content
+## Platform-specific content
 Use tabs for cross-platform docs:
+
 ```mdx
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -100,7 +73,7 @@ import TabItem from '@theme/TabItem';
 </Tabs>
 ```
 
-### Admonitions
+## Admonitions
 ```mdx
 :::note
 General information, context, or clarifications
@@ -111,53 +84,19 @@ Best practices, recommendations, or encouraging specific actions
 :::
 
 :::warning
-Important cautions about data loss, security, or breaking changes
+Important cautions about data loss or security risks
 :::
 ```
 
-**When to use each type:**
-* **Note**: background info, alternative approaches, version differences
-* **Tip**: performance improvements, recommended workflows, pro tips
-* **Warning**: data loss risks, security considerations
+## Images
+* Use descriptive filenames and alt text.
+* Place images in an `images/` subdirectory.
 
-### Images
-* Formats: `.webp` (preferred), `.png`, `.jpg`
-* Descriptive filenames and alt text
-* Max size: 2000px × 500px
-* Place in `images/` subdirectory
+## Tutorials
+See `/tutorials/_README.md` for tutorial-specific guidelines.
 
-### Quality checklist
-**Content:**
-- [ ] US spelling throughout
-- [ ] No marketing language, technical tone maintained
-- [ ] Concepts linked to fundamentals, not re-explained
-- [ ] Every section starts with prose explanation before lists
-- [ ] Information consolidated, not fragmented across small sections
-
-**Structure:**
-- [ ] Proper frontmatter with title, sidebar_position, description
-- [ ] 3-5 H2 sections maximum, each with substantial content
-- [ ] Sentence case headings, H2/H3 only
-- [ ] Platform tabs where needed
-
-**Technical:**
-- [ ] Links end with `/index.md`, absolute paths used
-- [ ] Terminology consistent (entity not context, JavaScript tracker)
-- [ ] Code/UI formatting correct (`backticks`, **bold UI**)
-
-### Common pitfalls to avoid
-* Don't explain fundamental concepts (link to Fundamentals instead)
-* Don't use marketing language
-* Don't use passive voice unnecessarily
-* Don't use more than 3 heading levels
-* Don't end list items with periods (unless multiple sentences)
-* Don't use "&" instead of "and"
-
-### Tutorials
-For tutorial-specific guidelines, see `/tutorials/_README.md`
-
-### Development workflow
-* **Package manager**: use `yarn` commands, not `npm`
-* **Development server**: `yarn start` or `yarn dev`
-* **Build**: `yarn build`
-* **Install dependencies**: `yarn install` or `yarn add <package>`
+## Development workflow
+* Use `yarn`, not `npm`.
+* Start dev server: `yarn start` or `yarn dev`
+* Build: `yarn build`
+* Install dependencies: `yarn install` or `yarn add <package>`

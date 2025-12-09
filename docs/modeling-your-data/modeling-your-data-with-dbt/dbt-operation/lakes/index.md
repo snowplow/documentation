@@ -8,7 +8,7 @@ description: "How to run our models on lakehouses"
 import Badges from '@site/src/components/Badges';
 ```
 
-<Badges badgeType="Early Release"></Badges>&nbsp;
+<Badges badgeType="Early Release"></Badges>
 
 :::info
 

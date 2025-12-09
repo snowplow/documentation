@@ -7,6 +7,7 @@ sidebar_position: 30
 ```mdx-code-block
 import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
+import BadgeGroup from '@site/src/components/BadgeGroup';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import MarkdownTableToMuiDataGrid from '@site/src/components/MarkdownTableAsMui'
@@ -16,9 +17,11 @@ export const datagridProps = {
   };
 ```
 
-<Badges badgeType="dbt-package Release" pkg="attribution"></Badges>&nbsp;
-<Badges badgeType="Early Release"></Badges>&nbsp;
+<BadgeGroup>
+<Badges badgeType="dbt-package Release" pkg="attribution"></Badges>
+<Badges badgeType="Early Release"></Badges>
 <Badges badgeType="SPAL"></Badges>
+</BadgeGroup>
 
 :::warning
 Make sure you upgrade to [v.0.4.0](https://github.com/snowplow/dbt-snowplow-unified/releases/tag/0.4.0) of Unified Package if you would like to use the v0.2.0 of Attribution Package

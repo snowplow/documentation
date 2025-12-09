@@ -7,14 +7,17 @@ sidebar_position: 800
 
 ```mdx-code-block
 import Badges from '@site/src/components/Badges';
+import BadgeGroup from '@site/src/components/BadgeGroup';
 import ThemedImage from '@theme/ThemedImage';
 import {versions} from '@site/src/componentVersions';
 import Apperrors from "@site/docs/reusable/data-modeling/app-errors/_index.md"
 ```
 
-<Badges badgeType="dbt-package Release" pkg="mobile"></Badges>&nbsp;
-<Badges badgeType="Maintained"></Badges>&nbsp;
+<BadgeGroup>
+<Badges badgeType="dbt-package Release" pkg="mobile"></Badges>
+<Badges badgeType="Maintained"></Badges>
 <Badges badgeType="SCL"></Badges>
+</BadgeGroup>
 
 :::info
 

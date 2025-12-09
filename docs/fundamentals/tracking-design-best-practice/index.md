@@ -34,7 +34,7 @@ For example, an `Ecommerce Checkout Flow` data product may contain three event s
 
 Note that the `cart` entity data structure is reused across event specifications, this promotes consistency in your tracking design and makes analysis easier.
 
-Additionally you can assign entities to [source applications](/docs/data-product-studio/source-applications/index.md) to document which entities are expected for each event within that application, these are also called global entities. An example would be assigning a `user` entity to a mobile application to ensure that user information is always captured with events from that application.
+Additionally you can assign entities to [source applications](/docs/data-product-studio/source-applications/index.md) to document which entities are expected for each event within that application, these are also called [global entities](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/global-context/index.md). An example would be assigning a `user` entity to a mobile application to ensure that user information is always captured with events from that application.
 
 ## Naming conventions for tracking plans
 
@@ -70,12 +70,12 @@ Examples of Data Products include:
 * `Mobile App User Engagement`: contains events related to user interactions within a mobile application
 * `SaaS Application Usage`: contains events related to user actions within a SaaS platform
 
-Bad examples of Data Products would be overly broad or vague groupings, such as `All User Events` or `Miscellaneous Events`, which do not provide clear context or ownership or overly specific groupings that limit reusability, such as `Product Page Views for Campaign X`.
+Bad examples of Data Products would be overly broad or vague groupings, such as `All User Events` or `Miscellaneous Events`, which do not provide clear context or ownership. Another example would be overly specific groupings that limit reusability, such as `Product Page Views for Campaign X`.
 
 When defining Data Products, consider the following best practices:
 * **Clear purpose**: Each Data Product should have a well-defined purpose and scope
 * **Ownership**: Assign clear ownership to each Data Product to ensure accountability for data quality and governance
-* **Logical grouping**: Group related events that share a common business domain or use-case
+* **Logical grouping**: Group related events that share a common business domain or use-case. Consider a group that reflects how the data will be used in analysis.
 * **Reusability**: Design Data Products to promote reusability of event and entity data structures across different tracking plans
 
 ## Event Specification best practices
@@ -92,7 +92,7 @@ A bad example would be an `Ecommerce Action` Event Specification that tries to c
 
 ## Entity design best practices
 
-It is recommended that you adopt an "entity-first" approach to design. This means starting by defining the key entities in your business domain before defining the events that interact with those entities. This approach helps ensure consistency and reusability across your tracking design.
+**It is recommended that you adopt an "entity-first" approach to design**. This means starting by defining the key entities in your business domain before defining the events that interact with those entities. This approach helps ensure consistency and reusability across your tracking design.
 
 If a piece of information is likely to be relevant to multiple different events, it belongs in an entity, not as a property of a single event. In fact, we often recommend not including any properties directly on event data structures, and instead placing all information in entities unless truly necessary.
 
@@ -110,13 +110,13 @@ A common challenge in defining event schemas is the choice of their granularity.
 
 In some cases, it may be beneficial to group related actions into a single event schema. This means that a single event schema captures multiple types of actions, often distinguished by a property within the schema.
 
-For example, you might define a single `ecommerce_action` event schema that includes a `type` property to distinguish between `view_product`, `add_to_cart`, `checkout_started`, and `purchase_completed` actions.
+For example, you might define a single `ecommerce_action` event schema that includes a `type` property to distinguish between `view_product`, `add_to_cart`, `checkout_started`, and `purchase_completed` actions. Another example could be a `user_interaction` event schema that captures various user actions like `click`, `scroll`, and `form_submit`, with a `interaction_type` property to differentiate them.
 
 This approach can be useful when:
 * **Analysis** The actions are closely related and often analyzed together
 * **Simplicity** You want to reduce the number of event schemas and columns in your data warehouse
 
-It is you need to ensure the correct `type` property is set for each action and the allowed values are enforced through strong governance principles. This can be managed in Snowplow through Event Specifications with [property instructions](/docs/data-product-studio/event-specifications/ui/index.md#properties). Tools like [Snowtype](/docs/data-product-studio/snowtype/index.md) can also help simplify this complexity during implementation.
+Continuing the example from above, it is important to ensure the correct `type` property is set for each action and the allowed values are enforced through strong governance principles. This can be managed in Snowplow through Event Specifications with [property instructions](/docs/data-product-studio/event-specifications/ui/index.md#properties). Tools like [Snowtype](/docs/data-product-studio/snowtype/index.md) can also help simplify this complexity during implementation.
 
 ### Approach 2: One event schema per action
 

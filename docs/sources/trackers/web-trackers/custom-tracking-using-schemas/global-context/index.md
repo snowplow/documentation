@@ -1,6 +1,6 @@
 ---
-title: "Declarative entities with global context for web trackers"
-sidebar_label: "Declarative entities with Global Context"
+title: "Global context for web trackers"
+sidebar_label: "Global context"
 date: "2022-08-30"
 sidebar_position: 20
 ---
@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-**Global context** lets you define your own contexts once (e.g. on tracker initialization) and then have this context sent with every single event subsequently recorded on the page. This saves having to manually build and send the context array with every single event fired.
+**Global context** (also known as global entities) lets you define your own contexts once (e.g. on tracker initialization) and then have this context sent with every single event subsequently recorded on the page. This saves having to manually build and send the context array with every single event fired.
 
 Here is an example that adds a global context entity to all subsequently tracked events:
 

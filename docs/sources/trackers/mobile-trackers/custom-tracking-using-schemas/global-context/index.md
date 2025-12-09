@@ -1,6 +1,6 @@
 ---
-title: "Declarative entities with global context for the native mobile trackers"
-sidebar_label: "Declarative entities with Global Context"
+title: "Global context for mobile trackers"
+sidebar_label: "Global context"
 date: "2022-08-30"
 sidebar_position: 20
 ---

@@ -53,33 +53,21 @@ You can confirm events are reaching Braze by checking the following pages in you
 1. Query Builder: in Braze, navigate to **Analytics** > **Query Builder**. You can write queries on the following tables to preview the data forwarded from Snowplow: `USER_BEHAVIORS_CUSTOMEVENT_SHARED`, `USERS_BEHAVIORS_PURCHASE_SHARED`.
 2. API Usage Dashboard: in Braze, navigate to **Settings** > **API and Identifiers** to see a chart of API usage over time. You can filter specifically for the API key used by Snowplow and see both successes and failures.
 
+## Sending custom properties
+
+You can send custom properties beyond the standard fields defined in the schema reference below. The structure depends on which Braze object type you're using:
+
+- **User attributes**: add as top-level fields (e.g., `subscription_tier`, `loyalty_points`)
+- **Event properties**: nest under `properties` object (e.g., `properties.plan_type`, `properties.feature_flag`)
+- **Purchase properties**: nest under `properties` object (e.g., `properties.color`, `properties.size`)
+
+For property names containing spaces, use bracket notation (e.g., `["account type"]` or `properties["campaign source"]`).
+
+See Braze's [Event Object documentation](https://www.braze.com/docs/api/objects_filters/event_object) for details on supported data types, property naming requirements, and payload size limits. See [Creating forwarders](/docs/destinations/forwarding-events/creating-forwarders/index.md) for details on configuring field mappings.
+
 ## Limitations
 
 **Rate limits:** Braze enforces a rate limit of 3,000 API calls every three seconds for the Track Users API. Because Snowplow does not currently support batching for event forwarders, this API rate limit also functions as the event rate limit. If your input throughput exceeds 3,000 events per three seconds, you will experience increased latency.
-
-## Sending custom properties
-
-The schema reference below defines the standard fields supported by the Braze integration. You can also send custom properties beyond these standard fields. The structure depending on which Braze object type you're using.
-
-### Custom user attributes
-
-Custom user attributes are added as top-level fields in the attributes object, alongside Braze's standard user profile fields. When configuring your forwarder, add additional field mappings with the destination field name as your custom attribute name (e.g., `subscription_tier`, `loyalty_points`, `preferred_category`).
-
-Custom attributes support strings, integers, floats, booleans, dates, arrays, and nested objects.
-
-### Custom event properties
-
-Custom event properties are nested under a `properties` object within each event. When configuring your forwarder, add additional field mappings with the destination field name formatted as `properties.your_custom_field` (e.g., `properties.plan_type`, `properties.feature_flag`).
-
-Event properties support numbers, booleans, strings (up to 255 characters), datetimes, arrays, and objects. Property names must be non-empty strings under 255 characters and cannot start with a dollar sign or use the reserved keys `time` or `event_name`. The total event property payload can be up to 100 KB. For property names containing spaces, use bracket notation (e.g., `properties["campaign source"]`).
-
-### Custom purchase properties
-
-Custom purchase properties are nested under a `properties` object within each purchase, similar to events. When configuring your forwarder, add additional field mappings with the destination field name formatted as `properties.your_custom_field` (e.g., `properties.color`, `properties.size`, `properties.shipping_method`).
-
-Purchase properties support the same data types as event properties, with a maximum payload size of 50 KB per purchase. For property names containing spaces, use bracket notation.
-
-You can extract custom property values from any field in your Snowplow events, including event properties, entities, or custom fields. See [Creating forwarders](/docs/destinations/forwarding-events/creating-forwarders/index.md) for details on configuring field mappings.
 
 ## Schema reference
 

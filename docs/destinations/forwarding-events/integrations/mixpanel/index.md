@@ -53,17 +53,11 @@ When a user logs in and your event contains a `user_id` value, Mixpanel will aut
 
 ## Sending custom properties
 
-The schema reference below defines the standard fields supported by the Mixpanel integration. You can also send custom event properties beyond these standard fields by mapping them within the `properties` object in the field mapping configuration.
+You can send custom event properties beyond the standard fields defined in the schema reference below. Custom properties are nested under the `properties` object. When configuring your forwarder, add field mappings formatted as `properties.your_custom_field` (e.g., `properties.plan_type`, `properties.feature_flag`).
 
-Custom properties are nested under the top-level `properties` object in the Mixpanel API. When configuring your forwarder, add additional field mappings with the destination field name formatted as `properties.your_custom_field`. For example:
+For property names containing spaces, use bracket notation (e.g., `properties["referred by"]`).
 
-- `properties.plan_type` to send subscription plan information
-- `properties.feature_flag` to track feature flag states
-- `properties.campaign_id` to include marketing campaign identifiers
-
-For property names containing spaces, use bracket notation instead of dot notation. For example, use `properties["referred by"]` rather than `properties.referred by`.
-
-You can extract these values from any field in your Snowplow events, including event properties, entities, or custom fields. See [Creating forwarders](/docs/destinations/forwarding-events/creating-forwarders/index.md) for details on configuring field mappings.
+See Mixpanel's [Import Events API documentation](https://developer.mixpanel.com/reference/import-events) for details on supported data types and property requirements. See [Creating forwarders](/docs/destinations/forwarding-events/creating-forwarders/index.md) for details on configuring field mappings.
 
 ## Schema reference
 

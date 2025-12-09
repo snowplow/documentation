@@ -42,18 +42,3 @@ Snowplow also provides out-of-the-box events, context entities and atomic event 
 | [Device and browser information](/docs/events/ootb-data/device-and-browser/index.md)                             | Information about the device or browser of the user.                                          |
 | [User and session identification and stitching](/docs/events/ootb-data/user-and-session-identification/index.md) | Overview of the user and session identifiers provided by the trackers and how to stitch them. |
 | [Geolocation information](/docs/events/ootb-data/geolocation/index.md)                                           | Geolocation information attached to events.                                                   |
-
-<details>
-  <summary>Going deeper into the event properties</summary>
-  <div>
-
-These pages are for you if you want to understand the tracker payload in more detail, and especially if you are building your own tracker. In the latter case, utilizing the parameters documented here will ensure that your tracker works with the rest of the Snowplow stack.
-
-| Category                                                                | Description                                          |
-| ----------------------------------------------------------------------- | ---------------------------------------------------- |
-| [Event parameters](/docs/events/going-deeper/event-parameters/index.md) | Protocol of all the parameters in the event payload. |
-| [HTTP headers](/docs/events/going-deeper/http-headers/index.md)         | Collecting HTTP request headers and cookies.         |
-| [Example requests](/docs/events/going-deeper/example-requests/index.md) | Example tracker requests with sample payload.        |
-
-  </div>
-</details>

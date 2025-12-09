@@ -93,7 +93,7 @@ Emitters must conform to an [`Emitter` interface](https://github.com/snowplow/sn
 interface Emitter {
   flush: () => void;
   input: (payload: PayloadDictionary) => void;
-  /** Set if the requests from the emitter should be anonymized. Read more about anonymization used at https://docs.snowplow.io/docs/events/going-deeper/http-headers/. Available from 3.21.0 onwards */
+  /** Set if the requests from the emitter should be anonymized. Read more about anonymization used at https://docs.snowplow.io/docs/events/http-requests/. Available from 3.21.0 onwards */
   setAnonymization?: (shouldAnonymize: boolean) => void;
 }
 ```

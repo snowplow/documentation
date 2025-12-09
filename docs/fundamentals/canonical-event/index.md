@@ -11,7 +11,7 @@ import TabItem from '@theme/TabItem';
 
 ```
 
-TODO make this page explicitly about modeling
+TODO make this page explicitly about modeling?
 
 In order to analyze Snowplow data, it is important to understand how it is structured. We have tried to make the structure of Snowplow data as simple, logical, and easy-to-query as possible.
 

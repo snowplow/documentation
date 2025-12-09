@@ -1,7 +1,7 @@
 ---
 title: "Introduction to the structure of Snowplow data"
 description: A summary of the Snowplow events table and its fields, including custom events and entities
-sidebar_label: "What the data looks like"
+sidebar_label: "What the data looks like TODO"
 sidebar_position: 4
 ---
 
@@ -10,6 +10,8 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
 ```
+
+TODO make this page explicitly about modeling
 
 In order to analyze Snowplow data, it is important to understand how it is structured. We have tried to make the structure of Snowplow data as simple, logical, and easy-to-query as possible.
 

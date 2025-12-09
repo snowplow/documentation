@@ -73,10 +73,10 @@ Examples of Data Products include:
 Bad examples of Data Products would be overly broad or vague groupings, such as `All User Events` or `Miscellaneous Events`, which do not provide clear context or ownership. Another example would be overly specific groupings that limit reusability, such as `Product Page Views for Campaign X`.
 
 When defining Data Products, consider the following best practices:
-* **Clear purpose**: Each Data Product should have a well-defined purpose and scope
-* **Ownership**: Assign clear ownership to each Data Product to ensure accountability for data quality and governance
-* **Logical grouping**: Group related events that share a common business domain or use-case. Consider a group that reflects how the data will be used in analysis.
-* **Reusability**: Design Data Products to promote reusability of event and entity data structures across different tracking plans
+* **Clear purpose**: each Data Product should have a well-defined purpose and scope
+* **Ownership**: assign clear ownership to each Data Product to ensure accountability for data quality and governance
+* **Logical grouping**: group related events that share a common business domain or use-case. Consider a group that reflects how the data will be used in analysis.
+* **Reusability**: design Data Products to promote reusability of event and entity data structures across different tracking plans
 
 ## Event Specification best practices
 
@@ -84,9 +84,9 @@ Event Specifications represent the key business events you are tracking. They co
 
 For example, an `Add To Cart` Event Specification would represent the action of a user adding a product to their shopping cart. It would include:
 * A clear name: `Add To Cart`
-* A description of the event's purpose: "Tracks when a user adds a product to their shopping cart."
-* Trigger conditions: "Fired when the user clicks the 'Add to Cart' button on a product page."
-* Associated data structures: an `add_to_cart` event data structure and associated `product` and `cart` entity data structures.
+* A description of the event's purpose: "tracks when a user adds a product to their shopping cart"
+* Trigger conditions: "fired when the user clicks the 'Add to Cart' button on a product page"
+* Associated data structures: an `add_to_cart` event data structure and associated `product` and `cart` entity data structures
 
 A bad example would be an `Ecommerce Action` Event Specification that tries to capture multiple actions like adding to cart, starting checkout, and completing a purchase in a single event. This can lead to confusion in implementation and complexity in analysis.
 
@@ -113,8 +113,8 @@ In some cases, it may be beneficial to group related actions into a single event
 For example, you might define a single `ecommerce_action` event schema that includes a `type` property to distinguish between `view_product`, `add_to_cart`, `checkout_started`, and `purchase_completed` actions. Another example could be a `user_interaction` event schema that captures various user actions like `click`, `scroll`, and `form_submit`, with a `interaction_type` property to differentiate them.
 
 This approach can be useful when:
-* **Analysis** The actions are closely related and often analyzed together
-* **Simplicity** You want to reduce the number of event schemas and columns in your data warehouse
+* **Analysis**: the actions are closely related and often analyzed together
+* **Simplicity**: you want to reduce the number of event schemas and columns in your data warehouse
 
 Continuing the example from above, it is important to ensure the correct `type` property is set for each action and the allowed values are enforced through strong governance principles. This can be managed in Snowplow through Event Specifications with [property instructions](/docs/data-product-studio/event-specifications/ui/index.md#properties). Tools like [Snowtype](/docs/data-product-studio/snowtype/index.md) can also help simplify this complexity during implementation.
 
@@ -129,7 +129,7 @@ For example, in an e-commerce application, you might have separate event schemas
 * `purchase_completed`
 
 This approach has several advantages:
-* **Clarity**: Each event schema has a clear purpose, making it easier to understand
-* **Flexibility**: You can evolve each event schema independently, without affecting others
+* **Clarity**: each event schema has a clear purpose, making it easier to understand
+* **Flexibility**: you can evolve each event schema independently, without affecting others
 
 However, this approach may lead to a large number of event schemas if your application has many distinct actions and can make analysis more complex.

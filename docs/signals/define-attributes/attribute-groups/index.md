@@ -88,7 +88,7 @@ If Signals then processes a new event that calculates the attribute again, or ma
 ## Testing the attribute definitions
 
 :::note Warehouse Connection 
-A warehouse connection is required to test attribute definitions
+A warehouse connection is required to test attribute definitions.
 :::
 
 After defining one or more [attributes](/docs/signals/define-attributes/attributes/index.md) for groups with a stream or batch source, you can test out the configuration with the **Run preview** button.

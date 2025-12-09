@@ -30,7 +30,7 @@ This diagram shows how tracking plans are represented in Snowplow Console.
 For example, an `Ecommerce Checkout Flow` data product may contain three event specifications:
 * `Checkout Started` with a `checkout_started` event data structure and associated `cart` entity
 * `Product Add To Cart` with an `add_to_cart` event data structure and associated `cart` and `product` entities
-* `Order Completed` with an `order_completed` event data structure and associated `cart`, `order` and `payment` entities
+* `Order Completed` with an `order_completed` event data structure and associated `cart`, `product`, `order` and `payment` entities
 
 Note that the `cart` entity data structure is reused across event specifications, this promotes consistency in your tracking design and makes analysis easier.
 

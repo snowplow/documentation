@@ -14,18 +14,18 @@ An event describes a single, transient activity. The context in which that event
 
 The tracker allows the addition of a persistent set of information through the `SubjectConfiguration`, which represents the basic information about the user and the app. This data is added to every event as part of the [canonical event properties](/docs/events/going-deeper/event-parameters/index.md).
 
-| Property | Description | Automatically added? | Column(s) in enriched event |
-| -------- | ----------- |: --------------------- :| ----------------------------------- |
-| `userId`           | User identifier.            | ❌                     | `user_id`                             |
-| `ipAddress`        | User IP address.            | ✅                     | `user_ipaddress`                      |
-| `timezone`         | Current timezone label.     | ✅                     | `os_timezone`                         |
-| `language`         | Language set in the device. | ✅                     | `br_lang`                             |
-| `useragent`        | User-agent.                 | ✅                     | `useragent`                           |
+| Property           | Description                 | Automatically added?  | Column(s) in enriched event             |
+| ------------------ | --------------------------- | --------------------- | --------------------------------------- |
+| `userId`           | User identifier.            | ❌                     | `user_id`                               |
+| `ipAddress`        | User IP address.            | ✅                     | `user_ipaddress`                        |
+| `timezone`         | Current timezone label.     | ✅                     | `os_timezone`                           |
+| `language`         | Language set in the device. | ✅                     | `br_lang`                               |
+| `useragent`        | User-agent.                 | ✅                     | `useragent`                             |
 | `viewport`         | Screen viewport.            | ✅ (iOS) / ❌ (Android) | `br_viewheight`, `br_viewwidth`         |
 | `screenResolution` | Screen resolution.          | ✅                     | `dvce_screenheight`, `dvce_screenwidth` |
-| `colorDepth`       | Screen color depth.         | ❌                     | `br_colordepth`                       |
-| `networkUserId`    | Network user ID.            | ✅                     | `network_userid`                      |
-| `domainUserId`     | Domain user ID.             | ❌                     | `domain_userid`                       |
+| `colorDepth`       | Screen color depth.         | ❌                     | `br_colordepth`                         |
+| `networkUserId`    | Network user ID.            | ✅                     | `network_userid`                        |
+| `domainUserId`     | Domain user ID.             | ❌                     | `domain_userid`                         |
 
 As always, be aware of privacy when tracking [personal identifiable information](https://snowplow.io/blog/2020/09/06/user-identification-and-privacy/) such as email addresses or IP addresses.
 The tracker provides anonymous tracking functionality to mask certain user identifiers. Refer to the [section on anonymous tracking to learn more](../anonymous-tracking/index.md).

@@ -23,6 +23,10 @@ All payloads should be wrapped in a `payload_data` self-describing JSON.
 }
 ```
 
+:::info Reserved parameter `u`
+`u` is a reserved parameter because it is used for [click tracking in the Pixel Tracker](/docs/sources/trackers/pixel-tracker/index.md#click-tracking).
+:::
+
 ## Self-describing event
 
 This is an example of an HTTP request for a `viewed_product` event from web, using the recommended Base64 encoding and the `ue_px` property:

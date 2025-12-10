@@ -6,14 +6,14 @@ sidebar_position: 1
 
 Snowplow includes three ways to track custom data:
 * Self-describing [events](/docs/fundamentals/events/index.md#self-describing-events)
-* Custom [entities](/docs/fundamentals/entities/index.md#custom-entities)
+* Custom [entities](/docs/fundamentals/entities/index.md)
 * Structured events (not recommended)
 
 ## Custom self-describing events
 
 Self-describing events are [based on JSON schemas](/docs/fundamentals/schemas/index.md) and can have arbitrarily many fields.
 
-To define your own custom event, you will need to [create a corresponding schema](/docs/data-product-studio/data-structures/manage/index.md). Snowplow uses the schema to validate that the JSON containing the event properties is well-formed.
+To define your own custom event, you will need to [create a corresponding data structure](/docs/data-product-studio/data-structures/manage/index.md). Snowplow uses the data structure to validate that the JSON containing the event properties is well-formed.
 
 This code shows how you could track a custom `article_share` event using the [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md):
 
@@ -30,7 +30,7 @@ window.snowplow('trackSelfDescribingEvent', {
 });
 ```
 
-In addition to the [standard columns](/docs/fundamentals/canonical-event/index.md), each type of self-describing event gets its own warehouse column (or its own table, in the case of Redshift) for event-specific fields defined in its schema. See the [structure of Snowplow data](/docs/fundamentals/canonical-event/index.md#self-describing-events) for more information.
+In addition to the [standard atomic columns](/docs/fundamentals/canonical-event/index.md), each type of self-describing event gets its own warehouse column (or its own table, in the case of Redshift) for event-specific fields defined in its schema. See the [structure of Snowplow data](/docs/fundamentals/canonical-event/index.md#self-describing-events) for more information.
 
 Check out the schema fundamentals page to learn how the trackers serialize the self-describing event data, and how it's loaded into the warehouse. ADD LINK
 
@@ -40,11 +40,7 @@ We originally called self-describing events "unstructured events", to distinguis
 
 ## Custom entities
 
-All Snowplow events can be augmented with [entities](/docs/fundamentals/entities/index.md). Snowplow trackers add certain entities automatically. For example, the web trackers add a [`webPage` entity](/docs/sources/trackers/web-trackers/tracking-events/index.md#auto-tracked-entities) to all events by default.
-
-Defining your own custom entities is useful when you have similar bits of business-specific context you want to attach to multiple different events. For example, if many of your events refer to a product or a user, you can create your own `user` and `product` entities with the fields you want. Check out our [tracking plan guide](/docs/fundamentals/tracking-design-best-practice/index.md) for best practice on designing entities.
-
-As with custom self-describing events, if you want to create your own custom entity, you will need to [create a corresponding schema](/docs/data-product-studio/data-structures/manage/index.md). Snowplow uses the schema to validate that the JSON containing the entity properties is well-formed.
+As with custom self-describing events, if you want to create your own custom [entity](/docs/fundamentals/entities/index.md), you will need to [create a corresponding data structure](/docs/data-product-studio/data-structures/manage/index.md). Snowplow uses the data structure to validate that the JSON containing the entity properties is well-formed.
 
 Here's an example that shows how you could track custom `user` and `product` entities along with a page view event, using the [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md):
 

@@ -86,7 +86,7 @@ The legacy `transaction` and `transaction_item` events are also "baked-in". Seve
 
 ### Self-describing events
 
-Self-describing events can include arbitrarily complex data, as defined by the event's [data structure](/docs/fundamentals/schemas/index.md) or schema. We call them "self-describing" because these events include a reference to their underlying JSON Schema data structure.
+Self-describing events can include arbitrarily complex data, as defined by the event's [data structure](/docs/fundamentals/schemas/index.md) or schema. We call them "self-describing" because these events include a reference to their underlying [JSON Schema](/docs/data-product-studio/json-schema-reference/index.md) data structure.
 
 Each self-describing event consists of two parts:
 - `schema`: a reference to a [schema](/docs/fundamentals/schemas/index.md) that describes the name, version and structure of the event
@@ -103,7 +103,7 @@ Check out the full range of included events [here](/docs/events/ootb-data/index.
 
 You can also create [custom self-describing events](/docs/events/custom-events/index.md) to match your business requirements. Snowplow provides [tooling](/docs/data-product-studio/index.md) to help you define and track custom events.
 
-Find out more in the [warehouse tables fundamentals](/docs/fundamentals/warehouse-tables/index.md) page about how self-describing events are structured in the data warehouse.
+Find out in the [warehouse tables fundamentals](/docs/fundamentals/warehouse-tables/index.md) page about how self-describing events are structured in the data warehouse.
 
 :::info Terminology
 We originally called self-describing events "unstructured events", to distinguish them from structured events. This was misleading, because these events are actually more structured than structured events. The old term is deprecated, but you might still see it in some docs, APIs and database column names, such as `unstruct_event` or `ue`.

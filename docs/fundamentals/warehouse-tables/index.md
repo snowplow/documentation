@@ -31,6 +31,6 @@ You can still query the data as if it were in a single fat table. This is becaus
 - The joins from the additional tables to the core `atomic.events` table are one-to-one
 - The field joined on is the distribution key for both tables, so queries are as fast as if the data were in a single table
 
-## Self-describing events and entities column names
+## Schemas in the warehouse
 
-TODO
+To understand how self-describing events and entities are translated into warehouse columns, check out this [reference page](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md).

@@ -9,11 +9,11 @@ When an event occurs, it generally involves a number of entities, which provi
 
 :::info Terminology
 
-In the past, what we now call “entities” was called “context”. We find the new term clearer, but you will still find `context` used in many of the existing APIs, database column names, and documentation, especially to refer to a set of _multiple_ entities. Sometimes, we will also use the two terms interchangeably.
+What we now call "entities" was previously called "context". You'll still find `context` used in many of the existing APIs, database column names, and documentation, especially to refer to a set of multiple entities.
 
 :::
 
-Let’s take the example of a “search” event. It may have the following entities associated with it:
+Let's take the example of a "search" event. It may have the following entities associated with it:
 
 1. A user entity, representing the user who performed the search
 2. A web page entity — the page on which the event occurred

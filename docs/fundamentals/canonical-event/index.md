@@ -1,11 +1,11 @@
 ---
 title: "Snowplow event properties"
-description: A summary of the Snowplow events table and its fields, including custom events and entities
+description: A summary of the Snowplow events table and its standard fields
 sidebar_label: "Event fields"
 sidebar_position: 4.5
 ---
 
-This page provides a reference for the standard, out-of-the-box fields that are found in all Snowplow events. These fields define the Snowplow tracker protocol, and are often called "atomic properties" or "atomic fields" in reference to the [Snowplow `atomic.events` table](/docs/fundamentals/warehouse-tables/index.md).
+This page provides a reference for the standard fields that are found in all Snowplow events. These fields define the Snowplow tracker protocol, and are often called "atomic properties" or "atomic fields" in reference to the [Snowplow `atomic.events` table](/docs/fundamentals/warehouse-tables/index.md). They're also sometimes called "canonical fields".
 
 Fields that are populated during tracking have two names associated with them:
 * **Payload property**: a short payload name, to reduce the size of the HTTP request
@@ -17,7 +17,7 @@ Different event fields are populated by different applications, such as tracker 
 
 The **reqd?** values in these tables specify whether a field is required for a Snowplow event. Required fields will always have values.
 
-In total, the tracker protocol defines 131 fields, although not all fields are populated for every event. Some fields are specific to web or mobile platforms, while others are only populated for certain event types. Additionally, 42 fields are deprecated, leaving 89 usable fields.
+Any payload that conforms to this protocol is a valid Snowplow event payload, whether it's sent by a Snowplow tracker SDK, a webhook, or a custom application. If you want to get into the details, check out some example HTTP requests [here](/docs/events/http-requests/index.md). In total, the tracker protocol defines 131 fields, of which 89 are in use by Snowplow applications.
 
 ## Common fields
 
@@ -57,10 +57,10 @@ The `network_userid` is set by a [Collector cookie](/docs/pipeline/collector/ind
 | ---------------- | ------------------- | ---- | ------------------------------------------------------------------------------ | ----- | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | --- | ------ |
 | `uid`            | `user_id`           | text | Unique identifier for user, set by the business using `setUserId`              | No    | `c94f860b-1266-4dad-ae57-3a36a414a521` | Tracking                                                                                                                         | ✅   | ✅      |
 | `duid`           | `domain_userid`     | text | Unique identifier for a user, based on a first party cookie                    | No    | `4b0dfa75-9a8c-46a1-9691-01add9db4200` | Tracking                                                                                                                         | ✅   | ❌      |
-| `tnuid`          | `network_userid`    | text | User ID set by Snowplow using server-set cookie,                               | No    | `ecdff4d0-9175-40ac-a8bb-325c49733607` | Tracking or pipeline                                                                                                             | ✅   | ✅      |
-| `ip`             | `user_ipaddress`    | text | User IP address, can be overwritten with the IP anonymization enrichment       | No    | `92.231.54.234`                        | Tracking or [IP anonymization enrichment](/docs/pipeline/enrichments/available-enrichments/ip-anonymization-enrichment/index.md) | ✅   | ✅      |
-| `vid`            | `domain_sessionidx` | int  | Index of number of visits that this `domain_userid` has made to this domain    | No    | `3`                                    | Tracking                                                                                                                         | ✅   | ❌      |
+| `tnuid`          | `network_userid`    | text | User ID set by Snowplow using server-set cookie                                | No    | `ecdff4d0-9175-40ac-a8bb-325c49733607` | Tracking or pipeline                                                                                                             | ✅   | ✅      |
 | `sid`            | `domain_sessionid`  | text | Unique identifier (UUID) for this visit of this `domain_userid` to this domain | No    | `c6ef3124-b53a-4b13-a233-0088f79dcbcb` | Tracking                                                                                                                         | ✅   | ❌      |
+| `vid`            | `domain_sessionidx` | int  | Index of number of visits that this `domain_userid` has made to this domain    | No    | `3`                                    | Tracking                                                                                                                         | ✅   | ❌      |
+| `ip`             | `user_ipaddress`    | text | User IP address, can be overwritten with the IP anonymization enrichment       | No    | `92.231.54.234`                        | Tracking or [IP anonymization enrichment](/docs/pipeline/enrichments/available-enrichments/ip-anonymization-enrichment/index.md) | ✅   | ✅      |
 
 
 ### Application fields
@@ -104,10 +104,10 @@ To set the `os_timezone` timezone field, use the [timezone plugin](/docs/sources
 | `dtm`            | `dvce_created_tstamp` | timestamp | Timestamp for the event recorded on the client device       | No    | `2013-11-26 00:03:57.885` | Tracking           | ✅   | ✅      |
 | `stm`            | `dvce_sent_tstamp`    | timestamp | Timestamp when event occurred, as recorded by client device | No    | `2013-11-26 00:03:58.032` | Tracking           | ✅   | ✅      |
 |                  | `etl_tstamp`          | timestamp | Timestamp for when the event was validated and enriched     | No    | `2017-01-26 00:01:25.292` | Pipeline           | ✅   | ✅      |
-| `tz`             | `os_timezone`         | text      | Client operating system timezone                            | No    | `Europe/London`           | Tracking           | ✅   | ✅      |
 |                  | `derived_tstamp`      | timestamp | Timestamp making allowance for inaccurate device clock      | No    | `2013-11-26 00:02:04.123` | Default enrichment | ✅   | ✅      |
 | `ttm`            | `true_tstamp`         | timestamp | User-set "true timestamp" for the event                     | No    | `2013-11-26 00:02:04.123` | Tracking           | ✅   | ✅      |
 |                  | `load_tstamp `        | timestamp | Timestamp for when the data was loaded into the warehouse   | No    | `2013-11-26 00:02:04.123` | Pipeline           | ✅   | ✅      |
+| `tz`             | `os_timezone`         | text      | Client operating system timezone                            | No    | `Europe/London`           | Tracking           | ✅   | ✅      |
 
 The trackers send timestamp properties as `int` in the payload, representing milliseconds since the Unix epoch, e.g. `1361553733313`. They're converted to `timestamp` type during enrichment. Similarly, the `tz` property is URL-encoded in the payload, e.g. `Europe%2FLondon`, and decoded during enrichment.
 
@@ -157,15 +157,15 @@ For more information on this topic check out the [geolocation data](/docs/events
 
 These fields are populated by the [campaign attribution enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md).
 
-| Field name     | Type | Description                                                    | Reqd? | Example                                 | Source                                                                                                                       | Web | Mobile |
-| -------------- | ---- | -------------------------------------------------------------- | ----- | --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | --- | ------ |
-| `mkt_medium`   | text | Type of traffic source                                         | No    | 'cpc', 'affiliate', 'organic', 'social' | [Campaign Attribution Enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅   | ✅      |
-| `mkt_source`   | text | The company / website where the traffic came from              | No    | 'Google', 'Facebook'                    | [Campaign Attribution Enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅   | ✅      |
-| `mkt_term`     | text | Any keywords associated with the referrer                      | No    | 'new age tarot decks'                   | [Campaign Attribution Enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅   | ✅      |
-| `mkt_content`  | text | The content of the ad. (Or an ID so that it can be looked up.) | No    | 13894723                                | [Campaign Attribution Enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅   | ✅      |
-| `mkt_campaign` | text | The campaign ID                                                | No    | 'diageo-123'                            | [Campaign Attribution Enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅   | ✅      |
-| `mkt_clickid`  | text | The click ID                                                   | No    | 'ac3d8e459'                             | [Campaign Attribution Enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅   | ✅      |
-| `mkt_network`  | text | The ad network to which the click ID belongs                   | No    | 'DoubleClick'                           | [Campaign Attribution Enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅   | ✅      |
+| Field name     | Type | Description                                                 | Reqd? | Example                                 | Source                                                                                                                       | Web | Mobile |
+| -------------- | ---- | ----------------------------------------------------------- | ----- | --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | --- | ------ |
+| `mkt_medium`   | text | Type of traffic source                                      | No    | 'cpc', 'affiliate', 'organic', 'social' | [Campaign Attribution Enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅   | ✅      |
+| `mkt_source`   | text | The company or website where the traffic came from          | No    | 'Google', 'Facebook'                    | [Campaign Attribution Enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅   | ✅      |
+| `mkt_term`     | text | Any keywords associated with the referrer                   | No    | 'new age tarot decks'                   | [Campaign Attribution Enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅   | ✅      |
+| `mkt_content`  | text | The content of the ad, or an ID so that it can be looked up | No    | 13894723                                | [Campaign Attribution Enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅   | ✅      |
+| `mkt_campaign` | text | The campaign ID                                             | No    | 'diageo-123'                            | [Campaign Attribution Enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅   | ✅      |
+| `mkt_clickid`  | text | The click ID                                                | No    | 'ac3d8e459'                             | [Campaign Attribution Enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅   | ✅      |
+| `mkt_network`  | text | The ad network to which the click ID belongs                | No    | 'DoubleClick'                           | [Campaign Attribution Enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅   | ✅      |
 
 ### Cross-domain tracking fields
 
@@ -177,6 +177,8 @@ These fields are populated by default if the event's `url` has a [cross-navigati
 |                  | `refr_dvce_tstamp`   | timestamp | The time of attaching the `domain_userid` to the inbound link | No    | `2013-11-26 00:02:05` | Default enrichment | ✅   | ✅      |
 
 ### Snowplow versions fields
+
+These fields record the versions of the various Snowplow components involved in processing the event.
 
 | Payload property | Field name    | Type | Description              | Reqd? | Example                             | Source             | Web | Mobile |
 | ---------------- | ------------- | ---- | ------------------------ | ----- | ----------------------------------- | ------------------ | --- | ------ |
@@ -203,8 +205,8 @@ The `url` property is further parsed during enrichment to populate the various `
 |                  | `page_urlpath`     | text | Path to page                                                           | No    | `/product/index.html`       | Default enrichment                                                                                                 | ✅   | ❌      |
 |                  | `page_urlquery`    | text | Querystring                                                            | No    | `id=GTM-DLRG`               | Default enrichment                                                                                                 | ✅   | ❌      |
 |                  | `page_urlfragment` | text | Fragment, also known as anchor                                         | No    | `4-conclusion`              | Default enrichment                                                                                                 | ✅   | ❌      |
-| `refr`           | `page_referrer`    | text | URL of the referrer                                                    | No    | `http://www.referrer.com`   | Tracking                                                                                                           | ✅   | ❌      |
 | `page`           | `page_title`       | text | Web page title                                                         | No    | `Snowplow Behavioral Data`  | Tracking                                                                                                           | ✅   | ❌      |
+| `refr`           | `page_referrer`    | text | URL of the referrer                                                    | No    | `http://www.referrer.com`   | Tracking                                                                                                           | ✅   | ❌      |
 |                  | `refr_urlscheme`   | text | Referrer scheme                                                        | No    | `http`                      | Default enrichment                                                                                                 | ✅   | ❌      |
 |                  | `refr_urlhost`     | text | Referrer host                                                          | No    | `www.bing.com`              | Default enrichment                                                                                                 | ✅   | ❌      |
 |                  | `refr_urlport`     | int  | Referrer port                                                          | No    | `80`                        | Default enrichment                                                                                                 | ✅   | ❌      |
@@ -245,7 +247,7 @@ For more information on this topic check out the [device and browser data](/docs
 
 ### Page views
 
-There are no fields that are specific to page view events. All the fields required are included in the standard fields available for any web-based event e.g. `page_urlscheme`, `page_title`.
+There are no fields that are specific to page view events. All the relevant fields are included in the standard fields available for any web-based event e.g. `page_url`, `page_title`.
 
 ### Page pings
 
@@ -268,7 +270,7 @@ Structured events use these fields to capture event data:
 | `se_ac`          | `se_action`   | text    | Action performed, or event name                                                                 | Yes * | `add-to-basket`, `play-video` |
 | `se_la`          | `se_label`    | text    | The object of the action e.g. the ID of the video played. or SKU of the product added to basket | No    | `pbz00123`                    |
 | `se_pr`          | `se_property` | text    | A property associated with the object of the action                                             | No    | `HD`, `large`                 |
-| `se_va`          | `se_value`    | decimal | A value associated with the event / action e.g. the value of goods added-to-basket              | No    | `9.99`                        |
+| `se_va`          | `se_value`    | decimal | A value associated with the event or action e.g. the value of goods added-to-basket             | No    | `9.99`                        |
 
 \* These fields are only required for `struct` events.
 
@@ -278,12 +280,17 @@ For [self-describing events](/docs/fundamentals/events/index.md#self-describing-
 
 | Field name      | Type | Description                           | Reqd? | Example      | Source             | Web | Mobile |
 | --------------- | ---- | ------------------------------------- | ----- | ------------ | ------------------ | --- | ------ |
-| `event_vendor`  | text | Business who defined the event        | Yes   | `com.acme`   | Default enrichment | ✅   | ✅      |
+| `event_vendor`  | text | Business that defined the event       | Yes   | `com.acme`   | Default enrichment | ✅   | ✅      |
 | `event_name`    | text | Event name                            | Yes   | `link_click` | Default enrichment | ✅   | ✅      |
 | `event_format`  | text | Format for event; always `jsonschema` | Yes   | `jsonschema` | Default enrichment | ✅   | ✅      |
 | `event_version` | text | Version of event schema               | Yes   | `1-0-2`      | Default enrichment | ✅   | ✅      |
 
-Check out the [warehouse table structure](/docs/fundamentals/warehouse-tables/index.md) page for details on how self-describing event and entity data fields.
+:::note Extra columns for self-describing event data
+
+Data in self-describing events or entities is added as additional columns, rather than in these standard atomic fields.
+
+Check out the [warehouse table structure](/docs/fundamentals/warehouse-tables/index.md) page to learn more.
+:::
 
 ## Deprecated fields
 

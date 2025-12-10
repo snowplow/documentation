@@ -6,7 +6,7 @@ sidebar_position: 450
 
 This page gives examples of requests to the Snowplow [Collector](/docs/pipeline/collector/index.md). This is a reference **for those who plan to implement their own tracker**, or want to understand the requests being sent by existing Snowplow trackers.
 
-Below are a number of example [Tracker Protocol](/docs/fundamentals/canonical-event/index.md) requests. All examples are POST requests with a JSON body.
+Below are a number of example [Tracker Protocol](/docs/fundamentals/canonical-event/index.md) requests. All examples are POST requests with a JSON body. Requests to the Collector endpoint can contain more than one event, depending how your tracker is configured.
 
 All requests are sent to `https://<your-collector-host>/com.snowplowanalytics.snowplow/tp2` unless you have specified a custom POST path when [configuring your Collector](/docs/pipeline/collector/index.md).
 

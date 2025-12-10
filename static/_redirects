@@ -434,3 +434,4 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/events/custom-events/structured-events/* /docs/events/event-types/custom-events/:splat 301
 /docs/events/going-deeper/http-headers/* /docs/events/http-requests/:splat 301
 /docs/events/going-deeper/example-requests/* /docs/events/http-requests/:splat 301
+/docs/events/going-deeper/* /docs/fundamentals/canonical-event/:splat 301

@@ -33,7 +33,7 @@ Track events in your applications using one of the [Snowplow tracking SDKs](/doc
 
 All the trackers also support custom tracking, so you can define the events that are relevant to your business.
 
-You can also use [webhooks](/docs/sources/webhooks/index.md) to track automated actions. The Snowplow [Collector endpoint](/docs/pipeline/collector/index.md) accepts all [valid](/docs/events/going-deeper/event-parameters/index.md) Snowplow event payloads, regardless of their source.
+You can also use [webhooks](/docs/sources/webhooks/index.md) to track automated actions. The Snowplow [Collector endpoint](/docs/pipeline/collector/index.md) accepts all [valid](/docs/fundamentals/canonical-event/index.md) Snowplow event payloads, regardless of their source.
 
 ## Snowplow event types
 

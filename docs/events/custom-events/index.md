@@ -9,11 +9,15 @@ Snowplow includes three ways to track custom data:
 * Custom [entities](/docs/fundamentals/entities/index.md)
 * Structured events (not recommended)
 
+## Snowplow data management tools
+
+Snowplow provides a number of [event data management tools](/docs/data-product-studio/index.md) to help you define, track, and manage your custom events and entities.
+
 ## Custom self-describing events
 
-Self-describing events are [based on JSON schemas](/docs/fundamentals/schemas/index.md) and can have arbitrarily many fields.
+Self-describing [events](/docs/fundamentals/events/index.md#self-describing-events) are [based on JSON schemas](/docs/fundamentals/schemas/index.md) and can have arbitrarily many fields.
 
-To define your own custom event, you will need to [create a corresponding data structure](/docs/data-product-studio/data-structures/manage/index.md). Snowplow uses the data structure to validate that the JSON containing the event properties is well-formed.
+To define your own custom event, you will need to [create a corresponding data structure](/docs/data-product-studio/data-structures/index.md). Snowplow uses the data structure to validate that the JSON containing the event properties is well-formed.
 
 This code shows how you could track a custom `article_share` event using the [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md):
 
@@ -30,17 +34,11 @@ window.snowplow('trackSelfDescribingEvent', {
 });
 ```
 
-In addition to the [standard atomic columns](/docs/fundamentals/canonical-event/index.md), each type of self-describing event gets its own warehouse column (or its own table, in the case of Redshift) for event-specific fields defined in its schema. See the [structure of Snowplow data](/docs/fundamentals/canonical-event/index.md#self-describing-events) for more information.
-
-Check out the schema fundamentals page to learn how the trackers serialize the self-describing event data, and how it's loaded into the warehouse. ADD LINK
-
-:::info Terminology
-We originally called self-describing events "unstructured events", to distinguish them from structured events. This was misleading, because these events are actually more structured than structured events. The old term is deprecated, but you might still see it in some docs, APIs and database column names, such as `unstruct_event` or `ue`.
-:::
+In addition to populating the [standard atomic columns](/docs/fundamentals/canonical-event/index.md), each type of self-describing event gets its own warehouse column (or its own table, in the case of Redshift) for event-specific fields defined in its schema. See the [warehouse tables fundamentals](/docs/fundamentals/warehouse-tables/index.md) page for more information.
 
 ## Custom entities
 
-As with custom self-describing events, if you want to create your own custom [entity](/docs/fundamentals/entities/index.md), you will need to [create a corresponding data structure](/docs/data-product-studio/data-structures/manage/index.md). Snowplow uses the data structure to validate that the JSON containing the entity properties is well-formed.
+As with custom self-describing events, if you want to create your own custom [entity](/docs/fundamentals/entities/index.md), you will need to [create a corresponding data structure](/docs/data-product-studio/data-structures/index.md). Snowplow uses the data structure to validate that the JSON containing the entity properties is well-formed.
 
 Here's an example that shows how you could track custom `user` and `product` entities along with a page view event, using the [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md):
 
@@ -66,7 +64,7 @@ window.snowplow('trackPageView', {
 });
 ```
 
-Check out the schema fundamentals page to learn how the trackers serialize the entity data, and how it's loaded into the warehouse ADD LINK.
+See the [warehouse tables fundamentals](/docs/fundamentals/warehouse-tables/index.md) page to learn how entity data is structured in the data warehouse.
 
 :::info Terminology
 In the past, what we now call "entity" or "entities" was called "context". You'll still find `context` used in many of the existing APIs, database column names, and documentation, especially to refer to a set of multiple entities. For example, the `context` parameter in the JavaScript tracker API above is an array of entities.
@@ -74,9 +72,15 @@ In the past, what we now call "entity" or "entities" was called "context". You'l
 
 ### Add custom entities to all events
 
-TODO
-global context - web, mobile, ?
-application entities is the same thing??
+Certain Snowplow trackers provide the option to add custom entities to all events, or a configurable subset of events. These are called **application entities**. This feature is called "global context" in the trackers.
+
+See the documentation for each tracker to learn how to configure it:
+* [Web](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/global-context/index.md)
+* [Native mobile](/docs/sources/trackers/mobile-trackers/custom-tracking-using-schemas/global-context/index.md) (iOS and Android)
+* [React Native](/docs/sources/trackers/react-native-tracker/index.md)
+* [Scala](docs/sources/trackers/scala-tracker/initialization/index.md)
+
+Use [source applications](/docs/data-product-studio/source-applications/index.md) to document your expected application entities.
 
 ## Structured events
 

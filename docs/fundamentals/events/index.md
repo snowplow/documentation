@@ -96,7 +96,7 @@ Because the event references a specific version of its schema, it's always clear
 
 Snowplow provides a large number of self-describing events out-of-the-box, for example:
 * [Link clicks](/docs/events/ootb-data/links-and-referrers/index.md#link-click-tracking-on-web)
-* Form submissions
+* [Form submissions](/docs/sources/trackers/web-trackers/tracking-events/form-tracking/index.md)
 * [Ecommerce transactions](/docs/events/ootb-data/ecommerce-events/index.md)
 
 Check out the full range of included events [here](/docs/events/ootb-data/index.md).

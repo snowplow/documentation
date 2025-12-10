@@ -87,7 +87,7 @@ application entities is the same thing??
 :::info Use self-describing events instead
 Structured event tracking is a legacy format used to track events that were not natively supported by Snowplow.
 
-We recommend using [self-describing events](#self-describing-events) for custom event tracking.
+We recommend using self-describing events for custom event tracking.
 :::
 
 Structured events are simpler to create than custom self-describing events, as you don't need to define a [schema](/docs/fundamentals/schemas/index.md). However, they have a number of disadvantages:
@@ -119,4 +119,4 @@ snowplow('trackStructEvent', {
 });
 ```
 
-In the warehouse, data tracked for any of these event-specific fields is stored in standard columns. See the [structure of Snowplow data](/docs/fundamentals/canonical-event/index.md#structured-events) for more information.
+In the warehouse, data tracked for any of these structured event-specific fields is stored in [standard atomic columns](/docs/fundamentals/canonical-event/index.md#structured-events).

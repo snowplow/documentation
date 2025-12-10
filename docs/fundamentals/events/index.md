@@ -29,7 +29,7 @@ The different meanings of "event" apply at different stages of the tracking life
 
 ## How to track events
 
-Track events in your applications using one of the [Snowplow tracking SDKs](/docs/sources/trackers/index.md). Each SDK provides built-in APIs to track different types of events.
+Track events in your applications using one of the [Snowplow tracking SDKs](/docs/sources/trackers/index.md). Each SDK provides built-in APIs to track [different types of events](/docs/events/ootb-data/index.md).
 
 All the trackers also support custom tracking, so you can define the events that are relevant to your business.
 
@@ -37,9 +37,7 @@ You can also use [webhooks](/docs/sources/webhooks/index.md) to track automated 
 
 ## Snowplow event types
 
-All Snowplow events have the same underlying structure and standard fields. These are listed in detail here ADD LINK. In the data warehouse, all events share a number of standard columns, such as timestamps. That said, event-specific data will be stored differently. See also [what Snowplow data looks like](/docs/fundamentals/canonical-event/index.md).
-
-Snowplow has two core types of events:
+All Snowplow events have the same underlying structure and [standard fields](/docs/fundamentals/canonical-event/index.md). However, there are two types of events in Snowplow:
 * Schema-less **baked-in** events
   * The baked-in event types are page views, page pings, and structured events
 * **Self-describing** events that are based on a [JSON schema](/docs/fundamentals/schemas/index.md)
@@ -70,9 +68,9 @@ All Snowplow events are by default tracked with schema-defined [entities](/docs/
 ### Baked-in events
 
 The following events are "baked in":
-* Page views ADD LINK
-* Page pings ADD LINK
-* Structured events ADD LINK
+* [Page views](/docs/events/ootb-data/page-and-screen-view-events/index.md)
+* [Page pings](/docs/events/ootb-data/page-activity-tracking/index.md)
+* [Structured events](/docs/events/custom-events/index.md#structured-events)
 
 In the data warehouse, any event-specific information will be in standard columns in the Snowplow `events` table. You can find those listed [here](/docs/fundamentals/canonical-event/index.md#event-specific-fields).
 
@@ -88,7 +86,7 @@ The legacy `transaction` and `transaction_item` events are also "baked-in". Seve
 
 ### Self-describing events
 
-Self-describing events can include arbitrarily complex data, as defined by the event's [schema](/docs/fundamentals/schemas/index.md) or data structure. We call them "self-describing" because these events include a reference to their schema.
+Self-describing events can include arbitrarily complex data, as defined by the event's [data structure](/docs/fundamentals/schemas/index.md) or schema. We call them "self-describing" because these events include a reference to their underlying JSON Schema data structure.
 
 Each self-describing event consists of two parts:
 - `schema`: a reference to a [schema](/docs/fundamentals/schemas/index.md) that describes the name, version and structure of the event
@@ -97,15 +95,15 @@ Each self-describing event consists of two parts:
 Because the event references a specific version of its schema, it's always clear to downstream users and applications what each field in the event means, even if your definition of the event changes over time.
 
 Snowplow provides a large number of self-describing events out-of-the-box, for example:
-* Link clicks
+* [Link clicks](/docs/events/ootb-data/links-and-referrers/index.md#link-click-tracking-on-web)
 * Form submissions
-* Ecommerce transactions
+* [Ecommerce transactions](/docs/events/ootb-data/ecommerce-events/index.md)
 
 Check out the full range of included events [here](/docs/events/ootb-data/index.md).
 
 You can also create [custom self-describing events](/docs/events/custom-events/index.md) to match your business requirements. Snowplow provides [tooling](/docs/data-product-studio/index.md) to help you define and track custom events.
 
-Find out more here ADD LINK about how self-describing events are structured in the data warehouse.
+Find out more in the [warehouse tables fundamentals](/docs/fundamentals/warehouse-tables/index.md) page about how self-describing events are structured in the data warehouse.
 
 :::info Terminology
 We originally called self-describing events "unstructured events", to distinguish them from structured events. This was misleading, because these events are actually more structured than structured events. The old term is deprecated, but you might still see it in some docs, APIs and database column names, such as `unstruct_event` or `ue`.

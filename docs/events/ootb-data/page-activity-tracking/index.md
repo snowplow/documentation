@@ -6,23 +6,6 @@ title: "Page and screen engagement"
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 ```
 
-TODO
-<details>
-<summary>Tracking and storage format</summary>
-
-Snowplow [tracking SDKs](/docs/sources/trackers/index.md) provide a dedicated API for these events. For example, if you want to track a page view using the [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md):
-
-```javascript
-window.snowplow('trackPageView');
-```
-
-In the data warehouse, any event-specific information for these events will be in standard columns (in the Snowplow `events` table). You can find those listed [here](/docs/fundamentals/canonical-event/index.md#event-specific-fields).
-
-</details>
-
----
-
-
 Page or screen activity (engagement) tracking enables you to measure the time users spent engaged on a page or screen and the extent of the page/screen they viewed.
 There are two mechanisms that the activity tracking is implemented:
 

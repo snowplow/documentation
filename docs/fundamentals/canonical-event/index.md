@@ -1,7 +1,7 @@
 ---
-title: "Snowplow event properties"
+title: "Snowplow atomic event properties"
 description: A summary of the Snowplow events table and its standard fields
-sidebar_label: "Event fields"
+sidebar_label: "Atomic event fields"
 sidebar_position: 4.5
 ---
 

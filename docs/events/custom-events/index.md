@@ -9,9 +9,7 @@ Snowplow includes three ways to track custom data:
 * Custom [entities](/docs/fundamentals/entities/index.md)
 * Structured events (not recommended)
 
-## Snowplow data management tools
-
-Snowplow provides a number of [event data management tools](/docs/data-product-studio/index.md) to help you define, track, and manage your custom events and entities.
+Read our [tracking design best practice guide](/docs/fundamentals/tracking-design-best-practice/index.md) to learn how to use custom data effectively.
 
 ## Custom self-describing events
 
@@ -85,7 +83,7 @@ Use [source applications](/docs/data-product-studio/source-applications/index.md
 ## Structured events
 
 :::info Use self-describing events instead
-Structured event tracking is a legacy format used to track events that were not natively supported by Snowplow.
+Structured event tracking is a legacy format used to track events that weren't natively supported by Snowplow.
 
 We recommend using self-describing events for custom event tracking.
 :::

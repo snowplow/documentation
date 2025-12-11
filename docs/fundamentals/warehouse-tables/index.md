@@ -5,11 +5,11 @@ sidebar_label: "Warehouse tables"
 sidebar_position: 4
 ---
 
-All Snowplow events have the same underlying structure and standard fields. All of these fields can be found in the `atomic.events` table, which is a "fat" (many columns) table.
+All Snowplow events have the same underlying structure and standard fields. All of these fields can be found in the `atomic.events` table, which is a "wide" (many columns) table.
 
 Each line in the atomic events table represents a single event, be that a `page_view`, `add_to_basket`, `play_video`, etc.
 
-Individual fields are stored in their own columns. Check out the [event properties reference](/docs/fundamentals/canonical-event/index.md) for a full list of standard fields. In warehouses except Redshift, [self-describing events](/docs/fundamentals/events/index.md#self-describing-events) and [entities](/docs/fundamentals/entities/index.md) are stored as additional columns in the `atomic.events` table.
+Individual fields are stored in their own columns. Check out the [event properties reference](/docs/fundamentals/canonical-event/index.md) for a full list of standard fields. In most warehouses, [self-describing events](/docs/fundamentals/events/index.md#self-describing-events) and [entities](/docs/fundamentals/entities/index.md) are stored as additional columns in the `atomic.events` table.
 
 :::tip Don't mutate the atomic events table
 The Snowplow data table is designed to be immutable: the data in each line should not change over time.
@@ -25,7 +25,7 @@ In Redshift, unlike other warehouses, [self-describing events](/docs/fundamental
 
 These additional tables can be joined back to the core `atomic.events` table, by joining on the `root_id` field in the self-describing event or entity table with the `event_id` in the `atomic.events` table, and the `root_tstamp` and `collector_tstamp` field in the respective tables.
 
-You can still query the data as if it were in a single fat table. This is because:
+You can still query the data as if it were in a single wide table. This is because:
 - The joins from the additional tables to the core `atomic.events` table are one-to-one
 - The field joined on is the distribution key for both tables, so queries are as fast as if the data were in a single table
 

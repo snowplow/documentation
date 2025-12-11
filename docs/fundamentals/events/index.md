@@ -5,9 +5,9 @@ sidebar_position: 1
 description: "An event is a central concept in Snowplow that represents something that occurred at a particular point in time"
 ---
 
-The word "event" can mean multiple things, depending on the context and perhaps on your role.
+The word **event** can mean multiple things, depending on the context and perhaps on your role.
 
-If you're a marketer or a product manager, you might think about an event as a description of a behavior, or as an interaction between the user and other [entities](/docs/fundamentals/entities/index.md). This is a high-level conceptual definition. Examples of events include:
+If you're a marketer or a product manager, you might think about an event as a description of a behavior, or as an interaction between the user and other [entities](/docs/fundamentals/entities/index.md). Examples of events using this high-level conceptual definition include:
 - Load a web page
 - Add an item to basket
 - Enter a destination
@@ -44,22 +44,7 @@ All Snowplow events have the same underlying structure and [standard fields](/do
   * All other events are self-describing events
   * This includes out-of-the-box events that come with Snowplow, and custom events that you define yourself
 
-```mermaid
-graph TD
-    A[Snowplow Tracker Protocol] --> B[Baked-in Events<br/>No schema]
-    A --> C[Self-describing Events<br/>Defined by JSON schema]
-
-    B --> D[Page Ping]
-    B --> E[Page View]
-    B --> F[Structured]
-
-    C --> G[Out-of-the-box]
-    C --> H[Custom]
-
-    style A fill:#0ea5e9,stroke:#0284c7,stroke-width:2px,color:#fff
-    style B fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff
-    style C fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff
-```
+<img src={require('@site/docs/fundamentals/images/Snowplow-event-types.png').default} alt="Diagram showing the different types of Snowplow event" style={{maxWidth: '600px', width: '100%', paddingBottom: '1.5rem'}} />
 
 Whether an event is baked-in or self-describing affects how you'll model the data.
 

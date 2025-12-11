@@ -20,40 +20,15 @@ For example, when tracking a "search" event, you might want to capture informati
 
 The event data might include fields such as the search term, number of results, and time taken to perform the search. These fields are specific to the "search" event.
 
-The `user`, `web page`, `A/B test variation`, and `products` data isn't specific to that event, and can be defined and tracked as entities.
+The `user`, `webPage`, `A/B test variation`, and `products` data isn't specific to that event, and can be defined and tracked as entities:
 
-```mermaid
-graph TD
-    A[Search Event] --> B[user entity]
-    A --> C[web_page entity]
-    A --> D[ab_test entity]
-    A --> E[product entity #1]
-    A --> F[product entity #2]
-    A --> G[product entity #3]
+<img src={require('@site/docs/fundamentals/images/example-event-entities.png').default} alt="Diagram showing an example Snowplow event with atomic event data at the top, self-describing event data in the middle, and entities at the bottom including user, webPage, abTestID, and three product entities" style={{maxWidth: '400px', width: '100%', paddingBottom: '1.5rem'}} />
 
-    subgraph Entities
-        B
-        C
-        D
-        E
-        F
-        G
-    end
-
-    style A fill:#0ea5e9,stroke:#0284c7,stroke-width:2px,color:#fff
-    style B fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff
-    style C fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff
-    style D fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff
-    style E fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff
-    style F fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff
-    style G fill:#8b5cf6,stroke:#7c3aed,stroke-width:2px,color:#fff
-```
-
-That user might go on to generate a "link click" event. You might want to capture data on:
+The user who triggered the `search` event might go on to generate a `link_click` event. You might want to capture data on:
 * The user who clicked the link
 * The web page where the link was clicked
 
-The same `user` and `web page` entities can be reused for this event.
+The same `user` and `webPage` entities can be reused for this event.
 
 Every Snowplow event can have entities attached to it. They can be of the same or different types.
 

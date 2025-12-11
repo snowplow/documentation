@@ -7,6 +7,14 @@ description: "Document and manage your tracking implementation across different 
 keywords: ["source applications", "app id", "application entities", "global context", "data sources"]
 ---
 
+```mdx-code-block
+import Badges from '@site/src/components/Badges';
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+<Badges badgeType="Actively Maintained"></Badges>
+```
+
 For data collection, you will often have different sources of information that correspond to applications designed for a particular purpose. These are what we refer to as Source Applications.
 
 :::tip
@@ -42,3 +50,59 @@ Application entities, also referred to as [global context](/docs/sources/tracker
 :::info
 Since application entities can also be set conditionally, you can mark any of them as optional with a note to better understand the condition or any extra information required. The method for conditionally adding an application entity is through [rulesets](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/global-context/index.md#rulesets), [filter functions](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/global-context/index.md#filter-functions) and [context generators](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/global-context/index.md#context-generators).
 :::
+
+## Initialize tracking with the Set up tracking tab
+
+Once you have created a source application, you can use the **Set up tracking** tab to configure tracking and generate ready-to-use code snippets. This guided configuration simplifies the instrumentation process and reduces the time to receiving your first event.
+
+:::info
+The Set up tracking tab currently supports the JavaScript tracker. You can always customize your tracking further by referring to the [tracker documentation](/docs/sources/trackers/index.md).
+:::
+
+### Configure tracking in the Set up tracking tab
+
+The Set up tracking tab provides a visual interface to configure your tracker and generates code snippets based on your selections.
+
+#### Initialize tracker
+
+Configure the basic tracker settings:
+
+- **Collector URL**: the endpoint where your events will be sent
+- **App ID**: select one of the application IDs associated with your source application
+
+![Initialize tracker](images/initialize-tracker.png)
+
+#### Automatic tracking
+
+Enable out-of-the-box tracking features to capture common user interactions without additional code:
+
+- **Page views**: automatically track when pages are viewed
+- **Link clicks**: capture clicks on links
+- **Form interactions**: track form submissions and field interactions
+- **Page pings**: monitor user engagement with periodic activity pings
+
+Toggle these features based on your tracking requirements.
+
+![Automatic tracking](images/automatic-tracking.png)
+
+#### Implementation
+
+The code snippet at the bottom of the Set up tracking tab updates in real-time as you modify settings. Copy the final code snippet and integrate it into your application to begin tracking.
+
+Choose your implementation method:
+
+<Tabs groupId="implementation" queryString>
+  <TabItem value="tag" label="JavaScript (tag)" default>
+    Add a `<script>` tag to your website. 
+    
+    The SDK URL is pre-filled with the latest version from a CDN but can be edited if you are hosting on your own domain.
+
+    ![Javascript implementation](images/tag-implementation.png)
+
+  </TabItem>
+  <TabItem value="npm" label="Browser (npm)">
+    Install the tracker as an npm package for bundled applications and any required plugins using your preferred package manager.
+
+    ![Browser implementation](images/npm-implementation.png)
+  </TabItem>
+</Tabs>

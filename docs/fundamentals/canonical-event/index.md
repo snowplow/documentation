@@ -11,13 +11,13 @@ Fields that are populated during tracking have two names associated with them:
 * **Payload property**: a short payload name, to reduce the size of the HTTP request
 * **Field name**: a more descriptive column or field name
 
-The field **type** refers to the data type in the warehouse or enriched event data. For some fields, the type is different for the raw tracker payload and the enriched event. Again, this is to reduce the size of the HTTP request.
+The field **type** refers to the data type in the enriched event data. For some fields, the type is different for the raw tracker payload and the enriched event. Again, this is to reduce the size of the HTTP request.
 
 Different event fields are populated by different applications, such as tracker SDKs or [enrichments](/docs/pipeline/enrichments/index.md). The **source** of data for each field is indicated in the tables below.
 
 The **reqd?** values in these tables specify whether a field is required for a Snowplow event. Required fields will always have values.
 
-Any payload that conforms to this protocol is a valid Snowplow event payload, whether it's sent by a Snowplow tracker SDK, a webhook, or a custom application. If you want to get into the details, check out some example HTTP requests [here](/docs/events/http-requests/index.md). In total, the tracker protocol defines 131 fields, of which 89 are in use by Snowplow applications.
+Any payload that conforms to this protocol is a valid Snowplow event payload, whether it's sent by a Snowplow tracker SDK, a webhook, or a custom application. If you want to get into the details, check out these [example HTTP requests](/docs/events/http-requests/index.md). In total, the tracker protocol defines 131 fields, of which 89 are in use by Snowplow applications.
 
 ## Common fields
 
@@ -88,7 +88,7 @@ This table shows the possible values for the `platform` field:
 | Games console             | `cnsl`           |
 | Internet of Things        | `iot`            |
 
-:::info
+:::info Tracker namespacing
 The tracker namespace parameter is used to distinguish between different trackers. The name can be any string that doesn't contain a colon or semicolon character. Tracker namespacing allows you to run multiple trackers, pinging to different collectors.
 :::
 
@@ -159,17 +159,17 @@ These fields are populated by the [campaign attribution enrichment](/docs/pipeli
 
 | Field name     | Type | Description                                                 | Reqd? | Example                                 | Source                                                                                                                       | Web | Mobile |
 | -------------- | ---- | ----------------------------------------------------------- | ----- | --------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | --- | ------ |
-| `mkt_medium`   | text | Type of traffic source                                      | No    | 'cpc', 'affiliate', 'organic', 'social' | [Campaign Attribution Enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅   | ✅      |
-| `mkt_source`   | text | The company or website where the traffic came from          | No    | 'Google', 'Facebook'                    | [Campaign Attribution Enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅   | ✅      |
-| `mkt_term`     | text | Any keywords associated with the referrer                   | No    | 'new age tarot decks'                   | [Campaign Attribution Enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅   | ✅      |
-| `mkt_content`  | text | The content of the ad, or an ID so that it can be looked up | No    | 13894723                                | [Campaign Attribution Enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅   | ✅      |
-| `mkt_campaign` | text | The campaign ID                                             | No    | 'diageo-123'                            | [Campaign Attribution Enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅   | ✅      |
-| `mkt_clickid`  | text | The click ID                                                | No    | 'ac3d8e459'                             | [Campaign Attribution Enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅   | ✅      |
-| `mkt_network`  | text | The ad network to which the click ID belongs                | No    | 'DoubleClick'                           | [Campaign Attribution Enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅   | ✅      |
+| `mkt_medium`   | text | Type of traffic source                                      | No    | 'cpc', 'affiliate', 'organic', 'social' | [Campaign attribution enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅   | ✅      |
+| `mkt_source`   | text | The company or website where the traffic came from          | No    | 'Google', 'Facebook'                    | [Campaign attribution enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅   | ✅      |
+| `mkt_term`     | text | Any keywords associated with the referrer                   | No    | 'new age tarot decks'                   | [Campaign attribution enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅   | ✅      |
+| `mkt_content`  | text | The content of the ad, or an ID so that it can be looked up | No    | 13894723                                | [Campaign attribution enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅   | ✅      |
+| `mkt_campaign` | text | The campaign ID                                             | No    | 'diageo-123'                            | [Campaign attribution enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅   | ✅      |
+| `mkt_clickid`  | text | The click ID                                                | No    | 'ac3d8e459'                             | [Campaign attribution enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅   | ✅      |
+| `mkt_network`  | text | The ad network to which the click ID belongs                | No    | 'DoubleClick'                           | [Campaign attribution enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) | ✅   | ✅      |
 
 ### Cross-domain tracking fields
 
-These fields are populated by default if the event's `url` has a [cross-navigation querystring](/docs/events/cross-navigation/index.md).
+The pipeline populates these fields by default if the event's `url` has a [cross-navigation querystring](/docs/events/cross-navigation/index.md).
 
 | Payload property | Field name           | Type      | Description                                                   | Reqd? | Example               | Source             | Web | Mobile |
 | ---------------- | -------------------- | --------- | ------------------------------------------------------------- | ----- | --------------------- | ------------------ | --- | ------ |
@@ -247,11 +247,11 @@ For more information on this topic check out the [device and browser data](/docs
 
 ### Page views
 
-There are no fields that are specific to page view events. All the relevant fields are included in the standard fields available for any web-based event e.g. `page_url`, `page_title`.
+There are no fields that are specific to page view events. All the relevant fields are included in the standard fields available for any web-based event e.g. `page_url`, or `page_title`.
 
 ### Page pings
 
-There are four additional fields included with page ping events that indicate how a user has scrolled over a web page since the last page ping:
+Page ping events include four additional fields. They indicate how a user has scrolled over a web page since the last page ping:
 
 | Payload property | Field name       | Type | Description                                        | Reqd? | Example |
 | ---------------- | ---------------- | ---- | -------------------------------------------------- | ----- | ------- |
@@ -272,7 +272,7 @@ Structured events use these fields to capture event data:
 | `se_pr`          | `se_property` | text    | A property associated with the object of the action                                             | No    | `HD`, `large`                 |
 | `se_va`          | `se_value`    | decimal | A value associated with the event or action e.g. the value of goods added-to-basket             | No    | `9.99`                        |
 
-\* These fields are only required for `struct` events.
+\* These fields are only required for structured events.
 
 ## Self-describing event fields
 

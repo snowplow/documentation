@@ -22,7 +22,7 @@ Select whether you'd like to create an [Event](/docs/fundamentals/events/index.m
   }}
 />
 
-You can now write the first version of your JSON schema for this data structure. Some template JSON is provided in the code window to start you off. For comprehensive guidance on all supported JSON Schema features and validation options, see the [JSON Schema reference](/docs/data-product-studio/json-schema-reference/index.md).
+You can now write the first version of your JSON schema for this data structure. Some template JSON is provided in the code window to start you off. For comprehensive guidance on all supported JSON Schema features and validation options, see the [JSON Schema reference](/docs/api-reference/json-schema-reference/index.md).
 
 ![](images/json-template.png)
 

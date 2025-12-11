@@ -64,7 +64,7 @@ window.snowplow('trackPageView', {
 
 See the [warehouse tables fundamentals](/docs/fundamentals/warehouse-tables/index.md) page to learn how entity data is structured in the data warehouse.
 
-:::info Terminology
+:::info Deprecated terminology
 In the past, what we now call "entity" or "entities" was called "context". You'll still find `context` used in many of the existing APIs, database column names, and documentation, especially to refer to a set of multiple entities. For example, the `context` parameter in the JavaScript tracker API above is an array of entities.
 :::
 

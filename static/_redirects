@@ -428,7 +428,7 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 
 /docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md/* /docs/pipeline/enriched-tsv-format/index.md/:splat 301
 /docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/* /docs/pipeline/enriched-tsv-format/:splat 301
-/docs/fundamentals/schemas/json-schema-reference/* /docs/data-product-studio/json-schema-reference/:splat 301
+/docs/fundamentals/schemas/json-schema-reference/* /docs/api-reference/json-schema-reference/:splat 301
 /docs/events/custom-events/context-entities/* /docs/events/event-types/custom-events/:splat 301
 /docs/events/custom-events/self-describing-events/* /docs/events/event-types/custom-events/:splat 301
 /docs/events/custom-events/structured-events/* /docs/events/event-types/custom-events/:splat 301

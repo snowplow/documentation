@@ -16,7 +16,7 @@ Schemas describe how you structure your data. When data is [processed through yo
 
 By describing how the data should be structured as part of your schema definition, you ensure clean and consistent data landing in your data warehouse or other destinations.
 
-As you evolve your website, mobile app or server-side application, you can evolve your schemas to reflect the changes. Snowplow automatically evolves your table definition to accommodate both old and new data safely.
+As you evolve your website, mobile app, or server-side application, you can update your schemas to reflect the changes. Snowplow automatically evolves your table definition to accommodate both old and new data safely.
 
 ## Data structures are schemas plus metadata
 
@@ -27,19 +27,19 @@ A **data structure** is a higher-level data management concept that includes the
 * Whether it's available to your pipeline, or is still in draft
 * Optional change notes associated with schema versions
 
-[Data structures](/docs/data-product-studio/data-structures/index.md) wrap schemas with this additional metadata to help you manage your data definitions more effectively. They allow you to group related schemas within [data products](/docs/data-product-studio/data-products/index.md) (tracking plans), or keep track of [which schemas are used where](/docs/data-product-studio/event-specifications/index.md).
+[Data structures](/docs/data-product-studio/data-structures/index.md) wrap schemas with this additional metadata to help you manage your data definitions. They allow you to group related schemas within [data products](/docs/data-product-studio/data-products/index.md) (tracking plans), or keep track of [which schemas are used where](/docs/data-product-studio/event-specifications/index.md).
 
-:::tip
+:::tip Data structure management
 Check out the documentation for [managing](/docs/data-product-studio/data-structures/manage/index.md) and [versioning](/docs/data-product-studio/data-structures/version-amend/index.md) data structures.
 :::
 
-## Schema anatomy
+## Self-describing JSON schema anatomy
 
 :::info Data structures builder
 Snowplow CDI customers can create custom schemas using the [data structures builder](/docs/data-product-studio/data-structures/manage/builder/index.md), without worrying about how it works under the hood.
 :::
 
-Snowplow schemas are based on the [JSON Schema](https://json-schema.org/) standard ([draft 4](https://datatracker.ietf.org/doc/html/draft-fge-json-schema-validation-00)). For a comprehensive guide to all Snowplow supported validation options, see the [Snowplow JSON Schema reference](/docs/data-product-studio/json-schema-reference/index.md).
+Snowplow schemas are based on the [JSON Schema](https://json-schema.org/) standard ([draft 4](https://datatracker.ietf.org/doc/html/draft-fge-json-schema-validation-00)). For a comprehensive guide to all Snowplow supported validation options, see the [Snowplow JSON Schema reference](/docs/api-reference/json-schema-reference/index.md).
 
 Snowplow specifically uses **self-describing JSON schemas**, meaning that they contain metadata about themselves within the schema definition.
 
@@ -119,13 +119,13 @@ Snowplow CDI customers don't need to create or manage their own Iglu repositorie
 
 You'll notice that schema URIs use the `iglu:` protocol, for example: `iglu:com.snowplowanalytics.snowplow/page_view/jsonschema/1-0-0`. This is because all Snowplow schemas are stored in an Iglu repository.
 
-There is a [central Iglu repository](http://iglucentral.com/) that holds public schemas for use with Snowplow, including ones for some of the [out-of-the-box self-described events](/docs/fundamentals/events/index.md#out-of-the-box-and-custom-events) and [out-of-the-box entities](/docs/fundamentals/entities/index.md#out-of-the-box-entities).
+There is a [central Iglu repository](http://iglucentral.com/) that holds public schemas for use with Snowplow, including ones for some of the [out-of-the-box self-describing events](/docs/fundamentals/events/index.md#self-describing-events) and [out-of-the-box entities](/docs/fundamentals/entities/index.md#how-to-track-entities).
 
 For Snowplow Self-Hosted users, you'll need to run your own Iglu schema repository to host schemas for your custom [events](/docs/fundamentals/events/index.md#self-describing-events) and [entities](/docs/fundamentals/entities/index.md#custom-entities). Use [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) (recommended), or a [static repository](/docs/api-reference/iglu/iglu-repositories/static-repo/index.md).
 
 ## Self-describing JSON data in the event payload
 
-Snowplow trackers can send self-describing JSON event and entity data as is, or as Base64-encoded strings. Configure this within the tracker. Base-64 strings are URL-safe and ensure that no data is lost or corrupted. The downside is that the data will be bigger and less readable.
+Snowplow trackers can send self-describing JSON event and entity data as is, or as Base64-encoded strings. Base-64 strings are URL-safe and ensure that no data is lost or corrupted. The downside is that the data will be bigger and less readable.
 
 Here's an example showing a self-describing JSON object for a product view event:
 
@@ -140,10 +140,6 @@ Here's an example showing a self-describing JSON object for a product view event
 ```
 
 Before adding this data to the event payload, the tracker will wrap this event self-describing JSON in an outer self-describing JSON. The wrapper specifies that this is a self-describing event, using the historical `unstruct_event` naming:
-
-:::info It's self-describing JSON all the way down
-The event payload is itself a self-describing JSON object. See how this works in practise in these [example tracker HTTP requests](/docs/events/http-requests/index.md).
-:::
 
 ```json
 {
@@ -162,6 +158,10 @@ The event payload is itself a self-describing JSON object. See how this works in
   }
 }
 ```
+
+:::info It's self-describing JSON all the way down
+The event payload is itself a self-describing JSON object. See how this works in practise in these [example tracker HTTP requests](/docs/events/http-requests/index.md).
+:::
 
 The parameter name used for this wrapped structure depends on whether you've chosen to use Base-64 encoding or not:
 

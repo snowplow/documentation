@@ -86,7 +86,7 @@ The legacy `transaction` and `transaction_item` events are also "baked-in". Seve
 
 ### Self-describing events
 
-Self-describing events can include arbitrarily complex data, as defined by the event's [data structure](/docs/fundamentals/schemas/index.md) or schema. We call them "self-describing" because these events include a reference to their underlying [JSON Schema](/docs/data-product-studio/json-schema-reference/index.md) data structure.
+Self-describing events can include arbitrarily complex data, as defined by the event's [data structure](/docs/fundamentals/schemas/index.md) or schema. We call them "self-describing" because these events include a reference to their underlying [JSON Schema](/docs/api-reference/json-schema-reference/index.md) data structure.
 
 Each self-describing event consists of two parts:
 - `schema`: a reference to a [schema](/docs/fundamentals/schemas/index.md) that describes the name, version and structure of the event

@@ -5,13 +5,13 @@ sidebar_position: 1
 ---
 
 Snowplow includes three ways to track custom data:
-* Self-describing [events](/docs/fundamentals/events/index.md#self-describing-events)
+* Custom [self-describing events](/docs/fundamentals/events/index.md#self-describing-events)
 * Custom [entities](/docs/fundamentals/entities/index.md)
 * Structured events (not recommended)
 
-Read our [tracking design best practice guide](/docs/fundamentals/tracking-design-best-practice/index.md) to learn how to use custom data effectively.
+Read our [tracking design best practice guide](/docs/fundamentals/tracking-design-best-practice/index.md) to learn how to use custom data.
 
-## Custom self-describing events
+## Custom events
 
 Self-describing [events](/docs/fundamentals/events/index.md#self-describing-events) are [based on JSON schemas](/docs/fundamentals/schemas/index.md) and can have arbitrarily many fields.
 
@@ -76,7 +76,7 @@ See the documentation for each tracker to learn how to configure it:
 * [Web](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/global-context/index.md)
 * [Native mobile](/docs/sources/trackers/mobile-trackers/custom-tracking-using-schemas/global-context/index.md) (iOS and Android)
 * [React Native](/docs/sources/trackers/react-native-tracker/index.md)
-* [Scala](docs/sources/trackers/scala-tracker/initialization/index.md)
+* [Scala](/docs/sources/trackers/scala-tracker/initialization/index.md)
 
 Use [source applications](/docs/data-product-studio/source-applications/index.md) to document your expected application entities.
 

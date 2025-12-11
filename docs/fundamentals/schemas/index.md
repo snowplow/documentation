@@ -5,18 +5,18 @@ sidebar_position: 3
 description: "Schemas are a powerful feature that ensures your data is clean and descriptive"
 ---
 
-**Schemas** are one of the most powerful features of Snowplow. They define the structure of the data that you collect. Each schema defines what fields are recorded with each [event](/docs/fundamentals/events/index.md), and provides validation criteria for each field. Schemas are also used to describe the structure of [entities that are attached to events](/docs/fundamentals/entities/index.md).
+**Schemas** define the structure of the data that you collect. Each schema defines what fields are recorded with each [event](/docs/fundamentals/events/index.md), and provides validation criteria for each field. Schemas are also used to describe the structure of [entities that are attached to events](/docs/fundamentals/entities/index.md).
 
 With schemas, you can:
-* Build meaning into your data by clearly defining what each field represents
-* Define your own data structures to capture data in a way that works for your business. For example, a two-sided marketplace will be tracking very different events from a gaming application
-* Ensure your data presents a validated record of what has happened
+* Build meaning into your data by clearly defining what each field represents.
+* Define your own data structures to capture data in a way that works for your business. For example, a two-sided marketplace will be tracking very different events from a gaming application.
+* Ensure your data presents a validated record of what has happened.
 
-Schemas describe how you want your data to be structured. When data is [processed through your Snowplow pipeline](/docs/fundamentals/index.md), each event is validated against its schema and only valid events are allowed to pass through. [Failed events](/docs/fundamentals/failed-events/index.md) are sent to a separate location.
+Schemas describe how you structure your data. When data is [processed through your Snowplow pipeline](/docs/fundamentals/index.md), each event is validated against its schema and only valid events are allowed to pass through. [Failed events](/docs/fundamentals/failed-events/index.md) are sent to a separate location.
 
 By describing how the data should be structured as part of your schema definition, you ensure clean and consistent data landing in your data warehouse or other destinations.
 
-As you evolve your website, mobile app or server-side application, you can evolve your schemas to reflect the changes. Snowplow automatically evolves your table definition to accommodate both old and new data safely and non-destructively.
+As you evolve your website, mobile app or server-side application, you can evolve your schemas to reflect the changes. Snowplow automatically evolves your table definition to accommodate both old and new data safely.
 
 ## Data structures are schemas plus metadata
 

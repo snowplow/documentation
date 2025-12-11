@@ -51,15 +51,15 @@ Application entities, also referred to as [global context](/docs/sources/tracker
 Since application entities can also be set conditionally, you can mark any of them as optional with a note to better understand the condition or any extra information required. The method for conditionally adding an application entity is through [rulesets](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/global-context/index.md#rulesets), [filter functions](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/global-context/index.md#filter-functions) and [context generators](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/global-context/index.md#context-generators).
 :::
 
-## Initialize tracking with the Set up tracking tab
+## Initialize tracking with the tracker configuration
 
-Once you have created a source application, you can use the **Set up tracking** tab to configure tracking and generate ready-to-use code snippets. This guided configuration simplifies the instrumentation process and reduces the time to receiving your first event.
+Once you have created a source application, you can use the **Set up tracking** tab to configure tracking and generate ready-to-use code snippets. This guided configuration simplifies the instrumentation process and helps you start receiving events.
 
 :::info
 The Set up tracking tab currently supports the JavaScript tracker. You can always customize your tracking further by referring to the [tracker documentation](/docs/sources/trackers/index.md).
 :::
 
-### Configure tracking in the Set up tracking tab
+### Configure tracker settings
 
 The Set up tracking tab provides a visual interface to configure your tracker and generates code snippets based on your selections.
 
@@ -87,7 +87,7 @@ Toggle these features based on your tracking requirements.
 
 #### Implementation
 
-The code snippet at the bottom of the Set up tracking tab updates in real-time as you modify settings. Copy the final code snippet and integrate it into your application to begin tracking.
+The code snippet at the bottom of the Set up tracking tab updates in real-time as you modify settings. Copy the code snippet and integrate it into your application to begin tracking.
 
 Choose your implementation method:
 
@@ -97,7 +97,7 @@ Choose your implementation method:
     
     The SDK URL is pre-filled with the latest version from a CDN but can be edited if you are hosting on your own domain.
 
-    ![Javascript implementation](images/tag-implementation.png)
+    ![JavaScript implementation](images/tag-implementation.png)
 
   </TabItem>
   <TabItem value="npm" label="Browser (npm)">

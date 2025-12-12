@@ -87,7 +87,7 @@ Here is an example of what the `contexts_com_snowplowanalytics_snowplow_failure_
 
 ## Configure
 
-To use this feature, you will first need to enable the stream that contains failed events in the [Snowplow TSV format](/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md) suitable for loading into your warehouse or lake.
+To use this feature, you will first need to enable the stream that contains failed events in the [Snowplow TSV format](/docs/pipeline/enriched-tsv-format/index.md) suitable for loading into your warehouse or lake.
 
 The instructions below are for Snowplow CDI customers. For Snowplow Self-Hosted, you will need to configure this manually via Terraform.
 

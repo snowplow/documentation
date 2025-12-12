@@ -18,7 +18,7 @@ The process for creating a key has been improved over time. We recommend using t
 
 ### Version 3
 
-The following view is available in [Console](https://console.snowplowanalytics.com/), under **Settings** in the navigation bar, then **Manage organization** and select **API keys for managing Snowplow** in the respective page. Please note that a user can view that page only if they have the necessary permissions ("View" on API keys).
+The following view is available in [Console](https://console.snowplowanalytics.com/), under **Settings** in the navigation bar, then **Manage organization**, then **API keys for managing Snowplow**. Users can view this page only if they have the "view" permission on API keys.
 
 ![](images/accessing-generated-api-keys.png)
 

@@ -18,7 +18,7 @@ The process for creating a key has been improved over time. We recommend using t
 
 ### Version 3
 
-The following view is available to all customers under [Console settings](https://console.snowplowanalytics.com/credentials):
+The following view is available to all customers in the Console, under "Settings" in the navigation bar,  then "Manage organization" and selecting "API keys for managing Snowplow" in the respective page:
 
 ![](images/accessing-generated-api-keys.png)
 

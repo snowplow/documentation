@@ -22,7 +22,7 @@
 * H2 is for main sections. H3 is for subsections.
 * Never end headings with punctuation.
 * Use sentence case: "Configure how events are sent".
-* Use imperative voice: "Configure the tracker" not "Tracker configuration".
+* Prefer imperative voice: "Initialize the tracker" not "Tracker initialization".
 
 ## Bold, italic, and code
 

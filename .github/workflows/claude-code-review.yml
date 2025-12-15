@@ -2,7 +2,7 @@ name: Claude Code Review
 
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [opened]
 
 jobs:
   claude-review:
@@ -31,7 +31,9 @@ jobs:
             Please review this pull request and provide feedback on writing quality.
             Suggest changes the author should make to follow the style guide.
 
-            Use the repository's CLAUDE.md for guidance on style and conventions. Be constructive and helpful in your feedback.
+            Use the repository's CLAUDE.md for guidance on style and conventions. Be constructive, helpful, and concise in your feedback.
+
+            Provide feedback only on things that can be improved, not things that are already correct.
 
             Use `gh pr comment` with your Bash tool to leave your review as a comment on the PR.
 

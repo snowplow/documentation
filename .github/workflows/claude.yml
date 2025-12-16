@@ -42,6 +42,8 @@ jobs:
 
           # Optional: Give a custom prompt to Claude. If this is not specified, Claude will perform the instructions specified in the comment that tagged it.
           prompt: |
+            Do not commit any changes unless specifically instructed to do so.
+
             Your default behavior, if no other instructions are given, is to review the pull request for writing quality. Use the repository's CLAUDE.md for guidance on style and conventions.
             Suggest changes the author should make to follow the style guide.
 

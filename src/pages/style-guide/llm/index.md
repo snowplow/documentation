@@ -12,7 +12,7 @@
 
 ## Formatting and punctuation
 
-* Use straight double quotes ("). Never use single quotes (') or smart quotes (").
+* Use straight double quotes ("). Never use single quotes (') or smart quotes (”).
 * Use the Oxford comma: "events, entities, and schemas".
 * Use "and", never "&".
 
@@ -86,7 +86,7 @@
 ## Snowplow terminology
 
 * Use "Snowplow". Never use "Snowplow Analytics".
-* Always capitalized: Data Product Studio, Snowtype, Snowplow Customer Data Infrastructure, Data Model Packs, Signals.
+* Always capitalized: Data Product Studio, Snowtype, Snowplow Customer Data Infrastructure, Signals.
 * Console: Capitalized, no article. "Data structures in Console."
 * Collector: Capitalized, with "the". "Events hit the Collector endpoint."
 * Enrich: Capitalized. "Enrich can enrich an event."
@@ -96,11 +96,10 @@
 * Use "entity". Never use "context".
 * Use "self-describing event". Never use "unstructured event".
 * Use "failed events". Never use "bad rows" (except for legacy JSON format).
-* Use "visualization". Never use "data application".
 * Language capitalized, "tracker" lowercase: "JavaScript tracker", "Python tracker".
 * Use "native mobile trackers" for iOS and Android together.
 * Use "JavaScript tracker" for all web trackers collectively.
-* Call events without schemas "baked-in events" (page views, page pings, legacy ecommerce).
+* Call events without schemas "baked-in events" (page views, page pings, structured, legacy ecommerce).
 * Use "version 1.3.0" or "1.3.0". Never use "v1.3.0".
 
 ## General technical terms

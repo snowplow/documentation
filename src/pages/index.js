@@ -1,11 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import Layout from '@theme/Layout'
 import Head from '@docusaurus/Head'
+import { motion, useInView } from 'framer-motion';
 import { PlaceholdersAndVanishInput } from '../components/ui/placeholders-and-vanish-input';
 import { FloatingNav } from '../components/ui/floating-navbar';
+import { BackgroundGradientAnimation } from '../components/ui/background-gradient-animation';
+import { GridBackground } from '../components/ui/grid-background';
+import { BackgroundLines } from '../components/ui/background-lines';
+import LogoCloudDemo from '../components/ui/infinite-logo-slider';
+
+// Fixed JSX syntax issues
 
 // Path Card Component
-const PathCard = ({ title, subtitle, description, forText, builds, ctaText, ctaLink, icon, variant }) => {
+const PathCard = ({ title, subtitle, description, forText, builds, ctaText, ctaLink, icon, variant, shouldAnimate = false }) => {
   const isSignals = variant === 'signals';
 
   return (
@@ -43,19 +50,36 @@ const PathCard = ({ title, subtitle, description, forText, builds, ctaText, ctaL
         </ul>
 
         {/* CTA */}
-        <a
+        <motion.a
           href={ctaLink}
           className={`inline-flex items-center gap-2 px-6 py-3 rounded-lg font-semibold text-sm transition-all duration-300 ${
             isSignals
               ? 'bg-cyan-50 text-cyan-700 hover:bg-cyan-500 hover:text-white border border-cyan-200'
               : 'bg-violet-50 text-violet-700 hover:bg-violet-500 hover:text-white border border-violet-200'
           }`}
+          animate={shouldAnimate ?
+            { y: [20, 0] } :
+            { y: 0 }
+          }
+          transition={{
+            duration: shouldAnimate ? 0.5 : 0,
+            delay: shouldAnimate ? 0.3 : 0
+          }}
+          whileHover={{ scale: 1.02 }}
+          whileTap={{ scale: 0.98 }}
         >
           {ctaText}
-          <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <motion.svg
+            className="w-4 h-4"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            whileHover={{ x: 4 }}
+            transition={{ duration: 0.2 }}
+          >
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </a>
+          </motion.svg>
+        </motion.a>
       </div>
     </div>
   );
@@ -63,18 +87,18 @@ const PathCard = ({ title, subtitle, description, forText, builds, ctaText, ctaL
 
 // FAQ Accordion Item
 const FAQItem = ({ question, answer, isOpen, onClick }) => (
-  <div className="border-b border-gray-200 last:border-0">
+  <div className="border-b border-border last:border-0">
     <button
       onClick={onClick}
-      className="w-full py-5 flex items-center justify-between text-left"
+      className="w-full py-5 flex items-center justify-between text-left text-foreground bg-card border-border border-solid border-1 border-t-0 border-l-0 border-r-0"
     >
-      <span className="text-base text-gray-700 hover:text-gray-900 transition-colors pr-8">
+      <span className="text-base text-muted-foreground hover:text-foreground transition-colors pr-8">
         {question}
       </span>
-      <span className={`flex-shrink-0 w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center transition-transform duration-300 ${
-        isOpen ? 'rotate-180 bg-violet-500' : ''
+      <span className={`flex-shrink-0 w-8 h-8 rounded-full border flex items-center justify-center transition-transform duration-300 ${
+        isOpen ? 'rotate-180 bg-accent-foreground border-accent text-accent-foreground' : 'bg-muted border-border text-muted-foreground'
       }`}>
-        <svg className={`w-4 h-4 ${isOpen ? 'text-white' : 'text-gray-600'}`} fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <svg className="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
         </svg>
       </span>
@@ -82,7 +106,7 @@ const FAQItem = ({ question, answer, isOpen, onClick }) => (
     <div className={`overflow-hidden transition-all duration-300 ${
       isOpen ? 'max-h-96 pb-5' : 'max-h-0'
     }`}>
-      <p className="text-gray-600 leading-relaxed">{answer}</p>
+      <p className="text-muted-foreground leading-relaxed">{answer}</p>
     </div>
   </div>
 );
@@ -90,27 +114,61 @@ const FAQItem = ({ question, answer, isOpen, onClick }) => (
 // Main Landing Page
 export default function SnowplowDocsLanding() {
   const [openFAQ, setOpenFAQ] = useState(null);
+  const [shouldAnimate, setShouldAnimate] = useState(false);
+  const [hasScrolledToSection, setHasScrolledToSection] = useState(false);
+  const pathsRef = useRef(null);
+  const isInView = useInView(pathsRef, { threshold: 0.2 });
+
+  const scrollToSection = (sectionId) => {
+    console.log('Button clicked - starting scroll');
+
+    const element = document.getElementById(sectionId);
+    if (element) {
+      // Start the scroll immediately
+      element.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+
+      // After scroll completes, trigger animation
+      setTimeout(() => {
+        console.log('Triggering animation');
+        setShouldAnimate(true);
+      }, 800);
+    }
+  };
+
+  // Effect to detect natural scrolling to section
+  useEffect(() => {
+    const handleScroll = () => {
+      if (isInView && !hasScrolledToSection && !shouldAnimate) {
+        const pathsElement = document.getElementById('paths');
+        if (pathsElement) {
+          const rect = pathsElement.getBoundingClientRect();
+          if (rect.top <= window.innerHeight * 0.5 && rect.bottom >= 0) {
+            console.log('Natural scroll detected - triggering animation');
+            setShouldAnimate(true);
+            setHasScrolledToSection(true);
+          }
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, [isInView, hasScrolledToSection, shouldAnimate]);
 
   const navItems = [
     {
-      name: "Fundamentals",
-      link: "/docs/fundamentals/",
-      icon: <span>📘</span>,
-    },
-    {
       name: "Get Started",
-      link: "/docs/get-started/",
+      link: "#paths",
       icon: <span>🚀</span>,
+      onClick: () => scrollToSection('paths')
     },
     {
-      name: "API Reference",
-      link: "/docs/api-reference/",
-      icon: <span>📚</span>,
-    },
-    {
-      name: "Community",
-      link: "https://community.snowplow.io/",
-      icon: <span>🤝</span>,
+      name: "Tutorials",
+      link: "/docs/tutorials/",
+      icon: <span>📖</span>,
     },
   ];
 
@@ -148,32 +206,50 @@ export default function SnowplowDocsLanding() {
       </Head>
 
       <div className="min-h-screen bg-white text-gray-900">
-        <FloatingNav navItems={navItems} />
+        <FloatingNav navItems={navItems} showBadge={true} />
 
         {/* Hero Section */}
-        <section className="px-6 py-24 lg:py-32 bg-gradient-to-br from-white via-background to-background">
-          <div className="max-w-4xl mx-auto text-center">
+        <section className="relative min-h-screen overflow-hidden">
+          {/* Grid Background - Top Layer */}
+          <GridBackground
+            containerClassName="absolute inset-0 z-15"
+            gridSize="72px"
+            gridColor="rgba(55, 65, 81, 0.2)"
+            darkGridColor="rgba(55, 65, 81, 0.2)"
+            maskRadialGradient={true}
+          />
+
+          {/* Background Lines - Middle Layer */}
+          <BackgroundLines className="absolute inset-0 z-10 pointer-events-none" />
+
+          {/* Gradient Animation - Bottom Layer */}
+          <BackgroundGradientAnimation
+            gradientBackgroundStart="rgb(255, 255, 255)"
+            gradientBackgroundEnd="rgb(240, 240, 255)"
+            firstColor="124, 58, 237"
+            secondColor="168, 85, 247"
+            thirdColor="139, 92, 246"
+            fourthColor="99, 102, 241"
+            fifthColor="67, 56, 202"
+            pointerColor="124, 58, 237"
+            size="140%"
+            blendingValue="normal"
+            interactive={false}
+            containerClassName="absolute inset-0 z-5"
+          />
+          <div className="relative z-20 min-h-screen flex items-center px-10 py-40 lg:py-32">
+            <div className="max-w-4xl mx-auto text-center">
            
 
 
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-violet-100 border border-violet-200 mb-8">
-              <img src="/img/snowplow-logo.svg" alt="Snowplow" className="h-6" />
-              <span className="text-lg font-light text-violet-700">
-                Developer Docs
-              </span>
-            </div>
-
-            
 
             {/* Headline */}
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-[800] mb-16 leading-tight">
               From Raw Behavior Data
-              
-              to AI powered Fuel
-               
-            </h1>
 
+              to AI powered Fuel
+
+            </h1>
 
             {/* Interactive Search Bar */}
             <div className="max-w-xl mx-auto mb-10">
@@ -230,56 +306,121 @@ export default function SnowplowDocsLanding() {
             We are the leader in customer data infrastructure (CDI)—including advanced analytics, real-time personalization engines, and AI agents.
             </p>
 
+            </div>
           </div>
         </section>
 
+                {/* Trust Strip */}
+                <LogoCloudDemo />
+
         {/* Two Paths Section */}
-        <section id="paths" className="px-6 py-24 bg-gray-50">
+        <section ref={pathsRef} id="paths" className="px-6 py-24 bg-gray-50">
           <div className="max-w-5xl mx-auto">
             {/* Section header */}
-            <div className="text-center mb-16">
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+            <motion.div
+              className="text-center mb-16"
+              animate={shouldAnimate ?
+                { y: [30, 0] } :
+                { y: 0 }
+              }
+              transition={{
+                duration: shouldAnimate ? 0.6 : 0,
+                delay: shouldAnimate ? 0.2 : 0,
+                ease: "easeOut"
+              }}
+              onAnimationStart={() => shouldAnimate && console.log('Header animation started')}
+              onAnimationComplete={() => shouldAnimate && console.log('Header animation completed')}
+            >
+              <motion.h2
+                className="text-3xl md:text-4xl font-bold mb-4 text-gray-900"
+                animate={shouldAnimate ?
+                  { y: [20, 0] } :
+                  { y: 0 }
+                }
+                transition={{
+                  duration: shouldAnimate ? 0.6 : 0,
+                  delay: shouldAnimate ? 0.4 : 0,
+                  ease: "easeOut"
+                }}
+              >
                 Two Products. One Foundation.
-              </h2>
-              <p className="text-gray-600">
+              </motion.h2>
+              <motion.p
+                className="text-gray-600"
+                animate={shouldAnimate ?
+                  { y: [20, 0] } :
+                  { y: 0 }
+                }
+                transition={{
+                  duration: shouldAnimate ? 0.6 : 0,
+                  delay: shouldAnimate ? 0.6 : 0,
+                  ease: "easeOut"
+                }}
+              >
                 Your journey depends on what you're building.
-              </p>
-            </div>
+              </motion.p>
+            </motion.div>
 
             {/* Path Cards */}
             <div className="grid md:grid-cols-2 gap-8">
-              <PathCard
-                title="Snowplow CDI"
-                subtitle="Governed, AI-ready behavioral data — in your warehouse"
-                description="Collect event-level data from every touchpoint. Validate against schemas at collection — not after. Deliver to your warehouse, lake, or stream in seconds, with complete ownership."
-                forText="Data Engineers · Analytics Engineers · Platform Teams"
-                builds={[
-                  "Composable analytics & BI",
-                  "Customer 360 & journey analytics",
-                  "Attribution modeling",
-                  "ML feature pipelines"
-                ]}
-                ctaText="Explore CDI Docs"
-                ctaLink="/docs/get-started/"
-                icon="🔷"
-                variant="cdi"
-              />
-              <PathCard
-                title="Snowplow Signals"
-                subtitle="Real-time customer intelligence — for AI-powered applications"
-                description="Access rich user context in 45ms. Combine live in-session behavior with historical data. Trigger personalized interventions at exactly the right moment."
-                forText="Product Engineers · Software Developers · ML/AI Teams"
-                builds={[
-                  "In-session personalization",
-                  "AI agents with customer context",
-                  "Recommendation engines",
-                  "Dynamic pricing & proactive nudges"
-                ]}
-                ctaText="Explore Signals Docs"
-                ctaLink="/docs/signals/"
-                icon="⚡"
-                variant="signals"
-              />
+              <motion.div
+                animate={shouldAnimate ?
+                  { y: [40, 0], scale: [0.95, 1] } :
+                  { y: 0, scale: 1 }
+                }
+                transition={{
+                  duration: shouldAnimate ? 0.8 : 0,
+                  delay: shouldAnimate ? 0.8 : 0,
+                  ease: "easeOut"
+                }}
+              >
+                <PathCard
+                  title="Snowplow CDI"
+                  subtitle="Governed, AI-ready behavioral data — in your warehouse"
+                  description="Collect event-level data from every touchpoint. Validate against schemas at collection — not after. Deliver to your warehouse, lake, or stream in seconds, with complete ownership."
+                  forText="Data Engineers · Analytics Engineers · Platform Teams"
+                  builds={[
+                    "Composable analytics & BI",
+                    "Customer 360 & journey analytics",
+                    "Attribution modeling",
+                    "ML feature pipelines"
+                  ]}
+                  ctaText="Explore CDI Docs"
+                  ctaLink="/docs/get-started/"
+                  icon="🔷"
+                  variant="cdi"
+                  shouldAnimate={shouldAnimate}
+                />
+              </motion.div>
+              <motion.div
+                animate={shouldAnimate ?
+                  { y: [40, 0], scale: [0.95, 1] } :
+                  { y: 0, scale: 1 }
+                }
+                transition={{
+                  duration: shouldAnimate ? 0.8 : 0,
+                  delay: shouldAnimate ? 1.0 : 0,
+                  ease: "easeOut"
+                }}
+              >
+                <PathCard
+                  title="Snowplow Signals"
+                  subtitle="Real-time customer intelligence — for AI-powered applications"
+                  description="Access rich user context in 45ms. Combine live in-session behavior with historical data. Trigger personalized interventions at exactly the right moment."
+                  forText="Product Engineers · Software Developers · ML/AI Teams"
+                  builds={[
+                    "In-session personalization",
+                    "AI agents with customer context",
+                    "Recommendation engines",
+                    "Dynamic pricing & proactive nudges"
+                  ]}
+                  ctaText="Explore Signals Docs"
+                  ctaLink="/docs/signals/"
+                  icon="⚡"
+                  variant="signals"
+                  shouldAnimate={shouldAnimate}
+                />
+              </motion.div>
             </div>
           </div>
         </section>
@@ -370,21 +511,7 @@ export default function SnowplowDocsLanding() {
           </div>
         </section>
 
-        {/* Trust Strip */}
-        <section className="px-6 py-16 border-t border-b border-gray-200 bg-white">
-          <div className="max-w-3xl mx-auto text-center">
-            <p className="text-xs text-gray-500 uppercase tracking-wider mb-6">
-              Powering behavioral data at scale
-            </p>
-            <div className="flex flex-wrap items-center justify-center gap-8 text-gray-600">
-              {['Strava', 'HelloFresh', 'Burberry', 'Supercell', 'Auto Trader', 'DPG Media', '1Password'].map((brand) => (
-                <span key={brand} className="text-base font-medium">
-                  {brand}
-                </span>
-              ))}
-            </div>
-          </div>
-        </section>
+
 
         {/* FAQ Section */}
         <section className="px-6 py-24 bg-gray-50">
@@ -393,7 +520,7 @@ export default function SnowplowDocsLanding() {
               Common Questions
             </h2>
 
-            <div className="bg-white border border-gray-200 rounded-xl p-6 shadow-sm">
+            <div className="bg-card border border-border rounded-xl p-6 shadow-sm">
               {faqs.map((faq, i) => (
                 <FAQItem
                   key={i}

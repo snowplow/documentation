@@ -76,6 +76,39 @@ module.exports = {
           from: { transform: "translateX(0)" },
           to: { transform: "translateX(100%)" },
         },
+        moveHorizontal: {
+          "0%": {
+            transform: "translateX(-50%) translateY(-10%)",
+          },
+          "50%": {
+            transform: "translateX(50%) translateY(10%)",
+          },
+          "100%": {
+            transform: "translateX(-50%) translateY(-10%)",
+          },
+        },
+        moveInCircle: {
+          "0%": {
+            transform: "rotate(0deg)",
+          },
+          "50%": {
+            transform: "rotate(180deg)",
+          },
+          "100%": {
+            transform: "rotate(360deg)",
+          },
+        },
+        moveVertical: {
+          "0%": {
+            transform: "translateY(-50%)",
+          },
+          "50%": {
+            transform: "translateY(50%)",
+          },
+          "100%": {
+            transform: "translateY(-50%)",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.15s ease-in-out",
@@ -85,6 +118,11 @@ module.exports = {
         "slide-in-from-top-full": "slide-in-from-top 0.15s ease-out",
         "slide-in-from-bottom-full": "slide-in-from-bottom 0.15s ease-out",
         "slide-out-to-right-full": "slide-out-to-right 0.15s ease-in",
+        first: "moveVertical 30s ease infinite",
+        second: "moveInCircle 20s reverse infinite",
+        third: "moveInCircle 40s linear infinite",
+        fourth: "moveHorizontal 40s ease infinite",
+        fifth: "moveInCircle 20s ease infinite",
       },
       typography: {
         DEFAULT: {

@@ -3,8 +3,6 @@ title: "Adjust"
 sidebar_position: -1
 ---
 
-## Intro
-
 [Adjust](https://www.adjust.com/) provides a mobile attribution platform. It enables users to track what marketing channels drive mobile app installations.
 
 Many Snowplow users who have mobile apps use Adjust to capture the sources (marketing channels) that drive app downloads. By integrating Adjust with Snowplow, it is straightforward to:

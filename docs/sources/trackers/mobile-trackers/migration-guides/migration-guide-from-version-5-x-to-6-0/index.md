@@ -1,9 +1,8 @@
 ---
-title: "From version 5.x to 6.0"
+title: "Migration guide from version 5.x to 6.0"
+sidebar_label: "From version 5.x to 6.0"
 sidebar_position: -7
 ---
-
-# Migration guide from version 5.x to 6.0
 
 There were a few breaking changes within v6, for both iOS and Android. These are described here, with a quick summary of the rest of the changelog at the end.
 

@@ -1,6 +1,7 @@
 ---
 position: 4
-title: Setup basic tracking
+title: Track page views, activity, and link clicks with the Browser tracker
+sidebar_label: Set up web tracking
 ---
 
 For this example application, we will use the [Browser tracker](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/quick-start-guide/#quick-start-basic) which is distributed through npm.
@@ -28,7 +29,7 @@ import "./styles.css";
 +  heartbeatDelay: 10,
 +});
 
-+trackPageView(); 
++trackPageView();
 
 createRoot(document.getElementById("root")!).render(
 ```

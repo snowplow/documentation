@@ -1,5 +1,6 @@
 ---
-title: "EventHub"
+title: "Configuring EventHub as a Snowbridge target"
+sidebar_label: "EventHub"
 description: "Write data to an EventHub."
 ---
 
@@ -7,8 +8,6 @@ description: "Write data to an EventHub."
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-## Authentication
 
 Authentication for the EventHub target is done by configuring any valid combination of the environment variables [listed in the Azure Event Hubs Client documentation](https://pkg.go.dev/github.com/Azure/azure-event-hubs-go#NewHubWithNamespaceNameAndEnvironment).
 

@@ -1,10 +1,9 @@
 ---
-title: "From version 1.x to 2.0 for Android"
+title: "Migration guide for Snowplow Android Tracker SDK from version 1.x to 2.0"
 date: "2021-03-19"
+sidebar_label: "From version 1.x to 2.0 for Android"
 sidebar_position: -1
 ---
-
-# Migration guide for Snowplow Android Tracker SDK from version 1.x to 2.0
 
 This section describes the main changes when converting an applications instrumentation of the Snowplow Android tracker SDK from version 1.x to version 2.0.
 
@@ -74,39 +73,39 @@ The tracker can be controlled by the `TrackerController` (the `Tracker` class is
 ## Low level migration from 1.x
 
 - Minimum supported version is API 21 (Android 5).
-    
+
 - Migrated from Android Support Library to AndroidX.
-    
+
 - Minimum OkHttpClient dependency is 4.9.1.
-    
+
 - `lifecycleAutotracking` (background and foreground events and indexes on sessions) are optional and off by default.
-    
+
 - `lifecycleAutotracking` requires `androidx.lifecycle:lifecycle-extensions` among the dependencies of the app.
-    
+
 - `RequestSecurity` class has been renamed `Protocol`.
-    
+
 - `mobileContext` property has been renamed `platformContext`.
-    
+
 - `DevicePlatforms` has been renamed `DevicePlatform`.
-    
+
 - `ReadyRequest` has been replaced by `Request` (not needed in the new API).
-    
+
 - `namespace` on Tracker is now mandatory for the correct operativity.
-    
+
 - `name` field on `ScreenView` is now mandatory.
-    
+
 - `EcommerceItem`s aren't forced to have the same timestamp of the `EcommerceTransaction` event.
-    
+
 - `SPEcommerceItem` constructor doesn't require `itemId` as it's added by the tracker when the e-commerce event is sent.
-    
+
 - Deprecated classes of the previous API (Tracker, Emitter, Subject, ...) are now accessible from the `internal` sub-package.
-    
+
 - The `internal` package is considered private API so it doesn't follow the restrictions of the [Semantic Version](https://semver.org/) policy. Although we will keep the legacy deprecated API with minimum changes until the release of the version 3.0.
-    
+
 - Global Contexts implementation is changed and uniformed to the one on iOS tracker.
-    
+
 - **For the versions 2.0 and 2.1**, the application install events report the timestamp of when installation happened in the `true_timestamp` rather than the `device_timestamp`. It caused an [issue](https://github.com/snowplow/snowplow-android-tracker/issues/462) with the `derived_timestamp`. For this reason, since the version 2.2, the application install events report the timestamp of then installation happened in the `device_timestamp` like the previous 1.x versions.
-    
+
 
 ## Migrate to new Global Contexts API
 

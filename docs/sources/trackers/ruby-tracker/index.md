@@ -1,5 +1,5 @@
 ---
-title: "Ruby Tracker"
+title: "Ruby tracker"
 date: "2020-02-26"
 sidebar_position: 220
 ---

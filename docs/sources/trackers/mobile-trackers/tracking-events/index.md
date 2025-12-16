@@ -1,10 +1,9 @@
 ---
-title: "Tracking out-of-the-box events"
+title: "Tracking out-of-the-box events with the native mobile trackers"
+sidebar_label: "Tracking out-of-the-box events"
 date: "2022-08-30"
 sidebar_position: 10
 ---
-
-# Tracking out-of-the-box events
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

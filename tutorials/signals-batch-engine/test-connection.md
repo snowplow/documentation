@@ -1,6 +1,7 @@
 ---
 position: 3
-title: Test the connection
+title: Test the Signals batch engine connections
+sidebar_label: Test the connection
 description: "Verify connectivity to Snowplow Signals API and check database, cache, and storage service health."
 ---
 

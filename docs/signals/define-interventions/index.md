@@ -1,5 +1,5 @@
 ---
-title: "Define interventions"
+title: "Defining interventions in Signals"
 sidebar_position: 25
 description: "Configure and deploy interventions to trigger real-time actions based on user attribute changes in Snowplow Signals."
 ---

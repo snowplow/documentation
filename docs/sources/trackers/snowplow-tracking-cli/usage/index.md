@@ -1,5 +1,6 @@
 ---
-title: "Usage"
+title: "Using the Snowplow Tracking CLI"
+sidebar_label: "Usage"
 date: "2020-10-12"
 sidebar_position: 200
 ---

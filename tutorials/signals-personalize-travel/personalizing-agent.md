@@ -1,5 +1,6 @@
 ---
-title: "Optional: Personalize the AI agent"
+title: "Optional: Provide Signals personalization context to the travel AI agent"
+sidebar_label: "Optional: personalize the AI agent"
 position: 6
 description: "Integrate Snowplow Signals with an AI chatbot to provide personalized travel recommendations based on user behavioral data."
 keywords: ["chatbot", "AI personalization", "OpenAI", "conversational AI", "behavioral data"]

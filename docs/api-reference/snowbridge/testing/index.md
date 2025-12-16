@@ -74,7 +74,7 @@ Note that docker expects absolute paths for mounted files - here we use `$(pwd)`
 
 To test transformations, you only need to add the `transform` block(s) to your configuration file. Don’t specify the `source` and `target` blocks to leave them on default (`stdin` and `stdout`).
 
-To test specific sources or targets, add the respective `source` or `target` blocks. For example, see the [configuration](/docs/api-reference/snowbridge/configuration/targets/http/google-tag-manager.md) for an HTTP target sending data to Google Tag Manager Server Side.
+To test specific sources or targets, add the respective `source` or `target` blocks. For example, see the [configuration](/docs/api-reference/snowbridge/configuration/targets/http/index.md#example-for-google-tag-manager-server-side) for an HTTP target sending data to Google Tag Manager Server Side.
 
 ### Adding a custom transformation script
 

@@ -1,5 +1,6 @@
 ---
-title: "Installation"
+title: "Installing the Snowplow Tracking CLI"
+sidebar_label: "Installation"
 date: "2020-10-12"
 sidebar_position: 100
 ---

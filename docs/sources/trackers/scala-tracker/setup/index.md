@@ -1,5 +1,6 @@
 ---
-title: "Setup"
+title: "Installing the Scala tracker"
+sidebar_label: "Setup"
 date: "2022-9-15"
 sidebar_position: 0
 ---
@@ -19,14 +20,14 @@ Add the Scala Tracker to your build.sbt:
 
 <CodeBlock language="scala" title="build.sbt">{
 `libraryDependencies += "com.snowplowanalytics" %% "snowplow-scala-tracker-core" % "${versions.scalaTracker}"
-\ 
+\
 // If you plan to use the http4s emitter with an Ember client
 libraryDependencies += "com.snowplowanalytics" %% "snowplow-scala-tracker-emitter-http4s" % "${versions.scalaTracker}"
 libraryDependencies += "org.http4s" %% "http4s-ember-client" % "0.23.15"
-\ 
+\
 // If you plan to use the id emitters:
 libraryDependencies += "com.snowplowanalytics" %% "snowplow-scala-tracker-emitter-id" % "${versions.scalaTracker}"
-\ 
+\
 // If you plan to use EC2/GCE contexts:
 libraryDependencies += "com.snowplowanalytics" %% "snowplow-scala-tracker-metadata" % "${versions.scalaTracker}"`
 }</CodeBlock>
@@ -50,14 +51,14 @@ Then add into the same file:
     ...
     // Snowplow Scala Tracker
     compile 'com.snowplowanalytics:snowplow-scala-tracker-core_2.13:${versions.scalaTracker}'
-\ 
+\
     // If you plan to use the http4s emitters with an Ember client
     compile 'com.snowplowanalytics:snowplow-scala-tracker-emitter-http4s_2.13:${versions.scalaTracker}'
     compile 'org.http4s:http4s-ember-client_2.13:0.23.15'
-\ 
+\
     // If you plan to use the id emitters
     compile 'com.snowplowanalytics:snowplow-scala-tracker-emitter-id_2.13:${versions.scalaTracker}'
-\ 
+\
     // If you plan to use EC2/GCE contexts:
     compile 'com.snowplowanalytics:snowplow-scala-tracker-metadata_2.13:${versions.scalaTracker}'
 }`
@@ -74,7 +75,7 @@ Add into your project's `pom.xml`:
     <artifactId>snowplow-scala-tracker-core_2.13</artifactId>
     <version>${versions.scalaTracker}</version>
 </dependency>
-\ 
+\
 <!-- If you plan to use the http4s emitter with an Ember client: -->
 <dependency>
     <groupId>com.snowplowanalytics</groupId>
@@ -86,14 +87,14 @@ Add into your project's `pom.xml`:
     <artifactId>http4s-ember-client</artifactId>
     <version>0.23.15</version>
 </dependency>
-\ 
+\
 <!-- If you plan to use the id emitters: -->
 <dependency>
     <groupId>com.snowplowanalytics</groupId>
     <artifactId>snowplow-scala-tracker-emitter-id_2.13</artifactId>
     <version>${versions.scalaTracker}</version>
 </dependency>
-\ 
+\
 <!-- If you plan to use EC2/GCE contexts: -->
 <dependency>
     <groupId>com.snowplowanalytics</groupId>

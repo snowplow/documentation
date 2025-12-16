@@ -1,11 +1,10 @@
 ---
-title: "Events"
+title: "Snowplow events"
 description: ""
 date: "2020-02-26"
+sidebar_label: "Events"
 sidebar_position: 3.5
 ---
-
-# Snowplow event specification
 
 At its heart, Snowplow is a platform for granular tracking of events.
 Snowplow trackers fire _events_, which are either HTTP GET or POST requests to a Snowplow collector. By adding parameters to these requests, trackers can pass data into the collector for processing by Snowplow.

@@ -4,8 +4,6 @@ date: "2020-02-26"
 sidebar_position: 50
 ---
 
-## Overview
-
 This webhook integration lets you track a variety of events logged by [Mailgun](https://www.mailgun.com/).
 
 Available events are:
@@ -18,7 +16,7 @@ Available events are:
 - Clicks
 - Opens
 
-### Compatibility
+## Compatibility
 
 - [R97 Knossos](https://github.com/snowplow/snowplow/releases/tag/r97-knossos)\+ (`POST`\-capable collectors only)
 - [Mailgun webhook API](https://documentation.mailgun.com/en/latest/user_manual.html#webhooks)

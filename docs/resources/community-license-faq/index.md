@@ -1,4 +1,6 @@
-# FAQ: Snowplow Community License (SCL)
+---
+title: "FAQ: Snowplow Community License (SCL)"
+---
 
 :::info Note
 

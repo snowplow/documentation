@@ -1,5 +1,6 @@
 ---
-title: "Migration guides"
+title: "Migration guides for the Node.js tracker"
+sidebar_label: "Migration guides"
 date: "2021-04-12"
 sidebar_position: 4800
 ---

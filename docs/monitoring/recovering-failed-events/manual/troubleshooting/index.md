@@ -4,8 +4,6 @@ date: "2020-08-26"
 sidebar_position: 50
 ---
 
-## Monitoring
-
 In order to verify the process is running properly there are several locations that can be monitored, depending on your runtime environment these are: datasinks (for recovery job processed output): `failedOutput` (S3/GCS bucket), `unrecoverableOutput` (S3/GCS bucket), `output` (Kinesis/PubSub streams) and job runners (tracking job status and processing in real-time).
 
 ## Possible Failures

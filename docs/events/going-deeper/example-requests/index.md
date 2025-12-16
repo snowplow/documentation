@@ -241,7 +241,7 @@ represents the following JSON, when decoded:
 
 </details>
 
-# Page View
+## Page View
 
 ```json
 {
@@ -313,7 +313,7 @@ represents the following JSON, when decoded:
 
 </details>
 
-# Page Ping
+## Page Ping
 
 ```json
 {

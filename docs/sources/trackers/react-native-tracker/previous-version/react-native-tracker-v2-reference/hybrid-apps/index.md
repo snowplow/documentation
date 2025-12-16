@@ -4,8 +4,6 @@ date: "2022-08-30"
 sidebar_position: 70
 ---
 
-# Hybrid Apps
-
 :::info
 
 This feature is available since v1.3.

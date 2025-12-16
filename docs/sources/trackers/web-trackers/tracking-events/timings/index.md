@@ -1,9 +1,8 @@
 ---
-title: "Performance timings"
+title: "Tracking performance navigation timings on web"
+sidebar_label: "Performance timings"
 sidebar_position: 98
 ---
-
-# Performance Navigation Timing
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

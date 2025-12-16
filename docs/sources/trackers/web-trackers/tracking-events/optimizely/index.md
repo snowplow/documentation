@@ -1,9 +1,8 @@
 ---
-title: "Optimizely"
+title: "Integrating Optimizely with the web trackers"
+sidebar_label: "Optimizely"
 sidebar_position: 170
 ---
-
-# Optimizely tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

@@ -1,5 +1,6 @@
 ---
-title: "Getting Started"
+title: "Getting started with recovering failed events from buckets"
+sidebar_label: "Getting started"
 date: "2020-07-22"
 sidebar_position: 0
 ---

@@ -1,5 +1,6 @@
 ---
 title: "Self Hosting the JavaScript Tracker on AWS"
+sidebar_label: "Self hosting on AWS"
 sidebar_position: 100
 ---
 
@@ -34,7 +35,7 @@ We will continue referring to the file as `sp.js` throughout this guide, however
 Navigate to [S3 within AWS](https://s3.console.aws.amazon.com/s3/home) and then create a new bucket within your Amazon S3 account to store `sp.js`.
 
 | Option                                           | Value                                       |
-|--------------------------------------------------|---------------------------------------------|
+| ------------------------------------------------ | ------------------------------------------- |
 | **Bucket Name**                                  | For example, `[company-name]-sp-js`         |
 | **AWS Region**                                   | For example, `EU (London) eu-west-2`        |
 | **Block Public Access settings for this bucket** | Deselect: ****Block _all_ public access**** |
@@ -50,7 +51,7 @@ You want to upload the **minified** version of the Snowplow JavaScript, which 
 Now you're ready to upload the JavaScript Tracker into your S3 bucket.
 
 1. Navigate to your new bucket by clicking on your Buckets name
-2. Click `Create folder` and create a new folder which represents the version of the JavaScript Tracker you are uploading. This will help with any browser caching issues as you update your tracker in the future.  
+2. Click `Create folder` and create a new folder which represents the version of the JavaScript Tracker you are uploading. This will help with any browser caching issues as you update your tracker in the future.
     If you downloaded Version 3.0.0 then create a folder called `3.0.0`
 3. Navigate into your new folder, click **Upload**, click **Add Files** and browse to your file
 4. Your file should now be present in the **Files and folders** section
@@ -81,7 +82,7 @@ The only disadvantage of a long expiration is that you need to find a way to _f
 Your metadata should now look something like this:
 
 | Type           | Key             | Value                  |
-|----------------|-----------------|------------------------|
+| -------------- | --------------- | ---------------------- |
 | System defined | Cache-Control   | max-age=315360000      |
 | System defined | Content-Type    | application/javascript |
 | System defined | Cotent-Encoding | gzip                   |
@@ -97,15 +98,15 @@ Now you are ready to create the CloudFront distribution which will serve your Ja
 1. Click **Create Distribution** and then **Get Started**
 2. Use the table below to set all the required options
 
-| Option | Value |
-| --- | --- |
-| Origin Domain Name | **[Bucket Name].s3.amazonaws.com**  
-e.g. snowplow-static-js.s3.amazonaws.com |
-| Other options | Leave as default |
+| Option                                   | Value                              |
+| ---------------------------------------- | ---------------------------------- |
+| Origin Domain Name                       | **[Bucket Name].s3.amazonaws.com** |
+| e.g. snowplow-static-js.s3.amazonaws.com |
+| Other options                            | Leave as default                   |
 
 Click **Create Distribution** and then you should see AWS beginning to create the distribution.
 
-Note down your CloudFront distribution's **Domain Name** - e.g. `http://d1weib8el6blz6.cloudfront.net`  
+Note down your CloudFront distribution's **Domain Name** - e.g. `http://d1weib8el6blz6.cloudfront.net`
 You will need this later when you integrate Snowplow into your website.
 
 ### Testing your JavaScript file on CloudFront

@@ -11,9 +11,7 @@ import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
 <Accelerator href="https://docs.snowplow.io/accelerators/mobile/" name="Advanced Analytics for Mobile"/>
 ```
 
-## Requirements
-
-In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a mobile events dataset being available in your database:
+In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a mobile events dataset being available in your database, the requirements are:
 
 - Snowplow [Android](/docs/sources/trackers/mobile-trackers/previous-versions/android-tracker/index.md) or [iOS](/docs/sources/trackers/mobile-trackers/previous-versions/objective-c-tracker/index.md) mobile tracker version 1.1.0 or later implemented.
 - Mobile session context enabled ([ios](/docs/sources/trackers/mobile-trackers/previous-versions/objective-c-tracker/ios-tracker-1-7-0/index.md#session-context) or  [android](/docs/sources/trackers/mobile-trackers/previous-versions/android-tracker/android-1-7-0/index.md#session-tracking)).

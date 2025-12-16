@@ -3,8 +3,6 @@ title: "Exception tracking"
 sidebar_position: 50
 ---
 
-# Exception tracking
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

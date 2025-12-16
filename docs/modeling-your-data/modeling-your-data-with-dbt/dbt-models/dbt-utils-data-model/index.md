@@ -1,20 +1,21 @@
 ---
-title: "Utils"
+title: "Snowplow Utils dbt package"
+sidebar_label: "Utils"
 sidebar_position: 60
 description: "The Snowplow Utils dbt Package"
-hide_title: true
 ---
 
 ```mdx-code-block
 import Badges from '@site/src/components/Badges';
+import BadgeGroup from '@site/src/components/BadgeGroup';
 import ThemedImage from '@theme/ThemedImage';
 ```
 
-<Badges badgeType="dbt-package Release" pkg="utils"></Badges>&nbsp;
-<Badges badgeType="Actively Maintained"></Badges>&nbsp;
+<BadgeGroup>
+<Badges badgeType="dbt-package Release" pkg="utils"></Badges>
+<Badges badgeType="Actively Maintained"></Badges>
 <Badges badgeType="SPAL"></Badges>
-
-# Snowplow Utils Package
+</BadgeGroup>
 
 :::info
 The models, functionality, and variables described below are only available from `snowplow-utils v0.15.0` and above, as earlier packages do not utilize these variables.

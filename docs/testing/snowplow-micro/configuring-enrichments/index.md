@@ -1,5 +1,6 @@
 ---
-title: "Configuring enrichments"
+title: "Configuring enrichments in Snowplow Micro"
+sidebar_label: "Configuring enrichments"
 sidebar_position: 3
 description: "How to add enrichments to Snowplow Micro."
 ---

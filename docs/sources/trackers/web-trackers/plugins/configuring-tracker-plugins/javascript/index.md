@@ -1,5 +1,6 @@
 ---
-title: "Javascript (tag) tracker"
+title: "Configuring plugins for the JavaScript (tag) tracker"
+sidebar_label: "JavaScript (tag) tracker"
 date: "2023-03-22"
 sidebar_position: 400
 ---

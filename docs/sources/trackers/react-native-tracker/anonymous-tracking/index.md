@@ -1,10 +1,9 @@
 ---
-title: "Anonymous Tracking"
+title: "Anonymous tracking for the React Native tracker"
+sidebar_label: "Anonymous tracking"
 date: "2022-08-30"
 sidebar_position: 25
 ---
-
-# Anonymous Tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

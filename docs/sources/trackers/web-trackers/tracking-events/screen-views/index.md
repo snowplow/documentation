@@ -1,9 +1,8 @@
 ---
-title: "Screen views"
+title: "Tracking screen views on web"
+sidebar_label: "Screen views"
 sidebar_position: 60
 ---
-
-# Screen view tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
@@ -25,7 +24,7 @@ The plugin is available from Version 4.2 of the tracker.
 <TabItem value="js" label="JavaScript (tag)" default>
 
 | Tracker Distribution | Included |
-|----------------------|----------|
+| -------------------- | -------- |
 | `sp.js`              | ✅        |
 | `sp.lite.js`         | ❌        |
 

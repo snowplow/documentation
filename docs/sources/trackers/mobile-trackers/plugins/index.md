@@ -1,9 +1,8 @@
 ---
-title: "Tracker plugins"
+title: "Native mobile tracker plugins"
+sidebar_label: "Tracker plugins"
 sidebar_position: 45
 ---
-
-# Tracker plugins
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

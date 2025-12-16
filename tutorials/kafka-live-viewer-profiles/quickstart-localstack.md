@@ -1,6 +1,7 @@
 ---
 position: 2
-title: Quickstart with Localstack
+title: "Run the Kafka live viewer profiles application using LocalStack"
+sidebar_label: "Run the application locally"
 ---
 
 

@@ -1,5 +1,6 @@
 ---
-title: "Signals integration"
+title: "Signals integration for Snowplow Inspector"
+sidebar_label: "Signals integration"
 sidebar_position: 30
 description: "Using Snowplow Inspector to understand Snowplow Signals"
 ---

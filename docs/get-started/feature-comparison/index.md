@@ -41,7 +41,7 @@ Here is a detailed list of product features, showing which are available as part
 | [Data modeling management tooling](/docs/modeling-your-data/running-data-models-via-console/dbt/index.md)                 |   ✅   |        ❌         |
 | Jobs monitoring dashboard                                                                                                 |   ✅   |        ❌         |
 | Failed events alerting                                                                                                    |   ✅   |        ❌         |
-| Failed events in the warehouse                                                                                            |   ✅   |        ❌         |
+| Failed events in the warehouse                                                                                            |   ✅   |        ✅         |
 | QA pipeline                                                                                                               |   ✅   |  do-it-yourself  |
 | Fine-grained user permissions using access control lists                                                                  |   ✅   |        ❌         |
 | API key access                                                                                                            |   ✅   |        ❌         |

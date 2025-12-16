@@ -1,17 +1,16 @@
 ---
-title: "Declarative entities with Global Context"
+title: "Global context for web trackers"
+sidebar_label: "Global context"
 date: "2022-08-30"
 sidebar_position: 20
 ---
-
-# Declarative entities with Global Context
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-**Global context** lets you define your own contexts once (e.g. on tracker initialization) and then have this context sent with every single event subsequently recorded on the page. This saves having to manually build and send the context array with every single event fired.
+**Global context** (also known as global entities) lets you define your own contexts once (e.g. on tracker initialization) and then have this context sent with every single event subsequently recorded on the page. This saves having to manually build and send the context array with every single event fired.
 
 Here is an example that adds a global context entity to all subsequently tracked events:
 
@@ -109,7 +108,7 @@ This argument is a string taken from the event payload field, `e`.
 `eventType` takes the following values:
 
 | Type                           | `e`       |
-|--------------------------------|-----------|
+| ------------------------------ | --------- |
 | Pageview tracking              | pv        |
 | Page pings                     | pp        |
 | Link click                     | ue        |

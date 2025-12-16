@@ -1,13 +1,13 @@
 ---
-title: "Custom Implementations"
+title: "Custom implementations"
 description: "Custom Implementations"
 sidebar_position: 30
-hide_title: true
 ---
 
 ```mdx-code-block
 import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
+import BadgeGroup from '@site/src/components/BadgeGroup';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import MarkdownTableToMuiDataGrid from '@site/src/components/MarkdownTableAsMui'
@@ -17,15 +17,18 @@ export const datagridProps = {
   };
 ```
 
-<Badges badgeType="dbt-package Release" pkg="attribution"></Badges>&nbsp;
-<Badges badgeType="Early Release"></Badges>&nbsp;
+<BadgeGroup>
+<Badges badgeType="dbt-package Release" pkg="attribution"></Badges>
+<Badges badgeType="Early Release"></Badges>
 <Badges badgeType="SPAL"></Badges>
+</BadgeGroup>
 
 :::warning
 Make sure you upgrade to [v.0.4.0](https://github.com/snowplow/dbt-snowplow-unified/releases/tag/0.4.0) of Unified Package if you would like to use the v0.2.0 of Attribution Package
 
 :::
 
+This page describes how to customize the Attribution model.
 
 ## Customizing the Attribution Overview
 
@@ -38,7 +41,7 @@ By default, the model expects a spend source and the model aggregates that (it t
 ```sql
     from spend_with_unique_keys s
     inner join {{ ref('snowplow_attribution_campaign_attributions') }} c
-    on c.campaign = s.campaign and s.spend_tstamp < cv_tstamp 
+    on c.campaign = s.campaign and s.spend_tstamp < cv_tstamp
     and s.spend_tstamp > {{ snowplow_utils.timestamp_add('day', -90, 'cv_tstamp') }}
 ```
 
@@ -53,18 +56,18 @@ Here comes the second time based filter which you might want to adjust in case y
     cv_tstamp >= {{ snowplow_utils.timestamp_add('day', -var("snowplow__conversion_window_days"), last_processed_cv_tstamp) }}
   {% endif%}
  ```
-  
+
 Finally, the model takes the aggregated conversion level data and does a series of unions to calculate metrics by attribution type (first touch, last touch etc.) Here again you might want to adjust what specific metrics you are interested in, add your own etc.
 
 ## Running the Attribution Analysis with a specific conversion period only
-By default the Attribution package is designed to be run incrementally. 
- 
-In case you only need ad hoc analysis studying only a specific conversion window and perhaps looking at a larger lookback period to gather a broader user journey, for cost saving purposes you might want to define a set period every time the model is run (e.g. on a monthly basis). 
- 
+By default the Attribution package is designed to be run incrementally.
+
+In case you only need ad hoc analysis studying only a specific conversion window and perhaps looking at a larger lookback period to gather a broader user journey, for cost saving purposes you might want to define a set period every time the model is run (e.g. on a monthly basis).
+
 In that case, you can simply overwrite both the `snowplow__conversion_window_start_date` and `snowplow__conversion_window_end_date` variables to decide on the period. In this case the default `snowplow__conversion_window_days` variable will be disregarded by the package.
- 
+
 Bear in mind that it needs a full-refresh every time you process the package:
- 
+
 ```bash
  dbt run --select snowplow_attribution --full-refresh --vars 'snowplow__allow_refresh: true'
 ```
@@ -80,7 +83,7 @@ There are two ways to go about this:
 - create a view on top of your source data to make sure you align the expected input fields
 
 - have the common user_id field called `stitched_user_id` in both your path and conversions source view
-    
+
 - make sure to set the variable `snowplow__conversion_stitching` to True (it means the package will rely on the `stitched_user_id` fields for the joins)
 
 #### 2. Align the package logic to work with your data sources
@@ -112,7 +115,7 @@ with paths as (
 select ...
 ```
 
-You would most probably need to touch the `paths` and `conversions` cte to adjust how your data is getting processed incrementally from your custom sources. The `string_aggs` cte creates the individual paths the user travelled through to get to the conversion. These path strings are then converted to `arrays` in the subsequent cte. 
+You would most probably need to touch the `paths` and `conversions` cte to adjust how your data is getting processed incrementally from your custom sources. The `string_aggs` cte creates the individual paths the user travelled through to get to the conversion. These path strings are then converted to `arrays` in the subsequent cte.
 
 After that there is a separate macro called `transform_paths` that is being called to provide the sql for the path transformations. It is quite complex, we would not be recommending to overwrite these.
 

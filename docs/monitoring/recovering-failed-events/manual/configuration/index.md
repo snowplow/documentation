@@ -1,5 +1,6 @@
 ---
-title: "Configuration"
+title: "Event recovery configuration"
+sidebar_label: "Configuration"
 date: "2020-08-25"
 sidebar_position: 10
 ---

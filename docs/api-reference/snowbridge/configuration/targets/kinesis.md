@@ -1,5 +1,6 @@
 ---
-title: "Kinesis"
+title: "Configuring Kinesis as a Snowbridge target"
+sidebar_label: "Kinesis"
 description: "Write data to a Kinesis stream."
 ---
 
@@ -7,8 +8,6 @@ description: "Write data to a Kinesis stream."
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-## Authentication
 
 Authentication is done via the [AWS authentication environment variables](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html). Optionally, you can use the `role_arn` option to specify an ARN to use on the stream.
 

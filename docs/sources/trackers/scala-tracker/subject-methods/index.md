@@ -1,5 +1,5 @@
 ---
-title: "Subject methods"
+title: "Configuring a subject with the Scala tracker"
 date: "2022-9-15"
 sidebar_position: 30
 ---

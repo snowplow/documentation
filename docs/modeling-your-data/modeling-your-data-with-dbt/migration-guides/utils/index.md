@@ -1,5 +1,6 @@
 ---
-title: "Utils"
+title: "Migration guide for Utils"
+sidebar_label: "Utils"
 sidebar_position: 50
 ---
 

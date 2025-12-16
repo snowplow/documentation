@@ -5,8 +5,6 @@ sidebar_label: "Using data product templates"
 sidebar_position: 2
 ---
 
-## Creating a Data Product based on Templates using Console
-
 To create a new data product based on a pre-defined template, navigate to the "Data products" section from the navigation bar and click the "Create data product" or "Templates" buttons.
 
 :::note
@@ -15,7 +13,7 @@ _When creating a data product based on a template, the name must be unique to en
 
 Below is a list of the current templates:
 
-### Base Web
+## Base Web
 
 This Data Product template contains all the tracking of Standard Events related to web tracking. It is expected that these events would be implemented using our [Web trackers](/docs/sources/trackers/web-trackers/index.md) and the respective [button click](/docs/sources/trackers/web-trackers/tracking-events/button-click/index.md) and [link click](/docs/sources/trackers/web-trackers/tracking-events/link-click/index.md) plugins.
 
@@ -28,7 +26,7 @@ Included event specifications:
 * [Button click](/docs/sources/trackers/web-trackers/tracking-events/button-click/index.md)
 * [Link click](/docs/sources/trackers/web-trackers/tracking-events/link-click/index.md)
 
-### Base Mobile
+## Base Mobile
 
 This Data Product template contains all the tracking of Standard Events related to mobile tracking. It is expected that these events would be implemented using our [mobile trackers](/docs/sources/trackers/mobile-trackers/index.md) with [installation](/docs/sources/trackers/mobile-trackers/tracking-events/installation-tracking/index.md), [screen view](/docs/sources/trackers/mobile-trackers/tracking-events/screen-tracking/index.md) and [app lifecycle](/docs/sources/trackers/mobile-trackers/tracking-events/lifecycle-tracking/index.md) tracking capabilities enabled.
 
@@ -42,9 +40,9 @@ Included event specifications:
 * [Application background](/docs/events/ootb-data/mobile-lifecycle-events/index.md#background-event)
 * [Application foreground](/docs/events/ootb-data/mobile-lifecycle-events/index.md#foreground-event)
 
-### E-commerce (Web and Mobile)
+## Ecommerce (Web and Mobile)
 
-This Data Product template contains all the basic e-commerce interactions that help you analyze customer behavior, identify potential growth opportunities, and improve your sales performance.
+This Data Product template contains all the basic ecommerce interactions that help you analyze customer behavior, identify potential growth opportunities, and improve your sales performance.
 
 Tracked using the [out-of-the-box e-commerce events](/docs/events/ootb-data/ecommerce-events/index.md) for web, Android, and iOS. On web, this requires the [Snowplow Ecommerce plugin](/docs/sources/trackers/web-trackers/tracking-events/ecommerce/index.md).
 
@@ -62,7 +60,7 @@ Included event specifications:
 * Transaction
 * Transaction Error
 
-### Media Web
+## Media Web
 
 This Data Product template contains a full set of media tracking interactions to measure video or audio data.
 Tracked using the [Snowplow Media plugin](https://docs.snowplow.io/docs/sources/trackers/web-trackers/tracking-events/media/snowplow/).

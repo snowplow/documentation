@@ -9,11 +9,9 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-## Overview
-
 The [Scala client](https://github.com/snowplow/iglu-scala-client) is an Iglu client and schema resolver implemented in Scala.
 
-Setting up the Scala client to use from your own code is straightforward.  
+Setting up the Scala client to use from your own code is straightforward.
 For actual examples of initialization you can look at [Scala client](https://github.com/snowplow/iglu-scala-client) page.
 
 ## Integration options

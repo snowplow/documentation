@@ -1,5 +1,5 @@
 ---
-title: "Rust Tracker"
+title: "Rust tracker"
 date: "2022-10-24"
 sidebar_position: 225
 ---

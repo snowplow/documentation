@@ -1,5 +1,5 @@
 ---
-title: "Attribute keys"
+title: "Defining attribute keys with the Python SDK"
 sidebar_position: 15
 sidebar_label: "Attribute keys"
 description: "Define built-in and custom attribute keys to specify the analytical context for attribute calculations in Snowplow Signals."

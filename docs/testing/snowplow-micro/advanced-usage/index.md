@@ -1,5 +1,6 @@
 ---
-title: "Advanced usage"
+title: "Advanced usage of Snowplow Micro"
+sidebar_label: "Advanced usage"
 sidebar_position: 6
 description: "How to configure more aspects of Snowplow Micro."
 ---
@@ -10,6 +11,8 @@ import CodeBlock from '@theme/CodeBlock';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
+
+This page describes additional configuration options for Snowplow Micro.
 
 ## Enabling HTTPS
 

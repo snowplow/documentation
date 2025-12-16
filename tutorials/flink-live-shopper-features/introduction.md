@@ -1,6 +1,7 @@
 ---
 position: 1
-title: Introduction
+title: "Learn how to calculate real-time shopper features using Apache Flink"
+sidebar_label: "Introduction"
 ---
 
 Welcome to the **real-time shopper features using Apache Flink** solution accelerator for ecommerce.

@@ -1,10 +1,9 @@
 ---
-title: "Tracking specific client-side properties"
+title: "Tracking client side properties with the React Native tracker"
+sidebar_label: "Tracking specific client-side properties"
 date: "2022-08-30"
 sidebar_position: 23
 ---
-
-# Tracking specific client-side properties
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

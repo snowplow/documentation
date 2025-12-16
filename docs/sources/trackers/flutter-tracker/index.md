@@ -1,5 +1,5 @@
 ---
-title: "Flutter Tracker"
+title: "Flutter tracker"
 date: "2022-01-31"
 sidebar_position: 130
 ---

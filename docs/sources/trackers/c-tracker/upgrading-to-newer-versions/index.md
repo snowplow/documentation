@@ -1,5 +1,6 @@
 ---
-title: "Upgrading to Newer Versions"
+title: "Upgrading the C and C++ tracker"
+sidebar_label: "Upgrading to Newer Versions"
 date: "2022-04-21"
 sidebar_position: 100
 ---

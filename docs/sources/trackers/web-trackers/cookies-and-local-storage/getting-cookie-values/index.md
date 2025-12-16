@@ -1,5 +1,5 @@
 ---
-title: "Getting cookie information"
+title: "Getting cookie information to use in web tracking"
 sidebar_position: 500
 ---
 
@@ -7,8 +7,6 @@ sidebar_position: 500
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
-
-## Domain user information
 
 You can use the following function to extract the Domain User Information from the ID cookie:
 

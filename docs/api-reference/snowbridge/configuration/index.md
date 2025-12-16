@@ -1,5 +1,6 @@
 ---
-title: "Configuration"
+title: "Snowbridge configuration overview"
+sidebar_label: "Configuration"
 date: "2022-10-20"
 sidebar_position: 300
 ---
@@ -8,8 +9,6 @@ sidebar_position: 300
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-# Configuration Overview
 
 Snowbridge is configured using [HCL](https://github.com/hashicorp/hcl). To configure Snowbridge, create your configuration in a file with `.hcl` extension, and set the `SNOWBRIDGE_CONFIG_FILE` environment variable to the path to your file. By default, the Snowbridge docker image uses `/tmp/config.hcl` as the config path - when using the docker images you can either mount your config file to `/tmp/config.hcl`, or mount it to a different path, and set the `SNOWBRIDGE_CONFIG_FILE` environment variable in your docker container to that path.
 

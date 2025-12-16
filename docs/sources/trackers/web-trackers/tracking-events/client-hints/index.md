@@ -1,9 +1,8 @@
 ---
-title: "Client Hints"
+title: "Tracking client hints on web"
+sidebar_label: "Client Hints"
 sidebar_position: 150
 ---
-
-# Client Hints tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

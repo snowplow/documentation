@@ -1,9 +1,8 @@
 ---
-title: "Screen view tracking"
+title: "Tracking screen views with the React Native tracker"
+sidebar_label: "Screen views"
 sidebar_position: 40
 ---
-
-# Screen view tracking
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

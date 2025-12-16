@@ -1,5 +1,6 @@
 ---
-title: "Running"
+title: "Running the event recovery job"
+sidebar_label: "Running"
 date: "2020-07-22"
 sidebar_position: 30
 ---

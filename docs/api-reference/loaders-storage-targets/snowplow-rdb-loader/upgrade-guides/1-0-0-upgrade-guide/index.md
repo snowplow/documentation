@@ -1,5 +1,6 @@
 ---
-title: "1.0.0 Upgrade Guide"
+title: "RDB Loader v1.0.0 upgrade guide"
+sidebar_label: "1.0.0 upgrade guide"
 date: "2021-04-14"
 sidebar_position: 200
 ---

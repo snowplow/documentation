@@ -3,8 +3,6 @@ title: "Campaigns and UTMs"
 sidebar_position: 90
 ---
 
-# Campaigns and UTM tracking
-
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
@@ -44,7 +42,7 @@ For the prospective customer clicking on the link, adding the query parameters d
 Snowplow uses the same query parameters used by Google Analytics. Because of this, Snowplow users who are also using GA do not need to do any additional work to make their campaigns trackable in Snowplow as well as GA. Those parameters are:
 
 | **Parameter**  | **Name**         | **Description**                                                                                                                                       |
-|----------------|------------------|-------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------- | ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `utm_source`   | Campaign source  | Identify the advertiser driving traffic to your site e.g. Google, Facebook, autumn-newsletter etc.                                                    |
 | `utm_medium`   | Campaign medium  | The advertising / marketing medium e.g. cpc, banner, email newsletter, in-app ad, cpa                                                                 |
 | `utm_campaign` | Campaign id      | A unique campaign id. This can be a descriptive name or a number / string that is then looked up against a campaign table as part of the analysis     |

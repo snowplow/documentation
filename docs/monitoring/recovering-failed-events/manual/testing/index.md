@@ -1,5 +1,6 @@
 ---
-title: "Testing"
+title: "Testing the recovery configuration"
+sidebar_label: "Testing"
 date: "2020-08-26"
 sidebar_position: 20
 ---

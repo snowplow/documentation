@@ -1,5 +1,6 @@
 ---
-title: "Importing events"
+title: "Importing events into Snowplow Inspector"
+sidebar_label: "Importing events"
 sidebar_position: 20
 description: "How to import events from other devices"
 ---

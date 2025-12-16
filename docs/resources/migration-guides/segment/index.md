@@ -40,7 +40,7 @@ analytics.track('Transaction Completed', {
 
 This event would be loaded into a `Transaction Completed` warehouse table. Analysts must `UNION` tables together to reconstruct user journeys.
 
-To track the same behavior with Snowplow, you could use the web ecommerce `trackTransaction` event. The tracking code looks very similar:
+To track the same behavior with Snowplow, you could use the [web ecommerce](/docs/sources/trackers/web-trackers/tracking-events/ecommerce/index.md) `trackTransaction` event. The tracking code looks very similar:
 
 ```javascript
 snowplow('trackTransaction', {
@@ -58,14 +58,14 @@ snowplow('trackTransaction', {
 
 The differences are in the warehouse loading and data modeling:
 * Snowplow processes this as a `transaction` [event](/docs/fundamentals/events/index.md) with one `product` [entity](/docs/fundamentals/entities/index.md)
-* The Snowplow [tracker SDK](/docs/sources/trackers/index.md) and pipeline add additional contextual entities to each event, for example information about the specific page or screen view, the user's session, or the browser
+* The Snowplow [tracker SDKs](/docs/sources/trackers/index.md) and pipeline add additional contextual entities to each event, for example information about the specific page or screen view, the user's session, or the browser
 * In BigQuery or Snowflake, the event will be loaded into the single `atomic.events` table, with a column for the `transaction` event and a column for each entity
   * Columns have type `OBJECT` in Snowflake, and `REPEATED RECORD` in BigQuery
   * In Redshift, each event and entity is loaded into its own table
 
 You can add the same `product` entity to any other relevant event, such as `add_to_cart` or `view_product`. This simplifies analysis of product lifecycles, from initial product view to purchase.
 
-Snowplow SDKs provide built-in methods for tracking page views and screen views, along with many other kinds of events. For example, button clicks, form submissions, page pings (activity), or media interactions. The additional entities added depend on which Snowplow SDK you're using, and which [enrichments](/docs/pipeline/enrichments/index.md) you've configured.
+Snowplow tracker SDKs provide built-in methods for tracking page views and screen views, along with many other kinds of events. For example, button clicks, form submissions, page pings (activity), or media interactions. The additional entities added depend on which Snowplow SDK you're using, and which [enrichments](/docs/pipeline/enrichments/index.md) you've configured.
 
 Snowplow provides out-of-the-box [dbt data models](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md) for initial modeling and common analytics use cases.
 
@@ -90,7 +90,7 @@ Schematic event specification isn't optional for Snowplow. Every event and entit
 
 Snowplow provides [monitoring](/docs/monitoring/index.md) and alerting for failed events. You can choose to load failed events into a separate table in your warehouse, or to analyze them in temporary buckets. This strict approach ensures high data quality.
 
-The Snowplow Tracking Plans equivalent is [data products](/docs/fundamentals/data-products/index.md). Each data product contains a set of related event specifications. Each event specification has one event data structure, and any number of entity data structures.
+The Snowplow equivalent to Segment Tracking Plans is [data products](/docs/fundamentals/data-products/index.md). Each data product contains a set of related event specifications. Each event specification has one event data structure, and any number of entity data structures.
 
 You can use the Snowplow Console, API, or CLI to [define your tracking data structures](/docs/data-product-studio/data-products/index.md). For each event you can specify when it should be tracked, and which entities should be added. Once you've defined your event specifications, use [Snowtype](/docs/data-product-studio/snowtype/index.md) to automatically generate the tracking code snippets.
 

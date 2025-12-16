@@ -8,7 +8,7 @@ This guide is to help technical implementers migrate from Google Analytics to Sn
 
 ## Platform differences
 
-There are [significant differences between Google Analytics and Snowplow](https://snowplow.io/comparisons/snowplow-vs-google-analytics) as data platforms. For migration, it's important to understand how Snowplow structures events differently from GA4. This affects how you'll implement tracking and how you'll model the warehouse data.
+There are [significant differences](https://snowplow.io/comparisons/snowplow-vs-google-analytics) between Google Analytics and Snowplow as data platforms. For migration, it's important to understand how Snowplow structures events differently from GA4. This affects how you'll implement tracking and how you'll model the warehouse data.
 
 This table shows some key differences:
 
@@ -89,7 +89,7 @@ Schematic event specification isn't optional for Snowplow. Every event and entit
 
 Snowplow provides [monitoring](/docs/monitoring/index.md) and alerting for failed events. You can choose to load failed events into a separate table in your warehouse, or to analyze them in temporary buckets. This strict approach ensures high data quality.
 
-You've probably defined which GA4 events and parameters to track in a tracking plan spreadsheet or similar document. Snowplow provides event data management tools for defining and managing tracking plans. They're called [data products](/docs/fundamentals/data-products/index.md). Each data product contains a set of related event specifications. Each event specification has one event data structure, and any number of entity data structures.
+You've probably defined which GA4 events and parameters to track in a tracking plan spreadsheet or similar document. Snowplow provides event data management tools for defining and managing tracking plans. Tracking plans are called [data products](/docs/fundamentals/data-products/index.md) in Snowplow. Each data product contains a set of related event specifications. Each event specification has one event data structure, and any number of entity data structures.
 
 You can use the Snowplow Console, API, or CLI to [define your tracking data structures](/docs/data-product-studio/data-products/index.md). For each event you can specify when it should be tracked, and which entities should be added. Once you've defined your event specifications, use [Snowtype](/docs/data-product-studio/snowtype/index.md) to automatically generate the tracking code snippets.
 

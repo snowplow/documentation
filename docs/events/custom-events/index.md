@@ -15,7 +15,7 @@ Read our [tracking design best practice guide](/docs/fundamentals/tracking-desig
 
 Self-describing [events](/docs/fundamentals/events/index.md#self-describing-events) are [based on JSON schemas](/docs/fundamentals/schemas/index.md) and can have arbitrarily many fields.
 
-To define your own custom event, you will need to [create a corresponding data structure](/docs/data-product-studio/data-structures/index.md). Snowplow uses the data structure to validate that the JSON containing the event properties is well-formed.
+To define your own custom event, you will need to [create a corresponding schema](/docs/fundamentals/schemas/index.md). Snowplow uses the schema to validate that the JSON containing the event properties is well-formed.
 
 This code shows how you could track a custom `article_share` event using the [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md):
 
@@ -36,7 +36,7 @@ In addition to populating the [standard atomic columns](/docs/fundamentals/canon
 
 ## Custom entities
 
-As with custom self-describing events, if you want to create your own custom [entity](/docs/fundamentals/entities/index.md), you will need to [create a corresponding data structure](/docs/data-product-studio/data-structures/index.md). Snowplow uses the data structure to validate that the JSON containing the entity properties is well-formed.
+As with custom self-describing events, if you want to create your own custom [entity](/docs/fundamentals/entities/index.md), you will need to [create a corresponding schema](/docs/fundamentals/schemas/index.md). Snowplow uses the schema to validate that the JSON containing the entity properties is well-formed.
 
 Here's an example that shows how you could track custom `user` and `product` entities along with a page view event, using the [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md):
 

@@ -3,7 +3,7 @@ title: "Out-of-the-box data"
 sidebar_position: 2
 ---
 
-Snowplow has provided these out-of-the-box [event](/docs/fundamentals/events/index.md) and [entity](/docs/fundamentals/entities/index.md) types so you can get started quickly with generating and modeling user data.
+Snowplow has provided these out-of-the-box [event](/docs/fundamentals/events/index.md) and [entity](/docs/fundamentals/entities/index.md) types so you can get started quickly with tracking user data.
 
 This table shows the available events or out-of-the-box data grouped by category, along with the type of data you can generate on [web](/docs/sources/trackers/web-trackers/index.md) and [mobile](/docs/sources/trackers/mobile-trackers/index.md) platforms. Note that "events" refers to "self-describing events".
 

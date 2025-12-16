@@ -9,7 +9,7 @@ All Snowplow events have the same underlying structure and standard fields. All 
 
 Each line in the atomic events table represents a single event, be that a `page_view`, `add_to_basket`, `play_video`, etc.
 
-Individual fields are stored in their own columns. Check out the [event properties reference](/docs/fundamentals/canonical-event/index.md) for a full list of standard fields. In most warehouses, [self-describing events](/docs/fundamentals/events/index.md#self-describing-events) and [entities](/docs/fundamentals/entities/index.md) are stored as additional columns in the `atomic.events` table.
+Individual fields are stored in their own columns. Check out the [event properties reference](/docs/fundamentals/canonical-event/index.md) for a full list of standard fields. [Self-describing events](/docs/fundamentals/events/index.md#self-describing-events) and [entities](/docs/fundamentals/entities/index.md) are stored as additional columns in the `atomic.events` table (except in Redshift, see below).
 
 :::tip Don't mutate the atomic events table
 The Snowplow data table is designed to be immutable: the data in each line should not change over time.

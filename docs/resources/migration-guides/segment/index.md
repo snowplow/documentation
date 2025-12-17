@@ -12,13 +12,13 @@ There are a [number of differences](https://snowplow.io/comparisons/snowplow-vs-
 
 This table shows some key differences:
 
-| Feature                 | Segment                                   | Snowplow                                                                                                                              |
-| ----------------------- | ----------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| Capturing user behavior | Uses `track` events                       | Choose from the built-in event types, or use `trackSelfDescribingEvent` to track a custom [event](/docs/fundamentals/events/index.md) |
-| Contextual event data   | Included in the event `properties` object | Included in the event as reusable [entities](/docs/fundamentals/entities/index.md)                                                    |
-| User identity           | Tracked separately as an `identify` event | Included in the event as a reusable entity                                                                                            |
-| Warehouse tables        | One table per custom event type           | In BigQuery and Snowflake, one big table with columns for every event or entity; in Redshift, one table per custom event or entity    |
-| Data validation         | Optional Tracking Plan                    | All events and entities defined by JSON schemas                                                                                       |
+| Feature                 | Segment                                   | Snowplow                                                                                                                                                                    |
+| ----------------------- | ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Capturing user behavior | Uses `track` events                       | Choose from the built-in event types, or use `trackSelfDescribingEvent` to track a custom [event](/docs/fundamentals/events/index.md)                                       |
+| Contextual event data   | Included in the event `properties` object | Included in the event as reusable [entities](/docs/fundamentals/entities/index.md)                                                                                          |
+| User identity           | Tracked separately as an `identify` event | Included in the event as a reusable entity                                                                                                                                  |
+| Warehouse tables        | One table per custom event type           | In [most warehouses](/docs/destinations/warehouses-lakes/index.md), one big table with columns for every event or entity; in Redshift, one table per custom event or entity |
+| Data validation         | Optional Tracking Plan                    | All events and entities defined by JSON schemas                                                                                                                             |
 
 ### Event structure
 

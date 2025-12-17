@@ -14,12 +14,12 @@ There are [significant differences](https://snowplow.io/comparisons/snowplow-vs-
 
 This table shows some key differences:
 
-| Feature                 | Google Analytics 4                                                                                | Snowplow                                                                                                                           |
-| ----------------------- | ------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| Capturing user behavior | Uses `gtag('event', ...)` with event names, or `dataLayer.push()` with GTM triggers and variables | Direct tracker SDK calls for built-in or custom [event](/docs/fundamentals/events/index.md) types                                  |
-| Contextual event data   | Included in the event `parameters` object                                                         | Included in the event as reusable [entities](/docs/fundamentals/entities/index.md)                                                 |
-| Warehouse tables        | BigQuery only; daily partitioned `events_YYYYMMDD` table with nested fields                       | In BigQuery and Snowflake, one big table with columns for every event or entity; in Redshift, one table per custom event or entity |
-| Data validation         | Optional and limited schema enforcement                                                           | All events and entities defined by JSON schemas                                                                                    |
+| Feature                 | Google Analytics 4                                                                                | Snowplow                                                                                                                                                                   |
+| ----------------------- | ------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Capturing user behavior | Uses `gtag('event', ...)` with event names, or `dataLayer.push()` with GTM triggers and variables | Direct tracker SDK calls for built-in or custom [event](/docs/fundamentals/events/index.md) types                                                                          |
+| Contextual event data   | Included in the event `parameters` object                                                         | Included in the event as reusable [entities](/docs/fundamentals/entities/index.md)                                                                                         |
+| Warehouse tables        | BigQuery only; daily partitioned `events_YYYYMMDD` table with nested fields                       | In [most warehouses](/docs/destinations/warehouses-lakes/index.md) one big table with columns for every event or entity; in Redshift, one table per custom event or entity |
+| Data validation         | None                                                                                              | All events and entities defined by JSON schemas                                                                                                                            |
 
 ### Event structure
 
@@ -82,23 +82,23 @@ snowplow('trackTransaction', {
 
 This table shows how some data layer GA4 tracking maps to Snowplow web tracking:
 
-| GA4 Event     | GA4 Data Layer Example                                                                                    | Snowplow Implementation                                                                                                                                        |
-| ------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `page_view`   | Sent by default by GTM, or `dataLayer.push({event: 'page_view'})`.                                        | Use `trackPageView`                                                                                                                                            |
-| `purchase`    | `dataLayer.push({event: 'purchase', ecommerce: {transaction_id: '123', value: 99.99}})`                   | Use built-in ecommerce tracking, or define a custom `purchase` schema containing `transaction_id` and `value` properties, and track `trackSelfDescribingEvent` |
-| Custom events | `dataLayer.push({event: 'video_play', video_title: 'Demo'})`                                              | Define a custom `video_play` schema containing `video_title` property and track with `trackSelfDescribingEvent`                                                |
-| Send user IDs | `dataLayer.push({user_id: 'USER_123'})`, configured as user property in GTM                               | Use `setUserId('USER_123')` to set the user ID                                                                                                                 |
-| Page metadata | `dataLayer.push({page_type: 'product', category: 'electronics'})`, configured as custom dimensions in GTM | Define custom entities for page context and attach to relevant events                                                                                          |
+| GA4 Event     | GA4 Data Layer Example                                                                                                      | Snowplow Implementation                                                                                                                                        |
+| ------------- | --------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `page_view`   | Sent by default by GTM, or `dataLayer.push({event: 'page_view'})`.                                                          | Use `trackPageView`                                                                                                                                            |
+| `purchase`    | `dataLayer.push({event: 'purchase', ecommerce: {transaction_id: '123', value: 99.99}})`                                     | Use built-in ecommerce tracking, or define a custom `purchase` schema containing `transaction_id` and `value` properties, and track `trackSelfDescribingEvent` |
+| Custom events | Define custom GTM configuration then call e.g. `dataLayer.push({event: 'read_article', article_title: 'Interesting text'})` | Define a custom `read_article` schema containing `article_title` property and track with `trackSelfDescribingEvent`                                            |
+| Send user IDs | `dataLayer.push({user_id: 'USER_123'})`, configured as user property in GTM                                                 | Use `setUserId('USER_123')` to set the user ID                                                                                                                 |
+| Page metadata | `dataLayer.push({page_type: 'product', category: 'electronics'})`, configured as custom dimensions in GTM                   | Define custom entities for page context and attach to relevant events                                                                                          |
 
 ### Warehouse loading and data modeling
 
 The key differences between GA4 and Snowplow events are in the warehouse loading and data modeling.
 
-With GA, the example `purchase` event would be loaded into an `events_YYYYMMDD` table in BigQuery, with nested RECORD fields for parameters and user properties. Each parameter exists as key-value pairs with separate columns for different data types e.g. `string_value`, `int_value`, or `float_value`. Analysts must use complex `UNNEST` operations to extract parameters and join data.
+With GA, the example `purchase` event would be loaded into an `events_YYYYMMDD` table in BigQuery, with nested RECORD fields for parameters and user properties. Each parameter exists as key-value pairs with separate columns for different data types: `string_value`, `int_value`, `float_value`, or `double_value`. Analysts must use complex `UNNEST` operations to extract parameters and join data.
 
 With Snowplow, the example event would be processed as a `transaction` [event](/docs/fundamentals/events/index.md) with one `product` [entity](/docs/fundamentals/entities/index.md). The Snowplow [tracker SDKs](/docs/sources/trackers/index.md) and pipeline add additional contextual entities to each event, for example information about the specific page or screen view, the user's session, or the browser.
 
-In BigQuery or Snowflake, the event will be loaded into the single `atomic.events` table, with a column for the `transaction` event and a column for each entity. Columns have type `OBJECT` in Snowflake, and `REPEATED RECORD` in BigQuery. In Redshift, each event and entity is loaded into its own table.
+In BigQuery, Databricks, or Snowflake, the event will be loaded into the single `atomic.events` table, with a column for the `transaction` event and a column for each entity. In Redshift, each event and entity is loaded into its own table.
 
 You can add the same `product` entity to any other relevant event, such as `add_to_cart` or `view_item`. This simplifies analysis of product lifecycles, from initial product view to purchase.
 
@@ -108,11 +108,15 @@ Snowplow provides out-of-the-box [dbt data models](/docs/modeling-your-data/mode
 
 ### Data validation
 
-GA4 provides optional schema enforcement for events and parameters. You can define expected properties for events, but validation failures don't block data collection. Events that don't match their specification are still processed.
+GA4 is loosely typed and doesn't validate incoming events. You can define expected properties and custom configuration, but events that don't match their specification are still processed. The defined configurations are mainly used for reporting in the GA4 interface.
 
-Schematic event specification isn't optional for Snowplow. Every event and entity is defined by a [JSON schema](/docs/fundamentals/schemas/index.md), called a data structure. The data payload itself contains a reference to the specific data structure and version that defines it. The events are always validated as they're processed through the Snowplow pipeline, and events that fail validation are filtered out. There's no pass-with-warning or autocorrection feature.
+The lack of validation leads to fragmented and low quality data. For example, the `price` for a purchase event might be accidentally tracked in different places as `25.42`, `"25.42"`, or even `2542`. In the warehouse, this parameter's values will be split over `float_value`, `string_value`, and `int_value` columns, making querying more complex.
+
+Event specification and validation isn't optional for Snowplow. Every event and entity is defined by a [JSON schema](/docs/fundamentals/schemas/index.md), called a data structure. The data payload itself contains a reference to the specific data structure and version that defines it. The events are always validated as they're processed through the Snowplow pipeline, and events that fail validation are filtered out.
 
 Snowplow provides [monitoring](/docs/monitoring/index.md) and alerting for failed events. You can choose to load failed events into a separate table in your warehouse, or to analyze them in temporary buckets. This strict approach ensures high data quality.
+
+#### Tracking plans
 
 You've probably defined which GA4 events and parameters to track in a tracking plan spreadsheet or similar document. Snowplow provides event data management tools for defining and managing tracking plans. Tracking plans are called [data products](/docs/fundamentals/data-products/index.md) in Snowplow. Each data product contains a set of related event specifications. Each event specification has one event data structure, and any number of entity data structures.
 

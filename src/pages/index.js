@@ -1,4 +1,4 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
 import Layout from '@theme/Layout'
 import Head from '@docusaurus/Head'
 import { motion, useInView } from 'framer-motion';
@@ -8,8 +8,85 @@ import { BackgroundGradientAnimation } from '../components/ui/background-gradien
 import { GridBackground } from '../components/ui/grid-background';
 import { BackgroundLines } from '../components/ui/background-lines';
 import LogoCloudDemo from '../components/ui/infinite-logo-slider';
+import { getMetaData, getSteps } from '../components/tutorials/utils';
+import { Meta, Tutorial } from '../components/tutorials/models';
+import TutorialGrid from '../components/tutorials/TutorialGrid';
+import { Snippet } from '../components/ui/snippet';
 
-// Fixed JSX syntax issues
+// Solution Grid Component for landing page
+const SolutionGrid = () => {
+  const solutionTutorials = useMemo(() => {
+    try {
+      const parsedTutorials = Object.values(getMetaData()).map((metaJson) => {
+        const meta = Meta.parse(metaJson);
+        const steps = getSteps(meta.id);
+        return { meta, steps };
+      }).map(tutorial => Tutorial.parse(tutorial));
+
+      // Filter for "Solution accelerator" and "Signals implementation" topics only
+      return parsedTutorials.filter(tutorial =>
+        tutorial.meta.label === 'Solution accelerator' ||
+        tutorial.meta.label === 'Signals implementation'
+      );
+    } catch (error) {
+      console.error('Error loading tutorials:', error);
+      return [];
+    }
+  }, []);
+
+  return <TutorialGrid tutorials={solutionTutorials} />;
+};
+
+// MCP Installation Component
+const MCPInstallation = () => {
+  return (
+    <div className="bg-card border border-border rounded-xl p-8 shadow-sm">
+      <div className="flex items-start gap-4 mb-6">
+        <div className="bg-primary/10 rounded-lg p-3">
+          <span className="text-2xl">🚀</span>
+        </div>
+        <div>
+          <h3 className="text-xl font-semibold text-foreground mb-2">Get Started with Snowplow MCP</h3>
+          <p className="text-muted-foreground">
+            Set up the Snowplow Model Context Protocol server in seconds. Install Claude Desktop and run:
+          </p>
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <div>
+          <p className="text-sm font-medium text-foreground mb-2">Install Claude Desktop:</p>
+          <Snippet
+            text="brew install --cask claude"
+            prompt={true}
+            dark={false}
+            width="100%"
+          />
+        </div>
+
+        <div>
+          <p className="text-sm font-medium text-foreground mb-2">Or install Snowplow MCP globally:</p>
+          <Snippet
+            text="npm install -g @snowplow/mcp-server"
+            prompt={true}
+            dark={false}
+            width="100%"
+          />
+        </div>
+
+        <div className="pt-4 border-t border-border">
+          <p className="text-xs text-muted-foreground">
+            💡 Need help? Check our{' '}
+            <a href="/docs/mcp/" className="text-primary hover:text-primary/80 underline">
+              MCP documentation
+            </a>{' '}
+            for detailed setup instructions.
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+};
 
 // Path Card Component
 const PathCard = ({ title, subtitle, description, forText, builds, ctaText, ctaLink, icon, variant, shouldAnimate = false }) => {
@@ -160,34 +237,45 @@ export default function SnowplowDocsLanding() {
 
   const navItems = [
     {
-      name: "Get Started",
-      link: "#paths",
-      icon: <span>🚀</span>,
-      onClick: () => scrollToSection('paths')
+      name: "CDI",
+      link: "/docs/",
+      icon: <span>🔧</span>,
+    },
+    {
+      name: "Signals",
+      link: "/docs/signals/",
+      icon: <span>📊</span>,
     },
     {
       name: "Tutorials",
-      link: "/docs/tutorials/",
+      link: "/tutorials/",
       icon: <span>📖</span>,
+    },
+    {
+      name: "Get Started",
+      link: "#paths",
+      icon: <span>🚀</span>,
+      onClick: () => scrollToSection('paths'),
+      isPrimary: true
     },
   ];
 
   const faqs = [
     {
-      question: "How is Snowplow different from Google Analytics or Adobe?",
-      answer: "You own everything — your cloud, your warehouse, your schemas. Data lands in seconds (not hours), with 130+ properties out of the box. No sampling, no black boxes, no vendor lock-in."
+      question: "What is the Snowplow Model Context Protocol (MCP)?",
+      answer: "Snowplow MCP is a standardized way for Claude Desktop to interact with your Snowplow data pipeline. It enables Claude to help you manage schemas, analyze tracking implementation, and troubleshoot data collection issues directly from your chat interface."
     },
     {
-      question: "How is Snowplow different from CDPs like Segment?",
-      answer: "Schema validation happens at collection, not as a paid add-on. Data syncs in seconds, not 15+ minutes. And you control the pipeline end-to-end — it runs in your infrastructure."
+      question: "How do I install and configure Snowplow MCP?",
+      answer: "Install Claude Desktop, then add the Snowplow MCP server to your configuration. You can install it via npm or configure it directly in Claude Desktop. Check our MCP documentation for step-by-step instructions."
     },
     {
-      question: "Do I need both CDI and Signals?",
-      answer: "No. Use CDI alone if your focus is analytics and BI. Add Signals when you need sub-second personalization or real-time context for AI agents."
+      question: "What can I do with Snowplow MCP?",
+      answer: "Query your schemas, validate tracking implementations, analyze event data, generate schema definitions, troubleshoot pipeline issues, and get AI-powered insights into your Snowplow setup - all through natural language conversations with Claude."
     },
     {
-      question: "Can Snowplow replace my current analytics stack?",
-      answer: "Yes. Teams use Snowplow to replace GA4, Segment, or homegrown pipelines — or to complement them with richer, governed data."
+      question: "Do I need a Snowplow Cloud account to use MCP?",
+      answer: "No. Snowplow MCP works with both Snowplow Cloud and Open Source deployments. You just need access to your Snowplow infrastructure and the appropriate API credentials or connection details."
     }
   ];
 
@@ -245,10 +333,11 @@ export default function SnowplowDocsLanding() {
 
             {/* Headline */}
             <h1 className="text-5xl md:text-6xl lg:text-7xl font-[800] mb-16 leading-tight">
-              From Raw Behavior Data
-
-              to AI powered Fuel
-
+              Build Data Apps
+              <br />
+              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                with AI superpowers
+              </span>
             </h1>
 
             {/* Interactive Search Bar */}
@@ -303,18 +392,17 @@ export default function SnowplowDocsLanding() {
 
             {/* Subheadline */}
             <p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto mb-10 leading-relaxed">
-            We are the leader in customer data infrastructure (CDI)—including advanced analytics, real-time personalization engines, and AI agents.
+            Build behavioral data pipelines with our CDI platform, then connect Claude Desktop via MCP to supercharge your development workflow with AI-powered schema management and debugging.
             </p>
 
             </div>
           </div>
         </section>
 
-                {/* Trust Strip */}
-                <LogoCloudDemo />
+
 
         {/* Two Paths Section */}
-        <section ref={pathsRef} id="paths" className="px-6 py-24 bg-gray-50">
+        <section ref={pathsRef} id="paths" className="px-6 py-24 bg-background">
           <div className="max-w-5xl mx-auto">
             {/* Section header */}
             <motion.div
@@ -343,7 +431,7 @@ export default function SnowplowDocsLanding() {
                   ease: "easeOut"
                 }}
               >
-                Two Products. One Foundation.
+                One Foundation. Stronger Together.
               </motion.h2>
               <motion.p
                 className="text-gray-600"
@@ -357,7 +445,7 @@ export default function SnowplowDocsLanding() {
                   ease: "easeOut"
                 }}
               >
-                Your journey depends on what you're building.
+                Your journey depends on what you're building. CDI captures and governs your data. Signals serves it to your applications in real-time.
               </motion.p>
             </motion.div>
 
@@ -424,120 +512,60 @@ export default function SnowplowDocsLanding() {
             </div>
           </div>
         </section>
+        {/* Trust Strip */}
+        <LogoCloudDemo />
 
-        {/* Better Together Section */}
-        <section className="px-6 py-24 bg-white">
-          <div className="max-w-3xl mx-auto">
-            <div className="bg-gradient-to-br from-violet-50 to-cyan-50 border border-gray-200 rounded-2xl p-10 text-center">
-              <h2 className="text-2xl md:text-3xl font-bold mb-4 text-gray-900">
-                They Work Together
+
+        {/* Get Started Section */}
+        <section className="px-6 py-24 bg-card">
+          <div className="max-w-6xl mx-auto">
+            <h2 className="text-3xl md:text-4xl font-[800] text-center mb-12 text-foreground tracking-tight">
+              Accelerate Your Solution 
+            </h2>
+
+            <SolutionGrid />
+          </div>
+        </section>
+
+
+
+        {/* MCP Section */}
+        <section className="px-6 py-24 bg-background">
+          <div className="max-w-4xl mx-auto">
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-[800] text-center mb-4 text-foreground tracking-tight">
+                🤖 Supercharge Your Workflow with AI
               </h2>
-              <p className="text-gray-600 max-w-xl mx-auto mb-8">
-                CDI captures and governs your data. Signals serves it to your applications in real-time. Use one or both — they share the same foundation.
+              <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+                Connect Claude Desktop to your Snowplow infrastructure and let AI help you manage schemas, debug tracking, and analyze data flows.
               </p>
+            </div>
 
-              {/* Flow diagram */}
-              <div className="flex items-center justify-center gap-3 flex-wrap">
-                <div className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg shadow-sm">
-                  <span className="text-xl">📱</span>
-                  <span className="text-sm text-gray-700">Sources</span>
-                </div>
+            <div className="grid lg:grid-cols-2 gap-8 mb-16">
+              <MCPInstallation />
 
-                <span className="text-gray-400">→</span>
-
-                <div className="flex items-center gap-2 px-4 py-2 bg-violet-100 border border-violet-200 rounded-lg">
-                  <span className="text-xl">🔷</span>
-                  <span className="text-sm text-violet-700 font-medium">CDI</span>
-                </div>
-
-                <span className="text-gray-400">→</span>
-
-                <div className="flex flex-col gap-2">
-                  <div className="flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg shadow-sm">
-                    <span className="text-lg">🏢</span>
-                    <span className="text-xs text-gray-600">Warehouse</span>
-                  </div>
-                  <div className="flex items-center gap-2 px-4 py-2 bg-cyan-100 border border-cyan-200 rounded-lg">
-                    <span className="text-lg">⚡</span>
-                    <span className="text-xs text-cyan-700">Signals</span>
-                  </div>
+              <div className="bg-card border border-border rounded-xl p-8 shadow-sm">
+                <h3 className="text-xl font-semibold text-foreground mb-4">Frequently Asked Questions</h3>
+                <div className="space-y-4">
+                  {faqs.map((faq, i) => (
+                    <FAQItem
+                      key={i}
+                      question={faq.question}
+                      answer={faq.answer}
+                      isOpen={openFAQ === i}
+                      onClick={() => setOpenFAQ(openFAQ === i ? null : i)}
+                    />
+                  ))}
                 </div>
               </div>
             </div>
-          </div>
-        </section>
 
-        {/* Get Started Section */}
-        <section className="px-6 py-24 bg-gray-50">
-          <div className="max-w-3xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-bold text-center mb-12 text-gray-900">
-              Start Here
-            </h2>
-
-            <div className="grid md:grid-cols-3 gap-6">
+            <div className="text-center">
               <a
-                href="/docs/fundamentals/"
-                className="group p-6 bg-white border border-gray-200 rounded-xl transition-all hover:border-violet-300 hover:-translate-y-1 shadow-sm"
+                href="/docs/mcp/"
+                className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-medium"
               >
-                <span className="text-3xl mb-4 block">📘</span>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">New to Snowplow?</h3>
-                <span className="text-sm text-violet-600 group-hover:text-violet-700">
-                  Read the Fundamentals →
-                </span>
-              </a>
-
-              <a
-                href="/docs/get-started/"
-                className="group p-6 bg-white border border-gray-200 rounded-xl transition-all hover:border-fuchsia-300 hover:-translate-y-1 shadow-sm"
-              >
-                <span className="text-3xl mb-4 block">🔧</span>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Ready to Implement?</h3>
-                <span className="text-sm text-fuchsia-600 group-hover:text-fuchsia-700">
-                  First Steps →
-                </span>
-              </a>
-
-              <a
-                href="https://try-signals.snowplow.io/"
-                className="group p-6 bg-white border border-gray-200 rounded-xl transition-all hover:border-cyan-300 hover:-translate-y-1 shadow-sm"
-              >
-                <span className="text-3xl mb-4 block">⚡</span>
-                <h3 className="text-lg font-semibold text-gray-900 mb-2">Try Signals Sandbox</h3>
-                <span className="text-sm text-cyan-600 group-hover:text-cyan-700">
-                  Launch Sandbox →
-                </span>
-              </a>
-            </div>
-          </div>
-        </section>
-
-
-
-        {/* FAQ Section */}
-        <section className="px-6 py-24 bg-gray-50">
-          <div className="max-w-2xl mx-auto">
-            <h2 className="text-2xl md:text-3xl font-bold text-center mb-12 text-gray-900">
-              Common Questions
-            </h2>
-
-            <div className="bg-card border border-border rounded-xl p-6 shadow-sm">
-              {faqs.map((faq, i) => (
-                <FAQItem
-                  key={i}
-                  question={faq.question}
-                  answer={faq.answer}
-                  isOpen={openFAQ === i}
-                  onClick={() => setOpenFAQ(openFAQ === i ? null : i)}
-                />
-              ))}
-            </div>
-
-            <div className="text-center mt-8">
-              <a
-                href="https://snowplow.io/compare"
-                className="text-sm text-violet-600 hover:text-violet-700"
-              >
-                See full comparisons →
+                View full MCP documentation →
               </a>
             </div>
           </div>

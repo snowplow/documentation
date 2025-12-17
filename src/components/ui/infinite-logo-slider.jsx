@@ -72,7 +72,7 @@ const InfiniteSlider = ({
             <div
                 className="absolute inset-0 z-10 pointer-events-none"
                 style={{
-                    background: 'linear-gradient(to right, white 0%, transparent 15%, transparent 85%, white 100%)'
+                    background: 'linear-gradient(to right, hsl(var(--card)) 0%, transparent 15%, transparent 85%, hsl(var(--card)) 100%)'
                 }}
             />
 
@@ -106,11 +106,11 @@ const InfiniteSlider = ({
 
 export default function LogoCloudDemo() {
     return (
-        <section className="bg-white overflow-hidden py-16 w-full">
+        <section className="bg-background overflow-hidden py-16 w-full">
             <div className="mx-auto max-w-7xl px-6">
                 <div className="flex flex-col items-center md:flex-row">
-                    <div className="flex-shrink-0 text-center md:text-right md:max-w-44 md:border-r md:border-gray-200 md:pr-6">
-                        <p className="text-sm text-gray-600">
+                    <div className="flex-shrink-0 text-center md:text-right md:max-w-44 md:border-r md:border-border md:pr-6">
+                        <p className="text-base text-muted-foreground font-medium">
                             Powering the best teams
                         </p>
                     </div>
@@ -119,7 +119,7 @@ export default function LogoCloudDemo() {
                             {LOGOS.map((logo, index) => (
                                 <img
                                     key={index}
-                                    className="h-auto w-fit opacity-60 hover:opacity-100 transition-opacity duration-300 flex-shrink-0"
+                                    className="h-auto w-fit opacity-60 hover:opacity-100 transition-opacity duration-300 flex-shrink-0 dark:invert"
                                     src={logo.src}
                                     alt={logo.alt}
                                     style={{ height: `${logo.height}px` }}

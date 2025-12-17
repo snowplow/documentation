@@ -7,7 +7,11 @@ description: "Load common types of failed events to a separate table in your war
 
 :::note Compatibility
 
-This feature is available since Enrich 5.0.0 and works with Snowflake Loader, BigQuery Loader since version 2, and Lake Loader.
+This feature is available since Enrich 5.0.0 and works with:
+* Snowflake Streaming Loader
+* BigQuery Loader (since version 2)
+* Lake Loader
+* Databricks Streaming Loader
 
 :::
 
@@ -110,6 +114,7 @@ You can use the following loaders with the failed events stream:
 * Snowflake Streaming Loader
 * BigQuery Loader (since version 2)
 * Lake Loader
+* Databricks Streaming Loader
 
 Pick your desired destination and follow the steps in the UI, selecting _“failed events”_ as the  type of events.
 

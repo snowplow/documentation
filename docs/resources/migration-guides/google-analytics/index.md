@@ -6,7 +6,7 @@ description: "Migrate from Google Analytics to Snowplow, including data layer im
 keywords: ["google analytics", "ga4", "migration", "data layer", "gtm", "google tag manager"]
 ---
 
-This guide helps technical implementers migrate from Google Analytics to Snowplow.
+This guide is to help technical implementers migrate from Google Analytics to Snowplow.
 
 ## Platform differences
 
@@ -82,13 +82,13 @@ snowplow('trackTransaction', {
 
 This table shows how some data layer GA4 tracking maps to Snowplow web tracking:
 
-| GA4 Event     | GA4 Data Layer Example                                                                                    | Snowplow Implementation                                                                                                                                         |
-| ------------- | --------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `page_view`   | Sent by default by GTM, or `dataLayer.push({event: 'page_view'})`.                                        | Use `trackPageView`.                                                                                                                                            |
-| `purchase`    | `dataLayer.push({event: 'purchase', ecommerce: {transaction_id: '123', value: 99.99}})`                   | Use built-in ecommerce tracking, or define a custom `purchase` schema containing `transaction_id` and `value` properties, and track `trackSelfDescribingEvent`. |
-| Custom events | `dataLayer.push({event: 'video_play', video_title: 'Demo'})`                                              | Define a custom `video_play` schema containing `video_title` property and track with `trackSelfDescribingEvent`.                                                |
-| Send user IDs | `dataLayer.push({user_id: 'USER_123'})`, configured as user property in GTM                               | Use `setUserId('USER_123')` to set the user ID.                                                                                                                 |
-| Page metadata | `dataLayer.push({page_type: 'product', category: 'electronics'})`, configured as custom dimensions in GTM | Define custom entities for page context and attach to relevant events.                                                                                          |
+| GA4 Event     | GA4 Data Layer Example                                                                                    | Snowplow Implementation                                                                                                                                        |
+| ------------- | --------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `page_view`   | Sent by default by GTM, or `dataLayer.push({event: 'page_view'})`.                                        | Use `trackPageView`                                                                                                                                            |
+| `purchase`    | `dataLayer.push({event: 'purchase', ecommerce: {transaction_id: '123', value: 99.99}})`                   | Use built-in ecommerce tracking, or define a custom `purchase` schema containing `transaction_id` and `value` properties, and track `trackSelfDescribingEvent` |
+| Custom events | `dataLayer.push({event: 'video_play', video_title: 'Demo'})`                                              | Define a custom `video_play` schema containing `video_title` property and track with `trackSelfDescribingEvent`                                                |
+| Send user IDs | `dataLayer.push({user_id: 'USER_123'})`, configured as user property in GTM                               | Use `setUserId('USER_123')` to set the user ID                                                                                                                 |
+| Page metadata | `dataLayer.push({page_type: 'product', category: 'electronics'})`, configured as custom dimensions in GTM | Define custom entities for page context and attach to relevant events                                                                                          |
 
 ### Warehouse loading and data modeling
 
@@ -104,7 +104,7 @@ You can add the same `product` entity to any other relevant event, such as `add_
 
 Snowplow tracker SDKs provide built-in methods for tracking page views, along with many other kinds of events. The additional entities added depend on which Snowplow SDK you're using, and which [enrichments](/docs/pipeline/enrichments/index.md) you've configured.
 
-Snowplow provides out-of-the-box [dbt data models](https://docs.snowplow.io/docs/modeling-data/modeling-your-data/dbt/) for initial modeling and common analytics use cases.
+Snowplow provides out-of-the-box [dbt data models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/index.md) for initial modeling and common analytics use cases.
 
 ### Data validation
 
@@ -129,7 +129,7 @@ However, Snowplow also provides templates and tags for GTM and GTM Server-side. 
 
 | Approach                                                                                                | Phase 1                                                                    | Phase 2                                                                                         | Phase 3                           | Best for                                                                              |
 | ------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | --------------------------------- | ------------------------------------------------------------------------------------- |
-| Direct [tracker SDK](/docs/sources/trackers/index.md) calls                                             | Define Snowplow [data products](/docs/fundamentals/data-products/index.md) | Add Snowplow tracking calls; implement Snowlow data models                                      |                                   | Teams with tracking implementation engineer resources; greenfield validation projects |
+| Direct [tracker SDK](/docs/sources/trackers/index.md) calls                                             | Define Snowplow [data products](/docs/fundamentals/data-products/index.md) | Add Snowplow tracking calls; implement Snowplow data models                                     |                                   | Teams with tracking implementation engineer resources; greenfield validation projects |
 | [Snowplow GTM templates](/docs/sources/trackers/google-tag-manager/index.md)                            | Define Snowplow [data products](/docs/fundamentals/data-products/index.md) | Configure Snowplow tags to receive data layer events; implement Snowplow data models            | Implement Snowplow tracking calls | Validation of Snowplow data quality for analytics or marketing teams                  |
 | [GTM Server-side](/docs/destinations/forwarding-events/google-tag-manager-server-side/index.md) tagging | Define Snowplow [data products](/docs/fundamentals/data-products/index.md) | Use GTM Server-side to forward your existing events to Snowplow; implement Snowplow data models | Implement Snowplow tracking calls | Validation of Snowplow data quality for teams already using GTM Server-side           |
 

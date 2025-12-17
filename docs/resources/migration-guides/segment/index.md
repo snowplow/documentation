@@ -121,7 +121,7 @@ You'll need to translate your Segment Tracking Plans into Snowplow [data product
 
 The goal is to create a set of JSON data structures for all your events and entities, organized into data products and [event specifications](/docs/data-product-studio/event-specifications/index.md). The best way to import your new data product tracking plans into Snowplow is to use the [Snowplow CLI](/docs/data-product-studio/snowplow-cli/index.md).
 
-:::info Snowplow MCP server
+:::info Snowplow CLI MCP server
 The Snowplow CLI includes an [MCP server](/docs/data-product-studio/snowplow-cli/index.md#mcp-server) to help you translate your Segment Tracking Plans into Snowplow data products.
 :::
 

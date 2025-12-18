@@ -8,7 +8,10 @@ description: "Snowplow Micro is a lightweight version of the Snowplow pipeline t
 ```mdx-code-block
 import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
-<AvailabilityBadges available={['cloud', 'pmc', 'selfHosted']} />
+<AvailabilityBadges
+  available={['cloud', 'pmc', 'selfHosted']}
+  helpContent="Snowplow Micro is included with all platforms."
+/>
 ```
 
 [Snowplow Micro](https://github.com/snowplow/snowplow-micro) is a lightweight version of the Snowplow pipeline. It's great for:

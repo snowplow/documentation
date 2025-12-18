@@ -11,6 +11,7 @@ import TabItem from '@theme/TabItem';
 import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
 import BadgeGroup from '@site/src/components/BadgeGroup';
+import AvailabilityBadges from '@site/src/components/ui/availability-badges'
 ```
 
 <BadgeGroup>
@@ -18,6 +19,8 @@ import BadgeGroup from '@site/src/components/BadgeGroup';
 <Badges badgeType="Actively Maintained"></Badges>
 <Badges badgeType="SPAL"></Badges>
 </BadgeGroup>
+
+<AvailabilityBadges available={['cloud', 'pmc', 'addon']} helpContent="The Media Player package is available as part of the Digital Analytics Data Model Pack, a paid addon for Snowplow CDI." />
 
 **The package source code can be found in the [snowplow/dbt-snowplow-media-player repo](https://github.com/snowplow/dbt-snowplow-media-player), and the docs for the [model design here](https://snowplow.github.io/dbt-snowplow-media-player/#!/overview/snowplow_media_player).**
 

@@ -234,7 +234,7 @@ endMediaTracking({ id });`}
 </CodeBlock>)}</>
 
 <>{(props.tracker == 'flutter') && (<Admonition type="info" title="Configure the JS plugin URL on Web">
-    In order to be able to track media events using the Flutter tracker on Web, you will need to configure the URL for the <a href="/docs/sources/trackers/web-trackers/tracking-events/media/">media plugin for the JavaScript tracker</a>. Set the <code>jsMediaPluginURL</code> in the <code>TrackerConfiguration</code> to the URL for the script hosted on your server or on CDN.
+    In order to be able to track media events using the Flutter tracker on Web, you will need to configure the URL for the <a href="/docs/sources/web-trackers/tracking-events/media/">media plugin for the JavaScript tracker</a>. Set the <code>jsMediaPluginURL</code> in the <code>TrackerConfiguration</code> to the URL for the script hosted on your server or on CDN.
     <CodeBlock language="dart">
     {`SnowplowTracker tracker = await Snowplow.createTracker(
     namespace: namespace,

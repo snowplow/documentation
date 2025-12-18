@@ -332,12 +332,12 @@ The table below shows which media player properties (first column) and media eve
 
 ## How to track?
 
-* on Web using plugins for our [JavaScript trackers](/docs/sources/trackers/web-trackers/index.md):
-  * [media plugin](/docs/sources/trackers/web-trackers/tracking-events/media/index.md) that can be used to track events from any media player.
-  * [HTML5 media tracking plugin](/docs/sources/trackers/web-trackers/tracking-events/media/html5/index.md).
-  * [YouTube tracking plugin](/docs/sources/trackers/web-trackers/tracking-events/media/youtube/index.md).
-  * [Vimeo tracking plugin](/docs/sources/trackers/web-trackers/tracking-events/media/vimeo/index.md).
-* [media tracking APIs on our iOS and Android trackers](/docs/sources/trackers/mobile-trackers/tracking-events/media-tracking/index.md) for mobile apps.
+* on Web using plugins for our [JavaScript trackers](/docs/sources/web-trackers/index.md):
+  * [media plugin](/docs/sources/web-trackers/tracking-events/media/index.md) that can be used to track events from any media player.
+  * [HTML5 media tracking plugin](/docs/sources/web-trackers/tracking-events/media/html5/index.md).
+  * [YouTube tracking plugin](/docs/sources/web-trackers/tracking-events/media/youtube/index.md).
+  * [Vimeo tracking plugin](/docs/sources/web-trackers/tracking-events/media/vimeo/index.md).
+* [media tracking APIs on our iOS and Android trackers](/docs/sources/mobile-trackers/tracking-events/media-tracking/index.md) for mobile apps.
 
 ## Modeled data using the snowplow-media-player dbt package
 

@@ -21,7 +21,7 @@ At the high level, there are 3 kinds of Snowplow events:
 * [Structured events](#structured-events), which you can supplement with some (limited) custom information
 * [Self-describing events](#self-describing-events), which can include arbitrarily complex data, described by a [schema](/docs/fundamentals/schemas/index.md)
 
-You can create all of these by using various [tracking SDKs](/docs/sources/trackers/index.md).
+You can create all of these by using various [tracking SDKs](/docs/sources/index.md).
 
 In the data warehouse, all 3 kinds of events share a number of standard columns, such as timestamps. That said, event-specific data will be stored differently, as explained below. See also [what Snowplow data looks like](/docs/fundamentals/canonical-event/index.md).
 
@@ -62,7 +62,7 @@ Over the years, it has become more idiomatic to use [entities](/docs/fundamental
 <details>
 <summary>Tracking and storage format</summary>
 
-Snowplow [tracking SDKs](/docs/sources/trackers/index.md) provide a dedicated API for these events. For example, if you want to track a page view using the [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md):
+Snowplow [tracking SDKs](/docs/sources/index.md) provide a dedicated API for these events. For example, if you want to track a page view using the [JavaScript tracker](/docs/sources/web-trackers/quick-start-guide/index.md):
 
 ```javascript
 window.snowplow('trackPageView');
@@ -97,7 +97,7 @@ Structured events have 5 fields:
 <details>
 <summary>Tracking and storage format</summary>
 
-To track a structured event, use one of the [tracking SDKs](/docs/sources/trackers/index.md). For example, with the [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md):
+To track a structured event, use one of the [tracking SDKs](/docs/sources/index.md). For example, with the [JavaScript tracker](/docs/sources/web-trackers/quick-start-guide/index.md):
 
 ```javascript
 snowplow('trackStructEvent', {
@@ -139,11 +139,11 @@ This structure is an example of what we call _self-describing JSON_ — a JSON o
 <details>
 <summary>Tracking and storage format</summary>
 
-Some self-describing events were predefined by Snowplow and are natively supported by tracking SDKs. For example, the mobile trackers automatically send [screen view](/docs/sources/trackers/mobile-trackers/tracking-events/screen-tracking/index.md) self-described events. You can find the schemas for these events [here](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow).
+Some self-describing events were predefined by Snowplow and are natively supported by tracking SDKs. For example, the mobile trackers automatically send [screen view](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md) self-described events. You can find the schemas for these events [here](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow).
 
 To track your own _custom_ self-describing event, e.g. `viewed_product`, **you will first need to define its [schema](/docs/fundamentals/schemas/index.md)** (see [managing data structures](/docs/data-product-studio/data-structures/manage/index.md)). This schema might have fields such as `productId`, `brand`, etc.
 
-Then you can use one of our [tracking SDKs](/docs/sources/trackers/index.md). For example, with the [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md):
+Then you can use one of our [tracking SDKs](/docs/sources/index.md). For example, with the [JavaScript tracker](/docs/sources/web-trackers/quick-start-guide/index.md):
 
 ```javascript
 window.snowplow('trackSelfDescribingEvent', {

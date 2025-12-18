@@ -108,7 +108,7 @@ For some self-describing event with a name of `sign_up`, where we do not want to
 <summary>Using a self-describing event and a context name</summary>
 
 
-Using our [Snowplow e-commerce tracking](/docs/sources/trackers/web-trackers/tracking-events/ecommerce/index.md):
+Using our [Snowplow e-commerce tracking](/docs/sources/web-trackers/tracking-events/ecommerce/index.md):
 
 <Tabs groupId="warehouse" queryString>
 <TabItem value="snowflake" label="Snowflake" default>

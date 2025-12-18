@@ -30,7 +30,7 @@ This is tracked in the `web_page` context entity in that page view event and for
 
 ### How to track?
 
-See the [documentation for the JavaScript tracker](/docs/sources/trackers/web-trackers/tracking-events/index.md#page-views) to learn how to track a page view event.
+See the [documentation for the JavaScript tracker](/docs/sources/web-trackers/tracking-events/index.md#page-views) to learn how to track a page view event.
 
 ## Screen view events
 
@@ -63,9 +63,9 @@ After a screen view event is tracked, the tracker attaches a screen context enti
 
 ### How to track?
 
-* [Documentation for the iOS and Android trackers](/docs/sources/trackers/mobile-trackers/tracking-events/screen-tracking/index.md).
-* [Documentation for the React Native tracker](/docs/sources/trackers/react-native-tracker/tracking-events/screen-tracking/index.md).
-* [Documentation for the Flutter tracker](/docs/sources/trackers/flutter-tracker/tracking-events/index.md#track-screen-views-withscreenview).
+* [Documentation for the iOS and Android trackers](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md).
+* [Documentation for the React Native tracker](/docs/sources/react-native-tracker/tracking-events/screen-tracking/index.md).
+* [Documentation for the Flutter tracker](/docs/sources/flutter-tracker/tracking-events/index.md#track-screen-views-withscreenview).
 
 ## Use in modeling
 

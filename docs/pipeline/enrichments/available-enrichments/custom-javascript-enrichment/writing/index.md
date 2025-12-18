@@ -46,7 +46,7 @@ function process(event) {
   ...
 ```
 
-There are getter methods available for each of the [standard event fields](/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md?fields=table) — just capitalize the first letter of the field and prepend it with `get`, for example `event.getUser_ipaddress()` or `event.getGeo_country()`.
+There are getter methods available for each of the [standard event fields](/docs/pipeline/enriched-tsv-format/index.md?fields=table) — just capitalize the first letter of the field and prepend it with `get`, for example `event.getUser_ipaddress()` or `event.getGeo_country()`.
 
 :::note
 
@@ -169,7 +169,7 @@ Keep in mind that the old value of a modified field will not be available in you
 
 :::
 
-Just like with getters, there are setter methods available for each of the [standard event fields](/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md?fields=table):
+Just like with getters, there are setter methods available for each of the [standard event fields](/docs/pipeline/enriched-tsv-format/index.md?fields=table):
 
 ```js
 function process(event) {

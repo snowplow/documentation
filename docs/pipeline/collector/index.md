@@ -113,8 +113,6 @@ Invoking this API will return an object of the following form:
 }
 ```
 
-#### Response details
-
 The `cookieDomains` object is always expected to be available and holds two properties:
 
 - `domains` is a non-optional list of domains for which collector cookies are being set. The value may be an empty list.
@@ -142,3 +140,18 @@ Finally, `blockUnencrypted` is an optional boolean property indicating whether u
 ## Configuring the collector for Snowplow Self-Hosted users
 
 After you have installed the [Collector](/docs/api-reference/stream-collector/index.md) (either following the [Quick Start guide](/docs/get-started/self-hosted/index.md) or [manually](/docs/api-reference/stream-collector/setup/index.md)), you can follow the [reference page](/docs/api-reference/stream-collector/configure/index.md) to configure it.
+
+## HTTP request headers
+
+The Collector will collect any standard HTTP headers and the values of these headers can be extracted during Enrichment. The [HTTP header extractor enrichment](/docs/pipeline/enrichments/available-enrichments/http-header-extractor-enrichment/index.md) can be configured for the headers you wish to extract.
+
+Additionally, the following two headers can be sent on requests:
+
+| Header       | Allowed Values     | Description                                                                                                |
+| ------------ | ------------------ | ---------------------------------------------------------------------------------------------------------- |
+| Content-Type | `application/json` | See [MDN Content-Type](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Type)             |
+| SP-Anonymous | `*`                | Enables Server Side Anonymization, preventing the User IP Address and Network User ID from being collected |
+
+### Cookie header
+
+The Collector will collect any cookie information sent in the `Cookie` HTTP header. Cookies can be attached to events using the [Cookie extractor enrichment](/docs/pipeline/enrichments/available-enrichments/cookie-extractor-enrichment/index.md)

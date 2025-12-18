@@ -18,7 +18,7 @@ import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 <Badges badgeType="SPAL"></Badges>
 </BadgeGroup>
 
-<AvailabilityBadges availability={['cloud', 'pmc', 'addon']} helpContent="The Utils package is available as part of the Digital Analytics Data Model Pack, a paid addon for Snowplow CDI." />
+<AvailabilityBadges available={['cloud', 'pmc', 'addon']} helpContent="The Utils package is available as part of the Digital Analytics Data Model Pack, a paid addon for Snowplow CDI." />
 
 :::info
 The models, functionality, and variables described below are only available from `snowplow-utils v0.15.0` and above, as earlier packages do not utilize these variables.

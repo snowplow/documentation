@@ -5,6 +5,15 @@ date: "2020-02-15"
 sidebar_position: 4
 ---
 
+```mdx-code-block
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc', 'selfHosted']}
+  helpContent="Tracker SDKs are included with all Snowplow platforms."
+/>
+```
+
 Snowplow supports a wide range of sources which send events to your collector endpoint.
 
 To collect events from your own applications, use our [tracker SDKs](/docs/sources/trackers/index.md).

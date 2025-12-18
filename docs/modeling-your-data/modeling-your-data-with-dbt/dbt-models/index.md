@@ -4,6 +4,15 @@ sidebar_position: 10
 description: "All Snowplow dbt packages"
 ---
 
+```mdx-code-block
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc', 'addon']}
+  helpContent="Data models are a paid addon for Snowplow CDI."
+/>
+```
+
 Snowplow provides several dbt packages to help you get value from your data.
 
 

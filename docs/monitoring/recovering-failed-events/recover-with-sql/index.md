@@ -257,7 +257,13 @@ Key principles for reconstructing events:
 
 ## Creating a prep query
 
-In this example, the `user_entity` is obviously an entity, so will be in an array. We're using BigQuery here, so we need an array containing a single struct value. In BigQuery, Snowplow stores the `data` object as a `JSON` type, so the individual values must be cast to their correct types.
+In this example, the `user_entity` is obviously an entity, so will be in an array. Depending on the data warehouse you are using, the `data` object will be stored differently. 
+
+* In BigQuery, Snowplow stores the `data` object as a `JSON` type. 
+* In Snowflake uses a `VARIANT` type. 
+* Databricks uses a `STRING` type to represent the JSON object. 
+
+Regardless of the data warehouse in question, the repaired object should be an array containing a single struct value, and the individual values must be cast to their correct types from the value stored in the failed event object.
 
 <Tabs groupId="warehouse" queryString>
   <TabItem value="bigQuery" label="BigQuery" default>

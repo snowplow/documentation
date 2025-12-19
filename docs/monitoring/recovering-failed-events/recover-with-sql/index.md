@@ -259,8 +259,8 @@ Key principles for reconstructing events:
 
 In this example, the `user_entity` is obviously an entity, so will be in an array. Depending on the data warehouse you are using, the `data` object will be stored differently. 
 
-* In BigQuery, Snowplow stores the `data` object as a `JSON` type. 
-* In Snowflake uses a `VARIANT` type. 
+* BigQuery stores the `data` object as a JSON type. 
+* Snowflake uses a VARIANT type.
 * Databricks uses a `STRING` type to represent the JSON object. 
 
 Regardless of the data warehouse in question, the repaired object should be an array containing a single struct value, and the individual values must be cast to their correct types from the value stored in the failed event object.
@@ -329,7 +329,7 @@ FROM prep
 SELECT
   ARRAY( -- since this is an entity, it must be an array
       NAMED_STRUCT(
-        '_schema_version', '2-0-0', -- set the schema version to the correct entity version for BigQuery Loader V2
+        '_schema_version', '2-0-0', -- set the schema version to the correct entity version for Databricks
         'user_id', CAST(GET_JSON_OBJECT(contexts_com_snowplowanalytics_snowplow_failure_1[0].data, '$.user_id') as BIGINT), -- use the `[0]` syntax to extract the first (and only) instance of this entity from the failure array
         'user_name', CAST(GET_JSON_OBJECT(contexts_com_snowplowanalytics_snowplow_failure_1[0].data, '$.user_name') as STRING) -- CAST as BIGINT and STRING to cast the raw JSON string values to their appropriate types
       )
@@ -430,8 +430,7 @@ column_mappings AS (   -- this CTE checks if columns are missing,
             FORMAT('cast(null as %s) AS %s', target_type, column_name)
           -- Custom event columns
           WHEN STARTS_WITH(lower(column_name), 'unstruct_') THEN
-            FORMAT('CAST(NULL AS ', target_type, ') AS ', column_name)
-          -- Standard columns
+            FORMAT('cast(null as %s) AS %s', target_type, column_name)
           ELSE
             FORMAT('cast(null as %s) AS %s', target_type, column_name)
         END

@@ -335,6 +335,9 @@ column_mappings AS (   -- this CTE checks if columns are missing,
           -- Entity columns
           WHEN STARTS_WITH(lower(column_name), 'contexts_') THEN
             FORMAT('cast(null as %s) AS %s', target_type, column_name)
+          -- Custom event columns
+          WHEN STARTS_WITH(lower(column_name), 'unstruct_') THEN
+            FORMAT('CAST(NULL AS ', target_type, ') AS ', column_name)
           -- Standard columns
           ELSE
             FORMAT('cast(null as %s) AS %s', target_type, column_name)
@@ -449,6 +452,9 @@ column_mappings AS (   -- this CTE checks if columns are missing,
         CASE
           -- Entity columns
           WHEN STARTSWITH(lower(column_name), 'contexts_') THEN
+            CONCAT('CAST(NULL AS ', target_type, ') AS ', column_name)
+          -- Custom event columns
+          WHEN STARTSWITH(lower(column_name), 'unstruct_') THEN
             CONCAT('CAST(NULL AS ', target_type, ') AS ', column_name)
           -- Standard columns
           ELSE

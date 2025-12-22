@@ -1,42 +1,57 @@
 ---
-title: "Identities"
+title: "Introduction to Snowplow Identities"
+sidebar_label: "Identities"
 date: "2025-02-25"
 sidebar_position: 6
 ---
 
-Snowplow Identities provides real-time identity resolution.
+Snowplow Identities provides real-time identity resolution. It stitches together user identifiers to create a unified view of each user, and adds a unified `snowplow_id` to each event.
 
-As events flow through your pipeline, the Identities graph database checks the identifiers. It uses deterministic profile stitching to link identifiers into a single profile, and adds the persistent `snowplow_id` as an entity to each event. This `snowplow_id` allows you to create one-row-per-user and identifier mapping tables in your warehouse.
+Identities allows you to:
+* Attribute anonymous events to authenticated users, both within the same session and across sessions and devices
+* Connect behavior across web, iOS, and Android apps, when users authenticate with the same credentials on different platforms
+* Build on cross-domain navigation tracking ADD LINK to identify users across domains
+* Distinguish between separate users sharing the same device
 
-Use cases for Identities include:
-* Attribution and analytics: tie together user behavior across sessions, devices, and domains to form a complete picture of the user journey. This improves accuracy in marketing attribution, conversion funnel analysis, and multi-touchpoint reporting.
-* Feature engineering and personalization: aggregate behavior across platforms, enabling feature extraction and personalization in both real-time and batch contexts.
-* Audience targeting and activation: create deduplicated user audiences for targeting in marketing tools, CRMs, adtech channels, or other engagement platforms.
+Use the provided Identities data models to build one-row-per-user and identifier mapping tables to help with key use cases such as marketing attribution, conversion funnel analysis, multi-touchpoint reporting, audience targeting, feature engineering, and personalization.
+
+## How does Identities fit into the Snowplow pipeline?
+
+Identity resolution happens in real time as part of the event enrichment process ADD LINK.
+
+At the enrichment stage, the pipeline sends user identifiers in the event payload to the Identities service. It either links the identifiers to an existing profile, or creates a new one. Enrich then adds the resolved `snowplow_id` to the event in an identity entity.
+
+Some incoming identifiers will reveal that two previously separate profiles actually belong to the same user. Identities will merge the two profiles in its graph database, and add a merge event directly into your enriched event stream.
+
+Your Identities infrastructure is deployed into the same cloud as your pipeline. The core components are:
+* **Identities API**: used for identity operations
+* **Postgres database**: persists the identity graph and performs graph operations
 
 ## Using Identities
 
-Contact Support to get started with Snowplow Identities. Check out the Configuration ADD LINK page for more details.
+Deploy and configure Identities using Snowplow Console ADD LINK.
 
-## Architecture
+Steps for using Identities:
+1. Decide which identifiers to use
+2. Configure Identities
+3. Use your new identity data
 
-## Identities entity
+### 1. Decide which identifiers to use
 
-The added entity uses schema X. The `snowplow_id` has format Y.
+Your first step is to decide which user identifiers are most relevant to your business use cases.
 
-Here's an example:
+Identities supports identity stitching using any standard Snowplow user identifiers, such as `user_id` or `domain_userid`, as well as custom identifiers that you define. Identities can be derived from any field in the event payload, whether event or entity.
 
-```json
-{ "probably":"json"}
-```
+Read more about identifiers on the concepts ADD LINK page.
 
-## Merge event
+### 2. Configure Identities
 
-When Identities merges two profiles, it generates a merge event and adds it directly to your enriched event stream.
+Use Snowplow Console ADD LINK to configure Identities with the identifiers you've chosen.
 
-This event is useful for ??? in modeling.
+Set optional filters to specify which events will be sent to Identities for resolution. You can also set aliases to resolve multiple event fields to the same identifier.
 
-The merge event uses schema Z.
+### 3. Use your new identity data
 
-```json
-{ "probably":"json"}
-```
+Set up the Identities dbt package to create your new identity tables. We've updated the existing Snowplow dbt models to support Identities. Use your identity data to gain a better understanding of your users.
+
+Identities is compatible with Snowplow Signals ADD LINK for real-time personalization based on unified user profiles.

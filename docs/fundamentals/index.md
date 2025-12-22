@@ -9,7 +9,7 @@ description: "An overview of what a Snowplow pipeline does and what steps it inc
 
 The diagram above illustrates a typical Snowplow pipeline with data flowing left to right.
 
-- [**Trackers**](/docs/sources/trackers/index.md) generate [event](/docs/fundamentals/events/index.md) data and send this to your Collector. We have trackers covering web, mobile, desktop, server and IoT. Additionally, [**webhooks**](/docs/sources/webhooks/index.md) allow third-party software to send their own internal event streams to your Collector for further processing.
+- [**Trackers**](/docs/sources/index.md) generate [event](/docs/fundamentals/events/index.md) data and send this to your Collector. We have trackers covering web, mobile, desktop, server and IoT. Additionally, [**webhooks**](/docs/sources/webhooks/index.md) allow third-party software to send their own internal event streams to your Collector for further processing.
 - Events hit the **Collector** application and it saves the raw events to storage (S3 on AWS and Google Cloud Storage on GCP) and then sends them down the pipeline to Enrich.
 - The **Enrich** application cleanses the data and validates each event against its [schema](/docs/fundamentals/schemas/index.md) to ensure it meets the criteria you have designed and set. When an event fails to validate, it will feed into a bad data stream which contains all of your [**failed events**](/docs/fundamentals/failed-events/index.md). This way, the Snowplow pipeline is non-lossy as failed events [can be reprocessed](/docs/monitoring/recovering-failed-events/index.md).
 - Once validated, each event is enriched by the [**Enrichments**](/docs/pipeline/enrichments/available-enrichments/index.md) you have configured for your pipeline.

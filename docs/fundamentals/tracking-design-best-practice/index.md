@@ -34,7 +34,7 @@ For example, an `Ecommerce Checkout Flow` data product may contain three event s
 
 Note that the `cart` entity data structure is reused across event specifications, this promotes consistency in your tracking design and makes analysis easier.
 
-Additionally you can assign entities to [source applications](/docs/data-product-studio/source-applications/index.md) to document which entities are expected for each event within that application, these are also called [global entities](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/global-context/index.md). An example would be assigning a `user` entity to a mobile application to ensure that user information is always captured with events from that application.
+Additionally you can assign entities to [source applications](/docs/data-product-studio/source-applications/index.md) to document which entities are expected for each event within that application, these are also called [global entities](/docs/sources/web-trackers/custom-tracking-using-schemas/global-context/index.md). An example would be assigning a `user` entity to a mobile application to ensure that user information is always captured with events from that application.
 
 ## Naming conventions for tracking plans
 

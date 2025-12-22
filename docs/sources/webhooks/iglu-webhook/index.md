@@ -1,5 +1,6 @@
 ---
 title: "Iglu webhook"
+sidebar_label: "Iglu webhook"
 date: "2020-02-25"
 sidebar_position: 30
 ---

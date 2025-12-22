@@ -1,0 +1,8 @@
+{
+  "title": "Build a recommendations system with Shaped.ai",
+  "label": "Solution accelerator",
+  "description": "Use Snowplow data to build a recommendations system with Shaped.ai.",
+  "useCases": ["Real-time personalization"],
+  "technologies": ["Shaped.ai"],
+  "snowplowTech": ["Snowbridge"]
+}

@@ -1,5 +1,5 @@
 ---
-title: "ZenDesk"
+title: "Zendesk"
 date: "2020-02-26"
 sidebar_position: 150
 ---

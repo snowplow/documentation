@@ -46,3 +46,15 @@ All Snowplow trackers have open-source licenses (Apache 2.0 License, except for 
 | [Rust](/docs/sources/rust-tracker/index.md)                  | Rust                        | ❌                                                        | [snowplow-rust-tracker](https://github.com/snowplow/snowplow-rust-tracker)             | [crates.io](https://crates.io/crates/snowplow_tracker)                                              |
 | [Lua](/docs/sources/lua-tracker/index.md)                    | Lua                         | ❌                                                        | [snowplow-lua-tracker](https://github.com/snowplow/snowplow-lua-tracker)               | [LuaRocks](https://luarocks.org/modules/snowplow/snowplowtracker)                                   |
 | [Tracking CLI](/docs/sources/snowplow-tracking-cli/index.md) | Command line, shell scripts | ❌                                                        | [snowplow-tracking-cli](https://github.com/snowplow/snowplow-tracking-cli/)            | [GitHub](https://github.com/snowplow/snowplow-tracking-cli/releases)                                |
+
+## Webhooks
+
+| Webhook                                                  | Track                                                                        |
+| -------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| [Adjust](/docs/sources/webhooks/adjust-webhook/index.md) | Which marketing channels are driving mobile app installations                |
+| [Iglu](/docs/sources/webhooks/iglu-webhook/index.md)     | Any [Iglu](/docs/api-reference/iglu/index.md)-compatible GET or POST request |
+| [Iterable](/docs/sources/webhooks/iterable/index.md)     | Events provided by Iterable                                                  |
+| [MailGun](/docs/sources/webhooks/mailgun/index.md)       | Email activity logged by MailGun                                             |
+| [Mandrill](/docs/sources/webhooks/mandrill/index.md)     | Email activity logged by Mandrill                                            |
+| [SendGrid](/docs/sources/webhooks/sendgrid/index.md)     | Email activity logged by SendGrid                                            |
+| [Zendesk](/docs/sources/webhooks/zendesk/index.md)       | Events logged by Zendesk                                                     |

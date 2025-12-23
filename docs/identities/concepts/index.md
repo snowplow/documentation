@@ -6,13 +6,13 @@ sidebar_position: 1
 ---
 
 Identities is based on several core concepts.
-* **Identifiers** are the key/value pairs extracted from events and used to resolve identity
+* **Identifiers** are the identifying properties in the event payload
 * **Profiles** are collections of linked identifiers that represent a single user
 * **Merges** occur when identifiers link two previously separate profiles together
 
 ## Identifiers
 
-Identifiers are the key/value pairs that Identities extracts from events and uses to resolve identity. Each identifier has a name, such as `domain_userid`, and a value that's the actual ID in the event payload, such as `a43eb2f1-...`.
+Identifiers are the key/value pairs that Identities extracts from events and uses to resolve identity. Each identifier has a name or type, such as `domain_userid`, and a value that's the actual ID in the event payload, such as `a43eb2f1-...`.
 
 You can configure identifiers from atomic event fields, custom event fields, or from your own entities. For example, you might add a hashed email address from a user profile entity, or a legacy user ID from a custom entity.
 
@@ -260,11 +260,8 @@ graph LR
     BobA --> CarolP
 ```
 
-## Cross-domain tracking
+## Identifier aliases and cross-domain tracking
 
-TODO
+Identifier aliases allow you to map multiple event fields to the same identifier type. This is particularly useful for [cross-domain tracking](/docs/events/cross-navigation/index.md), where the `refr_domain_userid` field contains the `domain_userid` from the referring site.
 
-
-Identifier aliases allow you to map multiple event fields to the same identifier type. This is useful for cross-domain tracking, where the `refr_domain_userid` field contains the `domain_userid` from the referring site.
-
-When you create an alias, events with values in the aliased field are treated as if they contained that identifier type. For example, if you alias `refr_domain_userid` to `domain_userid`, a user clicking from one site to another will have their profiles linked even though the identifier appears in different fields.
+If you alias `refr_domain_userid` to `domain_userid`, a user clicking from one site to another will have their profiles linked even though the identifier appears in different fields.

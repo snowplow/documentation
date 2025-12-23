@@ -74,6 +74,21 @@ For now, Identities will give any subsequent events containing either identifier
 
 Identities stores the relationships between identifiers and profiles in a Postgres database using a graph-based model. This graph is the source of truth for identity resolution. It dynamically links and merges profiles as new identifiers appear.
 
+The identity resolution process for each event is as follows:
+1. The Snowplow pipeline extracts the configured identifiers from the event payload
+2. The pipeline sends the identifiers to the Identities API
+3. Identities checks the graph database for existing profiles linked to the identifiers
+4. Are any of the identifiers linked to existing profiles?
+   * No: Identities creates a new profile, links all identifiers to it, and returns the new profile Snowplow ID
+   * Yes: processing continues
+5. Identities creates links to that profile for any identifiers that aren't already linked
+6. Does any of the identifiers have another linked profile?
+   * No: Identities returns the existing profile Snowplow ID
+   * Yes: processing continues
+7. Identities creates a profile-profile merge relationship from the newer profile to the older profile
+8. Identities follows the downstream profiles and relinks their identifiers directly to the new root profile <!-- really? that's not shown in the example diagrams -->
+9. Identities returns the parent profile Snowplow ID
+
 :::info Data privacy
 Identities works inside your cloud environment. All requests are encrypted in transit and at rest.
 :::

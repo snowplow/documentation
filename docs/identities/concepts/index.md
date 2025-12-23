@@ -68,254 +68,248 @@ The merge event uses this schema ADD LINK:
 { "some":"json"}
 ```
 
-## Identity resolution graph
+## Identity resolution
 
 Identities stores the relationships between identifiers and profiles in a Postgres database using a graph-based model. This graph is the source of truth for identity resolution. It dynamically links and merges profiles as new identifiers appear.
 
 Identities resolves identity in real time. Each event is resolved against the current state of the graph, ensuring that the `snowplow_id` reflects the most up-to-date identity information.
 
-If the graph database is temporarily unavailable or slow to respond, Identities generates a deterministic fallback `snowplow_id` based on the event's identifiers. A background reconciliation process later replays these events to update the graph and generate any necessary merge events.
+If the graph database is temporarily unavailable or slow to respond, Identities generates a deterministic fallback `snowplow_id` linked to the event's identifiers, without looking up existing profiles. Full identity resolution is deferred to avoid additional pipeline latency. An automatic background reconciliation process later replays the affected events to update the graph and generate any necessary merge events.
 
 :::info Data privacy
 Identities works inside your cloud environment. All requests are encrypted in transit and at rest.
 :::
 
+Tracked events are sometimes delayed in arriving into your pipeline, for example due to network issues or offline tracking. When they're eventually processed, they're resolved against the current state of the identity graph.
+
 ## Examples
 
-These examples based on a fictional company show how Identities builds and merges profiles over time. They follow ExampleCompany employees Alice, Bob, and Carol.
+These examples, based on a fictional company, show how Identities builds and merges profiles over time. They follow ExampleCompany employees Alice, Bob, and Carol. ExampleCompany has implemented Snowplow tracking across their platforms.
 
-ExampleCompany uses several identifiers for identity resolution:
+ExampleCompany configured these identifiers for identity resolution:
 - `user_id` (marked as unique) — the authenticated user's email address
 - `domain_userid` — browser cookie ID from the web tracker
 - `network_userid` — server-side cookie ID from the Collector
-- `device_id` — device identifier from mobile apps
+- `appleIdfa` — device identifier from mobile apps
+- `androidIdfa` — device identifier from mobile apps
 - TODO
 
 ### Creating a new profile
 
-Alice browses the ExampleCompany website on her tablet without logging in. This is the first time Identities has seen her tablet's `domain_userid`.
+Alice browses the ExampleCompany website on her tablet without logging in. This is the first time Identities has seen her tablet's `domain_userid`. She's an anonymous user.
 
 Since no existing profile contains this identifier, Identities creates a new profile and links the `domain_userid` to it.
 
 ```mermaid
 graph LR
-    subgraph "Profile: sp_001"
-        A["domain_userid
-        tablet_abc123"]
-    end
+    A["domain_userid
+    4b0dfa75-..."]
+    B["Profile: sp_001"]
 
-    style A fill:#e1f5fe
+    A --> B
+
+    style A fill:#fff9c4
+    style B fill:#fff9c4
 ```
 
-All events from Alice's tablet browsing session receive `snowplow_id` = `sp_001`.
+All events from Alice's tablet browsing session are tagged with an identity entity referencing `snowplow_id: "sp_001"`.
 
-### Adding identifiers to a profile
-
-Later, Alice logs in on the same tablet. The event now contains both her `domain_userid` (from the browser cookie) and her `user_id` (from authentication).
+Later, Alice logs in to the website using the same tablet. Identities receives an event that contains both her `domain_userid` from the browser cookie, and her `user_id` from authentication.
 
 Identities finds the existing profile via the `domain_userid` and adds the `user_id` to it.
 
 ```mermaid
 graph LR
-    subgraph "Profile: sp_001"
-        A["domain_userid
-        tablet_abc123"]
-        B["user_id
-        alice@company.com"]
-    end
+    A["domain_userid
+    4b0dfa75-..."]
+    B["user_id
+    alice@company.com"]
+    C["Profile: sp_001"]
 
-    style A fill:#e1f5fe
-    style B fill:#c8e6c9
+    A --> C
+    B --> C
+
+    style A fill:#fff9c4
+    style B fill:#fff9c4
+    style C fill:#fff9c4
 ```
 
-The profile now has two linked identifiers. Any future events with either identifier will resolve to `sp_001`.
+The profile now has two linked identifiers. Any future events with either identifier will resolve to `sp_001`. This allows ExampleCompany analysts to identify Alice's activity across both anonymous and authenticated sessions.
 
-### Merging profiles
+### Merging profiles of known and anonymous users
 
-Alice installs the ExampleCompany mobile app on her phone and browses anonymously. A new profile is created for her phone's `device_id`.
+Alice installs the ExampleCompany mobile app on her Apple phone, and uses the app anonymously. Identities receives an event containing her phone's `appleIdfa` within the mobile platform entity. This is a new identifier, so it creates a new profile.
 
 ```mermaid
 graph LR
-    subgraph "Profile: sp_001"
-        A["domain_userid
-        tablet_abc123"]
-        B["user_id
-        alice@company.com"]
-    end
+    A["domain_userid
+    4b0dfa75-..."]
+    B["user_id
+    alice@company.com"]
+    C["appleIdfa
+    6D92078A-..."]
+    P1["Profile: sp_001"]
+    P2["Profile: sp_002"]
 
-    subgraph "Profile: sp_002"
-        C["device_id
-        phone_xyz789"]
-    end
+    A --> P1
+    B --> P1
+    C --> P2
 
-    style A fill:#e1f5fe
-    style B fill:#c8e6c9
-    style C fill:#fff3e0
+    style A fill:#fff9c4
+    style B fill:#fff9c4
+    style C fill:#e1f5fe
+    style P1 fill:#fff9c4
+    style P2 fill:#e1f5fe
 ```
 
-When Alice logs into the mobile app, the event contains both her `device_id` and her `user_id`. Identities detects that these identifiers belong to different profiles and merges them.
+When Alice logs into the mobile app, the next event contains both her `appleIdfa` and her `user_id`. Identities detects that profiles `sp_001` and `sp_002` refer to the same user because of the matching `user_id`. It merges them and emits a merge event.
 
-The older profile (`sp_001`) becomes the active `snowplow_id`. All identifiers from both profiles are now linked to `sp_001`.
+The older profile becomes the active `snowplow_id`. All identifiers from both profiles are now linked to `sp_001`; all future events containing any of these identifiers will have an identity entity containing `sp_001`.
 
 ```mermaid
 graph LR
-    subgraph "Profile: sp_001 (merged)"
-        A["domain_userid
-        tablet_abc123"]
-        B["user_id
-        alice@company.com"]
-        C["device_id
-        phone_xyz789"]
-    end
+    A["domain_userid
+    4b0dfa75-..."]
+    B["user_id
+    alice@company.com"]
+    C["appleIdfa
+    6D92078A-..."]
+    P1["Profile: sp_001"]
+    P2["Profile: sp_002"]
 
-    style A fill:#e1f5fe
-    style B fill:#c8e6c9
+    A --> P1
+    B --> P1
+    C --> P2
+    B --> P2
+    P2 --> P1
+
+    style A fill:#fff9c4
+    style B fill:#fff9c4
     style C fill:#fff3e0
+    style P1 fill:#fff9c4
+    style P2 fill:#fff3e0
 ```
-
-Identities emits a merge event indicating that `sp_002` was merged into `sp_001`. Downstream systems can use this event to update their records.
 
 ### Unique identifiers preventing incorrect merges
 
-Bob is a new ExampleCompany user. He receives an invitation from Alice and opens it on his mobile phone, browsing anonymously. A new profile is created.
+Bob is a new ExampleCompany employee. He has browsed the ExampleCompany website on his laptop anonymously, and then logged in. The website generated events containing a `domain_userid`, and subsequently a `domain_userid` and `user_id`.
+
+Identities created a new profile for his `domain_userid`, and later added his `user_id` to the same profile.
 
 ```mermaid
 graph LR
-    subgraph "Profile: sp_003"
-        D["device_id
-        bob_phone_456"]
-    end
+    A["domain_userid
+    c94f860b-..."]
+    B["user_id
+    bob@company.com"]
+    C["Profile: sp_030"]
 
-    style D fill:#fff3e0
-```
-
-The next day, Bob signs up on his laptop. A new profile is created with his `user_id` and laptop's `domain_userid`.
-
-```mermaid
-graph LR
-    subgraph "Profile: sp_003"
-        D["device_id
-        bob_phone_456"]
-    end
-
-    subgraph "Profile: sp_004"
-        E["user_id
-        bob@company.com"]
-        F["domain_userid
-        laptop_def789"]
-    end
-
-    style D fill:#fff3e0
-    style E fill:#c8e6c9
-    style F fill:#e1f5fe
-```
-
-When Bob logs into the mobile app, the two profiles merge. Since both profiles have only one unique identifier value (`bob@company.com`), there's no conflict.
-
-```mermaid
-graph LR
-    subgraph "Profile: sp_003 (merged)"
-        D["device_id
-        bob_phone_456"]
-        E["user_id
-        bob@company.com"]
-        F["domain_userid
-        laptop_def789"]
-    end
-
-    style D fill:#fff3e0
-    style E fill:#c8e6c9
-    style F fill:#e1f5fe
-```
-
-Now consider a shared device scenario. Bob asks Alice to show him how to complete a task using his work laptop. Alice logs out of Bob's account and logs into her own.
-
-The event contains Alice's `user_id` and Bob's laptop `domain_userid`. Without unique identifier protection, this would merge Alice's and Bob's profiles together.
-
-However, because `user_id` is marked as unique, Identities detects a conflict: Alice's profile has `user_id` = `alice@company.com` and Bob's profile has `user_id` = `bob@company.com`. These are different values for the same unique identifier.
-
-Identities does **not** merge the profiles. Alice's event is attributed to her existing profile (`sp_001`), and the `domain_userid` is recognized as shared rather than identifying.
-
-```mermaid
-graph LR
-    subgraph "Profile: sp_001 (Alice)"
-        A["domain_userid
-        tablet_abc123"]
-        B["user_id
-        alice@company.com"]
-        C["device_id
-        phone_xyz789"]
-    end
-
-    subgraph "Profile: sp_003 (Bob)"
-        D["device_id
-        bob_phone_456"]
-        E["user_id
-        bob@company.com"]
-        F["domain_userid
-        laptop_def789"]
-    end
+    A --> C
+    B --> C
 
     style A fill:#e1f5fe
-    style B fill:#c8e6c9
-    style C fill:#fff3e0
-    style D fill:#fff3e0
-    style E fill:#c8e6c9
-    style F fill:#e1f5fe
+    style B fill:#e1f5fe
+    style C fill:#e1f5fe
 ```
 
-The profiles remain separate, preserving accurate identity resolution.
+Bob asks Alice to help with a task. She logs out of Bob's account, and logs into her own. The `domain_userid` remains the same, but the tracked `user_id` changes to Alice's.
+
+ExampleCompany has configured `user_id` as a unique identifier. This means that two profiles with different `user_id` values will never be merged together, even if they share other identifiers.
+
+```mermaid
+graph LR
+    BobA["domain_userid
+    c94f860b-..."]
+    BobB["user_id
+    bob@company.com"]
+    BobC["Profile: sp_030"]
+
+    BobA --> BobC
+    BobB --> BobC
+
+    style BobA fill:#e1f5fe
+    style BobB fill:#e1f5fe
+    style BobC fill:#e1f5fe
+
+    A["domain_userid
+    4b0dfa75-..."]
+    B["user_id
+    alice@company.com"]
+    C["appleIdfa
+    6D92078A-..."]
+    P1["Profile: sp_001"]
+    P2["Profile: sp_002"]
+
+    A --> P1
+    B --> P1
+    C --> P2
+    B --> P2
+    P2 --> P1
+
+    BobA --> P1
+
+    style A fill:#fff9c4
+    style B fill:#fff9c4
+    style C fill:#fff3e0
+    style P1 fill:#fff9c4
+    style P2 fill:#fff3e0
+```
+
+The events are tagged with Alice's existing profile, `sp_001`.
 
 ### Anonymous activity on a shared device
 
 After Alice finishes helping Bob, she logs out. Their colleague Carol walks past and browses the ExampleCompany landing page anonymously on Bob's laptop.
 
-The event contains only the laptop's `domain_userid`. This identifier has now been seen with two different unique identifiers (`alice@company.com` and `bob@company.com`).
+The event contains the same `domain_userid` from the website cookies. This identifier has now been seen with two different unique `user_id` identifiers, `alice@company.com` and `bob@company.com`.
 
-Identities cannot deterministically attribute this anonymous activity to either Alice or Bob. Instead of making an incorrect attribution, Identities creates a new anonymous profile.
+Identities can't deterministically attribute this anonymous activity to either Alice or Bob. Instead of making an incorrect attribution, Identities creates a new anonymous profile, and tags events in this session with the new Snowplow ID `sp_045`.
 
 ```mermaid
 graph LR
-    subgraph "Profile: sp_001 (Alice)"
-        A["domain_userid
-        tablet_abc123"]
-        B["user_id
-        alice@company.com"]
-        C["device_id
-        phone_xyz789"]
-    end
+    BobA["domain_userid
+    c94f860b-..."]
+    BobB["user_id
+    bob@company.com"]
+    BobC["Profile: sp_030"]
 
-    subgraph "Profile: sp_003 (Bob)"
-        D["device_id
-        bob_phone_456"]
-        E["user_id
-        bob@company.com"]
-        F["domain_userid
-        laptop_def789"]
-    end
+    BobA --> BobC
+    BobB --> BobC
 
-    subgraph "Profile: sp_005 (Anonymous)"
-        G["domain_userid
-        laptop_def789"]
-    end
+    style BobA fill:#e1f5fe
+    style BobB fill:#e1f5fe
+    style BobC fill:#e1f5fe
 
-    style A fill:#e1f5fe
-    style B fill:#c8e6c9
+    A["domain_userid
+    4b0dfa75-..."]
+    B["user_id
+    alice@company.com"]
+    C["appleIdfa
+    6D92078A-..."]
+    P1["Profile: sp_001"]
+    P2["Profile: sp_002"]
+
+    A --> P1
+    B --> P1
+    C --> P2
+    B --> P2
+    P2 --> P1
+
+    BobA --> P1
+
+    style A fill:#fff9c4
+    style B fill:#fff9c4
     style C fill:#fff3e0
-    style D fill:#fff3e0
-    style E fill:#c8e6c9
-    style F fill:#e1f5fe
-    style G fill:#f5f5f5
+    style P1 fill:#fff9c4
+    style P2 fill:#fff3e0
+
+    CarolP["Profile: sp_045"]
+
+    BobA --> CarolP
 ```
 
 This anonymous profile ensures that Carol's activity (or any other anonymous user of the shared laptop) isn't incorrectly attributed to Alice or Bob.
 
-### Late-arriving events
+### Cross-domain tracking
 
-Alice frequently works offline during her commute. Her laptop buffers events while disconnected and sends them when she reconnects.
-
-While Alice's laptop is offline, she logs into the mobile app on her phone. This creates a connection between her phone's read-only account and her editor account, triggering a merge.
-
-When her laptop reconnects and sends the buffered events, those events are resolved against the **current** state of the identity graph—which now includes the merge. The late-arriving events receive Alice's up-to-date merged `snowplow_id`.
-
-This means the events are attributed to her complete, merged profile rather than a partial profile that existed when the events were originally captured.
+TODO

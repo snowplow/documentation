@@ -26,17 +26,7 @@ When you create an alias, events with values in the aliased field are treated as
 
 A profile is a collection of linked identifiers that represent a single user. Each profile has a persistent, immutable `snowplow_id` that identifies it.
 
-When Identities receives a new identifier, it creates a new profile and links the identifier to it. The pipeline adds the new `snowplow_id` to the event. In subsequent events, if the original identifier appears alongside new identifiers or identifier values, those are also linked to the same profile. Events containing one or more of the profile identifiers will receive the same `snowplow_id`.
-
-### Identity entity
-
-The added entity uses schema X. The `snowplow_id` has format Y.
-
-Here's an example:
-
-```json
-{ "some":"json"}
-```
+When Identities receives a new identifier, it creates a new profile and links the identifier to it. The pipeline adds the new `snowplow_id` to the event in an [identity entity](/docs/identities/data-models/index.md#identity-entity). In subsequent events, if the original identifier appears alongside new identifiers or identifier values, those are also linked to the same profile. Events containing one or more of the profile identifiers will receive the same `snowplow_id`.
 
 ### Example profile creation
 
@@ -104,19 +94,9 @@ In normal operation, priority doesn't affect how profiles are linked. All identi
 
 Merges happen when an event contains identifiers that are currently linked to different profiles. This typically occurs when a user's anonymous activity is later connected to their known identity.
 
-When profiles merge, the older profile's `snowplow_id` becomes the ID for the combined profile. All identifiers from both profiles are linked to the combined profile.
+When profiles merge, the older profile's `snowplow_id` becomes the ID for the combined profile. All identifiers from both profiles are linked to the combined profile. Merged profiles can also be merged again in the future if new connecting identifiers are observed.
 
-Merged profiles can also be merged again in the future if new connecting identifiers are observed. The `snowplow_id` always reflects the oldest profile in the merge chain.
-
-### Merge events
-
-When merges occur, a merge event is emitted into the Snowplow pipeline. This event indicates to downstream systems, such as warehouse data models, Signals, or third-party event forwarding destinations, that two users were determined to be the same user.
-
-The merge event uses this schema ADD LINK:
-
-```json
-{ "some":"json"}
-```
+When a merge occurs, Identities emits a [merge event](/docs/identities/data-models/index.md#merge-events) into your enriched event stream.
 
 ### Example merge process
 

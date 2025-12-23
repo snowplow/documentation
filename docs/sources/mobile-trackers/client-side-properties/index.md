@@ -15,7 +15,7 @@ An event describes a single, transient activity. The context in which that event
 The tracker allows the addition of a persistent set of information through the `SubjectConfiguration`, which represents the basic information about the user and the app. This data is added to every event as part of the [canonical event properties](/docs/events/going-deeper/event-parameters/index.md).
 
 | Property | Description | Automatically added? | Column(s) in enriched event |
-| -------- | ----------- |: --------------------- :| ----------------------------------- |
+| -------- | ----------- | ---------------------| ----------------------------------- |
 | `userId`           | User identifier.            | ❌                     | `user_id`                             |
 | `ipAddress`        | User IP address.            | ✅                     | `user_ipaddress`                      |
 | `timezone`         | Current timezone label.     | ✅                     | `os_timezone`                         |

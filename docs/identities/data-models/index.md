@@ -1,5 +1,6 @@
 ---
-title: "In the warehouse"
+title: "Identity modeling"
+sidebar_label: "Identity modeling"
 date: "2025-02-25"
 sidebar_position: 3
 ---

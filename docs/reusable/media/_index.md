@@ -1251,7 +1251,7 @@ trackMediaPlay({
     data: {},
     ad: {},
     adBreak: {},
-    entities: [
+    context: [
         {
             schema: "iglu:org.schema/video/jsonschema/1-0-0",
             data: {"creativeId": "value"}

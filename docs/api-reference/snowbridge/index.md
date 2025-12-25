@@ -4,6 +4,10 @@ sidebar_position: 65
 sidebar_label: "Snowbridge"
 ---
 
+:::note
+Version 4.0.0 includes breaking changes to response rule evaluation. See the [upgrade guide](/docs/api-reference/snowbridge/3-X-X-upgrade-guide/index.md) for migration information.
+:::
+
 Snowbridge is a flexible, low latency tool which can replicate streams of data of any type to external destinations, optionally filtering or transforming the data along the way. It can be used to consume, transform and relay data to any third party platform which supports HTTP or is listed as a target below — in real-time.
 
 ## Features

@@ -1,7 +1,10 @@
 ---
 title: "Setup Guide for GCP"
+sidebar_label: "Setup Guide for GCP"
 date: "2021-05-11"
 sidebar_position: -10
+description: "Deploy Snowplow Mini 0.14.x on GCP with Compute Engine."
+keywords: ["snowplow mini", "gcp setup", "mini 0.14", "compute engine"]
 ---
 
 ## Overview

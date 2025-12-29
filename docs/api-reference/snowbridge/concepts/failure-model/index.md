@@ -1,7 +1,10 @@
 ---
-title: "Failure model"
+title: "Snowbridge failure model"
+sidebar_label: "Failure model"
 date: "2022-10-20"
 sidebar_position: 600
+description: "Learn how Snowbridge handles target failures, oversized data, invalid data, transformation failures, and fatal errors."
+keywords: ["failure handling", "error recovery", "failed events", "retry logic", "snowbridge errors"]
 ---
 
 When Snowbridge hits an unrecoverable error — for example [oversized](#oversized-data) or [invalid](#invalid-data) data — it will emit a [failed event](/docs/fundamentals/failed-events/index.md#what-is-a-failed-event) to the configured failure target. A failure target is the same as a target, the only difference is that the configured destination will receive failed events.

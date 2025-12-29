@@ -1,7 +1,10 @@
 ---
-title: "Set up Collector"
+title: "Set up and run Collector"
+sidebar_label: "Set up Collector"
 date: "2021-08-04"
 sidebar_position: 1
+description: "Instructions for running the Snowplow event Collector using Docker images or jar files, including how to configure the application with HOCON files and perform health checks."
+keywords: ["collector setup", "Docker collector", "run collector", "collector deployment"]
 ---
 
 ```mdx-code-block

@@ -83,7 +83,9 @@ jobs:
             fi
 
             if [ ${#missing_fields[@]} -gt 0 ]; then
-              fields_str=$(IFS=', '; echo "${missing_fields[*]}")
+              # Join array elements with ", " separator
+              fields_str=$(printf "%s, " "${missing_fields[@]}")
+              fields_str=${fields_str%, }  # Remove trailing ", "
               missing_metadata+=("$file: missing fields: $fields_str")
             fi
           done < changed_files.txt
@@ -111,10 +113,10 @@ jobs:
             ${issues.map(issue => `- \`${issue}\``).join('\n')}
 
             ### Required fields
-            All markdown files (except those starting with \`_\`) should include:
-            - \`title\`: Full page title
-            - \`sidebar_label\`: Short title for navigation sidebar (can be the same as title)
-            - \`description\`: One to two sentences for SEO
+            The file metadata is important for SEO and marketing. All markdown files, except for those with filenames starting with \`_\`, should include:
+            - \`title\`: Full, descriptive page title
+            - \`sidebar_label\`: Short title for navigation sidebar (can be the same as the main title)
+            - \`description\`: One to two sentences summarizing the page contents
             - \`keywords\`: Array of marketing/SEO keywords
 
             Please add the missing metadata.`;

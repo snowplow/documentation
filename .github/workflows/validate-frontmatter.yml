@@ -78,6 +78,10 @@ jobs:
               missing_fields+=("keywords")
             fi
 
+            if ! echo "$frontmatter" | grep -q '^sidebar_label:'; then
+              missing_fields+=("sidebar_label")
+            fi
+
             if [ ${#missing_fields[@]} -gt 0 ]; then
               fields_str=$(IFS=', '; echo "${missing_fields[*]}")
               missing_metadata+=("$file: missing fields: $fields_str")
@@ -109,6 +113,7 @@ jobs:
             ### Required fields
             All markdown files (except those starting with \`_\`) should include:
             - \`title\`: Full page title
+            - \`sidebar_label\`: Short title for navigation sidebar (can be the same as title)
             - \`description\`: One to two sentences for SEO
             - \`keywords\`: Array of marketing/SEO keywords
 

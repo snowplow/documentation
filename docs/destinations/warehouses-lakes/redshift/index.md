@@ -1,7 +1,9 @@
 ---
-title: "Redshift"
+title: "Load Snowplow data to Amazon Redshift"
+sidebar_label: "Redshift"
 sidebar_position: 40
-description: "Send Snowplow data to Amazon Redshift for analytics and data warehousing"
+description: "Send Snowplow data to Amazon Redshift for analytics and data warehousing with automatic table creation, schema evolution, and optimized batch loading from S3."
+keywords: ["Redshift", "Amazon Redshift", "AWS", "data warehouse", "batch loader"]
 ---
 
 ```mdx-code-block

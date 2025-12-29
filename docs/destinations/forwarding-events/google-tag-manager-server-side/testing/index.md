@@ -1,7 +1,9 @@
 ---
-title: "Debugging Google Tag Manager Server Side Tags"
-sidebar_label: "Testing & debugging"
+title: "Debug and test GTM Server Side tags"
+sidebar_label: "Testing and debugging"
 sidebar_position: 800
+description: "Test and debug Google Tag Manager Server Side tag configurations using Preview Mode before deploying to production environments."
+keywords: ["GTM SS debugging", "Preview Mode", "tag testing", "GTM SS preview"]
 ---
 
 If you are working on some changes to the configuration of your Google Tag Manager tags and would like to test them before applying them in production, you can use GTM’s [Preview Mode](https://developers.google.com/tag-platform/tag-manager/server-side/debug) feature. It shows information about the events it receives, which tags get triggered, etc.

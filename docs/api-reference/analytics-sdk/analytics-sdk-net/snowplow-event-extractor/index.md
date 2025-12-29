@@ -1,7 +1,10 @@
 ---
-title: "Snowplow event extractor"
+title: "Parse enriched events in Azure Data Lake"
+sidebar_label: "Snowplow event extractor"
 date: "2021-03-26"
 sidebar_position: 1040
+description: "Custom U-SQL extractor for parsing Snowplow enriched events in Azure Data Lake Analytics with direct access to nested context fields."
+keywords: ["azure data lake analytics", "u-sql extractor", "snowplow azure"]
 ---
 
 [Azure Data Lake](https://azure.microsoft.com/en-in/solutions/data-lake/) is a secure and scalable data storage and analytics service. [Azure Data Lake Analytics](https://azure.microsoft.com/en-in/services/data-lake-analytics/) includes [U-SQL](https://blogs.msdn.microsoft.com/visualstudio/2015/09/28/introducing-u-sql-a-language-that-makes-big-data-processing-easy/), a big-data query language for writing queries that analyze data.

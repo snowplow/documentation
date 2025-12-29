@@ -1,7 +1,10 @@
 ---
-title: "Loading transformed data"
+title: "Loading transformed data into warehouses"
+sidebar_label: "Loading transformed data"
 date: "2022-04-05"
 sidebar_position: 20
+description: "Load transformed Snowplow data into Redshift, Snowflake, or Databricks with automated table management and SQL COPY operations."
+keywords: ["data loading", "warehouse loading", "redshift loading", "snowflake loading", "databricks loading"]
 ---
 
 _For a high-level overview of the RDB Loader architecture, of which the loader is a part, see [RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md)._

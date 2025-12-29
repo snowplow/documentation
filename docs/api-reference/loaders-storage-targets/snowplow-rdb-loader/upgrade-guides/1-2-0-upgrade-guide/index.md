@@ -1,8 +1,10 @@
 ---
-title: "RDB Loader v1.2.0 upgrade guide"
+title: "RDB Loader 1.2.0 upgrade guide"
 sidebar_label: "1.2.0 upgrade guide"
 date: "2021-09-03"
 sidebar_position: 190
+description: "Upgrade RDB Loader to 1.2.0 with webhook monitoring, folder monitoring, and enhanced observability for Redshift loading."
+keywords: ["rdb loader 1.2 upgrade", "webhook monitoring", "folder monitoring", "loader observability", "rdb monitoring"]
 ---
 
 RDB Loader 1.2.0 brings many improvements for monitoring subsystem. If you're not interested in new features - you can just bump versions. If you need webhook monitoring - read below instructions on how to enable it.

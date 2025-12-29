@@ -1,7 +1,10 @@
 ---
-title: "DynamoDB Table"
+title: "DynamoDB table for event deduplication"
+sidebar_label: "DynamoDB Table"
 date: "2021-03-26"
 sidebar_position: 30
+description: "Create DynamoDB table for RDB Shredder event deduplication with event manifest storage for cross-batch deduplication."
+keywords: ["dynamodb table", "event manifest", "deduplication storage", "cross-batch deduplication", "rdb shredder dynamodb"]
 ---
 
 In order to perform [deduplication](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/previous-versions/snowplow-rdb-loader/event-deduplication/index.md) in the RDB shredder, a dynamoDB table is needed to store the event manifest.

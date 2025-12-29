@@ -1,6 +1,9 @@
 ---
-title: "Postgres Loader"
+title: "Postgres Loader for testing and development"
+sidebar_label: "Postgres Loader"
 sidebar_position: 7
+description: "Load Snowplow enriched events into PostgreSQL database from Kinesis or Pub/Sub for development and testing environments."
+keywords: ["postgres loader", "postgresql", "snowplow postgres", "database loader"]
 ---
 
 ```mdx-code-block

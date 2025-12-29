@@ -1,7 +1,10 @@
 ---
-title: "RDB loader monitoring"
+title: "RDB loader 2.x monitoring and alerting"
+sidebar_label: "RDB loader monitoring"
 date: "2021-09-29"
 sidebar_position: 350
+description: "Monitor RDB Loader 2.x with webhooks, folder monitoring, health checks, StatsD metrics, and Sentry alerts for warehouse loading."
+keywords: ["rdb loader monitoring", "webhook alerts", "health checks", "statsd rdb", "loader observability"]
 ---
 
 The RDB loader has several types of monitoring built in, to help the pipeline operator: folder monitoring, warehouse health checks, Statsd metrics, Sentry alerts, and Snowplow tracking.

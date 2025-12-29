@@ -50,3 +50,7 @@ In layman's terms, this configuration will read data from a kinesis stream, filt
 <CodeBlock language="hcl" reference>{`
 https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/overview-full-example.hcl
 `}</CodeBlock>
+
+## Temporary heading
+
+This section is here to test the frontmatter validation workflow.

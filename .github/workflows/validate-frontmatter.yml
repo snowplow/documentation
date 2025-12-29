@@ -62,8 +62,16 @@ jobs:
               missing_fields+=("title")
             fi
 
-            if ! echo "$frontmatter" | grep -q '^description:'; then
+            # Check if description exists and is not empty
+            desc_line=$(echo "$frontmatter" | grep '^description:' || true)
+            if [ -z "$desc_line" ]; then
               missing_fields+=("description")
+            else
+              # Extract value after 'description:' and check if it's empty (ignoring quotes and whitespace)
+              desc_value=$(echo "$desc_line" | sed 's/^description:[[:space:]]*//' | sed 's/^"\(.*\)"$/\1/' | sed "s/^'\(.*\)'$/\1/" | tr -d '[:space:]')
+              if [ -z "$desc_value" ]; then
+                missing_fields+=("description (empty)")
+              fi
             fi
 
             if ! echo "$frontmatter" | grep -q '^keywords:'; then

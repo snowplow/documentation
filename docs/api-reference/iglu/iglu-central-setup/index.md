@@ -1,7 +1,10 @@
 ---
-title: "Iglu Central Setup"
+title: "Set up an Iglu Central mirror"
+sidebar_label: "Iglu Central setup"
 date: "2021-03-26"
 sidebar_position: 50
+description: "Create public mirrors or private clones of Iglu Central schema registry for offline access or reduced latency."
+keywords: ["iglu central", "schema mirror", "iglu setup", "private registry"]
 ---
 
 This guide is designed for Iglu users wanting to create a public mirror or private clone of [Iglu Central](/docs/api-reference/iglu/iglu-repositories/iglu-central/index.md). There are a couple of reasons you may want to do this:

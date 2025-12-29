@@ -1,7 +1,10 @@
 ---
-title: "Schema Resolution"
+title: "Schema resolution algorithm for Iglu clients"
+sidebar_label: "Schema resolution"
 date: "2021-03-26"
 sidebar_position: 400
+description: "Standard schema resolution algorithm for Iglu clients with registry prioritization, caching, and lookup strategies."
+keywords: ["schema resolution", "iglu client", "registry priority", "schema caching"]
 ---
 
 This page describes the Schema resolution algorithm which is standard for all Iglu clients. Currently only [Iglu Scala client](https://github.com/snowplow/iglu-scala-client) fully follow this algorithm, while other clients may miss some parts, but we're working on making their behavior consistent.

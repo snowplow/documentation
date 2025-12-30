@@ -1,7 +1,10 @@
 ---
 title: "Adding extra data: the Subject class"
+sidebar_label: "Adding extra data: the Subject class"
 date: "2022-05-12"
 sidebar_position: 70
+description: "Add user and environment data to tracked events using the Subject class in Java tracker v0.11."
+keywords: ["subject class v0.11", "user data", "contextual information"]
 ---
 
 You may have additional information about your application's environment, current user and so on, which you want to send to Snowplow with each event.

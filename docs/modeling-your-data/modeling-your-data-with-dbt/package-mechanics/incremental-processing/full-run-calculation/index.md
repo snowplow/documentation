@@ -1,6 +1,8 @@
 ---
 title: "Full calculation for run timestamps"
+sidebar_label: "Full calculation for run timestamps"
 description: "A detailed deep dive into how we calculate which events to process in a run."
+keywords: ["run timestamps", "event processing", "timestamp calculation", "incremental run"]
 sidebar_position: 40
 ---
 

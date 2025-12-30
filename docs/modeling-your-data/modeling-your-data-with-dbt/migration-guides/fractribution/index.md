@@ -2,6 +2,8 @@
 title: "Migration guide for Fractribution"
 sidebar_label: "Fractribution"
 sidebar_position: 920
+description: "Migration guide for upgrading the legacy Snowplow Fractribution dbt package including breaking changes and configuration updates."
+keywords: ["fractribution migration", "fractribution upgrade", "legacy package migration"]
 ---
 
 This is a legacy package.

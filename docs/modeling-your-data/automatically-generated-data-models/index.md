@@ -3,6 +3,7 @@ title: Automatically generated data models
 sidebar_label: Automatically generated data models
 sidebar_position: 8
 description: Generate optimized, analysis-ready data models directly from your data products for views or incremental dbt models.
+keywords: ["automatic data models", "data product models", "generated models", "dbt model generation"]
 ---
 
 Automatic data model generation allows you to generate optimized models directly from your [data products](/docs/data-product-studio/data-products/index.md) in [Snowplow Console](https://console.snowplowanalytics.com). You can use the models directly in your warehouse, or integrate them into existing dbt projects. The models are ready for analysis, BI tool, or reverse ETL use cases.

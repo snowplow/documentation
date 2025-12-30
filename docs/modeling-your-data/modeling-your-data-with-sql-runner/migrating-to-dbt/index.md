@@ -1,7 +1,9 @@
 ---
 title: "Migrating from SQL Runner to dbt"
+sidebar_label: "Migrating from SQL Runner to dbt"
 sidebar_position: 0
-description: SQL Runner is no longer actively developed and users should try to migrate to dbt where possible, this guide helps you do that
+description: "SQL Runner is no longer actively developed and users should try to migrate to dbt where possible, this guide helps you do that."
+keywords: ["SQL Runner to dbt", "dbt migration", "SQL Runner migration", "legacy to dbt"]
 ---
 
 ```mdx-code-block

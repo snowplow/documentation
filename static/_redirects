@@ -426,6 +426,16 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/monitoring/monitoring-failed-events/alerts/* /docs/monitoring/alerts/:splat 301
 /docs/monitoring/monitoring-failed-events/* /docs/monitoring/:splat 301
 
+/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md/* /docs/pipeline/enriched-tsv-format/index.md/:splat 301
+/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/* /docs/pipeline/enriched-tsv-format/:splat 301
+/docs/fundamentals/schemas/json-schema-reference/* /docs/api-reference/json-schema-reference/:splat 301
+/docs/events/custom-events/context-entities/* /docs/events/event-types/custom-events/:splat 301
+/docs/events/custom-events/self-describing-events/* /docs/events/event-types/custom-events/:splat 301
+/docs/events/custom-events/structured-events/* /docs/events/event-types/custom-events/:splat 301
+/docs/events/going-deeper/http-headers/* /docs/events/http-requests/:splat 301
+/docs/events/going-deeper/example-requests/* /docs/events/http-requests/:splat 301
+/docs/events/going-deeper/* /docs/fundamentals/canonical-event/:splat 301
+
 # Removing the "tracker" sublevel
 /docs/sources/trackers/c-tracker/* /docs/sources/c-tracker/:splat 301
 /docs/sources/trackers/flutter-tracker/* /docs/sources/flutter-tracker/:splat 301

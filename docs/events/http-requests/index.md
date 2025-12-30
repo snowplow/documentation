@@ -1,17 +1,16 @@
 ---
-title: "Example tracker requests"
+title: "Example tracker HTTP request headers"
+sidebar_label: "Example HTTP requests"
+sidebar_position: 450
 ---
 
-:::note
-This page gives examples of requests to the Snowplow collector. However, there is no need to perform these requests manually. Instead, we recommend using our Snowplow trackers that do them for you.
-The requests on this page are only relevant if you plan to write a new tracker implementation.
-:::
+This page gives examples of requests to the Snowplow [Collector](/docs/pipeline/collector/index.md). This is a reference **for those who plan to implement their own tracker**, or want to understand the requests being sent by existing Snowplow trackers.
 
-Below are a number of example Tracker Protocol requests. All examples are POST requests with a JSON body.
+Below are a number of example [Tracker Protocol](/docs/fundamentals/canonical-event/index.md) requests. All examples are POST requests with a JSON body. Requests to the Collector endpoint can contain more than one event, depending how your tracker is configured.
 
 All requests are sent to `https://<your-collector-host>/com.snowplowanalytics.snowplow/tp2` unless you have specified a custom POST path when [configuring your Collector](/docs/pipeline/collector/index.md).
 
-All payloads should be wrapped in a `payload_data` Self Describing JSON.
+All payloads should be wrapped in a `payload_data` self-describing JSON.
 
 ```json
 {
@@ -24,9 +23,13 @@ All payloads should be wrapped in a `payload_data` Self Describing JSON.
 }
 ```
 
-## Self Describing Event
+:::info Reserved parameter `u`
+`u` is a reserved parameter because it is used for [click tracking in the Pixel Tracker](/docs/sources/pixel-tracker/index.md#click-tracking).
+:::
 
-This is an example of a _viewed_product_ event from the web (using the recommended Base64 encoding and the `ue_px` property):
+## Self-describing event
+
+This is an example of an HTTP request for a `viewed_product` event from web, using the recommended Base64 encoding and the `ue_px` property:
 
 ```json
 {
@@ -119,9 +122,9 @@ represents the following JSON, when decoded:
 
 </details>
 
-## Custom Entities
+## Custom entities
 
-An array of entities can be sent with each event. Entity payloads should be wrapped in a `contexts` Self Describing JSON.
+An array of [entities](/docs/fundamentals/entities/index.md) can be sent with each event. Entity payloads should be wrapped in a `contexts` self-describing JSON.
 
 ```json
 {
@@ -137,15 +140,7 @@ An array of entities can be sent with each event. Entity payloads should be wrap
 }
 ```
 
-:::info
-
-Entities can be attached to any Snowplow event type, it's possible to attach the `user` entity described above to any of the events which follow in this section.
-
-[Learn more](/docs/fundamentals/entities/index.md) about entities.
-
-:::
-
-This is an example of the same _viewed_product_ event above but also with a custom context (using the recommended Base64 encoding and the `cx` property):
+This is an example of an HTTP request for the same `viewed_product` event as above but with a custom entity added, using the recommended Base64 encoding and the `cx` property:
 
 ```json
 {
@@ -241,7 +236,9 @@ represents the following JSON, when decoded:
 
 </details>
 
-## Page View
+## Page view
+
+This is an example HTTP request for a [page view](/docs/events/ootb-data/page-activity-tracking/index.md) event:
 
 ```json
 {
@@ -313,7 +310,9 @@ represents the following JSON, when decoded:
 
 </details>
 
-## Page Ping
+## Page ping
+
+This is an example HTTP request for a [page ping](/docs/events/ootb-data/page-activity-tracking/index.md) event:
 
 ```json
 {

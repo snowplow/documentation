@@ -117,12 +117,12 @@ The Site Search tag can be used to track searches on your website, using the [Si
 <details>
 <summary>Site Search Parameters</summary>
 
-| Name           | Required? | Description                     | Example                  |
-| -------------- | --------- | ------------------------------- | ------------------------ |
-| `terms`        | Yes       | Search terms                    | ['unified, log']         |
+| Name           | Required? | Description                     | Example                   |
+| -------------- | --------- | ------------------------------- | ------------------------- |
+| `terms`        | Yes       | Search terms                    | ['unified, log']          |
 | `filters`      | No        | Search filters                  | \{'category': 'clothing'} |
-| `totalResults` | No        | Results found                   | 10                       |
-| `pageResults`  | No        | Results displayed on first page | 5                        |
+| `totalResults` | No        | Results found                   | 10                        |
+| `pageResults`  | No        | Results displayed on first page | 5                         |
 
 </details>
 
@@ -211,13 +211,13 @@ The Errors tracker tag provides a way to manually track any errors that occur on
 | `filename` | No            | Filename or URL                     | 'shop.js'                |
 | `lineno`   | No            | Line number of problem code chunk   | 23                       |
 | `colno`    | No            | Column number of problem code chunk | 45                       |
-| `error`    | No            | JS `ErrorEvent`                     | \{Stack trace string}     |
+| `error`    | No            | JS `ErrorEvent`                     | \{Stack trace string}    |
 
 </details>
 
 ## Page View
 
-You can provide a `Custom Page Title` if you wish, and you can add a [custom context](/docs/events/custom-events/context-entities/index.md) to the request, as also described [here](/docs/sources/web-trackers/tracking-events/page-views/index.md#tracking-a-page-view).
+You can provide a `Custom Page Title` if you wish, and you can add a [custom entity](/docs/events/custom-events/index.md#custom-entities) to the request, as also described [here](/docs/sources/web-trackers/tracking-events/page-views/index.md#tracking-a-page-view).
 
 If you enable `Page Activity Tracking`, page pings will be sent at intervals that you can specify.
 

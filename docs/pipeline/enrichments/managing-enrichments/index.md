@@ -1,6 +1,9 @@
 ---
-title: "Managing enrichments"
+title: "Manage enrichments in Console"
 sidebar_position: 30
+sidebar_label: "Managing enrichments"
+description: "Enable, configure, and deploy enrichments for your pipelines using Snowplow Console UI."
+keywords: ["manage enrichments", "enable enrichments", "enrichment configuration"]
 ---
 
 

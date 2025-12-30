@@ -2,6 +2,8 @@
 title: "Managing multiple trackers"
 date: "2021-03-31"
 sidebar_position: 4000
+description: "Documentation for tracking Managing multiple ers with the web tracker."
+keywords: ["tracking", "events"]
 ---
 
 ```mdx-code-block

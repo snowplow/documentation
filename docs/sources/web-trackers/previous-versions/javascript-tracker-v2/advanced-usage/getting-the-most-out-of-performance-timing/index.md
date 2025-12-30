@@ -2,6 +2,8 @@
 title: "Getting the most out of performance timing"
 date: "2020-02-26"
 sidebar_position: 30
+description: "Documentation for Getting the most out of performance timing in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

@@ -1,6 +1,8 @@
 ---
 title: "Social media"
 sidebar_position: 140
+description: "Documentation for Social media in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

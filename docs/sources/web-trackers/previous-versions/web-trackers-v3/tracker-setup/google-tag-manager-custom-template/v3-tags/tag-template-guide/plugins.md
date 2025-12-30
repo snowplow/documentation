@@ -2,6 +2,8 @@
 title: "Using Plugins"
 date: "2023-12-20"
 sidebar_position: 200
+description: "Plugin documentation for Using Plugins functionality in the tracker."
+keywords: ["plugin", "using"]
 ---
 
 [Plugins](../../../../plugins/index.md) provide an easy way to distribute custom behavior for the tracker.

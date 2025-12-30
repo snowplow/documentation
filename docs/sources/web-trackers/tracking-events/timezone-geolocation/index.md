@@ -1,7 +1,9 @@
 ---
-title: "Tracking timezone and geolocation on web"
+title: "Track timezone and geolocation on web"
 sidebar_label: "Timezone and geolocation"
 sidebar_position: 100
+description: "Capture user timezone information and geolocation coordinates with accuracy data through browser APIs for location-based analysis."
+keywords: ["timezone", "geolocation"]
 ---
 
 ```mdx-code-block

@@ -1,7 +1,9 @@
 ---
-title: "Tracking link clicks on web"
+title: "Track link clicks on web"
 sidebar_label: "Link clicks"
 sidebar_position: 40
+description: "Automatically track clicks on anchor elements with configurable filters, pseudo-click support, and optional content capture for href destinations."
+keywords: ["link tracking", "click tracking"]
 ---
 
 ```mdx-code-block

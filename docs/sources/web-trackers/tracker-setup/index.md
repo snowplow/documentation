@@ -1,6 +1,8 @@
 ---
-title: "Setting up the web trackers"
+title: "Set up the web trackers"
 sidebar_label: "Tracker setup"
+description: "Install and initialize the JavaScript or Browser tracker with customizable configuration options."
+keywords: ["tracker setup", "initialization", "newtracker", "sp.js", "npm package"]
 date: "2021-03-31"
 sidebar_position: 1000
 ---
@@ -49,8 +51,8 @@ import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 - Configure an instance of the tracker by calling `newTracker(...)` with your desired properties. This will create a module level instance of your tracker. You don't need to keep a reference to it.
 
 ```javascript
-newTracker('sp1', '{{collector_url}}', { 
-  appId: 'my-app-id', 
+newTracker('sp1', '{{collector_url}}', {
+  appId: 'my-app-id',
   plugins: [ ],
 });
 ```

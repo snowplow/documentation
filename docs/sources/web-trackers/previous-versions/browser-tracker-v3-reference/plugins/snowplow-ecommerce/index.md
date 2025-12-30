@@ -1,6 +1,8 @@
 ---
 title: "Snowplow Ecommerce"
 sidebar_position: 16000
+description: "Documentation for Snowplow Ecommerce in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

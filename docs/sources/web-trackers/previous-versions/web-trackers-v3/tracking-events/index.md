@@ -2,6 +2,8 @@
 title: "Tracking data out-of-the-box"
 date: "2022-08-30"
 sidebar_position: 2500
+description: "Documentation for tracking Tracking data out-of-the-box with the web tracker."
+keywords: ["tracking", "events"]
 ---
 
 ```mdx-code-block

@@ -1,6 +1,9 @@
 ---
 title: "Cookies and local storage for the web trackers"
 sidebar_label: "Cookies and local storage"
+description: "Understand how the web trackers use cookies and local storage to persist user and session information."
+keywords: ["cookies", "local storage", "session tracking", "domain userid"]
+date: "2021-04-07"
 sidebar_position: 2850
 ---
 

@@ -1,6 +1,8 @@
 ---
 title: "Core web vitals"
 sidebar_position: 95
+description: "Documentation for Core web vitals in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

@@ -1,7 +1,8 @@
 ---
-title: "Signals resources"
+title: "Tutorials and resources for Snowplow Signals"
 sidebar_position: 830
-description: "Useful links and tools for working with Signals."
+description: "Access quick start tutorials for defining stream attributes, setting up the batch engine, and exploring real-time prospect scoring with machine learning."
+keywords: ["signals tutorials", "batch engine", "ml prospect scoring"]
 sidebar_label: "Resources"
 ---
 

@@ -1,6 +1,10 @@
 ---
 title: "App lifecycle tracking"
+sidebar_label: "App lifecycle tracking"
+date: "2021-08-06"
 sidebar_position: 30
+description: "Automatically track foreground and background transitions with React Native tracker v2 lifecycle events and lifecycle context entities."
+keywords: ["react native tracker v2 lifecycle tracking", "foreground background events", "app state tracking"]
 ---
 
 ```mdx-code-block

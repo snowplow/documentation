@@ -1,7 +1,10 @@
 ---
 title: "Introduction and configuration"
+sidebar_label: "Introduction and configuration"
 date: "2021-08-06"
 sidebar_position: 10
+description: "Initialize and configure React Native tracker v2 with network, tracker, session, emitter, and subject configuration objects."
+keywords: ["react native tracker v2 configuration", "tracker initialization", "configuration objects"]
 ---
 
 ```mdx-code-block

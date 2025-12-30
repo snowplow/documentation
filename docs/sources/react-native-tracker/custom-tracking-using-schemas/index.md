@@ -1,8 +1,10 @@
 ---
-title: "Custom event tracking with React Native tracker"
+title: "Track custom events with the React Native tracker"
 sidebar_label: "Custom event tracking"
 date: "2021-08-06"
 sidebar_position: 21
+description: "Track self-describing events and attach custom context entities using schemas with the React Native tracker SDK."
+keywords: ["react native custom events", "self-describing events", "custom context entities"]
 ---
 
 Self-describing (self-referential) JSON schemas are at the core of Snowplow tracking. Read more about them [here](/docs/fundamentals/schemas/index.md). They allow you to track completely customised data, and are also used internally throughout Snowplow pipelines.

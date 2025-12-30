@@ -1,7 +1,10 @@
 ---
 title: "Emitters"
+sidebar_label: "Emitters"
 date: "2020-02-26"
 sidebar_position: 60
+description: "Configure Emitter, AsyncEmitter, CeleryEmitter, and RedisEmitter classes in Python tracker v0.15 for sending events to collectors."
+keywords: ["python tracker v0.15 emitters", "asyncemitter", "redis emitter"]
 ---
 
 Tracker instances must be initialized with an emitter. This section will go into more depth about the Emitter class and its subclasses.

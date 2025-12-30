@@ -3,6 +3,7 @@ title: "Snowplow atomic event properties"
 description: A summary of the Snowplow events table and its standard fields
 sidebar_label: "Atomic event fields"
 sidebar_position: 4.5
+keywords: ["atomic events", "tracker protocol", "event fields", "canonical fields"]
 ---
 
 This page provides a reference for the standard fields that are found in all Snowplow events. These fields define the Snowplow tracker protocol, and are often called "atomic properties" or "atomic fields" in reference to the [Snowplow `atomic.events` table](/docs/fundamentals/warehouse-tables/index.md). They're also sometimes called "canonical fields".

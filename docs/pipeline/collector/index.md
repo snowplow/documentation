@@ -4,7 +4,7 @@ sidebar_position: 1
 sidebar_label: "Collector"
 ---
 
-Once your [event collector](/docs/fundamentals/index.md) is set up, along with [trackers](/docs/sources/trackers/index.md) to submit events to them, you may want to verify your collector configuration. This can take two forms, depending on your needs.
+Once your [event collector](/docs/fundamentals/index.md) is set up, along with [trackers](/docs/sources/index.md) to submit events to them, you may want to verify your collector configuration. This can take two forms, depending on your needs.
 
 Read more about the technical aspects of the collector [here](/docs/api-reference/stream-collector/index.md).
 

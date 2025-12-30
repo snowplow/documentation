@@ -1,5 +1,6 @@
 ---
-title: "Mandrill"
+title: "Mandrill webhook"
+sidebar_label: "Mandrill"
 date: "2020-02-25"
 sidebar_position: 60
 ---

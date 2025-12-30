@@ -45,7 +45,7 @@ It's **important** to keep these things in mind when using this enrichment:
 ### `anonymousOnly` mode
 Enrich 5.3.0 introduced the `anonymousOnly` mode. When [anonymousOnly](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/pii_enrichment_config/jsonschema/2-0-1#L155) is set to true, PII fields are masked only in events tracked in anonymous mode (i.e. the `SP-Anonymous` header is present).
 
-This is useful for compliance with regulation such as GDPR, where you would start with [anonymous tracking](/docs/sources/trackers/web-trackers/anonymous-tracking/index.md) by default (all identifiers are masked) and switch to non-anonymous tracking when the user consents to data collection (all identifiers are kept).
+This is useful for compliance with regulation such as GDPR, where you would start with [anonymous tracking](/docs/sources/web-trackers/anonymous-tracking/index.md) by default (all identifiers are masked) and switch to non-anonymous tracking when the user consents to data collection (all identifiers are kept).
 
 By default, `anonymousOnly` is `false`, i.e. PII fields are always masked.
 

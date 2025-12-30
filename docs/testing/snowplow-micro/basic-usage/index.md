@@ -65,9 +65,9 @@ Most of the examples on this and the following pages will show the Docker option
 
 ## Sending events to Micro
 
-Follow the documentation for one of [our trackers](/docs/sources/trackers/index.md) to implement some tracking code on your website or application.
+Follow the documentation for one of [our trackers](/docs/sources/index.md) to implement some tracking code on your website or application.
 
-You can then point it to `localhost:9090` where Micro is listening. For example, using the [Browser tracker](/docs/sources/trackers/web-trackers/index.md):
+You can then point it to `localhost:9090` where Micro is listening. For example, using the [Browser tracker](/docs/sources/web-trackers/index.md):
 
 ```js
 import { newTracker, trackPageView, enableActivityTracking } from '@snowplow/browser-tracker';

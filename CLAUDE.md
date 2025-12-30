@@ -8,11 +8,11 @@
 * Address readers as "you". Refer to the reader's users as "the user".
 * Link to concepts in `/docs/fundamentals/`. Never re-explain them inline.
 * Structure feature pages as: description → when/why → basic example → configuration.
-* For style reviews, read the extended style guide at `src/pages/style-guide/llm/index.md`.
+* **IMPORTANT**: When asked for a style review, read the extended style guide at `src/pages/style-guide/llm/index.md`.
 
 ## Headings and organization
 * Use sentence case: "Configure how events are sent".
-* Use imperative voice: "Configure the tracker" not "Tracker configuration".
+* Prefer imperative voice: "Configure the tracker" not "Tracker configuration".
 * Use only H2 (##) and H3 (###). Use H4 (####) rarely. Never use H1, H5, or H6.
 * Precede every heading with at least one paragraph of explanatory text.
 * Limit pages to 3-5 H2 sections. Create a new page if content exceeds this.
@@ -21,7 +21,7 @@
 * Use the Oxford comma: "events, entities, and schemas".
 * Use `backticks` for code, file names, and table/field names.
 * Use **bold** only for UI elements (buttons, page titles).
-* **CRITICAL**: Use lowercase after colons in list items: `Like: this` not `Like: This`.
+* Use lowercase after colons in list items: `Like: this` not `Like: This`.
 
 ## Snowplow terminology
 * **Always capitalized**: Data Product Studio, Snowtype, Snowplow CDI, Signals
@@ -32,7 +32,7 @@
 * Use kebab-case for file names: `google-tag-manager-server-side.md`
 * **Always create a directory with `index.md` inside.** Never create standalone `.md` files for main topics.
 * Example: Create `/segment-audience-hub/index.md`, not `segment-audience-hub.md`.
-* **End all internal links with `/index.md`** for validation.
+* **End all internal links with `/index.md`** for validation, EXCEPT for links in files within `/tutorials`.
 * Use absolute paths from docs root: `/docs/sources/trackers/.../index.md`
 * **Verify every link exists.** Search the docs directory to confirm paths before publishing.
 

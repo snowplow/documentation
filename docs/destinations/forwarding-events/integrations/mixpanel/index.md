@@ -51,6 +51,14 @@ Mixpanel uses a combination of `distinct_id` (user identifier) and `$device_id` 
 
 When a user logs in and your event contains a `user_id` value, Mixpanel will automatically merge the user's anonymous activity (tracked via `$device_id`) with their identified profile (tracked via `distinct_id`).
 
+## Sending custom properties
+
+You can send custom event properties beyond the standard fields defined in the schema reference below. Custom properties are nested under the `properties` object. When configuring your forwarder, add field mappings formatted as `properties.your_custom_field` (e.g., `properties.plan_type`, `properties.feature_flag`).
+
+For property names containing spaces, use bracket notation (e.g., `properties["referred by"]`).
+
+See Mixpanel's [Import Events API documentation](https://developer.mixpanel.com/reference/import-events) for details on supported data types and property requirements. See [Creating forwarders](/docs/destinations/forwarding-events/creating-forwarders/index.md) for details on configuring field mappings.
+
 ## Schema reference
 
 This section contains information on the fields you can send to Mixpanel, including field names, data types, required fields, and default Snowplow mapping expressions.

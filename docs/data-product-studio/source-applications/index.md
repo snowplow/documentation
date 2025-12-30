@@ -25,7 +25,7 @@ To illustrate, consider Snowplow. We can identify several applications designed 
 * The Console application that is served under console.snowplowanalytics.com
 * The documentation website serving as our information hub for all things related to our product, served under docs.snowplow.io
 
-Source Applications are a foundational component that enables you to establish the overarching relationships that connect application IDs and [application entities](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/global-context/index.md) and [data products](/docs/data-product-studio/data-products/index.md).
+Source Applications are a foundational component that enables you to establish the overarching relationships that connect application IDs and [application entities](/docs/sources/web-trackers/custom-tracking-using-schemas/global-context/index.md) and [data products](/docs/data-product-studio/data-products/index.md).
 
 ## Application IDs
 
@@ -37,8 +37,8 @@ We often see, and recommend as a best practice, setting up a unique application 
 
 ## Application entities
 
-Application entities, also referred to as [global context](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/global-context/index.md), are a set of entities that can be sent with every event recorded in the application. Using Source Applications you can document which application entities are expected. This is useful for tracking implementation, data discovery, and preventing information duplication in Data Products.
+Application entities, also referred to as [global context](/docs/sources/web-trackers/custom-tracking-using-schemas/global-context/index.md), are a set of entities that can be sent with every event recorded in the application. Using Source Applications you can document which application entities are expected. This is useful for tracking implementation, data discovery, and preventing information duplication in Data Products.
 
 :::info
-Since application entities can also be set conditionally, you can mark any of them as optional with a note to better understand the condition or any extra information required. The method for conditionally adding an application entity is through [rulesets](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/global-context/index.md#rulesets), [filter functions](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/global-context/index.md#filter-functions) and [context generators](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/global-context/index.md#context-generators).
+Since application entities can also be set conditionally, you can mark any of them as optional with a note to better understand the condition or any extra information required. The method for conditionally adding an application entity is through [rulesets](/docs/sources/web-trackers/custom-tracking-using-schemas/global-context/index.md#rulesets), [filter functions](/docs/sources/web-trackers/custom-tracking-using-schemas/global-context/index.md#filter-functions) and [context generators](/docs/sources/web-trackers/custom-tracking-using-schemas/global-context/index.md#context-generators).
 :::

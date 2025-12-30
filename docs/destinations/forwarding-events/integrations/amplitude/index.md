@@ -40,6 +40,18 @@ You can confirm events are reaching Amplitude by checking the **Ingestion Debugg
 2. Select the **Ingestion Debugger** tab
 3. Filter the graphs to show only events from the **HTTP API** to confirm data is flowing as expected from Snowplow.
 
+## Sending custom properties
+
+You can send custom properties beyond the standard fields defined in the schema reference below. Amplitude supports three types of custom properties:
+
+- **event_properties**: custom data associated with specific events (e.g., `event_properties.plan_type`, `event_properties.feature_flag`)
+- **user_properties**: custom data tied to user profiles (e.g., `user_properties.subscription_tier`, `user_properties.account_age`)
+- **group_properties**: custom data tied to groups when `event_type` is `$groupidentify` (requires Amplitude Accounts add-on)
+
+For property names containing spaces, use bracket notation (e.g., `event_properties["campaign source"]`).
+
+See Amplitude's [HTTP API v2 documentation](https://amplitude.com/docs/apis/analytics/http-v2#) for details on supported data types, property operations, and object depth limits. See [Creating forwarders](/docs/destinations/forwarding-events/creating-forwarders/index.md) for details on configuring field mappings.
+
 ## Schema reference
 
 This section contains information on the fields you can send to Amplitude, including field names, data types, required fields, and default Snowplow mapping expressions.

@@ -1,7 +1,10 @@
 ---
-title: "GCP - Beam"
+title: "Run event recovery on GCP Dataflow with Beam"
 date: "2020-08-03"
 sidebar_position: 0
+sidebar_label: "GCP - Beam"
+description: "Deploy dockerized event recovery jobs on Google Cloud Dataflow using Apache Beam runtime."
+keywords: ["GCP event recovery", "Dataflow recovery", "Beam recovery"]
 ---
 
 The Beam job is a dockerized purpose built Dataflow job that reads data from a GCS location specified through a pattern and stores the recovered payloads in a PubSub topic, unrecovered and unrecoverable in other GCS buckets.

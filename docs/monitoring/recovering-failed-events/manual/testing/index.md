@@ -1,8 +1,10 @@
 ---
-title: "Testing the recovery configuration"
+title: "Test an event recovery configuration locally"
 sidebar_label: "Testing"
 date: "2020-08-26"
 sidebar_position: 20
+description: "Validate recovery configuration and run small-scale test recoveries locally using the snowplow-event-recovery CLI tool."
+keywords: ["test recovery config", "validate recovery", "recovery CLI"]
 ---
 
 Once you know how you want to configure the recovery job, it's worthwhile to test your configuration locally, before deploying an actual recovery job.

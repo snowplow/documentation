@@ -47,7 +47,7 @@ This table shows the possible values for the `event` field:
 
 The `domain_userid` is regarded as the most reliable session based identifier for most use cases. It's treated as the primary `user_identifier` field in our data models that rely on sessionization, including the [Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) data model.
 
-The `domain_sessionidx` is the number or index of the current user session. For example, an event occurring during a user's first session would have `domain_sessionidx` set to 1. The JavaScript tracker calculates this field by storing a visit count in a [first-party cookie](/docs/sources/trackers/web-trackers/cookies-and-local-storage/index.md).
+The `domain_sessionidx` is the number or index of the current user session. For example, an event occurring during a user's first session would have `domain_sessionidx` set to 1. The JavaScript tracker calculates this field by storing a visit count in a [first-party cookie](/docs/sources/web-trackers/cookies-and-local-storage/index.md).
 
 The equivalent values on mobile are tracked in a [session entity](/docs/events/ootb-data/user-and-session-identification/index.md#client-session-context-entity).
 
@@ -96,7 +96,7 @@ The tracker namespace parameter is used to distinguish between different tracker
 
 The `etl_tstamp` field records when the event was validated and enriched, not when it was loaded into the warehouse. The name is historical.
 
-To set the `os_timezone` timezone field, use the [timezone plugin](/docs/sources/trackers/web-trackers/tracking-events/timezone-geolocation/index.md) on web trackers, or set the timezone in the [mobile tracker configuration](/docs/sources/trackers/mobile-trackers/client-side-properties/index.md).
+To set the `os_timezone` timezone field, use the [timezone plugin](/docs/sources/web-trackers/tracking-events/timezone-geolocation/index.md) on web trackers, or set the timezone in the [mobile tracker configuration](/docs/sources/mobile-trackers/client-side-properties/index.md).
 
 | Payload property | Field name            | Type      | Description                                                 | Reqd? | Example                   | Source             | Web | Mobile |
 | ---------------- | --------------------- | --------- | ----------------------------------------------------------- | ----- | ------------------------- | ------------------ | --- | ------ |

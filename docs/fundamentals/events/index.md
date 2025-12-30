@@ -53,7 +53,7 @@ Because the event references a specific version of its schema, it's always clear
 
 Snowplow provides a large number of self-describing events out-of-the-box, for example:
 * [Link clicks](/docs/events/ootb-data/links-and-referrers/index.md#link-click-tracking-on-web)
-* [Form submissions](/docs/sources/trackers/web-trackers/tracking-events/form-tracking/index.md)
+* [Form submissions](/docs/sources/web-trackers/tracking-events/form-tracking/index.md)
 * [Ecommerce transactions](/docs/events/ootb-data/ecommerce-events/index.md)
 
 Check out the full range of included events [here](/docs/events/ootb-data/index.md).
@@ -68,7 +68,7 @@ We originally called self-describing events "unstructured events", to distinguis
 
 ## How to track events
 
-Track events in your applications using one of the [Snowplow tracking SDKs](/docs/sources/trackers/index.md). Each SDK provides built-in APIs to track [different types of events](/docs/events/ootb-data/index.md).
+Track events in your applications using one of the [Snowplow tracking SDKs](/docs/sources/index.md). Each SDK provides built-in APIs to track [different types of events](/docs/events/ootb-data/index.md).
 
 All the trackers also support custom tracking, so you can define the events that are relevant to your business.
 

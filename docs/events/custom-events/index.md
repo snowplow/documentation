@@ -17,7 +17,7 @@ Self-describing [events](/docs/fundamentals/events/index.md#self-describing-even
 
 To define your own custom event, you will need to [create a corresponding schema](/docs/fundamentals/schemas/index.md). Snowplow uses the schema to validate that the JSON containing the event properties is well-formed.
 
-This code shows how you could track a custom `article_share` event using the [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md):
+This code shows how you could track a custom `article_share` event using the [JavaScript tracker](/docs/sources/web-trackers/quick-start-guide/index.md):
 
 ```javascript
 window.snowplow('trackSelfDescribingEvent', {
@@ -38,7 +38,7 @@ In addition to populating the [standard atomic columns](/docs/fundamentals/canon
 
 As with custom self-describing events, if you want to create your own custom [entity](/docs/fundamentals/entities/index.md), you will need to [create a corresponding schema](/docs/fundamentals/schemas/index.md). Snowplow uses the schema to validate that the JSON containing the entity properties is well-formed.
 
-Here's an example that shows how you could track custom `user` and `product` entities along with a page view event, using the [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md):
+Here's an example that shows how you could track custom `user` and `product` entities along with a page view event, using the [JavaScript tracker](/docs/sources/web-trackers/quick-start-guide/index.md):
 
 ```javascript
 // Track a page view with a custom entity
@@ -73,10 +73,10 @@ In the past, what we now call "entity" or "entities" was called "context". You'l
 Certain Snowplow trackers provide the option to add custom entities to all events, or a configurable subset of events. These are called **application entities**. This feature is called "global context" in the trackers.
 
 See the documentation for each tracker to learn how to configure it:
-* [Web](/docs/sources/trackers/web-trackers/custom-tracking-using-schemas/global-context/index.md)
-* [Native mobile](/docs/sources/trackers/mobile-trackers/custom-tracking-using-schemas/global-context/index.md) (iOS and Android)
-* [React Native](/docs/sources/trackers/react-native-tracker/index.md)
-* [Scala](/docs/sources/trackers/scala-tracker/initialization/index.md)
+* [Web](/docs/sources/web-trackers/custom-tracking-using-schemas/global-context/index.md)
+* [Native mobile](/docs/sources/mobile-trackers/custom-tracking-using-schemas/global-context/index.md) (iOS and Android)
+* [React Native](/docs/sources/react-native-tracker/index.md)
+* [Scala](/docs/sources/scala-tracker/initialization/index.md)
 
 Use [source applications](/docs/data-product-studio/source-applications/index.md) to document your expected application entities.
 
@@ -105,7 +105,7 @@ Structured events have five custom event specific parameters:
 | `se_property`    | text     | A property associated with either the action or the object             | `hd`                          |
 | `se_value`       | decimal  | A value associated with the user action                                | `13.99`                       |
 
-Here's how to track a structured event using the [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md):
+Here's how to track a structured event using the [JavaScript tracker](/docs/sources/web-trackers/quick-start-guide/index.md):
 
 ```javascript
 snowplow('trackStructEvent', {

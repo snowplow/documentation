@@ -2,6 +2,9 @@
 title: "Android (0.6.0)"
 date: "2020-03-02"
 sidebar_position: 950
+sidebar_label: "Android (0.6.0)"
+description: "Legacy documentation for Android Tracker version 0.6.0."
+keywords: ["android 0.6.0", "tracker"]
 ---
 
 ### Content

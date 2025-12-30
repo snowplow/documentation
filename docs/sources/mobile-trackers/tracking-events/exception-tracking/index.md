@@ -1,7 +1,9 @@
 ---
-title: "Tracking exceptions with the native mobile trackers"
+title: "Track exceptions with the native mobile trackers"
 sidebar_label: "Exceptions"
 sidebar_position: 50
+description: "Automatically capture and track unhandled exceptions and crashes within mobile applications."
+keywords: ["exception tracking", "crash tracking", "error monitoring"]
 ---
 
 ```mdx-code-block

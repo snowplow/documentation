@@ -2,6 +2,9 @@
 title: "Remote Configuration"
 date: "2021-06-21"
 sidebar_position: 4000
+sidebar_label: "Remote Configuration"
+description: "Remote configuration feature for Mobile Trackers v2.0 to configure trackers without app updates."
+keywords: ["mobile tracker v2", "remote configuration"]
 ---
 
 ```mdx-code-block

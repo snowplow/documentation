@@ -3,6 +3,8 @@ title: "Roku device info context"
 sidebar_label: "Device info context"
 date: "2021-12-23"
 sidebar_position: 4750
+description: "Automatically attach Roku device information including model, OS version, RIDA, network status, and display properties to all tracked events."
+keywords: ["roku device context", "rida tracking", "device information"]
 ---
 
 Device Info Context is an entity attached to events that provides information about the Roku device. It gives information about the device model and OS, adds unique identifiers for the channel and device, includes playback settings, current device usage, locale, display properties, network status, and device features.

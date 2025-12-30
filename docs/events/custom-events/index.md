@@ -4,12 +4,12 @@ sidebar_label: "Custom data"
 sidebar_position: 1
 ---
 
-Snowplow includes three ways to track custom data:
+Snowplow includes three ways to customize tracking:
 * Custom [self-describing events](/docs/fundamentals/events/index.md#self-describing-events)
-* Custom [entities](/docs/fundamentals/entities/index.md)
+* Custom [entities](/docs/fundamentals/entities/index.md) added to out-of-the-box or custom events
 * Structured events (not recommended)
 
-Read our [tracking design best practice guide](/docs/fundamentals/tracking-design-best-practice/index.md) to learn how to use custom data.
+Read our [tracking design best practice guide](/docs/fundamentals/tracking-design-best-practice/index.md) to learn how to track and use custom data.
 
 ## Custom events
 

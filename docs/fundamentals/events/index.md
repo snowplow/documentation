@@ -5,35 +5,7 @@ sidebar_position: 1
 description: "An event is a central concept in Snowplow that represents something that occurred at a particular point in time"
 ---
 
-The word **event** can mean multiple things, depending on the context and perhaps on your role.
-
-If you're a marketer or a product manager, you might think about an event as a description of a behavior, or as an interaction between the user and other [entities](/docs/fundamentals/entities/index.md). Examples of events using this high-level conceptual definition include:
-- Load a web page
-- Add an item to basket
-- Enter a destination
-- Check a balance
-- Search for an item
-- Share a video
-
-If you're an analyst, an event to you might be a row in a database table. For a data engineer, an event might be a record in a stream, or an object in a storage bucket. For an implementation engineer, an event could be the parameters for a tracker API call, or the HTML payload generated. All of these definitions are valid.
-
-## Event lifecycle
-
-The different meanings of "event" apply at different stages of the tracking lifecycle:
-1. Stakeholders decide what behaviors and **interactions** to capture
-2. Stakeholders create a [tracking plan](/docs/fundamentals/tracking-design-best-practice/index.md) that defines the desired **structure** of the events
-3. Engineers pass event data **parameters** to a Snowplow tracker
-4. The tracker sends HTML **payloads** to the Collector endpoint
-5. The Snowplow pipeline processes the payloads into stream **records**, then loads them into a data warehouse or lake
-6. Analysts and data scientists query the data **rows** in the tables
-
-## How to track events
-
-Track events in your applications using one of the [Snowplow tracking SDKs](/docs/sources/trackers/index.md). Each SDK provides built-in APIs to track [different types of events](/docs/events/ootb-data/index.md).
-
-All the trackers also support custom tracking, so you can define the events that are relevant to your business.
-
-You can also use [webhooks](/docs/sources/webhooks/index.md) to track automated actions. The Snowplow [Collector endpoint](/docs/pipeline/collector/index.md) accepts all [valid](/docs/fundamentals/canonical-event/index.md) Snowplow event payloads, regardless of their source.
+Events are the primary way to capture data with Snowplow. Every time something happens that you want to track, you can send an event to your Snowplow pipeline. Each event is a JSON object that describes what happened. Events flow through your pipeline where they're validated, enriched, and loaded into your data warehouse or lake for analysis.
 
 ## Snowplow event types
 
@@ -93,3 +65,11 @@ Find out in the [warehouse tables fundamentals](/docs/fundamentals/warehouse-tab
 :::info Terminology
 We originally called self-describing events "unstructured events", to distinguish them from structured events. This was misleading, because these events are actually more structured than structured events. The old term is deprecated, but you might still see it in some docs, APIs and database column names, such as `unstruct_event` or `ue`.
 :::
+
+## How to track events
+
+Track events in your applications using one of the [Snowplow tracking SDKs](/docs/sources/trackers/index.md). Each SDK provides built-in APIs to track [different types of events](/docs/events/ootb-data/index.md).
+
+All the trackers also support custom tracking, so you can define the events that are relevant to your business.
+
+You can also use [webhooks](/docs/sources/webhooks/index.md) to track automated actions. The Snowplow [Collector endpoint](/docs/pipeline/collector/index.md) accepts all [valid](/docs/fundamentals/canonical-event/index.md) Snowplow event payloads, regardless of their source.

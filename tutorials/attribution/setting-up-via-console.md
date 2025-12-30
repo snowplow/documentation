@@ -2,6 +2,8 @@
 title: "Set up the Attribution dbt package using Snowplow Console"
 sidebar_label: "Set up in Console"
 position: 5
+description: "Configure the Attribution data model in Snowplow Console with a fully managed service. Set attribution start dates, path lookback windows, and schedule automated model runs."
+keywords: ["snowplow console attribution", "managed attribution modeling", "attribution data model", "console dbt setup"]
 ---
 
 

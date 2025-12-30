@@ -2,7 +2,8 @@
 position: 1
 title: "Learn how to set up the Signals batch engine for warehouse attributes"
 sidebar_label: "Introduction"
-description: "Set up the Snowplow Signals batch engine to calculate historical behavioral data attributes from warehouse data using dbt."
+description: "Set up the Snowplow Signals batch engine to calculate historical behavioral data attributes from warehouse data using dbt. Generate modeled datasets and sync attributes to the Profiles Store for real-time access."
+keywords: ["signals batch engine", "warehouse attribute calculation dbt"]
 ---
 
 Welcome to the [Snowplow Signals](/docs/signals/) batch engine tutorial.

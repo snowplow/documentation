@@ -2,6 +2,8 @@
 position: 4
 title: "Conclusions and next steps from the Kafka live viewer profiles accelerator"
 sidebar_label: "Conclusion"
+description: "Complete your real-time event-driven architecture for video streaming analytics with Snowplow, Kafka, and DynamoDB for live viewer insights."
+keywords: ["event-driven video analytics", "real-time streaming insights"]
 ---
 
 In this tutorial, we have explored the **live viewer profiles** solution accelerator for video streaming, gaining practical insights into building, deploying, and extending real-time, event-driven architectures using Snowplow and Kafka.

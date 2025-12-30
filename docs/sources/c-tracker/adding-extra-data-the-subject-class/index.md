@@ -1,5 +1,8 @@
 ---
-title: "Adding extra data: the Subject class"
+title: "Adding extra data: the Subject class in C++ tracker"
+sidebar_label: "Adding extra data: the Subject class"
+description: "Attach user and device information to tracked events using the Subject class. Set user ID, screen resolution, viewport, color depth, timezone, language, user-agent, and IP address for richer behavioral data."
+keywords: ["subject class", "user data", "device information", "screen resolution", "user id"]
 date: "2020-02-25"
 sidebar_position: 30
 ---
@@ -28,16 +31,16 @@ se.set_subject(subject);
 The Subject class has a set of `set...()` methods to attach extra data relating to the user to all tracked events.
 The below table maps the setter functions to the event properties that they affect.
 
-| Setter method | Resulting event property |
-| --- | --- |
-| `set_user_id` | `user_id` |
+| Setter method           | Resulting event property                   |
+| ----------------------- | ------------------------------------------ |
+| `set_user_id`           | `user_id`                                  |
 | `set_screen_resolution` | `dvce_screenwidth` and `dvce_screenheight` |
-| `set_viewport` | `br_viewwidth` and `br_viewheight` |
-| `set_color_depth` | `br_colordepth` |
-| `set_timezone` | `os_timezone` |
-| ``set_language` | `br_lang` |
-| `set_useragent` | `useragent` |
-| `set_ip_address` | `user_ipaddress` |
+| `set_viewport`          | `br_viewwidth` and `br_viewheight`         |
+| `set_color_depth`       | `br_colordepth`                            |
+| `set_timezone`          | `os_timezone`                              |
+| ``set_language`         | `br_lang`                                  |
+| `set_useragent`         | `useragent`                                |
+| `set_ip_address`        | `user_ipaddress`                           |
 
 We will discuss each of these in turn below:
 

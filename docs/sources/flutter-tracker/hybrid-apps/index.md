@@ -1,5 +1,8 @@
 ---
-title: "Hybrid Apps (WebViews)"
+title: "Track events from hybrid Flutter apps with WebViews"
+sidebar_label: "Hybrid Apps (WebViews)"
+description: "Enable event tracking from WebView content in Flutter apps using webview_flutter package. Forward Web tracker events to Flutter tracker or use WebView tracker directly to share sessions."
+keywords: ["hybrid apps", "webview tracking", "flutter webview", "event forwarding", "webview_flutter"]
 sidebar_position: 5000
 ---
 

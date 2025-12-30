@@ -1,6 +1,9 @@
 ---
-title: "Plugins"
+title: "Snowplow GTM plugins"
+sidebar_label: "Plugins"
 sidebar_position: 200
+description: "Load JavaScript tracker plugins in Google Tag Manager to extend tracking functionality. Configure external and inline custom plugins with CDN URLs or custom JavaScript variables for enhanced event tracking."
+keywords: ["gtm plugins", "tracker plugins", "javascript tracker plugins", "custom plugins", "inline plugins"]
 ---
 
 Plugins are supported to provide an easy way to extend the functionality of the tracker. This is similar to the [JavaScript Tracker](/docs/sources/web-trackers/plugins/creating-your-own-plugins/index.md) but with the caveat that plugins may be more limited in their functionality due to the constraints of the Google Tag Manager environment.

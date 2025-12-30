@@ -3,6 +3,7 @@ title: "Inspecting your first failed events"
 sidebar_position: 9
 sidebar_label: "Inspect failed events"
 description: "How validation and failed events work"
+keywords: ["failed events", "validation", "schema validation", "bad data"]
 ---
 
 If you have defined some custom events in the previous section, we recommend playing around with sending invalid data to see what happens.

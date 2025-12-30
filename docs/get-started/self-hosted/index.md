@@ -1,8 +1,10 @@
 ---
-title: "Setting up Snowplow Self-Hosted"
+title: "Set up Snowplow Self-Hosted"
 date: "2020-10-30"
 sidebar_position: 4
 sidebar_label: "Setting up Self-Hosted"
+description: "Deploy Snowplow Community Edition using Terraform modules on AWS, GCP, or Azure for non-production testing and evaluation."
+keywords: ["Self-Hosted", "Community Edition", "Terraform", "self-hosted deployment", "Snowplow setup"]
 ---
 
 ```mdx-code-block

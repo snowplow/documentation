@@ -2,7 +2,8 @@
 title: "Snowplow Ecommerce dbt package"
 sidebar_label: "Ecommerce"
 sidebar_position: 40
-description: "The Snowplow Ecommerce dbt Package"
+description: "Transform raw ecommerce event data into derived tables for carts, checkouts, products, transactions, and sessions."
+keywords: ["ecommerce dbt", "ecommerce tracking", "cart analysis", "transaction modeling", "checkout funnel", "ecommerce data model", "e-commerce dbt package"]
 ---
 
 ```mdx-code-block

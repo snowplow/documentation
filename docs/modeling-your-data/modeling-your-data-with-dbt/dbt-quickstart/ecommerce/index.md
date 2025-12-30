@@ -2,6 +2,8 @@
 sidebar_label: "Ecommerce"
 sidebar_position: 40
 title: "Ecommerce Quickstart"
+description: "Quick start guide for the Snowplow Ecommerce dbt package to model cart, checkout, product, and transaction data."
+keywords: ["ecommerce quickstart", "ecommerce setup", "dbt ecommerce installation"]
 ---
 
 ```mdx-code-block

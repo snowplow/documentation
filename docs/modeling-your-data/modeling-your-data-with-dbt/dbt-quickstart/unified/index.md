@@ -2,6 +2,8 @@
 sidebar_label: "Unified Digital"
 sidebar_position: 10
 title: "Unified Digital Quickstart"
+description: "Quick start guide for the Snowplow Unified Digital dbt package to model web and mobile event data into views, sessions, and users."
+keywords: ["unified digital quickstart", "unified setup", "dbt unified installation"]
 ---
 
 :::info

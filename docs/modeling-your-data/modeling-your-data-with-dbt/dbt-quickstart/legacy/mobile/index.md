@@ -2,6 +2,8 @@
 sidebar_label: "Mobile"
 sidebar_position: 800
 title: "Mobile Quickstart"
+description: "Quick start guide for the legacy Snowplow Mobile dbt package to model mobile event data into sessions and users."
+keywords: ["mobile quickstart", "legacy mobile package", "dbt mobile setup"]
 ---
 
 

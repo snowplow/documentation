@@ -1,5 +1,8 @@
 ---
 title: "Incorporating non-snowplow data"
+sidebar_label: "Incorporating non-snowplow data"
+description: "Incorporate external data sources into Snowplow derived tables by joining non-Snowplow data with custom derived models."
+keywords: ["external data", "non-Snowplow data", "data enrichment", "join external tables"]
 sidebar_position: 100
 ---
 

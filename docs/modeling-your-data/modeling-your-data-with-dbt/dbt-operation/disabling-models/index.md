@@ -1,6 +1,8 @@
 ---
-title: "Disabling models"
-description: "How to disable a model in our packages"
+title: "Turn off models"
+sidebar_label: "Turning off models"
+description: "How to turn off a model in our packages using model configuration in your dbt project yaml file."
+keywords: ["disable dbt models", "dbt model configuration", "disable modules"]
 sidebar_position: 40
 ---
 

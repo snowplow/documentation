@@ -1,6 +1,8 @@
 ---
-title: "Testing your tracking and pipeline"
+title: "Test your Snowplow tracking and pipeline implementation"
 sidebar_label: "Testing"
+description: "Test and validate your Snowplow tracking implementation using Snowplow Inspector, Micro, and Mini. Run automated tests and QA your pipeline before deploying to production environments."
+keywords: ["testing", "qa", "snowplow micro", "snowplow inspector", "tracking validation"]
 date: "2024-12-04"
 sidebar_position: 8.5
 ---

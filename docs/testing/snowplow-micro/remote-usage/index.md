@@ -1,8 +1,9 @@
 ---
-title: "Connecting remote sites and applications to Snowplow Micro"
+title: "Connect remote sites and apps to Snowplow Micro"
 sidebar_label: "Connecting remote sites and apps"
 sidebar_position: 5
-description: "How to use Micro with websites and apps that are not running locally."
+description: "Test remote websites and apps with Micro using ngrok or localtunnel for public access, or use local domain resolution to receive first-party cookies. Configure HTTPS and match collector settings."
+keywords: ["remote testing", "ngrok", "localtunnel", "hosts file", "ssl certificate", "first-party cookies"]
 ---
 
 ```mdx-code-block

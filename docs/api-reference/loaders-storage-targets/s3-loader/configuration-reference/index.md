@@ -7,7 +7,7 @@ description: "Configure S3 Loader with Kinesis input, S3 output, compression, pa
 keywords: ["s3 loader config", "kinesis to s3", "compression config", "s3 partitioning", "loader monitoring"]
 ---
 
-S3 Loader is released under the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.1/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).
+S3 Loader is released under the [Snowplow Limited Use License](/limited-use-license-1.1/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).
 
 To accept the terms of license and run S3 Loader, configure the `license.accept` option, like this:
 

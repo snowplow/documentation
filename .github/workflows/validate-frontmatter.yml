@@ -55,6 +55,11 @@ jobs:
               continue
             fi
 
+            # Skip files with type: link in frontmatter
+            if echo "$frontmatter" | grep -q '^type:[[:space:]]*link'; then
+              continue
+            fi
+
             # Check for required fields
             missing_fields=()
 

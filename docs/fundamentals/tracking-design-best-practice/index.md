@@ -34,12 +34,12 @@ A tracking plan is documentation that adds a semantic layer to the events your b
 
 Each tracking plan groups related business events.
 
-![Tracking plan overview showing the relationship between data products, event specifications, data structures](images/tracking-plan-overview.png)
+![Tracking plan overview showing the relationship between tracking plans, event specifications, data structures](images/tracking-plan-overview.png)
 
-This diagram shows how tracking plans are represented in Snowplow Console. A **data product** represents a tracking plan. It's a container for related event specifications. An **event specification** represents a single business event. It contains all the relevant information about the event, including its purpose, origin, and associated data structures. **Event and entity data structures** represent the JSON schemas that define the structure of the captured data.
+This diagram shows how tracking plans are represented in Snowplow Console. A **tracking plan** represents a tracking plan. It's a container for related event specifications. An **event specification** represents a single business event. It contains all the relevant information about the event, including its purpose, origin, and associated data structures. **Event and entity data structures** represent the JSON schemas that define the structure of the captured data.
 
 :::info Tracking plans in Console
-Snowplow customers can create tracking plans directly in [Snowplow Console](https://console.snowplowanalytics.com) using [data products](/docs/data-product-studio/data-products/index.md) and [event specifications](/docs/data-product-studio/event-specifications/index.md).
+Snowplow customers can create tracking plans directly in [Snowplow Console](https://console.snowplowanalytics.com) using [tracking plans](/docs/event-studio/tracking-plans/index.md) and [event specifications](/docs/event-studio/event-specifications/index.md).
 :::
 
 ## Naming conventions for tracking plans
@@ -60,7 +60,7 @@ Here are our recommendations, but it's more important to be consistent across yo
 We recommend taking the following steps to create a tracking plan:
 
 1. Analyze the business use case and define the reports to be produced
-2. Check our out-of-the-box data products to see if you can reuse or build on top of them
+2. Check our out-of-the-box tracking plans to see if you can reuse or build on top of them
 3. Choose the naming convention to follow in your schemas
 4. Define your entities first
 5. Introduce events as interactions of the entities
@@ -117,9 +117,9 @@ One way to think about events and entities is by relating them to the [star sche
 Contain any information that would be represented using dimension tables in entities, rather than events.
 :::
 
-If you've already defined other data products, check that you're re-using entities where possible. The more entities that you can re-use across your data, the more consistent and easier it will be to perform analyses.
+If you've already defined other tracking plans, check that you're re-using entities where possible. The more entities that you can re-use across your data, the more consistent and easier it will be to perform analyses.
 
-This is also a good time to consider whether certain data really needs to be captured. Tracking unnecessary information uses extra bandwidth and battery power, and may add extra overhead to manage. You can [evolve](/docs/data-product-studio/data-structures/version-amend/index.md) your data structures to add more information later. Refer to the business reports identified earlier to be clear on what data needs to be tracked now.
+This is also a good time to consider whether certain data really needs to be captured. Tracking unnecessary information uses extra bandwidth and battery power, and may add extra overhead to manage. You can [evolve](/docs/event-studio/data-structures/version-amend/index.md) your data structures to add more information later. Refer to the business reports identified earlier to be clear on what data needs to be tracked now.
 
 ### 4. Define the events
 
@@ -135,7 +135,7 @@ A common challenge in defining event schemas is the choice of their granularity.
 
 ### 5. Finalize the tracking plan
 
-Having identified your events and entities, you can now record them in a tracking plan. Create [event specifications](/docs/data-product-studio/event-specifications/index.md) in Console to formally document them and manage their lifecycle.
+Having identified your events and entities, you can now record them in a tracking plan. Create [event specifications](/docs/event-studio/event-specifications/index.md) in Console to formally document them and manage their lifecycle.
 
 ## Event action granularity
 

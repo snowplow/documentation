@@ -14,7 +14,7 @@ If you don't log in or configure registries, the extension won't recognize or be
 
 ![The Snowplow Inspector extension displaying a Self Describing Event called "example_event". It contains a property "example_field_1" with the value "abc". The event's schema displays as Unrecognized in any registries.](../images/unrecognized-event.png)
 
-Snowplow customers with access to the Snowplow Console can log in using the button in the bottom-left of the extension, which will automatically discover schemas defined for any [data structures](/docs/data-product-studio/data-structures/index.md) set up in your development or production Iglu Server environments.
+Snowplow customers with access to the Snowplow Console can log in using the button in the bottom-left of the extension, which will automatically discover schemas defined for any [data structures](/docs/event-studio/data-structures/index.md) set up in your development or production Iglu Server environments.
 
 When installed, the extension also creates a local Iglu registry, which lets you iterate on schemas without having to deploy them to a external registry.
 You can create any number of additional local registries to help organize your work.
@@ -93,7 +93,7 @@ You can manually edit the JSON in the extension, or bulk import JSON files from 
 
 ### Data structures API
 
-Data structures API registries use the [data structures API](/docs/data-product-studio/data-structures/manage/api/index.md) included in Console.
+Data structures API registries use the [data structures API](/docs/event-studio/data-structures/manage/api/index.md) included in Console.
 
 Most users can just log in to [Console](https://console.snowplowanalytics.com) via the extension and it will import registries for any Snowplow Console organizations your account has access to.
 

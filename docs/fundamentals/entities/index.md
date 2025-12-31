@@ -97,7 +97,7 @@ Defining your own custom entities is useful when you have similar bits of busine
 
 :::
 
-To track an event with a custom entity, e.g. `product`, **you will first need to define its [schema](/docs/fundamentals/schemas/index.md)** (see [managing data structures](/docs/data-product-studio/data-structures/manage/index.md)). This schema might have fields such as `productId`, `brand`, etc.
+To track an event with a custom entity, e.g. `product`, **you will first need to define its [schema](/docs/fundamentals/schemas/index.md)** (see [managing data structures](/docs/event-studio/data-structures/manage/index.md)). This schema might have fields such as `productId`, `brand`, etc.
 
 Then you can use one of the [tracking SDKs](/docs/sources/trackers/index.md) to add an array of entities to your event. For example, with the [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md):
 

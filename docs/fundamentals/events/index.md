@@ -141,7 +141,7 @@ This structure is an example of what we call _self-describing JSON_ — a JSON o
 
 Some self-describing events were predefined by Snowplow and are natively supported by tracking SDKs. For example, the mobile trackers automatically send [screen view](/docs/sources/trackers/mobile-trackers/tracking-events/screen-tracking/index.md) self-described events. You can find the schemas for these events [here](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow).
 
-To track your own _custom_ self-describing event, e.g. `viewed_product`, **you will first need to define its [schema](/docs/fundamentals/schemas/index.md)** (see [managing data structures](/docs/data-product-studio/data-structures/manage/index.md)). This schema might have fields such as `productId`, `brand`, etc.
+To track your own _custom_ self-describing event, e.g. `viewed_product`, **you will first need to define its [schema](/docs/fundamentals/schemas/index.md)** (see [managing data structures](/docs/event-studio/data-structures/manage/index.md)). This schema might have fields such as `productId`, `brand`, etc.
 
 Then you can use one of our [tracking SDKs](/docs/sources/trackers/index.md). For example, with the [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md):
 

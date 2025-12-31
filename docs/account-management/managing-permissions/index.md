@@ -14,7 +14,7 @@ Snowplow Console sets permissions for each area of Console as summarized below:
 | ------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
 | User management     | The management and addition of user access. This permission cannot be configured on a Custom role.                            | No access<br/>Edit<br/>Create                                                |
 | Environments        | The management of pipeline and sandbox (Mini) environments. This includes managing which Enrichments run on each environment. | No access<br/>View<br/>Edit                                                  |
-| Data products       | The management and creation of Data Products                                                                                  | No access<br/>View<br/>Edit<br/>Create                                       |
+| Tracking plans       | The management and creation of Tracking Plans                                                                                  | No access<br/>View<br/>Edit<br/>Create                                       |
 | Data structures     | The management and creation of the schemas that define the events and entities you are capturing.                             | No access<br/>View<br/>Edit on development<br/>Edit on production<br/>Create |
 | Data models         | The management and creation of your data models.                                                                              | No access<br/>View<br/>Edit<br/>Create                                       |
 | API keys            | The management and creation of API keys.                                                                                      | View<br/>Manage<br/>Create                                                   |
@@ -35,7 +35,7 @@ There are three ways of setting user permissions:
 | ------------------- | ------------------------------ |
 | User management     | No access (in the UI)          |
 | Environments        | View access                    |
-| Data products       | Edit<br/>Create                |
+| Tracking plans       | Edit<br/>Create                |
 | Data structures     | Edit on development<br/>Create |
 | Data models         | View access                    |
 | API keys            | View access                    |
@@ -46,7 +46,7 @@ There are three ways of setting user permissions:
 | ------------------- | --------------- |
 | User management     | Full access     |
 | Environments        | Full access     |
-| Data products       | Full access     |
+| Tracking plans       | Full access     |
 | Data structures     | Full access     |
 | Data models         | Full access     |
 | API keys            | Full access     |
@@ -57,7 +57,7 @@ There are three ways of setting user permissions:
 | ------------------- | --------------------------- |
 | User management     | Customized by you, per user |
 | Environments        | Customized by you, per user |
-| Data products       | Customized by you, per user |
+| Tracking plans       | Customized by you, per user |
 | Data structures     | Customized by you, per user |
 | Data models & jobs  | Customized by you, per user |
 | API keys            | Customized by you, per user |
@@ -84,14 +84,14 @@ An environment has three permissions:
 - **View** - the user can see the environment management screen, but cannot edit anything. This is the default setting for the User role.
 - **Edit / Publish** - the user can make and publish edits to the environment. This includes configuration such as enrichment enablement, enrichment configuration and collector configuration. This is the default setting for the Admin role.
 
-### Data Products
+### Tracking Plans
 
-Data Products have four permissions:
+Tracking Plans have four permissions:
 
-- **No access** - the user will not see the data product management screens.
-- **View** - the user can see the data product management screens, but cannot edit anything. This permission and all data product permissions below require the user to have at least the **view** permission on data structures.
-- **Edit** - the user can see the data product management screens, and can make edits to existing data products.
-- **Create** - the user can create new data products.
+- **No access** - the user will not see the tracking plan management screens.
+- **View** - the user can see the tracking plan management screens, but cannot edit anything. This permission and all tracking plan permissions below require the user to have at least the **view** permission on data structures.
+- **Edit** - the user can see the tracking plan management screens, and can make edits to existing tracking plans.
+- **Create** - the user can create new tracking plans.
 
 ### Data structures
 

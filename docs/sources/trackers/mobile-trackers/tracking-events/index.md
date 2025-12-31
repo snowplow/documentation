@@ -505,7 +505,7 @@ The tracked `DeepLinkReceived` event and each subsequent `ScreenView` event also
 
 ### Creating a Structured event
 
-Our philosophy in creating Snowplow is that users should design suitable data structures customised for their own consumer interactions data capture. You can read more about that philosophy [here](/docs/data-product-studio/index.md).
+Our philosophy in creating Snowplow is that users should design suitable data structures customised for their own consumer interactions data capture. You can read more about that philosophy [here](/docs/event-studio/index.md).
 
 However, as part of a Snowplow implementation there may be interactions where [custom `SelfDescribing` events](/docs/sources/trackers/mobile-trackers/custom-tracking-using-schemas/index.md) are unwarranted. Those are candidates to track as `Structured` events. We do strongly recommend using fully custom `SelfDescribing` events.
 

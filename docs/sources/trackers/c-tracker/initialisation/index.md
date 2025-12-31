@@ -5,7 +5,7 @@ date: "2020-02-25"
 sidebar_position: 20
 ---
 
-Designing how and what to track in your app is an important decision. Check out our docs about tracking design [here](/docs/data-product-studio/index.md).
+Designing how and what to track in your app is an important decision. Check out our docs about tracking design [here](/docs/event-studio/index.md).
 
 ## Import the library
 

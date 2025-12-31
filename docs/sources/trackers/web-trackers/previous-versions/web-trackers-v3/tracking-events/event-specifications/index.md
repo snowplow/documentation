@@ -8,7 +8,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-The plugin allows you to integrate with Event Specifications for a selected set of plugins. The configuration for the plugin should be retrieved directly from your [Data Product](https://docs.snowplow.io/docs/fundamentals/data-products/) in [Snowplow Console](https://console.snowplowanalytics.com).
+The plugin allows you to integrate with Event Specifications for a selected set of plugins. The configuration for the plugin should be retrieved directly from your [Tracking Plan](https://docs.snowplow.io/docs/fundamentals/tracking-plans/) in [Snowplow Console](https://console.snowplowanalytics.com).
 
 The plugin will automatically add an Event Specification context to the events matching the configuration added.
 
@@ -97,6 +97,6 @@ EventSpecificationsPlugin({
  </TabItem>
 </Tabs>
 
-You can retrieve the configuration for your Event Specifications directly from your Data Product after clicking on the `Implement tracking` button.
+You can retrieve the configuration for your Event Specifications directly from your Tracking Plan after clicking on the `Implement tracking` button.
 
 ![implement tracking button](./images/implement_tracking.png)

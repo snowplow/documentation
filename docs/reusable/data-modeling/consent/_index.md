@@ -28,7 +28,7 @@ This custom module consists of a series of dbt models which produce the followin
 
 ## Operation
 
-<ReactMarkdown children={`It is assumed that the Snowplow ${props.packageName} package is already installed and configured as per the [Quick Start](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/index.md) instructions.`}/>
+<ReactMarkdown children={`It is assumed that the Snowplow ${props.packageName} package is already installed and configured as per the [Quick Start](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart) instructions.`}/>
 
 ### Enable the module
 
@@ -43,7 +43,7 @@ vars:
 
 ###  Run the module
 <ReactMarkdown children={`
-If you have previously run the model without this optional module enabled, you can simply enable the module and run \`dbt run --selector snowplow_${props.packageName}\` as many times as needed for this module to catch up with your other data. If you only wish to process this from a specific date, be sure to change your \`snowplow__start_date\`, or refer to the [Custom module](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) section for a detailed guide on how to achieve this the most efficient way.`}/>
+If you have previously run the model without this optional module enabled, you can simply enable the module and run \`dbt run --selector snowplow_${props.packageName}\` as many times as needed for this module to catch up with your other data. If you only wish to process this from a specific date, be sure to change your \`snowplow__start_date\`, or refer to the [Custom module](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models) section for a detailed guide on how to achieve this the most efficient way.`}/>
 
 <ReactMarkdown children={`
 If you haven't run the web package before, then you can run it using \`dbt run --selector snowplow_${props.packageName}\` either through your CLI, within dbt Cloud, or for Snowplow CDI customers you can use Snowplow Console. In this situation, all models will start in-sync as no events have been processed.`}/>

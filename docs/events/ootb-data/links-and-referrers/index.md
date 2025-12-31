@@ -17,9 +17,9 @@ import TOCInline from '@theme/TOCInline';
 Along with page view events, the tracker tracks the URL of the referring page that linked to the current page.
 The URL is tracked in the atomic event properties, under the `page_referrer` property.
 
-| **Table Column**                                 | **Type** | **Description**                                               | **Example values**                                                                                                      |
-|---------------------------------------------|----------|---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| `page_referrer`                             | text     | Referrer URL                                                  | `https://www.snowplow.io/`                                                                                       |
+| **Table Column** | **Type** | **Description** | **Example values**         |
+| ---------------- | -------- | --------------- | -------------------------- |
+| `page_referrer`  | text     | Referrer URL    | `https://www.snowplow.io/` |
 
 ## Deep links in mobile apps
 
@@ -51,8 +51,8 @@ This context entity is attached to the first screen view event automatically aft
 
 ### How to track?
 
-* See the documentation for the [iOS and Android tracker](https://docs.snowplow.io/docs/sources/mobile-trackers/tracking-events/#tracking-deep-links).
-* [Documentation for the React Native tracker](https://docs.snowplow.io/docs/sources/react-native-tracker/tracking-events/#tracking-deep-link-received-events).
+* See the documentation for the [iOS and Android tracker](/docs/sources/mobile-trackers/tracking-events/index.md#tracking-deep-links).
+* [Documentation for the React Native tracker](/docs/sources/react-native-tracker/tracking-events/index.md#tracking-deep-link-received-events).
 
 ## Link click tracking on Web
 

@@ -42,7 +42,7 @@ This is usually acceptable as the browser will have cached the first request; if
 
 The name of the plugin to load. These values can be found on the respective plugin documentation.
 
-For example, for the `Link Click Tracking` plugin, the values (`'snowplowLinkClickTracking,LinkClickTrackingPlugin'`) can be found in the snippet [here](https://docs.snowplow.io/docs/sources/web-trackers/tracking-events/link-click/#enable-link-click-tracking).
+For example, for the `Link Click Tracking` plugin, the values (`'snowplowLinkClickTracking,LinkClickTrackingPlugin'`) can be found in the snippet [here](/docs/sources/web-trackers/tracking-events/link-click/index.md#enable-link-click-tracking).
 
 ### Additional Configuration (optional)
 

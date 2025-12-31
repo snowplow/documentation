@@ -35,7 +35,7 @@ Snowplow provides a fully managed service for running data models. We recommend 
 7. (Optional) Configure all the potential Configuration Variables for the Attribution Model. Once you are happy with the changes - click ‘Confirm’ to save.
 
 :::info
-Please Note: See the information about each of [the options here](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/attribution/).
+Please Note: See the information about each of [the options here](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/attribution/).
 ![](./screenshots/Screenshot14.png)
 For a more detailed guide check out the [Setting Variables](/tutorials/attribution/setting-up-locally/#setting-variables) section of the local setup section of this tutorial.
 :::

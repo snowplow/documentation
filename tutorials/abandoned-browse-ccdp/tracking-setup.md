@@ -73,7 +73,7 @@ To verify your tracking implementation, use the [Snowplow Chrome extension](http
 
 ## Track product views
 
-Implement the product view tracking when a product is viewed. This will create a column in the warehouse dedicated to storing information on viewed products. Please ensure you use the correct data type for each variable. Refer to the [ecommerce documentation](https://docs.snowplow.io/docs/sources/web-trackers/tracking-events/ecommerce) for further information.
+Implement the product view tracking when a product is viewed. This will create a column in the warehouse dedicated to storing information on viewed products. Please ensure you use the correct data type for each variable. Refer to the [ecommerce documentation](/docs/sources/web-trackers/tracking-events/ecommerce/) for further information.
 ```javascript
   snowplow('trackProductView', {
     id: "12345",

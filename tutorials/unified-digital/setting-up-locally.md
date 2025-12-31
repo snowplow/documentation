@@ -88,7 +88,7 @@ vars:
     snowplow__enable_web: true
 ```
 
-3. Enable [entities](https://docs.snowplow.io/docs/understanding-your-pipeline/entities/) to make sure that they're processed within the package - this means they will be un-nested from the atomic columns and made available in the derived tables. Make sure to only enable the ones you need.
+3. Enable [entities](/docs/fundamentals/entities/) to make sure that they're processed within the package - this means they will be un-nested from the atomic columns and made available in the derived tables. Make sure to only enable the ones you need.
 
     ```yaml
     vars:

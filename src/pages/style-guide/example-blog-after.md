@@ -16,11 +16,11 @@ Snowtype works by integrating with our Data Product Studio to retrieve custom sc
 ## New Features and Improvements
 ### Enhanced Client-Side Validation
 
-In addition to Snowtype’s strongly typed APIs, we've implemented [client-side validation](https://docs.snowplow.io/docs/collecting-data/code-generation/client-side-validation/) for the browser tracker, focusing on three key areas:
+In addition to Snowtype’s strongly typed APIs, we've implemented [client-side validation](/docs/collecting-data/code-generation/client-side-validation/) for the browser tracker, focusing on three key areas:
 
-1. **[Schema validation](https://docs.snowplow.io/docs/data-product-studio/snowtype/client-side-validation/#schema-validation-example)** catches type mismatches between your data and defined schemas. For example, if your button_click event expects an `id` property of type `string` but receives a `number`, you'll get an immediate browser console warning‍.
-2. **[Cardinality rules validation](https://docs.snowplow.io/docs/collecting-data/code-generation/client-side-validation#entity-cardinality-rules-validation-example)** ensures the correct number of entities are included with each event, e.g. `Exactly 1`, `At least 1`, `Between 1 and 2‍`. For instance, if a product click event is missing its associated product data, you'll receive an error notification.
-3. **[Property rules validation](https://docs.snowplow.io/docs/understanding-tracking-design/managing-event-specifications/ui#properties)** validates field values against predefined rules. If a product entity with a category attribute must be either "related" or "cross-sell" but receives "upsell", the system flags this immediately.
+1. **[Schema validation](/docs/data-product-studio/snowtype/client-side-validation/#schema-validation-example)** catches type mismatches between your data and defined schemas. For example, if your button_click event expects an `id` property of type `string` but receives a `number`, you'll get an immediate browser console warning‍.
+2. **[Cardinality rules validation](/docs/collecting-data/code-generation/client-side-validation#entity-cardinality-rules-validation-example)** ensures the correct number of entities are included with each event, e.g. `Exactly 1`, `At least 1`, `Between 1 and 2‍`. For instance, if a product click event is missing its associated product data, you'll receive an error notification.
+3. **[Property rules validation](/docs/understanding-tracking-design/managing-event-specifications/ui#properties)** validates field values against predefined rules. If a product entity with a category attribute must be either "related" or "cross-sell" but receives "upsell", the system flags this immediately.
 
 ### Expanded Platform Support
 

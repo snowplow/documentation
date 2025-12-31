@@ -37,7 +37,7 @@ packages:
 dbt deps
 ```
 
-5. Now open your `dbt_project.yml` where we will configure the package. A full list of configuration options can be seen on [this page](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/attribution/).
+5. Now open your `dbt_project.yml` where we will configure the package. A full list of configuration options can be seen on [this page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/attribution/).
 
 6. Add the following to your `dbt_project.yml` file and configure it accordingly for your use-case.
 

@@ -6,7 +6,7 @@ description: "Set up a Base Web data product template to monitor page views, pag
 keywords: ["base web data product", "data product templates"]
 ---
 
-After creating a Source Application, the recommended way to keep track of what we consider base events for a tracking setup is through the Base Data Product templates. For this application you can use the [Base Web](https://docs.snowplow.io/docs/understanding-tracking-design/defining-the-data-to-collect-with-data-products/data-product-templates/#base-web).
+After creating a Source Application, the recommended way to keep track of what we consider base events for a tracking setup is through the Base Data Product templates. For this application you can use the [Base Web](/docs/data-product-studio/data-products/data-product-templates/#base-web).
 
 To create a Base Web Data Product for your application, navigate to the Data Products section and after clicking the `Templates` button, select the Base Web template.
 ![](./images/create-dp.png)

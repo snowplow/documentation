@@ -390,7 +390,7 @@ Here are two pieces of older content that only partially follow the style guide.
 ### Deprecated terminology
 - Use "entity", not "context"
     - It's unavoidable to use "context" when referring to some table columns or APIs, but use the correct nomenclature around them anyway
-    - Link to the Fundamentals [page about entities](https://docs.snowplow.io/docs/fundamentals/entities/) if it feels unclear
+    - Link to the Fundamentals [page about entities](/docs/fundamentals/entities/) if it feels unclear
 
    | ✅                                                | ❌                                                |
    | ------------------------------------------------ | ------------------------------------------------ |

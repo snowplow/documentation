@@ -2,12 +2,6 @@
 title: "Using Snowtype with Google Tag Manager"
 sidebar_position: 6
 ---
-
-:::info
-**Data Products** have been renamed to **Tracking Plans** in the Snowplow interface. In this technical section, we may still refer to "Data Products" to match API fields and CLI commands.
-:::
-
-
 :::info
 This feature is available from version 0.5.0.
 :::

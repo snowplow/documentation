@@ -4,6 +4,11 @@ description: "Use the 'snowplow-cli data-products' command to manage your tracki
 sidebar_label: "Using the CLI"
 sidebar_position: 999
 ---
+
+:::info
+**Data Products** have been renamed to **Tracking Plans** in the Snowplow interface. In this technical section, we may still refer to "Data Products" to match API fields and CLI commands.
+:::
+
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 

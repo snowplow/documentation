@@ -382,7 +382,8 @@ button.snowplow-button:focus {
 /* End of buttons */
 
 table {
-  display: inline-table;
+  display: table;
+  max-width: 100%;
 }
 .table-of-contents__left-border {
   border-left-color: hsl(var(--border));
@@ -1162,19 +1163,32 @@ Controls the display of navbar/sidebar items
     minmax(var(--padding-inline), 1fr) [full-width-end];
 }
 
-.theme-doc-markdown > :not(.breakout, .full-width),
+.theme-doc-markdown > :not(.breakout, .full-width, :has(> table)),
 .full-width > :not(.breakout, .full-width) {
   grid-column-start: 3;
   grid-column-end: 4;
 }
 
 .theme-doc-markdown > .breakout,
-.theme-doc-markdown p:has(img, table),
+.theme-doc-markdown p:has(img),
+.theme-doc-markdown > table,
+.theme-doc-markdown > div:has(> table),
 .theme-doc-markdown
   div:has(div.css-yu4ftp-MuiDataGrid-root, div.css-m0j720-MuiDataGrid-root) {
   grid-column-start: 2 !important;
   grid-column-end: 5 !important;
   height: fit-content;
+}
+
+/* Center tables in the breakout area and size them appropriately */
+.theme-doc-markdown > table,
+.theme-doc-markdown > div:has(> table) {
+  justify-self: center;
+}
+
+.theme-doc-markdown table {
+  width: fit-content;
+  min-width: min(100%, 740px);
 }
 
 .theme-doc-markdown > .full-width {

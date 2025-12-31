@@ -52,9 +52,29 @@ flowchart LR
   </>
 }</>
 
-<>{props.warehouse != 'Postgres' && props.warehouse != 'Data Lake' && (<>
-  <h4>{props.warehouse} Loader</h4>
-  <ReactMarkdown children={`
-For more information about the ${props.warehouse} Loader, see the [documentation on the available destinations](/docs/destinations/warehouses-lakes/index.md?cloud=${props.cloud}).
-  `}/>
-</>)}</>
+<>{props.warehouse != 'Postgres' && (() => {
+  // Determine the correct loader documentation link based on warehouse type
+  let loaderLink = '';
+
+  if (props.warehouse === 'Redshift') {
+    loaderLink = '/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader?warehouse=redshift';
+  } else if (props.warehouse === 'Databricks') {
+    loaderLink = '/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader?warehouse=databricks';
+  } else if (props.warehouse === 'Snowflake') {
+    loaderLink = '/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader';
+  } else if (props.warehouse === 'BigQuery') {
+    loaderLink = '/docs/api-reference/loaders-storage-targets/bigquery-loader';
+  } else {
+    // Fallback is Data lakes
+    loaderLink = '/docs/api-reference/loaders-storage-targets/lake-loader';
+  }
+
+  return (
+    <>
+      <h4>{props.warehouse} Loader</h4>
+      <ReactMarkdown children={`
+For more information about the ${props.warehouse} Loader, see the [loader documentation](${loaderLink}).
+      `}/>
+    </>
+  );
+})()}</>

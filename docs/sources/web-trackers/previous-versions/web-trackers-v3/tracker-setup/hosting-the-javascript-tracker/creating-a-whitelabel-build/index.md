@@ -2,6 +2,8 @@
 title: "Creating a white-label build"
 date: "2022-09-14"
 sidebar_position: 4000
+description: "Documentation for Creating a white-label build in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

@@ -1,8 +1,9 @@
 ---
-title: "Signals integration for Snowplow Inspector"
+title: "Debug Signals attributes and interventions in Snowplow Inspector"
 sidebar_label: "Signals integration"
 sidebar_position: 30
-description: "Using Snowplow Inspector to understand Snowplow Signals"
+description: "Connect Snowplow Inspector to Signals to validate attribute and intervention definitions. View real-time attribute values and monitor triggered interventions using the browser extension."
+keywords: ["signals integration", "debug attributes", "debug interventions", "signals api", "attribute values"]
 ---
 
 The Snowplow Inspector optionally integrates with [Snowplow Signals](/docs/signals/index.md) to help validate your [attribute](/docs/signals/define-attributes/attributes/index.md) and [intervention](/docs/signals/concepts/index.md#interventions) definitions.

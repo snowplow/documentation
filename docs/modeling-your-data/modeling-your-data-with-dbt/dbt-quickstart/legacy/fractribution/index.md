@@ -2,6 +2,8 @@
 sidebar_label: "Fractribution"
 sidebar_position: 900
 title: "Fractribution Quickstart"
+description: "Quick start guide for the legacy Snowplow Fractribution dbt package for marketing attribution modeling."
+keywords: ["fractribution quickstart", "legacy attribution", "fractribution setup"]
 ---
 
 ```mdx-code-block

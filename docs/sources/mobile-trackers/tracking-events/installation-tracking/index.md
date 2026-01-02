@@ -1,7 +1,9 @@
 ---
-title: "Tracking application installs with the native mobile trackers"
+title: "Track application installs with the native mobile trackers"
 sidebar_label: "Installs"
 sidebar_position: 60
+description: "Track first-time app installations and capture referrer information from Google Play Store for Android apps."
+keywords: ["install tracking", "app installation", "google play referrer"]
 ---
 
 ```mdx-code-block

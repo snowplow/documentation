@@ -3,6 +3,7 @@ position: 1
 title: "Learn how to set up Signals for real-time calculation"
 sidebar_label: "Introduction"
 description: "Get started with Snowplow Signals to calculate user behavior attributes in real time, to build personalization use cases."
+keywords: ["snowplow signals", "real-time attributes"]
 ---
 
 Welcome to the [Snowplow Signals](/docs/signals/) Quick Start tutorial.

@@ -1,7 +1,9 @@
 ---
-title: "Running on data lakes"
+title: "Run models on data lakes"
+sidebar_label: "Running on data lakes"
 sidebar_position: 50
-description: "How to run our models on lakehouses"
+description: "How to run our models on lakehouses including Databricks and other data lake platforms."
+keywords: ["dbt data lakes", "dbt lakehouses", "Databricks dbt"]
 ---
 
 ```mdx-code-block

@@ -2,6 +2,8 @@
 title: "Snowflake Streaming Loader configuration reference"
 sidebar_label: "Configuration reference"
 sidebar_position: 1
+description: "Configure Snowflake Streaming Loader with Snowpipe Streaming, Kinesis, Pub/Sub, and Kafka settings for real-time warehouse loading."
+keywords: ["snowflake config", "snowpipe streaming", "streaming loader config", "warehouse configuration"]
 ---
 
 ```mdx-code-block

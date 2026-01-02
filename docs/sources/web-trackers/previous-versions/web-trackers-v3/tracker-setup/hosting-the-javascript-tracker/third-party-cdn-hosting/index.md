@@ -2,6 +2,8 @@
 title: "Third Party CDN Hosting"
 date: "2020-10-12"
 sidebar_position: 4100
+description: "Documentation for Third Party CDN Hosting in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ## Hosting sp.js

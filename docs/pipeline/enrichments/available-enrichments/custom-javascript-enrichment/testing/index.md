@@ -1,7 +1,9 @@
 ---
-title: "Testing your enrichment"
+title: "Test JavaScript enrichments locally"
 sidebar_position: 2
-description: "How to test and debug your enrichment code."
+description: "Test JavaScript enrichment code locally using Node.js before deploying to production pipelines."
+sidebar_label: "Testing"
+keywords: ["test JavaScript enrichment", "local testing", "enrichment debugging"]
 ---
 
 ```mdx-code-block

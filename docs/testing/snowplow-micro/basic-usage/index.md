@@ -1,8 +1,9 @@
 ---
-title: "Basic Snowplow Micro usage"
+title: "Run Snowplow Micro with Docker"
 sidebar_label: "Basic usage"
 sidebar_position: 1
-description: "How to run Snowplow Micro and send events to it."
+description: "Run Snowplow Micro locally using Docker to validate and debug tracking implementations. Send events to port 9090 and view results through the UI, API, or exported TSV/JSON format."
+keywords: ["micro basic usage", "docker", "run micro", "test events", "micro ui"]
 ---
 
 ```mdx-code-block

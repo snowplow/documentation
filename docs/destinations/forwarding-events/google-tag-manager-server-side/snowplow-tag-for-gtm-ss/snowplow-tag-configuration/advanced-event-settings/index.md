@@ -1,8 +1,13 @@
 ---
-title: "Advanced Event Settings"
+title: "Event settings for Snowplow Tag in GTM SS"
+sidebar_label: "Event settings"
 date: "2022-11-22"
 sidebar_position: 100
+description: "Configure structured events, self-describing events, and context entities for the Snowplow Tag in GTM Server Side."
+keywords: ["advanced event settings", "structured events", "self-describing events", "context entities"]
 ---
+
+This page describes the event settings available in the Snowplow Tag for GTM Server Side.
 
 ## Structured events
 

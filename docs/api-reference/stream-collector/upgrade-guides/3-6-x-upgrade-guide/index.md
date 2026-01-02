@@ -1,6 +1,9 @@
 ---
-title: "3.6.x upgrade guide"
+title: "Collector 3.6.x upgrade guide with compression"
+sidebar_label: "3.6.x upgrade guide"
 sidebar_position: 10
+description: "Upgrade guide for Collector 3.6.x introducing payload compression to reduce storage costs and improve throughput, requiring Enrich 6.1.x for compatibility."
+keywords: ["collector 3.6", "payload compression", "compression feature", "Enrich 6.1", "cost reduction"]
 ---
 
 Collector 3.6.0 introduces payload compression, a new feature that significantly reduces the size (and therefore, cost) of data written to your raw output stream.

@@ -2,7 +2,8 @@
 title: "Snowplow Normalize dbt package"
 sidebar_label: "Normalize"
 sidebar_position: 50
-description: "The Snowplow Normalize dbt Package"
+description: "Flatten and normalize self-describing events and entities into dedicated tables for downstream ETL and analysis tools."
+keywords: ["normalize dbt", "flatten events", "unnest entities", "event normalization", "ETL preparation"]
 ---
 
 ```mdx-code-block

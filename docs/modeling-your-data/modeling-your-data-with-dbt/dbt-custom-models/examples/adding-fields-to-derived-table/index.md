@@ -1,5 +1,8 @@
 ---
-title: "Adding Fields to a Derived Table"
+title: "Adding fields to a derived table"
+sidebar_label: "Adding fields to a derived table"
+description: "Add custom fields to Snowplow derived tables using passthrough fields, custom aggregations, or custom derived models."
+keywords: ["add fields to derived tables", "passthrough fields", "custom aggregations", "extend derived tables"]
 sidebar_position: 10
 ---
 

@@ -1,7 +1,10 @@
 ---
-title: "Snowplow Tag for GTM SS"
+title: "Snowplow Tag for GTM Server Side"
+sidebar_label: "Snowplow Tag for GTM SS"
 date: "2021-11-24"
 sidebar_position: 200
+description: "Forward events to Snowplow Collector from GTM Server Side using the Snowplow Tag, supporting events from Snowplow JavaScript Tracker or other GTM SS clients like GA4."
+keywords: ["Snowplow Tag", "GTM SS Tag", "Collector forwarding", "event routing"]
 ---
 
 The [Snowplow Tag for GTM SS](https://tagmanager.google.com/gallery/#/owners/snowplow/templates/snowplow-gtm-server-side-tag) is most useful if using GTM SS as a Server Side Tag Manager for Snowplow JavaScript Tracker events, as you will want to ensure you forward these events to your Snowplow Collector. The Snowplow Tag will automatically forward any events the Snowplow Client receives once it has been configured with your Collector URL.

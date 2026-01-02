@@ -1,7 +1,10 @@
 ---
 title: "The RedisWorker class"
+sidebar_label: "RedisWorker class"
 date: "2020-02-26"
 sidebar_position: 90
+description: "Send events from Redis to emitters using the RedisWorker class in Python tracker v0.15 for asynchronous event processing."
+keywords: ["python tracker v0.15 redisworker", "redis event processing", "async worker"]
 ---
 
 **Important note**: Since version 0.9.0, the RedisWorker is only available as an extra module. To use it, you need to install the snowplow-tracker as:

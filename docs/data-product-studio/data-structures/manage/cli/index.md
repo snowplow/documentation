@@ -1,8 +1,9 @@
 ---
-title: "Managing data structures via the CLI"
-description: "Use the 'snowplow-cli data-structures' command to manage your data structures."
+title: "Manage data structures via Snowplow CLI"
 sidebar_label: "Snowplow CLI"
 sidebar_position: 2
+description: "Use the Snowplow CLI data-structures command to generate, download, validate, and publish data structures with git-ops workflows and JSON Schema validation."
+keywords: ["data structures CLI", "Snowplow CLI schemas", "schema validation CLI", "CLI publish schemas"]
 ---
 
 ```mdx-code-block

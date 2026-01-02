@@ -1,7 +1,10 @@
 ---
 title: "Hybrid Apps"
+sidebar_label: "Hybrid Apps"
 date: "2022-08-30"
 sidebar_position: 70
+description: "Track events from WebViews in React Native tracker v2 hybrid apps using WebView tracker for event forwarding and shared sessions."
+keywords: ["react native tracker v2 hybrid apps", "webview tracking", "event forwarding"]
 ---
 
 :::info

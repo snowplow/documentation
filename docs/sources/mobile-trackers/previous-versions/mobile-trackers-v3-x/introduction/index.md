@@ -2,6 +2,9 @@
 title: "Introduction"
 date: "2021-11-23"
 sidebar_position: -10
+sidebar_label: "Introduction"
+description: "Introduction to Mobile Trackers v3.x configuration and setup."
+keywords: ["mobile tracker v3", "configuration"]
 ---
 
 The Mobile Trackers can be configured at the startup with a set of Configuration objects. The entry point to setup the tracker is now the `Snowplow` class and the `createTracker` methods. They need a namespace string which is now mandatory.

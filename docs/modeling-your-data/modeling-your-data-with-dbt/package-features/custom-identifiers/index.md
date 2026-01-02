@@ -1,6 +1,9 @@
 ---
-title: "Custom Sessionization"
+title: "Configure custom sessionization"
+sidebar_label: "Custom sessionization"
 sidebar_position: 50
+description: "Define custom session and user identifiers in Snowplow dbt packages using SQL expressions and custom logic."
+keywords: ["custom sessionization", "session identifiers", "user identifiers", "custom SQL identifiers"]
 toc_max_heading_level: 5
 ---
 ```mdx-code-block
@@ -94,8 +97,8 @@ Similar to before, if you want to combine multiple identifiers in different (or 
 vars:
     ...
     snowplow__session_identifiers: [
-            {'schema': 'com_mycompany_logged_session_id_1', 'field': 'logged_in_id', 'prefix': 'lsi'}, 
-            {'schema': 'com_mycompany_logged_session_id_1', 'field': 'session_identifier', 'prefix': 'lsi'}, 
+            {'schema': 'com_mycompany_logged_session_id_1', 'field': 'logged_in_id', 'prefix': 'lsi'},
+            {'schema': 'com_mycompany_logged_session_id_1', 'field': 'session_identifier', 'prefix': 'lsi'},
             {'schema': 'com_mycompany_session_identifier_1', 'field': 'session_id', 'prefix': 'si'}]
     ...
 ...
@@ -112,9 +115,9 @@ This will then render into the following SQL:
 SELECT
     ...
     COALESCE(
-        com_mycompany_logged_session_id_1[0].logged_in_id, 
-        com_mycompany_logged_session_id_1[0].session_identifier, 
-        com_mycompany_session_identifier_1[0].session_id, 
+        com_mycompany_logged_session_id_1[0].logged_in_id,
+        com_mycompany_logged_session_id_1[0].session_identifier,
+        com_mycompany_session_identifier_1[0].session_id,
         NULL
         ) as session_identifier,
 ...
@@ -127,9 +130,9 @@ SELECT
 SELECT
     ...
     COALESCE(
-        com_mycompany_logged_session_id_1_0_0[safe_offset(0)].logged_in_id, 
-        com_mycompany_logged_session_id_1_0_0[safe_offset(0)].session_identifier, 
-        com_mycompany_session_identifier_1_0_0[safe_offset(0)].session_id, 
+        com_mycompany_logged_session_id_1_0_0[safe_offset(0)].logged_in_id,
+        com_mycompany_logged_session_id_1_0_0[safe_offset(0)].session_identifier,
+        com_mycompany_session_identifier_1_0_0[safe_offset(0)].session_id,
         NULL
         ) as session_identifier,
 ...
@@ -142,9 +145,9 @@ SELECT
 SELECT
     ...
     COALESCE(
-        lsi_logged_in_id, 
-        lsi_session_identifier, 
-        si_session_id, 
+        lsi_logged_in_id,
+        lsi_session_identifier,
+        si_session_id,
         NULL
         ) as session_identifier,
 ...

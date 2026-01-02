@@ -1,7 +1,10 @@
 ---
-title: "Amplitude Tag for GTM SS"
+title: "Amplitude Tag for GTM Server Side"
+sidebar_label: "Amplitude Tag for GTM SS"
 date: "2021-11-24"
 sidebar_position: 300
+description: "Forward Snowplow events to Amplitude from GTM Server Side using the Amplitude Tag with HTTP API v2 for product analytics and user tracking."
+keywords: ["Amplitude Tag", "GTM SS Amplitude", "product analytics", "HTTP API v2"]
 ---
 
 The [Amplitude Tag for GTM SS](https://tagmanager.google.com/gallery/#/owners/snowplow/templates/snowplow-gtm-server-side-amplitude-tag) allows events to be forwarded to Amplitude. This Tag works best with events from the Snowplow Client, but can also construct Amplitude events from other GTM SS Clients such as GAv4.

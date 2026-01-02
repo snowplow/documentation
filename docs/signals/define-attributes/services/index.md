@@ -1,8 +1,9 @@
 ---
-title: "Defining services in Console"
+title: "Define services in Console "
 sidebar_label: "Services"
 sidebar_position: 32
-description: "Group multiple attribute groups together using services to create stable interfaces for consuming calculated attributes in applications."
+description: "Services group multiple versioned attribute groups into stable consumption interfaces for applications. Create and manage services to control which attribute versions your applications use."
+keywords: ["services", "attribute group versioning", "stable interfaces"]
 ---
 
 [Services](/docs/signals/concepts/index.md#services) group attribute groups together for serving to your applications.

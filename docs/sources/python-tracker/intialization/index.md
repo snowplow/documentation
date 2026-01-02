@@ -1,7 +1,9 @@
 ---
-title: "Initializing the Python tracker"
+title: "Initialize the Python tracker"
 sidebar_label: "Initialization"
 sidebar_position: 20
+description: "Initialize the Python tracker using the Snowplow class or Tracker, Emitter, and Subject classes with configuration for namespace, endpoint, and encoding."
+keywords: ["python tracker initialization", "tracker configuration", "snowplow class"]
 ---
 
 Assuming you have completed the Python Tracker Setup for your Python project, you are now ready to initialize the Python Tracker. There are two ways to this:
@@ -10,7 +12,7 @@ Assuming you have completed the Python Tracker Setup for your Python project, 
 2. Using the `Tracker`, `Emitter` and `Subject` classes. This option is useful in case you want to replace one of the internal tracker components (for instance, you want to provide a custom `Emitter` class).
 
 ## Option 1: Initialization using the Snowplow class
-The Snowplow class contains `static` methods to help manage `Tracker` objects. 
+The Snowplow class contains `static` methods to help manage `Tracker` objects.
 
 Import the Snowplow class along with the required configuration objects:
 
@@ -34,17 +36,17 @@ Snowplow.get_tracker('ns')
 
 The Snowplow class can be used to initialize trackers using the following properties:
 
-| **Argument Name** | **Description** | **Required?** | **Default** |
-| --- | --- | --- | --- |
-| `namespace` | The name of the tracker  | Yes |  |
-| `endpoint` | The collector URL events are sent to  | Yes |  |
-| `method` | The method to use: “get” or “post” | No | `post` |
-| `emitter_config` | The emitter configuration object | No | `EmitterConfiguration()` |
-| `app_id` | The application ID | No | `None` |
-| `subject` | The user being tracked | No | `subject.Subject()` |
-| `tracker_config` | The tracker configuration object | No | `TrackerConfiguration()` |
+| **Argument Name** | **Description**                      | **Required?** | **Default**              |
+| ----------------- | ------------------------------------ | ------------- | ------------------------ |
+| `namespace`       | The name of the tracker              | Yes           |                          |
+| `endpoint`        | The collector URL events are sent to | Yes           |                          |
+| `method`          | The method to use: “get” or “post”   | No            | `post`                   |
+| `emitter_config`  | The emitter configuration object     | No            | `EmitterConfiguration()` |
+| `app_id`          | The application ID                   | No            | `None`                   |
+| `subject`         | The user being tracked               | No            | `subject.Subject()`      |
+| `tracker_config`  | The tracker configuration object     | No            | `TrackerConfiguration()` |
 
-Optionally, you may choose to use the `TrackerConfiguration` and `EmitterConfiguration` classes to configure the emitter and tracker respectively.  
+Optionally, you may choose to use the `TrackerConfiguration` and `EmitterConfiguration` classes to configure the emitter and tracker respectively.
 
 ### Tracker configuration using `TrackerConfiguration`
 
@@ -57,16 +59,16 @@ tracker_config = TrackerConfiguration(
 )
 
 Snowplow.create_tracker(
-    namespace='ns', 
+    namespace='ns',
     endpoint='collector.example.com',
     tracker_config = tracker_config
 )
 ```
 
-| **Argument Name** | **Description** | **Default** |
-| --- | --- | --- |
-| `encode_base64` | Whether JSONs in the payload should be base-64 encoded. | `True` |
-| `json_encoder` | Custom JSON serializer that gets called on non-serializable object. | `None` |
+| **Argument Name** | **Description**                                                     | **Default** |
+| ----------------- | ------------------------------------------------------------------- | ----------- |
+| `encode_base64`   | Whether JSONs in the payload should be base-64 encoded.             | `True`      |
+| `json_encoder`    | Custom JSON serializer that gets called on non-serializable object. | `None`      |
 ### Emitter configuration using `EmitterConfiguration`
 
 The `EmitterConfiguration` class contains additional settings for the `Emitter` initialization. For example:
@@ -84,7 +86,7 @@ emitter_config = EmitterConfiguration(
 )
 
 Snowplow.create_tracker(
-    namespace='ns', 
+    namespace='ns',
     endpoint='collector.example.com',
     emitter_config = emitter_config
 )
@@ -92,16 +94,16 @@ Snowplow.create_tracker(
 
 The full list of arguments is below:
 
-| **Argument Name** | **Description** | **Default** |
-| --- | --- | --- | 
-| `batch_size` | The maximum number of queued events before the buffer is flushed. | `10` |
-| `on_success` | Callback executed after every HTTP request in a flush has status code 200. | `None` |
-| `on_failure` | Callback executed if at least one HTTP request in a flush has status code other than 200. | `None` |
-| `byte_limit` | The size event list after reaching which queued events will be flushed. | `None` |
-| `request_timeout` | Timeout for the HTTP requests. Can be set either as single float value which applies to both "connect" AND "read" timeout, or as tuple with two float values which specify the "connect" and "read" timeouts separately. | `None` |
-| `custom_retry_codes` | Set custom retry rules for HTTP status codes received in emit responses from the Collector. By default, retry will not occur for status codes 400, 401, 403, 410 or 422. This can be overridden here. Note that 2xx codes will never retry as they are considered successful. | `None` |
-| `event_store` | Stores the event buffer and buffer capacity. | `InMemoryEventStore` |
-| `session` | Persist parameters across requests by using a session object | `None` |
+| **Argument Name**    | **Description**                                                                                                                                                                                                                                                               | **Default**          |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------- |
+| `batch_size`         | The maximum number of queued events before the buffer is flushed.                                                                                                                                                                                                             | `10`                 |
+| `on_success`         | Callback executed after every HTTP request in a flush has status code 200.                                                                                                                                                                                                    | `None`               |
+| `on_failure`         | Callback executed if at least one HTTP request in a flush has status code other than 200.                                                                                                                                                                                     | `None`               |
+| `byte_limit`         | The size event list after reaching which queued events will be flushed.                                                                                                                                                                                                       | `None`               |
+| `request_timeout`    | Timeout for the HTTP requests. Can be set either as single float value which applies to both "connect" AND "read" timeout, or as tuple with two float values which specify the "connect" and "read" timeouts separately.                                                      | `None`               |
+| `custom_retry_codes` | Set custom retry rules for HTTP status codes received in emit responses from the Collector. By default, retry will not occur for status codes 400, 401, 403, 410 or 422. This can be overridden here. Note that 2xx codes will never retry as they are considered successful. | `None`               |
+| `event_store`        | Stores the event buffer and buffer capacity.                                                                                                                                                                                                                                  | `InMemoryEventStore` |
+| `session`            | Persist parameters across requests by using a session object                                                                                                                                                                                                                  | `None`               |
 
 
 
@@ -126,14 +128,14 @@ t = Tracker(namespace="snowplow_tracker", emitters=e)
 
 The tracker parameters are:
 
-| **Argument Name** | **Description** | **Required?** | **Default** |
-| --- | --- | --- | --- |
-| `namespace` | The name of the tracker instance | Yes |  |
-| `emitters` | The emitter(s) to which events are sent | Yes |  |
-| `subject` | The user being tracked | No | `subject.Subject()` |
-| `app_id` | The application ID | No | `None` |
-| `encode_base64` | Whether to enable [base 64 encoding](https://en.wikipedia.org/wiki/Base64) | No | `True` |
-| `json_encoder` | Custom JSON serializer | No | `None` |
+| **Argument Name** | **Description**                                                            | **Required?** | **Default**         |
+| ----------------- | -------------------------------------------------------------------------- | ------------- | ------------------- |
+| `namespace`       | The name of the tracker instance                                           | Yes           |                     |
+| `emitters`        | The emitter(s) to which events are sent                                    | Yes           |                     |
+| `subject`         | The user being tracked                                                     | No            | `subject.Subject()` |
+| `app_id`          | The application ID                                                         | No            | `None`              |
+| `encode_base64`   | Whether to enable [base 64 encoding](https://en.wikipedia.org/wiki/Base64) | No            | `True`              |
+| `json_encoder`    | Custom JSON serializer                                                     | No            | `None`              |
 
 Here is a more complete example in which every tracker parameter is set:
 
@@ -141,11 +143,11 @@ Here is a more complete example in which every tracker parameter is set:
 e = Emitter(endpoint="collector.example.com")
 s = Subject().set_platform("srv")
 
-tracker = Tracker( 
-    namespace="cf", 
-    emitter=e, 
-    subject=s, 
-    app_id="aid", 
+tracker = Tracker(
+    namespace="cf",
+    emitter=e,
+    subject=s,
+    app_id="aid",
     encode_base64=False,
     json_encoder=my_custom_encoder
 )
@@ -177,7 +179,7 @@ The `app_id` argument lets you set the application ID to any string.
 
 By default, unstructured events and custom contexts are encoded into Base64 to ensure that no data is lost or corrupted. You can turn encoding on or off using the Boolean `encode_base64` argument.
 
-#### `json_encoder` 
+#### `json_encoder`
 
 This parameter allows you to customize the JSON encoder used to serialize objects added to the payload. For example:
 
@@ -189,8 +191,8 @@ def complex_encoder(c):
     return JSONEncoder.default(c)
 
 t = Tracker(
-    namespace="snowplow_tracker", 
-    emitter=e, 
+    namespace="snowplow_tracker",
+    emitter=e,
     json_encoder=complex_encoder
 )
 ```

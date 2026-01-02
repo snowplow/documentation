@@ -1,5 +1,8 @@
 ---
 title: "Using multi-valued entities"
+sidebar_label: "Using multi-valued entities"
+description: "Extract and use multi-valued entities in Snowplow dbt custom models with warehouse-specific unnesting techniques."
+keywords: ["multi-valued entities", "entity arrays", "unnest entities", "context arrays"]
 sidebar_position: 30
 ---
 

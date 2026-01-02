@@ -1,6 +1,8 @@
 ---
 title: "This run tables"
+sidebar_label: "This run tables"
 description: "Details about the this run table approach use in our packages."
+keywords: ["this run tables", "events this run", "sessions this run", "run-specific tables"]
 sidebar_position: 40
 ---
 

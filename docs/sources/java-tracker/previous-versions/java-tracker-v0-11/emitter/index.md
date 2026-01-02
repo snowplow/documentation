@@ -1,7 +1,10 @@
 ---
 title: "Emitter"
+sidebar_label: "Emitter"
 date: "2022-05-12"
 sidebar_position: 80
+description: "Configure event sending with SimpleEmitter and BatchEmitter classes in Java tracker v0.11."
+keywords: ["emitter configuration", "http client adapter"]
 ---
 
 Events are sent using an `Emitter` class. You can initialize a class using a variety of builder functions.

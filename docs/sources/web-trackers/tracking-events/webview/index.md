@@ -1,7 +1,9 @@
 ---
-title: "Tracking WebViews and hybrid applications using the web trackers"
+title: "Track WebViews and hybrid applications using the web trackers"
 sidebar_label: "Hybrid applications"
 sidebar_position: 180
+description: "Integrate web tracking in hybrid mobile apps by forwarding events from web views to native iOS, Android, or React Native trackers."
+keywords: ["webview", "hybrid apps"]
 ---
 
 ```mdx-code-block

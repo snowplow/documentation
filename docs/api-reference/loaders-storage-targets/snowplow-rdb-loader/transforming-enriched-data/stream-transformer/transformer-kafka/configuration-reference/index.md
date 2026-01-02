@@ -1,6 +1,9 @@
 ---
 title: "Transformer Kafka configuration reference"
+sidebar_label: "Transformer Kafka configuration reference"
 sidebar_position: 22
+description: "Configure Transformer Kafka with stream settings, Azure Blob Storage output, windowing, and monitoring for Azure real-time transformation."
+keywords: ["transformer kafka config", "kafka transformer settings", "azure transformer config", "event hubs configuration"]
 ---
 
 ```mdx-code-block

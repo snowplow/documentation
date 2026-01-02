@@ -1,7 +1,9 @@
 ---
-title: "Tracking social media interactions with the web trackers"
+title: "Track social media interactions with the web trackers"
 sidebar_label: "Social media"
 sidebar_position: 140
+description: "Track user interactions with social media widgets including likes, shares, and retweets across Facebook, Twitter, and other platforms."
+keywords: ["social media", "social interactions"]
 ---
 
 ```mdx-code-block

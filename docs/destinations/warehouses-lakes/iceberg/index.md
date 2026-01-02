@@ -1,7 +1,9 @@
 ---
-title: "Iceberg"
+title: "Load Snowplow data to Apache Iceberg"
+sidebar_label: "Iceberg"
 sidebar_position: 60
-description: "Send Snowplow data to Iceberg data lakes for analytics and data processing"
+description: "Send Snowplow data to Apache Iceberg data lakes for analytics and data processing with open table format, schema evolution, and cross-engine compatibility."
+keywords: ["Iceberg", "Apache Iceberg", "data lake", "open table format", "lake loader"]
 ---
 
 ```mdx-code-block

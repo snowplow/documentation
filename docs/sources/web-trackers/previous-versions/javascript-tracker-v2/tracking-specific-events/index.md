@@ -1,6 +1,8 @@
 ---
 title: "Tracking Events"
 sidebar_position: 40
+description: "Documentation for tracking Tracking Events with the web tracker."
+keywords: ["tracking", "events"]
 ---
 
 _This page refers to version 2.14.0+ of the Snowplow JavaScript Tracker._

@@ -1,7 +1,9 @@
 ---
-title: "Ecommerce Analytics"
+title: "Ecommerce Analytics visualization"
 sidebar_position: 2
 sidebar_label: "Ecommerce Analytics"
+description: "Ecommerce analytics visualization with dashboards for revenue, purchases, checkout journey, and transaction patterns."
+keywords: ["ecommerce visualization", "ecommerce dashboards", "revenue analytics", "purchase analytics"]
 ---
 
 <!-- Ecommerce reports based on GA4's Monetization metrics, covering revenue, purchases, checkout journey and promotions -->

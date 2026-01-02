@@ -1,8 +1,9 @@
 ---
-title: "Defining services with the Python SDK"
+title: "Define services programmatically with the Signals Python SDK"
 sidebar_label: "Services"
 sidebar_position: 32
-description: "Create services programmatically using the Python SDK to group attribute groups for stable consumption interfaces."
+description: "Define Service objects that group multiple attribute groups with version control. Use the Python SDK to publish services for stable attribute consumption."
+keywords: ["python sdk services", "service configuration", "attribute group grouping"]
 ---
 
 [Services](/docs/signals/concepts/index.md#services) group attribute groups together for serving to your applications.

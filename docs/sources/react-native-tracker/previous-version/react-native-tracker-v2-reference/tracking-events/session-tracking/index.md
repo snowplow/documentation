@@ -1,6 +1,10 @@
 ---
 title: "Session tracking"
+sidebar_label: "Session tracking"
+date: "2021-08-06"
 sidebar_position: 20
+description: "Track user sessions with client_session entities in React Native tracker v2, configure foreground and background timeouts, and retrieve session data at runtime."
+keywords: ["react native tracker v2 session tracking", "session timeout", "client session entity"]
 ---
 
 ```mdx-code-block

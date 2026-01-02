@@ -3,6 +3,7 @@ title: "Introduction to structuring your data with schemas"
 sidebar_label: "Schemas and data structures"
 sidebar_position: 3
 description: "Schemas are a powerful feature that ensures your data is clean and descriptive"
+keywords: ["schemas", "data structures", "JSON Schema", "data validation", "Iglu"]
 ---
 
 **Schemas** define the structure of the data that you collect. Each schema defines what fields are recorded with each [event](/docs/fundamentals/events/index.md), and provides validation criteria for each field. Schemas are also used to describe the structure of [entities that are attached to events](/docs/fundamentals/entities/index.md).

@@ -1,6 +1,8 @@
 ---
-title: "Initialization and configuration options for web trackers"
+title: "Initialize and configure the web trackers"
 sidebar_label: "Initialization and configuration"
+description: "Configure tracker behavior with options for cookies, events, anonymous tracking, and collector endpoints."
+keywords: ["tracker configuration", "initialization options", "configuration object", "tracker settings"]
 date: "2021-03-31"
 sidebar_position: 2000
 ---
@@ -65,8 +67,8 @@ Initialize one tracker per initial page load.
 The following table shows all the configuration parameters. These are all optional: you aren't required to provide any configuration object at all.
 
 
-| Property                                                                                                                                             | Description                                                                                                                                                                                                                         | Default (if applicable)               | Type                                                     |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- | -------------------------------------------------------- |
+| Property                                                                                                                                    | Description                                                                                                                                                                                                                         | Default (if applicable)               | Type                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- | -------------------------------------------------------- |
 | [`appId`](/docs/sources/web-trackers/tracking-events/index.md#setting-application-id)                                                       | Set the application ID.                                                                                                                                                                                                             |                                       | `string`                                                 |
 | [`appVersion`](/docs/sources/web-trackers/tracking-events/index.md#setting-application-version)                                             | Set the application version.                                                                                                                                                                                                        |                                       | `string`                                                 |
 | [`platform`](/docs/sources/web-trackers/tracking-events/index.md#setting-application-platform)                                              | Set the application platform.                                                                                                                                                                                                       | "web"                                 | `string` enum                                            |

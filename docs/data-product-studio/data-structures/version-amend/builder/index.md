@@ -1,8 +1,10 @@
 ---
-title: "Versioning Data Structures with the Data Structures Builder"
-date: "2023-03-01"
+title: "Version data structures with the builder"
 sidebar_label: "Using the Data Structures Builder"
+date: "2023-03-01"
 sidebar_position: 20
+description: "Automatically version custom data structures using the Data Structures Builder with automated detection of breaking and non-breaking changes."
+keywords: ["builder versioning", "automated versioning", "breaking changes detection", "schema versions"]
 ---
 
 Versioning is automated when using the Data Structure Builder to create or edit your custom [Data Structures](/docs/fundamentals/schemas/index.md) for your [Events](/docs/fundamentals/events/index.md) and [Entities](/docs/fundamentals/entities/index.md).

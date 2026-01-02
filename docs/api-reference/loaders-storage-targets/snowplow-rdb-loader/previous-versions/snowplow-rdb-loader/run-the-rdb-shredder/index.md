@@ -1,7 +1,10 @@
 ---
-title: "Run the RDB shredder"
+title: "Run the RDB shredder 2.x"
+sidebar_label: "Run the RDB shredder"
 date: "2021-09-14"
 sidebar_position: 40
+description: "Run RDB Shredder 2.x on EMR with Dataflow Runner for transforming enriched events into shredded data for Redshift."
+keywords: ["run rdb shredder", "emr shredder", "dataflow runner", "shredder execution", "rdb shredder 2.x"]
 ---
 
 The RDB shredder is published as a jar file attached to the [github release page](https://github.com/snowplow/snowplow-rdb-loader/releases). We also push it to several S3 buckets, from where it is accessible to an EMR cluster:

@@ -1,8 +1,10 @@
 ---
-title: "Installing and initializing the native mobile trackers"
+title: "Install and initialize the native mobile trackers"
 sidebar_label: "Installation and initialization"
 date: "2022-08-30"
 sidebar_position: 0
+description: "Install the Snowplow mobile tracker SDK for iOS or Android and configure it to track events from your mobile application."
+keywords: ["mobile tracker installation", "ios setup", "android setup"]
 ---
 
 ```mdx-code-block

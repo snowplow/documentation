@@ -1,7 +1,10 @@
 ---
 title: "Resolving data model failures"
+sidebar_label: "Resolving data model failures"
 date: "2022-10-14"
 sidebar_position: 200
+description: "Troubleshoot and resolve data model failures in Snowplow Console including debugging steps and common issues."
+keywords: ["data model failures", "dbt debugging", "model troubleshooting", "Console errors"]
 ---
 
 :::note

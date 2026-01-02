@@ -2,6 +2,8 @@
 position: 3
 title: "Understand the live shopper feature calculations"
 sidebar_label: "Understand the calculations"
+description: "Learn how rolling and session windows process Snowplow events in Flink to calculate product views, cart behavior, and session analytics metrics."
+keywords: ["flink window functions", "rolling window aggregations"]
 ---
 
 This section explains what is calculated, how each metric is updated, and where the values are stored.

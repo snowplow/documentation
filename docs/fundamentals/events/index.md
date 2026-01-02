@@ -3,6 +3,7 @@ title: "Introduction to Snowplow events"
 sidebar_label: "Events"
 sidebar_position: 1
 description: "An event is a central concept in Snowplow that represents something that occurred at a particular point in time"
+keywords: ["events", "self-describing events", "baked-in events", "event types"]
 ---
 
 Events are the primary way to capture data with Snowplow. Every time something happens that you want to track, you can send an event to your Snowplow pipeline. Each event is a JSON object that describes what happened. Events flow through your pipeline where they're validated, enriched, and loaded into your data warehouse or lake for analysis.

@@ -1,7 +1,8 @@
 ---
-title: "Configuring Kafka as a Snowbridge source"
+title: "Configure Kafka as a Snowbridge source"
 sidebar_label: "Kafka"
-description: "Read data from a Kafka topic."
+description: "Configure Kafka source for Snowplow Snowbridge to read data from Kafka topics with authentication and consumer group settings."
+keywords: ["snowbridge config", "kafka source", "kafka consumer", "kafka topic", "kafka config"]
 ---
 
 ```mdx-code-block

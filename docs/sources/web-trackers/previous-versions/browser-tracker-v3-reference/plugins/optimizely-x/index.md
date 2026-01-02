@@ -2,6 +2,8 @@
 title: "Optimizely X"
 date: "2021-04-07"
 sidebar_position: 14000
+description: "Documentation for Optimizely X in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

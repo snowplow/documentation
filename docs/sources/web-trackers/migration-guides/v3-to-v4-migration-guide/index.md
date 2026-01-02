@@ -1,6 +1,9 @@
 ---
 title: "Migrating from web trackers v3 to v4"
 sidebar_label: "Migrating from v3 to v4"
+description: "Upgrade to JavaScript tracker v4 with changes to cookie handling, async behavior, and plugin updates."
+keywords: ["v3 to v4 migration", "tracker upgrade", "cookie domain", "async cookies", "fetch api"]
+date: "2021-03-24"
 sidebar_position: 1100
 ---
 

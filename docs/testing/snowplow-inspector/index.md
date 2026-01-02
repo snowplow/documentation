@@ -1,7 +1,9 @@
 ---
-title: "Snowplow Inspector browser extension"
+title: "Debug web tracking with the Snowplow Inspector browser extension"
 sidebar_position: 1
-description: "Snowplow Inspector is a useful tool for debugging Snowplow events on web-pages and more"
+sidebar_label: "Snowplow Inspector"
+description: "Validate and debug Snowplow web tracking using the Inspector browser extension. View events, attributes, and interventions in real-time with schema validation support for Chrome, Edge, and Firefox."
+keywords: ["snowplow inspector", "browser extension", "event debugging", "web tracking validation", "chrome extension"]
 ---
 
 Snowplow recommends using the Snowplow Inspector browser extension for validating your tracking code.

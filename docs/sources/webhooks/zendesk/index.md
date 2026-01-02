@@ -3,6 +3,8 @@ title: "Zendesk webhook"
 sidebar_label: "Zendesk"
 date: "2020-02-26"
 sidebar_position: 150
+description: "Track Zendesk ticket events and user context data including ticket creation, updates, and associated requester, assignee, and submitter information."
+keywords: ["zendesk webhook integration", "zendesk ticket tracking", "zendesk support events"]
 ---
 
 You can configure Zendesk to automatically send `POST` requests to a (Clojure or Scala) collector. The first step is to set up a Zendesk "extension" pointing at the collector.

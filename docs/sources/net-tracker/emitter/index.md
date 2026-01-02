@@ -1,8 +1,10 @@
 ---
-title: "Configuring emitters in the .NET tracker"
+title: "Configure emitters in the .NET tracker"
 sidebar_label: "Emitter"
 date: "2020-02-26"
 sidebar_position: 40
+description: "Configure the emitter for sending and storing events with async processing, persistent storage, and collector endpoints."
+keywords: [".net emitter configuration", "event storage", "async emitter"]
 ---
 
 These instructions are for Snowplow.Tracker (.NET Standard) or Snowplow.Tracker.PlatformExtensions (PCL).

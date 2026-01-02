@@ -1,7 +1,8 @@
 ---
-title: "Configuring Kafka as a Snowbridge target"
+title: "Configure Kafka as a Snowbridge target"
 sidebar_label: "Kafka"
-description: "Write data to a Kafka topic."
+description: "Configure Kafka target for Snowplow Snowbridge to write data to Kafka topics with SASL authentication and TLS encryption."
+keywords: ["snowbridge config", "kafka target", "kafka producer", "sasl authentication", "kafka topic"]
 ---
 
 ```mdx-code-block

@@ -1,7 +1,9 @@
 ---
-title: "Amending schemas"
-description: "Fixing a mistake in an existing schema version"
+title: "Amend schemas to fix mistakes"
+sidebar_label: "Amending schemas"
 sidebar_position: 40
+description: "Fix mistakes in existing schema versions by amending them, with guidelines on when amendments are appropriate and how to handle production schemas."
+keywords: ["schema amendments", "fix schema mistakes", "schema corrections", "patch schemas"]
 ---
 
 ```mdx-code-block

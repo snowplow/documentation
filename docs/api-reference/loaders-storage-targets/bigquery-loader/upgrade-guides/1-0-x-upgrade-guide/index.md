@@ -1,8 +1,10 @@
 ---
-title: "BigQuery Loader v1.0.x upgrade guide"
+title: "BigQuery Loader 1.0.x upgrade guide"
 sidebar_label: "1.0.x upgrade guide"
 date: "2021-10-07"
 sidebar_position: 0
+description: "Upgrade BigQuery Loader from 0.6.x to 1.0.x with HOCON config, new load_tstamp field, and StreamLoader migration steps."
+keywords: ["bigquery 1.0 upgrade", "streamloader migration", "hocon config", "load_tstamp", "bigquery upgrade"]
 ---
 
 ## Configuration

@@ -1,6 +1,8 @@
 ---
 title: "Activity (page pings)"
 sidebar_position: 30
+description: "Documentation for Activity (page pings) in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

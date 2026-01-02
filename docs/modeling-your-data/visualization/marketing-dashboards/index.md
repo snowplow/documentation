@@ -1,7 +1,9 @@
 ---
-title: "User and Marketing Analytics"
+title: "User and Marketing Analytics visualization"
 sidebar_position: 2
 sidebar_label: "User and Marketing Analytics"
+description: "User and marketing analytics visualization with dashboards for acquisition, traffic sources, retention, and engagement metrics."
+keywords: ["user analytics", "marketing analytics", "user acquisition", "engagement metrics"]
 ---
 
 The User and Marketing Analytics visualization contains all the visuals you need to perform a high level analysis of your web and mobile performance. This includes dashboards covering:

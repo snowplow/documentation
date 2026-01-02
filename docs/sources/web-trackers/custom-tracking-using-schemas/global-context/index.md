@@ -1,6 +1,8 @@
 ---
 title: "Global context for web trackers"
 sidebar_label: "Global context"
+description: "Define context entities once and automatically attach them to all tracked events using global context."
+keywords: ["global context", "context generators", "filter functions", "rulesets"]
 date: "2022-08-30"
 sidebar_position: 20
 ---

@@ -5,4 +5,6 @@ date: "2022-03-25"
 sidebar_position: 10000
 sidebar_custom_props:
   outdated: true
+description: "Documentation for older versions of the Java tracker for reference and legacy implementations."
+keywords: ["java tracker legacy", "previous versions"]
 ---

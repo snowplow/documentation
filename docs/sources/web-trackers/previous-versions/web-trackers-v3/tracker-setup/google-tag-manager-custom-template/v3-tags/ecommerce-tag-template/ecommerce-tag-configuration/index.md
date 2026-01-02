@@ -1,6 +1,8 @@
 ---
 title: "Ecommerce Tag Configuration"
 sidebar_position: 100
+description: "Documentation for Ecommerce Tag Configuration in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

@@ -1,6 +1,8 @@
 ---
-title: "jqFilter"
-description: "Filters messages based on the output of a jq command."
+title: "Snowbridge jqFilter transformation"
+sidebar_label: "jqFilter"
+description: "Filter messages using jq commands that return boolean results to keep or discard messages, with Snowbridge."
+keywords: ["snowbridge config", "jq filter", "json filter", "conditional filtering", "jq boolean"]
 ---
 
 ```mdx-code-block

@@ -1,7 +1,10 @@
 ---
 title: "Sending events"
+sidebar_label: "Sending events"
 date: "2020-12-02"
 sidebar_position: 20
+description: "Track self-describing events, structured events, page views, errors, and ecommerce transactions in Scala tracker 1.0.0 with custom contexts and timestamps."
+keywords: ["scala 1.0 events", "self-describing events", "ecommerce tracking"]
 ---
 
 ### `trackSelfDescribingEvent`

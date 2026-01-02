@@ -1,8 +1,10 @@
 ---
-title: "Initializing the Unity tracker"
+title: "Initialize the Unity tracker"
 sidebar_label: "Initialization"
 date: "2020-02-26"
 sidebar_position: 20
+description: "Import required libraries and create tracker instances with emitters in Unity projects across platforms including WebGL."
+keywords: ["unity tracker initialization", "unity tracker setup", "webglemitter initialization"]
 ---
 
 Assuming you have completed the Unity Tracker Setup for your project, you are now ready to initialize the Unity Tracker.

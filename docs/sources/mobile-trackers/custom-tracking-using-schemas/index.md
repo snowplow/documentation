@@ -1,8 +1,10 @@
 ---
-title: "Custom event tracking in the native mobile trackers"
+title: "Track custom events with the native mobile trackers"
 sidebar_label: "Custom event tracking"
 date: "2022-08-30"
 sidebar_position: 20
+description: "Track custom self-describing events and attach context entities using JSON schemas in mobile applications."
+keywords: ["custom events", "self-describing events", "context entities"]
 ---
 
 ```mdx-code-block

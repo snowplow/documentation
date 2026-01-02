@@ -3,6 +3,8 @@ title: "Tracking events with the Roku tracker"
 sidebar_label: "Tracking events"
 date: "2021-11-16"
 sidebar_position: 2000
+description: "Track self-describing events, structured events, and screen views with the Roku tracker SDK including automatic install event tracking."
+keywords: ["roku event tracking", "self-describing events", "screen view tracking"]
 ---
 
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your apps.

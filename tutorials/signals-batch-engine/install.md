@@ -2,7 +2,8 @@
 position: 2
 title: Install the Signals Python SDK with batch engine CLI
 sidebar_label: Install the CLI
-description: "Install the Snowplow Signals batch engine CLI tool, and configure environment variables for warehouse attribute processing."
+description: "Install the Snowplow Signals batch engine CLI tool with Python pip, and configure environment variables for API authentication and warehouse attribute processing."
+keywords: ["signals python sdk", "batch engine cli installation"]
 ---
 
 Choose where to generate your Signals dbt models. We recommend creating a new repository.

@@ -1,8 +1,10 @@
 ---
-title: "Event specifications"
+title: "Event specifications define how to track user behavior "
 sidebar_label: "Event specifications"
 sidebar_position: 4
 date: "2025-11-14"
+description: "Define complete structure and requirements for events in your behavioral data pipeline, serving as data contracts between teams with business metadata and implementation requirements."
+keywords: ["event specifications", "data contracts", "event schemas", "entity schemas", "tracking requirements"]
 ---
 
 Event specifications define the complete structure and requirements for [events](/docs/fundamentals/events/index.md) in your behavioral data pipeline. They serve as the single source of truth for what data should be collected, how it should be structured, and what business meaning it carries.

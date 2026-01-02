@@ -2,6 +2,8 @@
 title: "Snowplow v3"
 date: "2021-11-18"
 sidebar_position: 100
+description: "Documentation for Snowplow v3 in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 This template implements the [Snowplow JavaScript tracker v3](/docs/sources/web-trackers/index.md).

@@ -2,6 +2,8 @@
 position: 5
 title: "Set up an abandoned browse campaign in Braze"
 sidebar_label: "Set up Braze campaign"
+description: "Learn how to create and configure an abandoned browse email campaign in Braze using product view data synced from Census. Set up triggers, templates, and test your campaign to re-engage users who viewed products but didn't purchase."
+keywords: ["braze abandoned browse", "email campaign setup", "marketing automation braze", "census braze integration"]
 ---
 
 This guide will walk you through setting up and testing an abandoned browse campaign in Braze using the product view data synced from Census.

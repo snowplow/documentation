@@ -1,7 +1,9 @@
 ---
-title: "Managing event specifications using Console"
+title: "Manage event specifications using Console UI"
 sidebar_label: "Using the UI"
 sidebar_position: 1
+description: "Create and manage event specifications in Snowplow Console UI as documented events within data products with data structures and implementation details."
+keywords: ["event specifications UI", "Console UI", "create event specifications", "event documentation"]
 ---
 
 ## Creating a new event specification through Console

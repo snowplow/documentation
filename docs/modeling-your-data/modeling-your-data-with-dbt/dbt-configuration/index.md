@@ -1,7 +1,8 @@
 ---
 title: "Configure Snowplow dbt packages"
 sidebar_label: "Configuration"
-description: "Information for the configuration of our dbt packages"
+description: "Configure Snowplow dbt packages, including warehouse-specific settings for Postgres, Spark, Databricks, and BigQuery."
+keywords: ["dbt configuration", "dbt variables", "Databricks Unity Catalog", "BigQuery partitioning"]
 sidebar_position: 40
 ---
 

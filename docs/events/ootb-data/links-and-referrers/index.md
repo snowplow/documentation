@@ -1,5 +1,8 @@
 ---
 title: "Referrers, deep links and cross-navigation events"
+sidebar_label: "Links and referrers"
+description: "Track page referrers, deep links in mobile apps, and cross-navigation links using message notification events."
+keywords: ["referrers", "deep links", "cross-navigation", "message notifications"]
 ---
 
 ```mdx-code-block

@@ -1,10 +1,11 @@
 ---
-title: "Contributor License Agreement"
+title: "Snowplow Contributor License Agreement"
 date: "2020-11-24"
 sidebar_position: 0
+sidebar_label: "Contributor License Agreement"
+description: "Understand the Snowplow Contributor License Agreement requirements for contributing code to Snowplow projects."
+keywords: ["CLA", "contributor agreement", "code contributions"]
 ---
-
-## Why we have a CLA
 
 As the project sponsor, Snowplow Analytics Ltd would like to ensure the long-term viability of Snowplow and its community. The Contributor License Agreement helps ensure everyone can enjoy Snowplow with confidence that Snowplow is here to stay.
 

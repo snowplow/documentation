@@ -1,8 +1,9 @@
 ---
-title: "Managing data structures with the Data Structures Builder"
-description: "The Data Structures Builder is ideal for quickly creating an event or entity with our guided setup and automated versioning."
+title: "Create data structures with the builder"
 sidebar_label: "Console: data structures builder"
 sidebar_position: 1
+description: "Quickly create events or entities with guided setup and automated versioning using the Data Structures Builder for simple property types."
+keywords: ["data structures builder", "schema builder", "guided setup", "automated versioning", "Console builder"]
 ---
 
 :::info Supported properties

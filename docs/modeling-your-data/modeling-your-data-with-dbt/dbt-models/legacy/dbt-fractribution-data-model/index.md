@@ -1,7 +1,8 @@
 ---
 title: "Snowplow Fractribution dbt package"
 sidebar_label: "Fractribution"
-description: "The Snowplow Fractribution dbt Package"
+description: "Legacy Fractribution dbt package for marketing attribution analysis. Superseded by the Attribution package."
+keywords: ["fractribution legacy", "legacy attribution", "deprecated fractribution"]
 sidebar_position: 900
 ---
 

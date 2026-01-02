@@ -1,7 +1,10 @@
 ---
 title: "Initialization"
+sidebar_label: "Initialization"
 date: "2020-02-26"
 sidebar_position: 20
+description: "Initialize Python tracker v0.15 using the Snowplow class or Tracker, Emitter, and Subject classes with namespace and endpoint configuration."
+keywords: ["python tracker v0.15 initialization", "snowplow class setup", "tracker configuration"]
 ---
 
 Assuming you have completed the Python Tracker Setup for your Python project, you are now ready to initialize the Python Tracker.

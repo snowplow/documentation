@@ -1,7 +1,9 @@
 ---
-title: "Visualizations"
+title: "Data model visualizations"
 sidebar_position: 8
 sidebar_label: "Visualizations"
+description: "Overview of Snowplow visualization templates including ecommerce, attribution, media, and marketing analytics."
+keywords: ["data visualization", "Snowplow dashboards", "analytics visualizations", "BI templates"]
 ---
 
 ```mdx-code-block

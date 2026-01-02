@@ -1,6 +1,8 @@
 ---
 title: "JavaScript (tag) tracker v2"
 sidebar_position: 2000
+description: "Documentation for tracking JavaScript (tag) er v2 with the web tracker."
+keywords: ["tracking", "events"]
 ---
 
 ```mdx-code-block

@@ -3,6 +3,7 @@ title: "Introduction to Snowplow entities"
 sidebar_label: "Entities (context)"
 sidebar_position: 2
 description: "Entities are a good way to deal with common fields across various events"
+keywords: ["entities", "context", "contextual data", "custom entities"]
 ---
 
 When you track an action or behavior, the information about the objects, users, and context in which the action occurred is just as important as the action itself. In Snowplow tracking, we use entities to capture this contextual data. They're reusable building blocks that make your tracking easier to implement, and your data easier to analyze.

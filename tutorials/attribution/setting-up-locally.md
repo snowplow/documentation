@@ -2,6 +2,8 @@
 title: "Set up the Attribution dbt package locally"
 sidebar_label: "Set up locally"
 position: 4
+description: "Install and configure the Snowplow Attribution dbt package locally. Set up conversion sources, attribution models, and generate channel and campaign attribution tables for marketing analysis."
+keywords: ["attribution dbt local setup", "dbt package installation", "attribution model configuration", "snowplow attribution setup"]
 ---
 
 

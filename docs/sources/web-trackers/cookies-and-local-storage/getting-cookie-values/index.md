@@ -1,5 +1,9 @@
 ---
-title: "Getting cookie information to use in web tracking"
+title: "Get cookie information to use in web tracking"
+sidebar_label: "Getting cookie information to use in web tracking"
+description: "Retrieve domain user ID, session ID, and other cookie values from the tracker for use in your application."
+keywords: ["get cookie values", "domain userid", "session id", "cookie retrieval"]
+date: "2021-04-07"
 sidebar_position: 500
 ---
 

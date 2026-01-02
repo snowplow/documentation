@@ -2,6 +2,8 @@
 title: "Consent and GDPR tracking (original)"
 sidebar_label: "Original"
 sidebar_position: 100
+description: "Documentation for tracking Consent and GDPR  (original) with the web tracker."
+keywords: ["tracking", "events"]
 ---
 
 ```mdx-code-block

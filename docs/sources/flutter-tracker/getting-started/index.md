@@ -1,8 +1,10 @@
 ---
-title: "Getting started with the Flutter tracker"
+title: "Get started with the Flutter tracker"
 sidebar_label: "Getting started"
 date: "2022-01-31"
 sidebar_position: 10
+description: "Install the Snowplow Flutter tracker from pub.dev and initialize tracking in your Flutter app. Create a tracker instance with namespace and collector endpoint to track events across Web, Android, and iOS platforms."
+keywords: ["flutter installation", "flutter setup", "flutter pub add", "tracker initialization", "snowplow_tracker package"]
 ---
 
 ```mdx-code-block

@@ -1,7 +1,10 @@
 ---
-title: "Iglu Repositories"
+title: "Introduction to Iglu repositories for schema storage"
+sidebar_label: "Repositories"
 date: "2021-03-26"
 sidebar_position: 20
+description: "Remote and embedded Iglu repositories for storing and serving JSON schemas via HTTP or embedded in JVM applications."
+keywords: ["iglu repositories", "schema storage", "iglu server", "static repo"]
 ---
 
 An Iglu repository acts as a store of data schemas (currently JSON Schemas only). Hosting JSON Schemas in an Iglu repository allows you to use those schemas in Iglu-capable systems such as Snowplow.
@@ -21,11 +24,11 @@ In this diagram we show an Iglu client resolving a schema from Iglu Central, one
 
 We currently have two Iglu "repo" technologies available for deploying your Iglu repository - follow the links to find out more:
 
-| **Repository** | **Category** | **Description** | **Status** |
-| --- | --- | --- | --- |
-| Iglu Server | Remote | An Iglu repository server structured as a RESTful API | Production-ready |
-| Static repo | Remote | An Iglu repository server structured as a static website | Production-ready |
-| JVM-embedded repo | Embedded | An Iglu repository embedded in a Java or Scala application | Production-ready |
+| **Repository**    | **Category** | **Description**                                            | **Status**       |
+| ----------------- | ------------ | ---------------------------------------------------------- | ---------------- |
+| Iglu Server       | Remote       | An Iglu repository server structured as a RESTful API      | Production-ready |
+| Static repo       | Remote       | An Iglu repository server structured as a static website   | Production-ready |
+| JVM-embedded repo | Embedded     | An Iglu repository embedded in a Java or Scala application | Production-ready |
 
 ## Iglu Central
 

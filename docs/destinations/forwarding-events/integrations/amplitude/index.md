@@ -1,7 +1,9 @@
 ---
-title: "Amplitude"
-description: "Send Snowplow events to Amplitude for product analytics and behavioral insights using the HTTP API v2 with support for event tracking and user properties."
+title: "Forward events to Amplitude"
+sidebar_label: "Amplitude"
 sidebar_position: 1
+description: "Send Snowplow events to Amplitude for product analytics and behavioral insights using the HTTP API v2 with support for event tracking and user properties."
+keywords: ["Amplitude", "product analytics", "behavioral insights", "HTTP API", "user properties", "event forwarding"]
 ---
 
 ```mdx-code-block

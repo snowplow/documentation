@@ -1,9 +1,10 @@
 ---
-title: "Snowplow events"
-description: ""
+title: "Overview of Snowplow events"
+description: "Links to information about Snowplow event types, custom tracking, and out-of-the-box data collection capabilities."
 date: "2020-02-26"
 sidebar_label: "Events"
 sidebar_position: 3.5
+keywords: ["events", "custom events", "tracking", "out-of-the-box data"]
 ---
 
 This section gives an overview of the different kinds of Snowplow events, as well as general tracking concepts.

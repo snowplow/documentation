@@ -1,7 +1,10 @@
 ---
 title: "Tracking Events"
+sidebar_label: "Tracking Events"
 date: "2021-04-07"
 sidebar_position: 4000
+description: "Track page views, screen views, and custom events with Node.js tracker v3."
+keywords: ["node.js tracker v3 events", "event tracking"]
 ---
 
 ## Tracking specific events

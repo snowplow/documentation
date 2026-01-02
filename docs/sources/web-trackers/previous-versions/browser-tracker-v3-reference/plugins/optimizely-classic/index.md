@@ -2,6 +2,8 @@
 title: "Optimizely Classic"
 date: "2021-04-07"
 sidebar_position: 13000
+description: "Documentation for Optimizely Classic in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

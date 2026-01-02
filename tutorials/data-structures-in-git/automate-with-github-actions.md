@@ -2,6 +2,8 @@
 title: "Automate data structure workflows with GitHub Actions"
 sidebar_label: "Automate with GitHub Actions"
 position: 4
+description: "Set up GitHub Actions workflows to automatically validate pull requests and publish data structures to development and production environments."
+keywords: ["github actions snowplow cli", "automated data structure deployment"]
 ---
 
 We'll not go into the details of creating github repositories and initial commits here, the [github docs](https://docs.github.com/) do an excellent job of that already. The next few steps will assume a working github repository containing the directory and data structure we created in the previous section. It will have two branches named `main` and `develop` which should be in sync.

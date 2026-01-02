@@ -1,6 +1,8 @@
 ---
 title: "Timings"
 sidebar_position: 98
+description: "Documentation for Timings in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

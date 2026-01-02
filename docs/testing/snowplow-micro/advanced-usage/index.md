@@ -1,8 +1,9 @@
 ---
-title: "Advanced usage of Snowplow Micro"
+title: "Configure additional Snowplow Micro settings"
 sidebar_label: "Advanced usage"
 sidebar_position: 6
-description: "How to configure more aspects of Snowplow Micro."
+description: "Enable HTTPS with SSL/TLS certificates, add custom Iglu resolver configurations, and modify collector settings. Advanced configuration options for Snowplow Micro using bind mounts and environment variables."
+keywords: ["micro advanced", "https configuration", "iglu resolver", "collector config", "ssl certificate"]
 ---
 
 ```mdx-code-block

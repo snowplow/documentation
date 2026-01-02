@@ -1,8 +1,10 @@
 ---
-title: "Snowbridge sources"
+title: "Introduction to Snowbridge sources"
 sidebar_label: "Sources"
 date: "2022-10-20"
 sidebar_position: 200
+description: "Configure Snowbridge sources to retrieve data from streams and forward them for processing with acking and concurrency controls."
+keywords: ["snowbridge sources", "stream sources", "concurrent writes", "message acking"]
 ---
 
 Sources deal with retrieving data from the input stream, and forwarding it for processing — once messages are either filtered or successfully sent, they are then acked (if the source technology supports acking). Otherwise, messages will be retrieved again by the source. Sources also have a setting which controls concurrency for the instance — `concurrent_writes`.

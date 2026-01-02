@@ -1,6 +1,8 @@
 ---
-title: "Examples"
-description: "Example custom models"
+title: "Example custom dbt models"
+sidebar_label: "Examples"
+description: "Example custom models for Snowplow dbt packages including derived tables, aggregations, and sessionization patterns."
+keywords: ["custom model examples", "dbt examples", "Snowplow customization examples"]
 sidebar_position: 10
 ---
 

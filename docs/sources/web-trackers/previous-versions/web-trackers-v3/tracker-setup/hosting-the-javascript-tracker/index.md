@@ -2,6 +2,8 @@
 title: "Hosting the JavaScript tracker"
 date: "2021-03-24"
 sidebar_position: 3200
+description: "Documentation for tracking Hosting the JavaScript er with the web tracker."
+keywords: ["tracking", "events"]
 ---
 
 We recommend self-hosting the Snowplow JavaScript tracker, `sp.js`, as it has some definite advantages over using a third-party-hosted JavaScript:

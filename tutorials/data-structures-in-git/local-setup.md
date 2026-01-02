@@ -2,6 +2,8 @@
 title: "Create a local data structure with Snowplow CLI"
 sidebar_label: "Create a local data structure"
 position: 2
+description: "Generate a new data structure locally using Snowplow CLI with vendor and schema information in YAML format."
+keywords: ["snowplow cli generate command", "data structure yaml format"]
 ---
 
 Firstly we'll need a place to put things.

@@ -1,8 +1,9 @@
 ---
-title: "Defining attribute groups in Console"
+title: "Define attribute groups in Console"
 sidebar_position: 1
 sidebar_label: "Attribute groups"
-description: "Create and manage attribute groups to define behavioral data calculations from real-time streams or warehouse sources."
+description: "Define attribute groups to calculate behavioral data from real-time event streams, batch warehouse tables, or external sources. Configure attributes, attribute keys, TTL lifetimes, and test definitions before publishing."
+keywords: ["attribute groups", "stream attributes", "batch attributes", "attribute keys", "ttl"]
 ---
 
 Define the behavior you want to capture in [attribute groups](/docs/signals/concepts/index.md#attribute-groups). Choose whether to calculate attributes from your event stream or warehouse.
@@ -19,7 +20,7 @@ The first step is to specify:
 
 ## Data source
 
-:::note Warehouse Connection 
+:::note Warehouse Connection
 A warehouse connection is required to create `Batch` and `External Batch` attributes.
 :::
 
@@ -87,7 +88,7 @@ If Signals then processes a new event that calculates the attribute again, or ma
 
 ## Testing the attribute definitions
 
-:::note Warehouse Connection 
+:::note Warehouse Connection
 A warehouse connection is required to test attribute definitions.
 :::
 

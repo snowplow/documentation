@@ -1,7 +1,10 @@
 ---
-title: "Setup Guide for AWS"
+title: "Set up Snowplow Mini on AWS"
+sidebar_label: "AWS setup guide"
 date: "2021-05-11"
 sidebar_position: 1
+description: "Deploy Snowplow Mini on AWS for a single-instance testing environment."
+keywords: ["snowplow mini", "aws setup", "mini deployment"]
 ---
 
 ```mdx-code-block

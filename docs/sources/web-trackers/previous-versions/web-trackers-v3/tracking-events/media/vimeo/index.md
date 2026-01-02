@@ -1,6 +1,8 @@
 ---
 title: "Vimeo"
 sidebar_position: 15
+description: "Documentation for Vimeo in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

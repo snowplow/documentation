@@ -1,7 +1,10 @@
 ---
-title: "Setup Guide for GCP"
+title: "Set up Snowplow Mini on GCP"
+sidebar_label: "GCP setup guide"
 date: "2021-05-11"
 sidebar_position: 2
+description: "Deploy Snowplow Mini on GCP for a single-instance testing environment."
+keywords: ["snowplow mini", "gcp setup", "mini deployment"]
 ---
 
 ```mdx-code-block

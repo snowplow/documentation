@@ -1,7 +1,9 @@
 ---
-title: "Integrating with your event specifications on web"
+title: "Integrate with your event specifications on web"
 sidebar_label: "Event specifications"
 sidebar_position: 115
+description: "Integrate with Event Specifications from Data Products to automatically add event specification context to matching events."
+keywords: ["event specifications", "data products"]
 ---
 
 ```mdx-code-block

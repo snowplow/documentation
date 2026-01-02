@@ -1,5 +1,5 @@
 ---
-title: "Data Product Studio"
+title: "Event data management with Data Product Studio"
 date: "2020-02-15"
 sidebar_position: 3
 sidebar_label: "Data Product Studio"

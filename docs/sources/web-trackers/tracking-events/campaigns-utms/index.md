@@ -1,7 +1,9 @@
 ---
-title: "Tracking campaigns and UTMs on web"
+title: "Track campaigns and UTMs on web"
 sidebar_label: "Campaigns and UTMs"
 sidebar_position: 90
+description: "Identify traffic sources from paid and organic campaigns using UTM parameters and referrer analysis for marketing attribution."
+keywords: ["utm parameters", "campaign tracking"]
 ---
 
 ```mdx-code-block

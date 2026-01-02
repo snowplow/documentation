@@ -2,6 +2,8 @@
 title: "Migration guide for Attribution"
 sidebar_label: "Attribution"
 sidebar_position: 20
+description: "Migration guide for upgrading the Snowplow Attribution dbt package including breaking changes and configuration updates."
+keywords: ["attribution migration", "attribution upgrade", "dbt attribution version"]
 ---
 
 ### Upgrading to 0.5.0

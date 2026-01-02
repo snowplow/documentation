@@ -2,6 +2,8 @@
 title: "Optional: Integrate marketing spend for attribution ROAS"
 sidebar_label: "Optional: Integrate marketing spend"
 position: 7
+description: "Integrate marketing spend data with the Attribution package to calculate ROAS (return on ad spend). Configure spend sources by channel and campaign for comprehensive attribution analysis."
+keywords: ["attribution roas calculation", "marketing spend integration", "dbt spend source", "channel spend tracking"]
 ---
 
 If you have marketing spend source data in your data warehouse then the Snowplow Attribution model package provides a configuration option that allows you to integrate your spend data with the `attribution_overview` view.

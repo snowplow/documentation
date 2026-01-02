@@ -1,7 +1,10 @@
 ---
-title: "Tracking application lifecycle changeswith the React Native tracker"
+title: "Track application lifecycle changeswith the React Native tracker"
 sidebar_label: "Application lifecycle"
+date: "2021-08-06"
 sidebar_position: 30
+description: "Automatically track foreground and background transitions with lifecycle events and attach lifecycle context entities to all events."
+keywords: ["react native lifecycle tracking", "foreground background events", "app state tracking"]
 ---
 
 ```mdx-code-block

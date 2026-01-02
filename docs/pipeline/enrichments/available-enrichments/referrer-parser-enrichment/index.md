@@ -1,7 +1,9 @@
 ---
-title: "Referer parser enrichment"
+title: "Referrer parser enrichment"
 sidebar_position: 3
-sidebar_label: Referer parser
+sidebar_label: Referrer parser
+description: "Extract attribution data from referrer URLs to identify traffic sources, search terms, and marketing channels."
+keywords: ["referrer parser", "traffic source", "attribution"]
 ---
 
 This enrichment uses [snowplow referer-parser](https://github.com/snowplow/referer-parser) library to extract attribution data from referer URLs.

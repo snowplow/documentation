@@ -1,8 +1,10 @@
 ---
-title: "Initializing the .NET tracker"
+title: "Initialize the .NET tracker"
 sidebar_label: "Initialization"
 date: "2020-02-26"
 sidebar_position: 20
+description: "Initialize and configure the .NET tracker with emitter, storage, and subject settings for event tracking."
+keywords: [".net tracker initialization", "tracker configuration", "emitter setup"]
 ---
 
 Assuming you have completed the .NET Tracker Setup for your project, you are now ready to initialize the .NET Tracker.

@@ -1,6 +1,9 @@
 ---
 title: "Tracking specific events"
+sidebar_label: "Tracking specific events"
 sidebar_position: 40
+description: "Track page views, ecommerce transactions, structured events, and self-describing events with Python tracker v0.15 using track methods."
+keywords: ["python tracker v0.15 events", "page view tracking", "ecommerce tracking"]
 ---
 
 As a Snowplow user, you have the access to a wide selection of event types and associated methods for tracking as well as the ability to define your own event types:

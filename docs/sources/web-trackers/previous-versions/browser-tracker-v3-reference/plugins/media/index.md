@@ -1,6 +1,8 @@
 ---
 title: "Snowplow Media"
 sidebar_position: 12500
+description: "Documentation for Snowplow Media in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

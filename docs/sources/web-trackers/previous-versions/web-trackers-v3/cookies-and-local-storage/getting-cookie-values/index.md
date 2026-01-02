@@ -1,6 +1,8 @@
 ---
 title: "Getting cookie information"
 sidebar_position: 500
+description: "Documentation for Getting cookie information in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

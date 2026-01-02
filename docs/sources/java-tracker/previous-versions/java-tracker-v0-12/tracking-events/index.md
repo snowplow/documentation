@@ -1,7 +1,10 @@
 ---
 title: "Tracking events"
+sidebar_label: "Tracking events"
 date: "2022-03-24"
 sidebar_position: 20
+description: "Track page views, screen views, and custom events with Java tracker version 0.12."
+keywords: ["event tracking v0.12", "page view tracking", "custom events"]
 ---
 
 To track an event, pass an `Event` instance to the `Tracker`.

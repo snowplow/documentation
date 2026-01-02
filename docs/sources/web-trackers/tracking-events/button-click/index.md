@@ -1,7 +1,9 @@
 ---
-title: "Tracking button clicks on web"
+title: "Track button clicks on web"
 sidebar_label: "Button clicks"
 sidebar_position: 50
+description: "Automatically track clicks on button elements and input buttons with configurable filtering and custom context entities."
+keywords: ["button tracking", "click events"]
 ---
 
 ```mdx-code-block

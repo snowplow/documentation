@@ -2,6 +2,8 @@
 title: "Plugins"
 date: "2021-04-07"
 sidebar_position: 3000
+description: "Plugin documentation for Plugins functionality in the tracker."
+keywords: ["plugin", "plugins"]
 ---
 
 ```mdx-code-block

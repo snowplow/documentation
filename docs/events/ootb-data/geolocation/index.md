@@ -1,5 +1,8 @@
 ---
 title: "Geolocation"
+sidebar_label: "Geolocation"
+description: "Track user location using IP-based geolocation enrichment or device GPS coordinates with the geolocation context entity."
+keywords: ["geolocation", "IP lookup", "GPS tracking", "location data"]
 ---
 
 ```mdx-code-block

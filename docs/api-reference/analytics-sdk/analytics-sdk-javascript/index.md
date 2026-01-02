@@ -1,7 +1,10 @@
 ---
-title: "Analytics SDK - JavaScript"
+title: "JavaScript and TypeScript Analytics SDK"
+sidebar_label: "JavaScript"
 date: "2021-10-18"
 sidebar_position: 200
+description: "Lightweight JavaScript and TypeScript library to transform Snowplow enriched TSV events into JSON for serverless functions and Node.js."
+keywords: ["javascript analytics sdk", "typescript", "snowplow nodejs", "aws lambda"]
 ---
 
 ## Overview

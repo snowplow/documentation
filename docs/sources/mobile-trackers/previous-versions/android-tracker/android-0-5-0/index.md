@@ -2,6 +2,9 @@
 title: "Android (0.5.0)"
 date: "2020-03-02"
 sidebar_position: 960
+sidebar_label: "Android (0.5.0)"
+description: "Legacy documentation for Android Tracker version 0.5.0."
+keywords: ["android 0.5.0", "tracker"]
 ---
 
 ## Tracker

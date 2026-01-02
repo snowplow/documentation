@@ -3,6 +3,7 @@ title: "First steps with Snowplow"
 sidebar_position: 1
 sidebar_label: "Get started"
 description: "Details on where and how Snowplow is deployed"
+keywords: ["Snowplow CDI", "Private Managed Cloud", "Cloud", "Community Edition", "Self-Hosted"]
 ---
 
 Choose the [Snowplow](https://snowplow.io) platform that works for your business. See the [feature comparison page](/docs/get-started/feature-comparison/index.md) for more information.

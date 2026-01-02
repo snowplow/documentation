@@ -1,7 +1,10 @@
 ---
-title: "Iglu Resolver"
+title: "Iglu Resolver configuration for Snowplow applications"
+sidebar_label: "Iglu Resolver"
 date: "2020-10-22"
 sidebar_position: 30
+description: "Configure Iglu Resolver for schema fetching and validation in Snowplow enrichers and loaders with cache and repository settings."
+keywords: ["iglu resolver", "resolver config", "schema fetching", "iglu client configuration"]
 ---
 
 Iglu Resolver is a component embedded into many Snowplow applications, including enrichers and loaders. It's responsible for fetching schemas from Iglu registries and validating data against these schemas.

@@ -1,6 +1,8 @@
 ---
-title: "Package mechanics"
+title: "Snowplow dbt package mechanics"
+sidebar_label: "Package mechanics"
 description: "Key mechanics of our packages"
+keywords: ["package mechanics", "dbt package logic", "incremental processing", "package internals"]
 sidebar_position: 70
 ---
 

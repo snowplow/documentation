@@ -1,7 +1,9 @@
 ---
-title: "Defining the data to collect with Data Products"
-sidebar_position: 5
+title: "Define the data to collect with data products"
 sidebar_label: "Data products"
+sidebar_position: 5
+description: "Create logical groupings of behavioral data by domain with explicit ownership, event specifications, and source applications to improve governance and collaboration across your organization."
+keywords: ["data products", "tracking plans","event specifications", "data ownership", "data governance", "tracking implementation"]
 ---
 
 As described in [Data Products Introduction](/docs/fundamentals/data-products/index.md), a data product is a logical grouping of the data you collect as an organisation by domain, with an explicit owner.

@@ -1,9 +1,9 @@
 ---
-title: "Organize data sources with Source Applications"
+title: "Organize data sources with source applications"
 date: "2020-02-15"
 sidebar_position: 2
 sidebar_label: "Source applications"
-description: "Document and manage your tracking implementation across different applications with Source Applications in Data Product Studio."
+description: "Document and manage your tracking implementation across different applications with source applications in Data Product Studio."
 keywords: ["source applications", "app id", "application entities", "global context", "data sources"]
 ---
 

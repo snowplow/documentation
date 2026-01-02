@@ -1,7 +1,9 @@
 ---
-title: "Our packages"
+title: "Snowplow dbt packages"
+sidebar_label: "Our packages"
 sidebar_position: 10
-description: "All Snowplow dbt packages"
+description: "Overview of Snowplow dbt packages including Unified Digital, Attribution, Ecommerce, Media Player, Normalize, and Utils."
+keywords: ["dbt packages", "Snowplow dbt", "data modeling packages", "dbt models", "snowplow data models"]
 ---
 
 Snowplow provides several dbt packages to help you get value from your data.

@@ -1,6 +1,8 @@
 ---
-title: "Users and Identity Stitching"
+title: "Users and identity stitching"
+sidebar_label: "Users and identity stitching"
 description: "Details on mapping between `domain_userid` and `user_id` in our packages."
+keywords: ["identity stitching", "user mapping", "user identifiers", "stitched user ID"]
 sidebar_position: 10
 ---
 ```mdx-code-block
@@ -75,9 +77,9 @@ vars:
 
 If you need a specific way to refer to a custom user you can also use the `snowplow_user_sql` variable, which will override any default or overwrites on `snowplow__user_identifiers`.
 
-Please note, however, that the `snowplow__user_identifiers` variable is not designed to handle user stitching the way you might expect it. Currently, there is a limitation that if any of the identifiers in the list do not persist throughout the session, there is no guarantee that the highest-prestige identifier (first in the list) will take precedence. 
+Please note, however, that the `snowplow__user_identifiers` variable is not designed to handle user stitching the way you might expect it. Currently, there is a limitation that if any of the identifiers in the list do not persist throughout the session, there is no guarantee that the highest-prestige identifier (first in the list) will take precedence.
 
-This is particularly relevant for those adding user_id as the first element in their list, as it may be NULL for some events within a session. For that it is best to rely on the package based user stitching logic, leave user_id as the `snowplow__user_stitching_id` and rely on the `stitched_user_id` field produced by the package in each derived tables as the main identifier field. This way even if the user logged in for some period of the time within a session the user_id field will be found and prioritized over the rest. 
+This is particularly relevant for those adding user_id as the first element in their list, as it may be NULL for some events within a session. For that it is best to rely on the package based user stitching logic, leave user_id as the `snowplow__user_stitching_id` and rely on the `stitched_user_id` field produced by the package in each derived tables as the main identifier field. This way even if the user logged in for some period of the time within a session the user_id field will be found and prioritized over the rest.
 
 Alternatively, to ensure a deterministic user selection, you could rely on the `snowplow_user_sql` variable instead to something like this:
 

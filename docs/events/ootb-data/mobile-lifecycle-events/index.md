@@ -1,5 +1,8 @@
 ---
 title: "Mobile app install and lifecycle events"
+sidebar_label: "Mobile lifecycle events"
+description: "Automatically track mobile app install, foreground, and background events with lifecycle entities for app usage analysis."
+keywords: ["app install", "app lifecycle", "foreground events", "background events", "mobile tracking"]
 ---
 
 ```mdx-code-block

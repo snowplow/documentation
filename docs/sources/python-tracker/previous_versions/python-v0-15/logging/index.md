@@ -1,7 +1,10 @@
 ---
 title: "Logging"
+sidebar_label: "Logging"
 date: "2020-02-26"
 sidebar_position: 80
+description: "Configure Python logging levels for tracker v0.15 emitters module to control debug, info, and error message output."
+keywords: ["python tracker v0.15 logging", "tracker debug", "log levels"]
 ---
 
 The emitters.py module has Python logging turned to give you information about requests being sent. The logger prints messages about what emitters are doing. By default, only messages with priority "INFO" or higher will be logged.

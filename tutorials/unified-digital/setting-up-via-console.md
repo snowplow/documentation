@@ -2,6 +2,8 @@
 title: "Set up the Unified Digital dbt package using Snowplow Console"
 sidebar_label: "Set up using Console"
 position: 3
+description: "Deploy the Unified Digital dbt package through Snowplow Console's fully managed service. Configure web and mobile data processing, enrichments, and scheduling through the Console interface."
+keywords: ["snowplow console data models", "managed dbt deployment"]
 ---
 
 

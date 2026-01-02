@@ -1,6 +1,8 @@
 ---
 title: "Errors"
 sidebar_position: 110
+description: "Documentation for Errors in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

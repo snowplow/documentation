@@ -1,6 +1,8 @@
 ---
-title: "Dispatch setup"
+title: "Dispatch setup for dbt packages"
+sidebar_label: "Dispatch setup"
 description: "Details on how to setup the dispatch order for macros"
+keywords: ["dbt dispatch", "macro dispatch", "dispatch order", "macro overrides"]
 sidebar_position: 30
 ---
 

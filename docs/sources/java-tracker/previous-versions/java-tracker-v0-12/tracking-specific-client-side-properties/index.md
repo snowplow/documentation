@@ -1,7 +1,10 @@
 ---
 title: "Tracking specific client-side properties"
+sidebar_label: "Tracking specific client-side properties"
 date: "2022-03-24"
 sidebar_position: 40
+description: "Add user properties and device information to events using the Subject class in Java tracker v0.12."
+keywords: ["subject class v0.12", "user properties", "client-side tracking"]
 ---
 
 An event describes a single, transient activity. The context in which that event occurs - the relatively persistent environment - is also incredibly valuable data. As discussed on the previous page, the most powerful way to track such data is to use [custom self-describing JSON entities](/docs/sources/java-tracker/previous-versions/java-tracker-v0-12/custom-tracking-using-schemas/index.md). These are sent as JSON in the raw event payload. Depending on your data warehouse, event context entities are loaded into their own tables, or remain as JSON in the loaded event.

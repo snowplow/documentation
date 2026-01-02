@@ -2,7 +2,8 @@
 position: 4
 title: Create attribute group projects using the batch engine CLI
 sidebar_label: Create projects
-description: "Initialize dbt projects for Snowplow Signals batch attribute groups, and set up the required folder structure."
+description: "Initialize separate dbt projects for each Snowplow Signals batch attribute group with automated folder structure and base configuration files."
+keywords: ["dbt project initialization", "batch attribute group setup"]
 ---
 
 Having tested the connection, you can now initialize your projects.

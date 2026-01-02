@@ -2,6 +2,8 @@
 title: "Cookie extractor enrichment"
 sidebar_position: 7
 sidebar_label: Cookie extractor
+description: "Extract name-value pairs from first-party cookies and attach them to events as derived contexts."
+keywords: ["cookie extraction", "first-party cookies", "cookie enrichment"]
 ---
 
 This enrichment extracts name-value pairs from cookies set on the collector domain, attaching them to the event as derived contexts.

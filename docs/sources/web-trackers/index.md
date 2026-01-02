@@ -1,5 +1,8 @@
 ---
-title: "Web trackers"
+title: "Web tracker SDKs"
+sidebar_label: "Web trackers"
+description: "Track user behavior on websites using the JavaScript tracker or Browser tracker with flexible plugins and tracking methods."
+keywords: ["javascript tracker", "browser tracker", "web tracking", "npm package"]
 date: "2021-03-24"
 sidebar_position: 100
 ---

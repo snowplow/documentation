@@ -1,7 +1,9 @@
 ---
-title: "Snowtype (Code generation) - automatically generate code for Snowplow tracking SDKs"
+title: "Generate tracking code with Snowtype"
+sidebar_label: "Snowtype (code generation)"
 sidebar_position: 6
-sidebar_label: "Snowtype (Code generation)"
+description: "Automatically generate type-safe tracking code from data structures and event specifications with compile-time validation, reducing implementation time and maintenance overhead."
+keywords: ["Snowtype", "code generation", "type-safe tracking", "automated SDK code", "tracking automation"]
 ---
 
 ```mdx-code-block

@@ -1,8 +1,10 @@
 ---
-title: "Configuring emitters in the Unity tracker"
+title: "Configure emitters in the Unity tracker"
 sidebar_label: "Emitter"
 date: "2020-02-26"
 sidebar_position: 50
+description: "Configure sync, async, and WebGL emitters to send and store Unity tracker events with customizable protocols, methods, and batch sizes."
+keywords: ["unity emitter configuration", "asyncemitter unity", "webgl emitter"]
 ---
 
 The Emitter object is responsible for sending and storing all events.
@@ -15,15 +17,15 @@ We provide the following emitters available currently:
 
 ### Constructor
 
-| **Argument Name** | **Description** | **Required?** | **Default** |
-| --- | --- | --- | --- |
-| `endpoint` | The collector uri the emitter should use | Yes | Null |
-| `protocol` | The request Protocol (HTTP or HTTPS) | No | HTTP |
-| `method` | The HTTP Method (GET or POST) | No | POST |
-| `sendLimit` | The amount of events to send at a time | No | 500 (AsyncEmitter) / 10 (SyncEmitter) / 1 (WebGlEmitter) |
-| `byteLimitGet` | The byte limit for a GET request | No | 52000 |
-| `byteLimitPost` | The byte limit for a POST request | No | 52000 |
-| `eventStore` | Implementation for storing queued events waiting to be sent | No | `InMemoryEventStore` on tvOS, otherwise `EventStore` (on-disk [LiteDB](https://www.litedb.org/)) |
+| **Argument Name** | **Description**                                             | **Required?** | **Default**                                                                                      |
+| ----------------- | ----------------------------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------ |
+| `endpoint`        | The collector uri the emitter should use                    | Yes           | Null                                                                                             |
+| `protocol`        | The request Protocol (HTTP or HTTPS)                        | No            | HTTP                                                                                             |
+| `method`          | The HTTP Method (GET or POST)                               | No            | POST                                                                                             |
+| `sendLimit`       | The amount of events to send at a time                      | No            | 500 (AsyncEmitter) / 10 (SyncEmitter) / 1 (WebGlEmitter)                                         |
+| `byteLimitGet`    | The byte limit for a GET request                            | No            | 52000                                                                                            |
+| `byteLimitPost`   | The byte limit for a POST request                           | No            | 52000                                                                                            |
+| `eventStore`      | Implementation for storing queued events waiting to be sent | No            | `InMemoryEventStore` on tvOS, otherwise `EventStore` (on-disk [LiteDB](https://www.litedb.org/)) |
 
 A full Emitter construction should look like the following:
 

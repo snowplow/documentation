@@ -1,7 +1,9 @@
 ---
-title: "Defining interventions in Signals"
+title: "Define interventions to trigger real-time actions with Signals"
 sidebar_position: 25
-description: "Configure and deploy interventions to trigger real-time actions based on user attribute changes in Snowplow Signals."
+sidebar_label: "Define interventions"
+description: "Create rule-based interventions with criteria and targeting to automatically trigger actions when attribute values change. Configure using Console UI, Python SDK, or API."
+keywords: ["interventions", "rule-based triggers", "intervention criteria", "attribute targeting"]
 ---
 
 [Interventions](/docs/signals/concepts/index.md#interventions) are automated triggers that enable real-time actions based on user behavior.

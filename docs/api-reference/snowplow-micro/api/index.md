@@ -1,7 +1,9 @@
 ---
-title: "REST API"
+title: "Snowplow Micro REST API"
+sidebar_label: "REST API"
 sidebar_position: 1
-description: Snowplow Micro REST API.
+description: "Snowplow Micro REST API endpoints for querying good events, bad events, and resetting cache."
+keywords: ["snowplow micro", "micro rest api", "micro endpoints"]
 ---
 
 ```mdx-code-block

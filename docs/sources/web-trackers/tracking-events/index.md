@@ -1,8 +1,10 @@
 ---
-title: "Tracking data out-of-the-box with the web trackers"
+title: "Track data out-of-the-box with the web trackers"
 sidebar_label: "Tracking data out-of-the-box"
 date: "2022-08-30"
 sidebar_position: 2500
+description: "Track page views, structured events, and self-describing events with automatic context entities and custom timestamps using the web trackers."
+keywords: ["tracking", "events"]
 ---
 
 ```mdx-code-block

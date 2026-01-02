@@ -1,7 +1,9 @@
 ---
-title: "Tracking ads on web"
+title: "Track ads on web"
 sidebar_label: "Ads"
 sidebar_position: 95
+description: "Track ad impressions, clicks, and conversions with support for various cost models across ad networks and campaigns."
+keywords: ["ad tracking", "impressions"]
 ---
 
 ```mdx-code-block

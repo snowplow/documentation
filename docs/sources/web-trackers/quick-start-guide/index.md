@@ -1,6 +1,8 @@
 ---
 title: "Quick start guide for the web trackers"
 sidebar_label: "Quick start guide"
+description: "Get started quickly with the JavaScript or Browser tracker to track page views and user activity on your website."
+keywords: ["quick start", "getting started", "setup guide", "page view tracking"]
 date: "2021-03-24"
 sidebar_position: 100
 ---

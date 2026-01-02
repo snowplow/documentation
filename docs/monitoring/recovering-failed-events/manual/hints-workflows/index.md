@@ -1,7 +1,10 @@
 ---
-title: "Hints and workflows"
+title: "Manual event recovery workflows"
 date: "2020-08-26"
 sidebar_position: 60
+sidebar_label: "Hints and workflows"
+description: "Explore data structures, build configurations, validate recovery flows, and test jobs locally using scripting utilities."
+keywords: ["recovery workflows", "recovery configuration tips"]
 ---
 
 Most of the following workflows come from testing/working with elaborate bad row structures and configurations and rely heavily on the supplied scripting utility. To set it up locally follow [scripting utility intro](/docs/monitoring/recovering-failed-events/manual/testing/index.md#scripting) or starting with an empty ammonite script file (ie. `test.sc`), set up Snowplow's repository and dependencies:

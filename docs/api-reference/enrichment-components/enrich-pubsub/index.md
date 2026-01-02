@@ -1,7 +1,10 @@
 ---
-title: "Enrich Pubsub (GCP)"
+title: "Enrich PubSub for Google Cloud"
+sidebar_label: "Enrich PubSub (GCP)"
 date: "2020-10-22"
 sidebar_position: 20
+description: "Standalone JVM application for enriching Snowplow events from Google Cloud PubSub with configurable enrichments and validation."
+keywords: ["enrich pubsub", "google cloud pubsub", "snowplow gcp"]
 ---
 
 ```mdx-code-block

@@ -2,6 +2,8 @@
 title: "Adding plugins to your tracker"
 date: "2021-04-19"
 sidebar_position: 500
+description: "Plugin documentation for Adding s to your tracker functionality in the tracker."
+keywords: ["plugin", "adding"]
 ---
 
 The Snowplow JavaScript Trackers v3 allow extension via plugins. There a number of official Snowplow plugins, but we also encourage building your own. You can either include them directly in your codebase or tag management tool, or you could publish them to npm as public packages that the whole community can use.

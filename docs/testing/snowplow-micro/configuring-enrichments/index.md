@@ -1,8 +1,9 @@
 ---
-title: "Configuring enrichments in Snowplow Micro"
+title: "Enable enrichments in Snowplow Micro"
 sidebar_label: "Configuring enrichments"
 sidebar_position: 3
-description: "How to add enrichments to Snowplow Micro."
+description: "Add enrichments to Snowplow Micro including YAUAA, IP Lookup, and JavaScript enrichment. Mount enrichment configuration files to test pipeline behavior locally."
+keywords: ["enrichments", "yauaa", "ip lookup enrichment", "javascript enrichment", "enrichment testing"]
 ---
 
 ```mdx-code-block

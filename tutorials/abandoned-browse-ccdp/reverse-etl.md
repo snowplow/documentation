@@ -2,6 +2,8 @@
 position: 4
 title: "Integrate with with Census using reverse ETL"
 sidebar_label: "Integrate with Census"
+description: "Set up Census reverse ETL to sync abandoned browse audiences from Snowflake to Braze. Configure data sources, create audience segments, and automate marketing campaign triggers."
+keywords: ["census reverse etl", "snowflake braze integration", "audience segmentation", "marketing automation sync"]
 ---
 
 Next we will set up a Census sync to build an audience using our query from Snowflake, filter the audience to focus on users who have shown interest in products but haven't purchased, and sync the data to Braze.

@@ -2,6 +2,8 @@
 position: 9
 title: Install Snowtype to enable code generation from data products
 sidebar_label: Install Snowtype
+description: "Install and initialize Snowtype CLI to generate tracking APIs from event specifications. Automatically attach event_specification entities and enable event count features without additional implementation work."
+keywords: ["snowtype cli installation", "code generation tracking", "event specification api", "console api key setup"]
 ---
 
 After defining your Event Specifications, the next step is implementing those events on your app. To do that you are going to use Snowtype to generate the required APIs for tracking the Event Specifications.

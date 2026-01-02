@@ -1,6 +1,9 @@
 ---
 title: "Private Managed Cloud on Azure"
+sidebar_label: "Azure setup guide"
 sidebar_position: 30
+description: "Set up Snowplow CDI Private Managed Cloud on Azure with subscription configuration, service principal permissions, and custom roles."
+keywords: ["Azure setup", "Private Managed Cloud", "Azure subscription", "service principal", "Azure permissions"]
 ---
 
 To set up Snowplow, log in to Snowplow [Console](https://console.snowplowanalytics.com) where you'll be able to follow a step-by-step guide to getting started, including the steps below.

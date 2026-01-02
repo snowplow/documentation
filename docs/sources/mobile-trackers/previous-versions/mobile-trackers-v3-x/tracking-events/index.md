@@ -2,6 +2,9 @@
 title: "Tracking Events"
 date: "2021-11-23"
 sidebar_position: 30
+sidebar_label: "Tracking Events"
+description: "Documentation for tracking events using Mobile Trackers v3.x."
+keywords: ["mobile tracker v3", "tracking events"]
 ---
 
 ```mdx-code-block

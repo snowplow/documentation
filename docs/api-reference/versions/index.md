@@ -1,7 +1,10 @@
 ---
-title: "Versions and compatibility"
+title: "Snowplow component versions and compatibility matrix"
+sidebar_label: "Versions and compatibility"
 date: "2021-04-29"
 sidebar_position: -1000
+description: "Latest versions of Snowplow components including collectors, enrichment, loaders, trackers, Iglu, data models, and analytics SDKs with compatibility and upgrade information."
+keywords: ["component versions", "version compatibility", "latest versions", "upgrade guides", "deprecation"]
 ---
 
 ```mdx-code-block

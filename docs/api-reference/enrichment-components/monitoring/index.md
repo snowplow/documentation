@@ -1,8 +1,10 @@
 ---
-title: "Monitoring Enrich"
+title: "Monitoring in Enrich applications"
 sidebar_label: "Monitoring"
 date: "2021-10-04"
 sidebar_position: 60
+description: "Monitor Snowplow Enrich applications with StatsD metrics for event counts, latency tracking, and health probes."
+keywords: ["enrich monitoring", "statsd", "enrichment metrics"]
 ---
 
 Enrich app has monitoring built in, to help the pipeline operator.

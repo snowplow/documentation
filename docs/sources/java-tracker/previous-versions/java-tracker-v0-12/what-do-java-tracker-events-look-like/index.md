@@ -1,7 +1,10 @@
 ---
 title: "What do Java tracker events look like?"
+sidebar_label: "What do Java tracker events look like?"
 date: "2022-03-24"
 sidebar_position: 60
+description: "Understand the structure of enriched events from Java tracker version 0.12 with example payloads."
+keywords: ["event structure v0.12", "event payload", "enriched events"]
 ---
 
 See [Tracking events](/docs/sources/java-tracker/previous-versions/java-tracker-v0-12/tracking-events/index.md) to learn how to track events with the Java tracker.

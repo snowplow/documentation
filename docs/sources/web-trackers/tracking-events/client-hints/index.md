@@ -1,7 +1,9 @@
 ---
-title: "Tracking client hints on web"
+title: "Track client hints on web"
 sidebar_label: "Client Hints"
 sidebar_position: 150
+description: "Capture browser information through Client Hints as an alternative to user-agent strings with basic and high-entropy options."
+keywords: ["client hints", "user-agent"]
 ---
 
 ```mdx-code-block

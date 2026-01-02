@@ -1,6 +1,8 @@
 ---
-title: "Installing the C++ tracker"
-sidebar_label: "Setup"
+title: "Install the C++ tracker"
+sidebar_label: "Installation"
+description: "Install the C++ tracker using CMake, FetchContent, or by copying source files. Supports macOS, Windows, and Linux with C++ 11 minimum. Configure dependencies including SQLite3, CURL, and LibUUID."
+keywords: ["c++ installation", "cmake", "fetchcontent", "cpp dependencies", "sqlite3"]
 date: "2020-02-25"
 sidebar_position: 10
 ---

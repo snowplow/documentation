@@ -2,6 +2,8 @@
 title: "Migration guide for Ecommerce"
 sidebar_label: "Ecommerce"
 sidebar_position: 30
+description: "Migration guide for upgrading the Snowplow Ecommerce dbt package including breaking changes and configuration updates."
+keywords: ["ecommerce migration", "ecommerce upgrade", "dbt ecommerce version"]
 ---
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

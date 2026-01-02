@@ -1,6 +1,8 @@
 ---
 title: "App errors in Mobile package"
 sidebar_label: "App errors"
+description: "App errors module for the legacy Mobile dbt package. Superseded by the Unified Digital App errors module."
+keywords: ["mobile app errors", "legacy app errors", "mobile error tracking"]
 sidebar_position: 100
 ---
 

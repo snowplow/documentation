@@ -1,8 +1,10 @@
 ---
-title: "Adding context and data to events in the Ruby tracker"
+title: "Add entities and other data to events with the Ruby tracker"
 sidebar_label: "Adding data to your events: context and more"
 date: "2021-10-19"
 sidebar_position: 20
+description: "Add event context entities, subject data with user and platform information, page data, and custom timestamps to Ruby tracker events."
+keywords: ["ruby event context", "subject configuration", "cookie-based identifiers"]
 ---
 
 ```mdx-code-block

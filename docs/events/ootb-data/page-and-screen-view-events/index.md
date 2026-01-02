@@ -1,5 +1,8 @@
 ---
 title: "Page and screen views"
+sidebar_label: "Page and screen views"
+description: "Track page views on web and screen views on mobile with page view IDs and screen context entities."
+keywords: ["page views", "screen views", "page view tracking", "screen tracking"]
 ---
 
 ```mdx-code-block

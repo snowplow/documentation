@@ -2,6 +2,8 @@
 title: "View the Unified Digital dbt package output data"
 sidebar_label: "View the output data"
 position: 4
+description: "Query and analyze the Unified Digital dbt package output tables including views, sessions, and users. Explore aggregated metrics, engagement time calculations, and user interaction data."
+keywords: ["dbt derived tables query", "snowplow sessions users analytics"]
 ---
 
 The output data can now be reviewed, focusing on the `views`, `sessions`, and `users` tables. These tables contain detailed records of key metrics and interactions.

@@ -2,6 +2,8 @@
 title: "Migration guide from version 4.x to 5.0"
 sidebar_label: "From version 4.x to 5.0"
 sidebar_position: -4
+description: "Migrate to mobile tracker version 5.0 with internal rewrite to Swift and Kotlin while maintaining minimal API changes."
+keywords: ["migration", "version 5.0", "swift kotlin rewrite"]
 ---
 
 Although the trackers underwent a huge internal rewrite (from Objective-C to Swift and from Java to Kotlin), we tried to keep the API with as little breaking changes as possible.

@@ -2,6 +2,8 @@
 title: "Javascript (tag) tracker"
 date: "2023-03-22"
 sidebar_position: 400
+description: "Documentation for tracking Javascript (tag) er with the web tracker."
+keywords: ["tracking", "events"]
 ---
 
 The [default releases](https://github.com/snowplow/snowplow-javascript-tracker/releases) of the JavaScript Tracker include a full-featured `sp.js` version, and a smaller-filesize `sp.lite.js` version that includes fewer [plugins](../../index.md).

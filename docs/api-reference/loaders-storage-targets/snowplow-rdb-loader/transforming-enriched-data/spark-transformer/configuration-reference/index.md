@@ -1,7 +1,10 @@
 ---
 title: "Spark transformer configuration reference"
+sidebar_label: "Spark transformer configuration reference"
 date: "2022-10-13"
 sidebar_position: 12
+description: "Configure Spark batch transformer with EMR settings, S3 paths, output formats, and deduplication options for warehouse loading."
+keywords: ["spark transformer config", "batch transformer config", "emr configuration", "deduplication config", "transformer settings"]
 ---
 
 ```mdx-code-block

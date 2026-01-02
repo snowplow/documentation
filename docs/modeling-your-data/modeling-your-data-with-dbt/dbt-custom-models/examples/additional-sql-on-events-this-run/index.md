@@ -1,6 +1,8 @@
 ---
 title: "Additional SQL on events this run"
-description: "Details on how to add sql to the events this run table"
+sidebar_label: "Additional SQL on events this run"
+description: "Add custom SQL to the events this run table using the snowplow__custom_sql variable for calculated fields and context extraction."
+keywords: ["events this run", "custom SQL", "snowplow__custom_sql", "extend events table"]
 sidebar_position: 40
 ---
 

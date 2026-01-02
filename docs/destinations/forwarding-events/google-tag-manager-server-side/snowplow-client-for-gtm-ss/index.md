@@ -1,7 +1,10 @@
 ---
-title: "Snowplow Client for GTM SS"
+title: "Snowplow Client for GTM Server Side"
+sidebar_label: "Snowplow Client for GTM SS"
 date: "2021-11-24"
 sidebar_position: 100
+description: "Receive Snowplow events in GTM Server Side containers with the Snowplow Client, which populates common event data and rich Snowplow properties for tags."
+keywords: ["Snowplow Client", "GTM SS Client", "event data", "tag properties"]
 ---
 
 To receive events in your GTM SS container, the Snowplow Client must be installed. This works for both events direct from the tracker, or enriched events from the pipeline.

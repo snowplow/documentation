@@ -1,7 +1,10 @@
 ---
 title: "Setup"
+sidebar_label: "Setup"
 date: "2020-12-02"
 sidebar_position: 0
+description: "Install Scala tracker version 1.0.0 from Maven Central or JCenter using sbt, Gradle, or Maven with http4s and id emitter modules."
+keywords: ["scala 1.0 installation", "maven central", "scala tracker 1.0.0"]
 ---
 
 The Tracker is published to Maven Central and JCenter, which should make it easy to add it as a dependency into your own Scala app.

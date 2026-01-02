@@ -1,7 +1,9 @@
 ---
-title: "Configuring emitters in the Python tracker"
+title: "Configure emitters in the Python tracker"
 sidebar_label: "Emitters"
 sidebar_position: 30
+description: "Configure emitters to send events to Snowplow collectors with batch size, retry logic, and async support using the Emitter and AsyncEmitter classes."
+keywords: ["python emitters", "asyncemitter", "batch processing"]
 ---
 
 Tracker instances must be initialized with an emitter. This section will go into more depth about the Emitter class and its subclasses.
@@ -38,28 +40,28 @@ def __init__(
     )-> None:
 ```
 
-| **Argument** | **Description** | **Required?** | **Type** | **Default** |
-| --- | --- | --- | --- | --- | 
-| `endpoint` | The collector URI | Yes | String | 
-| `protocol` | Request protocol: http or https | No | String | `https` | 
-| `port` | The port to connect to | No | Positive integer | `None` | 
-| `method` | The method to use: “get” or “post” | No | String | `post` | 
-| `batch_size` | Number of events to store before flushing | No | Positive integer | `10` | 
-| `on_success` | Callback executed when a flush is successful | No | Function taking 1 argument | `None` | 
-| `on_failure` | Callback executed when a flush is unsuccessful | No | Function taking 2 arguments | `None` |
-| `byte_limit` | Number of bytes to store before flushing | No | Positive integer | `None` |
-| `request_timeout` | Timeout for HTTP requests | No | Positive integer or tuple of 2 integers | `None` | 
-| `max_retry_delay_seconds` | The maximum time between attempts to send failed events to the collector | No | int | 60 | 
-| `buffer_capacity` | The maximum capacity of the event buffer | No | int | `None` |
-| `custom_retry_codes` | Custom retry rules for HTTP status codes received in emit responses from the Collector | No | dict | `None` | 
-| `event_store` | Stores the event buffer and buffer capacity | No | EventStore | `None`| 
-| `session` | Persist parameters across requests by using a session object | No | requests.Session | `None` | 
+| **Argument**              | **Description**                                                                        | **Required?** | **Type**                                | **Default** |
+| ------------------------- | -------------------------------------------------------------------------------------- | ------------- | --------------------------------------- | ----------- |
+| `endpoint`                | The collector URI                                                                      | Yes           | String                                  |
+| `protocol`                | Request protocol: http or https                                                        | No            | String                                  | `https`     |
+| `port`                    | The port to connect to                                                                 | No            | Positive integer                        | `None`      |
+| `method`                  | The method to use: “get” or “post”                                                     | No            | String                                  | `post`      |
+| `batch_size`              | Number of events to store before flushing                                              | No            | Positive integer                        | `10`        |
+| `on_success`              | Callback executed when a flush is successful                                           | No            | Function taking 1 argument              | `None`      |
+| `on_failure`              | Callback executed when a flush is unsuccessful                                         | No            | Function taking 2 arguments             | `None`      |
+| `byte_limit`              | Number of bytes to store before flushing                                               | No            | Positive integer                        | `None`      |
+| `request_timeout`         | Timeout for HTTP requests                                                              | No            | Positive integer or tuple of 2 integers | `None`      |
+| `max_retry_delay_seconds` | The maximum time between attempts to send failed events to the collector               | No            | int                                     | 60          |
+| `buffer_capacity`         | The maximum capacity of the event buffer                                               | No            | int                                     | `None`      |
+| `custom_retry_codes`      | Custom retry rules for HTTP status codes received in emit responses from the Collector | No            | dict                                    | `None`      |
+| `event_store`             | Stores the event buffer and buffer capacity                                            | No            | EventStore                              | `None`      |
+| `session`                 | Persist parameters across requests by using a session object                           | No            | requests.Session                        | `None`      |
 
 :::note
 If no `event_store` is provided, an `InMemoryEventStore` will be initialized with a `buffer_capacity` of 10,000
 :::
 
-See the [`API docs`](https://snowplow.github.io/snowplow-python-tracker/) for more information. 
+See the [`API docs`](https://snowplow.github.io/snowplow-python-tracker/) for more information.
 
 ### `protocol`
 
@@ -77,7 +79,7 @@ When the emitter receives an event, it adds it to a buffer. When the queue is fu
 
 `on_success` is an optional callback that will execute whenever the queue is flushed successfully, that is, whenever every request sent has status code 200. It will be passed one argument: an array of events that were successfully sent.
 
-### `on_failure` 
+### `on_failure`
 
 `on_failure` is similar, but executes when the flush is not wholly successful. It will be passed two arguments: the number of events that were successfully sent, and an array of unsent events.
 
@@ -96,7 +98,7 @@ def failure(num, arr):
     print("These events were not sent successfully:")
     for event_dict in arr:
         print(event_dict)
-     
+
 e = Emitter(endpoint="collector.example.com", buffer_size=3, on_success=new_success, on_failure=failure)
 
 t = Tracker(namespace="snowplow_tracker", emitter=e)
@@ -108,7 +110,7 @@ Timeout for HTTP requests. Can be set either as single float value which applies
 
 ### `max_retry_delay_seconds`
 
-The maximum time between attempts to send failed events to the collector. 
+The maximum time between attempts to send failed events to the collector.
 
 ### `buffer_capacity`
 
@@ -126,13 +128,13 @@ The event store is used to store an event queue with events scheduled to be sent
 The session object can be parsed into the emitter to use the requests.Session API. This allows users to persist parameters across requests, as well as pool connections to increase efficiency under heavy usage. If no `session` is parsed, the requests API is used.
 
 ## What happens if an event fails to send?
-After trying to send a batch of events the collector will return an http status code. A 2xx code is always considered successful. If a failure code is returned (anything other than 2xx, with certain exceptions, see below), the events (as PayloadDictList objects) are returned to the buffer. They will be retried in future sending attempts. 
+After trying to send a batch of events the collector will return an http status code. A 2xx code is always considered successful. If a failure code is returned (anything other than 2xx, with certain exceptions, see below), the events (as PayloadDictList objects) are returned to the buffer. They will be retried in future sending attempts.
 
 To prevent unnecessary requests being made while the collector is unavailable, an exponential backoff is added to all subsequent event sending attempts. This resets after a request is successful. The default maximum backoff time between attempts is 1 minute but this can be configured by setting `max_retry_delay_seconds`.
 
 The status codes 400 Bad Request, 401 Unauthorised, 403 Forbidden, 410 Gone, or 422 Unprocessable Entity are the exceptions: they are not retried by default. Payloads in requests receiving these responses are not returned to the buffer for retry. They are just deleted.
 
-Configure which codes to retry on or not using the `EmitterConfiguration` when creating your tracker. This method takes a dictionary of status codes and booleans (True for retry and False for not retry). 
+Configure which codes to retry on or not using the `EmitterConfiguration` when creating your tracker. This method takes a dictionary of status codes and booleans (True for retry and False for not retry).
 
 ```python
 # by default 401 isn't retried, but 500 is
@@ -148,11 +150,11 @@ Snowplow.create_tracker(
 ```
 
 ## Configuring how events are buffered
-As events are collected, the are stored in a buffer until there are enough to send. By default, tracked events are stored in the `InMemoryEventStore`. This is an implemenation of the `EventStore` protocol and stores payloads in a `List` object and is cleared once the buffer capacity is reached. 
+As events are collected, the are stored in a buffer until there are enough to send. By default, tracked events are stored in the `InMemoryEventStore`. This is an implemenation of the `EventStore` protocol and stores payloads in a `List` object and is cleared once the buffer capacity is reached.
 
 The default buffer capacity is 10,000 events. This is the number of events that can be stored. When the buffer is full, new tracked payloads are dropped, so choosing the right capacity is important. You can set the buffer capacity through the `EmitterConfiguration` object, for example:
 
-```python    
+```python
 emitter_config = EmitterConfiguration(buffer_capacity=25,000)
 
 Snowplow.create_tracker(
@@ -180,7 +182,7 @@ Here is a complete example with all constructor parameters set:
 from snowplow_tracker import AsyncEmitter
 
 e = AsyncEmitter(
-    endpoint="collector.example.com", 
+    endpoint="collector.example.com",
     protocol = "https",
     port=9090,
     method='post',

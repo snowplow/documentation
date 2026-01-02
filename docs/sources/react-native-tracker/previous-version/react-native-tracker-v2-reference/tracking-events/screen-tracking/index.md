@@ -1,6 +1,10 @@
 ---
 title: "Screen view tracking"
+sidebar_label: "Screen view tracking"
+date: "2021-08-06"
 sidebar_position: 40
+description: "Track screen views automatically with React Navigation or manually, enable screen context entities, and measure screen engagement with React Native tracker v2."
+keywords: ["react native tracker v2 screen tracking", "screen engagement", "navigation tracking"]
 ---
 
 ```mdx-code-block

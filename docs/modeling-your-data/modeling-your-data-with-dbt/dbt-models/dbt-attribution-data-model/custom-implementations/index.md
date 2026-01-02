@@ -1,6 +1,8 @@
 ---
-title: "Custom implementations"
-description: "Custom Implementations"
+title: "Custom Attribution implementations"
+sidebar_label: "Custom implementations"
+description: "Customize the Attribution dbt package with custom conversion periods, sources, and attribution overview logic."
+keywords: ["custom attribution", "attribution customization", "custom paths to conversions", "attribution macro"]
 sidebar_position: 30
 ---
 

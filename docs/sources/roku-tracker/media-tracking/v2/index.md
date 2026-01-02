@@ -2,6 +2,9 @@
 title: "Roku media tracking (v2)"
 sidebar_label: "Media tracking (v2)"
 date: "2025-03-21"
+sidebar_position: 20
+description: "Track Roku media playback with v2 schemas including session entities, ping events, and percentage progress tracking for audio and video nodes."
+keywords: ["roku media tracking v2", "media session", "ping events"]
 ---
 
 ```mdx-code-block

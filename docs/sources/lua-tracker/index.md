@@ -1,7 +1,10 @@
 ---
-title: "Lua tracker"
+title: "Lua tracker SDK"
+sidebar_label: "Lua tracker"
 date: "2020-02-26"
 sidebar_position: 270
+description: "Track events in Lua applications with the Snowplow Lua tracker SDK, compatible with Lua 5.1+ and LuaJIT."
+keywords: ["lua tracker", "lua analytics", "luarocks"]
 ---
 
 ```mdx-code-block

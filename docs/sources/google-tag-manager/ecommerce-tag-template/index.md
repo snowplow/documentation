@@ -1,6 +1,9 @@
 ---
-title: Ecommerce Template
+title: "Snowplow GTM Ecommerce template"
+sidebar_label: "Ecommerce template"
 sidebar_position: 600
+description: "Install and configure the Snowplow Ecommerce Tag Template in Google Tag Manager to track product views, transactions, cart actions, and checkout events using the Snowplow Ecommerce plugin for v3 and v4 trackers."
+keywords: ["gtm ecommerce", "ecommerce tracking", "gtm ecommerce template", "product tracking", "transaction tracking"]
 ---
 
 The Ecommerce Template is a separate Tag Template that can be added to your GTM workspace to track ecommerce events. This was done to keep the main Snowplow Tag Template a bit lighter, and for ease of tag management.

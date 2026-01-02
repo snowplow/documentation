@@ -1,7 +1,10 @@
 ---
 title: "Snowplow v3"
+sidebar_label: "Snowplow v3"
 date: "2021-11-18"
 sidebar_position: 100
+description: "Deploy JavaScript tracker v3 in Google Tag Manager using the Snowplow v3 Tag template. Configure tracker initialization, commands, and collector endpoints with GTM settings variable for legacy v3 tracking."
+keywords: ["v3 tag template", "gtm v3 implementation", "javascript tracker v3", "v3 tracker setup", "legacy v3 gtm"]
 ---
 
 This template implements the [Snowplow JavaScript tracker v3](/docs/sources/web-trackers/index.md).

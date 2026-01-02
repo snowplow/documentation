@@ -1,7 +1,9 @@
 ---
-title: "IAB enrichment"
+title: "IAB bot detection enrichment"
 sidebar_position: 0
-sidebar_label: IAB
+sidebar_label: IAB bot detection
+description: "Identify bot and spider traffic using the IAB/ABC International Spiders and Bots List based on IP and user agent."
+keywords: ["IAB enrichment", "bot detection", "spider detection"]
 ---
 
 The IAB Spiders & Robots enrichment uses the [IAB/ABC International Spiders and Bots List](https://iabtechlab.com/software/iababc-international-spiders-and-bots-list/) to determine whether an event was produced by a user or a robot/spider based on its’ IP address and user agent.
@@ -37,7 +39,7 @@ They correspond to one of the IAB/ABC database files, and need to have two inner
 The table below describes the three types of database fields:
 
 | **Field name**         | **Database description**                                          | **Database filename**           |
-|------------------------|-------------------------------------------------------------------|---------------------------------|
+| ---------------------- | ----------------------------------------------------------------- | ------------------------------- |
 | `ipFile`               | Blacklist of IP addresses considered to be robots of spiders      | `"ip_exclude_current_cidr.txt"` |
 | `excludeUseragentFile` | Blacklist of useragent strings considered to be robots or spiders | `"exclude_current.txt"`         |
 | `includeUseragentFile` | Whitelist of useragent strings considered to be browsers          | `"include_current.txt"`         |

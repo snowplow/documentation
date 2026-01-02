@@ -1,6 +1,9 @@
 ---
 title: "Snowplow v3 Settings Variable"
+sidebar_label: "Snowplow v3 Settings Variable"
 sidebar_position: 2000
+description: "Configure tracker initialization options with the Snowplow v3 Settings Variable template in GTM. Create reusable tracker configuration objects to apply consistent settings across multiple v3 tags."
+keywords: ["v3 settings variable", "tracker configuration", "gtm v3 settings", "v3 tracker options", "legacy v3 variable"]
 ---
 
 The **Snowplow v3 Settings** custom variable template is meant to be used with the Snowplow v3 tag template.

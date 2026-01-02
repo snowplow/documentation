@@ -1,8 +1,9 @@
 ---
-title: "Connecting to existing warehouse tables"
+title: "Connect to existing warehouse tables"
 sidebar_position: 30
 sidebar_label: "Warehouse configuration"
-description: "Create an attribute group for connecting Signals to an existing warehouse table using the Python SDK."
+description: "Connect Signals to existing warehouse tables using ExternalBatchAttributeGroup and BatchSource objects. Define table details, timestamp fields, and field mappings to sync pre-calculated attributes."
+keywords: ["external batch", "batch source", "warehouse tables", "field mapping", "timestamp sync"]
 ---
 
 To sync existing, pre-calculated attributes to Signals, use an `ExternalBatchAttributeGroup` attribute group to define which source table to use, and which fields (columns) to use from the table. Using existing warehouse tables doesn't require any additional modeling.

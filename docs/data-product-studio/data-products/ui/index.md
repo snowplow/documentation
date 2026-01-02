@@ -1,8 +1,10 @@
 ---
-title: "Managing Data Product using Console"
-date: "2024-01-18"
+title: "Manage data products using Console UI"
 sidebar_label: "Using the UI"
+date: "2024-01-18"
 sidebar_position: 1
+description: "Create and manage data products in Snowplow Console with templates, event specifications, source applications, and automatic code generation for tracking implementation."
+keywords: ["data product UI", "Console UI", "event specifications UI", "source applications", "tracking code generation"]
 ---
 
 To create a new data product, navigate to the "Data products" section from the navigation bar and click the "Create data product" button.
@@ -102,4 +104,3 @@ If the new version of the Data Structure introduces incompatibilities with the e
 ![Conflict resolution Event Specification](images/conflict_resolution.png)
 
 This mechanism ensures that teams can benefit from updated Data Structures while maintaining the integrity and accuracy of their Event Specifications. Users are empowered to make informed decisions during the upgrade process, with clear visual cues and options to handle conflicts effectively.
-

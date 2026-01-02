@@ -1,7 +1,10 @@
 ---
-title: "Configuration reference"
+title: "BigQuery Loader 1.x configuration reference"
+sidebar_label: "Configuration reference"
 date: "2021-10-07"
 sidebar_position: 0
+description: "Configure BigQuery Loader 1.x with Pub/Sub input, BigQuery output, StatsD monitoring, and advanced retry and sink settings."
+keywords: ["bigquery 1.x config", "pubsub config", "loader settings", "monitoring config", "bigquery settings"]
 ---
 
 This is a complete list of the options that can be configured in the Snowplow BigQuery Loader HOCON config file. The [example configs in github](https://github.com/snowplow-incubator/snowplow-bigquery-loader/tree/master/config) show how to prepare a config file.

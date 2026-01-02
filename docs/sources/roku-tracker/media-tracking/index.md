@@ -3,6 +3,8 @@ title: "Media tracking with the Roku tracker"
 sidebar_label: "Media tracking"
 date: "2021-12-23"
 sidebar_position: 4500
+description: "Enable automatic audio and video playback tracking for Roku Audio and Video nodes with support for media tracking v1 and v2 schemas."
+keywords: ["roku media tracking", "video playback tracking", "audio tracking"]
 ---
 
 ```mdx-code-block

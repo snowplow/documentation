@@ -2,6 +2,8 @@
 title: "Testing, debugging and troubleshooting"
 date: "2021-04-07"
 sidebar_position: 2950
+description: "Documentation for Testing, debugging and troubleshooting in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

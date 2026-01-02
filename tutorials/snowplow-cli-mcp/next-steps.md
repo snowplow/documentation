@@ -2,6 +2,8 @@
 position: 4
 title: "Next steps from the Snowplow CLI MCP tool tutorial"
 sidebar_label: "Next steps"
+description: "Explore advanced AI-powered tracking plan development including business process analysis, schema evolution planning, journey mapping, and cross-platform consistency. Learn how to leverage AI for comprehensive tracking strategy."
+keywords: ["ai tracking plan development", "schema evolution strategy"]
 ---
 
 Beyond creating individual files, AI assistants can help analyze tracking requirements and suggest comprehensive solutions:

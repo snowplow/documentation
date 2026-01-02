@@ -1,6 +1,8 @@
 ---
 title: "Configuring cookie and storage settings"
 sidebar_position: 100
+description: "Documentation for Configuring cookie and storage settings in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

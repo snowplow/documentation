@@ -1,7 +1,10 @@
 ---
-title: "Amplitude Tag Configuration"
+title: "Configure Amplitude Tag for GTM Server Side"
+sidebar_label: "Configuration"
 date: "2021-11-24"
 sidebar_position: 100
+description: "Configure event mapping, user properties, entity rules, and session tracking for the Amplitude Tag in GTM Server Side."
+keywords: ["Amplitude Tag configuration", "event mapping", "user properties", "session tracking"]
 ---
 
 :::tip Populating the Amplitude Session ID
@@ -228,7 +231,7 @@ The standard log properties are:
 Depending on the type of log, additional properties are logged:
 
 | Type of log | Additional information                                         |
-|-------------|----------------------------------------------------------------|
+| ----------- | -------------------------------------------------------------- |
 | Message     | “Message”                                                      |
 | Request     | “RequestMethod”, “RequestUrl”, “RequestHeaders”, “RequestBody” |
 | Response    | “ResponseStatusCode”, “ResponseHeaders”, “ResponseBody”        |

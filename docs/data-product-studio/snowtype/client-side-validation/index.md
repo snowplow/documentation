@@ -1,6 +1,9 @@
 ---
-title: "Client-side validation"
+title: "Client-side schema validation with Snowtype"
+sidebar_label: "Client-side validation"
 sidebar_position: 5
+description: "Enable real-time schema validation in the browser for JavaScript and TypeScript trackers to catch tracking errors before events are sent."
+keywords: ["client-side validation", "browser validation", "schema validation", "JavaScript validation", "TypeScript validation"]
 ---
 
 :::info

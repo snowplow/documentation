@@ -2,6 +2,9 @@
 title: "Quick Start Guide"
 date: "2021-11-23"
 sidebar_position: 20
+sidebar_label: "Quick Start Guide"
+description: "Quick start guide for installing and setting up Mobile Trackers v3.x."
+keywords: ["mobile tracker v3", "quick start"]
 ---
 
 ```mdx-code-block

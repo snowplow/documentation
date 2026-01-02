@@ -2,6 +2,8 @@
 title: "Currency conversion enrichment"
 sidebar_position: 2
 sidebar_label: Currency conversion
+description: "Convert transaction values to a base currency using Open Exchange Rates API for standardized reporting."
+keywords: ["currency conversion", "exchange rates", "multi-currency"]
 ---
 
 This enrichment uses [Open Exchange Rates](https://openexchangerates.org/) to convert the currencies used in transactions. It requires an Open Exchange Rates account and API key.

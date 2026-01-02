@@ -1,6 +1,8 @@
 ---
-title: "spEnrichedFilterUnstructEvent"
-description: "Filters messages based on a regex match against a field in a custom event."
+title: "Snowbridge spEnrichedFilterUnstructEvent transformation"
+sidebar_label: "spEnrichedFilterUnstructEvent"
+description: "Filter Snowplow enriched events based on regex matches against self-describing event fields using jsonpath notation, with Snowbridge."
+keywords: ["snowbridge config", "unstruct event filter", "custom event filter", "self-describing events", "event filtering"]
 ---
 
 ```mdx-code-block
@@ -12,7 +14,7 @@ import CodeBlock from '@theme/CodeBlock';
 
 This transformation is for use on fields from custom events.
 
-The event name must be provided as it appears in the `event_name` field of the event (eg. `add_to_cart`). 
+The event name must be provided as it appears in the `event_name` field of the event (eg. `add_to_cart`).
 
 Optionally, a regex can be provided to match against the stringified version of the event (eg. `1-*-*`)
 

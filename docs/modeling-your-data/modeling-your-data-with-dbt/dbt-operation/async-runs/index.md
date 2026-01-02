@@ -1,6 +1,9 @@
 ---
-title: "Asynchronous runs"
+title: "Run modules asynchronously"
+sidebar_label: "Asynchronous runs"
 sidebar_position: 60
+description: "Run dbt package modules asynchronously at different intervals using session identifiers and selective model execution."
+keywords: ["async dbt runs", "asynchronous model execution", "dbt scheduling"]
 ---
 
 You may wish to run the modules asynchronously, for instance run the views module hourly but the sessions and users modules daily. You would assume this could be achieved using e.g.:
@@ -15,7 +18,7 @@ However you can leverage dbt's `ls` command in conjunction with shell substituti
 
 For example to run just the page views module asynchronously:
 
-```bash title = "Do this instead"
+```bash title="Do this instead"
 dbt run --select +snowplow_unified.views --vars "{'models_to_run': '$(dbt ls --select +snowplow_unified.views --output name | tail -n +4)'}"
 ```
 

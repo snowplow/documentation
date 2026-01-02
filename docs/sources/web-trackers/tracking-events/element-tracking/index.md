@@ -1,7 +1,9 @@
 ---
-title: "Tracking page element visibility and lifecycle on web"
+title: "Track page element visibility and lifecycle on web"
 sidebar_label: "Element tracking"
 sidebar_position: 55
+description: "Declaratively track page elements as they are created, destroyed, scrolled into view, or scrolled out of view with configurable visibility rules."
+keywords: ["element tracking", "visibility"]
 ---
 
 ```mdx-code-block

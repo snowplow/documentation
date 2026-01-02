@@ -1,6 +1,8 @@
 ---
-title: "Configuring plugins for the JavaScript (tag) tracker"
+title: "Configure plugins for the JavaScript (tag) tracker"
 sidebar_label: "JavaScript (tag) tracker"
+description: "Build custom sp.js bundles with specific plugins or dynamically load plugins for the JavaScript tracker."
+keywords: ["javascript tracker plugins", "custom sp.js", "bundled plugins", "dynamic plugin loading"]
 date: "2023-03-22"
 sidebar_position: 400
 ---

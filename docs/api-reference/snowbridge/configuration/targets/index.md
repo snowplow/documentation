@@ -3,6 +3,8 @@ title: "Snowbridge target configuration"
 sidebar_label: "Targets"
 date: "2022-10-20"
 sidebar_position: 300
+description: "Configure Snowbridge targets including stdout, EventHub, HTTP, Kafka, Kinesis, PubSub, and SQS for stream output."
+keywords: ["snowbridge config", "target configuration", "stdout", "http target", "kinesis target", "pubsub target"]
 ---
 
 ```mdx-code-block

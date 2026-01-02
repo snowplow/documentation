@@ -1,7 +1,10 @@
 ---
-title: "Installing the Java tracker"
+title: "Install the Java tracker"
+sidebar_label: "Installing the Java tracker"
 date: "2022-03-24"
 sidebar_position: 10
+description: "Install and configure the Java tracker using Maven, Gradle, or direct download for JDK8+ applications."
+keywords: ["java tracker installation", "maven setup", "gradle configuration"]
 ---
 
 ```mdx-code-block

@@ -1,8 +1,9 @@
 ---
-title: "Defining attributes with the Python SDK"
+title: "Define attributes with the Signals Python SDK"
 sidebar_position: 10
 sidebar_label: "Attributes"
-description: "Create attributes programmatically using the Python SDK by specifying event schemas, aggregations, and filtering criteria."
+description: "Define Attribute objects programmatically by specifying event schemas, aggregation types, properties, and filtering criteria. Configure time periods and default values using the Python SDK."
+keywords: ["python sdk attributes", "attribute configuration", "aggregations", "criteria filters", "event properties"]
 ---
 
 [Attributes](/docs/signals/concepts/index.md#attribute-groups) are defined as part of attribute groups. To create an attribute, you'll need to set:

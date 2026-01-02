@@ -1,6 +1,8 @@
 ---
 title: "Web tracker plugins"
 sidebar_label: "Plugins"
+description: "Extend the web tracker with plugins for tracking ads, ecommerce, media, forms, and more."
+keywords: ["plugins", "tracker extensions", "ecommerce tracking", "form tracking", "media tracking"]
 date: "2021-04-07"
 sidebar_position: 2800
 ---

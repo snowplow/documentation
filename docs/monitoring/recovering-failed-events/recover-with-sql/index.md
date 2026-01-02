@@ -1,7 +1,9 @@
 ---
-title: "Recover loaded events with SQL"
+title: "Recover loaded events from a failed events table with SQL"
 sidebar_position: 10
+sidebar_label: "Recover loaded events with SQL"
 description: "Learn how to recover failed events from your failed events table back into your good events table using SQL queries."
+keywords: ["SQL event recovery", "recover with SQL", "failed events SQL"]
 ---
 
 ```mdx-code-block

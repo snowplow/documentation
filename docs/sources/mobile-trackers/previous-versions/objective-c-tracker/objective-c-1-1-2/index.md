@@ -2,6 +2,9 @@
 title: "Objective-C (iOS) (1.1.2)"
 date: "2020-03-05"
 sidebar_position: 880
+sidebar_label: "Objective-C (iOS) (1.1.2)"
+description: "Documentation for Objective-C Tracker version 1.1.2."
+keywords: ["objective-c 1.1.2", "ios", "tracker"]
 ---
 
 ## Installation

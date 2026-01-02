@@ -1,6 +1,8 @@
 ---
 title: "Snowplow v3 Settings Variable"
 sidebar_position: 2000
+description: "Documentation for Snowplow v3 Settings Variable in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 The **Snowplow v3 Settings** custom variable template is meant to be used with the Snowplow v3 tag template.

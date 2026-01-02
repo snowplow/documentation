@@ -2,6 +2,7 @@
 title: "Modeling data"
 sidebar_position: 7
 description: "An overview of the purpose of data modeling."
+keywords: ["data modeling", "data transformation", "derived tables", "data aggregation"]
 sidebar_label: "Data models"
 ---
 

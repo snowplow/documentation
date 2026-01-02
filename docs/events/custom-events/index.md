@@ -2,6 +2,8 @@
 title: "How to track custom events and entities"
 sidebar_label: "Custom data"
 sidebar_position: 1
+description: "Track custom self-describing events and entities with JSON schemas for flexible data collection."
+keywords: ["custom events", "self-describing events", "entities", "structured events", "JSON schemas"]
 ---
 
 Snowplow includes three ways to customize tracking:

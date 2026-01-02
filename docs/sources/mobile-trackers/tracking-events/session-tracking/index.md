@@ -1,7 +1,9 @@
 ---
-title: "Tracking sessions with the native mobile trackers"
+title: "Track sessions with the native mobile trackers"
 sidebar_label: "Sessions"
 sidebar_position: 20
+description: "Track user sessions with configurable timeouts, session callbacks, and cross-navigation support in mobile applications."
+keywords: ["session tracking", "user sessions", "session timeout"]
 ---
 
 ```mdx-code-block

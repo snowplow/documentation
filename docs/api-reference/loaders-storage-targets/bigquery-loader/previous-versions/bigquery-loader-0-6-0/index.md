@@ -1,7 +1,10 @@
 ---
 title: "BigQuery Loader (0.6.x)"
+sidebar_label: "BigQuery Loader (0.6.x)"
 date: "2021-10-06"
 sidebar_position: 10
+description: "BigQuery Loader 0.6.x with Apache Beam, StreamLoader, Mutator, and Repeater for loading events from Pub/Sub to BigQuery."
+keywords: ["bigquery loader 0.6", "streamloader", "bigquery mutator", "apache beam loader", "legacy bigquery"]
 ---
 
 ## Technical Architecture

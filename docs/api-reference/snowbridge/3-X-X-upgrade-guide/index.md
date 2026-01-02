@@ -1,6 +1,9 @@
 ---
-title: "3.X.X upgrade guide"
+title: "Snowbridge 3.X.X upgrade guide"
+sidebar_label: "3.X.X upgrade guide"
 sidebar_position: 400
+description: "Upgrade Snowbridge to version 3.X.X with configuration changes for transformations, new features, and breaking changes."
+keywords: ["snowbridge 3.x upgrade", "upgrade guide", "snowbridge migration", "version 3"]
 ---
 
 ## Breaking Changes

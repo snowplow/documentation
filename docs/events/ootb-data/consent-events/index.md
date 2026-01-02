@@ -1,5 +1,8 @@
 ---
 title: "Consent events (Enhanced Consent)"
+sidebar_label: "Consent events"
+description: "Track GDPR consent preferences, CMP visibility, and marketing consent with enhanced consent events and legacy consent APIs."
+keywords: ["consent tracking", "GDPR", "consent preferences", "CMP", "marketing consent"]
 ---
 
 ```mdx-code-block

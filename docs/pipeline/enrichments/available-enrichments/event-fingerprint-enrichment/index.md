@@ -2,6 +2,8 @@
 title: "Event fingerprint enrichment"
 sidebar_position: 6
 sidebar_label: Event fingerprint
+description: "Generate unique fingerprints for events using hash functions to enable deduplication and event matching."
+keywords: ["event fingerprint", "deduplication", "event hashing"]
 ---
 
 This enrichment computes the fingerprint of an event using the query string parameters.

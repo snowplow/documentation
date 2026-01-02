@@ -1,8 +1,10 @@
 ---
 title: "Cookie Extension service"
+sidebar_label: "Cookie Extension service"
 description: "How to create and use a Cookie Extension service, previously known as ID service, to mitigate against ITP"
 date: "2020-02-26"
 sidebar_position: 3.5
+keywords: ["Cookie Extension service", "ITP", "Safari tracking prevention", "user identification"]
 ---
 
 import Tabs from '@theme/Tabs';

@@ -2,6 +2,8 @@
 title: "Optional timestamp argument"
 date: "2021-04-07"
 sidebar_position: 1000
+description: "Documentation for Optional timestamp argument in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

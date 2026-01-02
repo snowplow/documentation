@@ -1,7 +1,10 @@
 ---
-title: "Web data model"
+title: "Web data model for SQL Runner"
+sidebar_label: "Web data model"
 date: "2021-07-27"
 sidebar_position: 100
+description: "Legacy SQL Runner web data model for transforming web event data into derived tables."
+keywords: ["SQL Runner web", "web data model", "legacy web SQL", "web SQL Runner"]
 ---
 
 :::tip

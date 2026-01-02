@@ -1,6 +1,8 @@
 ---
-title: "Upgrading the C and C++ tracker"
-sidebar_label: "Upgrading to Newer Versions"
+title: "Upgrade to newer versions of the C++ tracker"
+sidebar_label: "Upgrading to newer versions"
+description: "Migration instructions for upgrading to newer C++ tracker versions. Learn about breaking changes in v2.0.0, v1.0.0, v0.3.0, and v0.2.0 including CMake updates and API changes."
+keywords: ["c++ upgrade", "migration guide", "breaking changes", "version upgrade"]
 date: "2022-04-21"
 sidebar_position: 100
 ---

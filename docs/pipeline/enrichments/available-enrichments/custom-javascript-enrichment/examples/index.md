@@ -1,7 +1,9 @@
 ---
-title: "Example code"
+title: "JavaScript enrichment code examples"
 sidebar_position: 3
-description: "Examples of enrichment code in JavaScript."
+description: "Example JavaScript enrichment implementations for common use cases and transformation patterns."
+sidebar_label: "Examples"
+keywords: ["JavaScript enrichment examples", "enrichment patterns", "code samples", "custom enrichment"]
 ---
 
 Suppose you want to extend your events with a label that distinguishes traffic from internal and external systems. This is a good use case for [adding an entity](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/writing/index.md#adding-extra-entities-to-the-event).

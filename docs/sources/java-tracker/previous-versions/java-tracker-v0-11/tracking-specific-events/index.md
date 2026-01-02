@@ -1,7 +1,10 @@
 ---
 title: "Tracking specific events"
+sidebar_label: "Tracking specific events"
 date: "2020-02-26"
 sidebar_position: 40
+description: "Track various event types including page views, structured events, and custom events with Java tracker v0.11."
+keywords: ["event tracking v0.11", "page view", "structured events"]
 ---
 
 Events supported by the Java Tracker at a glance:

@@ -1,7 +1,10 @@
 ---
-title: "Telemetry principles"
+title: "Telemetry principles in Snowplow Self-Hosted"
+sidebar_label: "Telemetry principles"
 date: "2021-07-09"
 sidebar_position: 6
+description: "Learn about telemetry data collection in Snowplow Self-Hosted applications, what data is collected, and how to disable it."
+keywords: ["telemetry", "privacy", "data collection", "PII pseudonymization", "opt-out", "self-hosted"]
 ---
 
 Telemetry helps us better understand how our applications are used:

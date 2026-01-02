@@ -1,6 +1,8 @@
 ---
 title: "Manifest tables"
+sidebar_label: "Manifest tables"
 description: "Details around the manifest tables we use in our packages."
+keywords: ["manifest tables", "session lifecycle", "quarantine table", "package state"]
 sidebar_position: 50
 ---
 

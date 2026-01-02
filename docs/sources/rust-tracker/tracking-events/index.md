@@ -1,8 +1,10 @@
 ---
-title: "Tracking events with the Rust tracker"
+title: "Track events with the Rust tracker"
 sidebar_label: "Tracking events"
 date: "2022-10-24"
 sidebar_position: 3000
+description: "Track self-describing events, structured events, screen views, and timing events with the Rust tracker SDK using builder patterns."
+keywords: ["rust event tracking", "self-describing events", "timing events"]
 ---
 
 Designing how and what to track in your app is an important decision. Check out our docs about tracking design [here](/docs/data-product-studio/index.md).

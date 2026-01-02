@@ -1,6 +1,9 @@
 ---
 title: "Snowplow v3 Ecommerce"
+sidebar_label: "Snowplow v3 Ecommerce"
 sidebar_position: 2000
+description: "Implement the Snowplow Ecommerce plugin for JavaScript tracker v3 in GTM using the v3 Ecommerce Tag template. Track product interactions, transactions, and cart events with legacy v3 ecommerce tracking."
+keywords: ["v3 ecommerce", "gtm v3 ecommerce template", "legacy v3 ecommerce", "ecommerce plugin v3", "v3 product tracking"]
 ---
 
 This template implements the [Snowplow Ecommerce plugin](/docs/sources/web-trackers/tracking-events/ecommerce/index.md) for the Snowplow JavaScript tracker v3 and is meant to be used alongside [the main Snowplow v3 tag template](/docs/sources/google-tag-manager/previous-versions/v3/v3-tags/tag-template-guide/index.md).

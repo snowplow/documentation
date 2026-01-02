@@ -1,7 +1,9 @@
 ---
-title: "Receive interventions"
+title: "Subscribe to and receive interventions in your applications"
 sidebar_position: 50
-description: "Configure and deploy interventions to trigger real-time actions based on user attribute changes in Snowplow Signals."
+sidebar_label: "Receive interventions"
+description: "Subscribe to interventions by attribute key ID to automatically respond to user behavior changes. Use the Python SDK, browser tracker plugin, or Signals API to receive intervention payloads."
+keywords: ["subscribe interventions", "intervention subscription", "browser plugin", "intervention payload"]
 ---
 
 [Interventions](/docs/signals/concepts/index.md#interventions) are automated triggers that enable real-time actions based on user behavior.

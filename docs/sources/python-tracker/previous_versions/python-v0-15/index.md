@@ -1,7 +1,10 @@
 ---
 title: "Version 0.15"
+sidebar_label: "Version 0.15"
 date: "2020-02-26"
 sidebar_position: 200
+description: "Documentation for Python tracker version 0.15, supporting Redis and Celery emitters for event tracking."
+keywords: ["python tracker v0.15", "legacy python tracker", "redis emitter"]
 ---
 
 ```mdx-code-block

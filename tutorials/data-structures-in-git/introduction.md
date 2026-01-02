@@ -2,6 +2,8 @@
 title: "Learn how to manage data structures with Git"
 sidebar_label: "Introduction"
 position: 1
+description: "Manage Snowplow data structures using Git and Snowplow CLI for version control, approval workflows, and automated validation with GitHub Actions."
+keywords: ["data structure version control", "snowplow cli git workflow"]
 ---
 
 Snowplow data structures are the artifacts defining the rules for event validation within the Snowplow data pipeline. As such, they are a description of event shapes that the pipeline will allow through, and essentially the basis for the shape of data in the warehouse.

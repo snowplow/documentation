@@ -2,6 +2,8 @@
 title: "UA parser enrichment"
 sidebar_position: 1
 sidebar_label: UA parser 
+description: "Parse user agent strings to extract browser, operating system, and device information."
+keywords: ["user agent parser", "browser detection", "device detection"]
 ---
 
 This enrichment uses the [ua-parser library](https://github.com/ua-parser/uap-core/) to parse the user agent and provide information about the user's device.

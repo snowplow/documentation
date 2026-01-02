@@ -1,7 +1,10 @@
 ---
 title: "BigQuery Loader (0.3.x)"
+sidebar_label: "BigQuery Loader (0.3.x)"
 date: "2020-03-11"
 sidebar_position: 40
+description: "BigQuery Loader 0.3.x legacy documentation with Dataflow job and Mutator for Pub/Sub to BigQuery loading."
+keywords: ["bigquery loader 0.3", "dataflow loader", "bigquery 0.3", "legacy loader", "pubsub bigquery"]
 ---
 
 Please be aware that we have identified a security vulnerability in BigQuery Repeater in this version, which we've fixed in version [0.4.2](/docs/api-reference/loaders-storage-targets/bigquery-loader/previous-versions/bigquery-loader-0-4-0/index.md).

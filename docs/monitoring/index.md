@@ -1,8 +1,10 @@
 ---
-title: "Managing data quality"
+title: "Monitor failed events"
 date: "2020-02-15"
 sidebar_position: 8.6
 sidebar_label: "Monitoring"
+description: "Monitor and manage data quality with tools for tracking failed events, data quality dashboards, and Console API access."
+keywords: ["data quality monitoring", "failed events dashboard", "Snowplow Console monitoring", "data quality", "visibility", "data integrity"]
 ---
 
 ```mdx-code-block

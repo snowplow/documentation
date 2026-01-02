@@ -1,5 +1,8 @@
 ---
 title: "Device and browser information"
+sidebar_label: "Device and browser information"
+description: "Track device, browser, and platform information in atomic fields and context entities including YAUAA parsing and mobile context."
+keywords: ["device information", "browser context", "mobile context", "YAUAA", "user agent"]
 ---
 
 ```mdx-code-block

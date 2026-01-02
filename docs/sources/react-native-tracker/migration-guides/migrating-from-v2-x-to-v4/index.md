@@ -1,6 +1,10 @@
 ---
-title: "Migrating from v2 to v4"
+title: "Migrate from v2 to v4"
+sidebar_label: "Migrating from v2 to v4"
+date: "2021-08-09"
 sidebar_position: 90
+description: "Migration guide for upgrading React Native tracker from v2 to v4 with JavaScript-only architecture, new platform support, and configuration changes."
+keywords: ["react native tracker v2 to v4", "migration guide", "javascript-only tracker"]
 ---
 
 Version 4 of the React Native tracker brings a significant rearchitecture of the tracker, which is now JavaScript-only instead of building on top of the iOS and Android native trackers.

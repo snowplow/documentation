@@ -2,6 +2,8 @@
 sidebar_label: "Utils"
 sidebar_position: 60
 title: "Utils Quickstart"
+description: "Quick start guide for the Snowplow Utils dbt package with core macros and helper functions for Snowplow dbt packages."
+keywords: ["utils quickstart", "utils setup", "dbt utils installation"]
 ---
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

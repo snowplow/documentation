@@ -2,6 +2,9 @@
 title: "Android (0.2.0) / Java (0.6.0)"
 date: "2020-03-02"
 sidebar_position: 990
+sidebar_label: "Android (0.2.0) / Java (0.6.0)"
+description: "Legacy documentation for Android Tracker version 0.2.0 and Java Tracker version 0.6.0."
+keywords: ["android 0.2.0", "java 0.6.0", "tracker"]
 ---
 
 ## 1. Overview

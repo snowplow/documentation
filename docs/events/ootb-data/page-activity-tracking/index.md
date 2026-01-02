@@ -1,5 +1,8 @@
 ---
 title: "Page and screen engagement"
+sidebar_label: "Page activity tracking"
+description: "Measure user engagement time and scrolling depth using page ping events on web and screen summary entities on mobile."
+keywords: ["page pings", "activity tracking", "scroll tracking", "engagement tracking", "screen summary"]
 ---
 
 ```mdx-code-block

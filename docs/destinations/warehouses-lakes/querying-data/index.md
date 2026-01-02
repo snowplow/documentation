@@ -1,8 +1,9 @@
 ---
-title: "Querying Snowplow data"
+title: "How to query Snowplow data in the warehouse"
 sidebar_label: "Querying data"
 sidebar_position: 1
-description: "An introduction to querying Snowplow data, including self-describing events and entities, as well tips for dealing with duplicate events"
+description: "Introduction to querying Snowplow data in warehouses including self-describing events, entities, and handling duplicate events with SQL techniques."
+keywords: ["querying data", "SQL queries", "self-describing events", "entities", "deduplication"]
 ---
 
 ```mdx-code-block

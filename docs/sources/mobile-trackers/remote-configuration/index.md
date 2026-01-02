@@ -3,6 +3,8 @@ title: "Update the native mobile trackers configuration remotely"
 sidebar_label: "Update tracker configuration remotely"
 date: "2022-08-30"
 sidebar_position: 50
+description: "Configure mobile trackers to download and apply configuration updates remotely without requiring app resubmission."
+keywords: ["remote configuration", "mobile tracker updates", "dynamic configuration"]
 ---
 
 ```mdx-code-block

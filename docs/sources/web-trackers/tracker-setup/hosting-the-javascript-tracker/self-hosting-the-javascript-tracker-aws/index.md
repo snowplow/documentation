@@ -1,6 +1,9 @@
 ---
 title: "Self Hosting the JavaScript Tracker on AWS"
 sidebar_label: "Self hosting on AWS"
+description: "Host sp.js on AWS CloudFront and S3 for fast, reliable tracker delivery to your website visitors."
+keywords: ["aws hosting", "cloudfront", "s3 hosting", "cdn"]
+date: "2021-03-24"
 sidebar_position: 100
 ---
 

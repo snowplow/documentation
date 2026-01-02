@@ -1,7 +1,9 @@
 ---
-title: "Tracking consent and GDPR with the native mobile trackers"
+title: "Track consent and GDPR with the native mobile trackers"
 sidebar_label: "Consent"
 sidebar_position: 61
+description: "Add GDPR consent context entities to all tracked events for legal compliance and privacy management."
+keywords: ["gdpr tracking", "consent management", "privacy compliance"]
 ---
 
 ```mdx-code-block

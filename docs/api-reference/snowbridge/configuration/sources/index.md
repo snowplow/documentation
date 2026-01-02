@@ -3,6 +3,8 @@ title: "Snowbridge source configuration"
 sidebar_label: "Sources"
 date: "2022-10-20"
 sidebar_position: 100
+description: "Configure Snowbridge sources including stdin, Kafka, Kinesis, PubSub, SQS, and HTTP for stream ingestion."
+keywords: ["snowbridge config", "source configuration", "stdin", "kinesis source", "pubsub source", "kafka source"]
 ---
 
 ```mdx-code-block

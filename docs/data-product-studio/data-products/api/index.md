@@ -1,7 +1,9 @@
 ---
-title: "Managing Data Products via the API"
+title: "Manage data products via the API"
 sidebar_label: "Using the API"
 sidebar_position: 3
+description: "Programmatically manage data products through the API with endpoints for creating, updating, retrieving, and managing subscriptions for automated workflows and version control integration."
+keywords: ["data products API", "API endpoints", "programmatic management", "subscription management", "automation"]
 ---
 
 As well as managing [data products](/docs/data-product-studio/data-products/index.md) through Snowplow Console, Snowplow customers can also manage them programmatically through an API.

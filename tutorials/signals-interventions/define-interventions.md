@@ -3,6 +3,7 @@ position: 4
 title: Define real-time ecommerce intervention triggers
 sidebar_label: Define interventions
 description: "Create rule-based interventions that trigger personalized experiences based on user behavior."
+keywords: ["rule-based interventions", "ecommerce personalization"]
 ---
 
 [Interventions](/docs/signals/concepts/#interventions) are rules that trigger when user attributes meet specific conditions. They enable real-time personalization by activating experiences based on current behavior.

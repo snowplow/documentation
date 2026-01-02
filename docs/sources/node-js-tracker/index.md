@@ -1,7 +1,10 @@
 ---
-title: "Node.js tracker"
+title: "Node.js tracker SDK"
+sidebar_label: "Node.js tracker"
 date: "2021-03-24"
 sidebar_position: 165
+description: "Track events in Node.js applications with the Snowplow Node.js tracker SDK written in TypeScript."
+keywords: ["node.js tracker", "nodejs analytics", "typescript tracker"]
 ---
 
 ```mdx-code-block

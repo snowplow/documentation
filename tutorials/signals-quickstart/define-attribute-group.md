@@ -3,6 +3,7 @@ position: 2
 title: Define a Signals attribute group for session metrics
 sidebar_label: Define an attribute group
 description: "Create an attribute group in Snowplow Signals to calculate session metrics like page views, browser, and referrer data in real time."
+keywords: ["attribute groups", "session metrics"]
 ---
 
 [Attribute groups](/docs/signals/concepts/#attribute-groups) are where you define the data you want to calculate. To create an attribute group, go to **Signals** > **Attribute groups** in Snowplow Console and click **Create attribute group**.

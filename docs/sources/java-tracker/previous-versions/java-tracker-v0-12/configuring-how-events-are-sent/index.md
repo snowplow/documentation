@@ -1,7 +1,10 @@
 ---
 title: "Configuring how events are sent"
+sidebar_label: "Configuring how events are sent"
 date: "2022-03-24"
 sidebar_position: 50
+description: "Configure network connections, event batching, and buffering for Java tracker version 0.12."
+keywords: ["emitter configuration v0.12", "event batching", "network setup"]
 ---
 
 A user interacts with your app: an event is generated and tracked using `Tracker.track()`. But the event must be sent to your event collector, to enter your pipeline, before it has any value.

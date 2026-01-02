@@ -1,8 +1,10 @@
 ---
-title: "Data product templates"
-date: "2024-06-17"
+title: "Data product templates for common tracking scenarios"
 sidebar_label: "Using data product templates"
+date: "2024-06-17"
 sidebar_position: 2
+description: "Pre-defined data product templates for Base Web, Base Mobile, Ecommerce, and Media tracking with included event specifications and implementation guidance."
+keywords: ["data product templates", "Base Web template", "Base Mobile template", "ecommerce template", "media tracking template"]
 ---
 
 To create a new data product based on a pre-defined template, navigate to the "Data products" section from the navigation bar and click the "Create data product" or "Templates" buttons.

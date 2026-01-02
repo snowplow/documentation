@@ -1,5 +1,8 @@
 ---
 title: "User and session identification"
+sidebar_label: "User and session identification"
+description: "Track user and session identifiers including domain_userid, network_userid, session IDs, and custom business user IDs."
+keywords: ["user identification", "session tracking", "domain_userid", "user_id", "session ID"]
 ---
 
 ```mdx-code-block

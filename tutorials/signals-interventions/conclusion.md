@@ -3,6 +3,7 @@ position: 6
 title: "Conclusions and next steps for the Signals interventions tutorial"
 sidebar_label: "Conclusion"
 description: "Complete the Signals Sandbox tutorial and explore next steps for real-time personalization."
+keywords: ["signals interventions tutorial", "real-time personalization"]
 ---
 
 Congratulations! You've successfully completed the Signals Sandbox tutorial and experienced real-time personalization in action.

@@ -2,6 +2,8 @@
 title: "Modify, validate, and publish the data structure using Snowplow CLI"
 sidebar_label: "Modify, validate, and publish"
 position: 3
+description: "Validate data structure schemas for errors and warnings, then publish to development and production environments using Snowplow CLI."
+keywords: ["data structure validation", "snowplow cli publish command"]
 ---
 
 Firstly we'll add a property to our data structure definition. We'd like to know if a login succeeded or failed. Our modified `login.yaml` should look like this

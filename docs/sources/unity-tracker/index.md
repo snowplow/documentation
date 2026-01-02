@@ -1,7 +1,10 @@
 ---
-title: "Unity tracker"
+title: "Unity tracker SDK"
+sidebar_label: "Unity tracker"
 date: "2020-02-26"
 sidebar_position: 250
+description: "Track Snowplow events from Unity games and apps across multiple platforms including iOS, Android, WebGL, and desktop."
+keywords: ["unity tracker", "unity game analytics", "unity event tracking"]
 ---
 
 ```mdx-code-block

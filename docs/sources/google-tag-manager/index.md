@@ -1,7 +1,10 @@
 ---
-title: "Google Tag Manager"
+title: "Snowplow Google Tag Manager templates"
+sidebar_label: "Google Tag Manager"
 date: "2020-08-10"
 sidebar_position: 135
+description: "Deploy the Snowplow JavaScript tracker through Google Tag Manager using custom templates for v4. Configure event tracking, ecommerce, and custom variables with server-side and client-side GTM tags."
+keywords: ["google tag manager", "gtm templates", "javascript tracker v4", "gtm custom templates", "server-side gtm"]
 ---
 
 
@@ -17,7 +20,7 @@ The main Tag template that you will need to use when setting up the JavaScript T
 
 1. [Snowplow v4](https://tagmanager.google.com/gallery/#/owners/snowplow/templates/snowplow-gtm-tag-template-v4):
   Load, configure, and deploy the Snowplow JavaScript tracker library. It supports the full functionality of the JavaScript SDK.
-2. [Snowplow v4 Settings](https://tagmanager.google.com/gallery/#/owners/snowplow/templates/snowplow-gtm-variable-template-v4):
+1. [Snowplow v4 Settings](https://tagmanager.google.com/gallery/#/owners/snowplow/templates/snowplow-gtm-variable-template-v4):
   A variable template which can be used to easily apply a set of tracker configuration parameters to tags created with the Snowplow v4 tag template.
 
 For Ecommerce tracking, the [Snowplow Ecommerce Tag](https://github.com/snowplow/snowplow-gtm-tag-template-ecommerce-v3) is available on GitHub.

@@ -3,6 +3,7 @@ title: "Introduction to data products"
 sidebar_position: 7
 sidebar_label: "Data products"
 description: "Snowplow's data products enable organizations to easily generate AI and BI-ready data that is reliable, clear, compliant, accurate, and predictable"
+keywords: ["data products", "data contracts", "data governance", "behavioral data"]
 ---
 
 Data products are Snowplow's solution to helping organizations more easily create and democratise behavioral data. By creating well-documented datasets, that are both human and machine readable, you can more easily collaborate around data & unlock self-service analytics at scale.

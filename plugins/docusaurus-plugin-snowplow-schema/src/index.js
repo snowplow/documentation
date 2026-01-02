@@ -2,134 +2,134 @@ const fs = require('fs')
 const path = require('path')
 const matter = require('gray-matter')
 
-function normalizePath(p) {
-  return p.replace(/\\/g, '/').replace(/^\.\/?/, '')
-}
+// Constants
+const DEFAULT_TITLE = 'Snowplow documentation'
+const DEFAULT_DESCRIPTION = 'Snowplow documentation'
+const DEFAULT_KEYWORDS = [
+  'composable CDP',
+  'composable analytics',
+  'real-time personalization',
+  'agentic applications',
+  'customer data infrastructure',
+  'event architecture',
+  'behavioral data',
+  'event tracking',
+  'AI-ready data',
+  'data pipeline',
+  'first-party data',
+  'product analytics',
+  'data governance',
+  'machine learning data',
+]
 
 function normalizeSlug(slug) {
   return slug.replace(/\/$/, '')
 }
 
-function loadMapping(filePath, isKeywords = false) {
-  if (!fs.existsSync(filePath)) return {}
+function buildSlugFromPath(basePrefix, base, filename) {
+  let slug = '/' + path.join(base, filename).replace(/\\/g, '/')
 
-  const lines = fs
-    .readFileSync(filePath, 'utf8')
-    .split('\n')
-    .map((l) => l.trim())
-    .filter(Boolean)
-
-  const map = {}
-  for (let i = 0; i < lines.length; i++) {
-    if (lines[i].endsWith('.md')) {
-      const rawPath = normalizePath(lines[i])
-      if (i + 1 < lines.length && !lines[i + 1].endsWith('.md')) {
-        if (isKeywords) {
-          const keywords = lines[i + 1]
-            .split(',')
-            .map((k) => k.replace(/"/g, '').trim())
-            .filter(Boolean)
-          map[rawPath] = keywords
-        } else {
-          const desc = lines[i + 1]
-            .replace(/^description:\s*/, '')
-            .replace(/^"|"$/g, '')
-          map[rawPath] = desc
-        }
-      }
-    }
+  // Handle index files
+  if (filename === 'index') {
+    slug = '/' + base.replace(/\\/g, '/')
   }
-  return map
+
+  // Remove duplicate folder names (e.g., /docs/feature/feature -> /docs/feature)
+  const parts = slug.split('/')
+  const last = parts[parts.length - 1]
+  const secondLast = parts[parts.length - 2]
+  if (last === secondLast) {
+    slug = parts.slice(0, -1).join('/')
+  }
+
+  const cleaned = String(slug || '').replace(/^\/+/, '')
+  return '/' + normalizeSlug([basePrefix, cleaned].filter(Boolean).join('/'))
 }
 
-module.exports = function snowplowSchemaPlugin(context, options) {
+function resolveSlug(rawSlug, basePrefix, base, filename) {
+  if (rawSlug) {
+    // User-defined slug: resolve against basePrefix
+    const cleanedRaw = String(rawSlug).replace(/^\/+/, '')
+    return (
+      '/' + normalizeSlug([basePrefix, cleanedRaw].filter(Boolean).join('/'))
+    )
+  }
+
+  // Auto-generated slug from path
+  return buildSlugFromPath(basePrefix, base, filename)
+}
+
+module.exports = function snowplowSchemaPlugin(context) {
   const siteUrl = (
     context?.siteConfig?.url || 'https://docs.snowplow.io'
   ).replace(/\/$/, '')
   const siteName = context?.siteConfig?.title || 'Snowplow Documentation'
 
-  const descriptionMap = loadMapping(
-    path.join(__dirname, 'schemaData/description.md')
-  )
-  const keywordsMap = loadMapping(
-    path.join(__dirname, 'schemaData/keywords.md'),
-    true
-  )
-
   function loadMDXMetadata(folderPath, basePrefix) {
     if (!fs.existsSync(folderPath)) return {}
     const metadata = {}
 
+    function processFile(fullPath, base, file) {
+      try {
+        const rawContent = fs.readFileSync(fullPath, 'utf8')
+        const parsed = matter(rawContent)
+        const { data } = parsed
+
+        // Skip link-only files (no actual content)
+        if (data.type === 'link') {
+          return
+        }
+
+        const filename = file.replace(/\.mdx?$/, '')
+        const slug = resolveSlug(data.slug, basePrefix, base, filename)
+
+        // Apply fallbacks for missing frontmatter
+        data.title = data.title || DEFAULT_TITLE
+        data.description = data.description || DEFAULT_DESCRIPTION
+
+        if (!Array.isArray(data.keywords) || data.keywords.length === 0) {
+          data.keywords = DEFAULT_KEYWORDS
+        }
+
+        metadata[slug] = data
+
+        // Store alias for root slug if explicitly set
+        if (data.slug && data.slug.trim() === '/') {
+          metadata['/'] = data
+        }
+      } catch (error) {
+        console.warn(
+          `Warning: Failed to process file ${fullPath}:`,
+          error.message
+        )
+      }
+    }
+
     function walk(dir, base = '') {
-      const files = fs.readdirSync(dir)
-      for (const file of files) {
-        const fullPath = path.join(dir, file)
-        const stat = fs.statSync(fullPath)
+      try {
+        const files = fs.readdirSync(dir)
 
-        if (stat.isDirectory()) {
-          walk(fullPath, path.join(base, file))
-        } else if (file.endsWith('.md') || file.endsWith('.mdx')) {
-          // Skip partials: files starting with "_"
-          if (file.startsWith('_')) continue
+        for (const file of files) {
+          const fullPath = path.join(dir, file)
+          const stat = fs.statSync(fullPath)
 
-          const rawContent = fs.readFileSync(fullPath, 'utf8')
-          const parsed = matter(rawContent)
-          const { data } = parsed
+          if (stat.isDirectory()) {
+            walk(fullPath, path.join(base, file))
+          } else if (file.endsWith('.md') || file.endsWith('.mdx')) {
+            // Skip partials: files starting with "_"
+            if (file.startsWith('_')) continue
 
-          // 🚫 Never trust frontmatter description → wipe it
-          data.description = undefined
-
-          const rawSlug = data.slug
-          const filename = file.replace(/\.mdx?$/, '')
-          let slug
-
-          if (rawSlug) {
-            // Always resolve against basePrefix (docs semantics)
-            const cleanedRaw = String(rawSlug).replace(/^\/+/, '') // drop leading slash
-            slug = '/' + normalizeSlug([basePrefix, cleanedRaw].filter(Boolean).join('/'))
-          } else {
-            // Derive from path, then resolve against basePrefix
-            slug = '/' + path.join(base, filename).replace(/\\/g, '/')
-            if (filename === 'index') slug = '/' + base.replace(/\\/g, '/')
-            const parts = slug.split('/')
-            const last = parts[parts.length - 1]
-            const secondLast = parts[parts.length - 2]
-            if (last === secondLast) slug = parts.slice(0, -1).join('/')
-
-            const cleaned = String(slug || '').replace(/^\/+/, '')
-            slug = '/' + normalizeSlug([basePrefix, cleaned].filter(Boolean).join('/'))
-          }
-
-          const relPath = normalizePath(path.join(basePrefix, base, file))
-          const lookupPath = relPath
-
-          data.description = descriptionMap[lookupPath] || 'Snowplow documentation'
-          if (keywordsMap[lookupPath]) {
-            data.keywords = keywordsMap[lookupPath]
-          }
-
-          // ---- Fallbacks ----
-          if (!data.title) {
-            data.title = 'Snowplow documentation'
-          }
-          if (!Array.isArray(data.keywords) || data.keywords.length === 0) {
-            data.keywords = ['composable CDP', 'composable analytics', 'real-time personalization', 'agentic applications', 'customer data infrastructure', 'event architecture', 'behavioral data', 'event tracking', 'AI-ready data', 'data pipeline', 'first-party data', 'product analytics', 'data governance', 'machine learning data']
-          }
-
-          metadata[slug] = data
-
-          // Extra safety: if this doc explicitly set slug: '/' store an alias at '/'
-          if (rawSlug && rawSlug.trim() === '/') {
-            metadata['/'] = data
+            processFile(fullPath, base, file)
           }
         }
+      } catch (error) {
+        console.warn(`Warning: Failed to read directory ${dir}:`, error.message)
       }
     }
 
     walk(folderPath)
     return metadata
   }
-
 
   return {
     name: 'docusaurus-plugin-page-schema',
@@ -143,15 +143,10 @@ module.exports = function snowplowSchemaPlugin(context, options) {
         path.join(context.siteDir, 'tutorials'),
         'tutorials'
       )
-      const blogMetadata = loadMDXMetadata(
-        path.join(context.siteDir, 'blog'),
-        'blog'
-      )
 
       const allPagesMetadata = {
         ...docsMetadata,
         ...tutorialsMetadata,
-        ...blogMetadata,
       }
 
       return { allPagesMetadata, siteUrl, siteName }

@@ -1,7 +1,10 @@
 ---
 title: "S3 loader configuration reference"
+sidebar_label: "S3 loader configuration reference"
 date: "2021-10-04"
 sidebar_position: 50
+description: "Configure S3 Loader with Kinesis input, S3 output, compression, partitioning, and monitoring settings for event archiving."
+keywords: ["s3 loader config", "kinesis to s3", "compression config", "s3 partitioning", "loader monitoring"]
 ---
 
 S3 Loader is released under the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.1/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).

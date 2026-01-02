@@ -1,7 +1,8 @@
 ---
-title: "Configuring SQS as a Snowbridge source"
+title: "Configure SQS as a Snowbridge source"
 sidebar_label: "SQS"
-description: "Read data from an SQS queue."
+description: "Configure SQS source for Snowplow Snowbridge to read from AWS SQS queues with IAM authentication and message handling."
+keywords: ["snowbridge config", "sqs source", "aws sqs", "sqs queue", "sqs consumer"]
 ---
 
 ```mdx-code-block

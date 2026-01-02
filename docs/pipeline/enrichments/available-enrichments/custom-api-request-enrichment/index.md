@@ -2,6 +2,8 @@
 title: "Custom API Request enrichment"
 sidebar_position: 13
 sidebar_label: Custom API Request
+description: "Enrich events with data from external HTTP APIs by making custom API requests during event processing."
+keywords: ["API enrichment", "HTTP API", "external data enrichment"]
 ---
 
 The API Request Enrichment lets you perform dimension widening on a Snowplow event via your own or third-party proprietary http(s) API.

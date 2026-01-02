@@ -1,5 +1,8 @@
 ---
-title: "Using Different Sessionisation"
+title: "Using different sessionisation"
+sidebar_label: "Using different sessionisation"
+description: "Use custom session identifiers in Snowplow dbt packages including daily aggregates and alternative sessionization logic."
+keywords: ["custom sessionization", "session identifiers", "daily aggregates", "alternative session logic"]
 sidebar_position: 50
 ---
 

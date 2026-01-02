@@ -1,7 +1,9 @@
 ---
-title: "Tracking Kantar Focal Meter events on web"
+title: "Track Kantar Focal Meter events on web"
 sidebar_label: "Kantar Focal Meter"
 sidebar_position: 180
+description: "Integrate with Kantar Focal Meter router meters to measure content audience by sending domain user IDs to Focal Meter endpoints."
+keywords: ["focal meter", "kantar"]
 ---
 
 ```mdx-code-block

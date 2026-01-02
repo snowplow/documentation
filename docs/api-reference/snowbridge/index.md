@@ -1,7 +1,9 @@
 ---
-title: "Snowbridge"
+title: "Replicate event streams in real time with Snowbridge"
 sidebar_position: 65
 sidebar_label: "Snowbridge"
+description: "Replicate Snowplow event streams to multiple destinations with Snowbridge, a configurable tool supporting Kinesis, PubSub, Kafka, HTTP, and more."
+keywords: ["snowbridge", "stream replication", "kinesis", "pubsub", "kafka", "event streaming"]
 ---
 
 Snowbridge is a flexible, low latency tool which can replicate streams of data of any type to external destinations, optionally filtering or transforming the data along the way. It can be used to consume, transform and relay data to any third party platform which supports HTTP or is listed as a target below — in real-time.

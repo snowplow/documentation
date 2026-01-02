@@ -1,6 +1,9 @@
 ---
-title: "RDB Loader (Redshift, Databricks)"
+title: "RDB Loader for Redshift and Databricks"
+sidebar_label: "RDB Loader (Redshift, Databricks)"
 sidebar_position: 1
+description: "Load Snowplow events into Redshift, Databricks, or Snowflake with transformation and deduplication using Spark or stream transformers."
+keywords: ["rdb loader", "redshift loader", "databricks loader", "relational database", "batch loading"]
 ---
 
 ```mdx-code-block

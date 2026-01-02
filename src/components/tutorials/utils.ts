@@ -5,6 +5,7 @@ export function getMetaData(): Meta[] {
 
   const meta = context
     .keys()
+    .filter((key) => !key.includes('/requirements/'))
     .filter((key) => key.endsWith('meta.json'))
     .map((key) => {
       const [_, tutorial, file] = key.split('/')

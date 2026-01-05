@@ -14,7 +14,7 @@ For this tutorial, we've provided a [Jupyter notebook](https://colab.research.go
 
 In your real application code, you can access the current session ID and use it to retrieve the relevant attribute values. The attributes are being calculated in real time, in session. Read about how to access IDs such as `domain_sessionid` in your web application in [the JavaScript tracker](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/#getdomainuserid) documentation.
 
-To test this out, use the [Snowplow Inspector](/docs/data-product-studio/data-quality/snowplow-inspector/) browser extension to find out your current session ID on your web application. Click around and generate some page view events. Then find your `Domain Session ID` in the Inspector.
+To test this out, use the [Snowplow Inspector](/docs/testing/snowplow-inspector/) browser extension to find out your current session ID on your web application. Click around and generate some page view events. Then find your `Domain Session ID` in the Inspector.
 
 ![Screenshot showing the session ID in the Snowplow Inspector](./images/inspector-session.png)
 

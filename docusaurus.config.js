@@ -14,9 +14,8 @@ module.exports = {
     'Build, deploy, and scale your next data creation project using Snowplow.',
   url: 'https://docs.snowplow.io',
   baseUrl: '/',
-  // reset this back to throw, set to warn so that site builds
-  onBrokenLinks: 'warn',
-  onBrokenAnchors: 'warn',
+  onBrokenLinks: 'throw',
+  onBrokenAnchors: 'throw',
   favicon: 'img/favicon.ico',
   trailingSlash: true,
   organizationName: 'snowplow',

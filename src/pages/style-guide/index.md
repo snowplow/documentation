@@ -30,10 +30,10 @@ Ask the AI to specifically check your writing against the style guide.
 
 ## Examples
 
-Here are two pieces of older content that only partially follow the style guide. You can see the original text and the text that has been updated to match the style guide rules:
+Here are two pieces of older content that only partially follow the style guide. The annotations show the changes that are needed for them to comply fully:
 
-* Documentation: [annotated screenshot](annotated-docs.webp); [original text](/style-guide/example-docs-before); [updated text](/style-guide/example-docs-after)
-* Blog post: [annotated screenshot](annotated-blog.webp); [original text](/style-guide/example-blog-before); [updated text](/style-guide/example-blog-after)
+* [Documentation](annotated-docs.webp)
+* [Blog post](annotated-blog.webp)
 
 ## Grammar and spelling
 

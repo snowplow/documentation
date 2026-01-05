@@ -16,7 +16,7 @@ The inputs on the creation screen are:
 - **Description**: a few words on what this Source Application represents and/or any notes.
 - **Primary owner**: owner email address.
 - **Application IDs**: the [Application IDs](/docs/data-product-studio/source-applications/#application-ids) expected to be used for this application. _These will automatically flow down to the Data Products and Event specifications you define relating to this Source Application._
-- **Application entities**: here is where you will set the [Application Contexts](/docs/data-product-studio/source-applications/#application-context) you will implement and expect to be available with every event hit coming from this application.
+- **Application entities**: here is where you will set the [Application Contexts](/docs/data-product-studio/source-applications/#application-entities) you will implement and expect to be available with every event hit coming from this application.
 
 An example of inputs can be the following which you can adjust to your case:
 ![](./images/filled-sap.png)

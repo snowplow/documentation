@@ -16,7 +16,7 @@ This tutorial walks you through the process of setting up our Unified Digital db
   - web events dataset being available in your database
   - [Snowplow Javascript tracker](/docs/sources/web-trackers/) version 2 or later implemented.
   - Web Page context [enabled](/docs/sources/web-trackers/tracker-setup/initialization-options/) (enabled by default in version 3+).
-  - [Page view events](/docs/sources/web-trackers/tracking-events/#page-views) implemented.
+  - [Page view events](/docs/sources/web-trackers/tracking-events/page-views) implemented.
 - For mobile:
   - Mobile events dataset being available in your database
   - Snowplow Android, iOS [mobile tracker](/docs/sources/mobile-trackers/) version 1.1.0 (or later) or [React Native tracker](/docs/sources/react-native-tracker/) implemented

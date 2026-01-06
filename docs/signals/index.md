@@ -16,6 +16,12 @@ Real-time personalization use cases that are unlocked by Signals include:
 * Contextually relevant advertising
 * Paywall optimization
 
+:::info Signals Sandbox
+
+Try out Signals for free using the [Signals Sandbox](https://try-signals.snowplow.io). Follow the [Signals interventions tutorial](/tutorials/signals-interventions/start/) to explore using Signals in a demo web application. You don't need a Snowplow account to use the Sandbox.
+
+:::
+
 Your Signals infrastructure is deployed into the same cloud as your pipeline. You can use [Snowplow Console](https://console.snowplowanalytics.com) to first define the data you're interested in, then use the Signals SDKs and API to retrieve the calculated [attributes](/docs/signals/concepts/index.md) in your applications to alter your customer's experience and behavior.
 
 As well as attributes, Signals allows you to define [interventions](/docs/signals/concepts/index.md#interventions). This is a way to specify the business logic, based on attribute values, that should trigger actions such as notifications in your application.

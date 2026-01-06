@@ -1,5 +1,6 @@
 ---
-title: "SQS"
+title: "Configuring SQS as a Snowbridge target"
+sidebar_label: "SQS"
 description: "Write data to an SQS queue."
 ---
 
@@ -7,8 +8,6 @@ description: "Write data to an SQS queue."
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-## Authentication
 
 Authentication is done via the [AWS authentication environment variables](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html). Optionally, you can use the `role_arn` option to specify an ARN to use on the queue.
 

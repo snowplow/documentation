@@ -1,6 +1,7 @@
 ---
 position: 4
-title: Next steps
+title: "Next steps from the Snowplow CLI MCP tool tutorial"
+sidebar_label: "Next steps"
 ---
 
 Beyond creating individual files, AI assistants can help analyze tracking requirements and suggest comprehensive solutions:

@@ -1,6 +1,7 @@
 ---
-position: 4
-title: Generate data models
+position: 5
+title: Generate dbt data models using the batch engine CLI
+sidebar_label: Generate data models
 description: "Create dbt SQL models for Snowplow Signals batch attribute processing with base models, filtered events, and aggregations."
 ---
 

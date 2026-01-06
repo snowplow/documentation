@@ -4,11 +4,7 @@ sidebar_position: 12
 sidebar_label: Custom SQL
 ---
 
-## Summary
-
 The SQL Query Enrichment lets you perform dimension widening on a Snowplow event via your own internal relational database.
-
-## Overview
 
 If you have data points that you’d like to use to enrich your event data collected with Snowplow that live in a data base, this enrichment will help you to query for the fields you want to add.
 
@@ -200,7 +196,7 @@ And this query result:
 ```sql
 SELECT username, date_of_birth FROM tbl_users WHERE user = 123;
 | username | date_of_birth |
-|----------|---------------|
+| -------- | ------------- |
 | karl     | 1980-06-12    |
 ```
 
@@ -221,7 +217,7 @@ With this query result:
 ```sql
 SELECT username, date_of_birth FROM tbl_users WHERE user = 123;
 | username | date_of_birth |
-|----------|---------------|
+| -------- | ------------- |
 ```
 
 No context would be added to the `derived_contexts` array, but the event would continue processing. With this query result:
@@ -229,7 +225,7 @@ No context would be added to the `derived_contexts` array, but the event would
 ```sql
 SELECT username, date_of_birth FROM tbl_users WHERE user = 123;
 | username | date_of_birth |
-|----------|---------------|
+| -------- | ------------- |
 | karl     | 1980-06-12    |
 | mary     | 1975-03-22    |
 ```
@@ -261,7 +257,7 @@ And this query result:
 ```sql
 SELECT * FROM product WHERE category = 'homeware';
 | SKU | prod_name |
-|-----|-----------|
+| --- | --------- |
 | 123 | iPad      |
 | 456 | Ray-Bans  |
 ```

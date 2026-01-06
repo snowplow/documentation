@@ -1,6 +1,7 @@
 ---
 position: 6
-title: Setup custom Data Structures
+title: Create custom data structures for event specifications
+sidebar_label: Create custom data structures
 ---
 
 Before you create the custom Data Product for these interactions, you need to create a couple of Data Structures, `todo` and `todo_action`, fitting the use case of the Todo web application.

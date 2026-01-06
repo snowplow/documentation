@@ -1,6 +1,7 @@
 ---
 position: 4
-title: Reverse ETL Integration
+title: "Integrate with with Census using reverse ETL"
+sidebar_label: "Integrate with Census"
 ---
 
 Next we will set up a Census sync to build an audience using our query from Snowflake, filter the audience to focus on users who have shown interest in products but haven't purchased, and sync the data to Braze.
@@ -20,51 +21,51 @@ Use the query from the [data modeling](./data-modeling.md#identifying-most-viewe
 
 ```sql
 WITH productsViewedToday AS (
-    SELECT 
-        domain_userid, 
-        page_urlpath AS product_id, 
+    SELECT
+        domain_userid,
+        page_urlpath AS product_id,
         MAX(user_id) AS email,
         MAX(product.value:name::STRING) AS product,
         5 * SUM(CASE WHEN event_name = 'page_ping' THEN 1 ELSE 0 END) AS time_engaged_in_s,
         MAX(
-            CASE 
-                WHEN ecom_action.value:type = 'add_to_cart' 
-                THEN TRUE 
-                ELSE FALSE 
+            CASE
+                WHEN ecom_action.value:type = 'add_to_cart'
+                THEN TRUE
+                ELSE FALSE
             END
         ) AS add_to_cart,
         MAX(
-            CASE 
-                WHEN page_urlquery = 'abandonedEmail=true' 
-                THEN TRUE 
-                ELSE FALSE 
+            CASE
+                WHEN page_urlquery = 'abandonedEmail=true'
+                THEN TRUE
+                ELSE FALSE
             END
         ) AS winback_successful,
         MAX(page_url) AS product_url
-    FROM 
+    FROM
         SNOWPLOW_SALES_AWS_PROD1_DB.ATOMIC.EVENTS,
         LATERAL FLATTEN(input => contexts_com_snowplowanalytics_snowplow_ecommerce_product_1) product,
         LATERAL FLATTEN(input => contexts_com_snowplowanalytics_snowplow_web_page_1) page,
         LATERAL FLATTEN(input => unstruct_event_com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1) ecom_action
-    WHERE 
+    WHERE
         DATE(load_tstamp) = CURRENT_DATE()
         AND page_urlpath LIKE '/product%'
-    GROUP BY 
+    GROUP BY
         1, 2
-    ORDER BY 
+    ORDER BY
         time_engaged_in_s DESC
 )
 
-SELECT 
-    a.* 
-FROM 
+SELECT
+    a.*
+FROM
     productsViewedToday a
-LEFT JOIN 
+LEFT JOIN
     productsViewedToday b
-    ON a.email = b.email 
+    ON a.email = b.email
     AND a.time_engaged_in_s < b.time_engaged_in_s
-WHERE 
-    b.time_engaged_in_s IS NULL 
+WHERE
+    b.time_engaged_in_s IS NULL
     AND a.email IS NOT NULL;
 ```
 

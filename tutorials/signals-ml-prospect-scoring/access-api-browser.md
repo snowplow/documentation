@@ -1,12 +1,13 @@
 ---
-title: See scores in the browser
-position: 5.5
+title: Call the API to see prospect scores in your browser
+sidebar_label: See scores in the browser
+position: 6
 description: "Deploy the prospect scoring API, and display real-time conversion predictions in the browser console."
 ---
 
 The final requirement is to see the prospect scores and predictions in the browser. In this tutorial, we'll call the API every 10 seconds.
 
-You need an API endpoint that you can access from your local machine, or from JavaScript in the browser. 
+You need an API endpoint that you can access from your local machine, or from JavaScript in the browser.
 
 In the previous step we used TryCloudflare tunnels to expose Colab notebook behind a public HTTPS endpoint. In the server output you will find your public URL similar to this one:
 

@@ -1078,6 +1078,12 @@ export const dbtVersions = {
                 "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0"
             }
         },
+        "0.17.5": {
+            "dbtversion": ">=1.4.0 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0"
+            }
+        },
         "0.2.0": {
             "dbtversion": ">=0.18.0 <0.20.0",
             "packages": {

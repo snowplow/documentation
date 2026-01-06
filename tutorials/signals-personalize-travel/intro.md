@@ -1,12 +1,13 @@
 ---
-title: "Introduction"
+title: "Learn how to build a personalized travel agent with Signals"
+sidebar_label: "Introduction"
 position: 1
 description: "Build personalized travel experiences using Snowplow Signals to customize content and chatbot responses based on real-time user behavior."
 keywords: ["Snowplow Signals", "personalization", "real-time", "travel", "chatbot", "attributes"]
 date: "2025-01-21"
 ---
 
-Welcome to the **Personalize content and agentic responses using Signals** tutorial.
+Welcome to the **Build a personalized travel agent with Signals** tutorial.
 
 [![Personalized Travel Experiences](./images/demo-site.jpg)](./images/demo-site.jpg)
 
@@ -20,9 +21,9 @@ You'll build a complete personalization system that captures user interests thro
 
 ## Prerequisites
 
-* Signals enabled for your BDP pipeline or [Snowplow Local](https://github.com/snowplow-incubator/snowplow-local) set up with [Signals Sandbox](https://try-signals.snowplow.io/dashboard)
-* The [Snowplow Inspector](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm?hl=en) browser extension installed
+* Signals enabled for your CDI pipeline or [Snowplow Local](https://github.com/snowplow-incubator/snowplow-local) set up with [Signals Sandbox](https://try-signals.snowplow.io/dashboard)
+* The [Snowplow Inspector](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm) browser extension installed
 * Familiarity with running Jupyter notebooks, either locally or in Google Colab
 * [Docker](https://www.docker.com/) installed and configured
-* Access to the Jupyter [notebook](https://colab.research.google.com/github/snowplow/documentation/blob/main/tutorials/signals-bdp/signals.ipynb)
+* Access to the Jupyter [notebook](https://colab.research.google.com/github/snowplow/documentation/blob/main/static/notebooks/signals-personalize-travel-demo.ipynb)
 * Optional: an [OpenAI API key](https://platform.openai.com/api-keys) to customize agent responses

@@ -1,5 +1,6 @@
 ---
-title: "PubSub"
+title: "Configuring Pub/Sub as a Snowbridge target"
+sidebar_label: "PubSub"
 description: "Write data to a Pubsub topic."
 ---
 
@@ -7,8 +8,6 @@ description: "Write data to a Pubsub topic."
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-## Authentication
 
 Authentication is done using a [GCP Service Account](https://cloud.google.com/docs/authentication/application-default-credentials#attached-sa). Create a service account credentials file, and provide the path to it via the `GOOGLE_APPLICATION_CREDENTIALS` environment variable.
 

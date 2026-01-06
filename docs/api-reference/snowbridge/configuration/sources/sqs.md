@@ -1,5 +1,6 @@
 ---
-title: "SQS"
+title: "Configuring SQS as a Snowbridge source"
+sidebar_label: "SQS"
 description: "Read data from an SQS queue."
 ---
 
@@ -7,8 +8,6 @@ description: "Read data from an SQS queue."
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-# SQS Source
 
 Read data from an SQS queue.
 

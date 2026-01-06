@@ -1,5 +1,6 @@
 ---
-title: Enabling Conversions within Unified Package
+title: "Enable conversions in the Unified Digital dbt package"
+sidebar_label: "Enable conversions"
 position: 3
 ---
 

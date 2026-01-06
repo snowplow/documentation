@@ -10,8 +10,6 @@ import CodeBlock from '@theme/CodeBlock';
 ```
 
 
-## Downloading the artifact
-
 The asset is published as a jar file attached to the [Github release notes](https://github.com/snowplow/snowplow-rdb-loader/releases) for each version.
 
 <span>It's also available as a Docker image on Docker Hub under <code>{`snowplow/transformer-kinesis:${versions.rdbLoader}`}</code></span>

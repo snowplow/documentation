@@ -8,7 +8,7 @@ description: "Configure and deploy interventions to trigger real-time actions ba
 
 Subscribe to interventions to automatically respond within your application. You have three options for receiving interventions, depending on your use case or application:
 * [Signals Python SDK](https://pypi.org/project/snowplow-signals/)
-* Plugin for the [browser tracker](/docs/sources/trackers/web-trackers/index.md)
+* Plugin for the [browser tracker](/docs/sources/web-trackers/index.md)
 * [Signals API](/docs/signals/connection/index.md#signals-api)
 
 Subscription is by attribute key ID, not by individual intervention. Start by [connecting to Signals](/docs/signals/connection/index.md).
@@ -49,7 +49,7 @@ subscription.stop()
 
 ## Using the browser tracker plugin
 
-For web applications using the Snowplow [browser tracker](/docs/sources/trackers/web-trackers/index.md), you can subscribe to interventions using the [Signals Interventions plugin](https://github.com/snowplow-incubator/signals-browser-plugin).
+For web applications using the Snowplow [browser tracker](/docs/sources/web-trackers/index.md), you can subscribe to interventions using the [Signals browser plugin](https://www.npmjs.com/package/@snowplow/signals-browser-plugin).
 
 The workflow is:
 1. Create a Snowplow tracker with the plugin configured
@@ -62,7 +62,7 @@ import {
   SignalsInterventionsPlugin,
   addInterventionHandlers,
   subscribeToInterventions,
-} from '@snowplow/browser-plugin-signals-interventions';
+} from '@snowplow/signals-browser-plugin';
 
 // Install the Signals Intervention plugin
 newTracker('sp1', '{{collector_url}}', {

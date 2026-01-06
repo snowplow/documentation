@@ -1,5 +1,6 @@
 ---
-title: "Services"
+title: "Defining services with the Python SDK"
+sidebar_label: "Services"
 sidebar_position: 32
 description: "Create services programmatically using the Python SDK to group attribute groups for stable consumption interfaces."
 ---

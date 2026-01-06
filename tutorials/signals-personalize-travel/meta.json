@@ -1,8 +1,8 @@
 {
-  "title": "Build personalized experiences with Signals",
+  "title": "Build a personalized travel agent with Signals",
   "label": "Solution accelerator",
   "description": "Set up a demo travel site, and integrate with Snowplow Signals to personalize content and chatbot responses based on user behavior.",
-  "useCase": "Real-time personalization",
+  "useCase": "Customer-Facing AI Agents",
   "technologies": ["Jupyter notebook", "OpenAI"],
   "snowplowTech": ["Signals", "Local"]
 }

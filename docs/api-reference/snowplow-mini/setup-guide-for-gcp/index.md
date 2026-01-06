@@ -9,8 +9,6 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-## Overview
-
 Snowplow Mini is, in essence, the Snowplow real time stack inside of a single image. It is an easily-deployable, single instance version of Snowplow that serves three use cases:
 
 1. Giving a Snowplow consumer (e.g. an analyst / data team / marketing team) a way to quickly understand what Snowplow "does" i.e. what you put it at one end and take out of the other
@@ -57,8 +55,8 @@ Note that `imported-sp-mini` is a name of your choice for destination image an
 
 <p>Version {versions.snowplowMini} (recommended)</p>
 
-| L / 2 vCPUs | XL / 4 vCPUs | XXL / 8 vCPUs |
-| --- | --- | --- |
+| L / 2 vCPUs                                                                                        | XL / 4 vCPUs                                                                                         | XXL / 8 vCPUs                                                                                          |
+| -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | [large](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-24-0-large-1759755114.tar.gz) | [xlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-24-0-xlarge-1759755403.tar.gz) | [xxlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-24-0-xxlarge-1759755176.tar.gz) |
 
 You can find more about `gcloud compute images create` command [here](https://cloud.google.com/sdk/gcloud/reference/compute/images/create) for additional parameters.
@@ -67,7 +65,7 @@ After importing our tarball of your choice into your project, you should see it 
 
 To decide on which size of Snowplow Mini to choose, read on.
 
-### large & xlarge & xxlarge
+## large & xlarge & xxlarge
 
 Mini is available in 3 different sizes:
 

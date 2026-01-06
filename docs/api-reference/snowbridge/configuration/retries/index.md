@@ -1,5 +1,6 @@
 ---
-title: "Retry behavior (beta)"
+title: "Snowbridge retry behavior configuration (beta)"
+sidebar_label: "Retry behavior (beta)"
 description: "Configure retry behaviour."
 ---
 

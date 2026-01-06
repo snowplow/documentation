@@ -1,6 +1,7 @@
 ---
 position: 2
-title: Set up your Signals connection
+title: Connect to Signals within a notebook using the Signals Python SDK
+sidebar_label: Connect to Signals using the Python SDK
 description: "Enable Signals through Snowplow Console or deploy a Signals Sandbox instance and obtain your access credentials."
 ---
 

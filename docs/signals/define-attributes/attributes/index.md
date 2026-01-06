@@ -1,5 +1,5 @@
 ---
-title: "Attributes"
+title: "Defining attributes in Console"
 sidebar_position: 10
 sidebar_label: "Attributes"
 description: "Configure individual attributes within attribute groups to specify event schemas, properties, and aggregation methods for Signals calculations."
@@ -21,7 +21,7 @@ Use the event filter to choose which event type to calculate the attribute from.
 
 Click the dropdown to see the available schemas, listed by name and vendor:
 
-* **Snowplow events**: select any built-in Snowplow or [Iglu Central](https://iglucentral.com) schema. For legacy reasons, to calculate an attribute from [structured](/docs/events/custom-events/structured-events/index.md) events find `event (com.google.analytics.measurement-protocol)`.
+* **Snowplow events**: select any built-in Snowplow or [Iglu Central](https://iglucentral.com) schema. For legacy reasons, to calculate an attribute from [structured](/docs/events/custom-events/index.md#structured-events) events find `event (com.google.analytics.measurement-protocol)`.
 
 * **Custom events**: select any schema or data structure that's available within your pipeline.
 

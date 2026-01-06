@@ -1,5 +1,6 @@
 ---
-title: "Sources"
+title: "Snowbridge source configuration"
+sidebar_label: "Sources"
 date: "2022-10-20"
 sidebar_position: 100
 ---
@@ -9,7 +10,7 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-**Stdin source** is the default. We also support Kafka, Kinesis, PubSub, and SQS sources.
+**Stdin source** is the default. We also support Kafka, Kinesis, PubSub, SQS and experimental HTTP sources.
 
 Stdin source simply treats stdin as the input. It has one optional configuration to set the concurrency.
 

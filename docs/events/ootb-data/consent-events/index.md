@@ -36,7 +36,7 @@ Enhanced consent is the recommended way to track marketing consent events on you
 
 ## How to track?
 
-To track enhanced consent events using the JavaScript tracker on Web, you can make use of [the Enhanced Consent plugin](/docs/sources/trackers/web-trackers/tracking-events/consent-gdpr/index.md).
+To track enhanced consent events using the JavaScript tracker on Web, you can make use of [the Enhanced Consent plugin](/docs/sources/web-trackers/tracking-events/consent-gdpr/index.md).
 
 ## Modeled data using the snowplow-web dbt package
 
@@ -66,8 +66,8 @@ However, we recommend using the Enhanced Consent events as they are more up-to-d
 
 To learn how to track consent granted and withdrawn events, see:
 
-* On Web, make use of the [Consent plugin on the JavaScript tracker](/docs/sources/trackers/web-trackers/previous-versions/web-trackers-v3/tracking-events/consent-gdpr/original/index.md).
-* On mobile, see the [consent tracking APIs here](/docs/sources/trackers/mobile-trackers/tracking-events/index.md#creating-a-consent-event).
+* On Web, make use of the [Consent plugin on the JavaScript tracker](/docs/sources/web-trackers/previous-versions/web-trackers-v3/tracking-events/consent-gdpr/original/index.md).
+* On mobile, see the [consent tracking APIs here](/docs/sources/mobile-trackers/tracking-events/index.md#creating-a-consent-event).
 
 The tracking consists of two events (`consent_granted` and `consent_withdrawn`) and two context entities (`consent_document` and `gdpr`).
 

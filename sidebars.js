@@ -61,6 +61,7 @@ const swap = (allItems, linkItems, descriptions) => {
 
     if (linkItems[item.id]) {
       return [
+        ...header,
         {
           type: 'link',
           label: linkItems[item.id].sidebar_label ?? linkItems[item.id].title,
@@ -87,6 +88,12 @@ const swapDocItemsToLinkItems = (generatedDocs, originalDocs) => {
       descriptions[docItem.id] = docItem.frontMatter.description
     }
     if (docItem.frontMatter.type === 'link') {
+      // Adding the noindex flag
+      docItem.frontMatter.sidebar_custom_props = {
+        ...(docItem.frontMatter.sidebar_custom_props || {}),
+        noindex: true,
+      }
+
       linkItems[docItem.id] = docItem.frontMatter
     }
   }

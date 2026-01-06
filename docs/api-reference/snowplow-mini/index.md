@@ -4,11 +4,20 @@ date: "2021-08-14"
 sidebar_position: 120
 ---
 
+```mdx-code-block
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc', 'selfHosted']}
+  helpContent="Snowplow Mini is included with all Snowplow platforms."
+/>
+```
+
 [Snowplow Mini](/docs/api-reference/snowplow-mini/index.md) is a single-instance version of Snowplow that primarily serves as a development sandbox, giving you a quick way to debug tracker updates and changes to your schema and pipeline configuration.
 
 :::tip
 
-Snowplow Mini is similar to [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md), with the following differences:
+Snowplow Mini is similar to [Snowplow Micro](/docs/testing/snowplow-micro/index.md), with the following differences:
 * Micro is more portable and can easily run on your machine or in automated tests.
 * Mini has more features, mainly an OpenSearch Dashboards UI, and is better integrated with Snowplow.
 

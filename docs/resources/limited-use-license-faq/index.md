@@ -1,4 +1,6 @@
-# FAQ: Snowplow Limited Use License Agreement (SLULA)
+---
+title: "FAQ: Snowplow Limited Use License Agreement (SLULA)"
+---
 
 :::info Note
 

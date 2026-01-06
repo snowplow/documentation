@@ -35,7 +35,7 @@ The tracker version is also set automatically.
 ## Application context entity on Web apps
 
 This context entity is tracked with events tracked using the JavaScript tracker starting from version 4.1.0.
-The application version is provided in the tracker configuration, [see instructions here](/docs/sources/trackers/web-trackers/tracking-events/index.md#setting-application-version).
+The application version is provided in the tracker configuration, [see instructions here](/docs/sources/web-trackers/tracking-events/index.md#setting-application-version).
 
 <SchemaProperties
   overview={{event: false, web: true, mobile: false, automatic: false}}
@@ -59,4 +59,4 @@ This context entity is automatically tracked with events on mobile apps and give
 
 ### How to track?
 
-It is tracked on our [iOS and Android trackers](/docs/sources/trackers/mobile-trackers/tracking-events/platform-and-application-context/index.md#application-context) as well as on the [React Native](/docs/sources/trackers/react-native-tracker/tracking-events/platform-and-application-context/index.md#application-context) and Flutter tracker (when used in iOS or Android).
+It is tracked on our [iOS and Android trackers](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md#application-context) as well as on the [React Native](/docs/sources/react-native-tracker/tracking-events/platform-and-application-context/index.md#application-context) and Flutter tracker (when used in iOS or Android).

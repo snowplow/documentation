@@ -4,7 +4,6 @@ description: "Guide for debugging data modeling issues"
 sidebar_position: 10
 ---
 
-## Debugging Data Modeling Issues
 There will inevitably be times when you run into dbt errors or the output is not what you expected (e.g. a session is missing from the sessions table). This guide will try and help you get started with the most common issues and how to handle them, to help you get unblocked faster and avoid having to open a customer ticket to ask for help.
 
 

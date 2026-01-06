@@ -1,5 +1,5 @@
 ---
-title: "Defining attributes"
+title: "Defining attributes with the Python SDK"
 sidebar_position: 10
 sidebar_label: "Attributes"
 description: "Create attributes programmatically using the Python SDK by specifying event schemas, aggregations, and filtering criteria."

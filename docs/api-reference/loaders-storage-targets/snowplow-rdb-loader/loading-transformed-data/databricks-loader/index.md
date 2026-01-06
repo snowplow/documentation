@@ -10,23 +10,21 @@ import CodeBlock from '@theme/CodeBlock';
 import AutoSchemaCreation from '@site/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/_automatic-schema-creation.md';
 ```
 
-## Setting up Databricks
-
-The following resources need to be created:
+To set up the Databricks loader, the following resources need to be created:
 
 - [Databricks cluster](https://docs.databricks.com/clusters/create-cluster.html)
 - [Databricks access token](https://docs.databricks.com/dev-tools/api/latest/authentication.html)
 
 <AutoSchemaCreation name="Databricks" grantDocs="https://docs.databricks.com/sql/language-manual/security-grant.html" />
 
-### Downloading the artifact
+## Downloading the artifact
 
 The asset is published as a jar file attached to the [Github release notes](https://github.com/snowplow/snowplow-rdb-loader/releases) for each version.
 
 <p>It's also available as a Docker image on Docker Hub under <code>{`snowplow/rdb-loader-databricks:${versions.rdbLoader}`}</code>.</p>
 
 
-### Configuring `rdb-loader-databricks`
+## Configuring `rdb-loader-databricks`
 
 The loader takes two configuration files:
 
@@ -43,7 +41,7 @@ All self-describing schemas for events processed by RDB Loader **must** be hoste
 
 :::
 
-### Running the Databricks loader
+## Running the Databricks loader
 
 The two config files need to be passed in as base64-encoded strings:
 

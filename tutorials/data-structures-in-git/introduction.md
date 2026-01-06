@@ -1,5 +1,6 @@
 ---
-title: Introduction
+title: "Learn how to manage data structures with Git"
+sidebar_label: "Introduction"
 position: 1
 ---
 

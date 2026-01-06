@@ -1,10 +1,9 @@
 ---
-title: "Iterable"
+title: "Iterable webhook"
+sidebar_label: "Iterable"
 date: "2022-05-17"
 sidebar_position: 30
 ---
-
-## Overview
 
 This webhook integration lets you track a variety of events provided by Iterable through their [System Webhooks](https://support.iterable.com/hc/en-us/articles/208013936-System-Webhooks). The event types include email opens and clicks, sent SMS or push notifications, and more.
 

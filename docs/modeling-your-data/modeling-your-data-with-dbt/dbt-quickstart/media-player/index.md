@@ -9,21 +9,24 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
+import BadgeGroup from '@site/src/components/BadgeGroup';
 import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
 
 <Accelerator href="https://docs.snowplow.io/accelerators/media-player" name="Video and Media Analytics"/>
 ```
 
-<Badges badgeType="dbt-package Release" pkg="media-player"></Badges>&nbsp;
-<Badges badgeType="Actively Maintained"></Badges>&nbsp;
+<BadgeGroup>
+<Badges badgeType="dbt-package Release" pkg="media-player"></Badges>
+<Badges badgeType="Actively Maintained"></Badges>
 <Badges badgeType="SPAL"></Badges>
+</BadgeGroup>
 
 ## Requirements
 
 In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web or mobile events dataset being available in your database:
 
-- A dataset of media events must be available in the database. You can collect media events using our plugins for the JavaScript tracker or using the iOS and Android trackers: [Media plugin](/docs/sources/trackers/web-trackers/tracking-events/media/index.md), [HTML5 media player plugin](/docs/sources/trackers/web-trackers/tracking-events/media/html5/index.md), [YouTube plugin](/docs/sources/trackers/web-trackers/tracking-events/media/youtube/index.md), [Vimeo plugin](/docs/sources/trackers/web-trackers/tracking-events/media/vimeo/index.md) or the [iOS and Android media APIs](/docs/sources/trackers/mobile-trackers/tracking-events/media-tracking/index.md)
-- Have the [`webPage` context](/docs/sources/trackers/web-trackers/tracking-events/index.md#auto-tracked-entities) enabled on Web or the [screen context](/docs/sources/trackers/mobile-trackers/tracking-events/screen-tracking/index.md#screen-view-event-and-screen-context-entity) on mobile (enabled by default).
+- A dataset of media events must be available in the database. You can collect media events using our plugins for the JavaScript tracker or using the iOS and Android trackers: [Media plugin](/docs/sources/web-trackers/tracking-events/media/index.md), [HTML5 media player plugin](/docs/sources/web-trackers/tracking-events/media/html5/index.md), [YouTube plugin](/docs/sources/web-trackers/tracking-events/media/youtube/index.md), [Vimeo plugin](/docs/sources/web-trackers/tracking-events/media/vimeo/index.md) or the [iOS and Android media APIs](/docs/sources/mobile-trackers/tracking-events/media-tracking/index.md)
+- Have the [`webPage` context](/docs/sources/web-trackers/tracking-events/index.md#auto-tracked-entities) enabled on Web or the [screen context](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md#screen-view-event-and-screen-context-entity) on mobile (enabled by default).
 - Enabled session tracking on the tracker (default on mobile).
 
 The model is compatible with all versions of our media tracking APIs. These have evolved over time and may track the media events using two sets of event and contexts schemas:

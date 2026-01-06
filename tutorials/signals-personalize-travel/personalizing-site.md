@@ -1,5 +1,6 @@
 ---
-title: "Personalize site content"
+title: "Add Signals personalization options to the travel site contents"
+sidebar_label: "Personalize site content"
 position: 5
 description: "Use Snowplow Signals attributes to customize website content including images, descriptions, and layout based on user behavior."
 keywords: ["personalization", "content customization", "Signals SDK", "user experience", "behavioral data"]

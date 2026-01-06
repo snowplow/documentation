@@ -1,5 +1,6 @@
 ---
-title: "Calculate from warehouse"
+title: "Calculate attributes from warehouse data"
+sidebar_label: "Calculate from warehouse"
 sidebar_position: 50
 description: "Use existing warehouse data or create new batch attribute tables with dbt to sync historical attributes to the Signals Profiles Store."
 ---

@@ -1,9 +1,8 @@
 ---
-title: "Adjust"
+title: "Adjust webhook"
+sidebar_label: "Adjust"
 sidebar_position: -1
 ---
-
-## Intro
 
 [Adjust](https://www.adjust.com/) provides a mobile attribution platform. It enables users to track what marketing channels drive mobile app installations.
 

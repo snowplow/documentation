@@ -1,5 +1,6 @@
 ---
-title: "Web to Unified Digital"
+title: "Migrating from Web to Unified Digital"
+sidebar_label: "Web to Unified Digital"
 sidebar_position: 1000
 ---
 ```mdx-code-block

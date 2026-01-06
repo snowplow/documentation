@@ -1,5 +1,6 @@
 ---
-title: "Monitoring"
+title: "Monitoring Enrich"
+sidebar_label: "Monitoring"
 date: "2021-10-04"
 sidebar_position: 60
 ---

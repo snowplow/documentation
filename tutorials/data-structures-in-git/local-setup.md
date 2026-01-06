@@ -1,5 +1,6 @@
 ---
-title: Create a local data structure
+title: "Create a local data structure with Snowplow CLI"
+sidebar_label: "Create a local data structure"
 position: 2
 ---
 

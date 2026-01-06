@@ -1,6 +1,7 @@
 ---
 position: 2
-title: Installation and setup
+title: "Install the Snowplow CLI and configure an MCP client"
+sidebar_label: "Install the Snowplow CLI"
 ---
 
 To use the MCP tools with your AI assistant, you'll need to install the Snowplow CLI and configure your chosen MCP client. This guide walks you through both steps.
@@ -25,7 +26,7 @@ The Snowplow CLI MCP server can be used with any MCP-compatible client. Below ar
 ### Claude desktop
 
 **Config location**:
-- **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`  
+- **macOS**: `~/Library/Application Support/Claude/claude_desktop_config.json`
 - **Windows**: `%APPDATA%\Claude\claude_desktop_config.json`
 
 ```json

@@ -1,5 +1,6 @@
 ---
-title: "Create behavioral attributes"
+title: "Define travel preference attributes using the Signals Python SDK"
+sidebar_label: "Define behavioral attributes"
 position: 3
 description: "Define behavioral attributes using the Snowplow Signals Python SDK to capture user preferences from website interactions."
 keywords: ["Snowplow Signals", "attributes", "Python SDK", "behavioral data", "user preferences"]
@@ -17,14 +18,14 @@ The attributes you create will track user engagement with different types of con
 
 ## Open the Jupyter notebook
 
-You'll use the Snowplow Signals Python SDK in a Jupyter notebook to define your attributes. You can run the notebook directly using Google Colab [here](https://colab.research.google.com/github/snowplow/documentation/blob/main/tutorials/signals-bdp/signals.ipynb), or download it locally.
+You'll use the Snowplow Signals Python SDK in a Jupyter notebook to define your attributes. You can run the notebook directly using Google Colab [here](https://colab.research.google.com/github/snowplow/documentation/blob/main/static/notebooks/signals-personalize-travel-demo.ipynb), or download it locally.
 
 ## Set up your credentials
 
 You'll need the same connection credentials you used in the previous step:
 
 <Tabs groupId="cloud" queryString lazy>
-  <TabItem value="cdi" label="BDP" default>
+  <TabItem value="cdi" label="CDI" default>
 
 ```python
 API_URL = 'example.signals.snowplowanalytics.com'

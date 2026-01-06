@@ -1,5 +1,6 @@
 ---
-title: "Install the demo travel website"
+title: "Run the demo Signals React travel application"
+sidebar_label: "Run the demo travel website"
 position: 2
 description: "Set up and run the demo travel website using Docker and Snowplow Local."
 keywords: ["Docker", "Snowplow Local", "travel website", "setup", "installation"]
@@ -11,7 +12,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-You'll now install and run the example travel website that you'll use to test Snowplow Signals personalization. This website represents a typical e-commerce travel platform where users browse destinations, read content, and interact with various features.
+You'll now install and run the example travel website that you'll use to test Snowplow Signals personalization. This website represents a typical ecommerce travel platform where users browse destinations, read content, and interact with various features.
 
 The demo website is part of the [Snowplow Local](https://github.com/snowplow-incubator/snowplow-local) repository. It's a React application.
 
@@ -40,7 +41,7 @@ cp .env.example .env
 Edit the `.env` file with your Signals connection credentials:
 
 <Tabs groupId="cloud" queryString lazy>
-  <TabItem value="cdi" label="BDP" default>
+  <TabItem value="cdi" label="CDI" default>
 
 ```bash
 NEXT_PUBLIC_SNOWPLOW_SIGNALS_API_URL=signals.snowplow.com
@@ -69,7 +70,7 @@ If you plan to use the AI agent add an OpenAI API key (`OPENAI_API_KEY`) to your
 Run the following Docker command:
 
 <Tabs groupId="cloud" queryString lazy>
-  <TabItem value="cdi" label="BDP" default>
+  <TabItem value="cdi" label="CDI" default>
 
 ```bash
 docker compose --profile travel-site up

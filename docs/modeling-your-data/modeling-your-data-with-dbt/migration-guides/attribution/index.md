@@ -1,5 +1,6 @@
 ---
-title: "Attribution"
+title: "Migration guide for Attribution"
+sidebar_label: "Attribution"
 sidebar_position: 20
 ---
 

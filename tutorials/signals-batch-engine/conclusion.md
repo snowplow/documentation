@@ -1,6 +1,7 @@
 ---
-position: 10
-title: Conclusion
+position: 8
+title: "Conclusions and next steps from the Signals batch engine tutorial"
+sidebar_label: "Conclusion"
 description: "Complete the Snowplow Signals batch engine tutorial, and explore next steps for warehouse-based customer intelligence."
 ---
 

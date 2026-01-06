@@ -1,10 +1,9 @@
 ---
-title: "Sendgrid"
+title: "SendGrid webhook"
+sidebar_label: "SendGrid"
 date: "2020-02-26"
 sidebar_position: 110
 ---
-
-## Overview
 
 This webhook integration lets you track a variety of events logged by [SendGrid](http://sendgrid.com/).
 
@@ -22,7 +21,7 @@ Available events are:
 - Group Unsubscribe
 - Group Resubscribe
 
-### Compatibility
+## Compatibility
 
 - The support of the latest version of Sendgrid webhook has been introduced in [Snowplow R114 Polonnaruwa](https://github.com/snowplow/snowplow/releases/tag/r114-polonnaruwa)
 - [SendGrid webhook API](https://docs.sendgrid.com/for-developers/tracking-events/event)

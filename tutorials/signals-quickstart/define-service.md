@@ -1,6 +1,7 @@
 ---
-position: 4.5
-title: Define a service
+position: 3
+title: Define a Signals tutorial service
+sidebar_label: Define a service
 description: "Configure a Snowplow Signals service to group attribute groups for easy consumption in applications."
 ---
 

@@ -1,7 +1,8 @@
 ---
-position: 10
-title: Conclusion
-description: "Complete the Snowplow Signals quickstart tutorial, and explore next steps for real-time customer intelligence."
+position: 5
+title: "Conclusions and next steps from the Signals quick start tutorial"
+sidebar_label: "Conclusion"
+description: "Complete the Snowplow Signals quick start tutorial, and explore next steps for real-time customer intelligence."
 ---
 
 In this tutorial you've learned how to use Signals to calculate and serve information about user behavior in real time.

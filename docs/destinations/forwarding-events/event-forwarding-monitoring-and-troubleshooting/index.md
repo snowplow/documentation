@@ -90,10 +90,10 @@ This section explains how to find and query failed event logs.
 
 ### Finding failed event logs
 
-To better understand why a failure has occurred, you can directly access and review detailed failed delivery logs in file storage. The logs are automatically saved as [failed events](/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/file-storage/index.md) in your Snowplow cloud storage bucket under the prefix:
+To better understand why a failure has occurred, you can directly access and review detailed failed delivery logs in file storage. The logs are automatically saved as [failed events](/docs/monitoring/exploring-failed-events/file-storage/index.md) in your Snowplow cloud storage bucket under the prefix:
 `/{pipeline_name}/partitioned/com.snowplowanalytics.snowplow.badrows.event_forwarding_errors/`
 
-For more details on where to find failed events, see [Accessing failed events in file storage](/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/file-storage/index.md).
+For more details on where to find failed events, see [Accessing failed events in file storage](/docs/monitoring/exploring-failed-events/file-storage/index.md).
 
 Failed event logs are formatted according to the [`event_forwarding_error`](https://iglucentral.com/?q=event_forwarding_error) schema and contain:
 

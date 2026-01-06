@@ -1,5 +1,5 @@
 ---
-title: "Understanding failed events"
+title: "Introduction to failed events"
 sidebar_label: "Failed events"
 sidebar_position: 5
 description: "Failed events represent data that did not pass validation or otherwise failed to be processed"
@@ -51,7 +51,7 @@ All of these are internal failures you typically can’t address upstream.
 
 ## Dealing with failed events
 
-Snowplow provides a dashboard and alerts for failed events. See [Monitoring failed events](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/index.md).
+Snowplow provides a dashboard and alerts for failed events. See [Monitoring failed events](/docs/monitoring/index.md).
 
 ---
 
@@ -65,11 +65,11 @@ This feature is not retroactive, i.e. only failed events that occur _after it’
 
 The events will include a special column with the details of the failure, and any invalid columns will be set to `null`. Otherwise, the format is [the same as for your atomic events](/docs/fundamentals/canonical-event/index.md).
 
-See [Exploring failed events](/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/index.md) for more details and setup instructions.
+See [Exploring failed events](/docs/monitoring/exploring-failed-events/index.md) for more details and setup instructions.
 
 ---
 
-Finally, on AWS and GCP all failed events are backed up in object storage (S3 and GCS respectively). Sometimes, but not in all cases (e.g. not if the original events exceeded size limits), it’s possible to recover them by replaying them through the pipeline. This is a complicated process mainly reserved for internal failures and outages. Refer to [Recovering failed events](/docs/data-product-studio/data-quality/failed-events/recovering-failed-events/index.md).
+Finally, on AWS and GCP all failed events are backed up in object storage (S3 and GCS respectively). Sometimes, but not in all cases (e.g. not if the original events exceeded size limits), it’s possible to recover them by replaying them through the pipeline. This is a complicated process mainly reserved for internal failures and outages. Refer to [Recovering failed events](/docs/monitoring/recovering-failed-events/index.md).
 
 ---
 

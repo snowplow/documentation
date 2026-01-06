@@ -1,0 +1,146 @@
+name: Validate Frontmatter Metadata
+
+on:
+  pull_request:
+    types: [opened]
+    paths:
+      - '**.md'
+      - '**.mdx'
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  validate-metadata:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Get changed markdown files
+        id: changed-files
+        run: |
+          # Get list of changed .md and .mdx files, excluding files starting with underscore
+          git diff --name-only --diff-filter=AM origin/${{ github.base_ref }}...HEAD | \
+            grep -E '\.(md|mdx)$' | \
+            grep -v '^_' | \
+            grep -v '/_' > changed_files.txt || true
+
+          if [ -s changed_files.txt ]; then
+            echo "has_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Validate frontmatter
+        if: steps.changed-files.outputs.has_changes == 'true'
+        id: validate
+        run: |
+          # Script to validate frontmatter
+          missing_metadata=()
+
+          while IFS= read -r file; do
+            if [ ! -f "$file" ]; then
+              continue
+            fi
+
+            # Extract frontmatter (between --- markers)
+            frontmatter=$(sed -n '/^---$/,/^---$/p' "$file" | sed '1d;$d')
+
+            if [ -z "$frontmatter" ]; then
+              missing_metadata+=("$file: missing frontmatter block")
+              continue
+            fi
+
+            # Skip files with type: link in frontmatter
+            if echo "$frontmatter" | grep -q '^type:[[:space:]]*link'; then
+              continue
+            fi
+
+            # Check for required fields
+            missing_fields=()
+
+            if ! echo "$frontmatter" | grep -q '^title:'; then
+              missing_fields+=("title")
+            fi
+
+            # Check if description exists and is not empty
+            desc_line=$(echo "$frontmatter" | grep '^description:' || true)
+            if [ -z "$desc_line" ]; then
+              missing_fields+=("description")
+            else
+              # Extract value after 'description:' and check if it's empty (ignoring quotes and whitespace)
+              desc_value=$(echo "$desc_line" | sed 's/^description:[[:space:]]*//' | sed 's/^"\(.*\)"$/\1/' | sed "s/^'\(.*\)'$/\1/" | tr -d '[:space:]')
+              if [ -z "$desc_value" ]; then
+                missing_fields+=("description (empty)")
+              fi
+            fi
+
+            if ! echo "$frontmatter" | grep -q '^keywords:'; then
+              missing_fields+=("keywords")
+            fi
+
+            if ! echo "$frontmatter" | grep -q '^sidebar_label:'; then
+              missing_fields+=("sidebar_label")
+            fi
+
+            if [ ${#missing_fields[@]} -gt 0 ]; then
+              # Join array elements with ", " separator
+              fields_str=$(printf "%s, " "${missing_fields[@]}")
+              fields_str=${fields_str%, }  # Remove trailing ", "
+              missing_metadata+=("$file: missing fields: $fields_str")
+            fi
+          done < changed_files.txt
+
+          # Save results to file for comment step
+          if [ ${#missing_metadata[@]} -gt 0 ]; then
+            printf '%s\n' "${missing_metadata[@]}" > validation_issues.txt
+            echo "has_issues=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_issues=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Post comment on PR
+        if: steps.validate.outputs.has_issues == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const issues = fs.readFileSync('validation_issues.txt', 'utf8').trim().split('\n');
+
+            const comment = `## Missing SEO metadata
+
+            The following markdown files are missing required metadata fields:
+
+            ${issues.map(issue => `- \`${issue}\``).join('\n')}
+
+            ### Required fields
+            The file metadata is important for SEO and marketing. All markdown files, except for those with filenames starting with \`_\`, should include:
+            - \`title\`: Full, descriptive page title
+            - \`sidebar_label\`: Short title for navigation sidebar (can be the same as the main title)
+            - \`description\`: One to two sentences summarizing the page contents
+            - \`keywords\`: Array of marketing/SEO keywords
+
+            Please add the missing metadata.`;
+
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: comment
+            });
+
+      - name: Summary
+        if: steps.changed-files.outputs.has_changes == 'true'
+        run: |
+          if [ -f validation_issues.txt ]; then
+            echo "⚠️ Found metadata issues in the following files:"
+            cat validation_issues.txt
+            echo ""
+            echo "This is a warning only - the check will not block the PR."
+          else
+            echo "✅ All markdown files have required metadata."
+          fi

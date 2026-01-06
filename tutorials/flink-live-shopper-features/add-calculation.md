@@ -1,6 +1,7 @@
 ---
 position: 4
-title: (Optional) Add your own calculation
+title: "Optional: Add a new calculation to the Flink live shopper features project"
+sidebar_label: "Optional: add your own calculation"
 ---
 
 This page describes how to add an additional feature to the product window. The process would be similar for other parts of the system, such as cart or purchase features.

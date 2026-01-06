@@ -10,12 +10,10 @@ import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
 <Accelerator href="https://docs.snowplow.io/accelerators/ecommerce/" name="E-Commerce"/>
 ```
 
-## Requirements
+In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web events dataset being available in your database, the requirements are:
 
-In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web events dataset being available in your database:
-
-- A dataset of ecommerce events from the [Snowplow JavaScript tracker](/docs/sources/trackers/web-trackers/index.md), or the [iOS/Android](/docs/sources/trackers/mobile-trackers/tracking-events/ecommerce-tracking/index.md) trackers must be available in the database.
-- Have the [`webPage` context](/docs/sources/trackers/web-trackers/tracker-setup/initialization-options/index.md#adding-predefined-contexts) enabled. (Note if you have only tracked mobile ecommerce events, you will need other events in your warehouse to have used this context as we require the column to exist).
+- A dataset of ecommerce events from the [Snowplow JavaScript tracker](/docs/sources/web-trackers/index.md), or the [iOS/Android](/docs/sources/mobile-trackers/tracking-events/ecommerce-tracking/index.md) trackers must be available in the database.
+- Have the [`webPage` context](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md#adding-predefined-contexts) enabled. (Note if you have only tracked mobile ecommerce events, you will need other events in your warehouse to have used this context as we require the column to exist).
 - Have the following ecommerce contexts enabled: `cart`, `checkout_step`, `page` `transaction`, `user`
 - Track the ecommerce tracking action events on your website/mobile application
 
@@ -91,7 +89,7 @@ vars:
 
 ### 6. Removing unused modules
 
-The ecommerce package creates tables that depend on the existence of certain entities that are a part of the [Snowplow ecommerce](/docs/sources/trackers/web-trackers/tracking-events/ecommerce/index.md) JS plugin. If, for some reason, you have not implemented them and would like to streamline your data modeling not to create empty tables, then you need to add that configuration to your `dbt_project.yml` file. Below you can see an example of what that would look like if you wanted to disable the [cart entity](/docs/sources/trackers/web-trackers/tracking-events/ecommerce/index.md#cart)
+The ecommerce package creates tables that depend on the existence of certain entities that are a part of the [Snowplow ecommerce](/docs/sources/web-trackers/tracking-events/ecommerce/index.md) JS plugin. If, for some reason, you have not implemented them and would like to streamline your data modeling not to create empty tables, then you need to add that configuration to your `dbt_project.yml` file. Below you can see an example of what that would look like if you wanted to disable the [cart entity](/docs/sources/web-trackers/tracking-events/ecommerce/index.md#cart)
 
 #### Disabling the cart module in `dbt_project.yml` (recommended)
 

@@ -62,7 +62,7 @@ gtag('event', 'purchase', {
 });
 ```
 
-To directly track the same behavior with Snowplow, you could use the [web ecommerce](/docs/sources/trackers/web-trackers/tracking-events/ecommerce/index.md) `trackTransaction` event. The tracking code looks similar:
+To directly track the same behavior with Snowplow, you could use the [web ecommerce](/docs/sources/web-trackers/tracking-events/ecommerce/index.md) `trackTransaction` event. The tracking code looks similar:
 
 ```javascript
 snowplow('trackTransaction', {
@@ -96,7 +96,7 @@ The key differences between GA4 and Snowplow events are in the warehouse loading
 
 With GA, the example `purchase` event would be loaded into an `events_YYYYMMDD` table in BigQuery, with nested RECORD fields for parameters and user properties. Each parameter exists as key-value pairs with separate columns for different data types: `string_value`, `int_value`, `float_value`, or `double_value`. Analysts must use complex `UNNEST` operations to extract parameters and join data.
 
-With Snowplow, the example event would be processed as a `transaction` [event](/docs/fundamentals/events/index.md) with one `product` [entity](/docs/fundamentals/entities/index.md). The Snowplow [tracker SDKs](/docs/sources/trackers/index.md) and pipeline add additional contextual entities to each event, for example information about the specific page or screen view, the user's session, or the browser.
+With Snowplow, the example event would be processed as a `transaction` [event](/docs/fundamentals/events/index.md) with one `product` [entity](/docs/fundamentals/entities/index.md). The Snowplow [tracker SDKs](/docs/sources/index.md) and pipeline add additional contextual entities to each event, for example information about the specific page or screen view, the user's session, or the browser.
 
 In BigQuery, Databricks, or Snowflake, the event will be loaded into the single `atomic.events` table, with a column for the `transaction` event and a column for each entity. In Redshift, each event and entity is loaded into its own table.
 
@@ -133,8 +133,8 @@ However, Snowplow also provides templates and tags for GTM and GTM Server-side. 
 
 | Approach                                                                                                | Phase 1                                                                    | Phase 2                                                                                         | Phase 3                           | Best for                                                                              |
 | ------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | --------------------------------- | ------------------------------------------------------------------------------------- |
-| Direct [tracker SDK](/docs/sources/trackers/index.md) calls                                             | Define Snowplow [data products](/docs/fundamentals/data-products/index.md) | Add Snowplow tracking calls; implement Snowplow data models                                     |                                   | Teams with tracking implementation engineer resources; greenfield validation projects |
-| [Snowplow GTM templates](/docs/sources/trackers/google-tag-manager/index.md)                            | Define Snowplow [data products](/docs/fundamentals/data-products/index.md) | Configure Snowplow tags to receive data layer events; implement Snowplow data models            | Implement Snowplow tracking calls | Validation of Snowplow data quality for analytics or marketing teams                  |
+| Direct [tracker SDK](/docs/sources/index.md) calls                                                      | Define Snowplow [data products](/docs/fundamentals/data-products/index.md) | Add Snowplow tracking calls; implement Snowplow data models                                     |                                   | Teams with tracking implementation engineer resources; greenfield validation projects |
+| [Snowplow GTM templates](/docs/sources/google-tag-manager/index.md)                                     | Define Snowplow [data products](/docs/fundamentals/data-products/index.md) | Configure Snowplow tags to receive data layer events; implement Snowplow data models            | Implement Snowplow tracking calls | Validation of Snowplow data quality for analytics or marketing teams                  |
 | [GTM Server-side](/docs/destinations/forwarding-events/google-tag-manager-server-side/index.md) tagging | Define Snowplow [data products](/docs/fundamentals/data-products/index.md) | Use GTM Server-side to forward your existing events to Snowplow; implement Snowplow data models | Implement Snowplow tracking calls | Validation of Snowplow data quality for teams already using GTM Server-side           |
 
 Using Snowplow's GTM templates or tags is a temporary solution to help you migrate.
@@ -166,7 +166,7 @@ For data layer implementations, pay special attention to:
 * Any custom JavaScript variables that process data layer data
 
 You'll need to translate your GA4 event configuration into Snowplow [data products](/docs/fundamentals/data-products/index.md). Some things to consider:
-* Which platforms will you be tracking on? Different Snowplow tracker SDKs include different built-in event types. The [web](/docs/sources/trackers/web-trackers/index.md) and [native mobile](/docs/sources/trackers/mobile-trackers/index.md) trackers are the most fully featured.
+* Which platforms will you be tracking on? Different Snowplow tracker SDKs include different built-in event types. The [web](/docs/sources/web-trackers/index.md) and [native mobile](/docs/sources/mobile-trackers/index.md) trackers are the most fully featured.
 * Which GA4 events can be migrated to built-in Snowplow events, and which should be custom [self-describing events](/docs/fundamentals/events/index.md#self-describing-events)?
 * Are there sets of event parameters used in multiple places that could be defined as [entities](/docs/fundamentals/entities/index.md) instead?
 * What's the best combination of event properties and entities to capture the same data as GA4?
@@ -213,15 +213,15 @@ Your GA4 implementation will stay live until the final migration phase. By the e
 #### Direct tracker SDK calls
 
 For the most straightforward migration, add Snowplow tracking in parallel with your existing GA4 tracking:
-* Implement a tracker SDK, and track a small number of built-in events, such as [page views](/docs/sources/trackers/web-trackers/quick-start-guide/index.md)
+* Implement a tracker SDK, and track a small number of built-in events, such as [page views](/docs/sources/web-trackers/quick-start-guide/index.md)
 * Use the [Snowplow Inspector browser extension](/docs/testing/snowplow-inspector/index.md) to confirm that the tracker is generating the expected events
 * Use [Snowtype](/docs/data-product-studio/snowtype/index.md) to generate custom tracking code for your data products
 
 #### Snowplow GTM templates
 
-If you're using GTM and don't have the resources to implement Snowplow tracking yet, you can use [Snowplow's GTM tag templates](/docs/sources/trackers/google-tag-manager/index.md) to generate Snowplow events without changing your application code:
+If you're using GTM and don't have the resources to implement Snowplow tracking yet, you can use [Snowplow's GTM tag templates](/docs/sources/google-tag-manager/index.md) to generate Snowplow events without changing your application code:
 * Keep your existing `dataLayer.push()` calls in your application code
-* Install the [Snowplow GTM tag template](/docs/sources/trackers/google-tag-manager/index.md) in your GTM web container
+* Install the [Snowplow GTM tag template](/docs/sources/google-tag-manager/index.md) in your GTM web container
 * Configure GTM triggers to fire Snowplow tags based on your data layer events
 * Use GTM variables to map data layer properties to Snowplow event and entity fields
 

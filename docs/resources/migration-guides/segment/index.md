@@ -40,7 +40,7 @@ analytics.track('Transaction Completed', {
 
 This event would be loaded into a `Transaction Completed` warehouse table. Analysts must `UNION` tables together to reconstruct user journeys.
 
-To track the same behavior with Snowplow, you could use the [web ecommerce](/docs/sources/trackers/web-trackers/tracking-events/ecommerce/index.md) `trackTransaction` event. The tracking code looks very similar:
+To track the same behavior with Snowplow, you could use the [web ecommerce](/docs/sources/web-trackers/tracking-events/ecommerce/index.md) `trackTransaction` event. The tracking code looks very similar:
 
 ```javascript
 snowplow('trackTransaction', {
@@ -58,7 +58,7 @@ snowplow('trackTransaction', {
 
 The differences are in the warehouse loading and data modeling:
 * Snowplow processes this as a `transaction` [event](/docs/fundamentals/events/index.md) with one `product` [entity](/docs/fundamentals/entities/index.md)
-* The Snowplow [tracker SDKs](/docs/sources/trackers/index.md) and pipeline add additional contextual entities to each event, for example information about the specific page or screen view, the user's session, or the browser
+* The Snowplow [tracker SDKs](/docs/sources/index.md) and pipeline add additional contextual entities to each event, for example information about the specific page or screen view, the user's session, or the browser
 * In BigQuery or Snowflake, the event will be loaded into the single `atomic.events` table, with a column for the `transaction` event and a column for each entity
   * Columns have type `OBJECT` in Snowflake, and `REPEATED RECORD` in BigQuery
   * In Redshift, each event and entity is loaded into its own table
@@ -114,7 +114,7 @@ Export your Tracking Plans using one of these methods:
 * Warehouse inference: if you no longer have access to your Segment account, you can infer the events and properties from your warehouse data
 
 You'll need to translate your Segment Tracking Plans into Snowplow [data products](/docs/fundamentals/data-products/index.md). Some things to consider:
-* Which platforms will you be tracking on? Different Snowplow tracker SDKs include different built-in event types. The [web](/docs/sources/trackers/web-trackers/index.md) and [native mobile](/docs/sources/trackers/mobile-trackers/index.md) trackers are the most fully featured.
+* Which platforms will you be tracking on? Different Snowplow tracker SDKs include different built-in event types. The [web](/docs/sources/web-trackers/index.md) and [native mobile](/docs/sources/mobile-trackers/index.md) trackers are the most fully featured.
 * Which Tracking Plan events can be migrated to built-in Snowplow events, and which should be custom [self-describing events](/docs/fundamentals/events/index.md#self-describing-events)?
 * Are there sets of event properties used in multiple places that could be defined as [entities](/docs/fundamentals/entities/index.md) instead?
 * What's the best combination of event properties and entities to capture the same data as the non-`track` Segment events?
@@ -145,7 +145,7 @@ Add Snowplow tracking in parallel with your existing Segment tracking:
 * If you have a web platform, we recommend starting here
   * The [Snowplow Inspector browser extension](/docs/testing/snowplow-inspector/index.md) is a useful manual testing tool
   * Start with non-critical pages or features
-* Implement a tracker SDK, and track a small number of built-in events, such as [page views](/docs/sources/trackers/web-trackers/quick-start-guide/index.md)
+* Implement a tracker SDK, and track a small number of built-in events, such as [page views](/docs/sources/web-trackers/quick-start-guide/index.md)
   * Use the Snowplow Inspector to confirm that the tracker is generating the expected events
   * Use [Snowplow Micro](/docs/testing/snowplow-micro/index.md) to test and validate locally
   * Finally, confirm that the tracker can also send events to your warehouse

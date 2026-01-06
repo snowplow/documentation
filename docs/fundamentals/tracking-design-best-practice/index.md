@@ -38,7 +38,7 @@ For example, an `Ecommerce Checkout Flow` data product may contain three event s
 
 Note that the `cart` entity data structure is reused across event specifications, this promotes consistency in your tracking design and makes analysis easier.
 
-Additionally you can assign entities to [source applications](/docs/data-product-studio/source-applications/index.md) to document which entities are expected for each event within that application, these are also called [global entities](/docs/sources/web-trackers/custom-tracking-using-schemas/global-context/index.md). An example would be assigning a `user` entity to a mobile application to ensure that user information is always captured with events from that application.
+Additionally you can assign entities to [source applications](/docs/event-studio/source-applications/index.md) to document which entities are expected for each event within that application, these are also called [global entities](/docs/sources/web-trackers/custom-tracking-using-schemas/global-context/index.md). An example would be assigning a `user` entity to a mobile application to ensure that user information is always captured with events from that application.
 
 ## Naming conventions for tracking plans
 
@@ -120,7 +120,7 @@ This approach can be useful when:
 * **Analysis**: the actions are closely related and often analyzed together
 * **Simplicity**: you want to reduce the number of event schemas and columns in your data warehouse
 
-Continuing the example from above, it is important to ensure the correct `type` property is set for each action and the allowed values are enforced through strong governance principles. This can be managed in Snowplow through Event Specifications with [property instructions](/docs/data-product-studio/event-specifications/ui/index.md#properties). Tools like [Snowtype](/docs/data-product-studio/snowtype/index.md) can also help simplify this complexity during implementation.
+Continuing the example from above, it is important to ensure the correct `type` property is set for each action and the allowed values are enforced through strong governance principles. This can be managed in Snowplow through Event Specifications with [property instructions](/docs/event-studio/event-specifications/ui/index.md#properties). Tools like [Snowtype](/docs/event-studio/snowtype/index.md) can also help simplify this complexity during implementation.
 
 ### Approach 2: One event schema per action
 

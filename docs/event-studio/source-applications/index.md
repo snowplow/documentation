@@ -70,7 +70,7 @@ Configure the basic tracker settings:
 - **Collector URL**: the endpoint where your events will be sent
 - **App ID**: select one of the application IDs associated with your source application
 
-![Initialize tracker](images/initialize-tracker.png)
+<!-- placeholder ![Initialize tracker](images/initialize-tracker.png) -->
 
 #### Automatic tracking
 
@@ -83,7 +83,7 @@ Enable out-of-the-box tracking features to capture common user interactions with
 
 Toggle these features based on your tracking requirements.
 
-![Automatic tracking](images/automatic-tracking.png)
+<!-- placeholder ![Automatic tracking](images/automatic-tracking.png) -->
 
 #### Implementation
 
@@ -97,12 +97,12 @@ Choose your implementation method:
 
     The SDK URL is pre-filled with the latest version from a CDN but can be edited if you are hosting on your own domain.
 
-    ![JavaScript implementation](images/tag-implementation.png)
+    <!-- placeholder ![JavaScript implementation](images/tag-implementation.png) -->
 
   </TabItem>
   <TabItem value="npm" label="Browser (npm)">
     Install the tracker as an npm package for bundled applications and any required plugins using your preferred package manager.
 
-    ![Browser implementation](images/npm-implementation.png)
+    <!-- placeholder ![Browser implementation](images/npm-implementation.png) -->
   </TabItem>
 </Tabs>

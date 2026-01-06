@@ -78,7 +78,7 @@ See the documentation for each tracker to learn how to configure it:
 * [React Native](/docs/sources/react-native-tracker/index.md)
 * [Scala](/docs/sources/scala-tracker/initialization/index.md)
 
-Use [source applications](/docs/data-product-studio/source-applications/index.md) to document your expected application entities.
+Use [source applications](/docs/event-studio/source-applications/index.md) to document your expected application entities.
 
 ## Structured events
 

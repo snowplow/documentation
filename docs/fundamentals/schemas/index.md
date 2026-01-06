@@ -27,10 +27,10 @@ A **data structure** is a higher-level data management concept that includes the
 * Whether it's available to your pipeline, or is still in draft
 * Optional change notes associated with schema versions
 
-[Data structures](/docs/data-product-studio/data-structures/index.md) wrap schemas with this additional metadata to help you manage your data definitions. They allow you to group related schemas within [data products](/docs/data-product-studio/data-products/index.md) (tracking plans), or keep track of [which schemas are used where](/docs/data-product-studio/event-specifications/index.md).
+[Data structures](/docs/event-studio/data-structures/index.md) wrap schemas with this additional metadata to help you manage your data definitions. They allow you to group related schemas within [data products](/docs/event-studio/tracking-plans/index.md) (tracking plans), or keep track of [which schemas are used where](/docs/event-studio/event-specifications/index.md).
 
 :::tip Data structure management
-Check out the documentation for [managing](/docs/data-product-studio/data-structures/manage/index.md) and [versioning](/docs/data-product-studio/data-structures/version-amend/index.md) data structures.
+Check out the documentation for [managing](/docs/event-studio/data-structures/manage/index.md) and [versioning](/docs/event-studio/data-structures/version-amend/index.md) data structures.
 :::
 
 ## Self-describing JSON schema anatomy

@@ -3,16 +3,9 @@ title: "Versioning Data Structures with the Data Structures Builder"
 date: "2023-03-01"
 sidebar_label: "Using the Data Structures Builder"
 sidebar_position: 20
-sidebar_custom_props:
-  offerings:
-    - bdp
 ---
 
-# Versioning with the Data Structures Builder
-
 Versioning is automated when using the Data Structure Builder to create or edit your custom [Data Structures](/docs/fundamentals/schemas/index.md) for your [Events](/docs/fundamentals/events/index.md) and [Entities](/docs/fundamentals/entities/index.md).
-
-![](images/data-structures-2.png)
 
 **Breaking and non-breaking changes**
 
@@ -22,5 +15,5 @@ At the point of publishing a data structure, there are two options for versionin
 
 The Data Structure builder will automatically select how to version up your data structure depending on the changes you have just made.
 
-![](images/data-structures-1.png)
 ![](images/data-structures-2.png)
+![](images/data-structures-1.png)

@@ -9,11 +9,11 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-You can (and should!) test your enrichment with [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md) before adding it to your production pipeline.
+You can (and should!) test your enrichment with [Snowplow Micro](/docs/testing/snowplow-micro/index.md) before adding it to your production pipeline.
 
 ## Basic setup
 
-If you haven’t worked with Micro before, take a look at the [usage guide](/docs/data-product-studio/data-quality/snowplow-micro/basic-usage/index.md). Adding the JavaScript enrichment to Micro is similar to [adding other enrichments](/docs/data-product-studio/data-quality/snowplow-micro/configuring-enrichments/index.md).
+If you haven’t worked with Micro before, take a look at the [usage guide](/docs/testing/snowplow-micro/basic-usage/index.md). Adding the JavaScript enrichment to Micro is similar to [adding other enrichments](/docs/testing/snowplow-micro/configuring-enrichments/index.md).
 
 :::tip Testing `.js` files directly
 
@@ -29,21 +29,17 @@ For example, if your enrichment code is in `script.js` in the current directory,
   snowplow/snowplow-micro:${versions.snowplowMicro}`
 }</CodeBlock>
 
-Next, point your tracking code to `localhost:9090` (see the [usage guide](/docs/data-product-studio/data-quality/snowplow-micro/basic-usage/index.md#sending-events-to-micro) for more details). Now the events you send to Micro will go through your enrichment code.
+Next, point your tracking code to `localhost:9090` (see the [usage guide](/docs/testing/snowplow-micro/basic-usage/index.md#sending-events-to-micro) for more details). Now the events you send to Micro will go through your enrichment code.
 
 ## Debugging
 
-When debugging a JavaScript enrichment with Micro, there are a few sources of useful information: the [UI](/docs/data-product-studio/data-quality/snowplow-micro/ui/index.md) (available since Micro 2.0.0), the logs and the [REST API](/docs/api-reference/snowplow-micro/api/index.md).
+When debugging a JavaScript enrichment with Micro, there are a few sources of useful information: the [UI](/docs/testing/snowplow-micro/ui/index.md) (available since Micro 2.0.0), the logs and the [REST API](/docs/api-reference/snowplow-micro/api/index.md).
 
 ### User Interface
 
-The overview will show you which events are enriched successfully and which fail:
+The Micro user interface will show you which events are enriched successfully and which fail.
 
-![Micro UI overview](../../../../../data-product-studio/data-quality/snowplow-micro/images/overview.png)
-
-For each failed event, you can also expand the details and look at the failure message:
-
-![Micro UI failure message](../../../../../data-product-studio/data-quality/snowplow-micro/images/failure-details.png)
+For each failed event, you can also click on the failure badge to look at the detailed failure message.
 
 ### Logs
 
@@ -75,7 +71,7 @@ If you `throw` in your JavaScript code to [discard the event](/docs/pipeline/enr
 
 You can also add temporary `print` statements to your code to inspect certain values.
 
-:::caution
+:::warning
 
 Make sure to remove all debug printing when adding the enrichment to a production pipeline.
 
@@ -131,7 +127,7 @@ For example, if your code adds some entities, you will find them in the output f
 
 If your enrichment [adds extra entities to the event](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/writing/index.md#adding-extra-entities-to-the-event), you might be iterating on the schemas for those entities at the same time you are iterating on your enrichment code.
 
-You can simplify your development and testing flow by [adding schemas to Micro](/docs/data-product-studio/data-quality/snowplow-micro/adding-schemas/index.md#adding-schemas-directly-to-micro) as local files. For example, your current directory might look like this:
+You can simplify your development and testing flow by [adding schemas to Micro](/docs/testing/snowplow-micro/adding-schemas/index.md#adding-schemas-directly-to-micro) as local files. For example, your current directory might look like this:
 
 ```
 script.js
@@ -157,7 +153,7 @@ Here are a few more tips on getting the most out of Micro when testing your Java
 
 ### Enriched fields
 
-If your enrichment uses fields filled by other enrichments, you will want to [enable those](/docs/data-product-studio/data-quality/snowplow-micro/configuring-enrichments/index.md) as well.
+If your enrichment uses fields filled by other enrichments, you will want to [enable those](/docs/testing/snowplow-micro/configuring-enrichments/index.md) as well.
 
 ### IP addresses
 
@@ -169,17 +165,17 @@ import XForwardedForPlugin from "@site/docs/reusable/x-forwarded-for-plugin/_ind
 <XForwardedForPlugin/>
 ```
 
-Alternatively, check out the section on [exposing Micro via a public domain name](/docs/data-product-studio/data-quality/snowplow-micro/remote-usage/index.md#exposing-micro-via-a-public-domain-name) — with this approach you can get a public URL for your Micro, to which you can point your tracking code. Now the interaction between your tracking and your Micro will go through the internet, and you will get a realistic IP address in your events.
+Alternatively, check out the section on [exposing Micro via a public domain name](/docs/testing/snowplow-micro/remote-usage/index.md#exposing-micro-via-a-public-domain-name) — with this approach you can get a public URL for your Micro, to which you can point your tracking code. Now the interaction between your tracking and your Micro will go through the internet, and you will get a realistic IP address in your events.
 
 ### Cookies
 
 If your enrichment relies on cookies, you may find it difficult to reproduce all the cookies set by your website or app in a local setup.
 
-For a solution, check out the section on [locally resolving an existing domain name to Micro](/docs/data-product-studio/data-quality/snowplow-micro/remote-usage/index.md#locally-resolving-an-existing-domain-name-to-micro). With this approach you can hook into an existing website or app, receiving all cookies in your Micro.
+For a solution, check out the section on [locally resolving an existing domain name to Micro](/docs/testing/snowplow-micro/remote-usage/index.md#locally-resolving-an-existing-domain-name-to-micro). With this approach you can hook into an existing website or app, receiving all cookies in your Micro.
 
 :::tip Cookie name
 
-If the values of cookie-based fields (e.g. `network_userid`) are not what you expect, make sure you [configure Micro](/docs/data-product-studio/data-quality/snowplow-micro/advanced-usage/index.md#adding-custom-collector-configuration) to use the same cookie name as your website or app (the default is `micro`). For example, to set it to `sp`:
+If the values of cookie-based fields (e.g. `network_userid`) are not what you expect, make sure you [configure Micro](/docs/testing/snowplow-micro/advanced-usage/index.md#adding-custom-collector-configuration) to use the same cookie name as your website or app (the default is `micro`). For example, to set it to `sp`:
 
 <CodeBlock language="bash">{
 `docker run ... \\

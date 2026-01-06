@@ -19,4 +19,4 @@ To run the loader, mount your config file into the docker image, and then provid
   --iglu-config /myconfig/iglu.hocon
 `}</CodeBlock>
 
-Where `loader.hocon` is loader's [configuration file](/docs/api-reference/loaders-storage-targets/bigquery-loader/#configuring-the-loader) and `iglu.hocon` is [iglu resolver](/docs/api-reference/iglu/iglu-resolver/index.md) configuration.
+Where `loader.hocon` is loader's [configuration file](/docs/api-reference/loaders-storage-targets/bigquery-loader/index.md#configuring-the-loader) and `iglu.hocon` is [iglu resolver](/docs/api-reference/iglu/iglu-resolver/index.md) configuration.

@@ -1,7 +1,7 @@
 ---
-title: "Conversions"
+title: "Modeling conversions with the Web package"
+sidebar_label: "Conversions"
 sidebar_position: 100
-hide_title: true
 ---
 
 ```mdx-code-block
@@ -12,13 +12,11 @@ import TabItem from '@theme/TabItem';
 
 <Badges badgeType="dbt-package Release" pkg="web"></Badges>
 
-# Conversions
-
 Conversion events are a type of event that's important to your business, be that a transaction, a sign up to a newsletter, or the view of a specific page. Whatever type of event matters to you, so long as it can be determined from a single event record, you'll be able to model and aggregate these conversions at a session level with our package.
 
 Because we know that each user may have a different concept of what a conversion means to them, for example it could be a specific type of event such as a `page_view` on a specific url, a self-describing event such as `sign_up`, or even a bespoke `conversion` event type with some attached context, the way we model conversions is also flexible and allows you to change your definition over time. This allows you to track multiple types of conversions, with varying logic, even retrospectively.
 
-:::caution
+:::warning
 
 Because this is part of the sessions table within the web package, we still expect your sessions to contain at least one `page_view` or `page_ping` event, and the events must all have a `domain_sessionid` to be included in the `base_events_this_run_table`. Without a `domain_sessionid` the event will not be visible to the model, and without a `page_view` or `page_ping` in the session there will be no session record for the model to attach the conversions to.
 
@@ -33,7 +31,7 @@ For every type of conversion you provide a configuration for, the package will a
 | `cv_{name}_values`           | An array of values for each conversion, if provided in the configuration                     |
 | `cv_{name}_total`            | The total of the values for each conversion, if provided in the configuration                |
 | `cv_{name}_events`           | An array of `event_id`s for each conversion, if `list_events` is `true` in the configuration |
-| `cv_{name}_first_conversion` | The `derived_tstamp` of the first conversion event                                         |
+| `cv_{name}_first_conversion` | The `derived_tstamp` of the first conversion event                                           |
 | `cv_{name}_converted`        | A boolean for if there was a conversion in the session                                       |
 
 :::tip
@@ -59,11 +57,11 @@ If you are using these columns make sure that all your conversion values are in 
 ## The conversion configuration dictionary
 The `snowplow__conversion_events` variable in our project takes a list of dictionaries to determine what events count as a conversion. These dictionaries are expected to have certain keys and form what we call a conversion configuration. The keys are:
 
-| Key           | Required | Description                                                                                                                                                         | Example value                                              |
-| ------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| Key             | Required | Description                                                                                                                                                         | Example value                                              |
+| --------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
 | `name`          | Yes      | The name of the conversion, to be used in the column names for this conversion                                                                                      | `sign_up`                                                  |
 | `condition`     | Yes      | The (valid sql) condition that identifies if the event is a conversion. Must return true or false, and will be used in a `case when ...` statement.                 | `event_name = 'page_view' and page_url like '%signed_up%'` |
-| `value`         | No       | The field name or sql to select the value associated with the conversion. If not provided the `cv_{name}_value` and `cv_{name}_total` fields will not be generated. | `tr_total_base/100`                                            |
+| `value`         | No       | The field name or sql to select the value associated with the conversion. If not provided the `cv_{name}_value` and `cv_{name}_total` fields will not be generated. | `tr_total_base/100`                                        |
 | `default_value` | No       | The default value to use when a conversion is identified but the value returned is `null`. The type should match value. Default `0`                                 | `1`                                                        |
 | `list_events`   | No       | A boolean to determine whether to add the `cv_{name}_events` column to the output.                                                                                  | `true`                                                     |
 
@@ -110,7 +108,7 @@ For some self-describing event with a name of `sign_up`, where we do not want to
 <summary>Using a self-describing event and a context name</summary>
 
 
-Using our [Snowplow e-commerce tracking](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md):
+Using our [Snowplow e-commerce tracking](/docs/sources/web-trackers/tracking-events/ecommerce/index.md):
 
 <Tabs groupId="warehouse" queryString>
 <TabItem value="snowflake" label="Snowflake" default>

@@ -17,13 +17,13 @@ Any package can make use of the table grants feature provided by the `snowplow__
 
 :::
 
-| Package | Minimum Required Version |
-|---------|--------------------------|
-| Unified Digital | 0.3.0 |
-| E-commerce | 0.8.1 |
-| Media Player | 0.7.2 |
-| Normalize | 0.3.5 |
-| Attribution | 0.2.0|
+| Package         | Minimum Required Version |
+| --------------- | ------------------------ |
+| Unified Digital | 0.3.0                    |
+| E-commerce      | 0.8.1                    |
+| Media Player    | 0.7.2                    |
+| Normalize       | 0.3.5                    |
+| Attribution     | 0.2.0                    |
 
 Note that this feature is not supported for BigQuery due to the different approach to permissions they take via IAM roles.
 
@@ -38,13 +38,13 @@ vars:
 ```
 Note that these user/role names are case sensitive. Databricks Principals are also supported. If the user does not exist an error will occur when the grant tries to run. This feature is compatible with the built-in [dbt grants](https://docs.getdbt.com/reference/resource-configs/grants) functionality and we will grant to a combination of the two.
 
-:::caution
+:::warning
 
 It is important to scope this to the relevant package, if you set this variable at the top level of your project then all models will have this grant applied.
 
 :::
 
-:::caution
+:::warning
 
 Note this will overwrite any existing grants applied to the table manually in the warehouse.
 

@@ -1,10 +1,9 @@
 ---
-title: "MailGun"
+title: "MailGun webhook"
+sidebar_label: "MailGun"
 date: "2020-02-26"
 sidebar_position: 50
 ---
-
-## Overview
 
 This webhook integration lets you track a variety of events logged by [Mailgun](https://www.mailgun.com/).
 
@@ -18,7 +17,7 @@ Available events are:
 - Clicks
 - Opens
 
-### Compatibility
+## Compatibility
 
 - [R97 Knossos](https://github.com/snowplow/snowplow/releases/tag/r97-knossos)\+ (`POST`\-capable collectors only)
 - [Mailgun webhook API](https://documentation.mailgun.com/en/latest/user_manual.html#webhooks)
@@ -56,7 +55,7 @@ http://<collector host>/com.mailgun/v1
 
 Finally click on **Set Webhook URL**. You can optionally click on **Test Webhook** to verify that your collector instance is reachable from Mailgun's servers.
 
-You may want to set the snowplow `aid=` parameter in your URL query string to the company for which this webhook has been configured; this is the `app_id` parameter taken from the [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md), however this is optional. The company is also contained in the received messages.
+You may want to set the snowplow `aid=` parameter in your URL query string to the company for which this webhook has been configured; this is the `app_id` parameter taken from the [Snowplow Tracker Protocol](/docs/events/index.md), however this is optional. The company is also contained in the received messages.
 
 If you want, you can also manually override the event's `platform` parameter by appending a query string to the end of the URL, in combination or separately with aid above. Here is what the final URL would look like for a configured aid and platform:
 
@@ -64,4 +63,4 @@ If you want, you can also manually override the event's `platform` parameter b
 http://<collector host>/com.mailgun/v1?aid=<company>&p=<platform code>
 ```
 
-Supported platform codes can again be found in the [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md); if not set, then the value for `platform` will default to `srv` for a server-side application.
+Supported platform codes can again be found in the [Snowplow Tracker Protocol](/docs/events/index.md); if not set, then the value for `platform` will default to `srv` for a server-side application.

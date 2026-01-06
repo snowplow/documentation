@@ -1,8 +1,8 @@
 ---
-title: "Media Player"
+title: "Snowplow Media Player dbt package"
+sidebar_label: "Media Player"
 description: "The Snowplow Media Player dbt Package"
 sidebar_position: 20
-hide_title: true
 ---
 
 ```mdx-code-block
@@ -10,38 +10,43 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
+import BadgeGroup from '@site/src/components/BadgeGroup';
+import AvailabilityBadges from '@site/src/components/ui/availability-badges'
 ```
 
-<Badges badgeType="dbt-package Release" pkg="media-player"></Badges>&nbsp;
-<Badges badgeType="Actively Maintained"></Badges>&nbsp;
+<BadgeGroup>
+<Badges badgeType="dbt-package Release" pkg="media-player"></Badges>
+<Badges badgeType="Actively Maintained"></Badges>
 <Badges badgeType="SPAL"></Badges>
+</BadgeGroup>
 
-# Snowplow Media Player Package
+<AvailabilityBadges available={['cloud', 'pmc', 'addon']} helpContent="The Media Player package is available as part of the Digital Analytics Data Model Pack, a paid addon for Snowplow CDI." />
 
 **The package source code can be found in the [snowplow/dbt-snowplow-media-player repo](https://github.com/snowplow/dbt-snowplow-media-player), and the docs for the [model design here](https://snowplow.github.io/dbt-snowplow-media-player/#!/overview/snowplow_media_player).**
 
 The package contains a fully incremental model that transforms raw media player event data into derived tables for easier querying. It can support media events tracked using the following tracking implementations on Web and mobile:
 
-* on Web using plugins for our [JavaScript trackers](/docs/sources/trackers/javascript-trackers/index.md):
-  * [media plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/index.md) that can be used to track events from any media player.
-  * [HTML5 media tracking plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/html5/index.md).
-  * [YouTube tracking plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/youtube/index.md).
-  * [Vimeo tracking plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/vimeo/index.md).
-* [media tracking APIs on our iOS and Android trackers](/docs/sources/trackers/mobile-trackers/tracking-events/media-tracking/index.md) for mobile apps.
+* on Web using plugins for our [JavaScript trackers](/docs/sources/web-trackers/index.md):
+  * [media plugin](/docs/sources/web-trackers/tracking-events/media/index.md) that can be used to track events from any media player.
+  * [HTML5 media tracking plugin](/docs/sources/web-trackers/tracking-events/media/html5/index.md).
+  * [YouTube tracking plugin](/docs/sources/web-trackers/tracking-events/media/youtube/index.md).
+  * [Vimeo tracking plugin](/docs/sources/web-trackers/tracking-events/media/vimeo/index.md).
+* [media tracking APIs on our iOS and Android trackers](/docs/sources/mobile-trackers/tracking-events/media-tracking/index.md) for mobile apps.
+* [media tracking APIs on our Roku tracker](/docs/sources/roku-tracker/media-tracking/index.md) for [Roku](https://www.roku.com/) devices
 
 <details>
 <summary>Version 1 and version 2 of the media event and context entity schemas</summary>
 
 There are two versions of schemas for media events that our trackers may use to track media events. This has an effect on the information provided by the media package. In contrast with v1, the v2 schemas contain information about the media playback that is computed directly on the tracker and is more accurate (e.g., play time, buffering time). They also introduce new schemas for tracking ads during media playback.
 
-1. v1 media schemas (used by the HTML5 and YouTube plugin for JavaScript tracker):
+1. v1 media schemas (used by the HTML5 and YouTube plugin for JavaScript tracker and the Roku tracker):
    - [media-player event schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player_event/jsonschema/1-0-0) used for all media events.
    - [media-player context v1 schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player/jsonschema/1-0-0).
    - Depending on the plugin / intention there are player-specific contexts:
       - in case of embedded YouTube tracking: Have the [YouTube specific context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.youtube/youtube/jsonschema/1-0-0) enabled.
       - in case of HTML5 audio or video tracking: Have the [HTML5 media element context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/org.whatwg/media_element/jsonschema/1-0-0) enabled.
       - in case of HTML5 video tracking: Have the [HTML5 video element context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/org.whatwg/video_element/jsonschema/1-0-0) enabled.
-2. v2 media schemas (used by the media and Vimeo plugins for the JavaScript trackers and the mobile trackers):
+2. v2 media schemas (used by the media and Vimeo plugins for the JavaScript trackers, the Roku tracker, and the mobile trackers):
    - [per-event media event schemas](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow.media).
    - [media-player context v2 schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player/jsonschema/2-0-0).
    - optional [media-session context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.media/session/jsonschema/1-0-0).
@@ -50,7 +55,7 @@ There are two versions of schemas for media events that our trackers may use to 
 </details>
 
 :::note
-Support for the version 2 schemas (as used by the media, Vimeo JS plugin or the mobile trackers) has been added in version 0.6 of the media player package. Older package versions only support version 1 schemas.
+Support for the version 2 schemas (as used by the media, Vimeo JS plugin, Roku tracker or the mobile trackers) has been added in version 0.6 of the media player package. Older package versions only support version 1 schemas.
 :::
 
 ## Overview
@@ -75,14 +80,14 @@ The package contains multiple staging models however the mart models are as foll
 
 The package generates robust identifiers for use in the incremental logic and keys for the derived tables.
 
-| Identifier | Definition |
-| ----------------------- | ----------------------------- |
-| `session_identifier` | The session  identifier as defined in your dbt project variables which is is used for the package's [incremental sessionization logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md). If not set, this defaults to the `mediaSessionId` from the media session entity if enabled, else to the page/screen view id. This ensures all media events for a play spanning multiple `domain_sessionid`s are modelled. The more traditional session identifier `domain_sessionid` can be extracted from the `domain_sessionid_array` field.  |
-| `user_identifier` | The user identifier as defined in your dbt project variables. If not set, this defaults to be `domain_userid` for web or the `userId` from the client session entity for mobile. |
-| `media_identifier` | Used to identify individual media elements/content. It is generated from the `player_id`, `media_label`, `media_type` and `media_player_type` fields. |
-| `play_id` | The unique identifier for each individual play of media content. This is the `mediaSessionId` from the media session entity if enabled. Otherwise this uses the page/screen view identifier together with the `media_identifer` to generate a unique play id. |
-| `media_ad_id` | Generated identifier that identifies an ad (identified using the `ad_id`) played with a specific media (identified using the `media_identifier`) and on a specific platform (based on the `platform` property). |
-| `media_ad_view_id` | The unique identifier for each individual ad view. It is generated from the `play_id`, `ad_break_id` and `media_ad_id` fields. |
+| Identifier           | Definition                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     |
+| -------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `session_identifier` | The session  identifier as defined in your dbt project variables which is is used for the package's [incremental sessionization logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md). If not set, this defaults to the `mediaSessionId` from the media session entity if enabled, else to the page/screen view id. This ensures all media events for a play spanning multiple `domain_sessionid`s are modelled. The more traditional session identifier `domain_sessionid` can be extracted from the `domain_sessionid_array` field. |
+| `user_identifier`    | The user identifier as defined in your dbt project variables. If not set, this defaults to be `domain_userid` for web or the `userId` from the client session entity for mobile.                                                                                                                                                                                                                                                                                                                                                                                                               |
+| `media_identifier`   | Used to identify individual media elements/content. It is generated from the `player_id`, `media_label`, `media_type` and `media_player_type` fields.                                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| `play_id`            | The unique identifier for each individual play of media content. This is the `mediaSessionId` from the media session entity if enabled. Otherwise this uses the page/screen view identifier together with the `media_identifer` to generate a unique play id.                                                                                                                                                                                                                                                                                                                                  |
+| `media_ad_id`        | Generated identifier that identifies an ad (identified using the `ad_id`) played with a specific media (identified using the `media_identifier`) and on a specific platform (based on the `platform` property).                                                                                                                                                                                                                                                                                                                                                                                |
+| `media_ad_view_id`   | The unique identifier for each individual ad view. It is generated from the `play_id`, `ad_break_id` and `media_ad_id` fields.                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 
 
 ## Mixing web and mobile events

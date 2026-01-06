@@ -1,11 +1,10 @@
 ---
 position: 3
-title: Deploy on AWS with Terraform
+title: "Deploy the Kafka live viewer profiles application on AWS using Terraform"
+sidebar_label: "Deploy on AWS using Terraform"
 ---
 
-# Deploy on AWS with Terraform
 
-## Introduction
 
 The following [Steps](#steps) will deploy the solution accelerator to AWS using Terraform. There is no need to manually install [Terraform](https://www.terraform.io/). It is executed via [Docker](https://www.docker.com/) using the `terraform.sh` script.
 
@@ -66,7 +65,7 @@ The applications listen for HTTP traffic on the following ports
 - Snowplow collector - 9090
 
 ## Next Steps
-- You can implement Snowplow media tracking on any [HTML5](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/html5/) or [YouTube](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/youtube/) media of your choice
+- You can implement Snowplow media tracking on any [HTML5](/docs/sources/trackers/web-trackers/tracking-events/media/html5/) or [YouTube](/docs/sources/trackers/web-trackers/tracking-events/media/youtube/) media of your choice
 - Look into the output from Kafka and extend the Live Viewer to include information on the media being watched and the user.
 - Replace Amazon DynamoDB with an alternative to be cloud agnostic, e.g. Google Bigtable or MongoDB.
 ---

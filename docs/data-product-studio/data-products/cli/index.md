@@ -4,10 +4,9 @@ description: "Use the 'snowplow-cli data-products' command to manage your data p
 sidebar_label: "Using the CLI"
 sidebar_position: 999
 ---
-```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-```
+
 The `data-products` subcommand of [Snowplow CLI](/docs/data-product-studio/snowplow-cli/index.md) provides a collection of functionality to ease the integration of custom development and publishing workflows.
 ## Snowplow CLI Prerequisites
 Installed and configured [Snowplow CLI](/docs/data-product-studio/snowplow-cli/index.md)
@@ -37,7 +36,7 @@ data:
           event:
             source: iglu:com.snowplowanalytics.snowplow/button_click/jsonschema/1-0-0
 ```
-:::caution Warning
+:::warning Warning
 The `source` fields of events and entities must refer to a deployed data structure. Referring to a locally created data structure is not yet supported.
 :::
 ### Linking data product to a source application
@@ -79,7 +78,7 @@ In this example event specification `All source apps` is related to both `generi
 ```bash
 ./snowplow-cli dp download
 ```
-This command retrieves all organization data products, event specifications, and source applications. By default, it creates a folder named `data-products` in your current working directory. You can specify a different folder name as an argument if needed. 
+This command retrieves all organization data products, event specifications, and source applications. By default, it creates a folder named `data-products` in your current working directory. You can specify a different folder name as an argument if needed.
 The command creates the following structure:
 - A main `data-products` folder containing your data product files
 - A `source-apps` subfolder containing source application definitions
@@ -88,7 +87,7 @@ The command creates the following structure:
 ```bash
 ./snowplow-cli dp validate
 ```
-This command scans all files under `./data-products` and validates them using the BDP console. It checks:
+This command scans all files under `./data-products` and validates them using Snowplow Console. It checks:
 1. Whether each file is in a valid format (YAML/JSON) with correctly formatted fields
 2. Whether all source application references in the data product files are valid
 3. Whether event specification rules are compatible with their schemas
@@ -97,4 +96,4 @@ If validation fails, the command displays the errors in the console and exits wi
 ```bash
 ./snowplow-cli dp publish
 ```
-This command locates all files under `./data-products`, validates them, and publishes them to the BDP console.
+This command locates all files under `./data-products`, validates them, and publishes them to Console.

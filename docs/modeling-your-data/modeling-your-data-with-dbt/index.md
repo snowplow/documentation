@@ -20,12 +20,12 @@ dark: require('./images/dbt_packages-dark.drawio.png').default
 </p>
 
 
-To setup dbt, Snowplow Community Edition users can start with the [dbt User Guide](https://docs.getdbt.com/guides/getting-started) and then we have prepared some [introduction videos](https://www.youtube.com/watch?v=1kd6BJhC4BE) for working with the Snowplow dbt packages.
+To set up dbt, Snowplow Self-Hosted users can start with the [dbt User Guide](https://docs.getdbt.com/guides/getting-started) and then we have prepared some [introduction videos](https://www.youtube.com/watch?v=1kd6BJhC4BE) for working with the Snowplow dbt packages.
 
-For Snowplow BDP customers, dbt projects can be configured and scheduled in the console meaning you can [get started](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/index.md) running dbt models alongside your Snowplow pipelines.
+For Snowplow CDI customers, dbt projects can be configured and scheduled in the console meaning you can [get started](/docs/modeling-your-data/running-data-models-via-console/dbt/index.md) running dbt models alongside your Snowplow pipelines.
 
 
-# Snowplow dbt Packages
+## Snowplow dbt Packages
 
 :::info
 
@@ -52,7 +52,7 @@ There are also 3 legacy dbt packages for web, mobile (superseded by unified) and
 - [Snowplow Fractribution](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-fractribution-data-model/index.md) ([dbt model docs](https://snowplow.github.io/dbt-snowplow-fractribution/#!/overview/fractribution)): used for Attribution Modeling with Snowplow
 
 
-Each package comes with a set of standard models to take your [Snowplow tracker data](/docs/sources/trackers/index.md) and produce tables aggregated to different levels, or to perform analysis for you. You can also add your own models on top, see the page on [custom modules](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) for more information on how to do this.
+Each package comes with a set of standard models to take your [Snowplow tracker data](/docs/sources/index.md) and produce tables aggregated to different levels, or to perform analysis for you. You can also add your own models on top, see the page on [custom modules](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) for more information on how to do this.
 
 
 

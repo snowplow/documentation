@@ -1,10 +1,9 @@
 ---
-title: "Mandrill"
+title: "Mandrill webhook"
+sidebar_label: "Mandrill"
 date: "2020-02-25"
 sidebar_position: 60
 ---
-
-## Overview
 
 This webhook integration lets you track a variety of events logged by [Mandrill](https://mandrill.com/).
 
@@ -20,7 +19,7 @@ Available events are:
 - Message clicked
 - Recipient unsubscribed
 
-### Compatibility
+## Compatibility
 
 - [Snowplow 0.9.14](https://github.com/snowplow/snowplow/releases/tag/0.9.14)\+ (`POST`\-capable collectors only)
 - [Mandrill webhook API](http://help.mandrill.com/entries/21738186-Introduction-to-Webhooks)
@@ -52,7 +51,7 @@ Once we have selected what events we want to record we need to fill in the **Po
 http://<collector host>/com.mandrill/v1?aid=<company code>
 ```
 
-The `aid=` name-value pair in your URI's querystring is optional; this is the `app_id` parameter taken from the [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md). You can use it to specify which company in Mandrill these call complete events belong to. Putting it all together, our setup screen now looks like this:
+The `aid=` name-value pair in your URI's querystring is optional; this is the `app_id` parameter taken from the [Snowplow Tracker Protocol](/docs/events/index.md). You can use it to specify which company in Mandrill these call complete events belong to. Putting it all together, our setup screen now looks like this:
 
 ![](images/mandrill-2.png)
 
@@ -62,7 +61,7 @@ If you want, you can also manually override the event's `platform` parameter l
 http://<collector host>/com.mandrill/v1?aid=<company code>&p=<platform code>
 ```
 
-Supported platform codes can again be found in the [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md); if not set, then the value for `platform` will default to `srv` for a server-side application.
+Supported platform codes can again be found in the [Snowplow Tracker Protocol](/docs/events/index.md); if not set, then the value for `platform` will default to `srv` for a server-side application.
 
 Once you click the **Create Webhook** button it will attempt to authenticate that the Collector actually exists and is ready to receive events. If everything is setup correctly it will return to the previous page and you will now see your new Webhook listed!
 

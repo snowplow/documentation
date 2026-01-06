@@ -4,7 +4,14 @@ date: "2020-11-02"
 sidebar_position: 80
 ---
 
-## Overview
+```mdx-code-block
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc', 'selfHosted']}
+  helpContent="Analytics SDKs are included with all Snowplow platforms."
+/>
+```
 
 The Snowplow Analytics SDKs are designed for data engineers and data scientists working with Snowplow in a number of languages.
 

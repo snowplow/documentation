@@ -1,7 +1,7 @@
 ---
-title: "Conversions"
+title: "Modeling conversion events with the Unified Digital package"
+sidebar_label: "Conversions"
 sidebar_position: 100
-hide_title: true
 ---
 
 ```mdx-code-block
@@ -11,8 +11,6 @@ import TabItem from '@theme/TabItem';
 ```
 
 <Badges badgeType="dbt-package Release" pkg="unified"></Badges>
-
-# Conversions
 
 Conversion events are a type of event that's important to your business, be that a transaction, a sign up to a newsletter, or the view of a specific page. Whatever type of event matters to you, so long as it can be determined from a single event record, you'll be able to model and aggregate these conversions at a session level with our package.
 
@@ -27,7 +25,7 @@ There are two ways that you can model conversions in the Unified package:
 
 By configuring the conversion specifications through the `snowplow__conversion_events` variable you can enable conversion events to be modelled in the derived sessions table.
 
-:::caution
+:::warning
 
 Because this is part of the sessions table within the Unified dbt package, we still expect your sessions to contain at least one `page_view`, a `page_ping` or a `screen_view` event, and the events must all have a `session_identifier` to be included in the `base_events_this_run_table`. Without a `session_identifier` the event will not be visible to the model, and without a `page_view`, a `page_ping` or a `screen_view` in the session there will be no session record for the model to attach the conversions to.
 
@@ -42,7 +40,7 @@ For every type of conversion you provide a configuration for, the package will a
 | `cv_{name}_values`           | An array of values for each conversion, if provided in the configuration                     |
 | `cv_{name}_total`            | The total of the values for each conversion, if provided in the configuration                |
 | `cv_{name}_events`           | An array of `event_id`s for each conversion, if `list_events` is `true` in the configuration |
-| `cv_{name}_first_conversion` | The `derived_tstamp` of the first conversion event                                         |
+| `cv_{name}_first_conversion` | The `derived_tstamp` of the first conversion event                                           |
 | `cv_{name}_converted`        | A boolean for if there was a conversion in the session                                       |
 
 :::tip
@@ -68,11 +66,11 @@ If you are using these columns make sure that all your conversion values are in 
 ### The conversion configuration dictionary
 The `snowplow__conversion_events` variable in our project takes a list of dictionaries to determine what events count as a conversion. These dictionaries are expected to have certain keys and form what we call a conversion configuration. The keys are:
 
-| Key           | Required | Description                                                                                                                                                         | Example value                                              |
-| ------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
+| Key             | Required | Description                                                                                                                                                         | Example value                                              |
+| --------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- |
 | `name`          | Yes      | The name of the conversion, to be used in the column names for this conversion                                                                                      | `sign_up`                                                  |
 | `condition`     | Yes      | The (valid sql) condition that identifies if the event is a conversion. Must return true or false, and will be used in a `case when ...` statement.                 | `event_name = 'page_view' and page_url like '%signed_up%'` |
-| `value`         | No       | The field name or sql to select the value associated with the conversion. If not provided the `cv_{name}_value` and `cv_{name}_total` fields will not be generated. | `tr_total_base/100`                                            |
+| `value`         | No       | The field name or sql to select the value associated with the conversion. If not provided the `cv_{name}_value` and `cv_{name}_total` fields will not be generated. | `tr_total_base/100`                                        |
 | `default_value` | No       | The default value to use when a conversion is identified but the value returned is `null`. The type should match value. Default `0`                                 | `1`                                                        |
 | `list_events`   | No       | A boolean to determine whether to add the `cv_{name}_events` column to the output.                                                                                  | `true`                                                     |
 
@@ -129,7 +127,7 @@ vars:
 <summary>Using a self-describing event and a context name</summary>
 
 
-Using our [Snowplow e-commerce tracking](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md):
+Using our [Snowplow e-commerce tracking](/docs/sources/web-trackers/tracking-events/ecommerce/index.md):
 
 <Tabs groupId="warehouse" queryString>
 <TabItem value="snowflake" label="Snowflake" default>
@@ -353,11 +351,11 @@ If you need a conversions source table for your downstream model (e.g. for the s
 
 This would produce an incremental conversions table where you will see the most important fields related to your conversion events based on your definitions. If you defined multiple conversion types, you will see them all in one table.
 
-| event_id  | session_identifier  | user_identifier       | user_id  | cv_id  | cv_value  | cv_tstamp               | dvce_created_tstamp   | cv_type       |
-|-----------|----------------------|-----------------------|----------|--------|-----------|-------------------------|------------------------|--------------|
-| event_1   | session_1            | f000170187170673177   | user_1   | cv_1   | 50.00     | 2023-06-08 20:18:32.000 | 2023-06-08 20:18:32.000 | transactions |
-| event_2   | session_2            | f0009028775170427694  | user_2   | cv_2   | 20.42     | 2023-06-11 15:33:03.000 | 2023-06-11 15:33:03.000 | transactions |
-| event_3   | session_3            | f0008284662789123943  | user_3   | cv_3   | 200.00    | 2023-07-07 13:05:55.000 | 2023-07-07 13:05:55.000 | transactions |
+| event_id | session_identifier | user_identifier      | user_id | cv_id | cv_value | cv_tstamp               | dvce_created_tstamp     | cv_type      |
+| -------- | ------------------ | -------------------- | ------- | ----- | -------- | ----------------------- | ----------------------- | ------------ |
+| event_1  | session_1          | f000170187170673177  | user_1  | cv_1  | 50.00    | 2023-06-08 20:18:32.000 | 2023-06-08 20:18:32.000 | transactions |
+| event_2  | session_2          | f0009028775170427694 | user_2  | cv_2  | 20.42    | 2023-06-11 15:33:03.000 | 2023-06-11 15:33:03.000 | transactions |
+| event_3  | session_3          | f0008284662789123943 | user_3  | cv_3  | 200.00   | 2023-07-07 13:05:55.000 | 2023-07-07 13:05:55.000 | transactions |
 
 :::note
 

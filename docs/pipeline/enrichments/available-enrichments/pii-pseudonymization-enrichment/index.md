@@ -12,7 +12,7 @@ In Europe the obligations regarding Personal Data handling have been outlined on
 
 ## Configuration
 
-- [Schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/pii_enrichment_config/jsonschema/2-0-0)
+- [Schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/pii_enrichment_config/jsonschema/2-0-1)
 - [Example](https://github.com/snowplow/enrich/blob/master/config/enrichments/pii_enrichment_config.json)
 
 ```mdx-code-block
@@ -23,7 +23,7 @@ import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_in
 
 Two types of fields can be configured to be hashed:
 
-- `pojo`: field that is effectively a scalar field in the enriched event (full list of fields that can be pseudonymized [here](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/pii_enrichment_config/jsonschema/2-0-0#L43-L60))
+- `pojo`: field that is effectively a scalar field in the enriched event (full list of fields that can be pseudonymized [here](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/pii_enrichment_config/jsonschema/2-0-1#L43-L60))
 - `json`: field contained inside a self-describing JSON (e.g. in `unstruct_event`)
 
 With the configuration example, the fields `user_id` and `user_ipaddress` of the enriched event would be hashed, as well as the fields `email` and `ip_opt` of the unstructured event in case its schema matches _iglu:com.mailchimp/subscribe/jsonschema/1-\*-\*_.
@@ -42,9 +42,16 @@ It's **important** to keep these things in mind when using this enrichment:
 - Hashing a field can change its format (e.g. email) and its length, thus making a whole valid original event invalid if its schema is not compatible with the hashing.
 - When updating the `salt` after it has already been used, same original values hashed with previous and new salt will have different hashes, thus making a join impossible and/or creating duplicate values.
 
+### `anonymousOnly` mode
+Enrich 5.3.0 introduced the `anonymousOnly` mode. When [anonymousOnly](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/pii_enrichment_config/jsonschema/2-0-1#L155) is set to true, PII fields are masked only in events tracked in anonymous mode (i.e. the `SP-Anonymous` header is present).
+
+This is useful for compliance with regulation such as GDPR, where you would start with [anonymous tracking](/docs/sources/web-trackers/anonymous-tracking/index.md) by default (all identifiers are masked) and switch to non-anonymous tracking when the user consents to data collection (all identifiers are kept).
+
+By default, `anonymousOnly` is `false`, i.e. PII fields are always masked.
+
 ## Input
 
-[These fields](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/pii_enrichment_config/jsonschema/2-0-0#L43-L60) of the enriched event and any field of an unstructured event or context can be hashed.
+[These fields](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.enrichments/pii_enrichment_config/jsonschema/2-0-1#L43-L60) of the enriched event and any string or array of strings field of a self-describing event or entity can be hashed.
 
 ## Output
 

@@ -1,7 +1,7 @@
 ---
-title: "Consent Module"
+title: "Consent module for Unified Digital"
+sidebar_label: "Consent module"
 sidebar_position: 200
-hide_title: true
 ---
 
 ```mdx-code-block

@@ -1,5 +1,5 @@
 ---
-title: "Community & contributing"
+title: "Community and contributing"
 date: "2020-10-28"
 sidebar_position: 11
 sidebar_label: "Resources"

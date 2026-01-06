@@ -17,56 +17,16 @@ This guide is linked from the [docs GitHub README](https://github.com/snowplow/d
 
 ## Using this guide with an AI tool
 
-If you're using an LLM AI tool to help you write, provide it with this guide.
+If you're using an LLM AI tool to help you write, provide it with the AI-optimized version of these guidelines.
 
-The style guide file is found [here](https://github.com/snowplow/documentation/blob/main/src/pages/style-guide/index.md).
-Depending which AI you are using, you will need to copy the file contents, or save the file.
+The style guide file is found [here](https://github.com/snowplow/documentation/blob/main/src/pages/style-guide/llm/index.md).
+Depending which AI you are using, you will need to copy the file contents, save the file, or provide a path to the file.
 
 ![github screenshot showing how to download the file](github_style_guide.webp)
 
-### Writing new content
+If you have a paid account, you can provide the AI-optimized style guide to your project instructions, so that it will apply to all chats in the project.
 
-If you have only a free account for the AI, manually provide the style guide for each chat.
-
-Example prompt:
-```text
-I'm writing a blog post to advertise a new product release. Here is the company style guide. Follow the rules for all generated writing.
-```
-
-If you have a paid account, create a summarized version of the style guide to set in your project instructions, so that it will apply to all chats in the project.
-
-Example prompt:
-```text
-Here is the company style guide. Create a compact version that I can set as custom project instructions.
-```
-
-Example instructions for chatGPT:
-```text
-This is for writing documentation on Snowplow (docs.snowplow.io) in markdown format. Create a code window.
-
-all headings sentence case
-[etc.]
-```
-
-### Editing existing content
-
-Try asking the AI to create an edited version that is consistent with the style guide. It might do a reasonable job of updating things like formatting and spelling (then again, it might not). It is less likely to do a good job of improving less easily-defined things, such as replacing an unnecessary explanation of a concept with a link to a Fundamentals page.
-
-Example prompt:
-```text
-Here is an existing piece of documentation, and the company style guide. Update the documentation to be compliant with the style guide. Do a first pass looking for and improving on any larger structural or design problems. Then a second pass looking for more specific technical problems.
-
-Tell me any issues you find in the content. I expect to get a full updated version that aligns with the style guide.
-```
-
-Alternatively, ask it just to just list problems rather than trying to edit the text itself. It will likely still miss some problems (and hallucinate others) but this can provide a useful checklist for improvements.
-
-Example prompt:
-```text
-Here is an existing piece of documentation, and the company style guide. Go through every section in the style guide (everything at header level h3 i.e. ###) and work out whether the documentation complies with it or not.
-
-If the page is not following that rule, tell me so and the evidence for your decision. I expect to get a list of some of the headings from the style guide, along with the associated evidence, and advice on updating the content.
-```
+Ask the AI to specifically check your writing against the style guide.
 
 ## Examples
 
@@ -146,10 +106,11 @@ Here are two pieces of older content that only partially follow the style guide.
 
 ### Titles and headings
 - Headings never finish with punctuation (no full stops, colons, etc.)
-- Use only heading levels 1, 2 and 3
+- Use imperative voice for headings to improve SEO: "Configure the tracker" not "Tracker configuration"
+- Use only heading levels 1, 2, 3, and (rarely) 4
 - The title of the page should have header level 1 (#)
+  - For **documentation** it's added automatically by Docusaurus
 - Subheadings should be H2 (##), with any sections under that as H3 (###)
-- Do not use smaller headings - they look confusingly like normal text
   - Docusaurus doesn't include smaller headings in the table of contents
 - For **documentation** and **release notes**, use sentence case for titles and headings
 
@@ -213,10 +174,14 @@ Here are two pieces of older content that only partially follow the style guide.
 - Use "and" rather than "&"
 - This is partly for consistency and aesthetic reasons, but also helps with screen reader accessibility
 
-    | ✅                                          | ❌                                        |
-    | ------------------------------------------ | ---------------------------------------- |
-    | version and amend                          | version & amend                          |
-    | User and Marketing Analytics visualization | User & Marketing Analytics visualization |
+### Numbers
+- Spell out single-digit numbers as words: "three events" not "3 events"
+
+### Page dividers
+- Do not use horizontal rules (`---`) as page dividers
+
+### Ellipses
+- Do not use ellipses (...)
 
 ## Writing style
 ### Tone
@@ -241,7 +206,7 @@ Here are two pieces of older content that only partially follow the style guide.
   | stream your enhanced events effortlessly to destinations | stream your enhanced events to destinations |
   | allows users to easily record                            | allows users to record                      |
   | create events quickly and accurately                     | create events                               |
-  | we have the best features to do X                        | we do X                                     |
+  | Snowplow has the best features to do X                   | Snowplow does X                             |
 
 ### Brevity
 - Explain the point as simply as possible, without any extra words or phrases that don't add meaningful information
@@ -281,7 +246,7 @@ Here are two pieces of older content that only partially follow the style guide.
     | -------------------------------------------------- |
     | you can track information about the user's browser |
 
-- For **documentation**, primarily refer to Snowplow as "Snowplow"
+- For **documentation**, primarily refer to Snowplow as "Snowplow" to improve SEO
   -  Exception: use "our", "we", "us" (first-person pronouns) if it makes for a better sentence
 
     | ✅                                            | ❌                                       |
@@ -457,13 +422,13 @@ Here are two pieces of older content that only partially follow the style guide.
 
 ### Pipeline components
 - Console is capitalized, and doesn't have a definite article (no "the")
-- It can also be called "BDP Console" or "Snowplow BDP Console"
+- It can also be called "Snowplow Console"
   - This is fine at the start of a piece of writing but feels overly wordy if used throughout, so maybe open with that then just call it "Console" subsequently
 
-   | ✅                              | ❌                                       |
-   | ------------------------------ | --------------------------------------- |
-   | data structures in Console     | data structures in the console          |
-   | data structures in BDP Console | data structures in the Snowplow Console |
+   | ✅                                   | ❌                                       |
+   | ----------------------------------- | --------------------------------------- |
+   | data structures in Console          | data structures in the console          |
+   | data structures in Snowplow Console | data structures in the Snowplow Console |
 
 - Collector is capitalized, and gets a definite article ("the")
     - Use "the Collector endpoint" where possible for clarity - the reader might not know what we mean by "Collector", but they probably know what an endpoint is
@@ -556,7 +521,7 @@ Here are two pieces of older content that only partially follow the style guide.
   | SDKs         |       |
   | URLs         |       |
 
-- For the **documentation** website, we have a docs plugin that adds a dotted line and a tooltip explanation to acronyms, e.g. hovering over "BDP" will show that it stands for "Behavioral Data Platform": add new acronym definitions to the `src/remark/abbreviations.js` file to enable this behavior
+- For the **documentation** website, we have a docs plugin that adds a dotted line and a tooltip explanation to acronyms, e.g. hovering over "CDI" will show that it stands for "Customer Data Infrastructure": add new acronym definitions to the `src/remark/abbreviations.js` file to enable this behavior
 - (Technically, these are all initialisms, not acronyms)
 
 ### Capitalization
@@ -668,6 +633,6 @@ Here are two pieces of older content that only partially follow the style guide.
 - Specify the language next to the opening backticks, so that the code block is rendered correctly
 - For the main **documentation** site only: if the rendering doesn't look right, make sure that the specified language is listed under `prism: additionalLanguages` in the `docusaurus.config.js` file
 
-    | ✅                                                          |
-    | ---------------------------------------------------------- |
-    | \`\`\`json<br></br>{"accessToken":"string"}<br></br>\`\`\` |
+    | ✅                                                           |
+    | ----------------------------------------------------------- |
+    | \`\`\`json<br></br>\{"accessToken":"string"}<br></br>\`\`\` |

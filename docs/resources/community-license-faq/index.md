@@ -1,4 +1,6 @@
-# FAQ: Snowplow Community License (SCL)
+---
+title: "FAQ: Snowplow Community License (SCL)"
+---
 
 :::info Note
 
@@ -43,7 +45,7 @@ Only the MIT and Apache 2 licensed software from Snowplow can be embedded and di
 
 ## I have commercially licensed software from Snowplow. Does this impact me?
 
-No, if you have entered into a separate commercial licensing with Snowplow, for example, buying a Snowplow BDP commercial product, then the commercial license terms you have agreed to will continue to govern your use of the software.
+No, if you have entered into a separate commercial licensing with Snowplow, for example, buying a Snowplow CDI commercial product, then the commercial license terms you have agreed to will continue to govern your use of the software.
 
 ## How can I contact Snowplow in case of doubts?
 

@@ -1,5 +1,6 @@
 ---
-title: Viewing the Output Data  
+title: "View the Unified Digital dbt package output data"
+sidebar_label: "View the output data"
 position: 4
 ---
 

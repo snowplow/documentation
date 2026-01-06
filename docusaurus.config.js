@@ -16,7 +16,7 @@ module.exports = {
   baseUrl: '/',
   // reset this back to throw, set to warn so that site builds
   onBrokenLinks: 'warn',
-  onBrokenMarkdownLinks: 'throw',
+  onBrokenAnchors: 'warn',
   favicon: 'img/favicon.ico',
   trailingSlash: true,
   organizationName: 'snowplow',
@@ -27,17 +27,27 @@ module.exports = {
     locales: ['en'],
   },
 
+  future: {
+    v4: true,
+  },
+
   clientModules: [
     require.resolve('./cookieConsent.js'),
     require.resolve('./snowplow.js'),
+    require.resolve('./reoTracking.js'),
     require.resolve('./google.js'),
+    require.resolve('./src/js/mermaidEnlarge.js'),
+    require.resolve('./src/qualified.js'),
   ],
 
   markdown: {
     mermaid: true,
+    hooks: {
+      onBrokenMarkdownLinks: 'throw',
+    },
   },
 
-  themes: ['@saucelabs/theme-github-codeblock', '@docusaurus/theme-mermaid'],
+  themes: ['@docusaurus/theme-mermaid', 'docusaurus-theme-github-codeblock'],
 
   presets: [
     [
@@ -48,7 +58,21 @@ module.exports = {
           showLastUpdateTime: true,
           editUrl: 'https://github.com/snowplow/documentation/tree/main/',
           remarkPlugins: [abbreviations, math],
-          rehypePlugins: [katex],
+          rehypePlugins: [
+            [
+              require('rehype-raw').default,
+              {
+                passThrough: [
+                  'mdxjsEsm',
+                  'mdxJsxFlowElement',
+                  'mdxJsxTextElement',
+                  'mdxFlowExpression',
+                  'mdxTextExpression',
+                ],
+              },
+            ],
+            katex,
+          ],
           async sidebarItemsGenerator({
             defaultSidebarItemsGenerator,
             ...args
@@ -77,6 +101,7 @@ module.exports = {
         showLastUpdateTime: true,
       },
     ],
+    './plugins/docusaurus-plugin-snowplow-schema',
   ],
 
   stylesheets: [
@@ -98,7 +123,12 @@ module.exports = {
           hideable: true,
         },
       },
+      codeblock: {
+        showGithubLink: true,
+        githubLinkLabel: 'View on GitHub',
+      },
       navbar: {
+        hideOnScroll: false,
         logo: {
           alt: 'Snowplow Logo',
           src: 'img/snowplow-logo.svg',
@@ -113,49 +143,72 @@ module.exports = {
             position: 'left',
             className: 'mobile-only',
           },
-          {
-            href: 'https://support.snowplow.io/',
-            label: 'Contact Support',
-            position: 'right',
-          },
-          {
-            href: 'https://community.snowplow.io/',
-            label: 'Community',
-            position: 'right',
-          },
-          {
-            href: 'https://github.com/snowplow/',
-            label: 'GitHub',
-            position: 'right',
-          },
-          {
-            to: 'https://snowplow.io/get-started/book-a-demo-of-snowplow-bdp/',
-            label: 'Book a demo',
-            className: 'snowplow-button',
-            position: 'right',
-          },
-          {
-            type: 'custom-docsTrackerNavbarButton',
-            position: 'right',
-          },
         ],
       },
       footer: {
-        style: 'dark',
+        style: 'light',
+        logo: {
+          alt: 'Snowplow',
+          src: '/img/Snowplow_icoOnly.svg',
+          width: 32,
+          height: 28.5,
+        },
         links: [
           {
-            label: 'Change cookie preferences',
-            href: '/cookie-preferences',
+            title: 'Resources',
+            items: [
+              {
+                href: 'https://github.com/snowplow/',
+                label: 'Github',
+              },
+              {
+                href: 'https://snowplow.io/',
+                label: 'Snowplow.io',
+              },
+              {
+                href: '/docs/glossary/',
+                label: 'Glossary',
+              },
+            ],
           },
           {
-            label: 'Terms and conditions',
-            href: '/terms-and-conditions',
+            title: 'Community',
+            items: [
+              {
+                href: 'https://community.snowplow.io/',
+                label: 'Snowplow Community',
+                className: 'capitalize text-sm text-muted-foreground',
+              },
+              {
+                href: 'https://support.snowplow.io/',
+                label: 'Support',
+              },
+            ],
+          },
+          {
+            title: 'Legal',
+            items: [
+              {
+                label: 'Cookie preferences',
+                href: '/cookie-preferences',
+              },
+              {
+                label: 'Terms and Conditions',
+                href: '/terms-and-conditions',
+              },
+              {
+                label: 'Licensing Overview',
+                href: '/docs/resources/copyright-license',
+              },
+            ],
           },
         ],
-        copyright: `Copyright © ${new Date().getFullYear()} Snowplow Analytics Ltd. Built with Docusaurus.`,
+
+        copyright: `Copyright © ${new Date().getFullYear()} Snowplow Analytics Ltd.`,
       },
       prism: {
-        theme: require('prism-react-renderer/themes/shadesOfPurple'),
+        theme: require('./src/theme/PrismThemes/snowplow-light.js').default,
+        darkTheme: require('./src/theme/PrismThemes/snowplow-dark.js').default,
         // Docusaurus comes with a subset of commonly used languages -https://github.com/FormidableLabs/prism-react-renderer/blob/master/src/vendor/prism/includeLangs.js.
         // To add syntax highlighting for additional Prism supported languages, add reference from https://prismjs.com/#supported-languages.
         // NOTE: do a `yarn build` to ensure that it does build properly
@@ -180,6 +233,9 @@ module.exports = {
           'django',
           'yaml',
           'kotlin',
+          'bash',
+          'diff',
+          'json',
         ],
       },
       algolia: {
@@ -187,32 +243,62 @@ module.exports = {
         apiKey: 'f22e24c1b333034a75914759b0f045c3',
         indexName: 'snowplow',
         contextualSearch: true,
+        insights: true,
       },
     }),
 
+  headTags: [
+    {
+      tagName: 'meta',
+      attributes: {
+        property: 'og:image',
+        content:
+          'https://cdn.prod.website-files.com/661fd4aa0185c5022e931990/66714f936876397066d5fba7_thumbnail-post-category.avif',
+      },
+    },
+  ],
+
   customFields: {
     webpack: {
-      module: {
-        rules: [
-          {
-            test: /\.css$/,
-            use: [
-              require.resolve('style-loader'),
-              require.resolve('css-loader'),
-              {
-                loader: require.resolve('postcss-loader'),
-                options: {
-                  postcssOptions: {
-                    plugins: [
-                      require.resolve('tailwindcss'),
-                      require.resolve('autoprefixer'),
-                    ],
-                  },
+      configure: (config) => {
+        // Add JSX runtime resolution
+        config.resolve.alias = {
+          ...config.resolve.alias,
+          'react/jsx-runtime': require.resolve('react/jsx-runtime'),
+          'react/jsx-dev-runtime': require.resolve('react/jsx-dev-runtime'),
+        }
+
+        // Add module rules for CSS processing
+        config.module.rules.push({
+          test: /\.css$/,
+          use: [
+            require.resolve('style-loader'),
+            require.resolve('css-loader'),
+            {
+              loader: require.resolve('postcss-loader'),
+              options: {
+                postcssOptions: {
+                  plugins: [
+                    require.resolve('tailwindcss'),
+                    require.resolve('autoprefixer'),
+                  ],
                 },
               },
-            ],
-          },
-        ],
+            },
+          ],
+        })
+
+        // Add resolve extensions
+        config.resolve.extensions = [
+          '.js',
+          '.jsx',
+          '.ts',
+          '.tsx',
+          '.json',
+          '.mjs',
+        ]
+
+        return config
       },
     },
   },

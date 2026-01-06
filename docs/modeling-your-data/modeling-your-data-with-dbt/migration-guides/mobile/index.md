@@ -1,7 +1,10 @@
 ---
-title: "Mobile"
+title: "Migration guide for Mobile"
+sidebar_label: "Mobile"
 sidebar_position: 910
 ---
+
+This is a legacy package.
 
 ### Upgrading to 0.7.0
 

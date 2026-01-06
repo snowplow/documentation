@@ -1,0 +1,813 @@
+---
+title: "Quick start guide for Snowplow Self-Hosted"
+sidebar_label: "Quick start guide"
+sidebar_position: 2
+---
+
+```mdx-code-block
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+import LicenseNotice from '@site/docs/get-started/self-hosted/_license-notice.md';
+```
+
+This guide will take you through how to spin up a Snowplow Community Edition pipeline using the [Snowplow Terraform modules](https://registry.terraform.io/namespaces/snowplow-devops). _(Not familiar with Terraform? Take a look at [Infrastructure as code with Terraform](https://learn.hashicorp.com/tutorials/terraform/infrastructure-as-code?in=terraform/aws-get-started).)_
+
+## Prerequisites
+
+[Sign up](https://snowplow.io/pricing/) for Snowplow Community Edition and follow the link in the email to get a copy of the repository containing the Terraform code.
+
+<LicenseNotice/>
+
+Install [Terraform 1.0.0](https://www.terraform.io/downloads.html) or higher. Follow the instructions to make sure the `terraform` binary is available on your `PATH`. You can also use [tfenv](https://github.com/tfutils/tfenv) to manage your Terraform installation.
+
+<Tabs groupId="cloud" queryString>
+  <TabItem value="aws" label="AWS" default>
+
+Install [AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/install-cliv2.html) version 2.
+
+[Configure](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-quickstart.html#cli-configure-quickstart-config) the CLI against a role that has the `AdminstratorAccess` policy attached.
+
+:::warning
+
+`AdminstratorAccess` allows all actions on all AWS services and shouldn't be used in production
+
+:::
+
+Details on how to configure the AWS Terraform Provider can be found [on the registry](https://registry.terraform.io/providers/hashicorp/aws/latest/docs#environment-variables).
+
+  </TabItem>
+  <TabItem value="gcp" label="GCP">
+
+Install [Google Cloud SDK](https://cloud.google.com/sdk/docs/install).
+
+Make sure the following APIs are active in your GCP account (this list might not be exhaustive and is subject to change as GCP APIs evolve):
+- [Compute Engine API](https://console.cloud.google.com/apis/api/compute.googleapis.com)
+- [Cloud Resource Manager API](https://console.cloud.google.com/apis/api/cloudresourcemanager.googleapis.com)
+- [Identity and Access Management (IAM) API](https://console.cloud.google.com/apis/api/iam.googleapis.com)
+- [Cloud Pub/Sub API](https://console.cloud.google.com/apis/api/pubsub.googleapis.com)
+- [Cloud SQL Admin API](https://console.cloud.google.com/apis/api/sqladmin.googleapis.com)
+
+Configure a Google Cloud service account. See [details on using the service account with the Cloud SDK](https://cloud.google.com/docs/authentication/getting-started#setting_the_environment_variable). You will need to:
+- Navigate to your service account on Google Cloud Console
+- Create a new JSON Key and store it locally
+- Create the environment variable by running `export GOOGLE_APPLICATION_CREDENTIALS="KEY PATH"` in your terminal
+
+</TabItem>
+<TabItem value="azure" label="Azure">
+
+Install the [Azure CLI](https://learn.microsoft.com/en-us/cli/azure/install-azure-cli).
+
+If your organisation has an existing Azure account, make sure your user has been granted the following roles on a valid Azure Subscription:
+
+* [Contributor](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#contributor)
+* [User Access Administrator](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#user-access-administrator)
+* [Storage Blob Data Contributor](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles#storage-blob-data-contributor)
+
+:::warning
+
+`User Access Administrator` allows the user to modify, create and delete permissions across Azure resources, and shouldn’t be used in production. Instead, you can use a custom role with the following permissions:
+* `Microsoft.Authorization/roleAssignments/write` to deploy the stacks below
+* `Microsoft.Authorization/roleAssignments/delete` to destroy them
+
+:::
+
+If you don’t have an Azure account yet, you can get started with a new [pay-as-you-go account](https://azure.microsoft.com/free/).
+
+Details on how to configure the Azure Terraform Provider can be found [on the registry](https://registry.terraform.io/providers/hashicorp/azurerm/latest/docs/guides/azure_cli).
+
+  </TabItem>
+</Tabs>
+
+## Storage options
+
+The sections below will guide you through setting up your destination to receive Snowplow data, but for now here is an overview.
+
+| Warehouse         |        AWS         |        GCP         |       Azure        |
+| :---------------- | :----------------: | :----------------: | :----------------: |
+| Snowflake         | :white_check_mark: |        :x:         |        :x:         |
+| Databricks        | :white_check_mark: |        :x:         | :white_check_mark: |
+| Redshift          | :white_check_mark: |         —          |         —          |
+| BigQuery          |         —          | :white_check_mark: |         —          |
+| Synapse Analytics |         —          |         —          | :white_check_mark: |
+
+## Real-time streaming options
+
+As part of the deployment, your data will be available in real-time streams corresponding to the cloud provider you have chosen. You can consume data directly from these streams, either in addition to or instead of the data warehouse.
+
+| Stream    |        AWS         |        GCP         |       Azure        |
+| :-------- | :----------------: | :----------------: | :----------------: |
+| Kinesis   | :white_check_mark: |        :x:         |        :x:         |
+| Pub/Sub   |        :x:         | :white_check_mark: |        :x:         |
+| EventHubs |        :x:         |        :x:         | :white_check_mark: |
+
+For an out-of-the-box solution to accessing this data in real-time streams, you can [check out our Snowbridge tool](/docs/api-reference/snowbridge/index.md). Alternatively, if you want to develop a custom consumer, you can [leverage our Analytics SDKs](/docs/api-reference/analytics-sdk/index.md) to parse the event formats more easily.
+
+:::note
+
+EventHubs topics are deployed in a Kafka-compatible model, so you can consume from them using standard Kafka connector libraries.
+
+:::
+
+<Tabs groupId="cloud" queryString>
+  <TabItem value="aws" label="AWS" default>
+
+There are three main storage options for you to select: Redshift, Snowflake and Databricks. Additionally, there is an S3 option, which is primarily used to archive enriched events and to store [failed events](/docs/fundamentals/failed-events/index.md).
+
+We recommend to only load data into a single destination, but nothing prevents you from loading into multiple destinations with the same pipeline (e.g. for testing purposes).
+
+  </TabItem>
+  <TabItem value="gcp" label="GCP">
+
+Only one storage option is provided: BigQuery.
+
+  </TabItem>
+  <TabItem value="azure" label="Azure">
+
+Only a data lake (ADLS) storage option is provided. This enables querying data from Databricks and Synapse Analytics.
+
+  </TabItem>
+</Tabs>
+
+## Set up a VPC to deploy into
+
+<Tabs groupId="cloud" queryString>
+  <TabItem value="aws" label="AWS" default>
+
+AWS provides a [default VPC](https://docs.aws.amazon.com/vpc/latest/userguide/default-vpc.html#view-default-vpc) in every region for your sub-account. Take a note of the identifiers of this VPC and the associated subnets for later parts of the deployment.
+
+  </TabItem>
+  <TabItem value="gcp" label="GCP">
+
+GCP provides a [default VPC](https://cloud.google.com/vpc/docs/vpc#default-network) for your project. In the steps below, it is sufficient to set `network = default` and leave subnetworks empty, and Terraform will discover the correct network to deploy into.
+
+  </TabItem>
+  <TabItem value="azure" label="Azure">
+
+Azure does not provide a default VPC or resource group, so we have added a helper module to create a working network we can deploy into.
+
+To use our out-of-the-box network, you will need to navigate to the `terraform/azure/base` directory in the code repository and update the input variables in `terraform.tfvars`.
+
+Once that’s done, you can use Terraform to create your base network.
+
+```bash
+terraform init
+terraform plan
+terraform apply
+```
+
+After the deployment completes, you should get an output like this:
+
+```
+...
+vnet_subnets_name_id = {
+  "collector-agw1" = "/subscriptions/<...>/resourceGroups/<...>/providers/Microsoft.Network/virtualNetworks/<...>/subnets/collector-agw1"
+  "iglu-agw1" = "/subscriptions/<...>/resourceGroups/<...>/providers/Microsoft.Network/virtualNetworks/<...>/subnets/iglu-agw1"
+  "iglu-vmss1" = "/subscriptions/<...>/resourceGroups/<...>/providers/Microsoft.Network/virtualNetworks/<...>/subnets/iglu-vmss1"
+  "iglu1" = "/subscriptions/<...>/resourceGroups/<...>/providers/Microsoft.Network/virtualNetworks/<...>/subnets/iglu1"
+  "pipeline1" = "/subscriptions/<...>/resourceGroups/<...>/providers/Microsoft.Network/virtualNetworks/<...>/subnets/pipeline1"
+}
+```
+
+These are the subnet identifiers, e.g. `"/subscriptions/<...>/resourceGroups/<...>/providers/Microsoft.Network/virtualNetworks/<...>/subnets/pipeline1"` is the identifier of the `pipeline1` subnet. Take note of these four identifiers, as you will need them in the following steps.
+
+  </TabItem>
+</Tabs>
+
+## Set up Iglu Server
+
+The first step is to set up the [Iglu Server](/docs/api-reference/iglu/index.md) stack required by the rest of your pipeline.
+
+This will allow you to create and evolve your own [custom events](/docs/fundamentals/events/index.md#self-describing-events) and [entities](/docs/fundamentals/entities/index.md#custom-entities). Iglu Server stores the [schemas](/docs/fundamentals/schemas/index.md) for your events and entities and fetches them as your events are processed by the pipeline.
+
+### Step 1: Update the `iglu_server` input variables
+
+Once you have cloned the code repository, you will need to navigate to the `iglu_server` directory to update the input variables in `terraform.tfvars`.
+
+<Tabs groupId="cloud" queryString>
+  <TabItem value="aws" label="AWS" default>
+
+```bash
+cd terraform/aws/iglu_server/default
+nano terraform.tfvars # or other text editor of your choosing
+```
+
+  </TabItem>
+  <TabItem value="gcp" label="GCP">
+
+```bash
+cd terraform/gcp/iglu_server/default
+nano terraform.tfvars # or other text editor of your choosing
+```
+
+  </TabItem>
+  <TabItem value="azure" label="Azure">
+
+```bash
+cd terraform/azure/iglu_server
+nano terraform.tfvars # or other text editor of your choosing
+```
+
+If you [used our `base` module](#set-up-a-vpc-to-deploy-into), you will need to set these variables as follows:
+
+* `resource_group_name`: use the same value as you supplied in `base`
+* `subnet_id_database`: use the identifier of the `iglu1` subnet from `base`
+* `subnet_id_servers`: use the identifier of the `iglu-vmss1` subnet from `base`
+
+</TabItem>
+</Tabs>
+
+To update your input variables, you’ll need to know a few things:
+
+- Your IP Address. [Help](https://duckduckgo.com/?q=ip+address&t=ffab&ia=answer).
+- A UUIDv4 to be used as the Iglu Server’s API Key. [Help](https://duckduckgo.com/?t=ffab&q=uuid&ia=answer).
+- How to generate an SSH Key.
+
+:::tip
+
+On most systems, you can generate an SSH Key with: `ssh-keygen -t rsa -b 4096`. This will output where you public key is stored, for example: `~/.ssh/id_rsa.pub`. You can get the value with `cat ~/.ssh/id_rsa.pub`.
+
+:::
+
+```mdx-code-block
+import Telemetry from "@site/docs/reusable/telemetry/_index.md"
+
+<Telemetry name="each of the Quick Start Terraform modules" idSetting="user_provided_id" enableSetting="telemetry_enabled" settingWord="variable" />
+```
+
+### Step 2: Run the `iglu_server` Terraform script
+
+You can now use Terraform to create your Iglu Server stack.
+
+<Tabs groupId="cloud" queryString>
+  <TabItem value="aws" label="AWS" default>
+
+You will be asked to select a region, you can find more information about [available AWS regions here](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html).
+
+```bash
+terraform init
+terraform plan
+terraform apply
+```
+
+The deployment will take roughly 15 minutes.
+
+  </TabItem>
+  <TabItem value="gcp" label="GCP">
+
+```bash
+terraform init
+terraform plan
+terraform apply
+```
+
+  </TabItem>
+  <TabItem value="azure" label="Azure">
+
+```bash
+terraform init
+terraform plan
+terraform apply
+```
+
+  </TabItem>
+</Tabs>
+
+Once the deployment is done, it will output `iglu_server_dns_name`. Make a note of this, you’ll need it when setting up your pipeline. If you have attached a custom SSL certificate and set up your own DNS records, then you don’t need this value.
+
+## Prepare the destination
+
+Depending on the destination(s) you’ve choosen, you might need to perform a few extra steps to prepare for loading data there.
+
+:::tip
+
+Feel free to go ahead with these while your Iglu Server stack is deploying.
+
+:::
+
+<Tabs groupId="warehouse" queryString>
+  <TabItem value="redshift" label="Redshift">
+
+Assuming you already have an active Redshift cluster, execute the following SQL (replace the `${...}` variables with your desired values). You will need the permissions to create databases, users and schemas in the cluster.
+
+```sql
+-- 1. (Optional) Create a new database - you can also use an existing one if you prefer
+CREATE DATABASE ${redshift_database};
+-- Log back into Redshift with the new database:
+-- psql --host <host> --port <port> --username <admin> --dbname ${redshift_database}
+
+-- 2. Create a schema within the database
+CREATE SCHEMA IF NOT EXISTS ${redshift_schema};
+
+-- 3. Create the loader user
+CREATE USER ${redshift_loader_user} WITH PASSWORD '${redshift_password}';
+
+-- 4. Ensure the schema is owned by the loader user
+ALTER SCHEMA ${redshift_schema} OWNER TO ${redshift_loader_user};
+```
+
+:::note
+
+You will need to ensure that the loader can access the Redshift cluster over whatever port is configured for the cluster (usually, `5439`).
+
+:::
+
+  </TabItem>
+  <TabItem value="bigquery" label="BigQuery">
+
+No extra steps needed.
+
+  </TabItem>
+  <TabItem value="snowflake" label="Snowflake">
+
+You will need to generate a key pair following the [Snowflake documentation](https://docs.snowflake.com/en/user-guide/key-pair-auth#generate-the-private-key). Make sure to enter an empty passphrase, as the terraform module below does not support keys with passphrases (for simplicity).
+
+Execute the following SQL (replace the `${...}` variables with your desired values). You will need access to both `SYSADMIN` and `SECURITYADMIN` level roles to action this:
+
+```sql
+-- 1. (Optional) Create a new database - you can also use an existing one if you prefer
+CREATE DATABASE IF NOT EXISTS ${snowflake_database};
+
+-- 2. Create a schema within the database
+CREATE SCHEMA IF NOT EXISTS ${snowflake_database}.${snowflake_schema};
+
+-- 3. Create a role that will be used for loading data
+CREATE ROLE IF NOT EXISTS ${snowflake_loader_role};
+GRANT USAGE ON DATABASE ${snowflake_database} TO ROLE ${snowflake_loader_role};
+GRANT ALL ON SCHEMA ${snowflake_database}.${snowflake_schema} TO ROLE ${snowflake_loader_role};
+
+-- 4. Create a user that can be used for loading data
+CREATE USER IF NOT EXISTS ${snowflake_loader_user}
+  RSA_PUBLIC_KEY='MIIBIj...'
+  TYPE = SERVICE
+  DEFAULT_ROLE = ${snowflake_loader_role}
+  EMAIL = 'loader@acme.com';
+GRANT ROLE ${snowflake_loader_role} TO USER ${snowflake_loader_user};
+
+-- 5. (Optional) Grant this role to SYSADMIN to make debugging easier from admin users
+GRANT ROLE ${snowflake_loader_role} TO ROLE SYSADMIN;
+```
+
+  </TabItem>
+  <TabItem value="databricks" label="Databricks">
+
+:::info Azure-specific instructions
+
+On Azure, we currently support loading data into Databricks via a data lake. You can still follow Step 1 below to create the cluster, however you should skip the rest of these steps. Instead, proceed with [deploying the pipeline](#set-up-the-pipeline) — we will return to configuring Databricks [at the end of this guide](#configure-the-destination).
+
+:::
+
+#### Step 1: Create a cluster
+
+:::note
+
+The cluster spec described below should be sufficient for a monthly event volume of up to 10 million events. If your event volume is greater, then you may need to increase the size of the cluster.
+
+:::
+
+Create a new cluster, following the [Databricks documentation](https://docs.databricks.com/clusters/create.html), with the following settings:
+
+* the runtime version must be 13.0 or greater (but not 13.1 or 13.2)
+* single node cluster
+* "smallest" size node type
+* auto-terminate after 30 minutes.
+
+<details>
+<summary>Advanced cluster configuration (optional)</summary>
+
+You might want to configure cluster-level permissions, by following [the Databricks instructions on cluster access control](https://docs.databricks.com/security/access-control/cluster-acl.html).  Snowplow's RDB Loader must be able to restart the cluster if it is terminated.
+
+If you use AWS Glue Data Catalog as your metastore, [follow these Databricks instructions](https://docs.databricks.com/data/metastores/aws-glue-metastore.html) for the relevant spark configurations.  You will need to set `spark.databricks.hive.metastore.glueCatalog.enabled true` and `spark.hadoop.hive.metastore.glue.catalogid <aws-account-id-for-glue-catalog>` in the spark configuration.
+
+You can configure your cluster with [an instance profile](https://docs.databricks.com/administration-guide/cloud-configurations/aws/instance-profiles.html) if it needs extra permissions to access resources.  For example, if the S3 bucket holding the delta lake is in a different AWS account.
+
+</details>
+
+#### Step 2: Note the JDBC connection details
+
+1. In the Databricks UI, click on "Compute" in the sidebar
+2. Click on the *RDB Loader cluster* and navigate to "Advanced options"
+3. Click on the "JDBC/ODBC" tab
+4. Note down the JDBC connection URL, specifically the `host`, the `port` and the `http_path`
+
+#### Step 3: Create an access token for the loader
+
+:::warning
+
+The access token must not have a specified lifetime. Otherwise, the loader will stop working when the token expires.
+
+:::
+
+1. Navigate to the user settings in your Databricks workspace
+    * For Databricks hosted on AWS, the "Settings" link is in the lower left corner in the side panel
+    * For Databricks hosted on Azure, "User Settings" is an option in the drop-down menu in the top right corner.
+2. Go to the "Access Tokens" tab
+3. Click the "Generate New Token" button
+4. Optionally enter a description (comment). Leave the expiration period empty
+5. Click the "Generate" button
+6. Copy the generated token and store it in a secure location
+
+#### Step 4: Create the catalog and the schema
+
+Execute the following SQL (replace the `${...}` variables with your desired values). The default catalog is called `hive_metastore` and is what you should use in the loader unless you specify your own.
+
+```sql
+-- USE CATALOG ${catalog_name}; -- Uncomment if your want to use a custom Unity catalog and replace with your own value.
+
+CREATE SCHEMA IF NOT EXISTS ${schema_name}
+-- LOCATION s3://<custom_location>/ -- Uncomment if you want tables created by Snowplow to be located in a non-default bucket or directory.
+;
+```
+
+<details>
+<summary>Advanced security configuration (optional)</summary>
+
+The security principal used by the loader needs a `Databricks SQL access` permission, which can be enabled in the _Admin Console_.
+
+Databricks does not have table access enabled by default. Enable it with an
+initialization script:
+
+```scala
+dbutils.fs.put("dbfs:/databricks/init/set_spark_params.sh","""
+|#!/bin/bash
+|
+|cat << 'EOF' > /databricks/driver/conf/00-custom-table-access.conf
+|[driver] {
+|  "spark.databricks.acl.sqlOnly" = "true"
+|}
+|EOF
+""".stripMargin, true)
+```
+
+After adding the script, you need to restart the cluster. Verify that changes took effect by evaluating `spark.conf.get("spark.databricks.acl.sqlOnly")`, which should return `true`.
+
+Follow the rest of the quick start guide so that the loader creates the required tables. Afterwards, reconfigure the permissions:
+
+```sql
+-- Clean initial permissions from tables
+REVOKE ALL PRIVILEGES ON TABLE <catalog>.<schema>.events FROM `<principal>`;
+REVOKE ALL PRIVILEGES ON TABLE <catalog>.<schema>.manifest FROM `<principal>`;
+REVOKE ALL PRIVILEGES ON TABLE <catalog>.<schema>.rdb_folder_monitoring FROM `<principal>`;
+
+-- Clean initial permissions from schema
+REVOKE ALL PRIVILEGES ON SCHEMA <catalog>.<schema> FROM `<principal>`;
+
+-- Loader will run CREATE TABLE IF NOT EXISTS statements, so USAGE and CREATE and both required.
+GRANT USAGE, CREATE ON SCHEMA <catalog>.<schema> TO `<principal>`;
+
+-- COPY TO statement requires ANY FILE and MODIFY for the receiving table
+GRANT SELECT ON ANY FILE TO `<principal>`;
+GRANT MODIFY  ON TABLE  <catalog>.<schema>.events TO `<principal>`;
+
+-- These tables are used to store internal loader state
+GRANT MODIFY, SELECT ON TABLE  <catalog>.<schema>.manifest TO `<principal>`;
+GRANT MODIFY, SELECT ON TABLE  <catalog>.<schema>.rdb_folder_monitoring TO `<principal>`;
+```
+
+</details>
+
+  </TabItem>
+  <TabItem value="synapse" label="Synapse Analytics">
+
+No extra steps needed. Proceed with [deploying the pipeline](#set-up-the-pipeline) — we will return to configuring Synapse [at the end of this guide](#configure-the-destination).
+
+  </TabItem>
+</Tabs>
+
+## Set up the pipeline
+
+In this section, you will update the input variables for the Terraform module, and then run the Terraform script to set up your pipeline. At the end you will have a working Snowplow pipeline ready to receive web, mobile or server-side data.
+
+### Step 1: Update the `pipeline` input variables
+
+Navigate to the `pipeline` directory in the code repository and update the input variables in `terraform.tfvars`.
+
+<Tabs groupId="cloud" queryString>
+  <TabItem value="aws" label="AWS" default>
+
+```bash
+cd terraform/aws/pipeline/default
+nano terraform.tfvars # or other text editor of your choosing
+```
+
+  </TabItem>
+  <TabItem value="gcp" label="GCP">
+
+```bash
+cd terraform/gcp/pipeline/default
+nano terraform.tfvars # or other text editor of your choosing
+```
+
+  </TabItem>
+  <TabItem value="azure" label="Azure">
+
+```bash
+cd terraform/azure/pipeline
+nano terraform.tfvars # or other text editor of your choosing
+```
+
+If you [used our `base` module](#set-up-a-vpc-to-deploy-into), you will need to set these variables as follows:
+
+* `resource_group_name`: use the same value as you supplied in `base`
+* `subnet_id_lb`: use the identifier of the `collector-agw1` subnet from `base`
+* `subnet_id_servers`: use the identifier of the `pipeline1` subnet from `base`
+
+<details>
+<summary>Confluent Cloud</summary>
+
+If you already use Confluent Cloud, you can opt to create the necessary message topics there, instead of relying on Azure Event Hubs. This way, you will also benefit from features like [Stream Lineage](https://docs.confluent.io/cloud/current/stream-governance/stream-lineage.html).
+
+To do this, you will need to:
+* Set the `stream_type` variable to `confluent_cloud`
+* Create 3 or 4 topics manually in your Confluent cluster and add their names in the respective variables (`confluent_cloud_..._topic_name`)
+* Create an API key and fill the relevant fields (`confluent_cloud_api_key`, `confluent_cloud_api_secret`)
+* Add a bootstrap server in `confluent_cloud_bootstrap_server`
+
+:::tip Topic partitions
+
+If you need to stay within the free tier for your Confluent cluster, make sure to select no more than 2 partitions for each topic.
+
+:::
+
+</details>
+
+  </TabItem>
+</Tabs>
+
+To update your input variables, you’ll need to know a few things:
+
+- Your IP Address. [Help](https://duckduckgo.com/?q=ip+address&t=ffab&ia=answer).
+- Your Iglu Server’s domain name from the [previous step](#step-2-run-the-iglu_server-terraform-script)
+- Your Iglu Server’s API Key from the [previous step](#step-1-update-the-iglu_server-input-variables)
+- How to generate an SSH Key.
+
+:::tip
+
+On most systems, you can generate an SSH Key with: `ssh-keygen -t rsa -b 4096`. This will output where you public key is stored, for example: `~/.ssh/id_rsa.pub`. You can get the value with `cat ~/.ssh/id_rsa.pub`.
+
+:::
+
+#### Destination-specific variables
+
+<Tabs groupId="cloud" queryString>
+  <TabItem value="aws" label="AWS" default>
+
+As mentioned [above](#storage-options), there are several options for the pipeline’s destination database. For each destination you’d like to configure, set the `<destination>_enabled` variable (e.g. `redshift_enabled`) to `true` and fill all the relevant configuration options (starting with `<destination>_`).
+
+When in doubt, refer back to the [destination setup](#prepare-the-destination) section where you have picked values for many of the variables.
+
+<details>
+<summary>Snowflake</summary>
+
+If you are using Snowflake, you will need to provide a private key you’ve generated during [destination setup](#prepare-the-destination).
+
+Here’s how to do it:
+
+```
+snowflake_streaming_loader_private_key = <<EOT
+-----BEGIN PRIVATE KEY-----
+MIIEvAIBADANBgkqhkiG9w0BAQEFAASCBKYwggSiAgEAAoIBAQCd2dEYSUp3hdyK
+5hWwpkNGG56hLFWDK47oMf/Niu+Yh+8Wm4p9TlPje+UuKOnK5N4nAbM4hlhKyEJv
+...
+99Xil8uas3v7o2OSe7FfLA==
+-----END PRIVATE KEY-----
+EOT
+```
+
+</details>
+
+:::warning
+
+For all active destinations, change any `_password` setting to a value that _only you_ know.
+
+:::
+
+  </TabItem>
+  <TabItem value="gcp" label="GCP">
+
+Set `bigquery_db_enabled` to `true` to enable loading to BigQuery.
+
+  </TabItem>
+  <TabItem value="azure" label="Azure">
+
+Set `lake_enabled` to `true` to enable loading to a data lake.
+
+  </TabItem>
+</Tabs>
+
+### Step 2: Run the `pipeline` Terraform script
+
+<Tabs groupId="cloud" queryString>
+  <TabItem value="aws" label="AWS" default>
+
+You will be asked to select a region, you can find more information about [available AWS regions here](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-regions-availability-zones.html).
+
+```bash
+terraform init
+terraform plan
+terraform apply
+```
+
+This will output your `collector_dns_name`.
+
+  </TabItem>
+  <TabItem value="gcp" label="GCP">
+
+```bash
+terraform init
+terraform plan
+terraform apply
+```
+
+This will output your `collector_ip_address`, `bigquery_db_dataset_id` and `bq_loader_bad_rows_topic_name`.
+
+  </TabItem>
+  <TabItem value="azure" label="Azure">
+
+```bash
+terraform init
+terraform plan
+terraform apply
+```
+
+This will output your `collector_lb_ip_address` and `collector_lb_fqdn`.
+
+  </TabItem>
+</Tabs>
+
+Make a note of the outputs: you'll need them when sending events and (in some cases) connecting to your data.
+
+:::tip Empty outputs
+
+Depending on your cloud and chosen destination, some of these outputs might be empty — you can ignore those.
+
+:::
+
+If you have attached a custom SSL certificate and set up your own DNS records, then you don't need `collector_dns_name`, as you will use your own DNS record to send events from the Snowplow trackers.
+
+:::tip Terraform errors
+
+For solutions to some common Terraform errors that you might encounter when running `terraform plan` or `terraform apply`, see the [FAQs section](/docs/get-started/self-hosted/faq/index.md#troubleshooting-terraform-errors).
+
+:::
+
+## Configure the destination
+
+<Tabs groupId="warehouse" queryString>
+  <TabItem value="redshift" label="Redshift">
+
+No extra steps needed.
+
+  </TabItem>
+  <TabItem value="bigquery" label="BigQuery">
+
+No extra steps needed.
+
+  </TabItem>
+  <TabItem value="snowflake" label="Snowflake">
+
+No extra steps needed.
+
+  </TabItem>
+  <TabItem value="databricks" label="Databricks">
+
+:::info Azure-specific instructions
+
+On Azure, we currently support loading data into Databricks via a data lake. To complete the setup, you will need to configure Databricks to access your data on ADLS.
+
+First, follow the [Databricks documentation](https://docs.databricks.com/en/storage/azure-storage.html) to set up authentication using either Azure service principal, shared access signature tokens or account keys. _(The latter mechanism is not recommended, but is arguably the easiest for testing purposes.)_
+
+You will need to know a couple of things:
+* Storage account name — this is the value of the `storage_account_name` variable in the pipeline `terraform.tvars` file
+* Storage container name — `lake-container`
+
+Once authentication is set up, you can create an external table using Spark SQL (replace `<storage-account-name>` with the corredponding value):
+
+```sql
+CREATE TABLE events
+LOCATION 'abfss://lake-container@<storage-account-name>.dfs.core.windows.net/events/';
+```
+
+:::
+
+  </TabItem>
+  <TabItem value="synapse" label="Synapse Analytics">
+
+Your data is loaded into ADLS. To access it, follow [the Synapse documentation](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/query-delta-lake-format) and use the `OPENROWSET` function.
+
+You will need to know a couple of things:
+* Storage account name — this is the value of the `storage_account_name` variable in the pipeline `terraform.tvars` file
+* Storage container name — `lake-container`
+
+<details>
+<summary>Example query</summary>
+
+```sql
+SELECT TOP 10 *
+FROM OPENROWSET(
+    BULK 'https://<storage-account-name>.blob.core.windows.net/lake-container/events/',
+    FORMAT = 'delta'
+) AS events;
+```
+
+</details>
+
+We recommend [creating a data source](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/query-delta-lake-format#data-source-usage), which simplifies future queries (note that unlike the previous URL, this one does not end with `/events/`):
+
+```sql
+CREATE EXTERNAL DATA SOURCE SnowplowData
+WITH (LOCATION = 'https://<storage-account-name>.blob.core.windows.net/lake-container/');
+```
+
+<details>
+<summary>Example query with data source</summary>
+
+```sql
+SELECT TOP 10 *
+FROM OPENROWSET(
+    BULK 'events',
+    DATA_SOURCE = 'SnowplowData',
+    FORMAT = 'delta'
+) AS events;
+```
+
+</details>
+
+:::tip Fabric and OneLake
+
+You can also consume your ADLS data via Fabric and OneLake:
+
+* First, [create a Lakehouse](https://learn.microsoft.com/en-us/fabric/onelake/create-lakehouse-onelake#create-a-lakehouse) or use an existing one.
+* Next, [create a OneLake shortcut](https://learn.microsoft.com/en-us/fabric/onelake/create-adls-shortcut) to your storage account. In the URL field, specify `https://<storage-account-name>.blob.core.windows.net/lake-container/events/`.
+* You can now [use Spark notebooks](https://learn.microsoft.com/en-us/fabric/data-engineering/lakehouse-notebook-explore) to explore your Snowplow data.
+
+Do note that currently not all Fabric services support nested fields present in the Snowplow data.
+
+:::
+
+  </TabItem>
+</Tabs>
+
+## Configure HTTPS (optional)
+
+Now that you have a working pipeline, you can *optionally* configure your Collector and Iglu Server to have an HTTPS-enabled endpoint. This might be required in some cases to track events on strictly SSL-only websites, as well as to enable first-party tracking (by putting the Collector endpoint on the same sub-domain as your website).
+
+<Tabs groupId="cloud" queryString>
+  <TabItem value="aws" label="AWS" default>
+
+1. Navigate to Amazon Certificate Manager (ACM) in the AWS Console
+2. Request a public certificate from the ACM portal for the domain you want to host these endpoints under (e.g. for the Collector this might be `c.acme.com`) - make sure you are in the *same* region as your pipeline
+  - `Fully qualified domain name` will be something like `c.acme.com`
+  - `Validation method` is whatever works best for you - generally `DNS validation` is going to be easiest to action
+  - `Key algorithm` should be left as `RSA 2048`
+3. Once you have requested the certificate, it should show up in the ACM certificate list as `Pending validation` - complete the DNS / Email validation steps and wait until the status changes to `Issued`
+4. Copy the issued certificate’s `ARN` and paste it into your `terraform.tfvars` file under `ssl_information.certificate_arn`
+5. Change `ssl_information.enabled` to `true`
+6. Apply the `iglu_server` / `pipeline` module as you have done previously to attach the certificate to the Load Balancer
+7. Add a `CNAME` DNS record for your requested domain pointing to the AWS Load balancer (e.g. `c.acme.com` -> `<lb-identifier>.<region>.elb.amazonaws.com`)
+  - If you are using `Route53` for DNS record management, you can instead [setup an Alias route](https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-elb-load-balancer.html) which can help circumvent certain `CNAME` cloaking tracking protections
+
+You should now be able to access your service over HTTPS. Verify this by going to your newly set up endpoint in a browser — you should get a valid response with a valid SSL certificate.
+
+  </TabItem>
+  <TabItem value="gcp" label="GCP">
+
+1. Navigate to Google Certificate Manager in the GCP Console
+2. Select the `Classic Certificates` tab and then press `Create SSL Certificate`
+  - `Name` should be something unique for the certificate you are creating
+  - `Description` describe the service you are creating the certificate for
+  - `Create mode` allows you to either supply your own certificate or create a `Google-managed` one. We generally recommend the latter for ease of implementation and updates
+  - `Domains` add the domain you want to host the service under (e.g. for the Collector this might be `c.acme.com`)
+3. Add an `A` DNS record for the requested domain pointing to the GCP Load balancer (e.g. `c.acme.com` -> `<lb-ipv4-address>`)
+4. Copy the Certificate ID into your `terraform.tfvars` file under `ssl_information.certificate_id`
+  - The ID takes the form `projects/{{project}}/global/sslCertificates/{{name}}`
+5. Change `ssl_information.enabled` to `true`
+6. Apply the `iglu_server` / `pipeline` module as you have done previously to attach the certificate to the Load Balancer
+
+Once the certificate is issued, you should now be able to access your service over HTTPS. Verify this by going to your newly set up endpoint in a browser — you should get a valid response with a valid SSL certificate.
+
+:::info
+
+It’s worth noting that GCP Managed Certificates can take up to 24 hours to be provisioned successfully, so it might take a while before you can access your service over HTTPS.
+
+:::
+
+  </TabItem>
+  <TabItem value="azure" label="Azure">
+
+Unlike AWS or GCP, Azure doesn't have a Certificate Management layer. So to follow this guide, you will need to have bought your own valid SSL certificate covering the domain(s) you want to bind to.
+
+1. [Convert your SSL Certificate](https://github.com/snowplow-devops/terraform-azurerm-lb?tab=readme-ov-file#adding-a-custom-certificate) into the correct format (`pkcs12`) needed for the Azure Application Load Balancer
+2. Copy the `pkcs12` certificate password into your `terraform.tfvars` file under `ssl_information.password`
+3. Copy the `pkcs12` certificate into your `terraform.tfvars` file under `ssl_information.data`
+ - Ensure the certificate is `base64`-encoded (e.g. `cat cert.p12 | base64`)
+4. Change `ssl_information.enabled` to `true`
+5. Apply the `iglu_server` / `pipeline` module as you have done previously to attach the certificate to the Load Balancer
+6. Add an `A` DNS record for your requested domain pointing to the Azure Load Balancer (e.g. `c.acme.com` -> `<lb-ipv4-address>`)
+
+You should now be able to access your service over HTTPS. Verify this by going to your newly set up endpoint in a browser — you should get a valid response with a valid SSL certificate.
+
+  </TabItem>
+</Tabs>
+
+---
+If you are curious, here’s [what has been deployed](/docs/get-started/self-hosted/what-is-deployed/index.md). Now it’s time to [send your first events to your pipeline](/docs/get-started/tracking/index.md)!

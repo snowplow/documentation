@@ -2,16 +2,13 @@
 title: "Managing data structures via the API"
 sidebar_label: "Data structures API"
 sidebar_position: 3
-sidebar_custom_props:
-  offerings:
-    - bdp
 ---
 
-As well as managing [data structures](/docs/fundamentals/schemas/index.md) through the Snowplow BDP Console, Snowplow BDP customers can also manage them programmatically through the data structures API.
+As well as managing [data structures](/docs/fundamentals/schemas/index.md) through Snowplow Console, Snowplow customers can also manage them programmatically through the data structures API.
 
 This functionality is key to automating any existing process you may have, including workflows in version control systems like GitHub.
 
-Partnered with other tools like our [CI tool](/docs/data-product-studio/data-quality/data-structures-ci-tool/index.md) and / or [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md), it's possible to have a very robust and automated data structure workflow that ensures data quality upstream of data hitting your pipeline.
+Partnered with other tools like our [CI tool](/docs/testing/data-structures-ci-tool/index.md) and / or [Snowplow Micro](/docs/testing/snowplow-micro/index.md), it's possible to have a very robust and automated data structure workflow that ensures data quality upstream of data hitting your pipeline.
 
 :::note
 
@@ -34,9 +31,7 @@ The endpoints focus on the main operations in the workflow around:
 3. Validating a data structure
 4. Deploying a data structure to a registry
 
-Each request will need to include your company's `organizationID` which is a UUID that can be retrieved from the URL immediately following the .com when visiting console:
-
-![](images/orgID.png)
+Each request will need to include your Organization ID. You can find it [on the _Manage organization_ page](https://console.snowplowanalytics.com/settings) in Console.
 
 ```mdx-code-block
 import GetConsoleApiKey from "@site/docs/reusable/get-console-api-key/_index.md"

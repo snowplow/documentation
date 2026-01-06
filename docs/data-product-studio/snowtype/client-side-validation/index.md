@@ -4,7 +4,7 @@ sidebar_position: 5
 ---
 
 :::info
-This feature is available since version 0.2.8 of Snowtype for the [Browser Tracker](/docs/sources/trackers/javascript-trackers/web-tracker/quick-start-guide/index.md?platform=browser) in both JavaScript and TypeScript.
+This feature is available since version 0.2.8 of Snowtype for the [Browser Tracker](/docs/sources/web-trackers/quick-start-guide/index.md?platform=browser) in both JavaScript and TypeScript.
 :::
 
 ## Schema validation right on your browser
@@ -13,7 +13,7 @@ Using Snowtype you can get notified, at runtime, about schema validation errors 
 To opt-in to client-side validation you should include the `--validations` flag when you are generating your code.
 
 ```sh
-npx @snowplow/snowtype generate --validations
+npx @snowplow/snowtype@latest generate --validations
 ```
 
 For validations to work, you will also need to install `ajv@8`, `ajv-formats@2` and `ajv-draft-04@1`.
@@ -60,7 +60,7 @@ Currently the validation information will include attributes that can help point
 ## Entity cardinality rules validation example
 
 :::info
-This feature is available since version 0.3.1 of Snowtype for the [Browser Tracker](/docs/sources/trackers/javascript-trackers/web-tracker/quick-start-guide/index.md?platform=browser) in both TypeScript and JavaScript.
+This feature is available since version 0.3.1 of Snowtype for the [Browser Tracker](/docs/sources/web-trackers/quick-start-guide/index.md?platform=browser) in both TypeScript and JavaScript.
 :::
 
 Cardinality rules allow you to specify the expected number of an entity taking part in an Event Specification. You would use this capability to ensure the correct number of entities are getting sent alongside your event. E.g. 
@@ -107,7 +107,7 @@ A similar warning will occur when there is a cardinality rule set for an entity,
 ## Property rules validation example
 
 :::info
-This feature is available since version 0.10.0 of Snowtype for the [Browser Tracker](/docs/sources/trackers/javascript-trackers/web-tracker/quick-start-guide/index.md?platform=browser) in both TypeScript and JavaScript.
+This feature is available since version 0.10.0 of Snowtype for the [Browser Tracker](/docs/sources/web-trackers/quick-start-guide/index.md?platform=browser) in both TypeScript and JavaScript.
 :::
 
 Property rules are [specific instructions](/docs/data-product-studio/event-specifications/index.md#properties) you can add in every schema that takes part in an Event Specification. This capability will allow you to adjust the expected values specifically to this event. E.g.

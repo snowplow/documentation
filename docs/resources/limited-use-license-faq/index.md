@@ -1,4 +1,6 @@
-# FAQ: Snowplow Limited Use License Agreement (SLULA)
+---
+title: "FAQ: Snowplow Limited Use License Agreement (SLULA)"
+---
 
 :::info Note
 
@@ -75,7 +77,7 @@ If you currently run Snowplow’s open source pipeline code in production (on li
 
 If you are a current user of Snowplow open source software but do not run the core pipeline code in production or in a competitive manner, you may continue to use new Snowplow Limited Use License Agreement versions of Snowplow.
 
-If you are a commercial Snowplow BDP Enterprise or BDP Cloud customer, this license change does not impact your use of Snowplow.
+If you are a commercial Snowplow CDI Private Managed Cloud or CDI Cloud customer, this license change does not impact your use of Snowplow.
 
 ### Examples
 

@@ -46,7 +46,7 @@ function process(event) {
   ...
 ```
 
-There are getter methods available for each of the [standard event fields](/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md?fields=table) — just capitalize the first letter of the field and prepend it with `get`, for example `event.getUser_ipaddress()` or `event.getGeo_country()`.
+There are getter methods available for each of the [standard event fields](/docs/pipeline/enriched-tsv-format/index.md?fields=table) — just capitalize the first letter of the field and prepend it with `get`, for example `event.getUser_ipaddress()` or `event.getGeo_country()`.
 
 :::note
 
@@ -153,7 +153,7 @@ Your array of entities will be passed to `JSON.stringify()` before being attache
 
 If you are still iterating on the schema while writing the JavaScript code, you might find the setup described in the [testing guide](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/testing/index.md#iterating-on-code-and-schemas) very useful.
 
-:::caution
+:::warning
 
 Make sure that the schemas of your entities are defined and accessible to your pipeline.
 
@@ -163,13 +163,13 @@ Make sure that the schemas of your entities are defined and accessible to your p
 
 Sometimes you will want to modify the original event fields directly.
 
-:::caution
+:::warning
 
 Keep in mind that the old value of a modified field will not be available in your data warehouse or lake. However, that might be your goal.
 
 :::
 
-Just like with getters, there are setter methods available for each of the [standard event fields](/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md?fields=table):
+Just like with getters, there are setter methods available for each of the [standard event fields](/docs/pipeline/enriched-tsv-format/index.md?fields=table):
 
 ```js
 function process(event) {
@@ -237,31 +237,44 @@ function process(event) {
 
 :::note
 
-You might be tempted to update derived entities in a similar way by using `event.setDerived_contexts()`. However, this is not supported (the function exists, but has no effect). Instead, refer to the [Adding extra entities](#adding-extra-entities-to-the-event) section.
+You might be tempted to update derived entities in a similar way by using `event.setDerived_contexts()`. However, this is not supported (the function exists, but has no effect). Instead, refer to the [Erasing derived contexts](#erasing-derived-contexts) section.
 
 :::
 
-## Discarding the event
+## Erasing derived contexts
 
-Sometimes you don’t want the event to appear in your data warehouse or lake, e.g. because you suspect it comes from a bot and not a real user. In this case, you can `throw` an exception in your JavaScript code, which will send the event to [failed events](/docs/fundamentals/failed-events/index.md):
+Starting with Enrich 5.4.0, it is possible to erase derived contexts.
+
+This feature can be used to update existing derived contexts as well. The way to do that is shown in the below example:
 
 ```js
-const botPattern = /.*Googlebot.*/;
-
 function process(event) {
-  const useragent = event.getUseragent();
+  const derived = JSON.parse(event.getDerived_contexts())
 
-  if (useragent !== null && botPattern.test(useragent)) {
-    throw "Filtered event produced by Googlebot";
+  // erase the existing contexts from the event
+  event.eraseDerived_contexts()
+
+  // modify the contexts
+  for (const entity of derived.data) {
+    if (entity.schema === ...) {
+      // update a field inside
+      entity.data.myField = entity.data.myField + 1
+    }
   }
+
+  // returned the updated array of derived contexts, which will replace the original one
+  return derived.data
 }
 ```
 
-:::caution
+## Discarding the event
 
-This will create an “enrichment failure” failed event, which may be tricky to distinguish from genuine failures in your enrichment code, e.g. due to a mistake. In the future, we might provide a better mechanism for discarding events.
+```mdx-code-block
+import DiscardingEvents from "@site/docs/reusable/discarding-events/_index.md"
 
-:::
+<DiscardingEvents/>
+```
+
 
 ## Accessing Java methods
 

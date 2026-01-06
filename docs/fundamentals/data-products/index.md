@@ -1,7 +1,7 @@
 ---
-title: "Introduction to Data Products"
+title: "Introduction to data products"
 sidebar_position: 7
-sidebar_label: "Data Products"
+sidebar_label: "Data products"
 description: "Snowplow's data products enable organizations to easily generate AI and BI-ready data that is reliable, clear, compliant, accurate, and predictable"
 ---
 
@@ -38,6 +38,8 @@ Examples of data products:
 
 **The Source Application/s it is part of**; a data product is referencing the [Source Application/s](/docs/data-product-studio/source-applications/index.md) that is spanning across.
 
+![Example Data Product view](images/example_data_product_view.png)
+
 **Benefits:**
 
 * Have a clear view in which application the data product is implemented in, which domains it spans and the related application context information it will have available by default in the dataset.
@@ -49,6 +51,8 @@ Examples of data products:
 * Know who to go to when new data is required for a particular domain or when there is an issue with the data, breaking down the barriers between data producers and data consumers
 
 **Event specifications**; these describe each event that is collected as part of the data product, on which applications they are triggered and where, the event data structure to validate against, and the entities to attach to each event (e.g. user, product etc).
+
+![Example Event Specification](images/example_event_specification.png)
 
 **Benefits:**
 
@@ -69,8 +73,6 @@ Break down the barriers that exist between data producers and data consumers, by
 **Benefits:**
 
 * Enhances accountability and transparency by providing a clear audit trail of all data modifications, fostering confidence in data integrity
-
-![Key elements of a Data Product](images/key-elements-of-a-data-product.png)
 
 **Volume metrics**; data products can detect events ingested in your pipeline that match the configured event specifications. This allows your team to monitor occurrence-related metrics for events being tracked with specific [event specification IDs](/docs/data-product-studio/snowtype/commands/index.md#snowtype-patch).
 

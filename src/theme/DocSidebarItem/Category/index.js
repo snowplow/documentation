@@ -9,8 +9,12 @@ import {
 } from '@docusaurus/theme-common'
 import {
   isActiveSidebarItem,
-  findFirstCategoryLink,
+} from '@docusaurus/plugin-content-docs/client'
+import {
+  findFirstSidebarItemLink,
   useDocSidebarItemsExpandedState,
+} from '@docusaurus/plugin-content-docs/client'
+import {
   isSamePath,
 } from '@docusaurus/theme-common/internal'
 import Link from '@docusaurus/Link'
@@ -49,31 +53,17 @@ function useCategoryHrefWithSSRFallback(item) {
     if (isBrowser || !item.collapsible) {
       return undefined
     }
-    return findFirstCategoryLink(item)
+    return findFirstSidebarItemLink(item)
   }, [item, isBrowser])
 }
 
 function CollapseButton({ categoryLabel, href, collapsed, updateCollapsed }) {
-  // Modified CollapseButton so that it has the same behavior as the title
   const handleClick = (e) => {
     e.preventDefault()
     e.stopPropagation()
 
-    if (!collapsed) {
-      // When expanded, simply collapse
-      updateCollapsed(true)
-    } else {
-      // When collapsed, expand AND navigate to the page
-      updateCollapsed(false)
-      if (href) {
-        const linkElement = e.target
-          .closest('.menu__list-item-collapsible')
-          .querySelector('.menu__link')
-        if (linkElement) {
-          linkElement.click()
-        }
-      }
-    }
+    // Only toggle the collapse state, don't navigate
+    updateCollapsed(!collapsed)
   }
 
   return (
@@ -142,25 +132,6 @@ export default function DocSidebarItemCategory({
     }
   }, [collapsible, expandedItem, index, setCollapsed, autoCollapseCategories])
 
-  // Modified click handler for the title link
-  const handleTitleClick = (e) => {
-    onItemClick?.(item)
-
-    if (collapsible) {
-      if (isActive && !collapsed) {
-        // When expanded and selected, clicking title should collapse and navigate
-        updateCollapsed(true)
-      } else if (href) {
-        // For items with href, expand and let navigation happen
-        updateCollapsed(false)
-      } else {
-        // For items without href, just toggle
-        e.preventDefault()
-        updateCollapsed()
-      }
-    }
-  }
-
   return (
     <li
       className={clsx(
@@ -184,7 +155,6 @@ export default function DocSidebarItemCategory({
             'menu__link--sublist-caret': !href && collapsible,
             'menu__link--active': isActive,
           })}
-          onClick={handleTitleClick}
           aria-current={isCurrentPage ? 'page' : undefined}
           aria-expanded={collapsible ? !collapsed : undefined}
           href={collapsible ? hrefWithSSRFallback ?? '#' : hrefWithSSRFallback}

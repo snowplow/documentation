@@ -10,7 +10,7 @@ You can direct some (or all) of your Snowplow events to the Preview Mode, instea
 
 :::note Snowbridge 2.3+
 
-To follow the steps below, you will need to be running [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md) 2.3+. You will also need to have the [`spGtmssPreview` transformation](/docs/destinations/forwarding-events/snowbridge/configuration/transformations/builtin/spGtmssPreview.md) activated (this is the default for Snowplow BDP customers using Snowbridge with GTM Server Side).
+To follow the steps below, you will need to be running [Snowbridge](/docs/api-reference/snowbridge/index.md) 2.3+. You will also need to have the [`spGtmssPreview` transformation](/docs/api-reference/snowbridge/configuration/transformations/builtin/spGtmssPreview.md) activated (this is the default for Snowplow customers using Snowbridge with GTM Server Side).
 
 :::
 
@@ -34,7 +34,7 @@ Copy the header value (in the example above, `sTjhMcUdkNldaM2RsOThwWTRvNzE3VkZtb
 
 You can add the header value to all or some of your events as an [entity](/docs/fundamentals/entities/index.md).
 
-For example, if you are using the [JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/index.md):
+For example, if you are using the [JavaScript tracker](/docs/sources/web-trackers/index.md):
 
 ```javascript
 snowplow('trackPageView', {
@@ -48,7 +48,7 @@ snowplow('trackPageView', {
 });
 ```
 
-You can also add it as a [global context](/docs/sources/trackers/javascript-trackers/web-tracker/custom-tracking-using-schemas/global-context/index.md) for all events:
+You can also add it as a [global context](/docs/sources/web-trackers/custom-tracking-using-schemas/global-context/index.md) for all events:
 
 ```javascript
 const gtmPreviewContext = {

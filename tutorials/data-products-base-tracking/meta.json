@@ -1,5 +1,8 @@
 {
-  "title": "Tracking with Base Data Products",
-  "label": "Data products",
-  "description": "This tutorial walks you through using Data Product Studio."
+  "title": "Track web events with base data products",
+  "label": "Data governance",
+  "description": "Use the Snowplow Console to create and manage data products for a web application.",
+  "useCases": ["Composable analytics"],
+  "technologies": [],
+  "snowplowTech": ["Snowtype", "Console"]
 }

@@ -4,6 +4,15 @@ date: "2020-02-15"
 sidebar_position: 2
 ---
 
+```mdx-code-block
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc', 'selfHosted']}
+  helpContent="Enrichments are included with all Snowplow platforms."
+/>
+```
+
 During Enrichment your events have extra properties and values attached to them, also known as dimension widening.
 
 Snowplow enrichments can be categorized into three brackets:
@@ -65,7 +74,7 @@ Similarly, `page_referrer` gets the value from `refr`, which represents the r
 | `refr_urlquery`    | Querystring                  |
 | `refr_urlfragment` | Fragment (anchor)            |
 
-Additionally the derived timestamp is calculated, `derived_tstamp`. See [this blog post](https://snowplowanalytics.com/blog/2015/09/15/improving-snowplows-understanding-of-time/) for more details.
+Additionally the derived timestamp is calculated, `derived_tstamp`. See [Timestamps](/docs/events/timestamps/index.md) for more details.
 
 Finally, contexts, unstructured events and the relevant configurable enrichments (if enabled) are validated against their corresponding JSON schemas and the array of the derived contexts is assembled.
 

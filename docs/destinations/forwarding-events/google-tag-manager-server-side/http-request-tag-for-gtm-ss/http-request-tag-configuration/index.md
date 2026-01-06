@@ -4,8 +4,6 @@ date: "2022-01-06"
 sidebar_position: 100
 ---
 
-## Video Walkthrough
-
 In the following short video a complete example configuration of the Snowplow GTM SS HTTP Request Tag is presented.
 
 ```mdx-code-block
@@ -324,7 +322,7 @@ The standard log properties are:
 Depending on the type of log, additional properties are logged:
 
 | Type of log | Additional information                                         |
-|-------------|----------------------------------------------------------------|
+| ----------- | -------------------------------------------------------------- |
 | Message     | “Message”                                                      |
 | Request     | “RequestMethod”, “RequestUrl”, “RequestHeaders”, “RequestBody” |
 | Response    | “ResponseStatusCode”, “ResponseHeaders”, “ResponseBody”        |

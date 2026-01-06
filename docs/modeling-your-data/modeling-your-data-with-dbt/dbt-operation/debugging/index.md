@@ -4,7 +4,6 @@ description: "Guide for debugging data modeling issues"
 sidebar_position: 10
 ---
 
-## Debugging Data Modeling Issues
 There will inevitably be times when you run into dbt errors or the output is not what you expected (e.g. a session is missing from the sessions table). This guide will try and help you get started with the most common issues and how to handle them, to help you get unblocked faster and avoid having to open a customer ticket to ask for help.
 
 
@@ -32,7 +31,7 @@ The most common scenario that may happen is there are certain session_identifier
 
 We process the data based on sessions: for each run we take a look at the new events (with default 6 hours of lookback window) then look at the sessions manifest table and identify how far to look back in time to cover those sessions with new events as a whole. One overlooked common scenario is that in case of pipeline issues, if some data is getting processed by the model, but the rest are only added to the warehouse outside of that default 6 hour lookback window, then the package will leave those events behind unless the same session will have new events coming in, and it needs to be reprocessed as a whole again (unless the data modeling jobs were immediately paused after the pipeline went partially down). In such cases you need partial backfilling (see the [late loaded events](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/late-arriving-data/index.md#late-loaded-events) section).
 
-The events can also be [late sent](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/late-arriving-data/#late-sent-events), in which case if they fall out of the limit, they will not get processed.
+The events can also be [late sent](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/late-arriving-data/index.md#late-sent-events), in which case if they fall out of the limit, they will not get processed.
 
 We also "quarantine" the sessions at times, as however hard we may try to filter out bots, there could be odd outliers that keep sessions alive for days, for which we have the `snowplow__max_session_days` variable. If bots keep sending events for longer than defined in that variable, the package will only process the first of those in a subsequent run and archives the session_identifier in the [quarantine table](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/manifest-tables/index.md#quarantine-table) after it runs. In such a case it is always best to look for the missing event's session_identifier (domain_userid as defaulted for web events) in the table to explain why the event is missing.
 

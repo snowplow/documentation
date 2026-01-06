@@ -1,10 +1,11 @@
 ---
-title: "Legacy packages"
+title: "Configure the legacy dbt packages"
+sidebar_label: "Legacy packages"
 sidebar_position: 9999
 description: "All legacy Snowplow dbt packages"
 ---
 
-:::caution
+:::warning
 
 Legacy packages are no longer under active development and are in some cases no longer supported. Please look for a suitable replacement for these packages where possible.
 

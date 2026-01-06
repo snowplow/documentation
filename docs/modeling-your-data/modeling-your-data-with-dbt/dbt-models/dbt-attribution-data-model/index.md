@@ -1,33 +1,39 @@
 ---
-title: "Attribution"
+title: "Snowplow Attribution dbt package"
+sidebar_label: "Attribution"
 description: "The Snowplow Attribution dbt Package"
 sidebar_position: 10
-hide_title: true
 ---
 
 ```mdx-code-block
 import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
+import BadgeGroup from '@site/src/components/BadgeGroup';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import MarkdownTableToMuiDataGrid from '@site/src/components/MarkdownTableAsMui'
+import AvailabilityBadges from '@site/src/components/ui/availability-badges'
 
 export const datagridProps = {
     hideFooter: true
   };
 ```
 
-<Badges badgeType="dbt-package Release" pkg="attribution"></Badges>&nbsp;
-<Badges badgeType="Early Release"></Badges>&nbsp;
+<BadgeGroup>
+<Badges badgeType="dbt-package Release" pkg="attribution"></Badges>
+<Badges badgeType="Early Release"></Badges>
 <Badges badgeType="SPAL"></Badges>
+</BadgeGroup>
+
+<AvailabilityBadges available={['cloud', 'pmc', 'addon']} helpContent="The Attribution package is available as part of the Digital Analytics Data Model Pack, a paid addon for Snowplow CDI." />
+
+
+
 
 :::info
-You will need Unified [verson 0.4.0](https://github.com/snowplow/dbt-snowplow-unified/releases/tag/0.4.0) to use Attribution version 0.2.0.
+You will need Unified [version 0.4.0](https://github.com/snowplow/dbt-snowplow-unified/releases/tag/0.4.0) to use Attribution version 0.2.0.
 
 :::
-
-
-# Snowplow Attribution Package
 ​
 **The package source code can be found in the [snowplow/dbt-snowplow-attribution repo](https://github.com/snowplow/dbt-snowplow-attribution), and the docs for the [macro design are here](https://snowplow.github.io/dbt-snowplow-attribution/#/overview/snowplow_attribution).**
 ​
@@ -213,7 +219,7 @@ You can do either for campaigns, too, with the `snowplow__channels_to_exclude` a
 
 In order to reduce unneccesarily long paths you can apply a number of path transformations that are created as part of user defined functions automatically in your warehouse by the package.
 
-In order to apply these transformations, all you have to do is to define them in the `snowplow__path_transforms` variable as a list of dictionaries, with the transformation name as key and optionally the parameter as value (for `remove_if_last_and_not_all` and `remove_if_not_all`). If the transformation requires no parameter you can just use `null` as values for the dictionary. For more details on how to do this, check out the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/attribution/index.mdx) E.g.: `{'exposure_path': null, 'remove_if_last_and_not_all': 'direct'}`
+In order to apply these transformations, all you have to do is to define them in the `snowplow__path_transforms` variable as a dictionary. In case of `remove_if_last_and_not_all` and `remove_if_not_all` transformations, the transformation name is the key and a non-empty array is the value. For other transformations (`exposure_path`, `first_path`, `unique_path`), no additional parameter is required, you can just use `null` as values. For more details on how to do this, check out the [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/attribution/index.mdx) E.g.: `{'exposure_path': null, 'remove_if_last_and_not_all': ['channel_to_remove_1', 'campaign_to_remove_1', 'campaign_to_remove_2']}` Please note that the transformations are applied on both campaign and channel paths equally.
 
 <details>
   <summary>Path transform options</summary>

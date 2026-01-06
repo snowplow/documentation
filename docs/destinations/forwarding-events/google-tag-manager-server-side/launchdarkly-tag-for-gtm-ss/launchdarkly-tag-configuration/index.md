@@ -48,7 +48,7 @@ This configuration section is available only if your [Metric Type](#metric-type)
 
 In this section you can specify the event property whose value will populate the LaunchDarkly `metricValue` object.
 
-:::caution
+:::warning
 
 Since the metric value needs to be a number (e.g. `10.0`), the Tag **will fail**, if you specify an event property whose value is not a number.
 
@@ -152,7 +152,7 @@ The standard log properties are:
 Depending on the type of log, additional properties are logged:
 
 | Type of log | Additional information                                         |
-|-------------|----------------------------------------------------------------|
+| ----------- | -------------------------------------------------------------- |
 | Message     | "Message"                                                      |
 | Request     | "RequestMethod", "RequestUrl", "RequestHeaders", "RequestBody" |
 | Response    | "ResponseStatusCode", "ResponseHeaders", "ResponseBody"        |

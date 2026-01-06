@@ -1,7 +1,7 @@
 ---
-title: "App Errors Module"
-sidebar_position: 50
-hide_title: true
+title: "App errors module for Unified Digital"
+sidebar_label: "App errors module"
+sidebar_position: 101
 ---
 
 ```mdx-code-block

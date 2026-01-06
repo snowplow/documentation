@@ -1,5 +1,6 @@
 ---
-title: "E-commerce"
+title: "Migration guide for Ecommerce"
+sidebar_label: "Ecommerce"
 sidebar_position: 30
 ---
 ```mdx-code-block

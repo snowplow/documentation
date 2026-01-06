@@ -1,5 +1,6 @@
 ---
-title: "Iglu Webhook"
+title: "Iglu webhook"
+sidebar_label: "Iglu webhook"
 date: "2020-02-25"
 sidebar_position: 30
 ---
@@ -41,7 +42,7 @@ iglu:com.snowplowanalytics.snowplow/social_interaction/jsonschema/1-0-0
 
 ### Optional fields
 
-If you want to specify which app these events belong to, add an `aid` parameter as taken from the [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md#application-parameters):
+If you want to specify which app these events belong to, add an `aid` parameter as taken from the [Snowplow Tracker Protocol](/docs/events/index.md#application-parameters):
 
 ```text
 ...&aid=<company code>&...
@@ -53,7 +54,7 @@ You can also manually override the event's `platform` parameter like so:
 ...&p=<platform code>&...
 ```
 
-Supported platform codes can again be found in the [Snowplow Tracker Protocol](/docs/sources/trackers/snowplow-tracker-protocol/index.md#application-parameters); if not set, then the value for `platform` will default to `srv` for a server-side application.
+Supported platform codes can again be found in the [Snowplow Tracker Protocol](/docs/events/index.md#application-parameters); if not set, then the value for `platform` will default to `srv` for a server-side application.
 
 ### Example `GET` request
 

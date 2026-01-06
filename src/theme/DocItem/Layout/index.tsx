@@ -1,7 +1,7 @@
 import React from 'react'
 import clsx from 'clsx'
 import { useWindowSize } from '@docusaurus/theme-common'
-import { useDoc } from '@docusaurus/theme-common/internal'
+import { useDoc } from '@docusaurus/plugin-content-docs/client'
 import DocItemPaginator from '@theme/DocItem/Paginator'
 import DocVersionBanner from '@theme/DocVersionBanner'
 import DocVersionBadge from '@theme/DocVersionBadge'
@@ -16,6 +16,10 @@ import styles from './styles.module.css'
 import { Paper } from '@mui/material'
 
 import { useTutorial, TutorialKind } from '@site/src/components/tutorials/hooks'
+import { AlignLeft } from 'lucide-react'
+import HeadJSONLD from '../../../components/SchemaPlugin'
+
+import Demo_Ad from '../../../components/ui/Demo_Ad'
 
 /**
  * Decide if the toc should be rendered, on mobile or desktop viewports
@@ -46,27 +50,45 @@ export default function DocItemLayout({ children }: Props): JSX.Element {
   const tutorial = useTutorial()
 
   return (
-    <div className="row">
-      <div className={clsx('col', !docTOC.hidden && styles.docItemCol)}>
-        <DocVersionBanner />
-        <div className={styles.docItemContainer}>
-          <article>
-            <DocBreadcrumbs />
-            <DocVersionBadge />
-            {docTOC.mobile}
-            {tutorial === TutorialKind.Tutorial ? (
-              <Paper sx={{ p: 4, pt: 3 }}>
+    <>
+      <HeadJSONLD />
+      <div className="row">
+        <div className={clsx('col', !docTOC.hidden && styles.docItemCol)}>
+          <DocVersionBanner />
+          <div className={styles.docItemContainer}>
+            <article className="max-w-full overflow-x-hidden leading-relaxed prose prose-headings:font-bold prose-p:mt-0 prose-table:block prose-table:rounded-lg prose-td:ps-3 prose-td:pe-3 prose-th:ps-3 prose-th:pe-3 prose-ul:mt-0 prose-ol:mt-0 prose-code:before:content-none prose-code:after:content-none prose-code:font-normal prose-code:text-sm prose-img:mx-auto prose-img:block [&_nav.theme-doc-breadcrumbs]:max-w-[740px] [&_nav.theme-doc-breadcrumbs]:mx-auto [&_nav.theme-doc-breadcrumbs]:mt-8 [&_footer.theme-doc-footer]:max-w-[740px] [&_footer.theme-doc-footer]:mx-auto [&_footer.theme-doc-footer]:mt-8 [&_table_thead_tr_th_h3]:my-2 [&_table_tbody_tr_td_h3]:my-2 [&_table_thead_a]:font-semibold [&_table_thead_a]:no-underline">
+              <DocBreadcrumbs />
+              <DocVersionBadge />
+              {docTOC.mobile}
+              {tutorial === TutorialKind.Tutorial ? (
+                <Paper sx={{ p: 2, pt: 2 }}>
+                  <DocItemContent>{children}</DocItemContent>
+                </Paper>
+              ) : (
                 <DocItemContent>{children}</DocItemContent>
-              </Paper>
-            ) : (
-              <DocItemContent>{children}</DocItemContent>
-            )}
-            <DocItemFooter />
-          </article>
-          <DocItemPaginator />
+              )}
+              <DocItemFooter />
+            </article>
+            <div className="max-w-[740px] mx-auto mt-8">
+              <DocItemPaginator />
+            </div>
+          </div>
         </div>
+        {docTOC.desktop && (
+          <div className="col col--3">
+            <div className="sticky top-16">
+              <div className="flex items-center gap-2 my-1">
+                <AlignLeft size={16} className="opacity-70 text-foreground" />
+                <p className="text-[0.825rem] font-normal opacity-70 text-foreground m-0 pl-1">
+                  On this page
+                </p>
+              </div>
+              {docTOC.desktop}
+              <Demo_Ad />
+            </div>
+          </div>
+        )}
       </div>
-      {docTOC.desktop && <div className="col col--3">{docTOC.desktop}</div>}
-    </div>
+    </>
   )
 }

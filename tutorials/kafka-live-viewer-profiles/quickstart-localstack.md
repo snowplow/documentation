@@ -1,9 +1,9 @@
 ---
 position: 2
-title: Quickstart with Localstack
+title: "Run the Kafka live viewer profiles application using LocalStack"
+sidebar_label: "Run the application locally"
 ---
 
-# Quickstart with Localstack
 
 ## Steps to Run the Application
 
@@ -47,7 +47,7 @@ On the next screen, click `Custom media tracking demo`. This will bring up a vid
 
 ![Welcome page on tracking website](images/welcome-page.png)
 
-You must keep this window open with the video playing because everything here is running in real-time. You can use the [Snowplow Chrome Plugin](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm?hl=en&pli=1) to verify that the events are successfully sent from the web browser.
+You must keep this window open with the video playing because everything here is running in real-time. You can use the [Snowplow Chrome Plugin](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm) to verify that the events are successfully sent from the web browser.
 
 ![Video playing on the website](images/video.png)
 
@@ -60,7 +60,7 @@ Open [http://localhost:8280](http://localhost:8280) in a separate window. This w
 Congratulations! You have successfully run the accelerator to stream web behavior through Snowplow and Kafka to a real-time dashboard.
 
 ## Next Steps
-- You can implement Snowplow media tracking on any [HTML5](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/html5/) or [YouTube](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/youtube/) media of your choice
+- You can implement Snowplow media tracking on any [HTML5](/docs/sources/trackers/web-trackers/tracking-events/media/html5/) or [YouTube](/docs/sources/trackers/web-trackers/tracking-events/media/youtube/) media of your choice
 - Look into the output from Kafka and extend the Live Viewer to include information on the media being watched and the user.
 - Use our supplied Terraform in the next section to run this on AWS and make it publicly available.
 

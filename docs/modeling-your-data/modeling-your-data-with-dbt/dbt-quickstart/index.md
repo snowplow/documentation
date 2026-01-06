@@ -1,5 +1,6 @@
 ---
-title: "Quick Start"
+title: "Quick start guide for Snowplow dbt packages"
+sidebar_label: "Quick Start"
 sidebar_position: 20
 ---
 

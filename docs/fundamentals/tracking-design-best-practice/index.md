@@ -22,8 +22,8 @@ The final outcome of your planning will be a set of tracking plans.
 
 ![Tracking plan overview showing the relationship between tracking plans, event specifications, data structures](images/tracking-plan-overview.png)
 
-This diagram shows how tracking plans are represented in Snowplow Console.
- * **Tracking plans** are containers for related event specifications. They were previously named "data products".
+This diagram shows how tracking plans are conceptualized in Snowplow.
+ * **Tracking plans** are containers for related event specifications. They were previously called "data products"; that name is still used within some Snowplow components.
  * **Event specification** represents a single business event. It contains all the relevant information about the event, including its purpose, origin, and associated data structures. Each has a single event data structure to define the event's properties, and can have multiple associated entity data structures.
  * **Event and entity data structures** define the structure of the captured data to allow in JSON schemas for consistent data collection and analysis.
  *
@@ -31,7 +31,7 @@ This diagram shows how tracking plans are represented in Snowplow Console.
 Snowplow customers can create [tracking plans](/docs/event-studio/tracking-plans/index.md) and [event specifications](/docs/event-studio/event-specifications/index.md) directly in [Snowplow Console](https://console.snowplowanalytics.com).
 :::
 
-For example, an `Ecommerce Checkout Flow` data product may contain three event specifications:
+For example, an `Ecommerce Checkout Flow` tracking plan may contain three event specifications:
 * `Checkout Started` with a `checkout_started` event data structure and associated `cart` entity
 * `Product Add To Cart` with an `add_to_cart` event data structure and associated `cart` and `product` entities
 * `Order Completed` with an `order_completed` event data structure and associated `cart`, `product`, `order` and `payment` entities
@@ -46,7 +46,7 @@ A common standard for naming and structuring events, entities, and properties ma
 
 Here are our recommendations, but it's more important to be consistent across your tracking plans than to follow these guidelines:
 
-For Data Products:
+For tracking plans:
 * Use a descriptive name in title case that reflects the business domain, application, or use-case, e.g., `Ecommerce Checkout Flow`, `Mobile App User Engagement`, `SaaS Application Usage`
 
 For Event Specifications:
@@ -63,24 +63,24 @@ For Properties:
 * Be specific and descriptive to avoid ambiguity, e.g., use `purchase_amount` instead of just `amount`
 * Do not repeat information contained in the data structure name, e.g., avoid `order_id` in an `order` entity
 
-## Data product best practices
+## Tracking plan best practices
 
-Data Products are logical groupings of related business events with defined ownership. They help organize your tracking design and make it easier to manage and analyze your data.
+Tracking plans are logical groupings of related business events with defined ownership. They help organize your tracking design and make it easier to manage and analyze your data.
 
-When defining Data Products, consider who will own the data and what business domain or use-case the events relate to. If you have multiple teams or departments, it can be helpful to align Data Products with those organizational structures. Additionally, those teams can reflect implementation ownership or analysis ownership.
+When defining tracking plans, consider who will own the data and what business domain or use-case the events relate to. If you have multiple teams or departments, it can be helpful to align tracking plans with those organizational structures. Additionally, those teams can reflect implementation ownership or analysis ownership.
 
-Examples of Data Products include:
+Examples of tracking plans include:
 * `Ecommerce Checkout Flow`: contains events related to the checkout process in an e-commerce application
 * `Mobile App User Engagement`: contains events related to user interactions within a mobile application
 * `SaaS Application Usage`: contains events related to user actions within a SaaS platform
 
-Bad examples of Data Products would be overly broad or vague groupings, such as `All User Events` or `Miscellaneous Events`, which do not provide clear context or ownership. Another example would be overly specific groupings that limit reusability, such as `Product Page Views for Campaign X`.
+Bad examples of tracking plans would be overly broad or vague groupings, such as `All User Events` or `Miscellaneous Events`, which do not provide clear context or ownership. Another example would be overly specific groupings that limit reusability, such as `Product Page Views for Campaign X`.
 
-When defining Data Products, consider the following best practices:
-* **Clear purpose**: each Data Product should have a well-defined purpose and scope
-* **Ownership**: assign clear ownership to each Data Product to ensure accountability for data quality and governance
+When defining tracking plans, consider the following best practices:
+* **Clear purpose**: each tracking plan should have a well-defined purpose and scope
+* **Ownership**: assign clear ownership to each tracking plan to ensure accountability for data quality and governance
 * **Logical grouping**: group related events that share a common business domain or use-case. Consider a group that reflects how the data will be used in analysis.
-* **Reusability**: design Data Products to promote reusability of event and entity data structures across different tracking plans
+* **Reusability**: design tracking plans to promote reusability of event and entity data structures across different tracking plans
 
 ## Event Specification best practices
 

@@ -10,9 +10,16 @@ const ALL_BADGE_TYPES: BadgeType[] = ['cloud', 'pmc', 'selfHosted', 'addon']
 
 const COMMON_HELP_TEXT = (
   <>
-    Read more about{' '}
+    Find out more about{' '}
     <a href="/docs/get-started/" className="text-primary hover:underline">
-      Snowplow CDI platforms
+      Snowplow CDI{' '}
+    </a>
+    and{' '}
+    <a
+      href="/docs/get-started/feature-comparison"
+      className="text-primary hover:underline"
+    >
+      product availability
     </a>
     , or contact{' '}
     <a
@@ -21,9 +28,9 @@ const COMMON_HELP_TEXT = (
       target="_blank"
       rel="noopener noreferrer"
     >
-      Support
+      Support{' '}
     </a>
-    .
+    to upgrade.
   </>
 )
 

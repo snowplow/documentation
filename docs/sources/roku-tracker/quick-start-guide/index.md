@@ -5,7 +5,7 @@ date: "2021-11-16"
 sidebar_position: 1000
 ---
 
-Designing how and what to track in your app is an important decision. Check out our docs about tracking design [here](/docs/data-product-studio/index.md).
+Designing how and what to track in your app is an important decision. Check out our docs about tracking design [here](/docs/event-studio/index.md).
 
 The following steps will guide you through setting up the Roku tracker in your project and tracking a simple event.
 

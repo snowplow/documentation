@@ -21,7 +21,7 @@ If you have `node.js` set up then no need to install, you can run via `npx`.
 
 ## 2. Configure your MCP client
 
-The Snowplow CLI MCP server can be used with any MCP-compatible client. Below are configuration examples for popular clients. For a complete list of supported clients and their configurations, see the [MCP reference](/docs/data-product-studio/snowplow-cli/reference/#mcp).
+The Snowplow CLI MCP server can be used with any MCP-compatible client. Below are configuration examples for popular clients. For a complete list of supported clients and their configurations, see the [MCP reference](/docs/event-studio/snowplow-cli/reference/#mcp).
 
 ### Claude desktop
 

@@ -31,7 +31,6 @@ You can very easily edit the script or run each of the Terraform modules indepen
 
 ## Overview
 
-<!-- see https://github.com/facebook/docusaurus/issues/8357 -->
 <Tabs groupId="cloud" queryString lazy>
   <TabItem value="aws" label="AWS" default>
 
@@ -40,15 +39,27 @@ You can very easily edit the script or run each of the Terraform modules indepen
 
 <Diagram cloud="aws" warehouse="Redshift" compute="EC2" stream="Kinesis" bucket="S3" igludb="RDS"/>
 
+#### Redshift Loader
+
+For more information about the Redshift Loader, see the [loader documentation](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md?warehouse=redshift).
+
   </TabItem>
   <TabItem value="snowflake" label="Snowflake">
 
 <Diagram cloud="aws" warehouse="Snowflake" compute="EC2" stream="Kinesis" bucket="S3" igludb="RDS"/>
 
+#### Snowflake Loader
+
+For more information about the Snowflake Loader, see the [loader documentation](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md).
+
   </TabItem>
   <TabItem value="databricks" label="Databricks">
 
 <Diagram cloud="aws" warehouse="Databricks" compute="EC2" stream="Kinesis" bucket="S3" igludb="RDS"/>
+
+#### Databricks Loader
+
+For more information about the Databricks Loader, see the [loader documentation](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md?warehouse=databricks).
 
   </TabItem>
 </Tabs>
@@ -62,6 +73,10 @@ You can very easily edit the script or run each of the Terraform modules indepen
 
 <Diagram cloud="gcp" warehouse="BigQuery" compute="CE" stream="Pub/Sub" bucket="GCS" igludb="CloudSQL"/>
 
+#### BigQuery Loader
+
+For more information about the BigQuery Loader, see the [loader documentation](/docs/api-reference/loaders-storage-targets/bigquery-loader/index.md).
+
   </TabItem>
 </Tabs>
 
@@ -73,10 +88,18 @@ You can very easily edit the script or run each of the Terraform modules indepen
 
 <Diagram cloud="azure" warehouse="Data Lake" compute="VMSS" stream="Kafka" bucket="ADLS Gen2" igludb="Postgres"/>
 
+#### Data Lake Loader
+
+For more information about the Data Lake Loader, see the [loader documentation](/docs/api-reference/loaders-storage-targets/lake-loader/index.md).
+
   </TabItem>
   <TabItem value="synapse" label="Synapse Analytics" default>
 
 <Diagram cloud="azure" warehouse="Data Lake" compute="VMSS" stream="Kafka" bucket="ADLS Gen2" igludb="Postgres"/>
+
+#### Data Lake Loader
+
+For more information about the Data Lake Loader, see the [loader documentation](/docs/api-reference/loaders-storage-targets/lake-loader/index.md).
 
   </TabItem>
 </Tabs>

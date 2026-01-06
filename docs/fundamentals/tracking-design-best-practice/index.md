@@ -23,7 +23,7 @@ The final outcome of your planning will be a set of tracking plans.
 ![Tracking plan overview showing the relationship between tracking plans, event specifications, data structures](images/tracking-plan-overview.png)
 
 This diagram shows how tracking plans are conceptualized in Snowplow.
- * **Tracking plans** are containers for related event specifications. They were previously called "data products"; that name is still used within some Snowplow components.
+ * **Tracking plans** are containers for related event specifications.
  * **Event specification** represents a single business event. It contains all the relevant information about the event, including its purpose, origin, and associated data structures. Each has a single event data structure to define the event's properties, and can have multiple associated entity data structures.
  * **Event and entity data structures** define the structure of the captured data to allow in JSON schemas for consistent data collection and analysis.
  *

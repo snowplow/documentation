@@ -363,7 +363,7 @@ Here are two pieces of older content that only partially follow the style guide.
 
     | ✅                                     |
     | ------------------------------------- |
-    | Data Product Studio                   |
+    | Event Studio                          |
     | Snowtype                              |
     | Snowplow Customer Data Infrastructure |
     | Data Model Packs                      |
@@ -373,7 +373,7 @@ Here are two pieces of older content that only partially follow the style guide.
    | ✅                                              | ❌                                              |
    | ---------------------------------------------- | ---------------------------------------------- |
    | track a page view                              | track a Page View                              |
-   | creating data products                         | creating Data Products                         |
+   | creating tracking plans                        | creating Tracking Plans                        |
    | all the source applications                    | all the Source Applications                    |
    | Unified Digital data model                     | Unified Digital Data Model                     |
    | stream that contains all of your failed events | stream that contains all of your Failed Events |

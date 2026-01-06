@@ -179,9 +179,9 @@ Loader Iglu error schema can be found [here](https://github.com/snowplow/iglu-ce
 
 </details>
 
-## Loader recovery error
+## Loader recovery error (legacy)
 
-Currently only the [BigQuery repeater](/docs/api-reference/loaders-storage-targets/bigquery-loader/previous-versions/bigquery-loader-1.x/index.md#snowplow-bigquery-repeater) generates this error. We call it "loader recovery error" because the purpose of the repeater is to recover from previously failed inserts. It represents the case when the software could not re-insert the row into the database due to a runtime failure or invalid data in a source.
+Only the [BigQuery repeater](/docs/api-reference/loaders-storage-targets/bigquery-loader/previous-versions/bigquery-loader-1.x/index.md#snowplow-bigquery-repeater) generated this error. We call it "loader recovery error" because the purpose of the repeater was to recover from previously failed inserts. It represents the case when the software could not re-insert the row into the database due to a runtime failure or invalid data in a source.
 
 <details>
 

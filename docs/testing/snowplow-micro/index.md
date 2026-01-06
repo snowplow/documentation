@@ -20,7 +20,7 @@ import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
 ![Snowplow Micro UI](./images/overview.png)
 
-Just like a real Snowplow pipeline, Micro receives, validates and enriches events sent by your [tracking code](/docs/sources/trackers/index.md).
+Just like a real Snowplow pipeline, Micro receives, validates and enriches events sent by your [tracking code](/docs/sources/index.md).
 
 Unlike a real pipeline:
 * It does not store the events in a data warehouse or database, although a [UI](/docs/testing/snowplow-micro/ui/index.md) and an [API](/docs/api-reference/snowplow-micro/api/index.md) are available to look at the data

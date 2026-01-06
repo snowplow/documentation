@@ -1,5 +1,6 @@
 ---
-title: "ZenDesk"
+title: "Zendesk webhook"
+sidebar_label: "Zendesk"
 date: "2020-02-26"
 sidebar_position: 150
 ---

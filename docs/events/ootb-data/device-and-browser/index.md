@@ -42,7 +42,7 @@ This is an optional feature on the JavaScript tracker that adds browser informat
 
 #### How to track?
 
-[See the JavaScript tracker documentation](/docs/sources/trackers/web-trackers/tracking-events/index.md#auto-tracked-entities) to learn how to configure the context entity.
+[See the JavaScript tracker documentation](/docs/sources/web-trackers/tracking-events/index.md#auto-tracked-entities) to learn how to configure the context entity.
 
 ### Mobile context
 
@@ -82,8 +82,8 @@ The context entity is enabled by default but the information that is included is
 
 ### How to track?
 
-* [iOS and Android tracker](/docs/sources/trackers/mobile-trackers/tracking-events/platform-and-application-context/index.md#platform-context).
-* [React Native tracker](/docs/sources/trackers/react-native-tracker/tracking-events/platform-and-application-context/index.md#platform-context).
+* [iOS and Android tracker](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md#platform-context).
+* [React Native tracker](/docs/sources/react-native-tracker/tracking-events/platform-and-application-context/index.md#platform-context).
 
 ## Context entities added during enrichment
 

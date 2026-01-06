@@ -190,11 +190,11 @@ export const TutorialProgressTracker: React.FC<TutorialProgressTrackerProps> = (
               {meta.label}
             </div>
           )}
-          {meta?.useCases && meta.useCases.map((useCase: string, index: number) => (
-            <div key={index} className="bg-primary text-primary-foreground px-2 py-1 rounded-lg text-[.675rem] font-normal">
-              {useCase}
+          {meta?.useCase && (
+            <div className="bg-primary text-primary-foreground px-2 py-1 rounded-lg text-[.675rem] font-normal">
+              {meta.useCase}
             </div>
-          ))}
+          )}
         </div>
 
         <h3 className="text-xl font-semibold mb-2">

@@ -2,7 +2,7 @@
   "title": "Calculate real-time shopper features using Apache Flink",
   "label": "Solution accelerator",
   "description": "Build a real-time shopper profile for an ecommerce site, leveraging Kafka, Flink and Redis.",
-  "useCases": ["Real-time personalization"],
+  "useCase": "Real-time personalization",
   "technologies": ["Flink", "Kafka", "Redis"],
   "snowplowTech": ["Local"]
 }

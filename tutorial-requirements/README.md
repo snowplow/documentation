@@ -81,7 +81,7 @@ The use case options are:
   * `Composable analytics`
   * `Composable CDP`
   * `Real-time personalization`
-  * `Customer-aware AI`
+  * `Customer-facing AI agents`
 
 For labels, the options are:
   * `Solution accelerator` - all solution accelerators get this label

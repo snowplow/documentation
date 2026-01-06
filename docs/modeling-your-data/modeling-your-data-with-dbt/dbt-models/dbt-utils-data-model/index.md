@@ -7,12 +7,18 @@ description: "The Snowplow Utils dbt Package"
 
 ```mdx-code-block
 import Badges from '@site/src/components/Badges';
+import BadgeGroup from '@site/src/components/BadgeGroup';
 import ThemedImage from '@theme/ThemedImage';
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 ```
 
-<Badges badgeType="dbt-package Release" pkg="utils"></Badges>&nbsp;
-<Badges badgeType="Actively Maintained"></Badges>&nbsp;
+<BadgeGroup>
+<Badges badgeType="dbt-package Release" pkg="utils"></Badges>
+<Badges badgeType="Actively Maintained"></Badges>
 <Badges badgeType="SPAL"></Badges>
+</BadgeGroup>
+
+<AvailabilityBadges available={['cloud', 'pmc', 'addon']} helpContent="The Utils package is available as part of the Digital Analytics Data Model Pack, a paid addon for Snowplow CDI." />
 
 :::info
 The models, functionality, and variables described below are only available from `snowplow-utils v0.15.0` and above, as earlier packages do not utilize these variables.

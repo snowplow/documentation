@@ -15,20 +15,20 @@ Below is a list of the current templates:
 
 ## Base Web
 
-This Tracking Plan template contains all the tracking of Standard Events related to web tracking. It is expected that these events would be implemented using our [Web trackers](/docs/sources/trackers/web-trackers/index.md) and the respective [button click](/docs/sources/trackers/web-trackers/tracking-events/button-click/index.md) and [link click](/docs/sources/trackers/web-trackers/tracking-events/link-click/index.md) plugins.
+This tracking plan template contains all the tracking of Standard Events related to web tracking. It is expected that these events would be implemented using our [Web trackers](/docs/sources/web-trackers/index.md) and the respective [button click](/docs/sources/web-trackers/tracking-events/button-click/index.md) and [link click](/docs/sources/web-trackers/tracking-events/link-click/index.md) plugins.
 
 Note: The event volume counts are calculated differently for this Tracking Plan. They are counts of any of the following events sent for the app ID's of this tracking plan.
 
 Included event specifications:
 
-* [Page View](/docs/sources/trackers/web-trackers/tracking-events/page-views/index.md)
-* [Page Ping](/docs/sources/trackers/web-trackers/tracking-events/activity-page-pings/index.md)
-* [Button click](/docs/sources/trackers/web-trackers/tracking-events/button-click/index.md)
-* [Link click](/docs/sources/trackers/web-trackers/tracking-events/link-click/index.md)
+* [Page View](/docs/sources/web-trackers/tracking-events/page-views/index.md)
+* [Page Ping](/docs/sources/web-trackers/tracking-events/activity-page-pings/index.md)
+* [Button click](/docs/sources/web-trackers/tracking-events/button-click/index.md)
+* [Link click](/docs/sources/web-trackers/tracking-events/link-click/index.md)
 
 ## Base Mobile
 
-This Tracking Plan template contains all the tracking of Standard Events related to mobile tracking. It is expected that these events would be implemented using our [mobile trackers](/docs/sources/trackers/mobile-trackers/index.md) with [installation](/docs/sources/trackers/mobile-trackers/tracking-events/installation-tracking/index.md), [screen view](/docs/sources/trackers/mobile-trackers/tracking-events/screen-tracking/index.md) and [app lifecycle](/docs/sources/trackers/mobile-trackers/tracking-events/lifecycle-tracking/index.md) tracking capabilities enabled.
+This tracking plan template contains all the tracking of Standard Events related to mobile tracking. It is expected that these events would be implemented using our [mobile trackers](/docs/sources/mobile-trackers/index.md) with [installation](/docs/sources/mobile-trackers/tracking-events/installation-tracking/index.md), [screen view](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md) and [app lifecycle](/docs/sources/mobile-trackers/tracking-events/lifecycle-tracking/index.md) tracking capabilities enabled.
 
 Note: The event volume counts are calculated differently for this Tracking Plan. They are counts of any of the following events sent for the app ID's of this tracking plan.
 
@@ -44,7 +44,7 @@ Included event specifications:
 
 This Tracking Plan template contains all the basic ecommerce interactions that help you analyze customer behavior, identify potential growth opportunities, and improve your sales performance.
 
-Tracked using the [out-of-the-box e-commerce events](/docs/events/ootb-data/ecommerce-events/index.md) for web, Android, and iOS. On web, this requires the [Snowplow Ecommerce plugin](/docs/sources/trackers/web-trackers/tracking-events/ecommerce/index.md).
+Tracked using the [out-of-the-box e-commerce events](/docs/events/ootb-data/ecommerce-events/index.md) for web, Android, and iOS. On web, this requires the [Snowplow Ecommerce plugin](/docs/sources/web-trackers/tracking-events/ecommerce/index.md).
 
 Included event specifications:
 
@@ -62,8 +62,8 @@ Included event specifications:
 
 ## Media Web
 
-This Tracking Plan template contains a full set of media tracking interactions to measure video or audio data.
-Tracked using the [Snowplow Media plugin](https://docs.snowplow.io/docs/sources/trackers/web-trackers/tracking-events/media/snowplow/).
+This tracking plan template contains a full set of media tracking interactions to measure video or audio data.
+Tracked using the [Snowplow Media plugin](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md).
 
 Included event specifications:
 

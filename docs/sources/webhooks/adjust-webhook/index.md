@@ -1,5 +1,6 @@
 ---
-title: "Adjust"
+title: "Adjust webhook"
+sidebar_label: "Adjust"
 sidebar_position: -1
 ---
 

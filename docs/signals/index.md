@@ -5,6 +5,15 @@ description: "Real-time personalization engine for customer intelligence that co
 sidebar_label: "Signals"
 ---
 
+```mdx-code-block
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc', 'addon']}
+  helpContent="Signals is a paid addon for Snowplow CDI."
+/>
+```
+
 Snowplow Signals is a real-time personalization engine for customer intelligence, built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in real time.
 
 Real-time personalization use cases that are unlocked by Signals include:
@@ -15,6 +24,12 @@ Real-time personalization use cases that are unlocked by Signals include:
 * Dynamic pricing
 * Contextually relevant advertising
 * Paywall optimization
+
+:::info Signals Sandbox
+
+Try out Signals for free using the [Signals Sandbox](https://try-signals.snowplow.io). Follow the [Signals interventions tutorial](/tutorials/signals-interventions/start/) to explore using Signals in a demo web application. You don't need a Snowplow account to use the Sandbox.
+
+:::
 
 Your Signals infrastructure is deployed into the same cloud as your pipeline. You can use [Snowplow Console](https://console.snowplowanalytics.com) to first define the data you're interested in, then use the Signals SDKs and API to retrieve the calculated [attributes](/docs/signals/concepts/index.md) in your applications to alter your customer's experience and behavior.
 
@@ -43,7 +58,7 @@ Steps for using Signals:
 3. Use the attributes and interventions to take action in your application
 
 :::note Warehouse support
-Only Snowflake and BigQuery are supported currently.
+Only Snowflake and BigQuery are supported currently. However, you can also use Signals without the warehouse functionality.
 :::
 
 Check out the [quick start tutorial](/tutorials/signals-quickstart/start) to get started.

@@ -20,8 +20,12 @@ Click **Enable** to start setting up a Signals connection.
 
 ![Snowplow Console Signals section showing Enable button to set up connection](../images/console-no-connection.png)
 
+:::note Warehouse Connection 
+Signals can also be deployed without connecting to a warehouse.
+:::
+
 You'll need to:
-* Select which warehouse to use
+* Select which warehouse to use 
 * Specify your warehouse account details
 * Specify your Snowplow atomic events table
 * Run the provided script

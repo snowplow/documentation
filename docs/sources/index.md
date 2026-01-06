@@ -5,38 +5,65 @@ date: "2020-02-15"
 sidebar_position: 4
 ---
 
-Snowplow supports a wide range of sources which send events to your collector endpoint.
+```mdx-code-block
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
-To collect events from your own applications, use our [tracker SDKs](/docs/sources/trackers/index.md).
+<AvailabilityBadges
+  available={['cloud', 'pmc', 'selfHosted']}
+  helpContent="Tracker SDKs are included with all Snowplow platforms."
+/>
+```
 
-For tracking from third-party applications, use our [webhooks](/docs/sources/webhooks/index.md).
+Snowplow supports a wide range of sources which send events to your Collector endpoint.
 
-<!-- TODO iterable and zendesk logos are missing -->
-<!-- fix when webhooks are tidied up -->
-<div className="sources-grid">
-    <img src={require('@site/docs/sources/images/adjust.png').default} alt="adjust" width="200" />
-    <img src={require('@site/docs/sources/images/amp.png').default} alt="AMP" width="200" />
-    <img src={require('@site/docs/sources/images/android.png').default} alt="Android" width="200" />
-    <img src={require('@site/docs/sources/images/cpp.png').default} alt="C++" width="200" />
-    <img src={require('@site/docs/sources/images/dotnet.png').default} alt=".NET" width="200" />
-    <img src={require('@site/docs/sources/images/flutter.png').default} alt="Flutter" width="200" />
-    <img src={require('@site/docs/sources/images/golang.png').default} alt="Golang" width="200" />
-    <img src={require('@site/docs/sources/images/gtm.png').default} alt="Google Tag Manager" width="200" />
-    <img src={require('@site/docs/sources/images/ios.png').default} alt="iOS" width="200" />
-    <img src={require('@site/docs/sources/images/java.png').default} alt="Java" width="200" />
-    <img src={require('@site/docs/sources/images/javascript.png').default} alt="JavaScript" width="200" />
-    <img src={require('@site/docs/sources/images/lua.png').default} alt="Lua" width="200" />
-    <img src={require('@site/docs/sources/images/mailgun.png').default} alt="Mailgun" width="200" />
-    <img src={require('@site/docs/sources/images/mandrill.png').default} alt="Mandrill" width="200" />
-    <img src={require('@site/docs/sources/images/nodejs.png').default} alt="Node.js" width="200" />
-    <img src={require('@site/docs/sources/images/php.png').default} alt="PHP" width="200" />
-    <img src={require('@site/docs/sources/images/pixel-tracker.png').default} alt="Pixel" width="200" />
-    <img src={require('@site/docs/sources/images/python.png').default} alt="Python" width="200" />
-    <img src={require('@site/docs/sources/images/react-native.png').default} alt="React Native" width="200" />
-    <img src={require('@site/docs/sources/images/roku.png').default} alt="Roku" width="200" />
-    <img src={require('@site/docs/sources/images/ruby.png').default} alt="Ruby" width="200" />
-    <img src={require('@site/docs/sources/images/rust.png').default} alt="Rust" width="200" />
-    <img src={require('@site/docs/sources/images/scala.png').default} alt="Scala" width="200" />
-    <img src={require('@site/docs/sources/images/sendgrid.png').default} alt="Sendgrid" width="200" />
-    <img src={require('@site/docs/sources/images/unity.png').default} alt="Unity" width="200" />
-</div>
+Snowplow tracker SDKs are client- or server-side libraries that enable you to collect events from your own applications. For tracking events from third-party applications, use [webhooks](/docs/sources/webhooks/index.md).
+
+You can find the source code for each tracker on GitHub, where possible. The JavaScript tracker repository is a multirepository containing the web (JavaScript and Browser), Node.js, and React Native trackers.
+
+All Snowplow trackers have open-source licenses (Apache 2.0 License, except for the JavaScript tracker which is BSD 3-Clause License).
+
+## Client-side trackers
+
+| Tracker                                                         | Language                     | Used in                                                 | [Snowtype](/docs/data-product-studio/snowtype/index.md)? | Supported [data models](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md) | GitHub                                                                                 | Installed using                                                                                                        |
+| --------------------------------------------------------------- | ---------------------------- | ------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
+| [Web](/docs/sources/web-trackers/index.md) (JavaScript)         | TypeScript, JavaScript       | Web                                                     | ✅                                                        | Unified Digital, Attribution, Media Player, Ecommerce                                  | [snowplow-javascript-tracker](https://github.com/snowplow/snowplow-javascript-tracker) | Script tag                                                                                                             |
+| [Web](/docs/sources/web-trackers/index.md) (Browser)            | TypeScript, JavaScript       | Web                                                     | ✅                                                        | Unified Digital, Attribution, Media Player, Ecommerce                                  | [snowplow-javascript-tracker](https://github.com/snowplow/snowplow-javascript-tracker) | [npm](https://www.npmjs.com/package/@snowplow/browser-tracker), yarn, or pnpm                                          |
+| [Google Tag Manager](/docs/sources/google-tag-manager/index.md) | JavaScript                   | Web                                                     | ❌                                                        | Unified Digital, Attribution, Ecommerce                                                | n/a                                                                                    | [Tag Template Gallery](https://tagmanager.google.com/gallery/#/owners/snowplow/templates/snowplow-gtm-tag-template-v4) |
+| [Google AMP](/docs/sources/google-amp-tracker/index.md)         | HTML                         | AMP HTML webpages                                       | ❌                                                        |                                                                                        | n/a                                                                                    | Script tag                                                                                                             |
+| [Pixel](/docs/sources/pixel-tracker/index.md)                   | HTML                         | Email, web environments where JavaScript is unavailable | ❌                                                        |                                                                                        | n/a                                                                                    | Script tag                                                                                                             |
+| [Android](/docs/sources/mobile-trackers/index.md)               | Kotlin, Java                 | Mobile                                                  | ✅                                                        | Unified Digital, Attribution, Media Player, Ecommerce                                  | [snowplow-android-tracker](https://github.com/snowplow/snowplow-android-tracker)       | [Maven](https://mvnrepository.com/artifact/com.snowplowanalytics/snowplow-android-tracker)                             |
+| [iOS](/docs/sources/mobile-trackers/index.md)                   | Swift, Objective-C           | Mobile (iOS), macOS, tvOS, watchOS, visionOS            | ✅                                                        | Unified Digital, Attribution, Media Player, Ecommerce                                  | [snowplow-ios-tracker](https://github.com/snowplow/snowplow-ios-tracker)               | SPM or [Cocoapods](https://cocoapods.org/pods/SnowplowTracker)                                                         |
+| [React Native](/docs/sources/react-native-tracker/index.md)     | TypeScript, JavaScript       | Mobile                                                  | ✅                                                        | Unified Digital, Attribution                                                           | [snowplow-javascript-tracker](https://github.com/snowplow/snowplow-javascript-tracker) | [npm](https://www.npmjs.com/package/@snowplow/react-native-tracker)                                                    |
+| [Flutter](/docs/sources/flutter-tracker/index.md)               | Dart                         | Mobile                                                  | ✅                                                        | Unified Digital, Attribution, Media Player                                             | [snowplow-flutter-tracker](https://github.com/snowplow/snowplow-flutter-tracker)       | [pub.dev](https://pub.dev/packages/snowplow_tracker)                                                                   |
+| [Roku](/docs/sources/roku-tracker/index.md)                     | BrightScript, BrighterScript | Media player applications                               | ❌                                                        | Media Player                                                                           | [snowplow-roku-tracker](https://github.com/snowplow/snowplow-roku-tracker)             | [npm](https://www.npmjs.com/package/@snowplow/roku-tracker)                                                            |
+| [WebView](/docs/sources/webview-tracker/index.md)               | TypeScript, JavaScript       | Hybrid mobile applications                              | ❌                                                        | Unified Digital, Attribution                                                           | [snowplow-webview-tracker](https://github.com/snowplow/snowplow-webview-tracker)       | [npm](https://www.npmjs.com/package/@snowplow/webview-tracker) or script tag                                           |
+
+## Server-side trackers
+
+| Tracker                                                      | Language                    | [Snowtype](/docs/data-product-studio/snowtype/index.md)? | GitHub                                                                                 | Installed using                                                                                     |
+| ------------------------------------------------------------ | --------------------------- | -------------------------------------------------------- | -------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| [Node.js](/docs/sources/node-js-tracker/index.md)            | TypeScript, JavaScript      | ✅                                                        | [snowplow-javascript-tracker](https://github.com/snowplow/snowplow-javascript-tracker) | [npm](https://www.npmjs.com/package/@snowplow/node-tracker)                                         |
+| [Python](/docs/sources/python-tracker/index.md)              | Python                      | ❌                                                        | [snowplow-python-tracker](https://github.com/snowplow/snowplow-python-tracker)         | [PyPI](https://pypi.org/project/snowplow-tracker/)                                                  |
+| [Golang](/docs/sources/golang-tracker/index.md)              | Go                          | ✅                                                        | [snowplow-golang-tracker](https://github.com/snowplow/snowplow-golang-tracker)         | [GitHub](https://github.com/snowplow/snowplow-golang-tracker/releases)                              |
+| [Java](/docs/sources/java-tracker/index.md)                  | Java                        | ✅                                                        | [snowplow-java-tracker](https://github.com/snowplow/snowplow-java-tracker)             | [Maven](https://mvnrepository.com/artifact/com.snowplowanalytics/snowplow-java-tracker)             |
+| [.NET](/docs/sources/net-tracker/index.md)                   | C#                          | ❌                                                        | [snowplow-dotnet-tracker](https://github.com/snowplow/snowplow-dotnet-tracker)         | [NuGet](https://www.nuget.org/packages/Snowplow.Tracker)                                            |
+| [Unity](/docs/sources/unity-tracker/index.md)                | C#                          | ❌                                                        | [snowplow-unity-tracker](https://github.com/snowplow/snowplow-unity-tracker)           | [GitHub](https://github.com/snowplow/snowplow-unity-tracker/releases)                               |
+| [C++](/docs/sources/c-tracker/index.md)                      | C++                         | ❌                                                        | [snowplow-cpp-tracker](https://github.com/snowplow/snowplow-cpp-tracker)               | CMake                                                                                               |
+| [Scala](/docs/sources/scala-tracker/index.md)                | Scala                       | ❌                                                        | [snowplow-scala-tracker](https://github.com/snowplow/snowplow-scala-tracker)           | [Maven](https://mvnrepository.com/artifact/com.snowplowanalytics/snowplow-scala-tracker) or JCenter |
+| [Ruby](/docs/sources/ruby-tracker/index.md)                  | Ruby                        | ❌                                                        | [snowplow-ruby-tracker](https://github.com/snowplow/snowplow-ruby-tracker)             | [RubyGems](https://rubygems.org/gems/snowplow-tracker/)                                             |
+| [PHP](/docs/sources/php-tracker/index.md)                    | PHP                         | ❌                                                        | [snowplow-php-tracker](https://github.com/snowplow/snowplow-php-tracker)               | [Packagist](https://packagist.org/packages/snowplow/snowplow-tracker)                               |
+| [Rust](/docs/sources/rust-tracker/index.md)                  | Rust                        | ❌                                                        | [snowplow-rust-tracker](https://github.com/snowplow/snowplow-rust-tracker)             | [crates.io](https://crates.io/crates/snowplow_tracker)                                              |
+| [Lua](/docs/sources/lua-tracker/index.md)                    | Lua                         | ❌                                                        | [snowplow-lua-tracker](https://github.com/snowplow/snowplow-lua-tracker)               | [LuaRocks](https://luarocks.org/modules/snowplow/snowplowtracker)                                   |
+| [Tracking CLI](/docs/sources/snowplow-tracking-cli/index.md) | Command line, shell scripts | ❌                                                        | [snowplow-tracking-cli](https://github.com/snowplow/snowplow-tracking-cli/)            | [GitHub](https://github.com/snowplow/snowplow-tracking-cli/releases)                                |
+
+## Webhooks
+
+| Webhook                                                  | Track                                                                        |
+| -------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| [Adjust](/docs/sources/webhooks/adjust-webhook/index.md) | Which marketing channels are driving mobile app installations                |
+| [Iglu](/docs/sources/webhooks/iglu-webhook/index.md)     | Any [Iglu](/docs/api-reference/iglu/index.md)-compatible GET or POST request |
+| [Iterable](/docs/sources/webhooks/iterable/index.md)     | Events provided by Iterable                                                  |
+| [MailGun](/docs/sources/webhooks/mailgun/index.md)       | Email activity logged by MailGun                                             |
+| [Mandrill](/docs/sources/webhooks/mandrill/index.md)     | Email activity logged by Mandrill                                            |
+| [SendGrid](/docs/sources/webhooks/sendgrid/index.md)     | Email activity logged by SendGrid                                            |
+| [Zendesk](/docs/sources/webhooks/zendesk/index.md)       | Events logged by Zendesk                                                     |

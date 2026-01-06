@@ -1,116 +1,59 @@
 ---
-title: "Understanding entities"
+title: "Introduction to Snowplow entities"
 sidebar_label: "Entities (context)"
 sidebar_position: 2
 description: "Entities are a good way to deal with common fields across various events"
 ---
 
-When an event occurs, it generally involves a number of entities, which provide additional information.
+When you track an action or behavior, the information about the objects, users, and context in which the action occurred is just as important as the action itself. In Snowplow tracking, we use entities to capture this contextual data. They're reusable building blocks that make your tracking easier to implement, and your data easier to analyze.
 
-:::info Terminology
-
-In the past, what we now call “entities” was called “context”. We find the new term clearer, but you will still find `context` used in many of the existing APIs, database column names, and documentation, especially to refer to a set of _multiple_ entities. Sometimes, we will also use the two terms interchangeably.
-
+:::info Deprecated terminology
+What we now call "entity" or "entities" was previously called "context". You'll still find `context` or `contexts` used in many of the existing APIs, database column names, and documentation, especially to refer to a set of multiple entities.
 :::
 
-Let’s take the example of a “search” event. It may have the following entities associated with it:
+For example, when tracking a "search" event, you might want to capture information about:
+* The user who performed the search
+* The web page where the search was made
+* The products that were returned in the search results
+* Any A/B test variations that were active on the page
+* And so on
 
-1. A user entity, representing the user who performed the search
-2. A web page entity — the page on which the event occurred
-3. If the page is a part of an A/B test, an entity that specifies the variation of the page
-4. An entity containing a set of products that were returned from the search
+The event data might include fields such as the search term, number of results, and time taken to perform the search. These fields are specific to the "search" event.
 
-:::note
+The `user`, `webPage`, `A/B test variation`, and `products` data isn't specific to that event, and can be defined and tracked as entities:
 
-Each Snowplow event can have multiple entities attached to it. Any number of these entities can be of the same or different types.
+<img src={require('@site/docs/fundamentals/images/example-event-entities.png').default} alt="Diagram showing an example Snowplow event with atomic event data at the top, self-describing event data in the middle, and entities at the bottom including user, webPage, abTestID, and three product entities" style={{maxWidth: '400px', width: '100%', paddingBottom: '1.5rem'}} />
 
-:::
+The user who triggered the `search` event might go on to generate a `link_click` event. You might want to capture data on:
+* The user who clicked the link
+* The web page where the link was clicked
 
-What makes entities interesting is that they are common across multiple different event types. For example, the following events for a retailer will all involve a “product” entity:
+The same `user` and `webPage` entities can be reused for this event.
 
-- View product
-- Select product
-- Like product
-- Add product to basket
-- Purchase product
-- Review product
-- Recommend product
+Every Snowplow event can have entities attached to it. They can be of the same or different types.
 
-Our retailer might want to describe product using a number of fields including:
+## How to track entities
 
-- SKU
-- Name
-- Unit price
-- Category
-- Tags
+Snowplow provides a number of entities out-of-the-box. You can configure your trackers to attach certain entities automatically to all events. For example, the web trackers add a [`webPage` entity](/docs/sources/web-trackers/tracking-events/index.md#auto-tracked-entities) to all events by default.
 
-Rather than defining all the product-related fields for all the different product-related events, they would define a single product entity and attach it to any product-related event.
+Trackers add other out-of-the-box entities based on event type. For example, if you track a Snowplow media `play` event, the tracker will automatically add `media_player` and media `session` entities to it.
 
-## Under the hood
+Check out the [out-of-the-box data](/docs/events/ootb-data/index.md) section to find out more about the entities that come with Snowplow trackers.
 
-Entities are similar to [self-describing events](/docs/fundamentals/events/index.md#self-describing-events). As such, they can include arbitrarily complex data, as defined by the entity’s [schema](/docs/fundamentals/schemas/index.md).
+Some [enrichments](/docs/pipeline/enrichments/available-enrichments/index.md) add entities to events in stream. For example, the [cross-navigation enrichment](/docs/pipeline/enrichments/available-enrichments/cross-navigation-enrichment/index.md) adds a `cross_navigation` entity to events based on the cross-navigation querystring.
 
-:::note
+### Custom entities
 
-Because the entity references its schema (in a particular version!), it’s always clear to the downstream users and applications what each field in the entity means, even if your definition of the entity changes over time.
+Check out our [tracking plan guide](/docs/fundamentals/tracking-design-best-practice/index.md) for best practice on designing entities.
 
-:::
+Snowplow provides [tooling](/docs/data-product-studio/index.md) to help you define your own custom entities. Read more about tracking custom data [here](/docs/events/custom-events/index.md).
+
+## Entities are defined by schemas
+
+Like most Snowplow [events](/docs/fundamentals/events/index.md#self-describing-events), entities are based on [self-describing JSON schemas](/docs/fundamentals/schemas/index.md). As such, they can include arbitrarily complex data, and are versioned. You can evolve your entity definitions over time.
 
 Each entity consists of two parts:
+- `schema`: a reference to a [schema](/docs/fundamentals/schemas/index.md) that describes the name, version and structure of the entity
+- `data`: the entity data as a set of key-value properties in JSON format
 
-- A reference to a [schema](/docs/fundamentals/schemas/index.md) that describes the name, version and structure of the entity
-- A set of key-value properties in JSON format — the data associated with the entity
-
-This structure is an example of what we call _self-describing JSON_ — a JSON object with a `schema` and a `data` field.
-
-In the data warehouse, each type of entity gets its own column (or its own table, in the case of Redshift). There is no difference between how out-of-the-box and custom entities are stored. See the [structure of Snowplow data](/docs/fundamentals/canonical-event/index.md#entities) for more information.
-
-## Out-of-the-box entities
-
-Snowplow provides a number of entities out of the box.
-
-Some of them are attached to the event by tracking SDKs. For example, with the [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md), you can enable the collection of performance timing and other entities. The associated data will be added automatically to any Snowplow event fired on the page:
-
-```javascript
-window.snowplow("newTracker", "sp", "{{COLLECTOR_URL}}", {
-    appId: "cfe23a"
-  },
-  contexts: {
-    webPage: true,
-    performanceNavigationTiming: true,
-    performanceTiming: true,
-    gaCookies: true,
-    geolocation: false
-  }
-);
-```
-
-Other out-of-the-box entities are added to the events by certain [enrichments](/docs/pipeline/enrichments/available-enrichments/index.md).
-
-## Custom entities
-
-Custom entities are entities you define yourself.
-
-:::tip
-
-Defining your own custom entities is useful when you have similar bits of business-specific context you want to attach to multiple different events. For example, if many of your events refer to a product or a user, you can create your own `product` and `user` entities with the fields you want.
-
-:::
-
-To track an event with a custom entity, e.g. `product`, **you will first need to define its [schema](/docs/fundamentals/schemas/index.md)** (see [managing data structures](/docs/event-studio/data-structures/manage/index.md)). This schema might have fields such as `productId`, `brand`, etc.
-
-Then you can use one of the [tracking SDKs](/docs/sources/trackers/index.md) to add an array of entities to your event. For example, with the [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md):
-
-```javascript
-snowplow('trackPageView', {
-  context: [{
-    schema: 'iglu:com.example_company/product/jsonschema/1-2-1',
-    data: {
-      productId: 'ASO01043',
-      brand: 'ACME'
-    }
-  }, {
-    ...
-  }]
-});
-```
+Find out in the [warehouse tables fundamentals](/docs/fundamentals/warehouse-tables/index.md) page about how entities are structured in the data warehouse.

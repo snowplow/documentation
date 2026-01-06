@@ -56,7 +56,7 @@ export default function DocItemLayout({ children }: Props): JSX.Element {
         <div className={clsx('col', !docTOC.hidden && styles.docItemCol)}>
           <DocVersionBanner />
           <div className={styles.docItemContainer}>
-            <article className="max-w-full overflow-x-hidden leading-relaxed prose prose-headings:font-bold prose-p:mt-0 prose-table:block prose-table:rounded-lg prose-td:ps-3 prose-td:pe-3 prose-th:ps-3 prose-th:pe-3 prose-ul:mt-0 prose-ol:mt-0 prose-code:before:content-none prose-code:after:content-none prose-code:font-normal prose-code:text-sm prose-img:mx-auto prose-img:block ">
+            <article className="max-w-full overflow-x-hidden leading-relaxed prose prose-headings:font-bold prose-p:mt-0 prose-table:block prose-table:rounded-lg prose-td:ps-3 prose-td:pe-3 prose-th:ps-3 prose-th:pe-3 prose-ul:mt-0 prose-ol:mt-0 prose-code:before:content-none prose-code:after:content-none prose-code:font-normal prose-code:text-sm prose-img:mx-auto prose-img:block [&_nav.theme-doc-breadcrumbs]:max-w-[740px] [&_nav.theme-doc-breadcrumbs]:mx-auto [&_nav.theme-doc-breadcrumbs]:mt-8 [&_footer.theme-doc-footer]:max-w-[740px] [&_footer.theme-doc-footer]:mx-auto [&_footer.theme-doc-footer]:mt-8 [&_table_thead_tr_th_h3]:my-2 [&_table_tbody_tr_td_h3]:my-2 [&_table_thead_a]:font-semibold [&_table_thead_a]:no-underline">
               <DocBreadcrumbs />
               <DocVersionBadge />
               {docTOC.mobile}
@@ -69,7 +69,9 @@ export default function DocItemLayout({ children }: Props): JSX.Element {
               )}
               <DocItemFooter />
             </article>
-            <DocItemPaginator />
+            <div className="max-w-[740px] mx-auto mt-8">
+              <DocItemPaginator />
+            </div>
           </div>
         </div>
         {docTOC.desktop && (

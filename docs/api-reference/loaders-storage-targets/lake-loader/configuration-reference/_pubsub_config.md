@@ -24,6 +24,20 @@
     <td>Optional. Default value 1000. How many Pub/Sub messages to pull from the server in a single request.</td>
 </tr>
 <tr>
+    <td><code>input.retries.transientErrors.delay</code> (since 0.8.0)</td>
+    <td>
+      Optional. Default value <code>100 millis</code>.
+      Backoff delay for follow-up attempts
+    </td>
+</tr>
+<tr>
+    <td><code>input.retries.transientErrors.attempts</code> (since 0.8.0)</td>
+    <td>
+      Optional. Default value <code>10</code>.
+      Max number of attempts, after which Loader will crash and exit
+    </td>
+</tr>
+<tr>
     <td><code>output.bad.topic</code></td>
     <td>Required, e.g. <code>projects/myproject/topics/snowplow-bad</code>. Name of the Pub/Sub topic that will receive failed events.</td>
 </tr>
@@ -38,4 +52,18 @@
 <tr>
     <td><code>output.bad.maxRecordSize</code></td>
     <td>Optional.  Default value 10000000.  Any single failed event sent to Pub/Sub should not exceed this size in bytes</td>
+</tr>
+<tr>
+    <td><code>output.bad.retries.transientErrors.delay</code> (since 0.8.0)</td>
+    <td>
+      Optional. Default value <code>100 millis</code>.
+      Backoff delay for follow-up attempts
+    </td>
+</tr>
+<tr>
+    <td><code>output.bad.retries.transientErrors.attempts</code> (since 0.8.0)</td>
+    <td>
+      Optional. Default value <code>10</code>.
+      Max number of attempts, after which Loader will crash and exit
+    </td>
 </tr>

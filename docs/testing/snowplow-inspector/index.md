@@ -4,6 +4,15 @@ sidebar_position: 1
 description: "Snowplow Inspector is a useful tool for debugging Snowplow events on web-pages and more"
 ---
 
+```mdx-code-block
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc', 'selfHosted']}
+  helpContent="Snowplow Inspector is included with all Snowplow platforms."
+/>
+```
+
 Snowplow recommends using the Snowplow Inspector browser extension for validating your tracking code.
 To install in Chrome, Edge and other Chromium-based browsers, find [Snowplow Inspector on the chrome web store](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm).
 
@@ -40,7 +49,7 @@ In the example below, events fired as HTTP POST requests from the Snowplow homep
 - An automatic [self-describing](/docs/fundamentals/events/index.md#self-describing-events) [`web_vitals`](/docs/events/ootb-data/app-performance/index.md#web-vitals-events) event.
 - A [`page_view`](/docs/fundamentals/canonical-event/index.md#page-views) event.
 - A second `page_view` event from an embedded iframe on the page. It has a blue dot because its App ID and Collector combination are distinct from the other events, which have red dots because they share an App ID/Collector.
-- A self-describing [`link_click`](/docs/sources/trackers/web-trackers/tracking-events/link-click/index.md) event.
+- A self-describing [`link_click`](/docs/sources/web-trackers/tracking-events/link-click/index.md) event.
 - Two [`page_ping`](/docs/events/ootb-data/page-activity-tracking/index.md#on-web-using-page-ping-events) events.
 
 ![A screenshot of the Snowplow Inspector extension listing several events observed on the current pageview. A selected page-view event displays, detailing the properties collected as a part of that event.](./images/using-poplin-chrome-extension.png)

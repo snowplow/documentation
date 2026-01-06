@@ -28,6 +28,7 @@ Please add **techops-cloud-admin@snowplowanalytics.com** to your project. This
 - [`Roles/iam.serviceAccountAdmin`](https://cloud.google.com/iam/docs/understanding-roles#iam.serviceAccountAdmin)
 - [`Roles/container.admin`](https://cloud.google.com/iam/docs/roles-permissions/container#container.admin)
 - [`Roles/run.admin`](https://cloud.google.com/run/docs/reference/iam/roles#run.admin)
+- [`Roles/datastore.owner`](https://docs.cloud.google.com/iam/docs/roles-permissions/firestore#datastore.owner)
 
 The following roles are also required if using [RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) within GCP:
 

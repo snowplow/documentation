@@ -4,7 +4,7 @@ sidebar_position: 5
 ---
 
 :::info
-This feature is available since version 0.2.8 of Snowtype for the [Browser Tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md?platform=browser) in both JavaScript and TypeScript.
+This feature is available since version 0.2.8 of Snowtype for the [Browser Tracker](/docs/sources/web-trackers/quick-start-guide/index.md?platform=browser) in both JavaScript and TypeScript.
 :::
 
 ## Schema validation right on your browser
@@ -60,7 +60,7 @@ Currently the validation information will include attributes that can help point
 ## Entity cardinality rules validation example
 
 :::info
-This feature is available since version 0.3.1 of Snowtype for the [Browser Tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md?platform=browser) in both TypeScript and JavaScript.
+This feature is available since version 0.3.1 of Snowtype for the [Browser Tracker](/docs/sources/web-trackers/quick-start-guide/index.md?platform=browser) in both TypeScript and JavaScript.
 :::
 
 Cardinality rules allow you to specify the expected number of an entity taking part in an Event Specification. You would use this capability to ensure the correct number of entities are getting sent alongside your event. E.g. 
@@ -107,7 +107,7 @@ A similar warning will occur when there is a cardinality rule set for an entity,
 ## Property rules validation example
 
 :::info
-This feature is available since version 0.10.0 of Snowtype for the [Browser Tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md?platform=browser) in both TypeScript and JavaScript.
+This feature is available since version 0.10.0 of Snowtype for the [Browser Tracker](/docs/sources/web-trackers/quick-start-guide/index.md?platform=browser) in both TypeScript and JavaScript.
 :::
 
 Property rules are [specific instructions](/docs/event-studio/event-specifications/index.md#properties) you can add in every schema that takes part in an Event Specification. This capability will allow you to adjust the expected values specifically to this event. E.g.

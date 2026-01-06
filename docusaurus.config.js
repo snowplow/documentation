@@ -143,29 +143,6 @@ module.exports = {
             position: 'left',
             className: 'mobile-only',
           },
-
-          // {
-          //   href: 'https://support.snowplow.io/',
-          //   label: 'Contact Support',
-          //   position: 'right',
-          // },
-          // {
-          //  href: 'https://community.snowplow.io/',
-          //   label: 'Community',
-          //   position: 'right',
-          // },
-
-          // {
-          // href: 'https://github.com/snowplow/',
-          // label: 'GitHub',
-          // position: 'right',
-          // },
-          // {
-          //   to: 'https://snowplow.io/get-started/book-a-demo-of-snowplow-bdp/',
-          //   label: 'Book a demo',
-          //   className: 'snowplow-button',
-          //   position: 'right',
-          // },
         ],
       },
       footer: {
@@ -230,7 +207,8 @@ module.exports = {
         copyright: `Copyright © ${new Date().getFullYear()} Snowplow Analytics Ltd.`,
       },
       prism: {
-        theme: require('prism-react-renderer').themes.shadesOfPurple,
+        theme: require('./src/theme/PrismThemes/snowplow-light.js').default,
+        darkTheme: require('./src/theme/PrismThemes/snowplow-dark.js').default,
         // Docusaurus comes with a subset of commonly used languages -https://github.com/FormidableLabs/prism-react-renderer/blob/master/src/vendor/prism/includeLangs.js.
         // To add syntax highlighting for additional Prism supported languages, add reference from https://prismjs.com/#supported-languages.
         // NOTE: do a `yarn build` to ensure that it does build properly
@@ -265,6 +243,7 @@ module.exports = {
         apiKey: 'f22e24c1b333034a75914759b0f045c3',
         indexName: 'snowplow',
         contextualSearch: true,
+        insights: true,
       },
     }),
 
@@ -278,7 +257,6 @@ module.exports = {
       },
     },
   ],
-
 
   customFields: {
     webpack: {

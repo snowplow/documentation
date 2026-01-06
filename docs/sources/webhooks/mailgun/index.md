@@ -1,5 +1,6 @@
 ---
-title: "MailGun"
+title: "MailGun webhook"
+sidebar_label: "MailGun"
 date: "2020-02-26"
 sidebar_position: 50
 ---

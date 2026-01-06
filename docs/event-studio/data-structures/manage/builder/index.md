@@ -14,7 +14,7 @@ The [data structures builder](/docs/event-studio/data-structures/manage/builder/
 - Decimal
 - Boolean
 
-For more complex data structures that require nesting or more advanced data types, use the [JSON editor](/docs/event-studio/data-structures/manage/json-editor/index.md). To understand all available JSON Schema validation options, see the [JSON Schema reference](/docs/fundamentals/schemas/json-schema-reference/index.md).
+For more complex data structures that require nesting or more advanced data types, use the [JSON editor](/docs/event-studio/data-structures/manage/json-editor/index.md). To understand all available JSON Schema validation options, see the [JSON Schema reference](/docs/api-reference/json-schema-reference/index.md).
 :::
 
 ***

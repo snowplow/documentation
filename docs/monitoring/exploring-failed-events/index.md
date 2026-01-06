@@ -5,9 +5,22 @@ sidebar_label: "Load failed events into table"
 description: "Load common types of failed events to a separate table in your warehouse or lake to analyze them easily."
 ---
 
+```mdx-code-block
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc', 'selfHosted']}
+  helpContent="Failed events loaders are included with all Snowplow platforms."
+/>
+```
+
 :::note Compatibility
 
-This feature is available since Enrich 5.0.0 and works with Snowflake Loader, BigQuery Loader since version 2, and Lake Loader.
+This feature is available since Enrich 5.0.0 and works with:
+* Snowflake Streaming Loader
+* BigQuery Loader (since version 2)
+* Lake Loader
+* Databricks Streaming Loader
 
 :::
 
@@ -87,7 +100,7 @@ Here is an example of what the `contexts_com_snowplowanalytics_snowplow_failure_
 
 ## Configure
 
-To use this feature, you will first need to enable the stream that contains failed events in the [Snowplow TSV format](/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md) suitable for loading into your warehouse or lake.
+To use this feature, you will first need to enable the stream that contains failed events in the [Snowplow TSV format](/docs/pipeline/enriched-tsv-format/index.md) suitable for loading into your warehouse or lake.
 
 The instructions below are for Snowplow CDI customers. For Snowplow Self-Hosted, you will need to configure this manually via Terraform.
 
@@ -110,6 +123,7 @@ You can use the following loaders with the failed events stream:
 * Snowflake Streaming Loader
 * BigQuery Loader (since version 2)
 * Lake Loader
+* Databricks Streaming Loader
 
 Pick your desired destination and follow the steps in the UI, selecting _“failed events”_ as the  type of events.
 

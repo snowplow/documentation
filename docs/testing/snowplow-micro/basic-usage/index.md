@@ -65,9 +65,9 @@ Most of the examples on this and the following pages will show the Docker option
 
 ## Sending events to Micro
 
-Follow the documentation for one of [our trackers](/docs/sources/trackers/index.md) to implement some tracking code on your website or application.
+Follow the documentation for one of [our trackers](/docs/sources/index.md) to implement some tracking code on your website or application.
 
-You can then point it to `localhost:9090` where Micro is listening. For example, using the [Browser tracker](/docs/sources/trackers/web-trackers/index.md):
+You can then point it to `localhost:9090` where Micro is listening. For example, using the [Browser tracker](/docs/sources/web-trackers/index.md):
 
 ```js
 import { newTracker, trackPageView, enableActivityTracking } from '@snowplow/browser-tracker';
@@ -109,7 +109,7 @@ curl localhost:9090/micro/good
 
 ## Exporting events
 
-Snowplow pipelines output data in the [_enriched TSV format_](/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md). Typically, this is picked up by one of our [loaders](/docs/destinations/warehouses-lakes/index.md) or by tools such as [Snowbridge](/docs/api-reference/snowbridge/index.md).
+Snowplow pipelines output data in the [_enriched TSV format_](/docs/pipeline/enriched-tsv-format/index.md). Typically, this is picked up by one of our [loaders](/docs/destinations/warehouses-lakes/index.md) or by tools such as [Snowbridge](/docs/api-reference/snowbridge/index.md).
 
 With Micro, you can see what your data would look like in this format — useful if you want to test any logic that is parsing this data.
 

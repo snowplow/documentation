@@ -9,8 +9,16 @@ sidebar_custom_props:
   header: " "
 ---
 
-Event Studio is a comprehensive set of tools for designing and implementing behavioral data event tracking. It provides:
+```mdx-code-block
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
+<AvailabilityBadges
+  available={['cloud', 'pmc', 'addon']}
+  helpContent="Event Studio is a paid addon for Snowplow CDI."
+/>
+```
+
+Event Studio is a comprehensive set of tools for designing and implementing behavioral data event tracking. It provides:
 * **Schema management**: define and version data structures for events and entities
 * **Ownership and governance**: assign ownership and establish data contracts
 * **Observability**: monitor data quality and tracking implementation

@@ -1,5 +1,5 @@
 ---
-title: "Managing Tracking Plan using Console"
+title: "Managing tracking plans using Console"
 date: "2024-01-18"
 sidebar_label: "Using the UI"
 sidebar_position: 1
@@ -102,4 +102,3 @@ If the new version of the Data Structure introduces incompatibilities with the e
 ![Conflict resolution Event Specification](images/conflict_resolution.png)
 
 This mechanism ensures that teams can benefit from updated Data Structures while maintaining the integrity and accuracy of their Event Specifications. Users are empowered to make informed decisions during the upgrade process, with clear visual cues and options to handle conflicts effectively.
-

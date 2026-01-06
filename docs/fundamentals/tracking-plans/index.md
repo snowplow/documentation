@@ -5,7 +5,7 @@ sidebar_label: "Tracking plans"
 description: "Snowplow's tracking plans enable organizations to easily generate AI and BI-ready data that is reliable, clear, compliant, accurate, and predictable"
 ---
 
-Tracking plans are Snowplow's solution to helping organizations more easily create and democratise behavioral data. By creating well-documented datasets, that are both human and machine readable, you can more easily collaborate around data & unlock self-service analytics at scale.
+Tracking plans are Snowplow's solution to helping organizations more easily create and democratise behavioral data. By creating well-documented datasets, that are both human and machine readable, you can more easily collaborate around data and unlock self-service analytics at scale.
 
 With tracking plans, you can:
 
@@ -18,7 +18,7 @@ With tracking plans, you can:
 
 ## What is a Tracking Plan
 
-A tracking plan is a well documented dataset. By documenting what data you are collecting, where, the meaning of that data and how to use it, you can break down the barriers that exist today between the many teams involved in the data value chain (i.e. from those implementing the tracking to those analysing the data).
+A tracking plan is a documented dataset. By documenting what data you are collecting, where, the meaning of that data and how to use it, you can break down the barriers that often exist between the many teams involved in the data value chain, i.e. from those implementing the tracking to those analysing the data.
 
 At its core, a tracking plan has:
 
@@ -27,11 +27,9 @@ At its core, a tracking plan has:
 
 Tracking plans at Snowplow are underpinned by the concept of a data contract. They act as a formal agreement between the producers of tracking plans and the consumers of tracking plans, and support better collaboration around the data being created.
 
-We have always believed in the value of data contracts at Snowplow; our tech is underpinned by event and entity schemas that describe upfront the structure of the data and ensure that the data conforms to that structure as it is processed by your pipeline. This schema technology forms the foundations of a data contract, but tracking plans take this to the next level to bring enhanced quality, governance and discoverability to the data that you create.
-
 Examples of tracking plans:
 
-* E-commerce Web
+* Ecommerce Web
 * Media Web
 
 ## Key elements of a Tracking Plan

@@ -143,29 +143,6 @@ module.exports = {
             position: 'left',
             className: 'mobile-only',
           },
-
-          // {
-          //   href: 'https://support.snowplow.io/',
-          //   label: 'Contact Support',
-          //   position: 'right',
-          // },
-          // {
-          //  href: 'https://community.snowplow.io/',
-          //   label: 'Community',
-          //   position: 'right',
-          // },
-
-          // {
-          // href: 'https://github.com/snowplow/',
-          // label: 'GitHub',
-          // position: 'right',
-          // },
-          // {
-          //   to: 'https://snowplow.io/get-started/book-a-demo-of-snowplow-bdp/',
-          //   label: 'Book a demo',
-          //   className: 'snowplow-button',
-          //   position: 'right',
-          // },
         ],
       },
       footer: {

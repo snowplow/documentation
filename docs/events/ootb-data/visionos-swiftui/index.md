@@ -71,4 +71,4 @@ Snowplow currently only supports visionOS apps via SwiftUI, not Unity.
 
 ## How to track?
 
-* [iOS tracker documentation](/docs/sources/trackers/mobile-trackers/tracking-events/visionos/index.md).
+* [iOS tracker documentation](/docs/sources/mobile-trackers/tracking-events/visionos/index.md).

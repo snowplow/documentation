@@ -124,7 +124,7 @@ Snowplow trackers send HTTP requests to the `/i` endpoint or the `/com.snowplowa
 
 Many tracker protocol violations are caused by bot traffic, so do not be surprised to see some of them in your pipeline.
 
-Another likely source is misconfigured query parameters if you are using the [pixel tracker](/docs/sources/trackers/pixel-tracker/index.md). In this case you might try to fix your application sending events, and then [recover the failed events](/docs/monitoring/recovering-failed-events/index.md).
+Another likely source is misconfigured query parameters if you are using the [pixel tracker](/docs/sources/pixel-tracker/index.md). In this case you might try to fix your application sending events, and then [recover the failed events](/docs/monitoring/recovering-failed-events/index.md).
 
 Because this failure is handled during enrichment, events in the real time good stream are free of this violation type.
 

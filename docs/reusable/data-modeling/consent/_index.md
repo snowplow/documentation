@@ -28,7 +28,7 @@ This custom module consists of a series of dbt models which produce the followin
 
 ## Operation
 
-<ReactMarkdown children={`It is assumed that the Snowplow ${props.packageName} package is already installed and configured as per the [Quick Start](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart) instructions.`}/>
+It is assumed that the Snowplow {props.packageName} package is already installed and configured as per the [Quick Start](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/index.md) instructions.
 
 ### Enable the module
 

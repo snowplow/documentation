@@ -7,6 +7,12 @@ sidebar_label: "Snowtype (Code generation)"
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc']}
+  helpContent="Snowtype is available for Snowplow CDI customers only."
+/>
 ```
 
 **Snowtype** is a code generation tool that automates the creation of type-safe tracking code for Snowplow SDKs. Snowtype connects directly to your data structures and event specifications. This eliminates manual instrumentation work and ensures that your tracking code is compliant with the schemas and produces high quality data.

@@ -51,7 +51,7 @@ const plugin = () => {
             config[token]
               ? {
                   type: 'html',
-                  value: `<abbr data-title="${config[token]}">${token}</abbr>`,
+                  value: `<abbr data-title="${config[token]}" class="relative cursor-help underline decoration-dotted hover:after:content-[attr(data-title)] focus:after:content-[attr(data-title)] hover:after:absolute focus:after:absolute hover:after:z-50 focus:after:z-50 hover:after:bg-popover focus:after:bg-popover hover:after:text-popover-foreground focus:after:text-popover-foreground hover:after:text-sm focus:after:text-sm hover:after:px-2 focus:after:px-2 hover:after:py-1 focus:after:py-1 hover:after:rounded focus:after:rounded hover:after:whitespace-nowrap focus:after:whitespace-nowrap hover:after:left-1/2 focus:after:left-1/2 hover:after:-translate-x-1/2 focus:after:-translate-x-1/2 hover:after:top-full focus:after:top-full hover:after:mt-1 focus:after:mt-1">${token}</abbr>`,
                 }
               : { ...node, value: token }
           )

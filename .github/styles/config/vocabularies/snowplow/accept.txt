@@ -66,9 +66,11 @@ KPIs
 SDKs
 SLAs
 URIs
+IPs
 
 (un)?ack(s|ing|ed)?
 [aA]d(-?)blocker
+[aA]gentic
 [aA]llowlist(s)?
 [aA]nonymization
 [aA]nonymization
@@ -77,6 +79,7 @@ URIs
 [aA]nonymizing
 [aA]sync
 [aA]utogenerate(d?)
+[aA]utotrack(ed|ing)?
 [bB]ackfill(ed|ing)?
 [bB]ackoff
 [bB]oolean

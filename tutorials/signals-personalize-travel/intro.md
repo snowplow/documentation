@@ -1,5 +1,5 @@
 ---
-title: "Learn how to build personalized experiences with Signals"
+title: "Learn how to build a personalized travel agent with Signals"
 sidebar_label: "Introduction"
 position: 1
 description: "Build personalized travel experiences using Snowplow Signals to customize content and chatbot responses based on real-time user behavior."
@@ -7,7 +7,7 @@ keywords: ["Snowplow Signals", "personalization", "real-time", "travel", "chatbo
 date: "2025-01-21"
 ---
 
-Welcome to the **Personalize content and agentic responses using Signals** tutorial.
+Welcome to the **Build a personalized travel agent with Signals** tutorial.
 
 [![Personalized Travel Experiences](./images/demo-site.jpg)](./images/demo-site.jpg)
 

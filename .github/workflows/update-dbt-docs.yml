@@ -36,8 +36,8 @@ jobs:
         branch: dbt-reference-docs
         branch-suffix: random
         delete-branch: true
-        reviewers: agnessnowplow
-        assignees: agnessnowplow
+        reviewers: agnes-kiss
+        assignees: agnes-kiss
         body: |
             Update auto-generated dbt docs. Note this is an auto-generated PR from a github action, see the action or utils/dbt_docs for further information.
         add-paths: |

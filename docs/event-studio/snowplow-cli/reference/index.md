@@ -4,10 +4,9 @@ date: 2025-10-02
 sidebar_position: 1
 ---
 
-:::info
-**Data Products** have been renamed to **Tracking Plans** in the Snowplow interface. In this technical section, we may still refer to "Data Products" to match API fields and CLI commands.
-:::
+import TrackingPlansNomenclature from '@site/docs/reusable/tracking-plans-nomenclature/_index.md';
 
+<TrackingPlansNomenclature />
 
 This page contains the complete reference for the Snowplow CLI commands.
 

@@ -4,15 +4,12 @@ sidebar_position: 2
 sidebar_label: "Snowtype CLI"
 ---
 
-:::info
-**Data Products** have been renamed to **Tracking Plans** in the Snowplow interface. In this technical section, we may still refer to "Data Products" to match API fields and CLI commands.
-:::
-
-
-```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-```
+
+
+
+<TrackingPlansNomenclature />
 
 The Snowtype CLI is a tool which aims to speed up tracking implementations, provide type safety and inline documentation for developers and ultimately reduce the number of erroneous events. By integrating this tool in the development workflow we introduce a way to connect the additions and updates done in a Snowplow implementation with the corresponding tracking code of the project.
 

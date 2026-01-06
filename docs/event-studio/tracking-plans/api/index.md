@@ -4,10 +4,9 @@ sidebar_label: "Using the API"
 sidebar_position: 3
 ---
 
-:::info
-**Data Products** have been renamed to **Tracking Plans** in the Snowplow interface. In this technical section, we may still refer to "Data Products" to match API fields and CLI commands.
-:::
+import TrackingPlansNomenclature from '@site/docs/reusable/tracking-plans-nomenclature/_index.md';
 
+<TrackingPlansNomenclature />
 
 As well as managing [tracking plans](/docs/event-studio/tracking-plans/index.md) through Snowplow Console, Snowplow customers can also manage them programmatically through an API.
 

@@ -5,12 +5,11 @@ sidebar_label: "Using the CLI"
 sidebar_position: 999
 ---
 
-:::info
-**Data Products** have been renamed to **Tracking Plans** in the Snowplow interface. In this technical section, we may still refer to "Data Products" to match API fields and CLI commands.
-:::
-
+import TrackingPlansNomenclature from '@site/docs/reusable/tracking-plans-nomenclature/_index.md';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+
+<TrackingPlansNomenclature />
 
 The `data-products` subcommand of [Snowplow CLI](/docs/event-studio/snowplow-cli/index.md) provides a collection of functionality to ease the integration of custom development and publishing workflows.
 ## Snowplow CLI Prerequisites

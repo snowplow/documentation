@@ -4,20 +4,17 @@ sidebar_label: Snowplow CLI
 sidebar_position: 7
 ---
 
-```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+import TrackingPlansNomenclature from '@site/docs/reusable/tracking-plans-nomenclature/_index.md';
 
 <AvailabilityBadges
   available={['cloud', 'pmc']}
   helpContent="Snowplow CLI is available for Snowplow CDI customers only."
 />
-```
 
-:::info Nomenclature
-We've renamed **data products** to **tracking plans** in the Snowplow interface. In this section, we may still refer to data products to match API fields and CLI commands.
-:::
+<TrackingPlansNomenclature />
 
 Snowplow CLI brings data management elements of Snowplow Console into the command line. It allows you to download your data structures and tracking plans to YAML/JSON files and publish them back to Console. This enables git-ops-like workflows, with reviews and branching.
 

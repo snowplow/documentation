@@ -11,13 +11,23 @@ export const Topic = z.enum([
 
 export type Topic = z.infer<typeof Topic>
 
+// The Use Cases allowed for the tutorials
+export const UseCase = z.enum([
+  'Composable CDP',
+  'Composable analytics',
+  'Customer-facing AI agents',
+  'Real-time personalization',
+])
+
+export type UseCase = z.infer<typeof UseCase>
+
 // The metadata for a tutorial
 export const Meta = z.object({
   id: z.string(),
   title: z.string(),
   label: Topic,
   description: z.string(),
-  useCase: z.string(),
+  useCase: UseCase,
   technologies: z.array(z.string()),
   snowplowTech: z.array(z.string()),
 })

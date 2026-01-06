@@ -1287,39 +1287,6 @@ li.footer__item::first-letter {
 }
 
 /* START Control rest of the elements erase after we upgrade */
-article nav.theme-doc-breadcrumbs,
-article footer.theme-doc-footer,
-nav.pagination-nav {
-  max-width: 740px;
-  margin: 2rem auto 0 auto;
-}
-abbr[data-title]:focus:after,
-abbr[data-title]:hover:after {
-  background-color: hsl(var(--popover));
-  border-radius: var(--radius);
-  color: var(--popover-foreground);
-  content: attr(data-title);
-  font-size: 0.875rem;
-  padding: 4px 8px;
-}
-.tocCollapsibleContent_node_modules-\@docusaurus-theme-classic-lib-theme-TOCCollapsible-styles-module
-  > ul {
-  padding: 0.75rem !important;
-  font-size: 1rem !important;
-  margin: 0 !important;
-}
-.tocCollapsibleContent_node_modules-\@docusaurus-theme-classic-lib-theme-TOCCollapsible-styles-module
-  a {
-  text-decoration: none !important;
-}
-.prose .markdown table thead tr th h3,
-.prose .markdown table tbody tr td h3 {
-  margin: 0.5rem 0 !important;
-}
-.prose table thead a {
-  font-weight: 600;
-  text-decoration: none;
-}
 
 /* END  Control rest of the elements erase after we upgrade */
 

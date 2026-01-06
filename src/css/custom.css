@@ -1286,9 +1286,6 @@ li.footer__item::first-letter {
   color: hsl(var(--muted-foreground));
 }
 
-/* START Control rest of the elements erase after we upgrade */
-
-/* END  Control rest of the elements erase after we upgrade */
 
 /* Custom code block header and button styling */
 .theme-code-block {

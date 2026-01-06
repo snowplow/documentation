@@ -4,6 +4,15 @@ sidebar_position: 1
 description: "Snowplow Inspector is a useful tool for debugging Snowplow events on web-pages and more"
 ---
 
+```mdx-code-block
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc', 'selfHosted']}
+  helpContent="Snowplow Inspector is included with all Snowplow platforms."
+/>
+```
+
 Snowplow recommends using the Snowplow Inspector browser extension for validating your tracking code.
 To install in Chrome, Edge and other Chromium-based browsers, find [Snowplow Inspector on the chrome web store](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm).
 

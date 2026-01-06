@@ -5,6 +5,15 @@ description: "Real-time personalization engine for customer intelligence that co
 sidebar_label: "Signals"
 ---
 
+```mdx-code-block
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc', 'addon']}
+  helpContent="Signals is a paid addon for Snowplow CDI."
+/>
+```
+
 Snowplow Signals is a real-time personalization engine for customer intelligence, built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in real time.
 
 Real-time personalization use cases that are unlocked by Signals include:

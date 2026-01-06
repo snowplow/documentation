@@ -3,8 +3,17 @@ title: Snowplow CLI
 sidebar_label: Snowplow CLI
 sidebar_position: 7
 ---
+
+```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc']}
+  helpContent="Snowplow CLI is available for Snowplow CDI customers only."
+/>
+```
 
 Snowplow CLI brings data management elements of Snowplow Console into the command line. It allows you to download your data structures and data products to YAML/JSON files and publish them back to Console. This enables git-ops-like workflows, with reviews and branching.
 

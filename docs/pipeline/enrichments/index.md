@@ -4,6 +4,15 @@ date: "2020-02-15"
 sidebar_position: 2
 ---
 
+```mdx-code-block
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc', 'selfHosted']}
+  helpContent="Enrichments are included with all Snowplow platforms."
+/>
+```
+
 During Enrichment your events have extra properties and values attached to them, also known as dimension widening.
 
 Snowplow enrichments can be categorized into three brackets:

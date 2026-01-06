@@ -56,7 +56,7 @@ Since application entities can also be set conditionally, you can mark any of th
 Once you have created a source application, you can use the **Set up tracking** tab to configure tracking and generate ready-to-use code snippets. This guided configuration simplifies the instrumentation process and helps you start receiving events.
 
 :::info
-The Set up tracking tab currently supports the JavaScript tracker. You can always customize your tracking further by referring to the [tracker documentation](/docs/sources/trackers/index.md).
+The Set up tracking tab currently supports the JavaScript tracker. You can always customize your tracking further by referring to the [tracker documentation](/docs/sources/index.md).
 :::
 
 ### Configure tracker settings

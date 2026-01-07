@@ -1,6 +1,6 @@
 ---
 position: 8
-title: Add event specifications to the todo data product
+title: Add event specifications to the todo tracking plan
 sidebar_label: Add event specifications
 ---
 

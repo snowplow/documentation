@@ -1,10 +1,10 @@
 ---
 position: 1
-title: "Learn how to track web events with base data products"
+title: "Learn how to track web events with base tracking plans"
 sidebar_label: "Introduction"
 ---
 
-This guide will help you understand some of the basic capabilities of Data Products and how they can be used in practice for most tracking implementation setups.
+This guide will help you understand some of the basic capabilities of tracking plans and how they can be used in practice for most tracking implementation setups.
 
 ## Prerequisites
 - A [collector](/docs/pipeline/collector/) endpoint.
@@ -12,7 +12,7 @@ This guide will help you understand some of the basic capabilities of Data Produ
 
 ## What you'll be doing
 
-This recipe will showcase how a basic tracking setup can be implemented using Data Product Studio capabilities such as Source Applications, Data Products and their related Snowtype features.
+This recipe will showcase how a basic tracking setup can be implemented using Event Studio capabilities such as Source Applications, tracking plans and their related Snowtype features.
 
 This basic tracking setup will include:
 - Page views and page pings

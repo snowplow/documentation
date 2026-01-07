@@ -41,10 +41,10 @@ The Snowplow CLI MCP server provides these tools:
 
 ### Core tools
 
-- **`get_context`** - Retrieves the built-in schema and rules that define how Snowplow data structures, data products, and source applications should be structured.
+- **`get_context`** - Retrieves the built-in schema and rules that define how Snowplow data structures, tracking plans, and source applications should be structured.
 - **`get_uuid`** - Generates valid v4 UUIDs required by many Snowplow components.
 
 ### Validation tools
 
 - **`validate_data_structures`** - Validates data structure files (events/entities). Must be called after creating or modifying any data structure.
-- **`validate_data_products`** - Validates data products and source applications. Must include both data product files AND their referenced source application files.
+- **`validate_data_products`** - Validates tracking plans and source applications. Must include both tracking plan files AND their referenced source application files.

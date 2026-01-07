@@ -12,7 +12,7 @@ We want to track user engagement on our blog
 ```
 
 The assistant will suggest:
-- Page view events with article context
+- Page view events with article entity
 - Custom events for shares and subscriptions
 - Reading progression metrics
 - Time-based engagement tracking
@@ -23,13 +23,13 @@ Our product_viewed event is missing context about where users found the product
 ```
 
 The assistant will provide:
-- Recommendations for adding context entities
+- Recommendations for adding entities
 - Versioning strategy
 - Guidelines for maintaining consistency with related events
 
 ### Journey mapping
 ```
-Create a data product for our checkout funnel
+Create a tracking plan for our checkout funnel
 ```
 
 The assistant will create:
@@ -45,4 +45,4 @@ We're adding mobile app tracking to our existing web tracking
 The assistant will analyze:
 - Which entities should be consistent across platforms
 - Platform-specific contexts needed
-- Data product structure recommendations
+- Tracking plan structure recommendations

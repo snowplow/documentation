@@ -1,6 +1,6 @@
 ---
 position: 2
-title: Create a source application for data products
+title: Create a source application for tracking plans
 sidebar_label: Create a source application
 ---
 
@@ -13,7 +13,7 @@ The inputs on the creation screen are:
 - **Name**: a name used for this application which is fairly understood across the organization.
 - **Description**: a few words on what this Source Application represents and/or any notes.
 - **Primary owner**: owner email address.
-- **Application IDs**: the [Application IDs](https://docs.snowplow.io/docs/understanding-tracking-design/organize-data-sources-with-source-applications/#application-ids) expected to be used for this application. _These will automatically flow down to the Data Products and Event specifications you define relating to this Source Application._
+- **Application IDs**: the [Application IDs](https://docs.snowplow.io/docs/understanding-tracking-design/organize-data-sources-with-source-applications/#application-ids) expected to be used for this application. _These will automatically flow down to the tracking plans and Event specifications you define relating to this Source Application._
 - **Application entities**: here is where you will set the [Application Contexts](https://docs.snowplow.io/docs/understanding-tracking-design/organize-data-sources-with-source-applications/#application-context) you will implement and expect to be available with every event hit coming from this application.
 
 An example of inputs can be the following which you can adjust to your case:

@@ -32,7 +32,7 @@ This event is manually tracked when the deep link is received in the app.
     url: 'https://example.com/notes/123',
     referrer: 'https://snowplow.io'
   }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Represents a deep-link received in the app.", "self": { "vendor": "com.snowplowanalytics.mobile", "name": "deep_link_received", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "url": { "type": "string", "description": "URL in the received deep-link", "format": "uri", "maxLength": 4096 }, "referrer": { "type": "string", "description": "Referrer URL, source of this deep-link", "format": "uri", "maxLength": 4096 } }, "required": ["url"], "additionalProperties": false }} />
+  schema={{ "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Represents a deep-link received in the app.", "self": { "vendor": "com.snowplowanalytics.mobile", "name": "deep_link_received", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "url": { "type": "string", "description": "URL in the received deep-link", "format": "uri", "maxLength": 4096 }, "referrer": { "type": "string", "description": "Referrer URL, source of this deep-link", "format": "uri", "maxLength": 4096 } }, "required": ["url"], "additionalProperties": false }} />
 
 ### Context entity attached to screen view events
 
@@ -44,7 +44,7 @@ This context entity is attached to the first screen view event automatically aft
     url: 'https://example.com/notes/123',
     referrer: 'https://snowplow.io'
   }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Entity that indicates a deep-link has been received and processed.", "self": { "vendor": "com.snowplowanalytics.mobile", "name": "deep_link", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "url": { "type": "string", "description": "URL in the received deep-link", "format": "uri", "maxLength": 4096 }, "referrer": { "type": "string", "description": "Referrer URL, source of this deep-link", "format": "uri", "maxLength": 4096 } }, "required": ["url"], "additionalProperties": false }} />
+  schema={{ "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Entity that indicates a deep-link has been received and processed.", "self": { "vendor": "com.snowplowanalytics.mobile", "name": "deep_link", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "url": { "type": "string", "description": "URL in the received deep-link", "format": "uri", "maxLength": 4096 }, "referrer": { "type": "string", "description": "Referrer URL, source of this deep-link", "format": "uri", "maxLength": 4096 } }, "required": ["url"], "additionalProperties": false }} />
 
 ### How to track?
 
@@ -59,7 +59,7 @@ Link click tracking feature in the JavaScript tracker enables automatic capturin
   overview={{event: true, web: true, mobile: false, automatic: true}}
   example={{
   }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for a link click event", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "link_click", "format": "jsonschema", "version": "1-0-1" }, "type": "object", "properties": { "elementId": { "type": "string" }, "elementClasses": { "type": "array", "items": { "type": "string" } }, "elementTarget": { "type": "string" }, "targetUrl": { "type": "string", "minLength": 1 }, "elementContent": { "type": "string" } }, "required": ["targetUrl"], "additionalProperties": false }} />
+  schema={{ "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for a link click event", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "link_click", "format": "jsonschema", "version": "1-0-1" }, "type": "object", "properties": { "elementId": { "type": "string" }, "elementClasses": { "type": "array", "items": { "type": "string" } }, "elementTarget": { "type": "string" }, "targetUrl": { "type": "string", "minLength": 1 }, "elementContent": { "type": "string" } }, "required": ["targetUrl"], "additionalProperties": false }} />
 
 ### How to track?
 

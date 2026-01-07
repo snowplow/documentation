@@ -15,7 +15,7 @@ The Snowtype CLI configuration can be saved in a `.json`, `.js`, or `.ts` file a
 
 ### `igluCentralSchemas`
 
-The schema tracking URLs for schemas available in [Iglu Central](http://iglucentral.com/).
+The schema tracking URLs for schemas available in [Iglu Central](https://iglucentral.com/).
 
 ### `repositories`
 

@@ -53,7 +53,7 @@ Upload the following schema to your Iglu repo as `com.adjust.snowplow/install/j
 
 ```json
 {
-  "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+  "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
   "description": "Schema for Adjust install event",
   "self": {
     "vendor": "com.adjust.snowplow",
@@ -565,7 +565,7 @@ E.g.:
 
 ```json
 {
-  "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+  "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
   "description": "Schema for Adjust reattribute event",
   "self": {
     "vendor": "com.adjust.snowplow",

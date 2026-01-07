@@ -241,7 +241,7 @@ If this context is enabled, the JavaScript tracker will add a context entity to 
 
 Anonymous tracking has to be disabled for the session context entities to be added to events.
 
-The [`client_session`](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) context entity consists of the following properties:
+The [`client_session`](https://iglucentral.com/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) context entity consists of the following properties:
 
 | Attribute             | Description                                                                                                   | Required? |
 |-----------------------|---------------------------------------------------------------------------------------------------------------|-----------|
@@ -439,7 +439,7 @@ The `onSessionUpdateCallback` option, allows you to supply a callback function t
 
 The callback's signature is:
 `(clientSession: ClientSession) => void`
-where clientSession includes the same values as you would expect on the [`client_session`](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) context.
+where clientSession includes the same values as you would expect on the [`client_session`](https://iglucentral.com/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) context.
 
 _Note:_ The callback is **not** called whenever a session is expired, but only when a new one is generated.
 

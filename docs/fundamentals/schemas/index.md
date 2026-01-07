@@ -47,7 +47,7 @@ Let's take a look at an example schema to talk about its constituent parts:
 
 ```json
 {
-  "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+  "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
   "description": "Schema for an example event",
   "self": {
     "vendor": "com.snowplowanalytics",
@@ -119,7 +119,7 @@ Snowplow CDI customers don't need to create or manage their own Iglu repositorie
 
 You'll notice that schema URIs use the `iglu:` protocol, for example: `iglu:com.snowplowanalytics.snowplow/page_view/jsonschema/1-0-0`. This is because all Snowplow schemas are stored in an Iglu repository.
 
-There is a [central Iglu repository](http://iglucentral.com/) that holds public schemas for use with Snowplow, including ones for some of the [out-of-the-box self-describing events](/docs/fundamentals/events/index.md#self-describing-events) and [out-of-the-box entities](/docs/fundamentals/entities/index.md#how-to-track-entities).
+There is a [central Iglu repository](https://iglucentral.com/) that holds public schemas for use with Snowplow, including ones for some of the [out-of-the-box self-describing events](/docs/fundamentals/events/index.md#self-describing-events) and [out-of-the-box entities](/docs/fundamentals/entities/index.md#how-to-track-entities).
 
 For Snowplow Self-Hosted users, you'll need to run your own Iglu schema repository to host schemas for your custom [events](/docs/fundamentals/events/index.md#self-describing-events) and [entities](/docs/fundamentals/entities/index.md#custom-entities). Use [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) (recommended), or a [static repository](/docs/api-reference/iglu/iglu-repositories/static-repo/index.md).
 

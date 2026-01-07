@@ -15,7 +15,7 @@ First, design the schema for your custom event (or entity). For example:
 
 ```json
 {
-     "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+     "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
      "description": "Schema for a button click event",
      "self": {
          "vendor": "com.snowplowanalytics",

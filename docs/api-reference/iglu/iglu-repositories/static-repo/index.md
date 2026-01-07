@@ -4,7 +4,7 @@ date: "2021-03-26"
 sidebar_position: 4000
 ---
 
-A static repo is simply an Iglu repository server structured as a static website. [Iglu Central](/docs/api-reference/iglu/iglu-central-setup/index.md) can be used as an example, [serving](http://iglucentral.com/) its whole content over http.
+A static repo is simply an Iglu repository server structured as a static website. [Iglu Central](/docs/api-reference/iglu/iglu-central-setup/index.md) can be used as an example, [serving](https://iglucentral.com/) its whole content over http.
 
 ## 1. Choose a hosting partner
 

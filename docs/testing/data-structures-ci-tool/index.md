@@ -57,7 +57,7 @@ Here is an example manifest file where our application has dependencies on three
 }
 ```
 
-The manifest must adhere to this [self-describing JSON Schema](http://iglucentral.com/schemas/com.snowplowanalytics.insights/data_structures_dependencies/jsonschema/1-0-0).
+The manifest must adhere to this [self-describing JSON Schema](https://iglucentral.com/schemas/com.snowplowanalytics.insights/data_structures_dependencies/jsonschema/1-0-0).
 
 ## Setting up as a Github Action
 

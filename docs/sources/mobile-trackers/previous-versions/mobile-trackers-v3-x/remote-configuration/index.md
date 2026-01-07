@@ -52,13 +52,13 @@ The `onSuccess` callback is called for each successful configuration. For exampl
 In the `RemoteConfiguration` object passed to the `setup` method is specified the REMOTE_CONFIG_URL, which is the url where the developer hosts the configuration file.  
 There aren't restrictions about where to host the file but possible solutions may be S3 with Cloudfront or a Google Cloud Storage bucket.
 
-The configuration file is simply a JSON file compliant with the [Remote Config JSONSchema](http://iglucentral.com/schemas/com.snowplowanalytics.mobile/remote_config/jsonschema/1-0-0).
+The configuration file is simply a JSON file compliant with the [Remote Config JSONSchema](https://iglucentral.com/schemas/com.snowplowanalytics.mobile/remote_config/jsonschema/1-0-0).
 
 An example of remote config specification:
 
 ```json
 {
-  "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.mobile/remote_config/jsonschema/1-0-0",
+  "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.mobile/remote_config/jsonschema/1-0-0",
   "configurationVersion": 1,
   "configurationBundle": [
     {
@@ -198,13 +198,13 @@ The `onSuccess` callback is called for each successful configuration. For exampl
 In the `RemoteConfiguration` object passed to the `setup` method is specified the REMOTE_CONFIG_URL, which is the url where the developer hosts the configuration file.  
 There aren't restrictions about where to host the file but possible solutions may be S3 with Cloudfront or a Google Cloud Storage bucket.
 
-The configuration file is simply a JSON file compliant with the [Remote Config JSONSchema](http://iglucentral.com/schemas/com.snowplowanalytics.mobile/remote_config/jsonschema/1-0-0).
+The configuration file is simply a JSON file compliant with the [Remote Config JSONSchema](https://iglucentral.com/schemas/com.snowplowanalytics.mobile/remote_config/jsonschema/1-0-0).
 
 An example of remote config specification:
 
 ```json
 {
-  "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.mobile/remote_config/jsonschema/1-0-0",
+  "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.mobile/remote_config/jsonschema/1-0-0",
   "configurationVersion": 1,
   "configurationBundle": [
     {

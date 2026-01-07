@@ -14,7 +14,7 @@ meta:
   schemaType: event
   customData: {}
 data:
-  $schema: http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#
+  $schema: https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#
   self:
     vendor: com.example
     name: login

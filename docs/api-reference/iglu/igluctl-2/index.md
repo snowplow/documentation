@@ -83,7 +83,7 @@ $ /path/to/igluctl lint /path/to/schema/registry/schemas/com.example_company/exa
 Examples of errors that are identified:
 
 - JSON Schema has inconsistent self-describing information and path on filesystem
-- JSON Schema has invalid `$schema` keyword. It should be always set to [iglu-specific](http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#), while users tend to set it to Draft v4 or even to self-referencing Iglu URI
+- JSON Schema has invalid `$schema` keyword. It should be always set to [iglu-specific](https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#), while users tend to set it to Draft v4 or even to self-referencing Iglu URI
 - JSON Schema is invalid against its standard (empty `required`, string `maximum` and similar)
 - JSON Schema contains properties which contradict each other, like `{"type": "integer", "maxLength": 0}` or `{"maximum": 0, "minimum": 10'}`. These schemas are inherently useless as for some valiators there is no JSON instance they can validate
 

@@ -42,7 +42,7 @@ The application version is provided in the tracker configuration, [see instructi
   example={{
     "version": "1.1.0"
   }}
-  schema={{ "description": "Schema for an application context which tracks the app version.", "properties": { "version": { "type": "string", "description": "Version of the application. Can be a semver-like structure (e.g 1.1.0) or a Git commit SHA hash.", "maxLength": 255 } }, "additionalProperties": false, "type": "object", "required": [ "version" ], "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "application", "format": "jsonschema", "version": "1-0-0" }, "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#" }} />
+  schema={{ "description": "Schema for an application context which tracks the app version.", "properties": { "version": { "type": "string", "description": "Version of the application. Can be a semver-like structure (e.g 1.1.0) or a Git commit SHA hash.", "maxLength": 255 } }, "additionalProperties": false, "type": "object", "required": [ "version" ], "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "application", "format": "jsonschema", "version": "1-0-0" }, "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#" }} />
 
 
 ## Application context entity on mobile apps
@@ -55,7 +55,7 @@ This context entity is automatically tracked with events on mobile apps and give
     "version": "1.1.0",
     "build": "s9f2k2d",
   }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for an application context which automatically tracks version number and build name when using our mobile SDK's.", "self": { "vendor": "com.snowplowanalytics.mobile", "name": "application", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "version": { "type": "string", "description": "Version number of the application e.g 1.1.0", "maxLength": 255 }, "build": { "type": "string", "description": "Build name of the application e.g s9f2k2d or 1.1.0 beta", "maxLength": 255 } }, "required": ["version", "build"], "additionalProperties": false }} />
+  schema={{ "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for an application context which automatically tracks version number and build name when using our mobile SDK's.", "self": { "vendor": "com.snowplowanalytics.mobile", "name": "application", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "version": { "type": "string", "description": "Version number of the application e.g 1.1.0", "maxLength": 255 }, "build": { "type": "string", "description": "Build name of the application e.g s9f2k2d or 1.1.0 beta", "maxLength": 255 } }, "required": ["version", "build"], "additionalProperties": false }} />
 
 ### How to track?
 

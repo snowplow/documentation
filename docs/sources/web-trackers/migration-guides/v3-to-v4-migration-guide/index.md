@@ -212,7 +212,7 @@ To keep using old plugins, they will have to be [explicitly installed](/docs/sou
 
 #### GA cookies
 
-- The [GA Cookies plugin](/docs/sources/web-trackers/tracking-events/ga-cookies/index.md) now tracks in GA4 mode rather than Universal Analytics mode. This involves a [different schema](http://iglucentral.com/?q=cookies); the newer GA4 schema (`com.google.ga4/cookies`) is now the default, rather than the classic/Universal Analytics schema (`com.google.analytics/cookies`).
+- The [GA Cookies plugin](/docs/sources/web-trackers/tracking-events/ga-cookies/index.md) now tracks in GA4 mode rather than Universal Analytics mode. This involves a [different schema](https://iglucentral.com/?q=cookies); the newer GA4 schema (`com.google.ga4/cookies`) is now the default, rather than the classic/Universal Analytics schema (`com.google.analytics/cookies`).
 - To restore the old behavior, specify configuration for the plugin to enable UA support and disable GA4 support.
 
 #### HTML5 media

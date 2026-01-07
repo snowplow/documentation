@@ -20,7 +20,7 @@ To set the background/foreground state you will need to detect this and then set
 client_session.set_is_background(true || false);
 ```
 
-When client sessions are used, the [`client_session`](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) context entity is added to all tracked event. This entity consists of the following properties:
+When client sessions are used, the [`client_session`](https://iglucentral.com/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) context entity is added to all tracked event. This entity consists of the following properties:
 
 | Attribute             | Description                                                                                                   | Required? |
 |-----------------------|---------------------------------------------------------------------------------------------------------------|-----------|

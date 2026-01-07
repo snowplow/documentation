@@ -371,7 +371,7 @@ Then you should add this Data Structure tracking URL to your configuration file 
 
 ### Iglu Central Schemas
 
-To add a Data Structure to the code generation, either manually or through the `snowtype patch` command, you would need the `Schema tracking URL`. You can find the Schema tracking URL on [Iglu Central](http://iglucentral.com/) by searching for the schema and under the **General Information** tab you can find the URL as shown below:
+To add a Data Structure to the code generation, either manually or through the `snowtype patch` command, you would need the `Schema tracking URL`. You can find the Schema tracking URL on [Iglu Central](https://iglucentral.com/) by searching for the schema and under the **General Information** tab you can find the URL as shown below:
 
 ![iglu central tracking url](images/iglu-url.png)
 

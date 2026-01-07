@@ -504,7 +504,7 @@ The JSON schema itself, if resolved:
 
 ```json
 {
-  "$schema":"http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+  "$schema":"https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
   "description":"A template for a self-describing JSON Schema for use with Iglu",
   "self": {
     "vendor":"com.myvendor",

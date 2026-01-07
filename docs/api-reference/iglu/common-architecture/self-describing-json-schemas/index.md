@@ -37,7 +37,7 @@ to this one:
 
 ```json
 {
-    "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+    "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
     "self": {
         "vendor": "com.snowplowanalytics",
         "name": "ad_click",
@@ -57,6 +57,6 @@ to this one:
 
 incorporating the aforementioned `self` property.
 
-Notice that we also changed the `$schema` property to [our own JSON Schema](http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#) which enforces the `self` property.
+Notice that we also changed the `$schema` property to [our own JSON Schema](https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#) which enforces the `self` property.
 
 To make our JSONs self-describing we still have to reference this JSON Schema in our JSONs. This process is described in [Self-describing JSONs](/docs/api-reference/iglu/common-architecture/self-describing-jsons/index.md).

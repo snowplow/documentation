@@ -116,7 +116,7 @@ curl 'https://console.snowplowanalytics.com/api/msc/v1/organizations/cad39ca5-3e
     "required": [
       "example_field_1"
     ],
-    "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+    "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
     "self": {
       "vendor": "com.acme",
       "name": "example_schema_name",

@@ -156,7 +156,7 @@ We are using the Snowplow GTM SS Tag to forward it to our Snowplow pipeline, and
 
     ```json
     {
-        "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+        "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
         "self": {
             "vendor": "com.acme",
             "name": "tutorial",

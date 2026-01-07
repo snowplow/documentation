@@ -14,7 +14,7 @@ Every Snowplow schema must follow this basic structure with Snowplow-specific me
 
 ```json
 {
-  "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+  "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
   "description": "Human-readable description of the schema purpose",
   "self": {
     "vendor": "com.example",
@@ -35,7 +35,7 @@ Every Snowplow schema must follow this basic structure with Snowplow-specific me
 
 Every Snowplow schema must include these components:
 
-* **`$schema`**: Must be `"http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#"`
+* **`$schema`**: Must be `"https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#"`
 * **`self`** object containing:
   * **`vendor`**: Your organization identifier (e.g., `"com.example"`)
   * **`name`**: The schema name

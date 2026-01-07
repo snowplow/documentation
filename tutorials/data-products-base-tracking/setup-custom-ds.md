@@ -9,7 +9,7 @@ Before you create the custom Data Product for these interactions, you need to cr
 #### Todo action Data Structure
 ```json
 {
-  "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+  "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
   "type": "object",
   "self": {
     "vendor": "com.your.organization",
@@ -39,7 +39,7 @@ Before you create the custom Data Product for these interactions, you need to cr
 #### Todo Data Structure
 ```json
 {
-  "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+  "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
   "type": "object",
   "self": {
     "vendor": "com.your.organization",

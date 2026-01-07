@@ -48,7 +48,7 @@ curl localhost:9090/micro/iglu/com.example/my-schema/jsonschema/1-0-0
 
 Place your Iglu registry URL and API key (if any) into two [environment variables](https://en.wikipedia.org/wiki/Environment_variable): `MICRO_IGLU_REGISTRY_URL` and `MICRO_IGLU_API_KEY`.
 
-Make sure to fully spell out the URL, including the protocol (`http://` or `https://`). For most Iglu registries, including those provided by Snowplow CDI, the URL will end with `/api` — make sure to include that part too, for example: `https://com-example.iglu.snplow.net/api`. [Static registries](/docs/api-reference/iglu/iglu-repositories/static-repo/index.md), such as `http://iglucentral.com`, are an exception — you don’t need to append `/api` to the URL.
+Make sure to fully spell out the URL, including the protocol (`http://` or `https://`). For most Iglu registries, including those provided by Snowplow CDI, the URL will end with `/api` — make sure to include that part too, for example: `https://com-example.iglu.snplow.net/api`. [Static registries](/docs/api-reference/iglu/iglu-repositories/static-repo/index.md), such as `https://iglucentral.com`, are an exception — you don’t need to append `/api` to the URL.
 
 :::tip
 

@@ -22,7 +22,7 @@ As an example, let's assume you own the `com.acme` vendor prefix (more informa
 
 ```json
 {
-  "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+  "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
   "description": "Schema for an Acme Inc ad click event",
   "self": {
     "vendor": "com.acme",
@@ -98,7 +98,7 @@ The JSON response should look like this:
 
 ```json
 {
-  "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+  "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
   "description": "Schema for an Acme Inc ad click event",
   "self": {
     "vendor": "com.acme",
@@ -125,7 +125,7 @@ GET requests support a `repr` URL parameter, allowing you to specify three dif
 
 ```json
 {
-  "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+  "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
   "description": "Schema for an Acme Inc ad click event",
   "self": {
     "vendor": "com.acme",
@@ -313,7 +313,7 @@ As an example, let's assume you own the `com.acme` vendor prefix (more informa
 
 ```json
 {
-  "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+  "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
   "description": "Schema for an Acme Inc ad click event",
   "self": {
     "vendor": "com.acme",
@@ -375,7 +375,7 @@ The JSON response should look like this:
 
 ```json
 {
-  "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+  "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
   "description": "Schema for an Acme Inc ad click event",
   "self": {
     "vendor": "com.acme",
@@ -402,7 +402,7 @@ GET requests support a `repr` URL parameter, allowing you to specify three dif
 
 ```json
 {
-  "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+  "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
   "description": "Schema for an Acme Inc ad click event",
   "self": {
     "vendor": "com.acme",

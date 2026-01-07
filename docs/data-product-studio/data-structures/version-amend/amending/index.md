@@ -111,7 +111,7 @@ Let’s say we have a mobile application. We are sending certain events from thi
 
 ```json
 {
-    "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+    "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
     "description": "Schema for client geolocation contexts",
     "self": {
         "vendor": "com.acme",
@@ -165,7 +165,7 @@ To solve this problem, we simply add the `$supersedes` definition to the new sch
 
 ```json
 {
-    "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+    "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
     // highlight-next-line
     "$supersedes": ["1-0-2"],
     "description": "Schema for client geolocation contexts",
@@ -214,7 +214,7 @@ Finally, if we [browse](/docs/data-product-studio/data-structures/manage/index.m
 
 ```json
 {
-    "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+    "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
     // highlight-next-line
     "$supersededBy": "1-0-3",
     "description": "Schema for client geolocation contexts",

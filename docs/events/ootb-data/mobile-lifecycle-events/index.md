@@ -26,7 +26,7 @@ It is not possible to track an event when an app is uninstalled since the mobile
 <SchemaProperties
   overview={{event: true, web: false, mobile: true, automatic: true}}
   example={{ }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for an event where a mobile application is installed.", "self": { "vendor": "com.snowplowanalytics.mobile", "name": "application_install", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { }, "additionalProperties": false }} />
+  schema={{ "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for an event where a mobile application is installed.", "self": { "vendor": "com.snowplowanalytics.mobile", "name": "application_install", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { }, "additionalProperties": false }} />
 
 ### Android referrer details context entity
 
@@ -41,7 +41,7 @@ It makes use of the [Google Play Install Referrer library](https://developer.and
 		"installBeginTimestamp": "2023-11-03T10:55:29.920Z",
 		"googlePlayInstantParam": true
    }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Represents an install referrer details for Android apps installed from the Play Store (see https://developer.android.com/reference/com/android/installreferrer/api/ReferrerDetails)", "self": { "vendor": "com.android.installreferrer.api", "name": "referrer_details", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "installReferrer": { "type": ["string", "null"], "maxLength": 4096, "description": "The referrer URL of the installed package" }, "referrerClickTimestamp": { "type": ["string", "null"], "format": "date-time", "description": "The timestamp when referrer click happens" }, "installBeginTimestamp": { "type": ["string", "null"], "format": "date-time", "description": "The timestamp when installation begins" }, "googlePlayInstantParam": { "type": "boolean", "description": "Boolean indicating if the user has interacted with the app's instant experience in the past 7 days" } }, "required": ["googlePlayInstantParam"], "additionalProperties": false }} />
+  schema={{ "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Represents an install referrer details for Android apps installed from the Play Store (see https://developer.android.com/reference/com/android/installreferrer/api/ReferrerDetails)", "self": { "vendor": "com.android.installreferrer.api", "name": "referrer_details", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "installReferrer": { "type": ["string", "null"], "maxLength": 4096, "description": "The referrer URL of the installed package" }, "referrerClickTimestamp": { "type": ["string", "null"], "format": "date-time", "description": "The timestamp when referrer click happens" }, "installBeginTimestamp": { "type": ["string", "null"], "format": "date-time", "description": "The timestamp when installation begins" }, "googlePlayInstantParam": { "type": "boolean", "description": "Boolean indicating if the user has interacted with the app's instant experience in the past 7 days" } }, "required": ["googlePlayInstantParam"], "additionalProperties": false }} />
 
 #### How to track?
 
@@ -52,14 +52,14 @@ See the [documentation for the Android tracker](/docs/sources/mobile-trackers/tr
 <SchemaProperties
   overview={{event: true, web: false, mobile: true, automatic: true}}
   example={{ foregroundIndex: 1 }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for an application foreground event", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "application_foreground", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "foregroundIndex": { "type": "integer", "minimum": 0, "maximum": 2147483647 } }, "additionalProperties": false }} />
+  schema={{ "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for an application foreground event", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "application_foreground", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "foregroundIndex": { "type": "integer", "minimum": 0, "maximum": 2147483647 } }, "additionalProperties": false }} />
 
 ## Background event
 
 <SchemaProperties
   overview={{event: true, web: false, mobile: true, automatic: true}}
   example={{ backgroundIndex: 1 }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for an application background event", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "application_background", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "backgroundIndex": { "type": "integer", "minimum": 0, "maximum": 2147483647 } }, "additionalProperties": false }} />
+  schema={{ "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for an application background event", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "application_background", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "backgroundIndex": { "type": "integer", "minimum": 0, "maximum": 2147483647 } }, "additionalProperties": false }} />
 
 ## Lifecycle context entity
 
@@ -69,7 +69,7 @@ See the [documentation for the Android tracker](/docs/sources/mobile-trackers/tr
     "isVisible": true,
     "index": 2
   }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
+  schema={{ "$schema": "https://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
   "description": "Entity that indicates the visibility state of the app (foreground, background)", "self": { "vendor": "com.snowplowanalytics.mobile", "name": "application_lifecycle", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "isVisible": { "description": "Indicates if the app is in foreground state (true) or background state (false)", "type": "boolean" }, "index": { "description": "Represents the foreground index or background index (tracked with com.snowplowanalytics.snowplow application_foreground and application_background events.", "type": "integer", "minimum": 0, "maximum": 2147483647 } }, "required": ["isVisible"], "additionalProperties": false }} />
 
 ## How to track?

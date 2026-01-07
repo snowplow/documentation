@@ -53,7 +53,7 @@ require 'iglu-client'
 resolver_config = {:schema => "iglu:com.snowplowanalytics.iglu/resolver-config/jsonschema/1-0-2",
  :data => {
    :cacheSize => 500,
-   :repositories => [{:name => "Iglu Central", :priority => 0, :vendorPrefixes => ["com.snowplowanalytics"], :connection => {:http => {:uri => "http://iglucentral.com"}}}]
+   :repositories => [{:name => "Iglu Central", :priority => 0, :vendorPrefixes => ["com.snowplowanalytics"], :connection => {:https => {:uri => "https://iglucentral.com"}}}]
   }
 }
 

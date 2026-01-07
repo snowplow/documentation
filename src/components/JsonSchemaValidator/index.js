@@ -2,7 +2,7 @@ import React, { Children, useState, cloneElement } from 'react'
 import { ThemeProvider, createTheme } from '@mui/material/styles'
 import { Autocomplete, TextField } from '@mui/material';
 import { useColorMode } from '@docusaurus/theme-common'
-import validator from '@rjsf/validator-ajv8'
+import { customizeValidator } from '@rjsf/validator-ajv8'
 import Form from '@rjsf/mui'
 import Details from '@theme/Details'
 import Tooltip from '@mui/material/Tooltip';
@@ -37,6 +37,13 @@ export const lightTheme = createTheme({
     mode: 'light',
   },
 })
+
+// Custom validator configuration to allow "sql" as a valid format
+const validator = customizeValidator({
+  customFormats: {
+    sql: true // Accept any string as valid for "sql" format
+  }
+});
 
 // Config Generator
 export function JsonSchemaGenerator({ output, children, versionedSchema }) {

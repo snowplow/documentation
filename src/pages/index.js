@@ -7,11 +7,11 @@ import { FloatingNav } from '../components/ui/floating-navbar';
 import { BackgroundGradientAnimation } from '../components/ui/background-gradient-animation';
 import { GridBackground } from '../components/ui/grid-background';
 import { BackgroundLines } from '../components/ui/background-lines';
-import LogoCloudDemo from '../components/ui/infinite-logo-slider';
 import { getMetaData, getSteps } from '../components/tutorials/utils';
 import { Meta, Tutorial } from '../components/tutorials/models';
 import TutorialGrid from '../components/tutorials/TutorialGrid';
 import { Snippet } from '../components/ui/snippet';
+import ProductTabs from '../components/ui/product-tabs';
 
 // Solution Grid Component for landing page
 const SolutionGrid = () => {
@@ -331,17 +331,13 @@ export default function SnowplowDocsLanding() {
 
 
 
-            {/* Headline */}
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-[800] mb-16 leading-tight">
-              Build Data Apps
-              <br />
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-                with AI superpowers
-              </span>
+
+            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-12">
+              Snowplow documentation
             </h1>
 
             {/* Interactive Search Bar */}
-            <div className="max-w-xl mx-auto mb-10">
+            <div className="max-w-xl mx-auto mb-12">
               <div className="relative">
                 <PlaceholdersAndVanishInput
                   placeholders={[
@@ -390,10 +386,8 @@ export default function SnowplowDocsLanding() {
               </div>
             </div>
 
-            {/* Subheadline */}
-            <p className="text-lg md:text-xl text-muted-foreground max-w-xl mx-auto mb-10 leading-relaxed">
-            Build behavioral data pipelines with our CDI platform, then connect Claude Desktop via MCP to supercharge your development workflow with AI-powered schema management and debugging.
-            </p>
+            {/* Product Tabs */}
+            <ProductTabs />
 
             </div>
           </div>
@@ -512,9 +506,6 @@ export default function SnowplowDocsLanding() {
             </div>
           </div>
         </section>
-        {/* Trust Strip */}
-        <LogoCloudDemo />
-
 
         {/* Get Started Section */}
         <section className="px-6 py-24 bg-card">

@@ -149,6 +149,15 @@ body {
   font-weight: 400;
   letter-spacing: -0.0125em;
 }
+
+/* Fix anchor links being hidden under navbar */
+h1[id],
+h2[id],
+h3[id],
+h4[id] {
+  scroll-margin-top: 70px;
+}
+
 .main-wrapper {
   margin-top: 1em;
 }
@@ -1285,7 +1294,6 @@ li.footer__item::first-letter {
   font-size: 0.75rem;
   color: hsl(var(--muted-foreground));
 }
-
 
 /* Custom code block header and button styling */
 .theme-code-block {

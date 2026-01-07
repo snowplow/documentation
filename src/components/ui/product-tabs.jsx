@@ -11,6 +11,10 @@ const ProductTabs = () => {
       color: 'violet',
       subtitle: 'Governed, AI-ready behavioral data — in your warehouse',
       description: 'Collect event-level data from every touchpoint. Validate against schemas at collection — not after. Deliver to your warehouse, lake, or stream in seconds, with complete ownership.',
+      getStarted: {
+        href: '/docs/get-started/index.md',
+        text: 'Learn about the different Snowplow CDI platforms'
+      },
       links: [
         {
           label: 'Event Studio',
@@ -40,17 +44,16 @@ const ProductTabs = () => {
       color: 'cyan',
       subtitle: 'Real-time customer intelligence — for AI-powered applications',
       description: 'Access rich user context in 45ms. Combine live in-session behavior with historical data. Trigger personalized interventions at exactly the right moment.',
+      getStarted: {
+        href: 'https://try-signals.snowplow.io/',
+        text: 'Try it out in the Signals Sandbox',
+        external: true
+      },
       links: [
         {
           label: 'Concepts',
           href: '/docs/signals/concepts/index.md',
           description: 'Understand how real-time customer intelligence works'
-        },
-        {
-          label: 'Try it out (sandbox)',
-          href: 'https://try-signals.snowplow.io/',
-          external: true,
-          description: 'Explore Signals in action with our interactive demo'
         },
         {
           label: 'Define attributes',
@@ -129,6 +132,49 @@ const ProductTabs = () => {
               {currentTab.description}
             </p>
           </div>
+
+          {/* Get Started Panel */}
+          <a
+            href={currentTab.getStarted.href}
+            target={currentTab.getStarted.external ? '_blank' : undefined}
+            rel={currentTab.getStarted.external ? 'noopener noreferrer' : undefined}
+            className={`block mb-6 p-6 rounded-xl border-2 transition-all duration-200 ${
+              isViolet
+                ? 'bg-violet-50 border-violet-200 hover:border-violet-400 hover:bg-violet-100'
+                : 'bg-cyan-50 border-cyan-200 hover:border-cyan-400 hover:bg-cyan-100'
+            }`}
+          >
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <span className="text-2xl">🚀</span>
+                <div>
+                  <h4 className={`font-semibold text-lg ${
+                    isViolet ? 'text-violet-900' : 'text-cyan-900'
+                  }`}>
+                    Get started
+                  </h4>
+                  <p className="text-sm text-gray-700">
+                    {currentTab.getStarted.text}
+                  </p>
+                </div>
+              </div>
+              <svg
+                className={`w-6 h-6 ${
+                  isViolet ? 'text-violet-600' : 'text-cyan-600'
+                }`}
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M17 8l4 4m0 0l-4 4m4-4H3"
+                />
+              </svg>
+            </div>
+          </a>
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
             {currentTab.links.map((link, i) => (

@@ -314,13 +314,6 @@ export default function SnowplowDocsLanding() {
       link: '/tutorials/',
       icon: <span>📖</span>,
     },
-    {
-      name: 'Get Started',
-      link: '#paths',
-      icon: <span>🚀</span>,
-      onClick: () => scrollToSection('paths'),
-      isPrimary: true,
-    },
   ]
 
   const faqs = [

@@ -6,7 +6,7 @@ sidebar_label: "Snowtype CLI"
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-
+import TrackingPlansNomenclature from '@site/docs/reusable/tracking-plans-nomenclature/_index.md';
 
 
 <TrackingPlansNomenclature />

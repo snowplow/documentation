@@ -155,12 +155,6 @@ profile_name:
 </TabItem>
 </Tabs>
 
-:::info
-
-The warehouse password should be sent by [secure form from Snowplow Console](https://console.snowplowanalytics.com/secure-messaging/freeform) in order to set the environment variables.
-
-:::
-
 ### Required Privileges
 
 ```mdx-code-block

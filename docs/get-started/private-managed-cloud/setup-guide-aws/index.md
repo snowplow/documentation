@@ -5,7 +5,7 @@ sidebar_position: 10
 coverImage: "aws_logo_0.png"
 ---
 
-To set up Snowplow, follow the ['Getting Started' steps in the Snowplow Console](https://console.snowplowanalytics.com/getting-started). You will receive an account as part of your onboarding.
+To set up Snowplow, follow the ['Getting Started' steps in the Snowplow Console](https://console.snowplowanalytics.com). You will receive an account as part of your onboarding.
 
 ## What are the steps
 

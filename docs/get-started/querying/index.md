@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 Once you've tracked some events, you'll want to look at them in your data warehouse, database, or lake. The exact steps will depend on your choice of storage and your Snowplow platform.
 
-For **Snowplow CDI** Private Managed Cloud or Cloud customers, you can find your connection details in [Snowplow Console](https://console.snowplowanalytics.com/destinations/catalog), under the destination you've selected.
+For **Snowplow CDI** Private Managed Cloud or Cloud customers, you can find your connection details in [Snowplow Console](https://console.snowplowanalytics.com/destinations), under the destination you've selected.
 
 Follow [our querying guide](/docs/destinations/warehouses-lakes/querying-data/index.md) for advice on querying your data.
 

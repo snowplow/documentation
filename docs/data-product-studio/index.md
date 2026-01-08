@@ -9,6 +9,15 @@ sidebar_custom_props:
   header: " "
 ---
 
+```mdx-code-block
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc', 'addon']}
+  helpContent="Data Product Studio is a paid addon for Snowplow CDI."
+/>
+```
+
 Data Product Studio is a comprehensive set of tools for designing and implementing behavioral data event tracking. It provides:
 
 * **Schema management**: define and version data structures for events and entities

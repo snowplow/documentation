@@ -7,6 +7,15 @@ description: "Overview of Snowplow tracker SDKs for web, mobile, server-side pla
 keywords: ["snowplow trackers", "event tracking sdks", "snowplow sources", "webhooks", "tracker sdk", "event generation", "event creation"]
 ---
 
+```mdx-code-block
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc', 'selfHosted']}
+  helpContent="Tracker SDKs are included with all Snowplow platforms."
+/>
+```
+
 Snowplow supports a wide range of sources which send events to your Collector endpoint.
 
 Snowplow tracker SDKs are client- or server-side libraries that enable you to collect events from your own applications. For tracking events from third-party applications, use [webhooks](/docs/sources/webhooks/index.md).

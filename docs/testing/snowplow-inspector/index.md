@@ -6,6 +6,15 @@ description: "Validate and debug Snowplow web tracking using the Inspector brows
 keywords: ["snowplow inspector", "browser extension", "event debugging", "web tracking validation", "chrome extension"]
 ---
 
+```mdx-code-block
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc', 'selfHosted']}
+  helpContent="Snowplow Inspector is included with all Snowplow platforms."
+/>
+```
+
 Snowplow recommends using the Snowplow Inspector browser extension for validating your tracking code.
 To install in Chrome, Edge and other Chromium-based browsers, find [Snowplow Inspector on the chrome web store](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm).
 

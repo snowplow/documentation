@@ -7,6 +7,15 @@ description: "Snowplow Mini is a single-instance development sandbox for testing
 keywords: ["snowplow mini", "development sandbox", "testing environment", "mini setup"]
 ---
 
+```mdx-code-block
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc', 'selfHosted']}
+  helpContent="Snowplow Mini is included with all Snowplow platforms."
+/>
+```
+
 [Snowplow Mini](/docs/api-reference/snowplow-mini/index.md) is a single-instance version of Snowplow that primarily serves as a development sandbox, giving you a quick way to debug tracker updates and changes to your schema and pipeline configuration.
 
 :::tip

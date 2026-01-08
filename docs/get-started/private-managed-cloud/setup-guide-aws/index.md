@@ -78,6 +78,7 @@ You will need to share this role with us as part of filling out the setup form i
         "events:*",
         "globalaccelerator:*",
         "iam:*",
+        "kafka:*",
         "kinesis:*",
         "kinesisanalytics:*",
         "kms:DescribeKey",

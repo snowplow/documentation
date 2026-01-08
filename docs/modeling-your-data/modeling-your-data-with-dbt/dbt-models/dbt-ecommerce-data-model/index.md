@@ -9,6 +9,7 @@ keywords: ["ecommerce dbt", "ecommerce tracking", "cart analysis", "transaction 
 ```mdx-code-block
 import Badges from '@site/src/components/Badges';
 import BadgeGroup from '@site/src/components/BadgeGroup';
+import AvailabilityBadges from '@site/src/components/ui/availability-badges'
 ```
 
 <BadgeGroup>
@@ -16,6 +17,8 @@ import BadgeGroup from '@site/src/components/BadgeGroup';
 <Badges badgeType="Actively Maintained"></Badges>
 <Badges badgeType="SPAL"></Badges>
 </BadgeGroup>
+
+<AvailabilityBadges available={['cloud', 'pmc', 'addon']} helpContent="The Ecommerce package is available as part of the Ecommerce Analytics Data Model Pack, a paid addon for Snowplow CDI." />
 
 **The package source code can be found in the [snowplow/dbt-snowplow-ecommerce repo](https://github.com/snowplow/dbt-snowplow-ecommerce), and the docs for the [model design here](https://snowplow.github.io/dbt-snowplow-ecommerce/#!/overview/snowplow_ecommerce).**
 

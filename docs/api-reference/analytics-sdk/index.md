@@ -7,6 +7,15 @@ description: "Transform Snowplow enriched TSV events into JSON for data modeling
 keywords: ["analytics sdk", "enriched events", "event transformation"]
 ---
 
+```mdx-code-block
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc', 'selfHosted']}
+  helpContent="Analytics SDKs are included with all Snowplow platforms."
+/>
+```
+
 The Snowplow Analytics SDKs are designed for data engineers and data scientists working with Snowplow in a number of languages.
 
 Some good use cases for the SDKs include:

@@ -219,6 +219,7 @@ Here are two pieces of older content that only partially follow the style guide.
 
 - Importantly, don't explain concepts: link to existing pages about them such as those in the [Fundamentals](/docs/fundamentals/) docs section
   - This includes events, entities and context, schemas, enrichment, the structure of the data, failed events, etc.
+  - No ellipses ("...")
 
 ### Voice
 - Use active rather than passive voice
@@ -596,6 +597,7 @@ Here are two pieces of older content that only partially follow the style guide.
 ### Links
 - Links should be clearly described, either by the preceding text or the link itself
 - Use the name of the page you're linking to where possible
+- All links should be wrapped in text, not naked `http://example.com` strings
 - [Guidelines for writing link text](https://developers.google.com/style/link-text)
 
    | ✅                                                        | ❌                                         |

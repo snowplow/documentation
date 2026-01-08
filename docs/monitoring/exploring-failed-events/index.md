@@ -6,6 +6,15 @@ description: "Load common types of failed events to a separate table in your war
 keywords: ["failed events loader", "load failed events", "warehouse failed events table"]
 ---
 
+```mdx-code-block
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc', 'selfHosted']}
+  helpContent="Failed events loaders are included with all Snowplow platforms."
+/>
+```
+
 :::note Compatibility
 
 This feature is available since Enrich 5.0.0 and works with:

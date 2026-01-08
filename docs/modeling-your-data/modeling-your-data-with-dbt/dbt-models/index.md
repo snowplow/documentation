@@ -6,6 +6,15 @@ description: "Overview of Snowplow dbt packages including Unified Digital, Attri
 keywords: ["dbt packages", "Snowplow dbt", "data modeling packages", "dbt models", "snowplow data models"]
 ---
 
+```mdx-code-block
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc', 'addon']}
+  helpContent="Data models are a paid addon for Snowplow CDI."
+/>
+```
+
 Snowplow provides several dbt packages to help you get value from your data.
 
 

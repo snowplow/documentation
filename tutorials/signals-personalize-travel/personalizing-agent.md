@@ -1,6 +1,6 @@
 ---
-title: "Optional: Provide Signals personalization context to the travel AI agent"
-sidebar_label: "Optional: personalize the AI agent"
+title: "Provide Signals personalization context to the travel AI agent"
+sidebar_label: "Personalize the AI agent"
 position: 6
 description: "Integrate Snowplow Signals with an AI chatbot to provide personalized travel recommendations based on user behavioral data."
 keywords: ["chatbot", "AI personalization", "OpenAI", "conversational AI", "behavioral data"]
@@ -11,7 +11,7 @@ date: "2025-01-21"
 import Mermaid from '@theme/Mermaid';
 ```
 
-You'll now optionally personalize a chatbot experience by integrating Signals with an AI agent that uses OpenAI as the backend. The chatbot fetches user attributes via a tool call, allowing it to provide contextual, personalized responses based on the user's browsing behavior.
+You'll now personalize a chatbot experience by integrating Signals with an AI agent that uses OpenAI as the backend. The chatbot fetches user attributes via a tool call, allowing it to provide contextual, personalized responses based on the user's browsing behavior.
 
 The demo site includes all necessary tools and SDKs, so you'll only need an OpenAI API key to implement this feature.
 

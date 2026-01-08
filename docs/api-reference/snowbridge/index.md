@@ -6,6 +6,15 @@ description: "Replicate Snowplow event streams to multiple destinations with Sno
 keywords: ["snowbridge", "stream replication", "kinesis", "pubsub", "kafka", "event streaming"]
 ---
 
+```mdx-code-block
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc', 'selfHosted']}
+  helpContent="Snowbridge is included with all Snowplow platforms."
+/>
+```
+
 Snowbridge is a flexible, low latency tool which can replicate streams of data of any type to external destinations, optionally filtering or transforming the data along the way. It can be used to consume, transform and relay data to any third party platform which supports HTTP or is listed as a target below — in real-time.
 
 ## Features

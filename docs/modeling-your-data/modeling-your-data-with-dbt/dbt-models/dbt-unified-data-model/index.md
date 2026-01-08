@@ -60,16 +60,16 @@ While using any entity in our packages is possible thanks to [modeling entities]
 | [Geolocation](/docs/events/ootb-data/geolocation/index.md#geolocation-context-entity-tracked-in-apps)           | mobile | snowplow__enable_geolocation_context                                                                                                                          |
 | [Application](/docs/events/ootb-data/app-information/index.md#application-context-entity-on-mobile-apps)        | mobile | snowplow__enable_application_context                                                                                                                          |
 | [Screen](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-view-events)                        | mobile | snowplow__enable_screen_context                                                                                                                               |
-| [Deep Links](/docs/events/ootb-data/links-and-referrers/index.md#context-entity-attached-to-screen-view-events) | mobile | snowplow__enable_deep_link_context                                                                                                                            |
-| [Screen Summary](/docs/events/ootb-data/page-activity-tracking/index.md#screen-summary-entity)                  | mobile | snowplow__enable_screen_summary_context                                                                                                                       |
+| [Deep links](/docs/events/ootb-data/links-and-referrers/index.md#context-entity-attached-to-screen-view-events) | mobile | snowplow__enable_deep_link_context                                                                                                                            |
+| [Screen summary](/docs/events/ootb-data/page-activity-tracking/index.md#screen-summary-entity)                  | mobile | snowplow__enable_screen_summary_context                                                                                                                       |
 
 ### Optional Modules
-| Module            | Docs                                                                                                                                                      | Enabled via Variable         |
-| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
-| Consent Reporting | [<Icon icon="fa-solid fa-book"/>](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/consent-module/index.md)         | snowplow__enable_consent     |
-| Core Web Vitals   | [<Icon icon="fa-solid fa-book"/>](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/core-web-vitals-module/index.md) | snowplow__enable_cwv         |
-| App Errors        | [<Icon icon="fa-solid fa-book"/>](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/app-errors-module/index.md)      | snowplow__enable_app_errors  |
-| Conversions       | [<Icon icon="fa-solid fa-book"/>](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/conversions/index.md)            | snowplow__enable_conversions |
+| Module                                                                                                                                    | Enabled via Variable         |
+| ----------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
+| [Consent reporting](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/consent-module/index.md)       | snowplow__enable_consent     |
+| [Core web vitals](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/core-web-vitals-module/index.md) | snowplow__enable_cwv         |
+| [App errors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/app-errors-module/index.md)           | snowplow__enable_app_errors  |
+| [Conversions](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/conversions/index.md)                | snowplow__enable_conversions |
 
 
 ## Engaged vs. Absolute Time

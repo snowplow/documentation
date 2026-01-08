@@ -6,6 +6,8 @@ sidebar_label: "Introduction"
 
 The [Snowplow CLI](/docs/data-product-studio/snowplow-cli) [MCP (Model Context Protocol) tool](/docs/data-product-studio/mcp-server) integrates Snowplow's data structure management capabilities directly into AI assistants. This enables natural language interaction for creating, validating, and managing your Snowplow tracking plans locally.
 
+The MCP integration enables you to work more efficiently by letting AI assistants handle the technical details of schema creation, validation, and cross-referencing while you focus on your tracking requirements and business logic.
+
 ## What you'll learn
 
 - How to set up the Snowplow CLI [MCP tool](/docs/data-product-studio/mcp-server) with AI assistants like Claude Desktop, Cursor, or Copilot

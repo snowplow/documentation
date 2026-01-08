@@ -47,6 +47,17 @@ export const lightTheme = createTheme({
   },
 })
 
+// Helper function to format group names for display
+function formatGroupName(groupName) {
+  const groupNameMap = {
+    'Warehouse and Tracker': 'Warehouse and tracker',
+    'Operation and Logic': 'Operation and logic',
+    'Contexts, Filters, and Logs': 'Entities (contexts), filters, and logs',
+    'Warehouse Specific': 'Warehouse-specific',
+  }
+  return groupNameMap[groupName] || groupName
+}
+
 // Config Generator
 export function JsonSchemaGenerator({
   output,
@@ -97,7 +108,7 @@ export function JsonSchemaGenerator({
       {children}
       <div className="JsonValidator">
         {Object.keys(versionedSchemas).map((group) => (
-          <Details key={group} summary={group}>
+          <Details key={group} summary={formatGroupName(group)}>
             <Form
               experimental_defaultFormStateBehavior={{
                 arrayMinItems: { populate: 'requiredOnly' },

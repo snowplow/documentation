@@ -8,7 +8,7 @@ sidebar_position: 400
 The Fractribution Package is no longer maintained, please refer to the [Attribution package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/index.md) for marketing attribution analysis with Snowplow
 :::
 
-import { DbtCongfigurationPage, JsonToTable, JsonSchemaGenerator, getSchemaVersions } from '@site/src/components/JsonSchemaValidator';
+import { DbtConfigurationPage, JsonToTable, JsonSchemaGenerator, getSchemaVersions } from '@site/src/components/JsonSchemaValidator';
 import { dump } from 'js-yaml';
 import Admonition from '@theme/Admonition';
 import DbtSchemas from "@site/docs/reusable/dbt-schemas/_index.md";
@@ -38,7 +38,7 @@ export const printYamlVariables = (data) => {
 
 This page helps you configure the Snowplow Fractribution dbt package. You can customize variables, generate configuration code, and set output schemas.
 
-<DbtCongfigurationPage schemaName="dbtFractribution" versions={getSchemaVersions('dbtFractribution')} label="dbt fractribution version">
+<DbtConfigurationPage schemaName="dbtFractribution" versions={getSchemaVersions('dbtFractribution')} label="dbt fractribution version">
 
 ## Package configuration variables
 
@@ -76,4 +76,4 @@ You can use the below inputs to generate the code that you need to place into yo
 
 <SchemaSetter output={printSchemaVariables} />
 
-</DbtCongfigurationPage>
+</DbtConfigurationPage>

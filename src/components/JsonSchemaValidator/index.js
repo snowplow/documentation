@@ -356,7 +356,7 @@ export function JsonToTable({ children, versionedSchema, groupFilter }) {
   )
 }
 
-export function DbtCongfigurationPage({
+export function DbtConfigurationPage({
   schemaName,
   versions,
   label,

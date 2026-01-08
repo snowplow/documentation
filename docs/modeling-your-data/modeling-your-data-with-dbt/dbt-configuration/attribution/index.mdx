@@ -4,7 +4,7 @@ sidebar_label: "Attribution"
 sidebar_position: 30
 ---
 
-import { DbtCongfigurationPage, JsonToTable, JsonSchemaGenerator, getSchemaVersions } from '@site/src/components/JsonSchemaValidator';
+import { DbtConfigurationPage, JsonToTable, JsonSchemaGenerator, getSchemaVersions } from '@site/src/components/JsonSchemaValidator';
 import { dump } from 'js-yaml';
 import Admonition from '@theme/Admonition';
 import DbtSchemas from "@site/docs/reusable/dbt-schemas/_index.md";
@@ -36,7 +36,7 @@ export const printYamlVariables = (data) => {
 
 This page helps you configure the Snowplow Attribution dbt package. You can customize variables, generate configuration code, and set output schemas.
 
-<DbtCongfigurationPage schemaName="dbtAttribution" versions={getSchemaVersions('dbtAttribution')} label="dbt attribution version">
+<DbtConfigurationPage schemaName="dbtAttribution" versions={getSchemaVersions('dbtAttribution')} label="dbt attribution version">
 
 ## Package configuration variables
 
@@ -70,4 +70,4 @@ You can use the below inputs to generate the code that you need to place into yo
 
 <SchemaSetter output={printSchemaVariables} />
 
-</DbtCongfigurationPage>
+</DbtConfigurationPage>

@@ -4,7 +4,7 @@ sidebar_label: "Normalize"
 sidebar_position: 50
 ---
 
-import { DbtCongfigurationPage, JsonToTable, JsonSchemaGenerator, getSchemaVersions } from '@site/src/components/JsonSchemaValidator';
+import { DbtConfigurationPage, JsonToTable, JsonSchemaGenerator, getSchemaVersions } from '@site/src/components/JsonSchemaValidator';
 import { dump } from 'js-yaml';
 import Admonition from '@theme/Admonition';
 import DbtSchemas from "@site/docs/reusable/dbt-schemas/_index.md";
@@ -38,7 +38,7 @@ export const printYamlVariables = (data) => {
 
 This page helps you configure the Snowplow Normalize dbt package. You can customize variables, generate configuration code, and set output schemas.
 
-<DbtCongfigurationPage schemaName="dbtNormalize" versions={getSchemaVersions('dbtNormalize')} label="dbt normalize version">
+<DbtConfigurationPage schemaName="dbtNormalize" versions={getSchemaVersions('dbtNormalize')} label="dbt normalize version">
 
 ## Package configuration variables
 
@@ -76,4 +76,4 @@ You can use the below inputs to generate the code that you need to place into yo
 
 <SchemaSetter output={printSchemaVariables} />
 
-</DbtCongfigurationPage>
+</DbtConfigurationPage>

@@ -4,7 +4,7 @@ sidebar_label: "Media Player"
 sidebar_position: 20
 ---
 
-import { DbtCongfigurationPage, JsonToTable, JsonSchemaGenerator, getSchemaVersions } from '@site/src/components/JsonSchemaValidator';
+import { DbtConfigurationPage, JsonToTable, JsonSchemaGenerator, getSchemaVersions } from '@site/src/components/JsonSchemaValidator';
 import { dump } from 'js-yaml';
 import Admonition from '@theme/Admonition';
 import DbtSchemas from "@site/docs/reusable/dbt-schemas/_index.md";
@@ -54,7 +54,7 @@ export const printYamlVariables = (data) => {
 
 This page helps you configure the Snowplow Media Player dbt package. You can customize variables, generate configuration code, and set output schemas.
 
-<DbtCongfigurationPage schemaName="dbtMediaPlayer" versions={getSchemaVersions('dbtMediaPlayer')} label="dbt media player version">
+<DbtConfigurationPage schemaName="dbtMediaPlayer" versions={getSchemaVersions('dbtMediaPlayer')} label="dbt media player version">
 
 ## Package configuration variables
 
@@ -92,4 +92,4 @@ You can use the below inputs to generate the code that you need to place into yo
 
 <SchemaSetter output={printSchemaVariables} />
 
-</DbtCongfigurationPage>
+</DbtConfigurationPage>

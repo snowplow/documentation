@@ -4,7 +4,7 @@ sidebar_label: "Unified Digital"
 sidebar_position: 10
 ---
 
-import { DbtCongfigurationPage, JsonToTable, JsonSchemaGenerator, getSchemaVersions } from '@site/src/components/JsonSchemaValidator';
+import { DbtConfigurationPage, JsonToTable, JsonSchemaGenerator, getSchemaVersions } from '@site/src/components/JsonSchemaValidator';
 import { dump } from 'js-yaml';
 import Admonition from '@theme/Admonition';
 import DbtSchemas from "@site/docs/reusable/dbt-schemas/_index.md";
@@ -55,7 +55,7 @@ export const printYamlVariables = (data) => {
 
 This page helps you configure the Snowplow Unified Digital dbt package. You can customize variables, generate configuration code, and set output schemas.
 
-<DbtCongfigurationPage schemaName="dbtUnified" versions={getSchemaVersions('dbtUnified')} label="dbt unified version">
+<DbtConfigurationPage schemaName="dbtUnified" versions={getSchemaVersions('dbtUnified')} label="dbt unified version">
 
 ## Package configuration variables
 
@@ -97,4 +97,4 @@ You can use the below inputs to generate the code that you need to place into yo
 
 <SchemaSetterWSeeds output={printSchemaVariables} />
 
-</DbtCongfigurationPage>
+</DbtConfigurationPage>

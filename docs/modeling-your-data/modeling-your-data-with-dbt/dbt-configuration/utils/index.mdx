@@ -4,7 +4,7 @@ sidebar_label: "Utils"
 sidebar_position: 60
 ---
 
-import { DbtCongfigurationPage, JsonToTable, JsonSchemaGenerator, getSchemaVersions } from '@site/src/components/JsonSchemaValidator';
+import { DbtConfigurationPage, JsonToTable, JsonSchemaGenerator, getSchemaVersions } from '@site/src/components/JsonSchemaValidator';
 import { dump } from 'js-yaml';
 import Admonition from '@theme/Admonition';
 import DbtSchemas from "@site/docs/reusable/dbt-schemas/_index.md";
@@ -35,7 +35,7 @@ export const printYamlVariables = (data) => {
 
 This page helps you configure the Snowplow Utils dbt package. You can customize variables, generate configuration code, and set output schemas.
 
-<DbtCongfigurationPage schemaName="dbtUtils" versions={getSchemaVersions('dbtUtils')} label="dbt utils version">
+<DbtConfigurationPage schemaName="dbtUtils" versions={getSchemaVersions('dbtUtils')} label="dbt utils version">
 
 ## Package configuration variables
 
@@ -73,4 +73,4 @@ You can use the below inputs to generate the code that you need to place into yo
 
 <SchemaSetter output={printSchemaVariables} />
 
-</DbtCongfigurationPage>
+</DbtConfigurationPage>

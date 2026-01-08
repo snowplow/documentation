@@ -310,6 +310,7 @@ export function JsonToTable({ children, versionedSchema, groupFilter }) {
             slots={{ toolbar: GridToolbar }}
             disableColumnSelector
             disableExport
+            disableVirtualization
             slotProps={{
               toolbar: {
                 showQuickFilter: true,
@@ -319,8 +320,13 @@ export function JsonToTable({ children, versionedSchema, groupFilter }) {
             }}
             sx={{
               width: '100%',
+              height: 'auto',
               '.MuiDataGrid-virtualScroller': {
                 borderTop: '1px solid rgba(224, 224, 224, 1)',
+                overflow: 'visible',
+              },
+              '.MuiDataGrid-main': {
+                overflow: 'visible',
               },
               '.MuiDataGrid-cell': {
                 borderTop: `1px solid ${

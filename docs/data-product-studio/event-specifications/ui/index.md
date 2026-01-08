@@ -8,8 +8,8 @@ sidebar_position: 1
 
 Event specifications serve as direct counterparts to [data structures](/docs/data-product-studio/data-structures/manage/index.md) and encapsulate the documented events within a data product.
 
-:::info
-Please note that the creation of event specifications is exclusive to data products.
+:::note
+The creation of event specifications is exclusive to data products.
 :::
 
 Create event specifications in tandem with the latest deployed data structure version in development. This ensures tracking implementation instructions align with the validation criteria in the event specification.

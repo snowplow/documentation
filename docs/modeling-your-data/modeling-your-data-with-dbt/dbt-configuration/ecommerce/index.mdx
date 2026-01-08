@@ -58,44 +58,42 @@ export const printYamlVariables = (data) => {
 
 This page helps you configure the Snowplow Ecommerce dbt package. You can customize variables, generate configuration code, and set output schemas.
 
+<DbtCongfigurationPage schemaName="dbtEcommerce" versions={getSchemaVersions('dbtEcommerce')} label="dbt ecommerce version">
+
 ## Package configuration variables
 
 This package utilizes a set of variables that are configured to recommended values for optimal performance of the models. Depending on your use case, you might want to override these values by adding to your `dbt_project.yml` file.
 
-:::note
+:::note Variable name prefix
 All variables in Snowplow packages start with `snowplow__` but we have removed these in the below tables for brevity.
 :::
 
-<DbtCongfigurationPage schemaName="dbtEcommerce" versions={getSchemaVersions('dbtEcommerce')} label="dbt ecommerce version">
-
-### Warehouse and Tracker
+### Warehouse and tracker
 
 <JsonToTable groupFilter="Warehouse and Tracker" />
 
-### Operation and Logic
+### Operation and logic
 
 <JsonToTable groupFilter="Operation and Logic" />
 
-### Contexts, Filters, and Logs
+### Entities (contexts), filters, and logs
 
 <JsonToTable groupFilter="Contexts, Filters, and Logs" />
 
-### Warehouse Specific
+### Warehouse-specific
 
 <JsonToTable groupFilter="Warehouse Specific" />
-
-</DbtCongfigurationPage>
 
 ## Config generator
 
 You can use the below inputs to generate the code that you need to place into your `dbt_project.yml` file to configure the package as you require. Any values not specified will use their default values from the package.
 
-<DbtCongfigurationPage schemaName="dbtEcommerce" versions={getSchemaVersions('dbtEcommerce')} label="dbt ecommerce version">
-  <JsonSchemaGenerator output={printYamlVariables} />
-</DbtCongfigurationPage>
+<JsonSchemaGenerator output={printYamlVariables} />
 
 ## Output schemas
 
 <DbtSchemas/>
 
 <SchemaSetter output={printSchemaVariables} />
+
+</DbtCongfigurationPage>

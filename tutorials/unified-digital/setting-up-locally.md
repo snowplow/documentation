@@ -134,7 +134,7 @@ vars:
 ```
 :::
 
-6. Configure more vars as necessary but theoretically this is all you need just to get started. If you are unsure whether the default values set are good enough in your case or you would already like to maximize the potential of your models, you can dive deeper into the meaning behind our variables on our [Config](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/) page. It includes a [Config Generator](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/#Generator) to help you create all your variable configurations, if necessary.
+6. Configure more vars as necessary but theoretically this is all you need just to get started. If you are unsure whether the default values set are good enough in your case or you would already like to maximize the potential of your models, you can dive deeper into the meaning behind our variables on our [Config](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/) page. It includes a [Config Generator](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/#config-generator) to help you create all your variable configurations, if necessary.
 
 7. Filter your data set
 

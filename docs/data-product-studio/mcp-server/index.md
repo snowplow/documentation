@@ -20,6 +20,7 @@ The [Snowplow CLI](/docs/data-product-studio/snowplow-cli/index.md) includes a l
 For a step-by-step guide to using the Snowplow MCP server, see the [MCP tutorial](/tutorials/snowplow-cli-mcp/introduction).
 :::
 
+The MCP server allows AI assistants to interact with the Snowplow CLI using the `snowplow-cli mcp` command.
 
 ## Install the MCP server
 

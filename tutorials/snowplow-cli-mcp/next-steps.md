@@ -1,5 +1,5 @@
 ---
-position: 4
+position: 5
 title: "Next steps from the Snowplow CLI MCP tool tutorial"
 sidebar_label: "Next steps"
 ---

@@ -1,26 +1,28 @@
 ---
-position: 3
+position: 4
 title: "Create and publish a data structure using the Snowplow CLI MCP tool"
-sidebar_label: "Create and publish a data structure"
+sidebar_label: "Create and publish a data product"
 ---
 
-Here's a typical interaction pattern for creating a data structure.
+This page shows a typical interaction pattern. In this example, the AI assistant is helping build a new [data product](/docs/fundamentals/data-products), with new [data structures](/docs/fundamentals/schemas) and [source application](/docs/data-product-studio/source-applications).
 
-## 1. Get context
+## Import Snowplow context
 
-:::note Important
 Always ensure `get_context` is called at the start of your conversation. If you don't see it happen, then ask for it.
-:::
 
-```
+Example prompt:
+
+```txt
 Please call get_context before we start working.
 ```
 
-The assistant will retrieve the built-in schema and rules that define how Snowplow components should be structured. This provides the structural templates and requirements for your tracking implementation.
+The assistant will retrieve the built-in schemas and rules that define how Snowplow components should be structured.
 
-## 2. Create a data structure
+## Create a new data structure
 
-```
+Example prompt:
+
+```txt
 Create a data structure for tracking when users view a product page.
 
 Include properties for product ID, product name, category, and price.
@@ -29,42 +31,43 @@ Include properties for product ID, product name, category, and price.
 The assistant will:
 - Generate a proper UUID for the data structure
 - Create a valid event schema following Snowplow conventions
-- Save the file locally to the appropriate location
+- Save the file **locally** to the appropriate location
+- Automatically validate the created structure and report any issues
 
-**Note**: Files are created locally only. Use `snowplow-cli data-structures publish` to sync to Console when ready.
+You can iterate if needed. Example prompt:
 
-## 3. Validate (automatic)
-
-The assistant should automatically call `validate_data_structures` on the created file and report any validation issues.
-
-## 4. Iterate if needed
-
-```
+```txt
 The price should be optional, not required.
 
 Also add a description field.
 ```
 
-The assistant will modify the structure and re-validate.
+The assistant will modify the structure, and validate again.
 
+## Create a new data product
 
-## 5. Data product creation
+Example prompt:
 
-```
+```txt
 Create a data product for ecommerce product interactions. Include:
-- The existing product page views
+- The existing product page views that you just made
 - Add to cart events
 - A source application for our website
 - Proper validation of all components
 ```
 
 The assistant will:
-1. Create the necessary data structures for events (locally)
-2. Create a source application definition (locally)
-3. Create a data product linking everything together (locally)
-4. Validate all components together (including cross-references)
+* Create the necessary additional data structures for events
+* Create a source application definition
+* Create a data product linking everything together
+* Validate and cross-reference all the components together
 
 
-## 6. Publish to Console
+## Publish to Console
 
-Use `snowplow-cli data-structures publish` and `snowplow-cli data-products publish` to push changes to Console.
+All files are created **locally**. When you're ready to publish to [Console](https://console.snowplowanalytics.com), use the standard Snowplow CLI commands:
+
+```bash
+snowplow-cli data-structures publish
+snowplow-cli data-products publish
+```

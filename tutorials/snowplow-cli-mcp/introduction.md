@@ -4,18 +4,15 @@ title: "Learn how to set up the Snowplow CLI MCP tool"
 sidebar_label: "Introduction"
 ---
 
-The Snowplow CLI MCP (Model Context Protocol) tool integrates Snowplow's data structure management capabilities directly into AI assistants like Claude. This enables natural language interaction for creating, validating, and managing your Snowplow tracking plans **locally**.
-
-**Important**: the MCP tool creates and validates files on your local filesystem only. To sync changes to Console, you'll use the regular CLI commands like `snowplow-cli ds publish` afterward.
+The [Snowplow CLI](/docs/data-product-studio/snowplow-cli) [MCP (Model Context Protocol) tool](/docs/data-product-studio/mcp-server) integrates Snowplow's data structure management capabilities directly into AI assistants. This enables natural language interaction for creating, validating, and managing your Snowplow tracking plans locally.
 
 ## What you'll learn
 
-- How to set up the Snowplow CLI MCP tool with AI assistants like Claude Desktop, Cursor, or Copilot
-- Available MCP tools and their functions
+- How to set up the Snowplow CLI [MCP tool](/docs/data-product-studio/mcp-server) with AI assistants like Claude Desktop, Cursor, or Copilot
 - Creating and validating data structures through conversation
 - AI-powered analysis for strategic tracking plan development
 
-## Demo: Using the Snowplow CLI MCP with Claude Desktop
+## Demo: using the Snowplow CLI MCP with Claude Desktop
 
 <div style={{position: "relative", width: "100%", height: "0", paddingBottom: "56.25%", overflow: "hidden"}}>
   <iframe
@@ -30,21 +27,6 @@ The Snowplow CLI MCP (Model Context Protocol) tool integrates Snowplow's data st
 
 ## Prerequisites
 
-- Snowplow CLI installed ([installation guide](/docs/data-product-studio/snowplow-cli/#install))
-- Snowplow CLI configured with your Console credentials ([configuration guide](/docs/data-product-studio/snowplow-cli/#configure))
-- Claude Desktop or another MCP-compatible client (Cursor or Copilot)
+- Snowplow CLI [installed](/docs/data-product-studio/snowplow-cli/#install) and [configured](/docs/data-product-studio/snowplow-cli/#configure).
+- Claude Desktop or another MCP-compatible client such as Cursor or Copilot.
 - **Filesystem access**: if using Claude Desktop, you must run alongside an MCP filesystem server (e.g., `@modelcontextprotocol/server-filesystem`) to enable file operations. Other MCP clients (Cursor, Copilot, etc.) have filesystem access by default.
-
-## Available MCP tools
-
-The Snowplow CLI MCP server provides these tools:
-
-### Core tools
-
-- **`get_context`** - Retrieves the built-in schema and rules that define how Snowplow data structures, data products, and source applications should be structured.
-- **`get_uuid`** - Generates valid v4 UUIDs required by many Snowplow components.
-
-### Validation tools
-
-- **`validate_data_structures`** - Validates data structure files (events/entities). Must be called after creating or modifying any data structure.
-- **`validate_data_products`** - Validates data products and source applications. Must include both data product files AND their referenced source application files.

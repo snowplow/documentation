@@ -4,10 +4,9 @@ sidebar_label: "Unified Digital"
 description: "Configure the Unified Digital dbt package with variables for sessions, users, and views using the interactive config generator."
 keywords: ["Unified Digital configuration", "dbt unified package", "web and mobile data modeling", "configure unified", "configure dbt"]
 sidebar_position: 10
-hide_table_of_contents: true
 ---
 
-import { DbtCongfigurationPage, JsonToTable, JsonSchemaGenerator, getSchemaVersions } from '@site/src/components/JsonSchemaValidator';
+import { DbtConfigurationPage, JsonToTable, JsonSchemaGenerator, getSchemaVersions } from '@site/src/components/JsonSchemaValidator';
 import { dump } from 'js-yaml';
 import Admonition from '@theme/Admonition';
 import DbtSchemas from "@site/docs/reusable/dbt-schemas/_index.md";
@@ -56,38 +55,48 @@ export const printYamlVariables = (data) => {
   )
 }
 
-export const MyMdxComponent = () => {
-  const schemaName = 'dbtUnified';
-  const versions = getSchemaVersions(schemaName);
-  const label = 'dbt unified version';
-  const output = printYamlVariables;
-  return (
-      <DbtCongfigurationPage schemaName={schemaName} versions={versions} label={label}>
-        <JsonToTable>
-            <h2 id="Variables">Package Configuration Variables</h2>
-            <p>This package utilizes a set of variables that are configured to recommended values for optimal performance of the models. Depending on your use case, you might want to override these values by adding to your <code>dbt_project.yml</code> file.</p>
-            <Admonition type="note">
-              All variables in Snowplow packages start with `snowplow__` but we have removed these in the below tables for brevity.
-            </Admonition>
-            <Admonition type="tip">
-              When modifying the <code>session/user_identifiers</code> or using <code>session/user_sql</code> in the unified package these will overwrite the <code>domain_sessionid</code> and <code>domain_userid</code> fields in tables, rather than being <code>session/user_identifier</code> as in the core utils implementation. This is for historic reasons to mitigate breaking changes. Original values for these fields can be found in `original_domain_session/userid` in each table.
-            </Admonition>
-        </JsonToTable>
-        <JsonSchemaGenerator output={output}>
-            <h2 id="Generator">Config Generator</h2>
-            <p>You can use the below inputs to generate the code that you need to place into your <code>dbt_project.yml</code> file to configure the package as you require. Any values not specified will use their default values from the package.</p>
-        </JsonSchemaGenerator>
-        <h2 id="schemas">Output Schemas</h2>
-        <DbtSchemas/>
-        <SchemaSetterWSeeds output={printSchemaVariables} />
-      </DbtCongfigurationPage>
-    );
-  };
+This page helps you configure the Snowplow Unified Digital dbt package. You can customize variables, generate configuration code, and set output schemas.
 
-<Admonition type="info" icon="" title = "Contents">
-  <a href="#Variables">Variables Definitions</a><br/>
-  <a href="#Generator">Config Generator</a><br/>
-  <a href="#schemas">Schema Generator</a>
-</Admonition>
+<DbtConfigurationPage schemaName="dbtUnified" versions={getSchemaVersions('dbtUnified')} label="dbt unified version">
 
-<MyMdxComponent/>
+## Package configuration variables
+
+This package utilizes a set of variables that are configured to recommended values for optimal performance of the models. Depending on your use case, you might want to override these values by adding to your `dbt_project.yml` file.
+
+:::note Variable name prefix
+All variables in Snowplow packages start with `snowplow__` but we have removed these in the below tables for brevity.
+:::
+
+:::tip
+When modifying the `session/user_identifiers` or using `session/user_sql` in the unified package these will overwrite the `domain_sessionid` and `domain_userid` fields in tables, rather than being `session/user_identifier` as in the core utils implementation. This is for historic reasons to mitigate breaking changes. Original values for these fields can be found in `original_domain_session/userid` in each table.
+:::
+
+### Warehouse and tracker
+
+<JsonToTable groupFilter="Warehouse and Tracker" />
+
+### Operation and logic
+
+<JsonToTable groupFilter="Operation and Logic" />
+
+### Entities (contexts), filters, and logs
+
+<JsonToTable groupFilter="Contexts, Filters, and Logs" />
+
+### Warehouse-specific
+
+<JsonToTable groupFilter="Warehouse Specific" />
+
+## Config generator
+
+You can use the below inputs to generate the code that you need to place into your `dbt_project.yml` file to configure the package as you require. Any values not specified will use their default values from the package.
+
+<JsonSchemaGenerator output={printYamlVariables} />
+
+## Output schemas
+
+<DbtSchemas/>
+
+<SchemaSetterWSeeds output={printSchemaVariables} />
+
+</DbtConfigurationPage>

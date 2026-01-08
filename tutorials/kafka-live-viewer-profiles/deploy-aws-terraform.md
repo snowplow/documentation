@@ -6,7 +6,7 @@ sidebar_label: "Deploy on AWS using Terraform"
 
 
 
-The following [Steps](#steps) will deploy the solution accelerator to AWS using Terraform. There is no need to manually install [Terraform](https://www.terraform.io/). It is executed via [Docker](https://www.docker.com/) using the `terraform.sh` script.
+The following [Steps](#steps-to-deploy-the-application) will deploy the solution accelerator to AWS using Terraform. There is no need to manually install [Terraform](https://www.terraform.io/). It is executed via [Docker](https://www.docker.com/) using the `terraform.sh` script.
 
 ## Steps to Deploy the Application
 
@@ -65,7 +65,7 @@ The applications listen for HTTP traffic on the following ports
 - Snowplow collector - 9090
 
 ## Next Steps
-- You can implement Snowplow media tracking on any [HTML5](/docs/sources/trackers/web-trackers/tracking-events/media/html5/) or [YouTube](/docs/sources/trackers/web-trackers/tracking-events/media/youtube/) media of your choice
+- You can implement Snowplow media tracking on any [HTML5](/docs/sources/web-trackers/tracking-events/media/html5/) or [YouTube](/docs/sources/web-trackers/tracking-events/media/youtube/) media of your choice
 - Look into the output from Kafka and extend the Live Viewer to include information on the media being watched and the user.
 - Replace Amazon DynamoDB with an alternative to be cloud agnostic, e.g. Google Bigtable or MongoDB.
 ---

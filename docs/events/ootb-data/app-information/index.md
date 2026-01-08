@@ -15,12 +15,12 @@ Information about the app and the tracker instance that the events originate fro
 
 These properties can be assigned across all our trackers regardless of the platform.
 
-Atomic table field | Type | Description | Example values
----|---|---|---
-`name_tracker` | text | The tracker namespace | `tracker_1`
-`app_id` | text | Unique identifier for website / application | `snow-game-android`
-`platform` | text | The platform the app runs on | `web`, `mob`, `app`
-`v_tracker` | text | Identifier for Snowplow tracker. The format follows the convention of `TRACKER_NAME-TRACKER_VERSION` | `js-2.16.2`
+| Atomic table field | Type | Description                                                                                          | Example values      |
+| ------------------ | ---- | ---------------------------------------------------------------------------------------------------- | ------------------- |
+| `name_tracker`     | text | The tracker namespace                                                                                | `tracker_1`         |
+| `app_id`           | text | Unique identifier for website / application                                                          | `snow-game-android` |
+| `platform`         | text | The platform the app runs on                                                                         | `web`, `mob`, `app` |
+| `v_tracker`        | text | Identifier for Snowplow tracker. The format follows the convention of `TRACKER_NAME-TRACKER_VERSION` | `js-2.16.2`         |
 
 :::info Tracker namespace
 The tracker namespace parameter is used to distinguish between different trackers. The name can be any string that _does not_ contain a colon or semi-colon character. Tracker namespacing allows you to run multiple trackers, pinging to different collectors.
@@ -59,4 +59,4 @@ This context entity is automatically tracked with events on mobile apps and give
 
 ### How to track?
 
-It is tracked on our [iOS and Android trackers](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md#application-context) as well as on the [React Native](/docs/sources/react-native-tracker/tracking-events/platform-and-application-context/index.md#application-context) and Flutter tracker (when used in iOS or Android).
+It is tracked on our [iOS and Android trackers](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md#application-context) as well as on the [React Native](/docs/sources/react-native-tracker/tracking-events/platform-and-application-context/index.md) and Flutter tracker (when used in iOS or Android).

@@ -141,7 +141,7 @@ addTrans({
   </TabItem>
 </Tabs>
 
-`addTrans` can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
+`addTrans` can also be passed an array of custom context entities as an additional parameter. See [custom context](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md) for more information.
 
 ### `addItem`
 
@@ -195,7 +195,7 @@ addItem({
   </TabItem>
 </Tabs>
 
-`addItem` can also be passed an array of custom context entities as an additional parameter. See [custom context](#custom-context) for more information.
+`addItem` can also be passed an array of custom context entities as an additional parameter. See [custom context](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md) for more information.
 
 ### `trackTrans`
 

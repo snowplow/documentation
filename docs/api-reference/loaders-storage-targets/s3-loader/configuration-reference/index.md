@@ -4,7 +4,7 @@ date: "2021-10-04"
 sidebar_position: 50
 ---
 
-S3 Loader is released under the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.1/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).
+S3 Loader is released under the [Snowplow Limited Use License](/limited-use-license-1.1/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).
 
 To accept the terms of license and run S3 Loader, configure the `license.accept` option, like this:
 

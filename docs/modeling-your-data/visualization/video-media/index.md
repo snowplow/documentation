@@ -1,7 +1,9 @@
 ---
-title: "Video and Media Analytics"
+title: "Video and Media Analytics visualization"
 sidebar_position: 5
 sidebar_label: "Video and Media Analytics"
+description: "Video and media analytics visualization with dashboards for watch time, audience retention, and in-media ad performance."
+keywords: ["video analytics", "media analytics", "watch time", "audience retention"]
 ---
 
 While 91% of businesses use video as a marketing tool, few businesses deeply understand how their users interact with this content and what effect this has on business metrics. Collecting vital engagement data plays a significant role in understanding your audience, optimizing your content, and measuring the impact of your video and media marketing efforts.

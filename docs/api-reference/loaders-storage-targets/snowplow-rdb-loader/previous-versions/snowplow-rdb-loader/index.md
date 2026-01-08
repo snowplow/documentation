@@ -1,7 +1,10 @@
 ---
 title: "RDB Loader 2.x.x"
+sidebar_label: "RDB Loader 2.x.x"
 date: "2020-03-05"
 sidebar_position: 0
+description: "Legacy RDB Loader 2.x documentation with RDB Shredder Spark job and loader application for Redshift event loading."
+keywords: ["rdb loader 2.x", "rdb shredder", "legacy shredder", "redshift loader 2.x", "spark shredder"]
 ---
 
 RDB (Relational Database) Loader is a pair of applications that work in tandem to load Snowplow events into a Redshift cluster.

@@ -1,6 +1,9 @@
 ---
 title: "Migrating to the v5.4 Ecommerce package"
+sidebar_label: "Migrating to the v5.4 Ecommerce package"
 sidebar_position: -6
+description: "Migrate from deprecated ecommerce events to the new v5.4 ecommerce tracking package with structured entities and event types."
+keywords: ["ecommerce migration", "version 5.4", "transaction events"]
 ---
 
 ```mdx-code-block

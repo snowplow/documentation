@@ -1,7 +1,10 @@
 ---
 title: "Sending events"
+sidebar_label: "Sending events"
 date: "2020-02-26"
 sidebar_position: 30
+description: "Track self-describing events, structured events, page views, errors, and ecommerce transactions in Scala tracker 0.5.0 with SchemaKey and json4s."
+keywords: ["scala 0.5 events", "self-describing events", "json4s tracking"]
 ---
 
 ### Additional type safety

@@ -2,6 +2,8 @@
 position: 3
 title: "Create and publish a data structure using the Snowplow CLI MCP tool"
 sidebar_label: "Create and publish a data structure"
+description: "Create and validate Snowplow data structures using conversational AI through the MCP tool. Learn the complete workflow from context retrieval through validation to publishing data structures to Console."
+keywords: ["data structure validation", "snowplow tracking plan creation"]
 ---
 
 Here's a typical interaction pattern for creating a data structure.

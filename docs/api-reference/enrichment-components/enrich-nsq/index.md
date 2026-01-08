@@ -1,6 +1,9 @@
 ---
-title: "Enrich NSQ (cloud agnostic)"
+title: "Enrich NSQ for cloud-agnostic applications"
+sidebar_label: "Enrich NSQ (cloud agnostic)"
 sidebar_position: 35
+description: "Cloud-agnostic standalone JVM application for enriching Snowplow events from NSQ with configurable enrichments and validation."
+keywords: ["enrich nsq", "nsq", "cloud agnostic enrichment"]
 ---
 
 ```mdx-code-block

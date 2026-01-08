@@ -1,8 +1,9 @@
 ---
-title: "Managing data products via the CLI"
-description: "Use the 'snowplow-cli data-products' command to manage your data products."
+title: "Manage data products via Snowplow CLI"
 sidebar_label: "Using the CLI"
 sidebar_position: 999
+description: "Use the Snowplow CLI data-products command to create, download, validate, and publish data products, event specifications, and source applications with git-ops workflows."
+keywords: ["Snowplow CLI data products", "data products CLI", "event specifications CLI", "source applications CLI", "CLI commands"]
 ---
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

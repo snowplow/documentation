@@ -2,6 +2,8 @@
 title: "Migration guide from version 5.x to 6.0"
 sidebar_label: "From version 5.x to 6.0"
 sidebar_position: -7
+description: "Migrate to mobile tracker version 6.0 with changes to lifecycle tracking, event batching, and screen engagement features."
+keywords: ["migration", "version 6.0", "lifecycle tracking"]
 ---
 
 There were a few breaking changes within v6, for both iOS and Android. These are described here, with a quick summary of the rest of the changelog at the end.

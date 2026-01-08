@@ -1,5 +1,8 @@
 ---
-title: "Incorporating non-snowplow data"
+title: "Incorporating non-Snowplow data"
+sidebar_label: "Incorporating non-Snowplow data"
+description: "Incorporate external data sources into Snowplow derived tables by joining non-Snowplow data with custom derived models."
+keywords: ["external data", "non-Snowplow data", "data enrichment", "join external tables"]
 sidebar_position: 100
 ---
 
@@ -20,9 +23,9 @@ In both cases what you could do is follow the recommendations on [adding a custo
 You might want to add extra safety measures to avoid misaligned data between the package and the table you want to bring data from. Consider using a pre-hook that you can add to the config section of your derived table for instance. Update schedules would also need to be synced for a hassle-free run and consider the impact when there are changes, refreshes to the source table, in case you need to run a full or partial refresh afterwards.
 :::
 
-When modifying the model you would typically want to add left joins using the key that makes sense for your use case (e.g. user_identifier, session_identifier, view_id etc.) and list the additional field(s) which you would like to be incorporated. As long as you keep a `this_run` table as a basis and select everything from it, and also tag your custom model as `snowplow_{{package_name}}_incremental` it will become part of the run and the package will keep everything in sync through the manifest table. 
+When modifying the model you would typically want to add left joins using the key that makes sense for your use case (e.g. user_identifier, session_identifier, view_id etc.) and list the additional field(s) which you would like to be incorporated. As long as you keep a `this_run` table as a basis and select everything from it, and also tag your custom model as `snowplow_{{package_name}}_incremental` it will become part of the run and the package will keep everything in sync through the manifest table.
 
-Bear in mind that if you make changes to the Sessions table, you might break the Users table in the Unified Digital package depending on the changes as the Users table is built on top of the Sessions table (e.g. it is generally safe to add more fields (be careful about name clashes), though you might also need to add them as a [passthrough field](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/passthrough-fields/index.md) for them to show up in the Users table, but probably not to remove them, best to test it first), otherwise they are safe to update independently. 
+Bear in mind that if you make changes to the Sessions table, you might break the Users table in the Unified Digital package depending on the changes as the Users table is built on top of the Sessions table (e.g. it is generally safe to add more fields (be careful about name clashes), though you might also need to add them as a [passthrough field](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/passthrough-fields/index.md) for them to show up in the Users table, but probably not to remove them, best to test it first), otherwise they are safe to update independently.
 
 :::info Lineage Graph
 You can inspect the lineage graph to verify this if you are unsure by using dbt's built in data lineage feature through dbt docs. We also update that for each of our latest releases on github: https://snowplow.github.io/dbt-snowplow-unified/#!/overview?g_v=1

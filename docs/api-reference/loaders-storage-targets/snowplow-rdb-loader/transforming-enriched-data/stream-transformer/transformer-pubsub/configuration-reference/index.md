@@ -1,7 +1,10 @@
 ---
-title: "Transformer Pubsub configuration reference"
+title: "Transformer Pub/Sub configuration reference"
+sidebar_label: "Transformer PubSub configuration reference"
 date: "2022-10-13"
 sidebar_position: 12
+description: "Configure Transformer Pub/Sub with stream settings, GCS output, windowing, and monitoring for GCP real-time transformation."
+keywords: ["transformer pubsub config", "pubsub transformer settings", "gcp transformer config", "stream transformer configuration"]
 ---
 
 ```mdx-code-block

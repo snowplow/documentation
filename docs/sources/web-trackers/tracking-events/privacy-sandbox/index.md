@@ -1,7 +1,9 @@
 ---
-title: "Tracking Privacy Sandbox browser data with the web trackers"
+title: "Track Privacy Sandbox browser data with the web trackers"
 sidebar_label: "Privacy Sandbox"
 sidebar_position: 160
+description: "Capture Privacy Sandbox data including Topics API information for privacy-preserving interest-based advertising and content personalization."
+keywords: ["privacy sandbox", "topics api"]
 ---
 
 ```mdx-code-block

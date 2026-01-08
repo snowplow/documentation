@@ -1,7 +1,9 @@
 ---
-title: "Tracking page views on web"
+title: "Track page views on web"
 sidebar_label: "Page views"
 sidebar_position: 20
+description: "Track page views with automatically captured URL, referrer, and title along with page view UUID for session analysis and single page apps."
+keywords: ["page views", "page tracking"]
 ---
 
 ```mdx-code-block

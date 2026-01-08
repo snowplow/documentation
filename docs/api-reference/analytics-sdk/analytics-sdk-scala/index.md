@@ -1,7 +1,10 @@
 ---
-title: "Analytics SDK - Scala"
+title: "Scala Analytics SDK"
+sidebar_label: "Scala"
 date: "2020-11-02"
 sidebar_position: 100
+description: "Parse Snowplow enriched events into case classes with JSON transformation and event inventory metadata for Apache Spark, Flink, and AWS Lambda."
+keywords: ["scala analytics sdk", "apache spark", "snowplow scala"]
 ---
 
 ```mdx-code-block

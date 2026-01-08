@@ -1,7 +1,10 @@
 ---
-title: "WebView tracker"
+title: "WebView tracker (legacy)"
+sidebar_label: "WebView tracker (legacy)"
 date: "2020-02-26"
 sidebar_position: 135
+description: "Track events from web views in mobile hybrid apps by forwarding events to native iOS, Android, or React Native trackers with shared session data."
+keywords: ["webview tracker", "hybrid app tracking", "mobile webview events"]
 ---
 
 ```mdx-code-block
@@ -108,12 +111,12 @@ To track events, simply call their corresponding functions given the event data.
 
 The following functions are available:
 
-| Method                     | Event type tracked                                                                                                                       |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
-| `trackSelfDescribingEvent` | Track a custom event based on "self-describing" JSON schema                                                                              |
-| `trackStructEvent`         | Track a semi-custom structured event                                                                                                     |
-| `trackScreenView`          | Track a view of a screen in the app                                                                                                      |
-| `trackPageView`            | Track a Web page visit                                                                                                                   |
+| Method                     | Event type tracked                                                                                                              |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `trackSelfDescribingEvent` | Track a custom event based on "self-describing" JSON schema                                                                     |
+| `trackStructEvent`         | Track a semi-custom structured event                                                                                            |
+| `trackScreenView`          | Track a view of a screen in the app                                                                                             |
+| `trackPageView`            | Track a Web page visit                                                                                                          |
 | `trackWebViewEvent`        | Track any Snowplow event (used internally by the [WebView plugin](/docs/sources/web-trackers/tracking-events/webview/index.md)) |
 
 All the methods share common features and parameters. Every type of event can have optional entities added.

@@ -1,6 +1,8 @@
 ---
-title: "Adding context and data to events in the Flutter tracker"
+title: "Add entities and subject data to Flutter tracker events"
 sidebar_label: "Adding data to your events: context and more"
+description: "Enrich Flutter events with custom context entities using self-describing JSON schemas. Configure subject information including user ID, platform data, timezone, and screen resolution."
+keywords: ["event context", "context entities", "subject configuration", "self-describing json", "event enrichment"]
 date: "2022-01-31"
 sidebar_position: 4000
 ---

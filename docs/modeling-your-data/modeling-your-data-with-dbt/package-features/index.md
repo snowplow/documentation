@@ -1,6 +1,8 @@
 ---
-title: "Package features"
+title: "Snowplow dbt package features"
+sidebar_label: "Package features"
 description: "Top level page for features contained in our packages"
+keywords: ["dbt package features", "Snowplow dbt features", "package functionality"]
 sidebar_position: 30
 ---
 

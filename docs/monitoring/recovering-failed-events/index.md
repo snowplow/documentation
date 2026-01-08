@@ -1,7 +1,9 @@
 ---
-title: "Recovering failed events"
+title: "Recover failed events"
 sidebar_position: 4
 sidebar_label: "Recover failed events"
+description: "Fix and reprocess failed events using SQL recovery, manual recovery from buckets, or Console data recovery requests."
+keywords: ["event recovery", "failed event recovery", "reprocess failed events"]
 ---
 
 Event recovery allows you to fix [failed events](/docs/fundamentals/failed-events/index.md) in some scenarios, so that you can ensure your data is complete and accurate.

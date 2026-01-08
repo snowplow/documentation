@@ -3,6 +3,7 @@ title: Define page view attributes for real-time prospect scoring
 sidebar_label: Define attributes
 position: 3
 description: "Define behavioral data attributes in Snowplow Signals for prospect scoring, including page views, sessions, and conversion events."
+keywords: ["signals python sdk", "page view attributes"]
 ---
 
 To use Signals, you need to define which attributes to calculate, and then apply the configuration. Signals will calculate the attributes from your real-time event stream.

@@ -2,6 +2,8 @@
 position: 3
 title: "Deploy the Kafka live viewer profiles application on AWS using Terraform"
 sidebar_label: "Deploy on AWS using Terraform"
+description: "Deploy the live viewer profiles solution to AWS infrastructure using Terraform scripts with EC2, DynamoDB, and Kafka components."
+keywords: ["terraform aws snowplow deployment", "kafka dynamodb infrastructure"]
 ---
 
 

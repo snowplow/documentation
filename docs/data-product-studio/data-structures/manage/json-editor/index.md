@@ -1,8 +1,9 @@
 ---
-title: "Managing data structures with the JSON Editor"
-description: "The JSON editor is best suited for defining complex data structures that require heavy nesting and advanced data types."
+title: "Create complex data structures with JSON Editor"
 sidebar_label: "Console: JSON editor"
 sidebar_position: 1
+description: "Define complex data structures with heavy nesting and advanced data types using the JSON Editor for full JSON Schema support."
+keywords: ["JSON editor", "complex schemas", "nested structures", "JSON Schema editor", "advanced data types"]
 ---
 
 :::info

@@ -1,6 +1,8 @@
 ---
 title: "Event specifications"
 sidebar_position: 115
+description: "Documentation for Event specifications in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

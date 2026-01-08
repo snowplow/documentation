@@ -1,7 +1,9 @@
 ---
-title: "Custom SQL enrichment"
+title: "Custom SQL query enrichment"
 sidebar_position: 12
 sidebar_label: Custom SQL
+description: "Query relational databases during enrichment to attach lookup data from MySQL, PostgreSQL, or other SQL databases."
+keywords: ["SQL enrichment", "database lookup", "relational database enrichment"]
 ---
 
 The SQL Query Enrichment lets you perform dimension widening on a Snowplow event via your own internal relational database.

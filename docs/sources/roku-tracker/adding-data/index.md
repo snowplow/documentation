@@ -1,8 +1,10 @@
 ---
-title: "Adding context and data to events in the Roku tracker"
+title: "Add entities and other data to events with the Roku tracker"
 sidebar_label: "Adding data to your events: context and more"
 date: "2021-11-16"
 sidebar_position: 3000
+description: "Add event context entities, subject data with user and platform information, and custom timestamps to Roku tracker events."
+keywords: ["roku event context", "subject configuration", "custom timestamps"]
 ---
 
 There are multiple ways to add extra data to your tracked events, adding richness and value to your dataset. Each of them involves a different class from the Roku tracker.
@@ -65,18 +67,18 @@ This can be disabled by setting the `sessionContext` option to `false`.
 By default, this information is attached via the `client_session` entity, similar to mobile platforms.
 You can also include these values in the `domain_userid`, `domain_sessionid`, and `domain_sessionidx` fields by enabling the `sessionAsCookies` setting.
 
-| Property             | Description                                |
-| -------------------- | ------------------------------------------ |
-| `userId`             | Unique user identifier in your system      |
-| `domainUserId`       | Cookie-based unique identifier for user    |
-| `domainSessionId`    | Cookie-based unique identifier for session |
-| `networkUserId`      | Cookie-based unique identifier for user    |
-| `appId`              | Unique identifier for application          |
-| `applicationContext` | Enable an entity with the channel version  |
-| `sessionContext`     | Whether to enable or disable session state |
-| `sessionAsCookies`   | Enable session identifiers in atomic fields|
-| `userAnonymous`      | Use a nil ID for the `domainUserId` value  |
-| `sessionAnonymous`   | Use a nil ID for the `domainSessionId` value  |
+| Property             | Description                                  |
+| -------------------- | -------------------------------------------- |
+| `userId`             | Unique user identifier in your system        |
+| `domainUserId`       | Cookie-based unique identifier for user      |
+| `domainSessionId`    | Cookie-based unique identifier for session   |
+| `networkUserId`      | Cookie-based unique identifier for user      |
+| `appId`              | Unique identifier for application            |
+| `applicationContext` | Enable an entity with the channel version    |
+| `sessionContext`     | Whether to enable or disable session state   |
+| `sessionAsCookies`   | Enable session identifiers in atomic fields  |
+| `userAnonymous`      | Use a nil ID for the `domainUserId` value    |
+| `sessionAnonymous`   | Use a nil ID for the `domainSessionId` value |
 
 Example:
 

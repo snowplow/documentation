@@ -1,6 +1,8 @@
 ---
 title: "Snowplow v3 Ecommerce"
 sidebar_position: 2000
+description: "Documentation for Snowplow v3 Ecommerce in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 This template implements the [Snowplow Ecommerce plugin](../../../../tracking-events/ecommerce/index.md) for the Snowplow JavaScript tracker v3 and is meant to be used alongside [the main Snowplow v3 tag template](../tag-template-guide/index.md).

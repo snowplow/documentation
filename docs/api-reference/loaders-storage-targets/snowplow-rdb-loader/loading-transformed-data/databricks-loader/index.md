@@ -1,7 +1,10 @@
 ---
-title: "Databricks loader"
+title: "Load into Databricks using the RDB Loader"
+sidebar_label: "Into Databricks"
 date: "2022-05-27"
 sidebar_position: 300
+description: "Load wide row Parquet data into Databricks with automatic schema creation and Delta Lake optimization."
+keywords: ["databricks loader", "databricks rdb", "wide row parquet", "delta lake", "databricks copy"]
 ---
 
 ```mdx-code-block

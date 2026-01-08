@@ -3,6 +3,7 @@ title: "Tracking your first events"
 sidebar_position: 5
 sidebar_label: "Track events"
 description: "Tracking your first Snowplow events"
+keywords: ["event tracking", "trackers", "JavaScript tracker", "web tracking", "mobile tracking"]
 ---
 
 ```mdx-code-block

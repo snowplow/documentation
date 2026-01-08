@@ -1,6 +1,8 @@
 ---
 title: "Media"
 sidebar_position: 75
+description: "Documentation for Media in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 There are four media tracking plugins to choose from. Choosing the right plugin for you depends on the following questions:

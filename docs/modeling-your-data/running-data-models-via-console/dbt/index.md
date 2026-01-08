@@ -2,6 +2,8 @@
 title: "Running custom dbt models via Snowplow CDI"
 sidebar_label: "Custom models"
 sidebar_position: 2
+description: "Run custom dbt models in Snowplow Console with scheduled execution and monitoring."
+keywords: ["custom dbt models", "Snowplow CDI", "dbt Console", "scheduled dbt"]
 ---
 
 ```mdx-code-block

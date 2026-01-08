@@ -1,5 +1,8 @@
 ---
-title: "FAQ: Snowplow Personal & Academic License (SPAL)"
+title: "Snowplow Personal and Academic License FAQ"
+sidebar_label: "Personal & Academic License FAQ"
+description: "Frequently asked questions about the Snowplow Personal and Academic License eligibility and terms."
+keywords: ["academic license", "SPAL", "personal use license"]
 ---
 
 :::info Note
@@ -7,6 +10,8 @@ title: "FAQ: Snowplow Personal & Academic License (SPAL)"
 This FAQ is not a substitute for reading [the license text](/personal-and-academic-license-1.0/).
 
 :::
+
+This page explains some of the most common questions about the Snowplow Personal and Academic License.
 
 ## What is the SPAL?
 

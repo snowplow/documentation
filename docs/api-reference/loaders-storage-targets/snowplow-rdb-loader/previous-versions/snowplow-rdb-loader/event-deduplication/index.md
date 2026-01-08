@@ -1,7 +1,10 @@
 ---
-title: "Event deduplication"
+title: "Event deduplication in RDB Loader 2.x"
+sidebar_label: "Event deduplication"
 date: "2020-03-05"
 sidebar_position: 20
+description: "Deduplicate Snowplow events with natural and synthetic strategies for in-batch and cross-batch deduplication in RDB Shredder."
+keywords: ["event deduplication", "natural deduplication", "synthetic deduplication", "cross-batch deduplication", "event fingerprint"]
 ---
 
 Duplicates is a common problem in event pipelines, it has been described and studied [many](http://snowplowanalytics.com/blog/2015/08/19/dealing-with-duplicate-event-ids/) [times](http://snowplowanalytics.com/blog/2016/01/26/snowplow-r76-changeable-hawk-eagle-released/#deduplication). Basically, the problem is that we cannot guarantee that every event has a unique `UUID` because

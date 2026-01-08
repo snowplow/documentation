@@ -1,7 +1,9 @@
 ---
-title: "Tracking media on web"
+title: "Track media on web"
 sidebar_label: "Media"
 sidebar_position: 75
+description: "Choose from four media tracking plugins supporting HTML5, YouTube, Vimeo, and custom players with version 2 media schemas."
+keywords: ["media tracking", "video"]
 ---
 
 There are four media tracking plugins to choose from. Choosing the right plugin for you depends on the following questions:
@@ -23,8 +25,8 @@ The v2 schemas:
 
 :::
 
-| Plugin                                                                                        | Media schemas version | Provides auto-tracking? | Player  |
-| --------------------------------------------------------------------------------------------- | --------------------- | ----------------------- | ------- |
+| Plugin                                                                               | Media schemas version | Provides auto-tracking? | Player  |
+| ------------------------------------------------------------------------------------ | --------------------- | ----------------------- | ------- |
 | [Snowplow media](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md) | v2                    | ❌                       | Any     |
 | [Vimeo](/docs/sources/web-trackers/tracking-events/media/vimeo/index.md)             | v2                    | ✅                       | Vimeo   |
 | [HTML5](/docs/sources/web-trackers/tracking-events/media/html5/index.md)             | v2                    | ✅                       | HTML5   |

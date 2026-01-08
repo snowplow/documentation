@@ -1,6 +1,9 @@
 ---
-title: "What is deployed?"
+title: "What is deployed in the Self-Hosted Quick Start?"
+sidebar_label: "What is deployed?"
 sidebar_position: 3
+description: "Overview of Snowplow pipeline infrastructure components deployed by Terraform including collector, enrichment, and loader modules."
+keywords: ["infrastructure", "Terraform modules", "pipeline architecture", "deployed components"]
 ---
 
 ```mdx-code-block

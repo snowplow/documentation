@@ -2,7 +2,8 @@
 position: 6
 title: Run and test your new attribute dbt models
 sidebar_label: Run and test models
-description: "Run dbt models to create Snowplow Signals attribute tables in your warehouse, and validate data quality."
+description: "Configure dbt connection profiles, run models with full refresh to create attribute tables in Snowflake or BigQuery, and validate data quality."
+keywords: ["dbt run command", "warehouse attribute tables"]
 ---
 
 Now that your models are generated, it's time to run them and verify that everything works as expected. This step allows you to test your models locally before moving them to production.

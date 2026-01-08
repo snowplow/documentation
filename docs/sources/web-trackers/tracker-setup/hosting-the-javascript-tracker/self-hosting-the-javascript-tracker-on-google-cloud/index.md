@@ -1,6 +1,8 @@
 ---
 title: "Self Hosting the JavaScript Tracker on GCP"
 sidebar_label: "Self hosting on GCP"
+description: "Host sp.js on Google Cloud Storage with CDN for reliable tracker distribution to your users."
+keywords: ["gcp hosting", "google cloud storage", "cloud cdn", "google cloud"]
 date: "2020-04-28"
 sidebar_position: 200
 ---

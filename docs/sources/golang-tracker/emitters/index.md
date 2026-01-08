@@ -1,6 +1,8 @@
 ---
-title: "Configuring emitters in the Golang tracker"
+title: "Configure emitters with the Golang tracker"
 sidebar_label: "Emitters"
+description: "Configure emitters with collector URI, storage implementation (memory or SQLite3), request types, and byte limits. Set up custom HTTP clients and callbacks for tracking event delivery."
+keywords: ["golang emitter", "storage configuration", "sqlite3 storage", "memory storage", "http client", "emitter callback"]
 date: "2020-02-26"
 sidebar_position: 50
 ---
@@ -15,17 +17,17 @@ emitter := sp.InitEmitter(RequireCollectorUri("com.acme"), sp.RequireStorage(*st
 
 There are other optional builder functions:
 
-| **Function Name** | **Description** | **Required?** | **Default** |
-| --- | --- | --- | --- |
-| `RequireCollectorUri` | The URI to send events to | Yes | `nil` |
-| `RequireStorage` | The storage integration to use | Yes | `nil` |
-| `OptionRequestType` | The request type to use (GET or POST) | No | `POST` |
-| `OptionProtocol` | The protocol to use (http or https) | No | `http` |
-| `OptionSendLimit` | The maximum amount of events to send at a time | No | `500` |
-| `OptionByteLimitGet` | The byte limit when sending a GET request | No | `40000` |
-| `OptionByteLimitPost` | The byte limit when sending a POST request | No | `40000` |
-| `OptionCallback` | Defines a custom callback function | No | `nil` |
-| `OptionHttpClient` | A custom HTTP client | No | `&Client{}` |
+| **Function Name**     | **Description**                                | **Required?** | **Default** |
+| --------------------- | ---------------------------------------------- | ------------- | ----------- |
+| `RequireCollectorUri` | The URI to send events to                      | Yes           | `nil`       |
+| `RequireStorage`      | The storage integration to use                 | Yes           | `nil`       |
+| `OptionRequestType`   | The request type to use (GET or POST)          | No            | `POST`      |
+| `OptionProtocol`      | The protocol to use (http or https)            | No            | `http`      |
+| `OptionSendLimit`     | The maximum amount of events to send at a time | No            | `500`       |
+| `OptionByteLimitGet`  | The byte limit when sending a GET request      | No            | `40000`     |
+| `OptionByteLimitPost` | The byte limit when sending a POST request     | No            | `40000`     |
+| `OptionCallback`      | Defines a custom callback function             | No            | `nil`       |
+| `OptionHttpClient`    | A custom HTTP client                           | No            | `&Client{}` |
 
 A more complete example:
 

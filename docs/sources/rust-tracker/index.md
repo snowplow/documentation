@@ -1,7 +1,10 @@
 ---
-title: "Rust tracker"
+title: "Rust tracker SDK"
+sidebar_label: "Rust tracker"
 date: "2022-10-24"
 sidebar_position: 225
+description: "Add event tracking to Rust applications using the Snowplow Rust tracker SDK with async event sending and retry policies."
+keywords: ["rust tracker", "rust analytics", "crates.io package"]
 ---
 
 ```mdx-code-block

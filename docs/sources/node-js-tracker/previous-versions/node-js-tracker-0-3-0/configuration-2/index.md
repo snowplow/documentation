@@ -1,7 +1,10 @@
 ---
 title: "Tracking Events"
+sidebar_label: "Tracking Events"
 date: "2020-02-26"
 sidebar_position: 400
+description: "Track events with Node.js tracker version 0.3.0."
+keywords: ["node.js tracker v0.3.0 events", "event tracking"]
 ---
 
 ## Tracking specific events

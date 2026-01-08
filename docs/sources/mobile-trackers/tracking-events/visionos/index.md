@@ -1,7 +1,9 @@
 ---
-title: "Tracking visionOS events with the iOS tracker"
+title: "Track visionOS events with the iOS tracker"
 sidebar_label: "visionOS"
 sidebar_position: 110
+description: "Track visionOS-specific events including window groups and immersive spaces in Apple Vision Pro applications."
+keywords: ["visionos tracking", "immersive space tracking", "apple vision pro"]
 ---
 
 ```mdx-code-block

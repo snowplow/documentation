@@ -1,7 +1,10 @@
 ---
 title: "Configuration"
+sidebar_label: "Configuration"
 date: "2020-09-03"
 sidebar_position: 300
+description: "Configure event properties for Node.js tracker v0.4.0."
+keywords: ["node.js tracker v0.4.0 configuration", "event properties"]
 ---
 
 You may have additional information about your application's environment, current user and so on, which you want to send to your Snowplow pipeline with each event.

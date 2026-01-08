@@ -1,7 +1,9 @@
 ---
-title: "Databricks"
+title: "Load Snowplow data to Databricks"
+sidebar_label: "Databricks"
 sidebar_position: 20
-description: "Send Snowplow data to Databricks for analytics and data processing"
+description: "Send Snowplow data to Databricks for analytics and data processing with Delta Lake tables, schema evolution, and lakehouse architecture support."
+keywords: ["Databricks", "Delta Lake", "lakehouse", "data platform", "Apache Spark"]
 ---
 
 ```mdx-code-block

@@ -1,7 +1,10 @@
 ---
 title: "RDB Loader 1.1.0"
+sidebar_label: "RDB Loader 1.1.0"
 date: "2021-06-08"
 sidebar_position: 10
+description: "RDB Loader 1.1.0 documentation with Shredder Spark job, SQS messaging, and stateless shredding for Redshift event loading."
+keywords: ["rdb loader 1.1", "shredder 1.1", "sqs messaging", "stateless loader", "redshift 1.1"]
 ---
 
 ## 1. Overview

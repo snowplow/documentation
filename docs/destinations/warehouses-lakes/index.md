@@ -3,6 +3,7 @@ title: "Supported warehouse and data lake destinations"
 sidebar_position: 1
 sidebar_label: "Warehouses and lakes"
 description: "An overview of the available options for storing Snowplow data in data warehouses and lakes"
+keywords: ["data warehouses", "data lakes", "Snowflake", "Databricks", "BigQuery", "Redshift", "Iceberg", "Delta Lake", "destination", "Snowplow destination"]
 ---
 
 Data warehouses and data lakes are primary destinations for Snowplow data. For other options, see the [destinations overview](/docs/fundamentals/destinations/index.md) page.

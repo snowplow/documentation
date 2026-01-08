@@ -1,8 +1,9 @@
 ---
-title: "Defining attribute keys with the Python SDK"
+title: "Define attribute keys with the Signals Python SDK"
 sidebar_position: 15
 sidebar_label: "Attribute keys"
-description: "Define built-in and custom attribute keys to specify the analytical context for attribute calculations in Snowplow Signals."
+description: "Create custom attribute keys based on atomic properties to specify the analytical context for attribute calculations. Use built-in keys like domain_userid or define your own."
+keywords: ["attribute keys", "custom attribute keys", "analytical context", "atomic properties"]
 ---
 
 An [attribute key](/docs/signals/concepts/index.md#attribute-keys) is the identifier that attributes are calculated against.

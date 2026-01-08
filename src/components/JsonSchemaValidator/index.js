@@ -39,7 +39,7 @@ export const lightTheme = createTheme({
 })
 
 // Config Generator
-export function JsonSchemaGenerator({ output, children, versionedSchema }) {
+export function JsonSchemaGenerator({ output, children, versionedSchema, groupFilter }) {
   const [formData, setFormData] = useState(null)
   const { colorMode, setColorMode } = useColorMode()
 
@@ -49,14 +49,21 @@ export function JsonSchemaGenerator({ output, children, versionedSchema }) {
 
   const versionedSchemas = {}
   Object.keys(versionedSchema.properties).forEach((property) => {
-    if (versionedSchema.properties[property].group in versionedSchemas) {
-      versionedSchemas[versionedSchema.properties[property].group] = { properties: { ...versionedSchemas[versionedSchema.properties[property].group].properties, [property]: versionedSchema.properties[property] }, definitions: versionedSchema.definitions }
+    const group = versionedSchema.properties[property].group;
+
+    // If groupFilter is specified, only include items from that group
+    if (groupFilter && group !== groupFilter) {
+      return;
+    }
+
+    if (group in versionedSchemas) {
+      versionedSchemas[group] = { properties: { ...versionedSchemas[group].properties, [property]: versionedSchema.properties[property] }, definitions: versionedSchema.definitions }
     } else {
 
       if (versionedSchema.definitions) {
-        versionedSchemas[versionedSchema.properties[property].group] = { properties: { [property]: versionedSchema.properties[property] }, definitions: versionedSchema.definitions }
+        versionedSchemas[group] = { properties: { [property]: versionedSchema.properties[property] }, definitions: versionedSchema.definitions }
       } else {
-        versionedSchemas[versionedSchema.properties[property].group] = { properties: { [property]: versionedSchema.properties[property] } }
+        versionedSchemas[group] = { properties: { [property]: versionedSchema.properties[property] } }
       }
     }
   })
@@ -88,7 +95,7 @@ export function JsonSchemaGenerator({ output, children, versionedSchema }) {
 }
 
 // Table of config details
-export function JsonToTable({ children, versionedSchema }) {
+export function JsonToTable({ children, versionedSchema, groupFilter }) {
   const { colorMode, setColorMode } = useColorMode()
 
   if (versionedSchema === null) {
@@ -104,6 +111,11 @@ export function JsonToTable({ children, versionedSchema }) {
   for (const key in properties) {
     const innerObject = properties[key];
     const group = innerObject.group;
+
+    // If groupFilter is specified, only include items from that group
+    if (groupFilter && group !== groupFilter) {
+      continue;
+    }
 
     // If the group doesn't exist in the groupedObjects, create an empty array for it
     if (!groupedObjects[group]) {
@@ -192,7 +204,6 @@ export function JsonToTable({ children, versionedSchema }) {
       {children}
       {Object.keys(groupedObjects).map((header, index) => (
         <div key={header}>
-          <h3>{header}</h3>
           <DataGridPremium
             apiRef={apiRef}
             initialState={initialState}

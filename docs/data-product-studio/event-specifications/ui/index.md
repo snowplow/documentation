@@ -31,7 +31,7 @@ To add more information or modify an existing event specification, follow these 
 
 1. Navigate to the appropriate data product
 2. Select the desired event specification
-3. This action will open on overview of the selected event specification containing the details that have been added to date
+3. This action will open an overview of the selected event specification containing the details that have been added to date
 
 This interface is divided into focused sections; explore each section below for more details.
 
@@ -78,14 +78,16 @@ The dialog displays the list of properties for the selected data structure will 
 
 You can configure detailed instructions for any of the properties shown in the list by clicking the **Add instruction** or **Edit** buttons. Once you have selected the type of instruction you wish to add/edit and have filled in the required input fields, you are then able to click **Save and update instruction** and return to the properties list.
 
-*Notes: instructions for required properties are added by default and can be edited but they cannot be deleted.*
+:::note 
+Instructions for required properties are added by default and can be edited but they cannot be deleted.
+:::
 
 ![Implementation instructions](images/implementation-instructions.png)
 
 
 ## Event specification code generation
 
-To accelerate your implementation of event tracking, Snowplow Console includes pre-generated code snippets specifically for custom self-describing events. These snippets can be accessed directly within the Console interface to significantly reduce the time and effort required for integrating event tracking functionality into your applications.
+To accelerate your implementation of event tracking, Snowplow Console includes pre-generated code snippets specifically for custom self-describing events. These snippets can be accessed directly within the Console interface to reduce the time and effort required for integrating event tracking functionality into your applications.
 
 ### Working with event specifications
 
@@ -95,7 +97,7 @@ When viewing an event specification, the **Working with this event** section pro
 - **Querying**: view example SQL queries to retrieve your event data from the warehouse
 
 :::note
-For standard Snowplow events (page views, screen views, page pings, and self-describing events), tracking code is available out of the box without requiring any additional configuration.
+For standard Snowplow events (page view, screen view, page ping, and self-describing events), tracking code is available out of the box without requiring any additional configuration.
 :::
 
 ### Implementation - Code snippets

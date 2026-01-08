@@ -103,14 +103,16 @@ For standard Snowplow events (page views, screen views, page pings, and self-des
 The Implementation tab generates tracking code snippets tailored to your event specification. You can:
 
 - **Select your tracker type**: choose between JavaScript tracker options (tag-based or npm-based)
-- **Toggle Snowtype code**: use the **Show snowtype code** toggle to display the specific Snowtype function name to call for tracking implementation.
 - **Copy code directly**: use the generated code snippets immediately in your application
+- **Toggle Snowtype code**: use the **Show snowtype code** toggle to display the specific Snowtype function name to call for tracking implementation.
 
 :::note
 Draft data structures can't be used for event validation during testing or production since they aren't loaded into Iglu. Validation will fail without schemas in an Iglu registry, though you can configure a custom registry if needed. Deploy your draft to the development environment when you're ready to test.
 :::
 
 ![Implementation code snippets](images/code-snippets.png)
+
+![Show snowtype code](images/show-snowtype-code.png)
 
 ### Querying - SQL examples
 

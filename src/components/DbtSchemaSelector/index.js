@@ -1,29 +1,29 @@
 import React, { useState } from 'react'
-import TextField from "@mui/material/TextField";
-import Box from "@mui/material/Box";
-import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { useColorMode } from '@docusaurus/theme-common';
+import TextField from '@mui/material/TextField'
+import Box from '@mui/material/Box'
+import { ThemeProvider, createTheme } from '@mui/material/styles'
+import { useColorMode } from '@docusaurus/theme-common'
 
 // Themeing
 export const darkTheme = createTheme({
   palette: {
     mode: 'dark',
   },
-});
+})
 
 export const lightTheme = createTheme({
   palette: {
     mode: 'light',
   },
-});
+})
 
 export const SchemaSetter = (props) => {
   const [manifestSchema, setManifestSchema] = useState('my_manifest_schema')
   const [scratchSchema, setScratchSchema] = useState('my_scratch_schema')
   const [derivedSchema, setDerivedSchema] = useState('my_derived_schema')
-  const { colorMode, setColorMode } = useColorMode();
+  const { colorMode, setColorMode } = useColorMode()
   return (
-    <>
+    <div>
       <ThemeProvider theme={colorMode === 'dark' ? darkTheme : lightTheme}>
         <Box sx={{ justifyContent: 'space-between', display: 'flex' }}>
           <TextField
@@ -59,20 +59,18 @@ export const SchemaSetter = (props) => {
         </Box>
         {props.output(manifestSchema, scratchSchema, derivedSchema)}
       </ThemeProvider>
-    </>
+    </div>
   )
-};
-
-
+}
 
 export const SchemaSetterWSeeds = (props) => {
   const [manifestSchema, setManifestSchema] = useState('my_manifest_schema')
   const [scratchSchema, setScratchSchema] = useState('my_scratch_schema')
   const [derivedSchema, setDerivedSchema] = useState('my_derived_schema')
   const [seedSchema, setseedSchema] = useState('my_seed_schema')
-  const { colorMode, setColorMode } = useColorMode();
+  const { colorMode, setColorMode } = useColorMode()
   return (
-    <>
+    <div>
       <ThemeProvider theme={colorMode === 'dark' ? darkTheme : lightTheme}>
         <Box sx={{ justifyContent: 'space-between', display: 'flex' }}>
           <TextField
@@ -118,6 +116,6 @@ export const SchemaSetterWSeeds = (props) => {
         </Box>
         {props.output(manifestSchema, scratchSchema, derivedSchema, seedSchema)}
       </ThemeProvider>
-    </>
+    </div>
   )
-};
+}

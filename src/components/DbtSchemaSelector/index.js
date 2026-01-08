@@ -34,7 +34,7 @@ export const SchemaSetter = (props) => {
             margin="dense"
             size="small"
             InputLabelProps={{ shrink: true }}
-            onChange={() => setManifestSchema(event.target.value)}
+            onChange={(event) => setManifestSchema(event.target.value)}
           />
           <TextField
             placeholder="my_scratch_schema"
@@ -44,7 +44,7 @@ export const SchemaSetter = (props) => {
             margin="dense"
             size="small"
             InputLabelProps={{ shrink: true }}
-            onChange={() => setScratchSchema(event.target.value)}
+            onChange={(event) => setScratchSchema(event.target.value)}
           />
           <TextField
             placeholder="my_derived_schema"
@@ -54,7 +54,7 @@ export const SchemaSetter = (props) => {
             margin="dense"
             size="small"
             InputLabelProps={{ shrink: true }}
-            onChange={() => setDerivedSchema(event.target.value)}
+            onChange={(event) => setDerivedSchema(event.target.value)}
           />
         </Box>
         {props.output(manifestSchema, scratchSchema, derivedSchema)}
@@ -81,7 +81,7 @@ export const SchemaSetterWSeeds = (props) => {
             margin="dense"
             size="small"
             InputLabelProps={{ shrink: true }}
-            onChange={() => setManifestSchema(event.target.value)}
+            onChange={(event) => setManifestSchema(event.target.value)}
           />
           <TextField
             placeholder="my_scratch_schema"
@@ -91,7 +91,7 @@ export const SchemaSetterWSeeds = (props) => {
             margin="dense"
             size="small"
             InputLabelProps={{ shrink: true }}
-            onChange={() => setScratchSchema(event.target.value)}
+            onChange={(event) => setScratchSchema(event.target.value)}
           />
           <TextField
             placeholder="my_derived_schema"
@@ -101,7 +101,7 @@ export const SchemaSetterWSeeds = (props) => {
             margin="dense"
             size="small"
             InputLabelProps={{ shrink: true }}
-            onChange={() => setDerivedSchema(event.target.value)}
+            onChange={(event) => setDerivedSchema(event.target.value)}
           />
           <TextField
             placeholder="my_seed_schema"
@@ -111,7 +111,7 @@ export const SchemaSetterWSeeds = (props) => {
             margin="dense"
             size="small"
             InputLabelProps={{ shrink: true }}
-            onChange={() => setseedSchema(event.target.value)}
+            onChange={(event) => setseedSchema(event.target.value)}
           />
         </Box>
         {props.output(manifestSchema, scratchSchema, derivedSchema, seedSchema)}

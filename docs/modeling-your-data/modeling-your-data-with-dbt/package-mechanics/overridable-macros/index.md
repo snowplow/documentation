@@ -2,6 +2,8 @@
 title: "Overridable macros in Snowplow dbt packages"
 sidebar_label: "Overridable macros"
 sidebar_position: 20
+description: "Override and customize default macros in Snowplow dbt packages to extend package functionality."
+keywords: ["overridable macros", "macro customization", "dbt macros", "custom macros"]
 ---
 ```mdx-code-block
 import Tabs from '@theme/Tabs';

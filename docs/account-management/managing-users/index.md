@@ -1,8 +1,10 @@
 ---
-title: "User management"
+title: "Manage users in Console directly or with SSO"
+sidebar_label: "User management"
 date: "2020-02-15"
 sidebar_position: 1
-sidebar_label: "User management"
+description: "Add and remove users in Snowplow Console, configure Single Sign-On with SAML 2.0 identity providers including Google Workspace, Azure AD, Okta, and OpenID Connect."
+keywords: ["user management", "SSO setup", "Single Sign-On", "SAML", "identity provider", "Azure AD", "Google Workspace", "Okta"]
 ---
 
 There are two ways to add and remove users in Console: directly managed in Console, or managed through your Single Sign-On (SSO) provider.

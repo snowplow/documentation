@@ -1,5 +1,8 @@
 ---
-title: "FAQ: Snowplow Community License (SCL)"
+title: "Snowplow Community License FAQ"
+sidebar_label: "Community License FAQ"
+description: "Frequently asked questions about the Snowplow Community License terms, usage rights, and restrictions."
+keywords: ["community license", "SCL", "license FAQ"]
 ---
 
 :::info Note
@@ -8,9 +11,11 @@ This FAQ is not a substitute for reading [the license text](/community-license-1
 
 :::
 
+This page explains some of the most common questions about the Snowplow Community License.
+
 ## What is the Snowplow Community License?
 
-This is a source-available license based on the Confluent Community License, with changes related to rights and restrictions.
+The Snowplow Community License is a source-available license based on the Confluent Community License, with changes related to rights and restrictions.
 
 ## How does the Snowplow Community License work in practice?
 

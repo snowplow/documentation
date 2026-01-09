@@ -1,7 +1,9 @@
 ---
-title: "Tracking platform and application data with the native mobile trackers"
+title: "Track platform and application data with the native mobile trackers"
 sidebar_label: "Platform and application data"
 sidebar_position: 10
+description: "Automatically capture device and application context including OS version, device model, battery level, and advertising identifiers."
+keywords: ["platform context", "application context", "device information"]
 ---
 
 ```mdx-code-block

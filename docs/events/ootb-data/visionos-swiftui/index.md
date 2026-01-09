@@ -1,5 +1,8 @@
 ---
 title: "visionOS and SwiftUI"
+sidebar_label: "visionOS and SwiftUI"
+description: "Track window groups and immersive spaces in visionOS apps on Apple Vision Pro using SwiftUI context entities and events."
+keywords: ["visionOS", "SwiftUI", "Apple Vision Pro", "window groups", "immersive spaces"]
 ---
 
 ```mdx-code-block

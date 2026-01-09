@@ -1,7 +1,9 @@
 ---
-title: "Automated testing with Snowplow Micro"
+title: "Set up automated testing with Snowplow Micro"
 sidebar_position: 5.5
 sidebar_label: "Automated testing"
+description: "Integrate Snowplow Micro with automated testing frameworks like Nightwatch and Cypress. Build end-to-end GitHub Actions workflows to validate tracking implementations with custom commands and assertions."
+keywords: ["automated testing", "nightwatch", "cypress", "github actions", "e2e testing", "ci/cd"]
 ---
 
 ```mdx-code-block

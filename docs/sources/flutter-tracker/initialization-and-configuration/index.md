@@ -1,7 +1,9 @@
 ---
-title: "Initialization and configuration for the Flutter tracker"
+title: "Initialize and configure the Flutter tracker"
 sidebar_label: "Initialization and configuration"
 sidebar_position: 2000
+description: "Initialize the Flutter tracker with createTracker method and configure TrackerConfiguration, SubjectConfiguration, GdprConfiguration, and EmitterConfiguration. Set up app identifiers, context entities, session tracking, and anonymous tracking options."
+keywords: ["flutter configuration", "tracker initialization", "tracker configuration", "subject configuration", "gdpr configuration"]
 ---
 
 The package provides a single method to initialize and configure a new tracker, the `Snowplow.createTracker` method. It accepts configuration parameters for the tracker and returns a `SnowplowTracker` instance.
@@ -21,16 +23,16 @@ The method returns a `SnowplowTracker` instance. This can be later used for trac
 The only required attributes of the `Snowplow.createTracker` method are `namespace` used to identify the tracker, and the Snowplow collector `endpoint`. Additionally, one can configure the HTTP method to be used when sending events to the collector, as well as a custom POST path, and provide configuration by instantiating classes for `TrackerConfiguration`, `SubjectConfiguration`, or `GdprConfiguration`. By default, events are sent by POST. The following arguments are accepted by the `Snowplow.createTracker` method:
 
 | Attribute        | Type                    | Description                                                                          |
-|------------------|-------------------------|--------------------------------------------------------------------------------------|
+| ---------------- | ----------------------- | ------------------------------------------------------------------------------------ |
 | `namespace`      | `String`                | Tracker namespace to identify the tracker.                                           |
 | `endpoint`       | `String`                | URI for the Snowplow collector endpoint.                                             |
 | `method`         | `Method?`               | HTTP method to use: `Method.get` or `Method.post` (`Method.post` is default).        |
 | `customPostPath` | `String?`               | Custom POST path.                                                                    |
-| `requestHeaders` | `Map<String, String>?` | Map of custom HTTP headers to add to requests to the collector. |
+| `requestHeaders` | `Map<String, String>?`  | Map of custom HTTP headers to add to requests to the collector.                      |
 | `trackerConfig`  | `TrackerConfiguration?` | Configuration of the tracker and the core tracker properties.                        |
 | `gdprConfig`     | `GdprConfiguration?`    | Determines the GDPR context that will be attached to all events sent by the tracker. |
 | `subjectConfig`  | `SubjectConfiguration?` | Subject information about tracked user and device that is added to events.           |
-| `emitterConfig` | `EmitterConfiguration?` | Configuration for how the events are sent.           |
+| `emitterConfig`  | `EmitterConfiguration?` | Configuration for how the events are sent.                                           |
 
 :::note
 The ability to set `customPostPath` was added in v0.2.0. Setting a custom POST path can be useful in avoiding adblockers; it replaces the default "com.snowplowanalytics/snowplow/tp2". Your event collector must also be configured to accept the custom path.
@@ -43,22 +45,22 @@ The `EmitterConfiguration` class was added in v0.3.0.
 
 `TrackerConfiguration` provides options to configure properties and features of the tracker. In addition to setting the app identifier and device platform, the configuration enables turning several automatic context entities on and off.
 
-| Attribute            | Type              | Description                                                                                           | Android | iOS | Web | Default                                       |
-|----------------------|-------------------|-------------------------------------------------------------------------------------------------------|---------|-----|-----|-----------------------------------------------|
-| `appId`              | `String?`         | Identifier of the app.                                                                                | ✔       | ✔   | ✔   | null on Web, bundle identifier on iOS/Android |
-| `devicePlatform`     | `DevicePlatform?` | The device platform the tracker runs on. Available options are provided by the `DevicePlatform` enum. | ✔       | ✔   | ✔   | "web" on Web, "mob" on iOS/Android            |
-| `base64Encoding`     | `bool?`           | Indicates whether payload JSON data should be base64 encoded.                                         | ✔       | ✔   | ✔   | true                                          |
-| `platformContext` | `bool?` | Indicates whether [platform](https://iglucentral.com/schemas/com.snowplowanalytics.snowplow/mobile_context/jsonschema/1-0-2) (mobile) entity should be attached to tracked events. | ✔ | ✔ | | true |
-| `geoLocationContext` | `bool?` | Indicates whether [geo-location](https://iglucentral.com/schemas/com.snowplowanalytics.snowplow/geolocation_context/jsonschema/1-1-0) entity should be attached to tracked events. | ✔ | ✔ | ✔ | false |
-| `sessionContext` | `bool?` | Indicates whether [session](https://iglucentral.com/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) entity should be attached to tracked events. | ✔ | ✔ | ✔ | true |
-| `webPageContext` | `bool?` | Indicates whether a context entity about current [web page](https://iglucentral.com/schemas/com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0) should be attached to tracked events. | | | ✔ | true |
-| `screenContext` | `bool?` | Indicates whether [screen](https://iglucentral.com/schemas/com.snowplowanalytics.mobile/screen/jsonschema/1-0-0) entity should be attached to tracked events. | ✔ | ✔ | | true |
-| `applicationContext` | `bool?` | Indicates whether [application](https://iglucentral.com/schemas/com.snowplowanalytics.mobile/application/jsonschema/1-0-0) entity should be attached to tracked events. | ✔ | ✔ | | true |
-| `webActivityTracking` | `WebActivityTracking?` | Enables activity tracking using page views and pings on the Web. |  |  | ✔ | true |
-| `userAnonymisation` | `bool?` | Anonymizes certain user identifiers. | ✔ | ✔ | ✔ | false |
-| `lifecycleAutotracking` | `bool?` | Indicates whether the [lifecycle](iglu:com.snowplowanalytics.mobile/application_lifecycle/jsonschema/1-0-0) entity and foreground and background events should be autotracked.    | ✔ | ✔ | | true                                         |
-| `screenEngagementAutotracking` | `bool?` | Indicates whether to enable tracking of the screen end event and the screen summary context entity.    | ✔ | ✔ | | true                                         |
-| `platformContextProperties` | `PlatformContextProperties?` | Overrides for the values for properties of the platform context entity.    | ✔ | ✔ | | null                                         |
+| Attribute                      | Type                         | Description                                                                                                                                                                                | Android | iOS | Web | Default                                       |
+| ------------------------------ | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------- | --- | --- | --------------------------------------------- |
+| `appId`                        | `String?`                    | Identifier of the app.                                                                                                                                                                     | ✔       | ✔   | ✔   | null on Web, bundle identifier on iOS/Android |
+| `devicePlatform`               | `DevicePlatform?`            | The device platform the tracker runs on. Available options are provided by the `DevicePlatform` enum.                                                                                      | ✔       | ✔   | ✔   | "web" on Web, "mob" on iOS/Android            |
+| `base64Encoding`               | `bool?`                      | Indicates whether payload JSON data should be base64 encoded.                                                                                                                              | ✔       | ✔   | ✔   | true                                          |
+| `platformContext`              | `bool?`                      | Indicates whether [platform](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/mobile_context/jsonschema/1-0-2) (mobile) entity should be attached to tracked events.          | ✔       | ✔   |     | true                                          |
+| `geoLocationContext`           | `bool?`                      | Indicates whether [geo-location](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/geolocation_context/jsonschema/1-1-0) entity should be attached to tracked events.          | ✔       | ✔   | ✔   | false                                         |
+| `sessionContext`               | `bool?`                      | Indicates whether [session](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) entity should be attached to tracked events.                    | ✔       | ✔   | ✔   | true                                          |
+| `webPageContext`               | `bool?`                      | Indicates whether a context entity about current [web page](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0) should be attached to tracked events. |         |     | ✔   | true                                          |
+| `screenContext`                | `bool?`                      | Indicates whether [screen](http://iglucentral.com/schemas/com.snowplowanalytics.mobile/screen/jsonschema/1-0-0) entity should be attached to tracked events.                               | ✔       | ✔   |     | true                                          |
+| `applicationContext`           | `bool?`                      | Indicates whether [application](http://iglucentral.com/schemas/com.snowplowanalytics.mobile/application/jsonschema/1-0-0) entity should be attached to tracked events.                     | ✔       | ✔   |     | true                                          |
+| `webActivityTracking`          | `WebActivityTracking?`       | Enables activity tracking using page views and pings on the Web.                                                                                                                           |         |     | ✔   | true                                          |
+| `userAnonymisation`            | `bool?`                      | Anonymizes certain user identifiers.                                                                                                                                                       | ✔       | ✔   | ✔   | false                                         |
+| `lifecycleAutotracking`        | `bool?`                      | Indicates whether the [lifecycle](iglu:com.snowplowanalytics.mobile/application_lifecycle/jsonschema/1-0-0) entity and foreground and background events should be autotracked.             | ✔       | ✔   |     | true                                          |
+| `screenEngagementAutotracking` | `bool?`                      | Indicates whether to enable tracking of the screen end event and the screen summary context entity.                                                                                        | ✔       | ✔   |     | true                                          |
+| `platformContextProperties`    | `PlatformContextProperties?` | Overrides for the values for properties of the platform context entity.                                                                                                                    | ✔       | ✔   |     | null                                          |
 
 :::note
 The ability to enable `userAnonymisation`, or the screen and application context entities, was added in v0.3.0.
@@ -83,7 +85,7 @@ See [this page](/docs/sources/flutter-tracker/anonymous-tracking/index.md) for i
 This Configuration class was added in v0.3.0. Currently, the only property is `serverAnonymisation`.
 
 | Attribute             | Type    | Description                                        | Android | iOS | Web | Default |
-|-----------------------|---------|----------------------------------------------------|---------|-----|-----|---------|
+| --------------------- | ------- | -------------------------------------------------- | ------- | --- | --- | ------- |
 | `serverAnonymisation` | `bool?` | Prevents tracking of server-side user identifiers. | ✔       | ✔   | ✔   | false   |
 
 ## Configuration of subject information: `SubjectConfiguration`
@@ -93,7 +95,7 @@ Subject information are persistent and global information about the tracked devi
 Some of the properties are only configurable on iOS and Android and are automatically assigned on the Web.
 
 | Attribute          | Type      | Description                                                     | Android | iOS | Web                              | Default |
-|--------------------|-----------|-----------------------------------------------------------------|---------|-----|----------------------------------|---------|
+| ------------------ | --------- | --------------------------------------------------------------- | ------- | --- | -------------------------------- | ------- |
 | `userId`           | `String?` | Business ID of the user.                                        | ✔       | ✔   | ✔                                |         |
 | `networkUserId`    | `String?` | Network user ID (UUIDv4).                                       | ✔       | ✔   | Non-configurable, auto-assigned. |         |
 | `domainUserId`     | `String?` | Domain user ID (UUIDv4).                                        | ✔       | ✔   | Non-configurable, auto-assigned. |         |
@@ -107,7 +109,7 @@ Some of the properties are only configurable on iOS and Android and are automati
 The configured attributes are mapped to Snowplow event properties described in the [Snowplow Tracker Protocol](/docs/events/index.md). They are mapped as follows:
 
 | Attribute                 | Event Property      |
-|---------------------------|---------------------|
+| ------------------------- | ------------------- |
 | `userId`                  | `uid`               |
 | `networkUserId`           | `network_userid`    |
 | `domainUserId`            | `domain_userid`     |
@@ -125,9 +127,9 @@ The configured attributes are mapped to Snowplow event properties described in t
 
 Determines the GDPR context that will be attached to all events sent by the tracker.
 
-| Attribute            | Type     | Description                  | Android | iOS | Web | Default |
-|----------------------|----------|------------------------------|---------|-----|-----|---------|
-| `basisForProcessing` | `String` | Basis for processing.        | ✔       | ✔   | ✔   |         |
-| `documentId`         | `String` | ID of a GDPR basis document. | ✔       | ✔   | ✔   |         |
-| `documentVersion`    | `String` | Version of the document.     | ✔       | ✔   | ✔   |         |
-| `documentDescription` | `String` | Description of the document. | ✔ | ✔ | ✔ |
+| Attribute             | Type     | Description                  | Android | iOS | Web | Default |
+| --------------------- | -------- | ---------------------------- | ------- | --- | --- | ------- |
+| `basisForProcessing`  | `String` | Basis for processing.        | ✔       | ✔   | ✔   |         |
+| `documentId`          | `String` | ID of a GDPR basis document. | ✔       | ✔   | ✔   |         |
+| `documentVersion`     | `String` | Version of the document.     | ✔       | ✔   | ✔   |         |
+| `documentDescription` | `String` | Description of the document. | ✔       | ✔   | ✔   |

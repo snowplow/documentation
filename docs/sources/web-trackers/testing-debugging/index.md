@@ -1,6 +1,8 @@
 ---
-title: "Testing, debugging and troubleshooting the web trackers"
+title: "Test, debug and troubleshoot the web trackers"
 sidebar_label: "Testing, debugging and troubleshooting"
+description: "Test and debug your web tracker implementation using Snowplow Inspector, Snowplow Micro, and the debugger plugin."
+keywords: ["testing", "debugging", "snowplow inspector", "snowplow micro", "troubleshooting"]
 date: "2021-04-07"
 sidebar_position: 2950
 ---

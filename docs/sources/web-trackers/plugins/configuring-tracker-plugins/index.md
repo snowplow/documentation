@@ -1,6 +1,9 @@
 ---
-title: "Configuring web tracker plugins"
+title: "Configure web tracker plugins"
 sidebar_label: "Configuring tracker plugins"
+description: "Install and configure plugins differently for JavaScript tag and Browser npm tracker versions."
+keywords: ["plugin configuration", "plugin installation", "addplugin"]
+date: "2021-04-07"
 sidebar_position: 750
 ---
 

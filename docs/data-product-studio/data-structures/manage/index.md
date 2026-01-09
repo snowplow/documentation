@@ -1,7 +1,9 @@
 ---
-title: "Managing data structures"
-sidebar_position: 1
+title: "Create and manage data structures in Console"
 sidebar_label: "Manage"
+sidebar_position: 1
+description: "Create, edit, and promote data structures using Console's builder or JSON editor, with draft workflows and environment promotion from development to production."
+keywords: ["data structure management", "schema builder", "JSON editor", "draft workflow", "schema promotion"]
 ---
 
 import ThemedImage from '@theme/ThemedImage';

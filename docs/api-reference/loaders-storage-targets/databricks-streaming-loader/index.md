@@ -2,6 +2,8 @@
 title: "Databricks Streaming Loader"
 sidebar_label: "Databricks Streaming Loader"
 sidebar_position: 5
+description: "Load Snowplow events to Databricks with low latency using Lakeflow Declarative Pipelines and Unity Catalog volumes."
+keywords: ["databricks loader", "lakeflow", "unity catalog", "databricks lakehouse"]
 ---
 
 ```mdx-code-block
@@ -117,12 +119,12 @@ Note that the volume must be an [external volume](https://docs.databricks.com/aw
 
 The Databricks Streaming Loader can be configured to send the following custom metrics to a [StatsD](https://www.datadoghq.com/statsd-monitoring/) receiver:
 
-| Metric                      | Definition |
-|-----------------------------|------------|
-| `events_good`               | A count of events that are successfully written to the Databricks volume. |
-| `events_bad`                | A count of failed events that could not be loaded, and were instead sent to the bad output stream. |
-| `latency_millis`            | The time in milliseconds from when events are written to the source stream of events (i.e. by Enrich) until when they are read by the loader. |
-| `e2e_latency_millis`        | The end-to-end latency of the snowplow pipeline. The time in milliseconds from when an event was received by the collector, until it is written to the Databricks volume. |
+| Metric               | Definition                                                                                                                                                                |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `events_good`        | A count of events that are successfully written to the Databricks volume.                                                                                                 |
+| `events_bad`         | A count of failed events that could not be loaded, and were instead sent to the bad output stream.                                                                        |
+| `latency_millis`     | The time in milliseconds from when events are written to the source stream of events (i.e. by Enrich) until when they are read by the loader.                             |
+| `e2e_latency_millis` | The end-to-end latency of the snowplow pipeline. The time in milliseconds from when an event was received by the collector, until it is written to the Databricks volume. |
 
 See the `monitoring.metrics.statsd` options in the [configuration reference](/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/configuration-reference/index.md) for how to configure the StatsD receiver.
 

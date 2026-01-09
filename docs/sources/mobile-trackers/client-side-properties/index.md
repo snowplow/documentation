@@ -1,8 +1,10 @@
 ---
-title: "Tracking client side properties in the native mobile trackers"
+title: "Track client side properties in the native mobile trackers"
 sidebar_label: "Tracking specific client-side properties"
 date: "2022-08-30"
 sidebar_position: 30
+description: "Configure user and device properties to automatically attach to all mobile tracker events using SubjectConfiguration."
+keywords: ["client properties", "subject configuration", "user identifiers"]
 ---
 
 ```mdx-code-block

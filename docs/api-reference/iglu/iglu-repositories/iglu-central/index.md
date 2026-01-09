@@ -1,7 +1,10 @@
 ---
-title: "Iglu Central"
+title: "Iglu Central public schema repository"
+sidebar_label: "Iglu Central"
 date: "2021-03-26"
 sidebar_position: 1000
+description: "Public machine-readable repository of Snowplow JSON schemas hosted on Amazon S3 with self-hosting support via igluctl."
+keywords: ["iglu central", "public schema repository", "snowplow schemas"]
 ---
 
 [Iglu Central](https://iglucentral.com/) is a public repository of JSON Schemas hosted by Snowplow Analytics.

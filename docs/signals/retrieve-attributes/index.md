@@ -1,8 +1,9 @@
 ---
-title: "Retrieving calculated values from the Profiles Store"
+title: "Retrieve calculated attributes from the Profiles Store"
 sidebar_position: 30
 sidebar_label: "Retrieve attributes"
-description: "Access calculated attributes from the Profiles Store using Snowplow Signals SDKs or API for real-time personalization."
+description: "Fetch calculated attributes from the Profiles Store using services or individual attribute groups. Use the Signals Python SDK, Node.js SDK, or API to retrieve user-specific values for real-time personalization."
+keywords: ["retrieve attributes", "profiles store", "get attributes", "signals sdk", "signals api"]
 ---
 
 ```mdx-code-block

@@ -1,7 +1,10 @@
 ---
-title: "Iglu Common Architecture"
+title: "Iglu architecture and design principles"
+sidebar_label: "Design and architecture"
 date: "2021-03-26"
 sidebar_position: 0
+description: "Technical design principles for the Iglu schema registry including self-describing JSON schemas, SchemaVer versioning, and schema resolution algorithms."
+keywords: ["iglu architecture", "self-describing json", "schemaver", "schema resolution"]
 ---
 
 Iglu is built on a set of technical design decisions which are documented in this section. It is this set of design decisions that allow Iglu clients and repositories to interoperate.

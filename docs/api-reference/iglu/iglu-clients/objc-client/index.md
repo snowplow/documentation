@@ -1,7 +1,10 @@
 ---
-title: "ObjC client"
+title: "Objective-C Iglu client"
+sidebar_label: "ObjC client"
 date: "2021-03-26"
 sidebar_position: 30
+description: "Iglu client library for Objective-C with JSON schema resolution and validation for iOS 7.0+ and macOS 10.9+."
+keywords: ["objective-c iglu client", "ios schema validation", "macos iglu"]
 ---
 
 The [Iglu Objc client](https://github.com/snowplow/iglu-objc-client) allows you to resolve JSON Schemas from embedded and remote repositories. It does not yet let you write to repositories in any way (e.g. you can't publish new schemas to an Iglu repository).

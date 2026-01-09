@@ -1,7 +1,10 @@
 ---
 title: "Google Play Data safety (Android)"
+sidebar_label: "Google Play Data safety (Android)"
 date: "2021-11-24"
 sidebar_position: 200
+description: "Guidance for declaring data collection and handling practices when publishing Android apps using the Snowplow tracker to Google Play."
+keywords: ["google play data safety", "android privacy", "data collection declaration"]
 ---
 
 Google Play require developers to declare how they collect and handle user data within their app. The provided information is shown on the Google Play store listing.

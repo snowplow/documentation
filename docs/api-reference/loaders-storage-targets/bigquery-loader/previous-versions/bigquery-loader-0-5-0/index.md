@@ -1,7 +1,10 @@
 ---
 title: "BigQuery Loader (0.5.x)"
+sidebar_label: "BigQuery Loader (0.5.x)"
 date: "2020-05-18"
 sidebar_position: 20
+description: "BigQuery Loader 0.5.x with Repeater replacing Forwarder and improved failed insert recovery for BigQuery loading."
+keywords: ["bigquery loader 0.5", "bigquery repeater", "failed inserts", "loader 0.5", "legacy bigquery"]
 ---
 
 ## Technical Architecture

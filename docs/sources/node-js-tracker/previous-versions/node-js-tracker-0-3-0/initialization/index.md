@@ -1,7 +1,10 @@
 ---
 title: "Initialization"
+sidebar_label: "Initialization"
 date: "2020-02-26"
 sidebar_position: 200
+description: "Initialize Node.js tracker v0.3.0 with configuration settings."
+keywords: ["node.js tracker v0.3.0 initialization", "tracker configuration"]
 ---
 
 Assuming you have completed the [Node.js Tracker Setup](/docs/sources/node-js-tracker/previous-versions/node-js-tracker-0-3-0/setup/index.md) for your project, you are now ready to initialize the Tracker.

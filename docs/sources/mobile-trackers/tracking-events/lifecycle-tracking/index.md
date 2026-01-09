@@ -1,7 +1,9 @@
 ---
-title: "Tracking application lifecycle changes with the native mobile trackers"
+title: "Track application lifecycle changes with the native mobile trackers"
 sidebar_label: "Application lifecycle"
 sidebar_position: 30
+description: "Automatically track application foreground and background transitions to understand app usage patterns."
+keywords: ["lifecycle tracking", "foreground background events", "app state changes"]
 ---
 
 ```mdx-code-block

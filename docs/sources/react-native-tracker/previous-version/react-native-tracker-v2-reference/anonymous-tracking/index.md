@@ -1,7 +1,10 @@
 ---
 title: "Anonymous Tracking"
+sidebar_label: "Anonymous Tracking"
 date: "2022-08-30"
 sidebar_position: 25
+description: "Enable client-side and server-side user anonymization in React Native tracker v2 to disable user and session identifiers."
+keywords: ["react native tracker v2 anonymous tracking", "user anonymization", "privacy tracking"]
 ---
 
 ```mdx-code-block

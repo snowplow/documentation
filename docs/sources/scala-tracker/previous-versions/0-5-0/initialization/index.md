@@ -1,7 +1,10 @@
 ---
 title: "Initialization"
+sidebar_label: "Initialization"
 date: "2020-02-26"
 sidebar_position: 20
+description: "Initialize Scala tracker 0.5.0 with async and sync emitters, configure subjects, enable EC2/GCE contexts, and add callbacks for event delivery."
+keywords: ["scala 0.5 initialization", "async emitter", "batch emitter"]
 ---
 
 ## Tracker

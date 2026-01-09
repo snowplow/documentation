@@ -3,6 +3,8 @@ title: "RDB Loader 2.0.0 upgrade guide"
 sidebar_label: "2.0.0 upgrade guide"
 date: "2021-12-01"
 sidebar_position: -10
+description: "Upgrade RDB Loader to 2.0.0 with separate configs for Loader and Shredder, SNS messaging, and split configuration architecture."
+keywords: ["rdb loader 2.0 upgrade", "sns messaging", "split configs", "shredder config", "loader config"]
 ---
 
 RDB Loader 2.0.0 brings ability to send shredding complete messages from Shredder to SNS topic and splits configs of RDB Loader and RDB Shredder. From now on, Loader and Shredder will not use same config.

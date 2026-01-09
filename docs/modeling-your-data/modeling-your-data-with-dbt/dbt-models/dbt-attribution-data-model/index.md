@@ -1,7 +1,8 @@
 ---
 title: "Snowplow Attribution dbt package"
 sidebar_label: "Attribution"
-description: "The Snowplow Attribution dbt Package"
+description: "Marketing attribution analysis with Snowplow dbt package supporting first-touch, last-touch, position-based, and linear attribution models."
+keywords: ["attribution modeling", "marketing attribution", "dbt attribution", "ROAS", "conversion paths", "attribution data model"]
 sidebar_position: 10
 ---
 

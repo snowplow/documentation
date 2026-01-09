@@ -1,8 +1,10 @@
 ---
-title: "Managing schemas using Iglu"
-date: "2020-02-15"
+title: "Manage schemas using Iglu Server"
 sidebar_label: "Iglu"
+date: "2020-02-15"
 sidebar_position: 4
+description: "Manage schemas with Iglu Server or host a static Iglu registry in Amazon S3 or Google Cloud Storage for self-hosted Snowplow deployments."
+keywords: ["Iglu Server", "schema management", "static registry", "S3 registry", "GCS registry"]
 ---
 
 To manage your [schemas](/docs/fundamentals/schemas/index.md), you will need to have an [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) installed (you will already have one if you followed the [Snowplow Self-Hosted Quick Start](/docs/get-started/self-hosted/index.md)).

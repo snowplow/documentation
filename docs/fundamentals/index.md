@@ -3,6 +3,7 @@ title: "Snowplow fundamentals"
 sidebar_position: 2
 sidebar_label: "Fundamentals"
 description: "An overview of what a Snowplow pipeline does and what steps it includes"
+keywords: ["Snowplow pipeline", "architecture", "trackers", "enrichment", "data warehouses", "collector"]
 ---
 
 ![Pipeline architecture diagram](images/architecture.png)

@@ -1,6 +1,8 @@
 ---
-title: "Custom event tracking on web"
+title: "Track custom events on web"
 sidebar_label: "Custom event tracking"
+description: "Track self-describing events and attach custom entities using JSON schemas for flexible data capture."
+keywords: ["self-describing events", "custom entities", "json schemas", "custom tracking"]
 date: "2022-08-30"
 sidebar_position: 2600
 ---

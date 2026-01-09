@@ -2,6 +2,8 @@
 title: "Declarative entities with Global Context"
 date: "2022-08-30"
 sidebar_position: 20
+description: "Documentation for Declarative entities with Global Context in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

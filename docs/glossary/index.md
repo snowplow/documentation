@@ -1,7 +1,10 @@
 ---
 title: "Glossary"
+sidebar_label: "Glossary"
 date: "2025-05-12"
 sidebar_position: 100
+description: "Comprehensive glossary of Snowplow terms covering components, concepts, legal terms, and product offerings."
+keywords: ["glossary", "terminology", "Snowplow terms", "definitions", "data pipeline concepts"]
 ---
 
 This page provides a glossary of terms used by Snowplow.

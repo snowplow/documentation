@@ -1,6 +1,8 @@
 ---
-title: "Configuring plugins for the browser (npm) tracker"
+title: "Configure plugins for the browser (npm) tracker"
 sidebar_label: "Browser (npm) tracker"
+description: "Add plugins to the Browser tracker during or after initialization using npm packages."
+keywords: ["browser tracker plugins", "npm plugins", "addplugin", "plugin initialization"]
 date: "2021-04-19"
 sidebar_position: 500
 ---

@@ -1,6 +1,8 @@
 ---
-title: "Backfilling"
-description: "Steps for backfilling the data models"
+title: "Backfill your data"
+sidebar_label: "Backfilling"
+description: "Steps for backfilling the data models after initialization, adding custom models, or following a full refresh."
+keywords: ["dbt backfilling", "backfill data models", "incremental processing"]
 sidebar_position: 10
 ---
 

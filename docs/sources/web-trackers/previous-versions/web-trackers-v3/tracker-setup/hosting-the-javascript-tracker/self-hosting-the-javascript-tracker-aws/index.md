@@ -1,6 +1,8 @@
 ---
 title: "Self Hosting the JavaScript Tracker on AWS"
 sidebar_position: 100
+description: "Documentation for tracking Self Hosting the JavaScript Tracker on AWS with the web tracker."
+keywords: ["tracking", "events"]
 ---
 
 ## Pre-requisites

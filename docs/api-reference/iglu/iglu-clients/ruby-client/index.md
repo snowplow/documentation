@@ -1,7 +1,10 @@
 ---
-title: "Ruby client"
+title: "Ruby Iglu client"
+sidebar_label: "Ruby client"
 date: "2021-03-26"
 sidebar_position: 60
+description: "Ruby Iglu client library for resolving and validating JSON schemas from embedded and remote repositories with JRuby support."
+keywords: ["ruby iglu client", "jruby", "ruby schema validation"]
 ---
 
 The [Iglu Ruby client](https://github.com/snowplow/iglu-ruby-client) allows you to resolve JSON Schemas from embedded and remote repositories.

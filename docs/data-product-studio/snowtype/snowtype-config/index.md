@@ -1,7 +1,9 @@
 ---
 title: "Snowtype configuration options"
-sidebar_position: 3
 sidebar_label: "Configuration options"
+sidebar_position: 3
+description: "Configure Snowtype code generation with options for output paths, tracker selection, language settings, and custom templates."
+keywords: ["Snowtype configuration", "config options", "code generation settings", "Snowtype setup"]
 ---
 
 ```mdx-code-block

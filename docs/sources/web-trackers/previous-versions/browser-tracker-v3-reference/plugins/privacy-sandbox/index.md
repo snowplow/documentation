@@ -1,6 +1,8 @@
 ---
 title: "Privacy Sandbox"
 sidebar_position: 14500
+description: "Documentation for Privacy Sandbox in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

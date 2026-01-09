@@ -1,7 +1,9 @@
 ---
-title: "Tracking ecommerce events with the native mobile trackers"
+title: "Track ecommerce events with the native mobile trackers"
 sidebar_label: "Ecommerce"
 sidebar_position: 70
+description: "Track comprehensive ecommerce interactions including product views, cart actions, checkouts, and transactions in mobile apps."
+keywords: ["ecommerce tracking", "transaction events", "mobile shopping analytics"]
 ---
 
 ```mdx-code-block

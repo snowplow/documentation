@@ -2,6 +2,9 @@
 title: "Android (0.3.0)"
 date: "2020-03-02"
 sidebar_position: 980
+sidebar_label: "Android (0.3.0)"
+description: "Legacy documentation for Android Tracker version 0.3.0."
+keywords: ["android 0.3.0", "tracker"]
 ---
 
 This page refers to version 0.3.0 of the Snowplow Android Tracker.

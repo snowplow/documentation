@@ -1,6 +1,9 @@
 ---
-title: Snowplow Template
+title: "Snowplow GTM template"
+sidebar_label: "Snowplow template"
 sidebar_position: 200
+description: "Configure Snowplow v4 tag types in Google Tag Manager including ad tracking, button clicks, cart events, site search, timing, enhanced consent, ecommerce, error tracking, page views, link clicks, and form tracking with custom commands."
+keywords: ["gtm tag types", "snowplow v4 tags", "gtm event tracking", "tag template configuration", "gtm custom tags"]
 ---
 
 This template implements the [Snowplow JavaScript tracker](/docs/sources/web-trackers/index.md) for Google Tag Manager. It allows for the sending of [Snowplow events](docs/events/index.md) from your website to your Snowplow collector.

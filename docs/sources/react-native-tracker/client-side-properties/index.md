@@ -1,8 +1,10 @@
 ---
-title: "Tracking client side properties with the React Native tracker"
+title: "Track client side properties with the React Native tracker"
 sidebar_label: "Tracking specific client-side properties"
 date: "2022-08-30"
 sidebar_position: 23
+description: "Configure and update subject properties including user ID, IP address, timezone, language, and screen resolution at tracker initialization or runtime."
+keywords: ["react native subject", "user properties", "client-side properties"]
 ---
 
 ```mdx-code-block

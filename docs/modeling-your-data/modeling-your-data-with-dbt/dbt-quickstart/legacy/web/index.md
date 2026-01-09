@@ -2,6 +2,8 @@
 sidebar_label: "Web"
 sidebar_position: 700
 title: "Web Quickstart"
+description: "Quick start guide for the legacy Snowplow Web dbt package to model web event data into page views, sessions, and users."
+keywords: ["web quickstart", "legacy web package", "dbt web setup"]
 ---
 
 ```mdx-code-block

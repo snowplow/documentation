@@ -1,9 +1,12 @@
 ---
-title: "6.0.x Upgrade Guide"
+title: "Enrich 6.0.x upgrade guide"
+sidebar_label: "6.0.x upgrade guide"
 sidebar_position: 50
+description: "Upgrade guide for Snowplow Enrich 6.0.x covering common-streams refactoring, configuration changes, and deprecated features."
+keywords: ["enrich 6.0", "common-streams", "configuration migration"]
 ---
 
-In version 6.0.0, Enrich is refactored to use [common-streams](https://github.com/snowplow-incubator/common-streams) libraries under the hood. [common-streams](https://github.com/snowplow-incubator/common-streams) is the collection of libraries that contains streaming-related constructs commonly used across many Snowplow streaming applications. 
+In version 6.0.0, Enrich is refactored to use [common-streams](https://github.com/snowplow-incubator/common-streams) libraries under the hood. [common-streams](https://github.com/snowplow-incubator/common-streams) is the collection of libraries that contains streaming-related constructs commonly used across many Snowplow streaming applications.
 
 [common-streams](https://github.com/snowplow-incubator/common-streams) allows for the adjustment of many different settings. It also provides default values for most of these settings, which are battle-tested. Therefore, we recommend using default values whenever it is possible. You can find more information about defaults in [configuration reference](/docs/api-reference/enrichment-components/configuration-reference/index.md).
 

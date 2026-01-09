@@ -1,6 +1,9 @@
 ---
 title: "Snowplow v3 Tags"
+sidebar_label: "Snowplow v3 Tags"
 sidebar_position: 1000
+description: "Configure legacy Snowplow v3 tag types in GTM for ad tracking, cart events, error tracking, consent, site search, social interactions, structured events, and timing with parameter objects and custom commands."
+keywords: ["v3 tags", "gtm v3 tag types", "legacy v3 tracking", "v3 event tracking", "v3 tag configuration"]
 ---
 
 Snowplow provides custom GTM Tag templates for general Snowplow tracking, as well as ecommerce tracking.

@@ -1,6 +1,8 @@
 ---
 title: 'Vimeo Tracking'
 sidebar_position: 16500
+description: "Documentation for tracking Vimeo Tracking with the web tracker."
+keywords: ["tracking", "events"]
 ---
 
 ```mdx-code-block

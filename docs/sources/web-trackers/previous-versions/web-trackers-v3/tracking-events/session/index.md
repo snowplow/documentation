@@ -1,6 +1,8 @@
 ---
 title: "Sessions"
 sidebar_position: 35
+description: "Documentation for Sessions in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

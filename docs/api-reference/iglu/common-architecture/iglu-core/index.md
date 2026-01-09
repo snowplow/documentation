@@ -1,7 +1,10 @@
 ---
-title: "Iglu Core"
+title: "Core Iglu components and data structures"
+sidebar_label: "Core components"
 date: "2021-03-26"
 sidebar_position: 120
+description: "Platform-agnostic core components for Iglu with SchemaKey, SchemaVer, and SchemaCriterion data structures for consistent schema handling."
+keywords: ["iglu core", "schemakey", "schemaver", "schema structures"]
 ---
 
 Iglu is designed to be not dependent on any particular programming language or platform. But there's growing set of applications beside clients and registries using different concepts originated from Iglu. To have consistent data structures and behavior among different applications, we're developing Iglu core libraries for different languages.

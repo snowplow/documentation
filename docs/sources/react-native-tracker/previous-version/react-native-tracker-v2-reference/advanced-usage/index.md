@@ -1,7 +1,10 @@
 ---
 title: "Advanced usage"
+sidebar_label: "Advanced usage"
 date: "2021-08-09"
 sidebar_position: 40
+description: "Remove trackers at runtime and access React Native tracker v2 from native iOS and Android code for hybrid tracking."
+keywords: ["react native tracker v2 advanced", "remove tracker", "native code access"]
 ---
 
 ## Removing a tracker at runtime

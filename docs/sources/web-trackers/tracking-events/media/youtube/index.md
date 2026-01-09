@@ -2,6 +2,8 @@
 title: "YouTube media tracking on web"
 sidebar_label: "YouTube"
 sidebar_position: 20
+description: "Automatically track YouTube video players embedded via iframe or YouTube IFrame API with playback events, quality changes, and buffer tracking."
+keywords: ["youtube", "video tracking"]
 ---
 
 ```mdx-code-block

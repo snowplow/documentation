@@ -1,6 +1,8 @@
 ---
-title: "Managing multiple trackers on web"
+title: "Manage multiple trackers on web"
 sidebar_label: "Managing multiple trackers"
+description: "Run multiple tracker instances to send events to different collectors with targeted method execution."
+keywords: ["multiple trackers", "tracker namespaces", "multi-collector tracking"]
 date: "2021-03-31"
 sidebar_position: 4000
 ---

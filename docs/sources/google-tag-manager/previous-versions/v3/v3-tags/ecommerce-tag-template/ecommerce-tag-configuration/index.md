@@ -1,6 +1,9 @@
 ---
 title: "Ecommerce Tag Configuration"
+sidebar_label: "Ecommerce Tag Configuration"
 sidebar_position: 100
+description: "Configure the Snowplow v3 Ecommerce Tag Template in GTM using native Snowplow Ecommerce API or transitional GA4/UA adapter APIs. Set tracking parameters, custom contexts, and product data for legacy v3 ecommerce tracking."
+keywords: ["v3 ecommerce configuration", "v3 ga4 ecommerce", "v3 ua ecommerce", "v3 ecommerce api", "legacy v3 ecommerce setup"]
 ---
 
 ```mdx-code-block

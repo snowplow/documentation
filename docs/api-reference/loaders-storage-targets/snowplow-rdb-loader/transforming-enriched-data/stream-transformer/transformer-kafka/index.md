@@ -1,6 +1,9 @@
 ---
-title: "Transformer Kafka"
+title: "Transformer Kafka for Azure streams"
+sidebar_label: "Transformer Kafka"
 sidebar_position: 30
+description: "Stream transformer for Azure that reads enriched events from Kafka and writes transformed data to Azure Blob Storage in real-time."
+keywords: ["transformer kafka", "azure transformer", "kafka transformer", "azure blob storage", "event hubs transformer"]
 ---
 
 ```mdx-code-block
@@ -27,7 +30,7 @@ The transformer takes two configuration files:
 - a `config.hocon` file with application settings
 - an `iglu_resolver.json` file with the resolver configuration for your [Iglu](https://github.com/snowplow/iglu) schema registry.
 
-An example of the minimal required config for the Transformer Kafla can be found [here](https://github.com/snowplow/snowplow-rdb-loader/tree/master/config/transformer/azure/transformer.kafka.config.minimal.hocon) and a more detailed one [here](https://github.com/snowplow/snowplow-rdb-loader/tree/master/config/transformer/azure/transformer.kafka.config.reference.hocon). For details about each setting, see the [configuration reference](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/stream-transformer/transformer-kafka/configuration-reference/index.md).
+An example of the minimal required config for the Transformer Kafka can be found [here](https://github.com/snowplow/snowplow-rdb-loader/tree/master/config/transformer/azure/transformer.kafka.config.minimal.hocon) and a more detailed one [here](https://github.com/snowplow/snowplow-rdb-loader/tree/master/config/transformer/azure/transformer.kafka.config.reference.hocon). For details about each setting, see the [configuration reference](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/stream-transformer/transformer-kafka/configuration-reference/index.md).
 
 See [here](/docs/api-reference/iglu/iglu-resolver/index.md) for details on how to prepare the Iglu resolver file.
 

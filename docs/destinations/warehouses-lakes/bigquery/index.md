@@ -1,7 +1,9 @@
 ---
-title: "BigQuery"
+title: "Load Snowplow data to BigQuery"
+sidebar_label: "BigQuery"
 sidebar_position: 30
-description: "Send Snowplow data to BigQuery for analytics and data warehousing"
+description: "Send Snowplow data to BigQuery for analytics and data warehousing with automatic table creation, schema evolution, and cross-batch deduplication."
+keywords: ["BigQuery", "Google Cloud", "data warehouse", "streaming loader", "batch loader"]
 ---
 
 ```mdx-code-block

@@ -1,7 +1,10 @@
 ---
-title: "Self-describing JSON Schemas"
+title: "Self-describing JSON schemas and vendor metadata"
+sidebar_label: "Self-describing JSON schemas"
 date: "2021-03-26"
 sidebar_position: 30
+description: "JSON Schema extension with self property containing vendor, name, format, and version metadata for schema identification."
+keywords: ["self-describing json schema", "json schema metadata", "iglu schema"]
 ---
 
 _This page is adapted from the Snowplow Analytics blog post, [Introducing self-describing JSONs](http://snowplowanalytics.com/blog/2014/05/15/introducing-self-describing-jsons/)._

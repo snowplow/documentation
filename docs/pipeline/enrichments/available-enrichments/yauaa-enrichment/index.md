@@ -2,6 +2,8 @@
 title: "YAUAA enrichment"
 sidebar_position: 9
 sidebar_label: YAUAA
+description: "Parse user agent strings with advanced detection using Yet Another UserAgent Analyzer for detailed device insights."
+keywords: ["YAUAA", "user agent analysis", "device fingerprinting"]
 ---
 
 YAUAA (Yet Another User Agent Analyzer) enrichment is a powerful user agent parser and analyzer.

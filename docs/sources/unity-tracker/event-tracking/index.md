@@ -1,8 +1,10 @@
 ---
-title: "Tracking events with the Unity tracker"
+title: "Track events with the Unity tracker"
 sidebar_label: "Event tracking"
 date: "2020-02-26"
 sidebar_position: 80
+description: "Track page views, screen views, structured events, timing events, self-describing events, and ecommerce transactions in Unity applications."
+keywords: ["unity event tracking", "unity screenview tracking", "unity ecommerce tracking"]
 ---
 
 You track events by building an event payload using event-specific Builder objects, and passing the result to a tracker instance's `Track()` method.

@@ -2,6 +2,7 @@
 title: "Mixpanel to Snowplow"
 date: "2025-01-09"
 sidebar_position: 5
+sidebar_label: "Mixpanel"
 description: "Migrate from Mixpanel to Snowplow with guidance on event tracking, user profiles, super properties, and warehouse modeling."
 keywords: ["mixpanel", "migration", "tracking plan", "data products", "user profiles", "super properties", "event tracking"]
 ---

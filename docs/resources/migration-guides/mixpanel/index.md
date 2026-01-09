@@ -11,7 +11,7 @@ This guide is to help technical implementers migrate from Mixpanel to Snowplow.
 
 ## Platform differences
 
-There are significant differences between Mixpanel and Snowplow as data platforms. For migration, it's important to understand how Snowplow structures events differently from Mixpanel. This affects how you'll implement tracking and how you'll model the warehouse data.
+There are significant differences between Mixpanel and Snowplow as data platforms. For migration, understanding how Snowplow structures events affects how you'll implement tracking and how you'll model the warehouse data.
 
 This table shows some key differences:
 
@@ -28,7 +28,7 @@ This table shows some key differences:
 
 ### Event structure
 
-Mixpanel's core method for tracking user behavior is `track()`. Here's an example custom web ecommerce Mixpanel event. The event name is `Product Purchased`, describing the action taken. The properties object provides contextual information about the specific purchase:
+Mixpanel tracks user behavior with `track()`. Here's an example custom web ecommerce Mixpanel event. The event name is `Product Purchased`, describing the action taken. The properties object provides contextual information about the specific purchase:
 
 ```javascript
 mixpanel.track('Product Purchased', {
@@ -40,7 +40,7 @@ mixpanel.track('Product Purchased', {
 });
 ```
 
-This event would be loaded into Mixpanel's events warehouse table with properties as columns. The exact table structure depends on your Mixpanel warehouse export configuration.
+This event loads into Mixpanel's events warehouse table with properties as columns. The table structure depends on your Mixpanel warehouse export configuration.
 
 To track the same behavior with Snowplow, you could use the [web ecommerce](/docs/sources/web-trackers/tracking-events/ecommerce/index.md) `trackTransaction` event. Alternatively, you could define a custom `product_purchased` schema and track it as a [self-describing event](/docs/fundamentals/events/index.md#self-describing-events):
 
@@ -86,7 +86,7 @@ mixpanel.people.set({
 });
 ```
 
-In Mixpanel's warehouse export, events and user profiles are typically stored in separate tables. Analysts must join these tables to analyze user behavior with profile attributes.
+In Mixpanel warehouse exports, events and user profiles are typically stored in separate tables. Analysts must join these tables to analyze user behavior with profile attributes.
 
 Snowplow takes an event-centric approach. There's no separate user profile system. Instead, you attach user attribute entities to events as needed:
 
@@ -126,9 +126,9 @@ This table shows how example Mixpanel tracking calls could be mapped to Snowplow
 
 ## Data validation
 
-Mixpanel offers optional Tracking Plans for defining expected events and properties. The suggested Mixpanel approach is to first track some events, then use those events as the basis for a template. You can choose how to handle validation failures: filter out events that don't match their specification, allow with warnings, or pass after autocorrecting minor issues. Using a Tracking Plan is optional.
+Mixpanel offers optional Tracking Plans for defining expected events and properties. The suggested Mixpanel approach is to first track some events, then use those events as the basis for a template. You can choose how to handle validation failures: filter out events that don't match their specification, allow with warnings, or pass after autocorrecting minor issues. Tracking Plans are optional.
 
-Schematic event specification isn't optional for Snowplow. Every event and entity is defined by a [JSON schema](/docs/fundamentals/schemas/index.md), called a data structure. The data payload itself contains a reference to the specific data structure and version that defines it. The events are always validated as they're processed through the Snowplow pipeline, and events that fail validation are filtered out.
+Event specification is required for Snowplow. Every event and entity is defined by a [JSON schema](/docs/fundamentals/schemas/index.md), called a data structure. The data payload itself contains a reference to the specific data structure and version that defines it. The events are always validated as they're processed through the Snowplow pipeline, and events that fail validation are filtered out.
 
 Snowplow provides [monitoring](/docs/monitoring/index.md) and alerting for failed events. You can choose to load failed events into a separate table in your warehouse, or to analyze them in temporary buckets. This strict approach ensures high data quality.
 
@@ -142,14 +142,14 @@ The Snowplow CLI includes an [MCP server](/docs/data-product-studio/snowplow-cli
 
 ## Migration phases
 
-We recommend using a parallel-run migration approach. This process can be divided into three phases:
+Use a parallel-run migration approach. This process can be divided into three phases:
 1. Assess and plan
 2. Implement and validate
 3. Cutover and finalize
 
 ### 1. Assess and plan
 
-Your existing Mixpanel Tracking Plans will serve as the foundation for your new Snowplow implementation. Before migration, we advise auditing your tracking calls and Tracking Plans. Are all the events and properties still relevant?
+Use your existing Mixpanel Tracking Plans as the foundation for your new Snowplow implementation. Before migration, audit your tracking calls and Tracking Plans. Are all the events and properties still relevant?
 
 Start documenting all downstream data consumers, such as BI dashboards, dbt models, ML pipelines, or marketing automation workflows, that may need updating after migration.
 
@@ -168,10 +168,6 @@ You'll need to translate your Mixpanel Tracking Plans into Snowplow [data produc
 
 The goal is to create a set of JSON data structures for all your events and entities, organized into data products and [event specifications](/docs/data-product-studio/event-specifications/index.md). The best way to import your new data product tracking plans into Snowplow is to use the [Snowplow CLI](/docs/data-product-studio/snowplow-cli/index.md).
 
-:::info Snowplow CLI MCP server
-The Snowplow CLI includes an [MCP server](/docs/data-product-studio/snowplow-cli/index.md#mcp-server) to help you translate your Mixpanel Tracking Plans into Snowplow data products.
-:::
-
 In this phase, you'll also need to decide what to do with historical data. There are two main choices:
 * Coexistence: leave historical Mixpanel data in existing tables. Write queries that combine data from both systems, using a transformation layer (for example, in dbt) to create compatible structures.
 * Unification: transform and backfill historical Mixpanel data into the Snowplow format. This requires a custom engineering project to export Mixpanel data, reshape it into the Snowplow enriched event format, and load it into the warehouse. The result is a unified historical dataset. Note that this is more complex for Mixpanel than other platforms due to the separation of events and user profiles.
@@ -188,7 +184,7 @@ Follow the [Snowplow CDI getting started instructions](/docs/get-started/private
 If you haven't done this yet, use the [Snowplow CLI](/docs/data-product-studio/snowplow-cli/index.md) to import your new data products plan into Snowplow. You can also inspect and edit data products using the Snowplow Console. They'll be available to the Snowplow pipeline for data validation on publishing. Use the Snowplow CLI or Console to publish.
 
 Add Snowplow tracking in parallel with your existing Mixpanel tracking:
-* If you have a web platform, we recommend starting here
+* If you have a web platform, start here
   * The [Snowplow Inspector browser extension](/docs/testing/snowplow-inspector/index.md) is a useful manual testing tool
   * Start with non-critical pages or features
 * Implement a tracker SDK, and track a small number of built-in events, such as [page views](/docs/sources/web-trackers/quick-start-guide/index.md)

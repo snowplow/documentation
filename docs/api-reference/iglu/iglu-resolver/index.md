@@ -24,7 +24,7 @@ Most of the time, configuring Iglu Resolver (or Client) means adding following J
         "vendorPrefixes": [ "com.snowplowanalytics" ],
         "connection": {
           "http": {
-            "uri": "http://iglucentral.com"
+            "uri": "https://iglucentral.com"
           }
         }
       },

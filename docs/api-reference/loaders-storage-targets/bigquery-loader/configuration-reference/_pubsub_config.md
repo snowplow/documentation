@@ -32,14 +32,14 @@
     </td>
 </tr>
 <tr>
-    <td><code>input.retries.transientErrors.delay</code></td>
+    <td><code>input.retries.transientErrors.delay</code> (since 2.1.0)</td>
     <td>
       Optional. Default value <code>100 millis</code>.
       Backoff delay for follow-up attempts
     </td>
 </tr>
 <tr>
-    <td><code>input.retries.transientErrors.attempts</code></td>
+    <td><code>input.retries.transientErrors.attempts</code> (since 2.1.0)</td>
     <td>
       Optional. Default value <code>10</code>.
       Max number of attempts, after which Enrich will crash and exit

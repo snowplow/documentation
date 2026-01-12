@@ -67,6 +67,6 @@
     <td>Optional.  Default value 1000000.  Any single event failed event sent to Kinesis should not exceed this size in bytes</td>
 </tr>
 <tr>
-    <td><code>output.bad.maxRetries</code> (since 0.4.0)</td>
+    <td><code>output.bad.maxRetries</code> (since 2.1.0)</td>
     <td>Optional. Default value 10. Maximum number of retries by Kinesis Client.</td>
 </tr>

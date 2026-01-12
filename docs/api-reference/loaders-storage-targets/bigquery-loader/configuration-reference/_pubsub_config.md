@@ -16,7 +16,7 @@
       Optional. Default value <code>0.1</code>.
       Controls when ack deadlines are re-extended, for a message that is close to exceeding its ack deadline.
       For example, if <code>durationPerAckExtension</code> is <code>15 seconds</code> and <code>minRemainingAckDeadline</code> is <code>0.1</code> then the loader
-      will wait until there is <code>1.5 seconds</code> left of the remining deadline, before re-extending the message deadline.
+      will wait until there is <code>1.5 seconds</code> left of the remaining deadline, before re-extending the message deadline.
     </td>
 </tr>
 <tr>
@@ -35,14 +35,14 @@
     <td><code>input.retries.transientErrors.delay</code> (since 2.1.0)</td>
     <td>
       Optional. Default value <code>100 millis</code>.
-      Backoff delay for follow-up attempts
+      backoff delay for follow-up attempts after transient errors.
     </td>
 </tr>
 <tr>
     <td><code>input.retries.transientErrors.attempts</code> (since 2.1.0)</td>
     <td>
       Optional. Default value <code>10</code>.
-      Max number of attempts, after which Enrich will crash and exit
+      max number of attempts, after which the loader will crash and exit.
     </td>
 </tr>
 <tr>

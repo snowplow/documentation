@@ -32,5 +32,5 @@ import Link from '@docusaurus/Link';
 </tr>
 <tr>
     <td><code>output.bad.maxRecordSize</code></td>
-    <td>Optional.  Default value 1000000.  Any single failed event sent to Kafka should not exceed this size in bytes</td>
+    <td>Optional. Default value 1000000. Any single failed event sent to Kafka should not exceed this size in bytes</td>
 </tr>

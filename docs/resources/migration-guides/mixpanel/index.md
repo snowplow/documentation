@@ -137,7 +137,7 @@ The Snowplow equivalent to Mixpanel Tracking Plans is [data products](/docs/fund
 You can use the Snowplow Console, API, or CLI to [define your tracking data structures](/docs/data-product-studio/data-products/index.md). For each event you can specify when it should be tracked, and which entities should be added. Once you've defined your event specifications, use [Snowtype](/docs/data-product-studio/snowtype/index.md) to automatically generate the tracking code snippets.
 
 :::info Snowplow CLI MCP server
-The Snowplow CLI includes an [MCP server](/docs/data-product-studio/snowplow-cli/index.md#mcp-server) to help you translate your Mixpanel Tracking Plans into Snowplow data products.
+The Snowplow CLI includes an [MCP server](/docs/data-product-studio/mcp-server/index.md) to help you translate your Mixpanel Tracking Plans into Snowplow data products.
 :::
 
 ## Migration phases

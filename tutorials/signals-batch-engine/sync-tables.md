@@ -1,19 +1,16 @@
 ---
 position: 7
 title: Sync the attribute tables with the Signals Profiles Store
-sidebar_label: Sync attribute tables
+sidebar_label: Sync attribute snapshot
 description: "Register warehouse attribute tables as batch sources in Signals to enable hourly syncing to the Profiles Store for real-time access in applications."
-keywords: ["signals profiles store sync", "batch source registration"]
+keywords: ["signals profiles store sync", "batch source registration", "dbt snapshot"]
 ---
 
-Syncing is the process of making your modeled and validated attributes table, and its calculated attributes available in Signals for production use. Under the hood the attributes table in your warehouse will be synced to the online store periodically. In order for it to work you need to let the sync engine know about your attributes table.
+Syncing is the process of making your calculated attributes available in Signals for production use. After the attributes table is ready for production use, you should run `dbt snapshot`. The sync engine will use this table to understand which records have been changed since the last sync. In order for it to work you need to let the sync engine know about the location of your dbt snapshot.
 
 There are two steps to enable syncing:
-1. Fill out the `batch_source_config.json` file for each model
+1. Fill out the `batch_source_config.json` file for each dbt project (one project per attribute group)
 2. Run the `sync` command
-
-You'll need to sync each attributes table individually.
-
 
 ## Update configuration file
 
@@ -23,9 +20,9 @@ During data model generation, a config file is generated in `config/batch_source
 {
     "database": "",       # Add your database name
     "wh_schema": "",      # Add your schema
-    "table": "user_attributes_1_attributes",
+    "table": "user_attributes_1_attributes_snapshot",
     "name": "user_attributes_1_attributes",
-    "timestamp_field": "valid_at_tstamp",
+    "timestamp_field": "dbt_valid_from",
     "description": "Table containing attributes for user_attributes_1 attribute group",
     "tags": {},
     "owner": ""
@@ -34,7 +31,7 @@ During data model generation, a config file is generated in `config/batch_source
 
 Fill out the `database` (for BigQuery this should be the project) and `wh_schema` values as per your [dbt target](https://docs.getdbt.com/reference/dbt-jinja-functions/target) setup.
 
-The warehouse schema should be the `schema` defined in your dbt target, suffixed with `_derived` (`{target_schema}_derived`). This is where the generated attributes tables are located by default.
+The warehouse schema should be the `schema` defined in your dbt target, suffixed with `_derived` (`{target_schema}_derived`). This is where the generated attributes table and snapshot are located by default.
 
 ## Run the sync command
 
@@ -50,9 +47,7 @@ snowplow-batch-engine sync \
 
 The batch engine will first register the batch source for the attribute group. It will also publish the attribute group so that syncing can begin.
 
-Signals will check for updates to the table every hour. Your attributes will soon be available to retrieve in your applications.
-
-Please note that syncing happens based on the records being updated since the last time a job was run. This is determined by the `timestamp_field` specified in the `batch_source_config.json`. As the attributes table is regenerated each time, this means that all the records will get synced. To keep costs down, please schedule the dbt run frequency accordingly (e.g. run it daily).
+Signals will check for updates to the table every hour. Changes will be captured in the next sync if both the dbt run and the dbt snapshot update have finished. Your attributes will then become available to retrieve in your applications.
 
 ```bash
 # Progress messages

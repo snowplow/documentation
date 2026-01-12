@@ -71,13 +71,13 @@ As the fields in Redshift are part of a different table, we need to join that ta
 2. Use a CTE and macro to get the records from the entity table, adding fields needed to deduplicate
 3. Join this onto events this run, using a specific set of conditions to manage duplicates but keep _genuine_ same-valued records.
 
-We use the `snowplow_utils.get_sde_or_context` [<Icon icon="fa-brands fa-github"/>](https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/get_sde_or_context.sql) macro, which takes 5 arguments:
-- `schema`: The schema in your warehouse that the table is in
-- `identifier`: The table name for the entity
-- `lower_limit`: The lower limit of the event time to scan
-- `upper_limit`: The upper limit of the event time to scan
-- `prefix`: The prefix to apply to all column names
-- `single_entity`: If it is a single-valued entity
+We use the [`snowplow_utils.get_sde_or_context` macro](https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/utils/get_sde_or_context.sql), which takes five arguments:
+- `schema`: the schema in your warehouse that the table is in
+- `identifier`: the table name for the entity
+- `lower_limit`: the lower limit of the event time to scan
+- `upper_limit`: the upper limit of the event time to scan
+- `prefix`: the prefix to apply to all column names
+- `single_entity`: if it is a single-valued entity
 
 In this case, we want to make sure to set `single_entity` to false as we are explicitly using a multi-valued entity.
 
@@ -94,7 +94,7 @@ select
     a.*,
     b.my_ent_my_field
 from {{ ref('snowplow_<package_name>_base_events_this_run') }} a
-left join contexts_my_entity_1 b on 
+left join contexts_my_entity_1 b on
     a.event_id = b.yauaa__id  -- match the event id between the tables, note the dobule underscore
     and a.collector_tstamp = b.yauaa__tstamp -- match the collector timestamp between the tables, note the double underscore
     and mod(b.yauaa__index, a.event_id_dedupe_count) = 0 -- ensure one version of each potentially duplicated entity in context

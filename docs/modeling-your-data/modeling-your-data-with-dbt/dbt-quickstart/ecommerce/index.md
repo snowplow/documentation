@@ -138,7 +138,7 @@ vars:
 
 ### 9. Verify your variables using our Config guides (Optional)
 
-If you are unsure whether the default values set are good enough in your case or you would already like to maximize the potential of your models, you can dive deeper into the meaning behind our variables on our [Config](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/index.mdx) page. It includes a [Config Generator](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/index.mdx#Generator) to help you create all your variable configurations, if necessary.
+If you are unsure whether the default values set are good enough in your case or you would already like to maximize the potential of your models, you can dive deeper into the meaning behind our variables on our [Config](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/ecommerce/index.mdx) page. It includes a [Config Generator](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/ecommerce/index.mdx#config-generator) to help you create all your variable configurations, if necessary.
 
 
 ### 10. Run your model

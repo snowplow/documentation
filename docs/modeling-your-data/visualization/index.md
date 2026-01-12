@@ -101,7 +101,7 @@ Many of the visualizations support the exporting of the SQL used to generate the
 Note that some data is processed further after the query to get it into the format required for plotting, which may include actions such as filtering, pivoting, etc.
 
 ### Help
-The visualizations provide help text throughout: keep an eye out for the help icon (<Icon icon="fa-regular fa-circle-question"/>) to get more context or help in using some functionality.
+The visualizations provide help text throughout: keep an eye out for the help icon to get more context or help in using some functionality.
 
 ### Log out
 If you wish to log out of the visualization, you can do this from the sidebar. Note that this also logs you out of the Console.

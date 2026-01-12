@@ -1,8 +1,8 @@
 ---
-title: "Mixpanel to Snowplow"
+title: "Migrate from Mixpanel to Snowplow"
 date: "2025-01-09"
 sidebar_position: 5
-sidebar_label: "Mixpanel"
+sidebar_label: "Mixpanel to Snowplow"
 description: "Migrate from Mixpanel to Snowplow with guidance on event tracking, user profiles, super properties, and warehouse modeling."
 keywords: ["mixpanel", "migration", "tracking plan", "data products", "user profiles", "super properties", "event tracking"]
 ---
@@ -15,16 +15,16 @@ There are significant differences between Mixpanel and Snowplow as data platform
 
 This table shows some key differences:
 
-| Feature                 | Mixpanel                                                                                  | Snowplow                                                                                                                                                                    |
-| ----------------------- | ----------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Capturing user behavior | Uses `track()` for events                                                                 | Choose from the built-in event types, or use `trackSelfDescribingEvent` to track a custom [event](/docs/fundamentals/events/index.md)                                       |
-| Contextual event data   | Included in the event `properties` object                                                 | Included in the event as reusable [entities](/docs/fundamentals/entities/index.md)                                                                                          |
-| User identity           | Managed via `identify()`, `alias()`, `reset()` with `distinct_id` and `$device_id`        | Use `setUserId()` for identified users; tracker handles anonymous identity                                                                                                  |
-| User attributes         | Separate user profiles via `.people.set()`, `.people.increment()`, and related methods    | Attach user attribute entities to events                                                                                                                                    |
-| Super properties        | Global properties via `register()` applied to all events                                  | Use global context entities or tracker configuration                                                                                                                        |
+| Feature                 | Mixpanel                                                                                     | Snowplow                                                                                                                                                                    |
+| ----------------------- | -------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Capturing user behavior | Uses `track()` for events                                                                    | Choose from the built-in event types, or use `trackSelfDescribingEvent` to track a custom [event](/docs/fundamentals/events/index.md)                                       |
+| Contextual event data   | Included in the event `properties` object                                                    | Included in the event as reusable [entities](/docs/fundamentals/entities/index.md)                                                                                          |
+| User identity           | Managed via `identify()`, `alias()`, `reset()` with `distinct_id` and `$device_id`           | Use `setUserId()` for identified users; tracker handles anonymous identity                                                                                                  |
+| User attributes         | Separate user profiles via `.people.set()`, `.people.increment()`, and related methods       | Attach user attribute entities to events                                                                                                                                    |
+| Super properties        | Global properties via `register()` applied to all events                                     | Use global context entities or tracker configuration                                                                                                                        |
 | Group analytics         | Track group membership via `track_with_groups()` and manage via `add_group()`, `set_group()` | Attach custom group entities to relevant events                                                                                                                             |
-| Warehouse tables        | Events in single or per-event-type tables; user profiles in separate table                | In [most warehouses](/docs/destinations/warehouses-lakes/index.md), one big table with columns for every event or entity; in Redshift, one table per custom event or entity |
-| Data validation         | Optional Tracking Plans                                                                   | All events and entities defined by JSON schemas                                                                                                                             |
+| Warehouse tables        | Events in single or per-event-type tables; user profiles in separate table                   | In [most warehouses](/docs/destinations/warehouses-lakes/index.md), one big table with columns for every event or entity; in Redshift, one table per custom event or entity |
+| Data validation         | Optional Tracking Plans                                                                      | All events and entities defined by JSON schemas                                                                                                                             |
 
 ### Event structure
 
@@ -113,16 +113,16 @@ This event-centric approach means user state is reconstructed from the event str
 
 This table shows how example Mixpanel tracking calls could be mapped to Snowplow tracking:
 
-| Mixpanel API Call        | Mixpanel Example                                                             | Snowplow Implementation                                                                                                                                                      |
-| ------------------------ | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `track()`                | `mixpanel.track('Order Completed', {revenue: 99.99})`                        | Use one of the built-in event types, or define a custom `order_completed` schema containing `revenue` property and track with `trackSelfDescribingEvent`.                    |
-| `identify()`             | `mixpanel.identify('user_123')`                                              | Use `setUserId('user_123')` to set user ID for all subsequent events.                                                                                                        |
-| `alias()`                | `mixpanel.alias('user_123', 'anon_456')`                                     | No direct equivalent. Track identity changes as custom events with `user_alias_created` schema if needed for analysis. Use `setUserId` to update the current user identifier. |
-| `register()`             | `mixpanel.register({plan: 'premium'})`                                       | Use global context entities or store properties in tracker configuration and attach as entities to all events.                                                               |
-| `.people.set()`          | `mixpanel.people.set({email: 'user@example.com'})`                           | Attach custom user entities to events. Model user attributes in warehouse from event stream.                                                                                 |
-| `.people.increment()`    | `mixpanel.people.increment('page_views')`                                    | Track events and calculate aggregates in warehouse using dbt models.                                                                                                         |
-| `.track_with_groups()`   | `mixpanel.track_with_groups('Button Clicked', {groupId: 'company-123'})`     | Attach custom group entities to events containing group identifiers and relevant group properties.                                                                           |
-| `reset()`                | `mixpanel.reset()`                                                           | Clear user ID with `setUserId(null)` or equivalent, depending on tracker. The tracker will generate a new anonymous identifier.                                              |
+| Mixpanel API Call      | Mixpanel Example                                                         | Snowplow Implementation                                                                                                                                                       |
+| ---------------------- | ------------------------------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `track()`              | `mixpanel.track('Order Completed', {revenue: 99.99})`                    | Use one of the built-in event types, or define a custom `order_completed` schema containing `revenue` property and track with `trackSelfDescribingEvent`.                     |
+| `identify()`           | `mixpanel.identify('user_123')`                                          | Use `setUserId('user_123')` to set user ID for all subsequent events.                                                                                                         |
+| `alias()`              | `mixpanel.alias('user_123', 'anon_456')`                                 | No direct equivalent. Track identity changes as custom events with `user_alias_created` schema if needed for analysis. Use `setUserId` to update the current user identifier. |
+| `register()`           | `mixpanel.register({plan: 'premium'})`                                   | Use global context entities or store properties in tracker configuration and attach as entities to all events.                                                                |
+| `.people.set()`        | `mixpanel.people.set({email: 'user@example.com'})`                       | Attach custom user entities to events. Model user attributes in warehouse from event stream.                                                                                  |
+| `.people.increment()`  | `mixpanel.people.increment('page_views')`                                | Track events and calculate aggregates in warehouse using dbt models.                                                                                                          |
+| `.track_with_groups()` | `mixpanel.track_with_groups('Button Clicked', {groupId: 'company-123'})` | Attach custom group entities to events containing group identifiers and relevant group properties.                                                                            |
+| `reset()`              | `mixpanel.reset()`                                                       | Clear user ID with `setUserId(null)` or equivalent, depending on tracker. The tracker will generate a new anonymous identifier.                                               |
 
 ## Data validation
 

@@ -1,6 +1,9 @@
 ---
-title: "Normalize"
+title: "Migration guide for Normalize"
+sidebar_label: "Normalize"
 sidebar_position: 40
+description: "Migration guide for upgrading the Snowplow Normalize dbt package including breaking changes and configuration updates."
+keywords: ["normalize migration", "normalize upgrade", "dbt normalize version"]
 ---
 
 ### Upgrading to 0.3.0

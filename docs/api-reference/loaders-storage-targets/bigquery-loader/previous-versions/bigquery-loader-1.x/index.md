@@ -1,6 +1,9 @@
 ---
 title: "BigQuery Loader (1.x)"
+sidebar_label: "BigQuery Loader (1.x)"
 sidebar_position: 0
+description: "Legacy BigQuery Loader 1.x documentation with StreamLoader, Mutator, and Repeater applications for loading events into BigQuery."
+keywords: ["bigquery loader 1.x", "streamloader", "bigquery mutator", "bigquery repeater", "legacy loader"]
 ---
 
 ```mdx-code-block
@@ -15,7 +18,7 @@ Under the umbrella of Snowplow BigQuery Loader, we have a family of applications
 
 :::tip Schemas in BigQuery
 
-For more information on how events are stored in BigQuery, check the [mapping between Snowplow schemas and the corresponding BigQuery column types](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md?warehouse=bigquery).
+For more information on how events are stored in BigQuery, check the [mapping between Snowplow schemas and the corresponding BigQuery column types](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md?warehouse=bigquery).
 
 :::
 

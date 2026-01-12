@@ -1,7 +1,9 @@
 ---
-title: "Video and Media Analytics"
+title: "Video and Media Analytics visualization"
 sidebar_position: 5
 sidebar_label: "Video and Media Analytics"
+description: "Video and media analytics visualization with dashboards for watch time, audience retention, and in-media ad performance."
+keywords: ["video analytics", "media analytics", "watch time", "audience retention"]
 ---
 
 While 91% of businesses use video as a marketing tool, few businesses deeply understand how their users interact with this content and what effect this has on business metrics. Collecting vital engagement data plays a significant role in understanding your audience, optimizing your content, and measuring the impact of your video and media marketing efforts.
@@ -16,7 +18,7 @@ Our Video and Media Analytics visualization helps you visualize insights on your
 
 - Running the [Snowplow Media dbt Package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md)
 - Access to the derived tables granted to the role used when setting up the visualization
-- Media events tracked using the media APIs for the [JavaScript (Media plugins)](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/index.md) or [mobile trackers](/docs/sources/trackers/mobile-trackers/tracking-events/media-tracking/index.md). Note that there are multiple JavaScript tracker media plugins available. Implementation of a v2 plugin is required for this visualization to work as intended.
+- Media events tracked using the media APIs for the [JavaScript (Media plugins)](/docs/sources/web-trackers/tracking-events/media/index.md) or [mobile trackers](/docs/sources/mobile-trackers/tracking-events/media-tracking/index.md). Note that there are multiple JavaScript tracker media plugins available. Implementation of a v2 plugin is required for this visualization to work as intended.
 
 ## Usage
 

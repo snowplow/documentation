@@ -2,6 +2,8 @@
 sidebar_label: "Web"
 sidebar_position: 700
 title: "Web Quickstart"
+description: "Quick start guide for the legacy Snowplow Web dbt package to model web event data into page views, sessions, and users."
+keywords: ["web quickstart", "legacy web package", "dbt web setup"]
 ---
 
 ```mdx-code-block
@@ -10,13 +12,11 @@ import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
 <Accelerator href="https://docs.snowplow.io/accelerators/web/" name="Advanced Analytics for Web"/>
 ```
 
-## Requirements
+In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web events dataset being available in your database, the requirements are:
 
-In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web events dataset being available in your database:
-
-- [Snowplow Javascript tracker](/docs/sources/trackers/javascript-trackers/index.md) version 2 or later implemented.
-- Web Page context [enabled](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md#webpage-context) (enabled by default in [v3+](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md#webpage-context)).
-- [Page view events](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/index.md#page-views) implemented.
+- [Snowplow Javascript tracker](/docs/sources/web-trackers/index.md) version 2 or later implemented.
+- Web Page context [enabled](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md#webpage-context) (enabled by default in [v3+](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md#webpage-context)).
+- [Page view events](/docs/sources/web-trackers/tracking-events/index.md#page-views) implemented.
 - From version v0.13.0 onwards you must be using [RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) v4.0.0 and above, or [BigQuery Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) v1.0.0 and above. If you are not using these versions, or are using the Postgres loader, you will need to set `snowplow__enable_load_tstamp` to `false` in your `dbt_project.yml` and will not be able to use the consent models.
 
 ## Installation
@@ -94,7 +94,7 @@ vars:
 
 ### 6. Verify page ping variables
 
-The web package processes page ping events to calculate web page engagement times. If your [tracker configuration](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/index.md#activity-tracking-page-pings) for `min_visit_length` (default 5) and `heartbeat` (default 10) differs from the defaults provided in this package, you can override by adding to your `dbt_project.yml`:
+The web package processes page ping events to calculate web page engagement times. If your [tracker configuration](/docs/sources/web-trackers/tracking-events/index.md#activity-tracking-page-pings) for `min_visit_length` (default 5) and `heartbeat` (default 10) differs from the defaults provided in this package, you can override by adding to your `dbt_project.yml`:
 
 ```yml title="dbt_project.yml"
 vars:
@@ -141,9 +141,3 @@ dbt run --selector snowplow_web
 
 ### 9. Enable extras
 The package comes with additional modules and functionality that you can enable, for more information see the [consent tracking](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/consent-module/index.md), [conversions](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/conversions/index.md), and [core web vitals](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/core-web-vitals-module/index.md) documentation.
-
-:::tip
-
-For some common analytical queries to run on the derived web data, take a look at our page [here](/docs/resources/recipes-tutorials/recipe-dbt-web-queries/index.md)!
-
-:::

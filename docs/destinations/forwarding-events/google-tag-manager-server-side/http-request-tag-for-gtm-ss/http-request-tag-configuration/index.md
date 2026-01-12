@@ -1,10 +1,11 @@
 ---
-title: "HTTP Request Tag Configuration"
+title: "Configure HTTP Request Tag for GTM Server Side"
+sidebar_label: "Configuration"
 date: "2022-01-06"
 sidebar_position: 100
+description: "Configure JSON request body construction, entity mapping, custom headers, and post-processing for the HTTP Request Tag in GTM Server Side."
+keywords: ["HTTP Request Tag configuration", "JSON body", "entity mapping", "custom endpoints"]
 ---
-
-## Video Walkthrough
 
 In the following short video a complete example configuration of the Snowplow GTM SS HTTP Request Tag is presented.
 
@@ -324,7 +325,7 @@ The standard log properties are:
 Depending on the type of log, additional properties are logged:
 
 | Type of log | Additional information                                         |
-|-------------|----------------------------------------------------------------|
+| ----------- | -------------------------------------------------------------- |
 | Message     | “Message”                                                      |
 | Request     | “RequestMethod”, “RequestUrl”, “RequestHeaders”, “RequestBody” |
 | Response    | “ResponseStatusCode”, “ResponseHeaders”, “ResponseBody”        |

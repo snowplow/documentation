@@ -1,5 +1,8 @@
 ---
 title: "App performance"
+sidebar_label: "App performance"
+description: "Track web vitals, navigation timing, and custom performance metrics using automatic plugins or manual timing events."
+keywords: ["web vitals", "performance tracking", "navigation timing", "timing events"]
 ---
 
 ```mdx-code-block
@@ -38,7 +41,7 @@ Enables tracking web performance metrics categorized as [Web Vitals](https://web
 
 #### How to track?
 
-Use the [Web vitals plugin for the JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/web-vitals/index.md).
+Use the [Web vitals plugin for the JavaScript tracker](/docs/sources/web-trackers/tracking-events/web-vitals/index.md).
 
 #### Modeled data using the snowplow-web dbt package
 
@@ -46,10 +49,10 @@ To process raw web vitals event data, we have included an optional module to mod
 
 This custom module consists of a series of dbt models which produce the following aggregated models from the raw web vitals events:
 
-Derived table | Table description | 
----|---|---
-`snowplow_web_vitals` | Incremental table used as a base for storing core web vital events (first event per page view). | [Docs](https://snowplow.github.io/dbt-snowplow-web/#!/model/model.snowplow_web.snowplow_web_vitals)
-`snowplow_web_vital_measurements` | Drop and recompute table to use for visualizations that takes core web vital measurements at the user specified percentile point (defaulted to 75). | [Docs](https://snowplow.github.io/dbt-snowplow-web/#!/model/model.snowplow_web.snowplow_web_vital_measurements)
+| Derived table                     | Table description                                                                                                                                   | dbt                                                                                                             |
+| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `snowplow_web_vitals`             | Incremental table used as a base for storing core web vital events (first event per page view).                                                     | [Docs](https://snowplow.github.io/dbt-snowplow-web/#!/model/model.snowplow_web.snowplow_web_vitals)             |
+| `snowplow_web_vital_measurements` | Drop and recompute table to use for visualizations that takes core web vital measurements at the user specified percentile point (defaulted to 75). | [Docs](https://snowplow.github.io/dbt-snowplow-web/#!/model/model.snowplow_web.snowplow_web_vital_measurements) |
 
 
 ### Performance navigation timing context entity
@@ -62,7 +65,7 @@ This plugin will add Performance Navigation Timing contexts to tracked events.
 
 #### How to track?
 
-Using the [Performance Navigation Timing plugin for the JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/timings/index.md).
+Using the [Performance Navigation Timing plugin for the JavaScript tracker](/docs/sources/web-trackers/tracking-events/timings/index.md).
 
 ## Manually tracked timing events
 
@@ -75,5 +78,5 @@ They enable you to manually track timing information measured within your app.
 
 ### How to track?
 
-1. Using the [JavaScript tracker on Web](/docs/sources/trackers/javascript-trackers/web-tracker/previous-versions/javascript-tracker-v2/tracking-specific-events/index.md#tracktiming).
-2. [iOS and Android trackers](/docs/sources/trackers/mobile-trackers/tracking-events/index.md#creating-a-timing-event).
+1. Using the [JavaScript tracker on Web](/docs/sources/web-trackers/previous-versions/javascript-tracker-v2/tracking-specific-events/index.md#tracktiming).
+2. [iOS and Android trackers](/docs/sources/mobile-trackers/tracking-events/index.md#creating-a-timing-event).

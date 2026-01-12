@@ -1,6 +1,8 @@
 ---
-title: "Users and Identity Stitching"
+title: "Users and identity stitching"
+sidebar_label: "Users and identity stitching"
 description: "Details on mapping between `domain_userid` and `user_id` in our packages."
+keywords: ["identity stitching", "user mapping", "user identifiers", "stitched user ID"]
 sidebar_position: 10
 ---
 ```mdx-code-block
@@ -25,7 +27,7 @@ This works by having an `User Mapping` table that collects and incrementally upd
 The `snowplow_unified` package means that all the user data, from both web and mobile, is modeled in one place. This makes it easy to effectively perform cross-platform stitching, which means that as soon as a users identify themselves by logging in as the same user on separate platforms, all the user data will be found within one package making it convenient for performing further analysis. We encourage everyone to take the base stitching logic provided by the package further by applying a custom aggregation downstream layer that takes the first/last fields per stitched_user_id from the users table as well a applying additional stitching based on custom user_mapping table(s) depending on need.
 
 :::info Multiple user_id / user identifier
-In order for the user_mapping table to successfully update the stitched_user_id field in the users table, it needs to stay unique on session_identifier which means that if for some reason there are multiple user_ids per user_identifier, we take the latest one. For a standard use case when the user_identifier is a cookie based domain_userid and the user_stitching_id is the logged in atomic.user_id field, we encourage everyone to [remove cookies](/docs/sources/trackers/javascript-trackers/web-tracker/anonymous-tracking/index.md#clear-user-data) to force creating a new session upon the user log out action to avoid a scenario when multiple users log in and out quickly after one another on the same device (e.g. school, library). For tracking advice, have a look at [this](/docs/events/ootb-data/user-and-session-identification/index.md#reset-generated-identifiers-after-the-user-logs-out/) documentation.
+In order for the user_mapping table to successfully update the stitched_user_id field in the users table, it needs to stay unique on session_identifier which means that if for some reason there are multiple user_ids per user_identifier, we take the latest one. For a standard use case when the user_identifier is a cookie based domain_userid and the user_stitching_id is the logged in atomic.user_id field, we encourage everyone to [remove cookies](/docs/sources/web-trackers/anonymous-tracking/index.md#clear-user-data) to force creating a new session upon the user log out action to avoid a scenario when multiple users log in and out quickly after one another on the same device (e.g. school, library). For tracking advice, have a look at [this](/docs/events/ootb-data/user-and-session-identification/index.md#reset-generated-identifiers-after-the-user-logs-out/) documentation.
 :::
 
 
@@ -75,9 +77,9 @@ vars:
 
 If you need a specific way to refer to a custom user you can also use the `snowplow_user_sql` variable, which will override any default or overwrites on `snowplow__user_identifiers`.
 
-Please note, however, that the `snowplow__user_identifiers` variable is not designed to handle user stitching the way you might expect it. Currently, there is a limitation that if any of the identifiers in the list do not persist throughout the session, there is no guarantee that the highest-prestige identifier (first in the list) will take precedence. 
+Please note, however, that the `snowplow__user_identifiers` variable is not designed to handle user stitching the way you might expect it. Currently, there is a limitation that if any of the identifiers in the list do not persist throughout the session, there is no guarantee that the highest-prestige identifier (first in the list) will take precedence.
 
-This is particularly relevant for those adding user_id as the first element in their list, as it may be NULL for some events within a session. For that it is best to rely on the package based user stitching logic, leave user_id as the `snowplow__user_stitching_id` and rely on the `stitched_user_id` field produced by the package in each derived tables as the main identifier field. This way even if the user logged in for some period of the time within a session the user_id field will be found and prioritized over the rest. 
+This is particularly relevant for those adding user_id as the first element in their list, as it may be NULL for some events within a session. For that it is best to rely on the package based user stitching logic, leave user_id as the `snowplow__user_stitching_id` and rely on the `stitched_user_id` field produced by the package in each derived tables as the main identifier field. This way even if the user logged in for some period of the time within a session the user_id field will be found and prioritized over the rest.
 
 Alternatively, to ensure a deterministic user selection, you could rely on the `snowplow_user_sql` variable instead to something like this:
 

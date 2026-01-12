@@ -1,7 +1,10 @@
 ---
-title: "Usage Guide"
+title: "Snowplow Mini usage guide"
+sidebar_label: "Usage guide"
 date: "2021-05-11"
 sidebar_position: 3
+description: "Learn how to use Snowplow Mini for testing, debugging trackers, and exploring Snowplow features."
+keywords: ["snowplow mini", "usage guide", "testing", "debugging", "mini dashboard"]
 ---
 
 ## Overview
@@ -198,7 +201,7 @@ where `service_name` can be one of the following: `collector`, `enrich`, `esLoad
 
 ## Configuring telemetry
 
-See our [telemetry principles](/docs/get-started/snowplow-community-edition/telemetry/index.md) for more information on telemetry.
+See our [telemetry principles](/docs/get-started/self-hosted/telemetry/index.md) for more information on telemetry.
 
 HTTP GET to get current configuration
 

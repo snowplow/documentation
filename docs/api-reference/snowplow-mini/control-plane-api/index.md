@@ -1,7 +1,10 @@
 ---
-title: "Control Plane API"
+title: "Snowplow Mini Control Plane API"
+sidebar_label: "Control Plane API"
 date: "2021-05-11"
 sidebar_position: 4
+description: "Control and configure a Snowplow Mini instance through the Control Plane API with HTTP authentication."
+keywords: ["snowplow mini", "control plane api", "mini configuration"]
 ---
 
 Snowplow Mini Control Plane API is created for controlling and configuring the Snowplow Mini instance without ssh to it.
@@ -64,7 +67,7 @@ where `service_name` can be one of the following: `collector`, `enrich`, `esLoad
 
 #### Configuring telemetry
 
-See our [telemetry principles](/docs/get-started/snowplow-community-edition/telemetry/index.md) for more information on telemetry.
+See our [telemetry principles](/docs/get-started/self-hosted/telemetry/index.md) for more information on telemetry.
 
 HTTP GET to get current configuration
 

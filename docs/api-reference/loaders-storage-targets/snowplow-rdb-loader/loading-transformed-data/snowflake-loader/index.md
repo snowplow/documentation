@@ -1,7 +1,10 @@
 ---
-title: "Snowflake loader"
+title: "Load into Snowflake using the RDB Loader"
+sidebar_label: "Into Snowflake"
 date: "2022-04-05"
 sidebar_position: 20
+description: "Load wide row JSON data into Snowflake on AWS, GCP, or Azure with TempCreds or NoCreds authentication methods."
+keywords: ["snowflake loader", "snowflake rdb", "wide row json", "snowflake copy", "snowflake stage"]
 ---
 
 ```mdx-code-block
@@ -14,7 +17,7 @@ It is possible to run Snowflake Loader on AWS, GCP and Azure.
 
 ### Setting up Snowflake
 
-You can use the steps outlined in our [quick start guide](/docs/get-started/snowplow-community-edition/quick-start/index.md?warehouse=snowflake#prepare-the-destination) to create most of the necessary Snowflake resources.
+You can use the steps outlined in our [quick start guide](/docs/get-started/self-hosted/quick-start/index.md?warehouse=snowflake#prepare-the-destination) to create most of the necessary Snowflake resources.
 
 There are two different authentication methods with Snowflake Loader:
 * With the `TempCreds` method, there are no additional Snowflake resources needed.
@@ -43,7 +46,7 @@ Finally, use the `transformedStage` [configuration setting](/docs/api-reference/
 
 ### Running the loader
 
-There are dedicated terraform modules for deploying Snowflake Loader on [AWS](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-ec2/aws/latest) and [Azure](https://github.com/snowplow-devops/terraform-azurerm-snowflake-loader-vmss). You can see how they are used in our full pipeline deployment examples [here](/docs/get-started/snowplow-community-edition/quick-start/index.md).
+There are dedicated terraform modules for deploying Snowflake Loader on [AWS](https://registry.terraform.io/modules/snowplow-devops/snowflake-loader-ec2/aws/latest) and [Azure](https://github.com/snowplow-devops/terraform-azurerm-snowflake-loader-vmss). You can see how they are used in our full pipeline deployment examples [here](/docs/get-started/self-hosted/quick-start/index.md).
 
 We don't have a terraform module for deploying Snowflake Loader on GCP yet. Therefore, it needs to be deployed manually at the moment.
 

@@ -28,6 +28,7 @@ Mailgun
 Marketo
 MaxMind
 Microsoft Entra
+ngrok
 Nightwatch
 npm
 Okta
@@ -53,7 +54,7 @@ Data Product Studio
 Data Model Packs
 Data Model Pack
 AWS Console
-BDP Console
+Snowplow Console
 Iglu Central
 Iglu Server
 Igluctl
@@ -65,9 +66,11 @@ KPIs
 SDKs
 SLAs
 URIs
+IPs
 
 (un)?ack(s|ing|ed)?
 [aA]d(-?)blocker
+[aA]gentic
 [aA]llowlist(s)?
 [aA]nonymization
 [aA]nonymization
@@ -76,6 +79,7 @@ URIs
 [aA]nonymizing
 [aA]sync
 [aA]utogenerate(d?)
+[aA]utotrack(ed|ing)?
 [bB]ackfill(ed|ing)?
 [bB]ackoff
 [bB]oolean
@@ -139,3 +143,5 @@ READMEs
 [uU]tils
 [vV]iewport
 [wW]alkthrough
+
+[aA]gentic

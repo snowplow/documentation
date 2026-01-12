@@ -1,5 +1,8 @@
 ---
 title: "Consent events (Enhanced Consent)"
+sidebar_label: "Consent events"
+description: "Track GDPR consent preferences, CMP visibility, and marketing consent with enhanced consent events and legacy consent APIs."
+keywords: ["consent tracking", "GDPR", "consent preferences", "CMP", "marketing consent"]
 ---
 
 ```mdx-code-block
@@ -36,7 +39,7 @@ Enhanced consent is the recommended way to track marketing consent events on you
 
 ## How to track?
 
-To track enhanced consent events using the JavaScript tracker on Web, you can make use of [the Enhanced Consent plugin](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/consent-gdpr/index.md).
+To track enhanced consent events using the JavaScript tracker on Web, you can make use of [the Enhanced Consent plugin](/docs/sources/web-trackers/tracking-events/consent-gdpr/index.md).
 
 ## Modeled data using the snowplow-web dbt package
 
@@ -44,14 +47,14 @@ To process raw events created by the Snowplow Enhanced Consent plugin we have in
 
 This custom module consists of a series of dbt models which produce the following aggregated models from the raw consent tracking events:
 
-Derived table | Table description | 
----|---|---
-`snowplow_web_consent_log` | Snowplow incremental table showing the audit trail of consent and Consent Management Platform (cmp) events | [Docs](https://snowplow.github.io/dbt-snowplow-web/#!/model/model.snowplow_web.snowplow_web_consent_log)
-`snowplow_web_consent_users` | Incremental table of user consent tracking stats | [Docs](https://snowplow.github.io/dbt-snowplow-web/#!/model/model.snowplow_web.snowplow_web_consent_users)
-`snowplow_web_consent_totals` | Summary of the latest consent status, per consent version | [Docs](https://snowplow.github.io/dbt-snowplow-web/#!/model/model.snowplow_web.snowplow_web_consent_totals)
-`snowplow_web_consent_scope_status` | Aggregate of current number of users consented to each consent scope | [Docs](https://snowplow.github.io/dbt-snowplow-web/#!/model/model.snowplow_web.snowplow_web_consent_scope_status)
-`snowplow_web_cmp_stats` | Used for modeling cmp_visible events and related metrics | [Docs](https://snowplow.github.io/dbt-snowplow-web/#!/model/model.snowplow_web.snowplow_web_consent_cmp_stats)
-`snowplow_web_consent_versions` | Incremental table used to keep track of each consent version and its validity | [Docs](https://snowplow.github.io/dbt-snowplow-web/#!/model/model.snowplow_web.snowplow_web_consent_versions)
+| Derived table                       | Table description                                                                                          | dbt                                                                                                               |
+| ----------------------------------- | ---------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| `snowplow_web_consent_log`          | Snowplow incremental table showing the audit trail of consent and Consent Management Platform (cmp) events | [Docs](https://snowplow.github.io/dbt-snowplow-web/#!/model/model.snowplow_web.snowplow_web_consent_log)          |
+| `snowplow_web_consent_users`        | Incremental table of user consent tracking stats                                                           | [Docs](https://snowplow.github.io/dbt-snowplow-web/#!/model/model.snowplow_web.snowplow_web_consent_users)        |
+| `snowplow_web_consent_totals`       | Summary of the latest consent status, per consent version                                                  | [Docs](https://snowplow.github.io/dbt-snowplow-web/#!/model/model.snowplow_web.snowplow_web_consent_totals)       |
+| `snowplow_web_consent_scope_status` | Aggregate of current number of users consented to each consent scope                                       | [Docs](https://snowplow.github.io/dbt-snowplow-web/#!/model/model.snowplow_web.snowplow_web_consent_scope_status) |
+| `snowplow_web_cmp_stats`            | Used for modeling cmp_visible events and related metrics                                                   | [Docs](https://snowplow.github.io/dbt-snowplow-web/#!/model/model.snowplow_web.snowplow_web_consent_cmp_stats)    |
+| `snowplow_web_consent_versions`     | Incremental table used to keep track of each consent version and its validity                              | [Docs](https://snowplow.github.io/dbt-snowplow-web/#!/model/model.snowplow_web.snowplow_web_consent_versions)     |
 
 ## Consent Tracking for Marketing accelerator
 
@@ -66,8 +69,8 @@ However, we recommend using the Enhanced Consent events as they are more up-to-d
 
 To learn how to track consent granted and withdrawn events, see:
 
-* On Web, make use of the [Consent plugin on the JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/previous-versions/web-trackers-v3/tracking-events/consent-gdpr/original/index.md).
-* On mobile, see the [consent tracking APIs here](/docs/sources/trackers/mobile-trackers/tracking-events/index.md#creating-a-consent-event).
+* On Web, make use of the [Consent plugin on the JavaScript tracker](/docs/sources/web-trackers/previous-versions/web-trackers-v3/tracking-events/consent-gdpr/original/index.md).
+* On mobile, see the [consent tracking APIs here](/docs/sources/mobile-trackers/tracking-events/index.md#creating-a-consent-event).
 
 The tracking consists of two events (`consent_granted` and `consent_withdrawn`) and two context entities (`consent_document` and `gdpr`).
 

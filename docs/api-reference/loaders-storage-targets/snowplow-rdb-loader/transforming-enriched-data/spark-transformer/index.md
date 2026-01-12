@@ -1,7 +1,10 @@
 ---
-title: "Spark transformer"
+title: "Spark transformer for batch processing"
+sidebar_label: "Spark transformer"
 date: "2022-04-04"
 sidebar_position: 10
+description: "Transform enriched Snowplow data in batches using Spark on EMR with support for deduplication and wide row or shredded output."
+keywords: ["spark transformer", "batch transformation", "emr spark", "deduplication", "rdb shredder"]
 ---
 
 ```mdx-code-block
@@ -45,7 +48,7 @@ where `region` is one of `us-east-1`, `us-east-2`, `us-west-1`, `us-west-2`, `eu
 
 ## Configuring the EMR cluster
 
-:::caution
+:::warning
 
 Starting from version `5.5.0`, batch transformer requires to use Java 11 on EMR ([default is Java 8](https://docs.aws.amazon.com/emr/latest/ReleaseGuide/configuring-java8.html)). See the `bootstrapActionConfigs` section in the configuration below.
 

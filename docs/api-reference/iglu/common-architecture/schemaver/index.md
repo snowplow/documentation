@@ -1,7 +1,10 @@
 ---
-title: "SchemaVer"
+title: "SchemaVer semantic versioning for schemas"
+sidebar_label: "SchemaVer"
 date: "2021-03-26"
 sidebar_position: 10
+description: "Overview of a semantic versioning system for JSON schemas."
+keywords: ["schemaver", "schema versioning", "semantic versioning", "schema evolution"]
 ---
 
 _This page is adapted from the Snowplow Analytics blog post, [Introducing SchemaVer for semantic versioning of schemas](http://snowplowanalytics.com/blog/2014/05/13/introducing-schemaver-for-semantic-versioning-of-schemas/) ._
@@ -18,7 +21,7 @@ Our approach is based on [semantic versioning](http://semver.org/) (SemVer for s
 
 As is, SemVer does not suit schema versioning well. Indeed, there is no such thing as bug fixes for a JSON Schema and the idea of an API doesn't really translate to JSON Schemas either.
 
-That's why we decided to introduce our own schema versioning notion: SchemaVer.  
+That's why we decided to introduce our own schema versioning notion: SchemaVer.
 SchemaVer is defined as follows: `MODEL-REVISION-ADDITION`
 
 - `MODEL` when you make a breaking schema change which will prevent interaction with _any_ historical data
@@ -62,8 +65,8 @@ and introduce a new `impressionId` property to obtain the following JSON Schema:
 }
 ```
 
-Because the new `impressionId` is **not** a required property and because the `additionalProperties` in our `1-0-0` version was set to `false`, any historical data following the `1-0-0` schema will work with this new schema.  
-  
+Because the new `impressionId` is **not** a required property and because the `additionalProperties` in our `1-0-0` version was set to `false`, any historical data following the `1-0-0` schema will work with this new schema.
+
 According to our definition of SchemaVer, we are consequently looking at an `ADDITION` and the schema's version becomes `1-0-1`.
 
 ### Revision example
@@ -110,8 +113,8 @@ We are now at version `1-0-2`. After a while, we decide to add a new `cost` prop
 }
 ```
 
-The problem now is that since we modified the `additionalProperties` to true before adding the `cost` field, someone might have added another `cost` field in the meantime following a different set of rules (for example it could be an amount followed by the currency such as 1.00$, the effective type would be string and not number) and so we cannot be sure that this new schema validate all historical data.  
-  
+The problem now is that since we modified the `additionalProperties` to true before adding the `cost` field, someone might have added another `cost` field in the meantime following a different set of rules (for example it could be an amount followed by the currency such as 1.00$, the effective type would be string and not number) and so we cannot be sure that this new schema validate all historical data.
+
 As a result, this new JSON Schema is a `REVISION` of the previous one, its version becomes `1-1-0`.
 
 ### Model example
@@ -136,8 +139,8 @@ Times goes by and we choose to completely review our JSON Schema identifying an 
 }
 ```
 
-The change is so important that we cannot realistically expect our historical data to interact with this new JSON Schema, consequently, the `MODEL` is changed and the schema's version becomes `2-0-0`.  
-  
+The change is so important that we cannot realistically expect our historical data to interact with this new JSON Schema, consequently, the `MODEL` is changed and the schema's version becomes `2-0-0`.
+
 Another important thing to notice is that we switched the `additionalProperties` back to false in order to avoid unnecessary future revisions.
 
 ### Additional differences

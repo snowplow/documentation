@@ -1,5 +1,8 @@
 ---
 title: "Ecommerce events"
+sidebar_label: "Ecommerce events"
+description: "Track ecommerce transactions, carts, checkouts, products, and promotions with Snowplow ecommerce events and context entities."
+keywords: ["ecommerce tracking", "transaction events", "cart tracking", "checkout tracking", "product events"]
 ---
 
 ```mdx-code-block
@@ -149,14 +152,14 @@ All tracked ecommerce properties are tracked as context entities.
 
 ## How to track?
 
-* Using the [JavaScript tracker on the Web](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md).
-* Using the [iOS and Android trackers](/docs/sources/trackers/mobile-trackers/tracking-events/ecommerce-tracking/index.md).
+* Using the [JavaScript tracker on the Web](/docs/sources/web-trackers/tracking-events/ecommerce/index.md).
+* Using the [iOS and Android trackers](/docs/sources/mobile-trackers/tracking-events/ecommerce-tracking/index.md).
 
 ## Modeled data using the snowplow-ecommerce dbt package
 
 [The package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md) contains a fully incremental model that transforms raw ecommerce event data into a set of derived tables based around the following ecommerce data objects: carts, checkouts, products and transactions.
 
-| Derived table                                 | Table description                                                                                                                                                                                                                                   |
+| Derived table                                 | Table description                                                                                                                                                                                                                                   | dbt                                                                                                                                     |
 | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | `snowplow_ecommerce_base_events_this_run`     | Base: Performs the incremental logic, the table contains a de-duped data set of all events required for the current run of the model, and is the foundation for all other models generated.                                                         | [Docs](https://snowplow.github.io/dbt-snowplow-ecommerce/#!/model/model.snowplow_ecommerce.snowplow_ecommerce_base_sessions_this_run)   |
 | `snowplow_ecommerce_cart_interactions`        | Carts: Parses the cart interactions that occur to provide handy filters and aggregations, which helps identify what happened to carts on a session level to extract, for example, abandoned carts with ease.                                        | [Docs](https://snowplow.github.io/dbt-snowplow-ecommerce/#!/model/model.snowplow_ecommerce.snowplow_ecommerce_cart_interactions)        |

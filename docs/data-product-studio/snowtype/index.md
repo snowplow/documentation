@@ -1,18 +1,31 @@
 ---
-title: "Code Generation - automatically generate code for Snowplow tracking SDKs"
+title: "Generate tracking code with Snowtype"
+sidebar_label: "Snowtype (code generation)"
 sidebar_position: 6
-sidebar_label: "Code generation (Snowtype)"
-sidebar_custom_props:
-  offerings:
-    - bdp
+description: "Automatically generate type-safe tracking code from data structures and event specifications with compile-time validation, reducing implementation time and maintenance overhead."
+keywords: ["Snowtype", "code generation", "type-safe tracking", "automated SDK code", "tracking automation"]
 ---
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc']}
+  helpContent="Snowtype is available for Snowplow CDI customers only."
+/>
 ```
 
-**Snowtype** is a tool that assists with instrumenting, verifying and maintaining tracking code. Snowtype works with Snowplow tracking SDKs.
+**Snowtype** is a code generation tool that automates the creation of type-safe tracking code for Snowplow SDKs. Snowtype connects directly to your data structures and event specifications. This eliminates manual instrumentation work and ensures that your tracking code is compliant with the schemas and produces high quality data.
+
+Snowtype streamlines the development workflow by providing several key advantages:
+
+- **Type safety enforcement:** Generates strongly-typed code that validates events and entities at compile time, preventing schema violations before data reaches your pipeline.
+- **Automated code generation:** Converts event specifications into production-ready SDK code, reducing implementation time from weeks to days.
+- **Integrated documentation:** Syncs inline code documentation with your data structures and products, maintaining consistency between design and implementation.
+- **Development workflow integration:** Fits seamlessly into CI/CD processes, enabling GitOps-style data product management and automated updates when schemas evolve.
+- **Reduced maintenance overhead:** Automatically updates tracking code when data structures change, eliminating the need for manual synchronization across multiple codebases.
 
 ## Supported trackers
 
@@ -34,21 +47,21 @@ Navigate to your project and install Snowtype using your favorite package manage
   <TabItem value="npm" label="npm" default>
 
 ```bash
-npm install --save-dev @snowplow/snowtype
+npm install --save-dev @snowplow/snowtype@latest
 ```
 
   </TabItem>
   <TabItem value="yarn" label="Yarn">
 
 ```bash
-yarn add --dev @snowplow/snowtype
+yarn add --dev @snowplow/snowtype@latest
 ```
 
   </TabItem>
   <TabItem value="pnpm" label="pnpm">
 
 ```bash
-pnpm add --save-dev @snowplow/snowtype
+pnpm add --save-dev @snowplow/snowtype@latest
 ```
 
   </TabItem>
@@ -62,7 +75,7 @@ Installing Snowtype will also create a local executable `snowtype` which you can
   <TabItem value="npm" label="npm" default>
 
 ```bash
-npx @snowplow/snowtype init
+npx @snowplow/snowtype@latest init
 # Same as
 npx snowtype init
 ```
@@ -71,7 +84,7 @@ npx snowtype init
   <TabItem value="yarn" label="Yarn">
 
 ```bash
-yarn @snowplow/snowtype init
+yarn @snowplow/snowtype@latest init
 # Same as
 yarn snowtype init
 ```
@@ -80,7 +93,7 @@ yarn snowtype init
   <TabItem value="pnpm" label="pnpm">
 
 ```bash
-pnpm @snowplow/snowtype init
+pnpm @snowplow/snowtype@latest init
 # Same as
 pnpm snowtype init
 ```

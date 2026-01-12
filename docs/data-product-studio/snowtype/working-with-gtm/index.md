@@ -1,6 +1,9 @@
 ---
-title: "Using Snowtype with Google Tag Manager"
+title: "Use Snowtype with Google Tag Manager"
+sidebar_label: "Snowtype and Google Tag Manager"
 sidebar_position: 6
+description: "Generate tracking code specifically formatted for Google Tag Manager custom JavaScript with Snowtype's GTM target for easier tag implementation."
+keywords: ["Snowtype GTM", "Google Tag Manager", "GTM tracking", "GTM custom JavaScript", "GTM code generation"]
 ---
 
 :::info
@@ -36,7 +39,7 @@ The only requirement is to first have [Node.js](https://nodejs.org/en/download/p
 ```bash
 # Navigate to a directory that you wish to create your project in.
 cd ./directory/to/setup/the/project
-# Create a folder for the project. Here you can replace 
+# Create a folder for the project. Here you can replace
 # 'container-id' with the GTM container the code will be used in.
 mkdir snowtype-gtm-container-id
 # Change directory to the newly created folder.
@@ -45,16 +48,16 @@ cd snowtype-gtm-container-id
 npm init -y
 # This will install the latest version of Snowtype.
 npm install @snowplow/snowtype@latest
-# This will start the Snowtype init flow, 
-# in which you should select 'Google Tag Manager' when 
+# This will start the Snowtype init flow,
+# in which you should select 'Google Tag Manager' when
 # prompted to select a tracker.
-npx @snowplow/snowtype init
+npx @snowplow/snowtype@latest init
 ```
 
 After you have completed the `init` flow and have added your desired configuration, you can go ahead and generate the code you need to use:
 
 ```bash
-npx @snowplow/snowtype generate
+npx @snowplow/snowtype@latest generate
 ```
 
 After that you can find the code in the specified `outpath` attribute of your configuration file.

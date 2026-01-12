@@ -1,15 +1,10 @@
 ---
-title: "Versioning Data Structures using Iglu"
+title: "Version data structures using Iglu Server"
 sidebar_label: "Using Iglu"
 sidebar_position: 30
-sidebar_custom_props:
-  offerings:
-    - community
+description: "Choose how to increment schema versions when uploading data structures to Iglu Server with guidance on breaking and non-breaking changes."
+keywords: ["Iglu versioning", "schema upload", "version increment", "Iglu Server"]
 ---
-
-## How do I version?
-
-### Breaking and non-breaking changes
 
 When evolving your [schema](/docs/fundamentals/schemas/index.md) and [uploading](/docs/data-product-studio/data-structures/manage/iglu/index.md) it to your [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md), you will need to choose how to increment its version.
 

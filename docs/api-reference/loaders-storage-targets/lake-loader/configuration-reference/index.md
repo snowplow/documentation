@@ -2,6 +2,8 @@
 title: "Lake Loader configuration reference"
 sidebar_label: "Configuration reference"
 sidebar_position: 1
+description: "Configure Lake Loader for Delta Lake and Iceberg tables with Kinesis, Pub/Sub, and Kafka stream settings for data lakes."
+keywords: ["lake loader config", "delta config", "iceberg config", "glue catalog", "lake configuration"]
 ---
 
 ```mdx-code-block
@@ -19,6 +21,18 @@ import Admonition from '@theme/Admonition';
 ```
 
 <p>The configuration reference in this page is written for Lake Loader <code>{`${versions.lakeLoader}`}</code></p>
+
+### License
+
+The Lake Loader is released under the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.1/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).
+
+To accept the terms of license and run the loader, set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable. Alternatively, configure the `license.accept` option in the config file:
+
+```json
+"license": {
+  "accept": true
+}
+```
 
 ### Table configuration
 

@@ -1,4 +1,6 @@
-# Snowplow Personal & Academic License Agreement
+---
+title: "Snowplow Personal & Academic License Agreement"
+---
 
 _Version 1.0, September 2023_
 

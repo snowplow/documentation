@@ -1,7 +1,9 @@
 ---
-title: "Referer parser enrichment"
+title: "Referrer parser enrichment"
 sidebar_position: 3
-sidebar_label: Referer parser
+sidebar_label: Referrer parser
+description: "Extract attribution data from referrer URLs to identify traffic sources, search terms, and marketing channels."
+keywords: ["referrer parser", "traffic source", "attribution"]
 ---
 
 This enrichment uses [snowplow referer-parser](https://github.com/snowplow/referer-parser) library to extract attribution data from referer URLs.
@@ -31,6 +33,13 @@ Snowplow has several subdomains like _community.snowplow.io_ and _docs.snowplow.
 ```
 
 Enabling this enrichment with the above configuration would fill the `refr_medium` column in our data warehouse with _“Internal”_ (rather then _"Unknown"_) when the referring URL to a page matches the subdomains above.
+
+:::note
+
+The enrichment will also classify `refr_medium` as `Internal` when an event's `page_urlhost` matches it's `refr_urlhost`, regardless of the configured `internalDomains`.
+This behavior is not configurable, and may require handling in data models or a [JavaScript enrichment](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/index.md) to change.
+
+:::
 
 ## Output
 

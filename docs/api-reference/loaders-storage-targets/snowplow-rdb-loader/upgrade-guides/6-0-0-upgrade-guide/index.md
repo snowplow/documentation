@@ -1,6 +1,9 @@
 ---
-title: "6.0.0 upgrade guide"
+title: "RDB Loader 6.0.0 upgrade guide"
+sidebar_label: "6.0.0 upgrade guide"
 sidebar_position: -20
+description: "Upgrade RDB Loader to 6.0.0 with recovery tables, schema merging, and improved schema evolution for Redshift and other warehouses."
+keywords: ["rdb loader 6.0 upgrade", "recovery tables", "schema evolution", "schema merging", "redshift migration"]
 ---
 
 ```mdx-code-block
@@ -115,7 +118,7 @@ Let's see how we can use `igluctl` to solve this problem.
 ```bash
 mkdir <schemas_folder> <sql_folder>
 igluctl static pull <schemas_folder> <iglu_url> <iglu_key>
-igluctl static generate <schemas_folder> <sql_folder> 
+igluctl static generate <schemas_folder> <sql_folder>
 # ...
 # iglu:com.test/test/jsonschema/1-0-1 has a breaking change Incompatible types in column example_field old RedshiftSmallInt new RedshiftInteger
 # ...
@@ -135,7 +138,7 @@ igluctl table-check \
         --dbschema <schema>
 # ...
 # * Column doesn't match, expected: 'example_field SMALLINT', actual: 'example_field INT'
-# ...   
+# ...
 ```
 
 We got the `Column doesn't match` output with the above example because the table column had been migrated manually from `SMALLINT` to `INT`. Since the latest schema version that doesn't contain any breaking change is `1-0-0`, `table-check` command expects to see `SMALLINT` in the table therefore it gives the `Column doesn't match` output.
@@ -144,7 +147,7 @@ In order to solve this problem, we should patch `1-0-0` with `{ "type": "integer
 
 After identifying all the offending schemas, you should patch them to reflect the changes in the warehouse.
 
-Schema casting rules could be found [here](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md?warehouse=redshift#types).
+Schema casting rules could be found [here](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md?warehouse=redshift#types).
 
 #### `$.featureFlags.disableRecovery` configuration
 

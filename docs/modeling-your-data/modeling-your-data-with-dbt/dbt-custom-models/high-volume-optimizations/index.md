@@ -1,5 +1,8 @@
 ---
 title: "High volume optimizations"
+sidebar_label: "High volume optimizations"
+description: "Optimize Snowplow dbt packages for high-volume data processing with reduced columns, ephemeral models, and tuned incremental logic."
+keywords: ["high volume optimization", "dbt performance", "columnar warehouse optimization", "events this run optimization"]
 sidebar_position: 20
 ---
 

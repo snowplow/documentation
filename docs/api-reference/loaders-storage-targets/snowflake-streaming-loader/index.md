@@ -2,6 +2,8 @@
 title: "Snowflake Streaming Loader"
 sidebar_label: "Snowflake Streaming Loader"
 sidebar_position: 0
+description: "Load Snowplow events to Snowflake with sub-minute latency from Kinesis, Pub/Sub, or Kafka using Snowpipe Streaming."
+keywords: ["snowflake loader", "snowpipe streaming", "real-time warehouse", "snowflake data warehouse"]
 ---
 
 ```mdx-code-block
@@ -13,9 +15,7 @@ import DeployOverview from '@site/docs/api-reference/loaders-storage-targets/sno
 import StreamingVsRDB from '@site/docs/api-reference/loaders-storage-targets/_snowflake-streaming-vs-rdb.md';
 ```
 
-## Overview
-
-The Snowflake Streaming Loader is an application that loads Snowplow events to Snowflake using the [Snowpipe Streaming API](https://docs.snowflake.com/en/user-guide/data-load-snowpipe-streaming-overview).
+The Snowflake Streaming Loader is an application that loads Snowplow events to Snowflake.
 
 <StreamingVsRDB/>
 
@@ -44,21 +44,21 @@ The simplest possible config file just needs a description of your pipeline inpu
   <TabItem value="aws" label="AWS" default>
 
 ```json reference
-https://github.com/snowplow-incubator/snowflake-loader/blob/main/config/config.kinesis.minimal.hocon
+https://github.com/snowplow-incubator/snowplow-snowflake-loader/blob/main/config/config.kinesis.minimal.hocon
 ```
 
   </TabItem>
   <TabItem value="gcp" label="GCP">
 
 ```json reference
-https://github.com/snowplow-incubator/snowflake-loader/blob/main/config/config.pubsub.minimal.hocon
+https://github.com/snowplow-incubator/snowplow-snowflake-loader/blob/main/config/config.pubsub.minimal.hocon
 ```
 
   </TabItem>
   <TabItem value="azure" label="Azure">
 
 ```json reference
-https://github.com/snowplow-incubator/snowflake-loader/blob/main/config/config.azure.minimal.hocon
+https://github.com/snowplow-incubator/snowplow-snowflake-loader/blob/main/config/config.azure.minimal.hocon
 ```
 
   </TabItem>

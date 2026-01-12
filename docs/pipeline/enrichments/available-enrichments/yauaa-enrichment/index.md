@@ -2,13 +2,15 @@
 title: "YAUAA enrichment"
 sidebar_position: 9
 sidebar_label: YAUAA
+description: "Parse user agent strings with advanced detection using Yet Another UserAgent Analyzer for detailed device insights."
+keywords: ["YAUAA", "user agent analysis", "device fingerprinting"]
 ---
 
 YAUAA (Yet Another User Agent Analyzer) enrichment is a powerful user agent parser and analyzer.
 
 It uses [YAUAA API](https://yauaa.basjes.nl/) to parse and analyze all user agent information of an HTTP request and extract as many relevant information as possible about the user's device and browser, like for instance the device class (Phone, Tablet, etc.).
 
-:::caution
+:::warning
 
 YAUAA parsing relies entirely on in-memory _HashMaps_ and requires roughly 400 MB of RAM (see [here](https://yauaa.basjes.nl/README-MemoryUsage.html)). Additional memory is also needed if caching is enabled (by default).
 

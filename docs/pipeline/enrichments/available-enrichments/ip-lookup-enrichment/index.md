@@ -1,14 +1,12 @@
 ---
-title: "IP Lookup enrichment"
+title: "IP lookup enrichment"
 sidebar_position: 10
-sidebar_label: IP Lookup 
+sidebar_label: IP Lookup
+description: "Resolve IP addresses to geographic locations and ISP information using MaxMind databases."
+keywords: ["IP lookup", "geolocation", "MaxMind"]
 ---
 
-## Summary
-
 This enrichment uses [MaxMind](https://www.maxmind.com/en/geoip2-databases) databases to look up useful data based on the IP address collected by your Snowplow tracker(s).
-
-## Overview
 
 When a user browses your site or app their IP address is collected. MaxMind maintains databases of additional points of information like geographic location, second level domain names (acme.com), Internet Service Provider, organization name and several other data points publicly associated with a given IP address.
 
@@ -57,7 +55,7 @@ Note that to test this enrichment, you will need events with realistic IP addres
 
 <XForwardedForPlugin/>
 
-Alternatively, you can [set up Micro to receive external IP addresses](/docs/data-product-studio/data-quality/snowplow-micro/remote-usage/index.md#exposing-micro-via-a-public-domain-name).
+Alternatively, you can [set up Micro to receive external IP addresses](/docs/testing/snowplow-micro/remote-usage/index.md#exposing-micro-via-a-public-domain-name).
 
 </TestingWithMicro>
 
@@ -68,12 +66,12 @@ There are four possible fields you can add to the “parameters” section of th
 
 It is important to note that accepted database filenames are the strings which are allowed in the `database` subfield. If the file name you provide is not one of these, the enrichment JSON will fail validation.
 
-| ENRICHMENT PARAMETER | VALID DATABASE NAMES |
-| --- | --- |
-| `geo` | "GeoLite2-City.mmdb" (free)  "GeoIP2-City.mmdb" (paid) |
-| `isp` | "GeoIP2-ISP.mmdb" |
-| `domain` | "GeoIP2-Domain.mmdb" |
-| `connectionType` | "GeoIP2-Connection-Type.mmdb" |
+| ENRICHMENT PARAMETER | VALID DATABASE NAMES                                   |
+| -------------------- | ------------------------------------------------------ |
+| `geo`                | "GeoLite2-City.mmdb" (free)  "GeoIP2-City.mmdb" (paid) |
+| `isp`                | "GeoIP2-ISP.mmdb"                                      |
+| `domain`             | "GeoIP2-Domain.mmdb"                                   |
+| `connectionType`     | "GeoIP2-Connection-Type.mmdb"                          |
 
 ### Configuration
 
@@ -129,7 +127,7 @@ When configuring the enrichment you will replace the following string `my-priva
 If we were to enable this enrichment as shown, we would see the following columns in our data warehouse get populated with data for a user with the IP Address 37.157.33.178:
 
 | COLUMN NAME       | SAMPLE DATA   | PURPOSE                                |
-|-------------------|---------------|----------------------------------------|
+| ----------------- | ------------- | -------------------------------------- |
 | `geo_country`     | GB            | Country of IP origin                   |
 | `geo_region`      | ENG           | Region of IP origin                    |
 | `geo_city`        | London        | City of IP origin                      |
@@ -208,7 +206,7 @@ To extend this enrichment for the additional databases offered by Maxmind we wou
 The data from these databases would then be loaded into the following columns:
 
 | COLUMN NAME       | PURPOSE                                                      |
-|-------------------|--------------------------------------------------------------|
+| ----------------- | ------------------------------------------------------------ |
 | `ip_isp`          | ISP name                                                     |
 | `ip_organization` | Organization name for larger networks                        |
 | `ip_domain`       | Second level domain name                                     |

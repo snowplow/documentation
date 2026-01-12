@@ -1,6 +1,9 @@
 ---
-title: "LaunchDarkly Tag Configuration"
+title: "Configure LaunchDarkly Tag for GTM Server Side"
+sidebar_label: "Configuration"
 sidebar_position: 100
+description: "Configure metric type, authentication, context keys, and event creation time for the LaunchDarkly Tag in GTM Server Side."
+keywords: ["LaunchDarkly Tag configuration", "metric events", "context keys", "experiment tracking"]
 ---
 
 This is the configuration of the LaunchDarkly Tag.
@@ -48,7 +51,7 @@ This configuration section is available only if your [Metric Type](#metric-type)
 
 In this section you can specify the event property whose value will populate the LaunchDarkly `metricValue` object.
 
-:::caution
+:::warning
 
 Since the metric value needs to be a number (e.g. `10.0`), the Tag **will fail**, if you specify an event property whose value is not a number.
 
@@ -152,7 +155,7 @@ The standard log properties are:
 Depending on the type of log, additional properties are logged:
 
 | Type of log | Additional information                                         |
-|-------------|----------------------------------------------------------------|
+| ----------- | -------------------------------------------------------------- |
 | Message     | "Message"                                                      |
 | Request     | "RequestMethod", "RequestUrl", "RequestHeaders", "RequestBody" |
 | Response    | "ResponseStatusCode", "ResponseHeaders", "ResponseBody"        |

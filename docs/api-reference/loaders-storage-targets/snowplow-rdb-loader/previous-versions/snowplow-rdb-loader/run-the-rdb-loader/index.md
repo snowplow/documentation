@@ -1,7 +1,10 @@
 ---
-title: "Run the RDB loader"
+title: "Run the RDB loader 2.x"
+sidebar_label: "Run the RDB loader"
 date: "2021-09-14"
 sidebar_position: 50
+description: "Run RDB Loader 2.x with Docker, configuration file, and Iglu resolver for loading transformed data into Redshift."
+keywords: ["run rdb loader", "rdb loader docker", "loader execution", "redshift loading", "rdb loader 2.x"]
 ---
 
 The RDB loader is [published on Docker Hub](https://hub.docker.com/repository/docker/snowplow/snowplow-rdb-loader)

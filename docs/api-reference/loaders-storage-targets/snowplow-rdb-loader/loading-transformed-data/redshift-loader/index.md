@@ -1,7 +1,10 @@
 ---
-title: "Redshift loader"
+title: "Load into Redshift using the RDB Loader"
+sidebar_label: "Into Redshift"
 date: "2022-04-05"
 sidebar_position: 10
+description: "Load shredded Snowplow events into Amazon Redshift with automatic schema creation and table management."
+keywords: ["redshift loader", "aws redshift", "shredded data loading", "redshift copy", "redshift tables"]
 ---
 
 ```mdx-code-block
@@ -9,8 +12,6 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 import AutoSchemaCreation from '@site/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/_automatic-schema-creation.md';
 ```
-
-## Setting up Redshift
 
 <AutoSchemaCreation name="Redshift" grantDocs="https://docs.aws.amazon.com/redshift/latest/dg/r_GRANT.html" />
 

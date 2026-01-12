@@ -1,9 +1,10 @@
 ---
-title: "Adjust"
+title: "Adjust webhook"
+sidebar_label: "Adjust"
 sidebar_position: -1
+description: "Track mobile attribution data including app installation and reattribution events from Adjust callbacks using the Iglu webhook adapter."
+keywords: ["adjust webhook integration", "mobile attribution tracking", "adjust callback snowplow"]
 ---
-
-## Intro
 
 [Adjust](https://www.adjust.com/) provides a mobile attribution platform. It enables users to track what marketing channels drive mobile app installations.
 

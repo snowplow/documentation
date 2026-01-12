@@ -1,6 +1,9 @@
 ---
 position: 1
-title: Installation and Setup
+title: "Learn how to track web events with base data products"
+sidebar_label: "Introduction"
+description: "Learn how to implement web tracking using Data Product Studio, source applications, and Snowtype code generation for a React TodoMVC application."
+keywords: ["data product studio tutorial", "snowtype code generation"]
 ---
 
 This guide will help you understand some of the basic capabilities of Data Products and how they can be used in practice for most tracking implementation setups.

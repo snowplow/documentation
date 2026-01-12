@@ -1,15 +1,16 @@
 ---
-title: "Setup Guide for GCP"
+title: "Set up Snowplow Mini on GCP"
+sidebar_label: "GCP setup guide"
 date: "2021-05-11"
 sidebar_position: 2
+description: "Deploy Snowplow Mini on GCP for a single-instance testing environment."
+keywords: ["snowplow mini", "gcp setup", "mini deployment"]
 ---
 
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-## Overview
 
 Snowplow Mini is, in essence, the Snowplow real time stack inside of a single image. It is an easily-deployable, single instance version of Snowplow that serves three use cases:
 
@@ -19,13 +20,13 @@ Snowplow Mini is, in essence, the Snowplow real time stack inside of a single im
 
 <p>Version {versions.snowplowMini} (recommended) comes with:</p>
 
-- Snowplow Collector NSQ 3.3.0
-- Snowplow Enrich NSQ 5.4.0
+- Snowplow Collector NSQ 3.7.0
+- Snowplow Enrich NSQ 6.1.2
 - Snowplow Elasticsearch Loader 2.1.2
 - Snowplow Iglu Server 0.13.0
 - Opensearch 2.4.0
 - Opensearch Dashboards 2.4.0
-- Postgresql 15.1
+- Postgresql 16.10
 - NSQ v1.3.0
 
 Note: All services are configured to start automatically so everything should happily survive restarts/shutdowns.
@@ -50,16 +51,16 @@ A sample usage would be as following.
 gcloud compute images create \
 imported-sp-mini \
 --source-uri \
-https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-23-2-large-1749631920.tar.gz
+https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-24-0-large-1759755114.tar.gz
 ```
 
 Note that `imported-sp-mini` is a name of your choice for destination image and above URI is for large image, change it with your preferred version of Snowplow Mini.
 
 <p>Version {versions.snowplowMini} (recommended)</p>
 
-| L / 2 vCPUs | XL / 4 vCPUs | XXL / 8 vCPUs |
-| --- | --- | --- |
-| [large](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-23-2-large-1749631920.tar.gz) | [xlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-23-1-xlarge-1749633980.tar.gz) | [xxlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-23-1-xxlarge-1749639938.tar.gz) |
+| L / 2 vCPUs                                                                                        | XL / 4 vCPUs                                                                                         | XXL / 8 vCPUs                                                                                          |
+| -------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
+| [large](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-24-0-large-1759755114.tar.gz) | [xlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-24-0-xlarge-1759755403.tar.gz) | [xxlarge](https://storage.googleapis.com/snowplow-mini/snowplow-mini-0-24-0-xxlarge-1759755176.tar.gz) |
 
 You can find more about `gcloud compute images create` command [here](https://cloud.google.com/sdk/gcloud/reference/compute/images/create) for additional parameters.
 
@@ -67,7 +68,7 @@ After importing our tarball of your choice into your project, you should see it 
 
 To decide on which size of Snowplow Mini to choose, read on.
 
-### large & xlarge & xxlarge
+## large & xlarge & xxlarge
 
 Mini is available in 3 different sizes:
 

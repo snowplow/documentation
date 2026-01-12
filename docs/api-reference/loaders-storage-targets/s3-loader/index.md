@@ -1,14 +1,15 @@
 ---
 title: "S3 Loader"
-sidebar_position: 4
+sidebar_label: "S3 Loader"
+sidebar_position: 5
+description: "Archive Snowplow events from Kinesis to S3 in LZO or Gzip format for raw payloads, enriched events, and failed events."
+keywords: ["s3 loader", "kinesis to s3", "aws s3", "lzo compression"]
 ---
 
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-## Overview
 
 Snowplow S3 Loader consumes records from an [Amazon Kinesis](http://aws.amazon.com/kinesis/) stream and writes them to [S3](http://aws.amazon.com/s3/). A typical Snowplow pipeline would use the S3 loader in several places:
 
@@ -67,8 +68,8 @@ Here is a standard command to run the loader on a EC2 instance in AWS:
       --log-opt awslogs-group=snowplow-s3-loader \\
       --log-opt awslogs-stream='ec2metadata --instance-id' \\
       --network host \\
-      -v $(pwd):/snowplow/config \\      
-      -e 'JAVA_OPTS=-Xms512M -Xmx1024M -Dorg.slf4j.simpleLogger.defaultLogLevel=WARN' \\   
+      -v $(pwd):/snowplow/config \\
+      -e 'JAVA_OPTS=-Xms512M -Xmx1024M -Dorg.slf4j.simpleLogger.defaultLogLevel=WARN' \\
       snowplow/snowplow-s3-loader:${versions.s3Loader} \\
       --config /snowplow/config/config.hocon
 `}</CodeBlock>

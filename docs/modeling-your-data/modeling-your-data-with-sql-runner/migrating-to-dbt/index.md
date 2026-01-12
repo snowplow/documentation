@@ -1,7 +1,9 @@
 ---
 title: "Migrating from SQL Runner to dbt"
+sidebar_label: "Migrating from SQL Runner to dbt"
 sidebar_position: 0
-description: SQL Runner is no longer actively developed and users should try to migrate to dbt where possible, this guide helps you do that
+description: "SQL Runner is no longer actively developed and users should try to migrate to dbt where possible, this guide helps you do that."
+keywords: ["SQL Runner to dbt", "dbt migration", "SQL Runner migration", "legacy to dbt"]
 ---
 
 ```mdx-code-block
@@ -17,7 +19,7 @@ This guide assumes you are running the standard web and/or mobile SQL Runner mod
 
 ## Why Migrate?
 
-SQL Runner is currently in maintenance mode, while we will continue to fix bugs when they are identified, we are not actively developing the tool or the models anymore and at some point in the future may deprecate it entirely. Our dbt models on the other hand are under active development, with new features and optimizations being made regularly. It is also a more widely used tool, meaning installation and management is far easier (or you can use tools like dbt Cloud, or our BDP customers can run dbt models the same way you can SQL Runner). We also have a far wider range of packages available in dbt including e-commerce, marketing attribution, and a package to normalize your Snowplow data. 
+SQL Runner is currently in maintenance mode, while we will continue to fix bugs when they are identified, we are not actively developing the tool or the models anymore and at some point in the future may deprecate it entirely. Our dbt models on the other hand are under active development, with new features and optimizations being made regularly. It is also a more widely used tool, meaning installation and management is far easier (or you can use tools like dbt Cloud, or our CDI customers can run dbt models the same way you can SQL Runner). We also have a far wider range of packages available in dbt including e-commerce, marketing attribution, and a package to normalize your Snowplow data.
 
 In dbt we also support Databricks & Postgres warehouses in addition to Snowflake, BigQuery, and Redshift. Our [Accelerators](https://snowplow.io/data-product-accelerators/) contain our dbt models, and newer tracking plugins are only being modeled within our dbt packages.
 
@@ -30,11 +32,11 @@ The core of the web and mobile models (e.g. page/screen views, sessions, and use
 We recommend you take a look at the [docs](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md) for our dbt packages to get a better understanding of how they work and how you can use them going forward.
 
 ## Pre-requisites
-We assume that you have dbt [installed](https://docs.getdbt.com/docs/core/installation), a working connection, and some basic understanding of using dbt including installing packages and running models. 
+We assume that you have dbt [installed](https://docs.getdbt.com/docs/core/installation), a working connection, and some basic understanding of using dbt including installing packages and running models.
 
 ## Mapping the variables
 
-While the variables for your SQL Runner models are spread throughout the files, in dbt all variables are in your `dbt_project.yml` file. We have mostly been consistent between the two tools, with the dbt variables being prefixed by `snowplow__`, but some have new names. The table below maps each SQL Runner variable to the equivalent dbt variable, but there are many more you can set to customize how the models run - you can read about these in the relevant [configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md) page. 
+While the variables for your SQL Runner models are spread throughout the files, in dbt all variables are in your `dbt_project.yml` file. We have mostly been consistent between the two tools, with the dbt variables being prefixed by `snowplow__`, but some have new names. The table below maps each SQL Runner variable to the equivalent dbt variable, but there are many more you can set to customize how the models run - you can read about these in the relevant [configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md) page.
 
 ```mdx-code-block
 import DbtVariables from "@site/docs/reusable/dbt-variables/_index.md"
@@ -44,39 +46,39 @@ import DbtVariables from "@site/docs/reusable/dbt-variables/_index.md"
 
 > Values in bold have a different name instead of just the prefix
 
-| SQL Runner Variable                | dbt variable                                                                                            |
-| ---------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| **`app_errors`**                   | **`snowplow__enable_app_errors_module`**                                                                |
-| **`app_id_filters`**               | **`snowplow__app_id`**                                                                                  |
-| **`application_context`**          | **`snowplow__enable_application_context`**                                                              |
-| `cleanup_mode`                     | No equivalent variable *(closest is `snowplow__allow_refresh` combined with dbt `--full-refresh` flag)* |
-| `cluster_by`                       | No equivalent variable *(Clustering defined in model)*                                                  |
-| `days_late_allowed`                | `snowplow__days_late_allowed`                                                                           |
-| `derived_tstamp_partitioned`       | `snowplow__derived_tstamp_partitioned`                                                                  |
+| SQL Runner Variable                    | dbt variable                                                                                            |
+| -------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| **`app_errors`**                       | **`snowplow__enable_app_errors_module`**                                                                |
+| **`app_id_filters`**                   | **`snowplow__app_id`**                                                                                  |
+| **`application_context`**              | **`snowplow__enable_application_context`**                                                              |
+| `cleanup_mode`                         | No equivalent variable *(closest is `snowplow__allow_refresh` combined with dbt `--full-refresh` flag)* |
+| `cluster_by`                           | No equivalent variable *(Clustering defined in model)*                                                  |
+| `days_late_allowed`                    | `snowplow__days_late_allowed`                                                                           |
+| `derived_tstamp_partitioned`           | `snowplow__derived_tstamp_partitioned`                                                                  |
 | **`enabled`** (Mobile app errors only) | **`snowplow__enable_app_errors_module`**                                                                |
-| `ends_run`                         | No equivalent variable                                                                                  |
-| `entropy`                          | No equivalent variable                                                                                  |
-| **`geolocation_context`**          | **`snowplow__enable_geolocation_context`**                                                              |
-| `heartbeat`                        | `snowplow__heartbeat`                                                                                   |
-| **`iab`**                          | **`snowplow__enable_iab`**                                                                              |
-| **`input_schema`**                 | **`snowplow__atomic_schema`**                                                                           |
-| `lookback_window_hours`            | `snowplow__lookback_window_hours`                                                                       |
-| **`minimumVisitLength`**           | **`snowplow_min_visit_length`**                                                                         |
-| **`mobile_context`**               | **`snowplow__enable_mobile_context`**                                                                   |
-| **`model_version`**                | No equivalent variable                                                                                  |
-| `output_schema`                    | Set in `models` part of project file, see relevant configuration page for more info.                    |
-| **`platform_filters`**             | **`snowplow__platform`**                                                                                |
-| `scratch_schema`                   | Set in `models` part of project file, see relevant configuration page for more info.                    |
-| **`screen_context`**               | **`snowplow__enable_screen_contextt`**                                                                  |
-| `session_lookback_days`            | `snowplow__session_lookback_days` *(default increased to 730)*                                          |
-| `skip_derived`                     | No equivalent variable *(use dbt `--select` flag)*                                                      |
-| `stage_next`                       | No equivalent variable                                                                                  |
-| `start_date`                       | `snowplow__start_date`                                                                                  |
-| `ua_bot_filter`                    | `snowplow__ua_bot_filter`                                                                               |
-| **`ua_parser`**                    | **`snowplow__enable_ua`**                                                                               |
-| **`update_cadence_days`**          | **`snowplow__backfill_limit_days`** *(default increased to 30)*                                         |
-| `upsert_lookback_days`             | `snowplow__upsert_lookback_days`                                                                        |
-| **`yauaa`**                        | **`snowplow__enable_yauaa`**                                                                            |
+| `ends_run`                             | No equivalent variable                                                                                  |
+| `entropy`                              | No equivalent variable                                                                                  |
+| **`geolocation_context`**              | **`snowplow__enable_geolocation_context`**                                                              |
+| `heartbeat`                            | `snowplow__heartbeat`                                                                                   |
+| **`iab`**                              | **`snowplow__enable_iab`**                                                                              |
+| **`input_schema`**                     | **`snowplow__atomic_schema`**                                                                           |
+| `lookback_window_hours`                | `snowplow__lookback_window_hours`                                                                       |
+| **`minimumVisitLength`**               | **`snowplow_min_visit_length`**                                                                         |
+| **`mobile_context`**                   | **`snowplow__enable_mobile_context`**                                                                   |
+| **`model_version`**                    | No equivalent variable                                                                                  |
+| `output_schema`                        | Set in `models` part of project file, see relevant configuration page for more info.                    |
+| **`platform_filters`**                 | **`snowplow__platform`**                                                                                |
+| `scratch_schema`                       | Set in `models` part of project file, see relevant configuration page for more info.                    |
+| **`screen_context`**                   | **`snowplow__enable_screen_contextt`**                                                                  |
+| `session_lookback_days`                | `snowplow__session_lookback_days` *(default increased to 730)*                                          |
+| `skip_derived`                         | No equivalent variable *(use dbt `--select` flag)*                                                      |
+| `stage_next`                           | No equivalent variable                                                                                  |
+| `start_date`                           | `snowplow__start_date`                                                                                  |
+| `ua_bot_filter`                        | `snowplow__ua_bot_filter`                                                                               |
+| **`ua_parser`**                        | **`snowplow__enable_ua`**                                                                               |
+| **`update_cadence_days`**              | **`snowplow__backfill_limit_days`** *(default increased to 30)*                                         |
+| `upsert_lookback_days`                 | `snowplow__upsert_lookback_days`                                                                        |
+| **`yauaa`**                            | **`snowplow__enable_yauaa`**                                                                            |
 
 
 ## Setting up and running our dbt packages
@@ -93,7 +95,7 @@ This method will also not correctly populate the user stitching table or process
 
 :::
 
-There may be cases where running the dbt models from scratch is not a viable option for you, in this case it is possible to migrate your existing derived SQL Runner data into the derived tables produced by dbt, however this will result in your data being generated from two slightly differing logics. 
+There may be cases where running the dbt models from scratch is not a viable option for you, in this case it is possible to migrate your existing derived SQL Runner data into the derived tables produced by dbt, however this will result in your data being generated from two slightly differing logics.
 
 It is advisable to produce your dbt tables into new schemas where possible, even though the derived tables should have different names; this will help keep your data separate and ensure that as we go through the following steps that dbt does not overwrite your SQL Runner tables.
 
@@ -104,7 +106,7 @@ Postgres only supports the `MERGE` statement in version 15 and up, if you are us
 :::
 
 ### Create dbt tables by doing a recent-dated run
-Because of the difference in manifest tables and incremental logic between SQL Runner and dbt models it makes sense to first create the dbt tables and then insert your existing data into them, rather than try and create the dbt tables directly from your SQL Runner data. 
+Because of the difference in manifest tables and incremental logic between SQL Runner and dbt models it makes sense to first create the dbt tables and then insert your existing data into them, rather than try and create the dbt tables directly from your SQL Runner data.
 
 Once you have your dbt project and variables set up, change your `snowplow__start_date` to a recent date, say 7 days before the end of your last SQL Runner processed date, and run the project once. This will produce all the dbt tables including the manifest tables needed to manage the incremental logic, and ensure a good overlap between the end of your SQL Runner processing and the start of dbt processing.
 
@@ -114,7 +116,7 @@ The following SQL will merge the existing web records in your SQL Runner derived
 
 **If you are using Redshift, be sure to `commit` your changes.**
 
-:::caution
+:::warning
 
 It is possible, particularly for columns which may have been null, that the types of columns across the two tables don't entirely match. Your warehouse may manage this for you, or you may have to use a `cast(col_name as new_type)` in place of just selecting the column based on any error message you receive.
 
@@ -129,7 +131,7 @@ MERGE INTO <DBT_DERIVED_SCHEMA>.snowplow_web_page_views t
 USING <SQL_RUNNER_DERIVED_SCHEMA>.page_views s
 ON T.page_view_id = s.page_view_id
 WHEN NOT MATCHED THEN
-INSERT 
+INSERT
 (
     page_view_id,
     event_id,
@@ -230,7 +232,7 @@ INSERT
     operating_system_name_version,
     operating_system_version
 )
-VALUES 
+VALUES
 (
     s.page_view_id,
     s.event_id,
@@ -344,7 +346,7 @@ MERGE INTO <DBT_DERIVED_SCHEMA>.snowplow_web_sessions t
 USING <SQL_RUNNER_DERIVED_SCHEMA>.sessions s
 ON T.domain_sessionid = s.domain_sessionid
 WHEN NOT MATCHED THEN
-INSERT 
+INSERT
 (
     app_id,
     domain_sessionid,
@@ -543,7 +545,7 @@ MERGE INTO <DBT_DERIVED_SCHEMA>.snowplow_web_users t
 USING <SQL_RUNNER_DERIVED_SCHEMA>.users s
 ON T.domain_userid = s.domain_userid
 WHEN NOT MATCHED THEN
-INSERT 
+INSERT
 (
     user_id,
     domain_userid,
@@ -635,7 +637,7 @@ The following SQL will merge the existing mobile records in your SQL Runner deri
 
 **If you are using Redshift, be sure to `commit` your changes.**
 
-:::caution
+:::warning
 
 It is possible, particularly for columns which may have been null, that the types of columns across the two tables don't entirely match. Your warehouse may manage this for you, or you may have to use a `cast(col_name as new_type)` in place of just selecting the column based on any error message you receive.
 
@@ -650,7 +652,7 @@ MERGE INTO <DBT_DERIVED_SCHEMA>.snowplow_mobile_screen_views t
 USING <SQL_RUNNER_DERIVED_SCHEMA>.mobile_screen_views s
 ON T.screen_view_id = s.screen_view_id
 WHEN NOT MATCHED THEN
-INSERT 
+INSERT
 (
     screen_view_id,
     event_id,
@@ -785,7 +787,7 @@ MERGE INTO <DBT_DERIVED_SCHEMA>.snowplow_mobile_sessions t
 USING <SQL_RUNNER_DERIVED_SCHEMA>.mobile_session s
 ON T.session_id = s.session_id
 WHEN NOT MATCHED THEN
-INSERT 
+INSERT
 (
     app_id,
     session_id,
@@ -930,7 +932,7 @@ MERGE INTO <DBT_DERIVED_SCHEMA>.snowplow_mobile_users t
 USING <SQL_RUNNER_DERIVED_SCHEMA>.mobile_users s
 ON t.device_user_id = s.device_user_id
 WHEN NOT MATCHED THEN
-INSERT 
+INSERT
 (
     user_id,
     device_user_id,
@@ -1031,7 +1033,7 @@ MERGE INTO <DBT_DERIVED_SCHEMA>.snowplow_mobile_app_errors t
 USING <SQL_RUNNER_DERIVED_SCHEMA>.mobile_app_errors s
 ON t.event_id = s.event_id
 WHEN NOT MATCHED THEN
-INSERT 
+INSERT
 (
     event_id,
         app_id,

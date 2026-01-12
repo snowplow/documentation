@@ -2,6 +2,8 @@
 sidebar_label: "Normalize"
 sidebar_position: 50
 title: "Normalize Quickstart"
+description: "Quick start guide for the Snowplow Normalize dbt package to flatten and normalize events and entities for downstream tools."
+keywords: ["normalize quickstart", "normalize setup", "dbt normalize installation"]
 ---
 
 ## Requirements

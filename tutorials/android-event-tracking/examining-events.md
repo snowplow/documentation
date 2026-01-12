@@ -1,6 +1,9 @@
 ---
 position: 3
-title: Examining the Events
+title: "Examine your Android screen view events with Snowplow Micro"
+sidebar_label: "Examine the events"
+description: "Verify and analyze Android screen view events using Snowplow Micro. View session data, screen engagement metrics, and automatically generated screen end events with foreground and background time tracking."
+keywords: ["snowplow micro android", "android event validation", "screen view testing", "mobile analytics debugging"]
 ---
 
 After implementing tracking, you'll want to verify and analyze the events being sent. You can use a Snowplow Micro pipeline for testing and development. Here's how to examine the events:

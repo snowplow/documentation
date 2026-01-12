@@ -1,7 +1,10 @@
 ---
-title: "Iglu Webhook"
+title: "Iglu webhook"
+sidebar_label: "Iglu webhook"
 date: "2020-02-25"
 sidebar_position: 30
+description: "Track self-describing events via GET or POST requests with custom JSON schemas for flexible third-party webhook integrations."
+keywords: ["iglu webhook adapter", "self-describing events", "custom webhook integration"]
 ---
 
 This webhook adapter lets you track events sent via a `GET` or `POST` request containing an [Iglu](https://github.com/snowplow/iglu)\-compatible event payload.

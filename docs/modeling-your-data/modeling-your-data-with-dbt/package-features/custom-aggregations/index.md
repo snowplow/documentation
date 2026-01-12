@@ -1,6 +1,8 @@
 ---
-title: "Custom Aggregations"
+title: "Configure custom aggregations for dbt models"
+sidebar_label: "Custom aggregations"
 description: "Details on custom aggregations in our packages"
+keywords: ["custom aggregations", "dbt aggregations", "derived table aggregations"]
 sidebar_position: 60
 ---
 
@@ -9,12 +11,12 @@ While [passthrough fields](/docs/modeling-your-data/modeling-your-data-with-dbt/
 ## Availability
 
 | Package | Minimum Required Version |
-|---------|--------------------------|
-| Unified | 0.3.0 |
+| ------- | ------------------------ |
+| Unified | 0.3.0                    |
 
 ## Usage
 
-To use a the custom aggregation, you need to set the relevant variable in your root `dbt_project.yml` file; e.g `snowplow__session_aggregations` (see your package [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md) for a full list of aggregation variables). 
+To use a the custom aggregation, you need to set the relevant variable in your root `dbt_project.yml` file; e.g `snowplow__session_aggregations` (see your package [configuration page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md) for a full list of aggregation variables).
 
 These variables are lists of objects that define your aggregations; they have keys of the `type` of aggregations you wish to do, the `field` to aggregate over, and the `alias` to give your aggregation in the derived table.
 
@@ -27,7 +29,7 @@ vars:
 ```
 The aggregation always runs on the [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md#events-this-run) table so all events (with a session identifier) and columns are available for you to use.
 
-Note that how to extract and use field from your entity or self-describing event columns will depend on your warehouse (see our [querying guide](/docs/destinations/warehouses-lakes/querying-data/index.md#entities) for more information), and you are unable to use dbt macros in this variable. 
+Note that how to extract and use field from your entity or self-describing event columns will depend on your warehouse (see our [querying guide](/docs/destinations/warehouses-lakes/querying-data/index.md#entities) for more information), and you are unable to use dbt macros in this variable.
 
 ### Supported Aggregations
 Currently we support the following aggregations:
@@ -43,7 +45,7 @@ Currently we support the following aggregations:
 
 ## Usage Notes
 
-:::caution
+:::warning
 
 It is unlikely, although not impossible, that when using the SQL approach you may need to provide a table alias to avoid ambiguous references, in this case please see the model sql file for the specific alias used for the `snowplow_unified_base_events_this_run` table in each case.
 

@@ -3,6 +3,7 @@ title: "Querying your first events"
 sidebar_position: 6
 sidebar_label: "Query the data"
 description: "Inspecting the events you tracked"
+keywords: ["querying data", "atomic events", "data warehouse", "SQL queries"]
 ---
 
 ```mdx-code-block
@@ -10,22 +11,15 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Once you’ve tracked some events, you will want to look at them in your data warehouse or database. The exact steps will depend on your choice of storage and the Snowplow offering.
+Once you've tracked some events, you'll want to look at them in your data warehouse, database, or lake. The exact steps will depend on your choice of storage and your Snowplow platform.
 
-## Connection details
+For **Snowplow CDI** Private Managed Cloud or Cloud customers, you can find your connection details in [Snowplow Console](https://console.snowplowanalytics.com/destinations/catalog), under the destination you've selected.
 
-<Tabs groupId="offering" queryString>
-  <TabItem value="enterprise" label="BDP Enterprise" default>
+Follow [our querying guide](/docs/destinations/warehouses-lakes/querying-data/index.md) for advice on querying your data.
 
-You can find the connection details in the [Console](https://console.snowplowanalytics.com/destinations/catalog), under the destination you’ve selected.
+## Snowplow Self-Hosted
 
-  </TabItem>
-  <TabItem value="cloud" label="BDP Cloud">
-
-You can find the connection details in the [Console](https://console.snowplowanalytics.com/destinations/catalog), under the destination you’ve selected.
-
-  </TabItem>
-  <TabItem value="community" label="Community Edition">
+If you don't have access to Snowplow Console, follow these instructions to connect to your Snowplow data:
 
 <Tabs groupId="warehouse" queryString>
   <TabItem value="postgres" label="Postgres" default>
@@ -85,7 +79,7 @@ To connect, you can use either Snowflake dashboard or [SnowSQL](https://docs.sno
 
 :::info Azure-specific instructions
 
-On Azure, you have created an external table in the [last step of the guide](/docs/get-started/snowplow-community-edition/quick-start/index.md#configure-the-destination). Use this table and ignore the text below.
+On Azure, you have created an external table in the [last step of the guide](/docs/get-started/self-hosted/quick-start/index.md#configure-the-destination). Use this table and ignore the text below.
 
 :::
 
@@ -102,20 +96,13 @@ See the [Databricks tutorial](https://docs.databricks.com/getting-started/quick-
 
 In Synapse Analytics, you can connect directly to the data residing in ADLS. You will need to know the names of the storage account (set in the `storage_account_name` Terraform variable) and the storage container (it’s a fixed value: `lake-container`).
 
-Follow [the Synapse documentation](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/query-delta-lake-format) and use the `OPENROWSET` function. If you created a data source in the [last step](/docs/get-started/snowplow-community-edition/quick-start/index.md#configure-the-destination) of the quick start guide, your queries will be a bit simpler.
+Follow [the Synapse documentation](https://learn.microsoft.com/en-us/azure/synapse-analytics/sql/query-delta-lake-format) and use the `OPENROWSET` function. If you created a data source in the [last step](/docs/get-started/self-hosted/quick-start/index.md#configure-the-destination) of the quick start guide, your queries will be a bit simpler.
 
 :::tip Fabric and OneLake
 
-If you created a OneLake shortcut in the [last step](/docs/get-started/snowplow-community-edition/quick-start/index.md#configure-the-destination) of the quick start guide, you will be able to explore Snowplow data in Fabric, for example, using Spark SQL.
+If you created a OneLake shortcut in the [last step](/docs/get-started/self-hosted/quick-start/index.md#configure-the-destination) of the quick start guide, you will be able to explore Snowplow data in Fabric, for example, using Spark SQL.
 
 :::
 
   </TabItem>
 </Tabs>
-
-</TabItem>
-</Tabs>
-
-## Writing queries
-
-Follow [our querying guide](/docs/destinations/warehouses-lakes/querying-data/index.md) for more information.

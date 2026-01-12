@@ -1,7 +1,10 @@
 ---
-title: "Scala client"
+title: "Scala Iglu client"
+sidebar_label: "Scala client"
 date: "2021-03-26"
 sidebar_position: 70
+description: "Production-ready Scala Iglu client and schema resolver for JVM applications with SBT and Gradle integration."
+keywords: ["scala iglu client", "jvm schema resolver", "sbt", "gradle"]
 ---
 
 ```mdx-code-block
@@ -9,11 +12,9 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-## Overview
-
 The [Scala client](https://github.com/snowplow/iglu-scala-client) is an Iglu client and schema resolver implemented in Scala.
 
-Setting up the Scala client to use from your own code is straightforward.  
+Setting up the Scala client to use from your own code is straightforward.
 For actual examples of initialization you can look at [Scala client](https://github.com/snowplow/iglu-scala-client) page.
 
 ## Integration options

@@ -1,5 +1,8 @@
 ---
 title: "Referrers, deep links and cross-navigation events"
+sidebar_label: "Links and referrers"
+description: "Track page referrers, deep links in mobile apps, and cross-navigation links using message notification events."
+keywords: ["referrers", "deep links", "cross-navigation", "message notifications"]
 ---
 
 ```mdx-code-block
@@ -16,7 +19,7 @@ The URL is tracked in the atomic event properties, under the `page_referrer` pro
 
 | **Table Column**                                 | **Type** | **Description**                                               | **Example values**                                                                                                      |
 |---------------------------------------------|----------|---------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------|
-| `page_referrer`                             | text     | Referrer URL                                                  | `http://www.snowplow.io/`                                                                                       |
+| `page_referrer`                             | text     | Referrer URL                                                  | `https://www.snowplow.io/`                                                                                       |
 
 ## Deep links in mobile apps
 
@@ -48,8 +51,8 @@ This context entity is attached to the first screen view event automatically aft
 
 ### How to track?
 
-* See the documentation for the [iOS and Android tracker](https://docs.snowplow.io/docs/sources/trackers/mobile-trackers/tracking-events/#tracking-deep-links).
-* [Documentation for the React Native tracker](https://docs.snowplow.io/docs/sources/trackers/react-native-tracker/tracking-events/#tracking-deep-link-received-events).
+* See the documentation for the [iOS and Android tracker](https://docs.snowplow.io/docs/sources/mobile-trackers/tracking-events/#tracking-deep-links).
+* [Documentation for the React Native tracker](https://docs.snowplow.io/docs/sources/react-native-tracker/tracking-events/#tracking-deep-link-received-events).
 
 ## Link click tracking on Web
 
@@ -63,7 +66,7 @@ Link click tracking feature in the JavaScript tracker enables automatic capturin
 
 ### How to track?
 
-See the [link click tracking documentation for the JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/index.md#link-click-tracking).
+See the [link click tracking documentation for the JavaScript tracker](/docs/sources/web-trackers/tracking-events/index.md#link-click-tracking).
 
 ## Cross-domain tracking on Web
 
@@ -73,4 +76,4 @@ When the `_sp` parameter is present in the page URL, enrichment uses it to assig
 
 ### How to track?
 
-See the [documentation for cross-domain tracking on the JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md#cross-domain-tracking) for instructions.
+See the [documentation for cross-domain tracking on the JavaScript tracker](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md#cross-domain-tracking) for instructions.

@@ -1,10 +1,9 @@
 ---
-title: "Creating a tracking plan with event specifications"
+title: "Create a tracking plan with event specifications"
 sidebar_label: "Creating a tracking plan"
 sidebar_position: 2
-sidebar_custom_props:
-  offerings:
-    - bdp
+description: "Build a comprehensive tracking plan by identifying business events, defining their structure with event specifications, and documenting implementation details."
+keywords: ["tracking plan", "event planning", "tracking design", "event specifications design"]
 ---
 
 As explained in [Introduction to tracking design](/docs/data-product-studio/index.md), to use Snowplow successfully, you need to have a good idea of:
@@ -53,5 +52,5 @@ The event validation part allows you to set the instructions for tracking implem
 The [Entities](/docs/fundamentals/entities/index.md) part allows you to declare which entities should be tracked with the event. You can also define whether the entity should be mandatory or optional, or whether more than one instance should be tracked with this event.
 
 :::info
-Snowplow BDP provides both a UI and an API to manage your Event Specifications. For information about managing event specifications see [How to manage Event Specifications](/docs/data-product-studio/event-specifications/index.md).
+Snowplow provides both a UI and an API to manage your Event Specifications. For information about managing event specifications see [How to manage Event Specifications](/docs/data-product-studio/event-specifications/index.md).
 :::

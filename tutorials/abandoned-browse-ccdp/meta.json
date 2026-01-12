@@ -1,5 +1,8 @@
 {
-  "title": "Abandoned Browse for Composable CDP",
+  "title": "Implement an abandoned browse system with composable CDP",
   "label": "Solution accelerator",
-  "description": "How to use Snowplow composable CDP to engage with customers that show intent to purchase"
+  "description": "Engage with customers that show intent to purchase, using Snowplow composable CDP with Braze.",
+  "useCase": "Composable CDP",
+  "technologies": ["Census", "Braze"],
+  "snowplowTech": ["Local"]
 }

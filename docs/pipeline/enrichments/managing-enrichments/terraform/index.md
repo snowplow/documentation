@@ -1,14 +1,13 @@
 ---
-title: "Managing enrichments in Snowplow Community Edition"
+title: "Manage enrichments in Snowplow Self-Hosted"
 date: "2021-10-06"
-sidebar_label: "Community Edition: Terraform"
+sidebar_label: "Snowplow Self-Hosted Terraform"
 sidebar_position: 15
-sidebar_custom_props:
-  offerings:
-    - community
+description: "Enable and configure enrichments in Snowplow Self-Hosted deployments using Terraform on AWS, GCP, or Azure."
+keywords: ["Terraform enrichments", "Self-Hosted enrichments", "enrichment deployment"]
 ---
 
-If you have installed Snowplow via [Quick Start](/docs/get-started/snowplow-community-edition/what-is-quick-start/index.md), you will have the following enrichments enabled by default:
+If you have installed Snowplow via [Quick Start](/docs/get-started/self-hosted/index.md), you will have the following enrichments enabled by default:
 
 - [UA parser](/docs/pipeline/enrichments/available-enrichments/ua-parser-enrichment/index.md)
 - [YAUAA](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md)
@@ -30,4 +29,4 @@ The IAB and IP Lookups enrichments require a 3rd party database to function.
 
 To disable any enrichment, you can follow the instructions for [AWS](https://github.com/snowplow-devops/terraform-aws-enrich-kinesis-ec2#disabling-default-enrichments), [GCP](https://github.com/snowplow-devops/terraform-google-enrich-pubsub-ce#disabling-default-enrichments) or [Azure](https://github.com/snowplow-devops/terraform-azurerm-enrich-event-hub-vmss#disabling-default-enrichments).
 
-If you are using [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md) for testing, you can configure enrichments following the [usage guide](/docs/data-product-studio/data-quality/snowplow-micro/configuring-enrichments/index.md).
+If you are using [Snowplow Micro](/docs/testing/snowplow-micro/index.md) for testing, you can configure enrichments following the [usage guide](/docs/testing/snowplow-micro/configuring-enrichments/index.md).

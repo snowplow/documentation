@@ -12,11 +12,30 @@
 </tr>
 <tr>
     <td><code>input.minRemainingAckDeadline</code></td>
-    <td>Optional. Default value <code>0.1</code>. Controls when ack deadlines are re-extended, for a message that is close to exceeding its ack deadline. For example, if <code>durationPerAckExtension</code> is <code>600 seconds</code> and <code>minRemainingAckDeadline</code> is <code>0.1</code> then the loader will wait until there is <code>60 seconds</code> left of the remining deadline, before re-extending the message deadline.</td>
+    <td>
+      Optional. Default value <code>0.1</code>.
+      Controls when ack deadlines are re-extended, for a message that is close to exceeding its ack deadline.
+      For example, if <code>durationPerAckExtension</code> is <code>600 seconds</code> and <code>minRemainingAckDeadline</code> is <code>0.1</code> then the loader
+      will wait until there is <code>60 seconds</code> left of the remining deadline, before re-extending the message deadline.
+    </td>
 </tr>
 <tr>
     <td><code>input.maxMessagesPerPull</code></td>
-    <td>Optional. Default value <code>1000</code>. How many pubsub messages to pull from the server in a single request.</td>
+    <td>Optional. Default value 1000. How many Pub/Sub messages to pull from the server in a single request.</td>
+</tr>
+<tr>
+    <td><code>input.retries.transientErrors.delay</code> (since 0.8.0)</td>
+    <td>
+      Optional. Default value <code>100 millis</code>.
+      Backoff delay for follow-up attempts
+    </td>
+</tr>
+<tr>
+    <td><code>input.retries.transientErrors.attempts</code> (since 0.8.0)</td>
+    <td>
+      Optional. Default value <code>10</code>.
+      Max number of attempts, after which Loader will crash and exit
+    </td>
 </tr>
 <tr>
     <td><code>output.bad.topic</code></td>
@@ -24,9 +43,27 @@
 </tr>
 <tr>
     <td><code>output.bad.batchSize</code></td>
-    <td>Optional.  Default value 100.  Bad events are sent to Pub/Sub in batches not exceeding this count.</td>
+    <td>Optional.  Default value 1000.  Bad events are sent to Pub/Sub in batches not exceeding this count.</td>
 </tr>
 <tr>
     <td><code>output.bad.requestByteThreshold</code></td>
     <td>Optional.  Default value 1000000.  Bad events are sent to Pub/Sub in batches with a total size not exceeding this byte threshold</td>
+</tr>
+<tr>
+    <td><code>output.bad.maxRecordSize</code></td>
+    <td>Optional.  Default value 10000000.  Any single failed event sent to Pub/Sub should not exceed this size in bytes</td>
+</tr>
+<tr>
+    <td><code>output.bad.retries.transientErrors.delay</code> (since 0.8.0)</td>
+    <td>
+      Optional. Default value <code>100 millis</code>.
+      Backoff delay for follow-up attempts
+    </td>
+</tr>
+<tr>
+    <td><code>output.bad.retries.transientErrors.attempts</code> (since 0.8.0)</td>
+    <td>
+      Optional. Default value <code>10</code>.
+      Max number of attempts, after which Loader will crash and exit
+    </td>
 </tr>

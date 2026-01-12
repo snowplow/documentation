@@ -1,6 +1,8 @@
 ---
 title: "Incremental sessionization logic"
+sidebar_label: "Incremental sessionization logic"
 description: "A detailed overview of our incremental run logic using manifest tables."
+keywords: ["incremental sessionization", "sessionization logic", "manifest tables", "incremental processing"]
 sidebar_position: 10
 ---
 
@@ -198,7 +200,7 @@ dbt run --select snowplow_<package>_base_new_event_limits
 - State 3: `Snowplow: Snowplow incremental models out of sync. Syncing`
 - State 4: `Snowplow: Standard incremental run`
 
-:::caution
+:::warning
 
 In all states, although much more likely in state 1, it is possible that a run finds no incremental data to process. In this case you will see a warning in the logs of the form `Snowplow Warning: No data in <table> for date range from variables, please modify your run variables to include data if this is not expected.`. In this case you should increase your start date if no runs have completed, or increase your backfill limit days if there is a gap in your data before the next records.
 

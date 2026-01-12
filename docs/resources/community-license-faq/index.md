@@ -1,4 +1,9 @@
-# FAQ: Snowplow Community License (SCL)
+---
+title: "Snowplow Community License FAQ"
+sidebar_label: "Community License FAQ"
+description: "Frequently asked questions about the Snowplow Community License terms, usage rights, and restrictions."
+keywords: ["community license", "SCL", "license FAQ"]
+---
 
 :::info Note
 
@@ -6,9 +11,11 @@ This FAQ is not a substitute for reading [the license text](/community-license-1
 
 :::
 
+This page explains some of the most common questions about the Snowplow Community License.
+
 ## What is the Snowplow Community License?
 
-This is a source-available license based on the Confluent Community License, with changes related to rights and restrictions.
+The Snowplow Community License is a source-available license based on the Confluent Community License, with changes related to rights and restrictions.
 
 ## How does the Snowplow Community License work in practice?
 
@@ -43,7 +50,7 @@ Only the MIT and Apache 2 licensed software from Snowplow can be embedded and di
 
 ## I have commercially licensed software from Snowplow. Does this impact me?
 
-No, if you have entered into a separate commercial licensing with Snowplow, for example, buying a Snowplow BDP commercial product, then the commercial license terms you have agreed to will continue to govern your use of the software.
+No, if you have entered into a separate commercial licensing with Snowplow, for example, buying a Snowplow CDI commercial product, then the commercial license terms you have agreed to will continue to govern your use of the software.
 
 ## How can I contact Snowplow in case of doubts?
 

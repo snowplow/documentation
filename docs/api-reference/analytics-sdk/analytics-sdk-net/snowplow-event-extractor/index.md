@@ -1,10 +1,11 @@
 ---
-title: "Snowplow event extractor"
+title: "Parse enriched events in Azure Data Lake"
+sidebar_label: "Snowplow event extractor"
 date: "2021-03-26"
 sidebar_position: 1040
+description: "Custom U-SQL extractor for parsing Snowplow enriched events in Azure Data Lake Analytics with direct access to nested context fields."
+keywords: ["azure data lake analytics", "u-sql extractor", "snowplow azure"]
 ---
-
-## Overview
 
 [Azure Data Lake](https://azure.microsoft.com/en-in/solutions/data-lake/) is a secure and scalable data storage and analytics service. [Azure Data Lake Analytics](https://azure.microsoft.com/en-in/services/data-lake-analytics/) includes [U-SQL](https://blogs.msdn.microsoft.com/visualstudio/2015/09/28/introducing-u-sql-a-language-that-makes-big-data-processing-easy/), a big-data query language for writing queries that analyze data.
 
@@ -24,7 +25,7 @@ public class EventExtractor : IExtractor
     {
        //split the input based on ROW_DELIMITER
        //set the output data on the output object
-       //EventExtractor only outputs columns and values that are defined with the output. 
+       //EventExtractor only outputs columns and values that are defined with the output.
     }
 }
 ```
@@ -44,7 +45,7 @@ DECLARE @input_file string = @"\snowplow\event.tsv";
     USING new Snowplow.EventExtractor();
 ```
 
-The most complex piece of processing is the handling of the self-describing JSONs found in the enriched event's unstruct_event, contexts and derived_contexts fields.  
+The most complex piece of processing is the handling of the self-describing JSONs found in the enriched event's unstruct_event, contexts and derived_contexts fields.
 Consider contexts found in the tsv:
 
 ```json
@@ -99,7 +100,7 @@ The nested data array inside context consists of an array from which we parse th
     FROM @parseData;
 ```
 
-The above process can get quite complex.  
+The above process can get quite complex.
 So to abstract away the complexity, Snowplow Event Extractor follows a simple mapping:
 
 ```sql

@@ -1,0 +1,8 @@
+{
+  "title": "Use the Snowplow CLI MCP tool",
+  "label": "Data governance",
+  "description": "Use the Snowplow CLI MCP tool with Claude or other MCP clients for streamlined data structure management.",
+  "useCase": "Composable analytics",
+  "technologies": ["AI assistants"],
+  "snowplowTech": ["Snowplow CLI"]
+}

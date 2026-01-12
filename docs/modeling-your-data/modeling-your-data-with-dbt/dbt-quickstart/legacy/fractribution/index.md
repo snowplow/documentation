@@ -2,6 +2,8 @@
 sidebar_label: "Fractribution"
 sidebar_position: 900
 title: "Fractribution Quickstart"
+description: "Quick start guide for the legacy Snowplow Fractribution dbt package for marketing attribution modeling."
+keywords: ["fractribution quickstart", "legacy attribution", "fractribution setup"]
 ---
 
 ```mdx-code-block
@@ -65,7 +67,7 @@ vars:
     snowplow__conversion_window_start_date: '2022-01-01'
     snowplow__conversion_window_end_date: '2023-02-01'
     snowplow__conversion_hosts: ['mysite.com']
-    snowplow__path_transforms: {'exposure_path' : null}
+    snowplow__path_transforms: \{'exposure_path' : null}
 ```
 
 :::tip Snowflake Only
@@ -85,7 +87,7 @@ vars:
 <details>
 <summary>Modifying the conversions source</summary>
 
-By default the `snowplow__conversions_source` is your atomic events table. In most cases this is likely to be what you want to use, however you may wish to use the in-built conversions modeling as part of our [web package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/conversions/index.md) if you have already defined this, by setting `snowplow__conversions_source` to `"{{ ref('snowplow_web_sessions') }}"`.
+By default the `snowplow__conversions_source` is your atomic events table. In most cases this is likely to be what you want to use, however you may wish to use the in-built conversions modeling as part of our [web package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/conversions/index.md) if you have already defined this, by setting `snowplow__conversions_source` to `"\\{\\{ ref('snowplow_web_sessions') }}\\}"`.
 
 Alternatively, if you are using Redshift/Postgres you may wish to include additional fields from a Self-Describing Event, or an Entity. To do this, you should create a new model in your project, e.g. `models/snowplow/snowplow_joined_events_table.sql` which should have something like the following content:
 
@@ -94,25 +96,25 @@ Alternatively, if you are using Redshift/Postgres you may wish to include additi
 ```jinja2
 with {{ snowplow_utils.get_sde_or_context('atomic',
                                           'my_custom_context',
-                                          "'{{ get_lookback_date_limits("min") }}'",
-                                          "'{{ get_lookback_date_limits("max") }}'",
+                                          "'\{\{ get_lookback_date_limits(\"min\") }}\}'",
+                                          "'\{\{ get_lookback_date_limits(\"max\") }}\}'",
                                           'my_prefix')}}
 
 select
   events.*,
   b.*
-from {{ source('atomic', 'events') }} as events
+from \\{\\{ source('atomic', 'events') }}\\} as events
   left join nl_basjes_my_prefix_1 b on
     events.event_id = b.my_prefix__id
     and events.collector_tstamp = b.my_prefix__tstamp
 
 where
   -- use the appropriate partition key to filter on in addition to this, add a bit of a buffer if it is not derived_tstamp
-  date(derived_tstamp) >= '{{ get_lookback_date_limits("min") }}'
-  and date(derived_tstamp) <= '{{ get_lookback_date_limits("max") }}'
+  date(derived_tstamp) >= '\{\{ get_lookback_date_limits(\"min\") }}\}'
+  and date(derived_tstamp) <= '\{\{ get_lookback_date_limits(\"max\") }}\}'
 ```
 
-Finally ensure you set the `snowplow__conversions_source` to `"{{ ref('snowplow_joined_events_table') }}"`
+Finally ensure you set the `snowplow__conversions_source` to `"\\{\\{ ref('snowplow_joined_events_table') }}\\}"`
 
 </details>
 
@@ -133,7 +135,7 @@ import FractributionDbtMacros from "@site/docs/reusable/fractribution-dbt-macros
 ```
 ### 4. Run the model
 
-Execute the following either through your CLI, within dbt Cloud, or within [Snowplow BDP](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/dbt/index.md)
+Execute the following either through your CLI, within dbt Cloud, or within [Snowplow Console](/docs/modeling-your-data/running-data-models-via-console/dbt/index.md)
 
 ```yml
 dbt run --select snowplow_fractribution
@@ -210,7 +212,7 @@ Please note that some of the libraries are adapter specific. These are listed in
 <details>
 <summary>M1 Instructions (for Snowflake only)</summary>
 
-:::caution
+:::warning
 There is an issue with running Snowpark on M1 chips. A workaround recommended by Snowflake is to set up a virtual environment that uses x86 Python:
 
 ```

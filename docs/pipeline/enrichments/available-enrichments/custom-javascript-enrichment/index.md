@@ -2,6 +2,8 @@
 title: "Custom JavaScript enrichment"
 sidebar_position: 11
 sidebar_label: Custom JavaScript
+description: "Write custom JavaScript code to transform and enrich events with flexible data manipulation logic."
+keywords: ["JavaScript enrichment", "custom enrichment", "event transformation"]
 ---
 
 With this enrichment, you can write a JavaScript function to be executed for each event. Use this enrichment to apply your own business logic to your events, including:

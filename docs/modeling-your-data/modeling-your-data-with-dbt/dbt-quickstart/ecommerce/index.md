@@ -2,6 +2,8 @@
 sidebar_label: "Ecommerce"
 sidebar_position: 40
 title: "Ecommerce Quickstart"
+description: "Quick start guide for the Snowplow Ecommerce dbt package to model cart, checkout, product, and transaction data."
+keywords: ["ecommerce quickstart", "ecommerce setup", "dbt ecommerce installation"]
 ---
 
 ```mdx-code-block
@@ -10,12 +12,10 @@ import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
 <Accelerator href="https://docs.snowplow.io/accelerators/ecommerce/" name="E-Commerce"/>
 ```
 
-## Requirements
+In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web events dataset being available in your database, the requirements are:
 
-In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web events dataset being available in your database:
-
-- A dataset of ecommerce events from the [Snowplow JavaScript tracker](/docs/sources/trackers/javascript-trackers/web-tracker/index.md), or the [iOS/Android](/docs/sources/trackers/mobile-trackers/tracking-events/ecommerce-tracking/index.md) trackers must be available in the database.
-- Have the [`webPage` context](/docs/sources/trackers/javascript-trackers/web-tracker/tracker-setup/initialization-options/index.md#adding-predefined-contexts) enabled. (Note if you have only tracked mobile ecommerce events, you will need other events in your warehouse to have used this context as we require the column to exist).
+- A dataset of ecommerce events from the [Snowplow JavaScript tracker](/docs/sources/web-trackers/index.md), or the [iOS/Android](/docs/sources/mobile-trackers/tracking-events/ecommerce-tracking/index.md) trackers must be available in the database.
+- Have the [`webPage` context](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md#adding-predefined-contexts) enabled. (Note if you have only tracked mobile ecommerce events, you will need other events in your warehouse to have used this context as we require the column to exist).
 - Have the following ecommerce contexts enabled: `cart`, `checkout_step`, `page` `transaction`, `user`
 - Track the ecommerce tracking action events on your website/mobile application
 
@@ -91,7 +91,7 @@ vars:
 
 ### 6. Removing unused modules
 
-The ecommerce package creates tables that depend on the existence of certain entities that are a part of the [Snowplow ecommerce](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md) JS plugin. If, for some reason, you have not implemented them and would like to streamline your data modeling not to create empty tables, then you need to add that configuration to your `dbt_project.yml` file. Below you can see an example of what that would look like if you wanted to disable the [cart entity](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md#cart)
+The ecommerce package creates tables that depend on the existence of certain entities that are a part of the [Snowplow ecommerce](/docs/sources/web-trackers/tracking-events/ecommerce/index.md) JS plugin. If, for some reason, you have not implemented them and would like to streamline your data modeling not to create empty tables, then you need to add that configuration to your `dbt_project.yml` file. Below you can see an example of what that would look like if you wanted to disable the [cart entity](/docs/sources/web-trackers/tracking-events/ecommerce/index.md#cart)
 
 #### Disabling the cart module in `dbt_project.yml` (recommended)
 
@@ -114,7 +114,7 @@ Adding these two configurations to your `dbt_project.yml` will ensure that the c
 If you want to temporarily disable a module, or you just find it easier to use the command line, you can also do this in the command line when executing the `dbt run` command. You will need to run the following command to disable the carts module
 
 ```bash
-dbt run --exclude carts --select snowplow_ecommerce --vars '{snowplow__disable_ecommerce_carts: true}'
+dbt run --exclude carts --select snowplow_ecommerce --vars '\{snowplow__disable_ecommerce_carts: true}'
 ```
 
 ### 7. Enable mobile ecommerce events
@@ -138,7 +138,7 @@ vars:
 
 ### 9. Verify your variables using our Config guides (Optional)
 
-If you are unsure whether the default values set are good enough in your case or you would already like to maximize the potential of your models, you can dive deeper into the meaning behind our variables on our [Config](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/index.mdx) page. It includes a [Config Generator](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/index.mdx#Generator) to help you create all your variable configurations, if necessary.
+If you are unsure whether the default values set are good enough in your case or you would already like to maximize the potential of your models, you can dive deeper into the meaning behind our variables on our [Config](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/ecommerce/index.mdx) page. It includes a [Config Generator](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/ecommerce/index.mdx#config-generator) to help you create all your variable configurations, if necessary.
 
 
 ### 10. Run your model

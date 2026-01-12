@@ -2,6 +2,8 @@
 title: "Campaign attribution enrichment"
 sidebar_position: 4
 sidebar_label: Campaign attribution
+description: "Link events to marketing campaigns by extracting attribution data from query string parameters."
+keywords: ["campaign attribution", "marketing attribution", "UTM parameters"]
 ---
 
 This enrichment can be used to link events to marketing campaigns, using the query string parameters.
@@ -16,20 +18,20 @@ https://www.acme.com/spring_offer_product?utm_source=influencer&utm_medium=blog&
 
 This could result in the following fields being added to the enrich event:
 
-| field          | value           |
-|----------------|-----------------|
-| `mkt_source`   | `influencer`    |
-| `mkt_medium`   | `blog`          |
-| `mkt_campaign` | `spring_offer`  |
+| field          | value          |
+| -------------- | -------------- |
+| `mkt_source`   | `influencer`   |
+| `mkt_medium`   | `blog`         |
+| `mkt_campaign` | `spring_offer` |
 
 The configuration of the enrichment defines which parameters in the URL (e.g. `utm_source`) map to which fields in the event (e.g. `mkt_source`) — see examples below.
 
 In addition, this enrichment automatically knows about Google (corresponding to the `gclid` query string parameter), Microsoft (`msclkid`), and DoubleClick (`dclid`). For example, if the query string contains `&gclid=abc`, this will be the result:
 
-| field         | value           |
-|---------------|-----------------|
-| `mkt_clickid` | `abc`           |
-| `mkt_network` | `Google`        |
+| field         | value    |
+| ------------- | -------- |
+| `mkt_clickid` | `abc`    |
+| `mkt_network` | `Google` |
 
 ## Configuration
 
@@ -120,7 +122,7 @@ If the query string includes multiple acceptable parameters (e.g. both `utm_camp
 Results:
 
 | query string                           | value of `mkt_campaign` |
-|----------------------------------------|-------------------------|
+| -------------------------------------- | ----------------------- |
 | `utm_campaign=abc`                     | `abc`                   |
 | `legacy_campaign=abc`                  | `abc`                   |
 | `legacy_campaign=abc&utm_campaign=def` | `def`                   |
@@ -157,7 +159,7 @@ In the next example, we will customize the `mktClickId` configuration:
     }
 ```
 
-:::caution
+:::warning
 
 You should not use more than one click parameter in the query string (e.g. both `wbraid` and `gbraid`). If you do, one of them will be picked arbitrarily.
 
@@ -166,7 +168,7 @@ You should not use more than one click parameter in the query string (e.g. both 
 Results:
 
 | query string            | value of `mkt_clickid` | value of `mkt_network` |
-|-------------------------|------------------------|------------------------|
+| ----------------------- | ---------------------- | ---------------------- |
 | `wbraid=abc`            | `abc`                  | `Google`               |
 | `msclkid=abc`           | `abc`                  | `NotMicrosoft`         |
 | `xyzid=abc`             | `abc`                  | `XYZ`                  |
@@ -177,7 +179,7 @@ Results:
 This enrichment populates the following fields of the atomic event :
 
 | Field          | Purpose                                                                                                                                                                                                                                                           |
-|----------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `mkt_medium`   | The advertising or marketing medium, for example: `banner`, `email newsletter`.                                                                                                                                                                                   |
 | `mkt_source`   | Identifies the advertiser, site, publication, etc. that is sending traffic to your property, for example: `newsletter4`, `billboard`.                                                                                                                             |
 | `mkt_term`     | Identifies keywords (terms).                                                                                                                                                                                                                                      |

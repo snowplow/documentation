@@ -1,7 +1,9 @@
 ---
-title: "Ecommerce Analytics"
+title: "Ecommerce Analytics visualization"
 sidebar_position: 2
 sidebar_label: "Ecommerce Analytics"
+description: "Ecommerce analytics visualization with dashboards for revenue, purchases, checkout journey, and transaction patterns."
+keywords: ["ecommerce visualization", "ecommerce dashboards", "revenue analytics", "purchase analytics"]
 ---
 
 <!-- Ecommerce reports based on GA4's Monetization metrics, covering revenue, purchases, checkout journey and promotions -->
@@ -20,7 +22,7 @@ Leveraging Snowplow's Ecommerce event tracking packages and our Ecommerce dbt pa
 
 - Running the [Snowplow Ecommerce dbt Package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md)
 - Access to the derived tables granted to the role used when setting up the visualization
-- Ecommerce events tracked using the ecommerce APIs for the [JavaScript (Snowplow Ecommerce plugin)](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/ecommerce/index.md) or [mobile trackers](/docs/sources/trackers/mobile-trackers/tracking-events/ecommerce-tracking/index.md)
+- Ecommerce events tracked using the ecommerce APIs for the [JavaScript (Snowplow Ecommerce plugin)](/docs/sources/web-trackers/tracking-events/ecommerce/index.md) or [mobile trackers](/docs/sources/mobile-trackers/tracking-events/ecommerce-tracking/index.md)
 
 ## Usage
 

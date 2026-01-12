@@ -1,7 +1,10 @@
 ---
-title: "Licensing overview"
+title: "Snowplow software licensing overview"
 sidebar_position: 10
 hide_table_of_contents: true
+sidebar_label: "Licensing overview"
+description: "Overview of Snowplow software licenses including Community License, Limited Use License, and commercial options."
+keywords: ["Snowplow licensing", "software licenses", "open source licenses", "component licenses"]
 ---
 
 ```mdx-code-block
@@ -77,7 +80,7 @@ All pipeline apps:
 * [BigQuery Loader](/docs/api-reference/loaders-storage-targets/bigquery-loader/index.md) _(2.0.0+)_
 * [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md) _(0.2.0+)_
 * Other loaders
-* [Snowbridge](/docs/destinations/forwarding-events/snowbridge/index.md) _(2.4.0+)_
+* [Snowbridge](/docs/api-reference/snowbridge/index.md) _(2.4.0+)_
 * Community Edition terraform modules _(2024+)_
 
 </td>
@@ -101,4 +104,4 @@ When in doubt, consult each component’s GitHub repository for the LICENSE file
 
 ## Proprietary components
 
-[Snowplow BDP](https://snowplow.io/snowplow-bdp/) is built upon the above components, but adds a vast set of proprietary, closed source ones (UI, API, highly available deployment logic, and so on). These are only available under a commercial license for Snowplow customers.
+[Snowplow CDI](https://snowplow.io/) is built upon the above components, but adds a vast set of proprietary, closed source ones (UI, API, highly available deployment logic, and so on). These are only available under a commercial license for Snowplow customers.

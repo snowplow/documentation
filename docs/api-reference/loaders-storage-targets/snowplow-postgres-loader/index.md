@@ -1,6 +1,9 @@
 ---
-title: "Postgres Loader"
-sidebar_position: 6
+title: "Postgres Loader for testing and development"
+sidebar_label: "Postgres Loader"
+sidebar_position: 7
+description: "Load Snowplow enriched events into PostgreSQL database from Kinesis or Pub/Sub for development and testing environments."
+keywords: ["postgres loader", "postgresql", "snowplow postgres", "database loader"]
 ---
 
 ```mdx-code-block
@@ -18,7 +21,7 @@ The Postgres loader is not recommended for production use, especially with large
 
 :::tip Schemas in Postgres
 
-For more information on how events are stored in Postgres, check the [mapping between Snowplow schemas and the corresponding Postgres column types](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md?warehouse=postgres).
+For more information on how events are stored in Postgres, check the [mapping between Snowplow schemas and the corresponding Postgres column types](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md?warehouse=postgres).
 
 :::
 

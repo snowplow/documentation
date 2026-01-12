@@ -1,22 +1,23 @@
 ---
 position: 10
-title: Generate tracking code and implementation instructions
+title: Generate tracking code from data products with Snowtype
+sidebar_label: Generate tracking code
+description: "Generate type-safe tracking code and implementation instructions with Snowtype. Use generated APIs to track event specifications and verify events with Snowplow Inspector and Console volume counts."
+keywords: ["snowtype code generation", "type-safe tracking apis", "event specification tracking", "tracking code implementation"]
 ---
 
-### Generating code and implementation instructions
-
-On your terminal now run `npx @snowplow/snowtype generate --instructions`. If all is as expected, after a few seconds, you will have the following files generated:
+On your terminal now run `npx @snowplow/snowtype@latest generate --instructions`. If all is as expected, after a few seconds, you will have the following files generated:
 
 ![](./images/fs.png)
 
 The `src/tracking/instructions.md` file includes detailed instructions and information about the Event Specifications to be implemented while `src/tracking/snowplow.ts` contains all the required code to be used to track the Event Specifications.
 
 :::info
-In some editors like [Visual Studio Code](https://code.visualstudio.com/), the APIs that are available in a project are shown to the developer as they type. For Snowtype exposed APIs to track Event Specifications or event Data Structures start with `track` and then the name of the Data Structure or Event Specification. For Event Specification APIs, there is also the suffix of `Spec` or `spec` depending on the language. 
+In some editors like [Visual Studio Code](https://code.visualstudio.com/), the APIs that are available in a project are shown to the developer as they type. For Snowtype exposed APIs to track Event Specifications or event Data Structures start with `track` and then the name of the Data Structure or Event Specification. For Event Specification APIs, there is also the suffix of `Spec` or `spec` depending on the language.
 E.g. for our custom Data Product, we have available the `trackAddTodoSpec`, `trackCompleteTodoSpec` and `trackRemoveTodoSpec` methods.
 :::
 
-### Tracking Data Product interactions
+## Tracking Data Product interactions
 
 To track interactions such as adding a new todo, you can add the following piece of code at `src/pagesTodo/components/Header.tsx`
 

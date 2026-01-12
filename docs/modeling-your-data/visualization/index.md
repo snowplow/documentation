@@ -1,10 +1,9 @@
 ---
-title: "Visualizations"
+title: "Data model visualizations"
 sidebar_position: 8
 sidebar_label: "Visualizations"
-sidebar_custom_props:
-  offerings:
-    - bdp
+description: "Overview of Snowplow visualization templates including ecommerce, attribution, media, and marketing analytics."
+keywords: ["data visualization", "Snowplow dashboards", "analytics visualizations", "BI templates"]
 ---
 
 ```mdx-code-block
@@ -65,10 +64,10 @@ The installation workflow will look something like this:
 
 ### Data model dependencies
 
-Generally, visualizations will depend on data models. If there are dependencies, the installation flow will highlight which models are required and what models you currently have [running via BDP](/docs/modeling-your-data/running-data-models-via-snowplow-bdp/index.md). It will also highlight any properties that you need to enable or configure for these data models.
+Generally, visualizations will depend on data models. If there are dependencies, the installation flow will highlight which models are required and what models you currently have [running via Console](/docs/modeling-your-data/running-data-models-via-console/index.md). It will also highlight any properties that you need to enable or configure for these data models.
 
 :::note Manual configuration for Open Source
-If you are running the necessary data models yourself outside of BDP, then you will need to manually check that your setup satisfies the requirements for each visualization. These requirements are listed within the documentation pages for each visualization.
+If you are running the necessary data models yourself outside of Console, then you will need to manually check that your setup satisfies the requirements for each visualization. These requirements are listed within the documentation pages for each visualization.
 :::
 
 ## Warehouse connection
@@ -102,7 +101,7 @@ Many of the visualizations support the exporting of the SQL used to generate the
 Note that some data is processed further after the query to get it into the format required for plotting, which may include actions such as filtering, pivoting, etc.
 
 ### Help
-The visualizations provide help text throughout: keep an eye out for the help icon (<Icon icon="fa-regular fa-circle-question"/>) to get more context or help in using some functionality.
+The visualizations provide help text throughout: keep an eye out for the help icon to get more context or help in using some functionality.
 
 ### Log out
 If you wish to log out of the visualization, you can do this from the sidebar. Note that this also logs you out of the Console.

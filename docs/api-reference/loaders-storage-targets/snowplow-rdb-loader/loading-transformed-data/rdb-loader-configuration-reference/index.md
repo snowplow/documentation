@@ -1,7 +1,10 @@
 ---
 title: "RDB Loader configuration reference"
+sidebar_label: "RDB Loader configuration reference"
 date: "2022-04-05"
 sidebar_position: 500
+description: "Configure RDB Loader for Redshift, Snowflake, and Databricks with storage, messaging, scheduling, and monitoring settings."
+keywords: ["rdb loader config", "redshift config", "snowflake config", "databricks config", "loader settings"]
 ---
 
 The configuration reference in this page is written for RDB Loader 5.0.0 or higher.
@@ -170,8 +173,8 @@ Only Snowflake Loader can be run on Azure at the moment.
 | `initRetries.strategy`               | Backoff strategy used during retry. The possible values are `JITTER`, `CONSTANT`, `EXPONENTIAL`, `FIBONACCI`.                                                                                                                                                                                                                                                                                             |
 | `initRetries.attempts`               | Optional. How many attempts to make before sending the message into retry queue. If missing, `cumulativeBound` will be used.                                                                                                                                                                                                                                                                              |
 | `initRetries.cumulativeBound`        | Optional. When backoff reaches this delay, eg '1 hour', the loader will stop retrying. If both this and `attempts` are not set, the loader will retry indefinitely.                                                                                                                                                                                                                                       |
-| `telemetry.disable` | Optional. Set to `true` to disable [telemetry](/docs/get-started/snowplow-community-edition/telemetry/index.md). |
-| `telemetry.userProvidedId` | Optional. See [here](/docs/get-started/snowplow-community-edition/telemetry/index.md#how-can-i-help) for more information. |
+| `telemetry.disable` | Optional. Set to `true` to disable [telemetry](/docs/get-started/self-hosted/telemetry/index.md). |
+| `telemetry.userProvidedId` | Optional. See [here](/docs/get-started/self-hosted/telemetry/index.md#how-can-i-help) for more information. |
 
 ## Common monitoring settings
 

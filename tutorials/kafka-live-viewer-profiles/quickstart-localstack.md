@@ -1,6 +1,9 @@
 ---
 position: 2
-title: Quickstart with Localstack
+title: "Run the Kafka live viewer profiles application using LocalStack"
+sidebar_label: "Run the application locally"
+description: "Run the complete live viewer profiles stack locally with Docker, LocalStack, and Snowplow to process media tracking events and display real-time user states."
+keywords: ["localstack snowplow development", "docker kafka dynamodb local"]
 ---
 
 The following steps will deploy the solution accelerator using Localstack.
@@ -46,7 +49,7 @@ On the next screen, click `Custom media tracking demo`. This will bring up a vid
 
 ![Welcome page on tracking website](images/welcome-page.png)
 
-You must keep this window open with the video playing because everything here is running in real-time. You can use the [Snowplow Chrome Plugin](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm?hl=en&pli=1) to verify that the events are successfully sent from the web browser.
+You must keep this window open with the video playing because everything here is running in real-time. You can use the [Snowplow Chrome Plugin](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm) to verify that the events are successfully sent from the web browser.
 
 ![Video playing on the website](images/video.png)
 

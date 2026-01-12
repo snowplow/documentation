@@ -2,13 +2,15 @@
 title: "Currency conversion enrichment"
 sidebar_position: 2
 sidebar_label: Currency conversion
+description: "Convert transaction values to a base currency using Open Exchange Rates API for standardized reporting."
+keywords: ["currency conversion", "exchange rates", "multi-currency"]
 ---
 
 This enrichment uses [Open Exchange Rates](https://openexchangerates.org/) to convert the currencies used in transactions. It requires an Open Exchange Rates account and API key.
 
 When transactional data is collected in multiple currencies, it can be useful to convert it in the one that is used for reporting for instance. This could help to lower discrepancies when reporting revenue amounts across multiple currencies.
 
-:::caution Limitations
+:::warning Limitations
 
 This is an older and less actively maintained enrichment, and as such it has several limitations.
 
@@ -32,12 +34,12 @@ import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_in
 <TestingWithMicro/>
 ```
 
-| **Field** | **Description** |
-| --- | --- |
-| `accountType` | Level of Open Exchange Rates account. Must be “developer”, “enterprise”, or “unlimited”. |
-| `apiKey` | Open Exchange Rates API key |
-| `baseCurrency` | Currency to convert all transaction values to |
-| `rateAt` | Determines which exchange rate will be used. **Currently only “EOD_PRIOR” is supported**, meaning that the enrichment uses the exchange rate from the end of the day prior to the event’s `collector_tstamp`. |
+| **Field**      | **Description**                                                                                                                                                                                               |
+| -------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `accountType`  | Level of Open Exchange Rates account. Must be “developer”, “enterprise”, or “unlimited”.                                                                                                                      |
+| `apiKey`       | Open Exchange Rates API key                                                                                                                                                                                   |
+| `baseCurrency` | Currency to convert all transaction values to                                                                                                                                                                 |
+| `rateAt`       | Determines which exchange rate will be used. **Currently only “EOD_PRIOR” is supported**, meaning that the enrichment uses the exchange rate from the end of the day prior to the event’s `collector_tstamp`. |
 
 ## Input
 
@@ -54,10 +56,10 @@ This enrichment uses the following fields :
 
 This enrichment updates the following fields of the atomic event :
 
-| Field | Purpose |
-| --- | --- |
-| `base_currency` | Base currency code according to [ISO_4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) |
-| `tr_total_base` | Total amount of transaction in base currency |
-| `tr_tax_base` | Tax applied in base currency |
-| `tr_shipping_base` | Shipping cost in base currency |
-| `ti_price_base` | Item price in base currency |
+| Field              | Purpose                                                                                         |
+| ------------------ | ----------------------------------------------------------------------------------------------- |
+| `base_currency`    | Base currency code according to [ISO_4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) |
+| `tr_total_base`    | Total amount of transaction in base currency                                                    |
+| `tr_tax_base`      | Tax applied in base currency                                                                    |
+| `tr_shipping_base` | Shipping cost in base currency                                                                  |
+| `ti_price_base`    | Item price in base currency                                                                     |

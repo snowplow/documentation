@@ -2,6 +2,8 @@
 title: "Migrating to Snowflake Streaming Loader from RDB Loader"
 sidebar_label: "Migrating from RDB Loader"
 sidebar_position: 2
+description: "Migrate from RDB Loader to Snowflake Streaming Loader for lower latency and cost with same table or fresh table strategies."
+keywords: ["snowflake migration", "rdb to streaming", "loader migration", "streaming upgrade", "snowflake switch"]
 ---
 
 This guide is aimed at Snowplow users who load events into Snowflake via the [RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md).
@@ -24,7 +26,7 @@ The Streaming Loader is fully compatible with the table created and managed by t
 
 :::tip
 
-[This page](/docs/destinations/warehouses-lakes/schemas-in-warehouse/index.md) explains how Snowplow data maps to the warehouse in more detail.
+[This page](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md) explains how Snowplow data maps to the warehouse in more detail.
 
 :::
 

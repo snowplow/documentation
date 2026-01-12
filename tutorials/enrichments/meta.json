@@ -1,5 +1,0 @@
-{
-  "title": "Set up Enrichments",
-  "label": "Tracking design",
-  "description": "Enrich your event data by adding and amending event properties in the Snowplow pipeline"
-}

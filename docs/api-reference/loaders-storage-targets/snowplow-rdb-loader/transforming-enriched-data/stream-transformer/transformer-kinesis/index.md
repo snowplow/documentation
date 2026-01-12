@@ -1,7 +1,10 @@
 ---
-title: "Transformer Kinesis"
+title: "Transformer Kinesis for AWS streams"
+sidebar_label: "Transformer Kinesis"
 date: "2022-10-13"
 sidebar_position: 20
+description: "Stream transformer for AWS that reads enriched events from Kinesis and writes transformed data to S3 in real-time."
+keywords: ["transformer kinesis", "aws transformer", "kinesis to s3", "stream transformation", "rdb transformer"]
 ---
 
 ```mdx-code-block
@@ -9,8 +12,6 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-
-## Downloading the artifact
 
 The asset is published as a jar file attached to the [Github release notes](https://github.com/snowplow/snowplow-rdb-loader/releases) for each version.
 

@@ -2,6 +2,8 @@
 sidebar_label: "Utils"
 sidebar_position: 60
 title: "Utils Quickstart"
+description: "Quick start guide for the Snowplow Utils dbt package with core macros and helper functions for Snowplow dbt packages."
+keywords: ["utils quickstart", "utils setup", "dbt utils installation"]
 ---
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
@@ -82,7 +84,7 @@ my_dbt_project
 ```
 Once you've created all of these models, you need to call the correct macros in each model to ensure that the correct SQL gets generated for each model. If you'd like to rename any of the models, all you need to do is rename the `.sql` files listed above.
 
-:::caution
+:::warning
 Please only rename the models with caution and be sure to read the subsequent steps carefully as you may need to modify some of the boilerplate code outlined below to have the macros adapt properly to your naming conventions.
 :::
 
@@ -130,7 +132,7 @@ Be sure to specify your `PACKAGE_NAME` when calling the `get_enabled_snowplow_mo
 ```jinja2
 {{
   config(
-   post_hook=["{{snowplow_utils.print_run_limits(this)}}"]
+   post_hook=["\\{\\{snowplow_utils.print_run_limits(this)}}\\}"]
    )
 }}
 
@@ -185,10 +187,10 @@ For the `snowplow_base_sessions_lifecycle_manifest` model, you have the followin
 ```jinja2
 
 {% set sessions_lifecycle_manifest_query = snowplow_utils.base_create_snowplow_sessions_lifecycle_manifest(
-    session_identifiers=var('snowplow__session_identifiers', '[{"schema": "atomic", "field": "domain_sessionid"}]'),
+    session_identifiers=var('snowplow__session_identifiers', '[\\{"schema": "atomic", "field": "domain_sessionid"}]'),
     session_sql=var('snowplow__session_sql', none),
     session_timestamp=var('snowplow__session_timestamp', 'collector_tstamp'),
-    user_identifiers=var('snowplow__user_identifiers', '[{"schema": "atomic", "field": "domain_userid"}]'),
+    user_identifiers=var('snowplow__user_identifiers', '[\\{"schema": "atomic", "field": "domain_userid"}]'),
     user_sql=var('snowplow__user_sql', none),
     quarantined_sessions=var('snowplow__quarantined_sessions', 'snowplow_base_quarantined_sessions'),
     derived_tstamp_partitioned=var('snowplow__derived_tstamp_partitioned', true),
@@ -212,11 +214,11 @@ There are several important parameters to consider. The first one is `snowplow__
 
 Next, we have `snowplow__session_identifiers` and `snowplow__user_identifiers`, which expect a map object defining the location of session or user identifiers. In this map, the key represents the name of the context or entity where the identifier can be found. If the identifier is a field in the atomic columns, the key can be set to `atomic`. The value specifies the name of the field in either the context/entity or the atomic columns.
 
-:::caution
+:::warning
 Currently, we only support session and user identifiers found in atomic fields for Redshift/Postgres. We don't support nested level fields for any warehouses, and for BigQuery you will currently need to do the version management yourself. We will be getting around to supporting this extra functionality soon.
 :::
 
-By default, `snowplow__session_identifiers` is set to `[{"schema": "atomic", "field": "domain_sessionid"}]`, and `snowplow__user_identifiers` is set to `[{"schema": "atomic", "field": "domain_userid"}]`. This means that the identifiers for sessions and users are expected to be found in the `domain_sessionid` and `domain_userid` fields, respectively.
+By default, `snowplow__session_identifiers` is set to `[\\{"schema": "atomic", "field": "domain_sessionid"}]`, and `snowplow__user_identifiers` is set to `[\\{"schema": "atomic", "field": "domain_userid"}]`. This means that the identifiers for sessions and users are expected to be found in the `domain_sessionid` and `domain_userid` fields, respectively.
 
 If you have more than one session or user identifier, you can specify multiple entries in the map. The order in which you list them determines the precedence that the macro will use to look for these field values, and `COALESCE` them into the common session/user_identifier field. E.g. if you have the following definition for your `user_identifier`:
 
@@ -225,8 +227,8 @@ If you have more than one session or user identifier, you can specify multiple e
 <pre><code className="language-json">
 {`
 [
-  {"schema": "my_custom_context", "field": "internal_user_id"},
-  {"schema": "atomic", "field": "domain_userid"}
+  \\{"schema": "my_custom_context", "field": "internal_user_id"},
+  \\{"schema": "atomic", "field": "domain_userid"}
 ]
 `}
 </code></pre>
@@ -235,8 +237,8 @@ If you have more than one session or user identifier, you can specify multiple e
 <pre><code className="language-json">
 {`
 [
-  {"schema": "my_custom_context", "field": "internal_user_id", "prefix": "mcc", "alias": "mcc_iud"},
-  {"schema": "atomic", "field": "domain_userid"}
+  \\{"schema": "my_custom_context", "field": "internal_user_id", "prefix": "mcc", "alias": "mcc_iud"},
+  \\{"schema": "atomic", "field": "domain_userid"}
 ]
 `}
 </code></pre>
@@ -267,7 +269,7 @@ For the `snowplow_base_sessions_this_run` model, you will need to add a post-hoo
 ```jinja2
 {{
     config(
-        post_hook=["{{ snowplow_utils.base_quarantine_sessions(var('snowplow__max_session_days', 3), var('snowplow__quarantined_sessions', 'snowplow_base_quarantined_sessions')) }}"]
+        post_hook=["\\{\\{ snowplow_utils.base_quarantine_sessions(var('snowplow__max_session_days', 3), var('snowplow__quarantined_sessions', 'snowplow_base_quarantined_sessions')) }}\\}"]
     )
 }}
 
@@ -294,7 +296,7 @@ For the `snowplow_base_events_this_run` model, you will need to run the followin
 
 {% set base_events_query = snowplow_utils.base_create_snowplow_events_this_run(
     sessions_this_run_table=var('snowplow__base_sessions', 'snowplow_base_sessions_this_run'),
-    session_identifiers=var('snowplow__session_identifiers', '[{"schema": "atomic", "field": "domain_sessionid"}]'),
+    session_identifiers=var('snowplow__session_identifiers', '[\\{"schema": "atomic", "field": "domain_sessionid"}]'),
     session_sql=var('snowplow__session_sql', none),
     session_timestamp=var('snowplow__session_timestamp', 'collector_tstamp'),
     derived_tstamp_partitioned=var('snowplow__derived_tstamp_partitioned', true),
@@ -316,11 +318,11 @@ To properly configure your dbt project to utilize and update the manifest tables
 ```yml
 # Completely or partially remove models from the manifest during run start.
 on-run-start:
-  - "{{ snowplow_utils.snowplow_delete_from_manifest(var('models_to_remove',[]), ref('snowplow_incremental_manifest')) }}"
+  - "\\{\\{ snowplow_utils.snowplow_delete_from_manifest(var('models_to_remove',[]), ref('snowplow_incremental_manifest')) }}\\}"
 
 # Update manifest table with last event consumed per sucessfully executed node/model
 on-run-end:
-  - "{{ snowplow_utils.snowplow_incremental_post_hook(package_name='snowplow', incremental_manifest_table_name=var('snowplow__incremental_manifest', 'snowplow_incremental_manifest'), base_events_this_run_table_name='snowplow_base_events_this_run', session_timestamp=var('snowplow__session_timestamp')) }}"
+  - "\\{\\{ snowplow_utils.snowplow_incremental_post_hook(package_name='snowplow', incremental_manifest_table_name=var('snowplow__incremental_manifest', 'snowplow_incremental_manifest'), base_events_this_run_table_name='snowplow_base_events_this_run', session_timestamp=var('snowplow__session_timestamp')) }}\\}"
 ```
 
 The `snowplow_delete_from_manifest` macro is called to remove models from manifest if specified using the `models_to_remove` variable, in case of a partial or full refresh. The `snowplow_incremental_post_hook` is used to update the manifest table with the timestamp of the last event consumed successfully for each Snowplow incremental model - make sure to change the `base_events_this_run_table_name` if you used a different table name.

@@ -1,10 +1,12 @@
 ---
-title: "Legacy packages"
+title: "Configure the legacy dbt packages"
+sidebar_label: "Legacy packages"
 sidebar_position: 9999
-description: "All legacy Snowplow dbt packages"
+description: "Configuration for legacy Snowplow dbt packages including Web, Mobile, and Fractribution that have been superseded by newer packages."
+keywords: ["legacy dbt packages", "deprecated dbt packages", "web dbt legacy", "mobile dbt legacy"]
 ---
 
-:::caution
+:::warning
 
 Legacy packages are no longer under active development and are in some cases no longer supported. Please look for a suitable replacement for these packages where possible.
 

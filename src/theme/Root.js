@@ -1,14 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import { getInitColorSchemeScript } from '@mui/material/styles'
 import { Experimental_CssVarsProvider as CssVarsProvider } from '@mui/material/styles'
 import theme from '@site/src/components/MuiTheme'
 import { ProductFruits } from 'react-product-fruits'
+import { Toaster } from '@site/src/components/ui/toaster'
 
 const useCookie = () => {
   const [userId, setUserId] = useState('unknown_user')
   const [sessionId, setSessionId] = useState('unknown_session')
 
   useEffect(() => {
+    // Ensure we're in the browser before accessing document
+    if (typeof window === 'undefined' || !document.cookie) {
+      return
+    }
+
     const cookieValue = decodeURIComponent(document.cookie)
       .split('; ')
       .find((row) => row.startsWith('_sp_biz1_id'))
@@ -37,6 +42,16 @@ async function fetchApiKey() {
     }
 
     const apiKey = await response.text()
+
+    // The Product Fruits API key is 16 characters
+    if (typeof apiKey !== 'string' || apiKey.length !== 16) {
+      throw new Error(
+        `Invalid API key format: expected 16 character string, got ${typeof apiKey} with length ${
+          apiKey.length
+        }`
+      )
+    }
+
     return apiKey
   } catch (error) {
     console.error('Error fetching API key:', error)
@@ -45,15 +60,17 @@ async function fetchApiKey() {
 }
 
 export default function Root({ children }) {
-  const [apiKey, setApiKey] = useState()
+  const [apiKey, setApiKey] = useState(null)
+  const [isClient, setIsClient] = useState(false)
 
   useEffect(() => {
+    setIsClient(true)
     fetchApiKey().then((key) => {
       if (key) {
         setApiKey(key)
       }
     })
-  })
+  }, [])
 
   const [userId, sessionId] = useCookie()
   const userInfo = {
@@ -63,7 +80,7 @@ export default function Root({ children }) {
 
   return (
     <>
-      {apiKey && (
+      {isClient && apiKey && (
         <ProductFruits
           workspaceCode={apiKey}
           language="en"
@@ -72,8 +89,10 @@ export default function Root({ children }) {
         />
       )}
 
-      {getInitColorSchemeScript()}
-      <CssVarsProvider theme={theme}>{children}</CssVarsProvider>
+      <CssVarsProvider theme={theme}>
+        {children}
+        <Toaster />
+      </CssVarsProvider>
     </>
   )
 }

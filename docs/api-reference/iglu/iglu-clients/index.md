@@ -1,7 +1,10 @@
 ---
-title: "Iglu Clients"
+title: "Iglu client libraries"
+sidebar_label: "Client libraries"
 date: "2021-03-26"
 sidebar_position: 40
+description: "Client libraries for resolving schemas from Iglu repositories in Scala, Objective-C, and Ruby with embedded and remote repository support."
+keywords: ["iglu client", "schema resolver", "scala client", "ruby client"]
 ---
 
 Iglu clients are used for interacting with Iglu server repos and for resolving schemas in embedded and remote Iglu schema repositories.
@@ -18,8 +21,8 @@ For more information on the rules governing resolving schemas from multiple repo
 
 There are currently three Iglu client libraries implemented:
 
-| **Repo server** | **Description** | **Status** |
-| --- | --- | --- |
-| [Scala client](https://github.com/snowplow/iglu-scala-client) | An Iglu client and resolver for Scala | Production-ready |
-| [Objc client](https://github.com/snowplow/iglu-objc-client) | An Iglu client and resolver for OSX | Unsupported |
-| [Ruby client](https://github.com/snowplow/iglu-ruby-client) | An Iglu client and resolver for Ruby and JRuby | Unsupported |
+| **Repo server**                                               | **Description**                                | **Status**       |
+| ------------------------------------------------------------- | ---------------------------------------------- | ---------------- |
+| [Scala client](https://github.com/snowplow/iglu-scala-client) | An Iglu client and resolver for Scala          | Production-ready |
+| [Objc client](https://github.com/snowplow/iglu-objc-client)   | An Iglu client and resolver for OSX            | Unsupported      |
+| [Ruby client](https://github.com/snowplow/iglu-ruby-client)   | An Iglu client and resolver for Ruby and JRuby | Unsupported      |

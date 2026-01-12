@@ -1,10 +1,11 @@
 ---
-title: "Mandrill"
+title: "Mandrill webhook"
+sidebar_label: "Mandrill"
 date: "2020-02-25"
 sidebar_position: 60
+description: "Track Mandrill email events including sent messages, bounces, opens, clicks, spam reports, rejections, and unsubscribes."
+keywords: ["mandrill webhook integration", "mandrill email tracking", "mailchimp transactional email"]
 ---
-
-## Overview
 
 This webhook integration lets you track a variety of events logged by [Mandrill](https://mandrill.com/).
 
@@ -20,7 +21,7 @@ Available events are:
 - Message clicked
 - Recipient unsubscribed
 
-### Compatibility
+## Compatibility
 
 - [Snowplow 0.9.14](https://github.com/snowplow/snowplow/releases/tag/0.9.14)\+ (`POST`\-capable collectors only)
 - [Mandrill webhook API](http://help.mandrill.com/entries/21738186-Introduction-to-Webhooks)

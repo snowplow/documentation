@@ -1,7 +1,9 @@
 ---
-title: "Writing your enrichment"
+title: "Write JavaScript enrichment functions"
 sidebar_position: 1
-description: "How to write the enrichment code in JavaScript."
+description: "Write custom JavaScript functions to transform events with access to event properties and utility functions."
+sidebar_label: "Writing"
+keywords: ["write JavaScript enrichment", "enrichment functions", "event transformation"]
 ---
 
 Your JavaScript enrichment code should contain a function called `process`:
@@ -46,7 +48,7 @@ function process(event) {
   ...
 ```
 
-There are getter methods available for each of the [standard event fields](/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md?fields=table) — just capitalize the first letter of the field and prepend it with `get`, for example `event.getUser_ipaddress()` or `event.getGeo_country()`.
+There are getter methods available for each of the [standard event fields](/docs/pipeline/enriched-tsv-format/index.md?fields=table) — just capitalize the first letter of the field and prepend it with `get`, for example `event.getUser_ipaddress()` or `event.getGeo_country()`.
 
 :::note
 
@@ -153,7 +155,7 @@ Your array of entities will be passed to `JSON.stringify()` before being attache
 
 If you are still iterating on the schema while writing the JavaScript code, you might find the setup described in the [testing guide](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/testing/index.md#iterating-on-code-and-schemas) very useful.
 
-:::caution
+:::warning
 
 Make sure that the schemas of your entities are defined and accessible to your pipeline.
 
@@ -163,13 +165,13 @@ Make sure that the schemas of your entities are defined and accessible to your p
 
 Sometimes you will want to modify the original event fields directly.
 
-:::caution
+:::warning
 
 Keep in mind that the old value of a modified field will not be available in your data warehouse or lake. However, that might be your goal.
 
 :::
 
-Just like with getters, there are setter methods available for each of the [standard event fields](/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md?fields=table):
+Just like with getters, there are setter methods available for each of the [standard event fields](/docs/pipeline/enriched-tsv-format/index.md?fields=table):
 
 ```js
 function process(event) {
@@ -237,9 +239,35 @@ function process(event) {
 
 :::note
 
-You might be tempted to update derived entities in a similar way by using `event.setDerived_contexts()`. However, this is not supported (the function exists, but has no effect). Instead, refer to the [Adding extra entities](#adding-extra-entities-to-the-event) section.
+You might be tempted to update derived entities in a similar way by using `event.setDerived_contexts()`. However, this is not supported (the function exists, but has no effect). Instead, refer to the [Erasing derived contexts](#erasing-derived-contexts) section.
 
 :::
+
+## Erasing derived contexts
+
+Starting with Enrich 5.4.0, it is possible to erase derived contexts.
+
+This feature can be used to update existing derived contexts as well. The way to do that is shown in the below example:
+
+```js
+function process(event) {
+  const derived = JSON.parse(event.getDerived_contexts())
+
+  // erase the existing contexts from the event
+  event.eraseDerived_contexts()
+
+  // modify the contexts
+  for (const entity of derived.data) {
+    if (entity.schema === ...) {
+      // update a field inside
+      entity.data.myField = entity.data.myField + 1
+    }
+  }
+
+  // returned the updated array of derived contexts, which will replace the original one
+  return derived.data
+}
+```
 
 ## Discarding the event
 

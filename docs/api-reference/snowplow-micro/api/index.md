@@ -1,7 +1,9 @@
 ---
-title: "REST API"
+title: "Snowplow Micro REST API"
+sidebar_label: "REST API"
 sidebar_position: 1
-description: Snowplow Micro REST API.
+description: "Snowplow Micro REST API endpoints for querying good events, bad events, and resetting cache."
+keywords: ["snowplow micro", "micro rest api", "micro endpoints"]
 ---
 
 ```mdx-code-block
@@ -9,7 +11,7 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-This page documents the REST API of [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md#what-is-snowplow-micro).
+This page documents the REST API of [Snowplow Micro](/docs/testing/snowplow-micro/index.md#what-is-snowplow-micro).
 
 ## /micro/all
 
@@ -42,7 +44,7 @@ This endpoint queries the good events, which are the events that have been succe
 
 ### Response format
 
-JSON array of [GoodEvent](https://github.com/snowplow-incubator/snowplow-micro/blob/master/src/main/scala/com.snowplowanalytics.snowplow.micro/model.scala#L19)s. A `GoodEvent` contains 4 fields:
+JSON array of [GoodEvent](https://github.com/snowplow/snowplow-micro/blob/master/src/main/scala/com.snowplowanalytics.snowplow.micro/model.scala#L19)s. A `GoodEvent` contains 4 fields:
 
 - `rawEvent`: contains the [RawEvent](https://github.com/snowplow/enrich/blob/master/modules/common/src/main/scala/com.snowplowanalytics.snowplow.enrich/common/adapters/RawEvent.scala#L28). It corresponds to the format of a validated event just before being enriched.
 - `event`: contains the [canonical snowplow Event](https://github.com/snowplow/snowplow-scala-analytics-sdk/blob/master/src/main/scala/com.snowplowanalytics.snowplow.analytics.scalasdk/Event.scala#L42). It is in the format of an event after enrichment, even if all the enrichments are deactivated.
@@ -307,7 +309,7 @@ This endpoint queries the bad events, which are the events that failed validatio
 
 ### Response format
 
-JSON array of [BadEvent](https://github.com/snowplow-incubator/snowplow-micro/blob/master/src/main/scala/com.snowplowanalytics.snowplow.micro/model.scala#L28)s. A `BadEvent` contains 3 fields:
+JSON array of [BadEvent](https://github.com/snowplow/snowplow-micro/blob/master/src/main/scala/com.snowplowanalytics.snowplow.micro/model.scala#L28)s. A `BadEvent` contains 3 fields:
 
 - `collectorPayload`: contains the [CollectorPayload](https://github.com/snowplow/enrich/blob/master/modules/common/src/main/scala/com.snowplowanalytics.snowplow.enrich/common/loaders/CollectorPayload.scala#L107) with all the raw information of the tracking event. This field can be empty if an error occured before trying to validate a payload.
 - `rawEvent`: contains the [RawEvent](https://github.com/snowplow/enrich/blob/master/modules/common/src/main/scala/com.snowplowanalytics.snowplow.enrich/common/adapters/RawEvent.scala#L28). It corresponds to the format of a validated event just before being enriched.

@@ -2,6 +2,8 @@
 title: "BigQuery Loader configuration reference"
 sidebar_label: "Configuration reference"
 sidebar_position: 1
+description: "Configure BigQuery Streaming Loader with BigQuery, Kinesis, Pub/Sub, and Kafka settings for streaming enriched Snowplow events."
+keywords: ["bigquery config", "loader configuration", "streaming config", "kinesis config", "pubsub config"]
 ---
 
 ```mdx-code-block
@@ -17,6 +19,18 @@ import CommonConfig from '@site/docs/api-reference/loaders-storage-targets/bigqu
 ```
 
 <p>The configuration reference in this page is written for BigQuery Loader <code>{`${versions.bqLoader}`}</code></p>
+
+### License
+
+The BigQuery Loader is released under the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.1/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).
+
+To accept the terms of license and run the loader, set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable. Alternatively, configure the `license.accept` option in the config file:
+
+```json
+"license": {
+  "accept": true
+}
+```
 
 ### BigQuery configuration
 

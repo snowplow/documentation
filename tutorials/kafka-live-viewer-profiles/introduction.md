@@ -1,6 +1,9 @@
 ---
 position: 1
-title: Introduction
+title: "Learn how to create live viewer profiles using Kafka"
+sidebar_label: "Introduction"
+description: "Build real-time viewer profiles for video streaming platforms using Snowplow, Kafka, Java, and DynamoDB to track live user interactions and engagement."
+keywords: ["kafka real-time viewer profiles", "video streaming analytics snowplow"]
 ---
 
 Welcome to the **live viewer profiles** solution accelerator for video streaming.

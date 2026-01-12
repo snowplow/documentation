@@ -1,8 +1,9 @@
 ---
-title: "Normalize"
+title: "Snowplow Normalize dbt package"
+sidebar_label: "Normalize"
 sidebar_position: 50
-description: "The Snowplow Normalize dbt Package"
-hide_title: true
+description: "Flatten and normalize self-describing events and entities into dedicated tables for downstream ETL and analysis tools."
+keywords: ["normalize dbt", "flatten events", "unnest entities", "event normalization", "ETL preparation"]
 ---
 
 ```mdx-code-block
@@ -10,13 +11,17 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
+import BadgeGroup from '@site/src/components/BadgeGroup';
+import AvailabilityBadges from '@site/src/components/ui/availability-badges'
 ```
 
-<Badges badgeType="dbt-package Release" pkg="normalize"></Badges>&nbsp;
-<Badges badgeType="Maintained"></Badges>&nbsp;
+<BadgeGroup>
+<Badges badgeType="dbt-package Release" pkg="normalize"></Badges>
+<Badges badgeType="Maintained"></Badges>
 <Badges badgeType="SPAL"></Badges>
+</BadgeGroup>
 
-# Snowplow Normalize Package
+<AvailabilityBadges available={['cloud', 'pmc', 'addon']} helpContent="The Normalize package is available as part of the Digital Analytics Data Model Pack, a paid addon for Snowplow CDI." />
 
 :::note
 Normalize in this context means [database normalization](https://en.wikipedia.org/wiki/Database_normalization), as these models produce flatter data, not statistical normalization.
@@ -106,7 +111,7 @@ The script should always be run from the **root** of your dbt project (the same 
 
 ### Install python packages
 
-:::caution
+:::warning
 Python versions between 3.7 and 3.10 (inclusive) are currently supported
 
 :::
@@ -118,7 +123,7 @@ pip install -r dbt_packages/snowplow_normalize/utils/requirements.txt
 ```
 
 ### Configuration File
-:::caution
+:::warning
 
 There may be changes to the config file between versions, this page will always contain the latest information but if you are using an older version you should call the python script with the `--configHelp` flag.
 
@@ -519,5 +524,5 @@ If you want to not select all columns from your self describing event or context
 ### Removing models
 You can remove all models that don't exist in your config by running the script with the `--cleanUp` flag. This will scan the `models_folder` folder provided in your config and list all models in this folder that don't match those listed in your config file; you will then be asked to confirm deletion of these. If you may wish to re-enable these models at a later date you can [disable them in your project](https://docs.getdbt.com/reference/resource-configs/enabled) instead.
 
-:::caution
+:::warning
 If you have other models in the same sub-folder that were not generated via this package then this will attempt to delete those files.

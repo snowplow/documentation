@@ -1,10 +1,17 @@
-# FAQ: Snowplow Personal & Academic License (SPAL)
+---
+title: "Snowplow Personal and Academic License FAQ"
+sidebar_label: "Personal & Academic License FAQ"
+description: "Frequently asked questions about the Snowplow Personal and Academic License eligibility and terms."
+keywords: ["academic license", "SPAL", "personal use license"]
+---
 
 :::info Note
 
 This FAQ is not a substitute for reading [the license text](/personal-and-academic-license-1.0/).
 
 :::
+
+This page explains some of the most common questions about the Snowplow Personal and Academic License.
 
 ## What is the SPAL?
 
@@ -16,7 +23,7 @@ The SPAL is based on the [PolyForm Noncommercial License](https://polyformprojec
 
 ## I have commercially licensed software from Snowplow. Does this impact me?
 
-No. If you have entered into a separate commercial licensing with Snowplow, for example, buying a Snowplow BDP commercial product, then the commercial license terms you have agreed to will continue to govern your use of the software.
+No. If you have entered into a separate commercial licensing with Snowplow, for example, buying a Snowplow CDI commercial product, then the commercial license terms you have agreed to will continue to govern your use of the software.
 
 ## Why make the source available?
 

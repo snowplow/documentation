@@ -1,24 +1,25 @@
 ---
-title: "Fractribution"
-description: "The Snowplow Fractribution dbt Package"
+title: "Snowplow Fractribution dbt package"
+sidebar_label: "Fractribution"
+description: "Legacy Fractribution dbt package for marketing attribution analysis. Superseded by the Attribution package."
+keywords: ["fractribution legacy", "legacy attribution", "deprecated fractribution"]
 sidebar_position: 900
-hide_title: true
 ---
 
 ```mdx-code-block
 import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
+import BadgeGroup from '@site/src/components/BadgeGroup';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-<Badges badgeType="dbt-package Release" pkg="fractribution"></Badges>&nbsp;
-​<Badges badgeType="Docker Pulls" repo="snowplow/fractribution"></Badges>&nbsp;
+<BadgeGroup>
+<Badges badgeType="dbt-package Release" pkg="fractribution"></Badges>
+<Badges badgeType="Docker Pulls" repo="snowplow/fractribution"></Badges>
 <Badges badgeType="Unsupported"></Badges>
+</BadgeGroup>
 
-
-# Snowplow Fractribution Package
-​
 **The package source code can be found in the [snowplow/dbt-snowplow-fractribution repo](https://github.com/snowplow/dbt-snowplow-fractribution), and the docs for the [macro design are here](https://snowplow.github.io/dbt-snowplow-fractribution/#/overview/snowplow_fractribution). If you would like to follow the Fractribution accelerator, which includes sample data, [see here](https://docs.snowplow.io/accelerators/snowplow-fractribution/)**
 ​
 :::warning

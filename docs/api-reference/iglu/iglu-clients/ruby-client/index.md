@@ -1,10 +1,11 @@
 ---
-title: "Ruby client"
+title: "Ruby Iglu client"
+sidebar_label: "Ruby client"
 date: "2021-03-26"
 sidebar_position: 60
+description: "Ruby Iglu client library for resolving and validating JSON schemas from embedded and remote repositories with JRuby support."
+keywords: ["ruby iglu client", "jruby", "ruby schema validation"]
 ---
-
-## Overview
 
 The [Iglu Ruby client](https://github.com/snowplow/iglu-ruby-client) allows you to resolve JSON Schemas from embedded and remote repositories.
 
@@ -42,7 +43,7 @@ Assuming you have completed the setup for your Ruby project, you are now ready t
 
 ### Importing the library
 
-All entities can be accessed by importing `iglu-client` package.  
+All entities can be accessed by importing `iglu-client` package.
 Client is placed in `Iglu::Resolver` module, while core entities are in root `Iglu` module.
 
 You are now ready to instantiate a Ruby Client.
@@ -75,26 +76,26 @@ json = resolver_config      # resolver config is plain self-describing JSON!
 resolver.validate(json)     # this will return same `json` value in case of success or throw IgluError in case of any failure
 ```
 
-Unlike Iglu Scala Client which never throws exceptions and return errors as values, Ruby client uses more common for dynamic languages approach,  
+Unlike Iglu Scala Client which never throws exceptions and return errors as values, Ruby client uses more common for dynamic languages approach,
 specifically it throws `IgluError` exception on any non-success case, like non-self-describing JSON, not found schema, connection error etc and returns plain value (same self-describing JSON) on success.
 
 To just lookup schema without any self-describing JSON, you can use `lookup_schema` method, which accepts schema key as object or URI.
 
 ### Core entities
 
-`iglu-ruby-client` gem also provides entities specific to [Iglu core's](/docs/api-reference/iglu/common-architecture/iglu-core/index.md).  
-Specifically, you can initialize and utilize entities such as schema key, self-describing data, SchemaVer etc.  
+`iglu-ruby-client` gem also provides entities specific to [Iglu core's](/docs/api-reference/iglu/common-architecture/iglu-core/index.md).
+Specifically, you can initialize and utilize entities such as schema key, self-describing data, SchemaVer etc.
 Same classes will be included in Iglu Ruby Core library when it'll be released.
 
 ```ruby
 schema_key = SchemaKey.new("com.acme", "event", "jsonschema", SchemaVer.new(1,0,2))
-# or 
+# or
 schema_key = SchemaKey.parse("iglu:com.acme/event/jsonschema/1-0-2")
 ```
 
 ### Embedded registry
 
-Ruby Client supports somewhat similar to [JVM embedded](/docs/api-reference/iglu/iglu-repositories/jvm-embedded-repo/index.md) registry.  
+Ruby Client supports somewhat similar to [JVM embedded](/docs/api-reference/iglu/iglu-repositories/jvm-embedded-repo/index.md) registry.
 It also can be constructed from `embedded` connection using path inside gems and JRuby jars (created using warbler) but it has few important differences with JVM embedded registry:
 
 - It can accept absolute filesystem paths

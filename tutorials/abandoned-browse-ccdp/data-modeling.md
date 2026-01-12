@@ -1,31 +1,32 @@
 ---
 position: 3
-title: Data Modeling
+title: "Model the data to identify unfinished purchases"
+sidebar_label: "Model the data"
+description: "Write SQL queries in Snowflake to identify users who viewed products but didn't complete purchases. Aggregate product view data and calculate engagement metrics for abandoned browse campaigns."
+keywords: ["snowflake sql abandoned browse", "ecommerce data modeling", "product view analytics", "user engagement tracking"]
 ---
-
-## Sending events and verifying data
 
 After implementing the tracking setup, send some events and test that they are arriving in your data warehouse. If you don't have a data warehouse, you can sign up for a [free trial of Snowflake](https://www.snowflake.com/).
 
-Once you have sent data to Snowflake, you can run the following query to verify the events are coming through. The [Snowflake Streaming loader](http://localhost:3000/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/) has a latency of several seconds so you should see results immediately. 
+Once you have sent data to Snowflake, you can run the following query to verify the events are coming through. The [Snowflake Streaming loader](http://localhost:3000/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/) has a latency of several seconds so you should see results immediately.
 
 ```sql
-SELECT 
-    domain_userid, 
+SELECT
+    domain_userid,
     user_id,
-    page_urlpath AS product_id, 
+    page_urlpath AS product_id,
     event_name,
     page_title,
     unstruct_event_com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1,
     contexts_com_snowplowanalytics_snowplow_ecommerce_product_1,
     contexts_com_snowplowanalytics_snowplow_web_page_1
 FROM DATABASE.ATOMIC.EVENTS
-WHERE 
+WHERE
     DATE(load_tstamp) = CURRENT_DATE()
 ORDER BY load_tstamp DESC;
 ```
 
-The output of this query should be similar to below: 
+The output of this query should be similar to below:
 ![Atomic Events](images/retl-atomic-events.png)
 
 ## Identifying most viewed but not added-to-cart products
@@ -38,54 +39,54 @@ Snowplow loads to most data warehouses / lakes in real-time so this query will i
 
 ```sql
 WITH productsViewedToday AS (
-    SELECT 
-        domain_userid, 
-        page_urlpath AS product_id, 
+    SELECT
+        domain_userid,
+        page_urlpath AS product_id,
         MAX(user_id) AS email,
         MAX(product.value:name::STRING) AS product,
         5 * SUM(CASE WHEN event_name = 'page_ping' THEN 1 ELSE 0 END) AS time_engaged_in_s,
         MAX(
-            CASE 
-                WHEN ecom_action.value:type = 'add_to_cart' 
-                THEN TRUE 
-                ELSE FALSE 
+            CASE
+                WHEN ecom_action.value:type = 'add_to_cart'
+                THEN TRUE
+                ELSE FALSE
             END
         ) AS add_to_cart,
         MAX(
-            CASE 
-                WHEN page_urlquery = 'abandonedEmail=true' 
-                THEN TRUE 
-                ELSE FALSE 
+            CASE
+                WHEN page_urlquery = 'abandonedEmail=true'
+                THEN TRUE
+                ELSE FALSE
             END
         ) AS winback_successful,
         MAX(page_url) AS product_url
-    FROM 
+    FROM
         SNOWPLOW_SALES_AWS_PROD1_DB.ATOMIC.EVENTS,
         LATERAL FLATTEN(input => contexts_com_snowplowanalytics_snowplow_ecommerce_product_1) product,
         LATERAL FLATTEN(input => contexts_com_snowplowanalytics_snowplow_web_page_1) page,
         LATERAL FLATTEN(input => unstruct_event_com_snowplowanalytics_snowplow_ecommerce_snowplow_ecommerce_action_1) ecom_action
-    WHERE 
+    WHERE
         DATE(load_tstamp) = CURRENT_DATE()
         AND page_urlpath LIKE '/product%'
-    GROUP BY 
+    GROUP BY
         1, 2
-    ORDER BY 
+    ORDER BY
         time_engaged_in_s DESC
 )
 
-SELECT 
-    a.* 
-FROM 
+SELECT
+    a.*
+FROM
     productsViewedToday a
-LEFT JOIN 
+LEFT JOIN
     productsViewedToday b
-    ON a.email = b.email 
+    ON a.email = b.email
     AND a.time_engaged_in_s < b.time_engaged_in_s
-WHERE 
-    b.time_engaged_in_s IS NULL 
+WHERE
+    b.time_engaged_in_s IS NULL
     AND a.email IS NOT NULL;
 ```
-The output of this query should be similar to below: 
+The output of this query should be similar to below:
 ![Aggregated Query](images/retl-aggregated-query.png)
 
 ## Next step

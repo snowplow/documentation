@@ -1,7 +1,10 @@
 ---
-title: "Transformations and filters"
+title: "Introduction to Snowbridge transformations and filters"
+sidebar_label: "Transformations and filters"
 date: "2022-10-20"
 sidebar_position: 300
+description: "Transform and filter messages with built-in transformations for Snowplow data or custom JavaScript scripts for flexible data processing."
+keywords: ["transformations", "filters", "javascript transformations", "data transformation", "message filtering"]
 ---
 
 
@@ -15,7 +18,7 @@ As an example of how transformations relate to each other - if you have a built-
 
 The latter use case, and further nuanced use cases can, however, be achieved using scripting transformation (in the case of the latter example, a single script can perform both checks with an OR condition).
 
-# Custom scripting transformations
+## Custom scripting transformations
 
 Custom scripting transformations allow you to provide a script to transform the data, set the destination's partition key, or filter the data according to your own logic. For scripting, you can use Javascript. Snowbridge uses a runtime engine to run the script against the data. Scipts interface with the rest of the app via the `EngineProtocol` interface, which provides a means to pass data into the scripting layer, and return data from the scripting layer back to the app.
 

@@ -1,7 +1,10 @@
 ---
-title: "2.0.0 upgrade guide"
+title: "S3 Loader 2.0.0 upgrade guide"
+sidebar_label: "2.0.0 upgrade guide"
 date: "2021-07-05"
 sidebar_position: 11
+description: "Upgrade S3 Loader to 2.0.0 with configuration refactoring, purpose property, and new Sentry and StatsD monitoring features."
+keywords: ["s3 loader 2.0 upgrade", "config refactoring", "purpose property", "bad rows format", "s3 migration"]
 ---
 
 ## Caution

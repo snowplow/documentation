@@ -1,7 +1,9 @@
 ---
-title: "Creating a tracking plan with event specifications"
+title: "Create a tracking plan with event specifications"
 sidebar_label: "Creating a tracking plan"
 sidebar_position: 2
+description: "Build a comprehensive tracking plan by identifying business events, defining their structure with event specifications, and documenting implementation details."
+keywords: ["tracking plan", "event planning", "tracking design", "event specifications design"]
 ---
 
 As explained in [Introduction to tracking design](/docs/data-product-studio/index.md), to use Snowplow successfully, you need to have a good idea of:

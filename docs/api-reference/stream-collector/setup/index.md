@@ -1,7 +1,10 @@
 ---
-title: "Set up"
+title: "Set up and run Collector"
+sidebar_label: "Set up Collector"
 date: "2021-08-04"
 sidebar_position: 1
+description: "Instructions for running the Snowplow event Collector using Docker images or jar files, including how to configure the application with HOCON files and perform health checks."
+keywords: ["collector setup", "Docker collector", "run collector", "collector deployment"]
 ---
 
 ```mdx-code-block
@@ -9,11 +12,9 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-## Available on Terraform Registry
+A Terraform module is available which deploys the collector on a AWS EC2 without the need for this manual setup.
 
 [![](https://img.shields.io/static/v1?label=Terraform&message=Registry&color=7B42BC&logo=terraform)](https://registry.terraform.io/modules/snowplow-devops/collector-kinesis-ec2/aws/latest)
-
-A Terraform module is available which deploys the collector on a AWS EC2 without the need for this manual setup.
 
 ## Run the collector
 

@@ -1,6 +1,9 @@
 ---
-title: Enabling Conversions within Unified Package
+title: "Enable conversions in the Unified Digital dbt package"
+sidebar_label: "Enable conversions"
 position: 3
+description: "Configure the conversions module in Snowplow Unified dbt package for attribution modeling. Define conversion events, enable the conversions table, and set up referral field fallbacks for marketing attribution."
+keywords: ["snowplow unified conversions", "dbt conversion tracking", "attribution conversion events", "unified package configuration"]
 ---
 
 Snowplow’s Attribution package requires the optional conversions module to be configured within the Unified package, because the `snowplow_unified_conversions` table is used as a source by default. This is an additional incremental table that will be updated for each run of the Unified package.

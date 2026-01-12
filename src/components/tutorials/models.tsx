@@ -11,13 +11,23 @@ export const Topic = z.enum([
 
 export type Topic = z.infer<typeof Topic>
 
+// The Use Cases allowed for the tutorials
+export const UseCase = z.enum([
+  'Composable CDP',
+  'Composable analytics',
+  'Customer-facing AI agents',
+  'Real-time personalization',
+])
+
+export type UseCase = z.infer<typeof UseCase>
+
 // The metadata for a tutorial
 export const Meta = z.object({
   id: z.string(),
   title: z.string(),
   label: Topic,
   description: z.string(),
-  useCases: z.array(z.string()),
+  useCase: UseCase,
   technologies: z.array(z.string()),
   snowplowTech: z.array(z.string()),
 })
@@ -27,6 +37,7 @@ export type Meta = z.infer<typeof Meta>
 export const Step = z.object({
   position: z.number(),
   title: z.string(),
+  sidebar_label: z.string().optional(),
   path: z.string(),
 })
 
@@ -42,9 +53,11 @@ export type Tutorial = z.infer<typeof Tutorial>
 // The front matter for a tutorial step (https://docusaurus.io/docs/markdown-features#front-matter)
 // - Position: used to sort the steps
 // - Title: title of the step shown in the sidebar/paginator
+// - Sidebar Label: optional label for sidebar (falls back to title if not provided)
 export const FrontMatter = z.object({
   position: z.number(),
   title: z.string(),
+  sidebar_label: z.string().optional(),
 })
 
 export type FrontMatter = z.infer<typeof FrontMatter>

@@ -1,5 +1,8 @@
 ---
 title: "Ecommerce events"
+sidebar_label: "Ecommerce events"
+description: "Track ecommerce transactions, carts, checkouts, products, and promotions with Snowplow ecommerce events and context entities."
+keywords: ["ecommerce tracking", "transaction events", "cart tracking", "checkout tracking", "product events"]
 ---
 
 ```mdx-code-block
@@ -149,8 +152,8 @@ All tracked ecommerce properties are tracked as context entities.
 
 ## How to track?
 
-* Using the [JavaScript tracker on the Web](/docs/sources/trackers/web-trackers/tracking-events/ecommerce/index.md).
-* Using the [iOS and Android trackers](/docs/sources/trackers/mobile-trackers/tracking-events/ecommerce-tracking/index.md).
+* Using the [JavaScript tracker on the Web](/docs/sources/web-trackers/tracking-events/ecommerce/index.md).
+* Using the [iOS and Android trackers](/docs/sources/mobile-trackers/tracking-events/ecommerce-tracking/index.md).
 
 ## Modeled data using the snowplow-ecommerce dbt package
 

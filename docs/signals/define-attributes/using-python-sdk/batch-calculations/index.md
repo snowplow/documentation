@@ -1,7 +1,9 @@
 ---
-title: "Calculate from warehouse"
+title: "Calculate and sync warehouse attributes to Signals"
+sidebar_label: "Calculate from warehouse"
 sidebar_position: 50
-description: "Use existing warehouse data or create new batch attribute tables with dbt to sync historical attributes to the Signals Profiles Store."
+description: "Calculate new batch attributes with dbt models or sync existing warehouse tables to the Profiles Store. Use the batch engine CLI to generate dbt projects and register tables."
+keywords: ["batch attributes", "warehouse sync", "dbt models", "batch engine", "external batch"]
 ---
 
 You can use existing attributes that are already in your warehouse, or use the Signals batch engine to calculate new attributes in a new table.

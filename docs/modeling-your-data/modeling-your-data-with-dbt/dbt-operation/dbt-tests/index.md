@@ -1,6 +1,9 @@
 ---
-title: "Tests"
+title: "Tests for dbt packages"
+sidebar_label: "Tests"
 sidebar_position: 50
+description: "Use dbt tests to validate data quality in Snowplow packages with test selection tags for scratch and derived models."
+keywords: ["dbt tests", "data quality tests", "test selection"]
 ---
 
 [Tests](https://docs.getdbt.com/docs/build/tests) are a useful feature in dbt to ensure that your data meets some expectations of it, such as certain fields should not be null. We provide a suite of tests with our packages to help test the output tables for any issues, however you could and should add your own as no one knows the required quality checks of your data better than you.

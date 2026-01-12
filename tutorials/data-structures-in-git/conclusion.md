@@ -1,9 +1,10 @@
 ---
-title: Summary
+title: "Conclusions from the data structures in Git tutorial"
+sidebar_label: "Conclusion"
 position: 7
+description: "Complete your Git-based data governance workflow with version control, automated validation, approval workflows, and environment promotion for data structures."
+keywords: ["data governance workflow", "ci cd data structures"]
 ---
-
-## Let's break down what we've done
 
 * We have seen how snowplow-cli can be used to work with data structures from the command line
 * We have applied that knowledge to build github workflows which support automated validation and publication

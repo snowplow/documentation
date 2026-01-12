@@ -1,10 +1,21 @@
 ---
-title: Snowplow CLI
-sidebar_label: Snowplow CLI
+title: "Snowplow CLI for data management"
+sidebar_label: "Snowplow CLI"
 sidebar_position: 7
+description: "Command-line tool for downloading and publishing data structures and data products to Snowplow Console, enabling git-ops workflows with reviews and branching."
+keywords: ["Snowplow CLI", "command line", "git-ops", "data structures CLI", "data products CLI", "MCP server"]
 ---
+
+```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
+import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+
+<AvailabilityBadges
+  available={['cloud', 'pmc']}
+  helpContent="Snowplow CLI is available for Snowplow CDI customers only."
+/>
+```
 
 Snowplow CLI brings data management elements of Snowplow Console into the command line. It allows you to download your data structures and data products to YAML/JSON files and publish them back to Console. This enables git-ops-like workflows, with reviews and branching.
 
@@ -121,16 +132,6 @@ For VS Code you can get this authoring functionality using this [YAML extension]
 After that running `snowplow-cli ds generate test` and opening the generated file in the configured editor of choice should look something like the following:
 
 ![](./images/lspValidation.png)
-
-## MCP server
-
-The Snowplow CLI includes a local Model Context Protocol (MCP) server that enables natural language interaction with AI assistants like Claude Desktop, Cursor, GitHub Copilot, and other MCP-compatible clients for creating, validating, and managing your Snowplow tracking plans. This allows you to:
-
-- Create and validate data structures through conversation
-- Analyze tracking requirements and suggest implementations
-- Validate data products and source applications
-
-For setup instructions and configuration examples for different MCP clients, see our [MCP tutorial](/tutorials/snowplow-cli-mcp/introduction).
 
 ## Use cases
 

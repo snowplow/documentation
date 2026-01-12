@@ -2,6 +2,8 @@
 title: "Cookie extractor enrichment"
 sidebar_position: 7
 sidebar_label: Cookie extractor
+description: "Extract name-value pairs from first-party cookies and attach them to events as derived contexts."
+keywords: ["cookie extraction", "first-party cookies", "cookie enrichment"]
 ---
 
 This enrichment extracts name-value pairs from cookies set on the collector domain, attaching them to the event as derived contexts.
@@ -34,7 +36,7 @@ import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_in
 
 <TestingWithMicro>
 
-You will likely also need to [configure Micro to work with first-party cookies](/docs/data-product-studio/data-quality/snowplow-micro/remote-usage/index.md#locally-resolving-an-existing-domain-name-to-micro).
+You will likely also need to [configure Micro to work with first-party cookies](/docs/testing/snowplow-micro/remote-usage/index.md#locally-resolving-an-existing-domain-name-to-micro).
 
 </TestingWithMicro>
 

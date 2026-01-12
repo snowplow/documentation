@@ -1,6 +1,9 @@
 ---
 position: 2
-title: Create a Source Application
+title: Create a source application for data products
+sidebar_label: Create a source application
+description: "Create a source application in Data Product Studio to represent your tracking estate and define application IDs and contexts."
+keywords: ["source application setup", "application context configuration"]
 ---
 
 The basis for every tracking setup is the Source Application. It represents the tracking estate, in a specific platform (_web, Android, iOS, etc._), for an application which in our case would be named _'Todo Web Application'_.

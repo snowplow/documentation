@@ -1,7 +1,9 @@
 ---
-position: 10
-title: Conclusion
-description: "Complete the Snowplow Signals batch engine tutorial, and explore next steps for warehouse-based customer intelligence."
+position: 8
+title: "Conclusions and next steps from the Signals batch engine tutorial"
+sidebar_label: "Conclusion"
+description: "Complete the Snowplow Signals batch engine tutorial for warehouse-based attribute calculation. Learn how to use dbt projects to compute and sync historical attributes to the Profiles Store."
+keywords: ["signals batch engine workflow", "warehouse customer intelligence"]
 ---
 
 In this tutorial you've learned how to calculate attributes from your warehouse data, and apply them to Signals.

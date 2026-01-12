@@ -1,7 +1,9 @@
 ---
-title: "Funnel Builder"
+title: "Funnel Builder visualization"
 sidebar_position: 2
 sidebar_label: "Funnel Builder"
+description: "Build custom funnel analyses to understand user journeys, conversion rates, and drop-off points across any sequence of events."
+keywords: ["funnel builder", "funnel analysis", "conversion funnel", "user journey analysis"]
 ---
 
 ```mdx-code-block

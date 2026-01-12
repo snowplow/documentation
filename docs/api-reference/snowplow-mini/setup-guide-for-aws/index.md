@@ -1,15 +1,16 @@
 ---
-title: "Setup Guide for AWS"
+title: "Set up Snowplow Mini on AWS"
+sidebar_label: "AWS setup guide"
 date: "2021-05-11"
 sidebar_position: 1
+description: "Deploy Snowplow Mini on AWS for a single-instance testing environment."
+keywords: ["snowplow mini", "aws setup", "mini deployment"]
 ---
 
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-## Overview
 
 Snowplow Mini is, in essence, the Snowplow real time stack inside of a single image. It is an easily-deployable, single instance version of Snowplow that serves three use cases:
 
@@ -21,7 +22,7 @@ All setup for Snowplow Mini is done within the AWS Console and will incur small 
 
 We offer Snowplow Mini in 3 different sizes. To decide on which size of Snowplow Mini to choose, read on.
 
-### large & xlarge & xxlarge
+## large & xlarge & xxlarge
 
 Mini is available in 3 different sizes:
 

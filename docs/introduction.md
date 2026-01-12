@@ -3,7 +3,8 @@ title: "Welcome to the Snowplow Documentation"
 slug: "/"
 sidebar_position: 0
 sidebar_label: "Introduction"
-description: "Welcome to Snowplow, the leader in customer data infrastructure (CDI) for AI"
+description: "Snowplow is the leader in customer data infrastructure (CDI) for AI. Transform raw behavioral data into governed, high-fidelity fuel for AI-powered applications, real-time personalization, and advanced analytics with event-level data collection."
+keywords: ["customer data infrastructure", "cdi", "behavioral data", "event-level data", "real-time personalization", "ai-powered analytics", "signals"]
 ---
 
 <head>
@@ -32,7 +33,7 @@ Key benefits of Snowplow's CDI:
 ### Why Snowplow?
 
 * "Glass-box" technical architecture capable of processing billions of events per day
-* **Over [20 SDKs](/docs/sources/trackers/index.md)** to collect data from web, mobile, server-side, and other sources
+* **Over [20 SDKs](/docs/sources/index.md)** to collect data from web, mobile, server-side, and other sources
 * A unique approach based on **[schemas and validation](/docs/fundamentals/schemas/index.md)** ensures your data is as clean as possible
 * **Over [15 enrichments](/docs/pipeline/enrichments/available-enrichments/index.md)** to get the most out of your data
 * Stream data to your data warehouse/lakehouse or SaaS destinations of choice

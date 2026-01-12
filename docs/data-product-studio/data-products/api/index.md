@@ -1,14 +1,16 @@
 ---
-title: "Managing Data Products via the API"
+title: "Manage data products via the API"
 sidebar_label: "Using the API"
 sidebar_position: 3
+description: "Programmatically manage data products through the API with endpoints for creating, updating, retrieving, and managing subscriptions for automated workflows and version control integration."
+keywords: ["data products API", "API endpoints", "programmatic management", "subscription management", "automation"]
 ---
 
 As well as managing [data products](/docs/data-product-studio/data-products/index.md) through Snowplow Console, Snowplow customers can also manage them programmatically through an API.
 
 This functionality is key to automating existing processes and frequent manual tasks, including workflows in version control systems like GitHub.
 
-Partnered with other tools like our [CI tool](/docs/data-product-studio/data-quality/data-structures-ci-tool/index.md) and / or [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md), it's possible to have a very robust and automated data structure workflow that ensures data quality upstream of data hitting your pipeline.
+Partnered with other tools like our [CI tool](/docs/testing/data-structures-ci-tool/index.md) and / or [Snowplow Micro](/docs/testing/snowplow-micro/index.md), it's possible to have a very robust and automated data structure workflow that ensures data quality upstream of data hitting your pipeline.
 
 ## Getting started
 

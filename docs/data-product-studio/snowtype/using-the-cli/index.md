@@ -1,15 +1,15 @@
 ---
-title: "Working with the Snowtype CLI"
-sidebar_position: 2
+title: "Work with the Snowtype CLI"
 sidebar_label: "Snowtype CLI"
+sidebar_position: 2
+description: "Use the Snowtype CLI to initialize projects, generate tracking code, and configure code generation for Snowplow tracking SDKs."
+keywords: ["Snowtype CLI", "code generation CLI", "Snowtype workflow", "CLI usage"]
 ---
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
-
-## Snowtype CLI
 
 The Snowtype CLI is a tool which aims to speed up tracking implementations, provide type safety and inline documentation for developers and ultimately reduce the number of erroneous events. By integrating this tool in the development workflow we introduce a way to connect the additions and updates done in a Snowplow implementation with the corresponding tracking code of the project.
 

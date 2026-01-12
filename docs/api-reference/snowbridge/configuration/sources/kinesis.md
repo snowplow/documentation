@@ -1,6 +1,8 @@
 ---
-title: "Kinesis"
-description: "Read data from a Kinesis stream."
+title: "Configure Kinesis as a Snowbridge source"
+sidebar_label: "Kinesis"
+description: "Configure Kinesis source for Snowplow Snowbridge to read from AWS Kinesis streams with DynamoDB checkpointing and authentication."
+keywords: ["snowbridge config", "kinesis source", "aws kinesis", "dynamodb checkpointing", "kinesis consumer"]
 ---
 
 ```mdx-code-block

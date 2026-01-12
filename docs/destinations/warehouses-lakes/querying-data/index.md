@@ -1,16 +1,15 @@
 ---
-title: "Querying Snowplow data"
+title: "How to query Snowplow data in the warehouse"
 sidebar_label: "Querying data"
 sidebar_position: 1
-description: "An introduction to querying Snowplow data, including self-describing events and entities, as well tips for dealing with duplicate events"
+description: "Introduction to querying Snowplow data in warehouses including self-describing events, entities, and handling duplicate events with SQL techniques."
+keywords: ["querying data", "SQL queries", "self-describing events", "entities", "deduplication"]
 ---
 
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
-
-## Basic queries
 
 You will typically find most of your Snowplow data in the `events` table. If you are using Redshift, there will be extra tables for [self-describing events](/docs/fundamentals/events/index.md#self-describing-events) and [entities](/docs/fundamentals/entities/index.md) — see [below](#self-describing-events).
 
@@ -290,7 +289,7 @@ FROM
 
 ## Failed events
 
-See [Exploring failed events](/docs/data-product-studio/data-quality/failed-events/exploring-failed-events/index.md).
+See [Exploring failed events](/docs/monitoring/exploring-failed-events/index.md).
 
 ## Dealing with duplicates
 

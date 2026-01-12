@@ -1,11 +1,11 @@
 ---
-title: "Managing Data Product using Console"
-date: "2024-01-18"
+title: "Manage data products using Console UI"
 sidebar_label: "Using the UI"
+date: "2024-01-18"
 sidebar_position: 1
+description: "Create and manage data products in Snowplow Console with templates, event specifications, source applications, and automatic code generation for tracking implementation."
+keywords: ["data product UI", "Console UI", "event specifications UI", "source applications", "tracking code generation"]
 ---
-
-## Creating and editing a new Data Product using Console
 
 To create a new data product, navigate to the "Data products" section from the navigation bar and click the "Create data product" button.
 
@@ -19,7 +19,7 @@ After selecting "Create from scratch" a form will appear on the page. Enter your
 
 :::note
 _The name of your data product must be unique to ensure proper identification and avoid conflicts._
-:::note
+:::
 
 ![Event specifications](images/event-specifications.png)
 
@@ -49,7 +49,7 @@ In the image below, you can see an example of a data product. It not only provid
 
 If you need to edit a data product at any time, simply select it from the data products listing accessible from the main menu.
 
-#### Updating existing Data Products following the release of Source Applications
+## Updating existing Data Products for Source Applications
 
 Data Products created prior to the release of [Source Applications](/docs/data-product-studio/source-applications/index.md) in September 2024 will need to be updated to assign Source Applications in which the events will be tracked on. The selected Source Applications will add the relevant application IDs to each of the event specifications in the data product.
 

@@ -1,6 +1,9 @@
 ---
-title: "Google Tag Manager Server Side"
+title: "Forward events with Google Tag Manager Server Side"
+sidebar_label: "Google Tag Manager Server Side"
 sidebar_position: 40
+description: "Send Snowplow events to multiple destinations using Google Tag Manager Server Side with Snowplow-authored tags and vendor/community tags for flexible event routing."
+keywords: ["GTM SS", "Google Tag Manager", "server-side tagging", "event forwarding", "tag manager"]
 ---
 
 To support sending events to adjacent destinations, Snowplow works with Google Tag Manager Server Side. There are both Snowplow Authored and Vendor/Community authored Tags which will allow event data to be forwarded to different destinations.

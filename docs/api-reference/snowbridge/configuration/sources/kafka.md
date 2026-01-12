@@ -1,14 +1,14 @@
 ---
-title: "Kafka"
-description: "Read data from a Kafka topic."
+title: "Configure Kafka as a Snowbridge source"
+sidebar_label: "Kafka"
+description: "Configure Kafka source for Snowplow Snowbridge to read data from Kafka topics with authentication and consumer group settings."
+keywords: ["snowbridge config", "kafka source", "kafka consumer", "kafka topic", "kafka config"]
 ---
 
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-## Authentication
 
 Authentication is done by providing valid credentials in the configuration.
 

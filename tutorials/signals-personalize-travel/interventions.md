@@ -1,5 +1,6 @@
 ---
-title: "Create an intervention"
+title: "Define a Signals intervention to automatically start the travel AI agent"
+sidebar_label: "Define an intervention"
 position: 7
 description: "Use Snowplow Signals interventions to automatically trigger chatbot appearance based on specific user behaviors."
 keywords: ["interventions", "chatbot timing", "user engagement", "behavioral triggers", "proactive assistance"]

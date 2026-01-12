@@ -1,7 +1,9 @@
 ---
-title: "Conversions"
+title: "Modeling conversions with the Web package"
+sidebar_label: "Conversions"
+description: "Conversion modeling for the legacy Web dbt package. Superseded by the Unified Digital Conversions module."
+keywords: ["web conversions legacy", "legacy conversion tracking", "web conversion modeling"]
 sidebar_position: 100
-hide_title: true
 ---
 
 ```mdx-code-block
@@ -11,8 +13,6 @@ import TabItem from '@theme/TabItem';
 ```
 
 <Badges badgeType="dbt-package Release" pkg="web"></Badges>
-
-# Conversions
 
 Conversion events are a type of event that's important to your business, be that a transaction, a sign up to a newsletter, or the view of a specific page. Whatever type of event matters to you, so long as it can be determined from a single event record, you'll be able to model and aggregate these conversions at a session level with our package.
 
@@ -110,7 +110,7 @@ For some self-describing event with a name of `sign_up`, where we do not want to
 <summary>Using a self-describing event and a context name</summary>
 
 
-Using our [Snowplow e-commerce tracking](/docs/sources/trackers/web-trackers/tracking-events/ecommerce/index.md):
+Using our [Snowplow e-commerce tracking](/docs/sources/web-trackers/tracking-events/ecommerce/index.md):
 
 <Tabs groupId="warehouse" queryString>
 <TabItem value="snowflake" label="Snowflake" default>

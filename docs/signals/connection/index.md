@@ -1,7 +1,9 @@
 ---
-title: "Connect to Signals"
+title: "Connect to Snowplow Signals"
 sidebar_position: 15
-description: "Configure Snowplow Signals attributes using the Console, Python SDK, or API to start calculating behavioral insights."
+sidebar_label: "Connect to Signals"
+description: "Set up a Signals connection through Snowplow Console or Sandbox to start configuring attributes and interventions. Connect using the Python SDK, Node.js SDK, or REST API with your deployment credentials."
+keywords: ["signals connection", "python sdk", "nodejs sdk", "signals api", "signals setup"]
 ---
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
@@ -19,6 +21,10 @@ If you're new to Signals, you'll need to set up a Signals connection in one of t
 Click **Enable** to start setting up a Signals connection.
 
 ![Snowplow Console Signals section showing Enable button to set up connection](../images/console-no-connection.png)
+
+:::note Warehouse Connection
+Signals can also be deployed without connecting to a warehouse.
+:::
 
 You'll need to:
 * Select which warehouse to use
@@ -63,10 +69,10 @@ Add these four tokens to your environment secrets.
 
 To connect to Signals using the Signals SDKs or API, you will need two values. These are found at the bottom of the Signals Sandbox dashboard under **Configuration details**.
 
-| Value           | Description                             | Where to get it                                                  | Format                                             |
-| --------------- | --------------------------------------- | ---------------------------------------------------------------- | -------------------------------------------------- |
-| Signals API URL | The API URL for your Signals deployment | Profiles API URL                             | `https://{{123abc}}.svc.snplow.net` |
-| Sandbox Token          | An authorization token to connect to Signals                     |  Sandbox Token  | UUID                                               |
+| Value           | Description                                  | Where to get it  | Format                              |
+| --------------- | -------------------------------------------- | ---------------- | ----------------------------------- |
+| Signals API URL | The API URL for your Signals deployment      | Profiles API URL | `https://{{123abc}}.svc.snplow.net` |
+| Sandbox Token   | An authorization token to connect to Signals | Sandbox Token    | UUID                                |
 
 Add these values to your environment secrets.
 

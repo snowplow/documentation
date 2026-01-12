@@ -1,6 +1,9 @@
 ---
 position: 7
-title: Create a custom Data Product
+title: Create a custom data product for todo behavior
+sidebar_label: Create a custom data product
+description: "Create a custom data product to measure business-specific interactions like adding, completing, and removing todos. Connect the data product to your source application to inherit app IDs and application contexts automatically."
+keywords: ["custom data product creation", "business goal tracking", "event specification inheritance", "source application connection"]
 ---
 
 As in every application, there are interactions that are important to the business and are measured in a custom way. For this application the interactions you need to measure are:

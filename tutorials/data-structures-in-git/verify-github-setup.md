@@ -1,6 +1,9 @@
 ---
-title: Verify GitHub setup
+title: "Verify data structures GitHub Actions automation workflow"
+sidebar_label: "Verify GitHub workflow"
 position: 5
+description: "Test your GitHub Actions workflow by creating a pull request with data structure changes and verifying automated validation and deployment."
+keywords: ["github workflow validation", "data structure ci cd pipeline"]
 ---
 
 Now we have our workflows in place let's work through an example. Our login data structure needs some attention. Our requirements have changed and rather than 'success' and 'failure' the login result will now need to report numbers and not strings. So instead of `[success, failure]` it'll be `[200, 403]`.

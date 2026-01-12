@@ -100,11 +100,9 @@
  * work well for content-centric websites.
  */
 
-
-
 :root {
-  --ifm-color-primary: hsl(var(--primary))!important;
-  --ifm-link-color: hsl(var(--primary))!important;
+  --ifm-color-primary: hsl(var(--primary)) !important;
+  --ifm-link-color: hsl(var(--primary)) !important;
   --ifm-color-primary-dark: #5d32a5;
   --ifm-color-primary-darker: #58309c;
   --ifm-color-primary-darkest: #482780;
@@ -151,16 +149,24 @@ body {
   font-weight: 400;
   letter-spacing: -0.0125em;
 }
+
+/* Fix anchor links being hidden under navbar */
+h1[id],
+h2[id],
+h3[id],
+h4[id] {
+  scroll-margin-top: 70px;
+}
+
 .main-wrapper {
   margin-top: 1em;
 }
-main[class*=docMainContainer]>div:first-child .row {
+main[class*='docMainContainer'] > div:first-child .row {
   margin: 0 !important;
 }
-main[class*=docMainContainer]>div:first-child .col {
+main[class*='docMainContainer'] > div:first-child .col {
   padding: 0 2rem !important;
 }
-
 
 /* Fix MDX prose content styling - preserve Tailwind typography */
 .markdown,
@@ -169,67 +175,58 @@ article.markdown,
   color: hsl(var(--muted-foreground));
 }
 
-.markdown h1,
-.markdown h2,
-.markdown h3,
-.markdown h4,
-.markdown h5,
-.markdown h6,
-.prose h1,
-.prose h2,
-.prose h3,
-.prose h4,
-.prose h5,
-.prose h6 {
-  color: hsl(var(--foreground)) !important;
-}
-
 .markdown a,
 .prose a {
   color: hsl(var(--primary)) !important;
 }
 
-
 /* Override Docusaurus article styles that interfere with prose */
-article[class*="markdown"] p {
+article[class*='markdown'] p {
   font-size: inherit !important;
   line-height: inherit !important;
 }
 
-/* Allow prose to control heading sizes and line heights */
-.prose h1 { font-size: 2.25rem !important; line-height: 2.5rem !important; }
-.prose h2 { font-size: 1.875rem !important; line-height: 2.25rem !important; }
-.prose h3 { font-size: 1.5rem !important; line-height: 2rem !important; }
-.prose h4 { font-size: 1.25rem !important; line-height: 1.75rem !important; }
-
-/* Prose paragraph and text line heights */
-.prose p { line-height: 1.75 !important; }
-.prose li { line-height: 1.75 !important; }
-.prose blockquote { line-height: 1.75 !important; }
-
 /* Prose size variants with proper line heights */
-.prose-sm p, .prose-sm li { font-size: 0.875rem !important; line-height: 1.5 !important; }
-.prose-base p, .prose-base li { font-size: 1rem !important; line-height: 1.75 !important; }
-.prose-lg p, .prose-lg li { font-size: 1.125rem !important; line-height: 1.75 !important; }
-.prose-xl p, .prose-xl li { font-size: 1.25rem !important; line-height: 1.8 !important; }
-.prose-2xl p, .prose-2xl li { font-size: 1.5rem !important; line-height: 1.67 !important; }
-
-
+.prose-sm p,
+.prose-sm li {
+  font-size: 0.875rem !important;
+  line-height: 1.5 !important;
+}
+.prose-base p,
+.prose-base li {
+  font-size: 1rem !important;
+  line-height: 1.75 !important;
+}
+.prose-lg p,
+.prose-lg li {
+  font-size: 1.125rem !important;
+  line-height: 1.75 !important;
+}
+.prose-xl p,
+.prose-xl li {
+  font-size: 1.25rem !important;
+  line-height: 1.8 !important;
+}
+.prose-2xl p,
+.prose-2xl li {
+  font-size: 1.5rem !important;
+  line-height: 1.67 !important;
+}
 
 /* Reset any Docusaurus interference with typography */
-.markdown, .prose {
+.markdown,
+.prose {
   font-size: unset !important;
   line-height: unset !important;
 }
 
-
 .DocSearch-Button {
   position: fixed !important;
-  top: 32px!important;
-  left: 50%!important;
-  transform: translate(-50%, -50%)!important;
-  max-width: 360px!important;
-  width: 100%!important;
+  top: 32px !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  max-width: 360px !important;
+  width: 100% !important;
   border-radius: 8px !important;
   background-color: hsl(var(--accent)) !important;
   color: hsl(var(--muted-foreground)) !important;
@@ -245,17 +242,17 @@ article[class*="markdown"] p {
 }
 @media screen and (max-width: 1280px) {
   .DocSearch-Button {
-    max-width: 240px!important;
+    max-width: 240px !important;
   }
 }
 @media screen and (max-width: 640px) {
   .DocSearch-Button {
-    max-width: 40px!important;
-    position: relative!important;
-    left: auto!important;
-    transform: none!important;
+    max-width: 40px !important;
+    position: relative !important;
+    left: auto !important;
+    transform: none !important;
     width: fit-content !important;
-    top: auto!important;
+    top: auto !important;
   }
 }
 
@@ -265,12 +262,12 @@ article[class*="markdown"] p {
   }
 
   /* Main content area spacing from sidebar */
-  main[role="main"] {
+  main[role='main'] {
     margin-left: 40px;
   }
 
   /* Fix for pages with sidebar_position: 1 - ensure content wrapper takes full width */
-  main[class*="docMainContainer"] > div:first-child {
+  main[class*='docMainContainer'] > div:first-child {
     width: 100% !important;
   }
 
@@ -410,7 +407,7 @@ table {
 /* Left side bar CSS START */
 
 aside.theme-doc-sidebar-container {
-  border: none!important;
+  border: none !important;
 }
 .sidebar_node_modules-\@docusaurus-theme-classic-lib-theme-DocSidebar-Desktop-styles-module {
   width: 100% !important;
@@ -500,7 +497,7 @@ aside.theme-doc-sidebar-container {
 
 .menu__list-item--collapsed .menu__link--sublist:after,
 .menu__list-item--collapsed .menu__caret:before {
-  transform: rotateZ(0deg)!important;
+  transform: rotateZ(0deg) !important;
 }
 
 .menu__list-item-collapsible {
@@ -517,27 +514,27 @@ aside.theme-doc-sidebar-container {
 }
 
 .menu__list-item-collapsible--active {
-  background-color: hsla(261.56, 53.33%, 47.06%, 0.12)!important;
-  border-radius: 0px var(--radius) var(--radius) 0px!important;
+  background-color: hsla(261.56, 53.33%, 47.06%, 0.12) !important;
+  border-radius: 0px var(--radius) var(--radius) 0px !important;
   border-left: 1px solid hsl(var(--primary));
   margin-left: -1px;
 }
-.menu__list-item-collapsible.menu__list-item-collapsible--active{
-  border-radius: 0px var(--radius) var(--radius) 0px!important;
+.menu__list-item-collapsible.menu__list-item-collapsible--active {
+  border-radius: 0px var(--radius) var(--radius) 0px !important;
 }
 
 .menu__list-item-collapsible--active .menu__caret {
   border: none;
   background: none;
   padding: 4px;
-  opacity: 100%!important;
+  opacity: 100% !important;
   display: flex !important;
 }
 
 .menu__link,
 .menu__caret {
   align-items: center;
-  border-radius: 0!important;
+  border-radius: 0 !important;
   display: flex;
   transition: background var(--ifm-transition-fast)
     var(--ifm-transition-timing-default);
@@ -557,7 +554,7 @@ aside.theme-doc-sidebar-container {
   font-size: 0.93825rem;
   padding: var(--ifm-menu-link-padding-vertical)
     var(--ifm-menu-link-padding-horizontal);
-  border-radius: 0!important;
+  border-radius: 0 !important;
 }
 
 .menu__link:hover {
@@ -582,7 +579,7 @@ aside.theme-doc-sidebar-container {
 .menu__link--active {
   color: hsl(var(--primary));
   background-color: hsla(261.56, 53.33%, 47.06%, 0.12);
-  border-radius: 0!important;
+  border-radius: 0 !important;
 }
 
 .menu__link--active:hover {
@@ -593,7 +590,7 @@ aside.theme-doc-sidebar-container {
 .menu__list-item-collapsible .menu__link:hover,
 .menu__list-item-collapsible .menu__link--active {
   color: var(--ifm-menu-color-active);
-  border-radius: 0px var(--radius) var(--radius) 0px !important; 
+  border-radius: 0px var(--radius) var(--radius) 0px !important;
   border-left: 1px solid hsl(var(--primary));
 }
 
@@ -606,27 +603,30 @@ aside.theme-doc-sidebar-container {
 .menu__caret {
   padding: var(--ifm-menu-link-padding-vertical)
     var(--ifm-menu-link-padding-horizontal);
-  opacity: 0!important;
+  opacity: 0 !important;
 }
 
 .menu__caret:before {
   content: '';
-  background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none' stroke='%236638B8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='m9 18 6-6-6-6'/%3e%3c/svg%3e") center / 1rem 1rem no-repeat !important;
+  background: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 20 20' fill='none' stroke='%236638B8' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3e%3cpath d='m9 18 6-6-6-6'/%3e%3c/svg%3e")
+    center / 1rem 1rem no-repeat !important;
   filter: var(--ifm-menu-link-sublist-icon-filter);
   height: 1.25rem;
-  transform: rotate(90deg)!important;
+  transform: rotate(90deg) !important;
   width: 1.25rem;
   transition: transform var(--ifm-transition-fast) linear;
 }
 .menu__list-item-collapsible:hover .menu__caret {
   border: none;
-  background: none!important;
+  background: none !important;
   padding: 4px;
-  opacity: 100!important;
+  opacity: 100 !important;
 }
-.theme-doc-sidebar-item-category-level-2 .menu__list-item-collapsible .menu__caret {
+.theme-doc-sidebar-item-category-level-2
+  .menu__list-item-collapsible
+  .menu__caret {
   padding: 4px;
-  opacity: 100!important;
+  opacity: 100 !important;
 }
 
 /* button to collapse */
@@ -795,7 +795,7 @@ a.card:hover::after {
 }
 .breadcrumbs {
   padding-left: 0;
-  flex-wrap: wrap!important;
+  flex-wrap: wrap !important;
 }
 
 .breadcrumbs__item:not(:last-child):after {
@@ -835,10 +835,12 @@ a.card:hover::after {
   align-items: center;
   padding: 12px 0;
   min-height: 48px;
+  gap: 4px; /* gap-1 equivalent */
+  flex-wrap: wrap;
 }
 
 .breadcrumbs__link {
-  font-size: .875rem !important;
+  font-size: 0.875rem !important;
   display: inline-flex;
   align-items: center;
   padding: 8px 4px;
@@ -850,7 +852,7 @@ a.card:hover::after {
 }
 
 .breadcrumbs__item:not(:last-child):after {
-  margin: 0 8px;
+  margin: 0 2px;
   display: inline-flex;
   align-items: center;
 }
@@ -861,6 +863,8 @@ ul.breadcrumbs {
   padding: 0;
   display: flex;
   align-items: center;
+  gap: 4px; /* gap-1 equivalent */
+  flex-wrap: wrap;
 }
 
 ul.breadcrumbs > li.breadcrumbs__item > a.breadcrumbs__link > svg {
@@ -872,7 +876,7 @@ ul.breadcrumbs > li.breadcrumbs__item > a.breadcrumbs__link > svg {
 }
 
 /* Fix home icon alignment specifically - tighten spacing */
-.breadcrumbs__link[aria-label*="Home"] {
+.breadcrumbs__link[aria-label*='Home'] {
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -896,6 +900,63 @@ ul.breadcrumbs > li.breadcrumbs__item > a.breadcrumbs__link > svg {
   line-height: 1;
 }
 
+/* Mobile responsive breadcrumbs */
+@media (max-width: 768px) {
+  .breadcrumbs {
+    gap: 2px; /* Tighter gap on mobile */
+    min-height: 40px; /* Smaller min-height on mobile */
+  }
+
+  .breadcrumbs__link {
+    font-size: 0.75rem !important; /* Smaller font on mobile */
+    padding: 4px 2px;
+  }
+
+  .breadcrumbs__item:not(:last-child):after {
+    margin: 0 1px; /* Even tighter separator margin on mobile */
+  }
+}
+
+/* Badge styling - automatic grouping for consecutive badges */
+.snowplow-badge-container {
+  display: inline-block;
+  vertical-align: middle;
+  white-space: nowrap;
+  margin-right: 4px; /* gap-1 equivalent */
+  margin-bottom: 4px; /* for wrapping */
+}
+
+/* Remove margin from last badge */
+.snowplow-badge-container:last-child {
+  margin-right: 0;
+}
+
+/* Auto-wrap consecutive badge containers */
+.theme-doc-markdown > p:has(.snowplow-badge-container) {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px;
+  margin-bottom: 1rem;
+}
+
+/* Fallback for browsers without :has() support */
+.snowplow-badge-container + .snowplow-badge-container {
+  margin-left: 0; /* Use gap instead */
+}
+
+/* Mobile responsive */
+@media (max-width: 768px) {
+  .snowplow-badge-container {
+    margin-right: 2px;
+    margin-bottom: 2px;
+  }
+
+  .theme-doc-markdown > p:has(.snowplow-badge-container) {
+    gap: 2px;
+  }
+}
+
 .card .text--truncate {
   overflow: visible;
   text-overflow: initial;
@@ -917,17 +978,18 @@ code {
 /* Remove margin-bottom from code blocks */
 .prose pre.prism-code {
   margin-bottom: 0;
+  scrollbar-color: hsl(var(--muted-foreground)) transparent;
+  scrollbar-width: thin;
 }
 
-/* Fix code block button overlap */
+.prose pre.prism-code:hover {
+  scrollbar-color: hsl(var(--muted-foreground)) transparent;
+  scrollbar-width: thin;
+}
+
+/* Code block content styling */
 div[class^='codeBlockContent'] {
   position: relative;
-  padding-top: 1rem;
-}
-
-/* Always show copy buttons */
-div[class^='codeBlockContent'] div[class^='buttonGroup'] button {
-  opacity: 50% !important;
 }
 
 input[type='text'],
@@ -1144,29 +1206,32 @@ img.full-width {
 }
 
 /* Manual margin collapse rules for grid layout. Removes bottom margin
-from elements with a subsequent element that has a top margin. */
-.theme-doc-markdown h1:has(+ h2),
-.theme-doc-markdown h1:has(+ h3),
-.theme-doc-markdown h2:has(+ h3),
-.theme-doc-markdown ul:has(+ h2),
-.theme-doc-markdown ul:has(+ h3),
-.theme-doc-markdown ol:has(+ h2),
-.theme-doc-markdown ol:has(+ h3),
-.theme-doc-markdown p:has(+ h2),
-.theme-doc-markdown p:has(+ h3),
-.theme-doc-markdown p:has(+ div > table),
-.theme-doc-markdown p:has(+ table),
-.theme-doc-markdown h2:has(+ p > img),
-/*.theme-doc-markdown p:has(+ p > img),*/
-.theme-doc-markdown h3:has(+ p > img),
-.theme-doc-markdown div.theme-admonition:has(+ h2),
-.theme-doc-markdown div.theme-admonition:has(+ h3),
-.theme-doc-markdown details:has(+ h2),
-.theme-doc-markdown details:has(+ h3),
-.theme-doc-markdown div.tabs-container:has(+ h2),
-.theme-doc-markdown div.tabs-container:has(+ h3)
-.theme-doc-markdown div.theme-code-block:has(+ h2),
-.theme-doc-markdown div.theme-code-block:has(+ h3) {
+from elements with a subsequent element that has a top margin.
+Uses :not(##):not(##) specificity hack to match Docusaurus v3's Infima framework,
+which uses the same pattern to ensure base styles have higher specificity. */
+.theme-doc-markdown h1:not(##):not(##):has(+ h2),
+.theme-doc-markdown h1:not(##):not(##):has(+ h3),
+/*.theme-doc-markdown h2:has(+ h3),*/
+.theme-doc-markdown ul:not(##):not(##):has(+ h2),
+.theme-doc-markdown ul:not(##):not(##):has(+ h3),
+.theme-doc-markdown ol:not(##):not(##):has(+ h2),
+.theme-doc-markdown ol:not(##):not(##):has(+ h3),
+.theme-doc-markdown p:not(##):not(##):has(+ h2),
+.theme-doc-markdown p:not(##):not(##):has(+ h3),
+.theme-doc-markdown p:not(##):not(##):has(+ div > table),
+.theme-doc-markdown p:not(##):not(##):has(+ table),
+.theme-doc-markdown h2:not(##):not(##):has(+ p > img),
+.theme-doc-markdown h3:not(##):not(##):has(+ p > img),
+.theme-doc-markdown div.theme-admonition:not(##):not(##):has(+ h2),
+.theme-doc-markdown div.theme-admonition:not(##):not(##):has(+ h3),
+.theme-doc-markdown details:not(##):not(##):has(+ h2),
+.theme-doc-markdown details:not(##):not(##):has(+ h3),
+.theme-doc-markdown div.tabs-container:not(##):not(##):has(+ h2),
+.theme-doc-markdown div.tabs-container:not(##):not(##):has(+ h3),
+.theme-doc-markdown div.theme-code-block:not(##):not(##):has(+ h2),
+.theme-doc-markdown div.theme-code-block:not(##):not(##):has(+ h3),
+.theme-doc-markdown div:not(##):not(##) > table:has(+ h2), /* Tables generated by MDX components are typically put in divs */
+.theme-doc-markdown div:not(##):not(##) > table:has(+ h3) {
   margin-bottom: 0rem;
 }
 
@@ -1188,8 +1253,8 @@ img {
 
 /* doc markdown grid layout control END*/
 
-div[class^=codeBlockContent] {
-  padding-top: 2rem!important;
+div[class^='codeBlockContent'] {
+  padding-top: 2rem !important;
 }
 
 .footer {
@@ -1230,42 +1295,219 @@ li.footer__item::first-letter {
   color: hsl(var(--muted-foreground));
 }
 
-/* START Control rest of the elements erase after we upgrade */
-article nav.theme-doc-breadcrumbs,
-article footer.theme-doc-footer,
-nav.pagination-nav {
-  max-width: 740px;
-  margin: 2rem auto 0 auto;
-}
-abbr[data-title]:focus:after,
-abbr[data-title]:hover:after {
-  background-color: hsl(var(--popover));
-  border-radius: var(--radius);
-  color: var(--popover-foreground);
-  content: attr(data-title);
-  font-size: 0.875rem;
-  padding: 4px 8px;
-}
-.tocCollapsibleContent_node_modules-\@docusaurus-theme-classic-lib-theme-TOCCollapsible-styles-module
-  > ul {
-  padding: 0.75rem !important;
-  font-size: 1rem !important;
-  margin: 0 !important;
-}
-.tocCollapsibleContent_node_modules-\@docusaurus-theme-classic-lib-theme-TOCCollapsible-styles-module
-  a {
-  text-decoration: none !important;
-}
-.prose .markdown table thead tr th h3,
-.prose .markdown table tbody tr td h3 {
-  margin: 0.5rem 0 !important;
-}
-.prose table thead a {
-  font-weight: 600;
-  text-decoration: none;
+/* Custom code block header and button styling */
+.theme-code-block {
+  border: 1px solid hsl(var(--border));
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: none !important;
 }
 
-/* END  Control rest of the elements erase after we upgrade */
+/* Remove the default button positioning */
+div[class*='buttonGroup'] {
+  position: static !important;
+}
+
+/* Code block pre should not have extra padding at top since header handles spacing */
+.theme-code-block pre {
+  margin: 0;
+  border-radius: 0;
+}
+
+/* Adjust the padding-top override to work with new header */
+.theme-code-block div[class^='codeBlockContent'] {
+  padding-top: 0 !important;
+}
+/* Mermaid diagrams responsive styles - FORCE fit viewport */
+.mermaid,
+div.mermaid,
+.theme-code-block .mermaid,
+pre.mermaid {
+  max-width: 100% !important;
+  overflow: hidden !important;
+  width: 100% !important;
+}
+
+/* Mobile: FORCE diagrams to never exceed viewport - covers both real mobile and dev tools simulation */
+@media (max-width: 768px),
+  screen and (max-device-width: 768px),
+  (max-width: 767px),
+  (pointer: coarse) {
+  /* Prevent horizontal scroll on mobile while preserving text flow */
+  body {
+    overflow-x: hidden !important;
+  }
+
+  /* Force all containers to respect viewport width */
+  .theme-doc-markdown,
+  article,
+  main {
+    max-width: 100vw !important;
+    overflow-x: hidden !important;
+    box-sizing: border-box !important;
+  }
+
+  /* Fix the root cause: Docusaurus column width on mobile */
+  .col[class*='docItemCol'] {
+    max-width: 100vw !important;
+    width: 100% !important;
+    flex: 1 1 100% !important;
+    overflow-x: hidden !important;
+  }
+
+  /* Fix text wrapping without adding padding */
+  .theme-doc-markdown p,
+  .theme-doc-markdown h1,
+  .theme-doc-markdown h2,
+  .theme-doc-markdown h3,
+  .theme-doc-markdown li,
+  .theme-doc-markdown div:not(.mermaid-container) {
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    hyphens: auto !important;
+  }
+
+  /* Mermaid container constraints - don't affect page layout */
+  .mermaid-container {
+    max-width: 100% !important;
+    width: 100% !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    margin: 1rem 0 !important;
+    padding: 0 !important;
+    position: relative;
+  }
+
+  /* Mermaid diagrams must fit within their container */
+  .mermaid,
+  div.mermaid,
+  .theme-code-block .mermaid,
+  pre.mermaid,
+  article .mermaid,
+  .theme-doc-markdown .mermaid,
+  .mermaid-container .mermaid {
+    max-width: 100% !important;
+    width: 100% !important;
+    overflow: hidden !important;
+    box-sizing: border-box !important;
+    margin: 0 auto !important;
+    padding: 0 !important;
+  }
+
+  /* Scale SVG to fit but keep text readable */
+  .mermaid svg,
+  div.mermaid svg,
+  .theme-code-block .mermaid svg,
+  pre.mermaid svg,
+  article .mermaid svg,
+  .mermaid-container .mermaid svg {
+    max-width: 100% !important;
+    width: auto !important;
+    height: auto !important;
+    transform: scale(0.5) !important;
+    transform-origin: left top !important;
+  }
+
+  /* Readable text sizes with better wrapping */
+  .mermaid text,
+  .mermaid .flowchart-label,
+  .mermaid .nodeLabel,
+  .mermaid .edgeLabel,
+  .mermaid foreignObject {
+    font-size: 11px !important;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+      sans-serif !important;
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    max-width: 120px !important;
+  }
+
+  /* Force text wrapping in nodes */
+  .mermaid .nodeLabel,
+  .mermaid foreignObject div {
+    white-space: normal !important;
+    word-wrap: break-word !important;
+    overflow-wrap: break-word !important;
+    hyphens: auto !important;
+    max-width: 100px !important;
+    line-height: 1.2 !important;
+  }
+}
+
+/* Specific targeting for Chrome dev tools device simulation */
+@media screen and (max-width: 414px) {
+  .mermaid svg,
+  div.mermaid svg,
+  .theme-code-block .mermaid svg,
+  pre.mermaid svg,
+  article .mermaid svg,
+  .mermaid-container .mermaid svg {
+    transform: scale(0.55) !important;
+    transform-origin: left top !important;
+  }
+
+  .mermaid text,
+  .mermaid .flowchart-label,
+  .mermaid .nodeLabel,
+  .mermaid .edgeLabel,
+  .mermaid foreignObject {
+    font-size: 9px !important;
+  }
+}
+
+/* Extra small screens - but still readable */
+@media (max-width: 480px) {
+  .mermaid svg,
+  div.mermaid svg,
+  .theme-code-block .mermaid svg,
+  pre.mermaid svg,
+  article .mermaid svg,
+  .mermaid-container .mermaid svg {
+    transform: scale(0.6) !important;
+    transform-origin: left top !important;
+  }
+
+  .mermaid text,
+  .mermaid .flowchart-label,
+  .mermaid .nodeLabel,
+  .mermaid .edgeLabel {
+    font-size: 10px !important;
+  }
+}
+
+/* Click to enlarge functionality */
+.mermaid-container {
+  position: relative;
+}
+
+@media (max-width: 768px) {
+  .mermaid-container::after {
+    content: '👆 Tap to enlarge';
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 11px;
+    pointer-events: none;
+    z-index: 10;
+    white-space: nowrap;
+    max-width: calc(100% - 20px);
+    text-align: center;
+  }
+
+  .mermaid-container {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+  }
+
+  .mermaid-container:active {
+    transform: scale(0.98);
+  }
+}
 
 @media print {
   aside.cookie-though {

@@ -1,9 +1,11 @@
 ---
 position: 1
-title: Introduction
+title: "Learn how to create live viewer profiles using Kafka"
+sidebar_label: "Introduction"
+description: "Build real-time viewer profiles for video streaming platforms using Snowplow, Kafka, Java, and DynamoDB to track live user interactions and engagement."
+keywords: ["kafka real-time viewer profiles", "video streaming analytics snowplow"]
 ---
 
-## About This Accelerator
 Welcome to the **live viewer profiles** solution accelerator for video streaming!
 
 This accelerator demonstrates how to build a real-time use case leveraging **Snowplow event data** to create live viewer profiles for a video streaming site. By combining Snowplow's streaming pipeline with **Apache Kafka**, a **Java application** and **AWS DynamoDB**, the solution processes live streaming events to visualize user interactions with video content and advertisements.
@@ -18,12 +20,9 @@ This accelerator is open source and can serve as the foundation to build practic
 
 Please start by reviewing how the application works in the next page on Localstack, even if you're planning to deploy with Terraform.
 
----
-
 ## Solution Accelerator Code
-[**The code for this infrastructure is available on here on GitHub.**](https://github.com/snowplow-industry-solutions/kafka-live-viewer-profiles)
 
----
+[**The code for this infrastructure is available on here on GitHub.**](https://github.com/snowplow-industry-solutions/kafka-live-viewer-profiles)
 
 ## Architecture
 

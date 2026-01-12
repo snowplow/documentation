@@ -1,8 +1,9 @@
 ---
-title: "Defining attributes"
+title: "Define attributes in Signals"
 sidebar_position: 20
 sidebar_label: "Define attributes"
-description: "Configure Snowplow Signals attributes using Console, Python SDK, or API to start calculating behavioral insights."
+description: "Create attribute groups and services to calculate behavioral insights from real-time streams or warehouse data. Use Console UI, Python SDK, or the Signals API."
+keywords: ["define attributes", "attribute groups", "signals configuration", "console ui"]
 ---
 
 There are three methods for defining attributes in Signals:

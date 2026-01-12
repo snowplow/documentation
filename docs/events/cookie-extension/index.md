@@ -1,14 +1,16 @@
 ---
 title: "Cookie Extension service"
+sidebar_label: "Cookie Extension service"
 description: "How to create and use a Cookie Extension service, previously known as ID service, to mitigate against ITP"
 date: "2020-02-26"
 sidebar_position: 3.5
+keywords: ["Cookie Extension service", "ITP", "Safari tracking prevention", "user identification"]
 ---
 
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-A Cookie Extension service works with the Snowplow [browser tracker](/docs/sources/trackers/web-trackers/index.md) to help you maintain consistent user identification despite browser privacy restrictions like Safari's Intelligent Tracking Prevention.
+A Cookie Extension service works with the Snowplow [browser tracker](/docs/sources/web-trackers/index.md) to help you maintain consistent user identification despite browser privacy restrictions like Safari's Intelligent Tracking Prevention.
 
 Deployed within your website's IP space, the service creates and manages persistent browser identifiers.
 

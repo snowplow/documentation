@@ -1,5 +1,3 @@
-import React from 'react'
-
 // Utility functions
 const formatType = (property) => {
   if (property.type === 'array' && property.items) {
@@ -52,6 +50,7 @@ const renderMarkdownCode = (text) => {
   if (!text) return text
 
   const parts = text.split(/(`[^`]+`)/g)
+
   return parts.map((part, index) => {
     if (part.startsWith('`') && part.endsWith('`')) {
       const codeContent = part.slice(1, -1)
@@ -115,6 +114,7 @@ const extractConditionallyRequiredFields = (schema) => {
 export default function EventForwardingSchemaTable({ schema }) {
   const { properties, requiredFields, schemaForConditionals } =
     parseSchemaStructure(schema)
+
   const conditionallyRequiredFields = extractConditionallyRequiredFields(
     schemaForConditionals || {}
   )
@@ -135,7 +135,6 @@ export default function EventForwardingSchemaTable({ schema }) {
     : Object.entries(properties).sort(([fieldNameA], [fieldNameB]) => {
         const isRequiredA = isFieldRequired(fieldNameA)
         const isRequiredB = isFieldRequired(fieldNameB)
-
         if (isRequiredA && !isRequiredB) return -1
         if (!isRequiredA && isRequiredB) return 1
         return 0
@@ -159,7 +158,7 @@ export default function EventForwardingSchemaTable({ schema }) {
           const isRequired = isFieldRequired(fieldName, nestedRequiredFields)
           const requirementLabel = isRequired ? ', required' : ', optional'
           const enumInfo = formatEnumValues(property)
-
+          const defaultValue = formatDefaultValue(property)
           return (
             <li key={fieldName}>
               <code>{fieldName}</code> ({type}
@@ -168,8 +167,13 @@ export default function EventForwardingSchemaTable({ schema }) {
               {enumInfo && (
                 <>
                   <br />
-                  {type}
                   {enumInfo}
+                </>
+              )}
+              {hasDefaultValue(property) && (
+                <>
+                  <br />
+                  Default mapping: {defaultValue}
                 </>
               )}
             </li>

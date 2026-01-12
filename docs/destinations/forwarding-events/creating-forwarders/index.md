@@ -1,7 +1,9 @@
 ---
-title: "Creating forwarders"
-description: "How to create a Snowplow event forwarder to send events to third party destinations in real-time"
+title: "Create event forwarders in Console"
+sidebar_label: "Creating forwarders"
 sidebar_position: 11
+description: "Step-by-step guide to create a Snowplow event forwarder to send events to third-party destinations in real-time with connections, filters, and field mappings."
+keywords: ["create forwarder", "event forwarding setup", "connection configuration", "field mapping", "destination integration"]
 ---
 
 Follow the steps below to configure a new event forwarder. See [available integrations](/docs/destinations/forwarding-events/integrations/index.md) for destination-specific guides.
@@ -68,7 +70,7 @@ Once you've defined your filter and mapping configuration, you can test it again
 
 ![Test transformation interface showing sample event input and JSON output preview with run test button](images/event-forwarding-test-transformations.png)
 
-Snowplow provides a few out-of-the-box sample events to test with, which you can edit as needed. You can also choose **Custom event** to paste in your own JSON-formatted Snowplow event. You can use [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/) with the `--output-json` flag to generate your own events to test with.
+Snowplow provides a few out-of-the-box sample events to test with, which you can edit as needed. You can also choose **Custom event** to paste in your own JSON-formatted Snowplow event. You can use [Snowplow Micro](/docs/testing/snowplow-micro/) with the `--output-json` flag to generate your own events to test with.
 
 Select **View generated code** to see the JavaScript function generated from your filters, field mappings, and custom functions. This is exactly what will run when transforming events for your destination, and can be used directly in a [Snowbridge JavaScript transformation](docs/api-reference/snowbridge/configuration/transformations/custom-scripts/javascript-configuration/index.md) for local testing.
 

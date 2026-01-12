@@ -1,6 +1,7 @@
 ---
-title: "Conclusion"
-position: 100
+title: "Conclusions and next steps from the Signals personalized travel site accelerator"
+sidebar_label: "Conclusion"
+position: 8
 description: "Summary of what you've accomplished and recommended next steps for expanding your Snowplow Signals implementation."
 keywords: ["conclusion", "next steps", "personalization", "real-time", "behavioral data"]
 date: "2025-01-21"

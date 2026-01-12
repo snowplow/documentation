@@ -1,7 +1,10 @@
 ---
-title: "Custom script transformations"
+title: "Custom Snowbridge script transformations"
+sidebar_label: "Custom script transformations"
 date: "2022-10-20"
 sidebar_position: 100
+description: "Create custom JavaScript Snowbridge transformations to modify data, filter messages, set partition keys, and add HTTP headers."
+keywords: ["snowbridge config", "custom scripts", "javascript transformations", "goja engine", "transform scripts"]
 ---
 
 ```mdx-code-block
@@ -51,7 +54,7 @@ function main(input) {
 
 Scripts can access the message Data at `input.Data`, and can return modified data by returning it in the `Data` field of the output. Likewise for the partition key to be used for the destination - `input.PartitionKey` and the `PartitionKey` field of the output.
 
-By default, the input's `Data` field will be a string in [enriched TSV format](/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md).
+By default, the input's `Data` field will be a string in [enriched TSV format](/docs/pipeline/enriched-tsv-format/index.md).
 This can be changed with the [SpEnrichedToJson](/docs/api-reference/snowbridge/configuration/transformations/builtin/spEnrichedToJson.md) transform, or the Javascript transformation itself has a `snowplow_mode` option, which transforms the data to an object first.
 
 The output of the script must be an object which maps to engineProtocol.
@@ -140,7 +143,7 @@ The headers will only be included if the target has the [`dynamic_headers = true
 The following hash algorithms are supported:
 - `sha1` - SHA-1 hash (160 bits)
 - `sha256` - SHA-256 hash (256 bits)
-- `md5` - MD5 hash (128 bits) 
+- `md5` - MD5 hash (128 bits)
 
 ```
 hash(input.Data["app_id"], "sha1")

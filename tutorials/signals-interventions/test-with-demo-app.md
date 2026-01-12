@@ -1,7 +1,9 @@
 ---
 position: 5
-title: Test with the demo application
+title: Test your Signals interventions in the demo application
+sidebar_label: Test in the demo application
 description: "Use the interactive demo e-shop to see your Signals configuration in action."
+keywords: ["signals demo app", "javascript tracker ecommerce"]
 ---
 
 ```mdx-code-block
@@ -81,7 +83,7 @@ Follow these steps to trigger each intervention.
 
 We highly recommend installing the [Snowplow Inspector](/docs/data-product-studio/data-quality/snowplow-inspector) Chrome extension that lets you validate which Snowplow events are triggering on the website and also check the values of Signals attributes and interventions.
 
-You can install the extension from the [Chrome Web Store](https://chrome.google.com/webstore/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm?hl=en). Once you add the extension to Chrome, you can view it by [opening Developer Tools](https://developer.chrome.com/docs/devtools/open/) (usually <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>I</kbd> or on Mac <kbd>Cmd</kbd>+<kbd>Option</kbd>+<kbd>I</kbd>), where it has its own tab named 'Snowplow'. Right away, you will see the tracked events as you open a product or add a product to cart.
+You can install the extension from the [Chrome Web Store](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm). Once you add the extension to Chrome, you can view it by [opening Developer Tools](https://developer.chrome.com/docs/devtools/open/) (usually <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>I</kbd> or on Mac <kbd>Cmd</kbd>+<kbd>Option</kbd>+<kbd>I</kbd>), where it has its own tab named 'Snowplow'. Right away, you will see the tracked events as you open a product or add a product to cart.
 
 ![Screenshot showing the Snowplow Inspector extension with tracked events from the demo app.](./images/inspector-events.png)
 

@@ -1,7 +1,10 @@
 ---
-title: "Versions and compatibility"
+title: "Snowplow component versions and compatibility matrix"
+sidebar_label: "Versions and compatibility"
 date: "2021-04-29"
 sidebar_position: -1000
+description: "Latest versions of Snowplow components including collectors, enrichment, loaders, trackers, Iglu, data models, and analytics SDKs with compatibility and upgrade information."
+keywords: ["component versions", "version compatibility", "latest versions", "upgrade guides", "deprecation"]
 ---
 
 ```mdx-code-block
@@ -9,8 +12,6 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import {versions} from '@site/src/componentVersions';
 ```
-
-## Compatibility
 
 In short, almost everything is compatible with almost everything. We rarely change the core protocols that various components use to communicate.
 
@@ -26,7 +27,7 @@ If you are a Snowplow CDI customer, rather than self-hosted, you don't need to d
 
 Some major upgrades might have breaking changes. In this case, we provide upgrade guides, such as the ones for [RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/upgrade-guides/index.md).
 
-From time to time, we develop better applications for certain tasks and deprecate the old ones. Deprecations are announced on [Community](http://community.snowplow.io/).
+From time to time, we develop better applications for certain tasks and deprecate the old ones. Deprecations are announced on [Community](https://community.snowplow.io/).
 
 ---
 
@@ -106,26 +107,26 @@ If you are a Snowplow CDI customer, rather than self-hosted, you don't need to i
 
 | Tracker                                                                      |        Latest version        |
 | :--------------------------------------------------------------------------- | :--------------------------: |
-| [JavaScript (Web and Node.js)](/docs/sources/trackers/web-trackers/index.md) | {versions.javaScriptTracker} |
-| [iOS](/docs/sources/trackers/mobile-trackers/index.md)                       |    {versions.iosTracker}     |
-| [Android](/docs/sources/trackers/mobile-trackers/index.md)                   |  {versions.androidTracker}   |
-| [React Native](/docs/sources/trackers/react-native-tracker/index.md)         | {versions.javaScriptTracker} |
-| [Flutter](/docs/sources/trackers/flutter-tracker/index.md)                   |  {versions.flutterTracker}   |
-| [WebView](/docs/sources/trackers/webview-tracker/index.md)                   |  {versions.webViewTracker}   |
-| [Roku](/docs/sources/trackers/roku-tracker/index.md)                         |    {versions.rokuTracker}    |
-| [Google AMP](/docs/sources/trackers/google-amp-tracker/index.md)             | {versions.googleAmpTracker}  |
-| [Pixel](/docs/sources/trackers/pixel-tracker/index.md)                       |   {versions.pixelTracker}    |
-| [Golang](/docs/sources/trackers/golang-tracker/index.md)                     |   {versions.golangTracker}   |
-| [.NET](/docs/sources/trackers/net-tracker/index.md)                          |   {versions.dotNetTracker}   |
-| [Java](/docs/sources/trackers/java-tracker/index.md)                         |    {versions.javaTracker}    |
-| [Python](/docs/sources/trackers/python-tracker/index.md)                     |   {versions.pythonTracker}   |
-| [Scala](/docs/sources/trackers/scala-tracker/index.md)                       |   {versions.scalaTracker}    |
-| [Ruby](/docs/sources/trackers/ruby-tracker/index.md)                         |    {versions.rubyTracker}    |
-| [Rust](/docs/sources/trackers/rust-tracker/index.md)                         |    {versions.rustTracker}    |
-| [PHP](/docs/sources/trackers/php-tracker/index.md)                           |    {versions.phpTracker}     |
-| [C++](/docs/sources/trackers/c-tracker/index.md)                             |    {versions.cppTracker}     |
-| [Unity](/docs/sources/trackers/unity-tracker/index.md)                       |   {versions.unityTracker}    |
-| [Lua](/docs/sources/trackers/lua-tracker/index.md)                           |    {versions.luaTracker}     |
+| [JavaScript (Web and Node.js)](/docs/sources/web-trackers/index.md) | {versions.javaScriptTracker} |
+| [iOS](/docs/sources/mobile-trackers/index.md)                       |    {versions.iosTracker}     |
+| [Android](/docs/sources/mobile-trackers/index.md)                   |  {versions.androidTracker}   |
+| [React Native](/docs/sources/react-native-tracker/index.md)         | {versions.javaScriptTracker} |
+| [Flutter](/docs/sources/flutter-tracker/index.md)                   |  {versions.flutterTracker}   |
+| [WebView](/docs/sources/webview-tracker/index.md)                   |  {versions.webViewTracker}   |
+| [Roku](/docs/sources/roku-tracker/index.md)                         |    {versions.rokuTracker}    |
+| [Google AMP](/docs/sources/google-amp-tracker/index.md)             | {versions.googleAmpTracker}  |
+| [Pixel](/docs/sources/pixel-tracker/index.md)                       |   {versions.pixelTracker}    |
+| [Golang](/docs/sources/golang-tracker/index.md)                     |   {versions.golangTracker}   |
+| [.NET](/docs/sources/net-tracker/index.md)                          |   {versions.dotNetTracker}   |
+| [Java](/docs/sources/java-tracker/index.md)                         |    {versions.javaTracker}    |
+| [Python](/docs/sources/python-tracker/index.md)                     |   {versions.pythonTracker}   |
+| [Scala](/docs/sources/scala-tracker/index.md)                       |   {versions.scalaTracker}    |
+| [Ruby](/docs/sources/ruby-tracker/index.md)                         |    {versions.rubyTracker}    |
+| [Rust](/docs/sources/rust-tracker/index.md)                         |    {versions.rustTracker}    |
+| [PHP](/docs/sources/php-tracker/index.md)                           |    {versions.phpTracker}     |
+| [C++](/docs/sources/c-tracker/index.md)                             |    {versions.cppTracker}     |
+| [Unity](/docs/sources/unity-tracker/index.md)                       |   {versions.unityTracker}    |
+| [Lua](/docs/sources/lua-tracker/index.md)                           |    {versions.luaTracker}     |
 
 ### Data models
 
@@ -165,10 +166,10 @@ If you are a Snowplow CDI customer, rather than self-hosted, you don't need to i
 
 :::
 
-| Application                                                                      |      Latest version      |
-| :------------------------------------------------------------------------------- | :----------------------: |
-| [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md) | {versions.snowplowMicro} |
-| [Snowplow Mini](/docs/api-reference/snowplow-mini/usage-guide/index.md)          | {versions.snowplowMini}  |
+| Application                                                             |      Latest version      |
+| :---------------------------------------------------------------------- | :----------------------: |
+| [Snowplow Micro](/docs/testing/snowplow-micro/index.md)                 | {versions.snowplowMicro} |
+| [Snowplow Mini](/docs/api-reference/snowplow-mini/usage-guide/index.md) | {versions.snowplowMini}  |
 
 ### Analytics SDKs
 

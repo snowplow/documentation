@@ -1,12 +1,14 @@
 ---
-title: Setting up locally
+title: "Set up the Unified Digital dbt package locally"
+sidebar_label: "Set up locally"
 position: 2
+description: "Install and configure the Snowplow Unified Digital dbt package locally with detailed variable configuration for web and mobile data modeling. Includes optimization tips for partition pruning, entity enablement, and warehouse-specific setup."
+keywords: ["dbt unified package installation", "snowplow web mobile data modeling"]
 ---
 
+Installing the package:
 
-### Installing the package
-
-1. Run the following command in a new directory to create a new DBT project
+1. Run the following command in a new directory to create a new dbt project
 
     ```bash
     dbt init
@@ -22,7 +24,7 @@ position: 2
 4. Paste the latest version of the Snowplow Unified package. You could also use a range here if you want to keep up to date with more recent versions or you can you can hard pin to a specific version.
 
     ```bash
-    
+
     packages:
       - package: snowplow/snowplow_unified
         version: [">=0.4.0"]
@@ -46,7 +48,7 @@ position: 2
 
     ![](./screenshots/Screenshot_2024-07-04_at_17.14.37.png)
 
-### Setting Variables
+## Setting Variables
 
 Now we’ll get to using our variables, which is how you enable the parts of the model that are relevant to your use-case.
 
@@ -58,7 +60,7 @@ Now we’ll get to using our variables, which is how you enable the parts of the
         snowplow__atomic_schema: schema_with_snowplow_events
         snowplow__database: database_with_snowplow_events
     ```
-    
+
 :::info Databricks only
 
 Please note that your `target.database` is NULL if using Databricks. In Databricks, schemas and databases are used interchangeably and in the dbt implementation of Databricks therefore we always use the schema value, so adjust your `snowplow__atomic_schema` value if you need to.
@@ -113,7 +115,7 @@ vars:
       snowplow_unified:
         snowplow__start_date: 'yyyy-mm-dd'
     ```
-    
+
 5. Optimize your data processing
 
 There are ways how you can deal with [high volume optimizations](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/high-volume-optimizations/) at a later stage, if needed, but you can do a lot upfront by selecting carefully which variable to use for `snowplow__session_timestamp`, which helps identify the timestamp column used for sessionization. This timestamp column should ideally be set to the column your event table is partitioned on. It is defaulted to `collector_tstamp` but depending on your loader it can be the `load_tstamp` as the sensible value to use:
@@ -134,7 +136,7 @@ vars:
 ```
 :::
 
-6. Configure more vars as necessary but theoretically this is all you need just to get started. If you are unsure whether the default values set are good enough in your case or you would already like to maximize the potential of your models, you can dive deeper into the meaning behind our variables on our [Config](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/) page. It includes a [Config Generator](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/#Generator) to help you create all your variable configurations, if necessary. 
+6. Configure more vars as necessary but theoretically this is all you need just to get started. If you are unsure whether the default values set are good enough in your case or you would already like to maximize the potential of your models, you can dive deeper into the meaning behind our variables on our [Config](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/) page. It includes a [Config Generator](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/#config-generator) to help you create all your variable configurations, if necessary.
 
 7. Filter your data set
 
@@ -162,13 +164,13 @@ vars:
     snowplow__heartbeat: 10 # Default value
 ```
 
-### Adding the `selectors.yml` file
+## Adding the `selectors.yml` file
 
 Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the Unified Digital Model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/#yaml-selectors) section.
 
 These are defined in the `selectors.yml` file ([source](https://github.com/snowplow/dbt-snowplow-unified/blob/main/selectors.yml)) within the package, however in order to use these selections you will need to copy this file into your own dbt project directory. This is a top-level file and therefore should sit alongside your `dbt_project.yml` file. If you are using multiple packages in your project you will need to combine the contents of these into a single file.
 
-### Running the package
+## Running the package
 
 Run dbt_seed to make sure you see some data, so we have some seeds in our packages, run that in there, and then run the actual model.
 

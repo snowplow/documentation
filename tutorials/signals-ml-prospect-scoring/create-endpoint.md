@@ -1,7 +1,9 @@
 ---
-title: Create intermediary API endpoint
+title: Create an API endpoint to serve the prospect scores in real time
+sidebar_label: Create API endpoint
 position: 5
 description: "Build an API endpoint to serve Snowplow Signals attributes and ML predictions for real-time prospect scoring."
+keywords: ["flask api", "cloudflare tunnels"]
 ---
 
 You now have attribute values in your Profiles Store, and a trained ML model. The next step is to create and deploy an endpoint to serve attributes and predictions.

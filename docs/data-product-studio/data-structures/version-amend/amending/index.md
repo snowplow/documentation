@@ -1,7 +1,9 @@
 ---
-title: "Amending schemas"
-description: "Fixing a mistake in an existing schema version"
+title: "Amend schemas to fix mistakes"
+sidebar_label: "Amending schemas"
 sidebar_position: 40
+description: "Fix mistakes in existing schema versions by amending them, with guidelines on when amendments are appropriate and how to handle production schemas."
+keywords: ["schema amendments", "fix schema mistakes", "schema corrections", "patch schemas"]
 ---
 
 ```mdx-code-block
@@ -70,7 +72,7 @@ If your events are failing in production because of an incorrect schema, you mig
 
 :::note
 
-You need to be on Enrich 3.8.0+ and Iglu Server 0.11.0+ to use this feature. Additionally, if you are using [Snowplow Mini](/docs/api-reference/snowplow-mini/index.md) or [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md), you will need version 0.17.0+ or 1.7.1+ respectively.
+You need to be on Enrich 3.8.0+ and Iglu Server 0.11.0+ to use this feature. Additionally, if you are using [Snowplow Mini](/docs/api-reference/snowplow-mini/index.md) or [Snowplow Micro](/docs/testing/snowplow-micro/index.md), you will need version 0.17.0+ or 1.7.1+ respectively.
 
 :::
 

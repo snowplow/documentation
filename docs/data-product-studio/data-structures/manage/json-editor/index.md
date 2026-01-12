@@ -1,8 +1,9 @@
 ---
-title: "Managing data structures with the JSON Editor"
-description: "The JSON editor is best suited for defining complex data structures that require heavy nesting and advanced data types."
+title: "Create complex data structures with JSON Editor"
 sidebar_label: "Console: JSON editor"
 sidebar_position: 1
+description: "Define complex data structures with heavy nesting and advanced data types using the JSON Editor for full JSON Schema support."
+keywords: ["JSON editor", "complex schemas", "nested structures", "JSON Schema editor", "advanced data types"]
 ---
 
 :::info
@@ -22,7 +23,7 @@ Select whether you'd like to create an [Event](/docs/fundamentals/events/index.m
   }}
 />
 
-You can now write the first version of your JSON schema for this data structure. Some template JSON is provided in the code window to start you off. For comprehensive guidance on all supported JSON Schema features and validation options, see the [JSON Schema reference](/docs/fundamentals/schemas/json-schema-reference/index.md).
+You can now write the first version of your JSON schema for this data structure. Some template JSON is provided in the code window to start you off. For comprehensive guidance on all supported JSON Schema features and validation options, see the [JSON Schema reference](/docs/api-reference/json-schema-reference/index.md).
 
 ![](images/json-template.png)
 
@@ -58,7 +59,7 @@ Patching can be useful in development environments, but should be done carefully
 
 For more information see [Versioning your data structures](/docs/data-product-studio/data-structures/version-amend/index.md).
 
-Once you have selected the appropriate version, click **Deploy to development environment** and your data structure will be deployed to your development environment ready [for you to test](/docs/data-product-studio/data-quality/index.md).
+Once you have selected the appropriate version, click **Deploy to development environment** and your data structure will be deployed to your development environment ready [for you to test](/docs/testing/index.md).
 
 You can identify data structures where the Development version is ahead of the Production version by the yellow background on the version number. In this example both `user` and `alert` have been edited on development.
 

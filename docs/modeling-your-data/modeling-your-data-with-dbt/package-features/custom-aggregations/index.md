@@ -1,6 +1,8 @@
 ---
-title: "Custom Aggregations"
+title: "Configure custom aggregations for dbt models"
+sidebar_label: "Custom aggregations"
 description: "Details on custom aggregations in our packages"
+keywords: ["custom aggregations", "dbt aggregations", "derived table aggregations"]
 sidebar_position: 60
 ---
 

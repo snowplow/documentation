@@ -1,7 +1,10 @@
 ---
-title: "Enrich Kinesis (AWS)"
+title: "Enrich Kinesis for AWS streams"
+sidebar_label: "Enrich Kinesis (AWS)"
 date: "2020-10-22"
 sidebar_position: 10
+description: "Standalone JVM application for enriching Snowplow events from AWS Kinesis streams with configurable enrichments and validation."
+keywords: ["enrich kinesis", "aws kinesis", "snowplow aws"]
 ---
 
 ```mdx-code-block

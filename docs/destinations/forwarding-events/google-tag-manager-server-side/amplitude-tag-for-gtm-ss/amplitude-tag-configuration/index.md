@@ -1,12 +1,15 @@
 ---
-title: "Amplitude Tag Configuration"
+title: "Configure Amplitude Tag for GTM Server Side"
+sidebar_label: "Configuration"
 date: "2021-11-24"
 sidebar_position: 100
+description: "Configure event mapping, user properties, entity rules, and session tracking for the Amplitude Tag in GTM Server Side."
+keywords: ["Amplitude Tag configuration", "event mapping", "user properties", "session tracking"]
 ---
 
 :::tip Populating the Amplitude Session ID
 
-The [Session ID in Amplitude](https://help.amplitude.com/hc/en-us/articles/115002323627-Track-sessions-in-Amplitude) is the session's start time in milliseconds since epoch, so it cannot be derived directly from the `session_id` of your forwarded Snowplow events, which is a UUID. Therefore, in order to populate the Session ID so that your events are stitched into sessions correctly in Amplitude, your Snowplow events need to have the [`client_session` context entity](/docs/sources/trackers/web-trackers/tracker-setup/initialization-options/index.md#session-context) attached. Then the Amplitude Tag will automatically populate the Amplitude Session ID based on the `firstEventTimestamp` property of the session the event belongs to.
+The [Session ID in Amplitude](https://help.amplitude.com/hc/en-us/articles/115002323627-Track-sessions-in-Amplitude) is the session's start time in milliseconds since epoch, so it cannot be derived directly from the `session_id` of your forwarded Snowplow events, which is a UUID. Therefore, in order to populate the Session ID so that your events are stitched into sessions correctly in Amplitude, your Snowplow events need to have the [`client_session` context entity](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md#session-context) attached. Then the Amplitude Tag will automatically populate the Amplitude Session ID based on the `firstEventTimestamp` property of the session the event belongs to.
 
 :::
 
@@ -228,7 +231,7 @@ The standard log properties are:
 Depending on the type of log, additional properties are logged:
 
 | Type of log | Additional information                                         |
-|-------------|----------------------------------------------------------------|
+| ----------- | -------------------------------------------------------------- |
 | Message     | “Message”                                                      |
 | Request     | “RequestMethod”, “RequestUrl”, “RequestHeaders”, “RequestBody” |
 | Response    | “ResponseStatusCode”, “ResponseHeaders”, “ResponseBody”        |

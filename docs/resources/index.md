@@ -1,13 +1,11 @@
 ---
-title: "Community & contributing"
+title: "Community and contributing"
 date: "2020-10-28"
 sidebar_position: 11
 sidebar_label: "Resources"
+description: "Join the Snowplow community, or contribute to projects."
+keywords: ["Snowplow community", "contributing", "contributor license agreement"]
 ---
-
-The Snowplow team works with the open source community to deliver Snowplow, the world's most powerful analytics platform. We are proud to be involved in developing, releasing and nurturing open source projects, helping to build and sustain communities (of analysts as well as coders) around them.
-
-## Contributing to Snowplow
 
 The source code is available for a large portion of the Snowplow product — we welcome contributors! Some things you might like to help out with:
 

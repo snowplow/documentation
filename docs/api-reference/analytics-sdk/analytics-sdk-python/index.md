@@ -1,7 +1,10 @@
 ---
-title: "Analytics SDK - Python"
+title: "Python Analytics SDK"
+sidebar_label: "Python"
 date: "2020-11-03"
 sidebar_position: 400
+description: "Python SDK for processing Snowplow enriched events with run manifest support for idempotent data processing in PySpark and AWS Lambda."
+keywords: ["python analytics sdk", "pyspark", "snowplow python", "run manifests"]
 ---
 
 ```mdx-code-block

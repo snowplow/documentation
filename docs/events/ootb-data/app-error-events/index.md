@@ -1,5 +1,8 @@
 ---
 title: "Application error events"
+sidebar_label: "Application error events"
+description: "Automatically track unhandled exceptions and application errors with the application_error event schema on web and mobile."
+keywords: ["error tracking", "exception tracking", "application_error", "crash reporting"]
 ---
 
 ```mdx-code-block
@@ -30,5 +33,5 @@ All tracked events are self-describing events that follow the `application_error
 Both our Web and mobile trackers provide an automatic exception tracking feature.
 Visit the following links to learn more about error tracking:
 
-1. On Web, using the [error tracking plugin for the JavaScript tracker](/docs/sources/trackers/web-trackers/tracking-events/errors/index.md)
-2. [iOS and Android tracking documentation](/docs/sources/trackers/mobile-trackers/tracking-events/exception-tracking/index.md).
+1. On Web, using the [error tracking plugin for the JavaScript tracker](/docs/sources/web-trackers/tracking-events/errors/index.md)
+2. [iOS and Android tracking documentation](/docs/sources/mobile-trackers/tracking-events/exception-tracking/index.md).

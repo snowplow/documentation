@@ -1,7 +1,9 @@
 ---
-title: "Braze"
-description: "Send Snowplow events to Braze for real-time personalization and campaign automation using the Track Users API with support for user attributes, custom events, and purchases."
+title: "Forward events to Braze"
+sidebar_label: "Braze"
 sidebar_position: 2
+description: "Send Snowplow events to Braze for real-time personalization and campaign automation using the Track Users API with support for user attributes, custom events, and purchases."
+keywords: ["Braze", "personalization", "campaign automation", "Track Users API", "marketing automation", "event forwarding"]
 ---
 
 ```mdx-code-block
@@ -52,6 +54,18 @@ You can confirm events are reaching Braze by checking the following pages in you
 
 1. Query Builder: in Braze, navigate to **Analytics** > **Query Builder**. You can write queries on the following tables to preview the data forwarded from Snowplow: `USER_BEHAVIORS_CUSTOMEVENT_SHARED`, `USERS_BEHAVIORS_PURCHASE_SHARED`.
 2. API Usage Dashboard: in Braze, navigate to **Settings** > **API and Identifiers** to see a chart of API usage over time. You can filter specifically for the API key used by Snowplow and see both successes and failures.
+
+## Sending custom properties
+
+You can send custom properties beyond the standard fields defined in the schema reference below. The structure depends on which Braze object type you're using:
+
+- **User attributes**: add as top-level fields (e.g., `subscription_tier`, `loyalty_points`)
+- **Event properties**: nest under `properties` object (e.g., `properties.plan_type`, `properties.feature_flag`)
+- **Purchase properties**: nest under `properties` object (e.g., `properties.color`, `properties.size`)
+
+For property names containing spaces, use bracket notation (e.g., `["account type"]` or `properties["campaign source"]`).
+
+See Braze's [Event Object documentation](https://www.braze.com/docs/api/objects_filters/event_object) for details on supported data types, property naming requirements, and payload size limits. See [Creating forwarders](/docs/destinations/forwarding-events/creating-forwarders/index.md) for details on configuring field mappings.
 
 ## Limitations
 

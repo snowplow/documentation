@@ -1,5 +1,8 @@
 ---
 title: "visionOS and SwiftUI"
+sidebar_label: "visionOS and SwiftUI"
+description: "Track window groups and immersive spaces in visionOS apps on Apple Vision Pro using SwiftUI context entities and events."
+keywords: ["visionOS", "SwiftUI", "Apple Vision Pro", "window groups", "immersive spaces"]
 ---
 
 ```mdx-code-block
@@ -71,4 +74,4 @@ Snowplow currently only supports visionOS apps via SwiftUI, not Unity.
 
 ## How to track?
 
-* [iOS tracker documentation](/docs/sources/trackers/mobile-trackers/tracking-events/visionos/index.md).
+* [iOS tracker documentation](/docs/sources/mobile-trackers/tracking-events/visionos/index.md).

@@ -2,6 +2,8 @@
 sidebar_label: "Media Player"
 sidebar_position: 20
 title: "Media Player Quickstart"
+description: "Quick start guide for the Snowplow Media Player dbt package to model video and audio engagement data."
+keywords: ["media player quickstart", "media player setup", "dbt media player installation"]
 ---
 
 ```mdx-code-block
@@ -9,21 +11,24 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ThemedImage from '@theme/ThemedImage';
 import Badges from '@site/src/components/Badges';
+import BadgeGroup from '@site/src/components/BadgeGroup';
 import { Accelerator } from "@site/src/components/AcceleratorAdmonitions";
 
 <Accelerator href="https://docs.snowplow.io/accelerators/media-player" name="Video and Media Analytics"/>
 ```
 
-<Badges badgeType="dbt-package Release" pkg="media-player"></Badges>&nbsp;
-<Badges badgeType="Actively Maintained"></Badges>&nbsp;
+<BadgeGroup>
+<Badges badgeType="dbt-package Release" pkg="media-player"></Badges>
+<Badges badgeType="Actively Maintained"></Badges>
 <Badges badgeType="SPAL"></Badges>
+</BadgeGroup>
 
 ## Requirements
 
 In addition to [dbt](https://github.com/dbt-labs/dbt) being installed and a web or mobile events dataset being available in your database:
 
-- A dataset of media events must be available in the database. You can collect media events using our plugins for the JavaScript tracker or using the iOS and Android trackers: [Media plugin](/docs/sources/trackers/web-trackers/tracking-events/media/index.md), [HTML5 media player plugin](/docs/sources/trackers/web-trackers/tracking-events/media/html5/index.md), [YouTube plugin](/docs/sources/trackers/web-trackers/tracking-events/media/youtube/index.md), [Vimeo plugin](/docs/sources/trackers/web-trackers/tracking-events/media/vimeo/index.md) or the [iOS and Android media APIs](/docs/sources/trackers/mobile-trackers/tracking-events/media-tracking/index.md)
-- Have the [`webPage` context](/docs/sources/trackers/web-trackers/tracking-events/index.md#auto-tracked-entities) enabled on Web or the [screen context](/docs/sources/trackers/mobile-trackers/tracking-events/screen-tracking/index.md#screen-view-event-and-screen-context-entity) on mobile (enabled by default).
+- A dataset of media events must be available in the database. You can collect media events using our plugins for the JavaScript tracker or using the iOS and Android trackers: [Media plugin](/docs/sources/web-trackers/tracking-events/media/index.md), [HTML5 media player plugin](/docs/sources/web-trackers/tracking-events/media/html5/index.md), [YouTube plugin](/docs/sources/web-trackers/tracking-events/media/youtube/index.md), [Vimeo plugin](/docs/sources/web-trackers/tracking-events/media/vimeo/index.md) or the [iOS and Android media APIs](/docs/sources/mobile-trackers/tracking-events/media-tracking/index.md)
+- Have the [`webPage` context](/docs/sources/web-trackers/tracking-events/index.md#auto-tracked-entities) enabled on Web or the [screen context](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md#screen-view-event-and-screen-context-entity) on mobile (enabled by default).
 - Enabled session tracking on the tracker (default on mobile).
 
 The model is compatible with all versions of our media tracking APIs. These have evolved over time and may track the media events using two sets of event and contexts schemas:
@@ -191,7 +196,7 @@ vars:
 
 ### 8. Verify your variables using our Config guides (Optional)
 
-If you are unsure whether the default values set are good enough in your case or you would already like to maximize the potential of your models, you can dive deeper into the meaning behind our variables on our [Config](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/index.mdx) page. It includes a [Config Generator](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/index.mdx#Generator) to help you create all your variable configurations, if necessary.
+If you are unsure whether the default values set are good enough in your case or you would already like to maximize the potential of your models, you can dive deeper into the meaning behind our variables on our [Config](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/media-player/index.mdx) page. It includes a [Config Generator](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/media-player/index.mdx#config-generator) to help you create all your variable configurations, if necessary.
 
 
 ### 9. Run your model

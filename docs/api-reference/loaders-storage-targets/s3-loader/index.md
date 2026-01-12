@@ -1,6 +1,9 @@
 ---
 title: "S3 Loader"
+sidebar_label: "S3 Loader"
 sidebar_position: 5
+description: "Archive Snowplow events from Kinesis to S3 in LZO or Gzip format for raw payloads, enriched events, and failed events."
+keywords: ["s3 loader", "kinesis to s3", "aws s3", "lzo compression"]
 ---
 
 ```mdx-code-block

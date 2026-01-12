@@ -1,6 +1,9 @@
 ---
-title: "2.0.0 upgrade guide"
+title: "BigQuery Loader 2.0.0 upgrade guide"
+sidebar_label: "2.0.0 upgrade guide"
 sidebar_position: -20
+description: "Upgrade BigQuery Loader to 2.0.0 with unified application, major version columns, and recovery column handling for schema evolution."
+keywords: ["bigquery 2.0 upgrade", "major version columns", "recovery columns", "schema evolution", "bigquery migration"]
 ---
 
 ## Configuration

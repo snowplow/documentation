@@ -1,7 +1,9 @@
 ---
-title: "BigQuery"
+title: "Load Snowplow data to BigQuery"
+sidebar_label: "BigQuery"
 sidebar_position: 30
-description: "Send Snowplow data to BigQuery for analytics and data warehousing"
+description: "Send Snowplow data to BigQuery for analytics and data warehousing with automatic table creation, schema evolution, and cross-batch deduplication."
+keywords: ["BigQuery", "Google Cloud", "data warehouse", "streaming loader", "batch loader"]
 ---
 
 ```mdx-code-block
@@ -33,7 +35,7 @@ Keep in mind that you will need to be able to:
 * Provide your Google Cloud Project ID and region
 * Allow-list Snowplow IP addresses
 * Specify the desired dataset name
-* Create a service account with the `roles/bigquery.dataEditor` permission (more permissions will be required for loading failed events and setting up [Data Quality Dashboard](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/index.md#data-quality-dashboard))
+* Create a service account with the `roles/bigquery.dataEditor` permission (more permissions will be required for loading failed events and setting up [Data Quality Dashboard](/docs/monitoring/index.md#data-quality-dashboard))
 
 ## Getting started
 

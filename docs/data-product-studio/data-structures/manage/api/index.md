@@ -1,14 +1,16 @@
 ---
-title: "Managing data structures via the API"
+title: "Manage data structures via the API"
 sidebar_label: "Data structures API"
 sidebar_position: 3
+description: "Programmatically manage data structures through the API with endpoints for retrieving, validating, and deploying schemas to development and production registries."
+keywords: ["data structures API", "schema API", "validation API", "deployment API", "Iglu Server"]
 ---
 
 As well as managing [data structures](/docs/fundamentals/schemas/index.md) through Snowplow Console, Snowplow customers can also manage them programmatically through the data structures API.
 
 This functionality is key to automating any existing process you may have, including workflows in version control systems like GitHub.
 
-Partnered with other tools like our [CI tool](/docs/data-product-studio/data-quality/data-structures-ci-tool/index.md) and / or [Snowplow Micro](/docs/data-product-studio/data-quality/snowplow-micro/index.md), it's possible to have a very robust and automated data structure workflow that ensures data quality upstream of data hitting your pipeline.
+Partnered with other tools like our [CI tool](/docs/testing/data-structures-ci-tool/index.md) and / or [Snowplow Micro](/docs/testing/snowplow-micro/index.md), it's possible to have a very robust and automated data structure workflow that ensures data quality upstream of data hitting your pipeline.
 
 :::note
 

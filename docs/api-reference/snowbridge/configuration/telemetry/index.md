@@ -1,16 +1,15 @@
 ---
-title: "Telemetry"
+title: "Snowbridge telemetry configuration"
+sidebar_label: "Telemetry"
 date: "2022-10-20"
 sidebar_position: 500
+description: "Enable or disable telemetry for Snowbridge with user-provided identifiers and privacy controls."
+keywords: ["snowbridge config", "telemetry", "usage tracking", "privacy", "disable telemetry"]
 ---
-
-# Telemetry Configuration
 
 You can read about our telemetry principles [here](/docs/get-started/self-hosted/telemetry/index.md).
 
-## Configuration options
-
-Enabling telemetry:
+To enable telemetry:
 
 ```hcl
 # Optional. Set to true to disable telemetry.
@@ -20,7 +19,7 @@ disable_telemetry = false
 user_provided_id = "elmer.fudd@acme.com"
 ```
 
-Disabling telemetry:
+To disable telemetry:
 
 ```hcl
 # Optional. Set to true to disable telemetry.

@@ -96,6 +96,7 @@ module.exports = {
             '--tw-prose-counters': 'hsl(var(--muted-foreground))',
             '--tw-prose-bullets': 'hsl(var(--muted-foreground))',
             '--tw-prose-hr': 'hsl(var(--border))',
+            '--tw-prose-kbd': 'hsl(var(--foreground))',
             '--tw-prose-quotes': 'hsl(var(--foreground))',
             '--tw-prose-quote-borders': 'hsl(var(--border))',
             '--tw-prose-captions': 'hsl(var(--muted-foreground))',

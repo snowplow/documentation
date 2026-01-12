@@ -1,7 +1,9 @@
 ---
-title: "Snowflake"
+title: "Load Snowplow data to Snowflake"
+sidebar_label: "Snowflake"
 sidebar_position: 10
-description: "Send Snowplow data to Snowflake for analytics and data warehousing"
+description: "Send Snowplow data to Snowflake for analytics and data warehousing with automatic table management, schema evolution, and efficient data loading via Snowpipe or batch."
+keywords: ["Snowflake", "data warehouse", "Snowpipe", "streaming loader", "batch loader"]
 ---
 
 ```mdx-code-block
@@ -35,7 +37,7 @@ Keep in mind that you will need to be able to:
 * Generate a key pair for key-based authentication
 * Specify the desired database and schema names, as well as a warehouse name
 * Create a role with the following permissions:
-  * `USAGE`, `OPERATE` on warehouse (for testing the connection and monitoring, e.g. as part of the [Data Quality Dashboard](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/index.md#data-quality-dashboard))
+  * `USAGE`, `OPERATE` on warehouse (for testing the connection and monitoring, e.g. as part of the [Data Quality Dashboard](/docs/monitoring/index.md#data-quality-dashboard))
   * `USAGE` on database
   * `ALL` privileges on the target schema
 

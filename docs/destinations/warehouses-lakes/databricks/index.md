@@ -1,7 +1,9 @@
 ---
-title: "Databricks"
+title: "Load Snowplow data to Databricks"
+sidebar_label: "Databricks"
 sidebar_position: 20
-description: "Send Snowplow data to Databricks for analytics and data processing"
+description: "Send Snowplow data to Databricks for analytics and data processing with Delta Lake tables, schema evolution, and lakehouse architecture support."
+keywords: ["Databricks", "Delta Lake", "lakehouse", "data platform", "Apache Spark"]
 ---
 
 ```mdx-code-block
@@ -70,7 +72,7 @@ See [Delta Lake](../delta/index.md).
   * `USE CATALOG` on the catalog
   * `USE SCHEMA` and `CREATE TABLE` on the schema
   * `READ VOLUME` and `WRITE VOLUME` on the volume
-  * `CAN USE` on the SQL warehouse (for testing the connection and monitoring, e.g. as part of the [Data Quality Dashboard](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/index.md#data-quality-dashboard))
+  * `CAN USE` on the SQL warehouse (for testing the connection and monitoring, e.g. as part of the [Data Quality Dashboard](/docs/monitoring/index.md#data-quality-dashboard))
 
 Note that Lakeflow features require a Premium Databricks account. You might also need Databricks metastore admin privileges for some of the steps.
 

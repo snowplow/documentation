@@ -3,6 +3,7 @@ title: "Tracking your first events"
 sidebar_position: 5
 sidebar_label: "Track events"
 description: "Tracking your first Snowplow events"
+keywords: ["event tracking", "trackers", "JavaScript tracker", "web tracking", "mobile tracking"]
 ---
 
 ```mdx-code-block
@@ -76,7 +77,7 @@ Now, let’s take a look at how to set up actual event tracking.
 
 ## Using the JavaScript tracker
 
-The [JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide/index.md) is our most commonly used tracker. It’s a good choice for websites, and the installation process is similar to other tools like Google Analytics.
+The [JavaScript tracker](/docs/sources/web-trackers/quick-start-guide/index.md) is our most commonly used tracker. It’s a good choice for websites, and the installation process is similar to other tools like Google Analytics.
 
 To use the JavaScript tracker on your site, you will need to obtain a code snippet first.
 
@@ -97,7 +98,7 @@ Take note of the Collector URL you’ve chosen when deploying your Snowplow Self
 
 If you have not yet configured an SSL certificate and a custom domain name for your Collector, you can use `http://<collector_dns_name>` (`http`, not `https`), where `collector_dns_name` is the output of the pipeline Terraform module.
 
-Then, follow the JavaScript tracker [quick start guide](/docs/sources/trackers/web-trackers/quick-start-guide/index.md) to create your snippet.
+Then, follow the JavaScript tracker [quick start guide](/docs/sources/web-trackers/quick-start-guide/index.md) to create your snippet.
 
   </TabItem>
 </Tabs>
@@ -134,10 +135,10 @@ To make sure that your tracking is well configured for strong first-party cookie
 
 ## Using other trackers
 
-We have many different trackers in different programming languages, in case the JavaScript tracker is not a fit for you. For example, see the [mobile native trackers](/docs/sources/trackers/mobile-trackers/index.md) or the [full list](/docs/sources/trackers/index.md) of what’s available.
+We have many different trackers in different programming languages, in case the JavaScript tracker is not a fit for you. For example, see the [mobile native trackers](/docs/sources/mobile-trackers/index.md) or the [full list](/docs/sources/index.md) of what’s available.
 
 :::tip
 
-For quick testing, you might be tempted to send data to your Collector URL using a basic command-line tool like `cURL`. However, you would need to ensure that the data format follows our [tracker protocol](/docs/events/index.md). Instead, take a look at the [command-line tracker](/docs/sources/trackers/snowplow-tracking-cli/index.md) that will do this for you.
+For quick testing, you might be tempted to send data to your Collector URL using a basic command-line tool like `cURL`. However, you would need to ensure that the data format follows our [tracker protocol](/docs/events/index.md). Instead, take a look at the [command-line tracker](/docs/sources/snowplow-tracking-cli/index.md) that will do this for you.
 
 :::

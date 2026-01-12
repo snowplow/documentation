@@ -1,6 +1,8 @@
 ---
-title: "spEnrichedSetPk"
-description: "Sets the message's destination partition key to an atomic field."
+title: "Snowbridge spEnrichedSetPk transformation"
+sidebar_label: "spEnrichedSetPk"
+description: "Set destination partition key for Snowplow enriched events using atomic field values, with Snowbridge."
+keywords: ["snowbridge config", "partition key", "enriched partition", "atomic fields", "snowplow partitioning"]
 ---
 
 ```mdx-code-block

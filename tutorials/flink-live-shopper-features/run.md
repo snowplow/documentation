@@ -1,6 +1,9 @@
 ---
 position: 2
-title: Run the project
+title: "Run the Flink live shopper features project"
+sidebar_label: "Run the project"
+description: "Start the Dockerized Flink streaming pipeline to process Snowplow events from Kafka and store computed shopper metrics in Redis."
+keywords: ["flink docker setup", "kafka redis stream processing"]
 ---
 
 1. [Clone the repository](https://github.com/snowplow-industry-solutions/flink-live-shopper)

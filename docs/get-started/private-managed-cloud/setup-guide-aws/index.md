@@ -1,8 +1,11 @@
 ---
 title: "Private Managed Cloud on AWS"
+sidebar_label: "AWS setup guide"
 date: "2020-01-30"
 sidebar_position: 10
 coverImage: "aws_logo_0.png"
+description: "Set up Snowplow CDI Private Managed Cloud on AWS with sub-account configuration, IAM roles, and cross-account access."
+keywords: ["AWS setup", "Private Managed Cloud", "AWS sub-account", "IAM roles", "cross-account access"]
 ---
 
 To set up Snowplow, follow the ['Getting Started' steps in the Snowplow Console](https://console.snowplowanalytics.com/getting-started). You will receive an account as part of your onboarding.
@@ -75,6 +78,7 @@ You will need to share this role with us as part of filling out the setup form i
         "events:*",
         "globalaccelerator:*",
         "iam:*",
+        "kafka:*",
         "kinesis:*",
         "kinesisanalytics:*",
         "kms:DescribeKey",

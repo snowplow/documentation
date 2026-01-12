@@ -1,14 +1,14 @@
 ---
-title: "Kinesis"
-description: "Write data to a Kinesis stream."
+title: "Configure Kinesis as a Snowbridge target"
+sidebar_label: "Kinesis"
+description: "Configure Kinesis target for Snowplow Snowbridge to write data to AWS Kinesis streams with throttle retry handling and IAM authentication."
+keywords: ["snowbridge config", "kinesis target", "aws kinesis", "kinesis producer", "throttle handling"]
 ---
 
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-## Authentication
 
 Authentication is done via the [AWS authentication environment variables](https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-envvars.html). Optionally, you can use the `role_arn` option to specify an ARN to use on the stream.
 

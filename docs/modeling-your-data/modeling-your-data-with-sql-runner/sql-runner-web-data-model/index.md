@@ -1,7 +1,10 @@
 ---
-title: "Web data model"
+title: "Web data model for SQL Runner"
+sidebar_label: "Web data model"
 date: "2021-07-27"
 sidebar_position: 100
+description: "Legacy SQL Runner web data model for transforming web event data into derived tables."
+keywords: ["SQL Runner web", "web data model", "legacy web SQL", "web SQL Runner"]
 ---
 
 :::tip
@@ -20,14 +23,14 @@ The Snowplow web data model aggregates Snowplow's out of the box page view and p
 
 #### Requirements
 
-- [Snowplow Javascript tracker](/docs/sources/trackers/web-trackers/index.md) version 2 or later implemented.
-- Web Page context [enabled](/docs/sources/trackers/web-trackers/tracker-setup/initialization-options/index.md#webpage-context) (enabled by default in [v3+](/docs/sources/trackers/web-trackers/tracker-setup/initialization-options/index.md#webpage-context)).
-- [Page view events](/docs/sources/trackers/web-trackers/tracking-events/index.md#page-views) implemented.
+- [Snowplow Javascript tracker](/docs/sources/web-trackers/index.md) version 2 or later implemented.
+- Web Page context [enabled](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md#webpage-context) (enabled by default in [v3+](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md#webpage-context)).
+- [Page view events](/docs/sources/web-trackers/tracking-events/index.md#page-views) implemented.
 
 #### Prerequisites
 
 - [SQL-runner](https://github.com/snowplow/sql-runner) must be installed ([Setup guide](/docs/modeling-your-data/modeling-your-data-with-sql-runner/index.md)).
-- A dataset of web events from the [Snowplow Javascript tracker](/docs/sources/trackers/web-trackers/index.md) must be available in the database.
+- A dataset of web events from the [Snowplow Javascript tracker](/docs/sources/web-trackers/index.md) must be available in the database.
 
 #### Configuring and running the model
 

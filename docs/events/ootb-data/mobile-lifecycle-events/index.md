@@ -1,5 +1,8 @@
 ---
 title: "Mobile app install and lifecycle events"
+sidebar_label: "Mobile lifecycle events"
+description: "Automatically track mobile app install, foreground, and background events with lifecycle entities for app usage analysis."
+keywords: ["app install", "app lifecycle", "foreground events", "background events", "mobile tracking"]
 ---
 
 ```mdx-code-block
@@ -45,7 +48,7 @@ It makes use of the [Google Play Install Referrer library](https://developer.and
 
 #### How to track?
 
-See the [documentation for the Android tracker](/docs/sources/trackers/mobile-trackers/tracking-events/installation-tracking/index.md#android-only-tracking-referrer-information-from-the-google-play-referrer-library) for more information how to track the entity.
+See the [documentation for the Android tracker](/docs/sources/mobile-trackers/tracking-events/installation-tracking/index.md#android-only-tracking-referrer-information-from-the-google-play-referrer-library) for more information how to track the entity.
 
 ## Foreground event
 
@@ -74,5 +77,5 @@ See the [documentation for the Android tracker](/docs/sources/trackers/mobile-tr
 
 ## How to track?
 
-* [iOS and Android tracker documentation](/docs/sources/trackers/mobile-trackers/tracking-events/lifecycle-tracking/index.md).
-* [React Native tracker documentation](/docs/sources/trackers/react-native-tracker/tracking-events/lifecycle-tracking/index.md).
+* [iOS and Android tracker documentation](/docs/sources/mobile-trackers/tracking-events/lifecycle-tracking/index.md).
+* [React Native tracker documentation](/docs/sources/react-native-tracker/tracking-events/lifecycle-tracking/index.md).

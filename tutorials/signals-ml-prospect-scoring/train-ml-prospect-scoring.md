@@ -1,7 +1,9 @@
 ---
-title: Train the ML prospect scoring model
+title: Prepare a training dataset and train the ML prospect scoring model
+sidebar_label: Train the ML model
 position: 4
 description: "Create and train a machine learning model using historical Snowplow behavioral data to predict prospect conversion."
+keywords: ["logistic regression", "duckdb training data"]
 ---
 
 As prospects browse your website, Signals will calculate the aggregated attributes in real time.

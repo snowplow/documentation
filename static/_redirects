@@ -417,3 +417,46 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/get-started/snowplow-bdp/* /docs/get-started/private-managed-cloud/:splat 301
 /docs/modeling-your-data/running-data-models-via-snowplow-bdp/* /docs/modeling-your-data/running-data-models-via-console/:splat 301
 /docs/get-started/snowplow-community-edition/* /docs/get-started/self-hosted/:splat 301
+
+/docs/data-product-studio/automatically-generated-data-models/* /docs/modeling-your-data/automatically-generated-data-models/:splat 301
+
+/docs/data-product-studio/data-quality/failed-events/* /docs/monitoring/:splat 301
+/docs/data-product-studio/data-quality/* /docs/testing/:splat 301
+/docs/monitoring/monitoring-failed-events/troubleshooting/* /docs/monitoring/:splat 301
+/docs/monitoring/monitoring-failed-events/alerts/* /docs/monitoring/alerts/:splat 301
+/docs/monitoring/monitoring-failed-events/* /docs/monitoring/:splat 301
+
+/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/index.md/* /docs/pipeline/enriched-tsv-format/index.md/:splat 301
+/docs/fundamentals/canonical-event/understanding-the-enriched-tsv-format/* /docs/pipeline/enriched-tsv-format/:splat 301
+/docs/fundamentals/schemas/json-schema-reference/* /docs/api-reference/json-schema-reference/:splat 301
+/docs/events/custom-events/context-entities/* /docs/events/event-types/custom-events/:splat 301
+/docs/events/custom-events/self-describing-events/* /docs/events/event-types/custom-events/:splat 301
+/docs/events/custom-events/structured-events/* /docs/events/event-types/custom-events/:splat 301
+/docs/events/going-deeper/http-headers/* /docs/events/http-requests/:splat 301
+/docs/events/going-deeper/example-requests/* /docs/events/http-requests/:splat 301
+/docs/events/going-deeper/* /docs/fundamentals/canonical-event/:splat 301
+
+# Removing the "tracker" sublevel
+/docs/sources/trackers/c-tracker/* /docs/sources/c-tracker/:splat 301
+/docs/sources/trackers/flutter-tracker/* /docs/sources/flutter-tracker/:splat 301
+/docs/sources/trackers/golang-tracker/* /docs/sources/golang-tracker/:splat 301
+/docs/sources/trackers/google-amp-tracker/* /docs/sources/google-amp-tracker/:splat 301
+/docs/sources/trackers/google-tag-manager/* /docs/sources/google-tag-manager/:splat 301
+/docs/sources/trackers/java-tracker/* /docs/sources/java-tracker/:splat 301
+/docs/sources/trackers/lua-tracker/* /docs/sources/lua-tracker/:splat 301
+/docs/sources/trackers/mobile-trackers/* /docs/sources/mobile-trackers/:splat 301
+/docs/sources/trackers/net-tracker/* /docs/sources/net-tracker/:splat 301
+/docs/sources/trackers/node-js-tracker/* /docs/sources/node-js-tracker/:splat 301
+/docs/sources/trackers/php-tracker/* /docs/sources/php-tracker/:splat 301
+/docs/sources/trackers/pixel-tracker/* /docs/sources/pixel-tracker/:splat 301
+/docs/sources/trackers/python-tracker/* /docs/sources/python-tracker/:splat 301
+/docs/sources/trackers/react-native-tracker/* /docs/sources/react-native-tracker/:splat 301
+/docs/sources/trackers/roku-tracker/* /docs/sources/roku-tracker/:splat 301
+/docs/sources/trackers/ruby-tracker/* /docs/sources/ruby-tracker/:splat 301
+/docs/sources/trackers/rust-tracker/* /docs/sources/rust-tracker/:splat 301
+/docs/sources/trackers/scala-tracker/* /docs/sources/scala-tracker/:splat 301
+/docs/sources/trackers/snowplow-tracking-cli/* /docs/sources/snowplow-tracking-cli/:splat 301
+/docs/sources/trackers/tracker-maintenance-classification/* /docs/sources/tracker-maintenance-classification/:splat 301
+/docs/sources/trackers/unity-tracker/* /docs/sources/unity-tracker/:splat 301
+/docs/sources/trackers/web-trackers/* /docs/sources/web-trackers/:splat 301
+/docs/sources/trackers/webview-tracker/* /docs/sources/webview-tracker/:splat 301

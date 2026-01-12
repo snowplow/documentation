@@ -1,11 +1,14 @@
 ---
-title: Introduction
+title: "Learn how to set up the Unified Digital dbt package"
+sidebar_label: "Introduction"
 position: 1
+description: "Learn how to set up the Snowplow Unified Digital dbt package for web and mobile analytics. Covers prerequisites for implementing unified cross-platform tracking with DBT transformations."
+keywords: ["unified digital dbt package", "cross-platform web mobile analytics"]
 ---
 
-This tutorial walks you through the process of setting up our Unified Digital DBT package.
+This tutorial walks you through the process of setting up our Unified Digital dbt package.
 
-### Prerequisites
+## Prerequisites
 
 - [DBT](https://github.com/dbt-labs/dbt) installed
 - Connection to a warehouse

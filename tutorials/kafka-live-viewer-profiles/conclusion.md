@@ -1,9 +1,10 @@
 ---
 position: 4
-title: Conclusion
+title: "Conclusions and next steps from the Kafka live viewer profiles accelerator"
+sidebar_label: "Conclusion"
+description: "Complete your real-time event-driven architecture for video streaming analytics with Snowplow, Kafka, and DynamoDB for live viewer insights."
+keywords: ["event-driven video analytics", "real-time streaming insights"]
 ---
-
-# Conclusion
 
 In this tutorial, we have explored the **live viewer profiles** solution accelerator for video streaming, gaining practical insights into building, deploying, and extending real-time, event-driven architectures using Snowplow and Kafka.
 
@@ -25,7 +26,7 @@ We explored how to:
 1. Use LocalStack to emulate AWS services for local development and testing.
 2. Launch and interact with the system components, such as the Kafka UI and LocalStack UI.
 3. View and verify the real-time event data from the browser using Snowplow's media tracking capabilities.
-4. Deploy the solution in an AWS environment using Terraform. 
+4. Deploy the solution in an AWS environment using Terraform.
 
 ### Practical Applications
 This tutorial can be extended to utilize Snowplow event data for other real-time use cases, such as:

@@ -1,7 +1,9 @@
 ---
 title: "Snowtype configuration options"
-sidebar_position: 3
 sidebar_label: "Configuration options"
+sidebar_position: 3
+description: "Configure Snowtype code generation with options for output paths, tracker selection, language settings, and custom templates."
+keywords: ["Snowtype configuration", "config options", "code generation settings", "Snowtype setup"]
 ---
 
 ```mdx-code-block
@@ -81,6 +83,24 @@ options?: {
     }
   }
 }
+```
+
+### `namespace`
+
+:::info
+
+This option only applies when generating Swift code.
+
+:::
+
+The namespace for the generated code. All classes generated will be included in this namespace, which can be used to avoid naming conflicts.
+
+
+For example, setting `namespace` to `Snowtype` will result in classes being accessed with the `Snowtype` prefix:
+
+```swift
+let data = Snowtype.AccountConfirmed(companyCountry: "", companyName:
+"", ...)
 ```
 
 _Keep in mind that CLI flags take precedence over configuration file options._

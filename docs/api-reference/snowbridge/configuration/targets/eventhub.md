@@ -1,14 +1,14 @@
 ---
-title: "EventHub"
-description: "Write data to an EventHub."
+title: "Configure EventHub as a Snowbridge target"
+sidebar_label: "EventHub"
+description: "Configure EventHub target for Snowplow Snowbridge to write data to Azure Event Hubs with namespace and environment authentication."
+keywords: ["snowbridge config", "eventhub target", "azure event hubs", "azure streaming", "eventhub config"]
 ---
 
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-## Authentication
 
 Authentication for the EventHub target is done by configuring any valid combination of the environment variables [listed in the Azure Event Hubs Client documentation](https://pkg.go.dev/github.com/Azure/azure-event-hubs-go#NewHubWithNamespaceNameAndEnvironment).
 

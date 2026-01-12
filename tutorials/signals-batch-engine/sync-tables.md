@@ -1,7 +1,9 @@
 ---
-position: 6
-title: Sync attribute snapshot
-description: "Connect dbt snapshot of the attributes table to Snowplow Signals for periodic syncing to the Profiles Store."
+position: 7
+title: Sync the attribute tables with the Signals Profiles Store
+sidebar_label: Sync attribute snapshot
+description: "Register warehouse attribute tables as batch sources in Signals to enable hourly syncing to the Profiles Store for real-time access in applications."
+keywords: ["signals profiles store sync", "batch source registration", "dbt snapshot"]
 ---
 
 Syncing is the process of making your calculated attributes available in Signals for production use. After the attributes table is ready for production use, you should run `dbt snapshot`. The sync engine will use this table to understand which records have been changed since the last sync. In order for it to work you need to let the sync engine know about the location of your dbt snapshot.

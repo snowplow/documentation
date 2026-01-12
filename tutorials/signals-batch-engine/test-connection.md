@@ -1,7 +1,9 @@
 ---
-position: 2
-title: Test the connection
-description: "Verify connectivity to Snowplow Signals API and check database, cache, and storage service health."
+position: 3
+title: Test the Signals batch engine connections
+sidebar_label: Test the connection
+description: "Verify connectivity to Snowplow Signals API and check database, cache, and storage service health before initializing dbt projects."
+keywords: ["signals api connection test", "batch engine authentication"]
 ---
 
 The first step is to confirm that you can connect to all the necessary services.

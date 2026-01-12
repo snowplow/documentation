@@ -1,11 +1,15 @@
 ---
-title: "Product features"
+title: "Product features in Snowplow CDI and Self-Hosted"
 sidebar_position: 2
 hide_table_of_contents: true
 sidebar_label: "Feature comparison"
+description: "Detailed comparison of features available in Snowplow CDI and Self-Hosted deployments."
+keywords: ["feature comparison", "CDI features", "Self-Hosted features", "product capabilities"]
 ---
 
 Here is a detailed list of product features, showing which are available as part of Snowplow [Customer Data Infrastructure](/docs/get-started/index.md#customer-data-infrastructure) (CDI) or [Snowplow Self-Hosted](/docs/get-started/index.md#self-hosted).
+
+Check out the [Snowplow Product Directory](https://snowplow.io/snowplow-product-description) to learn more about which features are available for CDI Cloud or CDI Private Managed Cloud deployments.
 
 | <h3>Data Pipeline</h3>                                                                                                    |  CDI  |   Self-Hosted    |
 | :------------------------------------------------------------------------------------------------------------------------ | :---: | :--------------: |
@@ -16,7 +20,7 @@ Here is a detailed list of product features, showing which are available as part
 | High availability and auto-scaling                                                                                        |   ✅   |        ❌         |
 | [Enrichments](/docs/pipeline/enrichments/available-enrichments/index.md)                                                  |   ✅   |        ✅         |
 | [Failed events](/docs/fundamentals/failed-events/index.md)                                                                |   ✅   |        ✅         |
-| [Data quality monitoring](/docs/data-product-studio/data-quality/failed-events/monitoring-failed-events/index.md)         |   ✅   |        ❌         |
+| [Data quality monitoring](/docs/monitoring/index.md)                                                                      |   ✅   |        ❌         |
 | Single Sign-On                                                                                                            |   ✅   |        ❌         |
 | Pipeline observability                                                                                                    |   ✅   |  do-it-yourself  |
 | Surge protection                                                                                                          |   ✅   |  do-it-yourself  |
@@ -41,7 +45,7 @@ Here is a detailed list of product features, showing which are available as part
 | [Data modeling management tooling](/docs/modeling-your-data/running-data-models-via-console/dbt/index.md)                 |   ✅   |        ❌         |
 | Jobs monitoring dashboard                                                                                                 |   ✅   |        ❌         |
 | Failed events alerting                                                                                                    |   ✅   |        ❌         |
-| Failed events in the warehouse                                                                                            |   ✅   |        ❌         |
+| Failed events in the warehouse                                                                                            |   ✅   |        ✅         |
 | QA pipeline                                                                                                               |   ✅   |  do-it-yourself  |
 | Fine-grained user permissions using access control lists                                                                  |   ✅   |        ❌         |
 | API key access                                                                                                            |   ✅   |        ❌         |

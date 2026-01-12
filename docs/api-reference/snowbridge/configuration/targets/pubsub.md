@@ -1,14 +1,14 @@
 ---
-title: "PubSub"
-description: "Write data to a Pubsub topic."
+title: "Configure Pub/Sub as a Snowbridge target"
+sidebar_label: "PubSub"
+description: "Configure PubSub target for Snowplow Snowbridge to write data to GCP Pub/Sub topics with service account authentication."
+keywords: ["snowbridge config", "pubsub target", "gcp pubsub", "pubsub topic", "google cloud"]
 ---
 
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-## Authentication
 
 Authentication is done using a [GCP Service Account](https://cloud.google.com/docs/authentication/application-default-credentials#attached-sa). Create a service account credentials file, and provide the path to it via the `GOOGLE_APPLICATION_CREDENTIALS` environment variable.
 

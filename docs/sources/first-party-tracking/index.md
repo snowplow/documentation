@@ -1,12 +1,13 @@
 ---
 title: "First-party tracking"
+sidebar_label: "First-party tracking"
 sidebar_position: 40
 sidebar_custom_props:
   # hide from sidebar and external search until these instructions apply more universally
   hidden: true
+description: "Configure a custom collector domain matching your primary domain to enable first-party cookies and bypass browser tracking limitations."
+keywords: ["first-party tracking", "custom collector domain", "cookie domain configuration"]
 ---
-
-# First-party tracking
 
 This feature lets you configure a custom collector domain to match your primary domain, enabling first-party cookies.
 

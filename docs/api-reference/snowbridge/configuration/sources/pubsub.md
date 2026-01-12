@@ -1,14 +1,14 @@
 ---
-title: "PubSub"
-description: "Read data from a PubSub topic."
+title: "Configure Pub/Sub as a Snowbridge source"
+sidebar_label: "PubSub"
+description: "Configure PubSub source for Snowplow Snowbridge to read from GCP Pub/Sub subscriptions with service account authentication."
+keywords: ["snowbridge config", "pubsub source", "gcp pubsub", "pubsub subscription", "google cloud"]
 ---
 
 ```mdx-code-block
 import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
-
-## Authentication
 
 Authentication is done using a [GCP Service Account](https://cloud.google.com/docs/authentication/application-default-credentials#attached-sa). Create a service account credentials file, and provide the path to it via the `GOOGLE_APPLICATION_CREDENTIALS` environment variable.
 

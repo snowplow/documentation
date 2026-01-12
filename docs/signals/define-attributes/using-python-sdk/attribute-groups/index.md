@@ -1,8 +1,9 @@
 ---
-title: "Attribute groups"
+title: "Define attribute groups with the Signals Python SDK"
 sidebar_position: 30
 sidebar_label: "Attribute groups"
-description: "Configure stream, batch, and external batch attribute groups programmatically using the Snowplow Signals Python SDK."
+description: "Define StreamAttributeGroup, BatchAttributeGroup, or ExternalBatchAttributeGroup objects programmatically. Configure attributes, data sources, TTL, and versioning using the Python SDK."
+keywords: ["python sdk attribute groups", "stream attribute group", "batch attribute group", "external batch"]
 ---
 
 ```mdx-code-block

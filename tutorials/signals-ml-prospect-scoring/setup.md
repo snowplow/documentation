@@ -3,6 +3,7 @@ title: Add credentials to the Signals prospect scoring ML notebook
 sidebar_label: Configure notebook
 position: 2
 description: "Configure Google Colab notebook with Snowplow Signals credentials for the prospect scoring machine learning tutorial."
+keywords: ["google colab", "signals credentials"]
 ---
 
 This tutorial uses this Google [Colab notebook](https://colab.research.google.com/github/snowplow-incubator/signals-notebooks/blob/main/web/web_prospect_scoring_end_to_end.ipynb).

@@ -2,6 +2,8 @@
 position: 3
 title: "Configure the MCP client"
 sidebar_label: "Configure the MCP client"
+description: "Configure MCP clients including Claude Desktop, VS Code, and Cursor for AI-powered data structure management. Step-by-step setup guide for both Homebrew and npx installation methods."
+keywords: ["snowplow cli installation", "claude desktop mcp configuration"]
 ---
 
 import Tabs from '@theme/Tabs';

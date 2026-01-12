@@ -2,6 +2,8 @@
 title: "Set up the Unified Digital dbt package locally"
 sidebar_label: "Set up locally"
 position: 2
+description: "Install and configure the Snowplow Unified Digital dbt package locally with detailed variable configuration for web and mobile data modeling. Includes optimization tips for partition pruning, entity enablement, and warehouse-specific setup."
+keywords: ["dbt unified package installation", "snowplow web mobile data modeling"]
 ---
 
 Installing the package:

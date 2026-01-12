@@ -3,6 +3,8 @@ title: "Unity tracker utilities"
 sidebar_label: "Utilities"
 date: "2020-02-26"
 sidebar_position: 90
+description: "Use logging utilities and thread-safe queue implementations for debugging and managing Unity tracker operations."
+keywords: ["unity tracker logging", "unity tracker utilities", "concurrentqueue unity"]
 ---
 
 The Tracker also provides several extra utilities that can be used.

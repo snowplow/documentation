@@ -1,7 +1,9 @@
 ---
-title: "Snowflake"
+title: "Load Snowplow data to Snowflake"
+sidebar_label: "Snowflake"
 sidebar_position: 10
-description: "Send Snowplow data to Snowflake for analytics and data warehousing"
+description: "Send Snowplow data to Snowflake for analytics and data warehousing with automatic table management, schema evolution, and efficient data loading via Snowpipe or batch."
+keywords: ["Snowflake", "data warehouse", "Snowpipe", "streaming loader", "batch loader"]
 ---
 
 ```mdx-code-block

@@ -1,7 +1,10 @@
 ---
-title: "Migrating from v0 to v1"
+title: "Migrate from v0 to v1"
+sidebar_label: "Migrating from v0 to v1"
 date: "2021-08-09"
 sidebar_position: 200
+description: "Migration guide for upgrading React Native tracker from v0.2.0 to v1.0.0 with API changes and configuration updates."
+keywords: ["react native tracker v0 to v1", "migration guide", "version upgrade"]
 ---
 
 This sections describes the differences between v0.2.0 and [v1.0.0](/docs/sources/react-native-tracker/index.md) of the Snowplow React Native Tracker and the steps needed to upgrade, which is also recommended.

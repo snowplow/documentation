@@ -3,7 +3,8 @@ title: "Welcome to the Snowplow Documentation"
 slug: "/"
 sidebar_position: 0
 sidebar_label: "Introduction"
-description: "Welcome to Snowplow, the leader in customer data infrastructure (CDI) for AI"
+description: "Snowplow is the leader in customer data infrastructure (CDI) for AI. Transform raw behavioral data into governed, high-fidelity fuel for AI-powered applications, real-time personalization, and advanced analytics with event-level data collection."
+keywords: ["customer data infrastructure", "cdi", "behavioral data", "event-level data", "real-time personalization", "ai-powered analytics", "signals"]
 ---
 
 <head>

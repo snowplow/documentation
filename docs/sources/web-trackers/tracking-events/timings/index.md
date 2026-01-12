@@ -1,7 +1,9 @@
 ---
-title: "Tracking performance navigation timings on web"
+title: "Track performance navigation timings on web"
 sidebar_label: "Performance timings"
 sidebar_position: 98
+description: "Track page load performance metrics using the PerformanceNavigationTiming API including DNS lookup, connection times, and resource loading duration."
+keywords: ["performance", "page load"]
 ---
 
 ```mdx-code-block

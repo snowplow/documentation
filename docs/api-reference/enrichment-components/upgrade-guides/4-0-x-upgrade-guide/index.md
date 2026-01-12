@@ -1,6 +1,9 @@
 ---
-title: "4.0.x Upgrade Guide"
+title: "Enrich 4.0.x upgrade guide"
+sidebar_label: "4.0.x upgrade guide"
 sidebar_position: 0
+description: "Upgrade guide for Snowplow Enrich 4.0.x covering license acceptance, atomic field limits, and deprecated assets."
+keywords: ["enrich 4.0", "upgrade guide", "atomic fields"]
 ---
 
 ## Breaking changes

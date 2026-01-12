@@ -1,7 +1,10 @@
 ---
 title: "Using multiple trackers in one Java app"
+sidebar_label: "Using multiple trackers in one Java app"
 date: "2022-03-24"
 sidebar_position: 65
+description: "Instantiate and manage multiple Java tracker instances with different configurations using the Snowplow interface."
+keywords: ["multiple trackers", "tracker namespaces"]
 ---
 
 Rarely, a tracking implementation may benefit from instantiating multiple Java trackers, each with a different configuration. This will not be appropriate for most Snowplow users.

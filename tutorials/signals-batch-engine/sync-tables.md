@@ -2,7 +2,8 @@
 position: 7
 title: Sync the attribute tables with the Signals Profiles Store
 sidebar_label: Sync attribute tables
-description: "Connect warehouse attribute tables to Snowplow Signals for periodic syncing to the Profiles Store."
+description: "Register warehouse attribute tables as batch sources in Signals to enable hourly syncing to the Profiles Store for real-time access in applications."
+keywords: ["signals profiles store sync", "batch source registration"]
 ---
 
 Syncing is the process of making your modeled and validated attributes table, and its calculated attributes available in Signals for production use. Under the hood the attributes table in your warehouse will be synced to the online store periodically. In order for it to work you need to let the sync engine know about your attributes table.

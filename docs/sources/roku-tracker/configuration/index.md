@@ -1,8 +1,10 @@
 ---
-title: "Configuring how events are sent for the Roku tracker"
+title: "Configure how events are sent for the Roku tracker"
 sidebar_label: "Configuring how events are sent"
 date: "2021-11-16"
 sidebar_position: 4000
+description: "Configure Roku tracker network settings with collector endpoint, HTTP method, server anonymization, and tracker namespaces for multiple collectors."
+keywords: ["roku tracker configuration", "collector endpoint", "tracker namespaces"]
 ---
 
 When you initialize your tracker (using the `init` method), you will need to provide its network configuration as an associative array under the `network` property. The configuration consists of the collector endpoint and HTTP method type (see below table).
@@ -20,11 +22,11 @@ m.global.snowplow.init = {
 
 Properties of the network configuration:
 
-| Network configuration parameter | Description |
-| --- | --- |
-| `collector` | URI for the Snowplow collector endpoint. |
-| `method` | HTTP method to use. `GET` and `POST` methods are supported. |
-| `serverAnonymous` | Enable the `SP-Anonymous` header for server anonymization. |
+| Network configuration parameter | Description                                                 |
+| ------------------------------- | ----------------------------------------------------------- |
+| `collector`                     | URI for the Snowplow collector endpoint.                    |
+| `method`                        | HTTP method to use. `GET` and `POST` methods are supported. |
+| `serverAnonymous`               | Enable the `SP-Anonymous` header for server anonymization.  |
 
 ## Tracker namespaces
 

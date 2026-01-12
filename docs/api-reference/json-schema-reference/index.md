@@ -1,7 +1,8 @@
 ---
 title: "JSON Schema reference"
 sidebar_position: 10
-description: "Complete reference for JSON Schema features supported in Snowplow schemas"
+description: "Complete reference for JSON Schema draft 4 features supported in Snowplow data structures, including validation keywords and type definitions."
+keywords: ["json schema", "data structures", "schema validation", "iglu", "schema reference", "type validation"]
 ---
 
 [Snowplow schemas](/docs/fundamentals/schemas/index.md) are based on the [JSON Schema](https://json-schema.org/) standard ([draft 4](https://datatracker.ietf.org/doc/html/draft-fge-json-schema-validation-00)). This reference provides comprehensive documentation for all JSON Schema features that are supported in Snowplow.

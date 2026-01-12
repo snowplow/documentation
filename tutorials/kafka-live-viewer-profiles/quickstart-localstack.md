@@ -2,6 +2,8 @@
 position: 2
 title: "Run the Kafka live viewer profiles application using LocalStack"
 sidebar_label: "Run the application locally"
+description: "Run the complete live viewer profiles stack locally with Docker, LocalStack, and Snowplow to process media tracking events and display real-time user states."
+keywords: ["localstack snowplow development", "docker kafka dynamodb local"]
 ---
 
 

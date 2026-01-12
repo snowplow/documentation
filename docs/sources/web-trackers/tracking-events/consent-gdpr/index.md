@@ -1,7 +1,9 @@
 ---
-title: "Tracking consent and GDPR on web"
+title: "Track consent and GDPR on web"
 sidebar_label: "Consent"
 sidebar_position: 100
+description: "Track user consent preferences and GDPR compliance with enhanced consent events for acceptance, selection, denial, expiration, and withdrawal."
+keywords: ["consent", "gdpr"]
 ---
 
 ```mdx-code-block

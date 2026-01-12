@@ -1,7 +1,10 @@
 ---
 title: "Installation and set-up"
+sidebar_label: "Installation and set-up"
 date: "2022-03-24"
 sidebar_position: 10
+description: "Install and configure Java tracker version 0.12 using Maven, Gradle, or direct download."
+keywords: ["java tracker v0.12 installation", "maven setup", "gradle configuration"]
 ---
 
 

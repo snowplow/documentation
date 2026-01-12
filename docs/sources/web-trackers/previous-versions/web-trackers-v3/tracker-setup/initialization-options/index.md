@@ -2,6 +2,8 @@
 title: "Initialization and configuration"
 date: "2021-03-31"
 sidebar_position: 2000
+description: "Setup and initialization instructions for Initialization and configuration."
+keywords: ["setup", "installation"]
 ---
 
 ```mdx-code-block

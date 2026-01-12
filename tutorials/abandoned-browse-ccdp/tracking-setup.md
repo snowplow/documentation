@@ -2,6 +2,8 @@
 position: 2
 title: "Capture abandoned browse behavior with the JavaScript tracker"
 sidebar_label: "Set up tracking"
+description: "Implement Snowplow JavaScript tracker to capture product views, user engagement time, and add-to-cart events on your ecommerce site. Track abandoned browse behavior with the ecommerce accelerator plugin."
+keywords: ["snowplow javascript tracker", "ecommerce product tracking", "engagement time tracking", "add to cart events"]
 ---
 
 To begin, we will set up Snowplow tracking on your ecommerce website. In this section we will capture what products a customer views, how long they view them for and if they add them to their cart. We assume that you already have a Snowplow pipeline. If you do not yet have a pipeline running, please return to the [Introduction](/tutorials/abandoned-browse-ccdp/introduction) information on the different deployment options.

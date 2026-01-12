@@ -1,7 +1,10 @@
 ---
 title: "Initialization"
+sidebar_label: "Initialization"
 date: "2022-05-12"
 sidebar_position: 20
+description: "Initialize and configure the Java tracker v0.11 with emitter, namespace, and platform settings."
+keywords: ["java tracker initialization", "tracker configuration v0.11"]
 ---
 
 Assuming you have completed the Java Tracker Setup for your project, you are now ready to initialize the Java Tracker.

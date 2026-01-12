@@ -1,6 +1,10 @@
 ---
 title: "Exception tracking"
+sidebar_label: "Exception tracking"
+date: "2021-08-06"
 sidebar_position: 50
+description: "Automatically track unhandled exceptions in native iOS and Android code with React Native tracker v2 exception autotracking."
+keywords: ["react native tracker v2 exception tracking", "crash reporting", "error tracking"]
 ---
 
 ```mdx-code-block

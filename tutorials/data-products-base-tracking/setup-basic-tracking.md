@@ -2,6 +2,8 @@
 position: 4
 title: Track page views, activity, and link clicks with the Browser tracker
 sidebar_label: Set up web tracking
+description: "Install and configure the Snowplow Browser tracker to capture page views, activity tracking with page pings, and automatic link click tracking using the link click plugin."
+keywords: ["browser tracker setup", "page view tracking", "link click tracking plugin", "activity tracking javascript"]
 ---
 
 For this example application, we will use the [Browser tracker](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/quick-start-guide/#quick-start-basic) which is distributed through npm.

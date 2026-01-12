@@ -1,6 +1,8 @@
 ---
 title: "Initialization options"
 sidebar_position: 10
+description: "Setup and initialization instructions for Initialization options."
+keywords: ["setup", "installation"]
 ---
 
 _This page refers to version 2.14.0+ of the Snowplow JavaScript Tracker._

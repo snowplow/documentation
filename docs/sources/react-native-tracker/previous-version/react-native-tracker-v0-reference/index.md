@@ -1,9 +1,12 @@
 ---
 title: "React Native Tracker v0 reference"
+sidebar_label: "React Native Tracker v0 reference"
 date: "2021-08-09"
 sidebar_position: 300
 sidebar_custom_props:
   outdated: true
+description: "Reference documentation for React Native tracker v0 with installation, configuration, and tracking methods for iOS and Android."
+keywords: ["react native tracker v0", "legacy tracker", "v0 reference"]
 ---
 
 This documentation page is about a previous version of the React Native tracker. [Go to the latest docs](/docs/sources/react-native-tracker/index.md).

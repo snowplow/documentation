@@ -1,7 +1,8 @@
 ---
 title: "Snowplow Web dbt package"
 sidebar_label: "Web"
-description: "The Snowplow Web dbt Package"
+description: "Legacy Web dbt package for web event data modeling. Superseded by the Unified Digital package."
+keywords: ["web dbt legacy", "legacy web package", "deprecated web"]
 sidebar_position: 700
 ---
 

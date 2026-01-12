@@ -1,7 +1,9 @@
 ---
-title: "Tracking site search on web"
+title: "Track site search on web"
 sidebar_label: "Site search"
 sidebar_position: 120
+description: "Track internal site search queries with search terms, filters, and result counts to analyze user search behavior and content discovery."
+keywords: ["site search", "search tracking"]
 ---
 
 ```mdx-code-block

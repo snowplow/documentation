@@ -1,5 +1,8 @@
 ---
 title: "App performance"
+sidebar_label: "App performance"
+description: "Track web vitals, navigation timing, and custom performance metrics using automatic plugins or manual timing events."
+keywords: ["web vitals", "performance tracking", "navigation timing", "timing events"]
 ---
 
 ```mdx-code-block

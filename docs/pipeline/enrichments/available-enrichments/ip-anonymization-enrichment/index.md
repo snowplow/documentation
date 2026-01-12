@@ -2,6 +2,8 @@
 title: "IP anonymization enrichment"
 sidebar_position: 14
 sidebar_label: IP anonymization
+description: "Anonymize IP addresses by masking octets or segments to protect user privacy and comply with regulations."
+keywords: ["IP anonymization", "GDPR compliance", "privacy protection"]
 ---
 
 This enrichment replaces the end of the user's IP address with "x"s, on a configurable length. For instance 13.54.45.87 could become 13.54.x.x.

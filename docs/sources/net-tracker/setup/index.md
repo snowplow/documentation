@@ -1,8 +1,10 @@
 ---
-title: "Installing the .NET tracker"
-sidebar_label: "Setup"
+title: "Install the .NET tracker"
+sidebar_label: "Installation"
 date: "2020-02-26"
 sidebar_position: 10
+description: "Install the .NET tracker using NuGet for .NET Standard, Xamarin, and MAUI applications."
+keywords: [".net tracker installation", "nuget package", "xamarin setup"]
 ---
 
 ```mdx-code-block

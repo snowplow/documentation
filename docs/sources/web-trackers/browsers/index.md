@@ -1,6 +1,8 @@
 ---
-title: "Tracking the browser entity with the web trackers"
+title: "Track browser information with the web trackers"
 sidebar_label: "Browser entity"
+description: "Track browser information including viewport, device properties, and client hints with the browser entity."
+keywords: ["browser entity", "client hints", "privacy sandbox"]
 date: "2021-04-07"
 sidebar_position: 2950
 ---

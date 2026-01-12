@@ -2,6 +2,8 @@
 title: "Custom event tracking"
 date: "2022-08-30"
 sidebar_position: 2600
+description: "Documentation for tracking Custom event with the web tracker."
+keywords: ["tracking", "events"]
 ---
 
 ```mdx-code-block

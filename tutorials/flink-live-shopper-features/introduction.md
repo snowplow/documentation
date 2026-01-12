@@ -2,6 +2,8 @@
 position: 1
 title: "Learn how to calculate real-time shopper features using Apache Flink"
 sidebar_label: "Introduction"
+description: "Build real-time ecommerce analytics with Apache Flink to calculate shopper features like product views, cart behavior, and session metrics for in-session personalization."
+keywords: ["apache flink real-time analytics", "ecommerce stream processing"]
 ---
 
 Welcome to the **real-time shopper features using Apache Flink** solution accelerator for ecommerce.

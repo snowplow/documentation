@@ -1,5 +1,8 @@
 ---
-title: "Tracking the Subject"
+title: "Track the Subject with the Golang tracker"
+sidebar_label: "Tracking the subject"
+description: "Attach user and device information to Golang tracker events using the Subject class. Set user ID, screen resolution, viewport, timezone, language, IP address, and user-agent for enriched event data."
+keywords: ["golang subject", "user data", "device information", "user id", "screen resolution"]
 date: "2020-02-26"
 sidebar_position: 30
 ---

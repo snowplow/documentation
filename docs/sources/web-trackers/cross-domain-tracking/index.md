@@ -1,6 +1,8 @@
 ---
 title: "Cross-domain tracking on web"
 sidebar_label: "Cross-domain tracking"
+description: "Track users across multiple domains by decorating links with user and session identifiers."
+keywords: ["cross-domain tracking", "link decoration", "multi-domain tracking"]
 date: "2022-08-30"
 sidebar_position: 2850
 ---

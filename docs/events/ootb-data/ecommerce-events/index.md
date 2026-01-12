@@ -1,5 +1,8 @@
 ---
 title: "Ecommerce events"
+sidebar_label: "Ecommerce events"
+description: "Track ecommerce transactions, carts, checkouts, products, and promotions with Snowplow ecommerce events and context entities."
+keywords: ["ecommerce tracking", "transaction events", "cart tracking", "checkout tracking", "product events"]
 ---
 
 ```mdx-code-block

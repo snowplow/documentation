@@ -1,7 +1,9 @@
 ---
-title: "Filter and mapping reference"
-description: "Complete reference for Snowplow Event Forwarding JavaScript expressions, field mapping syntax, event filtering, data transformations, and custom functions."
+title: "Event forwarding filter and mapping reference"
+sidebar_label: "Filter and mapping reference"
 sidebar_position: 20
+description: "Complete reference for Snowplow event forwarding JavaScript expressions, field mapping syntax, event filtering, data transformations, and custom functions."
+keywords: ["JavaScript expressions", "field mapping", "event filtering", "data transformations", "custom functions"]
 ---
 
 Event forwarders use JavaScript expressions for filtering events and mapping Snowplow data to destination fields. These expressions are entered during [forwarder setup](/docs/destinations/forwarding-events/index.md#getting-started) in Console, specifically in the **Event filtering**, **Field mapping**, and **Custom functions** sections. This reference covers the syntax and available data for these operations.

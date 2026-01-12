@@ -2,6 +2,8 @@
 title: "HTTP header extractor enrichment"
 sidebar_position: 8
 sidebar_label: HTTP header extractor
+description: "Extract HTTP request headers using regex patterns and attach them to events as derived contexts."
+keywords: ["HTTP headers", "header extraction", "request headers"]
 ---
 
 This enrichment can extract name/value pairs from the HTTP headers and attach them to the event as derived contexts.

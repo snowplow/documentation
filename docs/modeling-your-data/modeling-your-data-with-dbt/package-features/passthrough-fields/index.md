@@ -1,6 +1,8 @@
 ---
-title: "Passthrough Fields"
+title: "Passthrough fields for derived tables"
+sidebar_label: "Passthrough fields"
 description: "Details for how to pass additional fields through to the derived tables."
+keywords: ["passthrough fields", "custom fields", "additional columns", "derived table fields"]
 sidebar_position: 20
 ---
 ```mdx-code-block

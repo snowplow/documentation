@@ -1,8 +1,10 @@
 ---
-title: "Product features"
+title: "Product features in Snowplow CDI and Self-Hosted"
 sidebar_position: 2
 hide_table_of_contents: true
 sidebar_label: "Feature comparison"
+description: "Detailed comparison of features available in Snowplow CDI and Self-Hosted deployments."
+keywords: ["feature comparison", "CDI features", "Self-Hosted features", "product capabilities"]
 ---
 
 Here is a detailed list of product features, showing which are available as part of Snowplow [Customer Data Infrastructure](/docs/get-started/index.md#customer-data-infrastructure) (CDI) or [Snowplow Self-Hosted](/docs/get-started/index.md#self-hosted).

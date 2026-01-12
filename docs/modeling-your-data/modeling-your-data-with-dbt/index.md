@@ -1,6 +1,8 @@
 ---
-title: "Modeling your data with dbt"
+title: "Model your data with dbt"
+sidebar_label: "Modeling your data with dbt"
 description: "Information for our dbt packages including quickstarts, configurations, and building custom models."
+keywords: ["dbt packages", "Snowplow dbt", "data modeling", "dbt quickstart"]
 sidebar_position: 1
 ---
 

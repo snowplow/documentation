@@ -1,7 +1,9 @@
 ---
 position: 4
-title: "Create and publish a data structure using the Snowplow CLI MCP tool"
+title: "Create and publish a data product using the Snowplow CLI MCP tool"
 sidebar_label: "Create and publish a data product"
+description: "Create and validate Snowplow data structures using conversational AI through the MCP tool. Learn the complete workflow from context retrieval through validation to publishing data structures to Console."
+keywords: ["data structure validation", "snowplow tracking plan creation"]
 ---
 
 This page shows a typical interaction pattern. In this example, the AI assistant is helping build a new [data product](/docs/fundamentals/data-products), with new [data structures](/docs/fundamentals/schemas) and [source application](/docs/data-product-studio/source-applications).

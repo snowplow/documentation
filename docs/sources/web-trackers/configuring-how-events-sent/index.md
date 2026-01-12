@@ -1,6 +1,8 @@
 ---
-title: "Configuring how events are sent by the web trackers"
+title: "Configure how events are sent by the web trackers"
 sidebar_label: "Configuring how events are sent"
+description: "Configure request methods, payload sizes, retries, and custom headers for event transmission to the collector."
+keywords: ["event transmission", "post requests", "get requests", "batch sending", "retry configuration"]
 date: "2021-04-07"
 sidebar_position: 2750
 ---

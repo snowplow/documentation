@@ -1,6 +1,8 @@
 ---
-title: "Installing the Golang tracker"
-sidebar_label: "Setup"
+title: "Install the Golang tracker"
+sidebar_label: "Installation"
+description: "Install the Golang tracker using go modules with support for Go 1.17.x through 1.19.x. Import the tracker package and start tracking server-side events from your Go applications."
+keywords: ["golang installation", "go get", "go modules", "golang tracker v3"]
 date: "2020-02-26"
 sidebar_position: 10
 ---

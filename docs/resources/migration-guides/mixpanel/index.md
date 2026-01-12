@@ -67,7 +67,7 @@ Snowplow tracker SDKs provide built-in methods for tracking page views and scree
 
 Snowplow provides out-of-the-box [dbt data models](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md) for initial modeling and common analytics use cases.
 
-### User profiles and event properties
+### Events and users
 
 Mixpanel separates timestamped events from persistent user profiles. Events capture actions with timestamps, while user profiles store persistent attributes like name, email, or subscription tier. Here's the Mixpanel pattern:
 
@@ -106,7 +106,55 @@ snowplow('trackPageView', {
 
 This event-centric approach means you can reconstruct user state from the events in the warehouse. This provides a complete audit trail of all attribute changes over time.
 
-## Tracking comparison
+
+### Super properties
+
+In Mixpanel, super properties are event properties that are automatically attached to every event you track. They're used to capture contextual information that applies across all events, such as user plan type, app version, or environment.
+
+```javascript
+// Register super properties in Mixpanel
+mixpanel.register({
+  app_version: '2.1.0',
+  environment: 'production',
+  user_plan: 'premium'
+});
+
+// All subsequent events include these properties
+mixpanel.track('Page Viewed');
+mixpanel.track('Image Expanded');
+```
+
+There's no direct Snowplow equivalent to super properties. Instead, you attach "global context" [entities](/docs/fundamentals/entities/index.md) to every event. This approach provides the same functionality with stronger typing and validation through schemas.
+
+Here's how to implement the same pattern with the [JavaScript tracker](/docs/sources/web-trackers/custom-tracking-using-schemas/global-context/index.md):
+
+```javascript
+// Define your global context entity
+const appContext = {
+  schema: 'iglu:com.acme/app_context/jsonschema/1-0-0',
+  data: {
+    app_version: '2.1.0',
+    environment: 'production',
+    user_plan: 'premium'
+  }
+};
+
+// Add as global context - attached to all events
+snowplow('addGlobalContexts', [appContext]);
+
+// All subsequent events include this entity
+snowplow('trackPageView');
+snowplow('trackSelfDescribingEvent', {
+  event: {
+    schema: 'iglu:com.acme/image_expanded/jsonschema/1-0-0',
+    data: { button_id: 'submit' }
+  }
+});
+```
+
+You can also update the global context properties dynamically during runtime. This is useful when values change during the session.
+
+### Tracking comparison
 
 This table shows how example Mixpanel tracking calls could be mapped to Snowplow tracking:
 
@@ -121,15 +169,15 @@ This table shows how example Mixpanel tracking calls could be mapped to Snowplow
 | `.track_with_groups()` | `mixpanel.track_with_groups('Button Clicked', {groupId: 'company-123'})` | Attach custom group entities to events containing group identifiers and relevant group properties.                                                                            |
 | `reset()`              | `mixpanel.reset()`                                                       | Clear user ID with `setUserId(null)` or equivalent, depending on tracker. The tracker will generate a new anonymous identifier.                                               |
 
-## Data validation
+### Data validation
 
-Mixpanel offers optional Tracking Plans for defining expected events and properties. The suggested Mixpanel approach is to first track some events, then use those events as the basis for a template. You can choose how to handle validation failures: filter out events that don't match their specification, allow with warnings, or pass after autocorrecting minor issues. Tracking Plans are optional.
+You've presumably defined Tracking Plans for your Mixpanel implementation. The suggested Mixpanel approach is to create and maintain an external spreadsheet of events and properties to track. Within Mixpanel, the Lexicon feature allows you to manage definitions, and hide or drop events. There's no built-in validation of tracked events.
 
-Event specification is required for Snowplow. Every event and entity is defined by a [JSON schema](/docs/fundamentals/schemas/index.md), called a data structure. The data payload itself contains a reference to the specific data structure and version that defines it. The events are always validated as they're processed through the Snowplow pipeline, and events that fail validation are filtered out.
+Snowplow requires schematic specification for all data. Every event and entity is defined by a [JSON schema](/docs/fundamentals/schemas/index.md), called a data structure. The data payload itself contains a reference to the specific data structure and version that defines it. The events are always validated as they're processed through the Snowplow pipeline, and events that fail validation are filtered out.
 
-Snowplow provides [monitoring](/docs/monitoring/index.md) and alerting for failed events. You can choose to load failed events into a separate table in your warehouse, or to analyze them in temporary buckets. This strict approach ensures high data quality.
+To help maintain high data quality, Snowplow provides [monitoring](/docs/monitoring/index.md) and alerting for failed events. You can choose to load failed events into a separate table in your warehouse, or to analyze them in temporary buckets.
 
-The Snowplow equivalent to Mixpanel Tracking Plans is [data products](/docs/fundamentals/data-products/index.md). Each data product contains a set of related event specifications. Each event specification has one event data structure, and any number of entity data structures.
+The Snowplow equivalent to Tracking Plans is [data products](/docs/fundamentals/data-products/index.md). Each data product contains a set of related event specifications. Each event specification has one event data structure, and any number of entity data structures.
 
 You can use the Snowplow Console, API, or CLI to [define your tracking data structures](/docs/data-product-studio/data-products/index.md). For each event you can specify when it should be tracked, and which entities should be added. Once you've defined your event specifications, use [Snowtype](/docs/data-product-studio/snowtype/index.md) to automatically generate the tracking code snippets.
 
@@ -159,7 +207,7 @@ You'll need to translate your Mixpanel Tracking Plans into Snowplow [data produc
 * Which platforms will you be tracking on? Different Snowplow tracker SDKs include different built-in event types. The [web](/docs/sources/web-trackers/index.md) and [native mobile](/docs/sources/mobile-trackers/index.md) trackers are the most fully featured.
 * Which Tracking Plan events can be migrated to built-in Snowplow events, and which should be custom [self-describing events](/docs/fundamentals/events/index.md#self-describing-events)?
 * How should you migrate Mixpanel super properties? These are typically best represented as global context [entities](/docs/fundamentals/entities/index.md) that are attached to all events.
-* Which user profile properties should be captured as user entities? You might not need to attach user entities to every event, only those where user context is relevant for analysis.
+* Which user profile properties should be captured as user entities? You might not need to attach user entities to every event, only those where the user context is relevant for analysis.
 * Which events use group analytics? You'll need to define group entities for these.
 * Are there sets of event properties used in multiple places that could be defined as reusable entities instead?
 
@@ -213,4 +261,4 @@ In the final phase, you'll update downstream data consumers, and decommission Mi
 
 Use Snowplow [event forwarding](/docs/destinations/forwarding-events/index.md) to integrate with third-party destinations. Update all your data consumers to query the new Snowplow data tables.
 
-Remove the Mixpanel tracking from your codebases. Keep the Mixpanel tracking active for a short time as a final fallback before fully decommissioning. Finally, close your Mixpanel account.
+Remove the Mixpanel tracking from your codebases. Finally, close your Mixpanel account.

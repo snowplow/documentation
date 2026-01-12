@@ -2,7 +2,7 @@
 title: "Migrate from Google Analytics to Snowplow"
 sidebar_label: "Google Analytics to Snowplow"
 date: "2025-01-20"
-sidebar_position: 10
+sidebar_position: 0
 description: "Migrate from Google Analytics to Snowplow, including data layer implementations with Google Tag Manager."
 keywords: ["google analytics", "ga4", "migration", "data layer", "gtm", "google tag manager"]
 ---

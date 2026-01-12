@@ -2,7 +2,7 @@
 title: "Migrate from Segment to Snowplow"
 sidebar_label: "Segment to Snowplow"
 date: "2025-08-04"
-sidebar_position: 0
+sidebar_position: 10
 description: "Migrate from Segment to Snowplow with guidance on tracking implementation, data structures, and warehouse modeling."
 keywords: ["segment", "migration", "tracking plan", "data products", "analytics.js", "event tracking"]
 ---

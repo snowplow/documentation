@@ -59,6 +59,9 @@ Check out the [Snowplow Product Directory](https://snowplow.io/snowplow-product-
 | **Ecommerce Analytics**                                                                                                   |       |                  |
 | Ecommerce Analytics                                                                                                       |   ✅   |        ❌         |
 | [Ecommerce data model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md) |   ✅   |        ❌         |
+| <h3>Signals</h3>                                                                                                          |  CDI  |   Self-Hosted    |
+| [Real-time personalization engine](/docs/signals/index.md)                                                                |   ✅   |        ❌         |
+| Profiles Store                                                                                                            |   ✅   |        ❌         |
 | <h3>Extensions</h3>                                                                                                       |  CDI  |   Self-Hosted    |
 | Reverse ETL, powered by Census                                                                                            |   ✅   |        ❌         |
 | Audience Hub, powered by Census                                                                                           |   ✅   |        ❌         |

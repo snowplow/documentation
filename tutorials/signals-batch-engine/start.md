@@ -27,7 +27,7 @@ This guide will walk you through the steps to set up the batch engine and calcul
 This tutorial assumes that you have:
 
 * Python 3.11+ installed in your environment
-* Snowflake, BigQuery or Databricks warehouse with your atomic Snowplow events ready to use as the data source
+* Snowflake or BigQuery warehouse with your atomic Snowplow events ready to use as the data source
 * [dbt](https://www.getdbt.com/) with your warehouse [target](https://docs.getdbt.com/reference/dbt-jinja-functions/target) set up
 * Basic [dbt](https://www.getdbt.com/) knowledge
 * Valid API credentials for your Signals account:

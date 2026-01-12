@@ -43,7 +43,7 @@ Steps for using Signals:
 3. Use the attributes and interventions to take action in your application
 
 :::note Warehouse support
-Snowflake, BigQuery, and Databricks are supported currently.
+Snowflake and BigQuery are supported currently.
 :::
 
 Check out the [quick start tutorial](/tutorials/signals-quickstart/start) to get started.

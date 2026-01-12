@@ -17,7 +17,6 @@ This is the process workflow:
 Supported warehouses:
 * Snowflake
 * BigQuery
-* Databricks
 
 ## Next steps
 

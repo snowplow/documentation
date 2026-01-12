@@ -9,7 +9,7 @@ You can use existing attributes that are already in your warehouse, or use the S
 To use historical, warehouse attributes in your real-time use cases, you will need to sync the data to the Profiles Store. Signals includes a sync engine to do this.
 
 :::note Warehouse support
-Snowflake, BigQuery, and Databricks are supported currently.
+Snowflake and BigQuery are supported currently.
 :::
 
 Signals is configured slightly differently depending if you're using existing tables or creating new ones.
@@ -90,16 +90,15 @@ The model created for each attribute group has configurable variables. The most 
 
 You will need to update the variables for each attribute group individually, by editing the `dbt_project.yml` files. The table below lists the configurable variables for each model:
 
-| Variable                               | Description                                                                                           | Default Value  |
-| -------------------------------------- | ----------------------------------------------------------------------------------------------------- | -------------- |
-| `snowplow__start_date`                 | Date from where the model starts looking for events, based on both `load_tstamp` and `derived_tstamp` | `'2025-01-01'` |
-| `snowplow__app_id`                     | Filter the data on specific `app_id`s                                                                 | `[]`           |
-| `snowplow__backfill_limit_days`        | Limit backfill increments for the `filtered_events_table`                                             | `1`            |
-| `snowplow__late_event_lookback_days`   | The number of days to allow for late arriving data to be reprocessed during daily aggregation         | `5`            |
-| `snowplow__min_late_events_to_process` | The threshold number of skipped daily events to process during daily aggregation                      | `1`            |
-| `snowplow__atomic_schema`              | Change this if you aren't using `atomic` schema for Snowplow event data                               | `'atomic'`     |
-| `snowplow__database`                   | Change this if you aren't using `target.database` for Snowplow event data                             |                |
-| `snowplow__events_table`               | Change this if you aren't using `events` table for Snowplow event data                                | `'events'`     |
-| `snowplow__include_current_day_in_windows` | false | If set to true, the `current_day` with incomplete data is also taken into account for `last_x_day` type windows
-| `snowplow__databricks_catalog` | `hive_metastore` | Catalog used for the atomic events table (Databricks only)
-    
+| Variable                                   | Description                                                                                           | Default Value                                                                                                   |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `snowplow__start_date`                     | Date from where the model starts looking for events, based on both `load_tstamp` and `derived_tstamp` | `'2025-01-01'`                                                                                                  |
+| `snowplow__app_id`                         | Filter the data on specific `app_id`s                                                                 | `[]`                                                                                                            |
+| `snowplow__backfill_limit_days`            | Limit backfill increments for the `filtered_events_table`                                             | `1`                                                                                                             |
+| `snowplow__late_event_lookback_days`       | The number of days to allow for late arriving data to be reprocessed during daily aggregation         | `5`                                                                                                             |
+| `snowplow__min_late_events_to_process`     | The threshold number of skipped daily events to process during daily aggregation                      | `1`                                                                                                             |
+| `snowplow__atomic_schema`                  | Change this if you aren't using `atomic` schema for Snowplow event data                               | `'atomic'`                                                                                                      |
+| `snowplow__database`                       | Change this if you aren't using `target.database` for Snowplow event data                             |                                                                                                                 |
+| `snowplow__events_table`                   | Change this if you aren't using `events` table for Snowplow event data                                | `'events'`                                                                                                      |
+| `snowplow__include_current_day_in_windows` | false                                                                                                 | If set to true, the `current_day` with incomplete data is also taken into account for `last_x_day` type windows |
+| `snowplow__databricks_catalog`             | `hive_metastore`                                                                                      | Catalog used for the atomic events table (Databricks only)                                                      |

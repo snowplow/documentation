@@ -166,13 +166,13 @@ Use `Track(SelfDescribing)` to track a custom event which consists of a name a
 
 The arguments are as follows:
 
-| **Argument**             | **Description**                   | **Required?** | **Type**                                      |
-| ------------------------ | --------------------------------- | ------------- | --------------------------------------------- |
-| `eventData`              | The properties of the event       | Yes           | [`SelfDescribingJson`](#self-describing-json) |
-| `customContexts`         | Optional custom context           | No            | `List<IContext>`                              |
-| `deviceCreatedTimestamp` | Optional device-created-timestamp | No            | `long`                                        |
-| `trueTimestamp`          | Optional true-timestamp           | No            | `long`                                        |
-| `eventId`                | Optional custom event id          | No            | `string`                                      |
+| **Argument**             | **Description**                   | **Required?** | **Type**             |
+| ------------------------ | --------------------------------- | ------------- | -------------------- |
+| `eventData`              | The properties of the event       | Yes           | `SelfDescribingJson` |
+| `customContexts`         | Optional custom context           | No            | `List<IContext>`     |
+| `deviceCreatedTimestamp` | Optional device-created-timestamp | No            | `long`               |
+| `trueTimestamp`          | Optional true-timestamp           | No            | `long`               |
+| `eventId`                | Optional custom event id          | No            | `string`             |
 
 Example event json to track:
 

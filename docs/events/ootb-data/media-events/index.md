@@ -38,9 +38,9 @@ The newer v2 implementation has many more features than v1, including:
 * Filtering of repeated events (seek, volume)
 * Page activity updates during playback
 
-## Tracker and dbt package support
+## Tracker support
 
-This table shows the support for media tracking across the client-side Snowplow tracker SDKs.
+This table shows the support for media tracking across the main client-side Snowplow tracker SDKs. The server-side trackers don't include media tracking APIs.
 
 Auto-tracking means that the tracker can subscribe to and track events from a registered media player, without you needing to manually track each event.
 
@@ -58,7 +58,7 @@ Auto-tracking means that the tracker can subscribe to and track events from a re
 
 The Snowplow media tracking APIs are supported by the [Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) dbt data model.
 
-## Using the media APIs
+## How to use the media APIs
 
 Each media player instance needs to be registered with the tracker, using a unique ID. To start tracking user behavior involving that player, call the appropriate `startMediaTracking` function. When playback ends, call the `stopMediaTracking` function to end the session and send any final events.
 

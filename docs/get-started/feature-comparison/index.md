@@ -62,6 +62,7 @@ Check out the [Snowplow Product Directory](https://snowplow.io/snowplow-product-
 | <h3>Signals</h3>                                                                                                          |  CDI  |   Self-Hosted    |
 | [Real-time personalization engine](/docs/signals/index.md)                                                                |   ✅   |        ❌         |
 | Profiles Store                                                                                                            |   ✅   |        ❌         |
+| Interventions                                                                                                             |   ✅   |        ❌         |
 | <h3>Extensions</h3>                                                                                                       |  CDI  |   Self-Hosted    |
 | Reverse ETL, powered by Census                                                                                            |   ✅   |        ❌         |
 | Audience Hub, powered by Census                                                                                           |   ✅   |        ❌         |

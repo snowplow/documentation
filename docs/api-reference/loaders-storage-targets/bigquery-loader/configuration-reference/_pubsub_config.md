@@ -55,7 +55,7 @@
 </tr>
 <tr>
     <td><code>output.bad.maxRecordSize</code></td>
-    <td>Optional.  Default value 10000000.  Any single failed event sent to Pub/Sub should not exceed this size in bytes</td>
+    <td>Optional.  Default value 9000000.  Any single failed event sent to Pub/Sub should not exceed this size in bytes</td>
 </tr>
 <tr>
     <td><code>output.retries.transientErrors.delay</code> (since 2.1.0)</td>

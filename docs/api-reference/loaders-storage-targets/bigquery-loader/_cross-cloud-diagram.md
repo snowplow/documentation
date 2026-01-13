@@ -12,7 +12,4 @@ import LoaderDiagram from '@site/docs/api-reference/loaders-storage-targets/bigq
   <TabItem value="gcp" label="GCP">
     <LoaderDiagram {...props} stream="Pub/Sub" cloud="GCP"/>
   </TabItem>
-  <TabItem value="azure" label="Azure">
-    <LoaderDiagram {...props} stream="Kafka" cloud="Azure"/>
-  </TabItem>
 </Tabs>

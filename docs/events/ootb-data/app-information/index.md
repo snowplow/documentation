@@ -36,7 +36,7 @@ The included data is slightly different depending on the platform, as different 
 
 ### Tracker support
 
-This table shows the support for the application entity across the main client-side Snowplow tracker SDKs. The server-side trackers don't include this entity.
+This table shows the support for the application entity across the main client-side Snowplow [tracker SDKs](/docs/sources/index.md). The server-side trackers don't include this entity.
 
 | Tracker                                                                                                                | Supported | Since version | Auto-tracking | Notes                                                |
 | ---------------------------------------------------------------------------------------------------------------------- | --------- | ------------- | ------------- | ---------------------------------------------------- |

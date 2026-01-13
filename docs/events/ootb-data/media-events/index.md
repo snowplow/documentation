@@ -5,35 +5,77 @@ description: "Track video and audio playback with media player events covering p
 keywords: ["media tracking", "video playback", "audio playback", "media events", "ad tracking"]
 ---
 
-```mdx-code-block
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
-import TOCInline from '@theme/TOCInline';
-```
 
-Snowplow provides a complete solution for tracking events from media (video or audio) playback and for modeling the tracked data.
+The Snowplow media tracking APIs enable you to track events from media playback on the web as well as in mobile apps.
+Track changes in the media playback e.g., play, pause, seek events, playback position with ping and percentage progress events, or ad playback events e.g., ad breaks, ad progress, or ad clicks.
 
-This page gives an overview of the tracked data (consisting of self-describing events and context entities) and points to resources for setting up tracking using our Web and mobile trackers and modeling using our dbt package.
+While some trackers provide additional integrations with media players, the media tracking APIs are designed to be player agnostic.
 
-<TOCInline toc={toc} maxHeadingLevel={4} />
+Use media tracking to answer questions such as:
+- Are users watching videos without sound?
+- Which pieces of audio content do users play to completion?
+- Where do users drop off during playback?
+- How does buffering affect engagement?
+- Which ads do users skip, click, or watch?
 
-<details>
-<summary>Older (version 1) media event and context entity schemas</summary>
+The media tracking works with a set of out-of-the-box events and entities. You can add custom entities to the events as required.
 
-This page describes events and entities in the newer, version 2, schemas for media events and context entities. In case you are using the HTML5 and YouTube plugins for the JavaScript tracker, you may still be using the older schemas. These are still supported and work with our dbt media package. However, they provide less information (e.g, no ad tracking) and less accurate playback metrics (which are estimated based on percentage progress boundaries).
+Every media event automatically includes a media player entity that describes the current state of the media player, and a media session entity that aggregates statistics for the viewing session. Ad events also include an ad entity and an ad break entity.
 
-They consist of the following events and context entities:
-- [media-player event schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player_event/jsonschema/1-0-0) used for all media events.
-- [media-player context v1 schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/media_player/jsonschema/1-0-0).
-- Depending on the plugin / intention there are player-specific contexts:
-    - in case of embedded YouTube tracking: Have the [YouTube specific context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.youtube/youtube/jsonschema/1-0-0) enabled.
-    - in case of HTML5 audio or video tracking: Have the [HTML5 media element context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/org.whatwg/media_element/jsonschema/1-0-0) enabled.
-    - in case of HTML5 video tracking: Have the [HTML5 video element context schema](https://github.com/snowplow/iglu-central/blob/master/schemas/org.whatwg/video_element/jsonschema/1-0-0) enabled.
+## Media API versions
 
-</details>
+The current set of media APIs has evolved from an earlier, more limited implementation. We refer to them as v1 and v2 of the media tracking APIs. The [Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) dbt data model supports both versions.
 
-## Events
+Unless otherwise stated, all documentation refers to v2 of the media tracking APIs.
 
-### Playback events
+The newer v2 implementation has many more features than v1, including:
+* Advertising tracking support
+* Media ping events at configurable intervals
+* Session entity with aggregated statistics
+* Quality change tracking for bitrate, FPS, and quality level
+* Buffer and seek start/end event pairs
+* Filtering of repeated events (seek, volume)
+* Page activity updates during playback
+
+## Tracker and dbt package support
+
+This table shows the support for media tracking across the client-side Snowplow tracker SDKs.
+
+Auto-tracking means that the tracker can subscribe to and track events from a registered media player, without you needing to manually track each event.
+
+| Tracker                                                                                   | Plugin                                                                         | Supported | Since version                      | Auto-tracking | Notes                                                                                                                                                                         |
+| ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | --------- | ---------------------------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Web                                                                                       | [Snowplow](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md) | ✅         | 3.12.0 (Media v2)                  | ❌             |                                                                                                                                                                               |
+| Web                                                                                       | [HTML5](/docs/sources/web-trackers/tracking-events/media/html5/index.md)       | ✅         | 3.2.0 (Media v1), 4.0.0 (Media v2) | ✅             |                                                                                                                                                                               |
+| Web                                                                                       | [YouTube](/docs/sources/web-trackers/tracking-events/media/youtube/index.md)   | ✅         | 3.2.0 (Media v1), 4.0.0 (Media v2) | ✅             |                                                                                                                                                                               |
+| Web                                                                                       | [Vimeo](/docs/sources/web-trackers/tracking-events/media/vimeo/index.md)       | ✅         | 3.14.0 (Media v2)                  | ✅             |                                                                                                                                                                               |
+| [iOS](/docs/sources/mobile-trackers/tracking-events/media-tracking/index.md)              |                                                                                | ✅         | 5.3.0 (Media v2)                   | ✅/❌           | Auto-tracking for AVPlayer                                                                                                                                                    |
+| [Android](/docs/sources/mobile-trackers/tracking-events/media-tracking/index.md)          |                                                                                | ✅         | 5.3.0 (Media v2)                   | ❌             |                                                                                                                                                                               |
+| [React Native](/docs/sources/react-native-tracker/custom-tracking-using-schemas/index.md) |                                                                                | ❌         |                                    |               | Use the media schemas for your own custom events, or the [media web data product template](/docs/data-product-studio/data-products/data-product-templates/index.md#media-web) |
+| [Flutter](/docs/sources/flutter-tracker/tracking-events/media-tracking/index.md)          |                                                                                | ✅         | 0.7.0 (Media v2)                   | ❌             |                                                                                                                                                                               |
+| [Roku](/docs/sources/roku-tracker/media-tracking/index.md)                                |                                                                                | ✅         | 0.1.0 (Media v1), 0.3.0 (Media v2) | ❌             |                                                                                                                                                                               |
+
+The Snowplow media tracking APIs are supported by the [Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) dbt data model.
+
+## Using the media APIs
+
+Each media player instance needs to be registered with the tracker, using a unique ID. To start tracking user behavior involving that player, call the appropriate `startMediaTracking` function. When playback ends, call the `stopMediaTracking` function to end the session and send any final events.
+
+You can provide additional configuration to the `startMediaTracking` call to configure the tracking, or give initial information about the media played. Note that this configuration isn't available in Roku.
+
+## Available event types
+
+Media events fall into three categories: playback lifecycle events, player state changes, and advertising events. For most implementations, you'll need to track these events yourself.
+
+Many media events have no properties of their own. The user behavior is captured in the event type, and the media player, session, ad, or ad break entities that are attached to the event.
+
+The schema URIs have the format:
+`iglu:com.snowplowanalytics.snowplow.media/{EVENT_TYPE}/jsonschema/1-0-0`.
+
+### Playback lifecycle events
+
+These events track the core playback flow from start to finish.
 
 #### Buffer end event
 
@@ -99,7 +141,9 @@ They consist of the following events and context entities:
   example={{ }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Media player event sent when a seek operation begins.", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "seek_start_event", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": {}, "additionalProperties": false }} />
 
-### Player events
+### Player state change events
+
+These events track changes to the player's display mode, quality, and settings.
 
 #### Error event
 
@@ -170,7 +214,9 @@ They consist of the following events and context entities:
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Media player event sent when the volume has changed.", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "volume_change_event", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "previousVolume": { "type": [ "integer", "null" ], "description": "Volume percentage before the change.", "minimum": 0, "maximum": 100 }, "newVolume": { "type": "integer", "description": "Volume percentage after the change.", "minimum": 0, "maximum": 100 } }, "required": [ "newVolume" ], "additionalProperties": false }} />
 
-### Ad events
+### Advertising events
+
+These events track ad playback for monetized content. Ad events include the media ad and media ad break entities.
 
 #### Ad click event
 
@@ -237,9 +283,20 @@ They consist of the following events and context entities:
   example={{ }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Media player event that signals the start of an ad.", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "ad_start_event", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": {}, "additionalProperties": false }} />
 
-## Context entities
+## Automatically included entities
 
-### Media player entity
+Every media event includes entities that describe the current state of the player and session. These entities are attached automatically by the tracker. You don't need to track them yourself.
+
+| Entity         | Attached to      | Purpose                                                      |
+| -------------- | ---------------- | ------------------------------------------------------------ |
+| Media player   | All media events | Current playback state (position, duration, volume, quality) |
+| Media session  | All media events | Aggregated session metrics (time played, content watched)    |
+| Media ad       | Ad events only   | Information about the current ad                             |
+| Media ad break | Ad events only   | Information about the ad break                               |
+
+### Media player
+
+The media player entity captures the current state of playback at the moment each event fires.
 
 <SchemaProperties
   overview={{event: false, web: true, mobile: true, automatic: true}}
@@ -262,12 +319,12 @@ They consist of the following events and context entities:
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for a context entity for media events that describes the media player and playback state", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "media_player", "format": "jsonschema", "version": "2-0-0" }, "type": "object", "properties": { "currentTime": { "type": "number", "description": "The current playback time position within the media in seconds.", "minimum": 0, "maximum": 2147483647 }, "duration": { "type": [ "number", "null" ], "description": "A floating-point value indicating the duration of the media in seconds.", "minimum": 0, "maximum": 2147483647 }, "ended": { "type": "boolean", "description": "Whether playback of the media has ended." }, "fullscreen": { "type": [ "boolean", "null" ], "description": "Whether the video element is fullscreen." }, "livestream": { "type": [ "boolean", "null" ], "description": "Whether the media is a live stream." }, "label": { "type": [ "string", "null" ], "description": "Human readable name given to tracked media content.", "maxLength": 4096 }, "loop": { "type": [ "boolean", "null" ], "description": "Whether the video should restart after ending." }, "mediaType": { "description": "Type of media content.", "enum": [ "video", "audio", null ], "type": [ "string", "null" ] }, "muted": { "type": [ "boolean", "null" ], "description": "Whether the media element is muted." }, "paused": { "type": "boolean", "description": "Whether the media element is paused" }, "pictureInPicture": { "type": [ "boolean", "null" ], "description": "Whether the video element is showing picture-in-picture." }, "playbackRate": { "type": [ "number", "null" ], "description": "Playback rate (1 is normal).", "minimum": 0, "maximum": 16 }, "playerType": { "type": [ "string", "null" ], "description": "Type of the media player (e.g., com.youtube-youtube, com.vimeo-vimeo, org.whatwg-media_element).", "maxLength": 4096 }, "quality": { "type": [ "string", "null" ], "description": "Quality level of the playback (e.g., 1080p).", "maxLength": 4096 }, "volume": { "type": [ "integer", "null" ], "description": "Volume percentage at which the media will be played.", "minimum": 0, "maximum": 100 } }, "additionalProperties": false, "required": [ "currentTime", "ended", "paused" ] }} />
 
-### Media session entity
+### Media session
 
-The media session entity is updated automatically by our trackers.
-It contains metrics that are calculated based on the tracked media events and the media update calls.
+The media session entity contains metrics that are calculated based on the tracked media events and the media update calls.
 
-It makes use of the information in the media player entity (see above) and the tracked media event types to update it's state and calculate metrics.
+It makes use of the information in the media player entity and the tracked media event types to update its state and calculate metrics.
+
 The table below shows which media player properties (first column) and media events (second column) are used to calculate the metrics within the media session entity (third column).
 
 | Media player entity property | Media events                                               | Affected calculation of metric                                  |
@@ -308,6 +365,8 @@ The table below shows which media player properties (first column) and media eve
 
 ### Media ad
 
+The media ad entity describes the currently playing ad. It is attached to ad events.
+
 <SchemaProperties
   overview={{event: false, web: true, mobile: true, automatic: true}}
   example={{
@@ -322,6 +381,8 @@ The table below shows which media player properties (first column) and media eve
 
 ### Media ad break
 
+The media ad break entity describes a group of ads played together, whether pre-roll, mid-roll, or post-roll. It is attached to ad break events and all ad events within the break.
+
 <SchemaProperties
   overview={{event: false, web: true, mobile: true, automatic: true}}
   example={{
@@ -332,24 +393,3 @@ The table below shows which media player properties (first column) and media eve
     "podSize": 2
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for a context entity, shared with all ad events belonging to the ad break.", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "ad_break", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "name": { "description": "Ad break name (e.g., pre-roll, mid-roll, and post-roll).", "type": [ "null", "string" ], "maxLength": 4096 }, "breakId": { "type": "string", "maxLength": 256, "description": "An identifier for the ad break." }, "startTime": { "type": "number", "description": "Playback time in seconds at the start of the ad break.", "minimum": 0, "maximum": 2147483647 }, "breakType": { "description": "Type of ads within the break: linear (take full control of the video for a period of time), nonlinear (run concurrently to the video), companion (accompany the video but placed outside the player).", "enum": [ "linear", "nonlinear", "companion", null ], "type": [ "string", "null" ] }, "podSize": { "type": [ "integer", "null" ], "description": "The number of ads to be played within the ad break.", "minimum": 0, "maximum": 65535 } }, "additionalProperties": false, "required": [ "breakId", "startTime" ] }} />
-
-## How to track?
-
-* on Web using plugins for our [JavaScript trackers](/docs/sources/web-trackers/index.md):
-  * [media plugin](/docs/sources/web-trackers/tracking-events/media/index.md) that can be used to track events from any media player.
-  * [HTML5 media tracking plugin](/docs/sources/web-trackers/tracking-events/media/html5/index.md).
-  * [YouTube tracking plugin](/docs/sources/web-trackers/tracking-events/media/youtube/index.md).
-  * [Vimeo tracking plugin](/docs/sources/web-trackers/tracking-events/media/vimeo/index.md).
-* [media tracking APIs on our iOS and Android trackers](/docs/sources/mobile-trackers/tracking-events/media-tracking/index.md) for mobile apps.
-
-## Modeled data using the snowplow-media-player dbt package
-
-[The media player dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) contains a fully incremental model that transforms raw media event data into a set of derived tables based around the following data objects: media plays, media stats, media ad views, and media ads.
-
-| Derived table                             | Table description                                                                                                                                                                                                                                                      | dbt                                                                                                                                       |
-| ----------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `snowplow_media_player_base`              | This derived table summarises the key media player events and metrics of each media element on a media_id and pageview level which is considered as a base aggregation level for media interactions.                                                                   | [Docs](https://snowplow.github.io/dbt-snowplow-media-player/#!/model/model.snowplow_media_player.snowplow_media_player_base)              |
-| `snowplow_media_player_plays_by_pageview` | This view removes impressions from the '_base' table to summarise media plays on a page_view by media_id level.                                                                                                                                                        | [Docs](https://snowplow.github.io/dbt-snowplow-media-player/#!/model/model.snowplow_media_player.snowplow_media_player_plays_by_pageview) |
-| `snowplow_media_player_media_stats`       | This derived table aggregates the '_base' table to individual media_id level, calculating the main KPIs and overall video/audio metrics.                                                                                                                               | [Docs](https://snowplow.github.io/dbt-snowplow-media-player/#!/model/model.snowplow_media_player.snowplow_media_player_media_stats)       |
-| `snowplow_media_player_media_ad_views`    | This derived table aggregated individual views of ads during media playback.                                                                                                                                                                                           | [Docs](https://snowplow.github.io/dbt-snowplow-media-player/#!/model/model.snowplow_media_player.snowplow_media_player_media_ad_views)    |
-| `snowplow_media_player_media_ads`         | This derived table aggregates information about ads. Each row represents one ad played within a certain media on a certain platform. Stats about the number of ad clicks, progress reached and more are calculated as total values but also as counts of unique users. | [Docs](https://snowplow.github.io/dbt-snowplow-media-player/#!/model/model.snowplow_media_player.snowplow_media_player_media_ads)         |

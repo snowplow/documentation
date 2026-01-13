@@ -43,16 +43,16 @@ Enables tracking web performance metrics categorized as [Web Vitals](https://web
 
 Use the [Web vitals plugin for the JavaScript tracker](/docs/sources/web-trackers/tracking-events/web-vitals/index.md).
 
-#### Modeled data using the snowplow-web dbt package
+#### Modeled data using dbt
 
-To process raw web vitals event data, we have included an optional module to model in the [snowplow-web dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/core-web-vitals-module/index.md).
+To process raw web vitals event data, use the core web vitals module in the [Snowplow Unified Digital dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/core-web-vitals-module/index.md).
 
-This custom module consists of a series of dbt models which produce the following aggregated models from the raw web vitals events:
+This module produces the following aggregated tables from raw web vitals events:
 
-| Derived table                     | Table description                                                                                                                                   | dbt                                                                                                             |
-| --------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| `snowplow_web_vitals`             | Incremental table used as a base for storing core web vital events (first event per page view).                                                     | [Docs](https://snowplow.github.io/dbt-snowplow-web/#!/model/model.snowplow_web.snowplow_web_vitals)             |
-| `snowplow_web_vital_measurements` | Drop and recompute table to use for visualizations that takes core web vital measurements at the user specified percentile point (defaulted to 75). | [Docs](https://snowplow.github.io/dbt-snowplow-web/#!/model/model.snowplow_web.snowplow_web_vital_measurements) |
+| Derived table                         | Table description                                                                                                                                   | dbt                                                                                                                      |
+| ------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `snowplow_unified_web_vitals`         | Incremental table used as a base for storing core web vital events (first event per page view).                                                     | [Docs](https://snowplow.github.io/dbt-snowplow-unified/#!/model/model.snowplow_unified.snowplow_unified_web_vitals)             |
+| `snowplow_unified_vital_measurements` | Drop and recompute table to use for visualizations that takes core web vital measurements at the user specified percentile point (defaulted to 75). | [Docs](https://snowplow.github.io/dbt-snowplow-unified/#!/model/model.snowplow_unified.snowplow_unified_vital_measurements) |
 
 
 ### Performance navigation timing context entity

@@ -14,7 +14,7 @@ import SingleTableFormat from '../_single-table-format.mdx';
 
 :::info Cloud availability
 
-The BigQuery integration is available for Snowplow pipelines running on **AWS**, **Azure** and **GCP**.
+The BigQuery integration is available for Snowplow pipelines running on **AWS** and **GCP**.
 
 :::
 

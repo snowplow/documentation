@@ -119,7 +119,7 @@
   --ifm-font-color-base: hsl(var(--muted-foreground));
   --ifm-font-color-base-inverse: rgb(218, 221, 225);
   --ifm-toc-padding-horizontal: 20px;
-  --docusaurus-highlighted-code-line-bg: rgba(224, 199, 50, 0.2);
+  --docusaurus-highlighted-code-line-bg: rgba(224, 199, 50, 0.2) !important;
   --doc-sidebar-width: 330px !important;
   --ifm-tabs-padding-vertical: 8px;
   --ifm-menu-link-sublist-icon: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16px" height="16px" viewBox="0 0 24 24"><path fill="rgb(102, 56, 184)" d="M7.41 15.41L12 10.83l4.59 4.58L18 14l-6-6-6 6z"></path></svg>');

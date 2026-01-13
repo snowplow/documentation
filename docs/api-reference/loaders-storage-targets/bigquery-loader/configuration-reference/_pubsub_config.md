@@ -3,10 +3,6 @@
     <td>Required, e.g. <code>projects/myproject/subscriptions/snowplow-enriched</code>. Name of the Pub/Sub subscription with the enriched events</td>
 </tr>
 <tr>
-    <td><code>input.parallelPullFactor</code></td>
-    <td>Optional. Default value 0.5. <code>parallelPullFactor * cpu count</code> will determine the number of threads used internally by the Pub/Sub client library for fetching events</td>
-</tr>
-<tr>
     <td><code>input.durationPerAckExtension</code></td>
     <td>Optional. Default value <code>15 seconds</code>. Pub/Sub ack deadlines are extended for this duration when needed.</td>
 </tr>
@@ -60,4 +56,18 @@
 <tr>
     <td><code>output.bad.maxRecordSize</code></td>
     <td>Optional.  Default value 10000000.  Any single failed event sent to Pub/Sub should not exceed this size in bytes</td>
+</tr>
+<tr>
+    <td><code>output.retries.transientErrors.delay</code> (since 2.1.0)</td>
+    <td>
+      Optional. Default value <code>100 millis</code>.
+      backoff delay for follow-up attempts after transient errors.
+    </td>
+</tr>
+<tr>
+    <td><code>output.retries.transientErrors.attempts</code> (since 2.1.0)</td>
+    <td>
+      Optional. Default value <code>10</code>.
+      max number of attempts, after which the loader will crash and exit.
+    </td>
 </tr>

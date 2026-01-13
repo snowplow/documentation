@@ -41,8 +41,8 @@ The Java tracker provides classes for tracking different types of events. They a
 | [`Timing`](/docs/sources/java-tracker/previous-versions/java-tracker-v0-12/tracking-events/index.md#creating-a-timing-event)                                                              | ue               | unstruct                      |
 | [`PageView`](/docs/sources/java-tracker/previous-versions/java-tracker-v0-12/tracking-events/index.md#creating-a-pageview-event)                                                          | pv               | page_view                     |
 | [`Structured`](/docs/sources/java-tracker/previous-versions/java-tracker-v0-12/tracking-events/index.md#creating-a-structured-event)                                                      | se               | struct                        |
-| [`EcommerceTransaction`](/docs/sources/java-tracker/previous-versions/java-tracker-v0-12/tracking-events/index.md#creating-ecommercetransaction-and-ecommercetransactionitem-event)\*     | tr               | transaction                   |
-| [`EcommerceTransactionItem`](/docs/sources/java-tracker/previous-versions/java-tracker-v0-12/tracking-events/index.md#creating-ecommercetransaction-and-ecommercetransactionitem-event)\* | ti               | transaction_item              |
+| [`EcommerceTransaction`](/docs/sources/java-tracker/previous-versions/java-tracker-v0-12/tracking-events/index.md#creating-ecommercetransaction-and-ecommercetransactionitem-events)\*     | tr               | transaction                   |
+| [`EcommerceTransactionItem`](/docs/sources/java-tracker/previous-versions/java-tracker-v0-12/tracking-events/index.md#creating-ecommercetransaction-and-ecommercetransactionitem-events)\* | ti               | transaction_item              |
 
 Note: `EcommerceTransaction`/`EcommerceTransactionItem` are a legacy design and may be deprecated soon.
 

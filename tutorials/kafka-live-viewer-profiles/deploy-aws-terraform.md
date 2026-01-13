@@ -61,11 +61,11 @@ The applications listen for HTTP traffic on the following ports
 - Live viewer front-end - 8280
 - Snowplow Collector - 9090
 
-## Next steps
+## Next Steps
 
-- You can implement Snowplow media tracking on any [HTML5](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/html5/) or [YouTube](/docs/sources/trackers/javascript-trackers/web-tracker/tracking-events/media/youtube/) media of your choice
-- Look into the output from Kafka and extend the Live Viewer to include information on the media being watched and the user
-- Replace Amazon DynamoDB with an alternative to be cloud agnostic, e.g. Google Bigtable or MongoDB
+- You can implement Snowplow media tracking on any [HTML5](/docs/sources/web-trackers/tracking-events/media/html5/) or [YouTube](/docs/sources/web-trackers/tracking-events/media/youtube/) media of your choice
+- Look into the output from Kafka and extend the Live Viewer to include information on the media being watched and the user.
+- Replace Amazon DynamoDB with an alternative to be cloud agnostic, e.g. Google Bigtable or MongoDB.
 ---
 
 ## Other commands

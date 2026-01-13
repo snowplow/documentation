@@ -41,5 +41,5 @@ This is often more accurate than the IP-based geolocation but requires permissio
 
 ### How to track?
 
-* [Using the JavaScript tracker](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md#geolocation-context).
+* [Using the JavaScript tracker](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md).
 * Using the `TrackerConfiguration` object [on the Android tracker](https://snowplow.github.io/snowplow-android-tracker/snowplow-android-tracker/com.snowplowanalytics.snowplow.configuration/-tracker-configuration/geo-location-context.html) and [the iOS tracker](https://snowplow.github.io/snowplow-ios-tracker/documentation/snowplowtracker/trackerconfiguration/geolocationcontext(_:)).

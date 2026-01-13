@@ -62,7 +62,7 @@ To minimize latency, Signals will use the timestamp field to determine which row
 
 All attribute groups need an [attribute key](/docs/signals/concepts/index.md#attribute-keys).
 
-Signals includes four built-in attribute keys, based on commonly used identifiers from the atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) in all Snowplow events.
+Signals includes four built-in attribute keys, based on commonly used identifiers from the atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-fields) in all Snowplow events.
 
 To create a custom attribute key, navigate to **Signals** > **Attribute keys** within Console. Click the **Create attribute key** button.
 
@@ -72,7 +72,7 @@ You will need to provide:
 * A unique name
 * An optional description
 * An optional email address for the primary owner or maintainer
-* Which [atomic](/docs/fundamentals/canonical-event/index.md#atomic-fields) property you want to calculate attributes against
+* Which [atomic](/docs/fundamentals/canonical-event/index.md#common-fields) property you want to calculate attributes against
 
 To edit or delete a custom attribute key, go to the key details page and click the **Edit** button, or the `⋮` button followed by **Delete**.
 

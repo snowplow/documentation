@@ -62,4 +62,4 @@ This context entity is automatically tracked with events on mobile apps and give
 
 ### How to track?
 
-It is tracked on our [iOS and Android trackers](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md#application-context) as well as on the [React Native](/docs/sources/react-native-tracker/tracking-events/platform-and-application-context/index.md#application-context) and Flutter tracker (when used in iOS or Android).
+It is tracked on our [iOS and Android trackers](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md#application-context) as well as on the [React Native](/docs/sources/react-native-tracker/tracking-events/platform-and-application-context/index.md) and Flutter tracker (when used in iOS or Android).

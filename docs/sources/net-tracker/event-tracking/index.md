@@ -9,14 +9,14 @@ keywords: [".net event tracking", "page view tracking", "structured events"]
 
 Events supported by the .NET Tracker at a glance:
 
-| **Events**                                 | \*_Description_                                        |
-| ------------------------------------------ | ------------------------------------------------------ |
-| [`Track(PageView)`](#et-page-view)         | Track and record views of web pages                    |
-| [`Track(ScreenView)`](#et-screen-view)     | Track the user viewing a screen within the application |
-| [`Track(Structured)`](#et-structured)      | Track a Snowplow custom structured event               |
-| [`Track(Timing)`](#et-timing)              | Track a Timing with Category event                     |
-| [`Track(Unstructured)`](#et-unstructured)  | Track a Snowplow custom unstructured event             |
-| [`Track(EcommerceTransaction)`](#et-ecomm) | Track an ecommerce transaction and its items           |
+| **Events**                    | **Description**                                        |
+| ----------------------------- | ------------------------------------------------------ |
+| `Track(PageView)`             | Track and record views of web pages                    |
+| `Track(ScreenView)`           | Track the user viewing a screen within the application |
+| `Track(Structured)`           | Track a Snowplow custom structured event               |
+| `Track(Timing)`               | Track a Timing with Category event                     |
+| `Track(Unstructured)`         | Track a Snowplow custom unstructured event             |
+| `Track(EcommerceTransaction)` | Track an ecommerce transaction and its items           |
 
 ### Track page views with `Track(PageView)`
 
@@ -166,13 +166,13 @@ Use `Track(SelfDescribing)` to track a custom event which consists of a name a
 
 The arguments are as follows:
 
-| **Argument**             | **Description**                   | **Required?** | **Type**                                      |
-| ------------------------ | --------------------------------- | ------------- | --------------------------------------------- |
-| `eventData`              | The properties of the event       | Yes           | [`SelfDescribingJson`](#self-describing-json) |
-| `customContexts`         | Optional custom context           | No            | `List<IContext>`                              |
-| `deviceCreatedTimestamp` | Optional device-created-timestamp | No            | `long`                                        |
-| `trueTimestamp`          | Optional true-timestamp           | No            | `long`                                        |
-| `eventId`                | Optional custom event id          | No            | `string`                                      |
+| **Argument**             | **Description**                   | **Required?** | **Type**             |
+| ------------------------ | --------------------------------- | ------------- | -------------------- |
+| `eventData`              | The properties of the event       | Yes           | `SelfDescribingJson` |
+| `customContexts`         | Optional custom context           | No            | `List<IContext>`     |
+| `deviceCreatedTimestamp` | Optional device-created-timestamp | No            | `long`               |
+| `trueTimestamp`          | Optional true-timestamp           | No            | `long`               |
+| `eventId`                | Optional custom event id          | No            | `string`             |
 
 Example event json to track:
 

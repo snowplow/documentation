@@ -53,7 +53,7 @@ Under "Meet ANY of the following conditions" header click _**Add condition**_ 
 
 ### Setting up body for ticket event
 
-In the "Actions" section, click on _**Add action**_ button and select "Notify target" and "Snowplow Collector - Iglu POST" (the extension you set up in [Setting up a collector as a Zendesk extension](#setting-up-a-collector-as-a-zendesk-extension) section above).
+In the "Actions" section, click on _**Add action**_ button and select "Notify target" and "Snowplow Collector - Iglu POST".
 
 In the _**JSON body**_ box, paste the following:
 

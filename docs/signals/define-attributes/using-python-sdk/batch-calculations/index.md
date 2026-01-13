@@ -33,7 +33,7 @@ Once enabled, syncs begin at a fixed interval. By default, this is every 1 hour.
 
 Using existing tables in your warehouse is the more straight-forward approach, as it doesn't require any additional modeling. You'll need to [define an `ExternalBatchAttributeGroup`](/docs/signals/define-attributes/using-python-sdk/attribute-groups/warehouse-config/index.md), including a `BatchSource` warehouse configuration object.
 
-To start syncing existing tables, [publish](/docs/signals/define-attributes/using-python-sdk/index.md#publishing-and-deleting) your `ExternalBatchAttributeGroup` group to Signals.
+To start syncing existing tables, [publish](/docs/signals/connection/index.md#publishing-and-deleting) your `ExternalBatchAttributeGroup` group to Signals.
 
 ```python
 sp_signals.publish([attribute_group])

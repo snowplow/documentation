@@ -46,5 +46,5 @@ The `sessionId` from the `client_session` context, and the `id` from the `mobile
 
 The configuration is different depending on what event sources you have:
 * Web events only: the package will work out the box
-* Mobile events only: the `snowplow__enable_mobile_events` package variable must be set to `true`, and the [`webPage` context](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md#adding-predefined-contexts) must be available in your warehouse (even though it will not be populated for these mobile events)
+* Mobile events only: the `snowplow__enable_mobile_events` package variable must be set to `true`, and the [`webPage` context](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md) must be available in your warehouse (even though it will not be populated for these mobile events)
 * Both web and mobile events: the `snowplow__enable_mobile_events` package variable must be set to `true`

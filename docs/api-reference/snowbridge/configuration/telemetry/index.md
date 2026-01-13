@@ -15,7 +15,7 @@ To enable telemetry:
 # Optional. Set to true to disable telemetry.
 disable_telemetry = false
 
-# Optional. See here for more information: https://docs.snowplow.io/docs/get-started/self-hosted/telemetry/#how-can-i-help
+# Optional. An identifier to associate with telemetry data.
 user_provided_id = "elmer.fudd@acme.com"
 ```
 

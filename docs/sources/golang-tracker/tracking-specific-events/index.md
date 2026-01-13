@@ -9,14 +9,14 @@ sidebar_position: 40
 
 Tracking methods supported by the Golang Tracker at a glance:
 
-| **Function**                                    | **Description**                                        |
-| ----------------------------------------------- | ------------------------------------------------------ |
-| [`TrackSelfDescribingEvent()`](#unstruct-event) | Track a Snowplow custom unstructured event             |
-| [`TrackScreenView()`](#screen-view)             | Track the user viewing a screen within the application |
-| [`TrackPageView()`](#page-view)                 | Track and record views of web pages.                   |
-| [`TrackEcommerceTransaction()`](#ecommerce)     | Track an ecommerce transaction                         |
-| [`TrackStructEvent()`](#struct-event)           | Track a Snowplow custom structured event               |
-| [`TrackTiming()`](#timing-event)                | Track a timing event                                   |
+| **Function**                                                                                           | **Description**                                        |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------ |
+| [`TrackSelfDescribingEvent()`](#track-selfdescribingunstructured-events-with-trackselfdescribingevent) | Track a Snowplow custom unstructured event             |
+| [`TrackScreenView()`](#track-screen-views-with-trackscreenview)                                        | Track the user viewing a screen within the application |
+| [`TrackPageView()`](#track-pageviews-with-trackpageview)                                               | Track and record views of web pages.                   |
+| [`TrackEcommerceTransaction()`](#track-ecommerce-transactions-with-trackecommercetransaction)          | Track an ecommerce transaction                         |
+| [`TrackStructEvent()`](#track-structured-events-with-trackstructevent)                                 | Track a Snowplow custom structured event               |
+| [`TrackTiming()`](#track-timing-events-with-tracktiming)                                               | Track a timing event                                   |
 
 :::note
 

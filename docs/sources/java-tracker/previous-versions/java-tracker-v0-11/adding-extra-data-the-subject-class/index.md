@@ -11,17 +11,17 @@ You may have additional information about your application's environment, curren
 
 The Subject class has a set of `set...()` methods to attach extra data relating to the user to all tracked events:
 
-- [`setUserId`](#set-user-id)
-- [`setScreenResolution`](#set-screen-resolution)
-- [`setViewport`](#set-viewport-dimensions)
-- [`setColorDepth`](#set-color-depth)
-- [`setTimezone`](#set-timezone)
-- [`setLanguage`](#set-lang)
-- [`setIpAddress`](#set-ip-address)
-- [`setUseragent`](#set-useragent)
-- [`setNetworkUserId`](#set-network-user-id)
-- [`setDomainUserId`](#set-domain-user-id)
-- [`setDomainSessionId`](#set-domain-session-id) (Java tracker v0.11 onwards)
+- `setUserId`
+- `setScreenResolution`
+- `setViewport`
+- `setColorDepth`
+- `setTimezone`
+- `setLanguage`
+- `setIpAddress`
+- `setUseragent`
+- `setNetworkUserId`
+- `setDomainUserId`
+- `setDomainSessionId` (Java tracker v0.11 onwards)
 
 Here are some examples:
 

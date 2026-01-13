@@ -65,7 +65,7 @@ The event has no properties.
 
 To track page activity on Web, see the [activity tracking documentation](/docs/sources/web-trackers/tracking-events/activity-page-pings/index.md).
 
-To track screen engagement on mobile, see the [screen engagement documentation](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md#screen-engagemement-tracking).
+To track screen engagement on mobile, see the [screen engagement documentation](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md#screen-engagement-tracking).
 
 ## Use in modeling
 

@@ -23,7 +23,7 @@ You can attach any of these as additional arguments to the `track_x_event` metho
 
 ## Event context
 
-Event context is an incredibly powerful aspect of Snowplow tracking, which allows you to create very rich data. It is based on the same [self-describing JSON schemas](/docs/fundamentals/schemas/index.md) as the [self-describing events](/docs/sources/ruby-tracker/tracking-events/index.md#self-describing-event). Using event context, you can add any details you like to your events, as long as you can describe them in a self-describing JSON schema.
+Event context is an incredibly powerful aspect of Snowplow tracking, which allows you to create very rich data. It is based on the same [self-describing JSON schemas](/docs/fundamentals/schemas/index.md) as the [self-describing events](/docs/sources/ruby-tracker/tracking-events/index.md). Using event context, you can add any details you like to your events, as long as you can describe them in a self-describing JSON schema.
 
 Each schema will describe a single "entity". All of an event's entities together form the event context. The event context will be sent as one field of the event, finally ending up in one column (`contexts`) in your data storage. There is no limit to how many entities can be attached to one event.
 

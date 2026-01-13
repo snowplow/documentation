@@ -14,9 +14,9 @@ For some Event Specification features, such as event counts, it is required that
 
 ## Installing Snowtype
 
-After having set up a [Console API key](https://docs.snowplow.io/docs/collecting-data/code-generation/using-the-cli/#authenticating-with-the-console) you can install Snowtype on this project by switching to the project root directory and running `npm install @snowplow/snowtype@latest --save-dev`.
+After having set up a [Console API key](/docs/data-product-studio/snowtype/using-the-cli/#authenticating-with-the-console) you can install Snowtype on this project by switching to the project root directory and running `npm install @snowplow/snowtype@latest --save-dev`.
 
-Since this is a project without previous Snowtype installation, we need to go through the [init flow](https://docs.snowplow.io/docs/collecting-data/code-generation/using-the-cli/#initializing-snowtype-for-your-project).
+Since this is a project without previous Snowtype installation, we need to go through the [init flow](/docs/data-product-studio/snowtype/using-the-cli/#initializing-snowtype-for-your-project).
 
 To do that, you can go to the Data Product page and click on the `Implement tracking` button. There you can copy the second code command which relates to initializing a new Snowtype project.
 

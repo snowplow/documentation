@@ -19,7 +19,7 @@ Running the models on data lakes or lakehouses (using external tables in a wareh
 :::
 
 
-If you are using the [lake loaders](/docs/destinations/warehouses-lakes/index.md#data-lake-loaders) to load your data into a lake storage option, it may be possible to use our data models. In general in this section of the docs we are not going to detail which warehouses support which file formats, or how to set up the respective tables in each warehouse - please see the docs for your appropriate warehouse to see what file formats they support.
+If you are using the [lake loaders](/docs/api-reference/loaders-storage-targets/lake-loader/index.md) to load your data into a lake storage option, it may be possible to use our data models. In general in this section of the docs we are not going to detail which warehouses support which file formats, or how to set up the respective tables in each warehouse - please see the docs for your appropriate warehouse to see what file formats they support.
 
 ## Databricks
 At time of writing, `delta` is the preferred file format for Databricks [external tables](https://docs.databricks.com/en/sql/language-manual/sql-ref-external-tables.html). If you create an external table from this lake format in Databricks, you should be able to run the models without any further changes required by simply pointing the model at this table.

@@ -65,7 +65,7 @@ Included event specifications:
 ## Media Web
 
 This Data Product template contains a full set of media tracking interactions to measure video or audio data.
-Tracked using the [Snowplow Media plugin](https://docs.snowplow.io/docs/sources/web-trackers/tracking-events/media/snowplow/).
+Tracked using the [Snowplow Media plugin](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md).
 
 Included event specifications:
 

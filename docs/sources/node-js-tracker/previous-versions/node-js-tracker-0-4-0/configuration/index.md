@@ -13,17 +13,17 @@ You may have additional information about your application's environment, curren
 
 The `tracker` instance has a set of `set...()` methods to attach extra data to all tracked events:
 
-- [`setPlatform()`](#set-platform)
-- [`setUserId()`](#set-user-id)
-- [`setDomainUserId()`](#set-domain-user-id)
-- [`setNetworkUserId()`](http://set-network-user-id)
-- [`setScreenResolution()`](#set-screen-resolution)
-- [`setViewport()`](#set-viewport)
-- [`setColorDepth()`](#set-color-depth)
-- [`setTimezone()`](#set-timezone)
-- [`setLang()`](#set-lang)
-- `[setIpAddress()](#set-ip-address)`
-- `[setUseragent()](#set-useragent)`
+- `setPlatform()`
+- `setUserId()`
+- `setDomainUserId()`
+- `setNetworkUserId()`
+- `setScreenResolution()`
+- `setViewport()`
+- `setColorDepth()`
+- `setTimezone()`
+- `setLang()`
+- `setIpAddress()`
+- `setUseragent()`
 
 The full listing of available functions on the `Tracker` interface can be found in our [API Documentation](https://snowplow.github.io/snowplow-nodejs-tracker/interfaces/_tracker_.tracker.html).
 
@@ -43,7 +43,7 @@ t.setPlatform("mob");
 
 If the platform is not set manually, it defaults to `'srv'` (for server).
 
-For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/events/index.md#application-parameters).
+For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/fundamentals/canonical-event/index.md#application-fields).
 
 ### Set user ID with `setUserId()`
 

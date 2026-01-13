@@ -19,7 +19,7 @@ See [our explanation](/docs/fundamentals/schemas/index.md) on what schemas are f
 
 :::
 
-To track an event with a custom schema, you would need code like this (using the [Browser tracker](/docs/sources/web-trackers/tracking-events/index.md#tracking-custom-self-describing-events) as an example):
+To track an event with a custom schema, you would need code like this (using the [Browser tracker](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md) as an example):
 
 ```js
 import { trackSelfDescribingEvent } from '@snowplow/browser-tracker';

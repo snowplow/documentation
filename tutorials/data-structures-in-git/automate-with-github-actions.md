@@ -10,7 +10,7 @@ We'll not go into the details of creating github repositories and initial commit
 
 ## Publish to develop workflow
 
-We would like pushes to our `develop` branch to be automatically published to our [development](https://docs.snowplow.io/docs/data-product-studio/data-quality) environment. Github workflows can be [triggered](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/triggering-a-workflow) by all kinds of repository events. The one we are interested in here:
+We would like pushes to our `develop` branch to be automatically published to our [development](/docs/testing/) environment. Github workflows can be [triggered](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/triggering-a-workflow) by all kinds of repository events. The one we are interested in here:
 ```yml
 on:
   push:

@@ -30,7 +30,7 @@ The following events are "baked in":
 * [Page pings](/docs/events/ootb-data/page-activity-tracking/index.md)
 * [Structured events](/docs/events/custom-events/index.md#structured-events)
 
-In the data warehouse, any event-specific information will be in standard columns in the Snowplow `events` table. You can find those listed [here](/docs/fundamentals/canonical-event/index.md#event-specific-fields).
+In the data warehouse, any event-specific information will be in standard columns in the Snowplow `events` table. You can find those listed [here](/docs/fundamentals/canonical-event/index.md#baked-in-event-fields).
 
 Find out more about how to track and model page view and page ping events [here](/docs/events/ootb-data/page-activity-tracking/index.md).
 

@@ -89,4 +89,4 @@ Tracker tracker = new Tracker.TrackerBuilder(emitter, "AF003", "sp")
                     .build();
 ```
 
-For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/events/index.md#common-parameters).
+For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/fundamentals/canonical-event/index.md#common-fields).

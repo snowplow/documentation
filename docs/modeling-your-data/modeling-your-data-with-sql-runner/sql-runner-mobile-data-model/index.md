@@ -97,8 +97,6 @@ Optional modules are disabled by default. Please enable where appropriate by set
 
 #### Running the model
 
-[Locally](#tablocally)[In orchestration](#tabin-orchestration)
-
 ##### Authentication
 
 1. Set database password as an environmental variable.

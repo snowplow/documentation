@@ -21,8 +21,8 @@ Upstream of the RDB loader, [S3 loader](/docs/api-reference/loaders-storage-targ
 ![](images/architecture.png)
 
 1. Enriched files copied from _enriched/_ to _archive/enriched/_ with S3DistCp on EMR.
-2. Shredder is run as an EMR step. It reads the directory from step 1. 
-    Step 1 and 2 are orchestrated by Dataflow Runner (or any other orchestration tool).  
+2. Shredder is run as an EMR step. It reads the directory from step 1.
+    Step 1 and 2 are orchestrated by Dataflow Runner (or any other orchestration tool).
     Shredder is stateless. It knows which data to shred by comparing directories in _archive/enriched/_ and _shredded/_.
 3. Shredder writes shredded data to S3.
 4. When the writing is done, it sends the metadata about shredding data to SQS with [this schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.storage/shredding_complete/jsonschema/1-0-0).
@@ -36,12 +36,12 @@ Steps to get RDB loader up and running:
 
 1. [Configure shredder and loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/previous-versions/snowplow-rdb-loader/configuration-reference/index.md)
 2. Create SQS FIFO queue. Content-based deduplication needs to be enabled.
-3. Configure [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) with the schemas  
+3. Configure [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) with the schemas
     **IMPORTANT**: do not forget to add `/api` at the end of the uri in the resolver configuration for the loader
 4. Create `atomic.events` table.
-5. Run RDB Loader as long-running process with access to message queue:  
+5. Run RDB Loader as long-running process with access to message queue:
     `docker run snowplow/snowplow-rdb-loader:1.1.0 --config config.hocon.base64 --iglu-config resolver.json.base64`
-6. [Schedule EMR jobs with S3DistCp and Shredder](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/previous-versions/snowplow-rdb-loader/configuration-reference/index.md#dataflow-runner)
+6. [Schedule EMR jobs with S3DistCp and Shredder](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/previous-versions/snowplow-rdb-loader/configuration-reference/index.md)
 
 ## 4. Shredder stateless algorithm
 

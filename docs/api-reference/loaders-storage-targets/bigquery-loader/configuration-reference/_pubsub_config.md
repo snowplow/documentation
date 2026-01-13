@@ -4,7 +4,7 @@
 </tr>
 <tr>
     <td><code>input.durationPerAckExtension</code></td>
-    <td>Optional. Default value <code>15 seconds</code> (since version 2.1.0; prior to that, <code>60 seconds</code>). Pub/Sub ack deadlines are extended for this duration when needed.</td>
+    <td>Optional. Default value <code>15 seconds</code>. Pub/Sub ack deadlines are extended for this duration when needed.</td>
 </tr>
 <tr>
     <td><code>input.minRemainingAckDeadline</code></td>

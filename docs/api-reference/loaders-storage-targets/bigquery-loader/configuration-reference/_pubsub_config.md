@@ -4,7 +4,7 @@
 </tr>
 <tr>
     <td><code>input.durationPerAckExtension</code></td>
-    <td>Optional. Default value <code>15 seconds</code>. Pub/Sub ack deadlines are extended for this duration when needed.</td>
+    <td>Optional. Default value <code>15 seconds</code> (changed from <code>60 seconds</code> in 2.1.0). Pub/Sub ack deadlines are extended for this duration when needed.</td>
 </tr>
 <tr>
     <td><code>input.minRemainingAckDeadline</code></td>
@@ -31,14 +31,14 @@
     <td><code>input.retries.transientErrors.delay</code> (since 2.1.0)</td>
     <td>
       Optional. Default value <code>100 millis</code>.
-      backoff delay for follow-up attempts after transient errors.
+      Backoff delay for follow-up attempts after transient errors.
     </td>
 </tr>
 <tr>
     <td><code>input.retries.transientErrors.attempts</code> (since 2.1.0)</td>
     <td>
       Optional. Default value <code>10</code>.
-      max number of attempts, after which the loader will crash and exit.
+      Maximum number of attempts, after which the loader will crash and exit.
     </td>
 </tr>
 <tr>
@@ -61,13 +61,13 @@
     <td><code>output.retries.transientErrors.delay</code> (since 2.1.0)</td>
     <td>
       Optional. Default value <code>100 millis</code>.
-      backoff delay for follow-up attempts after transient errors.
+      Backoff delay for follow-up attempts after transient errors.
     </td>
 </tr>
 <tr>
     <td><code>output.retries.transientErrors.attempts</code> (since 2.1.0)</td>
     <td>
       Optional. Default value <code>10</code>.
-      max number of attempts, after which the loader will crash and exit.
+      Maximum number of attempts, after which the loader will crash and exit.
     </td>
 </tr>

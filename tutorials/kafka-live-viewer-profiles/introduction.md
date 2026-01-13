@@ -34,7 +34,7 @@ The solution comprises several interconnected components:
   - Code available in [tracker-frontend](https://github.com/snowplow-industry-solutions/kafka-live-viewer-profiles/tree/main/tracker-frontend) folder in GitHub
 
 - **Snowplow Collector**:
-  - Collects and forwards events via [Stream Enrich](/docs/fundamentals) and Kinesis to [Snowbridge](/docs/destinations/forwarding-events/snowbridge)
+  - Collects and forwards events via [Stream Enrich](/docs/fundamentals) and Kinesis to [Snowbridge](/docs/api-reference/snowbridge)
 
 - **Snowplow Snowbridge**:
   - Publishes events to Kafka for the Live Viewer back-end to consume

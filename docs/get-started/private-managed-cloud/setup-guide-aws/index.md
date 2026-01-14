@@ -8,7 +8,7 @@ description: "Set up Snowplow CDI Private Managed Cloud on AWS with sub-account 
 keywords: ["AWS setup", "Private Managed Cloud", "AWS sub-account", "IAM roles", "cross-account access"]
 ---
 
-To set up Snowplow, follow the ['Getting Started' steps in the Snowplow Console](https://console.snowplowanalytics.com/getting-started). You will receive an account as part of your onboarding.
+To set up Snowplow, follow the ['Getting Started' steps in the Snowplow Console](https://console.snowplowanalytics.com). You will receive an account as part of your onboarding.
 
 ## What are the steps
 

@@ -27,7 +27,7 @@ GTM SS with Snowplow can be setup in two different configurations.
 
 Use GTM SS to relay enriched events to destinations. Events are sent to GTM SS via Snowbridge after being processed by your Snowplow pipeline.
 
-* For Snowplow CDI, you can [request setup](https://console.snowplowanalytics.com/destinations/catalog) through Console
+* For Snowplow CDI, you can [request setup](https://console.snowplowanalytics.com/destinations) through Console
 * For Snowplow Self-Hosted, see [Snowbridge](/docs/api-reference/snowbridge/index.md)
 
 :::note

@@ -89,7 +89,7 @@ CDI Private Managed Cloud can automatically generate the snippet for you. Go to 
   </TabItem>
   <TabItem value="cloud" label="CDI Cloud">
 
-You can find the pre-generated snippet in the [Getting started](https://console.snowplowanalytics.com/environments/start-tracking-events?fromDocs) section.
+You can find the pre-generated snippet in the [Getting started](https://console.snowplowanalytics.com/) section.
 
   </TabItem>
   <TabItem value="self-hosted" label="Snowplow Self-Hosted">

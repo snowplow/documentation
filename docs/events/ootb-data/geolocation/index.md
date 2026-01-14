@@ -9,9 +9,9 @@ import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
 Snowplow provides several ways to capture location and timezone information:
 
-- **IP-based geolocation**: the IP Lookup enrichment adds location data to the `geo_` atomic event properties based on the user's IP address.
-- **Device geolocation**: client-side trackers can access GPS coordinates from the device and attach them as an entity. This requires user permission but provides more accurate location data.
-- **Timezone**: most trackers can capture the device timezone and add it to the `os_timezone` atomic event property.
+- IP-based geolocation: the IP Lookup enrichment adds location data to the `geo_` atomic event properties based on the user's IP address.
+- Device geolocation: client-side trackers can access GPS coordinates from the device and attach them as an entity. This requires user permission but provides more accurate location data.
+- Timezone: most trackers can capture the device timezone and add it to the `os_timezone` atomic event property.
 
 ## Location atomic event properties
 

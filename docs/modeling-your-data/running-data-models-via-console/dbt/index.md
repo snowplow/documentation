@@ -155,6 +155,10 @@ profile_name:
 </TabItem>
 </Tabs>
 
+:::info
+The warehouse password should be sent by [secure credential sharing form from Snowplow Console](https://console.snowplowanalytics.com/contact-us) in order to set the environment variables.
+:::
+
 ### Required Privileges
 
 ```mdx-code-block

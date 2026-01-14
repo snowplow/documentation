@@ -23,7 +23,7 @@ The Snowplow dbt packages don't support the basic consent events and entities. Y
 
 ## Tracker support
 
-This table shows the support for consent tracking across the main client-side Snowplow [tracker SDKs](/docs/sources/index.md).
+This table shows the support for consent tracking across the main client-side Snowplow [tracker SDKs](/docs/sources/index.md).  The server-side trackers don't include consent tracking APIs.
 
 Older versions of the web trackers provided the `browser-plugin-consent` plugin for basic consent tracking. It was deprecated in version 4 in favor of `browser-plugin-enhanced-consent`.
 

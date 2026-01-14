@@ -40,7 +40,7 @@ The newer v2 implementation has many more features than v1, including:
 
 ## Tracker support
 
-This table shows the support for media tracking across the main client-side Snowplow tracker SDKs. The server-side trackers don't include media tracking APIs.
+This table shows the support for media tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md). The server-side trackers don't include media tracking APIs.
 
 Auto-tracking means that the tracker can subscribe to and track events from a registered media player, without you needing to manually track each event.
 

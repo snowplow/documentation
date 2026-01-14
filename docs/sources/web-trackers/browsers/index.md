@@ -27,7 +27,7 @@ Add an entity to every tracked event that records information about the user's b
 The [browser](https://github.com/snowplow/iglu-central/tree/master/schemas/com.snowplowanalytics.snowplow/browser_context/jsonschema) context entity consists of the following properties:
 
 | Attribute | Description | Required? |
-| : ------: | :--------: | :-----: |
+| :------: | :--------: | :-----: |
 | `viewport` | Viewport dimensions of the browser. Arrives in the form of WidthxHeight e.g. 1200x900. | Yes  |
 | `documentSize` | Document dimensions. Arrives in the form of WidthxHeight e.g. 1200x900. | Yes  |
 | `resolution` | Device native resolution. Arrives in the form of WidthxHeight e.g. 1200x900. | Yes |

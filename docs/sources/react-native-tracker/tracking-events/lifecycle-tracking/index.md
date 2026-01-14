@@ -1,5 +1,5 @@
 ---
-title: "Track application lifecycle changeswith the React Native tracker"
+title: "Track application lifecycle changes with the React Native tracker"
 sidebar_label: "Application lifecycle"
 date: "2021-08-06"
 sidebar_position: 30

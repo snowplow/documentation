@@ -12,15 +12,12 @@ import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 Social media interaction tracking captures how users engage with social widgets embedded on your website, such as like buttons, share buttons, and tweet buttons.
 
 Use social interaction tracking to:
-
 - Measure how often content is shared on social platforms
 - Identify which social networks drive the most engagement
 - Understand which content resonates with users enough to share
 - Track the performance of social sharing features
 
-## Social interaction event
-
-The social interaction event captures the social network, the action performed (like, share, tweet), and optionally the target content.
+The social interaction event captures the social network, the action performed, and optionally the target content.
 
 <SchemaProperties
   overview={{event: true, web: true, mobile: false, automatic: false}}
@@ -31,17 +28,15 @@ The social interaction event captures the social network, the action performed (
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for a social interaction event", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "social_interaction", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "action": { "type": "string", "description": "The social action performed, e.g. like, retweet, share" }, "network": { "type": "string", "description": "The social network, e.g. facebook, twitter" }, "target": { "type": "string", "description": "The object of the social action, e.g. a page ID or product ID" } }, "required": ["action", "network"], "additionalProperties": false }} />
 
-### Tracker support
+## Tracker support
 
-This table shows the support for social interaction tracking across the main [Snowplow tracker SDKs](/docs/sources/index.md).
+This table shows the support for social interaction tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md).
 
-| Tracker                                                                    | Supported | Since version | Auto-tracking |
-| -------------------------------------------------------------------------- | --------- | ------------- | ------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/social-media/index.md)    | ✅         | 2.0.0         | ❌             |
-| iOS                                                                        | ❌         |               |               |
-| Android                                                                    | ❌         |               |               |
-| React Native                                                               | ❌         |               |               |
-| Flutter                                                                    | ❌         |               |               |
-| Roku                                                                       | ❌         |               |               |
-
-Social interaction events require manual tracking. You need to implement event handlers for your social widgets that call the tracking method when users interact with them.
+| Tracker                                                                 | Supported | Since version | Auto-tracking | Notes                         |
+| ----------------------------------------------------------------------- | --------- | ------------- | ------------- | ----------------------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/social-media/index.md) | ✅         | 3.0.0         | ❌             | Requires site tracking plugin |
+| iOS                                                                     | ❌         |               |               |                               |
+| Android                                                                 | ❌         |               |               |                               |
+| React Native                                                            | ❌         |               |               |                               |
+| Flutter                                                                 | ❌         |               |               |                               |
+| Roku                                                                    | ❌         |               |               |                               |

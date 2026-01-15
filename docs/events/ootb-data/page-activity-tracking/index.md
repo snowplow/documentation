@@ -13,7 +13,7 @@ Snowplow provides implementations for web and mobile platforms:
 * Page ping events on web
 * Screen summary entity on mobile
 
-Both page and screen activity tracking are included in the [Snowplow Unified Digital package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) (starting from version 0.2.0) to calculate engagement metrics.
+Both page and screen activity tracking are included in the [Snowplow Unified Digital package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) (starting from version 0.2.0) to calculate engagement metrics. The legacy [Web package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/index.md) handles page pings as well.
 
 ## Page engagement
 

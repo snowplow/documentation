@@ -35,17 +35,18 @@ This table shows the support for timezone tracking across the main [Snowplow tra
 | [React Native](/docs/sources/react-native-tracker/client-side-properties/index.md)   | ✅         | 0.1.0         |
 | [Flutter](/docs/sources/flutter-tracker/initialization-and-configuration/index.md)   | ✅         | 0.1.0         |
 | [Roku](/docs/sources/roku-tracker/adding-data/index.md)                              | ✅         | 0.1.0         |
-| [C++](/docs/sources/c-tracker/adding-extra-data-the-subject-class/index.md)          | ✅         | 0.1.0         |
-| [Go](/docs/sources/golang-tracker/adding-extra-data-the-subject-class/index.md)      | ✅         | 0.1.0         |
-| [Java](/docs/sources/java-tracker/tracking-specific-client-side-properties/index.md) | ✅         | 0.4.0         |
-| [.NET](/docs/sources/net-tracker/subject/index.md)                                   | ✅         | 0.1.0         |
 | [Node.js](/docs/sources/node-js-tracker/configuration/index.md)                      | ✅         | 0.8.0         |
-| [PHP](/docs/sources/php-tracker/subjects/index.md)                                   | ✅         | 0.1.0         |
+| [Golang](/docs/sources/golang-tracker/adding-extra-data-the-subject-class/index.md)  | ✅         | 0.1.0         |
+| [.NET](/docs/sources/net-tracker/subject/index.md)                                   | ✅         | 0.1.0         |
+| [Java](/docs/sources/java-tracker/tracking-specific-client-side-properties/index.md) | ✅         | 0.4.0         |
 | [Python](/docs/sources/python-tracker/subject/index.md)                              | ✅         | 0.4.0         |
+| [Scala](/docs/sources/scala-tracker/subject-methods/index.md)                        | ✅         | 0.1.0         |
 | [Ruby](/docs/sources/ruby-tracker/adding-data-events/index.md)                       | ✅         | 0.3.0         |
 | [Rust](/docs/sources/rust-tracker/initialization-and-configuration/index.md)         | ✅         | 0.1.0         |
-| [Scala](/docs/sources/scala-tracker/subject-methods/index.md)                        | ✅         | 0.1.0         |
+| [PHP](/docs/sources/php-tracker/subjects/index.md)                                   | ✅         | 0.1.0         |
+| [C++](/docs/sources/c-tracker/adding-extra-data-the-subject-class/index.md)          | ✅         | 0.1.0         |
 | [Unity](/docs/sources/unity-tracker/subject/index.md)                                | ✅         | 0.1.0         |
+| Lua                                                                                  | ❌         |               |
 
 ## Geolocation entity
 

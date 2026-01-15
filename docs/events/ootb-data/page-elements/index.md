@@ -33,16 +33,18 @@ Button click tracking automatically captures clicks on `<button>` and `<input ty
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for a button click event", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "button_click", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "label": { "type": "string", "description": "The text on the button, or a user-provided override" }, "id": { "type": "string", "description": "The ID of the button" }, "classes": { "type": "array", "items": { "type": "string" }, "description": "The classes of the button" }, "name": { "type": "string", "description": "The name attribute of the button" } }, "required": ["label"], "additionalProperties": false }} />
 
-### Tracker support for button clicks
+### Tracker support
 
-| Tracker                                                                      | Supported | Since version | Auto-tracking |
-| ---------------------------------------------------------------------------- | --------- | ------------- | ------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/button-click/index.md)      | ✅         | 3.18.0        | ✅             |
-| iOS                                                                          | ❌         |               |               |
-| Android                                                                      | ❌         |               |               |
-| React Native                                                                 | ❌         |               |               |
-| Flutter                                                                      | ❌         |               |               |
-| Roku                                                                         | ❌         |               |               |
+This table shows the support for button click tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md).
+
+| Tracker                                                                 | Supported | Since version | Auto-tracking |
+| ----------------------------------------------------------------------- | --------- | ------------- | ------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/button-click/index.md) | ✅         | 3.18.0        | ✅             |
+| iOS                                                                     | ❌         |               |               |
+| Android                                                                 | ❌         |               |               |
+| React Native                                                            | ❌         |               |               |
+| Flutter                                                                 | ❌         |               |               |
+| Roku                                                                    | ❌         |               |               |
 
 ## Form interactions
 
@@ -96,26 +98,25 @@ Triggered when a user submits a form. Contains data about all form fields.
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for a form submission event", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "submit_form", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "formId": { "type": "string", "description": "The ID of the form" }, "formClasses": { "type": "array", "items": { "type": "string" }, "description": "The classes of the form" }, "elements": { "type": "array", "items": { "type": "object", "properties": { "name": { "type": "string" }, "value": { "type": ["string", "null"] }, "nodeName": { "type": "string", "enum": ["INPUT", "TEXTAREA", "SELECT"] }, "type": { "type": ["string", "null"] } }, "required": ["name", "nodeName"], "additionalProperties": false }, "description": "The form elements and their values" } }, "required": ["formId", "formClasses", "elements"], "additionalProperties": false }} />
 
-### Tracker support for form tracking
+### Tracker support
 
-| Tracker                                                                      | Supported | Since version | Auto-tracking |
-| ---------------------------------------------------------------------------- | --------- | ------------- | ------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/form-tracking/index.md)     | ✅         | 2.0.0         | ✅             |
-| iOS                                                                          | ❌         |               |               |
-| Android                                                                      | ❌         |               |               |
-| React Native                                                                 | ❌         |               |               |
-| Flutter                                                                      | ❌         |               |               |
-| Roku                                                                         | ❌         |               |               |
+This table shows the support for form tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md).
 
-:::note
-Password fields are never tracked by form tracking for security reasons.
-:::
+| Tracker                                                                  | Supported | Since version                       | Auto-tracking | Notes                                                                                             |
+| ------------------------------------------------------------------------ | --------- | ----------------------------------- | ------------- | ------------------------------------------------------------------------------------------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/form-tracking/index.md) | ✅         | 2.1.0 (directly), 3.0.0 (as plugin) | ✅             | Requires form tracking plugin                                                                     |
+| iOS                                                                      | ❌         |                                     |               |                                                                                                   |
+| Android                                                                  | ❌         |                                     |               |                                                                                                   |
+| React Native                                                             | ❌         |                                     |               |                                                                                                   |
+| Flutter                                                                  | ❌         |                                     |               |                                                                                                   |
+| Roku                                                                     | ❌         |                                     |               |                                                                                                   |
+| Python                                                                   | ❌         |                                     |               | The Python tracker has deprecated form tracking APIs; use custom events with form schemas instead |
 
-## Element visibility and lifecycle
+## Page element visibility and lifecycle
 
-Element tracking enables declarative tracking of page elements as they are created, become visible, leave view, or are removed from the page.
+Element tracking enables declarative tracking of page elements as they are created, become visible, leave view, or are removed from the page. It's only available for web.
 
-### Element events
+### Available events
 
 The element tracking plugin generates four event types:
 
@@ -124,16 +125,50 @@ The element tracking plugin generates four event types:
 - `obscure_element`: when a matching element scrolls out of view
 - `destroy_element`: when a matching element is removed from the page
 
+Create element:
+
 <SchemaProperties
   overview={{event: true, web: true, mobile: false, automatic: true}}
   example={{
     element_name: "newsletter signup"
   }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for element lifecycle events", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "expose_element", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "element_name": { "type": "string", "description": "The name of the element rule that triggered this event" } }, "required": ["element_name"], "additionalProperties": false }} />
+  schema={{"description": "Event that fires when an element matching a named configuration is detected as existing in or being added to a document.","properties": {  "element_name": {    "description": "The name of the element that was created. Should match the element name field in entities that describe this particular element.",    "type": "string",    "maxLength": 255  }},"additionalProperties": false,"type": "object","required": ["element_name"],"self": {  "vendor": "com.snowplowanalytics.snowplow",  "name": "create_element",  "format": "jsonschema",  "version": "1-0-0"},"$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#"
+}
+} />
 
-### Element entity
+Expose element:
 
-All element events include an element entity with information about the tracked element.
+<SchemaProperties
+  overview={{event: true, web: true, mobile: false, automatic: true}}
+  example={{
+    element_name: "newsletter signup"
+  }}
+  schema={{"description": "Event that fires when an element matching a named configuration is detected as intersecting with the viewport, becoming visible to the user.","properties": {  "element_name": {    "description": "The name of the element that was exposed. Should match the element name field in entities that describe this particular element.",    "type": "string",    "maxLength": 255  }},"additionalProperties": false,"type": "object","required": ["element_name"],"self": {  "vendor": "com.snowplowanalytics.snowplow",  "name": "expose_element",  "format": "jsonschema",  "version": "1-0-0"},"$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#"
+}} />
+
+Obscure element:
+
+<SchemaProperties
+  overview={{event: true, web: true, mobile: false, automatic: true}}
+  example={{
+    element_name: "newsletter signup"
+  }}
+  schema={{"description": "Event that fires when an element matching a named configuration is detected as becoming hidden from a user or moving out of the viewport.","properties": {  "element_name": {    "description": "The name of the element that was obscured. Should match the element name field in entities that describe this particular element.",    "type": "string",    "maxLength": 255  }},"additionalProperties": false,"type": "object","required": ["element_name"],"self": {  "vendor": "com.snowplowanalytics.snowplow",  "name": "obscure_element",  "format": "jsonschema",  "version": "1-0-0"},"$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#"
+}} />
+
+Destroy element:
+
+<SchemaProperties
+  overview={{event: true, web: true, mobile: false, automatic: true}}
+  example={{
+    element_name: "newsletter signup"
+  }}
+  schema={{"description": "Event that fires when an element matching a named configuration is detected as being removed from a document.","properties": {  "element_name": {    "description": "The name of the element that was destroyed. Should match the element name field in entities that describe this particular element.",    "type": "string",    "maxLength": 255  }},"additionalProperties": false,"type": "object","required": ["element_name"],"self": {  "vendor": "com.snowplowanalytics.snowplow",  "name": "destroy_element",  "format": "jsonschema",  "version": "1-0-0"},"$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#"
+}} />
+
+### Available entities
+
+All element events include an `element` entity with information about the tracked element.
 
 <SchemaProperties
   overview={{event: false, web: true, mobile: false, automatic: true}}
@@ -152,9 +187,7 @@ All element events include an element entity with information about the tracked 
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for element context", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "element", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "element_name": { "type": "string", "description": "The name of the element" }, "width": { "type": "number", "description": "The width of the element" }, "height": { "type": "number", "description": "The height of the element" }, "position_x": { "type": "number", "description": "The x position of the element in the viewport" }, "position_y": { "type": "number", "description": "The y position of the element in the viewport" }, "doc_position_x": { "type": "number", "description": "The x position of the element in the document" }, "doc_position_y": { "type": "number", "description": "The y position of the element in the document" }, "element_index": { "type": "integer", "description": "The index of this element among all matching elements" }, "element_matches": { "type": "integer", "description": "The total number of elements matching the rule" }, "originating_page_view": { "type": "string", "description": "The page view ID when the element was first observed" }, "attributes": { "type": "array", "description": "Custom attributes extracted from the element" } }, "required": ["element_name"], "additionalProperties": false }} />
 
-### Element statistics entity
-
-You can optionally attach element statistics to any event type, providing information about element visibility and scroll depth.
+You can optionally configure the tracker to attach element statistics to any event type, providing information about element visibility and scroll depth, using the `element_statistics` entity.
 
 <SchemaProperties
   overview={{event: false, web: true, mobile: false, automatic: true}}
@@ -175,13 +208,15 @@ You can optionally attach element statistics to any event type, providing inform
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for element statistics", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "element_statistics", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "element_name": { "type": "string" }, "element_index": { "type": "integer" }, "element_matches": { "type": "integer" }, "current_state": { "type": "string" }, "min_size": { "type": "string" }, "current_size": { "type": "string" }, "max_size": { "type": "string" }, "y_depth_ratio": { "type": "number" }, "max_y_depth_ratio": { "type": "number" }, "max_y_depth": { "type": "string" }, "element_age_ms": { "type": "integer" }, "times_in_view": { "type": "integer" }, "total_time_visible_ms": { "type": "integer" } }, "required": ["element_name"], "additionalProperties": false }} />
 
-### Tracker support for element tracking
+### Tracker support
 
-| Tracker                                                                         | Supported | Since version | Auto-tracking |
-| ------------------------------------------------------------------------------- | --------- | ------------- | ------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/element-tracking/index.md)     | ✅         | 4.0.0         | ✅             |
-| iOS                                                                             | ❌         |               |               |
-| Android                                                                         | ❌         |               |               |
-| React Native                                                                    | ❌         |               |               |
-| Flutter                                                                         | ❌         |               |               |
-| Roku                                                                            | ❌         |               |               |
+This table shows the support for page element tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md).
+
+| Tracker                                                                     | Supported | Since version | Auto-tracking |
+| --------------------------------------------------------------------------- | --------- | ------------- | ------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/element-tracking/index.md) | ✅         | 4.6.0         | ✅             |
+| iOS                                                                         | ❌         |               |               |
+| Android                                                                     | ❌         |               |               |
+| React Native                                                                | ❌         |               |               |
+| Flutter                                                                     | ❌         |               |               |
+| Roku                                                                        | ❌         |               |               |

@@ -84,7 +84,7 @@ where clientSession includes the same values as you would expect on the [`client
 _Note:_ The callback is **not** called whenever a session is expired, but only when a new one is generated.
 
 :::note
-Please note that the session context entity is only available since version 3.11 of the tracker.
+Please note that the session update callback is only available since version 3.11 of the tracker.
 :::
 
 ## Session cookie duration

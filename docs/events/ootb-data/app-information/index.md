@@ -13,7 +13,7 @@ You can track this in two ways: setting [atomic event properties](/docs/fundamen
 
 ## Application atomic event properties
 
-These properties can be assigned across all our trackers, regardless of the platform.
+These [properties](/docs/fundamentals/canonical-event/index.md#application-fields) can be assigned across all our trackers, regardless of the platform.
 
 | Atomic table field | Type | Description                                                                                          | Example values      |
 | ------------------ | ---- | ---------------------------------------------------------------------------------------------------- | ------------------- |

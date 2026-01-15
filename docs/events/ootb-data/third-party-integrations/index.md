@@ -9,11 +9,11 @@ date: "2026-01-15"
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
-Snowplow provides plugins to integrate with third-party tools, capturing their data as entities attached to your events.
+As well as [event forwarding](/docs/destinations/forwarding-events/index.md) integrations and [webhooks](/docs/sources/webhooks/index.md), Snowplow provides tracking integrations with third-party tools.
 
 ## Optimizely X
 
-The Optimizely X plugin captures experiment and variation data from [Optimizely](https://www.optimizely.com/) A/B tests, attaching it to all tracked events.
+The Optimizely X web plugin captures experiment and variation data from [Optimizely](https://www.optimizely.com/) A/B tests. The tracker will add it to all tracked events as an entity.
 
 <SchemaProperties
   overview={{event: false, web: true, mobile: false, automatic: true}}
@@ -25,26 +25,24 @@ The Optimizely X plugin captures experiment and variation data from [Optimizely]
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for Optimizely X experiment context", "self": { "vendor": "com.optimizely.optimizelyx", "name": "summary", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "experimentId": { "type": ["integer", "null"], "description": "The Optimizely experiment ID" }, "variationName": { "type": ["string", "null"], "description": "The variation name (requires privacy setting)" }, "variationId": { "type": ["integer", "null"], "description": "The variation ID" }, "isActive": { "type": ["boolean", "null"], "description": "Whether the experiment is active" } }, "additionalProperties": true }} />
 
-:::note
-To capture variation names, disable "Mask descriptive names in project code and third-party integrations" in OptimizelyX Settings → Privacy. Otherwise, variation names will be null.
-:::
+### Tracker support
 
-### Tracker support for Optimizely
+This table shows the support for Optimizely X tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md).
 
-| Tracker                                                                    | Supported | Since version | Auto-tracking |
-| -------------------------------------------------------------------------- | --------- | ------------- | ------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/optimizely/index.md)      | ✅         | 3.0.0         | ✅             |
-| iOS                                                                        | ❌         |               |               |
-| Android                                                                    | ❌         |               |               |
-| React Native                                                               | ❌         |               |               |
-| Flutter                                                                    | ❌         |               |               |
-| Roku                                                                       | ❌         |               |               |
+| Tracker                                                               | Supported | Since version | Auto-tracking | Notes                        |
+| --------------------------------------------------------------------- | --------- | ------------- | ------------- | ---------------------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/optimizely/index.md) | ✅         | 3.0.0         | ✅             | Requires Optimizely X plugin |
+| iOS                                                                   | ❌         |               |               |                              |
+| Android                                                               | ❌         |               |               |                              |
+| React Native                                                          | ❌         |               |               |                              |
+| Flutter                                                               | ❌         |               |               |                              |
+| Roku                                                                  | ❌         |               |               |                              |
 
 ## Google Analytics cookies
 
-The GA cookies plugin captures Google Analytics cookie values (both GA4 and Universal Analytics) and attaches them to all events.
+The GA cookies web plugin captures Google Analytics cookie values (both GA4 and Universal Analytics) and attaches them to all events. The entity schema depends if the tracker finds GA4 or Universal Analytics cookies.
 
-### GA4 cookies entity
+GA4:
 
 <SchemaProperties
   overview={{event: false, web: true, mobile: false, automatic: true}}
@@ -57,7 +55,7 @@ The GA cookies plugin captures Google Analytics cookie values (both GA4 and Univ
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for GA4 cookies context", "self": { "vendor": "com.google.ga4", "name": "cookies", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "_ga": { "type": "string", "description": "The _ga cookie value" }, "cookie_prefix": { "type": ["string", "null"], "description": "The cookie prefix if configured" }, "session_cookies": { "type": "array", "items": { "type": "object", "properties": { "measurement_id": { "type": "string" }, "session_cookie": { "type": "string" } } }, "description": "Session cookie values by measurement ID" } }, "additionalProperties": false }} />
 
-### Universal Analytics cookies entity
+Universal Analytics:
 
 <SchemaProperties
   overview={{event: false, web: true, mobile: false, automatic: true}}
@@ -66,38 +64,42 @@ The GA cookies plugin captures Google Analytics cookie values (both GA4 and Univ
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for Universal Analytics cookies context", "self": { "vendor": "com.google.analytics", "name": "cookies", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "_ga": { "type": ["string", "null"], "description": "The _ga cookie value" }, "__utma": { "type": ["string", "null"], "description": "Classic GA cookie" }, "__utmb": { "type": ["string", "null"], "description": "Classic GA cookie" }, "__utmc": { "type": ["string", "null"], "description": "Classic GA cookie" }, "__utmv": { "type": ["string", "null"], "description": "Classic GA cookie" }, "__utmz": { "type": ["string", "null"], "description": "Classic GA cookie" } }, "additionalProperties": false }} />
 
-### Tracker support for GA cookies
+### Tracker support
 
-| Tracker                                                                    | Supported | Since version | Auto-tracking |
-| -------------------------------------------------------------------------- | --------- | ------------- | ------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/ga-cookies/index.md)      | ✅         | 3.0.0         | ✅             |
-| iOS                                                                        | ❌         |               |               |
-| Android                                                                    | ❌         |               |               |
-| React Native                                                               | ❌         |               |               |
-| Flutter                                                                    | ❌         |               |               |
-| Roku                                                                       | ❌         |               |               |
+This table shows the support for GA cookie tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md).
+
+| Tracker                                                               | Supported | Since version | Auto-tracking | Notes                      |
+| --------------------------------------------------------------------- | --------- | ------------- | ------------- | -------------------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/ga-cookies/index.md) | ✅         | 3.0.0         | ✅             | Requires GA cookies plugin |
+| iOS                                                                   | ❌         |               |               |                            |
+| Android                                                               | ❌         |               |               |                            |
+| React Native                                                          | ❌         |               |               |                            |
+| Flutter                                                               | ❌         |               |               |                            |
+| Roku                                                                  | ❌         |               |               |                            |
 
 ## Kantar Focal Meter
 
-The Focal Meter plugin integrates with [Kantar Focal Meter](https://www.virtualmeter.co.uk/focalmeter), a router-based audience measurement system. The plugin sends domain user IDs to Focal Meter endpoints to enable content audience measurement.
+Some Snowplow trackers integrate with [Kantar Focal Meter](https://www.virtualmeter.co.uk/focalmeter), a router-based audience measurement system. The plugin sends user IDs to Focal Meter endpoints to enable content audience measurement.
 
-This integration sends data to Kantar's endpoint rather than attaching an entity to events.
+This integration sends data to Kantar's endpoint, rather than attaching an entity to events.
 
-### Tracker support for Focal Meter
+### Tracker support
 
-| Tracker                                                                    | Supported | Since version | Auto-tracking |
-| -------------------------------------------------------------------------- | --------- | ------------- | ------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/focalmeter/index.md)      | ✅         | 3.16.0        | ✅             |
-| iOS                                                                        | ❌         |               |               |
-| Android                                                                    | ❌         |               |               |
-| React Native                                                               | ❌         |               |               |
-| Flutter                                                                    | ❌         |               |               |
-| Roku                                                                       | ❌         |               |               |
+This table shows the support for Kantar Focal Meter tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md).
+
+| Tracker                                                               | Supported | Since version | Auto-tracking | Notes                       |
+| --------------------------------------------------------------------- | --------- | ------------- | ------------- | --------------------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/focalmeter/index.md) | ✅         | 3.16.0        | ✅             | Requires Focal Meter plugin |
+| [iOS](/docs/sources/mobile-trackers/plugins/focal-meter/index.md)     | ✅         | 5.6.0         |               |                             |
+| [Android](/docs/sources/mobile-trackers/plugins/focal-meter/index.md) | ✅         | 5.6.0         |               |                             |
+| React Native                                                          | ❌         |               |               |                             |
+| Flutter                                                               | ❌         |               |               |                             |
+| Roku                                                                  | ❌         |               |               |                             |
 
 ## Privacy Sandbox (deprecated)
 
 :::warning
-The Privacy Sandbox Topics API has been deprecated by Google. This plugin remains available but the underlying browser API may no longer be supported.
+Privacy Sandbox has been deprecated by Google. This plugin remains available but the underlying browser API may no longer be supported.
 :::
 
 The Privacy Sandbox plugin captures data from the [Topics API](https://developer.chrome.com/docs/privacy-sandbox/topics/overview/), which was designed to provide privacy-preserving interest-based advertising signals.
@@ -111,13 +113,15 @@ The Privacy Sandbox plugin captures data from the [Topics API](https://developer
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for Privacy Sandbox Topics context", "self": { "vendor": "com.google.privacysandbox", "name": "topics", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "topics": { "type": "array", "items": { "type": "object", "properties": { "topic": { "type": "integer" }, "taxonomyVersion": { "type": "string" }, "modelVersion": { "type": "string" } } }, "description": "List of topics for the current user" } }, "additionalProperties": false }} />
 
-### Tracker support for Privacy Sandbox
+### Tracker support
 
-| Tracker                                                                         | Supported | Since version | Auto-tracking |
-| ------------------------------------------------------------------------------- | --------- | ------------- | ------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/privacy-sandbox/index.md)      | ✅         | 3.14.0        | ✅             |
-| iOS                                                                             | ❌         |               |               |
-| Android                                                                         | ❌         |               |               |
-| React Native                                                                    | ❌         |               |               |
-| Flutter                                                                         | ❌         |               |               |
-| Roku                                                                            | ❌         |               |               |
+This table shows the support for Privacy Sandbox tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md).
+
+| Tracker                                                                    | Supported | Since version | Auto-tracking |
+| -------------------------------------------------------------------------- | --------- | ------------- | ------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/privacy-sandbox/index.md) | ✅         | 3.14.0        | ✅             |
+| iOS                                                                        | ❌         |               |               |
+| Android                                                                    | ❌         |               |               |
+| React Native                                                               | ❌         |               |               |
+| Flutter                                                                    | ❌         |               |               |
+| Roku                                                                       | ❌         |               |               |

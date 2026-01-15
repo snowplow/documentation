@@ -37,6 +37,7 @@ This table shows the support for page ping tracking across the main client-side 
 | [Flutter](/docs/sources/flutter-tracker/initialization-and-configuration/index.md) | ✅         | 0.1.0         | ✅             | Only on web                        |
 | Roku                                                                               | ❌         |               |               |                                    |
 | [Python](/docs/sources/python-tracker/tracking-specific-events/index.md)           | ✅         | 0.8.0         | ❌             | Detect activity and track manually |
+| [Google Tag Manager](/docs/sources/google-tag-manager/snowplow-template/index.md)  | ✅         | v3            | ✅             |                                    |
 
 We recommend using the [Base web data product template](/docs/data-product-studio/data-products/data-product-templates/index.md#base-web) for web tracking. It includes page pings.
 

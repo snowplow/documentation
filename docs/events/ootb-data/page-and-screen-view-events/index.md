@@ -58,6 +58,7 @@ This table shows the support for page view tracking across the main [Snowplow tr
 | C++                                                                                                   | ❌         |               |               |                                                         |
 | Unity                                                                                                 | ❌         |               |               |                                                         |
 | Lua                                                                                                   | ❌         |               |               |                                                         |
+| [Google Tag Manager](/docs/sources/google-tag-manager/snowplow-template/index.md)                     | ✅         | v3            | ❌             |                                                         |
 
 We recommend using the [Base web data product template](/docs/data-product-studio/data-products/data-product-templates/index.md#base-web) for web tracking. It includes page views.
 

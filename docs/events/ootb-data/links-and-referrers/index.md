@@ -71,14 +71,15 @@ The web trackers can automatically track link click events, capturing details ab
 
 This table shows the support for link click tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md). The server-side trackers don't include link click tracking.
 
-| Tracker                                                               | Supported | Since version                                 | Auto-tracking | Notes                      |
-| --------------------------------------------------------------------- | --------- | --------------------------------------------- | ------------- | -------------------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/link-click/index.md) | ✅         | 0.7.0 (limited functionality), 3.0.0 (plugin) | ✅             | Requires link click plugin |
-| iOS                                                                   | ❌         |                                               |               |                            |
-| Android                                                               | ❌         |                                               |               |                            |
-| React Native                                                          | ❌         |                                               |               |                            |
-| Flutter                                                               | ❌         |                                               |               |                            |
-| Roku                                                                  | ❌         |                                               |               |                            |
+| Tracker                                                                           | Supported | Since version                                 | Auto-tracking | Notes                             |
+| --------------------------------------------------------------------------------- | --------- | --------------------------------------------- | ------------- | --------------------------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/link-click/index.md)             | ✅         | 0.7.0 (limited functionality), 3.0.0 (plugin) | ✅             | Requires link click plugin        |
+| iOS                                                                               | ❌         |                                               |               |                                   |
+| Android                                                                           | ❌         |                                               |               |                                   |
+| React Native                                                                      | ❌         |                                               |               |                                   |
+| Flutter                                                                           | ❌         |                                               |               |                                   |
+| Roku                                                                              | ❌         |                                               |               |                                   |
+| [Google Tag Manager](/docs/sources/google-tag-manager/snowplow-template/index.md) | ✅         | v3                                            | ✅             | Integrates with link click plugin |
 
 To track link clicks on web using React Native or Flutter, you can implement custom event tracking when users interact with links in your app using the `link_click` event schema.
 

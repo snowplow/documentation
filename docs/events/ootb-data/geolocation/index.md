@@ -48,6 +48,7 @@ This table shows the support for timezone tracking across the main [Snowplow tra
 | [C++](/docs/sources/c-tracker/adding-extra-data-the-subject-class/index.md)          | ✅         | 0.1.0         |
 | [Unity](/docs/sources/unity-tracker/subject/index.md)                                | ✅         | 0.1.0         |
 | Lua                                                                                  | ❌         |               |
+| Google Tag Manager                                                                   | ❌         |               |
 
 ## Geolocation entity
 
@@ -70,13 +71,14 @@ Some Snowplow trackers can access device geolocation information, e.g. GPS coord
 
 This table shows the support for geolocation tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md). The server-side trackers don't include geolocation tracking.
 
-| Tracker                                                                            | Supported | Since version | Auto-tracking | Notes                        |
-| ---------------------------------------------------------------------------------- | --------- | ------------- | ------------- | ---------------------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/timezone-geolocation/index.md)    | ✅         | 3.0.0         | ✅             | Requires timezone plugin     |
-| [iOS](/docs/sources/mobile-trackers/installation-and-set-up/index.md)              | ✅         | 0.6.0         | ✅             | Set in tracker configuration |
-| [Android](/docs/sources/mobile-trackers/installation-and-set-up/index.md)          | ✅         | 0.6.0         | ✅             | Set in tracker configuration |
-| React Native                                                                       | ❌         |               |               |                              |
-| [Flutter](/docs/sources/flutter-tracker/initialization-and-configuration/index.md) | ✅         | 0.1.0         | ✅             | Set in tracker configuration |
-| Roku                                                                               | ❌         |               |               |                              |
+| Tracker                                                                            | Supported | Since version | Auto-tracking | Notes                           |
+| ---------------------------------------------------------------------------------- | --------- | ------------- | ------------- | ------------------------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/timezone-geolocation/index.md)    | ✅         | 3.0.0         | ✅             | Requires timezone plugin        |
+| [iOS](/docs/sources/mobile-trackers/installation-and-set-up/index.md)              | ✅         | 0.6.0         | ✅             | Set in tracker configuration    |
+| [Android](/docs/sources/mobile-trackers/installation-and-set-up/index.md)          | ✅         | 0.6.0         | ✅             | Set in tracker configuration    |
+| React Native                                                                       | ❌         |               |               |                                 |
+| [Flutter](/docs/sources/flutter-tracker/initialization-and-configuration/index.md) | ✅         | 0.1.0         | ✅             | Set in tracker configuration    |
+| Roku                                                                               | ❌         |               |               |                                 |
+| [Google Tag Manager](/docs/sources/google-tag-manager/settings-template/index.md)  | ✅         | v3            | ❌             | Integrates with timezone plugin |
 
 The React Native tracker did include geolocation entity configuration in earlier versions. We [deprecated it in version 4](/docs/sources/react-native-tracker/migration-guides/migrating-from-v2-x-to-v4/index.md).

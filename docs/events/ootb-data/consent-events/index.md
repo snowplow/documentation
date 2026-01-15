@@ -36,6 +36,7 @@ Older versions of the web trackers provided the `browser-plugin-consent` plugin 
 | [React Native](/docs/sources/react-native-tracker/tracking-events/index.md)                | ✅         | 1.0.0                                   | ❌             | Basic API*; no GDPR entity                                                          |
 | [Flutter](/docs/sources/flutter-tracker/tracking-events/index.md)                          | ✅         | 0.1.0                                   | ❌             | Basic API                                                                           |
 | Roku                                                                                       | ❌         |                                         |               | Track custom events using the enhanced schemas                                      |
+| [Google Tag Manager](/docs/sources/google-tag-manager/snowplow-template/index.md)          | ✅         | v3                                      | ❌             | Enhanced consent events                                                             |
 
 *It's also possible to use the JavaScript Enhanced Consent plugin with the React Native tracker.
 

@@ -23,14 +23,15 @@ Every ecommerce event uses the `snowplow_ecommerce_action` event schema, with ad
 
 This table shows the support for ecommerce tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md). The server-side trackers can send ecommerce events as custom [self-describing events](/docs/fundamentals/events/index.md#self-describing-events).
 
-| Tracker                                                                              | Supported | Since version | Auto-tracking | Notes                                                |
-| ------------------------------------------------------------------------------------ | --------- | ------------- | ------------- | ---------------------------------------------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/ecommerce/index.md)                 | ✅         | 3.7.0         | ❌             | Requires ecommerce plugin                            |
-| [iOS](/docs/sources/mobile-trackers/tracking-events/ecommerce-tracking/index.md)     | ✅         | 5.4.0         | ❌             |                                                      |
-| [Android](/docs/sources/mobile-trackers/tracking-events/ecommerce-tracking/index.md) | ✅         | 5.4.0         | ❌             |                                                      |
-| [React Native](/docs/sources/react-native-tracker/index.md)                          | ✅         | 4.2.0         | ❌             | Requires ecommerce plugin*                           |
-| Flutter                                                                              | ❌         |               |               |                                                      |
-| Roku                                                                                 | ❌         |               |               | Use the ecommerce schemas for your own custom events |
+| Tracker                                                                                | Supported | Since version | Auto-tracking | Notes                                                |
+| -------------------------------------------------------------------------------------- | --------- | ------------- | ------------- | ---------------------------------------------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/ecommerce/index.md)                   | ✅         | 3.7.0         | ❌             | Requires ecommerce plugin                            |
+| [iOS](/docs/sources/mobile-trackers/tracking-events/ecommerce-tracking/index.md)       | ✅         | 5.4.0         | ❌             |                                                      |
+| [Android](/docs/sources/mobile-trackers/tracking-events/ecommerce-tracking/index.md)   | ✅         | 5.4.0         | ❌             |                                                      |
+| [React Native](/docs/sources/react-native-tracker/index.md)                            | ✅         | 4.2.0         | ❌             | Requires ecommerce plugin*                           |
+| Flutter                                                                                | ❌         |               |               |                                                      |
+| Roku                                                                                   | ❌         |               |               | Use the ecommerce schemas for your own custom events |
+| [Google Tag Manager](/docs/sources/google-tag-manager/ecommerce-tag-template/index.md) | ✅         | v3            | ❌             |                                                      |
 
 *You can use the [JavaScript ecommerce plugin](/docs/sources/web-trackers/tracking-events/ecommerce/index.md) and APIs for React Native ecommerce tracking.
 

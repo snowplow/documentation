@@ -32,11 +32,12 @@ The social interaction event captures the social network, the action performed, 
 
 This table shows the support for social interaction tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md).
 
-| Tracker                                                                 | Supported | Since version | Auto-tracking | Notes                         |
-| ----------------------------------------------------------------------- | --------- | ------------- | ------------- | ----------------------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/social-media/index.md) | ✅         | 3.0.0         | ❌             | Requires site tracking plugin |
-| iOS                                                                     | ❌         |               |               |                               |
-| Android                                                                 | ❌         |               |               |                               |
-| React Native                                                            | ❌         |               |               |                               |
-| Flutter                                                                 | ❌         |               |               |                               |
-| Roku                                                                    | ❌         |               |               |                               |
+| Tracker                                                                           | Supported | Since version | Auto-tracking | Notes                         |
+| --------------------------------------------------------------------------------- | --------- | ------------- | ------------- | ----------------------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/social-media/index.md)           | ✅         | 3.0.0         | ❌             | Requires site tracking plugin |
+| iOS                                                                               | ❌         |               |               |                               |
+| Android                                                                           | ❌         |               |               |                               |
+| React Native                                                                      | ❌         |               |               |                               |
+| Flutter                                                                           | ❌         |               |               |                               |
+| Roku                                                                              | ❌         |               |               |                               |
+| [Google Tag Manager](/docs/sources/google-tag-manager/snowplow-template/index.md) | ✅         | v3            | ❌             |                               |

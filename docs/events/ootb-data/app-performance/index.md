@@ -48,15 +48,14 @@ This [plugin](/docs/sources/web-trackers/tracking-events/timings/index.md) will 
 
 ### Tracker support
 
-This table shows which versions of the JavaScript tracker SDK introduced the performance plugins:
+This table shows which versions of the trackers can use the performance plugins:
 
-| Tracker      | Plugin                                                                                           | Supported | Since version | Auto-tracking |
-| ------------ | ------------------------------------------------------------------------------------------------ | --------- | ------------- | ------------- |
-| Web          | [WebVitalsPlugin](/docs/sources/web-trackers/tracking-events/web-vitals/index.md)                | ✅         | 3.13.0        | ✅             |
-| Web          | [PerformanceNavigationTimingPlugin](/docs/sources/web-trackers/tracking-events/timings/index.md) | ✅         | 3.10.0        | ✅             |
-| React Native |                                                                                                  | ❌         |               |               |
-
-The [React Native tracker](/docs/sources/react-native-tracker/index.md) can't access the required browser APIs to use these plugins.
+| Tracker                                                                           | Plugin                                                                                           | Supported | Since version | Auto-tracking | Notes                                                               |
+| --------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | --------- | ------------- | ------------- | ------------------------------------------------------------------- |
+| Web                                                                               | [WebVitalsPlugin](/docs/sources/web-trackers/tracking-events/web-vitals/index.md)                | ✅         | 3.13.0        | ✅             |                                                                     |
+| Web                                                                               | [PerformanceNavigationTimingPlugin](/docs/sources/web-trackers/tracking-events/timings/index.md) | ✅         | 3.10.0        | ✅             |                                                                     |
+| React Native                                                                      |                                                                                                  | ❌         |               |               | Tracker can't access the required browser APIs to use these plugins |
+| [Google Tag Manager](/docs/sources/google-tag-manager/settings-template/index.md) |                                                                                                  | ✅         |               | ✅             | Integrates with the performance navigation timing plugin            |
 
 ## Manual timing events
 

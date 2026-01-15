@@ -88,11 +88,12 @@ Track when a user completes a conversion action from an ad.
 
 This table shows the support for ad tracking across the main client-side [Snowplow tracker SDKs](~/docs/sources/index.md~).
 
-| Tracker                                                        | Supported | Since version                       | Auto-tracking | Notes                           |
-| -------------------------------------------------------------- | --------- | ----------------------------------- | ------------- | ------------------------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/ads/index.md) | ✅         | 1.1.0 (directly), 3.0.0 (as plugin) | ❌             | Requires the ad tracking plugin |
-| iOS                                                            | ❌         |                                     |               |                                 |
-| Android                                                        | ❌         |                                     |               |                                 |
-| React Native                                                   | ❌         |                                     |               |                                 |
-| Flutter                                                        | ❌         |                                     |               |                                 |
-| Roku                                                           | ❌         |                                     |               |                                 |
+| Tracker                                                                           | Supported | Since version                       | Auto-tracking | Notes                           |
+| --------------------------------------------------------------------------------- | --------- | ----------------------------------- | ------------- | ------------------------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/ads/index.md)                    | ✅         | 1.1.0 (directly), 3.0.0 (as plugin) | ❌             | Requires the ad tracking plugin |
+| iOS                                                                               | ❌         |                                     |               |                                 |
+| Android                                                                           | ❌         |                                     |               |                                 |
+| React Native                                                                      | ❌         |                                     |               |                                 |
+| Flutter                                                                           | ❌         |                                     |               |                                 |
+| Roku                                                                              | ❌         |                                     |               |                                 |
+| [Google Tag Manager](/docs/sources/google-tag-manager/snowplow-template/index.md) | ✅         | v3                                  | ❌             |                                 |

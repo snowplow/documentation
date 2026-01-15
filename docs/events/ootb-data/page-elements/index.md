@@ -37,14 +37,15 @@ Button click tracking automatically captures clicks on `<button>` and `<input ty
 
 This table shows the support for button click tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md).
 
-| Tracker                                                                 | Supported | Since version | Auto-tracking | Notes                        |
-| ----------------------------------------------------------------------- | --------- | ------------- | ------------- | ---------------------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/button-click/index.md) | ✅         | 3.18.0        | ✅             | Requires button click plugin |
-| iOS                                                                     | ❌         |               |               |                              |
-| Android                                                                 | ❌         |               |               |                              |
-| React Native                                                            | ❌         |               |               |                              |
-| Flutter                                                                 | ❌         |               |               |                              |
-| Roku                                                                    | ❌         |               |               |                              |
+| Tracker                                                                           | Supported | Since version | Auto-tracking | Notes                               |
+| --------------------------------------------------------------------------------- | --------- | ------------- | ------------- | ----------------------------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/button-click/index.md)           | ✅         | 3.18.0        | ✅             | Requires button click plugin        |
+| iOS                                                                               | ❌         |               |               |                                     |
+| Android                                                                           | ❌         |               |               |                                     |
+| React Native                                                                      | ❌         |               |               |                                     |
+| Flutter                                                                           | ❌         |               |               |                                     |
+| Roku                                                                              | ❌         |               |               |                                     |
+| [Google Tag Manager](/docs/sources/google-tag-manager/snowplow-template/index.md) | ✅         | v4            | ✅             | Integrates with button click plugin |
 
 We recommend using the [Base web data product template](/docs/data-product-studio/data-products/data-product-templates/index.md#base-web) for web tracking. It includes button clicks.
 
@@ -104,15 +105,16 @@ Triggered when a user submits a form. Contains data about all form fields.
 
 This table shows the support for form tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md).
 
-| Tracker                                                                  | Supported | Since version                       | Auto-tracking | Notes                                                                                             |
-| ------------------------------------------------------------------------ | --------- | ----------------------------------- | ------------- | ------------------------------------------------------------------------------------------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/form-tracking/index.md) | ✅         | 2.1.0 (directly), 3.0.0 (as plugin) | ✅             | Requires form tracking plugin                                                                     |
-| iOS                                                                      | ❌         |                                     |               |                                                                                                   |
-| Android                                                                  | ❌         |                                     |               |                                                                                                   |
-| React Native                                                             | ❌         |                                     |               |                                                                                                   |
-| Flutter                                                                  | ❌         |                                     |               |                                                                                                   |
-| Roku                                                                     | ❌         |                                     |               |                                                                                                   |
-| Python                                                                   | ❌         |                                     |               | The Python tracker has deprecated form tracking APIs; use custom events with form schemas instead |
+| Tracker                                                                           | Supported | Since version                       | Auto-tracking | Notes                                                                                             |
+| --------------------------------------------------------------------------------- | --------- | ----------------------------------- | ------------- | ------------------------------------------------------------------------------------------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/form-tracking/index.md)          | ✅         | 2.1.0 (directly), 3.0.0 (as plugin) | ✅             | Requires form tracking plugin                                                                     |
+| iOS                                                                               | ❌         |                                     |               |                                                                                                   |
+| Android                                                                           | ❌         |                                     |               |                                                                                                   |
+| React Native                                                                      | ❌         |                                     |               |                                                                                                   |
+| Flutter                                                                           | ❌         |                                     |               |                                                                                                   |
+| Roku                                                                              | ❌         |                                     |               |                                                                                                   |
+| Python                                                                            | ❌         |                                     |               | The Python tracker has deprecated form tracking APIs; use custom events with form schemas instead |
+| [Google Tag Manager](/docs/sources/google-tag-manager/snowplow-template/index.md) | ✅         | v3                                  | ✅             | Integrates with form tracking plugin                                                              |
 
 ## Page element visibility and lifecycle
 

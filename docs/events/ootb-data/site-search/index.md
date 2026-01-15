@@ -34,11 +34,12 @@ The site search event captures the search terms, any filters applied, and the nu
 
 This table shows the support for site search tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md).
 
-| Tracker                                                                | Supported | Since version | Auto-tracking | Notes                         |
-| ---------------------------------------------------------------------- | --------- | ------------- | ------------- | ----------------------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/site-search/index.md) | ✅         | 3.0.0         | ❌             | Requires site tracking plugin |
-| iOS                                                                    | ❌         |               |               |                               |
-| Android                                                                | ❌         |               |               |                               |
-| React Native                                                           | ❌         |               |               |                               |
-| Flutter                                                                | ❌         |               |               |                               |
-| Roku                                                                   | ❌         |               |               |                               |
+| Tracker                                                                           | Supported | Since version | Auto-tracking | Notes                         |
+| --------------------------------------------------------------------------------- | --------- | ------------- | ------------- | ----------------------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/site-search/index.md)            | ✅         | 3.0.0         | ❌             | Requires site tracking plugin |
+| iOS                                                                               | ❌         |               |               |                               |
+| Android                                                                           | ❌         |               |               |                               |
+| React Native                                                                      | ❌         |               |               |                               |
+| Flutter                                                                           | ❌         |               |               |                               |
+| Roku                                                                              | ❌         |               |               |                               |
+| [Google Tag Manager](/docs/sources/google-tag-manager/snowplow-template/index.md) | ✅         | v3            | ❌             |                               |

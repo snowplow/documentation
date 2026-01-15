@@ -10,8 +10,6 @@ import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
 Exception (error) tracking captures exceptions within your application.
 
-## Tracker support
-
 This table shows the support for exception tracking across the main client-side Snowplow [tracker SDKs](/docs/sources/index.md). The server-side trackers don't include error tracking APIs.
 
 | Tracker                                                                              | Supported | Since version | Auto-tracking | Notes                                                                                                                                                                                                                                |
@@ -22,12 +20,11 @@ This table shows the support for exception tracking across the main client-side 
 | React Native                                                                         | ❌         |               |               | Earlier versions of the React Native tracker supported error tracking for mobile platforms. This feature was removed in version 4.0.0 as it didn't work with JavaScript. Track errors manually using the `application_error` schema. |
 | Flutter                                                                              | ❌         |               |               | Use the `application_error` schema for your own custom event.                                                                                                                                                                        |
 | Roku                                                                                 | ❌         |               |               | Use the `application_error` schema for your own custom event.                                                                                                                                                                        |
+| [Google Tag Manager](/docs/sources/google-tag-manager/snowplow-template/index.md)    | ✅         | v3            | ❌             |                                                                                                                                                                                                                                      |
 
 ## How to use the application error APIs
 
-Exception autotracking is enabled by default in the native mobile trackers (iOS and Android).
-
-The tracker will capture unhandled exceptions. These can crash the app, so it's likely that the event will be sent after restart. Note that in some situations, it may not be possible to capture all exception details before the app crashes.
+EThe tracker will capture unhandled exceptions. These can crash the app, so it's likely that the event will be sent after restart. Note that in some situations, it may not be possible to capture all exception details before the app crashes.
 
 The Errors plugin for the JavaScript trackers provides configuration for automatic tracking of unhandled exceptions, as well as a method for manually tracking handled exceptions.
 

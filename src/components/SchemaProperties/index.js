@@ -13,6 +13,7 @@ export default function SchemaProperties(props) {
       : 'Entity'
     : 'Schema'
   const description = props.info || props.schema.description
+  const hasProperties = props.schema.properties && Object.keys(props.schema.properties).length > 0
 
   return (
     <div className="flex flex-col w-full bg-card rounded-lg shadow-[0px_1px_2px_0px_rgba(0,0,0,0.05)] outline outline-1 outline-offset-[-1px] outline-border justify-start items-start overflow-hidden mb-4">
@@ -43,7 +44,7 @@ export default function SchemaProperties(props) {
             </span>
           </div>
 
-          {props.example && (
+          {props.example && hasProperties && (
             <details>
               <summary className="cursor-pointer text-base font-semibold">
                 Example
@@ -67,63 +68,67 @@ export default function SchemaProperties(props) {
                 queryString
               >
                 <TabItem value="table" label="Table">
-                  <table className="w-full not-prose text-sm">
-                    <thead>
-                      <tr>
-                        <th>Property</th>
-                        <th>Description</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {Object.keys(props.schema.properties).map((property) => (
-                        <tr key={property}>
-                          <td>
-                            <code>{property}</code>
-                            {props.schema.properties[property].title
-                              ? ' (' +
-                                props.schema.properties[property].title +
-                                ')'
-                              : null}
-                            <br />
-                            <i>
-                              {Array.isArray(
-                                props.schema.properties[property].type
-                              )
-                                ? props.schema.properties[property].type[0]
-                                : props.schema.properties[property].type}
-                            </i>
-                          </td>
-                          <td>
-                            <i>
-                              {(props.schema.required || []).includes(property)
-                                ? 'Required.'
-                                : 'Optional.'}
-                            </i>{' '}
-                            {props.schema.properties[property].description}
-                            {props.schema.properties[property].enum && (
-                              <>
-                                <br />
-                                Must be one of:{' '}
-                                {props.schema.properties[property].enum.map(
-                                  (value, index) => (
-                                    <React.Fragment key={index}>
-                                      <code>{value}</code>
-                                      {index <
-                                      props.schema.properties[property].enum
-                                        .length -
-                                        1
-                                        ? ', '
-                                        : ''}
-                                    </React.Fragment>
-                                  )
-                                )}
-                              </>
-                            )}
-                          </td>
+                  {hasProperties ? (
+                    <table className="w-full not-prose text-sm">
+                      <thead>
+                        <tr>
+                          <th>Property</th>
+                          <th>Description</th>
                         </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                      </thead>
+                      <tbody>
+                        {Object.keys(props.schema.properties).map((property) => (
+                          <tr key={property}>
+                            <td>
+                              <code>{property}</code>
+                              {props.schema.properties[property].title
+                                ? ' (' +
+                                  props.schema.properties[property].title +
+                                  ')'
+                                : null}
+                              <br />
+                              <i>
+                                {Array.isArray(
+                                  props.schema.properties[property].type
+                                )
+                                  ? props.schema.properties[property].type[0]
+                                  : props.schema.properties[property].type}
+                              </i>
+                            </td>
+                            <td>
+                              <i>
+                                {(props.schema.required || []).includes(property)
+                                  ? 'Required.'
+                                  : 'Optional.'}
+                              </i>{' '}
+                              {props.schema.properties[property].description}
+                              {props.schema.properties[property].enum && (
+                                <>
+                                  <br />
+                                  Must be one of:{' '}
+                                  {props.schema.properties[property].enum.map(
+                                    (value, index) => (
+                                      <React.Fragment key={index}>
+                                        <code>{value}</code>
+                                        {index <
+                                        props.schema.properties[property].enum
+                                          .length -
+                                          1
+                                          ? ', '
+                                          : ''}
+                                      </React.Fragment>
+                                    )
+                                  )}
+                                </>
+                              )}
+                            </td>
+                          </tr>
+                        ))}
+                      </tbody>
+                    </table>
+                  ) : (
+                    <p className="text-muted-foreground text-sm">This schema has no properties.</p>
+                  )}
                 </TabItem>
                 <TabItem value="json" label="JSON schema">
                   <CodeBlock language="json">

@@ -44,7 +44,7 @@ export default function SchemaProperties(props) {
             </span>
           </div>
 
-          {props.example && hasProperties && (
+          {props.example && Object.keys(props.example).length > 0 && hasProperties && (
             <details>
               <summary className="cursor-pointer text-base font-semibold">
                 Example

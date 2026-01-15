@@ -1,6 +1,6 @@
 ---
 title: "Mobile app install and lifecycle events"
-sidebar_label: "Mobile lifecycle events"
+sidebar_label: "Mobile lifecycle"
 description: "Automatically track mobile app install, foreground, and background events with lifecycle entities for app usage analysis."
 keywords: ["app install", "app lifecycle", "foreground events", "background events", "mobile tracking"]
 ---
@@ -81,7 +81,7 @@ The background event is tracked when the app is no longer visible, such as when 
 
 ### Lifecycle entity
 
-This entity is automatically attached to all events. It indicates whether the app was in the foreground or background when the event occurred.
+When lifecycle autotracking is enabled, this entity is automatically attached to all events. It indicates whether the app was in the foreground or background when the event occurred.
 
 <SchemaProperties
   overview={{event: false, web: false, mobile: true, automatic: true}}

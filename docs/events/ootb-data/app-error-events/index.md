@@ -5,9 +5,7 @@ description: "Automatically track exceptions and application errors with the app
 keywords: ["error tracking", "exception tracking", "application_error", "crash reporting"]
 ---
 
-```mdx-code-block
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
-```
 
 Exception (error) tracking captures exceptions within your application.
 

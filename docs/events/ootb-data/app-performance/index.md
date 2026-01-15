@@ -1,6 +1,7 @@
 ---
 title: "App performance"
 sidebar_label: "App performance"
+sidebar_position: 20
 description: "Track web vitals, navigation timing, and custom performance metrics using automatic plugins or manual timing events."
 keywords: ["web vitals", "performance tracking", "navigation timing", "timing events"]
 ---

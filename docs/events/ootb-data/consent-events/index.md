@@ -1,6 +1,7 @@
 ---
 title: "Consent events and GDPR"
 sidebar_label: "Consent and GDPR"
+sidebar_position: 50
 description: "Track GDPR consent preferences, CMP visibility, and marketing consent with enhanced consent events and legacy consent APIs."
 keywords: ["consent tracking", "GDPR", "consent preferences", "CMP", "marketing consent"]
 ---

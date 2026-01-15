@@ -1,6 +1,7 @@
 ---
 title: "Media playback"
 sidebar_label: "Media playback"
+sidebar_position: 100
 description: "Track video and audio playback with media player events covering playback, buffering, quality changes, and ad tracking."
 keywords: ["media tracking", "video playback", "audio playback", "media events", "ad tracking"]
 ---

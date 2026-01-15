@@ -1,6 +1,7 @@
 ---
 title: "Geolocation and timezone tracking"
 sidebar_label: "Geolocation and timezone"
+sidebar_position: 80
 description: "Track user location using IP-based geolocation enrichment or device GPS coordinates with the geolocation context entity."
 keywords: ["geolocation", "IP lookup", "GPS tracking", "location data"]
 ---

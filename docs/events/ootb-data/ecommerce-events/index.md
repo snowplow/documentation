@@ -1,6 +1,7 @@
 ---
 title: "Ecommerce events and entities"
 sidebar_label: "Ecommerce"
+sidebar_position: 70
 description: "Track ecommerce transactions, carts, checkouts, products, and promotions with Snowplow ecommerce events and context entities."
 keywords: ["ecommerce tracking", "transaction events", "cart tracking", "checkout tracking", "product events"]
 ---

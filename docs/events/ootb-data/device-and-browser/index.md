@@ -1,8 +1,9 @@
 ---
 title: "Device and browser information"
 sidebar_label: "Device and browser information"
-description: "Track device, browser, and platform information in atomic fields and context entities including YAUAA parsing and mobile context."
-keywords: ["device information", "browser context", "mobile context", "YAUAA", "user agent"]
+sidebar_position: 60
+description: "Track device, browser, and platform information in atomic fields and context entities including YAUAA parsing, Client Hints, and mobile context."
+keywords: ["device information", "browser context", "mobile context", "YAUAA", "user agent", "client hints"]
 ---
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
@@ -28,7 +29,7 @@ You can configure the web trackers to automatically include a browser entity wit
 The browser entity is only available on web trackers since it captures browser-specific information from the DOM and browser APIs. These APIs aren't available to React Native or Flutter.
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: false, automatic: false}}
+  overview={{event: false, web: true, mobile: false, automatic: true}}
   example={{
     viewport: null,
     documentSize: null,
@@ -45,6 +46,35 @@ The browser entity is only available on web trackers since it captures browser-s
     tabId: null
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for browser contexts", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "browser_context", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "viewport": { "type": "string", "maxLength": 20, "description": "Viewport dimensions of the browser. Arrives in the form of WidthxHeight e.g. 1200x900." }, "documentSize": { "type": "string", "maxLength": 20, "description": "Document dimensions. Arrives in the form of WidthxHeight e.g. 1200x900" }, "resolution": { "type": "string", "maxLength": 20, "description": "Device native resolution. Arrives in the form of WidthxHeight e.g. 1200x900" }, "colorDepth": { "type": "integer", "minimum": 0, "maximum": 1000, "description": "The number of bits allocated to colors for a pixel in the output device, excluding the alpha channel." }, "devicePixelRatio": { "type": ["number", "null"], "minimum": 0, "maximum": 1000, "description": "Ratio of the resolution in physical pixels to the resolution in CSS pixels for the current display device." }, "cookiesEnabled": { "type": "boolean", "description": "Indicates whether cookies are enabled or not. More info and caveats at https://developer.mozilla.org/en-US/docs/Web/API/Navigator/cookieEnabled." }, "online": { "type": "boolean", "description": "Returns the online status of the browser. Important caveats are described in https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine." }, "browserLanguage": { "type": ["string", "null"], "maxLength": 20, "description": "The preferred language of the user, usually the language of the browser UI. RFC 5646 https://datatracker.ietf.org/doc/html/rfc5646." }, "documentLanguage": { "type": ["string", "null"], "maxLength": 20, "description": "The language of the HTML document. RFC 5646 https://datatracker.ietf.org/doc/html/rfc5646." }, "webdriver": { "type": ["boolean", "null"], "description": "Indicates whether the user agent is controlled by automation." }, "deviceMemory": { "type": ["integer", "null"], "minimum": 0, "maximum": 1000, "description": "Approximate amount of device memory in gigabytes." }, "hardwareConcurrency": { "type": ["integer", "null"], "minimum": 0, "maximum": 1000, "description": "Number of logical processors available to run threads on the user's computer." }, "tabId": { "type": ["string", "null"], "format": "uuid", "description": "An identifier for the client browser tab the event is sent from." } }, "required": ["viewport", "documentSize", "cookiesEnabled", "online", "colorDepth", "resolution"], "additionalProperties": false }} />
+
+## Client Hints entity
+
+[Client Hints](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-CH) are an alternative to user-agent strings for capturing browser and device information. As browsers move away from high-entropy user-agent strings, Client Hints provide useful information without the privacy concerns of traditional user-agent parsing.
+
+You can enable Client Hints in two ways:
+
+- Basic hints: captures limited device and browser information
+- High-entropy hints: captures additional details that could be used for fingerprinting (browsers may prompt the user before providing this data)
+
+| Tracker                                                                         | Supported | Since version | Auto-tracking |
+| ------------------------------------------------------------------------------- | --------- | ------------- | ------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/client-hints/index.md)         | ✅         | 3.0.0         | ✅             |
+| iOS                                                                             | ❌         |               |               |
+| Android                                                                         | ❌         |               |               |
+| React Native                                                                    | ❌         |               |               |
+| Flutter                                                                         | ❌         |               |               |
+| Roku                                                                            | ❌         |               |               |
+
+<SchemaProperties
+  overview={{event: false, web: true, mobile: false, automatic: true}}
+  example={{
+    isMobile: false,
+    brands: [
+      { brand: "Google Chrome", version: "89" },
+      { brand: "Chromium", version: "89" }
+    ]
+  }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for HTTP Client Hints context", "self": { "vendor": "org.ietf", "name": "http_client_hints", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "isMobile": { "type": "boolean", "description": "Whether the browser is on a mobile device" }, "brands": { "type": "array", "items": { "type": "object", "properties": { "brand": { "type": "string" }, "version": { "type": "string" } } }, "description": "List of browser brands and versions" }, "architecture": { "type": ["string", "null"], "description": "CPU architecture (high entropy)" }, "model": { "type": ["string", "null"], "description": "Device model (high entropy)" }, "platform": { "type": ["string", "null"], "description": "Operating system name (high entropy)" }, "platformVersion": { "type": ["string", "null"], "description": "Operating system version (high entropy)" }, "uaFullVersion": { "type": ["string", "null"], "description": "Full browser version (high entropy)" } }, "additionalProperties": false }} />
 
 ## Mobile entity
 

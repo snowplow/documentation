@@ -22,7 +22,7 @@ In the tracked events, it can appear either:
     * This is currently the default behavior on Web apps.
     * It is not supported in mobile apps.
     * This is referred to as the default `user_identifier` field in the dbt-snowplow-unified package
-2. As the `userId` property in the `client_session` context entity ([see below](/docs/events/ootb-data/user-and-session-identification/index.md#client-session-context-entity)).
+2. As the `userId` property in the `client_session` context entity ([see below](/docs/events/ootb-data/user-and-session-identification/index.md#session-entity)).
     * This is an optional configuration in the JavaScript tracker for Web apps.
     * It is the default behavior on mobile apps.
     * This is referred to as the default `user_identifier` field in the dbt-snowplow-unified package (used to be referred to as `device_user_id` in our legacy dbt-snowplow-mobile package).
@@ -33,7 +33,7 @@ This is also what our unified dbt packages does – it provides the information 
 :::
 
 :::note Mobile-specific identifiers
-In mobile apps, there are additional on-device identifiers provided by the platform – advertising ID (IDFA) and vendor ID (IDFV, app set ID). These can be tracked [in the mobile context entity](/docs/events/ootb-data/device-and-browser/index.md#mobile-context).
+In mobile apps, there are additional on-device identifiers provided by the platform – advertising ID (IDFA) and vendor ID (IDFV, app set ID). These can be tracked [in the mobile entity](/docs/events/ootb-data/device-and-browser/index.md#mobile-entity).
 :::
 
 ### Server (Collector) generated user identifier

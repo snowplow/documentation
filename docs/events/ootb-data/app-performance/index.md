@@ -69,25 +69,25 @@ Track things like resource load times or other performance measurements using ma
 
 This table shows the support for timing events across Snowplow [tracker SDKs](/docs/sources/index.md).
 
-| Tracker                                                                                               | Supported | Since version |
-| ----------------------------------------------------------------------------------------------------- | --------- | ------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/timings/generic/index.md)                            | ✅         | 3.0.0         |
-| [iOS](/docs/sources/mobile-trackers/tracking-events/index.md#creating-a-timing-event)                 | ✅         | 2.0.0         |
-| [Android](/docs/sources/mobile-trackers/tracking-events/index.md#creating-a-timing-event)             | ✅         | 2.0.0         |
-| [React Native](/docs/sources/react-native-tracker/tracking-events/index.md#tracking-timing-events)    | ✅         | 0.1.0         |
-| [Flutter](/docs/sources/flutter-tracker/tracking-events/index.md#track-timing-events-with-timing)     | ✅         | 0.1.0         |
-| Roku                                                                                                  | ❌         |               |
-| [Java](/docs/sources/java-tracker/tracking-events/index.md#creating-a-timing-event)                   | ✅         | 0.8.0         |
-| [Golang](/docs/sources/golang-tracker/tracking-specific-events/index.md#timing-event)                 | ✅         | 0.1.0         |
-| Python                                                                                                | ❌         |               |
-| Ruby                                                                                                  | ❌         |               |
-| PHP                                                                                                   | ❌         |               |
-| [.NET](/docs/sources/net-tracker/event-tracking/index.md#track-timing-events-with-tracktiming)        | ✅         | 1.0.0         |
-| [C++](/docs/sources/c-tracker/tracking-specific-events/index.md#track-timing-events-with-timingevent) | ✅         | 0.3.0         |
-| [Rust](/docs/sources/rust-tracker/tracking-events/index.md#track-timing-events-with-timingevent)      | ✅         | 0.1.0         |
-| [Unity](/docs/sources/unity-tracker/event-tracking/index.md#track-timing-events-with-tracktiming)     | ✅         | 0.1.0         |
-| Scala                                                                                                 | ❌         |               |
-| Lua                                                                                                   | ❌         |               |
-| Node.js                                                                                               | ❌         |               |
+| Tracker                                                                                                       | Supported | Since version |
+| ------------------------------------------------------------------------------------------------------------- | --------- | ------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/timings/generic/index.md)                                    | ✅         | 3.0.0         |
+| [iOS](/docs/sources/mobile-trackers/tracking-events/index.md#creating-a-timing-event)                         | ✅         | 2.0.0         |
+| [Android](/docs/sources/mobile-trackers/tracking-events/index.md#creating-a-timing-event)                     | ✅         | 2.0.0         |
+| [React Native](/docs/sources/react-native-tracker/tracking-events/index.md#tracking-timing-events)            | ✅         | 0.1.0         |
+| [Flutter](/docs/sources/flutter-tracker/tracking-events/index.md#track-timing-events-withtiming)              | ✅         | 0.1.0         |
+| Roku                                                                                                          | ❌         |               |
+| [Java](/docs/sources/java-tracker/tracking-events/index.md#creating-a-timing-event)                           | ✅         | 0.8.0         |
+| [Golang](/docs/sources/golang-tracker/tracking-specific-events/index.md#track-timing-events-with-tracktiming) | ✅         | 0.1.0         |
+| Python                                                                                                        | ❌         |               |
+| Ruby                                                                                                          | ❌         |               |
+| PHP                                                                                                           | ❌         |               |
+| [.NET](/docs/sources/net-tracker/event-tracking/index.md#track-timing-events-withtracktiming)                 | ✅         | 1.0.0         |
+| [C++](/docs/sources/c-tracker/tracking-specific-events/index.md#track-timing-events-withtimingevent)          | ✅         | 0.3.0         |
+| [Rust](/docs/sources/rust-tracker/tracking-events/index.md#track-timing-events-withtimingevent)               | ✅         | 0.1.0         |
+| [Unity](/docs/sources/unity-tracker/event-tracking/index.md#track-timing-events-withtracktiming)              | ✅         | 0.1.0         |
+| Scala                                                                                                         | ❌         |               |
+| Lua                                                                                                           | ❌         |               |
+| Node.js                                                                                                       | ❌         |               |
 
 You can still track timing data using trackers without built-in timing event support. Use custom events with the `timing` schema.

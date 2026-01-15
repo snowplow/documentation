@@ -53,7 +53,7 @@ Each self-describing event consists of two parts:
 Because the event references a specific version of its schema, it's always clear to downstream users and applications what each field in the event means, even if your definition of the event changes over time.
 
 Snowplow provides a large number of self-describing events out-of-the-box, for example:
-* [Link clicks](/docs/events/ootb-data/links-and-referrers/index.md#link-click-tracking-on-web)
+* [Link clicks](/docs/events/ootb-data/links-and-referrers/index.md#link-clicks)
 * [Form submissions](/docs/sources/web-trackers/tracking-events/form-tracking/index.md)
 * [Ecommerce transactions](/docs/events/ootb-data/ecommerce-events/index.md)
 

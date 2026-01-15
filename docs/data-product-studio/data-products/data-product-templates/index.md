@@ -36,9 +36,9 @@ Note: The event volume counts are calculated differently for this Data Product. 
 
 Included event specifications:
 
-* [Screen view](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-view-events)
+* [Screen view](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-views)
 * [Screen end](/docs/events/ootb-data/page-activity-tracking/index.md#screen-end-event)
-* [Application install](/docs/events/ootb-data/mobile-lifecycle-events/index.md#install-event)
+* [Application install](/docs/events/ootb-data/mobile-lifecycle-events/index.md#install-events)
 * [Application background](/docs/events/ootb-data/mobile-lifecycle-events/index.md#background-event)
 * [Application foreground](/docs/events/ootb-data/mobile-lifecycle-events/index.md#foreground-event)
 

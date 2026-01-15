@@ -54,3 +54,15 @@ Both default and extended formats will populate the [atomic](/docs/fundamentals/
 | Populates `refr_domain_userid` field                    | ✅                | ✅                                |
 | Populates `refr_dvce_tstamp` field                      | ✅                | ✅                                |
 | Adds `cross_navigation` entity                          | ❌                | ✅                                |
+
+## Tracker support
+
+This table shows the support for cross-domain tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md). The server-side trackers don't include link click tracking.
+
+| Tracker                                                                                                                                      | Supported | Since version |
+| -------------------------------------------------------------------------------------------------------------------------------------------- | --------- | ------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/link-click/index.md)                                                                        | ✅         | 0.7.0         |
+| [iOS](/docs/sources/mobile-trackers/tracking-events/session-tracking/index.md#decorating-outgoing-links-using-cross-navigation-tracking)     | ✅         | 6.0.0         |
+| [Android](/docs/sources/mobile-trackers/tracking-events/session-tracking/index.md#decorating-outgoing-links-using-cross-navigation-tracking) | ✅         | 6.0.0         |
+| React Native                                                                                                                                 | ❌         |               |
+| Flutter                                                                                                                                      | ❌         |               |

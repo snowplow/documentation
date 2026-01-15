@@ -38,7 +38,7 @@ The below table maps the setter functions to the event properties that they affe
 | `set_viewport`          | `br_viewwidth` and `br_viewheight`         |
 | `set_color_depth`       | `br_colordepth`                            |
 | `set_timezone`          | `os_timezone`                              |
-| ``set_language`         | `br_lang`                                  |
+| `set_language`          | `br_lang`                                  |
 | `set_useragent`         | `useragent`                                |
 | `set_ip_address`        | `user_ipaddress`                           |
 

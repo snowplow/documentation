@@ -212,7 +212,7 @@ Set the application ID using the `appId` field of the [tracker configuration o
 The option to track the application version was introduced in version 4.1 of the JavaScript tracker.
 :::
 
-Set the application ID using the `appVersion` field of the [tracker configuration object](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md). This will be attached to every event the tracker fires using the [application context entity](/docs/events/ootb-data/app-information/index.md#application-context-entity-on-web-apps).
+Set the application ID using the `appVersion` field of the [tracker configuration object](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md). This will be attached to every event the tracker fires using the [application context entity](/docs/events/ootb-data/app-information/index.md#entity-definitions).
 
 The version of can be a semver-like structure (e.g 1.1.0) or a Git commit SHA hash.
 

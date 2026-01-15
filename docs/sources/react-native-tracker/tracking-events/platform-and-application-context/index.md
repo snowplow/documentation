@@ -46,12 +46,12 @@ Additionally, you can track the build name of the application (e.g., `s9f2k2d` o
 
 Depending on whether `build` property is configured, the information will be tracked in a context entity using either of these schemas:
 
-1. If only `appVersion` is configured, [the Web `application` entity is used](/docs/events/ootb-data/app-information/index.md#application-context-entity-on-web-apps).
-2. If both `appVersion` and `build` are configured, [the mobile `application` entity is used](/docs/events/ootb-data/app-information/index.md#application-context-entity-on-mobile-apps).
+1. If only `appVersion` is configured, [the Web `application` entity is used](/docs/events/ootb-data/app-information/index.md#entity-definitions).
+2. If both `appVersion` and `build` are configured, [the mobile `application` entity is used](/docs/events/ootb-data/app-information/index.md#entity-definitions).
 
 ## Platform context
 
-The [platform context entity](/docs/events/ootb-data/device-and-browser/index.md#mobile-context) contains information about the user's device.
+The [platform context entity](/docs/events/ootb-data/device-and-browser/index.md#mobile-entity) contains information about the user's device.
 
 By default only the following properties are tracked automatically:
 

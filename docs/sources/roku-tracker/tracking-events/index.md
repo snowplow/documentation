@@ -104,7 +104,7 @@ m.global.snowplow.screenView = {
 
 ## Automatic application install events
 
-When [configuring the tracker](/docs/sources/roku-tracker/configuration/index.md), use the `trackInstall` setting to opt into automatic [`application_install` tracking](/docs/events/ootb-data/mobile-lifecycle-events/index.md#install-event).
+When [configuring the tracker](/docs/sources/roku-tracker/configuration/index.md), use the `trackInstall` setting to opt into automatic [`application_install` tracking](/docs/events/ootb-data/mobile-lifecycle-events/index.md#install-events).
 
 There's no way to directly detect if the app is running as part of a fresh installation, so the tracker uses an indirect trigger.
 It will send an install event after it creates a first `userId` value for the [`client_session` entity](/docs/sources/roku-tracker/adding-data/index.md#adding-user-and-platform-data-with-subject).

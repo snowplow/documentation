@@ -86,7 +86,7 @@ Track when a user completes a conversion action from an ad.
 
 ### Tracker support
 
-This table shows the support for ad tracking across the main client-side [Snowplow tracker SDKs](~/docs/sources/index.md~).
+This table shows the support for ad tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md).
 
 | Tracker                                                                           | Supported | Since version                       | Auto-tracking | Notes                           |
 | --------------------------------------------------------------------------------- | --------- | ----------------------------------- | ------------- | ------------------------------- |

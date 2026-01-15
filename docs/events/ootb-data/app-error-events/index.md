@@ -24,7 +24,7 @@ This table shows the support for exception tracking across the main client-side 
 
 ## How to use the application error APIs
 
-EThe tracker will capture unhandled exceptions. These can crash the app, so it's likely that the event will be sent after restart. Note that in some situations, it may not be possible to capture all exception details before the app crashes.
+The tracker will capture unhandled exceptions. These can crash the app, so it's likely that the event will be sent after restart. Note that in some situations, it may not be possible to capture all exception details before the app crashes.
 
 The Errors plugin for the JavaScript trackers provides configuration for automatic tracking of unhandled exceptions, as well as a method for manually tracking handled exceptions.
 

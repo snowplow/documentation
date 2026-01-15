@@ -33,7 +33,7 @@ See also [media tracking](/docs/events/ootb-data/media-events/index.md) for trac
 Track when an ad is displayed to a user.
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: false, automatic: false}}
+  overview={{event: true}}
   example={{
     impressionId: "67965967893",
     costModel: "cpm",
@@ -51,7 +51,7 @@ Track when an ad is displayed to a user.
 Track when a user clicks on an ad.
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: false, automatic: false}}
+  overview={{event: true}}
   example={{
     targetUrl: "http://www.example.com",
     clickId: "12243253",
@@ -70,7 +70,7 @@ Track when a user clicks on an ad.
 Track when a user completes a conversion action from an ad.
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: false, automatic: false}}
+  overview={{event: true}}
   example={{
     conversionId: "743560297",
     costModel: "cpa",

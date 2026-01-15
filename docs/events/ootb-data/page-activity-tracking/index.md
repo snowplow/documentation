@@ -52,7 +52,7 @@ The trackers can also track a `screen_summary` entity that contains screen engag
 This event can be tracked automatically by the mobile trackers just before the transition to the next screen. It has no properties.
 
 <SchemaProperties
-  overview={{event: true, web: false, mobile: true, automatic: true}}
+  overview={{event: true}}
   schema={{ "description": "Schema for an event tracked before transitioning to a new screen", "properties": {}, "additionalProperties": false, "type": "object", "self": { "vendor": "com.snowplowanalytics.mobile", "name": "screen_end", "format": "jsonschema", "version": "1-0-0" }, "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#" }} />
 
 ### Screen summary entity
@@ -60,7 +60,7 @@ This event can be tracked automatically by the mobile trackers just before the t
 Entity that contains screen engagement information, including how long a user spends on a screen in the foreground and background, as well as scroll depth.
 
 <SchemaProperties
-  overview={{event: false, web: false, mobile: true, automatic: true}}
+  overview={{event: false}}
   example={{ foreground_sec: 10.2, background_sec: 3.1, last_item_index: 11, items_count: 50, min_x_offset: 0, max_x_offset: 400, min_y_offset: 0, max_y_offset: 1000, content_width: 400, content_height: 5000 }}
   schema={{ "description": "Schema for an entity tracked with foreground/background/screen_end events with summary statistics about the screen view", "properties": { "foreground_sec": { "type": "number", "description": "Time in seconds spent on the current screen while the app was in foreground", "minimum": 0, "maximum": 2147483647 }, "background_sec": { "type": [ "number", "null" ], "description": "Time in seconds spent on the current screen while the app was in background", "minimum": 0, "maximum": 2147483647 }, "last_item_index": { "type": [ "integer", "null" ], "description": "Index of the last viewed item in the list on the screen", "minimum": 0, "maximum": 65535 }, "items_count": { "type": [ "integer", "null" ], "description": "Total number of items in the list on the screen", "minimum": 0, "maximum": 65535 }, "min_x_offset": { "type": [ "integer", "null" ], "description": "Minimum horizontal scroll offset on the scroll view in pixels", "minimum": -2147483647, "maximum": 2147483647 }, "max_x_offset": { "type": [ "integer", "null" ], "description": "Maximum horizontal scroll offset on the scroll view in pixels", "minimum": -2147483647, "maximum": 2147483647 }, "min_y_offset": { "type": [ "integer", "null" ], "description": "Minimum vertical scroll offset on the scroll view in pixels", "minimum": -2147483647, "maximum": 2147483647 }, "max_y_offset": { "type": [ "integer", "null" ], "description": "Maximum vertical scroll offset on the scroll view in pixels", "minimum": -2147483647, "maximum": 2147483647 }, "content_width": { "type": [ "integer", "null" ], "description": "Width of the scroll view in pixels", "minimum": 0, "maximum": 2147483647 }, "content_height": { "type": [ "integer", "null" ], "description": "Height of the scroll view in pixels", "minimum": 0, "maximum": 2147483647 } }, "additionalProperties": false, "type": "object", "required": [ "foreground_sec" ], "self": { "vendor": "com.snowplowanalytics.mobile", "name": "screen_summary", "format": "jsonschema", "version": "1-0-0" }, "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#" }} />
 

@@ -37,7 +37,7 @@ The following events track user interactions with SwiftUI windows and visionOS i
 Tracks when a user opens a SwiftUI window or window group.
 
 <SchemaProperties
-  overview={{event: true, web: false, mobile: true, automatic: false}}
+  overview={{event: true}}
   example={{ }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "self": { "vendor": "com.apple.swiftui", "name": "open_window", "format": "jsonschema", "version": "1-0-0" }, "description": "Schema for an event for opening a SwiftUI window or window group.", "type": "object", "properties": {}, "additionalProperties": false }} />
 
@@ -46,7 +46,7 @@ Tracks when a user opens a SwiftUI window or window group.
 Tracks when a user closes or dismisses a SwiftUI window or window group.
 
 <SchemaProperties
-  overview={{event: true, web: false, mobile: true, automatic: false}}
+  overview={{event: true}}
   example={{ }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "self": { "vendor": "com.apple.swiftui", "name": "dismiss_window", "format": "jsonschema", "version": "1-0-0" }, "description": "Schema for an event for dismissing a SwiftUI window or window group.", "type": "object", "properties": {}, "additionalProperties": false }} />
 
@@ -55,7 +55,7 @@ Tracks when a user closes or dismisses a SwiftUI window or window group.
 Tracks when a user enters an immersive space in a visionOS app on Apple Vision Pro.
 
 <SchemaProperties
-  overview={{event: true, web: false, mobile: true, automatic: false}}
+  overview={{event: true}}
   example={{ }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "self": { "vendor": "com.apple.swiftui", "name": "open_immersive_space", "format": "jsonschema", "version": "1-0-0" }, "description": "Schema for an event for opening a visionOS immersive space.", "type": "object", "properties": {}, "additionalProperties": false }} />
 
@@ -64,7 +64,7 @@ Tracks when a user enters an immersive space in a visionOS app on Apple Vision P
 Tracks when a user exits an immersive space in a visionOS app.
 
 <SchemaProperties
-  overview={{event: true, web: false, mobile: true, automatic: false}}
+  overview={{event: true}}
   example={{ }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "self": { "vendor": "com.apple.swiftui", "name": "dismiss_immersive_space", "format": "jsonschema", "version": "1-0-0" }, "description": "Schema for an event for dismissing a visionOS immersive space.", "type": "object", "properties": {}, "additionalProperties": false }} />
 
@@ -78,7 +78,7 @@ These entities provide context about the SwiftUI windows and visionOS immersive 
 Describes a SwiftUI window group, including its identifier, title, and window style. This entity is attached to open and dismiss window events.
 
 <SchemaProperties
-  overview={{event: false, web: false, mobile: true, automatic: false}}
+  overview={{event: false}}
   example={{
     id: "group1",
     window_id: "BC374B59-B8E7-4F09-B100-FD5F9AAC0E27",
@@ -92,7 +92,7 @@ Describes a SwiftUI window group, including its identifier, title, and window st
 Describes a visionOS immersive space, including its immersion style and upper limb visibility settings. This entity is automatically attached to all events that occur within an immersive space.
 
 <SchemaProperties
-  overview={{event: false, web: false, mobile: true, automatic: true}}
+  overview={{event: false}}
   example={{
     id: "space1",
     view_id: "C0A92B47-9654-4889-BC95-97E1C3721A53",

@@ -6,8 +6,6 @@ sidebar_position: 3
 keywords: ["user identification", "session tracking", "domain_userid", "user_id", "session ID"]
 ---
 
-import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
-
 Snowplow tracks several identifiers to help you understand user behavior across sessions and devices. These include tracker-generated IDs stored on the client, server-generated IDs from the Collector, and business user IDs you set in your app. Understanding how these identifiers work enables you to build a complete picture of user journeys and perform identity stitching in your data models.
 
 ## User identifiers

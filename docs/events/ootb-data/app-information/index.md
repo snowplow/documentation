@@ -57,7 +57,7 @@ For web, you need to provide the application version manually in the tracker con
 Web applications:
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: false, automatic: false}}
+  overview={{event: false}}
   example={{
     "version": "1.1.0"
   }}
@@ -67,7 +67,7 @@ Web applications:
 Mobile applications:
 
 <SchemaProperties
-  overview={{event: false, web: false, mobile: true, automatic: true}}
+  overview={{event: false}}
   example={{
     "version": "1.1.0",
     "build": "s9f2k2d",

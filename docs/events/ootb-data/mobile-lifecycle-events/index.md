@@ -23,7 +23,7 @@ It's not possible to track when an app is uninstalled, since the mobile platform
 This event has no properties since the relevant data is the timestamp, which is captured in the standard event fields.
 
 <SchemaProperties
-  overview={{event: true, web: false, mobile: true, automatic: true}}
+  overview={{event: true}}
   example={{ }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for an event where a mobile application is installed.", "self": { "vendor": "com.snowplowanalytics.mobile", "name": "application_install", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { }, "additionalProperties": false }} />
 
@@ -49,7 +49,7 @@ On Android only, the Android tracker can attach an extra [entity with install re
 This entity is available from Android tracker version 5.2.0 onwards.
 
 <SchemaProperties
-  overview={{event: true, web: false, mobile: true, automatic: true}}
+  overview={{event: true}}
   example={{
 		"installReferrer": "https://play.google.com/store/apps/details?id=com.example.myapp&referrer=someid%3Dsomedata",
 		"referrerClickTimestamp": "2023-11-03T09:55:29.920Z",
@@ -69,7 +69,7 @@ The mobile trackers can track these events automatically. They also attach a lif
 The foreground event is tracked each time the app becomes visible on the screen. The `foregroundIndex` property counts how many times the app has been foregrounded since installation.
 
 <SchemaProperties
-  overview={{event: true, web: false, mobile: true, automatic: true}}
+  overview={{event: true}}
   example={{ foregroundIndex: 1 }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for an application foreground event", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "application_foreground", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "foregroundIndex": { "type": "integer", "minimum": 0, "maximum": 2147483647 } }, "additionalProperties": false }} />
 
@@ -78,7 +78,7 @@ The foreground event is tracked each time the app becomes visible on the screen.
 The background event is tracked when the app is no longer visible, such as when the user switches to another app or returns to the home screen. The `backgroundIndex` property counts how many times the app has been backgrounded since installation.
 
 <SchemaProperties
-  overview={{event: true, web: false, mobile: true, automatic: true}}
+  overview={{event: true}}
   example={{ backgroundIndex: 1 }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for an application background event", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "application_background", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "backgroundIndex": { "type": "integer", "minimum": 0, "maximum": 2147483647 } }, "additionalProperties": false }} />
 
@@ -87,7 +87,7 @@ The background event is tracked when the app is no longer visible, such as when 
 When lifecycle autotracking is enabled, this entity is automatically attached to all events. It indicates whether the app was in the foreground or background when the event occurred.
 
 <SchemaProperties
-  overview={{event: false, web: false, mobile: true, automatic: true}}
+  overview={{event: false}}
   example={{
     "isVisible": true,
     "index": 2

@@ -55,7 +55,7 @@ This table shows the support for timezone tracking across the main [Snowplow tra
 Some Snowplow trackers can access device geolocation information, e.g. GPS coordinates, and attach it to events as an entity. This requires permission from the user, but is often more accurate than the IP-based geolocation.
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: true, automatic: true}}
+  overview={{event: false}}
   example={{
     latitude: 30.04335623,
     longitude: 67.59633102,

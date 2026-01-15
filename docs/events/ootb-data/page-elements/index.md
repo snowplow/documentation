@@ -24,7 +24,7 @@ Use page element tracking to:
 Button click tracking automatically captures clicks on `<button>` and `<input type="button">` elements.
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: false, automatic: true}}
+  overview={{event: true}}
   example={{
     label: "Submit",
     id: "submit-btn",
@@ -58,7 +58,7 @@ Form tracking captures three types of events: when a user focuses on a form fiel
 Triggered when a user focuses on a form field.
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: false, automatic: true}}
+  overview={{event: true}}
   example={{
     formId: "contact-form",
     elementId: "email",
@@ -74,7 +74,7 @@ Triggered when a user focuses on a form field.
 Triggered when a user changes the value of a form field.
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: false, automatic: true}}
+  overview={{event: true}}
   example={{
     formId: "contact-form",
     elementId: "email",
@@ -90,7 +90,7 @@ Triggered when a user changes the value of a form field.
 Triggered when a user submits a form. Contains data about all form fields.
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: false, automatic: true}}
+  overview={{event: true}}
   example={{
     formId: "contact-form",
     formClasses: ["contact-form", "validated"],
@@ -132,7 +132,7 @@ The element tracking plugin generates four event types:
 Create element:
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: false, automatic: true}}
+  overview={{event: true}}
   example={{
     element_name: "newsletter signup"
   }}
@@ -143,7 +143,7 @@ Create element:
 Expose element:
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: false, automatic: true}}
+  overview={{event: true}}
   example={{
     element_name: "newsletter signup"
   }}
@@ -153,7 +153,7 @@ Expose element:
 Obscure element:
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: false, automatic: true}}
+  overview={{event: true}}
   example={{
     element_name: "newsletter signup"
   }}
@@ -163,7 +163,7 @@ Obscure element:
 Destroy element:
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: false, automatic: true}}
+  overview={{event: true}}
   example={{
     element_name: "newsletter signup"
   }}
@@ -175,7 +175,7 @@ Destroy element:
 All element events include an `element` entity with information about the tracked element.
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: false, automatic: true}}
+  overview={{event: false}}
   example={{
     element_name: "newsletter signup",
     width: 560,
@@ -194,7 +194,7 @@ All element events include an `element` entity with information about the tracke
 You can optionally configure the tracker to attach element statistics to any event type, providing information about element visibility and scroll depth, using the `element_statistics` entity.
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: false, automatic: true}}
+  overview={{event: false}}
   example={{
     element_name: "blog content",
     element_index: 1,

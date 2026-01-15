@@ -21,7 +21,7 @@ Use site search tracking to:
 The site search event captures the search terms, any filters applied, and the number of results returned.
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: false, automatic: false}}
+  overview={{event: true}}
   example={{
     terms: ["unified", "log"],
     filters: {"category": "books", "sub-category": "non-fiction"},

@@ -60,7 +60,7 @@ The ecommerce APIs include a number of tracking functions for different ecommerc
 All these events use the same underlying schema. They're distinguished by their `type` property.
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: true, automatic: false}}
+  overview={{event: true}}
   example={{
     type: 'list_view',
     name: 'shop the look'
@@ -76,7 +76,7 @@ Every ecommerce event includes entities that describe the user interaction. Thes
 The cart entity captures the current state of the shopping cart, including its total value and currency.
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: true, automatic: false}}
+  overview={{event: false}}
   example={{
     cart_id: null,
     currency: 'EUR',
@@ -89,7 +89,7 @@ The cart entity captures the current state of the shopping cart, including its t
 The checkout step entity tracks information about a specific step in the checkout process, including delivery details, payment method, and user preferences.
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: true, automatic: false}}
+  overview={{event: false}}
   example={{
     step: 2,
     account_type: 'guest',
@@ -111,7 +111,7 @@ The checkout step entity tracks information about a specific step in the checkou
 The product entity contains detailed information about a product, including its ID, category, price, and other attributes such as brand, variant, and inventory status.
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: true, automatic: false}}
+  overview={{event: false}}
   example={{
     id: '1236',
     name: null,
@@ -134,7 +134,7 @@ The product entity contains detailed information about a product, including its 
 The promotion entity tracks internal promotional content such as banners, sliders, or featured product showcases.
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: true, automatic: false}}
+  overview={{event: false}}
   example={{
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for a promotion entity in Ecommerce", "self": { "vendor": "com.snowplowanalytics.snowplow.ecommerce", "name": "promotion", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "id": { "description" : "The ID of the promotion.", "type": "string", "maxLength": 4096 }, "name": { "description" : "The name of the promotion.", "type": [ "string", "null" ], "maxLength": 256 }, "product_ids" : { "description" : "Array of SKUs or product IDs showcased in the promotion.", "type" : [ "array", "null" ], "items" : { "type" : "string", "maxLength": 4096 } }, "position": { "description" : "The position the promotion was presented in a list of promotions E.g. banner, slider.", "type" : [ "integer", "null" ], "minimum": 0, "maximum": 9999999 }, "creative_id": { "description" : "Identifier/Name/Url for the creative presented on the promotion.", "type" : [ "string", "null" ], "maxLength": 4096 }, "type": { "description": "Type of the promotion delivery mechanism. E.g. popup, banner, intra-content", "type": [ "string", "null" ], "maxLength": 256 }, "slot": { "description": "The website slot in which the promotional content was added to. E.g. Identifier for slot sidebar-1, intra-content-2", "type": [ "string", "null" ], "maxLength": 256 } }, "required": [ "id" ], "additionalProperties": false }} />
@@ -144,7 +144,7 @@ The promotion entity tracks internal promotional content such as banners, slider
 The refund entity captures information about a transaction refund, including the amount refunded and the reason for the refund.
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: true, automatic: false}}
+  overview={{event: false}}
   example={{
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for a refund in Ecommerce", "self": { "vendor": "com.snowplowanalytics.snowplow.ecommerce", "name": "refund", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "transaction_id": { "description": "The ID of the transaction.", "type": "string", "maxLength": 4096 }, "currency": { "description" : "The currency in which the product is being priced (ISO 4217).", "type" : "string", "maxLength": 3, "minLength": 3 }, "refund_amount" : { "type": "number", "description": "The monetary amount refunded.", "multipleOf": 0.01, "minimum": 0.00, "maximum": 9999999 }, "refund_reason": { "type": [ "string", "null" ], "description": "Reason for refunding the whole or part of the transaction.", "maxLength": 4096 } }, "required": [ "transaction_id", "currency", "refund_amount" ], "additionalProperties": false }} />
@@ -154,7 +154,7 @@ The refund entity captures information about a transaction refund, including the
 The transaction entity contains details about a completed purchase, including revenue, payment method, shipping costs, and applied discounts.
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: true, automatic: false}}
+  overview={{event: false}}
   example={{
     transaction_id: 'TtlZ3b',
     currency: 'EUR',
@@ -174,7 +174,7 @@ The transaction entity contains details about a completed purchase, including re
 The transaction error entity captures information about failed transactions, including error codes, descriptions, and error types.
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: true, automatic: false}}
+  overview={{event: false}}
   example={{
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for a transaction error or rejection entity in ecommerce.", "self": { "vendor": "com.snowplowanalytics.snowplow.ecommerce", "name": "transaction_error", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "error_code": { "type": [ "string", "null" ], "description": "Error-identifying code for the transaction issue. E.g. E522", "maxLength": 256 }, "error_shortcode" : { "type": [ "string", "null" ], "description": "Shortcode for the error occurred in the transaction. E.g. declined_by_stock_api, declined_by_payment_method, card_declined, pm_card_radarBlock", "maxLength": 4096 }, "error_description": { "type": [ "string", "null" ], "description": "Longer description for the error occurred in the transaction.", "maxLength": 4096 }, "error_type": { "type": [ "string", "null" ], "enum": [ "hard", "soft", null ], "description": "Hard error types mean the customer must provide another form of payment e.g. an expired card. Soft errors can be the result of temporary issues where retrying might be successful e.g. processor declined the transaction." }, "resolution": { "type": [ "string", "null" ], "description": "The resolution selected for the error scenario. E.g. retry_allowed, user_blacklisted, block_gateway, contact_user, default", "maxLength": 4096  } }, "additionalProperties": false }} />
@@ -188,7 +188,7 @@ You can configure the ecommerce `user` and `page` entities to automatically atta
 The page entity describes the type of ecommerce page being viewed, such as homepage, product page, or checkout page.
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: true, automatic: false}}
+  overview={{event: false}}
   example={{
     type: 'checkout step 1',
     language: null,
@@ -201,7 +201,7 @@ The page entity describes the type of ecommerce page being viewed, such as homep
 The user entity provides information about the user making the purchase, including their ID, email address, and whether they're a guest.
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: true, automatic: false}}
+  overview={{event: false}}
   example={{
     id: 'U12345',
     email: 'john@email.com',

@@ -25,7 +25,7 @@ You'll need to manually track any received deep links, using the `deep_link_rece
 The `deep_link_received` event, as well as the first subsequent screen view event, include the `page_url` and `page_referrer` atomic event properties.
 
 <SchemaProperties
-  overview={{event: true, web: false, mobile: true, automatic: false}}
+  overview={{event: true}}
   example={{
     url: 'https://example.com/notes/123',
     referrer: 'https://snowplow.io'
@@ -35,7 +35,7 @@ The `deep_link_received` event, as well as the first subsequent screen view even
 The tracker will automatically add this `deep_link` entity to the next screen view event after tracking the `deep_link_received` event.
 
 <SchemaProperties
-  overview={{event: false, web: false, mobile: true, automatic: true}}
+  overview={{event: false}}
   example={{
     url: 'https://example.com/notes/123',
     referrer: 'https://snowplow.io'
@@ -62,7 +62,7 @@ The web trackers automatically populate the `page_referrer` [atomic event proper
 The web trackers can automatically track link click events, capturing details about the clicked link such as its URL, element ID, classes, target, and content.
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: false, automatic: true}}
+  overview={{event: true}}
   example={{
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for a link click event", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "link_click", "format": "jsonschema", "version": "1-0-1" }, "type": "object", "properties": { "elementId": { "type": "string" }, "elementClasses": { "type": "array", "items": { "type": "string" } }, "elementTarget": { "type": "string" }, "targetUrl": { "type": "string", "minLength": 1 }, "elementContent": { "type": "string" } }, "required": ["targetUrl"], "additionalProperties": false }} />

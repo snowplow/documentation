@@ -25,7 +25,7 @@ Some trackers can track an entity containing information about the current sessi
 The `client_session` entity contains data such as the session identifier and session index, as well as information about the previous session to help analysis.
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: true, automatic: true}}
+  overview={{event: true}}
   example={{
     sessionIndex: 7,
     sessionId: 'bca0fa0e-853c-41cf-9cc4-15048f6f0ff5',

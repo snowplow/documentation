@@ -20,7 +20,7 @@ Use social interaction tracking to:
 The social interaction event captures the social network, the action performed, and optionally the target content.
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: false, automatic: false}}
+  overview={{event: true}}
   example={{
     action: "like",
     network: "facebook",

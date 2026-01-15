@@ -33,7 +33,7 @@ The Errors plugin for the JavaScript trackers provides configuration for automat
 All exception events use the same `application_error` schema, which has the following properties:
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: true, automatic: true}}
+  overview={{event: true}}
   example={{
     programmingLanguage: "JAVA",
     message: "java.lang.OutOfMemoryError error raised",

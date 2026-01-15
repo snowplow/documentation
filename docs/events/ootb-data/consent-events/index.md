@@ -62,7 +62,7 @@ The [Enhanced Consent plugin](/docs/sources/web-trackers/tracking-events/consent
 With the exception of the CMP visible event, these methods use the same `consent_preferences` event schema. The CMP visible event uses the `cmp_visible` schema.
 
 <SchemaProperties
-    overview={{event: true, web: true, mobile: false, automatic: false}}
+    overview={{event: true}}
     example={{
         basisForProcessing: 'consent',
         consentVersion: '1',
@@ -75,7 +75,7 @@ With the exception of the CMP visible event, these methods use the same `consent
     schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for consent preferences selection event", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "consent_preferences", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "eventType": { "enum": ["deny_all", "allow_all", "allow_selected", "pending", "implicit_consent", "withdrawn", "expired"], "description": "The action for the consent preferences of a user." }, "basisForProcessing": { "enum": ["consent", "contract", "legal_obligation", "vital_interests", "public_task", "legitimate_interests"], "description": "GDPR lawful basis for data collection & processing." }, "consentUrl": { "type": "string", "format": "uri", "description": "URI of the privacy policy related document." }, "consentVersion": { "type": "string", "maxLength": 16, "description": "Version of the privacy policy related document." }, "consentScopes": { "type": "array", "items": { "type": "string", "description": "Each consent scope which has been accepted.", "maxLength": 1024 }, "minItems": 1, "description": "The scopes allowed after the user finalized his selection of consent preferences. E.g ['analytics', 'functional', 'advertisement']." }, "domainsApplied": { "type": "array", "items": { "type": "string", "description": "Each domain for which consent action applies.", "maxLength": 1024 }, "minItems": 1, "description": "The domains for which this consent allows these preferences to persist to." }, "gdprApplies": { "type": ["boolean", "null"], "description": "Determine if GDPR applies based on the user's geo-location." } }, "required": [ "eventType", "consentVersion", "domainsApplied", "consentScopes", "consentUrl", "basisForProcessing" ], "additionalProperties": false }} />
 
 <SchemaProperties
-    overview={{event: true, web: true, mobile: false, automatic: false}}
+    overview={{event: true}}
     info='Tracks the load time of Consent Management Platform (CMP) banners.'
     example={{
         elapsedTime: 1.5

@@ -27,7 +27,7 @@ Page view events are [baked-in events](/docs/fundamentals/events/index.md) that 
 Some trackers assign a unique identifier to every page load: the page view ID. Where available, you can configure this UUID to be added to every event tracked on that page, by tracking the `web_page` entity. This identifier can be very useful for sessionization and user journey analysis.
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: false, automatic: true}}
+  overview={{event: false}}
   example={{
     id: '024629F0-6B9B-440C-82D4-DB3CF9D31533'
    }}
@@ -71,7 +71,7 @@ Screen view events are the mobile equivalent of page view events.
 Screen view events record the name and identifier of the current screen, as well as some optional properties such as the ID of the previous screen. Information about the previous screen can be useful for understanding user navigation within your application.
 
 <SchemaProperties
-  overview={{event: true, web: false, mobile: true, automatic: 'Depends on the app framework'}}
+  overview={{event: true}}
   example={{
     "name": 'Screen 2',
     "type": 'feed',
@@ -88,7 +88,7 @@ Screen view events record the name and identifier of the current screen, as well
 Some trackers can automatically attach a `screen` entity to all events after a screen view is tracked. This entity contains information about the current, or last seen, screen.
 
 <SchemaProperties
-  overview={{event: false, web: false, mobile: true, automatic: true}}
+  overview={{event: false}}
   example={{
     "name": 'Screen 2',
     "type": 'feed',

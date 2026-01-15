@@ -29,7 +29,7 @@ You can configure the web trackers to automatically include a browser entity wit
 The browser entity is only available on web trackers since it captures browser-specific information from the DOM and browser APIs. These APIs aren't available to React Native or Flutter.
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: false, automatic: true}}
+  overview={{event: false}}
   example={{
     viewport: null,
     documentSize: null,
@@ -56,17 +56,17 @@ You can enable Client Hints in two ways:
 - Basic hints: captures limited device and browser information
 - High-entropy hints: captures additional details that could be used for fingerprinting (browsers may prompt the user before providing this data)
 
-| Tracker                                                                         | Supported | Since version | Auto-tracking |
-| ------------------------------------------------------------------------------- | --------- | ------------- | ------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/client-hints/index.md)         | ✅         | 3.0.0         | ✅             |
-| iOS                                                                             | ❌         |               |               |
-| Android                                                                         | ❌         |               |               |
-| React Native                                                                    | ❌         |               |               |
-| Flutter                                                                         | ❌         |               |               |
-| Roku                                                                            | ❌         |               |               |
+| Tracker                                                                 | Supported | Since version | Auto-tracking |
+| ----------------------------------------------------------------------- | --------- | ------------- | ------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/client-hints/index.md) | ✅         | 3.0.0         | ✅             |
+| iOS                                                                     | ❌         |               |               |
+| Android                                                                 | ❌         |               |               |
+| React Native                                                            | ❌         |               |               |
+| Flutter                                                                 | ❌         |               |               |
+| Roku                                                                    | ❌         |               |               |
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: false, automatic: true}}
+  overview={{event: false}}
   example={{
     isMobile: false,
     brands: [
@@ -94,7 +94,7 @@ This table shows the support for the mobile entity across the main client-side S
 | Roku                                                                                                                          | ❌         |               |               |                                   |
 
 <SchemaProperties
-  overview={{event: false, web: false, mobile: true, automatic: true}}
+  overview={{event: false}}
   example={{
     deviceManufacturer: 'Samsung',
     deviceModel: 'SM-N960N Galaxy Note9 TD-LTE KR 128GB',
@@ -134,7 +134,7 @@ The [YAUAA (Yet Another User Agent Analyzer) enrichment](/docs/pipeline/enrichme
 It extract information about the user's device and browser.
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: true, automatic: true}}
+  overview={{event: false}}
   example={{
     schema_name: 'yauaa',
     agent_class: 'Browser',
@@ -176,7 +176,7 @@ It extract information about the user's device and browser.
 The [IAB Spiders and Robots enrichment](/docs/pipeline/enrichments/available-enrichments/iab-enrichment/index.md) uses the IAB/ABC International Spiders and Bots List to determine whether an event was produced by a user or a robot/spider based on its IP address and user agent.
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: false, automatic: true}}
+  overview={{event: false}}
   example={{
     category: 'BROWSER',
     primaryImpact: null,

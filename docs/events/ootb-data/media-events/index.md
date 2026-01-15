@@ -84,7 +84,7 @@ These events track the core playback flow from start to finish.
 #### Buffer end event
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: true, automatic: 'Depends on the tracker used'}}
+  overview={{event: true}}
   example={{ }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Media player event fired when the the player finishes buffering content and resumes playback.", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "buffer_end_event", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": {}, "additionalProperties": false }} />
 
@@ -92,56 +92,56 @@ These events track the core playback flow from start to finish.
 #### Buffer start event
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: true, automatic: 'Depends on the tracker used'}}
+  overview={{event: true}}
   example={{ }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Media player event fired when the player goes into the buffering state and begins to buffer content.", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "buffer_start_event", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": {}, "additionalProperties": false }} />
 
 #### Pause event
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: true, automatic: 'Depends on the tracker used'}}
+  overview={{event: true}}
   example={{ }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Media player event sent when the user pauses the playback.", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "pause_event", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": {}, "additionalProperties": false }} />
 
 #### Playback end event
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: true, automatic: 'Depends on the tracker used'}}
+  overview={{event: true}}
   example={{ }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Media player event sent when playback stops when end of the media is reached or because no further data is available.", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "end_event", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": {}, "additionalProperties": false }} />
 
 #### Percent progress event
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: true, automatic: 'Depends on the tracker used'}}
+  overview={{event: true}}
   example={{ }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Media player event fired when a percentage boundary set in tracking options is reached", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "percent_progress_event", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "percentProgress": { "type": [ "integer", "null" ], "description": "The percent of the way through the media", "minimum": 0, "maximum": 100 } }, "additionalProperties": false }} />
 
 #### Media ping event
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: true, automatic: 'Depends on the tracker used'}}
+  overview={{event: true}}
   example={{ }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Media player event fired periodically during main content playback, regardless of other API events that have been sent.", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "ping_event", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { }, "additionalProperties": false }} />
 
 #### Play event
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: true, automatic: 'Depends on the tracker used'}}
+  overview={{event: true}}
   example={{ }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Media player event sent when the player changes state to playing from previously being paused.", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "play_event", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": {}, "additionalProperties": false }} />
 
 #### Seek end event
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: true, automatic: 'Depends on the tracker used'}}
+  overview={{event: true}}
   example={{ }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Media player event sent when a seek operation completes.", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "seek_end_event", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": {}, "additionalProperties": false }} />
 
 #### Seek start event
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: true, automatic: 'Depends on the tracker used'}}
+  overview={{event: true}}
   example={{ }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Media player event sent when a seek operation begins.", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "seek_start_event", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": {}, "additionalProperties": false }} />
 
@@ -152,7 +152,7 @@ These events track changes to the player's display mode, quality, and settings.
 #### Error event
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: true, automatic: 'Depends on the tracker used'}}
+  overview={{event: true}}
   example={{
     "errorCode": "E522",
     "errorName": "forbidden",
@@ -163,7 +163,7 @@ These events track changes to the player's display mode, quality, and settings.
 #### Fullscreen change event
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: true, automatic: 'Depends on the tracker used'}}
+  overview={{event: true}}
   example={{
     "fullscreen": true
   }}
@@ -172,7 +172,7 @@ These events track changes to the player's display mode, quality, and settings.
 #### Picture-in-picture change event
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: true, automatic: 'Depends on the tracker used'}}
+  overview={{event: true}}
   example={{
     pictureInPicture: true
   }}
@@ -181,7 +181,7 @@ These events track changes to the player's display mode, quality, and settings.
 #### Playback rate change event
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: true, automatic: 'Depends on the tracker used'}}
+  overview={{event: true}}
   example={{
     previousRate: 1,
     newRate: 1.5
@@ -191,7 +191,7 @@ These events track changes to the player's display mode, quality, and settings.
 #### Quality change event
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: true, automatic: 'Depends on the tracker used'}}
+  overview={{event: true}}
   example={{
     "previousQuality": '1080p',
     "newQuality": '720p',
@@ -204,14 +204,14 @@ These events track changes to the player's display mode, quality, and settings.
 #### Ready event
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: true, automatic: 'Depends on the tracker used'}}
+  overview={{event: true}}
   example={{ }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Media player event fired when the media tracking is successfully attached to the player and can track events.", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "ready_event", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": {}, "additionalProperties": false }} />
 
 #### Volume change event
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: true, automatic: 'Depends on the tracker used'}}
+  overview={{event: true}}
   example={{
     "previousVolume": 30,
     "newVolume": 50
@@ -225,7 +225,7 @@ These events track ad playback for monetized content. Ad events include the medi
 #### Ad click event
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: true, automatic: 'Depends on the tracker used'}}
+  overview={{event: true}}
   example={{
     percentProgress: 50
   }}
@@ -234,56 +234,56 @@ These events track ad playback for monetized content. Ad events include the medi
 #### Ad break start event
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: true, automatic: 'Depends on the tracker used'}}
+  overview={{event: true}}
   example={{ }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Media player event that signals the start of an ad break.", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "ad_break_start_event", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { }, "additionalProperties": false }} />
 
 #### Ad break end event
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: true, automatic: 'Depends on the tracker used'}}
+  overview={{event: true}}
   example={{ }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Media player event that signals the end of an ad break.", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "ad_break_end_event", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { }, "additionalProperties": false }} />
 
 #### Ad complete event
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: true, automatic: 'Depends on the tracker used'}}
+  overview={{event: true}}
   example={{ }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Media player event that signals the ad creative was played to the end at normal speed.", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "ad_complete_event", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": {}, "additionalProperties": false }} />
 
 #### Ad pause event
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: true, automatic: 'Depends on the tracker used'}}
+  overview={{event: true}}
   example={{ percentProgress: 50 }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Media player event fired when the user clicked the pause control and stopped the ad creative.", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "ad_pause_event", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "percentProgress": { "type": [ "integer", "null" ], "description": "The percent of the way through the ad", "minimum": 0, "maximum": 100 } }, "additionalProperties": false }} />
 
 #### Ad quartile event
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: true, automatic: 'Depends on the tracker used'}}
+  overview={{event: true}}
   example={{ percentProgress: 50 }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Media player event fired when a quartile of ad is reached after continuous ad playback at normal speed.", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "ad_quartile_event", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "percentProgress": { "type": "integer", "description": "The percent of the way through the ad", "minimum": 0, "maximum": 100 } }, "additionalProperties": false, "required": [ "percentProgress" ] }} />
 
 #### Ad resume event
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: true, automatic: 'Depends on the tracker used'}}
+  overview={{event: true}}
   example={{ percentProgress: 50 }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Media player event fired when the user resumed playing the ad creative after it had been stopped or paused.", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "ad_resume_event", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "percentProgress": { "type": [ "integer", "null" ], "description": "The percent of the way through the ad", "minimum": 0, "maximum": 100 } }, "additionalProperties": false }} />
 
 #### Ad skip event
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: true, automatic: 'Depends on the tracker used'}}
+  overview={{event: true}}
   example={{ percentProgress: 50 }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Media player event fired when the user activated a skip control to skip the ad creative.", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "ad_skip_event", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "percentProgress": { "type": [ "integer", "null" ], "description": "The percent of the way through the ad", "minimum": 0, "maximum": 100 } }, "additionalProperties": false }} />
 
 #### Ad start event
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: true, automatic: 'Depends on the tracker used'}}
+  overview={{event: true}}
   example={{ }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Media player event that signals the start of an ad.", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "ad_start_event", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": {}, "additionalProperties": false }} />
 
@@ -303,7 +303,7 @@ Every media event includes entities that describe the current state of the playe
 The media player entity captures the current state of playback at the moment each event fires.
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: true, automatic: true}}
+  overview={{event: false}}
   example={{
     "currentTime": 109,
     "duration": 400,
@@ -348,7 +348,7 @@ The table below shows which media player properties (first column) and media eve
 \* Play time stats are not being incremented while ads with type linear (default) are being played. Linear ads take over the video playback. For non-linear and companion ads, play time stats are still being incremented while the ad is playing.
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: true, automatic: true}}
+  overview={{event: false}}
   example={{
     "mediaSessionId": "2d9bd9ac-abbd-419a-b934-9a2965cba339",
     "startedAt": "2023-11-03T09:55:29.920Z",
@@ -372,7 +372,7 @@ The table below shows which media player properties (first column) and media eve
 The media ad entity describes the currently playing ad. It is attached to ad events.
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: true, automatic: true}}
+  overview={{event: false}}
   example={{
     "name": "Snowplow 5s ad",
     "adId": "2d9bd9ac-abbd-419a-b934-9a2965cba339",
@@ -388,7 +388,7 @@ The media ad entity describes the currently playing ad. It is attached to ad eve
 The media ad break entity describes a group of ads played together, whether pre-roll, mid-roll, or post-roll. It is attached to ad break events and all ad events within the break.
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: true, automatic: true}}
+  overview={{event: false}}
   example={{
     "name": 'pre-roll',
     "breakId": "fb819c48-5760-4d94-9c5b-4fa52f61a998",

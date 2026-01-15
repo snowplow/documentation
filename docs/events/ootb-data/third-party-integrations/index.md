@@ -16,7 +16,7 @@ As well as [event forwarding](/docs/destinations/forwarding-events/index.md) int
 The Optimizely X web plugin captures experiment and variation data from [Optimizely](https://www.optimizely.com/) A/B tests. The tracker will add it to all tracked events as an entity.
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: false, automatic: true}}
+  overview={{event: false}}
   example={{
     experimentId: 12345,
     variationName: "Variation A",
@@ -45,7 +45,7 @@ The GA cookies web plugin captures Google Analytics cookie values (both GA4 and 
 GA4:
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: false, automatic: true}}
+  overview={{event: false}}
   example={{
     _ga: "G-1234",
     cookie_prefix: "prefix",
@@ -58,7 +58,7 @@ GA4:
 Universal Analytics:
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: false, automatic: true}}
+  overview={{event: false}}
   example={{
     _ga: "GA1.2.3.4"
   }}
@@ -105,7 +105,7 @@ Privacy Sandbox has been deprecated by Google. This plugin remains available but
 The Privacy Sandbox plugin captures data from the [Topics API](https://developer.chrome.com/docs/privacy-sandbox/topics/overview/), which was designed to provide privacy-preserving interest-based advertising signals.
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: false, automatic: true}}
+  overview={{event: false}}
   example={{
     topics: [
       { topic: 123, taxonomyVersion: "1", modelVersion: "2" }

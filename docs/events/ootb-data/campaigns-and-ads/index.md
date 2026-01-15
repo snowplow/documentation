@@ -18,43 +18,15 @@ Use campaign and ad tracking to:
 - Track conversions from ad campaigns
 - Analyze the effectiveness of different marketing channels
 
-## Campaign tracking with UTM parameters
+## Campaign atomic event properties
 
-Snowplow automatically captures UTM parameters from URLs to identify traffic sources. These parameters populate [atomic event properties](/docs/fundamentals/canonical-event/index.md#marketing-fields).
+The [campaign attribution enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md) can automatically capture UTM parameters from URLs and populate [atomic event properties](/docs/fundamentals/canonical-event/index.md#marketing-fields) for campaign analysis.
 
-### Supported UTM parameters
-
-| Parameter      | Atomic field    | Description                                                                                                                                       |
-| -------------- | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `utm_source`   | `mkt_source`    | Identifies the advertiser driving traffic to your site (e.g., google, facebook, newsletter)                                                       |
-| `utm_medium`   | `mkt_medium`    | The advertising or marketing medium (e.g., cpc, banner, email)                                                                                    |
-| `utm_campaign` | `mkt_campaign`  | A unique campaign identifier                                                                                                                      |
-| `utm_term`     | `mkt_term`      | The search terms that triggered the ad (used for paid search)                                                                                     |
-| `utm_content`  | `mkt_content`   | Used to differentiate similar content or links in the same ad                                                                                     |
-
-Campaign parameters are compatible with Google Analytics, so you can use the same URL parameters for both tracking systems.
-
-### Non-paid traffic attribution
-
-When UTM parameters are not present, Snowplow analyzes the page referrer to determine traffic source:
-
-- If the referrer is a search engine, the medium is set to "organic" and Snowplow extracts the search engine name and search terms
-- If the referrer is another website, the medium is set to "referrer"
-
-### Tracker support for campaign tracking
-
-| Tracker                                                                              | Supported | Since version | Auto-tracking |
-| ------------------------------------------------------------------------------------ | --------- | ------------- | ------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/campaigns-utms/index.md)            | ✅         | 2.0.0         | ✅             |
-| iOS                                                                                  | ❌         |               |               |
-| Android                                                                              | ❌         |               |               |
-| React Native                                                                         | ❌         |               |               |
-| Flutter                                                                              | ❌         |               |               |
-| Roku                                                                                 | ❌         |               |               |
-
-## Ad tracking
+## Advertisement events
 
 Ad tracking captures impressions, clicks, and conversions from advertisements displayed on your site or elsewhere.
+
+See also [media tracking](/docs/events/ootb-data/media-events/index.md) for tracking advertising content consumed within video or audio media.
 
 ### Ad impression event
 
@@ -112,15 +84,15 @@ Track when a user completes a conversion action from an ad.
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for an ad conversion event", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "ad_conversion", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "conversionId": { "type": "string", "description": "Identifier for the conversion instance" }, "costModel": { "type": "string", "enum": ["cpa", "cpc", "cpm"], "description": "The cost model" }, "cost": { "type": "number", "description": "The cost of the conversion" }, "category": { "type": "string", "description": "Conversion category" }, "action": { "type": "string", "description": "The type of user interaction, e.g. purchase" }, "property": { "type": "string", "description": "Describes the object of the conversion" }, "initialValue": { "type": "number", "description": "How much the conversion is initially worth" }, "advertiserId": { "type": "string", "description": "Adserver identifier for the advertiser" }, "campaignId": { "type": "string", "description": "Adserver identifier for the campaign" } }, "additionalProperties": false }} />
 
-### Tracker support for ad tracking
+### Tracker support
 
-| Tracker                                                            | Supported | Since version | Auto-tracking |
-| ------------------------------------------------------------------ | --------- | ------------- | ------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/ads/index.md)     | ✅         | 2.0.0         | ❌             |
-| iOS                                                                | ❌         |               |               |
-| Android                                                            | ❌         |               |               |
-| React Native                                                       | ❌         |               |               |
-| Flutter                                                            | ❌         |               |               |
-| Roku                                                               | ❌         |               |               |
+This table shows the support for ad tracking across the main client-side [Snowplow tracker SDKs](~/docs/sources/index.md~).
 
-Ad events require manual tracking. You need to implement tracking calls in your ad serving code to capture impressions, clicks, and conversions.
+| Tracker                                                        | Supported | Since version                       | Auto-tracking | Notes                           |
+| -------------------------------------------------------------- | --------- | ----------------------------------- | ------------- | ------------------------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/ads/index.md) | ✅         | 1.1.0 (directly), 3.0.0 (as plugin) | ❌             | Requires the ad tracking plugin |
+| iOS                                                            | ❌         |                                     |               |                                 |
+| Android                                                        | ❌         |                                     |               |                                 |
+| React Native                                                   | ❌         |                                     |               |                                 |
+| Flutter                                                        | ❌         |                                     |               |                                 |
+| Roku                                                           | ❌         |                                     |               |                                 |

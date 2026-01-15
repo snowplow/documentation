@@ -82,6 +82,8 @@ This table shows the support for link click tracking across the main client-side
 
 To track link clicks on web using React Native or Flutter, you can implement custom event tracking when users interact with links in your app using the `link_click` event schema.
 
+We recommend using the [Base web data product template](/docs/data-product-studio/data-products/data-product-templates/index.md#base-web) for web tracking. It includes link clicks.
+
 ## Cross-domain tracking
 
 Read more about tracking cross-domain in the [cross-navigation page](/docs/events/cross-navigation/index.md).

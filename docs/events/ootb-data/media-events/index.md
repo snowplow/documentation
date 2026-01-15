@@ -59,6 +59,9 @@ Auto-tracking means that the tracker can subscribe to and track events from a re
 
 The Snowplow media tracking APIs are supported by the [Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) dbt data model.
 
+
+We recommend using the [Media base data product template](/docs/data-product-studio/data-products/data-product-templates/index.md#media-web) for media tracking on web.
+
 ## How to use the media APIs
 
 Each media player instance needs to be registered with the tracker, using a unique ID. To start tracking user behavior involving that player, call the appropriate `startMediaTracking` function. When playback ends, call the `stopMediaTracking` function to end the session and send any final events.

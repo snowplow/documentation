@@ -32,9 +32,11 @@ This table shows the support for ecommerce tracking across the main client-side 
 | Flutter                                                                              | ❌         |               |               |                                                      |
 | Roku                                                                                 | ❌         |               |               | Use the ecommerce schemas for your own custom events |
 
-*Use the [JavaScript ecommerce plugin](/docs/sources/web-trackers/tracking-events/ecommerce/index.md) and APIs for React Native ecommerce tracking.
+*You can use the [JavaScript ecommerce plugin](/docs/sources/web-trackers/tracking-events/ecommerce/index.md) and APIs for React Native ecommerce tracking.
 
 The Snowplow ecommerce tracking APIs are supported by the [Ecommerce](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md) dbt data model. It's a fully incremental model that transforms raw ecommerce event data into a set of derived tables based around carts, checkouts, products, and transactions.
+
+We recommend using the [Ecommerce base data product template](/docs/data-product-studio/data-products/data-product-templates/index.md#ecommerce-web-and-mobile) for ecommerce tracking.
 
 ## Available events
 

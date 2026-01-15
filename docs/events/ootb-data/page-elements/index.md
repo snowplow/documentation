@@ -37,14 +37,16 @@ Button click tracking automatically captures clicks on `<button>` and `<input ty
 
 This table shows the support for button click tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md).
 
-| Tracker                                                                 | Supported | Since version | Auto-tracking |
-| ----------------------------------------------------------------------- | --------- | ------------- | ------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/button-click/index.md) | ✅         | 3.18.0        | ✅             |
-| iOS                                                                     | ❌         |               |               |
-| Android                                                                 | ❌         |               |               |
-| React Native                                                            | ❌         |               |               |
-| Flutter                                                                 | ❌         |               |               |
-| Roku                                                                    | ❌         |               |               |
+| Tracker                                                                 | Supported | Since version | Auto-tracking | Notes                        |
+| ----------------------------------------------------------------------- | --------- | ------------- | ------------- | ---------------------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/button-click/index.md) | ✅         | 3.18.0        | ✅             | Requires button click plugin |
+| iOS                                                                     | ❌         |               |               |                              |
+| Android                                                                 | ❌         |               |               |                              |
+| React Native                                                            | ❌         |               |               |                              |
+| Flutter                                                                 | ❌         |               |               |                              |
+| Roku                                                                    | ❌         |               |               |                              |
+
+We recommend using the [Base web data product template](/docs/data-product-studio/data-products/data-product-templates/index.md#base-web) for web tracking. It includes button clicks.
 
 ## Form interactions
 

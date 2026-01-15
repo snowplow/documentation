@@ -38,6 +38,7 @@ This table shows the support for page ping tracking across the main client-side 
 | Roku                                                                               | ❌         |               |               |                                    |
 | [Python](/docs/sources/python-tracker/tracking-specific-events/index.md)           | ✅         | 0.8.0         | ❌             | Detect activity and track manually |
 
+We recommend using the [Base web data product template](/docs/data-product-studio/data-products/data-product-templates/index.md#base-web) for web tracking. It includes page pings.
 
 ## Screen engagement
 
@@ -75,3 +76,5 @@ This table shows the support for screen engagement tracking across the main clie
 | [React Native](/docs/sources/react-native-tracker/tracking-events/screen-tracking/index.md#screen-engagement-tracking) | ✅         | 2.1.0         | ✅             | Only on mobile |
 | [Flutter](/docs/sources/flutter-tracker/tracking-events/index.md#screen-engagement-tracking)                           | ✅         | 0.1.0         | ✅             | Only on mobile |
 | Roku                                                                                                                   | ❌         |               |               |                |
+
+We recommend using the [Base mobile data product template](/docs/data-product-studio/data-products/data-product-templates/index.md#base-mobile) for mobile tracking. It includes screen end events.

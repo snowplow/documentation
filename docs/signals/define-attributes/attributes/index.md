@@ -36,16 +36,20 @@ Once you've selected an event and version, click **Confirm** to add the attribut
 
 Signals supports a number of different aggregation types.
 
-| Aggregation | Description                    | Required property type                |
-| ----------- | ------------------------------ | ------------------------------------- |
-| Counter     | Count events                   | No property used for this aggregation |
-| Sum         | Sum of property values         | Numeric                               |
-| Min         | Minimum property value         | Numeric                               |
-| Max         | Maximum property value         | Numeric                               |
-| Mean        | Average of property values     | Numeric                               |
-| First       | First property value seen      | Any                                   |
-| Last        | Last property value seen       | Any                                   |
-| Unique list | List of unique property values | Any                                   |
+| Aggregation           | Description                                                           | Required property type                |
+| --------------------- | --------------------------------------------------------------------- | ------------------------------------- |
+| Counter               | Count events                                                          | No property used for this aggregation |
+| Sum                   | Sum of property values                                                | Numeric                               |
+| Min                   | Minimum property value                                                | Numeric                               |
+| Max                   | Maximum property value                                                | Numeric                               |
+| Mean                  | Average of property values                                            | Numeric                               |
+| First                 | First property value seen                                             | Any                                   |
+| Last                  | Last property value seen                                              | Any                                   |
+| Most Frequent         | Most frequent property value seen                                     | Any                                   |
+| Least Frequent        | Least frequent property value seen                                    | Any                                   |
+| Approx Count Distinct | Approximate distinct count as calculated by the HyperLogLog algorithm | Any                                   |
+| Category Count        | Dictionary of unique values and their counts                          | Any                                   |
+| Unique List           | List of unique property values                                        | Any                                   |
 
 A property isn't used for `counter` aggregation. To only count events with a specific property value, use a criteria filter.
 

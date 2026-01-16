@@ -43,6 +43,10 @@
     <td>Optional.  Default value <code>1 second</code>.  Maximum backoff used to retry checkpointing if we exceed the DynamoDB provisioned write limits.</td>
 </tr>
 <tr>
+    <td><code>input.maxRetries</code> (since 0.9.0)</td>
+    <td>Optional. Default value 10. Maximum number of retries for AWS SDK operations when reading from Kinesis.</td>
+</tr>
+<tr>
     <td><code>output.bad.streamName</code></td>
     <td>Required. Name of the Kinesis stream that will receive failed events.</td>
 </tr>

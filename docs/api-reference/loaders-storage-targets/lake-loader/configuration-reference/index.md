@@ -11,7 +11,7 @@ import {versions} from '@site/src/componentVersions';
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import DeltaConfig from '@site/docs/api-reference/loaders-storage-targets/lake-loader/configuration-reference/_delta_config.md';
-import IcebergBigLakeConfig from '@site/docs/api-reference/loaders-storage-targets/lake-loader/configuration-reference/_iceberg_biglake_config.md';
+import IcebergRestConfig from '@site/docs/api-reference/loaders-storage-targets/lake-loader/configuration-reference/_iceberg_rest_config.md';
 import IcebergGlueConfig from '@site/docs/api-reference/loaders-storage-targets/lake-loader/configuration-reference/_iceberg_glue_config.md';
 import PubsubConfig from '@site/docs/api-reference/loaders-storage-targets/lake-loader/configuration-reference/_pubsub_config.md';
 import KinesisConfig from '@site/docs/api-reference/loaders-storage-targets/lake-loader/configuration-reference/_kinesis_config.md';
@@ -61,6 +61,20 @@ To accept the terms of license and run the loader, set the `ACCEPT_LIMITED_USE_L
         </thead>
         <tbody>
           <IcebergGlueConfig/>
+        </tbody>
+    </table>
+  </TabItem>
+
+  <TabItem value="iceberg-rest" label="Iceberg / REST">
+    <table>
+        <thead>
+            <tr>
+                <th>Parameter</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+          <IcebergRestConfig/>
         </tbody>
     </table>
   </TabItem>

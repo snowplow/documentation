@@ -20,7 +20,7 @@ The Lake Loader is an application that loads Snowplow events to a cloud storage 
 
 The Lake Loader supports the two major Open Table Formats: [Delta](https://delta.io/) and [Iceberg](https://iceberg.apache.org/).
 
-For Iceberg tables, the loader supports [AWS Glue](https://docs.aws.amazon.com/glue/) as catalog.
+For Iceberg tables, the loader supports [AWS Glue](https://docs.aws.amazon.com/glue/) and [Iceberg REST](https://iceberg.apache.org/docs/latest/rest-catalog/) as catalogs.
 
 :::
 
@@ -104,6 +104,8 @@ The Lake Loader can be configured to send the following custom metrics to a [Sta
 | `latency_millis`            | The time in milliseconds from when events are written to the source stream of events (i.e. by Enrich) until when they are read by the loader.                                                                                                    |
 | `processing_latency_millis` | For each window of events, the time in milliseconds from when the first event is read from the stream, until all events are written and committed to the lake.                                                                                   |
 | `e2e_latency_millis`        | The end-to-end latency of the snowplow pipeline. For each window of events, the time in milliseconds from when the first event was received by the collector, until all events are written and committed to the lake.                            |
+| `table_data_files_total`    | The total number of data files in the table after a commit. This metric helps monitor table growth and the effectiveness of file compaction strategies.                                                                                          |
+| `table_snapshots_retained`  | The number of snapshots retained in the table metadata. This metric helps monitor snapshot accumulation and the effectiveness of snapshot expiration policies.                                                                                   |
 
 See the `monitoring.metrics.statsd` options in the [configuration reference](/docs/api-reference/loaders-storage-targets/lake-loader/configuration-reference/index.md) for how to configure the StatsD receiver.
 

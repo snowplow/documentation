@@ -2,6 +2,12 @@
 import Link from '@docusaurus/Link';
 ```
 
+:::note
+
+The REST catalog integration has been tested with Snowflake Open Catalog.
+
+:::
+
 <tr>
     <td><code>output.good.type</code></td>
     <td>Required, set this to <code>Iceberg</code></td>

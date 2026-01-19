@@ -9,6 +9,7 @@ keywords: ["unified digital migration", "unified upgrade", "dbt unified version"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
+
 ### Upgrading to 1.0.0
 
 - Version 1.10.6 of `dbt-core` now required

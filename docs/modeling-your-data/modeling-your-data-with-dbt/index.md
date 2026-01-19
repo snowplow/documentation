@@ -65,10 +65,11 @@ Snowplow maintains two active release lines:
 - v1.x (latest) – recommended for all users, it is where ongoing development occurs
 - v0.x (maintenance) – receives critical bug fixes only, where possible
 
+For users upgrading from v0.x to v1.x, see our [migration guides](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/unified/index.md#upgrading-to-100)
+
+
 ### Note on dbt Fusion
 While these packages are architecturally compatible with the dbt Fusion engine, Snowplow packages are not officially supported on dbt Fusion at this time. Limited testing may be possible using the [--no-version-check](https://docs.getdbt.com/reference/project-configs/require-dbt-version#fusion-compatibility) flag. Behavior can be fragile, particularly during full-refreshes or when introducing new models, and is under investigation.
-
-For users upgrading from v0.x to v1.x, see our [migration guides](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/utils/index.md#upgrading-to-100)
 
 The supported data warehouses per version can be seen below:
 

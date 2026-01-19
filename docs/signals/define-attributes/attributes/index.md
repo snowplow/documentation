@@ -47,7 +47,7 @@ Signals supports a number of different aggregation types.
 | Last                  | Last property value seen                                              | Any                                   |
 | Most Frequent         | Most frequent property value seen                                     | Any                                   |
 | Least Frequent        | Least frequent property value seen                                    | Any                                   |
-| Approx Count Distinct | Approximate distinct count as calculated by the HyperLogLog algorithm | Any                                   |
+| Approx Count Distinct | Approximate distinct count as calculated by the [HyperLogLog algorithm](https://redis.io/docs/latest/develop/data-types/probabilistic/hyperloglogs/) | Any                                   |
 | Category Count        | Dictionary of unique values and their counts                          | Any                                   |
 | Unique List           | List of unique property values                                        | Any                                   |
 

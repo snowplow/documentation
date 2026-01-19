@@ -14,19 +14,17 @@ Track the opening and dismissing of SwiftUI window groups using `OpenWindowEvent
 
 Use the `OpenImmersiveSpaceEvent` and `DismissImmersiveSpaceEvent` to automatically add an immersive space entity to all events occurring within an immersive space. The entity will identify the immersive space in which the events occurred. This feature is enabled by default for the iOS tracker.
 
-## Tracker support
-
 This table shows the support for VisionOS tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md). Snowplow currently only supports visionOS apps via SwiftUI, not Unity.
 
-| Tracker                                                                | Supported | Since version | Auto-tracking |
-| ---------------------------------------------------------------------- | --------- | ------------- | ------------- |
-| Web                                                                    | ❌         |               |               |
-| [iOS](/docs/sources/mobile-trackers/tracking-events/visionos/index.md) | ✅         | 6.0.0         | ✅/❌           |
-| Android                                                                | ❌         |               |               |
-| React Native                                                           | ❌         |               |               |
-| Flutter                                                                | ❌         |               |               |
-| Roku                                                                   | ❌         |               |               |
-| Unity                                                                  | ❌         |               |               |
+| Tracker                                                                | Supported | Since version | Auto-tracking | Notes                            |
+| ---------------------------------------------------------------------- | --------- | ------------- | ------------- | -------------------------------- |
+| Web                                                                    | ❌         |               |               |                                  |
+| [iOS](/docs/sources/mobile-trackers/tracking-events/visionos/index.md) | ✅         | 6.0.0         | ✅/❌           | Entities are automatically added |
+| Android                                                                | ❌         |               |               |                                  |
+| React Native                                                           | ❌         |               |               |                                  |
+| Flutter                                                                | ❌         |               |               |                                  |
+| Roku                                                                   | ❌         |               |               |                                  |
+| Unity                                                                  | ❌         |               |               |                                  |
 
 ## Available events
 

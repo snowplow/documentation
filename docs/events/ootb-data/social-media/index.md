@@ -17,20 +17,7 @@ Use social interaction tracking to:
 - Understand which content resonates with users enough to share
 - Track the performance of social sharing features
 
-The social interaction event captures the social network, the action performed, and optionally the target content.
-
-<SchemaProperties
-  overview={{event: true}}
-  example={{
-    action: "like",
-    network: "facebook",
-    target: "pbz00123"
-  }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for a social interaction event", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "social_interaction", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "action": { "type": "string", "description": "The social action performed, e.g. like, retweet, share" }, "network": { "type": "string", "description": "The social network, e.g. facebook, twitter" }, "target": { "type": "string", "description": "The object of the social action, e.g. a page ID or product ID" } }, "required": ["action", "network"], "additionalProperties": false }} />
-
-## Tracker support
-
-This table shows the support for social interaction tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md).
+This table shows the support for social interaction tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md):
 
 | Tracker                                                                           | Supported | Since version | Auto-tracking | Notes                         |
 | --------------------------------------------------------------------------------- | --------- | ------------- | ------------- | ----------------------------- |
@@ -41,3 +28,14 @@ This table shows the support for social interaction tracking across the main cli
 | Flutter                                                                           | ❌         |               |               |                               |
 | Roku                                                                              | ❌         |               |               |                               |
 | [Google Tag Manager](/docs/sources/google-tag-manager/snowplow-template/index.md) | ✅         | v3            | ❌             |                               |
+
+The social interaction event captures the social network, the action performed, and optionally the target content.
+
+<SchemaProperties
+  overview={{event: true}}
+  example={{
+    action: "like",
+    network: "facebook",
+    target: "pbz00123"
+  }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for a social interaction event", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "social_interaction", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "action": { "type": "string", "description": "The social action performed, e.g. like, retweet, share" }, "network": { "type": "string", "description": "The social network, e.g. facebook, twitter" }, "target": { "type": "string", "description": "The object of the social action, e.g. a page ID or product ID" } }, "required": ["action", "network"], "additionalProperties": false }} />

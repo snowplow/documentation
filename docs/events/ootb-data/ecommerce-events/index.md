@@ -17,8 +17,6 @@ Use ecommerce tracking to answer questions such as:
 - What is the average order value by user segment?
 - Which products are frequently purchased together?
 
-Every ecommerce event uses the `snowplow_ecommerce_action` event schema, with additional entities.
-
 ## Tracker support
 
 This table shows the support for ecommerce tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md). The server-side trackers can send ecommerce events as custom [self-describing events](/docs/fundamentals/events/index.md#self-describing-events).

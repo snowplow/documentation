@@ -22,13 +22,9 @@ This table shows the support for exception tracking across the main client-side 
 | Roku                                                                                 | ❌         |               |               | Use the `application_error` schema for your own custom event.                                                                                                                                                                        |
 | [Google Tag Manager](/docs/sources/google-tag-manager/snowplow-template/index.md)    | ✅         | v3            | ❌             |                                                                                                                                                                                                                                      |
 
-## How to use the application error APIs
-
-The tracker will capture unhandled exceptions. These can crash the app, so it's likely that the event will be sent after restart. Note that in some situations, it may not be possible to capture all exception details before the app crashes.
-
 The Errors plugin for the JavaScript trackers provides configuration for automatic tracking of unhandled exceptions, as well as a method for manually tracking handled exceptions.
 
-## Event properties
+The mobile trackers will capture unhandled exceptions. These can crash the app, so it's likely that the event will be sent after restart. Note that in some situations, it may not be possible to capture all exception details before the app crashes.
 
 All exception events use the same `application_error` schema, which has the following properties:
 

@@ -35,22 +35,18 @@ The included data is slightly different depending on the platform, as different 
 * Web: `version` only
 * Mobile: `version` and `build`
 
-### Tracker support
-
 This table shows the support for the application entity across the main client-side Snowplow [tracker SDKs](/docs/sources/index.md). The server-side trackers don't include this entity.
 
 | Tracker                                                                                                                | Supported | Since version | Auto-tracking | Notes                                                |
 | ---------------------------------------------------------------------------------------------------------------------- | --------- | ------------- | ------------- | ---------------------------------------------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/index.md#setting-application-version)                                 | ✅         | 4.1.0         | ❌             |                                                      |
-| [iOS](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md#application-context)     | ✅         | 1.0.0         | ✅             | Tracked by default                                   |
-| [Android](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md#application-context) | ✅         | 1.0.0         | ✅             | Tracked by default                                   |
-| [React Native](/docs/sources/react-native-tracker/tracking-events/platform-and-application-context/index.md)           | ✅         | 4.0.0         | ❌             | Uses web or mobile schema depending on configuration |
+| [Web](/docs/sources/web-trackers/tracking-events/index.md#setting-application-version)                                 | ✅         | 4.1.0         | ✅             |                                                      |
+| [iOS](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md#application-context)     | ✅         | 1.0.0         | ✅             |                                                      |
+| [Android](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md#application-context) | ✅         | 1.0.0         | ✅             |                                                      |
+| [React Native](/docs/sources/react-native-tracker/tracking-events/platform-and-application-context/index.md)           | ✅         | 4.0.0         | ✅             | Uses web or mobile schema depending on configuration |
 | [Flutter](/docs/sources/flutter-tracker/initialization-and-configuration/index.md)                                     | ✅         | 0.3.0         | ✅             | Available for mobile only                            |
-| [Roku](/docs/sources/roku-tracker/adding-data/index.md)                                                                | ✅         | 0.1.0         | ❌             |                                                      |
+| [Roku](/docs/sources/roku-tracker/adding-data/index.md)                                                                | ✅         | 0.1.0         | ✅             |                                                      |
 
-The native mobile trackers are able to extract the application version and build number automatically from the app metadata.
-
-For web, you need to provide the application version manually in the tracker configuration.
+The native mobile trackers are able to extract the application version and build number automatically from the app metadata. For web, you need to provide the application version manually in the tracker configuration.
 
 ### Entity definitions
 

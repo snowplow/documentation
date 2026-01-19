@@ -16,6 +16,17 @@ We recommend using the [Base mobile data product template](/docs/data-product-st
 
 The mobile trackers can automatically track an install event when the app is first opened after installation.
 
+This table shows the support for mobile application install tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md). Depending on your tracker and version, install autotracking may be enabled by default.
+
+| Tracker                                                                                           | Supported | Since version | Auto-tracking | Notes                           |
+| ------------------------------------------------------------------------------------------------- | --------- | ------------- | ------------- | ------------------------------- |
+| Web                                                                                               | ❌         |               |               |                                 |
+| [iOS](/docs/sources/mobile-trackers/tracking-events/installation-tracking/index.md)               | ✅         | 1.1.0         | ✅             |                                 |
+| [Android](/docs/sources/mobile-trackers/tracking-events/installation-tracking/index.md)           | ✅         | 1.1.0         | ✅             |                                 |
+| [React Native](/docs/sources/react-native-tracker/tracking-events/installation-tracking/index.md) | ✅         | 0.1.0         | ✅             | Only relevant for mobile events |
+| Flutter                                                                                           | ❌         |               |               |                                 |
+| Roku                                                                                              | ❌         |               |               |                                 |
+
 :::note No uninstall events
 It's not possible to track when an app is uninstalled, since the mobile platforms don't provide a callback where such an event could be tracked.
 :::
@@ -26,21 +37,6 @@ This event has no properties since the relevant data is the timestamp, which is 
   overview={{event: true}}
   example={{ }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for an event where a mobile application is installed.", "self": { "vendor": "com.snowplowanalytics.mobile", "name": "application_install", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { }, "additionalProperties": false }} />
-
-### Tracker support
-
-This table shows the support for mobile application install tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md).
-
-Depending on your tracker and version, install autotracking may be enabled by default.
-
-| Tracker                                                                                           | Supported | Since version | Auto-tracking | Notes                           |
-| ------------------------------------------------------------------------------------------------- | --------- | ------------- | ------------- | ------------------------------- |
-| Web                                                                                               | ❌         |               |               |                                 |
-| [iOS](/docs/sources/mobile-trackers/tracking-events/installation-tracking/index.md)               | ✅         | 1.1.0         | ✅             |                                 |
-| [Android](/docs/sources/mobile-trackers/tracking-events/installation-tracking/index.md)           | ✅         | 1.1.0         | ✅             |                                 |
-| [React Native](/docs/sources/react-native-tracker/tracking-events/installation-tracking/index.md) | ✅         | 0.1.0         | ✅             | Only relevant for mobile events |
-| Flutter                                                                                           | ❌         |               |               |                                 |
-| Roku                                                                                              | ❌         |               |               |                                 |
 
 ### Android referrer details entity
 
@@ -63,6 +59,18 @@ This entity is available from Android tracker version 5.2.0 onwards.
 Foreground and background events capture when the user switches to or away from your app. A foreground event fires when the app becomes visible on screen, while a background event fires when the user switches to another app or returns to the home screen.
 
 The mobile trackers can track these events automatically. They also attach a lifecycle entity to all events, indicating whether the app was visible when each event occurred.
+
+This table shows the support for mobile lifecycle event tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md). The server-side trackers don't include lifecycle event tracking. Depending on your tracker and version, lifecycle autotracking may be enabled by default.
+
+| Tracker                                                                                                        | Supported | Since version | Auto-tracking | Notes                           |
+| -------------------------------------------------------------------------------------------------------------- | --------- | ------------- | ------------- | ------------------------------- |
+| Web                                                                                                            | ❌         |               |               |                                 |
+| [iOS](/docs/sources/mobile-trackers/tracking-events/index.md#tracking-deep-links)                              | ✅         | 3.0.0         | ✅             |                                 |
+| [Android](/docs/sources/mobile-trackers/tracking-events/index.md#tracking-deep-links)                          | ✅         | 3.0.0         | ✅             |                                 |
+| [React Native](/docs/sources/react-native-tracker/tracking-events/index.md#tracking-deep-link-received-events) | ✅         | 0.1.0         | ✅             | Only relevant for mobile events |
+| [Flutter](/docs/sources/flutter-tracker/initialization-and-configuration/index.md)                             | ✅         | 0.5.0         | ✅             | Only relevant for mobile events |
+| Roku                                                                                                           | ❌         |               |               |                                 |
+
 
 ### Foreground event
 
@@ -94,18 +102,3 @@ When lifecycle autotracking is enabled, this entity is automatically attached to
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#",
   "description": "Entity that indicates the visibility state of the app (foreground, background)", "self": { "vendor": "com.snowplowanalytics.mobile", "name": "application_lifecycle", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "isVisible": { "description": "Indicates if the app is in foreground state (true) or background state (false)", "type": "boolean" }, "index": { "description": "Represents the foreground index or background index (tracked with com.snowplowanalytics.snowplow application_foreground and application_background events.", "type": "integer", "minimum": 0, "maximum": 2147483647 } }, "required": ["isVisible"], "additionalProperties": false }} />
-
-### Tracker support
-
-This table shows the support for mobile lifecycle event tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md). The server-side trackers don't include lifecycle event tracking.
-
-Depending on your tracker and version, lifecycle autotracking may be enabled by default.
-
-| Tracker                                                                                                        | Supported | Since version | Auto-tracking | Notes                           |
-| -------------------------------------------------------------------------------------------------------------- | --------- | ------------- | ------------- | ------------------------------- |
-| Web                                                                                                            | ❌         |               |               |                                 |
-| [iOS](/docs/sources/mobile-trackers/tracking-events/index.md#tracking-deep-links)                              | ✅         | 3.0.0         | ✅             |                                 |
-| [Android](/docs/sources/mobile-trackers/tracking-events/index.md#tracking-deep-links)                          | ✅         | 3.0.0         | ✅             |                                 |
-| [React Native](/docs/sources/react-native-tracker/tracking-events/index.md#tracking-deep-link-received-events) | ✅         | 0.1.0         | ✅             | Only relevant for mobile events |
-| [Flutter](/docs/sources/flutter-tracker/initialization-and-configuration/index.md)                             | ✅         | 0.5.0         | ✅             | Only relevant for mobile events |
-| Roku                                                                                                           | ❌         |               |               |                                 |

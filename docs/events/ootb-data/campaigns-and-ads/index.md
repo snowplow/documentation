@@ -28,6 +28,18 @@ Ad tracking captures impressions, clicks, and conversions from advertisements di
 
 See also [media tracking](/docs/events/ootb-data/media-events/index.md) for tracking advertising content consumed within video or audio media.
 
+This table shows the support for ad tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md).
+
+| Tracker                                                                           | Supported | Since version                       | Auto-tracking | Notes                           |
+| --------------------------------------------------------------------------------- | --------- | ----------------------------------- | ------------- | ------------------------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/ads/index.md)                    | ✅         | 1.1.0 (directly), 3.0.0 (as plugin) | ❌             | Requires the ad tracking plugin |
+| iOS                                                                               | ❌         |                                     |               |                                 |
+| Android                                                                           | ❌         |                                     |               |                                 |
+| React Native                                                                      | ❌         |                                     |               |                                 |
+| Flutter                                                                           | ❌         |                                     |               |                                 |
+| Roku                                                                              | ❌         |                                     |               |                                 |
+| [Google Tag Manager](/docs/sources/google-tag-manager/snowplow-template/index.md) | ✅         | v3                                  | ❌             |                                 |
+
 ### Ad impression event
 
 Track when an ad is displayed to a user.
@@ -83,17 +95,3 @@ Track when a user completes a conversion action from an ad.
     campaignId: "12"
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for an ad conversion event", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "ad_conversion", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "conversionId": { "type": "string", "description": "Identifier for the conversion instance" }, "costModel": { "type": "string", "enum": ["cpa", "cpc", "cpm"], "description": "The cost model" }, "cost": { "type": "number", "description": "The cost of the conversion" }, "category": { "type": "string", "description": "Conversion category" }, "action": { "type": "string", "description": "The type of user interaction, e.g. purchase" }, "property": { "type": "string", "description": "Describes the object of the conversion" }, "initialValue": { "type": "number", "description": "How much the conversion is initially worth" }, "advertiserId": { "type": "string", "description": "Adserver identifier for the advertiser" }, "campaignId": { "type": "string", "description": "Adserver identifier for the campaign" } }, "additionalProperties": false }} />
-
-### Tracker support
-
-This table shows the support for ad tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md).
-
-| Tracker                                                                           | Supported | Since version                       | Auto-tracking | Notes                           |
-| --------------------------------------------------------------------------------- | --------- | ----------------------------------- | ------------- | ------------------------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/ads/index.md)                    | ✅         | 1.1.0 (directly), 3.0.0 (as plugin) | ❌             | Requires the ad tracking plugin |
-| iOS                                                                               | ❌         |                                     |               |                                 |
-| Android                                                                           | ❌         |                                     |               |                                 |
-| React Native                                                                      | ❌         |                                     |               |                                 |
-| Flutter                                                                           | ❌         |                                     |               |                                 |
-| Roku                                                                              | ❌         |                                     |               |                                 |
-| [Google Tag Manager](/docs/sources/google-tag-manager/snowplow-template/index.md) | ✅         | v3                                  | ❌             |                                 |

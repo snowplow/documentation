@@ -24,8 +24,6 @@ Where activity autotracking is available, you can configure your tracker to send
 
 Page ping events are [baked-in events](/docs/fundamentals/events/index.md) that have no schema. They populate the [page offset atomic event parameters](/docs/fundamentals/canonical-event/index.md#baked-in-event-fields).
 
-### Tracker support
-
 This table shows the support for page ping tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md). Python is the only server-side tracker that provides page ping events.
 
 | Tracker                                                                            | Supported | Since version | Auto-tracking | Notes                              |
@@ -47,6 +45,19 @@ Use screen engagement tracking on mobile to track a `screen_end` event when a us
 
 The trackers can also track a `screen_summary` entity that contains screen engagement data. This entity is sent along with [lifecycle](/docs/events/ootb-data/mobile-lifecycle-events/index.md) and `screen_end` events.
 
+This table shows the support for screen engagement tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md). The server-side trackers don't include screen engagement tracking.
+
+| Tracker                                                                                                                | Supported | Since version | Auto-tracking | Notes          |
+| ---------------------------------------------------------------------------------------------------------------------- | --------- | ------------- | ------------- | -------------- |
+| Web                                                                                                                    | ❌         |               |               |                |
+| [iOS](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md#screen-engagement-tracking)               | ✅         | 6.0.0         | ✅             |                |
+| [Android](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md#screen-engagement-tracking)           | ✅         | 6.0.0         | ✅             |                |
+| [React Native](/docs/sources/react-native-tracker/tracking-events/screen-tracking/index.md#screen-engagement-tracking) | ✅         | 2.1.0         | ✅             | Only on mobile |
+| [Flutter](/docs/sources/flutter-tracker/tracking-events/index.md#screen-engagement-tracking)                           | ✅         | 0.1.0         | ✅             | Only on mobile |
+| Roku                                                                                                                   | ❌         |               |               |                |
+
+We recommend using the [Base mobile data product template](/docs/data-product-studio/data-products/data-product-templates/index.md#base-mobile) for mobile tracking. It includes screen end events.
+
 ### Screen end event
 
 This event can be tracked automatically by the mobile trackers just before the transition to the next screen. It has no properties.
@@ -63,19 +74,3 @@ Entity that contains screen engagement information, including how long a user sp
   overview={{event: false}}
   example={{ foreground_sec: 10.2, background_sec: 3.1, last_item_index: 11, items_count: 50, min_x_offset: 0, max_x_offset: 400, min_y_offset: 0, max_y_offset: 1000, content_width: 400, content_height: 5000 }}
   schema={{ "description": "Schema for an entity tracked with foreground/background/screen_end events with summary statistics about the screen view", "properties": { "foreground_sec": { "type": "number", "description": "Time in seconds spent on the current screen while the app was in foreground", "minimum": 0, "maximum": 2147483647 }, "background_sec": { "type": [ "number", "null" ], "description": "Time in seconds spent on the current screen while the app was in background", "minimum": 0, "maximum": 2147483647 }, "last_item_index": { "type": [ "integer", "null" ], "description": "Index of the last viewed item in the list on the screen", "minimum": 0, "maximum": 65535 }, "items_count": { "type": [ "integer", "null" ], "description": "Total number of items in the list on the screen", "minimum": 0, "maximum": 65535 }, "min_x_offset": { "type": [ "integer", "null" ], "description": "Minimum horizontal scroll offset on the scroll view in pixels", "minimum": -2147483647, "maximum": 2147483647 }, "max_x_offset": { "type": [ "integer", "null" ], "description": "Maximum horizontal scroll offset on the scroll view in pixels", "minimum": -2147483647, "maximum": 2147483647 }, "min_y_offset": { "type": [ "integer", "null" ], "description": "Minimum vertical scroll offset on the scroll view in pixels", "minimum": -2147483647, "maximum": 2147483647 }, "max_y_offset": { "type": [ "integer", "null" ], "description": "Maximum vertical scroll offset on the scroll view in pixels", "minimum": -2147483647, "maximum": 2147483647 }, "content_width": { "type": [ "integer", "null" ], "description": "Width of the scroll view in pixels", "minimum": 0, "maximum": 2147483647 }, "content_height": { "type": [ "integer", "null" ], "description": "Height of the scroll view in pixels", "minimum": 0, "maximum": 2147483647 } }, "additionalProperties": false, "type": "object", "required": [ "foreground_sec" ], "self": { "vendor": "com.snowplowanalytics.mobile", "name": "screen_summary", "format": "jsonschema", "version": "1-0-0" }, "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#" }} />
-
-
-### Tracker support
-
-This table shows the support for screen engagement tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md). The server-side trackers don't include screen engagement tracking.
-
-| Tracker                                                                                                                | Supported | Since version | Auto-tracking | Notes          |
-| ---------------------------------------------------------------------------------------------------------------------- | --------- | ------------- | ------------- | -------------- |
-| Web                                                                                                                    | ❌         |               |               |                |
-| [iOS](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md#screen-engagement-tracking)               | ✅         | 6.0.0         | ✅             |                |
-| [Android](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md#screen-engagement-tracking)           | ✅         | 6.0.0         | ✅             |                |
-| [React Native](/docs/sources/react-native-tracker/tracking-events/screen-tracking/index.md#screen-engagement-tracking) | ✅         | 2.1.0         | ✅             | Only on mobile |
-| [Flutter](/docs/sources/flutter-tracker/tracking-events/index.md#screen-engagement-tracking)                           | ✅         | 0.1.0         | ✅             | Only on mobile |
-| Roku                                                                                                                   | ❌         |               |               |                |
-
-We recommend using the [Base mobile data product template](/docs/data-product-studio/data-products/data-product-templates/index.md#base-mobile) for mobile tracking. It includes screen end events.

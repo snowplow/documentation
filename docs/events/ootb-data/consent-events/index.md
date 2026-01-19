@@ -18,7 +18,7 @@ Snowplow provides two versions of consent tracking APIs:
 
 To process raw events created by the Snowplow Enhanced Consent plugin, use the consent module in the [Snowplow Unified Digital dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/consent-module/index.md).
 
-:::note No modeling support for basic consent
+:::note Models support enhanced consent only
 The Snowplow dbt packages don't support the basic consent events and entities. You can however build your own models based on the raw events.
 :::
 

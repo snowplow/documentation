@@ -23,19 +23,7 @@ Use page element tracking to:
 
 Button click tracking automatically captures clicks on `<button>` and `<input type="button">` elements.
 
-<SchemaProperties
-  overview={{event: true}}
-  example={{
-    label: "Submit",
-    id: "submit-btn",
-    classes: ["btn", "btn-primary"],
-    name: "submit"
-  }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for a button click event", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "button_click", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "label": { "type": "string", "description": "The text on the button, or a user-provided override" }, "id": { "type": "string", "description": "The ID of the button" }, "classes": { "type": "array", "items": { "type": "string" }, "description": "The classes of the button" }, "name": { "type": "string", "description": "The name attribute of the button" } }, "required": ["label"], "additionalProperties": false }} />
-
-### Tracker support
-
-This table shows the support for button click tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md).
+This table shows the support for button click tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md):
 
 | Tracker                                                                           | Supported | Since version | Auto-tracking | Notes                               |
 | --------------------------------------------------------------------------------- | --------- | ------------- | ------------- | ----------------------------------- |
@@ -49,9 +37,33 @@ This table shows the support for button click tracking across the main client-si
 
 We recommend using the [Base web data product template](/docs/data-product-studio/data-products/data-product-templates/index.md#base-web) for web tracking. It includes button clicks.
 
+<SchemaProperties
+  overview={{event: true}}
+  example={{
+    label: "Submit",
+    id: "submit-btn",
+    classes: ["btn", "btn-primary"],
+    name: "submit"
+  }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for a button click event", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "button_click", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "label": { "type": "string", "description": "The text on the button, or a user-provided override" }, "id": { "type": "string", "description": "The ID of the button" }, "classes": { "type": "array", "items": { "type": "string" }, "description": "The classes of the button" }, "name": { "type": "string", "description": "The name attribute of the button" } }, "required": ["label"], "additionalProperties": false }} />
+
 ## Form interactions
 
 Form tracking captures three types of events: when a user focuses on a form field, when a field value changes, and when a form is submitted.
+
+This table shows the support for form tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md):
+
+| Tracker                                                                           | Supported | Since version                       | Auto-tracking | Notes                                                                                             |
+| --------------------------------------------------------------------------------- | --------- | ----------------------------------- | ------------- | ------------------------------------------------------------------------------------------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/form-tracking/index.md)          | ✅         | 2.1.0 (directly), 3.0.0 (as plugin) | ✅             | Requires form tracking plugin                                                                     |
+| iOS                                                                               | ❌         |                                     |               |                                                                                                   |
+| Android                                                                           | ❌         |                                     |               |                                                                                                   |
+| React Native                                                                      | ❌         |                                     |               |                                                                                                   |
+| Flutter                                                                           | ❌         |                                     |               |                                                                                                   |
+| Roku                                                                              | ❌         |                                     |               |                                                                                                   |
+| Python                                                                            | ❌         |                                     |               | The Python tracker has deprecated form tracking APIs; use custom events with form schemas instead |
+| [Google Tag Manager](/docs/sources/google-tag-manager/snowplow-template/index.md) | ✅         | v3                                  | ✅             | Integrates with form tracking plugin                                                              |
+
 
 ### Focus form event
 
@@ -101,24 +113,21 @@ Triggered when a user submits a form. Contains data about all form fields.
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for a form submission event", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "submit_form", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "formId": { "type": "string", "description": "The ID of the form" }, "formClasses": { "type": "array", "items": { "type": "string" }, "description": "The classes of the form" }, "elements": { "type": "array", "items": { "type": "object", "properties": { "name": { "type": "string" }, "value": { "type": ["string", "null"] }, "nodeName": { "type": "string", "enum": ["INPUT", "TEXTAREA", "SELECT"] }, "type": { "type": ["string", "null"] } }, "required": ["name", "nodeName"], "additionalProperties": false }, "description": "The form elements and their values" } }, "required": ["formId", "formClasses", "elements"], "additionalProperties": false }} />
 
-### Tracker support
-
-This table shows the support for form tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md).
-
-| Tracker                                                                           | Supported | Since version                       | Auto-tracking | Notes                                                                                             |
-| --------------------------------------------------------------------------------- | --------- | ----------------------------------- | ------------- | ------------------------------------------------------------------------------------------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/form-tracking/index.md)          | ✅         | 2.1.0 (directly), 3.0.0 (as plugin) | ✅             | Requires form tracking plugin                                                                     |
-| iOS                                                                               | ❌         |                                     |               |                                                                                                   |
-| Android                                                                           | ❌         |                                     |               |                                                                                                   |
-| React Native                                                                      | ❌         |                                     |               |                                                                                                   |
-| Flutter                                                                           | ❌         |                                     |               |                                                                                                   |
-| Roku                                                                              | ❌         |                                     |               |                                                                                                   |
-| Python                                                                            | ❌         |                                     |               | The Python tracker has deprecated form tracking APIs; use custom events with form schemas instead |
-| [Google Tag Manager](/docs/sources/google-tag-manager/snowplow-template/index.md) | ✅         | v3                                  | ✅             | Integrates with form tracking plugin                                                              |
-
 ## Page element visibility and lifecycle
 
 Element tracking enables declarative tracking of page elements as they are created, become visible, leave view, or are removed from the page. It's only available for web.
+
+This table shows the support for page element tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md):
+
+| Tracker                                                                     | Supported | Since version | Auto-tracking |
+| --------------------------------------------------------------------------- | --------- | ------------- | ------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/element-tracking/index.md) | ✅         | 4.6.0         | ✅             |
+| iOS                                                                         | ❌         |               |               |
+| Android                                                                     | ❌         |               |               |
+| React Native                                                                | ❌         |               |               |
+| Flutter                                                                     | ❌         |               |               |
+| Roku                                                                        | ❌         |               |               |
+
 
 ### Available events
 
@@ -211,16 +220,3 @@ You can optionally configure the tracker to attach element statistics to any eve
     total_time_visible_ms: 0
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for element statistics", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "element_statistics", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "element_name": { "type": "string" }, "element_index": { "type": "integer" }, "element_matches": { "type": "integer" }, "current_state": { "type": "string" }, "min_size": { "type": "string" }, "current_size": { "type": "string" }, "max_size": { "type": "string" }, "y_depth_ratio": { "type": "number" }, "max_y_depth_ratio": { "type": "number" }, "max_y_depth": { "type": "string" }, "element_age_ms": { "type": "integer" }, "times_in_view": { "type": "integer" }, "total_time_visible_ms": { "type": "integer" } }, "required": ["element_name"], "additionalProperties": false }} />
-
-### Tracker support
-
-This table shows the support for page element tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md).
-
-| Tracker                                                                     | Supported | Since version | Auto-tracking |
-| --------------------------------------------------------------------------- | --------- | ------------- | ------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/element-tracking/index.md) | ✅         | 4.6.0         | ✅             |
-| iOS                                                                         | ❌         |               |               |
-| Android                                                                     | ❌         |               |               |
-| React Native                                                                | ❌         |               |               |
-| Flutter                                                                     | ❌         |               |               |
-| Roku                                                                        | ❌         |               |               |

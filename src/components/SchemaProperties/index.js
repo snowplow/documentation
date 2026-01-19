@@ -57,7 +57,7 @@ export default function SchemaProperties(props) {
             </details>
           )}
 
-          <details>
+          <details open>
             <summary className="cursor-pointer text-base font-semibold">
               Properties and schema
             </summary>

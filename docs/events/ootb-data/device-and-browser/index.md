@@ -12,7 +12,35 @@ Snowplow trackers track information about the device or browser that is sending 
 
 ## Browser atomic event properties
 
-Web trackers populate [several atomic event properties](/docs/fundamentals/canonical-event/index.md#browser-fields).
+Some trackers can populate the [browser atomic event properties](/docs/fundamentals/canonical-event/index.md#browser-fields).
+
+Depending on the tracker, you may have to provide the values, as not all trackers capture these fields themselves. The tracker will add the values automatically to all sent events.
+
+:::note Cookies field
+Only the JavaScript tracker can populate the `br_cookies` field.
+:::
+
+| Tracker                                                                              | Supported | Since version | Auto-tracking | Notes                                         |
+| ------------------------------------------------------------------------------------ | --------- | ------------- | ------------- | --------------------------------------------- |
+| [Web](/docs/sources/web-trackers/browsers/index.md)                                  | ✅         | 0.1.0         | ✅             | All values set automatically                  |
+| [iOS](/docs/sources/mobile-trackers/client-side-properties/index.md)                 | ✅         | 0.5.0         | ✅             |                                               |
+| [Android](/docs/sources/mobile-trackers/client-side-properties/index.md)             | ✅         | 0.1.0         | ✅             |                                               |
+| [React Native](/docs/sources/react-native-tracker/client-side-properties/index.md)   | ✅         | 0.1.0         | ✅             |                                               |
+| [Flutter](/docs/sources/flutter-tracker/initialization-and-configuration/index.md)   | ✅         | 0.1.0         | ✅             |                                               |
+| [Roku](/docs/sources/roku-tracker/adding-data/index.md)                              | ✅         | 0.2.0         | ✅             | Set automatically; language and viewport only |
+| [Node.js](/docs/sources/node-js-tracker/configuration/index.md)                      | ✅         | 0.8.0         | ✅             |                                               |
+| [Golang](/docs/sources/golang-tracker/adding-extra-data-the-subject-class/index.md)  | ✅         | 1.0.0         | ✅             | Set language and color depth only             |
+| [.NET](/docs/sources/net-tracker/subject/index.md)                                   | ✅         | 0.1.0         | ✅             |                                               |
+| [Java](/docs/sources/java-tracker/tracking-specific-client-side-properties/index.md) | ✅         | 0.10.0        | ✅             |                                               |
+| [Python](/docs/sources/python-tracker/subject/index.md)                              | ✅         | 0.13.0        | ✅             |                                               |
+| [Scala](/docs/sources/scala-tracker/subject-methods/index.md)                        | ✅         | 0.6.0         | ✅             |                                               |
+| [Ruby](/docs/sources/ruby-tracker/adding-data-events/index.md)                       | ✅         | 0.3.0         | ✅             |                                               |
+| [Rust](/docs/sources/rust-tracker/initialization-and-configuration/index.md)         | ✅         | 0.1.0         | ✅             | Set language only                             |
+| [PHP](/docs/sources/php-tracker/subjects/index.md)                                   | ✅         | 0.1.0         | ✅             | Set language and color depth only             |
+| [C++](/docs/sources/c-tracker/adding-extra-data-the-subject-class/index.md)          | ✅         | 0.1.0         | ✅             |                                               |
+| [Unity](/docs/sources/unity-tracker/subject/index.md)                                | ✅         | 0.1.0         | ✅             |                                               |
+| [Lua](/docs/sources/lua-tracker/tracking-specific-events/index.md)                   | ✅         | 0.1.0         | ✅             | Set color depth and viewport only             |
+| Google Tag Manager                                                                   | ❌         |               |               |                                               |
 
 ## Browser entity
 
@@ -25,7 +53,7 @@ You can configure the web trackers to automatically include a browser entity wit
 | Android                                                                          | ❌         |               |               |
 | React Native                                                                     | ❌         |               |               |
 | Flutter                                                                          | ❌         |               |               |
-| Google Tag Manager                                                               | ❌         |               |               |  |
+| Google Tag Manager                                                               | ❌         |               |               |
 
 The browser entity is only available on web trackers since it captures browser-specific information from the DOM and browser APIs. These APIs aren't available to React Native or Flutter.
 
@@ -47,31 +75,6 @@ The browser entity is only available on web trackers since it captures browser-s
     tabId: null
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for browser contexts", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "browser_context", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "viewport": { "type": "string", "maxLength": 20, "description": "Viewport dimensions of the browser. Arrives in the form of WidthxHeight e.g. 1200x900." }, "documentSize": { "type": "string", "maxLength": 20, "description": "Document dimensions. Arrives in the form of WidthxHeight e.g. 1200x900" }, "resolution": { "type": "string", "maxLength": 20, "description": "Device native resolution. Arrives in the form of WidthxHeight e.g. 1200x900" }, "colorDepth": { "type": "integer", "minimum": 0, "maximum": 1000, "description": "The number of bits allocated to colors for a pixel in the output device, excluding the alpha channel." }, "devicePixelRatio": { "type": ["number", "null"], "minimum": 0, "maximum": 1000, "description": "Ratio of the resolution in physical pixels to the resolution in CSS pixels for the current display device." }, "cookiesEnabled": { "type": "boolean", "description": "Indicates whether cookies are enabled or not. More info and caveats at https://developer.mozilla.org/en-US/docs/Web/API/Navigator/cookieEnabled." }, "online": { "type": "boolean", "description": "Returns the online status of the browser. Important caveats are described in https://developer.mozilla.org/en-US/docs/Web/API/Navigator/onLine." }, "browserLanguage": { "type": ["string", "null"], "maxLength": 20, "description": "The preferred language of the user, usually the language of the browser UI. RFC 5646 https://datatracker.ietf.org/doc/html/rfc5646." }, "documentLanguage": { "type": ["string", "null"], "maxLength": 20, "description": "The language of the HTML document. RFC 5646 https://datatracker.ietf.org/doc/html/rfc5646." }, "webdriver": { "type": ["boolean", "null"], "description": "Indicates whether the user agent is controlled by automation." }, "deviceMemory": { "type": ["integer", "null"], "minimum": 0, "maximum": 1000, "description": "Approximate amount of device memory in gigabytes." }, "hardwareConcurrency": { "type": ["integer", "null"], "minimum": 0, "maximum": 1000, "description": "Number of logical processors available to run threads on the user's computer." }, "tabId": { "type": ["string", "null"], "format": "uuid", "description": "An identifier for the client browser tab the event is sent from." } }, "required": ["viewport", "documentSize", "cookiesEnabled", "online", "colorDepth", "resolution"], "additionalProperties": false }} />
-
-## Client hints entity
-
-[Client hints](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-CH) are an alternative to user-agent strings for capturing browser and device information. You can configure the JavaScript tracker to automatically include a client hints entity with all tracked events.
-
-| Tracker                                                                 | Supported | Since version | Auto-tracking |
-| ----------------------------------------------------------------------- | --------- | ------------- | ------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/client-hints/index.md) | ✅         | 3.0.0         | ✅             |
-| iOS                                                                     | ❌         |               |               |
-| Android                                                                 | ❌         |               |               |
-| React Native                                                            | ❌         |               |               |
-| Flutter                                                                 | ❌         |               |               |
-| Roku                                                                    | ❌         |               |               |
-| Google Tag Manager                                                      | ❌         |               |               |  |
-
-<SchemaProperties
-  overview={{event: false}}
-  example={{
-    isMobile: false,
-    brands: [
-      { brand: "Google Chrome", version: "89" },
-      { brand: "Chromium", version: "89" }
-    ]
-  }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for HTTP Client Hints context", "self": { "vendor": "org.ietf", "name": "http_client_hints", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "isMobile": { "type": "boolean", "description": "Whether the browser is on a mobile device" }, "brands": { "type": "array", "items": { "type": "object", "properties": { "brand": { "type": "string" }, "version": { "type": "string" } } }, "description": "List of browser brands and versions" }, "architecture": { "type": ["string", "null"], "description": "CPU architecture (high entropy)" }, "model": { "type": ["string", "null"], "description": "Device model (high entropy)" }, "platform": { "type": ["string", "null"], "description": "Operating system name (high entropy)" }, "platformVersion": { "type": ["string", "null"], "description": "Operating system version (high entropy)" }, "uaFullVersion": { "type": ["string", "null"], "description": "Full browser version (high entropy)" } }, "additionalProperties": false }} />
 
 ## Mobile entity
 
@@ -121,6 +124,31 @@ This table shows the support for the mobile entity across the main client-side S
     appSetIdScope: null
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for mobile contexts", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "mobile_context", "format": "jsonschema", "version": "1-0-3" }, "type": "object", "properties": { "osType": { "type": "string", "description": "Operating system type (e.g., ios, tvos, watchos, osx, android)" }, "osVersion": { "type": "string", "description": "The current version of the operating system" }, "deviceManufacturer": { "type": "string", "description": "The manufacturer of the product/hardware" }, "deviceModel": { "type": "string", "description": "The end-user-visible name for the end product" }, "carrier": { "type": ["string", "null"], "description": "The carrier of the SIM inserted in the device" }, "networkType": { "type": ["string", "null"], "enum": ["mobile", "wifi", "offline", null], "description": "Type of network the device is connected to" }, "networkTechnology": { "type": ["string", "null"], "description": "Radio access technology that the device is using" }, "openIdfa": { "type": ["string", "null"], "description": "Deprecated tracking identifier for iOS" }, "appleIdfa": { "type": ["string", "null"], "description": "Advertising identifier on iOS" }, "appleIdfv": { "type": ["string", "null"], "description": "UUID identifier for vendors on iOS" }, "androidIdfa": { "type": ["string", "null"], "description": "Advertising identifier on Android" }, "physicalMemory": { "type": ["integer", "null"], "minimum": 0, "maximum": 9223372036854775807, "description": "Total physical system memory in bytes" }, "systemAvailableMemory": { "type": ["integer", "null"], "minimum": 0, "maximum": 9223372036854775807, "description": "Available memory on the system in bytes (Android only)" }, "appAvailableMemory": { "type": ["integer", "null"], "minimum": 0, "maximum": 9223372036854775807, "description": "Amount of memory in bytes available to the current app (iOS only)" }, "batteryLevel": { "type": ["integer", "null"], "minimum": 0, "maximum": 100, "description": "Remaining battery level as an integer percentage of total battery capacity" }, "batteryState": { "type": ["string", "null"], "enum": ["unplugged", "charging", "full", null], "maxLength": 255, "description": "Battery state for the device" }, "lowPowerMode": { "type": ["boolean", "null"], "description": "A Boolean indicating whether Low Power Mode is enabled (iOS only)" }, "availableStorage": { "type": ["integer", "null"], "minimum": 0, "maximum": 9223372036854775807, "description": "Bytes of storage remaining" }, "totalStorage": { "type": ["integer", "null"], "minimum": 0, "maximum": 9223372036854775807, "description": "Total size of storage in bytes" }, "isPortrait": { "type": ["boolean", "null"], "description": "A Boolean indicating whether the device orientation is portrait (either upright or upside down)" }, "resolution": { "type": ["string", "null"], "maxLength": 20, "description": "Screen resolution in pixels. Arrives in the form of WIDTHxHEIGHT (e.g., 1200x900). Doesn't change when device orientation changes" }, "scale": { "type": ["number", "null"], "minimum": 0, "maximum": 1000, "description": "Scale factor used to convert logical coordinates to device coordinates of the screen (uses UIScreen.scale on iOS and DisplayMetrics.density on Android)" }, "language": { "type": ["string", "null"], "maxLength": 8, "description": "System language currently used on the device (ISO 639)" }, "appSetId": { "type": ["string", "null"], "format": "uuid", "description": "Android vendor ID scoped to the set of apps published under the same Google Play developer account (see https://developer.android.com/training/articles/app-set-id)" }, "appSetIdScope": { "type": ["string", "null"], "enum": ["app", "developer", null], "description": "Scope of the `appSetId`. Can be scoped to the app or to a developer account on an app store (all apps from the same developer on the same device will have the same ID)" } }, "required": ["osType", "osVersion", "deviceManufacturer", "deviceModel"], "additionalProperties": false }} />
+
+## Client hints entity
+
+[Client hints](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-CH) are an alternative to user-agent strings for capturing browser and device information. You can configure the JavaScript tracker to automatically include a client hints entity with all tracked events.
+
+| Tracker                                                                 | Supported | Since version | Auto-tracking |
+| ----------------------------------------------------------------------- | --------- | ------------- | ------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/client-hints/index.md) | ✅         | 3.0.0         | ✅             |
+| iOS                                                                     | ❌         |               |               |
+| Android                                                                 | ❌         |               |               |
+| React Native                                                            | ❌         |               |               |
+| Flutter                                                                 | ❌         |               |               |
+| Roku                                                                    | ❌         |               |               |
+| Google Tag Manager                                                      | ❌         |               |               |
+
+<SchemaProperties
+  overview={{event: false}}
+  example={{
+    isMobile: false,
+    brands: [
+      { brand: "Google Chrome", version: "89" },
+      { brand: "Chromium", version: "89" }
+    ]
+  }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for HTTP Client Hints context", "self": { "vendor": "org.ietf", "name": "http_client_hints", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "isMobile": { "type": "boolean", "description": "Whether the browser is on a mobile device" }, "brands": { "type": "array", "items": { "type": "object", "properties": { "brand": { "type": "string" }, "version": { "type": "string" } } }, "description": "List of browser brands and versions" }, "architecture": { "type": ["string", "null"], "description": "CPU architecture (high entropy)" }, "model": { "type": ["string", "null"], "description": "Device model (high entropy)" }, "platform": { "type": ["string", "null"], "description": "Operating system name (high entropy)" }, "platformVersion": { "type": ["string", "null"], "description": "Operating system version (high entropy)" }, "uaFullVersion": { "type": ["string", "null"], "description": "Full browser version (high entropy)" } }, "additionalProperties": false }} />
 
 ## Entities added during enrichment
 

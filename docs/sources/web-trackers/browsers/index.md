@@ -15,7 +15,7 @@ import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v
 <ReleaseBadge/>
 ```
 
-The Snowplow web tracker supports tracking in all modern browsers, including new browser features such as [Privacy Sandbox](/docs/sources/web-trackers/tracking-events/privacy-sandbox/index.md) and [Client Hints](/docs/sources/web-trackers/tracking-events/client-hints/index.md).
+The Snowplow web tracker supports tracking in all modern browsers, including new browser features such as [Privacy Sandbox](/docs/sources/web-trackers/tracking-events/privacy-sandbox/index.md) and [client hints](/docs/sources/web-trackers/tracking-events/client-hints/index.md).
 
 ## Browser entity
 
@@ -46,3 +46,39 @@ The [browser](https://github.com/snowplow/iglu-central/tree/master/schemas/com.
 Please note that the browser entity is only available since version 3.9 of the tracker.
 :::
 </details>
+
+## Automatic event properties
+
+The web trackers automatically capture browser and page information and add it to every event. You don't need to configure or manually include these properties.
+
+### Set once per tracker initialization
+
+These values are captured when the tracker initializes and remain constant for the session:
+
+| Property                                 | Description                              |
+| ---------------------------------------- | ---------------------------------------- |
+| `br_cookies`                             | Whether cookies are enabled (`1` or `0`) |
+| `doc_charset`                            | Document character set (e.g., `UTF-8`)   |
+| `br_lang`                                | Browser language                         |
+| `dvce_screenwidth` / `dvce_screenheight` | Screen resolution                        |
+| `br_colordepth`                          | Color depth of the display               |
+| `os_timezone`                            | User's timezone                          |
+
+### Set on every event
+
+These values are freshly captured for each event:
+
+| Property                         | Description                                    |
+| -------------------------------- | ---------------------------------------------- |
+| `br_viewwidth` / `br_viewheight` | Viewport dimensions at the time of the event   |
+| `doc_width` / `doc_height`       | Document dimensions at the time of the event   |
+| `page_url`                       | Current page URL                               |
+| `page_referrer`                  | Referrer URL                                   |
+| `domain_userid`                  | Domain user ID (first-party cookie identifier) |
+| `domain_sessionidx`              | Session index (visit count)                    |
+| `domain_sessionid`               | Session ID                                     |
+| `user_id`                        | Business user ID, if set via `setUserId()`     |
+
+:::note
+Some properties may be omitted when [anonymous tracking](/docs/sources/web-trackers/anonymous-tracking/index.md) is enabled.
+:::

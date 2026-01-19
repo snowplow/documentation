@@ -62,8 +62,8 @@ Starting with v1.0.0, Snowplow dbt packages adopt stricter syntax requirements i
 
 Snowplow maintains two active release lines:
 
-v1.x (latest) – recommended for all users, it is where ongoing development occurs
-v0.x (maintenance) – receives critical bug fixes only, where possible
+- v1.x (latest) – recommended for all users, it is where ongoing development occurs
+- v0.x (maintenance) – receives critical bug fixes only, where possible
 
 ### Note on dbt Fusion
 While these packages are architecturally compatible with the dbt Fusion engine, Snowplow packages are not officially supported on dbt Fusion at this time. Limited testing may be possible using the [--no-version-check](https://docs.getdbt.com/reference/project-configs/require-dbt-version#fusion-compatibility) flag. Behavior can be fragile, particularly during full-refreshes or when introducing new models, and is under investigation.

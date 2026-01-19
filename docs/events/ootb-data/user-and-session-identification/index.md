@@ -44,7 +44,7 @@ This table shows the support for `client_session` entity tracking across the mai
 | [C++](/docs/sources/c-tracker/client-sessions/index.md)                                      | ✅         | 1.0.0         | ✅             |
 | Unity                                                                                        | ❌         |               |               |
 | Lua                                                                                          | ❌         |               |               |
-| [Google Tag Manager](/docs/sources/google-tag-manager/settings-template/index.md)            | ✅         | v4            | ✅             |  |
+| [Google Tag Manager](/docs/sources/google-tag-manager/settings-template/index.md)            | ✅         | v4            | ✅             |
 
 The `client_session` entity contains data such as the session identifier and session index, as well as information about the previous session to help analysis.
 

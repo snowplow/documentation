@@ -29,7 +29,7 @@ Only the JavaScript tracker can populate the `br_cookies` field.
 | [Flutter](/docs/sources/flutter-tracker/initialization-and-configuration/index.md)   | ✅         | 0.1.0         | ✅             |                                               |
 | [Roku](/docs/sources/roku-tracker/adding-data/index.md)                              | ✅         | 0.2.0         | ✅             | Set automatically; language and viewport only |
 | [Node.js](/docs/sources/node-js-tracker/configuration/index.md)                      | ✅         | 0.8.0         | ✅             |                                               |
-| [Golang](/docs/sources/golang-tracker/adding-extra-data-the-subject-class/index.md)  | ✅         | 1.0.0         | ✅             | Set language and color depth only             |
+| [Golang](/docs/sources/golang-tracker/adding-extra-data-the-subject-class/index.md)  | ✅         | 1.0.0         | ✅             |                                               |
 | [.NET](/docs/sources/net-tracker/subject/index.md)                                   | ✅         | 0.1.0         | ✅             |                                               |
 | [Java](/docs/sources/java-tracker/tracking-specific-client-side-properties/index.md) | ✅         | 0.10.0        | ✅             |                                               |
 | [Python](/docs/sources/python-tracker/subject/index.md)                              | ✅         | 0.13.0        | ✅             |                                               |

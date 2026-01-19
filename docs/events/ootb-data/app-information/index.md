@@ -45,6 +45,7 @@ This table shows the support for the application entity across the main client-s
 | [React Native](/docs/sources/react-native-tracker/tracking-events/platform-and-application-context/index.md)           | ✅         | 4.0.0         | ✅             | Uses web or mobile schema depending on configuration |
 | [Flutter](/docs/sources/flutter-tracker/initialization-and-configuration/index.md)                                     | ✅         | 0.3.0         | ✅             | Available for mobile only                            |
 | [Roku](/docs/sources/roku-tracker/adding-data/index.md)                                                                | ✅         | 0.1.0         | ✅             |                                                      |
+| Google Tag Manager                                                                                                     | ❌         |               |               |                                                      |
 
 The native mobile trackers are able to extract the application version and build number automatically from the app metadata. For web, you need to provide the application version manually in the tracker configuration.
 

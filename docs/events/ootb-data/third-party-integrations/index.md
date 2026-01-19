@@ -25,6 +25,7 @@ This table shows the support for Optimizely X tracking across the main client-si
 | React Native                                                          | ❌         |               |               |                              |
 | Flutter                                                               | ❌         |               |               |                              |
 | Roku                                                                  | ❌         |               |               |                              |
+| Google Tag Manager                                                    | ❌         |               |               |                              |
 
 <SchemaProperties
   overview={{event: false}}
@@ -50,7 +51,7 @@ This table shows the support for GA cookie tracking across the main client-side 
 | React Native                                                          | ❌         |               |               |                            |
 | Flutter                                                               | ❌         |               |               |                            |
 | Roku                                                                  | ❌         |               |               |                            |
-
+| Google Tag Manager                                                    | ❌         |               |               |                            |
 
 GA4:
 
@@ -90,6 +91,7 @@ This table shows the support for Kantar Focal Meter tracking across the main cli
 | React Native                                                          | ❌         |               |               |                             |
 | Flutter                                                               | ❌         |               |               |                             |
 | Roku                                                                  | ❌         |               |               |                             |
+| Google Tag Manager                                                    | ❌         |               |               |                             |
 
 ## Privacy Sandbox (deprecated)
 
@@ -109,6 +111,7 @@ This table shows the support for Privacy Sandbox tracking across the main client
 | React Native                                                               | ❌         |               |               |
 | Flutter                                                                    | ❌         |               |               |
 | Roku                                                                       | ❌         |               |               |
+| Google Tag Manager                                                         | ❌         |               |               |  |
 
 <SchemaProperties
   overview={{event: false}}

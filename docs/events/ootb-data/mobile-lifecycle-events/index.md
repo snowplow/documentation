@@ -26,6 +26,7 @@ This table shows the support for mobile application install tracking across the 
 | [React Native](/docs/sources/react-native-tracker/tracking-events/installation-tracking/index.md) | ✅         | 0.1.0         | ✅             | Only relevant for mobile events |
 | Flutter                                                                                           | ❌         |               |               |                                 |
 | Roku                                                                                              | ❌         |               |               |                                 |
+| Google Tag Manager                                                                                | ❌         |               |               |                                 |
 
 :::note No uninstall events
 It's not possible to track when an app is uninstalled, since the mobile platforms don't provide a callback where such an event could be tracked.
@@ -70,7 +71,7 @@ This table shows the support for mobile lifecycle event tracking across the main
 | [React Native](/docs/sources/react-native-tracker/tracking-events/index.md#tracking-deep-link-received-events) | ✅         | 0.1.0         | ✅             | Only relevant for mobile events |
 | [Flutter](/docs/sources/flutter-tracker/initialization-and-configuration/index.md)                             | ✅         | 0.5.0         | ✅             | Only relevant for mobile events |
 | Roku                                                                                                           | ❌         |               |               |                                 |
-
+| Google Tag Manager                                                                                             | ❌         |               |               |                                 |
 
 ### Foreground event
 

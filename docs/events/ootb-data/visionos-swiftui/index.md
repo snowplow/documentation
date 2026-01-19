@@ -25,6 +25,7 @@ This table shows the support for VisionOS tracking across the main client-side [
 | Flutter                                                                | ❌         |               |               |                                  |
 | Roku                                                                   | ❌         |               |               |                                  |
 | Unity                                                                  | ❌         |               |               |                                  |
+| Google Tag Manager                                                     | ❌         |               |               |                                  |
 
 ## Available events
 

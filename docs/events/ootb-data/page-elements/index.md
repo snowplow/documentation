@@ -127,7 +127,7 @@ This table shows the support for page element tracking across the main client-si
 | React Native                                                                | ❌         |               |               |
 | Flutter                                                                     | ❌         |               |               |
 | Roku                                                                        | ❌         |               |               |
-
+| Google Tag Manager                                                          | ❌         |               |               |  |
 
 ### Available events
 

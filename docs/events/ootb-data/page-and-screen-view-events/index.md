@@ -88,6 +88,7 @@ This table shows the support for screen view tracking across the main [Snowplow 
 | [C++](/docs/sources/c-tracker/tracking-specific-events/index.md)                  | ✅         | 0.1.0         | ❌             | No screen entity                                                                              |
 | [Unity](/docs/sources/unity-tracker/index.md)                                     | ✅         | 0.8.0         | ❌             | No screen entity                                                                              |
 | [Lua](/docs/sources/lua-tracker/tracking-specific-events/index.md)                | ✅         | 0.1.0         | ❌             | No screen entity                                                                              |
+| Google Tag Manager                                                                | ❌         |               |               |                                                                                               |
 
 We recommend using the [Base mobile data product template](/docs/data-product-studio/data-products/data-product-templates/index.md#base-mobile) for mobile tracking. It includes screen views.
 

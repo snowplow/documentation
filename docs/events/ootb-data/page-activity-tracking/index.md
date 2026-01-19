@@ -55,6 +55,7 @@ This table shows the support for screen engagement tracking across the main clie
 | [React Native](/docs/sources/react-native-tracker/tracking-events/screen-tracking/index.md#screen-engagement-tracking) | ✅         | 2.1.0         | ✅             | Only on mobile |
 | [Flutter](/docs/sources/flutter-tracker/tracking-events/index.md#screen-engagement-tracking)                           | ✅         | 0.1.0         | ✅             | Only on mobile |
 | Roku                                                                                                                   | ❌         |               |               |                |
+| Google Tag Manager                                                                                                     | ❌         |               |               |                |
 
 We recommend using the [Base mobile data product template](/docs/data-product-studio/data-products/data-product-templates/index.md#base-mobile) for mobile tracking. It includes screen end events.
 

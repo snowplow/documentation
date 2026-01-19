@@ -24,6 +24,7 @@ This table shows the support for page referrer tracking across the main client-s
 | [React Native](/docs/sources/react-native-tracker/tracking-events/index.md#tracking-deep-link-received-events) | ✅         | 1.1.0                                              | ❌             | Based on Deep Link events          |
 | Flutter                                                                                                        | ❌         |                                                    |               |                                    |
 | Roku                                                                                                           | ❌         |                                                    |               |                                    |
+| Google Tag Manager                                                                                             | ❌         |                                                    |               |                                    |
 
 The web trackers automatically populate the `page_referrer` [atomic event property](/docs/fundamentals/canonical-event/index.md#page-fields) in all page view events.
 

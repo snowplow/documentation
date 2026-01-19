@@ -25,6 +25,7 @@ You can configure the web trackers to automatically include a browser entity wit
 | Android                                                                          | ❌         |               |               |
 | React Native                                                                     | ❌         |               |               |
 | Flutter                                                                          | ❌         |               |               |
+| Google Tag Manager                                                               | ❌         |               |               |  |
 
 The browser entity is only available on web trackers since it captures browser-specific information from the DOM and browser APIs. These APIs aren't available to React Native or Flutter.
 
@@ -59,6 +60,7 @@ The browser entity is only available on web trackers since it captures browser-s
 | React Native                                                            | ❌         |               |               |
 | Flutter                                                                 | ❌         |               |               |
 | Roku                                                                    | ❌         |               |               |
+| Google Tag Manager                                                      | ❌         |               |               |  |
 
 <SchemaProperties
   overview={{event: false}}
@@ -87,6 +89,7 @@ This table shows the support for the mobile entity across the main client-side S
 | [React Native](/docs/sources/react-native-tracker/tracking-events/platform-and-application-context/index.md#platform-context) | ✅         | 1.0.0         | ✅             | Only relevant for mobile tracking |
 | [Flutter](/docs/sources/flutter-tracker/initialization-and-configuration/index.md)                                            | ✅         | 0.1.0         | ✅             | Only relevant for mobile tracking |
 | Roku                                                                                                                          | ❌         |               |               |                                   |
+| Google Tag Manager                                                                                                            | ❌         |               |               |                                   |
 
 <SchemaProperties
   overview={{event: false}}

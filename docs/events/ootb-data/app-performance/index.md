@@ -24,11 +24,11 @@ This [plugin](/docs/sources/web-trackers/tracking-events/web-vitals/index.md) tr
 
 This table shows which versions of the trackers can use the web vitals plugins:
 
-| Tracker                                                                           | Supported | Since version | Auto-tracking | Notes                                                             |
-| --------------------------------------------------------------------------------- | --------- | ------------- | ------------- | ----------------------------------------------------------------- |
-| Web                                                                               | ✅         | 3.13.0        | ✅             |                                                                   |
-| React Native                                                                      | ❌         |               |               | Tracker can't access the required browser APIs                    |
-| [Google Tag Manager](/docs/sources/google-tag-manager/settings-template/index.md) | ❌         |               |               | Not directly supported, but you can load it as an external plugin |
+| Tracker            | Supported | Since version | Auto-tracking | Notes                                                             |
+| ------------------ | --------- | ------------- | ------------- | ----------------------------------------------------------------- |
+| Web                | ✅         | 3.13.0        | ✅             |                                                                   |
+| React Native       | ❌         |               |               | Tracker can't access the required browser APIs                    |
+| Google Tag Manager | ❌         |               |               | Not directly supported, but you can load it as an external plugin |
 
 To process raw web vitals event data, use the core web vitals module in the [Snowplow Unified Digital dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/core-web-vitals-module/index.md).
 
@@ -88,6 +88,7 @@ This table shows the support for timing events across Snowplow [tracker SDKs](/d
 | Scala                                                                                                         | ❌         |               |
 | Lua                                                                                                           | ❌         |               |
 | Node.js                                                                                                       | ❌         |               |
+| Google Tag Manager                                                                                            | ❌         |               |  |  |
 
 You can still track timing data using trackers without built-in timing event support. Use custom events with the `timing` schema.
 

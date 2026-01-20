@@ -10,7 +10,7 @@ date: "2026-01-19"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-Snowplow enables you to track events without collecting personally identifiable information (PII). This is useful when you need to respect user privacy preferences, comply with regulations such as GDPR, or track events before a user has provided consent.
+Snowplow enables you to track events without collecting personally identifiable information (PII). Use anonymous tracking to respect user privacy preferences, comply with regulations such as GDPR, or track events before a user has provided consent.
 
 Every Snowplow event includes a number of [identifiers](/docs/events/identifiers/index.md). You can configure your trackers to prevent the collection of these identifiers, as well as IP addresses and cookies, using anonymous tracking.
 
@@ -18,7 +18,7 @@ Some Snowplow trackers also provide options for tracking [user consent](/docs/ev
 
 ## Anonymization levels
 
-Snowplow trackers support multiple levels of anonymization, allowing you to balance privacy requirements with analytics needs. Combine client-side and server-side anonymization to achieve the desired level of privacy.
+Snowplow trackers support multiple levels of anonymization to balance privacy requirements with analytics needs. Combine client-side and server-side anonymization to achieve the desired level of privacy.
 
 As well as anonymous tracking, you can also use enrichments to pseudonymize or mask identifiers for tracked events, before they arrive at the data warehouse. This uses the [PII pseudonymization](/docs/pipeline/enrichments/available-enrichments/pii-pseudonymization-enrichment/index.md) or [IP anonymization](/docs/pipeline/enrichments/available-enrichments/ip-anonymization-enrichment/index.md) enrichments.
 
@@ -46,7 +46,7 @@ snowplow('newTracker', 'sp', '{{collector_url_here}}', {
 By default, the tracker uses [cookies and local storage](/docs/sources/web-trackers/cookies-and-local-storage/index.md) to persist user and session information, as well as for buffering events. When anonymous tracking is enabled, identifiers are not saved to cookies or local storage.
 
   </TabItem>
-  <TabItem value="ios" label="iOS" default>
+  <TabItem value="ios" label="iOS">
 
 ```swift
 Snowplow.createTracker(namespace: "appTracker", endpoint: "https://snowplow-collector-url.com") {
@@ -91,7 +91,7 @@ snowplow('newTracker', 'sp', '{{collector_url_here}}', {
 By default, with this configuration the tracker will use cookies and local storage to store session identifiers, but not user identifiers.
 
   </TabItem>
-  <TabItem value="ios" label="iOS" default>
+  <TabItem value="ios" label="iOS">
 
 ```swift
 Snowplow.createTracker(namespace: "appTracker", endpoint: "https://snowplow-collector-url.com") {
@@ -120,7 +120,7 @@ createTracker(
 
 ### Server-side anonymization
 
-Server-side anonymization prevents the event [Collector](/docs/pipeline/collector/index.md) setting the `sp` cookie for `network_userid`, or capturing IP addresses.
+Server-side anonymization prevents the event [Collector](/docs/pipeline/collector/index.md) setting the `sp` cookie for `network_userid`, or from capturing IP addresses.
 
 Setting server-side anonymization will add a `SP-Anonymous` HTTP header to requests sent to the Collector. This requires the request method to be `POST`, which is the default for most trackers. When the `SP-Anonymous` header is present, the Collector doesn't set or read the `sp` cookie.
 
@@ -149,7 +149,7 @@ snowplow('newTracker', 'sp', '{{collector_url_here}}', {
 This configuration prevents the tracker from storing any data in cookies or local storage.
 
   </TabItem>
-  <TabItem value="ios" label="iOS" default>
+  <TabItem value="ios" label="iOS">
 
 ```swift
 Snowplow.createTracker(namespace: "appTracker", endpoint: "https://snowplow-collector-url.com") {
@@ -200,7 +200,7 @@ This table shows the support for anonymous tracking across the main [Snowplow tr
 
 ### Toggle anonymous tracking
 
-As well as setting it at tracker initialization, you can enable or disable anonymous tracking during a session. This is useful for starting with anonymous tracking until a user accepts a cookie banner, or enabling full tracking when a user logs in.
+As well as setting it at tracker initialization, you can enable or disable anonymous tracking during a session. Use this to start with anonymous tracking until a user accepts a cookie banner, or to enable full tracking when a user logs in.
 
 Here's some example code for toggling anonymization at runtime on web or mobile:
 
@@ -215,7 +215,7 @@ snowplow('disableAnonymousTracking');
 These methods also accept an [optional configuration object](/docs/sources/web-trackers/anonymous-tracking/index.md#toggling-anonymous-tracking) to specify which levels of anonymization to enable.
 
   </TabItem>
-  <TabItem value="ios" label="iOS" default>
+  <TabItem value="ios" label="iOS">
 
 ```swift
 tracker.userAnonymisation = true
@@ -235,9 +235,7 @@ tracker.emitter.serverAnonymisation = true
   </TabItem>
 </Tabs>
 
-When toggling anonymous tracking, be aware that:
-- On web, enabling anonymous tracking removes user identifiers from outgoing events but doesn't delete existing cookies
-- On mobile, toggling anonymization starts a new session
+On web, enabling anonymous tracking removes user identifiers from outgoing events but doesn't delete existing cookies. On mobile, toggling anonymization starts a new session.
 
 ### Clear user data
 

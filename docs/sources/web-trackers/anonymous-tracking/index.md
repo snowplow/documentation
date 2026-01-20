@@ -224,7 +224,7 @@ If configuring the tracker with `stateStorageStrategy: 'localStorage'` and anony
 
 ### Clear user data
 
-If you wish to clear all the cookies and local storage values which contain user data when switching on anonymous tracking, or triggered by other actions on your site, you can call the following:
+If you wish to clear all the cookies (except for the Collector `sp` cookie) and local storage values which contain user data when switching on anonymous tracking, or triggered by other actions on your site, you can call the following:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>

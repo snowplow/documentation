@@ -20,7 +20,7 @@ Different event fields are populated by different applications, such as tracker 
 
 During enrichment, atomic property values are validated against the [atomic schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/atomic/jsonschema/1-0-0). If a required field is missing or invalid, for example the wrong type or length, [Enrich](/docs/api-reference/enrichment-components/index.md) will process the event as a [failed event](/docs/fundamentals/failed-events/index.md). The **reqd?** values in these tables specify whether a field is required for a Snowplow event.
 
-The tables show the default maximum lengths for string fields. You can configure different maximum lengths for specific fields by setting `atomicFieldsLimits` in the [Enrich configuration](/docs/api-reference/enrichment-components/configuration-reference/index.md). These can be more permissive than the limits in the atomic schema. In fact, the `page_url`, `page_referrer`, and `mkt_clickid` fields have longer maximum lengths in the default Enrich configuration than in the atomic schema.
+The tables show the default maximum lengths for string fields. You can configure different maximum lengths for specific fields by setting `atomicFieldsLimits` in the [Enrich configuration](/docs/api-reference/enrichment-components/configuration-reference/index.md). These can be more permissive than the limits in the atomic schema. In fact, the `page_url`, `page_referrer`, and `mkt_clickid` fields already have longer maximum lengths in the default Enrich configuration than in the atomic schema.
 
 Any payload that conforms to this protocol is a valid Snowplow event payload, whether it's sent by a Snowplow tracker SDK, a webhook, or a custom application. If you want to get into the details, check out these [example HTTP requests](/docs/events/http-requests/index.md). In total, the tracker protocol defines 131 fields, of which 89 are in use by Snowplow applications.
 
@@ -238,7 +238,7 @@ The `br_viewwidth` and `br_viewheight` page size fields originate from a single 
 | Payload property | Field name      | Type                     | Description                              | Reqd? | Example | Source   | Web | Mobile |
 | ---------------- | --------------- | ------------------------ | ---------------------------------------- | ----- | ------- | -------- | --- | ------ |
 | `lang`           | `br_lang`       | `string`, max length 255 | Language the browser is set to           | No    | `en-GB` | Tracking | ✅   | ❌      |
-| `cookie`         | `br_cookies`    | `boolean`                | Whether the browser is accepting cookies | No    | `1`     | Tracking | ✅   | ❌      |
+| `cookie`         | `br_cookies`    | `integer boolean`        | Whether the browser is accepting cookies | No    | `1`     | Tracking | ✅   | ❌      |
 | `cd`             | `br_colordepth` | `string`, max length 12  | Bit depth of the browser color palette   | No    | `24`    | Tracking | ✅   | ❌      |
 | `vp`             | `br_viewwidth`  | `integer`                | Viewport width                           | No    | `1000`  | Tracking | ✅   | ❌      |
 | `vp`             | `br_viewheight` | `integer`                | Viewport height                          | No    | `1000`  | Tracking | ✅   | ❌      |
@@ -304,7 +304,7 @@ We have deprecated the following fields. They're no longer populated by Snowplow
 | -------------------------- | ------------------------ | -------------------------------------------------------------------------- | ----- | ------------ | ---------- | --- | ------ |
 | `txn_id`                   | `integer`                | Transaction ID set client-side, used to de-dupe records                    | No    | `421828`     | Deprecated | ✅   | ✅      |
 | `dvce_type`                | `string`, max length 50  | Type of device                                                             | No    | `Computer`   | Deprecated | ✅   | ✅      |
-| `dvce_ismobile`            | `boolean`                | Is the device mobile?                                                      | No    | `1`          | Deprecated | ✅   | ✅      |
+| `dvce_ismobile`            | `integer boolean`        | Is the device mobile?                                                      | No    | `1`          | Deprecated | ✅   | ✅      |
 | `os_name`                  | `string`, max length 50  | Name of operating system                                                   | No    | `Android`    | Deprecated | ✅   | ✅      |
 | `os_family`                | `string`, max length 50  | Operating system family                                                    | No    | `Linux`      | Deprecated | ✅   | ✅      |
 | `os_manufacturer`          | `string`, max length 50  | Company responsible for OS                                                 | No    | `Apple`      | Deprecated | ✅   | ✅      |
@@ -314,15 +314,15 @@ We have deprecated the following fields. They're no longer populated by Snowplow
 | `br_family`                | `string`, max length 50  | Browser family                                                             | No    | `Firefox`    | Deprecated | ❌   | ❌      |
 | `br_type`                  | `string`, max length 50  | Browser type                                                               | No    | `Browser`    | Deprecated | ❌   | ❌      |
 | `br_renderengine`          | `string`, max length 50  | Browser rendering engine                                                   | No    | `GECKO`      | Deprecated | ❌   | ❌      |
-| `br_features_pdf`          | `boolean`                | Whether the browser recognizes PDFs                                        | No    | `1`          | Deprecated | ✅   | ❌      |
-| `br_features_flash`        | `boolean`                | Whether Flash is installed                                                 | No    | `1`          | Deprecated | ✅   | ❌      |
-| `br_features_java`         | `boolean`                | Whether Java is installed                                                  | No    | `1`          | Deprecated | ✅   | ❌      |
-| `br_features_director`     | `boolean`                | Whether Adobe Shockwave is installed                                       | No    | `1`          | Deprecated | ✅   | ❌      |
-| `br_features_quicktime`    | `boolean`                | Whether QuickTime is installed                                             | No    | `1`          | Deprecated | ✅   | ❌      |
-| `br_features_realplayer`   | `boolean`                | Whether RealPlayer is installed                                            | No    | `1`          | Deprecated | ✅   | ❌      |
-| `br_features_windowsmedia` | `boolean`                | Whether mplayer2 is installed                                              | No    | `1`          | Deprecated | ✅   | ❌      |
-| `br_features_gears`        | `boolean`                | Whether Google Gears is installed                                          | No    | `1`          | Deprecated | ✅   | ❌      |
-| `br_features_silverlight`  | `boolean`                | Whether Microsoft Silverlight is installed                                 | No    | `1`          | Deprecated | ✅   | ❌      |
+| `br_features_pdf`          | `integer boolean`        | Whether the browser recognizes PDFs                                        | No    | `1`          | Deprecated | ✅   | ❌      |
+| `br_features_flash`        | `integer boolean`        | Whether Flash is installed                                                 | No    | `1`          | Deprecated | ✅   | ❌      |
+| `br_features_java`         | `integer boolean`        | Whether Java is installed                                                  | No    | `1`          | Deprecated | ✅   | ❌      |
+| `br_features_director`     | `integer boolean`        | Whether Adobe Shockwave is installed                                       | No    | `1`          | Deprecated | ✅   | ❌      |
+| `br_features_quicktime`    | `integer boolean`        | Whether QuickTime is installed                                             | No    | `1`          | Deprecated | ✅   | ❌      |
+| `br_features_realplayer`   | `integer boolean`        | Whether RealPlayer is installed                                            | No    | `1`          | Deprecated | ✅   | ❌      |
+| `br_features_windowsmedia` | `integer boolean`        | Whether mplayer2 is installed                                              | No    | `1`          | Deprecated | ✅   | ❌      |
+| `br_features_gears`        | `integer boolean`        | Whether Google Gears is installed                                          | No    | `1`          | Deprecated | ✅   | ❌      |
+| `br_features_silverlight`  | `integer boolean`        | Whether Microsoft Silverlight is installed                                 | No    | `1`          | Deprecated | ✅   | ❌      |
 
 
 ### Legacy ecommerce fields

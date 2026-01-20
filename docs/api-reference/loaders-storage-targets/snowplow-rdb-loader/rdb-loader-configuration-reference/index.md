@@ -27,6 +27,10 @@ import License from "@site/docs/api-reference/loaders-storage-targets/snowplow-r
 <License/>
 ```
 
+## Password rotation
+
+To rotate the password for your RDB Loader, you'll need to contact [Snowplow Support](https://support.snowplow.io/), and share the intended password using the secure Credential sharing form in Console. To avoid disruption to your pipeline, we'll coordinate a time with you to update the credentials.
+
 ## Redshift Loader `storage` section
 
 | Parameter                                     | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          |

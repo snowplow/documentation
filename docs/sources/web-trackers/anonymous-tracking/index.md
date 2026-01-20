@@ -101,7 +101,7 @@ enableAnonymousTracking();
 
 which will enable client side anonymous tracking.
 
-For full, cookieless, anonymization, including anonymizing data within the Snowplow Collector (cookies and ip address), then you can enable server anonymization too:
+For full, cookieless anonymization, including anonymizing data within the Snowplow Collector (cookies and ip address), enable server anonymization too:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>

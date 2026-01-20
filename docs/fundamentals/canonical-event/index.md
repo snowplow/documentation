@@ -16,7 +16,7 @@ The field **type** refers to the data type in the enriched event data. For some 
 
 Different event fields are populated by different applications, such as tracker SDKs or [enrichments](/docs/pipeline/enrichments/index.md). The **source** of data for each field is indicated in the tables below.
 
-The **reqd?** values in these tables specify whether a field is required for a Snowplow event. Required fields will always have values.
+Atomic property values are validated during enrichment. If a required field is missing or invalid, for example the wrong type or length, the event will be processed as a [failed event](/docs/fundamentals/failed-events/index.md). The **reqd?** values in these tables specify whether a field is required for a Snowplow event.
 
 Any payload that conforms to this protocol is a valid Snowplow event payload, whether it's sent by a Snowplow tracker SDK, a webhook, or a custom application. If you want to get into the details, check out these [example HTTP requests](/docs/events/http-requests/index.md). In total, the tracker protocol defines 131 fields, of which 89 are in use by Snowplow applications.
 

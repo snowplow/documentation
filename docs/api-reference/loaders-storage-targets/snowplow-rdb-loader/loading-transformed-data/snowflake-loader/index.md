@@ -23,7 +23,7 @@ There are two different authentication methods with Snowflake Loader:
 * With the `TempCreds` method, there are no additional Snowflake resources needed.
 * With the `NoCreds` method, the Loader needs a Snowflake stage.
 
-This choice is controlled by the `loadAuthMethod` [configuration setting](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/rdb-loader-configuration-reference/index.md#snowflake-loader-storage-section).
+This choice is controlled by the `loadAuthMethod` [configuration setting](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/rdb-loader-configuration-reference/index.md#snowflake-loader-storage-section).
 
 :::note
 
@@ -40,7 +40,7 @@ You can follow [this tutorial](https://docs.snowflake.com/en/user-guide/data-loa
 
 Assuming you created the other required resources for it, you can create the Snowflake stage by following [this document](https://docs.snowflake.com/en/sql-reference/sql/create-stage.html).
 
-Finally, use the `transformedStage` [configuration setting](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/rdb-loader-configuration-reference/index.md#snowflake-loader-storage-section) to point the loader to your stage.
+Finally, use the `transformedStage` [configuration setting](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/rdb-loader-configuration-reference/index.md#snowflake-loader-storage-section) to point the loader to your stage.
 
 </details>
 
@@ -69,7 +69,7 @@ The loader takes two configuration files:
 | [gcp/snowflake.config.minimal.hocon](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/loader/gcp/snowflake.config.minimal.hocon)     | [gcp/snowflake.config.reference.hocon](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/loader/gcp/snowflake.config.reference.hocon)     |
 | [azure/snowflake.config.minimal.hocon](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/loader/azure/snowflake.config.minimal.hocon) | [azure/snowflake.config.reference.hocon](https://github.com/snowplow/snowplow-rdb-loader/blob/master/config/loader/azure/snowflake.config.reference.hocon) |
 
-For details about each setting, see the [configuration reference](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/loading-transformed-data/rdb-loader-configuration-reference/index.md).
+For details about each setting, see the [configuration reference](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/rdb-loader-configuration-reference/index.md).
 
 See [here](/docs/api-reference/iglu/iglu-resolver/index.md) for details on how to prepare the Iglu resolver file.
 

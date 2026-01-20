@@ -14,12 +14,8 @@ import TabItem from '@theme/TabItem';
 
 :::info
 
-This feature is available since v1.3.
+This feature is available since version 1.3 until version 2.x of the React Native tracker.
 
-:::
-
-:::note
-Version 4 of the React Native tracker does not yet provide full support for client-side anonymization, but this is something we plan to introduce in the upcoming versions.
 :::
 
 ```mdx-code-block
@@ -28,7 +24,9 @@ import AnonymousTrackingSharedBlock from "@site/docs/reusable/anonymous-tracking
 <AnonymousTrackingSharedBlock/>
 ```
 
-There are several levels to the anonymization depending on which of the three categories are affected:
+There are several levels to the anonymization depending on which of the three categories are affected.
+
+Read more about anonymous tracking in the [overview page](/docs/events/anonymous-tracking/index.md).
 
 ## 1. Full client-side anonymization
 

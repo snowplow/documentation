@@ -14,6 +14,8 @@ Snowplow enables you to track events without collecting personally identifiable 
 
 Every Snowplow event includes a number of [identifiers](/docs/events/identifiers/index.md). You can configure your trackers to prevent the collection of these identifiers, as well as IP addresses and cookies, using anonymous tracking.
 
+Some Snowplow trackers also provide options for tracking [user consent](/docs/events/ootb-data/consent-events/index.md) interactions and GDPR basis for processing.
+
 ## Anonymization levels
 
 Snowplow trackers support multiple levels of anonymization, allowing you to balance privacy requirements with analytics needs. Combine client-side and server-side anonymization to achieve the desired level of privacy.

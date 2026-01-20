@@ -16,7 +16,7 @@ The Snowplow web tracker allows you to track events anonymously. It enables anon
 
 Anonymous tracking can be configured on initialization, but can be reset later. You may wish to toggle this functionality on or off during a page visit, for example when a user accepts a cookie banner you may not want to disable anonymous tracking, or when a user logs in to your site.
 
-For information about tracking user consent interactions and GDPR basis for processing, check out [this page](/docs/sources/web-trackers/tracking-events/consent-gdpr/index.md).
+For information about tracking user consent interactions and GDPR basis for processing, check out [this page](/docs/sources/web-trackers/tracking-events/consent-gdpr/index.md). Read more about anonymous tracking in the [overview page](/docs/events/anonymous-tracking/index.md).
 
 On web, the following user and session identifiers can be anonymized:
 

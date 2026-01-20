@@ -23,7 +23,9 @@ import AnonymousTrackingSharedBlock from "@site/docs/reusable/anonymous-tracking
 
 <AnonymousTrackingSharedBlock/>
 ```
-There are several levels to the anonymisation depending on which of the three categories are affected:
+There are several levels to the anonymisation depending on which of the three categories are affected.
+
+Read more about anonymous tracking in the [overview page](/docs/events/anonymous-tracking/index.md).
 
 ## 1. Full client-side anonymisation
 

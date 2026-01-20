@@ -21,6 +21,8 @@ Apart from Repeater and Mutator, other infrastructure components have become obs
 * The `failedInserts` PubSub topic connecting Loader and Repeater.
 * The `deadLetter` GCS bucket used by Repeater to store data that repeatedly failed to be inserted into BigQuery.
 
+This means that failed events are now written to the failed events PubSub topic, configured as `output.bad.topic`, rather than to the GCS bucket as before. This change was made to consolidate all types of event failures into a single place.
+
 ## Events table format
 
 Starting from 2.0.0, BigQuery Loader changes its output column naming strategy. For example, for [ad_click event](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow.media/ad_click_event/jsonschema/1-0-0):

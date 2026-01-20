@@ -36,20 +36,20 @@ Once you've selected an event and version, click **Confirm** to add the attribut
 
 Signals supports a number of different aggregation types.
 
-| Aggregation           | Description                                                           | Required property type                |
+| Aggregation           | Description                                                           | Required property type in schema      |
 | --------------------- | --------------------------------------------------------------------- | ------------------------------------- |
 | Counter               | Count events                                                          | No property used for this aggregation |
 | Sum                   | Sum of property values                                                | Numeric                               |
 | Min                   | Minimum property value                                                | Numeric                               |
 | Max                   | Maximum property value                                                | Numeric                               |
 | Mean                  | Average of property values                                            | Numeric                               |
-| First                 | First property value seen                                             | Any                                   |
-| Last                  | Last property value seen                                              | Any                                   |
-| Most Frequent         | Most frequent property value seen                                     | Any                                   |
-| Least Frequent        | Least frequent property value seen                                    | Any                                   |
-| Approx Count Distinct | Approximate distinct count as calculated by the [HyperLogLog algorithm](https://redis.io/docs/latest/develop/data-types/probabilistic/hyperloglogs/) | Any                                   |
-| Category Count        | Dictionary of unique values and their counts                          | Any                                   |
-| Unique List           | List of unique property values                                        | Any                                   |
+| First                 | First property value seen                                             | String, Numeric, Boolean              |
+| Last                  | Last property value seen                                              | String, Numeric, Boolean              |
+| Most Frequent         | Most frequent property value seen                                     | String, Numeric, Boolean              |
+| Least Frequent        | Least frequent property value seen                                    | String, Numeric, Boolean              |
+| Approx Count Distinct | Approximate distinct count as calculated by the [HyperLogLog algorithm](https://redis.io/docs/latest/develop/data-types/probabilistic/hyperloglogs/) | String, Numeric, Boolean  |
+| Category Count        | Dictionary of unique values and their counts                          | String, Numeric, Boolean              |
+| Unique List           | List of unique property values                                        | String, Numeric, Boolean              |
 
 A property isn't used for `counter` aggregation. To only count events with a specific property value, use a criteria filter.
 
@@ -71,12 +71,6 @@ Add an optional time period to the attribute to aggregate it over a rolling wind
 Find the time period option within **More options**. Click **Done** to save it.
 
 ![Time period configuration dialog for setting rolling window attributes](../../images/attribute-set-period.png)
-
-### Stream attributes limit
-
-Stream attributes defined with a `period` setting, e.g., last 15 minutes, are limited to the 100 most recent relevant events. Relevant events are those that cause the attribute value to be updated. As a result, if you need to analyze user behavior or aggregate data over longer periods, such as counting page views over several hours or tracking all purchases in the past year, stream attributes may not capture the full picture.
-
-This isn't the case for stream attributes that don't have a `period` window defined. In this case, Signals considers all events—starting from the time the attribute was defined—and values aren't forgotten.
 
 ## Filtering with criteria
 

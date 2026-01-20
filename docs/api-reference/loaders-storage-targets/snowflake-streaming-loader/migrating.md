@@ -32,6 +32,12 @@ The Streaming Loader is fully compatible with the table created and managed by t
 
 You will notice some subtle differences:
 
+#### No loader-side deduplication
+
+RDB Loader performs in-batch and cross-batch deduplication during loading. The Streaming Loader does not deduplicate events, so expect to see more duplicates than with the RDB Loader.
+
+Snowplow's [data models](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md) handle deduplication automatically. If you write custom queries, see [dealing with duplicates](/docs/destinations/warehouses-lakes/querying-data/index.md#dealing-with-duplicates).
+
 #### New `_schema_version` property in entities
 
 Previously, when loading entities into the table, RDB Loader would drop any information about exactly which version of the schema had been used to validate them.

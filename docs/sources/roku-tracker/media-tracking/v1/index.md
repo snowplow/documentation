@@ -8,7 +8,7 @@ keywords: ["roku media tracking v1", "video events", "playback tracking"]
 ---
 
 Media tracking has [multiple versions](/docs/sources/web-trackers/tracking-events/media/index.md) of schema available.
-This document is for version 1 of the schemas, it is recommended to [migrate to v2 tracking](/docs/sources/roku-tracker/media-tracking/v2/index.md#migrating-from-v1).
+This document is for version 1 of the schemas, it is recommended to [migrate to v2 tracking](/docs/sources/roku-tracker/media-tracking/v2/index.md#migrating-from-media-v1-apis).
 
 ## Usage
 

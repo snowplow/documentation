@@ -47,13 +47,13 @@ The snippets below show how to get started with the plugin, after [setting up yo
 ### `startYouTubeTracking`
 
 This function enables the auto tracking for the specified YouTube Player.
-It installs the iFrame API if necessary, adds event listeners and any poll intervals, and then calls [`startMediaTracking`](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md#starting-and-ending-media-tracking).
+It installs the iFrame API if necessary, adds event listeners and any poll intervals, and then calls [`startMediaTracking`](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md#usage).
 
 The accepted options are the same as for the core `startMediaTracking` method, with the following additions:
 
 - `video`: A DOM ID for the iFrame element hosting the player, an iFrame element, or a pre-existing [YT.Player](https://developers.google.com/youtube/iframe_api_reference#Loading_a_Video_Player) instance to track events for.
 - `captureEvents`: An optional list of events to track; see [Events](#events).
-- `label`: The plugin manages the [`player` entity](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md#media-player-entity) automatically, but you can optionally supply a custom `label` if required.
+- `label`: The plugin manages the [`player` entity](/docs/events/ootb-data/media-events/index.md#media-player) automatically, but you can optionally supply a custom `label` if required.
 
 As it is required for `startMediaTracking`, the following option is also required:
 
@@ -182,7 +182,7 @@ const mediaSessionId = startYouTubeTracking({
 
 This function disables auto tracking for the player registered with the provided session ID.
 
-It will remove any event listeners and poll intervals, and call [`endMediaTracking`](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md#starting-and-ending-media-tracking) from the core plugin.
+It will remove any event listeners and poll intervals, and call [`endMediaTracking`](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md#usage) from the core plugin.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js-iframe" label="JavaScript (tag) - iFrame" default>
@@ -495,7 +495,7 @@ Instead of requiring the session ID to be provided, it will remove the oldest of
 
 ## Schemas and Example Data
 
-Event and entity schemas are [the same as](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md#tracked-events-and-entities) for the [Snowplow Media Plugin](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md).
+Event and entity schemas are [the same as](/docs/events/ootb-data/media-events/index.md) for the [Snowplow Media Plugin](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md).
 
 In addition, there is a dedicated entity attached with YouTube-specific information to all events.
 

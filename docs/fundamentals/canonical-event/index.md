@@ -54,7 +54,7 @@ The `domain_userid` is regarded as the most reliable session based identifier fo
 
 The `domain_sessionidx` is the number or index of the current user session. For example, an event occurring during a user's first session would have `domain_sessionidx` set to 1. The JavaScript tracker calculates this field by storing a visit count in a [first-party cookie](/docs/sources/web-trackers/cookies-and-local-storage/index.md).
 
-The equivalent values on mobile are tracked in a [session entity](/docs/events/ootb-data/user-and-session-identification/index.md#client-session-context-entity).
+The equivalent values on mobile are tracked in a [session entity](/docs/events/ootb-data/user-and-session-identification/index.md#session-entity).
 
 The `network_userid` is set by a [Collector cookie](/docs/pipeline/collector/index.md) by default. You can override it by setting a `network_userid` with your tracker.
 

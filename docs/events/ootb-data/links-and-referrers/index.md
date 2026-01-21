@@ -1,79 +1,87 @@
 ---
-title: "Referrers, deep links and cross-navigation events"
+title: "Referrers, links, and cross-navigation events"
 sidebar_label: "Links and referrers"
-description: "Track page referrers, deep links in mobile apps, and cross-navigation links using message notification events."
+sidebar_position: 90
+description: "Track page referrers, deep links in mobile apps, and cross-navigation links."
 keywords: ["referrers", "deep links", "cross-navigation", "message notifications"]
 ---
 
-```mdx-code-block
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
-import TOCInline from '@theme/TOCInline';
-```
 
-<TOCInline toc={toc} maxHeadingLevel={2} />
+Understanding how users arrive at your pages and navigate between them is essential for analyzing traffic sources, marketing effectiveness, and user journeys. Snowplow captures referrer information, deep link data, and link click events to give you a complete picture of cross-page and cross-app navigation.
 
-## Page referrer information on Web
+## Referrer atomic event property
 
-Along with page view events, the tracker tracks the URL of the referring page that linked to the current page.
-The URL is tracked in the atomic event properties, under the `page_referrer` property.
+Some Snowplow trackers can populate the `page_referrer` [atomic event property](/docs/fundamentals/canonical-event/index.md#page-fields). This field captures the URL of the page that referred the user to the current page.
 
-| **Table Column** | **Type** | **Description** | **Example values**         |
-| ---------------- | -------- | --------------- | -------------------------- |
-| `page_referrer`  | text     | Referrer URL    | `https://www.snowplow.io/` |
+This table shows the support for page referrer tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md). The server-side trackers don't include referrer tracking.
 
-## Deep links in mobile apps
+| Tracker                                                                                                        | Supported | Since version                                      | Auto-tracking | Notes                              |
+| -------------------------------------------------------------------------------------------------------------- | --------- | -------------------------------------------------- | ------------- | ---------------------------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/page-views/index.md#tracking-a-page-view)                     | ✅         | 0.1.0                                              | ✅             | Automatic for all page view events |
+| [iOS](/docs/sources/mobile-trackers/tracking-events/index.md#tracking-deep-links)                              | ✅         | 3.0.0 (deep link events), 4.1.0 (deep link entity) | ❌             | Based on Deep Link events          |
+| [Android](/docs/sources/mobile-trackers/tracking-events/index.md#tracking-deep-links)                          | ✅         | 3.0.0 (deep link events), 4.1.0 (deep link entity) | ❌             | Based on Deep Link events          |
+| [React Native](/docs/sources/react-native-tracker/tracking-events/index.md#tracking-deep-link-received-events) | ✅         | 1.1.0                                              | ❌             | Based on Deep Link events          |
+| Flutter                                                                                                        | ❌         |                                                    |               |                                    |
+| Roku                                                                                                           | ❌         |                                                    |               |                                    |
+| Google Tag Manager                                                                                             | ✅         | v3                                                 | ✅             | Automatic for all page view events |
 
-Deep links are URLs or hyperlinks that take users directly to a particular location within a mobile app. They are received by the mobile operating system and passed to the related app.
+The web trackers automatically populate the `page_referrer` [atomic event property](/docs/fundamentals/canonical-event/index.md#page-fields) in all page view events.
 
-### Deep link received event
+### Deep links for mobile
 
-This event is manually tracked when the deep link is received in the app.
+Deep links are URLs or hyperlinks that take users directly to a particular location within a mobile app. They're received by the mobile operating system and passed to the related app.
+
+Most events tracked on mobile unsurprisingly don't include webpage atomic properties. However, the mobile trackers can capture both the URL of the deep link and the referrer URL (if available).
+
+You'll need to manually track any received deep links, using the `deep_link_received` event.
+
+The `deep_link_received` event, as well as the first subsequent screen view event, include the `page_url` and `page_referrer` atomic event properties.
 
 <SchemaProperties
-  overview={{event: true, web: false, mobile: true, automatic: false}}
+  overview={{event: true}}
   example={{
     url: 'https://example.com/notes/123',
     referrer: 'https://snowplow.io'
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Represents a deep-link received in the app.", "self": { "vendor": "com.snowplowanalytics.mobile", "name": "deep_link_received", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "url": { "type": "string", "description": "URL in the received deep-link", "format": "uri", "maxLength": 4096 }, "referrer": { "type": "string", "description": "Referrer URL, source of this deep-link", "format": "uri", "maxLength": 4096 } }, "required": ["url"], "additionalProperties": false }} />
 
-### Context entity attached to screen view events
-
-This context entity is attached to the first screen view event automatically after tracking the deep link received event.
+The tracker will automatically add this `deep_link` entity to the next screen view event after tracking the `deep_link_received` event.
 
 <SchemaProperties
-  overview={{event: false, web: false, mobile: true, automatic: true}}
+  overview={{event: false}}
   example={{
     url: 'https://example.com/notes/123',
     referrer: 'https://snowplow.io'
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Entity that indicates a deep-link has been received and processed.", "self": { "vendor": "com.snowplowanalytics.mobile", "name": "deep_link", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "url": { "type": "string", "description": "URL in the received deep-link", "format": "uri", "maxLength": 4096 }, "referrer": { "type": "string", "description": "Referrer URL, source of this deep-link", "format": "uri", "maxLength": 4096 } }, "required": ["url"], "additionalProperties": false }} />
 
-### How to track?
+## Link clicks
 
-* See the documentation for the [iOS and Android tracker](/docs/sources/mobile-trackers/tracking-events/index.md#tracking-deep-links).
-* [Documentation for the React Native tracker](/docs/sources/react-native-tracker/tracking-events/index.md#tracking-deep-link-received-events).
+The web trackers can automatically track link click events, capturing details about the clicked link such as its URL, element ID, classes, target, and content.
 
-## Link click tracking on Web
+This table shows the support for link click tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md). The server-side trackers don't include link click tracking.
 
-Link click tracking feature in the JavaScript tracker enables automatic capturing of link click events as the user clicks on links on the page.
+| Tracker                                                                           | Supported | Since version                                 | Auto-tracking | Notes                             |
+| --------------------------------------------------------------------------------- | --------- | --------------------------------------------- | ------------- | --------------------------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/link-click/index.md)             | ✅         | 0.7.0 (limited functionality), 3.0.0 (plugin) | ✅             | Requires link click plugin        |
+| iOS                                                                               | ❌         |                                               |               |                                   |
+| Android                                                                           | ❌         |                                               |               |                                   |
+| React Native                                                                      | ❌         |                                               |               |                                   |
+| Flutter                                                                           | ❌         |                                               |               |                                   |
+| Roku                                                                              | ❌         |                                               |               |                                   |
+| [Google Tag Manager](/docs/sources/google-tag-manager/snowplow-template/index.md) | ✅         | v3                                            | ✅             | Integrates with link click plugin |
+
+To track link clicks on web using React Native or Flutter, you can implement custom event tracking when users interact with links in your app using the `link_click` event schema.
+
+We recommend using the [Base web data product template](/docs/data-product-studio/data-products/data-product-templates/index.md#base-web) for web tracking. It includes link clicks.
 
 <SchemaProperties
-  overview={{event: true, web: true, mobile: false, automatic: true}}
+  overview={{event: true}}
   example={{
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for a link click event", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "link_click", "format": "jsonschema", "version": "1-0-1" }, "type": "object", "properties": { "elementId": { "type": "string" }, "elementClasses": { "type": "array", "items": { "type": "string" } }, "elementTarget": { "type": "string" }, "targetUrl": { "type": "string", "minLength": 1 }, "elementContent": { "type": "string" } }, "required": ["targetUrl"], "additionalProperties": false }} />
 
-### How to track?
+## Cross-domain tracking
 
-See the [link click tracking documentation for the JavaScript tracker](/docs/sources/web-trackers/tracking-events/link-click/index.md).
-
-## Cross-domain tracking on Web
-
-The JavaScript Tracker can add an additional parameter named “_sp” to the querystring of outbound links. This process is called “link decoration”. The `_sp` value includes the domain user ID for the current page and the time at which the link was clicked (according to the device's clock).
-
-When the `_sp` parameter is present in the page URL, enrichment uses it to assign two properties to events: `refr_domain_userid` with the user identifier and `refr_tstamp` with the timestamp of the click on the link.
-
-### How to track?
-
-See the [documentation for cross-domain tracking on the JavaScript tracker](/docs/sources/web-trackers/cross-domain-tracking/index.md) for instructions.
+Read more about tracking cross-domain in the [cross-navigation page](/docs/events/cross-navigation/index.md).

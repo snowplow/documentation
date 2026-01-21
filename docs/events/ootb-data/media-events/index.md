@@ -45,18 +45,18 @@ This table shows the support for media tracking across the main client-side [Sno
 
 Auto-tracking means that the tracker can subscribe to and track events from a registered media player, without you needing to manually track each event.
 
-| Tracker                                                                                   | Plugin                                                                         | Supported | Since version                      | Auto-tracking | Notes                                                                                                                                                                         |
-| ----------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | --------- | ---------------------------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Web                                                                                       | [Snowplow](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md) | ✅         | 3.12.0 (Media v2)                  | ❌             |                                                                                                                                                                               |
-| Web                                                                                       | [HTML5](/docs/sources/web-trackers/tracking-events/media/html5/index.md)       | ✅         | 3.2.0 (Media v1), 4.0.0 (Media v2) | ✅             |                                                                                                                                                                               |
-| Web                                                                                       | [YouTube](/docs/sources/web-trackers/tracking-events/media/youtube/index.md)   | ✅         | 3.2.0 (Media v1), 4.0.0 (Media v2) | ✅             |                                                                                                                                                                               |
-| Web                                                                                       | [Vimeo](/docs/sources/web-trackers/tracking-events/media/vimeo/index.md)       | ✅         | 3.14.0 (Media v2)                  | ✅             |                                                                                                                                                                               |
-| [iOS](/docs/sources/mobile-trackers/tracking-events/media-tracking/index.md)              |                                                                                | ✅         | 5.3.0 (Media v2)                   | ✅/❌           | Auto-tracking for AVPlayer                                                                                                                                                    |
-| [Android](/docs/sources/mobile-trackers/tracking-events/media-tracking/index.md)          |                                                                                | ✅         | 5.3.0 (Media v2)                   | ❌             |                                                                                                                                                                               |
-| [React Native](/docs/sources/react-native-tracker/custom-tracking-using-schemas/index.md) |                                                                                | ❌         |                                    |               | Use the media schemas for your own custom events, or the [media web data product template](/docs/data-product-studio/data-products/data-product-templates/index.md#media-web) |
-| [Flutter](/docs/sources/flutter-tracker/tracking-events/media-tracking/index.md)          |                                                                                | ✅         | 0.7.0 (Media v2)                   | ❌             |                                                                                                                                                                               |
-| [Roku](/docs/sources/roku-tracker/media-tracking/index.md)                                |                                                                                | ✅         | 0.1.0 (Media v1), 0.3.0 (Media v2) | ❌             |                                                                                                                                                                               |
-| Google Tag Manager                                                                        | ❌                                                                              |           |                                    |               |
+| Tracker                                                                          | Plugin                                                                         | Supported | Since version                      | Auto-tracking | Notes                                                                                                                                                                         |
+| -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | --------- | ---------------------------------- | ------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Web                                                                              | [Snowplow](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md) | ✅         | 3.12.0 (Media v2)                  | ❌             |                                                                                                                                                                               |
+| Web                                                                              | [HTML5](/docs/sources/web-trackers/tracking-events/media/html5/index.md)       | ✅         | 3.2.0 (Media v1), 4.0.0 (Media v2) | ✅             |                                                                                                                                                                               |
+| Web                                                                              | [YouTube](/docs/sources/web-trackers/tracking-events/media/youtube/index.md)   | ✅         | 3.2.0 (Media v1), 4.0.0 (Media v2) | ✅             |                                                                                                                                                                               |
+| Web                                                                              | [Vimeo](/docs/sources/web-trackers/tracking-events/media/vimeo/index.md)       | ✅         | 3.14.0 (Media v2)                  | ✅             |                                                                                                                                                                               |
+| [iOS](/docs/sources/mobile-trackers/tracking-events/media-tracking/index.md)     |                                                                                | ✅         | 5.3.0 (Media v2)                   | ✅/❌           | Auto-tracking for AVPlayer                                                                                                                                                    |
+| [Android](/docs/sources/mobile-trackers/tracking-events/media-tracking/index.md) |                                                                                | ✅         | 5.3.0 (Media v2)                   | ❌             |                                                                                                                                                                               |
+| React Native                                                                     |                                                                                | ❌         |                                    |               | Use the media schemas for your own custom events, or the [media web data product template](/docs/data-product-studio/data-products/data-product-templates/index.md#media-web) |
+| [Flutter](/docs/sources/flutter-tracker/tracking-events/media-tracking/index.md) |                                                                                | ✅         | 0.7.0 (Media v2)                   | ❌             |                                                                                                                                                                               |
+| [Roku](/docs/sources/roku-tracker/media-tracking/index.md)                       |                                                                                | ✅         | 0.1.0 (Media v1), 0.3.0 (Media v2) | ❌             |                                                                                                                                                                               |
+| Google Tag Manager                                                               | ❌                                                                              |           |                                    |               |
 
 The Snowplow media tracking APIs are supported by the [Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) dbt data model.
 
@@ -378,8 +378,6 @@ Track an ad pause event when a user clicks the pause control to stop the ad crea
 
 The trackers have dedicated functions to track each ad quartile event: `trackMediaAdFirstQuartile`, `trackMediaAdMidpoint`, `trackMediaAdThirdQuartile`, or equivalent API. These events set the `percentProgress` property automatically to 25%, 50%, and 75% respectively.
 
-Alternatively, you can use a singl TODO
-
 <SchemaProperties
   overview={{event: true}}
   example={{ percentProgress: 50 }}
@@ -437,7 +435,7 @@ As with all Snowplow events, you can also attach custom entities to individual m
 
 ### Media player
 
-The media player entity captures the current state of playback at the moment each event fires.
+The media player entity captures the current state of playback at the moment each event fires. It's required for the [Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) data model.
 
 <SchemaProperties
   overview={{event: false}}
@@ -462,11 +460,9 @@ The media player entity captures the current state of playback at the moment eac
 
 ### Media session
 
-The media session entity contains metrics that are calculated based on the tracked media events and the media update calls.
+The media session entity contains metrics calculated based on the tracked media events and the media update calls. It's optional for the [Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) data model.
 
-It makes use of the information in the media player entity and the tracked media event types to update its state and calculate metrics.
-
-The table below shows which media player properties (first column) and media events (second column) are used to calculate the metrics within the media session entity (third column).
+The table below shows which media player properties and media events are used to calculate the metrics within the media session entity.
 
 | Media player entity property | Media events                                               | Affected calculation of metric                                  |
 | ---------------------------- | ---------------------------------------------------------- | --------------------------------------------------------------- |
@@ -482,7 +478,7 @@ The table below shows which media player properties (first column) and media eve
 |                              | `ad_start_event`, `ad_quartile_event`, `ad_complete_event` | `timeSpentAds`                                                  |
 |                              | `ad_start_event`, `ad_complete_event`, `ad_skip_event`     | `timePlayed`, `timePlayedMuted`*                                |
 
-\* Play time stats are not being incremented while ads with type linear (default) are being played. Linear ads take over the video playback. For non-linear and companion ads, play time stats are still being incremented while the ad is playing.
+\* Play time stats aren't incremented while ads with type linear (default) are being played. Linear ads take over the video playback. For non-linear and companion ads, play time stats are still incremented while the ad is playing.
 
 <SchemaProperties
   overview={{event: false}}
@@ -506,7 +502,7 @@ The table below shows which media player properties (first column) and media eve
 
 ### Media ad
 
-The media ad entity describes the currently playing ad. It is attached to ad events.
+The media ad entity describes the currently playing ad. It's attached to ad events.
 
 <SchemaProperties
   overview={{event: false}}

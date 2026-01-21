@@ -66,8 +66,30 @@ The additional options differ by version; but version 2 will accept the options 
 | `context` / `entities`      | `context`                   | SelfDescribingJSON[] | Array of custom entities to include with all generated events                                 |
 
 
+## Auto-tracked events
+
+The Roku tracker automatically tracks events from Audio/Video nodes:
+
+- Ready, play, pause, end events
+- Seek start, seek end events
+- Ping events
+- Percent progress events (if configured)
+- Buffer start, buffer end events
+- Quality change events
+- Error events
+
+To track events manually or track events not auto-tracked, use `trackMediaEvent`:
+
+```brightscript
+m.global.snowplow.trackMediaEvent = {
+    media: m.Video,
+    schema: "iglu:com.snowplowanalytics.snowplow.media/ad_click_event/jsonschema/1-0-0",
+    data: { "percentProgress": 50 }
+}
+```
+
 ## Media Player Events
 
 ```mdx-code-block
-<Media tracker="roku" />
+<Media platforms={["roku"]} />
 ```

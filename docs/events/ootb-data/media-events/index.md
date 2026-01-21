@@ -67,6 +67,14 @@ We recommend using the [Media base data product template](/docs/data-product-stu
 
 Each media player instance needs to be registered with the tracker, using a unique session ID. Set the media session ID to a random string. In the browser, you could generate this with a function such as `crypto.randomUUID()`. The ID should be unique to a single session within a single player instance.
 
+![Diagram showing media session timeline and which events to track](./timeline_diagram.svg)
+
+:::info Media example application
+Check out our [example React application](https://snowplow-industry-solutions.github.io/snowplow-javascript-tracker-examples/media) to see tracked media events and entities live as you watch a video.
+
+The source code for the app is [available here](https://github.com/snowplow-industry-solutions/snowplow-javascript-tracker-examples/tree/master/react).
+:::
+
 ### Start a session
 
 To start tracking user behavior involving that player, call the appropriate `startMediaTracking` function. The exact API is different for each tracker. Call `startMediaTracking` as soon as the player has loaded, not when playback begins. This ensures that session tracking begins immediately, and allows for accurate measurement of metrics such as buffering time or time to first frame.
@@ -332,7 +340,7 @@ If you skip `trackMediaAdBreakStart` and `trackMediaAdBreakEnd`, you won't have 
   example={{ }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Media player event that signals the start of an ad.", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "ad_start_event", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": {}, "additionalProperties": false }} />
 
-### Custom data
+### Custom events
 
 Track your own custom events within the media session, using `trackMediaSelfDescribingEvent` or equivalent API. The tracker will automatically attach the media entities.
 

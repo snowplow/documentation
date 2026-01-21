@@ -14,10 +14,7 @@ While the trackers provide integrations with a few media players, the media trac
 
 <TOCInline toc={toc} maxHeadingLevel={4} />
 
-## Tracked events and entities
-
-The media tracking works with a set of out-of-the-box event and entity schemas.
-Additionally, you can track custom entities along with the events.
+Check out the [media tracking overview page](/(/docs/events/ootb-data/media-events/)) to learn about the events and entities tracked by the media tracking APIs.
 
 :::info Example app
 To illustrate the tracked events and entities, you can visit a React example app that showcases the tracked media events and entities live as you watch a video.
@@ -25,115 +22,6 @@ To illustrate the tracked events and entities, you can visit a React example app
 [Visit the app here.](https://snowplow-industry-solutions.github.io/snowplow-javascript-tracker-examples/media)
 Source code for the app is [available here.](https://github.com/snowplow-industry-solutions/snowplow-javascript-tracker-examples/tree/master/react)
 :::
-
-### Media player events
-
-Each media player event is a self-describing event with a unique schema.
-
-The schema URIs have the format:
-`iglu:com.snowplowanalytics.snowplow.media/{EVENT_TYPE}/jsonschema/1-0-0`.
-
-You can see the schemas listed under the event tracking methods below.
-
-### Media player entity
-
-The media player entity is attached to all media events and gives information about the current state of the media player.
-It contains the current playback position (`currentTime`) as well as the paused or muted state.
-
-<details>
-    <summary>Media player entity properties</summary>
-
-The schemas contain a single `label` property:
-
-| Request Key      | Required | Type/Format              | Description                                                                                     |
-| ---------------- | -------- | ------------------------ | ----------------------------------------------------------------------------------------------- |
-| currentTime      | Y        | number                   | The current playback time                                                                       |
-| duration         | N        | number                   | A double-precision floating-point value indicating the duration of the media in seconds         |
-| ended            | Y        | boolean                  | If playback of the media has ended                                                              |
-| fullscreen       | N        | boolean                  | Whether the video element is fullscreen                                                         |
-| livestream       | N        | boolean                  | If the media is live                                                                            |
-| label            | N        | string                   | Human readable name given to tracked media content                                              |
-| loop             | N        | boolean                  | If the video should restart after ending                                                        |
-| mediaType        | N        | enum: `audio` or `video` | Type of media content                                                                           |
-| muted            | N        | boolean                  | If the media element is muted                                                                   |
-| paused           | Y        | boolean                  | If the media element is paused                                                                  |
-| pictureInPicture | N        | boolean                  | Whether the video element is showing picture-in-picture                                         |
-| playbackRate     | N        | number                   | Playback rate (1 is normal)                                                                     |
-| playerType       | N        | string                   | Type of the media player (e.g., com.youtube-youtube, com.vimeo-vimeo, org.whatwg-media_element) |
-| quality          | N        | string                   | Quality level of the playback (e.g., 1080p)                                                     |
-| volume           | N        | integer                  | Volume percent                                                                                  |
-</details>
-
-*Schema:*
-`iglu:com.snowplowanalytics.snowplow/media_player/jsonschema/2-0-0`.
-
-### Media session entity
-
-The media session entity is used to identify the playback using the `mediaSessionId`.
-It also contains statistics about the media playback computed on the tracker (e.g., `timePlayed`, `timeBuffering`, `adsClicked`).
-
-<details>
-    <summary>Media player session entity properties</summary>
-
-| Request Key     | Required | Type/Format | Description                                                                                                                                                                                       |
-| --------------- | -------- | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| mediaSessionId  | Y        | string      | An identifier for the media session (can be provided by the user)                                                                                                                                 |
-| startedAt       | N        | date-time   | Date-time timestamp of when the session started.                                                                                                                                                  |
-| pingInterval    | N        | number      | Interval (seconds) in which the ping events will be sent. Default (10s) is assumed if not specified.                                                                                              |
-| timePlayed      | N        | number      | Total seconds user spent playing content (excluding ads).                                                                                                                                         |
-| timePlayedMuted | N        | number      | Total seconds user spent playing content on mute (excluding ads).                                                                                                                                 |
-| timePaused      | N        | number      | Total seconds user spent with paused content (excluding linear ads)                                                                                                                               |
-| contentWatched  | N        | number      | Total seconds of the content played. Each part of the content played is counted once (i.e., counts rewinding or rewatching the same content only once). Playback rate does not affect this value. |
-| timeBuffering   | N        | number      | Total seconds that playback was buffering during the session.                                                                                                                                     |
-| timeSpentAds    | N        | number      | Total seconds that ads played during the session.                                                                                                                                                 |
-| ads             | N        | integer     | Number of ads played.                                                                                                                                                                             |
-| adsClicked      | N        | integer     | Number of ads that the user clicked on                                                                                                                                                            |
-| adsSkipped      | N        | integer     | Number of ads that the user skipped                                                                                                                                                               |
-| adBreaks        | N        | integer     | Number of ad breaks played.                                                                                                                                                                       |
-| avgPlaybackRate | N        | number      | Average playback rate (1 is normal speed).                                                                                                                                                        |
-</details>
-
-It is an optional entity that is enabled by default.
-
-*Schema:*
-`iglu:com.snowplowanalytics.snowplow.media/session/jsonschema/1-0-0`.
-
-### Media ad and ad break entities
-
-These entities give information about the currently playing ad and ad break.
-
-<details>
-    <summary>Media ad break entity properties</summary>
-
-| Request Key | Required | Type/Format                        | Description                                                   |
-| ----------- | -------- | ---------------------------------- | ------------------------------------------------------------- |
-| name        | N        | string                             | Ad break name such as pre-roll, mid-roll, and post-roll.      |
-| breakId     | N        | string                             | ID of the ad break.                                           |
-| startTime   | Y        | number                             | Playback time in seconds at the start of the ad break.        |
-| podSize     | N        | integer                            | The number of ads to be played within the ad break.           |
-| breakType   | N        | enum: linear, nonlinear, companion | linear  – take full control of the video for a period of time |
-nonlinear – run concurrently to the video
-companion – accompany the video but placed outside the player |
-</details>
-
-*Schema for the ad break entity:*
-`iglu:com.snowplowanalytics.snowplow.media/ad_break/jsonschema/1-0-0`.
-
-<details>
-    <summary>Media player ad entity properties</summary>
-
-| Request Key | Required | Type/Format | Description                                                         |
-| ----------- | -------- | ----------- | ------------------------------------------------------------------- |
-| name        | N        | string      | Friendly name of the ad                                             |
-| adId        | Y        | string      | Unique identifier for the ad.                                       |
-| creativeId  | N        | string      | The ID of the ad creative                                           |
-| podPosition | N        | integer     | The number position of the ad within the ad break, starting with 1. |
-| duration    | Y        | number      | Length of the video ad in seconds                                   |
-| skippable   | N        | boolean     | Indicating whether skip controls are made available to the end user |
-</details>
-
-*Schema for the ad entity:*
-`iglu:com.snowplowanalytics.snowplow.media/ad/jsonschema/1-0-0`.
 
 ## Starting and ending media tracking
 

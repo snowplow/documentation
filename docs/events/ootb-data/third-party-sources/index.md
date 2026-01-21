@@ -1,6 +1,6 @@
 ---
-title: "Third-party integrations"
-sidebar_label: "Third-party integrations"
+title: "Third-party sources"
+sidebar_label: "Third-party sources"
 sidebar_position: 170
 description: "Capture data from third-party tools including Optimizely experiments, Google Analytics cookies, and Kantar Focal Meter for unified analytics."
 keywords: ["optimizely", "google analytics", "focal meter", "a/b testing", "cookies", "integrations"]
@@ -9,7 +9,7 @@ date: "2026-01-15"
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
-As well as [event forwarding](/docs/destinations/forwarding-events/index.md) integrations and [webhooks](/docs/sources/webhooks/index.md), Snowplow provides tracking integrations with third-party tools.
+Snowplow provides tracking integrations that let you capture data from third-party tools deployed on your web and mobile properties.
 
 ## Optimizely X
 
@@ -39,7 +39,7 @@ This table shows the support for Optimizely X tracking across the main client-si
 
 ## Google Analytics cookies
 
-The GA cookies web plugin captures Google Analytics cookie values (both GA4 and Universal Analytics) and attaches them to all events. The entity schema depends if the tracker finds GA4 or Universal Analytics cookies.
+The GA cookies web plugin captures Google Analytics cookie values (both GA4 and Universal Analytics) and attaches them to all events.
 
 This table shows the support for GA cookie tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md):
 
@@ -53,7 +53,9 @@ This table shows the support for GA cookie tracking across the main client-side 
 | Roku                                                                  | ❌         |               |               |                            |
 | Google Tag Manager                                                    | ❌         |               |               |                            |
 
-GA4:
+The entity schema depends on whether the tracker finds GA4 or Universal Analytics cookies.
+
+GA4 schema:
 
 <SchemaProperties
   overview={{event: false}}
@@ -66,7 +68,7 @@ GA4:
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for GA4 cookies context", "self": { "vendor": "com.google.ga4", "name": "cookies", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "_ga": { "type": "string", "description": "The _ga cookie value" }, "cookie_prefix": { "type": ["string", "null"], "description": "The cookie prefix if configured" }, "session_cookies": { "type": "array", "items": { "type": "object", "properties": { "measurement_id": { "type": "string" }, "session_cookie": { "type": "string" } } }, "description": "Session cookie values by measurement ID" } }, "additionalProperties": false }} />
 
-Universal Analytics:
+Universal Analytics schema:
 
 <SchemaProperties
   overview={{event: false}}
@@ -86,8 +88,8 @@ This table shows the support for Kantar Focal Meter tracking across the main cli
 | Tracker                                                               | Supported | Since version | Auto-tracking | Notes                       |
 | --------------------------------------------------------------------- | --------- | ------------- | ------------- | --------------------------- |
 | [Web](/docs/sources/web-trackers/tracking-events/focalmeter/index.md) | ✅         | 3.16.0        | ✅             | Requires Focal Meter plugin |
-| [iOS](/docs/sources/mobile-trackers/plugins/focal-meter/index.md)     | ✅         | 5.6.0         |               |                             |
-| [Android](/docs/sources/mobile-trackers/plugins/focal-meter/index.md) | ✅         | 5.6.0         |               |                             |
+| [iOS](/docs/sources/mobile-trackers/plugins/focal-meter/index.md)     | ✅         | 5.6.0         | ❌             |                             |
+| [Android](/docs/sources/mobile-trackers/plugins/focal-meter/index.md) | ✅         | 5.6.0         | ❌             |                             |
 | React Native                                                          | ❌         |               |               |                             |
 | Flutter                                                               | ❌         |               |               |                             |
 | Roku                                                                  | ❌         |               |               |                             |

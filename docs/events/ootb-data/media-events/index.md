@@ -357,6 +357,8 @@ Every media event includes entities that describe the current state of the playe
 
 You can also add custom entities to all media events, by providing them in the configuration. These entities will be attached to all subsequent media events for that player instance.
 
+As with all Snowplow events, you can also attach custom entities to individual media events when tracking them.
+
 ### Media player
 
 The media player entity captures the current state of playback at the moment each event fires.

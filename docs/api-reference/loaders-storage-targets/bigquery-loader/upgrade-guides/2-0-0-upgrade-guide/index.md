@@ -21,7 +21,7 @@ Apart from Repeater and Mutator, other infrastructure components have become obs
 * The `failedInserts` PubSub topic connecting Loader and Repeater.
 * The `deadLetter` GCS bucket used by Repeater to store data that repeatedly failed to be inserted into BigQuery.
 
-This means that failed events are now written to the failed events PubSub topic, configured as `output.bad.topic`, rather than to the GCS bucket as before. This change was made to consolidate all types of event failures into a single place.
+This means that failed events are now written to the failed events PubSub topic, configured as `output.bad.topic`, rather than directly to the GCS bucket as before. This change was made to consolidate all types of event failures into a single place.
 
 ## Events table format
 

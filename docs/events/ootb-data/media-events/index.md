@@ -65,9 +65,45 @@ We recommend using the [Media base data product template](/docs/data-product-stu
 
 ## How to use the media APIs
 
-Each media player instance needs to be registered with the tracker, using a unique ID. To start tracking user behavior involving that player, call the appropriate `startMediaTracking` function. When playback ends, call the `stopMediaTracking` function to end the session and send any final events.
+Each media player instance needs to be registered with the tracker, using a unique session ID. Set the media session ID to a random string. In the browser, you could generate this with a function such as `crypto.randomUUID()`. The ID should be unique to a single session within a single player instance.
 
-You can provide additional configuration to the `startMediaTracking` call to configure the tracking, or give initial information about the media played. Note that this configuration isn't available in Roku.
+### Start a session
+
+To start tracking user behavior involving that player, call the appropriate `startMediaTracking` function. The exact API is different for each tracker. Call `startMediaTracking` as soon as the player has loaded, not when playback begins. This ensures that session tracking begins immediately, and allows for accurate measurement of metrics such as buffering time or time to first frame.
+
+A media session should correspond to a single media playback, including any ads that play before, during, or after the media. Metrics are collected against a media session, so it's important to set it correctly.
+
+### Configure the player
+
+You can provide additional player information and configuration when calling `startMediaTracking`, as well as in subsequent tracking calls.
+
+We recommend providing a human-readable name for the media content as a `label` property. It'll be tracked as part of the media player entity. The label helps you quickly identify which content a media session relates to during analysis, and is used in combination with the media type, player type, and player ID to create the media stats table with the [Media Player dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md).
+
+### Track playback
+
+Track user interactions with the appropriate media tracking calls. Call `trackMediaPlay` when the main media content starts playing, even if there are pre-roll ads. The media session model accounts for both total play time and play time excluding ads.
+
+We recommend continually updating the media player state by calling `updateMediaTracking` or equivalent `update` function **every second**. This function does not send events to the Collector, but updates internal attributes to ensure accurate metrics for the next event.
+
+How you handle livestreams and playlists depends on whether you want to analyze them as a single session or split by content:
+* **Analyze as a single session**: update the player label using `updateMediaTracking` when the content changes. This won't split the session in the data model.
+* **Analyze as separate sessions per content segment**: end and restart the media session each time the content changes. Customize `media_session_id` to include segments, for example, `livestream-1`, `livestream-2` or `playlist-1`, `playlist-2`, and aggregate later using a shared prefix or a custom `livestream_id` / `playlist_id`.
+
+### Filter events
+
+You don't need to send the media ping events, or any other tracked media events, to the data warehouse. The media APIs include a configuration option to filter out certain events, or to keep only specified events. Filtered events aren't sent to the Collector.
+
+To drop unwanted tracked events within the pipeline, use a [custom JavaScript enrichment](//docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/writing/index.md#discarding-the-event).
+
+### End a session
+
+When playback ends, call the `endMediaTracking` function to end the session, clean up event listeners, and stop any background pings. Call this when you want to reset session stats, even if the media wasn't fully watched. It does not fire any events.
+
+On web, if the user closes the browser or tab, you don't need to call `endMediaTracking` —  pings stop automatically. In single-page applications, if `endMediaTracking` is missed, you may see one or two additional ping events, up to the `maxPausedPings` limit.
+
+There's also a `trackMediaEnd` function that you can call to track when the media reaches 100% progress (fully watched). This is tracked as a media event. It's common to see sessions without a `trackMediaEnd` event if the user didn't finish the content.
+
+If the content finishes and the user rewinds, continue the same session. Use the `timePlayed` and `contentWatched` metrics within the media session entity to understand rewatches compared to how much of the media content they watched.
 
 ## Available event types
 
@@ -81,6 +117,17 @@ The schema URIs have the format:
 ### Playback lifecycle events
 
 These events track the core playback flow from start to finish.
+
+#### Media ping event
+
+Media ping events are events sent in a regular interval while media tracking is active. They inform about the current state of the media playback, and keep the media session alive.
+
+By default, ping events are sent every 30 seconds. They're sent in an interval that is unrelated to the media playback. However, to prevent sending too many events, there is a limit to how many ping events can be sent while the media is paused. By default, this is set to 1. You can change this by configuring `maxPausedPings`.
+
+<SchemaProperties
+  overview={{event: true}}
+  example={{ }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Media player event fired periodically during main content playback, regardless of other API events that have been sent.", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "ping_event", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { }, "additionalProperties": false }} />
 
 #### Buffer end event
 
@@ -117,13 +164,6 @@ These events track the core playback flow from start to finish.
   overview={{event: true}}
   example={{ }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Media player event fired when a percentage boundary set in tracking options is reached", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "percent_progress_event", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "percentProgress": { "type": [ "integer", "null" ], "description": "The percent of the way through the media", "minimum": 0, "maximum": 100 } }, "additionalProperties": false }} />
-
-#### Media ping event
-
-<SchemaProperties
-  overview={{event: true}}
-  example={{ }}
-  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Media player event fired periodically during main content playback, regardless of other API events that have been sent.", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "ping_event", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { }, "additionalProperties": false }} />
 
 #### Play event
 
@@ -223,6 +263,10 @@ These events track changes to the player's display mode, quality, and settings.
 
 These events track ad playback for monetized content. Ad events include the media ad and media ad break entities.
 
+Tracking only `trackMediaAdStart` and `trackMediaAdComplete`, or equivalent API, is sufficient if you don't need to attribute ads to specific ad breaks.
+
+If you skip `trackMediaAdBreakStart` and `trackMediaAdBreakEnd`, you won't have details like pod size and break ID to analyze all the ads within a break.
+
 #### Ad click event
 
 <SchemaProperties
@@ -288,6 +332,10 @@ These events track ad playback for monetized content. Ad events include the medi
   example={{ }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Media player event that signals the start of an ad.", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "ad_start_event", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": {}, "additionalProperties": false }} />
 
+### Custom data
+
+Track your own custom events within the media session, using `trackMediaSelfDescribingEvent` or equivalent API. The tracker will automatically attach the media entities.
+
 ## Automatically included entities
 
 Every media event includes entities that describe the current state of the player and session. These entities are attached automatically by the tracker. You don't need to track them yourself.
@@ -298,6 +346,8 @@ Every media event includes entities that describe the current state of the playe
 | Media session  | All media events | Aggregated session metrics (time played, content watched)    |
 | Media ad       | Ad events only   | Information about the current ad                             |
 | Media ad break | Ad events only   | Information about the ad break                               |
+
+You can also add custom entities to all media events, by providing them in the configuration. These entities will be attached to all subsequent media events for that player instance.
 
 ### Media player
 

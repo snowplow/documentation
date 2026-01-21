@@ -55,7 +55,7 @@ Auto-tracking means that the tracker can subscribe to and track events from a re
 | [Android](/docs/sources/mobile-trackers/tracking-events/media-tracking/index.md) |                                                                                | ✅         | 5.3.0 (Media v2)                   | ❌             |                                                                                                                                                                               |
 | React Native                                                                     |                                                                                | ❌         |                                    |               | Use the media schemas for your own custom events, or the [media web data product template](/docs/data-product-studio/data-products/data-product-templates/index.md#media-web) |
 | [Flutter](/docs/sources/flutter-tracker/tracking-events/media-tracking/index.md) |                                                                                | ✅         | 0.7.0 (Media v2)                   | ❌             |                                                                                                                                                                               |
-| [Roku](/docs/sources/roku-tracker/media-tracking/index.md)                       |                                                                                | ✅         | 0.1.0 (Media v1), 0.3.0 (Media v2) | ❌             |                                                                                                                                                                               |
+| [Roku](/docs/sources/roku-tracker/media-tracking/index.md)                       |                                                                                | ✅         | 0.1.0 (Media v1), 0.3.0 (Media v2) | ✅             |                                                                                                                                                                               |
 | Google Tag Manager                                                               | ❌                                                                              |           |                                    |               |
 
 The Snowplow media tracking APIs are supported by the [Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) dbt data model.
@@ -130,7 +130,7 @@ These events track the core playback flow from start to finish.
 
 Media ping events are events sent in a regular interval while media tracking is active. They inform about the current state of the media playback, and keep the media session alive.
 
-By default, ping events are sent every 30 seconds. They're sent in an interval that is unrelated to the media playback. However, to prevent sending too many events, there is a limit to how many ping events can be sent while the media is paused. By default, this is set to 1. You can change this by configuring `maxPausedPings`.
+By default, ping events are sent every 30 seconds. They're sent in an interval that is unrelated to the media playback. However, to prevent sending too many events, there is a limit to how many ping events can be sent while the media is paused. By default, this is set to 1. You can change this by configuring `maxPausedPings` (not available on Roku).
 
 <SchemaProperties
   overview={{event: true}}
@@ -237,7 +237,7 @@ Track an error event when the resource couldn't be loaded due to an error.
 
 #### Fullscreen change event
 
-This event is for media tracking on web. Track a fullscreen change event when the media player fullscreen changes, fired immediately after the browser switches into or out of full-screen mode.
+Track a fullscreen change event when the media player fullscreen changes, fired immediately after the browser switches into or out of full-screen mode.
 
 The `fullscreen` value is passed when tracking the event, and is automatically updated in the `player` entity.
 

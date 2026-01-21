@@ -39,7 +39,7 @@ export const PlatformTabs = ({ platforms, children }) => {
 
 The Snowplow media tracking APIs enable you to track events from media playback on the web and in mobile apps. Track changes in playback state (play, pause, seek), playback position (ping and percentage progress events), and ad playback (ad breaks, ad progress, ad clicks).
 
-The APIs are player-agnostic, so you can implement tracking for any media player. For details on the events and entities tracked, see the [media tracking overview](/docs/events/ootb-data/media-events/index.md).
+For details on the events and entities tracked, see the [media tracking overview](/docs/events/ootb-data/media-events/index.md).
 
 :::info Example app
 See the tracked media events and entities live as you watch a video in our [React example app](https://snowplow-industry-solutions.github.io/snowplow-javascript-tracker-examples/media). [View the source code](https://github.com/snowplow-industry-solutions/snowplow-javascript-tracker-examples/tree/master/react).
@@ -423,20 +423,25 @@ MediaTracking mediaTracking = tracker.getMedia().startMediaTracking(id, player);
     </CodeBlock>
   ),
   'roku': (
-    <CodeBlock language="brightscript">
+    <>
+      <p>The Roku tracker automatically reads most player properties from the Audio/Video node. Configure additional options in <code>enableMediaTracking</code>:</p>
+      <CodeBlock language="brightscript">
 {`m.global.snowplow.enableMediaTracking = {
-    media: m.Video,
-    version: 2,
-    label: "My Video"  ' Other properties are automatically tracked from the Video node
+    media: m.Video,           ' Audio/Video node to track (required)
+    version: 2,               ' Schema version (defaults to 2)
+    id: "session-123",        ' Custom session ID (auto-generated if not set)
+    label: "My Video",        ' Human-readable title for the media_player entity
+    rokuVideoContext: true    ' Whether to include the roku_video_context entity
 }`}
-    </CodeBlock>
+      </CodeBlock>
+    </>
   )
 }}
 </PlatformTabs>
 
 ### Ping events
 
-Media ping events are sent at regular intervals (default: 30 seconds) to report playback position. Configure the interval, change how many pings to send while paused, or turn off pings entirely.
+Media ping events are sent at regular intervals (default: 30 seconds) to report playback position. You can configure ping behavior in the starting configuration.
 
 <PlatformTabs platforms={props.platforms}>
 {{
@@ -600,7 +605,7 @@ configuration.setBoundaries(Arrays.asList(10, 25, 50, 75, 90));  // Fire events 
 {`m.global.snowplow.enableMediaTracking = {
     media: m.Video,
     version: 2,
-    boundaries: [10, 25, 50, 75, 90]  ' Fire events at these percentages
+    boundaries: [25, 50, 75]  ' By default, the tracker will fire events at these percentages
 }`}
     </CodeBlock>
   )
@@ -617,34 +622,34 @@ We recommend tracking this entity.
 {{
   'js-tag': (
     <CodeBlock language="javascript">
-{`window.snowplow('startMediaTracking', { id, session: false });`}
+{`window.snowplow('startMediaTracking', { id, session: true });`}
     </CodeBlock>
   ),
   'js-browser': (
     <CodeBlock language="javascript">
-{`startMediaTracking({ id, session: false });`}
+{`startMediaTracking({ id, session: true });`}
     </CodeBlock>
   ),
   'ios': (
     <CodeBlock language="swift">
-{`let configuration = MediaTrackingConfiguration(id: id).session(false)`}
+{`let configuration = MediaTrackingConfiguration(id: id).session(true)`}
     </CodeBlock>
   ),
   'android-kotlin': (
     <CodeBlock language="kotlin">
-{`val configuration = MediaTrackingConfiguration(id = id, session = false)`}
+{`val configuration = MediaTrackingConfiguration(id = id, session = true)`}
     </CodeBlock>
   ),
   'android-java': (
     <CodeBlock language="java">
 {`MediaTrackingConfiguration configuration = new MediaTrackingConfiguration(id, null);
-configuration.setSession(false);`}
+configuration.setSession(true);`}
     </CodeBlock>
   ),
   'flutter': (
     <CodeBlock language="dart">
 {`MediaTracking mediaTracking = await tracker.startMediaTracking(
-    configuration: const MediaTrackingConfiguration(id: id, session: false)
+    configuration: const MediaTrackingConfiguration(id: id, session: true)
 );`}
     </CodeBlock>
   ),
@@ -653,7 +658,7 @@ configuration.setSession(false);`}
 {`m.global.snowplow.enableMediaTracking = {
     media: m.Video,
     version: 2,
-    session: false
+    sessions: true
 }`}
     </CodeBlock>
   )
@@ -955,7 +960,26 @@ await mediaTracking.track(MediaBufferEndEvent());    // Buffering ended`}
     </CodeBlock>
   ),
   'roku': (
-    <p>Playback events are automatically tracked from Audio/Video nodes. To track events manually, use <code>trackMediaEvent</code>.</p>
+    <>
+      <p>The Roku tracker automatically tracks the following events from Audio/Video nodes:</p>
+      <ul>
+        <li>Ready, play, pause, end events</li>
+        <li>Seek start, seek end events</li>
+        <li>Ping events</li>
+        <li>Percent progress events (if configured)</li>
+        <li>Buffer start, buffer end events</li>
+        <li>Quality change events</li>
+        <li>Error events</li>
+      </ul>
+      <p>To track events manually or track events not auto-tracked, use <code>trackMediaEvent</code>:</p>
+      <CodeBlock language="brightscript">
+{`m.global.snowplow.trackMediaEvent = {
+    media: m.Video,
+    schema: "iglu:com.snowplowanalytics.snowplow.media/ad_click_event/jsonschema/1-0-0",
+    data: { "percentProgress": 50 }
+}`}
+      </CodeBlock>
+    </>
   )
 }}
 </PlatformTabs>

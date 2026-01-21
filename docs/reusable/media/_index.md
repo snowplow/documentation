@@ -876,7 +876,7 @@ configuration.setCaptureEvents(Arrays.asList(
 
 ## Tracking events
 
-Track events by calling the appropriate function when player events occur. For a complete list of available events and their properties, see the [media events reference](/docs/events/ootb-data/media-events/index.md#available-event-types).
+Track events by calling the appropriate function when player events occur. For a complete list of available events and their properties, see the [media events reference](/docs/events/ootb-data/media-events/index.md#playback-lifecycle-events).
 
 ### Playback events
 

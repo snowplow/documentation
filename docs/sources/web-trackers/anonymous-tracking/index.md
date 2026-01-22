@@ -24,6 +24,7 @@ On web, the following [user and session identifiers](/docs/events/ootb-data/user
    * `user_id`, a business identifier provided by you
    * `domain_userid`, set automatically by the tracker from the cookies
    * `userId` in the [session](/docs/sources/web-trackers/tracking-events/session/index.md) entity, set automatically by the tracker to the same value as `domain_userid`
+  * `tabId` in the [browser](/docs/sources/web-trackers/browsers/index.md) entity, set automatically by the tracker
 * Client-side session identifiers:
   * `domain_sessionid` and `domain_sessionidx`, set automatically by the tracker from the cookies
   * `previousSessionId` in the session entity, set automatically by the tracker
@@ -52,6 +53,7 @@ This mode will no longer track any user identifiers or session information. The 
 | `domain_sessionidx` | Atomic            | ❌                   |
 | `sessionId`         | Session entity    | ❌ no session entity |
 | `previousSessionId` | Session entity    | ❌ no session entity |
+| `tabId`             | Browser entity    | ❌                   |
 | `network_userid`    | Atomic            | ✅                   |
 | `user_ipaddress`    | Atomic            | ✅                   |
 
@@ -79,6 +81,7 @@ This mode will continue to track session information but will track no user iden
 | `domain_sessionidx` | Atomic            | ✅                  |
 | `sessionId`         | Session entity    | ✅                  |
 | `previousSessionId` | Session entity    | ❌                  |
+| `tabId`             | Browser entity    | ❌                  |
 | `network_userid`    | Atomic            | ✅                  |
 | `user_ipaddress`    | Atomic            | ✅                  |
 
@@ -105,6 +108,7 @@ This mode will no longer track any user identifiers or session information, and 
 | `domain_sessionidx` | Atomic            | ❌                  |
 | `sessionId`         | Session entity    | ❌                  |
 | `previousSessionId` | Session entity    | ❌                  |
+| `tabId`             | Browser entity    | ❌                  |
 | `network_userid`    | Atomic            | ❌                  |
 | `user_ipaddress`    | Atomic            | ❌                  |
 

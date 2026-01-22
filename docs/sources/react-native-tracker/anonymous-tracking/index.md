@@ -12,7 +12,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-:::info
+:::info Not available in version 4
 
 This feature is available since version 1.3 until version 2.x of the React Native tracker.
 

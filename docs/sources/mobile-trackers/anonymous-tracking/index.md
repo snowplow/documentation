@@ -13,16 +13,27 @@ import TabItem from '@theme/TabItem';
 ```
 
 :::info
-
-This feature is available since v4.
-
+This feature is available since version 4.
 :::
 
-```mdx-code-block
-import AnonymousTrackingSharedBlock from "@site/docs/reusable/anonymous-tracking-mobile/_index.md"
+Anonymous tracking is a feature that enables anonymization of various user and session identifiers, to support user privacy when consent for tracking the identifiers isn't given.
 
-<AnonymousTrackingSharedBlock/>
-```
+On mobile, the following [user and session identifiers](/docs/events/ootb-data/user-and-session-identification/index.md) can be anonymized:
+
+* Client-side user identifiers:
+   * `user_id`, `domain_userid`, `network_userid`, and `user_ipaddress`, set by you in `Subject`
+   * `userId`, a device ID, set automatically in the [session](/docs/sources/web-trackers/tracking-events/session/index.md) entity
+   * IDFA identifiers (`appleIdfa` and `appleIdfv` for iOS, `androidIdfa` for Android) in the mobile entity
+* Client-side session identifiers:
+  * `previousSessionId` in the session entity, set automatically by the tracker
+* Server-side user identifiers:
+  * `network_userid` and `user_ipaddress`, set by the [Collector](/docs/pipeline/collector/index.md)
+
+:::note User-set properties
+The Collector captures the IP address from the request HTTP headers, and updates the `user_ipaddress` event property. However, if you set the `user_ipaddress` property in the `Subject`, that value has priority.
+
+Similarly, if you set the `network_userid` property in the `Subject`, that value is used instead of the Collector cookie value.
+:::
 
 Read more about anonymous tracking in the [overview page](/docs/events/anonymous-tracking/index.md).
 

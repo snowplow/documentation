@@ -50,13 +50,15 @@ This table shows the possible values for the `event` field:
 
 ### User fields
 
+Read more about tracking and using these fields in the [OOTB user and session data](/docs/events/ootb-data/user-and-session-identification/index.md) and [identifiers](/docs/events/identifiers/index.md) pages.
+
 The `domain_userid` is regarded as the most reliable session based identifier for most use cases. It's treated as the primary `user_identifier` field in our data models that rely on sessionization, including the [Unified Digital](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) data model.
 
 The `domain_sessionidx` is the number or index of the current user session. For example, an event occurring during a user's first session would have `domain_sessionidx` set to 1. The JavaScript tracker calculates this field by storing a visit count in a [first-party cookie](/docs/sources/web-trackers/cookies-and-local-storage/index.md).
 
 The equivalent values on mobile are tracked in a [session entity](/docs/events/ootb-data/user-and-session-identification/index.md#session-entity).
 
-The `network_userid` is set by a [Collector cookie](/docs/pipeline/collector/index.md) by default. You can override it by setting a `network_userid` with your tracker.
+The `network_userid` is set by a [Collector cookie](/docs/pipeline/collector/index.md) by default. You can override it by setting a `network_userid` with your tracker. The IP address is also added to the event by the Collector, if you didn't provide one in your tracking code.
 
 | Payload property | Field name          | Type                     | Description                                                                    | Reqd? | Example                                | Source                                                                                                                           | Web | Mobile |
 | ---------------- | ------------------- | ------------------------ | ------------------------------------------------------------------------------ | ----- | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | --- | ------ |

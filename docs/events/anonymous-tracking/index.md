@@ -124,6 +124,8 @@ Server-side anonymization prevents the event [Collector](/docs/pipeline/collecto
 
 Setting server-side anonymization will add a `SP-Anonymous` HTTP header to requests sent to the Collector. This requires the request method to be `POST`, which is the default for most trackers. When the `SP-Anonymous` header is present, the Collector doesn't set or read the `sp` cookie.
 
+An alternative method for preventing IP address tracking is to set a null value, such as `0.0.0.0` within the tracker. Most Snowplow trackers [support this option](/docs/events/ootb-data/user-and-session-identification/index.md), although not the JavaScript trackers.
+
 In the [JavaScript trackers](/docs/sources/web-trackers/anonymous-tracking/index.md), setting server-side anonymization also sets full client-side anonymization. In the [native mobile trackers](/docs/sources/mobile-trackers/anonymous-tracking/index.md), it's a separate configuration.
 
 Here's some example code for enabling server-side anonymization when creating a tracker on web or mobile:

@@ -25,7 +25,7 @@ As well as anonymous tracking, you can also use enrichments to pseudonymize or m
 For more details on web cookie behavior, see [Cookies and local storage](/docs/sources/web-trackers/cookies-and-local-storage/index.md).
 
 :::note Spelling
-The trackers use the British spelling in their APIs: "anonymisation" rather than "anonymization".
+Some tracker APIs use the British spelling: "anonymisation" rather than "anonymization".
 :::
 
 ### Full client-side anonymization
@@ -198,10 +198,10 @@ This table shows the support for anonymous tracking across the main [Snowplow tr
 | [Web](/docs/sources/web-trackers/anonymous-tracking/index.md)                                      | ✅         | 3.0.0         | ✅           | ✅           |                                                               |
 | [iOS](/docs/sources/mobile-trackers/anonymous-tracking/index.md)                                   | ✅         | 4.0.0         | ✅           | ✅           |                                                               |
 | [Android](/docs/sources/mobile-trackers/anonymous-tracking/index.md)                               | ✅         | 4.0.0         | ✅           | ✅           |                                                               |
-| [React Native](/docs/sources/react-native-tracker/anonymous-tracking/index.md)                     | ❌         | 1.3.0-2.1.2   | ✅           | ✅           | No anonymous tracking in version 4+                           |
+| [React Native](/docs/sources/react-native-tracker/anonymous-tracking/index.md)                     | ❌/✅       | 1.3.0 - 2.1.2 | ❌/✅         | ✅           | Version 4.x only supports server-side anonymization           |
 | [Flutter](/docs/sources/flutter-tracker/anonymous-tracking/index.md)                               | ✅         | 0.3.0         | ✅           | ✅           |                                                               |
 | [Roku](/docs/sources/roku-tracker/adding-data/index.md#adding-user-and-platform-data-with-subject) | ✅         | 0.3.0         | ✅           | ✅           | Use Subject configuration to manage client-side anonymization |
-| [Node.js](/docs/sources/node-js-tracker/initialization/index.md)                                   | ✅         | 3.21.0        |             | ✅           |                                                               |
+| [Node.js](/docs/sources/node-js-tracker/initialization/index.md)                                   | ✅         | 3.21.0        | ❌           | ✅           |                                                               |
 | Golang                                                                                             | ❌         |               |             |             |                                                               |
 | .NET                                                                                               | ❌         |               |             |             |                                                               |
 | Java                                                                                               | ❌         |               |             |             |                                                               |
@@ -209,7 +209,7 @@ This table shows the support for anonymous tracking across the main [Snowplow tr
 | Scala                                                                                              | ❌         |               |             |             |                                                               |
 | Ruby                                                                                               | ❌         |               |             |             |                                                               |
 | Rust                                                                                               | ❌         |               |             |             |                                                               |
-| [PHP](/docs/sources/php-tracker/emitters/index.md)                                                 | ✅         | 0.9.0         |             | ✅           |                                                               |
+| [PHP](/docs/sources/php-tracker/emitters/index.md)                                                 | ✅         | 0.9.0         | ❌           | ✅           |                                                               |
 | C++                                                                                                | ❌         |               |             |             |                                                               |
 | Unity                                                                                              | ❌         |               |             |             |                                                               |
 | Lua                                                                                                | ❌         |               |             |             |                                                               |

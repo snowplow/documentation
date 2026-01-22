@@ -49,7 +49,7 @@ In this case, we want to anonymize both the client-side user identifiers as well
 ```swift
 let config = TrackerConfiguration()
     .sessionContext(false) // Session context entity won't be added to events
-    .userAnonymisation(true) // User identifiers in Platform context (IDFA and IDFV) will be anonymised
+    .userAnonymisation(true) // User identifiers in Platform context (IDFA and IDFV) will be anonymized
 ```
 
   </TabItem>
@@ -58,7 +58,7 @@ let config = TrackerConfiguration()
 ```kotlin
 val config = TrackerConfiguration("appId")
     .sessionContext(false) // Session context entity won't be added to events
-    .userAnonymisation(true) // User identifiers in Platform context (IDFA and IDFV) will be anonymised
+    .userAnonymisation(true) // User identifiers in Platform context (IDFA and IDFV) will be anonymized
 ```
 
   </TabItem>
@@ -67,28 +67,28 @@ val config = TrackerConfiguration("appId")
 ```java
 TrackerConfiguration config = new TrackerConfiguration("appId")
     .sessionContext(false) // Session context entity won't be added to events
-    .userAnonymisation(true); // User identifiers in Platform context (IDFA and IDFV) will be anonymised
+    .userAnonymisation(true); // User identifiers in Platform context (IDFA and IDFV) will be anonymized
 ```
 
   </TabItem>
 </Tabs>
 
-| Identifier          | Location in event | Included in event?                            |
-| ------------------- | ----------------- | --------------------------------------------- |
-| `user_id`           | Atomic            | ❌                                             |
-| `domain_userid`     | Atomic            | ❌                                             |
-| `userId`            | Session entity    | ❌ no session entity                           |
-| `sessionId`         | Session entity    | ❌ no session entity                           |
-| `previousSessionId` | Session entity    | ❌ no session entity                           |
-| `appleIdfa`         | Mobile entity     | ❌                                             |
-| `appleIdfv`         | Mobile entity     | ❌                                             |
-| `androidIdfa`       | Mobile entity     | ❌                                             |
-| `network_userid`    | Atomic            | ✅/❌ removed if you provided this in `Subject` |
-| `user_ipaddress`    | Atomic            | ✅/❌ removed if you provided this in `Subject` |
+| Identifier          | Location in event        | Included in event?                            |
+| ------------------- | ------------------------ | --------------------------------------------- |
+| `user_id`           | Atomic                   | ❌                                             |
+| `domain_userid`     | Atomic                   | ❌                                             |
+| `userId`            | Session entity           | ❌ no session entity                           |
+| `sessionId`         | Session entity           | ❌ no session entity                           |
+| `previousSessionId` | Session entity           | ❌ no session entity                           |
+| `appleIdfa`         | Mobile (platform) entity | ❌                                             |
+| `appleIdfv`         | Mobile (platform) entity | ❌                                             |
+| `androidIdfa`       | Mobile (platform) entity | ❌                                             |
+| `network_userid`    | Atomic                   | ✅/❌ removed if you provided this in `Subject` |
+| `user_ipaddress`    | Atomic                   | ✅/❌ removed if you provided this in `Subject` |
 
 ## 2. Client-side anonymisation with session tracking
 
-This setting disables client-side user identifiers are but tracks session information. In practice, this means that events track the Session entity but the `userId` property is a null UUID (`00000000-0000-0000-0000-000000000000`). If the mobile entity is enabled, the IDFA identifiers will not be present.
+This setting disables client-side user identifiers are but tracks session information. In practice, this means that events track the Session entity but the `userId` property is a null UUID (`00000000-0000-0000-0000-000000000000`). If the Mobile (platform) entity is enabled, the IDFA identifiers will not be present.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="ios" label="iOS" default>
@@ -96,7 +96,7 @@ This setting disables client-side user identifiers are but tracks session inform
 ```swift
 let config = TrackerConfiguration()
     .sessionContext(true) // Session entity is tracked with the session ID
-    .userAnonymisation(true) // User identifiers in Session and Mobile entity are anonymized
+    .userAnonymisation(true) // User identifiers in Session and Mobile (platform) entity are anonymized
 ```
 
   </TabItem>
@@ -105,7 +105,7 @@ let config = TrackerConfiguration()
 ```kotlin
 val config: TrackerConfiguration = TrackerConfiguration("appId")
     .sessionContext(true) // Session entity is tracked with the session ID
-    .userAnonymisation(true) // User identifiers in Session and Mobile entity are anonymized
+    .userAnonymisation(true) // User identifiers in Session and Mobile (platform) entity are anonymized
 ```
 
   </TabItem>
@@ -114,24 +114,24 @@ val config: TrackerConfiguration = TrackerConfiguration("appId")
 ```java
 TrackerConfiguration config = new TrackerConfiguration("appId")
     .sessionContext(true) // Session entity is tracked with the session ID
-    .userAnonymisation(true); // User identifiers in Session and Mobile entity are anonymized
+    .userAnonymisation(true); // User identifiers in Session and Mobile (platform) entity are anonymized
 ```
 
   </TabItem>
 </Tabs>
 
-| Identifier          | Location in event | Included in event?                            |
-| ------------------- | ----------------- | --------------------------------------------- |
-| `user_id`           | Atomic            | ❌                                             |
-| `domain_userid`     | Atomic            | ❌                                             |
-| `userId`            | Session entity    | ❌ null UUID                                   |
-| `sessionId`         | Session entity    | ✅                                             |
-| `previousSessionId` | Session entity    | ❌                                             |
-| `appleIdfa`         | Mobile entity     | ❌                                             |
-| `appleIdfv`         | Mobile entity     | ❌                                             |
-| `androidIdfa`       | Mobile entity     | ❌                                             |
-| `network_userid`    | Atomic            | ✅/❌ removed if you provided this in `Subject` |
-| `user_ipaddress`    | Atomic            | ✅/❌ removed if you provided this in `Subject` |
+| Identifier          | Location in event        | Included in event?                            |
+| ------------------- | ------------------------ | --------------------------------------------- |
+| `user_id`           | Atomic                   | ❌                                             |
+| `domain_userid`     | Atomic                   | ❌                                             |
+| `userId`            | Session entity           | ❌ null UUID                                   |
+| `sessionId`         | Session entity           | ✅                                             |
+| `previousSessionId` | Session entity           | ❌                                             |
+| `appleIdfa`         | Mobile (platform) entity | ❌                                             |
+| `appleIdfv`         | Mobile (platform) entity | ❌                                             |
+| `androidIdfa`       | Mobile (platform) entity | ❌                                             |
+| `network_userid`    | Atomic                   | ✅/❌ removed if you provided this in `Subject` |
+| `user_ipaddress`    | Atomic                   | ✅/❌ removed if you provided this in `Subject` |
 
 :::note Toggling anonymous tracking
 
@@ -170,18 +170,18 @@ EmitterConfiguration config = new EmitterConfiguration()
   </TabItem>
 </Tabs>
 
-| Identifier          | Location in event | Included in event?                                  |
-| ------------------- | ----------------- | --------------------------------------------------- |
-| `user_id`           | Atomic            | ✅                                                   |
-| `domain_userid`     | Atomic            | ✅                                                   |
-| `userId`            | Session entity    | ✅                                                   |
-| `sessionId`         | Session entity    | ✅                                                   |
-| `previousSessionId` | Session entity    | ✅                                                   |
-| `appleIdfa`         | Mobile entity     | ✅                                                   |
-| `appleIdfv`         | Mobile entity     | ✅                                                   |
-| `androidIdfa`       | Mobile entity     | ✅                                                   |
-| `network_userid`    | Atomic            | ❌/✅ still present if you provided this in `Subject` |
-| `user_ipaddress`    | Atomic            | ❌/✅ still present if you provided this in `Subject` |
+| Identifier          | Location in event        | Included in event?                                  |
+| ------------------- | ------------------------ | --------------------------------------------------- |
+| `user_id`           | Atomic                   | ✅                                                   |
+| `domain_userid`     | Atomic                   | ✅                                                   |
+| `userId`            | Session entity           | ✅                                                   |
+| `sessionId`         | Session entity           | ✅                                                   |
+| `previousSessionId` | Session entity           | ✅                                                   |
+| `appleIdfa`         | Mobile (platform) entity | ✅                                                   |
+| `appleIdfv`         | Mobile (platform) entity | ✅                                                   |
+| `androidIdfa`       | Mobile (platform) entity | ✅                                                   |
+| `network_userid`    | Atomic                   | ❌/✅ still present if you provided this in `Subject` |
+| `user_ipaddress`    | Atomic                   | ❌/✅ still present if you provided this in `Subject` |
 
 Setting the flag will add a `SP-Anonymous` HTTP header to requests sent to the Snowplow Collector. The Snowplow pipeline will take care of anonymizing the identifiers.
 
@@ -228,15 +228,15 @@ EmitterConfiguration emitterConfig = new EmitterConfiguration()
   </TabItem>
 </Tabs>
 
-| Identifier          | Location in event | Included in event?  |
-| ------------------- | ----------------- | ------------------- |
-| `user_id`           | Atomic            | ❌                   |
-| `domain_userid`     | Atomic            | ❌                   |
-| `userId`            | Session entity    | ❌ no session entity |
-| `sessionId`         | Session entity    | ❌ no session entity |
-| `previousSessionId` | Session entity    | ❌ no session entity |
-| `appleIdfa`         | Mobile entity     | ❌                   |
-| `appleIdfv`         | Mobile entity     | ❌                   |
-| `androidIdfa`       | Mobile entity     | ❌                   |
-| `network_userid`    | Atomic            | ❌                   |
-| `user_ipaddress`    | Atomic            | ❌                   |
+| Identifier          | Location in event        | Included in event?  |
+| ------------------- | ------------------------ | ------------------- |
+| `user_id`           | Atomic                   | ❌                   |
+| `domain_userid`     | Atomic                   | ❌                   |
+| `userId`            | Session entity           | ❌ no session entity |
+| `sessionId`         | Session entity           | ❌ no session entity |
+| `previousSessionId` | Session entity           | ❌ no session entity |
+| `appleIdfa`         | Mobile (platform) entity | ❌                   |
+| `appleIdfv`         | Mobile (platform) entity | ❌                   |
+| `androidIdfa`       | Mobile (platform) entity | ❌                   |
+| `network_userid`    | Atomic                   | ❌                   |
+| `user_ipaddress`    | Atomic                   | ❌                   |

@@ -25,20 +25,22 @@ As well as anonymous tracking, you can also use enrichments to pseudonymize or m
 For more details on web cookie behavior, see [Cookies and local storage](/docs/sources/web-trackers/cookies-and-local-storage/index.md).
 
 :::note Spelling
-We accidentally used the British spelling in the tracker APIs: "anonymisation" rather than "anonymization".
+The trackers use the British spelling in their APIs: "anonymisation" rather than "anonymization".
 :::
 
 ### Full client-side anonymization
 
 When configured for full client-side anonymization, the tracker does not track any client-side user or session identifiers. Events can still be collected, but can't be grouped by user or session.
 
-Here's some example code for enabling full client-side anonymization when creating a tracker on web or mobile:
+Here's some example code for enabling full client-side anonymization when creating a tracker on [web](/docs/sources/web-trackers/anonymous-tracking/index.md) or [mobile](/docs/sources/mobile-trackers/anonymous-tracking/index.md):
 
 <Tabs groupId="platform" queryString>
   <TabItem value="web" label="JavaScript" default>
 
 ```javascript
 snowplow('newTracker', 'sp', '{{collector_url_here}}', {
+  // No user or session identifiers will be added to events
+  // Network identifiers will be tracked
   anonymousTracking: true,
 });
 ```
@@ -53,6 +55,7 @@ Snowplow.createTracker(namespace: "appTracker", endpoint: "https://snowplow-coll
   TrackerConfiguration()
     .userAnonymisation(true) // User identifiers in mobile entity (IDFA and IDFV) will not be tracked
     .sessionContext(false) // Session entity won't be added to events
+    // Network identifiers will be tracked
 }
 ```
 
@@ -67,6 +70,7 @@ createTracker(
     TrackerConfiguration("appId")
         .userAnonymisation(true) // User identifiers in mobile entity (IDFA and IDFV) will not be tracked
         .sessionContext(false) // Session entity won't be added to events
+        // Network identifiers will be tracked
 )
 ```
 
@@ -77,18 +81,20 @@ createTracker(
 
 In this mode, the tracker doesn't include user identifiers but preserves session tracking. You can analyze session-level behavior without identifying individual users.
 
-Here's some example code for enabling client-side anonymization with session tracking when creating a tracker on web or mobile:
+Here's some example code for enabling client-side anonymization with session tracking when creating a tracker on [web](/docs/sources/web-trackers/anonymous-tracking/index.md) or [mobile](/docs/sources/mobile-trackers/anonymous-tracking/index.md):
 
 <Tabs groupId="platform" queryString>
   <TabItem value="web" label="JavaScript" default>
 
 ```javascript
 snowplow('newTracker', 'sp', '{{collector_url_here}}', {
+  // User identifiers won't be added to events
+  // Session and network identifiers will be tracked
   anonymousTracking: { withSessionTracking: true },
 });
 ```
 
-By default, with this configuration the tracker will use cookies and local storage to store session identifiers, but not user identifiers.
+The tracker uses cookies and local storage by default. With this configuration it will store session identifiers, but not user identifiers.
 
   </TabItem>
   <TabItem value="ios" label="iOS">
@@ -98,6 +104,7 @@ Snowplow.createTracker(namespace: "appTracker", endpoint: "https://snowplow-coll
   TrackerConfiguration()
     .userAnonymisation(true) // User identifiers in mobile entity (IDFA and IDFV) will not be tracked
     .sessionContext(true) // Session entity will be added to events but with userId as a null UUID
+    // Network identifiers will be tracked
 }
 ```
 
@@ -112,6 +119,7 @@ createTracker(
     TrackerConfiguration("appId")
         .userAnonymisation(true) // User identifiers in mobile entity (IDFA and IDFV) will not be tracked
         .sessionContext(true) // Session entity will be added to events but with userId as a null UUID
+        // Network identifiers will be tracked
 )
 ```
 
@@ -126,15 +134,16 @@ Setting server-side anonymization will add a `SP-Anonymous` HTTP header to reque
 
 An alternative method for preventing IP address tracking is to set a null value, such as `0.0.0.0` within the tracker. Most Snowplow trackers [support this option](/docs/events/ootb-data/user-and-session-identification/index.md), although not the JavaScript trackers.
 
-In the [JavaScript trackers](/docs/sources/web-trackers/anonymous-tracking/index.md), setting server-side anonymization also sets full client-side anonymization. In the [native mobile trackers](/docs/sources/mobile-trackers/anonymous-tracking/index.md), it's a separate configuration.
+In the [JavaScript trackers](/docs/sources/web-trackers/anonymous-tracking/index.md), setting server-side anonymization also sets full client-side anonymization. In the [native mobile trackers](/docs/sources/mobile-trackers/anonymous-tracking/index.md), it's a separate configuration. You can choose either client-side anonymization, server-side anonymization, or both.
 
-Here's some example code for enabling server-side anonymization when creating a tracker on web or mobile:
+Here's some example code for enabling server-side anonymization when creating a tracker on [web](/docs/sources/web-trackers/anonymous-tracking/index.md) or [mobile](/docs/sources/mobile-trackers/anonymous-tracking/index.md):
 
 <Tabs groupId="platform" queryString>
   <TabItem value="web" label="JavaScript" default>
 
 ```javascript
 snowplow('newTracker', 'sp', '{{collector_url_here}}', {
+  // No user, session, or network identifiers will be tracked
   anonymousTracking: { withServerAnonymisation: true },
 });
 ```
@@ -143,6 +152,8 @@ For fully [cookieless](/docs/sources/web-trackers/cookies-and-local-storage/inde
 
 ```javascript
 snowplow('newTracker', 'sp', '{{collector_url_here}}', {
+  // No user, session, or network identifiers will be tracked
+  // No data will be stored in the browser
   anonymousTracking: { withServerAnonymisation: true },
   stateStorageStrategy: 'none',
 });
@@ -155,6 +166,8 @@ This configuration prevents the tracker from storing any data in cookies or loca
 
 ```swift
 Snowplow.createTracker(namespace: "appTracker", endpoint: "https://snowplow-collector-url.com") {
+  // User and session identifiers will be tracked
+  // Network identifiers won't be added to events
   EmitterConfiguration().serverAnonymisation(true)
 }
 ```
@@ -167,6 +180,8 @@ createTracker(
     applicationContext,
     "appTracker",
     NetworkConfiguration("https://snowplow-collector-url.com"),
+    // User and session identifiers will be tracked
+    // Network identifiers won't be added to events
     EmitterConfiguration().serverAnonymisation(true)
 )
 ```
@@ -204,7 +219,7 @@ This table shows the support for anonymous tracking across the main [Snowplow tr
 
 As well as setting it at tracker initialization, you can enable or disable anonymous tracking during a session. Use this to start with anonymous tracking until a user accepts a cookie banner, or to enable full tracking when a user logs in.
 
-Here's some example code for toggling anonymization at runtime on web or mobile:
+Here's some example code for toggling anonymization at runtime on [web](/docs/sources/web-trackers/anonymous-tracking/index.md) or [mobile](/docs/sources/mobile-trackers/anonymous-tracking/index.md):
 
 <Tabs groupId="platform" queryString>
   <TabItem value="web" label="JavaScript" default>
@@ -256,8 +271,8 @@ Use anonymous tracking to avoid collecting the following identifiers in your eve
 | `domain_userid`            | [Atomic](/docs/fundamentals/canonical-event/index.md#user-fields)          | User            | UUID stored in a first-party cookie                         | ✅                |                  | ✅ [PII](/docs/pipeline/enrichments/available-enrichments/pii-pseudonymization-enrichment/index.md)                                                                                                            |
 | `domain_sessionid`         | [Atomic](/docs/fundamentals/canonical-event/index.md#user-fields)          | Session         | UUID for the current session                                | ✅                |                  | ✅ [PII](/docs/pipeline/enrichments/available-enrichments/pii-pseudonymization-enrichment/index.md)                                                                                                            |
 | `domain_sessionidx`        | [Atomic](/docs/fundamentals/canonical-event/index.md#user-fields)          | Session         | Count of sessions for this user                             | ✅                |                  |                                                                                                                                                                                                               |
-| `network_userid`           | [Atomic](/docs/fundamentals/canonical-event/index.md#user-fields)          | User            | UUID set by the Collector in a server-side cookie           |                  | ✅                | ✅ [PII](/docs/pipeline/enrichments/available-enrichments/pii-pseudonymization-enrichment/index.md)                                                                                                            |
-| `user_ipaddress`           | [Atomic](/docs/fundamentals/canonical-event/index.md#user-fields)          | User            | IP address captured by the Collector                        |                  | ✅                | ✅ [PII](/docs/pipeline/enrichments/available-enrichments/pii-pseudonymization-enrichment/index.md), [IP anonymization](/docs/pipeline/enrichments/available-enrichments/ip-anonymization-enrichment/index.md) |
+| `network_userid`           | [Atomic](/docs/fundamentals/canonical-event/index.md#user-fields)          | Network         | UUID set by the Collector in a server-side cookie           |                  | ✅                | ✅ [PII](/docs/pipeline/enrichments/available-enrichments/pii-pseudonymization-enrichment/index.md)                                                                                                            |
+| `user_ipaddress`           | [Atomic](/docs/fundamentals/canonical-event/index.md#user-fields)          | Network         | IP address captured by the Collector                        |                  | ✅                | ✅ [PII](/docs/pipeline/enrichments/available-enrichments/pii-pseudonymization-enrichment/index.md), [IP anonymization](/docs/pipeline/enrichments/available-enrichments/ip-anonymization-enrichment/index.md) |
 | `user_id` in atomic fields | [Atomic](/docs/fundamentals/canonical-event/index.md#user-fields)          | User            | Business user identifier set via `setUserId` or similar API | ✅                |                  | ✅ [PII](/docs/pipeline/enrichments/available-enrichments/pii-pseudonymization-enrichment/index.md)                                                                                                            |
 | `userId` in session entity | [Entity](/docs/events/ootb-data/user-and-session-identification/index.md)  | User            | UUID for the user in the client session entity              | ✅                |                  |                                                                                                                                                                                                               |
 | `sessionId`                | [Entity](/docs/events/ootb-data/user-and-session-identification/index.md)  | Session         | UUID for the session                                        | ✅                |                  |                                                                                                                                                                                                               |

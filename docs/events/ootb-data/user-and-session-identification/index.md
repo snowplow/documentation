@@ -8,7 +8,7 @@ keywords: ["user identification", "session tracking", "domain_userid", "user_id"
 
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
-Snowplow tracks a number of different identifiers to help you understand user behavior across sessions and devices. Read more about these in the [User and session identifiers](/docs/events/identifiers/index.md) page.
+Snowplow tracks a number of different identifiers to help you understand user behavior across sessions and devices. Read more about these in the [identifiers overview](/docs/events/identifiers/index.md) page.
 
 The main user and session identifiers are tracked as:
 * Atomic event properties

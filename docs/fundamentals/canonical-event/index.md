@@ -137,7 +137,7 @@ For more information on this topic check out the [device data](/docs/events/ootb
 
 ### IP address fields
 
-These fields are populated by the [IP enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md).
+These fields are populated by the [IP enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md), based on the `user_ipaddress` field.
 
 | Field name        | Type                     | Description                                                                                | Reqd? | Example              | Source                                                                                          | Web | Mobile |
 | ----------------- | ------------------------ | ------------------------------------------------------------------------------------------ | ----- | -------------------- | ----------------------------------------------------------------------------------------------- | --- | ------ |

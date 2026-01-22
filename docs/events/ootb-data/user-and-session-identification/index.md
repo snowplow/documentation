@@ -74,6 +74,8 @@ This table shows the support for `client_session` entity tracking across the mai
 
 The `client_session` entity contains data such as the session identifier and session index, as well as information about the previous session to help analysis.
 
+The `userId` property is the device ID.
+
 <SchemaProperties
   overview={{event: true}}
   example={{

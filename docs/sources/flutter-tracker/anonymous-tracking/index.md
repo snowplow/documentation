@@ -13,15 +13,30 @@ import AnonymousTrackingSharedBlock from "@site/docs/reusable/anonymous-tracking
 <AnonymousTrackingSharedBlock/>
 ```
 
+On web, the following [user and session identifiers](/docs/events/ootb-data/user-and-session-identification/index.md) can be anonymized:
+
+* Client-side user identifiers:
+   * `user_id`, a business identifier provided by you
+   * `domain_userid`, set automatically by the tracker from the cookies
+   * `userId` in the [session](/docs/sources/web-trackers/tracking-events/session/index.md) entity, set automatically by the tracker to the same value as `domain_userid`
+* Client-side session identifiers:
+  * `sessionId` and `previousSessionId` in the session entity
+* Server-side user identifiers:
+  * `network_userid` and `user_ipaddress`, set by the [Collector](/docs/pipeline/collector/index.md)
+
+
+original:
+
 On web, the following identifiers can be anonymised:
 
 * Web client-side user identifiers: `domain_userid` in the event, also present as `userId` in the [Session](http://iglucentral.com/schemas/com.snowplowanalytics.snowplow/client_session/jsonschema/1-0-2) context entity.
 * Web client-side session identifiers: `domain_sessionid` and `domain_sessionidx` in the event, which are also present in the Session entity as `sessionId`, and `sessionIndex`.
 * Server-side identifiers: `network_userid` and `user_ipaddress` event properties.
 
+Read more about anonymous tracking in the [overview page](/docs/events/anonymous-tracking/index.md).
+
 There are several levels to the anonymisation depending on which of the three categories are affected.
 
-Read more about anonymous tracking in the [overview page](/docs/events/anonymous-tracking/index.md).
 
 ## 1. Full client-side anonymisation
 

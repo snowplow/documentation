@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 
 Snowplow enables you to track events without collecting personally identifiable information (PII). Use anonymous tracking to respect user privacy preferences, comply with regulations such as GDPR, or track events before a user has provided consent.
 
-Every Snowplow event includes a number of [identifiers](/docs/events/identifiers/index.md). You can configure your trackers to prevent the collection of these identifiers, as well as IP addresses and cookies, using anonymous tracking.
+Every Snowplow event includes a number of identifiers. Read more about them in the [overview](/docs/events/identifiers/index.md) and [out-of-the-box tracking](/docs/events/ootb-data/user-and-session-identification/index.md) pages. You can configure your trackers to prevent the collection of these identifiers, as well as IP addresses and cookies, using anonymous tracking.
 
 Some Snowplow trackers also provide options for tracking [user consent](/docs/events/ootb-data/consent-events/index.md) interactions and GDPR basis for processing.
 
@@ -193,27 +193,27 @@ createTracker(
 
 This table shows the support for anonymous tracking across the main [Snowplow tracker SDKs](/docs/sources/index.md):
 
-| Tracker                                                                           | Supported | Since version | Client-side | Server-side | Notes                                                         |
-| --------------------------------------------------------------------------------- | --------- | ------------- | ----------- | ----------- | ------------------------------------------------------------- |
-| [Web](/docs/sources/web-trackers/anonymous-tracking/index.md)                     | ✅         | 3.0.0         | ✅           | ✅           |                                                               |
-| [iOS](/docs/sources/mobile-trackers/anonymous-tracking/index.md)                  | ✅         | 4.0.0         | ✅           | ✅           |                                                               |
-| [Android](/docs/sources/mobile-trackers/anonymous-tracking/index.md)              | ✅         | 4.0.0         | ✅           | ✅           |                                                               |
-| [React Native](/docs/sources/react-native-tracker/anonymous-tracking/index.md)    | ❌         | 1.3.0-2.1.2   | ✅           | ✅           | No anonymous tracking in version 4+                           |
-| [Flutter](/docs/sources/flutter-tracker/anonymous-tracking/index.md)              | ✅         | 0.3.0         | ✅           | ✅           |                                                               |
-| [Roku](/docs/sources/roku-tracker/adding-data/index.md)                           | ✅         | 0.3.0         | ✅           | ✅           | Use Subject configuration to manage client-side anonymization |
-| [Node.js](/docs/sources/node-js-tracker/initialization/index.md)                  | ✅         | 3.21.0        |             | ✅           |                                                               |
-| Golang                                                                            | ❌         |               |             |             |                                                               |
-| .NET                                                                              | ❌         |               |             |             |                                                               |
-| Java                                                                              | ❌         |               |             |             |                                                               |
-| Python                                                                            | ❌         |               |             |             |                                                               |
-| Scala                                                                             | ❌         |               |             |             |                                                               |
-| Ruby                                                                              | ❌         |               |             |             |                                                               |
-| Rust                                                                              | ❌         |               |             |             |                                                               |
-| [PHP](/docs/sources/php-tracker/emitters/index.md)                                | ✅         | 0.9.0         |             | ✅           |                                                               |
-| C++                                                                               | ❌         |               |             |             |                                                               |
-| Unity                                                                             | ❌         |               |             |             |                                                               |
-| Lua                                                                               | ❌         |               |             |             |                                                               |
-| [Google Tag Manager](/docs/sources/google-tag-manager/settings-template/index.md) | ✅         | v4            | ✅           | ✅           |                                                               |
+| Tracker                                                                                            | Supported | Since version | Client-side | Server-side | Notes                                                         |
+| -------------------------------------------------------------------------------------------------- | --------- | ------------- | ----------- | ----------- | ------------------------------------------------------------- |
+| [Web](/docs/sources/web-trackers/anonymous-tracking/index.md)                                      | ✅         | 3.0.0         | ✅           | ✅           |                                                               |
+| [iOS](/docs/sources/mobile-trackers/anonymous-tracking/index.md)                                   | ✅         | 4.0.0         | ✅           | ✅           |                                                               |
+| [Android](/docs/sources/mobile-trackers/anonymous-tracking/index.md)                               | ✅         | 4.0.0         | ✅           | ✅           |                                                               |
+| [React Native](/docs/sources/react-native-tracker/anonymous-tracking/index.md)                     | ❌         | 1.3.0-2.1.2   | ✅           | ✅           | No anonymous tracking in version 4+                           |
+| [Flutter](/docs/sources/flutter-tracker/anonymous-tracking/index.md)                               | ✅         | 0.3.0         | ✅           | ✅           |                                                               |
+| [Roku](/docs/sources/roku-tracker/adding-data/index.md#adding-user-and-platform-data-with-subject) | ✅         | 0.3.0         | ✅           | ✅           | Use Subject configuration to manage client-side anonymization |
+| [Node.js](/docs/sources/node-js-tracker/initialization/index.md)                                   | ✅         | 3.21.0        |             | ✅           |                                                               |
+| Golang                                                                                             | ❌         |               |             |             |                                                               |
+| .NET                                                                                               | ❌         |               |             |             |                                                               |
+| Java                                                                                               | ❌         |               |             |             |                                                               |
+| Python                                                                                             | ❌         |               |             |             |                                                               |
+| Scala                                                                                              | ❌         |               |             |             |                                                               |
+| Ruby                                                                                               | ❌         |               |             |             |                                                               |
+| Rust                                                                                               | ❌         |               |             |             |                                                               |
+| [PHP](/docs/sources/php-tracker/emitters/index.md)                                                 | ✅         | 0.9.0         |             | ✅           |                                                               |
+| C++                                                                                                | ❌         |               |             |             |                                                               |
+| Unity                                                                                              | ❌         |               |             |             |                                                               |
+| Lua                                                                                                | ❌         |               |             |             |                                                               |
+| [Google Tag Manager](/docs/sources/google-tag-manager/settings-template/index.md)                  | ✅         | v4            | ✅           | ✅           |                                                               |
 
 ### Toggle anonymous tracking
 
@@ -266,6 +266,14 @@ There's no equivalent API for deleting stored data on mobile.
 
 Use anonymous tracking to avoid collecting the following identifiers in your events. The table shows how you can anonymize each identifier using client-side anonymization, server-side anonymization, or enrichments.
 
+:::note Atomic and session user IDs
+Snowplow events have two properties with similar names: the `user_id` atomic event property and the `userId` property in the session entity.
+
+
+
+The former is a business user identifier you set via the tracker API, while the latter is a device ID generated by the tracker. Both can be anonymized using client-side anonymization.
+:::
+
 | Property                   | Location in event                                                          | Identifier type | Description                                                 | Client-side anon | Server-side anon | Enrichment                                                                                                                                                                                                    |
 | -------------------------- | -------------------------------------------------------------------------- | --------------- | ----------------------------------------------------------- | ---------------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `domain_userid`            | [Atomic](/docs/fundamentals/canonical-event/index.md#user-fields)          | User            | UUID stored in a first-party cookie                         | ✅                |                  | ✅ [PII](/docs/pipeline/enrichments/available-enrichments/pii-pseudonymization-enrichment/index.md)                                                                                                            |
@@ -274,7 +282,7 @@ Use anonymous tracking to avoid collecting the following identifiers in your eve
 | `network_userid`           | [Atomic](/docs/fundamentals/canonical-event/index.md#user-fields)          | Network         | UUID set by the Collector in a server-side cookie           |                  | ✅                | ✅ [PII](/docs/pipeline/enrichments/available-enrichments/pii-pseudonymization-enrichment/index.md)                                                                                                            |
 | `user_ipaddress`           | [Atomic](/docs/fundamentals/canonical-event/index.md#user-fields)          | Network         | IP address captured by the Collector                        |                  | ✅                | ✅ [PII](/docs/pipeline/enrichments/available-enrichments/pii-pseudonymization-enrichment/index.md), [IP anonymization](/docs/pipeline/enrichments/available-enrichments/ip-anonymization-enrichment/index.md) |
 | `user_id` in atomic fields | [Atomic](/docs/fundamentals/canonical-event/index.md#user-fields)          | User            | Business user identifier set via `setUserId` or similar API | ✅                |                  | ✅ [PII](/docs/pipeline/enrichments/available-enrichments/pii-pseudonymization-enrichment/index.md)                                                                                                            |
-| `userId` in session entity | [Entity](/docs/events/ootb-data/user-and-session-identification/index.md)  | User            | UUID for the user in the client session entity              | ✅                |                  |                                                                                                                                                                                                               |
+| `userId` in session entity | [Entity](/docs/events/ootb-data/user-and-session-identification/index.md)  | User            | Device ID in the client session entity                      | ✅                |                  |                                                                                                                                                                                                               |
 | `sessionId`                | [Entity](/docs/events/ootb-data/user-and-session-identification/index.md)  | Session         | UUID for the session                                        | ✅                |                  |                                                                                                                                                                                                               |
 | `appleIdfa`                | [Entity](/docs/events/ootb-data/device-and-browser/index.md#mobile-entity) | User            | Advertising identifier (IDFA) on iOS                        | ✅                |                  |                                                                                                                                                                                                               |
 | `appleIdfv`                | [Entity](/docs/events/ootb-data/device-and-browser/index.md#mobile-entity) | User            | Vendor identifier (IDFV) on iOS                             | ✅                |                  |                                                                                                                                                                                                               |

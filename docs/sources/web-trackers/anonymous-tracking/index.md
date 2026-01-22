@@ -50,6 +50,7 @@ This mode will no longer track any user identifiers or session information. The 
 | `userId`            | Session entity    | ❌ no session entity |
 | `domain_sessionid`  | Atomic            | ❌                   |
 | `domain_sessionidx` | Atomic            | ❌                   |
+| `sessionId`         | Session entity    | ❌ no session entity |
 | `previousSessionId` | Session entity    | ❌ no session entity |
 | `network_userid`    | Atomic            | ✅                   |
 | `user_ipaddress`    | Atomic            | ✅                   |
@@ -76,7 +77,8 @@ This mode will continue to track session information but will track no user iden
 | `userId`            | Session entity    | ❌ set to null UUID |
 | `domain_sessionid`  | Atomic            | ✅                  |
 | `domain_sessionidx` | Atomic            | ✅                  |
-| `previousSessionId` | Session entity    | ✅                  |
+| `sessionId`         | Session entity    | ✅                  |
+| `previousSessionId` | Session entity    | ❌                  |
 | `network_userid`    | Atomic            | ✅                  |
 | `user_ipaddress`    | Atomic            | ✅                  |
 
@@ -101,6 +103,7 @@ This mode will no longer track any user identifiers or session information, and 
 | `userId`            | Session entity    | ❌                  |
 | `domain_sessionid`  | Atomic            | ❌                  |
 | `domain_sessionidx` | Atomic            | ❌                  |
+| `sessionId`         | Session entity    | ❌                  |
 | `previousSessionId` | Session entity    | ❌                  |
 | `network_userid`    | Atomic            | ❌                  |
 | `user_ipaddress`    | Atomic            | ❌                  |

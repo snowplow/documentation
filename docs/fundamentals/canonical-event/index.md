@@ -22,6 +22,8 @@ During enrichment, atomic property values are validated against the [atomic sche
 
 The tables show the default maximum lengths for string fields. You can configure different maximum lengths for specific fields by setting `atomicFieldsLimits` in the [Enrich configuration](/docs/api-reference/enrichment-components/configuration-reference/index.md). These can be more permissive than the limits in the atomic schema. In fact, the `page_url`, `page_referrer`, and `mkt_clickid` fields already have larger maximum lengths in the default Enrich configuration than in the atomic schema.
 
+Some identifiers require UUID strings. Snowplow components use UUIDv4, but the pipeline will accept any valid UUID, regardless of version.
+
 Any payload that conforms to this protocol is a valid Snowplow event payload, whether it's sent by a Snowplow tracker SDK, a webhook, or a custom application. If you want to get into the details, check out these [example HTTP requests](/docs/events/http-requests/index.md). In total, the tracker protocol defines 131 fields, of which 89 are in use by Snowplow applications.
 
 ## Common fields
@@ -58,7 +60,9 @@ The `domain_sessionidx` is the number or index of the current user session. For 
 
 The equivalent values on mobile are tracked in a [session entity](/docs/events/ootb-data/user-and-session-identification/index.md#session-entity).
 
-The `network_userid` is set by a [Collector cookie](/docs/pipeline/collector/index.md) by default. You can override it by setting a `network_userid` with your tracker. The IP address is also added to the event by the Collector, if you didn't provide one in your tracking code.
+The `network_userid` is set by a [Collector cookie](/docs/pipeline/collector/index.md) by default. You can override it by setting a `network_userid` with your tracker.
+
+The IP address is also added to the event by the Collector, if you didn't provide one in your tracking code. Snowplow supports both IPv4 and IPv6 addresses, as long as a domain is compatible with the IPv6 network.
 
 | Payload property | Field name          | Type                     | Description                                                                    | Reqd? | Example                                | Source                                                                                                                           | Web | Mobile |
 | ---------------- | ------------------- | ------------------------ | ------------------------------------------------------------------------------ | ----- | -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------- | --- | ------ |

@@ -9,7 +9,7 @@ keywords: ["event specifications API", "API endpoints", "programmatic management
 With the [**Event Specifications API**](https://console.snowplowanalytics.com/api/msc/v1/docs), you can efficiently manage event specifications programmatically. Whether you want to retrieve, create, edit, publish, deprecate, or delete event specifications, the API provides the necessary endpoints and functionalities.
 
 :::note
-In the previous API version (V1), event specifications were referred to as 'tracking scenarios.
+In the previous API version (V1), event specifications were referred to as "tracking scenarios".
 :::
 
 ## Getting Started

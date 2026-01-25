@@ -3,7 +3,7 @@ title: "Iglu client libraries"
 sidebar_label: "Client libraries"
 date: "2021-03-26"
 sidebar_position: 40
-description: "Client libraries for resolving schemas from Iglu repositories in Scala,and Objective-C with embedded and remote repository support."
+description: "Client libraries for resolving schemas from Iglu repositories in Scala, and Objective-C with embedded and remote repository support."
 keywords: ["iglu client", "schema resolver", "scala client"]
 ---
 

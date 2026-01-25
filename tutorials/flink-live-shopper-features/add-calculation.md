@@ -21,7 +21,7 @@ In this example, you will track a new feature called `most_viewed_brand`, based 
 
 ## 1. Add a field to `ProductViewEvent`
 
-The web application tracks data on product brand—it's a field within the Snowplow [ecommerce `product_view` event](/docs/sources/trackers/web-trackers/tracking-events/ecommerce/#product-view). A full example payload is available at `.example/product_view.json`, showing how the payload would look after processing through the Snowplow pipeline.
+The web application tracks data on product brand—it's a field within the Snowplow [ecommerce `product_view` event](/docs/sources/web-trackers/tracking-events/ecommerce/#product-view). A full example payload is available at `.example/product_view.json`, showing how the payload would look after processing through the Snowplow pipeline.
 
 The `brand` field isn't currently present in the `ProductViewEvent` class.
 

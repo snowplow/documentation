@@ -10,6 +10,16 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
+### Upgrading to 1.0.0
+
+- Version 1.10.6 of `dbt-core` now required
+- for a full upgrade walkthrough, please follow [official dbt guide](https://docs.getdbt.com/docs/dbt-versions/core-upgrade/upgrading-to-v1.10)
+- Generic test arguments must be nested under arguments:
+(see dbt’s guidance on the require_generic_test_arguments_property behavior change [here](
+https://docs.getdbt.com/reference/global-configs/behavior-changes#generic-test-arguments-property))
+- Adapter dbt-redshift 1.10.0+ is required for Redshift users
+- Users unable to upgrade immediately may remain on v0.x, which receives critical bug fixes only
+
 ### Upgrading to 0.4.0
 
 If you make use of the `conversion` module, and don't wish to do a full refresh, you will need to add the new column and update the existing records with the correct values for the model to run successfully incrementally.

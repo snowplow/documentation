@@ -34,11 +34,11 @@ In this textbox you can specify the argument to the ecommerce function. This can
 
 **Add Custom Context Entities**
 
-Use this table to attach [custom context entities](/docs/sources/web-trackers/tracking-events/index.md#custom-context) to the Snowplow event. Each row can be set to a Google Tag Manager variable that returns an array of custom contexts to add to the event hit.
+Use this table to attach [custom context entities](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md#tracking-a-custom-entity) to the Snowplow event. Each row can be set to a Google Tag Manager variable that returns an array of custom contexts to add to the event hit.
 
 **Set Custom Timestamp**
 
-Set this to a UNIX timestamp in case you want to [override the default timestamp](/docs/sources/web-trackers/tracking-events/index.md#setting-the-true-timestamp) used by Snowplow.
+Set this to a UNIX timestamp in case you want to [override the default timestamp](/docs/sources/web-trackers/tracking-events/index.md#adding-custom-timestamps-to-events) used by Snowplow.
 
   </TabItem>
   <TabItem value="ga4" label="GA4 Ecommerce">

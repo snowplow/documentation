@@ -42,4 +42,4 @@ trackSelfDescribingEvent({
 });
 ```
 
-Above will attach `ttm` ([`true_tstamp`](/docs/fundamentals/canonical-event/index.md#date--time-fields)) parameter instead of default `dtm`. You can also use, plain number or `{ type: 'dtm', value: stamp }` to send `` `dvce_created_tstamp` ``.
+Above will attach `ttm` ([`true_tstamp`](/docs/fundamentals/canonical-event/index.md#time-and-date-fields)) parameter instead of default `dtm`. You can also use, plain number or `{ type: 'dtm', value: stamp }` to send `` `dvce_created_tstamp` ``.

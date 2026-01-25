@@ -43,8 +43,8 @@ Suppose we are tracking against a custom schema for button clicks:
             type: 'string',
             description: 'The text on the button, or a user-provided override'
         },
-        id: { 
-            type: 'string', 
+        id: {
+            type: 'string',
             description: 'The identifier of the button'
         },
     },
@@ -52,7 +52,7 @@ Suppose we are tracking against a custom schema for button clicks:
 }
 ```
 
-When the respective method, from Snowtype, that handles tracking of this event is fired validation will happen at runtime for all schema attributes. Following we can see an example of how the schema validation will show up in the browser console when the event responsible for tracking against the custom button click schema fires. 
+When the respective method, from Snowtype, that handles tracking of this event is fired validation will happen at runtime for all schema attributes. Following we can see an example of how the schema validation will show up in the browser console when the event responsible for tracking against the custom button click schema fires.
 
 ![validation example](./images/validation.png)
 
@@ -66,9 +66,9 @@ Currently the validation information will include attributes that can help point
 This feature is available since version 0.3.1 of Snowtype for the [Browser Tracker](/docs/sources/web-trackers/quick-start-guide/index.md?platform=browser) in both TypeScript and JavaScript.
 :::
 
-Cardinality rules allow you to specify the expected number of an entity taking part in an Event Specification. You would use this capability to ensure the correct number of entities are getting sent alongside your event. E.g. 
+Cardinality rules allow you to specify the expected number of an entity taking part in an Event Specification. You would use this capability to ensure the correct number of entities are getting sent alongside your event. E.g.
 
-- `Exactly 1` 
+- `Exactly 1`
 - `At least 1`
 - `Between 1 and 2`
 
@@ -113,7 +113,7 @@ A similar warning will occur when there is a cardinality rule set for an entity,
 This feature is available since version 0.10.0 of Snowtype for the [Browser Tracker](/docs/sources/web-trackers/quick-start-guide/index.md?platform=browser) in both TypeScript and JavaScript.
 :::
 
-Property rules are [specific instructions](/docs/data-product-studio/event-specifications/index.md#properties) you can add in every schema that takes part in an Event Specification. This capability will allow you to adjust the expected values specifically to this event. E.g.
+Property rules are specific instructions you can add in every schema that takes part in an Event Specification. This capability will allow you to adjust the expected values specifically to this event. E.g.
 
 - The `category` attribute of the `product` entity is expected to take the values of "related" or "cross-sell" for this Event Specification
 
@@ -192,7 +192,7 @@ type ErrorType = {
 ```
 
 :::info
-When Snowtype detects the `NODE_ENV` environment variable being set to `test`, as is done by many testing libraries, it will automatically default to throwing an `Error` when a violation is detected. 
+When Snowtype detects the `NODE_ENV` environment variable being set to `test`, as is done by many testing libraries, it will automatically default to throwing an `Error` when a violation is detected.
 :::
 
 ## Caveats

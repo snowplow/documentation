@@ -85,7 +85,7 @@ Click _Copy URL_ next to _Public to internet_ in the file browser to get the fil
 
 This will only work correctly if:
 
-- you earlier created your bucket with a name corresponding to the subdomain (see [Creating a storage bucket](#create-bucket)) you wish to use
+- you earlier created your bucket with a name corresponding to the subdomain (see [Creating a storage bucket](#create-a-storage-bucket)) you wish to use
 - you have verified ownership of this domain in Google Cloud: [https://cloud.google.com/storage/docs/domain-name-verification](https://cloud.google.com/storage/docs/domain-name-verification).
 
 To connect your domain to your Cloud Storage bucket, you will need to create a `CNAME` record as below:

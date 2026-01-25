@@ -1,7 +1,8 @@
 ---
-title: "Segment to Snowplow"
+title: "Migrate from Segment to Snowplow"
+sidebar_label: "Segment to Snowplow"
 date: "2025-08-04"
-sidebar_position: 0
+sidebar_position: 10
 description: "Migrate from Segment to Snowplow with guidance on tracking implementation, data structures, and warehouse modeling."
 keywords: ["segment", "migration", "tracking plan", "data products", "analytics.js", "event tracking"]
 ---
@@ -124,7 +125,7 @@ You'll need to translate your Segment Tracking Plans into Snowplow [data product
 The goal is to create a set of JSON data structures for all your events and entities, organized into data products and [event specifications](/docs/data-product-studio/event-specifications/index.md). The best way to import your new data product tracking plans into Snowplow is to use the [Snowplow CLI](/docs/data-product-studio/snowplow-cli/index.md).
 
 :::info Snowplow CLI MCP server
-The Snowplow CLI includes an [MCP server](/docs/data-product-studio/snowplow-cli/index.md#mcp-server) to help you translate your Segment Tracking Plans into Snowplow data products.
+The Snowplow CLI includes an [MCP server](/docs/data-product-studio/mcp-server/index.md) to help you translate your Segment Tracking Plans into Snowplow data products.
 :::
 
 In this phase, you'll also need to decide what to do with historical data. There are two main choices:

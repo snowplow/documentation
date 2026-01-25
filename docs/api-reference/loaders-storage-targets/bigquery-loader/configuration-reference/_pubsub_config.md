@@ -3,20 +3,16 @@
     <td>Required, e.g. <code>projects/myproject/subscriptions/snowplow-enriched</code>. Name of the Pub/Sub subscription with the enriched events</td>
 </tr>
 <tr>
-    <td><code>input.parallelPullFactor</code></td>
-    <td>Optional. Default value 0.5. <code>parallelPullFactor * cpu count</code> will determine the number of threads used internally by the Pub/Sub client library for fetching events</td>
-</tr>
-<tr>
     <td><code>input.durationPerAckExtension</code></td>
-    <td>Optional. Default value <code>60 seconds</code>. Pub/Sub ack deadlines are extended for this duration when needed.</td>
+    <td>Optional. Default value <code>15 seconds</code>. Pub/Sub ack deadlines are extended for this duration when needed.</td>
 </tr>
 <tr>
     <td><code>input.minRemainingAckDeadline</code></td>
     <td>
       Optional. Default value <code>0.1</code>.
       Controls when ack deadlines are re-extended, for a message that is close to exceeding its ack deadline.
-      For example, if <code>durationPerAckExtension</code> is <code>60 seconds</code> and <code>minRemainingAckDeadline</code> is <code>0.1</code> then the loader
-      will wait until there is <code>6 seconds</code> left of the remining deadline, before re-extending the message deadline.
+      For example, if <code>durationPerAckExtension</code> is <code>15 seconds</code> and <code>minRemainingAckDeadline</code> is <code>0.1</code> then the loader
+      will wait until there is <code>1.5 seconds</code> left of the remaining deadline, before re-extending the message deadline.
     </td>
 </tr>
 <tr>
@@ -29,6 +25,20 @@
       Optional. Default value <code>100 millis</code>.
       Adds an artifical delay between consecutive requests to Pub/Sub for more messages.
       Under some circumstances, this was found to slightly alleviate a problem in which Pub/Sub might re-deliver the same messages multiple times.
+    </td>
+</tr>
+<tr>
+    <td><code>input.retries.transientErrors.delay</code> (since 2.1.0)</td>
+    <td>
+      Optional. Default value <code>100 millis</code>.
+      Backoff delay for follow-up attempts after transient errors.
+    </td>
+</tr>
+<tr>
+    <td><code>input.retries.transientErrors.attempts</code> (since 2.1.0)</td>
+    <td>
+      Optional. Default value <code>10</code>.
+      Maximum number of attempts, after which the loader will crash and exit.
     </td>
 </tr>
 <tr>
@@ -45,5 +55,19 @@
 </tr>
 <tr>
     <td><code>output.bad.maxRecordSize</code></td>
-    <td>Optional.  Default value 10000000.  Any single failed event sent to Pub/Sub should not exceed this size in bytes</td>
+    <td>Optional.  Default value 9000000.  Any single failed event sent to Pub/Sub should not exceed this size in bytes</td>
+</tr>
+<tr>
+    <td><code>output.retries.transientErrors.delay</code> (since 2.1.0)</td>
+    <td>
+      Optional. Default value <code>100 millis</code>.
+      Backoff delay for follow-up attempts after transient errors.
+    </td>
+</tr>
+<tr>
+    <td><code>output.retries.transientErrors.attempts</code> (since 2.1.0)</td>
+    <td>
+      Optional. Default value <code>10</code>.
+      Maximum number of attempts, after which the loader will crash and exit.
+    </td>
 </tr>

@@ -51,7 +51,7 @@ To edit an existing data structure, navigate to **Data Structures** and locate t
 - Ordering the Name column alphabetically
 - Filtering the listing by Type and / or Vendor
 
-Once located, click on the name to view the data structure. You can then select from two options to edit the data structure: [**Edit with builder**](./builder/index.md#editing-a-data-structure-with-the-data-structures-builder) or [**Edit with JSON editor**](./json-editor/index.md#editing-a-data-structure-with-the-json-editor).
+Once located, click on the name to view the data structure. You can then select from two options to edit the data structure: [**Edit with builder**](./builder/index.md) or [**Edit with JSON editor**](./json-editor/index.md).
 
 :::note
 The **Edit with builder** option will be unavailable if the data structure you're viewing is not supported. More complex data structures must be edited with the **JSON Editor**.

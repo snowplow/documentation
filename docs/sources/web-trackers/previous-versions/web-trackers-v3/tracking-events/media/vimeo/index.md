@@ -10,7 +10,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-This plugin enables the automatic tracking of a Vimeo video, utilising the [Snowplow Media Plugin](../index.md).
+This plugin enables the automatic tracking of a Vimeo video, utilising the [Snowplow Media Plugin](../snowplow/index.md).
 
 :::info Example app
 To illustrate the tracked [events](/docs/fundamentals/events/index.md) and [entities](/docs/fundamentals/entities/index.md), you can visit [an example app](https://snowplow-industry-solutions.github.io/snowplow-javascript-tracker-examples/media) that showcases the tracked media events and entities live as you watch a video.
@@ -236,7 +236,7 @@ startVimeoTracking({
 
 ## Advanced usage
 
-As the Vimeo plugin uses Snowplow Media internally, for more granular control over events, you can utilise any of the functions provided by the [Snowplow Media Plugin](../index.md).
+As the Vimeo plugin uses Snowplow Media internally, for more granular control over events, you can utilise any of the functions provided by the [Snowplow Media Plugin](../snowplow/index.md).
 
 For example, if you wish to include additional behavior when a video is paused, you can create callback on the `pause` event of an instance of a Vimeo player.
 
@@ -288,7 +288,7 @@ video.on('pause', () => {
 
 ### Tracking advertising events
 
-Advertising events are not tracked automatically, but can be tracked using the `trackAd*` functions provided by Snowplow Media. For a full list of available functions, see the [Snowplow Media Plugin documentation](../index.md#update-ad-and-ad-break-properties).
+Advertising events are not tracked automatically, but can be tracked using the `trackAd*` functions provided by Snowplow Media. For a full list of available functions, see the [Snowplow Media Plugin documentation](../snowplow/index.md).
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>

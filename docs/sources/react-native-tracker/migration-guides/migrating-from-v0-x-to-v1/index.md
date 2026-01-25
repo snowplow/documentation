@@ -228,7 +228,7 @@ The changes to v0.2.0 PageViewEvent properties are:
 
 ## Setting the subject
 
-In v1.0.0, setting the subject can be done both when configuring the tracker (through the [SubjectConfiguration](/docs/sources/react-native-tracker/index.md#subjectconfiguration) object) and at runtime ([using the `set..` tracker methods](/docs/sources/react-native-tracker/tracking-events/index.md#setting-the-subject-data)), so the exact migration steps depend on the specifics of your app.
+In v1.0.0, setting the subject can be done both when configuring the tracker (through the [SubjectConfiguration](/docs/sources/react-native-tracker/previous-version/react-native-tracker-v2-reference/introduction/index.md#configuring-the-tracker) object) and at runtime ([using the `set..` tracker methods](/docs/sources/react-native-tracker/previous-version/react-native-tracker-v2-reference/client-side-properties/index.md#setting-the-subject-data-in-a-tracker-instance)), so the exact migration steps depend on the specifics of your app.
 
 A notable difference between the SubjectConfiguration properties of v1.0.0 from the `SubjectData` properties of v0.2.0 is the way to set screen dimensions either for the screen resolution or for the screen viewport.
 

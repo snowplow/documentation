@@ -23,7 +23,7 @@ Choose exactly how you want the model to look, based on your use case.
 You can specify which parts of the data product to include:
 * Event specifications
 * Entities
-* [Atomic Snowplow event properties](/docs/fundamentals/canonical-event/index.md#out-of-the-box-fields)
+* [Atomic Snowplow event properties](/docs/fundamentals/canonical-event/index.md#common-fields)
 
 ### Automatic data flattening
 

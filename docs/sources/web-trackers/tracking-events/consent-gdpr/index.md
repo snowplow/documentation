@@ -3,7 +3,7 @@ title: "Track consent and GDPR on web"
 sidebar_label: "Consent"
 sidebar_position: 100
 description: "Track user consent preferences and GDPR compliance with enhanced consent events for acceptance, selection, denial, expiration, and withdrawal."
-keywords: ["consent", "gdpr"]
+keywords: ["consent", "gdpr", "consent management", "enhanced consent", "user privacy", "data protection"]
 ---
 
 ```mdx-code-block
@@ -13,7 +13,7 @@ import TabItem from '@theme/TabItem';
 
 Track user consent preferences selection events using the Enhanced Consent plugin.
 
-Enhanced consent events must be **manually tracked**. The GDPR context entity will be **automatically tracked** with all events if configured.
+Enhanced consent events must be **manually tracked**.
 
 ## Install plugin
 
@@ -63,28 +63,18 @@ The plugin is available since version 3.8 of the tracker.
 
 ## Events
 
-| API                     | Used for:                                               |
+| API                     | To track                                                |
 | ----------------------- | ------------------------------------------------------- |
-| `trackConsentAllow`     | Track an acceptance of user consent.                    |
-| `trackConsentSelected`  | Track a specific selection of consented scopes.         |
-| `trackConsentPending`   | Track the unconfirmed selection about user consent.     |
-| `trackConsentImplicit`  | Track the implicit consent on user consent preferences. |
-| `trackConsentDeny`      | Track a denial of user consent.                         |
-| `trackConsentExpired`   | Track the expiration of a consent selection.            |
-| `trackConsentWithdrawn` | Track the withdrawal of user consent.                   |
-| `trackCmpVisible`       | Track the render time of a CMP banner.                  |
+| `trackConsentAllow`     | Acceptance of user consent                              |
+| `trackConsentSelected`  | A specific selection of consented scopes                |
+| `trackConsentPending`   | The unconfirmed selection about user consent            |
+| `trackConsentImplicit`  | The implicit consent on user consent preferences        |
+| `trackConsentDeny`      | A denial of user consent                                |
+| `trackConsentExpired`   | The expiration of a consent selection                   |
+| `trackConsentWithdrawn` | The withdrawal of user consent                          |
+| `trackCmpVisible`       | The render time of a consent management platform banner |
 
-With the exception of the CMP visible event, these methods use the same [`consent_preferences`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/consent_preferences/jsonschema/1-0-0) event schema. It has the following properties:
-
-|     Attribute      |    Type    | Description                                                                                                                           | Required |
-| :----------------: | :--------: | ------------------------------------------------------------------------------------------------------------------------------------- | :------: |
-| basisForProcessing |  `string`  | GDPR lawful basis for data collection & processing.                                                                                   |    ✅     |
-|     consentUrl     |  `string`  | URI of the privacy policy related document.                                                                                           |    ✅     |
-|   consentVersion   |  `string`  | Version of the privacy policy related document.                                                                                       |    ✅     |
-|   consentScopes    | `string[]` | The scopes allowed after the user finalized their selection of consent preferences. E.g ['analytics', 'functional', 'advertisement']. |    ✅     |
-|   domainsApplied   | `string[]` | The domains for which this consent allows these preferences to persist to.                                                            |    ✅     |
-|    gdprApplies     | `boolean`  | Determine if GDPR applies based on the user's geo-location.                                                                           |    ✘     |
-
+With the exception of the CMP visible event, these methods use the same [`consent_preferences`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/consent_preferences/jsonschema/1-0-0) event schema.
 
 ### Consent allow
 

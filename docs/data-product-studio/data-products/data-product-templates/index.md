@@ -36,9 +36,9 @@ Note: The event volume counts are calculated differently for this Data Product. 
 
 Included event specifications:
 
-* [Screen view](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-view-events)
+* [Screen view](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-views)
 * [Screen end](/docs/events/ootb-data/page-activity-tracking/index.md#screen-end-event)
-* [Application install](/docs/events/ootb-data/mobile-lifecycle-events/index.md#install-event)
+* [Application install](/docs/events/ootb-data/mobile-lifecycle-events/index.md#install-events)
 * [Application background](/docs/events/ootb-data/mobile-lifecycle-events/index.md#background-event)
 * [Application foreground](/docs/events/ootb-data/mobile-lifecycle-events/index.md#foreground-event)
 
@@ -65,7 +65,7 @@ Included event specifications:
 ## Media Web
 
 This Data Product template contains a full set of media tracking interactions to measure video or audio data.
-Tracked using the [Snowplow Media plugin](https://docs.snowplow.io/docs/sources/web-trackers/tracking-events/media/snowplow/).
+Tracked using the [Snowplow Media plugin](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md).
 
 Included event specifications:
 

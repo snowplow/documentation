@@ -277,7 +277,7 @@ For a list of available commands, consult the [API documentation](https://github
 
 ### Add custom context entities
 
-Using the Context Entities table allows you to attach [custom context entities](/docs/sources/web-trackers/tracking-events/index.md#custom-context) to the Snowplow event. Each row should be set to a variable value that must be an array of custom context objects that will all be concatenated to add to the Event.
+Using the Context Entities table allows you to attach [custom context entities](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md#tracking-a-custom-entity) to the Snowplow event. Each row should be set to a variable value that must be an array of custom context objects that will all be concatenated to add to the Event.
 
 For example to manually attach the web page context, create a custom JavaScript variable that returns an array with the custom context object:
 
@@ -311,10 +311,10 @@ Tags that can derive their parameters from a Google Tag Manager variable are:
 - [Self-describing Event](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md#tracking-a-custom-event-self-describing)
 - [Site Search](/docs/sources/web-trackers/tracking-events/site-search/index.md)
 - [Social Interaction](/docs/sources/web-trackers/tracking-events/social-media/index.md)
-- [Structured Event](/docs/fundamentals/events/index.md#structured-events)
+- [Structured Event](/docs/fundamentals/canonical-event/index.md#structured-events)
 - [Timing](/docs/sources/web-trackers/tracking-events/timings/generic/index.md)
 
-You can set the Retrieve Parameters From Variable setting to a Google Tag Manager variable. This parameter _must_ return an object. In the object, the key-value pairs should reflect the named parameters in the [event documentation](/docs/sources/web-trackers/tracking-events/index.md). For example, to have the variable populate an [Error event](/docs/sources/web-trackers/tracking-events/index.md#error-tracking), you could use a Custom JavaScript variable like this:
+You can set the Retrieve Parameters From Variable setting to a Google Tag Manager variable. This parameter _must_ return an object. In the object, the key-value pairs should reflect the named parameters in the [event documentation](/docs/sources/web-trackers/tracking-events/index.md). For example, to have the variable populate an [Error event](/docs/sources/web-trackers/tracking-events/errors/index.md), you could use a Custom JavaScript variable like this:
 
 ```javascript
 function() {

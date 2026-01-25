@@ -10,7 +10,7 @@ To begin, we will set up Snowplow tracking on your ecommerce website. In this se
 
 ![website](images/retl-shopfront.png)
 
-First, [initialize the Snowplow JavaScript tracker](/docs/sources/trackers/web-trackers/quick-start-guide). Below is an example of how to set up the tracker:
+First, [initialize the Snowplow JavaScript tracker](/docs/sources/web-trackers/quick-start-guide). Below is an example of how to set up the tracker:
 
 ```javascript
 ; (function (p, l, o, w, i, n, g) {
@@ -73,7 +73,7 @@ To verify your tracking implementation, use the [Snowplow Chrome extension](http
 
 ## Track product views
 
-Implement the product view tracking when a product is viewed. This will create a column in the warehouse dedicated to storing information on viewed products. Please ensure you use the correct data type for each variable. Refer to the [ecommerce documentation](https://docs.snowplow.io/docs/sources/trackers/web-trackers/tracking-events/ecommerce) for further information.
+Implement the product view tracking when a product is viewed. This will create a column in the warehouse dedicated to storing information on viewed products. Please ensure you use the correct data type for each variable. Refer to the [ecommerce documentation](/docs/sources/web-trackers/tracking-events/ecommerce/) for further information.
 ```javascript
   snowplow('trackProductView', {
     id: "12345",
@@ -122,4 +122,4 @@ Once add to cart events are tracked, the event should look like this in your Sno
 
 ## Next step
 
-With this implementation, you have page view, time spent, and add to cart tracking. If you want to add more ecommerce tracking, please refer to the [Snowplow ecommerce accelerator](https://docs.snowplow.io/accelerators/ecommerce) or the detailed [ecommerce documentation](/docs/sources/trackers/web-trackers/tracking-events/ecommerce). Next progress to the [data modeling](./data-modeling.md) step to verify your tracking setup in the data warehouse.
+With this implementation, you have page view, time spent, and add to cart tracking. If you want to add more ecommerce tracking, please refer to the [Snowplow ecommerce accelerator](https://docs.snowplow.io/accelerators/ecommerce) or the detailed [ecommerce documentation](/docs/sources/web-trackers/tracking-events/ecommerce). Next progress to the [data modeling](./data-modeling.md) step to verify your tracking setup in the data warehouse.

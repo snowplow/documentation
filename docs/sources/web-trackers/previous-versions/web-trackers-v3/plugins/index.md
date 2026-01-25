@@ -51,7 +51,7 @@ If you are using the JavaScript tracker with the full `sp.js` and your plugin is
 | Site*                                                                    | Events              | Manual               | ✅       | ❌            | `browser-plugin-site-tracking`                 |
 | [Timezone](../tracking-events/timezone-geolocation/index.md)             | Other               | Automatic            | ❌       | ❌            | `browser-plugin-timezone`                      |
 | [Web vitals](../tracking-events/web-vitals/index.md)                     | Events              | Automatic            | ❌       | ❌            | `browser-plugin-web-vitals`                    |
-| ~~[Browser features](#browser-features)~~ deprecated                     | Events              | Automatic            | ❌       | ❌            | `browser-plugin-browser-features`              |
+| ~~Browser features~~ deprecated                     | Events              | Automatic            | ❌       | ❌            | `browser-plugin-browser-features`              |
 
 *The site tracking plugin provides events for [site search](../tracking-events/site-search/index.md), [social media interactions](../tracking-events/social-media/index.md), and [timing](../tracking-events/timings/generic/index.md).
 

@@ -63,7 +63,7 @@ To demonstrate the necessity of attribute keys, consider the attribute `num_view
 
 Each of these is likely to have a different calculated value.
 
-You can [define your own attribute keys](/docs/signals/define-attributes/attribute-groups/index.md#creating-a-custom-attribute-key), or use the built-in ones. Signals comes with predefined attribute keys for user, device, and session. Their identifiers are from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) in all Snowplow events.
+You can [define your own attribute keys](/docs/signals/define-attributes/attribute-groups/index.md#attribute-keys), or use the built-in ones. Signals comes with predefined attribute keys for user, device, and session. Their identifiers are from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-fields) in all Snowplow events.
 
 | Attribute key      | Type     |
 | ------------------ | -------- |

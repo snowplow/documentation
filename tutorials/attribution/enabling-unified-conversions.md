@@ -8,7 +8,7 @@ keywords: ["snowplow unified conversions", "dbt conversion tracking", "attributi
 
 Snowplow’s Attribution package requires the optional conversions module to be configured within the Unified package, because the `snowplow_unified_conversions` table is used as a source by default. This is an additional incremental table that will be updated for each run of the Unified package.
 
-Enabling Conversions will also add 6 extra columns into the sessions table. See more details about that on [this page](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/conversions/).
+Enabling Conversions will also add 6 extra columns into the sessions table. See more details about that on [this page](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/conversions/).
 
 If you already have conversion events and the conversion module is enabled, you can skip this step.
 
@@ -21,7 +21,7 @@ Please note: All the actions within this step are to be completed within your Sn
 1. Add `snowplow__conversion_events: []` variable to dbt_project.yml file inside your project where you the run Snowplow Unified package.
 2. Add a conversion event into the array as shown below to the dbt_project.yml file in the vars section.
 
-You can see further details on configuring the conversion event on [this page of the docs](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/conversions/)
+You can see further details on configuring the conversion event on [this page of the docs](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/conversions/)
 
 :::info
 Please Note: The total value of conversions must be greater than 0 for the Attribution Package as it is required to calculate the proportion of value brought in by a campaign or channel.
@@ -41,7 +41,7 @@ vars:
     ]
 ```
 
-3. Enable the Conversions Module to create the `snowplow_unified_conversions` table by setting the following variable in your Unified dbt_project.yml file.
+1. Enable the Conversions Module to create the `snowplow_unified_conversions` table by setting the following variable in your Unified dbt_project.yml file.
 
 ```yml
 vars:
@@ -52,7 +52,7 @@ vars:
 :::warning
 If you have not previously run the Unified package with the conversions module enabled by default it will cause the Snowplow package to backfill from the `snowplow__start_date` (with `snowplow__backfill_limit_days` increments for each run) until the `snowplow_unified_conversions` table becomes up-to-date with the rest of the incremental tables. During backfilling any existing derived incremental tables (e.g. sessions table) are not going to get updated.
 
-Alternatively, you can adjust the run configurations the first time you run the package with the enabled conversions module to only backfill the `snowplow_unified_conversions` table from a certain more recent date only. [Read more details here](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/backfilling/).
+Alternatively, you can adjust the run configurations the first time you run the package with the enabled conversions module to only backfill the `snowplow_unified_conversions` table from a certain more recent date only. [Read more details here](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/backfilling/).
 
 :::
 

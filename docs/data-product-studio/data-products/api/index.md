@@ -119,7 +119,7 @@ The request body is mandatory and should be in JSON format. The minimum payload 
 
 :::note
 _The name of your data product must be unique to ensure proper identification and avoid conflicts._
-:::note
+:::
 
 ### Updating a Data Product
 
@@ -131,7 +131,7 @@ The minimum payload on update would be the same as on creation but with the addi
 
 :::note
 _The name of your data product must be unique to ensure proper identification and avoid conflicts._
-:::note
+:::
 
 See the [detailed API documentation](https://console.snowplowanalytics.com/api/msc/v1/docs) for all options.
 

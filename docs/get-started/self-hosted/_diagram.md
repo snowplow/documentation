@@ -1,6 +1,5 @@
 ```mdx-code-block
 import Mermaid from '@theme/Mermaid';
-import ReactMarkdown from 'react-markdown';
 ```
 
 <h4>The main components of the pipeline</h4>
@@ -51,10 +50,3 @@ flowchart LR
     </div>
   </>
 }</>
-
-<>{props.warehouse != 'Postgres' && props.warehouse != 'Data Lake' && (<>
-  <h4>{props.warehouse} Loader</h4>
-  <ReactMarkdown children={`
-For more information about the ${props.warehouse} Loader, see the [documentation on the available destinations](/docs/destinations/warehouses-lakes/index.md?cloud=${props.cloud}).
-  `}/>
-</>)}</>

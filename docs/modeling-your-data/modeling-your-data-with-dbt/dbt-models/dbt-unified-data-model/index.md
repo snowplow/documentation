@@ -49,28 +49,28 @@ This model consists of a series of modules, each producing a table which serves 
 - User Mapping: Provides a mapping between user identifiers, `user_identifier` and `user_id`, outputting the table `snowplow_unified_user_mapping`. This can be used for session stitching.
 
 ### Supported Entities
-While using any entity in our packages is possible thanks to [modeling entities](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/modeling-entities/index.md), a large set of common web and mobile entities are built into the processing of the package to add to your derived tables. Note these are in addition to those [required](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-quickstart/unified/index.md#requirements) to run the package.
+While using any entity in our packages is possible thanks to [modeling entities](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/modeling-entities/index.md), a large set of common web and mobile entities are built into the processing of the package to add to your derived tables.
 
-| Entity                                                                                                          | Type   | Enabled via Variable                                                                                                                                          |
-| --------------------------------------------------------------------------------------------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| [YAUAA](/docs/events/ootb-data/device-and-browser/index.md#yauaa-context-for-user-agent-parsing)                | web    | snowplow__enable_yauaa                                                                                                                                        |
-| [IAB](/docs/events/ootb-data/device-and-browser/index.md#iab-context-for-spiders-and-robots)                    | web    | snowplow__enable_iab                                                                                                                                          |
-| [UA](/docs/pipeline/enrichments/available-enrichments/ua-parser-enrichment/index.md)                            | web    | snowplow__enable_ua                                                                                                                                           |
-| [Browser](/docs/events/ootb-data/device-and-browser/index.md#browser-context)                                   | web    | snowplow\__enable_browser_context, snowplow\__enable_browser_context_2 (depending on schema versions tracked, when both are enabled the values are coalesced) |
-| [Mobile](/docs/events/ootb-data/device-and-browser/index.md#mobile-context)                                     | mobile | snowplow__enable_mobile_context                                                                                                                               |
-| [Geolocation](/docs/events/ootb-data/geolocation/index.md#geolocation-context-entity-tracked-in-apps)           | mobile | snowplow__enable_geolocation_context                                                                                                                          |
-| [Application](/docs/events/ootb-data/app-information/index.md#application-context-entity-on-mobile-apps)        | mobile | snowplow__enable_application_context                                                                                                                          |
-| [Screen](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-view-events)                        | mobile | snowplow__enable_screen_context                                                                                                                               |
-| [Deep Links](/docs/events/ootb-data/links-and-referrers/index.md#context-entity-attached-to-screen-view-events) | mobile | snowplow__enable_deep_link_context                                                                                                                            |
-| [Screen Summary](/docs/events/ootb-data/page-activity-tracking/index.md#screen-summary-entity)                  | mobile | snowplow__enable_screen_summary_context                                                                                                                       |
+| Entity                                                                                                          | Type   | Enabled via Variable                                                                                                                                            |
+| --------------------------------------------------------------------------------------------------------------- | ------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| [YAUAA](/docs/events/ootb-data/device-and-browser/index.md#user-agent-parsing)                | web    | `snowplow__enable_yauaa`                                                                                                                                        |
+| [IAB](/docs/events/ootb-data/device-and-browser/index.md#spiders-and-robots)                    | web    | `snowplow__enable_iab`                                                                                                                                          |
+| [UA](/docs/pipeline/enrichments/available-enrichments/ua-parser-enrichment/index.md)                            | web    | `snowplow__enable_ua`                                                                                                                                           |
+| [Browser](/docs/events/ootb-data/device-and-browser/index.md#browser-entity)                                   | web    | `snowplow__enable_browser_context`, `snowplow__enable_browser_context_2` (depending on schema versions tracked, when both are enabled the values are coalesced) |
+| [Mobile](/docs/events/ootb-data/device-and-browser/index.md#mobile-entity)                                     | mobile | `snowplow__enable_mobile_context`                                                                                                                               |
+| [Geolocation](/docs/events/ootb-data/geolocation/index.md#geolocation-entity)           | mobile | `snowplow__enable_geolocation_context`                                                                                                                          |
+| [Application](/docs/events/ootb-data/app-information/index.md#entity-definitions)        | mobile | `snowplow__enable_application_context`                                                                                                                          |
+| [Screen](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-entity)                        | mobile | `snowplow__enable_screen_context`                                                                                                                               |
+| [Deep links](/docs/events/ootb-data/links-and-referrers/index.md#deep-links-for-mobile) | mobile | `snowplow__enable_deep_link_context`                                                                                                                            |
+| [Screen summary](/docs/events/ootb-data/page-activity-tracking/index.md#screen-summary-entity)                  | mobile | `snowplow__enable_screen_summary_context`                                                                                                                       |
 
 ### Optional Modules
-| Module            | Docs                                                                                                                                                      | Enabled via Variable         |
-| ----------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------- |
-| Consent Reporting | [<Icon icon="fa-solid fa-book"/>](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/consent-module/index.md)         | snowplow__enable_consent     |
-| Core Web Vitals   | [<Icon icon="fa-solid fa-book"/>](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/core-web-vitals-module/index.md) | snowplow__enable_cwv         |
-| App Errors        | [<Icon icon="fa-solid fa-book"/>](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/app-errors-module/index.md)      | snowplow__enable_app_errors  |
-| Conversions       | [<Icon icon="fa-solid fa-book"/>](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/conversions/index.md)            | snowplow__enable_conversions |
+| Module                                                                                                                                    | Enabled via Variable           |
+| ----------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------ |
+| [Consent reporting](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/consent-module/index.md)       | `snowplow__enable_consent`     |
+| [Core web vitals](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/core-web-vitals-module/index.md) | `snowplow__enable_cwv`         |
+| [App errors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/app-errors-module/index.md)           | `snowplow__enable_app_errors`  |
+| [Conversions](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/conversions/index.md)                | `snowplow__enable_conversions` |
 
 
 ## Engaged vs. Absolute Time
@@ -99,7 +99,7 @@ dark: require('./images/engaged_time_dark.drawio.png').default
 />
 </p>
 
-At a session level, this calculation is slightly more involved, as it needs to happen per page view and account for [stray page pings](#stray-page-pings), but the underlying idea is the same.
+At a session level, this calculation is slightly more involved, as it needs to happen per page view and account for stray page pings (see below), but the underlying idea is the same.
 
 ### Mobile Calculation
 For Mobile we use the `screen_summary` entity from the [mobile trackers](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md#screen-engagement-tracking) for the engaged time. Check out the [mobile engagement demo](https://snowplow-incubator.github.io/mobile-screen-engagement-demo/) for a live view of this.

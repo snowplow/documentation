@@ -16,7 +16,7 @@ Now that you've defined attributes and interventions, it's time to see them work
 The demo application features:
 
 * **Product catalog**: products fetched from an external API
-* **Snowplow tracking**: the [JavaScript tracker](/docs/sources/trackers/web-trackers/) with the [ecommerce plugin](/docs/sources/trackers/web-trackers/tracking-events/ecommerce/)
+* **Snowplow tracking**: the [JavaScript tracker](/docs/sources/web-trackers/) with the [ecommerce plugin](/docs/sources/web-trackers/tracking-events/ecommerce/)
 * **Intervention display**: the [browser tracker plugin](/docs/signals/receive-interventions/#using-the-browser-tracker-plugin) to receive and show intervention banners
 * **Logging**: the app prints to the console when it tracks an event, or receives an intervention
 * **Reset functionality**: ability to clear your user data and start fresh
@@ -81,7 +81,7 @@ Follow these steps to trigger each intervention.
 
 ## Inspecting events, attributes and interventions using Snowplow Inspector
 
-We highly recommend installing the [Snowplow Inspector](/docs/data-product-studio/data-quality/snowplow-inspector) Chrome extension that lets you validate which Snowplow events are triggering on the website and also check the values of Signals attributes and interventions.
+We highly recommend installing the [Snowplow Inspector](/docs/testing/snowplow-inspector) Chrome extension that lets you validate which Snowplow events are triggering on the website and also check the values of Signals attributes and interventions.
 
 You can install the extension from the [Chrome Web Store](https://chromewebstore.google.com/detail/snowplow-inspector/maplkdomeamdlngconidoefjpogkmljm). Once you add the extension to Chrome, you can view it by [opening Developer Tools](https://developer.chrome.com/docs/devtools/open/) (usually <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>I</kbd> or on Mac <kbd>Cmd</kbd>+<kbd>Option</kbd>+<kbd>I</kbd>), where it has its own tab named 'Snowplow'. Right away, you will see the tracked events as you open a product or add a product to cart.
 

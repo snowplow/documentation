@@ -87,7 +87,7 @@ To set the property:
 
 ### First referrer
 
-The third attribute stores the first seen referrer path, based on the `refr_urlhost` [atomic event property](/docs/fundamentals/canonical-event/#platform-specific-fields).
+The third attribute stores the first seen referrer path, based on the `refr_urlhost` [atomic event property](/docs/fundamentals/canonical-event/#web-specific-fields).
 
 Create an attribute named `first_referrer`, and select `page_view` as before.
 

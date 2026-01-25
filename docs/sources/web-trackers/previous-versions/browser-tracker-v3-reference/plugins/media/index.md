@@ -40,5 +40,5 @@ newTracker('sp1', '{{collector_url}}', {
 ## Overview
 
 ```mdx-code-block
-<Media tracker="js-browser" />
+<Media platforms={["js-browser"]} />
 ```

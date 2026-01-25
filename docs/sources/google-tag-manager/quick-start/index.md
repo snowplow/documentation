@@ -46,13 +46,13 @@ The Snowplow Settings Variable template is used to configure the Snowplow tracke
 
 2. Select `Snowplow v4 Settings` from the list of available variables.
 
-3. Under `Tracker Options`, enter your Snowplow collector endpoint set up when [configuring your collector](https://docs.snowplow.io/docs/collecting-data/configuring-collector/).
+3. Under `Tracker Options`, enter your Snowplow collector endpoint set up when [configuring your collector](/docs/pipeline/collector/index.md).
 
 ![](images/variable.png)
 
 :::info
 
-You might consider using conditional variables to set the collector endpoint based on the environment, e.g. sending data to [Micro](https://docs.snowplow.io/docs/testing/snowplow-micro/)/[Mini](https://docs.snowplow.io/docs/api-reference/snowplow-mini/) collector endpoint during development.
+You might consider using conditional variables to set the Collector endpoint based on the environment, e.g. sending data to [Micro](/docs/testing/snowplow-micro/index.md)/[Mini](/docs/api-reference/snowplow-mini/index.md) Collector endpoint during development.
 
 :::
 

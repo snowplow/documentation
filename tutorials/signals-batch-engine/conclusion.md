@@ -13,8 +13,8 @@ This is the process workflow:
 * Initialize dbt projects
 * Generate models
 * Configure the projects with dbt
-* Create tables by running the models
-* Connect the tables to Signals by syncing
+* Create tables and snapshot by running dbt
+* Connect the snapshot to Signals by syncing
 
 Supported warehouses:
 * Snowflake

@@ -50,7 +50,7 @@ Once you are happy with the changes you have made you would then change the trac
 ## Features of Snowplow Mini
 
 - Data is tracked and processed in real time
-- Your Snowplow Mini speaks to your [Schema registries](/docs/fundamentals/schemas/index.md#iglu) to allow events to be sent against your custom schemas
+- Your Snowplow Mini speaks to your [Schema registries](/docs/fundamentals/schemas/index.md#iglu-schema-repository) to allow events to be sent against your custom schemas
 - Data is validated during processing
 - Data is loaded into OpenSearch and can be queried directly or through the OpenSearch Dashboard
 - Successfully processed events and failed events are in distinct good and bad indexes

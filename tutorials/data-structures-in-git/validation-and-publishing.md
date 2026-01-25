@@ -52,7 +52,7 @@ You should see output similar to this:
 
 ## Publish to development
 
-Apart from the missing descriptions everything looks good. We can fill them in later. Let's go ahead and publish our data structure to our [development](https://docs.snowplow.io/docs/data-product-studio/data-quality) environment.
+Apart from the missing descriptions everything looks good. We can fill them in later. Let's go ahead and publish our data structure to our [development](/docs/testing/) environment.
 
 ```bash
 $ snowplow-cli ds publish dev

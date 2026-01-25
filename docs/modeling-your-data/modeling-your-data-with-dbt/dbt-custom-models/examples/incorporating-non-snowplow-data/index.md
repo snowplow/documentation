@@ -16,7 +16,7 @@ Imagine you run an e-commerce site, and you are only tracking the products` SKU,
 **Example Scenario 2:**
 Wanting to incorporate additional user based information into the sessions table with the use of the external User Profiles table.
 
-In both cases what you could do is follow the recommendations on [adding a custom derived table](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/examples/adding-fields-to-derived-table/index.md#option-3:-custom-derived-table), basically by disabling the package provided derived table, copying the content of the existing derived table as is, which is normally just a select * from the upstream this_run table.
+In both cases what you could do is follow the recommendations on [adding a custom derived table](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/examples/adding-fields-to-derived-table/index.md#option-3-custom-derived-table), basically by disabling the package provided derived table, copying the content of the existing derived table as is, which is normally just a select * from the upstream this_run table.
 
 :::info
 

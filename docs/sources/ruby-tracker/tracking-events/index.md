@@ -18,13 +18,13 @@ We provide several built-in methods to help you track different kinds of events.
 
 Tracking methods supported by the Ruby Tracker:
 
-| **Method**                                              | **Event type tracked**                               |
-| ------------------------------------------------------- | ---------------------------------------------------- |
-| [`track_self_describing_event`](#self-describing-event) | Custom event based on "self-describing" JSON schema  |
-| [`track_struct_event`](#struct-event)                   | Semi-custom structured event                         |
-| [`track_page_view`](#page-view)                         | View of web page                                     |
-| [`track_screen_view`](#screen-view)                     | View of screen                                       |
-| [`track_ecommerce_transaction`](#ecommerce-transaction) | eCommerce transaction (and items in the transaction) |
+| **Method**                    | **Event type tracked**                               |
+| ----------------------------- | ---------------------------------------------------- |
+| `track_self_describing_event` | Custom event based on "self-describing" JSON schema  |
+| `track_struct_event`          | Semi-custom structured event                         |
+| `track_page_view`             | View of web page                                     |
+| `track_screen_view`           | View of screen                                       |
+| `track_ecommerce_transaction` | eCommerce transaction (and items in the transaction) |
 
 All the `track_x_event` methods share common features and parameters. Every type of event can have an optional context, Subject, and Page added. A Timestamp can also be provided for all event types to override the default event timestamp. See [the next page](/docs/sources/ruby-tracker/adding-data-events/index.md) to learn about adding extra data to events. It's important to understand how event context works, as it is one of the most powerful Snowplow features. Adding event context is a way to add depth, richness and value to all of your events.
 

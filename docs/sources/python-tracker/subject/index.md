@@ -43,7 +43,7 @@ The full set of subject methods are listed below:
 | [`set_timezone`](#set_timezone) | Set the local timezone for the Subject |
 | [`set_lang`](#set_lang) | Set the preferred language or locale of the Subject |
 | [`set_ip_address`](#set_ip_address) | Set the IP address of the Subject |
-| [`set_user_agent`](#set_user_agent) | Set the User Agent string of the Subject |
+| [`set_user_agent`](#set_useragent) | Set the User Agent string of the Subject |
 | [`set_domain_user_id`](#set_domain_user_id) | Set the Domain User ID of the Subject |
 | [`set_network_user_id`](#set_network_user_id) | Set the Network User ID of the Subject |
 | [`set_domain_session_id`](#set_domain_session_id) | Set the Domain Session ID of the Subject |
@@ -96,7 +96,7 @@ The default platform is `pc`. You can change the platform the subject is using b
 s.set_platform('mob')
 ```
 
-For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/events/index.md#application-parameters).
+For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/fundamentals/canonical-event/index.md#application-fields).
 
 ### `set_user_id`
 

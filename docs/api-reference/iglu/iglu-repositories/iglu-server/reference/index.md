@@ -11,7 +11,7 @@ This is a complete list of the options that can be configured in the Iglu Server
 
 ## License
 
-Iglu Server is released under the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.1/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).
+Iglu Server is released under the [Snowplow Limited Use License](/limited-use-license-1.1/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).
 
 To accept the terms of license and run Iglu Server, set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable. Alternatively, you can configure the `license.accept` option, like this:
 

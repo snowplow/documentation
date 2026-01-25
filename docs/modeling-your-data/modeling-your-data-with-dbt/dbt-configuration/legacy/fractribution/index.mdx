@@ -4,14 +4,13 @@ sidebar_label: "Fractribution"
 description: "Configure the legacy Fractribution dbt package for marketing attribution analysis. Superseded by the Attribution package."
 keywords: ["Fractribution configuration", "legacy attribution", "dbt fractribution package"]
 sidebar_position: 400
-hide_table_of_contents: true
 ---
 
 :::warning
 The Fractribution Package is no longer maintained, please refer to the [Attribution package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/index.md) for marketing attribution analysis with Snowplow
 :::
 
-import { DbtCongfigurationPage, JsonToTable, JsonSchemaGenerator, getSchemaVersions } from '@site/src/components/JsonSchemaValidator';
+import { DbtConfigurationPage, JsonToTable, JsonSchemaGenerator, getSchemaVersions } from '@site/src/components/JsonSchemaValidator';
 import { dump } from 'js-yaml';
 import Admonition from '@theme/Admonition';
 import DbtSchemas from "@site/docs/reusable/dbt-schemas/_index.md";
@@ -39,34 +38,44 @@ export const printYamlVariables = (data) => {
   )
 }
 
-export const MyMdxComponent = () => {
-  const schemaName = 'dbtFractribution';
-  const versions = getSchemaVersions(schemaName);
-  const label = 'dbt fractribution version';
-  const output = printYamlVariables;
-    return (
-      <DbtCongfigurationPage schemaName={schemaName} versions={versions} label={label}>
-        <JsonToTable>
-            <h2 id="Variables">Package Configuration Variables</h2>
-            <p>This package utilizes a set of variables that are configured to recommended values for optimal performance of the models. Depending on your use case, you might want to override these values by adding to your <code>dbt_project.yml</code> file.</p>
-            <Admonition type="note">
-              All variables in Snowplow packages start with `snowplow__` but we have removed these in the below tables for brevity.
-            </Admonition>
-        </JsonToTable>
-        <JsonSchemaGenerator output={output}>
-            <h2 id="Generator">Config Generator</h2>
-            <p>You can use the below inputs to generate the code that you need to place into your <code>dbt_project.yml</code> file to configure the package as you require. Any values not specified will use their default values from the package.</p>
-        </JsonSchemaGenerator>
-        <h2 id="schemas">Output Schemas</h2>
-        <DbtSchemas/>
-        <SchemaSetter output={printSchemaVariables} />
-      </DbtCongfigurationPage>
-    );
-  };
+This page helps you configure the Snowplow Fractribution dbt package. You can customize variables, generate configuration code, and set output schemas.
 
-<Admonition type="info" icon="" title = "Contents">
-  <a href="#Variables">Variables Definitions</a><br/>
-  <a href="#Generator">Config Generator</a><br/>
-  <a href="#schemas">Schema Generator</a>
-</Admonition>
-<MyMdxComponent/>
+<DbtConfigurationPage schemaName="dbtFractribution" versions={getSchemaVersions('dbtFractribution')} label="dbt fractribution version">
+
+## Package configuration variables
+
+This package utilizes a set of variables that are configured to recommended values for optimal performance of the models. Depending on your use case, you might want to override these values by adding to your `dbt_project.yml` file.
+
+:::note Variable name prefix
+All variables in Snowplow packages start with `snowplow__` but we have removed these in the below tables for brevity.
+:::
+
+### Warehouse and tracker
+
+<JsonToTable groupFilter="Warehouse and Tracker" />
+
+### Operation and logic
+
+<JsonToTable groupFilter="Operation and Logic" />
+
+### Entities (contexts), filters, and logs
+
+<JsonToTable groupFilter="Contexts, Filters, and Logs" />
+
+### Warehouse-specific
+
+<JsonToTable groupFilter="Warehouse Specific" />
+
+## Config generator
+
+You can use the below inputs to generate the code that you need to place into your `dbt_project.yml` file to configure the package as you require. Any values not specified will use their default values from the package.
+
+<JsonSchemaGenerator output={printYamlVariables} />
+
+## Output schemas
+
+<DbtSchemas/>
+
+<SchemaSetter output={printSchemaVariables} />
+
+</DbtConfigurationPage>

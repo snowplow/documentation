@@ -14,7 +14,7 @@ You can reference any field in your Snowplow events for both filters and field m
 
 ### Standard atomic fields
 
-Access [standard Snowplow fields](https://docs.snowplow.io/docs/fundamentals/canonical-event/) in your filters and mappings using JavaScript dot notation:
+Access [standard Snowplow fields](/docs/fundamentals/canonical-event/index.md) in your filters and mappings using JavaScript dot notation:
 
 ```javascript
 // Standard atomic fields

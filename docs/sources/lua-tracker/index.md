@@ -61,7 +61,7 @@ dependencies = {
 
 ### Tracking Events
 
-To track an event, simply create a tracker instance and call one of the `track_*` methods. For example, simple tracking of a [structured event](/docs/fundamentals/events/index.md#structured-events):
+To track an event, simply create a tracker instance and call one of the `track_*` methods. For example, simple tracking of a [structured event](/docs/events/custom-events/index.md#structured-events) can be done as follows:
 
 ```lua
 local snowplow = require("snowplow")

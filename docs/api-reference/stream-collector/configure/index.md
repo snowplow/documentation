@@ -10,7 +10,7 @@ This is a complete list of the options that can be configured in the collector H
 
 ### License
 
-The collector is released under the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.1/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).
+The collector is released under the [Snowplow Limited Use License](/limited-use-license-1.1/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).
 
 To accept the terms of license and run the collector, set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable. Alternatively, you can configure the `collector.license.accept` option, like this:
 

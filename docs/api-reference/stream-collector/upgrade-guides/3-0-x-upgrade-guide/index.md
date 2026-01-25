@@ -10,7 +10,7 @@ keywords: ["collector 3.0", "Akka HTTP migration", "http4s", "license acceptance
 
 ### New license
 
-Since version 3.0.0, the collector has been migrated to use the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.0/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).
+Since version 3.0.0, the collector has been migrated to use the [Snowplow Limited Use License](/limited-use-license-1.0/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).
 
 ### New HTTP stack
 
@@ -34,7 +34,7 @@ If you’ve previously used both HTTP and HTTPS ports in the collector, this fea
 
 ### License acceptance
 
-You have to explicitly accept the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.0/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)). To do so, either set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable, or update the following section in the configuration:
+You have to explicitly accept the [Snowplow Limited Use License](/limited-use-license-1.0/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)). To do so, either set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable, or update the following section in the configuration:
 
 ```hcl
 collector {

@@ -72,7 +72,7 @@ If you do not do this the package will still work, but the incremental upserts w
 
 ### 2. Adding the `selectors.yml` file
 
-Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the media player model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/index.md#yaml-selectors) section.
+Within the packages we have provided a suite of suggested selectors to run and test the models within the package together with the media player model. This leverages dbt's [selector flag](https://docs.getdbt.com/reference/node-selection/syntax). You can find out more about each selector in the [YAML Selectors](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/model-selection/index.md) section.
 
 These are defined in the `selectors.yml` file ([source](https://github.com/snowplow/dbt-snowplow-media-player/blob/main/selectors.yml)) within the package, however in order to use these selections you will need to copy this file into your own dbt project directory. This is a top-level file and therefore should sit alongside your `dbt_project.yml` file. If you are using multiple packages in your project you will need to combine the contents of these into a single file.
 
@@ -181,7 +181,7 @@ vars:
     snowplow__enable_youtube: true
 ```
 
-For other variables you can configure please see the [model configuration](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md#model-configuration) section.
+For other variables you can configure please see the [variables](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/index.md#variables) section.
 
 
 ### 7. Optimize your project
@@ -196,7 +196,7 @@ vars:
 
 ### 8. Verify your variables using our Config guides (Optional)
 
-If you are unsure whether the default values set are good enough in your case or you would already like to maximize the potential of your models, you can dive deeper into the meaning behind our variables on our [Config](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/index.mdx) page. It includes a [Config Generator](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/unified/index.mdx#Generator) to help you create all your variable configurations, if necessary.
+If you are unsure whether the default values set are good enough in your case or you would already like to maximize the potential of your models, you can dive deeper into the meaning behind our variables on our [Config](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/media-player/index.mdx) page. It includes a [Config Generator](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/media-player/index.mdx#config-generator) to help you create all your variable configurations, if necessary.
 
 
 ### 9. Run your model

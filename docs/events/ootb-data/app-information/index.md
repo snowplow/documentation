@@ -1,22 +1,20 @@
 ---
 title: "App and tracker information"
 sidebar_label: "App and tracker information"
+sidebar_position: 10
 description: "Track application and tracker metadata including version, build, platform, and namespace in atomic fields and context entities."
 keywords: ["app information", "tracker metadata", "app_id", "tracker version"]
 ---
 
-```mdx-code-block
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
-```
 
-Information about the app and the tracker instance that the events originate from is tracked using:
+Information about the application and the tracker instance that is sending the events to Snowplow can be useful for data analysis and troubleshooting issues.
 
-1. Atomic event properties
-2. Application context entity on mobile apps
+You can track this in two ways: setting [atomic event properties](/docs/fundamentals/canonical-event/index.md), or configuring the application entity.
 
-## Atomic event properties
+## Application atomic event properties
 
-These properties can be assigned across all our trackers regardless of the platform.
+These [properties](/docs/fundamentals/canonical-event/index.md#application-fields) can be assigned across all our trackers, regardless of the platform.
 
 | Atomic table field | Type | Description                                                                                          | Example values      |
 | ------------------ | ---- | ---------------------------------------------------------------------------------------------------- | ------------------- |
@@ -25,41 +23,50 @@ These properties can be assigned across all our trackers regardless of the platf
 | `platform`         | text | The platform the app runs on                                                                         | `web`, `mob`, `app` |
 | `v_tracker`        | text | Identifier for Snowplow tracker. The format follows the convention of `TRACKER_NAME-TRACKER_VERSION` | `js-2.16.2`         |
 
-:::info Tracker namespace
-The tracker namespace parameter is used to distinguish between different trackers. The name can be any string that _does not_ contain a colon or semi-colon character. Tracker namespacing allows you to run multiple trackers, pinging to different collectors.
-:::
+You can specify the tracker namespace and app ID when creating a new tracker instance.
 
-### How to track?
+The tracker platform is set automatically but can be overriden in most of our trackers. The tracker version is also set automatically.
 
-You can specify the tracker namespace and app ID when creating a new tracker instance (the `newTracker` call in the JavaScript and `Snowplow.createTracker` in mobile trackers).
-The tracker platform is set automatically but can be overriden in most of our trackers.
-The tracker version is also set automatically.
+## Application entity
 
-## Application context entity on Web apps
+You can configure your web or mobile trackers to automatically include an application entity with all tracked events.
 
-This context entity is tracked with events tracked using the JavaScript tracker starting from version 4.1.0.
-The application version is provided in the tracker configuration, [see instructions here](/docs/sources/web-trackers/tracking-events/index.md#setting-application-version).
+The included data is slightly different depending on the platform, as different schemas are used:
+* Web: `version` only
+* Mobile: `version` and `build`
+
+This table shows the support for the application entity across the main client-side Snowplow [tracker SDKs](/docs/sources/index.md). The server-side trackers don't include this entity.
+
+| Tracker                                                                                                                | Supported | Since version | Auto-tracking | Notes                                                |
+| ---------------------------------------------------------------------------------------------------------------------- | --------- | ------------- | ------------- | ---------------------------------------------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/index.md#setting-application-version)                                 | ✅         | 4.1.0         | ✅             |                                                      |
+| [iOS](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md#application-context)     | ✅         | 1.0.0         | ✅             |                                                      |
+| [Android](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md#application-context) | ✅         | 1.0.0         | ✅             |                                                      |
+| [React Native](/docs/sources/react-native-tracker/tracking-events/platform-and-application-context/index.md)           | ✅         | 4.0.0         | ✅             | Uses web or mobile schema depending on configuration |
+| [Flutter](/docs/sources/flutter-tracker/initialization-and-configuration/index.md)                                     | ✅         | 0.3.0         | ✅             | Available for mobile only                            |
+| [Roku](/docs/sources/roku-tracker/adding-data/index.md)                                                                | ✅         | 0.1.0         | ✅             |                                                      |
+| Google Tag Manager                                                                                                     | ❌         |               |               |                                                      |
+
+The native mobile trackers are able to extract the application version and build number automatically from the app metadata. For web, you need to provide the application version manually in the tracker configuration.
+
+### Entity definitions
+
+Web applications:
 
 <SchemaProperties
-  overview={{event: false, web: true, mobile: false, automatic: false}}
+  overview={{event: false}}
   example={{
     "version": "1.1.0"
   }}
   schema={{ "description": "Schema for an application context which tracks the app version.", "properties": { "version": { "type": "string", "description": "Version of the application. Can be a semver-like structure (e.g 1.1.0) or a Git commit SHA hash.", "maxLength": 255 } }, "additionalProperties": false, "type": "object", "required": [ "version" ], "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "application", "format": "jsonschema", "version": "1-0-0" }, "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#" }} />
 
 
-## Application context entity on mobile apps
-
-This context entity is automatically tracked with events on mobile apps and gives information about the app version and build number.
+Mobile applications:
 
 <SchemaProperties
-  overview={{event: false, web: false, mobile: true, automatic: true}}
+  overview={{event: false}}
   example={{
     "version": "1.1.0",
     "build": "s9f2k2d",
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for an application context which automatically tracks version number and build name when using our mobile SDK's.", "self": { "vendor": "com.snowplowanalytics.mobile", "name": "application", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "version": { "type": "string", "description": "Version number of the application e.g 1.1.0", "maxLength": 255 }, "build": { "type": "string", "description": "Build name of the application e.g s9f2k2d or 1.1.0 beta", "maxLength": 255 } }, "required": ["version", "build"], "additionalProperties": false }} />
-
-### How to track?
-
-It is tracked on our [iOS and Android trackers](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md#application-context) as well as on the [React Native](/docs/sources/react-native-tracker/tracking-events/platform-and-application-context/index.md#application-context) and Flutter tracker (when used in iOS or Android).

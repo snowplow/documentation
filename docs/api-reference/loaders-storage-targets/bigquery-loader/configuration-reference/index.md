@@ -2,7 +2,7 @@
 title: "BigQuery Loader configuration reference"
 sidebar_label: "Configuration reference"
 sidebar_position: 1
-description: "Configure BigQuery Streaming Loader with BigQuery, Kinesis, Pub/Sub, and Kafka settings for streaming enriched Snowplow events."
+description: "Configure BigQuery Streaming Loader with BigQuery, Kinesis, and Pub/Sub settings for streaming enriched Snowplow events."
 keywords: ["bigquery config", "loader configuration", "streaming config", "kinesis config", "pubsub config"]
 ---
 
@@ -14,7 +14,6 @@ import Admonition from '@theme/Admonition';
 import BigqueryConfig from '@site/docs/api-reference/loaders-storage-targets/bigquery-loader/configuration-reference/_bigquery_config.md';
 import PubsubConfig from '@site/docs/api-reference/loaders-storage-targets/bigquery-loader/configuration-reference/_pubsub_config.md';
 import KinesisConfig from '@site/docs/api-reference/loaders-storage-targets/bigquery-loader/configuration-reference/_kinesis_config.md';
-import KafkaConfig from '@site/docs/api-reference/loaders-storage-targets/bigquery-loader/configuration-reference/_kafka_config.md';
 import CommonConfig from '@site/docs/api-reference/loaders-storage-targets/bigquery-loader/configuration-reference/_common_config.md';
 ```
 
@@ -22,7 +21,7 @@ import CommonConfig from '@site/docs/api-reference/loaders-storage-targets/bigqu
 
 ### License
 
-The BigQuery Loader is released under the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.1/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).
+The BigQuery Loader is released under the [Snowplow Limited Use License](/limited-use-license-1.1/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).
 
 To accept the terms of license and run the loader, set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable. Alternatively, configure the `license.accept` option in the config file:
 
@@ -74,34 +73,6 @@ To accept the terms of license and run the loader, set the `ACCEPT_LIMITED_USE_L
           <PubsubConfig/>
         </tbody>
     </table>
-  </TabItem>
-  <TabItem value="azure" label="Azure">
-    <table>
-        <thead>
-            <tr>
-                <th>Parameter</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-          <KafkaConfig/>
-        </tbody>
-    </table>
-
-:::info Event Hubs Authentication
-
-You can use the `input.consumerConf` and `output.bad.producerConf` options to configure authentication to Azure event hubs using SASL.  For example:
-
-```json
-"input.consumerConf": {
-    "security.protocol": "SASL_SSL"
-    "sasl.mechanism": "PLAIN"
-    "sasl.jaas.config": "org.apache.kafka.common.security.plain.PlainLoginModule required username=\"\$ConnectionString\" password=<PASSWORD>;"
-}
-```
-
-:::
-
   </TabItem>
 </Tabs>
 

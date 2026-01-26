@@ -57,6 +57,12 @@ Once located, click on the name to view the data structure. You can then select 
 The **Edit with builder** option will be unavailable if the data structure you're viewing is not supported. More complex data structures must be edited with the **JSON Editor**.
 :::
 
+The same page also provides different tabs to explore related information:
+
+- **Full schema history**: View all changes made to the data structure over time
+- **Event specifications**: View all event specifications associated with the data structure
+- **Associated entities**: View all associated events and entities along with their properties, including descriptions, types, and criteria
+
 ## Promoting a data structure
 
 When you're ready to use your data structure, you need to publish it from draft status to your development environment for testing.

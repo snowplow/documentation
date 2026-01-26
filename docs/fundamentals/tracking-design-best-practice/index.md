@@ -4,7 +4,7 @@ sidebar_label: "Tracking design"
 date: "2020-02-15"
 sidebar_position: 8
 description: "Learn how to design effective behavioral data tracking by analyzing use cases, defining entities and events, and creating comprehensive tracking plans."
-keywords: ["tracking design", "tracking plan", "event specifications", "data products"]
+keywords: ["tracking design", "tracking plan", "event specifications"]
 ---
 
 Good tracking design is essential for successful data collection. This guide will help you approach the design process systematically.

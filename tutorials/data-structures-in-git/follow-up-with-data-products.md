@@ -2,8 +2,8 @@
 title: "Add GitHub workflow support for tracking plans"
 sidebar_label: "Add tracking plans"
 position: 6
-description: "Extend your Git workflow to manage source applications, data products, and event specifications using Snowplow CLI and GitHub Actions automation."
-keywords: ["data products git workflow", "source application yaml configuration"]
+description: "Extend your Git workflow to manage source applications, tracking plans, and event specifications using Snowplow CLI and GitHub Actions automation."
+keywords: ["tracking plans git workflow", "source application yaml configuration"]
 ---
 
 import TrackingPlansNomenclature from '@site/docs/reusable/tracking-plans-nomenclature/_index.md';

@@ -14,7 +14,7 @@ The [Snowplow CLI](/docs/data-product-studio/snowplow-cli/index.md) includes a l
 
 - Create and validate data structures through conversation
 - Analyze tracking requirements and suggest implementations
-- Validate data products and source applications
+- Validate tracking plans and source applications
 
 :::info Read more
 For a step-by-step guide to using the Snowplow MCP server, see the [MCP tutorial](/tutorials/snowplow-cli-mcp/introduction).
@@ -120,7 +120,7 @@ The Snowplow CLI MCP server provides these tools to your AI assistant:
 - `get_context`: to call at the start of each conversation, this tool retrieves the underlying Snowplow rules that define how Snowplow components should be structured
 - `get_uuid`: generates valid v4 UUIDs that are required by many Snowplow components
 - `validate_data_structures`: the assistant will use this validation tool after creating or modifying any data structure.
-- `validate_data_products`: the assistant will use this validation tool after creating or modifying any data product or source application file
+- `validate_data_products`: the assistant will use this validation tool after creating or modifying any tracking plan or source application file
 
 The `get_context` tool is the only one you might need to call manually.
 
@@ -128,7 +128,7 @@ The `get_context` tool is the only one you might need to call manually.
 
 To get AI support with your Snowplow tracking plans, start a new conversation and ask the assistant to call `get_context`. It might call this tool automatically if it realises it needs the Snowplow knowledge.
 
-You can then ask it for help. It has access to your existing data structures, data products, or source application definitions. The assistant will automatically validate any file changes using the included validation tools.
+You can then ask it for help. It has access to your existing data structures, tracking plans, or source application definitions. The assistant will automatically validate any file changes using the included validation tools.
 
 Use the standard [Snowplow CLI commands](/docs/data-product-studio/snowplow-cli/reference/index.md) to publish your changes to [Console](https://console.snowplowanalytics.com) when ready, using the standard Snowplow CLI commands such as `snowplow-cli ds publish`.
 

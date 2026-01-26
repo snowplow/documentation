@@ -4,7 +4,7 @@ date: "2025-01-09"
 sidebar_position: 5
 sidebar_label: "Mixpanel to Snowplow"
 description: "Migrate from Mixpanel to Snowplow with guidance on event tracking, user profiles, super properties, and warehouse modeling."
-keywords: ["mixpanel", "migration", "tracking plan", "data products", "user profiles", "super properties", "event tracking"]
+keywords: ["mixpanel", "migration", "tracking plan", "user profiles", "super properties", "event tracking"]
 ---
 
 This guide is to help technical implementers migrate from Mixpanel to Snowplow.
@@ -177,12 +177,12 @@ Snowplow requires schematic specification for all data. Every event and entity i
 
 To help maintain high data quality, Snowplow provides [monitoring](/docs/monitoring/index.md) and alerting for failed events. You can choose to load failed events into a separate table in your warehouse, or to analyze them in temporary buckets.
 
-The Snowplow equivalent to Tracking Plans is [data products](/docs/fundamentals/data-products/index.md). Each data product contains a set of related event specifications. Each event specification has one event data structure, and any number of entity data structures.
+Snowplow includes in-product management and tools for [tracking plans](/docs/fundamentals/data-products/index.md). Each tracking plan contains a set of related event specifications. Each event specification has one event data structure, and any number of entity data structures.
 
 You can use the Snowplow Console, API, or CLI to [define your tracking data structures](/docs/data-product-studio/data-products/index.md). For each event you can specify when it should be tracked, and which entities should be added. Once you've defined your event specifications, use [Snowtype](/docs/data-product-studio/snowtype/index.md) to automatically generate the tracking code snippets.
 
 :::info Snowplow CLI MCP server
-The Snowplow CLI includes an [MCP server](/docs/data-product-studio/mcp-server/index.md) to help you translate your Mixpanel Tracking Plans into Snowplow data products.
+The Snowplow CLI includes an [MCP server](/docs/data-product-studio/mcp-server/index.md) to help you translate your Mixpanel Tracking Plans into Snowplow tracking plans.
 :::
 
 ## Migration phases
@@ -203,7 +203,7 @@ Export your Tracking Plans using one of these methods:
 * Manual CSV download: download a CSV file from the Mixpanel UI for a less detailed but quick inventory of your events and properties
 * Warehouse inference: if you no longer have access to your Mixpanel account, you can infer the events and properties from your warehouse data
 
-You'll need to translate your Mixpanel Tracking Plans into Snowplow [data products](/docs/fundamentals/data-products/index.md). Some things to consider:
+You'll need to translate your Mixpanel Tracking Plans into Snowplow [tracking plans](/docs/fundamentals/data-products/index.md). Some things to consider:
 * Which platforms will you be tracking on? Different Snowplow tracker SDKs include different built-in event types. The [web](/docs/sources/web-trackers/index.md) and [native mobile](/docs/sources/mobile-trackers/index.md) trackers are the most fully featured.
 * Which Tracking Plan events can be migrated to built-in Snowplow events, and which should be custom [self-describing events](/docs/fundamentals/events/index.md#self-describing-events)?
 * How should you migrate Mixpanel super properties? These are typically best represented as global context [entities](/docs/fundamentals/entities/index.md) that are attached to all events.
@@ -211,7 +211,7 @@ You'll need to translate your Mixpanel Tracking Plans into Snowplow [data produc
 * Which events use group analytics? You'll need to define group entities for these.
 * Are there sets of event properties used in multiple places that could be defined as reusable entities instead?
 
-The goal is to create a set of JSON data structures for all your events and entities, organized into data products and [event specifications](/docs/data-product-studio/event-specifications/index.md). The best way to import your new data product tracking plans into Snowplow is to use the [Snowplow CLI](/docs/data-product-studio/snowplow-cli/index.md).
+The goal is to create a set of JSON data structures for all your events and entities, organized into tracking plans and [event specifications](/docs/data-product-studio/event-specifications/index.md). The best way to import your new tracking plan tracking plans into Snowplow is to use the [Snowplow CLI](/docs/data-product-studio/snowplow-cli/index.md).
 
 In this phase, you'll also need to decide what to do with historical data. There are two main choices:
 * Coexistence: leave historical Mixpanel data in existing tables. Write queries that combine data from both systems, using a transformation layer (for example, in dbt) to create compatible structures.
@@ -226,7 +226,7 @@ This phase involves three main tasks:
 
 Follow the [Snowplow CDI getting started instructions](/docs/get-started/private-managed-cloud/index.md) to set up your Snowplow infrastructure.
 
-If you haven't done this yet, use the [Snowplow CLI](/docs/data-product-studio/snowplow-cli/index.md) to import your new data products plan into Snowplow. You can also inspect and edit data products using the Snowplow Console. They'll be available to the Snowplow pipeline for data validation on publishing. Use the Snowplow CLI or Console to publish.
+If you haven't done this yet, use the [Snowplow CLI](/docs/data-product-studio/snowplow-cli/index.md) to import your new tracking plans into Snowplow. You can also inspect and edit tracking plans using the Snowplow Console. They'll be available to the Snowplow pipeline for data validation on publishing. Use the Snowplow CLI or Console to publish.
 
 Add Snowplow tracking in parallel with your existing Mixpanel tracking:
 * If you have a web platform, start here
@@ -236,7 +236,7 @@ Add Snowplow tracking in parallel with your existing Mixpanel tracking:
   * Use the Snowplow Inspector to confirm that the tracker is generating the expected events
   * Use [Snowplow Micro](/docs/testing/snowplow-micro/index.md) to test and validate locally
   * Finally, confirm that the tracker can also send events to your warehouse
-* Use [Snowtype](/docs/data-product-studio/snowtype/index.md) to generate custom tracking code for your data products
+* Use [Snowtype](/docs/data-product-studio/snowtype/index.md) to generate custom tracking code for your tracking plans
 * Test and validate your custom tracking using Micro as before
 * Gradually continue this process until you have a complete Mixpanel and Snowplow dual tracking implementation
 * Gradually roll out tracking to production

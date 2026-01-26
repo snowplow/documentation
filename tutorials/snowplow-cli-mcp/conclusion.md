@@ -3,16 +3,16 @@ title: "Conclusion"
 position: 6
 sidebar_label: "Conclusion"
 description: "Summary of what you learned in the Snowplow CLI MCP tool tutorial."
-keywords: ["mcp", "ai assistant", "data structures", "data products", "snowplow cli"]
+keywords: ["mcp", "ai assistant", "data structures", "tracking plans", "snowplow cli"]
 date: "2025-01-08"
 ---
 
-You've successfully set up the Snowplow CLI MCP tool and learned how to use AI assistants to manage your Snowplow data structures and data products through natural conversation.
+You've successfully set up the Snowplow CLI MCP tool and learned how to use AI assistants to manage your Snowplow data structures and tracking plans through natural conversation.
 
 In this tutorial, you:
 * Installed and configured the Snowplow CLI with an MCP-compatible AI assistant
 * Learned how to create and validate data structures using natural language prompts
-* Built complete data products including events, entities, and source applications
+* Built complete tracking plans including events, entities, and source applications
 * Published your locally created structures to Snowplow Console
 
 ## Next steps

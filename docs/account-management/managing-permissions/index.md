@@ -2,7 +2,7 @@
 title: "Available Console user permissions and roles"
 sidebar_label: "Permissions"
 sidebar_position: 2
-description: "Configure user permissions in Snowplow Console with Admin, User, and Custom roles to control access to environments, data structures, data products, data models, and API keys."
+description: "Configure user permissions in Snowplow Console with Admin, User, and Custom roles to control access to environments, data structures, tracking plans, data models, and API keys."
 keywords: ["user permissions", "role management", "access control", "Admin role", "Custom permissions", "Console permissions"]
 ---
 
@@ -16,7 +16,7 @@ Snowplow Console sets permissions for each area of Console as summarized below:
 | ------------------- | ----------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
 | User management     | The management and addition of user access. This permission cannot be configured on a Custom role.                            | No access<br/>Edit<br/>Create                                                |
 | Environments        | The management of pipeline and sandbox (Mini) environments. This includes managing which Enrichments run on each environment. | No access<br/>View<br/>Edit                                                  |
-| Tracking plans       | The management and creation of Tracking Plans                                                                                  | No access<br/>View<br/>Edit<br/>Create                                       |
+| Tracking plans      | The management and creation of tracking plans                                                                                 | No access<br/>View<br/>Edit<br/>Create                                       |
 | Data structures     | The management and creation of the schemas that define the events and entities you are capturing.                             | No access<br/>View<br/>Edit on development<br/>Edit on production<br/>Create |
 | Data models         | The management and creation of your data models.                                                                              | No access<br/>View<br/>Edit<br/>Create                                       |
 | API keys            | The management and creation of API keys.                                                                                      | View<br/>Manage<br/>Create                                                   |
@@ -37,7 +37,7 @@ There are three ways of setting user permissions:
 | ------------------- | ------------------------------ |
 | User management     | No access (in the UI)          |
 | Environments        | View access                    |
-| Tracking plans       | Edit<br/>Create                |
+| Tracking plans      | Edit<br/>Create                |
 | Data structures     | Edit on development<br/>Create |
 | Data models         | View access                    |
 | API keys            | View access                    |
@@ -48,7 +48,7 @@ There are three ways of setting user permissions:
 | ------------------- | --------------- |
 | User management     | Full access     |
 | Environments        | Full access     |
-| Tracking plans       | Full access     |
+| Tracking plans      | Full access     |
 | Data structures     | Full access     |
 | Data models         | Full access     |
 | API keys            | Full access     |
@@ -59,7 +59,7 @@ There are three ways of setting user permissions:
 | ------------------- | --------------------------- |
 | User management     | Customized by you, per user |
 | Environments        | Customized by you, per user |
-| Tracking plans       | Customized by you, per user |
+| Tracking plans      | Customized by you, per user |
 | Data structures     | Customized by you, per user |
 | Data models & jobs  | Customized by you, per user |
 | API keys            | Customized by you, per user |

@@ -29,7 +29,7 @@ The configuration consists of the `resolver-config.json` that your pipeline uses
         ],
         "connection": {
           "http": {
-            "uri": "http://iglucentral.com"
+            "uri": "https://iglucentral.com"
           }
         }
       }

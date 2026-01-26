@@ -82,7 +82,7 @@ Alternatively you can also include the standard Snowplow repository in your reso
   ],
   "connection": {
     "http": {
-      "uri": "http://iglucentral.com"
+      "uri": "https://iglucentral.com"
     }
   },
   "priority": 0

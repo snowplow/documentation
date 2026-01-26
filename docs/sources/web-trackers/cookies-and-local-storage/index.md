@@ -73,13 +73,13 @@ Local storage will only be used if `stateStorageStrategy` is set to `localSto
 
 ## Mapping values to tracker protocol
 
-The values stored in the cookies listed above are mapped into the [tracker protocol](/docs/events/index.md) when events are sent to a Snowplow Collector.
+The values stored in the cookies listed above are mapped into the [tracker protocol](/docs/fundamentals/canonical-event/index.md) when events are sent to a Snowplow Collector.
 
 The below table shows which parameters the cookie values map to:
 
-| Request Parameter | Event Parameter   | Cookie Value        |
-| ----------------- | ----------------- | ------------------- |
-| duid              | domain_userid     | _sp_id.domainUserId |
-| nuid              | network_userid    | sp                  |
-| vid               | domain_sessionidx | _sp_id.visitCount   |
-| sid               | domain_sessionid  | _sp_id.sessionId    |
+| Request Parameter | Event Parameter     | Cookie Value          |
+| ----------------- | ------------------- | --------------------- |
+| `duid`            | `domain_userid`     | `_sp_id.domainUserId` |
+| `nuid`            | `network_userid`    | `sp`                  |
+| `vid`             | `domain_sessionidx` | `_sp_id.visitCount`   |
+| `sid`             | `domain_sessionid`  | `_sp_id.sessionId`    |

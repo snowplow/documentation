@@ -8,6 +8,8 @@ keywords: ["user identification", "session tracking", "domain_userid", "user_id"
 
 Snowplow tracks several identifiers to help you understand user behavior across sessions and devices. These include tracker-generated IDs stored on the client, server-generated IDs from the Collector, and business user IDs you set in your app. Understanding how these identifiers work enables you to build a complete picture of user journeys and perform identity stitching in your data models.
 
+Read more about tracking identifiers in the [OOTB user and session data](/docs/events/ootb-data/user-and-session-identification/index.md) page.
+
 ## User identifiers
 
 ### Tracker (in-browser/on-device) generated user identifier

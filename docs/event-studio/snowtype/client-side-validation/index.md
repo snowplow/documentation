@@ -113,7 +113,7 @@ A similar warning will occur when there is a cardinality rule set for an entity,
 This feature is available since version 0.10.0 of Snowtype for the [Browser Tracker](/docs/sources/web-trackers/quick-start-guide/index.md?platform=browser) in both TypeScript and JavaScript.
 :::
 
-Property rules are [specific instructions](/docs/event-studio/event-specifications/index.md#properties) you can add in every schema that takes part in an Event Specification. This capability will allow you to adjust the expected values specifically to this event. E.g.
+Property rules are [specific instructions](/docs/event-studio/event-specifications/tracking-plans/index.md) you can add in every schema that takes part in an Event Specification. This capability will allow you to adjust the expected values specifically to this event. E.g.
 
 - The `category` attribute of the `product` entity is expected to take the values of "related" or "cross-sell" for this Event Specification
 

@@ -35,7 +35,7 @@ This table shows the support for button click tracking across the main client-si
 | Roku                                                                              | ❌         |               |               |                                     |
 | [Google Tag Manager](/docs/sources/google-tag-manager/snowplow-template/index.md) | ✅         | v4            | ✅             | Integrates with button click plugin |
 
-We recommend using the [Base web tracking plan template](/docs/data-product-studio/data-products/data-product-templates/index.md#base-web) for web tracking. It includes button clicks.
+We recommend using the [Base web tracking plan template](/docs/event-studio/tracking-plans/tracking-plan-templates/index.md#base-web) for web tracking. It includes button clicks.
 
 <SchemaProperties
   overview={{event: true}}

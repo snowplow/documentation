@@ -7,7 +7,7 @@ sidebar_label: "Install the Snowplow CLI"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-To use the Snowplow MCP tools with your AI assistant, you'll need to install and authenticate the [Snowplow CLI](/docs/data-product-studio/snowplow-cli).
+To use the Snowplow MCP tools with your AI assistant, you'll need to install and authenticate the [Snowplow CLI](/docs/event-studio/snowplow-cli).
 
 ## Install
 
@@ -56,4 +56,4 @@ Use the built-in `setup` command to authenticate the Snowplow CLI with your Snow
 snowplow-cli setup
 ```
 
-For more details on configuring the Snowplow CLI, check out the [main documentation](/docs/data-product-studio/snowplow-cli).
+For more details on configuring the Snowplow CLI, check out the [main documentation](/docs/event-studio/snowplow-cli).

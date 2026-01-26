@@ -15,17 +15,22 @@ There are significant differences between Adobe Analytics and Snowplow as data p
 
 This table shows some key differences:
 
-| Feature                 | Adobe Analytics                                                                                       | Snowplow                                                                                                                                                                    |
-| ----------------------- | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Capturing user behavior | Uses `s.t()` for page views, `s.tl()` for link tracking, with props and eVars                         | Direct tracker SDK calls for built-in or custom [event](/docs/fundamentals/events/index.md) types                                                                           |
-| Contextual event data   | Stored in props (hit-scoped), eVars (visit or visitor-scoped), and events (counters/currency)         | Included in the event as reusable [entities](/docs/fundamentals/entities/index.md) with explicit schemas                                                                    |
-| User identity           | Visitor ID (cookie-based) with optional custom identifiers via `s.visitorID`                          | Domain user ID (cookie-based) with optional custom identifiers via `setUserId`                                                                                              |
-| Warehouse tables        | Data Feeds export to flat files with numbered columns (prop1-prop75, eVar1-eVar250, event1-event1000) | In [most warehouses](/docs/destinations/warehouses-lakes/index.md), one big table with columns for every event or entity; in Redshift, one table per custom event or entity |
-| Data validation         | Processing rules and VISTA rules for transformation; no schema validation                             | All events and entities defined by JSON schemas                                                                                                                             |
+| Feature                 | Adobe Analytics                                                                                       | Snowplow                                                                                                                                                                              |
+| ----------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Capturing user behavior | Uses numbered variables                                                                               | Direct tracker calls for built-in or custom [event](/docs/fundamentals/events/index.md) types, including contextual data as reusable [entities](/docs/fundamentals/entities/index.md) |
+| Warehouse tables        | Data Feeds export to flat files with numbered columns (prop1-prop75, eVar1-eVar250, event1-event1000) | In [most warehouses](/docs/destinations/warehouses-lakes/index.md), one big table with columns for every event or entity; in Redshift, one table per custom event or entity           |
+| Data validation         | Processing rules and VISTA rules for transformation; no schema validation                             | All events and entities defined by JSON schemas                                                                                                                                       |
 
 ### Event structure
 
 Adobe Analytics uses two primary tracking methods: `s.t()` for page views and `s.tl()` for custom link tracking. Data is captured through props, eVars, and events.
+
+Each of these types uses numbered variables with different persistence scopes:
+* Props (`s.prop1-75`): hit-scoped traffic variables that expire after the hit
+* eVars (`s.eVar1-250`): conversion variables with configurable expiration (hit, visit, visitor, or specific events)
+* Events (`event1-1000`): counters and currency values for success metrics
+
+This numbered variable system requires external documentation to map variable numbers to business meanings. For example, `eVar5` might represent "campaign code" in one implementation and "product category" in another.
 
 Here's an example Adobe Analytics web ecommerce implementation. The code sets various variables before calling the tracking method:
 
@@ -70,48 +75,6 @@ As well as the tracking code looking different, there are key differences in the
 Snowplow tracker SDKs provide built-in methods for tracking page views and screen views, along with many other kinds of events. The additional entities added depend on which Snowplow SDK you're using, and which [enrichments](/docs/pipeline/enrichments/index.md) you've configured.
 
 Snowplow provides out-of-the-box [dbt data models](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md) for initial modeling and common analytics use cases.
-
-### Props, eVars, and entities
-
-Adobe Analytics uses numbered variables with different persistence scopes:
-* **Props** (`s.prop1-75`): hit-scoped traffic variables that expire after the hit
-* **eVars** (`s.eVar1-250`): conversion variables with configurable expiration (hit, visit, visitor, or specific events)
-* **Events** (`event1-1000`): counters and currency values for success metrics
-
-This numbered variable system requires external documentation to map variable numbers to business meanings. For example, `eVar5` might represent "campaign code" in one implementation and "product category" in another.
-
-In Snowplow, this contextual data is captured using [entities](/docs/fundamentals/entities/index.md) with explicit JSON schemas:
-
-```javascript
-// Adobe Analytics approach
-s.eVar1 = 'summer-sale';     // campaign_code (need documentation)
-s.eVar2 = 'email';           // marketing_channel (need documentation)
-s.prop1 = 'homepage';        // page_type (need documentation)
-
-// Snowplow approach with explicit schema
-snowplow('trackPageView', {
-  context: [{
-    schema: 'iglu:com.acme/marketing_context/jsonschema/1-0-0',
-    data: {
-      campaign_code: 'summer-sale',
-      marketing_channel: 'email'
-    }
-  }, {
-    schema: 'iglu:com.acme/page_context/jsonschema/1-0-0',
-    data: {
-      page_type: 'homepage'
-    }
-  }]
-});
-```
-
-The key advantages of the Snowplow approach:
-* Schema names describe the data's meaning
-* Property names are explicit, not numbered
-* Entities can be reused across different event types
-* Schema validation ensures data quality
-
-When planning your migration, map each prop and eVar to an appropriate entity. Group related variables into logical entities. For example, marketing-related eVars might become a single `marketing` entity.
 
 ### Tracking comparison
 

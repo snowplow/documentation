@@ -189,7 +189,7 @@ createTracker(
   </TabItem>
 </Tabs>
 
-## Tracker support TODO TNT flutter tracker add identifier tables NB distingusih web and mobile? take out reusable block?
+## Tracker support
 
 This table shows the support for anonymous tracking across the main [Snowplow tracker SDKs](/docs/sources/index.md):
 

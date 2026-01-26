@@ -7,7 +7,7 @@ description: "Migrate from Adobe Analytics to Snowplow with guidance on event tr
 keywords: ["adobe analytics", "migration", "tracking plan", "data products", "evars", "props", "event tracking", "adobe experience platform"]
 ---
 
-This guide is to help technical implementers migrate from Adobe Analytics to Snowplow.
+This guide is to help technical implementers migrate from Adobe Analytics to Snowplow. For more advice on tracking plans, check out our [best practices guide](/docs/fundamentals/tracking-design-best-practice/index.md).
 
 ## Platform differences
 
@@ -23,7 +23,7 @@ This table shows some key differences:
 
 ### Event structure
 
-Adobe Analytics uses two primary tracking methods: `s.t()` for page views and `s.tl()` for custom link tracking. Data is captured through props, eVars, and events.
+Adobe Analytics uses two primary [tracking methods](https://experienceleague.adobe.com/en/docs/analytics/implementation/vars/functions/overview#): `s.t()` for page views and `s.tl()` for custom link tracking. Data is captured through props, eVars, and events.
 
 Each of these types uses numbered variables with different persistence scopes:
 * Props (`s.prop1-75`): hit-scoped traffic variables that expire after the hit
@@ -93,7 +93,7 @@ This table shows how Adobe Analytics tracking maps to Snowplow tracking:
 
 ### Persistence and scope
 
-Adobe Analytics eVars have configurable persistence: they can expire after a hit, visit, or specific time period, or persist until a conversion event. This persistence is handled server-side by Adobe.
+Adobe Analytics eVars have [configurable persistence](https://experienceleague.adobe.com/en/docs/analytics/components/dimensions/evar#): they can expire after a hit, visit, or specific time period, or persist until a conversion event. This persistence is handled server-side by Adobe.
 
 Snowplow takes an event-centric approach where each event is self-contained. There's no built-in persistence mechanism. Instead, you have two options:
 

@@ -2,7 +2,7 @@
   "title": "Track web events with base tracking plans",
   "label": "Data governance",
   "description": "Use the Snowplow Console to create and manage tracking plans for a web application.",
-  "useCases": ["Composable analytics"],
+  "useCase": "Composable analytics",
   "technologies": [],
   "snowplowTech": ["Snowtype", "Console"]
 }

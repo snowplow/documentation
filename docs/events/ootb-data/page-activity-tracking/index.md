@@ -1,70 +1,77 @@
 ---
 title: "Page and screen engagement"
+sidebar_label: "Page and screen engagement"
+sidebar_position: 120
+description: "Measure user engagement time and scrolling depth using page ping events on web and screen summary entities on mobile."
+keywords: ["page pings", "activity tracking", "scroll tracking", "engagement tracking", "screen summary"]
 ---
 
-```mdx-code-block
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
-```
 
-Page or screen activity (engagement) tracking enables you to measure the time users spent engaged on a page or screen and the extent of the page/screen they viewed.
-There are two mechanisms that the activity tracking is implemented:
+Activity or engagement tracking enables you to measure the time a user spent engaged on a page or screen, and the extent of the page or screen they viewed.
 
-1. Using page ping events on Web.
-2. Using the screen summary entity on mobile.
+Snowplow provides implementations for web and mobile platforms:
+* Page ping events on web
+* Screen summary entity on mobile
 
-## On Web using page ping events
+Both page and screen activity tracking are included in the [Snowplow Unified Digital package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) to calculate engagement metrics. The legacy [Web package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/index.md) handles page pings as well.
 
-Page pings are used to record users engaging with content on a web page after it has originally loaded. For example, it can be used to track how far down an article a user scrolls.
+## Page engagement
 
-If enabled, the [activity tracking function](/docs/sources/web-trackers/tracking-events/activity-page-pings/index.md) checks for engagement with a page after load. (E.g. mousemovement, scrolling etc...).
+Page ping events record users engaging with content on a web page after it has initially loaded. This includes scroll position.
 
-Page pings are identified by `e=pp`. As well as all the standard web fields, there are four additional fields that `pp` includes, which are used to identify how users are scrolling over web pages:
+Where activity autotracking is available, you can configure your tracker to send page ping events at regular intervals. They're considered a type of "heartbeat" event that indicates the user is still present and engaging with the page.
 
-| Atomic Table Column | Type    | Description                                        | Example values |
-| ------------------- | ------- | -------------------------------------------------- | -------------- |
-| `pp_xoffset_min`    | integer | Minimum page x offset seen in the last ping period | `0`            |
-| `pp_xoffset_max`    | integer | Maximum page x offset seen in the last ping period | `100`          |
-| `pp_yoffset_min`    | integer | Minimum page y offset seen in the last ping period | `0`            |
-| `pp_yoffset_max`    | integer | Maximum page y offset seen in the last ping period | `100`          |
+Page ping events are [baked-in events](/docs/fundamentals/events/index.md) that have no schema. They populate the [page offset atomic event parameters](/docs/fundamentals/canonical-event/index.md#baked-in-event-fields).
 
-## On mobile
+This table shows the support for page ping tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md). Python is the only server-side tracker that provides page ping events.
 
-:::note
-Screen engagement tracking is available for native Android and iOS apps starting with version 6 of the trackers.
-:::
+| Tracker                                                                            | Supported | Since version | Auto-tracking | Notes                              |
+| ---------------------------------------------------------------------------------- | --------- | ------------- | ------------- | ---------------------------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/activity-page-pings/index.md)     | ✅         | 0.10.0        | ✅             |                                    |
+| iOS                                                                                | ❌         |               |               |                                    |
+| Android                                                                            | ❌         |               |               |                                    |
+| React Native                                                                       | ❌         |               |               |                                    |
+| [Flutter](/docs/sources/flutter-tracker/initialization-and-configuration/index.md) | ✅         | 0.1.0         | ✅             | Only on web                        |
+| Roku                                                                               | ❌         |               |               |                                    |
+| [Python](/docs/sources/python-tracker/tracking-specific-events/index.md)           | ✅         | 0.8.0         | ❌             | Detect activity and track manually |
+| [Google Tag Manager](/docs/sources/google-tag-manager/snowplow-template/index.md)  | ✅         | v3            | ✅             |                                    |
 
-Screen engagement information is tracked on our mobile trackers in the `screen_summary` context entity.
-The entity is tracked along with these events:
+We recommend using the [Base web data product template](/docs/data-product-studio/data-products/data-product-templates/index.md#base-web) for web tracking. It includes page pings.
 
-1. `application_foreground` and `application_background` events (see [lifecycle events](/docs/events/ootb-data/mobile-lifecycle-events/index.md)).
-2. `screen_end` event (see below).
+## Screen engagement
 
-### Screen summary entity
+Use screen engagement tracking on mobile to track a `screen_end` event when a user navigates away from a screen.
 
-Entity that contains the screen engagement information.
+The trackers can also track a `screen_summary` entity that contains screen engagement data. This entity is sent along with [lifecycle](/docs/events/ootb-data/mobile-lifecycle-events/index.md) and `screen_end` events.
 
-<SchemaProperties
-  overview={{event: false, web: false, mobile: true, automatic: true}}
-  example={{ foreground_sec: 10.2, background_sec: 3.1, last_item_index: 11, items_count: 50, min_x_offset: 0, max_x_offset: 400, min_y_offset: 0, max_y_offset: 1000, content_width: 400, content_height: 5000 }}
-  schema={{ "description": "Schema for an entity tracked with foreground/background/screen_end events with summary statistics about the screen view", "properties": { "foreground_sec": { "type": "number", "description": "Time in seconds spent on the current screen while the app was in foreground", "minimum": 0, "maximum": 2147483647 }, "background_sec": { "type": [ "number", "null" ], "description": "Time in seconds spent on the current screen while the app was in background", "minimum": 0, "maximum": 2147483647 }, "last_item_index": { "type": [ "integer", "null" ], "description": "Index of the last viewed item in the list on the screen", "minimum": 0, "maximum": 65535 }, "items_count": { "type": [ "integer", "null" ], "description": "Total number of items in the list on the screen", "minimum": 0, "maximum": 65535 }, "min_x_offset": { "type": [ "integer", "null" ], "description": "Minimum horizontal scroll offset on the scroll view in pixels", "minimum": -2147483647, "maximum": 2147483647 }, "max_x_offset": { "type": [ "integer", "null" ], "description": "Maximum horizontal scroll offset on the scroll view in pixels", "minimum": -2147483647, "maximum": 2147483647 }, "min_y_offset": { "type": [ "integer", "null" ], "description": "Minimum vertical scroll offset on the scroll view in pixels", "minimum": -2147483647, "maximum": 2147483647 }, "max_y_offset": { "type": [ "integer", "null" ], "description": "Maximum vertical scroll offset on the scroll view in pixels", "minimum": -2147483647, "maximum": 2147483647 }, "content_width": { "type": [ "integer", "null" ], "description": "Width of the scroll view in pixels", "minimum": 0, "maximum": 2147483647 }, "content_height": { "type": [ "integer", "null" ], "description": "Height of the scroll view in pixels", "minimum": 0, "maximum": 2147483647 } }, "additionalProperties": false, "type": "object", "required": [ "foreground_sec" ], "self": { "vendor": "com.snowplowanalytics.mobile", "name": "screen_summary", "format": "jsonschema", "version": "1-0-0" }, "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#" }} />
+This table shows the support for screen engagement tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md). The server-side trackers don't include screen engagement tracking.
+
+| Tracker                                                                                                                | Supported | Since version | Auto-tracking | Notes          |
+| ---------------------------------------------------------------------------------------------------------------------- | --------- | ------------- | ------------- | -------------- |
+| Web                                                                                                                    | ❌         |               |               |                |
+| [iOS](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md#screen-engagement-tracking)               | ✅         | 6.0.0         | ✅             |                |
+| [Android](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md#screen-engagement-tracking)           | ✅         | 6.0.0         | ✅             |                |
+| [React Native](/docs/sources/react-native-tracker/tracking-events/screen-tracking/index.md#screen-engagement-tracking) | ✅         | 2.1.0         | ✅             | Only on mobile |
+| [Flutter](/docs/sources/flutter-tracker/tracking-events/index.md#screen-engagement-tracking)                           | ✅         | 0.1.0         | ✅             | Only on mobile |
+| Roku                                                                                                                   | ❌         |               |               |                |
+| Google Tag Manager                                                                                                     | ❌         |               |               |                |
+
+We recommend using the [Base mobile data product template](/docs/data-product-studio/data-products/data-product-templates/index.md#base-mobile) for mobile tracking. It includes screen end events.
 
 ### Screen end event
 
-This event is tracked automatically by the mobile trackers just before the transition to the next screen.
-
-The event has no properties.
+This event can be tracked automatically by the mobile trackers just before the transition to the next screen. It has no properties.
 
 <SchemaProperties
-  overview={{event: true, web: false, mobile: true, automatic: true}}
+  overview={{event: true}}
   schema={{ "description": "Schema for an event tracked before transitioning to a new screen", "properties": {}, "additionalProperties": false, "type": "object", "self": { "vendor": "com.snowplowanalytics.mobile", "name": "screen_end", "format": "jsonschema", "version": "1-0-0" }, "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#" }} />
 
-## How to track
+### Screen summary entity
 
-To track page activity on Web, see the [activity tracking documentation](/docs/sources/web-trackers/tracking-events/activity-page-pings/index.md).
+Entity that contains screen engagement information, including how long a user spends on a screen in the foreground and background, as well as scroll depth.
 
-To track screen engagement on mobile, see the [screen engagement documentation](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md#screen-engagemement-tracking).
-
-## Use in modeling
-
-Page and screen activity events are used by our [Snowplow Unified Package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md) (starting from version 0.2.0) to calculate page engagement metrics.
-The [Snowplow Web Package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/index.md) can process page ping events.
+<SchemaProperties
+  overview={{event: false}}
+  example={{ foreground_sec: 10.2, background_sec: 3.1, last_item_index: 11, items_count: 50, min_x_offset: 0, max_x_offset: 400, min_y_offset: 0, max_y_offset: 1000, content_width: 400, content_height: 5000 }}
+  schema={{ "description": "Schema for an entity tracked with foreground/background/screen_end events with summary statistics about the screen view", "properties": { "foreground_sec": { "type": "number", "description": "Time in seconds spent on the current screen while the app was in foreground", "minimum": 0, "maximum": 2147483647 }, "background_sec": { "type": [ "number", "null" ], "description": "Time in seconds spent on the current screen while the app was in background", "minimum": 0, "maximum": 2147483647 }, "last_item_index": { "type": [ "integer", "null" ], "description": "Index of the last viewed item in the list on the screen", "minimum": 0, "maximum": 65535 }, "items_count": { "type": [ "integer", "null" ], "description": "Total number of items in the list on the screen", "minimum": 0, "maximum": 65535 }, "min_x_offset": { "type": [ "integer", "null" ], "description": "Minimum horizontal scroll offset on the scroll view in pixels", "minimum": -2147483647, "maximum": 2147483647 }, "max_x_offset": { "type": [ "integer", "null" ], "description": "Maximum horizontal scroll offset on the scroll view in pixels", "minimum": -2147483647, "maximum": 2147483647 }, "min_y_offset": { "type": [ "integer", "null" ], "description": "Minimum vertical scroll offset on the scroll view in pixels", "minimum": -2147483647, "maximum": 2147483647 }, "max_y_offset": { "type": [ "integer", "null" ], "description": "Maximum vertical scroll offset on the scroll view in pixels", "minimum": -2147483647, "maximum": 2147483647 }, "content_width": { "type": [ "integer", "null" ], "description": "Width of the scroll view in pixels", "minimum": 0, "maximum": 2147483647 }, "content_height": { "type": [ "integer", "null" ], "description": "Height of the scroll view in pixels", "minimum": 0, "maximum": 2147483647 } }, "additionalProperties": false, "type": "object", "required": [ "foreground_sec" ], "self": { "vendor": "com.snowplowanalytics.mobile", "name": "screen_summary", "format": "jsonschema", "version": "1-0-0" }, "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#" }} />

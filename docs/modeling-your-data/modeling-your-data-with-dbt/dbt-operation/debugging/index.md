@@ -1,6 +1,8 @@
 ---
-title: "Debugging data modeling issues"
-description: "Guide for debugging data modeling issues"
+title: "Debug data modeling issues"
+sidebar_label: "Debugging data modeling issues"
+description: "Guide for debugging data modeling issues including execution errors, missing data, and unexpected results."
+keywords: ["dbt debugging", "data modeling errors", "troubleshooting dbt"]
 sidebar_position: 10
 ---
 

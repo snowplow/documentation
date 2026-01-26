@@ -1,6 +1,8 @@
 ---
 title: "Incremental sessionization logic"
+sidebar_label: "Incremental sessionization logic"
 description: "A detailed overview of our incremental run logic using manifest tables."
+keywords: ["incremental sessionization", "sessionization logic", "manifest tables", "incremental processing"]
 sidebar_position: 10
 ---
 

@@ -1,7 +1,9 @@
 ---
-title: "Tracking generic site timings on web"
+title: "Track generic site timings on web"
 sidebar_label: "Generic timing"
 sidebar_position: 98
+description: "Track custom timing events to measure how long resources take to load or user actions take to complete with category and label organization."
+keywords: ["timing events", "performance"]
 ---
 
 ```mdx-code-block

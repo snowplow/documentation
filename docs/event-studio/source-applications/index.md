@@ -1,9 +1,9 @@
 ---
-title: "Organize data sources with Source Applications"
+title: "Organize data sources with source applications"
 date: "2020-02-15"
 sidebar_position: 2
 sidebar_label: "Source applications"
-description: "Document and manage your tracking implementation across different applications with Source Applications in Event Studio."
+description: "Document and manage your tracking implementation across different applications with source applications in Event Studio."
 keywords: ["source applications", "app id", "application entities", "global context", "data sources"]
 ---
 
@@ -35,7 +35,7 @@ Source Applications are a foundational component that enables you to establish t
 
 ## Application IDs
 
-Each Source Application should have a unique application ID to distinguish it in analysis. For each of these applications you would set up a unique application ID using the [`app_id`](/docs/events/ootb-data/app-information/index.md#atomic-event-properties) field to distinguish them later on in analysis.
+Each Source Application should have a unique application ID to distinguish it in analysis. For each of these applications you would set up a unique application ID using the [`app_id`](/docs/events/ootb-data/app-information/index.md#application-atomic-event-properties) field to distinguish them later on in analysis.
 
 :::tip
 We often see, and recommend as a best practice, setting up a unique application ID for each deployment environment you are using. For example, `${appId}-qa` for staging and `${appId}-dev` for development environments.

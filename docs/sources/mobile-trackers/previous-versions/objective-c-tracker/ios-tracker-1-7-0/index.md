@@ -2,6 +2,9 @@
 title: "iOS Tracker (1.7.0)"
 date: "2021-04-02"
 sidebar_position: -10
+sidebar_label: "iOS Tracker (1.7.0)"
+description: "Documentation for iOS Tracker version 1.7.0 supporting iOS, macOS, tvOS, and watchOS."
+keywords: ["ios 1.7.0", "tracker"]
 ---
 
 The iOS tracker supports **iOS 8.0+**, **macOS 10.9+**, **tvOS 9.0+** and **watchOS 2.0+**
@@ -279,7 +282,7 @@ On the tracker setup you can override the device platform entry calling:
 
 It resets the parameter `p` (platform) to the new value.
 
-[Here](/docs/events/index.md#application-parameters) a full list of the supported platform values.
+[Here](/docs/fundamentals/canonical-event/index.md#application-fields) a full list of the supported platform values.
 
 ### Sending events
 

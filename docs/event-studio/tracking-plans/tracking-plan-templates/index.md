@@ -1,8 +1,10 @@
 ---
 title: "Tracking plan templates"
-date: "2024-06-17"
 sidebar_label: "Using tracking plan templates"
+date: "2024-06-17"
 sidebar_position: 2
+description: "Pre-defined tracking plan templates for Base Web, Base Mobile, Ecommerce, and Media tracking with included event specifications and implementation guidance."
+keywords: ["tracking plan templates", "Base Web template", "Base Mobile template", "ecommerce template", "media tracking template"]
 ---
 
 To create a new tracking plan based on a pre-defined template, navigate to the "Tracking plans" section from the navigation bar and click the "Create tracking plan" or "Templates" buttons.
@@ -34,9 +36,9 @@ Note: The event volume counts are calculated differently for this Tracking Plan.
 
 Included event specifications:
 
-* [Screen view](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-view-events)
+* [Screen view](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-views)
 * [Screen end](/docs/events/ootb-data/page-activity-tracking/index.md#screen-end-event)
-* [Application install](/docs/events/ootb-data/mobile-lifecycle-events/index.md#install-event)
+* [Application install](/docs/events/ootb-data/mobile-lifecycle-events/index.md#install-events)
 * [Application background](/docs/events/ootb-data/mobile-lifecycle-events/index.md#background-event)
 * [Application foreground](/docs/events/ootb-data/mobile-lifecycle-events/index.md#foreground-event)
 

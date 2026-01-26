@@ -1,24 +1,26 @@
 ---
-title: "Configuring a subject with the Unity tracker"
+title: "Configure a subject with the Unity tracker"
 sidebar_label: "Subject"
 date: "2020-02-26"
 sidebar_position: 60
+description: "Configure subject properties including user ID, screen resolution, viewport, timezone, and language to attach user context to all tracked events."
+keywords: ["unity subject configuration", "unity user context", "unity tracker user properties"]
 ---
 
 You may have additional information about your application's environment, current user and so on, which you want to send to Snowplow with each event.
 
 The Subject class has a set of `Set...()` methods to attach extra data relating to the user to all tracked events:
 
-- [`SetUserId`](#set-user-id)
-- [`SetScreenResolution`](#set-screen-resolution)
-- [`SetViewport`](#set-viewport)
-- [`SetColorDepth`](#set-color-depth)
-- [`SetTimezone`](#set-timezone)
-- [`SetLanguage`](#set-language)
-- [`SetIpAddress`](#set-ip-address)
-- [`SetUseragent`](#set-useragent)
-- [`SetNetworkUserId`](#set-network-user-id)
-- [`SetDomainUserId`](#set-domain-user-id)
+- `SetUserId`
+- `SetScreenResolution`
+- `SetViewport`
+- `SetColorDepth`
+- `SetTimezone`
+- `SetLanguage`
+- `SetIpAddress`
+- `SetUseragent`
+- `SetNetworkUserId`
+- `SetDomainUserId`
 
 Here are some examples:
 

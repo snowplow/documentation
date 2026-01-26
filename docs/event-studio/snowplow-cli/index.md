@@ -1,7 +1,9 @@
 ---
-title: Snowplow CLI
-sidebar_label: Snowplow CLI
+title: "Snowplow CLI for data management"
+sidebar_label: "Snowplow CLI"
 sidebar_position: 7
+description: "Command-line tool for downloading and publishing data structures and tracking plans to Snowplow Console, enabling git-ops workflows with reviews and branching."
+keywords: ["Snowplow CLI", "command line", "git-ops", "data structures CLI", "tracking plans CLI", "MCP server"]
 ---
 
 import Tabs from '@theme/Tabs';

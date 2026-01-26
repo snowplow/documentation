@@ -1,6 +1,10 @@
 ---
-title: "Migrating from v2 to v4"
+title: "Migrate from v2 to v4"
+sidebar_label: "Migrating from v2 to v4"
+date: "2021-08-09"
 sidebar_position: 90
+description: "Migration guide for upgrading React Native tracker from v2 to v4 with JavaScript-only architecture, new platform support, and configuration changes."
+keywords: ["react native tracker v2 to v4", "migration guide", "javascript-only tracker"]
 ---
 
 Version 4 of the React Native tracker brings a significant rearchitecture of the tracker, which is now JavaScript-only instead of building on top of the iOS and Android native trackers.
@@ -42,7 +46,7 @@ Read more [in the documentation here](/docs/sources/react-native-tracker/trackin
 ### Removed geolocation context entity
 
 The geolocation context entity is no longer available to be tracked by the tracker.
-You may track it manually using global context and [the geolocation schema](/docs/events/ootb-data/geolocation/index.md#geolocation-context-entity-tracked-in-apps).
+You may track it manually using global context and [the geolocation schema](/docs/events/ootb-data/geolocation/index.md#geolocation-entity).
 
 ### Removed exception and diagnostic autotracking
 

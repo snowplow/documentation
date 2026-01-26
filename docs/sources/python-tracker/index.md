@@ -1,7 +1,10 @@
 ---
-title: "Python tracker"
+title: "Python tracker SDK"
+sidebar_label: "Python tracker"
 date: "2023-06-14"
 sidebar_position: 200
+description: "Track events in Python applications and games with the Snowplow Python tracker SDK using subjects, emitters, and trackers."
+keywords: ["python tracker", "python analytics", "pypi package"]
 ---
 
 ```mdx-code-block

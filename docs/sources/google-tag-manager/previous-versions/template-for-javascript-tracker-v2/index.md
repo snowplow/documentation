@@ -1,7 +1,10 @@
 ---
-title: JavaScript Tracker v2 Templates 
+title: "JavaScript Tracker v2 Templates"
+sidebar_label: "JavaScript Tracker v2 Templates"
 date: "2021-11-18"
 sidebar_position: 1000
+description: "Deploy Snowplow JavaScript tracker v2 through Google Tag Manager using legacy custom templates. Configure Snowplow Analytics and Settings templates from the GTM gallery for v2 tracker deployment."
+keywords: ["javascript tracker v2", "gtm v2 templates", "legacy tracker v2", "snowplow analytics template", "gtm v2 settings"]
 ---
 
 Snowplow JavaScript Tracker v2 can now be deployed directly with Google Tag Manager via a Custom Template. This is available in the [Tag Manager Template Gallery](https://tagmanager.google.com/gallery/#/owners/snowplow/templates/snowplow-gtm-custom-template).

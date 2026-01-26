@@ -2,6 +2,8 @@
 title: "Retrieve data model execution data"
 sidebar_position: 3
 sidebar_label: "Retrieve job execution data"
+description: "Retrieve data model execution data via API for monitoring and integration with alerting infrastructure."
+keywords: ["job execution API", "data model monitoring", "warehouse jobs API", "execution data"]
 ---
 
 The API that powers the warehouse jobs monitoring view in Snowplow Console (Jobs) is also available for consumption by other authenticated clients.

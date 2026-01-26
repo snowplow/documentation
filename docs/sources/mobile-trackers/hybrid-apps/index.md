@@ -1,8 +1,10 @@
 ---
-title: "Hybrid apps with the native mobile trackers"
+title: "Track events from hybrid apps with the native mobile trackers"
 sidebar_label: "Hybrid mobile and web apps"
 date: "2022-08-30"
 sidebar_position: 70
+description: "Track events from both native mobile code and embedded WebViews in hybrid apps using unified session tracking."
+keywords: ["hybrid apps", "webview tracking", "mobile web integration"]
 ---
 
 ```mdx-code-block

@@ -1,7 +1,10 @@
 ---
 title: "Support for Expo"
+sidebar_label: "Support for Expo"
 date: "2022-02-03"
 sidebar_position: 35
+description: "Use React Native tracker v2 with Expo framework in bare workflow or managed workflow with limited JavaScript-only functionality."
+keywords: ["react native tracker v2 expo", "expo go support", "managed workflow"]
 ---
 
 The React Native tracker supports the [Expo framework](https://expo.dev/). However, the support is different for the bare and the managed workflow.

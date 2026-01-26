@@ -30,10 +30,10 @@ Ask the AI to specifically check your writing against the style guide.
 
 ## Examples
 
-Here are two pieces of older content that only partially follow the style guide. You can see the original text and the text that has been updated to match the style guide rules:
+Here are two pieces of older content that only partially follow the style guide. The annotations show the changes that are needed for them to comply fully:
 
-* Documentation: [annotated screenshot](annotated-docs.webp); [original text](/style-guide/example-docs-before); [updated text](/style-guide/example-docs-after)
-* Blog post: [annotated screenshot](annotated-blog.webp); [original text](/style-guide/example-blog-before); [updated text](/style-guide/example-blog-after)
+* [Documentation](annotated-docs.webp)
+* [Blog post](annotated-blog.webp)
 
 ## Grammar and spelling
 
@@ -219,6 +219,7 @@ Here are two pieces of older content that only partially follow the style guide.
 
 - Importantly, don't explain concepts: link to existing pages about them such as those in the [Fundamentals](/docs/fundamentals/) docs section
   - This includes events, entities and context, schemas, enrichment, the structure of the data, failed events, etc.
+  - No ellipses ("...")
 
 ### Voice
 - Use active rather than passive voice
@@ -389,7 +390,7 @@ Here are two pieces of older content that only partially follow the style guide.
 ### Deprecated terminology
 - Use "entity", not "context"
     - It's unavoidable to use "context" when referring to some table columns or APIs, but use the correct nomenclature around them anyway
-    - Link to the Fundamentals [page about entities](https://docs.snowplow.io/docs/fundamentals/entities/) if it feels unclear
+    - Link to the Fundamentals [page about entities](/docs/fundamentals/entities/) if it feels unclear
 
    | ✅                                                | ❌                                                |
    | ------------------------------------------------ | ------------------------------------------------ |
@@ -596,6 +597,7 @@ Here are two pieces of older content that only partially follow the style guide.
 ### Links
 - Links should be clearly described, either by the preceding text or the link itself
 - Use the name of the page you're linking to where possible
+- All links should be wrapped in text, not naked `http://example.com` strings
 - [Guidelines for writing link text](https://developers.google.com/style/link-text)
 
    | ✅                                                        | ❌                                         |

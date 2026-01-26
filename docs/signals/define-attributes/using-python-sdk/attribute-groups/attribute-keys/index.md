@@ -1,13 +1,14 @@
 ---
-title: "Defining attribute keys with the Python SDK"
+title: "Define attribute keys with the Signals Python SDK"
 sidebar_position: 15
 sidebar_label: "Attribute keys"
-description: "Define built-in and custom attribute keys to specify the analytical context for attribute calculations in Snowplow Signals."
+description: "Create custom attribute keys based on atomic properties to specify the analytical context for attribute calculations. Use built-in keys like domain_userid or define your own."
+keywords: ["attribute keys", "custom attribute keys", "analytical context", "atomic properties"]
 ---
 
 An [attribute key](/docs/signals/concepts/index.md#attribute-keys) is the identifier that attributes are calculated against.
 
-Signals includes a number of out-of-the-box attribute keys based on commonly used identifiers from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) in all Snowplow events.
+Signals includes a number of out-of-the-box attribute keys based on commonly used identifiers from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-fields) in all Snowplow events.
 
 Import them into your notebook like this:
 
@@ -22,7 +23,7 @@ from snowplow_signals import (
 
 ## Custom attribute keys
 
-You can also define custom attribute keys, which allows you to calculate attributes on any other Snowplow atomic property you want. Atomic properties are those that are defined in the [atomic fields](/docs/fundamentals/canonical-event/index.md#atomic-fields) of the core Snowplow event, not properties tracked as part of an entity.
+You can also define custom attribute keys, which allows you to calculate attributes on any other Snowplow atomic property you want. Atomic properties are those that are defined in the [atomic fields](/docs/fundamentals/canonical-event/index.md#common-fields) of the core Snowplow event, not properties tracked as part of an entity.
 
 For example, an attribute key that groups by `app_id` can be defined as:
 

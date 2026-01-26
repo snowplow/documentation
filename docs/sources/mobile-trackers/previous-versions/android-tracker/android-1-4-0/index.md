@@ -2,6 +2,9 @@
 title: "Android (1.4.0)"
 date: "2020-03-19"
 sidebar_position: 870
+sidebar_label: "Android (1.4.0)"
+description: "Documentation for Android Tracker version 1.4.0 supporting API level 21+."
+keywords: ["android 1.4.0", "tracker"]
 ---
 
 The Android tracker supports Android 4.0 (API level 14+)

@@ -1,6 +1,9 @@
 ---
-title: "Managing enrichments"
+title: "Manage enrichments in Console"
 sidebar_position: 30
+sidebar_label: "Managing enrichments"
+description: "Enable, configure, and deploy enrichments for your pipelines using Snowplow Console UI."
+keywords: ["manage enrichments", "enable enrichments", "enrichment configuration"]
 ---
 
 
@@ -38,7 +41,7 @@ If your configuration is valid you will be given the option to _Publish_ the enr
 
 **_Publish_ your configuration** to the environment and then test it by sending some events to the Mini endpoint.
 
-Once you are happy with your configuration, follow [Deploying a configuration across environments](#deploy) to deploy the configuration to a pipeline.
+Once you are happy with your configuration, deploy it to a pipeline.
 
 * * *
 

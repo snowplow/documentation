@@ -1,7 +1,9 @@
 ---
-title: "Tracking screen views on web"
+title: "Track screen views on web"
 sidebar_label: "Screen views"
 sidebar_position: 60
+description: "Track screen views with mobile-style tracking on web including screen engagement metrics for time spent and scroll depth analysis."
+keywords: ["screen views", "mobile tracking"]
 ---
 
 ```mdx-code-block
@@ -97,7 +99,7 @@ newTracker('sp1', '{{collector_url}}', {
 ## Track a screen view event
 
 To track a screen view event, use the `trackScreenView` function.
-This will track a self-describing event with [the schema described here](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-view-events).
+This will track a self-describing event with [the schema described here](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-views).
 
 <Tabs groupId="platform" queryString>
 <TabItem value="js" label="JavaScript (tag)" default>

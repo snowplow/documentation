@@ -1,6 +1,8 @@
 ---
-title: "Table Grants"
+title: "Table grants for dbt packages"
+sidebar_label: "Table grants"
 description: "Details for granted access to our tables to other users/roles"
+keywords: ["table grants", "dbt grants", "database permissions", "user access"]
 sidebar_position: 30
 ---
 

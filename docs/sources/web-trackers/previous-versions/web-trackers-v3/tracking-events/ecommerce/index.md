@@ -2,6 +2,8 @@
 title: "Snowplow ecommerce tracking"
 sidebar_label: "Ecommerce"
 sidebar_position: 70
+description: "Documentation for tracking Snowplow ecommerce with the web tracker."
+keywords: ["tracking", "events"]
 ---
 
 ```mdx-code-block

@@ -1,6 +1,9 @@
 ---
 title: "Snowplow v3 Tags"
+sidebar_label: "Snowplow v3 Tags"
 sidebar_position: 1000
+description: "Configure legacy Snowplow v3 tag types in GTM for ad tracking, cart events, error tracking, consent, site search, social interactions, structured events, and timing with parameter objects and custom commands."
+keywords: ["v3 tags", "gtm v3 tag types", "legacy v3 tracking", "v3 event tracking", "v3 tag configuration"]
 ---
 
 Snowplow provides custom GTM Tag templates for general Snowplow tracking, as well as ecommerce tracking.
@@ -20,10 +23,10 @@ Tags that can derive their parameters from a Google Tag Manager variable are:
 - [Self-describing Event](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md#tracking-a-custom-event-self-describing)
 - [Site Search](/docs/sources/web-trackers/tracking-events/site-search/index.md)
 - [Social Interaction](/docs/sources/web-trackers/tracking-events/social-media/index.md)
-- [Structured Event](/docs/fundamentals/events/index.md#structured-events)
+- [Structured Event](/docs/fundamentals/canonical-event/index.md#structured-events)
 - [Timing](/docs/sources/web-trackers/tracking-events/timings/generic/index.md)
 
-You can set the **Retrieve Parameters From Variable** setting to a Google Tag Manager variable. This parameter _must_ return an object. In the object, the key-value pairs should reflect the named parameters in the [event documentation](/docs/sources/web-trackers/tracking-events/index.md). For example, to have the variable populate an [Error event](/docs/sources/web-trackers/tracking-events/index.md#error-tracking), you could use a Custom JavaScript variable like this:
+You can set the **Retrieve Parameters From Variable** setting to a Google Tag Manager variable. This parameter _must_ return an object. In the object, the key-value pairs should reflect the named parameters in the [event documentation](/docs/sources/web-trackers/tracking-events/index.md). For example, to have the variable populate an [Error event](/docs/sources/web-trackers/tracking-events/errors/index.md), you could use a Custom JavaScript variable like this:
 
 ```javascript
 function() {
@@ -83,7 +86,7 @@ It is intended to trigger [early on a page](https://support.google.com/tagmanage
 
 ##### Page View
 
-You can provide a **Custom Page Title** if you wish, and you can add a [custom context](/docs/sources/web-trackers/tracking-events/index.md#custom-context) to the request, as also described [here](/docs/sources/web-trackers/tracking-events/index.md#trackpageview).
+You can provide a **Custom Page Title** if you wish, and you can add a [custom context](/docs/sources/web-trackers/tracking-events/index.md#auto-tracked-entities) to the request, as also described [here](/docs/sources/web-trackers/tracking-events/index.md#page-view).
 
 If you enable **Page Activity Tracking**, the tag will setup a _heartbeat_ tracker, and send page pings to Snowplow at intervals that you can specify.
 
@@ -109,11 +112,11 @@ And then use this variable as your Command Argument:
 
 #### Add Custom Context Entities
 
-Using the **Context Entities** table allows you to attach [custom context entities](/docs/sources/web-trackers/tracking-events/index.md#custom-context) to the Snowplow event. Each row should be set to a variable value that must be an **array of custom context objects** that will all be concatenated to add to the Event.
+Using the **Context Entities** table allows you to attach [custom context entities](/docs/sources/web-trackers/tracking-events/index.md#auto-tracked-entities) to the Snowplow event. Each row should be set to a variable value that must be an **array of custom context objects** that will all be concatenated to add to the Event.
 
 #### Set Custom Timestamp
 
-You can also choose to [set the True Timestamp](/docs/sources/web-trackers/tracking-events/index.md#setting-the-true-timestamp) with this field. The format must be UNIX time in milliseconds.
+You can also choose to [set the True Timestamp](/docs/sources/web-trackers/tracking-events/index.md#adding-custom-timestamps-to-events) with this field. The format must be UNIX time in milliseconds.
 
 ## Acknowledgements
 

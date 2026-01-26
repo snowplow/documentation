@@ -1,7 +1,10 @@
 ---
 title: "Payload and logging"
+sidebar_label: "Payload and logging"
 date: "2022-05-12"
 sidebar_position: 100
+description: "Understand tracker payload structure and logging configuration in Java tracker v0.11."
+keywords: ["tracker payload", "logging configuration"]
 ---
 
 A Payload interface is used for implementing a TrackerPayload and SelfDescribingJson, but accordingly, can be used to implement your own Payload class if you choose.

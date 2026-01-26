@@ -1,7 +1,10 @@
 ---
-title: "React Native tracker"
+title: "React Native tracker SDK"
+sidebar_label: "React Native tracker"
 date: "2020-07-09"
 sidebar_position: 120
+description: "Track events in React Native apps for iOS, Android, and Web with the Snowplow tracker SDK supporting Expo and React Navigation."
+keywords: ["react native tracker", "mobile analytics", "expo tracking"]
 ---
 
 ```mdx-code-block
@@ -235,8 +238,8 @@ You can also get back session data from the tracker at runtime, that may be usef
 - **getBackgroundIndex**: To get the number of background transitions in the current session.
 - **getForegroundIndex**: To get the number of foreground transitions in the current session.
 
-You can find out more on how to use the tracker's methods to get session data at runtime in the corresponding [Advanced Usage section](/docs/sources/react-native-tracker/advanced-usage/index.md#getting-session-data-from-the-tracker).
+You can find out more on how to use the tracker's methods to get session data at runtime in the corresponding [session tracking documentation](/docs/sources/react-native-tracker/tracking-events/session-tracking/index.md#getting-session-data-from-the-tracker).
 
 ## Removing a tracker
 
-The React Native Tracker API also provides functions to remove a tracker or remove all trackers at runtime. You can find out how in the [Advanced Usage section](/docs/sources/react-native-tracker/advanced-usage/index.md#removing-a-tracker-at-runtime) of the React Native Tracker.
+The React Native Tracker API also provides functions to remove a tracker or remove all trackers at runtime. You can find out how in the [Removing trackers at runtime](/docs/sources/react-native-tracker/advanced-usage/index.md) documentation.

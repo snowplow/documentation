@@ -1,7 +1,9 @@
 ---
-title: "Subject configuration for Python tracker"
+title: "Track subject data with the Python tracker"
 sidebar_label: "Subject"
 sidebar_position: 40
+description: "Configure subject data for tracked events including user ID, platform, screen resolution, timezone, and IP address for tracker-level or event-level subjects."
+keywords: ["python subject", "user properties", "event context"]
 ---
 
 You may have additional information about your application's environment, current user and so on, which you want to send to Snowplow with each event.
@@ -41,7 +43,7 @@ The full set of subject methods are listed below:
 | [`set_timezone`](#set_timezone) | Set the local timezone for the Subject |
 | [`set_lang`](#set_lang) | Set the preferred language or locale of the Subject |
 | [`set_ip_address`](#set_ip_address) | Set the IP address of the Subject |
-| [`set_user_agent`](#set_user_agent) | Set the User Agent string of the Subject |
+| [`set_user_agent`](#set_useragent) | Set the User Agent string of the Subject |
 | [`set_domain_user_id`](#set_domain_user_id) | Set the Domain User ID of the Subject |
 | [`set_network_user_id`](#set_network_user_id) | Set the Network User ID of the Subject |
 | [`set_domain_session_id`](#set_domain_session_id) | Set the Domain Session ID of the Subject |
@@ -55,8 +57,8 @@ To configure a tracker subject, pass it to the tracker during initialization:
 subject = Subject().set_platform("mob").set_user_id("user-12345").set_lang("en")
 
 t = Tracker(
-        namespace="snowplow_tracker", 
-        emitters=emitter, 
+        namespace="snowplow_tracker",
+        emitters=emitter,
         subject=subject
 )
 ```
@@ -79,7 +81,7 @@ event_subject = Subject().set_screen_resolution(1920, 1080)
 
 id = tracker.get_uuid()
 screen_view = ScreenView(
-  id_=id, 
+  id_=id,
   name="name",
   event_subject=event_subject
 )
@@ -94,7 +96,7 @@ The default platform is `pc`. You can change the platform the subject is using b
 s.set_platform('mob')
 ```
 
-For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/events/index.md#application-parameters).
+For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/fundamentals/canonical-event/index.md#application-fields).
 
 ### `set_user_id`
 
@@ -233,7 +235,7 @@ page_view = PageView(
         page_url="https://www.snowplow.io",
         page_title="Homepage",
 )
-t.track(page_view) 
+t.track(page_view)
 
 # Create another Subject instance corresponding to a mobile user
 s2 = Subject()
@@ -250,7 +252,7 @@ page_view = PageView(
         page_url="https://www.snowplow.io",
         page_title="Homepage",
 )
-t.track(page_view) 
+t.track(page_view)
 
 # Switch back to s1 and track a structured event.
 t.set_subject(s1)

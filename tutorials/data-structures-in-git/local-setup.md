@@ -2,6 +2,8 @@
 title: "Create a local data structure with Snowplow CLI"
 sidebar_label: "Create a local data structure"
 position: 2
+description: "Generate a new data structure locally using Snowplow CLI with vendor and schema information in YAML format."
+keywords: ["snowplow cli generate command", "data structure yaml format"]
 ---
 
 Firstly we'll need a place to put things.
@@ -32,7 +34,7 @@ This should provide us the following output
 The generated file is written to our default `data-structures` directory under a sub directory matching the `--vendor` we supplied with a filename that mirrors the name we gave the data structure. Help for all the arguments available to `generate` is available by running `snowplow-cli ds generate --help`.
 
 :::note
-This directory layout and file naming scheme is also followed by the [download](https://docs.snowplow.io/docs/data-product-studio/data-structures/manage/cli/#downloading-data-structures) command.
+This directory layout and file naming scheme is also followed by the [download](/docs/data-product-studio/data-structures/manage/cli/#downloading-data-structures) command.
 :::
 
 Let's see what it has created for us.
@@ -57,7 +59,7 @@ data:
 ```
 * `apiVersion` should always be `v1`
 * `resourceType` should remain `data-structure`
-* `meta.hidden` directly relates to showing and hiding [in Console UI](https://docs.snowplow.io/docs/data-product-studio/data-structures/manage/#hiding-a-data-structure)
+* `meta.hidden` directly relates to showing and hiding [in Console UI](/docs/data-product-studio/data-structures/manage/#hiding-a-data-structure)
 * `meta.schemaType` can be `event` or `entity`
 * `meta.customData` is a map of strings to strings that can be used to send across any key/value pairs you'd like to associate with the data structure
-* `data` is the actual [snowplow self describing schema](https://docs.snowplow.io/docs/api-reference/iglu/common-architecture/self-describing-json-schemas) that this data structure describes
+* `data` is the actual [snowplow self describing schema](/docs/api-reference/iglu/common-architecture/self-describing-json-schemas) that this data structure describes

@@ -2,6 +2,8 @@
 title: "Set up the Attribution dbt package using Snowplow Console"
 sidebar_label: "Set up in Console"
 position: 5
+description: "Configure the Attribution data model in Snowplow Console with a fully managed service. Set attribution start dates, path lookback windows, and schedule automated model runs."
+keywords: ["snowplow console attribution", "managed attribution modeling", "attribution data model", "console dbt setup"]
 ---
 
 
@@ -33,9 +35,9 @@ Snowplow provides a fully managed service for running data models. We recommend 
 7. (Optional) Configure all the potential Configuration Variables for the Attribution Model. Once you are happy with the changes - click ‘Confirm’ to save.
 
 :::info
-Please Note: See the information about each of [the options here](https://docs.snowplow.io/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/attribution/).
+Please Note: See the information about each of [the options here](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-configuration/attribution/).
 ![](./screenshots/Screenshot14.png)
-For a more detailed guide check out the [Setting Variables](/tutorials/attribution/setting-up-locally/#setting-variables) section of the local setup section of this tutorial.
+For a more detailed guide check out the [Setting Variables](/tutorials/attribution/setting-up-locally) section of the local setup section of this tutorial.
 :::
 
 

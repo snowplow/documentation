@@ -75,6 +75,7 @@ exceptions:
   - GCS
   - HAR
   - IAM
+  - MCP
   - PII
   - SLA
   - SSO

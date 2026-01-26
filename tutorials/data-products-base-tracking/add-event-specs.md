@@ -2,6 +2,8 @@
 position: 8
 title: Add event specifications to the todo tracking plan
 sidebar_label: Add event specifications
+description: "Create event specifications with implementation instructions, entity cardinality rules, and trigger details. Define precise expectations for custom events and make them available through Snowtype code generation."
+keywords: ["event specification creation", "implementation instructions", "entity cardinality rules", "event trigger definition"]
 ---
 
 Now you can create the Event Specification representing the todo addition. Click `Create new event specification`, fill the event information modal with the following inputs and click `Save and continue`.
@@ -17,7 +19,7 @@ To make sure your intention on this Event Specification is clear and also instru
 ![](./images/implementation-instructions.png)
 
 :::tip
-Information for implementation instructions, cardinality rules and trigger details will be available for the implementation engineers directly through Snowtype [instructions feature](https://docs.snowplow.io/docs/collecting-data/code-generation/using-the-cli/#generating-event-specification-instructions).
+Information for implementation instructions, cardinality rules and trigger details will be available for the implementation engineers directly through Snowtype [instructions feature](/docs/data-product-studio/snowtype/using-the-cli/#generating-event-specification-instructions).
 :::
 
 Now on the Entity data structures section, click `Add existing data structure`, find and select the todo entity created earlier. On the next modal step you can define the expected cardinality, of this entity on the event specification. For the todo entity, you want to have exactly 1 instance.

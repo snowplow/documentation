@@ -1,7 +1,10 @@
 ---
 title: "Javascript Tracker Core"
+sidebar_label: "Javascript Tracker Core"
 date: "2020-02-26"
 sidebar_position: 400
+description: "Documentation for the JavaScript tracker core library used as the foundation for Node.js and web trackers."
+keywords: ["javascript tracker core", "tracker foundation"]
 ---
 
 ```mdx-code-block

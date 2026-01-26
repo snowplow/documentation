@@ -1,8 +1,10 @@
 ---
-title: "Tracking events with the Lua tracker"
+title: "Track events with the Lua tracker"
 sidebar_label: "Tracking events"
 date: "2020-02-26"
 sidebar_position: 40
+description: "Track screen views, structured events, and custom self-describing events with the Lua tracker SDK."
+keywords: ["lua event tracking", "screen view tracking", "self-describing events"]
 ---
 
 Creating a tracking instance is as simple as calling `snowplow.new_tracker` and providing a URL for your collector:

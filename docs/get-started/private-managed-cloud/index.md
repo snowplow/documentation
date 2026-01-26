@@ -2,9 +2,11 @@
 title: "Setting up Snowplow CDI"
 sidebar_position: 3
 sidebar_label: "Setting up Snowplow CDI"
+description: "Get started with Snowplow Customer Data Infrastructure on Cloud or Private Managed Cloud with setup guides for AWS, Azure, and GCP."
+keywords: ["Snowplow CDI", "Private Managed Cloud", "Cloud setup", "AWS setup", "Azure setup", "GCP setup"]
 ---
 
-To get started with Snowplow Customer Data Infrastructure, follow the **Getting Started** steps in [Snowplow Console](https://console.snowplowanalytics.com/getting-started). You will receive an account as part of your onboarding.
+To get started with Snowplow Customer Data Infrastructure, follow the **Getting Started** steps in [Snowplow Console](https://console.snowplowanalytics.com). You will receive an account as part of your onboarding.
 
 ## CDI Cloud
 

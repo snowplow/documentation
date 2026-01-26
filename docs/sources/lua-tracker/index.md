@@ -1,7 +1,10 @@
 ---
-title: "Lua tracker"
+title: "Lua tracker SDK"
+sidebar_label: "Lua tracker"
 date: "2020-02-26"
 sidebar_position: 270
+description: "Track events in Lua applications with the Snowplow Lua tracker SDK, compatible with Lua 5.1+ and LuaJIT."
+keywords: ["lua tracker", "lua analytics", "luarocks"]
 ---
 
 ```mdx-code-block
@@ -58,7 +61,7 @@ dependencies = {
 
 ### Tracking Events
 
-To track an event, simply create a tracker instance and call one of the `track_*` methods. For example, simple tracking of a [structured event](/docs/fundamentals/events/index.md#structured-events):
+To track an event, simply create a tracker instance and call one of the `track_*` methods. For example, simple tracking of a [structured event](/docs/events/custom-events/index.md#structured-events) can be done as follows:
 
 ```lua
 local snowplow = require("snowplow")

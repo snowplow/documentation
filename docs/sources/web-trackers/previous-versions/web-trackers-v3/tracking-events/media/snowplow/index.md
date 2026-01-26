@@ -1,6 +1,8 @@
 ---
 title: "Snowplow media"
 sidebar_position: 5
+description: "Documentation for Snowplow media in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block
@@ -61,18 +63,34 @@ newTracker('sp1', '{{collector_url}}', {
 
 ## Usage
 
+```mdx-code-block
+<Media platforms={["js-tag", "js-browser"]} />
+```
+
+## Page activity during playback
+
+When users watch video, they may not interact with the page, causing page pings to stop. The media plugin automatically keeps page activity alive during playback by calling `updatePageActivity` whenever media events are tracked.
+
+You can turn off this behavior if not needed:
+
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
 
-```mdx-code-block
-<Media tracker="js-tag" />
+```javascript
+window.snowplow('startMediaTracking', {
+    id,
+    updatePageActivityWhilePlaying: false
+});
 ```
 
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
 
-```mdx-code-block
-<Media tracker="js-browser" />
+```javascript
+startMediaTracking({
+    id,
+    updatePageActivityWhilePlaying: false
+});
 ```
 
   </TabItem>

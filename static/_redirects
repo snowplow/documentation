@@ -306,6 +306,7 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 # Sidebar restructure
 /docs/collecting-data/* /docs/sources/:splat 301
 /docs/sources/collecting-data-from-third-parties/* /docs/sources/webhooks/:splat 301
+/docs/sources/trackers/ /docs/sources/ 301
 /docs/sources/collecting-from-own-applications/* /docs/sources/trackers/:splat 301
 /docs/contributing/* /docs/resources/:splat 301
 /docs/understanding-your-pipeline/* /docs/fundamentals/:splat 301

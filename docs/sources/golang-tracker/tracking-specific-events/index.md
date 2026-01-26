@@ -1,20 +1,22 @@
 ---
-title: "Tracking specific events with the Golang tracker"
+title: "Track specific events with the Golang tracker"
 sidebar_label: "Tracking specific events"
+description: "Track behavioral events including SelfDescribing, ScreenView, PageView, EcommerceTransaction, Structured, and Timing events. Add custom contexts and optional timestamps to all tracked events."
+keywords: ["golang track events", "self-describing events", "structured events", "ecommerce tracking", "page view tracking"]
 date: "2020-02-26"
 sidebar_position: 40
 ---
 
 Tracking methods supported by the Golang Tracker at a glance:
 
-| **Function**                                    | **Description**                                        |
-|-------------------------------------------------|--------------------------------------------------------|
-| [`TrackSelfDescribingEvent()`](#unstruct-event) | Track a Snowplow custom unstructured event             |
-| [`TrackScreenView()`](#screen-view)             | Track the user viewing a screen within the application |
-| [`TrackPageView()`](#page-view)                 | Track and record views of web pages.                   |
-| [`TrackEcommerceTransaction()`](#ecommerce)     | Track an ecommerce transaction                         |
-| [`TrackStructEvent()`](#struct-event)           | Track a Snowplow custom structured event               |
-| [`TrackTiming()`](#timing-event)                | Track a timing event                                   |
+| **Function**                                                                                           | **Description**                                        |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------ |
+| [`TrackSelfDescribingEvent()`](#track-selfdescribingunstructured-events-with-trackselfdescribingevent) | Track a Snowplow custom unstructured event             |
+| [`TrackScreenView()`](#track-screen-views-with-trackscreenview)                                        | Track the user viewing a screen within the application |
+| [`TrackPageView()`](#track-pageviews-with-trackpageview)                                               | Track and record views of web pages.                   |
+| [`TrackEcommerceTransaction()`](#track-ecommerce-transactions-with-trackecommercetransaction)          | Track an ecommerce transaction                         |
+| [`TrackStructEvent()`](#track-structured-events-with-trackstructevent)                                 | Track a Snowplow custom structured event               |
+| [`TrackTiming()`](#track-timing-events-with-tracktiming)                                               | Track a timing event                                   |
 
 :::note
 
@@ -142,14 +144,14 @@ Use `TrackSelfDescribingEvent()` to track a custom event which consists of a nam
 
 The arguments are as follows:
 
-| **Argument**    | **Description**             | **Required?** | **Validation**       |
-|-----------------|-----------------------------|---------------|----------------------|
-| `Event`         | The properties of the event | Yes           | \*SelfDescribingJson |
-| `Timestamp`     | When the event occurred     | No            | \*int64              |
-| `EventId`       | The event ID                | No            | \*string             |
-| `TrueTimestamp` | The true time of event      | No            | \*int64              |
-| `Contexts`      | Custom contexts for the event | No          | []SelfDescribingJson |
-| `Subject`       | Event specific Subject      | No            | Subject              |
+| **Argument**    | **Description**               | **Required?** | **Validation**       |
+| --------------- | ----------------------------- | ------------- | -------------------- |
+| `Event`         | The properties of the event   | Yes           | \*SelfDescribingJson |
+| `Timestamp`     | When the event occurred       | No            | \*int64              |
+| `EventId`       | The event ID                  | No            | \*string             |
+| `TrueTimestamp` | The true time of event        | No            | \*int64              |
+| `Contexts`      | Custom contexts for the event | No            | []SelfDescribingJson |
+| `Subject`       | Event specific Subject        | No            | Subject              |
 
 Example:
 
@@ -175,15 +177,15 @@ For more on JSON schema, see the [blog post](https://snowplowanalytics.com/blog/
 
 Use `TrackScreenView()` to track a user viewing a screen (or equivalent) within your app:
 
-| **Argument**    | **Description**                     | **Required?** | **Type**               |
-|-----------------|-------------------------------------|---------------|------------------------|
-| `Name`          | Human-readable name for this screen | No            | \*string               |
-| `Id`            | Unique identifier for this screen   | No            | \*string               |
-| `Timestamp`     | When the event occurred             | No            | \*int64                |
-| `EventId`       | The event ID                        | No            | \*string               |
-| `TrueTimestamp` | The true time of event              | No            | \*int64                |
-| `Contexts`      | Custom contexts for the event       | No            | []SelfDescribingJson   |
-| `Subject`       | Event specific Subject              | No            | Subject                |
+| **Argument**    | **Description**                     | **Required?** | **Type**             |
+| --------------- | ----------------------------------- | ------------- | -------------------- |
+| `Name`          | Human-readable name for this screen | No            | \*string             |
+| `Id`            | Unique identifier for this screen   | No            | \*string             |
+| `Timestamp`     | When the event occurred             | No            | \*int64              |
+| `EventId`       | The event ID                        | No            | \*string             |
+| `TrueTimestamp` | The true time of event              | No            | \*int64              |
+| `Contexts`      | Custom contexts for the event       | No            | []SelfDescribingJson |
+| `Subject`       | Event specific Subject              | No            | Subject              |
 
 Although name and id are not individually required, at least one must be provided or the event will fail validation.
 
@@ -199,16 +201,16 @@ tracker.TrackScreenView(sp.ScreenViewEvent{
 
 Use `TrackPageView()` to track a user viewing a page within your app:
 
-| **Argument**    | **Description**                      | **Required?** | **Validation**         |
-|-----------------|--------------------------------------|---------------|------------------------|
-| `PageUrl`       | The URL of the page                  | Yes           | \*string               |
-| `PageTitle`     | The title of the page                | No            | \*string               |
-| `Referrer`      | The address which linked to the page | No            | \*string               |
-| `Timestamp`     | When the event occurred              | No            | \*int64                |
-| `EventId`       | The event ID                         | No            | \*string               |
-| `TrueTimestamp` | The true time of event               | No            | \*int64                |
-| `Contexts`      | Custom contexts for the event        | No            | []SelfDescribingJson   |
-| `Subject`       | Event specific Subject               | No            | Subject                |
+| **Argument**    | **Description**                      | **Required?** | **Validation**       |
+| --------------- | ------------------------------------ | ------------- | -------------------- |
+| `PageUrl`       | The URL of the page                  | Yes           | \*string             |
+| `PageTitle`     | The title of the page                | No            | \*string             |
+| `Referrer`      | The address which linked to the page | No            | \*string             |
+| `Timestamp`     | When the event occurred              | No            | \*int64              |
+| `EventId`       | The event ID                         | No            | \*string             |
+| `TrueTimestamp` | The true time of event               | No            | \*int64              |
+| `Contexts`      | Custom contexts for the event        | No            | []SelfDescribingJson |
+| `Subject`       | Event specific Subject               | No            | Subject              |
 
 Example:
 
@@ -222,38 +224,38 @@ tracker.TrackPageView(sp.PageViewEvent{
 
 Use `TrackEcommerceTransaction()` to track an ecommerce transaction:
 
-| **Argument**    | **Description**                 | **Required?** | **Validation**                    |
-|-----------------|---------------------------------|---------------|-----------------------------------|
-| `OrderId`       | ID of the eCommerce transaction | Yes           | \*string                          |
-| `TotalValue`    | Total transaction value         | Yes           | \*float64                         |
-| `Affiliation`   | Transaction affiliation         | No            | \*string                          |
-| `TaxValue`      | Transaction tax value           | No            | \*float64                         |
-| `Shipping`      | Delivery cost charged           | No            | \*float64                         |
-| `City`          | Delivery address city           | No            | \*string                          |
-| `State`         | Delivery address state          | No            | \*string                          |
-| `Country`       | Delivery address country        | No            | \*string                          |
-| `Currency`      | Transaction currency            | No            | \*string                          |
-| `Items`         | Items in the transaction        | Yes           | []EcommerceTransactionItemEvent   |
-| `Timestamp`     | When the event occurred         | No            | \*int64                           |
-| `EventId`       | The event ID                    | No            | \*string                          |
-| `TrueTimestamp` | The true time of event          | No            | \*int64                           |
-| `Contexts`      | Custom contexts for the event   | No            | []SelfDescribingJson              |
-| `Subject`       | Event specific Subject          | No            | Subject                           |
+| **Argument**    | **Description**                 | **Required?** | **Validation**                  |
+| --------------- | ------------------------------- | ------------- | ------------------------------- |
+| `OrderId`       | ID of the eCommerce transaction | Yes           | \*string                        |
+| `TotalValue`    | Total transaction value         | Yes           | \*float64                       |
+| `Affiliation`   | Transaction affiliation         | No            | \*string                        |
+| `TaxValue`      | Transaction tax value           | No            | \*float64                       |
+| `Shipping`      | Delivery cost charged           | No            | \*float64                       |
+| `City`          | Delivery address city           | No            | \*string                        |
+| `State`         | Delivery address state          | No            | \*string                        |
+| `Country`       | Delivery address country        | No            | \*string                        |
+| `Currency`      | Transaction currency            | No            | \*string                        |
+| `Items`         | Items in the transaction        | Yes           | []EcommerceTransactionItemEvent |
+| `Timestamp`     | When the event occurred         | No            | \*int64                         |
+| `EventId`       | The event ID                    | No            | \*string                        |
+| `TrueTimestamp` | The true time of event          | No            | \*int64                         |
+| `Contexts`      | Custom contexts for the event   | No            | []SelfDescribingJson            |
+| `Subject`       | Event specific Subject          | No            | Subject                         |
 
 The `items` argument is an Array of TransactionItems. `TrackEcommerceTransaction` fires multiple events: one transaction event for the transaction as a whole, and one transaction item event for each element of the `Items` list. Each transaction item event will have the same timestamp, true timestamp, order ID, and currency as the main transaction event.
 
 These are the fields with which a TransactionItem can be created.
 
-| **Field**  | **Description**               | **Required?** | **Validation**         |
-|------------|-------------------------------|---------------|------------------------|
-| `Sku`      | Item SKU                      | Yes           | \*string               |
-| `Price`    | Item price                    | Yes           | \*float64              |
-| `Quantity` | Item quantity                 | Yes           | \*int64                |
-| `Name`     | Item name                     | No            | \*string               |
-| `Category` | Item category                 | No            | \*string               |
-| `EventId`  | The event ID                  | No            | \*string               |
-| `Contexts` | Custom contexts for the event | No            | []SelfDescribingJson   |
-| `Subject`  | Event specific Subject        | No            | Subject                |
+| **Field**  | **Description**               | **Required?** | **Validation**       |
+| ---------- | ----------------------------- | ------------- | -------------------- |
+| `Sku`      | Item SKU                      | Yes           | \*string             |
+| `Price`    | Item price                    | Yes           | \*float64            |
+| `Quantity` | Item quantity                 | Yes           | \*int64              |
+| `Name`     | Item name                     | No            | \*string             |
+| `Category` | Item category                 | No            | \*string             |
+| `EventId`  | The event ID                  | No            | \*string             |
+| `Contexts` | Custom contexts for the event | No            | []SelfDescribingJson |
+| `Subject`  | Event specific Subject        | No            | Subject              |
 
 Example of tracking a transaction containing two items:
 
@@ -291,18 +293,18 @@ tracker.TrackEcommerceTransaction(sp.EcommerceTransactionEvent{
 
 Use `TrackStructEvent()` to track a custom event happening in your app which fits the Google Analytics-style structure of having up to five fields (with only the first two required):
 
-| **Argument**    | **Description**                                                  | **Required?** | **Validation**         |
-|-----------------|------------------------------------------------------------------|---------------|------------------------|
-| `Category`      | The grouping of structured events which this `action` belongs to | Yes           | \*string               |
-| `Action`        | Defines the type of user interaction which this event involves   | Yes           | \*string               |
-| `Label`         | A string to provide additional dimensions to the event data      | No            | \*string               |
-| `Property`      | A string describing the object or the action performed on it     | No            | \*string               |
-| `Value`         | A value to provide numerical data about the event                | No            | \*float64              |
-| `Timestamp`     | When the event occurred                                          | No            | \*int64                |
-| `EventId`       | The event ID                                                     | No            | \*string               |
-| `TrueTimestamp` | The true time of event                                           | No            | \*int64                |
-| `Contexts`      | Custom contexts for the event                                    | No            | []SelfDescribingJson   |
-| `Subject`       | Event specific Subject                                           | No            | Subject                |
+| **Argument**    | **Description**                                                  | **Required?** | **Validation**       |
+| --------------- | ---------------------------------------------------------------- | ------------- | -------------------- |
+| `Category`      | The grouping of structured events which this `action` belongs to | Yes           | \*string             |
+| `Action`        | Defines the type of user interaction which this event involves   | Yes           | \*string             |
+| `Label`         | A string to provide additional dimensions to the event data      | No            | \*string             |
+| `Property`      | A string describing the object or the action performed on it     | No            | \*string             |
+| `Value`         | A value to provide numerical data about the event                | No            | \*float64            |
+| `Timestamp`     | When the event occurred                                          | No            | \*int64              |
+| `EventId`       | The event ID                                                     | No            | \*string             |
+| `TrueTimestamp` | The true time of event                                           | No            | \*int64              |
+| `Contexts`      | Custom contexts for the event                                    | No            | []SelfDescribingJson |
+| `Subject`       | Event specific Subject                                           | No            | Subject              |
 
 Example:
 
@@ -321,17 +323,17 @@ Use `TrackTiming()` to track a timing event.
 
 The arguments are as follows:
 
-| **Argument**    | **Description**               | **Required?** | **Validation**         |
-|-----------------|-------------------------------|---------------|------------------------|
-| `Category`      | The category of the event     | Yes           | \*string               |
-| `Variable`      | The variable of the event     | Yes           | \*string               |
-| `Timing`        | The timing of the event       | Yes           | \*int64                |
-| `Label`         | The label of the event        | No            | \*string               |
-| `Timestamp`     | When the event occurred       | No            | \*int64                |
-| `EventId`       | The event ID                  | No            | \*string               |
-| `TrueTimestamp` | The true time of event        | No            | \*int64                |
-| `Contexts`      | Custom contexts for the event | No            | []SelfDescribingJson   |
-| `Subject`       | Event specific Subject        | No            | Subject                |
+| **Argument**    | **Description**               | **Required?** | **Validation**       |
+| --------------- | ----------------------------- | ------------- | -------------------- |
+| `Category`      | The category of the event     | Yes           | \*string             |
+| `Variable`      | The variable of the event     | Yes           | \*string             |
+| `Timing`        | The timing of the event       | Yes           | \*int64              |
+| `Label`         | The label of the event        | No            | \*string             |
+| `Timestamp`     | When the event occurred       | No            | \*int64              |
+| `EventId`       | The event ID                  | No            | \*string             |
+| `TrueTimestamp` | The true time of event        | No            | \*int64              |
+| `Contexts`      | Custom contexts for the event | No            | []SelfDescribingJson |
+| `Subject`       | Event specific Subject        | No            | Subject              |
 
 Example:
 

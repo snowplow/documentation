@@ -1,8 +1,9 @@
 ---
-title: "Querying Snowplow data"
+title: "How to query Snowplow data in the warehouse"
 sidebar_label: "Querying data"
 sidebar_position: 1
-description: "An introduction to querying Snowplow data, including self-describing events and entities, as well tips for dealing with duplicate events"
+description: "Introduction to querying Snowplow data in warehouses including self-describing events, entities, and handling duplicate events with SQL techniques."
+keywords: ["querying data", "SQL queries", "self-describing events", "entities", "deduplication"]
 ---
 
 ```mdx-code-block
@@ -27,7 +28,7 @@ SELECT * FROM <events>
 WHERE event_name = 'page_view'
 ```
 
-You will need to replace `<events>` with the appropriate location — the database, schema and table name will depend on your setup. See this [first steps section](/docs/get-started/querying/index.md#connection-details) for details.
+You will need to replace `<events>` with the appropriate location — the database, schema and table name will depend on your configuration.
 
 :::warning
 
@@ -356,7 +357,7 @@ If your events might have more than one `my_entity` attached, the logic is sligh
 
 First, de-duplicate the events table in the same way as above, but also keep track of the number of duplicates (see `event_id_dedupe_count` below). In the entity table, generate a row number per unique combination of _all_ fields in the record. Then join on `root_id` and `root_tstamp` as before, but with an _additional_ clause that the row number is a multiple of the number of duplicates, to support the 1-to-many join. This ensures all duplicates are removed while retaining all original records of the entity. This may look like a weird join condition, but it works.
 
-Unfortunately, listing all fields manually can be quite tedious, but we have added support for this in the [de-duplication logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/deduplication/index.md#multiple-entity-contexts) of our dbt packages.
+Unfortunately, listing all fields manually can be quite tedious, but we have added support for this in the [de-duplication logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/deduplication/index.md) of our dbt packages.
 
 ```sql
 WITH unique_events AS (

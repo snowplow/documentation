@@ -3,6 +3,7 @@ title: "Introduction to Snowplow events"
 sidebar_label: "Events"
 sidebar_position: 1
 description: "An event is a central concept in Snowplow that represents something that occurred at a particular point in time"
+keywords: ["events", "self-describing events", "baked-in events", "event types"]
 ---
 
 Events are the primary way to capture data with Snowplow. Every time something happens that you want to track, you can send an event to your Snowplow pipeline. Each event is a JSON object that describes what happened. Events flow through your pipeline where they're validated, enriched, and loaded into your data warehouse or lake for analysis.
@@ -29,7 +30,7 @@ The following events are "baked in":
 * [Page pings](/docs/events/ootb-data/page-activity-tracking/index.md)
 * [Structured events](/docs/events/custom-events/index.md#structured-events)
 
-In the data warehouse, any event-specific information will be in standard columns in the Snowplow `events` table. You can find those listed [here](/docs/fundamentals/canonical-event/index.md#event-specific-fields).
+In the data warehouse, any event-specific information will be in standard columns in the Snowplow `events` table. You can find those listed [here](/docs/fundamentals/canonical-event/index.md#baked-in-event-fields).
 
 Find out more about how to track and model page view and page ping events [here](/docs/events/ootb-data/page-activity-tracking/index.md).
 
@@ -52,7 +53,7 @@ Each self-describing event consists of two parts:
 Because the event references a specific version of its schema, it's always clear to downstream users and applications what each field in the event means, even if your definition of the event changes over time.
 
 Snowplow provides a large number of self-describing events out-of-the-box, for example:
-* [Link clicks](/docs/events/ootb-data/links-and-referrers/index.md#link-click-tracking-on-web)
+* [Link clicks](/docs/events/ootb-data/links-and-referrers/index.md#link-clicks)
 * [Form submissions](/docs/sources/web-trackers/tracking-events/form-tracking/index.md)
 * [Ecommerce transactions](/docs/events/ootb-data/ecommerce-events/index.md)
 

@@ -3,6 +3,7 @@ title: Define page view attributes for real-time prospect scoring
 sidebar_label: Define attributes
 position: 3
 description: "Define behavioral data attributes in Snowplow Signals for prospect scoring, including page views, sessions, and conversion events."
+keywords: ["signals python sdk", "page view attributes"]
 ---
 
 To use Signals, you need to define which attributes to calculate, and then apply the configuration. Signals will calculate the attributes from your real-time event stream.
@@ -136,11 +137,11 @@ Signals will start populating your Profiles Store with attributes calculated fro
 ## Look at your attributes
 
 :::note
-This section expects that you [integrated](/docs/sources/trackers/web-trackers/quick-start-guide/) `sp.js` into a website and have events flowing to the collector.
+This section expects that you [integrated](/docs/sources/web-trackers/quick-start-guide/) `sp.js` into a website and have events flowing to the collector.
 If you're using Signals Sandbox your collector URL for `sp.js` is next to the Signals token.
 :::
 
-Go to your website, and use the [Snowplow Inspector](/docs/data-product-studio/data-quality/snowplow-inspector/) browser plugin to find your own `domain_userid` in outbound web events.
+Go to your website, and use the [Snowplow Inspector](/docs/testing/snowplow-inspector/) browser plugin to find your own `domain_userid` in outbound web events.
 
 ![](./images/get_domain_userid.png)
 

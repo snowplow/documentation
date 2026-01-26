@@ -1,6 +1,8 @@
 ---
-title: "Initializing the C++ tracker"
+title: "Initialize the C++ tracker"
 sidebar_label: "Initialisation"
+description: "Create a C++ tracker using the Snowplow interface with default or custom configuration. Configure tracker, network, emitter, and session settings using configuration objects or manage Tracker, Emitter, and ClientSession directly."
+keywords: ["c++ initialization", "tracker configuration", "emitter configuration", "session configuration", "network configuration"]
 date: "2020-02-25"
 sidebar_position: 20
 ---

@@ -1,6 +1,8 @@
 ---
-title: "Modeling your data with dbt"
+title: "Model your data with dbt"
+sidebar_label: "Modeling your data with dbt"
 description: "Information for our dbt packages including quickstarts, configurations, and building custom models."
+keywords: ["dbt packages", "Snowplow dbt", "data modeling", "dbt quickstart"]
 sidebar_position: 1
 ---
 
@@ -54,7 +56,20 @@ There are also 3 legacy dbt packages for web, mobile (superseded by unified) and
 
 Each package comes with a set of standard models to take your [Snowplow tracker data](/docs/sources/index.md) and produce tables aggregated to different levels, or to perform analysis for you. You can also add your own models on top, see the page on [custom modules](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md) for more information on how to do this.
 
+## Package Versions & dbt Compatibility
 
+Starting with v1.0.0, Snowplow dbt packages adopt stricter syntax requirements introduced in dbt Core ≥ 1.10.6 (for example, nested generic test arguments). Earlier dbt versions are not supported from this release onward. Additionally, for Redshift users only, redshift-adapters 1.10 is the minimum requirement going forward.
+
+Snowplow maintains two active release lines:
+
+- v1.x (latest) – recommended for all users, it is where ongoing development occurs
+- v0.x (maintenance) – receives critical bug fixes only, where possible
+
+For users upgrading from v0.x to v1.x, see our [migration guides](/docs/modeling-your-data/modeling-your-data-with-dbt/migration-guides/unified/index.md#upgrading-to-100)
+
+
+### Note on dbt Fusion
+While these packages are architecturally compatible with the dbt Fusion engine, Snowplow packages are not officially supported on dbt Fusion at this time. Limited testing may be possible using the [--no-version-check](https://docs.getdbt.com/reference/project-configs/require-dbt-version#fusion-compatibility) flag. Behavior can be fragile, particularly during full-refreshes or when introducing new models, and is under investigation.
 
 The supported data warehouses per version can be seen below:
 

@@ -2,6 +2,8 @@
 title: "Tracker setup"
 date: "2021-03-31"
 sidebar_position: 1000
+description: "Documentation for tracking Tracker setup with the web tracker."
+keywords: ["tracking", "events"]
 ---
 
 ```mdx-code-block

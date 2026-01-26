@@ -2,6 +2,8 @@
 title: "Running custom dbt models via Snowplow CDI"
 sidebar_label: "Custom models"
 sidebar_position: 2
+description: "Run custom dbt models in Snowplow Console with scheduled execution and monitoring."
+keywords: ["custom dbt models", "Snowplow CDI", "dbt Console", "scheduled dbt"]
 ---
 
 ```mdx-code-block
@@ -156,9 +158,7 @@ profile_name:
 </Tabs>
 
 :::info
-
-The warehouse password should be sent by [secure form from Snowplow Console](https://console.snowplowanalytics.com/secure-messaging/freeform) in order to set the environment variables.
-
+The warehouse password should be sent by [secure credential sharing form from Snowplow Console](https://console.snowplowanalytics.com/contact-us) in order to set the environment variables.
 :::
 
 ### Required Privileges

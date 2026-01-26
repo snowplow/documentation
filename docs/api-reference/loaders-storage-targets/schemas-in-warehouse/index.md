@@ -1,8 +1,9 @@
 ---
-title: "How schema definitions translate to the warehouse"
+title: "Schema translation to warehouse column types"
 sidebar_label: "Schemas in the warehouse"
 sidebar_position: 100
-description: "A detailed explanation of how Snowplow data is represented in Redshift, BigQuery, Snowflake, Databricks, Iceberg and Delta Lake"
+description: "How Snowplow JSON schemas map to column types and structures in Redshift, BigQuery, Snowflake, Databricks, Iceberg, and Delta Lake."
+keywords: ["schema mapping", "warehouse schemas", "column types", "schema evolution", "warehouse tables"]
 ---
 
 ```mdx-code-block

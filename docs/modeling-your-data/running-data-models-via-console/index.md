@@ -1,8 +1,9 @@
 ---
-title: "Running data models"
+title: "Run data models from Console"
 date: "2020-12-01"
 sidebar_position: 2
 description: "Guides to run data models in Snowplow, both dbt and SQL Runner."
+keywords: ["running data models", "Snowplow Console", "dbt execution", "model scheduling"]
 sidebar_label: "Running data models"
 ---
 

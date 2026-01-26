@@ -1,7 +1,10 @@
 ---
-title: "Troubleshooting"
+title: "Troubleshoot the manual event recovery process"
 date: "2020-08-26"
 sidebar_position: 50
+sidebar_label: "Troubleshooting"
+description: "Diagnose and resolve process failures, recovery failures, and unexpected behavior in event recovery jobs."
+keywords: ["recovery troubleshooting", "recovery failures", "recovery errors"]
 ---
 
 In order to verify the process is running properly there are several locations that can be monitored, depending on your runtime environment these are: datasinks (for recovery job processed output): `failedOutput` (S3/GCS bucket), `unrecoverableOutput` (S3/GCS bucket), `output` (Kinesis/PubSub streams) and job runners (tracking job status and processing in real-time).

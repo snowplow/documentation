@@ -1,7 +1,10 @@
 ---
 title: "Introduction and configuration"
+sidebar_label: "Introduction and configuration"
 date: "2021-08-06"
 sidebar_position: 10
+description: "Initialize and configure React Native tracker v2 with network, tracker, session, emitter, and subject configuration objects."
+keywords: ["react native tracker v2 configuration", "tracker initialization", "configuration objects"]
 ---
 
 ```mdx-code-block
@@ -391,7 +394,7 @@ Each set of global contexts is identified by a tag. Through the tag it is possib
 - **addGlobalContexts**
 - **removeGlobalContexts**
 
-You can find out more information and examples about how to add or remove global contexts [here](/docs/sources/react-native-tracker/tracking-events/index.md#global-contexts).
+You can find out more information and examples about how to add or remove global contexts [here](/docs/sources/react-native-tracker/previous-version/react-native-tracker-v2-reference/custom-tracking-using-schemas/index.md#global-contexts).
 
 ### Setting the Subject
 
@@ -410,7 +413,7 @@ It is possible to change subject data at runtime, as the user journey evolves. O
 
 Alternatively, you can use the **setSubjectData** method to provide a new SubjectConfiguration.
 
-You can find out more on how to use the tracker's methods to set the subject information at runtime in the corresponding [Tracking events section](/docs/sources/react-native-tracker/tracking-events/index.md#setting-the-subject-data).
+You can find out more on how to use the tracker's methods to set the subject information at runtime in the corresponding [client-side properties documentation](/docs/sources/react-native-tracker/previous-version/react-native-tracker-v2-reference/client-side-properties/index.md#setting-the-subject-data-in-a-tracker-instance).
 
 ### Getting session context data from the tracker
 
@@ -423,8 +426,8 @@ You can also get back session data from the tracker at runtime, that may be usef
 - **getBackgroundIndex**: To get the number of background transitions in the current session.
 - **getForegroundIndex**: To get the number of foreground transitions in the current session.
 
-You can find out more on how to use the tracker's methods to get session data at runtime in the corresponding [Advanced Usage section](/docs/sources/react-native-tracker/advanced-usage/index.md#getting-session-data-from-the-tracker).
+You can find out more on how to use the tracker's methods to get session data at runtime in the corresponding [session tracking documentation](/docs/sources/react-native-tracker/previous-version/react-native-tracker-v2-reference/tracking-events/session-tracking/index.md#getting-session-data-from-the-tracker).
 
 ## Removing a tracker
 
-The React Native Tracker API also provides functions to remove a tracker or remove all trackers at runtime. You can find out how in the [Advanced Usage section](/docs/sources/react-native-tracker/advanced-usage/index.md#removing-a-tracker-at-runtime) of the React Native Tracker.
+The React Native Tracker API also provides functions to remove a tracker or remove all trackers at runtime. You can find out how in the [Removing trackers at runtime](/docs/sources/react-native-tracker/previous-version/react-native-tracker-v2-reference/advanced-usage/index.md) documentation.

@@ -2,6 +2,8 @@
 position: 4
 title: "Optional: Add a new calculation to the Flink live shopper features project"
 sidebar_label: "Optional: add your own calculation"
+description: "Extend the Flink pipeline by adding a custom feature calculation to track the most viewed product brand using event data and window aggregations."
+keywords: ["flink custom aggregations", "java stream processing extension"]
 ---
 
 This page describes how to add an additional feature to the product window. The process would be similar for other parts of the system, such as cart or purchase features.
@@ -19,7 +21,7 @@ In this example, you will track a new feature called `most_viewed_brand`, based 
 
 ## 1. Add a field to `ProductViewEvent`
 
-The web application tracks data on product brand—it's a field within the Snowplow [ecommerce `product_view` event](/docs/sources/trackers/web-trackers/tracking-events/ecommerce/#product-view). A full example payload is available at `.example/product_view.json`, showing how the payload would look after processing through the Snowplow pipeline.
+The web application tracks data on product brand—it's a field within the Snowplow [ecommerce `product_view` event](/docs/sources/web-trackers/tracking-events/ecommerce/#product-view). A full example payload is available at `.example/product_view.json`, showing how the payload would look after processing through the Snowplow pipeline.
 
 The `brand` field isn't currently present in the `ProductViewEvent` class.
 

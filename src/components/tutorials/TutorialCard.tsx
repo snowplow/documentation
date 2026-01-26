@@ -41,9 +41,9 @@ export const TutorialCard: React.FC<TutorialCardProps> = ({ tutorial, className 
       <CardContent className="p-6 h-full flex flex-col">
         {/* Topic/Use Case Tags */}
         <div className="flex flex-wrap gap-2 mb-4">
-          {tutorial.meta.useCases.length > 0 && (
+          {tutorial.meta.useCase && (
             <div className="bg-purple-200 text-purple-800 px-2 py-1 rounded-lg text-[.675rem] font-normal">
-              {tutorial.meta.useCases[0]}
+              {tutorial.meta.useCase}
             </div>
           )}
           <div className="bg-purple-200 text-purple-800 px-2 py-1 rounded-lg text-[.675rem] font-normal">

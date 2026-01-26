@@ -1,8 +1,9 @@
 ---
-title: "Signals concepts"
+title: "Core Signals components and concepts"
 sidebar_position: 10
 sidebar_label: "Concepts"
-description: "Learn about Snowplow Signals core concepts including attribute groups, services, interventions, and data sources for real-time customer intelligence."
+description: "Signals introduces attribute groups for defining behavioral data, services for consuming attributes, and interventions for triggering actions. Learn about data sources, attribute keys, and the Profiles Store."
+keywords: ["attribute groups", "services", "interventions", "profiles store", "attribute keys"]
 ---
 
 Signals introduces a new set of data governance concepts to Snowplow. As with schemas for Snowplow event data, Signals components are strictly defined, structured, and versioned.
@@ -62,7 +63,7 @@ To demonstrate the necessity of attribute keys, consider the attribute `num_view
 
 Each of these is likely to have a different calculated value.
 
-You can [define your own attribute keys](/docs/signals/define-attributes/attribute-groups/index.md#creating-a-custom-attribute-key), or use the built-in ones. Signals comes with predefined attribute keys for user, device, and session. Their identifiers are from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) in all Snowplow events.
+You can [define your own attribute keys](/docs/signals/define-attributes/attribute-groups/index.md#attribute-keys), or use the built-in ones. Signals comes with predefined attribute keys for user, device, and session. Their identifiers are from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-fields) in all Snowplow events.
 
 | Attribute key      | Type     |
 | ------------------ | -------- |

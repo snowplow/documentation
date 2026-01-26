@@ -2,6 +2,8 @@
 position: 1
 title: "Learn how to implement an abandoned browse system with a composable CDP"
 sidebar_label: "Introduction"
+description: "Build an abandoned browse tracking and re-engagement system using Snowplow, Snowflake, Census, and Braze. Learn how a composable CDP approach helps recover lost ecommerce conversions through personalized campaigns."
+keywords: ["composable cdp abandoned browse", "ecommerce cart abandonment", "snowplow snowflake census", "behavioral tracking tutorial"]
 ---
 
 Abandoned browse is a common ecommerce problem where users show interest in products but don't complete a purchase. It is also referred to as "shopping cart abandonment," "abandoned basket," or "abandoned cart." Despite how common it is, it is still a challenge to implement a successful re-engagement campaign when using traditional marketing tools because they lack all the context needed to create a compelling personalized message. At Snowplow, we have found that a composable CDP approach is the best way to solve this problem. This tutorial has been written to show that it is straightforward to get started.

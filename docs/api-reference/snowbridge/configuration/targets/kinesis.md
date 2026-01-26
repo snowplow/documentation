@@ -1,7 +1,8 @@
 ---
-title: "Configuring Kinesis as a Snowbridge target"
+title: "Configure Kinesis as a Snowbridge target"
 sidebar_label: "Kinesis"
-description: "Write data to a Kinesis stream."
+description: "Configure Kinesis target for Snowplow Snowbridge to write data to AWS Kinesis streams with throttle retry handling and IAM authentication."
+keywords: ["snowbridge config", "kinesis target", "aws kinesis", "kinesis producer", "throttle handling"]
 ---
 
 ```mdx-code-block

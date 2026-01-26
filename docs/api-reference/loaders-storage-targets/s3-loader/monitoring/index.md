@@ -1,7 +1,10 @@
 ---
-title: "S3 loader monitoring"
+title: "S3 Loader monitoring"
+sidebar_label: "S3 Loader monitoring"
 date: "2021-10-04"
 sidebar_position: 30
+description: "Monitor S3 Loader with StatsD metrics, Sentry error tracking, and Snowplow event tracking for application health and failures."
+keywords: ["s3 loader monitoring", "statsd metrics", "sentry alerts", "loader health", "application monitoring"]
 ---
 
 The S3 loader has several types of monitoring built in, to help the pipeline operator: Statsd metrics, Sentry alerts, and Snowplow tracking.
@@ -14,11 +17,15 @@ When processing enriched events, the S3 loader can emit metrics to a statsd daem
 
 ```text
 snowplow.s3loader.count:42|c|#tag1:value1
-snowplow.s3loader.latency_collector_to_load:123.4|g|#tag1:value1
+snowplow.s3loader.latency_collector_to_load:123|g|#tag1:value1
+snowplow.s3loader.latency_millis:56|g|#tag1:value1
+snowplow.s3loader.e2e_latency_millis:123|g|#tag1:value1
 ```
 
-- `count_good`: the total number of events in the batch that was loaded.
-- `latency_collector_to_load`: this is the time difference between reaching the collector and getting loaded to S3.
+- `count`: total number of events that got written to S3.
+- `latency_collector_to_load`: time difference between reaching the collector and getting loaded to S3 (only for enriched events). Will get deprecated eventually in favor of `e2e_latency_millis`.
+- `latency_millis`: delay between the input record getting written to the stream and S3 loader starting to process it.
+- `e2e_latency_millis`: same as `latency_collector_to_load`, which will get deprecated eventually and replaced with this metric.
 
 Statsd monitoring is configured by setting the `monitoring.metrics.statsd` section in [the hocon file](/docs/api-reference/loaders-storage-targets/s3-loader/configuration-reference/index.md):
 
@@ -35,6 +42,9 @@ Statsd monitoring is configured by setting the `monitoring.metrics.statsd` sec
   }
 }
 ```
+## Health probe
+
+Starting with `3.0.0` version S3 loader gets a health probe, configured via the `monitoring.healthProbe` section (see the configuration reference).
 
 ## Sentry
 
@@ -47,18 +57,5 @@ Sentry monitoring is configured by setting the `monitoring.sentry.dsn` key in�
 ```json
 "monitoring": {
   "dsn": "http://sentry.acme.com"
-}
-```
-
-## Snowplow Tracking
-
-The loader can emit a Snowplow event to a collector when the application experiences runtime problems. It sends [app_initialized](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.monitoring.kinesis/app_initialized/jsonschema/1-0-0) and [app_heartbeat](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.monitoring.kinesis/app_heartbeat/jsonschema/1-0-0) events to show the application is alive. A [storage_write_failed event](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.monitoring.kinesis/storage_write_failed/jsonschema/1-0-0) is sent when a file cannot be written to S3, and a [app_shutdown event](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.monitoring.kinesis/app_shutdown/jsonschema/1-0-0) is sent when the application exits due to too many S3 errors.
-
-Snowplow monitoring is configured by setting the `monitoring.snowplow` section in [the hocon file](/docs/api-reference/loaders-storage-targets/s3-loader/configuration-reference/index.md):
-
-```json
-"monitoring": {
-  "appId": "redshift-loader"
-  "collector": "collector.acme.com"
 }
 ```

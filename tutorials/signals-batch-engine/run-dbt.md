@@ -2,7 +2,8 @@
 position: 6
 title: Run and test your new attribute dbt models
 sidebar_label: Run and test models
-description: "Run dbt models to create Snowplow Signals attribute tables in your warehouse, and validate data quality."
+description: "Configure dbt connection profiles, run models with full refresh to create attribute tables in Snowflake or BigQuery, and validate data quality."
+keywords: ["dbt run command", "warehouse attribute tables", "dbt snapshot"]
 ---
 
 Now that your models are generated, it's time to run them and verify that everything works as expected. This step allows you to test your models locally before moving them to production.
@@ -53,3 +54,11 @@ It's important to test your models before moving them to production. The local t
 * Ensure data quality and accuracy
 
 Follow your standard dbt testing process.
+
+## Make sure all your data is processed
+The first time the model is run, not all your data might get processed. Processing is dictated by the variable `snowplow__backfill_limit_days`. You could increase this to a larger number depending on the data volume and how much data you need to backfill. You might be able to process everything in one run, or after a few runs.
+
+## Run dbt snapshot
+Once your data is fully backfilled, you are ready to run `dbt snapshot`. The attributes table captures the latest values for each attribute key in a drop and recompute fashion. Once you start running the dbt snapshot linked to this table, the sync engine will only process changes to specific attribute keys. It will only sync attribute keys where at least one attribute value changed since the last time data was sent to the profile store.
+
+This optimized syncing saves processing cost. Once you start syncing, you'll need to incorporate dbt snapshot runs after each time you run your dbt models. More on this in the next step.

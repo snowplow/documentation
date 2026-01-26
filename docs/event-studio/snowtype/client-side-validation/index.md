@@ -1,6 +1,9 @@
 ---
-title: "Client-side validation"
+title: "Client-side schema validation with Snowtype"
+sidebar_label: "Client-side validation"
 sidebar_position: 5
+description: "Enable real-time schema validation in the browser for JavaScript and TypeScript trackers to catch tracking errors before events are sent."
+keywords: ["client-side validation", "browser validation", "schema validation", "JavaScript validation", "TypeScript validation"]
 ---
 
 :::info
@@ -40,8 +43,8 @@ Suppose we are tracking against a custom schema for button clicks:
             type: 'string',
             description: 'The text on the button, or a user-provided override'
         },
-        id: { 
-            type: 'string', 
+        id: {
+            type: 'string',
             description: 'The identifier of the button'
         },
     },
@@ -49,7 +52,7 @@ Suppose we are tracking against a custom schema for button clicks:
 }
 ```
 
-When the respective method, from Snowtype, that handles tracking of this event is fired validation will happen at runtime for all schema attributes. Following we can see an example of how the schema validation will show up in the browser console when the event responsible for tracking against the custom button click schema fires. 
+When the respective method, from Snowtype, that handles tracking of this event is fired validation will happen at runtime for all schema attributes. Following we can see an example of how the schema validation will show up in the browser console when the event responsible for tracking against the custom button click schema fires.
 
 ![validation example](./images/validation.png)
 
@@ -63,9 +66,9 @@ Currently the validation information will include attributes that can help point
 This feature is available since version 0.3.1 of Snowtype for the [Browser Tracker](/docs/sources/web-trackers/quick-start-guide/index.md?platform=browser) in both TypeScript and JavaScript.
 :::
 
-Cardinality rules allow you to specify the expected number of an entity taking part in an Event Specification. You would use this capability to ensure the correct number of entities are getting sent alongside your event. E.g. 
+Cardinality rules allow you to specify the expected number of an entity taking part in an Event Specification. You would use this capability to ensure the correct number of entities are getting sent alongside your event. E.g.
 
-- `Exactly 1` 
+- `Exactly 1`
 - `At least 1`
 - `Between 1 and 2`
 
@@ -189,7 +192,7 @@ type ErrorType = {
 ```
 
 :::info
-When Snowtype detects the `NODE_ENV` environment variable being set to `test`, as is done by many testing libraries, it will automatically default to throwing an `Error` when a violation is detected. 
+When Snowtype detects the `NODE_ENV` environment variable being set to `test`, as is done by many testing libraries, it will automatically default to throwing an `Error` when a violation is detected.
 :::
 
 ## Caveats

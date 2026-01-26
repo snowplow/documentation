@@ -1,8 +1,9 @@
 ---
-title: "Calculate attributes from warehouse data"
+title: "Calculate and sync warehouse attributes to Signals"
 sidebar_label: "Calculate from warehouse"
 sidebar_position: 50
-description: "Use existing warehouse data or create new batch attribute tables with dbt to sync historical attributes to the Signals Profiles Store."
+description: "Calculate new batch attributes with dbt models or sync existing warehouse tables to the Profiles Store. Use the batch engine CLI to generate dbt projects and register tables."
+keywords: ["batch attributes", "warehouse sync", "dbt models", "batch engine", "external batch"]
 ---
 
 You can use existing attributes that are already in your warehouse, or use the Signals batch engine to calculate new attributes in a new table.
@@ -10,7 +11,7 @@ You can use existing attributes that are already in your warehouse, or use the S
 To use historical, warehouse attributes in your real-time use cases, you will need to sync the data to the Profiles Store. Signals includes a sync engine to do this.
 
 :::note Warehouse support
-Only Snowflake and BigQuery are supported currently.
+Only Snowflake and BigQuery are supported currently. However, you can also use Signals without the warehouse functionality.
 :::
 
 Signals is configured slightly differently depending if you're using existing tables or creating new ones.
@@ -32,13 +33,13 @@ Once enabled, syncs begin at a fixed interval. By default, this is every 1 hour.
 
 Using existing tables in your warehouse is the more straight-forward approach, as it doesn't require any additional modeling. You'll need to [define an `ExternalBatchAttributeGroup`](/docs/signals/define-attributes/using-python-sdk/attribute-groups/warehouse-config/index.md), including a `BatchSource` warehouse configuration object.
 
-To start syncing existing tables, [publish](/docs/signals/define-attributes/using-python-sdk/index.md#publishing-and-deleting) your `ExternalBatchAttributeGroup` group to Signals.
+To start syncing existing tables, [publish](/docs/signals/connection/index.md#publishing-and-deleting) your `ExternalBatchAttributeGroup` group to Signals.
 
 ```python
 sp_signals.publish([attribute_group])
 ```
 
-The sync will begin: the sync engine will look for new records at a given interval, based on the `timestamp_field` and the last time it ran. The default time interval is 1 hour.
+The sync will begin: the sync engine will look for new records at a given interval, based on the `timestamp_field` and the last time it ran. The default time interval is 1 hour. If you use dbt, consider creating a dbt snapshot over your attributes table to capture changes if it is refreshed in a drop and recompute manner. This way you can use the `dbt_valid_from` as the `timestamp_field` for optimal incremental syncs.
 
 ## Creating new attribute tables
 
@@ -67,7 +68,7 @@ The available options are:
 ```
   init              # Initialize dbt project structure and base configuration
   generate          # Generate dbt project assets
-  sync       # Registers the attribute table as a data source with Signals and publishes the Attribute Group so that syncing can begin
+  sync       # Registers the attribute table snapshot as a data source with Signals and publishes the Attribute Group so that syncing can begin
   test_connection   # Test the connection to the authentication and API services
 ```
 
@@ -91,13 +92,15 @@ The model created for each attribute group has configurable variables. The most 
 
 You will need to update the variables for each attribute group individually, by editing the `dbt_project.yml` files. The table below lists the configurable variables for each model:
 
-| Variable                               | Description                                                                                           | Default Value  |
-| -------------------------------------- | ----------------------------------------------------------------------------------------------------- | -------------- |
-| `snowplow__start_date`                 | Date from where the model starts looking for events, based on both `load_tstamp` and `derived_tstamp` | `'2025-01-01'` |
-| `snowplow__app_id`                     | Filter the data on specific `app_id`s                                                                 | `[]`           |
-| `snowplow__backfill_limit_days`        | Limit backfill increments for the `filtered_events_table`                                             | `1`            |
-| `snowplow__late_event_lookback_days`   | The number of days to allow for late arriving data to be reprocessed during daily aggregation         | `5`            |
-| `snowplow__min_late_events_to_process` | The threshold number of skipped daily events to process during daily aggregation                      | `1`            |
-| `snowplow__atomic_schema`              | Change this if you aren't using `atomic` schema for Snowplow event data                               | `'atomic'`     |
-| `snowplow__database`                   | Change this if you aren't using `target.database` for Snowplow event data                             |                |
-| `snowplow__events_table`               | Change this if you aren't using `events` table for Snowplow event data                                | `'events'`     |
+| Variable                                   | Description                                                                                           | Default Value                                                                                                   |
+| ------------------------------------------ | ----------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
+| `snowplow__start_date`                     | Date from where the model starts looking for events, based on both `load_tstamp` and `derived_tstamp` | `'2025-01-01'`                                                                                                  |
+| `snowplow__app_id`                         | Filter the data on specific `app_id`s                                                                 | `[]`                                                                                                            |
+| `snowplow__backfill_limit_days`            | Limit backfill increments for the `filtered_events_table`                                             | `1`                                                                                                             |
+| `snowplow__late_event_lookback_days`       | The number of days to allow for late arriving data to be reprocessed during daily aggregation         | `5`                                                                                                             |
+| `snowplow__min_late_events_to_process`     | The threshold number of skipped daily events to process during daily aggregation                      | `1`                                                                                                             |
+| `snowplow__atomic_schema`                  | Change this if you aren't using `atomic` schema for Snowplow event data                               | `'atomic'`                                                                                                      |
+| `snowplow__database`                       | Change this if you aren't using `target.database` for Snowplow event data                             |                                                                                                                 |
+| `snowplow__events_table`                   | Change this if you aren't using `events` table for Snowplow event data                                | `'events'`                                                                                                      |
+| `snowplow__include_current_day_in_windows` | false                                                                                                 | If set to true, the `current_day` with incomplete data is also taken into account for `last_x_day` type windows |
+| `snowplow__databricks_catalog`             | `hive_metastore`                                                                                      | Catalog used for the atomic events table (Databricks only)                                                      |

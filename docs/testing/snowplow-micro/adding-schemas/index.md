@@ -1,8 +1,9 @@
 ---
-title: "Adding custom schemas to Snowplow Micro"
+title: "Add custom schemas to Snowplow Micro"
 sidebar_label: "Adding custom schemas"
 sidebar_position: 4
-description: "How to add custom schemas to Snowplow Micro."
+description: "Connect Snowplow Micro to Iglu registries or add schemas directly. Point Micro to Console registries, Iglu Server, or mount local schema files for custom event validation."
+keywords: ["custom schemas", "iglu registry", "schema validation", "local schemas", "data structures"]
 ---
 
 ```mdx-code-block
@@ -18,7 +19,7 @@ See [our explanation](/docs/fundamentals/schemas/index.md) on what schemas are f
 
 :::
 
-To track an event with a custom schema, you would need code like this (using the [Browser tracker](/docs/sources/web-trackers/tracking-events/index.md#tracking-custom-self-describing-events) as an example):
+To track an event with a custom schema, you would need code like this (using the [Browser tracker](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md) as an example):
 
 ```js
 import { trackSelfDescribingEvent } from '@snowplow/browser-tracker';
@@ -48,7 +49,7 @@ curl localhost:9090/micro/iglu/com.example/my-schema/jsonschema/1-0-0
 
 Place your Iglu registry URL and API key (if any) into two [environment variables](https://en.wikipedia.org/wiki/Environment_variable): `MICRO_IGLU_REGISTRY_URL` and `MICRO_IGLU_API_KEY`.
 
-Make sure to fully spell out the URL, including the protocol (`http://` or `https://`). For most Iglu registries, including those provided by Snowplow CDI, the URL will end with `/api` — make sure to include that part too, for example: `https://com-example.iglu.snplow.net/api`. [Static registries](/docs/api-reference/iglu/iglu-repositories/static-repo/index.md), such as `http://iglucentral.com`, are an exception — you don’t need to append `/api` to the URL.
+Make sure to fully spell out the URL, including the protocol (`http://` or `https://`). For most Iglu registries, including those provided by Snowplow CDI, the URL will end with `/api` — make sure to include that part too, for example: `https://com-example.iglu.snplow.net/api`. [Static registries](/docs/api-reference/iglu/iglu-repositories/static-repo/index.md), such as `https://iglucentral.com`, are an exception — you don’t need to append `/api` to the URL.
 
 :::tip
 

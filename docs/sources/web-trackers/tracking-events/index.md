@@ -1,8 +1,10 @@
 ---
-title: "Tracking data out-of-the-box with the web trackers"
+title: "Track data out-of-the-box with the web trackers"
 sidebar_label: "Tracking data out-of-the-box"
 date: "2022-08-30"
 sidebar_position: 2500
+description: "Track page views, structured events, and self-describing events with automatic context entities and custom timestamps using the web trackers."
+keywords: ["tracking", "events"]
 ---
 
 ```mdx-code-block
@@ -117,7 +119,7 @@ However, the following autotracked context entities can be configured directly w
 
 | Entity                                                                                                      | Usage                             | Enabled by default |
 | ----------------------------------------------------------------------------------------------------------- | --------------------------------- | ------------------ |
-| [`webPage`](/docs/sources/web-trackers/tracking-events/page-views/index.md#webpage-context-entity) | A UUID for the page view.         | `true`             |
+| [`webPage`](/docs/sources/web-trackers/tracking-events/page-views/index.md#webpage-page-view-id-context-entity) | A UUID for the page view.         | `true`             |
 | [`session`](/docs/sources/web-trackers/tracking-events/session/index.md)                           | Data about the current session.   | `false`            |
 | [`browser`](/docs/sources/web-trackers/browsers/index.md)                                          | Properties of the user's browser. | `false`            |
 
@@ -210,13 +212,13 @@ Set the application ID using the `appId` field of the [tracker configuration o
 The option to track the application version was introduced in version 4.1 of the JavaScript tracker.
 :::
 
-Set the application ID using the `appVersion` field of the [tracker configuration object](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md). This will be attached to every event the tracker fires using the [application context entity](/docs/events/ootb-data/app-information/index.md#application-context-entity-on-web-apps).
+Set the application ID using the `appVersion` field of the [tracker configuration object](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md). This will be attached to every event the tracker fires using the [application context entity](/docs/events/ootb-data/app-information/index.md#entity-definitions).
 
 The version of can be a semver-like structure (e.g 1.1.0) or a Git commit SHA hash.
 
 ### Setting application platform
 
-Set the application platform using the `platform` field of the [tracker configuration object](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md). This will be attached to every event the tracker fires. Its default value is “web”. For a list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/events/index.md#application-parameters).
+Set the application platform using the `platform` field of the [tracker configuration object](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md). This will be attached to every event the tracker fires. Its default value is “web”. For a list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/fundamentals/canonical-event/index.md#application-fields).
 
 ### Setting the user ID
 

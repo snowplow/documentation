@@ -1,6 +1,7 @@
 ---
-title: "Modeling your data with SQL Runner"
-description: "Guides for setting up SQL Runner and running our web and mobile models."
+title: "Model your data with SQL Runner (legacy)"
+description: "Guides for setting up the legacy SQL Runner and running our web and mobile models."
+keywords: ["SQL Runner", "legacy SQL models", "SQL Runner setup", "web model SQL"]
 sidebar_label: "SQL Runner models (legacy)"
 sidebar_position: 99999
 ---

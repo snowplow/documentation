@@ -1,8 +1,10 @@
 ---
-title: "User management"
+title: "Manage users in Console directly or with SSO"
+sidebar_label: "User management"
 date: "2020-02-15"
 sidebar_position: 1
-sidebar_label: "User management"
+description: "Add and remove users in Snowplow Console, configure Single Sign-On with SAML 2.0 identity providers including Google Workspace, Azure AD, Okta, and OpenID Connect."
+keywords: ["user management", "SSO setup", "Single Sign-On", "SAML", "identity provider", "Azure AD", "Google Workspace", "Okta"]
 ---
 
 There are two ways to add and remove users in Console: directly managed in Console, or managed through your Single Sign-On (SSO) provider.
@@ -29,7 +31,7 @@ Setting up SSO for your account requires some information to be exchanged betwee
 To enable single sign-on (SSO) for Snowplow, follow these steps inside Console:
 
 1. Go to the [manage organization](https://console.snowplowanalytics.com/settings) page.
-2. Select [Single sign-on (SSO)](https://console.snowplowanalytics.com/users/sso) from the Users panel.
+2. Select [Single sign-on (SSO)](https://console.snowplowanalytics.com/users) from the Users panel. The SSO configuration is only visible to users with Admin role.
 3. Follow the steps for your selected identity provider and supply the relevant information.
 * For Google Workspace, Azure AD, and Open ID Connect, the process is fully self-serve. This means that you can get connected immediately.
 * For other identity providers, you will need to submit your details securely to our support team. We will then work with you to set up the SSO connection.

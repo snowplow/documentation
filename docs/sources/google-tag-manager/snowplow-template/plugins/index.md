@@ -1,12 +1,15 @@
 ---
-title: "Plugins"
+title: "Snowplow GTM plugins"
+sidebar_label: "Plugins"
 sidebar_position: 200
+description: "Load JavaScript tracker plugins in Google Tag Manager to extend tracking functionality. Configure external and inline custom plugins with CDN URLs or custom JavaScript variables for enhanced event tracking."
+keywords: ["gtm plugins", "tracker plugins", "javascript tracker plugins", "custom plugins", "inline plugins"]
 ---
 
 Plugins are supported to provide an easy way to extend the functionality of the tracker. This is similar to the [JavaScript Tracker](/docs/sources/web-trackers/plugins/creating-your-own-plugins/index.md) but with the caveat that plugins may be more limited in their functionality due to the constraints of the Google Tag Manager environment.
 
 Each plugin can be loaded from external URLs or provided inline within GTM, and can optionally take some custom configuration.
-A plugin may add new methods to the tracker that can be called via [Custom Commands](#custom-commands).
+A plugin may add new methods to the tracker that can be called via [Custom Commands](../index.md#custom-commands).
 
 :::note
 
@@ -39,7 +42,7 @@ This is usually acceptable as the browser will have cached the first request; if
 
 The name of the plugin to load. These values can be found on the respective plugin documentation.
 
-For example, for the `Link Click Tracking` plugin, the values (`'snowplowLinkClickTracking,LinkClickTrackingPlugin'`) can be found in the snippet [here](https://docs.snowplow.io/docs/sources/web-trackers/tracking-events/link-click/#enable-link-click-tracking).
+For example, for the `Link Click Tracking` plugin, the values (`'snowplowLinkClickTracking,LinkClickTrackingPlugin'`) can be found in the snippet [here](/docs/sources/web-trackers/tracking-events/link-click/index.md#enable-link-click-tracking).
 
 ### Additional Configuration (optional)
 

@@ -1,8 +1,9 @@
 ---
-title: "Using the Snowplow Micro user interface"
+title: "View and filter events in the Snowplow Micro UI"
 sidebar_position: 2
 sidebar_label: "Using the UI"
-description: "How to view, filter and investigate events in the Micro UI."
+description: "Access the Micro web interface to view, filter, and investigate good and bad events. Share the UI with colleagues through public domain names."
+keywords: ["micro ui", "event inspection", "filter events", "view events"]
 ---
 
 To view the Micro UI, head to [http://localhost:9090/micro/ui](http://localhost:9090/micro/ui) in your web browser (assuming you followed the [basic usage](/docs/testing/snowplow-micro/basic-usage/index.md) instructions).

@@ -3,6 +3,7 @@ title: Automatically generated data models
 sidebar_label: Automatically generated data models
 sidebar_position: 8
 description: Generate optimized, analysis-ready data models directly from your tracking plans for views or incremental dbt models.
+keywords: ["automatic data models", "tracking plan models", "generated models", "dbt model generation"]
 ---
 
 Automatic data model generation allows you to generate optimized models directly from your [tracking plans](/docs/event-studio/tracking-plans/index.md) in [Snowplow Console](https://console.snowplowanalytics.com). You can use the models directly in your warehouse, or integrate them into existing dbt projects. The models are ready for analysis, BI tool, or reverse ETL use cases.
@@ -22,7 +23,7 @@ Choose exactly how you want the model to look, based on your use case.
 You can specify which parts of the tracking plan to include:
 * Event specifications
 * Entities
-* [Atomic Snowplow event properties](/docs/fundamentals/canonical-event/index.md#out-of-the-box-fields)
+* [Atomic Snowplow event properties](/docs/fundamentals/canonical-event/index.md#common-fields)
 
 ### Automatic data flattening
 

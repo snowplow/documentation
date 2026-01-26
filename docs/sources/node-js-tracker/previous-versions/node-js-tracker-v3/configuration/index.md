@@ -1,7 +1,10 @@
 ---
 title: "Configuration"
+sidebar_label: "Configuration"
 date: "2021-04-07"
 sidebar_position: 3000
+description: "Configure event properties and user data for Node.js tracker v3."
+keywords: ["node.js tracker v3 configuration", "event properties"]
 ---
 
 You may have additional information about your application's environment, current user and so on, which you want to send to your Snowplow pipeline with each event.
@@ -40,7 +43,7 @@ t.setPlatform('mob');
 
 If the platform is not set manually, it defaults to `'srv'` (for server).
 
-For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/events/index.md#application-parameters).
+For a full list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/fundamentals/canonical-event/index.md#application-fields).
 
 ### Set user ID with `setUserId()`
 

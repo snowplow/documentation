@@ -1,6 +1,9 @@
 ---
 title: "Ecommerce Tag Configuration"
+sidebar_label: "Ecommerce Tag Configuration"
 sidebar_position: 100
+description: "Configure the Snowplow v3 Ecommerce Tag Template in GTM using native Snowplow Ecommerce API or transitional GA4/UA adapter APIs. Set tracking parameters, custom contexts, and product data for legacy v3 ecommerce tracking."
+keywords: ["v3 ecommerce configuration", "v3 ga4 ecommerce", "v3 ua ecommerce", "v3 ecommerce api", "legacy v3 ecommerce setup"]
 ---
 
 ```mdx-code-block
@@ -31,11 +34,11 @@ In this textbox you can specify the argument to the ecommerce function. This can
 
 **Add Custom Context Entities**
 
-Use this table to attach [custom context entities](/docs/sources/web-trackers/tracking-events/index.md#custom-context) to the Snowplow event. Each row can be set to a Google Tag Manager variable that returns an array of custom contexts to add to the event hit.
+Use this table to attach [custom context entities](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md#tracking-a-custom-entity) to the Snowplow event. Each row can be set to a Google Tag Manager variable that returns an array of custom contexts to add to the event hit.
 
 **Set Custom Timestamp**
 
-Set this to a UNIX timestamp in case you want to [override the default timestamp](/docs/sources/web-trackers/tracking-events/index.md#setting-the-true-timestamp) used by Snowplow.
+Set this to a UNIX timestamp in case you want to [override the default timestamp](/docs/sources/web-trackers/tracking-events/index.md#adding-custom-timestamps-to-events) used by Snowplow.
 
   </TabItem>
   <TabItem value="ga4" label="GA4 Ecommerce">

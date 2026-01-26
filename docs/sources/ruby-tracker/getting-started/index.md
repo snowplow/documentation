@@ -1,8 +1,10 @@
 ---
-title: "Getting started with the Ruby tracker"
+title: "Get started with the Ruby tracker"
 sidebar_label: "Getting started"
 date: "2021-10-15"
 sidebar_position: 0
+description: "Install the Ruby tracker gem, initialize trackers with emitters, configure subject properties, and implement singleton pattern for Ruby and Rails apps."
+keywords: ["ruby tracker setup", "gem installation", "singleton pattern"]
 ---
 
 ```mdx-code-block

@@ -1,7 +1,10 @@
 ---
-title: "Versions and compatibility"
+title: "Snowplow component versions and compatibility matrix"
+sidebar_label: "Versions and compatibility"
 date: "2021-04-29"
 sidebar_position: -1000
+description: "Latest versions of Snowplow components including collectors, enrichment, loaders, trackers, Iglu, data models, and analytics SDKs with compatibility and upgrade information."
+keywords: ["component versions", "version compatibility", "latest versions", "upgrade guides", "deprecation"]
 ---
 
 ```mdx-code-block
@@ -97,7 +100,6 @@ If you are a Snowplow CDI customer, rather than self-hosted, you don't need to i
 | [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md)         |   {versions.igluServer}    |
 | [`igluctl` utility](/docs/api-reference/iglu/igluctl-2/index.md)                       |     {versions.igluctl}     |
 | [Iglu Scala client](/docs/api-reference/iglu/iglu-clients/scala-client-setup/index.md) | {versions.igluScalaClient} |
-| [Iglu Ruby client](/docs/api-reference/iglu/iglu-clients/ruby-client/index.md)         | {versions.igluRubyClient}  |
 | [Iglu Objective-C client](/docs/api-reference/iglu/iglu-clients/objc-client/index.md)  | {versions.igluObjCClient}  |
 
 ### Trackers

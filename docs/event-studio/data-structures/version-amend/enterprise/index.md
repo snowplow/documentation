@@ -1,7 +1,9 @@
 ---
-title: "Versioning Data Structures with the JSON Editor"
+title: "Version data structures with JSON Editor"
 sidebar_label: "Using the JSON Editor"
 sidebar_position: 10
+description: "Choose schema version increments when publishing data structures using the JSON Editor in the Data Structures UI."
+keywords: ["JSON Editor versioning", "schema versions", "version selection", "publish schemas"]
 ---
 
 In Data Structures UI at the point of publishing a [schema](/docs/fundamentals/schemas/index.md) you'll be asked to select which version you'd like to create.

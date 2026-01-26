@@ -1,7 +1,10 @@
 ---
 title: "Setup"
+sidebar_label: "Setup"
 date: "2020-09-03"
 sidebar_position: 100
+description: "Install Node.js tracker version 0.3.0 using npm."
+keywords: ["node.js tracker v0.3.0 setup", "npm installation"]
 ---
 
 ## Compatibility

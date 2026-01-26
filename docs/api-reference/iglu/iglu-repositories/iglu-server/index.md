@@ -1,7 +1,10 @@
 ---
 title: "Iglu Server"
+sidebar_label: "Iglu Server"
 date: "2021-03-26"
 sidebar_position: 2000
+description: "RESTful interface for publishing, testing, and serving Iglu schemas with comprehensive API endpoints for schema management, validation, and authentication."
+keywords: ["iglu server api", "schema registry rest api"]
 ---
 
 The [Iglu Server](https://github.com/snowplow-incubator/iglu-server/) is an Iglu schema registry which allows you to publish, test and serve schemas via an easy-to-use RESTful interface. It is split into a few services which will be detailed in the following sections.

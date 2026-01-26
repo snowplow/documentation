@@ -1,7 +1,10 @@
 ---
 title: "Example Roku app with Snowplow tracking"
+sidebar_label: "Example Roku app"
 date: "2021-11-16"
 sidebar_position: 5000
+description: "Demo Roku video player channel showing Snowplow tracking implementation in BrightScript with setup and deployment instructions."
+keywords: ["roku demo app", "example channel", "brightscript tracking demo"]
 ---
 
 The tracker comes with a demo app that shows it in use. It is a simple video player with a fixed collection of played videos and an interface to switch between them. The demo app may serve you to understand how to embed Snowplow tracking within a BrightScript channel.

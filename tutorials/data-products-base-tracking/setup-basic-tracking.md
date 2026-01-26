@@ -2,9 +2,11 @@
 position: 4
 title: Track page views, activity, and link clicks with the Browser tracker
 sidebar_label: Set up web tracking
+description: "Install and configure the Snowplow Browser tracker to capture page views, activity tracking with page pings, and automatic link click tracking using the link click plugin."
+keywords: ["browser tracker setup", "page view tracking", "link click tracking plugin", "activity tracking javascript"]
 ---
 
-For this example application, we will use the [Browser tracker](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/quick-start-guide/#quick-start-basic) which is distributed through npm.
+For this example application, we will use the [Browser tracker](/docs/sources/web-trackers/quick-start-guide/#quick-start-basic) which is distributed through npm.
 
 Switch to the project root directory and then install it by running `npm install @snowplow/browser-tracker`.
 
@@ -41,12 +43,12 @@ What this code does is:
 2. Enables activity tracking which will send periodic page pings.
 3. Sends a page view when the main application component is first rendered.
 
-You can validate this step being implemented properly using the [Snowplow Inspector](https://docs.snowplow.io/docs/testing-debugging/snowplow-inspector/overview/) browser extension observing Page view and Page ping events.
+You can validate this step being implemented properly using the [Snowplow Inspector](/docs/testing/snowplow-inspector/) browser extension observing Page view and Page ping events.
 ![](./images/inspector.png)
 
 ## Add link click tracking
 
-As a next step you will implement link click tracking for the main page link pointing to the TodoMVC website. To track this and other links on your pages, you can install the [Link click](https://docs.snowplow.io/docs/collecting-data/collecting-from-own-applications/javascript-trackers/web-tracker/tracking-events/link-click/) tracking plugin. The plugin provides automatic link click tracking for all links on your page.
+As a next step you will implement link click tracking for the main page link pointing to the TodoMVC website. To track this and other links on your pages, you can install the [Link click](/docs/sources/web-trackers/tracking-events/link-click/) tracking plugin. The plugin provides automatic link click tracking for all links on your page.
 
 To enable it in the application, switch to the project root directory and then install it by running `npm install @snowplow/browser-plugin-link-click-tracking`.
 

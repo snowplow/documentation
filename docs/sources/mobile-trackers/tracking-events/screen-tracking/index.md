@@ -1,7 +1,9 @@
 ---
-title: "Tracking screen views and engagement with the native mobile trackers"
+title: "Track screen views and engagement with the native mobile trackers"
 sidebar_label: "Screen view and engagement"
 sidebar_position: 40
+description: "Automatically track screen changes, time spent on screens, and user engagement metrics in mobile applications."
+keywords: ["screen view tracking", "screen engagement", "mobile analytics"]
 ---
 
 ```mdx-code-block
@@ -126,8 +128,8 @@ Using the Android `Application.ActivityLifecycleCallbacks` interface, the tracke
 
 Automatic screen view tracking tracks two pieces of information:
 
-- The tracker automatically tracks each screen change using a [`ScreenView` event](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-view-events).
-- If the `TrackerConfiguration.screenContext` property is enabled, the tracker attaches a [`Screen` entity](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-view-events) to all the events tracked by the tracker reporting the last (and probably current) screen visible on device when the event was tracked.
+- The tracker automatically tracks each screen change using a [`ScreenView` event](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-views).
+- If the `TrackerConfiguration.screenContext` property is enabled, the tracker attaches a [`Screen` entity](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-entity) to all the events tracked by the tracker reporting the last (and probably current) screen visible on device when the event was tracked.
 
 The `Screen` entity is conditioned by the internal state of the tracker only. To make an example, if the developer manually tracks a `ScreenView` event, all the following events will have a `Screen` entity attached reporting the same information as the last tracked ScreenView event, even if it was manually tracked and the app is in a different screen.
 

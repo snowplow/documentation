@@ -2,6 +2,8 @@
 position: 10
 title: Generate tracking code from tracking plans with Snowtype
 sidebar_label: Generate tracking code
+description: "Generate type-safe tracking code and implementation instructions with Snowtype. Use generated APIs to track event specifications and verify events with Snowplow Inspector and Console volume counts."
+keywords: ["snowtype code generation", "type-safe tracking apis", "event specification tracking", "tracking code implementation"]
 ---
 
 On your terminal now run `npx @snowplow/snowtype@latest generate --instructions`. If all is as expected, after a few seconds, you will have the following files generated:

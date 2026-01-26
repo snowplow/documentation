@@ -1,8 +1,10 @@
 ---
-title: "Session tracking with the Unity tracker"
+title: "Track session data with the Unity tracker"
 sidebar_label: "Session"
 date: "2020-02-26"
 sidebar_position: 70
+description: "Manage user session data with configurable foreground and background timeouts across Unity platforms with persistent storage."
+keywords: ["unity session tracking", "unity session timeout", "unity session persistence"]
 ---
 
 The Session object is responsible for maintaining persistent data around user sessions over the life-time of an application.

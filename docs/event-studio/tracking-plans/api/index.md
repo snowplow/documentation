@@ -1,7 +1,9 @@
 ---
-title: "Managing Tracking Plans via the API"
+title: "Managing tracking plans via the API"
 sidebar_label: "Using the API"
 sidebar_position: 3
+description: "Programmatically manage tracking plans through the API with endpoints for creating, updating, retrieving, and managing subscriptions for automated workflows and version control integration."
+keywords: ["tracking plans API", "API endpoints", "programmatic management", "subscription management", "automation"]
 ---
 
 import TrackingPlansNomenclature from '@site/docs/reusable/tracking-plans-nomenclature/_index.md';
@@ -20,7 +22,7 @@ You can have a look at and interact with all available endpoints in the [API doc
 
 ### Authorizing in the API documentation
 
-To be able to post sample requests in the documentation you need to click the `Authorize` button at the top of the document and authorize with your token. The value for the token field in each individual request is overwritten by this authorization.
+To be able to post sample requests in the documentation you need to click the `Authorize` button at the top of the document and authorize with your token. The value for the token field in each individual request is overwritten by this authorization.
 
 The endpoints focus on the main operations in the workflow around:
 
@@ -120,8 +122,8 @@ The request body is mandatory and should be in JSON format. The minimum payload 
 ```
 
 :::note
-_The name of your tracking plan must be unique to ensure proper identification and avoid conflicts._
-:::note
+The name of your tracking plan must be unique to ensure proper identification and avoid conflicts.
+:::
 
 ### Updating a Tracking Plan
 
@@ -132,8 +134,8 @@ The minimum payload on update would be the same as on creation but with the addi
 `**POST** ​/api​/msc​/v1​/organizations/{organizationId}/data-products/v2/{dataProductId}`
 
 :::note
-_The name of your tracking plan must be unique to ensure proper identification and avoid conflicts._
-:::note
+The name of your tracking plan must be unique to ensure proper identification and avoid conflicts.
+:::
 
 See the [detailed API documentation](https://console.snowplowanalytics.com/api/msc/v1/docs) for all options.
 

@@ -1,9 +1,49 @@
 ---
-title: "3.X.X upgrade guide"
+title: "Snowbridge upgrade guide"
 sidebar_position: 400
+description: "Upgrade Snowbridge to version 3.X.X with configuration changes for transformations, new features, and breaking changes."
+keywords: ["snowbridge 3.x upgrade", "upgrade guide", "snowbridge migration", "version 3"]
 ---
 
-## Breaking Changes
+## Version 4.0.0 Breaking Changes
+
+### HTTP target: ordered response rule evaluation
+
+**Breaking change**: response rules are now evaluated in the order they are defined in the configuration, rather than being organized in separate `invalid` and `setup` blocks.
+
+**Migration required**: you must update your HTTP target configuration to specify a `type` attribute for each rule:
+
+**Before:**
+```hcl
+response_rules {
+  invalid {
+    http_codes = [400]
+    body = "Invalid value for 'purchase' field"
+  }
+  setup {
+    http_codes = [401, 403]
+  }
+}
+```
+
+**After (4.0.0):**
+```hcl
+response_rules {
+  rule {
+    type = "invalid"
+    http_codes = [400]
+    body = "Invalid value for 'purchase' field"
+  }
+  rule {
+    type = "setup"
+    http_codes = [401, 403]
+  }
+}
+```
+
+**Important**: rules are now evaluated in the order they appear in your configuration. The first matching rule determines the error type.
+
+## Version 3.0.0 Breaking Changes
 
 The below breaking changes were made in version 3.0.0. All other functionality is backwards compatible.
 
@@ -11,13 +51,13 @@ The below breaking changes were made in version 3.0.0. All other functionality i
 
 Support for Lua transformations has been removed. If you are running a Lua transformation, you can port the logic to [Javascript](/docs/api-reference/snowbridge/configuration/transformations/custom-scripts/javascript-configuration/index.md) or [JQ](/docs/api-reference/snowbridge/configuration/transformations/builtin/jq.md).
 
-## HTTP target: non-JSON data no longer supported
+### HTTP target: non-JSON data no longer supported
 
 We never intended to support non-JSON data, but prior to version 3.0.0, the request body was simply populated with whatever bytes were found in the message data, regardless of whether it is valid JSON.
 
 From version 3.0.0 onwards, only valid JSON will work, otherwise the message will be considered invalid and sent to the failure target.
 
-## HTTP target: request batching
+### HTTP target: request batching
 
 Many HTTP APIs allow sending several events in a single request by putting them into a JSON array. Since version 3.0.0, if the Snowbridge source provides data in batches, the HTTP target will batch events in this way.
 

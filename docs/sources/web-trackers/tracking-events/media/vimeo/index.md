@@ -2,6 +2,8 @@
 title: "Vimeo media tracking on web"
 sidebar_label: "Vimeo"
 sidebar_position: 15
+description: "Automatically track Vimeo video players embedded via iframe or Vimeo Player SDK with comprehensive playback and interaction events."
+keywords: ["vimeo", "video tracking"]
 ---
 
 ```mdx-code-block
@@ -287,7 +289,7 @@ video.on('pause', () => {
 
 ### Tracking advertising events
 
-Advertising events are not tracked automatically, but can be tracked using the `trackAd*` functions provided by Snowplow Media. For a full list of available functions, see the [Snowplow Media Plugin documentation](/docs/sources/web-trackers/tracking-events/media/index.md#update-ad-and-ad-break-properties).
+Advertising events are not tracked automatically, but can be tracked using the `trackAd*` functions provided by Snowplow Media. For a full list of available functions, see the [Snowplow Media Plugin documentation](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md).
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>

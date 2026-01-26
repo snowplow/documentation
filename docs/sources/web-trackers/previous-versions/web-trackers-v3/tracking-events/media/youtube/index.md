@@ -1,6 +1,8 @@
 ---
 title: "YouTube"
 sidebar_position: 20
+description: "Documentation for YouTube in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block
@@ -189,8 +191,8 @@ enableYouTubeTracking({ id, options?: { label?, captureEvents?, boundaries?, upd
 | `id`                    | `string` or `YT.Player` | \-                  | The HTML id attribute of the media element                                                                     | Yes      |
 | `options.label`         | `string`                | \-                  | An identifiable custom label sent with the event                                                               | No       |
 | `options.captureEvents` | `string[]`              | `['DefaultEvents']` | The events or Event Group to capture. For a full list of events and groups, check the [section below](#events) | No       |
-| `options.boundaries`    | `number[]`              | `[10, 25, 50, 75]`  | The progress percentages to fire an event at (valid values 1 - 99 inclusive) [[1]](#1)                         | No       |
-| `options.updateRate`    | `number`                | `250`               | The rate at which `seek` and `volumechange` events can occur [[2]](#2)                                         | No       |
+| `options.boundaries`    | `number[]`              | `[10, 25, 50, 75]`  | The progress percentages to fire an event at (valid values 1 - 99 inclusive)                          | No       |
+| `options.updateRate`    | `number`                | `250`               | The rate at which `seek` and `volumechange` events can occur                                          | No       |
 
 Below is an example of the full `enableYouTubeTracking` function:
 
@@ -347,6 +349,6 @@ Three schemas are used with this plugin:
 
 * * *
 
-1. To track when a video ends, use the 'ended' event.
+[*] To track when a video ends, use the 'ended' event.
 
-2. `seek` and `volumechange` use `setInterval` to poll the player every `n` ms. You are able to adjust the poll rate, however, lower values may cause performance issues.
+[**] `seek` and `volumechange` use `setInterval` to poll the player every `n` ms. You are able to adjust the poll rate, however, lower values may cause performance issues.

@@ -1,7 +1,9 @@
 ---
 title: "Snowtype configuration options"
-sidebar_position: 3
 sidebar_label: "Configuration options"
+sidebar_position: 3
+description: "Configure Snowtype code generation with options for output paths, tracker selection, language settings, and custom templates."
+keywords: ["Snowtype configuration", "config options", "code generation settings", "Snowtype setup"]
 ---
 
 import Tabs from '@theme/Tabs';
@@ -16,7 +18,7 @@ The Snowtype CLI configuration can be saved in a `.json`, `.js`, or `.ts` file a
 
 ### `igluCentralSchemas`
 
-The schema tracking URLs for schemas available in [Iglu Central](http://iglucentral.com/).
+The schema tracking URLs for schemas available in [Iglu Central](https://iglucentral.com/).
 
 ### `repositories`
 

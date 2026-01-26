@@ -1,7 +1,10 @@
 ---
 title: "Tracking out-of-the-box events"
+sidebar_label: "Tracking out-of-the-box events"
 date: "2021-08-06"
 sidebar_position: 20
+description: "Track screen views, structured events, page views, timing events, and ecommerce transactions with React Native tracker v2 SDK."
+keywords: ["react native tracker v2 event tracking", "screen view tracking", "structured events"]
 ---
 
 The React Native tracker captures two types of out-of-the-box events, automatically captured and manual events.

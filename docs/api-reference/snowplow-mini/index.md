@@ -1,7 +1,10 @@
 ---
-title: "Snowplow Mini"
+title: "Introduction to Snowplow Mini"
+sidebar_label: "Snowplow Mini"
 date: "2021-08-14"
 sidebar_position: 120
+description: "Snowplow Mini is a single-instance development sandbox for testing tracker updates and schema changes."
+keywords: ["snowplow mini", "development sandbox", "testing environment", "mini setup"]
 ---
 
 ```mdx-code-block
@@ -47,7 +50,7 @@ Once you are happy with the changes you have made you would then change the trac
 ## Features of Snowplow Mini
 
 - Data is tracked and processed in real time
-- Your Snowplow Mini speaks to your [Schema registries](/docs/fundamentals/schemas/index.md#iglu) to allow events to be sent against your custom schemas
+- Your Snowplow Mini speaks to your [Schema registries](/docs/fundamentals/schemas/index.md#iglu-schema-repository) to allow events to be sent against your custom schemas
 - Data is validated during processing
 - Data is loaded into OpenSearch and can be queried directly or through the OpenSearch Dashboard
 - Successfully processed events and failed events are in distinct good and bad indexes

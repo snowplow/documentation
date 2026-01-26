@@ -2,7 +2,8 @@
 title: "Snowplow Normalize dbt package"
 sidebar_label: "Normalize"
 sidebar_position: 50
-description: "The Snowplow Normalize dbt Package"
+description: "Flatten and normalize self-describing events and entities into dedicated tables for downstream ETL and analysis tools."
+keywords: ["normalize dbt", "flatten events", "unnest entities", "event normalization", "ETL preparation"]
 ---
 
 ```mdx-code-block
@@ -494,7 +495,7 @@ To add new models for new types of events, simply add them to your config and ru
 
 ### Updating your models
 :::warning
-Adding or removing columns from your dbt model, either manually or by changes caused by a different schema version, without specifying the `on_schema_change` model configuration or directly altering the tables in your database, is very likely to result in unintended outcomes - either your new columns will not appear or dbt may return an error. Please see the [dbt docs](https://docs.getdbt.com/docs/build/incremental-models#what-if-the-columns-of-my-incremental-model-change) for what to do in this situation. If you need to backfill new columns regardless you can perform a rerun of the entire model following the instructions [here](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-custom-models/index.md#tearing-down-and-restarting-a-subset-of-models) *(note using the `--full-refresh` flag will not work in this case due to the use of the Snowplow incremental logic)*.
+Adding or removing columns from your dbt model, either manually or by changes caused by a different schema version, without specifying the `on_schema_change` model configuration or directly altering the tables in your database, is very likely to result in unintended outcomes - either your new columns will not appear or dbt may return an error. Please see the [dbt docs](https://docs.getdbt.com/docs/build/incremental-models#what-if-the-columns-of-my-incremental-model-change) for what to do in this situation. If you need to backfill new columns regardless you can perform a rerun of the entire model following the instructions [here](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/full-or-partial-refreshes/index.md#refresh-only-some-models-in-a-package) *(note using the `--full-refresh` flag will not work in this case due to the use of the Snowplow incremental logic)*.
 :::
 
 If you wish to update your models, such as adding a new context, removing a column, or updating to a new schema version, you must update your config file and run the script again, ensuring the `overwrite` value is set to `true`. This will remove any custom changes you made to the model file itself and you will need to re-add these.

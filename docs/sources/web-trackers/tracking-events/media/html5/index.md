@@ -2,6 +2,8 @@
 title: "HTML5 media tracking on web"
 sidebar_label: "HTML5"
 sidebar_position: 10
+description: "Automatically track HTML5 video and audio elements with media events including play, pause, seek, buffer, and progress milestones."
+keywords: ["html5 media", "video tracking"]
 ---
 
 ```mdx-code-block
@@ -190,7 +192,7 @@ startHtml5MediaTracking({
 ### `endHtml5MediaTracking`
 
 This function disables auto tracking for the player registered with the provided session ID.
-It will remove any event listeners and poll intervals, and call [`endMediaTracking`](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md#starting-and-ending-media-tracking) from the core plugin.
+It will remove any event listeners and poll intervals, and call [`endMediaTracking`](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md#usage) from the core plugin.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -303,7 +305,7 @@ startHtml5MediaTracking({
 
 ### Schemas
 
-Event and entity schemas are [the same as](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md#tracked-events-and-entities) for the [Snowplow Media Plugin](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md).
+Event and entity schemas are [the same as](/docs/events/ootb-data/media-events/index.md) for the [Snowplow Media Plugin](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md).
 
 Along with the standard media context, the HTML5 media plugin also tracks the following media-specific contexts:
 

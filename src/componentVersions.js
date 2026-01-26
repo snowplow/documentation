@@ -22,32 +22,32 @@ export const versions = {
 
   // Core pipeline
   collector: '3.7.0',
-  enrich: '6.4.0',
+  enrich: '6.6.0',
   sqs2kinesis: '1.0.4',
-  dataflowRunner: '0.7.5',
-  snowbridge: '3.6.2',
+  dataflowRunner: '0.7.6',
+  snowbridge: '4.1.0',
 
   // Loaders
-  bqLoader: '2.0.1',
+  bqLoader: '2.1.0',
   bqLoader1x: '1.7.2',
   esLoader: '2.1.3',
   gcsLoader: '0.5.6',
   postgresLoader: '0.3.3',
-  rdbLoader: '6.1.6',
-  s3Loader: '2.3.0',
+  rdbLoader: '6.2.0',
+  s3Loader: '3.0.0',
   s3Loader22x: '2.2.9',
-  lakeLoader: '0.8.0',
+  lakeLoader: '0.9.1',
   snowflakeStreamingLoader: '0.5.1',
   databricksStreamingLoader: '0.4.0',
 
   // Data Modelling
   // dbt
   dbtSnowplowAttribution: '0.5.1',
-  dbtSnowplowUnified: '0.5.5',
+  dbtSnowplowUnified: '1.0.0',
   dbtSnowplowWeb: '1.0.1',
   dbtSnowplowMobile: '1.0.0',
   dbtSnowplowMediaPlayer: '0.9.4',
-  dbtSnowplowUtils: '0.17.5',
+  dbtSnowplowUtils: '1.0.0',
   dbtSnowplowNormalize: '0.4.1',
   dbtSnowplowFractribution: '0.3.6',
   dbtSnowplowEcommerce: '0.9.3',

@@ -2,6 +2,8 @@
 title: "Snowplow media tracking on web"
 sidebar_label: "Snowplow media"
 sidebar_position: 5
+description: "Manually track media events from any video player using flexible event tracking methods with custom entities and ad support."
+keywords: ["media tracking", "video events"]
 ---
 
 ```mdx-code-block
@@ -62,18 +64,34 @@ newTracker('sp1', '{{collector_url}}', {
 
 ## Usage
 
+```mdx-code-block
+<Media platforms={["js-tag", "js-browser"]} />
+```
+
+## Page activity during playback
+
+When users watch video, they may not interact with the page, causing page pings to stop. The media plugin automatically keeps page activity alive during playback by calling `updatePageActivity` whenever media events are tracked.
+
+You can turn off this behavior if not needed:
+
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
 
-```mdx-code-block
-<Media tracker="js-tag" />
+```javascript
+window.snowplow('startMediaTracking', {
+    id,
+    updatePageActivityWhilePlaying: false
+});
 ```
 
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
 
-```mdx-code-block
-<Media tracker="js-browser" />
+```javascript
+startMediaTracking({
+    id,
+    updatePageActivityWhilePlaying: false
+});
 ```
 
   </TabItem>

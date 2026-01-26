@@ -1,7 +1,10 @@
 ---
-title: "Shredding Overview"
+title: "Shredding overview for RDB Loader 2.x"
+sidebar_label: "Shredding Overview"
 date: "2020-03-06"
 sidebar_position: 10
+description: "Understand shredding in RDB Loader 2.x that splits enriched events into separate files for loading into Redshift tables."
+keywords: ["shredding", "rdb shredder", "enriched events", "redshift tables", "tsv files"]
 ---
 
 Shredding is the process of splitting a Snowplow enriched event into several smaller files, which can be inserted directly into Redshift tables.

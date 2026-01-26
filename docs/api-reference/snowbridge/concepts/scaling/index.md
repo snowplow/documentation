@@ -1,6 +1,9 @@
 ---
-title: "Scaling"
+title: "Scaling Snowbridge horizontally"
+sidebar_label: "Scaling"
 sidebar_position: 150
+description: "Scale Snowbridge horizontally across multiple instances with concurrency controls and target provisioning for optimal throughput."
+keywords: ["horizontal scaling", "concurrent writes", "snowbridge performance", "throughput optimization"]
 ---
 
 Snowbridge is built to suit a **horizontal scaling** model, and you can safely deploy multiple instances of Snowbridge to consume the same input out-of-the-box. No addditional configuration or setup is required for the app to smoothly run across multiple instances/environments, compared to a single instance/environment.

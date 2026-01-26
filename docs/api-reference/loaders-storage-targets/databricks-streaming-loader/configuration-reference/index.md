@@ -2,6 +2,8 @@
 title: "Databricks Streaming Loader configuration reference"
 sidebar_label: "Configuration reference"
 sidebar_position: 1
+description: "Configure Databricks Streaming Loader with Unity Catalog, Kinesis, Pub/Sub, and Kafka settings for lakehouse streaming."
+keywords: ["databricks config", "unity catalog config", "lakeflow config", "streaming loader configuration"]
 ---
 
 ```mdx-code-block
@@ -20,7 +22,7 @@ import CommonConfig from '@site/docs/api-reference/loaders-storage-targets/datab
 
 ### License
 
-The Databricks Streaming Loader is released under the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.1/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).
+The Databricks Streaming Loader is released under the [Snowplow Limited Use License](/limited-use-license-1.1/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).
 
 To accept the terms of license and run the loader, set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable. Alternatively, configure the `license.accept` option in the config file:
 

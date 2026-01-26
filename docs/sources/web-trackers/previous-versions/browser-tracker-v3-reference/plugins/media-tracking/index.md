@@ -2,6 +2,8 @@
 title: "HTML5 Media Tracking"
 date: "2022-01-11"
 sidebar_position: 12500
+description: "Documentation for tracking HTML5 Media Tracking with the web tracker."
+keywords: ["tracking", "events"]
 ---
 
 ```mdx-code-block
@@ -80,8 +82,8 @@ enableMediaTracking({
 | `id`                                   | `string`   | \-                  | The HTML id attribute of the media element                                                                     | Yes      |
 | `options.label`                        | `string`   | \-                  | An identifiable custom label sent with the event                                                               | No       |
 | `options.captureEvents`                | `string[]` | `['DefaultEvents']` | The events or Event Group to capture. For a full list of events and groups, check the [section below](#events) | No       |
-| `options.boundaries`                   | `number[]` | `[10, 25, 50, 75]`  | The progress percentages to fire an event at (valid values 1 - 99 inclusive) [[1]](#1)                       | No       |
-| `options.volumeChangeTrackingInterval` | `number`   | `250`               | The rate at which volume events can be sent [[2]](#2)                                                        | No       |
+| `options.boundaries`                   | `number[]` | `[10, 25, 50, 75]`  | The progress percentages to fire an event at (valid values 1 - 99 inclusive)                        | No       |
+| `options.volumeChangeTrackingInterval` | `number`   | `250`               | The rate at which volume events can be sent [**]                                                        | No       |
 
 Below is an example of the full `enableMediaTracking` function:
 
@@ -299,6 +301,6 @@ This plugin has been tested with [VideoJS](https://videojs.com/) and [Plyr](h
 
 * * *
 
-1. To track when a video ends, use the 'ended' event.
+[*] To track when a video ends, use the 'ended' event.
 
-2. When holding and dragging the volume slider, 'volumechange' events would be fired extremely quickly. This is used to limit the rate they can be sent out at. The default value is likely to be appropriate, but you can adjust it if you find you want fewer/more volume events through.
+[**] When holding and dragging the volume slider, 'volumechange' events would be fired extremely quickly. This is used to limit the rate they can be sent out at. The default value is likely to be appropriate, but you can adjust it if you find you want fewer/more volume events through.

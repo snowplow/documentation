@@ -3,6 +3,8 @@ title: "Snowbridge configuration overview"
 sidebar_label: "Configuration"
 date: "2022-10-20"
 sidebar_position: 300
+description: "Configure Snowbridge using HCL format to define sources, transformations, targets, and monitoring for stream replication."
+keywords: ["snowbridge config", "hcl configuration", "snowbridge setup", "stream config"]
 ---
 
 ```mdx-code-block
@@ -31,7 +33,7 @@ There'll be no external statistics reporting or sentry error reporting.
 
 ## License
 
-Since version 2.4.0, Snowbridge is released under the [Snowplow Limited Use License](https://docs.snowplow.io/limited-use-license-1.0/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).
+Since version 2.4.0, Snowbridge is released under the [Snowplow Limited Use License](/limited-use-license-1.0/) ([FAQ](/docs/resources/limited-use-license-faq/index.md)).
 
 To accept the terms of license and run Snowbridge, set the `ACCEPT_LIMITED_USE_LICENSE=yes` environment variable. Alternatively, you can configure the `license.accept` option, like this:
 

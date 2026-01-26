@@ -1,5 +1,8 @@
 ---
-title: "FAQ: Snowplow Limited Use License Agreement (SLULA)"
+title: "Snowplow Limited Use License FAQ"
+sidebar_label: "Limited Use License FAQ"
+description: "Frequently asked questions about the Snowplow Limited Use License Agreement terms and permitted uses."
+keywords: ["limited use license", "SLULA", "license terms"]
 ---
 
 :::info Note
@@ -10,6 +13,8 @@ This FAQ is not a substitute for reading the license text:
 * [version 1.1](/limited-use-license-1.1/)
 
 :::
+
+This page explains some of the most common questions about the Snowplow Limited Use License Agreement.
 
 ## Why was the Snowplow Limited Use License Agreement introduced?
 

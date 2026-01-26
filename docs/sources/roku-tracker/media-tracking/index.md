@@ -3,6 +3,8 @@ title: "Media tracking with the Roku tracker"
 sidebar_label: "Media tracking"
 date: "2021-12-23"
 sidebar_position: 4500
+description: "Enable automatic audio and video playback tracking for Roku Audio and Video nodes with support for media tracking v1 and v2 schemas."
+keywords: ["roku media tracking", "video playback tracking", "audio tracking"]
 ---
 
 ```mdx-code-block
@@ -14,4 +16,4 @@ Media tracking enables collecting events about audio/video playback from the [A
 Once enabled for a node, the tracker subscribes to selected events and tracks them automatically.
 This makes adding media tracking into your Roku channels really simple.
 
-There are [multiple versions](/docs/sources/web-trackers/tracking-events/media/index.md) of media tracking available, and the Roku tracker supports [v1](/docs/sources/roku-tracker/media-tracking/v1/index.md) and (from v0.3.0) [v2](/docs/sources/roku-tracker/media-tracking/v2/index.md).
+There are [multiple versions](/docs/events/ootb-data/media-events/index.md) of media tracking available, and the Roku tracker supports [v1](/docs/sources/roku-tracker/media-tracking/v1/index.md) and (from v0.3.0) [v2](/docs/sources/roku-tracker/media-tracking/v2/index.md).

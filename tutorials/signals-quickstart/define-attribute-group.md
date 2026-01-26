@@ -3,6 +3,7 @@ position: 2
 title: Define a Signals attribute group for session metrics
 sidebar_label: Define an attribute group
 description: "Create an attribute group in Snowplow Signals to calculate session metrics like page views, browser, and referrer data in real time."
+keywords: ["attribute groups", "session metrics"]
 ---
 
 [Attribute groups](/docs/signals/concepts/#attribute-groups) are where you define the data you want to calculate. To create an attribute group, go to **Signals** > **Attribute groups** in Snowplow Console and click **Create attribute group**.
@@ -86,7 +87,7 @@ To set the property:
 
 ### First referrer
 
-The third attribute stores the first seen referrer path, based on the `refr_urlhost` [atomic event property](/docs/fundamentals/canonical-event/#platform-specific-fields).
+The third attribute stores the first seen referrer path, based on the `refr_urlhost` [atomic event property](/docs/fundamentals/canonical-event/#web-specific-fields).
 
 Create an attribute named `first_referrer`, and select `page_view` as before.
 

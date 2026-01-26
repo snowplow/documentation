@@ -1,8 +1,9 @@
 ---
-title: "Defining attribute groups in Console"
+title: "Define attribute groups in Console"
 sidebar_position: 1
 sidebar_label: "Attribute groups"
-description: "Create and manage attribute groups to define behavioral data calculations from real-time streams or warehouse sources."
+description: "Define attribute groups to calculate behavioral data from real-time event streams, batch warehouse tables, or external sources. Configure attributes, attribute keys, TTL lifetimes, and test definitions before publishing."
+keywords: ["attribute groups", "stream attributes", "batch attributes", "attribute keys", "ttl"]
 ---
 
 Define the behavior you want to capture in [attribute groups](/docs/signals/concepts/index.md#attribute-groups). Choose whether to calculate attributes from your event stream or warehouse.
@@ -19,7 +20,7 @@ The first step is to specify:
 
 ## Data source
 
-:::note Warehouse Connection 
+:::note Warehouse Connection
 A warehouse connection is required to create `Batch` and `External Batch` attributes.
 :::
 
@@ -61,7 +62,7 @@ To minimize latency, Signals will use the timestamp field to determine which row
 
 All attribute groups need an [attribute key](/docs/signals/concepts/index.md#attribute-keys).
 
-Signals includes four built-in attribute keys, based on commonly used identifiers from the atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-related-fields) in all Snowplow events.
+Signals includes four built-in attribute keys, based on commonly used identifiers from the atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-fields) in all Snowplow events.
 
 To create a custom attribute key, navigate to **Signals** > **Attribute keys** within Console. Click the **Create attribute key** button.
 
@@ -71,7 +72,7 @@ You will need to provide:
 * A unique name
 * An optional description
 * An optional email address for the primary owner or maintainer
-* Which [atomic](/docs/fundamentals/canonical-event/index.md#atomic-fields) property you want to calculate attributes against
+* Which [atomic](/docs/fundamentals/canonical-event/index.md#common-fields) property you want to calculate attributes against
 
 To edit or delete a custom attribute key, go to the key details page and click the **Edit** button, or the `⋮` button followed by **Delete**.
 
@@ -87,7 +88,7 @@ If Signals then processes a new event that calculates the attribute again, or ma
 
 ## Testing the attribute definitions
 
-:::note Warehouse Connection 
+:::note Warehouse Connection
 A warehouse connection is required to test attribute definitions.
 :::
 

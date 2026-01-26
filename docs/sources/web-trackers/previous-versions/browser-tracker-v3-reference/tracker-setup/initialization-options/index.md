@@ -2,6 +2,8 @@
 title: "Initialization options"
 date: "2021-03-31"
 sidebar_position: 2000
+description: "Setup and initialization instructions for Initialization options."
+keywords: ["setup", "installation"]
 ---
 
 ```mdx-code-block
@@ -79,7 +81,7 @@ Set the application ID using the `appId` field of the configuration object. Th
 
 #### Setting the platform
 
-Set the application platform using the `platform` field of the configuration object. This will be attached to every event the tracker fires. Its default value is “web”. For a list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/events/index.md#application-parameters).
+Set the application platform using the `platform` field of the configuration object. This will be attached to every event the tracker fires. Its default value is “web”. For a list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/fundamentals/canonical-event/index.md#application-fields).
 
 #### Configuring the cookie domain
 

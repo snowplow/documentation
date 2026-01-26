@@ -1,7 +1,8 @@
 ---
-title: "Configuring HTTP as a Snowbridge target"
+title: "Configure HTTP as a Snowbridge target"
 sidebar_label: "HTTP"
-description: "Send data over HTTP."
+description: "Configure HTTP target for Snowplow Snowbridge to send data over HTTP with authentication, OAuth2, request templating, and response rules."
+keywords: ["snowbridge config", "http target", "http endpoint", "oauth2", "request templating", "gtm server side"]
 ---
 
 ```mdx-code-block
@@ -69,21 +70,29 @@ https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/
 This feature was added in version 3.0.0
 
 This feature is in beta status because we may make breaking changes in future versions.
+
+**Breaking change in version 4.0.0**: Response rules are now evaluated in the order they are defined in the configuration. Rules must specify a `type` attribute to distinguish between invalid, setup, and throttle errors, rather than organizing them in separate `invalid` and `setup` blocks.
 :::
 
 Response rules allow you to configure how the app deals with failures in sending the data. You can configure a response code and an optional string match on the response body to determine how a failure response is handled. Response codes between 200 and 299 are considered successful, and are not handled by this feature.
 
-There are three categories of failure:
+**Response rules are evaluated in the order they are defined in your configuration.** The first matching rule determines how the error is categorized.
+
+There are four categories of failure:
 
 `invalid` means that the data is considered incompatible with the target for some reason. For example, you may have defined a mapping for a given API, but the event happens to have null data for a required field. In this instance, retrying the data won't fix the issue, so you would configure an invalid response rule, identifying which responses indicate this scenario.
 
 Data that matches an invalid response rule is sent to the failure target.
 
-`setup` means that this error is not retryable, but is something which can only be resolved by a change in configuration or a change to the target. An example of this is an authentication failure - retrying will fix the issue, the resolution is to grant the appropriate permissions, or provide the correct API key.
+`setup` means that this error is not retryable, but is something which can only be resolved by a change in configuration or a change to the target. An example of this is an authentication failure - retrying won't fix the issue; the resolution is to grant the appropriate permissions, or provide the correct API key.
 
 Data that matches a setup response rule is handled by a retry as determined in the `setup` configuration block of [retry configuration](/docs/api-reference/snowbridge/configuration/retries/index.md).
 
-`transient` errors are everything else - we assume that the issue is temporary and retrying will resolve the problem. An example of this is being throttled by an API because too much data is being sent at once. There is no explicit configuration for transient - rather, anything that is not configured as one of the other types is considered transient.
+`throttle` (added in version 4.0.0) is a special type of error that indicates the target is rate limiting requests. This is handled separately from transient errors to allow different retry behavior - typically with longer delays to respect rate limits.
+
+Data that matches a throttle response rule is handled by a retry as determined in the `throttle` configuration block of [retry configuration](/docs/api-reference/snowbridge/configuration/retries/index.md).
+
+`transient` errors are everything else - we assume that the issue is temporary and retrying will resolve the problem. There is no explicit configuration for transient - rather, anything that is not configured as one of the other types is considered transient.
 
 ## Configuration options
 

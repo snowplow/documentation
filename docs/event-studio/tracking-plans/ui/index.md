@@ -1,8 +1,10 @@
 ---
 title: "Managing tracking plans using Console"
-date: "2024-01-18"
 sidebar_label: "Using the UI"
+date: "2024-01-18"
 sidebar_position: 1
+description: "Create and manage tracking plans in Snowplow Console with templates, event specifications, source applications, and automatic code generation for tracking implementation."
+keywords: ["tracking plan UI", "Console UI", "event specifications UI", "source applications", "tracking code generation"]
 ---
 
 To create a new tracking plan, navigate to the "Tracking plans" section from the navigation bar and click the "Create tracking plan" button.
@@ -59,7 +61,7 @@ Event specifications which contain previously added application IDs will need to
 
 ## Upgrading Event Specification Instructions
 
-When working with Event Specifications of a Tracking Plan, it’s essential to account for the evolution of underlying [Data Structures](/docs/event-studio/data-structures/index.md). Data Structures define reusable JSON schemas, which can be referenced by different Event Specifications (events and entities). Each Event Specification may contain instructions, which rely on a specific version of a Data Structure, adding another layer to specialize or constraint Event Specifications in a more granular way.
+When working with Event Specifications of a Tracking Plan, it's essential to account for the evolution of underlying [Data Structures](/docs/event-studio/data-structures/index.md). Data Structures define reusable JSON schemas, which can be referenced by different Event Specifications (events and entities). Each Event Specification may contain instructions, which rely on a specific version of a Data Structure, adding another layer to specialize or constraint Event Specifications in a more granular way.
 
 ### Versioning of Data Structures
 
@@ -67,7 +69,7 @@ As data and events evolve, Data Structures may be updated to new versions, which
 
 ### Semi-Automatic Upgrade of Event Specifications via the UI
 
-To streamline the process of upgrading an Event Specification to the latest version of a Data Structure, we’ve implemented a mechanism that allows you to update Event Specification instructions through the UI. Here’s how it works:
+To streamline the process of upgrading an Event Specification to the latest version of a Data Structure, we've implemented a mechanism that allows you to update Event Specification instructions through the UI. Here's how it works:
 
 When a new version of a Data Structure becomes available, the system will indicate that the event or entities referenced by the data structure has a new version available, showing an **'Upgrade'** button in the UI.
 

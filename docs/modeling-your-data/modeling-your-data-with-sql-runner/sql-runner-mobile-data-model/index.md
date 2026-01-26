@@ -1,7 +1,10 @@
 ---
-title: "Mobile data model"
+title: "Mobile data model for SQL Runner"
+sidebar_label: "Mobile data model"
 date: "2020-10-30"
 sidebar_position: 200
+description: "Legacy SQL Runner mobile data model for transforming mobile event data into derived tables."
+keywords: ["SQL Runner mobile", "mobile data model", "legacy mobile SQL", "mobile SQL Runner"]
 ---
 
 :::tip
@@ -78,7 +81,7 @@ Within the base module's main playbook, `01-base-main.yml.tmpl`:
    :start_date:         2020-01-01 #Set as required
    ...
    #Enable contexts if desired
-   :mobile_context: false 
+   :mobile_context: false
    :geolocation_context: false
    :application_context: false
    :screen_context: false
@@ -93,8 +96,6 @@ The remaining variables are set to the recommended defaults. For more informatio
 Optional modules are disabled by default. Please enable where appropriate by setting `enabled: true` in the main playbook of each module.
 
 #### Running the model
-
-[Locally](#tablocally)[In orchestration](#tabin-orchestration)
 
 ##### Authentication
 

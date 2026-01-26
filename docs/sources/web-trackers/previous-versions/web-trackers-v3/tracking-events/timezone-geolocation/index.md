@@ -1,6 +1,8 @@
 ---
 title: "Timezone and geolocation"
 sidebar_position: 100
+description: "Documentation for Timezone and geolocation in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

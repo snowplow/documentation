@@ -3,6 +3,7 @@ title: "Introduction to structuring your data with schemas"
 sidebar_label: "Schemas and data structures"
 sidebar_position: 3
 description: "Schemas are a powerful feature that ensures your data is clean and descriptive"
+keywords: ["schemas", "data structures", "JSON Schema", "data validation", "Iglu"]
 ---
 
 **Schemas** define the structure of the data that you collect. Each schema defines what fields are recorded with each [event](/docs/fundamentals/events/index.md), and provides validation criteria for each field. Schemas are also used to describe the structure of [entities that are attached to events](/docs/fundamentals/entities/index.md).
@@ -119,7 +120,7 @@ Snowplow CDI customers don't need to create or manage their own Iglu repositorie
 
 You'll notice that schema URIs use the `iglu:` protocol, for example: `iglu:com.snowplowanalytics.snowplow/page_view/jsonschema/1-0-0`. This is because all Snowplow schemas are stored in an Iglu repository.
 
-There is a [central Iglu repository](http://iglucentral.com/) that holds public schemas for use with Snowplow, including ones for some of the [out-of-the-box self-describing events](/docs/fundamentals/events/index.md#self-describing-events) and [out-of-the-box entities](/docs/fundamentals/entities/index.md#how-to-track-entities).
+There is a [central Iglu repository](https://iglucentral.com/) that holds public schemas for use with Snowplow, including ones for some of the [out-of-the-box self-describing events](/docs/fundamentals/events/index.md#self-describing-events) and [out-of-the-box entities](/docs/fundamentals/entities/index.md#how-to-track-entities).
 
 For Snowplow Self-Hosted users, you'll need to run your own Iglu schema repository to host schemas for your custom [events](/docs/fundamentals/events/index.md#self-describing-events) and [entities](/docs/fundamentals/entities/index.md#custom-entities). Use [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md) (recommended), or a [static repository](/docs/api-reference/iglu/iglu-repositories/static-repo/index.md).
 

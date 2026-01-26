@@ -1,8 +1,10 @@
 ---
-title: "Managing data quality"
+title: "Monitor failed events"
 date: "2020-02-15"
 sidebar_position: 8.6
 sidebar_label: "Monitoring"
+description: "Monitor and manage data quality with tools for tracking failed events, data quality dashboards, and Console API access."
+keywords: ["data quality monitoring", "failed events dashboard", "Snowplow Console monitoring", "data quality", "visibility", "data integrity"]
 ---
 
 ```mdx-code-block
@@ -53,7 +55,7 @@ Clicking on a particular error type will take you to a detailed view:
 
 ![](images/dqd-details.png)
 
-The detailed view also shows a description of the root cause and the application version ([web](/docs/events/ootb-data/app-information/index.md#application-context-entity-on-web-apps), [mobile](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md)). It provides a sample of the failed events in their entirety, as found in your warehouse.
+The detailed view also shows a description of the root cause and the application version ([web](/docs/events/ootb-data/app-information/index.md#entity-definitions), [mobile](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md)). It provides a sample of the failed events in their entirety, as found in your warehouse.
 
 Some columns are too wide to fit in the table: click on them to see the full pretty-printed, syntax-highlighted content. The most useful column to explore is probably `CONTEXTS_COM_SNOWPLOWANALYTICS_SNOWPLOW_FAILURE_1`, which contains the actual error information encoded as a JSON object:
 

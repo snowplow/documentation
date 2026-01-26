@@ -1,6 +1,8 @@
 ---
-title: "Configuring plugins for the JavaScript (tag) tracker"
+title: "Configure plugins for the JavaScript (tag) tracker"
 sidebar_label: "JavaScript (tag) tracker"
+description: "Build custom sp.js bundles with specific plugins or dynamically load plugins for the JavaScript tracker."
+keywords: ["javascript tracker plugins", "custom sp.js", "bundled plugins", "dynamic plugin loading"]
 date: "2023-03-22"
 sidebar_position: 400
 ---
@@ -119,7 +121,7 @@ How you pass these options to the plugin varies by when the plugin is loaded:
 ### Bundled Plugins
 
 Bundled plugins will automatically include any exposed methods.
-Additional configuration is typically passed through via the [`contexts`](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md#adding-predefined-contexts) configuration, which is extracted and passed to the plugin in `features.ts`, described in [Including Custom Plugins](#including-custom-plugins).
+Additional configuration is typically passed through via the [`contexts`](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md) configuration, which is extracted and passed to the plugin in `features.ts`, described in [Including Custom Plugins](#including-custom-plugins).
 
 ```javascript
 snowplow('newTracker', 'sp', '{{collector_url_here}}', {

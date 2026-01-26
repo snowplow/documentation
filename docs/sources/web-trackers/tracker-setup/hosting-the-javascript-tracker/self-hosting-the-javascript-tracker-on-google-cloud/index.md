@@ -1,6 +1,8 @@
 ---
 title: "Self Hosting the JavaScript Tracker on GCP"
 sidebar_label: "Self hosting on GCP"
+description: "Host sp.js on Google Cloud Storage with CDN for reliable tracker distribution to your users."
+keywords: ["gcp hosting", "google cloud storage", "cloud cdn", "google cloud"]
 date: "2020-04-28"
 sidebar_position: 200
 ---
@@ -48,7 +50,7 @@ Connecting your domain to your storage bucket (optional)
 
 You may wish to connect your domain to your Cloud Storage bucket. In this case your bucket can be named in the format of a subdomain e.g.`spassets.acme.com`.
 
-See **[Add DNS Record for bucket](#add-dns-record-for-bucket-optional)** for additional step you'll need to take.
+See the section below about adding a DNS record for an additional step you'll need to take.
 
 ### Upload your file
 
@@ -84,7 +86,7 @@ Click _Copy URL_ next to _Public to internet_ in the file browser to get the fil
 
 This will only work correctly if:
 
-- you earlier created your bucket with a name corresponding to the subdomain (see [Creating a storage bucket](#create-bucket)) you wish to use
+- you earlier created your bucket with a name corresponding to the subdomain (see "Create a storage bucket" section above) you wish to use
 - you have verified ownership of this domain in Google Cloud: [https://cloud.google.com/storage/docs/domain-name-verification](https://cloud.google.com/storage/docs/domain-name-verification).
 
 To connect your domain to your Cloud Storage bucket, you will need to create a `CNAME` record as below:

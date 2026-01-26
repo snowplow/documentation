@@ -1,6 +1,8 @@
 ---
 title: "Full calculation for run timestamps"
+sidebar_label: "Full calculation for run timestamps"
 description: "A detailed deep dive into how we calculate which events to process in a run."
+keywords: ["run timestamps", "event processing", "timestamp calculation", "incremental run"]
 sidebar_position: 40
 ---
 
@@ -18,7 +20,7 @@ When calculating the timestamps required for our [incremental sessionization log
 The details provided above cover how we calculate the first step of the date range to process on a run, based on the state of models in the package and any new data. This is not the full story as in a given run the date range of specific events that are available in the [events this run](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/this-run-tables/index.md#events-this-run) table will differ from this. What follows is the full details of how this is calculated and processed.
 
 ### Step 1: Calculate Base New Event Limits
-The first step is to identify the model limits for the run. This is accomplished by the `get_incremental_manifest_status`[<Icon icon="fa-brands fa-github"/>](https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/get_incremental_manifest_status.sql) macro to find the min and max last success in the manifest, and then uses the `get_run_limits`[<Icon icon="fa-brands fa-github"/>](https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/get_run_limits.sql) macro to identify which state the package is in and calculate the timestamp range for this run, as detailed above. 
+The first step is to identify the model limits for the run. This is accomplished by the [`get_incremental_manifest_status` macro](https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/get_incremental_manifest_status.sql) to find the min and max last success in the manifest, and then uses the [`get_run_limits` macro](https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/get_run_limits.sql) to identify which state the package is in and calculate the timestamp range for this run, as detailed above.
 
 This range is then printed to the console and stored in the `snowplow_<package_name>_base_new_event_limits` table for later use.
 
@@ -51,13 +53,13 @@ and {{ snowplow_utils.app_id_filter(app_ids) }}
 We also exclude any session identifiers listed in the [quarantine manifest](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/manifest-tables/index.md#quarantine-table) table to avoid processing long running sessions. For a session to be quarantined it must have events spanning longer than the value in your `snowplow__max_session_days` variable.
 ```jinja2
 where session_identifier is not null
-    and not exists (select 1 from {{ ref(quarantined_sessions) }} as a where a.session_identifier = e.session_identifier) 
+    and not exists (select 1 from {{ ref(quarantined_sessions) }} as a where a.session_identifier = e.session_identifier)
 ```
 
 Once this is all calculated, we merge these with the existing manifest and take the least of the start timestamp, and the greatest of the end timestamp. In the case of a session running over the `snowplow__max_session_days` the end timestamp is re-calculated based on this instead.
 
 ### Step 3: Building sessions this run
-We next identify which sessions need to be included in the current run, based on our event run limits and the _start_ timestamp of that session. Using the `return_base_new_event_limits`[<Icon icon="fa-brands fa-github"/>](https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/return_base_new_event_limits.sql) macro we get the upper and lower limits as calculated in step 1, but also the lower limit minus the `snowplow__max_session_days` to get the earliest a session could start and still have events included in this run (the session start limit).
+We next identify which sessions need to be included in the current run, based on our event run limits and the _start_ timestamp of that session. Using the [`return_base_new_event_limits` macro](https://github.com/snowplow/dbt-snowplow-utils/blob/main/macros/incremental_hooks/return_base_new_event_limits.sql) we get the upper and lower limits as calculated in step 1, but also the lower limit minus the `snowplow__max_session_days` to get the earliest a session could start and still have events included in this run (the session start limit).
 
 We then include in the run any session that:
 - Starts after the session start limit

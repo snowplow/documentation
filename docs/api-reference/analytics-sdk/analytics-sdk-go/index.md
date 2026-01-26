@@ -1,7 +1,10 @@
 ---
-title: "Analytics SDK - Go"
+title: "Go Analytics SDK"
+sidebar_label: "Go"
 date: "2021-05-26"
 sidebar_position: 300
+description: "Go library for parsing Snowplow enriched events with efficient field access and transformation to JSON or maps for serverless functions."
+keywords: ["go analytics sdk", "golang", "snowplow go"]
 ---
 
 ## 1. Overview

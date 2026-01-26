@@ -1,8 +1,10 @@
 ---
-title: "Tracking out-of-the-box events with the native mobile trackers"
+title: "Track out-of-the-box events with the native mobile trackers"
 sidebar_label: "Tracking out-of-the-box events"
 date: "2022-08-30"
 sidebar_position: 10
+description: "Track pre-built event types including screen views, lifecycle events, sessions, and custom self-describing events in mobile applications."
+keywords: ["mobile events", "event tracking", "screen view tracking"]
 ---
 
 ```mdx-code-block

@@ -1,8 +1,10 @@
 ---
-title: "Tracking events with the Flutter tracker"
+title: "Track events with the Flutter tracker"
 sidebar_label: "Tracking events"
 date: "2022-01-31"
 sidebar_position: 3000
+description: "Track events in Flutter using SelfDescribing, Structured, ScreenView, Timing, and Consent events. Enable auto-tracking of page views with SnowplowObserver or manually track custom events with schemas."
+keywords: ["flutter events", "self-describing events", "screen view tracking", "auto-tracking", "snowplow observer"]
 ---
 
 Snowplow has been built to enable you to track a wide range of events that occur when users interact with your apps.
@@ -60,7 +62,7 @@ Navigator.pop(context);
 Event classes supported by the Flutter Tracker:
 
 | Method             | Event type tracked                                          |
-|--------------------|-------------------------------------------------------------|
+| ------------------ | ----------------------------------------------------------- |
 | `SelfDescribing`   | Custom event based on "self-describing" JSON schema         |
 | `Structured`       | Semi-custom structured event                                |
 | `ScreenView`       | View of a screen in the app                                 |
@@ -118,7 +120,7 @@ This method provides a halfway-house between tracking fully user-defined self-de
 As these fields are fairly arbitrary, we recommend following the advice in this table how to define structured events. It's important to be consistent throughout the business about how each field is used.
 
 | Argument   | Description                                                    | Required in event? |
-|------------|----------------------------------------------------------------|--------------------|
+| ---------- | -------------------------------------------------------------- | ------------------ |
 | `category` | The grouping of structured events which this action belongs to | Yes                |
 | `action`   | Defines the type of user interaction which this event involves | Yes                |
 | `label`    | Often used to refer to the 'object' the action is performed on | No                 |
@@ -152,7 +154,7 @@ Screen view events are also used in the[Snowplow Unified data model](/docs/model
 This method creates an unstruct event, by creating and tracking a self-describing event. The schema ID for this is "iglu:com.snowplowanalytics.snowplow/screen_view/jsonschema/1-0-0", and the data field will contain the parameters which you provide. That schema is hosted on the schema repository Iglu Central, and so will always be available to your pipeline.
 
 | Argument         | Description                                                 | Required in event? |
-|------------------|-------------------------------------------------------------|--------------------|
+| ---------------- | ----------------------------------------------------------- | ------------------ |
 | `name`           | The name of the screen viewed.                              | Yes                |
 | `id`             | The id (UUID v4) of screen that was viewed.                 | Yes                |
 | `type`           | The type of screen that was viewed.                         | No                 |
@@ -225,7 +227,7 @@ tracker.track(event);
 Use the `Timing` type to track user timing events such as how long resources take to load. These events take a timing `category`, the `variable` being measured, and the `timing` time measurement. An optional `label` can be added to further identify the timing event
 
 | Argument   | Description                                              | Required in event? |
-|------------|----------------------------------------------------------|--------------------|
+| ---------- | -------------------------------------------------------- | ------------------ |
 | `category` | Defines the timing category.                             | Yes                |
 | `variable` | Defines the timing variable measured.                    | Yes                |
 | `timing`   | Represents the time.                                     | Yes                |
@@ -251,7 +253,7 @@ For both events, a consent document context will be attached to the event using 
 Properties of `ConsentGranted`:
 
 | Argument              | Description                            | Required in event? |
-|-----------------------|----------------------------------------|--------------------|
+| --------------------- | -------------------------------------- | ------------------ |
 | `expiry`              | The expiry date-time of the consent.   | Yes                |
 | `documentId`          | The consent document ID.               | Yes                |
 | `version`             | The consent document version.          | Yes                |
@@ -273,7 +275,7 @@ tracker.track(ConsentGranted(
 Properties of `ConsentWithdrawn`:
 
 | Argument              | Description                                   | Required in event? |
-|-----------------------|-----------------------------------------------|--------------------|
+| --------------------- | --------------------------------------------- | ------------------ |
 | `all`                 | Whether user opts out of all data collection. | Yes                |
 | `documentId`          | The consent document ID.                      | Yes                |
 | `version`             | The consent document version.                 | Yes                |

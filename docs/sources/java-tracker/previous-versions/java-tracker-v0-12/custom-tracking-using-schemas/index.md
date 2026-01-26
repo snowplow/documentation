@@ -1,7 +1,10 @@
 ---
 title: "Custom tracking using schemas"
+sidebar_label: "Custom tracking using schemas"
 date: "2022-03-24"
 sidebar_position: 30
+description: "Track custom events and add context entities using self-describing JSON schemas with Java tracker v0.12."
+keywords: ["self-describing events v0.12", "custom context", "json schemas"]
 ---
 
 Self-describing (self-referential) JSON schemas are at the core of Snowplow tracking. Read more about them [here](/docs/fundamentals/schemas/index.md). They allow you to track completely customised data, and are also used internally throughout Snowplow pipelines.

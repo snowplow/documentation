@@ -1,6 +1,8 @@
 ---
 title: "Campaigns and UTMs"
 sidebar_position: 90
+description: "Documentation for Campaigns and UTMs in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block

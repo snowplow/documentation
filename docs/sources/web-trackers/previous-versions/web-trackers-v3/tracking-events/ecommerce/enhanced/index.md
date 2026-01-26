@@ -2,6 +2,8 @@
 title: "Enhanced ecommerce tracking"
 sidebar_label: "Enhanced"
 sidebar_position: 70
+description: "Documentation for tracking Enhanced ecommerce with the web tracker."
+keywords: ["tracking", "events"]
 ---
 
 ```mdx-code-block

@@ -2,6 +2,8 @@
 title: "Optional timestamp argument"
 date: "2021-03-24"
 sidebar_position: -10
+description: "Documentation for Optional timestamp argument in the web tracker."
+keywords: ["tracker", "configuration"]
 ---
 
 ```mdx-code-block
@@ -40,4 +42,4 @@ window.snowplow("trackSelfDescribingEvent", {
 );
 ```
 
-Above will attach `ttm` ([`true_tstamp`](/docs/fundamentals/canonical-event/index.md#date--time-fields)) parameter instead of default `dtm`. You can also use, plain number or `{ type: 'dtm', value: tstamp }` to send `` `dvce_created_tstamp` ``.
+Above will attach `ttm` ([`true_tstamp`](/docs/fundamentals/canonical-event/index.md#time-and-date-fields)) parameter instead of default `dtm`. You can also use, plain number or `{ type: 'dtm', value: tstamp }` to send `` `dvce_created_tstamp` ``.

@@ -1,7 +1,8 @@
 ---
 title: "Snowplow Web dbt package"
 sidebar_label: "Web"
-description: "The Snowplow Web dbt Package"
+description: "Legacy Web dbt package for web event data modeling. Superseded by the Unified Digital package."
+keywords: ["web dbt legacy", "legacy web package", "deprecated web"]
 sidebar_position: 700
 ---
 
@@ -53,7 +54,7 @@ dark: require('./images/web-process-dark.drawio.png').default
 
 <span style={{'font-size':'80%'}}>
 
-\* Since version 0.15.0 of `snowplow_web` at least version 15.0 of Postgres is required, otherwise you will need to [overwrite](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/overridable-macros/index.md#overriding-macros) the `default_channel_group` macro to not use the `regexp_like` function.
+\* Since version 0.15.0 of `snowplow_web` at least version 15.0 of Postgres is required, otherwise you will need to [overwrite](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/overridable-macros/index.md) the `default_channel_group` macro to not use the `regexp_like` function.
 
 ** From version v0.13.0 onwards we use the `load_tstamp` field so you must be using [RDB Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) v4.0.0 and above, or [BigQuery Loader](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md) v1.0.0 and above. If you do not have this field because you are not using these versions, or you are using the Postgres loader, you will need to set `snowplow__enable_load_tstamp` to `false` in your `dbt_project.yml` and will not be able to use the consent models.
 </span>
@@ -76,7 +77,7 @@ See the subsections for information on the optional modules.
 
 :::tip
 
-For information about overriding our macros, see [here](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/overridable-macros/index.md#overriding-macros)
+For information about overriding our macros, see [here](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/overridable-macros/index.md)
 
 :::
 

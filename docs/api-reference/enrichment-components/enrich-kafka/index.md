@@ -1,7 +1,10 @@
 ---
-title: "Enrich Kafka (Azure)"
+title: "Enrich Kafka for Azure deployments"
+sidebar_label: "Enrich Kafka (Azure)"
 date: "2022-10-03"
 sidebar_position: 30
+description: "Standalone JVM application for enriching Snowplow events from Kafka topics with configurable enrichments and validation for Azure deployments."
+keywords: ["enrich kafka", "kafka", "snowplow azure"]
 ---
 
 ```mdx-code-block

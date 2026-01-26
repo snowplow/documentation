@@ -1,6 +1,8 @@
 ---
-title: "Backfilling"
-description: "Steps for backfilling the data models"
+title: "Backfill your data"
+sidebar_label: "Backfilling"
+description: "Steps for backfilling the data models after initialization, adding custom models, or following a full refresh."
+keywords: ["dbt backfilling", "backfill data models", "incremental processing"]
 sidebar_position: 10
 ---
 
@@ -47,7 +49,7 @@ gantt
 ### Step 1: Create and process new model only
 In a local environment, assuming you are using version control for your project, create a new branch and create your model in this branch. Next ensure you are using a profile/target and/or configure the package models so that they will write to the `staging` schema (or be prefixed with `staging` depending on your setup) instead of `prod`.
 
-Now you will need to run the below script to run only what is needed for your new model (see [specific model selection](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/model-selection/index.md#specific-model-selection) for more details on why). We've also increased the backfill limit days so this needs to be run fewer times.
+Now you will need to run the below script to run only what is needed for your new model (see [model selection](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-operation/model-selection/index.md) for more details on why). We've also increased the backfill limit days so this needs to be run fewer times.
 
 
 ```bash

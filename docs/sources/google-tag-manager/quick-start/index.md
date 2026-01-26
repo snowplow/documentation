@@ -1,7 +1,9 @@
 ---
-title: "Quick start guide for Google Tag Manager tracker"
+title: "Quick start guide for using Snowplow in Google Tag Manager"
 sidebar_label: "Quick start"
 sidebar_position: 100
+description: "Add Snowplow v4 custom templates to your Google Tag Manager workspace and configure basic tracking. Import templates from the GTM gallery and set up your collector endpoint for event tracking."
+keywords: ["gtm setup", "tag manager templates", "gtm workspace", "snowplow v4 setup", "gtm gallery"]
 ---
 
 This guide will walk you through the initial setup for Snowplow in Google Tag Manager.
@@ -44,13 +46,13 @@ The Snowplow Settings Variable template is used to configure the Snowplow tracke
 
 2. Select `Snowplow v4 Settings` from the list of available variables.
 
-3. Under `Tracker Options`, enter your Snowplow collector endpoint set up when [configuring your collector](https://docs.snowplow.io/docs/collecting-data/configuring-collector/).
+3. Under `Tracker Options`, enter your Snowplow collector endpoint set up when [configuring your collector](/docs/pipeline/collector/index.md).
 
 ![](images/variable.png)
 
 :::info
 
-You might consider using conditional variables to set the collector endpoint based on the environment, e.g. sending data to [Micro](https://docs.snowplow.io/docs/testing/snowplow-micro/)/[Mini](https://docs.snowplow.io/docs/api-reference/snowplow-mini/) collector endpoint during development.
+You might consider using conditional variables to set the Collector endpoint based on the environment, e.g. sending data to [Micro](/docs/testing/snowplow-micro/index.md)/[Mini](/docs/api-reference/snowplow-mini/index.md) Collector endpoint during development.
 
 :::
 

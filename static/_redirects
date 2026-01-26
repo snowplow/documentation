@@ -11,12 +11,6 @@
 /advanced-analytics-web-accelerator/* /accelerators/web/:splat 301
 /accelerators/snowplow_fractribution/* /accelerators/snowplow-fractribution/:splat 301
 
-# Event Studio renaming
-/docs/data-product-studio/data-products/* /docs/event-studio/tracking-plans/:splat 301
-/docs/data-product-studio/* /docs/event-studio/:splat 301
-/docs/fundamentals/data-products/* /docs/fundamentals/tracking-plans/:splat 301
-
-
 /docs/collecting-data/collecting-from-own-applications/javascript-tracker/ /docs/collecting-data/collecting-from-own-applications/javascript-trackers/ 301  # http://bit.ly/sp-js linked in most of the web tracker artifacts
 /docs/collecting-data/collecting-from-own-applications/scala-tracker/setup-2 /docs/collecting-data/collecting-from-own-applications/scala-tracker/setup 301
 /docs/collecting-data/collecting-from-own-applications/mobile-trackers/mobile-trackers-v3-0/* /docs/collecting-data/collecting-from-own-applications/mobile-trackers/:splat 301
@@ -466,3 +460,8 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/sources/trackers/unity-tracker/* /docs/sources/unity-tracker/:splat 301
 /docs/sources/trackers/web-trackers/* /docs/sources/web-trackers/:splat 301
 /docs/sources/trackers/webview-tracker/* /docs/sources/webview-tracker/:splat 301
+
+# Event Studio renaming
+/docs/data-product-studio/data-products/* /docs/event-studio/tracking-plans/:splat 301
+/docs/data-product-studio/* /docs/event-studio/:splat 301
+/docs/fundamentals/data-products/* /docs/fundamentals/tracking-plans/:splat 301

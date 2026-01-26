@@ -48,9 +48,9 @@ This mode will no longer track any user identifiers or session information. The 
 | ------------------- | ----------------- | ------------------- |
 | `user_id`           | Atomic            | ❌                   |
 | `domain_userid`     | Atomic            | ❌                   |
-| `userId`            | Session entity    | ❌ no session entity |
 | `domain_sessionid`  | Atomic            | ❌                   |
 | `domain_sessionidx` | Atomic            | ❌                   |
+| `userId`            | Session entity    | ❌ no session entity |
 | `sessionId`         | Session entity    | ❌ no session entity |
 | `previousSessionId` | Session entity    | ❌ no session entity |
 | `tabId`             | Browser entity    | ❌                   |
@@ -76,9 +76,9 @@ This mode will continue to track session information but will track no user iden
 | ------------------- | ----------------- | ------------------ |
 | `user_id`           | Atomic            | ❌                  |
 | `domain_userid`     | Atomic            | ❌                  |
-| `userId`            | Session entity    | ❌ set to null UUID |
 | `domain_sessionid`  | Atomic            | ✅                  |
 | `domain_sessionidx` | Atomic            | ✅                  |
+| `userId`            | Session entity    | ❌ set to null UUID |
 | `sessionId`         | Session entity    | ✅                  |
 | `previousSessionId` | Session entity    | ❌                  |
 | `tabId`             | Browser entity    | ❌                  |
@@ -99,18 +99,18 @@ eventMethod: 'post'
 
 This mode will no longer track any user identifiers or session information, and will additionally prevent the Snowplow Collector from generating a `network_userid` cookie and capturing the users IP address. The same behavior described for above for Client side Anonymous tracking also applies.
 
-| Identifier          | Location in event | Included in event? |
-| ------------------- | ----------------- | ------------------ |
-| `user_id`           | Atomic            | ❌                  |
-| `domain_userid`     | Atomic            | ❌                  |
-| `userId`            | Session entity    | ❌                  |
-| `domain_sessionid`  | Atomic            | ❌                  |
-| `domain_sessionidx` | Atomic            | ❌                  |
-| `sessionId`         | Session entity    | ❌                  |
-| `previousSessionId` | Session entity    | ❌                  |
-| `tabId`             | Browser entity    | ❌                  |
-| `network_userid`    | Atomic            | ❌                  |
-| `user_ipaddress`    | Atomic            | ❌                  |
+| Identifier          | Location in event | Included in event?  |
+| ------------------- | ----------------- | ------------------- |
+| `user_id`           | Atomic            | ❌                   |
+| `domain_userid`     | Atomic            | ❌                   |
+| `domain_sessionid`  | Atomic            | ❌                   |
+| `domain_sessionidx` | Atomic            | ❌                   |
+| `userId`            | Session entity    | ❌ no session entity |
+| `sessionId`         | Session entity    | ❌ no session entity |
+| `previousSessionId` | Session entity    | ❌ no session entity |
+| `tabId`             | Browser entity    | ❌                   |
+| `network_userid`    | Atomic            | ❌                   |
+| `user_ipaddress`    | Atomic            | ❌                   |
 
 Setting `stateStorageStrategy` to `cookieAndLocalStorage` or `localStorage` also allows for event buffering to continue working whilst not sending user information when `anonymousTracking` is enabled. However for an experience that doesn't use any browser storage (cookieless), set `stateStorageStrategy` to `none`. This can be later toggled on, once a user accepts a cookie policy.
 

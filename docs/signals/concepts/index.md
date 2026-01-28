@@ -83,8 +83,8 @@ This table summarizes the options for different types of processing:
 | Feature                            | Supported in real-time stream                                                 | Supported in batch            |
 | ---------------------------------- | ----------------------------------------------------------------------------- | ----------------------------- |
 | Real-time calculation              | ✅                                                                             | ❌                             |
+| Time windowing operations          | ✅                                                                            | ✅                             |
 | Computing user lifetime attributes | ✅ from the point at which the attribute was defined                           | ✅                             |
-| Time windowing operations          | ✅ but only the last 100 values might be included, depending on the definition | ✅                             |
 | Reprocessing data                  | ❌ attributes are only calculated from the moment they are defined             | ✅                             |
 | Non-Snowplow data                  | ❌                                                                             | ✅ using external batch source |  |
 

@@ -126,7 +126,7 @@ Performance timing context entities are **automatically tracked** once configure
 | `sp.js`              | ❌        |
 | `sp.lite.js`         | ❌        |
 
-This plugin was included in `sp.js` from version 3, but removed in version 4 in favour of the performance navigation timing plugin.
+This plugin was included in `sp.js` in version 3, but removed in version 4 in favor of the performance navigation timing plugin.
 
 **Download:**
 

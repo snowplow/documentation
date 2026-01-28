@@ -80,8 +80,10 @@ Geolocation context entities are **automatically tracked** once configured.
 
 | Tracker Distribution | Included |
 | -------------------- | -------- |
-| `sp.js`              | ✅        |
+| `sp.js`              | ❌        |
 | `sp.lite.js`         | ❌        |
+
+This plugin was included in `sp.js` from version 3, but removed in version 4.
 
 **Download:**
 

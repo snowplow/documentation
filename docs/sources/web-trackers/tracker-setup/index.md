@@ -11,7 +11,6 @@ sidebar_position: 1000
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md'
-import DocCardList from '@theme/DocCardList';
 ```
 
 <ReleaseBadge/>
@@ -21,8 +20,12 @@ import DocCardList from '@theme/DocCardList';
 
 There are two distributions of the JavaScript Tracker:
 
-- `sp.js` is fully featured and is bundled with the majority of the available plugins.
-- `sp.lite.js` is a smaller distribution with no bundled plugins. Included is Page View, Self Describing and Structured Event tracking as well as Activity Tracking and Anonymous Tracking. All other features can be loaded as separate [plugins](/docs/sources/web-trackers/plugins/index.md).
+| Distribution | Size (minified + gzipped) | Default distribution | Best for                                        | Plugins included? |
+| ------------ | ------------------------- | -------------------- | ----------------------------------------------- | ----------------- |
+| `sp.js`      | ~25 KB                    | ✅                    | Quick start with a wide range of functionality  | ✅                 |
+| `sp.lite.js` | ~18 KB                    | ❌                    | Minimizing tracker size, focus on core tracking | ❌                 |
+
+The `sp.js` distribution doesn't include all available plugins. See the [plugins](/docs/sources/web-trackers/plugins/index.md) page for full details on which are included.
 
 ```mdx-code-block
 import LoadWithTag from "@site/docs/reusable/javascript-tracker-load-with-tag/_index.md"
@@ -65,5 +68,3 @@ trackPageView();
 
   </TabItem>
 </Tabs>
-
-<DocCardList/>

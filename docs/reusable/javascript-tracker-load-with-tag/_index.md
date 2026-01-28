@@ -6,14 +6,14 @@ Use the following tag to your page to load `sp.js`:
 </script>
 ```
 
-**Note:** We recommend self hosting `sp.js` by following our Self hosting snowplow JS guides [here](/docs/sources/web-trackers/tracker-setup/hosting-the-javascript-tracker/index.md). The latest versions are currently available at [GitHub](https://github.com/snowplow/snowplow-javascript-tracker/releases).
+We recommend self hosting `sp.js` by following our [self hosting](/docs/sources/web-trackers/tracker-setup/hosting-the-javascript-tracker/index.md) guides. All tracker versions are available on [GitHub](https://github.com/snowplow/snowplow-javascript-tracker/releases).
 
-We also recommend renaming `sp.js` as this file name is commonly blocked by adblockers. Renaming to a random string will help ensure the JavaScript Tracker is loaded as expected.
+We also recommend renaming `sp.js` as this filename is commonly blocked by adblockers. Renaming to a random string will help ensure the JavaScript Tracker is loaded as expected.
 
-_Important note regarding testing:_ If the URL to sp.js is protocol-relative i.e. beginning with // when fetching `sp.js`. It will work if the your web page is using the “http” or “https” protocol. But if you are testing locally and loading your page from your filesystem using the “file” protocol (so its URI looks something like “file:///home/joe/snowplow_test.html”), the protocol-relative URL will also use that protocol, preventing the script from loading. To avoid this, change the URL to `"http://.../sp.js"` when testing locally.
+As well as loading the JavaScript Tracker, this tag creates a global function called `snowplow` which you use to access the Tracker. The rest of the documentation will assume that the function is called `snowplow`, but you can replace the string with the function name of your choice.
 
-As well as loading the JavaScript Tracker, this tag creates a global function called “snowplow” which you use to access the Tracker. You can replace the string “snowplow” with the function name of your choice. This is encouraged: if there are two JavaScript trackers on the same page, there won’t be any conflict between them as long as they have chosen different function names. 
+If you're running multiple JavaScript Trackers on the same page, you can avoid conflicts by specifying different function names for each tracker.
 
-:::note
-The rest of the documentation will assume that the function is called “snowplow”.
+:::info Local testing
+If you're testing by opening your HTML file directly from your filesystem, e.g. `file:///home/joe/test.html`, protocol-relative URLs like `//cdn.example.com/sp.js` won't load. Use a local server or specify the full URL with `http://` or `https://`.
 :::

@@ -1,4 +1,4 @@
-Use the following tag to your page to load `sp.js`:
+Use the following tag on your page to load `sp.js`:
 
 ```javascript
 <script type="text/javascript" async=1>

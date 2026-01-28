@@ -20,10 +20,10 @@ import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v
 
 There are two distributions of the JavaScript Tracker:
 
-| Distribution | Size (minified + gzipped) | Default distribution | Best for                                        | Plugins included? |
-| ------------ | ------------------------- | -------------------- | ----------------------------------------------- | ----------------- |
-| `sp.js`      | ~25 KB                    | ✅                    | Quick start with a wide range of functionality  | ✅                 |
-| `sp.lite.js` | ~18 KB                    | ❌                    | Minimizing tracker size, focus on core tracking | ❌                 |
+| Distribution | Size (minified + gzipped) | Default distribution | Best for                                                 | Plugins included? |
+| ------------ | ------------------------- | -------------------- | -------------------------------------------------------- | ----------------- |
+| `sp.js`      | ~25 KB                    | ✅                    | Quick start with the a range of common tracking features | ✅                 |
+| `sp.lite.js` | ~18 KB                    | ❌                    | Smaller file size and core tracking only                 | ❌                 |
 
 The `sp.js` distribution doesn't include all available plugins. See the [plugins](/docs/sources/web-trackers/plugins/index.md) page for full details on which are included.
 

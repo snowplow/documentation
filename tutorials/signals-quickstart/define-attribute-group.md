@@ -63,10 +63,6 @@ The purple dot next to **More** indicates that you have extended settings.
 
 ![Completed page view counter attribute with time period indicator](./images/attribute1-complete.png)
 
-:::info Event processing limits
-There's a limit on how many events can be considered for time-windowed [event processing in stream](/docs/signals/define-attributes/).
-:::
-
 ### Most recent browser
 
 The second attribute is the last seen browser name. The calculation makes use of the [YAUAA enrichment](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/): the browser name is a field in the `yauaa_context` entity.

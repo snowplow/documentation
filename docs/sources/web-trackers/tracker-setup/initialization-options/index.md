@@ -150,15 +150,11 @@ snowplow('newTracker', 'sp', '{{collector_url_here}}', {
   credentials: 'include', // Available from v4+
   contexts: {
     webPage: true, // Default
-    session: false, // Adds client session context entity to events, off by default. Available in v3.5+.
-    browser: false, // Adds browser context entity to events, off by default. Available in v3.9+.
-    performanceNavigationTiming: true, // Adds performance navigation timing entity. Available in v4.0.2+
-    performanceTiming: true,
-    gaCookies: true,
-    // gaCookies: { ga4: true, ua: false, ga4MeasurementId: "", cookiePrefix: "_ga_" }, // Optional
-    geolocation: false,
-    clientHints: true,
-    // clientHints: { includeHighEntropy: true }, // Optional
+    session: false, // Adds client session entity to events, off by default. Available in v3.5+.
+    browser: false, // Adds browser entity to events, off by default. Available in v3.9+.
+    performanceNavigationTiming: false, // Adds performance navigation timing entity. Available in v4.0.2+
+    gaCookies: false, // Adds Google Analytics cookies entity. Available in v3.0+
+    webVitals: false // Adds web vitals entity. Available in v4.0+
   },
   retryStatusCodes: [],
   dontRetryStatusCodes: [],

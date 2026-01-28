@@ -113,26 +113,22 @@ Every tracked event payload has a unique `event_id` UUID string set by the track
 
 ## Auto-tracked entities
 
-The tracker can be set up to automatically track certain events, or automatically add entities to every event sent. Most autotracking is specifically configured using plugins, which are imported, enabled, and configured individually.
+The tracker can be set up to automatically add entities to every event sent.
 
-However, the following autotracked context entities can be configured directly when instrumenting the tracker. To enable them, simply add their names and boolean to the `contexts` field of the [configuration object](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md). They will be added to every event tracked.
+Most autotracking is specifically configured using plugins, which are imported, enabled, and configured individually. However, you can configure some entities directly when instrumenting the tracker, using the [configuration object](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md).
 
-| Entity                                                                                                      | Usage                             | Enabled by default |
-| ----------------------------------------------------------------------------------------------------------- | --------------------------------- | ------------------ |
-| [`webPage`](/docs/sources/web-trackers/tracking-events/page-views/index.md#webpage-page-view-id-context-entity) | A UUID for the page view.         | `true`             |
-| [`session`](/docs/sources/web-trackers/tracking-events/session/index.md)                           | Data about the current session.   | `false`            |
-| [`browser`](/docs/sources/web-trackers/browsers/index.md)                                          | Properties of the user's browser. | `false`            |
+| Entity                                                                                                          | Usage                            | Added by default | JavaScript (tag) tracker | Browser (npm) tracker |
+| --------------------------------------------------------------------------------------------------------------- | -------------------------------- | ---------------- | ------------------------ | --------------------- |
+| [`webPage`](/docs/sources/web-trackers/tracking-events/page-views/index.md#webpage-page-view-id-context-entity) | UUID for the page view           | ✅                | `contexts` config        | `contexts` config     |
+| [`session`](/docs/sources/web-trackers/tracking-events/session/index.md)                                        | Data about the current session   | ❌                | `contexts` config        | `contexts` config     |
+| [`browser`](/docs/sources/web-trackers/browsers/index.md)                                                       | Properties of the user's browser | ❌                | `contexts` config        | `contexts` config     |
+| [`performanceTiming`](/docs/sources/web-trackers/tracking-events/timings/index.md)                              | Performance timing metrics       | ❌                | `contexts` config        | Plugin                |
+| [`gaCookies`](/docs/sources/web-trackers/tracking-events/ga-cookies/index.md)                                   | Extract GA cookie values         | ❌                | `contexts` config        | Plugin                |
+| [`geolocation`](/docs/sources/web-trackers/tracking-events/timezone-geolocation/index.md)                       | User's geolocation               | ❌                | `contexts` config        | Plugin                |
 
-The following context entities can be configured by plugin, or when setting up the **JavaScript tracker** configuration object only. To automatically track these context entities when using the Browser tracker, use the plugin versions.
+If you're using the `sp.lite.js` JavaScript tracker distribution of the JavaScript tracker, the configuration is the same as for the Browser tracker.
 
-| Entity                                                                                             | Usage                          | Enabled by default |
-| -------------------------------------------------------------------------------------------------- | ------------------------------ | ------------------ |
-| [`performanceTiming`](/docs/sources/web-trackers/tracking-events/timings/index.md)        | Performance timing metrics.    | `true`             |
-| [`gaCookies`](/docs/sources/web-trackers/tracking-events/ga-cookies/index.md)             | Extract GA cookie values.      | `true`             |
-| [`geolocation`](/docs/sources/web-trackers/tracking-events/timezone-geolocation/index.md) | User's geolocation.            | `false`            |
-| [`clientHints`](/docs/sources/web-trackers/tracking-events/client-hints/index.md)         | Chrome user-agent Client Hints | `true`             |
-
-## Manually-tracked events
+## Manually tracked events
 
 The tracker provides methods for tracking different types of events.
 The events are divided into two groups: canonical events and self-describing events. Canonical event properties have their own column in the data warehouse, while self-describing custom events are based on JSON schema.

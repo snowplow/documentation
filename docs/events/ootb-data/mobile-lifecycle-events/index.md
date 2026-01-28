@@ -10,7 +10,7 @@ import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
 Mobile lifecycle events track key moments in your app's usage: when a user installs the app, opens it, or switches away. These events help you understand user engagement patterns, measure retention, and analyze session behavior.
 
-We recommend using the [Base mobile data product template](/docs/data-product-studio/data-products/data-product-templates/index.md#base-mobile) for mobile tracking. It includes install and lifecycle events.
+We recommend using the [Base mobile tracking plan template](/docs/event-studio/tracking-plans/tracking-plan-templates/index.md#base-mobile) for mobile tracking. It includes install and lifecycle events.
 
 ## Install events
 

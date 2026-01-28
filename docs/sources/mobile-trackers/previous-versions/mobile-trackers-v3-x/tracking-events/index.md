@@ -159,7 +159,7 @@ A Self Describing event is a [self-describing JSON](http://snowplowanalytics.com
 
 ### Structured
 
-Our philosophy in creating Snowplow is that users should capture important consumer interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](/docs/data-product-studio/index.md). Using `trackSelfDescribingEvent` captures these interactions with custom schemas, as desribed above.
+Our philosophy in creating Snowplow is that users should capture important consumer interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](/docs/event-studio/index.md). Using `trackSelfDescribingEvent` captures these interactions with custom schemas, as desribed above.
 
 However, as part of a Snowplow implementation there may be interactons where custom Self Describing events are perhaps too complex or unwarranted. They are then candidates to track using `Structured`, if none of the other event-specific methods outlined below are appropriate.
 
@@ -463,7 +463,7 @@ A Self Describing event is a [self-describing JSON](http://snowplowanalytics.com
 
 ### Structured
 
-Our philosophy in creating Snowplow is that users should capture important consumer interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](/docs/data-product-studio/index.md). Using `trackSelfDescribingEvent` captures these interactions with custom schemas, as desribed above.
+Our philosophy in creating Snowplow is that users should capture important consumer interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](/docs/event-studio/index.md). Using `trackSelfDescribingEvent` captures these interactions with custom schemas, as desribed above.
 
 However, as part of a Snowplow implementation there may be interactons where custom Self Describing events are perhaps too complex or unwarranted. They are then candidates to track using `Structured`, if none of the other event-specific methods outlined below are appropriate.
 

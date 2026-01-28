@@ -15,7 +15,7 @@ The application consists of a product listing page, individual product pages, an
 It incorporates Snowplow tracking using these features:
 * [Snowplow browser tracker](https://docs.snowplow.io/docs/sources/trackers/web-trackers/)
 * [Ecommerce tracking plugin](https://docs.snowplow.io/docs/sources/trackers/web-trackers/tracking-events/ecommerce/)
-* [Snowtype](https://docs.snowplow.io/docs/data-product-studio/snowtype/) event definitions
+* [Snowtype](https://docs.snowplow.io/docs/event-studio/snowtype/) event definitions
 
 ## Copyright and license
 

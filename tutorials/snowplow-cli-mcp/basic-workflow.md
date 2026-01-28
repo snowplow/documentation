@@ -1,30 +1,26 @@
 ---
-position: 4
-title: "Create and publish a data product using the Snowplow CLI MCP tool"
-sidebar_label: "Create and publish a data product"
-description: "Create and validate Snowplow data structures using conversational AI through the MCP tool. Learn the complete workflow from context retrieval through validation to publishing data structures to Console."
-keywords: ["data structure validation", "snowplow tracking plan creation"]
+position: 3
+title: "Create and publish a data structure using the Snowplow CLI MCP tool"
+sidebar_label: "Create and publish a data structure"
 ---
 
-This page shows a typical interaction pattern. In this example, the AI assistant is helping build a new [data product](/docs/fundamentals/data-products), with new [data structures](/docs/fundamentals/schemas) and [source application](/docs/data-product-studio/source-applications).
+Here's a typical interaction pattern for creating a data structure.
 
-## Import Snowplow context
+## 1. Get context
 
+:::note Important
 Always ensure `get_context` is called at the start of your conversation. If you don't see it happen, then ask for it.
+:::
 
-Example prompt:
-
-```txt
+```
 Please call get_context before we start working.
 ```
 
-The assistant will retrieve the built-in schemas and rules that define how Snowplow components should be structured.
+The assistant will retrieve the built-in schema and rules that define how Snowplow components should be structured. This provides the structural templates and requirements for your tracking implementation.
 
-## Create a new data structure
+## 2. Create a data structure
 
-Example prompt:
-
-```txt
+```
 Create a data structure for tracking when users view a product page.
 
 Include properties for product ID, product name, category, and price.
@@ -33,43 +29,42 @@ Include properties for product ID, product name, category, and price.
 The assistant will:
 - Generate a proper UUID for the data structure
 - Create a valid event schema following Snowplow conventions
-- Save the file **locally** to the appropriate location
-- Automatically validate the created structure and report any issues
+- Save the file locally to the appropriate location
 
-You can iterate if needed. Example prompt:
+**Note**: Files are created locally only. Use `snowplow-cli data-structures publish` to sync to Console when ready.
 
-```txt
+## 3. Validate (automatic)
+
+The assistant should automatically call `validate_data_structures` on the created file and report any validation issues.
+
+## 4. Iterate if needed
+
+```
 The price should be optional, not required.
 
 Also add a description field.
 ```
 
-The assistant will modify the structure, and validate again.
+The assistant will modify the structure and re-validate.
 
-## Create a new data product
 
-Example prompt:
+## 5. Tracking plan creation
 
-```txt
-Create a data product for ecommerce product interactions. Include:
-- The existing product page views that you just made
+```
+Create a tracking plan for ecommerce product interactions. Include:
+- The existing product page views
 - Add to cart events
 - A source application for our website
 - Proper validation of all components
 ```
 
 The assistant will:
-* Create the necessary additional data structures for events
-* Create a source application definition
-* Create a data product linking everything together
-* Validate and cross-reference all the components together
+1. Create the necessary data structures for events (locally)
+2. Create a source application definition (locally)
+3. Create a tracking plan linking everything together (locally)
+4. Validate all components together (including cross-references)
 
 
-## Publish to Console
+## 6. Publish to Console
 
-All files are created **locally**. When you're ready to publish to [Console](https://console.snowplowanalytics.com), use the standard Snowplow CLI commands:
-
-```bash
-snowplow-cli data-structures publish
-snowplow-cli data-products publish
-```
+Use `snowplow-cli data-structures publish` and `snowplow-cli data-products publish` to push changes to Console.

@@ -1,6 +1,6 @@
 ---
 position: 10
-title: Generate tracking code from data products with Snowtype
+title: Generate tracking code from tracking plans with Snowtype
 sidebar_label: Generate tracking code
 description: "Generate type-safe tracking code and implementation instructions with Snowtype. Use generated APIs to track event specifications and verify events with Snowplow Inspector and Console volume counts."
 keywords: ["snowtype code generation", "type-safe tracking apis", "event specification tracking", "tracking code implementation"]
@@ -14,10 +14,10 @@ The `src/tracking/instructions.md` file includes detailed instructions and infor
 
 :::info
 In some editors like [Visual Studio Code](https://code.visualstudio.com/), the APIs that are available in a project are shown to the developer as they type. For Snowtype exposed APIs to track Event Specifications or event Data Structures start with `track` and then the name of the Data Structure or Event Specification. For Event Specification APIs, there is also the suffix of `Spec` or `spec` depending on the language.
-E.g. for our custom Data Product, we have available the `trackAddTodoSpec`, `trackCompleteTodoSpec` and `trackRemoveTodoSpec` methods.
+E.g. for our custom tracking plan, we have available the `trackAddTodoSpec`, `trackCompleteTodoSpec` and `trackRemoveTodoSpec` methods.
 :::
 
-## Tracking Data Product interactions
+## Tracking interactions
 
 To track interactions such as adding a new todo, you can add the following piece of code at `src/pagesTodo/components/Header.tsx`
 
@@ -54,7 +54,7 @@ Finally, you can go to the application, add a new todo and observe on the Snowpl
 
 ![](./images/inspector-spec.png)
 
-After a while the Event Specification volume counts for each event will be available at the Data Products screen.
+After a while the Event Specification volume counts for each event will be available at the tracking plans screen.
 
 ![](./images/custom-dp-volumes.png)
 

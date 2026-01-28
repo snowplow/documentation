@@ -91,7 +91,7 @@ If you are a Snowplow CDI customer, rather than self-hosted, you don't need to i
 
 :::info Snowplow CDI
 
-If you are a Snowplow CDI customer, rather than self-hosted, you don't need to install Iglu Server yourself. It's also unlikely that you need to use any of the other components in this section. You can manage your data structures [in the UI or via the API](/docs/data-product-studio/data-structures/manage/index.md).
+If you are a Snowplow CDI customer, rather than self-hosted, you don't need to install Iglu Server yourself. It's also unlikely that you need to use any of the other components in this section. You can manage your data structures [in the UI or via the API](/docs/event-studio/data-structures/manage/index.md).
 
 :::
 

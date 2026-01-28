@@ -47,7 +47,7 @@ Some [enrichments](/docs/pipeline/enrichments/available-enrichments/index.md) ad
 
 Check out our [tracking plan guide](/docs/fundamentals/tracking-design-best-practice/index.md) for best practice on designing entities.
 
-Snowplow provides [tooling](/docs/data-product-studio/index.md) to help you define your own custom entities. Read more about tracking custom data [here](/docs/events/custom-events/index.md).
+Snowplow provides [tooling](/docs/event-studio/index.md) to help you define your own custom entities. Read more about tracking custom data [here](/docs/events/custom-events/index.md).
 
 ## Entities are defined by schemas
 

@@ -27,7 +27,7 @@ The plugin is available from Version 4.2 of the tracker.
 
 | Tracker Distribution | Included |
 | -------------------- | -------- |
-| `sp.js`              | ✅        |
+| `sp.js`              | ❌        |
 | `sp.lite.js`         | ❌        |
 
 **Download:**

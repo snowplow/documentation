@@ -83,7 +83,7 @@ Geolocation context entities are **automatically tracked** once configured.
 | `sp.js`              | ❌        |
 | `sp.lite.js`         | ❌        |
 
-This plugin was included in `sp.js` from version 3, but removed in version 4.
+This plugin was included in `sp.js` in version 3, but removed in version 4.
 
 **Download:**
 

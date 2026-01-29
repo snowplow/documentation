@@ -94,6 +94,8 @@ snowplow('disableFormTracking');
   <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
+import { FormTrackingPlugin, disableFormTracking } from '@snowplow/browser-plugin-form-tracking';
+
 disableFormTracking();
 ```
 

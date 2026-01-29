@@ -129,7 +129,7 @@ This table shows the support for page element tracking across the main client-si
 | Roku                                                                        | ❌         |               |               |
 | Google Tag Manager                                                          | ❌         |               |               |  |
 
-### Available events
+### Events
 
 The element tracking plugin generates four event types:
 
@@ -138,7 +138,13 @@ The element tracking plugin generates four event types:
 - `obscure_element`: when a matching element scrolls out of view
 - `destroy_element`: when a matching element is removed from the page
 
-Create element:
+All of these events have a single property, `element_name`. The plugin adds an `element` entity with information about the tracked element.
+
+You can also configure the tracker to attach `element_statistics`, `element_content`, or `component_parents` entities.
+
+#### Create element event
+
+Triggered when an element matching a named configuration is added to the page or detected on page load.
 
 <SchemaProperties
   overview={{event: true}}
@@ -149,7 +155,9 @@ Create element:
 }
 } />
 
-Expose element:
+#### Expose element event
+
+Triggered when a tracked element scrolls into the viewport and becomes visible to the user.
 
 <SchemaProperties
   overview={{event: true}}
@@ -159,7 +167,9 @@ Expose element:
   schema={{"description": "Event that fires when an element matching a named configuration is detected as intersecting with the viewport, becoming visible to the user.","properties": {  "element_name": {    "description": "The name of the element that was exposed. Should match the element name field in entities that describe this particular element.",    "type": "string",    "maxLength": 255  }},"additionalProperties": false,"type": "object","required": ["element_name"],"self": {  "vendor": "com.snowplowanalytics.snowplow",  "name": "expose_element",  "format": "jsonschema",  "version": "1-0-0"},"$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#"
 }} />
 
-Obscure element:
+#### Obscure element event
+
+Triggered when a tracked element scrolls out of the viewport or becomes hidden from the user.
 
 <SchemaProperties
   overview={{event: true}}
@@ -169,7 +179,9 @@ Obscure element:
   schema={{"description": "Event that fires when an element matching a named configuration is detected as becoming hidden from a user or moving out of the viewport.","properties": {  "element_name": {    "description": "The name of the element that was obscured. Should match the element name field in entities that describe this particular element.",    "type": "string",    "maxLength": 255  }},"additionalProperties": false,"type": "object","required": ["element_name"],"self": {  "vendor": "com.snowplowanalytics.snowplow",  "name": "obscure_element",  "format": "jsonschema",  "version": "1-0-0"},"$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#"
 }} />
 
-Destroy element:
+#### Destroy element event
+
+Triggered when a tracked element is removed from the page.
 
 <SchemaProperties
   overview={{event: true}}
@@ -179,9 +191,9 @@ Destroy element:
   schema={{"description": "Event that fires when an element matching a named configuration is detected as being removed from a document.","properties": {  "element_name": {    "description": "The name of the element that was destroyed. Should match the element name field in entities that describe this particular element.",    "type": "string",    "maxLength": 255  }},"additionalProperties": false,"type": "object","required": ["element_name"],"self": {  "vendor": "com.snowplowanalytics.snowplow",  "name": "destroy_element",  "format": "jsonschema",  "version": "1-0-0"},"$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#"
 }} />
 
-### Available entities
+### Element entity
 
-All element events include an `element` entity with information about the tracked element.
+The `element` entity is attached to all element tracking events and contains information about the tracked element's position, dimensions, and attributes.
 
 <SchemaProperties
   overview={{event: false}}
@@ -200,12 +212,14 @@ All element events include an `element` entity with information about the tracke
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for element context", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "element", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "element_name": { "type": "string", "description": "The name of the element" }, "width": { "type": "number", "description": "The width of the element" }, "height": { "type": "number", "description": "The height of the element" }, "position_x": { "type": "number", "description": "The x position of the element in the viewport" }, "position_y": { "type": "number", "description": "The y position of the element in the viewport" }, "doc_position_x": { "type": "number", "description": "The x position of the element in the document" }, "doc_position_y": { "type": "number", "description": "The y position of the element in the document" }, "element_index": { "type": "integer", "description": "The index of this element among all matching elements" }, "element_matches": { "type": "integer", "description": "The total number of elements matching the rule" }, "originating_page_view": { "type": "string", "description": "The page view ID when the element was first observed" }, "attributes": { "type": "array", "description": "Custom attributes extracted from the element" } }, "required": ["element_name"], "additionalProperties": false }} />
 
-You can optionally configure the tracker to attach element statistics to any event type, providing information about element visibility and scroll depth, using the `element_statistics` entity.
+### Element statistics entity
+
+The `element_statistics` entity contains information about element visibility and scroll depth.
 
 <SchemaProperties
   overview={{event: false}}
   example={{
-    element_name: "blog content",
+    element_name: "article_content",
     element_index: 1,
     element_matches: 1,
     current_state: "unknown",
@@ -217,6 +231,36 @@ You can optionally configure the tracker to attach element statistics to any eve
     max_y_depth: "1937/3928",
     element_age_ms: 298379,
     times_in_view: 0,
-    total_time_visible_ms: 0
+    total_time_visible_ms: 185000
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for element statistics", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "element_statistics", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "element_name": { "type": "string" }, "element_index": { "type": "integer" }, "element_matches": { "type": "integer" }, "current_state": { "type": "string" }, "min_size": { "type": "string" }, "current_size": { "type": "string" }, "max_size": { "type": "string" }, "y_depth_ratio": { "type": "number" }, "max_y_depth_ratio": { "type": "number" }, "max_y_depth": { "type": "string" }, "element_age_ms": { "type": "integer" }, "times_in_view": { "type": "integer" }, "total_time_visible_ms": { "type": "integer" } }, "required": ["element_name"], "additionalProperties": false }} />
+
+### Element content entity
+
+The `element_content` entity captures data extracted from a tracked element, including its position within a parent component hierarchy.
+
+<SchemaProperties
+  overview={{event: false}}
+  example={{
+    parent_name: "product grid",
+    parent_index: 1,
+    element_name: "product card",
+    element_index: 3,
+    attributes: [
+      { source: "dataset", attribute: "product_id", value: "SKU-12345" },
+      { source: "content", attribute: "price", value: "$49.99" }
+    ]
+  }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Entity describing the content of an element matching a named configuration.", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "element_content", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "parent_name": { "description": "The name of the configuration for the element/component that contains the element described by this entity.", "type": "string", "maxLength": 255 }, "parent_index": { "description": "The index of this element's parent element/component's within it's parent's other matches for it's element configuration.", "type": "integer", "minimum": 1 }, "element_name": { "description": "The name of the configuration for the element/component that contains this data. This will usually match the corresponding element_name in an event payload or other entity.", "type": "string", "maxLength": 255 }, "element_index": { "description": "The position of this element's within it's parent's other matches for the element's configuration.", "type": "integer", "minimum": 1 }, "attributes": { "description": "Results of configured contents descriptions found on this element.", "type": ["array", "null"], "items": { "description": "An individual contents description found on this element.", "type": "object", "required": ["source", "attribute", "value"], "properties": { "source": { "description": "The type of content description that produced this result.", "enum": ["callback", "content", "selector", "dataset", "attributes", "properties", "child_text", "error"], "maxLength": 40 }, "attribute": { "description": "The name of the discovered content attribute found.", "type": "string", "maxLength": 255 }, "value": { "description": "The value of the discovered content attribute found.", "type": "string", "maxLength": 2048 } } } } }, "required": ["parent_name", "parent_index", "element_name", "element_index"], "additionalProperties": false }} />
+
+### Component parents entity
+
+The `component_parents` entity records the hierarchy of parent components that contain a tracked element.
+
+<SchemaProperties
+  overview={{event: false}}
+  example={{
+    element_name: "add to cart button",
+    component_list: ["product grid", "product card", "card actions"]
+  }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Entity describing the list of components that were found to contain the element with the named configuration.", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "component_parents", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "element_name": { "description": "Name of the element that this entity relates to, if any. If not provided, may apply to a subject of some other event, such as Link, Button, or Form Tracking events.", "type": ["string", "null"], "maxLength": 255 }, "component_list": { "description": "List of component names that were detected as containing the element that is the subject of this event.", "type": "array", "minItems": 1, "items": { "description": "Component name found to contain this element. This should match a component configuration name.", "type": "string", "maxLength": 255 } } }, "required": ["component_list"], "additionalProperties": false }} />

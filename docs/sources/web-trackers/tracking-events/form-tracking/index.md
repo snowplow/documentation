@@ -45,7 +45,9 @@ Form events are **automatically tracked** once configured.
 </TabItem>
 </Tabs>
 
-## Enable form tracking
+## Toggle form tracking
+
+Start tracking form events by enabling the plugin:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -62,7 +64,7 @@ snowplow('enableFormTracking');
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
 
-This is part of the `@snowplow/browser-plugin-form-tracking` plugin. You need to install it with your favorite package manager: `npm install @snowplow/browser-plugin-form-tracking` and then initialize it:
+Initialize your tracker with the plugin.
 
 ```javascript
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
@@ -78,6 +80,27 @@ enableFormTracking();
 
   </TabItem>
 </Tabs>
+
+To stop form tracking, call `disableFormTracking`:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('disableFormTracking');
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+disableFormTracking();
+```
+
+  </TabItem>
+</Tabs>
+
+## Events
 
 By default, all three event types are tracked. However, it is possible to subscribe only to specific event types using the `options.events` option when enabling form tracking:
 
@@ -106,17 +129,18 @@ enableFormTracking({
   </TabItem>
 </Tabs>
 
-### `change_form`
+Check out the [form tracking overview](/docs/events/ootb-data/page-elements/index.md#form-interactions) page to see the schema details.
+
+### Change form
 
 When a user changes the value of a `textarea`, `input`, or `select` element inside a form, a [`change_form`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/change_form/jsonschema/1-0-0) event will be fired. It will capture the name, type, and new value of the element, and the id of the parent form.
 
-### `submit_form`
-
+### Submit form
 When a user submits a form, a [`submit_form`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/submit_form/jsonschema/1-0-0) event will be fired. It will capture the id and classes of the form and the name, type, and value of all `textarea`, `input`, and `select` elements inside the form.
 
 Note that this will only work if the original form submission event is actually fired. If you prevent it from firing, for example by using a jQuery event handler which returns `false` to handle clicks on the form's submission button, the Snowplow `submit_form` event will not be fired.
 
-### `focus_form`
+### Focus form
 
 When a user focuses on a form element, a [`focus_form`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/focus_form/jsonschema/1-0-0) event will be fired. It will capture the id and classes of the form and the name, type, and value of the `textarea`, `input`, or `select` element inside the form that received focus.
 

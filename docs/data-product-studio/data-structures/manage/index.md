@@ -57,7 +57,7 @@ Once located, click on the name to view the data structure. You can then select 
 The **Edit with builder** option will be unavailable if the data structure you're viewing is not supported. More complex data structures must be edited with the **JSON Editor**.
 :::
 
-The same page also provides different tabs to explore related information:
+After selecting a data structure, you'll see several tabs that provide additional context and help you understand how the data structure is used throughout your tracking implementation.
 
 - **Full schema history**: View all changes made to the data structure over time
 - **Event specifications**: View all event specifications associated with the data structure

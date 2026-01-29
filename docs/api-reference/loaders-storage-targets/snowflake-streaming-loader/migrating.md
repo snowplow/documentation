@@ -17,7 +17,7 @@ There are two migration strategies you might take:
 
 ## Load into the same table as before
 
-The Streaming Loader is fully compatible with the table created and managed by the recent versions of RDB Loader.  In particular, these aspects are exactly the same as before:
+The Streaming Loader is fully compatible with the table created and managed by the recent versions of RDB Loader. In particular, these aspects are exactly the same as before:
 
 - There are 129 columns for the atomic fields, common to all Snowplow events
 - [Self-describing events](/docs/fundamentals/events/index.md#self-describing-events) are loaded into columns named like `unstruct_event_com_example_button_press_1`
@@ -31,6 +31,12 @@ The Streaming Loader is fully compatible with the table created and managed by t
 :::
 
 You will notice some subtle differences:
+
+#### No loader-side deduplication
+
+RDB Loader performs [within-batch and cross-batch deduplication](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/transforming-enriched-data/deduplication/index.md) during loading. The Streaming Loader does not deduplicate events, so you may see more duplicates than with the RDB Loader.
+
+Snowplow's [data models](/docs/modeling-your-data/modeling-your-data-with-dbt/index.md) handle deduplication automatically. If you write custom queries, see [dealing with duplicates](/docs/destinations/warehouses-lakes/querying-data/index.md#dealing-with-duplicates).
 
 #### New `_schema_version` property in entities
 

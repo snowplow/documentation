@@ -31,6 +31,18 @@
     --chart-5: 220.45 70.08% 50.2%;
     --radius: 0.25rem;
 
+    /* Snippet component colors */
+    --ds-blue-100: oklch(97.32% 0.0141 251.56);
+    --ds-blue-900: oklch(53.18% 0.2399 256.9900584162342);
+    --ds-red-100: oklch(96.5% 0.0223 13.09);
+    --ds-red-900: oklch(54.99% 0.232 25.29);
+    --ds-amber-100: oklch(97.48% 0.0331 85.79);
+    --ds-amber-900: oklch(52.79% 0.1496 54.65);
+    --ds-gray-100: hsla(0, 0%, 95%, 1);
+    --ds-gray-1000: hsla(0, 0%, 9%, 1);
+    --ds-gray-alpha-400: hsla(0, 0%, 0%, 0.08);
+    --ds-background-100: hsla(0, 0%, 100%, 1);
+
     --font-fallback: -apple-system, system-ui, BlinkMacSystemFont, 'Segoe UI',
       Roboto, 'Helvetica Neue', Arial, sans-serif;
   }
@@ -60,6 +72,18 @@
     --chart-3: 40.27 76.84% 62.75%;
     --chart-4: 340 73.06% 62.16%;
     --chart-5: 220.66 71.03% 58.04%;
+
+    /* Snippet component colors - dark theme */
+    --ds-blue-100: oklch(22.17% 0.069 259.89);
+    --ds-blue-900: oklch(71.7% 0.1648 250.79360374054167);
+    --ds-red-100: oklch(22.1% 0.0657 15.11);
+    --ds-red-900: oklch(69.96% 0.2136 22.03);
+    --ds-amber-100: oklch(22.46% 0.0538 76.04);
+    --ds-amber-900: oklch(77.21% 0.1991 64.28);
+    --ds-gray-100: hsla(0, 0%, 10%, 1);
+    --ds-gray-1000: hsla(0, 0%, 93%, 1);
+    --ds-gray-alpha-400: hsla(0, 0%, 100%, 0.14);
+    --ds-background-100: hsla(0, 0%, 4%, 1);
   }
 }
 @font-face {
@@ -92,6 +116,74 @@
 .animate-subtle-gradient {
   animation: subtle-gradient-shift 12s linear infinite;
 }
+
+/* Snippet Component Styles */
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+    scale: 0.5;
+  }
+  20% {
+    opacity: 1;
+    scale: 1;
+  }
+  80% {
+    opacity: 1;
+    scale: 1;
+  }
+  100% {
+    opacity: 0;
+    scale: 0.5;
+  }
+}
+
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+    scale: 1;
+  }
+  20% {
+    opacity: 0;
+    scale: 0.5;
+  }
+  80% {
+    opacity: 0;
+    scale: 0.5;
+  }
+  100% {
+    opacity: 1;
+    scale: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease-out forwards;
+}
+
+.animate-fade-out {
+  animation: fade-out 1s ease-out forwards;
+}
+
+/* Snippet component utility classes */
+.bg-background-100 { background-color: var(--ds-background-100); }
+.bg-gray-1000 { background-color: var(--ds-gray-1000); }
+.bg-blue-100 { background-color: var(--ds-blue-100); }
+.bg-amber-100 { background-color: var(--ds-amber-100); }
+.bg-red-100 { background-color: var(--ds-red-100); }
+
+.text-gray-1000 { color: var(--ds-gray-1000); }
+.text-gray-100 { color: var(--ds-gray-100); }
+.text-blue-900 { color: var(--ds-blue-900); }
+.text-amber-900 { color: var(--ds-amber-900); }
+.text-red-900 { color: var(--ds-red-900); }
+
+.fill-gray-1000 { fill: var(--ds-gray-1000); }
+.fill-gray-100 { fill: var(--ds-gray-100); }
+.fill-blue-900 { fill: var(--ds-blue-900); }
+.fill-amber-900 { fill: var(--ds-amber-900); }
+.fill-red-900 { fill: var(--ds-red-900); }
+
+.border-gray-alpha-400 { border-color: var(--ds-gray-alpha-400); }
 /* You can override the default Infima variables here. */
 
 /**

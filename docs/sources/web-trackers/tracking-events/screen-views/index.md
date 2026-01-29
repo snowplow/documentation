@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 Screen view tracking is the recommended way to track users opening a screen in mobile apps.
 They are the default option for tracking views in our mobile trackers (iOS, Android, React Native, Flutter).
 On Web, [we recommend using page views](/docs/sources/web-trackers/tracking-events/page-views/index.md) to track users visiting a page.
-However, using the screen view tracking plugin is also an option on Web if you prefer this data model.
+However, using the screen view tracking plugin is also an option on Web.
 
 :::note
 The plugin is available from Version 4.2 of the tracker.

@@ -61,7 +61,7 @@ The same page also provides different tabs to explore related information:
 
 - **Full schema history**: View all changes made to the data structure over time
 - **Event specifications**: View all event specifications associated with the data structure
-- **Associated entities**: View all associated events and entities along with their properties, including descriptions, types, and criteria
+- **Associated data structures**: View all associated event and entity data structures along with their properties, including descriptions, types, and criteria
 
 ## Promoting a data structure
 

@@ -38,7 +38,7 @@ Some enrichments require data files (e.g. a database of IPs).
 
 The Enrich application in a full Snowplow pipeline will automatically download and periodically update these files. However, Micro will only download them once. You can always restart Micro to get a fresher copy of the files.
 
-You might also face access limitations where the database files are hosted on S3, GCS or ADLS and are authenticated via the cloud environment.
+You might also face access limitations where the database files are hosted on S3, GCS, or ADLS and are authenticated via the cloud environment roles and permissions.
 
 </details>
 

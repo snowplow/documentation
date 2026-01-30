@@ -34,7 +34,7 @@ You can always run Micro with the `--help` argument to find out what is supporte
 | `-j`, `--output-json`<br/>_(since 2.4.0)_ | Print events in JSON format to standard output ([usage](/docs/testing/snowplow-micro/basic-usage/index.md#exporting-events))           |
 | `-d`, `--destination`<br/>_(since 2.4.0)_ | Send data to an HTTP endpoint instead of outputting it via standard output. Requires either `--output-tsv` or `--output-json` ([usage](/docs/testing/snowplow-micro/basic-usage/index.md#exporting-events))           |
 | `--yauaa` | Enable YAUAA user agent enrichment ([usage](/docs/testing/snowplow-micro/configuring-enrichments/index.md#yauaa-yet-another-user-agent-analyzer)) |
-| `-no-storage`<br/>_(since 4.0.0)_ | Do not store the events anywhere and disable the API (handy if using Micro purely for output) |
+| `--no-storage`<br/>_(since 4.0.0)_ | Do not store the events anywhere and disable the API |
 | `--storage`<br/>_(since 4.0.0)_ | Enable PostgreSQL storage backend ([usage](/docs/testing/snowplow-micro/advanced-usage/index.md#persisting-events-across-restarts)) |
 
 ## Environment variables

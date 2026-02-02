@@ -96,3 +96,34 @@ Pass your configuration file to the container (using a [bind mount](https://docs
   snowplow/snowplow-micro:${versions.snowplowMicro} \\
   --collector-config /config/micro.conf`
 }</CodeBlock>
+
+## Persisting events across restarts
+
+By default, Micro only stores events in memory. Since version 4.0.0, you can connect it to a PostgreSQL database to persist events across restarts.
+
+To enable this, first create a storage configuration file:
+
+```hcl title="storage.conf"
+host = "localhost"
+port = 5432
+database = "micro_test"
+user = "test_user"
+
+// How long to keep the events for (minimum: 5m)
+ttl = "7d"
+
+// How often to clean up expired events (minimum: 1m)
+cleanupInterval = "1h"
+```
+
+Next, place the database password into an [environment variable](https://en.wikipedia.org/wiki/Environment_variable) named `MICRO_POSTGRESQL_PASSWORD`.
+
+Now you can run Micro and pass the configuration, as well as the password:
+
+<CodeBlock language="bash">{
+`docker run -p 9090:9090 \\
+  --mount type=bind,source=$(pwd)/storage.conf,destination=/config/storage.conf \\
+  -e MICRO_POSTGRESQL_PASSWORD \\
+  snowplow/snowplow-micro:${versions.snowplowMicro} \\
+  --storage /config/storage.conf`
+}</CodeBlock>

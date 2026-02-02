@@ -64,8 +64,9 @@ If your code calls `newTracker` multiple times with the same namespace, only the
 Initialize one tracker per initial page load.
 :::
 
-The following table shows all the configuration parameters. These are all optional: you aren't required to provide any configuration object at all.
+## Configuration options
 
+The following table shows all the configuration parameters. These are **all optional**: you aren't required to provide any configuration object at all.
 
 | Property                                                                                                                                    | Description                                                                                          | Default (if applicable)               | Type                       |
 | ------------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | ------------------------------------- | -------------------------- |
@@ -89,7 +90,6 @@ The following table shows all the configuration parameters. These are all option
 | [`cookieLifetime`](/docs/sources/web-trackers/cookies-and-local-storage/configuring-cookies/index.md#cookie-lifetime-and-duration)          | Set the cookie lifetime in seconds.                                                                  | 63072000 (2 years)                    | `int`                      |
 | [`sessionCookieTimeout`](/docs/sources/web-trackers/tracking-events/session/index.md)                                                       | Set the session timeout in seconds.                                                                  | 1800 (30 minutes)                     | `int`                      |
 | [`stateStorageStrategy`](/docs/sources/web-trackers/cookies-and-local-storage/configuring-cookies/index.md#storage-strategy)                | How to store tracker state.                                                                          | `cookieAndLocalStorage`               | `string` enum              |
-| [`maxLocalStorageQueueSize`](/docs/sources/web-trackers/cookies-and-local-storage/configuring-cookies/index.md#local-storage-queue-size)    | Maximum events to queue in local storage when they are failing to send.                              | 1000                                  | `int`                      |
 | [`resetActivityTrackingOnPageView`](/docs/sources/web-trackers/tracking-events/activity-page-pings/index.md#reset-page-pings-on-page-view)  | Reset page ping timers when a page view is tracked.                                                  | `true`                                | `boolean`                  |
 | [`connectionTimeout`](/docs/sources/web-trackers/configuring-how-events-sent/index.md#connection-timeout)                                   | Request timeout in milliseconds.                                                                     | 5000                                  | `int`                      |
 | [`anonymousTracking`](/docs/sources/web-trackers/anonymous-tracking/index.md)                                                               | Enable anonymous tracking (do not track user identifiers).                                           | `false`                               | `boolean` or `object`      |
@@ -108,6 +108,27 @@ The following table shows all the configuration parameters. These are all option
 | [`eventStore`](/docs/sources/web-trackers/configuring-how-events-sent/index.md#custom-event-store)                                          | Custom EventStore implementation for storing events before sending.                                  |                                       | `object`                   |
 | [`keepalive`](/docs/sources/web-trackers/configuring-how-events-sent/index.md#keepalive-option-for-collector-requests)                      | Allow requests to outlive the webpage. Enables requests to complete even if the page is closed.      | `false`                               | `boolean`                  |
 | [`synchronousCookieWrite`](/docs/sources/web-trackers/configuring-how-events-sent/index.md#synchronous-cookie-writes)                       | Write cookies synchronously (blocks main thread).                                                    | `false`                               | `boolean`                  |
+| [`maxLocalStorageQueueSize`](/docs/sources/web-trackers/cookies-and-local-storage/configuring-cookies/index.md#local-storage-queue-size)    | Maximum events to queue in local storage when they are failing to send.                              | 1000                                  | `int`                      |
+| `useLocalStorage`                                                                                                                           | Whether the event queue persists to localStorage. See below.                                         | `true`                                | `boolean`                  |
+| `useStm`                                                                                                                                    | Whether to add the sent timestamp to GET events. See below.                                          | `true`                                | `boolean`                  |
+
+### Local storage options
+
+The `useLocalStorage` option in this table refers to event queue behavior. It was introduced in version 4.0.0. If you set it to `false`, events will be stored in memory only. If the page closes before events are sent, they'll be lost.
+
+This is a **risky** setting that you should only use if you have a specific reason, such as compliance or privacy.
+
+Previous versions of the tracker had a `useLocalStorage` option that referred to state storage. In version 3 [we deprecated this option](/docs/sources/web-trackers/migration-guides/v2-to-v3-migration-guide/index.md) in favor of `stateStorageStrategy`. If you're upgrading from version 2 and were using `useLocalStorage`, switch to `stateStorageStrategy: 'localStorage'` if don't want to store state in cookies, or use the default `cookieAndLocalStorage` behavior.
+
+### Sent timestamp for GET events
+
+By default, the tracker sends POST requests. If you update the `eventMethod` to `get`, the tracker will send events using GET requests. These events will contain a `stm` [timestamp parameter](/docs/events/timestamps/index.md) recording when the event was sent.
+
+If you need to make requests as small as possible, you can omit the `stm` parameter by setting the `useStm` option to `false`. This option was introduced in version 2.10.1. It's a niche parameter that you should only use if you have a specific reason to do so.
+
+POST requests always include the sent timestamp.
+
+## Example configuration code
 
 Here is a longer code example in which every tracker configuration parameter is set:
 

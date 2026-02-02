@@ -89,9 +89,9 @@ Setting the flag will add a `SP-Anonymous` HTTP header to requests sent to the S
 
 This setting disables client-side user identifiers but tracks session information. In practice, this means that events track the Session context entity but the userId property is a null UUID (00000000-0000-0000-0000-000000000000). In case Platform context is enabled, the IDFA identifiers will not be present.
 
-#### Cookie Extension Service
+#### Cookie Lifetime Extension Service
 
-This allows you to set the endpoint for the [Cookie Extension Service](/docs/events/cookie-extension/index.md).
+This allows you to set the endpoint for the [Cookie Lifetime Extension Service](/docs/sources/web-trackers/cookies-and-local-storage/cookie-extension/index.md).
 
 ## Cookie Settings
 

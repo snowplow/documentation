@@ -4,7 +4,7 @@ sidebar_label: "Configure cookie and storage settings"
 description: "Configure cookie names, domains, lifetimes, and storage strategies for optimal first-party tracking."
 keywords: ["cookie configuration", "storage strategy", "cookie domain", "samesite cookies"]
 date: "2021-04-07"
-sidebar_position: 100
+sidebar_position: 1
 ---
 
 ```mdx-code-block

@@ -22,14 +22,14 @@ Although first-party cookies don't allow sharing user and session identifiers ac
 Using Snowplow, you can set up your collector to be on the same domain as the website, which is the requirement for the use of first-party cookies.
 To learn how to set up the collector domain, [visit this page](/docs/sources/first-party-tracking/index.md).
 
-**Strategy 2: Snowplow Cookie Extension service for Safari ITP**
+**Strategy 2: Snowplow Cookie Lifetime Extension service for Safari ITP**
 
 As of Safari 16.4 released in April 2023, Safari sets the [lifetime of server-set cookies](https://webkit.org/tracking-prevention/#cname-and-third-party-ip-address-cloaking-defense) to a maximum of 7 days under some circumstances even if they are first-party cookies.
 This greatly limits the effectiveness of tracking a customer journey where users are not regularly returning to your website.
 In particular, it affects the `network_userid` identifier in Snowplow events.
 
-Snowplow provides the Cookie Extension service solution that fully mitigates the impact of this change.
-Visit the [documentation for the Cookie Extension service](/docs/events/cookie-extension/index.md) to learn more.
+Snowplow provides the Cookie Lifetime Extension service solution that fully mitigates the impact of this change.
+Visit the [documentation for the Cookie Lifetime Extension service](/docs/sources/web-trackers/cookies-and-local-storage/cookie-extension/index.md) to learn more.
 
 ## 2. Mitigating the impact of ad-blockers
 

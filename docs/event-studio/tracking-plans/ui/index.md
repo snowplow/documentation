@@ -15,15 +15,13 @@ A modal will appear on the page, giving you the possibility to quickly create a 
 
 ![Create tracking plan modal](images/create-tracking-plan-modal.png)
 
-After selecting "Create from scratch" a form will appear on the page. Enter your tracking plan information and click "Create and continue" to navigate to the event specification page.
+After selecting "Create new" a form will appear on the page. Enter your tracking plan information and click "Create and continue" to navigate to the event specification page.
 
 :::note
 _The name of your tracking plan must be unique to ensure proper identification and avoid conflicts._
 :::
 
-![Event specifications](images/event-specifications.png)
-
-This page allows you to create multiple event specifications. You can click on any row to enter the details on this screen, or you can complete the information later.
+The next page allows you to create multiple event specifications. You can click on any row to enter the details on this screen, or you can complete the information later.
 
 When clicking on an event specification row, a page will allow you to enter additional information into separate modals:
 
@@ -48,16 +46,6 @@ In the image below, you can see an example of a tracking plan. It not only provi
 ![Event specification details](images/event-specification-details.png)
 
 If you need to edit a tracking plan at any time, simply select it from the tracking plans listing accessible from the main menu.
-
-## Updating existing Tracking Plans for Source Applications
-
-Tracking Plans created prior to the release of [Source Applications](/docs/event-studio/source-applications/index.md) in September 2024 will need to be updated to assign Source Applications in which the events will be tracked on. The selected Source Applications will add the relevant application IDs to each of the event specifications in the tracking plan.
-
-![Updating existing Tracking Plans](images/edit-existing-tracking-plan.png)
-
-Event specifications which contain previously added application IDs will need to be updated to use the identifiers inherited from the Source Applications selected at Tracking Plan level. This process can be done manually but you can reach out to our Support team to help you with that by either logging a request through Snowplow [Console](https://console.snowplowanalytics.com/) or by directly emailing [support@snowplow.io](mailto:support@snowplow.io).
-
-![Updating existing Event Specifications](images/edit-existing-event-specification.png)
 
 ## Upgrading Event Specification Instructions
 

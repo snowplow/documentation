@@ -126,6 +126,8 @@ interface Emitter {
 }
 ```
 
+Read more about anonymous tracking in the [overview page](/docs/events/anonymous-tracking/index.md).
+
 Once you implement your own `Emitter`, you can pass it to the `newTracker` call as follows.
 
 ```ts

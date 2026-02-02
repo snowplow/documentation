@@ -10,6 +10,8 @@ import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
 Snowplow provides out-of-the-box [events](/docs/fundamentals/events/index.md) and [entities](/docs/fundamentals/entities/index.md) to track user consent preferences and GDPR compliance. Use these to capture consent decisions, track changes to user preferences, and monitor Consent Management Platform (CMP) performance.
 
+You can also configure your tracker not to track certain identifiers, depending on user consent, using [anonymous tracking](/docs/events/anonymous-tracking/index.md).
+
 ## Consent API versions
 
 Snowplow provides two versions of consent tracking APIs:

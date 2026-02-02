@@ -865,6 +865,13 @@ export const dbtVersions = {
                 "dbt-labs/dbt_utils": ">=1.0.0 <2.0.0",
                 "snowplow/snowplow_utils": ">=0.17.3 <0.18.0"
             }
+        },
+        "1.0.0": {
+            "dbtversion": ">=1.10.6 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.1.0 <2.0.0",
+                "snowplow/snowplow_utils": ">=1.0.0 <2.0.0"
+            }
         }
     },
     "snowplow/snowplow_utils": {
@@ -1142,6 +1149,12 @@ export const dbtVersions = {
             "dbtversion": ">=1.0.0 <2.0.0",
             "packages": {
                 "dbt-labs/dbt_utils": ">=0.8.0 <0.9.0"
+            }
+        },
+        "1.0.0": {
+            "dbtversion": ">=1.10.6 <2.0.0",
+            "packages": {
+                "dbt-labs/dbt_utils": ">=1.1.0 <2.0.0"
             }
         }
     },

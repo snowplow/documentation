@@ -77,6 +77,8 @@ This setting allows you to respect the Do Not Track setting in the user's browse
 
 ### Anonymous Tracking
 
+Read more about anonymous tracking in the [overview page](/docs/events/anonymous-tracking/index.md).
+
 #### Server Anonymisation
 
 Server-side anonymisation affects user identifiers set server-side. In particular, these are the network_userid property set in server-side cookie and the user IP address.
@@ -186,5 +188,5 @@ Available predefined contexts are:
 | `gaCookies`                   | Information about the Google Analytics cookies.                                                                                          | [Google Analytics Cookies Plugin](/docs/sources/web-trackers/tracking-events/ga-cookies/index.md)                       |
 | `clientHints`                 | Information about the client's device.                                                                                                   | [Client Hints Plugin](/docs/sources/web-trackers/tracking-events/client-hints/index.md)                                 |
 | `geolocation`                 | Information about the client's geolocation.                                                                                              | [Geolocation](/docs/events/ootb-data/geolocation/index.md)                                                              |
-| `session`                     | Information about the user session.                                                                                                      | [Session](/docs/events/ootb-data/user-and-session-identification/index.md#session-entity)                |
+| `session`                     | Information about the user session.                                                                                                      | [Session](/docs/events/ootb-data/user-and-session-identification/index.md#session-entity)                               |
 | `performanceNavigationTiming` | Retrieves data from the [PerformanceNavigationTiming](https://developer.mozilla.org/en-US/docs/Web/API/PerformanceNavigationTiming) API. | [Performance Navigation Timing](/docs/sources/web-trackers/tracking-events/timings/index.md)                            |

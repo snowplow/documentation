@@ -23,7 +23,7 @@ The default session expiry time is 30 minutes.
 
 ## Tracking the session entity
 
-The session entity is **automatically tracked** once configured.
+The session entity is **automatically tracked** once [configured](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md).
 
 <details>
     <summary>Client session entity properties</summary>

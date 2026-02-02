@@ -1,6 +1,6 @@
 ---
 title: "Configure cookie and storage settings for the web trackers"
-sidebar_label: "Configuring cookie and storage settings for the web trackers"
+sidebar_label: "Configure cookie and storage settings"
 description: "Configure cookie names, domains, lifetimes, and storage strategies for optimal first-party tracking."
 keywords: ["cookie configuration", "storage strategy", "cookie domain", "samesite cookies"]
 date: "2021-04-07"

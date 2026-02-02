@@ -140,7 +140,7 @@ In this example, the tracked page view and every subsequent page ping will have 
 
 ## WebPage (page view ID) context entity
 
-When the JavaScript Tracker loads on a page, it generates a new page view UUID. If the webPage context entity is enabled, then an entity containing this UUID is attached to **all events**.
+When the JavaScript Tracker loads on a page, it generates a new page view UUID. If the webPage entity is enabled, then an entity containing this UUID is attached to **all events**.
 
 From v3 of the web tracker, the webPage entity is enabled by default. We advise you leave this enabled so you can use the [Snowplow Web Data Model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/legacy/dbt-web-data-model/index.md).
 
@@ -149,7 +149,7 @@ To disable this entity, set `"webPage": false` in the `"contexts"` object within
 <details>
     <summary>Web page entity properties</summary>
 
-The [web_page](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0) context entity consists of the following property:
+The [web_page](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0) entity consists of the following property:
 
 | Attribute | Description                             | Required? |
 | --------- | --------------------------------------- | --------- |
@@ -157,58 +157,11 @@ The [web_page](https://github.com/snowplow/iglu-central/blob/master/schemas/com
 
 </details>
 
+You can get the ID of the current page view using [the `getPageViewId` function](/docs/sources/web-trackers/tracking-events/index.md#page-view-id).
+
 ## Reset page ping on page view
 
 By default the tracker will reset the Page Ping timers, which were configured when [`enableActivityTracking`](/docs/sources/web-trackers/tracking-events/activity-page-pings/index.md) is called, as well as reset the attached webPage context entities on all future Page Pings when a new `trackPageView` event occurs. This is enabled by default as of 2.13.0 and is particularly useful for Single Page Applications (SPA). If you previously relied on this behavior, you can disable this functionality by specifying `resetActivityTrackingOnPageView: false` in the configuration object on tracker initialisation.
-
-## Get page view ID
-
-When the JavaScript Tracker loads on a page, it generates a new page view UUID as mentioned above.
-
-It's possible to retrieve certain properties for use in your code, including the page view UUID, [user ID](/docs/sources/web-trackers/tracking-events/index.md#getting-user-id-once-set), and [cookie values](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/index.md#retrieving-cookie-properties-from-the-tracker), using a tracker callback. This is an advanced usage of the tracker.
-
-```mdx-code-block
-import RetrieveValuesJs from "@site/docs/reusable/javascript-tracker-retrieve-values/_javascript.md"
-import RetrieveValuesBrowser from "@site/docs/reusable/javascript-tracker-retrieve-values/_browser.md"
-```
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-<RetrieveValuesJs />
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-<RetrieveValuesBrowser />
-
-  </TabItem>
-</Tabs>
-
-To get the page view ID, use the `getPageViewId` method:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
-// Access the tracker instance inside a callback
-snowplow(function () {
- var sp = this.sp;
- var pageViewId = sp.getPageViewId();
- console.log(pageViewId);
-})
-```
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-```javascript
-const pageViewId = sp.getPageViewId();
-console.log(pageViewId);
-```
-
-  </TabItem>
-</Tabs>
 
 ## When is the page view ID generated
 

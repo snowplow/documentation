@@ -310,7 +310,7 @@ setReferrerUrl(document.referrer);
 </Tabs>
 :::
 
-### Custom timestamps
+### Custom timestamp
 
 Snowplow events have several [timestamps](/docs/events/timestamps/index.md).
 
@@ -391,7 +391,7 @@ trackSelfDescribingEvent({
 
 ## Get event properties
 
-It's possible to retrieve certain properties for use in your code, including the user ID, [page view ID](/docs/sources/web-trackers/tracking-events/page-views/index.md#get-page-view-id), and [cookie values](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/index.md#retrieving-cookie-properties-from-the-tracker), using a tracker callback.
+It's possible to retrieve certain identifiers and properties for use in your code. You'll need to use a callback for the JavaScript tracker.
 
 ```mdx-code-block
 import RetrieveValuesJs from "@site/docs/reusable/javascript-tracker-retrieve-values/_javascript.md"
@@ -410,6 +410,39 @@ import RetrieveValuesBrowser from "@site/docs/reusable/javascript-tracker-retrie
 
   </TabItem>
 </Tabs>
+
+### Cookie values
+
+You can [retrieve cookie values](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/index.md) using the `getDomainUserInfo` and other getters, or from the cookies directly.
+
+### Page view ID
+
+When the JavaScript Tracker loads on a page, it generates a new [page view UUID](docs/sources/web-trackers/tracking-events/page-views/index.md). To get this page view ID, use the `getPageViewId` method:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+// Access the tracker instance inside a callback
+snowplow(function () {
+ var sp = this.sp;
+ var pageViewId = sp.getPageViewId();
+ console.log(pageViewId);
+})
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+const pageViewId = sp.getPageViewId();
+console.log(pageViewId);
+```
+
+  </TabItem>
+</Tabs>
+
+### Business user ID
 
 The `getUserId` method returns the user ID which you configured using `setUserId()`:
 
@@ -431,6 +464,33 @@ snowplow(function () {
 ```javascript
 const userId = sp.getUserId();
 console.log(userId);
+```
+
+  </TabItem>
+</Tabs>
+
+### Tab ID
+
+If you've enabled the [`browser` entity](/docs/sources/web-trackers/browsers/index.md), you can get the tab ID using the `getTabId` method. It's a UUID identifier for the specific browser tab the event is sent from.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+// Access the tracker instance inside a callback
+snowplow(function () {
+ var sp = this.sp;
+ var tabId = sp.getTabId();
+ console.log(tabId);
+})
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+const tabId = sp.getTabId();
+console.log(tabId);
 ```
 
   </TabItem>

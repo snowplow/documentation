@@ -75,7 +75,7 @@ Most entity autotracking is specifically configured using plugins, which are imp
 | --------------------------------------------------------------------------------------------------------------- | -------------------------------- | ---------------- | ------------------------ | --------------------- |
 | [`webPage`](/docs/sources/web-trackers/tracking-events/page-views/index.md#page-view-id-and-web_page-entity) | UUID for the page view           | ✅                | `contexts` config        | `contexts` config     |
 | [`session`](/docs/sources/web-trackers/tracking-events/session/index.md)                                        | Data about the current session   | ❌                | `contexts` config        | `contexts` config     |
-| [`browser`](/docs/sources/web-trackers/browsers/index.md)                                                       | Properties of the user's browser | ❌                | `contexts` config        | `contexts` config     |
+| [`browser`](/docs/sources/web-trackers/tracking-events/browsers/index.md)                                                       | Properties of the user's browser | ❌                | `contexts` config        | `contexts` config     |
 | [`performanceTiming`](/docs/sources/web-trackers/tracking-events/timings/index.md)                              | Performance timing metrics       | ❌                | `contexts` config        | Plugin                |
 | [`gaCookies`](/docs/sources/web-trackers/tracking-events/ga-cookies/index.md)                                   | Extract GA cookie values         | ❌                | `contexts` config        | Plugin                |
 | [`geolocation`](/docs/sources/web-trackers/tracking-events/timezone-geolocation/index.md)                       | User's geolocation               | ❌                | `contexts` config        | Plugin                |
@@ -471,7 +471,7 @@ console.log(userId);
 
 ### Tab ID
 
-If you've enabled the [`browser` entity](/docs/sources/web-trackers/browsers/index.md), you can get the tab ID using the `getTabId` method. It's a UUID identifier for the specific browser tab the event is sent from.
+If you've enabled the [`browser` entity](/docs/sources/web-trackers/tracking-events/browsers/index.md), you can get the tab ID using the `getTabId` method. It's a UUID identifier for the specific browser tab the event is sent from.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>

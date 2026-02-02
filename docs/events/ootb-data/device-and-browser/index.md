@@ -22,7 +22,7 @@ Only the JavaScript tracker can populate the `br_cookies` field.
 
 | Tracker                                                                              | Supported | Since version | Auto-tracking | Notes                                         |
 | ------------------------------------------------------------------------------------ | --------- | ------------- | ------------- | --------------------------------------------- |
-| [Web](/docs/sources/web-trackers/browsers/index.md)                                  | ✅         | 0.1.0         | ✅             | All values set automatically                  |
+| [Web](/docs/sources/web-trackers/tracking-events/browsers/index.md)                                  | ✅         | 0.1.0         | ✅             | All values set automatically                  |
 | [iOS](/docs/sources/mobile-trackers/client-side-properties/index.md)                 | ✅         | 0.5.0         | ✅             |                                               |
 | [Android](/docs/sources/mobile-trackers/client-side-properties/index.md)             | ✅         | 0.1.0         | ✅             |                                               |
 | [React Native](/docs/sources/react-native-tracker/client-side-properties/index.md)   | ✅         | 0.1.0         | ✅             |                                               |

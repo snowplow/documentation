@@ -463,3 +463,4 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/sources/trackers/webview-tracker/* /docs/sources/webview-tracker/:splat 301
 
 /docs/events/cookie-extension/* /docs/sources/web-trackers/cookies-and-local-storage/cookie-extension/:splat 301
+/docs/sources/web-trackers/browsers/* /docs/sources/web-trackers/tracking-events/browsers/:splat 301

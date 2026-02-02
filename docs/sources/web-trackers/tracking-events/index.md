@@ -73,7 +73,7 @@ Most entity autotracking is specifically configured using plugins, which are imp
 
 | Entity                                                                                                          | Usage                            | Added by default | JavaScript (tag) tracker | Browser (npm) tracker |
 | --------------------------------------------------------------------------------------------------------------- | -------------------------------- | ---------------- | ------------------------ | --------------------- |
-| [`webPage`](/docs/sources/web-trackers/tracking-events/page-views/index.md#webpage-page-view-id-context-entity) | UUID for the page view           | ✅                | `contexts` config        | `contexts` config     |
+| [`webPage`](/docs/sources/web-trackers/tracking-events/page-views/index.md#page-view-id-and-web_page-entity) | UUID for the page view           | ✅                | `contexts` config        | `contexts` config     |
 | [`session`](/docs/sources/web-trackers/tracking-events/session/index.md)                                        | Data about the current session   | ❌                | `contexts` config        | `contexts` config     |
 | [`browser`](/docs/sources/web-trackers/browsers/index.md)                                                       | Properties of the user's browser | ❌                | `contexts` config        | `contexts` config     |
 | [`performanceTiming`](/docs/sources/web-trackers/tracking-events/timings/index.md)                              | Performance timing metrics       | ❌                | `contexts` config        | Plugin                |

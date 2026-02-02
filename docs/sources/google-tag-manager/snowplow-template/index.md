@@ -220,7 +220,7 @@ The Errors tracker tag provides a way to manually track any errors that occur on
 
 ## Page View
 
-You can provide a `Custom Page Title` if you wish, and you can add a [custom entity](/docs/events/custom-events/index.md#custom-entities) to the request, as also described [here](/docs/sources/web-trackers/tracking-events/page-views/index.md#tracking-a-page-view).
+You can provide a `Custom Page Title` if you wish, and you can add a [custom entity](/docs/events/custom-events/index.md#custom-entities) to the request, as also described [here](/docs/sources/web-trackers/tracking-events/page-views/index.md).
 
 If you enable `Page Activity Tracking`, page pings will be sent at intervals that you can specify.
 

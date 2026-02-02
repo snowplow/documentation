@@ -18,7 +18,7 @@ A modal will appear on the page, giving you the possibility to quickly create a 
 After selecting "Create new" a form will appear on the page. Enter your tracking plan information and click "Create and continue" to navigate to the event specification page.
 
 :::note
-_The name of your tracking plan must be unique to ensure proper identification and avoid conflicts._
+The name of your tracking plan must be unique to ensure proper identification and avoid conflicts.
 :::
 
 The next page allows you to create multiple event specifications. You can click on any row to enter the details on this screen, or you can complete the information later.
@@ -39,13 +39,15 @@ In the image below, you can see an example of a tracking plan. It not only provi
 - **Subscribe**; receive notifications of any changes in the tracking plan
 - **Implement tracking**; automatically generate the code for your tracking plan to be included in your application (to learn more visit [Code Generation - automatically generate code for Snowplow tracking SDKs](/docs/event-studio/snowtype/index.md))
 
-*Notes: sharing and subscribing is only available for users registered in Snowplow Console.*
+:::note
+Sharing and subscribing is only available for users registered in Snowplow Console.
+:::
 
 ![Tracking plan overview](images/tracking-plan-overview.png)
 
 ![Event specification details](images/event-specification-details.png)
 
-If you need to edit a tracking plan at any time, simply select it from the tracking plans listing accessible from the main menu.
+If you need to edit a tracking plan at any time, select it from the tracking plans listing accessible from the main menu.
 
 ## Upgrading Event Specification Instructions
 
@@ -63,7 +65,7 @@ When a new version of a Data Structure becomes available, the system will indica
 
 ![Upgrade Event Specification warning](images/upgrade-event-specification-warning.png)
 
-Clicking the button navigates to a new page, informing the user of the new version they are upgrading to, along with a **'View Changes'**.
+Clicking the button navigates to a new page, informing the user of the new version they are upgrading to, along with a **'View Changes'** button.
 
 ![Upgrade Event Specification page](images/upgrade-event-specification-page.png)
 
@@ -85,7 +87,7 @@ At the bottom, a button will allow users to confirm the upgrade. One of two thin
 If the new version of the Data Structure introduces incompatibilities with the existing Event Specification instructions, the system will flag the conflicting properties.
 
 - The UI will prompt the user to resolve these conflicts before the Event Specification can be upgraded.
-- The conflict resolution UI provides options to the user tp modify or delete each instruction depending on the type of incompatibility:
+- The conflict resolution UI provides options to the user to modify or delete each instruction depending on the type of incompatibility:
   - **Remove conflicting instructions**: If a specific property is no longer present in the new Data Structure.
   - **Modify conflicting instructions**: If a property in the new Data Structure has been changed in an incompatible way (e.g., type change, added/removed enum values, added pattern, etc.).
 

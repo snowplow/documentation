@@ -15,9 +15,11 @@ Track users' timezone and geolocation with these configuration options.
 
 ## Timezone
 
-The timezone plugin allows the tracker to populate the `os_timezone` field within the [canonical event model](/docs/fundamentals/canonical-event/index.md). This field has its own column in the data warehouse.
+Since version 4 of the JavaScript tracker, the tracker automatically captures the user's timezone. It populates the `os_timezone` [atomic field](/docs/fundamentals/canonical-event/index.md). This feature uses the `Intl.DateTimeFormat` function in modern browsers.
 
-The timezone property is **automatically tracked** once configured.
+If you're using an older version of the tracker, or your users use older browsers, use the timezone plugin to capture timezone information. It uses the `jstimezonedetect` library to determine the user's timezone and populate the `os_timezone` field.
+
+The timezone property is **automatically tracked** once you configure the plugin.
 
 ### Install plugin
 

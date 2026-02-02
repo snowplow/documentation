@@ -48,7 +48,7 @@ You can configure the web trackers to automatically include a browser entity wit
 
 | Tracker                                                                          | Supported | Since version | Auto-tracking |
 | -------------------------------------------------------------------------------- | --------- | ------------- | ------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/index.md#auto-tracked-entities) | ✅         | 3.9.0         | ✅             |
+| [Web](/docs/sources/web-trackers/tracking-events/index.md#add-contextual-data-with-entities) | ✅         | 3.9.0         | ✅             |
 | iOS                                                                              | ❌         |               |               |
 | Android                                                                          | ❌         |               |               |
 | React Native                                                                     | ❌         |               |               |

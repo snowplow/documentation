@@ -37,7 +37,7 @@ trackPageView();
 
 This method automatically captures the URL, referrer URL and page title (inferred from the `<title>` tag). The first page view tracked uses `document.referrer` for the referrer URL, while for subsequent page views it is the previous page URL.
 
-It's possible to [override the URL and referrer URL](/docs/sources/web-trackers/tracking-events/index.md#setting-a-custom-page-url-and-referrer-url).
+It's possible to [override the URL and referrer URL](/docs/sources/web-trackers/tracking-events/index.md#custom-page-url-and-referrer-url).
 
 If you wish, you can also override the title with a custom value:
 

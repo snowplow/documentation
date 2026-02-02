@@ -25,6 +25,10 @@ Best practice to ensure successful model runs:
 
 Before running your new models, you'll need to configure their dbt connection profile. Read more about this in the [dbt documentation](https://docs.getdbt.com/docs/core/connect-data-platform/connection-profiles). The batch engine doesn't generate a `profiles.yml` because it isn't best practice to store credentials in the same place as models.
 
+:::warn
+To ensure consistent syncs, Snowflake users must have `UTC` set as their default timezone. We validate this via a pre-hook before models run. If your run fails, follow the instructions provided in the dbt error message to update your user and remember to reconnect/restart your session afterward.
+:::
+
 ## Run the models
 
 After configuring dbt, you can run your models locally using the `dbt run` command.

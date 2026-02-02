@@ -55,8 +55,6 @@ swap:
   'Application context': application entity
   'Data Model': data model
   'Data Models': data models
-  'Data Product\b(?!\sStudio\b)': data product
-  'Data Products': data products
   'Data Structure': data structure
   'Data Structures': data structures
   'collector': Collector
@@ -70,3 +68,5 @@ swap:
   'Page Pings': page pings
   'Source Application': source application
   'Source Applications': source applications
+  'Tracking Plan': tracking plan
+  'Tracking Plans': tracking plans

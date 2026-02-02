@@ -49,7 +49,7 @@ In the below diagram we show an Iglu client resolving a schema from Iglu Central
 
 ![Iglu repositories](images/iglu-repos.png)
 
-**Iglu Central** ([http://iglucentral.com](http://iglucentral.com/)) is a public registry of Snowplow JSON schemas.
+**Iglu Central** ([https://iglucentral.com](https://iglucentral.com/)) is a public registry of Snowplow JSON schemas.
 
 Under the covers, Iglu Central is built and run as a **static Iglu registry**, hosted on Amazon S3.
 

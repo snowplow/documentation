@@ -67,6 +67,8 @@ This can be disabled by setting the `sessionContext` option to `false`.
 By default, this information is attached via the `client_session` entity, similar to mobile platforms.
 You can also include these values in the `domain_userid`, `domain_sessionid`, and `domain_sessionidx` fields by enabling the `sessionAsCookies` setting.
 
+Read more about anonymous tracking in the [overview page](/docs/events/anonymous-tracking/index.md).
+
 | Property             | Description                                  |
 | -------------------- | -------------------------------------------- |
 | `userId`             | Unique user identifier in your system        |

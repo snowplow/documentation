@@ -1,8 +1,7 @@
 ---
-title: "Migrate from Google Analytics to Snowplow"
-sidebar_label: "Google Analytics to Snowplow"
+title: "Google Analytics to Snowplow"
 date: "2025-01-20"
-sidebar_position: 0
+sidebar_position: 10
 description: "Migrate from Google Analytics to Snowplow, including data layer implementations with Google Tag Manager."
 keywords: ["google analytics", "ga4", "migration", "data layer", "gtm", "google tag manager"]
 ---
@@ -119,9 +118,9 @@ Snowplow provides [monitoring](/docs/monitoring/index.md) and alerting for faile
 
 #### Tracking plans
 
-You've probably defined which GA4 events and parameters to track in a tracking plan spreadsheet or similar document. Snowplow provides event data management tools for defining and managing tracking plans. Tracking plans are called [data products](/docs/fundamentals/data-products/index.md) in Snowplow. Each data product contains a set of related event specifications. Each event specification has one event data structure, and any number of entity data structures.
+You've probably defined which GA4 events and parameters to track in a tracking plan spreadsheet or similar document. Snowplow provides event data management tools for defining and managing tracking plans. Each [tracking plan](/docs/fundamentals/tracking-plans/index.md) contains a set of related event specifications. Each event specification has one event data structure, and any number of entity data structures.
 
-You can use the Snowplow Console, API, or CLI to [define your tracking data structures](/docs/data-product-studio/data-products/index.md). For each event you can specify when it should be tracked, and which entities should be added. Once you've defined your event specifications, you may be able to use [Snowtype](/docs/data-product-studio/snowtype/index.md) to automatically generate the tracking code snippets.
+You can use the Snowplow Console, API, or CLI to [define your tracking data structures](/docs/event-studio/tracking-plans/index.md). For each event you can specify when it should be tracked, and which entities should be added. Once you've defined your event specifications, you may be able to use [Snowtype](/docs/event-studio/snowtype/index.md) to automatically generate the tracking code snippets.
 
 
 ## Migration approaches
@@ -132,11 +131,11 @@ If you're using GA4 with direct `gtag()` calls, you can replace these with Snowp
 
 However, Snowplow also provides templates and tags for GTM and GTM Server-side. You could choose to migrate your data layer tracking and your modeling implementations in separate stages. This table summarizes the three possible approaches to reach a parallel-run dual tracking implementation:
 
-| Approach                                                                                                | Phase 1                                                                    | Phase 2                                                                                         | Phase 3                           | Best for                                                                              |
-| ------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | --------------------------------- | ------------------------------------------------------------------------------------- |
-| Direct [tracker SDK](/docs/sources/index.md) calls                                                      | Define Snowplow [data products](/docs/fundamentals/data-products/index.md) | Add Snowplow tracking calls; implement Snowplow data models                                     |                                   | Teams with tracking implementation engineer resources; greenfield validation projects |
-| [Snowplow GTM templates](/docs/sources/google-tag-manager/index.md)                                     | Define Snowplow [data products](/docs/fundamentals/data-products/index.md) | Configure Snowplow tags to receive data layer events; implement Snowplow data models            | Implement Snowplow tracking calls | Validation of Snowplow data quality for analytics or marketing teams                  |
-| [GTM Server-side](/docs/destinations/forwarding-events/google-tag-manager-server-side/index.md) tagging | Define Snowplow [data products](/docs/fundamentals/data-products/index.md) | Use GTM Server-side to forward your existing events to Snowplow; implement Snowplow data models | Implement Snowplow tracking calls | Validation of Snowplow data quality for teams already using GTM Server-side           |
+| Approach                                                                                                | Phase 1                                                                      | Phase 2                                                                                         | Phase 3                           | Best for                                                                              |
+| ------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | --------------------------------- | ------------------------------------------------------------------------------------- |
+| Direct [tracker SDK](/docs/sources/index.md) calls                                                      | Define Snowplow [tracking plans](/docs/fundamentals/tracking-plans/index.md) | Add Snowplow tracking calls; implement Snowplow data models                                     |                                   | Teams with tracking implementation engineer resources; greenfield validation projects |
+| [Snowplow GTM templates](/docs/sources/google-tag-manager/index.md)                                     | Define Snowplow [tracking plans](/docs/fundamentals/tracking-plans/index.md) | Configure Snowplow tags to receive data layer events; implement Snowplow data models            | Implement Snowplow tracking calls | Validation of Snowplow data quality for analytics or marketing teams                  |
+| [GTM Server-side](/docs/destinations/forwarding-events/google-tag-manager-server-side/index.md) tagging | Define Snowplow [tracking plans](/docs/fundamentals/tracking-plans/index.md) | Use GTM Server-side to forward your existing events to Snowplow; implement Snowplow data models | Implement Snowplow tracking calls | Validation of Snowplow data quality for teams already using GTM Server-side           |
 
 Using Snowplow's GTM templates or tags is a temporary solution to help you migrate.
 
@@ -166,17 +165,17 @@ For data layer implementations, pay special attention to:
 * How GTM triggers determine when events are sent
 * Any custom JavaScript variables that process data layer data
 
-You'll need to translate your GA4 event configuration into Snowplow [data products](/docs/fundamentals/data-products/index.md). Some things to consider:
+You'll need to translate your GA4 event configuration into Snowplow [tracking plans](/docs/fundamentals/tracking-plans/index.md). Some things to consider:
 * Which platforms will you be tracking on? Different Snowplow tracker SDKs include different built-in event types. The [web](/docs/sources/web-trackers/index.md) and [native mobile](/docs/sources/mobile-trackers/index.md) trackers are the most fully featured.
 * Which GA4 events can be migrated to built-in Snowplow events, and which should be custom [self-describing events](/docs/fundamentals/events/index.md#self-describing-events)?
 * Are there sets of event parameters used in multiple places that could be defined as [entities](/docs/fundamentals/entities/index.md) instead?
 * What's the best combination of event properties and entities to capture the same data as GA4?
 * If you're using GTM, will you go straight to implementing direct tracker SDK calls, or use Snowplow's GTM templates or GTM Server-side tagging to maintain the data layer pattern initially?
 
-The goal is to create a set of JSON data structures for all your events and entities, organized into data products and [event specifications](/docs/data-product-studio/event-specifications/index.md). The best way to import your new data product tracking plans into Snowplow is to use the [Snowplow CLI](/docs/data-product-studio/snowplow-cli/index.md).
+The goal is to create a set of JSON data structures for all your events and entities, organized into tracking plans and [event specifications](/docs/event-studio/event-specifications/index.md). The best way to import your new tracking plans into Snowplow is to use the [Snowplow CLI](/docs/event-studio/snowplow-cli/index.md).
 
 :::info Snowplow CLI MCP server
-The Snowplow CLI includes an [MCP server](/docs/data-product-studio/mcp-server/index.md) to help you translate your GA4 event configuration into Snowplow data products.
+The Snowplow CLI includes an [MCP server](/docs/event-studio/snowplow-cli/index.md#mcp-server) to help you translate your GA4 event configuration into Snowplow tracking plans.
 :::
 
 In this phase, you'll also need to decide what to do with historical data. There are two main choices:
@@ -192,7 +191,7 @@ This phase involves three main tasks:
 
 Follow the [Snowplow CDI getting started instructions](/docs/get-started/private-managed-cloud/index.md) to set up your Snowplow infrastructure.
 
-If you haven't done this yet, use the [Snowplow CLI](/docs/data-product-studio/snowplow-cli/index.md) to import your new data products plan into Snowplow. You can also inspect and edit data products using the Snowplow Console. They'll be available to the Snowplow pipeline for data validation on publishing.
+If you haven't done this yet, use the [Snowplow CLI](/docs/event-studio/snowplow-cli/index.md) to import your new tracking plans into Snowplow. You can also inspect and edit tracking plans using the Snowplow Console. They'll be available to the Snowplow pipeline for data validation on publishing.
 Use the Snowplow CLI or Console to publish.
 
 :::info Snowplow Micro
@@ -216,7 +215,7 @@ Your GA4 implementation will stay live until the final migration phase. By the e
 For the most straightforward migration, add Snowplow tracking in parallel with your existing GA4 tracking:
 * Implement a tracker SDK, and track a small number of built-in events, such as [page views](/docs/sources/web-trackers/quick-start-guide/index.md)
 * Use the [Snowplow Inspector browser extension](/docs/testing/snowplow-inspector/index.md) to confirm that the tracker is generating the expected events
-* Use [Snowtype](/docs/data-product-studio/snowtype/index.md) to generate custom tracking code for your data products
+* Use [Snowtype](/docs/event-studio/snowtype/index.md) to generate custom tracking code for your tracking plans
 
 #### Snowplow GTM templates
 

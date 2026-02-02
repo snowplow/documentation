@@ -59,7 +59,7 @@ Snowplow provides a large number of self-describing events out-of-the-box, for e
 
 Check out the full range of included events [here](/docs/events/ootb-data/index.md).
 
-You can also create [custom self-describing events](/docs/events/custom-events/index.md) to match your business requirements. Snowplow provides [tooling](/docs/data-product-studio/index.md) to help you define and track custom events.
+You can also create [custom self-describing events](/docs/events/custom-events/index.md) to match your business requirements. Snowplow provides [tooling](/docs/event-studio/index.md) to help you define and track custom events.
 
 Find out in the [warehouse tables fundamentals](/docs/fundamentals/warehouse-tables/index.md) page about how self-describing events are structured in the data warehouse.
 

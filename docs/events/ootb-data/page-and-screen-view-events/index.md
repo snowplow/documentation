@@ -46,7 +46,7 @@ This table shows the support for page view tracking across the main [Snowplow tr
 | Lua                                                                                                   | ❌         |               |               |                                                         |
 | [Google Tag Manager](/docs/sources/google-tag-manager/snowplow-template/index.md)                     | ✅         | v3            | ❌             |                                                         |
 
-We recommend using the [Base web data product template](/docs/data-product-studio/data-products/data-product-templates/index.md#base-web) for web tracking. It includes page views.
+We recommend using the [Base web tracking plan template](/docs/event-studio/tracking-plans/tracking-plan-templates/index.md#base-web) for web tracking. It includes page views.
 
 ### Web page entity
 
@@ -90,7 +90,7 @@ This table shows the support for screen view tracking across the main [Snowplow 
 | [Lua](/docs/sources/lua-tracker/tracking-specific-events/index.md)                | ✅         | 0.1.0         | ❌             | No screen entity                                                                              |
 | Google Tag Manager                                                                | ❌         |               |               |                                                                                               |
 
-We recommend using the [Base mobile data product template](/docs/data-product-studio/data-products/data-product-templates/index.md#base-mobile) for mobile tracking. It includes screen views.
+We recommend using the [Base mobile tracking plan template](/docs/event-studio/tracking-plans/tracking-plan-templates/index.md#base-mobile) for mobile tracking. It includes screen views.
 
 Screen view events record the name and identifier of the current screen, as well as some optional properties such as the ID of the previous screen. Information about the previous screen can be useful for understanding user navigation within your application.
 

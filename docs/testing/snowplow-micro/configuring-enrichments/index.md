@@ -38,9 +38,7 @@ Some enrichments require data files (e.g. a database of IPs).
 
 The Enrich application in a full Snowplow pipeline will automatically download and periodically update these files. However, Micro will only download them once. You can always restart Micro to get a fresher copy of the files.
 
-Also, the Enrich application supports files located in S3 and GCS with the `s3://` and `gs://` schemes respectively. Micro currently only supports `http://` and `https://`. You can often rewrite the URL to make it work:
-* `s3://my-bucket/x/y` → `https://my-bucket.s3.amazonaws.com/x/y`
-* `gs://my-bucket/x/y` → `https://storage.googleapis.com/my-bucket/x/y`
+You might also face access limitations where the database files are hosted on S3, GCS, or ADLS and are authenticated via the cloud environment roles and permissions.
 
 </details>
 

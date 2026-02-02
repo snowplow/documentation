@@ -91,7 +91,7 @@ If you are a Snowplow CDI customer, rather than self-hosted, you don't need to i
 
 :::info Snowplow CDI
 
-If you are a Snowplow CDI customer, rather than self-hosted, you don't need to install Iglu Server yourself. It's also unlikely that you need to use any of the other components in this section. You can manage your data structures [in the UI or via the API](/docs/data-product-studio/data-structures/manage/index.md).
+If you are a Snowplow CDI customer, rather than self-hosted, you don't need to install Iglu Server yourself. It's also unlikely that you need to use any of the other components in this section. You can manage your data structures [in the UI or via the API](/docs/event-studio/data-structures/manage/index.md).
 
 :::
 
@@ -100,7 +100,6 @@ If you are a Snowplow CDI customer, rather than self-hosted, you don't need to i
 | [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md)         |   {versions.igluServer}    |
 | [`igluctl` utility](/docs/api-reference/iglu/igluctl-2/index.md)                       |     {versions.igluctl}     |
 | [Iglu Scala client](/docs/api-reference/iglu/iglu-clients/scala-client-setup/index.md) | {versions.igluScalaClient} |
-| [Iglu Ruby client](/docs/api-reference/iglu/iglu-clients/ruby-client/index.md)         | {versions.igluRubyClient}  |
 | [Iglu Objective-C client](/docs/api-reference/iglu/iglu-clients/objc-client/index.md)  | {versions.igluObjCClient}  |
 
 ### Trackers

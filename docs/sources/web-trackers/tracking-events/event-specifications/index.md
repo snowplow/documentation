@@ -1,9 +1,7 @@
 ---
-title: "Integrate with your event specifications on web"
+title: "Integrating with your event specifications on web"
 sidebar_label: "Event specifications"
 sidebar_position: 115
-description: "Integrate with Event Specifications from Data Products to automatically add event specification context to matching events."
-keywords: ["event specifications", "data products"]
 ---
 
 ```mdx-code-block
@@ -11,12 +9,12 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-The plugin allows you to integrate with Event Specifications for a selected set of plugins. The configuration for the plugin should be retrieved directly from your [Data Product](/docs/fundamentals/data-products/index.md) in [Snowplow Console](https://console.snowplowanalytics.com).
+The plugin allows you to integrate with Event Specifications for a selected set of plugins. The configuration for the plugin should be retrieved directly from your [Tracking Plan](https://docs.snowplow.io/docs/fundamentals/tracking-plans/) in [Snowplow Console](https://console.snowplowanalytics.com).
 
 The plugin will automatically add an Event Specification context to the events matching the configuration added.
 
 :::note
-The plugin is available since version 3.23 of the tracker and is currently only available for Data Products created using the [Media Web template](/docs/data-product-studio/data-products/data-product-templates/#media-web).
+The plugin is available since version 3.23 of the tracker and is currently only available for Tracking Plans created using the [Media Web template](/docs/event-studio/tracking-plans/tracking-plan-templates/#media-web).
 :::
 
 ## Install plugin
@@ -100,6 +98,6 @@ EventSpecificationsPlugin({
  </TabItem>
 </Tabs>
 
-You can retrieve the configuration for your Event Specifications directly from your Data Product after clicking on the `Implement tracking` button.
+You can retrieve the configuration for your Event Specifications directly from your Tracking Plan after clicking on the `Implement tracking` button.
 
 ![implement tracking button](./images/implement_tracking.png)

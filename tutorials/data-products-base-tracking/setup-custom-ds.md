@@ -6,7 +6,7 @@ description: "Define custom data structures for event and entity schemas specifi
 keywords: ["custom data structures", "json schema event tracking", "entity data structures", "event specification schemas"]
 ---
 
-Before you create the custom Data Product for these interactions, you need to create a couple of Data Structures, `todo` and `todo_action`, fitting the use case of the Todo web application.
+Before you create the custom tracking plan for these interactions, you need to create a couple of Data Structures, `todo` and `todo_action`, fitting the use case of the Todo web application.
 
 #### Todo action Data Structure
 ```json

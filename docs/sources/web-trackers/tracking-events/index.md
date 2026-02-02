@@ -14,13 +14,12 @@ import TabItem from '@theme/TabItem';
 
 To track an event, the API is slightly different depending if you're using the JavaScript or Browser version of our web tracker.
 
-For example, instrumenting a tracker and manually tracking a [page view](/docs/sources/web-trackers/tracking-events/page-views/index.md). Note that [activity tracking](/docs/sources/web-trackers/tracking-events/activity-page-pings/index.md) (page pings) is also configured here.
+The main built-in events are [page views](/docs/sources/web-trackers/tracking-events/page-views/index.md) and [page pings](/docs/sources/web-trackers/tracking-events/activity-page-pings/index.md). Here's how to track them:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)">
 
   ```javascript
-  <!-- Snowplow starts plowing -->
   <script type="text/javascript">
   ;(function(p,l,o,w,i,n,g){if(!p[i]){p.GlobalSnowplowNamespace=p.GlobalSnowplowNamespace||[];
   p.GlobalSnowplowNamespace.push(i);p[i]=function(){(p[i].q=p[i].q||[]).push(arguments)
@@ -37,9 +36,7 @@ For example, instrumenting a tracker and manually tracking a [page view](/docs/s
   });
 
   snowplow('trackPageView');
-
   </script>
-  <!-- Snowplow stops plowing -->
   ```
   </TabItem>
   <TabItem value="browser" label="Browser (npm)" default>
@@ -66,17 +63,28 @@ trackPageView();
 
 </Tabs>
 
-The tracker makes it easy to track different kinds of data. We provide three kinds of base events - PageViews, Structured, and fully custom (Self-Describing) - that can be manually tracked. On top of this, we also provide a range of [plugins](/docs/sources/web-trackers/plugins/index.md) for automatic and manual tracking of different events and entities.
+As well as page views and activity tracking, you can track [custom events](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md), or use [plugins](/docs/sources/web-trackers/plugins/index.md) to track a wide range of other events and entities.
 
-Each event has an associated context, which is composed of entities. The tracker attaches entities to the events based on the tracker configuration and active plugins. You can also attach your own [custom entities](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md) to all `trackX` method calls.
+## Add contextual data with entities
 
-:::note
+The tracker can be set up to automatically add [entities](/docs/fundamentals/entities/index.md) to every event sent.
 
-Tracker methods available through plugins do not necessarily support adding custom entities. For those please refer to the corresponding plugin documentation for details.
+Most entity autotracking is specifically configured using plugins, which are imported, enabled, and configured individually. However, you can configure some entities directly when instrumenting the tracker, using the [configuration object](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md).
 
-:::
+| Entity                                                                                                          | Usage                            | Added by default | JavaScript (tag) tracker | Browser (npm) tracker |
+| --------------------------------------------------------------------------------------------------------------- | -------------------------------- | ---------------- | ------------------------ | --------------------- |
+| [`webPage`](/docs/sources/web-trackers/tracking-events/page-views/index.md#webpage-page-view-id-context-entity) | UUID for the page view           | ✅                | `contexts` config        | `contexts` config     |
+| [`session`](/docs/sources/web-trackers/tracking-events/session/index.md)                                        | Data about the current session   | ❌                | `contexts` config        | `contexts` config     |
+| [`browser`](/docs/sources/web-trackers/browsers/index.md)                                                       | Properties of the user's browser | ❌                | `contexts` config        | `contexts` config     |
+| [`performanceTiming`](/docs/sources/web-trackers/tracking-events/timings/index.md)                              | Performance timing metrics       | ❌                | `contexts` config        | Plugin                |
+| [`gaCookies`](/docs/sources/web-trackers/tracking-events/ga-cookies/index.md)                                   | Extract GA cookie values         | ❌                | `contexts` config        | Plugin                |
+| [`geolocation`](/docs/sources/web-trackers/tracking-events/timezone-geolocation/index.md)                       | User's geolocation               | ❌                | `contexts` config        | Plugin                |
 
-For example, here is a page view with an additional custom context entity.
+If you're using the `sp.lite.js` JavaScript tracker distribution, only the `webPage`, `session`, and `browser` entities are available out of the box, as the others require plugins that aren't included in that distribution.
+
+You can also attach your own [custom entities](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md) to events.
+
+For example, here is a page view with an additional custom entity:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -109,100 +117,21 @@ trackPageView({
   </TabItem>
 </Tabs>
 
-Every tracked event payload has a unique `event_id` UUID string set by the tracker, a set of timestamps, and other ubiquitous properties such as the `namespace`. You can find out more about how events and entities are structured [here](/docs/events/index.md).
+:::note
 
-## Auto-tracked entities
+Tracker methods available through plugins do not necessarily support adding custom entities. For those please refer to the corresponding plugin documentation for details.
 
-The tracker can be set up to automatically add entities to every event sent.
+:::
 
-Most autotracking is specifically configured using plugins, which are imported, enabled, and configured individually. However, you can configure some entities directly when instrumenting the tracker, using the [configuration object](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md).
+## Set event properties
 
-| Entity                                                                                                          | Usage                            | Added by default | JavaScript (tag) tracker | Browser (npm) tracker |
-| --------------------------------------------------------------------------------------------------------------- | -------------------------------- | ---------------- | ------------------------ | --------------------- |
-| [`webPage`](/docs/sources/web-trackers/tracking-events/page-views/index.md#webpage-page-view-id-context-entity) | UUID for the page view           | ✅                | `contexts` config        | `contexts` config     |
-| [`session`](/docs/sources/web-trackers/tracking-events/session/index.md)                                        | Data about the current session   | ❌                | `contexts` config        | `contexts` config     |
-| [`browser`](/docs/sources/web-trackers/browsers/index.md)                                                       | Properties of the user's browser | ❌                | `contexts` config        | `contexts` config     |
-| [`performanceTiming`](/docs/sources/web-trackers/tracking-events/timings/index.md)                              | Performance timing metrics       | ❌                | `contexts` config        | Plugin                |
-| [`gaCookies`](/docs/sources/web-trackers/tracking-events/ga-cookies/index.md)                                   | Extract GA cookie values         | ❌                | `contexts` config        | Plugin                |
-| [`geolocation`](/docs/sources/web-trackers/tracking-events/timezone-geolocation/index.md)                       | User's geolocation               | ❌                | `contexts` config        | Plugin                |
+Certain event properties, including `domain_userid` or `application_id`, can be set as [atomic properties](/docs/fundamentals/canonical-event/index.md) in the raw event.
 
-If you're using the `sp.lite.js` JavaScript tracker distribution, only the `webPage`, `session`, and `browser` entities are available by default.
-
-## Manually tracked events
-
-The tracker provides methods for tracking different types of events.
-The events are divided into two groups: canonical events and self-describing events. Canonical event properties have their own column in the data warehouse, while self-describing custom events are based on JSON schema.
-
-### Page view
-
-Read about page view tracking [here](/docs/sources/web-trackers/tracking-events/page-views/index.md).
-
-### Custom (self-describing)
-
-Our philosophy in creating Snowplow is that users should capture important user interactions and design suitable data structures for this data capture. You can read more about that philosophy [here](/docs/data-product-studio/index.md).
-
-Read about how to track custom events [here](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md).
-
-### Structured
-
-There may be user interactions where custom self-describing events are too complex or unwarranted. They are candidates to track using `trackStructEvent`.
-
-There are five parameters that can be associated with each structured event. Only the first two are required:
-
-| Name       | Required? | Description                                                                                                                                                      | Type    |
-| ---------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `Category` | Yes       | The name you supply for the group of objects you want to track e.g. 'media', 'ecomm'.                                                                            | String  |
-| `Action`   | Yes       | Defines the type of user interaction for the web object e.g. 'play-video', add-to-basket'.                                                                       | String  |
-| `Label`    | No        | Identifies the specific object being actioned e.g. ID of the video being played, or the SKU or the product added to basket.                                      | String? |
-| `Property` | No        | Describing the object or the action performed on it. This might be the quantity of an item added to basket.                                                      | String? |
-| `Value`    | No        | Quantify or further describe the user action. This might be the price of an item added to basket, or the starting time of the video where play was just pressed. | Float?  |
-
-An example of tracking a user listening to a music mix:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
-snowplow('trackStructEvent', {
-  category: 'Mixes',
-  action: 'Play',
-  label: 'MrC/fabric-0503-mix',
-  property: '',
-  value: 0.0
-});
-```
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-```javascript
-import { trackStructEvent } from '@snowplow/browser-tracker';
-
-trackStructEvent({
-  category: 'Mixes',
-  action: 'Play',
-  label: 'MrC/fabric-0503-mix',
-  value: 0.0
-});
-```
-
-  </TabItem>
-</Tabs>
-
-## Tracking data that is not event-type specific
-
-Some data, such as that relating to the user whose activity is being tracked, is relevant across all event types. The tracker provides two mechanisms for tracking this kind of data.
-
-Certain properties, including `domain_userid` or `application_id`, can be set as "atomic" properties in the raw event. These properties have their own column in the data warehouse.
-
-A more general and powerful method is to attach self-describing JSON "context entities" to your events - the same JSON schemas as used for self-describing events. This means that any data that can be described by a JSON schema can be added to any or all of your events. Read more [here](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md).
-
-All events also provide the option for setting a custom timestamp, called `trueTimestamp`. See below for details.
-
-### Setting application ID
+### Application ID
 
 Set the application ID using the `appId` field of the [tracker configuration object](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md). This will be attached to every event the tracker fires. You can set different application IDs on different parts of your site. You can then distinguish events that occur on different applications by grouping results based on `application_id`.
 
-### Setting application version
+### Application version
 
 :::info
 The option to track the application version was introduced in version 4.1 of the JavaScript tracker.
@@ -212,11 +141,11 @@ Set the application ID using the `appVersion` field of the [tracker configurat
 
 The version of can be a semver-like structure (e.g 1.1.0) or a Git commit SHA hash.
 
-### Setting application platform
+### Application platform
 
 Set the application platform using the `platform` field of the [tracker configuration object](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md). This will be attached to every event the tracker fires. Its default value is “web”. For a list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/fundamentals/canonical-event/index.md#application-fields).
 
-### Setting the user ID
+### Business user ID
 
 The JavaScript Tracker automatically sets a `domain_userid` based on a first party cookie. Read more about cookies [here](/docs/sources/web-trackers/cookies-and-local-storage/index.md).
 
@@ -315,54 +244,7 @@ setUserIdFromCookie('cookieid');
   </TabItem>
 </Tabs>
 
-### Getting user ID once set
-
-It's possible to retrieve certain properties for use in your code, including the user ID, [page view ID](/docs/sources/web-trackers/tracking-events/page-views/index.md#get-page-view-id), and [cookie values](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/index.md#retrieving-cookie-properties-from-the-tracker), using a tracker callback. This is an advanced usage of the tracker.
-
-```mdx-code-block
-import RetrieveValuesJs from "@site/docs/reusable/javascript-tracker-retrieve-values/_javascript.md"
-import RetrieveValuesBrowser from "@site/docs/reusable/javascript-tracker-retrieve-values/_browser.md"
-```
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-<RetrieveValuesJs />
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-<RetrieveValuesBrowser />
-
-  </TabItem>
-</Tabs>
-
-The `getUserId` method returns the user ID which you configured using `setUserId()`:
-
-<Tabs groupId="platform" queryString>
-  <TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
-// Access the tracker instance inside a callback
-snowplow(function () {
- var sp = this.sp;
- var userId = sp.getUserId();
- console.log(userId);
-})
-```
-
-  </TabItem>
-  <TabItem value="browser" label="Browser (npm)">
-
-```javascript
-const userId = sp.getUserId();
-console.log(userId);
-```
-
-  </TabItem>
-</Tabs>
-
-### Setting a custom page URL and referrer URL
+### Custom page URL and referrer URL
 
 The Snowplow JavaScript Tracker automatically tracks the page URL and referrer URL on any event tracked. However, in certain situations, you may want to override the one or both of these URLs with a custom value. For example, this might be desirable if your CMS spits out particularly ugly URLs that are hard to unpick at analysis time.
 
@@ -428,24 +310,17 @@ setReferrerUrl(document.referrer);
 </Tabs>
 :::
 
-### Adding custom timestamps to events
+### Custom timestamps
 
-Snowplow events have several timestamps. The raw event payload always contains a `deviceCreatedTimestamp` (`dtm`) and a `deviceSentTimestamp` (`stm`). Other timestamps are added as the event moves through the pipeline.
+Snowplow events have several [timestamps](/docs/events/timestamps/index.md).
 
 Every `trackX...()` method in the tracker allows for a custom timestamp, called `trueTimestamp` to be set.
 
-As standard, every event tracked by the Javascript tracker will be recorded with two timestamps:
-
-1. A `device_created_tstamp` - set when the event occurred
-2. A `device_sent_tstamp` - set when the event was sent by the tracker to the collector
-
-These are combined downstream in the Snowplow pipeline (with the `collector_tstamp`) to calculate the `derived_tstamp`, which is our best estimate of when the event actually occurred.
-
-In certain circumstances you might want to set the timestamp yourself e.g. if the JS tracker is being used to process historical event data, rather than tracking the events live. In this case you can set the `true_timestamp` for the event. When set, this will be used as the value in the `derived_tstamp` rather than a combination of the `device_created_tstamp`, `device_sent_tstamp` and `collector_tstamp`.
+In certain circumstances you might want to set the timestamp yourself e.g. if the JS tracker is being used to process historical event data, rather than tracking the events live. In this case you can set the `true_timestamp` for the event.
 
 To set the true timestamp add an extra argument to your track method: `{type: 'ttm', value: unixTimestampInMs}`.
 
-E.g. to set a true timestamp with a page view event:
+This example shows how to set a true timestamp for a page view event:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -510,5 +385,53 @@ trackSelfDescribingEvent({
   timestamp: { type: 'ttm', value: 1361553733371 }
 });
 ```
+  </TabItem>
+</Tabs>
+
+
+## Get event properties
+
+It's possible to retrieve certain properties for use in your code, including the user ID, [page view ID](/docs/sources/web-trackers/tracking-events/page-views/index.md#get-page-view-id), and [cookie values](/docs/sources/web-trackers/cookies-and-local-storage/getting-cookie-values/index.md#retrieving-cookie-properties-from-the-tracker), using a tracker callback.
+
+```mdx-code-block
+import RetrieveValuesJs from "@site/docs/reusable/javascript-tracker-retrieve-values/_javascript.md"
+import RetrieveValuesBrowser from "@site/docs/reusable/javascript-tracker-retrieve-values/_browser.md"
+```
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+<RetrieveValuesJs />
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+<RetrieveValuesBrowser />
+
+  </TabItem>
+</Tabs>
+
+The `getUserId` method returns the user ID which you configured using `setUserId()`:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+// Access the tracker instance inside a callback
+snowplow(function () {
+ var sp = this.sp;
+ var userId = sp.getUserId();
+ console.log(userId);
+})
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+const userId = sp.getUserId();
+console.log(userId);
+```
+
   </TabItem>
 </Tabs>

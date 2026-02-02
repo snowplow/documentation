@@ -114,6 +114,8 @@ Here is a longer code example in which every tracker configuration parameter is 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
 
+If you're using the minimal `sp.lite.js` distribution, setting the `performanceNavigationTiming`, `gaCookies`, or `webVitals` `context` options won't do anything as those plugins aren't available.
+
 ```javascript
 snowplow('newTracker', 'sp', '{{collector_url_here}}', {
   appId: 'my-app-id',

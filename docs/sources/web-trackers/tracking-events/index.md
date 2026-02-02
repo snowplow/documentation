@@ -126,7 +126,7 @@ Most autotracking is specifically configured using plugins, which are imported, 
 | [`gaCookies`](/docs/sources/web-trackers/tracking-events/ga-cookies/index.md)                                   | Extract GA cookie values         | ❌                | `contexts` config        | Plugin                |
 | [`geolocation`](/docs/sources/web-trackers/tracking-events/timezone-geolocation/index.md)                       | User's geolocation               | ❌                | `contexts` config        | Plugin                |
 
-If you're using the `sp.lite.js` JavaScript tracker distribution, the configuration is the same as for the Browser tracker.
+If you're using the `sp.lite.js` JavaScript tracker distribution, only the `webPage`, `session`, and `browser` entities are available by default.
 
 ## Manually tracked events
 

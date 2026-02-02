@@ -172,6 +172,8 @@ snowplow('newTracker', 'sp', '{{collector_url_here}}', {
 });
 ```
 
+The `contexts` block also accepts `clientHints` and `geolocation` keys. The [client hints](/docs/sources/web-trackers/tracking-events/client-hints/index.md) and [geolocation](/docs/sources/web-trackers/tracking-events/timezone-geolocation/index.md) plugins used to be included in `sp.js`, but were removed in version 4. Setting these configuration options won't do anything in version 4+ unless you've also installed the plugins separately.
+
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
 

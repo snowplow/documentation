@@ -15,15 +15,13 @@ A modal will appear on the page, giving you the possibility to quickly create a 
 
 ![Create tracking plan modal](images/create-tracking-plan-modal.png)
 
-After selecting "Create from scratch" a form will appear on the page. Enter your tracking plan information and click "Create and continue" to navigate to the event specification page.
+After selecting "Create new" a form will appear on the page. Enter your tracking plan information and click "Create and continue" to navigate to the event specification page.
 
 :::note
-_The name of your tracking plan must be unique to ensure proper identification and avoid conflicts._
+The name of your tracking plan must be unique to ensure proper identification and avoid conflicts.
 :::
 
-![Event specifications](images/event-specifications.png)
-
-This page allows you to create multiple event specifications. You can click on any row to enter the details on this screen, or you can complete the information later.
+The next page allows you to create multiple event specifications. You can click on any row to enter the details on this screen, or you can complete the information later.
 
 When clicking on an event specification row, a page will allow you to enter additional information into separate modals:
 
@@ -41,23 +39,15 @@ In the image below, you can see an example of a tracking plan. It not only provi
 - **Subscribe**; receive notifications of any changes in the tracking plan
 - **Implement tracking**; automatically generate the code for your tracking plan to be included in your application (to learn more visit [Code Generation - automatically generate code for Snowplow tracking SDKs](/docs/event-studio/snowtype/index.md))
 
-*Notes: sharing and subscribing is only available for users registered in Snowplow Console.*
+:::note
+Sharing and subscribing is only available for users registered in Snowplow Console.
+:::
 
 ![Tracking plan overview](images/tracking-plan-overview.png)
 
 ![Event specification details](images/event-specification-details.png)
 
-If you need to edit a tracking plan at any time, simply select it from the tracking plans listing accessible from the main menu.
-
-## Updating existing Tracking Plans for Source Applications
-
-Tracking Plans created prior to the release of [Source Applications](/docs/event-studio/source-applications/index.md) in September 2024 will need to be updated to assign Source Applications in which the events will be tracked on. The selected Source Applications will add the relevant application IDs to each of the event specifications in the tracking plan.
-
-![Updating existing Tracking Plans](images/edit-existing-tracking-plan.png)
-
-Event specifications which contain previously added application IDs will need to be updated to use the identifiers inherited from the Source Applications selected at Tracking Plan level. This process can be done manually but you can reach out to our Support team to help you with that by either logging a request through Snowplow [Console](https://console.snowplowanalytics.com/) or by directly emailing [support@snowplow.io](mailto:support@snowplow.io).
-
-![Updating existing Event Specifications](images/edit-existing-event-specification.png)
+If you need to edit a tracking plan at any time, select it from the tracking plans listing accessible from the main menu.
 
 ## Upgrading Event Specification Instructions
 
@@ -75,7 +65,7 @@ When a new version of a Data Structure becomes available, the system will indica
 
 ![Upgrade Event Specification warning](images/upgrade-event-specification-warning.png)
 
-Clicking the button navigates to a new page, informing the user of the new version they are upgrading to, along with a **'View Changes'**.
+Clicking the button navigates to a new page, informing the user of the new version they are upgrading to, along with a **'View Changes'** button.
 
 ![Upgrade Event Specification page](images/upgrade-event-specification-page.png)
 
@@ -97,7 +87,7 @@ At the bottom, a button will allow users to confirm the upgrade. One of two thin
 If the new version of the Data Structure introduces incompatibilities with the existing Event Specification instructions, the system will flag the conflicting properties.
 
 - The UI will prompt the user to resolve these conflicts before the Event Specification can be upgraded.
-- The conflict resolution UI provides options to the user tp modify or delete each instruction depending on the type of incompatibility:
+- The conflict resolution UI provides options to the user to modify or delete each instruction depending on the type of incompatibility:
   - **Remove conflicting instructions**: If a specific property is no longer present in the new Data Structure.
   - **Modify conflicting instructions**: If a property in the new Data Structure has been changed in an incompatible way (e.g., type change, added/removed enum values, added pattern, etc.).
 

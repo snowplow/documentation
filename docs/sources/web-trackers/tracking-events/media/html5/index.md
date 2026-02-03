@@ -14,7 +14,7 @@ import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md";
 
 This plugin enables the automatic tracking of HTML5 media elements (`<video>` and `<audio>`) on a webpage.
 
-It uses the [Snowplow Media Plugin](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md) under the hood.
+It uses the [Snowplow Media plugin](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md) under the hood.
 
 HTML5 media events and entities are **automatically tracked** once configured.
 
@@ -184,7 +184,7 @@ startHtml5MediaTracking({
 
 | Parameter                                       | Type                                                                                                                         | Description                                                                                    | Default / Required            |
 | ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ----------------------------- |
-| `id`                                            | `string`                                                                                                                     | A unique session ID for each media element, used to identify and end tracking.                 | Required                      |
+| `id`                                            | `string`                                                                                                                     | A unique session UUID for each media element, used to identify and end tracking.               | Required                      |
 | `video`                                         | `string` or `HTMLMediaElement`                                                                                               | The ID of the media element (as a string) or the media element itself.                         | Required                      |
 | `label`                                         | `string`                                                                                                                     | A human-readable label for the media element.                                                  | `undefined`                   |
 | `captureEvents`                                 | `HTML5MediaEventTypes`                                                                                                       | A list of media events to track.                                                               | All events tracked by default |
@@ -313,7 +313,7 @@ startHtml5MediaTracking({
 
 ## Additional entities
 
-Event and entity schemas are [the same as](/docs/events/ootb-data/media-events/index.md) for the [Snowplow Media Plugin](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md).
+Event and entity schemas are [the same as](/docs/events/ootb-data/media-events/index.md) for the [Snowplow Media plugin](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md).
 
 Along with the standard Snowplow media entities, the HTML5 media plugin also tracks two HTML5 media-specific entities, `media_element` and `video_element`.
 

@@ -11,7 +11,9 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-This plugin enables the automatic tracking of a Vimeo video, utilizing the [Snowplow Media Plugin](/docs/sources/web-trackers/tracking-events/media/index.md).
+This plugin enables the automatic tracking of a Vimeo video.
+
+It uses the [Snowplow Media plugin](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md) under the hood.
 
 :::info Example app
 To illustrate the tracked [events](/docs/fundamentals/events/index.md) and [entities](/docs/fundamentals/entities/index.md), you can visit [an example app](https://snowplow-industry-solutions.github.io/snowplow-javascript-tracker-examples/media) that showcases the tracked media events and entities live as you watch a video.

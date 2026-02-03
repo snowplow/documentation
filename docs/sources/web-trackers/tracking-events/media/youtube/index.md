@@ -239,7 +239,7 @@ You can also use a pre-made event group names in `captureEvents`:
 | Name            | Events                                                                                                                                               |
 | --------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `DefaultEvents` | `['ready', 'play', 'pause', 'ping', 'end', 'seek_start', 'seek_end', 'volume_change', 'percent_progress', 'playback_rate_change', 'quality_change']` |
-| `AllEvents`     | Every supported event listed in [Capturable Events](#capturable-events)                                                                              |
+| `AllEvents`     | Every supported event in the Events table                                                                                                            |
 
 It's possible to extend an event group with any event in the Events table above. This could be useful if you want, for example, all the events contained in the `DefaultEvents` group, along with the `error` event. This is expressed in the following way:
 

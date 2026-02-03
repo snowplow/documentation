@@ -123,7 +123,7 @@ startHtml5MediaTracking({
 
 ## Start tracking
 
-Start tracking HTML5 media by calling the `startHtml5MediaTracking` function with a configuration object:
+Start tracking HTML5 media by calling the `startHtml5MediaTracking` function with a configuration object. You must provide a unique `id` for the media session, along with the `video` ID.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -263,22 +263,22 @@ endHtml5MediaTracking(sessionId)
 
 The HTML5 media plugin can track the following events:
 
-| Event Type                 | Event String                | Description                                                                                   |
-| -------------------------- | --------------------------- | --------------------------------------------------------------------------------------------- |
-| **Ready**                  | `ready`                     | Fired when media tracking is successfully attached to the player and ready to track events.   |
-| **Play**                   | `play`                      | Fired when the player transitions from a paused state to playing.                             |
-| **Pause**                  | `pause`                     | Fired when the user pauses the playback.                                                      |
-| **End**                    | `end`                       | Fired when playback stops because the media has reached its end or no more data is available. |
-| **SeekEnd**                | `seek_end`                  | Fired when a seek operation is completed.                                                     |
-| **PlaybackRateChange**     | `playback_rate_change`      | Fired when the playback rate (speed) of the media changes.                                    |
-| **VolumeChange**           | `volume_change`             | Fired when the volume level of the media changes.                                             |
-| **FullscreenChange**       | `fullscreen_change`         | Fired when the browser enters or exits full-screen mode.                                      |
-| **PictureInPictureChange** | `picture_in_picture_change` | Fired when the browser enters or exits picture-in-picture mode.                               |
-| **BufferStart**            | `buffer_start`              | Fired when the media player starts buffering (loading content to play).                       |
-| **BufferEnd**              | `buffer_end`                | Fired when buffering ends, and playback resumes.                                              |
-| **Error**                  | `error`                     | Fired when an error occurs during the loading or playback of the media.                       |
-| **Ping**                   | `ping`                      | Fired periodically during media playback, regardless of other events.                         |
-| **PercentProgress**        | `percent_progress`          | Fired when a specific percentage of the media content has been played (as set by boundaries). |
+| Event Type             | Event String                | Description                                                                                   |
+| ---------------------- | --------------------------- | --------------------------------------------------------------------------------------------- |
+| Ready                  | `ready`                     | Fired when media tracking is successfully attached to the player and ready to track events.   |
+| Play                   | `play`                      | Fired when the player transitions from a paused state to playing.                             |
+| Pause                  | `pause`                     | Fired when the user pauses the playback.                                                      |
+| End                    | `end`                       | Fired when playback stops because the media has reached its end or no more data is available. |
+| SeekEnd                | `seek_end`                  | Fired when a seek operation is completed.                                                     |
+| PlaybackRateChange     | `playback_rate_change`      | Fired when the playback rate (speed) of the media changes.                                    |
+| VolumeChange           | `volume_change`             | Fired when the volume level of the media changes.                                             |
+| FullscreenChange       | `fullscreen_change`         | Fired when the browser enters or exits full-screen mode.                                      |
+| PictureInPictureChange | `picture_in_picture_change` | Fired when the browser enters or exits picture-in-picture mode.                               |
+| BufferStart            | `buffer_start`              | Fired when the media player starts buffering (loading content to play).                       |
+| BufferEnd              | `buffer_end`                | Fired when buffering ends, and playback resumes.                                              |
+| Error                  | `error`                     | Fired when an error occurs during the loading or playback of the media.                       |
+| Ping                   | `ping`                      | Fired periodically during media playback, regardless of other events.                         |
+| PercentProgress        | `percent_progress`          | Fired when a specific percentage of the media content has been played (as set by boundaries). |
 
 It's possible to only track a subset of these events by passing an array of event types to the `captureEvents` option:
 
@@ -313,7 +313,7 @@ startHtml5MediaTracking({
 
 ## Additional entities
 
-Event and entity schemas are [the same as](/docs/events/ootb-data/media-events/index.md) for the [Snowplow Media plugin](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md).
+The event and entity schemas are [the same as](/docs/events/ootb-data/media-events/index.md) for the [Snowplow Media plugin](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md).
 
 Along with the standard Snowplow media entities, the HTML5 media plugin also tracks two HTML5 media-specific entities, `media_element` and `video_element`.
 

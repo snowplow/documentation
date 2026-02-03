@@ -527,3 +527,9 @@ The media ad break entity describes a group of ads played together, whether pre-
     "podSize": 2
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for a context entity, shared with all ad events belonging to the ad break.", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "ad_break", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "name": { "description": "Ad break name (e.g., pre-roll, mid-roll, and post-roll).", "type": [ "null", "string" ], "maxLength": 4096 }, "breakId": { "type": "string", "maxLength": 256, "description": "An identifier for the ad break." }, "startTime": { "type": "number", "description": "Playback time in seconds at the start of the ad break.", "minimum": 0, "maximum": 2147483647 }, "breakType": { "description": "Type of ads within the break: linear (take full control of the video for a period of time), nonlinear (run concurrently to the video), companion (accompany the video but placed outside the player).", "enum": [ "linear", "nonlinear", "companion", null ], "type": [ "string", "null" ] }, "podSize": { "type": [ "integer", "null" ], "description": "The number of ads to be played within the ad break.", "minimum": 0, "maximum": 65535 } }, "additionalProperties": false, "required": [ "breakId", "startTime" ] }} />
+
+## Player-specific data
+
+The [HTML5](/docs/sources/web-trackers/tracking-events/media/html5/index.md), [YouTube](/docs/sources/web-trackers/tracking-events/media/youtube/index.md), and [Vimeo](/docs/sources/web-trackers/tracking-events/media/vimeo/index.md) media plugins automatically attach additional entities specific to those players. The Vimeo plugin also tracks additional events.
+
+These events and entities aren't required for the Media Player data model. See the documentation for each plugin for details.

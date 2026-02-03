@@ -18,7 +18,7 @@ It uses the [Snowplow Media plugin](/docs/sources/web-trackers/tracking-events/m
 
 YouTube media events and entities are **automatically tracked** once configured.
 
-## Installation
+## Install plugin
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -173,7 +173,7 @@ endYouTubeTracking(mediaSessionId);
 
 ## Start tracking
 
-The `startYouTubeTracking` function is used to begin auto-tracking a YouTube Player instance.
+The `startYouTubeTracking` function is used to begin auto-tracking a YouTube Player instance. You must provide a unique `id` for the media session, along with the `video` ID.
 
 It installs the iFrame API if necessary, adds event listeners and any poll intervals, and then calls [`startMediaTracking`](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md#usage) from the underlying Snowplow Media plugin.
 
@@ -361,7 +361,7 @@ endYouTubeTracking(mediaSessionId);
 
 ## YouTube player entity
 
-Event and entity schemas are [the same as](/docs/events/ootb-data/media-events/index.md) for the [Snowplow Media plugin](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md).
+The event and entity schemas are [the same as](/docs/events/ootb-data/media-events/index.md) for the [Snowplow Media plugin](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md).
 
 Along with the standard Snowplow media entities, the YouTube media plugin also adds a `youtube` entity to all media events.
 

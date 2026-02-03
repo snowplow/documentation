@@ -32,7 +32,7 @@ The process involves the following high level steps:
 
 - Once you’ve generated your tag add it to all the pages you’d like to track:
   - Place the tag directly into your codebase. Typically this will be placed into the `<head>` element of your page or in a similar, suitable, location if using a Single Page Application framework.
-    - The JavaScript Tracker supports both synchronous and asynchronous tags. We recommend the asynchronous tags in nearly all instances, as these do not slow down page load times.
+    - The tag loads asynchronously to avoid slowing down page load times. Tracking calls made before the script loads are automatically queued and processed once the tracker initializes.
   - Load the tag using a Tag Management solution such as Google Tag Manager, usually triggered on page load.
 
 - Configure an instance of the tracker by calling `newTracker` with your desired properties.

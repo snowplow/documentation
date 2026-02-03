@@ -26,17 +26,21 @@ Use our [browser extension](/docs/testing/snowplow-inspector/index.md) to inspec
 A [lightweight, local Snowplow pipeline](/docs/testing/snowplow-micro/index.md) ideal for sending test events into. It's used as a Docker container.
 
 
-## Debugging
+## Debugger plugin
 
-Use the debugger plugin to automatically start printing out `debug` logs to your Developer Tools console. This will help you debug what events are being tracked and what properties are included in each event that is being tracked and to what tracker instance.
+The debugger plugin logs detailed information about tracked events to your browser's Developer Tools console. For each event, it displays:
+- Event type
+- Schema information for self-describing events and entities
+- All entities attached to the event
+- The complete event payload sent to the Collector
+
+The plugin uses color-coded output to distinguish between different types of information, making it easier to scan through logged events.
 
 :::note
-You may need to enable `Verbose` logs in your Developer Tools, as this plugin uses `console.debug` to output results.
+You may need to enable **Verbose** logs in your Developer Tools console, as this plugin uses `console.debug` to output results.
 :::
 
-An example of the output from this plugin:
-
-![](images/Screenshot-2021-03-28-at-20.08.35.png)
+![Example console output from the debugger plugin](images/Screenshot-2021-03-28-at-20.08.35.png)
 
 ### Install plugin
 
@@ -69,7 +73,7 @@ window.snowplow('addPlugin',
 - `pnpm add @snowplow/browser-plugin-debugger`
 
 ```javascript
-import { newTracker, trackPageView } from '@snowplow/browser-tracker';
+import { newTracker } from '@snowplow/browser-tracker';
 import { DebuggerPlugin } from '@snowplow/browser-plugin-debugger';
 
 newTracker('sp1', '{{collector_url}}', {
@@ -80,3 +84,45 @@ newTracker('sp1', '{{collector_url}}', {
 
   </TabItem>
 </Tabs>
+
+### Configuration
+
+The `DebuggerPlugin` function accepts an optional `logLevel` parameter that controls the verbosity of console output.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+window.snowplow('addPlugin',
+  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-debugger@latest/dist/index.umd.min.js",
+  ["snowplowDebugger", "DebuggerPlugin"],
+  [3] // Log level: 3 = debug (default)
+);
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { newTracker } from '@snowplow/browser-tracker';
+import { DebuggerPlugin } from '@snowplow/browser-plugin-debugger';
+import { LOG_LEVEL } from '@snowplow/tracker-core';
+
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
+   plugins: [ DebuggerPlugin(LOG_LEVEL.debug) ],
+});
+```
+
+  </TabItem>
+</Tabs>
+
+The available log levels are:
+
+| Level   | Value | Description                                         |
+| ------- | ----- | --------------------------------------------------- |
+| `none`  | 0     | Disables all logging                                |
+| `error` | 1     | Logs errors only                                    |
+| `warn`  | 2     | Logs errors and warnings                            |
+| `debug` | 3     | Logs errors, warnings, and debug messages (default) |
+| `info`  | 4     | Logs all messages                                   |

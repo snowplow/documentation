@@ -720,7 +720,7 @@ context: [
 
 ## Configure the plugin
 
-As well as configuring the `element_statistics`, `element_content`, and `component_parents` entities, you can customize how element tracking works using the options below.
+As well as configuring the `element_statistics`, `element_content`, and `component_parents` entities, you can customize how element visibility tracking works using the options below.
 
 The core options are explained in this table:
 
@@ -734,7 +734,7 @@ You'll see `selector` and `name` in the examples on this page.
 
 ### Event frequency with `when`
 
-The `when` option controls how often events fire. Every rule requires a `when` setting.
+The `when` option controls how often events fire. The default is `always`.
 
 This example shows the options:
 
@@ -847,6 +847,44 @@ startElementTracking({
   </TabItem>
 </Tabs>
 
+If you're using `when: pageview`, ensure that the tracker is firing page view events appropriately for your needs, especially if it's a single page application (SPA).
+
+The plugin assumes that you'll call `startElementTracking()` before `trackPageView()`. The first page view doesn't reset the element visibility state, because the plugin sets `ignoreNextPageView: true` by default internally.
+
+If your site tracks page views before calling `startElementTracking()`, you can disable this behavior by passing `ignoreNextPageView: false` in the plugin options when adding it to the tracker.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+window.snowplow('addPlugin',
+  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-element-tracking@latest/dist/index.umd.min.js",
+  ["snowplowElementTracking", "SnowplowElementTrackingPlugin"],
+  [{ ignoreNextPageView: false }]
+);
+
+snowplow('startElementTracking', { elements: [/* configuration */] });
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+First, add the plugin when initializing the tracker.
+
+```javascript
+import { newTracker } from '@snowplow/browser-tracker';
+import { SnowplowElementTrackingPlugin, startElementTracking } from '@snowplow/browser-plugin-element-tracking';
+
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
+   plugins: [ SnowplowElementTrackingPlugin({ ignoreNextPageView: false }) ],
+});
+
+startElementTracking({ elements: [/* configuration */] });
+```
+  </TabItem>
+</Tabs>
+
 ### Visibility thresholds for `expose`
 
 Control what counts as "visible" for `expose_element` events:
@@ -912,7 +950,7 @@ expose: {
 
 ### Data selectors using `details`
 
-The plugin uses data selectors when deciding if an element should trigger an event using [`condition`], or when building the `element` entity's `attributes` property.
+The plugin uses data selectors when deciding if an element should trigger an event using `condition`, or when building the `element` entity's `attributes` property.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -1140,6 +1178,35 @@ startElementTracking({
     expose: { when: 'element' }
   }
 });
+```
+
+  </TabItem>
+</Tabs>
+
+### Send to specific trackers
+
+If you have multiple trackers loaded on the same page, you can specify which trackers should receive events using the `tracker` option. Provide a list of tracker namespaces.
+
+If omitted, events go to all trackers the plugin has been activated for.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('startElementTracking', {
+  elements: { selector: '.promo-banner' }
+}, ['tracker1', 'tracker2']);
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { startElementTracking } from '@snowplow/browser-plugin-element-tracking';
+
+startElementTracking({
+  elements: { selector: '.promo-banner' }
+}, ['tracker1', 'tracker2']);
 ```
 
   </TabItem>

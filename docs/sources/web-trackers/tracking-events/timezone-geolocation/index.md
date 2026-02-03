@@ -19,7 +19,7 @@ Since version 4 of the JavaScript tracker, the tracker automatically captures th
 
 If you're using an older version of the tracker, or your users use older browsers, use the timezone plugin to capture timezone information. It uses the `jstimezonedetect` library to determine the user's timezone and populate the `os_timezone` field.
 
-The timezone property is **automatically tracked** once you configure the plugin.
+The timezone property is **automatically tracked**.
 
 ### Install plugin
 
@@ -67,13 +67,17 @@ Once configured, all subsequent events will contain this property.
 
 ## Geolocation
 
-If this plugin is enabled, the tracker will attempt to create a context from the visitor’s geolocation information. If the visitor has not already given or denied the website permission to use their geolocation information, a prompt will appear. If they give permission, then all events from that moment on will include their geolocation information, as a context entity.
+If this plugin is enabled, the tracker will attempt to create a entity from the visitor's geolocation information.
 
-If the geolocation context isn't enabled at tracker initialization, then it can be enabled at a later time by calling `enableGeolocationContext`. This is useful if you have other areas of your site where you require requesting geolocation access, as you can defer enabling this on your Snowplow events until you have permission to read the users geolocation for your other use case.
+If the visitor hasn't already given or denied the website permission to use their geolocation information, a prompt will appear. If they give permission, then all events from that moment on will include their geolocation information, as a context entity.
+
+If the geolocation entity isn't enabled at tracker initialization, you can enable it at a later time by calling `enableGeolocationContext`. This is useful if you have other areas of your site where you require requesting geolocation access, as you can defer enabling this on your Snowplow events until you have permission to read the users geolocation for your other use case.
 
 For more information on the geolocation API, see [the specification](http://dev.w3.org/geo/api/spec-source.html).
 
-Geolocation context entities are **automatically tracked** once configured.
+Check out the [geolocation tracking overview](/docs/events/ootb-data/geolocation/index.md) for the entity schema.
+
+The geolocation entity is **automatically tracked** once configured.
 
 ### Install plugin
 
@@ -85,7 +89,7 @@ Geolocation context entities are **automatically tracked** once configured.
 | `sp.js`              | ❌        |
 | `sp.lite.js`         | ❌        |
 
-This plugin was included in `sp.js` in version 3, but removed in version 4.
+This plugin was included in `sp.js` in version 3, but removed from the default bundle in version 4.
 
 **Download:**
 
@@ -93,11 +97,26 @@ This plugin was included in `sp.js` in version 3, but removed in version 4.
 
 **Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
 
+To enable after initialization:
+
 ```javascript
 window.snowplow('addPlugin',
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-geolocation@latest/dist/index.umd.min.js",
-  ["snowplowGeolocation", "GeolocationtPlugin"],
-  [false] // Enable at load
+  ["snowplowGeolocation", "GeolocationPlugin"],
+);
+
+// Enable when appropriate e.g. after user consents
+// This prompts the browser for location permission
+window.snowplow('enableGeolocationContext');
+```
+
+To enable at initialization:
+
+```javascript
+window.snowplow('addPlugin',
+  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-geolocation@latest/dist/index.umd.min.js",
+  ["snowplowGeolocation", "GeolocationPlugin"],
+  [true] // Prompts for permission immediately
 );
 ```
 
@@ -108,36 +127,56 @@ window.snowplow('addPlugin',
 - `yarn add @snowplow/browser-plugin-geolocation`
 - `pnpm add @snowplow/browser-plugin-geolocation`
 
+To enable after initialization:
+
 ```javascript
 import { newTracker, trackPageView } from '@snowplow/browser-tracker';
 import { GeolocationPlugin, enableGeolocationContext } from '@snowplow/browser-plugin-geolocation';
 
 newTracker('sp1', '{{collector_url}}', {
    appId: 'my-app-id',
-   plugins: [ GeolocationPlugin() ],
+   plugins: [ GeolocationPlugin() ], // Inactive by default
 });
 
+// Enable when appropriate e.g. after user consents
+// This prompts the browser for location permission
 enableGeolocationContext();
+```
+
+To enable at initialization:
+
+```javascript
+import { newTracker, trackPageView } from '@snowplow/browser-tracker';
+import { GeolocationPlugin } from '@snowplow/browser-plugin-geolocation';
+
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
+   plugins: [ GeolocationPlugin(true) ], // Prompts for permission immediately
+});
 ```
 
   </TabItem>
 </Tabs>
 
-### Context entity
+:::note No consent revocation
+There's no API to turn off geolocation tracking once enabled.
+:::
 
-Adding this plugin will automatically capture [this](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/geolocation_context/jsonschema/1-1-0) context entity.
+If you have multiple tracker instances on your site, you can choose to enable geolocation tracking on a per-tracker basis. Provide a list of tracker namespaces to the `enableGeolocationContext` function.
 
-**Example geolocation data**
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
 
-```json
-{
-  "latitude": 51.507351,
-  "longitude": -0.127758,
-  "latitudeLongitudeAccuracy": 150,
-  "altitude": 93.03439331054688,
-  "altitudeAccuracy": 10,
-  "bearing": null,
-  "speed": null,
-  "timestamp": 1617139404224
-}
+```javascript
+window.snowplow('enableGeolocationContext', ['sp1']);
 ```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+enableGeolocationContext(['sp1']);
+```
+
+  </TabItem>
+</Tabs>

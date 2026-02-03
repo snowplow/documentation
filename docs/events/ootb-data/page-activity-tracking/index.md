@@ -41,35 +41,142 @@ We recommend using the [Base web data product template](/docs/data-product-studi
 
 ## Screen engagement
 
-Use screen engagement tracking on mobile to track a `screen_end` event when a user navigates away from a screen.
+Use screen engagement tracking to track a `screen_end` event when a user navigates away from a screen.
 
 The trackers can also track a `screen_summary` entity that contains screen engagement data. This entity is sent along with [lifecycle](/docs/events/ootb-data/mobile-lifecycle-events/index.md) and `screen_end` events.
 
 This table shows the support for screen engagement tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md). The server-side trackers don't include screen engagement tracking.
 
-| Tracker                                                                                                                | Supported | Since version | Auto-tracking | Notes          |
-| ---------------------------------------------------------------------------------------------------------------------- | --------- | ------------- | ------------- | -------------- |
-| Web                                                                                                                    | ❌         |               |               |                |
-| [iOS](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md#screen-engagement-tracking)               | ✅         | 6.0.0         | ✅             |                |
-| [Android](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md#screen-engagement-tracking)           | ✅         | 6.0.0         | ✅             |                |
-| [React Native](/docs/sources/react-native-tracker/tracking-events/screen-tracking/index.md#screen-engagement-tracking) | ✅         | 2.1.0         | ✅             | Only on mobile |
-| [Flutter](/docs/sources/flutter-tracker/tracking-events/index.md#screen-engagement-tracking)                           | ✅         | 0.1.0         | ✅             | Only on mobile |
-| Roku                                                                                                                   | ❌         |               |               |                |
-| Google Tag Manager                                                                                                     | ❌         |               |               |                |
+| Tracker                                                                                                                | Supported | Since version | Auto-tracking | Notes                           |
+| ---------------------------------------------------------------------------------------------------------------------- | --------- | ------------- | ------------- | ------------------------------- |
+| [Web](/docs/sources/web-trackers/tracking-events/screen-views/index.md#screen-engagement-tracking)                     | ✅         | 4.2.0         | ✅/❌           | Requires screen tracking plugin |
+| [iOS](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md#screen-engagement-tracking)               | ✅         | 6.0.0         | ✅             |                                 |
+| [Android](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md#screen-engagement-tracking)           | ✅         | 6.0.0         | ✅             |                                 |
+| [React Native](/docs/sources/react-native-tracker/tracking-events/screen-tracking/index.md#screen-engagement-tracking) | ✅         | 2.1.0         | ✅             | Only on mobile                  |
+| [Flutter](/docs/sources/flutter-tracker/tracking-events/index.md#screen-engagement-tracking)                           | ✅         | 0.1.0         | ✅             | Only on mobile                  |
+| Roku                                                                                                                   | ❌         |               |               |                                 |
+| Google Tag Manager                                                                                                     | ❌         |               |               |                                 |
 
 We recommend using the [Base mobile data product template](/docs/data-product-studio/data-products/data-product-templates/index.md#base-mobile) for mobile tracking. It includes screen end events.
 
 ### Screen end event
 
-This event can be tracked automatically by the mobile trackers just before the transition to the next screen. It has no properties.
+This event can be tracked automatically just before the transition to the next screen, based on the firing of the next screen view event. It has no properties.
 
 <SchemaProperties
   overview={{event: true}}
   schema={{ "description": "Schema for an event tracked before transitioning to a new screen", "properties": {}, "additionalProperties": false, "type": "object", "self": { "vendor": "com.snowplowanalytics.mobile", "name": "screen_end", "format": "jsonschema", "version": "1-0-0" }, "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#" }} />
 
+### List item view event
+
+Track this event to mark which items are visible in a list.
+
+<SchemaProperties
+  schema={{
+    description: "Schema for an event tracked when an item is displayed in a list",
+    properties: {
+      index: {
+        type: "integer",
+        description: "Index of the item in a list on the screen",
+        minimum: 0,
+        maximum: 65535
+      },
+      items_count: {
+        type: ["integer", "null"],
+        description: "Total number of items in a list on the screen",
+        minimum: 0,
+        maximum: 65535
+      }
+    },
+    additionalProperties: false,
+    type: "object",
+    required: ["index"],
+    self: {
+      vendor: "com.snowplowanalytics.mobile",
+      name: "list_item_view",
+      format: "jsonschema",
+      version: "1-0-0"
+    },
+    "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#"
+  }}
+  overview={{ event: true }}
+  example={{
+    index: 3,
+    items_count: 10
+  }}
+/>
+
+### Scroll changed event
+
+Track this event to mark changes in scroll position on a screen.
+
+<SchemaProperties
+  schema={{
+    description: "Schema for an event tracked when a scroll view's scroll position changes",
+    properties: {
+      x_offset: {
+        type: ["integer", "null"],
+        description: "Horizontal scroll offset in pixels",
+        minimum: -2147483647,
+        maximum: 2147483647
+      },
+      y_offset: {
+        type: ["integer", "null"],
+        description: "Vertical scroll offset in pixels",
+        minimum: -2147483647,
+        maximum: 2147483647
+      },
+      view_width: {
+        type: ["integer", "null"],
+        description: "The width of the scroll view in pixels",
+        minimum: 0,
+        maximum: 2147483647
+      },
+      view_height: {
+        type: ["integer", "null"],
+        description: "The height of the scroll view in pixels",
+        minimum: 0,
+        maximum: 2147483647
+      },
+      content_width: {
+        type: ["integer", "null"],
+        description: "The width of the content in the scroll view in pixels",
+        minimum: 0,
+        maximum: 2147483647
+      },
+      content_height: {
+        type: ["integer", "null"],
+        description: "The height of the content in the scroll view in pixels",
+        minimum: 0,
+        maximum: 2147483647
+      }
+    },
+    additionalProperties: false,
+    type: "object",
+    self: {
+      vendor: "com.snowplowanalytics.mobile",
+      name: "scroll_changed",
+      format: "jsonschema",
+      version: "1-0-0"
+    },
+    "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#"
+  }}
+  overview={{ event: true }}
+  example={{
+    x_offset: 0,
+    y_offset: 250,
+    view_width: 375,
+    view_height: 667,
+    content_width: 375,
+    content_height: 1500
+  }}
+/>
+
 ### Screen summary entity
 
-Entity that contains screen engagement information, including how long a user spends on a screen in the foreground and background, as well as scroll depth.
+Entity that contains screen engagement information, including how long a user spends on a screen in the foreground and background, as well as information about scroll depth and list items.
+
+The entity data is based on tracker state captured from lifecycle, list item view, and scroll changed events.
 
 <SchemaProperties
   overview={{event: false}}

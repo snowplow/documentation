@@ -1,5 +1,5 @@
 ---
-title: "Page element tracking"
+title: "Page element visibility and interaction tracking"
 sidebar_label: "Page elements"
 sidebar_position: 140
 description: "Track page element visibility, button clicks, and form interactions to understand how users engage with specific components on your web pages."
@@ -115,9 +115,9 @@ Triggered when a user submits a form. Contains data about all form fields.
 
 ## Page element visibility and lifecycle
 
-Element tracking enables declarative tracking of page elements as they are created, become visible, leave view, or are removed from the page. It's only available for web.
+Element visibility tracking enables declarative tracking of page elements as they are created, become visible, leave view, or are removed from the page. It's only available for web.
 
-This table shows the support for page element tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md):
+This table shows the support for page element visibility tracking across the main client-side [Snowplow tracker SDKs](/docs/sources/index.md):
 
 | Tracker                                                                     | Supported | Since version | Auto-tracking |
 | --------------------------------------------------------------------------- | --------- | ------------- | ------------- |

@@ -34,7 +34,8 @@ You can always run Micro with the `--help` argument to find out what is supporte
 | `-j`, `--output-json`<br/>_(since 2.4.0)_ | Print events in JSON format to standard output ([usage](/docs/testing/snowplow-micro/basic-usage/index.md#exporting-events))           |
 | `-d`, `--destination`<br/>_(since 2.4.0)_ | Send data to an HTTP endpoint instead of outputting it via standard output. Requires either `--output-tsv` or `--output-json` ([usage](/docs/testing/snowplow-micro/basic-usage/index.md#exporting-events))           |
 | `--yauaa` | Enable YAUAA user agent enrichment ([usage](/docs/testing/snowplow-micro/configuring-enrichments/index.md#yauaa-yet-another-user-agent-analyzer)) |
-| `-m`, `--max-events`<br/>_(since 3.0.1)_ | Maximum number of events of each kind (good, bad) to keep in memory (setting this to 0 disables all /micro endpoints) |
+| `--no-storage`<br/>_(since 4.0.0)_ | Do not store the events anywhere and disable the API |
+| `--storage`<br/>_(since 4.0.0)_ | Enable PostgreSQL storage backend ([usage](/docs/testing/snowplow-micro/advanced-usage/index.md#persisting-events-across-restarts)) |
 
 ## Environment variables
 
@@ -43,3 +44,6 @@ You can always run Micro with the `--help` argument to find out what is supporte
 | `MICRO_IGLU_REGISTRY_URL` | 1.5.0+  | The URL for an additional custom Iglu registry ([usage](/docs/testing/snowplow-micro/adding-schemas/index.md#pointing-micro-to-an-iglu-registry))                                |
 | `MICRO_IGLU_API_KEY`      | 1.5.0+  | An optional API key for an Iglu registry defined with `MICRO_IGLU_REGISTRY_URL`                                                                                                                           |
 | `MICRO_SSL_CERT_PASSWORD` | 1.7.0+  | The password for the optional SSL/TLS certificate in `/config/ssl-certificate.p12`. Enables HTTPS ([usage](/docs/testing/snowplow-micro/advanced-usage/index.md#enabling-https)) |
+| `MICRO_POSTGRESQL_PASSWORD` | 4.0.0+  | The password for the optional PostgreSQL database ([usage](/docs/testing/snowplow-micro/advanced-usage/index.md#persisting-events-across-restarts)) |
+| `MICRO_AZURE_BLOB_ACCOUNT` | 4.0.0+  | The Azure blob storage account name to use for downloading enrichment assets |
+| `MICRO_AZURE_BLOB_SAS_TOKEN` | 4.0.0+  | The Azure blob storage account token to use for downloading enrichment assets |

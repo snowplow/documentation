@@ -1,12 +1,16 @@
 ---
-title: "Add GitHub workflow support for data products"
-sidebar_label: "Add data products"
+title: "Add GitHub workflow support for tracking plans"
+sidebar_label: "Add tracking plans"
 position: 6
-description: "Extend your Git workflow to manage source applications, data products, and event specifications using Snowplow CLI and GitHub Actions automation."
-keywords: ["data products git workflow", "source application yaml configuration"]
+description: "Extend your Git workflow to manage source applications, tracking plans, and event specifications using Snowplow CLI and GitHub Actions automation."
+keywords: ["tracking plans git workflow", "source application yaml configuration"]
 ---
 
-Now that we have our data structures set up, we can define data products to organize and document how these structures are used across our applications. We'll walk through creating source applications, data products, and event specifications using the CLI, then integrate them into our automated workflows.
+import TrackingPlansNomenclature from '@site/docs/reusable/tracking-plans-nomenclature/_index.md';
+
+<TrackingPlansNomenclature />
+
+Now that we have our data structures set up, we can define tracking plans to organize and document how these structures are used across our applications. We'll walk through creating source applications, tracking plans, and event specifications using the CLI, then integrate them into our automated workflows.
 
 ## Create a source application
 
@@ -16,7 +20,7 @@ First, we'll create a source application to represent our website that will send
 snowplow-cli dp generate --source-app website
 ```
 :::note
-`dp` is an alias for `data-products`. Source applications and event specifications are also managed by this command
+`dp` is an alias for `data-products`, from the previous name for tracking plans. Source applications and event specifications are also managed by this command.
 :::
 
 This should provide the following output
@@ -80,9 +84,9 @@ snowplow-cli dp publish
 
 After publishing, you'll be able to see your new source application in the Snowplow Console UI.
 
-## Create a data product and an event specification
+## Create a tracking plan and an event specification
 
-Let's now create a data product and an event specification by running the following command
+Let's now create a tracking plan and an event specification by running the following command
 
 ```bash
 snowplow-cli dp generate --data-product Login
@@ -104,7 +108,7 @@ data:
 ```
 
 :::note
-For more information about available fields and values you can refer to the [data products schema](https://raw.githubusercontent.com/snowplow/snowplow-cli/main/internal/validation/schema/data-product.json). Making your ide schema aware via a [language server](https://github.com/redhat-developer/yaml-language-server) should provide a much smoother editing experience.
+For more information about available fields and values you can refer to the [tracking plans schema](https://raw.githubusercontent.com/snowplow/snowplow-cli/main/internal/validation/schema/data-product.json). Making your ide schema aware via a [language server](https://github.com/redhat-developer/yaml-language-server) should provide a much smoother editing experience.
 :::
 
 Let's amend it to add an event specification, and a reference to a source application:
@@ -153,9 +157,9 @@ We can apply the changes by using the publish command without the `--dry-run` fl
 snowplow-cli dp publish
 ```
 
-## Add data products validation and publishing in the github actions
+## Add tracking plans validation and publishing in the github actions
 
-Now that we've modeled a source application, data product and event specification, let's see how we can add them to the existing github actions workflows for data structures. You can customize your setup, use a separate repository or a separate actions, but in this example we'll add the data products publishing into the existing workflows.
+Now that we've modeled a source application, tracking plan and event specification, let's see how we can add them to the existing github actions workflows for data structures. You can customize your setup, use a separate repository or a separate actions, but in this example we'll add the tracking plans publishing into the existing workflows.
 
 Lets modify the PR example, and add the following line. This command will validate and print the changes to the github actions log.
 
@@ -182,7 +186,7 @@ jobs:
       - run: snowplow-cli dp publish --dry-run --gh-annotate
 ```
 
-Data products, source applications and event specifications don't have the dev and prod environments, so it's enough to publish them once.
+Tracking plans, source applications and event specifications don't have the dev and prod environments, so it's enough to publish them once.
 We can add the same command but without the `--dry-run` flag to the publish pipeline.
 
 ```yml {20} title=".github/workflows/publish-develop.yml"
@@ -208,4 +212,4 @@ jobs:
       - run: snowplow-cli dp publish
 ```
 
-You might want to publish data products in the `.github/workflows/publish-production.yml` as well, or only there. It depends on your setup, but if you strictly follow the rules and always merge to `main` from `develop`, the setup above should be enough.
+You might want to publish tracking plans in the `.github/workflows/publish-production.yml` as well, or only there. It depends on your setup, but if you strictly follow the rules and always merge to `main` from `develop`, the setup above should be enough.

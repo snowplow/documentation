@@ -20,7 +20,7 @@ For self-hosted deployments, we have:
 
 Snowplow CDI is our full infrastructure offering. Choose whether you'd like the **data plane** to be entirely hosted in your cloud account, or whether you'd prefer Snowplow to host the pipeline infrastructure for you.
 
-The **control plane**, which includes a UI and an API for [defining your data](/docs/data-product-studio/data-products/index.md) and managing your infrastructure, is always hosted by Snowplow.
+The **control plane**, which includes a UI and an API for [defining your data](/docs/event-studio/tracking-plans/index.md) and managing your infrastructure, is always hosted by Snowplow.
 
 ### CDI Private Managed Cloud
 

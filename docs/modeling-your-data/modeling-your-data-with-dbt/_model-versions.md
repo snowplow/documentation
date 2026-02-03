@@ -12,7 +12,7 @@ import {versions} from '@site/src/componentVersions';
 
 | snowplow-unified version      | dbt versions       | BigQuery | Databricks | Redshift | Snowflake | Postgres | Spark |
 | ----------------------------- | ------------------ | :------: | :--------: | :------: | :-------: | :------: | :---: |
-| {versions.dbtSnowplowUnified} | >=1.6.0 to \<2.0.0 |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |   ✅   |
+| {versions.dbtSnowplowUnified} | >=1.10.6 to \<2.0.0 |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |   ✅   |
 | 0.4.5                         | >=1.6.0 to \<2.0.0 |    ✅     |     ✅      |    ✅     |     ✅     |    ✅     |   ❌   |
 
 </TabItem>

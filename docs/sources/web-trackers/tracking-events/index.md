@@ -71,14 +71,14 @@ The tracker can be set up to automatically add [entities](/docs/fundamentals/ent
 
 Most entity autotracking is specifically configured using plugins, which are imported, enabled, and configured individually. However, you can configure some entities directly when instrumenting the tracker, using the [configuration object](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md).
 
-| Entity                                                                                                          | Usage                            | Added by default | JavaScript (tag) tracker | Browser (npm) tracker |
-| --------------------------------------------------------------------------------------------------------------- | -------------------------------- | ---------------- | ------------------------ | --------------------- |
+| Entity                                                                                                       | Usage                            | Added by default | JavaScript (tag) tracker | Browser (npm) tracker |
+| ------------------------------------------------------------------------------------------------------------ | -------------------------------- | ---------------- | ------------------------ | --------------------- |
 | [`webPage`](/docs/sources/web-trackers/tracking-events/page-views/index.md#page-view-id-and-web_page-entity) | UUID for the page view           | ✅                | `contexts` config        | `contexts` config     |
-| [`session`](/docs/sources/web-trackers/tracking-events/session/index.md)                                        | Data about the current session   | ❌                | `contexts` config        | `contexts` config     |
-| [`browser`](/docs/sources/web-trackers/tracking-events/browsers/index.md)                                                       | Properties of the user's browser | ❌                | `contexts` config        | `contexts` config     |
-| [`performanceTiming`](/docs/sources/web-trackers/tracking-events/timings/index.md)                              | Performance timing metrics       | ❌                | `contexts` config        | Plugin                |
-| [`gaCookies`](/docs/sources/web-trackers/tracking-events/ga-cookies/index.md)                                   | Extract GA cookie values         | ❌                | `contexts` config        | Plugin                |
-| [`geolocation`](/docs/sources/web-trackers/tracking-events/timezone-geolocation/index.md)                       | User's geolocation               | ❌                | `contexts` config        | Plugin                |
+| [`session`](/docs/sources/web-trackers/tracking-events/session/index.md)                                     | Data about the current session   | ❌                | `contexts` config        | `contexts` config     |
+| [`browser`](/docs/sources/web-trackers/tracking-events/browsers/index.md)                                    | Properties of the user's browser | ❌                | `contexts` config        | `contexts` config     |
+| [`performanceTiming`](/docs/sources/web-trackers/tracking-events/timings/index.md)                           | Performance timing metrics       | ❌                | `contexts` config        | Plugin                |
+| [`gaCookies`](/docs/sources/web-trackers/tracking-events/ga-cookies/index.md)                                | Extract GA cookie values         | ❌                | `contexts` config        | Plugin                |
+| [`geolocation`](/docs/sources/web-trackers/tracking-events/timezone-geolocation/index.md)                    | User's geolocation               | ❌                | `contexts` config        | Plugin                |
 
 If you're using the `sp.lite.js` JavaScript tracker distribution, only the `webPage`, `session`, and `browser` entities are available out of the box, as the others require plugins that aren't included in that distribution.
 
@@ -137,13 +137,13 @@ Set the application ID using the `appId` field of the [tracker configuration o
 The option to track the application version was introduced in version 4.1 of the JavaScript tracker.
 :::
 
-Set the application ID using the `appVersion` field of the [tracker configuration object](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md). This will be attached to every event the tracker fires using the [application context entity](/docs/events/ootb-data/app-information/index.md#entity-definitions).
+Set the application ID using the `appVersion` field of the [tracker configuration object](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md). This will be attached to every event the tracker fires using the [application entity](/docs/events/ootb-data/app-information/index.md#entity-definitions).
 
 The version of can be a semver-like structure (e.g 1.1.0) or a Git commit SHA hash.
 
 ### Application platform
 
-Set the application platform using the `platform` field of the [tracker configuration object](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md). This will be attached to every event the tracker fires. Its default value is “web”. For a list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/fundamentals/canonical-event/index.md#application-fields).
+Set the application platform using the `platform` field of the [tracker configuration object](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md). This will be attached to every event the tracker fires. Its default value is `web`. For a list of supported platforms, please see the [Snowplow Tracker Protocol](/docs/fundamentals/canonical-event/index.md#application-fields).
 
 ### Business user ID
 

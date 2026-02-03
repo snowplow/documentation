@@ -86,13 +86,13 @@
 ## Snowplow terminology
 
 * Use "Snowplow". Never use "Snowplow Analytics".
-* Always capitalized: Data Product Studio, Snowtype, Snowplow Customer Data Infrastructure, Signals.
+* Always capitalized: Event Studio, Snowtype, Snowplow Customer Data Infrastructure, Signals.
 * Console: Capitalized, no article. "Data structures in Console."
 * Collector: Capitalized, with "the". "Events hit the Collector endpoint."
 * Enrich: Capitalized. "Enrich can enrich an event."
 * Loaders: Capitalized, with "the". "The BigQuery Loader reads enriched events."
 * Iglu, Iglu Central, Iglu Server: Capitalized. Other Iglu components are lowercase.
-* Never capitalized: entities, events, schemas, data structures, data products, page view, self-describing event, source applications, failed events.
+* Never capitalized: entities, events, schemas, data structures, tracking plans, page view, self-describing event, source applications, failed events.
 * Use "entity". Never use "context".
 * Use "self-describing event". Never use "unstructured event".
 * Use "failed events". Never use "bad rows" (except for legacy JSON format).

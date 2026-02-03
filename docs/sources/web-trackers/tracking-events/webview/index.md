@@ -105,9 +105,9 @@ window.snowplow(
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
 
-- `npm install @snowplow/browser-plugin-webview@webview_plugin`
-- `yarn add @snowplow/browser-plugin-webview@webview_plugin`
-- `pnpm add @snowplow/browser-plugin-webview@webview_plugin`
+- `npm install @snowplow/browser-plugin-webview`
+- `yarn add @snowplow/browser-plugin-webview`
+- `pnpm add @snowplow/browser-plugin-webview`
 
 ```javascript
 import { newTracker } from '@snowplow/browser-tracker';

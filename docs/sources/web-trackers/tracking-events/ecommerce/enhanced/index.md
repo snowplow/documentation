@@ -1,6 +1,6 @@
 ---
 title: "Legacy enhanced ecommerce plugin for web"
-sidebar_label: "Enhanced"
+sidebar_label: "Enhanced (legacy)"
 sidebar_position: 70
 description: "Legacy plugin based on Google Analytics Enhanced Ecommerce that has been superseded by the newer Snowplow ecommerce plugin."
 keywords: ["enhanced ecommerce", "legacy"]
@@ -12,7 +12,7 @@ import TabItem from '@theme/TabItem';
 ```
 
 :::warning
-This plugin has been deprecated and superseded by the [Snowplow ecommerce plugin](/docs/sources/web-trackers/tracking-events/ecommerce/index.md). We highly recommend using this newer plugin, which is more fully featured and allows you to use the DBT model we provide.
+This plugin has been deprecated and superseded by the [Snowplow ecommerce plugin](/docs/sources/web-trackers/tracking-events/ecommerce/index.md). We highly recommend using this newer plugin, which is more fully featured and allows you to use the [Snowplow Ecommerce](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md) dbt model.
 :::
 
 This plugin is based on Google Analytics' Enhanced Ecommerce package. For more information on the Enhanced Ecommerce functions please see the Google Analytics [documentation](https://developers.google.com/analytics/devguides/collection/analyticsjs/enhanced-ecommerce).

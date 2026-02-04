@@ -11,7 +11,7 @@ keywords: ["customer data infrastructure", "cdi", "behavioral data", "event-leve
   <meta name='zd-site-verification' content='fly2zzu1qcv51s1ma9jds' />
 </head>
 
-Deliver validated, enriched, event-level data to your warehouse, lake, or stream in real time with Snowplow.
+**Deliver validated, enriched, event data to your warehouse, lake, or stream in real time with Snowplow**.
 
 Snowplow Customer Data Infrastructure (CDI) gives you:
 * Full visibility into how data flows through your pipeline

@@ -10,10 +10,10 @@ keywords: ["glossary", "terminology", "Snowplow terms", "definitions", "data pip
 This page provides a glossary of terms used by Snowplow.
 
 To help clarify, we've categorized the terms:
-* Component: a pipeline application, package, SDK, or other code-based tool or set of tools, e.g. Snowplow Micro
-* Concept: names for Snowplow things and ideas, e.g. tracking plan
-* Legal: about licensing, e.g. SLULA
-* Offering: a Snowplow product that you can buy, e.g. Snowplow CDI Cloud
+* **Component**: a pipeline application, package, SDK, or other code-based tool or set of tools, e.g. [Snowplow Micro](/docs/testing/snowplow-micro/index.md)
+* **Concept**: names for Snowplow things and ideas, e.g. [tracking plan](/docs/fundamentals/tracking-plans/index.md)
+* **Legal**: about licensing, e.g. SLULA
+* **Offering**: a Snowplow product that you can buy, e.g. [Snowplow CDI Cloud](/docs/get-started/index.md) or [Snowplow Signals](/docs/signals/index.md)
 
 | Term                                   | Category  | Description                                                                                                                                                           | More information                                                                             |
 | -------------------------------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |

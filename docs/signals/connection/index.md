@@ -4,7 +4,10 @@ sidebar_position: 15
 sidebar_label: "Connect to Signals"
 description: "Set up a Signals connection through Snowplow Console or Sandbox to start configuring attributes and interventions. Connect using the Python SDK, Node.js SDK, or REST API with your deployment credentials."
 keywords: ["signals connection", "python sdk", "nodejs sdk", "signals api", "signals setup"]
+sidebar_custom_props:
+  header: " "
 ---
+
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';

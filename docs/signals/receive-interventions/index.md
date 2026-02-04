@@ -6,7 +6,7 @@ description: "Subscribe to interventions by attribute key ID to automatically re
 keywords: ["subscribe interventions", "intervention subscription", "browser plugin", "intervention payload"]
 ---
 
-[Interventions](/docs/signals/concepts/index.md#interventions) are automated triggers that enable real-time actions based on user behavior.
+[Interventions](/docs/signals/concepts/interventions/index.md) are automated triggers that enable real-time actions based on user behavior.
 
 Subscribe to interventions to automatically respond within your application. You have three options for receiving interventions, depending on your use case or application:
 * [Signals Python SDK](https://pypi.org/project/snowplow-signals/)
@@ -16,7 +16,7 @@ Subscribe to interventions to automatically respond within your application. You
 Subscription is by attribute key ID, not by individual intervention. Start by [connecting to Signals](/docs/signals/connection/index.md).
 
 :::note Sent once
-An intervention is sent only the first time the criteria are met. Read an example of how this works on the [Concepts page](/docs/signals/concepts/index.md#targeting-example).
+An intervention is sent only the first time the criteria are met. Read an example of how this works on the [Concepts page](/docs/signals/concepts/interventions/index.md#targeting-example).
 :::
 
 ## Using the Signals Python SDK

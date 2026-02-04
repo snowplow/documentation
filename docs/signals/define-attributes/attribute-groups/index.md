@@ -6,7 +6,7 @@ description: "Define attribute groups to calculate behavioral data from real-tim
 keywords: ["attribute groups", "stream attributes", "batch attributes", "attribute keys", "ttl"]
 ---
 
-Define the behavior you want to capture in [attribute groups](/docs/signals/concepts/index.md#attribute-groups). Choose whether to calculate attributes from your event stream or warehouse.
+Define the behavior you want to capture in [attribute groups](/docs/signals/concepts/attributes/index.md). Choose whether to calculate attributes from your event stream or warehouse.
 
 To create an attribute group, go to **Signals** > **Attribute groups** in Snowplow Console and follow the instructions.
 
@@ -24,7 +24,7 @@ The first step is to specify:
 A warehouse connection is required to create `Batch` and `External Batch` attributes.
 :::
 
-There are three [sources](/docs/signals/concepts/index.md#data-sources) to choose from:
+There are three [sources](/docs/signals/concepts/data-sources/index.md) to choose from:
 * **Stream**: real-time Snowplow event stream
 * **Batch**: a new warehouse table created by Signals, calculated from your `atomic` events table
 * **External batch**: pre-calculated values in a warehouse table that you can sync to the Profiles Store
@@ -60,7 +60,7 @@ To minimize latency, Signals will use the timestamp field to determine which row
 
 ## Attribute keys
 
-All attribute groups need an [attribute key](/docs/signals/concepts/index.md#attribute-keys).
+All attribute groups need an [attribute key](/docs/signals/concepts/attributes/index.md#attribute-keys).
 
 Signals includes four built-in attribute keys, based on commonly used identifiers from the atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-fields) in all Snowplow events.
 
@@ -128,6 +128,6 @@ Unpublishing is version specific. It will stop Signals from calculating attribut
 
 Choose **Delete** to permanently delete all versions of the attribute group, along with attribute values in your Profiles Store for this group.
 
-If the attribute group version is used by a [service](/docs/signals/concepts/index.md#services), you'll need to update the service definition before unpublishing or deleting.
+If the attribute group version is used by a [service](/docs/signals/concepts/attributes/index.md#services), you'll need to update the service definition before unpublishing or deleting.
 
-If the attribute group version is used by a published [intervention](/docs/signals/concepts/index.md#interventions), deleting or unpublishing it will unpublish the intervention.
+If the attribute group version is used by a published [intervention](/docs/signals/concepts/interventions/index.md), deleting or unpublishing it will unpublish the intervention.

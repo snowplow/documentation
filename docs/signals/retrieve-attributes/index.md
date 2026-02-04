@@ -11,7 +11,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Your calculated attributes are stored in the Profiles Store, and retrieved using [services](/docs/signals/concepts/index.md#services).
+Your calculated attributes are stored in the Profiles Store, and retrieved using [services](/docs/signals/concepts/attributes/index.md#services).
 
 To use attributes to take action in your application, you'll want to retrieve only the relevant values. This would usually be the attributes for the current user.
 
@@ -26,7 +26,7 @@ Start by [connecting to Signals](/docs/signals/connection/index.md).
 
 ## Using a service
 
-The preferred way to retrieve attributes is by using a [service](/docs/signals/concepts/index.md#services). This allows you to retrieve attributes in bulk, from multiple attribute groups.
+The preferred way to retrieve attributes is by using a [service](/docs/signals/concepts/attributes/index.md#services). This allows you to retrieve attributes in bulk, from multiple attribute groups.
 
 <Tabs groupId="signals" queryString>
 <TabItem value="python" label="Python" default>
@@ -106,7 +106,7 @@ The table below lists all available arguments for `getBatchServiceAttributes()`
 
 ## Retrieving individual attributes
 
-You can also retrieve attributes directly from a specific [attribute group](/docs/signals/concepts/index.md#attribute-groups). This is useful when:
+You can also retrieve attributes directly from a specific [attribute group](/docs/signals/concepts/attributes/index.md). This is useful when:
 * You want to retrieve only a small subset of attributes
 * You haven't defined a service yet
 

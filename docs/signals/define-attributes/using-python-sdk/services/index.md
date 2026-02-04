@@ -6,7 +6,7 @@ description: "Define Service objects that group multiple attribute groups with v
 keywords: ["python sdk services", "service configuration", "attribute group grouping"]
 ---
 
-[Services](/docs/signals/concepts/index.md#services) group attribute groups together for serving to your applications.
+[Services](/docs/signals/concepts/attributes/index.md#services) group attribute groups together for serving to your applications.
 
 There are two ways to define the attribute groups in your service:
 - `AttributeGroup` objects: use the objects directly if you have them available in your code

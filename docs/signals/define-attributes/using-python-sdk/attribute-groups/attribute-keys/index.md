@@ -6,7 +6,7 @@ description: "Create custom attribute keys based on atomic properties to specify
 keywords: ["attribute keys", "custom attribute keys", "analytical context", "atomic properties"]
 ---
 
-An [attribute key](/docs/signals/concepts/index.md#attribute-keys) is the identifier that attributes are calculated against.
+An [attribute key](/docs/signals/concepts/attributes/index.md#attribute-keys) is the identifier that attributes are calculated against.
 
 Signals includes a number of out-of-the-box attribute keys based on commonly used identifiers from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-fields) in all Snowplow events.
 

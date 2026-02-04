@@ -23,6 +23,6 @@ Try out Signals for free using the [Signals Sandbox](https://try-signals.snowplo
 :::
 
 Key docs sections to explore:
-[Concepts](/docs/signals/concepts/index.md)
+[Fundamentals](/docs/signals/concepts/index.md)
 [Define attributes](/docs/signals/define-attributes/index.md)
 [Receive interventions](/docs/signals/receive-interventions/index.md)

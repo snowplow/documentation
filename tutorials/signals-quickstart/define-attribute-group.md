@@ -6,7 +6,7 @@ description: "Create an attribute group in Snowplow Signals to calculate session
 keywords: ["attribute groups", "session metrics"]
 ---
 
-[Attribute groups](/docs/signals/concepts/#attribute-groups) are where you define the data you want to calculate. To create an attribute group, go to **Signals** > **Attribute groups** in Snowplow Console and click **Create attribute group**.
+[Attribute groups](/docs/signals/concepts/attributes) are where you define the data you want to calculate. To create an attribute group, go to **Signals** > **Attribute groups** in Snowplow Console and click **Create attribute group**.
 
 ![Create attribute group form for quickstart tutorial](./images/attribute-group-create.png)
 

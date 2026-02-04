@@ -19,16 +19,17 @@ export const FeaturedSection: React.FC<FeaturedSectionProps> = ({
       className="rounded-lg bg-card p-5 transition-all duration-200 hover:shadow-md"
       style={{ border: '1px solid #e5e7eb' }}
     >
-      <Link
-        to={href}
-        className="block mb-2 text-lg font-semibold text-foreground hover:text-primary transition-colors duration-200"
-      >
-        {title}
-      </Link>
+      <p className="mb-2 text-lg font-semibold text-foreground">{title}</p>
       <p className="text-sm text-muted-foreground mb-4">{description}</p>
       {children && (
-        <div className="featured-section-links text-sm">{children}</div>
+        <div className="featured-section-links text-sm mb-4">{children}</div>
       )}
+      <Link
+        to={href}
+        className="featured-section-button inline-block text-sm font-medium px-3 py-1.5 rounded-md transition-colors"
+      >
+        Learn more →
+      </Link>
     </div>
   )
 }

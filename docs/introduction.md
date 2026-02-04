@@ -44,7 +44,7 @@ Snowplow Customer Data Infrastructure (CDI) gives you:
 <FeaturedSections>
   <FeaturedSection
     title="Fundamentals"
-    description="Core concepts for working with Snowplow"
+    description="Learn about core Snowplow concepts"
     href="/docs/fundamentals/index.md"
   >
     [Events](/docs/fundamentals/events/index.md)
@@ -54,19 +54,8 @@ Snowplow Customer Data Infrastructure (CDI) gives you:
   </FeaturedSection>
 
   <FeaturedSection
-    title="Tracker SDKs"
-    description="20+ SDKs for web, mobile, servers, and game engines"
-    href="/docs/sources/index.md"
-  >
-    [Web tracker setup](/docs/sources/web-trackers/tracker-setup/index.md)
-    [Page views on web](/docs/sources/web-trackers/tracking-events/page-views/index.md)
-    [Mobile initialization](/docs/sources/mobile-trackers/installation-and-set-up/index.md)
-    [Screen views on mobile](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md)
-  </FeaturedSection>
-
-  <FeaturedSection
-    title="Event Studio"
-    description="Design schemas and tracking plans in a visual interface"
+    title="Data collection and governance"
+    description="Implement and manage your tracking"
     href="/docs/event-studio/index.md"
   >
     [Tracking plans](/docs/event-studio/tracking-plans/index.md)
@@ -76,8 +65,31 @@ Snowplow Customer Data Infrastructure (CDI) gives you:
   </FeaturedSection>
 
   <FeaturedSection
+    title="Destinations"
+    description="Send data to warehouses, lakes, and downstream tools"
+    href="/docs/destinations/index.md"
+  >
+    [Warehouse and lake destinations](/docs/destinations/warehouses-lakes/index.md)
+    [Event forwarding](/docs/destinations/forwarding-events/index.md)
+    [Google Tag Manager Server-Side](/docs/destinations/forwarding-events/google-tag-manager-server-side/index.md)
+    [How to query Snowplow data](/docs/destinations/warehouses-lakes/querying-data/index.md)
+  </FeaturedSection>
+
+  <FeaturedSection
+    title="Trackers"
+    description="Instrument 20+ SDKs for web, mobile, and servers"
+    href="/docs/sources/index.md"
+  >
+    [Web tracker setup](/docs/sources/web-trackers/tracker-setup/index.md)
+    [Page views on web](/docs/sources/web-trackers/tracking-events/page-views/index.md)
+    [Mobile initialization](/docs/sources/mobile-trackers/installation-and-set-up/index.md)
+    [Screen views on mobile](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md)
+  </FeaturedSection>
+
+
+  <FeaturedSection
     title="Pipeline"
-    description="Configure your Collector, enrichments, and data processing"
+    description="Configure your Collector and enrichments"
     href="/docs/pipeline/index.md"
   >
     [Enrichments](/docs/pipeline/enrichments/index.md)
@@ -97,14 +109,4 @@ Snowplow Customer Data Infrastructure (CDI) gives you:
     [Identity stitching](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/index.md)
   </FeaturedSection>
 
-  <FeaturedSection
-    title="Destinations"
-    description="Send data to warehouses, lakes, and downstream tools"
-    href="/docs/destinations/index.md"
-  >
-    [Warehouse and lake destinations](/docs/destinations/warehouses-lakes/index.md)
-    [Event forwarding](/docs/destinations/forwarding-events/index.md)
-    [Google Tag Manager Server-Side](/docs/destinations/forwarding-events/google-tag-manager-server-side/index.md)
-    [How to query Snowplow data](/docs/destinations/warehouses-lakes/querying-data/index.md)
-  </FeaturedSection>
 </FeaturedSections>

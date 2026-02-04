@@ -1,8 +1,8 @@
 ---
-title: "Introduction to Snowplow Signals"
+title: "Snowplow for Agentic AI"
 sidebar_position: 8
-description: "Snowplow Signals is a real-time personalization engine that computes and acts on behavioral data from your pipeline. It enables in-session stream and historical user data access for personalized experiences, recommendations, and dynamic pricing."
-keywords: ["real-time personalization", "customer intelligence", "behavioral data", "signals", "agentic applications"]
+description: "Snowplow Signals streams enriched user context to AI agents and applications in real time. Integrate with LangChain, Bedrock, Vertex AI, and Vercel to ground agent responses in governed customer data."
+keywords: ["real-time personalization", "agentic ai", "customer context", "signals", "langchain", "ai agents"]
 sidebar_label: "Signals"
 ---
 
@@ -15,16 +15,13 @@ import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 />
 ```
 
-Snowplow Signals is a real-time personalization engine for customer intelligence, built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in real time.
+Snowplow Signals equips your AI agents with real-time customer context. It computes user attributes from your Snowplow behavioral data and makes them available with sub-50ms latency, so your agents can act on validated data instead of guesses.
 
-Real-time personalization use cases that are unlocked by Signals include:
-* Personalized recommendations
-* Personalized messaging
-* Agentic applications such as chatbots or copilots
-* Adaptive UIs
-* Dynamic pricing
-* Contextually relevant advertising
-* Paywall optimization
+Use Signals to:
+* Stream enriched user context to chatbots, copilots, and other agentic applications
+* Integrate with LangChain, Amazon Bedrock, Vertex AI, and Vercel
+* Deliver personalized recommendations, dynamic pricing, and adaptive UIs based on current behavior
+* Trigger actions automatically when users meet specific criteria
 
 :::info Signals Sandbox
 

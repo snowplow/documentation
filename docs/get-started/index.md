@@ -6,7 +6,21 @@ description: "Details on where and how Snowplow is deployed"
 keywords: ["Snowplow CDI", "Private Managed Cloud", "Cloud", "Community Edition", "Self-Hosted"]
 ---
 
-Choose the [Snowplow](https://snowplow.io) platform that works for your business. See the [feature comparison page](/docs/get-started/feature-comparison/index.md) for more information.
+[Snowplow](https://snowplow.io) lays the foundation for an organization's advanced analytics, operational, and ML and AI use cases, including customer insights, predicting customer behaviors, hyper-personalizing customer experiences, and detecting fraud in real time.
+
+Digital-first companies like Strava, HelloFresh, Auto Trader, Burberry, and DPG Media rely on Snowplow to collect and process billions of events per day.
+
+<img src="/img/snowplow-cdi-signals_vertical.svg" alt="diagram of snowplow architecture" style={{maxHeight: '800px', width: 'auto'}} />
+
+Snowplow is built to deliver:
+* "Glass-box" technical architecture capable of processing billions of events per day
+* **Over [20 SDKs](/docs/sources/index.md)** to collect data from web, mobile, server-side, and other sources
+* A unique approach based on **[schemas and validation](/docs/fundamentals/schemas/index.md)** ensures your data is as clean as possible
+* **Over [15 enrichments](/docs/pipeline/enrichments/available-enrichments/index.md)** to get the most out of your data
+* Stream data to your data warehouse/lakehouse or SaaS destinations of choice
+* Enable real time personalization with **[Signals](/docs/signals/)**
+
+Choose the Snowplow platform that works for your business. See the [feature comparison page](/docs/get-started/feature-comparison/index.md) for more information.
 
 We offer two fully featured Customer Data Infrastructure (CDI) platforms:
 * **Snowplow CDI Private Managed Cloud**: hosted in your own cloud, managed by Snowplow

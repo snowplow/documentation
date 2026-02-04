@@ -4,6 +4,9 @@ sidebar_position: 8
 description: "Snowplow Signals streams enriched user context to AI agents and applications in real time. Integrate with LangChain, Bedrock, Vertex AI, and Vercel to ground agent responses in governed customer data."
 keywords: ["real-time personalization", "agentic ai", "customer context", "signals", "langchain", "ai agents"]
 sidebar_label: "Signals"
+custom_edit_url: null
+pagination_next: null
+pagination_prev: null
 ---
 
 **Give your AI agents and copilots the context they need to act intelligently with Snowplow Signals**.

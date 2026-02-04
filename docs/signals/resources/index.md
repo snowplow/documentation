@@ -6,6 +6,7 @@ keywords: ["signals tutorials", "batch engine", "ml prospect scoring"]
 sidebar_label: "Resources"
 sidebar_custom_props:
   header: " "
+pagination_next: null
 ---
 
 This page lists some useful links and tools for working with Signals.

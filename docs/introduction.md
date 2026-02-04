@@ -22,9 +22,89 @@ Snowplow Customer Data Infrastructure (CDI) gives you:
 * Privacy and compliance tooling and infrastructure
 * The ability to distinguish AI agent traffic from human visitors
 
-Key docs sections to explore:
-[Fundamentals](/docs/fundamentals/index.md)
-[Event Studio](/docs/event-studio/index.md)
-[Tracker SDKs](/docs/sources/index.md)
-[Event forwarding](/docs/destinations/forwarding-events/index.md)
-[Data modeling](/docs/modeling-your-data/index.md)
+<FeaturedSections>
+  <FeaturedSection
+    title="Snowplow for Agentic AI"
+    description="Snowplow Signals gives you real-time customer context for your AI agents and applications"
+    href="/docs/signals/index.md"
+  >
+  </FeaturedSection>
+
+  <FeaturedSection
+    title="Get started with Snowplow CDI"
+    description="TODO"
+    href="/docs/get-started/index.md"
+  >
+  </FeaturedSection>
+
+</FeaturedSections>
+
+## Top pages
+
+<FeaturedSections>
+  <FeaturedSection
+    title="Fundamentals"
+    description="Core concepts for working with Snowplow"
+    href="/docs/fundamentals/index.md"
+  >
+    [Events](/docs/fundamentals/events/index.md)
+    [Entities](/docs/fundamentals/entities/index.md)
+    [Schemas](/docs/fundamentals/schemas/index.md)
+    [Atomic event fields reference](/docs/fundamentals/canonical-event/index.md)
+  </FeaturedSection>
+
+  <FeaturedSection
+    title="Tracker SDKs"
+    description="20+ SDKs for web, mobile, servers, and game engines"
+    href="/docs/sources/index.md"
+  >
+    [Web tracker setup](/docs/sources/web-trackers/tracker-setup/index.md)
+    [Page views on web](/docs/sources/web-trackers/tracking-events/page-views/index.md)
+    [Mobile initialization](/docs/sources/mobile-trackers/installation-and-set-up/index.md)
+    [Screen views on mobile](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md)
+  </FeaturedSection>
+
+  <FeaturedSection
+    title="Event Studio"
+    description="Design schemas and tracking plans in a visual interface"
+    href="/docs/event-studio/index.md"
+  >
+    [Tracking plans](/docs/event-studio/tracking-plans/index.md)
+    [Source applications](/docs/event-studio/source-applications/index.md)
+    [Create a data structure](/docs/event-studio/data-structures/manage/index.md)
+    [Snowtype](/docs/event-studio/snowtype/index.md)
+  </FeaturedSection>
+
+  <FeaturedSection
+    title="Pipeline"
+    description="Configure your Collector, enrichments, and data processing"
+    href="/docs/pipeline/index.md"
+  >
+    [Enrichments](/docs/pipeline/enrichments/index.md)
+    [Collector](/docs/pipeline/collector/index.md)
+    [IP Lookup enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md)
+    [Campaign attribution enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md)
+  </FeaturedSection>
+
+  <FeaturedSection
+    title="Data modeling"
+    description="Transform raw events into analytics-ready tables"
+    href="/docs/modeling-your-data/index.md"
+  >
+    [Unified Digital data model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md)
+    [Attribution data model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/index.md)
+    [Incremental processing logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md)
+    [Identity stitching](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/index.md)
+  </FeaturedSection>
+
+  <FeaturedSection
+    title="Destinations"
+    description="Send data to warehouses, lakes, and downstream tools"
+    href="/docs/destinations/index.md"
+  >
+    [Warehouse and lake destinations](/docs/destinations/warehouses-lakes/index.md)
+    [Event forwarding](/docs/destinations/forwarding-events/index.md)
+    [Google Tag Manager Server-Side](/docs/destinations/forwarding-events/google-tag-manager-server-side/index.md)
+    [How to query Snowplow data](/docs/destinations/warehouses-lakes/querying-data/index.md)
+  </FeaturedSection>
+</FeaturedSections>

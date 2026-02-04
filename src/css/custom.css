@@ -1518,3 +1518,9 @@ pre.mermaid {
     display: none;
   }
 }
+
+/* Featured section links - display each link on its own line */
+.featured-section-links a {
+  display: block;
+  padding: 2px 0;
+}

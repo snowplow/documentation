@@ -24,8 +24,8 @@ is_landing_page: true
   />
 
   <CallToActionCard
-    title="Snowplow for Agentic AI"
-    description="Real-time customer context for your AI agents and applications"
+    title="Snowplow Signals for Agentic AI"
+    description="Learn more about our real-time customer context platform"
     href="/docs/signals"
   />
 </CardGrid>

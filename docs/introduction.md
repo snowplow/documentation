@@ -1,5 +1,5 @@
 ---
-title: "Snowplow for Analytics"
+title: "Snowplow for Analytics Documentation"
 slug: "/"
 sidebar_position: 0
 sidebar_label: "Introduction"
@@ -7,6 +7,7 @@ description: "Snowplow CDI delivers validated, enriched event-level data to your
 keywords: ["customer data infrastructure", "cdi", "behavioral data", "event-level data", "composable analytics", "data warehouse"]
 custom_edit_url: null
 pagination_next: null
+is_landing_page: true
 ---
 
 <head>

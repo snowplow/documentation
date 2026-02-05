@@ -16,7 +16,9 @@ function filterSidebarForRoute(items: any[], pathname: string): any[] {
 
   if (isSignalsRoute) {
     // Find the Signals category and return its children (flattened to top level)
-    const signalsCategory = items.find(item => item.label === 'Signals');
+    const signalsCategory = items.find(item =>
+      item.href?.includes('/signals') || item.docId?.includes('signals')
+    );
     if (signalsCategory?.items) {
       // Add Introduction link at the top, pointing to the Signals index page
       const introLink = {
@@ -34,7 +36,7 @@ function filterSidebarForRoute(items: any[], pathname: string): any[] {
   } else {
     // Hide Signals from main docs sidebar
     return items.filter(item =>
-      item.label !== 'Signals' && !item.href?.includes('/signals')
+      !item.href?.includes('/signals') && !item.docId?.includes('signals')
     );
   }
 }

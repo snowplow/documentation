@@ -28,7 +28,7 @@ export const CardGrid: React.FC<CardGridProps> = ({
 interface FeaturedSectionProps {
   title: string
   description: string
-  href: string
+  href?: string
   children?: React.ReactNode
 }
 
@@ -48,12 +48,14 @@ export const FeaturedSection: React.FC<FeaturedSectionProps> = ({
       {children && (
         <div className="featured-section-links text-sm mb-5">{children}</div>
       )}
-      <Link
-        to={href}
-        className="featured-section-button inline-block text-base font-medium px-4 py-2 rounded-md transition-colors"
-      >
-        Learn more →
-      </Link>
+      {href && (
+        <Link
+          to={href}
+          className="featured-section-button inline-block text-base font-medium px-4 py-2 rounded-md transition-colors"
+        >
+          Learn more →
+        </Link>
+      )}
     </div>
   )
 }

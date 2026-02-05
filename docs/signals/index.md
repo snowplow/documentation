@@ -9,23 +9,58 @@ pagination_next: null
 pagination_prev: null
 ---
 
-**Give your AI agents and copilots the context they need to act intelligently with Snowplow Signals**.
+**Give your AI agents the context they need to act intelligently with Snowplow Signals**.
 
 Snowplow Signals equips your AI agents with real-time customer context. It computes user attributes from your Snowplow behavioral data and makes them available with sub-50 ms latency, so your agents can act on validated data instead of guesses.
 
 Use Signals to:
 * Stream enriched user context to chatbots, copilots, and other agentic applications
-* Integrate with your existing AI tools such as LangChain, Amazon Bedrock, Vertex AI, or Vercel
+* Integrate with your existing AI tools
 * Deliver personalized recommendations, dynamic pricing, and adaptive UIs based on current behavior
 * Trigger actions automatically when users meet specific criteria
 
-:::tip Signals Sandbox
+<CardGrid cols={2}>
+  <CallToActionCard
+    title="Snowplow for Composable Analytics"
+    description="Learn more about the Customer Data Infrastructure that's the foundation for Signals"
+    href="/docs"
+  />
+  <CallToActionCard
+    title="Get started with Signals Sandbox"
+    description="Try out Signals for free without a Snowplow account"
+    href="https://try-signals.snowplow.io"
+  />
+</CardGrid>
 
-Try out Signals for free using the [Signals Sandbox](https://try-signals.snowplow.io). Follow the [Signals interventions tutorial](/tutorials/signals-interventions/start/) to explore using Signals in a demo web application. You don't need a Snowplow account to use the Sandbox.
+## Explore Signals
 
-:::
+<CardGrid cols={3} breakout>
 
-Key docs sections to explore:
-[Fundamentals](/docs/signals/concepts/index.md)
-[Define attributes](/docs/signals/define-attributes/index.md)
-[Receive interventions](/docs/signals/receive-interventions/index.md)
+  <FeaturedSection
+    title="Attributes"
+    description="Calculate user attributes in real time"
+  >
+    [Learn about attributes](/docs/signals/concepts/attributes/index.md)
+    [Define attributes](/docs/signals/define-attributes/index.md)
+    [Retrieve attributes](/docs/signals/retrieve-attributes/index.md)
+  </FeaturedSection>
+
+  <FeaturedSection
+    title="Interventions"
+    description="Trigger actions automatically"
+  >
+    [Learn about interventions](/docs/signals/concepts/interventions/index.md)
+    [Define interventions](/docs/signals/define-interventions/index.md)
+    [Subscribe to interventions](/docs/signals/receive-interventions/index.md)
+  </FeaturedSection>
+
+  <FeaturedSection
+    title="Signals Python SDK"
+    description="Use Signals within a notebook"
+  >
+    [Define attributes](/docs/signals/define-attributes/using-python-sdk/index.md)
+    [Define interventions](/docs/signals/define-interventions/using-python-sdk/index.md)
+    [Subscribe to interventions](/docs/signals/receive-interventions/index.md#using-the-signals-python-sdk)
+  </FeaturedSection>
+
+</CardGrid>

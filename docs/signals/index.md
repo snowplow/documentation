@@ -12,24 +12,17 @@ is_landing_page: true
 
 **Give your AI agents the context they need to act intelligently with Snowplow Signals**.
 
-Snowplow Signals equips your AI agents with real-time customer context. It computes user attributes from your Snowplow behavioral data and makes them available with sub-50 ms latency, so your agents can act on validated data instead of guesses.
-
-Use Signals to:
-* Stream enriched user context to chatbots, copilots, and other agentic applications
-* Integrate with your existing AI tools
-* Deliver personalized recommendations, dynamic pricing, and adaptive UIs based on current behavior
-* Trigger actions automatically when users meet specific criteria
-
 <CardGrid cols={2}>
-  <CallToActionCard
-    title="Snowplow for Composable Analytics"
-    description="Learn more about the Customer Data Infrastructure that's the foundation for Signals"
-    href="/docs"
-  />
   <CallToActionCard
     title="Get started with Signals"
     description="Try out Signals for free without a Snowplow account"
     href="https://try-signals.snowplow.io"
+  />
+
+  <CallToActionCard
+    title="Snowplow for Composable Analytics"
+    description="Learn more about the Customer Data Infrastructure that's the foundation for Signals"
+    href="/docs"
   />
 </CardGrid>
 

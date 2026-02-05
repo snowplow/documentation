@@ -16,22 +16,17 @@ is_landing_page: true
 
 **Deliver validated, enriched event data to your warehouse, lake, or stream in real time with Snowplow**.
 
-Snowplow Customer Data Infrastructure (CDI) gives you:
-* Full visibility into how data flows through your pipeline
-* Centralized data governance
-* Real-time operationalization and personalization
-* Privacy and compliance tooling and infrastructure
-
 <CardGrid cols={2}>
-  <CallToActionCard
-    title="Snowplow for Agentic AI"
-    description="Real-time customer context for your AI agents and applications"
-    href="/docs/signals"
-  />
   <CallToActionCard
     title="Get started with Snowplow CDI"
     description="Choose to run Snowplow in your cloud or ours"
     href="/docs/get-started"
+  />
+
+  <CallToActionCard
+    title="Snowplow for Agentic AI"
+    description="Real-time customer context for your AI agents and applications"
+    href="/docs/signals"
   />
 </CardGrid>
 

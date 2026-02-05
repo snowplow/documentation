@@ -58,3 +58,27 @@ is_landing_page: true
   </FeaturedSection>
 
 </CardGrid>
+
+## Get hands on with Signals
+
+<CardGrid cols={3} breakout>
+  <LinkCard
+    title="Build a personalized travel agent"
+    description="Set up a demo travel site, and integrate with Snowplow Signals to personalize content and chatbot responses based on user behavior"
+    href="/tutorials/signals-personalize-travel/intro"
+  />
+
+  <LinkCard
+    title="Score prospects in real time using Signals and ML"
+    description="Try out Signals for live prospect scoring with machine learning"
+    href="/tutorials/signals-ml-prospect-scoring/intro"
+  />
+
+  <LinkCard
+    title="Implement real-time interventions in an ecommerce app"
+    description="Explore Signals interventions in a demo e-shop application"
+    href="/tutorials/signals-interventions/start/"
+  />
+</CardGrid>
+
+[See all tutorials](/tutorials)

@@ -13,6 +13,7 @@ import {
   CardGrid,
   FeaturedSection,
   CallToActionCard,
+  LinkCard,
 } from '@site/src/components/CardGrid'
 
 library.add(fab, fas, far) // Add all icons to the library so you can use them without importing them individually.
@@ -26,4 +27,5 @@ export default {
   CardGrid: CardGrid,
   FeaturedSection: FeaturedSection,
   CallToActionCard: CallToActionCard,
+  LinkCard: LinkCard,
 }

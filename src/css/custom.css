@@ -1562,3 +1562,21 @@ pre.mermaid {
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   text-decoration: none !important;
 }
+
+/* Link cards */
+.link-card {
+  text-decoration: none !important;
+}
+
+.link-card:hover {
+  text-decoration: none !important;
+}
+
+.link-card p.text-foreground {
+  color: hsl(var(--foreground)) !important;
+}
+
+.link-card p.text-muted-foreground {
+  color: hsl(var(--muted-foreground)) !important;
+  font-weight: 400 !important;
+}

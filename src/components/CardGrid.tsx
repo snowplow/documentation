@@ -83,3 +83,27 @@ export const CallToActionCard: React.FC<CallToActionCardProps> = ({
   )
 }
 
+// Link Card - clickable card with same styling as FeaturedSection
+interface LinkCardProps {
+  title: string
+  description: string
+  href: string
+}
+
+export const LinkCard: React.FC<LinkCardProps> = ({
+  title,
+  description,
+  href,
+}) => {
+  return (
+    <Link
+      to={href}
+      className="link-card block rounded-lg bg-card p-6 transition-all duration-200 hover:shadow-md"
+      style={{ border: '1px solid hsl(var(--border))' }}
+    >
+      <p className="mb-3 text-xl font-semibold text-foreground">{title}</p>
+      <p className="text-base text-muted-foreground mb-0">{description}</p>
+    </Link>
+  )
+}
+

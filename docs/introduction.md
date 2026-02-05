@@ -100,3 +100,27 @@ is_landing_page: true
   </FeaturedSection>
 
 </CardGrid>
+
+## Build with Snowplow
+
+<CardGrid cols={3} breakout>
+  <LinkCard
+    title="Implement an abandoned browse system with composable CDP"
+    description="Engage with customers that show intent to purchase but leave without buying"
+    href="/tutorials/abandoned-browse-ccdp/introduction"
+  />
+
+  <LinkCard
+    title="Set up the Unified Digital dbt package"
+    description="Transform your raw web and mobile event data into derived tables"
+    href="/tutorials/unified-digital/intro"
+  />
+
+  <LinkCard
+    title="Use the Snowplow CLI MCP tool"
+    description="Let Claude or other MCP clients help with your data structure management"
+    href="/tutorials/snowplow-cli-mcp/introduction"
+  />
+</CardGrid>
+
+[See all tutorials](/tutorials)

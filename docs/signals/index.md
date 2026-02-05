@@ -1,5 +1,5 @@
 ---
-title: "Snowplow for Agentic AI Documentation"
+title: "Snowplow Signals Documentation"
 sidebar_position: 8
 description: "Snowplow Signals streams enriched user context to AI agents and applications in real time. Integrate with LangChain, Bedrock, Vertex AI, and Vercel to ground agent responses in governed customer data."
 keywords: ["real-time personalization", "agentic ai", "customer context", "signals", "langchain", "ai agents"]

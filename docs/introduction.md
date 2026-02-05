@@ -1,5 +1,5 @@
 ---
-title: "Snowplow for Analytics Documentation"
+title: "Snowplow Documentation"
 slug: "/"
 sidebar_position: 0
 sidebar_label: "Introduction"

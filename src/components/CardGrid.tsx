@@ -40,17 +40,17 @@ export const FeaturedSection: React.FC<FeaturedSectionProps> = ({
 }) => {
   return (
     <div
-      className="rounded-lg bg-card p-5 transition-all duration-200 hover:shadow-md"
-      style={{ border: '1px solid #e5e7eb' }}
+      className="rounded-lg bg-card p-6 transition-all duration-200 hover:shadow-md"
+      style={{ border: '1px solid hsl(var(--border))' }}
     >
-      <p className="mb-2 text-lg font-semibold text-foreground">{title}</p>
-      <p className="text-sm text-muted-foreground mb-4">{description}</p>
+      <p className="mb-3 text-xl font-semibold text-foreground">{title}</p>
+      <p className="text-base text-muted-foreground mb-5">{description}</p>
       {children && (
-        <div className="featured-section-links text-sm mb-4">{children}</div>
+        <div className="featured-section-links text-sm mb-5">{children}</div>
       )}
       <Link
         to={href}
-        className="featured-section-button inline-block text-sm font-medium px-3 py-1.5 rounded-md transition-colors"
+        className="featured-section-button inline-block text-base font-medium px-4 py-2 rounded-md transition-colors"
       >
         Learn more →
       </Link>
@@ -73,10 +73,10 @@ export const CallToActionCard: React.FC<CallToActionCardProps> = ({
   return (
     <Link
       to={href}
-      className="cta-card block rounded-lg p-5 transition-all duration-200"
+      className="cta-card block rounded-lg p-6 transition-all duration-200"
     >
-      <p className="mb-2 text-lg font-semibold text-foreground">{title}</p>
-      <p className="text-sm text-muted-foreground">{description}</p>
+      <p className="mb-3 text-xl font-extrabold text-foreground">{title}</p>
+      <p className="text-base text-muted-foreground">{description}</p>
     </Link>
   )
 }

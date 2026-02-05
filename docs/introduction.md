@@ -35,7 +35,7 @@ Snowplow Customer Data Infrastructure (CDI) gives you:
   />
 </CardGrid>
 
-## Top pages
+## Explore Snowplow
 
 <CardGrid cols={3} breakout>
   <FeaturedSection
@@ -50,8 +50,8 @@ Snowplow Customer Data Infrastructure (CDI) gives you:
   </FeaturedSection>
 
   <FeaturedSection
-    title="Data collection and governance"
-    description="Implement and manage your tracking"
+    title="Event collection"
+    description="Manage your tracking"
     href="/docs/event-studio"
   >
     [Tracking plans](/docs/event-studio/tracking-plans/index.md)
@@ -62,7 +62,7 @@ Snowplow Customer Data Infrastructure (CDI) gives you:
 
   <FeaturedSection
     title="Destinations"
-    description="Send data to warehouses, lakes, and downstream tools"
+    description="Send data to warehouses, lakes, and third-party tools"
     href="/docs/destinations"
   >
     [Warehouse and lake destinations](/docs/destinations/warehouses-lakes/index.md)
@@ -87,8 +87,8 @@ Snowplow Customer Data Infrastructure (CDI) gives you:
     description="Configure your Collector and enrichments"
     href="/docs/pipeline"
   >
-    [Enrichments](/docs/pipeline/enrichments/index.md)
     [Collector](/docs/pipeline/collector/index.md)
+    [Enrichments](/docs/pipeline/enrichments/index.md)
     [IP Lookup enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md)
     [Campaign attribution enrichment](/docs/pipeline/enrichments/available-enrichments/campaign-attribution-enrichment/index.md)
   </FeaturedSection>

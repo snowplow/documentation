@@ -1538,22 +1538,27 @@ pre.mermaid {
   text-decoration: none !important;
 }
 
+[data-theme='dark'] .featured-section-button {
+  background: hsl(var(--primary));
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+[data-theme='dark'] .featured-section-button:hover {
+  background: hsl(var(--primary) / 0.9);
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
 /* Call to Action cards */
 .cta-card {
-  background-color: #f5f3ff;
+  background: linear-gradient(135deg, hsl(var(--primary) / 0.18) 0%, hsl(var(--primary) / 0.06) 35%, hsl(var(--background)) 100%);
   text-decoration: none !important;
+  border: 1px solid hsl(var(--border));
 }
 
 .cta-card:hover {
-  background-color: #ede9fe;
+  background: linear-gradient(135deg, hsl(var(--primary) / 0.24) 0%, hsl(var(--primary) / 0.10) 35%, hsl(var(--background)) 100%);
   box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   text-decoration: none !important;
-}
-
-[data-theme='dark'] .cta-card {
-  background-color: #1e1b4b;
-}
-
-[data-theme='dark'] .cta-card:hover {
-  background-color: #312e81;
 }

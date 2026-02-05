@@ -1537,3 +1537,23 @@ pre.mermaid {
   color: #1f2937;
   text-decoration: none !important;
 }
+
+/* Call to Action cards */
+.cta-card {
+  background-color: #f5f3ff;
+  text-decoration: none !important;
+}
+
+.cta-card:hover {
+  background-color: #ede9fe;
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  text-decoration: none !important;
+}
+
+[data-theme='dark'] .cta-card {
+  background-color: #1e1b4b;
+}
+
+[data-theme='dark'] .cta-card:hover {
+  background-color: #312e81;
+}

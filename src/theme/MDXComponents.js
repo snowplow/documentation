@@ -9,7 +9,11 @@ import { far } from '@fortawesome/free-regular-svg-icons' // Import all regular 
 
 import ThemedImage from '@theme/ThemedImage'
 import ReactMarkdown from 'react-markdown'
-import { FeaturedSections, FeaturedSection } from '@site/src/components/FeaturedSection'
+import {
+  CardGrid,
+  FeaturedSection,
+  CallToActionCard,
+} from '@site/src/components/CardGrid'
 
 library.add(fab, fas, far) // Add all icons to the library so you can use them without importing them individually.
 
@@ -19,6 +23,7 @@ export default {
   Icon: FontAwesomeIcon, // Make the FontAwesomeIcon component available in MDX as <icon />.
   ThemedImage: ThemedImage, // Make ThemedImage available in MDX
   ReactMarkdown: ReactMarkdown, // Make ReactMarkdown available in MDX
-  FeaturedSections: FeaturedSections,
+  CardGrid: CardGrid,
   FeaturedSection: FeaturedSection,
+  CallToActionCard: CallToActionCard,
 }

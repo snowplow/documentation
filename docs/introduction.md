@@ -22,30 +22,26 @@ Snowplow Customer Data Infrastructure (CDI) gives you:
 * Privacy and compliance tooling and infrastructure
 * The ability to distinguish AI agent traffic from human visitors
 
-<FeaturedSections>
-  <FeaturedSection
+<CardGrid cols={2}>
+  <CallToActionCard
     title="Snowplow for Agentic AI"
     description="Snowplow Signals gives you real-time customer context for your AI agents and applications"
-    href="/docs/signals/index.md"
-  >
-  </FeaturedSection>
-
-  <FeaturedSection
+    href="/docs/signals"
+  />
+  <CallToActionCard
     title="Get started with Snowplow CDI"
-    description="TODO"
-    href="/docs/get-started/index.md"
-  >
-  </FeaturedSection>
-
-</FeaturedSections>
+    description="Set up your first pipeline and send test events"
+    href="/docs/get-started"
+  />
+</CardGrid>
 
 ## Top pages
 
-<FeaturedSections>
+<CardGrid cols={3} breakout>
   <FeaturedSection
     title="Fundamentals"
     description="Learn about core Snowplow concepts"
-    href="/docs/fundamentals/index.md"
+    href="/docs/fundamentals"
   >
     [Events](/docs/fundamentals/events/index.md)
     [Entities](/docs/fundamentals/entities/index.md)
@@ -56,7 +52,7 @@ Snowplow Customer Data Infrastructure (CDI) gives you:
   <FeaturedSection
     title="Data collection and governance"
     description="Implement and manage your tracking"
-    href="/docs/event-studio/index.md"
+    href="/docs/event-studio"
   >
     [Tracking plans](/docs/event-studio/tracking-plans/index.md)
     [Source applications](/docs/event-studio/source-applications/index.md)
@@ -67,7 +63,7 @@ Snowplow Customer Data Infrastructure (CDI) gives you:
   <FeaturedSection
     title="Destinations"
     description="Send data to warehouses, lakes, and downstream tools"
-    href="/docs/destinations/index.md"
+    href="/docs/destinations"
   >
     [Warehouse and lake destinations](/docs/destinations/warehouses-lakes/index.md)
     [Event forwarding](/docs/destinations/forwarding-events/index.md)
@@ -78,19 +74,18 @@ Snowplow Customer Data Infrastructure (CDI) gives you:
   <FeaturedSection
     title="Trackers"
     description="Instrument 20+ SDKs for web, mobile, and servers"
-    href="/docs/sources/index.md"
+    href="/docs/sources"
   >
-    [Web tracker setup](/docs/sources/web-trackers/tracker-setup/index.md)
-    [Page views on web](/docs/sources/web-trackers/tracking-events/page-views/index.md)
-    [Mobile initialization](/docs/sources/mobile-trackers/installation-and-set-up/index.md)
-    [Screen views on mobile](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md)
+    [Get started on web](/docs/sources/web-trackers/tracker-setup/index.md)
+    [Track page views on web](/docs/sources/web-trackers/tracking-events/page-views/index.md)
+    [Get started on mobile](/docs/sources/mobile-trackers/installation-and-set-up/index.md)
+    [Track screen views on mobile](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md)
   </FeaturedSection>
-
 
   <FeaturedSection
     title="Pipeline"
     description="Configure your Collector and enrichments"
-    href="/docs/pipeline/index.md"
+    href="/docs/pipeline"
   >
     [Enrichments](/docs/pipeline/enrichments/index.md)
     [Collector](/docs/pipeline/collector/index.md)
@@ -101,12 +96,12 @@ Snowplow Customer Data Infrastructure (CDI) gives you:
   <FeaturedSection
     title="Data modeling"
     description="Transform raw events into analytics-ready tables"
-    href="/docs/modeling-your-data/index.md"
+    href="/docs/modeling-your-data"
   >
-    [Unified Digital data model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md)
-    [Attribution data model](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/index.md)
+    [Unified Digital dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-unified-data-model/index.md)
+    [Attribution dbt package](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/index.md)
     [Incremental processing logic](/docs/modeling-your-data/modeling-your-data-with-dbt/package-mechanics/incremental-processing/index.md)
     [Identity stitching](/docs/modeling-your-data/modeling-your-data-with-dbt/package-features/identity-stitching/index.md)
   </FeaturedSection>
 
-</FeaturedSections>
+</CardGrid>

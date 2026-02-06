@@ -1,3 +1,10 @@
+:::note Catalog options
+
+We support different catalog options for Iceberg lakes.
+The instructions below are not necessary when using Snowflake Open Catalog.
+
+:::
+
 The [Iceberg documentation](https://iceberg.apache.org/docs/latest/maintenance/) makes recommendations for running regular maintenance jobs to get the best performance from your lake.  This guide expands on those recommendations specifically for your Snowplow events lake.
 
 The Snowplow Lake Loader **does not** automatically run the maintenance tasks described below.

@@ -51,3 +51,5 @@ The following is a list of Organizational Policy constraints that we require to 
 - `constraints/iam.disableServiceAccountCreation`
 - `constraints/iam.disableServiceAccountKeyCreation`
 - `constraints/sql.restrictPublicIp`
+- `constraints/sql.restrictAuthorizedNetworks`
+- `constraints/sql.restrictNoncompliantResourceCreation`

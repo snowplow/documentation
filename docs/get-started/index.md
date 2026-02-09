@@ -2,8 +2,8 @@
 title: "First steps with Snowplow"
 sidebar_position: 1
 sidebar_label: "Get started"
-description: "Details on where and how Snowplow is deployed"
-keywords: ["Snowplow CDI", "Private Managed Cloud", "Cloud", "Community Edition", "Self-Hosted"]
+description: "Compare Snowplow deployment options including CDI Private Managed Cloud, CDI Cloud, Community Edition, and Self-Hosted to choose the right platform for your organization."
+keywords: ["Snowplow CDI", "Private Managed Cloud", "CDI Cloud", "Community Edition", "Self-Hosted", "deployment options", "behavioral data platform", "data infrastructure", "getting started"]
 ---
 
 Snowplow is a Customer Data Infrastructure (CDI) platform capable of processing billions of events per day:

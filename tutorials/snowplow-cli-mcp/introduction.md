@@ -30,8 +30,8 @@ The Snowplow CLI MCP (Model Context Protocol) tool integrates Snowplow's data st
 
 ## Prerequisites
 
-- Snowplow CLI installed ([installation guide](/docs/event-studio/snowplow-cli/#install))
-- Snowplow CLI configured with your Console credentials ([configuration guide](/docs/event-studio/snowplow-cli/#configure))
+- Snowplow CLI installed ([installation guide](/docs/event-studio/programmatic-management/snowplow-cli/#install))
+- Snowplow CLI configured with your Console credentials ([configuration guide](/docs/event-studio/programmatic-management/snowplow-cli/#configure))
 - Claude Desktop or another MCP-compatible client (Cursor or Copilot)
 - **Filesystem access**: if using Claude Desktop, you must run alongside an MCP filesystem server (e.g., `@modelcontextprotocol/server-filesystem`) to enable file operations. Other MCP clients (Cursor, Copilot, etc.) have filesystem access by default.
 

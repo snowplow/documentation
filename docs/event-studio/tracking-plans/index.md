@@ -1,6 +1,6 @@
 ---
 title: "Defining the data to collect with Tracking Plans"
-sidebar_position: 5
+sidebar_position: 30
 sidebar_label: "Tracking plans"
 description: "Create logical groupings of behavioral data by domain with explicit ownership, event specifications, and source applications to improve governance and collaboration across your organization."
 keywords: ["tracking plans", "event specifications", "data ownership", "data governance", "tracking implementation"]

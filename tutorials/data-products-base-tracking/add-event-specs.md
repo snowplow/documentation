@@ -19,7 +19,7 @@ To make sure your intention on this Event Specification is clear and also instru
 ![](./images/implementation-instructions.png)
 
 :::tip
-Information for implementation instructions, cardinality rules and trigger details will be available for the implementation engineers directly through Snowtype [instructions feature](/docs/event-studio/snowtype/using-the-cli/#generating-event-specification-instructions).
+Information for implementation instructions, cardinality rules and trigger details will be available for the implementation engineers directly through Snowtype [instructions feature](/docs/event-studio/implement-tracking/snowtype/using-the-cli/#generating-event-specification-instructions).
 :::
 
 Now on the Entity data structures section, click `Add existing data structure`, find and select the todo entity created earlier. On the next modal step you can define the expected cardinality, of this entity on the event specification. For the todo entity, you want to have exactly 1 instance.

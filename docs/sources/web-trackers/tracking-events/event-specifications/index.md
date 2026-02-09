@@ -14,7 +14,7 @@ The plugin allows you to integrate with Event Specifications for a selected set 
 The plugin will automatically add an Event Specification context to the events matching the configuration added.
 
 :::note
-The plugin is available since version 3.23 of the tracker and is currently only available for Tracking Plans created using the [Media Web template](/docs/event-studio/tracking-plans/tracking-plan-templates/#media-web).
+The plugin is available since version 3.23 of the tracker and is currently only available for Tracking Plans created using the [Media Web template](/docs/event-studio/tracking-plans/templates/#media-web).
 :::
 
 ## Install plugin

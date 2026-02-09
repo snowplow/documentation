@@ -37,7 +37,7 @@ This table shows the support for page ping tracking across the main client-side 
 | [Python](/docs/sources/python-tracker/tracking-specific-events/index.md)           | ✅         | 0.8.0         | ❌             | Detect activity and track manually |
 | [Google Tag Manager](/docs/sources/google-tag-manager/snowplow-template/index.md)  | ✅         | v3            | ✅             |                                    |
 
-We recommend using the [Base web tracking plan template](/docs/event-studio/tracking-plans/tracking-plan-templates/index.md#base-web) for web tracking. It includes page pings.
+We recommend using the [Base web tracking plan template](/docs/event-studio/tracking-plans/templates/index.md#base-web) for web tracking. It includes page pings.
 
 ## Screen engagement
 
@@ -57,7 +57,7 @@ This table shows the support for screen engagement tracking across the main clie
 | Roku                                                                                                                   | ❌         |               |               |                |
 | Google Tag Manager                                                                                                     | ❌         |               |               |                |
 
-We recommend using the [Base mobile tracking plan template](/docs/event-studio/tracking-plans/tracking-plan-templates/index.md#base-mobile) for mobile tracking. It includes screen end events.
+We recommend using the [Base mobile tracking plan template](/docs/event-studio/tracking-plans/templates/index.md#base-mobile) for mobile tracking. It includes screen end events.
 
 ### Screen end event
 

@@ -1,7 +1,7 @@
 ---
 title: "MCP server"
 sidebar_label: "MCP server"
-sidebar_position: 10
+sidebar_position: 80
 description: "Use the Snowplow CLI MCP server to interact with your tracking plans through AI assistants."
 keywords: ["mcp", "model context protocol", "ai", "cli", "tracking plan"]
 date: "2026-01-08"
@@ -10,7 +10,7 @@ date: "2026-01-08"
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 
-The [Snowplow CLI](/docs/event-studio/snowplow-cli/index.md) includes a local Model Context Protocol (MCP) server that enables natural language interaction with AI assistants for creating, validating, and managing your Snowplow tracking plans. This allows you to:
+The [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md) includes a local Model Context Protocol (MCP) server that enables natural language interaction with AI assistants for creating, validating, and managing your Snowplow tracking plans. This allows you to:
 
 - Create and validate data structures through conversation
 - Analyze tracking requirements and suggest implementations
@@ -24,7 +24,7 @@ The MCP server allows AI assistants to interact with the Snowplow CLI using the 
 
 ## Install the MCP server
 
-The MCP server is included with [Snowplow CLI](/docs/event-studio/snowplow-cli/index.md). Start by installing the CLI and authenticating to your Snowplow account.
+The MCP server is included with [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md). Start by installing the CLI and authenticating to your Snowplow account.
 
 To connect your AI client to the MCP server, provide a configuration object. The exact structure depends which client you are using, and whether you're connecting to the Snowplow CLI installed locally or via npx. For example:
 
@@ -130,7 +130,7 @@ To get AI support with your Snowplow tracking plans, start a new conversation an
 
 You can then ask it for help. It has access to your existing data structures, tracking plans, or source application definitions. The assistant will automatically validate any file changes using the included validation tools.
 
-Use the standard [Snowplow CLI commands](/docs/event-studio/snowplow-cli/reference/index.md) to publish your changes to [Console](https://console.snowplowanalytics.com) when ready, using the standard Snowplow CLI commands such as `snowplow-cli ds publish`.
+Use the standard [Snowplow CLI commands](/docs/event-studio/programmatic-management/snowplow-cli/reference/index.md) to publish your changes to [Console](https://console.snowplowanalytics.com) when ready, using the standard Snowplow CLI commands such as `snowplow-cli ds publish`.
 
 :::note Publish separately
 The MCP server creates and validates files on your local filesystem only.

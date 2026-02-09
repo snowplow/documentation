@@ -280,7 +280,7 @@ When editing an event specification, it can be deprecated by setting the `status
 - `spec.version`: If provided, it should be equal to or greater than zero, should not exist, and be greater than the last published version
 - `spec.status`: If provided, it should match one of `draft`, `published`, or `deprecated`
 - `spec.entities`: If provided, it will validate that the entities, `spec.entities.tracked` and `spec.entities.enriched`, are not duplicated and that they exist
-- `sceeventSpecnario.dataProductId`: If provided, it will validate that the tracking plan exists
+- `spec.dataProductId`: If provided, it will validate that the tracking plan exists
 
 :::info
 This endpoint will trigger [**compatibility checking**](#compatibility-checks) if `event.source` and `event.schema` are defined.

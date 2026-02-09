@@ -107,7 +107,7 @@ Please note:
     - one for data structure metadata as value to the `meta` key
     - one for the schema itself as value to the `data` key
 - this example uses the synchronous version of validation that responds with the result immediately. There is also an asynchronous version available that returns a request ID that you can later poll to get the result.
-- you can add metadata specific to your organisation to the schema as key/value pairs in the `customData` object. See '[Managing Meta Data](#managing-meta-data)' for more information.
+- you can add metadata specific to your organization to the schema as key/value pairs in the `customData` object. See '[Managing Meta Data](#managing-meta-data)' for more information.
 
 ## Deployments
 

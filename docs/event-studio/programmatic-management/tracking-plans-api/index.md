@@ -143,7 +143,7 @@ The following is the minimum accepted payload. It will create a subscription for
 
 If you want to subscribe a different user you will need to populate an additional field, `recipient`, with that user's email address.
 
-When a subscription is created, it will send a confirmation email to the recipient (default user or third user). Clicking the confirmation link in that email will direct the recipient to the following URL and and mark the subscription as confirmed:
+When a subscription is created, it will send a confirmation email to the recipient (default user or third user). Clicking the confirmation link in that email will direct the recipient to the following URL and mark the subscription as confirmed:
 
 `**POST** /organizations/{organizationId}/data-products/v1/{dataProductId}/subscriptions/{subscriptionId}/actions/confirm`
 

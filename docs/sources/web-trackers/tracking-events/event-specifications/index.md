@@ -2,6 +2,8 @@
 title: "Integrating with your event specifications on web"
 sidebar_label: "Event specifications"
 sidebar_position: 115
+description: "How to install and configure the event specifications plugin for the Snowplow web tracker to automatically add event specification context to tracked events."
+keywords: ["event specifications", "web tracker", "browser plugin", "tracking plan", "JavaScript tracker"]
 ---
 
 ```mdx-code-block

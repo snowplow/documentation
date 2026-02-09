@@ -2,6 +2,8 @@
 title: "Iglu Server configuration reference"
 date: "2021-08-03"
 sidebar_position: 0
+description: "Complete reference of all configuration options for Iglu Server, including database, networking, webhooks, and advanced settings."
+keywords: ["Iglu Server", "configuration", "schema registry", "Postgres", "HOCON"]
 ---
 
 This is a complete list of the options that can be configured in the Iglu Server HOCON config file. The [example configs in github](https://github.com/snowplow-incubator/iglu-server/tree/master/config) show how to prepare an input file.

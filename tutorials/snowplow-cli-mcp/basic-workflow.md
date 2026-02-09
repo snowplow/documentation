@@ -2,6 +2,8 @@
 position: 3
 title: "Create and publish a data structure using the Snowplow CLI MCP tool"
 sidebar_label: "Create and publish a data structure"
+description: "Step-by-step walkthrough of creating, validating, and publishing a data structure and tracking plan using the Snowplow CLI MCP tool."
+keywords: ["Snowplow CLI", "MCP", "data structures", "tracking plans", "validation"]
 ---
 
 Here's a typical interaction pattern for creating a data structure.

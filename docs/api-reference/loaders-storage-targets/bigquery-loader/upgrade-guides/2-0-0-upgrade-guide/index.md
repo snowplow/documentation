@@ -2,6 +2,8 @@
 title: "BigQuery Loader 2.0.0 upgrade guide"
 sidebar_label: "2.0.0 upgrade guide"
 sidebar_position: -20
+description: "Guide for upgrading to BigQuery Loader 2.0.0, including configuration changes, new column naming strategy, and recovery columns for schema evolution."
+keywords: ["BigQuery Loader", "upgrade guide", "schema evolution", "recovery columns", "BigQuery"]
 ---
 
 ## Configuration

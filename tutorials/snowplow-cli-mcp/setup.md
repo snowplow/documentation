@@ -2,6 +2,8 @@
 position: 2
 title: "Install the Snowplow CLI and configure an MCP client"
 sidebar_label: "Install the Snowplow CLI"
+description: "How to install the Snowplow CLI and configure MCP clients such as Claude Desktop, VS Code, and Cursor."
+keywords: ["Snowplow CLI", "MCP", "installation", "Claude Desktop", "VS Code", "Cursor"]
 ---
 
 To use the MCP tools with your AI assistant, you'll need to install the Snowplow CLI and configure your chosen MCP client. This guide walks you through both steps.

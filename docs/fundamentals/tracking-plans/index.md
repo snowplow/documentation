@@ -3,6 +3,7 @@ title: "Introduction to tracking plans"
 sidebar_position: 7
 sidebar_label: "Tracking plans"
 description: "Snowplow's tracking plans enable organizations to easily generate AI and BI-ready data that is reliable, clear, compliant, accurate, and predictable"
+keywords: ["tracking plans", "event specifications", "data governance", "data quality", "data contracts"]
 ---
 
 Tracking plans are Snowplow's solution to helping organizations more easily create and democratise behavioral data. By creating well-documented datasets, that are both human and machine readable, you can more easily collaborate around data and unlock self-service analytics at scale.

@@ -190,20 +190,20 @@ Here is an example configuration using all relevant databases on MaxMind's free 
 
 This enrichment populates atomic table fields prefixed with "geo_" and "ip_" [seen here](https://github.com/snowplow/iglu-central/blob/8ff48b2485b3c95447e38a9bb925ef3f5266112c/schemas/com.snowplowanalytics.snowplow/atomic/jsonschema/1-0-0#L82).
 
-| COLUMN NAME       | SAMPLE DATA   | PURPOSE                                                      | SOURCE DATABASE                            |
-| ----------------- | ------------- | ------------------------------------------------------------ | ------------------------------------------ |
-| `geo_country`     | GB            | Country of IP origin                                         | `GeoIP2-City.mmdb` or `GeoLite2-City.mmdb` |
-| `geo_region`      | ENG           | Region of IP origin                                          | `GeoIP2-City.mmdb` or `GeoLite2-City.mmdb` |
-| `geo_city`        | London        | City of IP origin                                            | `GeoIP2-City.mmdb` or `GeoLite2-City.mmdb` |
-| `geo_zipcode`     | EC2A          | Zip (postal) code of IP origin                               | `GeoIP2-City.mmdb` or `GeoLite2-City.mmdb` |
-| `geo_latitude`    | 51.5237       | An approximate latitude (coordinates)                        | `GeoIP2-City.mmdb` or `GeoLite2-City.mmdb` |
-| `geo_longitude`   | \-0.089       | An approximate longitude (coordinates)                       | `GeoIP2-City.mmdb` or `GeoLite2-City.mmdb` |
-| `geo_region_name` | England       | Region of IP origin                                          | `GeoIP2-City.mmdb` or `GeoLite2-City.mmdb` |
-| `geo_timezone`    | Europe/London | Timezone of IP origin                                        | `GeoIP2-City.mmdb` or `GeoLite2-City.mmdb` |
-| `ip_isp`          | AT&T Services | ISP name                                                     | `GeoIP2-ISP.mmdb`                          |
-| `ip_organization` | AT&T Services | Organization name for larger networks                        | `GeoIP2-ISP.mmdb`                          |
-| `ip_domain`       | att.net       | Second level domain name                                     | `GeoIP2-Domain.mmdb`                       |
-| `ip_netspeed`     | Cellular      | Indication of connection type (dial-up, cellular, cable/DSL) | `GeoIP2-Connection-Type.mmdb`              |
+| COLUMN NAME       | SAMPLE DATA   | PURPOSE                                                      | SOURCE DATABASE  |
+| ----------------- | ------------- | ------------------------------------------------------------ | ---------------- |
+| `geo_country`     | GB            | Country of IP origin                                         | `geo`            |
+| `geo_region`      | ENG           | Region of IP origin                                          | `geo`            |
+| `geo_city`        | London        | City of IP origin                                            | `geo`            |
+| `geo_zipcode`     | EC2A          | Zip (postal) code of IP origin                               | `geo`            |
+| `geo_latitude`    | 51.5237       | An approximate latitude (coordinates)                        | `geo`            |
+| `geo_longitude`   | \-0.089       | An approximate longitude (coordinates)                       | `geo`            |
+| `geo_region_name` | England       | Region of IP origin                                          | `geo`            |
+| `geo_timezone`    | Europe/London | Timezone of IP origin                                        | `geo`            |
+| `ip_isp`          | AT&T Services | ISP name                                                     | `isp`            |
+| `ip_organization` | AT&T Services | Organization name for larger networks                        | `isp`            |
+| `ip_domain`       | att.net       | Second level domain name                                     | `domain`         |
+| `ip_netspeed`     | Cellular      | Indication of connection type (dial-up, cellular, cable/DSL) | `connectionType` |
 
 
 Starting with Enrich 6.7.0, this enrichment supports ASN information, which is useful for detecting bot traffic coming from cloud computing providers.

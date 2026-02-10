@@ -23,12 +23,12 @@ MaxMind offers a free tier and a paid tier of databases, which can be used with 
 From the free tier you can provide two databases to Snowplow:
 
 - [GeoLite2 City Database](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data/), which contains geographic information (e.g. country) by IP address
-- [GeoLite2 ASN Database](https://dev.maxmind.com/geoip/docs/databases/asn/), which contains autonomous system numbers by IP address
+- [GeoLite2 ASN Database](https://dev.maxmind.com/geoip/docs/databases/asn/) (since enrich version 6.7.0), which contains autonomous system numbers by IP address
 
 From the paid tier you can provide four databases to Snowplow:
 
 - [GeoIP2 City](https://www.maxmind.com/en/geoip2-city?rld=snowplow), which also contains geographic information, but with more precision and coverage than the GeoLite2 City Database
-- [GeoIP2 ISP](https://www.maxmind.com/en/geoip2-isp-database?rld=snowplow), which contains information about the ISP serving that IP
+- [GeoIP2 ISP](https://www.maxmind.com/en/geoip2-isp-database?rld=snowplow), which contains information about the ISP serving that IP, and a more complete ASN mapping compared to the GeoLite2 ASN Database
 - [GeoIP2 Domain](https://www.maxmind.com/en/geoip2-domain-name-database?rld=snowplow), which contains information about the domain at that IP address
 - [GeoIP2 Connection Type](https://www.maxmind.com/en/geoip2-connection-type-database?rld=snowplow), which contains information about the connection type at that IP address.
 
@@ -130,9 +130,9 @@ When configuring the enrichment you will replace the following string `my-priva
 
 #### Example full configuration
 
-To extend this enrichment for the additional databases offered by Maxmind we would simply repeat the process for the other databases:
+To extend this enrichment for the additional databases offered by Maxmind we would simply repeat the process for the other databases.
 
-##### On AWS
+Here is an example configuration using all relevant databases on MaxMind's paid tier:
 
 ```json
 {
@@ -163,7 +163,7 @@ To extend this enrichment for the additional databases offered by Maxmind we wou
 }
 ```
 
-##### On GCS
+Here is an example configuration using all relevant databases on MaxMind's free tier:
 
 ```json
 {
@@ -174,20 +174,12 @@ To extend this enrichment for the additional databases offered by Maxmind we wou
         "enabled": true,
         "parameters": {
             "geo": {
-                "database": "GeoIP2-City.mmdb",
-                "uri": "gs://my-private-bucket/third-party/maxmind"
+                "database": "GeoLite2-City.mmdb",
+                "uri": "s3://my-private-bucket/third-party/maxmind"
             },
-            "isp": {
-                "database": "GeoIP2-ISP.mmdb",
-                "uri": "gs://my-private-bucket/third-party/maxmind"
-            },
-            "domain": {
-                "database": "GeoIP2-Domain.mmdb",
-                "uri": "gs://my-private-bucket/third-party/maxmind"
-            },
-            "connectionType": {
-                "database": "GeoIP2-Connection-Type.mmdb",
-                "uri": "gs://my-private-bucket/third-party/maxmind"
+            "asn": {
+                "database": "GeoLite2-ASN.mmdb",
+                "uri": "s3://my-private-bucket/third-party/maxmind"
             }
         }
     }
@@ -198,23 +190,25 @@ To extend this enrichment for the additional databases offered by Maxmind we wou
 
 This enrichment populates atomic table fields prefixed with "geo_" and "ip_" [seen here](https://github.com/snowplow/iglu-central/blob/8ff48b2485b3c95447e38a9bb925ef3f5266112c/schemas/com.snowplowanalytics.snowplow/atomic/jsonschema/1-0-0#L82).
 
-| COLUMN NAME       | SAMPLE DATA   | PURPOSE                                                      |
-| ----------------- | ------------- | ------------------------------------------------------------ |
-| `ip_isp`          |               | ISP name                                                     |
-| `ip_organization` |               | Organization name for larger networks                        |
-| `ip_domain`       | example.com   | Second level domain name                                     |
-| `ip_netspeed`     | Cellular      | Indication of connection type (dial-up, cellular, cable/DSL) |
-| `geo_country`     | GB            | Country of IP origin                                         |
-| `geo_region`      | ENG           | Region of IP origin                                          |
-| `geo_city`        | London        | City of IP origin                                            |
-| `geo_zipcode`     | EC2A          | Zip (postal) code of IP origin                               |
-| `geo_latitude`    | 51.5237       | An approximate latitude (coordinates)                        |
-| `geo_longitude`   | \-0.089       | An approximate longitude (coordinates)                       |
-| `geo_region_name` | England       | Region of IP origin                                          |
-| `geo_timezone`    | Europe/London | Timezone of IP origin                                        |
+| COLUMN NAME       | SAMPLE DATA   | PURPOSE                                                      | SOURCE DATABASE                            |
+| ----------------- | ------------- | ------------------------------------------------------------ | ------------------------------------------ |
+| `geo_country`     | GB            | Country of IP origin                                         | `GeoIP2-City.mmdb` or `GeoLite2-City.mmdb` |
+| `geo_region`      | ENG           | Region of IP origin                                          | `GeoIP2-City.mmdb` or `GeoLite2-City.mmdb` |
+| `geo_city`        | London        | City of IP origin                                            | `GeoIP2-City.mmdb` or `GeoLite2-City.mmdb` |
+| `geo_zipcode`     | EC2A          | Zip (postal) code of IP origin                               | `GeoIP2-City.mmdb` or `GeoLite2-City.mmdb` |
+| `geo_latitude`    | 51.5237       | An approximate latitude (coordinates)                        | `GeoIP2-City.mmdb` or `GeoLite2-City.mmdb` |
+| `geo_longitude`   | \-0.089       | An approximate longitude (coordinates)                       | `GeoIP2-City.mmdb` or `GeoLite2-City.mmdb` |
+| `geo_region_name` | England       | Region of IP origin                                          | `GeoIP2-City.mmdb` or `GeoLite2-City.mmdb` |
+| `geo_timezone`    | Europe/London | Timezone of IP origin                                        | `GeoIP2-City.mmdb` or `GeoLite2-City.mmdb` |
+| `ip_isp`          | AT&T Services | ISP name                                                     | `GeoIP2-ISP.mmdb`                          |
+| `ip_organization` | AT&T Services | Organization name for larger networks                        | `GeoIP2-ISP.mmdb`                          |
+| `ip_domain`       | att.net       | Second level domain name                                     | `GeoIP2-Domain.mmdb`                       |
+| `ip_netspeed`     | Cellular      | Indication of connection type (dial-up, cellular, cable/DSL) | `GeoIP2-Connection-Type.mmdb`              |
 
 
-Additionally, if ASN data is available, this enrichment adds a new derived entity to the enriched event with [this schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/asn/jsonschema/1-0-0) (since enrich 6.7.0).
+Starting with Enrich 6.7.0, this enrichment supports ASN information, which is useful for detecting bot traffic coming from cloud computing providers.
+
+If ASN data is available for a given IP address through one of the supplied databases (either ISP or the free ASN database), the enrichment adds a derived entity to the enriched event with [this schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/asn/jsonschema/1-0-0).
 
 Here is an example of a derived entity attached by this enrichment:
 
@@ -222,8 +216,8 @@ Here is an example of a derived entity attached by this enrichment:
 {
     "schema": "iglu:com.snowplowanalytics.snowplow/asn/jsonschema/1-0-0",
     "data": {
-        "number": 64496,
-        "organization": "Example organization"
+        "number": 16509,
+        "organization": "Amazon.com, Inc."
     }
 }
 ```

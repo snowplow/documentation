@@ -77,7 +77,7 @@ JQEOT
 }
 ```
 
-Example: 
+Example: Any entity entry matches the condition 
 
 ```
 transform {

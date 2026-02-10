@@ -42,11 +42,9 @@ https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/
 
 ## Filtering examples
 
-The following examples demonstrate common filtering patterns for Snowplow enriched events.
+The following examples demonstrate common filtering patterns for Snowplow enriched events. You can filter Snowplow enriched events based on any field in the data. 
 
-Filter Snowplow enriched events based on any field in the data. Use this instead of the deprecated `spEnrichedFilter`, `spEnrichedFilterContext`, and `spEnrichedFilterUnstructEvent` transformations.
-
-Filter where an atomic field matches any value from a list.
+Match an atomic field to any value from a list:
 
 ```hcl
 transform {
@@ -62,9 +60,9 @@ JQEOT
 }
 ```
 
-Filter using a regex match against a singular entity.
+Regex match against a singular entity:
 
-```
+```hcl
 transform {
   use "jqFilter" {
 
@@ -79,9 +77,9 @@ JQEOT
 }
 ```
 
-Filter where any entity entry matches the condition.
+Filter where any entity entry matches the condition:
 
-```
+```hcl
 transform {
   use "jqFilter" {
 
@@ -95,9 +93,9 @@ JQEOT
 }
 ```
 
-Filter for an exact match on a self-describing event field.
+Filter for an exact match on a self-describing event field:
 
-```
+```hcl
 transform {
   use "jqFilter" {
     # Keep only "sku" of "test-data" in custom event

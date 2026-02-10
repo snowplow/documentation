@@ -40,38 +40,69 @@ Every configuration option:
 https://github.com/snowplow/snowbridge/blob/v${versions.snowbridge}/assets/docs/configuration/transformations/builtin/jqFilter-full-example.hcl
 `}</CodeBlock>
 
-## Filtering based on entity fields
+## Filtering examples
 
-You can use `jqFilter` to filter Snowplow enriched events based on fields within [entities](/docs/fundamentals/entities/index.md). This replaces the deprecated `spEnrichedFilterContext` transformation.
+You can use `jqFilter` to filter Snowplow enriched events based on any field in the data. This replaces the deprecated `spEnrichedFilter`, `spEnrichedFilterContext`, and `spEnrichedFilterUnstructEvent` transformations.
 
-To keep events where a field in an entity matches specific values:
+Example: Atomic field matches any of a list of values:
 
 ```hcl
 transform {
   use "jqFilter" {
-    jq = ".contexts_com_acme_app_1[0].siteId | IN(536870919, 536870924)"
+
+    # Keep only web and mobile data
+    jq_command = <<JQEOT
+    .platform | IN("web", "mobile")
+JQEOT
+
+    snowplow_mode = true
   }
 }
 ```
 
-This keeps events where the `siteId` field in `contexts_com_acme_app_1` equals either `536870919` or `536870924`. Note that this checks only the first instance of the entity, which covers the vast majority of use cases.
+Example: Regex match against a singlular entity:
 
-You can also use regex patterns with jq's `test` function:
-
-```hcl
+```
 transform {
   use "jqFilter" {
-    jq = ".contexts_com_acme_env_context_1[0].environment | test(\"^(prod|staging)$\")"
+    # Keep only "environment" matching a regex in custom event
+    # `// ""` is needed as `null` is not regex compatible
+    jq_command = <<JQEOT
+    .contexts_com_acme_env_context_1.environment // "" | test("^prod")
+JQEOT
+
+    snowplow_mode = true
   }
 }
 ```
 
-If you need to check all instances of an entity (when the same entity is attached multiple times), you can use the `any` function:
+Example: 
 
-```hcl
+```
 transform {
   use "jqFilter" {
-    jq = ".contexts_com_acme_env_context_1 | any(.[]; .environment == \"prod\" or .environment == \"staging\")"
+
+    # Keep if any entry's environment matches one of two values:
+    jq = <<JQEOT
+    .contexts_com_acme_env_context_1 | any(.[]; .environment == "prod" or .environment == "staging")
+JQEOT
+
+    snowplow_mode = true
+  }
+}
+```
+
+Example: Exact match on an unstruct event field:
+
+```
+transform {
+  use "jqFilter" {
+    # Keep only "sku" of "test-data" in custom event
+    jq_command = <<JQEOT
+    .unstruct_event_com_acme_my_custom_event_1.sku == "test-data"
+JQEOT
+
+    snowplow_mode = true
   }
 }
 ```

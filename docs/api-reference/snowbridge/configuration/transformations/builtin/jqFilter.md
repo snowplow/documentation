@@ -65,6 +65,7 @@ Example: Regex match against a singlular entity:
 ```
 transform {
   use "jqFilter" {
+
     # Keep only "environment" matching a regex in custom event
     # `// ""` is needed as `null` is not regex compatible
     jq_command = <<JQEOT
@@ -83,7 +84,7 @@ transform {
   use "jqFilter" {
 
     # Keep if any entry's environment matches one of two values:
-    jq = <<JQEOT
+    jq_command = <<JQEOT
     .contexts_com_acme_env_context_1 | any(.[]; .environment == "prod" or .environment == "staging")
 JQEOT
 

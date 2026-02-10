@@ -18,16 +18,16 @@ Some of the databases MaxMind maintains require a commercial subscription with M
 
 ### 1. Decide which databases you’d like to use and download them
 
-MaxMind offers a free tier and a paid for tier of databases, which can be used with Snowplow.
+MaxMind offers a free tier and a paid tier of databases, which can be used with Snowplow.
 
-From the free tier then you can provide two databases to Snowplow:
+From the free tier you can provide two databases to Snowplow:
 
 - [GeoLite2 City Database](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data/), which contains geographic information (e.g. country) by IP address
 - [GeoLite2 ASN Database](https://dev.maxmind.com/geoip/docs/databases/asn/), which contains autonomous system numbers by IP address
 
-From the paid for tier you can provide four databases to Snowplow:
+From the paid tier you can provide four databases to Snowplow:
 
-- [GeoIP2 City](https://www.maxmind.com/en/geoip2-city?rld=snowplow), which also contains geographic information, but that with a lot more precision and coverage than that found in the GeoLite2 Free Database
+- [GeoIP2 City](https://www.maxmind.com/en/geoip2-city?rld=snowplow), which also contains geographic information, but with more precision and coverage than the GeoLite2 City Database
 - [GeoIP2 ISP](https://www.maxmind.com/en/geoip2-isp-database?rld=snowplow), which contains information about the ISP serving that IP
 - [GeoIP2 Domain](https://www.maxmind.com/en/geoip2-domain-name-database?rld=snowplow), which contains information about the domain at that IP address
 - [GeoIP2 Connection Type](https://www.maxmind.com/en/geoip2-connection-type-database?rld=snowplow), which contains information about the connection type at that IP address.
@@ -214,16 +214,16 @@ This enrichment populates atomic table fields prefixed with "geo_" and "ip_" [se
 | `geo_timezone`    | Europe/London | Timezone of IP origin                                        |
 
 
-Additionally, if ASN data is available then this enrichment adds a new derived context to the enriched event with [this schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/asn/jsonschema/1-0-0) (since enrich 6.7.0).
+Additionally, if ASN data is available, this enrichment adds a new derived entity to the enriched event with [this schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/asn/jsonschema/1-0-0) (since enrich 6.7.0).
 
-Here is an example of a derived context attached by this enrichment:
+Here is an example of a derived entity attached by this enrichment:
 
 ```json
 {
-  "schema":"iglu:com.snowplowanalytics.snowplow/asn/jsonschema/1-0-0",
+    "schema": "iglu:com.snowplowanalytics.snowplow/asn/jsonschema/1-0-0",
     "data": {
         "number": 64496,
         "organization": "Example organization"
-   }
+    }
 }
 ```

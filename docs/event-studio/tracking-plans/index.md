@@ -1,12 +1,12 @@
 ---
 title: "Defining the data to collect with Tracking Plans"
-sidebar_position: 30
+sidebar_position: 20
 sidebar_label: "Tracking plans"
 description: "Create logical groupings of behavioral data by domain with explicit ownership, event specifications, and source applications to improve governance and collaboration across your organization."
 keywords: ["tracking plans", "event specifications", "data ownership", "data governance", "tracking implementation"]
 ---
 
-As described in [Tracking Plans Introduction](/docs/fundamentals/tracking-plans/index.md), a tracking plan is a logical grouping of the data you collect as an organisation by domain, with an explicit owner.
+As described in [Tracking Plans Introduction](/docs/fundamentals/tracking-plans/index.md), a tracking plan is a logical grouping of the data you collect as an organization by domain, with an explicit owner.
 
 With tracking plans, you can:
 

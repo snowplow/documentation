@@ -1,7 +1,7 @@
 ---
 title: "Discover and manage events with the Event Catalog"
 sidebar_label: "Event Catalog"
-sidebar_position: 35
+sidebar_position: 30
 description: "Browse, search, and manage all event specifications across tracking plans from a single location to improve event discoverability and governance."
 keywords: ["event catalog", "event specifications", "event discovery", "event governance", "tracking plans"]
 date: "2025-02-05"

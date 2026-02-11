@@ -6,7 +6,7 @@ description: "Configure a Snowplow Signals service to group attribute groups for
 keywords: ["signals services", "snowplow console"]
 ---
 
-[Services](/docs/signals/concepts/#services) group attribute groups together for serving to your applications.
+[Services](/docs/signals/concepts/attributes/#services) group attribute groups together for serving to your applications.
 
 To create a service, go to **Signals** > **Services** in Snowplow Console and click **Create service**.
 

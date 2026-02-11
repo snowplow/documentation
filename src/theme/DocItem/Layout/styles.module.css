@@ -8,3 +8,8 @@
     max-width: 75% !important;
   }
 }
+
+.landingPage h1:first-of-type {
+  font-size: 3rem;
+  line-height: 1.1;
+}

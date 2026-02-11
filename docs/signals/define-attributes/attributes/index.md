@@ -6,7 +6,7 @@ description: "Define individual attributes within attribute groups by selecting 
 keywords: ["attributes", "aggregations", "event selection", "criteria filters", "property selection"]
 ---
 
-[Attributes](/docs/signals/concepts/index.md#attribute-groups) are defined as part of attribute groups. To create an attribute, you'll need to set:
+[Attributes](/docs/signals/concepts/attributes/index.md) are defined as part of attribute groups. To create an attribute, you'll need to set:
 * A name, ideally one that describes the attribute
 * Which event schema to calculate it from
 * What property in the schema to consider for the calculation
@@ -36,20 +36,20 @@ Once you've selected an event and version, click **Confirm** to add the attribut
 
 Signals supports a number of different aggregation types.
 
-| Aggregation           | Description                                                           | Required property type in schema      |
-| --------------------- | --------------------------------------------------------------------- | ------------------------------------- |
-| Counter               | Count events                                                          | No property used for this aggregation |
-| Sum                   | Sum of property values                                                | Numeric                               |
-| Min                   | Minimum property value                                                | Numeric                               |
-| Max                   | Maximum property value                                                | Numeric                               |
-| Mean                  | Average of property values                                            | Numeric                               |
-| First                 | First property value seen                                             | String, Numeric, Boolean              |
-| Last                  | Last property value seen                                              | String, Numeric, Boolean              |
-| Most Frequent         | Most frequent property value seen                                     | String, Numeric, Boolean              |
-| Least Frequent        | Least frequent property value seen                                    | String, Numeric, Boolean              |
-| Approx Count Distinct | Approximate distinct count as calculated by the [HyperLogLog algorithm](https://redis.io/docs/latest/develop/data-types/probabilistic/hyperloglogs/) | String, Numeric, Boolean  |
-| Category Count        | Dictionary of unique values and their counts                          | String, Numeric, Boolean              |
-| Unique List           | List of unique property values                                        | String, Numeric, Boolean              |
+| Aggregation           | Description                                                                                                                                          | Required property type in schema      |
+| --------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------- |
+| Counter               | Count events                                                                                                                                         | No property used for this aggregation |
+| Sum                   | Sum of property values                                                                                                                               | Numeric                               |
+| Min                   | Minimum property value                                                                                                                               | Numeric                               |
+| Max                   | Maximum property value                                                                                                                               | Numeric                               |
+| Mean                  | Average of property values                                                                                                                           | Numeric                               |
+| First                 | First property value seen                                                                                                                            | String, Numeric, Boolean              |
+| Last                  | Last property value seen                                                                                                                             | String, Numeric, Boolean              |
+| Most Frequent         | Most frequent property value seen                                                                                                                    | String, Numeric, Boolean              |
+| Least Frequent        | Least frequent property value seen                                                                                                                   | String, Numeric, Boolean              |
+| Approx Count Distinct | Approximate distinct count as calculated by the [HyperLogLog algorithm](https://redis.io/docs/latest/develop/data-types/probabilistic/hyperloglogs/) | String, Numeric, Boolean              |
+| Category Count        | Dictionary of unique values and their counts                                                                                                         | String, Numeric, Boolean              |
+| Unique List           | List of unique property values                                                                                                                       | String, Numeric, Boolean              |
 
 A property isn't used for `counter` aggregation. To only count events with a specific property value, use a criteria filter.
 

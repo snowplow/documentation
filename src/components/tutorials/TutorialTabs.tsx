@@ -4,13 +4,18 @@ import { useHistory, useLocation } from '@docusaurus/router'
 
 enum DocsTab {
   Docs = '/docs',
+  Signals = '/docs/signals',
   Tutorials = '/tutorials',
 }
 
 function getCurrentTab(pathname: string): DocsTab {
-  return pathname.startsWith(DocsTab.Tutorials)
-    ? DocsTab.Tutorials
-    : DocsTab.Docs
+  if (pathname.startsWith(DocsTab.Signals)) {
+    return DocsTab.Signals
+  }
+  if (pathname.startsWith(DocsTab.Tutorials)) {
+    return DocsTab.Tutorials
+  }
+  return DocsTab.Docs
 }
 
 export const DocsTutorialsTabsMobile: React.FC = () => {
@@ -46,7 +51,16 @@ export const DocsTutorialsTabsMobile: React.FC = () => {
         },
       }}
     >
-      <Tab value={DocsTab.Docs} label="Docs" sx={{ textTransform: 'none' }} />
+      <Tab
+        value={DocsTab.Docs}
+        label="Customer Data Infrastructure"
+        sx={{ textTransform: 'none' }}
+      />
+      <Tab
+        value={DocsTab.Signals}
+        label="Signals"
+        sx={{ textTransform: 'none' }}
+      />
       <Tab
         value={DocsTab.Tutorials}
         label="Tutorials"
@@ -85,16 +99,20 @@ export const DocsTutorialsTabsDesktop: React.FC = () => {
       <Tab
         onClick={() => changeTab(DocsTab.Docs)}
         value={DocsTab.Docs}
-        label="Docs"
+        label="Customer Data Infrastructure"
         sx={{ textTransform: 'none' }}
-        href={DocsTab.Docs}
+      />
+      <Tab
+        onClick={() => changeTab(DocsTab.Signals)}
+        value={DocsTab.Signals}
+        label="Signals"
+        sx={{ textTransform: 'none' }}
       />
       <Tab
         onClick={() => changeTab(DocsTab.Tutorials)}
         value={DocsTab.Tutorials}
         label="Tutorials"
         sx={{ textTransform: 'none' }}
-        href={DocsTab.Tutorials}
       />
     </Tabs>
   )

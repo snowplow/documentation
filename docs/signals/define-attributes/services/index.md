@@ -6,7 +6,7 @@ description: "Services group multiple versioned attribute groups into stable con
 keywords: ["services", "attribute group versioning", "stable interfaces"]
 ---
 
-[Services](/docs/signals/concepts/index.md#services) group attribute groups together for serving to your applications.
+[Services](/docs/signals/concepts/attributes/index.md#services) group attribute groups together for serving to your applications.
 
 To create a service, go to **Signals** > **Services** in Snowplow Console and follow the instructions.
 

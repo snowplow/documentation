@@ -6,7 +6,7 @@ description: "Connect Snowplow Inspector to Signals to validate attribute and in
 keywords: ["signals integration", "debug attributes", "debug interventions", "signals api", "attribute values"]
 ---
 
-The Snowplow Inspector optionally integrates with [Snowplow Signals](/docs/signals/index.md) to help validate your [attribute](/docs/signals/define-attributes/attributes/index.md) and [intervention](/docs/signals/concepts/index.md#interventions) definitions.
+The Snowplow Inspector optionally integrates with [Snowplow Signals](/docs/signals/index.md) to help validate your [attribute](/docs/signals/define-attributes/attributes/index.md) and [intervention](/docs/signals/concepts/interventions/index.md) definitions.
 
 There are two ways to connect Inspector to Signals:
 
@@ -17,7 +17,7 @@ To access the extension options, use your browser toolbar to find the extensions
 
 ![Screenshot of the Chromium browser with the extension menu open. The installed Snowplow Inspector has its Options menu item selected.](../images/extension-options.png)
 
-After connecting to Signals, the Inspector will use the Signals API to discover any defined [attribute keys](/docs/signals/concepts/index.md#attribute-keys), and the definitions for your attribute groups.
+After connecting to Signals, the Inspector will use the Signals API to discover any defined [attribute keys](/docs/signals/concepts/attributes/index.md#attribute-keys), and the definitions for your attribute groups.
 It uses these definitions with any events it has observed in the debugger to build a set of attribute keys.
 
 By default Signals includes `domain_userid` as an attribute key.

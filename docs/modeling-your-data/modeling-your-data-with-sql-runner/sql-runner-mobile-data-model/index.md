@@ -5,6 +5,7 @@ date: "2020-10-30"
 sidebar_position: 200
 description: "Legacy SQL Runner mobile data model for transforming mobile event data into derived tables."
 keywords: ["SQL Runner mobile", "mobile data model", "legacy mobile SQL", "mobile SQL Runner"]
+pagination_next: "testing/index"
 ---
 
 :::tip

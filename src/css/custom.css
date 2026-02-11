@@ -1518,3 +1518,65 @@ pre.mermaid {
     display: none;
   }
 }
+
+/* Featured section links - display each link on its own line */
+.featured-section-links a {
+  display: block;
+  padding: 2px 0;
+}
+
+/* Featured section button */
+.featured-section-button {
+  background-color: #f3f4f6;
+  color: #374151;
+  text-decoration: none !important;
+}
+
+.featured-section-button:hover {
+  background-color: #e5e7eb;
+  color: #1f2937;
+  text-decoration: none !important;
+}
+
+[data-theme='dark'] .featured-section-button {
+  background: hsl(var(--primary));
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+[data-theme='dark'] .featured-section-button:hover {
+  background: hsl(var(--primary) / 0.9);
+  color: #ffffff !important;
+  text-decoration: none !important;
+}
+
+/* Call to Action cards */
+.cta-card {
+  background: linear-gradient(135deg, hsl(var(--primary) / 0.18) 0%, hsl(var(--primary) / 0.06) 35%, hsl(var(--background)) 100%);
+  text-decoration: none !important;
+  border: 1px solid hsl(var(--border));
+}
+
+.cta-card:hover {
+  background: linear-gradient(135deg, hsl(var(--primary) / 0.24) 0%, hsl(var(--primary) / 0.10) 35%, hsl(var(--background)) 100%);
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+  text-decoration: none !important;
+}
+
+/* Link cards */
+.link-card {
+  text-decoration: none !important;
+}
+
+.link-card:hover {
+  text-decoration: none !important;
+}
+
+.link-card p.text-foreground {
+  color: hsl(var(--foreground)) !important;
+}
+
+.link-card p.text-muted-foreground {
+  color: hsl(var(--muted-foreground)) !important;
+  font-weight: 400 !important;
+}

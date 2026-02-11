@@ -11,7 +11,7 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-In this section, you'll define [attributes](/docs/signals/concepts/#attribute-groups) that calculate real-time user behavior metrics from ecommerce events. These attributes will track product views, cart additions, and cart value.
+In this section, you'll define [attributes](/docs/signals/concepts/attributes) that calculate real-time user behavior metrics from ecommerce events. These attributes will track product views, cart additions, and cart value.
 
 You'll create three attributes to track user shopping behavior:
 
@@ -141,7 +141,7 @@ This attribute:
 
 ## Create an attribute group
 
-[Attribute groups](/docs/signals/concepts/#attribute-groups) organize related attributes together. They can be considered as "tables" of attributes.
+[Attribute groups](/docs/signals/concepts/attributes) organize related attributes together. They can be considered as "tables" of attributes.
 
 Create a group to hold your ecommerce attributes:
 
@@ -159,7 +159,7 @@ attribute_group = StreamAttributeGroup(
 )
 ```
 
-The `attribute_key` parameter specifies the [user identifier](/docs/signals/concepts/#attribute-keys) that the attributes are grouped by. In this case, `domain_userid` means the attributes track behavior for each anonymous user.
+The `attribute_key` parameter specifies the [user identifier](/docs/signals/concepts/attributes/#attribute-keys) that the attributes are grouped by. In this case, `domain_userid` means the attributes track behavior for each anonymous user.
 
 This is a `StreamAttributeGroup`, because Signals will process events from the real-time event stream.
 
@@ -171,7 +171,7 @@ Attribute groups are immutable and versioned. If you need to modify attributes, 
 
 ## Create a service
 
-[Services](/docs/signals/concepts/#services) provide an interface for applications to retrieve attributes. Create a service that includes your attribute group:
+[Services](/docs/signals/concepts/attributes/#services) provide an interface for applications to retrieve attributes. Create a service that includes your attribute group:
 
 ```python
 stream_service = Service(

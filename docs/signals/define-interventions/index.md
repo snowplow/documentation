@@ -6,7 +6,7 @@ description: "Create rule-based interventions with criteria and targeting to aut
 keywords: ["interventions", "rule-based triggers", "intervention criteria", "attribute targeting"]
 ---
 
-[Interventions](/docs/signals/concepts/index.md#interventions) are automated triggers that enable real-time actions based on user behavior.
+[Interventions](/docs/signals/concepts/interventions/index.md) are automated triggers that enable real-time actions based on user behavior.
 
 There are three methods for defining interventions in Signals:
 * Snowplow Console UI
@@ -29,7 +29,7 @@ Next, configure when the intervention should trigger.
 Criteria are the conditional rules that determine when an intervention should trigger.
 
 :::note Sent once
-An intervention is sent only the first time the criteria are met. Read an example of how this works on the [Concepts page](/docs/signals/concepts/index.md#targeting-example).
+An intervention is sent only the first time the criteria are met. Read an example of how this works on the [Concepts page](/docs/signals/concepts/interventions/index.md#targeting-example).
 :::
 
 Defining intervention criteria has three steps:
@@ -47,7 +47,7 @@ These attributes are both from groups with the `domain_userid` attribute key. Th
 
 ## Custom targets
 
-Define a custom intervention target scope by selecting [attribute keys](/docs/signals/concepts/index.md#targeting). These are the attribute keys that will receive the information.
+Define a custom intervention target scope by selecting [attribute keys](/docs/signals/concepts/interventions/index.md#targeting). These are the attribute keys that will receive the information.
 
 By default, the intervention will target the attribute keys of the attribute groups defined in the criteria. Specify attribute keys here if you want different targets.
 

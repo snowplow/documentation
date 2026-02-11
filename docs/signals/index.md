@@ -1,85 +1,84 @@
 ---
-title: "Introduction to Snowplow Signals"
+title: "Snowplow Signals Documentation"
 sidebar_position: 8
-description: "Snowplow Signals is a real-time personalization engine that computes and acts on behavioral data from your pipeline. It enables in-session stream and historical user data access for personalized experiences, recommendations, and dynamic pricing."
-keywords: ["real-time personalization", "customer intelligence", "behavioral data", "signals", "agentic applications"]
-sidebar_label: "Signals"
+description: "Snowplow Signals streams enriched user context to AI agents and applications in real time. Integrate with LangChain, Bedrock, Vertex AI, and Vercel to ground agent responses in governed customer data."
+keywords: ["real-time personalization", "agentic ai", "customer context", "signals", "langchain", "ai agents"]
+sidebar_label: "Introduction"
+custom_edit_url: null
+pagination_next: null
+pagination_prev: null
+is_landing_page: true
 ---
 
-```mdx-code-block
-import AvailabilityBadges from '@site/src/components/ui/availability-badges';
+**Give your AI agents the context they need to act intelligently with Snowplow Signals**.
 
-<AvailabilityBadges
-  available={['cloud', 'pmc', 'addon']}
-  helpContent="Signals is a paid addon for Snowplow CDI."
-/>
-```
+<CardGrid cols={2}>
+  <CallToActionCard
+    title="Get started with Signals"
+    description="Try out Signals for free without a Snowplow account"
+    href="https://try-signals.snowplow.io"
+  />
 
-Snowplow Signals is a real-time personalization engine for customer intelligence, built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in real time.
+  <CallToActionCard
+    title="Snowplow for Composable Analytics"
+    description="Learn more about the Customer Data Infrastructure that's the foundation for Signals"
+    href="/docs"
+  />
+</CardGrid>
 
-Real-time personalization use cases that are unlocked by Signals include:
-* Personalized recommendations
-* Personalized messaging
-* Agentic applications such as chatbots or copilots
-* Adaptive UIs
-* Dynamic pricing
-* Contextually relevant advertising
-* Paywall optimization
+## Explore Signals
 
-:::info Signals Sandbox
+<CardGrid cols={3} breakout>
 
-Try out Signals for free using the [Signals Sandbox](https://try-signals.snowplow.io). Follow the [Signals interventions tutorial](/tutorials/signals-interventions/start/) to explore using Signals in a demo web application. You don't need a Snowplow account to use the Sandbox.
+  <FeaturedSection
+    title="Attributes"
+    description="Calculate user attributes in real time"
+  >
+    [Learn about attributes](/docs/signals/concepts/attributes/index.md)
+    [Define attributes](/docs/signals/define-attributes/index.md)
+    [Retrieve attributes](/docs/signals/retrieve-attributes/index.md)
+  </FeaturedSection>
 
-:::
+  <FeaturedSection
+    title="Interventions"
+    description="Trigger actions automatically"
+  >
+    [Learn about interventions](/docs/signals/concepts/interventions/index.md)
+    [Define interventions](/docs/signals/define-interventions/index.md)
+    [Subscribe to interventions](/docs/signals/receive-interventions/index.md)
+  </FeaturedSection>
 
-Your Signals infrastructure is deployed into the same cloud as your pipeline. You can use [Snowplow Console](https://console.snowplowanalytics.com) to first define the data you're interested in, then use the Signals SDKs and API to retrieve the calculated [attributes](/docs/signals/concepts/index.md) in your applications to alter your customer's experience and behavior.
+  <FeaturedSection
+    title="Signals Python SDK"
+    description="Use Signals within a notebook"
+  >
+    [Define attributes](/docs/signals/define-attributes/using-python-sdk/index.md)
+    [Define interventions](/docs/signals/define-interventions/using-python-sdk/index.md)
+    [Subscribe to interventions](/docs/signals/receive-interventions/index.md#using-the-signals-python-sdk)
+  </FeaturedSection>
 
-As well as attributes, Signals allows you to define [interventions](/docs/signals/concepts/index.md#interventions). This is a way to specify the business logic, based on attribute values, that should trigger actions such as notifications in your application.
+</CardGrid>
 
-Every [attribute group](/docs/signals/concepts/index.md#attribute-groups) and intervention published to the Signals API is versioned, allowing you to maintain strong data governance within the Profiles Store, and to test new Signals configurations without affecting production.
+## Get hands on with Signals
 
-## How does Signals fit into the Snowplow pipeline?
+<CardGrid cols={3} breakout>
+  <LinkCard
+    title="Build a personalized travel agent"
+    description="Set up a demo travel site, and integrate with Snowplow Signals to personalize content and chatbot responses based on user behavior"
+    href="/tutorials/signals-personalize-travel/intro"
+  />
 
-Signals consists of several new infrastructure components. When running Signals, your Snowplow pipeline will continue to process events as usual.
+  <LinkCard
+    title="Score prospects in real time using Signals and ML"
+    description="Try out Signals for live prospect scoring with machine learning"
+    href="/tutorials/signals-ml-prospect-scoring/intro"
+  />
 
-The core Signals components are:
-* **Profiles Store**: stores calculated attributes and configurations
-* Signals **SDKs** and **API**: allow you to manage and fetch attributes and interventions
-* **Streaming engine**: computes attributes from Snowplow events in stream, and sends them directly to the Profiles Store
-* **Sync engine**: periodically updates the Profiles Store with batch attributes
-* **Batch engine**: runs in your warehouse to compute attributes from warehouse tables
+  <LinkCard
+    title="Implement real-time interventions in an ecommerce app"
+    description="Explore Signals interventions in a demo e-shop application"
+    href="/tutorials/signals-interventions/start/"
+  />
+</CardGrid>
 
-![Snowplow Signals architecture diagram showing core components including Profiles Store, SDKs, streaming engine, and batch engine](./images/overview-incl-batch-engine.svg)
-
-## Using Signals
-
-Steps for using Signals:
-1. Decide on the business logic
-2. Apply the configurations to Signals
-3. Use the attributes and interventions to take action in your application
-
-:::note Warehouse support
-Only Snowflake and BigQuery are supported currently. However, you can also use Signals without the warehouse functionality.
-:::
-
-Check out the [quick start tutorial](/tutorials/signals-quickstart/start) to get started.
-
-### 1. Decide on the business logic
-
-Your first step is to decide what changes in user behavior you're aiming for. What systems or data will you need to achieve this? This planning will help you decide which attributes you want to calculate, and which interventions you're interested in defining.
-
-You'll also need to decide whether to calculate attributes from your real-time event stream (default), or from warehouse data, or both.
-
-Read more about attributes and interventions on the [concepts](/docs/signals/concepts/index.md) page.
-
-### 2. Apply the configuration
-
-We recommend using [Console](https://console.snowplowanalytics.com) to define your attributes and interventions. You could also use the [Signals Python SDK](https://pypi.org/project/snowplow-signals/), or even the [Signals API](/docs/signals/connection/index.md#signals-api).
-
-Once you've created your configurations, apply them to Signals by publishing them. It will start calculating attributes and populating the Profiles Store.
-
-### 3. Take action in your application
-
-Retrieve calculated attributes in your application using the [Node.js](https://www.npmjs.com/package/@snowplow/signals-node) or [Python](https://pypi.org/project/snowplow-signals/) Signals SDKs. You could also use the Signals API.
-
-Use the attributes to update the user experience, or subscribe to [interventions](/docs/signals/concepts/index.md) to automatically take action based on user behavior.
+[See all tutorials](/tutorials)

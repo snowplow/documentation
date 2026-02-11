@@ -11,11 +11,11 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Define the behavior you want to capture in [attribute groups](/docs/signals/concepts/index.md#attribute-groups).
+Define the behavior you want to capture in [attribute groups](/docs/signals/concepts/attributes/index.md).
 
 ## Attribute groups by data source
 
-Each of the three available [data sources](/docs/signals/concepts/index.md#data-sources) has its own attribute group class. Choose which one to use depending on how you want to calculate and sync the attributes.
+Each of the three available [data sources](/docs/signals/concepts/data-sources/index.md) has its own attribute group class. Choose which one to use depending on how you want to calculate and sync the attributes.
 
 <Tabs groupId="source" queryString>
 <TabItem value="stream" label="StreamAttributeGroup" default>

@@ -5,6 +5,7 @@ description: "Test and validate your Snowplow tracking implementation using Snow
 keywords: ["testing", "qa", "snowplow micro", "snowplow inspector", "tracking validation"]
 date: "2024-12-04"
 sidebar_position: 8.5
+pagination_prev: "modeling-your-data/index"
 ---
 
 There are a number of ways you can test your tracking implementation and QA your pipeline to follow good data practices.

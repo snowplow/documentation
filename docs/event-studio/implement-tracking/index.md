@@ -9,13 +9,17 @@ keywords: ["tracking implementation", "code generation", "Snowtype", "tracking c
 Once you've defined your [tracking plans](/docs/event-studio/tracking-plans/index.md) and [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md), the next step is implementing the tracking code in your applications.
 
 Snowplow provides several approaches to generate and implement tracking code:
-* Ready-to-use code snippets in Console (web only)
+* Ready-to-use code snippets in [Console](https://console.snowplowanalytics.com) (web only)
 * [Snowtype](/docs/event-studio/implement-tracking/snowtype/index.md) code generation tool
 * Manual integration with [Snowplow trackers](/docs/sources/index.md)
 
 ## Console code snippets
 
-When viewing an [event specification](/docs/event-studio/tracking-plans/event-specifications/index.md) in [Console](https://console.snowplowanalytics.com), the **Working with this event** section provides ready-to-use code snippets. These snippets show the exact tracking calls needed for each event, including all required properties and entities.
+When viewing an [event specification](/docs/event-studio/tracking-plans/event-specifications/index.md) in Console, the **Working with this event** section provides ready-to-use code snippets.
+
+### Implementation
+
+The snippets in the **Implementation** tab show the exact tracking calls needed for each event, including all required properties and entities.
 
 :::note Available for custom web events only
 Code snippets are available for the JavaScript tracker only, for event specifications with custom event data structures.
@@ -59,3 +63,13 @@ window.snowplow("trackSelfDescribingEvent", {
     ]
 });
 ```
+
+Use the **Show Snowtype code** toggle to display the specific Snowtype function name to call for tracking implementation.
+
+![Show snowtype code](images/show-snowtype-code.png)
+
+### Querying
+
+The **Querying** tab provides example queries to help you retrieve and analyze your event data. Choose your warehouse to see appropriately optimized SQL.
+
+![Querying SQL examples](images/sql-example.png)

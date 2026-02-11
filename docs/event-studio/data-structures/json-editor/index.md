@@ -49,13 +49,7 @@ The versioning dialog will appear, at this point you have three options:
 
 - Increment a minor version to indicate a non-breaking change to the schema. In our example, this would increment the schema to from `1-0-1` to `1-0-2`.
 - Increment a major version to indicate a breaking change to the schema. In our example, this would increment the schema from `1-0-1` to `2-0-0`.
-- [Patch the current version](/docs/fundamentals/schemas/versioning/index.md#patching-the-schema), this will overwrite the existing schema without increasing the version. In our example, this would leave the schema at 1-0-1.
-
-:::warning Selecting the "patch" option
-
-Patching can be useful in development environments, but should be done carefully and should never be done in production. See [amending schemas](/docs/fundamentals/schemas/versioning/index.md) for an explanation and some suggestions.
-
-:::
+- [Patch the current version](/docs/event-studio/data-structures/versioning/index.md#patch-a-schema), this will overwrite the existing schema without increasing the version. In our example, this would leave the schema at 1-0-1.
 
 For more information see [Versioning your data structures](/docs/event-studio/data-structures/versioning/index.md).
 

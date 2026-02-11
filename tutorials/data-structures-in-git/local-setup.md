@@ -59,7 +59,7 @@ data:
 ```
 * `apiVersion` should always be `v1`
 * `resourceType` should remain `data-structure`
-* `meta.hidden` directly relates to showing and hiding [in Console UI](/docs/event-studio/data-structures/manage/#hiding-a-data-structure)
+* `meta.hidden` directly relates to showing and hiding [in Console UI](/docs/event-studio/data-structures/#hide-a-data-structure)
 * `meta.schemaType` can be `event` or `entity`
 * `meta.customData` is a map of strings to strings that can be used to send across any key/value pairs you'd like to associate with the data structure
 * `data` is the actual [snowplow self describing schema](/docs/api-reference/iglu/common-architecture/self-describing-json-schemas) that this data structure describes

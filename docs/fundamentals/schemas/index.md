@@ -108,7 +108,7 @@ After the self section, the remainder of the schema is where you will begin desc
 - `type`: this denotes the type of data that is collected through this field. The most common types of data collected are `string`, `number`, `integer`, `object`, `array`, `boolean` and `null`. A single field can allow multiple types as shown in the field `job role` in the example schema which allows both `string` and `null`
 - Validation arguments can then be passed into the field such as `minLength`, `maxLength` and `enum` for strings and `minimum` and `maximum` for integers.
 
-This example doesn't show the optional `$supersedes` and `$supersededBy` fields. See [marking schemas as superseded](/docs/fundamentals/schemas/versioning/index.md#marking-the-schema-as-superseded).
+This example doesn't show the optional `$supersedes` and `$supersededBy` fields. See [marking schemas as superseded](/docs/fundamentals/schemas/versioning/index.md#mark-a-schema-as-superseded).
 
 ## Iglu schema repository
 

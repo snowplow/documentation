@@ -21,7 +21,7 @@ import Breaking from "/docs/reusable/schema-version-breaking-change/_breaking.md
 
 <Breaking/>
 
-Snowplow infrastructure doesn't increment the [middle version digit](/docs/event-studio/data-structures/versioning/index.md#incrementing-the-middle-digit), but you can use it in your own versioning strategy.
+Snowplow infrastructure doesn't increment the [middle version digit](/docs/event-studio/data-structures/versioning/index.md#increment-the-middle-digit), but you can use it in your own versioning strategy.
 
 Changing a schema without incrementing the version has several risks:
 * Events that were previously valid could become invalid against the new changes
@@ -252,7 +252,7 @@ The `$supersedes` field states that the schema version defined in the `self` par
 
 :::note Patching and superseding
 
-Once you’ve defined the `$supersedes` field for a schema version, you can’t update it — even in the development environment where [patching](#patching-the-schema) is allowed. However, you can change which schema version supersedes which by creating new schema versions.
+Once you’ve defined the `$supersedes` field for a schema version, you can’t update it — even in the development environment where patching is allowed. However, you can change which schema version supersedes which by creating new schema versions.
 
 For example, if version `1-0-2` is defined to supersede version `1-0-1`, and you create version `1-0-3` which also supersedes `1-0-1`, then `1-0-1` will be superseded by the newest version, i.e. `1-0-3`. See diagrams below for more information on how this is determined.
 

@@ -77,7 +77,7 @@ For more flexibility, see [Advanced usage](/docs/testing/snowplow-micro/advanced
 
 :::note Limitations
 
-Currently, this method does not work for [marking schemas as superseded](/docs/fundamentals/schemas/versioning/index.md#marking-the-schema-as-superseded).
+Currently, this method does not work for [marking schemas as superseded](/docs/fundamentals/schemas/versioning/index.md#mark-a-schema-as-superseded).
 
 :::
 

@@ -91,7 +91,7 @@ If you are a Snowplow CDI customer, rather than self-hosted, you don't need to i
 
 :::info Snowplow CDI
 
-If you are a Snowplow CDI customer, rather than self-hosted, you don't need to install Iglu Server yourself. It's also unlikely that you need to use any of the other components in this section. You can manage your data structures [in the UI or via the API](/docs/event-studio/data-structures/manage/index.md).
+If you are a Snowplow CDI customer, rather than self-hosted, you don't need to install Iglu Server yourself. It's also unlikely that you need to use any of the other components in this section. You can manage your data structures [in the UI or via the API](/docs/event-studio/data-structures/index.md).
 
 :::
 
@@ -104,8 +104,8 @@ If you are a Snowplow CDI customer, rather than self-hosted, you don't need to i
 
 ### Trackers
 
-| Tracker                                                                      |        Latest version        |
-| :--------------------------------------------------------------------------- | :--------------------------: |
+| Tracker                                                             |        Latest version        |
+| :------------------------------------------------------------------ | :--------------------------: |
 | [JavaScript (Web and Node.js)](/docs/sources/web-trackers/index.md) | {versions.javaScriptTracker} |
 | [iOS](/docs/sources/mobile-trackers/index.md)                       |    {versions.iosTracker}     |
 | [Android](/docs/sources/mobile-trackers/index.md)                   |  {versions.androidTracker}   |

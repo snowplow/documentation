@@ -467,21 +467,18 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 /docs/fundamentals/data-products/* /docs/fundamentals/tracking-plans/:splat 301
 
 # Event Studio restructure
-/docs/event-studio/snowplow-cli/* /docs/event-studio/programmatic-management/snowplow-cli/:splat 301
+/docs/event-studio/data-structures/version-amend/amending/* /docs/fundamentals/schemas/versioning/:splat 301
 /docs/event-studio/data-structures/version-amend/* /docs/event-studio/data-structures/versioning/:splat 301
 /docs/event-studio/data-structures/manage/cli/* /docs/event-studio/programmatic-management/snowplow-cli/data-structures/:splat 301
 /docs/event-studio/data-structures/manage/api/* /docs/event-studio/programmatic-management/data-structures-api/:splat 301
 /docs/event-studio/data-structures/manage/iglu/* /docs/api-reference/iglu/manage-schemas/:splat 301
 /docs/event-studio/data-structures/manage/builder/* /docs/event-studio/data-structures/:splat 301
 /docs/event-studio/data-structures/manage/* /docs/event-studio/data-structures/:splat 301
-/docs/event-studio/tracking-plans/ui/* /docs/event-studio/tracking-plans/create-and-manage/:splat 301
-/docs/event-studio/tracking-plans/tracking-plan-templates/* /docs/event-studio/tracking-plans/templates/:splat 301
-/docs/event-studio/tracking-plans/cli/* /docs/event-studio/programmatic-management/snowplow-cli/tracking-plans/:splat 301
-/docs/event-studio/tracking-plans/api/* /docs/event-studio/programmatic-management/tracking-plans-api/:splat 301
 /docs/event-studio/event-specifications/api/* /docs/event-studio/programmatic-management/event-specifications-api/:splat 301
 /docs/event-studio/event-specifications/* /docs/event-studio/tracking-plans/event-specifications/:splat 301
+/docs/event-studio/tracking-plans/cli/* /docs/event-studio/programmatic-management/snowplow-cli/tracking-plans/:splat 301
+/docs/event-studio/tracking-plans/api/* /docs/event-studio/programmatic-management/tracking-plans-api/:splat 301
+/docs/event-studio/tracking-plans/ui/* /docs/event-studio/tracking-plans/create-and-manage/:splat 301
+/docs/event-studio/tracking-plans/tracking-plan-templates/* /docs/event-studio/tracking-plans/templates/:splat 301
+/docs/event-studio/snowplow-cli/* /docs/event-studio/programmatic-management/snowplow-cli/:splat 301
 /docs/event-studio/snowtype/* /docs/event-studio/implement-tracking/snowtype/:splat 301
-/docs/event-studio/data-structures/versioning/amending/* /docs/fundamentals/schemas/versioning/:splat 301
-/docs/event-studio/data-structures/versioning/iglu/* /docs/event-studio/data-structures/versioning/:splat 301
-/docs/event-studio/data-structures/versioning/enterprise/* /docs/event-studio/data-structures/versioning/:splat 301
-/docs/event-studio/data-structures/versioning/builder/* /docs/event-studio/data-structures/versioning/:splat 301

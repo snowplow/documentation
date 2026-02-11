@@ -1,13 +1,13 @@
 ---
-title: "Create complex data structures with JSON Editor"
-sidebar_label: "Console: JSON editor"
+title: "Create complex data structures with the JSON editor"
+sidebar_label: "JSON editor"
 sidebar_position: 1
 description: "Define complex data structures with heavy nesting and advanced data types using the JSON Editor for full JSON Schema support."
 keywords: ["JSON editor", "complex schemas", "nested structures", "JSON Schema editor", "advanced data types"]
 ---
 
 :::info
-The JSON editor is ideal for more complex data structures that require nesting or more advanced data types. For simple data structures, use the [Data Structures Builder](/docs/event-studio/data-structures/create/index.md).
+The JSON editor is ideal for more complex data structures that require nesting or more advanced data types. For simple data structures, use the [Data Structures Builder](/docs/event-studio/data-structures/index.md).
 :::
 
 ## Creating a new data structure
@@ -29,7 +29,7 @@ You can now write the first version of your JSON schema for this data structure.
 
 Once you are done, click the **Validate** button and we'll validate that your schema is valid JSON markup. Assuming it passes validation, you can save your data structure as a draft.
 
-See the [Working with drafts](/docs/event-studio/data-structures/manage/index.md#working-with-drafts) section for more information about the draft workflow.
+See the [Working with drafts](/docs/event-studio/data-structures/index.md#working-with-drafts) section for more information about the draft workflow.
 
 Click **Save as draft** to save your data structure as a draft. As this is the first version of your data structure, it will be created as version `1-0-0` when you later deploy it to your development environment.
 

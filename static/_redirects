@@ -468,11 +468,12 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 
 # Event Studio restructure
 /docs/event-studio/snowplow-cli/* /docs/event-studio/programmatic-management/snowplow-cli/:splat 301
-/docs/event-studio/data-structures/manage/builder/* /docs/event-studio/data-structures/create/:splat 301
 /docs/event-studio/data-structures/version-amend/* /docs/event-studio/data-structures/versioning/:splat 301
 /docs/event-studio/data-structures/manage/cli/* /docs/event-studio/programmatic-management/snowplow-cli/data-structures/:splat 301
 /docs/event-studio/data-structures/manage/api/* /docs/event-studio/programmatic-management/data-structures-api/:splat 301
 /docs/event-studio/data-structures/manage/iglu/* /docs/api-reference/iglu/console-integration/:splat 301
+/docs/event-studio/data-structures/manage/builder/* /docs/event-studio/data-structures/:splat 301
+/docs/event-studio/data-structures/manage/* /docs/event-studio/data-structures/:splat 301
 /docs/event-studio/tracking-plans/ui/* /docs/event-studio/tracking-plans/create-and-manage/:splat 301
 /docs/event-studio/tracking-plans/tracking-plan-templates/* /docs/event-studio/tracking-plans/templates/:splat 301
 /docs/event-studio/tracking-plans/cli/* /docs/event-studio/programmatic-management/snowplow-cli/tracking-plans/:splat 301

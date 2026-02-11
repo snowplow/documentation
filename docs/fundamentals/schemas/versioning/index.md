@@ -1,6 +1,6 @@
 ---
-title: "Amend schemas to fix mistakes"
-sidebar_label: "Amending schemas"
+title: "Versioning, patching, and marking schemas as superseded"
+sidebar_label: "Versioning"
 sidebar_position: 40
 description: "Fix mistakes in existing schema versions by amending them, with guidelines on when amendments are appropriate and how to handle production schemas."
 keywords: ["schema amendments", "fix schema mistakes", "schema corrections", "patch schemas"]
@@ -11,20 +11,38 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-Sometimes, small mistakes creep into your schemas. For example, you might mark an optional field as required, or make a typo in the name of one of the fields. In these cases, you will want to update the schema to correct the mistake.
+Every schema has a version, starting from `1-0-0`. As your schema evolves, you will need to create new versions of it. All previous versions of a schema remain available to ensure backwards-compatibility.
 
-## Treat schemas as immutable
+Versioning has an important role in telling Snowplow Loaders how to handle the changes when loading into your data warehouse. For example, there may be a need to create new columns, update columns, or even create new tables.
 
-It might be tempting to somehow “overwrite” the schema without updating the version. But this can bring several problems:
-* Events that were previously valid could become invalid against the new changes.
-* Your warehouse loader, which updates the table [according to the schema](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md#versioning), could get stuck if it’s not possible to cast the data in the existing table column to the new definition (e.g. if you change a field type from a string to a number).
-* Similarly, data models or other applications consuming the data downstream might not be able to deal with the changes.
+It's important to understand when your change is breaking, and [version correctly](/docs/event-studio/data-structures/versioning/index.md).
 
-The best approach is to just create a new schema version and update your tracking code to use it. However, there are two alternatives for when it’s not ideal.
+import Breaking from "/docs/reusable/schema-version-breaking-change/_breaking.md"
 
-## Patching the schema
+<Breaking/>
 
-If you are working on a new schema version in a development environment, there is usually little risk in overwriting the schema instead of creating a new version. That’s because the new schema version has not made it to production, so changing it will not corrupt any production data. Moreover, if you overwrite all incorrect schema versions, you will be left with a neat and tidy schema version history.
+Snowplow infrastructure doesn't increment the [middle version digit](/docs/event-studio/data-structures/versioning/index.md#incrementing-the-middle-digit), but you can use it in your own versioning strategy.
+
+Changing a schema without incrementing the version has several risks:
+* Events that were previously valid could become invalid against the new changes
+* Your warehouse Loader, which updates the table [according to the schema](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md#versioning), could get stuck if it’s not possible to cast the data in the existing table column to the new definition (e.g. if you change a field type from a string to a number)
+* Similarly, data models or other applications consuming the data downstream might not be able to deal with the changes
+
+Aim to treat each schema version as immutable. However, if you can't avoid making changes to an existing schema version, you have two options: patching the schema, or marking it as superseded.
+
+## Patch a schema
+
+Patching is available if your schema version isn't yet in production.
+
+:::danger Development schemas only
+For Snowplow CDI customers, patching is disabled for production pipelines.
+
+Patching in a production environment can break your loading, especially if your patch contains breaking changes.
+
+Also, never patch a schema version that exists in a production environment, even if you are doing the patching in a development environment. This will lead to problems later when you try to promote that schema to production.
+:::
+
+If you are working on a new schema version in a development environment, patching is safer as it won't corrupt any production data.
 
 Before:
 
@@ -45,28 +63,9 @@ flowchart LR
   v100("1-0-0") --- v101("1-0-1") --- v102("1-0-2\n(corrected)")
 ```
 
-We call this approach “patching”. To patch the schema, i.e. apply changes to it without updating the version:
-* If you are using Snowplow CDI, select the “Patch” option [in the UI](/docs/event-studio/data-structures/index.md) when saving the schema
-* If you are using Snowplow Self-Hosted, do not increment the schema version when [uploading it with `igluctl`](/docs/api-reference/iglu/console-integration/index.md)
+Follow these [instructions](/docs/event-studio/data-structures/versioning/index.md#patch-a-schema) to patch a schema.
 
-:::danger
-
-Never patch schemas in a production environment. This can break your loading, especially if your patch contains breaking changes (see [above](#treat-schemas-as-immutable)).
-
-Also, never patch a schema version that exists in a production environment, even if you are doing the patching in a development environment. This will lead to problems later when you try to promote that schema to production.
-
-:::
-
-For Snowplow CDI customers, patching is disabled for production pipelines. Snowplow Self-Hosted users have to explicitly enable patching (if desired) in the [Iglu Server configuration](/docs/api-reference/iglu/iglu-repositories/iglu-server/reference/index.md) (`patchesAllowed`) at their own risk.
-
-:::tip Schema caching
-
-Note that various pipeline components, most importantly Enrich (including Enrich embedded in Snowplow Mini and Snowplow Micro), cache schemas to improve performance. The default caching time is 10 minutes (it’s controlled by the [Iglu Resolver configuration](/docs/api-reference/iglu/iglu-resolver/index.md)). This means that the effect of patching a schema will not be immediate.
-
-:::
-
-## Marking the schema as superseded
-
+## Mark a schema as superseded
 
 If your events are failing in production because of an incorrect schema, you might not be able to instantly update the tracking code to use a new schema version. This is a common situation for mobile tracking, for example. You can resolve this by marking the old schema version as superseded by the new schema version.
 
@@ -96,7 +95,7 @@ flowchart RL
   linkStyle 0,1 stroke:none,fill:none
 ```
 
-Here’s how this works, at a glance:
+Here's how this works, at a glance:
 * Suppose schema `1-0-2` is wrong.
 * Draft a new schema version correcting the issue.
 * In the new schema, add the following field at the root: `"$supersedes": ["1-0-2"]`.

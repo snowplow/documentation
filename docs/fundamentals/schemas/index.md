@@ -31,13 +31,13 @@ A **data structure** is a higher-level data management concept that includes the
 [Data structures](/docs/event-studio/data-structures/index.md) wrap schemas with this additional metadata to help you manage your data definitions. They allow you to group related schemas within [tracking plans](/docs/event-studio/tracking-plans/index.md) (previously known as data products), or keep track of [which schemas are used where](/docs/event-studio/tracking-plans/event-specifications/index.md).
 
 :::tip Data structure management
-Check out the documentation for [managing](/docs/event-studio/data-structures/manage/index.md) and [versioning](/docs/event-studio/data-structures/versioning/index.md) data structures.
+Check out the documentation for [managing](/docs/event-studio/data-structures/index.md) and [versioning](/docs/event-studio/data-structures/versioning/index.md) data structures.
 :::
 
 ## Self-describing JSON schema anatomy
 
 :::info Data structures builder
-Snowplow CDI customers can create custom schemas using the [data structures builder](/docs/event-studio/data-structures/create/index.md), without worrying about how it works under the hood.
+Snowplow CDI customers can create custom schemas using the [data structures builder](/docs/event-studio/data-structures/index.md), without worrying about how it works under the hood.
 :::
 
 Snowplow schemas are based on the [JSON Schema](https://json-schema.org/) standard ([draft 4](https://datatracker.ietf.org/doc/html/draft-fge-json-schema-validation-00)). For a comprehensive guide to all Snowplow supported validation options, see the [Snowplow JSON Schema reference](/docs/api-reference/json-schema-reference/index.md).
@@ -108,7 +108,7 @@ After the self section, the remainder of the schema is where you will begin desc
 - `type`: this denotes the type of data that is collected through this field. The most common types of data collected are `string`, `number`, `integer`, `object`, `array`, `boolean` and `null`. A single field can allow multiple types as shown in the field `job role` in the example schema which allows both `string` and `null`
 - Validation arguments can then be passed into the field such as `minLength`, `maxLength` and `enum` for strings and `minimum` and `maximum` for integers.
 
-This example doesn't show the optional `$supersedes` and `$supersededBy` fields. See [marking schemas as superseded](/docs/event-studio/data-structures/versioning/amending/index.md#marking-the-schema-as-superseded).
+This example doesn't show the optional `$supersedes` and `$supersededBy` fields. See [marking schemas as superseded](/docs/fundamentals/schemas/versioning/index.md#marking-the-schema-as-superseded).
 
 ## Iglu schema repository
 

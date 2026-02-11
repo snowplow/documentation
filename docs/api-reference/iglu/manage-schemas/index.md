@@ -1,6 +1,6 @@
 ---
 title: "Manage schemas using Iglu Server"
-sidebar_label: "Console integration"
+sidebar_label: "Manage schemas"
 date: "2020-02-15"
 sidebar_position: 4
 description: "Manage schemas with Iglu Server or host a static Iglu registry in Amazon S3 or Google Cloud Storage for self-hosted Snowplow deployments."
@@ -11,7 +11,7 @@ To manage your [schemas](/docs/fundamentals/schemas/index.md), you will need to 
 
 Alternatively, you can host a [static Iglu registry](/docs/api-reference/iglu/iglu-repositories/static-repo/index.md) in Amazon S3 or Google Cloud Storage.
 
-## Creating a schema
+## Create a schema
 
 First, design the schema for your custom event (or entity). For example:
 
@@ -66,3 +66,13 @@ igluctl static push --public <local path to schemas> <Iglu server endpoint> <igl
 ```
 
 See the [Igluctl reference page](/docs/api-reference/iglu/igluctl-2/index.md#static-push) for more information on the `static push` command.
+
+## Versioning schemas
+
+When evolving your [schema](/docs/fundamentals/schemas/index.md) and [uploading](/docs/api-reference/iglu/manage-schemas/index.md) it to your [Iglu Server](/docs/api-reference/iglu/iglu-repositories/iglu-server/index.md), you will need to choose how to increment its version.
+
+```mdx-code-block
+import Breaking from "/docs/reusable/schema-version-breaking-change/_breaking.md"
+
+<Breaking/>
+```

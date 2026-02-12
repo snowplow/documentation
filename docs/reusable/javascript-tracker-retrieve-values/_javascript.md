@@ -1,4 +1,4 @@
-If you call `snowplow` with a function as the argument, the function will be executed when sp.js loads:
+If you call `snowplow` with a function as the argument, the function will be executed when `sp.js` loads:
 
 ```javascript
 snowplow(function () {
@@ -14,7 +14,7 @@ snowplow(function (x) {
 }, "sp.js has loaded");
 ```
 
-The callback you provide is executed as a method on the internal `trackerDictionary` object. This means that you can access the `trackerDictionary` using `this`.
+The callback you provide is executed as a method on the internal `trackerDictionary` object. You can access the `trackerDictionary` using `this`.
 
 ```javascript
 // Configure a tracker instance named "sp"
@@ -30,14 +30,14 @@ snowplow(function () {
 })
 ```
 
-The callback function should not be a method:
+The callback function shouldn't be a method:
 
 ```javascript
 // TypeError: Illegal invocation
 snowplow(console.log, "sp.js has loaded");
 ```
 
-This will not work because the value of `this` in the `console.log` function will be the `trackerDictionary` rather than `console`.
+This won't work because the value of `this` in the `console.log` function will be the `trackerDictionary`, rather than `console`.
 
 You can get around this problem using `Function.prototoype.bind` as follows:
 

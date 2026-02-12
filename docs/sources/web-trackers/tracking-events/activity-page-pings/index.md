@@ -13,11 +13,11 @@ import TabItem from '@theme/TabItem';
 
 As well as tracking page views, we can monitor whether users continue to engage with pages over time, and record how they digest content on each page over time.
 
-That is accomplished using 'page ping' events. If activity tracking is enabled, the web page is monitored to see if a user is engaging with it e.g. is the tab in focus, does the mouse move over the page, does the user scroll, is `updatePageActivity` called, etc. If any of these things occur in a set period of time, a page ping event fires, and records the maximum scroll left / right and up / down in the last ping period. If there is no activity in the page, e.g. because the user is on a different browser tab, no page ping fires.
+That is accomplished using [page ping events](/docs/events/ootb-data/page-activity-tracking/index.md#page-engagement). If activity tracking is enabled, the web page is monitored to see if a user is engaging with it e.g. is the tab in focus, does the mouse move over the page, does the user scroll, is `updatePageActivity` called, etc. If any of these things occur in a set period of time, a page ping event fires, and records the maximum scroll left / right and up / down in the last ping period. If there is no activity in the page, e.g. because the user is on a different browser tab, no page ping fires.
 
 Page ping events are **automatically tracked** once configured.
 
-## Tracking page pings
+## Track page pings
 
 ### Enable activity tracking
 
@@ -56,8 +56,8 @@ You can elect to enable activity tracking on specific pages. It is executed as p
 
 The following example would generate the first ping event after 30 seconds, and subsequent pings every 10 seconds as long as the user continued to browse the page actively.
 
-:::warning
-The `enableActivityTracking` method **must** be called _before_ the `trackPageView` method.
+:::info Method order
+The `enableActivityTracking` method **must** be called before the `trackPageView` method.
 :::
 
 <Tabs groupId="platform" queryString>
@@ -148,7 +148,7 @@ This is particularly useful when a user is passively engaging with your content,
 
 ## Activity tracking callback
 
-You can now perform edge analytics in the browser to reduce the number of events sent to you collector whilst still tracking user activity. The Snowplow JavaScript Tracker enables this by allowing a callback to be specified in place of a page ping being sent. This is enabled by:
+You can now perform edge analytics in the browser to reduce the number of events sent to your Collector whilst still tracking user activity. The Snowplow JavaScript Tracker enables this by allowing a callback to be specified in place of a page ping being sent.
 
 ### Enable callback
 
@@ -181,7 +181,7 @@ enableActivityTrackingCallback({
   </TabItem>
 </Tabs>
 
-where `minimumVisitLength` is the time period from page load before the first page ping occurs, in seconds. `heartbeat` is the number of seconds between each page ping, once they have started. The `callback` should be a function which will receive an event object containing the page ping activity information, including pageivew_id, and any Page View contexts.
+where `minimumVisitLength` is the time period from page load before the first page ping occurs, in seconds. `heartbeat` is the number of seconds between each page ping, once they have started. The `callback` should be a function which will receive an event object containing the page ping activity information, including `pageViewId`, and any Page View entities.
 
 ```javascript
 type ActivityCallbackData = {
@@ -314,10 +314,6 @@ trackPageView();
 For this technique of sending on visibility change to work reliably, we recommend initialising the Snowplow tracker with `eventMethod: 'beacon'` and/or `stateStorageStrategy: 'cookieAndLocalStorage'` (if navigating to a page that also contains the JS Tracker). Using the visibility change technique may not work as expected for Single Page Applications (SPA), you would need to send the aggregated event to the Snowplow collector on navigation within your application.
 :::
 
-:::warning
-The `iglu:com.acme_company/page_unload/jsonschema/1-0-0` schema used in the example is not a valid schema. Please define your own schema for these events. Otherwise, they will fail validation and go to the bad event queue.
-:::
-
 We are using `visibilitychange` events as `beforeunload` isn't a reliable option for mobile devices when using `beacon`. You can read more about this on [MDN](https://developer.mozilla.org/en-US/docs/Web/API/Navigator/sendBeacon#description). An idea on the different levels of compatibility of the different Page Visiblity API across browsers and mobile can here found [here](https://www.igvita.com/2015/11/20/dont-lose-user-and-app-state-use-page-visibility/).
 
 ### Disable callback
@@ -347,6 +343,12 @@ disableActivityTrackingCallback();
 
 This will stop any further activity tracking callback from being executed.
 
-## Reset page ping on page view
+## Reset page pings on page view
 
-By default the tracker will reset the Page Ping timers, which were configured when `enableActivityTracking` is called, as well as reset the attached webPage context entities on all future Page Pings when a new [`trackPageView`](/docs/sources/web-trackers/tracking-events/page-views/index.md) event occurs. This is enabled by default as of 2.13.0 and is particularly useful for Single Page Applications (SPA). If you previously relied on this behavior, you can disable this functionality by specifying `resetActivityTrackingOnPageView: false` in the configuration object on tracker initialisation.
+By default, tracking a [page view](/docs/sources/web-trackers/tracking-events/page-views/index.md) using `trackPageView()`resets activity tracking timers and scroll offsets. This is particularly useful for single page applications (SPAs) where page navigation doesn't cause a full page reload.
+
+This behavior is the default since version 2.13.0. To prevent it, use the `resetActivityTrackingOnPageView` option during [tracker initialization](/docs/sources/web-trackers/tracker-setup/initialization-options/index.md).
+
+## Add entities dynamically
+
+When tracking [page views](/docs/sources/web-trackers/tracking-events/page-views/index.md), you can attach custom entities dynamically to each page view **and** subsequent page pings using the `contextCallback` parameter.

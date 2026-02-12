@@ -60,6 +60,8 @@ You may not want to add the same context entity to all tracked events. There are
 
 Generating context on-the-fly is accomplished with **context generators**. A context generator is a callback that will be evaluated with an optional argument that contains useful information.
 
+A context generator can return a single context entity, an array of context entities, or `undefined` (to add no context for that event).
+
 A sample context generator that conditionally generates a context entity could look like this:
 
 <Tabs groupId="platform" queryString>
@@ -187,6 +189,11 @@ Here's the specific structure of a ruleset, it's an object with certain optional
     reject: []
 }
 ```
+
+The rules are evaluated as follows:
+- The context is attached only if at least one `accept` rule matches the event schema **and** no `reject` rules match.
+- If you specify only `reject` rules (no `accept`), the context is never attached.
+- Both `accept` and `reject` can be a single rule string or an array of rule strings.
 
 Some examples, take note that wild-card matching URI path components is defined with an asterisk, `*`, in place of the component:
 
@@ -368,7 +375,9 @@ removeGlobalContexts(["name", "name2"]) // array of entity names
   </TabItem>
 </Tabs>
 
-Unnamed global context entities are removed by doing a JSON match of the context to be removed with the added context. So the objects have to be the same in order for them to be matched.
+Unnamed global context entities are matched as follows:
+- **Objects** (context entities, filter providers, ruleset providers): Compared by JSON serialization, so the structure must be identical.
+- **Functions** (context generators): Compared by reference. You must pass the exact same function instance that was originally added.
 
 For example:
 

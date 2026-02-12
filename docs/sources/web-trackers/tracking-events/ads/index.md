@@ -1,5 +1,5 @@
 ---
-title: "Track ads on web"
+title: "Track advertisements on web"
 sidebar_label: "Ads"
 sidebar_position: 95
 description: "Track ad impressions, clicks, and conversions with support for various cost models across ad networks and campaigns."
@@ -54,8 +54,8 @@ import { newTracker } from '@snowplow/browser-tracker';
 import { AdTrackingPlugin, trackAdClick } from '@snowplow/browser-plugin-ad-tracking';
 
 newTracker('sp1', '{{collector_url}}', {
-   appId: 'my-app-id',
-   plugins: [ AdTrackingPlugin() ],
+  appId: 'my-app-id',
+  plugins: [ AdTrackingPlugin() ],
 });
 ```
 
@@ -70,16 +70,16 @@ The ad tracking plugin includes three event types: ad impression, ad click, and 
 
 Ad impression tracking is accomplished using the `trackAdImpression` method. Here are the arguments it accepts:
 
-| **Name**       | **Required?** | **Description**                                                      | **Type** |
-| -------------- | ------------- | -------------------------------------------------------------------- | -------- |
-| `impressionId` | No            | Identifier for the particular impression instance                    | string   |
-| `costModel`    | No            | The cost model for the campaign: 'cpc', 'cpm', or 'cpa'              | string   |
-| `cost`         | No            | Ad cost                                                              | number   |
-| `targetUrl`    | No            | The destination URL                                                  | string   |
-| `bannerId`     | No            | Adserver identifier for the ad banner (creative) being displayed     | string   |
-| `zoneId`       | No            | Adserver identifier for the zone where the ad banner is located      | string   |
-| `advertiserID` | No            | Adserver identifier for the advertiser which the campaign belongs to | string   |
-| `campaignId`   | No            | Adserver identifier for the ad campaign which the banner belongs to  | string   |
+| **Name**       | **Required?** | **Description**                                                      | **Type**    |
+| -------------- | ------------- | -------------------------------------------------------------------- | ----------- |
+| `impressionId` | No            | Identifier for the particular impression instance                    | string      |
+| `costModel`    | No            | The cost model for the campaign: 'cpc', 'cpm', or 'cpa'              | string enum |
+| `cost`         | No            | Ad cost                                                              | number      |
+| `targetUrl`    | No            | The destination URL                                                  | string      |
+| `bannerId`     | No            | Adserver identifier for the ad banner (creative) being displayed     | string      |
+| `zoneId`       | No            | Adserver identifier for the zone where the ad banner is located      | string      |
+| `advertiserId` | No            | Adserver identifier for the advertiser which the campaign belongs to | string      |
+| `campaignId`   | No            | Adserver identifier for the ad campaign which the banner belongs to  | string      |
 
 :::note
 All properties are optional but you must specify at least 1 for this to be a valid call to `trackAdImpression`.
@@ -92,14 +92,14 @@ An example:
 
 ```javascript
 snowplow('trackAdImpression', {
-    impressionId: '67965967893',
-    costModel: 'cpm', // 'cpa', 'cpc', or 'cpm'
-    cost: 5.5,
-    targetUrl: 'http://www.example.com',
-    bannerId: '23',
-    zoneId: '7',
-    advertiserId: '201',
-    campaignId: '12'
+  impressionId: '67965967893',
+  costModel: 'cpm', // 'cpa', 'cpc', or 'cpm'
+  cost: 5.5,
+  targetUrl: 'http://www.example.com',
+  bannerId: '23',
+  zoneId: '7',
+  advertiserId: '201',
+  campaignId: '12'
 });
 ```
   </TabItem>
@@ -110,14 +110,14 @@ Example usage:
 import { trackAdImpression } from '@snowplow/browser-plugin-ad-tracking';
 
 trackAdImpression({
-    impressionId: '67965967893',
-    costModel: 'cpm', // 'cpa', 'cpc', or 'cpm'
-    cost: 5.5,
-    targetUrl: 'http://www.example.com',
-    bannerId: '23',
-    zoneId: '7',
-    advertiserId: '201',
-    campaignId: '12'
+  impressionId: '67965967893',
+  costModel: 'cpm', // 'cpa', 'cpc', or 'cpm'
+  cost: 5.5,
+  targetUrl: 'http://www.example.com',
+  bannerId: '23',
+  zoneId: '7',
+  advertiserId: '201',
+  campaignId: '12'
 });
 ```
 
@@ -130,16 +130,16 @@ Ad impression events are implemented as Snowplow self describing events. [Here]
 
 Ad click tracking is accomplished using the `trackAdClick` method. Here are the arguments it accepts:
 
-| **Name**       | **Required?** | **Description**                                                      | **Type** |
-| -------------- | ------------- | -------------------------------------------------------------------- | -------- |
-| `targetUrl`    | Yes           | The destination URL                                                  | string   |
-| `clickId`      | No            | Identifier for the particular click instance                         | string   |
-| `costModel`    | No            | The cost model for the campaign: 'cpc', 'cpm', or 'cpa'              | string   |
-| `cost`         | No            | Ad cost                                                              | number   |
-| `bannerId`     | No            | Adserver identifier for the ad banner (creative) being displayed     | string   |
-| `zoneId`       | No            | Adserver identifier for the zone where the ad banner is located      | string   |
-| `advertiserID` | No            | Adserver identifier for the advertiser which the campaign belongs to | string   |
-| `campaignId`   | No            | Adserver identifier for the ad campaign which the banner belongs to  | string   |
+| **Name**       | **Required?** | **Description**                                                      | **Type**    |
+| -------------- | ------------- | -------------------------------------------------------------------- | ----------- |
+| `targetUrl`    | Yes           | The destination URL                                                  | string      |
+| `clickId`      | No            | Identifier for the particular click instance                         | string      |
+| `costModel`    | No            | The cost model for the campaign: 'cpc', 'cpm', or 'cpa'              | string enum |
+| `cost`         | No            | Ad cost                                                              | number      |
+| `bannerId`     | No            | Adserver identifier for the ad banner (creative) being displayed     | string      |
+| `zoneId`       | No            | Adserver identifier for the zone where the ad banner is located      | string      |
+| `advertiserId` | No            | Adserver identifier for the advertiser which the campaign belongs to | string      |
+| `campaignId`   | No            | Adserver identifier for the ad campaign which the banner belongs to  | string      |
 
 An example:
 
@@ -147,7 +147,7 @@ An example:
   <TabItem value="js" label="JavaScript (tag)" default>
 
 ```javascript
-snowplow('trackAdClick',
+snowplow('trackAdClick',{
   targetUrl: 'http://www.example.com',
   clickId: '12243253',
   costModel: 'cpm',
@@ -157,7 +157,7 @@ snowplow('trackAdClick',
   impressionId: '67965967893', // the same as in trackAdImpression
   advertiserId: '201',
   campaignId: '12'
-);
+});
 ```
 
   </TabItem>
@@ -188,17 +188,17 @@ Ad click events are implemented as Snowplow self describing events.[Here](https:
 
 Use the `trackAdConversion` method to track ad conversions. Here are the arguments it accepts:
 
-| **Name**       | **Required?** | **Description**                                                      | **Type** |
-| -------------- | ------------- | -------------------------------------------------------------------- | -------- |
-| `conversionId` | No            | Identifier for the particular conversion instance                    | string   |
-| `costModel`    | No            | The cost model for the campaign: 'cpc', 'cpm', or 'cpa'              | string   |
-| `cost`         | No            | Ad cost                                                              | number   |
-| `category`     | No            | Conversion category                                                  | number   |
-| `action`       | No            | The type of user interaction, e.g. 'purchase'                        | string   |
-| `property`     | No            | Describes the object of the conversion                               | string   |
-| `initialValue` | No            | How much the conversion is initially worth                           | number   |
-| `advertiserID` | No            | Adserver identifier for the advertiser which the campaign belongs to | string   |
-| `campaignId`   | No            | Adserver identifier for the ad campaign which the banner belongs to  | string   |
+| **Name**       | **Required?** | **Description**                                                      | **Type**    |
+| -------------- | ------------- | -------------------------------------------------------------------- | ----------- |
+| `conversionId` | No            | Identifier for the particular conversion instance                    | string      |
+| `costModel`    | No            | The cost model for the campaign: 'cpc', 'cpm', or 'cpa'              | string enum |
+| `cost`         | No            | Ad cost                                                              | number      |
+| `category`     | No            | Conversion category                                                  | string      |
+| `action`       | No            | The type of user interaction, e.g. 'purchase'                        | string      |
+| `property`     | No            | Describes the object of the conversion                               | string      |
+| `initialValue` | No            | How much the conversion is initially worth                           | number      |
+| `advertiserId` | No            | Adserver identifier for the advertiser which the campaign belongs to | string      |
+| `campaignId`   | No            | Adserver identifier for the ad campaign which the banner belongs to  | string      |
 
 :::note
 All properties are optional but you must specify at least one for this to be a valid call to `trackAdConversion`.
@@ -211,15 +211,15 @@ An example:
 
 ```javascript
 snowplow('trackAdConversion', {
-    conversionId: '743560297',
-    costModel: 'cpa',
-    cost: 10,
-    category: 'ecommerce',
-    action: 'purchase',
-    property: '',
-    initialValue: 99,
-    advertiserId: '201',
-    campaignId: '12'
+  conversionId: '743560297',
+  costModel: 'cpa',
+  cost: 10,
+  category: 'ecommerce',
+  action: 'purchase',
+  property: '',
+  initialValue: 99,
+  advertiserId: '201',
+  campaignId: '12'
 });
 ```
 
@@ -230,15 +230,15 @@ snowplow('trackAdConversion', {
 import { trackAdConversion } from '@snowplow/browser-plugin-ad-tracking';
 
 trackAdConversion({
-    conversionId: '743560297',
-    costModel: 'cpa',
-    cost: 10,
-    category: 'ecommerce',
-    action: 'purchase',
-    property: '',
-    initialValue: 99,
-    advertiserId: '201',
-    campaignId: '12'
+  conversionId: '743560297',
+  costModel: 'cpa',
+  cost: 10,
+  category: 'ecommerce',
+  action: 'purchase',
+  property: '',
+  initialValue: 99,
+  advertiserId: '201',
+  campaignId: '12'
 });
 ```
 

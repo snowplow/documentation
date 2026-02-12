@@ -20,7 +20,7 @@ Tags that can derive their parameters from a Google Tag Manager variable are:
 - [Cart Tracking](/docs/sources/web-trackers/previous-versions/web-trackers-v3/tracking-events/ecommerce/original/index.md)
 - [Error Tracking](/docs/sources/web-trackers/tracking-events/errors/index.md)
 - [Consent](/docs/sources/web-trackers/previous-versions/web-trackers-v3/tracking-events/consent-gdpr/original/index.md)
-- [Self-describing Event](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md#tracking-a-custom-event-self-describing)
+- [Self-describing Event](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md#track-a-custom-event-self-describing)
 - [Site Search](/docs/sources/web-trackers/tracking-events/site-search/index.md)
 - [Social Interaction](/docs/sources/web-trackers/tracking-events/social-media/index.md)
 - [Structured Event](/docs/fundamentals/canonical-event/index.md#structured-events)
@@ -86,7 +86,7 @@ It is intended to trigger [early on a page](https://support.google.com/tagmanage
 
 ##### Page View
 
-You can provide a **Custom Page Title** if you wish, and you can add a [custom context](/docs/sources/web-trackers/tracking-events/index.md#auto-tracked-entities) to the request, as also described [here](/docs/sources/web-trackers/tracking-events/index.md#page-view).
+You can provide a **Custom Page Title** if you wish, and you can add a [custom context](/docs/sources/web-trackers/tracking-events/index.md#add-contextual-data-with-entities) to the request, as also described [here](/docs/sources/web-trackers/tracking-events/page-views/index.md).
 
 If you enable **Page Activity Tracking**, the tag will setup a _heartbeat_ tracker, and send page pings to Snowplow at intervals that you can specify.
 
@@ -112,11 +112,11 @@ And then use this variable as your Command Argument:
 
 #### Add Custom Context Entities
 
-Using the **Context Entities** table allows you to attach [custom context entities](/docs/sources/web-trackers/tracking-events/index.md#auto-tracked-entities) to the Snowplow event. Each row should be set to a variable value that must be an **array of custom context objects** that will all be concatenated to add to the Event.
+Using the **Context Entities** table allows you to attach [custom context entities](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md#track-a-custom-entity) to the Snowplow event. Each row should be set to a variable value that must be an **array of custom context objects** that will all be concatenated to add to the Event.
 
 #### Set Custom Timestamp
 
-You can also choose to [set the True Timestamp](/docs/sources/web-trackers/tracking-events/index.md#adding-custom-timestamps-to-events) with this field. The format must be UNIX time in milliseconds.
+You can also choose to [set the True Timestamp](/docs/sources/web-trackers/tracking-events/index.md#custom-timestamp) with this field. The format must be UNIX time in milliseconds.
 
 ## Acknowledgements
 

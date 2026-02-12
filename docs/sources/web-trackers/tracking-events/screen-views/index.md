@@ -11,14 +11,15 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Screen view tracking is the recommended way to track users opening a screen in mobile apps.
-They are the default option for tracking views in our mobile trackers (iOS, Android, React Native, Flutter).
-On Web, [we recommend using page views](/docs/sources/web-trackers/tracking-events/page-views/index.md) to track users visiting a page.
-However, using the screen view tracking plugin is also an option on Web if you prefer this data model.
+Screen view tracking is the recommended way to track users opening a screen in mobile apps. They are the default option for tracking views in our mobile trackers. Check out the [screen tracking overview page](/docs/events/ootb-data/page-and-screen-view-events/index.md) for more details and schemas.
 
-:::note
+On web, [we recommend using page views](/docs/sources/web-trackers/tracking-events/page-views/index.md) to track users visiting a page. However, using the screen view tracking plugin is also an option on web.
+
+:::note Availability
 The plugin is available from Version 4.2 of the tracker.
 :::
+
+Screen tracking events must be **manually tracked**. The plugin will add the relevant entities automatically.
 
 ## Install plugin
 
@@ -27,7 +28,7 @@ The plugin is available from Version 4.2 of the tracker.
 
 | Tracker Distribution | Included |
 | -------------------- | -------- |
-| `sp.js`              | ✅        |
+| `sp.js`              | ❌        |
 | `sp.lite.js`         | ❌        |
 
 **Download:**
@@ -98,11 +99,12 @@ newTracker('sp1', '{{collector_url}}', {
 
 ## Track a screen view event
 
-To track a screen view event, use the `trackScreenView` function.
-This will track a self-describing event with [the schema described here](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-views).
+To track a [screen view event](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-views), use the `trackScreenView` function.
 
 <Tabs groupId="platform" queryString>
 <TabItem value="js" label="JavaScript (tag)" default>
+
+This example shows the required properties only.
 
 ```javascript
 window.snowplow(
@@ -110,8 +112,6 @@ window.snowplow(
   {
     name: 'my-screen-name',
     id: '5d79770b-015b-4af8-8c91-b2ed6faf4b1e', // generated automatically if not provided
-    type: 'carousel', // optional
-    transitionType: 'basic', // optional
   }
 );
 ```
@@ -119,21 +119,25 @@ window.snowplow(
 </TabItem>
 <TabItem value="browser" label="Browser (npm)">
 
+This example shows the required properties only.
+
 ```javascript
 import { trackScreenView } from '@snowplow/browser-plugin-screen-tracking';
 
 trackScreenView({
   name: 'my-screen-name',
   id: '5d79770b-015b-4af8-8c91-b2ed6faf4b1e', // generated automatically if not provided
-  type: 'carousel', // optional
-  transitionType: 'basic', // optional
 });
 ```
 
 </TabItem>
 </Tabs>
 
-## Screen context entity
+## Screen entity
+
+By default, the tracker will automatically attach [a `screen` entity](/docs/events/ootb-data/page-and-screen-view-events/index.md#screen-entity) to **all** events tracked.
+
+However, if you haven't tracked any screen views, no `screen` entity will be attached. The `screen` entity contains information about the last screen viewed by the user, based on the last `trackScreenView` call.
 
 <Tabs groupId="platform" queryString>
 <TabItem value="js" label="JavaScript (tag)" default>
@@ -170,11 +174,13 @@ newTracker('sp1', '{{collector_url}}', {
 </TabItem>
 </Tabs>
 
-If the `screenContext` property is enabled, the tracker attaches a [`Screen` entity](http://iglucentral.com/schemas/com.snowplowanalytics.mobile/screen/jsonschema/1-0-0) to all the events tracked by the tracker reporting the last (and probably current) screen visible on device when the event was tracked.
-
-The `Screen` entity is based off the internal state of the tracker only. To make an example, if the developer manually tracks a `ScreenView` event, all the following events will have a `Screen` entity attached reporting the same information as the last tracked ScreenView event.
-
 ## Screen engagement tracking
+
+By default, the screen tracking plugin enables [screen engagement tracking](/docs/events/ootb-data/page-activity-tracking/index.md#screen-engagement).
+
+The tracker will automatically track a screen end event, with `screen_summary` entity, just before tracking a new screen view event.
+
+Because this feature was designed for mobile platforms, not all the functionality is applicable to web. The page doesn't distinguish between foreground and background, so the `foreground_sec` time in the `screen_summary` entity will track the total time spent on the screen. The `background_sec` field will always be `null`.
 
 <Tabs groupId="platform" queryString>
 <TabItem value="js" label="JavaScript (tag)" default>
@@ -212,30 +218,22 @@ newTracker('sp1', '{{collector_url}}', {
 </Tabs>
 
 
-Screen engagement tracking is a feature that enables tracking the user activity on the screen.
-This consists of the time spent and the amount of content viewed on the screen.
-
-Concretely, it consists of the following metrics:
-
-1. Time spent on screen while the app was in foreground (tracked automatically).
-2. Time spent on screen while the app was in background (tracked automatically).
-3. Number of list items scrolled out of all list items (requires some manual tracking).
-4. Scroll depth in pixels (requires some manual tracking).
-
-This information is attached using a [`screen_summary` context entity](/docs/events/ootb-data/page-activity-tracking/index.md#screen-summary-entity) to the following events:
-
-1. [`screen_end` event](/docs/events/ootb-data/page-activity-tracking/index.md#screen-end-event) that is automatically tracked before a new screen view event.
-2. [`application_background` event](/docs/events/ootb-data/mobile-lifecycle-events/index.md#background-event).
-3. [`application_foreground` event](/docs/events/ootb-data/mobile-lifecycle-events/index.md#foreground-event).
-
-Screen engagement tracking is enabled by default, but can be configured using the `screenEngagementAutotracking` option when initializing the plugin.
-
-For a demo of how mobile screen engagement tracking works in action, **[please visit this demo](https://snowplow-incubator.github.io/mobile-screen-engagement-demo/)**.
-
 ### Updating list item view and scroll depth information
 
-To update the list item viewed and scroll depth information tracked in the screen summary entity, you can track the `ListItemView` and `ScrollChanged` events with this information.
-When tracked, the tracker won't send these events individually to the collector, but will process the information into the next `screen_summary` entity and discard the events.
+To update the [list item viewed and scroll depth information](/docs/events/ootb-data/page-activity-tracking/index.md#screen-engagement) tracked in the `screen_summary` entity, track the `ListItemView` and `ScrollChanged` events with this information.
+
+:::note Page pings and element visibility
+
+We designed the screen summary entity to work with mobile platforms. On web, you can track scroll offsets automatically using [page pings](/docs/sources/web-trackers/tracking-events/activity-page-pings/index.md).
+
+For fine-grained tracking of page element visibility, consider using the [element visibility tracking plugin](/docs/sources/web-trackers/tracking-events/element-tracking/index.md) instead.
+
+:::
+
+When tracked and `screenEngagementAutotracking` is enabled, the tracker won't send these events to the Collector, but will process the information into the next screen summary entity. This means that tracking these events by themselves has no effect if you don't also track screen views.
+
+If you've set `screenEngagementAutotracking: false`, the list item view and scroll depth events are treated as regular events and sent to the Collector.
+
 You may want to track the events every time a new list item is viewed on the screen, or whenever the scroll position changes.
 
 To update the list items viewed information:

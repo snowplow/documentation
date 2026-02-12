@@ -44,7 +44,7 @@ The Snowplow Collector generates a user identifier that is stored in cookies for
 
 The identifier is available both in Web and mobile apps. However, in Android apps, it is stored in memory so it is reset after the app restarts.
 
-In most scenarios, this identifier may have a longer lifetime than the tracker generated identifier. However, browsers can restrict it's lifetime for different reasons, such as when the Snowplow Collector is on a third-party domain from the website (not recommended), or due to the ITP restrictions in Safari (Snowplow provides a solution to mitigate this problem – [the Cookie Extension service](/docs/events/cookie-extension/index.md)).
+In most scenarios, this identifier may have a longer lifetime than the tracker generated identifier. However, browsers can restrict it's lifetime for different reasons, such as when the Snowplow Collector is on a third-party domain from the website (not recommended), or due to the ITP restrictions in Safari (Snowplow provides a solution to mitigate this problem – [the Cookie Lifetime Extension service](/docs/sources/web-trackers/cookies-and-local-storage/cookie-extension/index.md)).
 
 :::info Collector cookie
 `network_userid` is captured via a cookie set by the Snowplow Collector. It can be overriden by setting `tnuid` on a Tracker request payload but is typically expected to be populated by the Collector cookies.
@@ -58,7 +58,7 @@ This is an external identifier given in the tracker by the app. Most commonly it
 The business user identifier is provided under the `user_id` field in the atomic events as well as our dbt packages.
 :::
 
-All our trackers have an API to set this identifier. You can find it in [the JavaScript tracker docs here](/docs/sources/web-trackers/tracking-events/index.md#setting-the-user-id) and [the mobile trackers docs here](/docs/sources/mobile-trackers/client-side-properties/index.md#set-the-subject-properties).
+All our trackers have an API to set this identifier. You can find it in [the JavaScript tracker docs here](/docs/sources/web-trackers/tracking-events/index.md#business-user-id) and [the mobile trackers docs here](/docs/sources/mobile-trackers/client-side-properties/index.md#set-the-subject-properties).
 
 This identifier can be very useful to stitch the generated tracker identifiers together in order to identify the same user across multiple browsers or devices. See below for more information on user stitching.
 

@@ -12,26 +12,14 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Self-describing (self-referential) JSON schemas are at the core of Snowplow tracking. Read more about them [here](/docs/fundamentals/schemas/index.md). They allow you to track completely customised data, and are also used internally throughout Snowplow pipelines.
+The specific data you need might not be covered by the JavaScript tracker's built-in event types and entities. In this case, you can use Snowplow’s [self-describing events](/docs/fundamentals/events/index.md#self-describing-events) and custom [entities](/docs/fundamentals/entities/index.md) to track [customised data](docs/events/custom-events/index.md).
 
-In all our trackers, self-describing JSON are used in two places. One is in the `SelfDescribing` event type that wraps custom self-describing JSONs for sending. The second use is to attach entities to any tracked event.
-The entities can describe the context in which the event happen or provide extra information to better describe the event.
+## Track a custom event (self-describing)
 
-
-## Tracking a custom event (self-describing)
-
-You may wish to track events in your app which are not directly supported by Snowplow and which structured event tracking does not adequately capture. Your event may have more than the five fields offered by Structured events, or its fields may not fit into the category-action-label-property-value model. The solution is Snowplow’s self-describing events. Self-describing events are a [data structure based on JSON Schemas](/docs/fundamentals/schemas/index.md) and can have arbitrarily many fields.
-
-To track a self-describing event, you make use of the `trackSelfDescribingEvent` method:
+To track a custom self-describing event, use the `trackSelfDescribingEvent` method. For example:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
-
-```javascript
-snowplow('trackSelfDescribingEvent', {{SELF-DESCRIBING EVENT JSON}});
-```
-
-For example:
 
 ```javascript
 snowplow('trackSelfDescribingEvent', {
@@ -79,9 +67,9 @@ The second argument or event property, depending on tracker, is a [self-describ
 - A `data` field, containing the properties of the event
 - A `schema` field, containing the location of the [JSON schema](http://json-schema.org/) against which the `data` field should be validated.
 
-Like all `trackX` methods, `trackSelfDescribingEvent` can also be passed an array of custom context entities as an additional parameter. See the next section for more information.
+Like all `trackX` methods, `trackSelfDescribingEvent` can also be passed an array of custom entities as an additional parameter.
 
-## Tracking a custom entity
+## Track a custom entity
 
 ```mdx-code-block
 import DefineCustomEntity from "@site/docs/reusable/define-custom-entity/_index.md"
@@ -89,13 +77,9 @@ import DefineCustomEntity from "@site/docs/reusable/define-custom-entity/_index.
 <DefineCustomEntity/>
 ```
 :::tip
-Custom context entities can be added as an extra argument to any of Snowplow's `trackX()` methods, e.g. `trackPageView` or `trackLinkClick`.
-:::
+Custom entities can be added as an extra argument to most Snowplow's `trackX()` methods, e.g. `trackPageView` or `trackLinkClick`.
 
-:::note
-
-Tracker methods available through plugins do not necessarily support adding custom entities. For those please refer to the corresponding plugin documentation for details.
-
+Not all plugins support adding custom entities; please refer to the corresponding plugin documentation for details.
 :::
 
 Here are two examples of schema for custom entities.
@@ -146,7 +130,7 @@ and the other describes a user on that screen:
 }
 ```
 
-**Important:** Even if only one custom context is being attached to an event, it still needs to be wrapped in an array.
+**Important:** Even if only one custom entity is being attached to an event, it still needs to be wrapped in an array.
 
 Tracking a **page view** with both of these example entities attached:
 
@@ -194,7 +178,7 @@ trackPageView({
   </TabItem>
 </Tabs>
 
-Tracking a **self describing event** with both of these context entities attached:
+Tracking a **self describing event** with both of these entities attached:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -253,4 +237,47 @@ trackSelfDescribingEvent({
   </TabItem>
 </Tabs>
 
-For more information on custom contexts, see [here](/docs/fundamentals/entities/index.md#custom-entities).
+## Track a structured event
+
+We recommend using custom self-describing events instead of structured events, as the provide more better data governance and easier modeling.
+
+There are five parameters that can be associated with each structured event. Only the first two are required:
+
+| Name       | Required? | Description                                                                                                                                                      | Type    |
+| ---------- | --------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------- |
+| `Category` | Yes       | The name you supply for the group of objects you want to track e.g. 'media', 'ecomm'.                                                                            | String  |
+| `Action`   | Yes       | Defines the type of user interaction for the web object e.g. 'play-video', add-to-basket'.                                                                       | String  |
+| `Label`    | No        | Identifies the specific object being actioned e.g. ID of the video being played, or the SKU or the product added to basket.                                      | String? |
+| `Property` | No        | Describing the object or the action performed on it. This might be the quantity of an item added to basket.                                                      | String? |
+| `Value`    | No        | Quantify or further describe the user action. This might be the price of an item added to basket, or the starting time of the video where play was just pressed. | Float?  |
+
+An example of tracking a user listening to a music mix:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('trackStructEvent', {
+  category: 'Mixes',
+  action: 'Play',
+  label: 'MrC/fabric-0503-mix',
+  property: '',
+  value: 0.0
+});
+```
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { trackStructEvent } from '@snowplow/browser-tracker';
+
+trackStructEvent({
+  category: 'Mixes',
+  action: 'Play',
+  label: 'MrC/fabric-0503-mix',
+  value: 0.0
+});
+```
+
+  </TabItem>
+</Tabs>

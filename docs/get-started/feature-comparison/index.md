@@ -16,7 +16,7 @@ Check out the [Snowplow Product Directory](https://snowplow.io/snowplow-product-
 | [25+ trackers and webhooks](/docs/sources/index.md)                                                                       |   ✅   |        ✅         |
 | First party tracking                                                                                                      |   ✅   |        ✅         |
 | Anonymous data collection                                                                                                 |   ✅   |        ✅         |
-| [Cookie Extension service](/docs/events/cookie-extension/index.md)                                                        |   ✅   |        ✅         |
+| [Cookie Lifetime Extension service](/docs/sources/web-trackers/cookies-and-local-storage/cookie-extension/index.md)       |   ✅   |        ✅         |
 | High availability and auto-scaling                                                                                        |   ✅   |        ❌         |
 | [Enrichments](/docs/pipeline/enrichments/available-enrichments/index.md)                                                  |   ✅   |        ✅         |
 | [Failed events](/docs/fundamentals/failed-events/index.md)                                                                |   ✅   |        ✅         |

@@ -11,7 +11,7 @@ Event specifications are complete definitions of business events. They define wh
 They act as data contracts between teams. When you create an event specification, you are defining exactly what data your applications should send, what your data warehouse will receive, and what your downstream consumers can rely on.
 
 :::note Event specifications are part of tracking plans
-You can only make event specifications within tracking plans. Tracking plans are wrappers for related event specifications. Event specifications can belong to multiple tracking plans.
+You can only make event specifications within tracking plans. Tracking plans are wrappers for related event specifications. Each event specification belongs to a single tracking plan.
 :::
 
 Each event specification has an event [data structure](/docs/event-studio/data-structures/index.md), plus optional entity data structures. You can add instructions for how to populate each property, when to trigger the event, and how many of each entity to expect. You can also select which version of each data structure to use.

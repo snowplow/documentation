@@ -2,6 +2,8 @@
 title: "BigQuery Loader 2.0.0 upgrade guide"
 sidebar_label: "2.0.0 upgrade guide"
 sidebar_position: -20
+description: "Guide for upgrading to BigQuery Loader 2.0.0, including configuration changes, new column naming strategy, and recovery columns for schema evolution."
+keywords: ["BigQuery Loader", "upgrade guide", "schema evolution", "recovery columns", "BigQuery"]
 ---
 
 ## Configuration
@@ -103,7 +105,7 @@ To avoid crashing or losing data, BigQuery Loader 2.0.0 proceeds by creating a n
 
 If you create a new schema `1-0-2` that reverts the offending changes and is again compatible with `1-0-0`, the data for events with that schema will be written to the original column as expected.
 :::tip
-You might find that some of your schemas were evolved incorrectly in the past, which results in the creation of these “recovery” columns after the upgrade. To address this for a given schema, create a new _minor_ schema version that reverts the breaking changes introduced in previous versions. (Or, if you want to keep the breaking change, create a new _major_ schema version.) You can set it to [supersede](/docs/event-studio/data-structures/version-amend/amending/index.md#marking-the-schema-as-superseded) the previous version(s), so that events are automatically validated against the new schema.
+You might find that some of your schemas were evolved incorrectly in the past, which results in the creation of these “recovery” columns after the upgrade. To address this for a given schema, create a new _minor_ schema version that reverts the breaking changes introduced in previous versions. (Or, if you want to keep the breaking change, create a new _major_ schema version.) You can set it to [supersede](/docs/fundamentals/schemas/versioning/index.md#mark-a-schema-as-superseded) the previous version(s), so that events are automatically validated against the new schema.
 :::
 :::note
 

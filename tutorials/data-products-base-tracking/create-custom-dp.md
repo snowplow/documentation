@@ -2,6 +2,8 @@
 position: 7
 title: Create a custom tracking plan for todo behavior
 sidebar_label: Create a custom tracking plan
+description: "How to create a custom tracking plan in Snowplow Console with event specifications for tracking todo interactions."
+keywords: ["tracking plans", "event specifications", "custom events", "Snowplow Console"]
 ---
 
 As in every application, there are interactions that are important to the business and are measured in a custom way. For this application the interactions you need to measure are:

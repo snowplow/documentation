@@ -2,6 +2,8 @@
 title: "Segment to Snowplow"
 date: "2025-08-04"
 sidebar_position: 0
+description: "A guide for technical implementers migrating from Segment to Snowplow, covering event structure differences, tracking plan translation, and a phased migration approach."
+keywords: ["Segment", "migration", "tracking plan", "event tracking", "Snowplow CLI"]
 ---
 
 This guide is to help technical implementers migrate from Segment to Snowplow.
@@ -92,7 +94,7 @@ Snowplow provides [monitoring](/docs/monitoring/index.md) and alerting for faile
 
 Snowplow also provides event data management tools for defining and managing tracking plans. Each Snowplow [tracking plan](/docs/fundamentals/tracking-plans/index.md) contains a set of related event specifications. Each event specification has one event data structure, and any number of entity data structures.
 
-You can use the Snowplow Console, API, or CLI to [define your tracking data structures](/docs/event-studio/tracking-plans/index.md). For each event you can specify when it should be tracked, and which entities should be added. Once you've defined your event specifications, use [Snowtype](/docs/event-studio/snowtype/index.md) to automatically generate the tracking code snippets.
+You can use the Snowplow Console, API, or CLI to [define your tracking data structures](/docs/event-studio/tracking-plans/index.md). For each event you can specify when it should be tracked, and which entities should be added. Once you've defined your event specifications, use [Snowtype](/docs/event-studio/implement-tracking/snowtype/index.md) to automatically generate the tracking code snippets.
 
 
 ## Migration phases
@@ -119,10 +121,10 @@ You'll need to translate your Segment Tracking Plans into Snowplow [tracking pla
 * Are there sets of event properties used in multiple places that could be defined as [entities](/docs/fundamentals/entities/index.md) instead?
 * What's the best combination of event properties and entities to capture the same data as the non-`track` Segment events?
 
-The goal is to create a set of JSON data structures for all your events and entities, organized into tracking plans and [event specifications](/docs/event-studio/event-specifications/index.md). The best way to import your new tracking plans into Snowplow is to use the [Snowplow CLI](/docs/event-studio/snowplow-cli/index.md).
+The goal is to create a set of JSON data structures for all your events and entities, organized into tracking plans and [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md). The best way to import your new tracking plans into Snowplow is to use the [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md).
 
 :::info Snowplow CLI MCP server
-The Snowplow CLI includes an [MCP server](/docs/event-studio/snowplow-cli/index.md#mcp-server) to help you translate your Segment Tracking Plans into Snowplow tracking plans.
+The Snowplow CLI includes an [MCP server](/docs/event-studio/programmatic-management/snowplow-cli/index.md#mcp-server) to help you translate your Segment Tracking Plans into Snowplow tracking plans.
 :::
 
 In this phase, you'll also need to decide what to do with historical data. There are two main choices:
@@ -138,7 +140,7 @@ This phase involves three main tasks:
 
 Follow the [Snowplow CDI getting started instructions](/docs/get-started/private-managed-cloud/index.md) to set up your Snowplow infrastructure.
 
-If you haven't done this yet, use the [Snowplow CLI](/docs/event-studio/snowplow-cli/index.md) to import your new tracking plans into Snowplow. You can also inspect and edit tracking plans using the Snowplow Console. They'll be available to the Snowplow pipeline for data validation on publishing.
+If you haven't done this yet, use the [Snowplow CLI](/docs/event-studio/programmatic-management/snowplow-cli/index.md) to import your new tracking plans into Snowplow. You can also inspect and edit tracking plans using the Snowplow Console. They'll be available to the Snowplow pipeline for data validation on publishing.
 Use the Snowplow CLI or Console to publish.
 
 Add Snowplow tracking in parallel with your existing Segment tracking:
@@ -149,7 +151,7 @@ Add Snowplow tracking in parallel with your existing Segment tracking:
   * Use the Snowplow Inspector to confirm that the tracker is generating the expected events
   * Use [Snowplow Micro](/docs/testing/snowplow-micro/index.md) to test and validate locally
   * Finally, confirm that the tracker can also send events to your warehouse
-* Use [Snowtype](/docs/event-studio/snowtype/index.md) to generate custom tracking code for your tracking plans
+* Use [Snowtype](/docs/event-studio/implement-tracking/snowtype/index.md) to generate custom tracking code for your tracking plans
 * Test and validate your custom tracking using Micro as before
 * Gradually continue this process until you have a complete Segment and Snowplow dual tracking implementation
 * Gradually roll out tracking to production

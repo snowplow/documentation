@@ -21,8 +21,6 @@ import Breaking from "/docs/reusable/schema-version-breaking-change/_breaking.md
 
 <Breaking/>
 
-Snowplow infrastructure doesn't increment the [middle version digit](/docs/event-studio/data-structures/versioning/index.md#increment-the-middle-digit), but you can use it in your own versioning strategy.
-
 Changing a schema without incrementing the version has several risks:
 * Events that were previously valid could become invalid against the new changes
 * Your warehouse Loader, which updates the table [according to the schema](/docs/api-reference/loaders-storage-targets/schemas-in-warehouse/index.md#versioning), could get stuck if it’s not possible to cast the data in the existing table column to the new definition (e.g. if you change a field type from a string to a number)

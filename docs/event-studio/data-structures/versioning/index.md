@@ -9,30 +9,31 @@ keywords: ["schema versioning", "backwards compatibility", "breaking changes", "
 
 Every data structure is based on a [versioned schema](/docs/fundamentals/schemas/versioning/index.md).
 
-## Versioning with the data structure builder
-
-Versioning is automated when using the data structure builder to create or edit your custom data structures.
-
-It will automatically select how to version up your data structure depending on the changes you have just made.
-
-![](images/data-structures-2.png)
-![](images/data-structures-1.png)
-
-## Versioning with the JSON editor
-
-When using the JSON editor, at the point of publishing a data structure you'll be asked to select which version you'd like to create.
-
 ```mdx-code-block
 import Breaking from "/docs/reusable/schema-version-breaking-change/_breaking.md"
 
 <Breaking/>
 ```
 
-## Increment the middle digit
+## Automatic versioning with the data structure builder
 
-For particular workflows you may want to make use of the middle digital as part of your versioning strategy. For simplicity, the UI allows only breaking or non-breaking changes.
+Versioning is automated when using the data structure builder to create or edit your custom data structures.
 
-Should you wish to use the middle versioning digit this is possible [via the Data Structures API](/docs/event-studio/programmatic-management/data-structures-api/index.md).
+It will automatically select how to version up your data structure depending on the changes you have just made.
+
+In this example, a new required property has been added to the data structure. This is a breaking change, so the builder will increment the first digit:
+
+![](images/data-structures-2.png)
+
+In this example, an additional enum option has been added to `category`. This is a non-breaking change, so the builder is incrementing the middle digit:
+
+![](images/data-structures-1.png)
+
+## Versioning with the JSON editor
+
+When using the JSON editor, at the point of publishing a data structure you'll be asked to select which version you'd like to create.
+
+![](images/json_editor_version_options.png)
 
 ## Patch a schema
 

@@ -17,8 +17,6 @@ Snowplow provides several approaches to generate and implement tracking code:
 
 When viewing an [event specification](/docs/event-studio/tracking-plans/event-specifications/index.md) in Console, the **Working with this event** section provides ready-to-use code snippets.
 
-### Implementation
-
 The snippets in the **Implementation** tab show the exact tracking calls needed for each event, including all required properties and entities.
 
 :::note Available for custom web events only
@@ -67,9 +65,3 @@ window.snowplow("trackSelfDescribingEvent", {
 Use the **Show Snowtype code** toggle to display the specific Snowtype function name to call for tracking implementation.
 
 ![Show snowtype code](images/show-snowtype-code.png)
-
-### Querying
-
-The **Querying** tab provides example queries to help you retrieve and analyze your event data. Choose your warehouse to see appropriately optimized SQL.
-
-![Querying SQL examples](images/sql-example.png)

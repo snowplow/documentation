@@ -79,7 +79,6 @@ If you are a Snowplow CDI customer, rather than self-hosted, you don't need to i
 | :-------------------------------------------------------------------------------------------------------------- | :----------------------------------: |
 | [Stream Collector](/docs/api-reference/stream-collector/index.md)                                               |        {versions.collector}          |
 | [Enrich](/docs/api-reference/enrichment-components/index.md)                                                    |          {versions.enrich}           |
-| [RDB Loader (Snowflake)](/docs/api-reference/loaders-storage-targets/snowplow-rdb-loader/index.md)              |        {versions.rdbLoader}          |
 | [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                                 |        {versions.lakeLoader}         |
 | [Snowflake Streaming Loader](/docs/api-reference/loaders-storage-targets/snowflake-streaming-loader/index.md)   | {versions.snowflakeStreamingLoader}  |
 | [Databricks Streaming Loader](/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/index.md) | {versions.databricksStreamingLoader} |

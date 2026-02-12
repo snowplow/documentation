@@ -433,14 +433,83 @@ aside.theme-doc-sidebar-container {
   border-radius: var(--radius);
 }
 
-.theme-doc-sidebar-item-link-level-1.header {
-  margin-top: 1em;
-  padding-bottom: 0;
-  padding-left: var(--ifm-menu-link-padding-horizontal);
-  font-variant: all-small-caps;
-  font-size: 1.1em;
-  color: var(--ifm-color-primary-darker);
+/* Collapsible section headers - styled as distinct category headings */
+.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible {
+  margin-top: 1.25em;
 }
+
+.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .menu__link {
+  padding-bottom: 0.125em;
+  font-variant: all-small-caps;
+  font-size: 0.93825rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: hsl(var(--muted-foreground));
+}
+
+/* Disable hover/active highlight styles on section header links */
+.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .menu__link:hover,
+.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .menu__link.menu__link--active {
+  background: none;
+  border-left: none;
+  color: hsl(var(--muted-foreground));
+}
+
+.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible:hover {
+  background: none !important;
+}
+
+.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible.menu__list-item-collapsible--active {
+  background: none !important;
+  border-left: none;
+  margin-left: 0;
+}
+
+/* Section header caret: always visible, aligned with text */
+.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .menu__caret {
+  display: flex !important;
+  opacity: 1 !important;
+  padding: 2px !important;
+  margin-left: auto;
+}
+
+.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .menu__caret:hover {
+  background: none !important;
+  border-left: none;
+}
+
+/* Remove vertical border line from section header's direct child list */
+.theme-doc-sidebar-item-category-level-1.section-header > .menu__list {
+  padding-left: 0;
+  margin-left: 0;
+  border-left: none;
+}
+
+/* Make items inside section headers look like top-level items */
+.section-header .theme-doc-sidebar-item-category-level-2,
+.section-header .theme-doc-sidebar-item-link-level-2 {
+  font-weight: 500;
+  color: hsl(var(--foreground));
+}
+
+.section-header .theme-doc-sidebar-item-category-level-2 > .menu__list-item-collapsible > .menu__link,
+.section-header .theme-doc-sidebar-item-link-level-2 > .menu__link {
+  padding-left: var(--ifm-menu-link-padding-horizontal);
+}
+
+/* Shift nested levels inside sections to appear one level up */
+.section-header .theme-doc-sidebar-item-category-level-3,
+.section-header .theme-doc-sidebar-item-link-level-3 {
+  font-weight: 340;
+}
+
+/* Nested lists inside sections: grey line aligns with parent's active line */
+.section-header .menu__list .menu__list {
+  margin-left: 0;
+  padding-left: 0.75rem;
+  margin-top: 4px;
+}
+
 
 .theme-doc-sidebar-item-link-level-1,
 .theme-doc-sidebar-item-category-level-1 {
@@ -459,7 +528,14 @@ aside.theme-doc-sidebar-container {
   color: hsl(var(--foreground));
 }
 
-.theme-doc-sidebar-item-category-level-2
+.theme-doc-sidebar-item-category-level-2:not(.section-header > .menu__list > .theme-doc-sidebar-item-category-level-2)
+  .menu__list-item-collapsible
+  .menu__caret {
+  display: flex;
+  padding: 4px;
+}
+
+.section-header .theme-doc-sidebar-item-category-level-3
   .menu__list-item-collapsible
   .menu__caret {
   display: flex;
@@ -622,12 +698,22 @@ aside.theme-doc-sidebar-container {
   padding: 4px;
   opacity: 100 !important;
 }
-.theme-doc-sidebar-item-category-level-2
+/* Level-2 carets always visible (except inside section headers, where they act as top-level) */
+.theme-doc-sidebar-item-category-level-2:not(.section-header > .menu__list > .theme-doc-sidebar-item-category-level-2)
   .menu__list-item-collapsible
   .menu__caret {
   padding: 4px;
   opacity: 100 !important;
 }
+
+/* Level-3+ carets inside section headers always visible (these are the "child" items) */
+.section-header .theme-doc-sidebar-item-category-level-3
+  .menu__list-item-collapsible
+  .menu__caret {
+  padding: 4px;
+  opacity: 100 !important;
+}
+
 
 /* button to collapse */
 aside.theme-doc-sidebar-container .button.button--secondary.button--outline {

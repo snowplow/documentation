@@ -1,9 +1,11 @@
 ---
 title: "Introduction to Snowplow Signals"
-sidebar_position: 8
+sidebar_position: 8.7
 description: "Snowplow Signals is a real-time personalization engine that computes and acts on behavioral data from your pipeline. It enables in-session stream and historical user data access for personalized experiences, recommendations, and dynamic pricing."
 keywords: ["real-time personalization", "customer intelligence", "behavioral data", "signals", "agentic applications"]
 sidebar_label: "Signals"
+sidebar_custom_props:
+  header: "Signals"
 ---
 
 ```mdx-code-block

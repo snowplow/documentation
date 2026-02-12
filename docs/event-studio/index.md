@@ -6,7 +6,7 @@ sidebar_label: "Event Studio"
 description: "Design and implement behavioral data tracking with schema management, governance, code generation, and tracking plans in Snowplow Console."
 keywords: ["tracking plan studio", "tracking design", "schema management", "event specifications", "data governance"]
 sidebar_custom_props:
-  header: " "
+  header: "Customer Data Infrastructure"
 ---
 
 ```mdx-code-block

@@ -1,5 +1,5 @@
 There are two kinds of schema changes:
-- **Non-breaking** - a non-breaking change is backward compatible with historical data and increments the `patch` number i.e. `1-0-0` -> `1-0-1`.
+- **Non-breaking** - a non-breaking change is backward compatible with historical data and increments the `patch` number i.e. `1-0-0` -> `1-0-1`, or the middle digit i.e. `1-0-0` -> `1-1-0`.
 - **Breaking** - a breaking change is not backwards compatible with historical data and increments the `model` number i.e. `1-0-0` -> `2-0-0`.
 
 Different data warehouses handle schema evolution slightly differently. Use the table below as a guide for incrementing the schema version appropriately.

@@ -72,7 +72,6 @@ If you are a Snowplow CDI customer, rather than self-hosted, you don't need to i
 | [Databricks Streaming Loader](/docs/api-reference/loaders-storage-targets/databricks-streaming-loader/index.md) | {versions.databricksStreamingLoader} |
 | [GCS Loader](/docs/api-reference/loaders-storage-targets/google-cloud-storage-loader/index.md)                  |        {versions.gcsLoader}          |
 | [Snowbridge](/docs/api-reference/snowbridge/index.md)                                                           |        {versions.snowbridge}         |
-| [Lake Loader](/docs/api-reference/loaders-storage-targets/lake-loader/index.md)                                 |        {versions.lakeLoader}         |
 
 </TabItem>
 <TabItem value="azure" label="Azure">

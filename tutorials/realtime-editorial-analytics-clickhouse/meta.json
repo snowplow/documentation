@@ -1,0 +1,8 @@
+{
+  "title": "Realtime editorial analytics with Snowplow and Clickhouse",
+  "label": "Solution accelerator",
+  "description": "Build a real-time editoral analytics dashboard for a media publisher site, leveraging Snowplow and Clickhouse.",
+  "useCase": "Real-time analytics",
+  "technologies": ["Clickhouse"],
+  "snowplowTech": ["Micro"]
+}

@@ -69,7 +69,9 @@ This event can be tracked automatically just before the transition to the next s
 
 ### List item view event
 
-Track this event to mark which items are visible in a list.
+Track this event to mark which items are visible in a list. When screen engagement tracking is enabled, this event won't be sent to the Collector but used to update the tracker state for the screen summary entity.
+
+If you're using the iOS tracker with SwiftUI, you can configure it to [automatically track this event](/docs/sources/mobile-trackers/tracking-events/screen-tracking/index.md#list-item-view-tracking).
 
 <SchemaProperties
   schema={{
@@ -108,7 +110,7 @@ Track this event to mark which items are visible in a list.
 
 ### Scroll changed event
 
-Track this event to mark changes in scroll position on a screen.
+Track this event to mark changes in scroll position on a screen. When screen engagement tracking is enabled, this event won't be sent to the Collector but used to update the tracker state for the screen summary entity.
 
 <SchemaProperties
   schema={{

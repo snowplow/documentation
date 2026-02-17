@@ -94,7 +94,7 @@ You can manually edit the JSON in the extension, or bulk import JSON files from 
 
 ### Data structures API
 
-Data structures API registries use the [data structures API](/docs/event-studio/data-structures/manage/api/index.md) included in Console.
+Data structures API registries use the [data structures API](/docs/event-studio/programmatic-management/data-structures-api/index.md) included in Console.
 
 Most users can just log in to [Console](https://console.snowplowanalytics.com) via the extension and it will import registries for any Snowplow Console organizations your account has access to.
 

@@ -28,7 +28,7 @@ This diagram shows how tracking plans are conceptualized in Snowplow.
  * **Event and entity data structures** define the structure of the captured data to allow in JSON schemas for consistent data collection and analysis.
  *
 :::info Tracking plans in Console
-Snowplow customers can create [tracking plans](/docs/event-studio/tracking-plans/index.md) and [event specifications](/docs/event-studio/event-specifications/index.md) directly in [Snowplow Console](https://console.snowplowanalytics.com).
+Snowplow customers can create [tracking plans](/docs/event-studio/tracking-plans/index.md) and [event specifications](/docs/event-studio/tracking-plans/event-specifications/index.md) directly in [Snowplow Console](https://console.snowplowanalytics.com).
 :::
 
 For example, an `Ecommerce Checkout Flow` tracking plan may contain three event specifications:
@@ -120,7 +120,7 @@ This approach can be useful when:
 * **Analysis**: the actions are closely related and often analyzed together
 * **Simplicity**: you want to reduce the number of event schemas and columns in your data warehouse
 
-Continuing the example from above, it is important to ensure the correct `type` property is set for each action and the allowed values are enforced through strong governance principles. This can be managed in Snowplow through Event Specifications with [property instructions](/docs/event-studio/event-specifications/ui/index.md#properties). Tools like [Snowtype](/docs/event-studio/snowtype/index.md) can also help simplify this complexity during implementation.
+Continuing the example from above, it is important to ensure the correct `type` property is set for each action and the allowed values are enforced through strong governance principles. This can be managed in Snowplow through Event Specifications with [property instructions](/docs/event-studio/tracking-plans/event-specifications/index.md#properties). Tools like [Snowtype](/docs/event-studio/implement-tracking/snowtype/index.md) can also help simplify this complexity during implementation.
 
 ### Approach 2: One event schema per action
 

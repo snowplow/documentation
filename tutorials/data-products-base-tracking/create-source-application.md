@@ -2,6 +2,8 @@
 position: 2
 title: Create a source application for tracking plans
 sidebar_label: Create a source application
+description: "How to create a source application in Snowplow Console, including setting application IDs and application context entities."
+keywords: ["source application", "tracking plans", "application IDs", "Snowplow Console"]
 ---
 
 The basis for every tracking setup is the Source Application. It represents the tracking estate, in a specific platform (_web, Android, iOS, etc._), for an application which in our case would be named _'Todo Web Application'_.

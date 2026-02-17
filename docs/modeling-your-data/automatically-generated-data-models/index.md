@@ -37,7 +37,7 @@ For entities, flattening depends on cardinality:
 
 ### Event specification inference
 
-If you're using [Snowtype](/docs/event-studio/snowtype/index.md) to generate your tracking code, the model generator can filter for event specification IDs, using the attached event specification entity. This guarantees that all events were sent with the intent to implement this tracking plan, and ensures high data quality.
+If you're using [Snowtype](/docs/event-studio/implement-tracking/snowtype/index.md) to generate your tracking code, the model generator can filter for event specification IDs, using the attached event specification entity. This guarantees that all events were sent with the intent to implement this tracking plan, and ensures high data quality.
 
 If you're not using Snowtype, the generated models perform more complex event filtering:
 - Models include all rows matching the tracking plan definition

@@ -441,15 +441,16 @@ aside.theme-doc-sidebar-container {
 .theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .menu__link {
   padding-bottom: 0.125em;
   font-variant: all-small-caps;
-  font-size: 0.93825rem;
+  font-size: 1.05rem;
   font-weight: 600;
   letter-spacing: 0.05em;
   color: hsl(var(--muted-foreground));
 }
 
-/* Disable hover/active highlight styles on section header links */
+/* Disable hover/active highlight styles on section header links and toggle button */
 .theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .menu__link:hover,
-.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .menu__link.menu__link--active {
+.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .menu__link.menu__link--active,
+.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .section-header__toggle.menu__link--active {
   background: none;
   border-left: none;
   color: hsl(var(--muted-foreground));
@@ -465,17 +466,44 @@ aside.theme-doc-sidebar-container {
   margin-left: 0;
 }
 
-/* Section header caret: always visible, aligned with text */
-.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .menu__caret {
-  display: flex !important;
-  opacity: 1 !important;
-  padding: 2px !important;
-  margin-left: auto;
+/* Section header toggle button: full-width, same appearance as the link */
+.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .section-header__toggle {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: var(--ifm-menu-link-padding-vertical) var(--ifm-menu-link-padding-horizontal);
+  padding-bottom: 0.125em;
+  font-variant: all-small-caps;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: hsl(var(--muted-foreground));
+  background: none;
+  cursor: pointer;
+  text-align: left;
 }
 
-.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .menu__caret:hover {
+.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .section-header__toggle:hover {
+  background: none;
+  color: hsl(var(--muted-foreground));
+}
+
+/* Inline caret inside the section header toggle button */
+.theme-doc-sidebar-item-category-level-1.section-header .section-header__caret {
+  display: inline-flex !important;
+  flex-shrink: 0;
+  margin-left: auto;
+  opacity: 1 !important;
+  padding: 2px !important;
+}
+
+.theme-doc-sidebar-item-category-level-1.section-header .section-header__caret:hover {
   background: none !important;
-  border-left: none;
+}
+
+/* Remove the old separate caret styles (no longer rendered) */
+.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .menu__caret {
+  display: none;
 }
 
 /* Remove vertical border line from section header's direct child list */

@@ -132,6 +132,8 @@ export default function DocSidebarItemCategory({
     }
   }, [collapsible, expandedItem, index, setCollapsed, autoCollapseCategories])
 
+  const isSectionHeader = className && className.includes('section-header')
+
   return (
     <li
       className={clsx(
@@ -149,26 +151,42 @@ export default function DocSidebarItemCategory({
           'menu__list-item-collapsible--active': isCurrentPage,
         })}
       >
-        <Link
-          className={clsx('menu__link', {
-            'menu__link--sublist': collapsible,
-            'menu__link--sublist-caret': !href && collapsible,
-            'menu__link--active': isActive,
-          })}
-          aria-current={isCurrentPage ? 'page' : undefined}
-          aria-expanded={collapsible ? !collapsed : undefined}
-          href={collapsible ? hrefWithSSRFallback ?? '#' : hrefWithSSRFallback}
-          {...props}
-        >
-          {label}
-        </Link>
-        {href && collapsible && (
-          <CollapseButton
-            categoryLabel={label}
-            href={href}
-            collapsed={collapsed}
-            updateCollapsed={updateCollapsed}
-          />
+        {isSectionHeader && collapsible ? (
+          <button
+            type="button"
+            className={clsx('clean-btn', 'menu__link', 'section-header__toggle', {
+              'menu__link--active': isActive,
+            })}
+            aria-expanded={!collapsed}
+            onClick={() => updateCollapsed(!collapsed)}
+          >
+            {label}
+            <span className="section-header__caret menu__caret" aria-hidden="true" />
+          </button>
+        ) : (
+          <>
+            <Link
+              className={clsx('menu__link', {
+                'menu__link--sublist': collapsible,
+                'menu__link--sublist-caret': !href && collapsible,
+                'menu__link--active': isActive,
+              })}
+              aria-current={isCurrentPage ? 'page' : undefined}
+              aria-expanded={collapsible ? !collapsed : undefined}
+              href={collapsible ? hrefWithSSRFallback ?? '#' : hrefWithSSRFallback}
+              {...props}
+            >
+              {label}
+            </Link>
+            {href && collapsible && (
+              <CollapseButton
+                categoryLabel={label}
+                href={href}
+                collapsed={collapsed}
+                updateCollapsed={updateCollapsed}
+              />
+            )}
+          </>
         )}
       </div>
 

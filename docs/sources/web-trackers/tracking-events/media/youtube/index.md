@@ -365,6 +365,8 @@ The event and entity schemas are [the same as](/docs/events/ootb-data/media-even
 
 Along with the standard Snowplow media entities, the YouTube media plugin also adds a `youtube` entity to all media events.
 
+If you've configured the [Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) dbt package to use the [v1 schemas](/docs/events/ootb-data/media-events/index.md#media-api-versions), or are using an older version of the Media Player model, it will use fields from the `youtube` entity. The Media Player model version 0.6+ doesn't use this entity.
+
 <SchemaProperties
   overview={{event: false}}
   example={{

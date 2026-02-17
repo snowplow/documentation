@@ -319,6 +319,8 @@ Along with the standard Snowplow media entities, the HTML5 media plugin also tra
 
 For `<video>` elements, both entities are added to all media events in the session. For `<audio>` elements, only the `media_element` entity is added.
 
+If you've configured the [Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) dbt package to use the [v1 schemas](/docs/events/ootb-data/media-events/index.md#media-api-versions), or are using an older version of the Media Player model, it will use fields from the `media_element` and `video_element` entities. The Media Player model version 0.6+ doesn't use them.
+
 ### HTML5 media element
 
 <SchemaProperties

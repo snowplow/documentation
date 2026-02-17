@@ -31,9 +31,9 @@ The event schema URIs have the format:
 
 ## Media API versions
 
-The current set of media APIs has evolved from an earlier, more limited implementation. We refer to them as v1 and v2 of the media tracking APIs. The [Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) dbt data model supports both versions.
+The current set of media APIs has evolved from an earlier, more limited implementation. We refer to them as v1 and v2 of the media tracking APIs. Unless otherwise stated, all documentation refers to v2 of the media tracking APIs.
 
-Unless otherwise stated, all documentation refers to v2 of the media tracking APIs.
+The [Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) dbt data model supports both versions since version 0.6.0. The v2 schemas are the default.
 
 The newer v2 implementation has many more features than v1, including:
 * Advertising tracking support
@@ -530,6 +530,8 @@ The media ad break entity describes a group of ads played together, whether pre-
 
 ## Player-specific data
 
-The [HTML5](/docs/sources/web-trackers/tracking-events/media/html5/index.md), [YouTube](/docs/sources/web-trackers/tracking-events/media/youtube/index.md), and [Vimeo](/docs/sources/web-trackers/tracking-events/media/vimeo/index.md) media plugins automatically attach additional entities specific to those players. The Vimeo plugin also tracks additional events.
+The [HTML5](/docs/sources/web-trackers/tracking-events/media/html5/index.md), [YouTube](/docs/sources/web-trackers/tracking-events/media/youtube/index.md), and [Vimeo](/docs/sources/web-trackers/tracking-events/media/vimeo/index.md) media plugins automatically attach additional entities specific to those players. The Vimeo plugin also tracks additional events. See the documentation for each plugin for details.
 
-These events and entities aren't required for the Media Player data model. See the documentation for each plugin for details.
+The HTML5 and YouTube entities are used as part of the v1 media schemas for the [Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) dbt package. If you're using the v2 schemas (default from Media Player 0.6+), the Media Player model doesn't use any fields from these player-specific entities. You can still use them for your own analysis.
+
+The Vimeo events and entities aren't used by any version of the Media Player model.

@@ -304,6 +304,8 @@ endVimeoTracking(id);
 
 The `CuePoint`, `ChapterChange`, `TextTrackChange`, `InteractiveHotspotClicked`, and `InteractiveOverlayPanelClicked` events are specific to the Vimeo plugin, and not provided by the Snowplow Media plugin.
 
+They're not used by the [Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) dbt package, but you can use them for your own analysis.
+
 ### Cue point
 
 Fired when a cue point added via `addCuePoint()` is reached during playback.
@@ -366,7 +368,7 @@ Fired when a user clicks an interactive overlay panel in a Vimeo interactive vid
 
 The event and entity schemas are [the same as](/docs/events/ootb-data/media-events/index.md) for the [Snowplow Media plugin](/docs/sources/web-trackers/tracking-events/media/snowplow/index.md), plus the Vimeo-specific events detailed above.
 
-Along with the standard Snowplow media entities, the Vimeo media plugin also tracks two Vimeo media-specific entities, `meta` and `interaction`.
+Along with the standard Snowplow media entities, the Vimeo media plugin also tracks two Vimeo media-specific entities, `meta` and `interaction`. They're not used by the [Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) dbt package, but you can use them for your own analysis.
 
 ### Video metadata
 

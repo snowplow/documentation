@@ -11,12 +11,12 @@ import TabItem from '@theme/TabItem'
 import SchemaProperties from "@site/docs/reusable/schema-properties/_index.md"
 
 
-This plugin allows you to integrate with [Media Web](/docs/event-studio/tracking-plans/tracking-plan-templates/index.md#media-web) event specifications. The plugin will add an event specification entity to the matching [Snowplow media](/docs/events/ootb-data/media-events/index.md) events.
+This plugin allows you to integrate with [Media Web](/docs/event-studio/tracking-plans/templates/index.md#media-web) event specifications. The plugin will add an event specification entity to the matching [Snowplow media](/docs/events/ootb-data/media-events/index.md) events.
 
 Retrieve the configuration directly from your [tracking plan](https://docs.snowplow.io/docs/fundamentals/tracking-plans/) in [Snowplow Console](https://console.snowplowanalytics.com).
 
 :::note
-The plugin is available since version 3.23 of the tracker. It's only available for tracking plans created using the [Media Web template](/docs/event-studio/tracking-plans/tracking-plan-templates/index.md#media-web).
+The plugin is available since version 3.23 of the tracker. It's only available for tracking plans created using the [Media Web template](/docs/event-studio/tracking-plans/templates/index.md#media-web).
 :::
 
 The event specification entity is **automatically tracked** once configured.

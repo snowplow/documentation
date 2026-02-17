@@ -31,9 +31,9 @@ The event schema URIs have the format:
 
 ## Media API versions
 
-The current set of media APIs has evolved from an earlier, more limited implementation. We refer to them as v1 and v2 of the media tracking APIs. The [Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) dbt data model supports both versions.
+The current set of media APIs has evolved from an earlier, more limited implementation. We refer to them as v1 and v2 of the media tracking APIs. Unless otherwise stated, all documentation refers to v2 of the media tracking APIs.
 
-Unless otherwise stated, all documentation refers to v2 of the media tracking APIs.
+The [Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) dbt data model supports both versions since version 0.6.0. The v2 schemas are the default.
 
 The newer v2 implementation has many more features than v1, including:
 * Advertising tracking support
@@ -43,6 +43,8 @@ The newer v2 implementation has many more features than v1, including:
 * Buffer and seek start/end event pairs
 * Filtering of repeated events (seek, volume)
 * Page activity updates during playback
+
+The v1 implementation used a single `media_player_event` schema for all events, distinguishing between actions using the `type` field. See the [Version 1 schemas](#version-1-schemas) section at the end of this page for details. The v2 implementation uses separate schemas for each event type.
 
 ## Tracker support
 
@@ -527,3 +529,41 @@ The media ad break entity describes a group of ads played together, whether pre-
     "podSize": 2
   }}
   schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for a context entity, shared with all ad events belonging to the ad break.", "self": { "vendor": "com.snowplowanalytics.snowplow.media", "name": "ad_break", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "name": { "description": "Ad break name (e.g., pre-roll, mid-roll, and post-roll).", "type": [ "null", "string" ], "maxLength": 4096 }, "breakId": { "type": "string", "maxLength": 256, "description": "An identifier for the ad break." }, "startTime": { "type": "number", "description": "Playback time in seconds at the start of the ad break.", "minimum": 0, "maximum": 2147483647 }, "breakType": { "description": "Type of ads within the break: linear (take full control of the video for a period of time), nonlinear (run concurrently to the video), companion (accompany the video but placed outside the player).", "enum": [ "linear", "nonlinear", "companion", null ], "type": [ "string", "null" ] }, "podSize": { "type": [ "integer", "null" ], "description": "The number of ads to be played within the ad break.", "minimum": 0, "maximum": 65535 } }, "additionalProperties": false, "required": [ "breakId", "startTime" ] }} />
+
+## Player-specific data
+
+The [HTML5](/docs/sources/web-trackers/tracking-events/media/html5/index.md), [YouTube](/docs/sources/web-trackers/tracking-events/media/youtube/index.md), and [Vimeo](/docs/sources/web-trackers/tracking-events/media/vimeo/index.md) media plugins automatically attach additional entities specific to those players. The Vimeo plugin also tracks additional events. See the documentation for each plugin for details.
+
+The HTML5 and YouTube entities are used as part of the v1 media schemas for the [Media Player](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-media-player-data-model/index.md) dbt package. If you're using the v2 schemas (default from Media Player 0.6+), the Media Player model doesn't use any fields from these player-specific entities. You can still use them for your own analysis.
+
+The Vimeo events and entities aren't used by any version of the Media Player model.
+
+## Version 1 schemas
+
+The v1 media events use the `media_player_event` schema.
+
+<SchemaProperties
+  overview={{event: true}}
+  example={{
+    "type": "play",
+    "label": "Big Bucks Bunny"
+  }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Schema for a media event", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "media_player_event", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "type": { "type": "string", "description": "The event fired by the media player", "maxLength": 255 }, "label": { "type": [ "string", "null" ], "description": "A custom identifier", "maxLength": 4096 } }, "additionalProperties": false, "required": [ "type" ] }} />
+
+The v1 media player entity uses the `1-0-0` version of the `media_player` schema, while v2 uses `2-0-0`.
+
+<SchemaProperties
+  overview={{event: false}}
+  example={{
+    "currentTime": 52.3,
+    "duration": 300,
+    "ended": false,
+    "isLive": false,
+    "loop": false,
+    "muted": false,
+    "paused": false,
+    "percentProgress": 17,
+    "playbackRate": 1,
+    "volume": 80
+  }}
+  schema={{ "$schema": "http://iglucentral.com/schemas/com.snowplowanalytics.self-desc/schema/jsonschema/1-0-0#", "description": "Common Context Schema for a media player event", "self": { "vendor": "com.snowplowanalytics.snowplow", "name": "media_player", "format": "jsonschema", "version": "1-0-0" }, "type": "object", "properties": { "currentTime": { "type": "number", "description": "The current playback time", "minimum": 0, "maximum": 9007199254740991 }, "duration": { "type": [ "number", "null" ], "description": "A double-precision floating-point value indicating the duration of the media in seconds", "minimum": 0, "maximum": 9007199254740991 }, "ended": { "type": "boolean", "description": "If playback of the media has ended" }, "isLive": { "type": "boolean", "description": "If the media is live" }, "loop": { "type": "boolean", "description": "If the video should restart after ending" }, "muted": { "type": "boolean", "description": "If the media element is muted" }, "paused": { "type": "boolean", "description": "If the media element is paused" }, "percentProgress": { "type": [ "integer", "null" ], "description": "The percent of the way through the media", "minimum": 0, "maximum": 100 }, "playbackRate": { "type": "number", "description": "Playback rate (1 is normal)", "minimum": -9007199254740991, "maximum": 9007199254740991 }, "volume": { "type": "integer", "description": "Volume percent", "minimum": 0, "maximum": 100 } }, "additionalProperties": false, "required": [ "currentTime", "duration", "ended", "loop", "muted", "paused", "playbackRate", "volume" ] }} />

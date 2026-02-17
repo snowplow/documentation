@@ -18,14 +18,17 @@ Some of the databases MaxMind maintains require a commercial subscription with M
 
 ### 1. Decide which databases you’d like to use and download them
 
-MaxMind offers five different databases with information on different IP addresses which can be used with Snowplow, one free:
+MaxMind offers a free tier and a paid tier of databases, which can be used with Snowplow.
 
-- [GeoLite2 Free Database](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data/), which contains geographic information (e.g. country) by IP address
+From the free tier you can provide two databases to Snowplow:
 
-And four paid for databases:
+- [GeoLite2 City Database](https://dev.maxmind.com/geoip/geolite2-free-geolocation-data/), which contains geographic information (e.g. country) by IP address
+- [GeoLite2 ASN Database](https://dev.maxmind.com/geoip/docs/databases/asn/) (since enrich version 6.7.0), which contains autonomous system numbers by IP address
 
-- [GeoIP2 City](https://www.maxmind.com/en/geoip2-city?rld=snowplow), which also contains geographic information, but that with a lot more precision and coverage than that found in the GeoLite2 Free Database
-- [GeoIP2 ISP](https://www.maxmind.com/en/geoip2-isp-database?rld=snowplow), which contains information about the ISP serving that IP
+From the paid tier you can provide four databases to Snowplow:
+
+- [GeoIP2 City](https://www.maxmind.com/en/geoip2-city?rld=snowplow), which also contains geographic information, but with more precision and coverage than the GeoLite2 City Database
+- [GeoIP2 ISP](https://www.maxmind.com/en/geoip2-isp-database?rld=snowplow), which contains information about the ISP serving that IP, and a more complete ASN mapping compared to the GeoLite2 ASN Database
 - [GeoIP2 Domain](https://www.maxmind.com/en/geoip2-domain-name-database?rld=snowplow), which contains information about the domain at that IP address
 - [GeoIP2 Connection Type](https://www.maxmind.com/en/geoip2-connection-type-database?rld=snowplow), which contains information about the connection type at that IP address.
 
@@ -59,7 +62,7 @@ Alternatively, you can [set up Micro to receive external IP addresses](/docs/tes
 
 </TestingWithMicro>
 
-There are four possible fields you can add to the “parameters” section of the enrichment configuration JSON: “geo”, “isp”, “domain”, and “connectionType”:
+There are five possible fields you can add to the “parameters” section of the enrichment configuration JSON: “geo”, “isp”, “domain”, “connectionType”, and “asn”:
 
 - The `database` field contains the name of the MaxMind database file.
 - The `uri` field contains the URI of the bucket in which the database file is found. This can have either `http:` or `s3:` or `gs:` as the scheme and must not end with a trailing slash.
@@ -72,10 +75,11 @@ It is important to note that accepted database filenames are the strings which a
 | `isp`                | "GeoIP2-ISP.mmdb"                                      |
 | `domain`             | "GeoIP2-Domain.mmdb"                                   |
 | `connectionType`     | "GeoIP2-Connection-Type.mmdb"                          |
+| `asn`                | "GeoLite2-ASN.mmdb"                                    |
 
 ### Configuration
 
-- [Schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/ip_lookups/jsonschema/2-0-0)
+- [Schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/ip_lookups/jsonschema/2-0-1)
 - [Example](https://github.com/snowplow/enrich/blob/master/config/enrichments/ip_lookups.json)
 
 #### Example minimal configuration
@@ -84,7 +88,7 @@ It is important to note that accepted database filenames are the strings which a
 
 ```json
 {
-    "schema": "iglu:com.snowplowanalytics.snowplow/ip_lookups/jsonschema/2-0-0",
+    "schema": "iglu:com.snowplowanalytics.snowplow/ip_lookups/jsonschema/2-0-1",
     "data": {
         "name": "ip_lookups",
         "vendor": "com.snowplowanalytics.snowplow",
@@ -103,7 +107,7 @@ It is important to note that accepted database filenames are the strings which a
 
 ```json
 {
-    "schema": "iglu:com.snowplowanalytics.snowplow/ip_lookups/jsonschema/2-0-0",
+    "schema": "iglu:com.snowplowanalytics.snowplow/ip_lookups/jsonschema/2-0-1",
     "data": {
         "name": "ip_lookups",
         "vendor": "com.snowplowanalytics.snowplow",
@@ -124,28 +128,15 @@ The parameters to set start with the type of MaxMind database we are accessing (
 
 When configuring the enrichment you will replace the following string `my-private-bucket/third-party/maxmind` with the path to your hosted database.
 
-If we were to enable this enrichment as shown, we would see the following columns in our data warehouse get populated with data for a user with the IP Address 37.157.33.178:
-
-| COLUMN NAME       | SAMPLE DATA   | PURPOSE                                |
-| ----------------- | ------------- | -------------------------------------- |
-| `geo_country`     | GB            | Country of IP origin                   |
-| `geo_region`      | ENG           | Region of IP origin                    |
-| `geo_city`        | London        | City of IP origin                      |
-| `geo_zipcode`     | EC2A          | Zip (postal) code of IP origin         |
-| `geo_latitude`    | 51.5237       | An approximate latitude (coordinates)  |
-| `geo_longitude`   | \-0.089       | An approximate longitude (coordinates) |
-| `geo_region_name` | England       | Region of IP origin                    |
-| `geo_timezone`    | Europe/London | Timezone of IP origin                  |
-
 #### Example full configuration
 
-To extend this enrichment for the additional databases offered by Maxmind we would simply repeat the process for the other databases:
+To extend this enrichment for the additional databases offered by Maxmind we would simply repeat the process for the other databases.
 
-##### On AWS
+Here is an example configuration using all relevant databases on MaxMind's paid tier:
 
 ```json
 {
-    "schema": "iglu:com.snowplowanalytics.snowplow/ip_lookups/jsonschema/2-0-0",
+    "schema": "iglu:com.snowplowanalytics.snowplow/ip_lookups/jsonschema/2-0-1",
     "data": {
         "name": "ip_lookups",
         "vendor": "com.snowplowanalytics.snowplow",
@@ -172,46 +163,61 @@ To extend this enrichment for the additional databases offered by Maxmind we wou
 }
 ```
 
-##### On GCS
+Here is an example configuration using all relevant databases on MaxMind's free tier:
 
 ```json
 {
-    "schema": "iglu:com.snowplowanalytics.snowplow/ip_lookups/jsonschema/2-0-0",
+    "schema": "iglu:com.snowplowanalytics.snowplow/ip_lookups/jsonschema/2-0-1",
     "data": {
         "name": "ip_lookups",
         "vendor": "com.snowplowanalytics.snowplow",
         "enabled": true,
         "parameters": {
             "geo": {
-                "database": "GeoIP2-City.mmdb",
-                "uri": "gs://my-private-bucket/third-party/maxmind"
+                "database": "GeoLite2-City.mmdb",
+                "uri": "s3://my-private-bucket/third-party/maxmind"
             },
-            "isp": {
-                "database": "GeoIP2-ISP.mmdb",
-                "uri": "gs://my-private-bucket/third-party/maxmind"
-            },
-            "domain": {
-                "database": "GeoIP2-Domain.mmdb",
-                "uri": "gs://my-private-bucket/third-party/maxmind"
-            },
-            "connectionType": {
-                "database": "GeoIP2-Connection-Type.mmdb",
-                "uri": "gs://my-private-bucket/third-party/maxmind"
+            "asn": {
+                "database": "GeoLite2-ASN.mmdb",
+                "uri": "s3://my-private-bucket/third-party/maxmind"
             }
         }
     }
 }
 ```
-
-The data from these databases would then be loaded into the following columns:
-
-| COLUMN NAME       | PURPOSE                                                      |
-| ----------------- | ------------------------------------------------------------ |
-| `ip_isp`          | ISP name                                                     |
-| `ip_organization` | Organization name for larger networks                        |
-| `ip_domain`       | Second level domain name                                     |
-| `ip_netspeed`     | Indication of connection type (dial-up, cellular, cable/DSL) |
 
 ## Output
 
 This enrichment populates atomic table fields prefixed with "geo_" and "ip_" [seen here](https://github.com/snowplow/iglu-central/blob/8ff48b2485b3c95447e38a9bb925ef3f5266112c/schemas/com.snowplowanalytics.snowplow/atomic/jsonschema/1-0-0#L82).
+
+| COLUMN NAME       | SAMPLE DATA   | PURPOSE                                                      | SOURCE DATABASE  |
+| ----------------- | ------------- | ------------------------------------------------------------ | ---------------- |
+| `geo_country`     | GB            | Country of IP origin                                         | `geo`            |
+| `geo_region`      | ENG           | Region of IP origin                                          | `geo`            |
+| `geo_city`        | London        | City of IP origin                                            | `geo`            |
+| `geo_zipcode`     | EC2A          | Zip (postal) code of IP origin                               | `geo`            |
+| `geo_latitude`    | 51.5237       | An approximate latitude (coordinates)                        | `geo`            |
+| `geo_longitude`   | \-0.089       | An approximate longitude (coordinates)                       | `geo`            |
+| `geo_region_name` | England       | Region of IP origin                                          | `geo`            |
+| `geo_timezone`    | Europe/London | Timezone of IP origin                                        | `geo`            |
+| `ip_isp`          | AT&T Services | ISP name                                                     | `isp`            |
+| `ip_organization` | AT&T Services | Organization name for larger networks                        | `isp`            |
+| `ip_domain`       | att.net       | Second level domain name                                     | `domain`         |
+| `ip_netspeed`     | Cellular      | Indication of connection type (dial-up, cellular, cable/DSL) | `connectionType` |
+
+
+Starting with Enrich 6.7.0, this enrichment supports ASN information, which is useful for detecting bot traffic coming from cloud computing providers.
+
+If ASN data is available for a given IP address through one of the supplied databases (either ISP or the free ASN database), the enrichment adds a derived entity to the enriched event with [this schema](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/asn/jsonschema/1-0-0).
+
+Here is an example of a derived entity attached by this enrichment:
+
+```json
+{
+    "schema": "iglu:com.snowplowanalytics.snowplow/asn/jsonschema/1-0-0",
+    "data": {
+        "number": 16509,
+        "organization": "Amazon.com, Inc."
+    }
+}
+```

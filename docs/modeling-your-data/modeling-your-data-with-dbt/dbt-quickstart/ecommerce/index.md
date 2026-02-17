@@ -91,7 +91,7 @@ vars:
 
 ### 6. Removing unused modules
 
-The ecommerce package creates tables that depend on the existence of certain entities that are a part of the [Snowplow ecommerce](/docs/sources/web-trackers/tracking-events/ecommerce/index.md) JS plugin. If, for some reason, you have not implemented them and would like to streamline your data modeling not to create empty tables, then you need to add that configuration to your `dbt_project.yml` file. Below you can see an example of what that would look like if you wanted to disable the [cart entity](/docs/sources/web-trackers/tracking-events/ecommerce/index.md#cart)
+The ecommerce package creates tables that depend on the existence of certain entities that are a part of the [Snowplow ecommerce](/docs/sources/web-trackers/tracking-events/ecommerce/index.md) JS plugin. If, for some reason, you have not implemented them and would like to streamline your data modeling not to create empty tables, then you need to add that configuration to your `dbt_project.yml` file. Below you can see an example of what that would look like if you wanted to disable the [cart entity](/docs/events/ootb-data/ecommerce-events/index.md#cart)
 
 #### Disabling the cart module in `dbt_project.yml` (recommended)
 

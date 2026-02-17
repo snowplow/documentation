@@ -22,7 +22,7 @@ Only the JavaScript tracker can populate the `br_cookies` field.
 
 | Tracker                                                                              | Supported | Since version | Auto-tracking | Notes                                         |
 | ------------------------------------------------------------------------------------ | --------- | ------------- | ------------- | --------------------------------------------- |
-| [Web](/docs/sources/web-trackers/browsers/index.md)                                  | ✅         | 0.1.0         | ✅             | All values set automatically                  |
+| [Web](/docs/sources/web-trackers/tracking-events/browsers/index.md)                                  | ✅         | 0.1.0         | ✅             | All values set automatically                  |
 | [iOS](/docs/sources/mobile-trackers/client-side-properties/index.md)                 | ✅         | 0.5.0         | ✅             |                                               |
 | [Android](/docs/sources/mobile-trackers/client-side-properties/index.md)             | ✅         | 0.1.0         | ✅             |                                               |
 | [React Native](/docs/sources/react-native-tracker/client-side-properties/index.md)   | ✅         | 0.1.0         | ✅             |                                               |
@@ -48,7 +48,7 @@ You can configure the web trackers to automatically include a browser entity wit
 
 | Tracker                                                                          | Supported | Since version | Auto-tracking |
 | -------------------------------------------------------------------------------- | --------- | ------------- | ------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/index.md#auto-tracked-entities) | ✅         | 3.9.0         | ✅             |
+| [Web](/docs/sources/web-trackers/tracking-events/index.md#add-contextual-data-with-entities) | ✅         | 3.9.0         | ✅             |
 | iOS                                                                              | ❌         |               |               |
 | Android                                                                          | ❌         |               |               |
 | React Native                                                                     | ❌         |               |               |

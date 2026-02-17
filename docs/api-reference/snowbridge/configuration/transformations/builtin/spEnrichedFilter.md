@@ -10,6 +10,10 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
+:::warning Deprecated
+This transformation is deprecated and can result in unexpected behavior when matching integers. Use the [`jqFilter`](/docs/api-reference/snowbridge/configuration/transformations/builtin/jqFilter.md) transformation instead, which provides more robust and flexible filtering capabilities.
+:::
+
 `spEnrichedFilter`: Specific to Snowplow data. Filters messages based on a regex match against an atomic field.
 
 This transformation is for use on base-level atomic fields, rather than fields from contexts, or custom events — which can be achieved with `spEnrichedFilterContext` and `spEnrichedFilterUnstructEvent`.

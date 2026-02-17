@@ -471,8 +471,7 @@ aside.theme-doc-sidebar-container {
   display: flex;
   align-items: center;
   width: 100%;
-  padding: var(--ifm-menu-link-padding-vertical) var(--ifm-menu-link-padding-horizontal);
-  padding-bottom: 0.125em;
+  padding: var(--ifm-menu-link-padding-vertical) 0 0.125em var(--ifm-menu-link-padding-horizontal);
   font-variant: all-small-caps;
   font-size: 1.05rem;
   font-weight: 600;
@@ -494,7 +493,7 @@ aside.theme-doc-sidebar-container {
   flex-shrink: 0;
   margin-left: auto;
   opacity: 1 !important;
-  padding: 2px !important;
+  padding: 4px !important;
 }
 
 .theme-doc-sidebar-item-category-level-1.section-header .section-header__caret:hover {
@@ -514,20 +513,20 @@ aside.theme-doc-sidebar-container {
 }
 
 /* Make items inside section headers look like top-level items */
-.section-header .theme-doc-sidebar-item-category-level-2,
-.section-header .theme-doc-sidebar-item-link-level-2 {
+.theme-doc-sidebar-item-category-level-1.section-header .theme-doc-sidebar-item-category-level-2,
+.theme-doc-sidebar-item-category-level-1.section-header .theme-doc-sidebar-item-link-level-2 {
   font-weight: 500;
   color: hsl(var(--foreground));
 }
 
-.section-header .theme-doc-sidebar-item-category-level-2 > .menu__list-item-collapsible > .menu__link,
-.section-header .theme-doc-sidebar-item-link-level-2 > .menu__link {
+.theme-doc-sidebar-item-category-level-1.section-header .theme-doc-sidebar-item-category-level-2 > .menu__list-item-collapsible > .menu__link,
+.theme-doc-sidebar-item-category-level-1.section-header .theme-doc-sidebar-item-link-level-2 > .menu__link {
   padding-left: var(--ifm-menu-link-padding-horizontal);
 }
 
 /* Shift nested levels inside sections to appear one level up */
-.section-header .theme-doc-sidebar-item-category-level-3,
-.section-header .theme-doc-sidebar-item-link-level-3 {
+.theme-doc-sidebar-item-category-level-1.section-header .theme-doc-sidebar-item-category-level-3,
+.theme-doc-sidebar-item-category-level-1.section-header .theme-doc-sidebar-item-link-level-3 {
   font-weight: 340;
 }
 
@@ -726,7 +725,7 @@ aside.theme-doc-sidebar-container {
   padding: 4px;
   opacity: 100 !important;
 }
-/* Level-2 carets always visible (except inside section headers, where they act as top-level) */
+/* Level-2 carets always visible (except direct children of section headers, which act as top-level) */
 .theme-doc-sidebar-item-category-level-2:not(.section-header > .menu__list > .theme-doc-sidebar-item-category-level-2)
   .menu__list-item-collapsible
   .menu__caret {
@@ -734,10 +733,19 @@ aside.theme-doc-sidebar-container {
   opacity: 100 !important;
 }
 
-/* Level-3+ carets inside section headers always visible (these are the "child" items) */
+/* Level-3+ carets inside section headers always visible */
 .section-header .theme-doc-sidebar-item-category-level-3
   .menu__list-item-collapsible
   .menu__caret {
+  padding: 4px;
+  opacity: 100 !important;
+}
+
+/* Carets for hoisted Signals subsections (marked with section-child class) always visible */
+.section-child
+  .menu__list-item-collapsible
+  .menu__caret {
+  display: flex;
   padding: 4px;
   opacity: 100 !important;
 }

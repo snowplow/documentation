@@ -101,7 +101,15 @@ const wrapInSections = (items) => {
         ...item,
         customProps: Object.keys(restCustomProps).length > 0 ? restCustomProps : undefined,
       }
-      sectionItems = [itemWithoutHeader]
+      if (header === 'Signals' && itemWithoutHeader.type === 'category' && itemWithoutHeader.items?.length) {
+        sectionItems = itemWithoutHeader.items.map((child) => ({
+          ...child,
+          className: [child.className, 'section-child'].filter(Boolean).join(' '),
+        }))
+        sectionLink = null
+      } else {
+        sectionItems = [itemWithoutHeader]
+      }
     } else if (currentSection) {
       // Add to current section
       sectionItems.push(item)

@@ -119,6 +119,8 @@ export default function DocSidebarItemCategory({
     setCollapsed(toCollapsed)
   }
 
+  const isSectionHeader = className && className.includes('section-header')
+
   useAutoExpandActiveCategory({ isActive, collapsed, updateCollapsed })
 
   useEffect(() => {
@@ -126,13 +128,12 @@ export default function DocSidebarItemCategory({
       collapsible &&
       expandedItem != null &&
       expandedItem !== index &&
-      autoCollapseCategories
+      autoCollapseCategories &&
+      !isSectionHeader
     ) {
       setCollapsed(true)
     }
-  }, [collapsible, expandedItem, index, setCollapsed, autoCollapseCategories])
-
-  const isSectionHeader = className && className.includes('section-header')
+  }, [collapsible, expandedItem, index, setCollapsed, autoCollapseCategories, isSectionHeader])
 
   return (
     <li

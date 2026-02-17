@@ -1,6 +1,6 @@
 ---
 title: "Create your own web tracker plugins"
-sidebar_label: "Creating your own plugins"
+sidebar_label: "Create your own plugins"
 description: "Build custom plugins to extend the web tracker with your own context entities, events, and filtering logic."
 keywords: ["custom plugins", "plugin development", "browser plugin interface", "inline plugins"]
 date: "2021-04-07"

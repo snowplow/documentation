@@ -665,6 +665,15 @@ configuration.setSession(true);`}
 }}
 </PlatformTabs>
 
+{(props.platforms.includes('js-browser') || props.platforms.includes('js-tag')) && (
+<>
+<p>To set a custom session start time, pass an object with a <code>startedAt</code> property instead of a boolean:</p>
+<CodeBlock language="javascript">
+{`session: { startedAt: new Date('2024-01-15T10:30:00Z') }`}
+</CodeBlock>
+</>
+)}
+
 ### Custom entities
 
 You can attach custom entities to all events for this media tracking instance.

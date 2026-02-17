@@ -18,7 +18,7 @@ This table shows the support for page referrer tracking across the main client-s
 
 | Tracker                                                                                                        | Supported | Since version                                      | Auto-tracking | Notes                              |
 | -------------------------------------------------------------------------------------------------------------- | --------- | -------------------------------------------------- | ------------- | ---------------------------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/page-views/index.md#tracking-a-page-view)                     | ✅         | 0.1.0                                              | ✅             | Automatic for all page view events |
+| [Web](/docs/sources/web-trackers/tracking-events/page-views/index.md)                     | ✅         | 0.1.0                                              | ✅             | Automatic for all page view events |
 | [iOS](/docs/sources/mobile-trackers/tracking-events/index.md#tracking-deep-links)                              | ✅         | 3.0.0 (deep link events), 4.1.0 (deep link entity) | ❌             | Based on Deep Link events          |
 | [Android](/docs/sources/mobile-trackers/tracking-events/index.md#tracking-deep-links)                          | ✅         | 3.0.0 (deep link events), 4.1.0 (deep link entity) | ❌             | Based on Deep Link events          |
 | [React Native](/docs/sources/react-native-tracker/tracking-events/index.md#tracking-deep-link-received-events) | ✅         | 1.1.0                                              | ❌             | Based on Deep Link events          |

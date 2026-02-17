@@ -35,7 +35,7 @@ Every Snowplow event can have entities attached to it. They can be of the same o
 
 ## How to track entities
 
-Snowplow provides a number of entities out-of-the-box. You can configure your trackers to attach certain entities automatically to all events. For example, the web trackers add a [`webPage` entity](/docs/sources/web-trackers/tracking-events/index.md#auto-tracked-entities) to all events by default.
+Snowplow provides a number of entities out-of-the-box. You can configure your trackers to attach certain entities automatically to all events. For example, the web trackers add a [`webPage` entity](/docs/sources/web-trackers/tracking-events/index.md#add-contextual-data-with-entities) to all events by default.
 
 Trackers add other out-of-the-box entities based on event type. For example, if you track a Snowplow media `play` event, the tracker will automatically add `media_player` and media `session` entities to it.
 

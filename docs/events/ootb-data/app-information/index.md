@@ -39,7 +39,7 @@ This table shows the support for the application entity across the main client-s
 
 | Tracker                                                                                                                | Supported | Since version | Auto-tracking | Notes                                                |
 | ---------------------------------------------------------------------------------------------------------------------- | --------- | ------------- | ------------- | ---------------------------------------------------- |
-| [Web](/docs/sources/web-trackers/tracking-events/index.md#setting-application-version)                                 | ✅         | 4.1.0         | ✅             |                                                      |
+| [Web](/docs/sources/web-trackers/tracking-events/index.md#application-version)                                 | ✅         | 4.1.0         | ✅             |                                                      |
 | [iOS](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md#application-context)     | ✅         | 1.0.0         | ✅             |                                                      |
 | [Android](/docs/sources/mobile-trackers/tracking-events/platform-and-application-context/index.md#application-context) | ✅         | 1.0.0         | ✅             |                                                      |
 | [React Native](/docs/sources/react-native-tracker/tracking-events/platform-and-application-context/index.md)           | ✅         | 4.0.0         | ✅             | Uses web or mobile schema depending on configuration |

@@ -1,5 +1,5 @@
 ---
-title: "Track client hints on web"
+title: "Track User-Agent Client Hints on web"
 sidebar_label: "Client Hints"
 sidebar_position: 150
 description: "Capture browser information through Client Hints as an alternative to user-agent strings with basic and high-entropy options."
@@ -11,20 +11,20 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-User-agent [Client Hints](https://www.chromium.org/updates/ua-ch) are being rolled out across a number of browsers and are an alternative to the tracking the user-agent, which is particularly useful in those browsers which are freezing the user-agent string. See [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-CH#Browser_compatibility) for browser support.
+User-Agent [Client Hints](https://www.chromium.org/updates/ua-ch) are being rolled out across a number of browsers and are an alternative to the tracking the user-agent, which is particularly useful in those browsers which are freezing the user-agent string. See [here](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Accept-CH#Browser_compatibility) for browser support.
 
 This is useful data to capture as browsers are moving away from high entropy user-agent strings. Client Hints offer useful information to understand browser usage without the potential to infringe on a users privacy as is often the case with the user-agent string.
 
-This context be enabled in two ways:
+This entity can be configured in two ways:
 
-1. `clientHints: true`
-    - This will capture the "basic" client hints
-2. `clientHints: { includeHighEntropy: true }`
-    - This will capture the "basic" client hints as well as hints that are deemed "High Entropy" and could be used to fingerprint users. Browsers may choose to prompt the user before making this data available.
+1. `clientHints: true`: captures the "basic" client hints `isMobile` and `brands`.
+2. `clientHints: { includeHighEntropy: true }`: captures the "basic" client hints as well as hints that are deemed "High Entropy" and could be used to fingerprint users. Browsers may choose to prompt the user before making this data available.
 
-To see what will be captured please see the JsonSchema file [org.ietf/http_client_hints/jsonschema/1-0-0](https://raw.githubusercontent.com/snowplow/iglu-central/master/schemas/org.ietf/http_client_hints/jsonschema/1-0-0).
+The high entropy properties are `architecture`, `model`, `platform`, `platformVersion`, and `uaFullVersion`.
 
-The Client Hints context entity is **automatically tracked** once configured.
+For the full schema details see the [device and browser tracking](/docs/events/ootb-data/device-and-browser/index.md#client-hints-entity) overview page.
+
+The Client Hints entity is **automatically tracked** once configured.
 
 ## Install plugin
 
@@ -43,9 +43,17 @@ The Client Hints context entity is **automatically tracked** once configured.
 **Note:** The links to the CDNs above point to the current latest version. You should pin to a specific version when integrating this plugin on your website if you are using a third party CDN in production.
 
 ```javascript
+// Basic
 window.snowplow('addPlugin',
   "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-client-hints@latest/dist/index.umd.min.js",
   ["snowplowClientHints", "ClientHintsPlugin"]
+);
+
+// High Entropy
+window.snowplow('addPlugin',
+  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-client-hints@latest/dist/index.umd.min.js",
+  ["snowplowClientHints", "ClientHintsPlugin"],
+  { includeHighEntropy: true }
 );
 ```
 
@@ -60,34 +68,18 @@ window.snowplow('addPlugin',
 import { newTracker } from '@snowplow/browser-tracker';
 import { ClientHintsPlugin } from '@snowplow/browser-plugin-client-hints';
 
+// Basic
 newTracker('sp1', '{{collector_url}}', {
    appId: 'my-app-id',
    plugins: [ ClientHintsPlugin() ],
-            // Use ClientHintsPlugin(true) to capture high entropy values
+});
+
+// High Entropy
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
+   plugins: [ ClientHintsPlugin(true) ],
 });
 ```
 
   </TabItem>
 </Tabs>
-
-## Context entity
-
-Adding this plugin will automatically capture [this](https://github.com/snowplow/iglu-central/blob/master/schemas/org.ietf/http_client_hints/jsonschema/1-0-0) context entity.
-
-**Example information**:
-
-```json
-{
-  "isMobile": false,
-  "brands": [
-    {
-      "brand": "Google Chrome",
-      "version": "89"
-    },
-    {
-      "brand": "Chromium",
-      "version": "89"
-    }
-  ]
-}
-```

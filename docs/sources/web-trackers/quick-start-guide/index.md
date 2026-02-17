@@ -10,14 +10,7 @@ sidebar_position: 100
 ```mdx-code-block
 import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
-import ReleaseBadge from '@site/docs/reusable/javascript-tracker-release-badge-v3/_index.md'
-
-<ReleaseBadge/>
 ```
-
-We recommend looking at the [Advanced Analytics for Web accelerator](https://docs.snowplow.io/accelerators/web/) to walk through tracking and modelling web events. It's a more in depth look at how to use Snowplow than this page.
-
-## Quick start (basic)
 
 Follow these instructions to quickly implement a Snowplow web tracker with default configuration, and track a page view.
 
@@ -39,7 +32,7 @@ The process involves the following high level steps:
 
 - Once you’ve generated your tag add it to all the pages you’d like to track:
   - Place the tag directly into your codebase. Typically this will be placed into the `<head>` element of your page or in a similar, suitable, location if using a Single Page Application framework.
-    - The JavaScript Tracker supports both synchronous and asynchronous tags. We recommend the asynchronous tags in nearly all instances, as these do not slow down page load times.
+    - The tag loads asynchronously to avoid slowing down page load times. Tracking calls made before the script loads are automatically queued and processed once the tracker initializes.
   - Load the tag using a Tag Management solution such as Google Tag Manager, usually triggered on page load.
 
 - Configure an instance of the tracker by calling `newTracker` with your desired properties.
@@ -155,4 +148,4 @@ enableActivityTracking({
 
 Adding this code to your site will cause [page ping events](/docs/sources/web-trackers/tracking-events/activity-page-pings/index.md) to be automatically tracked and sent via POST.
 
-If using the Browser tracker, the events will all have the `webPage` context entity attached, containing the page view ID. If using the JavaScript tracker, the page pings will have the `webPage` as well as `performanceTiming`, `gaCookies`, and `clientHint` entities. Read more about these entities [here](/docs/sources/web-trackers/tracking-events/index.md#auto-tracked-entities).
+The events will all have the `webPage` entity attached, containing the [page view ID](/docs/sources/web-trackers/tracking-events/page-views/index.md).

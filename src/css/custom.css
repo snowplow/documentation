@@ -116,6 +116,7 @@
   --ifm-code-padding-vertical: 0.05rem;
   --ifm-font-family-base: 'InterVariable', var(--font-fallback);
   --ifm-menu-color-active: hsl(var(--primary));
+  --ifm-menu-link-padding-vertical: 0.25rem;
   --ifm-font-color-base: hsl(var(--muted-foreground));
   --ifm-font-color-base-inverse: rgb(218, 221, 225);
   --ifm-toc-padding-horizontal: 20px;
@@ -435,7 +436,7 @@ aside.theme-doc-sidebar-container {
 
 /* Collapsible section headers - styled as distinct category headings */
 .theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible {
-  margin-top: 1.25em;
+  margin-top: 1em;
 }
 
 .theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .menu__link {
@@ -594,7 +595,7 @@ aside.theme-doc-sidebar-container {
 }
 
 .menu__list-item:not(:first-child) {
-  margin-top: 0.25rem;
+  margin-top: 0.125rem;
 }
 
 .menu__list-item--collapsed .menu__list {

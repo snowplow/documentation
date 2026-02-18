@@ -453,6 +453,7 @@ aside.theme-doc-sidebar-container {
 .theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .section-header__toggle.menu__link--active {
   background: none;
   border-left: none;
+  margin-left: 0;
   color: hsl(var(--muted-foreground));
 }
 
@@ -744,13 +745,19 @@ aside.theme-doc-sidebar-container {
   opacity: 100 !important;
 }
 
-/* Carets for hoisted Signals subsections (marked with section-child class) always visible */
+/* Carets for hoisted Signals subsections: hidden by default, visible on hover */
 .section-child
   .menu__list-item-collapsible
   .menu__caret {
   display: flex;
   padding: 4px;
-  opacity: 100 !important;
+  opacity: 0;
+}
+
+.section-child
+  .menu__list-item-collapsible:hover
+  .menu__caret {
+  opacity: 1 !important;
 }
 
 

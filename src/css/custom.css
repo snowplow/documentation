@@ -506,8 +506,11 @@ aside.theme-doc-sidebar-container {
 }
 
 /* Remove vertical border line from section header's direct child list */
+/* Uses !important to override Infima's specificity-boosted rule in production builds:
+   .menu__list:not(#\#):not(#\#) .menu__list { padding-left: var(--ifm-menu-link-padding-horizontal) }
+   That rule wins over a normal class chain locally it's absent, causing the deploy preview indent. */
 .theme-doc-sidebar-item-category-level-1.section-header > .menu__list {
-  padding-left: 0;
+  padding-left: 0 !important;
   margin-left: 0;
   border-left: none;
 }

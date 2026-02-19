@@ -1,6 +1,6 @@
 ---
 title: "Snowplow components and applications reference"
-sidebar_label: "Reference"
+sidebar_label: "Components"
 date: "2020-03-24"
 sidebar_position: 10
 description: "Technical reference documentation for Snowplow components and applications, including configuration details for self-hosted deployments and Snowplow CDI customers."

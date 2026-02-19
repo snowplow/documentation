@@ -88,6 +88,12 @@ Example:
 
 This is useful when you need to flag or allowlist specific user agents without modifying the IAB database files themselves.
 
+:::info
+
+These lists will take precedence over the IAB files. For example, a user agent added to `includeUseragents` will not be considered a robot even if it’s also in the `excludeUseragentFile` databaes.
+
+:::
+
 ## Input
 
 This enrichment uses the following fields of a Snowplow event:

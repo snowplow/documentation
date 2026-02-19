@@ -61,6 +61,24 @@ In addition to the IAB database files, you can provide custom lists of user agen
 
 Both fields accept a JSON array of strings. They are optional and default to empty lists if omitted.
 
+A user agent matching `excludeUseragents` produces the following output values:
+
+| Field | Value |
+| ----- | ----- |
+| `spiderOrRobot` | `true` |
+| `category` | `SPIDER_OR_ROBOT` |
+| `reason` | `FAILED_UA_EXCLUDE` |
+| `primaryImpact` | `UNKNOWN` |
+
+A user agent matching `includeUseragents` produces the following output values:
+
+| Field | Value |
+| ----- | ----- |
+| `spiderOrRobot` | `false` |
+| `category` | `BROWSER` |
+| `reason` | `PASSED_ALL` |
+| `primaryImpact` | `NONE` |
+
 Example:
 
 ```json

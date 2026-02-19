@@ -1,16 +1,16 @@
 ---
-title: "Define interventions to trigger real-time actions with Signals"
+title: "Define and receive interventions to trigger real-time actions with Signals"
 sidebar_position: 25
-sidebar_label: "Define interventions"
+sidebar_label: "Interventions"
 description: "Create rule-based interventions with criteria and targeting to automatically trigger actions when attribute values change. Configure using Console UI, Python SDK, or API."
 keywords: ["interventions", "rule-based triggers", "intervention criteria", "attribute targeting"]
 ---
 
-[Interventions](/docs/signals/concepts/index.md#interventions) are automated triggers that enable real-time actions based on user behavior.
+[Interventions](/docs/signals/concepts/index.md#interventions) are automated triggers that enable real-time actions based on user behavior. You'll need to define and subscribe to them.
 
 There are three methods for defining interventions in Signals:
 * Snowplow Console UI
-* [Signals Python SDK](/docs/signals/define-interventions/using-python-sdk/index.md)
+* [Signals Python SDK](/docs/signals/interventions/using-python-sdk/index.md)
 * [Signals API](/docs/signals/connection/index.md#signals-api)
 
 To create an intervention using the UI, go to **Signals** > **Interventions** in Snowplow Console and follow the instructions.
@@ -43,7 +43,7 @@ When adding more than one criteria, you can require all or any of them to be met
 
 ![Multiple intervention criteria with "all" or "any" logic selection](../images/intervention-criteria-all.png)
 
-These attributes are both from groups with the `domain_userid` attribute key. Therefore, this intervention is targeted to users. When a [subscribed](/docs/signals/receive-interventions/index.md) user reaches 10 page views while using Chrome, the intervention will trigger.
+These attributes are both from groups with the `domain_userid` attribute key. Therefore, this intervention is targeted to users. When a [subscribed](/docs/signals/interventions/subscribe/index.md) user reaches 10 page views while using Chrome, the intervention will trigger.
 
 ## Custom targets
 
@@ -65,7 +65,7 @@ To send the intervention configuration to your Signals infrastructure, click the
 
 ![Published intervention page with sample subscription code](../images/intervention-published.png)
 
-The intervention page also includes sample code to help you subscribe to it. Read more about this in the [receiving interventions](/docs/signals/receive-interventions/index.md) page.
+The intervention page also includes sample code to help you subscribe to it. Read more about this in the [receiving interventions](/docs/signals/interventions/subscribe/index.md) page.
 
 ### Versioning
 

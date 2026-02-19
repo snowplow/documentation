@@ -42,7 +42,7 @@ Attributes can be categorized into four main types, depending on the type of use
 | First touch   | The first event or property that happened              | `first_mkt_source`                   |
 | Last touch    | The most recent event or property that happened        | `last_device_class`                  |
 
-Signals includes a range of different aggregations for calculating attributes, including `mean`, `counter`, or `unique_list`. See the full list in the [attribute configuration](/docs/signals/define-attributes/attributes/index.md) page.
+Signals includes a range of different aggregations for calculating attributes, including `mean`, `counter`, or `unique_list`. See the full list in the [attribute configuration](/docs/signals/attributes/attributes/index.md) page.
 
 ### Attribute keys
 
@@ -63,7 +63,7 @@ To demonstrate the necessity of attribute keys, consider the attribute `num_view
 
 Each of these is likely to have a different calculated value.
 
-You can [define your own attribute keys](/docs/signals/define-attributes/attribute-groups/index.md#attribute-keys), or use the built-in ones. Signals comes with predefined attribute keys for user, device, and session. Their identifiers are from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-fields) in all Snowplow events.
+You can [define your own attribute keys](/docs/signals/attributes/attribute-groups/index.md#attribute-keys), or use the built-in ones. Signals comes with predefined attribute keys for user, device, and session. Their identifiers are from the out-of-the-box atomic [user-related fields](/docs/fundamentals/canonical-event/index.md#user-fields) in all Snowplow events.
 
 | Attribute key      | Type     |
 | ------------------ | -------- |
@@ -173,7 +173,7 @@ Another use for custom targeting is when you want to target an attribute key tha
 ### Subscribing
 
 To receive and take action on interventions, you'll need to:
-* [Subscribe](/docs/signals/receive-interventions/index.md) to them within your application
+* [Subscribe](/docs/signals/interventions/subscribe/index.md) to them within your application
 * Define the logic of how the application should react
 
 :::note Attribute key IDs
@@ -184,7 +184,7 @@ A subscription using a specific attribute key ID, for example a `domain_userid` 
 
 Once subscribed, all triggered interventions will be streamed to the consumer application.
 
-For back-end applications using the [Signals Python SDK](https://pypi.org/project/snowplow-signals/), [Signals Node.js SDK](https://www.npmjs.com/package/@snowplow/signals-node), or [Signals API](/docs/signals/connection/index.md#signals-api), subscribe within the application code by passing in the relevant attribute key IDs. For web applications, use the [Signals browser plugin](/docs/signals/receive-interventions/index.md) for the JavaScript tracker to subscribe automatically to relevant interventions.
+For back-end applications using the [Signals Python SDK](https://pypi.org/project/snowplow-signals/), [Signals Node.js SDK](https://www.npmjs.com/package/@snowplow/signals-node), or [Signals API](/docs/signals/connection/index.md#signals-api), subscribe within the application code by passing in the relevant attribute key IDs. For web applications, use the [Signals browser plugin](/docs/signals/interventions/subscribe/index.md) for the JavaScript tracker to subscribe automatically to relevant interventions.
 
 ### Targeting example
 

@@ -41,7 +41,7 @@ my_stream_attribute_group = StreamAttributeGroup(
 </TabItem>
 <TabItem value="batch" label="BatchAttributeGroup">
 
-Use a `BatchAttributeGroup` to calculate attributes from the atomic events table. Read more about this in the [batch calculations](/docs/signals/define-attributes/using-python-sdk/batch-calculations/index.md) section.
+Use a `BatchAttributeGroup` to calculate attributes from the atomic events table. Read more about this in the [batch calculations](/docs/signals/attributes/using-python-sdk/batch-calculations/index.md) section.
 
 ```python
 from snowplow_signals import BatchAttributeGroup, domain_sessionid
@@ -62,7 +62,7 @@ my_batch_attribute_group = BatchAttributeGroup(
 </TabItem>
 <TabItem value="external" label="ExternalBatchAttributeGroup">
 
-Use an `ExternalBatchAttributeGroup` to sync attributes from an existing warehouse table. Read more about this in the [batch calculations](/docs/signals/define-attributes/using-python-sdk/batch-calculations/index.md) section.
+Use an `ExternalBatchAttributeGroup` to sync attributes from an existing warehouse table. Read more about this in the [batch calculations](/docs/signals/attributes/using-python-sdk/batch-calculations/index.md) section.
 
 In this case, the attributes are already defined elsewhere and pre-calculated in the warehouse. Instead of `attributes`, this attribute group has `fields`.
 

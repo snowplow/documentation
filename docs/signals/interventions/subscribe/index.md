@@ -1,12 +1,10 @@
 ---
 title: "Subscribe to and receive interventions in your applications"
 sidebar_position: 50
-sidebar_label: "Receive interventions"
+sidebar_label: "Subscription"
 description: "Subscribe to interventions by attribute key ID to automatically respond to user behavior changes. Use the Python SDK, browser tracker plugin, or Signals API to receive intervention payloads."
 keywords: ["subscribe interventions", "intervention subscription", "browser plugin", "intervention payload"]
 ---
-
-[Interventions](/docs/signals/concepts/index.md#interventions) are automated triggers that enable real-time actions based on user behavior.
 
 Subscribe to interventions to automatically respond within your application. You have three options for receiving interventions, depending on your use case or application:
 * [Signals Python SDK](https://pypi.org/project/snowplow-signals/)

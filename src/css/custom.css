@@ -443,7 +443,7 @@ aside.theme-doc-sidebar-container {
   padding-bottom: 0.125em;
   font-variant: all-small-caps;
   font-size: 1.05rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.05em;
   color: hsl(var(--muted-foreground));
 }
@@ -476,7 +476,7 @@ aside.theme-doc-sidebar-container {
   padding: var(--ifm-menu-link-padding-vertical) 0 0.125em var(--ifm-menu-link-padding-horizontal);
   font-variant: all-small-caps;
   font-size: 1.05rem;
-  font-weight: 600;
+  font-weight: 700;
   letter-spacing: 0.05em;
   color: hsl(var(--muted-foreground));
   background: none;

@@ -11,13 +11,19 @@
 
 // @ts-check
 
+// Sections whose items are unwrapped/hoisted from their parent category into the section directly
+const CHILD_UNWRAP_SECTIONS = new Set(['Signals', 'Components'])
+
+// Sections that start in a collapsed state
+const COLLAPSED_BY_DEFAULT_SECTIONS = new Set(['Components'])
+
 const swap = (allItems, linkItems, descriptions) => {
-  const result = allItems.flatMap((item) => {
+  return allItems.flatMap((item) => {
     // Preserve header property for later section wrapping (don't create HTML here)
-    const className = [
-      item.className || '',
-      item.customProps?.hidden ? 'hidden' : '',
-    ].join(' ')
+    const className =
+      [item.className, item.customProps?.hidden ? 'hidden' : '']
+        .filter(Boolean)
+        .join(' ') || undefined
 
     if (item.type === 'category') {
       // a workaround for category pages not picking up the description in index.md
@@ -62,9 +68,18 @@ const swap = (allItems, linkItems, descriptions) => {
 
     return [{ ...item, className }]
   })
-
-  return result
 }
+
+/** @param {string} label @param {any} link @param {any[]} items */
+const buildSection = (label, link, items) => ({
+  type: 'category',
+  label,
+  collapsible: true,
+  collapsed: COLLAPSED_BY_DEFAULT_SECTIONS.has(label),
+  className: 'section-header',
+  link,
+  items,
+})
 
 // Wrap items into collapsible sections based on header markers in customProps
 /** @param {any[]} items */
@@ -80,31 +95,31 @@ const wrapInSections = (items) => {
     if (header) {
       // Close previous section if exists
       if (currentSection) {
-        result.push({
-          type: 'category',
-          label: currentSection,
-          collapsible: true,
-          collapsed: currentSection === 'Components',
-          className: 'section-header',
-          link: sectionLink,
-          items: sectionItems,
-        })
+        result.push(buildSection(currentSection, sectionLink, sectionItems))
       }
 
       // Start new section
       currentSection = header
-      sectionLink = item.link || (item.type === 'doc' ? { type: 'doc', id: item.id } : null)
+      sectionLink =
+        item.link || (item.type === 'doc' ? { type: 'doc', id: item.id } : null)
 
       // Add the item itself (without the header prop to avoid recursion issues)
       const { header: _, ...restCustomProps } = item.customProps || {}
       const itemWithoutHeader = {
         ...item,
-        customProps: Object.keys(restCustomProps).length > 0 ? restCustomProps : undefined,
+        customProps:
+          Object.keys(restCustomProps).length > 0 ? restCustomProps : undefined,
       }
-      if ((header === 'Signals' || header === 'Components') && itemWithoutHeader.type === 'category' && itemWithoutHeader.items?.length) {
+      if (
+        CHILD_UNWRAP_SECTIONS.has(header) &&
+        itemWithoutHeader.type === 'category' &&
+        itemWithoutHeader.items?.length
+      ) {
         sectionItems = itemWithoutHeader.items.map((child) => ({
           ...child,
-          className: [child.className, 'section-child'].filter(Boolean).join(' '),
+          className: [child.className, 'section-child']
+            .filter(Boolean)
+            .join(' '),
         }))
         sectionLink = null
       } else {
@@ -121,15 +136,7 @@ const wrapInSections = (items) => {
 
   // Close last section
   if (currentSection && sectionItems.length > 0) {
-    result.push({
-      type: 'category',
-      label: currentSection,
-      collapsible: true,
-      collapsed: currentSection === 'Components',
-      className: 'section-header',
-      link: sectionLink,
-      items: sectionItems,
-    })
+    result.push(buildSection(currentSection, sectionLink, sectionItems))
   }
 
   return result
@@ -145,13 +152,13 @@ const swapDocItemsToLinkItems = (generatedDocs, originalDocs) => {
       descriptions[docItem.id] = docItem.frontMatter.description
     }
     if (docItem.frontMatter.type === 'link') {
-      // Adding the noindex flag
-      docItem.frontMatter.sidebar_custom_props = {
-        ...(docItem.frontMatter.sidebar_custom_props || {}),
-        noindex: true,
+      linkItems[docItem.id] = {
+        ...docItem.frontMatter,
+        sidebar_custom_props: {
+          ...(docItem.frontMatter.sidebar_custom_props || {}),
+          noindex: true,
+        },
       }
-
-      linkItems[docItem.id] = docItem.frontMatter
     }
   }
 

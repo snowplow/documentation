@@ -97,6 +97,7 @@ This table shows the possible values for the `platform` field:
 | Connected TV              | `tv`             |
 | Games console             | `cnsl`           |
 | Internet of Things        | `iot`            |
+| Headset (e.g. AR)         | `headset`        |
 
 :::info Tracker namespacing
 The tracker namespace parameter is used to distinguish between different trackers. The name can be any string that doesn't contain a colon or semicolon character. Tracker namespacing allows you to run multiple trackers, pinging to different collectors.

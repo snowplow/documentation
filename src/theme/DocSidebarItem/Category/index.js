@@ -9,8 +9,6 @@ import {
 } from '@docusaurus/theme-common'
 import {
   isActiveSidebarItem,
-} from '@docusaurus/plugin-content-docs/client'
-import {
   findFirstSidebarItemLink,
   useDocSidebarItemsExpandedState,
 } from '@docusaurus/plugin-content-docs/client'
@@ -49,7 +47,7 @@ function useCategoryHrefWithSSRFallback(item) {
       return item.href
     }
     // In these cases, it's not necessary to render a fallback
-    // We skip the "findFirstCategoryLink" computation
+    // We skip the "findFirstSidebarItemLink" computation
     if (isBrowser || !item.collapsible) {
       return undefined
     }
@@ -57,7 +55,7 @@ function useCategoryHrefWithSSRFallback(item) {
   }, [item, isBrowser])
 }
 
-function CollapseButton({ categoryLabel, href, collapsed, updateCollapsed }) {
+function CollapseButton({ categoryLabel, collapsed, updateCollapsed }) {
   const handleClick = (e) => {
     e.preventDefault()
     e.stopPropagation()
@@ -182,7 +180,6 @@ export default function DocSidebarItemCategory({
             {href && collapsible && (
               <CollapseButton
                 categoryLabel={label}
-                href={href}
                 collapsed={collapsed}
                 updateCollapsed={updateCollapsed}
               />

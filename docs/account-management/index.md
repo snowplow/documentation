@@ -2,9 +2,9 @@
 title: "Manage your Snowplow account using the Credentials API"
 sidebar_label: "Account management"
 date: "2020-02-15"
-sidebar_position: 9
+sidebar_position: 9.5
 sidebar_custom_props:
-  header: "Reference"
+  header: "Resources"
 description: "Manage your Snowplow account configuration, users, and API keys through Console, including instructions for obtaining JWT tokens via the Credentials API."
 keywords: ["account management", "Credentials API", "API keys", "JWT authentication", "Console API"]
 ---

@@ -84,7 +84,7 @@ const wrapInSections = (items) => {
           type: 'category',
           label: currentSection,
           collapsible: true,
-          collapsed: false,
+          collapsed: currentSection === 'Components',
           className: 'section-header',
           link: sectionLink,
           items: sectionItems,
@@ -101,7 +101,7 @@ const wrapInSections = (items) => {
         ...item,
         customProps: Object.keys(restCustomProps).length > 0 ? restCustomProps : undefined,
       }
-      if (header === 'Signals' && itemWithoutHeader.type === 'category' && itemWithoutHeader.items?.length) {
+      if ((header === 'Signals' || header === 'Components') && itemWithoutHeader.type === 'category' && itemWithoutHeader.items?.length) {
         sectionItems = itemWithoutHeader.items.map((child) => ({
           ...child,
           className: [child.className, 'section-child'].filter(Boolean).join(' '),
@@ -125,7 +125,7 @@ const wrapInSections = (items) => {
       type: 'category',
       label: currentSection,
       collapsible: true,
-      collapsed: false,
+      collapsed: currentSection === 'Components',
       className: 'section-header',
       link: sectionLink,
       items: sectionItems,

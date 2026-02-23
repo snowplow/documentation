@@ -468,7 +468,7 @@ docs/understanding-tracking-design/managing-data-structures-with-data-structures
 
 # Sidebar reshuffle
 /docs/signals/define-attributes/* /docs/signals/attributes/:splat 301
-docs/signals/retrieve-attributes/* /docs/signals/attributes/:splat 301
+/docs/signals/retrieve-attributes/* /docs/signals/attributes/:splat 301
 /docs/signals/define-interventions/* /docs/signals/interventions/:splat 301
 /docs/signals/receive-interventions/* /docs/signals/interventions/subscribe/:splat 301
 /docs/signals/resources/* /docs/signals/get-started/:splat 301
@@ -476,3 +476,4 @@ docs/signals/retrieve-attributes/* /docs/signals/attributes/:splat 301
 /docs/resources/migration-guides/* /docs/migration-guides/:splat 301
 /docs/resources/* /docs/licensing/:splat 301
 /docs/licensing/copyright-license/* /docs/licensing/:splat 301
+/docs/api-reference/* /docs/api-reference/versions/:splat 301

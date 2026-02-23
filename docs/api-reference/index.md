@@ -9,6 +9,4 @@ sidebar_custom_props:
   header: "Components"
 ---
 
-This section contains detailed technical information about Snowplow components.
-
-Some of the information is relevant only for [Snowplow Self-Hosted](/docs/get-started/index.md#self-hosted) users, as [Snowplow CDI](/docs/get-started/index.md#customer-data-infrastructure) customers won't need to configure all their own components.
+<!-- This page isn't seen because of how the navigation sidebar is structured, with the subsections artifically hoisted to look like they're all top-level sections -->

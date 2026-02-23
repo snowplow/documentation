@@ -436,16 +436,21 @@ aside.theme-doc-sidebar-container {
 
 /* Collapsible section headers - styled as distinct category headings */
 .theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible {
-  margin-top: 1em;
+  margin-top: 1rem;
 }
 
-.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .menu__link {
-  padding-bottom: 0.125em;
+/* Shared heading typography for section header link and toggle button */
+.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .menu__link,
+.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .section-header__toggle {
   font-variant: all-small-caps;
   font-size: 1.05rem;
   font-weight: 700;
   letter-spacing: 0.05em;
   color: hsl(var(--muted-foreground));
+}
+
+.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .menu__link {
+  padding-bottom: 0.125rem;
 }
 
 /* Disable hover/active highlight styles on section header links and toggle button */
@@ -458,10 +463,12 @@ aside.theme-doc-sidebar-container {
   color: hsl(var(--muted-foreground));
 }
 
+/* Override Infima's global collapsible hover background */
 .theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible:hover {
   background: none !important;
 }
 
+/* Override Infima's global collapsible active background */
 .theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible.menu__list-item-collapsible--active {
   background: none !important;
   border-left: none;
@@ -473,12 +480,7 @@ aside.theme-doc-sidebar-container {
   display: flex;
   align-items: center;
   width: 100%;
-  padding: var(--ifm-menu-link-padding-vertical) 0 0.125em var(--ifm-menu-link-padding-horizontal);
-  font-variant: all-small-caps;
-  font-size: 1.05rem;
-  font-weight: 700;
-  letter-spacing: 0.05em;
-  color: hsl(var(--muted-foreground));
+  padding: var(--ifm-menu-link-padding-vertical) 0 0.125rem var(--ifm-menu-link-padding-horizontal);
   background: none;
   cursor: pointer;
   text-align: left;
@@ -490,6 +492,7 @@ aside.theme-doc-sidebar-container {
 }
 
 /* Inline caret inside the section header toggle button */
+/* !important needed to override Infima's global .menu__caret opacity: 0, display, and padding rules */
 .theme-doc-sidebar-item-category-level-1.section-header .section-header__caret {
   display: inline-flex !important;
   flex-shrink: 0;
@@ -498,6 +501,7 @@ aside.theme-doc-sidebar-container {
   padding: 4px !important;
 }
 
+/* Override Infima's collapsible hover background on the caret */
 .theme-doc-sidebar-item-category-level-1.section-header .section-header__caret:hover {
   background: none !important;
 }
@@ -728,14 +732,14 @@ aside.theme-doc-sidebar-container {
   border: none;
   background: none !important;
   padding: 4px;
-  opacity: 100 !important;
+  opacity: 1 !important;
 }
 /* Level-2 carets always visible (except direct children of section headers, which act as top-level) */
 .theme-doc-sidebar-item-category-level-2:not(.section-header > .menu__list > .theme-doc-sidebar-item-category-level-2)
   .menu__list-item-collapsible
   .menu__caret {
   padding: 4px;
-  opacity: 100 !important;
+  opacity: 1 !important;
 }
 
 /* Level-3+ carets inside section headers always visible */
@@ -743,7 +747,7 @@ aside.theme-doc-sidebar-container {
   .menu__list-item-collapsible
   .menu__caret {
   padding: 4px;
-  opacity: 100 !important;
+  opacity: 1 !important;
 }
 
 /* Carets for hoisted Signals subsections: hidden by default, visible on hover */

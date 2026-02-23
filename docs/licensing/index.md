@@ -1,11 +1,14 @@
 ---
-title: "Snowplow software licensing overview"
-sidebar_position: 10
-hide_table_of_contents: true
-sidebar_label: "Licensing overview"
-description: "Overview of Snowplow software licenses including Community License, Limited Use License, and commercial options."
-keywords: ["Snowplow licensing", "software licenses", "open source licenses", "component licenses"]
+title: "Snowplow licenses"
+date: "2020-10-28"
+sidebar_position: 12.5
+sidebar_label: "Licensing"
+description: "Information about the different licenses used in Snowplow components and projects, including the Community License, Limited Use License, and Personal and Academic License."
+keywords: ["Snowplow licensing", "community license", "limited use license", "contributor license agreement"]
 ---
+
+This section provides information about the different licenses used in Snowplow components and projects.
+
 
 ```mdx-code-block
 import Link from '@docusaurus/Link';
@@ -40,17 +43,17 @@ _Usage and distribution for any purpose_
 </td>
 <td>
 
-_Usage in non-competing products, no distribution_ ([FAQ](/docs/resources/community-license-faq/index.md))
+_Usage in non-competing products, no distribution_ ([FAQ](/docs/licensing/community-license-faq/index.md))
 
 </td>
 <td>
 
-_Usage in non-production environments only, no distribution_  ([FAQ](/docs/resources/limited-use-license-faq/index.md))
+_Usage in non-production environments only, no distribution_  ([FAQ](/docs/licensing/limited-use-license-faq/index.md))
 
 </td>
 <td>
 
-_Usage for personal and academic purposes only_ ([FAQ](/docs/resources/personal-and-academic-license-faq/index.md))
+_Usage for personal and academic purposes only_ ([FAQ](/docs/licensing/personal-and-academic-license-faq/index.md))
 
 </td>
 </tr>

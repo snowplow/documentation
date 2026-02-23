@@ -22,7 +22,7 @@ export const versions = {
 
   // Core pipeline
   collector: '3.7.0',
-  enrich: '6.7.0',
+  enrich: '6.7.1',
   sqs2kinesis: '1.0.4',
   dataflowRunner: '0.7.6',
   snowbridge: '4.1.0',
@@ -33,7 +33,7 @@ export const versions = {
   esLoader: '2.1.3',
   gcsLoader: '0.5.6',
   postgresLoader: '0.3.3',
-  rdbLoader: '6.2.0',
+  rdbLoader: '6.3.0',
   s3Loader: '3.1.0',
   s3Loader22x: '2.2.9',
   lakeLoader: '0.9.1',
@@ -77,5 +77,5 @@ export const versions = {
 
   // Testing & debugging
   snowplowMicro: '4.0.0',
-  snowplowMini: '0.24.1',
+  snowplowMini: '0.25.1',
 }

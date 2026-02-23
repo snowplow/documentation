@@ -27,11 +27,7 @@ The endpoints focus on the main operations in the workflow around:
 
 Each request will need to include your Organization ID. You can find it [on the _Manage organization_ page](https://console.snowplowanalytics.com/settings) in Console.
 
-```mdx-code-block
-import GetConsoleApiKey from "@site/docs/reusable/get-console-api-key/_index.md"
-
-<GetConsoleApiKey/>
-```
+Follow the instructions in the [Account management](/docs/account-management/index.md) section to obtain an access token for API authentication.
 
 ## Retrieving job run information
 

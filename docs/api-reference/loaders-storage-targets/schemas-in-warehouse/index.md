@@ -266,7 +266,7 @@ It will be translated into a field called `last_name` (notice the underscore) in
 
 ## Versioning
 
-What happens when you evolve your schema to a [new version](/docs/event-studio/data-structures/version-amend/index.md)?
+What happens when you evolve your schema to a [new version](/docs/event-studio/data-structures/versioning/index.md)?
 
 <Tabs groupId="warehouse" queryString>
   <TabItem value="redshift" label="Redshift" default>

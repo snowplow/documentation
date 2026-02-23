@@ -43,7 +43,7 @@ Link click events are **automatically tracked** once configured.
 </TabItem>
 </Tabs>
 
-## Enable link click tracking
+## Toggle link click tracking
 
 Turn on link click tracking like this:
 
@@ -62,7 +62,7 @@ snowplow('enableLinkClickTracking');
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
 
-Link click tracking is part of a separate plugin, `@snowplow/browser-plugin-link-click-tracking`. You need to install it with your favorite package manager: `npm install @snowplow/browser-plugin-link-click-tracking` and then initialize it:
+Initialize your tracker with the plugin.
 
 ```javascript
 import { newTracker } from '@snowplow/browser-tracker';
@@ -80,7 +80,7 @@ enableLinkClickTracking();
 
 Use this method once and the tracker will add click event listeners to the document to detect clicks on anchor elements.
 
-An optional parameter is `pseudoClicks`. If this is not turned on, Firefox will not recognize middle clicks. If it is turned on, there is a small possibility of false positives (click events firing when they shouldn't). **Turning this feature on is recommended**:
+An optional, but recommended, parameter is `pseudoClicks`. If this isn't turned on, Firefox won't recognize middle clicks. However, when configured, there is a small possibility of false positives (click events firing when they shouldn't).
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -132,12 +132,33 @@ enableLinkClickTracking({
   </TabItem>
 </Tabs>
 
+To stop tracking link events, call `disableLinkClickTracking`:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('disableLinkClickTracking');
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { disableLinkClickTracking } from '@snowplow/browser-plugin-link-click-tracking';
+
+disableLinkClickTracking();
+```
+
+  </TabItem>
+</Tabs>
+
 ## Refresh link click tracking
 
 In previous versions, the `enableLinkClickTracking` method only tracked clicks on links that existed in the document at the time it was called.
 If new links were added to the page after that, you had to use `refreshLinkClickTracking` to add Snowplow click listeners to any new links.
 
-From v4, this method is deprecated and has no effect; event listeners are now added directly to the document rather than to individual link elements and new links should automatically be tracked with no action required.
+From v4, this method is **deprecated** and has no effect; event listeners are now added directly to the document rather than to individual link elements and new links should automatically be tracked with no action required.
 
 ## Configuration
 

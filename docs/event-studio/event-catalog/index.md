@@ -1,13 +1,13 @@
 ---
 title: "Discover and manage events with the Event Catalog"
 sidebar_label: "Event Catalog"
-sidebar_position: 3
+sidebar_position: 30
 description: "Browse, search, and manage all event specifications across tracking plans from a single location to improve event discoverability and governance."
 keywords: ["event catalog", "event specifications", "event discovery", "event governance", "tracking plans"]
 date: "2025-02-05"
 ---
 
-The Event Catalog provides a centralized location to discover and manage all [event specifications](/docs/event-studio/event-specifications/index.md) across your [tracking plans](/docs/event-studio/tracking-plans/index.md). Instead of navigating through individual tracking plans to find specific events, you can browse, search, and filter all specifications from a single view.
+The Event Catalog provides a centralized location to discover and manage all event specifications across your [tracking plans](/docs/event-studio/tracking-plans/index.md). Instead of navigating through individual tracking plans to find specific events, you can browse, search, and filter all event specifications from a single view.
 
 When your organization has multiple tracking plans across different teams and domains, finding specific event specifications can become challenging. The Event Catalog addresses this by:
 
@@ -26,14 +26,14 @@ Navigate to **Event Catalog** in the main navigation.
 
 The Event Catalog provides a comprehensive list of all event specifications defined across your tracking plans. Each row displays:
 
-| Column | Description |
-|--------|-------------|
-| Event specification name | The name and schema identifier of the event specification |
-| Entities | The [entities](/docs/fundamentals/entities/index.md) attached to the event |
-| Tracking plan | The tracking plan containing the event specification |
-| Volume | The number of events collected |
-| Last seen | When the event was last received |
-| Status | The status of the event specification |
+| Column                   | Description                                                                |
+| ------------------------ | -------------------------------------------------------------------------- |
+| Event specification name | The name and schema identifier of the event specification                  |
+| Entities                 | The [entities](/docs/fundamentals/entities/index.md) attached to the event |
+| Tracking plan            | The tracking plan containing the event specification                       |
+| Volume                   | The number of events collected                                             |
+| Last seen                | When the event was last received                                           |
+| Status                   | The status of the event specification                                      |
 
 ### Filter and search
 

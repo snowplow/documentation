@@ -26,9 +26,9 @@ Sessions, identity, and context - https://docs.snowplow.io/docs/events/
 Event Studio
 Overview - https://docs.snowplow.io/docs/event-studio/
 Data Structures manager - https://docs.snowplow.io/docs/event-studio/data-structures/
-Manage via API - https://docs.snowplow.io/docs/event-studio/data-structures/manage/api/
-Snowtype CLI (type-safe codegen) - https://docs.snowplow.io/docs/event-studio/snowtype/using-the-cli/
-Data quality controls and tests - https://docs.snowplow.io/docs/event-studio/data-quality/
+Manage via API - https://docs.snowplow.io/docs/event-studio/programmatic-management/
+Snowtype CLI (type-safe codegen) - https://docs.snowplow.io/docs/event-studio/implement-tracking/snowtype/using-the-cli/
+Data quality controls and tests - https://docs.snowplow.io/docs/monitoring/
 
 Events
 Event types and tracking concepts - https://docs.snowplow.io/docs/fundamentals/events/
@@ -68,7 +68,7 @@ API keys and authentication - https://docs.snowplow.io/docs/account-management/
 
 Technical reference
 Index of API docs - https://docs.snowplow.io/docs/api-reference/
-Data Structures API - https://docs.snowplow.io/docs/event-studio/data-structures/manage/api/
+Data Structures API - https://docs.snowplow.io/docs/event-studio/programmatic-management/data-structures-api/
 Snowplow Micro API - https://docs.snowplow.io/docs/api-reference/snowplow-micro/
 
 Resources

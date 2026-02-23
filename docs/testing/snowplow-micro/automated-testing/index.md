@@ -183,7 +183,7 @@ window.snowplow('enableFormTracking', { options: options });
     1. cart-events ([schema](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/iglu-client-embedded/schemas/test.example.iglu/cart_action_event/jsonschema/1-0-0))
         - These events happen when a user interacts with the cart, adding or removing items, using the Add-to-cart or Remove buttons.
         - This is a self-describing event that captures the type of cart interaction: "add" versus "remove".
-        - We also want to add as [custom context](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md#tracking-a-custom-entity) the product involved in the cart-event, which is described by the product entity ([schema](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/iglu-client-embedded/schemas/test.example.iglu/product_entity/jsonschema/1-0-0), see more below)
+        - We also want to add as [custom context](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md#track-a-custom-entity) the product involved in the cart-event, which is described by the product entity ([schema](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/micro/iglu-client-embedded/schemas/test.example.iglu/product_entity/jsonschema/1-0-0), see more below)
         - Implemented in the shop-page (see file [shoppage.js](https://github.com/snowplow-incubator/snowplow-micro-examples/blob/main/app/static/ecommerce/js/shoppage.js)):
 
 ```javascript
@@ -610,7 +610,7 @@ cy.eventsWithParams(
 );
 ```
 
-This command accepts as first argument an object with the expected event's field-value pairs. You can read about all the fields in Snowplow docs [here](/docs/fundamentals/canonical-event/index.md). This command is particularly useful when checking on [structured events](/docs/sources/web-trackers/tracking-events/index.md#structured).
+This command accepts as first argument an object with the expected event's field-value pairs. You can read about all the fields in Snowplow docs [here](/docs/fundamentals/canonical-event/index.md). This command is particularly useful when checking on [structured events](/docs/sources/web-trackers/custom-tracking-using-schemas/index.md#track-a-structured-event).
 
 #### cy.eventsWithSchema
 

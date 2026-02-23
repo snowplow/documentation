@@ -68,13 +68,67 @@ newTracker('sp1', '{{collector_url}}', {
 
 The Web Vitals plugin can be initialized with a couple of options allowing for customizing its behavior:
 
-|       Option        |       Type       |                                                                                    Description                                                                                     |                      Default value                       |
-| :-----------------: | :--------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------: |
-| loadWebVitalsScript |    `boolean`     |                                             Should the plugin immediately load the Core Web Vitals measurement script from UNPKG CDN.                                              |                          `true`                          |
-|   webVitalsSource   |     `string`     |                                              The URL endpoint the Web Vitals script should be loaded from. Defaults to the UNPKG CDN.                                              | `https://unpkg.com/web-vitals@3/dist/web-vitals.iife.js` |
-|       context       | `DynamicContext` | Context entities to add to the tracked event. Can be provided either as an array of self-describing JSONs or function that returns a context entity. (available from version 3.19) |                                                          |
+|        Option         |       Type       |                                                                                    Description                                                                                     |                      Default value                       |
+| :-------------------: | :--------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------: |
+| `loadWebVitalsScript` |    `boolean`     |                                             Should the plugin immediately load the Core Web Vitals measurement script from UNPKG CDN.                                              |                          `true`                          |
+|   `webVitalsSource`   |     `string`     |                                              The URL endpoint the Web Vitals script should be loaded from. Defaults to the UNPKG CDN.                                              | `https://unpkg.com/web-vitals@4/dist/web-vitals.iife.js` |
+|       `context`       | `DynamicContext` | Context entities to add to the tracked event. Can be provided either as an array of self-describing JSONs or function that returns a context entity. (available from version 3.19) |                                                          |
 
-See the example for configuring [Plugins After Initialization](/docs/sources/web-trackers/plugins/configuring-tracker-plugins/javascript/index.md#plugins-after-initialization) on how these options can be used.
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+Pass configuration options as an array in the fourth parameter of `addPlugin`:
+
+```javascript
+window.snowplow(
+    'addPlugin',
+    'https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-web-vitals@latest/dist/index.umd.min.js',
+    ['snowplowWebVitals', 'WebVitalsPlugin'],
+    [{
+        loadWebVitalsScript: true,
+        webVitalsSource: 'https://cdn.jsdelivr.net/npm/web-vitals@3/dist/web-vitals.iife.js',
+        context: [
+            function(vitals) {
+                return {
+                    schema: 'iglu:com.example/page_performance/jsonschema/1-0-0',
+                    data: { lcpRating: vitals.lcp < 2500 ? 'good' : 'needs-improvement' }
+                };
+            }
+        ]
+    }]
+);
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+Pass configuration options directly to the plugin function:
+
+```javascript
+import { newTracker } from '@snowplow/browser-tracker';
+import { WebVitalsPlugin } from '@snowplow/browser-plugin-web-vitals';
+
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
+   plugins: [
+       WebVitalsPlugin({
+           loadWebVitalsScript: true,
+           webVitalsSource: 'https://cdn.jsdelivr.net/npm/web-vitals@3/dist/web-vitals.iife.js',
+           context: [
+               function(vitals) {
+                   return {
+                       schema: 'iglu:com.example/page_performance/jsonschema/1-0-0',
+                       data: { lcpRating: vitals.lcp < 2500 ? 'good' : 'needs-improvement' }
+                   };
+               }
+           ]
+       })
+   ],
+});
+```
+
+  </TabItem>
+</Tabs>
 
 ### Using an already existing Web Vitals library source
 

@@ -6,7 +6,7 @@ description: "Install and configure the Snowplow Browser tracker to capture page
 keywords: ["browser tracker setup", "page view tracking", "link click tracking plugin", "activity tracking javascript"]
 ---
 
-For this example application, we will use the [Browser tracker](/docs/sources/web-trackers/quick-start-guide/#quick-start-basic) which is distributed through npm.
+For this example application, we will use the [Browser tracker](/docs/sources/web-trackers/quick-start-guide) which is distributed through npm.
 
 Switch to the project root directory and then install it by running `npm install @snowplow/browser-tracker`.
 

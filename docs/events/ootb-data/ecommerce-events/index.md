@@ -35,7 +35,7 @@ This table shows the support for ecommerce tracking across the main client-side 
 
 The Snowplow ecommerce tracking APIs are supported by the [Ecommerce](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-ecommerce-data-model/index.md) dbt data model. It's a fully incremental model that transforms raw ecommerce event data into a set of derived tables based around carts, checkouts, products, and transactions.
 
-We recommend using the [Ecommerce base tracking plan template](/docs/event-studio/tracking-plans/tracking-plan-templates/index.md#ecommerce-web-and-mobile) for ecommerce tracking.
+We recommend using the [Ecommerce base tracking plan template](/docs/event-studio/tracking-plans/templates/index.md#ecommerce-web-and-mobile) for ecommerce tracking.
 
 ## Available events
 

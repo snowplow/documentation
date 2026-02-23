@@ -1,9 +1,9 @@
 ---
 title: "Track page element visibility and lifecycle on web"
-sidebar_label: "Element tracking"
+sidebar_label: "Element visibility tracking"
 sidebar_position: 55
-description: "Declaratively track page elements as they are created, destroyed, scrolled into view, or scrolled out of view with configurable visibility rules."
-keywords: ["element tracking", "visibility"]
+description: "Declaratively track page element visibility and lifecycle events as they are created, destroyed, scrolled into view, or scrolled out of view with configurable rules."
+keywords: ["element tracking", "visibility", "impression tracking"]
 ---
 
 ```mdx-code-block
@@ -11,29 +11,26 @@ import Tabs from '@theme/Tabs';
 import TabItem from '@theme/TabItem';
 ```
 
-Element tracking enables declarative tracking of page elements existing on web pages and scrolling into view.
+Element visibility tracking enables declarative tracking of page elements existing on web pages and scrolling into view.
 
-The plugin lets you define rules for which elements to track, and lets you trigger events for any combination of:
+This is useful for impression tracking, including:
 
-- New matching elements get added to a page
-- Existing elements get changed to match a rule
-- Matching elements get scrolled into a user's view and become visible
-- Matching elements get scrolled out of a user's view and become no longer visible
-- Elements get changed to no longer match a rule
-- Matching elements get removed from a page
+* Funnel steps e.g. form on page > form in view > [form tracking events](/docs/sources/web-trackers/tracking-events/form-tracking/index.md)
+* List impression tracking e.g. product impressions
+* Component performance e.g. recommendations performance, newsletter sign-up forms, modal popups
+* Product usage e.g. elements that appear on-hover, labeling or grouping events related to specific features
+* Advertisement impression tracking
 
-As a configuration-based plugin, you only need to define which elements should generate events, and in which scenarios.
-You can reuse the same configuration for generic tracking across a varying number of pages or sites.
+Once you call `startElementTracking`, the plugin watches the DOM and automatically fires events whenever:
+* Elements appear on the page: tracks `create_element`
+* Elements scroll into view: tracks `expose_element`
+* Elements scroll out of view: tracks `obscure_element`
+* Elements are removed from the page: tracks `destroy_element`
 
-Each event contains information about the matching element, and you can configure extra details to extract to allow dynamic event payloads.
+You can define rules for which elements to track, and can also trigger events when elements change to match or no longer match a rule. An entity containing details about the element is attached to each event, and you can also configure other entities.
 
-Example use cases for these events include:
 
-- Funnel steps (form on page > form in view > [form tracking events](/docs/sources/web-trackers/tracking-events/form-tracking/index.md))
-- List impression tracking (product impressions)
-- Component performance (recommendations performance, newsletter sign-up forms, modal popups)
-- Product usage (elements that appear on-hover, labeling or grouping events related to specific features)
-- Advertisement impression tracking
+Element lifecycle events are **automatically tracked** once configured.
 
 ## Install plugin
 
@@ -66,419 +63,10 @@ You should pin to a specific version when integrating this plugin on your websit
 </TabItem>
 </Tabs>
 
-## Examples
 
-Here are some example rules for simple use cases on the [Snowplow website](https://snowplow.io/) ([snapshot at time of writing](https://web.archive.org/web/20250422013533/https://snowplow.io/)).
+## Start element tracking
 
-The code examples use the [JavaScript Tracker syntax](/docs/sources/web-trackers/index.md), but should easily adapt to Browser Tracker syntax if needed.
-
-<details>
-  <summary>Scroll sections</summary>
-
-  The homepage has content grouped into distinct "layers" as you scroll down the page.
-  To see when users scroll down to each section, you can track an `expose` event for each section.
-  You can capture the header element text to identify each one.
-
-  ```javascript title="Rule configuration"
-  snowplow('startElementTracking', {
-    elements: {
-      selector: "section",
-      expose: { when: "element" },
-      details: { child_text: { title: "h2" } }
-    }
-  });
-  ```
-
-  ```json title="Event: expose_event"
-  {
-    "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
-    "data": {
-      "element_name": "section",
-      "width": 1920,
-      "height": 1111.7333984375,
-      "position_x": 0,
-      "position_y": 716.4500122070312,
-      "doc_position_x": 0,
-      "doc_position_y": 716.4500122070312,
-      "element_index": 2,
-      "element_matches": 10,
-      "originating_page_view": "06dbb0a2-9acf-4ae4-9562-1469b6d12c5d",
-      "attributes": [
-        {
-          "source": "child_text",
-          "attribute": "title",
-          "value": "Why Data Teams Choose Snowplow"
-        }
-      ]
-    }
-  }
-  ```
-
-  ```json title="Event: expose_event"
-  {
-    "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
-    "data": {
-      "element_name": "section",
-      "width": 1920,
-      "height": 2880,
-      "position_x": 0,
-      "position_y": 896.683349609375,
-      "doc_position_x": 0,
-      "doc_position_y": 1828.183349609375,
-      "element_index": 3,
-      "element_matches": 10,
-      "originating_page_view": "06dbb0a2-9acf-4ae4-9562-1469b6d12c5d",
-      "attributes": [
-        {
-          "source": "child_text",
-          "attribute": "title",
-          "value": "How Does Snowplow Work?"
-        }
-      ]
-    }
-  }
-  ```
-
-</details>
-
-<details>
-  <summary>Content depth</summary>
-
-  The blog posts have longer-form content.
-  Snowplow's page ping events track scroll depth by pixels, but those measurements become inconsistent between devices and page.
-  To see how much content gets consumed, you can generate stats based on the paragraphs in the content.
-  You can also get periodic stats based on the entire article in page pings.
-
-  ```javascript title="Rule configuration"
-  snowplow('startElementTracking', {
-    elements: [
-      {
-        selector: ".blogs_blog-post-body_content",
-        name: "blog content",
-        expose: false,
-        includeStats: ["page_ping"]
-      },
-      {
-        selector: ".blogs_blog-post-body_content p",
-        name: "blog paragraphs"
-      }
-    ]
-  });
-  ```
-
-  Because the expose event contains the `element_index` and `element_matches`, you can easily query the largest `element_index` by page view ID.
-  The result tells you consumption statistics for individual views of each article.
-  You can then summarize that metric to the content or category level, or converted to a percentage by comparing with `element_matches`.
-
-  ```json title="Event: expose_event"
-  {
-    "schema": "iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0",
-    "data": [
-      {
-        "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
-        "data": {
-          "element_name": "blog paragraphs",
-          "width": 800,
-          "height": 48,
-          "position_x": 320,
-          "position_y": 533.25,
-          "doc_position_x": 320,
-          "doc_position_y": 1373,
-          "element_index": 6,
-          "element_matches": 24,
-          "originating_page_view": "f390bec5-f63c-48af-b3ad-a03f0511af7f",
-          "attributes": []
-        }
-      },
-      {
-        "schema": "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0",
-        "data": {
-          "id": "f390bec5-f63c-48af-b3ad-a03f0511af7f"
-        }
-      }
-    ]
-  }
-  ```
-
-  The periodic page ping events also give you a summary of the total progress in the `max_y_depth_ratio`/`max_y_depth` values.
-  With `y_depth_ratio` you can also see when users backtrack up the page.
-
-  ```json title="Event: page_ping"
-  {
-    "schema": "iglu:com.snowplowanalytics.snowplow/element_statistics/jsonschema/1-0-0",
-    "data": {
-      "element_name": "blog content",
-      "element_index": 1,
-      "element_matches": 1,
-      "current_state": "unknown",
-      "min_size": "800x3928",
-      "current_size": "800x3928",
-      "max_size": "800x3928",
-      "y_depth_ratio": 0.20302953156822812,
-      "max_y_depth_ratio": 0.4931262729124236,
-      "max_y_depth": "1937/3928",
-      "element_age_ms": 298379,
-      "times_in_view": 0,
-      "total_time_visible_ms": 0
-    }
-  }
-  ```
-
-</details>
-
-<details>
-  <summary>Simple funnels</summary>
-
-  A newsletter sign-up form exists at the bottom of the page.
-  Performance measurement becomes difficult because many visitors don't even see it.
-  To test this you first need to know:
-
-  - When the form exists on a page
-  - When the form is actually seen
-  - When people actually interact with the form
-  - When the form is finally submitted
-
-  The form tracking plugin can only do the last parts, but the element tracker gives you the earlier steps.
-  If you end up adding more forms in the future, you'll want to know which is which, so you can mark the footer as a component so you can split it out later.
-
-  ```javascript title="Rule configuration"
-  snowplow('startElementTracking', {
-    elements: [
-      {
-        selector: ".hbspt-form",
-        name: "newsletter signup",
-        create: true,
-      },
-      {
-        selector: "footer",
-        component: true,
-        expose: false
-      }
-    ]
-  });
-  ```
-
-  If you try this on a blog page, you actually get two `create_element` events.
-  Blog posts have a second newsletter sign-up in a sidebar next to the content.
-  Because only the second form is a member of the `footer` component, you can easily see which one you are trying to measure when you query the data later.
-
-  ```json title="Event: create_element"
-  {
-    "schema": "iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0",
-    "data": [
-      {
-        "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
-        "data": {
-          "element_name": "newsletter signup",
-          "width": 336,
-          "height": 161,
-          "position_x": 1232,
-          "position_y": 238.88333129882812,
-          "doc_position_x": 1232,
-          "doc_position_y": 3677.883331298828,
-          "element_index": 1,
-          "element_matches": 2,
-          "originating_page_view": "02e30714-a84a-42f8-8b07-df106d669db0",
-          "attributes": []
-        }
-      },
-      {
-        "schema": "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0",
-        "data": {
-          "id": "02e30714-a84a-42f8-8b07-df106d669db0"
-        }
-      }
-    ]
-  }
-  ```
-
-  ```json title="Event: create_element"
-  {
-    "schema": "iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0",
-    "data": [
-      {
-        "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
-        "data": {
-          "element_name": "newsletter signup",
-          "width": 560,
-          "height": 137,
-          "position_x": 320,
-          "position_y": 1953.5,
-          "doc_position_x": 320,
-          "doc_position_y": 5392.5,
-          "element_index": 2,
-          "element_matches": 2,
-          "originating_page_view": "02e30714-a84a-42f8-8b07-df106d669db0",
-          "attributes": []
-        }
-      },
-      {
-        "schema": "iglu:com.snowplowanalytics.snowplow/component_parents/jsonschema/1-0-0",
-        "data": {
-          "element_name": "newsletter signup",
-          "component_list": [
-            "footer"
-          ]
-        }
-      },
-      {
-        "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
-        "data": {
-          "element_name": "footer",
-          "width": 1920,
-          "height": 1071.5,
-          "position_x": 0,
-          "position_y": 1212,
-          "doc_position_x": 0,
-          "doc_position_y": 4651,
-          "originating_page_view": "",
-          "attributes": []
-        }
-      },
-      {
-        "schema": "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0",
-        "data": {
-          "id": "02e30714-a84a-42f8-8b07-df106d669db0"
-        }
-      }
-    ]
-  }
-  ```
-
-</details>
-
-<details>
-  <summary>Recommendations performance</summary>
-
-  The homepage contains a section for the "Latest Blogs from Snowplow."
-  This could represent recommendations or some other form of personalization.
-  If it did, one might want to optimize it.
-  Link tracking could tell you when a recommendation worked and a visitor clicked it, but how would identify the recommendation not encouraging clicks?
-  If you track when the widget becomes visible and include the items that got recommended, you could correlate that with the clicks to measure performance.
-  For fairer measurement of visibility, you can configure that visibility only counts if at least 50% is in view, and it has to be on screen for at least 1.5 seconds.
-  You'll also collect the post title and author information.
-
-
-  ```javascript title="Rule configuration"
-  snowplow('startElementTracking', {
-    elements: [
-      {
-        selector: ".blog_list-header_list-wrapper",
-        name: "recommended_posts",
-        create: true,
-        expose: { when: "element", minTimeMillis: 1500, minPercentage: 0.5 },
-        contents: [
-          {
-            selector: ".collection-item",
-            name: "recommended_item",
-            details: { child_text: { title: "h3", author: ".blog_list-header_author-text > p" } }
-          }
-        ]
-      }
-    ]
-  });
-  ```
-
-  Scrolling down to see the items and you see the items that get served to the visitor:
-
-  ```json title="Event: expose_element"
-  {
-    "schema": "iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0",
-    "data": [
-      {
-        "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
-        "data": {
-          "element_name": "recommended_posts",
-          "width": 1280,
-          "height": 680.7666625976562,
-          "position_x": 320,
-          "position_y": 437.70001220703125,
-          "doc_position_x": 320,
-          "doc_position_y": 6261.066711425781,
-          "element_index": 1,
-          "element_matches": 1,
-          "originating_page_view": "034db1d6-1d60-42ca-8fe1-9aafc0442a22",
-          "attributes": []
-        }
-      },
-      {
-        "schema": "iglu:com.snowplowanalytics.snowplow/element_content/jsonschema/1-0-0",
-        "data": {
-          "element_name": "recommended_item",
-          "parent_name": "recommended_posts",
-          "parent_position": 1,
-          "position": 1,
-          "attributes": [
-            {
-              "source": "child_text",
-              "attribute": "title",
-              "value": "Data Pipeline Architecture Patterns for AI: Choosing the Right Approach"
-            },
-            {
-              "source": "child_text",
-              "attribute": "author",
-              "value": "Matus Tomlein"
-            }
-          ]
-        }
-      },
-      {
-        "schema": "iglu:com.snowplowanalytics.snowplow/element_content/jsonschema/1-0-0",
-        "data": {
-          "element_name": "recommended_item",
-          "parent_name": "recommended_posts",
-          "parent_position": 1,
-          "position": 2,
-          "attributes": [
-            {
-              "source": "child_text",
-              "attribute": "title",
-              "value": "Data Pipeline Architecture For AI: Why Traditional Approaches Fall Short"
-            },
-            {
-              "source": "child_text",
-              "attribute": "author",
-              "value": "Matus Tomlein"
-            }
-          ]
-        }
-      },
-      {
-        "schema": "iglu:com.snowplowanalytics.snowplow/element_content/jsonschema/1-0-0",
-        "data": {
-          "element_name": "recommended_item",
-          "parent_name": "recommended_posts",
-          "parent_position": 1,
-          "position": 3,
-          "attributes": [
-            {
-              "source": "child_text",
-              "attribute": "title",
-              "value": "Agentic AI Applications: How They Will Turn the Web Upside Down"
-            },
-            {
-              "source": "child_text",
-              "attribute": "author",
-              "value": "Yali\tSassoon"
-            }
-          ]
-        }
-      },
-      {
-        "schema": "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0",
-        "data": {
-          "id": "034db1d6-1d60-42ca-8fe1-9aafc0442a22"
-        }
-      }
-    ]
-  }
-  ```
-
-</details>
-
-## Enable element tracking
-
-You can begin tracking elements by providing configuration to the plugin's `startElementTracking` method:
+Begin tracking elements by providing configuration to the plugin's `startElementTracking` method:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -495,7 +83,7 @@ snowplow('startElementTracking', { elements: [/* configuration */] });
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
 
-Element tracking is part of a separate plugin, `@snowplow/browser-plugin-element-tracking`. You need to install it with your favorite package manager: `npm install @snowplow/browser-plugin-element-tracking` and then initialize it:
+First, add the plugin when initializing the tracker.
 
 ```javascript
 import { newTracker } from '@snowplow/browser-tracker';
@@ -511,209 +99,249 @@ startElementTracking({ elements: [/* configuration */] });
   </TabItem>
 </Tabs>
 
-Each use of this method adds the given list of element rules to the plugin configuration to start automatically tracking events.
+The `elements` configuration can take a single rule, or an array of rules. You can call `startElementTracking` multiple times to add more rules as needed.
 
-The `elements` configuration can take a single rule or an array of rules.
+## Events and entities
 
-Beyond `elements`, you can also specify `context`: an array of static entities or entity-generating functions to include custom information with all events generated by the plugin.
-This can also exist at the individual rule level for more specific entity requirements.
+The plugin can generate four events:
+- `create_element`: when a matching element is added to the page
+- `expose_element`: when a matching element scrolls into view
+- `obscure_element`: when a matching element scrolls out of view
+- `destroy_element`: when a matching element is removed from the page
 
-For the specifics of rule configuration, see [Rule configuration](#rule-configuration) below.
+Each of these events has only one property, `element_name`. Check out the [page element tracking overview](/docs/events/ootb-data/page-elements/index.md#page-element-visibility-and-lifecycle) page to see the schema details.
 
-## Disabling element tracking
+Every element event includes an `element` entity with details about the element that triggered the event. The attributes tracked depend on your `detail` configuration.
 
-To turn off tracking, use `endElementTracking` to remove the rule configuration.
-Providing no options to `endElementTracking` removes all earlier configured rules.
-If all rules get removed, the plugin removes its listeners until new rules get configured.
-
-If you want to stop tracking based for specific rules, you can provide the `name` or `id` values to the `endElementTracking` method.
-Each rule provided to `startElementTracking` gets associated with a `name` - and optionally, an `id`.
-If you don't specify a `name`, the `name` defaults to the `selector` value (required for all rules).
-
-For more complex requirements, you can also specify a callback function to decide if a rule should turn off (callback returns `true`) or not (callback returns `false`).
+By default, only the `expose_element` event is tracked. Configure which event types to track using booleans, or provide objects for more fine-grained control. Check out the configuration options on this page for details.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
 
 ```javascript
-snowplow('endElementTracking', { elements: ['name1', 'name2'] }); // removes based on `name` matching; multiple rules may share a name
-snowplow('endElementTracking', { elementIds: ['id1'] }); // removes rules based on `id` matching; at most one rule can have the same `id`
-snowplow('endElementTracking', { filter: (rule) => /recommendations/i.test(rule.name) }); // more complicated matching; rules where the `filter` function returns true will be removed
-snowplow('endElementTracking'); // remove all configured rules
+// This minimal example tracks expose events for all `.product-card` elements
+snowplow('startElementTracking', {
+  elements: { selector: '.product-card' }
+});
+
+// It's equivalent to this more explicit configuration
+snowplow('startElementTracking', {
+  elements: {
+    selector: '.product-card',
+    create: false,    // won't fire when element added to DOM
+    expose: true,     // WILL fire when element scrolls into view
+    obscure: false,   // won't fire when element scrolls out of view
+    destroy: false    // won't fire when element removed from DOM
+  }
+});
 ```
 
   </TabItem>
   <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
-endElementTracking({ elements: ['name1', 'name2'] }); // removes based on `name` matching; multiple rules may share a name
-endElementTracking({ elementIds: ['id1'] }); // removes rules based on `id` matching; at most one rule can have the same `id`
-endElementTracking({ filter: (rule) => /recommendations/i.test(rule.name) }); // more complicated matching; rules where the `filter` function returns true will be removed
-endElementTracking(); // remove all configured rules
+import { startElementTracking } from '@snowplow/browser-plugin-element-tracking';
+
+// This minimal example tracks expose events for all `.product-card` elements
+startElementTracking({
+  elements: { selector: '.product-card' }
+});
+
+// It's equivalent to this more explicit configuration
+startElementTracking({
+  elements: {
+    selector: '.product-card',
+    create: false,    // won't fire when element added to DOM
+    expose: true,     // WILL fire when element scrolls into view
+    obscure: false,   // won't fire when element scrolls out of view
+    destroy: false    // won't fire when element removed from DOM
+  }
+});
+```
+
+  </TabItem>
+</Tabs>
+
+### Example event
+
+This example shows how to track an `expose_element` event as users scroll through a web page. All event types are configured similarly.
+
+The example uses the `details` data selector option to specify what data to capture.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('startElementTracking', {
+  elements: {
+    selector: "section", // Matches all <section> elements
+    expose: { when: "element" }, // Fires when element becomes visible, once per element
+    details: { child_text: { title: "h2" } } // Captures the main section header
+  }
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { SnowplowElementTrackingPlugin, startElementTracking } from '@snowplow/browser-plugin-element-tracking';
+
+startElementTracking({
+  elements: {
+    selector: "section", // Matches all <section> elements
+    expose: { when: "element" }, // Fires when element becomes visible, once per element
+    details: { child_text: { title: "h2" } } // Captures the main section header
+  }
+});
 ```
   </TabItem>
 </Tabs>
 
-Removing rules by name removes all rules with matching names - rule names don't require uniqueness.
-Rule IDs _must be_ unique, so only a single rule matches per `elementIds` value.
+In this example, the page has several sections. As a user scrolls down the page and each section becomes visible, an `expose_element` event is generated for each one. All events will have `"element_name": "section"`.
+
+Example `element` entity for the first section's `expose_element` event. The section title is "Why Data Teams Choose Snowplow":
+
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
+  "data": {
+    "element_name": "section",
+    "width": 1920,
+    "height": 1111.7333984375,
+    "position_x": 0,
+    "position_y": 716.4500122070312,
+    "doc_position_x": 0,
+    "doc_position_y": 716.4500122070312,
+    "element_index": 2,
+    "element_matches": 10,
+    "originating_page_view": "06dbb0a2-9acf-4ae4-9562-1469b6d12c5d",
+    "attributes": [
+      {
+        "source": "child_text",
+        "attribute": "title",
+        "value": "Why Data Teams Choose Snowplow"
+      }
+    ]
+  }
+}
+```
+
+Example `element` entity for the second section's `expose_element` event. The section title is "How Does Snowplow Work?":
+
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
+  "data": {
+    "element_name": "section",
+    "width": 1920,
+    "height": 2880,
+    "position_x": 0,
+    "position_y": 896.683349609375,
+    "doc_position_x": 0,
+    "doc_position_y": 1828.183349609375,
+    "element_index": 3,
+    "element_matches": 10,
+    "originating_page_view": "06dbb0a2-9acf-4ae4-9562-1469b6d12c5d",
+    "attributes": [
+      {
+        "source": "child_text",
+        "attribute": "title",
+        "value": "How Does Snowplow Work?"
+      }
+    ]
+  }
+}
+```
+
+
+## Stop element tracking
+
+To turn off tracking, use `endElementTracking`. You can remove all configured rules, or selectively remove specific rules.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+// Remove all configured rules and listeners
+snowplow('endElementTracking');
+
+// Removes based on `name` matching
+// Multiple rules may share a name
+snowplow('endElementTracking', {
+  elements: ['name1', 'name2']
+});
+
+// Removes rules based on `id` matching
+// At most one rule can have the same `id`
+snowplow('endElementTracking', {
+  elementIds: ['id1']
+});
+
+// More complicated matching
+// Rules where the `filter` function returns true will be removed
+snowplow('endElementTracking', {
+  filter: (rule) => /recommendations/i.test(rule.name)
+});
+
+// Passing an empty object removes no rules
+snowplow('endElementTracking', {});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { SnowplowElementTrackingPlugin, endElementTracking } from '@snowplow/browser-plugin-element-tracking';
+
+// Remove all configured rules and listeners
+endElementTracking();
+
+// Removes based on `name` matching
+// Multiple rules may share a name
+endElementTracking({
+  elements: ['name1', 'name2']
+});
+
+// Removes rules based on `id` matching
+// At most one rule can have the same `id`
+endElementTracking({
+  elementIds: ['id1']
+});
+
+// More complicated matching
+// Rules where the `filter` function returns true will be removed
+endElementTracking({
+  filter: (rule) => /recommendations/i.test(rule.name)
+});
+
+// Passing an empty object removes no rules
+endElementTracking({});
+```
+  </TabItem>
+</Tabs>
+
 If you specify more than one of the `elementIds`, `elements`, and `filter` options, they get evaluated in that order.
-Passing an empty object to `endElementTracking` counts as specifying no options - and removes no rules - which differs to calling it with no arguments.
 
-## Rule configuration
+## Configure entities
 
-When calling `startElementTracking`, you specify the `elements` option with either a single rule or an array of rules.
-Each rule defines core information like: the elements to match, events to fire, extra details to collect about each element (or their contents), and custom entities to attach.
+You can configure additional element tracking or custom entities by modifying the `startElementTracking` call.
 
-### Core configuration
+Additional entities can be attached depending on configuration:
+- `element_statistics`: visibility and scroll depth statistics for the element
+- `element_content`: information about nested elements within the matched element
+- `component_parents`: the component hierarchy that the element belongs to
+- Custom entities
 
-The foundational configuration required for working with the plugin APIs.
+Check out the [page element tracking overview](/docs/events/ootb-data/page-elements/index.md#page-element-visibility-and-lifecycle) page to see the schema details.
 
-| Rule property | Type     | Description                                                                                                                                                                                                                                                                                                                                  | Status        |
-| ------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
-| `selector`    | `string` | A CSS selector string that matches one or more elements on the page that should trigger events from this rule.                                                                                                                                                                                                                               | **Required**  |
-| `name`        | `string` | A label to name this rule. Allows you to keep a stable name for events generated by this rule, even if the `selector` changes, so the data produced remains consistent. You can share a single `name` between many rules to have different configurations for different selectors. If not supplied, the `selector` value becomes the `name`. | _Recommended_ |
-| `id`          | `string` | A specific identifier for this rule. Useful if you share a `name` between many rules and need to specifically remove individual rules within that group.                                                                                                                                                                                     | Optional      |
+The configuration is per-rule, so different rules can have different settings.
 
-### Event configuration
+### Element statistics
 
-These settings define which events should automatically fire, and the situations when they should occur.
-By default, only the `expose` setting gets enabled, so the plugin tracks when elements matching the rule's `selector` become visible on the user's viewport.
-For convenience, each option can use a boolean to turn on or off each event type for elements matching the selector.
-You can also use an object to have more control on when the events get triggered.
+Use the `includeStats` option to attach the `element_statistics` entity to specified events, including those not generated by this plugin.
 
-| Rule property | Type                  | Description                                                                                                                        | Default |
-| ------------- | --------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------- |
-| `create`      | `boolean` or `object` | Controls firing `element_create` events when the element gets added to the page (or already exists when the rule gets configured). | `false` |
-| `destroy`     | `boolean` or `object` | Controls firing `element_destroy` events when the element gets removed from the page.                                              | `false` |
-| `expose`      | `boolean` or `object` | Controls firing `element_expose` events when the element becomes visible in the user's viewport.                                   | `true`  |
-| `obscure`     | `boolean` or `object` | Controls firing `element_obscure` events when the element becomes no longer visible in the user's viewport.                        | `false` |
-
-#### General event options
-
-These common options are available for the `create`, `destroy`, `expose`, and `obscure` settings and allow limiting how often the event fires.
-
-| Rule property | Type                 | Description                                                                                                              | Status       |
-| ------------- | -------------------- | ------------------------------------------------------------------------------------------------------------------------ | ------------ |
-| `when`        | `string` or `object` | Sets the limit on how many times the event should fire for matched elements.                                             | **Required** |
-| `condition`   | `array`              | A single or list of many [data selectors](#data-selectors); if the final result has no elements the event won't trigger. | Optional     |
-
-For `when`, the available options include, in descending order of frequency:
-
-- `always`: generate an event every time an element becomes eligible (for example, every time an event becomes visible)
-- `element`: only fire 1 event for each specific element that matches the rule for the lifetime of the rule (for example, just the first time each element becomes visible)
-- `pageview`: like `element`, but reset the state when the tracker next tracks a page view event; this can be useful for single page applications where the plugin may have a long lifetime but you still want to limit the number of events
-- `once`: only fire 1 event _per rule_, so even if there are many elements matching `selector` only track the first time this occurs
-- `never`: never track this event for this rule. This is useful for defining `components`
-
-When using the `boolean` shorthand, `true` is identical to `{ when: "always" }`, and `false` is `{ when: "never" }`.
-
-#### Expose event options
-
-As well as the [general event options](#general-event-options), `expose` has some extra options specific to its use case.
-
-| Rule property    | Type                | Description                                                                                                                                                                                                                                                                                 |
-| ---------------- | ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `minPercentage`  | `number`            | For larger elements, only consider the element visible if at least this percentage of its area is visible.                                                                                                                                                                                  |
-| `minTimeMillis`  | `number`            | Only consider the element visible if it's cumulative time on screen exceeds this value, in milliseconds.                                                                                                                                                                                    |
-| `minSize`        | `number`            | Unless the elements area (height * width) is at least this size, don't consider the element as visible (for example, don't track empty elements).                                                                                                                                           |
-| `boundaryPixels` | `number` or `array` | Add this number of pixels to the dimensions (top, right, bottom, left) of the element when calculating its dimensions for `minPercentage` purposes. You can specify a single value, a pair for vertical and horizontal values, or specific values for each of top, right, bottom, and left. |
-
-### Shadow DOM compatibility
-
-If the elements you want to track exist within [shadow DOM](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM) trees, the plugin may not identify them.
-Use these settings to notify the plugin that it should descend into shadow hosts to identify elements to match the rule against.
-
-| Rule property    | Type      | Description                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| ---------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `shadowSelector` | `string`  | A CSS selector for elements that are shadow hosts containing the actual `selector`-targeted elements.                                                                                                                                                                                                                                                                                                                                  |
-| `shadowOnly`     | `boolean` | By default, the plugin matches `selector` elements both outside and inside shadow hosts matched by `shadowSelector`; set this to `true` to only match elements within shadow hosts matched by `shadowSelector`. (for example, you may want all `button` elements in a web component, but that selector is too generic when applied to your whole site, so this setting can limit the matches to only those within those shadow hosts). |
-
-### Element data
-
-These settings control extra information captured about the event generating the event.
-
-| Rule property  | Type      | Description                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| -------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `component`    | `boolean` | When `true`, defines these elements as being a component. Events generated by this rule, or other rules targeting their child elements, have this rules `name` attached via the `component_parents` entity, showing the component hierarchy that the element belongs to.                                                                                                                                                                                                                                                                                                                                                                     |
-| `details`      | `array`   | A list of [data selectors](#data-selectors) of information to capture about this element. The selected values populate the `attributes` object in the [`element` entity](#events-and-entities).                                                                                                                                                                                                                                                                                                                                                                                                                                              |
-| `includeStats` | `array`   | An array of `event_name` values that the plugin should attach an [`element_statistics` entity](#element-statistics) to.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
-| `contents`     | `array`   | You can nest configurations in this property to collect data about elements nested within the elements matched by this rule (for example, this rule could target a recommendations widget, and using `contents` you could describe the individual recommendations served within it). The nested configurations can not trigger their own events, and their [event configuration](#event-configuration) gets ignored. Nested `details` work for the extra `element_content` entities that get generated (based on the nested `name`), and you can further nest `contents` arbitrarily, though you may end up with a large number of entities. |
-
-## Data selectors
-
-Data selectors are a declarative way to extract information from elements matched by rules.
-
-The plugin uses data selectors when deciding if an element should trigger an event (using [`condition`](#general-event-options)), or when building the `element` entity's `attributes` property based on a rule's [`details` and `contents` settings](#element-data).
-
-The declarative configuration lets you safely extract information without having to explicitly write code, or still get information where callbacks aren't possible.
-For example, a function defined in Google Tag Manager that passes through a Tag Template can not work with DOM elements directly, which limits the data it could extract.
-
-The declarative use is optional, and you can also just provide a callback function that accepts an element and returns an object if you prefer.
-
-You define data selectors as a list, so you can also combine the two approaches.
-When evaluating each list of data selectors, the result is a list of triplets describing:
-
-1. The `source`/type of the data selector
-2. The selected `attribute` name
-3. The selected attribute `value`
-
-Each data selector should be a function or an object with any of the following properties:
-
-| Data selector property | Value type | Description                                                                                                                                                                                                                                                                                                                                    |
-| ---------------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-|                        | `function` | A custom callback. The function should return an object with `string` properties, each of which produce a result in the output list. Values get cast to `string`; empty values (such as `undefined`) get skipped entirely.                                                                                                                     |
-| `attributes`           | `array`    | Produces a result for each provided attribute extracted via the [`getAttribute()` API](https://developer.mozilla.org/en-US/docs/Web/API/Element/getAttribute). The value is often the initial value set in the HTML of the page, compared to `properties` which may be a more recent value.                                                    |
-| `properties`           | `array`    | Produces a result for each provided property name sourced from the element.                                                                                                                                                                                                                                                                    |
-| `dataset`              | `array`    | Produces a result for each provided property name sourced from the element's dataset attribute. This should be the camel-case format version, rather than the attribute-style name.                                                                                                                                                            |
-| `child_text`           | `object`   | The value should be an object mapping names to CSS selectors; produces a result for each name mapped to the `textContent` of the first matching child element. Be cautious of large text values.                                                                                                                                               |
-| `content`              | `object`   | The value should be an object mapping names to regular expression patterns. Each pattern gets evaluated against the `textContent` of the matching element and produces an attribute with the matched value. If the pattern contains matching groups, uses the first captured group.                                                            |
-| `selector`             | `boolean`  | Attach the rule's `selector` as an attribute. Can be useful if you are sharing `names` between rules and need to know which rule matched.                                                                                                                                                                                                      |
-| `match`                | `object`   | The value should be an object mapping other attribute names to values or functions. The current set of attribute results get checked against this object; if no attributes have the same value (or the function doesn't return `true` for the value) then discard the current list of results. This can be useful for the `condition` setting. |
-
-The `source` matches the property used, or `callback` if a callback function is the source.
-If the callback encounters an error, it produces an `error`-sourced value.
-
-For the purposes of `condition` matching, events don't fire if the resulting list of attributes is empty.
-
-## Events and entities
-
-Events generated by the plugin have simple payloads, consisting of an `element_name` property that's referenced by the entities attached to the event.
-
-The event schemas are:
-
-- [`create_element`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/create_element/jsonschema/1-0-0)
-- [`destroy_element`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/destroy_element/jsonschema/1-0-0)
-- [`expose_element`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/expose_element/jsonschema/1-0-0)
-- [`obscure_element`](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/obscure_element/jsonschema/1-0-0)
-
-These events include an `element` entity which includes:
-
-- An `element_name` matching the one in the event payload
-- Size and position information
-- Any attributes collected via the [`detail` setting](#element-data)
-
-[See `element` entity schema on GitHub](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/element/jsonschema/1-0-0)
-
-### Optional entities
-
-Depending on configuration, events may also include the following entities:
-
-#### Element statistics
-
-By using the [`includeStats` setting](#element-data), you can configure the plugin to attach this entity to any events sent to the tracker (including those not generated by this plugin).
-
-For each rule with this configured, entities for each matching element include:
-
-- Visibility state at the time of the event
-- Smallest, largest, and current size
-- Element-specific min/max scroll depth information
-- Time since the element was first observed (element age)
-- How many times the element has been in view
-- Cumulative total time the element has been in view
-
-If the selector matches a lot of elements, this can enlarge event payload sizes, use caution with the `selector` used with this setting.
-
-Note that `includeStats` requires opt-in for all event types, even those generated by this plugin:
+This example will add the `element_statistics` entity to `expose_element` and `page_ping` events:
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
@@ -741,31 +369,41 @@ startElementTracking({ elements: {
   </TabItem>
 </Tabs>
 
-Define non-self-describing events with the event names assigned to them during enrichment (`page_view`, `page_ping`, `event` (structured events), `transaction`, and `transaction_item`).
+Adding element statistics to page pings can be useful to understand how a user moves through the content. It'll show scroll depth increasing over time, backtracking behavior, and total engagement duration.
 
-[See `element_statistics` entity schema on GitHub](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/element_statistics/jsonschema/1-0-0)
+For [baked-in events](/docs/fundamentals/events/index.md#baked-in-events), use the following names:
+* Page view: `page_view`
+* Page ping: `page_ping`
+* Structured: `event`
 
-#### Component hierarchy
+Be cautious with the `selector`. If it matches a lot of elements, this can enlarge event payload sizes.
 
-If any configured rules are a [`component`](#element-data), events generated by the plugin may include the `component_parents` entity.
+### Element content
 
-This includes an `element_name` reference, and a `component_list` that's a list of any `component`-rule names that are ancestors of that element.
-Use these values to aggregate events to different levels of a component hierarchy.
+Add the `element_content` entity by setting `contents`. It captures data about specified nested elements within the matched parent element.
 
-The plugin also exposes a `getComponentListGenerator` command, that returns a function that accepts an element and returns this entity.
-This function gets used to attach the entity to custom events, or events generated by other plugins like the [form](/docs/sources/web-trackers/tracking-events/form-tracking/index.md) or [link](/docs/sources/web-trackers/tracking-events/link-click/index.md) tracking plugins.
+In this example, the plugin will track an `expose_element` event when a `.product-grid` element scrolls into view. This event will have an `element` entity for the grid itself, and multiple `element_content` entities for each `.product-card` within the grid.
 
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
 
 ```javascript
-snowplow('getComponentListGenerator', function (componentGenerator, componentGeneratorWithDetail) {
-   // access a context generator aware of the startElementTracking "components" configuration
-   // this will attach the component_parents entity to events generated by these plugins that show the component hierarchy
-   snowplow('enableLinkClickTracking', { context: [componentGenerator] });
-   snowplow('enableFormTracking', { context: [componentGenerator] });
-
-   // componentGeneratorWithDetail will also populate element_detail entities for each component, but is not directly compatible with the above plugin APIs
+snowplow('startElementTracking', {
+  elements: {
+    selector: '.product-grid',
+    name: 'product_list',
+    expose: { when: 'element' },
+    contents: [
+      {
+        selector: '.product-card',
+        name: 'product_item',
+        details: [
+          { dataset: ['productId', 'price'] },
+          { child_text: { name: 'h3', brand: '.brand-name' } }
+        ]
+      }
+    ]
+  }
 });
 ```
 
@@ -773,37 +411,1219 @@ snowplow('getComponentListGenerator', function (componentGenerator, componentGen
   <TabItem value="browser" label="Browser (npm)">
 
 ```javascript
+import { SnowplowElementTrackingPlugin, startElementTracking } from '@snowplow/browser-plugin-element-tracking';
+
+startElementTracking({
+  elements: {
+    selector: '.product-grid',
+    name: 'product_list',
+    expose: { when: 'element' },
+    contents: [
+      {
+        selector: '.product-card',
+        name: 'product_item',
+        details: [
+          { dataset: ['productId', 'price'] },
+          { child_text: { name: 'h3', brand: '.brand-name' } }
+        ]
+      }
+    ]
+  }
+});
+```
+
+  </TabItem>
+</Tabs>
+
+The `details` configuration sets which element `attributes` to capture.
+
+<details>
+  <summary>Example entities for this configuration</summary>
+
+The `expose_element` event will have `"element_name": "product_list"`.
+
+One `element` entity:
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
+  "data": {
+    "element_name": "product_list",
+    "element_index": 1,
+    "element_matches": 1,
+    "width": 1200,
+    "height": 400,
+    "attributes": []
+  }
+}
+```
+
+Multiple `element_content` entities:
+
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow/element_content/jsonschema/1-0-0",
+  "data": {
+    "element_name": "product_item",
+    "parent_name": "product_list", // element_name of parent element
+    "parent_position": 1,          // element_index of parent element
+    "position": 1,
+    "attributes": [
+      { "source": "dataset", "attribute": "productId", "value": "SKU-001" },
+      { "source": "dataset", "attribute": "price", "value": "29.99" },
+      { "source": "child_text", "attribute": "name", "value": "Wireless Mouse" },
+      { "source": "child_text", "attribute": "brand", "value": "Logitech" }
+    ]
+  }
+}
+```
+
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow/element_content/jsonschema/1-0-0",
+  "data": {
+    "element_name": "product_item",
+    "parent_name": "product_list", // element_name of parent element
+    "parent_position": 1,          // element_index of parent element
+    "position": 2,
+    "attributes": [
+      { "source": "dataset", "attribute": "productId", "value": "SKU-002" },
+      { "source": "dataset", "attribute": "price", "value": "49.99" },
+      { "source": "child_text", "attribute": "name", "value": "Mechanical Keyboard" },
+      { "source": "child_text", "attribute": "brand", "value": "Keychron" }
+    ]
+  }
+}
+```
+
+</details>
+
+### Component parents
+
+You can mark elements as components to track hierarchy, using `component` rules. Events for child elements include a `component_parents` entity listing their ancestor components.
+
+This is useful when you have the same appearing in multiple places on your site. Without component tracking, all those events look identical.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('startElementTracking', {
+  elements: [
+    // Define components (containers)
+    {
+      selector: 'header', // Mark the header as a component
+      name: 'site_header',
+      component: true,
+      expose: false // Don't track expose events for the component itself
+    },
+    {
+      selector: 'footer', // Mark the footer as a component
+      name: 'site_footer',
+      component: true,
+      expose: false // Don't track expose events for the component itself
+    },
+    // Track elements - events will include component_parents
+    {
+      selector: '.newsletter-form',
+      name: 'newsletter_signup',
+      create: true, // Fire create_element events
+      expose: { when: 'element' } // Fire expose_element events
+    }
+  ]
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { SnowplowElementTrackingPlugin, startElementTracking } from '@snowplow/browser-plugin-element-tracking';
+
+startElementTracking({
+  elements: [
+    // Define components (containers)
+    {
+      selector: 'header', // Mark the header as a component
+      name: 'site_header',
+      component: true,
+      expose: false // Don't track expose events for the component itself
+    },
+    {
+      selector: 'footer', // Mark the footer as a component
+      name: 'site_footer',
+      component: true,
+      expose: false // Don't track expose events for the component itself
+    },
+    // Track elements - events will include component_parents
+    {
+      selector: '.newsletter-form',
+      name: 'newsletter_signup',
+      create: true, // Fire create_element events
+      expose: { when: 'element' } // Fire expose_element events
+    }
+  ]
+});
+```
+
+  </TabItem>
+</Tabs>
+
+For this example, imagine a page has two `.newsletter-form` elements: one in the page sidebar, and one in the footer.
+
+The `component_parents` entity for the sidebar form, which isn't within either of the defined component containers, could look like this:
+
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow/component_parents/jsonschema/1-0-0",
+  "data": {
+    "element_name": "newsletter_signup",
+    "component_list": []
+  }
+}
+```
+
+The `component_parents` entity for the footer form, which is within the `footer` component, could look like this:
+
+```json
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow/component_parents/jsonschema/1-0-0",
+  "data": {
+    "element_name": "newsletter_signup",
+    "component_list": ["site_footer"]
+  }
+}
+```
+
+#### Generate entities for other events
+
+The plugin also exposes a `getComponentListGenerator` utility function for attaching component hierarchy information to custom events, or to events generated by other plugins like the [form](/docs/sources/web-trackers/tracking-events/form-tracking/index.md) or [link](/docs/sources/web-trackers/tracking-events/link-click/index.md) tracking plugins.
+
+This function returns two entity generator functions that determine component hierarchy for a given element:
+* `componentGenerator`: returns a single `component_parents` entity
+* `componentGeneratorWithDetail`: returns a `component_parents` entity plus an `element` entity
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+The JavaScript tracker uses a callback pattern to access the generators asynchronously:
+
+```javascript
+// This snippet assumes you've already defined component rules in startElementTracking
+
+snowplow('getComponentListGenerator', function (componentGenerator, componentGeneratorWithDetail) {
+   // attach the component_parents entity to events from these plugins
+   snowplow('enableLinkClickTracking', { context: [componentGenerator] });
+   snowplow('enableFormTracking', { context: [componentGenerator] });
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+The Browser tracker returns the generators directly as an array:
+
+```javascript
+// This snippet assumes you've already defined component rules in startElementTracking
+
 import { getComponentListGenerator } from '@snowplow/browser-plugin-element-tracking';
 import { enableLinkClickTracking } from '@snowplow/browser-plugin-link-click-tracking';
 import { enableFormTracking } from '@snowplow/browser-plugin-form-tracking';
 
-// access a context generator aware of the startElementTracking "components" configuration
 const [componentGenerator, componentGeneratorWithDetail] = getComponentListGenerator();
 
-// this will attach the component_parents entity to events generated by these plugins that show the component hierarchy
-enableLinkClickTracking({ options: { ... }, psuedoClicks: true, context: [componentGenerator] });
+// attach the component_parents entity to events from these plugins
+enableLinkClickTracking({ context: [componentGenerator] });
 enableFormTracking({ context: [componentGenerator] });
-
-// componentGeneratorWithDetail will also populate element_detail entities for each component, but is not directly compatible with the above plugin APIs
 ```
   </TabItem>
 </Tabs>
 
-[See `component_parents` entity schema on GitHub](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/component_parents/jsonschema/1-0-0)
+:::note Plugin compatibility
 
-#### Element contents
+`componentGeneratorWithDetail` returns multiple entities and isn't directly compatible with the `context` arrays used by the link and form tracking plugins.
 
-The `element_content` schema gets attached when you use the [`contents` setting](#element-data).
+:::
 
-There can be many instances of this entity in individual events, and the list of them are a flattened tree representation of the nested configuration provided.
-Each instance contains references to the parent `element_content` or `element` entity instance that contains it in the `parent_name` and `parent_index` properties (via `element_name` and `element_index`, respectively).
-Nested `details` configurations are also used to populate the `attributes` for each instance.
+### Custom entities
 
-[See `element_content` entity schema on GitHub](https://github.com/snowplow/iglu-central/blob/master/schemas/com.snowplowanalytics.snowplow/element_content/jsonschema/1-0-0)
+There are two ways you can add custom entities to element tracking events:
+* Plugin `context` option, applies to all rules
+* Per-rule `context` option, applies only to events from that specific rule
 
-#### Custom context
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
 
-You can attach custom entities to the events generated by the plugin.
+```javascript
+// Configure at plugin level to apply to all rules
+snowplow('startElementTracking', {
+  elements: [/* rules */],
+  context: [/* entities attached to ALL events */]
+});
 
-- You can include `context` alongside `elements` when calling `startElementTracking`. You can pass an array of static entities _or_ a callback function that returns such an array. The function receives the element that the event is relevant to, and the matching rule that defined the event should fire.
-- Individual rules may also contain specific `context` in the same format as in the preceding.
+// Configure at rule level to apply to a specific rule
+snowplow('startElementTracking', {
+  elements: {
+    selector: '.promo-banner',
+    name: 'promotion',
+    context: [/* entities attached only to this rule's events */]
+  }
+});
+```
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+// Configure at plugin level to apply to all rules
+startElementTracking({
+  elements: [/* rules */],
+  context: [/* entities attached to ALL events */]
+});
+
+// Configure at rule level to apply to a specific rule
+startElementTracking({
+  elements: {
+    selector: '.promo-banner',
+    name: 'promotion',
+    context: [/* entities attached only to this rule's events */]
+  }
+});
+```
+  </TabItem>
+</Tabs>
+
+You can configure static or dynamic entities:
+* Use static entities when the same data should be attached to every event, e.g. A/B test variant
+
+```javascript
+context: [
+    {
+      schema: 'iglu:com.example/campaign/jsonschema/1-0-0',
+      data: { campaign_id: 'summer_2025', variant: 'A' }
+    }
+  ]
+```
+
+* Use callbacks to generate dynamic entities when the data depends on the specific element that triggered the event
+
+```javascript
+context: [
+  (element, rule) => ({
+    schema: 'iglu:com.example/promotion/jsonschema/1-0-0',
+    data: {
+      promo_id: element.dataset.promoId,
+      position: element.dataset.position,
+      rule_name: rule.name
+    }
+  })
+]
+```
+
+## Configure the plugin
+
+As well as configuring the `element_statistics`, `element_content`, and `component_parents` entities, you can customize how element visibility tracking works using the options below.
+
+The core options are explained in this table:
+
+| Property   | Type     | Description                                                                                                                                                                                                                                                                                                                                  | Status        |
+| ---------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------- |
+| `selector` | `string` | A CSS selector string that matches one or more elements on the page that should trigger events from this rule.                                                                                                                                                                                                                               | **Required**  |
+| `name`     | `string` | A label to name this rule. Allows you to keep a stable name for events generated by this rule, even if the `selector` changes, so the data produced remains consistent. You can share a single `name` between many rules to have different configurations for different selectors. If not supplied, the `selector` value becomes the `name`. | _Recommended_ |
+| `id`       | `string` | A specific identifier for this rule. Useful if you share a `name` between many rules and need to specifically remove individual rules within that group.                                                                                                                                                                                     |
+
+You'll see `selector` and `name` in the examples on this page.
+
+### Event frequency with `when`
+
+The `when` option controls how often events fire. The default is `always`.
+
+This example shows the options:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+// "always" - fires every time (e.g., every scroll in/out of view)
+// Boolean shorthand - expose: true
+snowplow('startElementTracking', {
+  elements: {
+    selector: '.ad-banner',
+    name: 'ad_impression',
+    expose: { when: 'always' }  // fires each time banner scrolls into view
+  }
+});
+
+// "element" - fires once per matched element
+snowplow('startElementTracking', {
+  elements: {
+    selector: '.product-card',
+    name: 'product_impression',
+    expose: { when: 'element' }  // fires once per card, even if user scrolls back
+  }
+});
+
+// "pageview" - fires once per element, resets on new page view (useful for SPAs)
+snowplow('startElementTracking', {
+  elements: {
+    selector: '.hero-section',
+    name: 'hero_viewed',
+    expose: { when: 'pageview' }  // resets when tracker fires next page_view event
+  }
+});
+
+// "once" - fires exactly once for the entire rule, regardless of how many elements match
+snowplow('startElementTracking', {
+  elements: {
+    selector: '.newsletter-form',
+    name: 'newsletter_form_exists',
+    expose: { when: 'once' }  // fires once even if multiple forms exist
+  }
+});
+
+// "never": never track this event for this rule
+// This is useful for defining components
+// Boolean shorthand - expose: false
+snowplow('startElementTracking', {
+  elements: {
+    selector: 'section',
+    expose: { when: 'never' }  // never fires
+  }
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { startElementTracking } from '@snowplow/browser-plugin-element-tracking';
+
+// "always" - fires every time (e.g., every scroll in/out of view)
+// Boolean shorthand - expose: true
+startElementTracking({
+  elements: {
+    selector: '.ad-banner',
+    name: 'ad_impression',
+    expose: { when: 'always' }  // fires each time banner scrolls into view
+  }
+});
+
+// "element" - fires once per matched element
+startElementTracking({
+  elements: {
+    selector: '.product-card',
+    name: 'product_impression',
+    expose: { when: 'element' }  // fires once per card, even if user scrolls back
+  }
+});
+
+// "pageview" - fires once per element, resets on new page view (useful for SPAs)
+startElementTracking({
+  elements: {
+    selector: '.hero-section',
+    name: 'hero_viewed',
+    expose: { when: 'pageview' }  // resets when tracker fires next page_view event
+  }
+});
+
+// "once" - fires exactly once for the entire rule, regardless of how many elements match
+startElementTracking({
+  elements: {
+    selector: '.newsletter-form',
+    name: 'newsletter_form_exists',
+    expose: { when: 'once' }  // fires once even if multiple forms exist
+  }
+});
+
+// "never": never track this event for this rule
+// This is useful for defining components
+// Boolean shorthand - expose: false
+startElementTracking({
+  elements: {
+    selector: 'section',
+    expose: { when: 'never' }  // never fires
+  }
+});
+```
+
+  </TabItem>
+</Tabs>
+
+If you're using `when: pageview`, ensure that the tracker is firing page view events appropriately for your needs, especially if it's a single page application (SPA).
+
+The plugin assumes that you'll call `startElementTracking()` before `trackPageView()`. The first page view doesn't reset the element visibility state, because the plugin sets `ignoreNextPageView: true` by default internally.
+
+If your site tracks page views before calling `startElementTracking()`, you can disable this behavior by passing `ignoreNextPageView: false` in the plugin options when adding it to the tracker.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+window.snowplow('addPlugin',
+  "https://cdn.jsdelivr.net/npm/@snowplow/browser-plugin-element-tracking@latest/dist/index.umd.min.js",
+  ["snowplowElementTracking", "SnowplowElementTrackingPlugin"],
+  [{ ignoreNextPageView: false }]
+);
+
+snowplow('startElementTracking', { elements: [/* configuration */] });
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+First, add the plugin when initializing the tracker.
+
+```javascript
+import { newTracker } from '@snowplow/browser-tracker';
+import { SnowplowElementTrackingPlugin, startElementTracking } from '@snowplow/browser-plugin-element-tracking';
+
+newTracker('sp1', '{{collector_url}}', {
+   appId: 'my-app-id',
+   plugins: [ SnowplowElementTrackingPlugin({ ignoreNextPageView: false }) ],
+});
+
+startElementTracking({ elements: [/* configuration */] });
+```
+  </TabItem>
+</Tabs>
+
+### Visibility thresholds for `expose`
+
+Control what counts as "visible" for `expose_element` events:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('startElementTracking', {
+  elements: {
+    selector: '.video-player',
+    name: 'video_impression',
+    expose: {
+      when: 'element',
+      minPercentage: 0.5,      // at least 50% of element must be visible
+      minTimeMillis: 2000,     // must be visible for 2 seconds cumulative
+      minSize: 10000,          // element must be at least 10,000px² (e.g., 100x100)
+      boundaryPixels: 50       // adds 50px padding when calculating visibility
+    }
+  }
+});
+
+// boundaryPixels accepts different formats:
+expose: {
+  when: 'element',
+  boundaryPixels: 20           // 20px all sides
+  // or: [10, 20]              // 10px vertical, 20px horizontal
+  // or: [10, 20, 30, 40]      // top, right, bottom, left
+}
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { startElementTracking } from '@snowplow/browser-plugin-element-tracking';
+
+startElementTracking({
+  elements: {
+    selector: '.video-player',
+    name: 'video_impression',
+    expose: {
+      when: 'element',
+      minPercentage: 0.5,      // at least 50% of element must be visible
+      minTimeMillis: 2000,     // must be visible for 2 seconds cumulative
+      minSize: 10000,          // element must be at least 10,000px² (e.g., 100x100)
+      boundaryPixels: 50       // adds 50px padding when calculating visibility
+    }
+  }
+});
+
+// boundaryPixels accepts different formats:
+expose: {
+  when: 'element',
+  boundaryPixels: 20           // 20px all sides
+  // or: [10, 20]              // 10px vertical, 20px horizontal
+  // or: [10, 20, 30, 40]      // top, right, bottom, left
+}
+```
+
+  </TabItem>
+</Tabs>
+
+### Data selectors using `details`
+
+The plugin uses data selectors when deciding if an element should trigger an event using `condition`, or when building the `element` entity's `attributes` property.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('startElementTracking', {
+  elements: {
+    selector: '.product-card',
+    name: 'product',
+    expose: { when: 'element' },
+    details: [
+      // HTML attributes (from getAttribute)
+      { attributes: ['id', 'data-category'] },
+
+      // Element properties (may differ from HTML attributes)
+      { properties: ['className', 'tagName'] },
+
+      // Dataset values (data-* attributes, camelCase)
+      // <div data-product-id="123" data-price="29.99">
+      { dataset: ['productId', 'price'] },
+
+      // Text content from child elements
+      { child_text: {
+          name: 'h3',           // text from first <h3>
+          brand: '.brand-name'  // text from first .brand-name
+      }},
+
+      // Regex extraction from element's textContent
+      { content: {
+          sku: /SKU-(\d+)/     // captures first group
+      }},
+
+      // Include the selector that matched
+      { selector: true },
+
+      // Validate collected attributes - discards results if no match
+      // Useful for filtering in `condition`
+      { match: {
+          category: 'electronics',                        // exact value match
+          price: (val) => parseFloat(val) > 0             // function match
+      }},
+
+      // Custom callback function
+      (element) => ({
+        isOnSale: element.classList.contains('on-sale') ? 'true' : 'false',
+        position: element.dataset.position
+      })
+    ]
+  }
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { startElementTracking } from '@snowplow/browser-plugin-element-tracking';
+
+startElementTracking({
+  elements: {
+    selector: '.product-card',
+    name: 'product',
+    expose: { when: 'element' },
+    details: [
+      // HTML attributes (from getAttribute)
+      { attributes: ['id', 'data-category'] },
+
+      // Element properties (may differ from HTML attributes)
+      { properties: ['className', 'tagName'] },
+
+      // Dataset values (data-* attributes, camelCase)
+      // <div data-product-id="123" data-price="29.99">
+      { dataset: ['productId', 'price'] },
+
+      // Text content from child elements
+      { child_text: {
+          name: 'h3',           // text from first <h3>
+          brand: '.brand-name'  // text from first .brand-name
+      }},
+
+      // Regex extraction from element's textContent
+      { content: {
+          sku: /SKU-(\d+)/     // captures first group
+      }},
+
+      // Include the selector that matched
+      { selector: true },
+
+      // Validate collected attributes - discards results if no match
+      // Useful for filtering in `condition`
+      { match: {
+          category: 'electronics',                        // exact value match
+          price: (val) => parseFloat(val) > 0             // function match
+      }},
+
+      // Custom callback function
+      (element) => ({
+        isOnSale: element.classList.contains('on-sale') ? 'true' : 'false',
+        position: element.dataset.position
+      })
+    ]
+  }
+});
+```
+
+  </TabItem>
+</Tabs>
+
+### Conditional event firing with `condition`
+
+Only fire events when elements match certain criteria. Use data selectors to define the conditions:
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+// Example: only track visible notifications
+snowplow('startElementTracking', {
+  elements: {
+    selector: '.notification',
+    name: 'notification_shown',
+    create: {
+      when: 'element',
+      condition: [
+        // Only fire if notification has data-visible="true"
+        { dataset: ['visible'] },
+        { match: { visible: 'true' } }
+      ]
+    }
+  }
+});
+
+// Example: only track products that are in stock
+snowplow('startElementTracking', {
+  elements: {
+    selector: '.product-card',
+    name: 'in_stock_product',
+    expose: {
+      when: 'element',
+      condition: [
+        { dataset: ['stockStatus'] },
+        { match: { stockStatus: (val) => val !== 'out-of-stock' } }
+      ]
+    }
+  }
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { startElementTracking } from '@snowplow/browser-plugin-element-tracking';
+
+// Example: only track visible notifications
+startElementTracking({
+  elements: {
+    selector: '.notification',
+    name: 'notification_shown',
+    create: {
+      when: 'element',
+      condition: [
+        // Only fire if notification has data-visible="true"
+        { dataset: ['visible'] },
+        { match: { visible: 'true' } }
+      ]
+    }
+  }
+});
+
+// Example: only track products that are in stock
+startElementTracking({
+  elements: {
+    selector: '.product-card',
+    name: 'in_stock_product',
+    expose: {
+      when: 'element',
+      condition: [
+        { dataset: ['stockStatus'] },
+        { match: { stockStatus: (val) => val !== 'out-of-stock' } }
+      ]
+    }
+  }
+});
+```
+
+  </TabItem>
+</Tabs>
+
+### Shadow DOM tracking
+
+If the elements you want to track exist within [shadow DOM](https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_shadow_DOM) trees, the plugin might not identify them automatically.
+
+Use these settings to notify the plugin that it should descend into shadow hosts to identify elements to match the rule against.
+
+By default, the plugin matches specified elements both outside and inside `shadowSelector` shadow hosts. Set `shadowOnly` to `true` to only match elements within those shadow hosts.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('startElementTracking', {
+  elements: {
+    selector: 'button.submit',
+    name: 'submit_button',
+    shadowSelector: 'my-custom-form',  // CSS selector for elements that are shadow hosts containing the targeted elements
+    shadowOnly: true,  // only match elements inside shadow DOM, not elsewhere
+    expose: { when: 'element' }
+  }
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { startElementTracking } from '@snowplow/browser-plugin-element-tracking';
+
+startElementTracking({
+  elements: {
+    selector: 'button.submit',
+    name: 'submit_button',
+    shadowSelector: 'my-custom-form',  // CSS selector for elements that are shadow hosts containing the targeted elements
+    shadowOnly: true,  // only match elements inside shadow DOM, not elsewhere
+    expose: { when: 'element' }
+  }
+});
+```
+
+  </TabItem>
+</Tabs>
+
+### Send to specific trackers
+
+If you have multiple trackers loaded on the same page, you can specify which trackers should receive events using the `tracker` option. Provide a list of tracker namespaces.
+
+If omitted, events go to all trackers the plugin has been activated for.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript
+snowplow('startElementTracking', {
+  elements: { selector: '.promo-banner' }
+}, ['tracker1', 'tracker2']);
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript
+import { startElementTracking } from '@snowplow/browser-plugin-element-tracking';
+
+startElementTracking({
+  elements: { selector: '.promo-banner' }
+}, ['tracker1', 'tracker2']);
+```
+
+  </TabItem>
+</Tabs>
+
+## Further examples
+
+These examples are based on [a snapshot](https://web.archive.org/web/20250422013533/https://snowplow.io/) of the [Snowplow website](https://snowplow.io/).
+
+### Content depth
+
+The blog posts have longer-form content.
+Snowplow's page ping events track scroll depth by pixels, but those measurements become inconsistent between devices and page.
+To see how much content gets consumed, you can generate stats based on the paragraphs in the content.
+You can also get periodic stats based on the entire article in page pings.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript title="Rule configuration"
+snowplow('startElementTracking', {
+  elements: [
+    {
+      selector: ".blogs_blog-post-body_content",
+      name: "blog content",
+      expose: false,
+      includeStats: ["page_ping"]
+    },
+    {
+      selector: ".blogs_blog-post-body_content p",
+      name: "blog paragraphs"
+    }
+  ]
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript title="Rule configuration"
+import { startElementTracking } from '@snowplow/browser-plugin-element-tracking';
+
+startElementTracking({
+  elements: [
+    {
+      selector: ".blogs_blog-post-body_content",
+      name: "blog content",
+      expose: false,
+      includeStats: ["page_ping"]
+    },
+    {
+      selector: ".blogs_blog-post-body_content p",
+      name: "blog paragraphs"
+    }
+  ]
+});
+```
+
+  </TabItem>
+</Tabs>
+
+Because the expose event contains the `element_index` and `element_matches`, you can easily query the largest `element_index` by page view ID.
+The result tells you consumption statistics for individual views of each article.
+You can then summarize that metric to the content or category level, or converted to a percentage by comparing with `element_matches`.
+
+```json title="Event: expose_event"
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0",
+  "data": [
+    {
+      "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
+      "data": {
+        "element_name": "blog paragraphs",
+        "width": 800,
+        "height": 48,
+        "position_x": 320,
+        "position_y": 533.25,
+        "doc_position_x": 320,
+        "doc_position_y": 1373,
+        "element_index": 6,
+        "element_matches": 24,
+        "originating_page_view": "f390bec5-f63c-48af-b3ad-a03f0511af7f",
+        "attributes": []
+      }
+    },
+    {
+      "schema": "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0",
+      "data": {
+        "id": "f390bec5-f63c-48af-b3ad-a03f0511af7f"
+      }
+    }
+  ]
+}
+```
+
+The periodic page ping events also give you a summary of the total progress in the `max_y_depth_ratio`/`max_y_depth` values.
+With `y_depth_ratio` you can also see when users backtrack up the page.
+
+```json title="Event: page_ping"
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow/element_statistics/jsonschema/1-0-0",
+  "data": {
+    "element_name": "blog content",
+    "element_index": 1,
+    "element_matches": 1,
+    "current_state": "unknown",
+    "min_size": "800x3928",
+    "current_size": "800x3928",
+    "max_size": "800x3928",
+    "y_depth_ratio": 0.20302953156822812,
+    "max_y_depth_ratio": 0.4931262729124236,
+    "max_y_depth": "1937/3928",
+    "element_age_ms": 298379,
+    "times_in_view": 0,
+    "total_time_visible_ms": 0
+  }
+}
+```
+
+### Simple funnels
+
+A newsletter sign-up form exists at the bottom of the page.
+Performance measurement becomes difficult because many visitors don't even see it.
+To test this you first need to know:
+
+- When the form exists on a page
+- When the form is actually seen
+- When people actually interact with the form
+- When the form is finally submitted
+
+The form tracking plugin can only do the last parts, but the element tracker gives you the earlier steps.
+If you end up adding more forms in the future, you'll want to know which is which, so you can mark the footer as a component so you can split it out later.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript title="Rule configuration"
+snowplow('startElementTracking', {
+  elements: [
+    {
+      selector: ".hbspt-form",
+      name: "newsletter signup",
+      create: true,
+    },
+    {
+      selector: "footer",
+      component: true,
+      expose: false
+    }
+  ]
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript title="Rule configuration"
+import { startElementTracking } from '@snowplow/browser-plugin-element-tracking';
+
+startElementTracking({
+  elements: [
+    {
+      selector: ".hbspt-form",
+      name: "newsletter signup",
+      create: true,
+    },
+    {
+      selector: "footer",
+      component: true,
+      expose: false
+    }
+  ]
+});
+```
+
+  </TabItem>
+</Tabs>
+
+If you try this on a blog page, you actually get two `create_element` events.
+Blog posts have a second newsletter sign-up in a sidebar next to the content.
+Because only the second form is a member of the `footer` component, you can easily see which one you are trying to measure when you query the data later.
+
+```json title="Event: create_element"
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0",
+  "data": [
+    {
+      "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
+      "data": {
+        "element_name": "newsletter signup",
+        "width": 336,
+        "height": 161,
+        "position_x": 1232,
+        "position_y": 238.88333129882812,
+        "doc_position_x": 1232,
+        "doc_position_y": 3677.883331298828,
+        "element_index": 1,
+        "element_matches": 2,
+        "originating_page_view": "02e30714-a84a-42f8-8b07-df106d669db0",
+        "attributes": []
+      }
+    },
+    {
+      "schema": "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0",
+      "data": {
+        "id": "02e30714-a84a-42f8-8b07-df106d669db0"
+      }
+    }
+  ]
+}
+```
+
+```json title="Event: create_element"
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0",
+  "data": [
+    {
+      "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
+      "data": {
+        "element_name": "newsletter signup",
+        "width": 560,
+        "height": 137,
+        "position_x": 320,
+        "position_y": 1953.5,
+        "doc_position_x": 320,
+        "doc_position_y": 5392.5,
+        "element_index": 2,
+        "element_matches": 2,
+        "originating_page_view": "02e30714-a84a-42f8-8b07-df106d669db0",
+        "attributes": []
+      }
+    },
+    {
+      "schema": "iglu:com.snowplowanalytics.snowplow/component_parents/jsonschema/1-0-0",
+      "data": {
+        "element_name": "newsletter signup",
+        "component_list": [
+          "footer"
+        ]
+      }
+    },
+    {
+      "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
+      "data": {
+        "element_name": "footer",
+        "width": 1920,
+        "height": 1071.5,
+        "position_x": 0,
+        "position_y": 1212,
+        "doc_position_x": 0,
+        "doc_position_y": 4651,
+        "originating_page_view": "",
+        "attributes": []
+      }
+    },
+    {
+      "schema": "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0",
+      "data": {
+        "id": "02e30714-a84a-42f8-8b07-df106d669db0"
+      }
+    }
+  ]
+}
+```
+
+### Recommendations performance
+
+The homepage contains a section for the "Latest Blogs from Snowplow."
+This could represent recommendations or some other form of personalization.
+If it did, one might want to optimize it.
+Link tracking could tell you when a recommendation worked and a visitor clicked it, but how would identify the recommendation not encouraging clicks?
+If you track when the widget becomes visible and include the items that got recommended, you could correlate that with the clicks to measure performance.
+For fairer measurement of visibility, you can configure that visibility only counts if at least 50% is in view, and it has to be on screen for at least 1.5 seconds.
+You'll also collect the post title and author information.
+
+<Tabs groupId="platform" queryString>
+  <TabItem value="js" label="JavaScript (tag)" default>
+
+```javascript title="Rule configuration"
+snowplow('startElementTracking', {
+  elements: [
+    {
+      selector: ".blog_list-header_list-wrapper",
+      name: "recommended_posts",
+      create: true,
+      expose: { when: "element", minTimeMillis: 1500, minPercentage: 0.5 },
+      contents: [
+        {
+          selector: ".collection-item",
+          name: "recommended_item",
+          details: { child_text: { title: "h3", author: ".blog_list-header_author-text > p" } }
+        }
+      ]
+    }
+  ]
+});
+```
+
+  </TabItem>
+  <TabItem value="browser" label="Browser (npm)">
+
+```javascript title="Rule configuration"
+import { startElementTracking } from '@snowplow/browser-plugin-element-tracking';
+
+startElementTracking({
+  elements: [
+    {
+      selector: ".blog_list-header_list-wrapper",
+      name: "recommended_posts",
+      create: true,
+      expose: { when: "element", minTimeMillis: 1500, minPercentage: 0.5 },
+      contents: [
+        {
+          selector: ".collection-item",
+          name: "recommended_item",
+          details: { child_text: { title: "h3", author: ".blog_list-header_author-text > p" } }
+        }
+      ]
+    }
+  ]
+});
+```
+
+  </TabItem>
+</Tabs>
+
+Scrolling down to see the items and you see the items that get served to the visitor:
+
+```json title="Event: expose_element"
+{
+  "schema": "iglu:com.snowplowanalytics.snowplow/contexts/jsonschema/1-0-0",
+  "data": [
+    {
+      "schema": "iglu:com.snowplowanalytics.snowplow/element/jsonschema/1-0-0",
+      "data": {
+        "element_name": "recommended_posts",
+        "width": 1280,
+        "height": 680.7666625976562,
+        "position_x": 320,
+        "position_y": 437.70001220703125,
+        "doc_position_x": 320,
+        "doc_position_y": 6261.066711425781,
+        "element_index": 1,
+        "element_matches": 1,
+        "originating_page_view": "034db1d6-1d60-42ca-8fe1-9aafc0442a22",
+        "attributes": []
+      }
+    },
+    {
+      "schema": "iglu:com.snowplowanalytics.snowplow/element_content/jsonschema/1-0-0",
+      "data": {
+        "element_name": "recommended_item",
+        "parent_name": "recommended_posts",
+        "parent_position": 1,
+        "position": 1,
+        "attributes": [
+          {
+            "source": "child_text",
+            "attribute": "title",
+            "value": "Data Pipeline Architecture Patterns for AI: Choosing the Right Approach"
+          },
+          {
+            "source": "child_text",
+            "attribute": "author",
+            "value": "Matus Tomlein"
+          }
+        ]
+      }
+    },
+    {
+      "schema": "iglu:com.snowplowanalytics.snowplow/element_content/jsonschema/1-0-0",
+      "data": {
+        "element_name": "recommended_item",
+        "parent_name": "recommended_posts",
+        "parent_position": 1,
+        "position": 2,
+        "attributes": [
+          {
+            "source": "child_text",
+            "attribute": "title",
+            "value": "Data Pipeline Architecture For AI: Why Traditional Approaches Fall Short"
+          },
+          {
+            "source": "child_text",
+            "attribute": "author",
+            "value": "Matus Tomlein"
+          }
+        ]
+      }
+    },
+    {
+      "schema": "iglu:com.snowplowanalytics.snowplow/element_content/jsonschema/1-0-0",
+      "data": {
+        "element_name": "recommended_item",
+        "parent_name": "recommended_posts",
+        "parent_position": 1,
+        "position": 3,
+        "attributes": [
+          {
+            "source": "child_text",
+            "attribute": "title",
+            "value": "Agentic AI Applications: How They Will Turn the Web Upside Down"
+          },
+          {
+            "source": "child_text",
+            "attribute": "author",
+            "value": "Yali\tSassoon"
+          }
+        ]
+      }
+    },
+    {
+      "schema": "iglu:com.snowplowanalytics.snowplow/web_page/jsonschema/1-0-0",
+      "data": {
+        "id": "034db1d6-1d60-42ca-8fe1-9aafc0442a22"
+      }
+    }
+  ]
+}
+```

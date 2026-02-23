@@ -1,6 +1,8 @@
 ---
 title: "Event specifications"
 sidebar_position: 115
+description: "How to install and configure the event specifications plugin for version 3 of the Snowplow web tracker."
+keywords: ["event specifications", "web tracker v3", "browser plugin", "tracking plan", "JavaScript tracker"]
 ---
 
 ```mdx-code-block

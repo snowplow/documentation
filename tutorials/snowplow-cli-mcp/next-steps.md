@@ -2,6 +2,8 @@
 position: 4
 title: "Next steps from the Snowplow CLI MCP tool tutorial"
 sidebar_label: "Next steps"
+description: "Advanced use cases for the Snowplow CLI MCP tool, including business process analysis, schema evolution planning, and cross-platform tracking."
+keywords: ["Snowplow CLI", "MCP", "schema evolution", "tracking plans", "cross-platform"]
 ---
 
 Beyond creating individual files, AI assistants can help analyze tracking requirements and suggest comprehensive solutions:

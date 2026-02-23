@@ -216,7 +216,7 @@ You can do this using the [History API](https://developer.mozilla.org/en-US/docs
 <Tabs groupId="platform" queryString>
   <TabItem value="js" label="JavaScript (tag)" default>
 
-The URL-updating code runs in a [callback](/docs/sources/web-trackers/tracking-events/index.md#getting-user-id-once-set) to ensure it doesn't run before the page view event can capture the original URL.
+The URL-updating code runs in a [callback](/docs/sources/web-trackers/tracking-events/index.md#get-event-properties) to ensure it doesn't run before the page view event can capture the original URL.
 
 ```javascript
 snowplow('trackPageView'); // page URL is https://example.com/?example=123&_sp=6de9024e-17b9-4026-bd4d-efec50ae84cb.1680681134458

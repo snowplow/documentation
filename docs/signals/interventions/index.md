@@ -6,7 +6,7 @@ description: "Create rule-based interventions with criteria and targeting to aut
 keywords: ["interventions", "rule-based triggers", "intervention criteria", "attribute targeting"]
 ---
 
-[Interventions](/docs/signals/concepts/index.md#interventions) are automated triggers that enable real-time actions based on user behavior. You'll need to define and subscribe to them.
+[Interventions](/docs/signals/concepts/index.md#interventions) are automated triggers that enable real-time actions based on user behavior. You'll need to define and [subscribe](docs/signals/interventions/subscribe/index.md) to them.
 
 There are three methods for defining interventions in Signals:
 * Snowplow Console UI

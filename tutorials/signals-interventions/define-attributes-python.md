@@ -41,7 +41,7 @@ from snowplow_signals import (
 
 ## Define the attributes
 
-Each [attribute](/docs/signals/define-attributes/using-python-sdk/attribute-groups/attributes/) defines which event it will be calculated from, and what kind of aggregation will be performed.
+Each [attribute](/docs/signals/attributes/using-python-sdk/attribute-groups/attributes/) defines which event it will be calculated from, and what kind of aggregation will be performed.
 
 ### Product views counter
 

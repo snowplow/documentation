@@ -1,7 +1,7 @@
 ---
 title: "ASN lookup enrichment"
 sidebar_position: 11
-sidebar_label: ASN Lookup
+sidebar_label: ASN lookup
 description: "Flag bot traffic by checking autonomous system numbers against known bad ASN lists."
 keywords: ["ASN lookup", "bot detection", "bad ASN", "autonomous system"]
 date: "2026-02-24"
@@ -55,8 +55,8 @@ An inline array of ASN objects. These are combined with any entries from `botAsn
 
 | Field | Type | Required | Description |
 | --- | --- | --- | --- |
-| `asn` | integer | yes | The autonomous system number. |
-| `name` | string | no | A human-readable label. Used only for clarity in the configuration file. |
+| `asn` | integer | Yes | The autonomous system number. |
+| `name` | string | No | A human-readable label. Used only for clarity in the configuration file. |
 
 ### `bypassPlatforms`
 
@@ -98,6 +98,8 @@ For example, server-side tracking (`"srv"`) and IoT (`"iot"`) events typically c
 You can use the community-maintained [cpuchain/bad-asn-list](https://github.com/cpuchain/bad-asn-list) as a starting point for `botAsnsFile`. Host the CSV file in your own cloud storage to avoid depending on an external service at pipeline runtime.
 
 :::
+
+The enrichment modifies the existing ASN entity to add a bot signal when a match is found.
 
 ## Output
 

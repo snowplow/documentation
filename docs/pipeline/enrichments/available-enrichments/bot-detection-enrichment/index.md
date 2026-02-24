@@ -1,7 +1,7 @@
 ---
 title: "Bot detection enrichment"
 sidebar_position: 15
-sidebar_label: Bot Detection
+sidebar_label: Bot detection
 description: "Consolidate bot signals from multiple enrichments into a single entity for easier filtering and analysis."
 keywords: ["bot detection", "bot filtering", "YAUAA", "IAB", "ASN"]
 date: "2026-02-24"
@@ -13,7 +13,7 @@ This enrichment is available since version 6.9.0 of Enrich.
 
 Multiple enrichments can independently detect bots: [YAUAA](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md), [IAB](/docs/pipeline/enrichments/available-enrichments/iab-enrichment/index.md), and the [ASN lookup](/docs/pipeline/enrichments/available-enrichments/asn-lookup-enrichment/index.md). Without this enrichment, you would need to check each source separately during data modeling to determine whether an event came from a bot.
 
-The bot detection enrichment consolidates these signals into a single [entity](/docs/fundamentals/entities/index.md). It reads the output of the contributing enrichments and produces a `bot_detection` entity with a simple `bot` boolean and a list of which sources flagged the event. This makes it straightforward to filter bot traffic in your data models, or to drop bot events entirely using a [JavaScript enrichment](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/index.md).
+The bot detection enrichment consolidates these signals into a single [entity](/docs/fundamentals/entities/index.md). It reads the output of the contributing enrichments and produces a `bot_detection` entity with a simple `bot` boolean and a list of which sources flagged the event. This lets you filter bot traffic in your data models, or drop bot events entirely using a [JavaScript enrichment](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/index.md).
 
 ## How bot signals are combined
 
@@ -71,6 +71,8 @@ The enrichment accepts three required boolean parameters that control which sour
     }
 }
 ```
+
+The enrichment produces a single entity that summarizes all bot signals for the event.
 
 ## Output
 

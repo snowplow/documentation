@@ -6,7 +6,7 @@ description: "Extract attribution data from referrer URLs to identify traffic so
 keywords: ["referrer parser", "traffic source", "attribution"]
 ---
 
-This enrichment uses [snowplow referer-parser](https://github.com/snowplow/referer-parser) library to extract attribution data from referer URLs.
+This enrichment uses [snowplow referer-parser](https://github.com/snowplow/referer-parser) library to extract attribution data from referer URLs.
 
 Knowing which sites refer users to our website is very much a staple of analytics in order to help understand traffic patterns. This enrichment takes the value of the referring URL and matches it against the company/site it belongs to.
 
@@ -18,7 +18,7 @@ This is particularly useful when looking for specific traffic from search engine
 - [Example schema](https://github.com/snowplow/enrich/blob/master/config/enrichments/referer_parser.json)
 
 ```mdx-code-block
-import TestingWithMicro from “@site/docs/reusable/test-enrichment-with-micro/_index.md”
+import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_index.md"
 
 <TestingWithMicro/>
 ```
@@ -28,13 +28,13 @@ import TestingWithMicro from “@site/docs/reusable/test-enrichment-with-micro/_
 Snowplow has several subdomains like _community.snowplow.io_ and _docs.snowplow.io_. As users move from these subdomains to our main _snowplow.io_ domain, we would like to capture that traffic as being referred internally. Therefore we would set the configuration in the example schema as such:
 
 ```json
-“internalDomains”: [
-    “community.snowplow.io”,
-    “docs.snowplow.io”
+"internalDomains": [
+    "community.snowplow.io",
+    "docs.snowplow.io"
 ],
 ```
 
-Enabling this enrichment with the above configuration would fill the `refr_medium` column in our data warehouse with _”Internal”_ (rather then _”Unknown”_) when the referring URL to a page matches the subdomains above.
+Enabling this enrichment with the above configuration would fill the `refr_medium` column in our data warehouse with _"Internal"_ (rather then _"Unknown"_) when the referring URL to a page matches the subdomains above.
 
 :::note
 
@@ -56,11 +56,11 @@ Custom mappings take precedence over the default database. If a domain appears i
 The `referrers` parameter is a nested object structured as follows:
 
 ```json
-“referrers”: {
-  “<medium>”: {
-    “<source name>”: {
-      “domains”: [“<domain1>”, “<domain2>”],
-      “parameters”: [“<param1>”]
+"referrers": {
+  "<medium>": {
+    "<source name>": {
+      "domains": ["<domain1>", "<domain2>"],
+      "parameters": ["<param1>"]
     }
   }
 }
@@ -69,23 +69,23 @@ The `referrers` parameter is a nested object structured as follows:
 | Field | Description |
 | --- | --- |
 | `<medium>` | The referrer category (e.g., `search`, `social`, `email`). This value populates `refr_medium`. |
-| `<source name>` | A human-readable name for the source (e.g., `”Google”`, `”Internal Search”`). This value populates `refr_source`. |
+| `<source name>` | A human-readable name for the source (e.g., `"Google"`, `"Internal Search"`). This value populates `refr_source`. |
 | `domains` | An array of hostnames to match against the referrer URL. At least one domain is required. |
 | `parameters` | An optional array of URL query parameter names to extract search terms from. Matched values populate `refr_term`. |
 
 For example, to classify a custom search engine and a social network:
 
 ```json
-“referrers”: {
-  “search”: {
-    “Corporate Search”: {
-      “domains”: [“search.example.com”],
-      “parameters”: [“q”, “query”]
+"referrers": {
+  "search": {
+    "Corporate Search": {
+      "domains": ["search.example.com"],
+      "parameters": ["q", "query"]
     }
   },
-  “social”: {
-    “Internal Forum”: {
-      “domains”: [“forum.example.com”]
+  "social": {
+    "Internal Forum": {
+      "domains": ["forum.example.com"]
     }
   }
 }

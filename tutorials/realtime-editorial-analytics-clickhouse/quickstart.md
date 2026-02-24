@@ -31,7 +31,7 @@ Details on everything that's installed can be found in the [architecture](/tutor
 
 ## Step 2: Open the web tracking front-end
 
-Wait for about 30 minutes for the website container to kickstart. Once its ready, visit [http://localhost:3000](http://localhost:3000) to view the website application and start tracking events.
+Wait for about 30 seconds for the website container to kickstart. Once its ready, visit [http://localhost:3000](http://localhost:3000) to view the website application and start tracking events.
 
 ![First page of tracking website](images/homepage.png)
 

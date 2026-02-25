@@ -1,6 +1,6 @@
 ---
 title: "Custom SQL query enrichment"
-sidebar_position: 13
+sidebar_position: 14
 sidebar_label: Custom SQL
 description: "Query relational databases during enrichment to attach lookup data from MySQL, PostgreSQL, or other SQL databases."
 keywords: ["SQL enrichment", "database lookup", "relational database enrichment"]

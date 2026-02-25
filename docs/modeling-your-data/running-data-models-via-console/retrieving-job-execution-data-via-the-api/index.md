@@ -1,7 +1,7 @@
 ---
-title: "Retrieve data model execution data"
-sidebar_position: 3
-sidebar_label: "Retrieve job execution data"
+title: "Retrieving data model execution data"
+sidebar_position: 2
+sidebar_label: "Retrieving job execution data"
 description: "Retrieve data model execution data via API for monitoring and integration with alerting infrastructure."
 keywords: ["job execution API", "data model monitoring", "warehouse jobs API", "execution data"]
 ---

@@ -2,24 +2,18 @@
 title: "Resolving data model failures"
 sidebar_label: "Resolving data model failures"
 date: "2022-10-14"
-sidebar_position: 200
+sidebar_position: 1
 description: "Troubleshoot and resolve data model failures in Snowplow Console including debugging steps and common issues."
 keywords: ["data model failures", "dbt debugging", "model troubleshooting", "Console errors"]
 ---
 
-:::note
-
-This documentation assumes you are running your data models via the data modeling UI in Snowplow Console, as described in [the documentation for running data models](/docs/modeling-your-data/running-data-models-via-console/dbt/index.md#2-the-data-modeling-configuration).
-
-:::
-
 ### Receiving alerts
 
-If a run of a data model fails for any reason, all owners are notified automatically. A link to the jobs UI in console is provided in the alert, which you can review to diagnose the failure.
+If a run of a data model fails for any reason, all owners are notified automatically. A link to the jobs UI in Console is provided in the alert, which you can review to diagnose the failure.
 
 ### Diagnosing failures
 
-You will be able to see the details of your data model failure in the jobs interface in console. Under 'Job Dag' for the failed job, click on the failed step to see details of what went wrong. Due to the nature of the `dbt run` call, your DAG will only have 2 blocks.
+You will be able to see the details of your data model failure in the jobs interface in Console. Under 'Job DAG' (Directed Acyclic Graph) for the failed job, click on the failed step to see details of what went wrong.
 
 ![](images/dbt-dag.png)
 

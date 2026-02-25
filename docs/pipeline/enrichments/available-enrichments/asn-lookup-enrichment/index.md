@@ -4,14 +4,13 @@ sidebar_position: 11
 sidebar_label: ASN lookup
 description: "Flag bot traffic by checking autonomous system numbers against known bad ASN lists."
 keywords: ["ASN lookup", "bot detection", "bad ASN", "autonomous system"]
-date: "2026-02-24"
 ---
 
 :::note Availability
 This enrichment is available since version 6.9.0 of Enrich.
 :::
 
-This enrichment checks the autonomous system number (ASN) attached to an event against a configurable list of ASNs associated with bots, cloud providers, or abusive networks. When a match is found, the enrichment sets `likelyBot` to `true` on the existing ASN [entity](/docs/fundamentals/entities/index.md).
+This enrichment checks the autonomous system number (ASN) attached to an event against a configurable list of ASNs associated with bots, cloud providers, or abusive networks. When a match is found, the enrichment sets `likelyBot` to `true` on the ASN [entity](/docs/fundamentals/entities/index.md) added by the [IP lookup enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md).
 
 This is useful for automatically flagging non-human traffic. Many bots and scrapers originate from well-known cloud hosting or data center ASNs, and community-maintained lists such as [cpuchain/bad-asn-list](https://github.com/cpuchain/bad-asn-list) track these.
 

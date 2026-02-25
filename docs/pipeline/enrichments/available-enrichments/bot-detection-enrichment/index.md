@@ -2,9 +2,8 @@
 title: "Bot detection enrichment"
 sidebar_position: 15
 sidebar_label: Bot detection
-description: "Consolidate bot signals from multiple enrichments into a single entity for easier filtering and analysis."
+description: "Consolidate bot indicators from multiple enrichments into a single entity for easier filtering and analysis."
 keywords: ["bot detection", "bot filtering", "YAUAA", "IAB", "ASN"]
-date: "2026-02-24"
 ---
 
 :::note Availability
@@ -13,17 +12,17 @@ This enrichment is available since version 6.9.0 of Enrich.
 
 Multiple enrichments can independently detect bots: [YAUAA](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md), [IAB](/docs/pipeline/enrichments/available-enrichments/iab-enrichment/index.md), and the [ASN lookup](/docs/pipeline/enrichments/available-enrichments/asn-lookup-enrichment/index.md). Without this enrichment, you would need to check each source separately during data modeling to determine whether an event came from a bot.
 
-The bot detection enrichment consolidates these signals into a single [entity](/docs/fundamentals/entities/index.md). It reads the output of the contributing enrichments and produces a `bot_detection` entity with a simple `bot` boolean and a list of which sources flagged the event. This lets you filter bot traffic in your data models, or drop bot events entirely using a [JavaScript enrichment](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/index.md).
+The bot detection enrichment consolidates these indicators into a single [entity](/docs/fundamentals/entities/index.md). It reads the output of the contributing enrichments and produces a `bot_detection` entity with a simple `bot` boolean and a list of which sources flagged the event. This lets you filter bot traffic in your data models, or drop bot events entirely using a [JavaScript enrichment](/docs/pipeline/enrichments/available-enrichments/custom-javascript-enrichment/examples/index.md#filtering-out-bots).
 
-## How bot signals are combined
+## How bot indicators are combined
 
-The enrichment uses "any positive = bot" logic. If any enabled source flags the event as a bot, the event is classified as a bot. A negative result from one source does not override a positive result from another.
+The enrichment uses "any positive = bot" logic. If any of the enabled sources flags the event as coming from a bot, the event is classified as a bot. A negative result from one source does not override a positive result from another. This is because none of the existing enrichments can produce a strong "not a bot" result.
 
-Each source contributes a signal as follows:
+Each source contributes a indicator as follows:
 
 | Source | Flagged as bot when |
 | --- | --- |
-| YAUAA | `deviceClass` or `agentClass` is `"Robot"` in the YAUAA entity |
+| YAUAA | `deviceClass` is `"Robot"`, `"Robot Mobile"`, or `"Robot Imitator"`, or `agentClass` is `"Robot"` or `"Robot Mobile"` in the YAUAA entity |
 | IAB | `spiderOrRobot` is `true` in the IAB entity |
 | ASN lookup | `likelyBot` is `true` in the ASN entity |
 
@@ -50,9 +49,9 @@ The enrichment accepts three required boolean parameters that control which sour
 
 | Parameter | Type | Description |
 | --- | --- | --- |
-| `useYauaa` | boolean | Consult the [YAUAA enrichment](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md) output for bot signals. |
-| `useIab` | boolean | Consult the [IAB enrichment](/docs/pipeline/enrichments/available-enrichments/iab-enrichment/index.md) output for bot signals. |
-| `useAsnLookups` | boolean | Consult the [ASN lookup enrichment](/docs/pipeline/enrichments/available-enrichments/asn-lookup-enrichment/index.md) output for bot signals. |
+| `useYauaa` | boolean | Consult the [YAUAA enrichment](/docs/pipeline/enrichments/available-enrichments/yauaa-enrichment/index.md) output for bot indicators. |
+| `useIab` | boolean | Consult the [IAB enrichment](/docs/pipeline/enrichments/available-enrichments/iab-enrichment/index.md) output for bot indicators. |
+| `useAsnLookups` | boolean | Consult the [ASN lookup enrichment](/docs/pipeline/enrichments/available-enrichments/asn-lookup-enrichment/index.md) output for bot indicators. |
 
 ### Example configuration
 
@@ -72,7 +71,7 @@ The enrichment accepts three required boolean parameters that control which sour
 }
 ```
 
-The enrichment produces a single entity that summarizes all bot signals for the event.
+The enrichment produces a single entity that summarizes all bot indicators for the event.
 
 ## Output
 
@@ -81,7 +80,7 @@ When enabled, this enrichment always attaches a `bot_detection` entity (`iglu:co
 | Field | Type | Description |
 | --- | --- | --- |
 | `bot` | boolean | `true` if any enabled source flagged the event as a bot, `false` otherwise. |
-| `indicators` | array of strings | Which sources flagged the event. Possible values: `"yauaa"`, `"iab"`, `"asnLookups"`. Empty when `bot` is `false`. |
+| `indicators` | array of strings | Which sources flagged the event as a bot. Possible values: `"yauaa"`, `"iab"`, `"asnLookups"`. Empty when `bot` is `false`. |
 
 ### Example: bot detected by multiple sources
 

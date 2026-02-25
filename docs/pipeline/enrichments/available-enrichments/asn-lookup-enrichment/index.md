@@ -102,7 +102,7 @@ The enrichment modifies the existing ASN entity to add a bot signal when a match
 
 ## Output
 
-This enrichment modifies the ASN entity (`iglu:com.snowplowanalytics.snowplow/asn/jsonschema/1-0-1`) that the [IP lookup enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) attaches to each event. When the event's ASN matches an entry in the bot list, the enrichment sets `likelyBot` to `true`:
+This enrichment modifies the ASN entity (`iglu:com.snowplowanalytics.snowplow/asn/jsonschema/1-0-1`) that the [IP lookup enrichment](/docs/pipeline/enrichments/available-enrichments/ip-lookup-enrichment/index.md) attaches to events where ASN information is available. When the event's ASN matches an entry in the bot list, the enrichment sets `likelyBot` to `true`:
 
 ```json
 {

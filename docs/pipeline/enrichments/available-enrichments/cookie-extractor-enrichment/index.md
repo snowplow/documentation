@@ -36,7 +36,7 @@ import TestingWithMicro from "@site/docs/reusable/test-enrichment-with-micro/_in
 
 <TestingWithMicro>
 
-You will likely also need to [configure Micro to work with first-party cookies](/docs/testing/snowplow-micro/local/remote-usage/index.md#locally-resolving-an-existing-domain-name-to-micro).
+To test first-party cookies, you will need to run Micro locally and [configure a custom DNS resolution rule](/docs/testing/snowplow-micro/local/remote-usage/index.md#locally-resolving-an-existing-domain-name-to-micro).
 
 </TestingWithMicro>
 

@@ -2,8 +2,8 @@
 title: "Test and debug tracking with Snowplow Micro"
 sidebar_label: "Snowplow Micro"
 sidebar_position: 2
-description: "Snowplow Micro is a lightweight test pipeline for debugging and automated testing. It receives, validates, and enriches events locally with a UI and API for inspection."
-keywords: ["snowplow micro", "test pipeline", "automated testing", "local testing", "event validation", "local pipeline"]
+description: "Snowplow Micro is a lightweight test pipeline for debugging and automated testing. It receives, validates, and enriches events with a UI and API for inspection."
+keywords: ["snowplow micro", "test pipeline", "automated testing", "local testing", "event validation", "local pipeline", "development environment", "console"]
 ---
 
 ```mdx-code-block

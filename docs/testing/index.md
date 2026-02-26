@@ -21,4 +21,4 @@ Use the [Snowplow Inspector](/docs/testing/snowplow-inspector/index.md) browser 
 
 Micro can be deployed [through Console](/docs/testing/snowplow-micro/console/index.md) or [locally](/docs/testing/snowplow-micro/local/index.md) using Docker or Java.
 
-Micro can also be used for [automated testing](/docs/testing/snowplow-micro/automated-testing/index.md) in an CI/CD environment.
+Micro can also be used for [automated testing](/docs/testing/snowplow-micro/automated-testing/index.md) in a CI/CD environment.

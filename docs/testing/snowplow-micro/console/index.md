@@ -19,7 +19,7 @@ Using a development environment is a great way to test your changes before apply
 
 ## Setup
 
-To create a development enrivonment, navigate to **Settings > Workspaces**, select your workspace, scroll to the **Development environments** section and click **Create environment**.
+To create a development environment, navigate to **Settings > Workspaces**, select your workspace, scroll to the **Development environments** section and click **Create environment**.
 
 :::note Permissions
 
@@ -33,7 +33,7 @@ Under the hood, an instance of Snowplow Micro will be deployed in your cloud acc
 
 ## Usage
 
-Once your development enviornment is ready, you can access it from the **Pipelines** section in the Console sidebar.
+Once your development environment is ready, you can access it from the **Pipelines** section in the Console sidebar.
 
 Select your environment and you will see the Collector endpoint URL you can use in your tracking code to send events to this environment.
 
@@ -43,7 +43,7 @@ To view events in the [Micro UI](/docs/testing/snowplow-micro/ui/index.md), sele
 
 :::warning Production data
 
-Do not send production data to development environments. Anyone with the _View enrivonments_ permissions can access the UI and see the events. Also, developmnet environments are not configured to withstand high volumes of events.
+Do not send production data to development environments. Anyone with the _View environments permissions can access the UI and see the events. Also, developmnet environments are not configured to withstand high volumes of events.
 
 :::
 

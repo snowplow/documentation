@@ -13,7 +13,7 @@ import CodeBlock from '@theme/CodeBlock';
 
 The basic approach for using Snowplow Micro in automated testing is this:
 * Run it alongside your tests, either via Docker or Java
-* In each test, send some events then then validate the results using the [Micro REST API](/docs/api-reference/snowplow-micro/api/index.md)
+* In each test, send some events then validate the results using the [Micro REST API](/docs/api-reference/snowplow-micro/api/index.md)
 
 :::tip
 

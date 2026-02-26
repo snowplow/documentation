@@ -73,6 +73,8 @@ For example, to install our Unified Digital data model, you can follow the [tuto
 
 Likewise, to configure variables for the models, edit the `dbt_project.yml` file.
 
+With multiple models, you might run into a situation where one depends on the output of another. As long as you use [the `ref` function](https://docs.getdbt.com/faqs/Models/create-dependencies), dbt will automatically infer and honor dependencies. In particular, see how to set up our Unified Digital and Attribution models to [work together](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/dbt-attribution-data-model/keeping-cohesion-with-unified/index.md).
+
 :::note
 
 When running the models, Console will override any warehouse connection settings with the ones you will configure in the next section.
@@ -113,6 +115,8 @@ If you want to run different models within the project at different times, you c
 * One run configuration
 * Two schedules, e.g. daily at 12 AM and every Monday at 3 AM
 * Pick different commands for each schedule, e.g. `dbt run --select <...>`
+
+In both cases, note that `dbt run` will automatically run all the relevant models in the correct order, [accounting for dependencies](https://docs.getdbt.com/faqs/Models/create-dependencies).
 
 :::
 

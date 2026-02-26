@@ -15,7 +15,7 @@ To set up Snowplow, follow the ['Getting Started' steps in the Snowplow Console]
 The first setup steps are designed to get your infrastructure in place and have you sending data as quickly as possible. The initial steps include:
 
 - providing the right cloud environment for Snowplow to be installed
-- setting up your first sandbox environment
+- setting up your first development environment
 - selecting which warehouse, if any, you want to load your data into
 
 Completing the forms for these initial steps should take you around 30 minutes.

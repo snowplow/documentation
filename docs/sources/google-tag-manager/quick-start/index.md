@@ -52,7 +52,7 @@ The Snowplow Settings Variable template is used to configure the Snowplow tracke
 
 :::info
 
-You might consider using conditional variables to set the Collector endpoint based on the environment, e.g. sending data to [Micro](/docs/testing/snowplow-micro/index.md)/[Mini](/docs/api-reference/snowplow-mini/index.md) Collector endpoint during development.
+You might consider using conditional variables to set the Collector endpoint based on the environment, e.g. sending data to [Snowplow Micro](/docs/testing/snowplow-micro/index.md) during development.
 
 :::
 

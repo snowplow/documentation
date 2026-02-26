@@ -23,8 +23,10 @@ import AvailabilityBadges from '@site/src/components/ui/availability-badges';
 
 Just like a real Snowplow pipeline, Micro receives, validates and enriches events sent by your [tracking code](/docs/sources/index.md).
 
-Unlike a real pipeline:
-* It does not store the events in a data warehouse or database, although a [UI](/docs/testing/snowplow-micro/ui/index.md) and an [API](/docs/api-reference/snowplow-micro/api/index.md) are available to look at the data
-* It's not meant for production traffic
+:::warning
 
-Follow [these instructions](/docs/testing/snowplow-micro/basic-usage/index.md) to get started in minutes.
+Micro is not designed for production traffic.
+
+:::
+
+To get started in minutes, [deploy Micro through Console](/docs/testing/snowplow-micro/console/index.md) or [run it locally](/docs/testing/snowplow-micro/local/index.md).

@@ -11,7 +11,13 @@ import {versions} from '@site/src/componentVersions';
 import CodeBlock from '@theme/CodeBlock';
 ```
 
-By default, Micro does not have any [enrichments](/docs/pipeline/enrichments/available-enrichments/index.md) enabled. This page shows how you can enable them.
+By default, when running locally, Micro does not have any [enrichments](/docs/pipeline/enrichments/available-enrichments/index.md) enabled. This page shows how you can enable them.
+
+:::tip Micro in Console
+
+When [running Micro through Console](/docs/testing/snowplow-micro/console/index.md), you can use the UI to configure enrichments.
+
+:::
 
 ## YAUAA (Yet Another User Agent Analyzer)
 

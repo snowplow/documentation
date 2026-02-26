@@ -58,7 +58,7 @@ Note that to test this enrichment, you will need events with realistic IP addres
 
 <XForwardedForPlugin/>
 
-Alternatively, you can [set up Micro to receive external IP addresses](/docs/testing/snowplow-micro/remote-usage/index.md#exposing-micro-via-a-public-domain-name).
+Alternatively, you can [set up Micro to receive external IP addresses](/docs/testing/snowplow-micro/local/remote-usage/index.md#exposing-micro-via-a-public-domain-name).
 
 </TestingWithMicro>
 

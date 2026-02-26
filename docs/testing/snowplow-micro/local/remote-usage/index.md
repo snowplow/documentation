@@ -14,7 +14,7 @@ import TabItem from '@theme/TabItem';
 import XForwardedForPlugin from "@site/docs/reusable/x-forwarded-for-plugin/_index.md"
 ```
 
-If you are not running your website or app locally but would still like to use Micro for testing and debugging, there are two options:
+If you are not running your website or app locally but would still like to use Micro for local testing and debugging, there are two options:
 
 |                                         | Option 1<br/>[Exposing Micro via a public domain name](#exposing-micro-via-a-public-domain-name) | Option 2<br/>[Locally resolving an existing domain name to Micro](#locally-resolving-an-existing-domain-name-to-micro) |
 | --------------------------------------- | :----------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------: |
@@ -24,6 +24,12 @@ If you are not running your website or app locally but would still like to use M
 | Micro receives external IP addresses    |                                               Yes                                                |                                                           No                                                           |
 
 ## Exposing Micro via a public domain name
+
+:::tip Micro in Console
+
+This method is for running Micro locally. You can also [run Micro through Console](/docs/testing/snowplow-micro/console/index.md), which automatically gives you a public endpoint.
+
+:::
 
 This method allows you to get a publicly accessible URL for your Micro, which you can point your tracking code to. You can also send this URL to colleagues for them to inspect the results via the [UI](/docs/testing/snowplow-micro/ui/index.md) (since version 2.0.0) or the [API](/docs/api-reference/snowplow-micro/api/index.md).
 
@@ -112,7 +118,7 @@ However, you will only get local IP addresses (like `192.168.0.42`) in your data
 
 ### Generate a local SSL/TLS certificate
 
-Chances are that the website in question uses HTTPS. If so, you will need to configure Micro to [enable HTTPS](/docs/testing/snowplow-micro/advanced-usage/index.md#enabling-https). Otherwise, feel free to skip this step.
+Chances are that the website in question uses HTTPS. If so, you will need to configure Micro to [enable HTTPS](/docs/testing/snowplow-micro/local/advanced-usage/index.md#enabling-https). Otherwise, feel free to skip this step.
 
 First, install [`mkcert`](https://github.com/FiloSottile/mkcert). This tool allows you to easily generate SSL/TLS certificates that your machine trusts.
 
@@ -130,14 +136,14 @@ You should now have a local file called `c.example.com.p12` with the default pas
 
 ### Match the Collector configuration
 
-To make sure your Micro behaves the same way as the Collector it’s “pretending” to be, copy the relevant parts of your Collector configuration and [pass them to Micro](/docs/testing/snowplow-micro/advanced-usage/index.md#adding-custom-collector-configuration).
+To make sure your Micro behaves the same way as the Collector it’s “pretending” to be, copy the relevant parts of your Collector configuration and [pass them to Micro](/docs/testing/snowplow-micro/local/advanced-usage/index.md#adding-custom-collector-configuration).
 
 The two most important settings are the cookie name (you can set it with `-Dcollector.cookie.name` as shown on the page linked above) and any custom paths (via a configuration file).
 
 ### Run Micro
 
 You will need to run Micro as usual, with a few changes:
-* [Enable HTTPS](/docs/testing/snowplow-micro/advanced-usage/index.md#enabling-https), if needed
+* [Enable HTTPS](/docs/testing/snowplow-micro/local/advanced-usage/index.md#enabling-https), if needed
 * Use port `80` instead of `9090`
 * If HTTPS is enabled, also use port `443` instead of `9543`
 

@@ -15,11 +15,13 @@ You can (and should!) test your enrichment with [Snowplow Micro](/docs/testing/s
 
 ## Basic setup
 
-If you haven’t worked with Micro before, take a look at the [usage guide](/docs/testing/snowplow-micro/local/index.md). Adding the JavaScript enrichment to Micro is similar to [adding other enrichments](/docs/testing/snowplow-micro/local/enrichments/index.md).
+While it's possible to use Micro [through Console](/docs/testing/snowplow-micro/console/index.md), running it locally has the benefit that you can add logging statements and look at their output.
+
+If you haven't run Micro on your machine before, take a look at the [usage guide](/docs/testing/snowplow-micro/local/index.md). Adding the JavaScript enrichment to Micro is similar to [adding other enrichments](/docs/testing/snowplow-micro/local/enrichments/index.md).
 
 :::tip Testing `.js` files directly
 
-One trick up Micro’s sleeve is that while you can add the full enrichment configuration in a JSON file (with your JavaScript encoded in base64), you can also just drop a `.js` file in your enrichments folder. Micro will interpret it as JavaScript enrichment code. This way, you don’t need to keep converting your enrichment to base64 as you iterate on it. _(Make sure to either use a `.json` or a `.js` file, but not both.)_
+While you can add the full enrichment configuration in a JSON file (with your JavaScript encoded in base64), you can also just drop a `.js` file in your enrichments folder. Micro will interpret it as JavaScript enrichment code. This way, you don’t need to keep converting your enrichment to base64 as you iterate on it. _(Make sure to either use a `.json` or a `.js` file, but not both.)_
 
 :::
 

@@ -56,6 +56,8 @@ import XForwardedForPlugin from "@site/docs/reusable/x-forwarded-for-plugin/_ind
 
 Note that to test this enrichment, you will need events with realistic IP addresses (not local ones like `192.168.0.42`).
 
+This is not an issue if running Micro through Console, but will be trickier if running locally.
+
 <XForwardedForPlugin/>
 
 Alternatively, you can [set up Micro to receive external IP addresses](/docs/testing/snowplow-micro/local/remote-usage/index.md#exposing-micro-via-a-public-domain-name).

@@ -6,7 +6,7 @@ keywords: ["running data models", "Snowplow Console", "dbt execution", "model sc
 sidebar_label: "Running data models"
 ---
 
-You can use Snowplow Console to schedule and run [dbt](https://www.getdbt.com/) data models, including our [out-of-the-box models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/index.md), [automatically generated models](docs/modeling-your-data/automatically-generated-data-models/index.md) and any custom or third party models.
+You can use [Snowplow Console](https://console.snowplowanalytics.com) to schedule and run [dbt](https://www.getdbt.com/) data models, including our [out-of-the-box models](/docs/modeling-your-data/modeling-your-data-with-dbt/dbt-models/index.md), [automatically generated models](/docs/modeling-your-data/automatically-generated-data-models/index.md), and any custom or third party models.
 
 ## Overview
 
@@ -59,11 +59,11 @@ Next, create the model project:
 
 Once the project is created, you can start adding data models.
 
-## Adding data models
+## Add data models
 
 :::tip
 
-If you already have an existing dbt project with a set of data models, you can skip this section. Console will work with your current dbt configuration in `dbt_project.yml` and `packages.yml`.
+If you already have a dbt project with a set of data models, you can skip this section. Console will work with your current dbt configuration in `dbt_project.yml` and `packages.yml`.
 
 :::
 
@@ -81,9 +81,9 @@ When running the models, Console will override any warehouse connection settings
 
 Once you are happy with the dbt project setup, run dbt commands locally to verify it.
 
-## Connecting to the warehouse
+## Connect to the warehouse
 
-In this step you will create a warehouse connection for the models to use. Note that you can define more than one connection, for example if you would like to have separate model run configurations for production and QA data.
+In this step, you will create a warehouse connection for the models to use. Note that you can define more than one connection, for example, if you would like to have separate model run configurations for production and QA data.
 
 :::tip
 
@@ -93,7 +93,7 @@ You might have already set up a warehouse connection for loading the data. Data 
 
 Navigate to **Destinations > Connections > Set up connection > Data modeling connection**. Select your warehouse and follow the steps in Console to create and test your connection.
 
-## Adding run configurations
+## Add run configurations
 
 For Console to run your data models, you will need to create run configurations.
 
@@ -106,12 +106,12 @@ Each run configuration controls what dbt commands will be executed and when. Mor
 
 If you want to run all your models every day at midnight, you would create:
 * One run configuration
-* One schedule (daily, 00:00 AM)
+* One schedule (daily, 12 AM)
 * Add standard dbt commands, e.g. `dbt deps` and `dbt run`
 
 If you want to run different models within the project at different times, you can use dbt’s [selector features](https://docs.getdbt.com/reference/commands/run#running-specific-models). In this case, create:
 * One run configuration
-* Two schedules, e.g. daily at 00:00 AM and every Monday at 03:00 AM
+* Two schedules, e.g. daily at 12 AM and every Monday at 3 AM
 * Pick different commands for each schedule, e.g. `dbt run --select <...>`
 
 :::
@@ -124,9 +124,9 @@ To create a run configuration:
 * Select the desired time and dbt commands
 * Repeat as necessary
 
-## Running the models
+## Run the models
 
-Once you’ve defined the run configurations and schedules, Console will automatically run your data models. You can see when the next run is scheduled by looking at at each run configuration.
+Once you’ve defined the run configurations and schedules, Console will automatically run your data models. You can see when the next run is scheduled by looking at each run configuration.
 
 ![Run configuration example](images/run-configurations.png)
 

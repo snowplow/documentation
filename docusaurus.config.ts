@@ -103,8 +103,8 @@ const config: Config = {
     [
       '@signalwire/docusaurus-plugin-llms-txt',
       {
-        siteTitle: 'My Documentation',
-        siteDescription: 'Comprehensive guide to our platform',
+        siteTitle: 'Snowplow Documentation',
+        siteDescription: 'Snowplow is the leading customer data infrastructure (CDI) for AI, transforming raw behavioral data into governed, high-fidelity fuel for analytics, real-time personalization, and AI agents.',
         depth: 2,
         content: {
           includeBlog: true,

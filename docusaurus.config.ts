@@ -5,7 +5,6 @@ const sidebar = require('./sidebars')
 const abbreviations = require('./src/remark/abbreviations')
 const math = require('remark-math')
 const katex = require('rehype-katex')
-const path = require('path')
 
 const config: Config = {
   title: 'Snowplow Documentation',
@@ -111,10 +110,9 @@ const config: Config = {
           includePages: true,
           enableLlmsFullTxt: true,
           relativePaths: false,
-          excludeRoutes:["/search"]
         },
-        includeOrder:["/docs"],
-      }
+        includeOrder:["/docs", "sitemap.xml"],
+      } satisfies PluginOptions
     ],
   ],
 

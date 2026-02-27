@@ -1,15 +1,13 @@
-// @ts-check
-// Note: type annotations allow type checking and IDEs autocompletion
+import type { Config } from '@docusaurus/types'
+import type { PluginOptions } from '@signalwire/docusaurus-plugin-llms-txt'
 
 const sidebar = require('./sidebars')
 const abbreviations = require('./src/remark/abbreviations')
 const math = require('remark-math')
 const katex = require('rehype-katex')
 const path = require('path')
-const PluginOptions = require('@signalwire/docusaurus-plugin-llms-txt/public')
 
-/** @type {import('@docusaurus/types').Config} */
-module.exports = {
+const config: Config = {
   title: 'Snowplow Documentation',
   tagline:
     'Build, deploy, and scale your next data creation project using Snowplow.',
@@ -105,16 +103,15 @@ module.exports = {
     [
       '@signalwire/docusaurus-plugin-llms-txt',
       {
-        generate: {
-          enableMarkdownFiles: true,
-          enableLlmsFullTxt: false,
-        },
-        include: {
-          includeBlog: false,
-          includePages: false,
-          includeDocs: true,
-        },
-      } satisfies PluginOptions,
+        siteTitle: 'My Documentation',
+        siteDescription: 'Comprehensive guide to our platform',
+        depth: 2,
+        content: {
+          includeBlog: true,
+          includePages: true,
+          enableLlmsFullTxt: true  
+        }
+      }
     ],
   ],
 
@@ -317,3 +314,5 @@ module.exports = {
     },
   },
 }
+
+export default config

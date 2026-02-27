@@ -109,7 +109,8 @@ const config: Config = {
         content: {
           includeBlog: true,
           includePages: true,
-          enableLlmsFullTxt: true  
+          enableLlmsFullTxt: true,
+          relativePaths: false
         }
       }
     ],

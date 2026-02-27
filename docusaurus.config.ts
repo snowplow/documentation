@@ -104,14 +104,16 @@ const config: Config = {
       '@signalwire/docusaurus-plugin-llms-txt',
       {
         siteTitle: 'Snowplow Documentation',
-        siteDescription: 'Snowplow is the leading customer data infrastructure (CDI) for AI, transforming raw behavioral data into governed, high-fidelity fuel for analytics, real-time personalization, and AI agents.',
+        siteDescription: 'Authoritative Snowplow documentation for implementing event tracking, validation, enrichment, governance, and delivery of clean event-level behavioral data. Focus areas include composable analytics, composable CDP, in-product personalization, AI agentic applications, and feeding AI-ready real-time data into warehouses, lakes, streams, and real-time tools.',
         depth: 2,
         content: {
           includeBlog: true,
           includePages: true,
           enableLlmsFullTxt: true,
-          relativePaths: false
-        }
+          relativePaths: false,
+          excludeRoutes:["/search"]
+        },
+        includeOrder:["/docs"],
       }
     ],
   ],

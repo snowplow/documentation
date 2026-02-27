@@ -1,6 +1,6 @@
 ---
 title: "Retrieve data model execution data"
-sidebar_position: 3
+sidebar_position: 2
 sidebar_label: "Retrieve job execution data"
 description: "Retrieve data model execution data via API for monitoring and integration with alerting infrastructure."
 keywords: ["job execution API", "data model monitoring", "warehouse jobs API", "execution data"]
@@ -14,7 +14,7 @@ The exact same data about past and current jobs executions can be retrieved and 
 
 You can have a look at and interact with all available endpoints in the [API documentation](https://console.snowplowanalytics.com/api/msc/v1/docs/index.html?url=/api/msc/v1/docs/docs.yaml#/Jobs).
 
-### Authorizing in the API documentation
+### Authorization
 
 To be able to post sample requests in the documentation you need to click the `Authorize` button at the top of the document and authorize with your token. The value for the token field in each individual requests is overwritten by this authorization.
 
@@ -29,7 +29,7 @@ Each request will need to include your Organization ID. You can find it [on the 
 
 Follow the instructions in the [Account management](/docs/account-management/index.md) section to obtain an access token for API authentication.
 
-## Retrieving job run information
+## Retrieve job run information
 
 ### Getting a list of job runs for a specific time window
 

@@ -6,6 +6,7 @@ const abbreviations = require('./src/remark/abbreviations')
 const math = require('remark-math')
 const katex = require('rehype-katex')
 const path = require('path')
+const PluginOptions = require('@signalwire/docusaurus-plugin-llms-txt/public')
 
 /** @type {import('@docusaurus/types').Config} */
 module.exports = {
@@ -101,6 +102,20 @@ module.exports = {
       },
     ],
     './plugins/docusaurus-plugin-snowplow-schema',
+    [
+      '@signalwire/docusaurus-plugin-llms-txt',
+      {
+        generate: {
+          enableMarkdownFiles: true,
+          enableLlmsFullTxt: false,
+        },
+        include: {
+          includeBlog: false,
+          includePages: false,
+          includeDocs: true,
+        },
+      } satisfies PluginOptions,
+    ],
   ],
 
   stylesheets: [

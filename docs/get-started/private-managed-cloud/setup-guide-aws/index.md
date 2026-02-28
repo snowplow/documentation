@@ -37,10 +37,10 @@ These instructions are also provided as part of the setup flow in Console.
 ### Create sub-account
 
 1. From your main AWS account, set up an Organisation if you haven't done so already.
-2. Create a member account (the sub-account) in that organization
+2. Create a member account (the sub-account) in that organization.
 3. Sign out and sign into the new sub-account. Everything Snowplow-related will take place within this account from here in.
-4. Follow [these instructions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html#access_policies_create-start) to create a policy using the following:
-  - Attach the following AWS managed policies
+4. Follow the [AWS instructions for creating a policy in the console](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html#access_policies_create-start).
+  - Attach the following AWS managed policies:
 ```text
 arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
 arn:aws:iam::aws:policy/AmazonEC2FullAccess
@@ -73,8 +73,7 @@ arn:aws:iam::aws:policy/GlobalAcceleratorFullAccess
 arn:aws:iam::aws:policy/IAMFullAccess
 arn:aws:iam::aws:policy/ServiceQuotasFullAccess
 ```
-  - Create and attach this custom inline policy
-    - Covers EKS cluster management, KMS read, and SecretsManager — permissions not fully covered by the AWS managed policies above.
+  - Create and attach the following custom inline policy, which covers EKS cluster management, KMS read, and Secrets Manager — permissions not fully covered by the managed policies above.
 ```json
 {
  "Version": "2012-10-17",

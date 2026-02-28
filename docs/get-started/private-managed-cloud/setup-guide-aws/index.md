@@ -39,84 +39,135 @@ These instructions are also provided as part of the setup flow in Console.
 1. From your main AWS account, set up an Organisation if you haven't done so already.
 2. Create a member account (the sub-account) in that organization
 3. Sign out and sign into the new sub-account. Everything Snowplow-related will take place within this account from here in.
-4. Follow [these instructions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html#access_policies_create-start) to create a policy using the JSON policy document below.
+4. Follow [these instructions](https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_create-console.html#access_policies_create-start) to create a policy using the following:
+  - Attach the following AWS managed policies
+```text
+arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
+arn:aws:iam::aws:policy/AmazonEC2FullAccess
+arn:aws:iam::aws:policy/AmazonECS_FullAccess
+arn:aws:iam::aws:policy/AmazonEKSAdminPolicy
+arn:aws:iam::aws:policy/AmazonElastiCacheFullAccess
+arn:aws:iam::aws:policy/AmazonEMRFullAccessPolicy_v2
+arn:aws:iam::aws:policy/AmazonEventBridgeFullAccess
+arn:aws:iam::aws:policy/AmazonKinesisAnalyticsFullAccess
+arn:aws:iam::aws:policy/AmazonKinesisFullAccess
+arn:aws:iam::aws:policy/AmazonMSKFullAccess
+arn:aws:iam::aws:policy/AmazonOpenSearchServiceFullAccess
+arn:aws:iam::aws:policy/AmazonRDSFullAccess
+arn:aws:iam::aws:policy/AmazonRedshiftFullAccess
+arn:aws:iam::aws:policy/AmazonRoute53FullAccess
+arn:aws:iam::aws:policy/AmazonRoute53ResolverFullAccess
+arn:aws:iam::aws:policy/AmazonS3FullAccess
+arn:aws:iam::aws:policy/AmazonSNSFullAccess
+arn:aws:iam::aws:policy/AmazonSQSFullAccess
+arn:aws:iam::aws:policy/AmazonSSMFullAccess
+arn:aws:iam::aws:policy/AutoScalingFullAccess
+arn:aws:iam::aws:policy/AWSCertificateManagerFullAccess
+arn:aws:iam::aws:policy/AWSLambda_FullAccess
+arn:aws:iam::aws:policy/AWSSupportAccess
+arn:aws:iam::aws:policy/AWSWAFReadOnlyAccess
+arn:aws:iam::aws:policy/CloudWatchFullAccess
+arn:aws:iam::aws:policy/CloudWatchLogsFullAccess
+arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess
+arn:aws:iam::aws:policy/GlobalAcceleratorFullAccess
+arn:aws:iam::aws:policy/IAMFullAccess
+arn:aws:iam::aws:policy/ServiceQuotasFullAccess
+```
+  - Create and attach this custom inline policy
+    - Covers EKS cluster management, KMS read, and SecretsManager — permissions not fully covered by the AWS managed policies above.
+```json
+{
+ "Version": "2012-10-17",
+ "Statement": [
+   {
+     "Sid": "EKSClusterManagement",
+     "Effect": "Allow",
+     "Resource": "*",
+     "Action": [
+       "eks:AccessKubernetesApi",
+       "eks:AssociateAccessPolicy",
+       "eks:AssociateIdentityProviderConfig",
+       "eks:CreateAccessEntry",
+       "eks:CreateAddon",
+       "eks:CreateCluster",
+       "eks:CreateFargateProfile",
+       "eks:CreateNodegroup",
+       "eks:DeleteAccessEntry",
+       "eks:DeleteAddon",
+       "eks:DeleteCluster",
+       "eks:DeleteFargateProfile",
+       "eks:DeleteNodegroup",
+       "eks:DeregisterCluster",
+       "eks:DescribeAccessEntry",
+       "eks:DescribeAddon",
+       "eks:DescribeAddonConfiguration",
+       "eks:DescribeAddonVersions",
+       "eks:DescribeCluster",
+       "eks:DescribeFargateProfile",
+       "eks:DescribeIdentityProviderConfig",
+       "eks:DescribeNodegroup",
+       "eks:DescribeUpdate",
+       "eks:DisassociateAccessPolicy",
+       "eks:DisassociateIdentityProviderConfig",
+       "eks:ListAccessEntries",
+       "eks:ListAccessPolicies",
+       "eks:ListAddons",
+       "eks:ListAssociatedAccessPolicies",
+       "eks:ListClusters",
+       "eks:ListFargateProfiles",
+       "eks:ListIdentityProviderConfigs",
+       "eks:ListNodegroups",
+       "eks:ListTagsForResource",
+       "eks:ListUpdates",
+       "eks:RegisterCluster",
+       "eks:TagResource",
+       "eks:UntagResource",
+       "eks:UpdateAccessEntry",
+       "eks:UpdateAddon",
+       "eks:UpdateClusterConfig",
+       "eks:UpdateClusterVersion",
+       "eks:UpdateNodegroupConfig",
+       "eks:UpdateNodegroupVersion"
+     ]
+   },
+   {
+     "Sid": "KMS",
+     "Effect": "Allow",
+     "Resource": "*",
+     "Action": [
+       "kms:DescribeKey",
+       "kms:List*"
+     ]
+   },
+   {
+     "Sid": "SecretsManager",
+     "Effect": "Allow",
+     "Resource": "*",
+     "Action": [
+       "secretsmanager:CreateSecret",
+       "secretsmanager:DeleteSecret",
+       "secretsmanager:DescribeSecret",
+       "secretsmanager:GetResourcePolicy",
+       "secretsmanager:GetSecretValue",
+       "secretsmanager:PutSecretValue",
+       "secretsmanager:TagResource"
+     ]
+   }
+ ]
+}
+```
 
 ### Set up Role and IAM permissions
 
-1. Access the IAM control panel within the sub-account
-2. Go to Access management > Roles and select Create role
-3. Select "Another AWS account" (Account ID: 793733611312 Require MFA: false). We use Okta to assume roles, which uses delegated MFA and not direct MFA authentication to AWS
-4. Select the policy you created earlier
-5. Call the role "SnowplowAdmin" (please use this specific name)
+1. In the AWS sub-account, open **IAM** from the console
+2. Navigate to **Access management > Roles** and click **Create role**
+3. Under trusted entity type, select **AWS account**, then choose **Another AWS account**
+   - Account ID: `793733611312`
+   - Leave **Require MFA** unchecked — Snowplow uses Okta for MFA, which handles authentication before role assumption
+4. Attach the policy you created in the previous step
+5. Name the role `SnowplowAdmin` — this exact name is required
 
 You will need to share this role with us as part of filling out the setup form in Console.
-
-### JSON Policy Document
-
-```json
-{
-  "Version":"2012-10-17",
-  "Statement":[
-    {
-      "Effect":"Allow",
-      "Action":[
-        "acm:*",
-        "application-autoscaling:*",
-        "autoscaling:*",
-        "cloudformation:*",
-        "cloudfront:*",
-        "cloudwatch:*",
-        "dynamodb:*",
-        "ec2:*",
-        "ecs:*",
-        "eks:*",
-        "elasticache:*",
-        "elasticloadbalancing:*",
-        "elasticmapreduce:*",
-        "es:*",
-        "execute-api:*",
-        "events:*",
-        "globalaccelerator:*",
-        "iam:*",
-        "kafka:*",
-        "kinesis:*",
-        "kinesisanalytics:*",
-        "kms:DescribeKey",
-        "kms:List*",
-        "lambda:*",
-        "logs:*",
-        "rds:*",
-        "route53:*",
-        "route53resolver:*",
-        "s3:*",
-        "secretsmanager:CreateSecret",
-        "secretsmanager:DeleteSecret",
-        "secretsmanager:DescribeSecret",
-        "secretsmanager:GetResourcePolicy",
-        "secretsmanager:GetSecretValue",
-        "secretsmanager:PutSecretValue",
-        "secretsmanager:TagResource",
-        "servicequotas:GetAWSDefaultServiceQuota",
-        "servicequotas:GetServiceQuota",
-        "servicequotas:ListAWSDefaultServiceQuotas",
-        "servicequotas:ListRequestedServiceQuotaChangeHistory",
-        "servicequotas:ListServiceQuotas",
-        "servicequotas:ListServices",
-        "servicequotas:RequestServiceQuotaIncrease",
-        "sns:*",
-        "sqs:*",
-        "ssm:*",
-        "support:*",
-        "wafv2:Describe*",
-        "wafv2:Get*",
-        "wafv2:List*",
-      ],
-      "Resource":"*"
-    }
-  ]
-}
-
-```
 
 For complete documentation from Amazon go [here](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html).
 

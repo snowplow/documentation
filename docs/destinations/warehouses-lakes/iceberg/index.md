@@ -53,6 +53,7 @@ Keep in mind that you will need to be able to:
   <TabItem value="rest" label="REST" default>
     * Specify your Snowflake Open Catalog account id and region, as well as namespace
     * Create a service connection to the catalog and provide the client id and client secret
+    * Grant the `CATALOG_MANAGE_CONTENT` privilege to the service principal
   </TabItem>
   <TabItem value="glue" label="AWS Glue">
     * Specify your AWS account ID

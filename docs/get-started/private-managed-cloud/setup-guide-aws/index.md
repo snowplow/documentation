@@ -240,7 +240,7 @@ These instructions are also provided as part of the setup flow in Console.
   }
   ```
 
-  You will need to share this role with us as part of filling out the setup form in Console.
+  You will need to share this role with us as part of filling out the setup form in Snowplow Console.
 
 For complete documentation from Amazon go [here](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html).
 
@@ -261,15 +261,38 @@ For complete documentation from Amazon go [here](https://docs.aws.amazon.com/AWS
 
 The last step is to set up the Snowplow deployment role. This is a role assumed by the machine user to make changes with Terraform.
 
-1. Navigate to https://console.aws.amazon.com/iam/home#/roles$new?step=type&roleType=crossAccount
-2. Select Create role and for trusted entity type select AWS account.
-- Account ID: 793733611312
-- Do not select Require MFA as Snowplow needs to be able to assume the role via headless jobs
-- If setting this up via IAM, do not add `"aws:MultiFactorAuthPresent": "false"` condition, as this will prevent the role being assumed by Snowplow SRE staff. We use Okta to assume roles, which uses delegated MFA and not direct MFA authentication to AWS
-3. Attach the `IAMFullAccess` policy. If a Permission Boundary was set on the admin role, then add this boundary to the bottom section of permissions page.
-- Role name: `SnowplowDeployment` (please use this specific name)
-- Role description: allows the Snowplow Team to programmatically deploy to this account.
-4. Copy the Snowplow deployment role ARN. You will need to share this role with us as part of filling out the setup form in Console.
+  1. Navigate to https://console.aws.amazon.com/iam/home#/roles$new?step=type&roleType=crossAccount
+  2. Select Create role and for trusted entity type select AWS account.
+    - Account ID: 793733611312
+    - Do not select Require MFA as Snowplow needs to be able to assume the role via headless jobs
+    - If setting this up via IAM, do not add "aws:MultiFactorAuthPresent": "false" condition, as this will prevent the role being assumed by Snowplow SRE staff. We use Okta to assume roles, which uses delegated MFA and not direct MFA authentication to AWS
+    - After the role is created, edit the trust policy to add a StringLike condition on aws:PrincipalArn so that only Snowplow SRE staff and the Snowplow automation user can assume the role:
+  ```json
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Principal": {
+          "AWS": "arn:aws:iam::793733611312:root"
+        },
+        "Action": "sts:AssumeRole",
+        "Condition": {
+          "StringLike": {
+            "aws:PrincipalArn": [
+              "arn:aws:iam::793733611312:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_sre-*",
+              "arn:aws:iam::793733611312:user/nomad-handler"
+            ]
+          }
+        }
+      }
+    ]
+  }
+  ```
+  3. Attach the IAMFullAccess policy. If a Permission Boundary was set on the admin role, then add this boundary to the bottom section of permissions page.
+    - Role name: `SnowplowDeployment` (please use this specific name)
+    - Role description: Allows the Snowplow team to programmatically deploy to this account
+  4. Copy the Snowplow deployment role ARN. You will need to share this role with us as part of filling out the setup form in Snowplow Console.
 
 ### Provide a CIDR range for VPC peering or using a custom VPC (optional)
 

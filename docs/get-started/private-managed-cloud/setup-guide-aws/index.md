@@ -40,11 +40,10 @@ These instructions are also provided as part of the setup flow in Console.
   2. Create a member account (the sub-account) in that organization.
   3. Sign out and sign into the new sub-account. Everything Snowplow-related will take place within this account from here in.
 
- ### Set up Role and IAM permissions
+### Set up Role and IAM permissions
 
   :::note
-  Before you begin, raise the [Managed policies per role](https://us-east-1.console.aws.amazon.com/servicequotas/home/services/iam/quotas/L-0DA4ABF3) attached to an IAM role Service Quota in IAM (region: us-east-1) from the default of 10 to 25. This is
-  typically auto-approved within seconds of requesting.
+  Before you begin, raise the [Managed policies per role](https://us-east-1.console.aws.amazon.com/servicequotas/home/services/iam/quotas/L-0DA4ABF3) attached to an IAM role Service Quota in IAM (region: us-east-1) from the default of 10 to 25. This is typically auto-approved within seconds of requesting.
   :::
 
   1. In the AWS sub-account, open IAM from the console
@@ -80,8 +79,7 @@ arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess
 arn:aws:iam::aws:policy/IAMFullAccess
   ```
   5. Name the role `SnowplowAdmin` — this exact name is required
-  6. Open the role you just created, go to the Permissions tab and click `Add permissions` > `Create inline policy`. Switch to the JSON editor, paste the
-  following, and save the policy:
+  6. Open the role you just created, go to the Permissions tab and click `Add permissions` > `Create inline policy`. Switch to the JSON editor, paste the following, and save the policy:
   ```json
   {
     "Version": "2012-10-17",
@@ -246,14 +244,14 @@ For complete documentation from Amazon go [here](https://docs.aws.amazon.com/org
 
 ### Set up Role and IAM Permissions with **CloudFormation**
 
-We also provide a CloudFormation template that will create a role named SnowplowAdmin with the full permission set [here](https://snowplow-hosted-assets.s3-eu-west-1.amazonaws.com/common/iam/SnowplowAdminRole_CF.yml).
+We also provide a CloudFormation template that will create a role named SnowplowAdmin with the full permission set [here](https://snowplow-hosted-assets.s3-eu-west-1.amazonaws.com/common/iam/SnowplowAdminRole_CF.yml). The IAM quota will also need updating for this template to apply successfully.
 
 1. Access the CloudFormation service within the sub-account
-2. Go to Stacks select Create stack > With new resources (standard)
-3. Select Template is ready within the Prepare template block
+2. Go to `Stacks` select `Create stack` > `With new resources (standard)`
+3. Select `Template is ready` within the Prepare template block
 4. Specify an Amazon S3 URL with the full path to the SnowplowAdmin CloudFormation template and proceed
 5. Provide the stack with a meaningful name such as SnowplowAdmin stack
-6. Now proceed through the remainder of the prompts and choose Create stack
+6. Now proceed through the remainder of the prompts and choose `Create stack`
 
 For complete documentation from Amazon go [here](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html).
 
@@ -261,10 +259,11 @@ For complete documentation from Amazon go [here](https://docs.aws.amazon.com/AWS
 
 The last step is to set up the Snowplow deployment role. This is a role assumed by the machine user to make changes with Terraform.
 
-  1. Navigate to https://console.aws.amazon.com/iam/home#/roles$new?step=type&roleType=crossAccount
-  2. Select Create role and for trusted entity type select AWS account.
-    - Account ID: 793733611312
-    - Do not select Require MFA as Snowplow needs to be able to assume the role via headless jobs
+  1. In the AWS sub-account, open IAM from the console
+  2. Navigate to `Access management` > `Roles` and click `Create role`
+  3. Under trusted entity type, select `AWS account`, then choose `Another AWS account`
+    - Account ID: `793733611312`
+    - Do not select `Require MFA` as Snowplow needs to be able to assume the role via headless jobs
     - If setting this up via IAM, do not add "aws:MultiFactorAuthPresent": "false" condition, as this will prevent the role being assumed by Snowplow SRE staff. We use Okta to assume roles, which uses delegated MFA and not direct MFA authentication to AWS
     - After the role is created, edit the trust policy to add a StringLike condition on aws:PrincipalArn so that only Snowplow SRE staff and the Snowplow automation user can assume the role:
   ```json
@@ -289,10 +288,10 @@ The last step is to set up the Snowplow deployment role. This is a role assumed 
     ]
   }
   ```
-  3. Attach the IAMFullAccess policy. If a Permission Boundary was set on the admin role, then add this boundary to the bottom section of permissions page.
+  4. Attach the IAMFullAccess policy. If a Permission Boundary was set on the admin role, then add this boundary to the bottom section of permissions page.
     - Role name: `SnowplowDeployment` (please use this specific name)
     - Role description: Allows the Snowplow team to programmatically deploy to this account
-  4. Copy the Snowplow deployment role ARN. You will need to share this role with us as part of filling out the setup form in Snowplow Console.
+  5. Copy the Snowplow deployment role ARN. You will need to share this role with us as part of filling out the setup form in Snowplow Console.
 
 ### Provide a CIDR range for VPC peering or using a custom VPC (optional)
 

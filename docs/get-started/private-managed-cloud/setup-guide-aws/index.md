@@ -165,6 +165,30 @@ arn:aws:iam::aws:policy/ServiceQuotasFullAccess
    - Leave **Require MFA** unchecked — Snowplow uses Okta for MFA, which handles authentication before role assumption
 4. Attach the policy you created in the previous step
 5. Name the role `SnowplowAdmin` — this exact name is required
+6. Open the role you just created, go to the `Trust relationships` tab and click `Edit trust policy`. Replace the generated JSON with the following and then click Update policy:
+
+```json
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Effect": "Allow",
+      "Principal": {
+        "AWS": "arn:aws:iam::793733611312:root"
+      },
+      "Action": "sts:AssumeRole",
+      "Condition": {
+        "Bool": {
+          "aws:MultiFactorAuthPresent": "false"
+        },
+        "StringLike": {
+          "aws:PrincipalArn": "arn:aws:iam::793733611312:role/aws-reserved/sso.amazonaws.com/*/AWSReservedSSO_sre-*"
+        }
+      }
+    }
+  ]
+}
+```
 
 You will need to share this role with us as part of filling out the setup form in Console.
 

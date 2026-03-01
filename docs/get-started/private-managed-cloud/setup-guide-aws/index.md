@@ -36,7 +36,7 @@ These instructions are also provided as part of the setup flow in Console.
 
 ### Create sub-account
 
-  1. From your main AWS account, set up an Organisation if you haven't done so already.
+  1. From your main AWS account, set up an Organization if you haven't done so already.
   2. Create a member account (the sub-account) in that organization.
   3. Sign out and sign into the new sub-account. Everything Snowplow-related will take place within this account from here in.
 
@@ -214,7 +214,7 @@ arn:aws:iam::aws:policy/IAMFullAccess
     ]
   }
   ```
-  7. Go to the Trust relationships tab and click Edit trust policy. Replace the generated JSON with the following and click Update policy:
+  7. Go to the Trust relationships tab and click **Edit trust policy**. Replace the generated JSON with the following and click **Update policy**:
   ```json
   {
     "Version": "2012-10-17",
@@ -242,16 +242,16 @@ arn:aws:iam::aws:policy/IAMFullAccess
 
 For complete documentation from Amazon go [here](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html).
 
-### Set up Role and IAM Permissions with **CloudFormation**
+### Set up Role and IAM permissions with **CloudFormation**
 
 We also provide a CloudFormation template that will create a role named SnowplowAdmin with the full permission set [here](https://snowplow-hosted-assets.s3-eu-west-1.amazonaws.com/common/iam/SnowplowAdminRole_CF.yml). The IAM quota will also need updating for this template to apply successfully.
 
-1. Access the CloudFormation service within the sub-account
-2. Go to `Stacks` select `Create stack` > `With new resources (standard)`
-3. Select `Template is ready` within the Prepare template block
-4. Specify an Amazon S3 URL with the full path to the SnowplowAdmin CloudFormation template and proceed
-5. Provide the stack with a meaningful name such as SnowplowAdmin stack
-6. Now proceed through the remainder of the prompts and choose `Create stack`
+  1. Access the CloudFormation service within the sub-account
+  2. Go to `Stacks` select `Create stack` > `With new resources (standard)`
+  3. Select `Template is ready` within the Prepare template block
+  4. Specify an Amazon S3 URL with the full path to the SnowplowAdmin CloudFormation template and proceed
+  5. Provide the stack with a meaningful name such as SnowplowAdmin stack
+  6. Now proceed through the remainder of the prompts and choose `Create stack`
 
 For complete documentation from Amazon go [here](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacks.html).
 
@@ -263,9 +263,10 @@ The last step is to set up the Snowplow deployment role. This is a role assumed 
   2. Navigate to `Access management` > `Roles` and click `Create role`
   3. Under trusted entity type, select `AWS account`, then choose `Another AWS account`
     - Account ID: `793733611312`
-    - Do not select `Require MFA` as Snowplow needs to be able to assume the role via headless jobs
-    - If setting this up via IAM, do not add "aws:MultiFactorAuthPresent": "false" condition, as this will prevent the role being assumed by Snowplow SRE staff. We use Okta to assume roles, which uses delegated MFA and not direct MFA authentication to AWS
-    - After the role is created, edit the trust policy to add a StringLike condition on aws:PrincipalArn so that only Snowplow SRE staff and the Snowplow automation user can assume the role:
+    - Leave `Require MFA` unchecked — Snowplow uses Okta for MFA, which handles authentication before role assumption
+  4. Attach the `IAMFullAccess` policy. If a Permission Boundary was set on the admin role, add it in the bottom section of the permissions page.
+  5. Name the role `SnowplowDeployment` — this exact name is required. Optionally add a description: "Allows the Snowplow team to programmatically deploy to this account". Create the role.
+  6. Open the role you just created, go to the Trust relationships tab and click **Edit trust policy**. Replace the generated JSON with the following and click **Update policy**:
   ```json
   {
     "Version": "2012-10-17",
@@ -288,10 +289,7 @@ The last step is to set up the Snowplow deployment role. This is a role assumed 
     ]
   }
   ```
-  4. Attach the IAMFullAccess policy. If a Permission Boundary was set on the admin role, then add this boundary to the bottom section of permissions page.
-    - Role name: `SnowplowDeployment` (please use this specific name)
-    - Role description: Allows the Snowplow team to programmatically deploy to this account
-  5. Copy the Snowplow deployment role ARN. You will need to share this role with us as part of filling out the setup form in Snowplow Console.
+  7. Copy the Snowplow deployment role ARN. You will need to share this role with us as part of filling out the setup form in Snowplow Console.
 
 ### Provide a CIDR range for VPC peering or using a custom VPC (optional)
 
@@ -307,7 +305,7 @@ If you require Snowplow to be deployed using a specific IAM Permission Boundary,
 
 ### Final checklist
 
-If you are sending a request to our team to set up your account for you. Please ensure you provide the following information:
+If you are sending a request to our team to set up your account for you, please ensure you provide the following information:
 1. SnowplowAdmin role ARN
 2. SnowplowDeployment role ARN
 3. AWS region to deploy into

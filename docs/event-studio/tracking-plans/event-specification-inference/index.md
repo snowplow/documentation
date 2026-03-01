@@ -32,7 +32,7 @@ Before publishing completes, the Console checks whether all [data structures](/d
 
 ## How inference works
 
-Once a specification is published, the pipeline begins matching incoming events against it based on the event's data structure and source application. A single incoming event can match one or more specifications if the definitions overlap. Events sent using Snowtype's [automatic tracking features](/docs/snowtypes/automatic-tracking/index.md) already contain an `event_specification` entity so will not be matched against specifications and will bypass inference entirely, but all other events are eligible for matching.
+Once a specification is published, the pipeline begins matching incoming events against it based on the event's data structure and source application. A single incoming event can match one or more specifications if the definitions overlap. Events sent using Snowtype's [automatic tracking features](/docs/event-studio/implement-tracking/snowtype/index.md) already contain an `event_specification` entity so will not be matched against specifications and will bypass inference entirely, but all other events are eligible for matching.
 
 When a match occurs, the pipeline:
 

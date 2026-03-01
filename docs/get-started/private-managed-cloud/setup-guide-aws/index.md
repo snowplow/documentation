@@ -54,30 +54,30 @@ These instructions are also provided as part of the setup flow in Console.
     - Leave `Require MFA` unchecked — Snowplow uses Okta for MFA, which handles authentication before role assumption
   4. Search for and attach each of the following AWS managed policies:
   ```text
-  arn:aws:iam::aws:policy/AWSCertificateManagerFullAccess
-  arn:aws:iam::aws:policy/AutoScalingFullAccess
-  arn:aws:iam::aws:policy/CloudWatchFullAccess
-  arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
-  arn:aws:iam::aws:policy/AmazonEC2FullAccess
-  arn:aws:iam::aws:policy/AmazonECS_FullAccess
-  arn:aws:iam::aws:policy/AmazonElastiCacheFullAccess
-  arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess
-  arn:aws:iam::aws:policy/AmazonEMRFullAccessPolicy_v2
-  arn:aws:iam::aws:policy/AmazonOpenSearchServiceFullAccess
-  arn:aws:iam::aws:policy/AmazonEventBridgeFullAccess
-  arn:aws:iam::aws:policy/IAMFullAccess
-  arn:aws:iam::aws:policy/AmazonMSKFullAccess
-  arn:aws:iam::aws:policy/AmazonKinesisFullAccess
-  arn:aws:iam::aws:policy/AWSLambda_FullAccess
-  arn:aws:iam::aws:policy/CloudWatchLogsFullAccess
-  arn:aws:iam::aws:policy/AmazonRDSFullAccess
-  arn:aws:iam::aws:policy/AmazonRedshiftFullAccess
-  arn:aws:iam::aws:policy/AmazonRoute53FullAccess
-  arn:aws:iam::aws:policy/AmazonRoute53ResolverFullAccess
-  arn:aws:iam::aws:policy/AmazonS3FullAccess
-  arn:aws:iam::aws:policy/AmazonSNSFullAccess
-  arn:aws:iam::aws:policy/AmazonSQSFullAccess
-  arn:aws:iam::aws:policy/AmazonSSMFullAccess
+arn:aws:iam::aws:policy/AmazonDynamoDBFullAccess
+arn:aws:iam::aws:policy/AmazonEC2FullAccess
+arn:aws:iam::aws:policy/AmazonECS_FullAccess
+arn:aws:iam::aws:policy/AmazonElastiCacheFullAccess
+arn:aws:iam::aws:policy/AmazonEMRFullAccessPolicy_v2
+arn:aws:iam::aws:policy/AmazonEventBridgeFullAccess
+arn:aws:iam::aws:policy/AmazonKinesisFullAccess
+arn:aws:iam::aws:policy/AmazonMSKFullAccess
+arn:aws:iam::aws:policy/AmazonOpenSearchServiceFullAccess
+arn:aws:iam::aws:policy/AmazonRDSFullAccess
+arn:aws:iam::aws:policy/AmazonRedshiftFullAccess
+arn:aws:iam::aws:policy/AmazonRoute53FullAccess
+arn:aws:iam::aws:policy/AmazonRoute53ResolverFullAccess
+arn:aws:iam::aws:policy/AmazonS3FullAccess
+arn:aws:iam::aws:policy/AmazonSNSFullAccess
+arn:aws:iam::aws:policy/AmazonSQSFullAccess
+arn:aws:iam::aws:policy/AmazonSSMFullAccess
+arn:aws:iam::aws:policy/AutoScalingFullAccess
+arn:aws:iam::aws:policy/AWSCertificateManagerFullAccess
+arn:aws:iam::aws:policy/AWSLambda_FullAccess
+arn:aws:iam::aws:policy/CloudWatchFullAccess
+arn:aws:iam::aws:policy/CloudWatchLogsFullAccess
+arn:aws:iam::aws:policy/ElasticLoadBalancingFullAccess
+arn:aws:iam::aws:policy/IAMFullAccess
   ```
   5. Name the role `SnowplowAdmin` — this exact name is required
   6. Open the role you just created, go to the Permissions tab and click `Add permissions` > `Create inline policy`. Switch to the JSON editor, paste the

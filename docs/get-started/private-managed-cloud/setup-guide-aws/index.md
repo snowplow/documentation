@@ -190,6 +190,8 @@ arn:aws:iam::aws:policy/ServiceQuotasFullAccess
 }
 ```
 
+**Note** that the AWS Service Quota for Managed Policies Per Role which is in AWS Identity and Access Management (IAM), within us-east-1 region only, musst be changed from default of 10 to 25. This enables the required policies to be attached to the role.
+
 You will need to share this role with us as part of filling out the setup form in Console.
 
 For complete documentation from Amazon go [here](https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_accounts.html).

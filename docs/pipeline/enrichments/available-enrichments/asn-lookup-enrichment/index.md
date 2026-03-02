@@ -119,4 +119,4 @@ If the ASN does not match any entry in the bot list, or the event's platform is 
 
 | Field | Type | Description |
 | --- | --- | --- |
-| `likelyBot` | boolean | Set to `true` when the ASN matches the bot list. Absent otherwise. |
+| `likelyBot` | boolean | Set to `true` or `false` for whether the ASN matches the bot list. Absent if the enrichment is skipped due to `bypassPlatforms`. |

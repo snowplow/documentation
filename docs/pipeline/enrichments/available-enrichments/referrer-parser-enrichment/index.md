@@ -91,7 +91,13 @@ For example, to classify a custom search engine and a social network:
 }
 ```
 
-With this configuration, a referrer URL of `https://search.example.com/?q=snowplow` would produce `refr_medium` = `search`, `refr_source` = `Corporate Search`, and `refr_term` = `snowplow`.
+With this configuration, a referrer URL of `https://search.example.com/?q=snowplow` would produce the following:
+
+| Field         | Value               |
+| ------------- | ------------------- |
+| `refr_medium` | `search`            |
+| `refr_source` | `Corporate Search`  |
+| `refr_term`   | `snowplow`          |
 
 :::tip Contributing mappings upstream
 

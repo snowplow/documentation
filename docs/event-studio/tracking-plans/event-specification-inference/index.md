@@ -34,14 +34,29 @@ Before publishing completes, the Console checks whether all [data structures](/d
 
 ## Understand how inference works
 
-Once a specification is published, the pipeline begins matching incoming events against it based on the event's data structure and source application. A single incoming event can match one or more specifications if the definitions overlap. Events sent using Snowtype's [automatic tracking features](/docs/event-studio/implement-tracking/snowtype/index.md) already contain an `event_specification` entity, so the pipeline does not match them against specifications and bypasses inference entirely. All other events are eligible.
+Once a specification is published, the pipeline evaluates every eligible incoming event against it. Events sent using Snowtype's [automatic tracking features](/docs/event-studio/implement-tracking/snowtype/index.md) already contain an `event_specification` entity, so the pipeline bypasses inference for them entirely. All other events are evaluated using the following criteria, in order:
+
+1. **Event schema**: the event's schema must match the event data structure defined in the specification.
+2. **Entity set**: the event must carry all [entities](/docs/fundamentals/entities/index.md) listed in the specification according to the cardinality rules. Extra entities with different schemas on the event are ignored.
+3. **Property rules**: any property-level rules defined on those data structures in the specification — for example, `category = "product"` — must be satisfied.
+
+The pipeline does not match on `appId`, environment, or any other source attribute. A single incoming event can match more than one specification if multiple published specifications share overlapping definitions.
 
 When a match occurs, the pipeline:
 
 - Attaches an [entity](/docs/fundamentals/entities/index.md) to the event containing the specification name and ID, making the business context available for downstream consumers.
 - Records the event against the specification in the Console, updating the total volume count and "last seen" timestamp.
 
-This is particularly useful for standard events — such as page views, link clicks, and button clicks — that Snowplow trackers emit by default. Without a published specification, these events do not appear in Console volume metrics and are not connected to a tracking plan. Publishing specifications for them makes them visible within the tracking plan and gives you full visibility of all your tracked events in one place.
+### Example
+
+Consider a specification named "Product page view" that defines:
+
+- **Event**: `page_view` (`iglu:com.snowplowanalytics.snowplow/page_view/jsonschema/1-0-0`)
+- **Entity**: `product` (`iglu:com.acme/product/jsonschema/1-0-0`) with a rule `category = "electronics"`
+
+An incoming `page_view` event carrying a `product` entity where `category = "electronics"` matches the specification. The pipeline attaches an `event_specification` entity to the event and increments the specification's volume count in the Console.
+
+The same `page_view` event carrying a `product` entity where `category = "clothing"` does not match, because the entity rule is not satisfied. A `page_view` event with no `product` entity also does not match, because the required entity is absent.
 
 :::tip[No tracking changes needed]
 You do not need to change your tracking implementation to benefit from inference. Events already flowing through your pipeline will be matched against newly published specifications automatically.

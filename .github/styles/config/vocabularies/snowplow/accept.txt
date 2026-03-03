@@ -40,6 +40,7 @@ Postgres
 PubSub
 Redshift Serverless
 Sendgrid
+Signals
 Snowbridge
 Snowtype
 StatsD

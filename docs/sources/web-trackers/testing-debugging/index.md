@@ -23,7 +23,7 @@ Use our [browser extension](/docs/testing/snowplow-inspector/index.md) to inspec
 
 ## Snowplow Micro
 
-A [lightweight, local Snowplow pipeline](/docs/testing/snowplow-micro/index.md) ideal for sending test events into. It's used as a Docker container.
+A [lightweight Snowplow pipeline](/docs/testing/snowplow-micro/index.md) ideal for sending test events into. You can [deploy it through Console](/docs/testing/snowplow-micro/console/index.md) or [run it locally](/docs/testing/snowplow-micro/local/index.md) via Docker.
 
 
 ## Debugger plugin

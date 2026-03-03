@@ -440,13 +440,24 @@ li.menu__list-item.space-above {
 }
 
 /* Collapsible section headers - styled as distinct category headings */
-.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible {
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible {
   margin-top: 1rem;
 }
 
+/* Remove top margin from the first section header */
+.theme-doc-sidebar-item-category-level-1.section-header:first-child
+  > .menu__list-item-collapsible {
+  margin-top: 0;
+}
+
 /* Shared heading typography for section header link and toggle button */
-.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .menu__link,
-.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .section-header__toggle {
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible
+  > .menu__link,
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible
+  > .section-header__toggle {
   font-variant: all-small-caps;
   font-size: 1.15rem;
   font-weight: 700;
@@ -454,14 +465,22 @@ li.menu__list-item.space-above {
   color: hsl(var(--muted-foreground));
 }
 
-.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .menu__link {
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible
+  > .menu__link {
   padding-bottom: 0.125rem;
 }
 
 /* Disable hover/active highlight styles on section header links and toggle button */
-.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .menu__link:hover,
-.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .menu__link.menu__link--active,
-.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .section-header__toggle.menu__link--active {
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible
+  > .menu__link:hover,
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible
+  > .menu__link.menu__link--active,
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible
+  > .section-header__toggle.menu__link--active {
   background: none;
   border-left: none;
   margin-left: 0;
@@ -469,29 +488,36 @@ li.menu__list-item.space-above {
 }
 
 /* Override Infima's global collapsible hover background */
-.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible:hover {
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible:hover {
   background: none !important;
 }
 
 /* Override Infima's global collapsible active background */
-.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible.menu__list-item-collapsible--active {
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible.menu__list-item-collapsible--active {
   background: none !important;
   border-left: none;
   margin-left: 0;
 }
 
 /* Section header toggle button: full-width, same appearance as the link */
-.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .section-header__toggle {
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible
+  > .section-header__toggle {
   display: flex;
   align-items: center;
   width: 100%;
-  padding: var(--ifm-menu-link-padding-vertical) 0 0.125rem var(--ifm-menu-link-padding-horizontal);
+  padding: var(--ifm-menu-link-padding-vertical) 0 0.125rem
+    var(--ifm-menu-link-padding-horizontal);
   background: none;
   cursor: pointer;
   text-align: left;
 }
 
-.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .section-header__toggle:hover {
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible
+  > .section-header__toggle:hover {
   background: none;
   color: hsl(var(--muted-foreground));
 }
@@ -507,12 +533,15 @@ li.menu__list-item.space-above {
 }
 
 /* Override Infima's collapsible hover background on the caret */
-.theme-doc-sidebar-item-category-level-1.section-header .section-header__caret:hover {
+.theme-doc-sidebar-item-category-level-1.section-header
+  .section-header__caret:hover {
   background: none !important;
 }
 
 /* Remove the old separate caret styles (no longer rendered) */
-.theme-doc-sidebar-item-category-level-1.section-header > .menu__list-item-collapsible > .menu__caret {
+.theme-doc-sidebar-item-category-level-1.section-header
+  > .menu__list-item-collapsible
+  > .menu__caret {
   display: none;
 }
 
@@ -527,20 +556,29 @@ li.menu__list-item.space-above {
 }
 
 /* Make items inside section headers look like top-level items */
-.theme-doc-sidebar-item-category-level-1.section-header .theme-doc-sidebar-item-category-level-2,
-.theme-doc-sidebar-item-category-level-1.section-header .theme-doc-sidebar-item-link-level-2 {
+.theme-doc-sidebar-item-category-level-1.section-header
+  .theme-doc-sidebar-item-category-level-2,
+.theme-doc-sidebar-item-category-level-1.section-header
+  .theme-doc-sidebar-item-link-level-2 {
   font-weight: 500;
   color: hsl(var(--foreground));
 }
 
-.theme-doc-sidebar-item-category-level-1.section-header .theme-doc-sidebar-item-category-level-2 > .menu__list-item-collapsible > .menu__link,
-.theme-doc-sidebar-item-category-level-1.section-header .theme-doc-sidebar-item-link-level-2 > .menu__link {
+.theme-doc-sidebar-item-category-level-1.section-header
+  .theme-doc-sidebar-item-category-level-2
+  > .menu__list-item-collapsible
+  > .menu__link,
+.theme-doc-sidebar-item-category-level-1.section-header
+  .theme-doc-sidebar-item-link-level-2
+  > .menu__link {
   padding-left: var(--ifm-menu-link-padding-horizontal);
 }
 
 /* Shift nested levels inside sections to appear one level up */
-.theme-doc-sidebar-item-category-level-1.section-header .theme-doc-sidebar-item-category-level-3,
-.theme-doc-sidebar-item-category-level-1.section-header .theme-doc-sidebar-item-link-level-3 {
+.theme-doc-sidebar-item-category-level-1.section-header
+  .theme-doc-sidebar-item-category-level-3,
+.theme-doc-sidebar-item-category-level-1.section-header
+  .theme-doc-sidebar-item-link-level-3 {
   font-weight: 340;
 }
 
@@ -550,7 +588,6 @@ li.menu__list-item.space-above {
   padding-left: 0.75rem;
   margin-top: 4px;
 }
-
 
 .theme-doc-sidebar-item-link-level-1,
 .theme-doc-sidebar-item-category-level-1 {
@@ -569,14 +606,17 @@ li.menu__list-item.space-above {
   color: hsl(var(--foreground));
 }
 
-.theme-doc-sidebar-item-category-level-2:not(.section-header > .menu__list > .theme-doc-sidebar-item-category-level-2)
+.theme-doc-sidebar-item-category-level-2:not(.section-header
+    > .menu__list
+    > .theme-doc-sidebar-item-category-level-2)
   .menu__list-item-collapsible
   .menu__caret {
   display: flex;
   padding: 4px;
 }
 
-.section-header .theme-doc-sidebar-item-category-level-3
+.section-header
+  .theme-doc-sidebar-item-category-level-3
   .menu__list-item-collapsible
   .menu__caret {
   display: flex;
@@ -740,7 +780,9 @@ li.menu__list-item.space-above {
   opacity: 1 !important;
 }
 /* Level-2 carets always visible (except direct children of section headers, which act as top-level) */
-.theme-doc-sidebar-item-category-level-2:not(.section-header > .menu__list > .theme-doc-sidebar-item-category-level-2)
+.theme-doc-sidebar-item-category-level-2:not(.section-header
+    > .menu__list
+    > .theme-doc-sidebar-item-category-level-2)
   .menu__list-item-collapsible
   .menu__caret {
   padding: 4px;
@@ -748,7 +790,8 @@ li.menu__list-item.space-above {
 }
 
 /* Level-3+ carets inside section headers always visible */
-.section-header .theme-doc-sidebar-item-category-level-3
+.section-header
+  .theme-doc-sidebar-item-category-level-3
   .menu__list-item-collapsible
   .menu__caret {
   padding: 4px;
@@ -756,20 +799,15 @@ li.menu__list-item.space-above {
 }
 
 /* Carets for hoisted Signals subsections: hidden by default, visible on hover */
-.section-child
-  .menu__list-item-collapsible
-  .menu__caret {
+.section-child .menu__list-item-collapsible .menu__caret {
   display: flex;
   padding: 4px;
   opacity: 0;
 }
 
-.section-child
-  .menu__list-item-collapsible:hover
-  .menu__caret {
+.section-child .menu__list-item-collapsible:hover .menu__caret {
   opacity: 1 !important;
 }
-
 
 /* button to collapse */
 aside.theme-doc-sidebar-container .button.button--secondary.button--outline {
@@ -777,7 +815,7 @@ aside.theme-doc-sidebar-container .button.button--secondary.button--outline {
 }
 @media (min-width: 997px) {
   aside.theme-doc-sidebar-container nav.menu {
-    padding: 1rem 0 0.5rem 0.5rem;
+    padding: 0rem 0 0.5rem 0.5rem;
   }
   aside.theme-doc-sidebar-container .button.button--secondary.button--outline {
     display: inline-flex !important;

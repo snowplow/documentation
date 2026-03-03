@@ -18,7 +18,9 @@ For general use, we recommend [running Micro through Snowplow Console](/docs/tes
 
 :::
 
-The easiest way to run Micro locally is through [Docker](https://www.docker.com/). <Badges badgeType="Docker Pulls" repo="snowplow/snowplow-micro" />
+The easiest way to run Micro locally is through [Docker](https://www.docker.com/).
+
+<Badges badgeType="Docker Pulls" repo="snowplow/snowplow-micro" />
 
 Run the following command:
 

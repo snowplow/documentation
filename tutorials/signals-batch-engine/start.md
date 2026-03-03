@@ -6,7 +6,7 @@ description: "Set up the Snowplow Signals batch engine to calculate historical b
 keywords: ["signals batch engine", "warehouse attribute calculation dbt"]
 ---
 
-Welcome to the [Snowplow Signals](/docs/signals/) batch engine tutorial.
+Welcome to the [Snowplow Signals](/docs/signals/introduction/) batch engine tutorial.
 
 Snowplow Signals is a real-time personalization engine for customer intelligence, built on Snowplow's behavioral data pipeline. It allows you to compute, access, and act on in-session stream and historical user data, in real time.
 
@@ -41,4 +41,4 @@ This tutorial assumes that you have:
 
 The batch source configuration can't be done before the attributes table has been created.
 
-Check out the [Signals configuration](/docs/signals/) documentation to find out where to find these credentials, and how to apply attribute configurations.
+Check out the [Signals configuration](/docs/signals/introduction/) documentation to find out where to find these credentials, and how to apply attribute configurations.

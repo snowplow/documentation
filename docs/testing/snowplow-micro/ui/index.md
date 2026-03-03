@@ -6,7 +6,7 @@ description: "Access the Micro web interface to view, filter, and investigate go
 keywords: ["micro ui", "event inspection", "filter events", "view events"]
 ---
 
-Micro provides a user interface that helps explore events sent to it, including [failed events](/docs/fundamentals/failed-events/index.md).
+Micro provides a user interface that helps you explore events sent to it, including [failed events](/docs/fundamentals/failed-events/index.md).
 
 If you are [running Micro through Console](/docs/testing/snowplow-micro/console/index.md), navigate to the **Pipelines** side menu and select your Micro. Then click **View events**. You will need the _View environments_ permission to access the UI.
 

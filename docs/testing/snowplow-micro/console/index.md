@@ -43,7 +43,7 @@ To view events in the [Micro UI](/docs/testing/snowplow-micro/ui/index.md), sele
 
 :::warning Production data
 
-Do not send production data to development environments. Anyone with the _View environments_ permission can access the UI and see the events. Also, developmnet environments are not configured to withstand high volumes of events.
+Do not send production data to development environments. Anyone with the _View environments_ permission can access the UI and see the events. Also, development environments are not configured to withstand high volumes of events.
 
 :::
 
